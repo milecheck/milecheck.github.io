@@ -276,23 +276,75 @@ img {
   margin-bottom: 32px;
 }
 
-.states-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  max-width: 600px;
+.states-table-wrap {
+  max-width: 560px;
   margin: 0 auto 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
 
-.state-chip {
-  background: var(--accent-dim);
-  color: var(--accent);
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-size: 15px;
+.states-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.states-table thead {
+  background: rgba(0, 224, 148, 0.1);
+}
+
+.states-table th {
+  padding: 12px 16px;
+  font-size: 13px;
   font-weight: 600;
-  border: 1px solid rgba(0, 224, 148, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.states-table th:not(:first-child) {
+  text-align: center;
+}
+
+.states-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+}
+
+.states-table td:not(:first-child) {
+  text-align: center;
+}
+
+.states-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.state-active {
+  background: rgba(0, 224, 148, 0.05);
+}
+
+.state-active td:first-child {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.state-soon td:first-child {
+  color: var(--text-secondary);
+}
+
+td.check {
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+td.soon {
+  color: var(--text-secondary);
+  font-size: 12px;
+  opacity: 0.5;
 }
 
 .states-coming {
