@@ -388,6 +388,139 @@ td.soon {
   font-style: italic;
 }
 
+/* ===== Pricing ===== */
+.pricing {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.pricing h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.pricing-subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card-featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 24px rgba(0, 224, 148, 0.12);
+}
+
+.pricing-card-soon {
+  opacity: 0.7;
+}
+
+.pricing-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.pricing-card-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.pricing-card-featured .pricing-card-header h3 {
+  color: var(--accent);
+}
+
+.pricing-amount {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.pricing-card-featured .pricing-amount {
+  color: var(--accent);
+}
+
+.pricing-period {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.pricing-trial {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: -10px;
+  margin-bottom: 14px;
+}
+
+.pricing-badge-soon {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+.pricing-features {
+  list-style: none;
+  flex: 1;
+}
+
+.pricing-features li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 5px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.pricing-features li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.pricing-card-soon .pricing-features li::before {
+  content: '\2013';
+  color: var(--text-secondary);
+}
+
+.pricing-lock {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: 16px;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
 /* ===== Download CTA ===== */
 .download {
   max-width: var(--max-width);
@@ -535,9 +668,15 @@ td.soon {
     gap: 16px;
   }
 
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
   .features h2,
   .states h2,
-  .download h2 {
+  .download h2,
+  .pricing h2 {
     font-size: 28px;
   }
 
