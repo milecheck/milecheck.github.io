@@ -112,11 +112,49 @@ img {
   opacity: 0.9 !important;
 }
 
+/* ===== Winter Banner (full-width below nav) ===== */
+.winter-banner {
+  margin-top: 64px;
+  background: linear-gradient(135deg, rgba(0, 120, 200, 0.15), rgba(0, 180, 216, 0.1));
+  border-bottom: 1px solid rgba(0, 180, 216, 0.25);
+  padding: 14px 24px;
+}
+
+.winter-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.winter-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.winter-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.winter-text strong {
+  font-size: 15px;
+  color: #00b4d8;
+}
+
+.winter-text span {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 /* ===== Hero ===== */
 .hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 120px 24px 80px;
+  padding: 60px 24px 80px;
   display: flex;
   align-items: center;
   gap: 60px;
@@ -124,6 +162,14 @@ img {
 
 .hero-content {
   flex: 1;
+}
+
+.hero-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0, 224, 148, 0.2);
 }
 
 .hero h1 {
@@ -174,29 +220,26 @@ img {
   color: var(--text-secondary);
 }
 
+/* ===== Hero Screenshots (4 phones fan layout) ===== */
 .hero-screenshots {
   flex-shrink: 0;
   position: relative;
-  width: 280px;
-  height: 500px;
+  width: 420px;
+  height: 480px;
 }
 
 .phone-frame {
   position: absolute;
-  width: 240px;
-  border-radius: 24px;
+  width: 180px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
   border: 2px solid var(--border);
-  z-index: 2;
+  transition: transform 0.3s ease;
 }
 
-.phone-frame-back {
-  top: 40px;
-  left: 60px;
-  z-index: 1;
-  opacity: 0.7;
-  transform: scale(0.95);
+.phone-frame:hover {
+  transform: translateY(-6px);
 }
 
 .phone-screen {
@@ -204,32 +247,66 @@ img {
   display: block;
 }
 
-/* ===== Features ===== */
+/* Staggered fan layout — 4 phones overlapping */
+.phone-1 {
+  left: 0;
+  top: 40px;
+  z-index: 4;
+  transform: rotate(-6deg);
+}
+.phone-1:hover { transform: rotate(-6deg) translateY(-6px); }
+
+.phone-2 {
+  left: 70px;
+  top: 10px;
+  z-index: 3;
+  transform: rotate(-2deg);
+}
+.phone-2:hover { transform: rotate(-2deg) translateY(-6px); }
+
+.phone-3 {
+  left: 150px;
+  top: 0;
+  z-index: 2;
+  transform: rotate(2deg);
+}
+.phone-3:hover { transform: rotate(2deg) translateY(-6px); }
+
+.phone-4 {
+  left: 230px;
+  top: 20px;
+  z-index: 1;
+  transform: rotate(6deg);
+  opacity: 0.85;
+}
+.phone-4:hover { transform: rotate(6deg) translateY(-6px); }
+
+/* ===== Features (compact tiles) ===== */
 .features {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 60px 24px;
 }
 
 .features h2 {
   font-size: 36px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 36px;
   letter-spacing: -1px;
 }
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 16px;
 }
 
 .feature-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px;
+  border-radius: 12px;
+  padding: 20px;
   transition: border-color 0.2s;
 }
 
@@ -238,20 +315,20 @@ img {
 }
 
 .feature-icon {
-  font-size: 32px;
-  margin-bottom: 16px;
+  font-size: 26px;
+  margin-bottom: 10px;
 }
 
 .feature-card h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .feature-card p {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* ===== States ===== */
@@ -274,41 +351,6 @@ img {
   color: var(--text-secondary);
   font-size: 16px;
   margin-bottom: 32px;
-}
-
-.winter-banner {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  max-width: 480px;
-  margin: 24px 0 0;
-  padding: 14px 18px;
-  background: rgba(0, 180, 216, 0.1);
-  border: 1px solid rgba(0, 180, 216, 0.3);
-  border-radius: 12px;
-  text-align: left;
-}
-
-.winter-icon {
-  font-size: 28px;
-  flex-shrink: 0;
-}
-
-.winter-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.winter-text strong {
-  font-size: 15px;
-  color: #00b4d8;
-}
-
-.winter-text span {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.5;
 }
 
 .states-table-wrap {
@@ -628,9 +670,13 @@ td.soon {
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
-    padding: 100px 20px 60px;
+    padding: 40px 20px 60px;
     text-align: center;
     gap: 40px;
+  }
+
+  .hero-logo {
+    margin: 0 auto 24px;
   }
 
   .hero h1 {
@@ -646,26 +692,23 @@ td.soon {
     justify-content: center;
   }
 
-  .winter-banner {
-    margin: 24px auto 0;
-  }
-
   .hero-screenshots {
-    width: 220px;
-    height: 400px;
+    width: 320px;
+    height: 380px;
   }
 
   .phone-frame {
-    width: 190px;
+    width: 140px;
   }
 
-  .phone-frame-back {
-    left: 50px;
-  }
+  .phone-1 { left: 0; top: 30px; }
+  .phone-2 { left: 55px; top: 8px; }
+  .phone-3 { left: 115px; top: 0; }
+  .phone-4 { left: 175px; top: 15px; }
 
   .feature-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
   .pricing-grid {
@@ -683,6 +726,12 @@ td.soon {
   .nav-links a:not(.nav-cta) {
     display: none;
   }
+
+  .winter-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -691,15 +740,16 @@ td.soon {
   }
 
   .hero-screenshots {
-    width: 180px;
+    width: 280px;
     height: 340px;
   }
 
   .phone-frame {
-    width: 160px;
+    width: 120px;
   }
 
-  .phone-frame-back {
-    left: 40px;
-  }
+  .phone-1 { left: 0; top: 25px; }
+  .phone-2 { left: 45px; top: 6px; }
+  .phone-3 { left: 100px; top: 0; }
+  .phone-4 { left: 155px; top: 12px; }
 }
