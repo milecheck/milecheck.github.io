@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MileCheck — Highway Mile Markers & Road Alerts</title>
-  <meta name="description" content="Know exactly where you are on the highway. Real-time mile markers, road conditions, and alerts for 37 states.">
+  <meta name="description" content="Know exactly where you are on the highway. Real-time mile markers, road conditions, and alerts for 36 states.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="MileCheck — Highway Mile Markers & Road Alerts">
@@ -20,7 +20,7 @@
   <meta name="twitter:image" content="https://milecheckapp.com/images/feature-graphic.png">
 
   <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -28,6 +28,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="#" class="nav-brand">
+        <img src="images/icon.png" alt="MileCheck" class="nav-icon">
         <span class="nav-name">MileCheck</span>
       </a>
       <div class="nav-links">
@@ -39,35 +40,10 @@
     </div>
   </nav>
 
-  <!-- Winter Alert Banner -->
-  <div class="winter-banner">
-    <div class="winter-inner">
-      <span class="winter-icon">&#x26C4;</span>
-      <div class="winter-text">
-        <strong>Winter Road Alerts Active &#x2744;&#xFE0F;</strong>
-        <span>Real-time closures, chain requirements, and pass conditions in AK &middot; AZ &middot; CO &middot; ID &middot; MT &middot; OR &middot; UT &middot; WA &mdash; more states coming soon.</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- DOT Worker Banner -->
-  <div class="dot-banner">
-    <div class="winter-inner">
-      <span class="winter-icon">&#x1F6E3;&#xFE0F;</span>
-      <div class="winter-text">
-        <strong>Shout out to our amazing DOT workers</strong>
-        <span>Find your milepost, live trip tracking, and trip logging across 37 states. More added daily &mdash; <a href="#states">see if your state is supported &darr;</a></span>
-      </div>
-    </div>
-  </div>
-
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-brand">
-        <img src="images/icon.png" alt="MileCheck" width="80" height="80" class="hero-logo">
-        <h1>Know exactly where you are on the highway.</h1>
-      </div>
+      <h1>Know exactly where you are on the highway.</h1>
       <p class="hero-subtitle">Real-time mile markers, road conditions, and alerts for your drive. Built for truckers, road trippers, commuters, and anyone on the highway.</p>
       <div class="hero-badges">
         <a href="https://apps.apple.com/app/milecheck/id6759212851" class="badge-link" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
@@ -76,6 +52,13 @@
         <a href="#" class="badge-link badge-coming-soon" aria-label="Get it on Google Play">
           <span class="badge-placeholder">Google Play &mdash; Coming Soon</span>
         </a>
+      </div>
+      <div class="winter-banner">
+        <span class="winter-icon">&#9888;&#65039;</span>
+        <div class="winter-text">
+          <strong>Live Road Alerts Active</strong>
+          <span>Real-time closures, crashes, construction, weather, and chain requirements from state DOTs across 36 states.</span>
+        </div>
       </div>
     </div>
     <div class="hero-screenshots">
@@ -140,36 +123,36 @@
         </thead>
         <tbody>
           <tr class="state-active"><td>Alaska</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-          <tr class="state-active"><td>Alabama</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Alabama</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Arizona</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-          <tr class="state-active"><td>Arkansas</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Arkansas</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>California</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Colorado</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
           <tr class="state-active"><td>Connecticut</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
-          <tr class="state-active"><td>Delaware</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
-          <tr class="state-active"><td>Florida</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
-          <tr class="state-active"><td>Georgia</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Delaware</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Florida</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Georgia</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>Hawaii</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Idaho</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
-          <tr class="state-active"><td>Illinois</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Illinois</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>Indiana</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Iowa</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>Kansas</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>Kentucky</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>Louisiana</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Maine</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
-          <tr class="state-active"><td>Maryland</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Maryland</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Massachusetts</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Michigan</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Minnesota</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>Mississippi</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>Missouri</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Montana</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-          <tr class="state-active"><td>Nebraska</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Nebraska</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Nevada</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>New Hampshire</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>New Jersey</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
-          <tr class="state-active"><td>New Mexico</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>New Mexico</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>New York</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-soon"><td>North Carolina</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>North Dakota</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
@@ -184,9 +167,9 @@
           <tr class="state-soon"><td>Texas</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Utah</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
           <tr class="state-active"><td>Vermont</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
-          <tr class="state-active"><td>Virginia</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>Virginia</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Washington</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-          <tr class="state-active"><td>West Virginia</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
+          <tr class="state-soon"><td>West Virginia</td><td class="soon">Coming Soon</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Wisconsin</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
           <tr class="state-active"><td>Wyoming</td><td class="check">&#10003;</td><td class="soon">Coming Soon</td></tr>
         </tbody>
@@ -221,7 +204,7 @@
         <div class="pricing-trial">3-day free trial</div>
         <ul class="pricing-features">
           <li>Everything in Free</li>
-          <li>Interactive map with 228,000+ mileposts</li>
+          <li>Interactive map with 175,000+ mileposts</li>
           <li>Real-time DOT alerts (8 states)</li>
           <li>Bridge alerts (Seattle)</li>
           <li>Trip logging &amp; CSV export</li>
@@ -268,7 +251,7 @@
       </div>
       <div class="footer-links">
         <a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-        <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>
+        <a href="mailto:info@milecheckapp.com">Contact</a>
       </div>
       <div class="footer-social">
         <a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
