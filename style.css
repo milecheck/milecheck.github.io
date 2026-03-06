@@ -152,26 +152,17 @@ img {
 
 /* ===== DOT Worker Banner ===== */
 .dot-banner {
-  background: linear-gradient(135deg, rgba(224, 148, 0, 0.10), rgba(200, 120, 0, 0.06));
-  border-bottom: 1px solid rgba(224, 148, 0, 0.2);
-  padding: 10px 24px;
+  background: linear-gradient(135deg, rgba(224, 148, 0, 0.12), rgba(200, 120, 0, 0.08));
+  border-bottom: 1px solid rgba(224, 148, 0, 0.25);
+  padding: 14px 24px;
 }
 
-.dot-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.dot-inner strong {
+.dot-banner .winter-text strong {
   color: #f0a030;
 }
 
-.dot-inner a {
+.dot-banner .winter-text a {
   color: #f0a030;
-  text-decoration: underline;
 }
 
 /* ===== Hero ===== */
