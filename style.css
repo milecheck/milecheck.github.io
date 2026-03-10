@@ -432,6 +432,105 @@ td.soon {
   font-style: italic;
 }
 
+/* ===== States Highlight (50 states milestone) ===== */
+.states-highlight {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.states-highlight-box {
+  background: rgba(0, 224, 148, 0.08);
+  border: 1px solid rgba(0, 224, 148, 0.25);
+  border-radius: 16px;
+  padding: 24px 40px;
+  text-align: center;
+}
+
+.states-highlight-alerts {
+  background: rgba(0, 180, 216, 0.08);
+  border-color: rgba(0, 180, 216, 0.25);
+}
+
+.states-highlight-number {
+  display: block;
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.states-highlight-alerts .states-highlight-number {
+  color: #00b4d8;
+}
+
+.states-highlight-label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Alert states grid */
+.alert-states {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.alert-states h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.alert-states-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.alert-state {
+  background: rgba(0, 180, 216, 0.1);
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00b4d8;
+}
+
+.alert-states-note {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .states-highlight {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .states-highlight-box {
+    padding: 20px 32px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .states-highlight-number {
+    font-size: 48px;
+  }
+}
+
 /* ===== Pricing ===== */
 .pricing {
   max-width: var(--max-width);
