@@ -257,12 +257,19 @@ img {
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
   border: 2px solid var(--border);
   transition: transform 0.3s ease;
+}
+
+.phone-frame:hover {
+  transform: translateY(-6px);
+}
+
+.phone-frame-front {
   z-index: 2;
   left: 40px;
   top: 20px;
 }
 
-.phone-frame:hover {
+.phone-frame-front:hover {
   transform: translateY(-6px);
 }
 
@@ -271,7 +278,7 @@ img {
   left: 0;
   top: 0;
   transform: rotate(-4deg);
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .phone-frame-back:hover {
@@ -331,6 +338,90 @@ img {
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.5;
+}
+
+/* ===== Screenshots Showcase ===== */
+.screenshots {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.screenshots h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.screenshots-subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin-bottom: 48px;
+}
+
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.screenshot-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.screenshot-phone {
+  width: 220px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.screenshot-phone:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+.screenshot-img {
+  width: 100%;
+  display: block;
+}
+
+.screenshot-label {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.screenshot-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 240px;
+}
+
+@media (max-width: 768px) {
+  .screenshots-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .screenshot-phone {
+    width: 200px;
+  }
+
+  .screenshots h2 {
+    font-size: 28px;
+  }
 }
 
 /* ===== States ===== */
@@ -802,6 +893,9 @@ td.soon {
 
   .phone-frame {
     width: 190px;
+  }
+
+  .phone-frame-front {
     left: 30px;
     top: 20px;
   }
@@ -851,6 +945,9 @@ td.soon {
 
   .phone-frame {
     width: 160px;
+  }
+
+  .phone-frame-front {
     left: 25px;
     top: 20px;
   }
