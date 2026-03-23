@@ -114,10 +114,11 @@ img {
 
 /* ===== Winter Banner (full-width below nav) ===== */
 .winter-banner {
-  margin-top: 64px;
+  margin-top: 40px;
   background: linear-gradient(135deg, rgba(0, 120, 200, 0.15), rgba(0, 180, 216, 0.1));
-  border-bottom: 1px solid rgba(0, 180, 216, 0.25);
-  padding: 14px 24px;
+  border: 1px solid rgba(0, 180, 216, 0.25);
+  border-radius: 12px;
+  padding: 18px 24px;
 }
 
 .winter-inner {
@@ -169,7 +170,7 @@ img {
 .hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 120px 24px 100px;
+  padding: 160px 24px 120px;
   display: flex;
   align-items: center;
   gap: 60px;
@@ -199,13 +200,14 @@ img {
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -1.5px;
+  margin-bottom: 20px;
 }
 
 .hero-subtitle {
   font-size: 18px;
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   max-width: 480px;
 }
 
@@ -536,21 +538,21 @@ td.soon {
 .pricing {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 100px 24px;
   text-align: center;
 }
 
 .pricing h2 {
   font-size: 36px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   letter-spacing: -1px;
 }
 
 .pricing-subtitle {
   color: var(--text-secondary);
   font-size: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .pricing-grid {
@@ -669,7 +671,7 @@ td.soon {
 .download {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 100px 24px;
   text-align: center;
 }
 
@@ -683,7 +685,7 @@ td.soon {
 .download p {
   color: var(--text-secondary);
   font-size: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .download .hero-badges {
@@ -772,7 +774,7 @@ td.soon {
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
-    padding: 100px 20px 60px;
+    padding: 120px 20px 60px;
     text-align: center;
     gap: 40px;
   }
