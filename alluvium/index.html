@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alluvium Cellars — Closing Sale</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --brown-dark: #2C1810;
+    --brown-mid: #3D2A1E;
+    --gold: #C9A959;
+    --gold-dim: rgba(201, 169, 89, 0.15);
+    --cream: #F5F3F0;
+    --tan: #A89A8A;
+    --wine: #722F37;
+    --text: #1A1A1A;
+    --text-light: #7A7A7A;
+    --border: #D0C8BE;
+    --max-width: 960px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--text);
+    background: var(--cream);
+    line-height: 1.6;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    background: var(--brown-dark);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201, 169, 89, 0.3);
+  }
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-brand {
+    font-family: 'Calibri', 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--tan);
+    text-decoration: none;
+  }
+  .nav-brand strong {
+    color: var(--cream);
+    font-size: 13px;
+    letter-spacing: 3px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: 'Calibri', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tan);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--wine) !important;
+    color: var(--cream) !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+  }
+  .nav-cta:hover { opacity: 0.9; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--brown-dark);
+    padding: 140px 24px 80px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  .hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-family: 'Calibri', sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 52px;
+    font-weight: normal;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-tagline {
+    font-family: 'Calibri', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 32px;
+  }
+  .hero-desc {
+    font-size: 18px;
+    color: var(--cream);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    opacity: 0.85;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--wine);
+    color: var(--cream);
+    font-family: 'Calibri', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .hero-cta:hover { opacity: 0.9; }
+
+  /* ===== GOLD BAR ===== */
+  .gold-bar {
+    background: var(--gold);
+    color: var(--brown-dark);
+    text-align: center;
+    padding: 12px 24px;
+    font-style: italic;
+    font-size: 16px;
+  }
+  .gold-bar strong { font-weight: bold; }
+
+  /* ===== SECTION ===== */
+  section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+  .section-title {
+    font-family: 'Calibri', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  section h2 {
+    font-size: 32px;
+    font-weight: normal;
+    font-style: italic;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+  section p {
+    color: var(--text-light);
+    font-size: 16px;
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* ===== PRICING HIGHLIGHTS ===== */
+  .pricing-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 48px 0;
+    flex-wrap: wrap;
+  }
+  .price-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 40px;
+    text-align: center;
+    min-width: 220px;
+    flex: 1;
+    max-width: 280px;
+  }
+  .price-card-featured {
+    border-color: var(--gold);
+    box-shadow: 0 4px 24px rgba(201, 169, 89, 0.15);
+  }
+  .price-card .category {
+    font-family: 'Calibri', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--wine);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .price-card .amount {
+    font-size: 42px;
+    color: var(--text);
+    line-height: 1;
+  }
+  .price-card .per {
+    font-family: 'Calibri', sans-serif;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .price-card .detail {
+    font-family: 'Calibri', sans-serif;
+    font-size: 12px;
+    color: var(--tan);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== WINE LIST ===== */
+  .wine-section-header {
+    background: var(--brown-dark);
+    padding: 8px 16px;
+    margin-top: 32px;
+    margin-bottom: 0;
+    border-radius: 6px 6px 0 0;
+  }
+  .wine-section-header h3 {
+    font-family: 'Calibri', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--border);
+  }
+  .wine-list {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    margin-bottom: 24px;
+  }
+  .wine-row {
+    padding: 10px 16px;
+    border-bottom: 1px solid #EEEAE5;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .wine-row:last-child { border-bottom: none; }
+  .wine-name {
+    font-size: 16px;
+    color: var(--text);
+  }
+  .wine-year {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-left: 6px;
+  }
+  .wine-badge {
+    font-family: 'Calibri', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3px;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    margin-left: 8px;
+    vertical-align: 2px;
+  }
+  .wine-badge.gold { color: var(--gold); border-color: var(--gold); }
+  .wine-badge.dgold { color: var(--gold); border-color: var(--gold); font-weight: bold; }
+  .wine-price {
+    font-family: 'Calibri', sans-serif;
+    font-size: 12px;
+    text-align: right;
+  }
+  .wine-price .original {
+    color: var(--tan);
+    text-decoration: line-through;
+  }
+  .wine-price .off {
+    color: var(--wine);
+    font-weight: bold;
+    margin-left: 6px;
+  }
+  .wine-blend {
+    width: 100%;
+    font-family: 'Calibri', sans-serif;
+    font-size: 12px;
+    color: var(--wine);
+    line-height: 1.3;
+  }
+
+  /* ===== BULK / BARREL ===== */
+  .barrel-info {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 32px;
+  }
+  .barrel-info h3 {
+    font-size: 22px;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .barrel-info p {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    background: var(--brown-dark);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .contact-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .contact .section-title { color: var(--gold); }
+  .contact h2 {
+    color: var(--cream);
+    font-size: 32px;
+    font-weight: normal;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .contact p {
+    color: var(--tan);
+    font-size: 16px;
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .contact-method {
+    text-align: center;
+  }
+  .contact-method .label {
+    font-family: 'Calibri', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 4px;
+  }
+  .contact-method a {
+    color: var(--gold);
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .contact-method a:hover { text-decoration: underline; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--brown-mid);
+    padding: 24px;
+    text-align: center;
+  }
+  footer p {
+    font-family: 'Calibri', sans-serif;
+    font-size: 12px;
+    color: var(--tan);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero { padding: 120px 20px 60px; }
+    .hero h1 { font-size: 36px; }
+    .hero-desc { font-size: 16px; }
+    .pricing-row { flex-direction: column; align-items: center; }
+    .price-card { max-width: 100%; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 11px; letter-spacing: 1px; }
+    section { padding: 60px 20px; }
+    .contact-methods { flex-direction: column; gap: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 28px; }
+    .nav-brand { font-size: 9px; }
+    .nav-brand strong { font-size: 11px; }
+    section h2 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand"><strong>Alluvium Cellars</strong> &nbsp;&middot;&nbsp; Woodinville, WA</a>
+    <div class="nav-links">
+      <a href="#wines">Wines</a>
+      <a href="#bulk">Bulk &amp; Barrel</a>
+      <a href="#contact" class="nav-cta">Inquire</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Alluvium Cellars &middot; Woodinville, Washington</div>
+    <h1>Last <span>Call</span></h1>
+    <div class="hero-tagline">Closing Sale &middot; Award-Winning Washington Wines</div>
+    <p class="hero-desc">
+      Alluvium Cellars is closing its doors. Our entire inventory of award-winning, small-lot wines is available at case pricing &mdash; up to 63% below retail. Open to wineries, retailers, and the public.
+    </p>
+    <a href="#contact" class="hero-cta">Get in Touch</a>
+  </div>
+</div>
+
+<!-- GOLD BAR -->
+<div class="gold-bar">
+  Double Gold &amp; 93-point wines &mdash; starting at <strong>$12.50 a bottle</strong>
+</div>
+
+<!-- CASE PRICING -->
+<section id="wines">
+  <div class="section-title">Case Pricing</div>
+  <h2>Bottled Wine by the Case</h2>
+  <p>All wines sourced from Washington's premier AVAs. Award-winning blends, single varietals, and limited releases. Mix &amp; match available.</p>
+
+  <div class="pricing-row">
+    <div class="price-card">
+      <div class="category">Red Wines</div>
+      <div class="amount">$150</div>
+      <div class="per">per case of 12</div>
+      <div class="detail">$12.50 / bottle</div>
+    </div>
+    <div class="price-card price-card-featured">
+      <div class="category">Mixed Cases</div>
+      <div class="amount">$135</div>
+      <div class="per">per case of 12</div>
+      <div class="detail">Half red, half white</div>
+    </div>
+    <div class="price-card">
+      <div class="category">White, Ros&eacute; &amp; Dessert</div>
+      <div class="amount">$120</div>
+      <div class="per">per case of 12</div>
+      <div class="detail">$10 / bottle</div>
+    </div>
+  </div>
+
+  <!-- RED WINES -->
+  <div class="wine-section-header"><h3>Red Wines &mdash; $150 / Case</h3></div>
+  <div class="wine-list">
+    <div class="wine-row">
+      <div><span class="wine-name">Agerasia</span><span class="wine-year">2021 &middot; 2023</span><span class="wine-badge">93 PTS</span></div>
+      <div class="wine-price"><span class="original">$288&ndash;300</span><span class="off">48&ndash;50% off</span></div>
+      <div class="wine-blend">Bordeaux Blend &middot; 47% Merlot, 38% Cab Sauv, 15% Cab Franc</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Alpha</span><span class="wine-year">2022</span><span class="wine-badge">SILVER &middot; 89 PTS</span></div>
+      <div class="wine-price"><span class="original">$300</span><span class="off">50% off</span></div>
+      <div class="wine-blend">Bordeaux Left Bank &middot; 43% Cab Sauv, 31% Merlot, 19% Cab Franc, 7% Petit Verdot</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Apex</span><span class="wine-year">2022</span></div>
+      <div class="wine-price"><span class="original">$396</span><span class="off">62% off</span></div>
+      <div class="wine-blend">Cabernet Sauvignon &middot; 92% Cab Sauv, 5% Merlot, 3% Cab Franc</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Anthem</span><span class="wine-year">2022</span><span class="wine-badge">93 PTS</span></div>
+      <div class="wine-price"><span class="original">$264</span><span class="off">43% off</span></div>
+      <div class="wine-blend">GSM Rh&ocirc;ne Blend &middot; 45% Grenache, 38% Syrah, 17% Mourv&egrave;dre</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Allegory</span><span class="wine-year">2023</span><span class="wine-badge dgold">&starf;&starf; DOUBLE GOLD</span></div>
+      <div class="wine-price"><span class="original">$360</span><span class="off">58% off</span></div>
+      <div class="wine-blend">Rh&ocirc;ne Red Blend &middot; 84% Mourv&egrave;dre, 16% Cab Sauv</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Asterius</span><span class="wine-year">2022</span><span class="wine-badge">93 PTS</span></div>
+      <div class="wine-price"><span class="original">$336</span><span class="off">55% off</span></div>
+      <div class="wine-blend">Syrah &middot; 86% Syrah, 14% Cab Sauv</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Avant</span><span class="wine-year">2023</span></div>
+      <div class="wine-price"><span class="original">$360</span><span class="off">58% off</span></div>
+      <div class="wine-blend">Carm&eacute;n&egrave;re Blend &middot; 75% Carm&eacute;n&egrave;re, 19% Cab Sauv, 6% Cab Franc</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Alyssum</span><span class="wine-year">2022</span></div>
+      <div class="wine-price"><span class="original">$384</span><span class="off">61% off</span></div>
+      <div class="wine-blend">100% Grenache</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Arcane</span><span class="wine-year">2022</span><span class="wine-badge gold">GOLD &middot; 91 PTS</span></div>
+      <div class="wine-price"><span class="original">$336</span><span class="off">55% off</span></div>
+      <div class="wine-blend">Cab Franc Blend &middot; 76% Cab Franc, 24% Merlot</div>
+    </div>
+  </div>
+
+  <!-- WHITE, ROSÉ & DESSERT -->
+  <div class="wine-section-header"><h3>White, Ros&eacute; &amp; Dessert &mdash; $120 / Case</h3></div>
+  <div class="wine-list">
+    <div class="wine-row">
+      <div><span class="wine-name">Apricity</span><span class="wine-year">2021 &middot; 2024</span><span class="wine-badge">SILVER &middot; 92 PTS</span></div>
+      <div class="wine-price"><span class="original">$204</span><span class="off">41% off</span></div>
+      <div class="wine-blend">Rh&ocirc;ne White Blend &middot; 57% Viognier, 29% Roussanne, 14% Marsanne</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Aine</span><span class="wine-year">2024</span><span class="wine-badge">SILVER &middot; 89 PTS</span></div>
+      <div class="wine-price"><span class="original">$324</span><span class="off">63% off</span></div>
+      <div class="wine-blend">100% Sauvignon Blanc</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Armogan</span><span class="wine-year">2022</span><span class="wine-badge">92 PTS</span></div>
+      <div class="wine-price"><span class="original">$204</span><span class="off">41% off</span></div>
+      <div class="wine-blend">100% Chardonnay &middot; Unoaked, Chablis-Style</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Aeris</span><span class="wine-year">2024</span></div>
+      <div class="wine-price"><span class="original">$204</span><span class="off">41% off</span></div>
+      <div class="wine-blend">Ros&eacute; Blend &middot; 67% Grenache, 33% Syrah</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Amar</span><span class="wine-year">2023</span></div>
+      <div class="wine-price"><span class="original">$204</span><span class="off">41% off</span></div>
+      <div class="wine-blend">100% Cabernet Franc Ros&eacute;</div>
+    </div>
+    <div class="wine-row">
+      <div><span class="wine-name">Aubade</span><span class="wine-year">NV &middot; 375ml</span></div>
+      <div class="wine-price"><span class="original">$180</span><span class="off">33% off</span></div>
+      <div class="wine-blend">100% Syrah &middot; Bourbon Barrel Aged &middot; Port-Style Dessert &middot; 22% ABV</div>
+    </div>
+  </div>
+</section>
+
+<!-- BULK & BARREL -->
+<section id="bulk" style="background: white; max-width: 100%; padding: 80px 24px;">
+  <div style="max-width: 960px; margin: 0 auto;">
+    <div class="section-title">For Wineries</div>
+    <h2>Bulk Wine &amp; Barrel Sales</h2>
+    <p>In addition to bottled cases, we have bulk wine and barrels available for purchase by licensed wineries. Premium Washington fruit, ready for your label or blending program.</p>
+
+    <div class="barrel-info">
+      <h3>Available Inventory</h3>
+      <p><!-- TODO: Add barrel/bulk details here --></p>
+      <p>Contact us for a full inventory list, varietal breakdown, and pricing. Volume discounts available.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="section-title">Get in Touch</div>
+    <h2>Interested? Let's talk.</h2>
+    <p>Whether you're a winery looking for bulk wine, a retailer stocking shelves, or a wine lover grabbing a deal &mdash; we'd love to hear from you.</p>
+    <div class="contact-methods">
+      <div class="contact-method">
+        <div class="label">Phone</div>
+        <a href="tel:+1XXXXXXXXXX"><!-- TODO: Add phone --></a>
+      </div>
+      <div class="contact-method">
+        <div class="label">Email</div>
+        <a href="mailto:TODO@email.com"><!-- TODO: Add email --></a>
+      </div>
+      <div class="contact-method">
+        <div class="label">Location</div>
+        <a href="#">Woodinville, Washington</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Alluvium Cellars &middot; Woodinville, Washington &middot; Must be 21+ &middot; Sales tax applies &middot; Shipping available</p>
+</footer>
+
+</body>
+</html>
