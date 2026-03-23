@@ -169,7 +169,7 @@ img {
 .hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 60px 24px 80px;
+  padding: 120px 24px 100px;
   display: flex;
   align-items: center;
   gap: 60px;
@@ -287,28 +287,28 @@ img {
 .features {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 60px 24px;
+  padding: 100px 24px;
 }
 
 .features h2 {
   font-size: 36px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 48px;
   letter-spacing: -1px;
 }
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 24px;
 }
 
 .feature-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 28px;
   transition: border-color 0.2s;
 }
 
@@ -556,7 +556,7 @@ td.soon {
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -772,7 +772,7 @@ td.soon {
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
-    padding: 40px 20px 60px;
+    padding: 100px 20px 60px;
     text-align: center;
     gap: 40px;
   }
