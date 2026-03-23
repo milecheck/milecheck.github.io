@@ -289,7 +289,7 @@ img {
 .features {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 60px 24px 80px;
 }
 
 .features h2 {
@@ -538,7 +538,7 @@ td.soon {
 .pricing {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 60px 24px 80px;
   text-align: center;
 }
 
@@ -552,7 +552,17 @@ td.soon {
 .pricing-subtitle {
   color: var(--text-secondary);
   font-size: 16px;
-  margin-bottom: 48px;
+  margin-bottom: 8px;
+}
+
+.pricing-urgency {
+  color: var(--accent);
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.pricing-urgency-bold {
+  margin-bottom: 40px;
 }
 
 .pricing-grid {
@@ -671,7 +681,7 @@ td.soon {
 .download {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 60px 24px 80px;
   text-align: center;
 }
 
