@@ -6,13 +6,13 @@
 }
 
 :root {
-  --bg: #0a0f0d;
-  --bg-card: #141a17;
-  --accent: #00e094;
-  --accent-dim: rgba(0, 224, 148, 0.15);
-  --text: #f0f0f0;
-  --text-secondary: #9ca3af;
-  --border: #1f2937;
+  --bg: #ffffff;
+  --bg-card: #f3f7f5;
+  --accent: #00a868;
+  --accent-dim: rgba(0, 168, 104, 0.12);
+  --text: #111827;
+  --text-secondary: #6b7280;
+  --border: #dde8e3;
   --max-width: 1100px;
 }
 
@@ -50,9 +50,10 @@ img {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(10, 15, 13, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
 }
 
 .nav-inner {
@@ -114,7 +115,7 @@ img {
 
 /* ===== Winter Banner (full-width below nav) ===== */
 .winter-banner {
-  margin-top: 40px;
+  margin-top: 24px;
   background: linear-gradient(135deg, rgba(0, 120, 200, 0.15), rgba(0, 180, 216, 0.1));
   border: 1px solid rgba(0, 180, 216, 0.25);
   border-radius: 12px;
@@ -170,7 +171,7 @@ img {
 .hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 160px 24px 120px;
+  padding: 120px 24px 80px;
   display: flex;
   align-items: center;
   gap: 60px;
@@ -192,7 +193,7 @@ img {
   height: 80px;
   border-radius: 18px;
   flex-shrink: 0;
-  box-shadow: 0 8px 32px rgba(0, 224, 148, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 168, 104, 0.15);
 }
 
 .hero h1 {
@@ -225,6 +226,10 @@ img {
 
 .badge-img {
   height: 44px;
+}
+
+.badge-img-gp {
+  height: 60px;
 }
 
 .badge-coming-soon {
@@ -267,7 +272,7 @@ img {
   width: 220px;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
   border: 2px solid var(--border);
   transition: transform 0.3s ease;
   z-index: 2;
@@ -300,14 +305,14 @@ img {
 .features {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 60px 24px 80px;
+  padding: 40px 24px 60px;
 }
 
 .features h2 {
   font-size: 36px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
   letter-spacing: -1px;
 }
 
@@ -378,7 +383,7 @@ img {
 }
 
 .states-table thead {
-  background: rgba(0, 224, 148, 0.1);
+  background: rgba(0, 168, 104, 0.08);
 }
 
 .states-table th {
@@ -398,7 +403,7 @@ img {
 
 .states-table td {
   padding: 10px 16px;
-  border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+  border-bottom: 1px solid var(--border);
 }
 
 .states-table td:not(:first-child) {
@@ -410,7 +415,7 @@ img {
 }
 
 .state-active {
-  background: rgba(0, 224, 148, 0.05);
+  background: rgba(0, 168, 104, 0.05);
 }
 
 .state-active td:first-child {
@@ -449,8 +454,8 @@ td.soon {
 }
 
 .states-highlight-box {
-  background: rgba(0, 224, 148, 0.08);
-  border: 1px solid rgba(0, 224, 148, 0.25);
+  background: rgba(0, 168, 104, 0.08);
+  border: 1px solid rgba(0, 168, 104, 0.25);
   border-radius: 16px;
   padding: 24px 40px;
   text-align: center;
@@ -544,7 +549,7 @@ td.soon {
 .pricing {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 60px 24px 80px;
+  padding: 40px 24px 60px;
   text-align: center;
 }
 
@@ -591,7 +596,7 @@ td.soon {
 
 .pricing-card-featured {
   border-color: var(--accent);
-  box-shadow: 0 0 24px rgba(0, 224, 148, 0.12);
+  box-shadow: 0 0 24px rgba(0, 168, 104, 0.15);
 }
 
 .pricing-card-soon {
@@ -683,11 +688,30 @@ td.soon {
   border-top: 1px solid var(--border);
 }
 
+/* ===== Early Adopter Note ===== */
+.pricing-early-adopter {
+  max-width: 520px;
+  margin: 28px auto 0;
+  background: rgba(0, 168, 104, 0.07);
+  border: 1px solid rgba(0, 168, 104, 0.2);
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.pricing-early-adopter strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ===== Download CTA ===== */
 .download {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 60px 24px 80px;
+  padding: 40px 24px 60px;
   text-align: center;
 }
 
