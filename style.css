@@ -243,6 +243,17 @@ img {
   color: var(--text-secondary);
 }
 
+.platform-callout {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.platform-callout .check {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ===== Hero Screenshots (2-phone stacked layout) ===== */
 .hero-screenshots {
   flex-shrink: 0;
@@ -311,11 +322,6 @@ img {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 28px;
-  transition: border-color 0.2s;
-}
-
-.feature-card:hover {
-  border-color: var(--accent);
 }
 
 .feature-icon {
