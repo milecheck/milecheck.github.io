@@ -691,7 +691,7 @@ td.soon {
 /* ===== Early Adopter Note ===== */
 .pricing-early-adopter {
   max-width: 520px;
-  margin: 28px auto 0;
+  margin: 12px auto 20px;
   background: rgba(0, 168, 104, 0.07);
   border: 1px solid rgba(0, 168, 104, 0.2);
   border-radius: 12px;
