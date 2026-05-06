@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MileCheck — Highway Mile Markers & Road Alerts</title>
-  <meta name="description" content="Know exactly where you are on the highway. Real-time mile markers in all 50 US states, plus live road alerts from state DOTs.">
+  <title>MileCheck — Real-time highway mile markers + road alerts</title>
+  <meta name="description" content="Real-time highway mile markers in all 50 US states, plus live DOT road alerts in 8 states. Built for truckers, snowplow drivers, EMTs, road workers, and anyone who's ever needed to know which milepost they're at.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="MileCheck — Highway Mile Markers & Road Alerts">
-  <meta property="og:description" content="Know exactly where you are on the highway. Real-time mile markers in all 50 US states, plus live road alerts from state DOTs.">
+  <meta property="og:description" content="Real-time mile markers in all 50 US states, plus live DOT road alerts in 8 states. $9.99/year or $1.99/month, 7-day free trial.">
   <meta property="og:image" content="https://milecheckapp.com/images/feature-graphic.png?v=2">
   <meta property="og:url" content="https://milecheckapp.com">
   <meta property="og:type" content="website">
@@ -16,197 +16,267 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MileCheck — Highway Mile Markers & Road Alerts">
-  <meta name="twitter:description" content="Know exactly where you are on the highway. Real-time mile markers in all 50 US states, plus live road alerts from state DOTs.">
+  <meta name="twitter:description" content="Real-time mile markers in all 50 US states, plus live DOT road alerts in 8 states. $9.99/year or $1.99/month, 7-day free trial.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/feature-graphic.png?v=2">
 
   <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Nav -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-brand">
-        <img src="images/icon.png" alt="MileCheck" class="nav-icon">
-        <span class="nav-name">MileCheck</span>
-      </a>
-      <div class="nav-links">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand">MileCheck</a>
+      <nav class="primary-nav">
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
-        <a href="#download" class="nav-cta">Download</a>
-      </div>
+        <a href="#pricing" class="nav-cta">Get the app</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Know exactly where you are on the highway.</h1>
-      <p class="hero-subtitle">Real-time mile markers for all 50 US states. Live road conditions and alerts from state DOTs. Built for truckers, road trippers, commuters, and anyone on the highway.</p>
-      <div class="hero-badges">
-        <a href="https://apps.apple.com/app/milecheck/id6759212851" class="badge-link" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="badge-img">
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="badge-link" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
-          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="badge-img badge-img-gp">
-        </a>
+  <main>
+
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Now on iOS &amp; Android</p>
+        <h1 class="hero-h1">Real-time highway<br>mile markers + road alerts.</h1>
+        <p class="hero-sub">Built for truckers, snowplow drivers, EMTs, and road workers. Also for the rest of us when you hear &ldquo;crash at milepost 142&rdquo; on the radio.</p>
+        <div class="hero-ctas">
+          <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">Get on iOS →</a>
+          <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-secondary" target="_blank" rel="noopener">Get on Android →</a>
+        </div>
+        <p class="hero-fineprint"><span class="mono">$9.99/year</span> or <span class="mono">$1.99/month</span> &middot; early adopter rate &middot; 7-day free trial</p>
       </div>
-      <p class="platform-callout"><span class="check">✓ iOS</span> &nbsp;<span class="check">✓ Android</span> &nbsp;&mdash;&nbsp; the first dedicated highway mile marker app on both platforms.</p>
-      <div class="winter-banner">
-        <span class="winter-icon">&#127758;</span>
-        <div class="winter-text">
-          <strong>Now Nationwide &mdash; All 50 States</strong>
-          <span>Mile markers in every US state.<br>Live road alerts from DOTs in WA, OR, MT, AZ, UT, ID, AK, and CO &mdash; more states coming soon.</span>
+    </section>
+
+    <!-- ============== STATS BLOCK ============== -->
+    <section class="stats">
+      <div class="container">
+        <div class="block-grid block-grid-3">
+          <div class="block">
+            <div class="block-label">Mile markers</div>
+            <div class="block-value mono">50</div>
+            <div class="block-secondary">US states</div>
+          </div>
+          <div class="block">
+            <div class="block-label">Live DOT alerts <span class="live-dot" aria-hidden="true"></span></div>
+            <div class="block-value mono">8</div>
+            <div class="block-secondary">WA &middot; OR &middot; MT &middot; AZ &middot; UT &middot; ID &middot; AK &middot; CO<br><span class="block-tertiary">More states being released &mdash; <a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">watch our IG for updates</a></span></div>
+          </div>
+          <div class="block">
+            <div class="block-label">Early adopter rate</div>
+            <div class="block-value mono">$9.99<span class="block-unit">/yr</span></div>
+            <div class="block-secondary">or <span class="mono">$1.99</span>/month &middot; 7-day free trial</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="hero-screenshots">
-      <div class="phone-frame">
-        <img src="images/IMG_0664.jpeg" alt="MileCheck mile marker screen" class="phone-screen">
-      </div>
-      <div class="phone-frame phone-frame-back">
-        <img src="images/IMG_0666.jpeg" alt="MileCheck map screen" class="phone-screen">
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Features -->
-  <section id="features" class="features">
-    <h2>Everything you need on the road</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F4CD;</div>
-        <h3>Real-Time Mile Markers</h3>
-        <p>See your nearest mile marker with interpolated decimal precision. Know your exact position to report to roadside assistance.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F5FA;&#xFE0F;</div>
-        <h3>Interactive Map</h3>
-        <p>See milepost markers and color-coded alerts across all supported states. Tap to measure distance between mileposts.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F4CB;</div>
-        <h3>Trip Logging</h3>
-        <p>Record your drives with automatic route and mile tracking. Export to CSV or share trip details via text or email.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x26A0;&#xFE0F;</div>
-        <h3>Live Road Alerts</h3>
-        <p>Closures, crashes, construction, weather, and chain requirements from state DOTs. Supported states: WA, OR, MT, AZ, UT, ID, AK, and CO &mdash; more coming soon.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F30D;</div>
-        <h3>Works Offline</h3>
-        <p>Bundled milepost data for all states means the core features work even without cell service in remote areas.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F3A8;</div>
-        <h3>6 Color Themes</h3>
-        <p>Choose from Road, Snow, Berry, Sunset, Slate, or Light mode. Make it yours.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="pricing">
-    <h2>Simple Pricing</h2>
-    <p class="pricing-early-adopter"><strong>Early adopter pricing — locked in forever.</strong> Subscribe now at $4.99/year and you'll keep that rate at every renewal, even if the price goes up later.</p>
-    <p class="pricing-subtitle">Start free. No ads ever.</p>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-card-header">
-          <h3>Free</h3>
-          <span class="pricing-amount">$0</span>
+    <!-- ============== AUDIENCES ============== -->
+    <section class="audiences" id="audiences">
+      <div class="container">
+        <p class="section-label">Who it's for</p>
+        <h2 class="section-h2">Made for everyone who&rsquo;s ever needed to say &ldquo;I&rsquo;m at milepost 142.&rdquo;</h2>
+        <div class="rows">
+          <article class="row">
+            <div class="row-num mono">01</div>
+            <div class="row-body">
+              <h3>Truckers</h3>
+              <p class="row-problem">Dispatch needs an exact location. The mile marker just blew past you at 65 mph.</p>
+              <p class="row-solution">MileCheck reads your nearest mile marker in real time, with decimal precision. One number to report.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">02</div>
+            <div class="row-body">
+              <h3>DOT workers, EMTs &amp; first responders</h3>
+              <p class="row-problem">You&rsquo;re rolling to a crash and need to confirm the milepost fast &mdash; or you&rsquo;re laying salt, sand, or brine and tracking each pass on a paper clipboard you have to keep dry.</p>
+              <p class="row-solution">Live mile markers, a DOT incident overlay, one-tap trip logging with notes. No clipboard required.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">03</div>
+            <div class="row-body">
+              <h3>Road trippers</h3>
+              <p class="row-problem">You&rsquo;re miles into nowhere. Maps says &ldquo;Highway 200.&rdquo; That&rsquo;s not specific enough to share with anyone who might come find you.</p>
+              <p class="row-solution">Tap the share button. MileCheck sends your route, direction, and exact milepost &mdash; a real location, not a vague pin in a green field.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">04</div>
+            <div class="row-body">
+              <h3>Commuters</h3>
+              <p class="row-problem">Closures, crashes, construction. You&rsquo;d rather hear about them before you hit them.</p>
+              <p class="row-solution">DOT alerts on your route in 8 states, refreshed every few minutes. Filter by what matters.</p>
+            </div>
+          </article>
         </div>
-        <ul class="pricing-features">
-          <li>Real-time mile marker display</li>
-          <li>GPS speed &amp; heading</li>
-          <li>Weather &amp; sunrise/sunset</li>
-          <li>6 color themes</li>
-          <li>Works offline</li>
-        </ul>
       </div>
-      <div class="pricing-card pricing-card-featured">
-        <div class="pricing-card-header">
-          <h3>Premium</h3>
-          <span class="pricing-amount">$4.99<span class="pricing-period">/year</span></span>
-        </div>
-        <div class="pricing-trial">7-day free trial</div>
-        <ul class="pricing-features">
-          <li>Everything in Free</li>
-          <li>Interactive map with mile markers in all 50 states</li>
-          <li>Real-time DOT alerts (8 states, more coming soon)</li>
-          <li>Trip logging &amp; CSV export</li>
-        </ul>
-      </div>
-      <div class="pricing-card pricing-card-soon">
-        <div class="pricing-card-header">
-          <h3>Premium+</h3>
-          <span class="pricing-badge-soon">Coming Soon</span>
-        </div>
-        <ul class="pricing-features">
-          <li>Everything in Premium</li>
-          <li>Turn-by-turn navigation</li>
-          <li>Pre-trip route planning</li>
-          <li>Alerts along your planned route</li>
-          <li>ETA with real-time traffic</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Download CTA -->
-  <section id="download" class="download">
-    <h2>Get MileCheck</h2>
-    <p>Free to download. Try Premium free for 7 days.</p>
-    <div class="hero-badges">
-      <a href="https://apps.apple.com/app/milecheck/id6759212851" class="badge-link" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
-        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="badge-img">
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="badge-link" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="badge-img badge-img-gp">
-      </a>
-    </div>
-    <p class="platform-callout"><span class="check">✓ iOS</span> &nbsp;<span class="check">✓ Android</span> &nbsp;&mdash;&nbsp; the first dedicated highway mile marker app on both platforms.</p>
-  </section>
+    <!-- ============== FEATURES ============== -->
+    <section class="features" id="features">
+      <div class="container">
+        <p class="section-label">What's in the box</p>
+        <h2 class="section-h2">Six things, done well.</h2>
+        <div class="rows">
+          <article class="row">
+            <div class="row-num mono">01</div>
+            <div class="row-body">
+              <h3>Mile markers, all 50 states</h3>
+              <p class="row-text">Every interstate, US highway, and most state routes. Bundled offline so you keep working in no-service areas.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">02</div>
+            <div class="row-body">
+              <h3>Live DOT alerts in 8 states</h3>
+              <p class="row-text">Closures, crashes, construction, weather, chains. Direct from WSDOT, ODOT, MDT, ADOT, UDOT, ITD, AKDOT, and CDOT.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">03</div>
+            <div class="row-body">
+              <h3>Trip logging with path mini-map</h3>
+              <p class="row-text">Tap to start a trip. The app records your route as you drive and renders a clean mini-map under each log entry.</p>
+              <svg class="trip-svg" viewBox="0 0 320 80" aria-hidden="true">
+                <line x1="0" y1="20" x2="320" y2="20" stroke="#E5E5E5" stroke-width="1"/>
+                <line x1="0" y1="40" x2="320" y2="40" stroke="#E5E5E5" stroke-width="1"/>
+                <line x1="0" y1="60" x2="320" y2="60" stroke="#E5E5E5" stroke-width="1"/>
+                <path d="M 8 60 C 50 60, 70 20, 120 28 S 200 64, 240 36 S 300 16, 312 22" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <circle cx="8" cy="60" r="4" fill="#000"/>
+                <circle cx="312" cy="22" r="4" fill="#000"/>
+              </svg>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">04</div>
+            <div class="row-body">
+              <h3>Multi-state coverage that actually works</h3>
+              <p class="row-text">Cross from Idaho into Montana. The state, the route format, and the live data source all switch automatically.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">05</div>
+            <div class="row-body">
+              <h3>Offline-ready by default</h3>
+              <p class="row-text">Mile marker data ships with the app. No download, no setup, no &ldquo;oops you&rsquo;re in a canyon&rdquo; moments.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">06</div>
+            <div class="row-body">
+              <h3>Light or dark, your call</h3>
+              <p class="row-text">System-aware theme picker with six accent colors. Light by default for midday sun; switch to dark for night driving.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="images/icon.png" alt="MileCheck" class="footer-icon">
-        <span class="footer-tagline">Made for highway travelers</span>
+    <!-- ============== POSITIONING ============== -->
+    <section class="positioning">
+      <div class="container">
+        <p class="section-label">For Android too</p>
+        <h2 class="section-h2">The first serious mile marker app on Android.</h2>
+        <p class="positioning-body">Until now there was no mile marker app built for Android &mdash; only iOS options, and they lack MileCheck&rsquo;s full feature set. We launched MileCheck on both platforms with the same code, the same offline data, and the same mile markers in all 50 states.</p>
       </div>
-      <div class="footer-links">
-        <a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-        <a href="mailto:info@milecheckapp.com">Contact</a>
+    </section>
+
+    <!-- ============== PRICING ============== -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-h2">Free to try. Cheap to keep.</h2>
+        <div class="pricing-grid">
+
+          <div class="tier">
+            <div class="tier-name">Free</div>
+            <div class="tier-price"><span class="mono">$0</span></div>
+            <div class="tier-period">forever</div>
+            <ul class="tier-features">
+              <li>Real-time mile marker</li>
+              <li>GPS speed &amp; heading</li>
+              <li>All 50 states bundled offline</li>
+              <li>Light &amp; dark mode</li>
+            </ul>
+          </div>
+
+          <div class="tier tier-featured">
+            <div class="tier-name">Premium</div>
+            <div class="tier-price"><span class="mono price-green">$9.99</span><span class="tier-period">/year</span></div>
+            <div class="tier-meta">or <span class="mono">$1.99</span>/month &middot; 7-day free trial</div>
+            <ul class="tier-features">
+              <li>Everything in Free</li>
+              <li>Interactive map across all 50 states</li>
+              <li>Live DOT alerts in 8 states</li>
+              <li>Trip logging with path mini-map</li>
+              <li>Filter alerts by route, type, severity</li>
+            </ul>
+            <a href="#" class="btn btn-primary tier-cta">Start free trial</a>
+            <p class="tier-fineprint">Early adopter rate &mdash; locked in for life, even when the price rises.</p>
+          </div>
+
+          <div class="tier tier-soon">
+            <div class="tier-name">Premium+</div>
+            <div class="tier-price">Coming soon</div>
+            <div class="tier-period">&nbsp;</div>
+            <ul class="tier-features">
+              <li>Everything in Premium</li>
+              <li>Pre-trip route planning</li>
+              <li>Alerts on your planned route</li>
+              <li>ETA with live traffic</li>
+              <li>Turn-by-turn navigation</li>
+            </ul>
+          </div>
+
+        </div>
       </div>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="https://www.threads.net/@milecheckapp" target="_blank" rel="noopener noreferrer" aria-label="Threads">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.784 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.96-.065-1.17.408-2.243 1.33-3.023.88-.744 2.084-1.168 3.59-1.264 1.07-.068 2.062.04 2.963.266-.086-1.032-.378-1.835-.87-2.394-.594-.677-1.497-1.02-2.684-1.02h-.036c-.957.007-1.74.302-2.33.878l-1.39-1.49C9.166 4.622 10.347 4.17 11.754 4.16h.046c1.724.014 3.065.58 3.988 1.684.848 1.014 1.302 2.413 1.35 4.16.635.267 1.2.592 1.69.974 1.076.84 1.834 1.935 2.254 3.255.55 1.727.412 3.752-.39 5.547-1.014 2.27-2.835 3.775-5.415 4.48-1.098.3-2.257.44-3.1.44zm-1.14-8.616c-.054 0-.108 0-.163.002-1.587.1-2.482.845-2.44 1.608.042.77.847 1.442 2.092 1.374 1.464-.08 2.544-.905 2.882-2.542-.72-.216-1.51-.358-2.37-.442z"/></svg>
-        </a>
-        <a href="https://x.com/milecheckapp" target="_blank" rel="noopener noreferrer" aria-label="X">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="#" aria-label="TikTok" title="Coming Soon" style="opacity: 0.4; pointer-events: none;">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.43v-7.15a8.16 8.16 0 005.58 2.09V11.1a4.84 4.84 0 01-2.98-1.1 4.83 4.83 0 01-1.86-3.31h2.84z"/></svg>
-        </a>
-        <a href="https://www.reddit.com/user/MileCheckApp/" target="_blank" rel="noopener noreferrer" aria-label="Reddit">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-.028.028L12 24l8.485-3.515.028.028C22.657 18.314 24 15.314 24 12c0-6.627-5.373-12-12-12zm6.67 13.95c.014.196.02.393.02.593 0 3.025-3.52 5.478-7.865 5.478-4.344 0-7.864-2.453-7.864-5.478 0-.2.007-.398.02-.593A1.794 1.794 0 011.75 12.2a1.8 1.8 0 013.078-1.26c1.216-.893 2.895-1.47 4.785-1.54l.897-4.238a.3.3 0 01.358-.232l2.975.628a1.286 1.286 0 012.385.652 1.284 1.284 0 01-1.283 1.284 1.286 1.286 0 01-1.28-1.174l-2.65-.559-.8 3.776c1.855.084 3.497.66 4.69 1.54A1.8 1.8 0 0122.25 12.2a1.794 1.794 0 01-3.58 1.75zM8.6 13.2a1.286 1.286 0 100 2.572 1.286 1.286 0 000-2.572zm6.8 0a1.286 1.286 0 100 2.572 1.286 1.286 0 000-2.572zM12 18.27c-1.628 0-3.065-.46-3.816-1.21a.3.3 0 01.425-.425c.596.596 1.876.994 3.391.994s2.795-.398 3.391-.994a.3.3 0 01.425.424c-.75.752-2.188 1.212-3.816 1.212z"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <p class="footer-brand">MileCheck</p>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://x.com/milecheckapp" target="_blank" rel="noopener">X / Twitter</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://www.reddit.com/user/MileCheckApp/" target="_blank" rel="noopener">Reddit</a></li>
+          </ul>
+        </div>
       </div>
-      <p class="footer-legal">Mile marker positions are approximate and may not reflect actual sign locations. Do not use this app while driving. No ads. Your location data stays on your device.</p>
-      <p class="footer-copyright">&copy; 2026 MileCheck</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck. Mile marker positions are approximate and may not reflect actual sign locations. Do not use this app while driving.</p>
     </div>
   </footer>
 
