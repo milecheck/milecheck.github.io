@@ -558,3 +558,69 @@ img, svg { display: block; max-width: 100%; }
   .btn { width: 100%; }
   .footer-grid { grid-template-columns: 1fr; }
 }
+
+/* --- Coverage section (added 2026-05-15) --- */
+.coverage {
+  padding: 96px 0;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.coverage-intro {
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #525252;
+  max-width: 640px;
+  margin: 0 0 48px 0;
+}
+
+.coverage-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+}
+
+.coverage-card {
+  padding: 32px;
+  border: 1px solid #E5E5E5;
+  background: #FAFAFA;
+}
+
+.coverage-card-live {
+  border-color: #000;
+  background: #FFF;
+}
+
+.coverage-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #737373;
+  margin: 0 0 8px 0;
+}
+
+.coverage-card-live .coverage-label {
+  color: #000;
+}
+
+.coverage-count {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0 0 20px 0;
+  color: #000;
+}
+
+.coverage-list {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #525252;
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .coverage-grid {
+    grid-template-columns: 1fr;
+  }
+}
