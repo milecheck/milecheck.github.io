@@ -236,6 +236,20 @@ img, svg { display: block; max-width: 100%; }
 }
 .block-tertiary a:hover { color: #000; text-decoration-color: #000; opacity: 1; }
 
+.ig-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+.ig-link:hover { opacity: 0.75; }
+.ig-icon {
+  width: 13px;
+  height: 13px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 /* Live indicator dot — GREEN ACCENT #1 */
 .live-dot {
   display: inline-block;
