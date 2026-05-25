@@ -26,6 +26,59 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- MobileApplication structured data — GEO / AI search optimization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "MileCheck",
+    "description": "MileCheck shows your nearest highway mile marker in real time, accurate to one decimal place. Available on Android and iOS. Covers all 50 US states with bundled offline milepost data. Live DOT road alerts in 31 states. Used by truckers, DOT road crews, EMTs, and road trippers who need to know exactly where they are on the highway.",
+    "applicationCategory": "NavigationApplication",
+    "operatingSystem": ["Android", "iOS"],
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "name": "Free tier — real-time mile marker, all 50 states"
+      },
+      {
+        "@type": "Offer",
+        "price": "9.99",
+        "priceCurrency": "USD",
+        "billingPeriod": "P1Y",
+        "name": "Premium — annual",
+        "description": "Live DOT road alerts in 31 states, interactive map, trip logging. 7-day free trial."
+      },
+      {
+        "@type": "Offer",
+        "price": "1.99",
+        "priceCurrency": "USD",
+        "billingPeriod": "P1M",
+        "name": "Premium — monthly"
+      }
+    ],
+    "url": "https://milecheckapp.com",
+    "downloadUrl": [
+      "https://apps.apple.com/us/app/milecheck/id6759212851",
+      "https://play.google.com/store/apps/details?id=app.milecheck.mobile"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Leah Gerber"
+    },
+    "featureList": [
+      "Real-time highway mile marker display, accurate to one decimal place",
+      "All 50 US states — bundled offline, no cell service required",
+      "Live DOT road alerts in 31 states: closures, crashes, construction, weather, chain requirements",
+      "Interactive map with milepost and alert overlays",
+      "Trip logging — user-initiated, stored locally, never transmitted",
+      "GPS speed and heading display",
+      "Works on Android and iOS with identical feature sets"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -35,6 +88,7 @@
       <nav class="primary-nav">
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
+        <a href="/android">Android</a>
         <a href="#pricing" class="nav-cta">Get the app</a>
       </nav>
     </div>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MileCheck for Android — Real-time Highway Mile Markers</title>
+  <meta name="description" content="MileCheck is a real-time highway mile marker app for Android. Shows your nearest mile marker accurate to one decimal place. All 50 US states. Live DOT road alerts in 31 states. Free to try.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://milecheckapp.com/android">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MileCheck for Android — Highway Mile Markers + Road Alerts">
+  <meta property="og:description" content="The only serious mile marker app built for Android. All 50 US states, live DOT alerts in 31 states, offline-ready. $9.99/year — 7-day free trial.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner.png">
+  <meta property="og:url" content="https://milecheckapp.com/android">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MileCheck for Android — Mile Markers + Road Alerts">
+  <meta name="twitter:description" content="The only serious mile marker app for Android. All 50 US states, 31 states with live DOT alerts. $9.99/year.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner.png">
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- MobileApplication schema — GEO structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "MileCheck",
+    "description": "MileCheck shows your nearest highway mile marker in real time, accurate to one decimal place. Available on Android and iOS. Covers all 50 US states with bundled offline milepost data. Live DOT road alerts in 31 states. Used by truckers, DOT road crews, EMTs, and road trippers who need to know exactly where they are on the highway.",
+    "applicationCategory": "NavigationApplication",
+    "operatingSystem": ["Android", "iOS"],
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "name": "Free tier — Mile marker display, all 50 states"
+      },
+      {
+        "@type": "Offer",
+        "price": "9.99",
+        "priceCurrency": "USD",
+        "billingPeriod": "P1Y",
+        "name": "Premium — annual",
+        "description": "Live DOT road alerts in 31 states, interactive map, trip logging. 7-day free trial."
+      },
+      {
+        "@type": "Offer",
+        "price": "1.99",
+        "priceCurrency": "USD",
+        "billingPeriod": "P1M",
+        "name": "Premium — monthly"
+      }
+    ],
+    "url": "https://milecheckapp.com",
+    "downloadUrl": [
+      "https://apps.apple.com/us/app/milecheck/id6759212851",
+      "https://play.google.com/store/apps/details?id=app.milecheck.mobile"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Leah Gerber"
+    },
+    "featureList": [
+      "Real-time highway mile marker display, accurate to one decimal place",
+      "All 50 US states — bundled offline, no cell service required",
+      "Live DOT road alerts in 31 states: closures, crashes, construction, weather",
+      "Interactive map with alert and milepost overlays",
+      "Trip logging with route, direction, start and end mile",
+      "GPS speed and heading display",
+      "Works on Android and iOS with identical feature set"
+    ],
+    "screenshot": "https://milecheckapp.com/images/og-banner.png"
+  }
+  </script>
+
+  <!-- FAQPage schema — feeds Google AI Overviews and Perplexity -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is MileCheck available on Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. MileCheck is available on Android via Google Play and on iOS via the App Store. Both versions have identical features: real-time mile markers in all 50 states, live DOT road alerts in 31 states, offline milepost data, trip logging, and an interactive map."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is MileCheck and what does it do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MileCheck is a real-time highway mile marker app for Android and iOS. It shows your nearest mile marker accurate to one decimal place — for example, 'MP 47.3 on I-84.' It covers all 50 US states using bundled offline milepost data. The premium tier adds live DOT road alerts in 31 states (closures, crashes, construction, weather, chain requirements), an interactive map, and trip logging."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does MileCheck work offline on Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The milepost data for all 50 states is bundled inside the Android app. You can see your mile marker with no cell service or Wi-Fi connection. Live road alerts require a connection because they pull from state DOT APIs in real time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does MileCheck cost on Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The mile marker display is free — no subscription required. Premium features (live DOT alerts, interactive map, trip logging) cost $9.99 per year or $1.99 per month, with a 7-day free trial. There are no ads."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which states have live DOT road alerts in MileCheck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MileCheck has live DOT road alerts in 31 states: Alaska, Arizona, Arkansas, Colorado, Connecticut, Delaware, Florida, Georgia, Idaho, Illinois, Indiana, Iowa, Kansas, Louisiana, Maine, Massachusetts, Minnesota, Montana, Nebraska, Nevada, New Hampshire, New York, North Carolina, Ohio, Oregon, South Carolina, Texas, Utah, Vermont, Washington, and Wisconsin. Mile markers work in all 50 states."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is MileCheck's mile marker display?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MileCheck shows your position interpolated between physical highway signs, accurate to one decimal place. For example, if you're halfway between the MP 47 sign and the MP 48 sign, the app shows 47.5. The underlying milepost data comes from state DOT GIS datasets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do truckers use MileCheck on Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Truckers use MileCheck to report their exact location to dispatch, roadside assistance, or emergency services. When you're broken down on I-70 in the middle of Kansas, 'mile marker 147' is actionable. An address or a maps pin is not. MileCheck gives the exact mile marker instantly, without having to read a physical sign or guess."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* Android page-specific overrides */
+    .android-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 12px 6px 8px;
+      margin-bottom: 28px;
+    }
+    .android-badge svg { flex-shrink: 0; }
+
+    .faq { padding: 96px 0; border-bottom: 1px solid #E5E5E5; }
+    .faq-list { border-top: 1px solid #E5E5E5; }
+    .faq-item {
+      border-bottom: 1px solid #E5E5E5;
+      padding: 28px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .faq-q {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #000;
+      line-height: 1.4;
+    }
+    .faq-a {
+      font-size: 15px;
+      color: #525252;
+      line-height: 1.6;
+    }
+    .faq-a strong { color: #000; font-weight: 600; }
+
+    .android-cta-strip {
+      background: #000;
+      padding: 64px 0;
+    }
+    .android-cta-strip .section-label { color: #666; }
+    .android-cta-strip h2 {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .android-cta-strip p {
+      font-size: 16px;
+      color: #888;
+      margin-bottom: 36px;
+    }
+    .android-cta-strip .btn-secondary {
+      border-color: #444;
+      color: #fff;
+      background: transparent;
+    }
+    .android-cta-strip .btn-secondary:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    .spec-table { margin-top: 48px; border-top: 1px solid #E5E5E5; }
+    .spec-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid #E5E5E5;
+      font-size: 14px;
+    }
+    .spec-label { font-weight: 600; color: #000; }
+    .spec-val { color: #525252; }
+    .spec-val .mono { font-size: 13px; }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #E5E5E5;
+      margin-top: 48px;
+      border: 1px solid #E5E5E5;
+    }
+    .compare-col {
+      background: #fff;
+      padding: 28px;
+    }
+    .compare-col-alt { background: #FAFAFA; }
+    .compare-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 16px;
+    }
+    .compare-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .compare-col li {
+      font-size: 14px;
+      line-height: 1.4;
+      padding-left: 18px;
+      position: relative;
+      color: #525252;
+    }
+    .compare-col li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #CCC;
+      font-weight: 400;
+    }
+    .compare-col-good li::before { content: '✓'; color: #00C880; font-weight: 700; }
+    .compare-col-good li { color: #000; }
+
+    @media (max-width: 720px) {
+      .faq-item { grid-template-columns: 1fr; gap: 12px; }
+      .spec-row { grid-template-columns: 1fr; gap: 4px; }
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand">MileCheck</a>
+      <nav class="primary-nav">
+        <a href="/#features">Features</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="nav-cta" target="_blank" rel="noopener">Get on Android →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+      <div class="container">
+
+        <div class="android-badge">
+          <!-- Android logo SVG -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2.5 17C2.5 17 2 16 2 14.5C2 11 5 8 8.5 8H15.5C19 8 22 11 22 14.5C22 16 21.5 17 21.5 17" stroke="#3DDC84" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="8.5" cy="14.5" r="1.5" fill="#3DDC84"/>
+            <circle cx="15.5" cy="14.5" r="1.5" fill="#3DDC84"/>
+            <line x1="8" y1="4" x2="6" y2="7.5" stroke="#3DDC84" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="16" y1="4" x2="18" y2="7.5" stroke="#3DDC84" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M5 17V21" stroke="#3DDC84" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M19 17V21" stroke="#3DDC84" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Now on Android
+        </div>
+
+        <h1 class="hero-h1">The mile marker app<br>for Android.</h1>
+        <p class="hero-sub">MileCheck shows your nearest highway mile marker in real time — accurate to one decimal place. All 50 US states, bundled offline. Live DOT road alerts in 31 states. Built for truckers, road crews, and anyone who needs an exact location on the highway.</p>
+        <div class="hero-ctas">
+          <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Get on Android →</a>
+          <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-secondary" target="_blank" rel="noopener">Get on iOS →</a>
+        </div>
+        <p class="hero-fineprint">Mile marker display is <strong>always free</strong> &middot; Premium <span class="mono">$9.99/year</span> or <span class="mono">$1.99/month</span> &middot; 7-day free trial</p>
+
+      </div>
+    </section>
+
+    <!-- ============== STATS ============== -->
+    <section class="stats">
+      <div class="container">
+        <div class="block-grid block-grid-3">
+          <div class="block">
+            <div class="block-label">Mile markers</div>
+            <div class="block-value mono">50</div>
+            <div class="block-secondary">US states, bundled offline</div>
+          </div>
+          <div class="block">
+            <div class="block-label">Live DOT alerts <span class="live-dot" aria-hidden="true"></span></div>
+            <div class="block-value mono">31</div>
+            <div class="block-secondary">States with live closures, crashes &amp; conditions</div>
+          </div>
+          <div class="block">
+            <div class="block-label">Accuracy</div>
+            <div class="block-value mono">0.1<span class="block-unit">mi</span></div>
+            <div class="block-secondary">Interpolated between physical signs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== WHAT IT DOES ============== -->
+    <section class="audiences" id="what-it-does">
+      <div class="container">
+        <p class="section-label">What it does</p>
+        <h2 class="section-h2">One number. Exactly where you are.</h2>
+        <div class="rows">
+          <article class="row">
+            <div class="row-num mono">01</div>
+            <div class="row-body">
+              <h3>Real-time mile marker — to one decimal place</h3>
+              <p class="row-text">MileCheck reads your GPS position and shows your nearest highway mile marker, interpolated between physical signs. If you're between MP&nbsp;47 and MP&nbsp;48, you see <strong>47.3</strong> — not just "somewhere around 47." The app displays your route, direction, and speed alongside the milepost.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">02</div>
+            <div class="row-body">
+              <h3>All 50 states, no signal required</h3>
+              <p class="row-text">The full milepost dataset — every interstate, US highway, and most state routes across all 50 states — ships bundled inside the Android app. There's nothing to download. There's no setup. When you enter a canyon, a tunnel, or a dead zone, the mile marker keeps working from the last known GPS fix.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">03</div>
+            <div class="row-body">
+              <h3>Live DOT road alerts in 31 states</h3>
+              <p class="row-text">Closures, crashes, construction zones, weather conditions, and chain requirements — pulled directly from state DOT APIs and updated every few minutes. Filter by type (closure only, crash only), by route, or by distance from your current position. Available in: AK, AR, AZ, CO, CT, DE, FL, GA, IA, ID, IL, IN, KS, LA, MA, ME, MN, MT, NC, NE, NH, NV, NY, OH, OR, SC, TX, UT, VT, WA, WI.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">04</div>
+            <div class="row-body">
+              <h3>Trip logging — opt-in, private, user-controlled</h3>
+              <p class="row-text">Tap <em>Log Trip</em> to start. Tap to stop. The app records your route, direction, start and end mile, and duration. Trip data never leaves your device — MileCheck does not collect, transmit, or store your location history. Used by DOT road crews, snowplow drivers, and salt/sand/brine applicators to log their passes.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== WHO USES IT ============== -->
+    <section class="features" id="who">
+      <div class="container">
+        <p class="section-label">Who uses it on Android</p>
+        <h2 class="section-h2">Truckers built this. Everyone else benefits.</h2>
+        <div class="rows">
+          <article class="row">
+            <div class="row-num mono">01</div>
+            <div class="row-body">
+              <h3>Long-haul and regional truckers</h3>
+              <p class="row-text">When something goes wrong on the highway — a breakdown, an accident, a medical situation — the first question dispatch asks is "where are you?" On rural interstates, there's no address. There's a mile marker. MileCheck gives it to you in a second, so you can give it to someone who can help.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">02</div>
+            <div class="row-body">
+              <h3>DOT road crews and snowplow operators</h3>
+              <p class="row-text">Shift supervisors need to know which miles got treated and when. MileCheck's trip logging records the route, direction, and mile range automatically as you drive. Product selector (sand, salt, brine) is built in for DOT-specific documentation. No paper clipboard.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">03</div>
+            <div class="row-body">
+              <h3>EMTs and first responders</h3>
+              <p class="row-text">Crash coordinates on a map aren't always actionable. "I-5 southbound at MP 174" is. MileCheck shows the nearest milepost so first responders can confirm or communicate exact incident location, and so incoming units know what exit to target.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">04</div>
+            <div class="row-body">
+              <h3>Road trippers and commuters</h3>
+              <p class="row-text">See closures and crashes before you reach them — 10, 25, 50, or 100 miles out. The interactive map shows every alert on every route, at every zoom level. Filter to what matters. The mile marker display also works as a precision GPS speedometer.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ANDROID vs NOTHING ============== -->
+    <section class="positioning">
+      <div class="container">
+        <p class="section-label">The Android gap</p>
+        <h2 class="section-h2">Before MileCheck, there was no serious Android mile marker app.</h2>
+        <p class="positioning-body">Mile marker apps existed on iOS. On Android, there was nothing built for the audience that most needs it — truckers, road crews, and rural drivers. MileCheck launched on Android in May 2026 with the full feature set: offline milepost data for all 50 states, live alerts, interactive map, trip logging. Both platforms use the same codebase and the same data.</p>
+
+        <div class="compare-grid">
+          <div class="compare-col compare-col-good">
+            <p class="compare-col-title">MileCheck on Android</p>
+            <ul>
+              <li>All 50 states, bundled offline</li>
+              <li>Live DOT alerts in 31 states</li>
+              <li>Decimal-place accuracy (e.g., MP 47.3)</li>
+              <li>Trip logging with mile-by-mile detail</li>
+              <li>Interactive map with alert overlay</li>
+              <li>No ads. No location tracking.</li>
+            </ul>
+          </div>
+          <div class="compare-col compare-col-alt">
+            <p class="compare-col-title">Other Android options</p>
+            <ul>
+              <li>Limited state coverage or iOS-only</li>
+              <li>No DOT alert integration</li>
+              <li>No decimal accuracy between signs</li>
+              <li>No trip logging built for road crews</li>
+              <li>Navigation-focused (maps, turn-by-turn) — not mile marker focused</li>
+              <li>Ad-supported or expensive</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TECH SPECS ============== -->
+    <section class="features" id="specs">
+      <div class="container">
+        <p class="section-label">Technical details</p>
+        <h2 class="section-h2">What's under the hood on Android.</h2>
+
+        <div class="spec-table">
+          <div class="spec-row">
+            <div class="spec-label">Platform</div>
+            <div class="spec-val">Android (Google Play) &middot; also available on iOS (App Store)</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Mile marker data</div>
+            <div class="spec-val">State DOT GIS datasets for all 50 states &middot; bundled in the app &middot; no download required &middot; works offline</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Accuracy</div>
+            <div class="spec-val">Interpolated between physical DOT signs &middot; displayed to one decimal place &middot; position smoothed over three GPS readings to reduce jitter</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Live alerts</div>
+            <div class="spec-val">31 states &middot; pulled from state DOT APIs &middot; refreshed every 2–10 minutes (configurable) &middot; closures, crashes, construction, weather, chain requirements, bridge openings</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Trip logging</div>
+            <div class="spec-val">User-initiated (tap to start, tap to stop) &middot; records route, direction, start mile, end mile, duration, optional notes &middot; data stored locally, never transmitted</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Price</div>
+            <div class="spec-val">Mile marker display — <strong>free</strong> &middot; Premium (alerts + map + trips) — <span class="mono">$9.99/year</span> or <span class="mono">$1.99/month</span> &middot; 7-day free trial &middot; no ads</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Minimum Android version</div>
+            <div class="spec-val">Android 7.0 (Nougat) and above</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Maps</div>
+            <div class="spec-val">Google Maps SDK &middot; standard, satellite, hybrid, and terrain views &middot; milepost and alert markers &middot; north-up or heading-up orientation</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Privacy</div>
+            <div class="spec-val">Location data stays on your device &middot; no account required &middot; trip logs are local-only &middot; <a href="https://milecheck.github.io/milecheck-privacy/" style="text-decoration:underline">privacy policy</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FAQ ============== -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <p class="section-label">Frequently asked</p>
+        <h2 class="section-h2">Questions about MileCheck on Android.</h2>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <p class="faq-q">Is MileCheck available on Android?</p>
+            <p class="faq-a">Yes. MileCheck is available on Android via the Google Play Store. Search "MileCheck" or use the download link below. Both the Android and iOS versions have the same feature set — all 50 states, live alerts in 31 states, offline mode, trip logging, and interactive map.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">Does it work on older Android phones?</p>
+            <p class="faq-a">MileCheck runs on Android 7.0 (Nougat) and above. It's designed to work well on budget and mid-range Android devices, not just flagships. The bundled milepost data and the GPS calculation engine are optimized to be lightweight.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">Does it work without cell service?</p>
+            <p class="faq-a">Yes — mile marker display works completely offline. The milepost dataset for all 50 states is bundled inside the app when you download it. Live DOT road alerts require a cell or Wi-Fi connection to update, but the core mile marker feature does not.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">How accurate is the mile marker on Android?</p>
+            <p class="faq-a">MileCheck shows your position interpolated between physical highway signs, to one decimal place. If you're between the MP 47 sign and the MP 48 sign, you see something like 47.3 — not just 47. GPS position is smoothed over three readings to reduce jitter. Accuracy depends on the underlying DOT milepost data for each state.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">What's the difference between mile markers and exit numbers?</p>
+            <p class="faq-a">Mile markers are the small green signs that appear roughly every mile along interstate and US highways. They count up from the state's southern or western border. Exit numbers on most modern interstates match the nearest mile marker. They're not the same sign — and they're not always the same number. MileCheck shows mile markers, not exit numbers.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">Which states have live road alerts?</p>
+            <p class="faq-a">Live DOT road alerts are currently active in <strong>31 states</strong>: Alaska, Arizona, Arkansas, Colorado, Connecticut, Delaware, Florida, Georgia, Idaho, Illinois, Indiana, Iowa, Kansas, Louisiana, Maine, Massachusetts, Minnesota, Montana, Nebraska, Nevada, New Hampshire, New York, North Carolina, Ohio, Oregon, South Carolina, Texas, Utah, Vermont, Washington, and Wisconsin. Mile markers work in all 50 states. More alert states are added regularly.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">Is MileCheck free on Android?</p>
+            <p class="faq-a">The mile marker display — the core feature — is always free. Premium features (live road alerts in 31 states, interactive map, trip logging) cost $9.99 per year or $1.99 per month. There's a 7-day free trial so you can test everything before paying. There are no ads in either tier.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">Does MileCheck track or store my location?</p>
+            <p class="faq-a">No. MileCheck uses your GPS location to calculate the nearest mile marker — that's it. Your location is never transmitted to MileCheck's servers. Trip logs are stored on your device only and can be deleted at any time. MileCheck does not collect, sell, or share location data.</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-q">Is MileCheck useful for truckers specifically?</p>
+            <p class="faq-a">Yes — truckers are one of MileCheck's primary audiences. When a truck breaks down or needs roadside assistance, the first thing dispatch or emergency services needs is an exact location. On rural interstates, that means a mile marker. MileCheck gives you that number instantly. It also shows DOT alerts ahead on your route and supports trip logging with start/end mile and optional notes.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== DOWNLOAD CTA ============== -->
+    <section class="android-cta-strip">
+      <div class="container">
+        <p class="section-label">Download</p>
+        <h2>Get MileCheck on Android.</h2>
+        <p>Mile markers in all 50 states. Live alerts in 31. Always free for the mile tab.</p>
+        <div class="hero-ctas">
+          <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Get on Google Play →</a>
+          <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-secondary" target="_blank" rel="noopener">Get on iOS →</a>
+        </div>
+        <p style="font-size:13px;color:#666;margin-top:12px;">7-day free trial &middot; No ads &middot; No account required</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <p class="footer-brand"><a href="/">MileCheck</a></p>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://x.com/milecheckapp" target="_blank" rel="noopener">X / Twitter</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://www.reddit.com/user/MileCheckApp/" target="_blank" rel="noopener">Reddit</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck. Mile marker positions are approximate and may not reflect actual sign locations. Do not use this app while driving.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
