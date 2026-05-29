@@ -593,10 +593,14 @@
   <style>
     /* MOBILE TUNING — keep narrow widths from blowing up */
     @media (max-width: 760px){
-      .stats .block-value { font-size: 42px !important; letter-spacing: -1px !important; }
-      .stats .block-unit { font-size: 20px !important; }
-      .stats .block-secondary { font-size: 13px !important; line-height: 1.5 !important; }
-      .stats .block { padding-top: 20px !important; padding-bottom: 20px !important; }
+      /* keep the 3 stats as a compact ROW so the page isn't so long */
+      .stats .block-grid, .stats .block-grid-3 { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 14px !important; }
+      .stats .block { padding: 4px 0 !important; border: 0 !important; }
+      .stats .block-value { font-size: 30px !important; letter-spacing: -1px !important; }
+      .stats .block-unit { font-size: 14px !important; }
+      .stats .block-label { font-size: 9px !important; letter-spacing: 1px !important; }
+      .stats .block-secondary { font-size: 11px !important; line-height: 1.4 !important; }
+      .stats .block-tertiary { display: none !important; }
     }
     @media (max-width: 440px){
       .primary-nav { gap: 13px !important; }
@@ -621,7 +625,7 @@
         <a href="#" data-tab="pricing">Pricing</a>
         <a href="#" data-tab="story">Story</a>
         <a href="#" data-tab="b2b">B2B</a>
-        <a href="#" data-tab="pricing" class="nav-cta">Get the app</a>
+        <a href="#" data-dl class="nav-cta">Get the app</a>
       </nav>
     </div>
   </header>
@@ -730,7 +734,7 @@
         </div>
         <div style="text-align:center;margin-top:44px;">
           <p style="font-size:17px;color:#374151;margin:0 0 18px;">Find your milepost free &mdash; it&rsquo;s how help finds you.</p>
-          <a href="#" data-tab="pricing" class="btn btn-primary" style="background:#00C880;border-color:#00C880;color:#fff;">Get the app &rarr;</a>
+          <a href="#" data-dl class="btn btn-primary" style="background:#00C880;border-color:#00C880;color:#fff;">Get the app &rarr;</a>
         </div>
       </div>
     </section>
@@ -927,11 +931,11 @@
       <div class="container">
         <p class="section-label">Coverage</p>
         <h2 class="section-h2">50 states of mile markers. Live DOT alerts in 35.</h2>
-        <p class="positioning-body" style="margin-bottom:40px;">Green is where live DOT alerts are running today. New states added every week.</p>
+        <p class="positioning-body" style="margin-bottom:40px;">Every state has mile markers. The deeper green shows where live DOT alerts are running today &mdash; 35 and counting, with new states added every week.</p>
         <style>
           .us-svg-wrap { max-width: 780px; margin: 0 auto; }
           .us-svg-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
-          .us-svg-wrap svg path { fill:#E8EAED; stroke:#FFFFFF; stroke-width:1.4; }
+          .us-svg-wrap svg path { fill:#C2EDD6; stroke:#FFFFFF; stroke-width:1.4; }
           .us-svg-wrap svg path#wa, .us-svg-wrap svg path#or, .us-svg-wrap svg path#mt, .us-svg-wrap svg path#az, .us-svg-wrap svg path#ut, .us-svg-wrap svg path#id, .us-svg-wrap svg path#ak, .us-svg-wrap svg path#co, .us-svg-wrap svg path#de, .us-svg-wrap svg path#ar, .us-svg-wrap svg path#fl, .us-svg-wrap svg path#ma, .us-svg-wrap svg path#sc, .us-svg-wrap svg path#me, .us-svg-wrap svg path#nh, .us-svg-wrap svg path#vt, .us-svg-wrap svg path#oh, .us-svg-wrap svg path#nv, .us-svg-wrap svg path#wi, .us-svg-wrap svg path#ny, .us-svg-wrap svg path#la, .us-svg-wrap svg path#ga, .us-svg-wrap svg path#tx, .us-svg-wrap svg path#ks, .us-svg-wrap svg path#ne, .us-svg-wrap svg path#ia, .us-svg-wrap svg path#mn, .us-svg-wrap svg path#in, .us-svg-wrap svg path#nc, .us-svg-wrap svg path#ct, .us-svg-wrap svg path#il, .us-svg-wrap svg path#md, .us-svg-wrap svg path#ok, .us-svg-wrap svg path#ky, .us-svg-wrap svg path#ms { fill:#00C880; }
           .usmap-legend { display:flex; gap:28px; justify-content:center; margin-top:28px; font-size:13px; color:#6b7280; }
           .usmap-legend .key { display:inline-flex; align-items:center; gap:8px; }
@@ -1200,8 +1204,8 @@
 	/>
 </svg>
           <div class="usmap-legend">
-            <span class="key"><span class="swatch" style="background:#00C880;"></span> Live DOT alerts (35)</span>
-            <span class="key"><span class="swatch" style="background:#E8EAED;"></span> Mile markers only (15)</span>
+            <span class="key"><span class="swatch" style="background:#C2EDD6;"></span> Mile markers &mdash; all 50 states</span>
+            <span class="key"><span class="swatch" style="background:#00C880;"></span> Live DOT alerts &mdash; 35 states</span>
           </div>
         </div>
       </div>
@@ -1240,7 +1244,7 @@
               <li>Trip logging</li>
               <li>Filter alerts by route, type, severity</li>
             </ul>
-            <a href="#" class="btn btn-primary tier-cta">Start free trial</a>
+            <a href="#" data-dl class="btn btn-primary tier-cta">Start free trial</a>
             <p class="tier-fineprint">Early adopter rate &mdash; locked in for life, even when the price rises.</p>
           </div>
 
@@ -1255,7 +1259,7 @@
               <li>Navigate to any mile marker</li>
               <li>Hand off to Google Maps, Apple Maps, or Waze</li>
             </ul>
-            <a href="#" class="btn btn-primary tier-cta">Get the app &rarr;</a>
+            <a href="#" data-dl class="btn btn-primary tier-cta">Get the app &rarr;</a>
           </div>
 
         </div>
@@ -1537,6 +1541,27 @@
       var x=(location.hash||'').replace('#','');
       if(valid.indexOf(x)>=0) show(x);
     });
+  })();
+  </script>
+  <!-- Download chooser modal -->
+  <div id="dlModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(15,20,25,0.55);align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#fff;border-radius:18px;max-width:380px;width:100%;padding:34px 28px 30px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,0.3);position:relative;">
+      <button id="dlClose" aria-label="Close" style="position:absolute;top:12px;right:16px;border:0;background:none;font-size:24px;color:#9aa1ab;cursor:pointer;line-height:1;">&times;</button>
+      <h3 style="font-size:22px;font-weight:800;color:#0F1419;margin:0 0 6px;letter-spacing:-0.02em;">Get MileCheck</h3>
+      <p style="font-size:14px;color:#6b7280;margin:0 0 22px;line-height:1.5;">Free to find your milepost. Premium comes with a 7-day free trial.</p>
+      <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener" style="display:block;background:#0A84FF;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px;border-radius:11px;margin-bottom:12px;">Download on the App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener" style="display:block;background:#00C880;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px;border-radius:11px;">Get it on Google Play</a>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var m=document.getElementById('dlModal');
+    document.addEventListener('click',function(e){
+      var t=e.target.closest?e.target.closest('[data-dl]'):null;
+      if(t){ e.preventDefault(); m.style.display='flex'; return; }
+      if(e.target===m||e.target.id==='dlClose'){ m.style.display='none'; }
+    });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') m.style.display='none'; });
   })();
   </script>
 </body>
