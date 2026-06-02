@@ -635,6 +635,7 @@
         <a href="#" data-tab="pricing">Pricing</a>
         <a href="#" data-tab="story">Story</a>
         <a href="#" data-tab="b2b">B2B</a>
+        <a href="blog/">Blog</a>
         <a href="#" data-dl class="nav-cta">Get the app</a>
       </nav>
     </div>
@@ -1282,7 +1283,7 @@
         <p class="section-label">For partners and platform builders</p>
         <h2>Building something on top of mile marker data?</h2>
         <p class="partners-body">
-          MileCheck operates a multi-state mile marker + DOT alert ingestion platform that today serves consumer drivers on iOS and Android. The same data layer &mdash; <strong>50 states of bundled mileposts</strong>, <strong>35 state DOT integrations and growing</strong>, normalized route mappings, navigate-to-milepost handoff &mdash; has direct relevance to fleet management platforms, mapping and navigation tools, 511 traveler-information operators, digital freight brokerages, and roadside assistance providers.
+          MileCheck operates a multi-state mile marker + DOT alert ingestion platform that today serves consumer drivers on iOS and Android. The same data layer &mdash; <strong>50 states of bundled mileposts</strong>, <strong>42 state DOT integrations and growing</strong>, normalized route mappings, navigate-to-milepost handoff &mdash; has direct relevance to fleet management platforms, mapping and navigation tools, 511 traveler-information operators, digital freight brokerages, and roadside assistance providers.
         </p>
         <p class="partners-body">
           If you're working on something where precise highway location matters &mdash; whether that's API access, data licensing, integration partnerships, or something we haven't thought of &mdash; we'd like to hear from you.
@@ -1305,7 +1306,7 @@
         <p class="eyebrow">For platforms and partners</p>
         <h1>The highway data layer your platform doesn't have to build.</h1>
         <p class="ent-hero-sub">
-          <strong>50 US states of bundled mile markers.</strong> 35 state DOT integrations, expanding weekly toward all 50. Normalized route mappings across 19 distinct DOT platform formats. A consumer-grade mobile interface already shipped to iOS and Android.
+          <strong>50 US states of bundled mile markers.</strong> 42 state DOT integrations, expanding weekly toward all 50. Normalized route mappings across 19 distinct DOT platform formats. A consumer-grade mobile interface already shipped to iOS and Android.
         </p>
         <a href="mailto:info@milecheckapp.com" class="ent-hero-cta">Open a conversation &rarr;</a>
       </div>
@@ -1325,7 +1326,7 @@
           <div class="infra-cell">
             <div class="infra-cell-num mono">02</div>
             <h3>DOT integration corpus</h3>
-            <p>35 state DOTs integrated and growing. Each integration handles a different upstream platform format (<code>ibi511</code>, <code>MassDOT EVBG</code>, <code>FL511 ArcGIS</code>, <code>DriveTexas</code>, <code>NEC New England Compass</code>, <code>OHGO</code>, <code>CARS FEU-g</code>, <code>DelDOT TMC</code>, plus 11 others). Cloudflare Worker dispatcher normalizes outputs to a consistent <code>road-weather-reports</code> and <code>incident-reports</code> schema. Cache TTLs tuned per source. R2 mirror pattern available for DOTs that block Cloudflare egress.</p>
+            <p>42 state DOTs integrated and growing. Each integration handles a different upstream platform format — 19 distinct platform shapes in all. A serverless dispatcher normalizes every source into a single consistent road-conditions and incident schema, with caching tuned per source and resilient fallbacks for agencies with restrictive access.</p>
           </div>
           <div class="infra-cell">
             <div class="infra-cell-num mono">03</div>
@@ -1441,7 +1442,7 @@
         <p class="ent-section-label">Where it goes next</p>
         <h2>The integration engine isn't capped at state DOTs.</h2>
         <div class="why-content" style="margin-bottom:40px;">
-          <p>Alert classification and filtering already improve continuously &mdash; sorting closures, crashes, construction, and weather by severity, route, and direction, and getting sharper with every state added. The same engine that normalized 35 state DOTs extends to entirely new authorities and transportation modes. We've already proven it once at the city level.</p>
+          <p>Alert classification and filtering already improve continuously &mdash; sorting closures, crashes, construction, and weather by severity, route, and direction, and getting sharper with every state added. The same engine that normalized 42 state DOTs extends to entirely new authorities and transportation modes. We've already proven it once at the city level.</p>
         </div>
         <div class="audience-grid">
           <div class="audience-cell">
