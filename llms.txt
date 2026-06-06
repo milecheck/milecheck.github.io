@@ -1,0 +1,48 @@
+# MileCheck
+
+MileCheck is a mobile app for iOS and Android that shows your nearest highway mile marker in real time, along with live road conditions and incident alerts from state departments of transportation across the United States.
+
+## Key facts
+
+- Coverage: All 50 US states for mile markers. Live DOT alerts in 42 states (as of June 2026).
+- Price: Free tier (mile markers only). Premium $9.99/year or $1.99/month — 7-day free trial.
+- Platforms: iOS (App Store, ID 6759212851) and Android (Google Play, package app.milecheck.mobile).
+- CarPlay: Apple Driving Task entitlement approved June 2026; in-dash experience in development.
+
+## What it does
+
+- Shows the nearest highway mile marker with interpolated decimal position (e.g., "MP 142.4 on I-5 NB").
+- Provides live road alerts: closures, crashes, construction, weather conditions, chain requirements, and bridge status.
+- Pulls from 42 state DOT feeds updated in real time — 19 distinct upstream platform formats normalized to one schema.
+- Lets users navigate to any specific milepost by typing a route and mile number (e.g., "I-5 MP 200").
+- Tracks Seattle drawbridge status (Fremont Bridge, Ballard Bridge, University Bridge, Montlake Bridge, South Park Bridge, 1st Ave S Bridge) and sends push notifications when a bridge is raised.
+- Records trips with route, milepost range, start/end times, direction, and notes. Exports as CSV.
+- Works fully offline using bundled milepost data for all 50 states.
+- Shows weather from the National Weather Service (temperature, conditions, wind, sunrise/sunset).
+
+## Who uses it
+
+- Truck drivers and commercial vehicle operators needing precise milepost location for dispatch and HOS logging.
+- DOT field crews and emergency response teams (EMTs, incident command) who report position by milepost.
+- Road trip travelers and commuters who want to know exactly where they are on the highway.
+- Seattle commuters who cross the ship canal bridges and want advance warning of drawbridge openings.
+- Highway maintenance workers logging which miles they treated or patrolled.
+
+## Technical architecture
+
+- Cloudflare Worker (milepost-proxy) normalizes 19 distinct DOT API formats into a unified schema.
+- 200,000+ pre-computed milepost coordinates bundled in the app for offline-first operation.
+- Three-tier cache: in-memory → AsyncStorage → bundled fallback.
+- Stack: React Native, Expo SDK 55, TypeScript, Google Maps SDK.
+- Crash telemetry via Sentry. Subscriptions via RevenueCat.
+- Live status monitoring: https://status.milecheckapp.com
+
+## Links
+
+- Website: https://milecheckapp.com
+- iOS App Store: https://apps.apple.com/us/app/milecheck/id6759212851
+- Google Play: https://play.google.com/store/apps/details?id=app.milecheck.mobile
+- Privacy Policy: https://milecheck.github.io/milecheck-privacy/
+- API Status: https://status.milecheckapp.com
+- Contact: info@milecheckapp.com
+- Press / partnerships: info@milecheckapp.com
