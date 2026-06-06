@@ -130,16 +130,16 @@
     /* TWO-COLUMN POSITIONING (revised) */
     .positioning-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 0;
       border-top: 1px solid #E5E5E5;
     }
     .positioning-col {
-      padding: 40px 40px 40px 0;
+      padding: 40px 32px 40px 0;
       border-right: 1px solid #E5E5E5;
     }
     .positioning-col:last-child {
-      padding: 40px 0 40px 40px;
+      padding: 40px 0 40px 32px;
       border-right: none;
     }
     .positioning-col-num {
@@ -985,7 +985,7 @@
     <section data-panel="home" class="positioning">
       <div class="container">
         <p class="section-label">Why MileCheck</p>
-        <h2 class="section-h2">Two things no one else has.</h2>
+        <h2 class="section-h2">Three things no one else has.</h2>
         <div class="positioning-grid">
           <div class="positioning-col">
             <div class="positioning-col-num mono">01</div>
@@ -996,6 +996,11 @@
             <div class="positioning-col-num mono">02</div>
             <h3>The only app on either store with live, nationwide DOT API integrations.</h3>
             <p>Closures, crashes, construction, weather warnings &mdash; pulled directly from 42 official state DOT feeds, not scraped from third-party sources. When your state DOT publishes an alert, MileCheck users see it. The integration corpus expands state by state, with new states added weekly toward all 50.</p>
+          </div>
+          <div class="positioning-col">
+            <div class="positioning-col-num mono">03</div>
+            <h3>The only CarPlay app that shows your mile marker.</h3>
+            <p>Apple&rsquo;s Driving Task entitlement &mdash; the same approval required of dedicated navigation apps &mdash; was granted in June 2026. MileCheck is the only app in its category cleared for CarPlay. In-dash mile markers are in development now.</p>
           </div>
         </div>
       </div>
