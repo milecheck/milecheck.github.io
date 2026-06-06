@@ -369,7 +369,7 @@
     /* Three-layer infrastructure block */
     .infra-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 0;
       border-top: 1px solid #E5E5E5;
       border-bottom: 1px solid #E5E5E5;
@@ -378,7 +378,8 @@
       padding: 40px 32px 44px 0;
       border-right: 1px solid #E5E5E5;
     }
-    .infra-cell:nth-child(2) { padding-left: 32px; padding-right: 32px; }
+    .infra-cell:nth-child(2) { padding-left: 32px; padding-right: 0; border-right: none; }
+    .infra-cell:nth-child(n+3) { border-top: 1px solid #E5E5E5; }
     .infra-cell:last-child { padding-left: 32px; padding-right: 0; border-right: none; }
     .infra-cell-num {
       font-family: 'JetBrains Mono', monospace;
