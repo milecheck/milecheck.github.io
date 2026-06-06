@@ -3,24 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MileCheck — Highway Mile Markers &amp; Live DOT Alerts</title>
-  <meta name="description" content="The only mile-marker app on either store with live state DOT data. Real-time mile markers in all 50 US states. Live road alerts from 42 state DOTs. Navigate to any milepost.">
+  <title>MileCheck — Highway location data, shipped to drivers and platforms (PREVIEW)</title>
+  <meta name="description" content="The only mile-marker app on either store with live state DOT data. Real-time mile markers in all 50 US states. Live road alerts from 35 state DOTs. Navigate to any milepost.">
 
   <meta property="og:title" content="MileCheck — Highway Mile Markers & Live DOT Alerts">
-  <meta property="og:description" content="The only app on iOS or Android with live state DOT data. 50 states of mile markers. 42 with live alerts. New states added weekly toward all 50.">
+  <meta property="og:description" content="The only app on iOS or Android with live state DOT data. 50 states of mile markers. 35 with live alerts. New states added weekly toward all 50.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner.png">
   <meta property="og:url" content="https://milecheckapp.com">
   <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@milecheckapp">
-  <meta name="twitter:title" content="MileCheck — Highway Mile Markers &amp; Live DOT Alerts">
-  <meta name="twitter:description" content="Real-time highway mile markers in all 50 US states. Live DOT road alerts from 42 states. Seattle drawbridge push notifications. $9.99/yr — 7-day free trial.">
-  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner.png">
-
-  <meta name="keywords" content="highway mile marker app, milepost app, live DOT road alerts, road conditions app, iOS mile marker, Android mile marker, Seattle bridge alerts, drawbridge notifications, truck driver navigation, milepost GPS, highway navigation, road alert app, mile marker locator, DOT traffic alerts">
-  <meta name="application-name" content="MileCheck">
-  <meta name="apple-itunes-app" content="app-id=6759212851">
 
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,19 +130,16 @@
     /* TWO-COLUMN POSITIONING (revised) */
     .positioning-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 0;
       border-top: 1px solid #E5E5E5;
     }
     .positioning-col {
-      padding: 40px 32px 40px 0;
+      padding: 40px 40px 40px 0;
       border-right: 1px solid #E5E5E5;
     }
-    .positioning-col:nth-child(2) {
-      padding: 40px 32px 40px 32px;
-    }
     .positioning-col:last-child {
-      padding: 40px 0 40px 32px;
+      padding: 40px 0 40px 40px;
       border-right: none;
     }
     .positioning-col-num {
@@ -369,7 +356,7 @@
     /* Three-layer infrastructure block */
     .infra-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 0;
       border-top: 1px solid #E5E5E5;
       border-bottom: 1px solid #E5E5E5;
@@ -378,8 +365,7 @@
       padding: 40px 32px 44px 0;
       border-right: 1px solid #E5E5E5;
     }
-    .infra-cell:nth-child(2) { padding-left: 32px; padding-right: 0; border-right: none; }
-    .infra-cell:nth-child(n+3) { border-top: 1px solid #E5E5E5; }
+    .infra-cell:nth-child(2) { padding-left: 32px; padding-right: 32px; }
     .infra-cell:last-child { padding-left: 32px; padding-right: 0; border-right: none; }
     .infra-cell-num {
       font-family: 'JetBrains Mono', monospace;
@@ -507,7 +493,7 @@
     /* Proof block */
     .proof-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 1px;
       background: #E5E5E5;
       border: 1px solid #E5E5E5;
@@ -634,67 +620,13 @@
       .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "MileCheck",
-    "description": "Real-time highway mile markers in all 50 US states. Live DOT road alerts from 42 state departments of transportation. Navigate to any milepost. Includes Seattle drawbridge push notifications when a bridge is raised.",
-    "url": "https://milecheckapp.com",
-    "applicationCategory": "NavigationApplication",
-    "operatingSystem": "iOS, Android",
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "Premium Annual",
-        "price": "9.99",
-        "priceCurrency": "USD",
-        "description": "7-day free trial included",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "billingDuration": "P1Y"
-        }
-      },
-      {
-        "@type": "Offer",
-        "name": "Premium Monthly",
-        "price": "1.99",
-        "priceCurrency": "USD",
-        "description": "7-day free trial included",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "billingDuration": "P1M"
-        }
-      }
-    ],
-    "author": {
-      "@type": "Organization",
-      "name": "MileCheck",
-      "url": "https://milecheckapp.com",
-      "email": "info@milecheckapp.com"
-    },
-    "downloadUrl": [
-      "https://apps.apple.com/us/app/milecheck/id6759212851",
-      "https://play.google.com/store/apps/details?id=app.milecheck.mobile"
-    ],
-    "screenshot": "https://milecheckapp.com/images/og-banner.png",
-    "featureList": [
-      "Real-time highway mile markers in all 50 US states",
-      "Live DOT road alerts from 42 state departments of transportation",
-      "Navigate to any milepost by route and mile number",
-      "Seattle drawbridge alerts with push notifications for Fremont, Ballard, University, Montlake, South Park, and 1st Ave S bridges",
-      "Interactive map with milepost markers and alert overlays",
-      "Trip logging with route, milepost range, timestamps, and CSV export",
-      "Offline-ready with bundled milepost data for all 50 states",
-      "Apple CarPlay support in development"
-    ],
-    "keywords": "highway mile marker, milepost, DOT road alerts, live road conditions, bridge alerts, Seattle bridges, GPS milepost, truck driver app, highway navigation, road conditions"
-  }
-  </script>
 </head>
 <body>
 
+  <!-- PREVIEW WATERMARK — REMOVE BEFORE SHIPPING -->
+  <div class="preview-banner">
+    ⚠️ PREVIEW · Refreshed landing page mockup · Compare to <a href="index.html">current live site</a> · See spec: <code>Social Media/LANDING-PAGE-REFRESH-SPEC.md</code>
+  </div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -703,10 +635,10 @@
       <nav class="primary-nav">
         <a href="#" data-tab="home">Home</a>
         <a href="#" data-tab="features">Features</a>
+        <a href="#" data-tab="coverage">Coverage</a>
         <a href="#" data-tab="pricing">Pricing</a>
         <a href="#" data-tab="story">Story</a>
         <a href="#" data-tab="b2b">B2B</a>
-        <a href="blog/">Blog</a>
         <a href="#" data-dl class="nav-cta">Get the app</a>
       </nav>
     </div>
@@ -727,16 +659,13 @@
       <div class="container">
         <p class="eyebrow">iOS · Android · 50 US states</p>
         <h1 class="hero-h1">The only mile-marker app<br>with live state DOT data.</h1>
-        <p class="hero-sub">Real-time mile markers in all 50 US states. Live road alerts from 42 state DOTs. Navigate to any mile marker on the map &mdash; because a milepost isn't just a number on a sign. It's how help finds you.</p>
+        <p class="hero-sub">Real-time mile markers in all 50 US states. Live road alerts from 35 state DOTs. Navigate to any mile marker on the map &mdash; because a milepost isn't just a number on a sign. It's how help finds you.</p>
         <style>
           .btn-ios { background:#0A84FF !important; border-color:#0A84FF !important; color:#fff !important; }
           .btn-ios:hover { background:#0070E0 !important; border-color:#0070E0 !important; }
           .btn-android { background:#00C880 !important; border-color:#00C880 !important; color:#fff !important; }
           .btn-android:hover { background:#00B473 !important; border-color:#00B473 !important; }
         </style>
-        <p class="hero-carplay" style="display:inline-flex;align-items:center;gap:8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:24px;padding:6px 16px;font-size:13px;font-weight:600;color:#166534;margin-bottom:20px;">
-          🚗 CarPlay approved — building now
-        </p>
         <div class="hero-ctas">
           <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary btn-ios" target="_blank" rel="noopener">Get on iOS &rarr;</a>
           <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary btn-android" target="_blank" rel="noopener">Get on Android &rarr;</a>
@@ -756,8 +685,8 @@
           </div>
           <div class="block">
             <div class="block-label">Live DOT alerts <span class="live-dot" aria-hidden="true"></span></div>
-            <div class="block-value mono">42</div>
-            <div class="block-secondary">of 50 US states<br><span class="block-tertiary"><strong style="color:#000;">New states added weekly toward all 50.</strong> Tracking state-by-state &mdash; <a href="#coverage" style="color:#00A86B;text-decoration:underline;font-weight:600;">see the map &darr;</a></span></div>
+            <div class="block-value mono">35</div>
+            <div class="block-secondary">of 50 US states<br><span class="block-tertiary"><strong style="color:#000;">New states added weekly toward all 50.</strong> Tracking state-by-state &mdash; <a href="#" data-tab="coverage" style="color:#00A86B;text-decoration:underline;font-weight:600;">see coverage list &darr;</a></span></div>
           </div>
           <div class="block">
             <div class="block-label">Rating</div>
@@ -768,17 +697,260 @@
       </div>
     </section>
 
+    <!-- ============== POSITIONING (TWO-COLUMN) ============== -->
+    <section data-panel="home" class="positioning">
+      <div class="container">
+        <p class="section-label">Why MileCheck</p>
+        <h2 class="section-h2">Two things no one else has.</h2>
+        <div class="positioning-grid">
+          <div class="positioning-col">
+            <div class="positioning-col-num mono">01</div>
+            <h3>The only mile-marker app on Android.</h3>
+            <p>Truckers, road crews, and EMTs were left out of the iOS-only mile marker app ecosystem for years. We built MileCheck on both platforms from day one &mdash; the same code, the same offline data, the same mile markers in all 50 states.</p>
+          </div>
+          <div class="positioning-col">
+            <div class="positioning-col-num mono">02</div>
+            <h3>The only app on either store with live, nationwide DOT API integrations.</h3>
+            <p>Closures, crashes, construction, weather warnings &mdash; pulled directly from 35 official state DOT feeds, not scraped from third-party sources. When your state DOT publishes an alert, MileCheck users see it. The integration corpus expands state by state, with new states added weekly toward all 50.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== STORY ============== -->
+    <style>
+      .story { padding: 72px 0; background: #FFFFFF; }
+      .story .container { max-width: 760px; }
+      .story-body p { font-size: 18px; line-height: 1.7; color: #374151; margin: 0 0 22px; }
+      .story-body p:last-child { color: #0F1419; }
+      .story-photo { margin: 40px 0 0; }
+      .story-photo-placeholder { aspect-ratio: 16 / 7; border: 1.5px dashed #CBD5E1; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #9aa1ab; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; background: #FAFAFA; }
+      .story-photo figcaption { margin-top: 12px; font-size: 13px; color: #6b7280; font-style: italic; text-align: center; }
+    </style>
+    <section data-panel="story" class="story" id="story">
+      <div class="container">
+        <p class="section-label">Our story</p>
+        <h2 class="section-h2">Why we built MileCheck.</h2>
+        <div class="story-body">
+          <p>Last winter, my dad took a seasonal job driving snowplows for the Oregon Department of Transportation. Like many DOTs across the country, ODOT needed more drivers, and before long he was out on the highways in the middle of winter storms, helping keep the roads open.</p>
+          <p>What I didn&rsquo;t realize at the time was how much of that job revolves around mile markers. Every radio call references them. Every crash report. Every road closure. They&rsquo;re how crews report conditions, track where sand, salt, and brine have been applied, and coordinate a response.</p>
+          <p>Once I started paying attention, I noticed mile marker references everywhere. Crash alerts. Road closures. Emergency responses. Tow trucks. Maintenance crews. Dispatchers.</p>
+          <p>If you call for help on a mountain highway, how do you tell anyone exactly where you are?</p>
+          <p>That&rsquo;s what mile markers are for.</p>
+          <p>Most drivers pass hundreds of them without a second thought. But the people who keep roads open, respond to emergencies, and help stranded motorists rely on them every day.</p>
+          <p>The problem is that knowing your exact mile marker isn&rsquo;t always intuitive, and they aren&rsquo;t built into most major navigation apps. Signs get missed, damaged, or stolen. Snow covers them. Staring at the shoulder waiting for a small green sign while you plow through a storm isn&rsquo;t exactly ideal.</p>
+          <p>There&rsquo;s an app people use for this, but it only works on iPhone. My dad uses Android, and so do many of the drivers around him. Asking him to switch phones for a single app was never realistic, so I built him a simple web app that showed his nearest Oregon mile marker from his GPS location.</p>
+          <p>As it grew, it became a family effort. My mom, my sister, and I spent countless hours driving highways and back roads, checking mile markers, comparing numbers, making adjustments, and trying again.</p>
+          <p>I still remember the first time the number changed at exactly the right moment. We were SO excited &mdash; it felt like magic every time we passed a milepost.</p>
+          <p>My dad showed it to a few people at work. They showed it to others. Soon feedback was coming in from truck drivers, road crews, first responders, and everyday drivers. Nearly every feature in MileCheck exists because someone using it on a real road asked for it.</p>
+          <p>Today, MileCheck does a lot more than show mile markers. It helps drivers find their location, stay ahead of road conditions, and plan long drives.</p>
+          <p><strong>What started as a simple tool for my dad turned out to be useful for a lot of other people, too.</strong></p>
+        </div>
+        <div style="text-align:center;margin-top:44px;">
+          <p style="font-size:17px;color:#374151;margin:0 0 18px;">Find your milepost free &mdash; it&rsquo;s how help finds you.</p>
+          <a href="#" data-dl class="btn btn-primary" style="background:#00C880;border-color:#00C880;color:#fff;">Get the app &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== SCREENSHOTS (CAROUSEL — OPTION B) ============== -->
+    <style>
+      .screens { padding: 56px 0 24px; background: #FAFAFA; }
+      .screens .section-head { text-align: center; margin-bottom: 8px; }
+      .screens .carousel-track {
+        display: flex; gap: 24px; overflow-x: auto;
+        scroll-snap-type: x mandatory; padding: 24px 24px 28px;
+        scrollbar-width: thin; scrollbar-color: #00C880 #E5E5E5;
+        -webkit-overflow-scrolling: touch;
+      }
+      .screens .carousel-track::-webkit-scrollbar { height: 8px; }
+      .screens .carousel-track::-webkit-scrollbar-track { background: #E5E5E5; border-radius: 4px; }
+      .screens .carousel-track::-webkit-scrollbar-thumb { background: #00C880; border-radius: 4px; }
+      .screens .carousel-card { flex-shrink: 0; width: 250px; scroll-snap-align: center; }
+      .screens .cc-phone { border-radius: 30px; background: #1a1f26; padding: 7px; box-shadow: 0 16px 44px rgba(0,0,0,0.22); margin-bottom: 14px; }
+      .screens .cc-phone-inner { border-radius: 24px; overflow: hidden; background: #fff; aspect-ratio: 1284 / 2778; }
+      .screens .cc-phone-inner img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+      .screens .cc-eyebrow { font-size: 10px; font-weight: 800; color: #00C880; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 6px; }
+      .screens .cc-title { font-size: 16px; font-weight: 900; letter-spacing: -0.02em; color: #0F1419; margin-bottom: 5px; }
+      .screens .cc-sub { font-size: 12px; color: #6b7280; line-height: 1.5; }
+      .screens .carousel-hint { text-align: center; font-size: 11px; color: #9aa1ab; margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
+    </style>
+    <section data-panel="home" class="screens">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label">See it</p>
+          <h2 class="section-h2">The whole app, end to end.</h2>
+        </div>
+      </div>
+      <div class="carousel-track">
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-01-mile.png" alt="Mile tab showing nearest mile marker"></div></div>
+          <div class="cc-eyebrow">Mile Tab</div>
+          <div class="cc-title">Your nearest mile marker.</div>
+          <div class="cc-sub">Accurate to one-tenth of a mile. Updates as you drive.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-02-navmp.png" alt="Map tab navigate to milepost"></div></div>
+          <div class="cc-eyebrow">Map Tab · Navigate to MP</div>
+          <div class="cc-title">Navigate to any mile marker.</div>
+          <div class="cc-sub">Tap a marker &rarr; tap Maps &rarr; hands off to your nav app.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-03-pass.png" alt="Map tab mountain pass"></div></div>
+          <div class="cc-eyebrow">Map Tab · Mountain Pass</div>
+          <div class="cc-title">See what&rsquo;s ahead.</div>
+          <div class="cc-sub">Alerts and mile markers on the road you&rsquo;re actually driving.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-04-metro.png" alt="Map tab metro alerts"></div></div>
+          <div class="cc-eyebrow">Map Tab · Metro</div>
+          <div class="cc-title">Live DOT alerts on the map.</div>
+          <div class="cc-sub">Pulled straight from your state&rsquo;s official feed.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-05-alert.png" alt="Alert detail popup"></div></div>
+          <div class="cc-eyebrow">Map Tab · Alert Detail</div>
+          <div class="cc-title">Tap. See the full story.</div>
+          <div class="cc-sub">What&rsquo;s closed, when, why &mdash; straight from the DOT.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-06-bridge.png" alt="Seattle drawbridge status"></div></div>
+          <div class="cc-eyebrow">Map Tab · Seattle Bridges</div>
+          <div class="cc-title">Live drawbridge status.</div>
+          <div class="cc-sub">Know before you cross. Seattle-only for now.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-07-states.png" alt="Jump to any state"></div></div>
+          <div class="cc-eyebrow">Map Tab · State Jump</div>
+          <div class="cc-title">All 50 US states.</div>
+          <div class="cc-sub">Tap a state to jump there instantly.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-08-alerts.png" alt="Alerts tab"></div></div>
+          <div class="cc-eyebrow">Alerts Tab</div>
+          <div class="cc-title">Every alert in your state.</div>
+          <div class="cc-sub">Grouped by route. Filter by type. Follow what matters. Tap any alert to see it on the map.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-09-trips-off.png" alt="Trips tab off by default"></div></div>
+          <div class="cc-eyebrow">Trips Tab</div>
+          <div class="cc-title">Off by default.</div>
+          <div class="cc-sub">Trip logging is yours to turn on. Data stays on device.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-10-trips-log.jpeg" alt="Trips tab live multi-route log"></div></div>
+          <div class="cc-eyebrow">Trips Tab · Live Log</div>
+          <div class="cc-title">Multi-route drives.</div>
+          <div class="cc-sub">SR 99 &rarr; SR 509 &rarr; SR 518. Auto-tracked when you start.</div>
+        </div>
+        <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-11-settings.png" alt="Settings tab themes"></div></div>
+          <div class="cc-eyebrow">Settings Tab</div>
+          <div class="cc-title">Five themes. Light or dark.</div>
+          <div class="cc-sub">Built for daytime sun and 3 AM cabs.</div>
+        </div>
+      </div>
+      <div class="carousel-hint">&larr; swipe or scroll horizontally &rarr;</div>
+    </section>
+
+    <!-- ============== AUDIENCES (5 ROWS NOW) ============== -->
+    <section data-panel="home" class="audiences" id="audiences">
+      <div class="container">
+        <p class="section-label">Who it's for</p>
+        <h2 class="section-h2">Made for everyone who&rsquo;s ever needed to say &ldquo;I&rsquo;m at milepost 142.&rdquo;</h2>
+        <style>
+          .aud-track { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; padding:8px 4px 22px; scrollbar-width:thin; scrollbar-color:#00C880 #E5E5E5; -webkit-overflow-scrolling:touch; }
+          .aud-track::-webkit-scrollbar { height:8px; }
+          .aud-track::-webkit-scrollbar-track { background:#E5E5E5; border-radius:4px; }
+          .aud-track::-webkit-scrollbar-thumb { background:#00C880; border-radius:4px; }
+          .aud-card { flex-shrink:0; width:340px; scroll-snap-align:start; background:#fff; border:1px solid #E5E5E5; border-radius:14px; padding:24px; }
+          .aud-card .aud-num { font-family:ui-monospace,Menlo,monospace; font-size:13px; color:#9aa1ab; margin-bottom:10px; }
+          .aud-card h3 { font-size:19px; font-weight:800; color:#0F1419; margin:0 0 14px; letter-spacing:-0.01em; }
+          .aud-card .aud-problem { font-size:14px; line-height:1.55; color:#6b7280; margin:0 0 12px; }
+          .aud-card .aud-solution { font-size:14px; line-height:1.55; color:#0F1419; margin:0; }
+          .aud-hint { text-align:center; font-size:11px; color:#9aa1ab; letter-spacing:0.1em; text-transform:uppercase; margin-top:4px; }
+        </style>
+        <div class="aud-track">
+          <div class="aud-card"><div class="aud-num">01</div><h3>Truckers</h3><p class="aud-problem">Dispatch needs an exact location. The mile marker just blew past you at 65 mph.</p><p class="aud-solution">MileCheck reads your nearest mile marker in real time. One number to report.</p></div>
+          <div class="aud-card"><div class="aud-num">02</div><h3>DOT workers, EMTs &amp; first responders</h3><p class="aud-problem">You&rsquo;re responding to a crash and need to confirm the milepost fast &mdash; or you&rsquo;re laying salt, sand, or brine and logging every pass on paper, then burning another hour after a 12-hour shift typing it into the system.</p><p class="aud-solution">Live mile markers, a DOT incident overlay, and one-tap trip logging that exports at the end of your shift &mdash; no re-entering a paper log after 12 hours on the road.</p></div>
+          <div class="aud-card"><div class="aud-num">03</div><h3>Road trippers</h3><p class="aud-problem">You&rsquo;ve got a flat on a dark highway, service is spotty, and you&rsquo;re halfway between mile markers. &ldquo;I&rsquo;m somewhere on the highway&rdquo; won&rsquo;t help anyone find you.</p><p class="aud-solution">Pull up MileCheck: &ldquo;I-90 westbound, between mile 142 and 143.&rdquo; Read it to whoever&rsquo;s coming, or tap share to send it &mdash; a real location, not a vague pin in a green field.</p></div>
+          <div class="aud-card"><div class="aud-num">04</div><h3>Commuters</h3><p class="aud-problem">Closures, crashes, construction. You&rsquo;d rather hear about them before you hit them.</p><p class="aud-solution">Check your highway route in advance &mdash; delays, closures, crashes, construction, each showing when the DOT last updated it, urgent and long-term alike. Follow the ones you care about. In Seattle, see if a drawbridge is up before you head home or into the city.</p></div>
+          <div class="aud-card"><div class="aud-num">05</div><h3>Dispatchers and operations teams</h3><p class="aud-problem">Your driver is stuck at &ldquo;somewhere between Pendleton and Boise.&rdquo; You need to send help to a specific point on a specific highway.</p><p class="aud-solution">MileCheck gives every milepost a coordinate, a state, a route, and a navigate-to button. Dispatch reads one number. Field crew taps Maps and goes.</p></div>
+        </div>
+        <div class="aud-hint">&larr; swipe for more &rarr;</div>
+      </div>
+    </section>
+
+    <!-- ============== FEATURES (REORDERED) ============== -->
+    <section data-panel="features" class="features" id="features">
+      <div class="container">
+        <p class="section-label">What's in the box</p>
+        <h2 class="section-h2">Seven things, done well.</h2>
+        <div class="rows">
+          <article class="row">
+            <div class="row-num mono">01</div>
+            <div class="row-body">
+              <h3>Navigate to any mile marker with one tap <span class="row-tag">New</span></h3>
+              <p class="row-text">Hands off to Google Maps, Apple Maps, or Waze with the milepost as your destination. The first nav app where a mile marker is a destination, not just a sign.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">02</div>
+            <div class="row-body">
+              <h3>Mile markers, all 50 states</h3>
+              <p class="row-text">Every interstate, US highway, and most state routes. Bundled offline so you keep working in no-service areas.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">03</div>
+            <div class="row-body">
+              <h3>Live DOT alerts in 35 states</h3>
+              <p class="row-text">Closures, crashes, construction, weather, chains. Direct from 35 state DOTs &mdash; <a href="#" data-tab="coverage" style="color:#00A86B;text-decoration:underline;font-weight:600;">see the list &darr;</a>. New states added weekly toward all 50.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">04</div>
+            <div class="row-body">
+              <h3>Pre-trip route planning <span class="row-tag">Premium+</span></h3>
+              <p class="row-text">Plan a corridor, see only the alerts affecting your drive. Hand off to your nav app when you're ready.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">05</div>
+            <div class="row-body">
+              <h3>Trip logging</h3>
+              <p class="row-text">Opt in when you want it. Records your route with multi-segment tracking, stays on your device, never transmitted.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">06</div>
+            <div class="row-body">
+              <h3>Multi-state coverage that actually works</h3>
+              <p class="row-text">Cross from Idaho into Montana. The state, the route format, and the live data source all switch automatically.</p>
+            </div>
+          </article>
+          <article class="row">
+            <div class="row-num mono">07</div>
+            <div class="row-body">
+              <h3>Offline-ready by default</h3>
+              <p class="row-text">Mile marker data ships with the app. No download, no setup, no &ldquo;oops you&rsquo;re in a canyon&rdquo; moments.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ============== COVERAGE (UPDATED) ============== -->
-    <section data-panel="home" class="coverage" id="coverage">
+    <section data-panel="coverage" class="coverage" id="coverage">
       <div class="container">
         <p class="section-label">Coverage</p>
-        <h2 class="section-h2">Where MileCheck runs.</h2>
-        <p class="positioning-body" style="margin-bottom:40px;">Every state has mile markers. The deeper green shows where live DOT alerts are running today &mdash; 42 and counting, with new states added every week.</p>
+        <h2 class="section-h2">50 states of mile markers. Live DOT alerts in 35.</h2>
+        <p class="positioning-body" style="margin-bottom:40px;">Every state has mile markers. The deeper green shows where live DOT alerts are running today &mdash; 35 and counting, with new states added every week.</p>
         <style>
           .us-svg-wrap { max-width: 780px; margin: 0 auto; }
           .us-svg-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
           .us-svg-wrap svg path { fill:#C2EDD6; stroke:#FFFFFF; stroke-width:1.4; }
-          .us-svg-wrap svg path#wa, .us-svg-wrap svg path#or, .us-svg-wrap svg path#mt, .us-svg-wrap svg path#az, .us-svg-wrap svg path#ut, .us-svg-wrap svg path#id, .us-svg-wrap svg path#ak, .us-svg-wrap svg path#co, .us-svg-wrap svg path#de, .us-svg-wrap svg path#ar, .us-svg-wrap svg path#fl, .us-svg-wrap svg path#ma, .us-svg-wrap svg path#sc, .us-svg-wrap svg path#me, .us-svg-wrap svg path#nh, .us-svg-wrap svg path#vt, .us-svg-wrap svg path#oh, .us-svg-wrap svg path#nv, .us-svg-wrap svg path#wi, .us-svg-wrap svg path#ny, .us-svg-wrap svg path#la, .us-svg-wrap svg path#ga, .us-svg-wrap svg path#tx, .us-svg-wrap svg path#ks, .us-svg-wrap svg path#ne, .us-svg-wrap svg path#ia, .us-svg-wrap svg path#mn, .us-svg-wrap svg path#in, .us-svg-wrap svg path#nc, .us-svg-wrap svg path#ct, .us-svg-wrap svg path#il, .us-svg-wrap svg path#md, .us-svg-wrap svg path#ok, .us-svg-wrap svg path#ky, .us-svg-wrap svg path#ms, .us-svg-wrap svg path#mo, .us-svg-wrap svg path#tn, .us-svg-wrap svg path#nm, .us-svg-wrap svg path#ca, .us-svg-wrap svg path#nj, .us-svg-wrap svg path#hi, .us-svg-wrap svg path#nd { fill:#00C880; }
+          .us-svg-wrap svg path#wa, .us-svg-wrap svg path#or, .us-svg-wrap svg path#mt, .us-svg-wrap svg path#az, .us-svg-wrap svg path#ut, .us-svg-wrap svg path#id, .us-svg-wrap svg path#ak, .us-svg-wrap svg path#co, .us-svg-wrap svg path#de, .us-svg-wrap svg path#ar, .us-svg-wrap svg path#fl, .us-svg-wrap svg path#ma, .us-svg-wrap svg path#sc, .us-svg-wrap svg path#me, .us-svg-wrap svg path#nh, .us-svg-wrap svg path#vt, .us-svg-wrap svg path#oh, .us-svg-wrap svg path#nv, .us-svg-wrap svg path#wi, .us-svg-wrap svg path#ny, .us-svg-wrap svg path#la, .us-svg-wrap svg path#ga, .us-svg-wrap svg path#tx, .us-svg-wrap svg path#ks, .us-svg-wrap svg path#ne, .us-svg-wrap svg path#ia, .us-svg-wrap svg path#mn, .us-svg-wrap svg path#in, .us-svg-wrap svg path#nc, .us-svg-wrap svg path#ct, .us-svg-wrap svg path#il, .us-svg-wrap svg path#md, .us-svg-wrap svg path#ok, .us-svg-wrap svg path#ky, .us-svg-wrap svg path#ms { fill:#00C880; }
           .usmap-legend { display:flex; gap:28px; justify-content:center; margin-top:28px; font-size:13px; color:#6b7280; }
           .usmap-legend .key { display:inline-flex; align-items:center; gap:8px; }
           .usmap-legend .swatch { width:14px; height:14px; border-radius:4px; display:inline-block; }
@@ -1047,267 +1219,11 @@
 </svg>
           <div class="usmap-legend">
             <span class="key"><span class="swatch" style="background:#C2EDD6;"></span> Mile markers &mdash; all 50 states</span>
-            <span class="key"><span class="swatch" style="background:#00C880;"></span> Live DOT alerts &mdash; 42 states</span>
+            <span class="key"><span class="swatch" style="background:#00C880;"></span> Live DOT alerts &mdash; 35 states</span>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- ============== POSITIONING (TWO-COLUMN) ============== -->
-    <section data-panel="home" class="positioning">
-      <div class="container">
-        <p class="section-label">Why MileCheck</p>
-        <h2 class="section-h2">Three things no one else has.</h2>
-        <div class="positioning-grid">
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">01</div>
-            <h3>The only mile-marker app on Android.</h3>
-            <p>Truckers, road crews, and EMTs were left out of the iOS-only mile marker app ecosystem for years. We built MileCheck on both platforms from day one &mdash; the same code, the same offline data, the same mile markers in all 50 states.</p>
-          </div>
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">02</div>
-            <h3>The only app on either store with live, nationwide DOT API integrations.</h3>
-            <p>Closures, crashes, construction, weather warnings &mdash; pulled directly from 42 official state DOT feeds, not scraped from third-party sources. When your state DOT publishes an alert, MileCheck users see it. The integration corpus expands state by state, with new states added weekly toward all 50.</p>
-          </div>
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">03</div>
-            <h3>The only CarPlay app that shows your mile marker.</h3>
-            <p>Apple&rsquo;s Driving Task entitlement &mdash; the same approval required of dedicated navigation apps &mdash; was granted in June 2026. MileCheck is the only app in its category cleared for CarPlay. In-dash mile markers are in development now.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== STORY ============== -->
-    <style>
-      .story { padding: 72px 0; background: #FFFFFF; }
-      .story .container { max-width: 760px; }
-      .story-body p { font-size: 18px; line-height: 1.7; color: #374151; margin: 0 0 22px; }
-      .story-body p:last-child { color: #0F1419; }
-      .story-photo { margin: 40px 0 0; }
-      .story-photo-placeholder { aspect-ratio: 16 / 7; border: 1.5px dashed #CBD5E1; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #9aa1ab; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; background: #FAFAFA; }
-      .story-photo figcaption { margin-top: 12px; font-size: 13px; color: #6b7280; font-style: italic; text-align: center; }
-    </style>
-    <section data-panel="story" class="story" id="story">
-      <div class="container">
-        <p class="section-label">Our story</p>
-        <h2 class="section-h2">Why we built MileCheck.</h2>
-        <div class="story-body">
-          <p>My dad took a seasonal job driving snowplows for ODOT. Before long I realized how much of that job revolves around mile markers &mdash; every radio call, every crash report, every road closure. They&rsquo;re how crews track where sand, salt, and brine have been applied, and how dispatchers coordinate a response.</p>
-          <p>If you call for help on a mountain highway, how do you tell anyone exactly where you are? That&rsquo;s what mile markers are for. Most drivers pass hundreds of them without a second thought. But the people who keep roads open, respond to emergencies, and help stranded motorists rely on them every day.</p>
-          <p>There was one app for this, but it only worked on iPhone. My dad uses Android. So I built him a web app that showed his nearest Oregon mile marker from GPS. My mom, my sister, and I spent hours driving highways and back roads, checking numbers, making adjustments. I still remember the first time the number changed at exactly the right moment.</p>
-          <p>My dad showed it to coworkers. They showed it to others. Feedback came from truck drivers, road crews, first responders, and everyday drivers. Nearly every feature in MileCheck exists because someone on a real road asked for it.</p>
-          <p><strong>What started as a simple tool for my dad turned out to be useful for a lot of other people, too.</strong></p>
-        </div>
-        <div style="text-align:center;margin-top:44px;">
-          <p style="font-size:17px;color:#374151;margin:0 0 18px;">Find your milepost free &mdash; it&rsquo;s how help finds you.</p>
-          <a href="#" data-dl class="btn btn-primary" style="background:#00C880;border-color:#00C880;color:#fff;">Get the app &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== SCREENSHOTS (CAROUSEL — OPTION B) ============== -->
-    <style>
-      .screens { padding: 56px 0 24px; background: #FAFAFA; }
-      .screens .section-head { text-align: center; margin-bottom: 8px; }
-      .screens .carousel-track {
-        display: flex; gap: 24px; overflow-x: auto;
-        scroll-snap-type: x mandatory; padding: 24px 24px 28px;
-        scrollbar-width: thin; scrollbar-color: #00C880 #E5E5E5;
-        -webkit-overflow-scrolling: touch;
-      }
-      .screens .carousel-track::-webkit-scrollbar { height: 8px; }
-      .screens .carousel-track::-webkit-scrollbar-track { background: #E5E5E5; border-radius: 4px; }
-      .screens .carousel-track::-webkit-scrollbar-thumb { background: #00C880; border-radius: 4px; }
-      .screens .carousel-card { flex-shrink: 0; width: 250px; scroll-snap-align: center; }
-      .screens .cc-phone { border-radius: 30px; background: #1a1f26; padding: 7px; box-shadow: 0 16px 44px rgba(0,0,0,0.22); margin-bottom: 14px; }
-      .screens .cc-phone-inner { border-radius: 24px; overflow: hidden; background: #fff; aspect-ratio: 1284 / 2778; }
-      .screens .cc-phone-inner img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-      .screens .cc-eyebrow { font-size: 10px; font-weight: 800; color: #00C880; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 6px; }
-      .screens .cc-title { font-size: 16px; font-weight: 900; letter-spacing: -0.02em; color: #0F1419; margin-bottom: 5px; }
-      .screens .cc-sub { font-size: 12px; color: #6b7280; line-height: 1.5; }
-      .screens .carousel-hint { text-align: center; font-size: 11px; color: #9aa1ab; margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
-    </style>
-    <section data-panel="home" class="screens">
-      <div class="container">
-        <div class="section-head">
-          <p class="section-label">See it</p>
-          <h2 class="section-h2">The whole app, end to end.</h2>
-        </div>
-      </div>
-      <div class="carousel-track">
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-01-mile.png" alt="Mile tab showing nearest mile marker"></div></div>
-          <div class="cc-eyebrow">Mile Tab</div>
-          <div class="cc-title">Your nearest mile marker.</div>
-          <div class="cc-sub">Accurate to one-tenth of a mile. Updates as you drive.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-02-navmp.png" alt="Map tab navigate to milepost"></div></div>
-          <div class="cc-eyebrow">Map Tab · Navigate to MP</div>
-          <div class="cc-title">Navigate to any mile marker.</div>
-          <div class="cc-sub">Tap a marker &rarr; tap Maps &rarr; hands off to your nav app.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-03-pass.png" alt="Map tab mountain pass"></div></div>
-          <div class="cc-eyebrow">Map Tab · Mountain Pass</div>
-          <div class="cc-title">See what&rsquo;s ahead.</div>
-          <div class="cc-sub">Alerts and mile markers on the road you&rsquo;re actually driving.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-04-metro.png" alt="Map tab metro alerts"></div></div>
-          <div class="cc-eyebrow">Map Tab · Metro</div>
-          <div class="cc-title">Live DOT alerts on the map.</div>
-          <div class="cc-sub">Pulled straight from your state&rsquo;s official feed.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-05-alert.png" alt="Alert detail popup"></div></div>
-          <div class="cc-eyebrow">Map Tab · Alert Detail</div>
-          <div class="cc-title">Tap. See the full story.</div>
-          <div class="cc-sub">What&rsquo;s closed, when, why &mdash; straight from the DOT.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-06-bridge.png" alt="Seattle drawbridge status"></div></div>
-          <div class="cc-eyebrow">Map Tab · Seattle Bridges</div>
-          <div class="cc-title">Live drawbridge status.</div>
-          <div class="cc-sub">Know before you cross. Seattle-only for now.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-07-states.png" alt="Jump to any state"></div></div>
-          <div class="cc-eyebrow">Map Tab · State Jump</div>
-          <div class="cc-title">All 50 US states.</div>
-          <div class="cc-sub">Tap a state to jump there instantly.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-08-alerts.png" alt="Alerts tab"></div></div>
-          <div class="cc-eyebrow">Alerts Tab</div>
-          <div class="cc-title">Every alert in your state.</div>
-          <div class="cc-sub">Grouped by route. Filter by type. Follow what matters. Tap any alert to see it on the map.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-09-trips-off.png" alt="Trips tab off by default"></div></div>
-          <div class="cc-eyebrow">Trips Tab</div>
-          <div class="cc-title">Off by default.</div>
-          <div class="cc-sub">Trip logging is yours to turn on. Data stays on device.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-10-trips-log.jpeg" alt="Trips tab live multi-route log"></div></div>
-          <div class="cc-eyebrow">Trips Tab · Live Log</div>
-          <div class="cc-title">Multi-route drives.</div>
-          <div class="cc-sub">SR 99 &rarr; SR 509 &rarr; SR 518. Auto-tracked when you start.</div>
-        </div>
-        <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-11-settings.png" alt="Settings tab themes"></div></div>
-          <div class="cc-eyebrow">Settings Tab</div>
-          <div class="cc-title">Five themes. Light or dark.</div>
-          <div class="cc-sub">Built for daytime sun and 3 AM cabs.</div>
-        </div>
-      </div>
-      <div class="carousel-hint">&larr; swipe or scroll horizontally &rarr;</div>
-    </section>
-
-    <!-- ============== AUDIENCES (5 ROWS NOW) ============== -->
-    <section data-panel="home" class="audiences" id="audiences">
-      <div class="container">
-        <p class="section-label">Who it's for</p>
-        <h2 class="section-h2">Made for everyone who&rsquo;s ever needed to say &ldquo;I&rsquo;m at milepost 142.&rdquo;</h2>
-        <style>
-          .aud-track { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; padding:8px 4px 22px; scrollbar-width:thin; scrollbar-color:#00C880 #E5E5E5; -webkit-overflow-scrolling:touch; }
-          .aud-track::-webkit-scrollbar { height:8px; }
-          .aud-track::-webkit-scrollbar-track { background:#E5E5E5; border-radius:4px; }
-          .aud-track::-webkit-scrollbar-thumb { background:#00C880; border-radius:4px; }
-          .aud-card { flex-shrink:0; width:340px; scroll-snap-align:start; background:#fff; border:1px solid #E5E5E5; border-radius:14px; padding:24px; }
-          .aud-card .aud-num { font-family:ui-monospace,Menlo,monospace; font-size:13px; color:#9aa1ab; margin-bottom:10px; }
-          .aud-card h3 { font-size:19px; font-weight:800; color:#0F1419; margin:0 0 14px; letter-spacing:-0.01em; }
-          .aud-card .aud-problem { font-size:14px; line-height:1.55; color:#6b7280; margin:0 0 12px; }
-          .aud-card .aud-solution { font-size:14px; line-height:1.55; color:#0F1419; margin:0; }
-          .aud-hint { text-align:center; font-size:11px; color:#9aa1ab; letter-spacing:0.1em; text-transform:uppercase; margin-top:4px; }
-        </style>
-        <div class="aud-track">
-          <div class="aud-card"><div class="aud-num">01</div><h3>Truckers</h3><p class="aud-problem">Dispatch needs an exact location. The mile marker just blew past you at 65 mph.</p><p class="aud-solution">MileCheck reads your nearest mile marker in real time. One number to report.</p></div>
-          <div class="aud-card"><div class="aud-num">02</div><h3>DOT workers, EMTs &amp; first responders</h3><p class="aud-problem">You&rsquo;re responding to a crash and need to confirm the milepost fast &mdash; or you&rsquo;re laying salt, sand, or brine and logging every pass on paper, then burning another hour after a 12-hour shift typing it into the system.</p><p class="aud-solution">Live mile markers, a DOT incident overlay, and one-tap trip logging that exports at the end of your shift &mdash; no re-entering a paper log after 12 hours on the road.</p></div>
-          <div class="aud-card"><div class="aud-num">03</div><h3>Road trippers</h3><p class="aud-problem">You&rsquo;ve got a flat on a dark highway, service is spotty, and you&rsquo;re halfway between mile markers. &ldquo;I&rsquo;m somewhere on the highway&rdquo; won&rsquo;t help anyone find you.</p><p class="aud-solution">Pull up MileCheck: &ldquo;I-90 westbound, between mile 142 and 143.&rdquo; Read it to whoever&rsquo;s coming, or tap share to send it &mdash; a real location, not a vague pin in a green field.</p></div>
-          <div class="aud-card"><div class="aud-num">04</div><h3>Commuters</h3><p class="aud-problem">Closures, crashes, construction. You&rsquo;d rather hear about them before you hit them.</p><p class="aud-solution">Check your highway route in advance &mdash; delays, closures, crashes, construction, each showing when the DOT last updated it, urgent and long-term alike. Follow the ones you care about. In Seattle, see if a drawbridge is up before you head home or into the city.</p></div>
-          <div class="aud-card"><div class="aud-num">05</div><h3>Dispatchers and operations teams</h3><p class="aud-problem">Your driver is stuck at &ldquo;somewhere between Pendleton and Boise.&rdquo; You need to send help to a specific point on a specific highway.</p><p class="aud-solution">MileCheck gives every milepost a coordinate, a state, a route, and a navigate-to button. Dispatch reads one number. Field crew taps Maps and goes.</p></div>
-        </div>
-        <div class="aud-hint">&larr; swipe for more &rarr;</div>
-      </div>
-    </section>
-
-    <!-- ============== FEATURES (REORDERED) ============== -->
-    <section data-panel="features" class="features" id="features">
-      <div class="container">
-        <p class="section-label">What's in the box</p>
-        <h2 class="section-h2">Nine things, done well.</h2>
-        <div class="rows">
-          <article class="row">
-            <div class="row-num mono">01</div>
-            <div class="row-body">
-              <h3>Navigate to any mile marker with one tap <span class="row-tag">New</span></h3>
-              <p class="row-text">Hands off to Google Maps, Apple Maps, or Waze with the milepost as your destination. The first nav app where a mile marker is a destination, not just a sign.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">02</div>
-            <div class="row-body">
-              <h3>Mile markers, all 50 states</h3>
-              <p class="row-text">Every interstate, US highway, and most state routes. Bundled offline so you keep working in no-service areas.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">03</div>
-            <div class="row-body">
-              <h3>Live DOT alerts in 42 states</h3>
-              <p class="row-text">Closures, crashes, construction, weather, chains. Direct from 42 state DOTs &mdash; <a href="#coverage" style="color:#00A86B;text-decoration:underline;font-weight:600;">see the map &darr;</a>. New states added weekly toward all 50.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">04</div>
-            <div class="row-body">
-              <h3>Pre-trip route planning <span class="row-tag">Premium+</span></h3>
-              <p class="row-text">Plan a corridor, see only the alerts affecting your drive. Hand off to your nav app when you're ready.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">05</div>
-            <div class="row-body">
-              <h3>Trip logging</h3>
-              <p class="row-text">Opt in when you want it. Records your route with multi-segment tracking, stays on your device, never transmitted.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">06</div>
-            <div class="row-body">
-              <h3>Multi-state coverage that actually works</h3>
-              <p class="row-text">Cross from Idaho into Montana. The state, the route format, and the live data source all switch automatically.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">07</div>
-            <div class="row-body">
-              <h3>Offline-ready by default</h3>
-              <p class="row-text">Mile marker data ships with the app. No download, no setup, no &ldquo;oops you&rsquo;re in a canyon&rdquo; moments.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">08</div>
-            <div class="row-body">
-              <h3>Seattle drawbridge alerts &amp; push notifications</h3>
-              <p class="row-text">Follow any of Seattle&rsquo;s six drawbridges &mdash; Fremont, Ballard, University, Montlake, South Park, and 1st Ave S &mdash; and get a push notification the moment one goes up. Useful if you commute over the ship canal or into SoDo and want a heads-up before you hit the queue.</p>
-            </div>
-          </article>
-          <article class="row">
-            <div class="row-num mono">09</div>
-            <div class="row-body">
-              <h3>Apple CarPlay <span class="row-tag">In Progress</span></h3>
-              <p class="row-text">Apple&rsquo;s Driving Task entitlement was granted in June 2026 &mdash; the same approval level as dedicated navigation apps. The in-dash MileCheck experience is in development now.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-
 
     <!-- ============== PRICING (PREMIUM+ UPDATED) ============== -->
     <section data-panel="pricing" class="pricing" id="pricing">
@@ -1338,7 +1254,7 @@
             <ul class="tier-features">
               <li>Everything in Free</li>
               <li>Interactive map across all 50 states</li>
-              <li>Live DOT alerts in 42 states</li>
+              <li>Live DOT alerts in 35 states</li>
               <li>Trip logging</li>
               <li>Filter alerts by route, type, severity</li>
             </ul>
@@ -1370,7 +1286,7 @@
         <p class="section-label">For partners and platform builders</p>
         <h2>Building something on top of mile marker data?</h2>
         <p class="partners-body">
-          MileCheck operates a multi-state mile marker + DOT alert ingestion platform that today serves consumer drivers on iOS and Android. The same data layer &mdash; <strong>50 states of bundled mileposts</strong>, <strong>42 state DOT integrations and growing</strong>, normalized route mappings, navigate-to-milepost handoff &mdash; has direct relevance to fleet management platforms, mapping and navigation tools, 511 traveler-information operators, digital freight brokerages, and roadside assistance providers.
+          MileCheck operates a multi-state mile marker + DOT alert ingestion platform that today serves consumer drivers on iOS and Android. The same data layer &mdash; <strong>50 states of bundled mileposts</strong>, <strong>35 state DOT integrations and growing</strong>, normalized route mappings, navigate-to-milepost handoff &mdash; has direct relevance to fleet management platforms, mapping and navigation tools, 511 traveler-information operators, digital freight brokerages, and roadside assistance providers.
         </p>
         <p class="partners-body">
           If you're working on something where precise highway location matters &mdash; whether that's API access, data licensing, integration partnerships, or something we haven't thought of &mdash; we'd like to hear from you.
@@ -1391,12 +1307,9 @@
     <section class="ent-hero">
       <div class="container">
         <p class="eyebrow">For platforms and partners</p>
-        <h1>Normalized multi-state road intelligence &mdash; one API, 42 states, live.</h1>
+        <h1>The highway data layer your platform doesn't have to build.</h1>
         <p class="ent-hero-sub">
-          <strong>50 US states of bundled mile markers.</strong> 42 state DOT integrations, expanding weekly toward all 50. Normalized route mappings across 19 distinct DOT platform formats. A consumer-grade mobile interface already shipped to iOS and Android.
-        </p>
-        <p class="ent-hero-sub" style="margin-top:16px;">
-          Most milepost data products stop at the static layer: &ldquo;where is MP 142?&rdquo; MileCheck delivers both layers &mdash; that milepost lookup <em>plus</em> what&rsquo;s happening at MP 142 right now, live from 42 state DOT feeds. One integration, one schema, one normalized API response.
+          <strong>50 US states of bundled mile markers.</strong> 35 state DOT integrations, expanding weekly toward all 50. Normalized route mappings across 19 distinct DOT platform formats. A consumer-grade mobile interface already shipped to iOS and Android.
         </p>
         <a href="mailto:info@milecheckapp.com" class="ent-hero-cta">Open a conversation &rarr;</a>
       </div>
@@ -1406,7 +1319,7 @@
     <section class="ent-section">
       <div class="container">
         <p class="ent-section-label">The infrastructure</p>
-        <h2>Four layers, one stack.</h2>
+        <h2>Three layers, one stack.</h2>
         <div class="infra-grid">
           <div class="infra-cell">
             <div class="infra-cell-num mono">01</div>
@@ -1416,17 +1329,12 @@
           <div class="infra-cell">
             <div class="infra-cell-num mono">02</div>
             <h3>DOT integration corpus</h3>
-            <p>42 state DOTs integrated and growing. Each integration handles a different upstream platform format — 19 distinct platform shapes in all. A serverless dispatcher normalizes every source into a single consistent road-conditions and incident schema, with caching tuned per source and resilient fallbacks for agencies with restrictive access.</p>
+            <p>35 state DOTs integrated and growing. Each integration handles a different upstream platform format (<code>ibi511</code>, <code>MassDOT EVBG</code>, <code>FL511 ArcGIS</code>, <code>DriveTexas</code>, <code>NEC New England Compass</code>, <code>OHGO</code>, <code>CARS FEU-g</code>, <code>DelDOT TMC</code>, plus 11 others). Cloudflare Worker dispatcher normalizes outputs to a consistent <code>road-weather-reports</code> and <code>incident-reports</code> schema. Cache TTLs tuned per source. R2 mirror pattern available for DOTs that block Cloudflare egress.</p>
           </div>
           <div class="infra-cell">
             <div class="infra-cell-num mono">03</div>
             <h3>Navigate-to-milepost primitive</h3>
             <p>The first consumer nav stack where a mile marker is a destination, not a display element. Tapping a milepost in the map hands off to Google Maps, Apple Maps, or Waze with the milepost coordinate as the routing target. Direct workflow value for dispatch-to-driver handoffs in fleet, roadside, and emergency-response use cases.</p>
-          </div>
-          <div class="infra-cell">
-            <div class="infra-cell-num mono">04</div>
-            <h3>CarPlay &mdash; in development</h3>
-            <p>Apple&rsquo;s Driving Task entitlement was granted June 2026. This entitlement requires a separate Apple review of an app&rsquo;s navigational utility &mdash; it&rsquo;s not a standard developer-portal option, and most apps in the transportation space don&rsquo;t qualify. MileCheck passed that review. The in-dash experience is in development now; the same data layer ships to the vehicle screen.</p>
           </div>
         </div>
       </div>
@@ -1448,9 +1356,6 @@
             <li>Roadside assistance dispatchers that need exact field-crew routing to a driver-reported milepost</li>
           </ul>
           <p style="margin-top:28px;">And it&rsquo;s been field-tested by the people it&rsquo;s built for. Real DOT workers ran MileCheck in their daily work and sent feedback every day through development &mdash; domain validation from actual end users that an internal team can&rsquo;t easily reproduce. The product is already shaped by the operators who live on the road.</p>
-          <p class="why-roi" style="margin-top:28px;padding:20px 24px;background:#f9fafb;border-left:3px solid #00C880;border-radius:0 8px 8px 0;font-size:15px;line-height:1.6;">
-            <strong>Build vs. license:</strong> Replicating this infrastructure means 42 state API negotiations, 19 distinct integration patterns, and 18+ months of DOT access work &mdash; before a line of normalization code is written. Licensing starts at <a href="mailto:info@milecheckapp.com" style="color:#00A86B;text-decoration:underline;">a conversation</a>.
-          </p>
         </div>
       </div>
     </section>
@@ -1464,12 +1369,12 @@
           <div class="audience-cell">
             <div class="audience-cell-label">Segment 01</div>
             <h4>Fleet management</h4>
-            <p>Telematics platforms and driver apps where mile-marker reporting closes the dispatch-handoff gap. MileCheck integrates as an SDK, an API, or a parallel app surface &mdash; whatever fits your driver-UX architecture.</p>
+            <p>Telematics platforms and driver apps where mile-marker reporting closes the dispatch-handoff gap. MileCheck data layer integrates as an SDK, an API, or a parallel app surface &mdash; whatever fits your driver-UX architecture.</p>
           </div>
           <div class="audience-cell">
             <div class="audience-cell-label">Segment 02</div>
             <h4>Mapping and navigation</h4>
-            <p>Mapping and navigation platforms can add a milepost layer to their tile data without negotiating 50 state DOT contracts. We&rsquo;ve done the normalization work and can deliver as a continuous data feed or a per-state corpus.</p>
+            <p>Add a milepost layer to your tile data without negotiating 50 state DOT contracts. We've done the normalization work and can deliver as a continuous data feed or a per-state corpus.</p>
           </div>
           <div class="audience-cell">
             <div class="audience-cell-label">Segment 03</div>
@@ -1484,12 +1389,12 @@
           <div class="audience-cell">
             <div class="audience-cell-label">Segment 05</div>
             <h4>Roadside assistance and incident response</h4>
-            <p>Service vehicle ETA, 911 dispatch routing, and field-crew navigation all depend on dispatch precision. MileCheck&rsquo;s navigate-to-milepost capability eliminates the &ldquo;find a closest address&rdquo; workaround that today bottlenecks roadside and emergency response.</p>
+            <p>Service vehicle ETA depends on dispatch precision. MileCheck's navigate-to-milepost capability eliminates the "find a closest address" workaround that today bottlenecks roadside fulfillment.</p>
           </div>
           <div class="audience-cell">
             <div class="audience-cell-label">Segment 06</div>
-            <h4>State DOT and transportation agencies</h4>
-            <p>State DOTs, regional 511 operators, and multi-state transportation consortia seeking to consolidate cross-state data access or add a normalized condition layer to existing public-facing traveler information products.</p>
+            <h4>Direct-to-consumer growth</h4>
+            <p>The consumer app is its own revenue stream, independent of any integration. The market reaches well beyond professional drivers &mdash; anyone who lives near a drawbridge, skis a mountain pass, or road-trips an unfamiliar highway. User base and price both scale with marketing investment that hasn&rsquo;t been spent yet.</p>
           </div>
         </div>
       </div>
@@ -1522,19 +1427,14 @@
             <div class="proof-cell-label"><strong>states</strong> &mdash; bundled mile markers, every interstate and US highway, most state routes</div>
           </div>
           <div class="proof-cell">
-            <div class="proof-cell-num">42</div>
+            <div class="proof-cell-num">35</div>
             <div class="proof-cell-label"><strong>states</strong> &mdash; live DOT alerts in production today, expanding weekly toward all 50</div>
           </div>
           <div class="proof-cell">
             <div class="proof-cell-num">2</div>
             <div class="proof-cell-label"><strong>platforms</strong> &mdash; iOS App Store and Google Play, identical feature sets, identical underlying data layer</div>
           </div>
-          <div class="proof-cell">
-            <div class="proof-cell-num">&#10003;</div>
-            <div class="proof-cell-label"><strong>Apple Driving Task entitlement</strong> &mdash; granted June 2026. The automotive-grade nav approval most transportation apps don&rsquo;t qualify for.</div>
-          </div>
         </div>
-        <p style="text-align:center;font-size:13px;margin-top:12px;opacity:0.8;"><a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="color:#00A86B;font-weight:600;">&#8599; Live API status</a> &nbsp;&middot;&nbsp; DOT feed uptime monitored 24/7</p>
         <p style="margin:36px auto 0;max-width:700px;text-align:center;font-size:16px;line-height:1.6;color:#374151;"><strong style="color:#0F1419;">And it runs lean.</strong> The whole platform &mdash; a Cloudflare Worker, R2 storage, Expo, and a lightweight routing API &mdash; runs on a small fixed monthly cost, with no metered dependency on expensive turn-by-turn nav-API pings. Margins scale with users, not with infrastructure spend.</p>
       </div>
     </section>
@@ -1545,7 +1445,7 @@
         <p class="ent-section-label">Where it goes next</p>
         <h2>The integration engine isn't capped at state DOTs.</h2>
         <div class="why-content" style="margin-bottom:40px;">
-          <p>Alert classification and filtering already improve continuously &mdash; sorting closures, crashes, construction, and weather by severity, route, and direction, and getting sharper with every state added. The same engine that normalized 42 state DOTs extends to entirely new authorities and transportation modes. We've already proven it once at the city level.</p>
+          <p>Alert classification and filtering already improve continuously &mdash; sorting closures, crashes, construction, and weather by severity, route, and direction, and getting sharper with every state added. The same engine that normalized 35 state DOTs extends to entirely new authorities and transportation modes. We've already proven it once at the city level.</p>
         </div>
         <div class="audience-grid">
           <div class="audience-cell">
@@ -1606,7 +1506,6 @@
           <ul class="footer-list">
             <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
             <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
-            <li><a href="https://status.milecheckapp.com" target="_blank" rel="noopener">Status</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -1649,7 +1548,7 @@
       var t = e.target.closest ? e.target.closest('[data-tab]') : null;
       if(t){ e.preventDefault(); show(t.getAttribute('data-tab')); }
     });
-    var valid=['home','features','pricing','story','b2b'];
+    var valid=['home','features','coverage','pricing','story','b2b'];
     var hsh=(location.hash||'').replace('#','');
     show(valid.indexOf(hsh)>=0?hsh:'home');
     window.addEventListener('hashchange',function(){
