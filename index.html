@@ -536,7 +536,7 @@
 
     /* CTA section */
     .cta-section {
-      padding: 96px 0 88px;
+      padding: 58px 0 52px;
       background: #0F1419;
       color: #fff;
     }
@@ -547,7 +547,7 @@
       letter-spacing: -1.2px;
       line-height: 1.1;
       color: #fff;
-      margin-bottom: 32px;
+      margin-bottom: 20px;
       max-width: 720px;
     }
     .cta-body {
@@ -1067,18 +1067,13 @@
         <p class="ent-section-label">Why it matters</p>
         <h2>Highway location precision is the data layer your driver-facing apps need.</h2>
         <div class="why-content">
-          <p>Most consumer navigation apps (Google Maps, Apple Maps, Waze) don't include mile markers as a routing primitive. The data exists at the state DOT level, but it's locked behind 50 different platforms, 19 distinct API formats, and a long tail of state-by-state inconsistencies in route naming, milepost intervals, and direction encoding. <strong>Building it in-house means starting from scratch on all 50 &mdash; discovering each platform, working through access one agency at a time (many DOT feeds aren&rsquo;t public; each has its own registration, and some require emailing or calling the agency directly for credentials), and re-solving every route-normalization edge case along the way.</strong></p>
-          <p>MileCheck has done the integration work. The result is a unified, normalized, real-time highway location layer with a consumer-grade mobile interface as proof of operation. The same layer can power:</p>
           <ul>
-            <li>Fleet management driver apps that need mile-marker reporting and DOT alert overlays on the driver's primary screen</li>
-            <li>Mapping platforms that want to add milepost-aware POIs and routing primitives to their existing tile data</li>
-            <li>511 traveler-information operators that want to consolidate cross-state DOT data without negotiating 50 individual feeds</li>
-            <li>Digital freight brokerages that need precise origin, destination, and waypoint targeting at the milepost level</li>
-            <li>Roadside assistance dispatchers that need exact field-crew routing to a driver-reported milepost</li>
+            <li>Consumer nav apps don&rsquo;t include mile markers &mdash; Google Maps, Apple Maps, and Waze treat the milepost system as invisible.</li>
+            <li>State DOT data is fragmented across 50 platforms, 19 distinct API formats, and years of per-agency access negotiation.</li>
+            <li>MileCheck solved both layers: a normalized milepost corpus plus live DOT conditions, unified in one schema and proven in production.</li>
           </ul>
-          <p style="margin-top:28px;">And it&rsquo;s been field-tested by the people it&rsquo;s built for. Real DOT workers ran MileCheck in their daily work and sent feedback every day through development &mdash; domain validation from actual end users that an internal team can&rsquo;t easily reproduce. The product is already shaped by the operators who live on the road.</p>
-          <p class="why-roi" style="margin-top:28px;padding:20px 24px;background:#f9fafb;border-left:3px solid #00C880;border-radius:0 8px 8px 0;font-size:15px;line-height:1.6;">
-            <strong>Build vs. license:</strong> Replicating this infrastructure means 42 state API negotiations, 19 distinct integration patterns, and 18+ months of DOT access work &mdash; before a line of normalization code is written. Licensing starts at <a href="mailto:info@milecheckapp.com" style="color:#00A86B;text-decoration:underline;">a conversation</a>.
+          <p class="why-roi" style="margin-top:24px;padding:20px 24px;background:#f9fafb;border-left:3px solid #00C880;border-radius:0 8px 8px 0;font-size:15px;line-height:1.6;">
+            <strong>Build vs. license:</strong> Replicating this means 42 state API negotiations, 19 distinct integration patterns, and 18+ months of DOT access work &mdash; before normalization begins. Licensing starts at <a href="mailto:info@milecheckapp.com" style="color:#00A86B;text-decoration:underline;">a conversation</a>.
           </p>
         </div>
       </div>
@@ -1091,34 +1086,28 @@
         <h2>Conversations open across six segments.</h2>
         <div class="audience-grid">
           <div class="audience-cell">
-            <div class="audience-cell-label">Segment 01</div>
             <h4>Fleet management</h4>
-            <p>Telematics platforms and driver apps where mile-marker reporting closes the dispatch-handoff gap. MileCheck integrates as an SDK, an API, or a parallel app surface &mdash; whatever fits your driver-UX architecture.</p>
+            <p>Telematics platforms and driver apps where mile-marker reporting closes the dispatch-handoff gap.</p>
           </div>
           <div class="audience-cell">
-            <div class="audience-cell-label">Segment 02</div>
             <h4>Mapping and navigation</h4>
-            <p>Mapping and navigation platforms can add a milepost layer to their tile data without negotiating 50 state DOT contracts. We&rsquo;ve done the normalization work and can deliver as a continuous data feed or a per-state corpus.</p>
+            <p>Add a milepost layer and live DOT conditions to existing tile data without negotiating 50 state contracts.</p>
           </div>
           <div class="audience-cell">
-            <div class="audience-cell-label">Segment 03</div>
             <h4>511 / traveler information</h4>
-            <p>Cross-state aggregation of DOT alerts under one normalized schema. Useful for interstate corridor consortia, regional 511 operators, and state agencies seeking neighbor-state integration without bilateral negotiations.</p>
+            <p>Consolidate cross-state DOT alerts under one normalized schema without bilateral state negotiations.</p>
           </div>
           <div class="audience-cell">
-            <div class="audience-cell-label">Segment 04</div>
             <h4>Digital freight and logistics</h4>
-            <p>Load matching, track-and-trace, predictive ETA &mdash; all benefit from milepost-precision origin and destination targeting. The "drop trailer at MP 87 of I-80" workflow is currently impossible in consumer nav. MileCheck makes it routable.</p>
+            <p>Milepost-precision for load matching, track-and-trace, and trailer-drop workflows consumer nav can&rsquo;t route today.</p>
           </div>
           <div class="audience-cell">
-            <div class="audience-cell-label">Segment 05</div>
             <h4>Roadside assistance and incident response</h4>
-            <p>Service vehicle ETA, 911 dispatch routing, and field-crew navigation all depend on dispatch precision. MileCheck&rsquo;s navigate-to-milepost capability eliminates the &ldquo;find a closest address&rdquo; workaround that today bottlenecks roadside and emergency response.</p>
+            <p>Navigate service vehicles to a driver-reported milepost, eliminating the closest-address dispatch workaround.</p>
           </div>
           <div class="audience-cell">
-            <div class="audience-cell-label">Segment 06</div>
             <h4>State DOT and transportation agencies</h4>
-            <p>State DOTs, regional 511 operators, and multi-state transportation consortia seeking to consolidate cross-state data access or add a normalized condition layer to existing public-facing traveler information products.</p>
+            <p>Cross-state data access and normalized condition layers for corridor consortia and interstate 511 operators.</p>
           </div>
         </div>
       </div>
@@ -1129,13 +1118,24 @@
       <div class="container">
         <p class="ent-section-label">Ways to work together</p>
         <h2>Pick the model that fits &mdash; we're flexible.</h2>
-        <ul class="shapes-list">
-          <li><strong>API access</strong> to the unified DOT alerts feed (today's Worker is one endpoint away from public deployment)</li>
-          <li><strong>Data licensing</strong> for the 50-state milepost corpus</li>
-          <li><strong>White-label SDK integration</strong> into your existing driver app</li>
-          <li><strong>Joint product development</strong> &mdash; co-engineering a vertical use case on top of the layer</li>
-          <li><strong>Something else</strong> &mdash; we're open to ideas that don't fit the above</li>
-        </ul>
+        <div class="infra-grid" style="margin-top:36px;">
+          <div class="infra-cell">
+            <h3>API access</h3>
+            <p>The unified DOT alerts feed &mdash; live conditions, closures, crashes &mdash; served through one normalized endpoint.</p>
+          </div>
+          <div class="infra-cell">
+            <h3>Data licensing</h3>
+            <p>The 50-state milepost corpus as a static dataset or continuous sync, shaped to your schema.</p>
+          </div>
+          <div class="infra-cell">
+            <h3>White-label SDK</h3>
+            <p>Mile-marker display and DOT alert integration embedded directly into your existing driver app.</p>
+          </div>
+          <div class="infra-cell">
+            <h3>Joint development</h3>
+            <p>Co-engineering a vertical use case on top of the highway intelligence layer.</p>
+          </div>
+        </div>
         <p class="shapes-footnote">Each conversation starts at info gathering. We don't have a salesperson. You'll be talking to the founder.</p>
       </div>
     </section>
@@ -1168,39 +1168,6 @@
       </div>
     </section>
 
-    <!-- ============== WHERE IT GOES NEXT ============== -->
-    <section class="ent-section ent-section-alt">
-      <div class="container">
-        <p class="ent-section-label">Where it goes next</p>
-        <h2>The integration engine isn't capped at state DOTs.</h2>
-        <div class="why-content" style="margin-bottom:40px;">
-          <p>Alert classification and filtering already improve continuously &mdash; sorting closures, crashes, construction, and weather by severity, route, and direction, and getting sharper with every state added. The same engine that normalized 42 state DOTs extends to entirely new authorities and transportation modes. We've already proven it once at the city level.</p>
-        </div>
-        <div class="audience-grid">
-          <div class="audience-cell">
-            <div class="audience-cell-label">Already proven</div>
-            <h4>City DOT</h4>
-            <p>Real-time Seattle drawbridge status &mdash; Ballard, Fremont, University, Montlake and more &mdash; is already live via SDOT. The same pattern extends to any city's bridges, signals, and closures.</p>
-          </div>
-          <div class="audience-cell">
-            <div class="audience-cell-label">Opportunity</div>
-            <h4>County DOT</h4>
-            <p>County road authorities publish closures and conditions no consumer app surfaces today. Same integration model, an untapped layer of coverage.</p>
-          </div>
-          <div class="audience-cell">
-            <div class="audience-cell-label">Opportunity</div>
-            <h4>Rail</h4>
-            <p>Highway-rail grade crossings, crossing delays, and freight-rail conflicts &mdash; safety-critical data absent from every consumer navigation app.</p>
-          </div>
-          <div class="audience-cell">
-            <div class="audience-cell-label">Opportunity</div>
-            <h4>Marine &amp; water</h4>
-            <p>Ferry schedules and status, drawbridge openings, and waterway crossings &mdash; the first- and last-mile gaps for coastal and island corridors.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ============== CTA ============== -->
     <section class="cta-section">
       <div class="container">
@@ -1209,6 +1176,32 @@
         <p class="cta-body">
           For partnership and platform inquiries, contact <a href="mailto:info@milecheckapp.com" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">info@milecheckapp.com</a>.
         </p>
+      </div>
+    </section>
+
+    <!-- ============== WHERE IT GOES NEXT ============== -->
+    <section class="ent-section ent-section-alt">
+      <div class="container">
+        <p class="ent-section-label">Where it goes next</p>
+        <h2>The integration engine isn't capped at state DOTs.</h2>
+        <div class="audience-grid" style="margin-top:36px;">
+          <div class="audience-cell">
+            <h4>City DOT</h4>
+            <p>Seattle drawbridge status is already live &mdash; the same pattern extends to any city&rsquo;s bridges, signals, and closures.</p>
+          </div>
+          <div class="audience-cell">
+            <h4>County DOT</h4>
+            <p>County road authorities publish closures and conditions no consumer app surfaces today.</p>
+          </div>
+          <div class="audience-cell">
+            <h4>Rail</h4>
+            <p>Highway-rail grade crossings and freight-rail conflicts &mdash; safety-critical data absent from every consumer navigation app.</p>
+          </div>
+          <div class="audience-cell">
+            <h4>Marine &amp; water</h4>
+            <p>Ferry schedules, drawbridge openings, and waterway crossings &mdash; the first- and last-mile gaps for coastal corridors.</p>
+          </div>
+        </div>
       </div>
     </section>
 
