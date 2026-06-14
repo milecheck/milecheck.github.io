@@ -797,7 +797,7 @@
     <section data-panel="home" class="reviews">
       <div class="container">
         <style>
-          .reviews { padding:44px 0; background:#FAFAFA; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; }
+          .reviews { padding:22px 0; background:#FAFAFA; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; }
           .rev-featured { max-width:760px; margin:0 auto; text-align:center; }
           .rev-stars { color:#F5A623; font-size:18px; letter-spacing:4px; margin-bottom:12px; }
           .rev-quote { font-size:20px; line-height:1.4; font-weight:600; letter-spacing:-0.3px; color:#0F1419; margin:0 0 14px; }
@@ -807,13 +807,12 @@
           .rev-source { display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; font-weight:600; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:24px; padding:6px 16px; }
           @media (max-width:880px){ .rev-quote{ font-size:21px; } }
         </style>
-        <p class="section-label" style="text-align:center;">What drivers say</p>
-        <div class="rev-featured">
-          <div class="rev-stars" aria-label="Rated 5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="rev-quote">&ldquo;The app I didn&rsquo;t know I needed and now <span class="hl">cannot live without</span>! I drive the passes a lot to go snowboarding and this is so much easier to figure out conditions and where traffic starts/ends so I know which shortcuts to take! Insanely helpful!&rdquo;</p>
-          <p class="rev-attr"><strong>dayjules</strong> &middot; App Store review</p>
-          <div class="rev-source">&#9733; Rated 5.0 on the App Store</div>
-        </div>
+        <p style="text-align:center;margin:0;font-size:15px;color:#525252;line-height:1.7;max-width:760px;margin:0 auto;">
+          <span style="color:#F5A623;letter-spacing:2px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <strong style="color:#0F1419;">5.0 on the App Store</strong> &mdash;
+          <span style="color:#0F1419;">&ldquo;The app I didn&rsquo;t know I needed and now cannot live without!&rdquo;</span>
+          <span style="color:#9aa1ab;">&mdash; dayjules</span>
+        </p>
       </div>
     </section>
 
@@ -845,10 +844,6 @@
           @media(max-width:880px){#mile-map{height:420px;}}
         </style>
         <div class="mile-map-head">
-          <div class="mm-copy">
-            <h3 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#0F1419;margin:0 0 8px;">Explore the mile markers live.</h3>
-            <p class="positioning-body" style="margin:0;">The same milepost data that powers the app, straight from our servers &mdash; pick a state, zoom in, and explore.</p>
-          </div>
           <label class="mile-map-pick">State
             <select id="mile-map-state" aria-label="Choose a state to view mile markers"></select>
           </label>
@@ -913,9 +908,9 @@
     <section data-panel="home" class="fresh">
       <div class="container">
         <style>
-          .fresh{padding:80px 0;background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
+          .fresh{padding:48px 0;background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
           .fresh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-          .fresh-card{background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:28px;}
+          .fresh-card{background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:20px;}
           .fresh-card h3{font-size:18px;font-weight:700;color:#0F1419;margin:0 0 10px;}
           .fresh-card p{font-size:15px;line-height:1.6;color:#525252;margin:0;}
           .fresh-icon{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#00A86B;margin-bottom:14px;}
@@ -1261,12 +1256,8 @@
         <h2 class="section-h2">Questions, answered.</h2>
         <div class="faq-list">
           <details class="faq-item"><summary>What does MileCheck do?</summary><p>It shows your nearest highway mile marker in real time, anywhere in all 50 states &mdash; plus live road conditions and alerts pulled straight from state DOTs. You always know exactly where you are, and what&rsquo;s ahead on your route.</p></details>
-          <details class="faq-item"><summary>How accurate are the mile markers?</summary><p>Positions come from official state DOT milepost data and are interpolated to the nearest tenth of a mile, so the number on your screen matches the signs on the road. We continuously review and correct the dataset as states re-sign or rebuild routes.</p></details>
           <details class="faq-item"><summary>Which states are covered?</summary><p>Mile markers in all 50 states. Live DOT alerts in 42 states today, growing toward all 50.</p></details>
-          <details class="faq-item"><summary>Does it work without cell service?</summary><p>Yes. Mile markers are stored on your phone, so they work in dead zones with no signal. Live alerts need a connection to pull the latest conditions from the DOT.</p></details>
           <details class="faq-item"><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium &mdash; the live map, DOT alerts, and trip tools &mdash; is <span class="mono">$9.99/yr</span> or <span class="mono">$1.99/mo</span>, with a 7-day free trial.</p></details>
-          <details class="faq-item"><summary>How is this different from Google or Apple Maps?</summary><p>Those apps don&rsquo;t show highway mile markers at all, and they don&rsquo;t normalize state DOT alert feeds. MileCheck is built around exactly that &mdash; the milepost you&rsquo;d read to a 911 dispatcher, and the live conditions on your specific highway.</p></details>
-          <details class="faq-item"><summary>What about my privacy?</summary><p>Your location stays on your device. MileCheck doesn&rsquo;t sell or upload your location history. See our <a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener">privacy policy</a> for details.</p></details>
         </div>
       </div>
     </section>
