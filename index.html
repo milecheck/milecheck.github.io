@@ -1056,31 +1056,31 @@
     <section class="ent-section">
       <div class="container">
         <p class="ent-section-label">Who we talk to</p>
-        <h2>Conversations open across six segments.</h2>
+        <h2>Six segments where mile-marker precision is the missing layer.</h2>
         <div class="audience-grid">
           <div class="audience-cell">
             <h4>Fleet management</h4>
-            <p>Telematics platforms and driver apps where mile-marker reporting closes the dispatch-handoff gap.</p>
+            <p>Drivers report location by mile marker. Most telematics platforms log GPS coordinates &mdash; so dispatch can&rsquo;t translate "I&rsquo;m at MP 184 on I-80" into a routable position without a manual lookup.</p>
           </div>
           <div class="audience-cell">
             <h4>Mapping and navigation</h4>
-            <p>Add a milepost layer and live DOT conditions to existing tile data without negotiating 50 state contracts.</p>
+            <p>Adding a milepost layer means 50 state GIS negotiations, 19 schema formats, and a pipeline to keep it current. Most platforms skip it. The corpus is available to license today.</p>
           </div>
           <div class="audience-cell">
             <h4>511 / traveler information</h4>
-            <p>Consolidate cross-state DOT alerts under one normalized schema without bilateral state negotiations.</p>
+            <p>Cross-state corridor alerts live in 50 separate DOT systems with incompatible schemas. Aggregating them into one feed today means bilateral access agreements with every agency in your coverage area.</p>
           </div>
           <div class="audience-cell">
             <h4>Digital freight and logistics</h4>
-            <p>Milepost-precision for load matching, track-and-trace, and trailer-drop workflows consumer nav can&rsquo;t route today.</p>
+            <p>"Meet the driver at I-80 MP 184" has no native equivalent in consumer navigation. Drivers send approximate GPS pins. Dispatchers guess. Load handoffs at highway mile markers are a solved problem on paper, unsupported in software.</p>
           </div>
           <div class="audience-cell">
             <h4>Roadside assistance and incident response</h4>
-            <p>Navigate service vehicles to a driver-reported milepost, eliminating the closest-address dispatch workaround.</p>
+            <p>Drivers report being stranded by mile marker. Most dispatch systems require a street address to route a service vehicle. The closest workaround is asking the stranded driver to find a sign and read it back.</p>
           </div>
           <div class="audience-cell">
             <h4>State DOT and transportation agencies</h4>
-            <p>Cross-state data access and normalized condition layers for corridor consortia and interstate 511 operators.</p>
+            <p>Monitoring corridor conditions across state lines means maintaining separate logins, schemas, and feeds for every neighboring agency. Interstate consortium data sharing is a perennial unsolved problem.</p>
           </div>
         </div>
       </div>
@@ -1097,6 +1097,24 @@
             <li>State DOT data is fragmented across 50 agencies, 19 distinct API formats, and years of per-state access negotiation &mdash; a problem that compounds with every state you need to add.</li>
             <li>MileCheck normalized both layers into one schema and proved the stack in a production consumer app. That corpus is now available to license or integrate.</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== BUILD VS LICENSE ============== -->
+    <section class="ent-section">
+      <div class="container">
+        <p class="ent-section-label">Build vs. license</p>
+        <h2>Building the data is harder than building the app.</h2>
+        <div class="why-content">
+          <ul>
+            <li><strong>42 agency integrations</strong> &mdash; each with its own auth method, rate limits, schema, and reliability characteristics. One upstream change breaks your feed until someone catches it.</li>
+            <li><strong>19 distinct platform formats</strong> &mdash; ibi511, COtrip, ArcGIS FeatureServer, GeoJSON&hairsp;/&hairsp;WZDx, CARS FEU-g, EVBG XML, and more. No two states publish the same data the same way.</li>
+            <li><strong>State-by-state access</strong> &mdash; some feeds require registration, API keys, terms agreements, and back-and-forth with agency IT. Multiply that by 50.</li>
+            <li><strong>Continuous normalization</strong> &mdash; route names, mile marker formats, and direction codes vary by state and change without notice. Keeping them aligned is an ongoing maintenance burden, not a one-time project.</li>
+            <li><strong>Feed monitoring</strong> &mdash; DOT feeds go stale, change endpoints, and return unexpected errors. Without active per-source monitoring, your app silently serves outdated data.</li>
+          </ul>
+          <p style="margin-top:24px;font-size:15px;color:#6B7280;">MileCheck solved this once, in production, for a consumer app with five-star ratings on both stores. The platform is available to license today &mdash; no agency negotiations required on your side.</p>
         </div>
       </div>
     </section>
@@ -1125,32 +1143,6 @@
           </div>
         </div>
         <p class="shapes-footnote">Each conversation starts at info gathering. We don't have a salesperson. You'll be talking to the founder.</p>
-      </div>
-    </section>
-
-    <!-- ============== WHERE IT GOES NEXT ============== -->
-    <section class="ent-section ent-section-alt">
-      <div class="container">
-        <p class="ent-section-label">Where it goes next</p>
-        <h2>The integration engine isn't capped at state DOTs.</h2>
-        <div class="audience-grid" style="margin-top:36px;">
-          <div class="audience-cell">
-            <h4>City DOT</h4>
-            <p>Seattle drawbridge status is already live &mdash; the same pattern extends to any city&rsquo;s bridges, signals, and closures.</p>
-          </div>
-          <div class="audience-cell">
-            <h4>County DOT</h4>
-            <p>County road authorities publish closures and conditions no consumer app surfaces today.</p>
-          </div>
-          <div class="audience-cell">
-            <h4>Rail</h4>
-            <p>Highway-rail grade crossings and freight-rail conflicts &mdash; safety-critical data absent from every consumer navigation app.</p>
-          </div>
-          <div class="audience-cell">
-            <h4>Marine &amp; water</h4>
-            <p>Ferry schedules, drawbridge openings, and waterway crossings &mdash; the first- and last-mile gaps for coastal corridors.</p>
-          </div>
-        </div>
       </div>
     </section>
 
