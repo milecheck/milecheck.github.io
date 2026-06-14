@@ -88,16 +88,16 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #999999;
-  margin-bottom: 28px;
+  margin-bottom: 14px;
 }
 
 .hero-h1 {
-  font-size: 72px;
+  font-size: 58px;
   font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -2.5px;
+  line-height: 1.04;
+  letter-spacing: -2px;
   color: #000;
-  margin-bottom: 28px;
+  margin-bottom: 18px;
   max-width: 920px;
 }
 
@@ -107,14 +107,14 @@ img, svg { display: block; max-width: 100%; }
   line-height: 1.5;
   color: #525252;
   max-width: 680px;
-  margin-bottom: 44px;
+  margin-bottom: 22px;
 }
 
 .hero-ctas {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
 }
 
 .hero-fineprint {
