@@ -722,7 +722,7 @@
     </style>
 
     <!-- ============== HERO (REVISED) ============== -->
-    <section data-panel="home" class="hero">
+    <section data-panel="home" class="hero" style="padding-bottom:8px;border-bottom:none;">
       <div class="container">
         <p class="eyebrow">iOS · Android · 50 US states</p>
         <h1 class="hero-h1">The only mile-marker app<br>with live state DOT data.</h1>
@@ -764,6 +764,7 @@
             <div class="block-secondary">and a 0.00% crash rate</div>
           </div>
         </div>
+        <p style="text-align:center;padding:14px 0 4px;font-size:14px;color:#525252;border-top:1px solid #E5E5E5;margin:0;">&ldquo;The app I didn&rsquo;t know I needed and now cannot live without!&rdquo; &nbsp;<span style="color:#F5A623;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>&nbsp; <span style="color:#9aa1ab;">dayjules, App Store</span></p>
       </div>
     </section>
 
@@ -792,28 +793,6 @@
       </div>
     </section>
 
-    <!-- ============== NEW: REVIEWS ============== -->
-    <section data-panel="home" class="reviews">
-      <div class="container">
-        <style>
-          .reviews { padding:22px 0; background:#FAFAFA; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; }
-          .rev-featured { max-width:760px; margin:0 auto; text-align:center; }
-          .rev-stars { color:#F5A623; font-size:18px; letter-spacing:4px; margin-bottom:12px; }
-          .rev-quote { font-size:20px; line-height:1.4; font-weight:600; letter-spacing:-0.3px; color:#0F1419; margin:0 0 14px; }
-          .rev-quote .hl { color:#00A86B; }
-          .rev-attr { font-size:15px; color:#525252; margin:0; }
-          .rev-attr strong { color:#0F1419; font-weight:600; }
-          .rev-source { display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; font-weight:600; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:24px; padding:6px 16px; }
-          @media (max-width:880px){ .rev-quote{ font-size:21px; } }
-        </style>
-        <p style="text-align:center;margin:0;font-size:15px;color:#525252;line-height:1.7;max-width:760px;margin:0 auto;">
-          <span style="color:#F5A623;letter-spacing:2px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <strong style="color:#0F1419;">5.0 on the App Store</strong> &mdash;
-          <span style="color:#0F1419;">&ldquo;The app I didn&rsquo;t know I needed and now cannot live without!&rdquo;</span>
-          <span style="color:#9aa1ab;">&mdash; dayjules</span>
-        </p>
-      </div>
-    </section>
 
     <!-- ============== NEW: LIVE MILE MARKER MAP ============== -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -834,7 +813,10 @@
           @media(max-width:880px){#mile-map{height:300px;}}
         </style>
         <div class="mile-map-head">
-          <p style="font-size:15px;color:#525252;margin:0;">Live in all 50 states. 42 DOT feeds and growing.</p>
+          <div class="mm-copy">
+            <h2 style="font-size:28px;font-weight:800;letter-spacing:-0.5px;color:#0F1419;margin:0 0 4px;">See the mile markers, live.</h2>
+            <p style="font-size:15px;color:#525252;margin:0;">50 states. 42 live DOT feeds and growing.</p>
+          </div>
           <label class="mile-map-pick">State
             <select id="mile-map-state" aria-label="Choose a state to view mile markers"></select>
           </label>
@@ -925,24 +907,24 @@
 
     <!-- ============== SCREENSHOTS (CAROUSEL — OPTION B) ============== -->
     <style>
-      .screens { padding: 40px 0 16px; background: #FAFAFA; }
-      .screens .section-head { text-align: center; margin-bottom: 8px; }
+      .screens { padding: 24px 0 8px; background: #FAFAFA; }
+      .screens .section-head { text-align: center; margin-bottom: 4px; }
       .screens .carousel-track {
-        display: flex; gap: 24px; overflow-x: auto;
-        scroll-snap-type: x mandatory; padding: 24px 24px 28px;
+        display: flex; gap: 18px; overflow-x: auto;
+        scroll-snap-type: x mandatory; padding: 16px 24px 20px;
         scrollbar-width: thin; scrollbar-color: #00C880 #E5E5E5;
         -webkit-overflow-scrolling: touch;
       }
-      .screens .carousel-track::-webkit-scrollbar { height: 8px; }
+      .screens .carousel-track::-webkit-scrollbar { height: 6px; }
       .screens .carousel-track::-webkit-scrollbar-track { background: #E5E5E5; border-radius: 4px; }
       .screens .carousel-track::-webkit-scrollbar-thumb { background: #00C880; border-radius: 4px; }
-      .screens .carousel-card { flex-shrink: 0; width: 180px; scroll-snap-align: center; }
-      .screens .cc-phone { border-radius: 30px; background: #1a1f26; padding: 7px; box-shadow: 0 16px 44px rgba(0,0,0,0.22); margin-bottom: 14px; }
-      .screens .cc-phone-inner { border-radius: 24px; overflow: hidden; background: #fff; aspect-ratio: 1284 / 2778; }
+      .screens .carousel-card { flex-shrink: 0; width: 136px; scroll-snap-align: center; }
+      .screens .cc-phone { border-radius: 24px; background: #1a1f26; padding: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.20); margin-bottom: 10px; }
+      .screens .cc-phone-inner { border-radius: 19px; overflow: hidden; background: #fff; aspect-ratio: 1284 / 2778; }
       .screens .cc-phone-inner img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-      .screens .cc-eyebrow { font-size: 10px; font-weight: 800; color: #00C880; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 6px; }
-      .screens .cc-title { font-size: 16px; font-weight: 900; letter-spacing: -0.02em; color: #0F1419; margin-bottom: 5px; }
-      .screens .cc-sub { font-size: 12px; color: #6b7280; line-height: 1.5; }
+      .screens .cc-eyebrow { font-size: 9px; font-weight: 800; color: #00C880; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 4px; }
+      .screens .cc-title { font-size: 13px; font-weight: 900; letter-spacing: -0.02em; color: #0F1419; margin-bottom: 3px; }
+      .screens .cc-sub { font-size: 11px; color: #6b7280; line-height: 1.45; }
       .screens .carousel-hint { text-align: center; font-size: 11px; color: #9aa1ab; margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
     </style>
     <section data-panel="home" class="screens">
@@ -974,20 +956,6 @@
       </div>
     </section>
 
-    <!-- ============== velocity strip ============== -->
-    <section data-panel="home" class="velocity">
-      <div class="container" style="text-align:center;">
-        <style>.velocity{padding:20px 0;background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}.velocity .vlead{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#00A86B;margin:0 0 10px;}.velocity .vchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0;}.velocity .vchip{font-size:13px;font-weight:600;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:24px;padding:5px 12px;}</style>
-        <p class="vlead">Founder-built &middot; shipping fast</p>
-        <div class="vchips">
-          <span class="vchip">Crosswind warnings</span>
-          <span class="vchip">Navigate to any milepost</span>
-          <span class="vchip">42 live-alert states</span>
-          <span class="vchip">Seattle bridge alerts</span>
-          <span class="vchip">Built for CarPlay</span>
-        </div>
-      </div>
-    </section>
 
     <!-- ============== NEW: FAQ ============== -->
     <section data-panel="home" class="faq" id="faq">
