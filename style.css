@@ -480,17 +480,17 @@ img, svg { display: block; max-width: 100%; }
 /* ===== Footer ===== */
 .site-footer {
   border-top: 1px solid #E5E5E5;
-  padding: 56px 0 40px;
+  padding: 36px 0 26px;
   background: #FFFFFF;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 32px;
-  padding-bottom: 40px;
+  gap: 20px;
+  padding-bottom: 26px;
   border-bottom: 1px solid #E5E5E5;
-  margin-bottom: 28px;
+  margin-bottom: 18px;
 }
 
 .footer-col-brand { padding-right: 32px; }
@@ -517,14 +517,14 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #999;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .footer-list li {
   font-size: 14px;
   font-weight: 500;
   color: #525252;
-  padding: 5px 0;
+  padding: 3px 0;
 }
 
 .footer-list a:hover { color: #000; opacity: 1; }
