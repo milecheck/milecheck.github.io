@@ -24,10 +24,10 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="../index.html" class="brand">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <nav class="primary-nav">
         <a href="../index.html">Home</a>
         <a href="../index.html#features">Features</a>
-        <a href="../index.html#coverage">Coverage</a>
         <a href="../index.html#pricing">Pricing</a>
         <a href="../index.html#story">Story</a>
         <a href="../index.html#b2b">B2B</a>
@@ -136,5 +136,6 @@
     </div>
   </footer>
 
+  <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
 </body>
 </html>
