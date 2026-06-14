@@ -768,18 +768,43 @@
       </div>
     </section>
 
+    <!-- ============== POSITIONING (TWO-COLUMN) — moved up 2026-06-13 ============== -->
+    <section data-panel="home" class="positioning">
+      <div class="container">
+        <p class="section-label">Why MileCheck</p>
+        <h2 class="section-h2">Three things no one else has.</h2>
+        <div class="positioning-grid">
+          <div class="positioning-col">
+            <div class="positioning-col-num mono">01</div>
+            <h3>The only mile-marker app on Android.</h3>
+            <p>Truckers, road crews, and EMTs were left out of the iOS-only mile marker app ecosystem for years. We built MileCheck on both platforms from day one &mdash; the same code, the same offline data, the same mile markers in all 50 states.</p>
+          </div>
+          <div class="positioning-col">
+            <div class="positioning-col-num mono">02</div>
+            <h3>The only app on either store with live, nationwide DOT API integrations.</h3>
+            <p>Closures, crashes, construction, weather warnings &mdash; pulled directly from 42 official state DOT feeds, not scraped from third-party sources. When your state DOT publishes an alert, MileCheck users see it. The integration corpus expands state by state, with new states added weekly toward all 50.</p>
+          </div>
+          <div class="positioning-col">
+            <div class="positioning-col-num mono">03</div>
+            <h3>The only CarPlay app that shows your mile marker.</h3>
+            <p>Apple&rsquo;s Driving Task entitlement &mdash; the same approval required of dedicated navigation apps &mdash; was granted in June 2026. MileCheck is the only app in its category cleared for CarPlay. In-dash mile markers are in development now.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============== NEW: REVIEWS ============== -->
     <section data-panel="home" class="reviews">
       <div class="container">
         <style>
-          .reviews { padding:72px 0; background:#FAFAFA; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; }
+          .reviews { padding:44px 0; background:#FAFAFA; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; }
           .rev-featured { max-width:760px; margin:0 auto; text-align:center; }
-          .rev-stars { color:#F5A623; font-size:22px; letter-spacing:5px; margin-bottom:22px; }
-          .rev-quote { font-size:26px; line-height:1.42; font-weight:600; letter-spacing:-0.5px; color:#0F1419; margin:0 0 24px; }
+          .rev-stars { color:#F5A623; font-size:18px; letter-spacing:4px; margin-bottom:12px; }
+          .rev-quote { font-size:20px; line-height:1.4; font-weight:600; letter-spacing:-0.3px; color:#0F1419; margin:0 0 14px; }
           .rev-quote .hl { color:#00A86B; }
           .rev-attr { font-size:15px; color:#525252; margin:0; }
           .rev-attr strong { color:#0F1419; font-weight:600; }
-          .rev-source { display:inline-flex; align-items:center; gap:8px; margin-top:26px; font-size:13px; font-weight:600; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:24px; padding:6px 16px; }
+          .rev-source { display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; font-weight:600; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:24px; padding:6px 16px; }
           @media (max-width:880px){ .rev-quote{ font-size:21px; } }
         </style>
         <p class="section-label" style="text-align:center;">What drivers say</p>
@@ -1084,7 +1109,7 @@
     <section data-panel="home" class="mile-map-sec" id="livemap">
       <div class="container">
         <style>
-          .mile-map-sec{padding:80px 0;}
+          .mile-map-sec{padding:8px 0 64px;border-bottom:1px solid #E5E5E5;}
           .mile-map-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px;}
           .mile-map-head .mm-copy{max-width:640px;}
           #mile-map{height:520px;width:100%;border-radius:14px;overflow:hidden;border:1px solid #E5E5E5;z-index:0;}
@@ -1097,9 +1122,8 @@
         </style>
         <div class="mile-map-head">
           <div class="mm-copy">
-            <p class="section-label">Live map</p>
-            <h2 class="section-h2" style="margin-bottom:14px;">See the mile markers, live.</h2>
-            <p class="positioning-body">The same milepost data that powers the app, straight from our servers. Pick a state, zoom in, and explore the markers MileCheck reads in real time as you drive.</p>
+            <h3 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#0F1419;margin:0 0 8px;">Explore the mile markers live.</h3>
+            <p class="positioning-body" style="margin:0;">The same milepost data that powers the app, straight from our servers &mdash; pick a state, zoom in, and explore.</p>
           </div>
           <label class="mile-map-pick">State
             <select id="mile-map-state" aria-label="Choose a state to view mile markers"></select>
@@ -1180,31 +1204,6 @@
           <div class="fresh-card"><div class="fresh-icon">Live</div><h3>DOT alerts refresh all day</h3><p>Closures, crashes, construction, weather and chain controls come straight from each state DOT and update continuously &mdash; so what you see is what&rsquo;s happening on the road right now.</p></div>
           <div class="fresh-card"><div class="fresh-icon">Growing</div><h3>New states every week</h3><p>We&rsquo;re adding live DOT coverage state by state &mdash; 42 of 50 today and climbing. Mile markers already cover all 50.</p></div>
           <div class="fresh-card"><div class="fresh-icon">Maintained</div><h3>Mile markers kept accurate</h3><p>As states re-sign, rebuild, or reclassify routes, we review and correct the milepost data &mdash; so the number on your screen keeps matching the sign on the road.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== POSITIONING (TWO-COLUMN) ============== -->
-    <section data-panel="home" class="positioning">
-      <div class="container">
-        <p class="section-label">Why MileCheck</p>
-        <h2 class="section-h2">Three things no one else has.</h2>
-        <div class="positioning-grid">
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">01</div>
-            <h3>The only mile-marker app on Android.</h3>
-            <p>Truckers, road crews, and EMTs were left out of the iOS-only mile marker app ecosystem for years. We built MileCheck on both platforms from day one &mdash; the same code, the same offline data, the same mile markers in all 50 states.</p>
-          </div>
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">02</div>
-            <h3>The only app on either store with live, nationwide DOT API integrations.</h3>
-            <p>Closures, crashes, construction, weather warnings &mdash; pulled directly from 42 official state DOT feeds, not scraped from third-party sources. When your state DOT publishes an alert, MileCheck users see it. The integration corpus expands state by state, with new states added weekly toward all 50.</p>
-          </div>
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">03</div>
-            <h3>The only CarPlay app that shows your mile marker.</h3>
-            <p>Apple&rsquo;s Driving Task entitlement &mdash; the same approval required of dedicated navigation apps &mdash; was granted in June 2026. MileCheck is the only app in its category cleared for CarPlay. In-dash mile markers are in development now.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -1499,8 +1498,8 @@
     <section data-panel="home" class="velocity">
       <div class="container">
         <style>
-          .velocity{padding:80px 0;background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
-          .velocity .vchips{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 30px;}
+          .velocity{padding:52px 0;background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
+          .velocity .vchips{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 22px;}
           .velocity .vchip{font-size:14px;font-weight:600;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:24px;padding:8px 16px;}
           .velocity-cta{font-size:17px;line-height:1.6;color:#525252;max-width:680px;}
           .velocity-cta strong{color:#0F1419;font-weight:600;}
@@ -1524,7 +1523,7 @@
     <section data-panel="home" class="faq" id="faq">
       <div class="container">
         <style>
-          .faq{padding:80px 0;}
+          .faq{padding:56px 0;}
           .faq-list{max-width:780px;margin:0 auto;}
           .faq-item{border-bottom:1px solid #E5E5E5;}
           .faq-item summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;position:relative;font-size:18px;font-weight:600;color:#0F1419;}
@@ -1539,13 +1538,10 @@
         <div class="faq-list">
           <details class="faq-item"><summary>What does MileCheck do?</summary><p>It shows your nearest highway mile marker in real time, anywhere in all 50 states &mdash; plus live road conditions and alerts pulled straight from state DOTs. You always know exactly where you are, and what&rsquo;s ahead on your route.</p></details>
           <details class="faq-item"><summary>How accurate are the mile markers?</summary><p>Positions come from official state DOT milepost data and are interpolated to the nearest tenth of a mile, so the number on your screen matches the signs on the road. We continuously review and correct the dataset as states re-sign or rebuild routes.</p></details>
-          <details class="faq-item"><summary>How often is the data updated?</summary><p>Two layers. Live DOT alerts &mdash; closures, crashes, construction, weather, chain controls &mdash; refresh throughout the day. The mile-marker dataset is expanded and corrected on an ongoing basis, and we add new states with live alerts every week.</p></details>
           <details class="faq-item"><summary>Which states are covered?</summary><p>Mile markers in all 50 states. Live DOT alerts in 42 states today, growing toward all 50.</p></details>
           <details class="faq-item"><summary>Does it work without cell service?</summary><p>Yes. Mile markers are stored on your phone, so they work in dead zones with no signal. Live alerts need a connection to pull the latest conditions from the DOT.</p></details>
-          <details class="faq-item"><summary>Is it on iPhone and Android?</summary><p>Both. MileCheck is on the App Store and Google Play &mdash; the only mile-marker app on both.</p></details>
           <details class="faq-item"><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium &mdash; the live map, DOT alerts, and trip tools &mdash; is <span class="mono">$9.99/yr</span> or <span class="mono">$1.99/mo</span>, with a 7-day free trial.</p></details>
           <details class="faq-item"><summary>How is this different from Google or Apple Maps?</summary><p>Those apps don&rsquo;t show highway mile markers at all, and they don&rsquo;t normalize state DOT alert feeds. MileCheck is built around exactly that &mdash; the milepost you&rsquo;d read to a 911 dispatcher, and the live conditions on your specific highway.</p></details>
-          <details class="faq-item"><summary>Will it support CarPlay?</summary><p>Yes &mdash; CarPlay is approved by Apple and in active development, so MileCheck can show your mile marker right on the in-vehicle screen.</p></details>
           <details class="faq-item"><summary>What about my privacy?</summary><p>Your location stays on your device. MileCheck doesn&rsquo;t sell or upload your location history. See our <a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener">privacy policy</a> for details.</p></details>
         </div>
       </div>

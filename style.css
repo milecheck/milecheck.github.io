@@ -575,8 +575,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* --- Coverage section (added 2026-05-15) --- */
 .coverage {
-  padding: 96px 0;
-  border-bottom: 1px solid #E5E5E5;
+  padding: 96px 0 24px;
 }
 
 .coverage-intro {
