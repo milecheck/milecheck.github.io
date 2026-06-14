@@ -78,7 +78,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ===== Hero ===== */
 .hero {
-  padding: 96px 0 88px;
+  padding: 60px 0 32px;
   border-bottom: 1px solid #E5E5E5;
 }
 
@@ -169,7 +169,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ===== Stats block ===== */
 .stats {
-  border-bottom: 1px solid #E5E5E5;
+  padding-bottom: 4px;
 }
 
 .block-grid {
@@ -290,9 +290,10 @@ img, svg { display: block; max-width: 100%; }
 .features,
 .positioning,
 .story {
-  padding: 96px 0;
+  padding: 60px 0;
   border-bottom: 1px solid #E5E5E5;
 }
+.positioning { padding-top: 28px; }
 
 .rows {
   border-top: 1px solid #E5E5E5;
@@ -473,7 +474,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ===== Download (final CTA) ===== */
 .download {
-  padding: 96px 0;
+  padding: 60px 0;
 }
 
 /* ===== Footer ===== */
@@ -575,7 +576,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* --- Coverage section (added 2026-05-15) --- */
 .coverage {
-  padding: 96px 0 24px;
+  padding: 56px 0 12px;
 }
 
 .coverage-intro {
