@@ -305,19 +305,19 @@
       border-bottom: 1px solid #E5E5E5;
     }
     .ent-hero h1 {
-      font-size: 54px;
+      font-size: 48px;
       font-weight: 800;
       letter-spacing: -1.5px;
       line-height: 1.1;
       color: #000;
       margin-bottom: 28px;
-      max-width: 760px;
+      max-width: 700px;
     }
     .ent-hero-sub {
       font-size: 19px;
       line-height: 1.6;
       color: #525252;
-      max-width: 720px;
+      max-width: 780px;
       margin-bottom: 36px;
     }
     .ent-hero-sub strong { color: #000; font-weight: 600; }
@@ -335,7 +335,7 @@
 
     /* Sections */
     .ent-section {
-      padding: 88px 0;
+      padding: 56px 0;
       border-bottom: 1px solid #E5E5E5;
       background: #FFFFFF;
     }
@@ -592,7 +592,7 @@
 
     /* Mobile */
     @media (max-width: 768px) {
-      .ent-hero h1 { font-size: 40px; }
+      .ent-hero h1 { font-size: 36px; }
       .infra-grid { grid-template-columns: 1fr; }
       .infra-cell { padding: 28px 20px; }
       .audience-grid { grid-template-columns: 1fr; }
@@ -617,7 +617,7 @@
     @media (max-width: 440px){
       .hero-h1 { font-size: 38px !important; line-height: 1.08 !important; }
       .section-h2 { font-size: 30px !important; line-height: 1.12 !important; }
-      .ent-hero h1 { font-size: 34px !important; line-height: 1.1 !important; letter-spacing: -1px !important; }
+      .ent-hero h1 { font-size: 30px !important; line-height: 1.1 !important; letter-spacing: -1px !important; }
       .cta-section h2 { font-size: 30px !important; }
     }
   </style>
@@ -991,6 +991,20 @@
           Most milepost data products stop at the static layer: &ldquo;where is MP 142?&rdquo; MileCheck delivers both &mdash; that milepost lookup <em>plus</em> live conditions at MP 142 right now, normalized from 42 state DOT feeds across 19 distinct upstream platform formats. One schema. One API response. No state contracts on your side.
         </p>
         <a href="mailto:info@milecheckapp.com" class="ent-hero-cta">Open a conversation &rarr;</a>
+
+        <!-- Brand proof strip -->
+        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:48px;padding-top:28px;border-top:1px solid #E5E5E5;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <img src="assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:8px;" onerror="this.style.display='none'">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#000;">MileCheck App</span>
+          </div>
+          <div style="width:1px;height:28px;background:#E5E5E5;"></div>
+          <span style="font-size:13px;color:#525252;"><span style="color:#F5A623;">★★★★★</span> App Store &amp; Google Play</span>
+          <div style="width:1px;height:28px;background:#E5E5E5;"></div>
+          <span style="font-size:13px;color:#525252;">50 states · 42 live DOT integrations</span>
+          <div style="width:1px;height:28px;background:#E5E5E5;"></div>
+          <span style="font-size:13px;color:#525252;">CarPlay &amp; Android Auto</span>
+        </div>
       </div>
     </section>
 
@@ -1096,7 +1110,8 @@
             <div class="proof-cell-label"><strong>monitored feeds</strong> &mdash; uptime tracked per state, alerting on stale or missing data at the source</div>
           </div>
         </div>
-        <p style="text-align:center;font-size:13px;margin-top:12px;opacity:0.8;"><a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="color:#00A86B;font-weight:600;">&#8599; Live API status</a> &nbsp;&middot;&nbsp; DOT feed uptime monitored 24/7</p>
+        <p style="text-align:center;font-size:14px;font-weight:600;color:#000;margin-top:24px;">Proven in production through the MileCheck iOS, Android, CarPlay, and Android Auto applications.</p>
+        <p style="text-align:center;font-size:13px;margin-top:8px;opacity:0.8;"><a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="color:#00A86B;font-weight:600;">&#8599; Live API status</a> &nbsp;&middot;&nbsp; DOT feed uptime monitored 24/7</p>
         <div class="why-content" style="margin-top:40px;">
           <ul>
             <li><strong>Every agency is different</strong> &mdash; 42 integrations, each with its own auth method, rate limits, schema, and reliability characteristics. One upstream change breaks your feed until someone catches it.</li>
