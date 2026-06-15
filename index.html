@@ -767,6 +767,26 @@
       </div>
     </section>
 
+    <!-- ============== FEATURE CHIPS ============== -->
+    <style>
+      .feature-chips { padding: 16px 0; background: #fff; border-bottom: 1px solid #E5E5E5; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+      .feature-chips::-webkit-scrollbar { display: none; }
+      .feature-chips-inner { display: inline-flex; gap: 10px; padding: 0 24px; }
+      .fchip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border: 1px solid #E5E5E5; border-radius: 999px; font-size: 13px; font-weight: 600; color: #374151; background: #FAFAFA; white-space: nowrap; }
+      .fchip-icon { font-size: 15px; line-height: 1; }
+      @media (max-width: 760px) { .feature-chips-inner { padding: 0 16px; } .fchip { font-size: 12px; padding: 6px 12px; } }
+    </style>
+    <section data-panel="home" class="feature-chips">
+      <div class="feature-chips-inner">
+        <div class="fchip"><span class="fchip-icon">🌉</span> Seattle bridge alerts</div>
+        <div class="fchip"><span class="fchip-icon">💨</span> Crosswind warnings</div>
+        <div class="fchip"><span class="fchip-icon">🚗</span> Apple CarPlay</div>
+        <div class="fchip"><span class="fchip-icon">📍</span> Navigate to any milepost</div>
+        <div class="fchip"><span class="fchip-icon">✈️</span> Offline mode</div>
+        <div class="fchip"><span class="fchip-icon">📋</span> Trip logging</div>
+      </div>
+    </section>
+
     <!-- ============== POSITIONING (TWO-COLUMN) — moved up 2026-06-13 ============== -->
     <section data-panel="home" class="positioning">
       <div class="container">
