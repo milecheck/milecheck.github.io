@@ -293,7 +293,8 @@ img, svg { display: block; max-width: 100%; }
   padding: 60px 0;
   border-bottom: 1px solid #E5E5E5;
 }
-.positioning { padding-top: 28px; }
+.positioning { padding-top: 8px; }
+.stats .block { padding-bottom: 20px; }
 
 .rows {
   border-top: 1px solid #E5E5E5;
