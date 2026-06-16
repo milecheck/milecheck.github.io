@@ -1106,9 +1106,11 @@
         <div class="why-content">
           <ul>
             <li>Consumer nav apps don&rsquo;t expose mile markers &mdash; Google Maps, Apple Maps, and Waze treat the milepost system as invisible to the application layer.</li>
+            <li><strong>Fleet routing and weather tools cover different layers.</strong> Truck-navigation apps route and keep drivers legal; weather tools model storm risk. Neither shows the driver&rsquo;s live mile marker, and neither carries what the state DOTs themselves report &mdash; actual closures, construction, crashes, and chain controls.</li>
             <li>State DOT data is fragmented across 50 agencies, 19 distinct API formats, and years of per-state access negotiation &mdash; a problem that compounds with every state you need to add.</li>
             <li>MileCheck normalized both layers into one schema and proved the stack in a production consumer app. That corpus is now available to license or integrate.</li>
           </ul>
+          <p style="margin-top:24px;font-size:15px;color:#6B7280;">MileCheck is the complementary layer, not a competitor to your routing or weather stack: <strong style="color:#000;">direct-from-state-DOT road events &mdash; closures, construction, crashes, chain controls &mdash; tied to the exact mile marker.</strong> It runs alongside the nav and weather tools fleets already use, filling the gap between them.</p>
         </div>
       </div>
     </section>
@@ -1159,7 +1161,7 @@
         <div class="infra-grid" style="margin-top:36px;">
           <div class="infra-cell">
             <h3>API access</h3>
-            <p>The unified DOT alerts feed &mdash; live conditions, closures, crashes &mdash; served through one normalized endpoint.</p>
+            <p>The unified DOT alerts feed &mdash; direct from 42 state agencies: closures, construction, crashes, and chain controls &mdash; served through one normalized endpoint.</p>
           </div>
           <div class="infra-cell">
             <h3>Data licensing</h3>
