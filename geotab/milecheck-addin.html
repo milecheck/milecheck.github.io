@@ -42,11 +42,17 @@
   .mc-route .state{color:var(--muted);}
 
   .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:600;margin:0 0 7px 1px;}
+  .mc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+  @media (max-width:560px){ .mc-cols{grid-template-columns:1fr;} }
+  .mc-col-h{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 7px 1px;}
+  .mc-col-active .mc-col-h{color:var(--crit);}
+  .mc-count{background:var(--line);color:var(--muted);font-size:10px;font-weight:700;border-radius:3px;padding:0 5px;line-height:16px;}
+  .mc-col-empty{font-size:12px;color:var(--faint);padding:11px 12px;border:1px dashed var(--line);border-radius:3px;}
   /* alerts: tight, muted rows — thin severity tick, no rainbow cards */
   .mc-alert{display:flex;gap:11px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--info);border-radius:3px;padding:9px 12px;margin-bottom:5px;}
   .mc-alert .body{flex:1;min-width:0;}
   .mc-alert .type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);}
-  .mc-alert .desc{margin:2px 0 3px;color:var(--ink);line-height:1.4;}
+  .mc-alert .desc{margin:2px 0 3px;color:var(--ink);line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
   .mc-alert .meta{font-size:11.5px;color:var(--faint);display:flex;gap:9px;flex-wrap:wrap;}
   .mc-alert.closure{border-left-color:var(--crit);} .mc-alert.closure .type{color:var(--crit);}
   .mc-alert.construction{border-left-color:var(--warn);} .mc-alert.construction .type{color:var(--warn);}
@@ -87,7 +93,7 @@
   var MILECHECK_API = "https://milepost-proxy.leahgerber93.workers.dev";
   // Demo vehicle position when not running inside Geotab (I-5, WA — Tacoma corridor).
   var DEMO_POS = { lat:47.2400, lon:-122.4300, bearing:0 };
-  var ALERT_RADIUS_MI = 60, MAX_ALERTS = 6;
+  var ALERT_RADIUS_MI = 60, MAX_ALERTS = 12;
 
   // Bounding boxes for major freight-corridor states (extend to all 50 in production).
   var STATE_BOUNDS = {
@@ -140,21 +146,46 @@
   function esc(t){ return (t||"").replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c];}); }
   function el(id){ return document.getElementById(id); }
 
+  // Triage an alert into the two columns the dispatcher cares about.
+  function bucket(a){
+    var s=(a.desc||"").toLowerCase();
+    var planned=/nightly|overnight|night work|nighttime|each night|seasonal|long-term|until further notice|reopening|scheduled|begins? \w+ \d|through \w+ \d|\d\s*(p\.?m\.?)\s*(-|to)\s*\d/.test(s);
+    if(a.label==="Crash") return "active";
+    if(/\bdelay|backed up|congest|stop-and-go|stopped traffic/.test(s)) return "active";
+    if(a.label==="Closure" && !planned) return "active"; // closed right now
+    return "planned"; // nightly / long-term closures, construction, weather
+  }
+
   function render(data, isLive){
     el("mc-live").classList.toggle("on", !!isLive);
     el("mc-demo").classList.toggle("on", !isLive);
     var alerts=data.alerts||[];
     var dir=data.direction?(" "+data.direction):"";
-    var alertsHtml = alerts.length ? alerts.map(function(a){
+
+    function alertCard(a){
       return '<div class="mc-alert '+a.cls+'"><div class="body">'
         +'<div class="type">'+esc(a.label)+'</div>'
         +(a.desc?'<div class="desc">'+esc(a.desc)+'</div>':'')
         +'<div class="meta"><span>'+esc(a.route||"")+'</span>'
         +'<span>'+(a.source?esc(a.source):'')+(a.updated!=null?(a.source?' &middot; ':'')+rel(a.updated):'')+'</span></div>'
         +'</div></div>';
-    }).join("") : '<div class="mc-empty">'+(data.alertsAvail===false
-        ? 'Live DOT alerts aren’t connected in '+esc(data.state)+' yet — mile-marker tracking still works.'
-        : 'No active DOT alerts within '+ALERT_RADIUS_MI+' mi. Clear road ahead.')+'</div>';
+    }
+    function col(title, arr, kind){
+      return '<div class="mc-col mc-col-'+kind+'"><div class="mc-col-h">'+title
+        +' <span class="mc-count">'+arr.length+'</span></div>'
+        +(arr.length ? arr.map(alertCard).join("") : '<div class="mc-col-empty">None right now.</div>')+'</div>';
+    }
+
+    var alertsBlock;
+    if(data.alertsAvail===false){
+      alertsBlock='<div class="mc-empty">Live DOT alerts aren’t connected in '+esc(data.state)+' yet — mile-marker tracking still works.</div>';
+    } else {
+      var active=[], planned=[];
+      alerts.forEach(function(a){ (bucket(a)==="active"?active:planned).push(a); });
+      alertsBlock='<div class="mc-cols">'
+        +col("Active &mdash; needs attention", active, "active")
+        +col("Planned / ongoing", planned, "planned")+'</div>';
+    }
 
     var heroHtml = data.milepost!=null ?
       '<div class="mc-hero"><div class="label">Nearest mile marker</div>'
@@ -162,7 +193,7 @@
       +'<div class="mc-route"><strong>'+esc(data.route||"")+dir+'</strong>'
       +'<span class="sep">|</span><span class="state">'+esc(data.state||"")+'</span></div></div>' : '';
 
-    el("mc-content").innerHTML = heroHtml + '<div class="mc-section-label">Live DOT alerts ahead</div>' + alertsHtml;
+    el("mc-content").innerHTML = heroHtml + alertsBlock;
     el("mc-updated").textContent = "Updated "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
   }
 
