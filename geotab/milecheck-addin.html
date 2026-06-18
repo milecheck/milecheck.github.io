@@ -40,6 +40,7 @@
   .mc-route strong{color:var(--ink);font-weight:700;}
   .mc-route .sep{color:var(--line);margin:0 7px;}
   .mc-route .state{color:var(--muted);}
+  .mc-route .spd{color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;}
 
   .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:600;margin:0 0 7px 1px;}
   .mc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
@@ -52,6 +53,8 @@
   .mc-alert{display:flex;gap:11px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--info);border-radius:3px;padding:9px 12px;margin-bottom:5px;}
   .mc-alert .body{flex:1;min-width:0;}
   .mc-alert .type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);}
+  .mc-alert .type-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .mc-alert .dist{font-size:11px;font-weight:700;color:var(--ink);background:var(--line);border-radius:3px;padding:1px 7px;white-space:nowrap;font-variant-numeric:tabular-nums;}
   .mc-alert .desc{margin:2px 0 3px;color:var(--ink);line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
   .mc-alert .meta{font-size:11.5px;color:var(--faint);display:flex;gap:9px;flex-wrap:wrap;}
   .mc-alert.closure{border-left-color:var(--crit);} .mc-alert.closure .type{color:var(--crit);}
@@ -92,28 +95,65 @@
 
   var MILECHECK_API = "https://milepost-proxy.leahgerber93.workers.dev";
   // Demo vehicle position when not running inside Geotab (I-5, WA — Tacoma corridor).
-  var DEMO_POS = { lat:47.2400, lon:-122.4300, bearing:0 };
+  var DEMO_POS = { lat:47.2400, lon:-122.4300, bearing:0, speed:62 };
   var ALERT_RADIUS_MI = 60, MAX_ALERTS = 12;
 
-  // Bounding boxes for major freight-corridor states (extend to all 50 in production).
+  // Bounding boxes — all 50 states (mirrors constants/states.ts). Order matters:
+  // first match wins; ID before MT (MT's box extends into the Idaho panhandle).
   var STATE_BOUNDS = {
-    WA:{minLat:45.54,maxLat:49.00,minLon:-124.85,maxLon:-116.92}, OR:{minLat:41.99,maxLat:46.29,minLon:-124.57,maxLon:-116.46},
-    CA:{minLat:32.50,maxLat:42.01,minLon:-124.50,maxLon:-114.10}, NV:{minLat:35.00,maxLat:42.00,minLon:-120.01,maxLon:-114.04},
-    UT:{minLat:37.00,maxLat:42.00,minLon:-114.05,maxLon:-109.04}, AZ:{minLat:31.33,maxLat:37.00,minLon:-114.82,maxLon:-109.04},
+    WA:{minLat:45.54,maxLat:49.00,minLon:-124.85,maxLon:-116.91}, OR:{minLat:41.99,maxLat:46.29,minLon:-124.57,maxLon:-116.46},
     ID:{minLat:42.00,maxLat:49.00,minLon:-117.24,maxLon:-111.04}, MT:{minLat:44.36,maxLat:49.00,minLon:-116.05,maxLon:-104.04},
-    CO:{minLat:37.001,maxLat:41.00,minLon:-109.05,maxLon:-102.04}, TX:{minLat:25.80,maxLat:36.50,minLon:-106.70,maxLon:-93.50},
-    IL:{minLat:36.97,maxLat:42.51,minLon:-91.52,maxLon:-87.02}, OH:{minLat:38.40,maxLat:42.00,minLon:-84.82,maxLon:-80.52},
+    AZ:{minLat:31.33,maxLat:36.999,minLon:-114.82,maxLon:-109.04}, UT:{minLat:37.00,maxLat:42.00,minLon:-114.05,maxLon:-109.04},
+    CO:{minLat:37.001,maxLat:41.00,minLon:-109.05,maxLon:-102.04}, NM:{minLat:31.33,maxLat:37.00,minLon:-109.05,maxLon:-103.00},
+    AK:{minLat:54.50,maxLat:71.50,minLon:-165.00,maxLon:-129.50}, SD:{minLat:42.48,maxLat:45.94,minLon:-104.06,maxLon:-96.43},
+    ND:{minLat:45.94,maxLat:49.00,minLon:-104.05,maxLon:-96.55}, NE:{minLat:40.00,maxLat:43.00,minLon:-104.05,maxLon:-95.31},
+    KS:{minLat:37.00,maxLat:40.00,minLon:-102.05,maxLon:-94.59}, WI:{minLat:42.49,maxLat:47.08,minLon:-92.89,maxLon:-86.80},
+    MN:{minLat:43.50,maxLat:49.00,minLon:-97.21,maxLon:-89.60}, IA:{minLat:40.37,maxLat:43.50,minLon:-96.64,maxLon:-90.14},
+    IL:{minLat:36.97,maxLat:42.51,minLon:-91.52,maxLon:-87.02}, WY:{minLat:40.99,maxLat:45.01,minLon:-111.06,maxLon:-104.05},
+    ME:{minLat:43.06,maxLat:47.46,minLon:-71.08,maxLon:-66.95}, RI:{minLat:41.15,maxLat:42.02,minLon:-71.86,maxLon:-71.12},
+    MI:{minLat:41.70,maxLat:48.30,minLon:-90.42,maxLon:-82.12}, NV:{minLat:35.00,maxLat:42.00,minLon:-120.01,maxLon:-114.04},
+    NJ:{minLat:38.92,maxLat:41.36,minLon:-75.56,maxLon:-73.89}, DE:{minLat:38.45,maxLat:39.84,minLon:-75.79,maxLon:-75.04},
+    MD:{minLat:37.91,maxLat:39.73,minLon:-79.49,maxLon:-75.04}, VA:{minLat:36.54,maxLat:39.47,minLon:-83.68,maxLon:-75.24},
+    WV:{minLat:37.20,maxLat:40.64,minLon:-82.65,maxLon:-77.72}, OH:{minLat:38.40,maxLat:42.00,minLon:-84.82,maxLon:-80.52},
+    PA:{minLat:39.72,maxLat:42.27,minLon:-80.52,maxLon:-74.69}, MA:{minLat:41.18,maxLat:42.89,minLon:-73.51,maxLon:-69.93},
+    VT:{minLat:42.73,maxLat:45.02,minLon:-73.43,maxLon:-71.46}, NH:{minLat:42.70,maxLat:45.31,minLon:-72.56,maxLon:-70.70},
+    CT:{minLat:40.98,maxLat:42.05,minLon:-73.73,maxLon:-71.79}, NY:{minLat:40.48,maxLat:45.02,minLon:-79.77,maxLon:-71.86},
     FL:{minLat:24.40,maxLat:31.00,minLon:-87.63,maxLon:-80.03}, GA:{minLat:30.36,maxLat:35.00,minLon:-85.61,maxLon:-80.84},
-    TN:{minLat:34.98,maxLat:36.68,minLon:-90.31,maxLon:-81.65}
+    NC:{minLat:33.84,maxLat:36.59,minLon:-84.32,maxLon:-75.46}, SC:{minLat:32.03,maxLat:35.22,minLon:-83.35,maxLon:-78.54},
+    MS:{minLat:30.17,maxLat:35.00,minLon:-91.66,maxLon:-88.10}, AL:{minLat:30.22,maxLat:35.01,minLon:-88.47,maxLon:-84.89},
+    AR:{minLat:33.00,maxLat:36.50,minLon:-94.62,maxLon:-89.64}, LA:{minLat:28.93,maxLat:33.02,minLon:-94.04,maxLon:-88.82},
+    OK:{minLat:33.62,maxLat:37.00,minLon:-103.00,maxLon:-94.43}, TN:{minLat:34.98,maxLat:36.68,minLon:-90.31,maxLon:-81.65},
+    KY:{minLat:36.50,maxLat:39.15,minLon:-89.57,maxLon:-81.96}, IN:{minLat:37.77,maxLat:41.76,minLon:-88.10,maxLon:-84.78},
+    MO:{minLat:36.00,maxLat:40.61,minLon:-95.77,maxLon:-89.10}, CA:{minLat:32.5,maxLat:42.0,minLon:-124.5,maxLon:-114.1},
+    HI:{minLat:18.5,maxLat:22.5,minLon:-160.5,maxLon:-154.5}, TX:{minLat:25.8,maxLat:36.5,minLon:-106.7,maxLon:-93.5}
   };
+  // name + DOT label per state; alerts:1 = live DOT feed (42 states), 0 = mileposts only (8).
   var STATE_META = {
     WA:{name:"Washington",dot:"WSDOT",alerts:1}, OR:{name:"Oregon",dot:"TripCheck",alerts:1},
-    CA:{name:"California",dot:"Caltrans",alerts:1}, NV:{name:"Nevada",dot:"NVRoads",alerts:1},
-    UT:{name:"Utah",dot:"UDOT",alerts:1}, AZ:{name:"Arizona",dot:"AZ511",alerts:1},
-    ID:{name:"Idaho",dot:"ITD",alerts:1}, MT:{name:"Montana",dot:"MDT",alerts:1},
-    CO:{name:"Colorado",dot:"COtrip",alerts:1}, TX:{name:"Texas",dot:"DriveTexas",alerts:1},
-    IL:{name:"Illinois",dot:"IDOT",alerts:1}, OH:{name:"Ohio",dot:"OHGO",alerts:1},
-    FL:{name:"Florida",dot:"FL511",alerts:1}, GA:{name:"Georgia",dot:"511GA",alerts:1}, TN:{name:"Tennessee",dot:"TDOT",alerts:1}
+    ID:{name:"Idaho",dot:"ITD 511",alerts:1}, MT:{name:"Montana",dot:"MDT",alerts:1},
+    AZ:{name:"Arizona",dot:"AZ511",alerts:1}, UT:{name:"Utah",dot:"UDOT",alerts:1},
+    CO:{name:"Colorado",dot:"COtrip",alerts:1}, NM:{name:"New Mexico",dot:"NM 511",alerts:1},
+    AK:{name:"Alaska",dot:"AK 511",alerts:1}, SD:{name:"South Dakota",dot:"SD511",alerts:0},
+    ND:{name:"North Dakota",dot:"NDRoads",alerts:1}, NE:{name:"Nebraska",dot:"NE 511",alerts:1},
+    KS:{name:"Kansas",dot:"KanDrive",alerts:1}, WI:{name:"Wisconsin",dot:"511WI",alerts:1},
+    MN:{name:"Minnesota",dot:"511MN",alerts:1}, IA:{name:"Iowa",dot:"511IA",alerts:1},
+    IL:{name:"Illinois",dot:"IDOT",alerts:1}, WY:{name:"Wyoming",dot:"WYDOT",alerts:0},
+    ME:{name:"Maine",dot:"MaineDOT",alerts:1}, RI:{name:"Rhode Island",dot:"RIDOT",alerts:0},
+    MI:{name:"Michigan",dot:"Mi Drive",alerts:0}, NV:{name:"Nevada",dot:"NVRoads",alerts:1},
+    NJ:{name:"New Jersey",dot:"511NJ",alerts:1}, DE:{name:"Delaware",dot:"DelDOT",alerts:1},
+    MD:{name:"Maryland",dot:"MD 511",alerts:1}, VA:{name:"Virginia",dot:"VA 511",alerts:0},
+    WV:{name:"West Virginia",dot:"WV 511",alerts:0}, OH:{name:"Ohio",dot:"OHGO",alerts:1},
+    PA:{name:"Pennsylvania",dot:"511PA",alerts:0}, MA:{name:"Massachusetts",dot:"MassDOT",alerts:1},
+    VT:{name:"Vermont",dot:"VTrans",alerts:1}, NH:{name:"New Hampshire",dot:"NHDOT",alerts:1},
+    CT:{name:"Connecticut",dot:"CTDOT",alerts:1}, NY:{name:"New York",dot:"511NY",alerts:1},
+    FL:{name:"Florida",dot:"FL511",alerts:1}, GA:{name:"Georgia",dot:"511GA",alerts:1},
+    NC:{name:"North Carolina",dot:"NCDOT",alerts:1}, SC:{name:"South Carolina",dot:"511SC",alerts:1},
+    MS:{name:"Mississippi",dot:"MDOTtraffic",alerts:1}, AL:{name:"Alabama",dot:"ALGO",alerts:0},
+    AR:{name:"Arkansas",dot:"IDrive",alerts:1}, LA:{name:"Louisiana",dot:"511LA",alerts:1},
+    OK:{name:"Oklahoma",dot:"OK 511",alerts:1}, TN:{name:"Tennessee",dot:"SmartWay",alerts:1},
+    KY:{name:"Kentucky",dot:"goKY",alerts:1}, IN:{name:"Indiana",dot:"INDOT",alerts:1},
+    MO:{name:"Missouri",dot:"MoDOT",alerts:1}, CA:{name:"California",dot:"QuickMap",alerts:1},
+    HI:{name:"Hawaii",dot:"HI DOT",alerts:1}, TX:{name:"Texas",dot:"DriveTexas",alerts:1}
   };
 
   function detectState(lat,lon){ for(var s in STATE_BOUNDS){ var b=STATE_BOUNDS[s];
@@ -163,10 +203,13 @@
     var dir=data.direction?(" "+data.direction):"";
 
     function alertCard(a){
+      var dtxt=a.dist==null?"":(a.dist<1?"<1 mi":Math.round(a.dist)+" mi");
+      var mpTxt=(a.mp!=null&&a.mp!=="")?(' &middot; MP '+esc(String(a.mp))):'';
       return '<div class="mc-alert '+a.cls+'"><div class="body">'
-        +'<div class="type">'+esc(a.label)+'</div>'
+        +'<div class="type-row"><span class="type">'+esc(a.label)+'</span>'
+        +(dtxt?'<span class="dist">'+dtxt+'</span>':'')+'</div>'
         +(a.desc?'<div class="desc">'+esc(a.desc)+'</div>':'')
-        +'<div class="meta"><span>'+esc(a.route||"")+'</span>'
+        +'<div class="meta"><span>'+esc(a.route||"")+mpTxt+'</span>'
         +'<span>'+(a.source?esc(a.source):'')+(a.updated!=null?(a.source?' &middot; ':'')+rel(a.updated):'')+'</span></div>'
         +'</div></div>';
     }
@@ -189,18 +232,19 @@
 
     var heroHtml = data.milepost!=null ?
       '<div class="mc-hero"><div class="label">Nearest mile marker</div>'
-      +'<div class="mc-mp"><span class="num">'+data.milepost+'</span><span class="unit">MP</span></div>'
+      +'<div class="mc-mp"><span class="num">'+data.milepost.toFixed(1)+'</span><span class="unit">MP</span></div>'
       +'<div class="mc-route"><strong>'+esc(data.route||"")+dir+'</strong>'
+      +(data.speed!=null?'<span class="sep">&middot;</span><span class="spd">'+Math.round(data.speed)+' mph</span>':'')
       +'<span class="sep">|</span><span class="state">'+esc(data.state||"")+'</span></div></div>' : '';
 
     el("mc-content").innerHTML = heroHtml + alertsBlock;
     el("mc-updated").textContent = "Updated "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
   }
 
-  function loadFor(lat, lon, bearing, isLive){
+  function loadFor(lat, lon, bearing, isLive, speed){
     var state=detectState(lat,lon), meta=state?STATE_META[state]:null;
     if(!state){ render({state:"this area",milepost:null,alerts:[],alertsAvail:false}, isLive); return; }
-    var out={state:meta.name,route:"",direction:bearingToDir(bearing),milepost:null,
+    var out={state:meta.name,route:"",direction:bearingToDir(bearing),speed:(speed!=null?speed:null),milepost:null,
              alertsAvail:!!meta.alerts,alerts:[]};
     var jobs=[
       fetch(MILECHECK_API+"/mileposts?state="+state).then(function(r){return r.json();}).then(function(mps){
@@ -209,11 +253,26 @@
         for(var i=0;i<mps.length;i++){ var m=mps[i];
           var la=m.lat!=null?m.lat:m.latitude, lo=m.lon!=null?m.lon:m.longitude;
           if(la==null||lo==null) continue;
-          var d=haversine(lat,lon,la,lo);
-          if(d<bd){ bd=d; best=m; }
-          if(/^I-/.test(normalizeRoad(m.highway||m.route||""))&&d<md){ md=d; major=m; } }
+          m._d=haversine(lat,lon,la,lo);
+          if(m._d<bd){ bd=m._d; best=m; }
+          if(/^I-/.test(normalizeRoad(m.highway||m.route||""))&&m._d<md){ md=m._d; major=m; } }
         var pick=(major&&md<=bd+2.0)?major:best;
-        if(pick){ out.milepost=(pick.milepost!=null?pick.milepost:pick.mile)|0; out.route=normalizeRoad(pick.highway||pick.route||""); }
+        if(!pick) return;
+        out.route=normalizeRoad(pick.highway||pick.route||"");
+        var mileOf=function(m){ return m.milepost!=null?m.milepost:m.mile; };
+        // Interpolate a 1-decimal position from the two nearest markers on this
+        // route with different whole-mile values (mirrors the phone app).
+        var same=mps.filter(function(m){ return m._d!=null && normalizeRoad(m.highway||m.route||"")===out.route && mileOf(m)!=null; })
+                    .sort(function(x,y){ return x._d-y._d; });
+        var a=same[0], b=null;
+        if(a){ var ra=Math.round(mileOf(a));
+          for(var k=1;k<same.length;k++){ if(Math.round(mileOf(same[k]))!==ra){ b=same[k]; break; } } }
+        if(a&&b&&Math.abs(Math.round(mileOf(a))-Math.round(mileOf(b)))<=3){
+          var ma=Math.round(mileOf(a)), mb=Math.round(mileOf(b));
+          var lom=Math.min(ma,mb), him=Math.max(ma,mb);
+          var lod=(ma<mb)?a._d:b._d, tot=a._d+b._d, frac=tot>0?lod/tot:0;
+          out.milepost=Math.round((lom+frac*(him-lom))*10)/10;
+        } else if(a){ out.milepost=Math.round(mileOf(a)*10)/10; }
       }).catch(function(){})
     ];
     if(out.alertsAvail){
@@ -228,6 +287,7 @@
           var c=classify(txt, inc["event-type-id"]);
           out.alerts.push({ cls:c.cls, label:c.label, sev:c.sev,
             route:normalizeRoad(loc["route-id"]||loc["location-name"]||""),
+            mp:sl["start-mile-marker"],
             desc:((inc["impact-desc"]||inc.description||inc.headline||"").replace(/<[^>]+>/g," ").trim()).slice(0,160),
             source:meta.dot, updated:minsAgo(inc["last-updated"]||inc["update-time"]), dist:dist });
         });
@@ -253,7 +313,7 @@
           var pick=null;
           (result||[]).forEach(function(r){ if(r&&r.latitude!=null&&r.longitude!=null&&(r.latitude||r.longitude)){
             if(!pick||(r.dateTime||"")>(pick.dateTime||"")) pick=r; } });
-          resolve(pick?{lat:pick.latitude,lon:pick.longitude,bearing:pick.bearing}:null);
+          resolve(pick?{lat:pick.latitude,lon:pick.longitude,bearing:pick.bearing,speed:pick.speed!=null?Math.round(pick.speed*0.621371):null}:null);
         }, function(){ resolve(null); });
       }catch(e){ resolve(null); }
     });
@@ -261,29 +321,35 @@
 
   function load(api, state){
     getVehiclePosition(api, state).then(function(pos){
-      if(pos){ loadFor(pos.lat, pos.lon, pos.bearing, true); }
-      else { loadFor(DEMO_POS.lat, DEMO_POS.lon, DEMO_POS.bearing, false); }
+      if(pos){ loadFor(pos.lat, pos.lon, pos.bearing, true, pos.speed); }
+      else { loadFor(DEMO_POS.lat, DEMO_POS.lon, DEMO_POS.bearing, false, DEMO_POS.speed); }
     });
   }
 
   /* ---- Geotab Add-In lifecycle ---------------------------------- */
-  if(typeof geotab==="undefined"){ window.geotab={}; }
+  var REFRESH_MS = 60000;  // re-pull position + DOT alerts every 60s while the panel is open
+  var STANDALONE = (typeof geotab==="undefined");
+  if(STANDALONE){ window.geotab={}; }
   geotab.addin = geotab.addin || {};
   geotab.addin.milecheck = function(){
-    var api, st;
+    var api, st, timer;
     return {
       initialize:function(freshApi, state, callback){ api=freshApi; st=state; if(callback) callback(); },
-      focus:function(freshApi, state){ api=freshApi||api; st=state||st; load(api, st); },
-      blur:function(){}
+      focus:function(freshApi, state){ api=freshApi||api; st=state||st; load(api, st);
+        if(timer) clearInterval(timer); timer=setInterval(function(){ load(api, st); }, REFRESH_MS); },
+      blur:function(){ if(timer){ clearInterval(timer); timer=null; } }
     };
   };
 
-  /* ---- Standalone preview (browser, outside MyGeotab) ----------- */
-  document.addEventListener("DOMContentLoaded", function(){
-    setTimeout(function(){
-      if(el("mc-content").querySelector(".mc-skeleton")){ load(null, null); }
-    }, 400);
-  });
+  // Standalone preview: opened directly in a browser (not embedded in MyGeotab),
+  // the host never calls focus(), so render demo mode (DEMO_POS) ourselves and
+  // refresh on the same cadence. Skipped inside MyGeotab (geotab is defined there).
+  if(STANDALONE){
+    var run=function(){ load(null, null); };
+    if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", run); }
+    else { run(); }
+    setInterval(run, REFRESH_MS);
+  }
 })();
 </script>
 </body>
