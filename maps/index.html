@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Maps — wildfires, mile markers, road closures | MileCheck</title>
+  <meta name="description" content="MileCheck's free live maps: US wildfire map with road closures, the 50-state mile marker map, and more highway intelligence maps on the way.">
+
+  <meta property="og:title" content="MileCheck Live Maps">
+  <meta property="og:description" content="Live US wildfire map, the 50-state mile marker map, and more highway intelligence maps.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner.png">
+  <meta property="og:url" content="https://milecheckapp.com/maps/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    .maps-hero{max-width:1160px;margin:0 auto;padding:38px 20px 8px;}
+    .maps-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .maps-hero h1 .accent{color:#00A86B;}
+    .maps-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
+    .maps-grid{max-width:1160px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+    .mapcard{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .15s;}
+    a.mapcard:hover{border-color:#0E1116;}
+    .mapcard .mtag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
+    .mtag.live{color:#0f7a4f;}.mtag.soon{color:#8A939B;}
+    .mapcard h2{font-size:19px;font-weight:800;letter-spacing:-0.01em;}
+    .mapcard p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-top:7px;flex:1;}
+    .mapcard .go{margin-top:14px;font-weight:700;font-size:13.5px;color:#0E1116;border-bottom:1px solid #0E1116;align-self:flex-start;}
+    .mapcard.dis{background:#FAFAF8;}
+    .mapcard.dis h2{color:#5b6670;}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="./" class="active">Maps</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="maps-hero">
+    <h1>Live <span class="accent">maps</span></h1>
+    <p class="sub">Free, live highway intelligence — built on the same data that powers the MileCheck app. New maps are added as we build them.</p>
+  </div>
+
+  <div class="maps-grid">
+    <a class="mapcard" href="../fire/">
+      <span class="mtag live">● Live</span>
+      <h2>US Wildfire Map</h2>
+      <p>Every active wildfire in the country — acres, percent containment, and burned-area perimeters from NIFC — plus the road closures fires cause, overlaid from live state DOT data. State selector and "fires near me."</p>
+      <span class="go">Open the fire map →</span>
+    </a>
+
+    <a class="mapcard" href="../index.html#livemap">
+      <span class="mtag live">● Live</span>
+      <h2>Mile Marker Map</h2>
+      <p>The 50-state mile marker map — browse any state's highways and see the actual milepost data the app runs on. The one number 911, tow dispatch, and DOT crews all use.</p>
+      <span class="go">Open the mile marker map →</span>
+    </a>
+
+    <div class="mapcard dis">
+      <span class="mtag soon">Coming next</span>
+      <h2>Road Closures Map</h2>
+      <p>Every live highway closure in 48 states on one national map — the view no single state DOT site can give you.</p>
+    </div>
+
+    <div class="mapcard dis">
+      <span class="mtag soon">Coming</span>
+      <h2>Seattle Bridges</h2>
+      <p>Live drawbridge status for the Fremont, Ballard, Montlake, South Park, and 1st Ave S bridges.</p>
+    </div>
+
+    <div class="mapcard dis">
+      <span class="mtag soon">Coming</span>
+      <h2>Border Wait Times</h2>
+      <p>Live waits at US, Canada, and Mexico crossings — already in the app, coming to the web.</p>
+    </div>
+
+    <div class="mapcard dis">
+      <span class="mtag soon">Winter</span>
+      <h2>Chain Laws &amp; Pass Conditions</h2>
+      <p>Chain requirements and mountain-pass conditions across the West, when the season turns.</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+</body>
+</html>
