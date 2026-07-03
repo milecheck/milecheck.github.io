@@ -210,7 +210,18 @@ function envParam(){const b=map.getBounds();
 function render(){
   fireLayer.clearLayers();
   const z=map.getZoom();
-  const labeled=z>=6?new Set(FIRES.slice(0,8).map(f=>f.name)):new Set();
+  // label the biggest fires, but skip any whose label would collide with an
+  // already-labeled neighbor (greedy, biggest-first, ~110px min spacing)
+  const labeled=new Set();
+  if(z>=6){
+    const placed=[];
+    for(const f of FIRES){
+      if(labeled.size>=10)break;
+      const pt=map.latLngToContainerPoint([f.lat,f.lon]);
+      if(placed.some(q=>Math.abs(q.x-pt.x)<110&&Math.abs(q.y-pt.y)<34))continue;
+      placed.push(pt);labeled.add(f.name);
+    }
+  }
   FIRES.forEach((f,i)=>{
     const out=f.cont!=null&&f.cont>=100;
     const m=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="fire-ic${out?' out':''}">🔥</div>`,iconSize:[26,26],iconAnchor:[13,13]})}).addTo(fireLayer);
