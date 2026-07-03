@@ -226,7 +226,7 @@ function render(){
     const out=f.cont!=null&&f.cont>=100;
     const m=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="fire-ic${out?' out':''}">🔥</div>`,iconSize:[26,26],iconAnchor:[13,13]})}).addTo(fireLayer);
     m.bindPopup(popupHtml(f),{maxWidth:280});
-    m.on('click',()=>{map.flyTo([f.lat,f.lon],Math.max(map.getZoom(),11),{duration:.8});});
+    m.on('click',()=>{rememberView();map.flyTo([f.lat,f.lon],Math.max(map.getZoom(),11),{duration:.8});});
     if(labeled.has(f.name)){
       const contTxt=f.cont!=null?` · ${Math.round(f.cont)}%`:"";
       L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="lblwrap"><span class="fire-lbl${f.rx?' rxc':''}">${f.name} · ${Math.round(f.ac).toLocaleString()} ac${contTxt}</span></div>`,iconSize:[200,20],iconAnchor:[100,-12]}),interactive:false}).addTo(fireLayer);
@@ -251,6 +251,7 @@ function render(){
     </div>`;}).join("");
   rows.querySelectorAll('.frow').forEach(el=>el.onclick=()=>{
     const f=FIRES[+el.dataset.i]; if(!f)return;
+    rememberView();
     map.flyTo([f.lat,f.lon],11,{duration:.9});
     L.popup({maxWidth:280}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map);
   });
@@ -292,6 +293,16 @@ async function loadPerimeters(env){
       L.geoJSON(gj,{style:{color:'#cf3320',weight:2,fillColor:'#cf3320',fillOpacity:.26},interactive:false}).addTo(perimLayer);
   }catch(e){}
 }
+// zoom-in on a fire, zoom back out when its popup closes — so the rest of the
+// fires come back without the user having to pan out themselves
+let prevView=null;
+function rememberView(){ if(!prevView) prevView={c:map.getCenter(),z:map.getZoom()}; }
+map.on('popupclose',()=>{
+  setTimeout(()=>{             // wait a beat: if another popup opened (fire-to-fire click), don't restore
+    if(!map._popup && prevView){ map.flyTo(prevView.c,prevView.z,{duration:.8}); prevView=null; }
+  },250);
+});
+
 let mvTimer=null;
 map.on('moveend',()=>{clearTimeout(mvTimer);mvTimer=setTimeout(loadFires,400);});
 document.getElementById('nearMe').onclick=()=>{
