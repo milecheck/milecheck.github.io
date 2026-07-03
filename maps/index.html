@@ -33,6 +33,17 @@
     .mapcard .go{margin-top:14px;font-weight:700;font-size:13.5px;color:#0E1116;border-bottom:1px solid #0E1116;align-self:flex-start;}
     .mapcard.dis{background:#FAFAF8;}
     .mapcard.dis h2{color:#5b6670;}
+  
+    /* Responsive mobile nav (same rules as blog.css) */
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
   </style>
 </head>
 <body>
