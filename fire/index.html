@@ -292,7 +292,12 @@ async function closuresFor(st){
   if(c&&Date.now()-c.t<300000)return c.list;
   try{
     const d=await fetch(WORKER+"/incidents?state="+st,{cache:"no-store"}).then(r=>r.json());
-    const list=(d["incident-reports"]||[]).filter(r=>(r["event-type-id"]||"")==="CL").map(r=>{
+    const isClosed=r=>{
+      if((r["event-type-id"]||"")==="CL")return true;
+      const t=((r.headline||"")+" "+(r["impact-desc"]||"")).toLowerCase();
+      return /\bclos(ed|ure)\b/.test(t)&&!/rest area|lane|shoulder|ramp|sidewalk/.test(t);
+    };
+    const list=(d["incident-reports"]||[]).filter(isClosed).map(r=>{
       const sl=(r.location||{})["start-location"]||{};
       const lat=+sl["start-lat"],lon=+sl["start-long"];
       if(!isFinite(lat)||!isFinite(lon)||!lat)return null;
@@ -305,8 +310,8 @@ async function closuresFor(st){
 async function loadClosures(){
   const z=map.getZoom(), lg=document.getElementById('clLegend');
   closureLayer.clearLayers();
-  if(z<6){lg.style.display="none";return;}   // closures render at state-level zoom
-  const sts=statesInView().slice(0,4);       // cap: at z>=6 you see at most a few states
+  if(z<5){lg.style.display="none";return;}   // closures render at state-level zoom
+  const sts=statesInView().slice(0,6);       // cap the fan-out at wide state views
   const lists=await Promise.all(sts.map(closuresFor));
   let n=0;
   lists.flat().forEach(c=>{
