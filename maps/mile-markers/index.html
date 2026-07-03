@@ -83,7 +83,15 @@
       var mapEl=document.getElementById('mile-map');
       if(!mapEl||typeof L==='undefined') return;
       var map=L.map('mile-map',{scrollWheelZoom:true}).setView([47.3,-120.6],6);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:18}).addTo(map);
+      var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+      var baseLight=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:18});
+      var baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS',maxZoom:14});
+      var baseSat=L.layerGroup([
+        L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri',maxZoom:17}),
+        L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
+      ]);
+      baseLight.addTo(map);
+      L.control.layers({'Light':baseLight,'Terrain':baseTerrain,'Satellite':baseSat},null,{position:'bottomright',collapsed:true}).addTo(map);
       var cluster=L.markerClusterGroup({chunkedLoading:true,maxClusterRadius:50});
       map.addLayer(cluster);
       var sel=document.getElementById('mile-map-state');
