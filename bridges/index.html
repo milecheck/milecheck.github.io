@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seattle Drawbridge Status — is the bridge up right now? | MileCheck</title>
+  <meta name="description" content="Live status for Seattle's drawbridges — Fremont, Ballard, Montlake, South Park, and 1st Ave S. See if the bridge is up right now, how long it's been up, and when it went back down.">
+
+  <meta property="og:title" content="Seattle Drawbridge Status — live">
+  <meta property="og:description" content="Is the Fremont Bridge up right now? Live status for Seattle's five drawbridges, updated every 30 seconds.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/bridges/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Is the Fremont Bridge up right now?","acceptedAnswer":{"@type":"Answer","text":"This page shows live raised/lowered status for the Fremont Bridge and Seattle's other drawbridges, refreshed every 30 seconds from Seattle DOT's bridge feed. A raised bridge typically stays up 5 to 15 minutes for boat traffic."}},
+      {"@type":"Question","name":"Which Seattle bridges does this page track?","acceptedAnswer":{"@type":"Answer","text":"The five Seattle drawbridges with live status: Fremont, Ballard, Montlake, South Park, and 1st Ave S. The MileCheck app shows the same bridges on its live map and lets you follow a bridge for status."}},
+      {"@type":"Question","name":"How long do Seattle drawbridge openings last?","acceptedAnswer":{"@type":"Answer","text":"Most openings last 5 to 15 minutes. During boating season openings are frequent on the Ship Canal bridges (Fremont, Ballard, Montlake), and federal rules generally give boats priority except during posted rush-hour restrictions."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .br-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .br-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .br-hero h1 .accent{color:#7C3AED;}
+    .br-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
+    .br-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:.55fr 1.45fr;gap:16px;}
+    @media(max-width:860px){.br-wrap{grid-template-columns:1fr;}}
+    .br-list{display:flex;flex-direction:column;gap:10px;}
+    .br-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+    .br-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .br-card.up{border-color:#DC2626;background:#FEF5F5;}
+    .br-card.up .br-dot{background:#DC2626;animation:pulse 1.6s infinite;}
+    .br-card.recent .br-dot{background:#F59E0B;}
+    .br-card.down .br-dot{background:#0f7a4f;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .br-nm{font-weight:800;font-size:15.5px;}
+    .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
+    .br-card.up .br-st{color:#DC2626;font-weight:800;}
+    .br-card.recent .br-st{color:#b45309;font-weight:700;}
+    .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:56vh;background:#eef0e9;}
+    #brmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .br-badge{background:#fff;border:2px solid #7C3AED;color:#0E1116;font-weight:800;font-size:11px;padding:3px 9px;border-radius:8px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.25);}
+    .br-badge.upb{background:#DC2626;border-color:#fff;color:#fff;}
+    .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
+    .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .br-notes b{color:#0E1116;}
+    .br-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;margin-top:2px;}
+    .br-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .br-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .br-embed{max-width:1160px;margin:0 auto 8px;padding:0 20px;}
+    .br-embed details{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 18px;}
+    .br-embed summary{font-weight:800;font-size:14px;cursor:pointer;}
+    .br-embed pre{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:10px;padding:12px;font:12px/1.5 'JetBrains Mono',monospace;overflow-x:auto;margin:10px 0;}
+    .br-embed p{color:#5b6670;font-size:13px;line-height:1.55;}
+
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/" class="active">Maps</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="br-hero">
+    <h1>Seattle <span class="accent">drawbridge status</span> — live</h1>
+    <p class="sub">Is the bridge up right now? Live raised/lowered status for Seattle's five drawbridges, straight from the city's bridge feed — refreshed every 30 seconds. Openings usually last 5–15 minutes.</p>
+  </div>
+
+  <div class="br-wrap">
+    <div class="br-list" id="brList">
+      <div class="br-card down"><span class="br-dot"></span><div><div class="br-nm">Loading…</div><div class="br-st">Checking bridge feed</div></div></div>
+      <div class="br-cta">
+        <h3>Get bridge alerts in the app</h3>
+        <p>The MileCheck app shows these bridges live on the map — follow one and see its status before you commit to the route.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+      <span class="br-updated" id="brUpdated">—</span>
+    </div>
+    <div class="br-mapbox"><div id="brmap"></div></div>
+  </div>
+
+  <div class="br-embed" style="margin-top:16px;">
+    <details>
+      <summary>Embed this bridge status on your site (free)</summary>
+      <p>News sites, neighborhood blogs, and community pages are welcome to embed this page. Keep the attribution visible and you're set. Questions: info@milecheckapp.com</p>
+      <pre>&lt;iframe src="https://milecheckapp.com/bridges/" width="100%" height="620"
+  style="border:1px solid #E5E5E5;border-radius:12px;" title="Seattle drawbridge status — MileCheck"&gt;&lt;/iframe&gt;</pre>
+    </details>
+  </div>
+
+  <div class="br-notes">
+    <p><b>How it works:</b> status comes from Seattle DOT's live bridge feed. A <b style="color:#DC2626;">red</b> bridge is raised right now; <b style="color:#b45309;">amber</b> means it went down within the last 20 minutes (traffic may still be clearing); <b style="color:#0f7a4f;">green</b> is down and open to traffic. The University and Lower Spokane St bridges don't publish live status. During boating season, Ship Canal bridges open frequently — federal rules give boats priority outside posted rush-hour restrictions.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../fire/">US wildfire map</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Bridge status data from Seattle DOT; refresh timing may vary.</p>
+    </div>
+  </footer>
+
+<script>
+const BRIDGES=[
+  {key:'fremont',  name:'Fremont Bridge',  lat:47.6567, lon:-122.3501},
+  {key:'ballard',  name:'Ballard Bridge',  lat:47.6584, lon:-122.3764},
+  {key:'montlake', name:'Montlake Bridge', lat:47.6470, lon:-122.3048},
+  {key:'south',    name:'South Park Bridge', lat:47.5285, lon:-122.3133},
+  {key:'1st',      name:'1st Ave S Bridge',  lat:47.5405, lon:-122.3539},
+];
+const API='https://milepost-proxy.leahgerber93.workers.dev/bridge-status';
+const RECENT_MIN=20;
+
+const map=L.map('brmap',{scrollWheelZoom:false});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'Esri · bridge status: Seattle DOT via MileCheck',maxZoom:17}).addTo(map);
+map.fitBounds([[47.512,-122.40],[47.675,-122.29]],{padding:[18,18]});
+let markers=[];
+
+function ago(ts){const m=Math.max(0,Math.round((Date.now()/1000-ts)/60));return m<1?'just now':m+' min';}
+function matchKey(id){id=(id||'').toLowerCase();return BRIDGES.find(b=>id.includes(b.key));}
+
+async function refresh(){
+  let data={raised:[],raisedAt:{},loweredAt:{}};
+  try{const r=await fetch(API,{cache:'no-store'});if(r.ok)data=await r.json();}catch(e){}
+  const state={};
+  BRIDGES.forEach(b=>state[b.key]={tier:'down',detail:'Down — open to traffic'});
+  (data.raised||[]).forEach(id=>{const b=matchKey(id);if(b){const t=(data.raisedAt||{})[id];
+    state[b.key]={tier:'up',detail:t?('UP — raised '+ago(t)+' ago'):'UP right now'};}});
+  Object.entries(data.loweredAt||{}).forEach(([id,ts])=>{const b=matchKey(id);
+    if(b&&state[b.key].tier==='down'&&(Date.now()/1000-ts)<RECENT_MIN*60){
+      state[b.key]={tier:'recent',detail:'Went down '+ago(ts)+' ago — traffic clearing'};}});
+
+  // list
+  const list=document.getElementById('brList');
+  list.querySelectorAll('.br-card.dyn').forEach(n=>n.remove());
+  const first=list.firstChild;
+  // remove loading card
+  const loading=list.querySelector('.br-card:not(.dyn)');if(loading&&loading.querySelector('.br-nm').textContent==='Loading…')loading.remove();
+  const frag=document.createDocumentFragment();
+  BRIDGES.slice().sort((a,b)=>{const r=t=>t==='up'?0:t==='recent'?1:2;return r(state[a.key].tier)-r(state[b.key].tier);})
+    .forEach(b=>{
+      const st=state[b.key];
+      const el=document.createElement('div');
+      el.className='br-card dyn '+st.tier;
+      el.innerHTML='<span class="br-dot"></span><div><div class="br-nm">'+b.name+'</div><div class="br-st">'+st.detail+'</div></div>';
+      frag.appendChild(el);
+    });
+  list.insertBefore(frag,list.querySelector('.br-cta'));
+
+  // markers
+  markers.forEach(m=>map.removeLayer(m));markers=[];
+  BRIDGES.forEach(b=>{
+    const st=state[b.key];
+    const up=st.tier==='up';
+    const ic=L.divIcon({className:'',html:'<div class="br-badge'+(up?' upb':'')+'">'+b.name.replace(' Bridge','')+(up?' · UP':'')+'</div>',iconAnchor:[40,12]});
+    const m=L.marker([b.lat,b.lon],{icon:ic}).addTo(map);
+    m.bindPopup('<b>'+b.name+'</b><br>'+st.detail);
+    markers.push(m);
+  });
+  document.getElementById('brUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · refreshes every 30s';
+}
+refresh();
+setInterval(refresh,30000);
+</script>
+</body>
+</html>
