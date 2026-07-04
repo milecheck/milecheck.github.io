@@ -54,8 +54,13 @@
     .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:56vh;background:#eef0e9;}
     #brmap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
-    .br-badge{background:#fff;border:2px solid #7C3AED;color:#0E1116;font-weight:800;font-size:11px;padding:3px 9px;border-radius:8px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.25);}
-    .br-badge.upb{background:#DC2626;border-color:#fff;color:#fff;}
+    .bmk{display:flex;flex-direction:column;align-items:center;gap:3px;pointer-events:auto;}
+    .bmk-ic{width:36px;height:36px;border-radius:50%;background:#fff;border:2.5px solid #7C3AED;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.28);}
+    .bmk.bi-up .bmk-ic{background:#DC2626;border-color:#fff;animation:pulse 1.5s infinite;}
+    .bmk.bi-rec .bmk-ic{background:#F59E0B;border-color:#fff;}
+    .bmk-nm{background:#fff;border:1.5px solid #E5E5E5;color:#0E1116;font-weight:800;font-size:11px;padding:2px 8px;border-radius:8px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+    .bmk.bi-up .bmk-nm{background:#DC2626;color:#fff;border-color:#fff;}
+    .bmk.bi-rec .bmk-nm{background:#F59E0B;color:#fff;border-color:#fff;}
     .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
     .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
     .br-notes b{color:#0E1116;}
@@ -165,7 +170,7 @@
 <script>
 const BRIDGES=[
   {key:'fremont',  name:'Fremont Bridge',  lat:47.6567, lon:-122.3501},
-  {key:'ballard',  name:'Ballard Bridge',  lat:47.6584, lon:-122.3764},
+  {key:'ballard',  name:'Ballard Bridge',  lat:47.6584, lon:-122.3764, labelUp:true},
   {key:'montlake', name:'Montlake Bridge', lat:47.6470, lon:-122.3048},
   {key:'south',    name:'South Park Bridge', lat:47.5285, lon:-122.3133},
   {key:'1st',      name:'1st Ave S Bridge',  lat:47.5405, lon:-122.3539},
@@ -212,10 +217,18 @@ async function refresh(){
 
   // markers
   markers.forEach(m=>map.removeLayer(m));markers=[];
+  const svgClosed=c=>'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h20"/><path d="M6 16v-5m12 5v-5"/><path d="M6 11c2.2-4 9.8-4 12 0"/></svg>';
+  const svgOpen='<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h3.5m13 0H22"/><path d="M6.5 16l4.2-8m6.8 8l-4.2-8"/><path d="M10 19.5l1.5-1.2 1.5 1.2 1.5-1.2 1.5 1.2"/></svg>';
   BRIDGES.forEach(b=>{
     const st=state[b.key];
-    const up=st.tier==='up';
-    const ic=L.divIcon({className:'',html:'<div class="br-badge'+(up?' upb':'')+'">'+b.name.replace(' Bridge','')+(up?' · UP':'')+'</div>',iconAnchor:[40,12]});
+    const cls=st.tier==='up'?'bi-up':(st.tier==='recent'?'bi-rec':'bi-down');
+    const glyph=st.tier==='up'?svgOpen:svgClosed(st.tier==='recent'?'#fff':'#7C3AED');
+    const label=b.name.replace(' Bridge','')+(st.tier==='up'?' · UP':'');
+    const inner=b.labelUp
+      ?'<span class="bmk-nm">'+label+'</span><span class="bmk-ic">'+glyph+'</span>'
+      :'<span class="bmk-ic">'+glyph+'</span><span class="bmk-nm">'+label+'</span>';
+    const ic=L.divIcon({className:'',iconSize:[110,60],iconAnchor:[55,b.labelUp?42:24],
+      html:'<div class="bmk '+cls+'">'+inner+'</div>'});
     const m=L.marker([b.lat,b.lon],{icon:ic}).addTo(map);
     m.bindPopup('<b>'+b.name+'</b><br>'+st.detail);
     markers.push(m);
