@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highway Mile Markers in Arizona — MileCheck</title>
+  <meta name="description" content="How mile markers work on Arizona highways — I-10, I-17's famous 194 quirk, the kilometer-posted I-19, monsoon dust storms and Flagstaff snow — plus live AZ511 alerts, all in one app.">
+
+  <meta property="og:title" content="Highway Mile Markers in Arizona">
+  <meta property="og:description" content="Mile markers on I-10, I-17, and Arizona's dust-storm corridor, plus live AZ511 alerts, in real time.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/blog/mile-markers-arizona.html">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="blog.css">
+  <style>
+    .strip-map{margin:1.8rem 0 2rem;}
+    .strip-map svg{width:100%;height:auto;display:block;}
+    .strip-map .sm-city{font:600 13px Inter,sans-serif;fill:#0E1116;text-anchor:middle;}
+    .strip-map .sm-mp{font:600 11px 'JetBrains Mono',monospace;fill:#8A939B;text-anchor:middle;}
+    .strip-map .sm-mp-l{text-anchor:start;}
+    .strip-map .sm-mp-r{text-anchor:end;}
+    .strip-map .sm-pin{font:700 12px Inter,sans-serif;fill:#fff;text-anchor:middle;}
+    .strip-map figcaption{font:400 0.85rem/1.5 Inter,sans-serif;color:#5b6670;margin:0.8rem 0 0;text-align:center;}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How do mile markers work on Arizona highways?","acceptedAnswer":{"@type":"Answer","text":"Arizona's mileposts count up from where a route enters the state on its west or south side — I-10 counts up from the California line and crosses into New Mexico near mile 391. One famous exception: I-17's mileposts start at 194 in Phoenix, not zero, because they carry over from the older highway numbering it replaced."}},
+      {"@type":"Question","name":"Why is I-19 in Arizona measured in kilometers?","acceptedAnswer":{"@type":"Answer","text":"I-19 from Tucson to Nogales is the only interstate in America posted in kilometers instead of miles — a leftover from a 1970s metric pilot. Its exit numbers and roadside posts are metric, which is exactly the kind of quirk that makes knowing your real position matter."}},
+      {"@type":"Question","name":"Does MileCheck have live Arizona AZ511 alerts?","acceptedAnswer":{"@type":"Answer","text":"Yes. MileCheck pulls live road alerts from ADOT's AZ511 system — closures, crashes, construction, and dust or weather hazards — plus readings from ADOT roadside weather stations, tied to the mile marker and direction. Mile markers cover every Arizona highway and work offline."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="./" class="active">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="article-wrap">
+      <a href="./" class="article-back">All articles</a>
+
+      <p class="article-eyebrow">State guide</p>
+      <h1 class="article-title">Highway Mile Markers in Arizona</h1>
+      <div class="article-meta">
+        <span>July 6, 2026</span>
+        <span>4 min read</span>
+      </div>
+
+      <div class="article-body">
+        <p>Arizona's highways run through some of the most extreme driving conditions in the country — hundred-mile desert stretches, monsoon dust storms, and a two-mile elevation swing from Phoenix to Flagstaff. All of it runs on mile markers. Here's how they work across the state, where they matter most, and how to see your exact one plus live AZ511 conditions in real time.</p>
+
+        <h2>How Arizona numbers its highways</h2>
+        <p>Arizona's mileposts count up from where a route enters the state on its west or south side — I-10 starts near the California line and crosses into New Mexico around mile 391. But Arizona also has two of the strangest numbering quirks in America. I-17's mileposts start at 194 in Phoenix, not zero, because they carry over from the older highway it replaced — so there is no I-17 milepost 1. And I-19 from Tucson to Nogales is posted in kilometers, the only metric interstate in the country. Quirks like these are exactly why MileCheck reads the real roadside data instead of guessing. Mile marker data for every Arizona highway is bundled into the app and works offline.</p>
+
+        <h2>The corridors people actually drive</h2>
+        <ul>
+          <li><strong>I-10</strong> crosses the state for about 391 miles — California line, Phoenix, Tucson, then out to New Mexico.</li>
+          <li><strong>I-40</strong> runs the old Route 66 corridor through Kingman, Williams, and Flagstaff, about 359 miles.</li>
+          <li><strong>I-17</strong> climbs from Phoenix at 1,100 feet to Flagstaff at 7,000 — mileposts 194 to 341.</li>
+          <li><strong>I-8</strong> heads for San Diego out of Casa Grande through Yuma; <strong>US-93</strong> is the Vegas run northwest of Wickenburg; <strong>US-60</strong> and <strong>SR-87</strong> carry cabin traffic into the high country; the <strong>Loop 101, 202, and 303</strong> freeways ring Phoenix.</li>
+        </ul>
+
+        <h2>Where mile markers matter most: dust and elevation</h2>
+        <p>The stretch of I-10 between Phoenix and Tucson around Picacho Peak — roughly mileposts 211 to 219 — is one of the most dangerous dust-storm corridors in the country. When a wall of dust rolls across the interstate, visibility can go from clear to zero in seconds, and ADOT's guidance is to pull completely off, lights out, foot off the brake. Knowing your milepost is how you tell dispatch, your fleet, or the person coming behind you exactly where the wall is. On the other end of the state, I-17's long grades and Flagstaff's seven-thousand-foot winters close roads the desert never has to think about.</p>
+
+        <figure class="strip-map">
+        <svg viewBox="0 0 760 190" role="img" aria-label="Strip map of Interstate 10 across Arizona: the California line on the west, Phoenix near milepost 143, the Picacho Peak dust storm corridor near milepost 214, Tucson near milepost 257, and the New Mexico line near mile 391." xmlns="http://www.w3.org/2000/svg">
+        <line x1="48" y1="140" x2="712" y2="140" stroke="#0E1116" stroke-width="9" stroke-linecap="round"/>
+        <line x1="48" y1="140" x2="712" y2="140" stroke="#fff" stroke-width="2" stroke-dasharray="7 11"/>
+        <line x1="48.0" y1="131.0" x2="48.0" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="90.5" y1="134.0" x2="90.5" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="132.9" y1="131.0" x2="132.9" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="175.4" y1="134.0" x2="175.4" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="217.8" y1="131.0" x2="217.8" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="260.3" y1="134.0" x2="260.3" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="302.7" y1="131.0" x2="302.7" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="345.2" y1="134.0" x2="345.2" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="387.6" y1="131.0" x2="387.6" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="430.1" y1="134.0" x2="430.1" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="472.6" y1="131.0" x2="472.6" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="515.0" y1="134.0" x2="515.0" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="557.5" y1="131.0" x2="557.5" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="599.9" y1="134.0" x2="599.9" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="642.4" y1="131.0" x2="642.4" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="684.8" y1="134.0" x2="684.8" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="712.0" y1="131.0" x2="712.0" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <text x="48.0" y="170" class="sm-mp sm-mp-l">MP 0</text>
+        <text x="217.8" y="170" class="sm-mp">MP 100</text>
+        <text x="387.7" y="170" class="sm-mp">MP 200</text>
+        <text x="712.0" y="170" class="sm-mp sm-mp-r">MP 391 &#183; New Mexico line</text>
+        <circle cx="52.0" cy="140" r="5" fill="#0E1116"/><text x="60" y="124" class="sm-city">California line</text>
+        <circle cx="290.8" cy="140" r="5" fill="#0E1116"/><text x="290.8" y="124" class="sm-city">Phoenix</text>
+        <circle cx="484.4" cy="140" r="5" fill="#0E1116"/><text x="484.4" y="124" class="sm-city">Tucson</text>
+        <line x1="411.4" y1="136" x2="411.4" y2="64" stroke="#00e094" stroke-width="2.5"/>
+        <rect x="311.4" y="33" width="200" height="30" rx="15" fill="#00e094"/>
+        <text x="411.4" y="52" class="sm-pin">Dust storm corridor &#183; MP 214</text>
+        <circle cx="411.4" cy="140" r="7" fill="#00e094" stroke="#fff" stroke-width="2.5"/>
+        </svg>
+        <figcaption>I-10 crosses Arizona from the California line through Phoenix and Tucson to New Mexico near mile 391 — with the Picacho Peak dust-storm corridor around milepost 214.</figcaption>
+        </figure>
+
+        <h2>Monsoon, dust, and mountain snow</h2>
+        <p>Arizona's closures come in two seasons. From mid-June through September, monsoon storms push haboobs — mile-high walls of dust — across I-10 and I-8, and flash floods can take out desert highways in minutes. In winter, the high country gets serious snow: Flagstaff is one of the snowiest cities in America, and I-40, I-17, and SR-87 all see winter closures and icy-grade restrictions the valley never hears about. Every one of these events is announced by milepost, so getting the live AZ511 alert before you're inside the dust or on the grade is the whole game.</p>
+
+        <h2>Live AZ511 alerts, in one place</h2>
+        <p>MileCheck pulls live road alerts straight from ADOT's AZ511 system: closures, crashes, construction, and weather hazards, tied to the mile marker and direction. It also reads ADOT's roadside weather stations — surface grip, temperature, and wind — so an icy bridge deck on I-40 or a wind warning near Picacho shows up as an alert, not a surprise.</p>
+
+        <h2>Everyday and emergency</h2>
+        <p>Whether you're crossing the desert on I-10 where towns are sixty miles apart, timing the I-17 climb on a snow day, or reporting a breakdown where the signal drops, the mile marker is the location Arizona's roads run on. MileCheck shows yours in real time, down to a tenth of a mile, even with no cell service.</p>
+      </div>
+
+      <div class="article-cta">
+        <h3>Mile markers and live AZ511 alerts, in real time.</h3>
+        <p>Every Arizona highway, works offline, dust and weather alerts included. On iPhone and Android.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">B2B Opportunities</p>
+          <ul class="footer-list">
+            <li><a href="../index.html#b2b">Partner info</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://www.reddit.com/user/MileCheckApp/" target="_blank" rel="noopener">Reddit</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Mile marker positions are approximate and may not reflect actual sign locations. Built for highway travelers &mdash; use responsibly.</p>
+    </div>
+  </footer>
+
+  <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+</body>
+</html>
