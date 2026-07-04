@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mile Markers State by State — all 50 states | MileCheck</title>
+  <meta name="description" content="MileCheck's state-by-state library: mile marker coverage in all 50 states, live DOT alerts in 48, and driver's guides to how mileposts work in each state.">
+
+  <meta property="og:title" content="Mile Markers, State by State">
+  <meta property="og:description" content="Coverage in all 50 states, live DOT alerts in 48, and state-by-state driver's guides to how mile markers work.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/states/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    .st-hero{max-width:1160px;margin:0 auto;padding:38px 20px 8px;}
+    .st-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .st-hero h1 .accent{color:#00A86B;}
+    .st-hero p.sub{max-width:74ch;color:#5b6670;font-size:15px;margin-top:8px;line-height:1.55;}
+    .st-grid{max-width:1160px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+    .stcard{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;display:flex;flex-direction:column;text-decoration:none;color:inherit;}
+    a.stcard:hover{border-color:#0E1116;}
+    .stcard.has-guide{border-color:#BFE9D9;background:#FBFEFD;}
+    .st-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+    .stcard h2{font-size:15.5px;font-weight:800;letter-spacing:-0.01em;}
+    .st-ab{font-size:11px;font-weight:800;color:#8A939B;letter-spacing:.06em;}
+    .st-status{font-size:11.5px;margin-top:6px;display:flex;gap:10px;flex-wrap:wrap;font-weight:700;}
+    .st-ok{color:#0f7a4f;}
+    .st-soon{color:#8A939B;font-weight:600;}
+    .st-hook{color:#5b6670;font-size:12.5px;line-height:1.45;margin-top:7px;flex:1;}
+    .st-hook.dim{color:#A9B1B8;}
+    .st-go{margin-top:9px;font-weight:700;font-size:12.5px;color:#0E1116;border-bottom:1px solid #0E1116;align-self:flex-start;}
+
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="./" class="active">States</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="st-hero">
+    <h1>Mile markers, <span class="accent">state by state</span></h1>
+    <p class="sub">MileCheck covers mile markers in all 50 states and pulls live DOT road alerts in 48. State by state, we're writing the driver's guide to how each one's mileposts actually work — the corridors, the passes, the quirks, and what the DOT closes. Green-bordered states have their guide.</p>
+  </div>
+
+  <div class="st-grid">
+    <div class="stcard">
+      <div class="st-top"><h2>Alabama</h2><span class="st-ab">AL</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Alaska</h2><span class="st-ab">AK</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <a class="stcard has-guide" href="../blog/mile-markers-arizona.html">
+      <div class="st-top"><h2>Arizona</h2><span class="st-ab">AZ</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook">Why I-17 starts at 194 and I-19 is in kilometers.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Arkansas</h2><span class="st-ab">AR</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>California</h2><span class="st-ab">CA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Colorado</h2><span class="st-ab">CO</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Connecticut</h2><span class="st-ab">CT</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Delaware</h2><span class="st-ab">DE</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Florida</h2><span class="st-ab">FL</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Georgia</h2><span class="st-ab">GA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Hawaii</h2><span class="st-ab">HI</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Idaho</h2><span class="st-ab">ID</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Illinois</h2><span class="st-ab">IL</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Indiana</h2><span class="st-ab">IN</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Iowa</h2><span class="st-ab">IA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Kansas</h2><span class="st-ab">KS</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Kentucky</h2><span class="st-ab">KY</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Louisiana</h2><span class="st-ab">LA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Maine</h2><span class="st-ab">ME</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Maryland</h2><span class="st-ab">MD</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Massachusetts</h2><span class="st-ab">MA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Michigan</h2><span class="st-ab">MI</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Minnesota</h2><span class="st-ab">MN</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Mississippi</h2><span class="st-ab">MS</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Missouri</h2><span class="st-ab">MO</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <a class="stcard has-guide" href="../blog/mile-markers-montana.html">
+      <div class="st-top"><h2>Montana</h2><span class="st-ab">MT</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook">The highest point on I-90 in America.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Nebraska</h2><span class="st-ab">NE</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Nevada</h2><span class="st-ab">NV</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>New Hampshire</h2><span class="st-ab">NH</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>New Jersey</h2><span class="st-ab">NJ</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>New Mexico</h2><span class="st-ab">NM</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>New York</h2><span class="st-ab">NY</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>North Carolina</h2><span class="st-ab">NC</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>North Dakota</h2><span class="st-ab">ND</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Ohio</h2><span class="st-ab">OH</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Oklahoma</h2><span class="st-ab">OK</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <a class="stcard has-guide" href="../blog/mile-markers-oregon.html">
+      <div class="st-top"><h2>Oregon</h2><span class="st-ab">OR</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook">Cabbage Hill, Gorge ice, and the new half-mile markers.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Pennsylvania</h2><span class="st-ab">PA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Rhode Island</h2><span class="st-ab">RI</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-soon">&#9675; Alerts coming soon</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>South Carolina</h2><span class="st-ab">SC</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>South Dakota</h2><span class="st-ab">SD</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Tennessee</h2><span class="st-ab">TN</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Texas</h2><span class="st-ab">TX</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <a class="stcard has-guide" href="../blog/mile-markers-utah.html">
+      <div class="st-top"><h2>Utah</h2><span class="st-ab">UT</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook">106 miles of interstate with no services.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Vermont</h2><span class="st-ab">VT</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Virginia</h2><span class="st-ab">VA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <a class="stcard has-guide" href="../blog/mile-markers-washington.html">
+      <div class="st-top"><h2>Washington</h2><span class="st-ab">WA</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook">The passes that close more than almost anywhere.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
+
+    <div class="stcard">
+      <div class="st-top"><h2>West Virginia</h2><span class="st-ab">WV</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Wisconsin</h2><span class="st-ab">WI</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-ok">&#9679; Live DOT alerts</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Wyoming</h2><span class="st-ab">WY</span></div>
+      <p class="st-status"><span class="st-ok">&#9679; Mile markers</span> <span class="st-soon">&#9675; Alerts coming soon</span></p>
+      <p class="st-hook dim">Driver&rsquo;s guide coming.</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../fire/">US wildfire map</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+            <li><a href="../bridges/">Seattle bridges</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+</body>
+</html>
