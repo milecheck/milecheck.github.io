@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Border Crossing Wait Times — live US/Canada &amp; US/Mexico | MileCheck</title>
+  <meta name="description" content="Live border wait times at every US land crossing — Canada and Mexico. Passenger and commercial vehicle delays, updated from CBP, sorted by wait. Is San Ysidro backed up right now?">
+
+  <meta property="og:title" content="Live Border Crossing Wait Times">
+  <meta property="og:description" content="Every US/Canada and US/Mexico land crossing, live passenger and commercial wait times from CBP. Sorted by delay.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/borders/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How long is the wait at the border right now?","acceptedAnswer":{"@type":"Answer","text":"This page shows live passenger and commercial vehicle wait times at every US land border crossing with Canada and Mexico, sourced from US Customs and Border Protection and refreshed every few minutes. Crossings are sorted by current delay so the worst backups are easy to spot."}},
+      {"@type":"Question","name":"Is San Ysidro or Otay Mesa faster right now?","acceptedAnswer":{"@type":"Answer","text":"Both San Diego area crossings appear on this page with their live passenger and commercial delays side by side, so you can pick the faster one before you commit to a lane. Waits at San Ysidro, Otay Mesa, and Tecate can differ by an hour or more."}},
+      {"@type":"Question","name":"Where does border wait time data come from?","acceptedAnswer":{"@type":"Answer","text":"Directly from US Customs and Border Protection's public border wait time feed. MileCheck normalizes it and shows it on a map alongside the mile marker and road alert data drivers use to reach the crossing."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .bw-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .bw-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .bw-hero h1 .accent{color:#0A66C2;}
+    .bw-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:72ch;line-height:1.55;}
+    .bw-controls{max-width:1160px;margin:16px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+    .bw-seg{display:inline-flex;border:1px solid #E5E5E5;border-radius:10px;overflow:hidden;}
+    .bw-seg button{border:0;background:#fff;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;cursor:pointer;color:#5b6670;}
+    .bw-seg button.on{background:#0E1116;color:#fff;}
+    .bw-search{flex:1;min-width:180px;border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;}
+    .bw-veh{display:inline-flex;border:1px solid #E5E5E5;border-radius:10px;overflow:hidden;}
+    .bw-veh button{border:0;background:#fff;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;cursor:pointer;color:#5b6670;}
+    .bw-veh button.on{background:#0A66C2;color:#fff;}
+    .bw-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;display:grid;grid-template-columns:1.35fr .65fr;gap:16px;}
+    @media(max-width:860px){.bw-wrap{grid-template-columns:1fr;}}
+    .bw-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:380px;height:56vh;background:#eef0e9;}
+    #bwmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bw-pin{border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:11px;font-family:'JetBrains Mono',monospace;}
+    .bw-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:56vh;}
+    .bw-list .lh{padding:11px 15px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:13.5px;display:flex;justify-content:space-between;}
+    .bw-list .lh .cnt{color:#8A939B;font-weight:600;}
+    .bw-rows{overflow-y:auto;}
+    .bw-row{padding:10px 15px;border-bottom:1px solid #F0F0F0;display:flex;align-items:center;gap:10px;cursor:pointer;}
+    .bw-row:hover{background:#F7F9FB;}
+    .bw-row:last-child{border-bottom:none;}
+    .bw-min{font-weight:800;font-size:15px;font-variant-numeric:tabular-nums;min-width:52px;text-align:right;}
+    .bw-nm{font-weight:700;font-size:13.5px;flex:1;}
+    .bw-cr{color:#8A939B;font-size:11.5px;font-weight:600;display:block;margin-top:1px;}
+    .bw-closed{color:#8A939B;font-weight:700;font-size:12px;}
+    .bw-updated{max-width:1160px;margin:10px auto 0;padding:0 20px;font-size:12px;color:#8A939B;font-weight:600;}
+    .bw-notes{max-width:1160px;margin:20px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .bw-notes b{color:#0E1116;}
+    .bw-embed{max-width:1160px;margin:8px auto 0;padding:0 20px;}
+    .bw-embed details{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 18px;}
+    .bw-embed summary{font-weight:800;font-size:14px;cursor:pointer;}
+    .bw-embed pre{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:10px;padding:12px;font:12px/1.5 'JetBrains Mono',monospace;overflow-x:auto;margin:10px 0;}
+    .bw-embed p{color:#5b6670;font-size:13px;line-height:1.55;}
+
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/" class="active">Maps</a>
+        <a href="../states/">States</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="bw-hero">
+    <h1>Border crossing <span class="accent">wait times</span> — live</h1>
+    <p class="sub">Every US land crossing with Canada and Mexico, live from US Customs and Border Protection. Passenger and commercial delays, sorted worst-first — so you can pick the faster crossing before you commit to a lane.</p>
+  </div>
+
+  <div class="bw-controls">
+    <div class="bw-seg" id="bwBorder">
+      <button data-b="all" class="on">All</button>
+      <button data-b="Mexican">Mexico</button>
+      <button data-b="Canadian">Canada</button>
+    </div>
+    <div class="bw-veh" id="bwVeh">
+      <button data-v="pass" class="on">Passenger</button>
+      <button data-v="comm">Commercial</button>
+    </div>
+    <input class="bw-search" id="bwSearch" placeholder="Search a crossing (San Ysidro, Blaine, Laredo…)">
+  </div>
+
+  <div class="bw-wrap">
+    <div class="bw-mapbox"><div id="bwmap"></div></div>
+    <div class="bw-list">
+      <div class="lh"><span>Crossings by wait</span><span class="cnt" id="bwCount">—</span></div>
+      <div class="bw-rows" id="bwRows"><div class="bw-row"><span class="bw-nm">Loading live wait times…</span></div></div>
+    </div>
+  </div>
+  <div class="bw-updated" id="bwUpdated">—</div>
+
+  <div class="bw-embed">
+    <details>
+      <summary>Embed this on your site (free for news &amp; community)</summary>
+      <p>News sites, travel blogs, and community pages are welcome to embed this page at no cost — keep the MileCheck attribution visible. <b>Commercial or operational use</b> (fleet dashboards, logistics tools, paid products) requires a data license — email <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>.</p>
+      <pre>&lt;iframe src="https://milecheckapp.com/borders/" width="100%" height="640"
+  style="border:1px solid #E5E5E5;border-radius:12px;" title="Border wait times — MileCheck"&gt;&lt;/iframe&gt;</pre>
+    </details>
+  </div>
+
+  <div class="bw-notes">
+    <p><b>How to read it:</b> the number is the current delay in minutes for the lane type you've selected. <b style="color:#0f7a4f;">Green</b> is under 15 minutes, <b style="color:#b45309;">amber</b> is 15–45, <b style="color:#DC2626;">red</b> is 45+ . A dash means the lane isn't reporting or is closed. Tap a crossing to center the map. Data is from CBP and can lag real conditions by a few minutes — always follow posted signs and officers at the border.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../fire/">US wildfire map</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+            <li><a href="../bridges/">Seattle bridges</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Border wait data from US Customs and Border Protection.</p>
+    </div>
+  </footer>
+
+<script>
+// Lat/lon for the major land border crossings (CBP feed has none). Keyed by port_name.
+const PORT_COORDS={
+ // --- Canadian border ---
+ "Blaine":[48.9940,-122.7570],"Lynden":[48.9700,-122.4370],"Sumas":[49.0020,-122.2650],
+ "Buffalo/Niagara Falls":[43.0900,-78.9000],"Detroit":[42.3120,-83.0730],"Port Huron":[42.9990,-82.4230],
+ "Sault Ste. Marie":[46.5040,-84.3450],"Champlain":[44.9910,-73.4470],"Derby Line":[45.0050,-72.0980],
+ "Highgate Springs":[45.0080,-73.0790],"Alexandria Bay":[44.3480,-75.9620],"Ogdensburg":[44.7160,-75.4960],
+ "Massena":[44.9850,-74.7370],"Pembina":[48.9990,-97.2410],"Sweetgrass":[48.9990,-111.9640],
+ "International Falls":[48.6010,-93.4100],"Calais":[45.1890,-67.2790],"Houlton":[46.1230,-67.7920],
+ "Madawaska":[47.3560,-68.3230],"Jackman":[45.6220,-70.2530],"Norton":[45.0060,-71.7970],
+ "Derby":[45.0050,-72.0980],"Norton VT":[45.0060,-71.7970],
+ // --- Mexican border ---
+ "San Ysidro":[32.5420,-117.0300],"Otay Mesa":[32.5460,-116.9380],"Otay Mesa Port of Entry":[32.5540,-116.9380],
+ "Tecate":[32.5760,-116.6270],"Calexico":[32.6650,-115.4960],"Andrade":[32.7220,-114.7210],
+ "San Luis":[32.4870,-114.7820],"Lukeville":[31.8800,-112.8140],"Nogales":[31.3330,-110.9420],
+ "Naco":[31.3340,-109.9480],"Douglas (Raul Hector Castro)":[31.3440,-109.5490],"Douglas":[31.3440,-109.5490],
+ "Columbus":[31.8280,-107.6400],"Santa Teresa":[31.7830,-106.6890],"Marcelino Serna":[31.7970,-106.5340],
+ "El Paso":[31.7590,-106.4870],"Paso Del Norte":[31.7510,-106.4650],"Bridge of the Americas":[31.7660,-106.4510],
+ "Fort Hancock":[31.3010,-105.8560],"Presidio":[29.5610,-104.3720],"Del Rio":[29.3270,-100.9270],
+ "Eagle Pass":[28.7080,-100.4990],"Laredo":[27.5000,-99.5030],"Roma":[26.4050,-99.0170],"ROMA TEXAS":[26.4050,-99.0170],
+ "Rio Grande City":[26.3790,-98.8210],"Hidalgo/Pharr":[26.1000,-98.2620],"Progreso":[26.0620,-97.9500],
+ "Brownsville":[25.9010,-97.4970],"B&M Bridge":[25.8880,-97.5010],"Gateway":[25.9500,-97.5410]
+};
+
+const API='https://milepost-proxy.leahgerber93.workers.dev/border-waits';
+let RAW=[], border='all', veh='pass', q='';
+
+const map=L.map('bwmap',{scrollWheelZoom:false});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'Esri · wait times: US CBP via MileCheck',maxZoom:12}).addTo(map);
+map.setView([38,-98],4);
+let markers=[];
+
+function delayOf(p){
+  const grp=veh==='comm'?p.commercial_vehicle_lanes:p.passenger_vehicle_lanes;
+  const std=grp&&grp.standard_lanes; if(!std)return null;
+  const n=parseInt(std.delay_minutes,10);
+  return isNaN(n)?null:n;
+}
+function color(m){return m==null?'#9AA4AD':m<15?'#0f7a4f':m<45?'#b45309':'#DC2626';}
+function fmt(m){return m==null?'—':m+'m';}
+
+function view(){
+  let rows=RAW.filter(p=>border==='all'||p.border.startsWith(border));
+  if(q)rows=rows.filter(p=>(p.port_name+' '+(p.crossing_name||'')).toLowerCase().includes(q));
+  rows=rows.map(p=>({p,d:delayOf(p)}));
+  rows.sort((a,b)=>{if(a.d==null)return 1;if(b.d==null)return -1;return b.d-a.d;});
+  return rows;
+}
+function render(){
+  const rows=view();
+  const box=document.getElementById('bwRows');box.innerHTML='';
+  rows.forEach(({p,d})=>{
+    const el=document.createElement('div');el.className='bw-row';
+    const closed=(p.port_status||'').toLowerCase()==='closed';
+    el.innerHTML='<span class="bw-min" style="color:'+(closed?'#8A939B':color(d))+'">'+(closed?'&#10005;':fmt(d))+'</span>'+
+      '<span class="bw-nm">'+p.port_name+(closed?' <span class="bw-closed">closed</span>':'')+
+      '<span class="bw-cr">'+(p.crossing_name||'')+' · '+p.border.replace(' Border','')+'</span></span>';
+    const c=PORT_COORDS[p.port_name];
+    if(c)el.onclick=()=>map.setView(c,9,{animate:true});
+    box.appendChild(el);
+  });
+  document.getElementById('bwCount').textContent=rows.length+' crossings';
+
+  markers.forEach(m=>map.removeLayer(m));markers=[];
+  const seen={};
+  rows.forEach(({p,d})=>{
+    const c=PORT_COORDS[p.port_name];if(!c||seen[p.port_name])return;seen[p.port_name]=1;
+    const closed=(p.port_status||'').toLowerCase()==='closed';
+    const sz=d==null?26:Math.min(46,28+d/8);
+    const ic=L.divIcon({className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
+      html:'<div class="bw-pin" style="width:'+sz+'px;height:'+sz+'px;background:'+(closed?'#9AA4AD':color(d))+'">'+(closed?'&#10005;':fmt(d))+'</div>'});
+    const m=L.marker(c,{icon:ic}).addTo(map);
+    m.bindPopup('<b>'+p.port_name+'</b><br>'+(p.crossing_name||'')+'<br>'+(closed?'Closed':(veh==='comm'?'Commercial':'Passenger')+' delay: '+fmt(d)));
+    markers.push(m);
+  });
+}
+async function load(){
+  try{const r=await fetch(API,{cache:'no-store'});if(r.ok)RAW=await r.json();}
+  catch(e){document.getElementById('bwRows').innerHTML='<div class="bw-row"><span class="bw-nm">Live wait times are temporarily unavailable. Try again shortly.</span></div>';return;}
+  render();
+  document.getElementById('bwUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · source: US CBP · refreshes every 5 min';
+}
+document.getElementById('bwBorder').onclick=e=>{if(e.target.dataset.b){border=e.target.dataset.b;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render();}};
+document.getElementById('bwVeh').onclick=e=>{if(e.target.dataset.v){veh=e.target.dataset.v;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render();}};
+document.getElementById('bwSearch').oninput=e=>{q=e.target.value.toLowerCase().trim();render();};
+load();
+setInterval(load,300000);
+</script>
+</body>
+</html>
