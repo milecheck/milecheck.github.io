@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michigan Drawbridge Map — every bridge, every opening schedule | MileCheck</title>
+  <meta name="description" content="Every movable bridge in Michigan on one map — Charlevoix, Grand Haven, the Bay City four, Portage Lake, Cheboygan — with the federal opening schedules that run Great Lakes boating season.">
+
+  <meta property="og:title" content="Michigan Drawbridge Map — every opening schedule">
+  <meta property="og:description" content="When does the drawbridge open? Charlevoix on the hour and half-hour, Bay City interleaved every 15 minutes — every Michigan movable bridge and its schedule.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/bridges/michigan/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"When does the Charlevoix drawbridge open?","acceptedAnswer":{"@type":"Answer","text":"The US-31 bascule bridge in Charlevoix opens on the hour and half-hour during boating season for waiting vessels — downtown traffic backs up with each opening, so time your drive between openings."}},
+      {"@type":"Question","name":"When do the Bay City bridges open?","acceptedAnswer":{"@type":"Answer","text":"Bay City's four Saginaw River drawbridges interleave: Independence and Veterans Memorial open on the hour and half-hour, Liberty and Lafayette at a quarter past and a quarter to — so a crossing is available roughly every 15 minutes. Commercial ships get openings on demand."}},
+      {"@type":"Question","name":"Does the Portage Lake lift bridge open in winter?","acceptedAnswer":{"@type":"Answer","text":"The US-41 Houghton–Hancock lift bridge stays fully lowered through winter — openings require 12 hours' notice until mid-April. In season it opens for vessels per its federal schedule."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .br-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .br-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .br-hero h1 .accent{color:#7C3AED;}
+    .br-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
+    .br-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:.55fr 1.45fr;gap:16px;}
+    @media(max-width:860px){.br-wrap{grid-template-columns:1fr;}}
+    .br-list{display:flex;flex-direction:column;gap:10px;}
+    .br-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+    .br-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .br-card.up{border-color:#DC2626;background:#FEF5F5;}
+    .br-card.up .br-dot{background:#DC2626;animation:pulse 1.6s infinite;}
+    .br-card.down .br-dot{background:#0f7a4f;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .br-nm{font-weight:800;font-size:14.5px;}
+    .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
+    .br-card.up .br-st{color:#DC2626;font-weight:800;}
+    .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:460px;height:64vh;background:#eef0e9;}
+    #brmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bmk-ic{width:30px;height:30px;border-radius:50%;background:#fff;border:2.5px solid #7C3AED;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.28);}
+    .bmk-ic.bi-up{background:#DC2626;border-color:#fff;animation:pulse 1.5s infinite;}
+    .bmk-ic.bi-live{border-color:#0f7a4f;}
+    .bmk-sched{width:14px;height:14px;border-radius:50%;background:#7C3AED;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);opacity:.85;}
+    .fpop b{font-size:14px;}
+    .fpop .st-up{color:#DC2626;font-weight:800;}
+    .fpop .st-down{color:#0f7a4f;font-weight:800;}
+    .fpop .sched{color:#454e56;font-size:12.5px;line-height:1.5;margin-top:6px;}
+    .fpop .cite{color:#8A939B;font-size:11px;margin-top:6px;}
+    .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
+    .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .br-notes b{color:#0E1116;}
+    .br-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;margin-top:2px;}
+    .br-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .br-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .legend{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:12px 16px;font-size:12.5px;color:#5b6670;line-height:2;}
+    .bl-box{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:46vh;}
+    .bl-box .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;}
+    .bl-search{padding:9px 14px;border-bottom:1px solid #F0F0EE;}
+    .bl-search input{width:100%;font-family:inherit;font-size:13.5px;padding:8px 11px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;outline:none;}
+    .bl-rows{overflow-y:auto;}
+    .blrow{padding:10px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+    .blrow:hover{background:#F7F5EE;}
+    .blrow:last-child{border-bottom:none;}
+    .blrow .nm{font-weight:700;font-size:13px;line-height:1.35;}
+    .blrow .sub{color:#8A939B;font-size:11.5px;margin-top:1px;}
+    .blrow .chip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+    .chip.c-up{background:#DC2626;color:#fff;animation:pulse 1.6s infinite;}
+    .chip.c-live{background:#E7F5EE;color:#0f7a4f;}
+    .chip.c-sched{background:#F1EBFB;color:#7C3AED;}
+    .legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;}
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/" class="active">Maps</a>
+        <a href="../../states/">States</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="br-hero">
+    <h1>Michigan <span class="accent">drawbridge map</span> — every bridge, every schedule</h1>
+    <p class="sub">Michigan's drawbridges run on clockwork: Charlevoix on the hour and half-hour, Bay City's four bridges interleaved so one opens every 15 minutes, Portage Lake locked down all winter. Every movable bridge, with its federal schedule — tap any bridge for the rule.</p>
+  </div>
+
+  <div class="br-wrap">
+    <div class="br-list" id="brList">
+      <div class="legend">
+        <span class="sw" style="background:#7C3AED;"></span>Movable bridge — tap for its opening schedule<br>
+        <span style="color:#8A939B;">No Michigan agency publishes live bridge status yet — schedules are the tool here.</span>
+      </div>
+      <div class="bl-box">
+        <div class="lh"><span>All Michigan movable bridges</span><span id="blCount" style="color:#8A939B;font-weight:700;font-size:12px;"></span></div>
+        <div class="bl-search"><input id="blSearch" type="search" placeholder="Search bridge, road, or waterway…" aria-label="Search bridges"></div>
+        <div class="bl-rows" id="blRows"></div>
+      </div>
+      <div class="br-cta">
+        <h3>Get drawbridge + road alerts in the app</h3>
+        <p>MileCheck shows live DOT alerts, mile markers, and bridges on the road — in all 50 states, with CarPlay and Android Auto.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+      <span class="br-updated" id="brUpdated">—</span>
+    </div>
+    <div class="br-mapbox"><div id="brmap"></div></div>
+  </div>
+
+  <div class="br-notes">
+    <p><b>How it works:</b> opening schedules come from the US Coast Guard’s Drawbridge Operation Regulations (33 CFR Part 117) — Michigan’s bridges run on unusually regular clocks, which makes the schedule almost as good as live status. A few one-time drawbridges no longer open (Zilwaukee has been a fixed high-rise since 1988). Also see <a href="../">Seattle</a>, <a href="../washington/">Washington</a>, <a href="../oregon/">Oregon</a>, <a href="../florida/">Florida</a>, <a href="../louisiana/">Louisiana</a>, <a href="../new-jersey/">New Jersey</a>, and <a href="../north-carolina/">North Carolina</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-fineprint" style="text-align:center;">&copy; 2026 MileCheck LLC. Schedules: 33 CFR 117 (USCG) · <a href="../../index.html">milecheckapp.com</a></p>
+    </div>
+  </footer>
+
+<script>
+const SCHED=[{"n":"Dyckman Avenue bridge","la":42.40672,"lo":-86.273801,"s":"From May 1 through October 14— (1) From 7 a.m. to 11 p.m., seven days a week the draw need open only on the hour and half-hour; however, Mondays through Fridays the draw need not open at 12 noon an…","w":"Black River (South Haven)","c":"33 CFR 117.624(a)"},{"n":"Dyckman Avenue bridge","la":42.40672,"lo":-86.273801,"s":"From October 15 through April 30, the draw shall open on signal for the passage of commercial vessels and pleasure craft if at least a twelve hour advance notice is given.","w":"Black River (South Haven)","c":"33 CFR 117.624(b)"},{"n":"Dyckman Avenue bridge","la":42.40672,"lo":-86.273801,"s":"At all times, the draw shall open as soon as possible for public vessels of the United States, state or local government vessels used for public safety and vessels in distress.","w":"Black River (South Haven)","c":"33 CFR 117.624(c)"},{"n":"Seventh Street Bridge","la":46.420707,"lo":-105.859872,"s":"shall open on signal; except that, from May 1 through October 31, from 8 a.m. to 11 p.m., seven days a week, the draw need open only on the quarter-hour and three-quarter-hour for recreational vess…","w":"Black River (Port Huron)","c":"33 CFR 117.625(b)"},{"n":"Tenth Street Bridge","la":47.520511,"lo":-111.290292,"s":"shall open on signal; except that, from May 1 through October 31, from 8 a.m. to 11 p.m., seven days a week, the draw need open only on the hour and half-hour for recreational vessels, or at any ti…","w":"Black River (Port Huron)","c":"33 CFR 117.625(c)"},{"n":"US 23 highway bridge","la":45.318945,"lo":-85.258729,"s":"From May 1 through November 31— (1) Between the hours of 7 a.m. and 11 p.m., the draw need only open from three minutes before to three minutes after the quarter-hour and three-quarter hour. (2) Be…","w":"Cheboygan River","c":"33 CFR 117.627(a)"},{"n":"US 23 highway bridge","la":45.318945,"lo":-85.258729,"s":"From December 1 through April 31, no drawtender is required to be at the bridge and the bridge need not open unless a request to open the draw is given at least 12-hours in advance of a vessels int…","w":"Cheboygan River","c":"33 CFR 117.627(b)"},{"n":"US 23 highway bridge","la":46.045002,"lo":-85.125183,"s":"At all times, the draw shall open as soon as possible for the passage of vessels if carrying public safety or public utility vehicles and persons to or from the island.","w":"Cheboygan River","c":"33 CFR 117.627(c)"},{"n":"Grosse Ile Toll Bridge","la":42.173516,"lo":-83.162249,"s":"shall operate as follows: (1) From March 16 through December 14— (i) Between the hours of 7 a.m. and 11 p.m., seven days a week and holidays, the draw need open only from three minutes before to th…","w":"Detroit River (Trenton Channel)","c":"33 CFR 117.631(a)"},{"n":"Wayne County highway bridge","la":42.127355,"lo":-83.174369,"s":"shall operate as follows: (1) From March 16 through December 14— (i) Between the hours of 7 a.m. and 11 p.m., seven days a week and holidays, the draw need open only from three minutes before to th…","w":"Detroit River (Trenton Channel)","c":"33 CFR 117.631(b)"},{"n":"U.S. Route 31 bridge","la":43.074739,"lo":-86.218233,"s":"shall open on signal for pleasure craft- (1) From March 16 through December 14, from 6:30 a.m. to 8:30 p.m., seven days a week, once an hour, on the half-hour; except the draw need not open for ple…","w":"Grand River","c":"33 CFR 117.633(c)"},{"n":"U.S. 41 Bridge","la":47.122594,"lo":-88.573739,"s":"shall open on signal, except that: (1) From April 15 through December 14, between the hours of 7 a.m. and 7 p.m. Monday through Friday, less Federal holidays, the bridge shall open on signal from f…","w":"Keweenaw Waterway","c":"33 CFR 117.635(a)"},{"n":"Maple Street bridge","la":45.318945,"lo":-85.258729,"s":"and US-31 highway bridge, mile 1.4, both at Manistee, shall operate as follows: (1) From May 1 through October 31, between 7 a.m. to 11 p.m., the bridges shall open on signal. From 11 p.m. to 7 a.m…","w":"Manistee River","c":"33 CFR 117.637(a)"},{"n":"US-31 highway bridge","la":45.318945,"lo":-85.258729,"s":"and US-31 highway bridge, mile 1.4, both at Manistee, shall operate as follows: (1) From May 1 through October 31, between 7 a.m. to 11 p.m., the bridges shall open on signal. From 11 p.m. to 7 a.m…","w":"Manistee River","c":"33 CFR 117.637(a)"},{"n":"U.S. 31 bridge","la":45.318945,"lo":-85.258729,"s":"shall be operated as follows: (1) From April 1 through December 31, the draw shall open on signal; except from 6 a.m. to 10 p.m., April 1 to October 31, the draw need open only from three minutes b…","w":"Pine River (Charlevoix)","c":"33 CFR 117.641(a)"},{"n":"S29 bridge","la":42.999102,"lo":-82.424933,"s":"shall open on signal from April 1 through November 30 from 2 a.m. to 8 a.m. and from 8 a.m. to 2 a.m. on the hour and one-half hour. From December 1 through March 31, the draw shall open on signal…","w":"Pine River (St. Clair)","c":"33 CFR 117.643"},{"n":"West Jefferson Avenue Bridge","la":42.280956,"lo":-83.12865,"s":"is required to operate a radiotelephone, and shall open on signal except from January 1 through March 31 when the bridge shall open on signal if provided a 12-hour advance notice.","w":"River Rouge","c":"33 CFR 117.645(d)"},{"n":"Fort Street Bridge","la":42.291183,"lo":-83.143524,"s":"is required to operate a radiotelephone, and shall open on signal except from January 1 through March 31 when the bridge shall open on signal if provided a 12-hour advance notice.","w":"River Rouge","c":"33 CFR 117.645(g)"},{"n":"Dix Avenue Bridge","la":42.296703,"lo":-83.150728,"s":"is required to operate a radiotelephone, and shall open on signal except from January 1 through March 31 when the bridge shall open on signal if provided a 12-hour advance notice.","w":"River Rouge","c":"33 CFR 117.645(h)"},{"n":"Lake State Railway Bridge","la":43.604605,"lo":-83.890402,"s":"and the Central Michigan Railroad Bridge, mile 4.94, both in Bay City, shall open on signal; except that from January 1 through March 31, the draws shall open on signal if at least 12 hours advance…","w":"Saginaw River","c":"33 CFR 117.647(a)"},{"n":"Central Michigan Railroad Bridge","la":43.604605,"lo":-83.890402,"s":"and the Central Michigan Railroad Bridge, mile 4.94, both in Bay City, shall open on signal; except that from January 1 through March 31, the draws shall open on signal if at least 12 hours advance…","w":"Saginaw River","c":"33 CFR 117.647(a)"},{"n":"Independence Bridge","la":43.604605,"lo":-83.890402,"s":"Liberty Street Bridge, mile 4.99, Veterans Memorial Bridge, mile 5.60, and Lafayette Street Bridge, mile 6.78, all in Bay City, shall open on signal, except as follows: (1) From April 15 through No…","w":"Saginaw River","c":"33 CFR 117.647(b)"},{"n":"Liberty Street Bridge","la":43.604605,"lo":-83.890402,"s":"Liberty Street Bridge, mile 4.99, Veterans Memorial Bridge, mile 5.60, and Lafayette Street Bridge, mile 6.78, all in Bay City, shall open on signal, except as follows: (1) From April 15 through No…","w":"Saginaw River","c":"33 CFR 117.647(b)"},{"n":"Veterans Memorial Bridge","la":43.604605,"lo":-83.890402,"s":"Liberty Street Bridge, mile 4.99, Veterans Memorial Bridge, mile 5.60, and Lafayette Street Bridge, mile 6.78, all in Bay City, shall open on signal, except as follows: (1) From April 15 through No…","w":"Saginaw River","c":"33 CFR 117.647(b)"},{"n":"Lafayette Street Bridge","la":43.604605,"lo":-83.890402,"s":"Liberty Street Bridge, mile 4.99, Veterans Memorial Bridge, mile 5.60, and Lafayette Street Bridge, mile 6.78, all in Bay City, shall open on signal, except as follows: (1) From April 15 through No…","w":"Saginaw River","c":"33 CFR 117.647(b)"},{"n":"CSX railroad bridge","la":42.958141,"lo":-85.680662,"s":"need not be opened for the passage of vessels. The owner shall return the draw to an operable condition within a reasonable time when directed by the District Commander to do so.","w":"Saginaw River","c":"33 CFR 117.647(c)"},{"n":"US33 (Blossomland) bridge","la":43.781139,"lo":-86.436876,"s":"From March 1 through May 14, from October 1 through December 15, and from 8 p.m. to 7 a.m. from May 15 through September 30, the draws shall open on signal.","w":"St. Joseph River","c":"33 CFR 117.651(a)"},{"n":"Blossomland bridge","la":42.111704,"lo":-86.478433,"s":"From 7 a.m. to 8 p.m. from May 15 through September 30, the draw of the Blossomland bridge need be opened only from three minutes before to three minutes after the hour and half hour, and the draw…","w":"St. Joseph River","c":"33 CFR 117.651(b)"},{"n":"Second Avenue bridge","la":45.063742,"lo":-83.430897,"s":"shall open on signal if at least three hours notice is given to the Dispatcher, Police Department, City of Alpena, Michigan.","w":"Thunder Bay River","c":"33 CFR 117.655"}];
+
+const map=L.map('brmap',{scrollWheelZoom:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'Esri · schedules: 33 CFR 117 via MileCheck',maxZoom:17}).addTo(map);
+map.fitBounds([[41.7,-90.4],[47.5,-82.3]],{padding:[14,14]});
+
+const svgBridge=c=>'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h20"/><path d="M6 16v-5m12 5v-5"/><path d="M6 11c2.2-4 9.8-4 12 0"/></svg>';
+const svgOpen='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h3.5m13 0H22"/><path d="M6.5 16l4.2-8m6.8 8l-4.2-8"/></svg>';
+
+// Schedule-only corpus markers (static, purple)
+const schedIndex=[]; // {name, sub, search, marker, lat, lon}
+SCHED.forEach(b=>{
+  if(b.g) return; // live-tagged bridges are drawn by the live layer
+  const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
+  const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
+    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+b.c+'</div></div>');
+  schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
+});
+
+// Sidebar list: live bridges first (by status), then schedule-only A→Z.
+const liveIndex=[];
+function renderList(){
+  const q=(document.getElementById('blSearch').value||'').toLowerCase().trim();
+  const rows=document.getElementById('blRows');
+  const items=[];
+  liveIndex.forEach(x=>items.push({...x,order:x.up?0:1}));
+  schedIndex.slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(x=>items.push({...x,order:2,chip:'schedule',cls:'c-sched'}));
+  const shown=items.filter(x=>!q||x.search.includes(q)).sort((a,b)=>a.order-b.order||a.name.localeCompare(b.name));
+  document.getElementById('blCount').textContent=shown.length+' of '+items.length;
+  rows.innerHTML='';
+  shown.forEach(x=>{
+    const el=document.createElement('div');
+    el.className='blrow';
+    el.innerHTML='<div><div class="nm">'+x.name+'</div><div class="sub">'+(x.sub||'')+'</div></div><span class="chip '+x.cls+'">'+x.chip+'</span>';
+    el.addEventListener('click',()=>{
+      map.flyTo([x.lat,x.lon],14,{duration:.8});
+      setTimeout(()=>x.marker.openPopup(),850);
+      if(window.innerWidth<860)document.querySelector('.br-mapbox').scrollIntoView({behavior:'smooth'});
+    });
+    rows.appendChild(el);
+  });
+}
+document.getElementById('blSearch').addEventListener('input',renderList);
+
+document.getElementById('brUpdated').textContent='Schedules per 33 CFR 117 · no live feed published in MI yet';
+renderList();
+
+document.querySelector('.nav-toggle').addEventListener('click',()=>document.querySelector('.primary-nav').classList.toggle('open'));
+</script>
+</body>
+</html>
