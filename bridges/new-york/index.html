@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New York Drawbridge Map — Erie Canal lift bridges + every movable bridge | MileCheck</title>
+  <meta name="description" content="Every movable bridge in New York on one map — all 20 Erie Canal lift bridges with bridge phones, the Long Island parkway drawbridges, and NYC's movable bridges with their opening rules.">
+
+  <meta property="og:title" content="New York Drawbridge Map — canal lifts + every movable bridge">
+  <meta property="og:description" content="When does the lift bridge go up? Every Erie Canal lift bridge (Fairport, Brockport, Albion…) with its phone, plus NYC and Long Island movable bridges and their rules.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/bridges/new-york/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"When do the Erie Canal lift bridges open?","acceptedAnswer":{"@type":"Answer","text":"The 20 canal lift bridges — Fairport, Spencerport, Brockport, Albion, Medina and neighbors — open on demand during navigation season (roughly May through October, during posted daily hours). An opening takes 3 to 5 minutes. Each bridge has its own phone, listed on this map."}},
+      {"@type":"Question","name":"Do New York City's drawbridges still open?","acceptedAnswer":{"@type":"Answer","text":"Yes, but rarely and never unannounced — most NYC movable bridges (Pulaski, Hamilton Avenue, Grand Street and the Harlem River bridges) require two hours' advance notice from vessels, so openings are scheduled events rather than surprises."}},
+      {"@type":"Question","name":"Which Long Island parkway bridges are drawbridges?","acceptedAnswer":{"@type":"Answer","text":"The Loop Parkway and Meadowbrook State Parkway bridges over the south-shore channels are working drawbridges with federal opening schedules — a summer factor on the way to Point Lookout and Jones Beach."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .br-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .br-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .br-hero h1 .accent{color:#7C3AED;}
+    .br-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
+    .br-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:.55fr 1.45fr;gap:16px;}
+    @media(max-width:860px){.br-wrap{grid-template-columns:1fr;}}
+    .br-list{display:flex;flex-direction:column;gap:10px;}
+    .br-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+    .br-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .br-card.up{border-color:#DC2626;background:#FEF5F5;}
+    .br-card.up .br-dot{background:#DC2626;animation:pulse 1.6s infinite;}
+    .br-card.down .br-dot{background:#0f7a4f;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .br-nm{font-weight:800;font-size:14.5px;}
+    .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
+    .br-card.up .br-st{color:#DC2626;font-weight:800;}
+    .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:460px;height:64vh;background:#eef0e9;}
+    #brmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bmk-ic{width:30px;height:30px;border-radius:50%;background:#fff;border:2.5px solid #7C3AED;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.28);}
+    .bmk-ic.bi-up{background:#DC2626;border-color:#fff;animation:pulse 1.5s infinite;}
+    .bmk-ic.bi-live{border-color:#0f7a4f;}
+    .bmk-sched{width:14px;height:14px;border-radius:50%;background:#7C3AED;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);opacity:.85;}
+    .fpop b{font-size:14px;}
+    .fpop .st-up{color:#DC2626;font-weight:800;}
+    .fpop .st-down{color:#0f7a4f;font-weight:800;}
+    .fpop .sched{color:#454e56;font-size:12.5px;line-height:1.5;margin-top:6px;}
+    .fpop .cite{color:#8A939B;font-size:11px;margin-top:6px;}
+    .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
+    .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .br-notes b{color:#0E1116;}
+    .br-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;margin-top:2px;}
+    .br-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .br-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .legend{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:12px 16px;font-size:12.5px;color:#5b6670;line-height:2;}
+    .bl-box{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:46vh;}
+    .bl-box .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;}
+    .bl-search{padding:9px 14px;border-bottom:1px solid #F0F0EE;}
+    .bl-search input{width:100%;font-family:inherit;font-size:13.5px;padding:8px 11px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;outline:none;}
+    .bl-rows{overflow-y:auto;}
+    .blrow{padding:10px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+    .blrow:hover{background:#F7F5EE;}
+    .blrow:last-child{border-bottom:none;}
+    .blrow .nm{font-weight:700;font-size:13px;line-height:1.35;}
+    .blrow .sub{color:#8A939B;font-size:11.5px;margin-top:1px;}
+    .blrow .chip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+    .chip.c-up{background:#DC2626;color:#fff;animation:pulse 1.6s infinite;}
+    .chip.c-live{background:#E7F5EE;color:#0f7a4f;}
+    .chip.c-sched{background:#F1EBFB;color:#7C3AED;}
+    .legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;}
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/" class="active">Maps</a>
+        <a href="../../states/">States</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="br-hero">
+    <h1>New York <span class="accent">drawbridge map</span> — canal lifts, parkways, and the city</h1>
+    <p class="sub">Two very different New Yorks: upstate, 20 Erie Canal lift bridges rise on demand all season (each with its own phone — on this map); downstate, NYC's movable bridges need two hours' notice and the Long Island parkway drawbridges lift for the boat channels. Tap any bridge for its rule.</p>
+  </div>
+
+  <div class="br-wrap">
+    <div class="br-list" id="brList">
+      <div class="legend">
+        <span class="sw" style="background:#7C3AED;"></span>Movable bridge — tap for rules + phone<br>
+        <span style="color:#8A939B;">No NY agency publishes live bridge status — canal bridges open on demand in season.</span>
+      </div>
+      <div class="bl-box">
+        <div class="lh"><span>All New York movable bridges</span><span id="blCount" style="color:#8A939B;font-weight:700;font-size:12px;"></span></div>
+        <div class="bl-search"><input id="blSearch" type="search" placeholder="Search bridge, road, or waterway…" aria-label="Search bridges"></div>
+        <div class="bl-rows" id="blRows"></div>
+      </div>
+      <div class="br-cta">
+        <h3>Get drawbridge + road alerts in the app</h3>
+        <p>MileCheck shows live DOT alerts, mile markers, and bridges on the road — in all 50 states, with CarPlay and Android Auto.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+      <span class="br-updated" id="brUpdated">—</span>
+    </div>
+    <div class="br-mapbox"><div id="brmap"></div></div>
+  </div>
+
+  <div class="br-notes">
+    <p><b>How it works:</b> canal lift bridges come from the NY Canal Corporation’s own dataset (coords, phones); opening rules come from the US Coast Guard’s Drawbridge Operation Regulations (33 CFR Part 117). No New York agency publishes live raised/lowered status — canal bridges open on demand in navigation season, and NYC bridges open only with advance notice. Also see <a href="../">Seattle</a>, <a href="../washington/">Washington</a>, <a href="../oregon/">Oregon</a>, <a href="../michigan/">Michigan</a>, <a href="../florida/">Florida</a>, <a href="../louisiana/">Louisiana</a>, <a href="../new-jersey/">New Jersey</a>, and <a href="../north-carolina/">North Carolina</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-fineprint" style="text-align:center;">&copy; 2026 MileCheck LLC. Canal bridges: NY Canal Corp · Schedules: 33 CFR 117 (USCG) · <a href="../../index.html">milecheckapp.com</a></p>
+    </div>
+  </footer>
+
+<script>
+const SCHED=[{"n":"Lift Bridge — Washington St","la":43.19578,"lo":-77.85384,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 274.21","c":"NY Canal Corp","p":"(585) 352-3548"},{"n":"Lift Bridge — Union Street","la":43.19335,"lo":-77.80038,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 271.28","c":"NY Canal Corp","p":"(585) 352-5451"},{"n":"Lift Bridge — Prospect Avenue","la":43.22547,"lo":-78.39176,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 304.13","c":"NY Canal Corp","p":"(585) 798-0140"},{"n":"Lift Bridge — Park Avenue","la":43.21536,"lo":-77.93537,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 278.76","c":"NY Canal Corp","p":"(585) 637-0460"},{"n":"Lift Bridge — North Main Street","la":43.24907,"lo":-78.19367,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 293.15","c":"NY Canal Corp","p":"(585) 589-6255"},{"n":"Lift Bridge — N Main St","la":43.21669,"lo":-77.93815,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 278.93","c":"NY Canal Corp","p":"(585) 637-4530"},{"n":"Lift Bridge — Main Street","la":43.21289,"lo":-78.47644,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 308.87","c":"NY Canal Corp","p":"(716) 735-7250"},{"n":"Lift Bridge — Main Street","la":43.1016,"lo":-77.44192,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 246.67","c":"NY Canal Corp","p":"(585) 223-9412"},{"n":"Lift Bridge — Knowlesville Rd","la":43.24264,"lo":-78.31063,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 299.47","c":"NY Canal Corp","p":"(585) 798-2050"},{"n":"Lift Bridge — International Railroad*","la":42.93134,"lo":-78.90218,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Niagara River · mile 8.61","c":"NY Canal Corp","p":"(716) 876-5670"},{"n":"Lift Bridge — Ingersoll Street","la":43.24853,"lo":-78.19042,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 292.98","c":"NY Canal Corp","p":"(585) 589-4107"},{"n":"Lift Bridge — Hulberton Road","la":43.25438,"lo":-78.06624,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 286.58","c":"NY Canal Corp","p":"(585) 638-8183"},{"n":"Lift Bridge — Green Island*","la":42.73547,"lo":-73.68967,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Hudson River · mile 152.74","c":"NY Canal Corp","p":"(518) 724-7586"},{"n":"Lift Bridge — Gasport Road","la":43.19961,"lo":-78.57584,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 314.15","c":"NY Canal Corp","p":"(716) 772-7700"},{"n":"Lift Bridge — Ferry Street*","la":42.91519,"lo":-78.90225,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Niagara River · mile 9.77","c":"NY Canal Corp","p":"(716) 851-5689"},{"n":"Lift Bridge — Exchange Street","la":43.17675,"lo":-78.68566,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 320.12","c":"NY Canal Corp","p":"(716) 434-7368"},{"n":"Lift Bridge — East Avenue","la":43.2286,"lo":-78.02166,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 283.48","c":"NY Canal Corp","p":"(585) 638-6456"},{"n":"Lift Bridge — Eagle Harbor Rd","la":43.25186,"lo":-78.25314,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 296.41","c":"NY Canal Corp","p":"(585) 589-0628"},{"n":"Lift Bridge — Amtrak (Livingston Ave)*","la":42.65447,"lo":-73.74208,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Hudson River · mile 146.38","c":"NY Canal Corp","p":"(518) 465-0746"},{"n":"Lift Bridge — Adam Street","la":43.17867,"lo":-78.68278,"s":"Erie Canal lift bridge — opens on demand during navigation season (roughly May–October, posted daily hours). Openings take 3–5 minutes.","w":"Erie Canal · mile 319.92","c":"NY Canal Corp","p":"N/A, kept open"},{"n":"Ferry Street bridge","la":40.703187,"lo":-73.994706,"s":"From April 15 through November 30, the draws shall open on signal. However, between the hours of 12 midnight and 8 a.m., seven days a week, no bridgetender is required to be in attendance at the br…","w":"Black Rock Canal","c":"33 CFR 117.769(a)"},{"n":"Ferry Street bridge","la":40.703187,"lo":-73.994706,"s":"From December 1 through April 14, no bridgetender is required to be in attendance at the bridges and the draws shall open on signal if notice is given to the owners at least four hours in advance o…","w":"Black Rock Canal","c":"33 CFR 117.769(b)"},{"n":"Michigan Avenue bridge","la":42.871585,"lo":-78.872829,"s":"shall operate as follows: (1) From March 22 through December 15, the draw shall open within 20 minutes of signal. However, the draw need not open from 7:30 a.m. to 9 a.m., and from 4 p.m. to 5:45 p…","w":"Buffalo River","c":"33 CFR 117.773(a)"},{"n":"Ohio Street bridge","la":42.861836,"lo":-78.867404,"s":"shall operate as follows: (1) From March 22 through December 15, the draw shall open on signal within 20 minutes after a request is made to the Michigan Avenue drawtender. However, the draw need no…","w":"Buffalo River","c":"33 CFR 117.773(b)"},{"n":"CSX Transportation railroad bridges","la":42.860159,"lo":-78.848448,"s":"both at Buffalo, shall open on signal if notice is given at least 4 hours in advance of a vessel's time of intended passage through the draws.","w":"Buffalo River","c":"33 CFR 117.773(c)"},{"n":"The South Park Avenue bridge","la":42.86302,"lo":-78.842704,"s":"The South Park Avenue bridge, mile 5.3, at Buffalo, shall open on signal if notice is given at least 4 hours in advance of a vessel's time of intended passage through the draw. However, the draw ne…","w":"Buffalo River","c":"33 CFR 117.773(d)"},{"n":"Roosevelt Island bridge","la":40.76347,"lo":-73.945826,"s":"is given to the drawtender at the Grand Street/Avenue bridge, mile 3.1 across Newtown Creek (East Branch), the New York Department of Transportation (NYCDOT) Radio Hotline or NYCDOT Bridge Operatio…","w":"East River","c":"33 CFR 117.781(c)"},{"n":"Colonel Patrick Henry O'Rorke Memorial Bridge","la":43.248477,"lo":-77.611575,"s":"shall open on signal from April 1 through December 15; however, from 7 a.m. to 9 a.m. and from 4 p.m. to 6 p.m., Monday through Friday, except Federal holidays, the draw need be opened only for the…","w":"Genesee River","c":"33 CFR 117.785"},{"n":"Ninth Street Bridge","la":40.674096,"lo":-73.996479,"s":"the Third Street Bridge, mile 1.8, the Carroll Street Bridge, mile 2.0, and the Union Street Bridge, mile 2.1, at Brooklyn, shall open on signal, if at least a two-hour advance notice is given to t…","w":"Gowanus Canal","c":"33 CFR 117.787"},{"n":"Third Street Bridge","la":40.676151,"lo":-73.99022,"s":"the Third Street Bridge, mile 1.8, the Carroll Street Bridge, mile 2.0, and the Union Street Bridge, mile 2.1, at Brooklyn, shall open on signal, if at least a two-hour advance notice is given to t…","w":"Gowanus Canal","c":"33 CFR 117.787"},{"n":"Carroll Street Bridge","la":40.678243,"lo":-73.989312,"s":"the Third Street Bridge, mile 1.8, the Carroll Street Bridge, mile 2.0, and the Union Street Bridge, mile 2.1, at Brooklyn, shall open on signal, if at least a two-hour advance notice is given to t…","w":"Gowanus Canal","c":"33 CFR 117.787"},{"n":"Union Street Bridge","la":40.679485,"lo":-73.98836,"s":"the Third Street Bridge, mile 1.8, the Carroll Street Bridge, mile 2.0, and the Union Street Bridge, mile 2.1, at Brooklyn, shall open on signal, if at least a two-hour advance notice is given to t…","w":"Gowanus Canal","c":"33 CFR 117.787"},{"n":"the bridges","la":42.791573,"lo":-73.761566,"s":"e passage of the following vessels: (1) Downbound vessels during a freshet of a height exceeding an elevation determined by the District Commander. (2) Public vessels of the United States. (3) Vess…","w":"Hudson River","c":"33 CFR 117.791(a)"},{"n":"the bridges","la":42.791573,"lo":-73.761566,"s":"d may remain closed for up to 10 minutes to allow accumulated land traffic to pass.","w":"Hudson River","c":"33 CFR 117.791(b)"},{"n":"The following requirements apply to all bridges across H","la":40.868911,"lo":-73.821012,"s":"The following requirements apply to all bridges across Hutchinson River (Eastchester Creek): (1) The owners of each bridge shall provide and keep in good legible condition clearance gauges for each…","w":"Hutchinson River (Eastchester Creek)","c":"33 CFR 117.793(a)"},{"n":"Hutchinson River Parkway Bridge","la":40.868911,"lo":-73.821012,"s":"at the Bronx, New York shall open on signal if at least a two-hour notice is given to the New York City Department of Transportation (NYCDOT) Radio Hotline, or the NYCDOT Bridge Operations Office.","w":"Hutchinson River (Eastchester Creek)","c":"33 CFR 117.793(b)"},{"n":"South Fulton Avenue Bridge","la":40.893816,"lo":-73.822135,"s":"shall open on signal from three hours before to three hours after the predicted high tide. For the purposes of this section, predicted high tide occurs four hours after predicted high water for New…","w":"Hutchinson River (Eastchester Creek)","c":"33 CFR 117.793(c)"},{"n":"Marine Parkway bridge","la":40.573473,"lo":-73.884917,"s":"shall open on signal Monday through Friday from 8 a.m. to 4 p.m. At all other times, the draw shall open on signal if at least eight hours notice is given; however, the draw shall open on signal if…","w":"Jamaica Bay and Connecting Waterways","c":"33 CFR 117.795(a)"},{"n":"US2 Bridge","la":44.766116,"lo":-73.289959,"s":"over Lake Champlain, between South Hero Island and North Hero Island, shall operate as follows: (1) The draw shall open on signal on the hour and the half hour from May 15th through October 15th fr…","w":"Lake Champlain","c":"33 CFR 117.797(b)"},{"n":"West Bay bridge","la":40.800792,"lo":-72.628056,"s":"Beach Lane bridge, mile 1.1 across Quantuck Canal, Quoque bridge, mile 1.1 across Quoque Canal and the Smith Point bridge, mile 6.1 across Narrow Bay shall open on signal from October 1 through Apr…","w":"Long Island, New York Inland Waterway from East Ro","c":"33 CFR 117.799(d)"},{"n":"Beach Lane bridge","la":40.800792,"lo":-72.628056,"s":"Beach Lane bridge, mile 1.1 across Quantuck Canal, Quoque bridge, mile 1.1 across Quoque Canal and the Smith Point bridge, mile 6.1 across Narrow Bay shall open on signal from October 1 through Apr…","w":"Long Island, New York Inland Waterway from East Ro","c":"33 CFR 117.799(d)"},{"n":"Quoque bridge","la":40.800792,"lo":-72.628056,"s":"Beach Lane bridge, mile 1.1 across Quantuck Canal, Quoque bridge, mile 1.1 across Quoque Canal and the Smith Point bridge, mile 6.1 across Narrow Bay shall open on signal from October 1 through Apr…","w":"Long Island, New York Inland Waterway from East Ro","c":"33 CFR 117.799(d)"},{"n":"Quoque Canal and the Smith Point bridge","la":40.800792,"lo":-72.628056,"s":"Beach Lane bridge, mile 1.1 across Quantuck Canal, Quoque bridge, mile 1.1 across Quoque Canal and the Smith Point bridge, mile 6.1 across Narrow Bay shall open on signal from October 1 through Apr…","w":"Long Island, New York Inland Waterway from East Ro","c":"33 CFR 117.799(d)"},{"n":"Atlantic Beach Bridge","la":40.592409,"lo":-73.737225,"s":"shall operate as follows: (1) From October 1 through May 14 the draw shall open on signal from 8 a.m. to midnight. (2) From midnight to 8 a.m. year-round, the draw shall open on signal if at least…","w":"Long Island, New York Inland Waterway from East Ro","c":"33 CFR 117.799(e)"},{"n":"Loop Parkway Bridge","la":40.60638,"lo":-73.561231,"s":"shall open for commercial vessels engaged in commerce, the draw shall open Monday thru Friday from 6:20 a.m. to 9:50 a.m. and 3:20 p.m. to 7:20 p.m. on signal at 20 and 50 minutes after the hour, a…","w":"Long Island, New York Inland Waterway from East Ro","c":"33 CFR 117.799(f)"},{"n":"Long Beach Bridge","la":40.595484,"lo":-73.656723,"s":"shall open on signal; except that: (1) From midnight to 8 a.m. year-round, the draw shall open on signal if at least four hours notice is given; and (2) From 3 p.m. to 8 p.m. on Saturdays, Sundays,…","w":"Long Island, New York Inland Waterway from East Ro","c":"33 CFR 117.799(g)"},{"n":"Bayville Bridge","la":40.903045,"lo":-73.548655,"s":"New York, shall open on signal between 7 a.m. and 11 p.m., from May 1 through October 31, and between 7 a.m. and 5 p.m., Monday through Friday, from November 1 through April 30. At all other times…","w":"Mill Neck Creek","c":"33 CFR 117.800"},{"n":"Borden Avenue Bridge","la":40.738989,"lo":-73.942472,"s":"across Dutch Kills at Queens, shall open on signal if at least a two-hour advance notice is given to the New York City Department of Transportation (NYCDOT) Radio Hotline or NYCDOT Bridge Operation…","w":"Newtown Creek, Dutch Kills, English Kills and thei","c":"33 CFR 117.801(c)"},{"n":"Hunters Point Avenue Bridge","la":40.740854,"lo":-73.940574,"s":"across Dutch Kills at Queens, shall open on signal if at least a two-hour advance notice is given to the New York City Department of Transportation (NYCDOT) Radio Hotline or the NYCDOT Bridge Opera…","w":"Newtown Creek, Dutch Kills, English Kills and thei","c":"33 CFR 117.801(d)"},{"n":"Metropolitan Avenue Bridge","la":40.714292,"lo":-73.931218,"s":"across English Kills at New York City, shall open on signal if at least a two-hour advance notice is given to the New York City Department of Transportation (NYCDOT) Radio Hotline or the NYCDOT Bri…","w":"Newtown Creek, Dutch Kills, English Kills and thei","c":"33 CFR 117.801(e)"},{"n":"Grand Street/Avenue Bridge","la":40.716583,"lo":-73.922344,"s":"across Newtown Creek (East Branch) between Brooklyn and Queens, shall open on signal if at least a two-hour advance notice is given to the New York City Department of Transportation (NYCDOT) Radio…","w":"Newtown Creek, Dutch Kills, English Kills and thei","c":"33 CFR 117.801(f)"},{"n":"Glen Island Bridge","la":40.889356,"lo":-73.782758,"s":"New York, shall open on signal, except as follows: (1) Two hours advance notice shall be given for openings from 12 midnight to 6 a.m. from May 1st through October 31st by calling the number posted…","w":"New Rochelle Harbor","c":"33 CFR 117.802(a)"}];
+
+const map=L.map('brmap',{scrollWheelZoom:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'Esri · schedules: 33 CFR 117 via MileCheck',maxZoom:17}).addTo(map);
+map.fitBounds([[40.45,-79.8],[45.1,-71.8]],{padding:[14,14]});
+
+const svgBridge=c=>'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h20"/><path d="M6 16v-5m12 5v-5"/><path d="M6 11c2.2-4 9.8-4 12 0"/></svg>';
+const svgOpen='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h3.5m13 0H22"/><path d="M6.5 16l4.2-8m6.8 8l-4.2-8"/></svg>';
+
+// Schedule-only corpus markers (static, purple)
+const schedIndex=[]; // {name, sub, search, marker, lat, lon}
+SCHED.forEach(b=>{
+  if(b.g) return; // live-tagged bridges are drawn by the live layer
+  const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
+  const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
+    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+b.c+'</div></div>');
+  schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
+});
+
+// Sidebar list: live bridges first (by status), then schedule-only A→Z.
+const liveIndex=[];
+function renderList(){
+  const q=(document.getElementById('blSearch').value||'').toLowerCase().trim();
+  const rows=document.getElementById('blRows');
+  const items=[];
+  liveIndex.forEach(x=>items.push({...x,order:x.up?0:1}));
+  schedIndex.slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(x=>items.push({...x,order:2,chip:'schedule',cls:'c-sched'}));
+  const shown=items.filter(x=>!q||x.search.includes(q)).sort((a,b)=>a.order-b.order||a.name.localeCompare(b.name));
+  document.getElementById('blCount').textContent=shown.length+' of '+items.length;
+  rows.innerHTML='';
+  shown.forEach(x=>{
+    const el=document.createElement('div');
+    el.className='blrow';
+    el.innerHTML='<div><div class="nm">'+x.name+'</div><div class="sub">'+(x.sub||'')+'</div></div><span class="chip '+x.cls+'">'+x.chip+'</span>';
+    el.addEventListener('click',()=>{
+      map.flyTo([x.lat,x.lon],14,{duration:.8});
+      setTimeout(()=>x.marker.openPopup(),850);
+      if(window.innerWidth<860)document.querySelector('.br-mapbox').scrollIntoView({behavior:'smooth'});
+    });
+    rows.appendChild(el);
+  });
+}
+document.getElementById('blSearch').addEventListener('input',renderList);
+
+document.getElementById('brUpdated').textContent='Canal data: NY Canal Corp · schedules per 33 CFR 117';
+renderList();
+
+document.querySelector('.nav-toggle').addEventListener('click',()=>document.querySelector('.primary-nav').classList.toggle('open'));
+</script>
+</body>
+</html>
