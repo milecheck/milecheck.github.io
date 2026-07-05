@@ -40,6 +40,10 @@
     .fire-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
     @media(max-width:860px){.fire-wrap{grid-template-columns:1fr;}}
     .fire-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
+    .fire-left{display:flex;flex-direction:column;gap:10px;min-width:0;}
+    .fire-legend{display:flex;gap:12px 16px;align-items:center;flex-wrap:wrap;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 14px;font-size:12.5px;color:#5b6670;font-weight:600;}
+    .fire-legend .lg-pill{color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;}
+    .fire-legend .lg-new{background:#111;}.fire-legend .lg-rx{background:#c47f0a;}
     #firemap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
     .bigstatus{position:absolute;top:12px;left:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;}
@@ -144,11 +148,17 @@
   </div>
 
   <div class="fire-wrap">
-    <div class="fire-mapbox">
-      <span class="bigstatus ok" id="bigStatus">Loading fires…</span>
-      <button class="nearme" id="nearMe">Fires near me</button>
-      <span class="cl-legend" id="clLegend" style="display:none">⛔ road closures · live DOT data via MileCheck</span>
-      <div id="firemap"></div>
+    <div class="fire-left">
+      <div class="fire-mapbox">
+        <span class="bigstatus ok" id="bigStatus">Loading fires…</span>
+        <button class="nearme" id="nearMe">Fires near me</button>
+        <span class="cl-legend" id="clLegend" style="display:none">⛔ road closures · live DOT data via MileCheck</span>
+        <div id="firemap"></div>
+      </div>
+      <div class="fire-legend">
+        <span style="font-weight:800;color:#0E1116;font-size:13px;">Legend:</span>
+        <span>🔥 active fire</span><span class="lg-pill lg-new">NEW</span><span>started &lt; 48 hrs</span><span style="color:#cf3320;">▮ perimeter</span><span>⛔ road closed</span><span style="opacity:.6;">🔥 faded = contained</span><span class="lg-pill lg-rx">RX</span><span>prescribed burn</span>
+      </div>
     </div>
     <div class="fire-side">
       <div class="state-sel"><label for="stateSel">State</label>
@@ -172,10 +182,6 @@
     </div>
   </div>
 
-  <div class="fire-notes" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
-    <span style="font-weight:800;color:#0E1116;font-size:13px;">Legend:</span>
-    <span>🔥 active fire</span><span style="background:#111;color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;">NEW</span><span>started &lt; 48 hrs ago</span><span style="color:#cf3320;">▮ burned-area perimeter</span><span>⛔ road closed (live DOT)</span><span style="opacity:.6;">🔥 faded = 100% contained</span><span style="background:#c47f0a;color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;">RX</span><span>prescribed burn</span>
-  </div>
   <div class="fire-notes">
     <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Zoom and pan the map; the fire list updates to what's in view, largest first.
   </div>
