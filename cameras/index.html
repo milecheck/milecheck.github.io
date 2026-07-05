@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Highway Cameras — Washington, Utah &amp; Montana | MileCheck</title>
-  <meta name="description" content="Live DOT highway cameras on one map — see actual road conditions on I-90 Snoqualmie Pass, the Cottonwood canyons, and thousands more, each tagged with its route and mile marker. Washington, Utah, and Montana, more states coming.">
+  <title>Live Highway Cameras — Washington, Oregon, Utah &amp; Montana | MileCheck</title>
+  <meta name="description" content="Live DOT highway cameras on one map — see actual road conditions on I-90 Snoqualmie Pass, the Cottonwood canyons, and thousands more, each tagged with its route and mile marker. Washington, Oregon, Utah, and Montana, more states coming.">
 
   <meta property="og:title" content="Live Highway Cameras — MileCheck">
-  <meta property="og:description" content="See the actual road before you drive it. Live DOT cameras in WA, UT, and MT, each tagged with route + mile marker.">
+  <meta property="og:description" content="See the actual road before you drive it. Live DOT cameras in WA, OR, UT, and MT, each tagged with route + mile marker.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/">
   <meta property="og:type" content="website">
@@ -26,7 +26,7 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type":"Question","name":"How do I see live highway cameras for my route?","acceptedAnswer":{"@type":"Answer","text":"Pick a state or zoom the map to your area — every DOT traffic camera shows as a dot. Tap one to see the live image, updated straight from the state DOT. Each camera is tagged with its highway and mile marker, so you can check the exact stretch you'll be driving."}},
-      {"@type":"Question","name":"Which states have live cameras here?","acceptedAnswer":{"@type":"Answer","text":"Washington, Utah, and Montana today — including the mountain passes drivers check most, like I-90 Snoqualmie Pass and the Cottonwood canyons. More states are being added."}},
+      {"@type":"Question","name":"Which states have live cameras here?","acceptedAnswer":{"@type":"Answer","text":"Washington, Oregon, Utah, and Montana today — including the mountain passes drivers check most, like I-90 Snoqualmie Pass and the Cottonwood canyons. More states are being added."}},
       {"@type":"Question","name":"Where do these camera images come from?","acceptedAnswer":{"@type":"Answer","text":"Directly from each state department of transportation — the same official cameras DOTs use to monitor their own roads, normalized into one map by MileCheck."}},
       {"@type":"Question","name":"Why are cameras listed by mile marker?","acceptedAnswer":{"@type":"Answer","text":"Mile markers are how the road system locates everything — closures, crashes, and cameras. Knowing a camera sits at I-90 MP 52 tells you exactly which stretch you're looking at. The MileCheck app shows your own mile marker in real time so you can match what you see to where you'll be."}}
     ]
@@ -118,7 +118,7 @@
 
   <div class="cl-hero">
     <h1>Live <span class="accent">highway cameras</span></h1>
-    <p class="sub">See the actual road before you drive it. Live DOT cameras across Washington, Utah, and Montana — including the passes drivers check most, like I-90 Snoqualmie and the Cottonwood canyons — each tagged with its route and mile marker — plus Washington State Ferries terminal cams so you can see the holding lanes before you commit. More states coming.</p>
+    <p class="sub">See the actual road before you drive it. Live DOT cameras across Washington, Oregon, Utah, and Montana — including the passes drivers check most, like I-90 Snoqualmie and the Cottonwood canyons — each tagged with its route and mile marker — plus Washington State Ferries terminal cams so you can see the holding lanes before you commit. More states coming.</p>
   </div>
 
   <div class="cl-wrap">
@@ -132,6 +132,7 @@
         <select id="stateSel">
           <option value="">Choose a state…</option>
           <option value="MT">Montana</option>
+          <option value="OR">Oregon</option>
           <option value="UT">Utah</option>
           <option value="WA">Washington</option>
         </select>
@@ -150,7 +151,7 @@
   </div>
 
   <div class="cl-notes">
-    <b>About this data:</b> camera images come directly from state departments of transportation — WSDOT, UDOT, and MDT — the same official cameras the DOTs use to monitor their own roads. Images refresh on the DOT's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the DOT provides them; Washington State Ferries terminal and holding-lane cameras are included (blue dots). Washington, Utah, and Montana today; more states are being added.
+    <b>About this data:</b> camera images come directly from state departments of transportation — WSDOT, ODOT/TripCheck, UDOT, and MDT — the same official cameras the DOTs use to monitor their own roads. Images refresh on the DOT's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the DOT provides them; Washington State Ferries terminal and holding-lane cameras are included (blue dots). Washington, Oregon, Utah, and Montana today; more states are being added.
   </div>
 
   <footer class="site-footer">
@@ -184,14 +185,14 @@
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera images: WSDOT, UDOT, and MDT via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera images: WSDOT, ODOT, UDOT, and MDT via MileCheck. Always drive to conditions and follow posted signs.</p>
     </div>
   </footer>
 
 <script>
 const map=L.map('cammap',{scrollWheelZoom:true,attributionControl:true,preferCanvas:true});
 const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
-const ATTR='Esri, USGS · cameras: WSDOT / UDOT / MDT via MileCheck';
+const ATTR='Esri, USGS · cameras: WSDOT / ODOT / UDOT / MDT via MileCheck';
 const baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});
 const baseSat=L.layerGroup([
   L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17}),
@@ -203,8 +204,8 @@ L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreet
 // Center on the 3-state coverage area, not the whole US.
 map.setView([45.6,-115.5],5);
 
-const SB={"WA":[45.54,-124.85,49,-116.91],"UT":[37,-114.05,42,-109.04],"MT":[44.36,-116.05,49,-104.04]};
-const NAMES={WA:"Washington",UT:"Utah",MT:"Montana"};
+const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"UT":[37,-114.05,42,-109.04],"MT":[44.36,-116.05,49,-104.04]};
+const NAMES={WA:"Washington",OR:"Oregon",UT:"Utah",MT:"Montana"};
 const sel=document.getElementById('stateSel');
 sel.onchange=()=>{const c=sel.value;
   if(!c){map.setView([45.6,-115.5],5);return;}
@@ -217,7 +218,7 @@ let CAMS=[];
 // Keep highway cameras + ferry-terminal cameras (Leah 7-04: "ferry is a big
 // one" — WSF holding-lane cams are exactly what PNW drivers check). Airport /
 // city-street cams stay filtered out.
-const ROAD_RE=/^(I|US|SR|WA|UT|MT|\d)[- ]?\d*/i;
+const ROAD_RE=/^(I|US|SR|WA|OR|UT|MT|\d)[- ]?\d*/i;
 const FERRY_RE=/ferr/i;
 function statesInView(){
   const b=map.getBounds(),out=[];
@@ -248,7 +249,7 @@ function popupHtml(c){
     <div class="fp-st">${[c.ferry?"⛴ Ferry terminal":c.route,(c.mp||c.mp===0)&&c.mp>0&&!c.ferry?"MP "+Math.round(c.mp):null,NAMES[c.st]||c.st].filter(Boolean).join(" · ")}</div>
     <img id="${id}" src="${bust}" alt="Live view: ${c.title}" loading="lazy"
       onerror="this.alt='Camera image unavailable right now';this.style.minHeight='60px';">
-    <div class="fp-meta"><span>Live from ${c.st==='WA'?'WSDOT':c.st==='UT'?'UDOT':'MDT'}</span>
+    <div class="fp-meta"><span>Live from ${c.st==='WA'?'WSDOT':c.st==='OR'?'ODOT':c.st==='UT'?'UDOT':'MDT'}</span>
       <button class="fp-refresh" onclick="var i=document.getElementById('${id}');i.src='${c.img.replace(/'/g,"")}'+('${c.img.includes("?")?"&":"?"}')+'t='+Date.now();return false;">↻ Refresh</button></div>
     <div class="fp-row"><a href="https://milecheckapp.com" style="font-weight:700">These cameras + live alerts on your route — MileCheck →</a></div></div>`;
 }
@@ -276,7 +277,7 @@ function render(){
   bs.className=inView.length?"bigstatus":"bigstatus hint";
   bs.textContent=inView.length?("📷 "+inView.length+" live camera"+(inView.length>1?"s":"")+" in view"):"No cameras in this view";
   const rows=document.getElementById("camRows");
-  if(!inView.length){rows.innerHTML=`<div class="cl-empty">No cameras here<small>Camera coverage is Washington, Utah, and Montana today — more states coming.</small></div>`;return;}
+  if(!inView.length){rows.innerHTML=`<div class="cl-empty">No cameras here<small>Camera coverage is Washington, Oregon, Utah, and Montana today — more states coming.</small></div>`;return;}
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0)));
   rows.innerHTML=sorted.slice(0,60).map((c,i)=>`<div class="crow" data-i="${i}">
       <div class="t"><span class="rt">${c.ferry?"⛴ Ferry":c.route}${c.mp>0&&!c.ferry?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
