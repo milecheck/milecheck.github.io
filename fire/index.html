@@ -55,7 +55,7 @@
     .fire-legend .lg-new{background:#111;}.fire-legend .lg-rx{background:#c47f0a;}
     #firemap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
-    .bigstatus{position:absolute;top:12px;left:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;}
+    .bigstatus{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;}
     .bigstatus.ok{color:#0f7a4f;}.bigstatus.warn{color:#cf3320;}
     .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
     .nearme:hover{background:#2a2f36;}
@@ -90,7 +90,7 @@
     .fire-filter button:last-child{border-right:0;}
     .fire-filter button.on{background:#cf3320;color:#fff;}
     .cl-ic{font-size:23px;line-height:1;text-align:center;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));}
-    .cl-legend{position:absolute;top:58px;left:12px;z-index:800;background:#cf3320;color:#fff;border:1.5px solid #fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:800;box-shadow:0 2px 8px rgba(207,51,32,.35);cursor:default;}
+    .cl-legend{position:absolute;top:58px;left:58px;z-index:800;background:#cf3320;color:#fff;border:1.5px solid #fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:800;box-shadow:0 2px 8px rgba(207,51,32,.35);cursor:default;}
     .fire-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
     .fire-list .lh{padding:12px 16px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;}
     .fire-rows{overflow-y:auto;}
@@ -128,8 +128,9 @@
 
     @media (max-width: 760px){
       .fire-mapbox{height:56vh;}
-      .bigstatus{font-size:13px;padding:6px 10px;max-width:52%;left:58px;}
-      .cl-legend{top:50px;font-size:12px;padding:6px 10px;max-width:70%;left:58px;}
+      .leaflet-control-zoom{display:none;}
+      .bigstatus{font-size:13px;padding:6px 10px;max-width:66%;left:12px;}
+      .cl-legend{top:50px;font-size:12px;padding:6px 10px;max-width:80%;left:12px;}
       .nearme{font-size:12px;padding:8px 11px;}
       .fire-list{max-height:none;}
       .fire-rows{max-height:52vh;}
