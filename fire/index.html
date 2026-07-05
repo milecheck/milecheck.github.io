@@ -69,6 +69,10 @@
     .state-sel{display:flex;gap:8px;align-items:center;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 14px;}
     .state-sel label{font-weight:800;font-size:13px;}
     .state-sel select{flex:1;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;}
+    .fire-filter{display:flex;border:1px solid #E5E5E5;border-radius:12px;overflow:hidden;background:#fff;}
+    .fire-filter button{flex:1;border:0;background:#fff;font:inherit;font-weight:700;font-size:12.5px;padding:9px 6px;cursor:pointer;color:#5b6670;border-right:1px solid #F0F0F0;}
+    .fire-filter button:last-child{border-right:0;}
+    .fire-filter button.on{background:#cf3320;color:#fff;}
     .cl-ic{font-size:23px;line-height:1;text-align:center;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));}
     .cl-legend{position:absolute;top:58px;left:12px;z-index:800;background:#cf3320;color:#fff;border:1.5px solid #fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:800;box-shadow:0 2px 8px rgba(207,51,32,.35);cursor:default;}
     .fire-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
@@ -149,6 +153,11 @@
     <div class="fire-side">
       <div class="state-sel"><label for="stateSel">State</label>
         <select id="stateSel"><option value="">All USA</option></select>
+      </div>
+      <div class="fire-filter" id="fireFilter">
+        <button data-f="all" class="on">All fires</button>
+        <button data-f="new">New &lt;48h</button>
+        <button data-f="large">1,000+ ac</button>
       </div>
       <div class="fire-list">
         <div class="lh" id="listHead">Largest active fires</div>
@@ -231,27 +240,35 @@ L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreet
   {position:'bottomright',collapsed:true}).addTo(map);
 map.setView([39.5,-98.35],4);   // lower 48
 let fireLayer=L.layerGroup().addTo(map), perimLayer=L.layerGroup().addTo(map);
-let FIRES=[],busy=false;
+let FIRES=[],busy=false,fireFilter="all";
 
 function envParam(){const b=map.getBounds();
   return encodeURIComponent(JSON.stringify({xmin:b.getWest(),ymin:b.getSouth(),xmax:b.getEast(),ymax:b.getNorth(),spatialReference:{wkid:4326}}));}
 
+function shownFires(){
+  if(fireFilter==="new")   return FIRES.filter(f=>!f.rx&&isNewFire(f));
+  if(fireFilter==="large") return FIRES.filter(f=>f.ac>=1000);
+  return FIRES;
+}
 function render(){
   fireLayer.clearLayers();
   const z=map.getZoom();
+  const S=shownFires();
   // label the biggest fires, but skip any whose label would collide with an
-  // already-labeled neighbor (greedy, biggest-first, ~110px min spacing)
+  // already-labeled neighbor (greedy, biggest-first). Only fires >=100 ac get a
+  // label so tiny fires don't add clutter; tighter spacing + fewer labels.
   const labeled=new Set();
   if(z>=6){
-    const placed=[];
-    for(const f of FIRES){
-      if(labeled.size>=10)break;
+    const placed=[], maxLabels = fireFilter==="all" ? 8 : 14;
+    for(const f of S){
+      if(labeled.size>=maxLabels)break;
+      if(f.ac<100 && !isNewFire(f))continue;   // skip tiny, non-new fires
       const pt=map.latLngToContainerPoint([f.lat,f.lon]);
-      if(placed.some(q=>Math.abs(q.x-pt.x)<110&&Math.abs(q.y-pt.y)<34))continue;
+      if(placed.some(q=>Math.abs(q.x-pt.x)<128&&Math.abs(q.y-pt.y)<38))continue;
       placed.push(pt);labeled.add(f.name);
     }
   }
-  FIRES.forEach((f,i)=>{
+  S.forEach((f,i)=>{
     const out=f.cont!=null&&f.cont>=100;
     const m=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="fire-ic${out?' out':''}">🔥</div>`,iconSize:[26,26],iconAnchor:[13,13]})}).addTo(fireLayer);
     m.bindPopup(popupHtml(f),{maxWidth:280});
@@ -262,11 +279,12 @@ function render(){
     }
   });
   const bs=document.getElementById("bigStatus");
-  if(FIRES.length){bs.className="bigstatus warn";bs.textContent=FIRES.length+" active fire"+(FIRES.length>1?"s":"")+" in view";}
-  else{bs.className="bigstatus ok";bs.textContent="No active fires in view";}
+  const label=fireFilter==="new"?"new fire":(fireFilter==="large"?"large fire":"active fire");
+  if(S.length){bs.className="bigstatus warn";bs.textContent=S.length+" "+label+(S.length>1?"s":"")+" in view";}
+  else{bs.className="bigstatus ok";bs.textContent=fireFilter==="new"?"No new fires in view":(fireFilter==="large"?"No large fires in view":"No active fires in view");}
   const rows=document.getElementById("fireRows");
-  if(!FIRES.length){rows.innerHTML=`<div class="fire-empty">✓ All clear<small>No active fires in the current map view. Pan or zoom out to see more.</small></div>`;return;}
-  rows.innerHTML=FIRES.slice(0,25).map((f,i)=>{
+  if(!S.length){const msg=fireFilter==="new"?"No fires started in the last 48 hours in this view.":(fireFilter==="large"?"No fires over 1,000 acres in this view.":"No active fires in the current map view. Pan or zoom out to see more.");rows.innerHTML=`<div class="fire-empty">✓ All clear<small>${msg}</small></div>`;return;}
+  rows.innerHTML=S.slice(0,25).map((f,i)=>{
     const out=f.cont!=null&&f.cont>=100;
     const started=f.disc?new Date(f.disc).toLocaleDateString([], {month:"short",day:"numeric"}):null;
     const where=[f.st,f.county?f.county+" Co.":null].filter(Boolean).join(" · ");
@@ -279,7 +297,7 @@ function render(){
       ${cont}
     </div>`;}).join("");
   rows.querySelectorAll('.frow').forEach(el=>el.onclick=()=>{
-    const f=FIRES[+el.dataset.i]; if(!f)return;
+    const f=S[+el.dataset.i]; if(!f)return;
     rememberView();
     map.flyTo([f.lat,f.lon],11,{duration:.9});
     L.popup({maxWidth:280}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map);
@@ -340,6 +358,12 @@ map.on('popupclose',()=>{
 
 let mvTimer=null;
 map.on('moveend',()=>{clearTimeout(mvTimer);mvTimer=setTimeout(loadFires,400);});
+document.getElementById('fireFilter').onclick=e=>{
+  if(!e.target.dataset.f)return;
+  fireFilter=e.target.dataset.f;
+  [...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));
+  render();
+};
 document.getElementById('nearMe').onclick=()=>{
   if(!navigator.geolocation)return;
   navigator.geolocation.getCurrentPosition(p=>{map.setView([p.coords.latitude,p.coords.longitude],7);},()=>{},{timeout:8000});
