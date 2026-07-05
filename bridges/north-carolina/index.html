@@ -150,6 +150,9 @@
   </footer>
 
 <script>
+function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
+  if(!m)return c||'';
+  return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
 const SCHED=[{"n":"Wrightsville Beach Bridge (US-74/76, Heide Trask)","la":34.218228,"lo":-77.81249,"s":"Opens on the hour, 7 a.m.–7 p.m.; on signal at other times. The busiest drawbridge in NC — expect openings every hour on the hour in season.","w":"Intracoastal Waterway","c":"33 CFR 117.821"},{"n":"Cape Fear Memorial Bridge","la":34.228558,"lo":-77.954944,"s":"at Wilmington need not open for the passage of vessels from 7 a.m. to 9 a.m. on the second Saturday of July of every year, and from 7 a.m. to 11 a.m. on the first or second Sunday of November of ev…","w":"Cape Fear River","c":"33 CFR 117.822"},{"n":"Isabel S. Holmes Bridge","la":34.251105,"lo":-77.949417,"s":"at mile 1.0, at Wilmington, North Carolina will operate as follows: (1) The draw will be closed to pleasure craft from 6 a.m. to 6 p.m. every day except at 10 a.m. and 2 p.m. when the draw will ope…","w":"Northeast Cape Fear River","c":"33 CFR 117.829(a)"},{"n":"Alligator River Bridge (US-64, Lindsey C. Warren)","la":35.899603,"lo":-76.003889,"s":"Swing bridge on the main route to the Outer Banks — opens on signal, except need not open when winds exceed 34 knots. A fixed replacement is under construction.","w":"Alligator River","c":"33 CFR 117.809"},{"n":"US17-264 bridge","la":35.542843,"lo":-77.061786,"s":"shall open on signal if at least 24 hours notice is given. The bridge owners shall restore constant attendance when so directed by the District Commander.","w":"Pamlico and Tar Rivers","c":"33 CFR 117.831"},{"n":"US 158 Highway Bridge","la":36.301135,"lo":-76.217077,"s":"shall open on signal; except that between 7 a.m. and 9 a.m., and 4 p.m. and 6 p.m., Monday through Friday, the draw need open only at 7:30 a.m., 8:30 a.m., 4:30 p.m., and 5:30 p.m. for any pleasure…","w":"Pasquotank River","c":"33 CFR 117.833(b)"},{"n":"U.S. 70 Bridge","la":35.101218,"lo":-77.037104,"s":"Shall open on signal from 10 p.m. to 6 a.m.","w":"Trent River","c":"33 CFR 117.843(c)"},{"n":"US-17 Business Bridge (South Mills)","la":36.445884,"lo":-76.327222,"s":"Opens on signal except opens at specific scheduled times coordinated with the South Mills lock.","w":"Dismal Swamp Canal","c":"33 CFR 117.milepost"}];
 
 const map=L.map('brmap',{scrollWheelZoom:true});
@@ -166,7 +169,7 @@ SCHED.forEach(b=>{
   if(b.g) return; // live-tagged bridges are drawn by the live layer
   const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
   const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
-    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+b.c+'</div></div>');
+    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+cfrLink(b.c)+'</div></div>');
   schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
 });
 

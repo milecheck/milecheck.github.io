@@ -150,6 +150,9 @@
   </footer>
 
 <script>
+function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
+  if(!m)return c||'';
+  return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
 const SCHED=[{"n":"Barter's Island Bridge","la":43.881419,"lo":-69.671531,"s":"between Hodgdon and Barters Island at Boothbay, shall open on signal from June 1 through October 31; except that, from 5 p.m. to 8 a.m., the draw shall be opened on signal if notice was given to th…","w":"Back River","c":"33 CFR 117.523"},{"n":"Carlton Bridge","la":43.911418,"lo":-69.807997,"s":"From May 15 through September 30 the draw shall open on signal; except that, from 5 p.m. to 8 a.m., the draw shall open on signal if a two-hour notice is given by calling the number posted at the b…","w":"Kennebec River","c":"33 CFR 117.525(a)"},{"n":"Carlton Bridge","la":43.911418,"lo":-69.807997,"s":"From October 1 through May14 the draw shall open on signal; except that, from 5 p.m. to 8 a.m., the draw shall open on signal after a twenty-four hours notice is given from 8 a.m. to 5 p.m., on Sat…","w":"Kennebec River","c":"33 CFR 117.525(b)"},{"n":"Memorial (US 1) bridge","la":43.079522,"lo":-70.752574,"s":"shall open on signal; except that from 15 May through 31 October, from 7 a.m. to 7 p.m., the draw need be opened only on the hour and half hour for recreational vessels and commercial vessels less…","w":"Piscataqua River","c":"33 CFR 117.531(b)"},{"n":"Maine Central Railroad Bridge","la":44.319204,"lo":-69.772206,"s":"between Wiscasset and North Edgecombe, Maine, need not be opened for the passage of vessels. The draw of the Maine Central Railroad Bridge shall be returned to operable condition within six months…","w":"Sheepscot River","c":"33 CFR 117.533"},{"n":"Southport (SR27) Bridge","la":43.842649,"lo":-69.654108,"s":"at mile 0.7, across Townsend Gut between Boothbay Harbor and Southport, Maine shall open on signal; except that, from April 29 through September 30, between 6 a.m. and 6 p.m., the draw shall open o…","w":"Townsend Gut","c":"33 CFR 117.537"}];
 
 const map=L.map('brmap',{scrollWheelZoom:true});
@@ -166,7 +169,7 @@ SCHED.forEach(b=>{
   if(b.g) return; // live-tagged bridges are drawn by the live layer
   const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
   const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
-    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+b.c+'</div></div>');
+    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+cfrLink(b.c)+'</div></div>');
   schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
 });
 

@@ -152,6 +152,10 @@
   </footer>
 
 <script>
+function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
+  if(!m)return c||'';
+  return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
+
 const LA_URL='https://milepost-proxy.leahgerber93.workers.dev/la-bridges';
 
 const map=L.map('brmap',{scrollWheelZoom:true});
@@ -166,7 +170,7 @@ const schedIndex=[];
 SCHED.forEach(b=>{
   const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
   const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
-    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div><div class="cite">'+b.w+' · '+b.c+'</div></div>');
+    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div><div class="cite">'+b.w+' · '+cfrLink(b.c)+'</div></div>');
   schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
 });
 
