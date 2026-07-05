@@ -59,6 +59,9 @@
     .frow .newtag{font-size:10px;}
     .fpop .newtag{font-size:10px;}
     .lblwrap{text-align:center;pointer-events:none;}
+    .firelbl,.firelbl.leaflet-interactive{pointer-events:none;background:transparent;}
+    .firelbl .fire-lbl{pointer-events:auto;cursor:pointer;}
+    .firelbl .fire-lbl:hover{filter:brightness(1.08);}
     .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
     .fpop .fp-nm{font-weight:800;font-size:15px;}
     .fpop .fp-st{color:#5b6670;font-size:12.5px;font-weight:600;margin:2px 0 8px;}
@@ -280,7 +283,8 @@ function render(){
     m.on('click',()=>{ L.popup({maxWidth:280,autoPan:true}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map); });
     if(labeled.has(f.name)){
       const contTxt=f.cont!=null?` · ${Math.round(f.cont)}%`:"";
-      L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="lblwrap"><span class="fire-lbl${f.rx?' rxc':''}">${(!f.rx&&isNewFire(f))?'<span class="newtag">NEW</span>':''}${f.name} · ${Math.round(f.ac).toLocaleString()} ac${contTxt}</span></div>`,iconSize:[200,20],iconAnchor:[100,-12]}),interactive:false}).addTo(fireLayer);
+      const lm=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'firelbl',html:`<div class="lblwrap"><span class="fire-lbl${f.rx?' rxc':''}">${(!f.rx&&isNewFire(f))?'<span class="newtag">NEW</span>':''}${f.name} · ${Math.round(f.ac).toLocaleString()} ac${contTxt}</span></div>`,iconSize:[200,20],iconAnchor:[100,-12]})}).addTo(fireLayer);
+      lm.on('click',()=>{ L.popup({maxWidth:280,autoPan:true}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map); });
     }
   });
   const bs=document.getElementById("bigStatus");
