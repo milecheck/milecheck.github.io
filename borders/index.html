@@ -103,12 +103,12 @@
 
   <div class="bw-hero">
     <h1>Border crossing <span class="accent">wait times</span> — live</h1>
-    <p class="sub"><strong>These are the waits to cross <em>into</em> the US</strong> — northbound from Mexico, southbound from Canada. Every US land crossing, live from US Customs and Border Protection, passenger and commercial lanes, sorted worst-first so you can pick the faster crossing before you commit to a lane. <span style="color:#8A939B;">(CBP doesn't measure the wait to leave the US — that's the other country's border agency.)</span></p>
+    <p class="sub">Every US land crossing, live — <strong>into the US</strong> from CBP at all 83 crossings, and <strong>into Canada</strong> from CBSA at the busiest Canadian crossings. Passenger and commercial lanes, sorted worst-first so you can pick the faster crossing before you commit to a lane. <span style="color:#8A939B;">(Mexico's agency doesn't publish southbound waits, so the Mexican border shows into-US only.)</span></p>
   </div>
 
   <div style="max-width:1160px;margin:14px auto 0;padding:0 20px;">
     <div style="display:inline-flex;align-items:center;gap:8px;background:#EAF2FB;border:1px solid #CBE0F5;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:700;color:#0A66C2;">
-      <span style="font-size:15px;">&rarr;</span> Wait times shown are for entering the United States
+      <span style="font-size:15px;">&rarr;</span> <span id="bwDirBanner">Wait times shown are for entering the United States</span>
     </div>
   </div>
   <div class="bw-controls">
@@ -116,6 +116,10 @@
       <button data-b="all" class="on">All</button>
       <button data-b="Mexican">Mexico</button>
       <button data-b="Canadian">Canada</button>
+    </div>
+    <div class="bw-seg" id="bwDir" style="display:none;">
+      <button data-d="ca">Into Canada</button>
+      <button data-d="us" class="on">Into the US</button>
     </div>
     <div class="bw-veh" id="bwVeh">
       <button data-v="pass" class="on">Passenger</button>
@@ -143,7 +147,7 @@
   </div>
 
   <div class="bw-notes">
-    <p><b>How to read it:</b> every wait is the time to cross <b>into the US</b> right now — CBP doesn't publish outbound waits. The number is the delay in minutes for the lane type you've picked (<b>Passenger</b> = personal vehicles, <b>Commercial</b> = trucks). <b style="color:#0f7a4f;">Green</b> is under 15 minutes, <b style="color:#b45309;">amber</b> is 15–45, <b style="color:#DC2626;">red</b> is 45+. A dash means the lane isn't reporting or is closed. The <b>Mexico</b>/<b>Canada</b> toggle filters which border you're looking at. Tap a crossing to center the map. Data can lag real conditions by a few minutes — always follow posted signs and officers at the border.</p>
+    <p><b>How to read it:</b> waits are live for the direction you've picked — <b>into the US</b> (from US CBP, all crossings) or, on the Canadian border, <b>into Canada</b> (from Canada's CBSA, the busiest crossings). Mexico shows into-US only — Mexico's agency doesn't publish southbound waits. The number is the delay in minutes for the lane type you've picked (<b>Passenger</b> = personal vehicles, <b>Commercial</b> = trucks). <b style="color:#0f7a4f;">Green</b> is under 15 minutes, <b style="color:#b45309;">amber</b> is 15–45, <b style="color:#DC2626;">red</b> is 45+. A dash means the lane isn't reporting or is closed. The <b>Mexico</b>/<b>Canada</b> toggle filters which border you're looking at. Tap a crossing to center the map. Data can lag real conditions by a few minutes — always follow posted signs and officers at the border.</p>
   </div>
 
   <footer class="site-footer">
@@ -178,7 +182,7 @@
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Border wait data from US Customs and Border Protection.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Border wait data from US CBP (into the US) and Canada's CBSA (into Canada).</p>
     </div>
   </footer>
 
@@ -207,41 +211,52 @@ const PORT_COORDS={
  "Brownsville":[25.9010,-97.4970],"B&M Bridge":[25.8880,-97.5010],"Gateway":[25.9500,-97.5410]
 };
 
-const API='https://milepost-proxy.leahgerber93.workers.dev/border-waits';
-let RAW=[], border='all', veh='pass', q='';
+const API='https://milepost-proxy.leahgerber93.workers.dev/border-crossings';
+let RAW=[], border='all', veh='pass', dir='us', q='';
 
 const map=L.map('bwmap',{scrollWheelZoom:false});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{
-  attribution:'Esri · wait times: US CBP via MileCheck',maxZoom:12}).addTo(map);
+  attribution:'Esri · waits: US CBP + CBSA via MileCheck',maxZoom:12}).addTo(map);
 map.setView([38,-98],4);
 let markers=[];
 
 function delayOf(p){
-  const grp=veh==='comm'?p.commercial_vehicle_lanes:p.passenger_vehicle_lanes;
-  const std=grp&&grp.standard_lanes; if(!std)return null;
-  const n=parseInt(std.delay_minutes,10);
-  return isNaN(n)?null:n;
+  if(dir==='ca'){
+    if(!p.intoCanada)return null;
+    const v=veh==='comm'?p.intoCanada.commercial:p.intoCanada.passenger;
+    return typeof v==='number'?v:null;
+  }
+  const grp=veh==='comm'?p.commercial:p.passenger;
+  const std=grp&&grp.standard;
+  return std&&typeof std.delayMinutes==='number'?std.delayMinutes:null;
+}
+function coordOf(p){
+  if(typeof p.lat==='number'&&typeof p.lon==='number')return [p.lat,p.lon];
+  return PORT_COORDS[p.portName]||null;
 }
 function color(m){return m==null?'#9AA4AD':m<15?'#0f7a4f':m<45?'#b45309':'#DC2626';}
 function fmt(m){return m==null?'—':m+'m';}
 
 function view(){
-  let rows=RAW.filter(p=>border==='all'||p.border.startsWith(border));
-  if(q)rows=rows.filter(p=>(p.port_name+' '+(p.crossing_name||'')).toLowerCase().includes(q));
+  let rows=RAW.filter(p=>border==='all'||(p.border||'').toLowerCase()===border.toLowerCase());
+  if(dir==='ca')rows=rows.filter(p=>p.intoCanada);
+  if(q)rows=rows.filter(p=>(p.portName+' '+(p.crossingName||'')).toLowerCase().includes(q));
   rows=rows.map(p=>({p,d:delayOf(p)}));
   rows.sort((a,b)=>{if(a.d==null)return 1;if(b.d==null)return -1;return b.d-a.d;});
   return rows;
 }
+function dirLabel(){return dir==='ca'?'entering Canada':'entering the United States';}
 function render(){
+  document.getElementById('bwDirBanner').textContent='Wait times shown are for '+dirLabel();
   const rows=view();
   const box=document.getElementById('bwRows');box.innerHTML='';
   rows.forEach(({p,d})=>{
     const el=document.createElement('div');el.className='bw-row';
-    const closed=(p.port_status||'').toLowerCase()==='closed';
+    const closed=(p.portStatus||'').toLowerCase()==='closed';
     el.innerHTML='<span class="bw-min" style="color:'+(closed?'#8A939B':color(d))+'">'+(closed?'&#10005;':fmt(d))+'</span>'+
-      '<span class="bw-nm">'+p.port_name+(closed?' <span class="bw-closed">closed</span>':'')+
-      '<span class="bw-cr">'+(p.crossing_name||'')+' · '+p.border.replace(' Border','')+'</span></span>';
-    const c=PORT_COORDS[p.port_name];
+      '<span class="bw-nm">'+p.portName+(closed?' <span class="bw-closed">closed</span>':'')+
+      '<span class="bw-cr">'+(p.crossingName||'')+' · '+(p.border==='canadian'?'Canadian':'Mexican')+'</span></span>';
+    const c=coordOf(p);
     if(c)el.onclick=()=>map.setView(c,9,{animate:true});
     box.appendChild(el);
   });
@@ -250,23 +265,37 @@ function render(){
   markers.forEach(m=>map.removeLayer(m));markers=[];
   const seen={};
   rows.forEach(({p,d})=>{
-    const c=PORT_COORDS[p.port_name];if(!c||seen[p.port_name])return;seen[p.port_name]=1;
-    const closed=(p.port_status||'').toLowerCase()==='closed';
+    const c=coordOf(p);if(!c||seen[p.portName])return;seen[p.portName]=1;
+    const closed=(p.portStatus||'').toLowerCase()==='closed';
     const sz=d==null?26:Math.min(46,28+d/8);
     const ic=L.divIcon({className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],
       html:'<div class="bw-pin" style="width:'+sz+'px;height:'+sz+'px;background:'+(closed?'#9AA4AD':color(d))+'">'+(closed?'&#10005;':fmt(d))+'</div>'});
     const m=L.marker(c,{icon:ic}).addTo(map);
-    m.bindPopup('<b>'+p.port_name+'</b><br>'+(p.crossing_name||'')+'<br>'+(closed?'Closed':(veh==='comm'?'Commercial':'Passenger')+' delay: '+fmt(d)));
+    m.bindPopup('<b>'+p.portName+'</b><br>'+(p.crossingName||'')+'<br>'+(closed?'Closed':(veh==='comm'?'Commercial':'Passenger')+' '+(dir==='ca'?'into Canada':'into the US')+': '+fmt(d)));
     markers.push(m);
   });
 }
+function setDir(v){
+  dir=v;
+  [...document.getElementById('bwDir').children].forEach(b=>b.classList.toggle('on',b.dataset.d===v));
+  render();
+}
 async function load(){
-  try{const r=await fetch(API,{cache:'no-store'});if(r.ok)RAW=await r.json();}
+  try{const r=await fetch(API,{cache:'no-store'});if(r.ok)RAW=(await r.json())['border-crossings']||[];}
   catch(e){document.getElementById('bwRows').innerHTML='<div class="bw-row"><span class="bw-nm">Live wait times are temporarily unavailable. Try again shortly.</span></div>';return;}
   render();
-  document.getElementById('bwUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · source: US CBP · refreshes every 5 min';
+  document.getElementById('bwUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · into US: CBP · into Canada: CBSA · refreshes every 5 min';
 }
-document.getElementById('bwBorder').onclick=e=>{if(e.target.dataset.b){border=e.target.dataset.b;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render();}};
+document.getElementById('bwBorder').onclick=e=>{if(e.target.dataset.b){
+  border=e.target.dataset.b;
+  [...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));
+  // Direction toggle only makes sense on the Canadian border (CBSA data).
+  // Selecting Canada defaults to Into Canada; Mexico/All lock to Into the US.
+  const dirSeg=document.getElementById('bwDir');
+  if(border==='Canadian'){dirSeg.style.display='inline-flex';setDir('ca');}
+  else{dirSeg.style.display='none';setDir('us');}
+}};
+document.getElementById('bwDir').onclick=e=>{if(e.target.dataset.d)setDir(e.target.dataset.d);};
 document.getElementById('bwVeh').onclick=e=>{if(e.target.dataset.v){veh=e.target.dataset.v;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render();}};
 document.getElementById('bwSearch').oninput=e=>{q=e.target.value.toLowerCase().trim();render();};
 load();
