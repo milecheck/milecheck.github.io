@@ -118,7 +118,7 @@
 
   <div class="cl-hero">
     <h1>Live <span class="accent">highway cameras</span></h1>
-    <p class="sub">See the actual road before you drive it. Live DOT cameras across Washington, Utah, and Montana — including the passes drivers check most, like I-90 Snoqualmie and the Cottonwood canyons — each tagged with its route and mile marker. More states coming.</p>
+    <p class="sub">See the actual road before you drive it. Live DOT cameras across Washington, Utah, and Montana — including the passes drivers check most, like I-90 Snoqualmie and the Cottonwood canyons — each tagged with its route and mile marker — plus Washington State Ferries terminal cams so you can see the holding lanes before you commit. More states coming.</p>
   </div>
 
   <div class="cl-wrap">
@@ -150,7 +150,7 @@
   </div>
 
   <div class="cl-notes">
-    <b>About this data:</b> camera images come directly from state departments of transportation — WSDOT, UDOT, and MDT — the same official cameras the DOTs use to monitor their own roads. Images refresh on the DOT's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the DOT provides them. Washington, Utah, and Montana today; more states are being added.
+    <b>About this data:</b> camera images come directly from state departments of transportation — WSDOT, UDOT, and MDT — the same official cameras the DOTs use to monitor their own roads. Images refresh on the DOT's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the DOT provides them; Washington State Ferries terminal and holding-lane cameras are included (blue dots). Washington, Utah, and Montana today; more states are being added.
   </div>
 
   <footer class="site-footer">
@@ -214,9 +214,11 @@ const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
 let camLayer=L.layerGroup().addTo(map);
 const camCache={};
 let CAMS=[];
-// Keep highway cameras only — WA's feed includes airport/ferry cams keyed to
-// non-road "routes"; a route that starts with a road class or a digit is a road.
+// Keep highway cameras + ferry-terminal cameras (Leah 7-04: "ferry is a big
+// one" — WSF holding-lane cams are exactly what PNW drivers check). Airport /
+// city-street cams stay filtered out.
 const ROAD_RE=/^(I|US|SR|WA|UT|MT|\d)[- ]?\d*/i;
+const FERRY_RE=/ferr/i;
 function statesInView(){
   const b=map.getBounds(),out=[];
   for(const[c,v]of Object.entries(SB)){
@@ -230,10 +232,11 @@ async function camsFor(st){
     const d=await fetch(WORKER+"/cameras?state="+st,{cache:"no-store"}).then(r=>r.json());
     const list=(d.cameras||[]).filter(cm=>
       cm.isActive!==false&&isFinite(+cm.lat)&&isFinite(+cm.lon)&&+cm.lat&&
-      cm.imageUrl&&ROAD_RE.test((cm.route||"").trim())
+      cm.imageUrl&&(ROAD_RE.test((cm.route||"").trim())||FERRY_RE.test(cm.route||""))
     ).map(cm=>({
       lat:+cm.lat,lon:+cm.lon,title:(cm.title||"Traffic camera").slice(0,120),
-      route:(cm.route||"").trim(),mp:cm.mile,img:cm.imageUrl,st}));
+      route:(cm.route||"").trim(),mp:cm.mile,img:cm.imageUrl,st,
+      ferry:FERRY_RE.test(cm.route||"")}));
     camCache[st]={t:Date.now(),list};return list;
   }catch(e){camCache[st]={t:Date.now(),list:[]};return [];}
 }
@@ -242,7 +245,7 @@ function popupHtml(c){
   const id='camimg'+(++popSeq);
   const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();
   return `<div class="campop"><div class="fp-nm">${c.title}</div>
-    <div class="fp-st">${[c.route,(c.mp||c.mp===0)&&c.mp>0?"MP "+Math.round(c.mp):null,NAMES[c.st]||c.st].filter(Boolean).join(" · ")}</div>
+    <div class="fp-st">${[c.ferry?"⛴ Ferry terminal":c.route,(c.mp||c.mp===0)&&c.mp>0&&!c.ferry?"MP "+Math.round(c.mp):null,NAMES[c.st]||c.st].filter(Boolean).join(" · ")}</div>
     <img id="${id}" src="${bust}" alt="Live view: ${c.title}" loading="lazy"
       onerror="this.alt='Camera image unavailable right now';this.style.minHeight='60px';">
     <div class="fp-meta"><span>Live from ${c.st==='WA'?'WSDOT':c.st==='UT'?'UDOT':'MDT'}</span>
@@ -263,7 +266,7 @@ function render(){
   const b=map.getBounds();
   const inView=CAMS.filter(c=>b.contains([c.lat,c.lon]));
   inView.forEach(c=>{
-    const m=L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:2,fillColor:'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
+    const m=L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:2,fillColor:c.ferry?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
     m.bindPopup(()=>popupHtml(c),{maxWidth:300});
     m.on('click',()=>{rememberView();map.flyTo([c.lat,c.lon],Math.max(map.getZoom(),11),{duration:.7});});
   });
@@ -273,7 +276,7 @@ function render(){
   if(!inView.length){rows.innerHTML=`<div class="cl-empty">No cameras here<small>Camera coverage is Washington, Utah, and Montana today — more states coming.</small></div>`;return;}
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0)));
   rows.innerHTML=sorted.slice(0,60).map((c,i)=>`<div class="crow" data-i="${i}">
-      <div class="t"><span class="rt">${c.route}${c.mp>0?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
+      <div class="t"><span class="rt">${c.ferry?"⛴ Ferry":c.route}${c.mp>0&&!c.ferry?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
       <div class="sub">${c.title}</div>
     </div>`).join("")+(sorted.length>60?`<div class="cl-empty" style="padding:14px"><small>Showing 60 of ${sorted.length} — zoom in for the rest.</small></div>`:"");
   rows.querySelectorAll('.crow').forEach(el=>el.onclick=()=>{
