@@ -40,6 +40,15 @@
     .fire-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
     @media(max-width:860px){.fire-wrap{grid-template-columns:1fr;}}
     .fire-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
+    .fire-loading{position:absolute;inset:0;z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(238,240,233,.82);backdrop-filter:blur(1.5px);transition:opacity .3s;}
+    .fire-loading.done{opacity:0;pointer-events:none;}
+    .fl-spin{width:38px;height:38px;border:4px solid #E4C9C3;border-top-color:#cf3320;border-radius:50%;animation:flspin .8s linear infinite;}
+    @keyframes flspin{to{transform:rotate(360deg);}}
+    .fl-txt{font-weight:800;font-size:14px;color:#cf3320;letter-spacing:.01em;}
+    .skel{padding:12px 16px;border-bottom:1px solid #F0F0EE;}
+    .skel .sk{height:12px;border-radius:6px;background:linear-gradient(90deg,#EEE 25%,#F6F6F4 37%,#EEE 63%);background-size:400% 100%;animation:sksh 1.3s ease-in-out infinite;}
+    .skel .sk.w1{width:55%;}.skel .sk.w2{width:32%;margin-top:8px;}.skel .sk.w3{width:100%;height:6px;margin-top:9px;}
+    @keyframes sksh{0%{background-position:100% 50%;}100%{background-position:0 50%;}}
     .fire-left{display:flex;flex-direction:column;gap:10px;min-width:0;}
     .fire-legend{display:flex;gap:12px 16px;align-items:center;flex-wrap:wrap;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 14px;font-size:12.5px;color:#5b6670;font-weight:600;}
     .fire-legend .lg-pill{color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;}
@@ -157,6 +166,7 @@
         <button class="nearme" id="nearMe">Fires near me</button>
         <span class="cl-legend" id="clLegend" style="display:none">⛔ road closures · live DOT data via MileCheck</span>
         <div id="firemap"></div>
+        <div class="fire-loading" id="fireLoading"><div class="fl-spin"></div><div class="fl-txt">Loading live fire data…</div></div>
       </div>
       <div class="fire-legend">
         <span style="font-weight:800;color:#0E1116;font-size:13px;">Legend:</span>
@@ -174,7 +184,7 @@
       </div>
       <div class="fire-list">
         <div class="lh" id="listHead">Largest active fires</div>
-        <div class="fire-rows" id="fireRows"></div>
+        <div class="fire-rows" id="fireRows"><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div></div>
       </div>
       <div class="fire-cta">
         <h3>Fires don't close roads until they do.</h3>
@@ -287,6 +297,7 @@ function render(){
       lm.on('click',()=>{ L.popup({maxWidth:280,autoPan:true}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map); });
     }
   });
+  const fl=document.getElementById("fireLoading"); if(fl) fl.classList.add("done");
   const bs=document.getElementById("bigStatus");
   const label=fireFilter==="new"?"new fire":(fireFilter==="large"?"large fire":"active fire");
   if(S.length){bs.className="bigstatus warn";bs.textContent=S.length+" "+label+(S.length>1?"s":"")+" in view";}
