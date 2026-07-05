@@ -25,6 +25,25 @@
     .st-hero h1 .accent{color:#00A86B;}
     .st-hero p.sub{max-width:74ch;color:#5b6670;font-size:15px;margin-top:8px;line-height:1.55;}
     .st-grid{max-width:1160px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+    /* Split reader (desktop): list scrolls left, guide loads right — no page hop. */
+    @media(min-width:961px){
+      .st-layout{max-width:1360px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:420px 1fr;gap:18px;align-items:start;}
+      .st-layout .st-grid{max-width:none;margin:0;padding:0;grid-template-columns:1fr;max-height:calc(100vh - 140px);overflow-y:auto;padding-right:6px;}
+      .st-reader{position:sticky;top:84px;height:calc(100vh - 140px);overflow-y:auto;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:26px 30px;}
+      .stcard.active{border-color:#0E1116;box-shadow:0 0 0 1px #0E1116;}
+    }
+    .st-reader{display:none;}
+    @media(min-width:961px){.st-reader{display:block;}}
+    .st-reader .rd-empty{color:#8A939B;font-weight:700;text-align:center;padding:80px 20px;font-size:15px;line-height:1.6;}
+    .st-reader .rd-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid #E5E5E5;padding-bottom:12px;margin-bottom:16px;}
+    .st-reader .rd-title{font-size:22px;font-weight:800;letter-spacing:-0.02em;}
+    .st-reader .rd-open{font-size:13px;font-weight:700;color:#00A86B;white-space:nowrap;text-decoration:none;border-bottom:1px solid rgba(0,168,107,.4);}
+    .st-reader .article-body p{font-size:15px;line-height:1.65;color:#374151;margin:0 0 16px;}
+    .st-reader .article-body h2{font-size:17px;font-weight:800;margin:22px 0 8px;}
+    .st-reader .article-body ul{margin:0 0 16px 20px;}
+    .st-reader .article-body li{font-size:15px;line-height:1.6;color:#374151;margin-bottom:6px;}
+    .st-reader .article-body a{color:#00A86B;font-weight:600;}
+    .st-reader .article-body svg{max-width:100%;height:auto;}
     .stcard{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;display:flex;flex-direction:column;text-decoration:none;color:inherit;}
     a.stcard:hover{border-color:#0E1116;}
     .stcard.has-guide{border-color:#BFE9D9;background:#FBFEFD;}
@@ -74,6 +93,7 @@
     <p class="sub">MileCheck covers mile markers in all 50 states and pulls live DOT road alerts in 48. State by state, we're writing the driver's guide to how each one's mileposts actually work — the corridors, the passes, the quirks, and what the DOT closes. Green-bordered states have their guide.</p>
   </div>
 
+  <div class="st-layout">
   <div class="st-grid">
     <a class="stcard has-guide" href="../blog/mile-markers-alabama.html">
       <div class="st-top"><h2>Alabama</h2><span class="st-ab">AL</span></div>
@@ -425,6 +445,10 @@
       <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
     </a>
   </div>
+  <aside class="st-reader" id="stReader">
+    <div class="rd-empty">Pick a state on the left &mdash; its driver&rsquo;s guide opens right here.<br><br>&#127937; 50 of 50 written.</div>
+  </aside>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
@@ -463,5 +487,52 @@
   </footer>
 
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+<script>
+(function(){
+  var reader=document.getElementById('stReader');
+  function isSplit(){return window.matchMedia('(min-width:961px)').matches;}
+  function slugOf(href){var m=href.match(/mile-markers-([a-z-]+)\.html/);return m?m[1]:null;}
+  function loadGuide(href,card,push){
+    fetch(href).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var title=doc.querySelector('.article-title'),body=doc.querySelector('.article-body');
+      if(!title||!body)throw 0;
+      reader.innerHTML='';
+      var head=document.createElement('div');head.className='rd-head';
+      head.innerHTML='<div class="rd-title">'+title.textContent+'</div><a class="rd-open" href="'+href+'">Open full page &rarr;</a>';
+      reader.appendChild(head);
+      var bodyWrap=document.createElement('div');bodyWrap.className='article-body';
+      bodyWrap.innerHTML=body.innerHTML;
+      reader.appendChild(bodyWrap);
+      reader.scrollTop=0;
+      // In-guide links to other guides stay in the panel; fix relative hrefs (guides live in ../blog/).
+      bodyWrap.querySelectorAll('a[href]').forEach(function(a){
+        var h=a.getAttribute('href');
+        if(/^mile-markers-[a-z-]+\.html$/.test(h)){a.setAttribute('href','../blog/'+h);
+          a.addEventListener('click',function(e){if(isSplit()){e.preventDefault();loadGuide('../blog/'+h,null,true);}});}
+        else if(/^(what-to-tell-911|how-to-find)/.test(h)){a.setAttribute('href','../blog/'+h);}
+      });
+      document.querySelectorAll('.stcard.active').forEach(function(c){c.classList.remove('active');});
+      if(!card){var slug=slugOf(href);card=document.querySelector('.stcard[href$="mile-markers-'+slug+'.html"]');}
+      if(card){card.classList.add('active');if(push)card.scrollIntoView({block:'nearest'});}
+      if(push!==false){var slug2=slugOf(href);if(slug2)history.replaceState(null,'','#'+slug2);}
+    }).catch(function(){window.location.href=href;});
+  }
+  document.querySelectorAll('a.stcard.has-guide').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(!isSplit())return; // mobile: normal navigation
+      if(e.target.closest('.st-bridge'))return; // bridge chip keeps its own target
+      e.preventDefault();
+      loadGuide(a.getAttribute('href'),a,true);
+    });
+  });
+  // Deep link: /states/#oregon opens that guide in the panel.
+  if(isSplit()&&location.hash.length>1){
+    var slug=location.hash.slice(1);
+    var card=document.querySelector('.stcard[href$="mile-markers-'+slug+'.html"]');
+    if(card)loadGuide(card.getAttribute('href'),card,false);
+  }
+})();
+</script>
 </body>
 </html>
