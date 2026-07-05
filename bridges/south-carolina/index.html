@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>South Carolina Drawbridge Map — Ben Sawyer, Wappoo Cut, Lady’s Island | MileCheck</title>
+  <meta name="description" content="Every movable bridge in South Carolina on one map — Charleston’s Ben Sawyer and Wappoo Cut bridges, Beaufort’s Lady’s Island swing span, and their federal opening rules.">
+
+  <meta property="og:title" content="South Carolina Drawbridge Map — Charleston’s working spans">
+  <meta property="og:description" content="Ben Sawyer to Sullivan’s Island, Wappoo Cut on the ICW, Lady’s Island at Beaufort — every SC movable bridge and its rule.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/bridges/south-carolina/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"When does the Ben Sawyer Bridge open?","acceptedAnswer":{"@type":"Answer","text":"The Ben Sawyer (SR 703) swing bridge to Sullivan’s Island opens on signal under 33 CFR 117, with weekday rush-hour and summer-weekend restrictions to protect beach traffic."}},
+      {"@type":"Question","name":"When is the Wappoo Cut bridge closed to boats?","acceptedAnswer":{"@type":"Answer","text":"The SR 171/700 bridge over Wappoo Creek holds shut for weekday rush hours; otherwise it opens on signal with seasonal daytime schedules."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .br-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .br-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .br-hero h1 .accent{color:#7C3AED;}
+    .br-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
+    .br-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:.55fr 1.45fr;gap:16px;}
+    @media(max-width:860px){.br-wrap{grid-template-columns:1fr;}}
+    .br-list{display:flex;flex-direction:column;gap:10px;}
+    .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:460px;height:64vh;background:#eef0e9;}
+    #brmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bmk-sched{width:14px;height:14px;border-radius:50%;background:#7C3AED;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);opacity:.85;}
+    .fpop b{font-size:14px;}
+    .fpop .sched{color:#454e56;font-size:12.5px;line-height:1.5;margin-top:6px;}
+    .fpop .cite{color:#8A939B;font-size:11px;margin-top:6px;}
+    .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
+    .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .br-notes b{color:#0E1116;}
+    .br-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;margin-top:2px;}
+    .br-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .br-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .legend{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:12px 16px;font-size:12.5px;color:#5b6670;line-height:2;}
+    .legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;}
+    .bl-box{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:46vh;}
+    .bl-box .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;}
+    .bl-search{padding:9px 14px;border-bottom:1px solid #F0F0EE;}
+    .bl-search input{width:100%;font-family:inherit;font-size:13.5px;padding:8px 11px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;outline:none;}
+    .bl-rows{overflow-y:auto;}
+    .blrow{padding:10px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+    .blrow:hover{background:#F7F5EE;}
+    .blrow:last-child{border-bottom:none;}
+    .blrow.nomap{cursor:default;}
+    .blrow .nm{font-weight:700;font-size:13px;line-height:1.35;}
+    .blrow .sub{color:#8A939B;font-size:11.5px;margin-top:1px;}
+    .blrow .chip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+    .chip.c-sched{background:#F1EBFB;color:#7C3AED;}
+    .chip.c-list{background:#F0F0EE;color:#8A939B;}
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/" class="active">Maps</a>
+        <a href="../../states/">States</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="br-hero">
+    <h1>South Carolina <span class="accent">drawbridge map</span> — the Lowcountry spans</h1>
+    <p class="sub">The Intracoastal Waterway threads the Lowcountry, and its movable bridges still shape the drive — Ben Sawyer swings for Sullivan’s Island, Wappoo Cut holds rush hours in Charleston, and the Lady’s Island swing span meters Beaufort traffic. Tap any bridge for its rule.</p>
+  </div>
+
+  <div class="br-wrap">
+    <div class="br-list" id="brList">
+      <div class="legend">
+        <span class="sw" style="background:#7C3AED;"></span>Movable bridge — tap for its opening rules<br>
+        <span style="color:#8A939B;">ICW bridges hold shut through Charleston and Beaufort rush hours.</span>
+      </div>
+      <div class="bl-box">
+        <div class="lh"><span>All South Carolina movable bridges</span><span id="blCount" style="color:#8A939B;font-weight:700;font-size:12px;"></span></div>
+        <div class="bl-search"><input id="blSearch" type="search" placeholder="Search bridge, road, or waterway…" aria-label="Search bridges"></div>
+        <div class="bl-rows" id="blRows"></div>
+      </div>
+      <div class="br-cta">
+        <h3>Get drawbridge + road alerts in the app</h3>
+        <p>MileCheck shows live DOT alerts, mile markers, and bridges on the road — in all 50 states, with CarPlay and Android Auto.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+      <span class="br-updated" id="brUpdated">—</span>
+    </div>
+    <div class="br-mapbox"><div id="brmap"></div></div>
+  </div>
+
+  <div class="br-notes">
+    <p><b>How it works:</b> opening rules come from the US Coast Guard’s Drawbridge Operation Regulations (33 CFR Part 117). South Carolina publishes no live drawbridge status, so schedules are the tool here. Bridges without a map pin are listed with their rule but haven’t been precisely located yet. Also see <a href="../">Seattle</a> and the other state pages on the <a href="../../maps/">Maps hub</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-fineprint" style="text-align:center;">&copy; 2026 MileCheck LLC. Schedules: 33 CFR 117 (USCG) · <a href="../../index.html">milecheckapp.com</a></p>
+    </div>
+  </footer>
+
+<script>
+function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
+  if(!m)return c||'';
+  return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
+const SCHED=[{"n":"(a) General. Public vessels of the United States and tugs wi","s":"General. Public vessels of the United States and tugs with tows, upon proper signal, will be passed through the drawspan of each drawbridge listed in this section at anytime.","w":"Atlantic Intracoastal Waterway, Little River to Savannah River","c":"33 CFR 117.911(a)"},{"n":"(b) Little River Bridge across Upper Litte River, mile 347.3","s":"Little River Bridge across Upper Litte River, mile 347.3, at North Myrtle Beach. The draw shall open on signal, except that from 7 a.m. to 9 a.m. and 4 p.m. to 6 p.m., Monday through Friday, except…","w":"Atlantic Intracoastal Waterway, Little River to Savannah River","c":"33 CFR 117.911(b)"},{"n":"SR 703 bridge","s":"Ben Sawyer (SR 703) bridge across Sullivan's Island Narrows, mile 462.2 between Sullivan's Island and Mount Pleasant. The draw shall open on signal; except that, the draw need not open from 7 a.m.…","w":"Atlantic Intracoastal Waterway, Little River to Savannah River","c":"33 CFR 117.911(c)","la":32.772723,"lo":-79.842045},{"n":"SR 171 bridge","s":"SR 171/700 (Wappoo Cut) Bridge across Wappoo Creek, mile 470.8, at Charleston, SC. The draw shall open on signal; except that the draw need not open from 6 a.m. to 9:29 a.m. and 3:31 p.m. to 7 p.m.…","w":"Atlantic Intracoastal Waterway, Little River to Savannah River","c":"33 CFR 117.911(d)","la":32.766367,"lo":-79.97406},{"n":"Lady's Island (Woods Memorial) Bridge","s":"Lady's Island (Woods Memorial) Bridge, across the Beaufort River, mile 536.0, at Beaufort, SC. The draw shall operate as follows: (1) Monday through Friday, except Federal holidays: (i) From 6 a.m.…","w":"Atlantic Intracoastal Waterway, Little River to Savannah River","c":"33 CFR 117.911(e)","la":32.394775,"lo":-80.626034},{"n":"Seaboard System Railroad bridge","s":"need not be opened for the passage of vessels. However, the draw shall be returned to operable condition within six months after notification by the District Commander to do so.","w":"Ashepoo River","c":"33 CFR 117.913"},{"n":"US17 Highway Bridges","s":"SC shall open on signal; except that, from 4 p.m. to 9 a.m. daily, the draws shall open only if at least 12 hours notice is given. The draws of either bridge shall open as soon as possible for the…","w":"Ashley River","c":"33 CFR 117.915(a)"},{"n":"Seaboard System Railroad bridge","s":"shall open on signal from 7 a.m. to 11 p.m. From 11 p.m. to 7 a.m., the draw shall open on signal if at least three hours notice is given.","w":"Ashley River","c":"33 CFR 117.915(b)"},{"n":"Southern Railway bridge","s":"shall open on signal if at least 24 hours notice is given.","w":"Congaree River","c":"33 CFR 117.923"},{"n":"Seaboard System Railroad bridge","s":"shall open on signal if at least six hours advance notice is given.","w":"Cooper River","c":"33 CFR 117.925"},{"n":"The removable span of the Seaboard System Railroad bridge","s":"The removable span of the Seaboard System Railroad bridge, mile 1.7 at Bushy Park, shall be removed to allow the passage of dredges and construction equipment if at least 20 days notice is given. W…","w":"Durham Creek","c":"33 CFR 117.929"},{"n":"Waccamaw Coast Line Railroad bridge","s":"shall open on signal; except that from 8 a.m. to 6 p.m. Monday through Friday, the draw shall open on signal if at least one hour notice is given.","w":"Waccamaw River","c":"33 CFR 117.938"}];
+
+const map=L.map('brmap',{scrollWheelZoom:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'Esri · schedules: 33 CFR 117 via MileCheck',maxZoom:17}).addTo(map);
+map.fitBounds([[32.144775,-80.976034],[33.022723,-79.492045]],{padding:[14,14],maxZoom:11});
+
+const schedIndex=[];
+SCHED.forEach(b=>{
+  if(typeof b.la==='number'){
+    const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
+    const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
+      .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+cfrLink(b.c)+'</div></div>');
+    schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
+  }else{
+    schedIndex.push({name:b.n,sub:b.w+' · '+(b.c||''),search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:null,rule:b.s,cite:b.c});
+  }
+});
+
+function renderList(){
+  const q=(document.getElementById('blSearch').value||'').toLowerCase().trim();
+  const rows=document.getElementById('blRows');
+  const items=schedIndex.slice().sort((a,b)=>(a.marker?0:1)-(b.marker?0:1)||a.name.localeCompare(b.name));
+  const shown=items.filter(x=>!q||x.search.includes(q));
+  document.getElementById('blCount').textContent=shown.length+' of '+items.length;
+  rows.innerHTML='';
+  shown.forEach(x=>{
+    const el=document.createElement('div');
+    el.className='blrow'+(x.marker?'':' nomap');
+    el.innerHTML='<div><div class="nm">'+x.name+'</div><div class="sub">'+(x.sub||'')+'</div></div><span class="chip '+(x.marker?'c-sched':'c-list')+'">'+(x.marker?'schedule':'no pin')+'</span>';
+    if(x.marker){
+      el.addEventListener('click',()=>{
+        map.flyTo([x.lat,x.lon],13,{duration:.8});
+        setTimeout(()=>x.marker.openPopup(),850);
+        if(window.innerWidth<860)document.querySelector('.br-mapbox').scrollIntoView({behavior:'smooth'});
+      });
+    }else{
+      el.title=(x.rule||'').slice(0,300);
+    }
+    rows.appendChild(el);
+  });
+}
+document.getElementById('blSearch').addEventListener('input',renderList);
+
+document.getElementById('brUpdated').textContent='Rules per 33 CFR 117 (USCG)';
+renderList();
+
+document.querySelector('.nav-toggle').addEventListener('click',()=>document.querySelector('.primary-nav').classList.toggle('open'));
+</script>
+</body>
+</html>

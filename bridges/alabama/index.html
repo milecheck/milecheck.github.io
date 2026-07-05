@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alabama Drawbridge Map — Bayou La Batre, the Black Warrior lifts | MileCheck</title>
+  <meta name="description" content="Every movable bridge in Alabama on one map — the Bayou La Batre hourly bascule, the Black Warrior and Alabama River rail lifts, and their federal opening rules.">
+
+  <meta property="og:title" content="Alabama Drawbridge Map">
+  <meta property="og:description" content="From Bayou La Batre’s shrimp fleet to the Black Warrior lifts — every Alabama movable bridge and its opening rule.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/bridges/alabama/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"When does the Bayou La Batre bridge open?","acceptedAnswer":{"@type":"Answer","text":"The SR 188 Bridge opens on signal every hour on the hour, daily between 4 a.m. and 8 p.m. under 33 CFR 117."}},
+      {"@type":"Question","name":"Does Alabama have live drawbridge status?","acceptedAnswer":{"@type":"Answer","text":"No public live feed exists. The MileCheck app shows live ALGO Traffic road alerts statewide alongside mile markers."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .br-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .br-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .br-hero h1 .accent{color:#7C3AED;}
+    .br-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
+    .br-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:.55fr 1.45fr;gap:16px;}
+    @media(max-width:860px){.br-wrap{grid-template-columns:1fr;}}
+    .br-list{display:flex;flex-direction:column;gap:10px;}
+    .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:460px;height:64vh;background:#eef0e9;}
+    #brmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bmk-sched{width:14px;height:14px;border-radius:50%;background:#7C3AED;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);opacity:.85;}
+    .fpop b{font-size:14px;}
+    .fpop .sched{color:#454e56;font-size:12.5px;line-height:1.5;margin-top:6px;}
+    .fpop .cite{color:#8A939B;font-size:11px;margin-top:6px;}
+    .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
+    .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .br-notes b{color:#0E1116;}
+    .br-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;margin-top:2px;}
+    .br-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .br-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .legend{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:12px 16px;font-size:12.5px;color:#5b6670;line-height:2;}
+    .legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;}
+    .bl-box{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:46vh;}
+    .bl-box .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;}
+    .bl-search{padding:9px 14px;border-bottom:1px solid #F0F0EE;}
+    .bl-search input{width:100%;font-family:inherit;font-size:13.5px;padding:8px 11px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;outline:none;}
+    .bl-rows{overflow-y:auto;}
+    .blrow{padding:10px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+    .blrow:hover{background:#F7F5EE;}
+    .blrow:last-child{border-bottom:none;}
+    .blrow.nomap{cursor:default;}
+    .blrow .nm{font-weight:700;font-size:13px;line-height:1.35;}
+    .blrow .sub{color:#8A939B;font-size:11.5px;margin-top:1px;}
+    .blrow .chip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+    .chip.c-sched{background:#F1EBFB;color:#7C3AED;}
+    .chip.c-list{background:#F0F0EE;color:#8A939B;}
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/" class="active">Maps</a>
+        <a href="../../states/">States</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="br-hero">
+    <h1>Alabama <span class="accent">drawbridge map</span></h1>
+    <p class="sub">Alabama’s movable bridges serve working water — the SR 188 bascule at Bayou La Batre opens on the hour for the shrimp fleet, and the river system’s railroad lifts on the Alabama and Black Warrior still turn for barge tows. Tap any bridge for its rule.</p>
+  </div>
+
+  <div class="br-wrap">
+    <div class="br-list" id="brList">
+      <div class="legend">
+        <span class="sw" style="background:#7C3AED;"></span>Movable bridge — tap for its opening rules<br>
+        <span style="color:#8A939B;">Bayou La Batre’s SR 188 span opens hourly, 4 a.m.–8 p.m., for the shrimp fleet.</span>
+      </div>
+      <div class="bl-box">
+        <div class="lh"><span>All Alabama movable bridges</span><span id="blCount" style="color:#8A939B;font-weight:700;font-size:12px;"></span></div>
+        <div class="bl-search"><input id="blSearch" type="search" placeholder="Search bridge, road, or waterway…" aria-label="Search bridges"></div>
+        <div class="bl-rows" id="blRows"></div>
+      </div>
+      <div class="br-cta">
+        <h3>Get drawbridge + road alerts in the app</h3>
+        <p>MileCheck shows live DOT alerts, mile markers, and bridges on the road — in all 50 states, with CarPlay and Android Auto.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+      <span class="br-updated" id="brUpdated">—</span>
+    </div>
+    <div class="br-mapbox"><div id="brmap"></div></div>
+  </div>
+
+  <div class="br-notes">
+    <p><b>How it works:</b> opening rules come from the US Coast Guard’s Drawbridge Operation Regulations (33 CFR Part 117). Alabama publishes no live drawbridge status, so schedules are the tool here. Bridges without a map pin are listed with their rule but haven’t been precisely located yet. Also see <a href="../">Seattle</a> and the other state pages on the <a href="../../maps/">Maps hub</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-fineprint" style="text-align:center;">&copy; 2026 MileCheck LLC. Schedules: 33 CFR 117 (USCG) · <a href="../../index.html">milecheckapp.com</a></p>
+    </div>
+  </footer>
+
+<script>
+function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
+  if(!m)return c||'';
+  return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
+const SCHED=[{"n":"(a) The Alabama & Gulf Coast Railway Drawbridge, mile 105.3,","s":"The Alabama & Gulf Coast Railway Drawbridge, mile 105.3, at Coy, shall open on signal if at least 24 hours notice is given.","w":"Alabama River","c":"33 CFR 117.101(a)"},{"n":"Meridian and Bigbee Railroad (MNBR) Bridge","s":"shall open on signal if at least 24 hours notice is given. An opening can be arranged by contacting the Meridian and Bigbee Railroad Roadmaster at 601-480-5071.","w":"Alabama River","c":"33 CFR 117.101(b)"},{"n":"Canadian National/Illinois Central railroad bridge","s":"shall open on signal if at least 24 hours notice is given.","w":"Alabama River","c":"33 CFR 117.101(c)"},{"n":"CSX Transportation Railroad bridge","s":"shall open on signal if at least 24 hours notice is given.","w":"Alabama River","c":"33 CFR 117.101(d)"},{"n":"SR 188 Bridge","s":"will open on signal every hour on the hour daily between 4 a.m. and 8 p.m., Monday through Sunday. The bridge need not open for the passage of vessels on the hours of 7 a.m., 3 p.m., and 4 p.m., Mo…","w":"Bayou La Batre","c":"33 CFR 117.103","la":30.425207,"lo":-88.240561},{"n":"CSX Transportation Railroad bridge","s":"shall open on signal; except that, from 6 p.m. to 10 a.m. the draw shall open on signal if at least eight hours' notice is given. During periods of severe storms or hurricanes, from the time the Na…","w":"Bayou Sara","c":"33 CFR 117.105(a)"},{"n":"CSX Transportation Railroad bridge","s":"AL shall be remotely operated by the bridge tender at CSX's bridge remote control center in Mobile, Alabama. Vessels can contact the CSX bridge tender via VHF-FM channel 13 or by telephone at the n…","w":"Bayou Sara","c":"33 CFR 117.105(b)"},{"n":"Alabama Gulf Coast (AGR) vertical lift span","s":"ior River, mile 219.0, at Demopolis, shall operate as follows: (a) The draw shall be maintained in the fully open-to-navigation position for vessels at all times, except during periods when it is c…","w":"Black Warrior River","c":"33 CFR 117.106"},{"n":"CSX Transportation Railroad bridge","s":"GA, shall open on signal if at least six hours notice is given.","w":"Chattahoochee River","c":"33 CFR 117.107"},{"n":"CSX Transportation Railroad bridge","s":"shall open on signal if at least six hours notice is given.","w":"Coosa River","c":"33 CFR 117.109"},{"n":"CSX Transportation Railroad bridge","s":"AL shall be remotely operated by the bridge tender at CSX's bridge remote control center in Mobile, AL and shall open promptly and fully when signaled to open. Vessels can contact the CSX bridge te…","w":"Mobile River","c":"33 CFR 117.111(a)"},{"n":"CSX Transportation Railroad bridge","s":"shall open on signal if at least ten-hours-notice is given. The draw shall open at the direction of the District Commander.","w":"Tensaw River","c":"33 CFR 117.113"},{"n":"Meridian and Bigbee Railroad (MNBR) vertical lift span","s":"ee River, mile 128.6 (Black Warrior Tombigbee (BWT) Waterway mile 173.6), at Naheola, shall operate as follows: (1) The draw shall be maintained in the fully open-to-navigation position for vessels…","w":"Tombigbee River","c":"33 CFR 117.118(a)"},{"n":"Norfolk Southern Railroad (NSRR) Vertical Lift Bridge","s":"near Jackson, Washington and Clarke Counties, Alabama shall be operated as follows: (1) The draw shall be kept in the open-to-vessel position, except during periods when it will close for the passa…","w":"Tombigbee River","c":"33 CFR 117.118(b)"}];
+
+const map=L.map('brmap',{scrollWheelZoom:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'Esri · schedules: 33 CFR 117 via MileCheck',maxZoom:17}).addTo(map);
+map.fitBounds([[30.22,-88.47],[35.01,-84.89]],{padding:[14,14],maxZoom:11});
+
+const schedIndex=[];
+SCHED.forEach(b=>{
+  if(typeof b.la==='number'){
+    const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
+    const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
+      .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+cfrLink(b.c)+'</div></div>');
+    schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
+  }else{
+    schedIndex.push({name:b.n,sub:b.w+' · '+(b.c||''),search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:null,rule:b.s,cite:b.c});
+  }
+});
+
+function renderList(){
+  const q=(document.getElementById('blSearch').value||'').toLowerCase().trim();
+  const rows=document.getElementById('blRows');
+  const items=schedIndex.slice().sort((a,b)=>(a.marker?0:1)-(b.marker?0:1)||a.name.localeCompare(b.name));
+  const shown=items.filter(x=>!q||x.search.includes(q));
+  document.getElementById('blCount').textContent=shown.length+' of '+items.length;
+  rows.innerHTML='';
+  shown.forEach(x=>{
+    const el=document.createElement('div');
+    el.className='blrow'+(x.marker?'':' nomap');
+    el.innerHTML='<div><div class="nm">'+x.name+'</div><div class="sub">'+(x.sub||'')+'</div></div><span class="chip '+(x.marker?'c-sched':'c-list')+'">'+(x.marker?'schedule':'no pin')+'</span>';
+    if(x.marker){
+      el.addEventListener('click',()=>{
+        map.flyTo([x.lat,x.lon],13,{duration:.8});
+        setTimeout(()=>x.marker.openPopup(),850);
+        if(window.innerWidth<860)document.querySelector('.br-mapbox').scrollIntoView({behavior:'smooth'});
+      });
+    }else{
+      el.title=(x.rule||'').slice(0,300);
+    }
+    rows.appendChild(el);
+  });
+}
+document.getElementById('blSearch').addEventListener('input',renderList);
+
+document.getElementById('brUpdated').textContent='Rules per 33 CFR 117 (USCG)';
+renderList();
+
+document.querySelector('.nav-toggle').addEventListener('click',()=>document.querySelector('.primary-nav').classList.toggle('open'));
+</script>
+</body>
+</html>
