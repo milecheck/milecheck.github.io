@@ -311,9 +311,12 @@ function render(){
 }
 const NEW_HOURS=48; // fires discovered within this many hours get a NEW tag
 function isNewFire(f){
-  if(!f.disc)return false;
-  const t=Date.parse(f.disc); if(isNaN(t))return false;
-  return (Date.now()-t) < NEW_HOURS*3600*1000 && (Date.now()-t) >= 0;
+  if(f.disc==null)return false;
+  // WFIGS FireDiscoveryDateTime is epoch milliseconds (a number) OR an ISO string.
+  const t=(typeof f.disc==='number')?f.disc:new Date(f.disc).getTime();
+  if(isNaN(t))return false;
+  const age=Date.now()-t;
+  return age>=0 && age < NEW_HOURS*3600*1000;
 }
 function popupHtml(f){
   const started=f.disc?new Date(f.disc).toLocaleDateString([], {month:"short",day:"numeric",year:"numeric"}):null;
