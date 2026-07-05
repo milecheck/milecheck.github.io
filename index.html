@@ -440,6 +440,23 @@
     }
 
     /* Audience-fit grid */
+    /* B2B "Who we talk to" segment cards (2026-07-05 redesign) */
+    .seg-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px; }
+    .seg-card { position:relative; background:#fff; border:1px solid #E5E5E5; border-radius:14px; padding:26px 26px 24px; transition:border-color .15s, transform .15s; }
+    .seg-card:hover { border-color:#0E1116; transform:translateY(-2px); }
+    .seg-num { position:absolute; top:22px; right:24px; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; color:#C8CDD3; letter-spacing:1px; }
+    .seg-card:hover .seg-num { color:#00C880; }
+    .seg-ico { width:38px; height:38px; border-radius:10px; background:#F3FAF6; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+    .seg-card h4 { font-size:17px; font-weight:800; letter-spacing:-0.01em; margin:0 0 10px; }
+    .seg-quote { font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:600; color:#0E1116; background:#F7F7F4; border-left:3px solid #00C880; border-radius:0 8px 8px 0; padding:8px 12px; margin:0 0 12px; }
+    .seg-card p.seg-body { font-size:14px; line-height:1.6; color:#525252; margin:0; }
+    .seg-card p.seg-body strong { color:#0E1116; }
+    .seg-cta { background:#0E1116; border-color:#0E1116; display:flex; flex-direction:column; justify-content:center; }
+    .seg-cta h4 { color:#fff; font-size:19px; }
+    .seg-cta p { color:#B9C0C7; font-size:14px; line-height:1.6; margin:0 0 16px; }
+    .seg-cta a.seg-btn { align-self:flex-start; background:#00C880; color:#06110C; font-weight:800; font-size:14px; padding:10px 18px; border-radius:10px; text-decoration:none; }
+    .seg-cta a.seg-btn:hover { background:#00B473; }
+    @media (max-width:760px){ .seg-grid { grid-template-columns:1fr; } }
     .audience-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1110,34 +1127,53 @@
       <div class="container">
         <p class="ent-section-label">Who we talk to</p>
         <h2>Seven segments where mile-marker precision is the missing layer.</h2>
-        <div class="audience-grid">
-          <div class="audience-cell">
+        <div class="seg-grid">
+          <div class="seg-card"><span class="seg-num">01</span>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg></div>
             <h4>Fleet management</h4>
-            <p>Drivers report location by mile marker. Most telematics platforms log GPS coordinates &mdash; so dispatch can&rsquo;t translate "I&rsquo;m at MP 184 on I-80" into a routable position without a manual lookup.</p>
+            <div class="seg-quote">&ldquo;I&rsquo;m at MP 184 on I-80.&rdquo;</div>
+            <p class="seg-body">That&rsquo;s how drivers report location. Telematics logs GPS coordinates &mdash; so dispatch can&rsquo;t plot the one format drivers actually use without a manual lookup. <strong>We&rsquo;re the translation layer.</strong></p>
           </div>
-          <div class="audience-cell">
-            <h4>Mapping and navigation</h4>
-            <p>Adding a milepost layer means 50 state GIS negotiations, 19 schema formats, and a pipeline to keep it current. Most platforms skip it. The corpus is available to license today.</p>
+          <div class="seg-card"><span class="seg-num">02</span>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg></div>
+            <h4>Mapping &amp; navigation</h4>
+            <div class="seg-quote">50 GIS negotiations &middot; 19 schemas &middot; or 1 license.</div>
+            <p class="seg-body">Adding a milepost layer yourself means fifty state negotiations and a pipeline to keep it current. Most platforms skip it. <strong>The corpus is licensable today.</strong></p>
           </div>
-          <div class="audience-cell">
+          <div class="seg-card"><span class="seg-num">03</span>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></div>
             <h4>511 / traveler information</h4>
-            <p>Cross-state corridor alerts live in 50 separate DOT systems with incompatible schemas. Aggregating them into one feed today means bilateral access agreements with every agency in your coverage area.</p>
+            <div class="seg-quote">One corridor. Five agency logins.</div>
+            <p class="seg-body">Cross-state alerts live in 50 incompatible DOT systems; aggregating them yourself means bilateral agreements with every agency on the route. <strong>We already normalized 48 of them.</strong></p>
           </div>
-          <div class="audience-cell">
-            <h4>Digital freight and logistics</h4>
-            <p>"Meet the driver at I-80 MP 184" has no native equivalent in consumer navigation. Drivers send approximate GPS pins. Dispatchers guess. Load handoffs at highway mile markers are a solved problem on paper, unsupported in software. And for cross-border freight, live commercial wait times at all 82 US land crossings are an operational input no fleet platform surfaces today.</p>
+          <div class="seg-card"><span class="seg-num">04</span>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v13h-2M16 8h-5V3H3v13h3"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="M10 18.5h5"/></svg></div>
+            <h4>Digital freight &amp; logistics</h4>
+            <div class="seg-quote">&ldquo;Meet the driver at I-80 MP 184.&rdquo;</div>
+            <p class="seg-body">No native equivalent in consumer nav &mdash; drivers send approximate pins, dispatchers guess. Plus live commercial waits at all 82 land borders, <strong>an input no fleet platform surfaces today.</strong></p>
           </div>
-          <div class="audience-cell">
-            <h4>Roadside assistance and incident response</h4>
-            <p>Drivers report being stranded by mile marker. Most dispatch systems require a street address to route a service vehicle. The closest workaround is asking the stranded driver to find a sign and read it back.</p>
+          <div class="seg-card"><span class="seg-num">05</span>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <h4>Roadside &amp; incident response</h4>
+            <div class="seg-quote">&ldquo;Can you find a sign and read it back?&rdquo;</div>
+            <p class="seg-body">Stranded drivers report a mile marker; most dispatch systems demand a street address. The workaround is literally asking a stressed driver to go find a sign. <strong>We turn the marker into a routable point.</strong></p>
           </div>
-          <div class="audience-cell">
-            <h4>Towing &amp; roadside dispatch platforms</h4>
-            <p>Your dispatch board already receives &ldquo;disabled vehicle, I-5 NB MP 164.&rdquo; Plot it on the map automatically, and flag whether that stretch is closed or under a chain control right now &mdash; one API call, no state-DOT contracts on your side. A milepost lookup is table stakes; the live conditions at that milepost aren&rsquo;t.</p>
+          <div class="seg-card"><span class="seg-num">06</span>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l4 4-9 9H5v-4z"/><path d="M13 7l4 4"/><path d="M19 3l2 2"/></svg></div>
+            <h4>Towing &amp; dispatch platforms</h4>
+            <div class="seg-quote">&ldquo;Disabled vehicle, I-5 NB MP 164.&rdquo;</div>
+            <p class="seg-body">Your board already receives that call. Plot it automatically &mdash; and flag whether that stretch is closed or under chain control <em>right now</em>. <strong>One API call, zero state-DOT contracts on your side.</strong></p>
           </div>
-          <div class="audience-cell">
-            <h4>State DOT and transportation agencies</h4>
-            <p>Monitoring corridor conditions across state lines means maintaining separate logins, schemas, and feeds for every neighboring agency. Interstate consortium data sharing is a perennial unsolved problem.</p>
+          <div class="seg-card"><span class="seg-num">07</span>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
+            <h4>State DOTs &amp; agencies</h4>
+            <div class="seg-quote">The corridor doesn&rsquo;t stop at the state line.</div>
+            <p class="seg-body">Watching conditions across a border means separate logins, schemas, and feeds per neighbor &mdash; the perennial unsolved consortium problem. <strong>One feed, every neighboring agency, one schema.</strong></p>
+          </div>
+          <div class="seg-card seg-cta">
+            <h4>Run on road + mile? It plugs in.</h4>
+            <p>If your operation speaks &ldquo;route and milepost,&rdquo; the layer drops into your stack &mdash; live conditions included, production-proven in a five-star app.</p>
+            <a class="seg-btn" href="mailto:info@milecheckapp.com">Open a conversation &rarr;</a>
           </div>
         </div>
       </div>
