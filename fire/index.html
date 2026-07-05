@@ -277,8 +277,7 @@ function render(){
   S.forEach((f,i)=>{
     const out=f.cont!=null&&f.cont>=100;
     const m=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="fire-ic${out?' out':''}">🔥</div>`,iconSize:[26,26],iconAnchor:[13,13]})}).addTo(fireLayer);
-    m.bindPopup(popupHtml(f),{maxWidth:280});
-    m.on('click',()=>{rememberView();map.flyTo([f.lat,f.lon],Math.max(map.getZoom(),11),{duration:.8});});
+    m.on('click',()=>{ L.popup({maxWidth:280,autoPan:true}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map); });
     if(labeled.has(f.name)){
       const contTxt=f.cont!=null?` · ${Math.round(f.cont)}%`:"";
       L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="lblwrap"><span class="fire-lbl${f.rx?' rxc':''}">${(!f.rx&&isNewFire(f))?'<span class="newtag">NEW</span>':''}${f.name} · ${Math.round(f.ac).toLocaleString()} ac${contTxt}</span></div>`,iconSize:[200,20],iconAnchor:[100,-12]}),interactive:false}).addTo(fireLayer);
