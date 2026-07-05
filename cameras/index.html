@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
 
   <script type="application/ld+json">
   {
@@ -235,7 +237,7 @@
   </footer>
 
 <script>
-const map=L.map('cammap',{scrollWheelZoom:true,attributionControl:true,preferCanvas:true});
+const map=L.map('cammap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true,preferCanvas:true});
 const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
 const ATTR='Esri, USGS · cameras: WSDOT / ODOT / UDOT / MDT via MileCheck';
 const baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});

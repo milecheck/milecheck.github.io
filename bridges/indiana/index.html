@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
 
   <script type="application/ld+json">
   {
@@ -142,7 +144,7 @@ function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
   return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
 const SCHED=[{"n":"Elgin, Joliet, and Eastern Railroad Bridge","s":"(b) Elgin, Joliet, and Eastern Railroad Bridge, mile 1.89, over the Indiana Harbor Canal need not have a drawtender in continued attendance at the bridge. Ten minutes before the bridge is lowered for train traffic a crewmember from the train will initiate a SECURITE call on VHF-FM Marine Channel 16 that the bridge will be lowering for train traffic and invite any concerned mariners to contact the crewmember on VHF-FM Marine Channel 12. The crewmember will also visually monitor for vessel traffic and listen for the standard bridge opening signal of one prolonged blast and one short blast from vessels already transiting the waterway. After the ten minute warning, another SECURITE shall be made on VHF-FM Marine Channel 16 that the bridge will be lowering for rail traffic, five minutes before lowering. Once the crewmember is satisfied that it is safe, the bridge will be lowered for rail traffic. Once the rail traffic has cleared the bridge, the bridge shall be raised and locked in the fully open to navigation position.","w":"Indiana Harbor Canal","c":"33 CFR 117.400(b)"},{"n":"The Indianapolis Boulevard Bridge","s":"(c) The Indianapolis Boulevard Bridge, mile 2.59, at East Chicago, shall open on signal if at least twelve hours' notice is given.","w":"Indiana Harbor Canal","c":"33 CFR 117.400(c)","la":41.646665,"lo":-87.480888},{"n":"Franklin Street bridge","s":"(a) The draw of the Franklin Street bridge, mile 0.5 at Michigan City, shall be operated as follows: (1) From March 16 through November 30, the draw shall open on signal; except from 6:15 a.m. to 11:15 p.m., Monday through Sunday, the draw need open only from three minutes before to three minutes after the quarter-hour and three-quarter hour. (2) From December 1 through March 15, the draw shall open on signal if at least 12-hours advance notice is provided prior to intended time of passage.","w":"Trail Creek","c":"33 CFR 117.401(a)","la":41.722792,"lo":-86.904589},{"n":"Amtrak Railroad Bridge","s":"(b) The draw of the Amtrak Railroad Bridge, mile 0.9, at Michigan City shall open on signal, except from December 1 through March 15 the draw shall open if at least 12-hours advance notice is given. The bridge is authorized to be operated remotely. The bridge shall operate and maintain a VHF-FM Marine Radio.","w":"Trail Creek","c":"33 CFR 117.401(b)"}];
 
-const map=L.map('brmap',{scrollWheelZoom:true});
+const map=L.map('brmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Esri · schedules: 33 CFR 117 via MileCheck',maxZoom:17}).addTo(map);
 map.fitBounds([[41.396665,-87.83088799999999],[41.972792,-86.554589]],{padding:[14,14],maxZoom:11});

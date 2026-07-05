@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
 
   <script type="application/ld+json">
   {
@@ -51,7 +53,8 @@
     .skel .sk.w1{width:55%;}.skel .sk.w2{width:32%;margin-top:8px;}.skel .sk.w3{width:100%;height:6px;margin-top:9px;}
     @keyframes sksh{0%{background-position:100% 50%;}100%{background-position:0 50%;}}
     .fire-left{display:flex;flex-direction:column;gap:10px;min-width:0;}
-    .fire-legend{display:flex;gap:12px 16px;align-items:center;flex-wrap:wrap;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 14px;font-size:12.5px;color:#5b6670;font-weight:600;}
+    .fire-legend{display:flex;gap:6px 8px;align-items:center;flex-wrap:wrap;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 12px;font-size:12px;color:#3f4a44;font-weight:600;}
+    .lg-item{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;background:#F7F7F4;border:1px solid #ECECE8;border-radius:999px;padding:4px 10px;line-height:1;}
     .fire-legend .lg-pill{color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;}
     .fire-legend .lg-new{background:#111;}.fire-legend .lg-rx{background:#c47f0a;}
     #firemap{position:absolute;inset:0;}
@@ -171,8 +174,12 @@
         <div class="fire-loading" id="fireLoading"><div class="fl-spin"></div><div class="fl-txt">Loading live fire data…</div></div>
       </div>
       <div class="fire-legend">
-        <span style="font-weight:800;color:#0E1116;font-size:13px;">Legend:</span>
-        <span>🔥 active fire</span><span class="lg-pill lg-new">NEW</span><span>started &lt; 48 hrs</span><span style="color:#cf3320;">▮ perimeter</span><span>⛔ road closed</span><span style="opacity:.6;">🔥 faded = contained</span><span class="lg-pill lg-rx">RX</span><span>prescribed burn</span>
+        <span class="lg-item">🔥 Active fire</span>
+        <span class="lg-item"><span class="lg-pill lg-new">NEW</span> under 48 hrs</span>
+        <span class="lg-item"><span style="color:#cf3320;font-weight:800;">▮</span> Perimeter</span>
+        <span class="lg-item">⛔ Road closed</span>
+        <span class="lg-item"><span style="opacity:.55;">🔥</span> Faded&thinsp;=&thinsp;contained</span>
+        <span class="lg-item"><span class="lg-pill lg-rx">RX</span> Prescribed burn</span>
       </div>
     </div>
     <div class="fire-side">
@@ -246,7 +253,7 @@
   </footer>
 
 <script>
-const map=L.map('firemap',{scrollWheelZoom:true,attributionControl:true});
+const map=L.map('firemap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
 // basemap choices (all keyless Esri services)
 const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
 const ATTR='Esri, USGS · fires: NIFC/WFIGS';

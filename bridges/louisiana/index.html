@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
 
   <script type="application/ld+json">
   {
@@ -159,7 +161,7 @@ function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
 
 const LA_URL='https://milepost-proxy.leahgerber93.workers.dev/la-bridges';
 
-const map=L.map('brmap',{scrollWheelZoom:true});
+const map=L.map('brmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Esri · live status: LA DOTD · schedules: 33 CFR 117 via MileCheck',maxZoom:17}).addTo(map);
 map.fitBounds([[28.9,-94.1],[33.1,-88.7]],{padding:[14,14]});

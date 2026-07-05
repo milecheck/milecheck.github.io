@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
 
   <script type="application/ld+json">
   {
@@ -214,7 +216,7 @@ const PORT_COORDS={
 const API='https://milepost-proxy.leahgerber93.workers.dev/border-crossings';
 let RAW=[], border='all', veh='pass', dir='us', q='';
 
-const map=L.map('bwmap',{scrollWheelZoom:false});
+const map=L.map('bwmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:false});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Esri · waits: US CBP + CBSA via MileCheck',maxZoom:12}).addTo(map);
 map.setView([38,-98],4);
