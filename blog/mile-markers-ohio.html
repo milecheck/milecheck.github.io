@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highway Mile Markers in Ohio — MileCheck</title>
+  <meta name="description" content="How mile markers work on Ohio highways — the Ohio Turnpike, I-71, I-70 and I-75 — plus live Ohio DOT road alerts, all in one app.">
+
+  <meta property="og:title" content="Highway Mile Markers in Ohio">
+  <meta property="og:description" content="Mile markers on the Ohio Turnpike, I-71, and I-70, plus live OHGO alerts, in real time.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/blog/mile-markers-ohio.html">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="blog.css">
+  <style>
+    .strip-map{margin:1.8rem 0 2rem;}
+    .strip-map svg{width:100%;height:auto;display:block;}
+    .strip-map .sm-city{font:600 13px Inter,sans-serif;fill:#0E1116;text-anchor:middle;}
+    .strip-map .sm-mp{font:600 11px 'JetBrains Mono',monospace;fill:#8A939B;text-anchor:middle;}
+    .strip-map .sm-mp-l{text-anchor:start;}
+    .strip-map .sm-mp-r{text-anchor:end;}
+    .strip-map .sm-pin{font:700 12px Inter,sans-serif;fill:#fff;text-anchor:middle;}
+    .strip-map figcaption{font:400 0.85rem/1.5 Inter,sans-serif;color:#5b6670;margin:0.8rem 0 0;text-align:center;}
+    .photo-fig{margin:1.8rem 0 2rem;}
+    .photo-fig img{width:100%;border-radius:14px;display:block;}
+    .photo-fig .ph{width:100%;aspect-ratio:16/10;border-radius:14px;background:#EEF1F3;border:1px dashed #C3CAD1;display:flex;align-items:center;justify-content:center;color:#8A939B;font:600 14px/1.5 Inter,sans-serif;text-align:center;padding:16px;}
+    .photo-fig figcaption{font:400 0.85rem/1.5 Inter,sans-serif;color:#5b6670;margin:0.8rem 0 0;text-align:center;}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How do mile markers work on Ohio highways?","acceptedAnswer":{"@type":"Answer","text":"Ohio's mileposts count up from where a route enters the state — from the south or west line — and rise as you head north or east. The Ohio Turnpike carries its own milepost line, counting up from the Indiana border, separate from the numbering on Ohio's free interstates."}},
+      {"@type":"Question","name":"Does the Ohio Turnpike use its own mile markers?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Ohio Turnpike (I-80/I-90) runs about 241 miles across northern Ohio with its own mileposts, starting at 0 on the Indiana line and reaching the Pennsylvania line around mile 241. Exit numbers on the Turnpike match those mileposts."}},
+      {"@type":"Question","name":"Does MileCheck have live Ohio DOT alerts?","acceptedAnswer":{"@type":"Answer","text":"Yes. MileCheck pulls live road alerts from Ohio's OHGO system — closures, crashes, and construction — tied to route and mile marker. Mile marker data covers every Ohio highway and works offline."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../states/">States</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="./" class="active">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="article-wrap">
+      <a href="./" class="article-back">All articles</a>
+
+      <p class="article-eyebrow">State guide</p>
+      <h1 class="article-title">Highway Mile Markers in Ohio</h1>
+      <div class="article-meta">
+        <span>July 4, 2026</span>
+        <span>4 min read</span>
+      </div>
+
+      <div class="article-body">
+        <p>Ohio packs a lot of interstate into one state — the Turnpike across the top, the I-71 diagonal through the middle, and the big east-west and north-south crossings everyone else drives through. Here's how the mile markers work, where they matter, and how to see your exact one plus live Ohio DOT conditions in real time.</p>
+
+        <h2>How Ohio numbers its highways</h2>
+        <p>Ohio's mileposts count up from where a route enters the state and rise as you head north or east — standard interstate practice. The wrinkle is the <strong>Ohio Turnpike</strong>: the toll road carrying I-80 and I-90 across the north runs about 241 miles from the Indiana line to the Pennsylvania line on its own milepost line, with exit numbers that match the mileposts. So "mile 110 on the Turnpike" and "mile 110 on I-71" are two very different places. Mile marker data for every Ohio highway is bundled into MileCheck and works offline.</p>
+
+        <h2>The corridors people actually drive</h2>
+        <ul>
+          <li><strong>The Ohio Turnpike (I-80/I-90)</strong> runs the width of northern Ohio, past Toledo, Sandusky, and south of Cleveland.</li>
+          <li><strong>I-71</strong> is the state's diagonal, linking Cleveland, Columbus, and Cincinnati — the three big cities on one road.</li>
+          <li><strong>I-70</strong> crosses east-west through Columbus; <strong>I-75</strong> runs north-south through Toledo, Dayton, and Cincinnati.</li>
+          <li><strong>I-77</strong> drops from Cleveland through Akron and Canton toward West Virginia.</li>
+        </ul>
+
+        <h2>Where mile markers matter most</h2>
+        <p>Long stretches of Ohio interstate look the same for miles at a time — farm fields on I-70, the flat run west of Toledo, the Turnpike between service plazas. When traffic stops or a car ends up on the shoulder, the mile marker is how you tell dispatch, a tow truck, or the Turnpike's own service patrol exactly where you are. On the Turnpike, it also tells you how far you are from the next exit, since the exit numbers are the mileposts.</p>
+
+        <figure class="strip-map">
+        <svg viewBox="0 0 760 190" role="img" aria-label="Strip map of the Ohio Turnpike: Indiana line at mile 0, Toledo near mile 64, Sandusky near mile 110, and the Pennsylvania line near mile 241." xmlns="http://www.w3.org/2000/svg">
+        <line x1="48" y1="140" x2="712" y2="140" stroke="#0E1116" stroke-width="9" stroke-linecap="round"/>
+        <line x1="48" y1="140" x2="712" y2="140" stroke="#fff" stroke-width="2" stroke-dasharray="7 11"/>
+        <line x1="48.0" y1="131.0" x2="48.0" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="103.3" y1="134.0" x2="103.3" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="158.7" y1="131.0" x2="158.7" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="214.0" y1="134.0" x2="214.0" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="269.3" y1="131.0" x2="269.3" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="324.7" y1="134.0" x2="324.7" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="380.0" y1="131.0" x2="380.0" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="435.3" y1="134.0" x2="435.3" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="490.7" y1="131.0" x2="490.7" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="546.0" y1="134.0" x2="546.0" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="601.3" y1="131.0" x2="601.3" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="656.7" y1="134.0" x2="656.7" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="712.0" y1="131.0" x2="712.0" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <text x="48.0" y="170" class="sm-mp sm-mp-l">MP 0 &#183; Indiana line</text>
+        <text x="323.5" y="170" class="sm-mp">MP 100</text>
+        <text x="599.0" y="170" class="sm-mp">MP 200</text>
+        <text x="712.0" y="170" class="sm-mp sm-mp-r">MP 241 &#183; PA line</text>
+        <circle cx="224.3" cy="140" r="5" fill="#0E1116"/><text x="224.3" y="124" class="sm-city">Toledo</text>
+        <circle cx="580.0" cy="140" r="5" fill="#0E1116"/><text x="580.0" y="124" class="sm-city">Youngstown area</text>
+        <line x1="351.1" y1="136" x2="351.1" y2="64" stroke="#00e094" stroke-width="2.5"/>
+        <rect x="277.1" y="33" width="148" height="30" rx="15" fill="#00e094"/>
+        <text x="351.1" y="52" class="sm-pin">Sandusky &#183; MP 110</text>
+        <circle cx="351.1" cy="140" r="7" fill="#00e094" stroke="#fff" stroke-width="2.5"/>
+        </svg>
+        <figcaption>The Ohio Turnpike (I-80) runs about 241 miles across northern Ohio on its own milepost line — Toledo near mile 64, Sandusky near mile 110.</figcaption>
+        </figure>
+
+        <h2>Lake-effect winters</h2>
+        <p>Ohio's winter story is written by Lake Erie. East of Cleveland, in the snowbelt along I-90 and the northeast counties, lake-effect bands can drop heavy snow on one stretch of highway while a few miles away stays nearly dry. Whiteouts and chain-reaction slowdowns arrive fast, and closures and crash reports are called out by route and mile marker. Knowing yours — and seeing what's ahead on your route — is the difference between driving into a band and waiting it out at an exit.</p>
+
+        <h2>Live Ohio DOT alerts, in one place</h2>
+        <p>MileCheck pulls live road alerts straight from Ohio's OHGO system: closures, crashes, and construction, tied to the mile marker and direction so you can see what's ahead of you on your route, whether you're on the Turnpike or the free interstates.</p>
+
+        <h2>Everyday and emergency</h2>
+        <p>Whether you're crossing the state on the Turnpike, running the I-71 diagonal between Columbus and Cincinnati, or reporting a breakdown on I-75, the mile marker is the location Ohio's roads run on. MileCheck shows yours in real time, down to a tenth of a mile, on your phone and on CarPlay or Android Auto — even where the cell signal drops.</p>
+
+        <h2>Keep reading</h2>
+        <p><strong>Nearby state guides:</strong> <a href="mile-markers-indiana.html">Indiana</a> &nbsp;&middot;&nbsp; <a href="mile-markers-kentucky.html">Kentucky</a> &nbsp;&middot;&nbsp; <a href="mile-markers-michigan.html">Michigan</a> &nbsp;&middot;&nbsp; <a href="mile-markers-pennsylvania.html">Pennsylvania</a> &nbsp;&middot;&nbsp; <a href="mile-markers-west-virginia.html">West Virginia</a></p>
+        <p><strong>Essentials:</strong> <a href="what-to-tell-911-highway-breakdown.html">What to tell 911 on the highway</a> &nbsp;·&nbsp; <a href="how-to-find-your-mile-marker.html">How to find your mile marker</a> &nbsp;·&nbsp; <a href="../maps/mile-markers/">Browse the live mile marker map</a> &nbsp;&#183;&nbsp; <a href="../states/">All 50 states</a></p>
+      </div>
+
+      <div class="article-cta">
+        <h3>Mile markers and live Ohio DOT alerts, in real time.</h3>
+        <p>Every Ohio highway, works offline, with CarPlay and Android Auto. On iPhone and Android.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">B2B Opportunities</p>
+          <ul class="footer-list">
+            <li><a href="../index.html#b2b">Partner info</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://www.reddit.com/user/MileCheckApp/" target="_blank" rel="noopener">Reddit</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Mile marker positions are approximate and may not reflect actual sign locations. Built for highway travelers &mdash; use responsibly.</p>
+    </div>
+  </footer>
+
+  <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highway Mile Markers in Vermont — MileCheck</title>
+  <meta name="description" content="How mile markers work on Vermont highways — the town-line reset quirk on US and VT routes, plus I-89 and I-91 — and live Vermont road alerts, all in one app.">
+
+  <meta property="og:title" content="Highway Mile Markers in Vermont">
+  <meta property="og:description" content="Vermont's mile markers reset at every town line — unique in the US. Here's how to read them, plus live VT alerts in real time.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/blog/mile-markers-vermont.html">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="blog.css">
+  <style>
+    .strip-map{margin:1.8rem 0 2rem;}
+    .strip-map svg{width:100%;height:auto;display:block;}
+    .strip-map .sm-city{font:600 13px Inter,sans-serif;fill:#0E1116;text-anchor:middle;}
+    .strip-map .sm-mp{font:600 11px 'JetBrains Mono',monospace;fill:#8A939B;text-anchor:middle;}
+    .strip-map .sm-mp-l{text-anchor:start;}
+    .strip-map .sm-mp-r{text-anchor:end;}
+    .strip-map .sm-pin{font:700 12px Inter,sans-serif;fill:#fff;text-anchor:middle;}
+    .strip-map figcaption{font:400 0.85rem/1.5 Inter,sans-serif;color:#5b6670;margin:0.8rem 0 0;text-align:center;}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Why do Vermont's mile markers reset at town lines?","acceptedAnswer":{"@type":"Answer","text":"Vermont uses town-based mileage on US and VT state routes — the physical markers restart at zero every time the road crosses a town boundary. It's unique in the US. Only the interstates (I-89, I-91, I-93) carry continuous statewide mile numbers."}},
+      {"@type":"Question","name":"How does MileCheck handle Vermont's town-based mile markers?","acceptedAnswer":{"@type":"Answer","text":"MileCheck's Vermont data uses continuous end-to-end mileage for every route, the same way the interstates are numbered. That gives you one consistent number per route instead of a figure that resets every few miles at a town line."}},
+      {"@type":"Question","name":"Does MileCheck have live Vermont DOT alerts?","acceptedAnswer":{"@type":"Answer","text":"Yes. MileCheck pulls live road alerts for Vermont — closures, crashes, and construction — tied to route and mile marker. Mile markers cover every Vermont highway and work offline, which helps in the hills where signal fades."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../states/">States</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="./" class="active">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="article-wrap">
+      <a href="./" class="article-back">All articles</a>
+
+      <p class="article-eyebrow">State guide</p>
+      <h1 class="article-title">Highway Mile Markers in Vermont</h1>
+      <div class="article-meta">
+        <span>July 4, 2026</span>
+        <span>4 min read</span>
+      </div>
+
+      <div class="article-body">
+        <p>Vermont is the quirk state of American mileposting. On most of its highways, the mile markers don't count up across the state the way they do everywhere else — they reset at every town line. Here's how that works, why the interstates are different, and how to see one consistent mile marker plus live road alerts in real time.</p>
+
+        <h2>The town-line reset — unique in the US</h2>
+        <p>On US routes and VT state routes, Vermont uses town-based mileage: the physical markers restart at zero each time the road crosses a town boundary. Drive US-7 up the western side of the state and you'll watch the numbers climb, drop back to zero, and climb again, over and over. No other state does this. Only the interstates — I-89, I-91, and the short piece of I-93 — carry continuous statewide mile numbers from border to border.</p>
+        <p>MileCheck sidesteps the confusion: its Vermont data uses continuous end-to-end mileage on every route, the same way the interstates are numbered. One route, one consistent number — bundled into the app and working offline.</p>
+
+        <h2>The corridors people actually drive</h2>
+        <ul>
+          <li><strong>I-89</strong> enters from New Hampshire at White River Junction and runs about 130 miles northwest through Montpelier and Burlington to the Canadian border.</li>
+          <li><strong>I-91</strong> runs the eastern edge of the state, up the Connecticut River valley from Massachusetts to Canada.</li>
+          <li><strong>US-7</strong> is the western main street — Bennington, Rutland, Middlebury, Burlington.</li>
+          <li><strong>US-2</strong> and <strong>VT-100</strong> thread the middle: US-2 east–west through Montpelier, VT-100 the famous north–south ski-country road along the spine of the Greens.</li>
+        </ul>
+
+        <h2>Where mile markers matter most</h2>
+        <p>Vermont's roads are two-lane, wooded, and often out of cell range faster than you'd expect. When you break down on VT-100 between ski towns or slide off US-2 in a snow squall, "somewhere past the town line" isn't much for a dispatcher to work with — and with town-based markers, even the posted number needs a town name attached to mean anything. A continuous mile marker takes the ambiguity out of it.</p>
+
+        <figure class="strip-map">
+        <svg viewBox="0 0 760 190" role="img" aria-label="Strip map of Interstate 89 through Vermont: the New Hampshire line at White River Junction at mile 0, Montpelier near mile 50, Burlington near mile 90, and the Canadian border near mile 130." xmlns="http://www.w3.org/2000/svg">
+        <line x1="48" y1="140" x2="712" y2="140" stroke="#0E1116" stroke-width="9" stroke-linecap="round"/>
+        <line x1="48" y1="140" x2="712" y2="140" stroke="#fff" stroke-width="2" stroke-dasharray="7 11"/>
+        <line x1="48.0" y1="131.0" x2="48.0" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="175.7" y1="134.0" x2="175.7" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="303.4" y1="131.0" x2="303.4" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="431.1" y1="134.0" x2="431.1" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="558.8" y1="131.0" x2="558.8" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <line x1="635.4" y1="134.0" x2="635.4" y2="146.0" stroke="#C3CAD1" stroke-width="1.5"/>
+        <line x1="712.0" y1="131.0" x2="712.0" y2="149.0" stroke="#C3CAD1" stroke-width="2"/>
+        <text x="48.0" y="170" class="sm-mp sm-mp-l">MP 0 &#183; NH line</text>
+        <text x="303.4" y="170" class="sm-mp">MP 50</text>
+        <text x="558.8" y="170" class="sm-mp">MP 100</text>
+        <text x="712.0" y="170" class="sm-mp sm-mp-r">MP 130 &#183; Canada</text>
+        <circle cx="507.7" cy="140" r="5" fill="#0E1116"/><text x="507.7" y="124" class="sm-city">Burlington</text>
+        <line x1="303.4" y1="136" x2="303.4" y2="64" stroke="#00e094" stroke-width="2.5"/>
+        <rect x="217.4" y="33" width="172" height="30" rx="15" fill="#00e094"/>
+        <text x="303.4" y="52" class="sm-pin">Montpelier &#183; MP 50</text>
+        <circle cx="303.4" cy="140" r="7" fill="#00e094" stroke="#fff" stroke-width="2.5"/>
+        </svg>
+        <figcaption>I-89 runs about 130 miles across Vermont, from White River Junction at the New Hampshire line past Montpelier and Burlington to the Canadian border — one of the few Vermont roads with continuous statewide miles.</figcaption>
+        </figure>
+
+        <h2>Mud season, snow, and the Greens</h2>
+        <p>Vermont has a fifth season — mud season — when back roads soften and closures pop up in spring, and a long winter before it when snow and ice work the mountain gaps on VT-100, US-2, and the interstates. Closures and incident reports are given by route and location, and having one consistent mile number per route makes them far easier to act on.</p>
+
+        <h2>Live Vermont alerts, in one place</h2>
+        <p>MileCheck pulls live road alerts for Vermont — closures, crashes, and construction — tied to the mile marker and route so you can see what's ahead before you're committed to a mountain gap. Alerts refresh in real time, and the mile marker data underneath works offline.</p>
+
+        <h2>Everyday and emergency</h2>
+        <p>Whether you're calling in a slide-off on I-91 in January, reporting a breakdown on US-7, or just telling a friend which pull-off you're at on VT-100, a clear mile marker beats "a few miles past the town line" every time. MileCheck shows yours in real time, down to a tenth of a mile, with CarPlay and Android Auto for the drive.</p>
+
+        <h2>Keep reading</h2>
+        <p><strong>Nearby state guides:</strong> <a href="mile-markers-massachusetts.html">Massachusetts</a> &nbsp;&middot;&nbsp; <a href="mile-markers-new-hampshire.html">New Hampshire</a> &nbsp;&middot;&nbsp; <a href="mile-markers-new-york.html">New York</a></p>
+        <p><strong>Essentials:</strong> <a href="what-to-tell-911-highway-breakdown.html">What to tell 911 on the highway</a> &nbsp;·&nbsp; <a href="how-to-find-your-mile-marker.html">How to find your mile marker</a> &nbsp;·&nbsp; <a href="../maps/mile-markers/">Browse the live mile marker map</a> &nbsp;&#183;&nbsp; <a href="../states/">All 50 states</a></p>
+      </div>
+
+      <div class="article-cta">
+        <h3>Mile markers and live Vermont alerts, in real time.</h3>
+        <p>Every Vermont highway with continuous mileage, works offline, with CarPlay and Android Auto. On iPhone and Android.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">B2B Opportunities</p>
+          <ul class="footer-list">
+            <li><a href="../index.html#b2b">Partner info</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://www.reddit.com/user/MileCheckApp/" target="_blank" rel="noopener">Reddit</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Mile marker positions are approximate and may not reflect actual sign locations. Built for highway travelers &mdash; use responsibly.</p>
+    </div>
+  </footer>
+
+  <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+</body>
+</html>
