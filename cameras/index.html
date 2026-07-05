@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Highway Cameras — Washington, Utah &amp; Montana | MileCheck</title>
+  <meta name="description" content="Live DOT highway cameras on one map — see actual road conditions on I-90 Snoqualmie Pass, the Cottonwood canyons, and thousands more, each tagged with its route and mile marker. Washington, Utah, and Montana, more states coming.">
+
+  <meta property="og:title" content="Live Highway Cameras — MileCheck">
+  <meta property="og:description" content="See the actual road before you drive it. Live DOT cameras in WA, UT, and MT, each tagged with route + mile marker.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/cameras/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How do I see live highway cameras for my route?","acceptedAnswer":{"@type":"Answer","text":"Pick a state or zoom the map to your area — every DOT traffic camera shows as a dot. Tap one to see the live image, updated straight from the state DOT. Each camera is tagged with its highway and mile marker, so you can check the exact stretch you'll be driving."}},
+      {"@type":"Question","name":"Which states have live cameras here?","acceptedAnswer":{"@type":"Answer","text":"Washington, Utah, and Montana today — including the mountain passes drivers check most, like I-90 Snoqualmie Pass and the Cottonwood canyons. More states are being added."}},
+      {"@type":"Question","name":"Where do these camera images come from?","acceptedAnswer":{"@type":"Answer","text":"Directly from each state department of transportation — the same official cameras DOTs use to monitor their own roads, normalized into one map by MileCheck."}},
+      {"@type":"Question","name":"Why are cameras listed by mile marker?","acceptedAnswer":{"@type":"Answer","text":"Mile markers are how the road system locates everything — closures, crashes, and cameras. Knowing a camera sits at I-90 MP 52 tells you exactly which stretch you're looking at. The MileCheck app shows your own mile marker in real time so you can match what you see to where you'll be."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .cl-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .cl-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .cl-hero h1 .accent{color:#0f7a4f;}
+    .cl-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
+    .cl-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
+    @media(max-width:860px){.cl-wrap{grid-template-columns:1fr;}}
+    .cl-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
+    #cammap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bigstatus{position:absolute;top:12px;left:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;color:#0f7a4f;}
+    .bigstatus.hint{color:#5b6670;font-weight:700;}
+    .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
+    .nearme:hover{background:#2a2f36;}
+    .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
+    .campop{width:280px;max-width:76vw;}
+    .campop .fp-nm{font-weight:800;font-size:14.5px;line-height:1.3;}
+    .campop .fp-st{color:#5b6670;font-size:12.5px;font-weight:600;margin:2px 0 8px;}
+    .campop img{width:100%;border-radius:8px;background:#eef0e9;min-height:120px;display:block;}
+    .campop .fp-meta{color:#5b6670;font-size:11.5px;margin-top:6px;display:flex;justify-content:space-between;align-items:center;}
+    .campop .fp-refresh{background:none;border:1px solid #E5E5E5;border-radius:7px;padding:3px 9px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;color:#0E1116;}
+    .campop .fp-row{font-size:12.5px;margin-top:8px;line-height:1.4;}
+
+    .cl-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
+    .state-sel{display:flex;gap:8px;align-items:center;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 14px;}
+    .state-sel label{font-weight:800;font-size:13px;}
+    .state-sel select{flex:1;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;}
+    .cl-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
+    .cl-list .lh{padding:12px 16px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;}
+    .cl-rows{overflow-y:auto;}
+    .crow{padding:11px 16px;border-bottom:1px solid #F0F0EE;cursor:pointer;}
+    .crow:hover{background:#F7F5EE;}
+    .crow:last-child{border-bottom:none;}
+    .crow .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+    .crow .rt{font-weight:800;font-size:14px;}
+    .crow .stb{font-weight:800;color:#0f7a4f;font-size:12.5px;white-space:nowrap;}
+    .crow .sub{color:#5b6670;font-size:12.5px;margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+    .cl-empty{padding:34px 16px;text-align:center;color:#5b6670;font-weight:700;font-size:15px;}
+    .cl-empty small{display:block;font-weight:500;margin-top:6px;line-height:1.5;}
+
+    .cl-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;}
+    .cl-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .cl-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .cl-cta .btn{display:inline-block;margin:0 8px 8px 0;}
+
+    .cl-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .cl-notes b{color:#0E1116;}
+
+    /* Responsive mobile nav (same rules as blog.css) */
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+      .cl-mapbox{height:56vh;}
+      .bigstatus{font-size:13px;padding:6px 10px;max-width:60%;}
+      .nearme{font-size:12px;padding:8px 11px;}
+      .cl-list{max-height:none;}
+      .cl-rows{max-height:52vh;}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/" class="active">Maps</a>
+        <a href="../states/">States</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cl-hero">
+    <h1>Live <span class="accent">highway cameras</span></h1>
+    <p class="sub">See the actual road before you drive it. Live DOT cameras across Washington, Utah, and Montana — including the passes drivers check most, like I-90 Snoqualmie and the Cottonwood canyons — each tagged with its route and mile marker. More states coming.</p>
+  </div>
+
+  <div class="cl-wrap">
+    <div class="cl-mapbox">
+      <span class="bigstatus hint" id="bigStatus">Pick a state or zoom in — cameras load at state level</span>
+      <button class="nearme" id="nearMe">Cameras near me</button>
+      <div id="cammap"></div>
+    </div>
+    <div class="cl-side">
+      <div class="state-sel"><label for="stateSel">State</label>
+        <select id="stateSel">
+          <option value="">Choose a state…</option>
+          <option value="MT">Montana</option>
+          <option value="UT">Utah</option>
+          <option value="WA">Washington</option>
+        </select>
+      </div>
+      <div class="cl-list">
+        <div class="lh">Cameras in view</div>
+        <div class="cl-rows" id="camRows"><div class="cl-empty">Pick a state to load cameras<small>Or zoom the map into your area. Images come straight from each state DOT.</small></div></div>
+      </div>
+      <div class="cl-cta">
+        <h3>Check the pass before you're on it.</h3>
+        <p>MileCheck pairs these cameras with live DOT alerts and your real-time mile marker — so you know the conditions ahead, not just where a camera is. Works in all 50 states.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl-notes">
+    <b>About this data:</b> camera images come directly from state departments of transportation — WSDOT, UDOT, and MDT — the same official cameras the DOTs use to monitor their own roads. Images refresh on the DOT's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the DOT provides them. Washington, Utah, and Montana today; more states are being added.
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+            <li><a href="../fire/">Wildfire map</a></li>
+            <li><a href="../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera images: WSDOT, UDOT, and MDT via MileCheck. Always drive to conditions and follow posted signs.</p>
+    </div>
+  </footer>
+
+<script>
+const map=L.map('cammap',{scrollWheelZoom:true,attributionControl:true,preferCanvas:true});
+const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+const ATTR='Esri, USGS · cameras: WSDOT / UDOT / MDT via MileCheck';
+const baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});
+const baseSat=L.layerGroup([
+  L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17}),
+  L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
+]);
+const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
+baseTerrain.addTo(map);
+L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreets},null,{position:'bottomright',collapsed:true}).addTo(map);
+// Center on the 3-state coverage area, not the whole US.
+map.setView([45.6,-115.5],5);
+
+const SB={"WA":[45.54,-124.85,49,-116.91],"UT":[37,-114.05,42,-109.04],"MT":[44.36,-116.05,49,-104.04]};
+const NAMES={WA:"Washington",UT:"Utah",MT:"Montana"};
+const sel=document.getElementById('stateSel');
+sel.onchange=()=>{const c=sel.value;
+  if(!c){map.setView([45.6,-115.5],5);return;}
+  const b=SB[c];map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9});};
+
+const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
+let camLayer=L.layerGroup().addTo(map);
+const camCache={};
+let CAMS=[];
+// Keep highway cameras only — WA's feed includes airport/ferry cams keyed to
+// non-road "routes"; a route that starts with a road class or a digit is a road.
+const ROAD_RE=/^(I|US|SR|WA|UT|MT|\d)[- ]?\d*/i;
+function statesInView(){
+  const b=map.getBounds(),out=[];
+  for(const[c,v]of Object.entries(SB)){
+    if(b.getWest()<v[3]&&b.getEast()>v[1]&&b.getSouth()<v[2]&&b.getNorth()>v[0])out.push(c);}
+  return out;
+}
+async function camsFor(st){
+  const c=camCache[st];
+  if(c&&Date.now()-c.t<600000)return c.list;
+  try{
+    const d=await fetch(WORKER+"/cameras?state="+st,{cache:"no-store"}).then(r=>r.json());
+    const list=(d.cameras||[]).filter(cm=>
+      cm.isActive!==false&&isFinite(+cm.lat)&&isFinite(+cm.lon)&&+cm.lat&&
+      cm.imageUrl&&ROAD_RE.test((cm.route||"").trim())
+    ).map(cm=>({
+      lat:+cm.lat,lon:+cm.lon,title:(cm.title||"Traffic camera").slice(0,120),
+      route:(cm.route||"").trim(),mp:cm.mile,img:cm.imageUrl,st}));
+    camCache[st]={t:Date.now(),list};return list;
+  }catch(e){camCache[st]={t:Date.now(),list:[]};return [];}
+}
+let popSeq=0;
+function popupHtml(c){
+  const id='camimg'+(++popSeq);
+  const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();
+  return `<div class="campop"><div class="fp-nm">${c.title}</div>
+    <div class="fp-st">${[c.route,(c.mp||c.mp===0)&&c.mp>0?"MP "+Math.round(c.mp):null,NAMES[c.st]||c.st].filter(Boolean).join(" · ")}</div>
+    <img id="${id}" src="${bust}" alt="Live view: ${c.title}" loading="lazy"
+      onerror="this.alt='Camera image unavailable right now';this.style.minHeight='60px';">
+    <div class="fp-meta"><span>Live from ${c.st==='WA'?'WSDOT':c.st==='UT'?'UDOT':'MDT'}</span>
+      <button class="fp-refresh" onclick="var i=document.getElementById('${id}');i.src='${c.img.replace(/'/g,"")}'+('${c.img.includes("?")?"&":"?"}')+'t='+Date.now();return false;">↻ Refresh</button></div>
+    <div class="fp-row"><a href="https://milecheckapp.com" style="font-weight:700">These cameras + live alerts on your route — MileCheck →</a></div></div>`;
+}
+let prevView=null;
+function rememberView(){ if(!prevView) prevView={c:map.getCenter(),z:map.getZoom()}; }
+map.on('popupclose',()=>{setTimeout(()=>{if(!map._popup && prevView){map.flyTo(prevView.c,prevView.z,{duration:.8});prevView=null;}},250);});
+
+function render(){
+  camLayer.clearLayers();
+  const bs=document.getElementById("bigStatus");
+  const z=map.getZoom();
+  if(z<6){bs.className="bigstatus hint";bs.textContent="Pick a state or zoom in — cameras load at state level";
+    document.getElementById("camRows").innerHTML=`<div class="cl-empty">Pick a state to load cameras<small>Or zoom the map into your area. Images come straight from each state DOT.</small></div>`;
+    return;}
+  const b=map.getBounds();
+  const inView=CAMS.filter(c=>b.contains([c.lat,c.lon]));
+  inView.forEach(c=>{
+    const m=L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:2,fillColor:'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
+    m.bindPopup(()=>popupHtml(c),{maxWidth:300});
+    m.on('click',()=>{rememberView();map.flyTo([c.lat,c.lon],Math.max(map.getZoom(),11),{duration:.7});});
+  });
+  bs.className=inView.length?"bigstatus":"bigstatus hint";
+  bs.textContent=inView.length?("📷 "+inView.length+" live camera"+(inView.length>1?"s":"")+" in view"):"No cameras in this view";
+  const rows=document.getElementById("camRows");
+  if(!inView.length){rows.innerHTML=`<div class="cl-empty">No cameras here<small>Camera coverage is Washington, Utah, and Montana today — more states coming.</small></div>`;return;}
+  const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0)));
+  rows.innerHTML=sorted.slice(0,60).map((c,i)=>`<div class="crow" data-i="${i}">
+      <div class="t"><span class="rt">${c.route}${c.mp>0?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
+      <div class="sub">${c.title}</div>
+    </div>`).join("")+(sorted.length>60?`<div class="cl-empty" style="padding:14px"><small>Showing 60 of ${sorted.length} — zoom in for the rest.</small></div>`:"");
+  rows.querySelectorAll('.crow').forEach(el=>el.onclick=()=>{
+    const c=sorted[+el.dataset.i]; if(!c)return;
+    rememberView();
+    map.flyTo([c.lat,c.lon],11,{duration:.8});
+    L.popup({maxWidth:300}).setLatLng([c.lat,c.lon]).setContent(popupHtml(c)).openOn(map);
+  });
+}
+let busy=false;
+async function loadCams(){
+  if(busy)return; busy=true;
+  const z=map.getZoom();
+  if(z>=6){
+    const sts=statesInView();
+    const lists=await Promise.all(sts.map(camsFor));
+    CAMS=lists.flat();
+  }
+  busy=false; render();
+}
+let mvTimer=null;
+map.on('moveend',()=>{clearTimeout(mvTimer);mvTimer=setTimeout(loadCams,400);});
+document.getElementById('nearMe').onclick=()=>{
+  if(!navigator.geolocation)return;
+  navigator.geolocation.getCurrentPosition(p=>{map.setView([p.coords.latitude,p.coords.longitude],9);},()=>{},{timeout:8000});
+};
+loadCams(); setInterval(loadCams,600000);
+</script>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+</body>
+</html>
