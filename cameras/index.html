@@ -254,9 +254,12 @@ function popupHtml(c){
 }
 let prevView=null;
 function rememberView(){ if(!prevView) prevView={c:map.getCenter(),z:map.getZoom()}; }
-map.on('popupclose',()=>{setTimeout(()=>{if(!map._popup && prevView){map.flyTo(prevView.c,prevView.z,{duration:.8});prevView=null;}},250);});
+map.on('popupclose',()=>{setTimeout(()=>{if(!map._popup){if(prevView){map.flyTo(prevView.c,prevView.z,{duration:.8});prevView=null;}else{render();}}},250);});
 
 function render(){
+  // Don't rebuild markers while a popup is open — clearing the layer would
+  // destroy the popup's anchor marker (the "camera fades away" bug).
+  if(map._popup&&map._popup.isOpen&&map._popup.isOpen())return;
   camLayer.clearLayers();
   const bs=document.getElementById("bigStatus");
   const z=map.getZoom();
