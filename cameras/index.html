@@ -43,7 +43,7 @@
     .cl-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
     #cammap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
-    .bigstatus{position:absolute;top:12px;left:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;color:#0f7a4f;}
+    .bigstatus{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;color:#0f7a4f;}
     .bigstatus.hint{color:#5b6670;font-weight:700;}
     .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
     .nearme:hover{background:#2a2f36;}
@@ -60,6 +60,11 @@
     .state-sel{display:flex;gap:8px;align-items:center;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 14px;}
     .state-sel label{font-weight:800;font-size:13px;}
     .state-sel select{flex:1;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;}
+    .type-chips{display:flex;gap:8px;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 14px;align-items:center;}
+    .type-chips .tlab{font-weight:800;font-size:13px;margin-right:2px;}
+    .tchip{flex:1;text-align:center;font-family:inherit;font-size:13px;font-weight:700;padding:7px 4px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#5b6670;cursor:pointer;}
+    .tchip.on{background:#0f7a4f;border-color:#0f7a4f;color:#fff;}
+    .tchip.on.ferry{background:#1d6fd1;border-color:#1d6fd1;}
     .cl-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
     .cl-list .lh{padding:12px 16px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;}
     .cl-rows{overflow-y:auto;}
@@ -128,6 +133,11 @@
       <div id="cammap"></div>
     </div>
     <div class="cl-side">
+      <div class="type-chips"><span class="tlab">Show</span>
+        <button class="tchip on" data-t="all">All</button>
+        <button class="tchip" data-t="hwy">Highways</button>
+        <button class="tchip ferry" data-t="ferry">⛴ Ferries</button>
+      </div>
       <div class="state-sel"><label for="stateSel">State</label>
         <select id="stateSel">
           <option value="">Choose a state…</option>
@@ -213,6 +223,13 @@ sel.onchange=()=>{const c=sel.value;
 
 const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
 let camLayer=L.layerGroup().addTo(map);
+let typeFilter='all';
+document.querySelectorAll('.tchip').forEach(b=>b.onclick=()=>{
+  typeFilter=b.dataset.t;
+  document.querySelectorAll('.tchip').forEach(x=>x.classList.toggle('on',x===b));
+  if(map._popup)map.closePopup();
+  render();
+});
 const camCache={};
 let CAMS=[];
 // Keep highway cameras + ferry-terminal cameras (Leah 7-04: "ferry is a big
@@ -268,14 +285,15 @@ function render(){
     document.getElementById("camRows").innerHTML=`<div class="cl-empty">Pick a state to load cameras<small>Or zoom the map into your area. Images come straight from each state DOT.</small></div>`;
     return;}
   const b=map.getBounds();
-  const inView=CAMS.filter(c=>b.contains([c.lat,c.lon]));
+  const inView=CAMS.filter(c=>b.contains([c.lat,c.lon])&&
+    (typeFilter==='all'||(typeFilter==='ferry'?c.ferry:!c.ferry)));
   inView.forEach(c=>{
     const m=L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:2,fillColor:c.ferry?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
     m.bindPopup(()=>popupHtml(c),{maxWidth:300});
     m.on('click',()=>{rememberView();map.flyTo([c.lat,c.lon],Math.max(map.getZoom(),11),{duration:.7});});
   });
   bs.className=inView.length?"bigstatus":"bigstatus hint";
-  bs.textContent=inView.length?("📷 "+inView.length+" live camera"+(inView.length>1?"s":"")+" in view"):"No cameras in this view";
+  bs.textContent=inView.length?((typeFilter==="ferry"?"⛴ ":"📷 ")+inView.length+" live "+(typeFilter==="ferry"?"ferry cam":"camera")+(inView.length>1?"s":"")+" in view"):"No cameras in this view";
   const rows=document.getElementById("camRows");
   if(!inView.length){rows.innerHTML=`<div class="cl-empty">No cameras here<small>Camera coverage is Washington, Oregon, Utah, and Montana today — more states coming.</small></div>`;return;}
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0)));
