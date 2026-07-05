@@ -23,7 +23,10 @@
     .maps-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
     .maps-hero h1 .accent{color:#00A86B;}
     .maps-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
-    .maps-grid{max-width:1160px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+    .maps-grid{max-width:1160px;margin:14px auto 34px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+    .maps-section{max-width:1160px;margin:26px auto 0;padding:0 20px;}
+    .maps-section h2{font-size:19px;font-weight:800;letter-spacing:-0.01em;}
+    .maps-section p{color:#5b6670;font-size:13.5px;margin-top:4px;}
     .mapcard{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .15s;}
     a.mapcard:hover{border-color:#0E1116;}
     .mapcard .mtag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
@@ -69,6 +72,10 @@
     <p class="sub">Free, live highway intelligence — built on the same data that powers the MileCheck app. New maps are added as we build them.</p>
   </div>
 
+  <div class="maps-section">
+    <h2>Road intelligence</h2>
+    <p>The core maps — where you are, what's closed, what's burning.</p>
+  </div>
   <div class="maps-grid">
     <a class="mapcard" href="mile-markers/">
       <span class="mtag live">● Live</span>
@@ -91,12 +98,19 @@
       <span class="go">Open the closures map →</span>
     </a>
 
-    <div class="mapcard dis">
-      <span class="mtag soon">Coming</span>
-      <h2>Highway Cameras</h2>
-      <p>Live DOT traffic cameras along your route — see the road, the pass, and the weather before you're in it.</p>
-    </div>
+    <a class="mapcard" href="../borders/">
+      <span class="mtag live">● Live</span>
+      <h2>Border Wait Times</h2>
+      <p>Live waits at every US crossing with Canada and Mexico — passenger and commercial, sorted worst-first, straight from CBP.</p>
+      <span class="go">Open border wait times →</span>
+    </a>
+  </div>
 
+  <div class="maps-section">
+    <h2>Drawbridges</h2>
+    <p>Every regulated drawbridge in America has a federal opening rule — we're turning that rulebook into live maps, state by state. <a href="../blog/drawbridge-maps.html">Read the story</a>.</p>
+  </div>
+  <div class="maps-grid">
     <a class="mapcard" href="../bridges/louisiana/">
       <span class="mtag live">● Live</span>
       <h2>Louisiana Drawbridges</h2>
@@ -131,13 +145,18 @@
       <p>Is the bridge up right now? Live drawbridge status for the Fremont, Ballard, Montlake, South Park, and 1st Ave S bridges — refreshed every 30 seconds.</p>
       <span class="go">Open bridge status →</span>
     </a>
+  </div>
 
-    <a class="mapcard" href="../borders/">
-      <span class="mtag live">● Live</span>
-      <h2>Border Wait Times</h2>
-      <p>Live waits at every US crossing with Canada and Mexico — passenger and commercial, sorted worst-first, straight from CBP.</p>
-      <span class="go">Open border wait times →</span>
-    </a>
+  <div class="maps-section">
+    <h2>Coming next</h2>
+    <p>In the app today or on the workbench — web versions on the way.</p>
+  </div>
+  <div class="maps-grid">
+    <div class="mapcard dis">
+      <span class="mtag soon">Coming</span>
+      <h2>Highway Cameras</h2>
+      <p>Live DOT traffic cameras along your route — see the road, the pass, and the weather before you're in it.</p>
+    </div>
 
     <div class="mapcard dis">
       <span class="mtag soon">Winter</span>
