@@ -4,11 +4,11 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Highway Cameras — 14 states, route + mile marker tagged | MileCheck</title>
-  <meta name="description" content="Live DOT highway cameras on one map — see actual road conditions on I-90 Snoqualmie Pass, the Cottonwood canyons, and thousands more, each tagged with its route and mile marker. Fourteen states coast to coast — CA, WA, OR, UT, MT, AZ, NV, SD, WI, NY, LA, GA, SC, and AK — more coming.">
+  <title>Live Highway Cameras — 15 states, route + mile marker tagged | MileCheck</title>
+  <meta name="description" content="Live DOT highway cameras on one map — see actual road conditions on I-90 Snoqualmie Pass, the Cottonwood canyons, and thousands more, each tagged with its route and mile marker. Fifteen states coast to coast — CA, WA, OR, UT, MT, AZ, NV, OH, SD, WI, NY, LA, GA, SC, and AK — more coming.">
 
   <meta property="og:title" content="Live Highway Cameras — MileCheck">
-  <meta property="og:description" content="See the actual road before you drive it. Live DOT cameras in 14 states, each tagged with route + mile marker.">
+  <meta property="og:description" content="See the actual road before you drive it. Live DOT cameras in 15 states, each tagged with route + mile marker.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/">
   <meta property="og:type" content="website">
@@ -27,7 +27,7 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type":"Question","name":"How do I see live highway cameras for my route?","acceptedAnswer":{"@type":"Answer","text":"Pick a state or zoom the map to your area — every DOT traffic camera shows as a dot. Tap one to see the live image, updated straight from the state DOT. Each camera is tagged with its highway and mile marker, so you can check the exact stretch you'll be driving."}},
-      {"@type":"Question","name":"Which states have live cameras here?","acceptedAnswer":{"@type":"Answer","text":"Fourteen states today — California, Washington, Oregon, Utah, Montana, Arizona, Nevada, South Dakota, Wisconsin, New York, Louisiana, Georgia, South Carolina, and Alaska — including the mountain passes drivers check most, like I-90 Snoqualmie Pass and the Cottonwood canyons. More states are being added."}},
+      {"@type":"Question","name":"Which states have live cameras here?","acceptedAnswer":{"@type":"Answer","text":"Fifteen states today — California, Washington, Oregon, Utah, Montana, Arizona, Nevada, Ohio, South Dakota, Wisconsin, New York, Louisiana, Georgia, South Carolina, and Alaska — including the mountain passes drivers check most, like I-90 Snoqualmie Pass and the Cottonwood canyons. More states are being added."}},
       {"@type":"Question","name":"Where do these camera images come from?","acceptedAnswer":{"@type":"Answer","text":"Directly from each state department of transportation — the same official cameras DOTs use to monitor their own roads, normalized into one map by MileCheck."}},
       {"@type":"Question","name":"Why are cameras listed by mile marker?","acceptedAnswer":{"@type":"Answer","text":"Mile markers are how the road system locates everything — closures, crashes, and cameras. Knowing a camera sits at I-90 MP 52 tells you exactly which stretch you're looking at. The MileCheck app shows your own mile marker in real time so you can match what you see to where you'll be."}}
     ]
@@ -76,6 +76,17 @@
     .crow .rt{font-weight:800;font-size:14px;}
     .crow .stb{font-weight:800;color:#0f7a4f;font-size:12.5px;white-space:nowrap;}
     .crow .sub{color:#5b6670;font-size:12.5px;margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+    .cam-viewer{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;margin-bottom:12px;}
+    .cv-imgwrap{position:relative;background:#0E1116;aspect-ratio:16/10;}
+    .cv-imgwrap img{width:100%;height:100%;object-fit:contain;display:block;}
+    .cv-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:20px;font-weight:800;color:#0E1116;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+    .cv-nav:hover{background:#fff;}
+    .cv-prev{left:10px;}.cv-next{right:10px;}
+    .cv-close{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:15px;cursor:pointer;}
+    .cv-meta{padding:10px 14px 12px;}
+    .cv-title{font-weight:800;font-size:14px;line-height:1.3;color:#0E1116;}
+    .cv-sub{font-size:12px;color:#5b6670;margin-top:2px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+    .cv-refresh{border:1px solid #E5E5E5;background:#FAFAF7;border-radius:8px;font:inherit;font-size:12px;font-weight:700;padding:4px 10px;cursor:pointer;}
     .cl-empty{padding:34px 16px;text-align:center;color:#5b6670;font-weight:700;font-size:15px;}
     .cl-empty small{display:block;font-weight:500;margin-top:6px;line-height:1.5;}
 
@@ -124,7 +135,7 @@
 
   <div class="cl-hero">
     <h1>Live <span class="accent">highway cameras</span></h1>
-    <p class="sub">See the actual road before you drive it. Live DOT cameras across fourteen states — CA, WA, OR, UT, MT, AZ, NV, SD, WI, NY, LA, GA, SC, AK — including the passes drivers check most, like I-90 Snoqualmie and the Cottonwood canyons — each tagged with its route and mile marker — plus Washington State Ferries terminal cams so you can see the holding lanes before you commit. More states coming.</p>
+    <p class="sub">See the actual road before you drive it. Live DOT cameras across fifteen states — CA, WA, OR, UT, MT, AZ, NV, OH, SD, WI, NY, LA, GA, SC, AK — including the passes drivers check most, like I-90 Snoqualmie and the Cottonwood canyons — each tagged with its route and mile marker — plus Washington State Ferries terminal cams so you can see the holding lanes before you commit. More states coming.</p>
   </div>
 
   <div class="cl-wrap">
@@ -150,6 +161,7 @@
           <option value="MT">Montana</option>
           <option value="NV">Nevada</option>
           <option value="NY">New York</option>
+          <option value="OH">Ohio</option>
           <option value="OR">Oregon</option>
           <option value="SC">South Carolina</option>
           <option value="SD">South Dakota</option>
@@ -159,6 +171,18 @@
         </select>
       </div>
       <div class="cl-list">
+        <div class="cam-viewer" id="camViewer" hidden>
+          <div class="cv-imgwrap">
+            <img id="cvImg" alt="Live camera view">
+            <button class="cv-nav cv-prev" id="cvPrev" aria-label="Previous camera">&#8249;</button>
+            <button class="cv-nav cv-next" id="cvNext" aria-label="Next camera">&#8250;</button>
+            <button class="cv-close" id="cvClose" aria-label="Close viewer">&#10005;</button>
+          </div>
+          <div class="cv-meta">
+            <div class="cv-title" id="cvTitle">—</div>
+            <div class="cv-sub"><span id="cvSub">—</span><span style="display:flex;gap:8px;align-items:center;"><span id="cvCount" style="color:#8A939B;font-weight:700;"></span><button class="cv-refresh" id="cvRefresh">&#8635;</button></span></div>
+          </div>
+        </div>
         <div class="lh">Cameras in view</div>
         <div class="cl-rows" id="camRows"><div class="cl-empty">Pick a state to load cameras<small>Or zoom the map into your area. Images come straight from each state DOT.</small></div></div>
       </div>
@@ -172,7 +196,7 @@
   </div>
 
   <div class="cl-notes">
-    <b>About this data:</b> camera images come directly from state departments of transportation — Caltrans, WSDOT, ODOT/TripCheck, UDOT, MDT, ADOT/AZ511, NDOT/NVRoads, SDDOT, WisDOT/511WI, NYSDOT/511NY, DOTD/511LA, GDOT/511GA, SCDOT, and AKDOT — the same official cameras the DOTs use to monitor their own roads. Images refresh on the DOT's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the DOT provides them; Washington State Ferries terminal and holding-lane cameras are included (blue dots). Fourteen states today; more are being added.
+    <b>About this data:</b> camera images come directly from state departments of transportation — Caltrans, WSDOT, ODOT/TripCheck, UDOT, MDT, ADOT/AZ511, NDOT/NVRoads, SDDOT, OHGO/ODOT, WisDOT/511WI, NYSDOT/511NY, DOTD/511LA, GDOT/511GA, SCDOT, and AKDOT — the same official cameras the DOTs use to monitor their own roads. Images refresh on the DOT's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the DOT provides them; Washington State Ferries terminal and holding-lane cameras are included (blue dots). Fifteen states today; more are being added.
   </div>
 
   <footer class="site-footer">
@@ -225,9 +249,9 @@ L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreet
 // Center on the 3-state coverage area, not the whole US.
 map.setView([41.5,-105],4.4);
 
-const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"UT":[37,-114.05,42,-109.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"NV":[35,-120.01,42,-114.04],"WI":[42.49,-92.89,47.08,-86.80],"NY":[40.48,-79.77,45.02,-71.86],"LA":[28.93,-94.04,33.02,-88.82],"GA":[30.36,-85.61,35,-80.84],"SC":[32.03,-83.35,35.22,-78.54],"CA":[32.5,-124.5,42,-114.1],"AK":[54.5,-170,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43]};
-const NAMES={WA:"Washington",OR:"Oregon",UT:"Utah",MT:"Montana",AZ:"Arizona",NV:"Nevada",WI:"Wisconsin",NY:"New York",LA:"Louisiana",GA:"Georgia",SC:"South Carolina",CA:"California",AK:"Alaska",SD:"South Dakota"};
-const AGENCY={WA:"WSDOT",OR:"ODOT",UT:"UDOT",MT:"MDT",AZ:"ADOT",NV:"NDOT",WI:"WisDOT",NY:"NYSDOT",LA:"DOTD",GA:"GDOT",SC:"SCDOT",CA:"Caltrans",AK:"AKDOT",SD:"SDDOT"};
+const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"UT":[37,-114.05,42,-109.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"NV":[35,-120.01,42,-114.04],"WI":[42.49,-92.89,47.08,-86.80],"NY":[40.48,-79.77,45.02,-71.86],"LA":[28.93,-94.04,33.02,-88.82],"GA":[30.36,-85.61,35,-80.84],"SC":[32.03,-83.35,35.22,-78.54],"CA":[32.5,-124.5,42,-114.1],"AK":[54.5,-170,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"OH":[38.40,-84.82,42.00,-80.52]};
+const NAMES={WA:"Washington",OR:"Oregon",UT:"Utah",MT:"Montana",AZ:"Arizona",NV:"Nevada",WI:"Wisconsin",NY:"New York",LA:"Louisiana",GA:"Georgia",SC:"South Carolina",CA:"California",AK:"Alaska",SD:"South Dakota",OH:"Ohio"};
+const AGENCY={WA:"WSDOT",OR:"ODOT",UT:"UDOT",MT:"MDT",AZ:"ADOT",NV:"NDOT",WI:"WisDOT",NY:"NYSDOT",LA:"DOTD",GA:"GDOT",SC:"SCDOT",CA:"Caltrans",AK:"AKDOT",SD:"SDDOT",OH:"OHGO"};
 const sel=document.getElementById('stateSel');
 sel.onchange=()=>{const c=sel.value;
   if(!c){map.setView([41.5,-105],4.4);return;}
@@ -284,14 +308,33 @@ function popupHtml(c){
       <button class="fp-refresh" onclick="var i=document.getElementById('${id}');i.src='${c.img.replace(/'/g,"")}'+('${c.img.includes("?")?"&":"?"}')+'t='+Date.now();return false;">↻ Refresh</button></div>
     <div class="fp-row"><a href="https://milecheckapp.com" style="font-weight:700">These cameras + live alerts on your route — MileCheck →</a></div></div>`;
 }
-let prevView=null;
-function rememberView(){ if(!prevView) prevView={c:map.getCenter(),z:map.getZoom()}; }
-map.on('popupclose',()=>{setTimeout(()=>{if(!map._popup){if(prevView){map.flyTo(prevView.c,prevView.z,{duration:.8});prevView=null;}else{render();}}},250);});
+// ---- Side viewer (bigger image + click-through deck) ----
+let DECK=[], DIDX=-1;
+function showCam(i,pan){
+  if(!DECK.length)return;
+  DIDX=((i%DECK.length)+DECK.length)%DECK.length;
+  const c=DECK[DIDX];
+  const v=document.getElementById('camViewer');
+  v.hidden=false;
+  const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();
+  const img=document.getElementById('cvImg');
+  img.src=bust; img.alt='Live view: '+c.title;
+  document.getElementById('cvTitle').textContent=c.title;
+  document.getElementById('cvSub').textContent=[c.ferry?'⛴ Ferry terminal':c.route,(c.mp>0&&!c.ferry)?'MP '+Math.round(c.mp):null,'Live from '+(AGENCY[c.st]||c.st)].filter(Boolean).join(' · ');
+  document.getElementById('cvCount').textContent=(DIDX+1)+' of '+DECK.length;
+  if(pan)map.panTo([c.lat,c.lon],{animate:true});
+}
+document.getElementById('cvPrev').onclick=()=>showCam(DIDX-1,true);
+document.getElementById('cvNext').onclick=()=>showCam(DIDX+1,true);
+document.getElementById('cvClose').onclick=()=>{document.getElementById('camViewer').hidden=true;DIDX=-1;};
+document.getElementById('cvRefresh').onclick=()=>{if(DIDX>=0)showCam(DIDX,false);};
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('camViewer').hidden)return;
+  if(e.key==='ArrowLeft'){showCam(DIDX-1,true);e.preventDefault();}
+  if(e.key==='ArrowRight'){showCam(DIDX+1,true);e.preventDefault();}
+});
 
 function render(){
-  // Don't rebuild markers while a popup is open — clearing the layer would
-  // destroy the popup's anchor marker (the "camera fades away" bug).
-  if(map._popup&&map._popup.isOpen&&map._popup.isOpen())return;
   camLayer.clearLayers();
   const bs=document.getElementById("bigStatus");
   const z=map.getZoom();
@@ -301,25 +344,26 @@ function render(){
   const b=map.getBounds();
   const inView=CAMS.filter(c=>b.contains([c.lat,c.lon])&&
     (typeFilter==='all'||(typeFilter==='ferry'?c.ferry:!c.ferry)));
-  inView.forEach(c=>{
-    const m=L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:2,fillColor:c.ferry?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
-    m.bindPopup(()=>popupHtml(c),{maxWidth:300});
-    m.on('click',()=>{rememberView();map.flyTo([c.lat,c.lon],Math.max(map.getZoom(),11),{duration:.7});});
-  });
+  // (sorted is also the viewer's click-through deck — computed below, markers
+  // reference it by index so ‹ › order matches the sidebar list.)
   bs.className=inView.length?"bigstatus":"bigstatus hint";
   bs.textContent=inView.length?((typeFilter==="ferry"?"⛴ ":"📷 ")+inView.length+" live "+(typeFilter==="ferry"?"ferry cam":"camera")+(inView.length>1?"s":"")+" in view"):"No cameras in this view";
   const rows=document.getElementById("camRows");
-  if(!inView.length){rows.innerHTML=`<div class="cl-empty">No cameras here<small>Camera coverage is 14 states today (CA WA OR UT MT AZ NV SD WI NY LA GA SC AK) — more coming.</small></div>`;return;}
+  if(!inView.length){DECK=[];rows.innerHTML=`<div class="cl-empty">No cameras here<small>Camera coverage is 15 states today (CA WA OR UT MT AZ NV OH SD WI NY LA GA SC AK) — more coming.</small></div>`;return;}
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0)));
+  DECK=sorted;
+  if(DIDX>=DECK.length)DIDX=-1;
+  sorted.forEach((c,i)=>{
+    const m=L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:2,fillColor:c.ferry?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
+    m.on('click',()=>showCam(i,false));
+  });
   rows.innerHTML=sorted.slice(0,60).map((c,i)=>`<div class="crow" data-i="${i}">
       <div class="t"><span class="rt">${c.ferry?"⛴ Ferry":c.route}${c.mp>0&&!c.ferry?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
       <div class="sub">${c.title}</div>
     </div>`).join("")+(sorted.length>60?`<div class="cl-empty" style="padding:14px"><small>Showing 60 of ${sorted.length} — zoom in for the rest.</small></div>`:"");
   rows.querySelectorAll('.crow').forEach(el=>el.onclick=()=>{
-    const c=sorted[+el.dataset.i]; if(!c)return;
-    rememberView();
-    map.flyTo([c.lat,c.lon],11,{duration:.8});
-    L.popup({maxWidth:300}).setLatLng([c.lat,c.lon]).setContent(popupHtml(c)).openOn(map);
+    const i=+el.dataset.i; if(!sorted[i])return;
+    showCam(i,true);
   });
 }
 let busy=false;
