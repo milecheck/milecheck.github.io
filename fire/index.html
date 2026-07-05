@@ -346,13 +346,36 @@ async function loadFires(){
   }catch(e){}
   busy=false; render();
 }
+function perimPopup(props){
+  const nm=(props.attr_IncidentName||props.IncidentName||"").trim();
+  // try to match a fire we already have for the full detail card
+  const match=nm&&FIRES.find(f=>f.name&&f.name.toUpperCase()===nm.toUpperCase());
+  if(match)return popupHtml(match);
+  const ac=props.attr_GISAcres||props.GISAcres;
+  const cont=props.attr_PercentContained??props.PercentContained;
+  return `<div class="fpop">
+    <div class="fp-nm">${nm?nm+" Fire":"Burned area"}</div>
+    <div class="fp-st">Burned-area perimeter · NIFC</div>
+    ${ac?`<div class="fp-row">Perimeter size: <b>${Math.round(ac).toLocaleString()} acres</b></div>`:""}
+    ${cont!=null&&cont!==""?`<div class="fp-row">Containment: <b class="fp-cont">${Math.round(cont)}%</b></div>`:""}
+    <div class="fp-row" style="color:#5b6670;margin-top:5px;">This shaded area is the mapped fire perimeter.</div>
+  </div>`;
+}
 async function loadPerimeters(env){
   try{
-    const url=`https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Interagency_Perimeters_Current/FeatureServer/0/query?geometry=${env}&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&inSR=4326&outSR=4326&where=1%3D1&outFields=attr_IncidentName&f=geojson&resultRecordCount=100`;
+    const url=`https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Interagency_Perimeters_Current/FeatureServer/0/query?geometry=${env}&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&inSR=4326&outSR=4326&where=1%3D1&outFields=attr_IncidentName,attr_GISAcres,attr_PercentContained&f=geojson&resultRecordCount=100`;
     const gj=await fetch(url,{cache:"no-store"}).then(r=>r.json());
     perimLayer.clearLayers();
     if(gj&&gj.features&&gj.features.length)
-      L.geoJSON(gj,{style:{color:'#cf3320',weight:2,fillColor:'#cf3320',fillOpacity:.26},interactive:false}).addTo(perimLayer);
+      L.geoJSON(gj,{
+        style:{color:'#cf3320',weight:2,fillColor:'#cf3320',fillOpacity:.26},
+        onEachFeature:(feat,layer)=>{
+          layer.bindPopup(perimPopup(feat.properties||{}),{maxWidth:280});
+          layer.on('mouseover',()=>layer.setStyle({fillOpacity:.42,weight:3}));
+          layer.on('mouseout',()=>layer.setStyle({fillOpacity:.26,weight:2}));
+          layer.on('click',()=>rememberView());
+        }
+      }).addTo(perimLayer);
   }catch(e){}
 }
 // zoom-in on a fire, zoom back out when its popup closes — so the rest of the
