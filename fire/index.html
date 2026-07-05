@@ -50,6 +50,10 @@
     .fire-ic.out{opacity:.55;filter:grayscale(.35);}
     .fire-lbl{background:#cf3320;color:#fff;font-weight:700;font-size:11px;padding:2px 8px;border-radius:7px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.3);text-align:center;display:inline-block;pointer-events:none;}
     .fire-lbl.rxc{background:#c47f0a;}
+    .newtag{display:inline-block;background:#111;color:#fff;font-weight:800;font-size:9px;letter-spacing:.06em;padding:1px 5px;border-radius:5px;margin-right:5px;vertical-align:middle;}
+    .fire-lbl .newtag{background:#fff;color:#cf3320;}
+    .frow .newtag{font-size:10px;}
+    .fpop .newtag{font-size:10px;}
     .lblwrap{text-align:center;pointer-events:none;}
     .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
     .fpop .fp-nm{font-weight:800;font-size:15px;}
@@ -161,7 +165,7 @@
 
   <div class="fire-notes" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
     <span style="font-weight:800;color:#0E1116;font-size:13px;">Legend:</span>
-    <span>🔥 active fire</span><span style="color:#cf3320;">▮ burned-area perimeter</span><span>⛔ road closed (live DOT)</span><span style="opacity:.6;">🔥 faded = 100% contained</span><span style="background:#c47f0a;color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;">RX</span><span>prescribed burn</span>
+    <span>🔥 active fire</span><span style="background:#111;color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;">NEW</span><span>started &lt; 48 hrs ago</span><span style="color:#cf3320;">▮ burned-area perimeter</span><span>⛔ road closed (live DOT)</span><span style="opacity:.6;">🔥 faded = 100% contained</span><span style="background:#c47f0a;color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;">RX</span><span>prescribed burn</span>
   </div>
   <div class="fire-notes">
     <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Zoom and pan the map; the fire list updates to what's in view, largest first.
@@ -254,7 +258,7 @@ function render(){
     m.on('click',()=>{rememberView();map.flyTo([f.lat,f.lon],Math.max(map.getZoom(),11),{duration:.8});});
     if(labeled.has(f.name)){
       const contTxt=f.cont!=null?` · ${Math.round(f.cont)}%`:"";
-      L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="lblwrap"><span class="fire-lbl${f.rx?' rxc':''}">${f.name} · ${Math.round(f.ac).toLocaleString()} ac${contTxt}</span></div>`,iconSize:[200,20],iconAnchor:[100,-12]}),interactive:false}).addTo(fireLayer);
+      L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="lblwrap"><span class="fire-lbl${f.rx?' rxc':''}">${(!f.rx&&isNewFire(f))?'<span class="newtag">NEW</span>':''}${f.name} · ${Math.round(f.ac).toLocaleString()} ac${contTxt}</span></div>`,iconSize:[200,20],iconAnchor:[100,-12]}),interactive:false}).addTo(fireLayer);
     }
   });
   const bs=document.getElementById("bigStatus");
@@ -270,7 +274,7 @@ function render(){
       ?`<div class="bar"><i style="width:${Math.max(2,Math.min(100,f.cont))}%"></i></div><div class="cl">${Math.round(f.cont)}% contained</div>`
       :`<div class="cl">containment not reported</div>`;
     return `<div class="frow${out?' out':''}" data-i="${i}">
-      <div class="t"><span class="nm">${f.name} Fire${f.rx?'<span class="rxtag">RX BURN</span>':''}</span><span class="ac">${Math.round(f.ac).toLocaleString()} ac</span></div>
+      <div class="t"><span class="nm">${(!f.rx&&isNewFire(f))?'<span class="newtag">NEW</span>':''}${f.name} Fire${f.rx?'<span class="rxtag">RX BURN</span>':''}</span><span class="ac">${Math.round(f.ac).toLocaleString()} ac</span></div>
       <div class="sub">${where?where+" · ":""}${started?`started ${started}`:""}</div>
       ${cont}
     </div>`;}).join("");
@@ -281,11 +285,17 @@ function render(){
     L.popup({maxWidth:280}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map);
   });
 }
+const NEW_HOURS=48; // fires discovered within this many hours get a NEW tag
+function isNewFire(f){
+  if(!f.disc)return false;
+  const t=Date.parse(f.disc); if(isNaN(t))return false;
+  return (Date.now()-t) < NEW_HOURS*3600*1000 && (Date.now()-t) >= 0;
+}
 function popupHtml(f){
   const started=f.disc?new Date(f.disc).toLocaleDateString([], {month:"short",day:"numeric",year:"numeric"}):null;
   const where=[f.county?f.county+" County":null,f.st].filter(Boolean).join(", ");
   return `<div class="fpop">
-    <div class="fp-nm">${f.name} Fire${f.rx?' <span class="rxtag">RX BURN</span>':''}</div>
+    <div class="fp-nm">${(!f.rx&&isNewFire(f))?'<span class="newtag">NEW</span> ':''}${f.name} Fire${f.rx?' <span class="rxtag">RX BURN</span>':''}</div>
     <div class="fp-st">${where||"location per NIFC"}</div>
     <div class="fp-row">Size: <b>${Math.round(f.ac).toLocaleString()} acres</b></div>
     <div class="fp-row">Containment: <b class="fp-cont">${f.cont!=null?Math.round(f.cont)+"%":"not reported"}</b></div>
