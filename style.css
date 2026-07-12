@@ -35,7 +35,7 @@ img, svg { display: block; max-width: 100%; }
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1500; /* must beat page overlays (cam viewer 1100, A2HS 1200) so the open nav menu always wins */
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
