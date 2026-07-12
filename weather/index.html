@@ -182,7 +182,7 @@
         <button class="lg-item tog" id="togWind" aria-pressed="false" title="High wind &amp; extreme wind warnings"><span class="sw sw-wind"></span> Wind</button>
         <button class="lg-item tog on" id="togHur" aria-pressed="true" title="Hurricane forecast tracks &amp; cones — National Hurricane Center"><span class="sw-hur"></span> <span id="hurChipTxt">Hurricanes</span></button>
         <button class="lg-item tog" id="togRadar" aria-pressed="false" title="Live NEXRAD radar composite — NOAA / Iowa Environmental Mesonet"><span class="sw-radar"></span> Radar</button>
-        <span class="lg-item">⛔ Road closed</span>
+        <button class="lg-item tog" id="togClos" aria-pressed="false" title="Live DOT road closures via MileCheck — optional overlay">⛔ Road closed</button>
       </div>
     </div>
     <div class="wx-side">
@@ -254,6 +254,7 @@
 const map=L.map('wxmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
 // basemap choices (all keyless Esri services)
 const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+L.Popup.mergeOptions({autoPanPaddingTopLeft: L.point(14,118), autoPanPaddingBottomRight: L.point(14,14), maxHeight: 340});
 const ATTR='Esri, USGS · warnings: NWS · hurricanes: NHC';
 const baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});
 const baseSat=L.layerGroup([
@@ -261,8 +262,8 @@ const baseSat=L.layerGroup([
   L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
 ]);
 const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
-baseSat.addTo(map);   // satellite default (Leah 2026-07-12)
-L.control.layers({'Satellite':baseSat,'Terrain':baseTerrain,'Streets':baseStreets},null,
+baseTerrain.addTo(map);   // terrain default for weather (Leah 2026-07-12: events read better than on satellite)
+L.control.layers({'Terrain':baseTerrain,'Streets':baseStreets,'Satellite':baseSat},null,
   {position:'bottomright',collapsed:true}).addTo(map);
 map.setView([39.5,-98.35],4);   // lower 48
 
@@ -273,13 +274,13 @@ function fmtNwsTime(s){if(!s)return null;const d=new Date(s);return isNaN(d)?nul
 // Warnings only — no advisories, no marine zones. Tropical WATCHES are the one
 // watch family kept: a hurricane watch is a drive-decision event, not noise.
 const FAMS={
-  tropical:{label:'Tropical', color:'#d61f1f', fill:.20,
+  tropical:{label:'Tropical', color:'#d61f1f', fill:.32,
     events:['Hurricane Warning','Hurricane Watch','Tropical Storm Warning','Tropical Storm Watch','Storm Surge Warning']},
-  winter:{label:'Winter', color:'#4c5fd6', fill:.20,
+  winter:{label:'Winter', color:'#4c5fd6', fill:.32,
     events:['Blizzard Warning','Ice Storm Warning','Winter Storm Warning','Snow Squall Warning']},
-  flood:{label:'Flood', color:'#0e8a6d', fill:.20,
+  flood:{label:'Flood', color:'#0e8a6d', fill:.32,
     events:['Flash Flood Warning','Flood Warning']},
-  storm:{label:'Storms', color:'#e08a00', fill:.20,
+  storm:{label:'Storms', color:'#e08a00', fill:.32,
     events:['Severe Thunderstorm Warning','Tornado Warning','Dust Storm Warning']},
   wind:{label:'Wind', color:'#5b7a99', fill:.16,
     events:['High Wind Warning','Extreme Wind Warning']}
@@ -345,7 +346,7 @@ async function renderWarnings(){
       if(EVENT_TO_FAM[p.event]!==fam)continue;
       if(f.geometry){
         try{
-          const g=L.geoJSON(f.geometry,{style:{color:FAMS[fam].color,weight:2,fillColor:FAMS[fam].color,fillOpacity:FAMS[fam].fill}})
+          const g=L.geoJSON(f.geometry,{style:{color:FAMS[fam].color,weight:3,fillColor:FAMS[fam].color,fillOpacity:FAMS[fam].fill}})
             .bindPopup(wxPopup(p,fam),{maxWidth:300});
           g.addTo(famLayers[fam]);
           items.push({fam,props:p,group:g,bounds:g.getBounds()});
@@ -375,7 +376,7 @@ async function renderWarnings(){
       }
       if(g){
         try{
-          L.geoJSON(g,{style:{color:FAMS[q.fam].color,weight:2,fillColor:FAMS[q.fam].color,fillOpacity:FAMS[q.fam].fill}}).addTo(grp);
+          L.geoJSON(g,{style:{color:FAMS[q.fam].color,weight:3,fillColor:FAMS[q.fam].color,fillOpacity:FAMS[q.fam].fill}}).addTo(grp);
           got=true;
         }catch(e){}
       }
@@ -548,7 +549,8 @@ sel.onchange=()=>{const c=sel.value;
 
 // ===== road-closure overlay (live DOT data via the MileCheck Worker) =====
 const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
-let closureLayer=L.layerGroup().addTo(map);
+let closOn=false;                      // Leah 2026-07-12: closures are optional on this map, off by default
+let closureLayer=L.layerGroup();
 const clCache={};   // state -> {t, list}
 function statesInView(){
   const b=map.getBounds(),out=[];
@@ -579,6 +581,7 @@ async function closuresFor(st){
 async function loadClosures(){
   const z=map.getZoom(), lg=document.getElementById('clLegend');
   closureLayer.clearLayers();
+  if(!closOn){lg.style.display="none";return;}
   if(z<5){lg.style.display="none";return;}   // closures render at state-level zoom
   const sts=statesInView().slice(0,6);       // cap the fan-out at wide state views
   const lists=await Promise.all(sts.map(closuresFor));
@@ -597,7 +600,13 @@ async function loadClosures(){
 map.on('moveend',()=>{clearTimeout(window._clT);window._clT=setTimeout(loadClosures,450);});
 map.on('moveend',()=>{clearTimeout(window._wxT);window._wxT=setTimeout(updateWx,250);});
 
-loadNWS(); loadHurricanes(); loadClosures();
+document.getElementById('togClos').onclick=e=>{
+  closOn=!closOn;
+  if(closOn)closureLayer.addTo(map); else map.removeLayer(closureLayer);
+  e.currentTarget.classList.toggle('on',closOn);e.currentTarget.setAttribute('aria-pressed',closOn);
+  loadClosures();
+};
+loadNWS(); loadHurricanes();
 setInterval(loadNWS,300000); setInterval(loadClosures,300000);
 setInterval(loadHurricanes,900000);   // NHC advisories update ~6-hourly; 15 min is plenty
 </script>
