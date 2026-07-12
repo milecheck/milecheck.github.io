@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kilometre Markers, Province by Province — Canada | MileCheck</title>
+  <meta name="description" content="MileCheck's province-by-province library: how kilometre markers work across Canada, starting with driver's guides to Ontario and Quebec. Km-post support is coming to the app in an upcoming update.">
+
+  <meta property="og:title" content="Kilometre Markers, Province by Province — Canada">
+  <meta property="og:description" content="Canada posts kilometre markers, not miles. Driver's guides to how each province's markers actually work — Ontario and Quebec support is coming to MileCheck.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/canada/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    .st-hero{max-width:1160px;margin:0 auto;padding:38px 20px 8px;}
+    .st-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .st-hero h1 .accent{color:#00A86B;}
+    .st-hero p.sub{max-width:74ch;color:#5b6670;font-size:15px;margin-top:8px;line-height:1.55;}
+    .st-grid{max-width:1160px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+    /* Split reader (desktop): list scrolls left, guide loads right — no page hop. */
+    @media(min-width:961px){
+      .st-layout{max-width:1360px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:420px 1fr;gap:18px;align-items:start;}
+      .st-layout .st-grid{max-width:none;margin:0;padding:0;grid-template-columns:1fr;max-height:calc(100vh - 140px);overflow-y:auto;padding-right:6px;}
+      .st-reader{position:sticky;top:84px;height:calc(100vh - 140px);overflow-y:auto;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:26px 30px;}
+      .stcard.active{border-color:#0E1116;box-shadow:0 0 0 1px #0E1116;}
+    }
+    .st-reader{display:none;}
+    @media(min-width:961px){.st-reader{display:block;}}
+    .st-reader .rd-empty{color:#8A939B;font-weight:700;text-align:center;padding:80px 20px;font-size:15px;line-height:1.6;}
+    .st-reader .rd-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid #E5E5E5;padding-bottom:12px;margin-bottom:16px;}
+    .st-reader .rd-title{font-size:22px;font-weight:800;letter-spacing:-0.02em;}
+    .st-reader .rd-open{font-size:13px;font-weight:700;color:#00A86B;white-space:nowrap;text-decoration:none;border-bottom:1px solid rgba(0,168,107,.4);}
+    .st-reader .article-body p{font-size:15px;line-height:1.65;color:#374151;margin:0 0 16px;}
+    .st-reader .article-body h2{font-size:17px;font-weight:800;margin:22px 0 8px;}
+    .st-reader .article-body ul{margin:0 0 16px 20px;}
+    .st-reader .article-body li{font-size:15px;line-height:1.6;color:#374151;margin-bottom:6px;}
+    .st-reader .article-body a{color:#00A86B;font-weight:600;}
+    .st-reader .article-body svg{max-width:100%;height:auto;}
+    /* Strip-map styles — the guides carry these in their own <head>, which the
+       reader never loads; without them the SVG labels lose anchoring/fonts. */
+    .st-reader .strip-map{margin:1.6rem 0 1.8rem;}
+    .st-reader .strip-map svg{width:100%;height:auto;display:block;}
+    .st-reader .strip-map .sm-city{font:600 13px Inter,sans-serif;fill:#0E1116;text-anchor:middle;}
+    .st-reader .strip-map .sm-mp{font:600 11px 'JetBrains Mono',monospace;fill:#8A939B;text-anchor:middle;}
+    .st-reader .strip-map .sm-mp-l{text-anchor:start;}
+    .st-reader .strip-map .sm-mp-r{text-anchor:end;}
+    .st-reader .strip-map .sm-pin{font:700 12px Inter,sans-serif;fill:#fff;text-anchor:middle;}
+    .st-reader .strip-map figcaption{font:400 0.85rem/1.5 Inter,sans-serif;color:#5b6670;margin:0.8rem 0 0;text-align:center;}
+    .st-reader .photo-fig img{width:100%;border-radius:14px;display:block;}
+    .stcard{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;display:flex;flex-direction:column;text-decoration:none;color:inherit;}
+    a.stcard:hover{border-color:#0E1116;}
+    .stcard.has-guide{border-color:#BFE9D9;background:#FBFEFD;}
+    .st-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+    .stcard h2{font-size:15.5px;font-weight:800;letter-spacing:-0.01em;}
+    .st-ab{font-size:11px;font-weight:800;color:#8A939B;letter-spacing:.06em;}
+    .st-status{font-size:11.5px;margin-top:6px;display:flex;gap:10px;flex-wrap:wrap;font-weight:700;}
+    .st-ok{color:#0f7a4f;}
+    .st-soon{color:#8A939B;font-weight:600;}
+    .st-coming{color:#4C9A78;font-weight:700;}
+    .st-hook{color:#5b6670;font-size:12.5px;line-height:1.45;margin-top:7px;flex:1;}
+    .st-hook.dim{color:#A9B1B8;}
+    .st-go{margin-top:9px;font-weight:700;font-size:12.5px;color:#0E1116;border-bottom:1px solid #0E1116;align-self:flex-start;}
+
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../states/">United States</a>
+        <a href="./" class="active">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="st-hero">
+    <h1>Kilometre markers, <span class="accent">province by province</span></h1>
+    <p class="sub">Canada counts in kilometres, not miles &mdash; and each province posts its markers a little differently. Ontario and Quebec km-post support is coming to MileCheck in an upcoming update, and province by province we&rsquo;re writing the driver&rsquo;s guide to how each one&rsquo;s markers actually work &mdash; the corridors, the signage, and the quirks. Green-bordered provinces have their guide.</p>
+  </div>
+
+  <div class="st-layout">
+  <div class="st-grid">
+    <div class="stcard">
+      <div class="st-top"><h2>Alberta</h2><span class="st-ab">AB</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>British Columbia</h2><span class="st-ab">BC</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Manitoba</h2><span class="st-ab">MB</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>New Brunswick</h2><span class="st-ab">NB</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Newfoundland and Labrador</h2><span class="st-ab">NL</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Nova Scotia</h2><span class="st-ab">NS</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <a class="stcard has-guide" href="../blog/km-markers-ontario.html">
+      <div class="st-top"><h2>Ontario</h2><span class="st-ab">ON</span></div>
+      <p class="st-status"><span class="st-coming">&#9679; Km-posts &mdash; coming to the app</span></p>
+      <p class="st-hook">Exit numbers ARE the km-posts &mdash; Ontario numbered its exits by kilometre.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Prince Edward Island</h2><span class="st-ab">PE</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <a class="stcard has-guide" href="../blog/km-markers-quebec.html">
+      <div class="st-top"><h2>Quebec</h2><span class="st-ab">QC</span></div>
+      <p class="st-status"><span class="st-coming">&#9679; Km-posts &mdash; coming to the app</span></p>
+      <p class="st-hook">Rep&egrave;res kilom&eacute;triques every 2 km on every autoroute.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Saskatchewan</h2><span class="st-ab">SK</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Northwest Territories</h2><span class="st-ab">NT</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Nunavut</h2><span class="st-ab">NU</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+
+    <div class="stcard">
+      <div class="st-top"><h2>Yukon</h2><span class="st-ab">YT</span></div>
+      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
+      <p class="st-hook dim">Coming later.</p>
+    </div>
+  </div>
+  <aside class="st-reader" id="stReader">
+    <div class="rd-empty">Pick a province on the left &mdash; its driver&rsquo;s guide opens right here.<br><br>&#127809; 2 of 13 written.</div>
+  </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../fire/">US wildfire map</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+            <li><a href="../bridges/">Seattle bridges</a></li>
+            <li><a href="../borders/">Border wait times</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+<script>
+(function(){
+  var reader=document.getElementById('stReader');
+  function isSplit(){return window.matchMedia('(min-width:961px)').matches;}
+  function slugOf(href){var m=href.match(/km-markers-([a-z-]+)\.html/);return m?m[1]:null;}
+  function loadGuide(href,card,push){
+    fetch(href).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var title=doc.querySelector('.article-title'),body=doc.querySelector('.article-body');
+      if(!title||!body)throw 0;
+      reader.innerHTML='';
+      var head=document.createElement('div');head.className='rd-head';
+      head.innerHTML='<div class="rd-title">'+title.textContent+'</div><a class="rd-open" href="'+href+'">Open full page &rarr;</a>';
+      reader.appendChild(head);
+      var bodyWrap=document.createElement('div');bodyWrap.className='article-body';
+      bodyWrap.innerHTML=body.innerHTML;
+      reader.appendChild(bodyWrap);
+      reader.scrollTop=0;
+      // In-guide links to other guides stay in the panel; fix relative hrefs (guides live in ../blog/).
+      bodyWrap.querySelectorAll('a[href]').forEach(function(a){
+        var h=a.getAttribute('href');
+        if(/^km-markers-[a-z-]+\.html$/.test(h)){a.setAttribute('href','../blog/'+h);
+          a.addEventListener('click',function(e){if(isSplit()){e.preventDefault();loadGuide('../blog/'+h,null,true);}});}
+        else if(/^mile-markers-[a-z-]+\.html$/.test(h)){a.setAttribute('href','../blog/'+h);}
+        else if(/^(what-to-tell-911|how-to-find)/.test(h)){a.setAttribute('href','../blog/'+h);}
+      });
+      document.querySelectorAll('.stcard.active').forEach(function(c){c.classList.remove('active');});
+      if(!card){var slug=slugOf(href);card=document.querySelector('.stcard[href$="km-markers-'+slug+'.html"]');}
+      if(card){card.classList.add('active');if(push)card.scrollIntoView({block:'nearest'});}
+      if(push!==false){var slug2=slugOf(href);if(slug2)history.replaceState(null,'','#'+slug2);}
+    }).catch(function(){window.location.href=href;});
+  }
+  document.querySelectorAll('a.stcard.has-guide').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(!isSplit())return; // mobile: normal navigation
+      e.preventDefault();
+      loadGuide(a.getAttribute('href'),a,true);
+    });
+  });
+  // Deep link: /canada/#ontario opens that guide in the panel.
+  if(isSplit()&&location.hash.length>1){
+    var slug=location.hash.slice(1);
+    var card=document.querySelector('.stcard[href$="km-markers-'+slug+'.html"]');
+    if(card)loadGuide(card.getAttribute('href'),card,false);
+  }
+})();
+</script>
+</body>
+</html>
