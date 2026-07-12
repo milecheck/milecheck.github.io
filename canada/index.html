@@ -112,6 +112,133 @@
     <p class="sub">Canada counts in kilometres, not miles &mdash; and each province posts its markers a little differently. Ontario, Quebec, British Columbia, and Alberta km-post support is coming to MileCheck in an upcoming update, and province by province we&rsquo;re writing the driver&rsquo;s guide to how each one&rsquo;s markers actually work &mdash; the corridors, the signage, and the quirks. Green-bordered provinces have their guide.</p>
   </div>
 
+  <!-- ============== LIVE KM-POST MAP ============== -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <section class="km-map-sec">
+    <style>
+      .km-map-sec{max-width:1160px;margin:26px auto 6px;padding:0 20px;}
+      .km-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;height:56vh;min-height:380px;background:#eef0e9;}
+      #kmMap{position:absolute;inset:0;z-index:0;}
+      .km-count{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;pointer-events:none;}
+      .km-count.hint{color:#5b6670;font-weight:700;}
+      .km-nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
+      .km-nearme:hover{background:#2a2f36;}
+      .km-caption{max-width:96ch;color:#5b6670;font-size:13px;line-height:1.55;margin:12px 2px 0;}
+      #kmMap.leaflet-container{font-family:Inter,sans-serif;}
+      #kmMap .leaflet-popup-content{font-family:Inter,sans-serif;margin:11px 14px;font-size:13.5px;line-height:1.5;}
+      @media (max-width:760px){
+        .km-mapbox{height:52vh;min-height:320px;}
+        #kmMap .leaflet-control-zoom{display:none;}
+        .km-count{font-size:12px;padding:6px 10px;max-width:62%;left:12px;}
+        .km-nearme{font-size:12px;padding:8px 11px;}
+      }
+    </style>
+    <div class="km-mapbox">
+      <span class="km-count hint" id="kmCount">Loading map&hellip;</span>
+      <button class="km-nearme" id="kmNearMe">&#128205; Near me</button>
+      <div id="kmMap"></div>
+    </div>
+    <p class="km-caption">Live kilometre-post data for Ontario, Quebec, British Columbia, Alberta, Nova Scotia, and the Northwest Territories &mdash; from official provincial sources (MTO, MTQ, BC MOT, Alberta Transportation, Service NS, GNWT). Positions are approximate. This data is coming to the MileCheck app in an upcoming update.</p>
+  </section>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script>
+  (function(){
+    var mapEl=document.getElementById('kmMap');
+    if(!mapEl||typeof L==='undefined')return;
+    var WORKER='https://milepost-proxy.leahgerber93.workers.dev/mileposts?state=';
+    // b = [minLat, minLon, maxLat, maxLon] — data extents padded a touch.
+    var PROVS=[
+      {c:'ON',n:'Ontario',b:[41.9,-95.4,52.6,-74.1]},
+      {c:'QC',n:'Quebec',b:[44.8,-79.8,53.1,-61.0]},
+      {c:'BC',n:'British Columbia',b:[48.1,-132.5,60.2,-114.4]},
+      {c:'AB',n:'Alberta',b:[48.8,-120.2,60.2,-109.7]},
+      {c:'NS',n:'Nova Scotia',b:[43.3,-66.4,46.6,-59.9]},
+      {c:'NT',n:'Northwest Territories',b:[59.8,-136.5,69.7,-111.5]}
+    ];
+    var map=L.map('kmMap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+    var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+    var ATTR='Esri, USGS &middot; km-posts: provincial DOTs via MileCheck';
+    var baseSat=L.layerGroup([
+      L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17}),
+      L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
+    ]);
+    var baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});
+    var baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
+    baseSat.addTo(map);   // satellite default (house style)
+    L.control.layers({'Satellite':baseSat,'Terrain':baseTerrain,'Streets':baseStreets},null,{position:'bottomright',collapsed:true}).addTo(map);
+    map.setView([49.5,-90],4);   // southern Canada corridor band, ON to BC
+    var dots=L.layerGroup().addTo(map);
+    var counter=document.getElementById('kmCount');
+    function setCount(txt,hint){counter.textContent=txt;counter.className='km-count'+(hint?' hint':'');}
+    function dispRoute(r){
+      if(r==='QEW')return 'QEW';
+      var m=/^([A-Z]+)-(.+)$/.exec(r);
+      if(!m)return r;
+      if(m[1]==='A')return r;               // Quebec autoroutes stay A-20
+      if(m[1]==='QC')return 'Route '+m[2];  // Quebec routes: QC-132 -> Route 132
+      return 'Hwy '+m[2];                   // ON/BC/AB/NS/NT: Hwy 401, Hwy 1...
+    }
+    // per-province cache (10 min) + in-flight dedupe + short back-off on failure
+    var CACHE={},PENDING={},FAILED={},TTL=10*60*1000,BACKOFF=60*1000;
+    function getData(c){
+      var e=CACHE[c];
+      if(e&&Date.now()-e.t<TTL)return Promise.resolve(e.d);
+      if(PENDING[c])return PENDING[c];
+      if(FAILED[c]&&Date.now()-FAILED[c]<BACKOFF)return Promise.resolve(e?e.d:null);
+      PENDING[c]=fetch(WORKER+c).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+        if(!Array.isArray(d))throw 0;
+        CACHE[c]={t:Date.now(),d:d};delete PENDING[c];delete FAILED[c];return d;
+      }).catch(function(){delete PENDING[c];FAILED[c]=Date.now();return e?e.d:null;});
+      return PENDING[c];
+    }
+    function hits(b,bd){return !(bd.getSouth()>b[2]||bd.getNorth()<b[0]||bd.getWest()>b[3]||bd.getEast()<b[1]);}
+    var seq=0,MAX_DOTS=400;
+    function render(){
+      var z=map.getZoom();
+      if(z<6){dots.clearLayers();setCount('Zoom in — km-posts load by province',true);return;}
+      var bd=map.getBounds().pad(0.05);
+      var want=PROVS.filter(function(p){return hits(p.b,bd);});
+      if(!want.length){dots.clearLayers();setCount('0 km-posts in view');return;}
+      var my=++seq,fresh=want.every(function(p){var e=CACHE[p.c];return e&&Date.now()-e.t<TTL;});
+      if(!fresh)setCount('Loading km-posts…',true);
+      Promise.all(want.map(function(p){return getData(p.c);})).then(function(res){
+        if(my!==seq)return;   // stale render — a newer pan/zoom superseded it
+        var step=z>=11?1:(z>=9?5:25);
+        var s=bd.getSouth(),n=bd.getNorth(),w=bd.getWest(),ee=bd.getEast();
+        var pts=[],truncated=false,anyData=false;
+        for(var i=0;i<want.length&&!truncated;i++){
+          var d=res[i];if(!d)continue;anyData=true;
+          for(var j=0;j<d.length;j++){
+            var r=d[j],km=Math.round(r.mile);
+            if(km%step!==0)continue;
+            if(r.lat<s||r.lat>n||r.lon<w||r.lon>ee)continue;
+            pts.push({r:r,km:km,p:want[i]});
+            if(pts.length>=MAX_DOTS){truncated=true;break;}
+          }
+        }
+        dots.clearLayers();
+        if(!anyData){setCount('km-posts unavailable right now',true);return;}
+        var rad=z>=11?5:4;
+        for(var k=0;k<pts.length;k++){
+          var q=pts[k];
+          L.circleMarker([q.r.lat,q.r.lon],{radius:rad,color:'#fff',weight:1,fillColor:'#0f7a4f',fillOpacity:.95})
+            .bindPopup('<b>'+dispRoute(q.r.route)+'</b> &middot; KM '+q.km+' &middot; '+q.p.n)
+            .addTo(dots);
+        }
+        setCount((truncated?MAX_DOTS+'+':pts.length.toLocaleString())+' km-post'+(pts.length===1?'':'s')+' in view');
+      });
+    }
+    map.on('moveend',render);
+    render();
+    document.getElementById('kmNearMe').onclick=function(){
+      if(!navigator.geolocation)return;
+      navigator.geolocation.getCurrentPosition(function(p){map.setView([p.coords.latitude,p.coords.longitude],11);},function(){},{timeout:8000});
+    };
+  })();
+  </script>
+
   <div class="st-layout">
   <div class="st-grid">
     <a class="stcard has-guide" href="../blog/km-markers-alberta.html">
