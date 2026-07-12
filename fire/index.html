@@ -602,7 +602,7 @@ document.getElementById('togRfw').onclick=e=>{
 };
 
 // ===== nearby DOT cameras (same Worker /cameras source as milecheckapp.com/cameras/) =====
-const CAM_STATES=new Set(['CA','WA','OR','UT','MT','AZ','NV','OH','SD','WI','NY','LA','GA','SC','AK']);
+const CAM_STATES=new Set(['CA','WA','OR','UT','MT','AZ','NV','OH','SD','WI','NY','LA','GA','SC','AK','DE','FL','MI']);  // snapshot-capable states (MD/WV are stream-only — skipped until an HLS player exists)
 const CAM_MAX=150, CAM_MIN_ZOOM=8;
 const fireCamLayer=L.layerGroup().addTo(map);
 let camOn=false, camRunSeq=0;
