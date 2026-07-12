@@ -63,6 +63,8 @@
     .sw-evac{display:inline-block;width:15px;height:11px;border:1.5px solid #d61f1f;border-radius:3px;background:repeating-linear-gradient(45deg,rgba(214,31,31,.55) 0 3px,transparent 3px 6px);}
     .sw-rfw{display:inline-block;width:15px;height:11px;border:1.5px solid #e08a00;border-radius:3px;background:rgba(224,138,0,.14);}
     .sw-cam{display:inline-block;width:9px;height:9px;border-radius:50%;background:#0f7a4f;border:1.5px solid #fff;box-shadow:0 0 0 1px #0f7a4f;}
+    .sw-air{color:#1259c9;font-weight:800;font-size:13px;line-height:1;}
+    .air-ic{line-height:0;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));}
     .fpop img.campic{width:100%;border-radius:8px;margin-top:6px;background:#eef0e9;min-height:90px;display:block;}
     #firemap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
@@ -201,6 +203,7 @@
         <button class="lg-item tog on" id="togEvac" aria-pressed="true" title="Evacuation orders — National Weather Service"><span class="sw-evac"></span> Evacuation</button>
         <button class="lg-item tog" id="togRfw" aria-pressed="false" title="Red Flag Warnings — critical fire weather, National Weather Service"><span class="sw-rfw"></span> Red flag</button>
         <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live DOT traffic cameras near the fires"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
+        <button class="lg-item tog" id="togAir" aria-pressed="false" title="Firefighting aircraft — air tankers, scoopers, lead planes &amp; air attack near the fires, live from the ADSB.lol community ADS-B network"><span class="sw-air">✈</span> <span id="airChipTxt">Aircraft</span></button>
       </div>
     </div>
     <div class="fire-side">
@@ -226,7 +229,7 @@
   </div>
 
   <div class="fire-notes">
-    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras (zoom in to a state to load them). Zoom and pan the map; the fire list updates to what's in view, largest first.
+    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras (zoom in to a state to load them). The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, and air attack — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. Zoom and pan the map; the fire list updates to what's in view, largest first.
   </div>
 
   <div class="cl-notes" style="max-width:1160px;margin:0 auto 40px;padding:0 20px;">
@@ -269,7 +272,7 @@
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Fire data: NIFC/WFIGS. Evacuation &amp; red-flag alerts: National Weather Service. Cameras: state DOTs. Map: Esri, USGS. Positions are approximate — always follow official evacuation and closure orders.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Fire data: NIFC/WFIGS. Evacuation &amp; red-flag alerts: National Weather Service. Cameras: state DOTs. Aircraft positions: <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> (ODbL). Map: Esri, USGS. Positions are approximate — always follow official evacuation and closure orders.</p>
     </div>
   </footer>
 
@@ -638,8 +641,97 @@ document.getElementById('togCam').onclick=e=>{
 };
 map.on('moveend',()=>{if(!camOn)return;clearTimeout(window._fcT);window._fcT=setTimeout(loadFireCams,450);});
 
+// ===== firefighting aircraft (community ADS-B via ADSB.lol — ODbL, keyless) =====
+// Air tankers, scoopers, lead planes, and air attack working the fires in view.
+// Identified CONSERVATIVELY: fire callsigns (TNKR/LEAD/JMPR/MAFFS/AA##/T##),
+// CAL FIRE "N###DF" tail numbers, or unambiguous tanker type codes (DC10, MD87,
+// RJ85/BAe-146, CL-415, S-64, AT-802) below 25,000 ft. False negatives are fine;
+// false positives are not. OFF by default — queries only run while toggled on,
+// keyed to the 5 largest fires in view (60 nm radius each), so a donation-run
+// community feed never gets hammered by idle visitors.
+const airLayer=L.layerGroup().addTo(map);
+let airOn=false, airRunSeq=0;
+const AIR_CS_RE=/^(TNKR\d|LEAD\d|JMPR\d|MAFFS\d|DUCK\d|AA\d{1,3}$|T\d{2,3}$)/;
+const AIR_REG_RE=/^N\d{1,4}DF$/;   // CAL FIRE fleet registrations end in DF
+const AIR_TYPES={DC10:'DC-10 Very Large Air Tanker',MD87:'MD-87 Air Tanker',RJ85:'RJ85 Large Air Tanker',B461:'BAe-146 Large Air Tanker',B462:'BAe-146 Large Air Tanker',B463:'BAe-146 Large Air Tanker',CL2T:'CL-415 Super Scooper',CL2P:'CL-215 Scooper',S64:'S-64 Air Crane Helitanker',AT8T:'AT-802 Single Engine Air Tanker'};
+const AIR_ROLES=[[/^TNKR/,'Air Tanker'],[/^LEAD/,'Lead Plane'],[/^JMPR/,'Smokejumper Aircraft'],[/^MAFFS/,'MAFFS Military Air Tanker'],[/^DUCK/,'Water Scooper'],[/^AA\d/,'Air Attack'],[/^T\d/,'Air Tanker']];
+function airMatch(a){
+  const cs=String(a.flight||'').trim().toUpperCase();
+  const reg=String(a.r||'').trim().toUpperCase();
+  if(AIR_CS_RE.test(cs)||AIR_REG_RE.test(reg))return true;
+  // type-only matches must be low enough to plausibly be working a fire
+  const t=String(a.t||'').trim().toUpperCase(), alt=a.alt_baro;
+  return !!AIR_TYPES[t]&&(alt==='ground'||(typeof alt==='number'&&alt<25000));
+}
+function airLabel(a){
+  const cs=String(a.flight||'').trim().toUpperCase();
+  for(const[re,role]of AIR_ROLES)if(re.test(cs))return role;
+  if(AIR_REG_RE.test(String(a.r||'').trim().toUpperCase()))return 'CAL FIRE Aircraft';
+  return AIR_TYPES[String(a.t||'').trim().toUpperCase()]||'Firefighting aircraft';
+}
+function airPopup(a,fireName){
+  const cs=String(a.flight||'').trim()||String(a.r||'').trim()||a.hex;
+  const reg=String(a.r||'').trim();
+  const alt=a.alt_baro==='ground'?'on the ground':(typeof a.alt_baro==='number'?Math.round(a.alt_baro).toLocaleString()+' ft':null);
+  const spd=(typeof a.gs==='number'&&a.gs>1)?Math.round(a.gs*1.15078)+' mph':null;
+  const near=fireName?`${esc(fireName)} Fire${typeof a.dst==='number'?' (~'+Math.round(a.dst*1.15078)+' mi away)':''}`:null;
+  return `<div class="fpop">
+    <div class="fp-nm">✈ ${esc(cs)}</div>
+    <div class="fp-st">${esc(airLabel(a))}</div>
+    ${(reg&&reg!==cs)?`<div class="fp-row">Tail number: <b>${esc(reg)}</b></div>`:''}
+    ${a.t?`<div class="fp-row">Type: <b>${esc(String(a.t).trim())}</b></div>`:''}
+    ${alt?`<div class="fp-row">Altitude: <b>${alt}</b></div>`:''}
+    ${spd?`<div class="fp-row">Speed: <b>${spd}</b></div>`:''}
+    ${near?`<div class="fp-row">Near: <b>${near}</b></div>`:''}
+    <div class="fp-row" style="color:#5b6670;margin-top:5px;">Source: ADSB.lol community ADS-B · positions can lag or drop out</div>
+  </div>`;
+}
+const AIR_SVG='M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z';
+function setAirChip(txt){const el=document.getElementById('airChipTxt');if(el)el.textContent=txt;}
+async function loadAircraft(){
+  const run=++airRunSeq;
+  if(!airOn){airLayer.clearLayers();setAirChip('Aircraft');return;}
+  // pick up to 5 query centers from the fires in view, at least ~50 nm apart
+  const centers=[];
+  for(const f of FIRES){
+    if(centers.length>=5)break;
+    if(centers.some(c=>Math.hypot(c.lat-f.lat,(c.lon-f.lon)*Math.cos(f.lat*Math.PI/180))*60<50))continue;
+    centers.push(f);
+  }
+  if(!centers.length){airLayer.clearLayers();setAirChip('Aircraft — no fires in view');return;}
+  const found=new Map();   // hex -> {a, fireName} (dedupe across overlapping queries)
+  await Promise.all(centers.map(async f=>{
+    try{
+      const d=await fetch(`https://api.adsb.lol/v2/point/${f.lat.toFixed(3)}/${f.lon.toFixed(3)}/60`,{cache:'no-store'}).then(r=>r.json());
+      for(const a of (d&&d.ac)||[]){
+        if(!airMatch(a)||!isFinite(+a.lat)||!isFinite(+a.lon))continue;
+        const prev=found.get(a.hex);
+        if(!prev||(a.dst??999)<(prev.a.dst??999))found.set(a.hex,{a,fireName:f.name});
+      }
+    }catch(e){}
+  }));
+  if(run!==airRunSeq||!airOn)return;
+  airLayer.clearLayers();
+  let n=0;
+  found.forEach(({a,fireName})=>{
+    n++;
+    const rot=(typeof a.track==='number')?Math.round(a.track):0;
+    L.marker([+a.lat,+a.lon],{icon:L.divIcon({className:'',html:`<div class="air-ic"><svg viewBox="0 0 24 24" width="26" height="26" style="transform:rotate(${rot}deg)"><path d="${AIR_SVG}" fill="#1259c9" stroke="#fff" stroke-width="1.1"/></svg></div>`,iconSize:[26,26],iconAnchor:[13,13]})})
+      .bindPopup(airPopup(a,fireName),{maxWidth:290}).addTo(airLayer);
+  });
+  setAirChip(n?`Aircraft (${n})`:'Aircraft — none airborne now');
+}
+document.getElementById('togAir').onclick=e=>{
+  airOn=!airOn;
+  e.currentTarget.classList.toggle('on',airOn);e.currentTarget.setAttribute('aria-pressed',airOn);
+  if(airOn)setAirChip('Aircraft — checking…');
+  loadAircraft();
+};
+map.on('moveend',()=>{if(!airOn)return;clearTimeout(window._airT);window._airT=setTimeout(loadAircraft,600);});
+
 loadFires(); loadClosures(); loadNWS();
 setInterval(loadFires,300000); setInterval(loadClosures,300000); setInterval(loadNWS,300000);
+setInterval(()=>{if(airOn)loadAircraft();},150000);   // aircraft: 2.5 min, only while toggled on
 </script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
 
