@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>US Road Weather Map — storms, hurricanes &amp; the closures they cause | MileCheck</title>
-  <meta name="description" content="Major road weather on one live map: winter storms, hurricanes, flash floods, and severe storms from the National Weather Service — plus the road closures they cause, live from state DOTs. Updates every 5 minutes.">
+  <meta name="description" content="Major road weather on one live map — winter storms, hurricanes, flash floods, monsoon storms — plus the highway closures they cause, live from state DOTs. Updated every 5 minutes.">
 
   <meta property="og:title" content="US Road Weather Map — MileCheck">
-  <meta property="og:description" content="Winter storms, hurricanes, flash floods, severe storms — and the road closures they cause. Live NWS warnings + live DOT closures, one map.">
+  <meta property="og:description" content="Winter storms, hurricanes, flash floods, monsoon storms — and the road closures they cause. Live NWS warnings + live DOT closures on one map.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/weather/">
   <meta property="og:type" content="website">
@@ -28,10 +28,10 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {"@type":"Question","name":"How do I see if a storm closed my highway?","acceptedAnswer":{"@type":"Answer","text":"This map overlays live National Weather Service warnings with live road closures from state DOTs — the ⛔ markers. Zoom in to your route: if a warning polygon sits on your highway and a closure marker appears, the storm has already reached the road. The MileCheck app shows the same closures tied to the exact mile marker."}},
-      {"@type":"Question","name":"Which weather warnings show on this map?","acceptedAnswer":{"@type":"Answer","text":"Only driving-relevant warnings: winter storms (blizzard, ice storm, winter storm, snow squall), tropical systems (hurricane and tropical storm warnings and watches, storm surge), flood and flash flood warnings, severe storms (severe thunderstorm, tornado, dust storm), and high wind. Advisories and marine-only alerts are left off to keep the map readable."}},
-      {"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Warnings come from the National Weather Service live alert feed, refreshed every 5 minutes. Hurricane forecast tracks and cones come from the National Hurricane Center. Radar is the NOAA national composite via the Iowa Environmental Mesonet. Road closures come live from state departments of transportation via MileCheck."}},
-      {"@type":"Question","name":"Does MileCheck show this in the app?","acceptedAnswer":{"@type":"Answer","text":"Yes — the MileCheck app shows live DOT road alerts, including weather closures, tied to your exact highway mile marker in real time, with weather and road-surface conditions on the main screen. It works in all 50 US states, offline included for mile markers."}}
+      {"@type":"Question","name":"How do I see if a storm closed my highway?","acceptedAnswer":{"@type":"Answer","text":"Zoom in to your state — the ⛔ markers are live road closures straight from state DOT feeds, shown alongside the weather warning that likely caused them. If a warning polygon sits on your highway and a closure marker appears, the storm has already reached the road. The MileCheck app ties every closure to a highway mile marker so you know exactly what's ahead on your route."}},
+      {"@type":"Question","name":"Which weather warnings show on this map?","acceptedAnswer":{"@type":"Answer","text":"Only warnings that matter behind the wheel: winter storms, blizzards, ice storms and snow squalls; hurricanes, tropical storms and storm surge; flash floods and river floods; severe thunderstorms, tornadoes and dust storms; and high-wind warnings. Heat advisories, marine warnings, and other non-driving alerts are filtered out — this is a road map, not a forecast site."}},
+      {"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Weather warnings come from the National Weather Service live alert feed and refresh every 5 minutes. Hurricane forecast tracks and cones come from the National Hurricane Center. Radar is NOAA NEXRAD data served by the Iowa Environmental Mesonet. Road closures come live from state departments of transportation via MileCheck."}},
+      {"@type":"Question","name":"Does MileCheck show this in the app?","acceptedAnswer":{"@type":"Answer","text":"Yes — the MileCheck app shows live DOT road alerts, including weather-driven closures, tied to your exact highway mile marker in real time. It also shows your nearest mile marker, speed, and local road conditions, and works offline in all 50 states."}}
     ]
   }
   </script>
@@ -46,9 +46,9 @@
     .wx-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
     .wx-loading{position:absolute;inset:0;z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(238,240,233,.82);backdrop-filter:blur(1.5px);transition:opacity .3s;}
     .wx-loading.done{opacity:0;pointer-events:none;}
-    .wl-spin{width:38px;height:38px;border:4px solid #C9CEEC;border-top-color:#4c5fd6;border-radius:50%;animation:wlspin .8s linear infinite;}
-    @keyframes wlspin{to{transform:rotate(360deg);}}
-    .wl-txt{font-weight:800;font-size:14px;color:#4c5fd6;letter-spacing:.01em;}
+    .wxl-spin{width:38px;height:38px;border:4px solid #C9CFEE;border-top-color:#4c5fd6;border-radius:50%;animation:wxspin .8s linear infinite;}
+    @keyframes wxspin{to{transform:rotate(360deg);}}
+    .wxl-txt{font-weight:800;font-size:14px;color:#4c5fd6;letter-spacing:.01em;}
     .skel{padding:12px 16px;border-bottom:1px solid #F0F0EE;}
     .skel .sk{height:12px;border-radius:6px;background:linear-gradient(90deg,#EEE 25%,#F6F6F4 37%,#EEE 63%);background-size:400% 100%;animation:sksh 1.3s ease-in-out infinite;}
     .skel .sk.w1{width:55%;}.skel .sk.w2{width:32%;margin-top:8px;}.skel .sk.w3{width:100%;height:6px;margin-top:9px;}
@@ -60,21 +60,24 @@
     .lg-item.tog:not(.on){opacity:.5;}
     .lg-item.tog.on{border-color:#c9c9c2;background:#fff;}
     .sw{display:inline-block;width:15px;height:11px;border-radius:3px;border:1.5px solid;}
-    .sw-winter{border-color:#4c5fd6;background:rgba(76,95,214,.18);}
-    .sw-trop{border-color:#d61f1f;background:rgba(214,31,31,.18);}
-    .sw-flood{border-color:#0e8a6d;background:rgba(14,138,109,.18);}
-    .sw-conv{border-color:#e08a00;background:rgba(224,138,0,.18);}
-    .sw-wind{border-color:#5b7a99;background:rgba(91,122,153,.18);}
-    .sw-radar{border-color:#7a8aa5;background:linear-gradient(45deg,rgba(14,138,109,.5) 0 30%,rgba(224,138,0,.55) 30% 65%,rgba(214,31,31,.55) 65%);}
+    .sw-winter{border-color:#4c5fd6;background:rgba(76,95,214,.20);}
+    .sw-trop{border-color:#d61f1f;background:rgba(214,31,31,.20);}
+    .sw-flood{border-color:#0e8a6d;background:rgba(14,138,109,.20);}
+    .sw-storm{border-color:#e08a00;background:rgba(224,138,0,.20);}
+    .sw-wind{border-color:#5b7a99;background:rgba(91,122,153,.20);}
+    .sw-hur{display:inline-block;width:15px;height:11px;border:1.5px solid #d61f1f;border-radius:50% 50% 50% 3px;background:rgba(214,31,31,.14);}
+    .sw-radar{display:inline-block;width:15px;height:11px;border-radius:3px;background:linear-gradient(90deg,#7ec8e3,#f7e463,#e08a00,#d61f1f);border:1.5px solid #b9c0c7;}
     #wxmap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
     .bigstatus{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;}
-    .bigstatus.ok{color:#0f7a4f;}.bigstatus.warn{color:#3a4ec4;}
+    .bigstatus.ok{color:#0f7a4f;}.bigstatus.warn{color:#4c5fd6;}
     .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
     .nearme:hover{background:#2a2f36;}
     .cl-ic{font-size:23px;line-height:1;text-align:center;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));}
     .cl-legend{position:absolute;top:58px;left:58px;z-index:800;background:#cf3320;color:#fff;border:1.5px solid #fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:800;box-shadow:0 2px 8px rgba(207,51,32,.35);cursor:default;}
-    .storm-lbl{background:#d61f1f;color:#fff;font-weight:700;font-size:11px;padding:2px 8px;border-radius:7px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.3);text-align:center;display:inline-block;}
+    .hur-lbl{background:#d61f1f;color:#fff;font-weight:700;font-size:11px;padding:2px 8px;border-radius:7px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.3);text-align:center;display:inline-block;pointer-events:none;}
+    .hurlbl,.hurlbl.leaflet-interactive{pointer-events:none;background:transparent;}
+    .lblwrap{text-align:center;pointer-events:none;}
     .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
     .fpop .fp-nm{font-weight:800;font-size:15px;}
     .fpop .fp-st{color:#5b6670;font-size:12.5px;font-weight:600;margin:2px 0 8px;}
@@ -92,7 +95,7 @@
     .wrow:hover{background:#F7F5EE;}
     .wrow:last-child{border-bottom:none;}
     .wrow .t{display:flex;gap:8px;align-items:baseline;}
-    .wrow .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;position:relative;top:1px;}
+    .wrow .dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;position:relative;top:1px;}
     .wrow .nm{font-weight:700;font-size:14px;}
     .wrow .sub{color:#5b6670;font-size:12.5px;margin-top:3px;line-height:1.45;}
     .wrow .exp{color:#5b6670;font-size:11.5px;margin-top:3px;font-weight:600;}
@@ -159,7 +162,7 @@
 
   <div class="wx-hero">
     <h1>US <span class="accent">road weather</span> map</h1>
-    <p class="sub">Major road weather, one map — winter storms, hurricanes, flash floods, monsoon storms — with the road closures they cause. Warnings live from the National Weather Service, hurricane tracks from the National Hurricane Center, closures live from state DOTs. Updates every 5 minutes.</p>
+    <p class="sub">Major road weather, one map — winter storms, hurricanes, flash floods, monsoon storms — with the road closures they cause. Warnings come live from the National Weather Service, hurricane tracks from the National Hurricane Center, and the ⛔ closures straight from state DOT feeds. Updates every 5 minutes. This is a road map, not a forecast site.</p>
   </div>
 
   <div class="wx-wrap">
@@ -169,16 +172,16 @@
         <button class="nearme" id="nearMe">Weather near me</button>
         <span class="cl-legend" id="clLegend" style="display:none">⛔ road closures · live DOT data via MileCheck</span>
         <div id="wxmap"></div>
-        <div class="wx-loading" id="wxLoading"><div class="wl-spin"></div><div class="wl-txt">Loading live weather data…</div></div>
+        <div class="wx-loading" id="wxLoading"><div class="wxl-spin"></div><div class="wxl-txt">Loading live weather data…</div></div>
       </div>
       <div class="wx-legend">
-        <button class="lg-item tog on" id="togWinter" aria-pressed="true" title="Blizzard, ice storm, winter storm, snow squall warnings"><span class="sw sw-winter"></span> Winter</button>
-        <button class="lg-item tog on" id="togTropical" aria-pressed="true" title="Hurricane and tropical storm warnings/watches, storm surge"><span class="sw sw-trop"></span> Tropical</button>
-        <button class="lg-item tog on" id="togFlood" aria-pressed="true" title="Flash flood and flood warnings"><span class="sw sw-flood"></span> Flood</button>
-        <button class="lg-item tog on" id="togConv" aria-pressed="true" title="Severe thunderstorm, tornado, and dust storm warnings"><span class="sw sw-conv"></span> Storms</button>
-        <button class="lg-item tog" id="togWind" aria-pressed="false" title="High wind and extreme wind warnings"><span class="sw sw-wind"></span> Wind</button>
-        <button class="lg-item tog on" id="togHurr" aria-pressed="true" title="Hurricane forecast tracks and cones — National Hurricane Center"><span style="color:#d61f1f;font-weight:800;">🌀</span> <span id="hurrChipTxt">Hurricanes</span></button>
-        <button class="lg-item tog" id="togRadar" aria-pressed="false" title="National radar composite — NOAA / Iowa Environmental Mesonet"><span class="sw sw-radar"></span> Radar</button>
+        <button class="lg-item tog on" id="togWinter" aria-pressed="true" title="Blizzard, ice storm, winter storm &amp; snow squall warnings"><span class="sw sw-winter"></span> Winter</button>
+        <button class="lg-item tog on" id="togTrop" aria-pressed="true" title="Hurricane, tropical storm &amp; storm surge warnings and watches"><span class="sw sw-trop"></span> Tropical</button>
+        <button class="lg-item tog on" id="togFlood" aria-pressed="true" title="Flash flood &amp; flood warnings"><span class="sw sw-flood"></span> Flood</button>
+        <button class="lg-item tog on" id="togStorm" aria-pressed="true" title="Severe thunderstorm, tornado &amp; dust storm warnings"><span class="sw sw-storm"></span> Storms</button>
+        <button class="lg-item tog" id="togWind" aria-pressed="false" title="High wind &amp; extreme wind warnings"><span class="sw sw-wind"></span> Wind</button>
+        <button class="lg-item tog on" id="togHur" aria-pressed="true" title="Hurricane forecast tracks &amp; cones — National Hurricane Center"><span class="sw-hur"></span> <span id="hurChipTxt">Hurricanes</span></button>
+        <button class="lg-item tog" id="togRadar" aria-pressed="false" title="Live NEXRAD radar composite — NOAA / Iowa Environmental Mesonet"><span class="sw-radar"></span> Radar</button>
         <span class="lg-item">⛔ Road closed</span>
       </div>
     </div>
@@ -187,12 +190,12 @@
         <select id="stateSel"><option value="">All USA</option></select>
       </div>
       <div class="wx-list">
-        <div class="lh" id="listHead">Road-weather warnings in view</div>
-        <div class="wx-rows" id="wxRows"><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div></div>
+        <div class="lh" id="listHead">Warnings in view</div>
+        <div class="wx-rows" id="wxRows"><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div></div>
       </div>
       <div class="wx-cta">
-        <h3>The storm is one half. The road is the other.</h3>
-        <p>MileCheck shows your exact highway mile marker plus live DOT road alerts — weather closures included — in real time. Works offline in all 50 states.</p>
+        <h3>Storms don't close roads until they do.</h3>
+        <p>MileCheck shows your exact highway mile marker plus live DOT road alerts — including weather closures — in real time. Works offline in all 50 states.</p>
         <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>
@@ -200,7 +203,7 @@
   </div>
 
   <div class="wx-notes">
-    <b>About this data:</b> weather warnings come live from the National Weather Service alert feed and refresh every 5 minutes — only driving-relevant warnings are shown (winter storms, tropical systems, floods, severe storms, high wind); advisories and marine alerts are left off. Hurricane forecast tracks and cones come from the National Hurricane Center and appear automatically when a storm is active. Radar is the national NEXRAD composite from NOAA via the Iowa Environmental Mesonet. Road closures (⛔) come live from state departments of transportation via MileCheck. Warnings are shown for driving-relevant events only — this is a road map, not a forecast site. Zoom and pan the map; the warning list updates to what's in view.
+    <b>About this data:</b> weather warnings come from the National Weather Service live alert feed and refresh every 5 minutes. Warnings shown for driving-relevant events only — winter storms, tropical systems, floods, severe storms, and high wind — this is a road map, not a forecast site. Hurricane forecast tracks and cones come from the National Hurricane Center; the cone shows where the storm's <b>center</b> could go, not the size of the storm. Radar is NOAA NEXRAD data served by the Iowa Environmental Mesonet. Road closures come live from state DOTs via MileCheck (zoom in to a state to load them). Zoom and pan the map; the warning list updates to what's in view.
   </div>
 
   <div class="cl-notes" style="max-width:1160px;margin:0 auto 40px;padding:0 20px;">
@@ -251,14 +254,14 @@
 const map=L.map('wxmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
 // basemap choices (all keyless Esri services)
 const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
-const ATTR='Esri, USGS · warnings: NWS · tracks: NHC';
+const ATTR='Esri, USGS · warnings: NWS · hurricanes: NHC';
 const baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});
 const baseSat=L.layerGroup([
   L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17}),
   L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
 ]);
 const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
-baseSat.addTo(map);   // satellite default (owner preference)
+baseSat.addTo(map);   // satellite default (Leah 2026-07-12)
 L.control.layers({'Satellite':baseSat,'Terrain':baseTerrain,'Streets':baseStreets},null,
   {position:'bottomright',collapsed:true}).addTo(map);
 map.setView([39.5,-98.35],4);   // lower 48
@@ -266,261 +269,287 @@ map.setView([39.5,-98.35],4);   // lower 48
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function fmtNwsTime(s){if(!s)return null;const d=new Date(s);return isNaN(d)?null:d.toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}
 
-// ===== 1) NWS road-relevant weather warnings =====
-// One fetch of api.weather.gov/alerts/active powers every family. Browsers send
-// a User-Agent automatically, which satisfies api.weather.gov.
+// ===== weather warning families (road-relevant only) =====
+// Warnings only — no advisories, no marine zones. Tropical WATCHES are the one
+// watch family kept: a hurricane watch is a drive-decision event, not noise.
 const FAMS={
-  tropical:  {label:'Tropical', color:'#d61f1f', pri:1, events:['Hurricane Warning','Hurricane Watch','Tropical Storm Warning','Tropical Storm Watch','Storm Surge Warning']},
-  winter:    {label:'Winter',   color:'#4c5fd6', pri:2, events:['Blizzard Warning','Ice Storm Warning','Winter Storm Warning','Snow Squall Warning']},
-  flood:     {label:'Flood',    color:'#0e8a6d', pri:3, events:['Flash Flood Warning','Flood Warning']},
-  convective:{label:'Storms',   color:'#e08a00', pri:4, events:['Severe Thunderstorm Warning','Tornado Warning','Dust Storm Warning']},
-  wind:      {label:'Wind',     color:'#5b7a99', pri:5, events:['High Wind Warning','Extreme Wind Warning']}
+  tropical:{label:'Tropical', color:'#d61f1f', fill:.20,
+    events:['Hurricane Warning','Hurricane Watch','Tropical Storm Warning','Tropical Storm Watch','Storm Surge Warning']},
+  winter:{label:'Winter', color:'#4c5fd6', fill:.20,
+    events:['Blizzard Warning','Ice Storm Warning','Winter Storm Warning','Snow Squall Warning']},
+  flood:{label:'Flood', color:'#0e8a6d', fill:.20,
+    events:['Flash Flood Warning','Flood Warning']},
+  storm:{label:'Storms', color:'#e08a00', fill:.20,
+    events:['Severe Thunderstorm Warning','Tornado Warning','Dust Storm Warning']},
+  wind:{label:'Wind', color:'#5b7a99', fill:.16,
+    events:['High Wind Warning','Extreme Wind Warning']}
 };
-const EVENT_FAM={};
-Object.keys(FAMS).forEach(k=>FAMS[k].events.forEach(e=>EVENT_FAM[e]=k));
-const famOn={tropical:true,winter:true,flood:true,convective:true,wind:false};   // Wind OFF by default — noisiest
-const warnLayer=L.layerGroup().addTo(map);
-let WARNS=[],warnRun=0,RENDERED=[];
-const zoneGeomCache=new Map();               // zone URL -> geometry (county/forecast zones)
-const ZONE_FETCH_MAX=150;                    // per-render budget of new zone fetches
-const ZONE_PER_ALERT=12, ZONE_CACHE_MAX=600;
+// zone-resolution priority when alerts carry no inline polygon:
+const FAM_PRIORITY=['tropical','winter','flood','storm','wind'];
+const EVENT_TO_FAM={};
+for(const k of FAM_PRIORITY)FAMS[k].events.forEach(e=>{EVENT_TO_FAM[e]=k;});
+// marine UGC prefixes — a warning whose zones are ALL marine is not a road event
+const MARINE_UGC=new Set(['AM','AN','GM','PZ','PK','PH','PM','PS','LC','LE','LH','LM','LO','LS','SL']);
+function isMarineOnly(p){
+  const ugc=(p&&p.geocode&&p.geocode.UGC)||[];
+  if(!ugc.length)return false;
+  return ugc.every(z=>MARINE_UGC.has(String(z).slice(0,2)));
+}
 
-function nwsPopup(p){
-  const on=fmtNwsTime(p.onset||p.effective),exp=fmtNwsTime(p.expires);
+const famLayers={}, famOn={tropical:true,winter:true,flood:true,storm:true,wind:false};
+for(const k of FAM_PRIORITY){
+  famLayers[k]=L.layerGroup();
+  if(famOn[k])famLayers[k].addTo(map);
+}
+let NWS_WX=[],       // filtered road-relevant alerts from the last fetch
+    WX_ITEMS=[],     // rendered: {fam, props, group, bounds}
+    wxRun=0;
+const zoneGeomCache=new Map();   // zone URL -> geometry (shared across refreshes)
+const ZONE_CACHE_MAX=150, ZONES_PER_ALERT=20;
+
+function wxPopup(p,fam){
+  const on=fmtNwsTime(p.onset||p.effective),exp=fmtNwsTime(p.expires||p.ends);
   const instr=p.instruction?esc(p.instruction.slice(0,300))+(p.instruction.length>300?'…':''):'';
   return `<div class="fpop">
-    <div class="fp-nm">${esc(p.event||'Warning')}</div>
+    <div class="fp-nm" style="color:${FAMS[fam].color}">${esc(p.event||'Weather warning')}</div>
     <div class="fp-st">${esc((p.areaDesc||'').slice(0,180))}</div>
     ${p.headline?`<div class="fp-row">${esc(p.headline)}</div>`:''}
     ${instr?`<div class="fp-row" style="color:#5b6670">${instr}</div>`:''}
-    ${on?`<div class="fp-row">Onset: <b>${on}</b></div>`:''}
+    ${on?`<div class="fp-row">Starts: <b>${on}</b></div>`:''}
     ${exp?`<div class="fp-row">Expires: <b>${exp}</b></div>`:''}
     <div class="fp-row" style="color:#5b6670;margin-top:5px;">Source: National Weather Service</div>
   </div>`;
-}
-function marineOnly(p){
-  const zs=(p&&p.affectedZones)||[];
-  if(!zs.length)return false;
-  return zs.every(z=>/\/zones\/marine\//i.test(z||''));
 }
 async function loadNWS(){
   try{
     const d=await fetch('https://api.weather.gov/alerts/active',{cache:'no-store'}).then(r=>r.json());
     const feats=(d&&d.features)||[];
-    WARNS=feats.filter(f=>{
+    NWS_WX=feats.filter(f=>{
       const p=f.properties||{};
-      return EVENT_FAM[p.event]&&!marineOnly(p);
-    }).map(f=>{f._fam=EVENT_FAM[(f.properties||{}).event];return f;});
-  }catch(e){renderWarns();return;}  // degrade gracefully: keep whatever was rendered before
-  renderWarns();
+      return EVENT_TO_FAM[p.event]&&!isMarineOnly(p);
+    });
+  }catch(e){ finishLoading(); return; }  // degrade gracefully: layers keep whatever they had
+  renderWarnings();
 }
-function addWarnShape(geom,f,style){
-  try{
-    const lyr=L.geoJSON(geom,{style})
-      .bindPopup(nwsPopup(f.properties||{}),{maxWidth:300}).addTo(warnLayer);
-    RENDERED.push({fam:f._fam,f,bounds:lyr.getBounds()});
-  }catch(e){}
-}
-async function renderWarns(){
-  const run=++warnRun;
-  warnLayer.clearLayers(); RENDERED=[];
-  // priority order for the zone-fetch budget: tropical > winter > flood > convective > wind
-  const active=WARNS.filter(f=>famOn[f._fam])
-    .sort((a,b)=>FAMS[a._fam].pri-FAMS[b._fam].pri);
-  let zonesFetched=0;
-  for(const f of active){
-    const c=FAMS[f._fam].color;
-    const style={color:c,weight:2,fillColor:c,fillOpacity:.16};
-    if(f.geometry){addWarnShape(f.geometry,f,style);continue;}
-    // Geometry-null warnings are issued for county/forecast ZONES — resolve each
-    // zone's polygon from its absolute api.weather.gov URL (small payloads, cached).
-    for(const zu of (((f.properties||{}).affectedZones)||[]).slice(0,ZONE_PER_ALERT)){
+async function renderWarnings(){
+  const run=++wxRun;
+  for(const k of FAM_PRIORITY)famLayers[k].clearLayers();
+  const items=[];
+  const zoneQueue=[];
+  // pass 1: alerts with inline polygons — instant, no extra fetches.
+  // Iterating families in priority order so pass 2's zone budget is spent
+  // tropical > winter > flood > storms > wind.
+  for(const fam of FAM_PRIORITY){
+    for(const f of NWS_WX){
+      const p=f.properties||{};
+      if(EVENT_TO_FAM[p.event]!==fam)continue;
+      if(f.geometry){
+        try{
+          const g=L.geoJSON(f.geometry,{style:{color:FAMS[fam].color,weight:2,fillColor:FAMS[fam].color,fillOpacity:FAMS[fam].fill}})
+            .bindPopup(wxPopup(p,fam),{maxWidth:300});
+          g.addTo(famLayers[fam]);
+          items.push({fam,props:p,group:g,bounds:g.getBounds()});
+        }catch(e){}
+      }else{
+        zoneQueue.push({fam,f});
+      }
+    }
+  }
+  WX_ITEMS=items;
+  finishLoading(); updateWx();
+  // pass 2: geometry-null alerts — resolve NWS zone polygons (cached, capped).
+  // Same debugged pattern as the fire page's red-flag zone resolution:
+  // sequential fetches, per-URL cache, run token to abandon superseded passes.
+  for(const q of zoneQueue){
+    const p=q.f.properties||{};
+    const grp=L.featureGroup();
+    let got=false;
+    for(const zu of ((p.affectedZones)||[]).slice(0,ZONES_PER_ALERT)){
       let g=zoneGeomCache.get(zu);
       if(g===undefined){
-        if(zonesFetched>=ZONE_FETCH_MAX||zoneGeomCache.size>=ZONE_CACHE_MAX)continue;
-        zonesFetched++;
+        if(zoneGeomCache.size>=ZONE_CACHE_MAX)continue;   // hard cap on zone fetches
         try{const zj=await fetch(zu,{cache:'no-store'}).then(r=>r.json());g=(zj&&zj.geometry)||null;}
         catch(e){g=null;}
         zoneGeomCache.set(zu,g);
-        if(run!==warnRun)return;             // toggled/refreshed mid-fetch — abandon
+        if(run!==wxRun)return;      // a fresh refresh superseded this pass — abandon
       }
-      if(g)addWarnShape(g,f,style);
+      if(g){
+        try{
+          L.geoJSON(g,{style:{color:FAMS[q.fam].color,weight:2,fillColor:FAMS[q.fam].color,fillOpacity:FAMS[q.fam].fill}}).addTo(grp);
+          got=true;
+        }catch(e){}
+      }
+    }
+    if(got){
+      grp.bindPopup(wxPopup(p,q.fam),{maxWidth:300});
+      grp.addTo(famLayers[q.fam]);
+      WX_ITEMS.push({fam:q.fam,props:p,group:grp,bounds:grp.getBounds()});
     }
   }
-  const wl=document.getElementById('wxLoading'); if(wl) wl.classList.add('done');
-  updateStatus(); updateList();
+  if(run===wxRun)updateWx();
 }
-function inViewWarnings(){
-  const b=map.getBounds(),seen=new Set(),out=[];
-  for(const r of RENDERED){
-    const id=(r.f.properties||{}).id||(r.f.properties||{}).event+(r.f.properties||{}).areaDesc;
-    if(seen.has(id))continue;
-    try{if(r.bounds&&r.bounds.isValid()&&b.intersects(r.bounds)){seen.add(id);out.push(r);}}catch(e){}
-  }
-  out.sort((a,b)=>FAMS[a.fam].pri-FAMS[b.fam].pri||String((a.f.properties||{}).event).localeCompare(String((b.f.properties||{}).event)));
-  return out;
-}
-function updateStatus(){
+function finishLoading(){const el=document.getElementById('wxLoading');if(el)el.classList.add('done');}
+function updateWx(){
+  const b=map.getBounds();
+  const inView=WX_ITEMS.filter(it=>famOn[it.fam]&&it.bounds&&it.bounds.isValid()&&b.intersects(it.bounds));
   const bs=document.getElementById('bigStatus');
-  const n=inViewWarnings().length;
-  if(n){bs.className='bigstatus warn';bs.textContent=n+' road-weather warning'+(n>1?'s':'')+' in view';}
+  if(inView.length){bs.className='bigstatus warn';bs.textContent=inView.length+' road-weather warning'+(inView.length>1?'s':'')+' in view';}
   else{bs.className='bigstatus ok';bs.textContent='No road-weather warnings in view';}
-}
-function updateList(){
   const rows=document.getElementById('wxRows');
-  const S=inViewWarnings();
-  if(!S.length){rows.innerHTML='<div class="wx-empty">✓ All clear<small>No driving-relevant weather warnings in the current map view. Pan or zoom out to see more.</small></div>';return;}
-  rows.innerHTML=S.slice(0,30).map((r,i)=>{
-    const p=r.f.properties||{};
-    const exp=fmtNwsTime(p.expires);
+  if(!inView.length){
+    rows.innerHTML='<div class="wx-empty">✓ All clear<small>No road-weather warnings in the current map view. Pan or zoom out to see more.</small></div>';
+    return;
+  }
+  const ordered=inView.slice().sort((x,y)=>FAM_PRIORITY.indexOf(x.fam)-FAM_PRIORITY.indexOf(y.fam));
+  rows.innerHTML=ordered.slice(0,30).map((it,i)=>{
+    const p=it.props, exp=fmtNwsTime(p.expires||p.ends);
     return `<div class="wrow" data-i="${i}">
-      <div class="t"><span class="dot" style="background:${FAMS[r.fam].color}"></span><span class="nm">${esc(p.event||'Warning')}</span></div>
-      <div class="sub">${esc((p.areaDesc||'').slice(0,110))}${(p.areaDesc||'').length>110?'…':''}</div>
-      ${exp?`<div class="exp">until ${exp}</div>`:''}
+      <div class="t"><span class="dot" style="background:${FAMS[it.fam].color}"></span><span class="nm">${esc(p.event||'Warning')}</span></div>
+      <div class="sub">${esc((p.areaDesc||'').slice(0,120))}</div>
+      ${exp?`<div class="exp">expires ${exp}</div>`:''}
     </div>`;}).join('');
-  const shown=S.slice(0,30);
   rows.querySelectorAll('.wrow').forEach(el=>el.onclick=()=>{
-    const r=shown[+el.dataset.i]; if(!r||!r.bounds||!r.bounds.isValid())return;
-    map.flyToBounds(r.bounds,{duration:.9,maxZoom:9});
-    L.popup({maxWidth:300}).setLatLng(r.bounds.getCenter()).setContent(nwsPopup(r.f.properties||{})).openOn(map);
+    const it=ordered[+el.dataset.i]; if(!it||!it.bounds||!it.bounds.isValid())return;
+    map.flyToBounds(it.bounds.pad(.4),{duration:.9,maxZoom:9});
+    it.group.openPopup(it.bounds.getCenter());
   });
 }
-function wireFamToggle(btnId,fam){
-  document.getElementById(btnId).onclick=e=>{
+function bindFamToggle(id,fam){
+  document.getElementById(id).onclick=e=>{
     famOn[fam]=!famOn[fam];
     e.currentTarget.classList.toggle('on',famOn[fam]);
     e.currentTarget.setAttribute('aria-pressed',famOn[fam]);
-    renderWarns();
+    if(famOn[fam])famLayers[fam].addTo(map);else map.removeLayer(famLayers[fam]);
+    updateWx();
   };
 }
-wireFamToggle('togWinter','winter');
-wireFamToggle('togTropical','tropical');
-wireFamToggle('togFlood','flood');
-wireFamToggle('togConv','convective');
-wireFamToggle('togWind','wind');
+bindFamToggle('togWinter','winter');bindFamToggle('togTrop','tropical');
+bindFamToggle('togFlood','flood');bindFamToggle('togStorm','storm');bindFamToggle('togWind','wind');
 
-// ===== 2) Hurricane forecast tracks & cones (National Hurricane Center) =====
-// Layer ids are DISCOVERED from the service directory (?f=json) rather than
-// hardcoded, so a NOAA restructure doesn't silently break the layer. Each storm
-// "wallet" (AT1-5 / EP1-5 / CP1-5) has Forecast Points / Track / Cone layers
-// that are empty unless that storm slot is active.
+// ===== hurricane forecast tracks & cones (National Hurricane Center) =====
+// The NHC MapServer publishes 15 storm "slots" (AT1-5, EP1-5, CP1-5); each has
+// Forecast Points / Track / Cone sublayers. Layer ids are discovered from the
+// service JSON (no hardcoded ids), then each slot's points layer is queried —
+// empty slots return empty FeatureCollections in a few hundred bytes.
 const NHC='https://mapservices.weather.noaa.gov/tropical/rest/services/tropical/NHC_tropical_weather/MapServer';
-const hurrLayer=L.layerGroup().addTo(map);
-let hurrOn=true,STORMS=[],NHC_WALLETS=null,hurrRun=0;
-function setHurrChip(txt){const el=document.getElementById('hurrChipTxt');if(el)el.textContent=txt;}
-async function nhcDiscover(){
-  if(NHC_WALLETS)return NHC_WALLETS;
-  const d=await fetch(NHC+'?f=json',{cache:'no-store'}).then(r=>r.json());
-  const m={};
-  for(const l of ((d&&d.layers)||[])){
-    const mt=/^([A-Z]{2}\d) Forecast (Points|Track|Cone)$/.exec(l.name||'');
-    if(!mt)continue;
-    (m[mt[1]]=m[mt[1]]||{wallet:mt[1]})[mt[2].toLowerCase()]=l.id;
-  }
-  NHC_WALLETS=Object.values(m).filter(w=>w.points!=null&&w.track!=null&&w.cone!=null);
-  return NHC_WALLETS;
+const hurLayer=L.layerGroup().addTo(map);
+let hurOn=true,hurSlots=null,hurRun=0;
+function setHurChip(t){const el=document.getElementById('hurChipTxt');if(el)el.textContent=t;}
+function hurProp(props,names){ // case-insensitive attribute lookup across NHC field spellings
+  if(!props)return null;
+  const keys=Object.keys(props);
+  for(const n of names){const k=keys.find(x=>x.toUpperCase()===n);if(k&&props[k]!=null&&props[k]!=='')return props[k];}
+  return null;
 }
-async function nhcQuery(id){
-  const u=NHC+'/'+id+'/query?where=1%3D1&outFields=*&f=geojson';
+async function hurDiscover(){
+  if(hurSlots)return hurSlots;
+  const d=await fetch(NHC+'?f=json',{cache:'no-store'}).then(r=>r.json());
+  const bySlot={};
+  (d.layers||[]).forEach(l=>{
+    const m=/^([A-Z]{2}\d) Forecast (Points|Track|Cone)$/.exec(l.name||'');
+    if(m)(bySlot[m[1]]=bySlot[m[1]]||{})[m[2].toLowerCase()]=l.id;
+  });
+  hurSlots=Object.entries(bySlot).map(([slot,ids])=>Object.assign({slot},ids))
+    .filter(s=>s.points!=null&&s.track!=null&&s.cone!=null);
+  return hurSlots;
+}
+async function hurQuery(id){
+  const u=NHC+'/'+id+'/query?where=1%3D1&outFields=*&f=geojson&outSR=4326';
   const d=await fetch(u,{cache:'no-store'}).then(r=>r.json());
   return (d&&d.features)||[];
 }
-function stormName(props){
-  const p=props||{};
-  for(const k of ['STORMNAME','stormname','StormName','TCDVLP','STORMTYPE'])
-    if(p[k]&&typeof p[k]==='string')return p[k];
-  return 'Tropical system';
-}
-function stormPopup(p,fallbackTitle){
-  const rows=[];
-  const add=(lbl,v)=>{if(v!=null&&v!=='')rows.push(`<div class="fp-row">${lbl}: <b>${esc(v)}</b></div>`);};
-  add('Type',p.STORMTYPE||p.TCDVLP);
-  add('Max winds',p.MAXWIND?p.MAXWIND+' kt':null);
-  add('Gusts',p.GUST?p.GUST+' kt':null);
-  add('Movement',p.TCSPD!=null&&p.TCDIR!=null?p.TCDIR+'° at '+p.TCSPD+' kt':null);
-  add('Valid',p.FLDATELBL||p.ADVDATE);
+function hurPopup(name,props,kind){
+  const type=hurProp(props,['STORMTYPE','TCDVLP']);
+  const wind=hurProp(props,['MAXWIND','INTENSITY']);
+  const when=hurProp(props,['FLDATELBL','ADVDATE','DTG']);
+  const coneNote=kind==='Forecast cone'
+    ?'<div class="fp-row" style="color:#5b6670;margin-top:5px;">The cone shows where the storm&rsquo;s <b>center</b> could go — impacts extend well outside it.</div>':'';
   return `<div class="fpop">
-    <div class="fp-nm">🌀 ${esc(stormName(p)!=='Tropical system'?stormName(p):fallbackTitle)}</div>
-    <div class="fp-st">National Hurricane Center forecast</div>
-    ${rows.join('')}
-    <div class="fp-row" style="color:#5b6670;margin-top:5px;">Source: NOAA / National Hurricane Center</div>
+    <div class="fp-nm" style="color:#d61f1f">${esc(name)}</div>
+    <div class="fp-st">${esc(kind)} · National Hurricane Center</div>
+    ${type?`<div class="fp-row">Status: <b>${esc(type)}</b></div>`:''}
+    ${wind?`<div class="fp-row">Max winds: <b>${esc(wind)} kt</b></div>`:''}
+    ${when?`<div class="fp-row">Forecast for: <b>${esc(when)}</b></div>`:''}
+    ${coneNote}
   </div>`;
 }
-function renderHurr(){
-  hurrLayer.clearLayers();
-  if(!hurrOn){setHurrChip('Hurricanes');return;}
-  const names=[];
-  STORMS.forEach(s=>{
-    let nm='Tropical system';
-    // cone of uncertainty — semi-transparent red fill
-    s.cone.forEach(f=>{try{
-      L.geoJSON(f.geometry,{style:{color:'#d61f1f',weight:1.5,fillColor:'#d61f1f',fillOpacity:.14}})
-        .bindPopup(stormPopup(f.properties||{},'Forecast cone'),{maxWidth:300}).addTo(hurrLayer);
-      if(nm==='Tropical system')nm=stormName(f.properties);
-    }catch(e){}});
-    // forecast track — red polyline
-    s.trk.forEach(f=>{try{
-      L.geoJSON(f.geometry,{style:{color:'#d61f1f',weight:2.5,dashArray:'2 6'}})
-        .bindPopup(stormPopup(f.properties||{},'Forecast track'),{maxWidth:300}).addTo(hurrLayer);
-      if(nm==='Tropical system')nm=stormName(f.properties);
-    }catch(e){}});
-    // forecast position points — first point is the current position, labeled
-    s.pts.forEach((f,i)=>{try{
-      const g=f.geometry||{};
-      if(g.type!=='Point'||!Array.isArray(g.coordinates))return;
-      const ll=[g.coordinates[1],g.coordinates[0]];
-      const p=f.properties||{};
-      if(nm==='Tropical system')nm=stormName(p);
-      const cur=(p.TAU===0||p.TAU==='0'||i===0);
-      L.circleMarker(ll,{radius:cur?7:4.5,color:'#fff',weight:1.5,fillColor:'#d61f1f',fillOpacity:.95})
-        .bindPopup(stormPopup(p,'Forecast position'),{maxWidth:300}).addTo(hurrLayer);
-      if(cur)
-        L.marker(ll,{icon:L.divIcon({className:'',html:`<span class="storm-lbl">🌀 ${esc(nm)}</span>`,iconSize:[130,20],iconAnchor:[65,-10]}),interactive:false}).addTo(hurrLayer);
-    }catch(e){}});
-    names.push(nm);
-  });
-  const real=names.filter(n=>n!=='Tropical system');
-  setHurrChip(STORMS.length?(real.length?'Hurricanes: '+real.join(', '):'Hurricanes ('+STORMS.length+' active)'):'Hurricanes — none active');
-}
 async function loadHurricanes(){
-  const run=++hurrRun;
+  const run=++hurRun;
   try{
-    const ws=await nhcDiscover();
-    const results=await Promise.all(ws.map(async w=>{
+    const slots=await hurDiscover();
+    if(!slots.length){setHurChip('Hurricanes — unavailable');return;}
+    const ptsAll=await Promise.all(slots.map(s=>hurQuery(s.points).catch(()=>[])));
+    if(run!==hurRun)return;
+    const active=[];
+    slots.forEach((s,i)=>{if(ptsAll[i].length)active.push({s,pts:ptsAll[i]});});
+    hurLayer.clearLayers();
+    if(!active.length){setHurChip('Hurricanes — none active');return;}
+    const names=[];
+    for(const a of active){
+      const name=String(hurProp((a.pts[0]||{}).properties,['STORMNAME'])||a.s.slot);
+      names.push(name);
+      let trk=[],cone=[];
       try{
-        const pts=await nhcQuery(w.points);
-        if(!pts.length)return null;   // slot inactive — no extra requests
-        const tc=await Promise.all([nhcQuery(w.track).catch(()=>[]),nhcQuery(w.cone).catch(()=>[])]);
-        return {wallet:w.wallet,pts,trk:tc[0],cone:tc[1]};
-      }catch(e){return null;}
-    }));
-    if(run!==hurrRun)return;
-    STORMS=results.filter(Boolean);
-  }catch(e){STORMS=[];}   // NHC unreachable — page works without it
-  renderHurr();
+        const res=await Promise.all([hurQuery(a.s.track).catch(()=>[]),hurQuery(a.s.cone).catch(()=>[])]);
+        trk=res[0];cone=res[1];
+      }catch(e){}
+      if(run!==hurRun)return;
+      cone.forEach(f=>{try{
+        L.geoJSON(f.geometry,{style:{color:'#d61f1f',weight:1.5,fillColor:'#d61f1f',fillOpacity:.15}})
+          .bindPopup(hurPopup(name,f.properties,'Forecast cone'),{maxWidth:300}).addTo(hurLayer);
+      }catch(e){}});
+      trk.forEach(f=>{try{
+        L.geoJSON(f.geometry,{style:{color:'#d61f1f',weight:2.5}})
+          .bindPopup(hurPopup(name,f.properties,'Forecast track'),{maxWidth:300}).addTo(hurLayer);
+      }catch(e){}});
+      a.pts.forEach((f,idx)=>{try{
+        const c=f.geometry&&f.geometry.coordinates; if(!c)return;
+        L.circleMarker([c[1],c[0]],{radius:idx===0?7:4.5,color:'#fff',weight:1.5,fillColor:'#d61f1f',fillOpacity:.95})
+          .bindPopup(hurPopup(name,f.properties,idx===0?'Current position':'Forecast position'),{maxWidth:300}).addTo(hurLayer);
+        if(idx===0){
+          L.marker([c[1],c[0]],{interactive:false,icon:L.divIcon({className:'hurlbl',
+            html:`<div class="lblwrap"><span class="hur-lbl">🌀 ${esc(name)}</span></div>`,iconSize:[160,20],iconAnchor:[80,-12]})}).addTo(hurLayer);
+        }
+      }catch(e){}});
+    }
+    setHurChip('Hurricanes ('+names.join(', ')+')');
+  }catch(e){setHurChip('Hurricanes — unavailable');}  // fail soft: page works without NHC
 }
-document.getElementById('togHurr').onclick=e=>{
-  hurrOn=!hurrOn;
-  e.currentTarget.classList.toggle('on',hurrOn);e.currentTarget.setAttribute('aria-pressed',hurrOn);
-  renderHurr();
+document.getElementById('togHur').onclick=e=>{
+  hurOn=!hurOn;
+  e.currentTarget.classList.toggle('on',hurOn);e.currentTarget.setAttribute('aria-pressed',hurOn);
+  if(hurOn)hurLayer.addTo(map);else map.removeLayer(hurLayer);
 };
 
-// ===== 3) Radar (OFF by default) — NOAA national composite via IEM =====
+// ===== radar (NOAA NEXRAD composite via Iowa Environmental Mesonet) =====
 const radarLayer=L.tileLayer('https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png',
-  {opacity:.55,attribution:'Radar: NOAA / Iowa Environmental Mesonet',maxZoom:14});
-let radarOn=false,radarTimer=null;
+  {opacity:.55,attribution:'Radar: NOAA / Iowa Environmental Mesonet'});
+let radarOn=false;
 document.getElementById('togRadar').onclick=e=>{
   radarOn=!radarOn;
   e.currentTarget.classList.toggle('on',radarOn);e.currentTarget.setAttribute('aria-pressed',radarOn);
-  if(radarOn){radarLayer.addTo(map);radarTimer=setInterval(()=>{try{radarLayer.redraw();}catch(e2){}},300000);}
-  else{map.removeLayer(radarLayer);clearInterval(radarTimer);}
+  if(radarOn)radarLayer.addTo(map);else map.removeLayer(radarLayer);
 };
 
-// ===== 4) road-closure overlay (live DOT data via the MileCheck Worker) =====
+document.getElementById('nearMe').onclick=()=>{
+  if(!navigator.geolocation)return;
+  navigator.geolocation.getCurrentPosition(p=>{map.setView([p.coords.latitude,p.coords.longitude],7);},()=>{},{timeout:8000});
+};
+
+// ===== state selector =====
+const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"ID":[42,-117.24,49,-111.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"UT":[37,-114.05,42,-109.04],"CO":[37,-109.05,41,-102.04],"NM":[31.33,-109.05,37,-103],"AK":[54.5,-165,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"ND":[45.94,-104.05,49,-96.55],"NE":[40,-104.05,43,-95.31],"KS":[37,-102.05,40,-94.59],"WI":[42.49,-92.89,47.08,-86.8],"MN":[43.5,-97.21,49,-89.6],"IA":[40.37,-96.64,43.5,-90.14],"IL":[36.97,-91.52,42.51,-87.02],"WY":[40.99,-111.06,45.01,-104.05],"ME":[43.06,-71.08,47.46,-66.95],"RI":[41.15,-71.86,42.02,-71.12],"MI":[41.7,-90.42,48.3,-82.12],"NV":[35,-120.01,42,-114.04],"NJ":[38.92,-75.56,41.36,-73.89],"DE":[38.45,-75.79,39.84,-75.04],"MD":[37.91,-79.49,39.73,-75.04],"VA":[36.54,-83.68,39.47,-75.24],"WV":[37.2,-82.65,40.64,-77.72],"OH":[38.4,-84.82,42,-80.52],"PA":[39.72,-80.52,42.27,-74.69],"MA":[41.18,-73.51,42.89,-69.93],"VT":[42.73,-73.43,45.02,-71.46],"NH":[42.7,-72.56,45.31,-70.7],"CT":[40.98,-73.73,42.05,-71.79],"NY":[40.48,-79.77,45.02,-71.86],"FL":[24.4,-87.63,31,-80.03],"GA":[30.36,-85.61,35,-80.84],"NC":[33.84,-84.32,36.59,-75.46],"SC":[32.03,-83.35,35.22,-78.54],"MS":[30.17,-91.66,35,-88.1],"AL":[30.22,-88.47,35.01,-84.89],"AR":[33,-94.62,36.5,-89.64],"LA":[28.93,-94.04,33.02,-88.82],"OK":[33.62,-103,37,-94.43],"TN":[34.98,-90.31,36.68,-81.65],"KY":[36.5,-89.57,39.15,-81.96],"IN":[37.77,-88.1,41.76,-84.78],"MO":[36,-95.77,40.61,-89.1],"CA":[32.5,-124.5,42,-114.1],"HI":[18.5,-160.5,22.5,-154.5],"TX":[25.8,-106.7,36.5,-93.5]};
+const NAMES={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+const sel=document.getElementById('stateSel');
+Object.keys(NAMES).sort((a,b)=>NAMES[a].localeCompare(NAMES[b])).forEach(c=>{
+  if(!SB[c])return; const o=document.createElement('option');o.value=c;o.textContent=NAMES[c];sel.appendChild(o);});
+sel.onchange=()=>{const c=sel.value;
+  if(!c){map.setView([39.5,-98.35],4);return;}
+  const b=SB[c];map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9});};
+
+// ===== road-closure overlay (live DOT data via the MileCheck Worker) =====
 const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
 let closureLayer=L.layerGroup().addTo(map);
 const clCache={};   // state -> {t, list}
-const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"ID":[42,-117.24,49,-111.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"UT":[37,-114.05,42,-109.04],"CO":[37,-109.05,41,-102.04],"NM":[31.33,-109.05,37,-103],"AK":[54.5,-165,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"ND":[45.94,-104.05,49,-96.55],"NE":[40,-104.05,43,-95.31],"KS":[37,-102.05,40,-94.59],"WI":[42.49,-92.89,47.08,-86.8],"MN":[43.5,-97.21,49,-89.6],"IA":[40.37,-96.64,43.5,-90.14],"IL":[36.97,-91.52,42.51,-87.02],"WY":[40.99,-111.06,45.01,-104.05],"ME":[43.06,-71.08,47.46,-66.95],"RI":[41.15,-71.86,42.02,-71.12],"MI":[41.7,-90.42,48.3,-82.12],"NV":[35,-120.01,42,-114.04],"NJ":[38.92,-75.56,41.36,-73.89],"DE":[38.45,-75.79,39.84,-75.04],"MD":[37.91,-79.49,39.73,-75.04],"VA":[36.54,-83.68,39.47,-75.24],"WV":[37.2,-82.65,40.64,-77.72],"OH":[38.4,-84.82,42,-80.52],"PA":[39.72,-80.52,42.27,-74.69],"MA":[41.18,-73.51,42.89,-69.93],"VT":[42.73,-73.43,45.02,-71.46],"NH":[42.7,-72.56,45.31,-70.7],"CT":[40.98,-73.73,42.05,-71.79],"NY":[40.48,-79.77,45.02,-71.86],"FL":[24.4,-87.63,31,-80.03],"GA":[30.36,-85.61,35,-80.84],"NC":[33.84,-84.32,36.59,-75.46],"SC":[32.03,-83.35,35.22,-78.54],"MS":[30.17,-91.66,35,-88.1],"AL":[30.22,-88.47,35.01,-84.89],"AR":[33,-94.62,36.5,-89.64],"LA":[28.93,-94.04,33.02,-88.82],"OK":[33.62,-103,37,-94.43],"TN":[34.98,-90.31,36.68,-81.65],"KY":[36.5,-89.57,39.15,-81.96],"IN":[37.77,-88.1,41.76,-84.78],"MO":[36,-95.77,40.61,-89.1],"CA":[32.5,-124.5,42,-114.1],"HI":[18.5,-160.5,22.5,-154.5],"TX":[25.8,-106.7,36.5,-93.5]};
 function statesInView(){
   const b=map.getBounds(),out=[];
   for(const[c,v]of Object.entries(SB)){
@@ -565,31 +594,12 @@ async function loadClosures(){
   lg.style.display=n?"":"none";
   if(n)lg.textContent=`⛔ ${n} road closure${n>1?"s":""} · live DOT data via MileCheck`;
 }
+map.on('moveend',()=>{clearTimeout(window._clT);window._clT=setTimeout(loadClosures,450);});
+map.on('moveend',()=>{clearTimeout(window._wxT);window._wxT=setTimeout(updateWx,250);});
 
-// ===== map interactions =====
-let mvTimer=null;
-map.on('moveend',()=>{
-  updateStatus();updateList();
-  clearTimeout(mvTimer);mvTimer=setTimeout(loadClosures,450);
-});
-document.getElementById('nearMe').onclick=()=>{
-  if(!navigator.geolocation)return;
-  navigator.geolocation.getCurrentPosition(p=>{map.setView([p.coords.latitude,p.coords.longitude],7);},()=>{},{timeout:8000});
-};
-// ===== state selector =====
-const NAMES={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
-const sel=document.getElementById('stateSel');
-Object.keys(NAMES).sort((a,b)=>NAMES[a].localeCompare(NAMES[b])).forEach(c=>{
-  if(!SB[c])return; const o=document.createElement('option');o.value=c;o.textContent=NAMES[c];sel.appendChild(o);});
-sel.onchange=()=>{const c=sel.value;
-  if(!c){map.setView([39.5,-98.35],4);return;}
-  const b=SB[c];map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9});};
-
-// ===== kick off + refresh cadences =====
 loadNWS(); loadHurricanes(); loadClosures();
-setInterval(loadNWS,300000);          // warnings: 5 min
-setInterval(loadHurricanes,600000);   // hurricane tracks: 10 min (slow-moving)
-setInterval(loadClosures,300000);     // closures: 5 min
+setInterval(loadNWS,300000); setInterval(loadClosures,300000);
+setInterval(loadHurricanes,900000);   // NHC advisories update ~6-hourly; 15 min is plenty
 </script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
 
