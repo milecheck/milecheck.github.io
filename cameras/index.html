@@ -107,6 +107,17 @@
     .cl-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
     .cl-notes b{color:#0E1116;}
 
+    /* Add-to-Home-Screen banner (mobile only, dismissible, shows once) */
+    /* z-index 1050: stays UNDER the floating mobile cam-viewer (1100) so an open camera wins */
+    .mc-a2hs{position:fixed;left:10px;right:10px;bottom:10px;z-index:1050;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:10px 12px;font-size:13px;color:#0E1116;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+    .mc-a2hs[hidden]{display:none;}
+    .mc-a2hs .a2hs-txt{flex:1;min-width:170px;font-weight:600;line-height:1.4;}
+    .mc-a2hs button{font-family:inherit;cursor:pointer;}
+    .mc-a2hs .a2hs-how{border:1px solid #0f7a4f;color:#0f7a4f;background:#fff;border-radius:8px;font-weight:700;font-size:12.5px;padding:5px 12px;}
+    .mc-a2hs .a2hs-x{border:0;background:none;color:#5b6670;font-size:15px;padding:4px 6px;line-height:1;}
+    .mc-a2hs .a2hs-steps{flex-basis:100%;color:#5b6670;font-size:12.5px;line-height:1.5;border-top:1px solid #F0F0EE;padding-top:8px;}
+    .mc-a2hs .a2hs-steps[hidden]{display:none;}
+
     /* Responsive mobile nav (same rules as blog.css) */
     .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
     @media (max-width: 760px){
@@ -396,5 +407,42 @@ document.getElementById('nearMe').onclick=()=>{
 loadCams(); setInterval(loadCams,600000);
 </script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<!-- Add-to-Home-Screen nudge: mobile only, after 20s (or 2nd visit), never again once dismissed -->
+<div class="mc-a2hs" id="mcA2hs" hidden>
+  <span class="a2hs-txt">📍 Keep this map one tap away — add it to your home screen.</span>
+  <button class="a2hs-how" id="mcA2hsHow">How</button>
+  <button class="a2hs-x" id="mcA2hsX" aria-label="Dismiss">&#10005;</button>
+  <div class="a2hs-steps" id="mcA2hsSteps" hidden></div>
+</div>
+<script>(function(){
+  var KEY='cameras';
+  try{
+    if(localStorage.getItem('mc_a2hs_dismissed_'+KEY))return;
+    var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
+    if(standalone)return;   // already on the home screen
+    var mobile=window.matchMedia&&(window.matchMedia('(max-width:860px)').matches||window.matchMedia('(pointer:coarse)').matches);
+    if(!mobile)return;
+    var visits=(parseInt(localStorage.getItem('mc_a2hs_visits_'+KEY)||'0',10)||0)+1;
+    localStorage.setItem('mc_a2hs_visits_'+KEY,String(visits));
+    var delay=visits>=2?1500:20000;   // 2nd visit: show almost right away; 1st: after ~20s
+    setTimeout(function(){
+      var el=document.getElementById('mcA2hs');if(!el)return;
+      el.hidden=false;
+      var ua=navigator.userAgent||'';
+      var isIOS=/iPad|iPhone|iPod/.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document);
+      var steps=isIOS
+        ?'iPhone/iPad: tap the <b>Share</b> icon (the square with the &#8593; arrow) in Safari, then <b>Add to Home Screen</b>.'
+        :'Android: tap the <b>&#8942;</b> menu in Chrome, then <b>Add to Home screen</b>.';
+      document.getElementById('mcA2hsHow').onclick=function(){
+        var s=document.getElementById('mcA2hsSteps');s.innerHTML=steps;s.hidden=!s.hidden;
+      };
+      document.getElementById('mcA2hsX').onclick=function(){
+        el.hidden=true;
+        try{localStorage.setItem('mc_a2hs_dismissed_'+KEY,'1');}catch(e){}
+      };
+    },delay);
+  }catch(e){}
+})();</script>
 </body>
 </html>

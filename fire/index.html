@@ -57,6 +57,13 @@
     .lg-item{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;background:#F7F7F4;border:1px solid #ECECE8;border-radius:999px;padding:4px 10px;line-height:1;}
     .fire-legend .lg-pill{color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;}
     .fire-legend .lg-new{background:#111;}.fire-legend .lg-rx{background:#c47f0a;}
+    button.lg-item{font:inherit;font-weight:600;color:#3f4a44;cursor:pointer;}
+    .lg-item.tog:not(.on){opacity:.5;}
+    .lg-item.tog.on{border-color:#c9c9c2;background:#fff;}
+    .sw-evac{display:inline-block;width:15px;height:11px;border:1.5px solid #d61f1f;border-radius:3px;background:repeating-linear-gradient(45deg,rgba(214,31,31,.55) 0 3px,transparent 3px 6px);}
+    .sw-rfw{display:inline-block;width:15px;height:11px;border:1.5px solid #e08a00;border-radius:3px;background:rgba(224,138,0,.14);}
+    .sw-cam{display:inline-block;width:9px;height:9px;border-radius:50%;background:#0f7a4f;border:1.5px solid #fff;box-shadow:0 0 0 1px #0f7a4f;}
+    .fpop img.campic{width:100%;border-radius:8px;margin-top:6px;background:#eef0e9;min-height:90px;display:block;}
     #firemap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
     .bigstatus{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;}
@@ -131,6 +138,16 @@
       .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
     }
 
+    /* Add-to-Home-Screen banner (mobile only, dismissible, shows once) */
+    .mc-a2hs{position:fixed;left:10px;right:10px;bottom:10px;z-index:1200;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:10px 12px;font-size:13px;color:#0E1116;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+    .mc-a2hs[hidden]{display:none;}
+    .mc-a2hs .a2hs-txt{flex:1;min-width:170px;font-weight:600;line-height:1.4;}
+    .mc-a2hs button{font-family:inherit;cursor:pointer;}
+    .mc-a2hs .a2hs-how{border:1px solid #0f7a4f;color:#0f7a4f;background:#fff;border-radius:8px;font-weight:700;font-size:12.5px;padding:5px 12px;}
+    .mc-a2hs .a2hs-x{border:0;background:none;color:#5b6670;font-size:15px;padding:4px 6px;line-height:1;}
+    .mc-a2hs .a2hs-steps{flex-basis:100%;color:#5b6670;font-size:12.5px;line-height:1.5;border-top:1px solid #F0F0EE;padding-top:8px;}
+    .mc-a2hs .a2hs-steps[hidden]{display:none;}
+
     @media (max-width: 760px){
       .fire-mapbox{height:56vh;}
       .leaflet-control-zoom{display:none;}
@@ -181,6 +198,9 @@
         <span class="lg-item">⛔ Road closed</span>
         <span class="lg-item"><span style="opacity:.55;">🔥</span> Faded&thinsp;=&thinsp;contained</span>
         <span class="lg-item"><span class="lg-pill lg-rx">RX</span> Prescribed burn</span>
+        <button class="lg-item tog on" id="togEvac" aria-pressed="true" title="Evacuation orders — National Weather Service"><span class="sw-evac"></span> Evacuation</button>
+        <button class="lg-item tog" id="togRfw" aria-pressed="false" title="Red Flag Warnings — critical fire weather, National Weather Service"><span class="sw-rfw"></span> Red flag</button>
+        <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live DOT traffic cameras near the fires"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
       </div>
     </div>
     <div class="fire-side">
@@ -206,7 +226,7 @@
   </div>
 
   <div class="fire-notes">
-    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Zoom and pan the map; the fire list updates to what's in view, largest first.
+    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras (zoom in to a state to load them). Zoom and pan the map; the fire list updates to what's in view, largest first.
   </div>
 
   <div class="cl-notes" style="max-width:1160px;margin:0 auto 40px;padding:0 20px;">
@@ -249,7 +269,7 @@
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Fire data: NIFC/WFIGS. Map: Esri, USGS. Positions are approximate — always follow official evacuation and closure orders.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Fire data: NIFC/WFIGS. Evacuation &amp; red-flag alerts: National Weather Service. Cameras: state DOTs. Map: Esri, USGS. Positions are approximate — always follow official evacuation and closure orders.</p>
     </div>
   </footer>
 
@@ -485,8 +505,179 @@ async function loadClosures(){
 }
 map.on('moveend',()=>{clearTimeout(window._clT);window._clT=setTimeout(loadClosures,450);});
 
-loadFires(); loadClosures(); setInterval(loadFires,300000); setInterval(loadClosures,300000);
+// ===== NWS CAP alerts: evacuation orders + Red Flag Warnings =====
+// ONE shared fetch of api.weather.gov/alerts/active powers BOTH layers.
+// (FEMA IPAWS archive was considered as a source — NWS CAP active alerts is the
+// live national surface for evacuation orders, so IPAWS isn't needed here.)
+// Browsers send a User-Agent automatically, which satisfies api.weather.gov.
+const evacLayer=L.layerGroup().addTo(map);   // evacuation: ON by default
+const rfwLayer=L.layerGroup().addTo(map);    // red flag: OFF by default (empty until toggled)
+let evacOn=true, rfwOn=false, NWS_ALERTS=[], rfwRun=0;
+const zoneGeomCache=new Map();               // zone URL -> geometry (Red Flag zones)
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmtNwsTime(s){if(!s)return null;const d=new Date(s);return isNaN(d)?null:d.toLocaleString([],{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}
+function nwsPopup(p){
+  const eff=fmtNwsTime(p.effective),exp=fmtNwsTime(p.expires);
+  const instr=p.instruction?esc(p.instruction.slice(0,300))+(p.instruction.length>300?'…':''):'';
+  return `<div class="fpop">
+    <div class="fp-nm">${esc(p.event||'Alert')}</div>
+    <div class="fp-st">${esc((p.areaDesc||'').slice(0,180))}</div>
+    ${p.headline?`<div class="fp-row">${esc(p.headline)}</div>`:''}
+    ${instr?`<div class="fp-row" style="color:#5b6670">${instr}</div>`:''}
+    ${eff?`<div class="fp-row">Effective: <b>${eff}</b></div>`:''}
+    ${exp?`<div class="fp-row">Expires: <b>${exp}</b></div>`:''}
+    <div class="fp-row" style="color:#5b6670;margin-top:5px;">Source: National Weather Service</div>
+  </div>`;
+}
+async function loadNWS(){
+  try{
+    const d=await fetch('https://api.weather.gov/alerts/active',{cache:'no-store'}).then(r=>r.json());
+    NWS_ALERTS=(d&&d.features)||[];
+  }catch(e){return;}  // degrade gracefully: layers keep whatever they had
+  renderEvac(); renderRfw();
+}
+function renderEvac(){
+  evacLayer.clearLayers();
+  if(!evacOn)return;
+  NWS_ALERTS.filter(f=>/evacuation/i.test((f.properties&&f.properties.event)||'')).forEach(f=>{
+    // Geometry-null evacuation alerts are skipped: resolving their county/zone
+    // codes to shapes is out of scope v1 (short-fused evac orders usually carry
+    // an inline polygon).
+    if(!f.geometry)return;
+    try{
+      L.geoJSON(f.geometry,{style:{color:'#d61f1f',weight:2.5,dashArray:'6 4',fillColor:'#d61f1f',fillOpacity:.25}})
+        .bindPopup(nwsPopup(f.properties||{}),{maxWidth:300}).addTo(evacLayer);
+    }catch(e){}
+  });
+}
+async function renderRfw(){
+  const run=++rfwRun;
+  rfwLayer.clearLayers();
+  if(!rfwOn)return;
+  const style={color:'#e08a00',weight:2,fillColor:'#e08a00',fillOpacity:.10};
+  const add=(geom,props)=>{try{
+    L.geoJSON(geom,{style}).bindPopup(nwsPopup(props||{}),{maxWidth:300}).addTo(rfwLayer);
+  }catch(e){}};
+  for(const f of NWS_ALERTS.filter(x=>((x.properties&&x.properties.event)||'')==='Red Flag Warning')){
+    if(f.geometry){add(f.geometry,f.properties);continue;}
+    // Red Flag Warnings are issued for fire-weather ZONES and almost never carry
+    // inline geometry — resolve each zone's polygon (small ~6KB payloads, cached).
+    for(const zu of ((f.properties&&f.properties.affectedZones)||[]).slice(0,12)){
+      let g=zoneGeomCache.get(zu);
+      if(g===undefined){
+        if(zoneGeomCache.size>=80)continue;   // hard cap on zone fetches
+        try{const zj=await fetch(zu,{cache:'no-store'}).then(r=>r.json());g=(zj&&zj.geometry)||null;}
+        catch(e){g=null;}
+        zoneGeomCache.set(zu,g);
+        if(run!==rfwRun||!rfwOn)return;       // toggled/refreshed mid-fetch — abandon
+      }
+      if(g)add(g,f.properties);
+    }
+  }
+}
+document.getElementById('togEvac').onclick=e=>{
+  evacOn=!evacOn;
+  e.currentTarget.classList.toggle('on',evacOn);e.currentTarget.setAttribute('aria-pressed',evacOn);
+  renderEvac();
+};
+document.getElementById('togRfw').onclick=e=>{
+  rfwOn=!rfwOn;
+  e.currentTarget.classList.toggle('on',rfwOn);e.currentTarget.setAttribute('aria-pressed',rfwOn);
+  renderRfw();
+};
+
+// ===== nearby DOT cameras (same Worker /cameras source as milecheckapp.com/cameras/) =====
+const CAM_STATES=new Set(['CA','WA','OR','UT','MT','AZ','NV','OH','SD','WI','NY','LA','GA','SC','AK']);
+const CAM_MAX=150, CAM_MIN_ZOOM=8;
+const fireCamLayer=L.layerGroup().addTo(map);
+let camOn=false, camRunSeq=0;
+const fireCamCache=new Map();   // state -> {t, list} so panning doesn't refetch
+async function fireCamsFor(st){
+  const c=fireCamCache.get(st);
+  if(c&&Date.now()-c.t<600000)return c.list;
+  try{
+    const d=await fetch(WORKER+'/cameras?state='+st,{cache:'no-store'}).then(r=>r.json());
+    const list=(d.cameras||[]).filter(cm=>cm.isActive!==false&&isFinite(+cm.lat)&&+cm.lat&&cm.imageUrl)
+      .map(cm=>({lat:+cm.lat,lon:+cm.lon,title:(cm.title||'Traffic camera').slice(0,120),
+        route:(cm.route||'').trim(),mp:cm.mile,img:cm.imageUrl,st}));
+    fireCamCache.set(st,{t:Date.now(),list});return list;
+  }catch(e){fireCamCache.set(st,{t:Date.now(),list:[]});return[];}
+}
+function fireCamPopup(c){
+  const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();  // cache-bust per open
+  return `<div class="fpop">
+    <div class="fp-nm">${esc(c.title)}</div>
+    <div class="fp-st">${[esc(c.route),(c.mp>0)?'MP '+Math.round(c.mp):null,c.st].filter(Boolean).join(' · ')}</div>
+    <img class="campic" src="${bust}" alt="Live view: ${esc(c.title)}" loading="lazy" onerror="this.alt='Camera image unavailable right now';this.style.minHeight='60px';">
+    <div class="fp-row" style="color:#5b6670;margin-top:6px;">Live from ${c.st} DOT</div>
+  </div>`;
+}
+function setCamChip(txt){const el=document.getElementById('camChipTxt');if(el)el.textContent=txt;}
+async function loadFireCams(){
+  const run=++camRunSeq;
+  fireCamLayer.clearLayers();
+  if(!camOn){setCamChip('Cameras');return;}
+  if(map.getZoom()<CAM_MIN_ZOOM){setCamChip('Cameras — zoom in');return;}
+  const sts=statesInView().filter(s=>CAM_STATES.has(s)).slice(0,4);
+  if(!sts.length){setCamChip('Cameras — none here');return;}
+  const lists=await Promise.all(sts.map(fireCamsFor));
+  if(run!==camRunSeq||!camOn)return;
+  const b=map.getBounds();
+  const inView=lists.flat().filter(c=>b.contains([c.lat,c.lon]));
+  // cap so fires stay the visual priority
+  inView.slice(0,CAM_MAX).forEach(c=>{
+    L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95})
+      .bindPopup(()=>fireCamPopup(c),{maxWidth:290}).addTo(fireCamLayer);
+  });
+  setCamChip(inView.length>CAM_MAX?`Cameras (${CAM_MAX} of ${inView.length})`:(inView.length?`Cameras (${inView.length})`:'Cameras — none here'));
+}
+document.getElementById('togCam').onclick=e=>{
+  camOn=!camOn;
+  e.currentTarget.classList.toggle('on',camOn);e.currentTarget.setAttribute('aria-pressed',camOn);
+  loadFireCams();
+};
+map.on('moveend',()=>{if(!camOn)return;clearTimeout(window._fcT);window._fcT=setTimeout(loadFireCams,450);});
+
+loadFires(); loadClosures(); loadNWS();
+setInterval(loadFires,300000); setInterval(loadClosures,300000); setInterval(loadNWS,300000);
 </script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+
+<!-- Add-to-Home-Screen nudge: mobile only, after 20s (or 2nd visit), never again once dismissed -->
+<div class="mc-a2hs" id="mcA2hs" hidden>
+  <span class="a2hs-txt">📍 Keep this map one tap away — add it to your home screen.</span>
+  <button class="a2hs-how" id="mcA2hsHow">How</button>
+  <button class="a2hs-x" id="mcA2hsX" aria-label="Dismiss">&#10005;</button>
+  <div class="a2hs-steps" id="mcA2hsSteps" hidden></div>
+</div>
+<script>(function(){
+  var KEY='fire';
+  try{
+    if(localStorage.getItem('mc_a2hs_dismissed_'+KEY))return;
+    var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
+    if(standalone)return;   // already on the home screen
+    var mobile=window.matchMedia&&(window.matchMedia('(max-width:860px)').matches||window.matchMedia('(pointer:coarse)').matches);
+    if(!mobile)return;
+    var visits=(parseInt(localStorage.getItem('mc_a2hs_visits_'+KEY)||'0',10)||0)+1;
+    localStorage.setItem('mc_a2hs_visits_'+KEY,String(visits));
+    var delay=visits>=2?1500:20000;   // 2nd visit: show almost right away; 1st: after ~20s
+    setTimeout(function(){
+      var el=document.getElementById('mcA2hs');if(!el)return;
+      el.hidden=false;
+      var ua=navigator.userAgent||'';
+      var isIOS=/iPad|iPhone|iPod/.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document);
+      var steps=isIOS
+        ?'iPhone/iPad: tap the <b>Share</b> icon (the square with the &#8593; arrow) in Safari, then <b>Add to Home Screen</b>.'
+        :'Android: tap the <b>&#8942;</b> menu in Chrome, then <b>Add to Home screen</b>.';
+      document.getElementById('mcA2hsHow').onclick=function(){
+        var s=document.getElementById('mcA2hsSteps');s.innerHTML=steps;s.hidden=!s.hidden;
+      };
+      document.getElementById('mcA2hsX').onclick=function(){
+        el.hidden=true;
+        try{localStorage.setItem('mc_a2hs_dismissed_'+KEY,'1');}catch(e){}
+      };
+    },delay);
+  }catch(e){}
+})();</script>
 </body>
 </html>
