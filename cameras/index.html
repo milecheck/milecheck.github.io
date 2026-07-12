@@ -42,7 +42,14 @@
     .cl-hero h1 .accent{color:#0f7a4f;}
     .cl-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
     .cl-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
-    @media(max-width:860px){.cl-wrap{grid-template-columns:1fr;}}
+    @media(max-width:860px){
+      .cl-wrap{grid-template-columns:1fr;}
+      /* On phones the sidebar stacks BELOW the map, so the viewer opened
+         off-screen and marker taps looked dead. Float it over the map instead. */
+      .cam-viewer{position:fixed;left:10px;right:10px;bottom:12px;z-index:1100;margin-bottom:0;box-shadow:0 14px 44px rgba(0,0,0,.35);}
+      .cam-viewer .cv-imgwrap{aspect-ratio:auto;max-height:40vh;}
+      .cam-viewer .cv-imgwrap img{height:auto;max-height:40vh;}
+    }
     .cl-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
     #cammap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
@@ -311,6 +318,7 @@ function popupHtml(c){
     <div class="fp-row"><a href="https://milecheckapp.com" style="font-weight:700">These cameras + live alerts on your route — MileCheck →</a></div></div>`;
 }
 // ---- Side viewer (bigger image + click-through deck) ----
+const IS_TOUCH=window.matchMedia&&window.matchMedia('(pointer:coarse)').matches;
 let DECK=[], DIDX=-1;
 function showCam(i,pan){
   if(!DECK.length)return;
@@ -356,7 +364,7 @@ function render(){
   DECK=sorted;
   if(DIDX>=DECK.length)DIDX=-1;
   sorted.forEach((c,i)=>{
-    const m=L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:2,fillColor:c.ferry?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
+    const m=L.circleMarker([c.lat,c.lon],{radius:IS_TOUCH?9:6,color:'#fff',weight:2,fillColor:c.ferry?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).addTo(camLayer);
     m.on('click',()=>showCam(i,false));
   });
   rows.innerHTML=sorted.slice(0,60).map((c,i)=>`<div class="crow" data-i="${i}">
