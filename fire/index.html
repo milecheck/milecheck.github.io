@@ -64,6 +64,12 @@
     .sw-rfw{display:inline-block;width:15px;height:11px;border:1.5px solid #e08a00;border-radius:3px;background:rgba(224,138,0,.14);}
     .sw-cam{display:inline-block;width:9px;height:9px;border-radius:50%;background:#0f7a4f;border:1.5px solid #fff;box-shadow:0 0 0 1px #0f7a4f;}
     .sw-air{color:#1259c9;font-weight:800;font-size:13px;line-height:1;}
+    .sw-smk{display:inline-block;width:15px;height:11px;border-radius:3px;border:1px solid #b9aca3;background:linear-gradient(90deg,rgba(122,106,96,.25),rgba(122,106,96,.8));}
+    .sw-aqi{display:inline-block;width:15px;height:11px;border-radius:3px;border:1px solid #d8c9a2;background:linear-gradient(90deg,#f7e63c,#ff7e00 45%,#f43a3a 72%,#8f3f97);}
+    .sw-hist{display:inline-block;width:15px;height:11px;border:1.5px solid #8a5a2b;border-radius:3px;background:rgba(138,90,43,.12);}
+    .sw-wind{color:#3b6fb5;font-weight:800;font-size:12px;line-height:1;}
+    .wind-ic{text-align:center;line-height:0;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));}
+    .wind-mph{display:inline-block;background:#3b6fb5;color:#fff;font-weight:800;font-size:10px;line-height:1;border:1.5px solid #fff;border-radius:6px;padding:2px 5px;margin-top:1px;}
     .air-ic{line-height:0;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));}
     .fpop img.campic{width:100%;border-radius:8px;margin-top:6px;background:#eef0e9;min-height:90px;display:block;}
     #firemap{position:absolute;inset:0;}
@@ -205,6 +211,10 @@
         <button class="lg-item tog" id="togRfw" aria-pressed="false" title="Red Flag Warnings — critical fire weather, National Weather Service"><span class="sw-rfw"></span> Red flag</button>
         <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live DOT traffic cameras near the fires"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
         <button class="lg-item tog" id="togAir" aria-pressed="false" title="Firefighting aircraft — air tankers, scoopers, lead planes &amp; air attack near the fires, live from the ADSB.lol community ADS-B network"><span class="sw-air">✈</span> <span id="airChipTxt">Aircraft</span></button>
+        <button class="lg-item tog" id="togSmk" aria-pressed="false" title="Near-surface smoke forecast — NOAA air-quality guidance (HRRR-based), darker = thicker smoke"><span class="sw-smk"></span> <span id="smkChipTxt">Smoke</span></button>
+        <button class="lg-item tog" id="togAqi" aria-pressed="false" title="Current air quality — EPA AirNow AQI areas at Moderate or worse"><span class="sw-aqi"></span> <span id="aqiChipTxt">Air quality</span></button>
+        <button class="lg-item tog" id="togHist" aria-pressed="false" title="Past years' burned-area perimeters from NIFC — zoom in to a region to load"><span class="sw-hist"></span> <span id="histChipTxt">History</span></button>
+        <button class="lg-item tog" id="togWind" aria-pressed="false" title="Latest station wind near the large fires in view — arrows point the way the wind is blowing (National Weather Service)"><span class="sw-wind">➤</span> <span id="windChipTxt">Wind</span></button>
       </div>
     </div>
     <div class="fire-side">
@@ -230,7 +240,7 @@
   </div>
 
   <div class="fire-notes">
-    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras (zoom in to a state to load them). The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, and air attack — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. Zoom and pan the map; the fire list updates to what's in view, largest first.
+    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras (zoom in to a state to load them). The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, and air attack — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. The smoke toggle overlays NOAA's near-surface smoke forecast guidance (HRRR-based) — darker shading means thicker forecast smoke at ground level; it's a model forecast, not a satellite photo. The air-quality toggle shows EPA AirNow's latest AQI contours for areas at Moderate or worse (all-Good areas aren't shaded). The history toggle outlines past years' burned-area perimeters (100+ acres) from NIFC's interagency fire-history archive — zoom in to a region to load them. The wind toggle reads the latest weather-station observation near each large (1,000+ ac) fire in view via the National Weather Service; the arrow points the way the wind is blowing — roughly the direction a fire would be pushed. Zoom and pan the map; the fire list updates to what's in view, largest first.
   </div>
 
   <div class="cl-notes" style="max-width:1160px;margin:0 auto 40px;padding:0 20px;">
@@ -273,7 +283,7 @@
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Fire data: NIFC/WFIGS. Evacuation &amp; red-flag alerts: National Weather Service. Cameras: state DOTs. Aircraft positions: <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> (ODbL). Map: Esri, USGS. Positions are approximate — always follow official evacuation and closure orders.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Fire data &amp; historic perimeters: NIFC/WFIGS. Evacuation &amp; red-flag alerts, wind observations: National Weather Service. Smoke forecast: NOAA air-quality guidance. Air quality: EPA AirNow. Cameras: state DOTs. Aircraft positions: <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> (ODbL). Map: Esri, USGS. Positions are approximate — always follow official evacuation and closure orders.</p>
     </div>
   </footer>
 
@@ -730,9 +740,196 @@ document.getElementById('togAir').onclick=e=>{
 };
 map.on('moveend',()=>{if(!airOn)return;clearTimeout(window._airT);window._airT=setTimeout(loadAircraft,600);});
 
+// ===== smoke forecast overlay (NOAA NDGD near-surface smoke — HRRR-based guidance, keyless) =====
+// One exportImage per view (not tiles) from the NWS public ArcGIS ImageServer, using the
+// service's own colorized rendering rule. OFF by default; refreshed on pan/zoom + every 15 min.
+const SMOKE_URL='https://mapservices.weather.noaa.gov/raster/rest/services/air_quality/ndgd_smoke_sfc_1hr_avg_time/ImageServer';
+const smokeGroup=L.layerGroup().addTo(map);   // holds the overlay(s) so toggle-off always clears
+let smokeOn=false, smokeOverlay=null, smokeMeta=null, smokeRun=0;
+function setSmkChip(txt){const el=document.getElementById('smkChipTxt');if(el)el.textContent=txt;}
+function to3857(lat,lon){const R=6378137;return[R*lon*Math.PI/180,R*Math.log(Math.tan(Math.PI/4+lat*Math.PI/360))];}
+async function loadSmoke(){
+  const run=++smokeRun;
+  if(!smokeOn){smokeGroup.clearLayers();smokeOverlay=null;setSmkChip('Smoke');return;}
+  if(smokeMeta===null){
+    try{const mj=await fetch(SMOKE_URL+'?f=json',{cache:'no-store'}).then(r=>r.json());
+      smokeMeta={ext:(mj&&mj.timeInfo&&mj.timeInfo.timeExtent)||null};
+    }catch(e){smokeMeta={ext:null};}
+    if(run!==smokeRun||!smokeOn)return;
+  }
+  const b=map.getBounds();
+  const s=Math.max(b.getSouth(),-85),n=Math.min(b.getNorth(),85);
+  const w=Math.max(b.getWest(),-180),e=Math.min(b.getEast(),180);
+  if(w>=e||s>=n)return;
+  const[x0,y0]=to3857(s,w),[x1,y1]=to3857(n,e);
+  let t=Date.now();
+  if(smokeMeta.ext&&smokeMeta.ext.length===2)t=Math.min(Math.max(t,smokeMeta.ext[0]),smokeMeta.ext[1]);
+  const sz=map.getSize();
+  const url=`${SMOKE_URL}/exportImage?bbox=${x0},${y0},${x1},${y1}&bboxSR=3857&imageSR=3857&size=${Math.min(sz.x,1400)},${Math.min(sz.y,1400)}&format=png32&transparent=true&renderingRule=${encodeURIComponent('{"rasterFunction":"smoke_don_0921"}')}&time=${t}&f=image`;
+  const old=smokeOverlay;
+  const ov=L.imageOverlay(url,[[s,w],[n,e]],{opacity:.55,pane:'tilePane',interactive:false});
+  ov.on('load',()=>{if(run!==smokeRun)return;if(old&&old!==ov)smokeGroup.removeLayer(old);setSmkChip('Smoke (forecast)');});
+  ov.on('error',()=>{smokeGroup.removeLayer(ov);if(run===smokeRun){setSmkChip('Smoke — unavailable');if(smokeOverlay===ov)smokeOverlay=old;}});
+  smokeOverlay=ov;smokeGroup.addLayer(ov);
+}
+document.getElementById('togSmk').onclick=e=>{
+  smokeOn=!smokeOn;
+  e.currentTarget.classList.toggle('on',smokeOn);e.currentTarget.setAttribute('aria-pressed',smokeOn);
+  if(smokeOn)setSmkChip('Smoke — loading…');
+  loadSmoke();
+};
+map.on('moveend',()=>{if(!smokeOn)return;clearTimeout(window._smT);window._smT=setTimeout(loadSmoke,500);});
+
+// ===== air quality (EPA AirNow latest AQI contours — public ArcGIS layer, keyless) =====
+// National contour set is small (~150 polygons); we fetch once (10-min cache) and shade only
+// Moderate-or-worse areas so a Good day doesn't wash the whole map green. OFF by default.
+const AQI_URL='https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/AirNowLatestContoursCombined/FeatureServer/0/query?where=gridcode%3E%3D2&outFields=gridcode&f=geojson&resultRecordCount=2000&geometryPrecision=3&maxAllowableOffset=0.01';
+const AQI_CAT={2:['Moderate','51–100','#f7d308'],3:['Unhealthy for Sensitive Groups','101–150','#ff7e00'],4:['Unhealthy','151–200','#f43a3a'],5:['Very Unhealthy','201–300','#8f3f97'],6:['Hazardous','301+','#7e0023']};
+const aqiLayer=L.layerGroup().addTo(map);
+let aqiOn=false, aqiRun=0, aqiCache=null, aqiCacheT=0;
+function setAqiChip(txt){const el=document.getElementById('aqiChipTxt');if(el)el.textContent=txt;}
+async function loadAqi(){
+  const run=++aqiRun;
+  if(!aqiOn){aqiLayer.clearLayers();setAqiChip('Air quality');return;}
+  if(!aqiCache||Date.now()-aqiCacheT>600000){
+    try{const gj=await fetch(AQI_URL,{cache:'no-store'}).then(r=>r.json());
+      if(gj&&gj.features){aqiCache=gj;aqiCacheT=Date.now();}
+    }catch(e){}
+    if(run!==aqiRun||!aqiOn)return;
+    if(!aqiCache){setAqiChip('Air quality — unavailable');return;}
+  }
+  aqiLayer.clearLayers();
+  let n=0;
+  try{
+    L.geoJSON(aqiCache,{
+      style:f=>{const c=(AQI_CAT[(f.properties||{}).gridcode]||AQI_CAT[2])[2];return{color:c,weight:1,fillColor:c,fillOpacity:.22};},
+      onEachFeature:(f,l)=>{n++;const cat=AQI_CAT[(f.properties||{}).gridcode];if(!cat)return;
+        l.bindPopup(`<div class="fpop"><div class="fp-nm">Air quality: ${cat[0]}</div><div class="fp-st">AQI ${cat[1]}</div><div class="fp-row" style="color:#5b6670;">Latest AQI contour from EPA AirNow — ground monitors + satellite estimates. Wildfire smoke is the usual driver of sudden drops.</div></div>`,{maxWidth:280});}
+    }).addTo(aqiLayer);
+  }catch(e){}
+  setAqiChip(n?`Air quality (${n})`:'Air quality — all Good');
+}
+document.getElementById('togAqi').onclick=e=>{
+  aqiOn=!aqiOn;
+  e.currentTarget.classList.toggle('on',aqiOn);e.currentTarget.setAttribute('aria-pressed',aqiOn);
+  if(aqiOn)setAqiChip('Air quality — loading…');
+  loadAqi();
+};
+
+// ===== fire history (NIFC interagency perimeter archive — same org as the live fires) =====
+// The full archive is enormous, so it ONLY loads when toggled on AND zoomed to a region
+// (z>=7), bbox-bounded, fires >=100 ac, past years only, geometry simplified server-side.
+const HIST_URL='https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/InterAgencyFirePerimeterHistory_All_Years_View/FeatureServer/0/query';
+const histLayer=L.layerGroup().addTo(map);
+let histOn=false, histRun=0;
+function setHistChip(txt){const el=document.getElementById('histChipTxt');if(el)el.textContent=txt;}
+async function loadHist(){
+  const run=++histRun;
+  if(!histOn){histLayer.clearLayers();setHistChip('History');return;}
+  if(map.getZoom()<7){histLayer.clearLayers();setHistChip('History — zoom in');return;}
+  const yr=new Date().getFullYear();
+  const url=`${HIST_URL}?geometry=${envParam()}&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&inSR=4326&outSR=4326&where=${encodeURIComponent('GIS_ACRES>=100 AND FIRE_YEAR_INT<'+yr)}&outFields=INCIDENT,FIRE_YEAR_INT,GIS_ACRES&f=geojson&resultRecordCount=250&geometryPrecision=4&maxAllowableOffset=0.002`;
+  try{
+    const gj=await fetch(url,{cache:'no-store'}).then(r=>r.json());
+    if(run!==histRun||!histOn)return;
+    histLayer.clearLayers();
+    let n=0;
+    if(gj&&gj.features&&gj.features.length)
+      L.geoJSON(gj,{
+        style:{color:'#8a5a2b',weight:1.4,fillColor:'#8a5a2b',fillOpacity:.07},
+        onEachFeature:(f,l)=>{n++;const p=f.properties||{};
+          l.bindPopup(`<div class="fpop"><div class="fp-nm">${esc((p.INCIDENT||'Past fire').trim())} Fire</div><div class="fp-st">Burned in ${p.FIRE_YEAR_INT||'a past year'}</div>${p.GIS_ACRES?`<div class="fp-row">Size: <b>${Math.round(p.GIS_ACRES).toLocaleString()} acres</b></div>`:''}<div class="fp-row" style="color:#5b6670;margin-top:5px;">Historic burned area · NIFC archive</div></div>`,{maxWidth:280});
+          l.on('mouseover',()=>l.setStyle({fillOpacity:.18,weight:2}));
+          l.on('mouseout',()=>l.setStyle({fillOpacity:.07,weight:1.4}));}
+      }).addTo(histLayer);
+    setHistChip(n?`History (${n})`:'History — none here');
+  }catch(e){if(run===histRun&&histOn)setHistChip('History — unavailable');}
+}
+document.getElementById('togHist').onclick=e=>{
+  histOn=!histOn;
+  e.currentTarget.classList.toggle('on',histOn);e.currentTarget.setAttribute('aria-pressed',histOn);
+  if(histOn&&map.getZoom()>=7)setHistChip('History — loading…');
+  loadHist();
+};
+map.on('moveend',()=>{if(!histOn)return;clearTimeout(window._hsT);window._hsT=setTimeout(loadHist,500);});
+
+// ===== wind at the large fires (NWS station observations, keyless, public domain) =====
+// Tied to the actual use case: which way is the fire being pushed. For up to 8 fires
+// >=1000 ac in view, we resolve the nearest NWS station's latest observation (cached
+// 10 min per fire) and draw an arrow pointing the way the wind is BLOWING (NWS reports
+// the direction it comes FROM; we flip it), labeled with mph. OFF by default.
+const windLayer=L.layerGroup().addTo(map);
+let windOn=false, windRun=0;
+const windCache=new Map();   // fire latlon key -> {t, obs|null}
+function setWindChip(txt){const el=document.getElementById('windChipTxt');if(el)el.textContent=txt;}
+function compass8(d){return['N','NE','E','SE','S','SW','W','NW'][Math.round((((d%360)+360)%360)/45)%8];}
+async function windObsFor(f){
+  const key=f.lat.toFixed(2)+','+f.lon.toFixed(2);
+  const c=windCache.get(key);
+  if(c&&Date.now()-c.t<600000)return c.obs;
+  let obs=null;
+  try{
+    const pj=await fetch(`https://api.weather.gov/points/${f.lat.toFixed(4)},${f.lon.toFixed(4)}`,{cache:'no-store'}).then(r=>r.json());
+    const su=pj&&pj.properties&&pj.properties.observationStations;
+    if(su){
+      const sj=await fetch(su,{cache:'no-store'}).then(r=>r.json());
+      for(const st of ((sj&&sj.features)||[]).slice(0,2)){   // nearest station, one fallback
+        try{
+          const oj=await fetch(`https://api.weather.gov/stations/${st.properties.stationIdentifier}/observations/latest`,{cache:'no-store'}).then(r=>r.json());
+          const p=oj&&oj.properties;
+          if(p&&p.windSpeed&&p.windSpeed.value!=null&&p.windDirection&&p.windDirection.value!=null){
+            obs={from:p.windDirection.value,mph:Math.round(p.windSpeed.value*0.621371),
+              station:(st.properties.name||st.properties.stationIdentifier||'').slice(0,60),time:p.timestamp};
+            break;
+          }
+        }catch(e){}
+      }
+    }
+  }catch(e){}
+  windCache.set(key,{t:Date.now(),obs});
+  return obs;
+}
+async function loadWind(){
+  const run=++windRun;
+  if(!windOn){windLayer.clearLayers();setWindChip('Wind');return;}
+  const b=map.getBounds();
+  const big=FIRES.filter(f=>!f.rx&&f.ac>=1000&&b.contains([f.lat,f.lon])).slice(0,8);
+  if(!big.length){windLayer.clearLayers();setWindChip('Wind — no large fires in view');return;}
+  setWindChip('Wind — checking…');
+  const results=await Promise.all(big.map(async f=>({f,obs:await windObsFor(f)})));
+  if(run!==windRun||!windOn)return;
+  windLayer.clearLayers();
+  let n=0,gotObs=0;
+  results.forEach(({f,obs})=>{
+    if(!obs)return;
+    gotObs++;
+    if(obs.mph<1)return;   // calm — an arbitrary arrow direction would mislead
+    n++;
+    const toward=Math.round((obs.from+180)%360);
+    const when=obs.time?new Date(obs.time).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):null;
+    const m=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',
+      html:`<div class="wind-ic"><svg viewBox="0 0 24 24" width="28" height="28" style="transform:rotate(${toward}deg)"><path d="M12 2 L17.5 15 L12 11.6 L6.5 15 Z" fill="#3b6fb5" stroke="#fff" stroke-width="1.2"/></svg><span class="wind-mph">${obs.mph}</span></div>`,
+      iconSize:[30,46],iconAnchor:[15,58]})}).addTo(windLayer);
+    m.bindPopup(`<div class="fpop"><div class="fp-nm">Wind near ${esc(f.name)} Fire</div>
+      <div class="fp-st">${obs.mph} mph, blowing toward ${compass8(toward)} (from ${compass8(obs.from)})</div>
+      <div class="fp-row">Station: <b>${esc(obs.station)}</b>${when?` · ${when}`:''}</div>
+      <div class="fp-row" style="color:#5b6670;margin-top:5px;">Latest observation · National Weather Service. Terrain steers fire winds — treat as a rough push direction.</div></div>`,{maxWidth:290});
+  });
+  setWindChip(n?`Wind (${n})`:(gotObs?'Wind — calm at fires':'Wind — no station data'));
+}
+document.getElementById('togWind').onclick=e=>{
+  windOn=!windOn;
+  e.currentTarget.classList.toggle('on',windOn);e.currentTarget.setAttribute('aria-pressed',windOn);
+  loadWind();
+};
+map.on('moveend',()=>{if(!windOn)return;clearTimeout(window._wnT);window._wnT=setTimeout(loadWind,600);});
+
 loadFires(); loadClosures(); loadNWS();
 setInterval(loadFires,300000); setInterval(loadClosures,300000); setInterval(loadNWS,300000);
 setInterval(()=>{if(airOn)loadAircraft();},150000);   // aircraft: 2.5 min, only while toggled on
+setInterval(()=>{if(smokeOn)loadSmoke();},900000);    // smoke forecast: 15 min, only while on
+setInterval(()=>{if(aqiOn)loadAqi();},600000);        // air quality: 10 min, only while on
+setInterval(()=>{if(windOn)loadWind();},600000);      // wind obs: 10 min, only while on
 </script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
 
