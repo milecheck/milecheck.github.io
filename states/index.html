@@ -23,6 +23,10 @@
     .st-hero{max-width:1160px;margin:0 auto;padding:38px 20px 8px;}
     .st-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
     .st-hero h1 .accent{color:#00A86B;}
+    .st-hero .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+    .border-pin{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;border:1px solid #E5E5E5;border-radius:999px;background:#fff;padding:8px 14px;font-size:13px;font-weight:700;color:#0E1116;text-decoration:none;white-space:nowrap;margin-top:6px;}
+    .border-pin:hover{border-color:#00A86B;color:#00A86B;}
+    .border-pin .dot{width:8px;height:8px;border-radius:50%;background:#F97316;}
     .st-hero p.sub{max-width:74ch;color:#5b6670;font-size:15px;margin-top:8px;line-height:1.55;}
     .st-grid{max-width:1160px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
     /* Split reader (desktop): list scrolls left, guide loads right — no page hop. */
@@ -102,7 +106,10 @@
   </header>
 
   <div class="st-hero">
-    <h1>Mile markers, <span class="accent">state by state</span></h1>
+    <div class="hero-top">
+      <h1>Mile markers, <span class="accent">state by state</span></h1>
+      <a class="border-pin" href="../borders/"><span class="dot"></span>Border wait times &rarr;</a>
+    </div>
     <p class="sub">MileCheck covers mile markers in all 50 states and pulls live DOT road alerts in 48. State by state, we're writing the driver's guide to how each one's mileposts actually work — the corridors, the passes, the quirks, and what the DOT closes. Green-bordered states have their guide.</p>
   </div>
 

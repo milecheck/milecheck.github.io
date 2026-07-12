@@ -23,6 +23,10 @@
     .st-hero{max-width:1160px;margin:0 auto;padding:38px 20px 8px;}
     .st-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
     .st-hero h1 .accent{color:#00A86B;}
+    .st-hero .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+    .border-pin{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;border:1px solid #E5E5E5;border-radius:999px;background:#fff;padding:8px 14px;font-size:13px;font-weight:700;color:#0E1116;text-decoration:none;white-space:nowrap;margin-top:6px;}
+    .border-pin:hover{border-color:#00A86B;color:#00A86B;}
+    .border-pin .dot{width:8px;height:8px;border-radius:50%;background:#F97316;}
     .st-hero p.sub{max-width:74ch;color:#5b6670;font-size:15px;margin-top:8px;line-height:1.55;}
     .st-grid{max-width:1160px;margin:22px auto 46px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
     /* Split reader (desktop): list scrolls left, guide loads right — no page hop. */
@@ -101,23 +105,28 @@
   </header>
 
   <div class="st-hero">
-    <h1>Kilometre markers, <span class="accent">province by province</span></h1>
-    <p class="sub">Canada counts in kilometres, not miles &mdash; and each province posts its markers a little differently. Ontario and Quebec km-post support is coming to MileCheck in an upcoming update, and province by province we&rsquo;re writing the driver&rsquo;s guide to how each one&rsquo;s markers actually work &mdash; the corridors, the signage, and the quirks. Green-bordered provinces have their guide.</p>
+    <div class="hero-top">
+      <h1>Kilometre markers, <span class="accent">province by province</span></h1>
+      <a class="border-pin" href="../borders/"><span class="dot"></span>Border wait times &rarr;</a>
+    </div>
+    <p class="sub">Canada counts in kilometres, not miles &mdash; and each province posts its markers a little differently. Ontario, Quebec, British Columbia, and Alberta km-post support is coming to MileCheck in an upcoming update, and province by province we&rsquo;re writing the driver&rsquo;s guide to how each one&rsquo;s markers actually work &mdash; the corridors, the signage, and the quirks. Green-bordered provinces have their guide.</p>
   </div>
 
   <div class="st-layout">
   <div class="st-grid">
-    <div class="stcard">
+    <a class="stcard has-guide" href="../blog/km-markers-alberta.html">
       <div class="st-top"><h2>Alberta</h2><span class="st-ab">AB</span></div>
-      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
-      <p class="st-hook dim">Coming later.</p>
-    </div>
+      <p class="st-status"><span class="st-coming">&#9679; Km-posts &mdash; coming to the app</span></p>
+      <p class="st-hook">The QEII runs Calgary to Edmonton in about 300 km.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
 
-    <div class="stcard">
+    <a class="stcard has-guide" href="../blog/km-markers-british-columbia.html">
       <div class="st-top"><h2>British Columbia</h2><span class="st-ab">BC</span></div>
-      <p class="st-status"><span class="st-soon">&#9675; Coming soon</span></p>
-      <p class="st-hook dim">Coming later.</p>
-    </div>
+      <p class="st-status"><span class="st-coming">&#9679; Km-posts &mdash; coming to the app</span></p>
+      <p class="st-hook">The Coquihalla is the highway everyone checks before driving.</p>
+      <span class="st-go">Read the driver&rsquo;s guide &rarr;</span>
+    </a>
 
     <div class="stcard">
       <div class="st-top"><h2>Manitoba</h2><span class="st-ab">MB</span></div>
@@ -188,7 +197,7 @@
     </div>
   </div>
   <aside class="st-reader" id="stReader">
-    <div class="rd-empty">Pick a province on the left &mdash; its driver&rsquo;s guide opens right here.<br><br>&#127809; 2 of 13 written.</div>
+    <div class="rd-empty">Pick a province on the left &mdash; its driver&rsquo;s guide opens right here.<br><br>&#127809; 4 of 13 written.</div>
   </aside>
   </div>
 
