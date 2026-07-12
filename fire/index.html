@@ -210,8 +210,8 @@
         <span class="lg-item"><span class="lg-pill lg-rx">RX</span> Prescribed burn</span>
         <button class="lg-item tog on" id="togEvac" aria-pressed="true" title="Evacuation orders — National Weather Service"><span class="sw-evac"></span> Evacuation</button>
         <button class="lg-item tog" id="togRfw" aria-pressed="false" title="Red Flag Warnings — critical fire weather, National Weather Service"><span class="sw-rfw"></span> Red flag</button>
-        <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live DOT traffic cameras near the fires"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
-        <button class="lg-item tog" id="togAir" aria-pressed="false" title="Firefighting aircraft — air tankers, scoopers, lead planes &amp; air attack near the fires, live from the ADSB.lol community ADS-B network"><span class="sw-air">✈</span> <span id="airChipTxt">Aircraft</span></button>
+        <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live DOT traffic cameras within ~20 miles of the fires in view"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
+        <button class="lg-item tog" id="togAir" aria-pressed="false" title="Firefighting aircraft — air tankers, scoopers, lead planes, air attack &amp; helicopters working the fire area, live from the ADSB.lol community ADS-B network"><span class="sw-air">✈</span> <span id="airChipTxt">Aircraft</span></button>
         <button class="lg-item tog" id="togSmk" aria-pressed="false" title="Near-surface smoke forecast — NOAA air-quality guidance (HRRR-based), darker = thicker smoke"><span class="sw-smk"></span> <span id="smkChipTxt">Smoke</span></button>
         <button class="lg-item tog" id="togAqi" aria-pressed="false" title="Current air quality — EPA AirNow AQI areas at Moderate or worse"><span class="sw-aqi"></span> <span id="aqiChipTxt">Air quality</span></button>
         <button class="lg-item tog" id="togHist" aria-pressed="false" title="Past years' burned-area perimeters from NIFC — zoom in to a region to load"><span class="sw-hist"></span> <span id="histChipTxt">History</span></button>
@@ -241,7 +241,7 @@
   </div>
 
   <div class="fire-notes">
-    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras (zoom in to a state to load them). The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, and air attack — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. The smoke toggle overlays NOAA's near-surface smoke forecast guidance (HRRR-based) — darker shading means thicker forecast smoke at ground level; it's a model forecast, not a satellite photo. The air-quality toggle shows EPA AirNow's latest AQI contours for areas at Moderate or worse (all-Good areas aren't shaded). The history toggle outlines past years' burned-area perimeters (100+ acres) from NIFC's interagency fire-history archive — zoom in to a region to load them. The wind toggle reads the latest weather-station observation near each large (1,000+ ac) fire in view via the National Weather Service; the arrow points the way the wind is blowing — roughly the direction a fire would be pushed. Zoom and pan the map; the fire list updates to what's in view, largest first.
+    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras within about 20 miles of the fires in view (zoom in to load them). The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, air attack, and helicopters working low and slow in the fire area — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. The smoke toggle overlays NOAA's near-surface smoke forecast guidance (HRRR-based) — darker shading means thicker forecast smoke at ground level; it's a model forecast, not a satellite photo. The air-quality toggle shows EPA AirNow's latest AQI contours for areas at Moderate or worse (all-Good areas aren't shaded). The history toggle outlines past years' burned-area perimeters (100+ acres) from NIFC's interagency fire-history archive — zoom in to a region to load them. The wind toggle reads the latest weather-station observation near each large (1,000+ ac) fire in view via the National Weather Service; the arrow points the way the wind is blowing — roughly the direction a fire would be pushed. Zoom and pan the map; the fire list updates to what's in view, largest first.
   </div>
 
   <div class="cl-notes" style="max-width:1160px;margin:0 auto 40px;padding:0 20px;">
@@ -401,7 +401,12 @@ async function loadFires(){
       return {name:a.IncidentName||"Fire",ac:a.IncidentSize||0,cont:a.PercentContained,disc:a.FireDiscoveryDateTime,
         rx:(a.IncidentTypeCategory||"")==="RX",st:(a.POOState||"").replace("US-",""),county:a.POOCounty||null,
         cause:a.FireCauseGeneral||null,crew:a.TotalIncidentPersonnel||null,lat:g.y,lon:g.x};})
-      .filter(Boolean).sort((a,b)=>{const ao=a.cont!=null&&a.cont>=100?1:0,bo=b.cont!=null&&b.cont>=100?1:0;return ao-bo||b.ac-a.ac;});
+      .filter(Boolean)
+      // stale zero-acre reports muddy the map: a 0-ac fire is only meaningful while
+      // it's fresh (a brand-new unsized report). Older than 48h with no size = hide
+      // everywhere (markers, labels, sidebar). isNewFire() hoists, safe to call here.
+      .filter(f=>f.ac>0||isNewFire(f))
+      .sort((a,b)=>{const ao=a.cont!=null&&a.cont>=100?1:0,bo=b.cont!=null&&b.cont>=100?1:0;return ao-bo||b.ac-a.ac;});
     loadPerimeters(env);
   }catch(e){}
   busy=false; render();
@@ -603,7 +608,12 @@ document.getElementById('togRfw').onclick=e=>{
 
 // ===== nearby DOT cameras (same Worker /cameras source as milecheckapp.com/cameras/) =====
 const CAM_STATES=new Set(['CA','WA','OR','UT','MT','AZ','NV','OH','SD','WI','NY','LA','GA','SC','AK','DE','FL','MI']);  // snapshot-capable states (MD/WV are stream-only — skipped until an HLS player exists)
-const CAM_MAX=150, CAM_MIN_ZOOM=8;
+const CAM_MAX=150, CAM_MIN_ZOOM=7, CAM_NEAR_KM=32;   // only cams within ~20 mi of a visible fire
+function kmBetween(la1,lo1,la2,lo2){
+  const R=6371,dLa=(la2-la1)*Math.PI/180,dLo=(lo2-lo1)*Math.PI/180;
+  const s=Math.sin(dLa/2)**2+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLo/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s));
+}
 const fireCamLayer=L.layerGroup().addTo(map);
 let camOn=false, camRunSeq=0;
 const fireCamCache=new Map();   // state -> {t, list} so panning doesn't refetch
@@ -638,13 +648,18 @@ async function loadFireCams(){
   const lists=await Promise.all(sts.map(fireCamsFor));
   if(run!==camRunSeq||!camOn)return;
   const b=map.getBounds();
-  const inView=lists.flat().filter(c=>b.contains([c.lat,c.lon]));
+  // cams near the FIRES, not every DOT cam in the viewport — a cam only earns a
+  // dot if it's within ~20 mi of an active fire currently in view.
+  const firesHere=FIRES.filter(f=>b.contains([f.lat,f.lon]));
+  if(!firesHere.length){setCamChip('Cameras — no fires in view');return;}
+  const inView=lists.flat().filter(c=>b.contains([c.lat,c.lon])
+    &&firesHere.some(f=>kmBetween(c.lat,c.lon,f.lat,f.lon)<=CAM_NEAR_KM));
   // cap so fires stay the visual priority
   inView.slice(0,CAM_MAX).forEach(c=>{
     L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95})
       .bindPopup(()=>fireCamPopup(c),{maxWidth:290}).addTo(fireCamLayer);
   });
-  setCamChip(inView.length>CAM_MAX?`Cameras (${CAM_MAX} of ${inView.length})`:(inView.length?`Cameras (${inView.length})`:'Cameras — none here'));
+  setCamChip(inView.length>CAM_MAX?`Cameras (${CAM_MAX} of ${inView.length})`:(inView.length?`Cameras (${inView.length})`:'Cameras — none near fires'));
 }
 document.getElementById('togCam').onclick=e=>{
   camOn=!camOn;
@@ -666,6 +681,9 @@ let airOn=false, airRunSeq=0;
 const AIR_CS_RE=/^(TNKR\d|LEAD\d|JMPR\d|MAFFS\d|DUCK\d|AA\d{1,3}$|T\d{2,3}$)/;
 const AIR_REG_RE=/^N\d{1,4}DF$/;   // CAL FIRE fleet registrations end in DF
 const AIR_TYPES={DC10:'DC-10 Very Large Air Tanker',MD87:'MD-87 Air Tanker',RJ85:'RJ85 Large Air Tanker',B461:'BAe-146 Large Air Tanker',B462:'BAe-146 Large Air Tanker',B463:'BAe-146 Large Air Tanker',CL2T:'CL-415 Super Scooper',CL2P:'CL-215 Scooper',S64:'S-64 Air Crane Helitanker',AT8T:'AT-802 Single Engine Air Tanker'};
+// known rotorcraft ICAO type codes — Guard/contract helicopters working fires
+// (Black Hawks, Chinooks, Hueys, EC145s, Super Pumas, K-MAX, Bells, Airbus, Agusta)
+const HELI_TYPES=new Set(['EC45','EC35','EC30','EC20','EC55','EC75','EC25','H60','S70','H47','CH47','UH1','B06','B105','B212','B412','B407','B429','B47G','S61','S76','S92','K126','KMAX','AS3B','AS50','AS55','A109','A119','A139','A169','A189']);
 const AIR_ROLES=[[/^TNKR/,'Air Tanker'],[/^LEAD/,'Lead Plane'],[/^JMPR/,'Smokejumper Aircraft'],[/^MAFFS/,'MAFFS Military Air Tanker'],[/^DUCK/,'Water Scooper'],[/^AA\d/,'Air Attack'],[/^T\d/,'Air Tanker']];
 function airMatch(a){
   const cs=String(a.flight||'').trim().toUpperCase();
@@ -675,11 +693,25 @@ function airMatch(a){
   const t=String(a.t||'').trim().toUpperCase(), alt=a.alt_baro;
   return !!AIR_TYPES[t]&&(alt==='ground'||(typeof alt==='number'&&alt<25000));
 }
+// gated-helicopter rule (additive to airMatch): ANY known rotorcraft type counts,
+// but only when it's plausibly working the fire — low (<8,000 ft), slow (<130 kt),
+// AND within ~15 nm of the fire we queried around. The 3-condition gate keeps
+// medevac and transit helicopters out; false negatives are fine.
+function heliMatch(a){
+  const t=String(a.t||'').trim().toUpperCase();
+  if(!HELI_TYPES.has(t))return false;
+  if(typeof a.alt_baro!=='number'||a.alt_baro>=8000)return false;
+  if(typeof a.gs!=='number'||a.gs>=130)return false;
+  return (a.dst??999)<=15;
+}
 function airLabel(a){
   const cs=String(a.flight||'').trim().toUpperCase();
   for(const[re,role]of AIR_ROLES)if(re.test(cs))return role;
   if(AIR_REG_RE.test(String(a.r||'').trim().toUpperCase()))return 'CAL FIRE Aircraft';
-  return AIR_TYPES[String(a.t||'').trim().toUpperCase()]||'Firefighting aircraft';
+  const t=String(a.t||'').trim().toUpperCase();
+  if(AIR_TYPES[t])return AIR_TYPES[t];
+  if(HELI_TYPES.has(t))return 'Helicopter (fire area)';
+  return 'Firefighting aircraft';
 }
 function airPopup(a,fireName){
   const cs=String(a.flight||'').trim()||String(a.r||'').trim()||a.hex;
@@ -716,7 +748,7 @@ async function loadAircraft(){
     try{
       const d=await fetch(`https://api.adsb.lol/v2/point/${f.lat.toFixed(3)}/${f.lon.toFixed(3)}/60`,{cache:'no-store'}).then(r=>r.json());
       for(const a of (d&&d.ac)||[]){
-        if(!airMatch(a)||!isFinite(+a.lat)||!isFinite(+a.lon))continue;
+        if((!airMatch(a)&&!heliMatch(a))||!isFinite(+a.lat)||!isFinite(+a.lon))continue;
         const prev=found.get(a.hex);
         if(!prev||(a.dst??999)<(prev.a.dst??999))found.set(a.hex,{a,fireName:f.name});
       }
