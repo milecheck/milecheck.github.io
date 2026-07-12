@@ -265,8 +265,8 @@ const baseSat=L.layerGroup([
   L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
 ]);
 const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
-baseTerrain.addTo(map);
-L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreets},null,
+baseSat.addTo(map);   // satellite default (Leah 2026-07-12)
+L.control.layers({'Satellite':baseSat,'Terrain':baseTerrain,'Streets':baseStreets},null,
   {position:'bottomright',collapsed:true}).addTo(map);
 map.setView([39.5,-98.35],4);   // lower 48
 let fireLayer=L.layerGroup().addTo(map), perimLayer=L.layerGroup().addTo(map);
