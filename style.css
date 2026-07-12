@@ -639,3 +639,11 @@ img, svg { display: block; max-width: 100%; }
     grid-template-columns: 1fr;
   }
 }
+
+/* Seal every Leaflet map into its own layer box: nothing inside a map
+   (controls z:1000, panes, popups) can ever stack above page chrome —
+   the open nav menu always wins. (Leah 2026-07-12: map overlaying the menu) */
+.cl-mapbox, .fire-mapbox, .wx-mapbox, .bw-mapbox, .mm-mapbox, [class$="-mapbox"] {
+  isolation: isolate;
+  z-index: 0;
+}
