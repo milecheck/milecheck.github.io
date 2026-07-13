@@ -362,7 +362,7 @@ async function camsFor(st){
 // ---- Federal networks: FAA aviation weather cams + National Park Service webcams ----
 // Both fail soft: if a source is down / keyless / rate-limited, its chip simply shows
 // nothing and the DOT cameras behave exactly as before.
-const NPS_API_KEY='';           // paste key from https://developer.nps.gov/get-started.htm — free, instant self-serve signup
+const NPS_API_KEY='NSG84Sgq3dtiGNrrVhm2artBRBrBczIwA9yABEYq'; // NPS/api.data.gov read-only public-data key (client-side by design; free to rotate)
 const NPS_FALLBACK_KEY='DEMO_KEY'; // api.data.gov public demo key (no signup, low per-IP rate limit — one list fetch per visitor is fine)
 const FED_MARKER_CAP=600;       // sane ceiling on markers drawn per view across all networks
 const NOIMG='data:image/svg+xml,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='640' height='400'><rect width='100%' height='100%' fill='#1c232e'/><text x='50%' y='47%' fill='#8A939B' font-family='sans-serif' font-size='22' text-anchor='middle'>Live view opens on the source site</text><text x='50%' y='58%' fill='#5b6670' font-family='sans-serif' font-size='15' text-anchor='middle'>Use the link below the title</text></svg>");
