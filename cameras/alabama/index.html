@@ -184,11 +184,14 @@ function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){camLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in Alabama'):'No cameras loaded — try again shortly.';}
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
-fetch(WORKER+'/cameras?state='+CODE).then(r=>r.json()).then(d=>{
+// The Worker occasionally 503s on the biggest camera states (cold cache); retry a few times.
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
+fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
+  if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
   CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||'')||(CODE==='AK'&&AK_HWY_RE.test(c.route||'')))).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl}));
   document.getElementById('statCams').textContent=CAMS.length;
   draw();
-}).catch(()=>{document.getElementById('coStatus').textContent='Live cameras unavailable right now — try again shortly.';});
+});
 </script>
 
 </body>
