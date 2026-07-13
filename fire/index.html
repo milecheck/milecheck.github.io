@@ -210,7 +210,7 @@
         <span class="lg-item"><span class="lg-pill lg-rx">RX</span> Prescribed burn</span>
         <button class="lg-item tog on" id="togEvac" aria-pressed="true" title="Evacuation orders — National Weather Service"><span class="sw-evac"></span> Evacuation</button>
         <button class="lg-item tog" id="togRfw" aria-pressed="false" title="Red Flag Warnings — critical fire weather, National Weather Service"><span class="sw-rfw"></span> Red flag</button>
-        <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live DOT traffic cameras within ~20 miles of the fires in view"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
+        <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live cameras within ~20 miles of the fires in view — road (DOT), FAA aviation weather, and national park webcams"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
         <button class="lg-item tog" id="togAir" aria-pressed="false" title="Firefighting aircraft — air tankers, scoopers, lead planes, air attack &amp; helicopters working the fire area, live from the ADSB.lol community ADS-B network"><span class="sw-air">✈</span> <span id="airChipTxt">Aircraft</span></button>
         <button class="lg-item tog" id="togSmk" aria-pressed="false" title="Near-surface smoke forecast — NOAA air-quality guidance (HRRR-based), darker = thicker smoke"><span class="sw-smk"></span> <span id="smkChipTxt">Smoke</span></button>
         <button class="lg-item tog" id="togAqi" aria-pressed="false" title="Current air quality — EPA AirNow AQI areas at Moderate or worse"><span class="sw-aqi"></span> <span id="aqiChipTxt">Air quality</span></button>
@@ -241,7 +241,7 @@
   </div>
 
   <div class="fire-notes">
-    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live DOT traffic cameras within about 20 miles of the fires in view (zoom in to load them). The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, air attack, and helicopters working low and slow in the fire area — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. The smoke toggle overlays NOAA's near-surface smoke forecast guidance (HRRR-based) — darker shading means thicker forecast smoke at ground level; it's a model forecast, not a satellite photo. The air-quality toggle shows EPA AirNow's latest AQI contours for areas at Moderate or worse (all-Good areas aren't shaded). The history toggle outlines past years' burned-area perimeters (100+ acres) from NIFC's interagency fire-history archive — zoom in to a region to load them. The wind toggle reads the latest weather-station observation near each large (1,000+ ac) fire in view via the National Weather Service; the arrow points the way the wind is blowing — roughly the direction a fire would be pushed. Zoom and pan the map; the fire list updates to what's in view, largest first.
+    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live cameras within about 20 miles of the fires in view (zoom in to load them) — road cameras from state DOTs (green), FAA aviation weather cameras (grey), and National Park Service webcams (purple); FAA and most park cameras open on their source site, road cameras show an inline snapshot. The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, air attack, and helicopters working low and slow in the fire area — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. The smoke toggle overlays NOAA's near-surface smoke forecast guidance (HRRR-based) — darker shading means thicker forecast smoke at ground level; it's a model forecast, not a satellite photo. The air-quality toggle shows EPA AirNow's latest AQI contours for areas at Moderate or worse (all-Good areas aren't shaded). The history toggle outlines past years' burned-area perimeters (100+ acres) from NIFC's interagency fire-history archive — zoom in to a region to load them. The wind toggle reads the latest weather-station observation near each large (1,000+ ac) fire in view via the National Weather Service; the arrow points the way the wind is blowing — roughly the direction a fire would be pushed. Zoom and pan the map; the fire list updates to what's in view, largest first.
   </div>
 
   <div class="cl-notes" style="max-width:1160px;margin:0 auto 40px;padding:0 20px;">
@@ -628,13 +628,53 @@ async function fireCamsFor(st){
     fireCamCache.set(st,{t:Date.now(),list});return list;
   }catch(e){fireCamCache.set(st,{t:Date.now(),list:[]});return[];}
 }
+// ===== federal cameras near fires: FAA aviation + NPS park webcams (lazy-loaded) =====
+// FAA sky/weather cams and park webcams near a fire are extra eyes on smoke & conditions.
+// FAA imagery is referer-locked and most NPS cams are link-only, so those open on the
+// source site; a minority of NPS cams carry an inline snapshot.
+const NPS_KEY='NSG84Sgq3dtiGNrrVhm2artBRBrBczIwA9yABEYq';
+let FAA_CAMS=null, NPS_CAMS=null;
+async function ensureFedCams(){
+  if(!FAA_CAMS){
+    try{
+      const rows=await fetch('../data/faa-cams.json',{cache:'force-cache'}).then(r=>r.ok?r.json():[]);
+      FAA_CAMS=rows.map(s=>({lat:s[3],lon:s[4],title:s[1],st:s[2],kind:'avi',views:s[5],
+        link:'https://weathercams.faa.gov/map/'+s[4]+','+s[3]+',11/cameraSite/'+s[0]+'/details/camera'}));
+    }catch(e){FAA_CAMS=[];}
+  }
+  if(!NPS_CAMS){
+    try{
+      const d=await fetch('https://developer.nps.gov/api/v1/webcams?limit=500&api_key='+NPS_KEY).then(r=>r.ok?r.json():null);
+      NPS_CAMS=((d&&d.data)||[]).filter(w=>w.status==='Active'&&isFinite(+w.latitude)&&+w.latitude&&(w.url||(w.images&&w.images.length))).map(w=>{
+        let img='';if(w.images&&w.images.length&&w.images[0].url)img=w.images[0].url.replace(/^https:\/\/www\.nps\.gov(?=https:\/\/)/,'');
+        const park=(w.relatedParks&&w.relatedParks[0])||{};
+        return{lat:+w.latitude,lon:+w.longitude,title:(w.title||'Park webcam').slice(0,120),
+          st:((park.states||'').split(',')[0]||'NPS'),kind:'nps',img,park:park.fullName||'',link:w.url||''};
+      });
+    }catch(e){NPS_CAMS=[];}
+  }
+}
 function fireCamPopup(c){
+  // FAA (always) and NPS-without-image → link card; road cams + NPS-with-image → inline snapshot.
+  if(c.kind==='avi'||(c.kind==='nps'&&!c.img)){
+    const src=c.kind==='avi'?'weathercams.faa.gov':'nps.gov';
+    const sub=c.kind==='avi'
+      ? ['✈ FAA Weather Camera',(c.views?c.views+' view'+(c.views>1?'s':''):null),c.st].filter(Boolean).join(' · ')
+      : ['🏞 '+(c.park||'National Park'),'National Park Service'].filter(Boolean).join(' · ');
+    return `<div class="fpop"><div class="fp-nm">${esc(c.title)}</div>
+      <div class="fp-st">${esc(sub)}</div>
+      <a href="${c.link}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-weight:700;color:#0f7a4f;text-decoration:none;">View live on ${src} &rarr;</a>
+    </div>`;
+  }
   const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();  // cache-bust per open
+  const meta=c.kind==='nps'?[esc(c.park||'National Park'),c.st].filter(Boolean).join(' · ')
+    :[esc(c.route),(c.mp>0)?'MP '+Math.round(c.mp):null,c.st].filter(Boolean).join(' · ');
+  const foot=c.kind==='nps'?'🏞 National Park Service':('Live from '+c.st+' DOT');
   return `<div class="fpop">
     <div class="fp-nm">${esc(c.title)}</div>
-    <div class="fp-st">${[esc(c.route),(c.mp>0)?'MP '+Math.round(c.mp):null,c.st].filter(Boolean).join(' · ')}</div>
+    <div class="fp-st">${meta}</div>
     <img class="campic" src="${bust}" alt="Live view: ${esc(c.title)}" loading="lazy" onerror="this.alt='Camera image unavailable right now';this.style.minHeight='60px';">
-    <div class="fp-row" style="color:#5b6670;margin-top:6px;">Live from ${c.st} DOT</div>
+    <div class="fp-row" style="color:#5b6670;margin-top:6px;">${esc(foot)}</div>
   </div>`;
 }
 function setCamChip(txt){const el=document.getElementById('camChipTxt');if(el)el.textContent=txt;}
@@ -643,20 +683,21 @@ async function loadFireCams(){
   fireCamLayer.clearLayers();
   if(!camOn){setCamChip('Cameras');return;}
   if(map.getZoom()<CAM_MIN_ZOOM){setCamChip('Cameras — zoom in');return;}
-  const sts=statesInView().filter(s=>CAM_STATES.has(s)).slice(0,4);
-  if(!sts.length){setCamChip('Cameras — none here');return;}
-  const lists=await Promise.all(sts.map(fireCamsFor));
-  if(run!==camRunSeq||!camOn)return;
   const b=map.getBounds();
-  // cams near the FIRES, not every DOT cam in the viewport — a cam only earns a
+  // cams near the FIRES, not every cam in the viewport — a cam only earns a
   // dot if it's within ~20 mi of an active fire currently in view.
   const firesHere=FIRES.filter(f=>b.contains([f.lat,f.lon]));
   if(!firesHere.length){setCamChip('Cameras — no fires in view');return;}
-  const inView=lists.flat().filter(c=>b.contains([c.lat,c.lon])
-    &&firesHere.some(f=>kmBetween(c.lat,c.lon,f.lat,f.lon)<=CAM_NEAR_KM));
+  const sts=statesInView().filter(s=>CAM_STATES.has(s)).slice(0,4);
+  const [lists]=await Promise.all([Promise.all(sts.map(fireCamsFor)),ensureFedCams()]);
+  if(run!==camRunSeq||!camOn)return;
+  const near=c=>b.contains([c.lat,c.lon])&&firesHere.some(f=>kmBetween(c.lat,c.lon,f.lat,f.lon)<=CAM_NEAR_KM);
+  // road cams (state DOT) + federal cams (FAA aviation grey, NPS parks purple)
+  const inView=lists.flat().filter(near).concat((FAA_CAMS||[]).filter(near),(NPS_CAMS||[]).filter(near));
   // cap so fires stay the visual priority
   inView.slice(0,CAM_MAX).forEach(c=>{
-    L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95})
+    const col=c.kind==='avi'?'#64748b':c.kind==='nps'?'#7C3AED':'#0f7a4f';
+    L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:col,fillOpacity:.95})
       .bindPopup(()=>fireCamPopup(c),{maxWidth:290}).addTo(fireCamLayer);
   });
   setCamChip(inView.length>CAM_MAX?`Cameras (${CAM_MAX} of ${inView.length})`:(inView.length?`Cameras (${inView.length})`:'Cameras — none near fires'));
