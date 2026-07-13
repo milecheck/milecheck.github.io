@@ -490,9 +490,10 @@ function render(){
     document.getElementById("camRows").innerHTML=`<div class="cl-empty">Pick a state to load cameras<small>Or zoom the map into your area. Images come straight from each state DOT.</small></div>`;
     return;}
   const b=map.getBounds();
+  // Federal layers are opt-in — "All" stays road cams (highways + ferries) only.
   const pool=CAMS.concat(
-    ((typeFilter==='all'||typeFilter==='avi')&&AVI_CAMS)?AVI_CAMS:[],
-    ((typeFilter==='all'||typeFilter==='nps')&&NPS_CAMS)?NPS_CAMS:[]);
+    (typeFilter==='avi'&&AVI_CAMS)?AVI_CAMS:[],
+    (typeFilter==='nps'&&NPS_CAMS)?NPS_CAMS:[]);
   const inView=pool.filter(c=>b.contains([c.lat,c.lon])&&
     (typeFilter==='all'||(c.kind||(c.ferry?'ferry':'hwy'))===typeFilter));
   // (sorted is also the viewer's click-through deck — computed below, markers
@@ -532,8 +533,8 @@ async function loadCams(){
     CAMS=lists.flat();
   }
   // Federal networks lazy-load on first activation (idempotent; each guards its own re-entry).
-  if(typeFilter==='all'||typeFilter==='avi')ensureAvi();
-  if((typeFilter==='all'||typeFilter==='nps')&&boundsTouchUS())ensureNps();
+  if(typeFilter==='avi')ensureAvi();
+  if(typeFilter==='nps'&&boundsTouchUS())ensureNps();
   busy=false; render();
 }
 let mvTimer=null;
