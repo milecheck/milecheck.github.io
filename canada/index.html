@@ -141,7 +141,7 @@
     </style>
     <button class="km-opener" id="kmOpener">
       <span class="km-opener-ic">&#128506;</span>
-      <span class="km-opener-tx"><strong>Live km-post map</strong> &mdash; about 67,000 posts across 6 provinces &amp; territories</span>
+      <span class="km-opener-tx"><strong>Live km-post map</strong> &mdash; about 118,000 posts across 10 provinces &amp; territories</span>
       <span class="km-opener-go" id="kmOpenerGo">Open map</span>
     </button>
     <div class="km-mapbox" id="kmMapWrap" hidden>
@@ -149,7 +149,7 @@
       <button class="km-nearme" id="kmNearMe">&#128205; Near me</button>
       <div id="kmMap"></div>
     </div>
-    <p class="km-caption" id="kmCaption" hidden>Live kilometre-post data for Ontario, Quebec, British Columbia, Alberta, Nova Scotia, and the Northwest Territories &mdash; from official provincial sources (MTO, MTQ, BC MOT, Alberta Transportation, Service NS, GNWT). Positions are approximate. This data is coming to the MileCheck app in an upcoming update.</p>
+    <p class="km-caption" id="kmCaption" hidden>Live kilometre-post data for Ontario, Quebec, British Columbia, Alberta, Manitoba, Saskatchewan, New Brunswick, Nova Scotia, Yukon, and the Northwest Territories &mdash; from official provincial and territorial sources. The Trans-Canada is covered coast to coast, Victoria to Halifax. Positions are approximate. This data is coming to the MileCheck app in an upcoming update.</p>
   </section>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
@@ -181,7 +181,11 @@
       {c:'BC',n:'British Columbia',b:[48.1,-132.5,60.2,-114.4]},
       {c:'AB',n:'Alberta',b:[48.8,-120.2,60.2,-109.7]},
       {c:'NS',n:'Nova Scotia',b:[43.3,-66.4,46.6,-59.9]},
-      {c:'NT',n:'Northwest Territories',b:[59.8,-136.5,69.7,-111.5]}
+      {c:'NT',n:'Northwest Territories',b:[59.8,-136.5,69.7,-111.5]},
+      {c:'MB',n:'Manitoba',b:[48.9,-102.1,58.9,-88.9]},
+      {c:'SK',n:'Saskatchewan',b:[48.9,-110.1,60.1,-101.3]},
+      {c:'NB',n:'New Brunswick',b:[44.5,-69.2,48.2,-63.7]},
+      {c:'YT',n:'Yukon',b:[59.9,-141.1,69.7,-123.7]}
     ];
     map=L.map('kmMap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
     var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
