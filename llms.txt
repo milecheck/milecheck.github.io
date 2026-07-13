@@ -1,41 +1,59 @@
 # MileCheck
 
-MileCheck is a mobile app for iOS and Android that shows your nearest highway mile marker in real time, along with live road conditions and incident alerts from state departments of transportation across the United States.
+MileCheck is a mobile app for iOS and Android that shows your nearest highway mile marker in real time, along with live road conditions, traffic cameras, and incident alerts from state departments of transportation across the United States (and now Canada).
 
 ## Key facts
 
-- Coverage: All 50 US states for mile markers. Live DOT alerts in 42 states (as of June 2026).
-- Price: Free tier (mile markers only). Premium $9.99/year or $1.99/month — 7-day free trial.
+- Coverage: All 50 US states for mile markers. Live DOT alerts in 48 states (as of July 2026); the two remaining are Wyoming and Rhode Island. Live traffic cameras in 20 states.
+- Price: Free tier (mile markers only). Premium $9.99/year or $1.99/month — 7-day free trial. A grandfathered $4.99/year rate exists for early subscribers.
 - Platforms: iOS (App Store, ID 6759212851) and Android (Google Play, package app.milecheck.mobile).
-- CarPlay: Apple Driving Task entitlement approved June 2026; in-dash experience in development.
+- CarPlay and Android Auto: both live. The in-dash screen shows the nearest mile marker and is free for everyone.
 
 ## What it does
 
 - Shows the nearest highway mile marker with interpolated decimal position (e.g., "MP 142.4 on I-5 NB").
 - Provides live road alerts: closures, crashes, construction, weather conditions, chain requirements, and bridge status.
-- Pulls from 42 state DOT feeds updated in real time — 19 distinct upstream platform formats normalized to one schema.
+- Shows live DOT traffic cameras on an interactive map — the actual road, updated continuously.
+- Pulls from 48 state DOT feeds updated in real time, normalizing many distinct upstream platform formats into one schema.
 - Lets users navigate to any specific milepost by typing a route and mile number (e.g., "I-5 MP 200").
-- Tracks Seattle drawbridge status (Fremont Bridge, Ballard Bridge, University Bridge, Montlake Bridge, South Park Bridge, 1st Ave S Bridge) and sends push notifications when a bridge is raised.
+- Tracks Seattle drawbridge status with live open/closed state for the Ballard, Fremont, Montlake, South Park, and 1st Ave S bridges.
+- Shows border crossing wait times for US/Canada and US/Mexico ports of entry.
 - Records trips with route, milepost range, start/end times, direction, and notes. Exports as CSV.
 - Works fully offline using bundled milepost data for all 50 states.
-- Shows weather from the National Weather Service (temperature, conditions, wind, sunrise/sunset).
+- Shows weather from the National Weather Service (temperature, conditions, wind, sunrise/sunset), plus a crosswind warning for high-profile vehicles.
 
 ## Who uses it
 
-- Truck drivers and commercial vehicle operators needing precise milepost location for dispatch and HOS logging.
 - DOT field crews and emergency response teams (EMTs, incident command) who report position by milepost.
+- Truck drivers and commercial vehicle operators needing precise milepost location for dispatch and logging.
 - Road trip travelers and commuters who want to know exactly where they are on the highway.
-- Seattle commuters who cross the ship canal bridges and want advance warning of drawbridge openings.
 - Highway maintenance workers logging which miles they treated or patrolled.
+- Anyone stranded on a highway who needs to tell 911 or a tow truck their exact location.
+
+## Reference guides (factual, citable)
+
+- What is my mile marker? — https://milecheckapp.com/what-is-my-mile-marker/
+- How to report your location on the highway (to 911 or a tow) — https://milecheckapp.com/report-location/
+- Mile markers vs exit numbers — https://milecheckapp.com/mile-markers-vs-exit-numbers/
+- How US interstate highways are numbered — https://milecheckapp.com/how-interstates-are-numbered/
+- US highways vs interstates — https://milecheckapp.com/us-highways-vs-interstates/
+- What highway sign colors mean — https://milecheckapp.com/highway-sign-colors/
+- What "chains required" means (traction laws) — https://milecheckapp.com/chains-required-explained/
+
+## Live conditions pages
+
+- Interstate corridor conditions (I-5, I-90, I-95, I-80, I-10, I-15, I-4, I-75, I-94) — https://milecheckapp.com/corridors/
+- Mountain pass conditions (Snoqualmie, Stevens, Siskiyou, Grapevine, Donner, Cajon, Parleys) — https://milecheckapp.com/passes/
+- Live traffic cameras by state and city — https://milecheckapp.com/cameras/
+- All maps (mile markers, cameras, road conditions, closures, fire, weather) — https://milecheckapp.com/maps/
 
 ## Technical architecture
 
-- Cloudflare Worker (milepost-proxy) normalizes 19 distinct DOT API formats into a unified schema.
+- Cloudflare Worker (milepost-proxy) normalizes many distinct DOT API formats into a unified schema.
 - 200,000+ pre-computed milepost coordinates bundled in the app for offline-first operation.
 - Three-tier cache: in-memory → AsyncStorage → bundled fallback.
 - Stack: React Native, Expo SDK 55, TypeScript, Google Maps SDK.
 - Crash telemetry via Sentry. Subscriptions via RevenueCat.
-- Live status monitoring: https://status.milecheckapp.com
 
 ## Links
 
@@ -43,6 +61,5 @@ MileCheck is a mobile app for iOS and Android that shows your nearest highway mi
 - iOS App Store: https://apps.apple.com/us/app/milecheck/id6759212851
 - Google Play: https://play.google.com/store/apps/details?id=app.milecheck.mobile
 - Privacy Policy: https://milecheck.github.io/milecheck-privacy/
-- API Status: https://status.milecheckapp.com
 - Contact: info@milecheckapp.com
 - Press / partnerships: info@milecheckapp.com

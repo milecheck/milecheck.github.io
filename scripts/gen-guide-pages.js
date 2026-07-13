@@ -47,6 +47,25 @@ const GUIDES = [
     related:`<a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> · <a href="../corridors/">Interstate corridors</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
   },
   {
+    slug:'us-highways-vs-interstates', eyebrow:'Highway basics',
+    title:"US Highways vs Interstates: What's the Difference?",
+    h1:"US highways vs interstates: what's the difference?",
+    lede:`They're both numbered highways with shields and mile markers, but they're two separate systems built decades apart — and their numbers run in opposite directions across the map.`,
+    sections:[
+      ['Two systems, two eras',`The <strong>US Highway system</strong> (US Routes) came first, established in 1926. The <strong>Interstate Highway System</strong> began in 1956 as a network of high-speed, limited-access freeways. Many US routes are older two-lane roads that run right through towns; interstates are built to a uniform freeway standard — divided, grade-separated, no stoplights or cross traffic.`],
+      ['How to tell them apart',`An <strong>interstate</strong> uses the red-white-and-blue shield and is written "I-5" or "I-90." A <strong>US route</strong> uses the plain black-and-white shield and is written "US-2" or "US-101." A US route can be anything from a full freeway to a small-town main street with traffic lights; an interstate is always a controlled-access freeway.`],
+      ['The numbering runs opposite ways',`Both systems use the same direction rule — <strong>odd numbers run north–south, even numbers run east–west</strong> — but the low-to-high order is <strong>reversed</strong> between them. Interstate numbers increase <strong>west to east and south to north</strong> (I-5 on the West Coast, I-95 on the East Coast). US route numbers do the opposite, increasing <strong>east to west and north to south</strong> (US-1 down the East Coast, US-101 on the West Coast; US-2 near the Canadian border). That's why an interstate and a US route with similar numbers can be on opposite sides of the country. <a href="../how-interstates-are-numbered/">More on how interstates are numbered →</a>`],
+      ['Mile markers work the same on both',`Whether you're on an interstate or a US route, mile markers count up from 0 at the state's southern or western edge and reset at each state line. So "US-97 at mile 154 in Oregon" pinpoints you exactly the same way "I-84 at mile 210" does. The MileCheck app reads your mile marker on both systems in real time.`],
+    ],
+    faq:[
+      ["What's the difference between a US highway and an interstate?",`Interstates are limited-access freeways built to a uniform national standard (I-5, I-90), using the red-white-blue shield. US highways are an older system (US-2, US-101) with the black-and-white shield that can be freeways or ordinary roads with intersections and traffic lights.`],
+      ['Is US-101 an interstate?',`No. US-101 is a US route, not an interstate — it uses the black-and-white US shield. It runs along the West Coast and is a US highway despite being a major road.`],
+      ['Why do US route numbers go the opposite way from interstates?',`Interstate numbers increase west-to-east and south-to-north; US route numbers increase east-to-west and north-to-south. The two systems were numbered in opposite orders, so a US route and an interstate with similar numbers can be on opposite coasts.`],
+      ['Do US highways have mile markers?',`Yes. US routes use the same mile-marker system as interstates — markers count up from the state's southern or western edge and reset at each state line.`],
+    ],
+    related:`<a href="../how-interstates-are-numbered/">How interstates are numbered</a> · <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> · <a href="../highway-sign-colors/">Highway sign colors</a>`,
+  },
+  {
     slug:'highway-sign-colors', eyebrow:'Highway basics',
     title:"What Highway Sign Colors Mean (Green, Blue, Brown & More)",
     h1:"What highway sign colors mean",
