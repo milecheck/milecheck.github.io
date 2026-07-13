@@ -118,7 +118,12 @@
   <section class="km-map-sec">
     <style>
       .km-map-sec{max-width:1160px;margin:26px auto 6px;padding:0 20px;}
-      .km-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;height:56vh;min-height:380px;background:#eef0e9;}
+      .km-opener{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font-family:inherit;font-size:14px;color:#0E1116;background:#FBFEFD;border:1px solid #BFE9D9;border-radius:14px;padding:14px 16px;cursor:pointer;}
+      .km-opener:hover{border-color:#0f7a4f;}
+      .km-opener-ic{font-size:20px;flex-shrink:0;}
+      .km-opener-tx{flex:1;min-width:0;line-height:1.45;color:#374151;}
+      .km-opener-go{flex-shrink:0;font-weight:800;font-size:13px;color:#0f7a4f;border-bottom:1px solid rgba(15,122,79,.4);white-space:nowrap;}
+      .km-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;height:56vh;min-height:380px;background:#eef0e9;margin-top:12px;}
       #kmMap{position:absolute;inset:0;z-index:0;}
       .km-count{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;pointer-events:none;}
       .km-count.hint{color:#5b6670;font-weight:700;}
@@ -134,12 +139,17 @@
         .km-nearme{font-size:12px;padding:8px 11px;}
       }
     </style>
-    <div class="km-mapbox">
+    <button class="km-opener" id="kmOpener">
+      <span class="km-opener-ic">&#128506;</span>
+      <span class="km-opener-tx"><strong>Live km-post map</strong> &mdash; about 67,000 posts across 6 provinces &amp; territories</span>
+      <span class="km-opener-go" id="kmOpenerGo">Open map</span>
+    </button>
+    <div class="km-mapbox" id="kmMapWrap" hidden>
       <span class="km-count hint" id="kmCount">Loading map&hellip;</span>
       <button class="km-nearme" id="kmNearMe">&#128205; Near me</button>
       <div id="kmMap"></div>
     </div>
-    <p class="km-caption">Live kilometre-post data for Ontario, Quebec, British Columbia, Alberta, Nova Scotia, and the Northwest Territories &mdash; from official provincial sources (MTO, MTQ, BC MOT, Alberta Transportation, Service NS, GNWT). Positions are approximate. This data is coming to the MileCheck app in an upcoming update.</p>
+    <p class="km-caption" id="kmCaption" hidden>Live kilometre-post data for Ontario, Quebec, British Columbia, Alberta, Nova Scotia, and the Northwest Territories &mdash; from official provincial sources (MTO, MTQ, BC MOT, Alberta Transportation, Service NS, GNWT). Positions are approximate. This data is coming to the MileCheck app in an upcoming update.</p>
   </section>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
@@ -147,6 +157,22 @@
   (function(){
     var mapEl=document.getElementById('kmMap');
     if(!mapEl||typeof L==='undefined')return;
+    // Collapsed by default (Leah 7/13: the full-height map buried the guides).
+    // Leaflet initializes on first open so tiles size correctly.
+    var opener=document.getElementById('kmOpener');
+    var wrap=document.getElementById('kmMapWrap');
+    var caption=document.getElementById('kmCaption');
+    var booted=false;
+    opener.addEventListener('click',function(){
+      var opening=wrap.hidden;
+      wrap.hidden=!opening;
+      caption.hidden=!opening;
+      document.getElementById('kmOpenerGo').textContent=opening?'Hide map':'Open map';
+      if(opening&&!booted){booted=true;boot();}
+      else if(opening){setTimeout(function(){map.invalidateSize();},60);}
+    });
+    var map;
+    function boot(){
     var WORKER='https://milepost-proxy.leahgerber93.workers.dev/mileposts?state=';
     // b = [minLat, minLon, maxLat, maxLon] — data extents padded a touch.
     var PROVS=[
@@ -157,7 +183,7 @@
       {c:'NS',n:'Nova Scotia',b:[43.3,-66.4,46.6,-59.9]},
       {c:'NT',n:'Northwest Territories',b:[59.8,-136.5,69.7,-111.5]}
     ];
-    var map=L.map('kmMap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+    map=L.map('kmMap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
     var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
     var ATTR='Esri, USGS &middot; km-posts: provincial DOTs via MileCheck';
     var baseSat=L.layerGroup([
@@ -236,6 +262,7 @@
       if(!navigator.geolocation)return;
       navigator.geolocation.getCurrentPosition(function(p){map.setView([p.coords.latitude,p.coords.longitude],11);},function(){},{timeout:8000});
     };
+    } // boot()
   })();
   </script>
 
