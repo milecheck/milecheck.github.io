@@ -104,6 +104,79 @@ const CORRIDORS = [
       ['What are dust storms on I-10?', `In Arizona, summer "haboobs" can drop visibility to zero on I-10 in seconds — a top cause of desert pileups. The <a href="#comap">live cameras above</a> show current desert visibility; track your mile marker through it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
+  {
+    slug: 'i-15', name: 'I-15', num: 15, states: ['CA','NV','UT','AZ','MT'],
+    subtitle: 'San Diego to Montana · the LA–Las Vegas–Salt Lake route', bounds: '[[32.5,-118.5],[49.0,-110.5]]',
+    lengthMi: '1,433 mi',
+    highPass: { slug: 'cajon', name: 'Cajon Pass', elev: '~4,190 ft' },
+    pois: [ {name:'Cajon Pass', slug:'cajon', lat:34.3419, lon:-117.4436} ],
+    hero: `See I-15 right now — live DOT cameras and real-time conditions from Southern California through Las Vegas and Salt Lake City to Montana, each tagged with its mile marker. Cajon Pass, the Mojave, and the Wasatch, all on one map.`,
+    segs: [
+      ['The LA–Las Vegas–Salt Lake corridor', `I-15 runs about 1,433 miles from San Diego up through the Los Angeles Basin, over <a href="../../passes/cajon/">Cajon Pass</a>, across the Mojave to Las Vegas, over the mountains to Salt Lake City, and north through Idaho into Montana. The LA–Vegas stretch is one of the busiest desert highways in the country.`],
+      ['Where the weather bites', `The Southern California end climbs <a href="../../passes/cajon/">Cajon Pass</a>, a wind, snow, and wildfire funnel between the LA Basin and the High Desert. Further north, winter snow and blowing snow hit the Utah, Idaho, and Montana stretches, and the Virgin River Gorge on the Arizona line is a narrow, weather-exposed choke point.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you from the desert to the mountains, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-15 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-15 from the state DOT feeds; a red banner appears at the top of this page if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything.`],
+      ['How long is I-15?', `About 1,433 miles from San Diego, California to the Canadian border in Montana.`],
+      ['What is the worst spot on I-15 in winter?', `<a href="../../passes/cajon/">Cajon Pass</a> above Los Angeles for wind and occasional snow, and the Utah, Idaho, and Montana stretches for heavy and blowing snow. See all <a href="../../passes/">mountain pass conditions</a>.`],
+      ['How far is Las Vegas from Los Angeles on I-15?', `About 270 miles — roughly four hours in good conditions, longer on a busy weekend. Track your mile marker across the desert with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
+  {
+    slug: 'i-4', name: 'I-4', num: 4, states: ['FL'],
+    subtitle: 'Tampa to Daytona Beach · the spine of Central Florida', bounds: '[[27.4,-82.9],[29.4,-80.85]]',
+    lengthMi: '132 mi',
+    highPass: null, pois: [],
+    hero: `See I-4 right now — live FDOT cameras and real-time conditions across Central Florida, from Tampa through Orlando to Daytona Beach, each tagged with its mile marker. One of the most congested and crash-prone stretches in the state, on one map.`,
+    segs: [
+      ['The Central Florida spine', `I-4 runs about 132 miles across the middle of Florida, linking Tampa, Lakeland, Orlando, and the theme-park corridor out to Daytona Beach on the Atlantic. It's the main route through the fastest-growing part of the state — and one of the busiest.`],
+      ['Where it slows down', `Congestion and crashes are the everyday story on I-4, especially through Orlando and the attractions area. Summer thunderstorms and dense morning fog cut visibility fast, and the corridor sees hurricane and tropical-storm impacts in late summer.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you across Central Florida, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-4 backed up right now?', `The <a href="#comap">live map above</a> shows active incidents and closures along I-4, straight from FDOT. For every Florida camera, see the <a href="../../cameras/florida/">Florida traffic cameras</a> page.`],
+      ['How long is I-4?', `About 132 miles across Central Florida, from Tampa to Daytona Beach.`],
+      ['Why is I-4 so dangerous?', `It carries heavy tourist and commuter traffic through a fast-growing corridor, with frequent congestion, sudden thunderstorms, and fog — a combination that makes the Orlando stretch one of the most crash-prone in the country. The <a href="#comap">live cameras above</a> show current conditions.`],
+      ['Does I-4 flood or close for hurricanes?', `Yes — Central Florida takes direct hurricane and tropical-storm hits, and I-4 can flood or close in a major storm. Watch the storms on the <a href="../../weather/">road weather map</a>.`],
+    ],
+  },
+  {
+    slug: 'i-75', name: 'I-75', num: 75, states: ['FL','GA','OH','MI'],
+    subtitle: 'Florida to Michigan · Miami to the Upper Great Lakes', bounds: '[[25.5,-88.0],[47.0,-80.5]]',
+    lengthMi: '1,786 mi',
+    highPass: null, pois: [],
+    hero: `See I-75 right now — live DOT cameras and real-time conditions along one of the great north–south routes, from South Florida to northern Michigan, each tagged with its mile marker. Atlanta traffic to Great Lakes snow, on one map.`,
+    segs: [
+      ['Florida to the Great Lakes', `I-75 runs about 1,786 miles from Miami and Naples up through Georgia and Atlanta, across the Tennessee and Kentucky mountains, into Ohio and Michigan and on to the Upper Peninsula. In Florida it includes "Alligator Alley," the long straight run across the Everglades.`],
+      ['Where the trouble is', `Congestion dominates the metro stretches — Atlanta's I-75 is among the busiest in the Southeast, and Detroit's is heavy too. Weather-wise, the northern end sees Great Lakes snow through Ohio and Michigan, while Florida brings summer thunderstorms, fog, and hurricanes.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-75 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-75 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything.`],
+      ['How long is I-75?', `About 1,786 miles from Miami, Florida to Sault Ste. Marie, Michigan.`],
+      ['Where does I-75 get congested?', `Metro Atlanta and metro Detroit are the two big chokepoints, both among the busiest urban interstates in their regions. The <a href="#comap">live cameras above</a> show which stretches are moving.`],
+      ['Does I-75 get snow?', `Yes — the Ohio and Michigan sections see Great Lakes and lake-effect snow through the winter. Track your mile marker through it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
+  {
+    slug: 'i-94', name: 'I-94', num: 94, states: ['MT','WI','MI'],
+    subtitle: 'Montana to Michigan · the northern Great Lakes route', bounds: '[[42.2,-108.6],[48.5,-82.3]]',
+    lengthMi: '1,585 mi',
+    highPass: null, pois: [],
+    hero: `See I-94 right now — live DOT cameras and real-time conditions across the northern tier, from eastern Montana through Wisconsin to Detroit, each tagged with its mile marker. Plains blizzards to Great Lakes snow, on one map.`,
+    segs: [
+      ['Across the northern tier', `I-94 runs about 1,585 miles from Billings, Montana across the Dakotas and Minnesota, through Wisconsin and the Chicago area, and into Michigan to Detroit and Port Huron. It's a major freight and commuter route through the Upper Midwest.`],
+      ['Where the weather bites', `The open plains of eastern Montana and the Dakotas bring ground blizzards and wind that close the road with no mountains in sight; from Wisconsin through Michigan, Great Lakes and lake-effect snow are the winter story. Milwaukee, Chicago, and Detroit add heavy metro congestion.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you across the plains and the lakes, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-94 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-94 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything.`],
+      ['How long is I-94?', `About 1,585 miles from Billings, Montana to Port Huron, Michigan.`],
+      ['Where does I-94 close in winter?', `The open high plains of eastern Montana and the Dakotas, where ground blizzards drop visibility to zero, and the Great Lakes snow belt through Wisconsin and Michigan. See the <a href="../../weather/">road weather map</a> for the storms behind them.`],
+      ['Does I-94 get congested?', `Yes — Milwaukee, the Chicago area, and Detroit are the big metro chokepoints. Track your mile marker through them with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
 ];
 
 function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
@@ -309,7 +382,9 @@ const STATES=${JSON.stringify(c.states)};
 const NUM=${c.num};
 const NAME=${JSON.stringify(c.name)};
 const POIS=${JSON.stringify(c.pois||[])};
-function isRoute(r){return new RegExp('^(I)?0*'+NUM+'$').test(String(r||'').toUpperCase().replace(/[\\s-]/g,''));}
+// Match the interstate as the LEADING token: clean "I-5"/"I5"/"005", or descriptive
+// "I-15 SB Lake Mead N" (NV-style). "I-155" / "US-15" / "SR-15" correctly excluded.
+function isRoute(r){r=String(r||'').toUpperCase().trim();var m=r.match(/^I[\\s-]?0*(\\d+)/);if(m)return +m[1]===NUM;var n=r.match(/^0*(\\d+)$/);if(n)return +n[1]===NUM;return false;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · ${c.name} cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);

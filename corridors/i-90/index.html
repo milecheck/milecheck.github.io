@@ -197,7 +197,9 @@ const STATES=["WA","MT","SD","WI","OH","PA","NY"];
 const NUM=90;
 const NAME="I-90";
 const POIS=[{"name":"Snoqualmie Pass","slug":"snoqualmie","lat":47.3923,"lon":-121.4001}];
-function isRoute(r){return new RegExp('^(I)?0*'+NUM+'$').test(String(r||'').toUpperCase().replace(/[\s-]/g,''));}
+// Match the interstate as the LEADING token: clean "I-5"/"I5"/"005", or descriptive
+// "I-15 SB Lake Mead N" (NV-style). "I-155" / "US-15" / "SR-15" correctly excluded.
+function isRoute(r){r=String(r||'').toUpperCase().trim();var m=r.match(/^I[\s-]?0*(\d+)/);if(m)return +m[1]===NUM;var n=r.match(/^0*(\d+)$/);if(n)return +n[1]===NUM;return false;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-90 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);

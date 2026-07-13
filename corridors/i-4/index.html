@@ -4,13 +4,13 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I-95 Live Traffic Cameras &amp; Road Conditions Right Now | MileCheck</title>
-  <meta name="description" content="See I-95 right now — live DOT traffic cameras and real-time road conditions along the corridor (Miami to Maine · the East Coast spine), each tagged with route and mile marker. Free, no account.">
-  <link rel="canonical" href="https://milecheckapp.com/corridors/i-95/">
-  <meta property="og:title" content="I-95 Right Now — Live Cameras &amp; Conditions | MileCheck">
-  <meta property="og:description" content="Live I-95 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
+  <title>I-4 Live Traffic Cameras &amp; Road Conditions Right Now | MileCheck</title>
+  <meta name="description" content="See I-4 right now — live DOT traffic cameras and real-time road conditions along the corridor (Tampa to Daytona Beach · the spine of Central Florida), each tagged with route and mile marker. Free, no account.">
+  <link rel="canonical" href="https://milecheckapp.com/corridors/i-4/">
+  <meta property="og:title" content="I-4 Right Now — Live Cameras &amp; Conditions | MileCheck">
+  <meta property="og:description" content="Live I-4 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
-  <meta property="og:url" content="https://milecheckapp.com/corridors/i-95/">
+  <meta property="og:url" content="https://milecheckapp.com/corridors/i-4/">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,8 +21,8 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is I-95 open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active closures and incidents along I-95 from the DOT feeds we cover; a red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the road closures map. (Camera and alert coverage is live in most I-95 states and still filling in along the mid-Atlantic.)"}},{"@type":"Question","name":"How long is I-95?","acceptedAnswer":{"@type":"Answer","text":"About 1,908 miles from Miami, Florida to the Maine–Canada border — and the busiest interstate in the United States."}},{"@type":"Question","name":"Why is I-95 so congested?","acceptedAnswer":{"@type":"Answer","text":"It's the main route between every major East Coast city, so the DC-to-Boston stretch runs near capacity daily. The live cameras above show you which stretches are moving before you commit."}},{"@type":"Question","name":"Does I-95 close for hurricanes or snow?","acceptedAnswer":{"@type":"Answer","text":"Yes — Atlantic hurricanes and flooding hit the Southeast section, and winter storms ice the Northeast. Watch the storms behind them on the road weather map."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Corridors","item":"https://milecheckapp.com/corridors/"},{"@type":"ListItem","position":3,"name":"I-95","item":"https://milecheckapp.com/corridors/i-95/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is I-4 backed up right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active incidents and closures along I-4, straight from FDOT. For every Florida camera, see the Florida traffic cameras page."}},{"@type":"Question","name":"How long is I-4?","acceptedAnswer":{"@type":"Answer","text":"About 132 miles across Central Florida, from Tampa to Daytona Beach."}},{"@type":"Question","name":"Why is I-4 so dangerous?","acceptedAnswer":{"@type":"Answer","text":"It carries heavy tourist and commuter traffic through a fast-growing corridor, with frequent congestion, sudden thunderstorms, and fog — a combination that makes the Orlando stretch one of the most crash-prone in the country. The live cameras above show current conditions."}},{"@type":"Question","name":"Does I-4 flood or close for hurricanes?","acceptedAnswer":{"@type":"Answer","text":"Yes — Central Florida takes direct hurricane and tropical-storm hits, and I-4 can flood or close in a major storm. Watch the storms on the road weather map."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Corridors","item":"https://milecheckapp.com/corridors/"},{"@type":"ListItem","position":3,"name":"I-4","item":"https://milecheckapp.com/corridors/i-4/"}]}</script>
   <style>
     .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
     .crit-banner a{color:#fff;text-decoration:underline;}
@@ -104,14 +104,14 @@
   <div class="crit-banner" id="critBanner" style="display:none"></div>
 
   <div class="co-hero">
-    <div class="eyebrow">Interstate 95 · Miami to Maine · the East Coast spine</div>
-    <h1>I-95 right now: live cameras &amp; road conditions</h1>
-    <p class="sub">See I-95 right now — live DOT cameras and real-time conditions along the East Coast's main artery, from Miami to the Maine border, each tagged with its mile marker. The busiest interstate in the country, on one map.</p>
+    <div class="eyebrow">Interstate 4 · Tampa to Daytona Beach · the spine of Central Florida</div>
+    <h1>I-4 right now: live cameras &amp; road conditions</h1>
+    <p class="sub">See I-4 right now — live FDOT cameras and real-time conditions across Central Florida, from Tampa through Orlando to Daytona Beach, each tagged with its mile marker. One of the most congested and crash-prone stretches in the state, on one map.</p>
     <div class="co-stats">
-      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras on I-95</div></div>
-      <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts on I-95</div></div>
-      <div class="co-stat"><div class="n">1,908 mi</div><div class="l">end to end</div></div>
-    <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">Miami to Maine</div><div class="l">1,908 mi end to end</div></div>
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras on I-4</div></div>
+      <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts on I-4</div></div>
+      <div class="co-stat"><div class="n">132 mi</div><div class="l">end to end</div></div>
+    <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">Tampa to Daytona Beach</div><div class="l">132 mi end to end</div></div>
     </div>
   </div>
 
@@ -122,30 +122,30 @@
     </div>
     <div style="position:relative;">
       <div id="comap"></div>
-      <div class="co-bs" id="coStatus">Loading live I-95 data…</div>
+      <div class="co-bs" id="coStatus">Loading live I-4 data…</div>
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
 
   <section class="co-guide">
-    <h2>The I-95 corridor</h2>
-    <p class="lede">Miami to Maine · the East Coast spine. Here's what to watch, and where the weather actually bites.</p>
-    <div class="co-seg"><h3>The busiest interstate</h3><p>I-95 runs about 1,908 miles up the entire East Coast and carries more traffic than any other interstate. It links nearly every major city on the seaboard — Miami, Jacksonville, Savannah, the Carolinas, Washington, Baltimore, Philadelphia, New York, Boston, and on into New England.</p></div>
-    <div class="co-seg"><h3>Where it slows down</h3><p>Congestion is the everyday story on I-95 — the DC–Baltimore–Philadelphia–New York–Boston stretch is chronically jammed, and a single incident ripples for miles. Weather adds to it: Northeast snow and ice from Pennsylvania to Maine in winter, and Atlantic hurricanes and tropical flooding across the Southeast in late summer, when evacuations can turn the whole corridor northbound.</p></div>
-    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are what you'd check before leaving. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto — handy on a road this long and this busy.</p></div>
+    <h2>The I-4 corridor</h2>
+    <p class="lede">Tampa to Daytona Beach · the spine of Central Florida. Here's what to watch, and where the weather actually bites.</p>
+    <div class="co-seg"><h3>The Central Florida spine</h3><p>I-4 runs about 132 miles across the middle of Florida, linking Tampa, Lakeland, Orlando, and the theme-park corridor out to Daytona Beach on the Atlantic. It's the main route through the fastest-growing part of the state — and one of the busiest.</p></div>
+    <div class="co-seg"><h3>Where it slows down</h3><p>Congestion and crashes are the everyday story on I-4, especially through Orlando and the attractions area. Summer thunderstorms and dense morning fog cut visibility fast, and the corridor sees hurricane and tropical-storm impacts in late summer.</p></div>
+    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you across Central Florida, hands-free on CarPlay and Android Auto.</p></div>
   </section>
 
   <section class="co-faq">
-    <h2>I-95 questions, answered</h2>
-    <details><summary>Is I-95 open right now?</summary><p>The <a href="#comap">live map above</a> shows active closures and incidents along I-95 from the DOT feeds we cover; a red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href="../../closures/">road closures map</a>. (Camera and alert coverage is live in most I-95 states and still filling in along the mid-Atlantic.)</p></details>
-    <details><summary>How long is I-95?</summary><p>About 1,908 miles from Miami, Florida to the Maine–Canada border — and the busiest interstate in the United States.</p></details>
-    <details><summary>Why is I-95 so congested?</summary><p>It's the main route between every major East Coast city, so the DC-to-Boston stretch runs near capacity daily. The <a href="#comap">live cameras above</a> show you which stretches are moving before you commit.</p></details>
-    <details><summary>Does I-95 close for hurricanes or snow?</summary><p>Yes — Atlantic hurricanes and flooding hit the Southeast section, and winter storms ice the Northeast. Watch the storms behind them on the <a href="../../weather/">road weather map</a>.</p></details>
+    <h2>I-4 questions, answered</h2>
+    <details><summary>Is I-4 backed up right now?</summary><p>The <a href="#comap">live map above</a> shows active incidents and closures along I-4, straight from FDOT. For every Florida camera, see the <a href="../../cameras/florida/">Florida traffic cameras</a> page.</p></details>
+    <details><summary>How long is I-4?</summary><p>About 132 miles across Central Florida, from Tampa to Daytona Beach.</p></details>
+    <details><summary>Why is I-4 so dangerous?</summary><p>It carries heavy tourist and commuter traffic through a fast-growing corridor, with frequent congestion, sudden thunderstorms, and fog — a combination that makes the Orlando stretch one of the most crash-prone in the country. The <a href="#comap">live cameras above</a> show current conditions.</p></details>
+    <details><summary>Does I-4 flood or close for hurricanes?</summary><p>Yes — Central Florida takes direct hurricane and tropical-storm hits, and I-4 can flood or close in a major storm. Watch the storms on the <a href="../../weather/">road weather map</a>.</p></details>
   </section>
 
   <div class="co-cta">
-    <h2>Know your exact mile marker on I-95 — live</h2>
-    <p>MileCheck shows your nearest mile marker in real time as you drive I-95, plus live DOT alerts on your route and the nearest camera. Free to start, works offline, and runs on CarPlay and Android Auto.</p>
+    <h2>Know your exact mile marker on I-4 — live</h2>
+    <p>MileCheck shows your nearest mile marker in real time as you drive I-4, plus live DOT alerts on your route and the nearest camera. Free to start, works offline, and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
@@ -193,17 +193,17 @@
 
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
-const STATES=["FL","GA","SC","MD","DE","PA","NY","NH","ME"];
-const NUM=95;
-const NAME="I-95";
+const STATES=["FL"];
+const NUM=4;
+const NAME="I-4";
 const POIS=[];
 // Match the interstate as the LEADING token: clean "I-5"/"I5"/"005", or descriptive
 // "I-15 SB Lake Mead N" (NV-style). "I-155" / "US-15" / "SR-15" correctly excluded.
 function isRoute(r){r=String(r||'').toUpperCase().trim();var m=r.match(/^I[\s-]?0*(\d+)/);if(m)return +m[1]===NUM;var n=r.match(/^0*(\d+)$/);if(n)return +n[1]===NUM;return false;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-95 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
-map.fitBounds([[25.0,-82.5],[47.5,-66.5]]);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-4 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
+map.fitBounds([[27.4,-82.9],[29.4,-80.85]]);
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const poiLayer=L.layerGroup().addTo(map);
