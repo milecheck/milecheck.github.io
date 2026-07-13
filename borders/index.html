@@ -43,6 +43,9 @@
     .bw-controls{max-width:1160px;margin:16px auto 0;padding:0 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;}
     .bw-group{display:flex;flex-direction:column;gap:4px;}
     .bw-group .glab{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#8A939B;padding-left:2px;}
+    .bw-col{display:flex;flex-direction:column;gap:10px;}
+    .bw-seg button.dis{opacity:.45;cursor:not-allowed;}
+    .bw-group .gnote{font-size:10.5px;color:#8A939B;margin-top:3px;padding-left:2px;display:none;}
     .bw-seg{display:inline-flex;border:1px solid #E5E5E5;border-radius:10px;overflow:hidden;}
     .bw-seg button{border:0;background:#fff;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;cursor:pointer;color:#5b6670;}
     .bw-seg button.on{background:#0E1116;color:#fff;}
@@ -118,19 +121,23 @@
     </div>
   </div>
   <div class="bw-controls">
-    <div class="bw-group">
-      <span class="glab">Border</span>
-      <div class="bw-seg" id="bwBorder">
-        <button data-b="all" class="on">All</button>
-        <button data-b="Mexican">🇲🇽 Mexico</button>
-        <button data-b="Canadian">🇨🇦 Canada</button>
+    <div class="bw-col">
+      <div class="bw-group">
+        <span class="glab">Border</span>
+        <div class="bw-seg" id="bwBorder">
+          <button data-b="all" class="on">All</button>
+          <button data-b="Mexican">🇲🇽 Mexico</button>
+          <button data-b="Canadian">🇨🇦 Canada</button>
+        </div>
       </div>
-    </div>
-    <div class="bw-group" id="bwDirGroup" style="display:none;">
-      <span class="glab">Direction</span>
-      <div class="bw-seg" id="bwDir">
-        <button data-d="ca">→ 🇨🇦 Into Canada</button>
-        <button data-d="us" class="on">→ 🇺🇸 Into the US</button>
+      <div class="bw-group" id="bwDirGroup">
+        <span class="glab">Direction</span>
+        <div class="bw-seg" id="bwDir">
+          <button data-d="us" class="on">→ 🇺🇸 Into the US</button>
+          <button data-d="ca">→ 🇨🇦 Into Canada</button>
+          <button data-d="mx" class="dis" disabled>→ 🇲🇽 Into Mexico</button>
+        </div>
+        <span class="gnote" id="bwMxNote">Into Mexico: no agency publishes southbound waits — data unavailable</span>
       </div>
     </div>
     <div class="bw-group">
@@ -304,16 +311,24 @@ async function load(){
   render();
   document.getElementById('bwUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · into US: CBP · into Canada: CBSA · refreshes every 5 min';
 }
-document.getElementById('bwBorder').onclick=e=>{if(e.target.dataset.b){
-  border=e.target.dataset.b;
-  [...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));
-  // Direction toggle only makes sense on the Canadian border (CBSA data).
-  // Selecting Canada defaults to Into Canada; Mexico/All lock to Into the US.
-  const dirGrp=document.getElementById('bwDirGroup');
-  if(border==='Canadian'){dirGrp.style.display='flex';setDir('ca');}
-  else{dirGrp.style.display='none';setDir('us');}
-}};
-document.getElementById('bwDir').onclick=e=>{if(e.target.dataset.d)setDir(e.target.dataset.d);};
+function setBorder(b){
+  border=b;
+  [...document.getElementById('bwBorder').children].forEach(x=>x.classList.toggle('on',x.dataset.b===b));
+  // Direction stays visible; CBSA southbound data only exists on the Canadian
+  // border, and nobody publishes into-Mexico waits (pill stays disabled).
+  const caBtn=[...document.getElementById('bwDir').children].find(x=>x.dataset.d==='ca');
+  caBtn.classList.toggle('dis',border==='Mexican');
+  caBtn.disabled=(border==='Mexican');
+  document.getElementById('bwMxNote').style.display=(border==='Canadian')?'none':'block';
+  if(border==='Canadian')setDir('ca'); else setDir('us');
+}
+document.getElementById('bwBorder').onclick=e=>{if(e.target.dataset.b)setBorder(e.target.dataset.b);};
+document.getElementById('bwDir').onclick=e=>{
+  const d=e.target.dataset.d;
+  if(!d||d==='mx'||e.target.disabled)return;
+  if(d==='ca'&&border!=='Canadian'){setBorder('Canadian');return;}  // Into Canada implies the Canadian border
+  setDir(d);
+};
 document.getElementById('bwVeh').onclick=e=>{if(e.target.dataset.v){veh=e.target.dataset.v;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render();}};
 document.getElementById('bwSearch').oninput=e=>{q=e.target.value.toLowerCase().trim();render();};
 load();
