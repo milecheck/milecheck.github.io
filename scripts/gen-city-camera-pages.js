@@ -1,0 +1,308 @@
+// Generates /cameras/<city-slug>/index.html for each metro — a live map of that
+// city's traffic cameras + SEO content, targeting "[city] traffic cameras / traffic".
+// Proximity-filtered around the metro center. Run: node scripts/gen-city-camera-pages.js
+const fs = require('fs');
+const path = require('path');
+
+// state slug map (for cross-linking to the state camera page)
+const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont'};
+const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Montana',AZ:'Arizona',NV:'Nevada',OH:'Ohio',WI:'Wisconsin',NY:'New York',PA:'Pennsylvania',GA:'Georgia',LA:'Louisiana',SC:'South Carolina',FL:'Florida',MI:'Michigan',AL:'Alabama',SD:'South Dakota',AK:'Alaska',ME:'Maine',NH:'New Hampshire',VT:'Vermont'};
+
+const CITIES = [
+  { slug:'seattle', name:'Seattle', state:'WA', dot:'WSDOT', lat:47.606, lon:-122.332, r:45,
+    blurb:`Seattle's freeways are among the most congested in the country, and WSDOT watches them with a dense camera network across the metro and the floating bridges.`,
+    freeways:`Watch <a href="../../corridors/i-5/">I-5</a> through downtown, <a href="../../corridors/i-90/">I-90</a> and SR-520 across Lake Washington, and I-405 on the Eastside.` },
+  { slug:'portland', name:'Portland', state:'OR', dot:'ODOT', lat:45.52, lon:-122.68, r:40,
+    blurb:`Portland's ODOT TripCheck cameras cover the metro freeways and the Columbia River crossings into Washington.`,
+    freeways:`Watch <a href="../../corridors/i-5/">I-5</a> and I-405 through the core, I-84 up the Columbia Gorge, and I-205 on the east side.` },
+  { slug:'los-angeles', name:'Los Angeles', state:'CA', dot:'Caltrans', lat:34.05, lon:-118.24, r:60,
+    blurb:`Los Angeles has the most-watched freeway network in America, and Caltrans covers it with hundreds of live cameras across the basin.`,
+    freeways:`Watch <a href="../../corridors/i-5/">I-5</a>, <a href="../../corridors/i-10/">I-10</a>, I-405, US-101, and I-110 — plus <a href="../../passes/grapevine/">the Grapevine</a> on I-5 to the north and <a href="../../passes/cajon/">Cajon Pass</a> on I-15 to the northeast.` },
+  { slug:'san-francisco', name:'San Francisco Bay Area', state:'CA', dot:'Caltrans', lat:37.77, lon:-122.24, r:55,
+    blurb:`The Bay Area's freeways and bridges are heavily instrumented by Caltrans, from the Bay Bridge to the South Bay.`,
+    freeways:`Watch <a href="../../corridors/i-80/">I-80</a> over the Bay Bridge, US-101 and I-280 down the Peninsula, and I-580, I-680, and I-880 in the East Bay.` },
+  { slug:'sacramento', name:'Sacramento', state:'CA', dot:'Caltrans', lat:38.58, lon:-121.49, r:45,
+    blurb:`Sacramento sits at the crossroads of two major interstates, and Caltrans covers the metro freeways and the causeway across the Yolo Bypass.`,
+    freeways:`Watch <a href="../../corridors/i-5/">I-5</a> and <a href="../../corridors/i-80/">I-80</a> through the city, US-50 toward Lake Tahoe, and CA-99 down the valley.` },
+  { slug:'san-diego', name:'San Diego', state:'CA', dot:'Caltrans', lat:32.72, lon:-117.16, r:45,
+    blurb:`San Diego's Caltrans cameras cover the metro freeways from the border to North County.`,
+    freeways:`Watch <a href="../../corridors/i-5/">I-5</a> along the coast, I-8 east toward the mountains, <a href="../../corridors/i-15/">I-15</a> inland, and I-805 through the core.` },
+  { slug:'las-vegas', name:'Las Vegas', state:'NV', dot:'NDOT', lat:36.17, lon:-115.14, r:45,
+    blurb:`Las Vegas traffic runs on the Spaghetti Bowl and the 215 Beltway, and NDOT's NVRoads cameras cover the valley.`,
+    freeways:`Watch <a href="../../corridors/i-15/">I-15</a> through the Strip, US-95 (the "95"), I-11 toward the dam, and the CC-215 Beltway.` },
+  { slug:'phoenix', name:'Phoenix', state:'AZ', dot:'ADOT', lat:33.45, lon:-112.07, r:55,
+    blurb:`Phoenix's ADOT/AZ511 cameras cover the Valley's freeway system, including the Loop network and the interstate crossings.`,
+    freeways:`Watch <a href="../../corridors/i-10/">I-10</a> and I-17 through the core, plus Loop 101 and Loop 202 around the Valley.` },
+  { slug:'salt-lake-city', name:'Salt Lake City', state:'UT', dot:'UDOT', lat:40.76, lon:-111.89, r:45,
+    blurb:`Salt Lake City's UDOT cameras cover the Wasatch Front freeways and the canyons up to the ski areas.`,
+    freeways:`Watch <a href="../../corridors/i-15/">I-15</a> up the Wasatch Front, <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a>, the I-215 belt, and the Cottonwood canyon roads.` },
+  { slug:'atlanta', name:'Atlanta', state:'GA', dot:'GDOT', lat:33.75, lon:-84.39, r:50,
+    blurb:`Atlanta has one of the largest camera networks in the Southeast, covering the Connector, the Perimeter, and every metro interstate.`,
+    freeways:`Watch <a href="../../corridors/i-75/">I-75</a> and I-85 through the Downtown Connector, the I-285 Perimeter, and I-20 east–west.` },
+  { slug:'orlando', name:'Orlando', state:'FL', dot:'FDOT', lat:28.54, lon:-81.38, r:45,
+    blurb:`Orlando traffic centers on I-4 and the toll roads, all covered by FDOT's FL511 cameras.`,
+    freeways:`Watch <a href="../../corridors/i-4/">I-4</a> through the core and the attractions, plus the 408, 417, and 429 toll roads and Florida's Turnpike.` },
+  { slug:'tampa', name:'Tampa', state:'FL', dot:'FDOT', lat:27.95, lon:-82.46, r:45,
+    blurb:`Tampa Bay's FDOT cameras cover the interstates, the bay crossings, and the Selmon Expressway.`,
+    freeways:`Watch <a href="../../corridors/i-4/">I-4</a> east toward Orlando, I-275 across the bay, <a href="../../corridors/i-75/">I-75</a> to the east, and the Selmon Expressway.` },
+  { slug:'miami', name:'Miami', state:'FL', dot:'FDOT', lat:25.77, lon:-80.19, r:50,
+    blurb:`South Florida's FDOT cameras cover the Miami metro freeways and expressways, some of the busiest in the state.`,
+    freeways:`Watch <a href="../../corridors/i-95/">I-95</a> up the coast, <a href="../../corridors/i-75/">I-75</a> and "Alligator Alley" west, the Palmetto (826), and the Dolphin (836).` },
+  { slug:'detroit', name:'Detroit', state:'MI', dot:'MDOT', lat:42.33, lon:-83.05, r:50,
+    blurb:`Metro Detroit's MDOT "Mi Drive" cameras cover the freeway network across the region.`,
+    freeways:`Watch <a href="../../corridors/i-75/">I-75</a>, <a href="../../corridors/i-94/">I-94</a>, and I-96 through the metro, I-696 across the north, and the Lodge (M-10).` },
+  { slug:'columbus', name:'Columbus', state:'OH', dot:'ODOT', lat:39.96, lon:-82.99, r:40,
+    blurb:`Columbus traffic runs on the interstates and the Outerbelt, all covered by Ohio DOT's OHGO cameras.`,
+    freeways:`Watch I-70 and I-71 through the split downtown, plus the I-270 Outerbelt around the metro.` },
+  { slug:'cleveland', name:'Cleveland', state:'OH', dot:'ODOT', lat:41.50, lon:-81.69, r:40,
+    blurb:`Cleveland's OHGO cameras cover the lakefront freeways and the interchanges, where lake-effect snow is the winter concern.`,
+    freeways:`Watch <a href="../../corridors/i-90/">I-90</a> along the lake, I-71 and I-77 south, and I-480 across the south side.` },
+  { slug:'cincinnati', name:'Cincinnati', state:'OH', dot:'ODOT', lat:39.10, lon:-84.51, r:40,
+    blurb:`Cincinnati's OHGO cameras cover the Ohio River crossings and the metro interstates.`,
+    freeways:`Watch I-71 and <a href="../../corridors/i-75/">I-75</a> through the core and over the river, I-74 to the west, and the I-275 loop.` },
+  { slug:'milwaukee', name:'Milwaukee', state:'WI', dot:'WisDOT', lat:43.04, lon:-87.91, r:40,
+    blurb:`Milwaukee's WisDOT 511WI cameras cover the metro freeways and the Marquette Interchange.`,
+    freeways:`Watch <a href="../../corridors/i-94/">I-94</a> and I-43 through downtown, the Marquette Interchange, and I-894 on the bypass.` },
+  { slug:'pittsburgh', name:'Pittsburgh', state:'PA', dot:'PennDOT', lat:40.44, lon:-79.99, r:40,
+    blurb:`Pittsburgh's freeways thread the rivers and tunnels, all covered by PennDOT's 511PA cameras.`,
+    freeways:`Watch I-376 (the Parkway) and the Fort Pitt Tunnel, I-79 to the west, and I-279 to the north.` },
+  { slug:'philadelphia', name:'Philadelphia', state:'PA', dot:'PennDOT', lat:39.95, lon:-75.16, r:45,
+    blurb:`Philadelphia's 511PA cameras cover the Schuylkill, I-95, and the metro expressways.`,
+    freeways:`Watch <a href="../../corridors/i-95/">I-95</a> along the Delaware, I-76 (the Schuylkill Expressway), and the Vine Street Expressway (I-676).` },
+  { slug:'new-york-city', name:'New York City', state:'NY', dot:'NYSDOT', lat:40.71, lon:-74.01, r:45,
+    blurb:`New York City's NYSDOT 511NY cameras cover the expressways, bridges, and tunnels across the five boroughs and into the suburbs.`,
+    freeways:`Watch <a href="../../corridors/i-95/">I-95</a> (the Cross Bronx), I-495 (the LIE), I-278 (the BQE), and the major bridge and tunnel crossings.` },
+  { slug:'new-orleans', name:'New Orleans', state:'LA', dot:'DOTD', lat:29.95, lon:-90.07, r:40,
+    blurb:`New Orleans traffic runs on I-10 and the lake crossings, covered by Louisiana DOTD's 511LA cameras.`,
+    freeways:`Watch <a href="../../corridors/i-10/">I-10</a> through the metro and over the swamps, I-610 across the city, and US-90 (the "high-rise").` },
+  { slug:'birmingham', name:'Birmingham', state:'AL', dot:'ALDOT', lat:33.52, lon:-86.80, r:40,
+    blurb:`Birmingham's ALDOT/ALGO Traffic cameras cover the interstate crossings and the metro loop.`,
+    freeways:`Watch I-65 north–south, I-20 and I-59 through the core, and the I-459 loop around the south.` },
+  { slug:'buffalo', name:'Buffalo', state:'NY', dot:'NYSDOT', lat:42.89, lon:-78.88, r:40,
+    blurb:`Buffalo's 511NY cameras cover the metro freeways, where lake-effect snow off Lake Erie is the winter story.`,
+    freeways:`Watch <a href="../../corridors/i-90/">I-90</a> (the Thruway), I-190 to the Peace Bridge, I-290, and the Kensington (NY-33).` },
+];
+
+function faq(c){
+  const ss=STATE_SLUG[c.state], sn=STATE_NAME[c.state];
+  return [
+    [`Where can I watch live ${c.name} traffic cameras?`,
+      `Right here — the <a href="#comap">map above</a> shows live ${c.dot} cameras across the ${c.name} area, each tagged with its route and mile marker. For the whole state, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
+    [`Are ${c.name} traffic cameras free?`,
+      `Yes. ${c.dot} publishes its traffic cameras publicly, and MileCheck puts the ${c.name} ones on one map for free — no account. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
+    [`Which freeways have cameras in ${c.name}?`, c.freeways],
+    [`How do I check ${c.name} traffic before I leave?`,
+      `Open the <a href="#comap">live map above</a> and tap any camera near your route to see the road right now. Conditions change fast in a busy metro, so check just before you go — and in the app, the nearest camera and your mile marker update automatically as you drive.`],
+  ];
+}
+function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faq(c).map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
+function crumbJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Cameras','item':'https://milecheckapp.com/cameras/'},{'@type':'ListItem','position':3,'name':c.name+' Cameras','item':'https://milecheckapp.com/cameras/'+c.slug+'/'}]}); }
+
+function page(c){
+  const faqHtml=faq(c).map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
+  const ss=STATE_SLUG[c.state], sn=STATE_NAME[c.state];
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${c.name} Traffic Cameras — Live ${c.dot} Freeway Cams | MileCheck</title>
+  <meta name="description" content="Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave. Free, no account.">
+  <link rel="canonical" href="https://milecheckapp.com/cameras/${c.slug}/">
+  <meta property="og:title" content="${c.name} Traffic Cameras — Live | MileCheck">
+  <meta property="og:description" content="Live ${c.name} freeway cameras on one map, each tagged with route and mile marker.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/cameras/${c.slug}/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">${faqJsonLd(c)}</script>
+  <script type="application/ld+json">${crumbJsonLd(c)}</script>
+  <style>
+    .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
+    .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
+    .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
+    .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .co-stat .n.live{color:#0f7a4f;}
+    .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
+    .co-guide h2{font-size:26px;margin:0 0 6px;}
+    .co-guide p{color:#3a444d;font-size:16px;line-height:1.65;margin:0 0 14px;}
+    .co-guide a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-faq{max-width:1000px;margin:24px auto 0;padding:0 20px;}
+    .co-faq h2{font-size:24px;margin:0 0 14px;}
+    .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .co-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;}
+    .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/">Maps</a>
+        <a href="../../cameras/" class="active">Cameras</a>
+        <a href="../../states/">United States</a>
+        <a href="../../canada/">Canada</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="co-hero">
+    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
+    <h1>${c.name} traffic cameras, live</h1>
+    <p class="sub">See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and mile marker. Free, no account — tap any camera for the latest image.</p>
+    <div class="co-stats">
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${c.name}</div></div>
+      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${c.dot}</div><div class="l">camera source</div></div>
+    </div>
+  </div>
+
+  <div class="co-wrap">
+    <div style="position:relative;">
+      <div id="comap"></div>
+      <div class="co-bs" id="coStatus">Loading live ${c.name} cameras…</div>
+      <div class="co-card" id="coCard"></div>
+    </div>
+  </div>
+
+  <section class="co-guide">
+    <h2>Live traffic cameras across ${c.name}</h2>
+    <p>${c.blurb}</p>
+    <p>${c.freeways}</p>
+    <p>Every camera on this map comes straight from ${c.dot} and is tagged with the route and mile marker where the agency provides it. Tap a camera dot to open its latest image; tap the image to see it full-size. For cameras beyond the metro, see <a href="../${ss}/">${sn} traffic cameras</a> or <a href="../">every highway camera</a>.</p>
+  </section>
+
+  <section class="co-faq">
+    <h2>${c.name} traffic camera questions, answered</h2>
+${faqHtml}
+  </section>
+
+  <div class="co-cta">
+    <h2>The nearest ${c.name} camera, right as you drive</h2>
+    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive ${c.name}'s freeways, plus live DOT alerts on your route. Free to start, works offline, runs on CarPlay and Android Auto.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="co-related">More: <a href="../${ss}/">${sn} cameras</a> · <a href="../">all highway cameras</a> · <a href="../../corridors/">interstate corridors</a> · <a href="../../maps/">all maps</a></p>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../">Highway cameras</a></li>
+            <li><a href="../../closures/">Road closures map</a></li>
+            <li><a href="../../fire/">Wildfire map</a></li>
+            <li><a href="../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: ${c.dot} via MileCheck. Always drive to conditions and follow posted signs.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<script>
+const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+const CODE=${JSON.stringify(c.state)};
+const DOT=${JSON.stringify(c.dot)};
+const CTR=[${c.lat},${c.lon}], RKM=${c.r};
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|M|Loop|\\d)[- ]?\\d*/i;
+const FERRY_RE=/ferr/i;
+function km(a,b,c,d){const R=6371,p=Math.PI/180;const x=Math.sin((c-a)*p/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin((d-b)*p/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · ${c.name} cameras: ${c.dot} via MileCheck',maxZoom:17}).addTo(map);
+map.setView(CTR,11);
+const camLayer=L.layerGroup().addTo(map);
+let CAMS=[];
+function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+const cardEl=document.getElementById('coCard');
+function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
+function thin(items,cellPx){const z=map.getZoom();if(z>=12||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
+function draw(){camLayer.clearLayers();const b=map.getBounds();thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:FERRY_RE.test(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in ${c.name}'):'No cameras loaded — try again shortly.';}
+let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
+fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
+  if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
+  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||''))&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl}));
+  document.getElementById('statCams').textContent=CAMS.length;
+  draw();
+});
+</script>
+
+</body>
+</html>`;
+}
+
+let n=0;
+for(const c of CITIES){
+  const dir=path.join('cameras',c.slug);
+  fs.mkdirSync(dir,{recursive:true});
+  fs.writeFileSync(path.join(dir,'index.html'),page(c));
+  n++;
+  console.log('wrote cameras/'+c.slug+'/index.html  ('+c.name+', '+c.dot+')');
+}
+console.log('\nGenerated '+n+' city camera pages.');
