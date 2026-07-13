@@ -4,16 +4,14 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I-5 Live Traffic Cameras &amp; Road Conditions Right Now (WA · OR · CA) | MileCheck</title>
-  <meta name="description" content="See I-5 right now — live DOT traffic cameras and real-time road conditions from Blaine, WA to the Mexican border, tagged with route and mile marker. Check Siskiyou Summit, the Grapevine, and every pass before you drive. Free, no account.">
+  <title>I-5 Live Traffic Cameras &amp; Road Conditions Right Now | MileCheck</title>
+  <meta name="description" content="See I-5 right now — live DOT traffic cameras and real-time road conditions along the corridor (Washington · Oregon · California), each tagged with route and mile marker. Free, no account.">
   <link rel="canonical" href="https://milecheckapp.com/corridors/i-5/">
-
-  <meta property="og:title" content="I-5 Right Now — Live Cameras &amp; Road Conditions | MileCheck">
-  <meta property="og:description" content="Live I-5 traffic cameras and road conditions from Washington to California, each tagged with its mile marker. See the pass before you drive it.">
+  <meta property="og:title" content="I-5 Right Now — Live Cameras &amp; Conditions | MileCheck">
+  <meta property="og:description" content="Live I-5 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/corridors/i-5/">
   <meta property="og:type" content="website">
-
   <link rel="icon" type="image/png" href="../../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,32 +21,11 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      { "@type": "Question", "name": "Is I-5 open right now?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The live map on this page shows active closures and incidents on I-5 as red and orange markers, pulled straight from WSDOT, ODOT, and Caltrans. Winter closures on I-5 most often hit Siskiyou Summit in southern Oregon and the Grapevine (Tejon Pass) north of Los Angeles." } },
-      { "@type": "Question", "name": "Where can I watch live I-5 traffic cameras?",
-        "acceptedAnswer": { "@type": "Answer", "text": "This page shows live DOT traffic cameras along the entire I-5 corridor across Washington, Oregon, and California, each tagged with its mile marker so you know exactly which stretch you are looking at." } },
-      { "@type": "Question", "name": "What is the highest point on I-5?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Siskiyou Summit in southern Oregon, at 4,310 feet, is the highest point on Interstate 5. It regularly requires chains or closes during winter storms." } },
-      { "@type": "Question", "name": "Which parts of I-5 close in winter?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The two chronic winter trouble spots are Siskiyou Summit near the Oregon–California border and the Grapevine (Tejon Pass) between the Central Valley and Los Angeles. Both can close for snow, ice, or high wind." } }
-    ]
-  }
-  </script>
-  <script type="application/ld+json">
-  { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "MileCheck", "item": "https://milecheckapp.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Maps", "item": "https://milecheckapp.com/maps/" },
-    { "@type": "ListItem", "position": 3, "name": "I-5", "item": "https://milecheckapp.com/corridors/i-5/" }
-  ] }
-  </script>
-
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is I-5 open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active closures and incidents as red and orange markers, straight from WSDOT, ODOT, and Caltrans; if a stretch is fully closed, a red banner appears at the top of this page. For a full US view, see the road closures map. Winter closures on I-5 most often hit Siskiyou Summit and the Grapevine."}},{"@type":"Question","name":"Where can I watch live I-5 traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"Right here — the map above shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See every highway camera in 25 states. For nearest-camera and mile-marker tracking while you drive, the MileCheck app does it hands-free on CarPlay and Android Auto."}},{"@type":"Question","name":"What is the highest point on I-5?","acceptedAnswer":{"@type":"Answer","text":"Siskiyou Summit in southern Oregon, at 4,310 feet — the highest elevation on all 1,381 miles of Interstate 5. It's marked with a ▲ on the map above."}},{"@type":"Question","name":"Which parts of I-5 close in winter?","acceptedAnswer":{"@type":"Answer","text":"Almost always Siskiyou Summit in Oregon and the Grapevine in California — both can close for snow, ice, or high wind. Watch the storms behind them on the road weather map."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Corridors","item":"https://milecheckapp.com/corridors/"},{"@type":"ListItem","position":3,"name":"I-5","item":"https://milecheckapp.com/corridors/i-5/"}]}</script>
   <style>
+    .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
+    .crit-banner a{color:#fff;text-decoration:underline;}
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
     .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
     .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
@@ -58,6 +35,9 @@
     .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
     .co-stat .n.live{color:#0f7a4f;}
     .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    a.co-stat-link{text-decoration:none;color:inherit;transition:border-color .15s;}
+    a.co-stat-link:hover{border-color:#0f7a4f;}
+    a.co-stat-link .l{color:#0f7a4f;}
     .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
     #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
     .co-toggle{display:flex;gap:8px;margin:0 0 12px;flex-wrap:wrap;}
@@ -66,14 +46,22 @@
     .co-chip.on.alr{background:#DC2626;border-color:#DC2626;color:#fff;}
     .co-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
     .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
-    .campic{width:100%;border-radius:8px;margin-top:6px;display:block;min-height:40px;background:#f0f0ee;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card.closure{border:2px solid #DC2626;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card .cc-desc{font-size:13.5px;color:#3a444d;margin-top:8px;line-height:1.5;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .co-card .cc-link{display:inline-block;margin-top:9px;font-weight:700;color:#0f7a4f;text-decoration:none;font-size:13.5px;}
+    .poi-icon{color:#7C3AED;font-size:22px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;cursor:pointer;font-weight:900;}
     .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
     .co-guide h2{font-size:26px;margin:0 0 6px;}
     .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
     .co-seg{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px 22px;margin-bottom:14px;}
-    .co-seg h3{font-size:19px;margin:0 0 4px;display:flex;align-items:center;gap:9px;}
-    .co-seg .miles{font-size:12.5px;font-weight:700;color:#0f7a4f;background:#eafaf2;border-radius:6px;padding:2px 8px;}
+    .co-seg h3{font-size:19px;margin:0 0 4px;}
     .co-seg p{color:#3a444d;font-size:15px;line-height:1.6;margin:8px 0 0;}
+    .co-seg a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .co-faq{max-width:1000px;margin:34px auto 0;padding:0 20px;}
     .co-faq h2{font-size:24px;margin:0 0 14px;}
     .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
@@ -90,9 +78,8 @@
     .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
     .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
     .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
-    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} }
+    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
   </style>
-  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
 <body>
 
@@ -114,15 +101,17 @@
     </div>
   </header>
 
+  <div class="crit-banner" id="critBanner" style="display:none"></div>
+
   <div class="co-hero">
     <div class="eyebrow">Interstate 5 · Washington · Oregon · California</div>
     <h1>I-5 right now: live cameras &amp; road conditions</h1>
-    <p class="sub">See the actual road before you drive it. Live DOT traffic cameras and real-time conditions along the entire I-5 corridor — Blaine at the Canadian border to San Diego at the Mexican border — each tagged with its mile marker. Check Siskiyou Summit or the Grapevine before you commit.</p>
+    <p class="sub">See I-5 right now — live DOT traffic cameras and real-time road conditions from Blaine, WA to the Mexican border, each tagged with route and mile marker. Check Siskiyou Summit, the Grapevine, and every pass before you drive.</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras on I-5</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts on I-5</div></div>
-      <div class="co-stat"><div class="n">1,381 mi</div><div class="l">Canada to Mexico</div></div>
-      <div class="co-stat"><div class="n">4,310 ft</div><div class="l">Siskiyou Summit (high point)</div></div>
+      <div class="co-stat"><div class="n">1,381 mi</div><div class="l">end to end</div></div>
+    <a class="co-stat co-stat-link" href="../../passes/siskiyou/"><div class="n" style="font-size:17px;padding-top:3px">Siskiyou Summit</div><div class="l">4,310 ft · high point ▸</div></a>
     </div>
   </div>
 
@@ -134,35 +123,24 @@
     <div style="position:relative;">
       <div id="comap"></div>
       <div class="co-bs" id="coStatus">Loading live I-5 data…</div>
+      <div class="co-card" id="coCard"></div>
     </div>
   </div>
 
   <section class="co-guide">
-    <h2>The I-5 corridor, state by state</h2>
-    <p class="lede">Interstate 5 is the West Coast's main artery — one continuous route from the Canadian border to the Mexican border. Here's what to watch on each stretch, and where the weather actually bites.</p>
-
-    <div class="co-seg">
-      <h3>I-5 in Washington <span class="miles">MP 0 – 276</span></h3>
-      <p>From the Columbia River at Vancouver north through Kelso, Olympia, Joint Base Lewis-McChord (a chronic congestion choke point), Tacoma, Seattle, and Everett up to the Peace Arch border crossing at Blaine. Snow is rare at sea level, but the Seattle–Tacoma stretch is one of the most congested corridors in the country — the live cameras here are mostly about traffic, not weather.</p>
-    </div>
-
-    <div class="co-seg">
-      <h3>I-5 in Oregon <span class="miles">MP 0 – 308</span></h3>
-      <p>Portland, Salem, Albany, Eugene, Roseburg, Grants Pass, Medford, and Ashland — then the climb to <strong>Siskiyou Summit at 4,310 feet</strong>, the highest point on the entire interstate. This is the winter wildcard: chains, spinouts, and full closures are common here from November through March. If any part of I-5 is going to be closed, it's usually this pass or the Grapevine.</p>
-    </div>
-
-    <div class="co-seg">
-      <h3>I-5 in California <span class="miles">MP 0 – 796</span></h3>
-      <p>Down from the Siskiyous past Mount Shasta and Redding, through Sacramento and the length of the Central Valley, over the <strong>Grapevine (Tejon Pass, 4,144 ft)</strong> into Los Angeles, and on to San Diego. The Grapevine is the other notorious closure point — snow and high wind shut it down several times each winter. In the valley, summer heat and dust are the bigger camera stories.</p>
-    </div>
+    <h2>The I-5 corridor</h2>
+    <p class="lede">Washington · Oregon · California. Here's what to watch, and where the weather actually bites.</p>
+    <div class="co-seg"><h3>I-5 in Washington</h3><p>From the Columbia River at Vancouver north through Kelso, Olympia, Joint Base Lewis-McChord (a chronic congestion choke point), Tacoma, Seattle, and Everett up to the Peace Arch crossing at Blaine. Snow is rare at sea level, but the Seattle–Tacoma stretch is one of the most congested corridors in the country — the cameras here are mostly about traffic, not weather.</p></div>
+    <div class="co-seg"><h3>I-5 in Oregon</h3><p>Portland, Salem, Albany, Eugene, Roseburg, Grants Pass, Medford, and Ashland — then the climb to <a href="../../passes/siskiyou/">Siskiyou Summit</a> at 4,310 feet, the highest point on the entire interstate. This is the winter wildcard: chains, spinouts, and full closures are common from November through March.</p></div>
+    <div class="co-seg"><h3>I-5 in California</h3><p>Down from the Siskiyous past Mount Shasta and Redding, through Sacramento and the length of the Central Valley, over <a href="../../passes/grapevine/">the Grapevine (Tejon Pass, 4,144 ft)</a> into Los Angeles, and on to San Diego. The Grapevine is the other notorious closure point — snow and high wind shut it down several times each winter.</p></div>
   </section>
 
   <section class="co-faq">
     <h2>I-5 questions, answered</h2>
-    <details><summary>Is I-5 open right now?</summary><p>The <a href="#comap">live map above</a> shows active closures and incidents as red and orange markers, straight from WSDOT, ODOT, and Caltrans. For a full US view, see the <a href="../../closures/">road closures map</a>. Winter closures on I-5 most often hit Siskiyou Summit in southern Oregon and the Grapevine north of Los Angeles.</p></details>
-    <details><summary>Where can I watch live I-5 traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live DOT cameras along the whole I-5 corridor across Washington, Oregon, and California, each tagged with its mile marker so you know exactly which stretch you're seeing. Want cameras beyond I-5? See <a href="../../cameras/">every highway camera in 25 states</a>. For nearest-camera and mile-marker tracking while you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.</p></details>
-    <details><summary>What's the highest point on I-5?</summary><p>Siskiyou Summit in southern Oregon, at 4,310 feet. It regularly requires chains or closes during winter storms — the single most weather-sensitive spot on the route. Check it on the <a href="#comap">live map</a> before you head south, or track your exact mile marker over the pass with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">app</a>.</p></details>
-    <details><summary>Which parts of I-5 close in winter?</summary><p>Two chronic trouble spots: Siskiyou Summit near the Oregon–California border, and the Grapevine (Tejon Pass) between the Central Valley and Los Angeles. Both can close for snow, ice, or high wind, sometimes with little warning. Watch the storms feeding these closures on the <a href="../../weather/">road weather map</a>, and closures as they happen on the <a href="../../closures/">closures map</a>.</p></details>
+    <details><summary>Is I-5 open right now?</summary><p>The <a href="#comap">live map above</a> shows active closures and incidents as red and orange markers, straight from WSDOT, ODOT, and Caltrans; if a stretch is fully closed, a red banner appears at the top of this page. For a full US view, see the <a href="../../closures/">road closures map</a>. Winter closures on I-5 most often hit <a href="../../passes/siskiyou/">Siskiyou Summit</a> and <a href="../../passes/grapevine/">the Grapevine</a>.</p></details>
+    <details><summary>Where can I watch live I-5 traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See <a href="../../cameras/">every highway camera in 25 states</a>. For nearest-camera and mile-marker tracking while you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.</p></details>
+    <details><summary>What is the highest point on I-5?</summary><p><a href="../../passes/siskiyou/">Siskiyou Summit</a> in southern Oregon, at 4,310 feet — the highest elevation on all 1,381 miles of Interstate 5. It's marked with a ▲ on the map above.</p></details>
+    <details><summary>Which parts of I-5 close in winter?</summary><p>Almost always <a href="../../passes/siskiyou/">Siskiyou Summit</a> in Oregon and <a href="../../passes/grapevine/">the Grapevine</a> in California — both can close for snow, ice, or high wind. Watch the storms behind them on the <a href="../../weather/">road weather map</a>.</p></details>
   </section>
 
   <div class="co-cta">
@@ -174,7 +152,7 @@
     </div>
   </div>
 
-  <p class="co-related">More live maps: <a href="../../cameras/">all highway cameras</a> · <a href="../../closures/">road closures</a> · <a href="../../fire/">wildfires</a> · <a href="../../maps/">every map</a></p>
+  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../maps/">all maps</a></p>
 
   <footer class="site-footer">
     <div class="container">
@@ -207,7 +185,7 @@
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: WSDOT, ODOT, and Caltrans via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: state DOTs via MileCheck. Always drive to conditions and follow posted signs.</p>
     </div>
   </footer>
 
@@ -215,89 +193,47 @@
 
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
-const STATES=['WA','OR','CA'];
-// I-5 route matcher: WA alerts use "005", OR "I5", CA "I-5"; cameras use "I-5".
-function isI5(r){ return /^(I)?0*5$/.test(String(r||'').toUpperCase().replace(/[\s-]/g,'')); }
+const STATES=["WA","OR","CA"];
+const NUM=5;
+const NAME="I-5";
+const POIS=[{"name":"Siskiyou Summit","slug":"siskiyou","lat":42.0672,"lon":-122.5606},{"name":"The Grapevine","slug":"grapevine","lat":34.7947,"lon":-118.879}];
+function isRoute(r){return new RegExp('^(I)?0*'+NUM+'$').test(String(r||'').toUpperCase().replace(/[\s-]/g,''));}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
-
 const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-  {attribution:'Esri, USGS · I-5 cameras &amp; conditions: WSDOT / ODOT / Caltrans via MileCheck',maxZoom:14}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-5 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
 map.fitBounds([[32.5,-124.4],[49.0,-116.5]]);
-
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
+const poiLayer=L.layerGroup().addTo(map);
 let CAMS=[], ALERTS=[], showCam=true, showAlr=true;
-
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-async function camsFor(st){
-  try{
-    const d=await fetch(WORKER+'/cameras?state='+st).then(r=>r.json());
-    return (d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&isI5(c.route))
-      .map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',mp:c.mile,img:c.imageUrl,st}));
-  }catch(e){return [];}
-}
-async function alertsFor(st){
-  try{
-    const d=await fetch(WORKER+'/incidents?state='+st).then(r=>r.json());
-    return (d['incident-reports']||[]).filter(a=>{
-      const rid=a.location&&a.location['route-id'];
-      const sl=a.location&&a.location['start-location'];
-      return isI5(rid)&&sl&&isFinite(+sl['start-lat'])&&+sl['start-lat'];
-    }).map(a=>{
-      const sl=a.location['start-location'];
-      return {lat:+sl['start-lat'],lon:+sl['start-long'],
-        type:a['event-type-id']||'OT',
-        title:(a.headline||a.description||a['impact-desc']||'I-5 incident').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,140),
-        desc:(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,220),
-        mp:sl['start-mile-marker'], st};
-    });
-  }catch(e){return [];}
-}
-function camPopup(c){
-  const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();
-  return '<div style="min-width:200px"><div style="font-weight:800;font-size:14px">'+esc(c.title)+'</div>'+
-    '<div style="font-size:12px;color:#5b6670;margin-top:2px">I-5'+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+c.st+' DOT</div>'+
-    '<img class="campic" src="'+bust+'" alt="Live I-5 camera: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></div>';
-}
-function alrPopup(a){
-  return '<div style="min-width:200px"><div style="font-weight:800;font-size:14px">'+esc(a.title)+'</div>'+
-    '<div style="font-size:12px;color:#5b6670;margin-top:2px">I-5'+(a.mp>0?' · MP '+Math.round(a.mp):'')+' · '+a.st+'</div>'+
-    (a.desc&&a.desc!==a.title?'<div style="font-size:13px;color:#3a444d;margin-top:6px;line-height:1.5">'+esc(a.desc)+'</div>':'')+'</div>';
-}
-// Thin markers when zoomed out so 900+ dots along one line don't smear into a
-// blob (white borders stack). One dot per ~marker-width grid cell; all show by
-// street level. Counts in the status line stay the true totals.
-function thin(items,cellPx){
-  const z=map.getZoom();
-  if(z>=11||items.length<80) return items;
-  const cell=cellPx*360/(256*Math.pow(2,z));
-  const seen=new Set(), out=[];
-  for(const it of items){ const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell); if(seen.has(k))continue; seen.add(k); out.push(it); }
-  return out;
-}
+const cardEl=document.getElementById('coCard');
+function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closure':'');cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||NAME)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+c.st+' DOT</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function alrCard(a){return '<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+NAME+(a.mp>0?' · MP '+Math.round(a.mp):'')+' · '+a.st+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
+function poiCard(p){return '<div class="cc-title">▲ '+esc(p.name)+'</div><div class="cc-meta">Mountain pass on '+NAME+'</div><div class="cc-desc">Live cameras, chain status, and closures for this pass.</div><a class="cc-link" href="../../passes/'+p.slug+'/">Open '+esc(p.name)+' conditions →</a>';}
+async function camsFor(st){try{const d=await fetch(WORKER+'/cameras?state='+st).then(r=>r.json());return (d.cameras||[]).filter(c=>c.isActive!==false&&+c.lat&&c.imageUrl&&isRoute(c.route)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,st}));}catch(e){return [];}}
+async function alertsFor(st){try{const d=await fetch(WORKER+'/incidents?state='+st).then(r=>r.json());return (d['incident-reports']||[]).filter(a=>{const rid=a.location&&a.location['route-id'];const sl=a.location&&a.location['start-location'];return isRoute(rid)&&sl&&+sl['start-lat'];}).map(a=>{const sl=a.location['start-location'];return {lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:(a.headline||a.description||a['impact-desc']||'Incident').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,140),desc:(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,240),st};});}catch(e){return [];}}
+function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){
-  camLayer.clearLayers(); alrLayer.clearLayers();
-  const b=map.getBounds();
-  if(showCam) thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).bindPopup(()=>camPopup(c),{maxWidth:280}).addTo(camLayer));
-  if(showAlr) thin(ALERTS.filter(a=>b.contains([a.lat,a.lon])),18).forEach(a=>L.circleMarker([a.lat,a.lon],{radius:6,color:'#fff',weight:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:.95}).bindPopup(()=>alrPopup(a),{maxWidth:280}).addTo(alrLayer));
-  const bits=[]; if(showCam)bits.push('📷 '+CAMS.length+' cameras'); if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');
-  document.getElementById('coStatus').textContent = bits.length? bits.join(' · ')+' on I-5' : 'Toggle a layer to view I-5 data';
+  camLayer.clearLayers();alrLayer.clearLayers();const b=map.getBounds();
+  if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));
+  if(showAlr)thin(ALERTS.filter(a=>b.contains([a.lat,a.lon])),18).forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:cl?9:6,color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
+  const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' on '+NAME:'Toggle a layer to view '+NAME+' data';
 }
-let _mvT=null; map.on('moveend',()=>{clearTimeout(_mvT);_mvT=setTimeout(draw,200);});
+// pass / high-point POI markers (always shown, not thinned)
+POIS.forEach(p=>L.marker([p.lat,p.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" title="'+esc(p.name)+'">▲</div>',iconSize:[26,26],iconAnchor:[13,13]}),zIndexOffset:500}).on('click',()=>showCard(poiCard(p),false)).addTo(poiLayer));
+let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 document.getElementById('tgCam').onclick=e=>{showCam=!showCam;e.currentTarget.classList.toggle('on',showCam);draw();};
 document.getElementById('tgAlr').onclick=e=>{showAlr=!showAlr;e.currentTarget.classList.toggle('on',showAlr);draw();};
-
-Promise.all([
-  Promise.all(STATES.map(camsFor)),
-  Promise.all(STATES.map(alertsFor)),
-]).then(([cams,alerts])=>{
-  CAMS=cams.flat(); ALERTS=alerts.flat();
-  document.getElementById('statCams').textContent=CAMS.length;
-  document.getElementById('statAlerts').textContent=ALERTS.length;
+function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
+Promise.all([Promise.all(STATES.map(camsFor)),Promise.all(STATES.map(alertsFor))]).then(([cams,alerts])=>{
+  CAMS=cams.flat();ALERTS=alerts.flat();
+  document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;
   draw();
-}).catch(()=>{ document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.'; });
+  const fc=ALERTS.filter(isFullClosure);
+  if(fc.length){const f=fc[0];const loc=NAME+(f.mp>0?' · MP '+Math.round(f.mp):'')+' · '+f.st;const bn=document.getElementById('critBanner');bn.innerHTML='⚠ CRITICAL: '+NAME+' has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' — nearest at '+loc+(fc.length>1?' (and '+(fc.length-1)+' more)':'')+'. Tap a red marker on the map for details.';bn.style.display='block';}
+}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
 </script>
 
 </body>
