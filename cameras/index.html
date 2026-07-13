@@ -170,7 +170,7 @@
 
   <div class="cl-hero">
     <h1>Live <span class="accent">highway cameras</span></h1>
-    <p class="sub">See the actual road before you drive it. Live highway cameras across 24 US states and 4 Canadian provinces — including the passes drivers check most, like I-90 Snoqualmie and BC's Coquihalla, plus Ontario's 401 — each tagged with its route and mile marker — plus Washington State Ferries terminal cams, FAA aviation weather cams, and National Park webcams. More coverage coming.</p>
+    <p class="sub">See the actual road before you drive it. Live highway cameras across 25 US states and 4 Canadian provinces — including the passes drivers check most, like I-90 Snoqualmie and BC's Coquihalla, plus Ontario's 401 — each tagged with its route and mile marker — plus Washington State Ferries terminal cams, FAA aviation weather cams, and National Park webcams. More coverage coming.</p>
   </div>
 
   <div class="cl-wrap">
@@ -205,6 +205,7 @@
           <option value="NY">New York</option>
           <option value="OH">Ohio</option>
           <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
           <option value="SC">South Carolina</option>
           <option value="SD">South Dakota</option>
           <option value="UT">Utah</option>
@@ -245,7 +246,7 @@
   </div>
 
   <div class="cl-notes">
-    <b>About this data:</b> camera images come directly from state and provincial transportation agencies — Caltrans, WSDOT, ODOT/TripCheck, UDOT, MDT, ADOT/AZ511, NDOT/NVRoads, SDDOT, OHGO/ODOT, WisDOT/511WI, NYSDOT/511NY, DOTD/511LA, GDOT/511GA, SCDOT, AKDOT, FDOT, MDOT/MiDrive, Maryland CHART, WV511, DelDOT, ALDOT/ALGO Traffic, and New England 511 (ME/NH/VT) in the US, plus DriveBC, Ontario 511, 511 Alberta, and Transports Québec in Canada — the same official cameras the agencies use to monitor their own roads. Images refresh on the agency's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the agency provides them; Washington State Ferries terminal and holding-lane cameras are included (blue dots). A few feeds (Delaware, Maryland, West Virginia, and Québec) are video-stream-only and don't appear as snapshot dots on this map yet. 24 US states + 4 Canadian provinces today; more coverage is being added. Contains information licensed under the Open Government Licence — British Columbia, Ontario, and Alberta; Québec camera data via Données Québec (CC-BY 4.0).
+    <b>About this data:</b> camera images come directly from state and provincial transportation agencies — Caltrans, WSDOT, ODOT/TripCheck, UDOT, MDT, ADOT/AZ511, NDOT/NVRoads, SDDOT, OHGO/ODOT, WisDOT/511WI, NYSDOT/511NY, DOTD/511LA, GDOT/511GA, SCDOT, AKDOT, FDOT, MDOT/MiDrive, Maryland CHART, WV511, DelDOT, ALDOT/ALGO Traffic, New England 511 (ME/NH/VT), and 511PA in the US, plus DriveBC, Ontario 511, 511 Alberta, and Transports Québec in Canada — the same official cameras the agencies use to monitor their own roads. Images refresh on the agency's own cycle (typically every few minutes). Camera positions are tagged with route and mile marker where the agency provides them; Washington State Ferries terminal and holding-lane cameras are included (blue dots). A few feeds (Delaware, Maryland, West Virginia, and Québec) are video-stream-only and don't appear as snapshot dots on this map yet. 25 US states + 4 Canadian provinces today; more coverage is being added. Contains information licensed under the Open Government Licence — British Columbia, Ontario, and Alberta; Québec camera data via Données Québec (CC-BY 4.0).
     <br><br>
     <b>Federal networks:</b> aviation weather cameras (grey dots, "Aviation" chip) come from the <b>FAA Weather Camera Program</b> (weathercams.faa.gov) — hundreds of camera sites, densest in Alaska and the mountain West, each with several fixed views; tap a site to open its live views on the FAA's own viewer. Park webcams (purple dots, "Parks" chip) come from the <b>National Park Service</b> (nps.gov) — tap one to see the park's image or open its live view on nps.gov. Imagery and data remain the property of the FAA and NPS respectively.
   </div>
@@ -312,7 +313,7 @@ map.setView([41.5,-105],4.4);
 // US states + Canadian provinces (AB/BC/ON added 2026-07-12 — same Worker
 // /cameras?state= param takes province codes; QC is stream-only, no snapshots
 // to render here). Format: [minLat, minLon, maxLat, maxLon].
-const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"UT":[37,-114.05,42,-109.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"AL":[30.22,-88.47,35.01,-84.89],"NV":[35,-120.01,42,-114.04],"WI":[42.49,-92.89,47.08,-86.80],"NY":[40.48,-79.77,45.02,-71.86],"LA":[28.93,-94.04,33.02,-88.82],"GA":[30.36,-85.61,35,-80.84],"SC":[32.03,-83.35,35.22,-78.54],"CA":[32.5,-124.5,42,-114.1],"AK":[54.5,-170,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"OH":[38.40,-84.82,42.00,-80.52],"FL":[24.40,-87.63,31.00,-80.03],"MI":[41.70,-90.42,48.30,-82.12],"BC":[48.30,-139.06,60.00,-114.03],"ON":[41.66,-95.16,56.86,-74.34],"AB":[48.99,-120.00,60.00,-110.00],"ME":[43.06,-71.08,47.46,-66.95],"NH":[42.70,-72.56,45.31,-70.70],"VT":[42.73,-73.43,45.02,-71.46]};
+const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"UT":[37,-114.05,42,-109.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"AL":[30.22,-88.47,35.01,-84.89],"NV":[35,-120.01,42,-114.04],"WI":[42.49,-92.89,47.08,-86.80],"NY":[40.48,-79.77,45.02,-71.86],"LA":[28.93,-94.04,33.02,-88.82],"GA":[30.36,-85.61,35,-80.84],"SC":[32.03,-83.35,35.22,-78.54],"CA":[32.5,-124.5,42,-114.1],"AK":[54.5,-170,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"OH":[38.40,-84.82,42.00,-80.52],"FL":[24.40,-87.63,31.00,-80.03],"MI":[41.70,-90.42,48.30,-82.12],"BC":[48.30,-139.06,60.00,-114.03],"ON":[41.66,-95.16,56.86,-74.34],"AB":[48.99,-120.00,60.00,-110.00],"ME":[43.06,-71.08,47.46,-66.95],"NH":[42.70,-72.56,45.31,-70.70],"VT":[42.73,-73.43,45.02,-71.46],"PA":[39.72,-80.52,42.27,-74.69]};
 const NAMES={WA:"Washington",OR:"Oregon",UT:"Utah",MT:"Montana",AZ:"Arizona",NV:"Nevada",WI:"Wisconsin",NY:"New York",LA:"Louisiana",GA:"Georgia",SC:"South Carolina",CA:"California",AK:"Alaska",SD:"South Dakota",OH:"Ohio",FL:"Florida",MI:"Michigan",BC:"British Columbia",ON:"Ontario",AB:"Alberta"};
 const AGENCY={WA:"WSDOT",OR:"ODOT",UT:"UDOT",MT:"MDT",AZ:"ADOT",NV:"NDOT",WI:"WisDOT",NY:"NYSDOT",LA:"DOTD",GA:"GDOT",SC:"SCDOT",CA:"Caltrans",AK:"AKDOT",SD:"SDDOT",OH:"OHGO",FL:"FDOT",MI:"MDOT (MiDrive)",BC:"DriveBC",ON:"Ontario 511",AB:"511 Alberta"};
 const sel=document.getElementById('stateSel');
@@ -337,7 +338,7 @@ let CAMS=[];
 // city-street cams stay filtered out.
 // M = Michigan trunklines (M-59); QEW/BC/ON/AB = Canada. Longer tokens sit
 // before shorter prefixes (MT before M) so alternation picks the right one.
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|QEW|BC|ON|AB|M|Loop|\d)[- ]?\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|QEW|BC|ON|AB|M|Loop|\d)[- ]?\d*/i;
 // AK routes are highway NAMES (Glenn Highway, Tok Cutoff) — keep highways, drop city streets.
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
@@ -509,7 +510,7 @@ function render(){
   if(!inView.length){DECK=[];rows.innerHTML=
     typeFilter==='avi'?`<div class="cl-empty">No aviation weather cams here<small>FAA WeatherCams are densest in Alaska and the mountain West — pan the map${AVI_CAMS?'':' (still loading)'}.</small></div>`:
     typeFilter==='nps'?`<div class="cl-empty">No park webcams here<small>National Park Service webcams sit inside the parks — pan to one${NPS_CAMS?'':' (still loading)'}.</small></div>`:
-    `<div class="cl-empty">No cameras here<small>Camera coverage is 24 US states + Canada (BC, Ontario, Alberta on this map) — more coming.</small></div>`;return;}
+    `<div class="cl-empty">No cameras here<small>Camera coverage is 25 US states + Canada (BC, Ontario, Alberta on this map) — more coming.</small></div>`;return;}
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0))||a.title.localeCompare(b.title));
   DECK=sorted;
   if(DIDX>=DECK.length)DIDX=-1;
