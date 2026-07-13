@@ -509,11 +509,27 @@ function render(){
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0))||a.title.localeCompare(b.title));
   DECK=sorted;
   if(DIDX>=DECK.length)DIDX=-1;
-  sorted.slice(0,FED_MARKER_CAP).forEach((c,i)=>{
+  // Thin overlapping dots when zoomed out: hundreds of white-bordered markers packed
+  // on a dense corridor stack their borders into a white smear. Draw one marker per
+  // ~marker-width grid cell (cell scales with zoom; all markers show by street level).
+  // Every camera still appears in the sidebar list. Keep i indexed into `sorted` so the
+  // click-through deck (DECK=sorted) stays aligned.
+  const cellPx=IS_TOUCH?20:16;
+  const cell=z>=12?0:cellPx*360/(256*Math.pow(2,z));
+  const cellSeen=cell>0?new Set():null;
+  let drawn=0;
+  for(let i=0;i<sorted.length&&drawn<FED_MARKER_CAP;i++){
+    const c=sorted[i];
+    if(cell>0){
+      const key=Math.round(c.lat/cell)+'|'+Math.round(c.lon/cell);
+      if(cellSeen.has(key))continue;
+      cellSeen.add(key);
+    }
+    drawn++;
     const m=L.circleMarker([c.lat,c.lon],{radius:IS_TOUCH?9:6,color:'#fff',weight:2,
       fillColor:c.kind==='avi'?'#64748b':c.kind==='nps'?'#7C3AED':(c.ferry?'#1d6fd1':'#0f7a4f'),fillOpacity:.95}).addTo(camLayer);
     m.on('click',()=>showCam(i,false));
-  });
+  }
   rows.innerHTML=sorted.slice(0,60).map((c,i)=>`<div class="crow" data-i="${i}">
       <div class="t"><span class="rt">${c.kind==='avi'?"✈ FAA":c.kind==='nps'?"🏞 NPS":c.ferry?"⛴ Ferry":c.route}${c.mp>0&&!c.ferry?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
       <div class="sub">${c.title}</div>
