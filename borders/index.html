@@ -40,7 +40,9 @@
     .bw-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
     .bw-hero h1 .accent{color:#0A66C2;}
     .bw-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:72ch;line-height:1.55;}
-    .bw-controls{max-width:1160px;margin:16px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+    .bw-controls{max-width:1160px;margin:16px auto 0;padding:0 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;}
+    .bw-group{display:flex;flex-direction:column;gap:4px;}
+    .bw-group .glab{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#8A939B;padding-left:2px;}
     .bw-seg{display:inline-flex;border:1px solid #E5E5E5;border-radius:10px;overflow:hidden;}
     .bw-seg button{border:0;background:#fff;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;cursor:pointer;color:#5b6670;}
     .bw-seg button.on{background:#0E1116;color:#fff;}
@@ -116,20 +118,32 @@
     </div>
   </div>
   <div class="bw-controls">
-    <div class="bw-seg" id="bwBorder">
-      <button data-b="all" class="on">All</button>
-      <button data-b="Mexican">Mexico</button>
-      <button data-b="Canadian">Canada</button>
+    <div class="bw-group">
+      <span class="glab">Border</span>
+      <div class="bw-seg" id="bwBorder">
+        <button data-b="all" class="on">All</button>
+        <button data-b="Mexican">🇲🇽 Mexico</button>
+        <button data-b="Canadian">🇨🇦 Canada</button>
+      </div>
     </div>
-    <div class="bw-seg" id="bwDir" style="display:none;">
-      <button data-d="ca">Into Canada</button>
-      <button data-d="us" class="on">Into the US</button>
+    <div class="bw-group" id="bwDirGroup" style="display:none;">
+      <span class="glab">Direction</span>
+      <div class="bw-seg" id="bwDir">
+        <button data-d="ca">→ 🇨🇦 Into Canada</button>
+        <button data-d="us" class="on">→ 🇺🇸 Into the US</button>
+      </div>
     </div>
-    <div class="bw-veh" id="bwVeh">
-      <button data-v="pass" class="on">Passenger</button>
-      <button data-v="comm">Commercial</button>
+    <div class="bw-group">
+      <span class="glab">Lane type</span>
+      <div class="bw-veh" id="bwVeh">
+        <button data-v="pass" class="on">🚗 Passenger</button>
+        <button data-v="comm">🚛 Commercial</button>
+      </div>
     </div>
-    <input class="bw-search" id="bwSearch" placeholder="Search a crossing (San Ysidro, Blaine, Laredo…)">
+    <div class="bw-group" style="flex:1;min-width:230px;">
+      <span class="glab">Find a crossing</span>
+      <input class="bw-search" id="bwSearch" placeholder="San Ysidro, Blaine, Laredo…">
+    </div>
   </div>
 
   <div class="bw-wrap">
@@ -295,9 +309,9 @@ document.getElementById('bwBorder').onclick=e=>{if(e.target.dataset.b){
   [...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));
   // Direction toggle only makes sense on the Canadian border (CBSA data).
   // Selecting Canada defaults to Into Canada; Mexico/All lock to Into the US.
-  const dirSeg=document.getElementById('bwDir');
-  if(border==='Canadian'){dirSeg.style.display='inline-flex';setDir('ca');}
-  else{dirSeg.style.display='none';setDir('us');}
+  const dirGrp=document.getElementById('bwDirGroup');
+  if(border==='Canadian'){dirGrp.style.display='flex';setDir('ca');}
+  else{dirGrp.style.display='none';setDir('us');}
 }};
 document.getElementById('bwDir').onclick=e=>{if(e.target.dataset.d)setDir(e.target.dataset.d);};
 document.getElementById('bwVeh').onclick=e=>{if(e.target.dataset.v){veh=e.target.dataset.v;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render();}};
