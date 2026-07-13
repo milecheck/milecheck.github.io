@@ -79,7 +79,7 @@
     <div id="mc-content"><div class="mc-skeleton">Locating vehicle&hellip;</div></div>
     <div class="mc-foot">
       <span id="mc-updated">&mdash;</span>
-      <span>50 states &middot; 42 live DOT feeds &middot; <a href="https://milecheckapp.com" target="_blank" rel="noopener">milecheckapp.com</a></span>
+      <span>50 states &middot; 48 live DOT feeds &middot; <a href="https://milecheckapp.com" target="_blank" rel="noopener">milecheckapp.com</a></span>
     </div>
   </div>
 
@@ -129,28 +129,28 @@
     MO:{minLat:36.00,maxLat:40.61,minLon:-95.77,maxLon:-89.10}, CA:{minLat:32.5,maxLat:42.0,minLon:-124.5,maxLon:-114.1},
     HI:{minLat:18.5,maxLat:22.5,minLon:-160.5,maxLon:-154.5}, TX:{minLat:25.8,maxLat:36.5,minLon:-106.7,maxLon:-93.5}
   };
-  // name + DOT label per state; alerts:1 = live DOT feed (48 states), 0 = mileposts only (8).
+  // name + DOT label per state; alerts:1 = live DOT feed (48 states), 0 = mileposts only (WY, RI).
   var STATE_META = {
     WA:{name:"Washington",dot:"WSDOT",alerts:1}, OR:{name:"Oregon",dot:"TripCheck",alerts:1},
     ID:{name:"Idaho",dot:"ITD 511",alerts:1}, MT:{name:"Montana",dot:"MDT",alerts:1},
     AZ:{name:"Arizona",dot:"AZ511",alerts:1}, UT:{name:"Utah",dot:"UDOT",alerts:1},
     CO:{name:"Colorado",dot:"COtrip",alerts:1}, NM:{name:"New Mexico",dot:"NM 511",alerts:1},
-    AK:{name:"Alaska",dot:"AK 511",alerts:1}, SD:{name:"South Dakota",dot:"SD511",alerts:0},
+    AK:{name:"Alaska",dot:"AK 511",alerts:1}, SD:{name:"South Dakota",dot:"SD511",alerts:1},
     ND:{name:"North Dakota",dot:"NDRoads",alerts:1}, NE:{name:"Nebraska",dot:"NE 511",alerts:1},
     KS:{name:"Kansas",dot:"KanDrive",alerts:1}, WI:{name:"Wisconsin",dot:"511WI",alerts:1},
     MN:{name:"Minnesota",dot:"511MN",alerts:1}, IA:{name:"Iowa",dot:"511IA",alerts:1},
     IL:{name:"Illinois",dot:"IDOT",alerts:1}, WY:{name:"Wyoming",dot:"WYDOT",alerts:0},
     ME:{name:"Maine",dot:"MaineDOT",alerts:1}, RI:{name:"Rhode Island",dot:"RIDOT",alerts:0},
-    MI:{name:"Michigan",dot:"Mi Drive",alerts:0}, NV:{name:"Nevada",dot:"NVRoads",alerts:1},
+    MI:{name:"Michigan",dot:"Mi Drive",alerts:1}, NV:{name:"Nevada",dot:"NVRoads",alerts:1},
     NJ:{name:"New Jersey",dot:"511NJ",alerts:1}, DE:{name:"Delaware",dot:"DelDOT",alerts:1},
-    MD:{name:"Maryland",dot:"MD 511",alerts:1}, VA:{name:"Virginia",dot:"VA 511",alerts:0},
-    WV:{name:"West Virginia",dot:"WV 511",alerts:0}, OH:{name:"Ohio",dot:"OHGO",alerts:1},
-    PA:{name:"Pennsylvania",dot:"511PA",alerts:0}, MA:{name:"Massachusetts",dot:"MassDOT",alerts:1},
+    MD:{name:"Maryland",dot:"MD 511",alerts:1}, VA:{name:"Virginia",dot:"VA 511",alerts:1},
+    WV:{name:"West Virginia",dot:"WV 511",alerts:1}, OH:{name:"Ohio",dot:"OHGO",alerts:1},
+    PA:{name:"Pennsylvania",dot:"511PA",alerts:1}, MA:{name:"Massachusetts",dot:"MassDOT",alerts:1},
     VT:{name:"Vermont",dot:"VTrans",alerts:1}, NH:{name:"New Hampshire",dot:"NHDOT",alerts:1},
     CT:{name:"Connecticut",dot:"CTDOT",alerts:1}, NY:{name:"New York",dot:"511NY",alerts:1},
     FL:{name:"Florida",dot:"FL511",alerts:1}, GA:{name:"Georgia",dot:"511GA",alerts:1},
     NC:{name:"North Carolina",dot:"NCDOT",alerts:1}, SC:{name:"South Carolina",dot:"511SC",alerts:1},
-    MS:{name:"Mississippi",dot:"MDOTtraffic",alerts:1}, AL:{name:"Alabama",dot:"ALGO",alerts:0},
+    MS:{name:"Mississippi",dot:"MDOTtraffic",alerts:1}, AL:{name:"Alabama",dot:"ALGO",alerts:1},
     AR:{name:"Arkansas",dot:"IDrive",alerts:1}, LA:{name:"Louisiana",dot:"511LA",alerts:1},
     OK:{name:"Oklahoma",dot:"OK 511",alerts:1}, TN:{name:"Tennessee",dot:"SmartWay",alerts:1},
     KY:{name:"Kentucky",dot:"goKY",alerts:1}, IN:{name:"Indiana",dot:"INDOT",alerts:1},
@@ -250,10 +250,22 @@
              alertsAvail:!!meta.alerts,alerts:[]};
     var jobs=[
       fetch(MILECHECK_API+"/mileposts?state="+state).then(function(r){return r.json();}).then(function(mps){
-        if(!Array.isArray(mps)) return;
+        // Some states (e.g. AZ) return mileposts grouped by route:
+        //   { "I-40":[{mile,lat,lng},...], "US-89":[...] }  — route is the KEY, coords use `lng`.
+        // Flatten to a flat array, attaching the route key to each point and dropping
+        // junk routes with <=2 points (mirrors the phone app's useAllMileposts filter).
+        if(!Array.isArray(mps)){
+          if(mps&&typeof mps==="object"){ var flat=[];
+            for(var rk in mps){ var arr=mps[rk]; if(!Array.isArray(arr)||arr.length<=2) continue;
+              for(var qi=0;qi<arr.length;qi++){ var e=arr[qi]; if(!e) continue;
+                if(e.route==null&&e.highway==null) e.route=rk; flat.push(e); } }
+            mps=flat;
+          } else { return; }
+        }
+        if(!mps.length) return;
         var best=null,bd=Infinity,major=null,md=Infinity;
         for(var i=0;i<mps.length;i++){ var m=mps[i];
-          var la=m.lat!=null?m.lat:m.latitude, lo=m.lon!=null?m.lon:m.longitude;
+          var la=m.lat!=null?m.lat:m.latitude, lo=m.lon!=null?m.lon:(m.lng!=null?m.lng:m.longitude);
           if(la==null||lo==null) continue;
           m._d=haversine(lat,lon,la,lo);
           if(m._d<bd){ bd=m._d; best=m; }
