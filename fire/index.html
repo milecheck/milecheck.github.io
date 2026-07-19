@@ -146,15 +146,10 @@
       .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
     }
 
-    /* Add-to-Home-Screen banner (mobile only, dismissible, shows once) */
-    .mc-a2hs{position:fixed;left:10px;right:10px;bottom:10px;z-index:1200;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:10px 12px;font-size:13px;color:#0E1116;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
-    .mc-a2hs[hidden]{display:none;}
-    .mc-a2hs .a2hs-txt{flex:1;min-width:170px;font-weight:600;line-height:1.4;}
-    .mc-a2hs button{font-family:inherit;cursor:pointer;}
-    .mc-a2hs .a2hs-how{border:1px solid #0f7a4f;color:#0f7a4f;background:#fff;border-radius:8px;font-weight:700;font-size:12.5px;padding:5px 12px;}
-    .mc-a2hs .a2hs-x{border:0;background:none;color:#5b6670;font-size:15px;padding:4px 6px;line-height:1;}
-    .mc-a2hs .a2hs-steps{flex-basis:100%;color:#5b6670;font-size:12.5px;line-height:1.5;border-top:1px solid #F0F0EE;padding-top:8px;}
-    .mc-a2hs .a2hs-steps[hidden]{display:none;}
+    /* #10: Add-to-Home-Screen banner removed — the fire map is native in the app now. */
+    .fire-premium-cta{border:1px solid #cf3320;border-radius:14px;background:#fff5f3;padding:16px;margin-bottom:12px;}
+    .fire-premium-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;color:#cf3320;}
+    .fire-premium-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
 
     @media (max-width: 760px){
       .fire-mapbox{height:56vh;}
@@ -237,6 +232,13 @@
       <div class="fire-list">
         <div class="lh" id="listHead">Largest active fires</div>
         <div class="fire-rows" id="fireRows"><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div></div>
+      </div>
+      <!-- #11: Premium upsell — the fire map is built into the MileCheck app. -->
+      <div class="fire-premium-cta">
+        <h3>🔥 See fires on your map, in the app</h3>
+        <p>The live fire layer — sized by acreage, color-coded, with new-fire alerts near you — is built into MileCheck Premium, right on your driving map. $9.99/yr or $1.99/mo, 7-day free trial.</p>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>
       <div class="fire-cta">
         <h3>Fires don't close roads until they do.</h3>
@@ -1014,41 +1016,6 @@ setInterval(()=>{if(windOn)loadWind();},600000);      // wind obs: 10 min, only 
 </script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
 
-<!-- Add-to-Home-Screen nudge: mobile only, after 20s (or 2nd visit), never again once dismissed -->
-<div class="mc-a2hs" id="mcA2hs" hidden>
-  <span class="a2hs-txt">📍 Keep this map one tap away — add it to your home screen.</span>
-  <button class="a2hs-how" id="mcA2hsHow">How</button>
-  <button class="a2hs-x" id="mcA2hsX" aria-label="Dismiss">&#10005;</button>
-  <div class="a2hs-steps" id="mcA2hsSteps" hidden></div>
-</div>
-<script>(function(){
-  var KEY='fire';
-  try{
-    if(localStorage.getItem('mc_a2hs_dismissed_'+KEY))return;
-    var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
-    if(standalone)return;   // already on the home screen
-    var mobile=window.matchMedia&&(window.matchMedia('(max-width:860px)').matches||window.matchMedia('(pointer:coarse)').matches);
-    if(!mobile)return;
-    var visits=(parseInt(localStorage.getItem('mc_a2hs_visits_'+KEY)||'0',10)||0)+1;
-    localStorage.setItem('mc_a2hs_visits_'+KEY,String(visits));
-    var delay=visits>=2?1500:20000;   // 2nd visit: show almost right away; 1st: after ~20s
-    setTimeout(function(){
-      var el=document.getElementById('mcA2hs');if(!el)return;
-      el.hidden=false;
-      var ua=navigator.userAgent||'';
-      var isIOS=/iPad|iPhone|iPod/.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document);
-      var steps=isIOS
-        ?'iPhone/iPad: tap the <b>Share</b> icon (the square with the &#8593; arrow) in Safari, then <b>Add to Home Screen</b>.'
-        :'Android: tap the <b>&#8942;</b> menu in Chrome, then <b>Add to Home screen</b>.';
-      document.getElementById('mcA2hsHow').onclick=function(){
-        var s=document.getElementById('mcA2hsSteps');s.innerHTML=steps;s.hidden=!s.hidden;
-      };
-      document.getElementById('mcA2hsX').onclick=function(){
-        el.hidden=true;
-        try{localStorage.setItem('mc_a2hs_dismissed_'+KEY,'1');}catch(e){}
-      };
-    },delay);
-  }catch(e){}
-})();</script>
+<!-- #10: Add-to-Home-Screen nudge removed — the fire map is native in the app now. -->
 </body>
 </html>
