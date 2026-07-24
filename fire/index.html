@@ -227,7 +227,9 @@
       <div class="fire-filter" id="fireFilter">
         <button data-f="all" class="on">All fires</button>
         <button data-f="new">New &lt;48h</button>
-        <button data-f="large">1,000+ ac</button>
+        <button data-f="100">100+ ac</button>
+        <button data-f="1000">1k+ ac</button>
+        <button data-f="10000">10k+ ac</button>
       </div>
       <div class="fire-list">
         <div class="lh" id="listHead">Largest active fires</div>
@@ -321,8 +323,10 @@ function envParam(){const b=map.getBounds();
 
 function shownFires(){
   if(fireFilter==="new")   return FIRES.filter(f=>!f.rx&&isNewFire(f));
-  if(fireFilter==="large") return FIRES.filter(f=>f.ac>=1000);
-  return FIRES;
+  // Minimum-acreage tiers mirror the app's fires-min-acres filter (0/100/1k/10k).
+  const min=+fireFilter;
+  if(min>0) return FIRES.filter(f=>f.ac>=min);
+  return FIRES;   // "all" (or the legacy "large" value → NaN → falls through to all)
 }
 function render(){
   fireLayer.clearLayers();
@@ -344,7 +348,10 @@ function render(){
   }
   S.forEach((f,i)=>{
     const out=f.cont!=null&&f.cont>=100;
-    const m=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="fire-ic${out?' out':''}">🔥</div>`,iconSize:[26,26],iconAnchor:[13,13]})}).addTo(fireLayer);
+    // Size the flame by acreage so a 200k-acre megafire reads bigger than a spot fire.
+    // Tiers mirror the app's fireMarkerDiameter() (app/(tabs)/map.tsx) so web + app agree.
+    const d=fireIconSize(f.ac), fs=Math.round(d*0.77);
+    const m=L.marker([f.lat,f.lon],{icon:L.divIcon({className:'',html:`<div class="fire-ic${out?' out':''}" style="font-size:${fs}px">🔥</div>`,iconSize:[d,d],iconAnchor:[d/2,d/2]})}).addTo(fireLayer);
     m.on('click',()=>{ L.popup({maxWidth:280,autoPan:true}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map); });
     if(labeled.has(f.name)){
       const contTxt=f.cont!=null?` · ${Math.round(f.cont)}%`:"";
@@ -354,9 +361,11 @@ function render(){
   });
   const fl=document.getElementById("fireLoading"); if(fl) fl.classList.add("done");
   const bs=document.getElementById("bigStatus");
-  const label=fireFilter==="new"?"new fire":(fireFilter==="large"?"large fire":"active fire");
+  const min=+fireFilter;
+  const acLbl=min>=1000?(min/1000)+"k+ ac":min+"+ ac";
+  const label=fireFilter==="new"?"new fire":(min>0?acLbl+" fire":"active fire");
   if(S.length){bs.className="bigstatus warn";bs.textContent=S.length+" "+label+(S.length>1?"s":"")+" in view";}
-  else{bs.className="bigstatus ok";bs.textContent=fireFilter==="new"?"No new fires in view":(fireFilter==="large"?"No large fires in view":"No active fires in view");}
+  else{bs.className="bigstatus ok";bs.textContent=fireFilter==="new"?"No new fires in view":(min>0?"No "+acLbl+" fires in view":"No active fires in view");}
   const rows=document.getElementById("fireRows");
   if(!S.length){const msg=fireFilter==="new"?"No fires started in the last 48 hours in this view.":(fireFilter==="large"?"No fires over 1,000 acres in this view.":"No active fires in the current map view. Pan or zoom out to see more.");rows.innerHTML=`<div class="fire-empty">✓ All clear<small>${msg}</small></div>`;return;}
   rows.innerHTML=S.slice(0,25).map((f,i)=>{
@@ -379,6 +388,17 @@ function render(){
   });
 }
 const NEW_HOURS=48; // fires discovered within this many hours get a NEW tag
+// Flame-marker diameter by acreage — mirrors the app's fireMarkerDiameter()
+// (app/(tabs)/map.tsx c23 #29). Keep these tiers in sync with the app.
+function fireIconSize(ac){
+  if(!(ac>0))return 24;
+  if(ac<100)return 22;
+  if(ac<1000)return 26;
+  if(ac<10000)return 30;
+  if(ac<50000)return 34;
+  if(ac<100000)return 38;
+  return 44;
+}
 function isNewFire(f){
   if(f.disc==null)return false;
   // WFIGS FireDiscoveryDateTime is epoch milliseconds (a number) OR an ISO string.

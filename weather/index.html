@@ -612,6 +612,20 @@ document.getElementById('togClos').onclick=e=>{
 loadNWS(); loadHurricanes();
 setInterval(loadNWS,300000); setInterval(loadClosures,300000);
 setInterval(loadHurricanes,900000);   // NHC advisories update ~6-hourly; 15 min is plenty
+
+// ===== URL params — deep links + the screenshot harness =====
+// ?state=TX zooms to a state · &closures=1 turns on the DOT-closure layer.
+// Lets social posts link straight to the relevant view AND lets headless renders be deterministic.
+(function(){
+  const q=new URLSearchParams(location.search);
+  const st=(q.get('state')||'').toUpperCase();
+  const goState=()=>{if(st&&SB[st]){sel.value=st;map.invalidateSize();const b=SB[st];map.fitBounds([[b[0],b[1]],[b[2],b[3]]],{animate:false});}};
+  if(st&&SB[st]){goState();setTimeout(goState,900);setTimeout(goState,2500);}   // re-apply once the container has settled (headless renders size late)
+  if(q.get('closures')==='1'){
+    document.getElementById('togClos').click();
+    setTimeout(loadClosures,1500);                            // reload for the states now in view
+  }
+})();
 </script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
 
