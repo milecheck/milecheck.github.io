@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MileCheck — Corridor Boards</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root{
+    --paper:#f0eee6; --card:#fbfaf5; --ink:#17150f; --dim:#8c8677; --line:#dcd7c9;
+    --green:#147a54; --green-deep:#0f5c3f; --amber:#b5771a; --red:#d63a1f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased;line-height:1.5;padding:40px 20px 72px}
+  .wrap{max-width:760px;margin:0 auto}
+  .brand{font-weight:800;font-size:15px;letter-spacing:-.01em}
+  .brand span{color:var(--green)}
+  .eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--dim);margin:2px 0 20px}
+  h1{font-size:27px;font-weight:800;letter-spacing:-.022em;margin-bottom:8px;text-wrap:balance}
+  .lede{color:var(--dim);font-size:15px;max-width:58ch;margin-bottom:6px}
+  h2{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--dim);margin:34px 0 12px;padding-top:18px;border-top:1px solid var(--line)}
+  a.board{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;
+    background:var(--card);border:1px solid var(--line);border-radius:7px;
+    padding:15px 17px;margin-bottom:10px;transition:border-color .15s,transform .15s}
+  a.board:hover,a.board:focus-visible{border-color:var(--green);transform:translateY(-1px)}
+  a.board:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .tx{min-width:0;flex:1}
+  .nm{font-size:17px;font-weight:800;line-height:1.25}
+  .ds{font-size:13.5px;color:var(--dim);margin-top:2px}
+  .tag{flex:none;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 9px;border-radius:99px}
+  .tag.live{background:rgba(20,122,84,.13);color:var(--green-deep)}
+  .tag.concept{background:rgba(181,119,26,.16);color:#7a4f0d}
+  .arrow{flex:none;color:var(--dim);font-size:19px;font-weight:700}
+  .note{background:var(--card);border-left:3px solid var(--amber);border-radius:0 5px 5px 0;
+    padding:13px 15px;font-size:13.5px;color:var(--dim);line-height:1.55;margin:14px 0 0}
+  .note b{color:var(--ink)}
+  footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--dim)}
+</style>
+
+<div class="wrap">
+  <div class="brand">Mile<span>Check</span></div>
+  <div class="eyebrow">Corridor Boards</div>
+
+  <h1>Live boards, running right now</h1>
+  <p class="lede">Each link opens a full board exactly as it would run on a screen in a venue. They pull live data, so what you see is what a customer standing there would see. Best viewed full screen on a laptop or cast to a TV.</p>
+
+  <h2>Live &mdash; real data, right now</h2>
+
+  <a class="board" href="issaquah.html">
+    <div class="tx">
+      <div class="nm">Issaquah &middot; Snoqualmie Pass</div>
+      <div class="ds">Pass status, chain controls, and eight live WSDOT cameras over the summit. For a gas station on I-90 before the pass.</div>
+    </div>
+    <span class="tag live">Live</span><span class="arrow">&rsaquo;</span>
+  </a>
+
+  <a class="board" href="blaine.html">
+    <div class="tx">
+      <div class="nm">Blaine &middot; Border crossings</div>
+      <div class="ds">Peace Arch, Pacific Highway and Lynden side by side with the fastest one flagged. Wait times from U.S. Customs and Border Protection.</div>
+    </div>
+    <span class="tag live">Live</span><span class="arrow">&rsaquo;</span>
+  </a>
+
+  <a class="board" href="ballard.html">
+    <div class="tx">
+      <div class="nm">Ballard &middot; Drawbridges</div>
+      <div class="ds">Live up/down for every Ship Canal bridge, with the detour. For a bar two blocks from the bridge.</div>
+    </div>
+    <span class="tag live">Live</span><span class="arrow">&rsaquo;</span>
+  </a>
+
+  <h2>Concepts &mdash; the idea, not live data</h2>
+
+  <a class="board" href="concept-beat-the-bridge.html">
+    <div class="tx">
+      <div class="nm">Beat the Bridge</div>
+      <div class="ds">Only appears while a bridge is actually up. A counter climbs against the typical seven-minute lift, so the whole room watches one screen.</div>
+    </div>
+    <span class="tag concept">Concept</span><span class="arrow">&rsaquo;</span>
+  </a>
+
+  <a class="board" href="concept-scoreboard.html">
+    <div class="tx">
+      <div class="nm">Bridge Scoreboard</div>
+      <div class="ds">Openings today, longest lift, season records. Turns the bridge into a stat line, which is native to a bar.</div>
+    </div>
+    <span class="tag concept">Concept</span><span class="arrow">&rsaquo;</span>
+  </a>
+
+  <p class="note">
+    <b>About the two concepts.</b> The numbers in them are illustrative. Openings-today, averages and
+    records need historical data, which MileCheck only started recording on July 24 &mdash; give it a
+    couple of weeks and these become real boards on their own. Everything in the Live section above is
+    genuine right now. <b>Please don't show the concept boards to a venue as if the stats were theirs.</b>
+  </p>
+
+  <footer>MileCheck LLC &middot; milecheckapp.com &middot; info@milecheckapp.com</footer>
+</div>
+</html>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MileCheck — Issaquah / Snoqualmie Pass Board</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --paper:#f0eee6; --card:#fbfaf5; --ink:#17150f; --dim:#8c8677; --line:#dcd7c9;
+    --green:#147a54; --green-deep:#0f5c3f; --red:#d63a1f; --amber:#b5771a; --blue:#2f6ea0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    background:#000; color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing:-.01em; -webkit-font-smoothing:antialiased;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  /* 16:9 stage that fills whatever screen it's on */
+  #stage{
+    width:100vw; height:56.25vw; max-height:100vh; max-width:177.78vh;
+    background:var(--paper); container-type:inline-size;
+    display:flex; flex-direction:column; overflow:hidden; position:relative;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    flex:none; display:flex; align-items:center; gap:1.1cqw;
+    padding:1.5cqw 2cqw; background:var(--card); border-bottom:1px solid var(--line);
+  }
+  .dot{width:1.4cqw;height:1.4cqw;border-radius:50%;background:var(--green);flex:none;
+       box-shadow:0 0 1.2cqw rgba(20,122,84,.45)}
+  .host{font-size:2cqw;font-weight:800;line-height:1.1}
+  .pow{font-size:1.1cqw;font-weight:600;color:var(--dim)}
+  .hspace{margin-left:auto;display:flex;align-items:center;gap:1.6cqw}
+  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums}
+  .clock small{display:block;font-size:1.05cqw;font-weight:700;color:var(--dim);letter-spacing:.02em}
+  .live{display:flex;align-items:center;gap:.55cqw;font-size:1.2cqw;font-weight:800;
+        letter-spacing:.13em;color:var(--green)}
+  .live i{width:.85cqw;height:.85cqw;border-radius:50%;background:var(--green);display:block;
+          animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+  /* ---------- body ---------- */
+  main{flex:1;min-height:0;display:flex;gap:1.4cqw;padding:1.5cqw 2cqw}
+  .left{flex:1.02;display:flex;flex-direction:column;gap:1.1cqw;min-height:0}
+  .right{flex:1.28;display:flex;flex-direction:column;gap:1.1cqw;min-height:0}
+
+  .eyebrow{font-size:1.25cqw;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+  .passname{font-size:3.3cqw;font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:.3cqw}
+  .status{font-size:5.4cqw;font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:.6cqw}
+  .st-open{color:var(--green)} .st-warn{color:var(--amber)} .st-bad{color:var(--red)}
+  .statusline{font-size:1.5cqw;font-weight:700;color:var(--dim);margin-top:.7cqw;line-height:1.4}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:.45cqw;
+        padding:1cqw 1.2cqw;display:flex;flex-direction:column;gap:.5cqw}
+  .card h4{font-size:1.1cqw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .row{display:flex;align-items:baseline;gap:.8cqw;font-size:1.5cqw;font-weight:700}
+  .row .v{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
+  .row .v.warn{color:var(--amber)} .row .v.bad{color:var(--red)} .row .v.ok{color:var(--green)}
+
+  /* alerts list */
+  #alerts{flex:1;min-height:0;overflow:hidden}
+  .al{display:flex;gap:.8cqw;padding:.6cqw 0;border-bottom:1px dashed var(--line);font-size:1.35cqw;font-weight:700}
+  .al:last-child{border-bottom:none}
+  .al .mp{flex:none;width:6.4cqw;color:var(--dim);font-variant-numeric:tabular-nums}
+  .al .tx{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .al.hot .tx{color:var(--red)}
+  .none{color:var(--dim);font-size:1.4cqw;font-weight:700;margin:auto;text-align:center;line-height:1.5}
+
+  /* camera */
+  .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
+           background:#cfd6d4;position:relative;display:flex}
+  .camwrap img{width:100%;height:100%;object-fit:cover;display:block;
+               animation:fadein .7s ease}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .camcap{position:absolute;left:0;right:0;bottom:0;
+          background:linear-gradient(transparent,rgba(8,8,6,.82) 42%);
+          padding:2.6cqw 1.2cqw .8cqw;display:flex;align-items:flex-end;gap:1cqw;color:#fff}
+  .camcap .nm{font-size:1.75cqw;font-weight:800;line-height:1.15}
+  .camcap .mp{margin-left:auto;font-size:1.45cqw;font-weight:800;font-variant-numeric:tabular-nums;
+              background:rgba(255,255,255,.16);padding:.25cqw .8cqw;border-radius:.3cqw}
+  .camtag{position:absolute;top:1cqw;left:1cqw;font-size:1cqw;font-weight:800;letter-spacing:.12em;
+          background:var(--red);color:#fff;padding:.3cqw .8cqw;border-radius:.25cqw}
+  /* progress ticks for the camera rotation */
+  .ticks{flex:none;display:flex;gap:.4cqw}
+  .ticks i{flex:1;height:.35cqw;background:var(--line);border-radius:99px;display:block;overflow:hidden;position:relative}
+  .ticks i.on::after{content:"";position:absolute;inset:0;background:var(--green);
+    transform-origin:left;animation:fill var(--dwell,8s) linear forwards}
+  .ticks i.done{background:var(--green)}
+  @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+  /* ---------- footer / ad + QR ---------- */
+  footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
+  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2cqw;min-width:0}
+  .adtag{flex:none;font-size:1cqw;font-weight:800;letter-spacing:.13em;color:#fff;
+         background:var(--amber);padding:.35cqw .9cqw;border-radius:.25cqw}
+  .adtxt{font-size:1.65cqw;font-weight:700;color:#6d4a10;white-space:nowrap;overflow:hidden;
+         text-overflow:ellipsis;animation:fadein .5s ease}
+  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.8cqw 2cqw .8cqw 1.4cqw;
+      border-left:1px solid rgba(181,119,26,.45)}
+  .qr svg{width:5.2cqw;height:5.2cqw;display:block;shape-rendering:crispEdges}
+  .qrtx{font-size:1.15cqw;font-weight:800;color:#6d4a10;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:1cqw}
+
+  .seasonal{font-size:1.15cqw;font-weight:700;color:var(--dim);line-height:1.45}
+</style>
+
+<div id="stage">
+  <header>
+    <span class="dot"></span>
+    <div><div class="host" id="host">Issaquah Chevron</div><div class="pow">powered by MileCheck</div></div>
+    <div class="hspace">
+      <div class="live"><i></i>LIVE</div>
+      <div class="clock"><span id="clock">--:--</span><small id="dateline">&nbsp;</small></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="left">
+      <div>
+        <div class="eyebrow">I-90 East &middot; 35 mi ahead</div>
+        <div class="passname">Snoqualmie Pass</div>
+        <div class="status" id="status">&mdash;</div>
+        <div class="statusline" id="statusline">Loading live conditions&hellip;</div>
+      </div>
+
+      <div class="card" style="flex:none">
+        <h4>At the summit</h4>
+        <div class="row"><span>Air temp</span><span class="v" id="temp">&mdash;</span></div>
+        <div class="row"><span>Elevation</span><span class="v">3,022 ft</span></div>
+        <div class="row"><span>Updated</span><span class="v" id="age">&mdash;</span></div>
+      </div>
+
+      <div class="card" style="flex:1;min-height:0">
+        <h4>On I-90 ahead</h4>
+        <div id="alerts"><div class="none">Loading&hellip;</div></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="camwrap">
+        <span class="camtag">LIVE CAMERA</span>
+        <img id="camimg" alt="">
+        <div class="camcap"><span class="nm" id="camname">&mdash;</span><span class="mp" id="cammp">&mdash;</span></div>
+      </div>
+      <div class="ticks" id="ticks"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="ad">
+      <span class="adtag">SPONSOR</span>
+      <span class="adtxt" id="adtxt">&nbsp;</span>
+    </div>
+    <div class="qr">
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" class="segno"><path class="qrline" stroke="#17150f" d="M0 0.5h7m1 0h1m1 0h1m2 0h4m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h2m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m5 0h1m1 0h4m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h4m2 0h1m4 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h2m1 0h1m-15 1h1m2 0h7m2 0h7m2 0h1m2 0h1m1 0h3m-28 1h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h4m2 0h2m1 0h2m-28 1h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m1 0h3m3 0h2m2 0h1m1 0h1m-26 1h2m4 0h1m1 0h3m2 0h1m2 0h1m3 0h1m2 0h2m2 0h1m-29 1h1m3 0h3m3 0h6m2 0h2m2 0h2m4 0h1m-28 1h3m1 0h1m2 0h1m3 0h1m2 0h3m4 0h7m-29 1h1m1 0h1m1 0h3m2 0h1m4 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m-29 1h1m1 0h4m1 0h8m1 0h1m3 0h1m1 0h2m2 0h1m1 0h1m-28 1h1m2 0h3m2 0h1m2 0h1m2 0h2m6 0h1m1 0h1m-26 1h3m1 0h2m1 0h2m6 0h1m1 0h1m1 0h2m3 0h1m1 0h2m-28 1h4m1 0h2m1 0h3m1 0h4m3 0h1m2 0h1m1 0h2m2 0h1m-29 1h2m3 0h1m2 0h2m3 0h1m4 0h4m3 0h2m-27 1h2m1 0h1m1 0h4m4 0h1m1 0h13m-20 1h1m1 0h4m1 0h1m1 0h1m2 0h1m3 0h2m-26 1h7m1 0h6m1 0h3m1 0h2m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h1m1 0h4m1 0h3m1 0h2m3 0h1m3 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h1m1 0h1m3 0h7m2 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h5m2 0h1m6 0h1m-29 1h1m1 0h3m1 0h1m4 0h2m2 0h1m2 0h4m1 0h2m1 0h3m-29 1h1m5 0h1m2 0h1m1 0h2m1 0h3m5 0h5m1 0h1m-29 1h7m1 0h5m2 0h2m2 0h2m1 0h1"/></svg>
+
+      <div class="qrtx">Take the pass<br>with you<small>Scan &middot; free app</small></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const API = 'https://milepost-proxy.leahgerber93.workers.dev';
+const DWELL = 8000;               // camera dwell, ms
+const REFRESH = 5 * 60 * 1000;    // data refresh, ms
+
+// Pass cameras, MP 33 -> 61, west to east over the summit. Real WSDOT feeds.
+const CAMS = [
+  {mp:'MP 33.2', nm:'North Bend',              u:'https://images.wsdot.wa.gov/sc/090VC03326.jpg'},
+  {mp:'MP 45.2', nm:'Tinkham Road',            u:'https://images.wsdot.wa.gov/sc/090VC04526.jpg'},
+  {mp:'MP 46.8', nm:'Denny Creek',             u:'https://images.wsdot.wa.gov/sc/090VC04680.jpg'},
+  {mp:'MP 52.0', nm:'Snoqualmie Summit',       u:'https://images.wsdot.wa.gov/sc/090VC05200.jpg'},
+  {mp:'MP 53.4', nm:'East Summit',             u:'https://images.wsdot.wa.gov/sc/090VC05347.jpg'},
+  {mp:'MP 55.1', nm:'Hyak',                    u:'https://images.wsdot.wa.gov/sc/090VC05517.jpg'},
+  {mp:'MP 57.7', nm:'Keechelus Snow Shed',     u:'https://images.wsdot.wa.gov/sc/090VC05771.jpg'},
+  {mp:'MP 60.5', nm:'Lake Keechelus Dam',      u:'https://images.wsdot.wa.gov/sc/090VC06050.jpg'},
+];
+
+// One advertiser per month is the real model; rotating here so the demo shows
+// what the slot looks like sold.
+const ADS = [
+  'Summit Auto — chains, wipers & tire checks, Exit 17',
+  'Issaquah Tire — free chain fitting while you wait',
+  'Front Street Diner — open till 10, two blocks from here',
+];
+
+const $ = id => document.getElementById(id);
+
+/* ---------- clock ---------- */
+function tickClock(){
+  const d = new Date();
+  $('clock').textContent = d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  $('dateline').textContent = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+setInterval(tickClock, 1000); tickClock();
+
+/* ---------- camera rotation ---------- */
+let ci = -1;
+const ticks = $('ticks');
+CAMS.forEach(()=>ticks.appendChild(document.createElement('i')));
+ticks.style.setProperty('--dwell', DWELL+'ms');
+
+function nextCam(){
+  ci = (ci + 1) % CAMS.length;
+  const c = CAMS[ci];
+  const img = $('camimg');
+  // cache-bust so the wall board shows a genuinely current frame
+  img.src = c.u + '?t=' + Date.now();
+  img.style.animation='none'; void img.offsetWidth; img.style.animation='';
+  $('camname').textContent = c.nm;
+  $('cammp').textContent = c.mp;
+  [...ticks.children].forEach((t,i)=>{
+    t.className = i===ci ? 'on' : (i<ci ? 'done' : '');
+  });
+}
+// ?cam=N holds one camera and stops the rotation. Used to capture deterministic
+// frames for the sales video; has no effect on a board running on a wall.
+const _pin = new URLSearchParams(location.search).get('cam');
+if (_pin !== null) { ci = (parseInt(_pin,10) || 0) - 1; nextCam(); }
+else { nextCam(); setInterval(nextCam, DWELL); }
+
+/* ---------- ad rotation ---------- */
+let ai = -1;
+function nextAd(){
+  ai = (ai + 1) % ADS.length;
+  const el = $('adtxt');
+  el.textContent = ADS[ai];
+  el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+}
+nextAd(); setInterval(nextAd, 20000);
+
+/* ---------- live data ---------- */
+// Feeds hand back unix seconds, unix ms, or an ISO string depending on the
+// state — and sometimes nothing at all. Never render NaN on a wall.
+function ago(ts){
+  if (ts == null || ts === '') return null;
+  let ms;
+  if (typeof ts === 'number') ms = ts > 1e12 ? ts : ts * 1000;
+  else {
+    const n = Number(ts);
+    ms = Number.isFinite(n) ? (n > 1e12 ? n : n * 1000) : Date.parse(ts);
+  }
+  if (!Number.isFinite(ms)) return null;
+  const mins = Math.floor((Date.now() - ms) / 60000);
+  if (mins < 0 || mins > 60*24*30) return null;   // clock skew or junk
+  if (mins < 1) return 'just now';
+  if (mins < 60) return mins + ' min ago';
+  const h = Math.round(mins/60);
+  if (h < 48) return h + (h === 1 ? ' hour ago' : ' hours ago');
+  const d = Math.round(h/24);
+  return d + (d === 1 ? ' day ago' : ' days ago');
+}
+
+async function load(){
+  try{
+    const [cRes, iRes] = await Promise.all([
+      fetch(API + '/conditions?state=WA').then(r=>r.json()).catch(()=>null),
+      fetch(API + '/incidents?state=WA').then(r=>r.json()).catch(()=>null),
+    ]);
+
+    // --- pass status ---
+    const reports = (cRes && cRes['road-weather-reports']) || [];
+    const pass = reports.find(r => /snoqualmie/i.test(r['location-name'] || ''));
+    const txt  = pass ? (pass['road-surface-condition'] || '') : '';
+    const temp = pass ? pass['air-temperature'] : null;
+
+    // WSDOT reports pass surface conditions Nov 1 - Apr 1 only. Off-season the
+    // field carries an explanatory sentence, not a condition. Say so plainly
+    // rather than dressing an empty field up as a status.
+    const offSeason = /reports have ended|reported on this page from|reported from/i.test(txt);
+    const bad  = /closed|chain|traction required/i.test(txt) && !offSeason;
+    const warn = /snow|ice|slush|compact|pack/i.test(txt) && !offSeason;
+
+    if (offSeason){
+      $('status').className = 'status st-open';
+      $('status').textContent = 'OPEN';
+      $('statusline').innerHTML =
+        'Summer conditions. <span class="seasonal">WSDOT reports pass surface conditions and chain '
+        + 'controls November&nbsp;1 &ndash; April&nbsp;1 &mdash; this panel fills in automatically when '
+        + 'the season opens.</span>';
+    } else if (txt){
+      $('status').className = 'status ' + (bad ? 'st-bad' : warn ? 'st-warn' : 'st-open');
+      $('status').textContent = bad ? 'CHAINS\nREQUIRED' : warn ? 'SNOW &\nICE' : 'OPEN';
+      $('statusline').textContent = txt;
+    } else {
+      $('status').className = 'status st-open';
+      $('status').textContent = 'OPEN';
+      $('statusline').textContent = 'No restrictions reported.';
+    }
+    $('temp').textContent = (temp==null ? '—' : temp + '°F');
+    const stamp = ago(pass && (pass['last-updated'] || pass['date-updated'] || pass['entry-time']));
+    // No usable timestamp from the feed? Show when WE last pulled, which is true
+    // and still tells a venue the board is alive.
+    $('age').textContent = stamp || 'just now';
+
+    // --- I-90 alerts ahead (east of Issaquah, MP 17+) ---
+    const incs = (iRes && iRes['incident-reports']) || [];
+    const list = [];
+    for (const x of incs){
+      const loc = x.location || {};
+      const route = String(loc['route-id'] || '');
+      if (!/(^|\D)(090|I-90)(\D|$)/.test(route)) continue;
+      // Corridor window: Issaquah (MP 17) to Cle Elum (MP 85). Without an upper
+      // bound this pulls in Moses Lake and Spokane — 170+ mi past the pass and
+      // useless to someone standing in this store.
+      const mp = loc['start-location'] && loc['start-location']['start-mile-marker'];
+      if (mp == null || mp < 17 || mp > 85) continue;
+      const head = (x.headline || x['impact-desc'] || x.description || '')
+        .replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+      if (!head) continue;
+      list.push({mp, head, hot:/closed|collision|crash|chain/i.test(head)});
+      if (list.length >= 5) break;
+    }
+    const box = $('alerts');
+    box.innerHTML = list.length
+      ? list.map(a =>
+          `<div class="al${a.hot?' hot':''}"><span class="mp">${a.mp!=null?'MP '+Math.round(a.mp):''}</span>`
+          + `<span class="tx">${a.head}</span></div>`).join('')
+      : '<div class="none">Nothing reported on I-90 east.<br>Clear to the pass.</div>';
+
+  }catch(e){
+    $('statusline').textContent = 'Live feed unavailable — retrying.';
+  }
+}
+load(); setInterval(load, REFRESH);
+</script>
+</html>

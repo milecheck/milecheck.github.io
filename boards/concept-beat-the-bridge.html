@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MileCheck — Beat the Bridge (concept)</title>
+<style>
+  :root{--paper:#f0eee6;--card:#fbfaf5;--ink:#17150f;--dim:#8c8677;--line:#dcd7c9;
+    --green:#147a54;--green-deep:#0f5c3f;--red:#d63a1f;--amber:#b5771a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#000;color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing:-.01em;-webkit-font-smoothing:antialiased;display:flex;align-items:center;
+    justify-content:center;overflow:hidden}
+  #stage{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;background:var(--paper);
+    container-type:inline-size;display:flex;flex-direction:column;overflow:hidden}
+  header{flex:none;display:flex;align-items:center;gap:1.1cqw;padding:1.5cqw 2cqw;
+    background:var(--card);border-bottom:1px solid var(--line)}
+  .dot{width:1.4cqw;height:1.4cqw;border-radius:50%;background:var(--red);flex:none}
+  .host{font-size:2cqw;font-weight:800;line-height:1.1}
+  .pow{font-size:1.1cqw;font-weight:600;color:var(--dim)}
+  .hspace{margin-left:auto;display:flex;align-items:center;gap:1.6cqw}
+  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+  .clock small{display:block;font-size:1.05cqw;font-weight:700;color:var(--dim)}
+  .live{display:flex;align-items:center;gap:.55cqw;font-size:1.25cqw;font-weight:800;
+    letter-spacing:.13em;color:var(--red)}
+  .live i{width:.9cqw;height:.9cqw;border-radius:50%;background:var(--red);display:block;
+    animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+  main{flex:1;min-height:0;display:flex;gap:1.6cqw;padding:1.6cqw 2cqw}
+  .hero{flex:1.35;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{font-size:1.35cqw;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+  .count{font-size:14cqw;font-weight:800;line-height:.86;letter-spacing:-.05em;color:var(--red);
+    font-variant-numeric:tabular-nums;margin:.2cqw 0}
+  .and{font-size:2.2cqw;font-weight:800;color:var(--dim)}
+  .chip{display:inline-block;font-size:1.45cqw;font-weight:800;padding:.5cqw 1.2cqw;
+    border-radius:99px;background:rgba(181,119,26,.16);color:#7a4f0d;margin-top:1cqw}
+  .side{flex:1;display:flex;flex-direction:column;gap:1.1cqw;min-height:0}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:.5cqw;
+    padding:1.2cqw 1.4cqw;display:flex;flex-direction:column;gap:.55cqw}
+  .panel h4{font-size:1.15cqw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .r{display:flex;align-items:baseline;font-size:1.65cqw;font-weight:700}
+  .r .v{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
+  .go{background:#eef6f1;border-color:var(--green)}
+  .go h4{color:var(--green-deep)} .go .v{color:var(--green)}
+  .bar{height:1.1cqw;background:var(--line);border-radius:99px;overflow:hidden;margin-top:.5cqw}
+  .bar i{display:block;height:100%;background:var(--red);border-radius:99px}
+  footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
+  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2cqw;min-width:0}
+  .adtag{flex:none;font-size:1cqw;font-weight:800;letter-spacing:.13em;color:#fff;
+    background:var(--amber);padding:.35cqw .9cqw;border-radius:.25cqw}
+  .adtxt{font-size:1.75cqw;font-weight:700;color:#6d4a10}
+  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.8cqw 2cqw .8cqw 1.4cqw;
+    border-left:1px solid rgba(181,119,26,.45)}
+  .qr svg{width:5.2cqw;height:5.2cqw;display:block;shape-rendering:crispEdges}
+  .qrtx{font-size:1.15cqw;font-weight:800;color:#6d4a10;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:1cqw}
+</style>
+<div id="stage">
+  <header><span class="dot"></span>
+    <div><div class="host">The Ballard Tavern</div><div class="pow">powered by MileCheck</div></div>
+    <div class="hspace"><div class="live"><i></i>BRIDGE IS UP</div>
+      <div class="clock"><span id="clock">--:--</span><small id="dateline">&nbsp;</small></div></div>
+  </header>
+  <main>
+    <div class="hero">
+      <div class="eyebrow">Ballard Bridge &middot; opened <span id="opened">5:42 PM</span></div>
+      <div class="count" id="count">4:12</div>
+      <div class="and">and counting</div>
+      <div><span class="chip">Usually drops around 7 minutes</span></div>
+    </div>
+    <div class="side">
+      <div class="panel">
+        <h4>How this one compares</h4>
+        <div class="r"><span>Average lift</span><span class="v">7 min</span></div>
+        <div class="r"><span>Longest today</span><span class="v">11 min</span></div>
+        <div class="r"><span>Lift number</span><span class="v">8 of today</span></div>
+        <div class="bar"><i id="bar" style="width:60%"></i></div>
+      </div>
+      <div class="panel go" style="flex:1;justify-content:center">
+        <h4>If you'd rather go now</h4>
+        <div class="r"><span>Fremont Bridge</span><span class="v">Down</span></div>
+        <div class="r"><span>Around it</span><span class="v">7 min</span></div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="ad"><span class="adtag">SPONSOR</span>
+      <span class="adtxt">Still up? Another round beats the detour. &mdash; The Ballard Tavern</span></div>
+    <div class="qr"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" class="segno"><path class="qrline" stroke="#17150f" d="M0 0.5h7m1 0h3m1 0h1m1 0h3m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h2m7 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h2m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h4m3 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h2m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h2m3 0h2m4 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h1m1 0h1m2 0h1m-17 1h1m2 0h7m1 0h3m1 0h4m2 0h1m2 0h1m1 0h3m-28 1h1m2 0h1m4 0h3m1 0h1m1 0h1m1 0h4m2 0h2m1 0h2m-28 1h1m1 0h2m2 0h1m1 0h1m2 0h3m1 0h1m4 0h2m2 0h1m1 0h1m-26 1h1m1 0h3m2 0h2m3 0h1m1 0h3m3 0h1m2 0h2m2 0h1m-25 1h1m1 0h1m2 0h2m1 0h2m1 0h1m2 0h2m2 0h2m4 0h1m-27 1h1m2 0h1m1 0h5m1 0h5m4 0h7m-29 1h1m1 0h2m2 0h2m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m-26 1h1m1 0h1m1 0h1m8 0h1m3 0h1m1 0h2m2 0h1m1 0h1m-26 1h1m1 0h2m1 0h1m2 0h1m2 0h2m7 0h1m1 0h1m-26 1h2m2 0h1m5 0h6m1 0h1m1 0h2m3 0h1m1 0h2m-28 1h3m2 0h3m1 0h1m1 0h1m3 0h2m2 0h1m2 0h1m1 0h2m2 0h1m-29 1h2m1 0h1m3 0h3m1 0h1m2 0h1m1 0h1m1 0h4m3 0h2m-27 1h2m1 0h4m1 0h1m2 0h1m1 0h2m1 0h12m-20 1h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m3 0h2m-26 1h7m1 0h1m1 0h2m2 0h2m1 0h1m1 0h2m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h2m3 0h1m2 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m3 0h2m1 0h1m2 0h7m1 0h2m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h2m1 0h1m2 0h1m6 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h2m1 0h5m1 0h2m1 0h3m-29 1h1m5 0h1m2 0h5m2 0h1m1 0h1m3 0h5m1 0h1m-29 1h7m1 0h1m1 0h3m1 0h2m3 0h2m1 0h1"/></svg>
+
+      <div class="qrtx">Get a ping when<br>it drops<small>Scan &middot; free app</small></div></div>
+  </footer>
+</div>
+<script>
+function tick(){const d=new Date();
+  document.getElementById('clock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  document.getElementById('dateline').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+setInterval(tick,1000);tick();
+// ?t=SECONDS pins the counter so video frames can show it climbing.
+// Live install reads raisedAt from /bridge-status instead.
+const q=new URLSearchParams(location.search);
+let secs=parseInt(q.get('t')||'252',10);
+const AVG=7*60;
+function paint(){
+  const m=Math.floor(secs/60), s=secs%60;
+  document.getElementById('count').textContent=m+':'+String(s).padStart(2,'0');
+  document.getElementById('bar').style.width=Math.min(100,(secs/AVG)*100).toFixed(0)+'%';
+}
+paint();
+if(!q.get('t')) setInterval(()=>{secs++;paint();},1000);
+</script>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MileCheck — Ballard Bridge Scoreboard (concept)</title>
+<style>
+  :root{--paper:#f0eee6;--card:#fbfaf5;--ink:#17150f;--dim:#8c8677;--line:#dcd7c9;
+    --green:#147a54;--green-deep:#0f5c3f;--red:#d63a1f;--amber:#b5771a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#000;color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing:-.01em;-webkit-font-smoothing:antialiased;display:flex;align-items:center;
+    justify-content:center;overflow:hidden}
+  #stage{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;background:var(--paper);
+    container-type:inline-size;display:flex;flex-direction:column;overflow:hidden}
+  header{flex:none;display:flex;align-items:center;gap:1.1cqw;padding:1.5cqw 2cqw;
+    background:var(--card);border-bottom:1px solid var(--line)}
+  .dot{width:1.4cqw;height:1.4cqw;border-radius:50%;background:var(--green);flex:none}
+  .host{font-size:2cqw;font-weight:800;line-height:1.1}
+  .pow{font-size:1.1cqw;font-weight:600;color:var(--dim)}
+  .hspace{margin-left:auto;display:flex;align-items:center;gap:1.6cqw}
+  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+  .clock small{display:block;font-size:1.05cqw;font-weight:700;color:var(--dim)}
+  .live{display:flex;align-items:center;gap:.55cqw;font-size:1.2cqw;font-weight:800;
+    letter-spacing:.13em;color:var(--green)}
+  .live i{width:.85cqw;height:.85cqw;border-radius:50%;background:var(--green);display:block}
+  main{flex:1;min-height:0;display:flex;gap:1.5cqw;padding:1.6cqw 2cqw}
+  .col{flex:1;display:flex;flex-direction:column;gap:1.1cqw;min-height:0}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:.5cqw;
+    padding:1.2cqw 1.4cqw;display:flex;flex-direction:column;gap:.5cqw}
+  .panel h4{font-size:1.15cqw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat{display:flex;align-items:baseline}
+  .stat .lb{font-size:1.9cqw;font-weight:700}
+  .stat .n{margin-left:auto;font-size:4.6cqw;font-weight:800;font-variant-numeric:tabular-nums;
+    letter-spacing:-.03em;line-height:1}
+  .stat .u{font-size:1.6cqw;font-weight:700;color:var(--dim);margin-left:.4cqw}
+  .r{display:flex;align-items:baseline;font-size:1.6cqw;font-weight:700;padding:.35cqw 0;
+    border-bottom:1px dashed var(--line)}
+  .r:last-child{border-bottom:none}
+  .r .v{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
+  .now{background:#eef6f1;border-color:var(--green)}
+  .now .lb{color:var(--green-deep)}
+  .peak{background:#fbe1d3;border-color:var(--red)}
+  .peak .r{color:#8a2c12;border-bottom:none}
+  footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
+  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2cqw;min-width:0}
+  .adtag{flex:none;font-size:1cqw;font-weight:800;letter-spacing:.13em;color:#fff;
+    background:var(--amber);padding:.35cqw .9cqw;border-radius:.25cqw}
+  .adtxt{font-size:1.7cqw;font-weight:700;color:#6d4a10}
+  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.8cqw 2cqw .8cqw 1.4cqw;
+    border-left:1px solid rgba(181,119,26,.45)}
+  .qr svg{width:5.2cqw;height:5.2cqw;display:block;shape-rendering:crispEdges}
+  .qrtx{font-size:1.15cqw;font-weight:800;color:#6d4a10;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:1cqw}
+</style>
+<div id="stage">
+  <header><span class="dot"></span>
+    <div><div class="host">The Ballard Tavern</div><div class="pow">powered by MileCheck</div></div>
+    <div class="hspace"><div class="live"><i></i>BRIDGE SCOREBOARD</div>
+      <div class="clock"><span id="clock">--:--</span><small id="dateline">&nbsp;</small></div></div>
+  </header>
+  <main>
+    <div class="col" style="flex:1.15">
+      <div class="panel" style="flex:1;justify-content:center;gap:1.1cqw">
+        <h4>Ballard Bridge &middot; today</h4>
+        <div class="stat"><span class="lb">Openings</span><span class="n" id="s1">7</span></div>
+        <div class="stat"><span class="lb">Longest</span><span class="n" id="s2">11</span><span class="u">min</span></div>
+        <div class="stat"><span class="lb">Total up</span><span class="n" id="s3">48</span><span class="u">min</span></div>
+      </div>
+      <div class="panel peak" style="flex:none">
+        <div class="r"><span>Busiest hour</span><span class="v">5&ndash;6 PM &middot; 3 lifts</span></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel now" style="flex:none">
+        <div class="stat"><span class="lb">Right now</span><span class="n" id="live" style="font-size:3.4cqw;color:var(--green)">DOWN</span></div>
+      </div>
+      <div class="panel" style="flex:1;justify-content:center">
+        <h4>Season records</h4>
+        <div class="r"><span>Most in a day</span><span class="v">14 &middot; Jun 21</span></div>
+        <div class="r"><span>Longest lift</span><span class="v">22 min &middot; May 3</span></div>
+        <div class="r"><span>Quietest day</span><span class="v">1 &middot; Feb 8</span></div>
+        <div class="r"><span>Average lift</span><span class="v">7 min</span></div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="ad"><span class="adtag">SPONSOR</span>
+      <span class="adtxt">Reuben's Brews &mdash; on tap here, brewed six blocks away</span></div>
+    <div class="qr"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" class="segno"><path class="qrline" stroke="#17150f" d="M0 0.5h7m1 0h3m1 0h1m1 0h3m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h2m7 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h2m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h4m3 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h2m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h2m3 0h2m4 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h1m1 0h1m2 0h1m-17 1h1m2 0h7m1 0h3m1 0h4m2 0h1m2 0h1m1 0h3m-28 1h1m2 0h1m4 0h3m1 0h1m1 0h1m1 0h4m2 0h2m1 0h2m-28 1h1m1 0h2m2 0h1m1 0h1m2 0h3m1 0h1m4 0h2m2 0h1m1 0h1m-26 1h1m1 0h3m2 0h2m3 0h1m1 0h3m3 0h1m2 0h2m2 0h1m-25 1h1m1 0h1m2 0h2m1 0h2m1 0h1m2 0h2m2 0h2m4 0h1m-27 1h1m2 0h1m1 0h5m1 0h5m4 0h7m-29 1h1m1 0h2m2 0h2m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m-26 1h1m1 0h1m1 0h1m8 0h1m3 0h1m1 0h2m2 0h1m1 0h1m-26 1h1m1 0h2m1 0h1m2 0h1m2 0h2m7 0h1m1 0h1m-26 1h2m2 0h1m5 0h6m1 0h1m1 0h2m3 0h1m1 0h2m-28 1h3m2 0h3m1 0h1m1 0h1m3 0h2m2 0h1m2 0h1m1 0h2m2 0h1m-29 1h2m1 0h1m3 0h3m1 0h1m2 0h1m1 0h1m1 0h4m3 0h2m-27 1h2m1 0h4m1 0h1m2 0h1m1 0h2m1 0h12m-20 1h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m3 0h2m-26 1h7m1 0h1m1 0h2m2 0h2m1 0h1m1 0h2m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h2m3 0h1m2 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m3 0h2m1 0h1m2 0h7m1 0h2m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h2m1 0h1m2 0h1m6 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h2m1 0h5m1 0h2m1 0h3m-29 1h1m5 0h1m2 0h5m2 0h1m1 0h1m3 0h5m1 0h1m-29 1h7m1 0h1m1 0h3m1 0h2m3 0h2m1 0h1"/></svg>
+
+      <div class="qrtx">Follow this bridge<br>on your phone<small>Scan &middot; free app</small></div></div>
+  </footer>
+</div>
+<script>
+const API='https://milepost-proxy.leahgerber93.workers.dev';
+function tick(){const d=new Date();
+  document.getElementById('clock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  document.getElementById('dateline').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+setInterval(tick,1000);tick();
+// "Right now" is LIVE. The counts around it are illustrative until
+// wait-archive/bridges/ has history — see README-venue-boards.md.
+(async()=>{try{
+  const s=await fetch(API+'/bridge-status').then(r=>r.json());
+  const up=(s.raised||[]).includes('WA-bridge-ballard');
+  const el=document.getElementById('live');
+  el.textContent=up?'UP':'DOWN';
+  el.style.color=up?'var(--red)':'var(--green)';
+}catch(e){}})();
+const q=new URLSearchParams(location.search);
+['s1','s2','s3'].forEach(k=>{if(q.get(k))document.getElementById(k).textContent=q.get(k);});
+</script>
+</html>

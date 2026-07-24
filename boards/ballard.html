@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MileCheck — Ballard / Bridge Board</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --paper:#f0eee6; --card:#fbfaf5; --ink:#17150f; --dim:#8c8677; --line:#dcd7c9;
+    --green:#147a54; --green-deep:#0f5c3f; --red:#d63a1f; --amber:#b5771a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#000;color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  #stage{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;
+    background:var(--paper);container-type:inline-size;display:flex;flex-direction:column;overflow:hidden}
+
+  header{flex:none;display:flex;align-items:center;gap:1.1cqw;padding:1.5cqw 2cqw;
+    background:var(--card);border-bottom:1px solid var(--line)}
+  .dot{width:1.4cqw;height:1.4cqw;border-radius:50%;background:var(--green);flex:none;
+    box-shadow:0 0 1.2cqw rgba(20,122,84,.45)}
+  .host{font-size:2cqw;font-weight:800;line-height:1.1}
+  .pow{font-size:1.1cqw;font-weight:600;color:var(--dim)}
+  .hspace{margin-left:auto;display:flex;align-items:center;gap:1.6cqw}
+  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+  .clock small{display:block;font-size:1.05cqw;font-weight:700;color:var(--dim)}
+  .live{display:flex;align-items:center;gap:.55cqw;font-size:1.2cqw;font-weight:800;
+    letter-spacing:.13em;color:var(--green)}
+  .live i{width:.85cqw;height:.85cqw;border-radius:50%;background:var(--green);display:block;
+    animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+  main{flex:1;min-height:0;display:flex;gap:1.5cqw;padding:1.6cqw 2cqw}
+  .hero{flex:1.15;display:flex;flex-direction:column;justify-content:center;gap:.5cqw}
+  .eyebrow{font-size:1.3cqw;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+  .bname{font-size:3.6cqw;font-weight:800;line-height:1;letter-spacing:-.025em;margin-top:.35cqw}
+  .bstate{font-size:8.4cqw;font-weight:800;line-height:.88;letter-spacing:-.04em;margin:.5cqw 0 .2cqw}
+  .up{color:var(--red)} .down{color:var(--green)}
+  .bsub{font-size:1.65cqw;font-weight:700;color:var(--dim);line-height:1.4}
+  .chip{display:inline-block;font-size:1.3cqw;font-weight:800;letter-spacing:.05em;
+    padding:.45cqw 1.1cqw;border-radius:99px;margin-top:.6cqw}
+  .chip.up{background:rgba(214,58,31,.14);color:#8a2c12}
+  .chip.down{background:rgba(20,122,84,.14);color:var(--green-deep)}
+
+  .side{flex:1;display:flex;flex-direction:column;gap:1cqw;min-height:0}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:.5cqw;
+    padding:1.1cqw 1.3cqw;display:flex;flex-direction:column;gap:.6cqw}
+  .panel h4{font-size:1.15cqw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .panel.go{background:#eef6f1;border-color:var(--green)}
+  .panel.go h4{color:var(--green-deep)}
+  .r{display:flex;align-items:baseline;font-size:1.55cqw;font-weight:700}
+  .r .v{margin-left:auto;font-weight:800}
+  .r .v.up{color:var(--red)} .r .v.down{color:var(--green)}
+  .r small{font-size:1.15cqw;font-weight:700;color:var(--dim);margin-left:.6cqw}
+  .brlist{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-evenly}
+  .brlist .r{font-size:1.9cqw;padding:.25cqw 0;border-bottom:1px dashed var(--line)}
+  .brlist .r:last-child{border-bottom:none}
+
+  footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
+  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2cqw;min-width:0}
+  .adtag{flex:none;font-size:1cqw;font-weight:800;letter-spacing:.13em;color:#fff;
+    background:var(--amber);padding:.35cqw .9cqw;border-radius:.25cqw}
+  .adtxt{font-size:1.7cqw;font-weight:700;color:#6d4a10;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;animation:fade .5s ease}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.8cqw 2cqw .8cqw 1.4cqw;
+    border-left:1px solid rgba(181,119,26,.45)}
+  .qr svg{width:5.2cqw;height:5.2cqw;display:block;shape-rendering:crispEdges}
+  .qrtx{font-size:1.15cqw;font-weight:800;color:#6d4a10;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:1cqw}
+</style>
+
+<div id="stage">
+  <header>
+    <span class="dot"></span>
+    <div><div class="host">The Ballard Tavern</div><div class="pow">powered by MileCheck</div></div>
+    <div class="hspace">
+      <div class="live"><i></i>LIVE BRIDGE STATUS</div>
+      <div class="clock"><span id="clock">--:--</span><small id="dateline">&nbsp;</small></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">2 blocks away &middot; Ship Canal</div>
+      <div class="bname">Ballard Bridge</div>
+      <div class="bstate down" id="state">&mdash;</div>
+      <div class="bsub" id="sub">Checking live status&hellip;</div>
+      <div><span class="chip down" id="chip" style="display:none"></span></div>
+    </div>
+
+    <div class="side">
+      <div class="panel go">
+        <h4>If you're heading out</h4>
+        <div class="r"><span>15th Ave W</span><span class="v down" id="alt1">Clear</span></div>
+        <div class="r"><span>Fremont Bridge</span><span class="v" id="alt2">&mdash;</span></div>
+      </div>
+      <div class="panel" style="flex:1;min-height:0">
+        <h4>Every Ship Canal bridge</h4>
+        <div class="brlist" id="brlist"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="ad"><span class="adtag">SPONSOR</span><span class="adtxt" id="adtxt">&nbsp;</span></div>
+    <div class="qr">
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" class="segno"><path class="qrline" stroke="#17150f" d="M0 0.5h7m1 0h3m1 0h1m1 0h3m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h2m7 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h2m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h4m3 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h2m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h2m3 0h2m4 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h1m1 0h1m2 0h1m-17 1h1m2 0h7m1 0h3m1 0h4m2 0h1m2 0h1m1 0h3m-28 1h1m2 0h1m4 0h3m1 0h1m1 0h1m1 0h4m2 0h2m1 0h2m-28 1h1m1 0h2m2 0h1m1 0h1m2 0h3m1 0h1m4 0h2m2 0h1m1 0h1m-26 1h1m1 0h3m2 0h2m3 0h1m1 0h3m3 0h1m2 0h2m2 0h1m-25 1h1m1 0h1m2 0h2m1 0h2m1 0h1m2 0h2m2 0h2m4 0h1m-27 1h1m2 0h1m1 0h5m1 0h5m4 0h7m-29 1h1m1 0h2m2 0h2m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m-26 1h1m1 0h1m1 0h1m8 0h1m3 0h1m1 0h2m2 0h1m1 0h1m-26 1h1m1 0h2m1 0h1m2 0h1m2 0h2m7 0h1m1 0h1m-26 1h2m2 0h1m5 0h6m1 0h1m1 0h2m3 0h1m1 0h2m-28 1h3m2 0h3m1 0h1m1 0h1m3 0h2m2 0h1m2 0h1m1 0h2m2 0h1m-29 1h2m1 0h1m3 0h3m1 0h1m2 0h1m1 0h1m1 0h4m3 0h2m-27 1h2m1 0h4m1 0h1m2 0h1m1 0h2m1 0h12m-20 1h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m3 0h2m-26 1h7m1 0h1m1 0h2m2 0h2m1 0h1m1 0h2m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h2m3 0h1m2 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m3 0h2m1 0h1m2 0h7m1 0h2m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h2m1 0h1m2 0h1m6 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h2m1 0h5m1 0h2m1 0h3m-29 1h1m5 0h1m2 0h5m2 0h1m1 0h1m3 0h5m1 0h1m-29 1h7m1 0h1m1 0h3m1 0h2m3 0h2m1 0h1"/></svg>
+
+      <div class="qrtx">Follow this bridge<br>on your phone<small>Scan &middot; free app</small></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const API = 'https://milepost-proxy.leahgerber93.workers.dev';
+const REFRESH = 30 * 1000;   // bridges move fast — poll hard
+
+const HOME = 'WA-bridge-ballard';
+const BRIDGES = [
+  {id:'WA-bridge-ballard',    nm:'Ballard'},
+  {id:'WA-bridge-fremont',    nm:'Fremont'},
+  {id:'WA-bridge-university', nm:'University'},
+  {id:'WA-bridge-montlake',   nm:'Montlake'},
+];
+
+const ADS = [
+  "Bridge is up? Happy hour runs till it drops. — The Ballard Tavern",
+  'Reuben’s Brews — on tap here, brewed six blocks away',
+  'Ballard Farmers Market — Sundays, 9 to 2, two blocks over',
+];
+
+const $ = id => document.getElementById(id);
+
+function tickClock(){
+  const d=new Date();
+  $('clock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  $('dateline').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+setInterval(tickClock,1000); tickClock();
+
+let ai=-1;
+function nextAd(){
+  ai=(ai+1)%ADS.length;
+  const el=$('adtxt'); el.textContent=ADS[ai];
+  el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+}
+nextAd(); setInterval(nextAd,20000);
+
+function mins(sinceSec){
+  if(!sinceSec) return null;
+  const m = Math.floor((Date.now()/1000 - sinceSec)/60);
+  return m >= 0 && m < 60*24*14 ? m : null;
+}
+function human(m){
+  if(m==null) return null;
+  if(m < 1) return 'just now';
+  if(m < 60) return m + (m===1?' minute ago':' minutes ago');
+  const h=Math.round(m/60);
+  if(h < 24) return h + (h===1?' hour ago':' hours ago');
+  const d=Math.round(h/24);
+  return d + (d===1?' day ago':' days ago');
+}
+
+async function load(){
+  let s = {raised:[], raisedAt:{}, loweredAt:{}};
+  try{ s = await fetch(API+'/bridge-status').then(r=>r.json()); }catch(e){}
+  const raised = new Set(s.raised || []);
+
+  // --- hero: the bridge outside this door ---
+  const isUp = raised.has(HOME);
+  $('state').className = 'bstate ' + (isUp ? 'up' : 'down');
+  $('state').textContent = isUp ? 'UP' : 'DOWN';
+  const chip = $('chip');
+
+  if (isUp){
+    const m = mins(s.raisedAt && s.raisedAt[HOME]);
+    $('sub').textContent = 'Traffic is stopped on 15th Ave W.';
+    chip.style.display = 'inline-block';
+    chip.className = 'chip up';
+    chip.textContent = m == null ? 'Opening now' : 'Open ' + m + (m===1?' minute':' minutes');
+  } else {
+    const m = mins(s.loweredAt && s.loweredAt[HOME]);
+    const last = human(m);
+    $('sub').innerHTML = 'Clear to cross.<br><span style="font-size:1.25cqw;color:var(--dim)">'
+      + 'This board flips the moment a bridge opens.</span>';
+    if (last){
+      chip.style.display='inline-block';
+      chip.className='chip down';
+      chip.textContent = 'Last opened ' + last;
+    } else {
+      chip.style.display='none';
+    }
+  }
+
+  // --- alternates ---
+  const fremUp = raised.has('WA-bridge-fremont');
+  $('alt2').textContent = fremUp ? 'Up' : 'Down';
+  $('alt2').className = 'v ' + (fremUp ? 'up' : 'down');
+  // 15th Ave W IS the Ballard Bridge deck, so it's only "clear" when that's down.
+  $('alt1').textContent = isUp ? 'Blocked' : 'Clear';
+  $('alt1').className = 'v ' + (isUp ? 'up' : 'down');
+
+  // --- all bridges ---
+  $('brlist').innerHTML = BRIDGES.map(b=>{
+    const up = raised.has(b.id);
+    const m  = up ? mins(s.raisedAt&&s.raisedAt[b.id]) : mins(s.loweredAt&&s.loweredAt[b.id]);
+    const note = up
+      ? (m==null ? '' : '<small>'+m+' min</small>')
+      : (m!=null && m < 180 ? '<small>reopened '+m+'m ago</small>' : '');
+    return `<div class="r"><span>${b.nm}</span>${note}`
+         + `<span class="v ${up?'up':'down'}">${up?'UP':'Down'}</span></div>`;
+  }).join('');
+}
+load(); setInterval(load, REFRESH);
+</script>
+</html>
