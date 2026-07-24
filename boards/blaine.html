@@ -36,7 +36,7 @@
   .dirline h1{font-size:2.5cqw;font-weight:800;letter-spacing:-.02em}
   .dirline .note{font-size:1.25cqw;font-weight:700;color:var(--dim);margin-left:auto}
 
-  .grid{flex:1.5;min-height:0;display:flex;gap:1.2cqw}
+  .grid{flex:1.8;min-height:0;display:flex;gap:1.2cqw}
   .x{flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:.5cqw;
      background:var(--card);padding:1.1cqw 1.2cqw;display:flex;flex-direction:column;gap:.4cqw;
      transition:box-shadow .4s ease,border-color .4s ease}
@@ -47,15 +47,22 @@
   .x.best .flag{color:var(--green)}
   .xname{font-size:2cqw;font-weight:800;line-height:1.05}
   .xsub{font-size:1.2cqw;font-weight:700;color:var(--dim)}
-  .dirs{margin-top:.5cqw;display:flex;flex-direction:column;gap:.25cqw;width:100%}
-  .dir{display:flex;align-items:baseline;gap:.55cqw}
-  .dir .lbl{font-size:1.15cqw;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--dim);width:6.2cqw;flex:none;white-space:nowrap}
-  .wait{font-size:3.9cqw;font-weight:800;line-height:.92;letter-spacing:-.03em;
-    font-variant-numeric:tabular-nums;transition:color .4s ease}
+  /* Lane matrix — mirrors the app's border popup exactly: direction across the
+     top, lane type down the side. The old layout showed one orphan "Trucks
+     north" row with nothing to compare it against, which read as noise. */
+  .mx{margin-top:.45cqw;display:grid;grid-template-columns:auto 1fr 1fr;
+    column-gap:.7cqw;row-gap:.1cqw;align-items:baseline}
+  .mxh{font-size:1.05cqw;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--dim);white-space:nowrap;padding-bottom:.35cqw;
+    border-bottom:1px solid var(--line);margin-bottom:.35cqw}
+  .x.best .mxh{border-bottom-color:rgba(20,122,84,.35)}
+  .mxc{font-size:1.05cqw;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--dim);white-space:nowrap}
+  .wait{font-size:2.8cqw;font-weight:800;line-height:1.06;letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;transition:color .4s ease;white-space:nowrap}
   .wait.ok{color:var(--green)} .wait.mid{color:var(--amber)} .wait.bad{color:var(--red)}
-  .wait.na{color:var(--dim);font-size:2.1cqw;letter-spacing:-.01em}
-  .unit{font-size:1.2cqw;font-weight:700;color:var(--dim)}
+  .wait.na{color:var(--dim);font-size:1.5cqw;letter-spacing:-.01em;font-weight:700}
+  .unit{font-size:1.05cqw;font-weight:700;color:var(--dim);margin-left:.2cqw}
   /* natural-fit camera — same fix as the Ritch board: whole WSDOT frame,
      header + timestamp intact, caption as its own bar rather than an overlay */
   .camrow{flex:1;min-height:0;display:flex;gap:1.2cqw;overflow:hidden}
@@ -137,11 +144,20 @@ const WANT=[
 ];
 
 // WSDOT cameras looking at the crossings themselves.
+// Eight cameras, not four. WSDOT serves a "This image is currently
+// unavailable" card at the SAME url, SAME dimensions (335x249) and a similar
+// file size as a live frame, and sends no CORS header — so a static page has no
+// honest way to tell them apart. Widening the rotation is the real mitigation:
+// one dead camera is now an eighth of the airtime instead of half the screen.
 const CAMS=[
-  {nm:'Peace Arch',        mp:'I-5 · MP 276.5', u:'https://images.wsdot.wa.gov/nw/005vc27650.jpg'},
-  {nm:'Pacific Highway',   mp:'SR 543 · Truck Spur', u:'https://images.wsdot.wa.gov/nw/543vc00099.jpg'},
-  {nm:'Duty Free',         mp:'SR 543 · MP 0.9', u:'https://images.wsdot.wa.gov/nw/543vc00098.jpg'},
-  {nm:'Lynden',            mp:'SR 539 · MP 15.1', u:'https://images.wsdot.wa.gov/nw/539vc01510.jpg'},
+  {nm:'Peace Arch',      mp:'I-5 · MP 276.5',      u:'https://images.wsdot.wa.gov/nw/005vc27650.jpg'},
+  {nm:'Truck Spur',      mp:'SR 543 · MP 0.9',     u:'https://images.wsdot.wa.gov/nw/543vc00099.jpg'},
+  {nm:'Duty Free',       mp:'SR 543 · MP 0.9',     u:'https://images.wsdot.wa.gov/nw/543vc00098.jpg'},
+  {nm:'Lynden',          mp:'SR 539 · MP 15.1',    u:'https://images.wsdot.wa.gov/nw/539vc01510.jpg'},
+  {nm:'D St',            mp:'SR 543 · MP 0.8',     u:'https://images.wsdot.wa.gov/nw/543vc00081.jpg'},
+  {nm:'SR 543 Interchange',mp:'I-5 · MP 275.1',    u:'https://images.wsdot.wa.gov/nw/005vc27512.jpg'},
+  {nm:'Peace Portal Dr', mp:'I-5 · MP 274.1',      u:'https://images.wsdot.wa.gov/nw/005vc27416.jpg'},
+  {nm:'H St Rd',         mp:'SR 539 · MP 14.6',    u:'https://images.wsdot.wa.gov/nw/539vc01467.jpg'},
 ];
 
 const ADS=[
@@ -171,14 +187,9 @@ function rotateCams(){
   for(let s=0;s<2;s++){
     const c=CAMS[(ci+s)%CAMS.length];
     const img=$('ci'+s);
-    img.onload=function(){
-      const r=this.naturalWidth/this.naturalHeight;
-      if(this.naturalWidth<200||r>0.85&&r<1.35){   // WSDOT's placeholder card
-        const alt=CAMS[(CAMS.indexOf(c)+2)%CAMS.length];
-        if(alt&&alt.u!==c.u){this.onload=null;this.src=alt.u+'?t='+Date.now();
-          $('cn'+s).textContent=alt.nm;$('cm'+s).textContent=alt.mp;}
-      }
-    };
+    // No placeholder sniffing: every WSDOT camera, live or dead, is 335x249,
+    // so the old aspect-ratio test (r<1.35) sat exactly on the real cameras'
+    // ratio and could reject good frames. Rotating more cameras is the fix.
     img.src=c.u+'?t='+Date.now();
     img.style.animation='none';void img.offsetWidth;img.style.animation='';
     $('cn'+s).textContent=c.nm; $('cm'+s).textContent=c.mp;
@@ -189,18 +200,39 @@ rotateCams();setInterval(rotateCams,CAMDWELL);
 
 // CBP: delay_minutes is a STRING, often '', with the meaning in
 // operational_status. '' + "Lanes Closed" is NOT a zero wait.
+// "N/A" status means the crossing has no lanes of that type at all (Peace Arch
+// runs no commercial lanes) — different from a lane that exists but is closed,
+// and different again from one that's open with no reported delay.
 function cbpLane(L){
-  if(!L) return {n:null,closed:false};
+  if(!L) return {n:null,closed:false,na:true};
   const st=(L.operational_status||'').toLowerCase();
   const raw=(L.delay_minutes??'').toString().trim();
   const n=raw===''?null:parseInt(raw,10);
-  return {n:Number.isFinite(n)?n:null, closed:st.includes('closed')};
+  return {n:Number.isFinite(n)?n:null, closed:st.includes('closed'), na:st==='n/a'};
 }
-// CBSA: -5 encodes "Not Applicable" (e.g. no commercial lanes at Douglas).
+// CBSA: negative delay encodes "Not Applicable" (Douglas has no truck lanes).
 function caDelay(v){return (typeof v==='number' && v>=0)?v:null;}
+function caNA(status){return /not applicable/i.test(status||'');}
 
 const cls=n=>n==null?'na':n<=10?'ok':n<=30?'mid':'bad';
 const show=(n,closed)=>closed?'Closed':(n==null?'—':n);
+
+// One cell of the lane matrix. Three distinct states the old board blurred
+// together: no lanes of this type here (n/a), lanes exist but shut (Closed),
+// and a real reported wait.
+function cell(n,na,closed){
+  if(na)     return '<span class="wait na">n/a</span>';
+  if(closed) return '<span class="wait na">Closed</span>';
+  if(n==null)return '<span class="wait na">&mdash;</span>';
+  return `<span class="wait ${cls(n)}">${n}<span class="unit">min</span></span>`;
+}
+// Mirrors the app's "Lanes:" line — the same fix that cleared up this exact
+// confusion in the app after the June TestFlight round.
+function laneSummary(r){
+  const comm = !(r.usTrucks.na && (r.caTrucksNA||r.caMissing));
+  const pass = !(r.usCars.na   && (r.caCarsNA  ||r.caMissing));
+  return comm&&pass?'Commercial &middot; Passenger':comm?'Commercial only':pass?'Passenger only':'&mdash;';
+}
 
 async function load(){
   let ca=[],us=[];
@@ -214,10 +246,13 @@ async function load(){
     const open=u?!/closed/i.test(u.port_status||''):true;
     return {
       ...w,
-      caCars: c?caDelay(c['poe-trav-delay']):null,
-      caTrucks: c?caDelay(c['poe-comm-delay']):null,
+      caCars:     c?caDelay(c['poe-trav-delay']):null,
+      caTrucks:   c?caDelay(c['poe-comm-delay']):null,
+      caCarsNA:   c?caNA(c['poe-trav-status']):true,
+      caTrucksNA: c?caNA(c['poe-comm-status']):true,
       caMissing: !c,
-      usLane: u?cbpLane(u.passenger_vehicle_lanes&&u.passenger_vehicle_lanes.standard_lanes):{n:null,closed:false},
+      usCars:   u?cbpLane(u.passenger_vehicle_lanes  && u.passenger_vehicle_lanes.standard_lanes) :{n:null,closed:false,na:true},
+      usTrucks: u?cbpLane(u.commercial_vehicle_lanes && u.commercial_vehicle_lanes.standard_lanes):{n:null,closed:false,na:true},
       open, hours:(u&&u.hours)||'', when:(u&&u.date&&u.time)?u.date+' '+u.time:''
     };
   });
@@ -236,16 +271,21 @@ async function load(){
       <div class="flag">${i===best?'● Fastest into Canada':r.road}</div>
       <div class="xname">${r.nm}</div>
       <div class="xsub">${r.kind} · ${r.away}</div>
-      <div class="dirs">
-        <div class="dir"><span class="lbl">&#8593; Canada</span>
-          <span class="wait ${cls(r.caCars)}">${r.caMissing?'—':show(r.caCars,false)}</span>
-          ${r.caCars==null?'':'<span class="unit">min</span>'}</div>
-        <div class="dir"><span class="lbl">&#8595; U.S.</span>
-          <span class="wait ${r.usLane.closed?'na':cls(r.usLane.n)}" style="font-size:2.9cqw">${show(r.usLane.n,r.usLane.closed)}</span>
-          ${r.usLane.n==null||r.usLane.closed?'':'<span class="unit">min</span>'}</div>
+      <div class="mx">
+        <span class="mxh"></span>
+        <span class="mxh">&#8593; Into Canada</span>
+        <span class="mxh">&#8595; Into U.S.</span>
+
+        <span class="mxc">Commercial</span>
+        ${cell(r.caTrucks, r.caTrucksNA||r.caMissing, false)}
+        ${cell(r.usTrucks.n, r.usTrucks.na, r.usTrucks.closed)}
+
+        <span class="mxc">Passenger</span>
+        ${cell(r.caCars, r.caCarsNA||r.caMissing, false)}
+        ${cell(r.usCars.n, r.usCars.na, r.usCars.closed)}
       </div>
       <div class="lanes">
-        <div class="lane"><span>Trucks north</span><span class="${r.caTrucks==null?'off':''}">${r.caTrucks==null?'n/a':r.caTrucks+' min'}</span></div>
+        <div class="lane"><span>Lanes</span><span>${laneSummary(r)}</span></div>
       </div>
       <div class="hrs"><span>Hours</span><span>${r.hours||'—'}</span></div>
     </div>`;}).join('');

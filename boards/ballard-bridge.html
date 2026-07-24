@@ -78,6 +78,7 @@
 
   /* ---- right rail: other bridges, as small lamps ---- */
   .rail{position:absolute;right:2.2cqw;bottom:8.5cqw;z-index:6;display:flex;flex-direction:column;gap:.65cqw;align-items:flex-end}
+  .br em{font-style:normal;font-weight:700;opacity:.6;font-size:.85em;margin-left:.35cqw;font-variant-numeric:tabular-nums}
   .rlab{font-size:1.1cqw;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-bottom:.2cqw}
   .br{display:flex;align-items:center;gap:.8cqw;font-size:1.55cqw;font-weight:700}
   .br i{width:1cqw;height:1cqw;border-radius:50%;background:var(--go);display:block;
@@ -234,8 +235,9 @@
 const API='https://milepost-proxy.leahgerber93.workers.dev';
 const REFRESH=30*1000;
 const HOME='WA-bridge-ballard';
-const OTHERS=[['r-fremont','WA-bridge-fremont'],['r-university','WA-bridge-university'],
-              ['r-montlake','WA-bridge-montlake']];
+const OTHERS=[['r-fremont','WA-bridge-fremont','Fremont'],
+              ['r-university','WA-bridge-university','University'],
+              ['r-montlake','WA-bridge-montlake','Montlake']];
 const ADS=[
   "Bridge up? Happy hour runs till it drops. — The Ballard Tavern",
   'Reuben’s Brews — on tap here, brewed six blocks away',
@@ -263,6 +265,21 @@ function daysSince(sec){
   return d>=0&&d<3650?d:null;
 }
 
+// Elapsed time, read from across a room. Minutes while it matters most (a lift
+// runs about 7), then h/m, then days once nothing has happened in a while.
+function dur(sec){
+  if(!sec) return null;
+  const s=Math.floor(Date.now()/1000-sec);
+  if(s<0||s>3650*86400) return null;
+  const m=Math.floor(s/60);
+  if(m<1)   return 'just now';
+  if(m<60)  return m+' min';
+  const h=Math.floor(m/60), rm=m%60;
+  if(h<24)  return rm?`${h}h ${rm}m`:`${h}h`;
+  const d=Math.floor(h/24);
+  return d===1?'1 day':`${d} days`;
+}
+
 async function load(){
   let s={raised:[],raisedAt:{},loweredAt:{}};
   try{ s=await fetch(API+'/bridge-status').then(r=>r.json()); }catch(e){}
@@ -273,24 +290,32 @@ async function load(){
   const w=$('vword'), sub=$('vsub');
   if(up){
     w.textContent='STAY'; w.className='vword up';
-    const m=s.raisedAt&&s.raisedAt[HOME]
-      ? Math.max(0,Math.floor((Date.now()/1000-s.raisedAt[HOME])/60)) : null;
-    sub.textContent=m==null
-      ? 'Ballard Bridge is up. Order another.'
-      : `Ballard Bridge has been up ${m} minute${m===1?'':'s'}. Order another.`;
+    const t=dur(s.raisedAt&&s.raisedAt[HOME]);
+    sub.textContent=t
+      ? `Up ${t}. A lift usually runs about 7. Order another.`
+      : 'Ballard Bridge is up. Order another.';
   }else{
     w.textContent='GO'; w.className='vword dn';
-    sub.textContent='Ballard Bridge is down. Clear to cross.';
+    const t=dur(s.loweredAt&&s.loweredAt[HOME]);
+    sub.textContent=t
+      ? `Down ${t} since the last lift. Clear to cross.`
+      : 'Ballard Bridge is down. Clear to cross.';
   }
 
   // The counter resets to 0 the moment it opens — the safety-sign gag.
   const d=up?0:daysSince(s.loweredAt&&s.loweredAt[HOME]);
   $('days').textContent=d==null?'0':d;
 
-  OTHERS.forEach(([id,bid])=>{
+  OTHERS.forEach(([id,bid,label])=>{
     const el=$(id); const o=raised.has(bid);
     el.className='br'+(o?' up':'');
-    el.querySelector('span').textContent=el.querySelector('span').textContent;
+    // Each neighbour carries its own clock: how long it has been up, or how
+    // long since it last came down.
+    const t=dur(o?(s.raisedAt&&s.raisedAt[bid]):(s.loweredAt&&s.loweredAt[bid]));
+    // Say which state the clock belongs to — a bare "9 min" on a wall is
+    // ambiguous from across the room.
+    el.querySelector('span').innerHTML=
+      `${label}${t?` <em>${o?'up':'down'} ${t}</em>`:''}`;
   });
 }
 load();setInterval(load,REFRESH);

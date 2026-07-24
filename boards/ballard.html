@@ -207,7 +207,7 @@ async function load(){
     const up = raised.has(b.id);
     const m  = up ? mins(s.raisedAt&&s.raisedAt[b.id]) : mins(s.loweredAt&&s.loweredAt[b.id]);
     const note = up
-      ? (m==null ? '' : '<small>'+m+' min</small>')
+      ? (m==null ? '' : '<small>up '+m+' min</small>')
       : (m!=null && m < 180 ? '<small>reopened '+m+'m ago</small>' : '');
     return `<div class="r"><span>${b.nm}</span>${note}`
          + `<span class="v ${up?'up':'down'}">${up?'UP':'Down'}</span></div>`;
