@@ -50,14 +50,16 @@
   .passname{font-size:3.3cqw;font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:.3cqw}
   .status{font-size:5.4cqw;font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:.6cqw}
   .st-open{color:var(--green)} .st-warn{color:var(--amber)} .st-bad{color:var(--red)}
-  .statusline{font-size:1.5cqw;font-weight:700;color:var(--dim);margin-top:.7cqw;line-height:1.4}
+  .statusline{font-size:1.42cqw;font-weight:700;color:var(--dim);margin-top:.6cqw;line-height:1.35}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:.45cqw;
-        padding:1cqw 1.2cqw;display:flex;flex-direction:column;gap:.5cqw}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
+        padding:.9cqw 1.2cqw;display:flex;flex-direction:column;gap:.5cqw}
   .card h4{font-size:1.1cqw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
   .row{display:flex;align-items:baseline;gap:.8cqw;font-size:1.5cqw;font-weight:700}
   .row .v{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
   .row .v.warn{color:var(--amber)} .row .v.bad{color:var(--red)} .row .v.ok{color:var(--green)}
+  .row .v.pend{color:var(--dim);font-weight:700;font-size:1.25cqw}
+  .muted{color:var(--dim);font-weight:700}
 
   /* alerts list */
   #alerts{flex:1;min-height:0;overflow:hidden}
@@ -90,13 +92,30 @@
               background:rgba(23,21,15,.08);padding:.25cqw .8cqw;border-radius:.3cqw;color:var(--dim)}
   .camtag{position:absolute;top:.9cqw;left:.9cqw;z-index:2;font-size:1cqw;font-weight:800;
           letter-spacing:.12em;background:var(--red);color:#fff;padding:.3cqw .8cqw;border-radius:.25cqw}
-  /* progress ticks for the camera rotation */
-  .ticks{flex:none;display:flex;gap:.4cqw}
-  .ticks i{flex:1;height:.35cqw;background:var(--line);border-radius:99px;display:block;overflow:hidden;position:relative}
-  .ticks i.on::after{content:"";position:absolute;inset:0;background:var(--green);
-    transform-origin:left;animation:fill var(--dwell,8s) linear forwards}
-  .ticks i.done{background:var(--green)}
-  @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  /* Corridor strip: camera names and mileposts mean nothing to someone who
+     doesn't drive I-90 weekly, so place each camera geographically between here
+     and the pass. Doubles as the rotation indicator. */
+  .strip{flex:none;position:relative;height:5.4cqw;margin-top:.2cqw}
+  .strip .axis{position:absolute;left:0;right:0;top:2.5cqw;height:.22cqw;background:var(--line);border-radius:99px}
+  .strip .done{position:absolute;left:0;top:2.5cqw;height:.22cqw;background:var(--green);
+    border-radius:99px;transition:width .5s ease}
+  .strip .cam{position:absolute;top:2.05cqw;width:1.1cqw;height:1.1cqw;border-radius:50%;
+    background:var(--card);border:.18cqw solid var(--dim);transform:translateX(-50%);
+    transition:all .35s ease}
+  .strip .cam.on{background:var(--green);border-color:var(--green);width:1.7cqw;height:1.7cqw;
+    top:1.78cqw;box-shadow:0 0 0 .35cqw rgba(20,122,84,.18)}
+  .strip .cam.past{background:var(--green);border-color:var(--green)}
+  .strip .end{position:absolute;top:0;font-size:1.15cqw;font-weight:800;color:var(--ink);
+    letter-spacing:-.01em;white-space:nowrap}
+  .strip .end.r{right:0;text-align:right;color:var(--dim)}
+  .strip .lm{position:absolute;top:3.5cqw;font-size:1.05cqw;font-weight:700;color:var(--dim);
+    transform:translateX(-50%);white-space:nowrap}
+  .strip .sum{position:absolute;top:1.55cqw;width:.16cqw;height:2.1cqw;background:var(--amber);
+    transform:translateX(-50%)}
+  .strip .sumlb{position:absolute;top:0;font-size:1.05cqw;font-weight:800;color:var(--amber);
+    transform:translateX(-50%);white-space:nowrap}
+  .strip .live{position:absolute;top:3.5cqw;font-size:1.05cqw;font-weight:800;color:var(--green);
+    transform:translateX(-50%);white-space:nowrap;transition:left .35s ease}
 
   /* ---------- footer / ad + QR ---------- */
   footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
@@ -111,7 +130,7 @@
   .qrtx{font-size:1.15cqw;font-weight:800;color:#6d4a10;line-height:1.3}
   .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:1cqw}
 
-  .seasonal{font-size:1.15cqw;font-weight:700;color:var(--dim);line-height:1.45}
+  .seasonal{font-size:1.1cqw;font-weight:700;color:var(--dim);line-height:1.4}
 </style>
 
 <div id="stage">
@@ -135,9 +154,10 @@
 
       <div class="card" style="flex:none">
         <h4>At the summit</h4>
-        <div class="row"><span>Air temp</span><span class="v" id="temp">&mdash;</span></div>
         <div class="row"><span>Elevation</span><span class="v">3,022 ft</span></div>
-        <div class="row"><span>Updated</span><span class="v" id="age">&mdash;</span></div>
+        <div class="row"><span>Snow depth</span><span class="v" id="snow">&mdash;</span></div>
+        <div class="row"><span>Air temp</span><span class="v" id="temp">&mdash;</span></div>
+        <div class="row" style="font-size:1.15cqw"><span class="muted" id="src">&nbsp;</span></div>
       </div>
 
       <div class="card" style="flex:1;min-height:0">
@@ -154,7 +174,7 @@
         </div>
         <div class="camcap"><span class="nm" id="camname">&mdash;</span><span class="mp" id="cammp">&mdash;</span></div>
       </div>
-      <div class="ticks" id="ticks"></div>
+      <div class="strip" id="strip"></div>
     </div>
   </main>
 
@@ -178,14 +198,14 @@ const REFRESH = 5 * 60 * 1000;    // data refresh, ms
 
 // Pass cameras, MP 33 -> 61, west to east over the summit. Real WSDOT feeds.
 const CAMS = [
-  {mp:'MP 33.2', nm:'North Bend',              u:'https://images.wsdot.wa.gov/sc/090VC03326.jpg'},
-  {mp:'MP 45.2', nm:'Tinkham Road',            u:'https://images.wsdot.wa.gov/sc/090VC04526.jpg'},
-  {mp:'MP 46.8', nm:'Denny Creek',             u:'https://images.wsdot.wa.gov/sc/090VC04680.jpg'},
-  {mp:'MP 52.0', nm:'Snoqualmie Summit',       u:'https://images.wsdot.wa.gov/sc/090VC05200.jpg'},
-  {mp:'MP 53.4', nm:'East Summit',             u:'https://images.wsdot.wa.gov/sc/090VC05347.jpg'},
-  {mp:'MP 55.1', nm:'Hyak',                    u:'https://images.wsdot.wa.gov/sc/090VC05517.jpg'},
-  {mp:'MP 57.7', nm:'Keechelus Snow Shed',     u:'https://images.wsdot.wa.gov/sc/090VC05771.jpg'},
-  {mp:'MP 60.5', nm:'Lake Keechelus Dam',      u:'https://images.wsdot.wa.gov/sc/090VC06050.jpg'},
+  {n:33.2, mp:'MP 33.2', nm:'North Bend',              u:'https://images.wsdot.wa.gov/sc/090VC03326.jpg'},
+  {n:45.2, mp:'MP 45.2', nm:'Tinkham Road',            u:'https://images.wsdot.wa.gov/sc/090VC04526.jpg'},
+  {n:46.8, mp:'MP 46.8', nm:'Denny Creek',             u:'https://images.wsdot.wa.gov/sc/090VC04680.jpg'},
+  {n:52.0, mp:'MP 52.0', nm:'Snoqualmie Summit',       u:'https://images.wsdot.wa.gov/sc/090VC05200.jpg'},
+  {n:53.4, mp:'MP 53.4', nm:'East Summit',             u:'https://images.wsdot.wa.gov/sc/090VC05347.jpg'},
+  {n:55.1, mp:'MP 55.1', nm:'Hyak',                    u:'https://images.wsdot.wa.gov/sc/090VC05517.jpg'},
+  {n:57.7, mp:'MP 57.7', nm:'Keechelus Snow Shed',     u:'https://images.wsdot.wa.gov/sc/090VC05771.jpg'},
+  {n:60.5, mp:'MP 60.5', nm:'Lake Keechelus Dam',      u:'https://images.wsdot.wa.gov/sc/090VC06050.jpg'},
 ];
 
 // One advertiser per month is the real model; rotating here so the demo shows
@@ -208,9 +228,20 @@ setInterval(tickClock, 1000); tickClock();
 
 /* ---------- camera rotation ---------- */
 let ci = -1;
-const ticks = $('ticks');
-CAMS.forEach(()=>ticks.appendChild(document.createElement('i')));
-ticks.style.setProperty('--dwell', DWELL+'ms');
+
+// Geographic strip: Issaquah (this store) on the left, over the summit, out to
+// the last camera. Each camera sits where it actually is.
+const HERE_MP = 17, END_MP = 61, SUMMIT_MP = 52;
+const pct = mp => ((mp - HERE_MP) / (END_MP - HERE_MP)) * 100;
+const strip = $('strip');
+strip.innerHTML =
+  '<span class="end">Issaquah</span>'
+  + '<span class="end r">&rarr; Cle Elum</span>'
+  + '<div class="axis"></div><div class="done" id="stripDone" style="width:0%"></div>'
+  + `<span class="sum" style="left:${pct(SUMMIT_MP)}%"></span>`
+  + `<span class="sumlb" style="left:${pct(SUMMIT_MP)}%">Summit</span>`
+  + CAMS.map((c,i)=>`<span class="cam" id="sc${i}" style="left:${pct(c.n)}%"></span>`).join('')
+  + '<span class="live" id="stripLive"></span>';
 
 function nextCam(){
   ci = (ci + 1) % CAMS.length;
@@ -221,9 +252,15 @@ function nextCam(){
   img.style.animation='none'; void img.offsetWidth; img.style.animation='';
   $('camname').textContent = c.nm;
   $('cammp').textContent = c.mp;
-  [...ticks.children].forEach((t,i)=>{
-    t.className = i===ci ? 'on' : (i<ci ? 'done' : '');
+  // move the marker along the corridor instead of ticking an abstract bar
+  CAMS.forEach((_,i)=>{
+    const el = $('sc'+i);
+    el.className = 'cam' + (i===ci ? ' on' : (i<ci ? ' past' : ''));
   });
+  $('stripDone').style.width = pct(c.n) + '%';
+  const lv = $('stripLive');
+  lv.style.left = pct(c.n) + '%';
+  lv.textContent = Math.round(c.n - HERE_MP) + ' mi from here';
 }
 // ?cam=N holds one camera and stops the rotation. Used to capture deterministic
 // frames for the sales video; has no effect on a board running on a wall.
@@ -299,11 +336,24 @@ async function load(){
       $('status').textContent = 'OPEN';
       $('statusline').textContent = 'No restrictions reported.';
     }
-    $('temp').textContent = (temp==null ? '—' : temp + '°F');
-    const stamp = ago(pass && (pass['last-updated'] || pass['date-updated'] || pass['entry-time']));
-    // No usable timestamp from the feed? Show when WE last pulled, which is true
-    // and still tells a venue the board is alive.
-    $('age').textContent = stamp || 'just now';
+    // WSDOT stops touching the pass report Apr–Nov, and the stale record still
+    // carries an air-temperature that drifted 57→56→66 in one night. A number
+    // that old must not be printed as a current summit condition, so off-season
+    // the weather rows show what they are: awaiting the season. Snow depth is the
+    // same row a venue will watch all winter, so it stays visible year-round.
+    const snowVal = pass && (pass['adjacent-snow-depth'] ?? pass['snow-depth']);
+    const stamp   = ago(pass && (pass['date-updated'] || pass['last-updated'] || pass['entry-time']));
+
+    if (offSeason) {
+      $('snow').textContent = 'Reported Nov–Apr';  $('snow').className = 'v pend';
+      $('temp').textContent = 'Reported Nov–Apr';  $('temp').className = 'v pend';
+      $('src').textContent  = stamp ? `WSDOT last updated this report ${stamp}` : '';
+    } else {
+      $('snow').className = 'v'; $('temp').className = 'v';
+      $('snow').textContent = (snowVal == null || snowVal === '') ? 'None reported' : snowVal + '"';
+      $('temp').textContent = (temp == null) ? '—' : temp + '°F';
+      $('src').textContent  = stamp ? `WSDOT · updated ${stamp}` : '';
+    }
 
     // --- I-90 alerts ahead (east of Issaquah, MP 17+) ---
     const incs = (iRes && iRes['incident-reports']) || [];
