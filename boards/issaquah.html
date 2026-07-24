@@ -69,19 +69,24 @@
   .none{color:var(--dim);font-size:1.4cqw;font-weight:700;margin:auto;text-align:center;line-height:1.5}
 
   /* camera */
+  /* NATURAL-FIT sizing (the fix from the Ritch board): the image sits at its own
+     aspect ratio, centred on a dark mat, so WSDOT's burnt-in header AND its
+     timestamp footer stay fully visible. `cover` cropped the header off and ran
+     our caption straight through their timestamp. Caption is its own bar below
+     the image, never an overlay. */
   .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
-           background:#cfd6d4;position:relative;display:flex}
-  .camwrap img{width:100%;height:100%;object-fit:cover;display:block;
-               animation:fadein .7s ease}
+           background:#14171a;display:flex;flex-direction:column}
+  .campane{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;padding:.3cqw}
+  .camwrap img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;
+               animation:fadein .45s ease}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
-  .camcap{position:absolute;left:0;right:0;bottom:0;
-          background:linear-gradient(transparent,rgba(8,8,6,.82) 42%);
-          padding:2.6cqw 1.2cqw .8cqw;display:flex;align-items:flex-end;gap:1cqw;color:#fff}
-  .camcap .nm{font-size:1.75cqw;font-weight:800;line-height:1.15}
-  .camcap .mp{margin-left:auto;font-size:1.45cqw;font-weight:800;font-variant-numeric:tabular-nums;
-              background:rgba(255,255,255,.16);padding:.25cqw .8cqw;border-radius:.3cqw}
-  .camtag{position:absolute;top:1cqw;left:1cqw;font-size:1cqw;font-weight:800;letter-spacing:.12em;
-          background:var(--red);color:#fff;padding:.3cqw .8cqw;border-radius:.25cqw}
+  .camcap{flex:none;background:var(--card);border-top:1px solid var(--line);
+          padding:.6cqw 1.2cqw;display:flex;align-items:center;gap:1cqw;color:var(--ink)}
+  .camcap .nm{font-size:1.6cqw;font-weight:800;line-height:1.15}
+  .camcap .mp{margin-left:auto;font-size:1.35cqw;font-weight:800;font-variant-numeric:tabular-nums;
+              background:rgba(23,21,15,.08);padding:.25cqw .8cqw;border-radius:.3cqw;color:var(--dim)}
+  .camtag{position:absolute;top:.9cqw;left:.9cqw;z-index:2;font-size:1cqw;font-weight:800;
+          letter-spacing:.12em;background:var(--red);color:#fff;padding:.3cqw .8cqw;border-radius:.25cqw}
   /* progress ticks for the camera rotation */
   .ticks{flex:none;display:flex;gap:.4cqw}
   .ticks i{flex:1;height:.35cqw;background:var(--line);border-radius:99px;display:block;overflow:hidden;position:relative}
@@ -140,8 +145,10 @@
 
     <div class="right">
       <div class="camwrap">
-        <span class="camtag">LIVE CAMERA</span>
-        <img id="camimg" alt="">
+        <div class="campane">
+          <span class="camtag">LIVE CAMERA</span>
+          <img id="camimg" alt="">
+        </div>
         <div class="camcap"><span class="nm" id="camname">&mdash;</span><span class="mp" id="cammp">&mdash;</span></div>
       </div>
       <div class="ticks" id="ticks"></div>
@@ -163,7 +170,7 @@
 
 <script>
 const API = 'https://milepost-proxy.leahgerber93.workers.dev';
-const DWELL = 8000;               // camera dwell, ms
+const DWELL = 4500;               // camera dwell, ms — quick enough to feel alive
 const REFRESH = 5 * 60 * 1000;    // data refresh, ms
 
 // Pass cameras, MP 33 -> 61, west to east over the summit. Real WSDOT feeds.

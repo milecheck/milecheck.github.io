@@ -31,33 +31,51 @@
     animation:pulse 2s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 
-  main{flex:1;min-height:0;display:flex;flex-direction:column;padding:1.5cqw 2cqw;gap:1.1cqw}
+  main{flex:1;min-height:0;display:flex;flex-direction:column;padding:1.3cqw 2cqw;gap:1cqw}
   .dirline{flex:none;display:flex;align-items:baseline;gap:1cqw}
   .dirline h1{font-size:2.5cqw;font-weight:800;letter-spacing:-.02em}
   .dirline .note{font-size:1.25cqw;font-weight:700;color:var(--dim);margin-left:auto}
 
-  .grid{flex:1;min-height:0;display:flex;gap:1.4cqw}
-  .x{flex:1;border:1px solid var(--line);border-radius:.5cqw;background:var(--card);
-     padding:1.3cqw 1.4cqw;display:flex;flex-direction:column;gap:.55cqw;position:relative;
+  .grid{flex:1.5;min-height:0;display:flex;gap:1.2cqw}
+  .x{flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:.5cqw;
+     background:var(--card);padding:1.1cqw 1.2cqw;display:flex;flex-direction:column;gap:.4cqw;
      transition:box-shadow .4s ease,border-color .4s ease}
   .x.best{border-color:var(--green);background:#eef6f1;box-shadow:inset 0 0 0 1px var(--green)}
   .x.shut{background:#f4f2ec}
   .flag{font-size:1.05cqw;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
     color:var(--dim);height:1.5cqw}
   .x.best .flag{color:var(--green)}
-  .xname{font-size:2.2cqw;font-weight:800;line-height:1.05}
+  .xname{font-size:2cqw;font-weight:800;line-height:1.05}
   .xsub{font-size:1.2cqw;font-weight:700;color:var(--dim)}
-  .waitbox{margin:auto 0;display:flex;align-items:baseline;gap:.6cqw}
-  .wait{font-size:5.6cqw;font-weight:800;line-height:.9;letter-spacing:-.035em;
+  .dirs{margin-top:.5cqw;display:flex;flex-direction:column;gap:.25cqw;width:100%}
+  .dir{display:flex;align-items:baseline;gap:.55cqw}
+  .dir .lbl{font-size:1.15cqw;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--dim);width:6.2cqw;flex:none;white-space:nowrap}
+  .wait{font-size:3.9cqw;font-weight:800;line-height:.92;letter-spacing:-.03em;
     font-variant-numeric:tabular-nums;transition:color .4s ease}
   .wait.ok{color:var(--green)} .wait.mid{color:var(--amber)} .wait.bad{color:var(--red)}
-  .wait.na{color:var(--dim);font-size:3.2cqw;letter-spacing:-.02em}
-  .unit{font-size:1.5cqw;font-weight:700;color:var(--dim)}
-  .lanes{margin-top:.7cqw;border-top:1px solid var(--line);padding-top:.6cqw;
-    display:flex;flex-direction:column;gap:.32cqw}
+  .wait.na{color:var(--dim);font-size:2.1cqw;letter-spacing:-.01em}
+  .unit{font-size:1.2cqw;font-weight:700;color:var(--dim)}
+  /* natural-fit camera — same fix as the Ritch board: whole WSDOT frame,
+     header + timestamp intact, caption as its own bar rather than an overlay */
+  .camrow{flex:1;min-height:0;display:flex;gap:1.2cqw;overflow:hidden}
+  .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
+    background:#14171a;display:flex;flex-direction:column}
+  .campane{flex:1;min-height:0;position:relative;display:flex;align-items:center;
+    justify-content:center;padding:.25cqw}
+  .campane img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;animation:fade .45s ease}
+  .camtag{position:absolute;top:.7cqw;left:.7cqw;z-index:2;font-size:.95cqw;font-weight:800;
+    letter-spacing:.12em;background:var(--red);color:#fff;padding:.25cqw .7cqw;border-radius:.25cqw}
+  .camcap{flex:none;background:var(--card);border-top:1px solid var(--line);padding:.5cqw 1cqw;
+    display:flex;align-items:center;font-size:1.3cqw;font-weight:800}
+  .camcap .mp{margin-left:auto;font-weight:800;color:var(--dim);font-size:1.15cqw}
+  .lanes{margin-top:.35cqw;display:flex;flex-direction:column;gap:.2cqw}
   .lane{display:flex;font-size:1.25cqw;font-weight:700;font-variant-numeric:tabular-nums}
   .lane span:last-child{margin-left:auto}
   .lane .off{color:var(--dim);font-weight:700}
+  .hrs{margin-top:auto;padding-top:.5cqw;border-top:1px solid var(--line);
+    display:flex;font-size:1.1cqw;font-weight:700;color:var(--dim)}
+  .hrs span:last-child{margin-left:auto;font-weight:800;color:var(--ink)}
 
   footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
   .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2cqw;min-width:0}
@@ -85,10 +103,11 @@
 
   <main>
     <div class="dirline">
-      <h1>Wait to enter the U.S.</h1>
-      <span class="note" id="src">U.S. Customs and Border Protection &middot; updated <span id="age">&mdash;</span></span>
+      <h1>Border waits &mdash; both directions</h1>
+      <span class="note">CBSA northbound &middot; CBP southbound &middot; updated <span id="age">&mdash;</span></span>
     </div>
     <div class="grid" id="grid"></div>
+    <div class="camrow" id="camrow"></div>
   </main>
 
   <footer>
@@ -102,115 +121,138 @@
 </div>
 
 <script>
-const API = 'https://milepost-proxy.leahgerber93.workers.dev';
-const REFRESH = 5 * 60 * 1000;
+const API='https://milepost-proxy.leahgerber93.workers.dev';
+const REFRESH=5*60*1000, CAMDWELL=6000;
 
-// The three Blaine-area crossings a driver here actually chooses between.
-const WANT = [
-  {port:'Blaine', crossing:'Peace Arch',      road:'I-5',      away:'1 mi',  kind:'Cars only'},
-  {port:'Blaine', crossing:'Pacific Highway', road:'SR 543',   away:'3 mi',  kind:'Cars & trucks'},
-  {port:'Lynden', crossing:'',                road:'SR 539',   away:'17 mi', kind:'Cars & trucks'},
+// Each crossing carries BOTH sides: the CBSA point-of-entry name (northbound,
+// into Canada) and the CBP port/crossing (southbound, into the US). A driver
+// filling up in Blaine is usually heading NORTH, so that number leads.
+const WANT=[
+  {road:'I-5',     nm:'Peace Arch',      away:'1 mi',  kind:'Cars only',
+   ca:'Douglas',               us:{port:'Blaine', crossing:'Peace Arch'}},
+  {road:'SR 543',  nm:'Pacific Highway', away:'3 mi',  kind:'Cars & trucks',
+   ca:'Pacific Highway',       us:{port:'Blaine', crossing:'Pacific Highway'}},
+  {road:'SR 539',  nm:'Lynden',          away:'17 mi', kind:'Cars & trucks',
+   ca:'Aldergrove',            us:{port:'Lynden', crossing:''}},
 ];
 
-const ADS = [
+// WSDOT cameras looking at the crossings themselves.
+const CAMS=[
+  {nm:'Peace Arch',        mp:'I-5 · MP 276.5', u:'https://images.wsdot.wa.gov/nw/005vc27650.jpg'},
+  {nm:'Pacific Highway',   mp:'SR 543 · Truck Spur', u:'https://images.wsdot.wa.gov/nw/543vc00099.jpg'},
+  {nm:'Duty Free',         mp:'SR 543 · MP 0.9', u:'https://images.wsdot.wa.gov/nw/543vc00098.jpg'},
+  {nm:'Lynden',            mp:'SR 539 · MP 15.1', u:'https://images.wsdot.wa.gov/nw/539vc01510.jpg'},
+];
+
+const ADS=[
   'Birch Bay Duty Free — last exit before the line',
   'Cascade Currency Exchange — better rate than the airport',
   'Semiahmoo Resort — 10 minutes away, rooms tonight',
 ];
+const $=id=>document.getElementById(id);
 
-const $ = id => document.getElementById(id);
-
-function tickClock(){
-  const d = new Date();
-  $('clock').textContent = d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-  $('dateline').textContent = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-}
-setInterval(tickClock,1000); tickClock();
+function tickClock(){const d=new Date();
+  $('clock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  $('dateline').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+setInterval(tickClock,1000);tickClock();
 
 let ai=-1;
-function nextAd(){
-  ai=(ai+1)%ADS.length;
-  const el=$('adtxt'); el.textContent=ADS[ai];
-  el.style.animation='none'; void el.offsetWidth; el.style.animation='';
-}
-nextAd(); setInterval(nextAd,20000);
+function nextAd(){ai=(ai+1)%ADS.length;const e=$('adtxt');e.textContent=ADS[ai];
+  e.style.animation='none';void e.offsetWidth;e.style.animation='';}
+nextAd();setInterval(nextAd,20000);
 
-// CBP gives delay_minutes as a STRING that is often '' — and an
-// operational_status that carries the real meaning. '' + "Lanes Closed" is not
-// a zero-minute wait, it means that lane isn't running. Never render '' as 0.
-function lane(L){
-  if (!L) return {n:null, status:'N/A'};
-  const st = (L.operational_status || '').trim();
-  const raw = (L.delay_minutes ?? '').toString().trim();
-  const n = raw === '' ? null : parseInt(raw,10);
-  return {n: Number.isFinite(n) ? n : null, status: st};
+// ---- cameras (natural-fit, whole WSDOT frame kept) ----
+$('camrow').innerHTML=CAMS.slice(0,2).map((_,i)=>
+  `<div class="camwrap"><div class="campane">${i===0?'<span class="camtag">LIVE CAMERA</span>':''}`
+  +`<img id="ci${i}" alt=""></div><div class="camcap"><span id="cn${i}">—</span>`
+  +`<span class="mp" id="cm${i}">—</span></div></div>`).join('');
+let ci=0;
+function rotateCams(){
+  for(let s=0;s<2;s++){
+    const c=CAMS[(ci+s)%CAMS.length];
+    const img=$('ci'+s);
+    img.onload=function(){
+      const r=this.naturalWidth/this.naturalHeight;
+      if(this.naturalWidth<200||r>0.85&&r<1.35){   // WSDOT's placeholder card
+        const alt=CAMS[(CAMS.indexOf(c)+2)%CAMS.length];
+        if(alt&&alt.u!==c.u){this.onload=null;this.src=alt.u+'?t='+Date.now();
+          $('cn'+s).textContent=alt.nm;$('cm'+s).textContent=alt.mp;}
+      }
+    };
+    img.src=c.u+'?t='+Date.now();
+    img.style.animation='none';void img.offsetWidth;img.style.animation='';
+    $('cn'+s).textContent=c.nm; $('cm'+s).textContent=c.mp;
+  }
+  ci=(ci+2)%CAMS.length;
 }
-const laneTxt = l =>
-  l.status.toLowerCase().includes('closed') ? 'Closed'
-  : l.n == null ? '—'
-  : l.n + ' min';
+rotateCams();setInterval(rotateCams,CAMDWELL);
+
+// CBP: delay_minutes is a STRING, often '', with the meaning in
+// operational_status. '' + "Lanes Closed" is NOT a zero wait.
+function cbpLane(L){
+  if(!L) return {n:null,closed:false};
+  const st=(L.operational_status||'').toLowerCase();
+  const raw=(L.delay_minutes??'').toString().trim();
+  const n=raw===''?null:parseInt(raw,10);
+  return {n:Number.isFinite(n)?n:null, closed:st.includes('closed')};
+}
+// CBSA: -5 encodes "Not Applicable" (e.g. no commercial lanes at Douglas).
+function caDelay(v){return (typeof v==='number' && v>=0)?v:null;}
+
+const cls=n=>n==null?'na':n<=10?'ok':n<=30?'mid':'bad';
+const show=(n,closed)=>closed?'Closed':(n==null?'—':n);
 
 async function load(){
-  let ports = [];
-  try{
-    const d = await fetch(API + '/border-waits').then(r=>r.json());
-    ports = Array.isArray(d) ? d : (d.port || d.ports || []);
-  }catch(e){ /* fall through to the empty render */ }
+  let ca=[],us=[];
+  try{ const d=await fetch(API+'/border-waits-ca').then(r=>r.json()); ca=d.waitTimes||[]; }catch(e){}
+  try{ const d=await fetch(API+'/border-waits').then(r=>r.json()); us=Array.isArray(d)?d:(d.port||[]); }catch(e){}
 
-  const rows = WANT.map(w => {
-    const p = ports.find(x =>
-      (x.port_name||'').trim() === w.port &&
-      (w.crossing ? (x.crossing_name||'').trim() === w.crossing : true));
-    if (!p) return {...w, missing:true};
-    const open = !/closed/i.test(p.port_status || '');
-    const pv = lane(p.passenger_vehicle_lanes && p.passenger_vehicle_lanes.standard_lanes);
-    const tv = lane(p.passenger_vehicle_lanes && p.passenger_vehicle_lanes.NEXUS_SENTRI_lanes);
-    const cv = lane(p.commercial_vehicle_lanes && p.commercial_vehicle_lanes.standard_lanes);
-    return {...w, open, pv, tv, cv, hours:p.hours || '', when:p.date && p.time ? p.date+' '+p.time : ''};
+  const rows=WANT.map(w=>{
+    const c=ca.find(x=>(x['poe-name']||'').trim()===w.ca);
+    const u=us.find(x=>(x.port_name||'').trim()===w.us.port &&
+                       (w.us.crossing?(x.crossing_name||'').trim()===w.us.crossing:true));
+    const open=u?!/closed/i.test(u.port_status||''):true;
+    return {
+      ...w,
+      caCars: c?caDelay(c['poe-trav-delay']):null,
+      caTrucks: c?caDelay(c['poe-comm-delay']):null,
+      caMissing: !c,
+      usLane: u?cbpLane(u.passenger_vehicle_lanes&&u.passenger_vehicle_lanes.standard_lanes):{n:null,closed:false},
+      open, hours:(u&&u.hours)||'', when:(u&&u.date&&u.time)?u.date+' '+u.time:''
+    };
   });
 
-  // Fastest = lowest passenger wait among crossings that are actually OPEN and
-  // reporting. A closed crossing with no data must never win by default.
-  let best = -1, bestN = Infinity;
-  rows.forEach((r,i)=>{
-    if (r.missing || !r.open || r.pv.n == null) return;
-    if (r.pv.n < bestN){ bestN = r.pv.n; best = i; }
-  });
+  // "Fastest" is judged on the NORTHBOUND number — that's the trip these
+  // customers are about to take.
+  let best=-1,bn=Infinity;
+  rows.forEach((r,i)=>{ if(r.open && r.caCars!=null && r.caCars<bn){bn=r.caCars;best=i;} });
 
-  $('grid').innerHTML = rows.map((r,i) => {
-    if (r.missing)
-      return `<div class="x shut"><div class="flag">${r.road}</div>
-        <div class="xname">${r.crossing || r.port}</div>
-        <div class="xsub">${r.kind} &middot; ${r.away}</div>
-        <div class="waitbox"><span class="wait na">No data</span></div></div>`;
-
-    if (!r.open)
-      return `<div class="x shut"><div class="flag">${r.road}</div>
-        <div class="xname">${r.crossing || r.port}</div>
-        <div class="xsub">${r.kind} &middot; ${r.away}</div>
-        <div class="waitbox"><span class="wait na">Closed</span></div>
-        <div class="lanes"><div class="lane"><span class="off">Hours</span><span class="off">${r.hours||'—'}</span></div></div></div>`;
-
-    const n = r.pv.n;
-    const cls = n == null ? 'na' : n <= 10 ? 'ok' : n <= 30 ? 'mid' : 'bad';
+  $('grid').innerHTML=rows.map((r,i)=>{
+    if(!r.open) return `<div class="x shut"><div class="flag">${r.road}</div>
+      <div class="xname">${r.nm}</div><div class="xsub">${r.kind} · ${r.away}</div>
+      <div class="dirs"><span class="wait na">Closed</span></div>
+      <div class="hrs"><span>Hours</span><span>${r.hours||'—'}</span></div></div>`;
     return `<div class="x${i===best?' best':''}">
-      <div class="flag">${i===best ? '● Fastest now' : r.road}</div>
-      <div class="xname">${r.crossing || r.port}</div>
-      <div class="xsub">${r.kind} &middot; ${r.away}</div>
-      <div class="waitbox">
-        <span class="wait ${cls}">${n == null ? '—' : n}</span>
-        ${n == null ? '' : '<span class="unit">min</span>'}
+      <div class="flag">${i===best?'● Fastest into Canada':r.road}</div>
+      <div class="xname">${r.nm}</div>
+      <div class="xsub">${r.kind} · ${r.away}</div>
+      <div class="dirs">
+        <div class="dir"><span class="lbl">&#8593; Canada</span>
+          <span class="wait ${cls(r.caCars)}">${r.caMissing?'—':show(r.caCars,false)}</span>
+          ${r.caCars==null?'':'<span class="unit">min</span>'}</div>
+        <div class="dir"><span class="lbl">&#8595; U.S.</span>
+          <span class="wait ${r.usLane.closed?'na':cls(r.usLane.n)}" style="font-size:2.9cqw">${show(r.usLane.n,r.usLane.closed)}</span>
+          ${r.usLane.n==null||r.usLane.closed?'':'<span class="unit">min</span>'}</div>
       </div>
       <div class="lanes">
-        <div class="lane"><span>Cars</span><span>${laneTxt(r.pv)}</span></div>
-        <div class="lane"><span class="${r.tv.status.toLowerCase().includes('closed')?'off':''}">NEXUS</span><span class="${r.tv.status.toLowerCase().includes('closed')?'off':''}">${laneTxt(r.tv)}</span></div>
-        <div class="lane"><span class="${r.cv.n==null?'off':''}">Trucks</span><span class="${r.cv.n==null?'off':''}">${laneTxt(r.cv)}</span></div>
-      </div></div>`;
-  }).join('');
+        <div class="lane"><span>Trucks north</span><span class="${r.caTrucks==null?'off':''}">${r.caTrucks==null?'n/a':r.caTrucks+' min'}</span></div>
+      </div>
+      <div class="hrs"><span>Hours</span><span>${r.hours||'—'}</span></div>
+    </div>`;}).join('');
 
-  const stamp = rows.find(r=>r.when);
-  $('age').textContent = stamp ? new Date(stamp.when).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}) : 'just now';
+  const s=rows.find(r=>r.when);
+  $('age').textContent=s?new Date(s.when).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'just now';
 }
-load(); setInterval(load, REFRESH);
+load();setInterval(load,REFRESH);
 </script>
 </html>
