@@ -40,6 +40,16 @@
   .note b{color:var(--ink)}
   footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
     font-size:12px;color:var(--dim)}
+  .flyers{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:4px}
+  .flyer{display:block;text-decoration:none;color:inherit;background:var(--card);
+    border:1px solid var(--line);border-radius:7px;overflow:hidden;transition:border-color .15s,transform .15s}
+  .flyer:hover,.flyer:focus-visible{border-color:var(--green);transform:translateY(-1px)}
+  .flyer:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .flyer .shot{display:block;width:100%;height:210px;object-fit:cover;object-position:top center;
+    background:#fff;border-bottom:1px solid var(--line)}
+  .flyer .cap{padding:11px 13px}
+  .flyer .cap .t{font-size:14.5px;font-weight:800;line-height:1.25}
+  .flyer .cap .w{font-size:12.5px;color:var(--dim);margin-top:2px}
 </style>
 
 <div class="wrap">
@@ -100,6 +110,29 @@
     </div>
     <span class="tag concept">Deck</span><span class="arrow">&rsaquo;</span>
   </a>
+
+  <h2>Print collateral &mdash; what goes up in the venue</h2>
+  <p class="lede" style="margin-bottom:16px">The board is the screen on the wall; these are the printed pieces that sit
+    beside it &mdash; counter cards a customer can pocket, and posters for a market or store window. Each
+    carries a scan-to-install code. Click any one for the full-size, print-ready sheet.</p>
+
+  <div class="flyers">
+    <a class="flyer" href="print/cards-4x6.png">
+      <img class="shot" src="print/cards-4x6.jpg" alt="Four pick-up cards: highway, breakdown, coast-to-coast, bridge">
+      <div class="cap"><div class="t">Counter pick-up cards</div>
+        <div class="w">4&times;6 &middot; gas-station counters &amp; rest stops</div></div>
+    </a>
+    <a class="flyer" href="print/posters-letter.png">
+      <img class="shot" src="print/posters-letter.jpg" alt="Letter-size wall posters">
+      <div class="cap"><div class="t">Wall posters</div>
+        <div class="w">8.5&times;11 &middot; markets &amp; store windows</div></div>
+    </a>
+    <a class="flyer" href="print/postcards.png">
+      <img class="shot" src="print/postcards.jpg" alt="Postcards, four to a letter sheet">
+      <div class="cap"><div class="t">Postcards</div>
+        <div class="w">4-up on letter &middot; hand-out &amp; mail</div></div>
+    </a>
+  </div>
 
   <p class="note">
     <b>Everything above is live.</b> Two bridge concepts that used to sit here &mdash; Beat the Bridge
