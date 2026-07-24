@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MileCheck — Seattle Drawbridges</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  /* An engraved walnut map with a warm bulb behind every bridge. The physical
+     version would be laser-cut wood; on a screen the job is to keep the object
+     quality — incised lines with a lit edge and a shadowed edge, brass rule,
+     lamps that bloom into the grain rather than sitting on top of it. */
+  :root{
+    --wood:#241a12; --wood2:#3a2a1c; --grain:#4a3520;
+    --cream:#f0e3c8; --dim:#a08a68; --brass:#c99a4e;
+    --go:#5ad39a; --red:#ff5a32;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#000;color:var(--cream);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  #stage{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;
+    container-type:inline-size;position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(201,154,78,.16) 0%, transparent 60%),
+      linear-gradient(178deg, var(--wood2) 0%, var(--wood) 55%, #1b130d 100%)}
+  /* wood grain, faint and irregular */
+  #stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+    background:repeating-linear-gradient(91deg,
+      rgba(255,225,180,.030) 0 .18cqw, transparent .18cqw .7cqw,
+      rgba(0,0,0,.05) .7cqw 1.05cqw, transparent 1.05cqw 2.3cqw)}
+
+  header{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;
+    gap:1.1cqw;padding:1.6cqw 2.2cqw}
+  .host{font-size:1.9cqw;font-weight:800;line-height:1.05;color:var(--cream)}
+  .pow{font-size:1.02cqw;font-weight:600;color:var(--dim)}
+  .spacer{margin-left:auto;text-align:right}
+  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+  .clock small{display:block;font-size:.98cqw;font-weight:700;color:var(--dim);margin-top:.25cqw}
+
+  /* engraved plate */
+  .plate{position:absolute;left:3.4cqw;right:3.4cqw;top:7.6cqw;bottom:9.4cqw;z-index:3;
+    border:.22cqw solid rgba(201,154,78,.55);border-radius:.5cqw;
+    box-shadow:inset 0 0 0 .1cqw rgba(0,0,0,.5), inset 0 .6cqw 3cqw rgba(0,0,0,.45),
+               0 .3cqw 2cqw rgba(0,0,0,.5);
+    background:rgba(0,0,0,.16);overflow:hidden}
+
+  .title{position:absolute;top:2cqw;left:0;right:0;text-align:center;z-index:4}
+  .title h1{font-size:2.5cqw;font-weight:700;letter-spacing:.42em;text-indent:.42em;
+    color:var(--cream);text-shadow:0 .1cqw 0 rgba(0,0,0,.6), 0 -.06cqw 0 rgba(255,230,190,.22)}
+  .title .sub{margin-top:.5cqw;font-size:1.06cqw;font-weight:700;letter-spacing:.34em;
+    text-indent:.34em;color:var(--brass)}
+  .rule{position:absolute;left:6cqw;right:6cqw;top:6.6cqw;height:.1cqw;z-index:4;
+    background:linear-gradient(90deg,transparent,rgba(201,154,78,.5) 18%,rgba(201,154,78,.5) 82%,transparent)}
+
+  svg#map{position:absolute;inset:0;width:100%;height:100%;z-index:4}
+
+  /* lamps sit above the engraving and bloom into it */
+  .lamp{position:absolute;z-index:5;transform:translate(-50%,-50%);pointer-events:none}
+  .bulb{width:1.5cqw;height:1.5cqw;border-radius:50%;background:var(--go);
+    box-shadow:0 0 1.1cqw .18cqw rgba(90,211,154,.85), 0 0 3.6cqw .7cqw rgba(90,211,154,.34),
+               inset 0 0 .3cqw rgba(255,255,255,.85);
+    transition:background .8s ease, box-shadow .8s ease}
+  .lamp.up .bulb{background:var(--red);
+    box-shadow:0 0 1.3cqw .22cqw rgba(255,90,50,.95), 0 0 4.6cqw .95cqw rgba(255,90,50,.45),
+               inset 0 0 .3cqw rgba(255,255,255,.9);
+    animation:throb 2.6s ease-in-out infinite}
+  @keyframes throb{0%,100%{opacity:1}50%{opacity:.72}}
+  @media (prefers-reduced-motion:reduce){.lamp.up .bulb{animation:none}}
+  .tag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;text-align:center}
+  .tag .nm{font-size:1.26cqw;font-weight:800;letter-spacing:.02em;color:var(--cream);
+    text-shadow:0 .08cqw .3cqw rgba(0,0,0,.85)}
+  .lamp.up .tag .nm{color:#ffb9a2}
+  .tag .el{display:block;font-size:1.02cqw;font-weight:700;color:var(--dim);
+    font-variant-numeric:tabular-nums;margin-top:.1cqw;
+    text-shadow:0 .08cqw .3cqw rgba(0,0,0,.85)}
+  .lamp.up .tag .el{color:#ff8a66}
+  .tag.above{bottom:1.5cqw}
+  .tag.below{top:1.5cqw}
+
+  .legend{position:absolute;left:0;right:0;bottom:2.1cqw;z-index:5;display:flex;
+    align-items:center;justify-content:center;gap:2.4cqw;font-size:1.12cqw;font-weight:700;
+    color:var(--dim)}
+  .legend i{width:.85cqw;height:.85cqw;border-radius:50%;display:inline-block;
+    margin-right:.55cqw;vertical-align:-.05cqw}
+  .legend .g{background:var(--go);box-shadow:0 0 .8cqw rgba(90,211,154,.8)}
+  .legend .r{background:var(--red);box-shadow:0 0 .8cqw rgba(255,90,50,.85)}
+  .legend .mark{color:var(--brass);letter-spacing:.24em;font-weight:800}
+
+  footer{position:absolute;bottom:0;left:0;right:0;z-index:7;display:flex;align-items:stretch;
+    background:rgba(10,7,4,.9);border-top:.1cqw solid rgba(201,154,78,.45)}
+  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.05cqw 2.2cqw;min-width:0}
+  .adtag{flex:none;font-size:.98cqw;font-weight:800;letter-spacing:.13em;background:var(--brass);
+    color:#241a12;padding:.35cqw .9cqw;border-radius:.25cqw}
+  .adtxt{font-size:1.62cqw;font-weight:700;color:#f2cd90;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis}
+  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.65cqw 2.2cqw .65cqw 1.4cqw;
+    border-left:.1cqw solid rgba(201,154,78,.32)}
+  .qr svg{width:4.8cqw;height:4.8cqw;display:block;shape-rendering:crispEdges;
+    background:var(--cream);padding:.24cqw;border-radius:.2cqw}
+  .qrtx{font-size:1.12cqw;font-weight:800;color:#f2cd90;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:var(--dim);font-size:.98cqw}
+</style>
+
+<div id="stage">
+  <header>
+    <div>
+      <div class="host" id="venue">The Ballard Tavern</div>
+      <div class="pow">powered by MileCheck</div>
+    </div>
+    <div class="spacer">
+      <div class="clock"><span id="clock">--:--</span><small id="dateline">&nbsp;</small></div>
+    </div>
+  </header>
+
+  <div class="plate">
+    <div class="title">
+      <h1>SEATTLE</h1>
+      <div class="sub">DRAWBRIDGES &middot; LIVE</div>
+    </div>
+    <div class="rule"></div>
+
+    <!-- Engraved waterways. Two offset strokes per channel — a dark one below and
+         a pale one above — read as an incised groove rather than a drawn line. -->
+    <svg id="map" viewBox="0 0 1200 560" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <filter id="soft"><feGaussianBlur stdDeviation="7"/></filter>
+      </defs>
+
+      <!-- Puget Sound, west edge -->
+      <path d="M0 150 C 70 190, 60 300, 0 360 L0 150Z" fill="rgba(0,0,0,.3)"/>
+      <path d="M0 150 C 70 190, 60 300, 0 360" stroke="rgba(255,230,190,.18)" stroke-width="2.5" fill="none"/>
+      <text x="34" y="272" fill="#a08a68" font-size="19" font-style="italic"
+            font-family="Georgia,serif">Sound</text>
+
+      <!-- Lake Washington, east edge -->
+      <path d="M1200 130 C 1130 180, 1130 320, 1200 380 L1200 130Z" fill="rgba(0,0,0,.3)"/>
+      <path d="M1200 130 C 1130 180, 1130 320, 1200 380" stroke="rgba(255,230,190,.18)" stroke-width="2.5" fill="none"/>
+      <text x="1104" y="322" fill="#a08a68" font-size="19" font-style="italic"
+            font-family="Georgia,serif" text-anchor="end">Lake Wash.</text>
+
+      <!-- Ship Canal: groove (dark under, light over) -->
+      <g fill="none" stroke-linecap="round">
+        <path d="M62 258 H430 Q470 258 500 250 H700 Q760 250 800 254 H1140"
+              stroke="rgba(0,0,0,.55)" stroke-width="17"/>
+        <path d="M62 254 H430 Q470 254 500 246 H700 Q760 246 800 250 H1140"
+              stroke="rgba(255,232,196,.30)" stroke-width="9"/>
+      </g>
+
+      <!-- Lake Union -->
+      <ellipse cx="600" cy="248" rx="112" ry="46" fill="rgba(0,0,0,.42)"/>
+      <ellipse cx="600" cy="244" rx="112" ry="46" fill="none" stroke="rgba(255,232,196,.28)" stroke-width="3"/>
+      <text x="600" y="252" fill="#a08a68" font-size="19" font-style="italic"
+            font-family="Georgia,serif" text-anchor="middle">Lake Union</text>
+
+      <!-- Duwamish branch, south of downtown -->
+      <g fill="none" stroke-linecap="round">
+        <path d="M300 262 C 300 340, 316 400, 352 470" stroke="rgba(0,0,0,.55)" stroke-width="14"/>
+        <path d="M300 258 C 300 336, 316 396, 352 466" stroke="rgba(255,232,196,.26)" stroke-width="7"/>
+      </g>
+      <text x="392" y="430" fill="#a08a68" font-size="17" font-style="italic"
+            font-family="Georgia,serif">Duwamish</text>
+    </svg>
+
+    <!-- lamps: positioned as a share of the plate, so they track the engraving -->
+    <div class="lamp" id="b-ballard"    style="left:16.7%;top:45.7%"><div class="bulb"></div>
+      <div class="tag above"><span class="nm">Ballard</span><span class="el" id="e-ballard"></span></div></div>
+    <div class="lamp" id="b-fremont"    style="left:35.8%;top:45.7%"><div class="bulb"></div>
+      <div class="tag above"><span class="nm">Fremont</span><span class="el" id="e-fremont"></span></div></div>
+    <div class="lamp" id="b-university" style="left:58.3%;top:44.3%"><div class="bulb"></div>
+      <div class="tag above"><span class="nm">University</span><span class="el" id="e-university"></span></div></div>
+    <div class="lamp" id="b-montlake"   style="left:78.3%;top:44.8%"><div class="bulb"></div>
+      <div class="tag above"><span class="nm">Montlake</span><span class="el" id="e-montlake"></span></div></div>
+
+    <div class="lamp" id="b-spokane" style="left:25.2%;top:55.4%"><div class="bulb"></div>
+      <div class="tag below"><span class="nm">Spokane St</span><span class="el" id="e-spokane"></span></div></div>
+    <div class="lamp" id="b-1st"     style="left:26.7%;top:69.6%"><div class="bulb"></div>
+      <div class="tag below"><span class="nm">1st Ave S</span><span class="el" id="e-1st"></span></div></div>
+    <div class="lamp" id="b-south"   style="left:29.0%;top:81.4%"><div class="bulb"></div>
+      <div class="tag below"><span class="nm">South Park</span><span class="el" id="e-south"></span></div></div>
+
+    <div class="legend">
+      <span><i class="g"></i>down</span>
+      <span><i class="r"></i>raised</span>
+      <span class="mark">MILECHECK</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="ad"><span class="adtag">SPONSOR</span><span class="adtxt" id="adtxt">&nbsp;</span></div>
+    <div class="qr">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" width="100%" height="100%" class="segno"><path class="qrline" stroke="#17150f" d="M0 0.5h7m1 0h3m1 0h1m1 0h3m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h2m7 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h2m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h4m3 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h2m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h2m3 0h2m4 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h1m1 0h1m2 0h1m-17 1h1m2 0h7m1 0h3m1 0h4m2 0h1m2 0h1m1 0h3m-28 1h1m2 0h1m4 0h3m1 0h1m1 0h1m1 0h4m2 0h2m1 0h2m-28 1h1m1 0h2m2 0h1m1 0h1m2 0h3m1 0h1m4 0h2m2 0h1m1 0h1m-26 1h1m1 0h3m2 0h2m3 0h1m1 0h3m3 0h1m2 0h2m2 0h1m-25 1h1m1 0h1m2 0h2m1 0h2m1 0h1m2 0h2m2 0h2m4 0h1m-27 1h1m2 0h1m1 0h5m1 0h5m4 0h7m-29 1h1m1 0h2m2 0h2m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m-26 1h1m1 0h1m1 0h1m8 0h1m3 0h1m1 0h2m2 0h1m1 0h1m-26 1h1m1 0h2m1 0h1m2 0h1m2 0h2m7 0h1m1 0h1m-26 1h2m2 0h1m5 0h6m1 0h1m1 0h2m3 0h1m1 0h2m-28 1h3m2 0h3m1 0h1m1 0h1m3 0h2m2 0h1m2 0h1m1 0h2m2 0h1m-29 1h2m1 0h1m3 0h3m1 0h1m2 0h1m1 0h1m1 0h4m3 0h2m-27 1h2m1 0h4m1 0h1m2 0h1m1 0h2m1 0h12m-20 1h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m3 0h2m-26 1h7m1 0h1m1 0h2m2 0h2m1 0h1m1 0h2m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h2m3 0h1m2 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m3 0h2m1 0h1m2 0h7m1 0h2m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h2m1 0h1m2 0h1m6 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h2m1 0h5m1 0h2m1 0h3m-29 1h1m5 0h1m2 0h5m2 0h1m1 0h1m3 0h5m1 0h1m-29 1h7m1 0h1m1 0h3m1 0h2m3 0h2m1 0h1"/></svg>
+      <div class="qrtx">Get pinged when<br>one goes up<small>Scan &middot; free app</small></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const API='https://milepost-proxy.leahgerber93.workers.dev';
+const REFRESH=30*1000;
+// key -> the Worker's bridge id
+const BR=[
+  ['ballard','WA-bridge-ballard'], ['fremont','WA-bridge-fremont'],
+  ['university','WA-bridge-university'], ['montlake','WA-bridge-montlake'],
+  ['spokane','WA-bridge-spokane'], ['1st','WA-bridge-1st'], ['south','WA-bridge-south'],
+];
+const ADS=[
+  "Bridge up? Happy hour runs till it drops. — The Ballard Tavern",
+  'Reuben’s Brews — on tap here, brewed six blocks away',
+  'Ballard Farmers Market — Sundays, 9 to 2, two blocks over',
+];
+const $=id=>document.getElementById(id);
+
+function tick(){const d=new Date();
+  $('clock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  $('dateline').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+setInterval(tick,1000);tick();
+
+let ai=-1;
+function nextAd(){ai=(ai+1)%ADS.length;$('adtxt').textContent=ADS[ai];}
+nextAd();setInterval(nextAd,20000);
+
+// ?up=ballard,fremont forces lamps red so the piece can be demoed — the real
+// bridges are down ~95% of the time.
+const forced=new Set((new URLSearchParams(location.search).get('up')||'')
+  .split(',').map(s=>s.trim()).filter(Boolean));
+
+// Elapsed time, read from across a room.
+function dur(sec){
+  if(!sec) return null;
+  const s=Math.floor(Date.now()/1000-sec);
+  if(s<0||s>3650*86400) return null;
+  const m=Math.floor(s/60);
+  if(m<1) return 'just now';
+  if(m<60) return m+' min';
+  const h=Math.floor(m/60), rm=m%60;
+  if(h<24) return rm?`${h}h ${rm}m`:`${h}h`;
+  const d=Math.floor(h/24);
+  return d===1?'1 day':`${d} days`;
+}
+
+async function load(){
+  let s={raised:[],raisedAt:{},loweredAt:{}};
+  try{ s=await fetch(API+'/bridge-status').then(r=>r.json()); }catch(e){}
+  const raised=new Set(s.raised||[]);
+  BR.forEach(([key,id])=>{
+    const up=forced.has(key)||raised.has(id);
+    const el=$('b-'+key); if(!el) return;
+    el.className='lamp'+(up?' up':'');
+    // Name the state the clock belongs to — a bare "9 min" says nothing.
+    const t=dur(up?(s.raisedAt&&s.raisedAt[id]):(s.loweredAt&&s.loweredAt[id]));
+    const lab=$('e-'+key);
+    if(lab) lab.textContent=t?`${up?'up':'down'} ${t}`:'';
+  });
+}
+load();setInterval(load,REFRESH);
+</script>
+</html>
