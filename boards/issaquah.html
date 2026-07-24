@@ -157,6 +157,8 @@
         <div class="row"><span>Elevation</span><span class="v">3,022 ft</span></div>
         <div class="row"><span>Snow depth</span><span class="v" id="snow">&mdash;</span></div>
         <div class="row"><span>Air temp</span><span class="v" id="temp">&mdash;</span></div>
+        <div class="row"><span>Over the pass</span><span class="v" id="ttime">&mdash;</span></div>
+        <div class="row" style="font-size:1.05cqw"><span class="muted" id="ttnote">&nbsp;</span></div>
         <div class="row" style="font-size:1.15cqw"><span class="muted" id="src">&nbsp;</span></div>
       </div>
 
@@ -243,8 +245,75 @@ strip.innerHTML =
   + CAMS.map((c,i)=>`<span class="cam" id="sc${i}" style="left:${pct(c.n)}%"></span>`).join('')
   + '<span class="live" id="stripLive"></span>';
 
+// Worker-side liveness (see /camera-live): WSDOT's "image unavailable" card is
+// byte-similar to a real frame and served without CORS, so the only reliable
+// signal is bytes that never change. Unknown cameras and a failed poll fail open.
+let LIVECAM=null;
+async function loadCamLive(){
+  try{
+    const d=await fetch(API+'/camera-live').then(r=>r.json());
+    if(d&&d.cameras) LIVECAM=d.cameras;
+  }catch(e){}
+}
+function camLive(u){ const s=LIVECAM&&LIVECAM[u]; return !s||s.live; }
+loadCamLive();setInterval(loadCamLive,5*60*1000);
+
+// Summit temperature from NWS station KSMP, which sits at Snoqualmie Pass and
+// reports year-round. WSDOT's pass record also carries an air temperature, but
+// it goes stale every spring — it drifted 57 -> 56 -> 66 in one night in July —
+// and a number that old can't be printed as a current summit condition. NWS is
+// keyless, CORS-open, and refreshes about hourly.
+let SUMMIT_TEMP=null;
+async function loadSummitTemp(){
+  try{
+    const r=await fetch('https://api.weather.gov/stations/KSMP/observations/latest',
+                        {headers:{'Accept':'application/geo+json'}});
+    if(!r.ok) return;
+    const p=(await r.json()).properties||{};
+    const c=p.temperature&&p.temperature.value;
+    if(c==null) return;
+    SUMMIT_TEMP={f:Math.round(c*9/5+32), text:p.textDescription||'', ts:p.timestamp};
+    renderTemp();
+  }catch(e){}
+}
+function renderTemp(){
+  const el=$('temp'); if(!el) return;
+  if(!SUMMIT_TEMP){ el.textContent='—'; el.className='v'; return; }
+  el.className='v';
+  el.textContent=SUMMIT_TEMP.text
+    ? `${SUMMIT_TEMP.f}°F · ${SUMMIT_TEMP.text}`
+    : `${SUMMIT_TEMP.f}°F`;
+}
+loadSummitTemp();setInterval(loadSummitTemp,15*60*1000);
+
+// Cross-pass travel time, straight from WSDOT — the same measurement behind the
+// "XX MIN TO ___" signs on I-90. WSDOT publishes no Cle Elum or summit endpoint;
+// the only cross-pass segment runs North Bend (MP 35) to Ellensburg (MP 109),
+// and Cle Elum (MP ~84) sits inside it. Slicing that by distance would invent a
+// number, and the summit is exactly where the time goes — so the board shows
+// the segment WSDOT actually measures, labelled for what it is.
+async function loadPassTime(){
+  try{
+    const d=await fetch(API+'/pass-travel').then(r=>r.json());
+    const eb=(d.routes||[]).find(r=>/North Bend to Ellensburg/i.test(r.name));
+    const el=$('ttime'); if(!el) return;
+    if(!eb||eb.currentMinutes==null){ el.textContent='—'; return; }
+    const over=eb.currentMinutes-(eb.averageMinutes??eb.currentMinutes);
+    el.textContent=`${eb.currentMinutes} min`+(over>=5?` · ${over} over typical`:'');
+    el.className='v'+(over>=5?' warn':'');
+    const nb=$('ttnote');
+    if(nb) nb.textContent='North Bend to Ellensburg · WSDOT';
+  }catch(e){}
+}
+loadPassTime();setInterval(loadPassTime,3*60*1000);
+
 function nextCam(){
-  ci = (ci + 1) % CAMS.length;
+  // Skip dead cameras rather than filtering CAMS — the index drives the
+  // corridor-position markers, so the array has to stay intact.
+  for(let k=0;k<CAMS.length;k++){
+    ci = (ci + 1) % CAMS.length;
+    if(camLive(CAMS[ci].u)) break;
+  }
   const c = CAMS[ci];
   const img = $('camimg');
   // cache-bust so the wall board shows a genuinely current frame
@@ -344,16 +413,19 @@ async function load(){
     const snowVal = pass && (pass['adjacent-snow-depth'] ?? pass['snow-depth']);
     const stamp   = ago(pass && (pass['date-updated'] || pass['last-updated'] || pass['entry-time']));
 
+    // Snow depth genuinely is a winter measurement — WSDOT doesn't report it in
+    // July because there's nothing to report. Temperature is different: people
+    // want it year-round, so it comes from NWS (below) instead of being
+    // suppressed along with the rest of the stale pass record.
     if (offSeason) {
       $('snow').textContent = 'Reported Nov–Apr';  $('snow').className = 'v pend';
-      $('temp').textContent = 'Reported Nov–Apr';  $('temp').className = 'v pend';
-      $('src').textContent  = stamp ? `WSDOT last updated this report ${stamp}` : '';
+      $('src').textContent  = stamp ? `WSDOT last updated the pass report ${stamp}` : '';
     } else {
-      $('snow').className = 'v'; $('temp').className = 'v';
+      $('snow').className = 'v';
       $('snow').textContent = (snowVal == null || snowVal === '') ? 'None reported' : snowVal + '"';
-      $('temp').textContent = (temp == null) ? '—' : temp + '°F';
       $('src').textContent  = stamp ? `WSDOT · updated ${stamp}` : '';
     }
+    renderTemp();
 
     // --- I-90 alerts ahead (east of Issaquah, MP 17+) ---
     const incs = (iRes && iRes['incident-reports']) || [];

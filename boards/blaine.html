@@ -182,14 +182,34 @@ $('camrow').innerHTML=CAMS.slice(0,2).map((_,i)=>
   `<div class="camwrap"><div class="campane">${i===0?'<span class="camtag">LIVE CAMERA</span>':''}`
   +`<img id="ci${i}" alt=""></div><div class="camcap"><span id="cn${i}">—</span>`
   +`<span class="mp" id="cm${i}">—</span></div></div>`).join('');
+// Which cameras are actually serving fresh frames. The Worker samples them on
+// its cron and flags any whose bytes haven't changed in 30 min — that's the only
+// way to catch WSDOT's placeholder card, which is byte-similar to a real frame
+// and served without CORS. Null until the first poll answers; unknown cameras
+// and a failed poll both fail open, so the row never blanks.
+let LIVECAM=null;
+async function loadCamLive(){
+  try{
+    const d=await fetch(API+'/camera-live').then(r=>r.json());
+    if(d&&d.cameras) LIVECAM=d.cameras;
+  }catch(e){}
+}
+function liveCams(){
+  if(!LIVECAM) return CAMS;
+  const ok=CAMS.filter(c=>{const s=LIVECAM[c.u];return !s||s.live;});
+  return ok.length>=2?ok:CAMS;
+}
+loadCamLive();setInterval(loadCamLive,5*60*1000);
+
 let ci=0;
 function rotateCams(){
+  const CAMS=liveCams();
   for(let s=0;s<2;s++){
     const c=CAMS[(ci+s)%CAMS.length];
     const img=$('ci'+s);
-    // No placeholder sniffing: every WSDOT camera, live or dead, is 335x249,
-    // so the old aspect-ratio test (r<1.35) sat exactly on the real cameras'
-    // ratio and could reject good frames. Rotating more cameras is the fix.
+    // No client-side sniffing: every WSDOT camera, live or dead, is 335x249, so
+    // the old aspect-ratio test sat exactly on the real cameras' ratio and could
+    // reject good frames. Detection now happens in the Worker, over time.
     img.src=c.u+'?t='+Date.now();
     img.style.animation='none';void img.offsetWidth;img.style.animation='';
     $('cn'+s).textContent=c.nm; $('cm'+s).textContent=c.mp;

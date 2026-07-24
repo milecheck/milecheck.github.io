@@ -77,14 +77,22 @@
   .clabel b{color:var(--deck);display:block;font-weight:800}
 
   /* ---- right rail: other bridges, as small lamps ---- */
-  .rail{position:absolute;right:2.2cqw;bottom:8.5cqw;z-index:6;display:flex;flex-direction:column;gap:.65cqw;align-items:flex-end}
-  .br em{font-style:normal;font-weight:700;opacity:.6;font-size:.85em;margin-left:.35cqw;font-variant-numeric:tabular-nums}
-  .rlab{font-size:1.1cqw;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-bottom:.2cqw}
-  .br{display:flex;align-items:center;gap:.8cqw;font-size:1.55cqw;font-weight:700}
-  .br i{width:1cqw;height:1cqw;border-radius:50%;background:var(--go);display:block;
-    box-shadow:0 0 1.1cqw rgba(79,191,139,.6)}
-  .br.up i{background:var(--red);box-shadow:0 0 1.1cqw rgba(224,81,44,.75)}
-  .br.up{color:var(--red)}
+  /* Three real columns — name, clock, lamp — so the lamps and the durations
+     line up down the rail instead of each row drifting to its own width. */
+  .rail{position:absolute;right:2.2cqw;bottom:8.5cqw;z-index:6;
+    display:grid;grid-template-columns:auto auto min-content;
+    column-gap:1.2cqw;row-gap:1.05cqw;align-items:center;font-size:2.1cqw}
+  .rlab{grid-column:1/-1;justify-self:end;font-size:1.25cqw;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:.45cqw}
+  .br{display:contents}
+  .br>span{justify-self:end;font-weight:800;letter-spacing:-.015em}
+  .br em{justify-self:end;font-style:normal;font-weight:700;font-size:.66em;
+    color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .br.up>span{color:var(--red)}
+  .br.up em{color:var(--red);opacity:.85}
+  .br i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:var(--go);display:block;
+    box-shadow:0 0 1.2cqw rgba(79,191,139,.6)}
+  .br.up i{background:var(--red);box-shadow:0 0 1.2cqw rgba(224,81,44,.75)}
 
   /* ---- footer ---- */
   footer{position:absolute;bottom:0;left:0;right:0;z-index:7;display:flex;align-items:stretch;
@@ -174,10 +182,36 @@
     </g>
 
     <!-- cars, only while the deck is joined -->
+    <!-- Traffic reads as vehicles, not pills: body, greenhouse and wheels, all
+         driving left-to-right so headlights lead. Three silhouettes so the deck
+         looks like a road rather than a repeating pattern. -->
     <g id="cars">
-      <g class="car"><rect x="90" y="368" width="48" height="15" rx="4" fill="var(--lamp)"/></g>
-      <g class="car"><rect x="90" y="368" width="36" height="15" rx="4" fill="#efe7d6"/></g>
-      <g class="car"><rect x="90" y="368" width="54" height="15" rx="4" fill="var(--amber)"/></g>
+      <!-- sedan -->
+      <g class="car">
+        <path d="M103 376l4.5-6q1-1.4 2.7-1.4h13.6q1.7 0 2.9 1.3l5.3 6.1z" fill="#2b4a55"/>
+        <rect x="91" y="375.5" width="50" height="6.5" rx="2.4" fill="var(--lamp)"/>
+        <rect x="137.6" y="377" width="3.4" height="2.2" rx="1.1" fill="#fffbe8"/>
+        <circle cx="102" cy="381.6" r="2.8" fill="#14262c"/>
+        <circle cx="130" cy="381.6" r="2.8" fill="#14262c"/>
+      </g>
+      <!-- box van -->
+      <g class="car">
+        <rect x="91" y="366.5" width="33" height="15.5" rx="1.6" fill="#efe7d6"/>
+        <path d="M124 371h9.5q1.6 0 2.6 1.3l3.4 4.4V382H124z" fill="#e2d8c2"/>
+        <rect x="126.5" y="372.6" width="7" height="4" rx="1" fill="#2b4a55"/>
+        <rect x="136.4" y="377.4" width="3.2" height="2.2" rx="1.1" fill="#fffbe8"/>
+        <circle cx="101" cy="381.8" r="3" fill="#14262c"/>
+        <circle cx="131" cy="381.8" r="3" fill="#14262c"/>
+      </g>
+      <!-- pickup -->
+      <g class="car">
+        <path d="M116 375.5l4-7q1-1.5 2.8-1.5h9.4q1.8 0 2.9 1.4l4.6 7.1z" fill="#2b4a55"/>
+        <rect x="91" y="375" width="53" height="7" rx="2.2" fill="var(--amber)"/>
+        <rect x="92.5" y="371" width="22" height="4.2" rx="1.2" fill="var(--amber)"/>
+        <rect x="140.6" y="376.6" width="3.4" height="2.2" rx="1.1" fill="#fffbe8"/>
+        <circle cx="103" cy="381.9" r="3" fill="#14262c"/>
+        <circle cx="134" cy="381.9" r="3" fill="#14262c"/>
+      </g>
     </g>
 
     <!-- the two bascule leaves, hinged at the pier faces -->
@@ -216,9 +250,9 @@
 
   <div class="rail">
     <div class="rlab">Ship Canal</div>
-    <div class="br" id="r-fremont"><span>Fremont</span><i></i></div>
-    <div class="br" id="r-university"><span>University</span><i></i></div>
-    <div class="br" id="r-montlake"><span>Montlake</span><i></i></div>
+    <div class="br" id="r-fremont"><span>Fremont</span><em id="d-fremont"></em><i></i></div>
+    <div class="br" id="r-university"><span>University</span><em id="d-university"></em><i></i></div>
+    <div class="br" id="r-montlake"><span>Montlake</span><em id="d-montlake"></em><i></i></div>
   </div>
 
   <footer>
@@ -306,16 +340,14 @@ async function load(){
   const d=up?0:daysSince(s.loweredAt&&s.loweredAt[HOME]);
   $('days').textContent=d==null?'0':d;
 
-  OTHERS.forEach(([id,bid,label])=>{
+  OTHERS.forEach(([id,bid])=>{
     const el=$(id); const o=raised.has(bid);
     el.className='br'+(o?' up':'');
     // Each neighbour carries its own clock: how long it has been up, or how
-    // long since it last came down.
+    // long since it last came down. Named state, because a bare "9 min" on a
+    // wall doesn't say nine minutes of what.
     const t=dur(o?(s.raisedAt&&s.raisedAt[bid]):(s.loweredAt&&s.loweredAt[bid]));
-    // Say which state the clock belongs to — a bare "9 min" on a wall is
-    // ambiguous from across the room.
-    el.querySelector('span').innerHTML=
-      `${label}${t?` <em>${o?'up':'down'} ${t}</em>`:''}`;
+    $('d'+id.slice(1)).textContent=t?`${o?'up':'down'} ${t}`:'';
   });
 }
 load();setInterval(load,REFRESH);
