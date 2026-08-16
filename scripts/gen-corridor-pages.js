@@ -6,6 +6,28 @@
 const fs = require('fs');
 const path = require('path');
 
+// States that also have a /bridges/<slug>/ page — interlink corridor pages to
+// bridges (GSC 2026-08-13: /bridges/ converts at 27.4% CTR, 3x the homepage,
+// but only 146 impressions site-wide — an indexing/interlink gap). Kept in
+// sync manually with the bridges/ directory.
+const BRIDGE_STATE_SLUGS = {
+  AL:'alabama', AR:'arkansas', CA:'california', CT:'connecticut', DE:'delaware',
+  FL:'florida', IL:'illinois', IN:'indiana', LA:'louisiana', ME:'maine',
+  MD:'maryland', MA:'massachusetts', MI:'michigan', MN:'minnesota', MS:'mississippi',
+  NJ:'new-jersey', NY:'new-york', NC:'north-carolina', OH:'ohio', OR:'oregon',
+  PA:'pennsylvania', SC:'south-carolina', TX:'texas', VA:'virginia', WA:'washington',
+  WI:'wisconsin',
+};
+const STATE_NAMES = {
+  AL:'Alabama', AR:'Arkansas', CA:'California', CT:'Connecticut', DE:'Delaware',
+  FL:'Florida', IL:'Illinois', IN:'Indiana', LA:'Louisiana', ME:'Maine',
+  MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi',
+  NJ:'New Jersey', NY:'New York', NC:'North Carolina', OH:'Ohio', OR:'Oregon',
+  PA:'Pennsylvania', SC:'South Carolina', TX:'Texas', VA:'Virginia', WA:'Washington',
+  WI:'Wisconsin', UT:'Utah', NV:'Nevada', MT:'Montana', AZ:'Arizona', SD:'South Dakota',
+  KS:'Kansas', MO:'Missouri', WV:'West Virginia', GA:'Georgia', NH:'New Hampshire',
+};
+
 const CORRIDORS = [
   {
     slug: 'i-5', name: 'I-5', num: 5, states: ['WA','OR','CA'],
@@ -177,6 +199,26 @@ const CORRIDORS = [
       ['Does I-94 get congested?', `Yes — Milwaukee, the Chicago area, and Detroit are the big metro chokepoints. Track your mile marker through them with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
+  {
+    slug: 'i-70', name: 'I-70', num: 70, states: ['UT','CO','KS','MO','IL','IN','OH','WV','MD'],
+    subtitle: 'Utah to Maryland · over the Rockies', bounds: '[[36.5,-112.5],[40.5,-76.5]]',
+    lengthMi: '2,153 mi',
+    highPass: { slug: 'eisenhower', name: 'Eisenhower Tunnel', elev: '11,158 ft' },
+    pois: [ {name:'Eisenhower Tunnel', slug:'eisenhower', lat:39.6767, lon:-105.9364},
+            {name:'Vail Pass', slug:'vail', lat:39.5264, lon:-106.2136} ],
+    hero: `See I-70 right now — live DOT cameras and real-time conditions from central Utah over the Colorado Rockies to Baltimore, each tagged with its mile marker. The Eisenhower Tunnel, Vail Pass, and the plains beyond, all on one map.`,
+    segs: [
+      ['Over the Rockies', `I-70 runs about 2,153 miles from central Utah to just outside Baltimore, and its signature stretch is Colorado — climbing out of Denver into the high country through <a href="../../passes/vail/">Vail Pass</a> and the <a href="../../passes/eisenhower/">Eisenhower Tunnel</a>, the highest point on the entire Interstate Highway System at 11,158 feet.`],
+      ['Where the weather bites', `The I-70 mountain corridor west of Denver is one of the most weather-sensitive stretches of interstate in the country — snow, avalanche control closures, and holiday ski traffic all combine through Georgetown, the tunnel, and Vail Pass. East of the Rockies, the high plains of eastern Colorado and Kansas bring wind and occasional ground blizzards; further east, Midwest ice storms hit Missouri, Illinois, Indiana, and Ohio in winter.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you through the tunnel and over the passes, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-70 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-70, straight from each state DOT; a red banner appears at the top of this page if a stretch is fully closed. The most common winter closures are at the <a href="../../passes/eisenhower/">Eisenhower Tunnel</a> and <a href="../../passes/vail/">Vail Pass</a> in Colorado. See the <a href="../../closures/">US closures map</a> for everything.`],
+      ['How long is I-70?', `About 2,153 miles from central Utah to just west of Baltimore, Maryland.`],
+      ['What is the highest point on I-70?', `The <a href="../../passes/eisenhower/">Eisenhower Tunnel</a> in Colorado, at 11,158 feet — the highest point on the entire U.S. Interstate Highway System, not just I-70. It's marked with a ▲ on the map above.`],
+      ['Does I-70 close for snow in Colorado?', `Yes — CDOT runs traction and chain law restrictions and, in bad storms, full closures over <a href="../../passes/vail/">Vail Pass</a> and through the <a href="../../passes/eisenhower/">Eisenhower Tunnel</a> corridor, especially on winter weekends with heavy ski traffic. Track your mile marker through it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
 ];
 
 function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
@@ -337,7 +379,7 @@ ${faqHtml}
     </div>
   </div>
 
-  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../maps/">all maps</a></p>
+  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a>${c.states.filter(st => BRIDGE_STATE_SLUGS[st]).map(st => ` · <a href="../../bridges/${BRIDGE_STATE_SLUGS[st]}/">${STATE_NAMES[st]} drawbridges</a>`).join('')} · <a href="../../maps/">all maps</a></p>
 
   <footer class="site-footer">
     <div class="container">

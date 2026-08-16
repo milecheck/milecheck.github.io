@@ -77,6 +77,13 @@ const STATES = [
 
 const HUB_CAMS = 25; // "25 states" phrasing used across the site
 
+// States that also have a /bridges/<slug>/ page — interlink camera pages to
+// bridges (GSC 2026-08-13: /bridges/ converts at 27.4% CTR, 3x the homepage,
+// but only 146 impressions site-wide — an indexing/interlink gap, not a
+// content problem). Kept in sync manually with the bridges/ directory.
+const BRIDGE_STATES = new Set(['washington','oregon','california','ohio','wisconsin',
+  'new-york','pennsylvania','louisiana','south-carolina','florida','michigan','alabama','maine']);
+
 function faq(s){
   return [
     [`Where can I watch live ${s.name} traffic cameras?`,
@@ -218,7 +225,7 @@ ${faqHtml}
     </div>
   </div>
 
-  <p class="co-related">More: <a href="../">all highway cameras</a> · <a href="../../passes/">mountain passes</a> · <a href="../../corridors/">interstate corridors</a> · <a href="../../maps/">all maps</a></p>
+  <p class="co-related">More: <a href="../">all highway cameras</a> · <a href="../../passes/">mountain passes</a> · <a href="../../corridors/">interstate corridors</a>${BRIDGE_STATES.has(s.slug) ? ` · <a href="../../bridges/${s.slug}/">${s.name} drawbridges</a>` : ''} · <a href="../../maps/">all maps</a></p>
 
   <footer class="site-footer">
     <div class="container">

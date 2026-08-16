@@ -104,6 +104,34 @@ const PASSES = [
       ['Where is Parleys Summit?', `On I-80 just east of Salt Lake City, at the top of Parleys Canyon toward Park City. Track your mile marker up the canyon with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
+  {
+    slug: 'eisenhower', name: 'Eisenhower Tunnel', route: 'I-70', state: 'CO', stateName: 'Colorado',
+    dot: 'CDOT', lat: 39.6767, lon: -105.9364, r: 22, elev: '11,158 ft', dist: '~60 mi', distNote: 'west of Denver on I-70',
+    range: 'Continental Divide',
+    hero: `See the tunnel before you drive it. Live CDOT cameras and real-time conditions on I-70 at the Eisenhower–Johnson Memorial Tunnels — the highest point on the entire U.S. Interstate Highway System, and the main route from Denver to Colorado's ski country.`,
+    closes: `The tunnel bores through the Continental Divide, so it doesn't close for snow the way an open summit does — but the approaches on both sides do, for avalanche control, whiteout conditions, and the crashes that pile up on a steep, high-altitude grade in bad weather. Chain law and traction law restrictions on I-70 through this stretch are common all winter, and holiday ski traffic can back the approaches up for miles even in clear weather.`,
+    extra: { h: 'The highest point on the Interstate System', p: `At 11,158 feet, the Eisenhower Tunnel isn't just the high point of I-70 — it's the highest elevation reached anywhere on the U.S. Interstate Highway System. Air is noticeably thinner here, grades are steep on both approaches, and the westbound bore (Eisenhower) and eastbound bore (Johnson) are close enough together that an incident in one often slows traffic in both.` },
+    faq: [
+      ['Is the Eisenhower Tunnel open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-70 through the tunnel and its approaches, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Closures here are usually avalanche control or weather on the approach grades, not the tunnel itself.`],
+      ['Are chains required at the Eisenhower Tunnel?', `CDOT sets traction and chain law restrictions on I-70 through this stretch, and they tighten fast in a storm. Watch the <a href="#comap">live cameras above</a> for conditions on the approach grades, and always follow posted signs.`],
+      ['How high is the Eisenhower Tunnel?', `11,158 feet — the highest point on the entire U.S. Interstate Highway System, not just I-70. Compare it with <a href="../vail/">Vail Pass</a> further west on the same corridor.`],
+      ['How far is the Eisenhower Tunnel from Denver?', `About 60 miles west on I-70. Track your mile marker through the tunnel and over the Divide with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
+    ],
+  },
+  {
+    slug: 'vail', name: 'Vail Pass', route: 'I-70', state: 'CO', stateName: 'Colorado',
+    dot: 'CDOT', lat: 39.5264, lon: -106.2136, r: 22, elev: '10,662 ft', dist: '~100 mi', distNote: 'west of Denver on I-70',
+    range: 'Gore Range',
+    hero: `See the summit before you drive it. Live CDOT cameras and real-time conditions on I-70 over Vail Pass — the high, exposed crossing between Copper Mountain and Vail on Colorado's busiest mountain corridor.`,
+    closes: `Vail Pass sits well above treeline on both approaches, so it takes the full force of Rocky Mountain storms with little wind protection — heavy snow, whiteouts, and avalanche control work close I-70 here several times most winters, sometimes for hours at a stretch. It's also one of the most crash-prone stretches on the corridor when a storm hits during peak ski traffic.`,
+    extra: { h: 'The exposed stretch of I-70', p: `Unlike the tunneled crossing at the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, Vail Pass is a fully exposed summit — the highway climbs into open alpine terrain with no tree cover to block wind and blowing snow. That's why it's often the first part of the Denver-to-Vail drive to see a chain law or full closure when a storm rolls in.` },
+    faq: [
+      ['Is Vail Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-70 over the pass, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Vail Pass closes for avalanche control and heavy snow several times most winters.`],
+      ['Are chains required on Vail Pass?', `CDOT sets traction and chain law restrictions on I-70 over the summit, and they change fast in a storm — this is one of the more frequently restricted stretches on the whole corridor. Watch the <a href="#comap">live cameras above</a> and follow posted signs.`],
+      ['How high is Vail Pass?', `10,662 feet — lower than the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, but more exposed to wind and blowing snow since it's an open summit, not a tunnel.`],
+      ['How far is Vail Pass from Denver?', `About 100 miles west on I-70. Track your mile marker over the summit with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
+    ],
+  },
 ];
 
 function faqJsonLd(p){

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vail Pass Camera &amp; Conditions Right Now (I-70) | MileCheck</title>
+  <meta name="description" content="Live Vail Pass cameras and real-time road conditions on I-70 — see snow, chains, and closures before you drive it. CDOT cameras, tagged with mile marker. Free, no account.">
+  <link rel="canonical" href="https://milecheckapp.com/passes/vail/">
+  <meta property="og:title" content="Vail Pass Right Now — Live Camera &amp; Conditions | MileCheck">
+  <meta property="og:description" content="Live I-70 Vail Pass cameras and conditions. See the pass before you drive it — snow, chains, and closures in real time.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/passes/vail/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Vail Pass open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active closures and incidents on I-70 over the pass, straight from CDOT. See the whole route on the I-70 corridor page or the US closures map. Vail Pass closes for avalanche control and heavy snow several times most winters."}},{"@type":"Question","name":"Are chains required on Vail Pass?","acceptedAnswer":{"@type":"Answer","text":"CDOT sets traction and chain law restrictions on I-70 over the summit, and they change fast in a storm — this is one of the more frequently restricted stretches on the whole corridor. Watch the live cameras above and follow posted signs."}},{"@type":"Question","name":"How high is Vail Pass?","acceptedAnswer":{"@type":"Answer","text":"10,662 feet — lower than the Eisenhower Tunnel 40 miles east, but more exposed to wind and blowing snow since it's an open summit, not a tunnel."}},{"@type":"Question","name":"How far is Vail Pass from Denver?","acceptedAnswer":{"@type":"Answer","text":"About 100 miles west on I-70. Track your mile marker over the summit with the MileCheck app on CarPlay or Android Auto."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Mountain Passes","item":"https://milecheckapp.com/passes/"},{"@type":"ListItem","position":3,"name":"Vail Pass","item":"https://milecheckapp.com/passes/vail/"}]}</script>
+  <style>
+    .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
+    .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
+    .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
+    .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .co-stat .n.live{color:#0f7a4f;}
+    .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    .co-toggle{display:flex;gap:8px;margin:0 0 12px;flex-wrap:wrap;}
+    .co-chip{font-family:inherit;font-size:13.5px;font-weight:700;padding:8px 14px;border:1px solid #E5E5E5;border-radius:10px;background:#FAFAF7;color:#5b6670;cursor:pointer;display:flex;align-items:center;gap:7px;}
+    .co-chip.on.cam{background:#0f7a4f;border-color:#0f7a4f;color:#fff;}
+    .co-chip.on.alr{background:#DC2626;border-color:#DC2626;color:#fff;}
+    .co-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+    .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
+    .campic{width:100%;border-radius:8px;margin-top:6px;display:block;min-height:40px;background:#f0f0ee;}
+    .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
+    .crit-banner a{color:#fff;text-decoration:underline;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card.closure{border:2px solid #DC2626;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card .cc-desc{font-size:13.5px;color:#3a444d;margin-top:8px;line-height:1.5;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .poi-icon{color:#7C3AED;font-size:24px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;cursor:pointer;font-weight:900;}
+    .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
+    .co-guide h2{font-size:26px;margin:0 0 6px;}
+    .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
+    .co-seg{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px 22px;margin-bottom:14px;}
+    .co-seg h3{font-size:19px;margin:0 0 4px;}
+    .co-seg p{color:#3a444d;font-size:15px;line-height:1.6;margin:8px 0 0;}
+    .co-faq{max-width:1000px;margin:34px auto 0;padding:0 20px;}
+    .co-faq h2{font-size:24px;margin:0 0 14px;}
+    .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .co-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-faq a:hover{text-decoration:underline;}
+    .co-cta{max-width:1000px;margin:34px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;}
+    .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/" class="active">Maps</a>
+        <a href="../../cameras/">Cameras</a>
+        <a href="../../states/">United States</a>
+        <a href="../../canada/">Canada</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="crit-banner" id="critBanner" style="display:none"></div>
+
+  <div class="co-hero">
+    <div class="eyebrow">I-70 · Colorado · Elevation 10,662 ft</div>
+    <h1>Vail Pass right now: live camera &amp; conditions</h1>
+    <p class="sub">See the summit before you drive it. Live CDOT cameras and real-time conditions on I-70 over Vail Pass — the high, exposed crossing between Copper Mountain and Vail on Colorado's busiest mountain corridor.</p>
+    <div class="co-stats">
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras near the pass</div></div>
+      <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
+      <div class="co-stat"><div class="n">10,662 ft</div><div class="l">summit elevation</div></div>
+      <div class="co-stat"><div class="n">~100 mi</div><div class="l">west of Denver on I-70</div></div>
+    </div>
+  </div>
+
+  <div class="co-wrap">
+    <div class="co-toggle">
+      <button class="co-chip cam on" id="tgCam"><span class="co-dot" style="background:#0f7a4f"></span> Cameras</button>
+      <button class="co-chip alr on" id="tgAlr"><span class="co-dot" style="background:#DC2626"></span> Alerts &amp; closures</button>
+    </div>
+    <div style="position:relative;">
+      <div id="comap"></div>
+      <div class="co-bs" id="coStatus">Loading live Vail Pass data…</div>
+      <div class="co-card" id="coCard"></div>
+    </div>
+  </div>
+
+  <section class="co-guide">
+    <h2>About Vail Pass</h2>
+    <p class="lede">Vail Pass carries I-70 over the Gore Range at 10,662 ft. Here's what to watch, and when it bites.</p>
+    <div class="co-seg"><h3>When it closes</h3><p>Vail Pass sits well above treeline on both approaches, so it takes the full force of Rocky Mountain storms with little wind protection — heavy snow, whiteouts, and avalanche control work close I-70 here several times most winters, sometimes for hours at a stretch. It's also one of the most crash-prone stretches on the corridor when a storm hits during peak ski traffic.</p></div>
+    <div class="co-seg"><h3>The exposed stretch of I-70</h3><p>Unlike the tunneled crossing at the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, Vail Pass is a fully exposed summit — the highway climbs into open alpine terrain with no tree cover to block wind and blowing snow. That's why it's often the first part of the Denver-to-Vail drive to see a chain law or full closure when a storm rolls in.</p></div>
+    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the stationary view — the CDOT feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.</p></div>
+  </section>
+
+  <section class="co-faq">
+    <h2>Vail Pass questions, answered</h2>
+    <details><summary>Is Vail Pass open right now?</summary><p>The <a href="#comap">live map above</a> shows active closures and incidents on I-70 over the pass, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Vail Pass closes for avalanche control and heavy snow several times most winters.</p></details>
+    <details><summary>Are chains required on Vail Pass?</summary><p>CDOT sets traction and chain law restrictions on I-70 over the summit, and they change fast in a storm — this is one of the more frequently restricted stretches on the whole corridor. Watch the <a href="#comap">live cameras above</a> and follow posted signs.</p></details>
+    <details><summary>How high is Vail Pass?</summary><p>10,662 feet — lower than the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, but more exposed to wind and blowing snow since it's an open summit, not a tunnel.</p></details>
+    <details><summary>How far is Vail Pass from Denver?</summary><p>About 100 miles west on I-70. Track your mile marker over the summit with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.</p></details>
+  </section>
+
+  <div class="co-cta">
+    <h2>Watch the climb — live, hands-free</h2>
+    <p>MileCheck shows your exact mile marker in real time as you drive I-70 over Vail Pass, plus the nearest camera and any alert on your route. Free to start, works offline, and runs on CarPlay and Android Auto.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="co-related">More passes &amp; routes: <a href="../">all mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../closures/">road closures</a> · <a href="../../maps/">all maps</a></p>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../../cameras/">Highway cameras</a></li>
+            <li><a href="../../closures/">Road closures map</a></li>
+            <li><a href="../../fire/">Wildfire map</a></li>
+            <li><a href="../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: CDOT via MileCheck. Always drive to conditions and follow posted signs.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<script>
+const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+const PASS={state:'CO',lat:39.5264,lon:-106.2136,radiusKm:22,route:'I-70'};
+function km(a,b,c,d){const R=6371,pi=Math.PI/180;const x=Math.sin((c-a)*pi/2)**2+Math.cos(a*pi)*Math.cos(c*pi)*Math.sin((d-b)*pi/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon,lat,lon)<=PASS.radiusKm;}
+const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
+const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Vail Pass cameras &amp; conditions: CDOT via MileCheck',maxZoom:16}).addTo(map);
+map.setView([PASS.lat,PASS.lon],11);
+const camLayer=L.layerGroup().addTo(map);
+const alrLayer=L.layerGroup().addTo(map);
+let CAMS=[], ALERTS=[], showCam=true, showAlr=true;
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
+async function loadCams(){const d=await fetchJSON(WORKER+'/cameras?state='+PASS.state,3);return ((d&&d.cameras)||[]).filter(c=>c.isActive!==false&&c.imageUrl&&near(+c.lat,+c.lon)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl}));}
+async function loadAlerts(){const d=await fetchJSON(WORKER+'/incidents?state='+PASS.state,3);return ((d&&d['incident-reports'])||[]).filter(a=>{const sl=a.location&&a.location['start-location'];return sl&&near(+sl['start-lat'],+sl['start-long']);}).map(a=>{const sl=a.location['start-location'];return {lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:(a.headline||a.description||a['impact-desc']||'Incident').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,140),desc:(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,240),route:a.location&&a.location['route-id']};});}
+const cardEl=document.getElementById('coCard');
+function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closure':'');cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||PASS.route)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · CDOT</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function alrCard(a){return '<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+esc(a.route||PASS.route)+(a.mp>0?' · MP '+Math.round(a.mp):'')+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();if(showCam)CAMS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:6,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:cl?10:7,color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' near the pass':'Toggle a layer to view pass data';}
+L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">▲</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('Vail Pass · 10,662 ft',{direction:'top',offset:[0,-12]}).addTo(map);
+document.getElementById('tgCam').onclick=e=>{showCam=!showCam;e.currentTarget.classList.toggle('on',showCam);draw();};
+document.getElementById('tgAlr').onclick=e=>{showAlr=!showAlr;e.currentTarget.classList.toggle('on',showAlr);draw();};
+function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
+Promise.all([loadCams(),loadAlerts()]).then(([c,a])=>{CAMS=c;ALERTS=a;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();const fc=ALERTS.filter(isFullClosure);if(fc.length){const f=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML='⚠ CRITICAL: the Vail Pass area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' on I-70'+(f.mp>0?' near MP '+Math.round(f.mp):'')+'. Tap a red marker for details.';bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+</script>
+
+</body>
+</html>
