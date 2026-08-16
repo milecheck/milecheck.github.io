@@ -84,6 +84,31 @@ const HUB_CAMS = 25; // "25 states" phrasing used across the site
 const BRIDGE_STATES = new Set(['washington','oregon','california','ohio','wisconsin',
   'new-york','pennsylvania','louisiana','south-carolina','florida','michigan','alabama','maine']);
 
+// City-level camera pages (gen-city-camera-pages.js), grouped by state code —
+// interlink state pages DOWN to their cities (2026-08-15: found the reverse link
+// already existed — every city page links up to its state — but nothing linked
+// down, so a search landing on the generic state page had no path to the more
+// specific "Columbus traffic cameras" page Google actually needs for that query).
+// Kept in sync manually with the CITIES array in gen-city-camera-pages.js.
+const CITIES_BY_STATE = {
+  WA: [{slug:'seattle', name:'Seattle'}],
+  OR: [{slug:'portland', name:'Portland'}],
+  CA: [{slug:'los-angeles', name:'Los Angeles'}, {slug:'san-francisco', name:'San Francisco'},
+       {slug:'sacramento', name:'Sacramento'}, {slug:'san-diego', name:'San Diego'}],
+  NV: [{slug:'las-vegas', name:'Las Vegas'}],
+  AZ: [{slug:'phoenix', name:'Phoenix'}],
+  UT: [{slug:'salt-lake-city', name:'Salt Lake City'}],
+  GA: [{slug:'atlanta', name:'Atlanta'}],
+  FL: [{slug:'orlando', name:'Orlando'}, {slug:'tampa', name:'Tampa'}, {slug:'miami', name:'Miami'}],
+  MI: [{slug:'detroit', name:'Detroit'}],
+  OH: [{slug:'columbus', name:'Columbus'}, {slug:'cleveland', name:'Cleveland'}, {slug:'cincinnati', name:'Cincinnati'}],
+  WI: [{slug:'milwaukee', name:'Milwaukee'}],
+  PA: [{slug:'pittsburgh', name:'Pittsburgh'}, {slug:'philadelphia', name:'Philadelphia'}],
+  NY: [{slug:'new-york-city', name:'New York City'}, {slug:'buffalo', name:'Buffalo'}],
+  LA: [{slug:'new-orleans', name:'New Orleans'}],
+  AL: [{slug:'birmingham', name:'Birmingham'}],
+};
+
 function faq(s){
   return [
     [`Where can I watch live ${s.name} traffic cameras?`,
@@ -225,7 +250,7 @@ ${faqHtml}
     </div>
   </div>
 
-  <p class="co-related">More: <a href="../">all highway cameras</a> · <a href="../../passes/">mountain passes</a> · <a href="../../corridors/">interstate corridors</a>${BRIDGE_STATES.has(s.slug) ? ` · <a href="../../bridges/${s.slug}/">${s.name} drawbridges</a>` : ''} · <a href="../../maps/">all maps</a></p>
+  <p class="co-related">More: <a href="../">all highway cameras</a>${(CITIES_BY_STATE[s.code] || []).map(c => ` · <a href="../${c.slug}/">${c.name} cameras</a>`).join('')} · <a href="../../passes/">mountain passes</a> · <a href="../../corridors/">interstate corridors</a>${BRIDGE_STATES.has(s.slug) ? ` · <a href="../../bridges/${s.slug}/">${s.name} drawbridges</a>` : ''} · <a href="../../maps/">all maps</a></p>
 
   <footer class="site-footer">
     <div class="container">
