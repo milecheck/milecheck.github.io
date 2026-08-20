@@ -48,6 +48,9 @@
     .br-card.up{border-color:#DC2626;background:#FEF5F5;}
     .br-card.up .br-dot{background:#DC2626;animation:pulse 1.6s infinite;}
     .br-card.down .br-dot{background:#0f7a4f;}
+    .br-card.unknown{border-color:#E5E5E5;background:#F7F7F5;}
+    .br-card.unknown .br-dot{background:#9aa4ad;}
+    .br-card.unknown .br-st{color:#5b6670;}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     .br-nm{font-weight:800;font-size:14.5px;}
     .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
@@ -205,7 +208,14 @@ let liveMarkers=[];
 function titleCase(str){return str.toLowerCase().replace(/\b[a-z]/g,c=>c.toUpperCase());}
 async function refresh(){
   let bridges=[];
-  try{const r=await fetch(LA_URL,{cache:'no-store'});if(r.ok){bridges=(await r.json()).bridges||[];}}catch(e){}
+  // Success must be proven, never assumed. An empty `bridges` array means two
+  // very different things — "DOTD reports every bridge open" or "the feed
+  // never answered" — and a viewer can't tell them apart on the map. Track
+  // the fetch outcome separately so a dead/erroring feed can never render as
+  // a confident "all bridges open" claim (with a fabricated 0-closed count)
+  // below.
+  let ok=false;
+  try{const r=await fetch(LA_URL,{cache:'no-store'});if(r.ok){bridges=(await r.json()).bridges||[];ok=true;}}catch(e){}
   liveMarkers.forEach(m=>map.removeLayer(m));liveMarkers=[];liveIndex=[];
   const roadClosed=bridges.filter(b=>/closed/i.test(b.road));
   bridges.forEach(b=>{
@@ -220,10 +230,11 @@ async function refresh(){
   });
   const load=document.getElementById('liveLoading');
   if(load){
-    if(roadClosed.length){load.className='br-card up';load.innerHTML='<span class="br-dot"></span><div><div class="br-nm">'+roadClosed.length+' bridge'+(roadClosed.length>1?'s':'')+' closed to road traffic</div><div class="br-st">'+roadClosed.map(b=>titleCase(b.name)).slice(0,3).join(' · ')+(roadClosed.length>3?' +'+(roadClosed.length-3)+' more':'')+'</div></div>';}
+    if(!ok){load.className='br-card unknown';load.innerHTML='<span class="br-dot"></span><div><div class="br-nm">DOTD bridge status unavailable right now</div><div class="br-st">Live feed didn\'t respond — try refreshing the page</div></div>';}
+    else if(roadClosed.length){load.className='br-card up';load.innerHTML='<span class="br-dot"></span><div><div class="br-nm">'+roadClosed.length+' bridge'+(roadClosed.length>1?'s':'')+' closed to road traffic</div><div class="br-st">'+roadClosed.map(b=>titleCase(b.name)).slice(0,3).join(' · ')+(roadClosed.length>3?' +'+(roadClosed.length-3)+' more':'')+'</div></div>';}
     else{load.className='br-card down';load.innerHTML='<span class="br-dot"></span><div><div class="br-nm">All bridges open to road traffic</div><div class="br-st">'+bridges.length+' DOTD movable bridges reporting</div></div>';}
   }
-  document.getElementById('brUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · DOTD status, refreshed every 10 min';
+  document.getElementById('brUpdated').textContent=ok?('Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · DOTD status, refreshed every 10 min'):'DOTD status feed unavailable — will retry automatically';
   renderList();
 }
 refresh();

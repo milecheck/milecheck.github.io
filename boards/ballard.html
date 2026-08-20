@@ -52,6 +52,7 @@
   .r{display:flex;align-items:baseline;font-size:1.55cqw;font-weight:700}
   .r .v{margin-left:auto;font-weight:800}
   .r .v.up{color:var(--red)} .r .v.down{color:var(--green)}
+  .r .v.nofeed{color:var(--dim);font-weight:700}
   .r small{font-size:1.15cqw;font-weight:700;color:var(--dim);margin-left:.6cqw}
   .brlist{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-evenly}
   .brlist .r{font-size:1.9cqw;padding:.25cqw 0;border-bottom:1px dashed var(--line)}
@@ -124,6 +125,12 @@ const BRIDGES = [
   {id:'WA-bridge-university', nm:'University'},
   {id:'WA-bridge-montlake',   nm:'Montlake'},
 ];
+// SDOT's real-time feed returns only 1st Ave S, Ballard, Fremont, Montlake,
+// and South Park — University is NOT in it, so raised.has(...) for it is
+// always false. Printing that as "Down" would look identical to a verified
+// all-clear reading, when really we have never heard from this bridge.
+// Same flag as boards/ballard-canal.html.
+const NO_FEED = new Set(['WA-bridge-university']);
 
 const ADS = [
   "Bridge is up? Happy hour runs till it drops. — The Ballard Tavern",
@@ -204,6 +211,10 @@ async function load(){
 
   // --- all bridges ---
   $('brlist').innerHTML = BRIDGES.map(b=>{
+    if (NO_FEED.has(b.id)){
+      return `<div class="r"><span>${b.nm}</span>`
+           + `<span class="v nofeed">no live status</span></div>`;
+    }
     const up = raised.has(b.id);
     const m  = up ? mins(s.raisedAt&&s.raisedAt[b.id]) : mins(s.loweredAt&&s.loweredAt[b.id]);
     const note = up

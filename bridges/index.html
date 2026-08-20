@@ -49,11 +49,14 @@
     .br-card.up .br-dot{background:#DC2626;animation:pulse 1.6s infinite;}
     .br-card.recent .br-dot{background:#F59E0B;}
     .br-card.down .br-dot{background:#0f7a4f;}
+    .br-card.unavailable{background:#F6F8F7;}
+    .br-card.unavailable .br-dot{background:#8A939B;}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     .br-nm{font-weight:800;font-size:15.5px;}
     .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
     .br-card.up .br-st{color:#DC2626;font-weight:800;}
     .br-card.recent .br-st{color:#b45309;font-weight:700;}
+    .br-card.unavailable .br-st{color:#8A939B;font-weight:600;font-style:italic;}
     .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:56vh;background:#eef0e9;}
     #brmap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
@@ -61,9 +64,11 @@
     .bmk-ic{width:36px;height:36px;border-radius:50%;background:#fff;border:2.5px solid #7C3AED;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.28);}
     .bmk.bi-up .bmk-ic{background:#DC2626;border-color:#fff;animation:pulse 1.5s infinite;}
     .bmk.bi-rec .bmk-ic{background:#F59E0B;border-color:#fff;}
+    .bmk.bi-na .bmk-ic{background:#F6F8F7;border-color:#8A939B;opacity:.7;}
     .bmk-nm{background:#fff;border:1.5px solid #E5E5E5;color:#0E1116;font-weight:800;font-size:11px;padding:2px 8px;border-radius:8px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.2);}
     .bmk.bi-up .bmk-nm{background:#DC2626;color:#fff;border-color:#fff;}
     .bmk.bi-rec .bmk-nm{background:#F59E0B;color:#fff;border-color:#fff;}
+    .bmk.bi-na .bmk-nm{background:#F6F8F7;color:#8A939B;border-color:#8A939B;}
     .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
     .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
     .br-notes b{color:#0E1116;}
@@ -198,9 +203,17 @@ function matchKey(id){id=(id||'').toLowerCase();return BRIDGES.find(b=>id.includ
 
 async function refresh(){
   let data={raised:[],raisedAt:{},loweredAt:{}};
-  try{const r=await fetch(API,{cache:'no-store'});if(r.ok)data=await r.json();}catch(e){}
+  // Success must be PROVEN, not assumed. If the fetch throws, the response isn't ok,
+  // or the JSON body is malformed, `data` stays at its empty defaults — and without
+  // this flag that empty state would render as "all 5 bridges down", a confident
+  // all-clear the page never actually received. A dead feed must look unavailable,
+  // not calm.
+  let ok=false;
+  try{const r=await fetch(API,{cache:'no-store'});if(r.ok){data=await r.json();ok=true;}}catch(e){}
   const state={};
-  BRIDGES.forEach(b=>state[b.key]={tier:'down',detail:'Down — open to traffic'});
+  BRIDGES.forEach(b=>state[b.key]=ok
+    ?{tier:'down',detail:'Down — open to traffic'}
+    :{tier:'unavailable',detail:'No live status — feed offline'});
   (data.raised||[]).forEach(id=>{const b=matchKey(id);if(b){const t=(data.raisedAt||{})[id];
     state[b.key]={tier:'up',detail:t?('UP — raised '+ago(t)+' ago'):'UP right now'};}});
   Object.entries(data.loweredAt||{}).forEach(([id,ts])=>{const b=matchKey(id);
@@ -230,9 +243,9 @@ async function refresh(){
   const svgOpen='<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h3.5m13 0H22"/><path d="M6.5 16l4.2-8m6.8 8l-4.2-8"/><path d="M10 19.5l1.5-1.2 1.5 1.2 1.5-1.2 1.5 1.2"/></svg>';
   BRIDGES.forEach(b=>{
     const st=state[b.key];
-    const cls=st.tier==='up'?'bi-up':(st.tier==='recent'?'bi-rec':'bi-down');
-    const glyph=st.tier==='up'?svgOpen:svgClosed(st.tier==='recent'?'#fff':'#7C3AED');
-    const label=b.name.replace(' Bridge','')+(st.tier==='up'?' · UP':'');
+    const cls=st.tier==='up'?'bi-up':st.tier==='recent'?'bi-rec':st.tier==='unavailable'?'bi-na':'bi-down';
+    const glyph=st.tier==='up'?svgOpen:svgClosed(st.tier==='recent'?'#fff':(st.tier==='unavailable'?'#8A939B':'#7C3AED'));
+    const label=b.name.replace(' Bridge','')+(st.tier==='up'?' · UP':(st.tier==='unavailable'?' · N/A':''));
     const inner=b.labelUp
       ?'<span class="bmk-nm">'+label+'</span><span class="bmk-ic">'+glyph+'</span>'
       :'<span class="bmk-ic">'+glyph+'</span><span class="bmk-nm">'+label+'</span>';
@@ -242,7 +255,10 @@ async function refresh(){
     m.bindPopup('<b>'+b.name+'</b><br>'+st.detail);
     markers.push(m);
   });
-  document.getElementById('brUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · refreshes every 30s';
+  const nowStr=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+  document.getElementById('brUpdated').textContent=ok
+    ?('Updated '+nowStr+' · refreshes every 30s')
+    :('Feed unavailable as of '+nowStr+' · retrying every 30s');
 }
 refresh();
 setInterval(refresh,30000);

@@ -213,6 +213,7 @@ const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
 let clLayer=L.layerGroup().addTo(map);
 const clCache={};
 let CLOSURES=[];
+let FAILED_STATES=new Set();
 function statesInView(){
   const b=map.getBounds(),out=[];
   for(const[c,v]of Object.entries(SB)){
@@ -227,7 +228,7 @@ function isClosed(r){
 }
 async function closuresFor(st){
   const c=clCache[st];
-  if(c&&Date.now()-c.t<300000)return c.list;
+  if(c&&Date.now()-c.t<300000)return {ok:true,list:c.list};
   try{
     const d=await fetch(WORKER+"/incidents?state="+st,{cache:"no-store"}).then(r=>r.json());
     const list=(d["incident-reports"]||[]).filter(isClosed).map(r=>{
@@ -237,8 +238,17 @@ async function closuresFor(st){
       return {lat,lon,head:(r.headline||"Road closed").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().slice(0,180),
         route:((r.location||{})["route-id"]||"").trim(),mp:sl["start-mile-marker"],st};
     }).filter(Boolean);
-    clCache[st]={t:Date.now(),list};return list;
-  }catch(e){clCache[st]={t:Date.now(),list:[]};return [];}
+    clCache[st]={t:Date.now(),list};
+    return {ok:true,list};
+  }catch(e){
+    // A fetch failure (network blip, Worker timeout, bad JSON) must NEVER be
+    // cached and must NEVER be treated as "this state has zero closures" —
+    // a dead feed reads identically to a quiet one unless we say so. Do not
+    // write clCache[st] here (a stale-but-real cached list, if any, is left
+    // untouched so it can still be shown), and report ok:false so the caller
+    // marks this state's data unavailable instead of implying an all-clear.
+    return {ok:false,list:(c&&c.list)||[]};
+  }
 }
 function popupHtml(c){
   return `<div class="fpop"><div class="fp-nm">⛔ Road closed</div>
@@ -264,17 +274,42 @@ function render(){
     m.bindPopup(popupHtml(c),{maxWidth:290});
     m.on('click',()=>{rememberView();map.flyTo([c.lat,c.lon],Math.max(map.getZoom(),10),{duration:.8});});
   });
-  bs.className="bigstatus";
-  bs.textContent=inView.length?("⛔ "+inView.length+" road closure"+(inView.length>1?"s":"")+" in view"):"No closures in view — roads are open";
-  if(!inView.length)bs.className="bigstatus hint";
+  // A feed that failed to load for a state currently in view must never be
+  // presented as "no closures here" — that would be a dead feed dressed up
+  // as a confirmed all-clear. Surface it explicitly instead, separate from
+  // the genuine "we checked, roads are open" state below.
+  const failedNames=[...FAILED_STATES].map(c=>NAMES[c]||c);
+  const failedNote=failedNames.length
+    ? "Closure data unavailable for "+failedNames.join(", ")+" — feed didn't respond, not a confirmed clear."
+    : "";
+
+  if(failedNames.length){
+    bs.className="bigstatus hint";
+    bs.textContent=inView.length
+      ? ("⛔ "+inView.length+" road closure"+(inView.length>1?"s":"")+" in view · "+failedNote)
+      : failedNote;
+  } else {
+    bs.className="bigstatus";
+    bs.textContent=inView.length?("⛔ "+inView.length+" road closure"+(inView.length>1?"s":"")+" in view"):"No closures in view — roads are open";
+    if(!inView.length)bs.className="bigstatus hint";
+  }
+
   const rows=document.getElementById("clRows");
-  if(!inView.length){rows.innerHTML=`<div class="cl-empty">✓ No closures here<small>Every highway in this view is open per the state DOT feeds. A quiet map is good news.</small></div>`;return;}
+  const failedBanner=failedNames.length
+    ? `<div style="padding:10px 16px;border-bottom:1px solid #F0F0EE;background:#FAFAF7;color:#5b6670;font-size:12.5px;line-height:1.5;font-weight:600;">⚠ ${failedNote}</div>`
+    : "";
+  if(!inView.length){
+    rows.innerHTML = failedNames.length
+      ? failedBanner+`<div class="cl-empty" style="color:#5b6670;">Closure data unavailable<small>Try again in a moment, or pick a different state — this is not a confirmed clear.</small></div>`
+      : `<div class="cl-empty">✓ No closures here<small>Every highway in this view is open per the state DOT feeds. A quiet map is good news.</small></div>`;
+    return;
+  }
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route));
-  rows.innerHTML=sorted.slice(0,40).map((c,i)=>`<div class="crow" data-i="${i}">
+  rows.innerHTML=failedBanner+sorted.slice(0,40).map((c,i)=>`<div class="crow" data-i="${i}">
       <div class="t"><span class="rt">${c.route||"Local road"}${c.mp?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
       <div class="sub">${c.head}</div>
     </div>`).join("");
-  rows.querySelectorAll('.crow').forEach(el=>el.onclick=()=>{
+  rows.querySelectorAll('.crow[data-i]').forEach(el=>el.onclick=()=>{
     const c=sorted[+el.dataset.i]; if(!c)return;
     rememberView();
     map.flyTo([c.lat,c.lon],10,{duration:.9});
@@ -287,8 +322,20 @@ async function loadClosures(){
   const z=map.getZoom();
   if(z>=5){
     const sts=statesInView().slice(0,6);
-    const lists=await Promise.all(sts.map(closuresFor));
+    const results=await Promise.all(sts.map(closuresFor));
+    // Track per-state fetch failures separately from empty-but-successful
+    // results — a state whose feed failed must not be silently folded into
+    // "0 closures" and reported as roads-are-open.
+    const failed=new Set();
+    const lists=[];
+    results.forEach((r,i)=>{
+      if(!r.ok)failed.add(sts[i]);
+      if(r.list&&r.list.length)lists.push(r.list);
+    });
+    FAILED_STATES=failed;
     CLOSURES=lists.flat();
+  } else {
+    FAILED_STATES=new Set();
   }
   busy=false; render();
 }

@@ -255,9 +255,17 @@ function laneSummary(r){
 }
 
 async function load(){
-  let ca=[],us=[];
+  // usOk tracks whether the CBP fetch actually succeeded. 'when' (below) is
+  // only ever set from a matched CBP record, so a network error, a CORS
+  // block, bad JSON, and "fetch worked but no crossing matched" all look
+  // identical downstream: every row's when=''. Without tracking success
+  // separately, that indistinguishable failure used to render the freshest-
+  // sounding timestamp on the board — "just now" — on a cycle that received
+  // zero live border data. Only a genuinely successful fetch with a matched
+  // record is allowed to claim a real update time.
+  let ca=[],us=[],usOk=false;
   try{ const d=await fetch(API+'/border-waits-ca').then(r=>r.json()); ca=d.waitTimes||[]; }catch(e){}
-  try{ const d=await fetch(API+'/border-waits').then(r=>r.json()); us=Array.isArray(d)?d:(d.port||[]); }catch(e){}
+  try{ const d=await fetch(API+'/border-waits').then(r=>r.json()); us=Array.isArray(d)?d:(d.port||[]); usOk=true; }catch(e){}
 
   const rows=WANT.map(w=>{
     const c=ca.find(x=>(x['poe-name']||'').trim()===w.ca);
@@ -316,7 +324,11 @@ async function load(){
     </div>`;}).join('');
 
   const s=rows.find(r=>r.when);
-  $('age').textContent=s?new Date(s.when).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'just now';
+  // Only render a clock time when the fetch actually succeeded AND a record
+  // matched — otherwise say so plainly instead of guessing "just now".
+  $('age').textContent = (usOk && s)
+    ? new Date(s.when).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})
+    : 'unavailable';
 }
 load();setInterval(load,REFRESH);
 </script>

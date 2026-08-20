@@ -49,7 +49,7 @@
   .eyebrow{font-size:1.25cqw;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
   .passname{font-size:3.3cqw;font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:.3cqw}
   .status{font-size:5.4cqw;font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:.6cqw}
-  .st-open{color:var(--green)} .st-warn{color:var(--amber)} .st-bad{color:var(--red)}
+  .st-open{color:var(--green)} .st-warn{color:var(--amber)} .st-bad{color:var(--red)} .st-unknown{color:var(--dim)}
   .statusline{font-size:1.3cqw;font-weight:700;color:var(--dim);margin-top:.4cqw;line-height:1.3}
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
@@ -370,10 +370,15 @@ function ago(ts){
 }
 
 async function load(){
+  // Feed success is proven per-endpoint, never assumed. A Worker outage, CORS
+  // failure, or bad JSON must not read the same as a verified-clear response —
+  // this is the highest-stakes board on the site, read right before a mountain
+  // pass crossing.
+  let cOk = false, iOk = false;
   try{
     const [cRes, iRes] = await Promise.all([
-      fetch(API + '/conditions?state=WA').then(r=>r.json()).catch(()=>null),
-      fetch(API + '/incidents?state=WA').then(r=>r.json()).catch(()=>null),
+      fetch(API + '/conditions?state=WA').then(r=>r.json()).then(d=>{cOk=true; return d;}).catch(()=>null),
+      fetch(API + '/incidents?state=WA').then(r=>r.json()).then(d=>{iOk=true; return d;}).catch(()=>null),
     ]);
 
     // --- pass status ---
@@ -389,7 +394,16 @@ async function load(){
     const bad  = /closed|chain|traction required/i.test(txt) && !offSeason;
     const warn = /snow|ice|slush|compact|pack/i.test(txt) && !offSeason;
 
-    if (offSeason){
+    if (!cOk){
+      // Conditions fetch failed outright — cRes is null and txt is empty for
+      // the SAME reason a genuinely clear pass would be empty. Without this
+      // branch first, the code below can't tell "verified clear" from "we
+      // never heard back", and both would print OPEN. A dead feed must never
+      // read as a verified-clear pass.
+      $('status').className = 'status st-unknown';
+      $('status').textContent = 'STATUS\nUNAVAILABLE';
+      $('statusline').textContent = 'Conditions feed unavailable — pass status unknown.';
+    } else if (offSeason){
       $('status').className = 'status st-open';
       $('status').textContent = 'OPEN';
       // Two lines, not four: the old blurb explained the whole seasonal policy and
@@ -419,7 +433,12 @@ async function load(){
     // July because there's nothing to report. Temperature is different: people
     // want it year-round, so it comes from NWS (below) instead of being
     // suppressed along with the rest of the stale pass record.
-    if (offSeason) {
+    if (!cOk) {
+      // No data to show — the row stays visually pending rather than printing
+      // a stale or fabricated number.
+      $('snow').textContent = '—';  $('snow').className = 'v pend';
+      $('src').textContent  = '';
+    } else if (offSeason) {
       $('snow').textContent = 'Reported Nov–Apr';  $('snow').className = 'v pend';
       $('src').textContent  = stamp ? `WSDOT last updated the pass report ${stamp}` : '';
     } else {
@@ -448,11 +467,18 @@ async function load(){
       if (list.length >= 5) break;
     }
     const box = $('alerts');
-    box.innerHTML = list.length
-      ? list.map(a =>
-          `<div class="al${a.hot?' hot':''}"><span class="mp">${a.mp!=null?'MP '+Math.round(a.mp):''}</span>`
-          + `<span class="tx">${a.head}</span></div>`).join('')
-      : '<div class="none">Nothing reported on I-90 east.<br>Clear to the pass.</div>';
+    if (!iOk){
+      // Incidents fetch failed — incs is empty for the same reason a genuinely
+      // alert-free corridor would be empty. "Clear to the pass" must only ever
+      // describe a feed that actually reported back.
+      box.innerHTML = '<div class="none">Live alerts feed unavailable.<br>I-90 status unknown.</div>';
+    } else {
+      box.innerHTML = list.length
+        ? list.map(a =>
+            `<div class="al${a.hot?' hot':''}"><span class="mp">${a.mp!=null?'MP '+Math.round(a.mp):''}</span>`
+            + `<span class="tx">${a.head}</span></div>`).join('')
+        : '<div class="none">Nothing reported on I-90 east.<br>Clear to the pass.</div>';
+    }
 
   }catch(e){
     $('statusline').textContent = 'Live feed unavailable — retrying.';

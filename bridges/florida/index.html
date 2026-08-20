@@ -212,9 +212,15 @@ let liveMarkers=[];
 function schedFor(gname){const m=SCHED.find(b=>b.g===gname);return m?'<div class="sched">'+m.s+'</div><div class="cite">'+m.c+'</div>':'';}
 async function refresh(){
   let feats=[];
+  // A failed fetch, a non-OK response, or bad JSON must never look like a verified
+  // "we checked every FDOT sensor and they're all down" — that's a real, confident
+  // safety claim and only a genuinely successful read has earned the right to make it.
+  // `ok` tracks whether the read actually succeeded; an empty feats[] from a dead
+  // feed is not the same fact as an empty feats[] from a real, successful response.
+  let ok=false;
   try{
     const r=await fetch(GPIO_URL,{cache:'no-store'});
-    if(r.ok){const j=await r.json();feats=(j.features||[]).map(f=>f.attributes).filter(a=>a.featuretype==='Bridge');}
+    if(r.ok){const j=await r.json();feats=(j.features||[]).map(f=>f.attributes).filter(a=>a.featuretype==='Bridge');ok=true;}
   }catch(e){}
   liveMarkers.forEach(m=>map.removeLayer(m));liveMarkers=[];liveIndex=[];
   const up=feats.filter(a=>a.featurestatus==='Bridge Up');
@@ -230,10 +236,13 @@ async function refresh(){
   // status card
   const load=document.getElementById('liveLoading');
   if(load){
-    if(up.length){load.className='br-card up';load.innerHTML='<span class="br-dot"></span><div><div class="br-nm">'+up.length+' bridge'+(up.length>1?'s':'')+' UP right now</div><div class="br-st">'+up.map(a=>a.devicename).slice(0,3).join(' · ')+(up.length>3?' +'+(up.length-3)+' more':'')+'</div></div>';}
+    if(!ok){load.className='br-card';load.innerHTML='<span class="br-dot" style="background:#8A939B;"></span><div><div class="br-nm">Live status unavailable</div><div class="br-st" style="color:#8A939B;">FDOT bridge sensors unreachable right now — schedules below still apply</div></div>';}
+    else if(up.length){load.className='br-card up';load.innerHTML='<span class="br-dot"></span><div><div class="br-nm">'+up.length+' bridge'+(up.length>1?'s':'')+' UP right now</div><div class="br-st">'+up.map(a=>a.devicename).slice(0,3).join(' · ')+(up.length>3?' +'+(up.length-3)+' more':'')+'</div></div>';}
     else{load.className='br-card down';load.innerHTML='<span class="br-dot"></span><div><div class="br-nm">All monitored bridges down</div><div class="br-st">'+feats.length+' FDOT live sensors reporting · zoom the map for schedules</div></div>';}
   }
-  document.getElementById('brUpdated').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · live sensors refresh every 30s';
+  document.getElementById('brUpdated').textContent=ok
+    ? 'Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · live sensors refresh every 30s'
+    : 'Last checked '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · live feed unavailable, retrying';
   renderList();
 }
 refresh();

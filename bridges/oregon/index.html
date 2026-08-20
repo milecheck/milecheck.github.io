@@ -210,6 +210,11 @@ const I5=[45.615393,-122.676673];
 let liftMarker=null;
 async function checkLift(){
   let lift=null;
+  // Tri-state, not a boolean: a failed/unreachable fetch must NOT collapse into the same
+  // `lift=null` value that a successful check produces when it finds no active lift — that
+  // would make a dead WSDOT feed print the identical reassuring "no lift reported" claim as a
+  // verified-clear reading. `ok` proves the check actually completed before we say anything.
+  let ok=false;
   try{
     const j=await fetch('https://milepost-proxy.leahgerber93.workers.dev/incidents?state=WA',{cache:'no-store'}).then(r=>r.json());
     lift=(j['incident-reports']||[]).find(r=>{
@@ -218,9 +223,14 @@ async function checkLift(){
       const la=+((r.location||{})['start-location']||{})['start-lat'];
       return /bridge lift|interstate bridge/.test(t)&&/I-?5|005/i.test(rt+' '+t)&&la>45.4&&la<45.8;
     })||null;
+    ok=true;
   }catch(e){}
   if(liftMarker){map.removeLayer(liftMarker);liftMarker=null;}
   const el=document.getElementById('brUpdated');
+  if(!ok){
+    el.textContent='I-5 Interstate Bridge: lift status unavailable · WSDOT feed unreachable · checked '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+    return;
+  }
   if(lift){
     const ic=L.divIcon({className:'',iconSize:[30,30],iconAnchor:[15,15],html:'<div class="bmk-ic bi-up" style="background:#DC2626;border-color:#fff;animation:pulse 1.5s infinite;"></div>'});
     liftMarker=L.marker(I5,{icon:ic,zIndexOffset:2000}).addTo(map)

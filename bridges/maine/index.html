@@ -210,10 +210,17 @@ renderList();
 let liveMarkers=[];
 async function checkME(){
   let events=[];
+  let ok=false; // success must be proven, not assumed — a feed/parse failure must never render as "no bridge events" with a fresh timestamp
   try{
     const j=await fetch('https://milepost-proxy.leahgerber93.workers.dev/incidents?state=ME',{cache:'no-store'}).then(r=>r.json());
     events=(j['incident-reports']||[]).filter(r=>/bridge/i.test((r.headline||'')+' '+(r.description||'')));
+    ok=true;
   }catch(e){}
+  const el=document.getElementById('brUpdated');
+  if(!ok){
+    el.textContent='Live bridge-event check unavailable';
+    return;
+  }
   liveMarkers.forEach(m=>map.removeLayer(m));liveMarkers=[];
   events.forEach(ev=>{
     const la=+((ev.location||{})['start-location']||{})['start-lat'];
@@ -224,7 +231,6 @@ async function checkME(){
       .bindPopup('<div class="fpop"><b>Bridge event</b><div class="sched">'+(ev.description||ev.headline||'')+'</div><div class="cite">Live from the Maine DOT feed</div></div>');
     liveMarkers.push(m);
   });
-  const el=document.getElementById('brUpdated');
   el.textContent=(events.length?('⚠ '+events.length+' bridge event'+(events.length>1?'s':'')+' active · '):'No bridge events · ')+'ME feed checked '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
 }
 checkME();
