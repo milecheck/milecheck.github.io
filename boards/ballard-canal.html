@@ -56,7 +56,7 @@
 
   /* lamps sit above the engraving and bloom into it */
   .lamp{position:absolute;z-index:5;transform:translate(-50%,-50%);pointer-events:none}
-  .bulb{width:1.5cqw;height:1.5cqw;border-radius:50%;background:var(--go);
+  .bulb{width:1.05cqw;height:1.05cqw;border-radius:50%;background:var(--go);
     box-shadow:0 0 1.1cqw .18cqw rgba(90,211,154,.85), 0 0 3.6cqw .7cqw rgba(90,211,154,.34),
                inset 0 0 .3cqw rgba(255,255,255,.85);
     transition:background .8s ease, box-shadow .8s ease}
@@ -121,48 +121,91 @@
     <!-- Engraved waterways. Two offset strokes per channel — a dark one below and
          a pale one above — read as an incised groove rather than a drawn line. -->
     <svg id="map" viewBox="0 0 1200 560" preserveAspectRatio="none" aria-hidden="true">
+      <!-- Real geography, stylized: Shilshole & Salmon Bay in the west, the Locks,
+           the canal drifting southeast to Fremont, Lake Union hanging SOUTH of the
+           route, Portage Bay under the University Bridge, the Montlake Cut, and
+           Union Bay opening to Lake Washington. Ship course drawn as a dashed
+           chart line. Each bridge is a glyph in its real paint — Ballard green
+           steel, Fremont blue with the orange chord, University's grey-green,
+           Montlake's stone towers — so a local recognizes THEIR bridge. -->
       <defs>
-        <filter id="soft"><feGaussianBlur stdDeviation="7"/></filter>
+        <g id="bascule">
+          <rect x="-5" y="-21" width="10" height="6" rx="1.5" fill="#1b130c" stroke="rgba(255,232,196,.25)" stroke-width="1"/>
+          <rect x="-5" y="15" width="10" height="6" rx="1.5" fill="#1b130c" stroke="rgba(255,232,196,.25)" stroke-width="1"/>
+        </g>
       </defs>
 
-      <g transform="translate(0,80)"><!-- composition lowered: the Duwamish branch is gone, so centre the canal in the plate -->
-      <!-- Puget Sound, west edge -->
-      <path d="M0 150 C 70 190, 60 300, 0 360 L0 150Z" fill="rgba(0,0,0,.3)"/>
-      <path d="M0 150 C 70 190, 60 300, 0 360" stroke="rgba(255,230,190,.18)" stroke-width="2.5" fill="none"/>
-      <text x="34" y="272" fill="#a08a68" font-size="19" font-style="italic"
-            font-family="Georgia,serif">Sound</text>
-
-      <!-- Lake Washington, east edge -->
-      <path d="M1200 130 C 1130 180, 1130 320, 1200 380 L1200 130Z" fill="rgba(0,0,0,.3)"/>
-      <path d="M1200 130 C 1130 180, 1130 320, 1200 380" stroke="rgba(255,230,190,.18)" stroke-width="2.5" fill="none"/>
-      <text x="1104" y="322" fill="#a08a68" font-size="19" font-style="italic"
-            font-family="Georgia,serif" text-anchor="end">Lake Wash.</text>
-
-      <!-- Ship Canal: groove (dark under, light over) -->
-      <g fill="none" stroke-linecap="round">
-        <path d="M62 258 H430 Q470 258 500 250 H700 Q760 250 800 254 H1140"
-              stroke="rgba(0,0,0,.55)" stroke-width="17"/>
-        <path d="M62 254 H430 Q470 254 500 246 H700 Q760 246 800 250 H1140"
-              stroke="rgba(255,232,196,.30)" stroke-width="9"/>
+      <g fill="rgba(0,0,0,.40)" stroke="rgba(255,232,196,.26)" stroke-width="2.5">
+        <!-- Puget Sound, west edge -->
+        <path d="M0 110 C 95 160, 105 330, 0 395 Z"/>
+        <!-- Shilshole into Salmon Bay -->
+        <path d="M55 235 C 110 200, 175 198, 225 222 C 250 233, 250 262, 222 270 C 170 288, 105 285, 62 262 C 48 254, 46 243, 55 235 Z"/>
+        <!-- Lake Union, hanging south of the route -->
+        <path d="M470 250 C 520 236, 700 232, 775 248 C 800 254, 800 268, 785 285 C 755 330, 730 400, 690 440 C 650 478, 565 470, 530 425 C 495 380, 470 310, 462 272 C 459 259, 462 253, 470 250 Z"/>
+        <!-- Portage Bay under the University Bridge -->
+        <path d="M780 250 C 815 236, 855 238, 878 252 C 892 262, 888 292, 868 310 C 845 330, 810 326, 795 300 C 785 282, 774 260, 780 250 Z"/>
+        <!-- Union Bay opening east -->
+        <path d="M995 236 C 1040 222, 1090 226, 1120 244 C 1140 258, 1135 285, 1105 296 C 1065 308, 1020 300, 1000 275 C 992 262, 988 244, 995 236 Z"/>
+        <!-- Lake Washington, east edge -->
+        <path d="M1200 100 C 1105 165, 1105 340, 1200 410 Z"/>
       </g>
 
-      <!-- Lake Union -->
-      <ellipse cx="600" cy="248" rx="112" ry="46" fill="rgba(0,0,0,.42)"/>
-      <ellipse cx="600" cy="244" rx="112" ry="46" fill="none" stroke="rgba(255,232,196,.28)" stroke-width="3"/>
-      <text x="600" y="252" fill="#a08a68" font-size="19" font-style="italic"
-            font-family="Georgia,serif" text-anchor="middle">Lake Union</text>
+      <!-- channel segments: groove (dark under, pale over) -->
+      <g fill="none" stroke-linecap="round">
+        <path d="M60 248 H225 M222 246 C 300 238, 380 244, 462 258 M775 254 C 850 246, 930 244, 1000 252"
+              stroke="rgba(0,0,0,.55)" stroke-width="15"/>
+        <path d="M60 245 H225 M222 243 C 300 235, 380 241, 462 255 M775 251 C 850 243, 930 241, 1000 249"
+              stroke="rgba(255,232,196,.30)" stroke-width="8"/>
+      </g>
 
+      <!-- ship course through Lake Union: dashed chart line -->
+      <path d="M462 256 C 560 262, 680 262, 778 252" fill="none"
+            stroke="rgba(255,232,196,.22)" stroke-width="2.5" stroke-dasharray="7 8"/>
+
+      <!-- the Locks: two gates across the channel -->
+      <g stroke="rgba(255,232,196,.5)" stroke-width="2.5">
+        <path d="M142 236 v22 M156 236 v22"/>
+      </g>
+      <text x="149" y="222" fill="#a08a68" font-size="15" font-style="italic"
+            font-family="Georgia,serif" text-anchor="middle">Locks</text>
+
+      <!-- bridges, in their real paint -->
+      <g id="br-glyphs">
+        <!-- Ballard: green steel -->
+        <use href="#bascule" x="252" y="243"/>
+        <rect x="248" y="228" width="8" height="30" rx="2" fill="#55795b" stroke="rgba(0,0,0,.5)" stroke-width="1"/>
+        <!-- Fremont: blue with the orange chord -->
+        <use href="#bascule" x="462" y="256"/>
+        <rect x="458" y="241" width="8" height="30" rx="2" fill="#3f6fa8" stroke="rgba(0,0,0,.5)" stroke-width="1"/>
+        <rect x="458" y="252" width="8" height="8" fill="#e07b33"/>
+        <!-- University: grey-green -->
+        <use href="#bascule" x="815" y="246"/>
+        <rect x="811" y="231" width="8" height="30" rx="2" fill="#6f8577" stroke="rgba(0,0,0,.5)" stroke-width="1"/>
+        <!-- Montlake: stone, with its tower caps -->
+        <use href="#bascule" x="940" y="247"/>
+        <rect x="936" y="232" width="8" height="30" rx="2" fill="#8d8474" stroke="rgba(0,0,0,.5)" stroke-width="1"/>
+        <rect x="934" y="230" width="12" height="4" rx="1" fill="#a99f8c"/>
+        <rect x="934" y="260" width="12" height="4" rx="1" fill="#a99f8c"/>
+      </g>
+
+      <!-- labels -->
+      <g fill="#a08a68" font-style="italic" font-family="Georgia,serif">
+        <text x="30" y="300" font-size="19">Sound</text>
+        <text x="148" y="292" font-size="15" text-anchor="middle">Salmon Bay</text>
+        <text x="622" y="372" font-size="19" text-anchor="middle">Lake Union</text>
+        <text x="838" y="332" font-size="14" text-anchor="middle">Portage Bay</text>
+        <text x="1128" y="345" font-size="19" text-anchor="end">Lake Wash.</text>
       </g>
     </svg>
 
     <!-- lamps: positioned as a share of the plate, so they track the engraving -->
-    <div class="lamp" id="b-ballard"    style="left:16.7%;top:60.0%"><div class="bulb"></div>
+    <div class="lamp" id="b-ballard"    style="left:21.0%;top:43.4%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">Ballard</span><span class="el" id="e-ballard"></span></div></div>
-    <div class="lamp" id="b-fremont"    style="left:35.8%;top:60.0%"><div class="bulb"></div>
+    <div class="lamp" id="b-fremont"    style="left:38.5%;top:45.7%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">Fremont</span><span class="el" id="e-fremont"></span></div></div>
-    <div class="lamp" id="b-university" style="left:58.3%;top:58.6%"><div class="bulb"></div>
+    <div class="lamp" id="b-university" style="left:67.9%;top:43.9%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">University</span><span class="el" id="e-university"></span></div></div>
-    <div class="lamp" id="b-montlake"   style="left:78.3%;top:59.1%"><div class="bulb"></div>
+    <div class="lamp" id="b-montlake"   style="left:78.3%;top:44.1%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">Montlake</span><span class="el" id="e-montlake"></span></div></div>
 
     <div class="legend">
