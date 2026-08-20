@@ -125,6 +125,7 @@
         <filter id="soft"><feGaussianBlur stdDeviation="7"/></filter>
       </defs>
 
+      <g transform="translate(0,80)"><!-- composition lowered: the Duwamish branch is gone, so centre the canal in the plate -->
       <!-- Puget Sound, west edge -->
       <path d="M0 150 C 70 190, 60 300, 0 360 L0 150Z" fill="rgba(0,0,0,.3)"/>
       <path d="M0 150 C 70 190, 60 300, 0 360" stroke="rgba(255,230,190,.18)" stroke-width="2.5" fill="none"/>
@@ -151,16 +152,17 @@
       <text x="600" y="252" fill="#a08a68" font-size="19" font-style="italic"
             font-family="Georgia,serif" text-anchor="middle">Lake Union</text>
 
+      </g>
     </svg>
 
     <!-- lamps: positioned as a share of the plate, so they track the engraving -->
-    <div class="lamp" id="b-ballard"    style="left:16.7%;top:45.7%"><div class="bulb"></div>
+    <div class="lamp" id="b-ballard"    style="left:16.7%;top:60.0%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">Ballard</span><span class="el" id="e-ballard"></span></div></div>
-    <div class="lamp" id="b-fremont"    style="left:35.8%;top:45.7%"><div class="bulb"></div>
+    <div class="lamp" id="b-fremont"    style="left:35.8%;top:60.0%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">Fremont</span><span class="el" id="e-fremont"></span></div></div>
-    <div class="lamp" id="b-university" style="left:58.3%;top:44.3%"><div class="bulb"></div>
+    <div class="lamp" id="b-university" style="left:58.3%;top:58.6%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">University</span><span class="el" id="e-university"></span></div></div>
-    <div class="lamp" id="b-montlake"   style="left:78.3%;top:44.8%"><div class="bulb"></div>
+    <div class="lamp" id="b-montlake"   style="left:78.3%;top:59.1%"><div class="bulb"></div>
       <div class="tag above"><span class="nm">Montlake</span><span class="el" id="e-montlake"></span></div></div>
 
     <div class="legend">
@@ -209,6 +211,14 @@ const forced=new Set((new URLSearchParams(location.search).get('up')||'')
   .split(',').map(s=>s.trim()).filter(Boolean));
 
 // Elapsed time, read from across a room.
+// Bridge tracking began 2026-07-24 (R2 archive first write). A bridge with no
+// recorded transition since then has provably been down at least that long —
+// "down 27+ days" is honest and, for a bar, a better stat than a blank.
+const TRACK_EPOCH=1784916000;
+function sinceTracking(){
+  const d=Math.floor((Date.now()/1000-TRACK_EPOCH)/86400);
+  return d>=1?`${d}+ days`:null;
+}
 function dur(sec){
   if(!sec) return null;
   const s=Math.floor(Date.now()/1000-sec);
@@ -231,7 +241,8 @@ async function load(){
     const el=$('b-'+key); if(!el) return;
     el.className='lamp'+(up?' up':'');
     // Name the state the clock belongs to — a bare "9 min" says nothing.
-    const t=dur(up?(s.raisedAt&&s.raisedAt[id]):(s.loweredAt&&s.loweredAt[id]));
+    const t=dur(up?(s.raisedAt&&s.raisedAt[id]):(s.loweredAt&&s.loweredAt[id]))
+            ||(!up&&sinceTracking()?sinceTracking():null);
     const lab=$('e-'+key);
     if(lab) lab.textContent=t?`${up?'up':'down'} ${t}`:'';
   });

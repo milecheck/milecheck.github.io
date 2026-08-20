@@ -36,21 +36,21 @@
   .dirline h1{font-size:2.5cqw;font-weight:800;letter-spacing:-.02em}
   .dirline .note{font-size:1.25cqw;font-weight:700;color:var(--dim);margin-left:auto}
 
-  .grid{flex:1.8;min-height:0;display:flex;gap:1.2cqw}
+  .grid{flex:1.5;min-height:0;display:flex;gap:1.2cqw}
   .x{flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:.5cqw;
-     background:var(--card);padding:1.1cqw 1.2cqw;display:flex;flex-direction:column;gap:.4cqw;
+     background:var(--card);padding:.85cqw 1.1cqw;display:flex;flex-direction:column;gap:.3cqw;
      transition:box-shadow .4s ease,border-color .4s ease}
   .x.best{border-color:var(--green);background:#eef6f1;box-shadow:inset 0 0 0 1px var(--green)}
   .x.shut{background:#f4f2ec}
   .flag{font-size:1.05cqw;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
     color:var(--dim);height:1.5cqw}
   .x.best .flag{color:var(--green)}
-  .xname{font-size:2cqw;font-weight:800;line-height:1.05}
+  .xname{font-size:1.85cqw;font-weight:800;line-height:1.05}
   .xsub{font-size:1.2cqw;font-weight:700;color:var(--dim)}
   /* Lane matrix — mirrors the app's border popup exactly: direction across the
      top, lane type down the side. The old layout showed one orphan "Trucks
      north" row with nothing to compare it against, which read as noise. */
-  .mx{margin-top:.45cqw;display:grid;grid-template-columns:auto 1fr 1fr;
+  .mx{margin-top:.3cqw;display:grid;grid-template-columns:auto 1fr 1fr;
     column-gap:.7cqw;row-gap:.1cqw;align-items:baseline}
   .mxh{font-size:1.05cqw;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
     color:var(--dim);white-space:nowrap;padding-bottom:.35cqw;
@@ -58,14 +58,14 @@
   .x.best .mxh{border-bottom-color:rgba(20,122,84,.35)}
   .mxc{font-size:1.05cqw;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
     color:var(--dim);white-space:nowrap}
-  .wait{font-size:2.8cqw;font-weight:800;line-height:1.06;letter-spacing:-.03em;
+  .wait{font-size:2.5cqw;font-weight:800;line-height:1.06;letter-spacing:-.03em;
     font-variant-numeric:tabular-nums;transition:color .4s ease;white-space:nowrap}
   .wait.ok{color:var(--green)} .wait.mid{color:var(--amber)} .wait.bad{color:var(--red)}
   .wait.na{color:var(--dim);font-size:1.5cqw;letter-spacing:-.01em;font-weight:700}
   .unit{font-size:1.05cqw;font-weight:700;color:var(--dim);margin-left:.2cqw}
   /* natural-fit camera — same fix as the Ritch board: whole WSDOT frame,
      header + timestamp intact, caption as its own bar rather than an overlay */
-  .camrow{flex:1;min-height:0;display:flex;gap:1.2cqw;overflow:hidden}
+  .camrow{flex:1.45;min-height:0;display:flex;gap:1.2cqw;overflow:hidden}
   .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
     background:#14171a;display:flex;flex-direction:column}
   .campane{flex:1;min-height:0;position:relative;display:flex;align-items:center;
@@ -80,7 +80,7 @@
   .lane{display:flex;font-size:1.25cqw;font-weight:700;font-variant-numeric:tabular-nums}
   .lane span:last-child{margin-left:auto}
   .lane .off{color:var(--dim);font-weight:700}
-  .hrs{margin-top:auto;padding-top:.5cqw;border-top:1px solid var(--line);
+  .hrs{margin-top:auto;padding-top:.35cqw;border-top:1px solid var(--line);
     display:flex;font-size:1.1cqw;font-weight:700;color:var(--dim)}
   .hrs span:last-child{margin-left:auto;font-weight:800;color:var(--ink)}
 
@@ -283,10 +283,15 @@ async function load(){
   rows.forEach((r,i)=>{ if(r.open && r.caCars!=null && r.caCars<bn){bn=r.caCars;best=i;} });
 
   $('grid').innerHTML=rows.map((r,i)=>{
-    if(!r.open) return `<div class="x shut"><div class="flag">${r.road}</div>
+    if(!r.open){
+      // A closed card that says when it reopens is information; one that just
+      // says "Closed" is dead space. Hours arrive as "8 am-Midnight".
+      const opens=(r.hours&&r.hours.includes('-'))?r.hours.split('-')[0].trim():null;
+      return `<div class="x shut"><div class="flag">${r.road}</div>
       <div class="xname">${r.nm}</div><div class="xsub">${r.kind} · ${r.away}</div>
-      <div class="dirs"><span class="wait na">Closed</span></div>
+      <div class="dirs"><span class="wait na">Closed${opens?` · opens ${opens}`:''}</span></div>
       <div class="hrs"><span>Hours</span><span>${r.hours||'—'}</span></div></div>`;
+    }
     return `<div class="x${i===best?' best':''}">
       <div class="flag">${i===best?'● Fastest into Canada':r.road}</div>
       <div class="xname">${r.nm}</div>
@@ -296,9 +301,9 @@ async function load(){
         <span class="mxh">&#8593; Into Canada</span>
         <span class="mxh">&#8595; Into U.S.</span>
 
-        <span class="mxc">Commercial</span>
+        ${(r.usTrucks.na&&(r.caTrucksNA||r.caMissing))?'':`<span class="mxc">Commercial</span>
         ${cell(r.caTrucks, r.caTrucksNA||r.caMissing, false)}
-        ${cell(r.usTrucks.n, r.usTrucks.na, r.usTrucks.closed)}
+        ${cell(r.usTrucks.n, r.usTrucks.na, r.usTrucks.closed)}`}
 
         <span class="mxc">Passenger</span>
         ${cell(r.caCars, r.caCarsNA||r.caMissing, false)}

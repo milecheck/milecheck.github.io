@@ -301,6 +301,14 @@ function daysSince(sec){
 
 // Elapsed time, read from across a room. Minutes while it matters most (a lift
 // runs about 7), then h/m, then days once nothing has happened in a while.
+// Bridge tracking began 2026-07-24 (R2 archive first write). A bridge with no
+// recorded transition since then has provably been down at least that long —
+// "down 27+ days" is honest and, for a bar, a better stat than a blank.
+const TRACK_EPOCH=1784916000;
+function sinceTracking(){
+  const d=Math.floor((Date.now()/1000-TRACK_EPOCH)/86400);
+  return d>=1?`${d}+ days`:null;
+}
 function dur(sec){
   if(!sec) return null;
   const s=Math.floor(Date.now()/1000-sec);
@@ -346,7 +354,8 @@ async function load(){
     // Each neighbour carries its own clock: how long it has been up, or how
     // long since it last came down. Named state, because a bare "9 min" on a
     // wall doesn't say nine minutes of what.
-    const t=dur(o?(s.raisedAt&&s.raisedAt[bid]):(s.loweredAt&&s.loweredAt[bid]));
+    const t=dur(o?(s.raisedAt&&s.raisedAt[bid]):(s.loweredAt&&s.loweredAt[bid]))
+            ||(!o&&sinceTracking()?sinceTracking():null);
     $('d'+id.slice(1)).textContent=t?`${o?'up':'down'} ${t}`:'';
   });
 }
