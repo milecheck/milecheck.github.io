@@ -93,6 +93,12 @@
   .br i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:var(--go);display:block;
     box-shadow:0 0 1.2cqw rgba(79,191,139,.6)}
   .br.up i{background:var(--red);box-shadow:0 0 1.2cqw rgba(224,81,44,.75)}
+  /* No upstream feed (SDOT publishes live status for 5 bridges; University is
+     not one). Unlit dot + muted row = "we don't know", not a false "down".
+     Mirrors the app's noLiveFeed flag in constants/map.ts. */
+  .br.nofeed>span{color:#9aa0a8}
+  .br.nofeed em{color:#7d838b;opacity:1}
+  .br.nofeed i{background:#4a4f57;box-shadow:none}
 
   /* ---- footer ---- */
   footer{position:absolute;bottom:0;left:0;right:0;z-index:7;display:flex;align-items:stretch;
@@ -272,6 +278,11 @@ const HOME='WA-bridge-ballard';
 const OTHERS=[['r-fremont','WA-bridge-fremont','Fremont'],
               ['r-university','WA-bridge-university','University'],
               ['r-montlake','WA-bridge-montlake','Montlake']];
+// SDOT's real-time feed returns only 1st Ave S, Ballard, Fremont, Montlake and
+// South Park. University Bridge is NOT in it — we have no status for it and must
+// not imply one. (Same flag the app carries in constants/map.ts.)
+const NO_FEED=new Set(['WA-bridge-university']);
+
 const ADS=[
   "Bridge up? Happy hour runs till it drops. — The Ballard Tavern",
   'Reuben’s Brews — on tap here, brewed six blocks away',
@@ -301,9 +312,12 @@ function daysSince(sec){
 
 // Elapsed time, read from across a room. Minutes while it matters most (a lift
 // runs about 7), then h/m, then days once nothing has happened in a while.
-// Bridge tracking began 2026-07-24 (R2 archive first write). A bridge with no
-// recorded transition since then has provably been down at least that long —
-// "down 27+ days" is honest and, for a bar, a better stat than a blank.
+// Bridge tracking began 2026-07-24 (R2 archive first write). For a bridge SDOT
+// actually publishes, no recorded transition since then means we have watched it
+// stay down that whole time — "down 27+ days" is a real observation.
+// ⚠️ This reasoning holds ONLY for feed-covered bridges. Applying it to one SDOT
+// doesn't publish (University) turned our own silence into a fabricated closure
+// — the 2026-08-20 fix; see NO_FEED.
 const TRACK_EPOCH=1784916000;
 function sinceTracking(){
   const d=Math.floor((Date.now()/1000-TRACK_EPOCH)/86400);
@@ -349,7 +363,16 @@ async function load(){
   $('days').textContent=d==null?'0':d;
 
   OTHERS.forEach(([id,bid])=>{
-    const el=$(id); const o=raised.has(bid);
+    const el=$(id);
+    // No feed → unlit row + explicit label; never fall through to the
+    // "down since tracking began" math, which would assert a closure we
+    // have never observed and cannot observe.
+    if(NO_FEED.has(bid)){
+      el.className='br nofeed';
+      $('d'+id.slice(1)).textContent='no live status';
+      return;
+    }
+    const o=raised.has(bid);
     el.className='br'+(o?' up':'');
     // Each neighbour carries its own clock: how long it has been up, or how
     // long since it last came down. Named state, because a bare "9 min" on a
