@@ -392,10 +392,12 @@ async function load(){
     if (offSeason){
       $('status').className = 'status st-open';
       $('status').textContent = 'OPEN';
+      // Two lines, not four: the old blurb explained the whole seasonal policy and
+      // pushed the alerts panel off the bottom of the board. A venue only needs to
+      // know the pass panel isn't broken, it's out of season.
       $('statusline').innerHTML =
-        'Summer conditions. <span class="seasonal">WSDOT reports pass surface conditions and chain '
-        + 'controls November&nbsp;1 &ndash; April&nbsp;1 &mdash; this panel fills in automatically when '
-        + 'the season opens.</span>';
+        'Summer conditions. <span class="seasonal">Chain controls and pass surface '
+        + 'reporting resume Nov&nbsp;1.</span>';
     } else if (txt){
       $('status').className = 'status ' + (bad ? 'st-bad' : warn ? 'st-warn' : 'st-open');
       $('status').textContent = bad ? 'CHAINS\nREQUIRED' : warn ? 'SNOW &\nICE' : 'OPEN';
