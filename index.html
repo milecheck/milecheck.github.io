@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <!-- Additional styles for new sections (will fold into style.css when shipping) -->
@@ -736,6 +736,7 @@
   }
   </script>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="stylesheet" href="signage-overrides.css">
 </head>
 <body>
 
@@ -771,26 +772,33 @@
     <!-- ============== HERO (REVISED) ============== -->
     <section data-panel="home" class="hero" style="padding-bottom:8px;border-bottom:none;">
       <div class="container">
-        <p class="eyebrow">iOS · Android · 50 US states</p>
-        <h1 class="hero-h1">The only mile-marker app with live DOT integrations.</h1>
-        <p class="hero-sub">Real-time mile markers in all 50 US states. Live road alerts from all 50 state DOTs. Navigate to any mile marker on the map. It's how help finds you.</p>
-        <style>
-          .btn-ios { background:#0A84FF !important; border-color:#0A84FF !important; color:#fff !important; }
-          .btn-ios:hover { background:#0070E0 !important; border-color:#0070E0 !important; }
-          .btn-android { background:#00C880 !important; border-color:#00C880 !important; color:#fff !important; }
-          .btn-android:hover { background:#00B473 !important; border-color:#00B473 !important; }
-        </style>
-        <p class="hero-carplay" style="display:inline-flex;align-items:center;gap:8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:24px;padding:6px 16px;font-size:13px;font-weight:600;color:#166534;margin-bottom:20px;">
-          🚗 Now on CarPlay &amp; Android Auto
-        </p>
-        <div class="hero-ctas">
-          <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary btn-ios" target="_blank" rel="noopener">Get on iOS &rarr;</a>
-          <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary btn-android" target="_blank" rel="noopener">Get on Android &rarr;</a>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">iOS · Android · 50 US states</p>
+            <h1 class="hero-h1">The only mile-marker app with live DOT integrations.</h1>
+            <p class="hero-sub">Real-time mile markers in all 50 US states. Live road alerts from all 50 state DOTs. Navigate to any mile marker on the map. It's how help finds you.</p>
+            <p class="hero-carplay" style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px 5px;margin-bottom:20px;">
+              Now on CarPlay &amp; Android Auto
+            </p>
+            <div class="hero-ctas">
+              <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary btn-ios" target="_blank" rel="noopener">Get on iOS &rarr;</a>
+              <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary btn-android" target="_blank" rel="noopener">Get on Android &rarr;</a>
+            </div>
+            <p class="hero-fineprint"><strong style="color:#00A86B;">Your mile marker is always free.</strong> Premium &mdash; map, live alerts, trip tools &mdash; <span class="mono">$9.99/yr</span> or <span class="mono">$1.99/mo</span>, 7-day free trial.</p>
+            <p class="hero-features" style="margin:16px 0 0;max-width:720px;font-size:13.5px;line-height:1.8;color:#4A544E;text-align:left;">
+              Real-time mile markers (50 states) &middot; Live DOT alerts (50 states) &middot; Border wait times &middot; Seattle bridge status &middot; Crosswind warnings &middot; CarPlay &amp; Android Auto &middot; Works offline
+            </p>
+          </div>
+          <div class="hero-sign-scene" aria-hidden="true">
+            <div class="hero-sign">
+              <div class="hero-sign-route">SR&nbsp;99</div>
+              <div class="hero-sign-mile">34.5</div>
+              <div class="hero-sign-cap">Nearest mile marker</div>
+            </div>
+            <div class="hero-sign-post"></div>
+            <div class="hero-road"></div>
+          </div>
         </div>
-        <p class="hero-fineprint"><strong style="color:#00A86B;">Your mile marker is always free.</strong> Premium &mdash; map, live alerts, trip tools &mdash; <span class="mono">$9.99/yr</span> or <span class="mono">$1.99/mo</span>, 7-day free trial.</p>
-        <p class="hero-features" style="margin:16px 0 0;max-width:720px;font-size:13.5px;line-height:1.8;color:#525252;text-align:left;">
-          Real-time mile markers (50 states) &middot; Live DOT alerts (50 states) &middot; Border wait times &middot; Seattle bridge status &middot; Crosswind warnings &middot; CarPlay &amp; Android Auto &middot; Works offline
-        </p>
       </div>
     </section>
 

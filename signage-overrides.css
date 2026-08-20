@@ -1,0 +1,92 @@
+/* ============================================================
+   signage-overrides.css — loaded AFTER each page's inline <style>
+   blocks. The older sections carry hardcoded hex values in inline
+   style="" attributes and embedded <style> rules; this layer
+   retints them into the signage system without touching hundreds
+   of lines of markup. !important here deliberately outranks
+   inline style attributes (author !important > inline non-important).
+   ============================================================ */
+
+/* — Old cool-grey hairlines → warm signage hairline — */
+[style*="#E5E5E5"] { border-color: var(--line) !important; }
+
+/* — Old flat-grey / cool-tint panel backgrounds → warm paper tints — */
+[style*="background:#FAFAFA"], [style*="background: #FAFAFA"] { background: #F3F1EA !important; }
+[style*="background:#FAFBF9"], [style*="background: #FAFBF9"] { background: #F3F1EA !important; }
+[style*="background:#F8FAFC"], [style*="background: #F8FAFC"] { background: #F3F1EA !important; }
+[style*="background:#F3FAF6"], [style*="background: #F3FAF6"] { background: #EFF4EC !important; }
+
+/* — Headline + label typography inherited by inline-styled sections — */
+.nav-to-mp h2, .partners h2, .maps-promo-sec h2,
+.ent-hero h1, .ent-section h2, .cta-section h2,
+.meet-roy h2, .seg h3 {
+  font-family: var(--display) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.2px !important;
+  line-height: 1.02 !important;
+}
+.nav-to-mp h2 { color: var(--ink) !important; }
+
+.nav-to-mp-tag {
+  font-family: var(--display) !important;
+  font-size: 13.5px !important;
+  letter-spacing: 2.2px !important;
+  color: #fff !important;
+  background: var(--sign) !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3.5px rgba(255,255,255,0.85) !important;
+  padding: 5px 12px 4px !important;
+}
+
+/* — Dark sections: blue-black → asphalt green-black — */
+.partners, [style*="#0F1419"] {
+  background: var(--asphalt) !important;
+  border-color: var(--asphalt) !important;
+}
+.partners .section-label { background: var(--sign); color: #fff; }
+
+/* — Enterprise tab — */
+.ent-hero { background: var(--asphalt) !important; }
+.ent-section-alt { background: #F3F1EA !important; }
+.cta-section { background: var(--asphalt) !important; }
+
+/* — Old brand-green hardcodes in inline styles → signage green
+     (the live-dot animation keeps the brighter live green). — */
+[style*="color:#00C880"], [style*="color: #00C880"] { color: var(--sign) !important; }
+[style*="color:#00A86B"], [style*="color: #00A86B"] { color: var(--sign) !important; }
+.hero-fineprint strong { color: var(--sign) !important; }
+
+/* — Store buttons: iOS = asphalt sign, Android = green sign — */
+.btn-ios {
+  background: var(--asphalt) !important;
+  border-color: var(--asphalt) !important;
+  color: #fff !important;
+  box-shadow: inset 0 0 0 2px var(--asphalt), inset 0 0 0 4px rgba(255,255,255,0.75);
+}
+.btn-ios:hover { background: #0E1210 !important; border-color: #0E1210 !important; }
+.btn-android {
+  background: var(--sign) !important;
+  border-color: var(--sign) !important;
+  color: #fff !important;
+  box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 4px rgba(255,255,255,0.85);
+}
+.btn-android:hover { background: var(--sign-deep) !important; border-color: var(--sign-deep) !important; }
+
+/* — CarPlay chip: cool mint pill → micro road sign — */
+.hero-carplay {
+  font-family: var(--display) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.6px !important;
+  text-transform: uppercase;
+  background: var(--surface) !important;
+  border: 1.5px solid var(--sign) !important;
+  border-radius: 7px !important;
+  color: var(--sign) !important;
+}
+
+/* — Segment numbers (JetBrains corners) stay, warmed — */
+.seg-num { color: #C9C4B4 !important; }
+
+/* — Phone frames: cooler slate → asphalt — */
+.demo-phone { background: var(--asphalt-2) !important; }
