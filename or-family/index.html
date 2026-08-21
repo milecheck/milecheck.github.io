@@ -262,8 +262,11 @@ const ago=iso=>{ if(!iso) return ''; const d=Math.floor((Date.now()-new Date(iso
 (async()=>{
   try{
     const d=await fetch(API+'/fires').then(r=>r.json());
+    // Nearest first, not biggest first — a fire in the next county matters more
+    // to him than a bigger one a hundred miles off. County name carries the
+    // "where", so no mileage label is needed.
     const near=(d.fires||[]).filter(f=>f.lat!=null&&mi([f.lat,f.lon],ELGIN)<=110)
-      .sort((a,b)=>(b.acres||0)-(a.acres||0));
+      .sort((a,b)=>mi([a.lat,a.lon],ELGIN)-mi([b.lat,b.lon],ELGIN)).slice(0,8);
     $('fires').innerHTML = near.length ? near.map(function(f,i){
       const bits=[];
       if(f.acres) bits.push(Number(f.acres).toLocaleString()+' acres');
