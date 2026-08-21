@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MileCheck — for Grandpa</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<style>
+  /* Built to be read on a desktop by someone who doesn't want to squint.
+     Body type is 20px, contrast is high, one column, nothing to click to
+     understand. Self-contained: no CDN fonts or icons, so it also prints. */
+  :root{
+    --ink:#16211c; --dim:#5c6b63; --line:#dfe3df; --paper:#fbfaf7; --card:#fff;
+    --green:#0b6e4f; --green-lt:#eef6f1; --red:#c0341d; --amber:#b5771a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);line-height:1.62;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;font-size:20px;padding:0 20px 80px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{padding:56px 0 30px;border-bottom:3px solid var(--green)}
+  .hello{font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+  h1{font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.02em;margin:12px 0 16px}
+  .sub{font-size:22px;color:var(--dim);max-width:34em}
+  h2{font-size:30px;font-weight:800;letter-spacing:-.015em;margin:52px 0 14px;line-height:1.2}
+  h3{font-size:21px;font-weight:800;margin:0 0 6px}
+  p{margin:0 0 18px;max-width:36em}
+  .lead{font-size:23px}
+  strong{font-weight:800}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:26px 28px;margin:22px 0}
+  .card.green{background:var(--green-lt);border-color:#bcd9c9}
+  .live-tag{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:800;
+    letter-spacing:1.6px;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+  .live-tag i{width:11px;height:11px;border-radius:50%;background:var(--green);display:block;
+    animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  @media(prefers-reduced-motion:reduce){.live-tag i{animation:none}}
+  .cams{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px}
+  .cam{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#14171a}
+  .cam img{width:100%;height:230px;object-fit:contain;display:block;background:#14171a}
+  .cam .cap{background:#fff;padding:11px 14px;font-size:17px;font-weight:700;
+    display:flex;align-items:baseline;gap:10px}
+  .cam .cap span{margin-left:auto;font-size:15px;color:var(--dim);font-weight:700}
+  .rowlist{margin-top:4px}
+  .row{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:19px}
+  .row:last-child{border-bottom:none}
+  .row .who{font-weight:800;min-width:9.5em}
+  .row .what{color:var(--dim);flex:1}
+  .row .far{margin-left:auto;font-weight:800;white-space:nowrap;color:var(--dim);font-size:17px}
+  .fire .who{color:var(--red)}
+  table{border-collapse:collapse;width:100%;margin:20px 0;font-size:19px}
+  th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:15px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);font-weight:800}
+  td.yes{color:var(--green);font-weight:800}
+  td.no{color:var(--dim)}
+  .shotrow{display:flex;gap:30px;align-items:center;flex-wrap:wrap;margin:24px 0}
+  .shotrow img{width:250px;border:1px solid var(--line);border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.10)}
+  .shotrow .tx{flex:1;min-width:260px}
+  .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:20px 0}
+  .num{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .num b{display:block;font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+  .num span{font-size:16px;color:var(--dim);font-weight:600}
+  .note{font-size:16px;color:var(--dim);font-style:italic;margin-top:10px}
+  .linkrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0}
+  .biglink{display:block;text-decoration:none;color:var(--ink);background:var(--card);
+    border:2px solid var(--green);border-radius:10px;padding:20px 22px;transition:background .15s}
+  .biglink:hover{background:var(--green-lt)}
+  .biglink b{display:block;font-size:22px;font-weight:800;color:var(--green);margin-bottom:3px}
+  .biglink span{font-size:17px;color:var(--dim)}
+  footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line);font-size:17px;color:var(--dim)}
+  a{color:var(--green)}
+  @media print{
+    body{background:#fff;font-size:12pt;padding:0}
+    .card,.cam{break-inside:avoid} h2{break-after:avoid}
+    .live-tag i{animation:none}
+  }
+  @media(max-width:680px){
+    body{font-size:18px} h1{font-size:32px} h2{font-size:25px}
+    .cams{grid-template-columns:1fr}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="hello">For Grandpa &middot; from Leah</div>
+    <h1>I built something, and I want to show you how it works.</h1>
+    <p class="sub">The easiest way to explain it is to just show you your own roads. Everything below is live right now &mdash; it updates every time you open this page.</p>
+  </header>
+
+  <h2>Right now, around Elgin</h2>
+  <p>These are road cameras near you. The first one is about a mile from town.</p>
+  <div class="cams" id="cams">
+    <div class="cam"><div class="cap">Loading cameras&hellip;</div></div>
+  </div>
+  <p class="note" id="camnote">&nbsp;</p>
+
+  <div class="card">
+    <div class="live-tag"><i></i>Live &middot; fires burning near you</div>
+    <div class="rowlist" id="fires"><div class="row"><span class="what">Loading&hellip;</span></div></div>
+    <p class="note">From the federal wildfire system, updated through the day. Sizes are the official reported acres.</p>
+  </div>
+
+  <div class="card">
+    <div class="live-tag"><i></i>Live &middot; what's happening on your highways</div>
+    <div class="rowlist" id="alerts"><div class="row"><span class="what">Loading&hellip;</span></div></div>
+    <p class="note">Straight from the Oregon Department of Transportation &mdash; crashes, construction, and closures on I-84, OR-82, OR-204 and OR-244.</p>
+  </div>
+
+
+  <h2>Look at any camera you want</h2>
+  <p>Those four above are just the closest ones to you. Here is the whole state on a map &mdash; every green dot is a camera, and you click one to see the road right now.</p>
+
+  <div class="linkrow">
+    <a class="biglink" href="https://milecheckapp.com/cameras/oregon/" target="_blank" rel="noopener">
+      <b>Oregon camera map</b>
+      <span>734 live ODOT cameras &middot; click any dot</span>
+    </a>
+    <a class="biglink" href="https://milecheckapp.com/cameras/washington/" target="_blank" rel="noopener">
+      <b>Washington camera map</b>
+      <span>1,700 live WSDOT cameras &middot; same thing, other state</span>
+    </a>
+    <a class="biglink" href="https://milecheckapp.com/fire/" target="_blank" rel="noopener">
+      <b>Wildfire map</b>
+      <span>Every active fire in the country</span>
+    </a>
+    <a class="biglink" href="https://milecheckapp.com/closures/" target="_blank" rel="noopener">
+      <b>Road closure map</b>
+      <span>Closures from every state, one map</span>
+    </a>
+  </div>
+  <p class="note">These all work on a computer, no app and no account needed. Bookmark whichever ones you like.</p>
+
+  <h2>Why not just use TripCheck?</h2>
+  <p>TripCheck is good, and I use their camera feed. But it only covers Oregon, and it makes you hunt around a map for what you want. You've told me you watch both Oregon <em>and</em> Washington &mdash; that's two different websites today.</p>
+
+  <table>
+    <tr><th>What you want</th><th>TripCheck</th><th>MileCheck</th></tr>
+    <tr><td>Oregon cameras</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+    <tr><td>Washington cameras too</td><td class="no">No &mdash; Oregon only</td><td class="yes">Yes, same page</td></tr>
+    <tr><td>Every other state</td><td class="no">No</td><td class="yes">All 50</td></tr>
+    <tr><td>Wildfires</td><td class="no">No</td><td class="yes">Yes</td></tr>
+    <tr><td>Closures &amp; crashes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+    <tr><td>Sorted by what's closest to you</td><td class="no">You search the map</td><td class="yes">Nearest first</td></tr>
+    <tr><td>Works in the truck, no signal</td><td class="no">No</td><td class="yes">Yes</td></tr>
+  </table>
+  <p>The real difference: <strong>everything above came from one place.</strong> Oregon's cameras, Washington's cameras, the federal fire system, and the state highway alerts &mdash; those are four separate government systems that don't talk to each other. I spent the last eight months writing the software that puts all fifty states into one.</p>
+
+  <h2>It's a phone app too</h2>
+  <div class="shotrow">
+    <img src="app-screen.png" alt="The MileCheck app showing mile marker 34.5 on SR 99">
+    <div class="tx">
+      <p>On the road it shows the <strong>mile marker you're passing right now</strong> &mdash; those little green signs on the shoulder. Down to the tenth of a mile.</p>
+      <p>That matters because it's the number 911 and a tow truck ask for. "I'm on I-84 somewhere past La Grande" is hard to find. <strong>"I-84 eastbound, milepost 265"</strong> is not.</p>
+      <p>It works with no cell service, because all fifty states are stored right on the phone.</p>
+    </div>
+  </div>
+
+  <h2>The other piece: screens in gas stations</h2>
+  <p>This is the part I think you'll like. That same road information, put on a screen where drivers already stop &mdash; on the pump, or behind the counter.</p>
+
+  <img src="pump-board.png" alt="A gas station pump with a MileCheck road-conditions screen mounted on top" style="width:100%;border:1px solid var(--line);border-radius:10px;margin:8px 0 6px;display:block">
+  <p class="note">That is a real screen showing the real board. The pass status, the camera, the travel time &mdash; all live, the same as what you saw at the top of this page. A person pumping gas stands there for four minutes with nothing to look at.</p>
+
+  <p>The gas station gets the screen for free and a cut of the advertising. Local businesses pay to be on it. And every screen has a code on it that people scan to get the app &mdash; so it advertises itself.</p>
+  <p>I have four of these built and running right now. I'm starting with stations before Snoqualmie Pass and up at the Canadian border, because that's where people actually stop to check conditions.</p>
+
+  <h2>How this makes money</h2>
+  <p>Three ways.</p>
+  <p><strong>One:</strong> drivers pay $9.99 a year. That's the part that's running today.</p>
+  <p><strong>Two:</strong> the gas station screens above &mdash; advertising revenue, split with the station.</p>
+  <p><strong>Three &mdash; and this is the biggest one:</strong> trucking and logistics companies want this in their trucks. When a driver breaks down or hits a closure, the dispatcher needs to know exactly where they are. That's the same problem, except a company will pay far more than ten dollars a year to solve it for a whole fleet. It's already listed on a marketplace that reaches over four million commercial vehicles.</p>
+
+  <h2>Who's using it</h2>
+  <p>The people I hear from most are the ones who work on the road for a living &mdash; <strong>DOT crews and highway workers</strong>, in Oregon and in states I've never been to. They're the ones who live by mile markers all day, so they were the first to get it. Truck drivers, tow operators, and first responders after that.</p>
+  <p>Almost everything in the app is there because one of them asked for it.</p>
+
+  <h2>Where it stands</h2>
+  <div class="nums">
+    <div class="num"><b id="n-users">827</b><span>people using it</span></div>
+    <div class="num"><b>50</b><span>states covered</span></div>
+    <div class="num"><b>4.6</b><span>stars, App Store</span></div>
+  </div>
+
+  <div class="card">
+    <h3>One more thing you might like</h3>
+    <p style="margin-bottom:14px">I wrote a guide to how Oregon's mile markers actually work &mdash; where the numbering starts on each highway, why I-84's numbers run the way they do, and what the little green signs are really telling you.</p>
+    <a class="biglink" style="max-width:26em" href="https://milecheckapp.com/blog/mile-markers-oregon.html" target="_blank" rel="noopener">
+      <b>Oregon mile marker guide</b><span>How the numbering works, highway by highway</span></a>
+  </div>
+
+  <footer>
+    Made by Leah &middot; MileCheck LLC &middot; <a href="https://milecheckapp.com">milecheckapp.com</a><br>
+    The app is on the iPhone App Store and Google Play. Everything on this page is live data, not a picture of it.
+  </footer>
+</div>
+
+<script>
+const API='https://milepost-proxy.leahgerber93.workers.dev';
+const ELGIN=[45.5646,-117.9169];
+const mi=(a,b)=>Math.hypot((a[0]-b[0])*69,(a[1]-b[1])*48.5);
+const $=id=>document.getElementById(id);
+
+// Cameras: nearest to Elgin, Oregon first, then the closest Washington one so
+// he can see both states side by side — that's the whole TripCheck argument.
+async function cams(){
+  try{
+    const [or,wa]=await Promise.all([
+      fetch(API+'/cameras?state=OR').then(r=>r.json()),
+      fetch(API+'/cameras?state=WA').then(r=>r.json())
+    ]);
+    // Skip WSDOT's airport cameras — the point is ROAD cameras in Washington,
+    // and an airport shot undercuts the whole comparison.
+    const pick=(d,n)=>(d.cameras||[]).filter(c=>c.lat!=null&&c.imageUrl&&!/airport/i.test(c.route||'')&&!/airport/i.test(c.title||''))
+      .map(c=>({...c,d:mi([c.lat,c.lon],ELGIN)}))
+      .sort((a,b)=>a.d-b.d)
+      .filter((c,i,arr)=>i===0||c.title!==arr[i-1].title)  // drop the duplicate angles
+      .slice(0,n);
+    const list=[...pick(or,3),...pick(wa,1)];
+    $('cams').innerHTML=list.map(c=>{
+      const u=encodeURI(c.imageUrl)+(c.imageUrl.includes('?')?'&':'?')+'t='+Date.now();
+      return `<div class="cam"><img src="${u}" alt="">
+        <div class="cap">${c.title||c.route}<span>${Math.round(c.d)} mi away</span></div></div>`;
+    }).join('');
+    $('camnote').textContent=`Showing the ${list.length} closest cameras — three in Oregon and one in Washington. `
+      +`There are ${(or.cameras||[]).length.toLocaleString()} Oregon and ${(wa.cameras||[]).length.toLocaleString()} Washington cameras in here, plus the rest of the country.`;
+  }catch(e){ $('cams').innerHTML='<div class="cam"><div class="cap">Cameras unavailable right now</div></div>'; }
+}
+
+async function fires(){
+  try{
+    const d=await fetch(API+'/fires').then(r=>r.json());
+    const all=(d.fires||d||[]).filter(f=>f.lat!=null);
+    const near=all.map(f=>({...f,d:mi([f.lat,f.lon],ELGIN)}))
+      .filter(f=>f.d<=90).sort((a,b)=>a.d-b.d).slice(0,5);
+    $('fires').innerHTML = near.length ? near.map(f=>`<div class="row fire">
+        <span class="who">${f.name||'Fire'}</span>
+        <span class="what">${f.acres?Number(f.acres).toLocaleString()+' acres':'size not reported'}${f.containedPct!=null?' · '+f.containedPct+'% contained':''}</span>
+        <span class="far">${Math.round(f.d)} mi away</span></div>`).join('')
+      : '<div class="row"><span class="what">No active fires reported within 90 miles right now. Good news.</span></div>';
+  }catch(e){ $('fires').innerHTML='<div class="row"><span class="what">Fire data unavailable right now</span></div>'; }
+}
+
+async function alerts(){
+  try{
+    const d=await fetch(API+'/incidents?state=OR').then(r=>r.json());
+    const inc=d['incident-reports']||[];
+    const clean=s=>String(s||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+    // ODOT repeats the same boilerplate across every segment of one incident.
+    // Four identical "a crash has occurred" rows makes live data look broken, so
+    // keep one row per distinct route+message.
+    const seen=new Set();
+    const mine=inc.filter(x=>{
+      const r=String((x.location||{})['route-id']||'');
+      if(!/(^|\D)(84|82|204|244)(\D|$)/.test(r)) return false;
+      const k=r+'|'+clean(x.headline||x.description||x['impact-desc']).slice(0,60);
+      if(seen.has(k)) return false;
+      seen.add(k); return true;
+    }).slice(0,6);
+    $('alerts').innerHTML = mine.length ? mine.map(x=>{
+      const loc=x.location||{};
+      const r=String(loc['route-id']||'').replace(/^I/,'I-').replace(/^ORE?/,'OR-');
+      const t=clean(x.headline||x.description||x['impact-desc']);
+      return `<div class="row"><span class="who">${r}</span>
+        <span class="what">${t.length>96?t.slice(0,96)+'…':t}</span></div>`;
+    }).join('') : '<div class="row"><span class="what">Nothing reported on your highways right now.</span></div>';
+  }catch(e){ $('alerts').innerHTML='<div class="row"><span class="what">Highway data unavailable right now</span></div>'; }
+}
+
+cams(); fires(); alerts();
+setInterval(cams, 5*60*1000);
+</script>
+</html>
