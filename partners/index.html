@@ -780,7 +780,7 @@
 
         <!-- Brand proof strip -->
         <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:48px;padding-top:28px;border-top:1px solid #E5E5E5;">
-          <span style="font-size:13px;color:#525252;">50 states · 50 live DOT integrations</span>
+          <span style="font-size:13px;color:#525252;">50 states · <!--cov:alerts.us_states-->50<!--/cov--> live DOT integrations</span>
           <div style="width:1px;height:28px;background:#E5E5E5;"></div>
           <span style="font-size:13px;color:#525252;">CarPlay &amp; Android Auto</span>
         </div>
@@ -944,7 +944,7 @@
             <summary>Why it&rsquo;s hard to build in-house</summary>
             <div class="why-content" style="margin-top:4px;">
               <ul>
-                <li><strong>Every agency is different</strong> &mdash; 50 integrations, each with its own auth method, rate limits, schema, and reliability characteristics. One upstream change breaks your feed until someone catches it.</li>
+                <li><strong>Every agency is different</strong> &mdash; <!--cov:alerts.us_states-->50<!--/cov--> integrations, each with its own auth method, rate limits, schema, and reliability characteristics. One upstream change breaks your feed until someone catches it.</li>
                 <li><strong>No common standard</strong> &mdash; ibi511, COtrip, ArcGIS FeatureServer, GeoJSON&hairsp;/&hairsp;WZDx, CARS FEU-g, EVBG XML, and more. No two states publish the same data the same way.</li>
                 <li><strong>State-by-state access</strong> &mdash; some feeds require registration, API keys, terms agreements, and back-and-forth with agency IT. Multiply that by 50.</li>
                 <li><strong>Continuous normalization</strong> &mdash; route names, mile marker formats, and direction codes vary by state and change without notice. Keeping them aligned is an ongoing maintenance burden, not a one-time project.</li>
