@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Highway Cameras — 27 US states + 3 Canadian provinces, route + mile marker tagged | MileCheck</title>
-  <meta name="description" content="Live highway cameras on one map — see actual road conditions on I-90 Snoqualmie Pass, the Coquihalla, Highway 401, and thousands more, each tagged with its route and mile marker. 27 US states plus British Columbia, Ontario, Alberta, and Québec — more coming.">
+  <meta name="description" content="Live highway cameras on one map — see actual road conditions on I-90 Snoqualmie Pass, the Coquihalla, Highway 401, and thousands more, each tagged with its route and mile marker. 27 US states plus British Columbia, Ontario, and Québec — more coming.">
 
   <meta property="og:title" content="Live Highway Cameras — MileCheck">
   <meta property="og:description" content="See the actual road before you drive it. Live highway cameras across 27 US states + 3 Canadian provinces, each tagged with route + mile marker.">
@@ -576,7 +576,7 @@ function render(){
   if(!inView.length){DECK=[];rows.innerHTML=
     typeFilter==='avi'?`<div class="cl-empty">No aviation weather cams here<small>FAA WeatherCams are densest in Alaska and the mountain West — pan the map${AVI_CAMS?'':' (still loading)'}.</small></div>`:
     typeFilter==='nps'?`<div class="cl-empty">No park webcams here<small>National Park Service webcams sit inside the parks — pan to one${NPS_CAMS?'':' (still loading)'}.</small></div>`:
-    `<div class="cl-empty">No cameras here<small>Camera coverage is 27 US states + Canada (BC, Ontario, Alberta on this map) — more coming.</small></div>`;return;}
+    `<div class="cl-empty">No cameras here<small>Camera coverage is 27 US states + Canada (BC, Ontario, Qu&eacute;bec) — more coming.</small></div>`;return;}
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route)||((a.mp||0)-(b.mp||0))||a.title.localeCompare(b.title));
   DECK=sorted;
   if(DIDX>=DECK.length)DIDX=-1;
