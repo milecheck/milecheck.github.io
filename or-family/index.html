@@ -4,6 +4,8 @@
 <title>MileCheck — for Grandpa</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   /* Built to be read on a desktop by someone who doesn't want to squint.
      Body type is 20px, contrast is high, one column, nothing to click to
@@ -60,6 +62,21 @@
   .num b{display:block;font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
   .num span{font-size:16px;color:var(--dim);font-weight:600}
   .note{font-size:16px;color:var(--dim);font-style:italic;margin-top:10px}
+  #map{height:560px;border:1px solid var(--line);border-radius:10px;margin:14px 0 8px;z-index:0}
+  .leaflet-popup-content{font-size:17px;line-height:1.5;margin:14px 16px}
+  .leaflet-popup-content b{font-size:19px}
+  .leaflet-popup-content img{width:100%;margin-top:8px;border-radius:5px;display:block}
+  .legend{display:flex;flex-wrap:wrap;gap:22px;font-size:17px;font-weight:700;color:var(--dim);margin:4px 0 26px}
+  .legend i{width:15px;height:15px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:-2px;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+  .item{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);
+    border-left:5px solid var(--line);border-radius:8px;padding:15px 18px;margin-bottom:10px;
+    font:inherit;font-size:19px;cursor:pointer;transition:border-color .15s,background .15s}
+  .item:hover{background:var(--green-lt);border-color:var(--green)}
+  .item b{display:block;font-size:20px;margin-bottom:3px}
+  .item .meta{color:var(--dim);font-size:17px}
+  .item .go{color:var(--green);font-weight:800;font-size:16px;margin-top:6px;display:block}
+  .item.fire{border-left-color:var(--red)} .item.fire b{color:var(--red)}
+  .item.road{border-left-color:var(--amber)}
   .linkrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0}
   .biglink{display:block;text-decoration:none;color:var(--ink);background:var(--card);
     border:2px solid var(--green);border-radius:10px;padding:20px 22px;transition:background .15s}
@@ -86,25 +103,25 @@
     <p class="sub">The easiest way to explain it is to just show you your own roads. Everything below is live right now &mdash; it updates every time you open this page.</p>
   </header>
 
-  <h2>Right now, around Elgin</h2>
-  <p>These are road cameras near you. The first one is about a mile from town.</p>
-  <div class="cams" id="cams">
-    <div class="cam"><div class="cap">Loading cameras&hellip;</div></div>
-  </div>
-  <p class="note" id="camnote">&nbsp;</p>
+  <h2>Your corner of Oregon, right now</h2>
+  <p>This is a live map of the country around Elgin. <strong>Click any dot</strong> &mdash; green is a road camera and it'll show you the road this minute, red is a fire, orange is something happening on the highway.</p>
 
-  <div class="card">
-    <div class="live-tag"><i></i>Live &middot; fires burning near you</div>
-    <div class="rowlist" id="fires"><div class="row"><span class="what">Loading&hellip;</span></div></div>
-    <p class="note">From the federal wildfire system, updated through the day. Sizes are the official reported acres.</p>
+  <div id="map"></div>
+  <div class="legend">
+    <span><i style="background:#0b6e4f"></i>Road camera</span>
+    <span><i style="background:#c0341d"></i>Wildfire</span>
+    <span><i style="background:#b5771a"></i>Highway work or crash</span>
+    <span><i style="background:#2f6ea0"></i>Elgin</span>
   </div>
 
-  <div class="card">
-    <div class="live-tag"><i></i>Live &middot; what's happening on your highways</div>
-    <div class="rowlist" id="alerts"><div class="row"><span class="what">Loading&hellip;</span></div></div>
-    <p class="note">Straight from the Oregon Department of Transportation &mdash; crashes, construction, and closures on I-84, OR-82, OR-204 and OR-244.</p>
-  </div>
+  <h2>Fires burning out there</h2>
+  <p>Click one and the map will take you to it.</p>
+  <div id="fires"><p>Loading&hellip;</p></div>
+  <p class="note">This comes from the federal wildfire system &mdash; the same source the agencies use. Acres and crew counts are what they've officially reported.</p>
 
+  <h2>On the highways</h2>
+  <p>Everything ODOT is reporting on I-84, OR-82, OR-204 and OR-244 &mdash; with the milepost, so you know exactly where.</p>
+  <div id="alerts"><p>Loading&hellip;</p></div>
 
   <h2>Look at any camera you want</h2>
   <p>Those four above are just the closest ones to you. Here is the whole state on a map &mdash; every green dot is a camera, and you click one to see the road right now.</p>
@@ -144,11 +161,11 @@
   </table>
   <p>The real difference: <strong>everything above came from one place.</strong> Oregon's cameras, Washington's cameras, the federal fire system, and the state highway alerts &mdash; those are four separate government systems that don't talk to each other. I spent the last eight months writing the software that puts all fifty states into one.</p>
 
-  <h2>It's a phone app too</h2>
+  <h2>There's a phone version too</h2>
   <div class="shotrow">
     <img src="app-screen.png" alt="The MileCheck app showing mile marker 34.5 on SR 99">
     <div class="tx">
-      <p>On the road it shows the <strong>mile marker you're passing right now</strong> &mdash; those little green signs on the shoulder. Down to the tenth of a mile.</p>
+      <p>Everything above works on a computer, which is how you'd use it. But there's also a phone version for people who are actually out driving &mdash; it shows the <strong>mile marker you're passing right now</strong>, those little green signs on the shoulder, down to the tenth of a mile.</p>
       <p>That matters because it's the number 911 and a tow truck ask for. "I'm on I-84 somewhere past La Grande" is hard to find. <strong>"I-84 eastbound, milepost 265"</strong> is not.</p>
       <p>It works with no cell service, because all fifty states are stored right on the phone.</p>
     </div>
@@ -196,76 +213,110 @@
 <script>
 const API='https://milepost-proxy.leahgerber93.workers.dev';
 const ELGIN=[45.5646,-117.9169];
+const RADIUS=80;                       // miles of country to put on the map
 const mi=(a,b)=>Math.hypot((a[0]-b[0])*69,(a[1]-b[1])*48.5);
 const $=id=>document.getElementById(id);
+const esc=t=>String(t==null?'':t).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+const clean=t=>String(t||'').replace(/<!--[\s\S]*?-->/g,'').replace(/\[Link[^\]]*\]\([^)]*\)/g,'')
+  .replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
 
-// Cameras: nearest to Elgin, Oregon first, then the closest Washington one so
-// he can see both states side by side — that's the whole TripCheck argument.
-async function cams(){
+const map=L.map('map',{scrollWheelZoom:false}).setView(ELGIN,9);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+  {attribution:'Esri, USGS, NOAA',maxZoom:16}).addTo(map);
+
+const dot=(c,r)=>({radius:r,fillColor:c,color:'#fff',weight:2,opacity:1,fillOpacity:.95});
+L.circleMarker(ELGIN,dot('#2f6ea0',9)).addTo(map).bindPopup('<b>Elgin</b>');
+
+// clicking a row in a list flies the map to it and opens its bubble
+const marks={};
+function fly(key){
+  const m=marks[key]; if(!m) return;
+  map.flyTo(m.getLatLng(), 11, {duration:.7});
+  setTimeout(()=>m.openPopup(), 750);
+  document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
+}
+window.fly=fly;
+
+const ago=iso=>{ if(!iso) return ''; const d=Math.floor((Date.now()-new Date(iso))/86400000);
+  return d<1?'started today':d===1?'burning 1 day':'burning '+d+' days'; };
+
+// ---------- cameras ----------
+(async()=>{
   try{
     const [or,wa]=await Promise.all([
       fetch(API+'/cameras?state=OR').then(r=>r.json()),
-      fetch(API+'/cameras?state=WA').then(r=>r.json())
-    ]);
-    // Skip WSDOT's airport cameras — the point is ROAD cameras in Washington,
-    // and an airport shot undercuts the whole comparison.
-    const pick=(d,n)=>(d.cameras||[]).filter(c=>c.lat!=null&&c.imageUrl&&!/airport/i.test(c.route||'')&&!/airport/i.test(c.title||''))
-      .map(c=>({...c,d:mi([c.lat,c.lon],ELGIN)}))
-      .sort((a,b)=>a.d-b.d)
-      .filter((c,i,arr)=>i===0||c.title!==arr[i-1].title)  // drop the duplicate angles
-      .slice(0,n);
-    const list=[...pick(or,3),...pick(wa,1)];
-    $('cams').innerHTML=list.map(c=>{
-      const u=encodeURI(c.imageUrl)+(c.imageUrl.includes('?')?'&':'?')+'t='+Date.now();
-      return `<div class="cam"><img src="${u}" alt="">
-        <div class="cap">${c.title||c.route}<span>${Math.round(c.d)} mi away</span></div></div>`;
-    }).join('');
-    $('camnote').textContent=`Showing the ${list.length} closest cameras — three in Oregon and one in Washington. `
-      +`There are ${(or.cameras||[]).length.toLocaleString()} Oregon and ${(wa.cameras||[]).length.toLocaleString()} Washington cameras in here, plus the rest of the country.`;
-  }catch(e){ $('cams').innerHTML='<div class="cam"><div class="cap">Cameras unavailable right now</div></div>'; }
-}
+      fetch(API+'/cameras?state=WA').then(r=>r.json())]);
+    [...(or.cameras||[]),...(wa.cameras||[])]
+      .filter(c=>c.lat!=null&&c.imageUrl&&!/airport/i.test((c.route||'')+(c.title||'')))
+      .filter(c=>mi([c.lat,c.lon],ELGIN)<=RADIUS)
+      .forEach(c=>{
+        const u=encodeURI(c.imageUrl);
+        L.circleMarker([c.lat,c.lon],dot('#0b6e4f',7)).addTo(map)
+         .bindPopup('<b>'+esc(c.title||c.route)+'</b><br><span style="color:#5c6b63">'+esc(c.route||'')+'</span>'
+           +'<img src="'+u+'?t='+Date.now()+'" alt="">',{maxWidth:340});
+      });
+  }catch(e){}
+})();
 
-async function fires(){
+// ---------- fires ----------
+(async()=>{
   try{
     const d=await fetch(API+'/fires').then(r=>r.json());
-    const all=(d.fires||d||[]).filter(f=>f.lat!=null);
-    const near=all.map(f=>({...f,d:mi([f.lat,f.lon],ELGIN)}))
-      .filter(f=>f.d<=90).sort((a,b)=>a.d-b.d).slice(0,5);
-    $('fires').innerHTML = near.length ? near.map(f=>`<div class="row fire">
-        <span class="who">${f.name||'Fire'}</span>
-        <span class="what">${f.acres?Number(f.acres).toLocaleString()+' acres':'size not reported'}${f.containedPct!=null?' · '+f.containedPct+'% contained':''}</span>
-        <span class="far">${Math.round(f.d)} mi away</span></div>`).join('')
-      : '<div class="row"><span class="what">No active fires reported within 90 miles right now. Good news.</span></div>';
-  }catch(e){ $('fires').innerHTML='<div class="row"><span class="what">Fire data unavailable right now</span></div>'; }
-}
+    const near=(d.fires||[]).filter(f=>f.lat!=null&&mi([f.lat,f.lon],ELGIN)<=110)
+      .sort((a,b)=>(b.acres||0)-(a.acres||0));
+    $('fires').innerHTML = near.length ? near.map(function(f,i){
+      const bits=[];
+      if(f.acres) bits.push(Number(f.acres).toLocaleString()+' acres');
+      if(f.containedPct!=null) bits.push(f.containedPct+'% contained');
+      if(f.personnel) bits.push(Number(f.personnel).toLocaleString()+' people working it');
+      if(f.county) bits.push(f.county+' County');
+      const a=ago(f.discovered); if(a) bits.push(a);
+      return '<button class="item fire" onclick="fly(\'fire'+i+'\')">'
+        +'<b>'+esc(f.name)+' Fire</b>'
+        +'<span class="meta">'+bits.join(' &middot; ')+'</span>'
+        +'<span class="go">Show me on the map &rsaquo;</span></button>';
+    }).join('') : '<p>No fires reported nearby right now.</p>';
+    near.forEach(function(f,i){
+      const bits=[];
+      if(f.acres) bits.push(Number(f.acres).toLocaleString()+' acres');
+      if(f.containedPct!=null) bits.push(f.containedPct+'% contained');
+      if(f.personnel) bits.push(Number(f.personnel).toLocaleString()+' crew');
+      marks['fire'+i]=L.circleMarker([f.lat,f.lon],dot('#c0341d',Math.min(20,7+Math.sqrt(f.acres||0)/45)))
+        .addTo(map).bindPopup('<b>'+esc(f.name)+' Fire</b><br>'+bits.join('<br>'));
+    });
+  }catch(e){ $('fires').innerHTML='<p>Fire information is unavailable right now.</p>'; }
+})();
 
-async function alerts(){
+// ---------- highway alerts, with the milepost and the real place name ----------
+(async()=>{
   try{
     const d=await fetch(API+'/incidents?state=OR').then(r=>r.json());
-    const inc=d['incident-reports']||[];
-    const clean=s=>String(s||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-    // ODOT repeats the same boilerplate across every segment of one incident.
-    // Four identical "a crash has occurred" rows makes live data look broken, so
-    // keep one row per distinct route+message.
     const seen=new Set();
-    const mine=inc.filter(x=>{
+    const rows=(d['incident-reports']||[]).filter(function(x){
       const r=String((x.location||{})['route-id']||'');
       if(!/(^|\D)(84|82|204|244)(\D|$)/.test(r)) return false;
-      const k=r+'|'+clean(x.headline||x.description||x['impact-desc']).slice(0,60);
-      if(seen.has(k)) return false;
-      seen.add(k); return true;
-    }).slice(0,6);
-    $('alerts').innerHTML = mine.length ? mine.map(x=>{
-      const loc=x.location||{};
-      const r=String(loc['route-id']||'').replace(/^I/,'I-').replace(/^ORE?/,'OR-');
-      const t=clean(x.headline||x.description||x['impact-desc']);
-      return `<div class="row"><span class="who">${r}</span>
-        <span class="what">${t.length>96?t.slice(0,96)+'…':t}</span></div>`;
-    }).join('') : '<div class="row"><span class="what">Nothing reported on your highways right now.</span></div>';
-  }catch(e){ $('alerts').innerHTML='<div class="row"><span class="what">Highway data unavailable right now</span></div>'; }
-}
-
-cams(); fires(); alerts();
-setInterval(cams, 5*60*1000);
+      const st=(x.location||{})['start-location']||{};
+      const k=r+'|'+(st['start-milepost']||'')+'|'+clean(x.headline).slice(0,40);
+      if(seen.has(k)) return false; seen.add(k); return true;
+    }).slice(0,8);
+    const nice=r=>String(r||'').replace(/^I(\d)/,'I-$1').replace(/^ORE?(\d)/,'OR-$1');
+    $('alerts').innerHTML = rows.length ? rows.map(function(x,i){
+      const loc=x.location||{}, st=loc['start-location']||{};
+      const mp = st['start-milepost']!=null ? 'Milepost '+st['start-milepost'] : '';
+      const where = st['location-desc'] || loc['location-name'] || '';
+      const what = clean(x.comments) || clean(x.headline) || clean(x['impact-desc']);
+      const delay = x['impact-desc']||'';
+      const hasPin = st['start-lat']!=null;
+      if(hasPin) marks['road'+i]=L.circleMarker([st['start-lat'],st['start-long']],dot('#b5771a',8))
+        .addTo(map).bindPopup('<b>'+esc(nice(loc['route-id']))+(mp?' &middot; '+esc(mp):'')+'</b><br>'
+          +esc(where)+'<br>'+esc(what.slice(0,160)));
+      return '<button class="item road" '+(hasPin?'onclick="fly(\'road'+i+'\')"':'disabled style="cursor:default"')+'>'
+        +'<b>'+esc(nice(loc['route-id']))+(mp?' &mdash; '+esc(mp):'')+'</b>'
+        +'<span class="meta">'+esc(where)+(delay?' &middot; '+esc(delay):'')+'</span>'
+        +'<span class="meta" style="display:block;margin-top:5px">'+esc(what.length>150?what.slice(0,150)+'…':what)+'</span>'
+        +(hasPin?'<span class="go">Show me on the map &rsaquo;</span>':'')+'</button>';
+    }).join('') : '<p>Nothing reported on those highways right now.</p>';
+  }catch(e){ $('alerts').innerHTML='<p>Highway information is unavailable right now.</p>'; }
+})();
 </script>
 </html>
