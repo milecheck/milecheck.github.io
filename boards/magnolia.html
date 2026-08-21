@@ -300,16 +300,34 @@ function dur(sec){
   return d===1?'1 day':`${d} days`;
 }
 
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url, opts, validate){
+  const r = await fetch(url, opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d = await r.json();
+  if(typeof validate === 'function' && !validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function load(){
   let s={raised:[],raisedAt:{},loweredAt:{}};
-  try{ s=await fetch(API+'/bridge-status').then(r=>r.json()); }catch(e){}
+  let feedOk=false;
+  try{
+    s=await fetchFeed(API+'/bridge-status', undefined, d=>Array.isArray(d.raised));
+    feedOk=true;
+  }catch(e){}
   const raised=new Set(s.raised||[]);
   BR.forEach(([key,id])=>{
     const el=$('b-'+key); if(!el) return;
-    // No feed → unlit lamp + an explicit label. Never fall through to the
-    // "down since tracking began" math, which would state a closure we have
-    // not observed and cannot observe.
-    if(NO_FEED.has(id)){
+    // No feed at all (network/HTTP failure, or a payload missing `raised`)
+    // → unlit lamp + an explicit label on EVERY bridge, same as the
+    // per-bridge NO_FEED case below. Never fall through to the "down since
+    // tracking began" math, which would state a closure we have not
+    // observed and cannot observe.
+    if(!feedOk || NO_FEED.has(id)){
       el.className='lamp nofeed';
       const lab0=$('e-'+key); if(lab0) lab0.textContent='no live status';
       return;

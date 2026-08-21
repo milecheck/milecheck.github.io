@@ -210,17 +210,33 @@ document.getElementById('blSearch').addEventListener('input',renderList);
 // Live FDOT sensor layer
 let liveMarkers=[];
 function schedFor(gname){const m=SCHED.find(b=>b.g===gname);return m?'<div class="sched">'+m.s+'</div><div class="cite">'+m.c+'</div>':'';}
+
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url,opts,validate){
+  const r=await fetch(url,opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d=await r.json();
+  if(typeof validate==='function'&&!validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function refresh(){
   let feats=[];
   // A failed fetch, a non-OK response, or bad JSON must never look like a verified
   // "we checked every FDOT sensor and they're all down" — that's a real, confident
   // safety claim and only a genuinely successful read has earned the right to make it.
-  // `ok` tracks whether the read actually succeeded; an empty feats[] from a dead
-  // feed is not the same fact as an empty feats[] from a real, successful response.
+  // ArcGIS in particular can answer HTTP 200 with an error body instead of a
+  // `features` array on a bad query, so status alone doesn't prove anything either —
+  // `ok` only flips once the payload shape is verified too. An empty feats[] from a
+  // dead feed is not the same fact as an empty feats[] from a real, successful response.
   let ok=false;
   try{
-    const r=await fetch(GPIO_URL,{cache:'no-store'});
-    if(r.ok){const j=await r.json();feats=(j.features||[]).map(f=>f.attributes).filter(a=>a.featuretype==='Bridge');ok=true;}
+    const j=await fetchFeed(GPIO_URL,{cache:'no-store'},d=>Array.isArray(d.features));
+    feats=j.features.map(f=>f.attributes).filter(a=>a.featuretype==='Bridge');
+    ok=true;
   }catch(e){}
   liveMarkers.forEach(m=>map.removeLayer(m));liveMarkers=[];liveIndex=[];
   const up=feats.filter(a=>a.featurestatus==='Bridge Up');

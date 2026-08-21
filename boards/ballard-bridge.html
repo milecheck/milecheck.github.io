@@ -34,7 +34,7 @@
   .verdict{position:absolute;top:11.5%;left:0;right:0;z-index:5;text-align:center;pointer-events:none}
   .vword{font-size:8.6cqw;font-weight:800;line-height:.84;letter-spacing:-.045em;
     transition:color .6s ease;text-shadow:0 .4cqw 2.4cqw rgba(6,18,24,.75)}
-  .vword.up{color:var(--red)} .vword.dn{color:var(--go)}
+  .vword.up{color:var(--red)} .vword.dn{color:var(--go)} .vword.unk{color:var(--dim)}
   .vsub{font-size:1.8cqw;font-weight:700;color:var(--deck);opacity:.8;margin-top:.5cqw;
     text-shadow:0 .2cqw 1.2cqw rgba(6,18,24,.8)}
 
@@ -336,9 +336,46 @@ function dur(sec){
   return d===1?'1 day':`${d} days`;
 }
 
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url, opts, validate){
+  const r = await fetch(url, opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d = await r.json();
+  if(typeof validate === 'function' && !validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function load(){
   let s={raised:[],raisedAt:{},loweredAt:{}};
-  try{ s=await fetch(API+'/bridge-status').then(r=>r.json()); }catch(e){}
+  let feedOk=false;
+  try{
+    s=await fetchFeed(API+'/bridge-status', undefined, d=>Array.isArray(d.raised));
+    feedOk=true;
+  }catch(e){}
+
+  if(!feedOk){
+    // Feed is down — must NOT fall through to up=false, which paints the
+    // "GO / clear to cross" scene (leaves down, cars driving) while we have
+    // no idea what the bridge is doing. Leave the background scene as last
+    // drawn (or its untouched default, on a first-ever failed load) and let
+    // this unmissable headline carry the truth instead. Rail entries get the
+    // same muted "no live status" treatment already used for University
+    // Bridge (see NO_FEED), applied here to every neighbour on the board.
+    const w=$('vword'), sub=$('vsub');
+    w.textContent='—'; w.className='vword unk';
+    sub.textContent='BRIDGE STATUS UNAVAILABLE — this board cannot confirm the bridge is clear.';
+    $('days').textContent='—';
+    OTHERS.forEach(([id])=>{
+      const el=$(id);
+      el.className='br nofeed';
+      $('d'+id.slice(1)).textContent='no live status';
+    });
+    return;
+  }
+
   const raised=new Set(s.raised||[]);
   const up=forceUp||raised.has(HOME);
 

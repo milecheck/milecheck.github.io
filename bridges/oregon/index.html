@@ -156,6 +156,17 @@
   </footer>
 
 <script>
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url, opts, validate){
+  const r = await fetch(url, opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d = await r.json();
+  if(typeof validate === 'function' && !validate(d)) throw new Error('unexpected payload');
+  return d;
+}
 function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
   if(!m)return c||'';
   return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
@@ -216,7 +227,7 @@ async function checkLift(){
   // verified-clear reading. `ok` proves the check actually completed before we say anything.
   let ok=false;
   try{
-    const j=await fetch('https://milepost-proxy.leahgerber93.workers.dev/incidents?state=WA',{cache:'no-store'}).then(r=>r.json());
+    const j=await fetchFeed('https://milepost-proxy.leahgerber93.workers.dev/incidents?state=WA',{cache:'no-store'},d=>Array.isArray(d['incident-reports']));
     lift=(j['incident-reports']||[]).find(r=>{
       const t=((r.headline||'')+' '+(r.description||'')).toLowerCase();
       const rt=(r.location&&r.location['route-id'])||'';

@@ -369,16 +369,31 @@ function ago(ts){
   return d + (d === 1 ? ' day ago' : ' days ago');
 }
 
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url, validate){
+  const r = await fetch(url);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d = await r.json();
+  if(typeof validate === 'function' && !validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function load(){
   // Feed success is proven per-endpoint, never assumed. A Worker outage, CORS
   // failure, or bad JSON must not read the same as a verified-clear response —
   // this is the highest-stakes board on the site, read right before a mountain
-  // pass crossing.
+  // pass crossing. fetchFeed() throws on a non-2xx status OR a payload that
+  // doesn't have the expected array — a Worker error body (HTTP 500 with
+  // {"error":...}) still parses as JSON, so status + shape are both required
+  // proof; neither alone rules out an outage dressed up as a response.
   let cOk = false, iOk = false;
   try{
     const [cRes, iRes] = await Promise.all([
-      fetch(API + '/conditions?state=WA').then(r=>r.json()).then(d=>{cOk=true; return d;}).catch(()=>null),
-      fetch(API + '/incidents?state=WA').then(r=>r.json()).then(d=>{iOk=true; return d;}).catch(()=>null),
+      fetchFeed(API + '/conditions?state=WA', d=>Array.isArray(d['road-weather-reports'])).then(d=>{cOk=true; return d;}).catch(()=>null),
+      fetchFeed(API + '/incidents?state=WA', d=>Array.isArray(d['incident-reports'])).then(d=>{iOk=true; return d;}).catch(()=>null),
     ]);
 
     // --- pass status ---

@@ -206,6 +206,19 @@ document.getElementById('blSearch').addEventListener('input',renderList);
 
 let liveMarkers=[];
 function titleCase(str){return str.toLowerCase().replace(/\b[a-z]/g,c=>c.toUpperCase());}
+
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url,opts,validate){
+  const r=await fetch(url,opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d=await r.json();
+  if(typeof validate==='function'&&!validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function refresh(){
   let bridges=[];
   // Success must be proven, never assumed. An empty `bridges` array means two
@@ -213,9 +226,10 @@ async function refresh(){
   // never answered" — and a viewer can't tell them apart on the map. Track
   // the fetch outcome separately so a dead/erroring feed can never render as
   // a confident "all bridges open" claim (with a fabricated 0-closed count)
-  // below.
+  // below. Status and payload shape both have to check out before that flag
+  // flips — a JSON error body parses fine but isn't a `bridges` array.
   let ok=false;
-  try{const r=await fetch(LA_URL,{cache:'no-store'});if(r.ok){bridges=(await r.json()).bridges||[];ok=true;}}catch(e){}
+  try{bridges=(await fetchFeed(LA_URL,{cache:'no-store'},d=>Array.isArray(d.bridges))).bridges;ok=true;}catch(e){}
   liveMarkers.forEach(m=>map.removeLayer(m));liveMarkers=[];liveIndex=[];
   const roadClosed=bridges.filter(b=>/closed/i.test(b.road));
   bridges.forEach(b=>{

@@ -254,6 +254,18 @@ function laneSummary(r){
   return comm&&pass?'Commercial &middot; Passenger':comm?'Commercial only':pass?'Passenger only':'&mdash;';
 }
 
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url,opts,validate){
+  const r=await fetch(url,opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d=await r.json();
+  if(typeof validate==='function'&&!validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function load(){
   // usOk tracks whether the CBP fetch actually succeeded. 'when' (below) is
   // only ever set from a matched CBP record, so a network error, a CORS
@@ -261,11 +273,12 @@ async function load(){
   // identical downstream: every row's when=''. Without tracking success
   // separately, that indistinguishable failure used to render the freshest-
   // sounding timestamp on the board — "just now" — on a cycle that received
-  // zero live border data. Only a genuinely successful fetch with a matched
-  // record is allowed to claim a real update time.
+  // zero live border data. Only a genuinely successful, shape-verified fetch
+  // with a matched record is allowed to claim a real update time — an HTTP
+  // error page or a malformed body must never count as a live response.
   let ca=[],us=[],usOk=false;
-  try{ const d=await fetch(API+'/border-waits-ca').then(r=>r.json()); ca=d.waitTimes||[]; }catch(e){}
-  try{ const d=await fetch(API+'/border-waits').then(r=>r.json()); us=Array.isArray(d)?d:(d.port||[]); usOk=true; }catch(e){}
+  try{ const d=await fetchFeed(API+'/border-waits-ca',undefined,d=>Array.isArray(d.waitTimes)); ca=d.waitTimes||[]; }catch(e){}
+  try{ const d=await fetchFeed(API+'/border-waits',undefined,d=>Array.isArray(d)||Array.isArray(d.port)); us=Array.isArray(d)?d:(d.port||[]); usOk=true; }catch(e){}
 
   const rows=WANT.map(w=>{
     const c=ca.find(x=>(x['poe-name']||'').trim()===w.ca);

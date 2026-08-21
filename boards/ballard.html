@@ -36,7 +36,7 @@
   .eyebrow{font-size:1.3cqw;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
   .bname{font-size:3.6cqw;font-weight:800;line-height:1;letter-spacing:-.025em;margin-top:.35cqw}
   .bstate{font-size:8.4cqw;font-weight:800;line-height:.88;letter-spacing:-.04em;margin:.5cqw 0 .2cqw}
-  .up{color:var(--red)} .down{color:var(--green)}
+  .up{color:var(--red)} .down{color:var(--green)} .unk{color:var(--dim)}
   .bsub{font-size:1.65cqw;font-weight:700;color:var(--dim);line-height:1.4}
   .chip{display:inline-block;font-size:1.3cqw;font-weight:800;letter-spacing:.05em;
     padding:.45cqw 1.1cqw;border-radius:99px;margin-top:.6cqw}
@@ -170,9 +170,50 @@ function human(m){
   return d + (d===1?' day ago':' days ago');
 }
 
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url, opts, validate){
+  const r = await fetch(url, opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d = await r.json();
+  if(typeof validate === 'function' && !validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function load(){
   let s = {raised:[], raisedAt:{}, loweredAt:{}};
-  try{ s = await fetch(API+'/bridge-status').then(r=>r.json()); }catch(e){}
+  let feedOk = false;
+  try{
+    s = await fetchFeed(API+'/bridge-status', undefined, d => Array.isArray(d.raised));
+    feedOk = true;
+  }catch(e){}
+
+  if (!feedOk){
+    // Feed is down (network failure, HTTP error, or a payload missing
+    // `raised`) — must NOT fall through to the isUp=false branch below,
+    // which prints "DOWN / Clear to cross" while we have no idea what the
+    // bridge is actually doing. Same muted "no live status" treatment
+    // already used for University Bridge (see NO_FEED), applied here to
+    // every element on the board.
+    $('state').className = 'bstate unk';
+    $('state').textContent = '—';
+    $('chip').style.display = 'none';
+    $('sub').innerHTML = 'BRIDGE STATUS UNAVAILABLE<br><span style="font-size:1.25cqw;color:var(--dim)">'
+      + 'Live feed is down — this board cannot confirm what the bridge is doing.</span>';
+
+    $('alt1').textContent = 'Unknown';
+    $('alt1').className = 'v nofeed';
+    $('alt2').textContent = 'Unknown';
+    $('alt2').className = 'v nofeed';
+
+    $('brlist').innerHTML = BRIDGES.map(b =>
+      `<div class="r"><span>${b.nm}</span><span class="v nofeed">no live status</span></div>`
+    ).join('');
+    return;
+  }
+
   const raised = new Set(s.raised || []);
 
   // --- hero: the bridge outside this door ---

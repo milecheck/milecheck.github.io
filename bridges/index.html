@@ -201,15 +201,27 @@ let markers=[];
 function ago(ts){const m=Math.max(0,Math.round((Date.now()/1000-ts)/60));return m<1?'just now':m+' min';}
 function matchKey(id){id=(id||'').toLowerCase();return BRIDGES.find(b=>id.includes(b.key));}
 
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url,opts,validate){
+  const r=await fetch(url,opts);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const d=await r.json();
+  if(typeof validate==='function'&&!validate(d)) throw new Error('unexpected payload');
+  return d;
+}
+
 async function refresh(){
   let data={raised:[],raisedAt:{},loweredAt:{}};
   // Success must be PROVEN, not assumed. If the fetch throws, the response isn't ok,
-  // or the JSON body is malformed, `data` stays at its empty defaults — and without
-  // this flag that empty state would render as "all 5 bridges down", a confident
-  // all-clear the page never actually received. A dead feed must look unavailable,
-  // not calm.
+  // the JSON body is malformed, or the payload doesn't actually carry the `raised`
+  // array we read below, `data` stays at its empty defaults — and without this flag
+  // that empty state would render as "all 5 bridges down", a confident all-clear the
+  // page never actually received. A dead feed must look unavailable, not calm.
   let ok=false;
-  try{const r=await fetch(API,{cache:'no-store'});if(r.ok){data=await r.json();ok=true;}}catch(e){}
+  try{data=await fetchFeed(API,{cache:'no-store'},d=>Array.isArray(d.raised));ok=true;}catch(e){}
   const state={};
   BRIDGES.forEach(b=>state[b.key]=ok
     ?{tier:'down',detail:'Down — open to traffic'}
