@@ -21,10 +21,14 @@
   --asphalt: #161B18;      /* dark sections */
   --asphalt-2: #1E2420;
   --safety: #FFC933;       /* centerline yellow — sparingly */
-  --radius-sign: 14px;
+  --radius-sign: 20px;      /* softened 2026-08-23: was 14px, poster-flat */
   --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --shadow-sign: 0 2px 0 rgba(23,32,27,0.12), 0 18px 40px -18px rgba(14,107,69,0.45);
+  /* Single soft elevation shadow — replaces the "reflective sign border"
+     double-inset trick everywhere below. That trick read as a physical
+     road sign (a poster); this reads as a normal, friendly raised button. */
+  --shadow-sign: 0 1px 2px rgba(23,32,27,0.06), 0 10px 24px -10px rgba(14,107,69,0.28);
+  --radius-soft: 14px;      /* buttons, chips, small controls */
 }
 
 /* ===== Reset ===== */
@@ -89,7 +93,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .brand {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.3px;
@@ -109,7 +113,7 @@ img, svg { display: block; max-width: 100%; }
 .primary-nav a:hover { color: var(--ink); opacity: 1; }
 
 .primary-nav .nav-cta {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -117,8 +121,8 @@ img, svg { display: block; max-width: 100%; }
   color: #fff;
   background: var(--sign);
   border: 1px solid var(--sign);
-  border-radius: 8px;
-  box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3.5px rgba(255,255,255,0.85);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-sign);
   padding: 8px 16px;
 }
 
@@ -141,15 +145,15 @@ img, svg { display: block; max-width: 100%; }
 
 .eyebrow {
   display: inline-block;
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #fff;
   background: var(--sign);
-  border-radius: 7px;
-  box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3.5px rgba(255,255,255,0.85);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-sign);
   padding: 6px 14px 5px;
   margin-bottom: 22px;
 }
@@ -235,7 +239,7 @@ img, svg { display: block; max-width: 100%; }
   z-index: 2;
   background: var(--sign);
   border-radius: var(--radius-sign);
-  box-shadow: inset 0 0 0 4px var(--sign), inset 0 0 0 7px rgba(255,255,255,0.92), var(--shadow-sign);
+  box-shadow: var(--shadow-sign);
   padding: 26px 44px 22px;
   text-align: center;
   color: #fff;
@@ -283,7 +287,7 @@ img, svg { display: block; max-width: 100%; }
 .btn {
   display: inline-block;
   padding: 15px 26px;
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 1.2px;
@@ -301,7 +305,7 @@ img, svg { display: block; max-width: 100%; }
   background: var(--sign);
   border-color: var(--sign);
   color: #FFFFFF;
-  box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 4px rgba(255,255,255,0.85);
+  box-shadow: var(--shadow-sign);
 }
 .btn-primary:hover {
   background: var(--sign-deep);
@@ -337,7 +341,7 @@ img, svg { display: block; max-width: 100%; }
 .block:last-child { border-right: none; }
 
 .block-label {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 2px;
@@ -423,21 +427,21 @@ img, svg { display: block; max-width: 100%; }
 /* ===== Section labels & headings ===== */
 .section-label {
   display: inline-block;
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 2.2px;
   text-transform: uppercase;
   color: #fff;
   background: var(--sign);
-  border-radius: 6px;
-  box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3.5px rgba(255,255,255,0.85);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-sign);
   padding: 5px 12px 4px;
   margin-bottom: 22px;
 }
 
 .section-h2 {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: clamp(36px, 4.6vw, 56px);
   font-weight: 700;
   letter-spacing: -0.3px;
@@ -482,7 +486,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .row-body h3 {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 26px;
   font-weight: 600;
   letter-spacing: 0.2px;
@@ -495,14 +499,14 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .row-tag {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.4px;
   text-transform: uppercase;
   color: var(--sign);
   border: 1.5px solid var(--sign);
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 3px 8px 2px;
 }
 
@@ -553,7 +557,7 @@ img, svg { display: block; max-width: 100%; }
 .tier:last-child { border-right: none; }
 
 .tier-name {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 2.2px;
@@ -670,7 +674,7 @@ img, svg { display: block; max-width: 100%; }
 .footer-col-brand { padding-right: 32px; }
 
 .footer-brand {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -688,7 +692,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .footer-label {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -787,7 +791,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .coverage-label {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2.2px;
