@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,650&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
 /* ============================================================
-   MileCheck — signage design system (2026-08-20 redesign)
+   MileCheck — "Night Shift" design system (2026-08-27, applied
+   site-wide after Leah approved the homepage port). Dusk-and-
+   logbook language: paper ground, ink header/footer, Fraunces
+   serif display, IBM Plex Sans body, Plex Mono stamps/labels,
+   safety-yellow CTAs, squared corners, ruled hairlines.
+   Previously: the signage design system (2026-08-20 redesign)
    Direction: the app's green milepost sign IS the brand. Type,
    chips, buttons and dividers all borrow from US highway signage
    (Barlow Condensed's letterforms descend from road-sign type),
@@ -9,26 +16,27 @@
    ============================================================ */
 
 :root {
-  --paper: #F7F6F1;        /* warm off-white ground */
+  --paper: #f6f4ec;        /* logbook paper ground */
   --surface: #FFFFFF;
-  --ink: #17201B;          /* green-black asphalt ink */
-  --ink-soft: #4A544E;
-  --ink-faint: #8B948E;
-  --line: #E4E0D4;         /* warm hairline */
-  --sign: #0E6B45;         /* highway-sign green (brand) */
-  --sign-deep: #0A5236;
+  --ink: #23261f;          /* logbook ink */
+  --ink-soft: #5c6156;
+  --ink-faint: #8a928c;
+  --line: #c9c6b8;         /* ruled hairline */
+  --sign: #31623f;         /* night-shift green */
+  --sign-deep: #264f32;
   --live: #00C880;         /* the app's live-green, kept as accent */
-  --asphalt: #161B18;      /* dark sections */
-  --asphalt-2: #1E2420;
-  --safety: #FFC933;       /* centerline yellow — sparingly */
-  --radius-sign: 20px;      /* softened 2026-08-23: was 14px, poster-flat */
-  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --asphalt: #23261f;      /* dark sections = the ink */
+  --asphalt-2: #2b2e27;
+  --safety: #e8a013;       /* safety amber — CTAs */
+  --radius-sign: 6px;       /* Night Shift squares things off */
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --body: 'IBM Plex Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono-stack: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
   /* Single soft elevation shadow — replaces the "reflective sign border"
      double-inset trick everywhere below. That trick read as a physical
      road sign (a poster); this reads as a normal, friendly raised button. */
-  --shadow-sign: 0 1px 2px rgba(23,32,27,0.06), 0 10px 24px -10px rgba(14,107,69,0.28);
-  --radius-soft: 14px;      /* buttons, chips, small controls */
+  --shadow-sign: 0 1px 2px rgba(35,38,31,0.08);
+  --radius-soft: 2px;       /* buttons, chips, small controls — squared */
 }
 
 /* ===== Reset ===== */
@@ -54,7 +62,7 @@ ul { list-style: none; }
 img, svg { display: block; max-width: 100%; }
 
 .mono {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--mono-stack);
   font-feature-settings: "tnum";
 }
 
@@ -79,11 +87,18 @@ img, svg { display: block; max-width: 100%; }
   position: sticky;
   top: 0;
   z-index: 1500; /* must beat page overlays (cam viewer 1100, A2HS 1200) so the open nav menu always wins */
-  background: rgba(247, 246, 241, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
+  background: var(--ink);
+  border-bottom: 2px solid var(--ink);
 }
+/* hamburger base (some pages relied on their own copy of this; make it global) */
+.nav-toggle { display: none; background: none; border: 0; padding: 6px; cursor: pointer; line-height: 0; }
+@media (max-width: 760px) { .nav-toggle { display: inline-flex; align-items: center; } }
+
+/* dark header: force light chrome with enough specificity to beat per-page inline styles */
+.site-header .brand { color: var(--paper); }
+.site-header .primary-nav { color: rgba(246,244,236,0.82); }
+.site-header .primary-nav a:hover { color: #fff; }
+.site-header .nav-toggle svg { stroke: var(--paper); }
 
 .header-inner {
   display: flex;
@@ -94,11 +109,11 @@ img, svg { display: block; max-width: 100%; }
 
 .brand {
   font-family: var(--body);
-  font-size: 24px;
+  font-size: 19px;
   font-weight: 700;
   letter-spacing: 0.3px;
-  color: var(--ink);
-  text-transform: uppercase;
+  color: var(--paper);
+  text-transform: none;
 }
 
 .primary-nav {
@@ -113,20 +128,19 @@ img, svg { display: block; max-width: 100%; }
 .primary-nav a:hover { color: var(--ink); opacity: 1; }
 
 .primary-nav .nav-cta {
-  font-family: var(--body);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
+  font-family: var(--mono-stack);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #fff;
-  background: var(--sign);
-  border: 1px solid var(--sign);
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-sign);
+  color: #23261f;
+  background: var(--safety);
+  border: 2px solid #fff;
+  border-radius: 0;
   padding: 8px 16px;
 }
 
-.primary-nav .nav-cta:hover { background: var(--sign-deep); opacity: 1; }
+.primary-nav .nav-cta:hover { background: #f0b336; opacity: 1; }
 
 /* ===== Hero ===== */
 .hero {
@@ -145,25 +159,25 @@ img, svg { display: block; max-width: 100%; }
 
 .eyebrow {
   display: inline-block;
-  font-family: var(--body);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-family: var(--mono-stack);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #fff;
-  background: var(--sign);
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-sign);
-  padding: 6px 14px 5px;
-  margin-bottom: 22px;
+  color: var(--sign);
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 18px;
 }
 
 .hero-h1 {
   font-family: var(--display);
-  font-size: clamp(52px, 7.2vw, 88px);
-  font-weight: 700;
-  line-height: 0.96;
-  letter-spacing: -0.5px;
+  font-size: clamp(34px, 4.8vw, 56px);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin-bottom: 20px;
   max-width: 920px;
@@ -286,17 +300,17 @@ img, svg { display: block; max-width: 100%; }
 /* ===== Buttons ===== */
 .btn {
   display: inline-block;
-  padding: 15px 26px;
-  font-family: var(--body);
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
+  padding: 13px 22px;
+  font-family: var(--mono-stack);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid var(--ink);
-  border-radius: 10px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
   transition: background 0.15s, color 0.15s, opacity 0.15s, transform 0.15s;
 }
 .btn:active { transform: translateY(1px); }
@@ -354,15 +368,15 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .block-value {
-  font-family: var(--display);
-  font-size: 72px;
+  font-family: var(--mono-stack);
+  font-size: 48px;
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1;
   color: var(--sign);
   margin-bottom: 10px;
 }
-.block-value.mono { font-family: var(--display); }
+.block-value.mono { font-family: var(--mono-stack); }
 .block-unit {
   font-size: 26px;
   font-weight: 600;
@@ -427,25 +441,25 @@ img, svg { display: block; max-width: 100%; }
 /* ===== Section labels & headings ===== */
 .section-label {
   display: inline-block;
-  font-family: var(--body);
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: 2.2px;
+  font-family: var(--mono-stack);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fff;
-  background: var(--sign);
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-sign);
-  padding: 5px 12px 4px;
-  margin-bottom: 22px;
+  color: var(--sign);
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 14px;
 }
 
 .section-h2 {
-  font-family: var(--body);
-  font-size: clamp(36px, 4.6vw, 56px);
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  line-height: 1.02;
+  font-family: var(--display);
+  font-size: clamp(27px, 3.6vw, 40px);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
   color: var(--ink);
   margin-bottom: 48px;
   max-width: 820px;
@@ -675,10 +689,10 @@ img, svg { display: block; max-width: 100%; }
 
 .footer-brand {
   font-family: var(--body);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  text-transform: none;
   color: #FFFFFF;
   margin-bottom: 8px;
 }
@@ -692,10 +706,10 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .footer-label {
-  font-family: var(--body);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-family: var(--mono-stack);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #7C877F;
   margin-bottom: 10px;
@@ -720,6 +734,13 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ===== Responsive ===== */
+@media (max-width: 760px) {
+  /* dark mobile dropdown — specificity beats the per-page inline .primary-nav blocks */
+  .site-header .primary-nav { background: var(--asphalt-2) !important; border-color: rgba(255,255,255,0.1) !important; box-shadow: 0 16px 36px rgba(0,0,0,0.4) !important; }
+  .site-header .primary-nav a { color: var(--paper) !important; border-bottom-color: rgba(255,255,255,0.08) !important; }
+  .site-header .primary-nav a.nav-cta { color: #23261f !important; }
+}
+
 @media (max-width: 880px) {
   .container { padding: 0 24px; }
   .hero { padding: 56px 0 44px; }
@@ -752,7 +773,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 @media (max-width: 520px) {
-  .hero-h1 { font-size: 46px; }
+  .hero-h1 { font-size: 32px; }
   .hero-ctas { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
   .footer-grid { grid-template-columns: 1fr; }
