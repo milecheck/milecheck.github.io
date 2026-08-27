@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WA Ferry Space — live drive-up space on Washington State Ferries | MileCheck</title>
+  <meta name="description" content="Live drive-up vehicle space on Washington State Ferries — Edmonds–Kingston, Seattle–Bainbridge, Mukilteo–Clinton, Fauntleroy, Anacortes and more. See how full the next sailings are before you get in line, plus live vessel positions.">
+
+  <meta property="og:title" content="WA Ferry Space — live drive-up space per sailing">
+  <meta property="og:description" content="How full is the next boat? Live drive-up space counts for Washington State Ferries sailings, straight from WSDOT — refreshed every minute.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/ferries/">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://milecheckapp.com/ferries/">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How full is the next Washington State Ferry?","acceptedAnswer":{"@type":"Answer","text":"This page shows live drive-up vehicle space for upcoming Washington State Ferries sailings at each terminal, straight from WSDOT's terminal feed, refreshed every minute. Space counts change fast near departure time."}},
+      {"@type":"Question","name":"Which ferry terminals does this page cover?","acceptedAnswer":{"@type":"Answer","text":"Every WSF terminal reporting sailing space — including Seattle, Bainbridge Island, Edmonds, Kingston, Mukilteo, Clinton, Fauntleroy, Vashon, Southworth, Point Defiance, Tahlequah, and Anacortes for the San Juan Islands."}},
+      {"@type":"Question","name":"Does drive-up space guarantee I will make the sailing?","acceptedAnswer":{"@type":"Answer","text":"No — space counts are live but change quickly, and vehicle loading closes before departure. Use the counts as a planning signal, leave buffer time, and consider a reservation on routes that offer them."}}
+    ]
+  }
+  </script>
+
+  <style>
+    .fy-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .fy-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .fy-hero h1 .accent{color:#0f7a4f;}
+    .fy-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
+    .fy-status{max-width:1160px;margin:10px auto 0;padding:0 20px;font-size:12.5px;color:#8A939B;}
+    .fy-disrupt{max-width:1160px;margin:14px auto 0;padding:0 20px;display:none;}
+    .fy-disrupt .inner{background:#FEF6EC;border:1px solid #F59E0B;border-radius:12px;padding:12px 16px;font-size:14px;color:#7c4a03;line-height:1.5;}
+    .fy-grid{max-width:1160px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;align-items:start;}
+    .fy-term{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;}
+    .fy-term h2{font-size:16.5px;font-weight:800;padding:13px 16px 11px;border-bottom:1px solid #EFEFEF;display:flex;justify-content:space-between;align-items:baseline;}
+    .fy-term h2 small{font-size:11.5px;color:#8A939B;font-weight:600;letter-spacing:.03em;}
+    .fy-sail{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid #F3F4F3;}
+    .fy-sail:last-child{border-bottom:none;}
+    .fy-time{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14.5px;min-width:74px;}
+    .fy-dest{flex:1;min-width:0;}
+    .fy-dest .to{font-size:13px;font-weight:700;}
+    .fy-dest .vs{font-size:11.5px;color:#8A939B;}
+    .fy-space{text-align:right;min-width:96px;}
+    .fy-bar{height:6px;border-radius:3px;background:#EDEFEE;overflow:hidden;margin-top:4px;}
+    .fy-bar i{display:block;height:100%;border-radius:3px;}
+    .fy-pct{font-size:12.5px;font-weight:800;}
+    .lots .fy-pct{color:#0f7a4f;} .lots .fy-bar i{background:#0f7a4f;}
+    .some .fy-pct{color:#b45309;} .some .fy-bar i{background:#F59E0B;}
+    .full .fy-pct{color:#DC2626;} .full .fy-bar i{background:#DC2626;}
+    .cancelled .fy-time,.cancelled .fy-dest .to{color:#DC2626;text-decoration:line-through;}
+    .cancelled .fy-pct{color:#DC2626;}
+    .fy-vessels{max-width:1160px;margin:0 auto 30px;padding:0 20px;font-size:13.5px;color:#5b6670;line-height:1.7;}
+    .fy-vessels b{color:#0F1419;}
+    .fy-note{max-width:1160px;margin:0 auto 40px;padding:0 20px;font-size:13px;color:#8A939B;line-height:1.6;}
+    .fy-cta{border:1px dashed #cfd6d2;border-radius:14px;padding:14px 16px;font-size:13.5px;line-height:1.55;background:#F9FAF9;}
+    .fy-empty{padding:16px;color:#8A939B;font-size:13.5px;font-style:italic;}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/" class="active">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="fy-hero">
+    <h1>Washington <span class="accent">ferry space</span> — live</h1>
+    <p class="sub">How full is the next boat? Live drive-up vehicle space for upcoming Washington State Ferries sailings, straight from WSDOT — refreshed every minute. Space changes fast near departure, so treat it as a planning signal, not a promise.</p>
+  </div>
+  <div class="fy-status" id="fyUpdated">Loading sailing space…</div>
+  <div class="fy-disrupt" id="fyDisrupt"><div class="inner" id="fyDisruptText"></div></div>
+
+  <div class="fy-grid" id="fyGrid">
+    <div class="fy-term"><h2>Loading terminals…</h2><div class="fy-empty">Checking the WSDOT terminal feed.</div></div>
+  </div>
+
+  <div class="fy-vessels" id="fyVessels"></div>
+
+  <div class="fy-note">
+    <div class="fy-cta" style="margin-bottom:14px;"><b>In the car?</b> The MileCheck app shows your nearest mile marker, live road alerts, and pass conditions on the way to the terminal — <a href="/get/">get the app</a>.</div>
+    Space counts are WSDOT's live drive-up figures per sailing and can change in seconds; vehicle loading closes before the posted departure. Reservable routes (Anacortes/San Juans, Port Townsend–Coupeville) also hold reserved space this page doesn't count toward drive-up. Data: WSDOT Ferries.
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../bridges/">Seattle drawbridges</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Sailing space and vessel data from WSDOT Ferries; counts change rapidly and are not a guarantee of boarding.</p>
+    </div>
+  </footer>
+
+<script>
+const API='https://milepost-proxy.leahgerber93.workers.dev/ferries';
+
+function fmtTime(iso){
+  if(!iso) return '—';
+  const d=new Date(iso);
+  if(isNaN(d)) return '—';
+  return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+}
+
+function spaceTier(count,max){
+  if(count==null||max==null||max<=0) return null;
+  const pct=count/max;
+  if(pct>0.4) return 'lots';
+  if(pct>0.12) return 'some';
+  return 'full';
+}
+
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+async function refresh(){
+  const updated=document.getElementById('fyUpdated');
+  let data=null, ok=false;
+  try{
+    const r=await fetch(API);
+    data=await r.json();
+    ok=r.ok && data && data.source_status!=='failed';
+  }catch(e){ ok=false; }
+  const nowStr=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+  if(!ok){
+    updated.textContent='Feed unavailable as of '+nowStr+' — retrying every minute. (WSDOT outage or a network hiccup; sailing space is unknown, not "empty".)';
+    return; // keep showing last-known board rather than blanking it
+  }
+
+  // Disruptions banner
+  const dis=(data.routes||[]).flatMap(r=>(r.disruptions||[]).map(d=>({route:r.name,text:d})));
+  const disBox=document.getElementById('fyDisrupt');
+  if(dis.length){
+    document.getElementById('fyDisruptText').innerHTML='<b>Service alerts:</b> '+dis.map(d=>'<b>'+esc(d.route)+'</b> — '+esc(d.text)).join(' &middot; ');
+    disBox.style.display='block';
+  } else disBox.style.display='none';
+
+  // Terminal boards — only terminals with upcoming departures, next 4 sailings each
+  const now=Date.now();
+  const grid=document.getElementById('fyGrid');
+  const cards=[];
+  (data.terminals||[]).forEach(t=>{
+    const upcoming=(t.departures||[])
+      .filter(d=>d.departure && new Date(d.departure).getTime()>now-5*60*1000)
+      .slice(0,4);
+    if(!upcoming.length) return;
+    const rows=upcoming.map(d=>{
+      const sp=(d.spaces&&d.spaces[0])||{};
+      const tier=d.isCancelled?'cancelled':spaceTier(sp.driveUpSpaceCount,sp.maxSpaceCount);
+      const pct=(sp.driveUpSpaceCount!=null&&sp.maxSpaceCount)?Math.max(0,Math.min(100,Math.round(100*sp.driveUpSpaceCount/sp.maxSpaceCount))):null;
+      const spaceHtml=d.isCancelled
+        ?'<div class="fy-pct">CANCELLED</div>'
+        :(pct==null
+          ?'<div class="fy-pct" style="color:#8A939B;">no count</div>'
+          :'<div class="fy-pct">'+sp.driveUpSpaceCount+' spaces</div><div class="fy-bar"><i style="width:'+pct+'%"></i></div>');
+      const dests=(d.spaces||[]).map(s=>esc(s.arrivingTerminalName)).filter(Boolean).join(' / ')||'—';
+      return '<div class="fy-sail '+(tier||'')+'">'
+        +'<div class="fy-time">'+fmtTime(d.departure)+'</div>'
+        +'<div class="fy-dest"><div class="to">→ '+dests+'</div><div class="vs">'+esc(d.vesselName||'')+'</div></div>'
+        +'<div class="fy-space">'+spaceHtml+'</div></div>';
+    }).join('');
+    cards.push('<div class="fy-term"><h2>'+esc(t.name)+'<small>drive-up space</small></h2>'+rows+'</div>');
+  });
+  grid.innerHTML=cards.length?cards.join(''):'<div class="fy-term"><h2>No upcoming sailings reported</h2><div class="fy-empty">WSDOT is not listing departures right now — service may be done for the night.</div></div>';
+
+  // Vessels underway
+  const underway=(data.vessels||[]).filter(v=>!v.atDock);
+  document.getElementById('fyVessels').innerHTML=underway.length
+    ?('<b>'+underway.length+' boats underway right now:</b> '+underway.map(v=>esc(v.name)+' ('+esc(v.departingTerminal||'?')+' → '+esc(v.arrivingTerminal||'?')+(v.eta?', ETA '+fmtTime(v.eta):'')+')').join(' · '))
+    :'';
+
+  updated.textContent='Updated '+nowStr+' · refreshes every minute · '+(data.source_status==='partial'?'⚠ one WSDOT feed is down — showing what’s available':'live from WSDOT Ferries');
+}
+refresh();
+setInterval(refresh,60000);
+</script>
+</body>
+</html>
