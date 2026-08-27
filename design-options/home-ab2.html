@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MileCheck — full homepage mockup (Night Shift)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,650&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* FULL HOMEPAGE MOCKUP — AB-2 "Night Shift" language, per Leah 2026-08-27:
+     dusk scene hero (roy-night-shift art, snowplow retired as too wintry),
+     A's paper logbook below. Headline swapped to the app's own core line.
+     Counts hand-copied from ledger values; wrap in cov markers before this
+     ever replaces index.html. */
+  :root{
+    --paper:#f6f4ec; --ink:#23261f; --ink2:#5c6156; --rule:#c9c6b8;
+    --safety:#e8a013; --green:#31623f;
+    --sky1:#2b3a55; --sky2:#59547a; --sky3:#b96d54;
+    --mono:'IBM Plex Mono',monospace; --serif:'Fraunces',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:16.5px;line-height:1.62}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  img{max-width:100%}
+  a{color:var(--green)}
+  .opt-banner{background:#23261f;color:#f6f4ec;font:600 12.5px var(--mono);text-align:center;padding:8px}
+  .opt-banner a{color:#e8a013}
+
+  /* dusk scene hero */
+  .scene{position:relative;overflow:hidden;color:#fff;
+    background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 46%,var(--sky3) 78%,#d99a6c 94%,var(--paper) 94.2%,var(--paper) 100%)}
+  .scene .stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.7)}
+  nav{position:relative;z-index:5}
+  nav .wrap{display:flex;align-items:center;height:62px;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:#fff;text-decoration:none}
+  .brand img{width:27px;height:27px;border-radius:6px}
+  .navlinks{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:14px}
+  .navlinks a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600}
+  @media(max-width:960px){.navlinks a:not(.cta){display:none}}
+  .cta{border:2px solid #fff;color:#23261f!important;background:var(--safety);padding:8px 16px;font:600 13px var(--mono);text-decoration:none}
+
+  .scene .hero{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:14px;align-items:end;padding-top:46px}
+  @media(max-width:840px){.scene .hero{grid-template-columns:1fr;text-align:center}}
+  .stamp{display:inline-block;font:600 12px var(--mono);letter-spacing:.1em;border:1.5px solid rgba(255,255,255,.8);padding:5px 10px;transform:rotate(-1deg);color:#fff}
+  h1{font-family:var(--serif);font-weight:650;font-size:clamp(36px,5.4vw,60px);line-height:1.07;letter-spacing:-.01em;margin:20px 0 0;max-width:16ch;color:#fff}
+  @media(max-width:840px){h1{margin-left:auto;margin-right:auto}}
+  .sub{margin-top:16px;font-size:17.5px;color:rgba(255,255,255,.85);max-width:44ch}
+  @media(max-width:840px){.sub{margin-left:auto;margin-right:auto}}
+  .ctas{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+  @media(max-width:840px){.ctas{justify-content:center}}
+  .btn{padding:13px 22px;font:600 14.5px var(--mono);text-decoration:none;border:2px solid #fff;display:inline-block}
+  .btn.primary{background:var(--safety);color:#23261f;border-color:var(--safety)}
+  .btn.ghost{color:#fff}
+  .fine{margin:16px 0 64px;font-size:13px;color:rgba(255,255,255,.68);max-width:44ch}
+  @media(max-width:840px){.fine{margin-left:auto;margin-right:auto}}
+  .fine b{color:#ffd479}
+  .roy{align-self:end;margin-bottom:-5px}
+  .roy img{width:min(300px,72%);display:block;margin:0 auto}
+
+  /* ledger */
+  .ledger{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--paper);position:relative}
+  .ledger .wrap{display:grid;grid-template-columns:1fr 1fr 1fr;padding:0}
+  @media(max-width:700px){.ledger .wrap{grid-template-columns:1fr}}
+  .cell{padding:20px 22px;border-left:1px solid var(--rule)}
+  .cell:first-child{border-left:none}
+  @media(max-width:700px){.cell{border-left:none;border-top:1px solid var(--rule)}.cell:first-child{border-top:none}}
+  .cell .k{font:600 11.5px var(--mono);letter-spacing:.12em;color:var(--green);text-transform:uppercase}
+  .cell .v{font:600 30px var(--mono);margin-top:2px}
+  .cell .s{font-size:13px;color:var(--ink2)}
+
+  /* shared section bits */
+  section{padding:64px 0}
+  .k-line{font:600 12px var(--mono);letter-spacing:.14em;color:var(--green);text-transform:uppercase}
+  h2{font-family:var(--serif);font-weight:650;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.01em;margin:12px 0 0}
+  .lede{margin-top:12px;font-size:16px;color:var(--ink2);max-width:62ch}
+
+  /* logbook entries */
+  .entries{margin-top:34px}
+  .entry{display:grid;grid-template-columns:96px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--rule)}
+  @media(max-width:640px){.entry{grid-template-columns:1fr;gap:6px}}
+  .entry .no{font:600 14px var(--mono);color:var(--ink2)}
+  .entry h3{margin:0;font-family:var(--serif);font-size:20px;font-weight:650}
+  .entry p{margin:6px 0 0;font-size:15.5px;color:var(--ink2);max-width:64ch}
+  .entry .tag{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.1em;border:1.5px solid var(--green);color:var(--green);padding:2px 7px;margin-left:8px;vertical-align:2px}
+
+  /* route link rows */
+  .routes{background:#fbfaf5;border-top:2px solid var(--ink)}
+  .linklist{margin-top:30px;border-top:1px solid var(--rule)}
+  .linkrow{display:grid;grid-template-columns:150px 1fr auto;gap:22px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+  @media(max-width:700px){.linkrow{grid-template-columns:1fr;gap:4px}}
+  .linkrow .tag{font:600 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+  .linkrow h3{margin:0;font-family:var(--serif);font-size:21px;font-weight:650}
+  .linkrow p{margin:4px 0 0;font-size:14.5px;color:var(--ink2)}
+  .linkrow .go{font-size:20px;color:var(--green)}
+  .linkrow:hover h3{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+
+  /* northwest prose */
+  .prose{margin-top:20px;font-size:16.5px;line-height:1.7;color:var(--ink2);max-width:70ch}
+
+  /* pricing band */
+  .price{background:var(--ink);color:var(--paper)}
+  .price .wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:36px;align-items:center;padding-top:64px;padding-bottom:64px}
+  @media(max-width:760px){.price .wrap{grid-template-columns:1fr}}
+  .price h2{color:var(--paper)}
+  .price p{color:rgba(246,244,236,.72);margin-top:14px;font-size:16px;max-width:48ch}
+  .price .num{font:600 54px var(--mono);line-height:1}
+  .price .num small{font:500 20px 'IBM Plex Sans',sans-serif;color:rgba(246,244,236,.6)}
+  .price .or{font:500 13.5px var(--mono);color:rgba(246,244,236,.55);margin:10px 0 20px}
+  .price .btn.primary{border-color:var(--safety)}
+
+  /* FAQ */
+  .faq{margin-top:26px;border-top:1px solid var(--rule)}
+  .faq details{border-bottom:1px solid var(--rule)}
+  .faq summary{cursor:pointer;padding:18px 0;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::after{content:"+";font:400 20px var(--mono);color:var(--green)}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{padding:0 0 18px;color:var(--ink2);max-width:70ch;margin:0;font-size:15.5px}
+
+  /* report signup */
+  .report{background:#fbfaf5;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .report .wrap{padding-top:52px;padding-bottom:56px;text-align:center}
+  .report .form{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+  .report input{font:500 15px var(--mono);padding:12px 14px;border:2px solid var(--ink);background:#fff;min-width:min(320px,80vw)}
+  .report .lede{margin-left:auto;margin-right:auto}
+
+  /* footer */
+  footer{padding:52px 0 36px;font-size:14.5px;color:var(--ink2)}
+  footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
+  @media(max-width:760px){footer .cols{grid-template-columns:1fr 1fr}}
+  footer .lbl{font:600 11.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:10px}
+  footer ul{list-style:none;margin:0;padding:0}
+  footer li{margin-bottom:8px}
+  footer a{color:var(--ink2);text-decoration:none}
+  footer a:hover{color:var(--ink);text-decoration:underline}
+  .fineprint{margin-top:34px;padding-top:20px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div class="opt-banner">FULL HOMEPAGE MOCKUP · “NIGHT SHIFT” &nbsp; <a href="./">&larr; all options</a></div>
+
+<div class="scene">
+  <div class="stars">
+    <i style="left:8%;top:110px"></i><i style="left:17%;top:190px"></i><i style="left:28%;top:95px"></i>
+    <i style="left:48%;top:150px"></i><i style="left:70%;top:120px"></i><i style="left:83%;top:220px"></i><i style="left:93%;top:105px"></i>
+  </div>
+  <nav><div class="wrap">
+    <a class="brand" href="#"><img src="../images/icon.png" alt="">MileCheck</a>
+    <div class="navlinks">
+      <a href="/maps/">Maps</a><a href="/cameras/">Cameras</a><a href="/states/">States</a><a href="/canada/">Canada</a><a href="/partners/">B2B</a><a href="/blog/">Blog</a>
+      <a class="cta" href="/get/">GET THE APP</a>
+    </div>
+  </div></nav>
+  <div class="wrap"><div class="hero">
+    <div>
+      <span class="stamp">iOS · ANDROID · ALL 50 STATES</span>
+      <h1>Know exactly where you are on the highway.</h1>
+      <p class="sub">Your nearest mile marker, live — plus road alerts from all 50 state DOTs. It&rsquo;s how help finds you.</p>
+      <div class="ctas">
+        <a class="btn primary" href="/get/">GET THE APP</a>
+        <a class="btn ghost" href="/maps/">SEE THE LIVE MAPS</a>
+      </div>
+      <p class="fine"><b>Your mile marker is always free.</b> Premium — map, live alerts, trip tools — $9.99/yr or $1.99/mo, 7-day free trial.</p>
+    </div>
+    <div class="roy"><img src="../images/roy-nightshift.png" alt="Roy, MileCheck's road-crew badger, on the night shift"></div>
+  </div></div>
+</div>
+
+<div class="ledger"><div class="wrap">
+  <div class="cell"><div class="k">Mile markers</div><div class="v">50</div><div class="s">US states — stored offline on your phone</div></div>
+  <div class="cell"><div class="k">Live DOT alerts</div><div class="v">50</div><div class="s">of 50 states, straight from each DOT feed</div></div>
+  <div class="cell"><div class="k">Crash rate</div><div class="v">0.00%</div><div class="s">and free on CarPlay &amp; Android Auto</div></div>
+</div></div>
+
+<section><div class="wrap">
+  <span class="k-line">Inside the app</span>
+  <h2>Far more than a mile marker.</h2>
+  <div class="entries">
+    <div class="entry"><span class="no">ENTRY 01</span><div><h3>Your mile marker, live</h3><p>Your nearest marker in real time, all 50 states — stored on the phone, so it works with no cell service. Plus GPS speed and a live map.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 02</span><div><h3>Alerts from every state DOT</h3><p>Closures, crashes, chains, and construction from all 50 state feeds — with border waits, Seattle bridge status, and crosswind warnings.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 03</span><div><h3>On the car screen</h3><p>CarPlay and Android Auto show your highway, mile marker, and road conditions — glance-and-go, free for everyone.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 04</span><div><h3>Trip log &amp; share your location</h3><p>Log your drives with mile ranges and export to CSV. Share exactly where you are — route, direction, mile marker — in one tap. Stored on your device, never uploaded.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 05</span><div><h3>Route planning<span class="tag">PREMIUM</span></h3><p>Plan a corridor, see it drawn on the map, and get the alerts that are actually on your route — with an honest ETA.</p></div></div>
+  </div>
+</div></section>
+
+<div class="routes"><section><div class="wrap">
+  <span class="k-line">Live right now, no app needed</span>
+  <h2>Check your route.</h2>
+  <p class="lede">Live pages for the highways, passes, and crossings drivers search most — the same data the app runs on.</p>
+  <div class="linklist">
+    <a class="linkrow" href="/maps/"><span class="tag">10 interstates</span><span><h3>Interstate corridors</h3><p>See a whole interstate right now — I-5, I-75, I-95, I-15, and more, tagged with mile markers.</p></span><span class="go">&rarr;</span></a>
+    <a class="linkrow" href="/passes/"><span class="tag">9 passes</span><span><h3>Mountain pass conditions</h3><p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon — see the snow before you drive the summit.</p></span><span class="go">&rarr;</span></a>
+    <a class="linkrow" href="/cameras/"><span class="tag">22 states</span><span><h3>Cameras by state</h3><p>Live traffic cameras for your state — Washington, Florida, California, and 19 more.</p></span><span class="go">&rarr;</span></a>
+    <a class="linkrow" href="/ferries/"><span class="tag">Live · WSDOT</span><span><h3>WA ferry space</h3><p>How full is the next boat? Live drive-up space for Washington State Ferries sailings.</p></span><span class="go">&rarr;</span></a>
+    <a class="linkrow" href="/bridges/"><span class="tag">Live · Seattle</span><span><h3>Drawbridge status</h3><p>Is the bridge up right now? Fremont, Ballard, Montlake, South Park, and 1st Ave S — live.</p></span><span class="go">&rarr;</span></a>
+    <a class="linkrow" href="/blog/how-to-find-your-mile-marker.html"><span class="tag">Guide</span><span><h3>What is my mile marker?</h3><p>How mile markers work, how to find yours right now, and why 911 and tow trucks ask for it.</p></span><span class="go">&rarr;</span></a>
+  </div>
+</div></section></div>
+
+<section><div class="wrap">
+  <span class="k-line">Built for the Northwest</span>
+  <h2>Beat the bridge. Beat the pass.</h2>
+  <p class="prose">If you drive Seattle, MileCheck shows the city&rsquo;s drawbridges — Fremont, Ballard, Montlake, South Park, and 1st Ave S — raised or lowered, live on the map, so you can see if the bridge is up before you&rsquo;re stuck behind it. Headed over the mountains? You get Snoqualmie and Stevens pass conditions and chain controls, straight from WSDOT.</p>
+</div></section>
+
+<div class="price"><div class="wrap">
+  <div>
+    <h2>Your mile marker is always free.</h2>
+    <p>Premium adds the live map, DOT alerts on your route, route planning, and trip tools. 7-day free trial, cancel anytime. Early subscribers keep their price.</p>
+  </div>
+  <div>
+    <div class="num">$9.99<small>/yr</small></div>
+    <div class="or">or $1.99/month</div>
+    <a class="btn primary" href="/get/">START THE FREE TRIAL</a>
+  </div>
+</div></div>
+
+<section><div class="wrap">
+  <span class="k-line">Questions</span>
+  <h2>Straight answers.</h2>
+  <div class="faq">
+    <details><summary>What does MileCheck do?</summary><p>It shows your nearest highway mile marker in real time, anywhere in all 50 states — plus live road conditions and alerts pulled straight from state DOTs. You always know exactly where you are, and what&rsquo;s ahead on your route.</p></details>
+    <details><summary>Which states are covered?</summary><p>Mile markers in all 50 states. Live DOT alerts in all 50 states.</p></details>
+    <details><summary>Does it work without cell service?</summary><p>Yes — mile markers are stored on your phone, so they work in dead zones. Live alerts need a connection.</p></details>
+    <details><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium — the live map, DOT alerts, and trip tools — is $9.99/yr or $1.99/mo, with a 7-day free trial.</p></details>
+    <details><summary>Does it work with CarPlay and Android Auto?</summary><p>Yes, both — and the car screen is free. It&rsquo;s deliberately simple: your highway, mile marker, and current road conditions, glance-and-go.</p></details>
+    <details><summary>Can my company license the data?</summary><p>Yes. The 50-state milepost corpus and the live 50-state DOT alert layer are available to license — one schema, one API. Email info@milecheckapp.com — details on the B2B page.</p></details>
+  </div>
+</div></section>
+
+<div class="report"><div class="wrap">
+  <span class="k-line">The monthly road report</span>
+  <h2>Get the report in your inbox.</h2>
+  <p class="lede">Real numbers on what actually happened on America&rsquo;s highways last month. Once a month. No spam.</p>
+  <div class="form">
+    <input type="email" placeholder="you@example.com" aria-label="Email address">
+    <a class="btn primary" href="#" style="border-color:var(--ink);">SIGN ME UP</a>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div>
+      <div class="lbl">MileCheck</div>
+      <p style="max-width:34ch;margin:0;">Real-time highway mile markers and live DOT road alerts. It&rsquo;s how help finds you.</p>
+    </div>
+    <div>
+      <div class="lbl">Get the app</div>
+      <ul>
+        <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851">iOS App Store</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile">Google Play</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">Live pages</div>
+      <ul>
+        <li><a href="/maps/">Live maps</a></li>
+        <li><a href="/cameras/">Cameras</a></li>
+        <li><a href="/ferries/">Ferry space</a></li>
+        <li><a href="/bridges/">Drawbridges</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="lbl">Company</div>
+      <ul>
+        <li><a href="/partners/">B2B &amp; licensing</a></li>
+        <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+        <li><a href="mailto:info@milecheckapp.com">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="fineprint">Mile marker positions are approximate and may not reflect actual sign locations. &copy; 2026 MileCheck LLC</p>
+</div></footer>
+
+</body>
+</html>
