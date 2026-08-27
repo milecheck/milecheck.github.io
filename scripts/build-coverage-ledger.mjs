@@ -156,6 +156,9 @@ async function main() {
     pages: {
       camera_states: cameraStatePages.length,
       camera_cities: cameraCityPages.length,
+      // dedicated per-state drawbridge pages (bridges/<state>/); more-states/ is
+      // the bulk page covering the remaining states and is not a state page.
+      bridge_states: pageDirs('bridges').filter((d) => d !== 'more-states').length,
       corridors: pageDirs('corridors').length,
       passes: pageDirs('passes').length,
       // state guides are blog FILES (blog/mile-markers-<state>.html), not dirs.
@@ -172,7 +175,7 @@ async function main() {
               (ledger.feeds.cameras.unavailable.length ? `  unavailable: ${ledger.feeds.cameras.unavailable.join(',')}` : ''));
   console.log(`  borders  : ${ledger.feeds.borders.crossings} crossings`);
   console.log(`  pages    : ${ledger.pages.camera_states} camera-state, ${ledger.pages.camera_cities} camera-city, ` +
-              `${ledger.pages.corridors} corridors, ${ledger.pages.passes} passes`);
+              `${ledger.pages.bridge_states} bridge-state, ${ledger.pages.corridors} corridors, ${ledger.pages.passes} passes`);
 
   if (DRY) { console.log('\nDRY RUN — not written.'); return; }
   writeFileSync(join(ROOT, 'data/coverage-ledger.json'), JSON.stringify(ledger, null, 2) + '\n');
