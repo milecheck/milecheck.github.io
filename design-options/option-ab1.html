@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option AB-1 — Logbook with a Postcard</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* OPTION AB-1 — "Logbook with a Postcard": A's paper/ink/mono logbook is
+     the page; B contributes the warm Fraunces headline and the snowplow
+     scene, mounted like a postcard taped into the log. A-dominant. */
+  :root{
+    --paper:#f6f4ec; --ink:#23261f; --ink2:#5c6156; --rule:#c9c6b8;
+    --safety:#e8a013; --green:#31623f;
+    --sky1:#2b3a55; --sky2:#59547a; --sky3:#b96d54;
+    --mono:'IBM Plex Mono',monospace; --serif:'Fraunces',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:16.5px;line-height:1.6}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  .opt-banner{background:#23261f;color:#f6f4ec;font:600 12.5px var(--mono);text-align:center;padding:8px}
+  .opt-banner a{color:#e8a013}
+
+  nav{border-bottom:2px solid var(--ink)}
+  nav .wrap{display:flex;align-items:center;height:64px;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:var(--ink);text-decoration:none}
+  .brand img{width:26px;height:26px;border-radius:6px}
+  .navlinks{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:14px}
+  .navlinks a{color:var(--ink2);text-decoration:none;font-weight:500}
+  @media(max-width:900px){.navlinks a:not(.cta){display:none}}
+  .cta{border:2px solid var(--ink);color:var(--ink);padding:8px 16px;font:600 13.5px var(--mono);text-decoration:none;background:var(--safety)}
+
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:38px;padding:58px 24px 46px;align-items:center}
+  @media(max-width:840px){.hero .wrap{grid-template-columns:1fr}}
+  .stamp{display:inline-block;font:600 12px var(--mono);letter-spacing:.1em;border:1.5px solid var(--ink);padding:5px 10px;transform:rotate(-1deg);background:#fff}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(36px,5.2vw,58px);line-height:1.08;letter-spacing:-.01em;margin:20px 0 0}
+  h1 em{font-style:normal;box-shadow:inset 0 -14px 0 rgba(232,160,19,.45)}
+  .sub{margin-top:18px;font-size:17.5px;color:var(--ink2);max-width:48ch}
+  .ctas{display:flex;gap:12px;margin:26px 0 8px;flex-wrap:wrap}
+  .btn{padding:13px 22px;font:600 15px var(--mono);text-decoration:none;border:2px solid var(--ink)}
+  .btn.primary{background:var(--ink);color:var(--paper)}
+  .btn.ghost{color:var(--ink)}
+  .fine{font-size:13px;color:var(--ink2);margin:14px 0 0}
+  .fine b{color:var(--green)}
+
+  /* the postcard — B's dusk scene taped into A's logbook */
+  .postcard{position:relative;transform:rotate(1.4deg)}
+  .postcard .frame{background:#fff;border:1.5px solid var(--rule);padding:12px 12px 14px;box-shadow:0 14px 34px rgba(35,38,31,.18)}
+  .postcard .scene{position:relative;overflow:hidden;
+    background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 44%,var(--sky3) 78%,#d99a6c 100%);padding:26px 14px 0}
+  .postcard .scene i{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.7)}
+  .postcard img{width:100%;display:block;margin-bottom:-4px}
+  .postcard figcaption{font:500 11.5px var(--mono);color:var(--ink2);text-align:center;padding-top:10px}
+  .tape{position:absolute;width:92px;height:26px;background:rgba(232,160,19,.4);top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg)}
+
+  .ledger{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .ledger .wrap{display:grid;grid-template-columns:1fr 1fr 1fr;padding:0}
+  @media(max-width:700px){.ledger .wrap{grid-template-columns:1fr}}
+  .cell{padding:20px 22px;border-left:1px solid var(--rule)}
+  .cell:first-child{border-left:none}
+  @media(max-width:700px){.cell{border-left:none;border-top:1px solid var(--rule)}.cell:first-child{border-top:none}}
+  .cell .k{font:600 11.5px var(--mono);letter-spacing:.12em;color:var(--green);text-transform:uppercase}
+  .cell .v{font:600 30px var(--mono);margin-top:2px}
+  .cell .s{font-size:13px;color:var(--ink2)}
+
+  section.notes{padding:64px 0 80px}
+  .k-line{font:600 12px var(--mono);letter-spacing:.14em;color:var(--green);text-transform:uppercase}
+  .notes h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.01em;margin:12px 0 0}
+  .entries{margin-top:34px}
+  .entry{display:grid;grid-template-columns:96px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--rule)}
+  @media(max-width:640px){.entry{grid-template-columns:1fr;gap:6px}}
+  .entry .no{font:600 14px var(--mono);color:var(--ink2)}
+  .entry h3{margin:0;font-family:var(--serif);font-size:20px;font-weight:600}
+  .entry p{margin:6px 0 0;font-size:15.5px;color:var(--ink2);max-width:64ch}
+</style>
+</head>
+<body>
+<div class="opt-banner">OPTION AB-1 · “LOGBOOK WITH A POSTCARD” — A&rsquo;s page, B&rsquo;s warmth &nbsp; <a href="./">&larr; all options</a></div>
+
+<nav><div class="wrap">
+  <a class="brand" href="#"><img src="../images/icon.png" alt="">MileCheck</a>
+  <div class="navlinks">
+    <a href="#">Maps</a><a href="#">Cameras</a><a href="#">States</a><a href="#">Canada</a><a href="#">B2B</a><a href="#">Blog</a>
+    <a class="cta" href="#">GET THE APP</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <span class="stamp">iOS · ANDROID · ALL 50 STATES</span>
+    <h1>Know <em>exactly</em> where you are on the highway.</h1>
+    <p class="sub">Your nearest mile marker, live — plus road alerts from all 50 state DOTs. It&rsquo;s how help finds you.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#">GET THE APP</a>
+      <a class="btn ghost" href="#">SEE THE LIVE MAPS</a>
+    </div>
+    <p class="fine"><b>Your mile marker is always free.</b> Premium — map, live alerts, trip tools — $9.99/yr or $1.99/mo, 7-day free trial.</p>
+  </div>
+  <figure class="postcard" style="margin:0;">
+    <div class="tape"></div>
+    <div class="frame">
+      <div class="scene">
+        <i style="left:10%;top:12px"></i><i style="left:30%;top:22px"></i><i style="left:76%;top:14px"></i><i style="left:90%;top:26px"></i>
+        <img src="../images/roy-plow.png" alt="Roy the badger driving a snowplow at dusk">
+      </div>
+      <figcaption>ROY · NIGHT SHIFT, US-2 — “roads don&rsquo;t watch themselves.”</figcaption>
+    </div>
+  </figure>
+</div></header>
+
+<div class="ledger"><div class="wrap">
+  <div class="cell"><div class="k">Mile markers</div><div class="v">50</div><div class="s">US states — stored offline on your phone</div></div>
+  <div class="cell"><div class="k">Live DOT alerts</div><div class="v">50</div><div class="s">of 50 states, straight from each DOT feed</div></div>
+  <div class="cell"><div class="k">Crash rate</div><div class="v">0.00%</div><div class="s">and free on CarPlay &amp; Android Auto</div></div>
+</div></div>
+
+<section class="notes"><div class="wrap">
+  <span class="k-line">Inside the app</span>
+  <h2>Far more than a mile marker.</h2>
+  <div class="entries">
+    <div class="entry"><span class="no">ENTRY 01</span><div><h3>Your mile marker, live</h3><p>Your nearest marker in real time, all 50 states — it works with no cell service. Plus GPS speed and a live map.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 02</span><div><h3>Alerts from every state DOT</h3><p>Closures, crashes, chains, and construction from all 50 state feeds — with border waits, Seattle bridge status, and crosswind warnings.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 03</span><div><h3>On the car screen</h3><p>CarPlay and Android Auto show your highway, mile marker, and road conditions — glance-and-go, free for everyone.</p></div></div>
+  </div>
+</div></section>
+
+</body>
+</html>
