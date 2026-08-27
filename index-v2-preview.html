@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MileCheck — V2 design preview (unlisted)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Barlow+Condensed:wght@700;800&display=swap">
+<style>
+  /* ============================================================
+     V2 DESIGN PREVIEW — SCT-planner design language applied to
+     MileCheck. NOT the live homepage. Numbers are hand-copied from
+     the current ledger-injected values; if this ever replaces
+     index.html, every count must be wrapped in <!--cov:KEY-->
+     markers first.
+     ============================================================ */
+  :root{
+    --bg:#ffffff; --bg-2:#f6f7f5; --line:#e3e6e1;
+    --ink:#1b211e; --ink-2:#59625d; --ink-3:#8a928d;
+    --green:#1f6b45; --green-d:#175436; --green-soft:#eaf2ed;
+    --brand:#00A86B; /* MileCheck accent, used sparingly */
+    --shadow:0 1px 2px rgba(20,30,25,.05), 0 8px 24px rgba(20,30,25,.07);
+    --r:14px; --max:1140px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  h1,h2,h3{line-height:1.16;letter-spacing:-.015em;margin:0}
+  h1{font-size:clamp(34px,4.8vw,54px);font-weight:800}
+  h2{font-size:clamp(25px,3vw,34px);font-weight:700}
+  h3{font-size:18px;font-weight:700}
+  p{margin:0}
+  a{color:var(--green)}
+
+  .preview-banner{background:#B45309;color:#fff;text-align:center;font-size:13px;font-weight:600;padding:8px 16px}
+
+  /* nav */
+  nav.site{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav.site .wrap{display:flex;align-items:center;gap:20px;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+  .brand img{width:30px;height:30px;border-radius:8px}
+  .navlinks{margin-left:auto;display:flex;gap:22px;align-items:center}
+  .navlinks a{color:var(--ink-2);text-decoration:none;font-size:15px;font-weight:500}
+  .navlinks a:hover{color:var(--ink)}
+  @media(max-width:860px){.navlinks a:not(.btn){display:none}}
+  .btn{display:inline-block;border-radius:9px;padding:11px 20px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;white-space:nowrap}
+  .btn-p{background:var(--green);color:#fff}
+  .navlinks a.btn-p{color:#fff}
+  .btn-p:hover{background:var(--green-d)}
+  .btn-o{border-color:var(--line);color:var(--ink);background:var(--bg)}
+  .btn-w{border-color:rgba(255,255,255,.55);color:#fff;background:rgba(255,255,255,.06)}
+
+  /* hero — deep dusk-highway gradient, SCT-style depth without a photo */
+  .hero{position:relative;min-height:min(74vh,600px);display:flex;align-items:flex-end;overflow:hidden;
+    background:linear-gradient(180deg,#0e1f17 0%,#143324 42%,#1d4a33 78%,#215239 100%)}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 60% at 75% 10%,rgba(255,214,140,.14) 0%,transparent 55%)}
+  .hero .road{position:absolute;left:0;right:0;bottom:0;height:120px;background:#10130f}
+  .hero .road::before{content:"";position:absolute;left:-4%;right:-4%;top:52px;height:5px;
+    background:repeating-linear-gradient(90deg,#e9c34b 0 46px,transparent 46px 96px);transform:rotate(-.6deg)}
+  .hero .wrap{position:relative;z-index:2;width:100%;padding-top:80px;color:#fff;
+    display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end;padding-bottom:150px}
+  @media(max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-bottom:150px}}
+  .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;padding:6px 14px;margin-bottom:18px}
+  .hero p.sub{margin-top:16px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.82);max-width:52ch}
+  .hero-ctas{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .hero p.fine{margin-top:16px;font-size:13.5px;color:rgba(255,255,255,.62)}
+  .hero p.fine strong{color:#7fd6ab}
+
+  /* milepost sign — kept as the one Barlow brand anchor */
+  .sign-wrap{display:flex;justify-content:center}
+  .mile-sign{background:#1E6B44;border:4px solid #fff;border-radius:14px;padding:22px 30px 18px;text-align:center;
+    box-shadow:0 18px 50px rgba(0,0,0,.35);transform:rotate(-1.2deg)}
+  .mile-sign .rt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.12em;color:rgba(255,255,255,.92)}
+  .mile-sign .num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:84px;line-height:1;color:#fff;margin:4px 0 2px}
+  .mile-sign .cap{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+  .sign-post{width:10px;height:70px;background:linear-gradient(180deg,#9aa39d,#6c756f);margin:0 auto;border-radius:3px}
+
+  /* stats band */
+  .stats{background:var(--bg);border-bottom:1px solid var(--line)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:36px 24px}
+  @media(max-width:700px){.stats .wrap{grid-template-columns:1fr;gap:20px}}
+  .stat .lbl{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+  .stat .val{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:44px;color:var(--green);line-height:1.1;margin-top:4px}
+  .stat .val small{font-size:20px;color:var(--ink-3);font-family:Figtree}
+  .stat .sub{font-size:14px;color:var(--ink-2)}
+  .dot-live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand);margin-left:6px;vertical-align:2px}
+
+  /* generic section */
+  section.pad{padding:76px 0}
+  section.pad.alt{background:var(--bg-2)}
+  .kicker{display:inline-block;background:var(--green);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:7px 16px;margin-bottom:18px}
+  .sec-sub{margin-top:10px;color:var(--ink-2);max-width:64ch}
+
+  /* what you get rows */
+  .tiers{margin-top:36px;display:grid;gap:14px}
+  .tier{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;box-shadow:var(--shadow)}
+  .tier .tag{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .tier h3{margin:6px 0 6px}
+  .tier p{color:var(--ink-2);font-size:15.5px}
+  .tier.hl{border-color:var(--green);background:var(--green-soft)}
+  .tier.hl .tag{color:var(--green)}
+
+  /* route cards */
+  .cards{margin-top:36px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:760px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+  .card:hover{transform:translateY(-2px);border-color:var(--green)}
+  .card .ct{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+  .card h3{margin-bottom:8px}
+  .card p{color:var(--ink-2);font-size:15px;flex:1}
+  .card .go{margin-top:14px;font-weight:600;font-size:15px;color:var(--green)}
+
+  /* bridges */
+  .bridge-panel{margin-top:32px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:30px;box-shadow:var(--shadow)}
+  .bridge-panel p{color:var(--ink-2);max-width:72ch}
+
+  /* pricing */
+  .price-box{margin-top:36px;background:#12211a;color:#fff;border-radius:18px;padding:44px 40px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+  @media(max-width:760px){.price-box{grid-template-columns:1fr;padding:34px 26px}}
+  .price-box h2{color:#fff}
+  .price-box p{color:rgba(255,255,255,.78);margin-top:10px;font-size:16px}
+  .price-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:56px;line-height:1}
+  .price-num small{font-size:22px;font-weight:700;color:rgba(255,255,255,.7);font-family:Figtree}
+  .price-side{text-align:center}
+  .price-side .or{font-size:14px;color:rgba(255,255,255,.6);margin:8px 0}
+
+  /* faq */
+  .faq{margin-top:32px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{cursor:pointer;padding:20px 0;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  .faq summary::after{content:"+";font-size:22px;color:var(--green);font-weight:400}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{padding:0 0 20px;color:var(--ink-2);max-width:70ch}
+
+  /* footer */
+  footer.site{background:var(--bg-2);border-top:1px solid var(--line);padding:52px 0 36px;font-size:14.5px;color:var(--ink-2)}
+  footer.site .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
+  @media(max-width:760px){footer.site .cols{grid-template-columns:1fr 1fr}}
+  footer.site .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+  footer.site ul{list-style:none;margin:0;padding:0}
+  footer.site li{margin-bottom:8px}
+  footer.site a{color:var(--ink-2);text-decoration:none}
+  footer.site a:hover{color:var(--ink)}
+  .fine{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+
+<div class="preview-banner">V2 DESIGN PREVIEW — not the live homepage. Compare with <a href="/" style="color:#fff;">the current site &rarr;</a></div>
+
+<nav class="site">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="images/icon.png" alt=""> MileCheck</a>
+    <div class="navlinks">
+      <a href="maps/">Maps</a>
+      <a href="cameras/">Cameras</a>
+      <a href="#states">United States</a>
+      <a href="canada/">Canada</a>
+      <a href="#story">Story</a>
+      <a href="partners/">B2B</a>
+      <a href="blog/">Blog</a>
+      <a class="btn btn-p" href="/get/">Get the app</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="road"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">iOS &middot; Android &middot; 50 US states</span>
+      <h1>The only mile-marker app with live DOT integrations.</h1>
+      <p class="sub">Real-time mile markers in all 50 US states. Live road alerts from all 50 state DOTs. Navigate to any mile marker on the map. It&rsquo;s how help finds you.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-p" href="/get/">Get the app</a>
+        <a class="btn btn-w" href="maps/">Explore the live maps</a>
+      </div>
+      <p class="fine"><strong>Your mile marker is always free.</strong> Premium &mdash; map, live alerts, trip tools &mdash; $9.99/yr or $1.99/mo, 7-day free trial.</p>
+    </div>
+    <div class="sign-wrap">
+      <div>
+        <div class="mile-sign">
+          <div class="rt">SR&nbsp;99</div>
+          <div class="num">34.5</div>
+          <div class="cap">Nearest mile marker</div>
+        </div>
+        <div class="sign-post"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat">
+      <div class="lbl">Mile markers</div>
+      <div class="val">50</div>
+      <div class="sub">US states</div>
+    </div>
+    <div class="stat">
+      <div class="lbl">Live DOT alerts<span class="dot-live"></span></div>
+      <div class="val">50</div>
+      <div class="sub">of 50 US states</div>
+    </div>
+    <div class="stat">
+      <div class="lbl">Stability</div>
+      <div class="val">0.00<small>%</small></div>
+      <div class="sub">crash rate</div>
+    </div>
+  </div>
+</div>
+
+<section class="pad" id="what">
+  <div class="wrap">
+    <span class="kicker">What you get</span>
+    <h2>Far more than a mile marker.</h2>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tag">Standard</div>
+        <h3>What you&rsquo;d expect.</h3>
+        <p>Your nearest mile marker, live (all 50 states) &middot; live DOT alerts &middot; works offline &middot; live map &middot; GPS speed.</p>
+      </div>
+      <div class="tier">
+        <div class="tag">Bonus</div>
+        <h3>The extras.</h3>
+        <p>Border wait times &middot; Seattle bridge status &middot; crosswind warnings &middot; trip logging &middot; share your location &middot; navigate to any milepost.</p>
+      </div>
+      <div class="tier hl">
+        <div class="tag">In the car</div>
+        <h3>CarPlay &amp; Android Auto — free.</h3>
+        <p>Your highway, mile marker, and road conditions on the car screen. Glance-and-go, no clutter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad alt" id="routes">
+  <div class="wrap">
+    <h2>Check your route.</h2>
+    <p class="sec-sub">Live cameras and road conditions for the highways, passes, and states drivers search most.</p>
+    <div class="cards">
+      <a class="card" href="maps/">
+        <div class="ct">&#9679; 10 interstates</div>
+        <h3>Interstate corridors</h3>
+        <p>See a whole interstate right now &mdash; I-5, I-75, I-95, I-15, and more, tagged with mile markers.</p>
+        <div class="go">See all corridors &rarr;</div>
+      </a>
+      <a class="card" href="passes/">
+        <div class="ct">&#9679; 9 passes</div>
+        <h3>Mountain pass conditions</h3>
+        <p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon &mdash; see the snow before you drive the summit.</p>
+        <div class="go">See all passes &rarr;</div>
+      </a>
+      <a class="card" href="cameras/">
+        <div class="ct">&#9679; 22 states</div>
+        <h3>Cameras by state</h3>
+        <p>Live traffic cameras for your state &mdash; Washington, Florida, California, and 19 more.</p>
+        <div class="go">Browse by state &rarr;</div>
+      </a>
+      <a class="card" href="blog/how-to-find-your-mile-marker.html">
+        <div class="ct">&#9679; Guide</div>
+        <h3>What is my mile marker?</h3>
+        <p>How mile markers work, how to find yours right now, and why 911 and tow trucks ask for it.</p>
+        <div class="go">Read the guide &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="bridges">
+  <div class="wrap">
+    <span class="kicker">Built for the Northwest</span>
+    <h2>Beat the bridge. Beat the pass.</h2>
+    <div class="bridge-panel">
+      <p>If you drive Seattle, MileCheck shows the city&rsquo;s drawbridges &mdash; Fremont, Ballard, Montlake, South Park, and 1st Ave S &mdash; raised or lowered, live on the map, so you can see if the bridge is up before you&rsquo;re stuck behind it. Headed over the mountains? You get Snoqualmie and Stevens pass conditions and chain controls, straight from WSDOT.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pad alt" id="pricing">
+  <div class="wrap">
+    <div class="price-box">
+      <div>
+        <h2>Your mile marker is always free.</h2>
+        <p>Premium adds the live map, DOT alerts on your route, and trip tools. 7-day free trial, cancel anytime.</p>
+      </div>
+      <div class="price-side">
+        <div class="price-num">$9.99<small>/yr</small></div>
+        <div class="or">or $1.99/month</div>
+        <a class="btn btn-p" href="/get/" style="margin-top:8px;">Start the free trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="faq">
+  <div class="wrap">
+    <h2>Questions, answered.</h2>
+    <div class="faq">
+      <details><summary>What does MileCheck do?</summary><p>It shows your nearest highway mile marker in real time, anywhere in all 50 states &mdash; plus live road conditions and alerts pulled straight from state DOTs. You always know exactly where you are, and what&rsquo;s ahead on your route.</p></details>
+      <details><summary>Which states are covered?</summary><p>Mile markers in all 50 states. Live DOT alerts in all 50 states.</p></details>
+      <details><summary>Does it work without cell service?</summary><p>Yes &mdash; mile markers are stored on your phone, so they work in dead zones. Live alerts need a connection.</p></details>
+      <details><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium &mdash; the live map, DOT alerts, and trip tools &mdash; is $9.99/yr or $1.99/mo, with a 7-day free trial.</p></details>
+      <details><summary>Does it work with CarPlay and Android Auto?</summary><p>Yes, both &mdash; and the car screen is free. It&rsquo;s deliberately simple right now: your highway, mile marker, and current road conditions, glance-and-go.</p></details>
+      <details><summary>Can my company license the data?</summary><p>Yes. The 50-state milepost corpus and the live 50-state DOT alert layer are available to license &mdash; one schema, one API. Email info@milecheckapp.com &mdash; details on the B2B page.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="lbl">MileCheck</div>
+        <p style="max-width:36ch;">Real-time highway mile markers and live DOT road alerts. It&rsquo;s how help finds you.</p>
+      </div>
+      <div>
+        <div class="lbl">Explore</div>
+        <ul>
+          <li><a href="maps/">Live maps</a></li>
+          <li><a href="cameras/">Cameras</a></li>
+          <li><a href="passes/">Mountain passes</a></li>
+          <li><a href="blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="lbl">Get the app</div>
+        <ul>
+          <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="lbl">Company</div>
+        <ul>
+          <li><a href="partners/">B2B &amp; licensing</a></li>
+          <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          <li><a href="mailto:info@milecheckapp.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">Mile marker positions are approximate and may not reflect actual sign locations. &copy; 2026 MileCheck LLC</div>
+  </div>
+</footer>
+
+</body>
+</html>
