@@ -25,629 +25,273 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,650&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://milecheckapp.com/">
 
-  <!-- Additional styles for new sections (will fold into style.css when shipping) -->
   <style>
-    /* PREVIEW WATERMARK */
-    .preview-banner {
-      background: #FEF3C7;
-      border-bottom: 2px solid #F59E0B;
-      padding: 10px 32px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #92400E;
+    /* ============================================================
+       "NIGHT SHIFT" design system (approved 2026-08-27, from
+       design-options/home-ab2.html): dusk-scene hero + paper logbook.
+       Self-contained — this page no longer loads style.css.
+       Previous design archived at /index-v1-classic.html (noindex).
+       ============================================================ */
+    :root{
+      --paper:#f6f4ec; --paper2:#fbfaf5; --ink:#23261f; --ink2:#5c6156; --rule:#c9c6b8;
+      --safety:#e8a013; --green:#31623f; --brand:#00A86B;
+      --sky1:#2b3a55; --sky2:#59547a; --sky3:#b96d54;
+      --mono:'IBM Plex Mono',monospace; --serif:'Fraunces',Georgia,serif;
+      --sans:'IBM Plex Sans',-apple-system,sans-serif;
     }
-    .preview-banner a { color: #92400E; text-decoration: underline; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.62}
+    img{max-width:100%}
+    a{color:var(--green)}
+    .container{max-width:1040px;margin:0 auto;padding:0 24px}
+    .mono{font-family:var(--mono)}
+    h1,h2,h3{margin:0}
+    .section-label,.ent-section-label,.k-line{display:block;font:600 12px var(--mono);letter-spacing:.14em;color:var(--green);text-transform:uppercase;margin:0}
+    .section-h2,section h2{font-family:var(--serif);font-weight:650;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.01em;margin:12px 0 0}
 
-    /* NAV-TO-MP SECTION (new) */
-    .nav-to-mp {
-      padding: 96px 0;
-      border-bottom: 1px solid #E5E5E5;
-      background: #FAFAFA;
-    }
-    .nav-to-mp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .nav-to-mp-tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #00C880;
-      background: rgba(0,200,128,0.1);
-      padding: 6px 12px;
-      border-radius: 3px;
-      margin-bottom: 20px;
-    }
-    .nav-to-mp h2 {
-      font-size: 48px;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.05;
-      margin-bottom: 24px;
-      color: #000;
-    }
-    .nav-to-mp p {
-      font-size: 17px;
-      line-height: 1.6;
-      color: #525252;
-      margin-bottom: 18px;
-      max-width: 540px;
-    }
-    .nav-to-mp p strong { color: #000; font-weight: 600; }
-    .nav-to-mp-footnote {
-      font-size: 13px;
-      color: #999;
-      margin-top: 16px;
-      font-style: italic;
-    }
-    .demo-phone {
-      max-width: 320px;
-      margin: 0 auto;
-      position: relative;
-      border-radius: 38px;
-      padding: 10px;
-      background: #1a1f26;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04);
-    }
-    .demo-phone-inner {
-      border-radius: 30px;
-      overflow: hidden;
-      aspect-ratio: 1320 / 2868;
-      background: #fff;
-      position: relative;
-    }
-    .demo-phone-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-    }
-    .demo-play-badge {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .demo-play-badge::before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      border-left: 11px solid #00C880;
+    /* ---- header on the dusk scene ---- */
+    .scene{position:relative;overflow:hidden;color:#fff;
+      background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 46%,var(--sky3) 78%,#d99a6c 94%,var(--paper) 94.2%,var(--paper) 100%)}
+    .scene .stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.7)}
+    .site-header{position:relative;z-index:20}
+    .header-inner{display:flex;align-items:center;height:62px;gap:16px}
+    .brand{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:#fff;text-decoration:none}
+    .brand img{width:27px;height:27px;border-radius:6px}
+    .primary-nav{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:14px}
+    .primary-nav a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600}
+    .primary-nav a:hover{color:#fff}
+    .primary-nav a.active{color:var(--safety);font-weight:700}
+    .primary-nav a.nav-cta{border:2px solid #fff;color:#23261f;background:var(--safety);padding:8px 16px;font:600 13px var(--mono)}
+    .nav-toggle{display:none;background:none;border:0;padding:6px;cursor:pointer;line-height:0}
+    .nav-toggle svg{stroke:#fff}
+    @media (max-width:960px){
+      .header-inner{position:relative}
+      .nav-toggle{display:inline-flex;align-items:center}
+      .primary-nav{display:none;position:absolute;top:100%;left:0;right:0;background:#23261f;flex-direction:column;align-items:stretch;gap:0;padding:6px 0;box-shadow:0 16px 36px rgba(0,0,0,.35);z-index:50}
+      .primary-nav.open{display:flex}
+      .primary-nav a{padding:14px 24px;width:100%;font-size:16px;border-bottom:1px solid rgba(255,255,255,.08)}
+      .primary-nav a.nav-cta{margin:10px 24px 6px;text-align:center;border:2px solid var(--safety)}
     }
 
-    /* TWO-COLUMN POSITIONING (revised) */
-    .positioning-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid #E5E5E5;
-    }
-    .positioning-col {
-      padding: 16px 28px 16px 0;
-      border-right: 1px solid #E5E5E5;
-    }
-    .positioning-col:nth-child(2) {
-      padding: 16px 28px 16px 28px;
-    }
-    .positioning-col:last-child {
-      padding: 16px 0 16px 28px;
-      border-right: none;
-    }
-    .positioning-col-num {
-      font-size: 13px;
-      font-weight: 600;
-      color: #999;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-    .positioning-col h3 {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.4px;
-      line-height: 1.2;
-      margin-bottom: 5px;
-      color: #000;
-    }
-    .positioning-col p {
-      font-size: 14px;
-      line-height: 1.5;
-      color: #525252;
-      margin: 0;
-    }
+    /* ---- hero ---- */
+    .hero-grid{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:14px;align-items:end;padding-top:46px}
+    @media (max-width:840px){.hero-grid{grid-template-columns:1fr;text-align:center}}
+    .eyebrow{display:inline-block;font:600 12px var(--mono);letter-spacing:.1em;border:1.5px solid rgba(255,255,255,.8);padding:5px 10px;transform:rotate(-1deg);color:#fff;margin:0}
+    .hero-h1{font-family:var(--serif);font-weight:650;font-size:clamp(36px,5.4vw,60px);line-height:1.07;letter-spacing:-.01em;margin:20px 0 0;max-width:16ch;color:#fff}
+    @media (max-width:840px){.hero-h1{margin-left:auto;margin-right:auto}}
+    .hero-sub{margin:16px 0 0;font-size:17.5px;color:rgba(255,255,255,.85);max-width:46ch}
+    @media (max-width:840px){.hero-sub{margin-left:auto;margin-right:auto}}
+    .hero-carplay{display:inline-block;font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#ffd479;margin:14px 0 0}
+    .hero-ctas{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+    @media (max-width:840px){.hero-ctas{justify-content:center}}
+    .btn{padding:13px 22px;font:600 14.5px var(--mono);text-decoration:none;border:2px solid #fff;display:inline-block;color:#fff;cursor:pointer}
+    .btn-primary{background:var(--safety);color:#23261f;border-color:var(--safety)}
+    .hero-fineprint{margin:16px 0 0;font-size:13px;color:rgba(255,255,255,.68);max-width:44ch}
+    @media (max-width:840px){.hero-fineprint{margin-left:auto;margin-right:auto}}
+    .hero-fineprint strong{color:#ffd479}
+    .hero-features{margin:12px 0 56px;max-width:46ch;font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.6)}
+    @media (max-width:840px){.hero-features{margin-left:auto;margin-right:auto}}
+    .hero-roy{align-self:end;margin-bottom:-5px}
+    .hero-roy img{width:min(300px,72%);display:block;margin:0 auto}
 
-    /* PARTNERS SECTION (new) */
-    .partners {
-      padding: 96px 0;
-      background: #0F1419;
-      color: #fff;
-      border-bottom: 1px solid #0F1419;
-    }
-    .partners .section-label {
-      color: #00C880;
-    }
-    .partners h2 {
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: -1.2px;
-      line-height: 1.1;
-      color: #fff;
-      margin-bottom: 32px;
-      max-width: 720px;
-    }
-    .partners-body {
-      font-size: 16px;
-      line-height: 1.65;
-      color: #A1A8B3;
-      max-width: 680px;
-      margin-bottom: 24px;
-    }
-    .partners-body strong { color: #fff; font-weight: 600; }
-    .partners-cta-row {
-      margin-top: 36px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      gap: 18px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .partners-email {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 15px;
-      font-weight: 600;
-      color: #00C880;
-      text-decoration: none;
-      border-bottom: 1px solid #00C880;
-      padding-bottom: 2px;
-    }
-    .partners-email:hover { opacity: 0.8; }
-    .partners-secondary-link {
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      border: 1px solid #525252;
-      padding: 10px 18px;
-      text-decoration: none;
-    }
-    .partners-secondary-link:hover { background: #fff; color: #0F1419; opacity: 1; }
+    /* ---- ledger stats ---- */
+    .ledger{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--paper)}
+    .ledger-grid{display:grid;grid-template-columns:1fr 1fr 1fr}
+    @media (max-width:700px){.ledger-grid{grid-template-columns:1fr}}
+    .cell{padding:20px 22px;border-left:1px solid var(--rule)}
+    .cell:first-child{border-left:none}
+    @media (max-width:700px){.cell{border-left:none;border-top:1px solid var(--rule)}.cell:first-child{border-top:none}}
+    .cell .k{font:600 11.5px var(--mono);letter-spacing:.12em;color:var(--green);text-transform:uppercase}
+    .cell .v{font:600 30px var(--mono);margin-top:2px}
+    .cell .s{font-size:13px;color:var(--ink2)}
+    .cell .t{margin-top:6px;font:600 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+    .cell .q{margin-top:8px;font-size:12.5px;color:var(--ink2);line-height:1.45}
+    .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);margin-left:5px;vertical-align:1px;animation:ld 2s infinite}
+    @keyframes ld{0%,100%{opacity:1}50%{opacity:.3}}
 
-    /* PREMIUM+ tier preview adjustment */
-    .tier-premiumplus {
-      opacity: 1 !important;
-    }
-    .tier-premiumplus .tier-price {
-      font-size: 18px !important;
-      font-weight: 600 !important;
-      color: #00C880 !important;
-      letter-spacing: 0 !important;
-      line-height: 1.3 !important;
-    }
-    .tier-premiumplus .tier-period {
-      display: none !important;
-    }
-    .tier-premiumplus .tier-meta-promo {
-      font-size: 12px;
-      color: #525252;
-      margin-top: 8px;
-      font-weight: 500;
-    }
+    /* ---- generic sections ---- */
+    section{padding:56px 0}
+    .alt{background:var(--paper2);border-top:2px solid var(--ink)}
+    .lede,.mp-sub{margin:12px 0 0;font-size:15.5px;color:var(--ink2);max-width:62ch}
 
-    /* Make 4-row audiences work */
-    .partners-footer-link {
-      display: block;
-      margin-top: 4px;
-      font-size: 12px;
-      color: #525252;
-    }
-    .partners-footer-link a {
-      color: inherit;
-      text-decoration: underline;
-      text-decoration-color: #E5E5E5;
-    }
-    .partners-footer-link a:hover { color: #000; }
+    /* ---- logbook entries ---- */
+    .entries{margin-top:30px}
+    .entry{display:grid;grid-template-columns:96px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--rule)}
+    @media (max-width:640px){.entry{grid-template-columns:1fr;gap:6px}}
+    .entry .no{font:600 14px var(--mono);color:var(--ink2)}
+    .entry h3{margin:0;font-family:var(--serif);font-size:20px;font-weight:650}
+    .entry p{margin:6px 0 0;font-size:15.5px;color:var(--ink2);max-width:66ch}
+    .entry .tag{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.1em;border:1.5px solid var(--green);color:var(--green);padding:2px 7px;margin-left:8px;vertical-align:2px}
 
-    /* Mobile */
-    @media (max-width: 768px) {
-      .nav-to-mp-grid { grid-template-columns: 1fr; gap: 40px; }
-      .nav-to-mp h2 { font-size: 36px; }
-      .demo-phone { max-width: 240px; }
-      .positioning-grid { grid-template-columns: 1fr; }
-      .positioning-col { padding: 32px 0 !important; border-right: none !important; border-bottom: 1px solid #E5E5E5; }
-      .positioning-col:last-child { border-bottom: none; }
-      .partners h2 { font-size: 30px; }
-    }
-  </style>
-  <style>
+    /* ---- link rows (live maps + routes) ---- */
+    .linklist{margin-top:28px;border-top:1px solid var(--rule)}
+    .linkrow{display:grid;grid-template-columns:170px 1fr auto;gap:22px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+    @media (max-width:700px){.linkrow{grid-template-columns:1fr;gap:4px}}
+    .linkrow .tag{font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+    .linkrow h3{margin:0;font-family:var(--serif);font-size:20px;font-weight:650}
+    .linkrow p{margin:4px 0 0;font-size:14.5px;color:var(--ink2);max-width:62ch}
+    .linkrow .go{font-size:20px;color:var(--green)}
+    .linkrow:hover h3{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+    .basics{margin-top:22px;font-size:14.5px;color:var(--ink2)}
+    .basics a{color:var(--green);font-weight:600}
 
-    /* PREVIEW WATERMARK */
-    .preview-banner {
-      background: #FEF3C7;
-      border-bottom: 2px solid #F59E0B;
-      padding: 10px 32px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #92400E;
-    }
-    .preview-banner a { color: #92400E; text-decoration: underline; }
+    /* ---- screenshots ---- */
+    .screens{border-top:2px solid var(--ink);background:var(--paper2)}
+    .carousel-track{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 32px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;justify-content:center}
+    .carousel-track::-webkit-scrollbar{display:none}
+    @media (max-width:700px){.carousel-track{justify-content:flex-start}}
+    .carousel-card{flex-shrink:0;width:190px;scroll-snap-align:center}
+    .cc-phone{border-radius:28px;background:#23261f;padding:6px;box-shadow:0 14px 40px rgba(35,38,31,.25);margin-bottom:14px}
+    .cc-phone-inner{border-radius:22px;overflow:hidden;background:#fff;aspect-ratio:1284/2778}
+    .cc-phone-inner img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+    .cc-eyebrow{font:600 10px var(--mono);color:var(--green);text-transform:uppercase;letter-spacing:.14em;margin-bottom:5px}
+    .cc-title{font-family:var(--serif);font-size:15px;font-weight:650;color:var(--ink);margin-bottom:4px}
+    .cc-sub{font-size:12px;color:var(--ink2);line-height:1.5}
 
-    /* ENTERPRISE PAGE — calmer, more precise than consumer page */
-    body.enterprise { background: #FAFAFA; }
+    /* ---- prose bands ---- */
+    .prose{margin:14px 0 0;font-size:16.5px;line-height:1.7;color:var(--ink2);max-width:70ch}
+    .prose a{color:var(--green)}
 
-    .ent-hero {
-      padding: 84px 0 68px;
-      background: #FFFFFF;
-      border-bottom: 1px solid #E5E5E5;
-    }
-    .ent-hero h1 {
-      font-size: 38px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.15;
-      color: #000;
-      margin-bottom: 28px;
-      max-width: 700px;
-    }
-    .ent-hero-sub {
-      font-size: 19px;
-      line-height: 1.6;
-      color: #525252;
-      max-width: 780px;
-      margin-bottom: 36px;
-    }
-    .ent-hero-sub strong { color: #000; font-weight: 600; }
-    .ent-hero-cta {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 16px;
-      font-weight: 600;
-      color: #00C880;
-      border-bottom: 1px solid #00C880;
-      padding-bottom: 3px;
-      text-decoration: none;
-    }
-    .ent-hero-cta:hover { opacity: 0.8; }
+    /* ---- pricing band ---- */
+    .price{background:var(--ink);color:var(--paper);border-top:2px solid var(--ink)}
+    .price-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:36px;align-items:center}
+    @media (max-width:760px){.price-grid{grid-template-columns:1fr}}
+    .price h2{color:var(--paper)}
+    .price p{color:rgba(246,244,236,.72);margin:14px 0 0;font-size:16px;max-width:48ch}
+    .price .num{font:600 54px var(--mono);line-height:1}
+    .price .num small{font:500 20px var(--sans);color:rgba(246,244,236,.6)}
+    .price .or{font:500 13.5px var(--mono);color:rgba(246,244,236,.55);margin:10px 0 20px}
 
-    /* Sections */
-    .ent-section {
-      padding: 30px 0;
-      border-bottom: 1px solid #E5E5E5;
-      background: #FFFFFF;
-    }
-    .ent-section-alt {
-      background: #FAFAFA;
-    }
-    .ent-section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 24px;
-    }
-    .ent-section h2 {
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      line-height: 1.2;
-      color: #000;
-      margin-bottom: 32px;
-      max-width: 760px;
-    }
-    .ent-section-intro {
-      font-size: 17px;
-      line-height: 1.65;
-      color: #525252;
-      max-width: 720px;
-      margin-bottom: 48px;
-    }
+    /* ---- FAQ ---- */
+    .faq-list{margin-top:26px;border-top:1px solid var(--rule)}
+    .faq-item{border-bottom:1px solid var(--rule)}
+    .faq-item summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:700;font-size:16.5px;display:flex;justify-content:space-between;gap:16px;color:var(--ink)}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font:400 20px var(--mono);color:var(--green)}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-item p{padding:0 0 18px;color:var(--ink2);max-width:70ch;margin:0;font-size:15.5px}
+    .faq-item p a{color:var(--green);font-weight:600}
 
-    /* Three-layer infrastructure block */
-    .infra-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: #E5E5E5;
-      border: 1px solid #E5E5E5;
-      margin-top: 8px;
-    }
-    .infra-cell {
-      background: #fff;
-      padding: 36px 28px;
-    }
-    .infra-cell-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: #999;
-      margin-bottom: 14px;
-    }
-    .infra-cell h3 {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 16px;
-      color: #000;
-    }
-    .infra-cell p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #525252;
-    }
-    .infra-cell p code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      background: #F4F4F4;
-      padding: 1px 5px;
-      border-radius: 2px;
-      color: #000;
-    }
+    /* ---- story / roy panel ---- */
+    .roy-grid{display:grid;grid-template-columns:280px 1fr;gap:44px;align-items:center;margin-top:26px}
+    @media (max-width:720px){.roy-grid{grid-template-columns:1fr;gap:24px;text-align:center}}
+    .roy-img img{width:250px;height:auto;filter:drop-shadow(0 14px 28px rgba(35,38,31,.2))}
+    @media (max-width:720px){.roy-img img{width:200px}.roy-grid p{margin-left:auto;margin-right:auto}}
+    .roy-tag{display:inline-block;font:600 12px var(--mono);letter-spacing:.06em;color:var(--ink);border:1.5px solid var(--rule);background:#fff;padding:6px 14px;margin-top:6px}
+    .story-body{margin-top:24px;max-width:720px}
+    .story-body p{font-size:17px;line-height:1.7;color:var(--ink2);margin:0 0 20px}
+    .story-body p:last-child{color:var(--ink)}
+    .story-icon-wrap{display:inline-flex;align-items:center;gap:20px;background:#fff;border:1.5px solid var(--rule);padding:20px 32px;text-decoration:none;color:inherit;cursor:pointer}
+    .story-icon-wrap img{width:64px;height:64px;border-radius:14px}
+    .story-icon-text strong{display:block;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px}
+    .story-icon-text span{font-size:13px;color:var(--ink2)}
 
-    /* Why it matters block */
-    .why-content {
-      max-width: 800px;
-    }
-    .why-content p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: #525252;
-      margin-bottom: 18px;
-    }
-    .why-content p strong { color: #000; font-weight: 600; }
-    .why-content ul {
-      list-style: none;
-      margin: 24px 0;
-      padding: 0;
-    }
-    .why-content ul li {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #525252;
-      padding: 14px 0 14px 24px;
-      border-bottom: 1px solid #E5E5E5;
-      position: relative;
-    }
-    .why-content ul li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: #00C880;
-      font-weight: 700;
-    }
+    /* ---- B2B (ent) sections ---- */
+    .ent-hero{background:var(--ink);color:var(--paper);padding:64px 0}
+    .ent-hero .eyebrow{border-color:rgba(246,244,236,.6);color:var(--paper)}
+    .ent-hero h1{font-family:var(--serif);font-weight:650;font-size:clamp(28px,4vw,44px);line-height:1.15;letter-spacing:-.01em;margin:18px 0 0;max-width:26ch;color:var(--paper)}
+    .ent-hero-sub{margin:18px 0 0;font-size:16.5px;line-height:1.65;color:rgba(246,244,236,.75);max-width:72ch}
+    .ent-hero-cta{display:inline-block;margin-top:24px;padding:13px 22px;font:600 14.5px var(--mono);text-decoration:none;background:var(--safety);color:#23261f;border:2px solid var(--safety)}
+    .ent-hero .proofline{font-size:13px;color:rgba(246,244,236,.6);margin:16px 0 0;font-weight:600}
+    .ent-strip{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:44px;padding-top:26px;border-top:1px solid rgba(246,244,236,.2)}
+    .ent-strip span{font:500 13px var(--mono);color:rgba(246,244,236,.7)}
+    .ent-strip .vr{width:1px;height:28px;background:rgba(246,244,236,.2)}
+    .ent-section{padding:56px 0}
+    .ent-section h2{font-family:var(--serif);font-weight:650;font-size:clamp(26px,3.4vw,38px);letter-spacing:-.01em;margin:12px 0 0}
+    .ent-section-intro{margin:16px 0 0;font-size:16px;line-height:1.65;color:var(--ink2);max-width:76ch}
+    .ent-section-alt{background:var(--paper2);border-top:2px solid var(--ink)}
+    .audience-grid,.infra-grid{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:0}
+    @media (max-width:700px){.audience-grid,.infra-grid{grid-template-columns:1fr}}
+    .audience-cell,.infra-cell{padding:24px 26px 22px 0;border-top:1px solid var(--rule)}
+    .audience-cell h4{margin:0 0 8px;font-family:var(--serif);font-size:18px;font-weight:650}
+    .audience-cell p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.6}
+    .infra-cell h3{margin:8px 0 8px;font-family:var(--serif);font-size:19px;font-weight:650}
+    .infra-cell p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.62}
+    .infra-cell-num{font:600 13px var(--mono);color:var(--green)}
+    .seg-grid{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media (max-width:700px){.seg-grid{grid-template-columns:1fr}}
+    .seg-card{background:#fff;border:1.5px solid var(--rule);padding:22px 22px 20px;position:relative}
+    .seg-num{position:absolute;top:16px;right:18px;font:600 12px var(--mono);color:var(--ink2)}
+    .seg-ico{margin-bottom:10px}
+    .seg-ico svg{stroke:var(--green)}
+    .seg-card h4{margin:0 0 6px;font-family:var(--serif);font-size:18px;font-weight:650}
+    .seg-quote{font:500 13px var(--mono);color:var(--green);margin-bottom:8px}
+    .seg-body{margin:0;font-size:14px;color:var(--ink2);line-height:1.6}
+    .seg-body strong{color:var(--ink)}
+    .seg-cta{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+    .seg-cta h4{color:var(--paper)}
+    .seg-cta p{color:rgba(246,244,236,.75);font-size:14px;margin:0 0 14px}
+    .seg-btn{display:inline-block;padding:10px 18px;font:600 13.5px var(--mono);text-decoration:none;background:var(--safety);color:#23261f}
+    .proof-grid{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+    @media (max-width:700px){.proof-grid{grid-template-columns:1fr 1fr}}
+    .proof-cell{padding:18px 20px;border-left:1px solid var(--rule)}
+    .proof-cell:first-child{border-left:none}
+    @media (max-width:700px){.proof-cell:nth-child(3){border-left:none}.proof-cell:nth-child(n+3){border-top:1px solid var(--rule)}}
+    .proof-cell-num{font:600 30px var(--mono);color:var(--green)}
+    .proof-cell-label{font-size:12.5px;color:var(--ink2);line-height:1.5;margin-top:4px}
+    .proof-cell-label strong{color:var(--ink)}
+    .centered-note{text-align:center;font-size:14px;color:var(--ink2);margin-top:20px}
+    .centered-note strong{color:var(--ink)}
+    .b2b-acc{max-width:820px;margin:28px auto 0}
+    .b2b-acc summary{list-style:none;cursor:pointer;font:600 15px var(--sans);color:var(--green);padding:14px 0;border-top:1px solid var(--rule)}
+    .b2b-acc summary::-webkit-details-marker{display:none}
+    .b2b-acc summary::after{content:'+';float:right;font:400 18px var(--mono);color:var(--green)}
+    .b2b-acc[open] summary::after{content:'\2212'}
+    .b2b-acc ul{margin:8px 0 0;padding-left:20px;color:var(--ink2);font-size:14.5px;line-height:1.65}
+    .b2b-acc li{margin-bottom:10px}
+    .b2b-acc li strong{color:var(--ink)}
+    .cta-section{background:var(--ink);color:var(--paper);padding:60px 0}
+    .cta-section h2{font-family:var(--serif);font-weight:650;color:var(--paper);margin:12px 0 0}
+    .cta-body{margin:14px 0 0;font-size:16px;color:rgba(246,244,236,.75)}
+    .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    @media (max-width:760px){.cta-grid{grid-template-columns:1fr;gap:28px}}
+    .geotab-card{border:1.5px solid rgba(246,244,236,.25);padding:26px 28px;background:rgba(246,244,236,.04)}
+    .geotab-badge{display:inline-block;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#23261f;background:var(--safety);padding:5px 13px;margin-bottom:16px}
+    .geotab-card .gh{font-family:var(--serif);font-size:19px;font-weight:650;color:var(--paper);margin:0 0 10px;line-height:1.3}
+    .geotab-card .gp{font-size:14.5px;line-height:1.55;color:rgba(246,244,236,.72);margin:0 0 18px}
+    .geotab-card .gp strong{color:var(--paper)}
+    .geotab-links{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .geotab-links .g1{display:inline-block;font:600 14px var(--mono);color:#23261f;background:var(--safety);padding:11px 18px;text-decoration:none}
+    .geotab-links .g2{display:inline-block;font:600 14px var(--sans);color:var(--safety);text-decoration:none;border-bottom:1px solid rgba(232,160,19,.5)}
 
-    /* Audience-fit grid */
-    /* B2B "Who we talk to" segment cards (2026-07-05 redesign) */
-    .seg-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px; }
-    .seg-card { position:relative; background:#fff; border:1px solid #E5E5E5; border-radius:14px; padding:26px 26px 24px; transition:border-color .15s, transform .15s; }
-    .seg-card:hover { border-color:#0E1116; transform:translateY(-2px); }
-    .seg-num { position:absolute; top:22px; right:24px; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; color:#C8CDD3; letter-spacing:1px; }
-    .seg-card:hover .seg-num { color:#00C880; }
-    .seg-ico { width:38px; height:38px; border-radius:10px; background:#F3FAF6; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
-    .seg-card h4 { font-size:17px; font-weight:800; letter-spacing:-0.01em; margin:0 0 10px; }
-    .seg-quote { font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:600; color:#0E1116; background:#F7F7F4; border-left:3px solid #00C880; border-radius:0 8px 8px 0; padding:8px 12px; margin:0 0 12px; }
-    .seg-card p.seg-body { font-size:14px; line-height:1.6; color:#525252; margin:0; }
-    .seg-card p.seg-body strong { color:#0E1116; }
-    .seg-cta { background:#0E1116; border-color:#0E1116; display:flex; flex-direction:column; justify-content:center; }
-    .seg-cta h4 { color:#fff; font-size:19px; }
-    .seg-cta p { color:#B9C0C7; font-size:14px; line-height:1.6; margin:0 0 16px; }
-    .seg-cta a.seg-btn { align-self:flex-start; background:#00C880; color:#06110C; font-weight:800; font-size:14px; padding:10px 18px; border-radius:10px; text-decoration:none; }
-    .seg-cta a.seg-btn:hover { background:#00B473; }
-    @media (max-width:760px){ .seg-grid { grid-template-columns:1fr; } }
-    .audience-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: #E5E5E5;
-      border: 1px solid #E5E5E5;
-      margin-top: 8px;
-    }
-    .audience-cell {
-      background: #fff;
-      padding: 36px 28px;
-    }
-    .audience-cell-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: #00C880;
-      margin-bottom: 12px;
-    }
-    .audience-cell h4 {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      margin-bottom: 12px;
-      color: #000;
-    }
-    .audience-cell p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #525252;
-    }
+    /* ---- signup band ---- */
+    .mc-signup{background:var(--paper2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:44px 0}
+    .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px}
+    .mc-eyebrow{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:0 0 8px}
+    .mc-signup h2{font-family:var(--serif);font-size:26px;font-weight:650;color:var(--ink);margin:0 0 8px}
+    .mc-sub{font-size:15px;line-height:1.55;color:var(--ink2);margin:0 auto 18px;max-width:44ch}
+    .mc-signup .ml-form-embedContent{display:none !important}
+    .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto}
+    .mc-signup input[type=email]{border-radius:0 !important;border:2px solid var(--ink) !important;font-family:var(--mono) !important}
+    .mc-signup button,.mc-signup .primary{background:var(--safety) !important;color:#23261f !important;border-radius:0 !important;font-weight:700 !important;font-family:var(--mono) !important}
 
-    /* Shapes of conversation */
-    .shapes-list {
-      list-style: none;
-      padding: 0;
-      max-width: 780px;
-    }
-    .shapes-list li {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #525252;
-      padding: 18px 0 18px 32px;
-      border-bottom: 1px solid #E5E5E5;
-      position: relative;
-    }
-    .shapes-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: #00C880;
-      font-weight: 700;
-      font-size: 18px;
-    }
-    .shapes-list li strong { color: #000; font-weight: 600; }
-    .shapes-footnote {
-      font-size: 14px;
-      color: #525252;
-      margin-top: 22px;
-      font-style: italic;
-    }
+    /* ---- footer ---- */
+    .site-footer{padding:52px 0 36px;font-size:14.5px;color:var(--ink2)}
+    .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr 1fr;gap:24px}
+    @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr 1fr}}
+    @media (max-width:600px){.footer-grid{grid-template-columns:1fr 1fr}}
+    .footer-brand{font-weight:700;color:var(--ink);margin:0}
+    .footer-tagline{font-size:13.5px;margin:4px 0 0}
+    .footer-label{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0 0 10px}
+    .footer-list{list-style:none;margin:0;padding:0}
+    .footer-list li{margin-bottom:8px}
+    .footer-list a{color:var(--ink2);text-decoration:none}
+    .footer-list a:hover{color:var(--ink);text-decoration:underline}
+    .footer-fineprint{margin-top:34px;padding-top:20px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink2)}
 
-    /* Proof block */
-    .proof-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 1px;
-      background: #E5E5E5;
-      border: 1px solid #E5E5E5;
-    }
-    .proof-cell {
-      background: #fff;
-      padding: 40px 28px;
-      text-align: center;
-    }
-    .proof-cell-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 56px;
-      font-weight: 700;
-      letter-spacing: -2px;
-      line-height: 1;
-      color: #000;
-      margin-bottom: 12px;
-    }
-    .proof-cell-label {
-      font-size: 14px;
-      color: #525252;
-      line-height: 1.4;
-    }
-    .proof-cell-label strong { color: #000; }
-
-    /* CTA section */
-    .cta-section {
-      padding: 58px 0 52px;
-      background: #0F1419;
-      color: #fff;
-    }
-    .cta-section .ent-section-label { color: #00C880; }
-    .cta-section h2 {
-      font-size: 44px;
-      font-weight: 700;
-      letter-spacing: -1.2px;
-      line-height: 1.1;
-      color: #fff;
-      margin-bottom: 20px;
-      max-width: 720px;
-    }
-    .cta-body {
-      font-size: 17px;
-      line-height: 1.65;
-      color: #A1A8B3;
-      max-width: 680px;
-      margin-bottom: 22px;
-    }
-    .cta-body strong { color: #fff; font-weight: 600; }
-    .cta-email-block {
-      margin-top: 40px;
-      padding: 28px 32px;
-      background: rgba(0,200,128,0.08);
-      border-left: 3px solid #00C880;
-      max-width: 580px;
-    }
-    .cta-email {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 22px;
-      font-weight: 600;
-      color: #00C880;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 8px;
-    }
-    .cta-email-sub {
-      font-size: 13px;
-      color: #A1A8B3;
-      line-height: 1.5;
-    }
-
-    /* Back-to-consumer link */
-    .back-link {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #999;
-      margin-bottom: 32px;
-      text-transform: uppercase;
-    }
-    .back-link:hover { color: #000; opacity: 1; }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      .ent-hero h1 { font-size: 30px; }
-      .infra-grid { grid-template-columns: 1fr; }
-      .infra-cell { padding: 28px 20px; }
-      .audience-grid { grid-template-columns: 1fr; }
-      .proof-grid { grid-template-columns: 1fr; }
-      .ent-section h2 { font-size: 22px; }
-      .cta-section h2 { font-size: 32px; }
-    }
-  
-  </style>
-  <style>
-    /* MOBILE TUNING — keep narrow widths from blowing up */
-    @media (max-width: 760px){
-      /* keep the 3 stats as a compact ROW so the page isn't so long */
-      .stats .block-grid, .stats .block-grid-3 { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 14px !important; }
-      .stats .block { padding: 4px 0 !important; border: 0 !important; }
-      .stats .block-value { font-size: 30px !important; letter-spacing: -1px !important; }
-      .stats .block-unit { font-size: 14px !important; }
-      .stats .block-label { font-size: 9px !important; letter-spacing: 1px !important; }
-      .stats .block-secondary { font-size: 11px !important; line-height: 1.4 !important; }
-      .stats .block-tertiary { display: none !important; }
-    }
-    @media (max-width: 440px){
-      .hero-h1 { font-size: 38px !important; line-height: 1.08 !important; }
-      .section-h2 { font-size: 30px !important; line-height: 1.12 !important; }
-      .ent-hero h1 { font-size: 30px !important; line-height: 1.1 !important; letter-spacing: -1px !important; }
-      .cta-section h2 { font-size: 30px !important; }
-    }
-  </style>
-  <style>
-    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
-    @media (max-width: 760px){
-      .header-inner { position: relative; }
-      .nav-toggle { display:inline-flex; align-items:center; }
-      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:50; }
-      .primary-nav.open { display:flex !important; }
-      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
-      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
-    }
+    /* ---- download modal ---- */
+    #dlModal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(35,38,31,.6);align-items:center;justify-content:center;padding:20px}
+    .dl-box{background:var(--paper);border:2px solid var(--ink);max-width:380px;width:100%;padding:34px 28px 30px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.35);position:relative}
+    .dl-box h3{font-family:var(--serif);font-size:24px;font-weight:650;color:var(--ink);margin:0 0 6px}
+    .dl-box .dl-sub{font-size:14px;color:var(--ink2);margin:0 0 22px;line-height:1.5}
+    .dl-ios,.dl-android{display:block;font:600 15px var(--mono);padding:14px;text-decoration:none;margin-bottom:12px;border:2px solid var(--ink)}
+    .dl-ios{background:var(--ink);color:var(--paper)}
+    .dl-android{background:var(--safety);color:#23261f;border-color:var(--safety);margin-bottom:0}
+    #dlClose{position:absolute;top:10px;right:14px;border:0;background:none;font-size:24px;color:var(--ink2);cursor:pointer;line-height:1}
   </style>
 
   <script type="application/ld+json">
@@ -726,7 +370,7 @@
       "Real-time highway mile markers in all 50 US states",
       "Live DOT road alerts from 50 state departments of transportation",
       "Navigate to any milepost by route and mile number",
-      "Seattle drawbridge alerts with push notifications for Fremont, Ballard, University, Montlake, South Park, and 1st Ave S bridges",
+      "Seattle drawbridge alerts with push notifications for the Fremont, Ballard, Montlake, South Park, and 1st Ave S bridges",
       "Interactive map with milepost markers and alert overlays",
       "Trip logging with route, milepost range, timestamps, and CSV export",
       "Offline-ready with bundled milepost data for all 50 states",
@@ -736,327 +380,143 @@
   }
   </script>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
-  <link rel="stylesheet" href="signage-overrides.css">
-  <link rel="canonical" href="https://milecheckapp.com/">
 </head>
 <body>
 
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#" data-tab="home" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
-      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <nav class="primary-nav">
-        <a href="#" data-tab="home">Home</a>
-        <a href="maps/">Maps</a>
-        <a href="cameras/">Cameras</a>
-        <a href="states/">United States</a>
-        <a href="canada/">Canada</a>
-        <a href="#" data-tab="story">Story</a>
-        <a href="/partners/">B2B</a>
-        <a href="blog/">Blog</a>
-        <a href="#" data-dl class="nav-cta">Get the app</a>
-      </nav>
+  <div class="scene">
+    <div class="stars">
+      <i style="left:8%;top:110px"></i><i style="left:17%;top:190px"></i><i style="left:28%;top:95px"></i>
+      <i style="left:48%;top:150px"></i><i style="left:70%;top:120px"></i><i style="left:83%;top:220px"></i><i style="left:93%;top:105px"></i>
     </div>
-  </header>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#" data-tab="home" class="brand"><img src="assets/app-icon-60.png" alt="">MileCheck</a>
+        <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <nav class="primary-nav">
+          <a href="#" data-tab="home">Home</a>
+          <a href="maps/">Maps</a>
+          <a href="cameras/">Cameras</a>
+          <a href="states/">United States</a>
+          <a href="canada/">Canada</a>
+          <a href="#" data-tab="story">Story</a>
+          <a href="/partners/">B2B</a>
+          <a href="blog/">Blog</a>
+          <a href="#" data-dl class="nav-cta">GET THE APP</a>
+        </nav>
+      </div>
+    </header>
 
-  <main>
-    <style>
-      /* Tighten vertical rhythm so the page isn't so long */
-      .stats, .nav-to-mp, .positioning, .audiences, .features, .coverage, .pricing, .partners, .story, .screens {
-        padding-top: 44px !important;
-        padding-bottom: 44px !important;
-      }
-      .section-h2 { margin-bottom: 28px !important; }
-    </style>
-
-    <!-- ============== HERO (REVISED) ============== -->
-    <section data-panel="home" class="hero" style="padding-bottom:8px;border-bottom:none;">
+    <!-- ============== HERO (Night Shift) ============== -->
+    <section data-panel="home" style="padding:0;">
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">iOS · Android · 50 US states</p>
-            <h1 class="hero-h1">The only mile-marker app with live DOT integrations.</h1>
-            <p class="hero-sub">Real-time mile markers in all 50 US states. Live road alerts from all 50 state DOTs. Navigate to any mile marker on the map. It's how help finds you.</p>
-            <p class="hero-carplay" style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px 5px;margin-bottom:20px;">
-              Now on CarPlay &amp; Android Auto
-            </p>
+            <p class="eyebrow">iOS · ANDROID · ALL 50 STATES</p>
+            <h1 class="hero-h1">Know exactly where you are on the highway.</h1>
+            <p class="hero-sub">Your nearest mile marker, live — plus road alerts from all 50 state DOTs. It&rsquo;s how help finds you.</p>
+            <p class="hero-carplay">Now on CarPlay &amp; Android Auto</p>
             <div class="hero-ctas">
-              <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="btn btn-primary btn-ios" target="_blank" rel="noopener">Get on iOS &rarr;</a>
-              <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary btn-android" target="_blank" rel="noopener">Get on Android &rarr;</a>
+              <a href="#" data-dl class="btn btn-primary">GET THE APP</a>
+              <a href="maps/" class="btn">SEE THE LIVE MAPS</a>
             </div>
-            <p class="hero-fineprint"><strong style="color:#00A86B;">Your mile marker is always free.</strong> Premium &mdash; map, live alerts, trip tools &mdash; <span class="mono">$9.99/yr</span> or <span class="mono">$1.99/mo</span>, 7-day free trial.</p>
-            <p class="hero-features" style="margin:16px 0 0;max-width:720px;font-size:13.5px;line-height:1.8;color:#4A544E;text-align:left;">
-              Real-time mile markers (50 states) &middot; Live DOT alerts (50 states) &middot; Border wait times &middot; Seattle bridge status &middot; Crosswind warnings &middot; CarPlay &amp; Android Auto &middot; Works offline
-            </p>
+            <p class="hero-fineprint"><strong>Your mile marker is always free.</strong> Premium &mdash; map, live alerts, trip tools &mdash; $9.99/yr or $1.99/mo, 7-day free trial.</p>
+            <p class="hero-features">Real-time mile markers (50 states) &middot; Live DOT alerts (50 states) &middot; Border wait times &middot; Seattle bridge status &middot; Crosswind warnings &middot; Works offline</p>
           </div>
-          <div class="hero-sign-scene" aria-hidden="true">
-            <div class="hero-sign">
-              <div class="hero-sign-route">SR&nbsp;99</div>
-              <div class="hero-sign-mile">34.5</div>
-              <div class="hero-sign-cap">Nearest mile marker</div>
-            </div>
-            <div class="hero-sign-post"></div>
-            <div class="hero-road"></div>
+          <div class="hero-roy" aria-hidden="true">
+            <img src="images/roy-nightshift.png" alt="Roy, MileCheck's road-crew badger, on the night shift">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <main>
+    <!-- ============== LEDGER STATS ============== -->
+    <section data-panel="home" class="ledger" style="padding:0;">
+      <div class="container" style="padding:0 24px;">
+        <div class="ledger-grid">
+          <div class="cell">
+            <div class="k">Mile markers</div>
+            <div class="v">50</div>
+            <div class="s">US states</div>
+            <div class="t">Always free</div>
+          </div>
+          <div class="cell">
+            <div class="k">Live DOT alerts<span class="live-dot" aria-hidden="true"></span></div>
+            <div class="v">50</div>
+            <div class="s">of 50 US states &mdash; <strong style="color:var(--ink);">every U.S. state.</strong></div>
+            <div class="t" style="color:var(--ink2);">Premium · $9.99/yr</div>
+          </div>
+          <div class="cell">
+            <div class="k">Stability</div>
+            <div class="v">0.00<span style="font-size:16px;">%</span></div>
+            <div class="s"><a href="https://status.milecheckapp.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">crash rate</a></div>
+            <div class="q">&ldquo;The app I didn&rsquo;t know I needed and now cannot live without!&rdquo; <span style="color:#F5A623;">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span style="color:var(--ink2);">dayjules, App Store</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============== STATS BLOCK (UPDATED) ============== -->
-    <section data-panel="home" class="stats" style="border-bottom:1px solid #E5E5E5;">
+    <!-- ============== WHAT YOU GET (logbook entries) ============== -->
+    <section data-panel="home">
       <div class="container">
-        <div class="block-grid block-grid-3">
-          <div class="block">
-            <div class="block-label">Mile markers</div>
-            <div class="block-value mono">50</div>
-            <div class="block-secondary">US states</div>
-            <div class="block-tertiary" style="margin-top:6px;color:#00A86B;font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;">Always free</div>
-          </div>
-          <div class="block">
-            <div class="block-label">Live DOT alerts <span class="live-dot" aria-hidden="true"></span></div>
-            <div class="block-value mono">50</div>
-            <div class="block-secondary">of 50 US states<br><span class="block-tertiary"><strong style="color:#000;">Every U.S. state.</strong></span></div>
-            <div class="block-tertiary" style="margin-top:6px;color:#6b7280;font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;">Premium · $9.99/yr</div>
-          </div>
-          <div class="block">
-            <div class="block-label">Stability</div>
-            <div class="block-value mono">0.00<span class="block-unit">%</span></div>
-            <div class="block-secondary"><a href="https://status.milecheckapp.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">crash rate</a></div>
-            <div class="block-tertiary" style="margin-top:10px;font-size:13px;color:#525252;line-height:1.4;">&ldquo;The app I didn&rsquo;t know I needed and now cannot live without!&rdquo;<br><span style="color:#F5A623;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>&nbsp; <span style="color:#9aa1ab;">dayjules, App Store</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== POSITIONING (TWO-COLUMN) — moved up 2026-06-13 ============== -->
-    <section data-panel="home" class="positioning">
-      <div class="container">
-        <p class="section-label">What you get</p>
+        <span class="section-label">Inside the app</span>
         <h2 class="section-h2">Far more than a mile marker.</h2>
-        <div class="positioning-grid">
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">STANDARD</div>
-            <h3>What you&rsquo;d expect.</h3>
-            <p>Your nearest mile marker, live (all 50 states) &middot; live DOT alerts &middot; works offline &middot; live map &middot; GPS speed.</p>
-          </div>
-          <div class="positioning-col">
-            <div class="positioning-col-num mono">BONUS</div>
-            <h3>The extras.</h3>
-            <p>Border wait times &middot; Seattle bridge status &middot; crosswind warnings &middot; trip logging &middot; share your location &middot; navigate to any milepost.</p>
-          </div>
-          <div class="positioning-col">
-            <div class="positioning-col-num mono" style="color:#00A86B;">ONLY MILECHECK</div>
-            <h3>What no one else has.</h3>
-            <p>The only mile-marker app on <em>both</em> iOS &amp; Android with live, nationwide DOT integrations (50 states) &middot; the only CarPlay &amp; Android Auto app that shows your mile marker &middot; the only highway data layer tracking America&rsquo;s drawbridges &mdash; live status and every federal opening rule.</p>
-          </div>
+        <div class="entries">
+          <div class="entry"><span class="no">ENTRY 01</span><div><h3>What you&rsquo;d expect.</h3><p>Your nearest mile marker, live (all 50 states) &middot; live DOT alerts &middot; works offline &middot; live map &middot; GPS speed.</p></div></div>
+          <div class="entry"><span class="no">ENTRY 02</span><div><h3>The extras.</h3><p>Border wait times &middot; Seattle bridge status &middot; crosswind warnings &middot; trip logging &middot; share your location &middot; navigate to any milepost.</p></div></div>
+          <div class="entry"><span class="no">ENTRY 03</span><div><h3>On the car screen.</h3><p>CarPlay and Android Auto show your highway, mile marker, and road conditions &mdash; glance-and-go, free for everyone.</p></div></div>
+          <div class="entry"><span class="no">ENTRY 04</span><div><h3>Route planning.<span class="tag">PREMIUM</span></h3><p>Plan a corridor, see it drawn on the map, and get the alerts that are actually on your route &mdash; with an honest ETA.</p></div></div>
+          <div class="entry"><span class="no">ENTRY 05</span><div><h3>What no one else has.</h3><p>The only mile-marker app on <em>both</em> iOS &amp; Android with live, nationwide DOT integrations (50 states) &middot; the only CarPlay &amp; Android Auto app that shows your mile marker &middot; the only highway data layer tracking America&rsquo;s drawbridges &mdash; live status and every federal opening rule.</p></div></div>
         </div>
       </div>
     </section>
 
-
-    <!-- ============== LIVE MAPS PROMO ============== -->
-    <section data-panel="home" class="maps-promo-sec" id="livemaps">
+    <!-- ============== LIVE MAPS ============== -->
+    <section data-panel="home" class="alt" id="livemaps">
       <div class="container">
-        <style>
-          .maps-promo-sec{padding:44px 0;border-bottom:1px solid #E5E5E5;}
-          .maps-promo-sec h2{font-size:28px;font-weight:800;letter-spacing:-0.5px;color:#0F1419;margin:0 0 4px;}
-          .maps-promo-sec .mp-sub{font-size:15px;color:#525252;margin:0 0 22px;}
-          .mp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
-          .mp-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:border-color .15s;}
-          .mp-card:hover{border-color:#0F1419;}
-          .mp-card .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#0f7a4f;margin-bottom:8px;}
-          .mp-card h3{font-size:17px;font-weight:800;margin:0 0 5px;}
-          .mp-card p{font-size:13.5px;color:#525252;line-height:1.5;margin:0;flex:1;}
-          .mp-card .go{margin-top:12px;font-weight:700;font-size:13.5px;color:#0F1419;border-bottom:1px solid #0F1419;align-self:flex-start;}
-        </style>
-        <h2>See our live maps.</h2>
+        <span class="section-label">Free on the web</span>
+        <h2 class="section-h2">See our live maps.</h2>
         <p class="mp-sub">Free highway intelligence on the web, built on the same data as the app.</p>
-        <div class="mp-grid">
-          <a class="mp-card" href="maps/mile-markers/">
-            <span class="tag">&#9679; Live</span>
-            <h3>Mile Marker Map</h3>
-            <p>Browse the mile markers of any highway in all 50 states, straight from the data the app runs on.</p>
-            <span class="go">Open the map &rarr;</span>
-          </a>
-          <a class="mp-card" href="closures/">
-            <span class="tag">&#9679; Live</span>
-            <h3>Road Closures Map</h3>
-            <p>Every current highway closure from 50 state DOTs on one national map.</p>
-            <span class="go">Open the map &rarr;</span>
-          </a>
-          <a class="mp-card" href="cameras/">
-            <span class="tag">&#9679; Live</span>
-            <h3>Highway Cameras</h3>
-            <p>Live DOT cameras in <!--cov:cameras.us_states-->27<!--/cov--> states coast to coast &mdash; see the pass before you drive it.</p>
-            <span class="go">Open the map &rarr;</span>
-          </a>
-          <a class="mp-card" href="maps/#drawbridges">
-            <span class="tag">&#9679; Live</span>
-            <h3>Drawbridge Maps</h3>
-            <p>Live Seattle &amp; Florida bridge status, plus every US drawbridge&rsquo;s opening rules &mdash; 26 states and counting.</p>
-            <span class="go">Open the maps &rarr;</span>
-          </a>
-          <a class="mp-card" href="borders/">
-            <span class="tag">&#9679; Live</span>
-            <h3>Border Wait Times</h3>
-            <p>Live waits at every US land crossing &mdash; passenger and commercial, both directions.</p>
-            <span class="go">Open the map &rarr;</span>
-          </a>
-          <a class="mp-card" href="fire/">
-            <span class="tag">&#9679; Live</span>
-            <h3>US Wildfire Map</h3>
-            <p>Every active fire with acres and containment, plus the live road closures fires cause.</p>
-            <span class="go">Open the map &rarr;</span>
-          </a>
-          <a class="mp-card" href="maps/">
-            <span class="tag">&#9679; 8 live maps</span>
-            <h3>All live maps</h3>
-            <p>The full set &mdash; state drawbridge pages, the fire map, and everything above in one place.</p>
-            <span class="go">See all maps &rarr;</span>
-          </a>
+        <div class="linklist">
+          <a class="linkrow" href="maps/mile-markers/"><span class="tag">&#9679; Live</span><span><h3>Mile Marker Map</h3><p>Browse the mile markers of any highway in all 50 states, straight from the data the app runs on.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="closures/"><span class="tag">&#9679; Live</span><span><h3>Road Closures Map</h3><p>Every current highway closure from 50 state DOTs on one national map.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="cameras/"><span class="tag">&#9679; Live</span><span><h3>Highway Cameras</h3><p>Live DOT cameras in <!--cov:cameras.us_states-->27<!--/cov--> states coast to coast &mdash; see the pass before you drive it.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="ferries/"><span class="tag">&#9679; Live</span><span><h3>WA Ferry Space</h3><p>How full is the next boat? Live drive-up space for Washington State Ferries sailings, straight from WSDOT.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="maps/#drawbridges"><span class="tag">&#9679; Live</span><span><h3>Drawbridge Maps</h3><p>Live Seattle &amp; Florida bridge status, plus every US drawbridge&rsquo;s opening rules &mdash; 26 states and counting.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="borders/"><span class="tag">&#9679; Live</span><span><h3>Border Wait Times</h3><p>Live waits at every US land crossing &mdash; passenger and commercial, both directions.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="fire/"><span class="tag">&#9679; Live</span><span><h3>US Wildfire Map</h3><p>Every active fire with acres and containment, plus the live road closures fires cause.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="maps/"><span class="tag">&#9679; All maps</span><span><h3>All live maps</h3><p>The full set &mdash; state drawbridge pages, the fire map, and everything above in one place.</p></span><span class="go">&rarr;</span></a>
         </div>
       </div>
     </section>
 
-    <section data-panel="home" class="maps-promo-sec" id="routes" style="background:#FAFBF9;">
+    <!-- ============== CHECK YOUR ROUTE ============== -->
+    <section data-panel="home" id="routes">
       <div class="container">
-        <h2>Check your route.</h2>
+        <span class="section-label">Plan ahead</span>
+        <h2 class="section-h2">Check your route.</h2>
         <p class="mp-sub">Live cameras and road conditions for the highways, passes, and states drivers search most.</p>
-        <div class="mp-grid">
-          <a class="mp-card" href="corridors/">
-            <span class="tag">&#9679; <!--cov:pages.corridors-->10<!--/cov--> interstates</span>
-            <h3>Interstate corridors</h3>
-            <p>See a whole interstate right now &mdash; I-5, I-75, I-95, I-15, and more, tagged with mile markers.</p>
-            <span class="go">See all corridors &rarr;</span>
-          </a>
-          <a class="mp-card" href="passes/">
-            <span class="tag">&#9679; <!--cov:pages.passes-->9<!--/cov--> passes</span>
-            <h3>Mountain pass conditions</h3>
-            <p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon &mdash; see the snow before you drive the summit.</p>
-            <span class="go">See all passes &rarr;</span>
-          </a>
-          <a class="mp-card" href="cameras/">
-            <span class="tag">&#9679; <!--cov:pages.camera_states-->22<!--/cov--> states</span>
-            <h3>Cameras by state</h3>
-            <p>Live traffic cameras for your state &mdash; Washington, Florida, California, and 19 more.</p>
-            <span class="go">Browse by state &rarr;</span>
-          </a>
-          <a class="mp-card" href="what-is-my-mile-marker/">
-            <span class="tag">&#9679; Guide</span>
-            <h3>What is my mile marker?</h3>
-            <p>How mile markers work, how to find yours right now, and why 911 and tow trucks ask for it.</p>
-            <span class="go">Read the guide &rarr;</span>
-          </a>
-          <a class="mp-card" href="report-location/">
-            <span class="tag">&#9679; Guide</span>
-            <h3>Report your location</h3>
-            <p>Broke down on the highway? Exactly what to tell 911, a tow, or roadside assistance.</p>
-            <span class="go">Read the guide &rarr;</span>
-          </a>
+        <div class="linklist">
+          <a class="linkrow" href="corridors/"><span class="tag">&#9679; <!--cov:pages.corridors-->10<!--/cov--> interstates</span><span><h3>Interstate corridors</h3><p>See a whole interstate right now &mdash; I-5, I-75, I-95, I-15, and more, tagged with mile markers.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="passes/"><span class="tag">&#9679; <!--cov:pages.passes-->9<!--/cov--> passes</span><span><h3>Mountain pass conditions</h3><p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon &mdash; see the snow before you drive the summit.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="cameras/"><span class="tag">&#9679; <!--cov:pages.camera_states-->22<!--/cov--> states</span><span><h3>Cameras by state</h3><p>Live traffic cameras for your state &mdash; Washington, Florida, California, and 19 more.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="what-is-my-mile-marker/"><span class="tag">&#9679; Guide</span><span><h3>What is my mile marker?</h3><p>How mile markers work, how to find yours right now, and why 911 and tow trucks ask for it.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="report-location/"><span class="tag">&#9679; Guide</span><span><h3>Report your location</h3><p>Broke down on the highway? Exactly what to tell 911, a tow, or roadside assistance.</p></span><span class="go">&rarr;</span></a>
         </div>
-        <p class="mp-sub" style="margin-top:22px;font-size:15px;">Highway basics:
-          <a href="mile-markers-vs-exit-numbers/" style="color:#0f7a4f;font-weight:700;">mile markers vs exit numbers</a> &middot;
-          <a href="how-interstates-are-numbered/" style="color:#0f7a4f;font-weight:700;">how interstates are numbered</a> &middot;
-          <a href="us-highways-vs-interstates/" style="color:#0f7a4f;font-weight:700;">US highways vs interstates</a> &middot;
-          <a href="highway-sign-colors/" style="color:#0f7a4f;font-weight:700;">what highway sign colors mean</a> &middot;
-          <a href="chains-required-explained/" style="color:#0f7a4f;font-weight:700;">what &ldquo;chains required&rdquo; means</a>
+        <p class="basics">Highway basics:
+          <a href="mile-markers-vs-exit-numbers/">mile markers vs exit numbers</a> &middot;
+          <a href="how-interstates-are-numbered/">how interstates are numbered</a> &middot;
+          <a href="us-highways-vs-interstates/">US highways vs interstates</a> &middot;
+          <a href="highway-sign-colors/">what highway sign colors mean</a> &middot;
+          <a href="chains-required-explained/">what &ldquo;chains required&rdquo; means</a>
         </p>
       </div>
     </section>
 
-    <!-- ============== STORY ============== -->
-    <style>
-      .story { padding: 40px 0; background: #FFFFFF; }
-      .story .container { max-width: 760px; }
-      .story-body p { font-size: 18px; line-height: 1.7; color: #374151; margin: 0 0 22px; }
-      .story-body p:last-child { color: #0F1419; }
-      .story-photo { margin: 44px 0 0; text-align: center; }
-      .story-photo figcaption { margin-top: 12px; font-size: 13px; color: #6b7280; font-style: italic; text-align: center; }
-      .story-icon-wrap { display: inline-flex; align-items: center; gap: 20px; background: #F8FBF8; border: 1px solid #D1FAE5; border-radius: 20px; padding: 20px 32px; }
-      .story-icon-wrap img { width: 72px; height: 72px; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-      .story-icon-text { text-align: left; }
-      .story-icon-text strong { display: block; font-size: 16px; font-weight: 700; color: #0F1419; margin-bottom: 4px; }
-      .story-icon-text span { font-size: 13px; color: #6b7280; }
-    </style>
-    <!-- ============== MEET ROY (mascot) ============== -->
-    <style>
-      .meet-roy { padding: 64px 0 40px; background: #FFFFFF; }
-      .meet-roy .roy-grid { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: center; }
-      .meet-roy .roy-img { display: flex; justify-content: center; }
-      .meet-roy .roy-img img { width: 260px; height: auto; filter: drop-shadow(0 18px 36px rgba(15,20,25,0.16)); }
-      .meet-roy .section-label { color: #00C880; }
-      .meet-roy h2 { font-size: clamp(30px, 4vw, 42px); font-weight: 900; letter-spacing: -0.03em; color: #0F1419; margin: 6px 0 18px; }
-      .meet-roy p { font-size: 17px; line-height: 1.65; color: #374151; margin: 0 0 14px; max-width: 60ch; }
-      .meet-roy .roy-tag { display: inline-block; font-size: 13px; font-weight: 700; color: #0F1419; background: #F1F5F2; border: 1px solid #E2E8E4; border-radius: 999px; padding: 6px 14px; margin-top: 6px; }
-      @media (max-width: 720px) {
-        .meet-roy .roy-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; }
-        .meet-roy p { margin-left: auto; margin-right: auto; }
-        .meet-roy .roy-img img { width: 200px; }
-      }
-    </style>
-    <section data-panel="story" class="meet-roy" id="roy">
-      <div class="container">
-        <div class="roy-grid">
-          <div class="roy-img"><img src="assets/roy.png" alt="Roy, MileCheck's road-crew foreman — a badger in a hard hat and hi-vis vest holding a clipboard"></div>
-          <div>
-            <p class="section-label">Meet the crew</p>
-            <h2>This is Roy.</h2>
-            <p>Roy is MileCheck&rsquo;s road-crew foreman &mdash; named for the dad who first showed me that on a highway, everything comes back to the mile marker.</p>
-            <p>He works nights, distrusts unmarked detours, and takes road conditions personally. Every so often he drops by with a reminder: check the cameras before the pass, know your mile marker before you need it, turn on fire alerts for your area.</p>
-            <span class="roy-tag">Reminders from Roy &middot; on our Instagram</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section data-panel="story" class="story" id="story">
-      <div class="container">
-        <p class="section-label">Our story</p>
-        <h2 class="section-h2">Why we built MileCheck.</h2>
-        <div class="story-body">
-          <p>My dad took a seasonal job driving snowplows for ODOT. Before long I realized how much of that job revolves around mile markers &mdash; every radio call, every crash report, every road closure. They&rsquo;re how crews track where sand, salt, and brine have been applied, and how dispatchers coordinate a response.</p>
-          <p>If you call for help on a mountain highway, how do you tell anyone exactly where you are? That&rsquo;s what mile markers are for. Most drivers pass hundreds of them without a second thought. But the people who keep roads open, respond to emergencies, and help stranded motorists rely on them every day.</p>
-          <p>There was one app for this, but it only worked on iPhone. My dad uses Android. So I built him a web app that showed his nearest Oregon mile marker from GPS. My mom, my sister, and I spent hours driving highways and back roads, checking numbers, making adjustments. I still remember the first time the number changed at exactly the right moment.</p>
-          <p>My dad showed it to coworkers. They showed it to others. Feedback came from truck drivers, road crews, first responders, and everyday drivers. Nearly every feature in MileCheck exists because someone on a real road asked for it.</p>
-          <p><strong>What started as a simple tool for my dad turned out to be useful for a lot of other people, too.</strong></p>
-        </div>
-        <figure class="story-photo">
-          <a href="#" data-dl class="story-icon-wrap" style="text-decoration:none;color:inherit;display:flex;cursor:pointer;" aria-label="Get the MileCheck app">
-            <img src="assets/app-icon-60.png" alt="MileCheck app icon">
-            <div class="story-icon-text">
-              <strong>MileCheck</strong>
-              <span>iOS &middot; Android &middot; CarPlay &middot; Android Auto</span>
-            </div>
-          </a>
-        </figure>
-        <div style="text-align:center;margin-top:44px;">
-          <p style="font-size:17px;color:#374151;margin:0 0 18px;">Find your milepost free &mdash; it&rsquo;s how help finds you.</p>
-          <a href="#" data-dl class="btn btn-primary" style="background:#00C880;border-color:#00C880;color:#fff;">Get the app &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== SCREENSHOTS (CAROUSEL — OPTION B) ============== -->
-    <style>
-      .screens { padding: 40px 0; background: #FAFAFA; border-bottom: 1px solid #E5E5E5; }
-      .screens .carousel-track {
-        display: flex; gap: 28px; overflow-x: auto;
-        scroll-snap-type: x mandatory; padding: 8px 32px 16px;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
-      .screens .carousel-track::-webkit-scrollbar { display: none; }
-      .screens .carousel-card { flex-shrink: 0; width: 190px; scroll-snap-align: center; }
-      .screens .cc-phone { border-radius: 28px; background: #1a1f26; padding: 6px; box-shadow: 0 14px 40px rgba(0,0,0,0.22); margin-bottom: 14px; }
-      .screens .cc-phone-inner { border-radius: 22px; overflow: hidden; background: #fff; aspect-ratio: 1284 / 2778; }
-      .screens .cc-phone-inner img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-      .screens .cc-eyebrow { font-size: 10px; font-weight: 800; color: #00C880; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 5px; }
-      .screens .cc-title { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; color: #0F1419; margin-bottom: 4px; }
-      .screens .cc-sub { font-size: 12px; color: #6b7280; line-height: 1.5; }
-    </style>
+    <!-- ============== SCREENSHOTS ============== -->
     <section data-panel="home" class="screens">
-      <div class="carousel-track" style="justify-content:center;">
+      <div class="carousel-track">
         <div class="carousel-card">
           <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-01-mile.png" alt="Mile tab showing nearest mile marker"></div></div>
           <div class="cc-eyebrow">Mile Tab</div>
@@ -1078,81 +538,125 @@
       </div>
     </section>
 
-
     <!-- ============== PRIVACY ============== -->
-    <section data-panel="home" class="privacy-band" style="background:#F3FAF6;border-top:1px solid #E5E5E5;padding:40px 0;">
+    <section data-panel="home">
       <div class="container">
-        <p class="section-label">Private by default</p>
+        <span class="section-label">Private by default</span>
         <h2 class="section-h2">No account. We don&rsquo;t track where you go.</h2>
-        <p style="font-size:17px;line-height:1.6;color:#3f4a44;max-width:680px;margin:14px 0 0;">No sign-up, no email, no phone number &mdash; just open it and drive. Your mile-marker lookup and trip history stay on your phone. Optional connected features &mdash; route planning and wildfire alerts &mdash; use location as explained in our <a href="https://milecheck.github.io/milecheck-privacy/" style="color:inherit;text-decoration:underline;">privacy policy</a>. We don&rsquo;t sell personal data and there are no ads.</p>
-        <p style="margin:18px 0 0;"><a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener" style="color:#00A86B;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,168,107,0.4);">Read the full privacy policy &rarr;</a></p>
+        <p class="prose">No sign-up, no email, no phone number &mdash; just open it and drive. Your mile-marker lookup and trip history stay on your phone. Optional connected features &mdash; route planning and wildfire alerts &mdash; use location as explained in our <a href="https://milecheck.github.io/milecheck-privacy/">privacy policy</a>. We don&rsquo;t sell personal data and there are no ads.</p>
+        <p style="margin:18px 0 0;"><a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener" style="font-weight:600;">Read the full privacy policy &rarr;</a></p>
       </div>
     </section>
 
-    <!-- ============== NEW: FAQ ============== -->
-    <section data-panel="home" class="faq" id="faq">
+    <!-- ============== SEATTLE / PNW ============== -->
+    <section data-panel="home" class="alt">
       <div class="container">
-        <style>
-          .faq{padding:40px 0;}
-          .faq-list{max-width:780px;margin:0 auto;}
-          .faq-item{border-bottom:1px solid #E5E5E5;}
-          .faq-item summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;position:relative;font-size:18px;font-weight:600;color:#0F1419;}
-          .faq-item summary::-webkit-details-marker{display:none;}
-          .faq-item summary::after{content:'+';position:absolute;right:4px;top:16px;font-size:26px;font-weight:400;color:#00A86B;}
-          .faq-item[open] summary::after{content:'\2212';}
-          .faq-item p{font-size:16px;line-height:1.65;color:#525252;margin:0 0 22px;max-width:700px;}
-          .faq-item p a{color:#00A86B;font-weight:600;}
-        </style>
-        <p class="section-label">FAQ</p>
+        <span class="section-label">Built for the Northwest</span>
+        <h2 class="section-h2">Beat the bridge. Beat the pass.</h2>
+        <p class="prose">If you drive Seattle, MileCheck shows the city&rsquo;s drawbridges &mdash; Fremont, Ballard, Montlake, South Park, and 1st Ave S &mdash; raised or lowered, live on the map, so you can see if the bridge is up before you&rsquo;re stuck behind it. Headed over the mountains? You get Snoqualmie and Stevens pass conditions and chain controls, straight from WSDOT.</p>
+      </div>
+    </section>
+
+    <!-- ============== PRICING ============== -->
+    <section data-panel="home" class="price">
+      <div class="container">
+        <div class="price-grid">
+          <div>
+            <h2>Your mile marker is always free.</h2>
+            <p>Premium adds the live map, DOT alerts on your route, route planning, and trip tools. 7-day free trial, cancel anytime. Early subscribers keep their price.</p>
+          </div>
+          <div>
+            <div class="num">$9.99<small>/yr</small></div>
+            <div class="or">or $1.99/month</div>
+            <a href="#" data-dl class="btn btn-primary">START THE FREE TRIAL</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FAQ ============== -->
+    <section data-panel="home" id="faq">
+      <div class="container">
+        <span class="section-label">FAQ</span>
         <h2 class="section-h2">Questions, answered.</h2>
         <div class="faq-list">
           <details class="faq-item"><summary>What does MileCheck do?</summary><p>It shows your nearest highway mile marker in real time, anywhere in all 50 states &mdash; plus live road conditions and alerts pulled straight from state DOTs. You always know exactly where you are, and what&rsquo;s ahead on your route.</p><p>New to mile markers? <a href="/blog/mile-markers-vs-gps.html">Mile markers vs. GPS &mdash; why both still matter &rarr;</a></p></details>
           <details class="faq-item"><summary>Which states are covered?</summary><p>Mile markers in all 50 states. Live DOT alerts in all 50 states.</p></details>
           <details class="faq-item"><summary>Does it work without cell service?</summary><p>Yes &mdash; mile markers are stored on your phone, so they work in dead zones. Live alerts need a connection.</p></details>
           <details class="faq-item"><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium &mdash; the live map, DOT alerts, and trip tools &mdash; is <span class="mono">$9.99/yr</span> or <span class="mono">$1.99/mo</span>, with a 7-day free trial.</p></details>
-                    <details class="faq-item"><summary>Does it work with CarPlay and Android Auto?</summary><p>Yes, both &mdash; and the car screen is free. It&rsquo;s deliberately simple right now: your highway, mile marker, and current road conditions, glance-and-go. Just the one thing you need while driving, with no clutter. A richer car screen is on the way.</p></details>
+          <details class="faq-item"><summary>Does it work with CarPlay and Android Auto?</summary><p>Yes, both &mdash; and the car screen is free. It&rsquo;s deliberately simple right now: your highway, mile marker, and current road conditions, glance-and-go. Just the one thing you need while driving, with no clutter. A richer car screen is on the way.</p></details>
           <details class="faq-item"><summary>Can my company license the data?</summary><p>Yes. The 50-state milepost corpus and the live 50-state DOT alert layer are available to license &mdash; one schema, one API, no state-by-state agency negotiations on your side. Fleets on Geotab can add MileCheck today from the <a href="blog/geotab-marketplace.html">Geotab Marketplace</a>. For API access or fleet licensing, email <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a> &mdash; details on the <a href="/partners/">B2B page</a>.</p></details>
           <details class="faq-item"><summary>Can I embed or republish MileCheck&rsquo;s maps and data?</summary><p>Newsrooms and public-interest sites are welcome to embed our live maps or cite the data with credit and a link &mdash; just tell us where it&rsquo;s running. Any commercial use of the data or maps &mdash; inside a product, service, or paid publication &mdash; requires a license first: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>.</p></details>
-                            </div>
+        </div>
       </div>
     </section>
 
-    <!-- ============== SEATTLE / PNW WEDGE (added 2026-06-27) ============== -->
-    <section data-panel="home" class="pnw-wedge" style="padding:40px 0;border-top:1px solid #E5E5E5;background:#F8FAFC;">
+    <!-- ===== STORY TAB ===== -->
+    <section data-panel="story" id="roy">
       <div class="container">
-        <p class="section-label">Built for the Northwest</p>
-        <h2 class="section-h2">Beat the bridge. Beat the pass.</h2>
-        <p style="font-size:17px;line-height:1.6;color:#3f4a44;max-width:700px;margin:14px 0 0;">If you drive Seattle, MileCheck shows the city&rsquo;s drawbridges &mdash; Fremont, Ballard, Montlake, South Park, and 1st Ave S &mdash; raised or lowered, live on the map, so you can see if the bridge is up before you&rsquo;re stuck behind it. Headed over the mountains? You get Snoqualmie and Stevens pass conditions and chain controls, straight from WSDOT.</p>
+        <span class="section-label">Meet the crew</span>
+        <h2 class="section-h2">This is Roy.</h2>
+        <div class="roy-grid">
+          <div class="roy-img"><img src="assets/roy.png" alt="Roy, MileCheck's road-crew foreman — a badger in a hard hat and hi-vis vest holding a clipboard"></div>
+          <div>
+            <p class="prose">Roy is MileCheck&rsquo;s road-crew foreman &mdash; named for the dad who first showed me that on a highway, everything comes back to the mile marker.</p>
+            <p class="prose">He works nights, distrusts unmarked detours, and takes road conditions personally. Every so often he drops by with a reminder: check the cameras before the pass, know your mile marker before you need it, turn on fire alerts for your area.</p>
+            <span class="roy-tag">Reminders from Roy &middot; on our Instagram</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ===== B2B TAB (merged enterprise content) ===== -->
+    <section data-panel="story" id="story" class="alt">
+      <div class="container">
+        <span class="section-label">Our story</span>
+        <h2 class="section-h2">Why we built MileCheck.</h2>
+        <div class="story-body">
+          <p>My dad took a seasonal job driving snowplows for ODOT. Before long I realized how much of that job revolves around mile markers &mdash; every radio call, every crash report, every road closure. They&rsquo;re how crews track where sand, salt, and brine have been applied, and how dispatchers coordinate a response.</p>
+          <p>If you call for help on a mountain highway, how do you tell anyone exactly where you are? That&rsquo;s what mile markers are for. Most drivers pass hundreds of them without a second thought. But the people who keep roads open, respond to emergencies, and help stranded motorists rely on them every day.</p>
+          <p>There was one app for this, but it only worked on iPhone. My dad uses Android. So I built him a web app that showed his nearest Oregon mile marker from GPS. My mom, my sister, and I spent hours driving highways and back roads, checking numbers, making adjustments. I still remember the first time the number changed at exactly the right moment.</p>
+          <p>My dad showed it to coworkers. They showed it to others. Feedback came from truck drivers, road crews, first responders, and everyday drivers. Nearly every feature in MileCheck exists because someone on a real road asked for it.</p>
+          <p><strong>What started as a simple tool for my dad turned out to be useful for a lot of other people, too.</strong></p>
+        </div>
+        <figure style="margin:44px 0 0;text-align:center;">
+          <a href="#" data-dl class="story-icon-wrap" aria-label="Get the MileCheck app">
+            <img src="assets/app-icon-60.png" alt="MileCheck app icon">
+            <span class="story-icon-text" style="text-align:left;">
+              <strong>MileCheck</strong>
+              <span>iOS &middot; Android &middot; CarPlay &middot; Android Auto</span>
+            </span>
+          </a>
+        </figure>
+        <div style="text-align:center;margin-top:44px;">
+          <p style="font-size:17px;color:var(--ink2);margin:0 0 18px;">Find your milepost free &mdash; it&rsquo;s how help finds you.</p>
+          <a href="#" data-dl class="btn btn-primary" style="border-color:var(--safety);">GET THE APP &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== B2B TAB ===== -->
     <div data-panel="b2b">
 
-    <!-- ============== HERO ============== -->
     <section class="ent-hero">
       <div class="container">
-        <p class="eyebrow">For platforms and partners</p>
+        <p class="eyebrow">FOR PLATFORMS AND PARTNERS</p>
         <h1>The highway intelligence layer &mdash; licensable, integrable, already in production.</h1>
         <p class="ent-hero-sub">
           Most milepost data products stop at the static layer: &ldquo;where is MP 142?&rdquo; MileCheck delivers both &mdash; that milepost lookup <em>plus</em> live conditions at MP 142 right now, normalized from 50 state DOT feeds across 19 distinct upstream platform formats. One schema. One API response. No state contracts on your side.
         </p>
         <a href="mailto:info@milecheckapp.com" class="ent-hero-cta">Open a conversation &rarr;</a>
-        <p style="font-size:13px;color:#6B7280;margin:16px 0 0;font-weight:600;">Live on the Geotab Marketplace &mdash; the fleet add-in runs in MyGeotab today &middot; data API by license.</p>
-
-        <!-- Brand proof strip -->
-        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:48px;padding-top:28px;border-top:1px solid #E5E5E5;">
-          <span style="font-size:13px;color:#525252;">50 states · <!--cov:alerts.us_states-->50<!--/cov--> live DOT integrations</span>
-          <div style="width:1px;height:28px;background:#E5E5E5;"></div>
-          <span style="font-size:13px;color:#525252;">CarPlay &amp; Android Auto</span>
+        <p class="proofline">Live on the Geotab Marketplace &mdash; the fleet add-in runs in MyGeotab today &middot; data API by license.</p>
+        <div class="ent-strip">
+          <span>50 states · <!--cov:alerts.us_states-->50<!--/cov--> live DOT integrations</span>
+          <div class="vr"></div>
+          <span>CarPlay &amp; Android Auto</span>
         </div>
       </div>
     </section>
 
-    <!-- ============== THE EVIDENCE ============== -->
     <section class="ent-section ent-section-alt">
       <div class="container">
-        <p class="ent-section-label">Why the layer matters</p>
+        <span class="ent-section-label">Why the layer matters</span>
         <h2>The mile marker is the location format institutions actually run on.</h2>
         <p class="ent-section-intro">GPS didn&rsquo;t retire the mile marker &mdash; it exposed how much emergency response, dispatch, and the entire highway data system still depend on it. The evidence is primary-sourced:</p>
         <div class="audience-grid">
@@ -1176,34 +680,33 @@
       </div>
     </section>
 
-    <!-- ============== INFRASTRUCTURE ============== -->
     <section class="ent-section">
       <div class="container">
-        <p class="ent-section-label">The infrastructure</p>
+        <span class="ent-section-label">The infrastructure</span>
         <h2>Five layers, one stack.</h2>
         <div class="infra-grid">
           <div class="infra-cell">
-            <div class="infra-cell-num mono">01</div>
+            <div class="infra-cell-num">01</div>
             <h3>Milepost corpus</h3>
             <p>Every interstate, US highway, and most state routes across all 50 states &mdash; sourced from official state DOT and government GIS records, never crowd-sourced. Quality-checked, normalized across state-by-state inconsistencies, and interpolated to one-tenth-of-a-mile precision between markers. Continuously updated as states add, reclassify, and re-route highways &mdash; a living dataset, not a one-time export. Bundled offline in the app; available as a structured dataset for integration.</p>
           </div>
           <div class="infra-cell">
-            <div class="infra-cell-num mono">02</div>
+            <div class="infra-cell-num">02</div>
             <h3>DOT integration corpus</h3>
             <p>50 state DOTs integrated and growing, each a different upstream platform format. A serverless dispatcher normalizes every source into a single consistent road-conditions and incident schema, with caching tuned per source and resilient fallbacks for agencies with restrictive access.</p>
           </div>
           <div class="infra-cell">
-            <div class="infra-cell-num mono">03</div>
+            <div class="infra-cell-num">03</div>
             <h3>Navigate-to-milepost primitive</h3>
             <p>The first consumer nav stack where a mile marker is a destination, not a display element. Tapping a milepost in the map hands off to Google Maps, Apple Maps, or Waze with the milepost coordinate as the routing target. Direct workflow value for dispatch-to-driver handoffs in fleet, roadside, and emergency-response use cases.</p>
           </div>
           <div class="infra-cell">
-            <div class="infra-cell-num mono">04</div>
+            <div class="infra-cell-num">04</div>
             <h3>CarPlay &amp; Android Auto</h3>
             <p>Live on CarPlay and Android Auto. Apple&rsquo;s Driving Task entitlement requires a separate navigational utility review &mdash; it&rsquo;s not a standard developer-portal option, and most transportation apps don&rsquo;t qualify. MileCheck passed that review. The same data layer that powers the phone experience ships to the vehicle screen.</p>
           </div>
           <div class="infra-cell" style="grid-column:1 / -1;">
-            <div class="infra-cell-num mono">05</div>
+            <div class="infra-cell-num">05</div>
             <h3>Real-time infrastructure status</h3>
             <p>Beyond DOT alerts: live commercial border-crossing wait times for all supported CBP land crossings (commercial and FAST lanes, direct from CBP), plus live movable-bridge open/closed status &mdash; hyper-local, time-critical signals no consumer map surfaces. Live drawbridge status runs in Seattle and Florida (state DOT sensors) with Louisiana road/marine status behind it &mdash; and the federal opening rules for 800+ regulated US drawbridges are already normalized in the corpus, published as state-by-state web maps.</p>
           </div>
@@ -1211,50 +714,49 @@
       </div>
     </section>
 
-    <!-- ============== AUDIENCE FIT ============== -->
     <section class="ent-section ent-section-alt">
       <div class="container">
-        <p class="ent-section-label">Who we talk to</p>
+        <span class="ent-section-label">Who we talk to</span>
         <h2>Seven segments where mile-marker precision is the missing layer.</h2>
         <div class="seg-grid">
           <div class="seg-card"><span class="seg-num">01</span>
-            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg></div>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg></div>
             <h4>Fleet management</h4>
             <div class="seg-quote">&ldquo;I&rsquo;m at MP 184 on I-80.&rdquo;</div>
             <p class="seg-body">That&rsquo;s how drivers report location. Telematics logs GPS coordinates &mdash; so dispatch can&rsquo;t plot the one format drivers actually use without a manual lookup. <strong>We&rsquo;re the translation layer.</strong></p>
           </div>
           <div class="seg-card"><span class="seg-num">02</span>
-            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg></div>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg></div>
             <h4>Mapping &amp; navigation</h4>
             <div class="seg-quote">50 GIS negotiations &middot; 19 schemas &middot; or 1 license.</div>
             <p class="seg-body">Adding a milepost layer yourself means fifty state negotiations and a pipeline to keep it current. Most platforms skip it. <strong>The corpus is licensable today.</strong></p>
           </div>
           <div class="seg-card"><span class="seg-num">03</span>
-            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></div>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></div>
             <h4>511 / traveler information</h4>
             <div class="seg-quote">One corridor. Five agency logins.</div>
             <p class="seg-body">Cross-state alerts live in 50 incompatible DOT systems; aggregating them yourself means bilateral agreements with every agency on the route. <strong>We already normalized all 50.</strong></p>
           </div>
           <div class="seg-card"><span class="seg-num">04</span>
-            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v13h-2M16 8h-5V3H3v13h3"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="M10 18.5h5"/></svg></div>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v13h-2M16 8h-5V3H3v13h3"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="M10 18.5h5"/></svg></div>
             <h4>Digital freight &amp; logistics</h4>
             <div class="seg-quote">&ldquo;Meet the driver at I-80 MP 184.&rdquo;</div>
             <p class="seg-body">No native equivalent in consumer nav &mdash; drivers send approximate pins, dispatchers guess. Plus live commercial waits at supported land borders, <strong>an input no fleet platform surfaces today.</strong></p>
           </div>
           <div class="seg-card"><span class="seg-num">05</span>
-            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
             <h4>Roadside &amp; incident response</h4>
             <div class="seg-quote">&ldquo;Can you find a sign and read it back?&rdquo;</div>
             <p class="seg-body">Stranded drivers report a mile marker; most dispatch systems demand a street address. The workaround is literally asking a stressed driver to go find a sign. <strong>We turn the marker into a routable point.</strong></p>
           </div>
           <div class="seg-card"><span class="seg-num">06</span>
-            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l4 4-9 9H5v-4z"/><path d="M13 7l4 4"/><path d="M19 3l2 2"/></svg></div>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l4 4-9 9H5v-4z"/><path d="M13 7l4 4"/><path d="M19 3l2 2"/></svg></div>
             <h4>Towing &amp; dispatch platforms</h4>
             <div class="seg-quote">&ldquo;Disabled vehicle, I-5 NB MP 164.&rdquo;</div>
             <p class="seg-body">Your board already receives that call. Plot it automatically &mdash; and flag whether that stretch is closed or under chain control <em>right now</em>. <strong>One API call, zero state-DOT contracts on your side.</strong></p>
           </div>
           <div class="seg-card"><span class="seg-num">07</span>
-            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
+            <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
             <h4>State DOTs &amp; agencies</h4>
             <div class="seg-quote">The corridor doesn&rsquo;t stop at the state line.</div>
             <p class="seg-body">Watching conditions across a border means separate logins, schemas, and feeds per neighbor &mdash; the perennial unsolved consortium problem. <strong>One feed, every neighboring agency, one schema.</strong></p>
@@ -1268,10 +770,9 @@
       </div>
     </section>
 
-    <!-- ============== BUILD VS LICENSE ============== -->
     <section class="ent-section">
       <div class="container">
-        <p class="ent-section-label">Build vs. license</p>
+        <span class="ent-section-label">Build vs. license</span>
         <h2>Building the data is harder than building the app.</h2>
         <p class="ent-section-intro">MileCheck runs alongside your routing or weather stack: <strong>direct-from-state-DOT road events &mdash; closures, construction, crashes, chain controls &mdash; tied to the exact mile marker.</strong> It&rsquo;s privacy-light by design &mdash; no driver accounts, and the vehicle&rsquo;s location stays in your platform, not on our servers. A coordinate-to-milepost lookup is available elsewhere &mdash; the <em>live conditions</em> at that milepost, normalized across 50 agencies and running in production, are the part that&rsquo;s hard to copy.</p>
         <div class="proof-grid">
@@ -1292,39 +793,28 @@
             <div class="proof-cell-label"><strong>monitored feeds</strong> &mdash; uptime tracked per state, alerting on stale or missing data at the source</div>
           </div>
         </div>
-        <p style="text-align:center;font-size:14px;font-weight:600;color:#000;margin-top:24px;">Proven in production through the MileCheck iOS, Android, CarPlay, and Android Auto applications.</p>
-        <p style="text-align:center;font-size:14px;color:#525252;margin-top:10px;max-width:740px;margin-left:auto;margin-right:auto;">Validated continuously by a <strong style="color:#000;">nationwide tester network</strong> &mdash; real drivers across the country who flag issues in the field, so a data problem surfaces before someone hits it in an emergency. Automated per-source monitoring catches the feeds; the testers catch the road.</p>
-        <p style="text-align:center;font-size:13px;margin-top:8px;opacity:0.8;"><a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="color:#00A86B;font-weight:600;">&#8599; Live API status</a> &nbsp;&middot;&nbsp; DOT feed uptime monitored 24/7</p>
-        <div style="margin-top:32px;max-width:820px;margin-left:auto;margin-right:auto;">
-          <style>
-            .b2b-acc summary{list-style:none;cursor:pointer;font-size:15px;font-weight:700;color:#00A86B;padding:14px 0;border-top:1px solid #E5E5E5;}
-            .b2b-acc summary::-webkit-details-marker{display:none;}
-            .b2b-acc summary::after{content:'+';float:right;font-weight:400;font-size:18px;color:#00A86B;}
-            .b2b-acc[open] summary::after{content:'\2212';}
-          </style>
-          <details class="b2b-acc">
-            <summary>Why it&rsquo;s hard to build in-house</summary>
-            <div class="why-content" style="margin-top:4px;">
-              <ul>
-                <li><strong>Every agency is different</strong> &mdash; <!--cov:alerts.us_states-->50<!--/cov--> integrations, each with its own auth method, rate limits, schema, and reliability characteristics. One upstream change breaks your feed until someone catches it.</li>
-                <li><strong>No common standard</strong> &mdash; ibi511, COtrip, ArcGIS FeatureServer, GeoJSON&hairsp;/&hairsp;WZDx, CARS FEU-g, EVBG XML, and more. No two states publish the same data the same way.</li>
-                <li><strong>State-by-state access</strong> &mdash; some feeds require registration, API keys, terms agreements, and back-and-forth with agency IT. Multiply that by 50.</li>
-                <li><strong>Continuous normalization</strong> &mdash; route names, mile marker formats, and direction codes vary by state and change without notice. Keeping them aligned is an ongoing maintenance burden, not a one-time project.</li>
-                <li><strong>Feed monitoring</strong> &mdash; DOT feeds go stale, change endpoints, and return unexpected errors. Without active per-source monitoring, your app silently serves outdated data.</li>
-              </ul>
-            </div>
-          </details>
-          <p style="margin-top:24px;font-size:15px;color:#6B7280;">MileCheck solved this once, in production, for a consumer app live on both stores. The platform is available to license today &mdash; no agency negotiations required on your side.</p>
-        </div>
+        <p class="centered-note" style="font-weight:600;color:var(--ink);">Proven in production through the MileCheck iOS, Android, CarPlay, and Android Auto applications.</p>
+        <p class="centered-note" style="max-width:740px;margin-left:auto;margin-right:auto;">Validated continuously by a <strong>nationwide tester network</strong> &mdash; real drivers across the country who flag issues in the field, so a data problem surfaces before someone hits it in an emergency. Automated per-source monitoring catches the feeds; the testers catch the road.</p>
+        <p class="centered-note" style="font-size:13px;"><a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="font-weight:600;">&#8599; Live API status</a> &nbsp;&middot;&nbsp; DOT feed uptime monitored 24/7</p>
+        <details class="b2b-acc">
+          <summary>Why it&rsquo;s hard to build in-house</summary>
+          <ul>
+            <li><strong>Every agency is different</strong> &mdash; <!--cov:alerts.us_states-->50<!--/cov--> integrations, each with its own auth method, rate limits, schema, and reliability characteristics. One upstream change breaks your feed until someone catches it.</li>
+            <li><strong>No common standard</strong> &mdash; ibi511, COtrip, ArcGIS FeatureServer, GeoJSON&hairsp;/&hairsp;WZDx, CARS FEU-g, EVBG XML, and more. No two states publish the same data the same way.</li>
+            <li><strong>State-by-state access</strong> &mdash; some feeds require registration, API keys, terms agreements, and back-and-forth with agency IT. Multiply that by 50.</li>
+            <li><strong>Continuous normalization</strong> &mdash; route names, mile marker formats, and direction codes vary by state and change without notice. Keeping them aligned is an ongoing maintenance burden, not a one-time project.</li>
+            <li><strong>Feed monitoring</strong> &mdash; DOT feeds go stale, change endpoints, and return unexpected errors. Without active per-source monitoring, your app silently serves outdated data.</li>
+          </ul>
+        </details>
+        <p style="margin-top:24px;font-size:15px;color:var(--ink2);max-width:820px;margin-left:auto;margin-right:auto;">MileCheck solved this once, in production, for a consumer app live on both stores. The platform is available to license today &mdash; no agency negotiations required on your side.</p>
       </div>
     </section>
 
-    <!-- ============== SHAPES OF CONVERSATION ============== -->
     <section class="ent-section ent-section-alt">
       <div class="container">
-        <p class="ent-section-label">Ways to work together</p>
+        <span class="ent-section-label">Ways to work together</span>
         <h2>Pick the model that fits &mdash; we're flexible.</h2>
-        <div class="infra-grid" style="margin-top:36px;">
+        <div class="infra-grid" style="margin-top:30px;">
           <div class="infra-cell">
             <h3>API access</h3>
             <p>The unified DOT alerts feed &mdash; direct from 50 state agencies: closures, construction, crashes, and chain controls &mdash; plus live commercial border-crossing waits from supported US land crossings (CBP), served through one normalized endpoint.</p>
@@ -1345,13 +835,12 @@
       </div>
     </section>
 
-    <!-- ============== CORRIDOR BOARDS ============== -->
     <section class="ent-section">
       <div class="container">
-        <p class="ent-section-label">Corridor boards</p>
+        <span class="ent-section-label">Corridor boards</span>
         <h2>Live road conditions on a screen in your venue.</h2>
         <p class="ent-section-intro">A MileCheck corridor board turns any TV in a truck stop, travel center, diner, or gas station into a live dashboard for the highway outside your door &mdash; closures, crashes, chain controls, and weather for your stretch of interstate, updating around the clock from the same direct-from-DOT layer that powers the app.</p>
-        <div class="infra-grid" style="margin-top:36px;">
+        <div class="infra-grid" style="margin-top:30px;">
           <div class="infra-cell">
             <h3>For venues</h3>
             <p>The board is free. We configure it for your corridor and your location &mdash; drivers walk in, see exactly what's ahead on their route, and your venue becomes the place that knows the road.</p>
@@ -1365,52 +854,36 @@
             <p>Any screen with a browser &mdash; no hardware to buy, nothing to install or maintain. The board is a live web page that keeps itself current.</p>
           </div>
         </div>
-        <p style="margin-top:28px;font-size:15px;line-height:1.6;">To put a board in your venue &mdash; or your brand on one &mdash; email <a href="mailto:info@milecheckapp.com" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">info@milecheckapp.com</a>.</p>
+        <p style="margin-top:28px;font-size:15px;line-height:1.6;">To put a board in your venue &mdash; or your brand on one &mdash; email <a href="mailto:info@milecheckapp.com" style="font-weight:600;">info@milecheckapp.com</a>.</p>
       </div>
     </section>
 
-    <!-- ============== CTA ============== -->
     <section class="cta-section">
       <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+        <div class="cta-grid">
           <div>
-            <p class="ent-section-label">Open a conversation</p>
+            <span class="ent-section-label" style="color:var(--safety);">Open a conversation</span>
             <h2>Get in touch.</h2>
-            <p class="cta-body">
-              For partnership and platform inquiries, contact <a href="mailto:info@milecheckapp.com" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">info@milecheckapp.com</a>.
-            </p>
+            <p class="cta-body">For partnership and platform inquiries, contact <a href="mailto:info@milecheckapp.com" style="color:var(--safety);">info@milecheckapp.com</a>.</p>
           </div>
-          <div style="border:1px solid rgba(255,255,255,0.16);border-radius:14px;padding:26px 28px;background:rgba(255,255,255,0.03);">
-            <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0F1419;background:#00C880;border-radius:999px;padding:5px 13px;margin-bottom:16px;">Now on the Geotab Marketplace</span>
-            <p style="font-size:20px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-0.01em;line-height:1.25;">Already run a fleet platform? MileCheck drops in as an Add-In.</p>
-            <p style="font-size:15px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0 0 18px;">It installs inside <strong style="color:#fff;">MyGeotab</strong> and <strong style="color:#fff;">Geotab Drive</strong> as an Add-In &mdash; the driver&rsquo;s live mile marker and direct-from-DOT alerts, right in the dashboard. Same normalized data layer, no rebuild on your side.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
-              <a href="https://marketplace.geotab.com/solutions/milecheck/" target="_blank" rel="noopener" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">View on the Geotab Marketplace &rarr;</a>
-              <a href="https://milecheckapp.com/geotab/milecheck-addin.html" target="_blank" rel="noopener" style="display:inline-block;font-size:15px;font-weight:600;color:#00C880;text-decoration:none;border-bottom:1px solid rgba(0,200,128,0.5);">See the live Add-In demo &rarr;</a>
+          <div class="geotab-card">
+            <span class="geotab-badge">Now on the Geotab Marketplace</span>
+            <p class="gh">Already run a fleet platform? MileCheck drops in as an Add-In.</p>
+            <p class="gp">It installs inside <strong>MyGeotab</strong> and <strong>Geotab Drive</strong> as an Add-In &mdash; the driver&rsquo;s live mile marker and direct-from-DOT alerts, right in the dashboard. Same normalized data layer, no rebuild on your side.</p>
+            <div class="geotab-links">
+              <a href="https://marketplace.geotab.com/solutions/milecheck/" target="_blank" rel="noopener" class="g1">View on the Geotab Marketplace &rarr;</a>
+              <a href="https://milecheckapp.com/geotab/milecheck-addin.html" target="_blank" rel="noopener" class="g2">See the live Add-In demo &rarr;</a>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <style>@media (max-width:760px){ .cta-section .container > div{ grid-template-columns:1fr !important; gap:28px !important; } }</style>
 
-      </div>
+    </div>
   </main>
 
   <!-- ===== MailerLite signup band (Road Report) ===== -->
   <section class="mc-signup">
-    <style>
-      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
-      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
-      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
-      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
-      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
-      /* MailerLite renders its own heading/desc inside the embed — hide it, our band carries the copy */
-      .mc-signup .ml-form-embedContent{display:none !important;}
-      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
-      .mc-signup input[type=email]{border-radius:8px !important;}
-      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
-    </style>
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Road Report</p>
       <h2>Get the report in your inbox</h2>
@@ -1419,12 +892,12 @@
     </div>
   </section>
 
-  <!-- ============== FOOTER (LIGHT UPDATE) ============== -->
+  <!-- ============== FOOTER ============== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand">MileCheck</p></div>
           <p class="footer-tagline">Mile markers in all 50 US states.</p>
         </div>
         <div class="footer-col">
@@ -1472,13 +945,10 @@
     </div>
   </footer>
 
-  <style>
-    .primary-nav a.active { color:#00A86B; font-weight:700; }
-  </style>
   <script>
   (function(){
     function show(tab){
-      document.querySelectorAll('main [data-panel]').forEach(function(s){
+      document.querySelectorAll('[data-panel]').forEach(function(s){
         s.style.display = (s.getAttribute('data-panel')===tab) ? '' : 'none';
       });
       document.querySelectorAll('.primary-nav a[data-tab]').forEach(function(a){
@@ -1491,7 +961,7 @@
       var t = e.target.closest ? e.target.closest('[data-tab]') : null;
       if(t){ e.preventDefault(); show(t.getAttribute('data-tab')); }
     });
-    var valid=['home','features','pricing','story','b2b'];
+    var valid=['home','story','b2b'];
     var hsh=(location.hash||'').replace('#','');
     show(valid.indexOf(hsh)>=0?hsh:'home');
     window.addEventListener('hashchange',function(){
@@ -1501,13 +971,13 @@
   })();
   </script>
   <!-- Download chooser modal -->
-  <div id="dlModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(15,20,25,0.55);align-items:center;justify-content:center;padding:20px;">
-    <div style="background:#fff;border-radius:18px;max-width:380px;width:100%;padding:34px 28px 30px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,0.3);position:relative;">
-      <button id="dlClose" aria-label="Close" style="position:absolute;top:12px;right:16px;border:0;background:none;font-size:24px;color:#9aa1ab;cursor:pointer;line-height:1;">&times;</button>
-      <h3 style="font-size:22px;font-weight:800;color:#0F1419;margin:0 0 6px;letter-spacing:-0.02em;">Get MileCheck</h3>
-      <p style="font-size:14px;color:#6b7280;margin:0 0 22px;line-height:1.5;">Free to find your milepost. Premium comes with a 7-day free trial.</p>
-      <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener" style="display:block;background:#0A84FF;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px;border-radius:11px;margin-bottom:12px;">Download on the App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener" style="display:block;background:#00C880;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px;border-radius:11px;">Get it on Google Play</a>
+  <div id="dlModal">
+    <div class="dl-box">
+      <button id="dlClose" aria-label="Close">&times;</button>
+      <h3>Get MileCheck</h3>
+      <p class="dl-sub">Free to find your milepost. Premium comes with a 7-day free trial.</p>
+      <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener" class="dl-ios">DOWNLOAD ON THE APP STORE</a>
+      <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener" class="dl-android">GET IT ON GOOGLE PLAY</a>
     </div>
   </div>
   <script>
