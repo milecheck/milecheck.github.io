@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get MileCheck — iOS &amp; Android</title>
+  <meta name="description" content="Download MileCheck for iPhone or Android. Real-time highway mile markers, live DOT road alerts, and trip logging in all 50 US states.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://milecheckapp.com/get/">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      background:#F7F5F0; color:#0F1419;
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      padding:24px;
+    }
+    .card {
+      background:#fff; border:1px solid #E5E5E5; border-radius:18px;
+      max-width:420px; width:100%; padding:40px 32px 34px; text-align:center;
+      box-shadow:0 8px 40px rgba(15,20,25,0.06);
+    }
+    .logo { width:72px; height:72px; border-radius:16px; margin:0 auto 18px; display:block; }
+    h1 { font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px; }
+    p.sub { font-size:14px; color:#6b7280; line-height:1.55; margin-bottom:26px; }
+    .store-btn {
+      display:block; text-decoration:none; font-weight:700; font-size:15px;
+      padding:15px; border-radius:12px; color:#fff; margin-bottom:12px;
+      transition:opacity .15s;
+    }
+    .store-btn:hover { opacity:0.9; }
+    .btn-ios { background:#0A84FF; }
+    .btn-android { background:#00C880; }
+    p.fine { font-size:12px; color:#9aa1ab; margin-top:16px; line-height:1.5; }
+    a.back { display:inline-block; margin-top:20px; font-size:13px; color:#6b7280; text-decoration:none; }
+    a.back:hover { color:#0F1419; }
+    #redirecting { display:none; font-size:13px; color:#6b7280; margin-bottom:14px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="../images/icon.png" alt="MileCheck" onerror="this.style.display='none'">
+    <h1>Get MileCheck</h1>
+    <p class="sub">Real-time mile markers, live DOT road alerts, and trip logging. Free to find your milepost — Premium comes with a 7-day free trial.</p>
+    <p id="redirecting">Taking you to your store&hellip;</p>
+    <a class="store-btn btn-ios" href="https://apps.apple.com/us/app/milecheck/id6759212851" rel="noopener">Download on the App&nbsp;Store</a>
+    <a class="store-btn btn-android" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" rel="noopener">Get it on Google&nbsp;Play</a>
+    <p class="fine">iPhone &amp; iPad on the App Store &middot; Android on Google Play</p>
+    <a class="back" href="../">&larr; Back to milecheckapp.com</a>
+  </div>
+  <script>
+  // On a phone, skip the chooser and go straight to the right store (one
+  // less tap). Desktop and anything unrecognized just sees both buttons.
+  // ?choose=1 suppresses the redirect so the chooser page itself stays
+  // reachable/testable from any device.
+  (function(){
+    try {
+      if (new URLSearchParams(location.search).has('choose')) return;
+      var ua = navigator.userAgent || '';
+      var target = null;
+      if (/android/i.test(ua)) {
+        target = 'https://play.google.com/store/apps/details?id=app.milecheck.mobile';
+      } else if (/iphone|ipad|ipod/i.test(ua) && !window.MSStream) {
+        target = 'https://apps.apple.com/us/app/milecheck/id6759212851';
+      }
+      if (target) {
+        document.getElementById('redirecting').style.display = 'block';
+        location.replace(target);
+      }
+    } catch (e) { /* chooser stays visible — fine */ }
+  })();
+  </script>
+</body>
+</html>
