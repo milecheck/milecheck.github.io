@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option D — Guide Signs</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800&display=swap">
+<style>
+  /* OPTION D — "Guide Signs": the design system IS highway signage, done
+     straight — real guide-sign green panels, exit tabs, reflective-white
+     type (Overpass descends from Highway Gothic). Asphalt-gray page. */
+  :root{
+    --road:#3b3f42; --road2:#2e3134; --lane:#f2c744;
+    --sign:#0f6c3f; --sign2:#0a5731; --signline:#ffffff;
+    --paper:#eceae4; --ink:#212420; --ink2:#5c615c;
+    --blue:#00477e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Overpass',sans-serif;font-size:16.5px;line-height:1.55}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  .opt-banner{background:#212420;color:#eceae4;font-size:12.5px;font-weight:700;text-align:center;padding:8px}
+  .opt-banner a{color:#f2c744}
+
+  nav{background:var(--road2)}
+  nav .wrap{display:flex;align-items:center;height:62px;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16px;color:#fff;text-decoration:none;letter-spacing:.02em}
+  .brand img{width:26px;height:26px;border-radius:6px}
+  .navlinks{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:14px}
+  .navlinks a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:700}
+  @media(max-width:800px){.navlinks a:not(.cta){display:none}}
+  .cta{background:var(--lane);color:#212420!important;border-radius:6px;padding:9px 16px;font-weight:800}
+
+  /* the road */
+  .road{background:linear-gradient(180deg,var(--road) 0%,var(--road2) 100%);padding:64px 0 72px;position:relative;overflow:hidden}
+  .road::after{content:"";position:absolute;left:0;right:0;bottom:34px;height:6px;
+    background:repeating-linear-gradient(90deg,var(--lane) 0 60px,transparent 60px 130px)}
+  .road .wrap{display:grid;grid-template-columns:1.35fr .65fr;gap:30px;align-items:center}
+  @media(max-width:820px){.road .wrap{grid-template-columns:1fr}}
+
+  /* the big guide sign */
+  .guide{background:var(--sign);border:5px solid #fff;border-radius:18px;padding:30px 32px 26px;color:#fff;
+    box-shadow:0 24px 60px rgba(0,0,0,.45);position:relative}
+  .exit-tab{position:absolute;top:-44px;right:22px;background:var(--sign);border:4px solid #fff;border-bottom:none;
+    border-radius:12px 12px 0 0;padding:7px 18px 4px;font-weight:800;font-size:15px;letter-spacing:.06em}
+  .guide .small{font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+  .guide h1{font-family:'Overpass',sans-serif;font-weight:800;font-size:clamp(30px,4.6vw,50px);line-height:1.12;letter-spacing:-.005em;margin:10px 0 0;color:#fff}
+  .guide .sub{margin-top:14px;font-size:17px;color:rgba(255,255,255,.88);font-weight:600;max-width:46ch}
+  .guide .arrowline{display:flex;gap:14px;align-items:center;margin-top:22px;flex-wrap:wrap}
+  .btn{border-radius:9px;padding:13px 22px;font-weight:800;font-size:15.5px;text-decoration:none}
+  .btn.lane{background:var(--lane);color:#212420}
+  .btn.white{border:2.5px solid #fff;color:#fff}
+  .guide .fine{margin-top:18px;font-size:12.5px;color:rgba(255,255,255,.7);border-top:1.5px solid rgba(255,255,255,.35);padding-top:12px}
+  .guide .fine b{color:var(--lane)}
+
+  .roy-side{display:flex;justify-content:center}
+  .roy-side img{width:min(240px,90%)}
+
+  /* mini signs row */
+  .minis{margin-top:-34px;position:relative;z-index:2}
+  .minis .wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  @media(max-width:760px){.minis .wrap{grid-template-columns:1fr}}
+  .mini{background:var(--blue);border:4px solid #fff;border-radius:12px;color:#fff;padding:16px 18px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+  .mini b{display:block;font-weight:800;font-size:15.5px;letter-spacing:.03em;text-transform:uppercase}
+  .mini span{font-size:13.5px;color:rgba(255,255,255,.85)}
+
+  section.feat{padding:76px 0 88px}
+  .k{font-weight:800;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sign)}
+  section.feat h2{font-weight:800;font-size:clamp(26px,3.8vw,42px);letter-spacing:-.01em;margin:10px 0 0}
+  .signs{margin-top:34px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  @media(max-width:760px){.signs{grid-template-columns:1fr}}
+  .panel{background:var(--sign);border:4px solid #fff;border-radius:14px;color:#fff;padding:22px 22px 20px;box-shadow:0 10px 26px rgba(15,60,35,.25)}
+  .panel .mile{font-weight:800;font-size:12.5px;letter-spacing:.1em;color:rgba(255,255,255,.75)}
+  .panel h3{margin:6px 0 8px;font-weight:800;font-size:19px;color:#fff}
+  .panel p{margin:0;font-size:14px;color:rgba(255,255,255,.88)}
+</style>
+</head>
+<body>
+<div class="opt-banner">OPTION D · “GUIDE SIGNS” — the design system is real highway signage &nbsp; <a href="./">&larr; all 5 options</a></div>
+
+<nav><div class="wrap">
+  <a class="brand" href="#"><img src="../images/icon.png" alt="">MILECHECK</a>
+  <div class="navlinks">
+    <a href="#">Maps</a><a href="#">Cameras</a><a href="#">States</a><a href="#">Canada</a><a href="#">B2B</a><a href="#">Blog</a>
+    <a class="cta" href="#">Get the app</a>
+  </div>
+</div></nav>
+
+<div class="road"><div class="wrap">
+  <div class="guide">
+    <div class="exit-tab">EXIT 50</div>
+    <div class="small">iOS · Android · all 50 states</div>
+    <h1>Know exactly where you are on the highway</h1>
+    <p class="sub">Your nearest mile marker, live — plus road alerts from all 50 state DOTs. It&rsquo;s how help finds you.</p>
+    <div class="arrowline">
+      <a class="btn lane" href="#">Get the app &nbsp;&uarr;</a>
+      <a class="btn white" href="#">Live maps &nbsp;&rarr;</a>
+    </div>
+    <div class="fine"><b>Your mile marker is always free.</b> Premium — map, live alerts, trip tools — $9.99/yr or $1.99/mo, 7-day free trial.</div>
+  </div>
+  <div class="roy-side"><img src="../images/roy-crew.png" alt="Roy, MileCheck's road-crew badger"></div>
+</div></div>
+
+<div class="minis"><div class="wrap">
+  <div class="mini"><b>Works offline</b><span>Mile markers stored on your phone — dead zones included</span></div>
+  <div class="mini"><b>Live DOT alerts</b><span>All 50 states, straight from each state&rsquo;s feed</span></div>
+  <div class="mini"><b>Free in the car</b><span>CarPlay &amp; Android Auto, no subscription</span></div>
+</div></div>
+
+<section class="feat"><div class="wrap">
+  <span class="k">Inside the app</span>
+  <h2>Far more than a mile marker.</h2>
+  <div class="signs">
+    <div class="panel"><div class="mile">MILE 1</div><h3>Your mile marker, live</h3><p>Your nearest marker in real time, all 50 states — works with no cell service. Plus GPS speed and a live map.</p></div>
+    <div class="panel"><div class="mile">MILE 2</div><h3>Alerts from every state DOT</h3><p>Closures, crashes, chains, and construction from all 50 state feeds — with border waits, bridge status, and crosswind warnings.</p></div>
+    <div class="panel"><div class="mile">MILE 3</div><h3>On the car screen</h3><p>CarPlay and Android Auto show your highway, mile marker, and road conditions — glance-and-go, free for everyone.</p></div>
+  </div>
+</div></section>
+
+</body>
+</html>

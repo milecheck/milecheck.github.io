@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option A — Field Notes</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* OPTION A — "Field Notes": the DOT logbook. Paper, ink, mono stamps,
+     ruled lines. Looks like a tool someone carries in a truck, not a SaaS. */
+  :root{
+    --paper:#f6f4ec; --ink:#23261f; --ink2:#5c6156; --rule:#c9c6b8;
+    --safety:#e8a013; --green:#31623f; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:16.5px;line-height:1.6}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+  .opt-banner{background:#23261f;color:#f6f4ec;font:600 12.5px var(--mono);text-align:center;padding:8px}
+  .opt-banner a{color:#e8a013}
+
+  nav{border-bottom:2px solid var(--ink)}
+  nav .wrap{display:flex;align-items:center;height:64px;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:var(--ink);text-decoration:none}
+  .brand img{width:26px;height:26px;border-radius:6px}
+  .navlinks{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:14px}
+  .navlinks a{color:var(--ink2);text-decoration:none;font-weight:500}
+  @media(max-width:800px){.navlinks a:not(.cta){display:none}}
+  .cta{border:2px solid var(--ink);color:var(--ink);padding:8px 16px;font:600 13.5px var(--mono);text-decoration:none;background:var(--safety)}
+
+  .hero .wrap{display:grid;grid-template-columns:1.4fr .6fr;gap:24px;padding:56px 24px 0;align-items:end}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr}}
+  .stamp{display:inline-block;font:600 12px var(--mono);letter-spacing:.1em;border:1.5px solid var(--ink);padding:5px 10px;transform:rotate(-1deg);background:#fff}
+  h1{font-size:clamp(34px,5.4vw,58px);font-weight:700;line-height:1.08;letter-spacing:-.02em;margin:20px 0 0}
+  h1 em{font-style:normal;box-shadow:inset 0 -14px 0 rgba(232,160,19,.45)}
+  .sub{margin-top:18px;font-size:17.5px;color:var(--ink2);max-width:50ch}
+  .ctas{display:flex;gap:12px;margin:26px 0 8px;flex-wrap:wrap}
+  .btn{padding:13px 22px;font:600 15px var(--mono);text-decoration:none;border:2px solid var(--ink)}
+  .btn.primary{background:var(--ink);color:var(--paper)}
+  .btn.ghost{color:var(--ink)}
+  .fine{font-size:13px;color:var(--ink2);margin:14px 0 40px}
+  .fine b{color:var(--green)}
+  .roy{display:flex;justify-content:center}
+  .roy img{width:min(250px,90%)}
+  .roy figcaption{font:500 11.5px var(--mono);color:var(--ink2);text-align:center;margin-top:6px}
+
+  .ledger{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .ledger .wrap{display:grid;grid-template-columns:1fr 1fr 1fr;padding:0}
+  @media(max-width:700px){.ledger .wrap{grid-template-columns:1fr}}
+  .cell{padding:20px 22px;border-left:1px solid var(--rule)}
+  .cell:first-child{border-left:none}
+  @media(max-width:700px){.cell{border-left:none;border-top:1px solid var(--rule)}.cell:first-child{border-top:none}}
+  .cell .k{font:600 11.5px var(--mono);letter-spacing:.12em;color:var(--green);text-transform:uppercase}
+  .cell .v{font:600 30px var(--mono);margin-top:2px}
+  .cell .s{font-size:13px;color:var(--ink2)}
+
+  section.notes{padding:64px 0 80px}
+  .notes h2{font-size:clamp(26px,3.6vw,40px);font-weight:700;letter-spacing:-.015em;margin:12px 0 0}
+  .k-line{font:600 12px var(--mono);letter-spacing:.14em;color:var(--green);text-transform:uppercase}
+  .entries{margin-top:34px}
+  .entry{display:grid;grid-template-columns:96px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--rule)}
+  @media(max-width:640px){.entry{grid-template-columns:1fr;gap:6px}}
+  .entry .no{font:600 14px var(--mono);color:var(--ink2)}
+  .entry h3{margin:0;font-size:19px;font-weight:700}
+  .entry p{margin:6px 0 0;font-size:15.5px;color:var(--ink2);max-width:64ch}
+</style>
+</head>
+<body>
+<div class="opt-banner">OPTION A · “FIELD NOTES” — the DOT logbook &nbsp; <a href="./">&larr; all 5 options</a></div>
+
+<nav><div class="wrap">
+  <a class="brand" href="#"><img src="../images/icon.png" alt="">MileCheck</a>
+  <div class="navlinks">
+    <a href="#">Maps</a><a href="#">Cameras</a><a href="#">States</a><a href="#">Canada</a><a href="#">B2B</a><a href="#">Blog</a>
+    <a class="cta" href="#">GET THE APP</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <span class="stamp">iOS · ANDROID · ALL 50 STATES</span>
+    <h1>Know <em>exactly</em> where you are on the highway.</h1>
+    <p class="sub">Your nearest mile marker, live — plus road alerts from all 50 state DOTs. It&rsquo;s how help finds you.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#">GET THE APP</a>
+      <a class="btn ghost" href="#">SEE THE LIVE MAPS</a>
+    </div>
+    <p class="fine"><b>Your mile marker is always free.</b> Premium — map, live alerts, trip tools — $9.99/yr or $1.99/mo, 7-day free trial.</p>
+  </div>
+  <figure class="roy" style="margin:0;">
+    <div>
+      <img src="../images/roy-crew.png" alt="Roy, MileCheck's road-crew badger">
+      <figcaption>ROY · ROAD CREW, MILE 34.5</figcaption>
+    </div>
+  </figure>
+</div></header>
+
+<div class="ledger"><div class="wrap">
+  <div class="cell"><div class="k">Mile markers</div><div class="v">50</div><div class="s">US states — stored offline on your phone</div></div>
+  <div class="cell"><div class="k">Live DOT alerts</div><div class="v">50</div><div class="s">of 50 states, straight from each DOT feed</div></div>
+  <div class="cell"><div class="k">Crash rate</div><div class="v">0.00%</div><div class="s">and free on CarPlay &amp; Android Auto</div></div>
+</div></div>
+
+<section class="notes"><div class="wrap">
+  <span class="k-line">Inside the app</span>
+  <h2>Far more than a mile marker.</h2>
+  <div class="entries">
+    <div class="entry"><span class="no">ENTRY 01</span><div><h3>Your mile marker, live</h3><p>Your nearest marker in real time, all 50 states — it works with no cell service. Plus GPS speed and a live map.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 02</span><div><h3>Alerts from every state DOT</h3><p>Closures, crashes, chains, and construction from all 50 state feeds — with border waits, Seattle bridge status, and crosswind warnings.</p></div></div>
+    <div class="entry"><span class="no">ENTRY 03</span><div><h3>On the car screen</h3><p>CarPlay and Android Auto show your highway, mile marker, and road conditions — glance-and-go, free for everyone.</p></div></div>
+  </div>
+</div></section>
+
+</body>
+</html>

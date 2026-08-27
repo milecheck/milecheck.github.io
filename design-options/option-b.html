@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option B — Storybook Scene</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,750&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+  /* OPTION B — "Storybook Scene": Roy's world IS the site. Warm winter-dusk
+     scene hero with the snowplow, chunky warm serif, soft rounded everything.
+     The most personality-forward option — the brand is the badger. */
+  :root{
+    --sky1:#2b3a55; --sky2:#59547a; --sky3:#b96d54; --snow:#f3efe8;
+    --ink:#2a2723; --ink2:#6b6459; --cream:#faf6ee; --accent:#e8a013;
+    --pine:#22452f;
+    --serif:'Fraunces',Georgia,serif; --sans:'Nunito Sans',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.65}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .opt-banner{background:#22452f;color:#faf6ee;font-size:12.5px;font-weight:700;text-align:center;padding:8px}
+  .opt-banner a{color:#ffd479}
+
+  nav{position:relative;z-index:5}
+  nav .wrap{display:flex;align-items:center;height:60px;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;color:#fff;text-decoration:none}
+  .brand img{width:30px;height:30px;border-radius:8px}
+  .navlinks{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14.5px}
+  .navlinks a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:700}
+  @media(max-width:960px){.navlinks a:not(.cta){display:none}}
+  .cta{background:var(--accent);color:#3a2c07!important;border-radius:999px;padding:10px 20px;font-weight:800}
+
+  .scene{position:relative;overflow:hidden;color:#fff;padding-top:6px;
+    background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 46%,var(--sky3) 74%,#d99a6c 88%,var(--snow) 88.2%,var(--snow) 100%)}
+  .scene .stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.7)}
+  .scene .wrap{position:relative;display:grid;grid-template-columns:1fr;text-align:center;padding-top:48px}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+  h1{font-family:var(--serif);font-weight:650;font-size:clamp(38px,6vw,68px);line-height:1.06;letter-spacing:-.01em;margin:16px auto 0;max-width:18ch}
+  .sub{margin:18px auto 0;font-size:18px;color:rgba(255,255,255,.85);max-width:52ch}
+  .ctas{display:flex;gap:12px;margin-top:28px;justify-content:center;flex-wrap:wrap}
+  .btn{border-radius:999px;padding:14px 26px;font-weight:800;font-size:15.5px;text-decoration:none}
+  .btn.primary{background:var(--accent);color:#3a2c07}
+  .btn.ghost{border:2px solid rgba(255,255,255,.6);color:#fff}
+  .fine{margin:18px auto 0;font-size:13px;color:rgba(255,255,255,.65);max-width:60ch}
+  .fine b{color:#ffd479}
+  .plow{position:relative;margin:26px auto -6px;width:min(760px,94%)}
+  .plow img{width:100%}
+
+  .trust{background:var(--snow);padding:8px 0 20px}
+  .trust .wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;text-align:center}
+  @media(max-width:700px){.trust .wrap{grid-template-columns:1fr}}
+  .trust b{display:block;font-size:15.5px;font-weight:800;color:var(--ink)}
+  .trust span{font-size:13.5px;color:var(--ink2)}
+
+  section.feat{padding:76px 0 84px;background:var(--cream)}
+  .k2{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pine)}
+  .feat h2{font-family:var(--serif);font-weight:650;font-size:clamp(30px,4.2vw,48px);margin:12px 0 0;letter-spacing:-.01em}
+  .cards{margin-top:36px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  @media(max-width:760px){.cards{grid-template-columns:1fr}}
+  .card{background:#fff;border:2px solid #e8e2d4;border-radius:22px;padding:26px}
+  .card h3{font-family:var(--serif);font-weight:650;font-size:21px;margin:0 0 8px}
+  .card p{margin:0;font-size:15px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div class="opt-banner">OPTION B · “STORYBOOK SCENE” — Roy&rsquo;s world is the site &nbsp; <a href="./">&larr; all 5 options</a></div>
+
+<div class="scene">
+  <div class="stars">
+    <i style="left:8%;top:120px"></i><i style="left:16%;top:200px"></i><i style="left:27%;top:100px"></i>
+    <i style="left:71%;top:130px"></i><i style="left:84%;top:210px"></i><i style="left:92%;top:110px"></i>
+  </div>
+  <nav><div class="wrap">
+    <a class="brand" href="#"><img src="../images/icon.png" alt="">MileCheck</a>
+    <div class="navlinks">
+      <a href="#">Maps</a><a href="#">Cameras</a><a href="#">States</a><a href="#">Canada</a><a href="#">B2B</a><a href="#">Blog</a>
+      <a class="cta" href="#">Get the app</a>
+    </div>
+  </div></nav>
+  <div class="wrap">
+    <span class="kick">iOS · Android · all 50 states</span>
+    <h1>Every road. Every mile. Somebody&rsquo;s watching it.</h1>
+    <p class="sub">Your nearest mile marker, live — plus road alerts from all 50 state DOTs. It&rsquo;s how help finds you.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#">Get the app</a>
+      <a class="btn ghost" href="#">See the live maps</a>
+    </div>
+    <p class="fine"><b>Your mile marker is always free.</b> Premium — map, live alerts, trip tools — $9.99/yr or $1.99/mo, 7-day free trial.</p>
+    <div class="plow"><img src="../images/roy-plow.png" alt="Roy the badger driving a snowplow"></div>
+  </div>
+</div>
+
+<div class="trust"><div class="wrap">
+  <div><b>Works offline</b><span>Mile markers stored on your phone — dead zones included</span></div>
+  <div><b>Live DOT alerts</b><span>All 50 states, straight from each state&rsquo;s own feed</span></div>
+  <div><b>Free in the car</b><span>CarPlay &amp; Android Auto, no subscription needed</span></div>
+</div></div>
+
+<section class="feat"><div class="wrap">
+  <span class="k2">Inside the app</span>
+  <h2>Far more than a mile marker.</h2>
+  <div class="cards">
+    <div class="card"><h3>Your mile marker, live</h3><p>Your nearest marker in real time, all 50 states — it works with no cell service. Plus GPS speed and a live map.</p></div>
+    <div class="card"><h3>Alerts from every state DOT</h3><p>Closures, crashes, chains, and construction from all 50 state feeds — with border waits, bridge status, and crosswind warnings.</p></div>
+    <div class="card"><h3>On the car screen</h3><p>CarPlay and Android Auto show your highway, mile marker, and road conditions — glance-and-go, free for everyone.</p></div>
+  </div>
+</div></section>
+
+</body>
+</html>

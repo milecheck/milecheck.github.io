@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option C — Data-First</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<style>
+  /* OPTION C — "Data-first": the anti-marketing site. Near-white, system
+     type, one green, and the product's real live data doing the talking.
+     Live alert counts load from the actual Worker on page load. */
+  :root{
+    --bg:#fcfcfa; --line:#e4e4de; --ink:#161815; --ink2:#5f645d; --ink3:#9a9e97;
+    --green:#177245; --greenbg:#eaf3ee;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  .opt-banner{background:#161815;color:#fcfcfa;font:600 12.5px var(--mono);text-align:center;padding:8px}
+  .opt-banner a{color:#7fd6a4}
+
+  nav{border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;height:60px;gap:16px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15.5px;color:var(--ink);text-decoration:none}
+  .brand img{width:24px;height:24px;border-radius:6px}
+  .navlinks{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:14px}
+  .navlinks a{color:var(--ink2);text-decoration:none;font-weight:500}
+  @media(max-width:800px){.navlinks a:not(.cta){display:none}}
+  .cta{background:var(--green);color:#fff!important;border-radius:7px;padding:9px 16px;font-weight:600}
+
+  header{padding:64px 0 0}
+  h1{font-size:clamp(30px,4.6vw,50px);font-weight:750;letter-spacing:-.025em;line-height:1.12;margin:0;max-width:22ch}
+  .sub{margin-top:16px;font-size:17.5px;color:var(--ink2);max-width:56ch}
+  .ctas{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+  .btn{border-radius:8px;padding:12px 20px;font-weight:600;font-size:15px;text-decoration:none}
+  .btn.primary{background:var(--green);color:#fff}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
+  .fine{margin:16px 0 0;font-size:13px;color:var(--ink3)}
+  .fine b{color:var(--green)}
+
+  /* THE live board — real numbers from the real Worker */
+  .board{margin:44px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .board .head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font:600 12px var(--mono);letter-spacing:.08em;color:var(--ink2);text-transform:uppercase}
+  .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#1db26b;margin-right:7px;animation:blink 2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .board .grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}
+  @media(max-width:720px){.board .grid{grid-template-columns:1fr 1fr}}
+  .stat{padding:20px 18px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:none}
+  @media(max-width:720px){.stat:nth-child(3){border-left:none}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+  .stat .n{font:600 32px var(--mono);letter-spacing:-.02em}
+  .stat .n.green{color:var(--green)}
+  .stat .l{font-size:12.5px;color:var(--ink2);margin-top:2px}
+  .board .foot{padding:10px 18px;border-top:1px solid var(--line);font:500 12px var(--mono);color:var(--ink3)}
+
+  section.rows{padding:70px 0 84px}
+  .k{font:600 12px var(--mono);letter-spacing:.12em;color:var(--green);text-transform:uppercase}
+  section.rows h2{font-size:clamp(24px,3.4vw,36px);font-weight:750;letter-spacing:-.02em;margin:10px 0 0}
+  .rowlist{margin-top:30px;border-top:1px solid var(--line)}
+  .row{display:grid;grid-template-columns:240px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
+  @media(max-width:640px){.row{grid-template-columns:1fr;gap:4px}}
+  .row h3{margin:0;font-size:16.5px;font-weight:700}
+  .row p{margin:0;font-size:15px;color:var(--ink2);max-width:66ch}
+</style>
+</head>
+<body>
+<div class="opt-banner">OPTION C · “DATA-FIRST” — the product’s live numbers do the talking &nbsp; <a href="./">&larr; all 5 options</a></div>
+
+<nav><div class="wrap">
+  <a class="brand" href="#"><img src="../images/icon.png" alt="">MileCheck</a>
+  <div class="navlinks">
+    <a href="#">Maps</a><a href="#">Cameras</a><a href="#">States</a><a href="#">Canada</a><a href="#">B2B</a><a href="#">Blog</a>
+    <a class="cta" href="#">Get the app</a>
+  </div>
+</div></nav>
+
+<header><div class="wrap">
+  <h1>Your nearest mile marker, live. Road alerts from all 50 state DOTs.</h1>
+  <p class="sub">It&rsquo;s how help finds you — the thing 911, tow trucks, and dispatch actually ask for. Works offline in dead zones.</p>
+  <div class="ctas">
+    <a class="btn primary" href="#">Get the app</a>
+    <a class="btn ghost" href="#">See the live maps</a>
+  </div>
+  <p class="fine"><b>Your mile marker is always free.</b> Premium — map, live alerts, trip tools — $9.99/yr or $1.99/mo, 7-day free trial.</p>
+
+  <div class="board">
+    <div class="head"><span><span class="live-dot"></span>Live from the MileCheck network</span><span id="boardTime"></span></div>
+    <div class="grid">
+      <div class="stat"><div class="n green" id="stAlerts">—</div><div class="l">active DOT alerts right now</div></div>
+      <div class="stat"><div class="n" id="stClosures">—</div><div class="l">of them are closures</div></div>
+      <div class="stat"><div class="n">50</div><div class="l">states with mile markers, offline</div></div>
+      <div class="stat"><div class="n">50</div><div class="l">state DOT feeds, live</div></div>
+    </div>
+    <div class="foot" id="boardFoot">Connecting to the live feed…</div>
+  </div>
+</div></header>
+
+<section class="rows"><div class="wrap">
+  <span class="k">Inside the app</span>
+  <h2>Far more than a mile marker.</h2>
+  <div class="rowlist">
+    <div class="row"><h3>Your mile marker, live</h3><p>Your nearest marker in real time, all 50 states — stored on the phone, so it works with no cell service. Plus GPS speed and a live map.</p></div>
+    <div class="row"><h3>Alerts from every state DOT</h3><p>Closures, crashes, chains, and construction from all 50 state feeds — with border waits, Seattle bridge status, and crosswind warnings.</p></div>
+    <div class="row"><h3>On the car screen</h3><p>CarPlay and Android Auto show your highway, mile marker, and road conditions — glance-and-go, free for everyone.</p></div>
+  </div>
+</div></section>
+
+<script>
+// Real data, really live: pull one state's current alert feed from the actual
+// production Worker so the board shows genuine numbers, honestly labeled.
+(async function(){
+  const foot=document.getElementById('boardFoot');
+  document.getElementById('boardTime').textContent=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+  try{
+    const r=await fetch('https://milepost-proxy.leahgerber93.workers.dev/incidents?state=WA');
+    const d=await r.json();
+    const incs=d['incident-reports']||[];
+    document.getElementById('stAlerts').textContent=incs.length;
+    const closures=incs.filter(i=>(i['event-type-id']||'')==='CL').length;
+    document.getElementById('stClosures').textContent=closures;
+    foot.textContent='Washington shown as a sample — the app carries all 50 states. Counts from WSDOT via the MileCheck feed, just now.';
+  }catch(e){ foot.textContent='Live feed unreachable from this page — the numbers above are placeholders until it reconnects.'; }
+})();
+</script>
+</body>
+</html>
