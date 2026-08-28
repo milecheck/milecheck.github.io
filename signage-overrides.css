@@ -28,14 +28,14 @@
 .nav-to-mp h2 { color: var(--ink) !important; }
 
 .nav-to-mp-tag {
-  font-family: var(--body) !important;
-  font-size: 13.5px !important;
-  letter-spacing: 2.2px !important;
-  color: #fff !important;
-  background: var(--sign) !important;
-  border-radius: var(--radius-soft) !important;
-  box-shadow: var(--shadow-sign) !important;
-  padding: 5px 12px 4px !important;
+  font-family: var(--mono-stack) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.14em !important;
+  color: var(--sign) !important;
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 /* — Dark sections: blue-black → asphalt green-black — */
@@ -43,12 +43,22 @@
   background: var(--asphalt) !important;
   border-color: var(--asphalt) !important;
 }
-.partners .section-label { background: var(--sign); color: #fff; }
+.partners .section-label { background: none; color: var(--safety); }
 
-/* — Enterprise tab — */
+/* — Enterprise tab — dark ink hero, LIGHT text forced (2026-08-28 fix:
+     /partners/ carries its own h1{color:#000}/sub{#525252}, which this
+     file's dark background turned into black-on-black). — */
 .ent-hero { background: var(--asphalt) !important; }
-.ent-section-alt { background: #F3F1EA !important; }
+.ent-hero h1 { color: var(--paper) !important; }
+.ent-hero-sub { color: rgba(246,244,236,0.78) !important; }
+.ent-hero-sub strong, .ent-hero-sub em { color: #fff !important; }
+.ent-hero .eyebrow { color: var(--safety) !important; }
+.ent-hero [style*="color:#525252"], .ent-hero [style*="color: #525252"],
+.ent-hero [style*="color:#6B7280"], .ent-hero [style*="color: #6B7280"] { color: rgba(246,244,236,0.6) !important; }
+.ent-section-alt { background: #efede3 !important; }
 .cta-section { background: var(--asphalt) !important; }
+.cta-section h2 { color: var(--paper) !important; }
+.cta-section .ent-section-label { color: var(--safety) !important; }
 
 /* — Old brand-green hardcodes in inline styles → signage green
      (the live-dot animation keeps the brighter live green). — */
