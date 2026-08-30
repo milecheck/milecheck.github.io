@@ -4,8 +4,6 @@
 <title>Phoenix — Road Board</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <!--
   A personal ambient board for a house in Phoenix (85012, uptown — the Central Ave corridor).
   Not a venue board: no sponsor slot, no QR, nothing to sell. Built to be left on a TV.
@@ -124,24 +122,11 @@
   .fire .ct.low{color:var(--heat)}
   .fire .mi{font-size:0.9cqw;color:var(--faint);font-weight:700;margin-left:auto;white-space:nowrap}
 
-  /* middle column: cameras stacked left, portrait fire map right */
-  .camgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:1cqw;flex:1;min-height:0}
-  .camstack{display:flex;flex-direction:column;gap:0.8cqw;min-height:0}
-  .mapside{display:flex;flex-direction:column;min-height:0}
-  .cam{position:relative;background:#000;border-radius:0.5cqw;overflow:hidden;flex:1;min-height:0}
+  /* middle column: two cameras stacked, 4:3, never cropped */
+  .cam-col{gap:0.9cqw}
+  .cam{position:relative;background:#000;border-radius:0.5cqw;overflow:hidden;
+       flex:0 1 47%;aspect-ratio:4/3;min-height:0;width:auto;max-width:100%;margin:0 auto}
   .cam img{width:100%;height:100%;object-fit:contain;display:block}
-  .camcap{position:absolute;left:0;right:0;bottom:0;padding:1.2cqw 0.6cqw 0.35cqw;
-          font-size:0.8cqw;font-weight:700;color:#fff;
-          background:linear-gradient(transparent,rgba(0,0,0,0.78))}
-  /* fire map */
-  .mapwrap{flex:1;min-height:0;border-radius:0.5cqw;overflow:hidden;border:0.08cqw solid var(--line)}
-  .leaflet-container{background:#eef0e9;font-family:inherit}
-  .fmark{display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
-  .fmark .fire-ic{font-size:20px;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.35)}
-  .fmark .fire-lbl{background:#cf3320;color:#fff;font-weight:800;font-size:11px;padding:1px 7px;
-    border-radius:7px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-  .home-lbl{background:#0f7a4f;color:#fff;font-weight:800;font-size:11px;padding:1px 7px;
-    border-radius:7px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.25)}
   .camtag{position:absolute;top:0.55cqw;left:0.55cqw;background:var(--red);color:#fff;
           font-size:0.8cqw;font-weight:800;letter-spacing:0.12em;padding:0.25cqw 0.6cqw;border-radius:0.2cqw}
 
@@ -219,17 +204,9 @@
 
     <!-- camera -->
     <div class="col cam-col">
-      <div class="camgrid">
-        <div class="camstack">
-          <div class="lbl">Freeways near the house</div>
-          <div class="cam"><span class="camtag">LIVE</span><img id="camimg0" alt="Live ADOT freeway camera"><span class="camcap" id="camcap0">&mdash;</span></div>
-          <div class="cam"><span class="camtag">LIVE</span><img id="camimg1" alt="Live ADOT freeway camera"><span class="camcap" id="camcap1">&mdash;</span></div>
-        </div>
-        <div class="mapside">
-          <div class="lbl">Where the fires are</div>
-          <div class="mapwrap" id="firemap"></div>
-        </div>
-      </div>
+      <div class="lbl">Freeways near the house</div>
+      <div class="cam"><span class="camtag">LIVE</span><img id="camimg0" alt="Live ADOT freeway camera"><span class="camcap" id="camcap0">&mdash;</span></div>
+      <div class="cam"><span class="camtag">LIVE</span><img id="camimg1" alt="Live ADOT freeway camera"><span class="camcap" id="camcap1">&mdash;</span></div>
     </div>
 
     <!-- border -->
@@ -587,7 +564,6 @@ async function load(){
     </div>`;
   }).join('') : `<div class="none"><b>No active wildfires.</b> Nothing burning on the Arizona reporting list.</div>`;
   fitList($('fires'));
-  fireMap(fires.filter(f => f.state === 'US-AZ' && !f.isRx && f.lat && f.lon));
 
   /* --- Roy ---------------------------------------------------------------
      Mirrors the precedence in src/utils/royForAlert.ts (guardrail G6 says one
@@ -605,37 +581,6 @@ async function load(){
     : credit;
 }
 
-/* ---------- fire map ----------
-   Real map, same recipe as the website fire page: Leaflet + Esri topo tiles,
-   fire markers with name labels, the house marked in green. Kiosk mode — no
-   panning or zooming, it just frames the fires + Phoenix on every refresh. */
-let MAP = null, FIRE_LAYER = null;
-function fireMap(fires){
-  const el = $('firemap'); if(!el) return;
-  if(typeof L === 'undefined'){ el.innerHTML = '<div class="none">Map unavailable.</div>'; return; }
-  if(!MAP){
-    MAP = L.map(el, {zoomControl:false, dragging:false, scrollWheelZoom:false,
-      doubleClickZoom:false, boxZoom:false, keyboard:false, touchZoom:false, tap:false});
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-      {attribution:'Esri', maxZoom:12}).addTo(MAP);
-    FIRE_LAYER = L.layerGroup().addTo(MAP);
-    L.marker(HERE, {icon: L.divIcon({className:'', html:'<span class="home-lbl">Phoenix</span>',
-      iconSize:null, iconAnchor:[28,10]}), interactive:false}).addTo(MAP);
-  }
-  FIRE_LAYER.clearLayers();
-  const top = fires.slice().sort((a,b)=>(b.acres||0)-(a.acres||0)).slice(0,10);
-  for(const f of top){
-    const big = (f.acres||0) >= 100;
-    const html = big
-      ? `<div class="fmark"><span class="fire-ic">\ud83d\udd25</span><span class="fire-lbl">${f.name}</span></div>`
-      : `<div class="fmark"><span class="fire-ic" style="font-size:15px">\ud83d\udd25</span></div>`;
-    L.marker([f.lat,f.lon], {icon: L.divIcon({className:'', html, iconSize:null,
-      iconAnchor: big ? [30,18] : [8,8]}), interactive:false}).addTo(FIRE_LAYER);
-  }
-  MAP.invalidateSize();
-  // frame the state, not the union of everything burning — stable between refreshes
-  MAP.fitBounds([[31.2,-114.9],[37.1,-109.0]]);
-}
 
 /* ---------- Roy ---------- */
 const ROY_IMG = {
