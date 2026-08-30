@@ -27,7 +27,12 @@
     }
     .logo { width:72px; height:72px; border-radius:16px; margin:0 auto 18px; display:block; }
     h1 { font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px; }
-    p.sub { font-size:14px; color:#6b7280; line-height:1.55; margin-bottom:26px; }
+    p.sub { font-size:14px; color:#6b7280; line-height:1.55; margin-bottom:16px; }
+    p.price { font-size:13px; color:#0F1419; line-height:1.6; margin-bottom:6px; }
+    p.price:last-of-type { margin-bottom:26px; }
+    p.price strong { font-weight:700; }
+    p.price .free { color:#00A86B; font-weight:700; }
+    p.premium { font-size:13px; color:#6b7280; line-height:1.6; margin-bottom:6px; }
     .store-btn {
       display:block; text-decoration:none; font-weight:700; font-size:15px;
       padding:15px; border-radius:12px; color:#fff; margin-bottom:12px;
@@ -46,7 +51,10 @@
   <div class="card">
     <img class="logo" src="../images/icon.png" alt="MileCheck" onerror="this.style.display='none'">
     <h1>Get MileCheck</h1>
-    <p class="sub">Real-time mile markers, live DOT road alerts, and trip logging. Free to find your milepost — Premium comes with a 7-day free trial.</p>
+    <p class="sub">Your nearest mile marker in real time,<br>wherever you're driving.</p>
+    <p class="price"><span class="free">Your mile marker is always free.</span></p>
+    <p class="premium">Sign up for Premium to add live DOT road alerts,<br>road cameras, trip logging, and route planning.</p>
+    <p class="price"><strong>$9.99/year</strong> or <strong>$1.99/month</strong><br>with a 7-day free trial.</p>
     <p id="redirecting">Taking you to your store&hellip;</p>
     <a class="store-btn btn-ios" href="https://apps.apple.com/us/app/milecheck/id6759212851" rel="noopener">Download on the App&nbsp;Store</a>
     <a class="store-btn btn-android" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" rel="noopener">Get it on Google&nbsp;Play</a>
