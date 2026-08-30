@@ -661,6 +661,15 @@ function showFatal(e){
 window.addEventListener('error', ev => showFatal(ev.error || ev.message));
 window.addEventListener('unhandledrejection', ev => showFatal(ev.reason));
 
+/* Kiosk self-heal: a TV never reloads the page on its own, so deployed fixes would
+   never arrive. Reload once a night at 4:30am local — quiet hour, fresh code daily. */
+(function(){
+  const now = new Date();
+  const next = new Date(now); next.setHours(4,30,0,0);
+  if(next <= now) next.setDate(next.getDate()+1);
+  setTimeout(()=>location.reload(), next - now);
+})();
+
 Promise.resolve()
   .then(load).catch(showFatal);
 weather(); forecast();
