@@ -4,6 +4,8 @@
 <title>Phoenix — Road Board</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <!--
   A personal ambient board for a house in Phoenix (85012, uptown — the Central Ave corridor).
   Not a venue board: no sponsor slot, no QR, nothing to sell. Built to be left on a TV.
@@ -122,17 +124,24 @@
   .fire .ct.low{color:var(--heat)}
   .fire .mi{font-size:0.9cqw;color:var(--faint);font-weight:700;margin-left:auto;white-space:nowrap}
 
-  /* cameras — two up, object-fit:contain so nothing is ever cropped */
-  .cams{display:grid;grid-template-columns:1fr 1fr;gap:0.9cqw;flex:0 0 auto}
-  .cam{position:relative;background:#000;border-radius:0.5cqw;overflow:hidden;aspect-ratio:16/9}
+  /* middle column: cameras stacked left, portrait fire map right */
+  .camgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:1cqw;flex:1;min-height:0}
+  .camstack{display:flex;flex-direction:column;gap:0.8cqw;min-height:0}
+  .mapside{display:flex;flex-direction:column;min-height:0}
+  .cam{position:relative;background:#000;border-radius:0.5cqw;overflow:hidden;flex:1;min-height:0}
   .cam img{width:100%;height:100%;object-fit:contain;display:block}
   .camcap{position:absolute;left:0;right:0;bottom:0;padding:1.2cqw 0.6cqw 0.35cqw;
           font-size:0.8cqw;font-weight:700;color:#fff;
           background:linear-gradient(transparent,rgba(0,0,0,0.78))}
   /* fire map */
-  .mappanel{flex:1;min-height:0;display:flex;flex-direction:column}
-  .mapwrap{flex:1;min-height:0}
-  .mapwrap svg{width:100%;height:100%;display:block}
+  .mapwrap{flex:1;min-height:0;border-radius:0.5cqw;overflow:hidden;border:0.08cqw solid var(--line)}
+  .leaflet-container{background:#eef0e9;font-family:inherit}
+  .fmark{display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
+  .fmark .fire-ic{font-size:20px;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+  .fmark .fire-lbl{background:#cf3320;color:#fff;font-weight:800;font-size:11px;padding:1px 7px;
+    border-radius:7px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+  .home-lbl{background:#0f7a4f;color:#fff;font-weight:800;font-size:11px;padding:1px 7px;
+    border-radius:7px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.25)}
   .camtag{position:absolute;top:0.55cqw;left:0.55cqw;background:var(--red);color:#fff;
           font-size:0.8cqw;font-weight:800;letter-spacing:0.12em;padding:0.25cqw 0.6cqw;border-radius:0.2cqw}
 
@@ -210,14 +219,16 @@
 
     <!-- camera -->
     <div class="col cam-col">
-      <div class="lbl">Freeways near the house</div>
-      <div class="cams">
-        <div class="cam"><span class="camtag">LIVE</span><img id="camimg0" alt="Live ADOT freeway camera"><span class="camcap" id="camcap0">&mdash;</span></div>
-        <div class="cam"><span class="camtag">LIVE</span><img id="camimg1" alt="Live ADOT freeway camera"><span class="camcap" id="camcap1">&mdash;</span></div>
-      </div>
-      <div class="mappanel">
-        <div class="lbl" style="margin-top:1cqw">Where the fires are</div>
-        <div class="mapwrap" id="firemap"></div>
+      <div class="camgrid">
+        <div class="camstack">
+          <div class="lbl">Freeways near the house</div>
+          <div class="cam"><span class="camtag">LIVE</span><img id="camimg0" alt="Live ADOT freeway camera"><span class="camcap" id="camcap0">&mdash;</span></div>
+          <div class="cam"><span class="camtag">LIVE</span><img id="camimg1" alt="Live ADOT freeway camera"><span class="camcap" id="camcap1">&mdash;</span></div>
+        </div>
+        <div class="mapside">
+          <div class="lbl">Where the fires are</div>
+          <div class="mapwrap" id="firemap"></div>
+        </div>
       </div>
     </div>
 
@@ -595,45 +606,35 @@ async function load(){
 }
 
 /* ---------- fire map ----------
-   A simplified Arizona outline (equirectangular, x squeezed by cos 34°) with one dot
-   per active fire, sized by acres. The house is the green marker. Top two fires by
-   size get a name label. */
+   Real map, same recipe as the website fire page: Leaflet + Esri topo tiles,
+   fire markers with name labels, the house marked in green. Kiosk mode — no
+   panning or zooming, it just frames the fires + Phoenix on every refresh. */
+let MAP = null, FIRE_LAYER = null;
 function fireMap(fires){
   const el = $('firemap'); if(!el) return;
-  if(!fires.length){ el.innerHTML = '<div class="none">No active wildfires to map.</div>'; return; }
-  const KX = 8.3, KY = 10;                     // deg -> viewBox units
-  const X = lon => (lon + 115.0) * KX;
-  const Y = lat => (37.05 - lat) * KY;
-  const AZ = [[-114.05,37.00],[-109.05,37.00],[-109.05,31.33],[-111.07,31.33],
-    [-114.81,32.49],[-114.72,32.72],[-114.47,32.98],[-114.52,33.03],[-114.62,33.42],
-    [-114.73,33.40],[-114.50,33.70],[-114.43,34.09],[-114.14,34.30],[-114.33,34.45],
-    [-114.47,34.71],[-114.63,34.87],[-114.63,35.10],[-114.57,35.22],[-114.66,35.53],
-    [-114.67,35.87],[-114.73,36.10],[-114.31,36.11],[-114.15,36.02],[-114.05,36.19]];
-  const outline = AZ.map(([lo,la]) => X(lo).toFixed(1)+','+Y(la).toFixed(1)).join(' ');
-  const byAcres = fires.slice().sort((a,b)=>(b.acres||0)-(a.acres||0));
-  const labeled = new Set(byAcres.slice(0,2).map(f=>f.id));
-  let dots = '';
-  for(const f of byAcres.slice(0,14).reverse()){    // draw big ones last, on top
-    const x = X(f.lon), y = Y(f.lat);
-    const r = Math.min(3, 0.8 + Math.sqrt(f.acres||1)/16);
-    dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}"
-      fill="var(--red)" fill-opacity="0.85" stroke="var(--paper)" stroke-width="0.35"/>`;
-    if(labeled.has(f.id)){
-      const left = x > 38;                          // keep labels inside the box
-      dots += `<text x="${(x + (left ? -(r+1) : r+1)).toFixed(1)}" y="${(y+0.9).toFixed(1)}"
-        text-anchor="${left?'end':'start'}" font-size="2.6" font-weight="700"
-        fill="var(--ink)" font-family="Helvetica,Arial,sans-serif">${f.name}</text>`;
-    }
+  if(typeof L === 'undefined'){ el.innerHTML = '<div class="none">Map unavailable.</div>'; return; }
+  if(!MAP){
+    MAP = L.map(el, {zoomControl:false, dragging:false, scrollWheelZoom:false,
+      doubleClickZoom:false, boxZoom:false, keyboard:false, touchZoom:false, tap:false});
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+      {attribution:'Esri', maxZoom:12}).addTo(MAP);
+    FIRE_LAYER = L.layerGroup().addTo(MAP);
+    L.marker(HERE, {icon: L.divIcon({className:'', html:'<span class="home-lbl">Phoenix</span>',
+      iconSize:null, iconAnchor:[28,10]}), interactive:false}).addTo(MAP);
   }
-  const hx = X(HERE[1]), hy = Y(HERE[0]);
-  el.innerHTML = `<svg viewBox="-2 -2 55 62" preserveAspectRatio="xMidYMid meet"
-      role="img" aria-label="Map of active Arizona wildfires">
-    <polygon points="${outline}" fill="var(--panel)" stroke="var(--faint)" stroke-width="0.45"/>
-    ${dots}
-    <circle cx="${hx.toFixed(1)}" cy="${hy.toFixed(1)}" r="1.1" fill="var(--green)" stroke="var(--paper)" stroke-width="0.35"/>
-    <text x="${(hx+1.9).toFixed(1)}" y="${(hy+0.9).toFixed(1)}" font-size="2.4" font-weight="700"
-      fill="var(--green)" font-family="Helvetica,Arial,sans-serif">Phoenix</text>
-  </svg>`;
+  FIRE_LAYER.clearLayers();
+  const top = fires.slice().sort((a,b)=>(b.acres||0)-(a.acres||0)).slice(0,10);
+  for(const f of top){
+    const big = (f.acres||0) >= 100;
+    const html = big
+      ? `<div class="fmark"><span class="fire-ic">\ud83d\udd25</span><span class="fire-lbl">${f.name}</span></div>`
+      : `<div class="fmark"><span class="fire-ic" style="font-size:15px">\ud83d\udd25</span></div>`;
+    L.marker([f.lat,f.lon], {icon: L.divIcon({className:'', html, iconSize:null,
+      iconAnchor: big ? [30,18] : [8,8]}), interactive:false}).addTo(FIRE_LAYER);
+  }
+  MAP.invalidateSize();
+  // frame the state, not the union of everything burning — stable between refreshes
+  MAP.fitBounds([[31.2,-114.9],[37.1,-109.0]]);
 }
 
 /* ---------- Roy ---------- */
