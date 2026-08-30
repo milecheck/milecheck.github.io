@@ -88,6 +88,7 @@
   .card{background:var(--panel);border:0.08cqw solid var(--line);border-radius:0.5cqw;
         padding:0.85cqw 1.1cqw;min-height:0}
   .grow{flex:1 1 0;display:flex;flex-direction:column;min-height:0}
+  .grow.tall{flex:1.55 1 0}
   .scroll{overflow:hidden;flex:1;min-height:0}
 
   /* crashes */
@@ -112,36 +113,41 @@
   .roy .say b{color:var(--ink);font-weight:800;display:block;font-size:1.05cqw;margin-bottom:0.15cqw}
   .none{font-size:1.15cqw;color:var(--dim);padding:1.2cqw 0;line-height:1.5}
   .none b{color:var(--green);font-weight:800}
-  .fire{display:flex;align-items:baseline;gap:0.7cqw;padding:0.5cqw 0;
+  .fire{display:flex;align-items:baseline;gap:0.7cqw;padding:0.5cqw 0;min-width:0;
         border-bottom:0.07cqw solid var(--line)}
   .fire:last-child{border-bottom:none}
-  .fire .nm{font-size:1.05cqw;font-weight:800}
+  .fire .nm{font-size:1.05cqw;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
   .fire .ac{font-size:0.92cqw;color:var(--dim);font-weight:700;white-space:nowrap}
   .fire .ct{font-size:0.85cqw;font-weight:800;white-space:nowrap;color:var(--green)}
   .fire .ct.low{color:var(--heat)}
   .fire .mi{font-size:0.9cqw;color:var(--faint);font-weight:700;margin-left:auto;white-space:nowrap}
 
-  /* camera */
-  .cam{position:relative;background:#000;border-radius:0.5cqw;overflow:hidden;
-        width:100%;flex:1;min-height:0}
-  .cam img{width:100%;height:100%;object-fit:cover;display:block}
-  .camtag{position:absolute;top:0.7cqw;left:0.7cqw;background:var(--red);color:#fff;
+  /* cameras — two up, object-fit:contain so nothing is ever cropped */
+  .cams{display:grid;grid-template-columns:1fr 1fr;gap:0.9cqw;flex:0 0 auto}
+  .cam{position:relative;background:#000;border-radius:0.5cqw;overflow:hidden;aspect-ratio:16/9}
+  .cam img{width:100%;height:100%;object-fit:contain;display:block}
+  .camcap{position:absolute;left:0;right:0;bottom:0;padding:1.2cqw 0.6cqw 0.35cqw;
+          font-size:0.8cqw;font-weight:700;color:#fff;
+          background:linear-gradient(transparent,rgba(0,0,0,0.78))}
+  /* fire map */
+  .mappanel{flex:1;min-height:0;display:flex;flex-direction:column}
+  .mapwrap{flex:1;min-height:0}
+  .mapwrap svg{width:100%;height:100%;display:block}
+  .camtag{position:absolute;top:0.55cqw;left:0.55cqw;background:var(--red);color:#fff;
           font-size:0.8cqw;font-weight:800;letter-spacing:0.12em;padding:0.25cqw 0.6cqw;border-radius:0.2cqw}
-  .camfoot{display:flex;justify-content:space-between;align-items:baseline;padding-top:0.7cqw}
-  .camfoot .nm{font-size:1.15cqw;font-weight:800}
-  .camfoot .mp{font-size:0.95cqw;color:var(--faint);font-weight:700}
 
   /* border */
-  .bx{padding:0.5cqw 0;border-bottom:0.07cqw solid var(--line)}
+  .bx{padding:0.42cqw 0;border-bottom:0.07cqw solid var(--line)}
   .bx:last-child{border-bottom:none}
-  .bx .top{display:flex;justify-content:space-between;align-items:baseline;gap:0.6cqw}
-  .bx .nm{font-size:1.08cqw;font-weight:800}
-  .bx .wait{font-size:1.6cqw;font-weight:800;letter-spacing:-0.02em;line-height:1}
+  .bx .top{display:flex;justify-content:space-between;align-items:baseline;gap:0.6cqw;min-width:0}
+  .bx .nm{font-size:1.05cqw;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .bx .hrs{font-style:normal;font-weight:600;font-size:0.82cqw;color:var(--faint)}
+  .bx .wait{font-size:1.35cqw;white-space:nowrap;font-weight:800;letter-spacing:-0.02em;line-height:1}
   .bx .wait small{font-size:0.85cqw;font-weight:700;color:var(--dim);letter-spacing:0}
   .w-ok{color:var(--green)} .w-mid{color:var(--amber)} .w-bad{color:var(--red)}
   .w-na{color:var(--faint);font-size:1.1cqw;font-weight:700}
   .bx .meta{font-size:0.88cqw;color:var(--faint);font-weight:600;margin-top:0.2cqw}
-  .dir{font-size:0.95cqw;color:var(--dim);font-weight:600;margin:-0.3cqw 0 0.7cqw}
+  .dir{font-size:0.9cqw;color:var(--dim);font-weight:600;margin:-0.3cqw 0 0.55cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .dir .arrow{display:inline-block;background:var(--green);color:#fff;font-weight:800;
               font-size:0.8cqw;letter-spacing:0.08em;padding:0.15cqw 0.45cqw;border-radius:0.18cqw;
               margin-right:0.5cqw}
@@ -205,18 +211,24 @@
     <!-- camera -->
     <div class="col cam-col">
       <div class="lbl">Freeways near the house</div>
-      <div class="cam"><span class="camtag">LIVE CAMERA</span><img id="camimg" alt="Live ADOT freeway camera"></div>
-      <div class="camfoot"><span class="nm" id="camname">&mdash;</span><span class="mp" id="cammp"></span></div>
+      <div class="cams">
+        <div class="cam"><span class="camtag">LIVE</span><img id="camimg0" alt="Live ADOT freeway camera"><span class="camcap" id="camcap0">&mdash;</span></div>
+        <div class="cam"><span class="camtag">LIVE</span><img id="camimg1" alt="Live ADOT freeway camera"><span class="camcap" id="camcap1">&mdash;</span></div>
+      </div>
+      <div class="mappanel">
+        <div class="lbl" style="margin-top:1cqw">Where the fires are</div>
+        <div class="mapwrap" id="firemap"></div>
+      </div>
     </div>
 
     <!-- border -->
     <div class="col">
-      <div class="card grow">
+      <div class="card grow tall">
         <div class="lbl">Border wait</div>
-        <div class="dir"><span class="arrow">MEXICO &rarr; U.S.</span> how long it takes to get back in, right now</div>
+        <div class="dir"><span class="arrow">MEXICO &rarr; U.S.</span> the wait to get back in, right now</div>
         <div class="scroll" id="border"><div class="none">Loading&hellip;</div></div>
         <div class="meta" style="font-size:0.82cqw;color:var(--faint);font-weight:600;padding-top:0.6cqw">
-          Northbound only. CBP does not publish how long it takes to drive south into Mexico.
+          Northbound only &mdash; CBP publishes no southbound waits.
         </div>
       </div>
       <div class="card grow">
@@ -277,6 +289,56 @@ function fitList(el){
   while(el.scrollHeight > el.clientHeight && el.children.length > 1 && guard--){
     el.removeChild(el.lastElementChild);
   }
+}
+
+/* Approximate AZ gazetteer — for "near <town>" labels only, not navigation.
+   If no listed place is within 45 miles, the label falls back to the county. */
+const AZ_TOWNS = [
+["Flagstaff",35.20,-111.65],["Prescott",34.54,-112.47],["Payson",34.23,-111.32],
+["Sedona",34.87,-111.76],["Show Low",34.25,-110.03],["Tucson",32.22,-110.97],
+["Yuma",32.69,-114.63],["Kingman",35.19,-114.05],["Page",36.91,-111.46],
+["Holbrook",34.90,-110.16],["Winslow",35.02,-110.70],["Globe",33.39,-110.79],
+["Safford",32.83,-109.71],["Willcox",32.25,-109.83],["Benson",31.97,-110.29],
+["Sierra Vista",31.55,-110.30],["Bisbee",31.44,-109.93],["Douglas",31.35,-109.55],
+["Nogales",31.34,-110.93],["Ajo",32.37,-112.86],["Gila Bend",32.95,-112.72],
+["Wickenburg",33.97,-112.73],["Casa Grande",32.88,-111.76],["Florence",33.03,-111.39],
+["Camp Verde",34.56,-111.85],["Cottonwood",34.74,-112.01],["Williams",35.25,-112.19],
+["Grand Canyon",35.97,-112.13],["Tuba City",36.13,-111.24],["Chinle",36.15,-109.55],
+["Window Rock",35.68,-109.05],["St. Johns",34.51,-109.36],["Springerville",34.13,-109.28],
+["Alpine",33.85,-109.14],["Clifton",33.05,-109.30],["Morenci",33.08,-109.36],
+["Duncan",32.72,-109.10],["Superior",33.29,-111.10],["Miami",33.40,-110.87],
+["San Carlos",33.35,-110.45],["Whiteriver",33.84,-109.96],["Heber",34.41,-110.57],
+["Snowflake",34.51,-110.08],["Pinetop",34.13,-109.93],["Young",34.10,-110.95],
+["Roosevelt",33.66,-111.12],["Apache Junction",33.42,-111.58],["Fountain Hills",33.61,-111.72],
+["Cave Creek",33.83,-111.95],["New River",33.92,-112.14],["Black Canyon City",34.07,-112.15],
+["Crown King",34.21,-112.34],["Yarnell",34.22,-112.75],["Congress",34.16,-112.85],
+["Bagdad",34.58,-113.20],["Seligman",35.33,-112.88],["Ash Fork",35.22,-112.48],
+["Chino Valley",34.76,-112.45],["Prescott Valley",34.61,-112.32],["Jerome",34.75,-112.11],
+["Pine",34.38,-111.45],["Happy Jack",34.74,-111.41],["Munds Park",34.94,-111.64],
+["Parker",34.15,-114.29],["Lake Havasu City",34.48,-114.32],["Bullhead City",35.15,-114.57],
+["Quartzsite",33.66,-114.22],["Salome",33.78,-113.61],["Buckeye",33.37,-112.58],
+["Maricopa",33.06,-112.05],["Eloy",32.76,-111.55],["Marana",32.44,-111.22],
+["Oracle",32.61,-110.77],["Mammoth",32.72,-110.64],["Kearny",33.06,-110.91],
+["Tombstone",31.71,-110.07],["Patagonia",31.54,-110.75],["Arivaca",31.58,-111.33],
+["Sells",31.91,-111.88],["Green Valley",31.85,-110.99],["Sonoita",31.68,-110.65],
+["San Luis",32.49,-114.78],["Wellton",32.67,-114.15],["Fredonia",36.95,-112.53],
+["Colorado City",36.99,-112.98],["Jacob Lake",36.71,-112.22],["Cameron",35.87,-111.41],
+["Kayenta",36.73,-110.25],["Ganado",35.71,-109.54],["Sanders",35.22,-109.33],
+["Wikieup",34.70,-113.61],["Peach Springs",35.53,-113.42],["Phoenix",33.45,-112.07],
+["Scottsdale",33.49,-111.92],["Mesa",33.42,-111.83],["Chandler",33.31,-111.84],
+["Glendale",33.54,-112.19],["Peoria",33.58,-112.24],["Surprise",33.63,-112.37],
+["Goodyear",33.44,-112.36],["Anthem",33.87,-112.15],["Queen Creek",33.25,-111.63],
+["Gold Canyon",33.37,-111.44],["Kirkland",34.42,-112.72],["Mayer",34.40,-112.24],
+["Tonopah",33.49,-112.95],["Tortilla Flat",33.53,-111.39],
+];
+function nearTown(lat,lon,county){
+  let best=null,bd=1e9;
+  for(const [n,tla,tlo] of AZ_TOWNS){
+    const d=miles(lat,lon,tla,tlo);
+    if(d<bd){bd=d;best=n;}
+  }
+  if(bd<=45) return 'near '+best;
+  return county ? county+' Co.' : 'remote';
 }
 
 /* ---------- clock ---------- */
@@ -485,8 +547,7 @@ async function load(){
     const val = has ? `${n}<small> min</small>`
                     : (!open ? 'Closed' : (status ? clean(status) : 'No wait posted'));
     return `<div class="bx">
-      <div class="top"><span class="nm">${name}</span><span class="wait ${cls}">${val}</span></div>
-      <div class="meta">Cars &middot; ${clean(x.hours)||'hours not posted'}</div>
+      <div class="top"><span class="nm">${name} <i class="hrs">&middot; ${clean(x.hours)||''}</i></span><span class="wait ${cls}">${val}</span></div>
     </div>`;
   }).join('') : `<div class="none">Border waits unavailable right now.</div>`;
   fitList($('border'));
@@ -511,10 +572,11 @@ async function load(){
       <span class="nm">${clean(f.name)}</span>
       <span class="ac">${acres}</span>
       ${pct!=null?`<span class="ct ${pct<50?'low':''}">${pct}% contained</span>`:''}
-      <span class="mi">${Math.round(mi)} mi</span>
+      <span class="mi">${nearTown(f.lat,f.lon,f.county)}</span>
     </div>`;
   }).join('') : `<div class="none"><b>No active wildfires.</b> Nothing burning on the Arizona reporting list.</div>`;
   fitList($('fires'));
+  fireMap(fires.filter(f => f.state === 'US-AZ' && !f.isRx && f.lat && f.lon));
 
   /* --- Roy ---------------------------------------------------------------
      Mirrors the precedence in src/utils/royForAlert.ts (guardrail G6 says one
@@ -530,6 +592,48 @@ async function load(){
   $('stamp').innerHTML = fail.length
     ? `<span class="err">${fail.join(' + ')} unavailable</span> &nbsp;` + credit
     : credit;
+}
+
+/* ---------- fire map ----------
+   A simplified Arizona outline (equirectangular, x squeezed by cos 34°) with one dot
+   per active fire, sized by acres. The house is the green marker. Top two fires by
+   size get a name label. */
+function fireMap(fires){
+  const el = $('firemap'); if(!el) return;
+  if(!fires.length){ el.innerHTML = '<div class="none">No active wildfires to map.</div>'; return; }
+  const KX = 8.3, KY = 10;                     // deg -> viewBox units
+  const X = lon => (lon + 115.0) * KX;
+  const Y = lat => (37.05 - lat) * KY;
+  const AZ = [[-114.05,37.00],[-109.05,37.00],[-109.05,31.33],[-111.07,31.33],
+    [-114.81,32.49],[-114.72,32.72],[-114.47,32.98],[-114.52,33.03],[-114.62,33.42],
+    [-114.73,33.40],[-114.50,33.70],[-114.43,34.09],[-114.14,34.30],[-114.33,34.45],
+    [-114.47,34.71],[-114.63,34.87],[-114.63,35.10],[-114.57,35.22],[-114.66,35.53],
+    [-114.67,35.87],[-114.73,36.10],[-114.31,36.11],[-114.15,36.02],[-114.05,36.19]];
+  const outline = AZ.map(([lo,la]) => X(lo).toFixed(1)+','+Y(la).toFixed(1)).join(' ');
+  const byAcres = fires.slice().sort((a,b)=>(b.acres||0)-(a.acres||0));
+  const labeled = new Set(byAcres.slice(0,2).map(f=>f.id));
+  let dots = '';
+  for(const f of byAcres.slice(0,14).reverse()){    // draw big ones last, on top
+    const x = X(f.lon), y = Y(f.lat);
+    const r = Math.min(3, 0.8 + Math.sqrt(f.acres||1)/16);
+    dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}"
+      fill="var(--red)" fill-opacity="0.85" stroke="var(--paper)" stroke-width="0.35"/>`;
+    if(labeled.has(f.id)){
+      const left = x > 38;                          // keep labels inside the box
+      dots += `<text x="${(x + (left ? -(r+1) : r+1)).toFixed(1)}" y="${(y+0.9).toFixed(1)}"
+        text-anchor="${left?'end':'start'}" font-size="2.6" font-weight="700"
+        fill="var(--ink)" font-family="Helvetica,Arial,sans-serif">${f.name}</text>`;
+    }
+  }
+  const hx = X(HERE[1]), hy = Y(HERE[0]);
+  el.innerHTML = `<svg viewBox="-2 -2 55 62" preserveAspectRatio="xMidYMid meet"
+      role="img" aria-label="Map of active Arizona wildfires">
+    <polygon points="${outline}" fill="var(--panel)" stroke="var(--faint)" stroke-width="0.45"/>
+    ${dots}
+    <circle cx="${hx.toFixed(1)}" cy="${hy.toFixed(1)}" r="1.1" fill="var(--green)" stroke="var(--paper)" stroke-width="0.35"/>
+    <text x="${(hx+1.9).toFixed(1)}" y="${(hy+0.9).toFixed(1)}" font-size="2.4" font-weight="700"
+      fill="var(--green)" font-family="Helvetica,Arial,sans-serif">Phoenix</text>
+  </svg>`;
 }
 
 /* ---------- Roy ---------- */
@@ -572,15 +676,18 @@ let CAMS = [], ci = 0, camTimer = null;
 function setCams(list){
   CAMS = list; ci = 0;
   if(camTimer) clearInterval(camTimer);
-  showCam(); camTimer = setInterval(()=>{ ci=(ci+1)%CAMS.length; showCam(); }, CAM_MS);
+  showCam(); camTimer = setInterval(()=>{ ci=(ci+2)%CAMS.length; showCam(); }, CAM_MS);
 }
 function showCam(){
-  const c = CAMS[ci]; if(!c) return;
-  const img = $('camimg');
-  img.onerror = () => { if(CAMS.length>1){ ci=(ci+1)%CAMS.length; showCam(); } };
-  img.src = c.imageUrl + (c.imageUrl.includes('?')?'&':'?') + 'cb=' + Date.now();
-  $('camname').textContent = c.title.replace(/\s*@\s*/,' at ');
-  $('cammp').textContent = c.route + (c.mile!=null ? '  ·  MP ' + c.mile : '');
+  if(!CAMS.length) return;
+  for(let k=0;k<2;k++){
+    const c = CAMS[(ci+k)%CAMS.length]; if(!c) continue;
+    const img = $('camimg'+k);
+    img.onerror = () => { img.style.opacity = 0.25; };  // a dead cam dims; next rotation replaces it
+    img.style.opacity = 1;
+    img.src = c.imageUrl + (c.imageUrl.includes('?')?'&':'?') + 'cb=' + Date.now();
+    $('camcap'+k).textContent = c.title.replace(/\s*@\s*/,' at ') + (c.mile!=null ? '  ·  MP ' + c.mile : '');
+  }
 }
 // keep the image itself fresh even between rotations
 setInterval(()=>{ if(CAMS.length) showCam(); }, 60*1000);
