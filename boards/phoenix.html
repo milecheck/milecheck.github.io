@@ -27,7 +27,7 @@
 -->
 <style>
   :root{
-    --u:19.2px;  /* 1% of the 1920px stage — layout never depends on the real viewport */
+    --u:21px;  /* 10-foot UI: ~9% larger than screen-proportional (19.2) on the 1920 stage */
     --paper:#F7F5F0; --panel:#FFFFFF; --ink:#17150F; --dim:#6B675C; --faint:#9A968B;
     --line:#E2DFD6; --green:#0B6E4F; --red:#B0332A; --amber:#8A6414; --amberp:#FBF3DF;
     --heat:#C2410C;
@@ -57,7 +57,7 @@
   .placeline{display:flex;align-items:baseline;gap:calc(var(--u)*0.8)}
   .place h1{font-size:calc(var(--u)*2.4);font-weight:800;letter-spacing:-0.02em}
   .place .sub{font-size:calc(var(--u)*1.05);color:var(--dim);font-weight:600;white-space:nowrap}
-  .hright{display:flex;align-items:baseline;gap:calc(var(--u)*1.6);flex:1;justify-content:flex-end}
+  .hright{display:flex;align-items:baseline;gap:calc(var(--u)*1.6);flex:1;justify-content:flex-end;min-width:0}
   .live{display:flex;align-items:center;gap:calc(var(--u)*0.45);font-size:calc(var(--u)*1);font-weight:800;
         letter-spacing:0.18em;color:var(--green)}
   .live .upd{display:block;font-size:calc(var(--u)*0.78);font-weight:700;letter-spacing:0.04em;
@@ -67,15 +67,15 @@
           animation:pulse 3.5s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   @media (prefers-reduced-motion:reduce){ .live i{animation:none} }
-  .now{display:flex;align-items:baseline;gap:calc(var(--u)*1.4)}
+  .now{display:flex;align-items:baseline;gap:calc(var(--u)*1.4);min-width:0;overflow:hidden;flex:0 1 auto}
   .temp{font-size:calc(var(--u)*2.1);font-weight:800;color:var(--heat);letter-spacing:-0.02em;white-space:nowrap}
   .temp small{font-size:calc(var(--u)*1);font-weight:700;color:var(--dim);letter-spacing:0}
-  .clock{text-align:right}
+  .clock{text-align:right;flex:none}
   .clock .t{font-size:calc(var(--u)*2.1);font-weight:800;letter-spacing:-0.02em;line-height:1;white-space:nowrap}
   .clock .d{font-size:calc(var(--u)*1);color:var(--dim);font-weight:700}
 
   /* five-day outlook, inline beside the current temperature */
-  .fc{display:flex;align-items:baseline;gap:calc(var(--u)*1.1);font-size:calc(var(--u)*0.9);color:var(--dim);font-weight:600;white-space:nowrap}
+  .fc{display:flex;align-items:baseline;gap:calc(var(--u)*1.1);font-size:calc(var(--u)*0.9);color:var(--dim);font-weight:600;white-space:nowrap;overflow:hidden;min-width:0}
   .fc span b{color:var(--ink);font-weight:800}
   .fc span i{font-style:normal;color:var(--faint)}
 
@@ -117,7 +117,7 @@
   .fire{display:flex;align-items:baseline;gap:calc(var(--u)*0.7);padding:calc(var(--u)*0.5) 0;min-width:0;
         border-bottom:calc(var(--u)*0.07) solid var(--line)}
   .fire:last-child{border-bottom:none}
-  .fire .nm{font-size:calc(var(--u)*1.05);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .fire .nm{font-size:calc(var(--u)*1.05);font-weight:800;white-space:nowrap;flex:none;max-width:55%;overflow:hidden;text-overflow:ellipsis}
   .fire .ac{font-size:calc(var(--u)*0.92);color:var(--dim);font-weight:700;white-space:nowrap}
   .fire .ct{font-size:calc(var(--u)*0.85);font-weight:800;white-space:nowrap;color:var(--green)}
   .fire .ct.low{color:var(--heat)}
@@ -275,7 +275,7 @@ function clean(s){ return String(s||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,'
    list genuinely fits — that adapts to any screen instead of hardcoding a count. */
 function fitList(el){
   let guard = 40;
-  while(el.scrollHeight > el.clientHeight && el.children.length > 1 && guard--){
+  while(el.scrollHeight > el.clientHeight + 10 && el.children.length > 1 && guard--){
     el.removeChild(el.lastElementChild);
   }
 }
