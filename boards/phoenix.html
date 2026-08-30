@@ -667,7 +667,7 @@ window.addEventListener('unhandledrejection', ev => showFatal(ev.reason));
   const now = new Date();
   const next = new Date(now); next.setHours(4,30,0,0);
   if(next <= now) next.setDate(next.getDate()+1);
-  setTimeout(()=>location.reload(), next - now);
+  setTimeout(()=>location.replace(location.pathname + '?r=' + Date.now()), next - now);
 })();
 
 Promise.resolve()
