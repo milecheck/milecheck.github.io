@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <title>Phoenix — Road Board</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=1920">
 <meta name="robots" content="noindex,nofollow">
 <!--
   A personal ambient board for a house in Phoenix (85012, uptown — the Central Ave corridor).
@@ -533,10 +533,14 @@ async function load(){
   $('border').innerHTML = rows.length ? rows.map(({x,open,n,has,status})=>{
     const name = x.crossingName ? `${x.portName} &middot; ${x.crossingName}` : x.portName;
     const cls = !has ? 'w-na' : n<=15 ? 'w-ok' : n<=35 ? 'w-mid' : 'w-bad';
-    const val = has ? `${n}<small> min</small>`
-                    : (!open ? 'Closed' : (status ? clean(status) : 'No wait posted'));
+    let val;
+    if (has) val = `${n}<small> min</small>`;
+    else if (!open) val = 'Closed';
+    else if (/pending/i.test(String(status))) val = 'No report';
+    else if (/closed/i.test(String(status))) val = 'Closed';
+    else val = status ? clean(status) : 'No report';
     return `<div class="bx">
-      <div class="top"><span class="nm">${name} <i class="hrs">&middot; ${clean(x.hours)||''}</i></span><span class="wait ${cls}">${val}</span></div>
+      <div class="top"><span class="nm">${name} <i class="hrs">&middot; ${clean(x.hours).replace('/day','')||''}</i></span><span class="wait ${cls}">${val}</span></div>
     </div>`;
   }).join('') : `<div class="none">Border waits unavailable right now.</div>`;
   fitList($('border'));
