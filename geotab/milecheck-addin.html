@@ -66,6 +66,43 @@
   .mc-foot{margin-top:16px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
   .mc-foot a{color:var(--accent);text-decoration:none;font-weight:600;}
   .mc-skeleton{color:var(--muted);padding:20px;text-align:center;}
+
+  /* ---- Fleet Safety strip: crosswind / chains / road surface --------
+     Only renders the conditions that are actually present. An empty
+     safety strip is the correct output on a calm dry day — it must never
+     invent a reassurance ("all clear") the data can't support. */
+  .mc-safety{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .mc-chip{display:flex;align-items:baseline;gap:7px;background:var(--surface);border:1px solid var(--line);
+           border-left:3px solid var(--info);border-radius:3px;padding:8px 12px;min-width:0;}
+  .mc-chip .k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);white-space:nowrap;}
+  .mc-chip .v{font-size:12.5px;color:var(--ink);font-weight:600;}
+  .mc-chip .sub{font-size:11px;color:var(--faint);}
+  .mc-chip.caution{border-left-color:var(--warn);} .mc-chip.caution .k{color:var(--warn);}
+  .mc-chip.strong{border-left-color:var(--warn);background:#fdf8ec;} .mc-chip.strong .k{color:var(--warn);}
+  .mc-chip.dangerous{border-left-color:var(--crit);background:#fbf0ee;} .mc-chip.dangerous .k{color:var(--crit);}
+  .mc-chip.chains{border-left-color:var(--crit);background:#fbf0ee;} .mc-chip.chains .k{color:var(--crit);}
+  .mc-chip.surface{border-left-color:var(--cool);} .mc-chip.surface .k{color:var(--cool);}
+
+  /* ---- Cameras: the actual road, nearest first ---------------------- */
+  .mc-cams{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  @media (max-width:560px){ .mc-cams{grid-template-columns:1fr 1fr;} }
+  .mc-cam{background:var(--surface);border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .mc-cam .shot{width:100%;aspect-ratio:16/9;object-fit:cover;background:#e4e7eb;display:block;}
+  .mc-cam .cap{padding:6px 8px 7px;}
+  .mc-cam .nm{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.3;
+              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .mc-cam .mt{font-size:10.5px;color:var(--faint);margin-top:2px;font-variant-numeric:tabular-nums;}
+
+  /* ---- Drawbridges: only where live status actually exists ---------- */
+  .mc-bridges{display:flex;gap:8px;flex-wrap:wrap;}
+  .mc-bridge{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);
+             border-left:3px solid #1d6b46;border-radius:3px;padding:8px 12px;}
+  .mc-bridge.up{border-left-color:var(--crit);background:#fbf0ee;}
+  .mc-bridge .nm{font-size:12px;font-weight:600;}
+  .mc-bridge .st{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#1d6b46;}
+  .mc-bridge.up .st{color:var(--crit);}
+  .mc-bridge .dist{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;}
+  .mc-block{margin-top:16px;}
 </style>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
   <link rel="canonical" href="https://milecheckapp.com/geotab/milecheck-addin.html">
