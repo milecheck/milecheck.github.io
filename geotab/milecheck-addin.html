@@ -138,6 +138,33 @@
   var DEMO_POS = { lat:47.2400, lon:-122.4300, bearing:0, speed:62 };
   var ALERT_RADIUS_MI = 60, MAX_ALERTS = 12;
 
+  /* ---- Add-on module config (2026-08-29) ---------------------------
+     Fleet Safety, Cameras and Bridges are the modules the Marketplace
+     listing describes. Each is driven by an endpoint already live in
+     production; each renders ONLY when it has real data for this
+     vehicle's position, so a calm dry day correctly shows nothing
+     rather than an invented all-clear. */
+  var CAM_RADIUS_MI = 40, MAX_CAMS = 3;     // nearest cameras worth showing
+  var COND_RADIUS_MI = 60;                  // road-surface report relevance
+  var BRIDGE_RADIUS_MI = 25;                // drawbridges near the vehicle
+
+  // Crosswind thresholds — identical to the phone app (src/utils/wind.ts).
+  // Deliberately NOT directive: a driver-awareness cue, not a legal restriction.
+  var CROSSWIND_CAUTION = 20, CROSSWIND_STRONG = 30, CROSSWIND_DANGEROUS = 40;
+  var COMPASS_TO_DEG = { N:0, NNE:22.5, NE:45, ENE:67.5, E:90, ESE:112.5, SE:135, SSE:157.5,
+                         S:180, SSW:202.5, SW:225, WSW:247.5, W:270, WNW:292.5, NW:315, NNW:337.5 };
+
+  // The FIVE Seattle drawbridges SDOT publishes live status for. University and
+  // Lower Spokane St are deliberately absent — they are not in the live feed, and
+  // claiming status we don't have is the exact overclaim this project guards against.
+  var SEATTLE_BRIDGES = [
+    { id:"WA-bridge-fremont",    name:"Fremont",    lat:47.6567, lon:-122.3501 },
+    { id:"WA-bridge-ballard",    name:"Ballard",    lat:47.6584, lon:-122.3764 },
+    { id:"WA-bridge-montlake",   name:"Montlake",   lat:47.6470, lon:-122.3048 },
+    { id:"WA-bridge-south-park", name:"South Park", lat:47.5285, lon:-122.3133 },
+    { id:"WA-bridge-1st-ave-s",  name:"1st Ave S",  lat:47.5405, lon:-122.3539 }
+  ];
+
   // Bounding boxes — all 50 states (mirrors constants/states.ts). Order matters:
   // first match wins; ID before MT (MT's box extends into the Idaho panhandle).
   var STATE_BOUNDS = {
@@ -226,6 +253,37 @@
   function esc(t){ return (t||"").replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c];}); }
   function el(id){ return document.getElementById(id); }
 
+  /* ---- Crosswind (Fleet Safety module) -----------------------------
+     Mirrors src/utils/wind.ts in the phone app, deliberately identical so
+     the fleet console and the driver's phone can never disagree:
+        crosswind = | wind_speed x sin(wind_direction - heading) |
+     wind_direction is where the wind comes FROM (NWS convention); heading
+     is where the vehicle is GOING. A 40 mph tailwind is fuel; a 40 mph
+     crosswind pushes a trailer — the sine isolates that component. */
+  function crosswindMph(windMph, dirCompass, headingDeg){
+    if(windMph==null||windMph<=0||headingDeg==null) return null;
+    var wd=COMPASS_TO_DEG[(dirCompass||"").toUpperCase()];
+    if(wd==null) return null;
+    var off=wd-headingDeg;
+    while(off>180) off-=360; while(off<-180) off+=360;
+    return Math.abs(windMph*Math.sin(off*Math.PI/180));
+  }
+  function crosswindTier(mph){
+    if(mph==null) return null;
+    if(mph>=CROSSWIND_DANGEROUS) return {cls:"dangerous", label:"Dangerous crosswind"};
+    if(mph>=CROSSWIND_STRONG)    return {cls:"strong",    label:"Strong crosswind"};
+    if(mph>=CROSSWIND_CAUTION)   return {cls:"caution",   label:"Crosswind"};
+    return null; // below 20 mph is not worth a driver's attention
+  }
+  // NWS returns windSpeed as a range string ("10 to 15 mph"); take the upper
+  // bound, matching the phone app's parse.
+  function parseWindMph(s){
+    if(s==null) return null;
+    var nums=String(s).match(/\d+/g);
+    if(!nums||!nums.length) return null;
+    return Math.max.apply(null, nums.map(Number));
+  }
+
   // Triage an alert into the two columns the dispatcher cares about.
   function bucket(a){
     var s=(a.desc||"").toLowerCase();
@@ -277,7 +335,64 @@
       +(data.speed!=null?'<span class="sep">&middot;</span><span class="spd">'+Math.round(data.speed)+' mph</span>':'')
       +'<span class="sep">|</span><span class="state">'+esc(data.state||"")+'</span></div></div>' : '';
 
-    el("mc-content").innerHTML = heroHtml + alertsBlock;
+    /* ---- Fleet Safety strip ----------------------------------------
+       Chain controls are derived from the alerts already loaded rather
+       than a second call — the DOT feed is where chain restrictions
+       live. Renders only what's real; nothing on a calm, dry day. */
+    var chainAlert=null;
+    for(var ci=0; ci<alerts.length; ci++){
+      if(/chain|traction tire|snow tire/i.test(alerts[ci].desc||"")){ chainAlert=alerts[ci]; break; }
+    }
+    var chips=[];
+    if(data.crosswind){
+      chips.push('<div class="mc-chip '+data.crosswind.tier.cls+'">'
+        +'<span class="k">'+esc(data.crosswind.tier.label)+'</span>'
+        +'<span class="v">'+data.crosswind.mph+' mph</span>'
+        +'<span class="sub">wind '+esc(data.crosswind.wind||"")+' from '+esc(data.crosswind.from||"")+'</span></div>');
+    }
+    if(chainAlert){
+      chips.push('<div class="mc-chip chains"><span class="k">Chain control</span>'
+        +'<span class="v">'+esc((chainAlert.route||"In effect")).slice(0,22)+'</span>'
+        +(chainAlert.dist!=null?'<span class="sub">'+(chainAlert.dist<1?"<1":Math.round(chainAlert.dist))+' mi</span>':'')
+        +'</div>');
+    }
+    if(data.surface){
+      chips.push('<div class="mc-chip surface"><span class="k">Road surface</span>'
+        +'<span class="v">'+esc(data.surface.text)+'</span>'
+        +(data.surface.where?'<span class="sub">'+esc(data.surface.where)+'</span>':'')+'</div>');
+    }
+    var safetyBlock = chips.length
+      ? '<div class="mc-section-label">Fleet safety</div><div class="mc-safety">'+chips.join("")+'</div>'
+      : '';
+
+    /* ---- Cameras ---------------------------------------------------- */
+    var camBlock='';
+    if(data.cameras&&data.cameras.length){
+      camBlock='<div class="mc-block"><div class="mc-section-label">Cameras near this vehicle</div><div class="mc-cams">'
+        +data.cameras.map(function(c){
+          var meta=(c.route?esc(c.route):"")+(c.mile!=null?" &middot; MP "+esc(String(c.mile)):"");
+          return '<div class="mc-cam">'
+            +'<img class="shot" loading="lazy" alt="" src="'+esc(c.imageUrl)+'" '
+            +'onerror="this.style.visibility=\'hidden\'">'
+            +'<div class="cap"><div class="nm">'+esc(c.title||"Traffic camera")+'</div>'
+            +'<div class="mt">'+(meta?meta+' &middot; ':'')
+            +(c._d<1?"<1":Math.round(c._d))+' mi</div></div></div>';
+        }).join("")+'</div></div>';
+    }
+
+    /* ---- Drawbridges ------------------------------------------------ */
+    var bridgeBlock='';
+    if(data.bridges&&data.bridges.length){
+      bridgeBlock='<div class="mc-block"><div class="mc-section-label">Drawbridges</div><div class="mc-bridges">'
+        +data.bridges.map(function(b){
+          return '<div class="mc-bridge'+(b.up?' up':'')+'">'
+            +'<span class="nm">'+esc(b.name)+'</span>'
+            +'<span class="st">'+(b.up?'Raised':'Open to traffic')+'</span>'
+            +'<span class="dist">'+(b.dist<1?"<1":Math.round(b.dist))+' mi</span></div>';
+        }).join("")+'</div></div>';
+    }
+
+    el("mc-content").innerHTML = heroHtml + safetyBlock + alertsBlock + camBlock + bridgeBlock;
     el("mc-updated").textContent = "Updated "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
   }
 
@@ -345,6 +460,86 @@
         });
       }).catch(function(){}));
     }
+    /* ---- MODULE: Fleet Safety — crosswind ---------------------------
+       NWS is called directly from the browser (it sends
+       access-control-allow-origin:*, verified). Two hops: /points to get
+       the forecast grid, then the forecast itself. Any failure is silent —
+       a missing crosswind reading must never block the milepost. */
+    if(bearing!=null){
+      jobs.push(
+        fetch("https://api.weather.gov/points/"+lat.toFixed(4)+","+lon.toFixed(4))
+          .then(function(r){ return r.ok?r.json():null; })
+          .then(function(p){
+            var url=p&&p.properties&&p.properties.forecast;
+            return url?fetch(url).then(function(r){ return r.ok?r.json():null; }):null;
+          })
+          .then(function(f){
+            var per=f&&f.properties&&f.properties.periods&&f.properties.periods[0];
+            if(!per) return;
+            var mph=parseWindMph(per.windSpeed);
+            var xw=crosswindMph(mph, per.windDirection, bearing);
+            var tier=crosswindTier(xw);
+            if(tier) out.crosswind={ mph:Math.round(xw), tier:tier, wind:per.windSpeed, from:per.windDirection };
+          }).catch(function(){})
+      );
+    }
+
+    /* ---- MODULE: Fleet Safety — road surface / winter conditions ---- */
+    if(out.alertsAvail){
+      jobs.push(fetch(MILECHECK_API+"/conditions?state="+state)
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          var list=(j&&j["road-weather-reports"])||[], best=null, bd=Infinity;
+          list.forEach(function(c){
+            var la=c.latitude!=null?c.latitude:(c.location&&c.location["start-location"]||{})["start-lat"];
+            var lo=c.longitude!=null?c.longitude:(c.location&&c.location["start-location"]||{})["start-long"];
+            if(la==null||lo==null) return;
+            var d=haversine(lat,lon,la,lo);
+            if(d<=COND_RADIUS_MI && d<bd){ bd=d; best=c; }
+          });
+          // Only surface a report that actually says something. Off-season
+          // placeholders ("Reports have ended for this season") are noise in
+          // a fleet console and get dropped.
+          if(!best) return;
+          var txt=(best["road-surface-condition"]||"").trim();
+          if(!txt || /reports have ended|no report|not reported/i.test(txt)) return;
+          out.surface={ text:txt.slice(0,90), where:(best["location-name"]||"").slice(0,40), dist:bd };
+        }).catch(function(){}));
+    }
+
+    /* ---- MODULE: Cameras — see the actual road ---------------------- */
+    jobs.push(fetch(MILECHECK_API+"/cameras?state="+state)
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        var cams=(j&&j.cameras)||[];
+        var near=cams.filter(function(c){
+          return c && c.isActive!==false && c.imageUrl && c.lat!=null && c.lon!=null;
+        }).map(function(c){
+          c._d=haversine(lat,lon,c.lat,c.lon); return c;
+        }).filter(function(c){ return c._d<=CAM_RADIUS_MI; })
+          .sort(function(a,b){ return a._d-b._d; })
+          .slice(0,MAX_CAMS);
+        if(near.length) out.cameras=near;
+      }).catch(function(){}));
+
+    /* ---- MODULE: Drawbridges — live raised/lowered ------------------
+       Only the five bridges SDOT actually publishes, and only when the
+       vehicle is near them. Elsewhere the module renders nothing. */
+    var nearBridges=SEATTLE_BRIDGES.map(function(b){
+      return { b:b, d:haversine(lat,lon,b.lat,b.lon) };
+    }).filter(function(x){ return x.d<=BRIDGE_RADIUS_MI; })
+      .sort(function(x,y){ return x.d-y.d; });
+    if(nearBridges.length){
+      jobs.push(fetch(MILECHECK_API+"/bridge-status")
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          var raised=(j&&j.raised)||[];
+          out.bridges=nearBridges.map(function(x){
+            return { name:x.b.name, dist:x.d, up:raised.indexOf(x.b.id)>=0 };
+          });
+        }).catch(function(){}));
+    }
+
     Promise.all(jobs).then(function(){
       out.alerts.sort(function(a,b){ var sev={high:0,med:1,low:2};
         if(sev[a.sev]!==sev[b.sev]) return sev[a.sev]-sev[b.sev];
