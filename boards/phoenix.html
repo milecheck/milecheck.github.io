@@ -445,6 +445,7 @@ async function load(){
     fetch(API+'/border-crossings').then(r=>r.json()).then(d=>crossings=d['border-crossings']||[]).catch(()=>fail.push('border')),
     fetch(API+'/fires').then(r=>r.json()).then(d=>fires=d.fires||[]).catch(()=>fail.push('fires')),
   ]);
+  if(fail.length < 4) DATA_OK = true;
   if(fail.length === 4){
     document.querySelectorAll('.scroll').forEach(el =>
       el.innerHTML = '<div class="none">No connection to the road data right now.</div>');
@@ -638,7 +639,15 @@ function showCam(){
 // keep the image itself fresh even between rotations
 setInterval(()=>{ if(CAMS.length) showCam(); }, 60*1000);
 
+let DATA_OK = false, FATAL_SHOWN = false;
 function showFatal(e){
+  const msg = e && e.message ? e.message : String(e || '');
+  // TV browsers emit bare "Script error." for harmless cross-origin noise (a camera
+  // image dropping, an extension). Only shout when we have something actionable AND
+  // the board has never successfully loaded its data.
+  if(DATA_OK || FATAL_SHOWN) return;
+  if(!msg || /^Script error\.?$/i.test(msg)) return;
+  FATAL_SHOWN = true;
   const box = document.createElement('div');
   box.style.cssText = 'position:fixed;left:2vw;right:2vw;bottom:2vw;z-index:99;'
     + 'background:#B0332A;color:#fff;font:600 15px/1.5 Helvetica,Arial,sans-serif;'
@@ -647,6 +656,7 @@ function showFatal(e){
     + '  —  if this says "Load failed" or mentions CORS, the browser is blocking a page opened '
     + 'straight from a file. Open it from a web address instead.';
   document.body.appendChild(box);
+  setTimeout(()=>box.remove(), 60*1000);   // never parked on a TV forever
 }
 window.addEventListener('error', ev => showFatal(ev.error || ev.message));
 window.addEventListener('unhandledrejection', ev => showFatal(ev.reason));
