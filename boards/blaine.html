@@ -14,88 +14,88 @@
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.01em;
     -webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
   #stage{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;
-    background:var(--paper);container-type:inline-size;display:flex;flex-direction:column;overflow:hidden}
+    background:var(--paper);display:flex;flex-direction:column;overflow:hidden}
 
-  header{flex:none;display:flex;align-items:center;gap:1.1cqw;padding:1.5cqw 2cqw;
+  header{flex:none;display:flex;align-items:center;gap:min(1.1vw, 1.956vh);padding:min(1.5vw, 2.667vh) min(2vw, 3.556vh);
     background:var(--card);border-bottom:1px solid var(--line)}
-  .dot{width:1.4cqw;height:1.4cqw;border-radius:50%;background:var(--green);flex:none;
-    box-shadow:0 0 1.2cqw rgba(20,122,84,.45)}
-  .host{font-size:2cqw;font-weight:800;line-height:1.1}
-  .pow{font-size:1.1cqw;font-weight:600;color:var(--dim)}
-  .hspace{margin-left:auto;display:flex;align-items:center;gap:1.6cqw}
-  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
-  .clock small{display:block;font-size:1.05cqw;font-weight:700;color:var(--dim)}
-  .live{display:flex;align-items:center;gap:.55cqw;font-size:1.2cqw;font-weight:800;
+  .dot{width:min(1.4vw, 2.489vh);height:min(1.4vw, 2.489vh);border-radius:50%;background:var(--green);flex:none;
+    box-shadow:0 0 min(1.2vw, 2.133vh) rgba(20,122,84,.45)}
+  .host{font-size:min(2vw, 3.556vh);font-weight:800;line-height:1.1}
+  .pow{font-size:min(1.1vw, 1.956vh);font-weight:600;color:var(--dim)}
+  .hspace{margin-left:auto;display:flex;align-items:center;gap:min(1.6vw, 2.844vh)}
+  .clock{font-size:min(1.9vw, 3.378vh);font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+  .clock small{display:block;font-size:min(1.05vw, 1.867vh);font-weight:700;color:var(--dim)}
+  .live{display:flex;align-items:center;gap:min(.55vw, 0.978vh);font-size:min(1.2vw, 2.133vh);font-weight:800;
     letter-spacing:.13em;color:var(--green)}
-  .live i{width:.85cqw;height:.85cqw;border-radius:50%;background:var(--green);display:block;
+  .live i{width:min(.85vw, 1.511vh);height:min(.85vw, 1.511vh);border-radius:50%;background:var(--green);display:block;
     animation:pulse 2s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 
-  main{flex:1;min-height:0;display:flex;flex-direction:column;padding:1.3cqw 2cqw;gap:1cqw}
-  .dirline{flex:none;display:flex;align-items:baseline;gap:1cqw}
-  .dirline h1{font-size:2.5cqw;font-weight:800;letter-spacing:-.02em}
-  .dirline .note{font-size:1.25cqw;font-weight:700;color:var(--dim);margin-left:auto}
+  main{flex:1;min-height:0;display:flex;flex-direction:column;padding:min(1.3vw, 2.311vh) min(2vw, 3.556vh);gap:min(1vw, 1.778vh)}
+  .dirline{flex:none;display:flex;align-items:baseline;gap:min(1vw, 1.778vh)}
+  .dirline h1{font-size:min(2.5vw, 4.444vh);font-weight:800;letter-spacing:-.02em}
+  .dirline .note{font-size:min(1.25vw, 2.222vh);font-weight:700;color:var(--dim);margin-left:auto}
 
-  .grid{flex:1.5;min-height:0;display:flex;gap:1.2cqw}
-  .x{flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:.5cqw;
-     background:var(--card);padding:.85cqw 1.1cqw;display:flex;flex-direction:column;gap:.3cqw;
+  .grid{flex:1.5;min-height:0;display:flex;gap:min(1.2vw, 2.133vh)}
+  .x{flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:min(.5vw, 0.889vh);
+     background:var(--card);padding:min(.85vw, 1.511vh) min(1.1vw, 1.956vh);display:flex;flex-direction:column;gap:min(.3vw, 0.533vh);
      transition:box-shadow .4s ease,border-color .4s ease}
   .x.best{border-color:var(--green);background:#eef6f1;box-shadow:inset 0 0 0 1px var(--green)}
   .x.shut{background:#f4f2ec}
-  .flag{font-size:1cqw;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
-    color:var(--dim);height:1.2cqw}
+  .flag{font-size:min(1vw, 1.778vh);font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--dim);height:min(1.2vw, 2.133vh)}
   .x.best .flag{color:var(--green)}
-  .xname{font-size:1.85cqw;font-weight:800;line-height:1.05}
-  .xsub{font-size:1.1cqw;font-weight:700;color:var(--dim)}
+  .xname{font-size:min(1.85vw, 3.289vh);font-weight:800;line-height:1.05}
+  .xsub{font-size:min(1.1vw, 1.956vh);font-weight:700;color:var(--dim)}
   /* Lane matrix — mirrors the app's border popup exactly: direction across the
      top, lane type down the side. The old layout showed one orphan "Trucks
      north" row with nothing to compare it against, which read as noise. */
-  .mx{margin-top:.3cqw;display:grid;grid-template-columns:auto 1fr 1fr;
-    column-gap:.7cqw;row-gap:.1cqw;align-items:baseline}
-  .mxh{font-size:1.05cqw;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--dim);white-space:nowrap;padding-bottom:.22cqw;
-    border-bottom:1px solid var(--line);margin-bottom:.22cqw}
+  .mx{margin-top:min(.3vw, 0.533vh);display:grid;grid-template-columns:auto 1fr 1fr;
+    column-gap:min(.7vw, 1.244vh);row-gap:min(.1vw, 0.178vh);align-items:baseline}
+  .mxh{font-size:min(1.05vw, 1.867vh);font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--dim);white-space:nowrap;padding-bottom:min(.22vw, 0.391vh);
+    border-bottom:1px solid var(--line);margin-bottom:min(.22vw, 0.391vh)}
   .x.best .mxh{border-bottom-color:rgba(20,122,84,.35)}
-  .mxc{font-size:1.05cqw;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  .mxc{font-size:min(1.05vw, 1.867vh);font-weight:800;letter-spacing:.07em;text-transform:uppercase;
     color:var(--dim);white-space:nowrap}
-  .wait{font-size:2.5cqw;font-weight:800;line-height:1.06;letter-spacing:-.03em;
+  .wait{font-size:min(2.5vw, 4.444vh);font-weight:800;line-height:1.06;letter-spacing:-.03em;
     font-variant-numeric:tabular-nums;transition:color .4s ease;white-space:nowrap}
   .wait.ok{color:var(--green)} .wait.mid{color:var(--amber)} .wait.bad{color:var(--red)}
-  .wait.na{color:var(--dim);font-size:1.5cqw;letter-spacing:-.01em;font-weight:700}
-  .unit{font-size:1.05cqw;font-weight:700;color:var(--dim);margin-left:.2cqw}
+  .wait.na{color:var(--dim);font-size:min(1.5vw, 2.667vh);letter-spacing:-.01em;font-weight:700}
+  .unit{font-size:min(1.05vw, 1.867vh);font-weight:700;color:var(--dim);margin-left:min(.2vw, 0.356vh)}
   /* natural-fit camera — same fix as the Ritch board: whole WSDOT frame,
      header + timestamp intact, caption as its own bar rather than an overlay */
-  .camrow{flex:1.45;min-height:0;display:flex;gap:1.2cqw;overflow:hidden}
-  .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
+  .camrow{flex:1.45;min-height:0;display:flex;gap:min(1.2vw, 2.133vh);overflow:hidden}
+  .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:min(.45vw, 0.8vh);overflow:hidden;
     background:#14171a;display:flex;flex-direction:column}
   .campane{flex:1;min-height:0;position:relative;display:flex;align-items:center;
-    justify-content:center;padding:.25cqw}
+    justify-content:center;padding:min(.25vw, 0.444vh)}
   .campane img{width:100%;height:100%;object-fit:contain;display:block;animation:fade .45s ease}
-  .camtag{position:absolute;top:.7cqw;left:.7cqw;z-index:2;font-size:.95cqw;font-weight:800;
-    letter-spacing:.12em;background:var(--red);color:#fff;padding:.25cqw .7cqw;border-radius:.25cqw}
-  .camcap{flex:none;background:var(--card);border-top:1px solid var(--line);padding:.5cqw 1cqw;
-    display:flex;align-items:center;font-size:1.3cqw;font-weight:800}
-  .camcap .mp{margin-left:auto;font-weight:800;color:var(--dim);font-size:1.15cqw}
-  .lanes{margin-top:.2cqw;display:flex;flex-direction:column;gap:.2cqw}
-  .lane{display:flex;font-size:1.25cqw;font-weight:700;font-variant-numeric:tabular-nums}
+  .camtag{position:absolute;top:min(.7vw, 1.244vh);left:min(.7vw, 1.244vh);z-index:2;font-size:min(.95vw, 1.689vh);font-weight:800;
+    letter-spacing:.12em;background:var(--red);color:#fff;padding:min(.25vw, 0.444vh) min(.7vw, 1.244vh);border-radius:min(.25vw, 0.444vh)}
+  .camcap{flex:none;background:var(--card);border-top:1px solid var(--line);padding:min(.5vw, 0.889vh) min(1vw, 1.778vh);
+    display:flex;align-items:center;font-size:min(1.3vw, 2.311vh);font-weight:800}
+  .camcap .mp{margin-left:auto;font-weight:800;color:var(--dim);font-size:min(1.15vw, 2.044vh)}
+  .lanes{margin-top:min(.2vw, 0.356vh);display:flex;flex-direction:column;gap:min(.2vw, 0.356vh)}
+  .lane{display:flex;font-size:min(1.25vw, 2.222vh);font-weight:700;font-variant-numeric:tabular-nums}
   .lane span:last-child{margin-left:auto}
   .lane .off{color:var(--dim);font-weight:700}
-  .hrs{margin-top:auto;padding-top:.35cqw;border-top:1px solid var(--line);
-    display:flex;font-size:1.1cqw;font-weight:700;color:var(--dim)}
+  .hrs{margin-top:auto;padding-top:min(.35vw, 0.622vh);border-top:1px solid var(--line);
+    display:flex;font-size:min(1.1vw, 1.956vh);font-weight:700;color:var(--dim)}
   .hrs span:last-child{margin-left:auto;font-weight:800;color:var(--ink)}
 
   footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
-  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2cqw;min-width:0}
-  .adtag{flex:none;font-size:1cqw;font-weight:800;letter-spacing:.13em;color:#fff;
-    background:var(--amber);padding:.35cqw .9cqw;border-radius:.25cqw}
-  .adtxt{font-size:1.65cqw;font-weight:700;color:#6d4a10;white-space:nowrap;overflow:hidden;
+  .ad{flex:1;display:flex;align-items:center;gap:min(1.2vw, 2.133vh);padding:min(1.1vw, 1.956vh) min(2vw, 3.556vh);min-width:0}
+  .adtag{flex:none;font-size:min(1vw, 1.778vh);font-weight:800;letter-spacing:.13em;color:#fff;
+    background:var(--amber);padding:min(.35vw, 0.622vh) min(.9vw, 1.6vh);border-radius:min(.25vw, 0.444vh)}
+  .adtxt{font-size:min(1.65vw, 2.933vh);font-weight:700;color:#6d4a10;white-space:nowrap;overflow:hidden;
     text-overflow:ellipsis;animation:fade .5s ease}
   @keyframes fade{from{opacity:0}to{opacity:1}}
-  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.8cqw 2cqw .8cqw 1.4cqw;
+  .qr{flex:none;display:flex;align-items:center;gap:min(.9vw, 1.6vh);padding:min(.8vw, 1.422vh) min(2vw, 3.556vh) min(.8vw, 1.422vh) min(1.4vw, 2.489vh);
     border-left:1px solid rgba(181,119,26,.45)}
-  .qr svg{width:5cqw;height:5cqw;display:block;shape-rendering:crispEdges;background:#fff;padding:.7cqw;border-radius:.25cqw;box-shadow:0 0 0 .1cqw rgba(0,0,0,.06)}
-  .qrtx{font-size:1.15cqw;font-weight:800;color:#6d4a10;line-height:1.3}
-  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:1cqw}
+  .qr svg{width:min(5vw, 8.889vh);height:min(5vw, 8.889vh);display:block;shape-rendering:crispEdges;background:#fff;padding:min(.7vw, 1.244vh);border-radius:min(.25vw, 0.444vh);box-shadow:0 0 0 min(.1vw, 0.178vh) rgba(0,0,0,.06)}
+  .qrtx{font-size:min(1.15vw, 2.044vh);font-weight:800;color:#6d4a10;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:min(1vw, 1.778vh)}
 </style>
 
 <div id="stage">

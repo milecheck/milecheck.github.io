@@ -19,56 +19,56 @@
   /* 16:9 stage that fills whatever screen it's on */
   #stage{
     width:100vw; height:56.25vw; max-height:100vh; max-width:177.78vh;
-    background:var(--paper); container-type:inline-size;
+    background:var(--paper); 
     display:flex; flex-direction:column; overflow:hidden; position:relative;
   }
 
   /* ---------- header ---------- */
   header{
-    flex:none; display:flex; align-items:center; gap:1.1cqw;
-    padding:1.5cqw 2cqw; background:var(--card); border-bottom:1px solid var(--line);
+    flex:none; display:flex; align-items:center; gap:min(1.1vw, 1.956vh);
+    padding:min(1.5vw, 2.667vh) min(2vw, 3.556vh); background:var(--card); border-bottom:1px solid var(--line);
   }
-  .dot{width:1.4cqw;height:1.4cqw;border-radius:50%;background:var(--green);flex:none;
-       box-shadow:0 0 1.2cqw rgba(20,122,84,.45)}
-  .host{font-size:2cqw;font-weight:800;line-height:1.1}
-  .pow{font-size:1.1cqw;font-weight:600;color:var(--dim)}
-  .hspace{margin-left:auto;display:flex;align-items:center;gap:1.6cqw}
-  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums}
-  .clock small{display:block;font-size:1.05cqw;font-weight:700;color:var(--dim);letter-spacing:.02em}
-  .live{display:flex;align-items:center;gap:.55cqw;font-size:1.2cqw;font-weight:800;
+  .dot{width:min(1.4vw, 2.489vh);height:min(1.4vw, 2.489vh);border-radius:50%;background:var(--green);flex:none;
+       box-shadow:0 0 min(1.2vw, 2.133vh) rgba(20,122,84,.45)}
+  .host{font-size:min(2vw, 3.556vh);font-weight:800;line-height:1.1}
+  .pow{font-size:min(1.1vw, 1.956vh);font-weight:600;color:var(--dim)}
+  .hspace{margin-left:auto;display:flex;align-items:center;gap:min(1.6vw, 2.844vh)}
+  .clock{font-size:min(1.9vw, 3.378vh);font-weight:800;font-variant-numeric:tabular-nums}
+  .clock small{display:block;font-size:min(1.05vw, 1.867vh);font-weight:700;color:var(--dim);letter-spacing:.02em}
+  .live{display:flex;align-items:center;gap:min(.55vw, 0.978vh);font-size:min(1.2vw, 2.133vh);font-weight:800;
         letter-spacing:.13em;color:var(--green)}
-  .live i{width:.85cqw;height:.85cqw;border-radius:50%;background:var(--green);display:block;
+  .live i{width:min(.85vw, 1.511vh);height:min(.85vw, 1.511vh);border-radius:50%;background:var(--green);display:block;
           animation:pulse 2s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 
   /* ---------- body ---------- */
-  main{flex:1;min-height:0;display:flex;gap:1.4cqw;padding:1.5cqw 2cqw}
-  .left{flex:1.02;display:flex;flex-direction:column;gap:1.1cqw;min-height:0}
-  .right{flex:1.24;display:flex;flex-direction:column;gap:.9cqw;min-height:0}
+  main{flex:1;min-height:0;display:flex;gap:min(1.4vw, 2.489vh);padding:min(1.5vw, 2.667vh) min(2vw, 3.556vh)}
+  .left{flex:1.02;display:flex;flex-direction:column;gap:min(1.1vw, 1.956vh);min-height:0}
+  .right{flex:1.24;display:flex;flex-direction:column;gap:min(.9vw, 1.6vh);min-height:0}
 
-  .eyebrow{font-size:1.25cqw;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
-  .passname{font-size:3.3cqw;font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:.3cqw}
-  .status{font-size:5.4cqw;font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:.6cqw}
+  .eyebrow{font-size:min(1.25vw, 2.222vh);font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+  .passname{font-size:min(3.3vw, 5.867vh);font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:min(.3vw, 0.533vh)}
+  .status{font-size:min(5.4vw, 9.6vh);font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:min(.6vw, 1.067vh)}
   .st-open{color:var(--green)} .st-warn{color:var(--amber)} .st-bad{color:var(--red)} .st-unknown{color:var(--dim)}
-  .statusline{font-size:1.3cqw;font-weight:700;color:var(--dim);margin-top:.4cqw;line-height:1.3}
+  .statusline{font-size:min(1.3vw, 2.311vh);font-weight:700;color:var(--dim);margin-top:min(.4vw, 0.711vh);line-height:1.3}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
-        padding:.9cqw 1.2cqw;display:flex;flex-direction:column;gap:.5cqw}
-  .card h4{font-size:1.1cqw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-  .row{display:flex;align-items:baseline;gap:.8cqw;font-size:1.5cqw;font-weight:700}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:min(.45vw, 0.8vh);overflow:hidden;
+        padding:min(.9vw, 1.6vh) min(1.2vw, 2.133vh);display:flex;flex-direction:column;gap:min(.5vw, 0.889vh)}
+  .card h4{font-size:min(1.1vw, 1.956vh);font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .row{display:flex;align-items:baseline;gap:min(.8vw, 1.422vh);font-size:min(1.5vw, 2.667vh);font-weight:700}
   .row .v{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
   .row .v.warn{color:var(--amber)} .row .v.bad{color:var(--red)} .row .v.ok{color:var(--green)}
-  .row .v.pend{color:var(--dim);font-weight:700;font-size:1.25cqw}
+  .row .v.pend{color:var(--dim);font-weight:700;font-size:min(1.25vw, 2.222vh)}
   .muted{color:var(--dim);font-weight:700}
 
   /* alerts list */
   #alerts{flex:1;min-height:0;overflow:hidden}
-  .al{display:flex;gap:.8cqw;padding:.6cqw 0;border-bottom:1px dashed var(--line);font-size:1.35cqw;font-weight:700}
+  .al{display:flex;gap:min(.8vw, 1.422vh);padding:min(.6vw, 1.067vh) 0;border-bottom:1px dashed var(--line);font-size:min(1.35vw, 2.4vh);font-weight:700}
   .al:last-child{border-bottom:none}
-  .al .mp{flex:none;width:6.4cqw;color:var(--dim);font-variant-numeric:tabular-nums}
+  .al .mp{flex:none;width:min(6.4vw, 11.378vh);color:var(--dim);font-variant-numeric:tabular-nums}
   .al .tx{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .al.hot .tx{color:var(--red)}
-  .none{color:var(--dim);font-size:1.4cqw;font-weight:700;margin:auto;text-align:center;line-height:1.5}
+  .none{color:var(--dim);font-size:min(1.4vw, 2.489vh);font-weight:700;margin:auto;text-align:center;line-height:1.5}
 
   /* camera */
   /* NATURAL-FIT sizing (the fix from the Ritch board): the image sits at its own
@@ -76,9 +76,9 @@
      timestamp footer stay fully visible. `cover` cropped the header off and ran
      our caption straight through their timestamp. Caption is its own bar below
      the image, never an overlay. */
-  .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:.45cqw;overflow:hidden;
+  .camwrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:min(.45vw, 0.8vh);overflow:hidden;
            background:#14171a;display:flex;flex-direction:column}
-  .campane{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;padding:.3cqw}
+  .campane{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;padding:min(.3vw, 0.533vh)}
   /* Fill the panel but keep the WHOLE frame: object-fit:contain scales UP
      (max-width alone caps at WSDOT's native 320px and leaves it swimming in
      black). Slight softness beats a postage stamp on a wall TV. */
@@ -86,51 +86,51 @@
                animation:fadein .45s ease}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   .camcap{flex:none;background:var(--card);border-top:1px solid var(--line);
-          padding:.6cqw 1.2cqw;display:flex;align-items:center;gap:1cqw;color:var(--ink)}
-  .camcap .nm{font-size:1.6cqw;font-weight:800;line-height:1.15}
-  .camcap .mp{margin-left:auto;font-size:1.35cqw;font-weight:800;font-variant-numeric:tabular-nums;
-              background:rgba(23,21,15,.08);padding:.25cqw .8cqw;border-radius:.3cqw;color:var(--dim)}
-  .camtag{position:absolute;top:.9cqw;left:.9cqw;z-index:2;font-size:1cqw;font-weight:800;
-          letter-spacing:.12em;background:var(--red);color:#fff;padding:.3cqw .8cqw;border-radius:.25cqw}
+          padding:min(.6vw, 1.067vh) min(1.2vw, 2.133vh);display:flex;align-items:center;gap:min(1vw, 1.778vh);color:var(--ink)}
+  .camcap .nm{font-size:min(1.6vw, 2.844vh);font-weight:800;line-height:1.15}
+  .camcap .mp{margin-left:auto;font-size:min(1.35vw, 2.4vh);font-weight:800;font-variant-numeric:tabular-nums;
+              background:rgba(23,21,15,.08);padding:min(.25vw, 0.444vh) min(.8vw, 1.422vh);border-radius:min(.3vw, 0.533vh);color:var(--dim)}
+  .camtag{position:absolute;top:min(.9vw, 1.6vh);left:min(.9vw, 1.6vh);z-index:2;font-size:min(1vw, 1.778vh);font-weight:800;
+          letter-spacing:.12em;background:var(--red);color:#fff;padding:min(.3vw, 0.533vh) min(.8vw, 1.422vh);border-radius:min(.25vw, 0.444vh)}
   /* Corridor strip: camera names and mileposts mean nothing to someone who
      doesn't drive I-90 weekly, so place each camera geographically between here
      and the pass. Doubles as the rotation indicator. */
-  .strip{flex:none;position:relative;height:5.4cqw;margin-top:.2cqw}
-  .strip .axis{position:absolute;left:0;right:0;top:2.5cqw;height:.22cqw;background:var(--line);border-radius:99px}
-  .strip .done{position:absolute;left:0;top:2.5cqw;height:.22cqw;background:var(--green);
+  .strip{flex:none;position:relative;height:min(5.4vw, 9.6vh);margin-top:min(.2vw, 0.356vh)}
+  .strip .axis{position:absolute;left:0;right:0;top:min(2.5vw, 4.444vh);height:min(.22vw, 0.391vh);background:var(--line);border-radius:99px}
+  .strip .done{position:absolute;left:0;top:min(2.5vw, 4.444vh);height:min(.22vw, 0.391vh);background:var(--green);
     border-radius:99px;transition:width .5s ease}
-  .strip .cam{position:absolute;top:2.05cqw;width:1.1cqw;height:1.1cqw;border-radius:50%;
-    background:var(--card);border:.18cqw solid var(--dim);transform:translateX(-50%);
+  .strip .cam{position:absolute;top:min(2.05vw, 3.644vh);width:min(1.1vw, 1.956vh);height:min(1.1vw, 1.956vh);border-radius:50%;
+    background:var(--card);border:min(.18vw, 0.32vh) solid var(--dim);transform:translateX(-50%);
     transition:all .35s ease}
-  .strip .cam.on{background:var(--green);border-color:var(--green);width:1.7cqw;height:1.7cqw;
-    top:1.78cqw;box-shadow:0 0 0 .35cqw rgba(20,122,84,.18)}
+  .strip .cam.on{background:var(--green);border-color:var(--green);width:min(1.7vw, 3.022vh);height:min(1.7vw, 3.022vh);
+    top:min(1.78vw, 3.164vh);box-shadow:0 0 0 min(.35vw, 0.622vh) rgba(20,122,84,.18)}
   .strip .cam.past{background:var(--green);border-color:var(--green)}
-  .strip .end{position:absolute;top:0;font-size:1.15cqw;font-weight:800;color:var(--ink);
+  .strip .end{position:absolute;top:0;font-size:min(1.15vw, 2.044vh);font-weight:800;color:var(--ink);
     letter-spacing:-.01em;white-space:nowrap}
   .strip .end.r{right:0;text-align:right;color:var(--dim)}
-  .strip .lm{position:absolute;top:3.5cqw;font-size:1.05cqw;font-weight:700;color:var(--dim);
+  .strip .lm{position:absolute;top:min(3.5vw, 6.222vh);font-size:min(1.05vw, 1.867vh);font-weight:700;color:var(--dim);
     transform:translateX(-50%);white-space:nowrap}
-  .strip .sum{position:absolute;top:1.55cqw;width:.16cqw;height:2.1cqw;background:var(--amber);
+  .strip .sum{position:absolute;top:min(1.55vw, 2.756vh);width:min(.16vw, 0.284vh);height:min(2.1vw, 3.733vh);background:var(--amber);
     transform:translateX(-50%)}
-  .strip .sumlb{position:absolute;top:0;font-size:1.05cqw;font-weight:800;color:var(--amber);
+  .strip .sumlb{position:absolute;top:0;font-size:min(1.05vw, 1.867vh);font-weight:800;color:var(--amber);
     transform:translateX(-50%);white-space:nowrap}
-  .strip .live{position:absolute;top:3.5cqw;font-size:1.05cqw;font-weight:800;color:var(--green);
+  .strip .live{position:absolute;top:min(3.5vw, 6.222vh);font-size:min(1.05vw, 1.867vh);font-weight:800;color:var(--green);
     transform:translateX(-50%);white-space:nowrap;transition:left .35s ease}
 
   /* ---------- footer / ad + QR ---------- */
   footer{flex:none;display:flex;align-items:stretch;border-top:1px solid var(--amber);background:#f6efdd}
-  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2cqw;min-width:0}
-  .adtag{flex:none;font-size:1cqw;font-weight:800;letter-spacing:.13em;color:#fff;
-         background:var(--amber);padding:.35cqw .9cqw;border-radius:.25cqw}
-  .adtxt{font-size:1.65cqw;font-weight:700;color:#6d4a10;white-space:nowrap;overflow:hidden;
+  .ad{flex:1;display:flex;align-items:center;gap:min(1.2vw, 2.133vh);padding:min(1.1vw, 1.956vh) min(2vw, 3.556vh);min-width:0}
+  .adtag{flex:none;font-size:min(1vw, 1.778vh);font-weight:800;letter-spacing:.13em;color:#fff;
+         background:var(--amber);padding:min(.35vw, 0.622vh) min(.9vw, 1.6vh);border-radius:min(.25vw, 0.444vh)}
+  .adtxt{font-size:min(1.65vw, 2.933vh);font-weight:700;color:#6d4a10;white-space:nowrap;overflow:hidden;
          text-overflow:ellipsis;animation:fadein .5s ease}
-  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.8cqw 2cqw .8cqw 1.4cqw;
+  .qr{flex:none;display:flex;align-items:center;gap:min(.9vw, 1.6vh);padding:min(.8vw, 1.422vh) min(2vw, 3.556vh) min(.8vw, 1.422vh) min(1.4vw, 2.489vh);
       border-left:1px solid rgba(181,119,26,.45)}
-  .qr svg{width:5cqw;height:5cqw;display:block;shape-rendering:crispEdges;background:#fff;padding:.7cqw;border-radius:.25cqw;box-shadow:0 0 0 .1cqw rgba(0,0,0,.06)}
-  .qrtx{font-size:1.15cqw;font-weight:800;color:#6d4a10;line-height:1.3}
-  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:1cqw}
+  .qr svg{width:min(5vw, 8.889vh);height:min(5vw, 8.889vh);display:block;shape-rendering:crispEdges;background:#fff;padding:min(.7vw, 1.244vh);border-radius:min(.25vw, 0.444vh);box-shadow:0 0 0 min(.1vw, 0.178vh) rgba(0,0,0,.06)}
+  .qrtx{font-size:min(1.15vw, 2.044vh);font-weight:800;color:#6d4a10;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:#8a6a2a;font-size:min(1vw, 1.778vh)}
 
-  .seasonal{font-size:1.1cqw;font-weight:700;color:var(--dim);line-height:1.4}
+  .seasonal{font-size:min(1.1vw, 1.956vh);font-weight:700;color:var(--dim);line-height:1.4}
 </style>
 
 <div id="stage">

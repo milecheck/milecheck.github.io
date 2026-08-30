@@ -19,50 +19,50 @@
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
   #stage{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;
-    container-type:inline-size;position:relative;overflow:hidden;
+    position:relative;overflow:hidden;
     background:
       radial-gradient(120% 80% at 50% -10%, rgba(201,154,78,.16) 0%, transparent 60%),
       linear-gradient(178deg, var(--wood2) 0%, var(--wood) 55%, #1b130d 100%)}
   /* wood grain, faint and irregular */
   #stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
     background:repeating-linear-gradient(91deg,
-      rgba(255,225,180,.030) 0 .18cqw, transparent .18cqw .7cqw,
-      rgba(0,0,0,.05) .7cqw 1.05cqw, transparent 1.05cqw 2.3cqw)}
+      rgba(255,225,180,.030) 0 min(.18vw, 0.32vh), transparent min(.18vw, 0.32vh) min(.7vw, 1.244vh),
+      rgba(0,0,0,.05) min(.7vw, 1.244vh) min(1.05vw, 1.867vh), transparent min(1.05vw, 1.867vh) min(2.3vw, 4.089vh))}
 
   header{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;
-    gap:1.1cqw;padding:1.6cqw 2.2cqw}
-  .host{font-size:1.9cqw;font-weight:800;line-height:1.05;color:var(--cream)}
-  .pow{font-size:1.02cqw;font-weight:600;color:var(--dim)}
+    gap:min(1.1vw, 1.956vh);padding:min(1.6vw, 2.844vh) min(2.2vw, 3.911vh)}
+  .host{font-size:min(1.9vw, 3.378vh);font-weight:800;line-height:1.05;color:var(--cream)}
+  .pow{font-size:min(1.02vw, 1.813vh);font-weight:600;color:var(--dim)}
   .spacer{margin-left:auto;text-align:right}
-  .clock{font-size:1.9cqw;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
-  .clock small{display:block;font-size:.98cqw;font-weight:700;color:var(--dim);margin-top:.25cqw}
+  .clock{font-size:min(1.9vw, 3.378vh);font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+  .clock small{display:block;font-size:min(.98vw, 1.742vh);font-weight:700;color:var(--dim);margin-top:min(.25vw, 0.444vh)}
 
   /* engraved plate */
-  .plate{position:absolute;left:3.4cqw;right:3.4cqw;top:7.6cqw;bottom:9.4cqw;z-index:3;
-    border:.22cqw solid rgba(201,154,78,.55);border-radius:.5cqw;
-    box-shadow:inset 0 0 0 .1cqw rgba(0,0,0,.5), inset 0 .6cqw 3cqw rgba(0,0,0,.45),
-               0 .3cqw 2cqw rgba(0,0,0,.5);
+  .plate{position:absolute;left:min(3.4vw, 6.044vh);right:min(3.4vw, 6.044vh);top:min(7.6vw, 13.511vh);bottom:min(9.4vw, 16.711vh);z-index:3;
+    border:min(.22vw, 0.391vh) solid rgba(201,154,78,.55);border-radius:min(.5vw, 0.889vh);
+    box-shadow:inset 0 0 0 min(.1vw, 0.178vh) rgba(0,0,0,.5), inset 0 min(.6vw, 1.067vh) min(3vw, 5.333vh) rgba(0,0,0,.45),
+               0 min(.3vw, 0.533vh) min(2vw, 3.556vh) rgba(0,0,0,.5);
     background:rgba(0,0,0,.16);overflow:hidden}
 
-  .title{position:absolute;top:2cqw;left:0;right:0;text-align:center;z-index:4}
-  .title h1{font-size:2.5cqw;font-weight:700;letter-spacing:.42em;text-indent:.42em;
-    color:var(--cream);text-shadow:0 .1cqw 0 rgba(0,0,0,.6), 0 -.06cqw 0 rgba(255,230,190,.22)}
-  .title .sub{margin-top:.5cqw;font-size:1.06cqw;font-weight:700;letter-spacing:.34em;
+  .title{position:absolute;top:min(2vw, 3.556vh);left:0;right:0;text-align:center;z-index:4}
+  .title h1{font-size:min(2.5vw, 4.444vh);font-weight:700;letter-spacing:.42em;text-indent:.42em;
+    color:var(--cream);text-shadow:0 min(.1vw, 0.178vh) 0 rgba(0,0,0,.6), 0 -min(.06vw, 0.107vh) 0 rgba(255,230,190,.22)}
+  .title .sub{margin-top:min(.5vw, 0.889vh);font-size:min(1.06vw, 1.884vh);font-weight:700;letter-spacing:.34em;
     text-indent:.34em;color:var(--brass)}
-  .rule{position:absolute;left:6cqw;right:6cqw;top:6.6cqw;height:.1cqw;z-index:4;
+  .rule{position:absolute;left:min(6vw, 10.667vh);right:min(6vw, 10.667vh);top:min(6.6vw, 11.733vh);height:min(.1vw, 0.178vh);z-index:4;
     background:linear-gradient(90deg,transparent,rgba(201,154,78,.5) 18%,rgba(201,154,78,.5) 82%,transparent)}
 
   svg#map{position:absolute;inset:0;width:100%;height:100%;z-index:4}
 
   /* lamps sit above the engraving and bloom into it */
   .lamp{position:absolute;z-index:5;transform:translate(-50%,-50%);pointer-events:none}
-  .bulb{width:.85cqw;height:.85cqw;border-radius:50%;background:var(--go);
-    box-shadow:0 0 .8cqw .14cqw rgba(90,211,154,.9), 0 0 2.2cqw .45cqw rgba(90,211,154,.3),
-               inset 0 0 .3cqw rgba(255,255,255,.85);
+  .bulb{width:min(.85vw, 1.511vh);height:min(.85vw, 1.511vh);border-radius:50%;background:var(--go);
+    box-shadow:0 0 min(.8vw, 1.422vh) min(.14vw, 0.249vh) rgba(90,211,154,.9), 0 0 min(2.2vw, 3.911vh) min(.45vw, 0.8vh) rgba(90,211,154,.3),
+               inset 0 0 min(.3vw, 0.533vh) rgba(255,255,255,.85);
     transition:background .8s ease, box-shadow .8s ease}
   .lamp.up .bulb{background:var(--red);
-    box-shadow:0 0 1cqw .18cqw rgba(255,90,50,.95), 0 0 3cqw .6cqw rgba(255,90,50,.45),
-               inset 0 0 .3cqw rgba(255,255,255,.9);
+    box-shadow:0 0 min(1vw, 1.778vh) min(.18vw, 0.32vh) rgba(255,90,50,.95), 0 0 min(3vw, 5.333vh) min(.6vw, 1.067vh) rgba(255,90,50,.45),
+               inset 0 0 min(.3vw, 0.533vh) rgba(255,255,255,.9);
     animation:throb 2.6s ease-in-out infinite}
   @keyframes throb{0%,100%{opacity:1}50%{opacity:.72}}
   @media (prefers-reduced-motion:reduce){.lamp.up .bulb{animation:none}}
@@ -70,41 +70,41 @@
      University is not one of them). An unlit slate bulb says "we don't know",
      which is the honest state; a green bulb would claim "down" and a blank
      would look broken. Mirrors the app's noLiveFeed flag (constants/map.ts). */
-  .lamp.nofeed .bulb{background:#4a4f57;box-shadow:0 0 .5cqw .08cqw rgba(120,128,138,.45);animation:none}
+  .lamp.nofeed .bulb{background:#4a4f57;box-shadow:0 0 min(.5vw, 0.889vh) min(.08vw, 0.142vh) rgba(120,128,138,.45);animation:none}
   .lamp.nofeed .tag .nm{color:#9aa0a8}
   .lamp.nofeed .tag .el{color:#7d838b;font-weight:600}
   .tag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;text-align:center}
-  .tag .nm{font-size:1.26cqw;font-weight:800;letter-spacing:.02em;color:var(--cream);
-    text-shadow:0 .08cqw .3cqw rgba(0,0,0,.85)}
+  .tag .nm{font-size:min(1.26vw, 2.24vh);font-weight:800;letter-spacing:.02em;color:var(--cream);
+    text-shadow:0 min(.08vw, 0.142vh) min(.3vw, 0.533vh) rgba(0,0,0,.85)}
   .lamp.up .tag .nm{color:#ffb9a2}
-  .tag .el{display:block;font-size:1.02cqw;font-weight:700;color:var(--dim);
-    font-variant-numeric:tabular-nums;margin-top:.1cqw;
-    text-shadow:0 .08cqw .3cqw rgba(0,0,0,.85)}
+  .tag .el{display:block;font-size:min(1.02vw, 1.813vh);font-weight:700;color:var(--dim);
+    font-variant-numeric:tabular-nums;margin-top:min(.1vw, 0.178vh);
+    text-shadow:0 min(.08vw, 0.142vh) min(.3vw, 0.533vh) rgba(0,0,0,.85)}
   .lamp.up .tag .el{color:#ff8a66}
-  .tag.above{bottom:2.9cqw}
-  .tag.below{top:1.5cqw}
+  .tag.above{bottom:min(2.9vw, 5.156vh)}
+  .tag.below{top:min(1.5vw, 2.667vh)}
 
-  .legend{position:absolute;left:0;right:0;bottom:2.1cqw;z-index:5;display:flex;
-    align-items:center;justify-content:center;gap:2.4cqw;font-size:1.12cqw;font-weight:700;
+  .legend{position:absolute;left:0;right:0;bottom:min(2.1vw, 3.733vh);z-index:5;display:flex;
+    align-items:center;justify-content:center;gap:min(2.4vw, 4.267vh);font-size:min(1.12vw, 1.991vh);font-weight:700;
     color:var(--dim)}
-  .legend i{width:.85cqw;height:.85cqw;border-radius:50%;display:inline-block;
-    margin-right:.55cqw;vertical-align:-.05cqw}
-  .legend .g{background:var(--go);box-shadow:0 0 .8cqw rgba(90,211,154,.8)}
-  .legend .r{background:var(--red);box-shadow:0 0 .8cqw rgba(255,90,50,.85)}
+  .legend i{width:min(.85vw, 1.511vh);height:min(.85vw, 1.511vh);border-radius:50%;display:inline-block;
+    margin-right:min(.55vw, 0.978vh);vertical-align:-min(.05vw, 0.089vh)}
+  .legend .g{background:var(--go);box-shadow:0 0 min(.8vw, 1.422vh) rgba(90,211,154,.8)}
+  .legend .r{background:var(--red);box-shadow:0 0 min(.8vw, 1.422vh) rgba(255,90,50,.85)}
   .legend .mark{color:var(--brass);letter-spacing:.24em;font-weight:800}
 
   footer{position:absolute;bottom:0;left:0;right:0;z-index:7;display:flex;align-items:stretch;
-    background:rgba(10,7,4,.9);border-top:.1cqw solid rgba(201,154,78,.45)}
-  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.05cqw 2.2cqw;min-width:0}
-  .adtag{flex:none;font-size:.98cqw;font-weight:800;letter-spacing:.13em;background:var(--brass);
-    color:#241a12;padding:.35cqw .9cqw;border-radius:.25cqw}
-  .adtxt{font-size:1.62cqw;font-weight:700;color:#f2cd90;white-space:nowrap;overflow:hidden;
+    background:rgba(10,7,4,.9);border-top:min(.1vw, 0.178vh) solid rgba(201,154,78,.45)}
+  .ad{flex:1;display:flex;align-items:center;gap:min(1.2vw, 2.133vh);padding:min(1.05vw, 1.867vh) min(2.2vw, 3.911vh);min-width:0}
+  .adtag{flex:none;font-size:min(.98vw, 1.742vh);font-weight:800;letter-spacing:.13em;background:var(--brass);
+    color:#241a12;padding:min(.35vw, 0.622vh) min(.9vw, 1.6vh);border-radius:min(.25vw, 0.444vh)}
+  .adtxt{font-size:min(1.62vw, 2.88vh);font-weight:700;color:#f2cd90;white-space:nowrap;overflow:hidden;
     text-overflow:ellipsis}
-  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.65cqw 2.2cqw .65cqw 1.4cqw;
-    border-left:.1cqw solid rgba(201,154,78,.32)}
-  .qr svg{width:5cqw;height:5cqw;display:block;shape-rendering:crispEdges;background:#fff;padding:.7cqw;border-radius:.25cqw;box-shadow:0 0 0 .1cqw rgba(0,0,0,.06)}
-  .qrtx{font-size:1.12cqw;font-weight:800;color:#f2cd90;line-height:1.3}
-  .qrtx small{display:block;font-weight:700;color:var(--dim);font-size:.98cqw}
+  .qr{flex:none;display:flex;align-items:center;gap:min(.9vw, 1.6vh);padding:min(.65vw, 1.156vh) min(2.2vw, 3.911vh) min(.65vw, 1.156vh) min(1.4vw, 2.489vh);
+    border-left:min(.1vw, 0.178vh) solid rgba(201,154,78,.32)}
+  .qr svg{width:min(5vw, 8.889vh);height:min(5vw, 8.889vh);display:block;shape-rendering:crispEdges;background:#fff;padding:min(.7vw, 1.244vh);border-radius:min(.25vw, 0.444vh);box-shadow:0 0 0 min(.1vw, 0.178vh) rgba(0,0,0,.06)}
+  .qrtx{font-size:min(1.12vw, 1.991vh);font-weight:800;color:#f2cd90;line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:var(--dim);font-size:min(.98vw, 1.742vh)}
 </style>
 
 <div id="stage">

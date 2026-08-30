@@ -18,25 +18,25 @@
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.01em;
     -webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
   #stage{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;
-    container-type:inline-size;position:relative;overflow:hidden;
+    position:relative;overflow:hidden;
     background:radial-gradient(120% 90% at 50% 8%, #1b414d 0%, var(--sea2) 42%, var(--sea) 100%)}
 
   /* ---- header ---- */
   header{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;
-    gap:1.1cqw;padding:1.7cqw 2.2cqw}
-  .host{font-size:2cqw;font-weight:800;line-height:1.05}
-  .pow{font-size:1.05cqw;font-weight:600;color:var(--dim);letter-spacing:.02em}
-  .spacer{margin-left:auto;display:flex;align-items:flex-end;gap:1.8cqw}
-  .clock{font-size:2cqw;font-weight:800;font-variant-numeric:tabular-nums;text-align:right;line-height:1}
-  .clock small{display:block;font-size:1cqw;font-weight:700;color:var(--dim);margin-top:.25cqw}
+    gap:min(1.1vw, 1.956vh);padding:min(1.7vw, 3.022vh) min(2.2vw, 3.911vh)}
+  .host{font-size:min(2vw, 3.556vh);font-weight:800;line-height:1.05}
+  .pow{font-size:min(1.05vw, 1.867vh);font-weight:600;color:var(--dim);letter-spacing:.02em}
+  .spacer{margin-left:auto;display:flex;align-items:flex-end;gap:min(1.8vw, 3.2vh)}
+  .clock{font-size:min(2vw, 3.556vh);font-weight:800;font-variant-numeric:tabular-nums;text-align:right;line-height:1}
+  .clock small{display:block;font-size:min(1vw, 1.778vh);font-weight:700;color:var(--dim);margin-top:min(.25vw, 0.444vh)}
 
   /* ---- the verdict, set into the sky ---- */
   .verdict{position:absolute;top:11.5%;left:0;right:0;z-index:5;text-align:center;pointer-events:none}
-  .vword{font-size:8.6cqw;font-weight:800;line-height:.84;letter-spacing:-.045em;
-    transition:color .6s ease;text-shadow:0 .4cqw 2.4cqw rgba(6,18,24,.75)}
+  .vword{font-size:min(8.6vw, 15.289vh);font-weight:800;line-height:.84;letter-spacing:-.045em;
+    transition:color .6s ease;text-shadow:0 min(.4vw, 0.711vh) min(2.4vw, 4.267vh) rgba(6,18,24,.75)}
   .vword.up{color:var(--red)} .vword.dn{color:var(--go)} .vword.unk{color:var(--dim)}
-  .vsub{font-size:1.8cqw;font-weight:700;color:var(--deck);opacity:.8;margin-top:.5cqw;
-    text-shadow:0 .2cqw 1.2cqw rgba(6,18,24,.8)}
+  .vsub{font-size:min(1.8vw, 3.2vh);font-weight:700;color:var(--deck);opacity:.8;margin-top:min(.5vw, 0.889vh);
+    text-shadow:0 min(.2vw, 0.356vh) min(1.2vw, 2.133vh) rgba(6,18,24,.8)}
 
   /* ---- bridge ---- */
   svg#bridge{position:absolute;inset:0;width:100%;height:100%;z-index:2}
@@ -66,33 +66,33 @@
   }
 
   /* ---- split-flap counter ---- */
-  .counter{position:absolute;bottom:8.5cqw;left:2.2cqw;z-index:6;display:flex;align-items:flex-end;gap:1cqw}
-  .flap{background:#0a171d;border:1px solid rgba(232,224,207,.22);border-radius:.4cqw;
-    padding:.7cqw 1.1cqw;box-shadow:inset 0 -.35cqw 0 rgba(0,0,0,.45);
-    font-size:4.6cqw;font-weight:800;font-variant-numeric:tabular-nums;line-height:1;
+  .counter{position:absolute;bottom:min(8.5vw, 15.111vh);left:min(2.2vw, 3.911vh);z-index:6;display:flex;align-items:flex-end;gap:min(1vw, 1.778vh)}
+  .flap{background:#0a171d;border:1px solid rgba(232,224,207,.22);border-radius:min(.4vw, 0.711vh);
+    padding:min(.7vw, 1.244vh) min(1.1vw, 1.956vh);box-shadow:inset 0 -min(.35vw, 0.622vh) 0 rgba(0,0,0,.45);
+    font-size:min(4.6vw, 8.178vh);font-weight:800;font-variant-numeric:tabular-nums;line-height:1;
     color:var(--lamp);position:relative}
   .flap::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.5)}
-  .clabel{font-size:1.25cqw;font-weight:700;color:var(--dim);line-height:1.35;max-width:22cqw;
-    padding-bottom:.5cqw}
+  .clabel{font-size:min(1.25vw, 2.222vh);font-weight:700;color:var(--dim);line-height:1.35;max-width:min(22vw, 39.111vh);
+    padding-bottom:min(.5vw, 0.889vh)}
   .clabel b{color:var(--deck);display:block;font-weight:800}
 
   /* ---- right rail: other bridges, as small lamps ---- */
   /* Three real columns — name, clock, lamp — so the lamps and the durations
      line up down the rail instead of each row drifting to its own width. */
-  .rail{position:absolute;right:2.2cqw;bottom:8.5cqw;z-index:6;
+  .rail{position:absolute;right:min(2.2vw, 3.911vh);bottom:min(8.5vw, 15.111vh);z-index:6;
     display:grid;grid-template-columns:auto auto min-content;
-    column-gap:1.2cqw;row-gap:1.05cqw;align-items:center;font-size:2.1cqw}
-  .rlab{grid-column:1/-1;justify-self:end;font-size:1.25cqw;font-weight:800;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:.45cqw}
+    column-gap:min(1.2vw, 2.133vh);row-gap:min(1.05vw, 1.867vh);align-items:center;font-size:min(2.1vw, 3.733vh)}
+  .rlab{grid-column:1/-1;justify-self:end;font-size:min(1.25vw, 2.222vh);font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:min(.45vw, 0.8vh)}
   .br{display:contents}
   .br>span{justify-self:end;font-weight:800;letter-spacing:-.015em}
   .br em{justify-self:end;font-style:normal;font-weight:700;font-size:.66em;
     color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
   .br.up>span{color:var(--red)}
   .br.up em{color:var(--red);opacity:.85}
-  .br i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:var(--go);display:block;
-    box-shadow:0 0 1.2cqw rgba(79,191,139,.6)}
-  .br.up i{background:var(--red);box-shadow:0 0 1.2cqw rgba(224,81,44,.75)}
+  .br i{width:min(1.2vw, 2.133vh);height:min(1.2vw, 2.133vh);border-radius:50%;background:var(--go);display:block;
+    box-shadow:0 0 min(1.2vw, 2.133vh) rgba(79,191,139,.6)}
+  .br.up i{background:var(--red);box-shadow:0 0 min(1.2vw, 2.133vh) rgba(224,81,44,.75)}
   /* No upstream feed (SDOT publishes live status for 5 bridges; University is
      not one). Unlit dot + muted row = "we don't know", not a false "down".
      Mirrors the app's noLiveFeed flag in constants/map.ts. */
@@ -103,16 +103,16 @@
   /* ---- footer ---- */
   footer{position:absolute;bottom:0;left:0;right:0;z-index:7;display:flex;align-items:stretch;
     background:#0a171d;border-top:1px solid rgba(240,168,60,.4)}
-  .ad{flex:1;display:flex;align-items:center;gap:1.2cqw;padding:1.1cqw 2.2cqw;min-width:0}
-  .adtag{flex:none;font-size:1cqw;font-weight:800;letter-spacing:.13em;background:var(--amber);
-    color:#0a171d;padding:.35cqw .9cqw;border-radius:.25cqw}
-  .adtxt{font-size:1.7cqw;font-weight:700;color:var(--lamp);white-space:nowrap;overflow:hidden;
+  .ad{flex:1;display:flex;align-items:center;gap:min(1.2vw, 2.133vh);padding:min(1.1vw, 1.956vh) min(2.2vw, 3.911vh);min-width:0}
+  .adtag{flex:none;font-size:min(1vw, 1.778vh);font-weight:800;letter-spacing:.13em;background:var(--amber);
+    color:#0a171d;padding:min(.35vw, 0.622vh) min(.9vw, 1.6vh);border-radius:min(.25vw, 0.444vh)}
+  .adtxt{font-size:min(1.7vw, 3.022vh);font-weight:700;color:var(--lamp);white-space:nowrap;overflow:hidden;
     text-overflow:ellipsis}
-  .qr{flex:none;display:flex;align-items:center;gap:.9cqw;padding:.7cqw 2.2cqw .7cqw 1.4cqw;
+  .qr{flex:none;display:flex;align-items:center;gap:min(.9vw, 1.6vh);padding:min(.7vw, 1.244vh) min(2.2vw, 3.911vh) min(.7vw, 1.244vh) min(1.4vw, 2.489vh);
     border-left:1px solid rgba(240,168,60,.3)}
-  .qr svg{width:5cqw;height:5cqw;display:block;shape-rendering:crispEdges;background:#fff;padding:.7cqw;border-radius:.25cqw;box-shadow:0 0 0 .1cqw rgba(0,0,0,.06)}
-  .qrtx{font-size:1.15cqw;font-weight:800;color:var(--lamp);line-height:1.3}
-  .qrtx small{display:block;font-weight:700;color:var(--dim);font-size:1cqw}
+  .qr svg{width:min(5vw, 8.889vh);height:min(5vw, 8.889vh);display:block;shape-rendering:crispEdges;background:#fff;padding:min(.7vw, 1.244vh);border-radius:min(.25vw, 0.444vh);box-shadow:0 0 0 min(.1vw, 0.178vh) rgba(0,0,0,.06)}
+  .qrtx{font-size:min(1.15vw, 2.044vh);font-weight:800;color:var(--lamp);line-height:1.3}
+  .qrtx small{display:block;font-weight:700;color:var(--dim);font-size:min(1vw, 1.778vh)}
 </style>
 
 <div id="stage">
