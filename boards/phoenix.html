@@ -27,7 +27,7 @@
 -->
 <style>
   :root{
-    --u:22px;  /* 10-foot UI: ~15% larger than screen-proportional on the 1920 stage */
+    --u:25px;  /* fixed 1920 stage, sized for a real 10-foot viewing distance */
     --paper:#F7F5F0; --panel:#FFFFFF; --ink:#17150F; --dim:#6B675C; --faint:#9A968B;
     --line:#E2DFD6; --green:#0B6E4F; --red:#B0332A; --amber:#8A6414; --amberp:#FBF3DF;
     --heat:#C2410C;
@@ -39,51 +39,51 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{ /* plain vw units — TV browsers predate container queries */
+  body{
     background:var(--paper); color:var(--ink);
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased; overflow:hidden;
-    
   }
-  .wrap{width:1920px;height:1080px;transform-origin:top left;display:flex;flex-direction:column;padding:calc(var(--u)*2) calc(var(--u)*2.6) calc(var(--u)*1.8)}
+  .wrap{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:top left;
+        display:flex;flex-direction:column;padding:36px 58px 24px}
 
-  header{display:flex;justify-content:space-between;align-items:flex-start;
-         border-bottom:calc(var(--u)*0.18) solid var(--ink);padding-bottom:calc(var(--u)*1);margin-bottom:calc(var(--u)*1.4)}
-  .place{display:flex;flex-direction:column;gap:calc(var(--u)*0.15)}
-  .place .sub{margin-left:calc(var(--u)*0.15);margin-top:calc(var(--u)*0.2)}
-  .brand{display:flex;align-items:center;gap:calc(var(--u)*0.5)}
-  .brand img{width:calc(var(--u)*1.9);height:calc(var(--u)*1.9);display:block;border-radius:calc(var(--u)*0.35)}
-  .brand span{font-size:calc(var(--u)*1.35);font-weight:800;letter-spacing:-0.01em;color:var(--ink)}
+  header{display:flex;justify-content:space-between;align-items:center;
+         border-bottom:4px solid var(--ink);padding-bottom:14px;margin-bottom:20px}
+  .place{display:flex;flex-direction:column;gap:2px;flex:none}
+  .place .sub{margin-left:4px;margin-top:2px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{width:42px;height:42px;display:block;border-radius:8px}
+  .brand span{font-size:30px;font-weight:800;letter-spacing:0;color:var(--ink)}
   .brand b{color:var(--green);font-weight:800}
-  .placeline{display:flex;align-items:baseline;gap:calc(var(--u)*0.8)}
-  .place h1{font-size:calc(var(--u)*2.4);font-weight:800;letter-spacing:-0.02em}
-  .place .sub{font-size:calc(var(--u)*1.05);color:var(--dim);font-weight:600;white-space:nowrap}
-  .hright{display:flex;align-items:baseline;gap:calc(var(--u)*1.6);flex:1;justify-content:flex-end;min-width:0}
-  .live{display:flex;align-items:center;gap:calc(var(--u)*0.45);font-size:calc(var(--u)*1);font-weight:800;
+  .placeline{display:flex;align-items:baseline;gap:18px}
+  .place h1{font-size:56px;font-weight:800;letter-spacing:0;line-height:1}
+  .place .sub{font-size:25px;color:var(--dim);font-weight:600;white-space:nowrap}
+  .hright{display:flex;align-items:center;gap:30px;flex:1;justify-content:flex-end;min-width:0}
+  .live{display:grid;grid-template-columns:18px auto;align-items:center;column-gap:9px;
+        font-size:22px;font-weight:800;
         letter-spacing:0.18em;color:var(--green)}
-  .live .upd{display:block;font-size:calc(var(--u)*0.78);font-weight:700;letter-spacing:0.04em;
-             color:var(--faint);text-transform:none;margin-top:calc(var(--u)*0.2)}
-  .live{flex-direction:row;flex-wrap:wrap}
-  .live i{width:calc(var(--u)*0.8);height:calc(var(--u)*0.8);border-radius:50%;background:var(--green);display:block;
+  .live .upd{grid-column:1 / 3;display:block;font-size:16px;font-weight:700;letter-spacing:0;
+             color:var(--faint);text-transform:none;margin-top:2px;white-space:nowrap}
+  .live i{width:17px;height:17px;border-radius:50%;background:var(--green);display:block;
           animation:pulse 3.5s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   @media (prefers-reduced-motion:reduce){ .live i{animation:none} }
-  .now{display:flex;align-items:baseline;gap:calc(var(--u)*1.4);min-width:0;overflow:hidden;flex:0 1 auto}
-  .temp{font-size:calc(var(--u)*2.1);font-weight:800;color:var(--heat);letter-spacing:-0.02em;white-space:nowrap}
-  .temp small{font-size:calc(var(--u)*1);font-weight:700;color:var(--dim);letter-spacing:0}
+  .now{display:flex;align-items:baseline;gap:26px;min-width:0;overflow:hidden;flex:0 1 auto}
+  .temp{font-size:48px;font-weight:800;color:var(--heat);letter-spacing:0;white-space:nowrap}
+  .temp small{font-size:22px;font-weight:700;color:var(--dim);letter-spacing:0}
   .clock{text-align:right;flex:none}
-  .clock .t{font-size:calc(var(--u)*2.1);font-weight:800;letter-spacing:-0.02em;line-height:1;white-space:nowrap}
-  .clock .d{font-size:calc(var(--u)*1);color:var(--dim);font-weight:700}
+  .clock .t{font-size:46px;font-weight:800;letter-spacing:0;line-height:1;white-space:nowrap}
+  .clock .d{font-size:20px;color:var(--dim);font-weight:700;margin-top:5px}
 
-  /* five-day outlook, inline beside the current temperature */
-  .fc{display:flex;align-items:baseline;gap:calc(var(--u)*1.6);font-size:calc(var(--u)*0.9);color:var(--dim);font-weight:600;white-space:nowrap;overflow:hidden;min-width:0}
+  /* Two useful forecast beats fit the TV header without crowding the clock. */
+  .fc{display:flex;align-items:baseline;gap:24px;font-size:20px;color:var(--dim);font-weight:600;white-space:nowrap;overflow:hidden;min-width:0}
   .fc .dy{font-weight:800;color:var(--ink-2,#6B675C);letter-spacing:0.08em}
   .fc span b{color:var(--ink);font-weight:800}
   .fc span i{font-style:normal;color:var(--faint)}
+  .fc span:nth-child(n+3){display:none}
 
-  main{flex:1;display:grid;grid-template-columns:1.12fr 1.42fr 1.1fr;gap:calc(var(--u)*1.3);min-height:0}
-  .col{display:flex;flex-direction:column;gap:calc(var(--u)*1.1);min-height:0;overflow:hidden}
-  .col.cam-col{justify-content:flex-start}
+  main{flex:1;display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:26px;min-height:0}
+  .col{display:flex;flex-direction:column;gap:20px;min-height:0;overflow:hidden}
   .spacer{flex:1;min-height:0}
 
   .lbl{font-size:calc(var(--u)*0.95);font-weight:800;letter-spacing:0.16em;text-transform:uppercase;
@@ -108,30 +108,39 @@
   .scope.ramp{background:var(--amber);color:#fff}
 
   /* Roy — mirrors the precedence in src/utils/royForAlert.ts (guardrail G6) */
-  .striprow{display:flex;align-items:flex-end;gap:calc(var(--u)*1.6)}
+  .striprow{display:flex;align-items:center;gap:22px}
   .upwrap{flex:1;min-width:0}
-  .roy{display:flex;align-items:flex-end;gap:calc(var(--u)*0.7);flex:0 0 calc(var(--u)*17);padding-bottom:calc(var(--u)*0.2)}
-  .roy img{width:calc(var(--u)*6);height:calc(var(--u)*6);object-fit:contain;object-position:bottom;display:block;flex:0 0 auto}
-  .roy .say{font-size:calc(var(--u)*0.95);line-height:1.35;color:var(--dim);font-weight:600;padding-bottom:calc(var(--u)*0.6)}
-  .roy .say b{color:var(--ink);font-weight:800;display:block;font-size:calc(var(--u)*1.05);margin-bottom:calc(var(--u)*0.15)}
+  .roy{display:flex;align-items:center;gap:14px;flex:0 0 350px}
+  .roy img{width:92px;height:92px;object-fit:contain;object-position:bottom;display:block;flex:0 0 auto}
+  .roy .say{font-size:18px;line-height:1.25;color:var(--dim);font-weight:600}
+  .roy .say b{color:var(--ink);font-weight:800;display:block;font-size:22px;margin-bottom:3px}
   .none{font-size:calc(var(--u)*1.15);color:var(--dim);padding:calc(var(--u)*1.2) 0;line-height:1.5}
   .none b{color:var(--green);font-weight:800}
-  .fire{display:flex;align-items:baseline;gap:calc(var(--u)*0.55);padding:calc(var(--u)*0.5) 0;min-width:0;overflow:hidden;
+  .fire{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:3px;
+        align-items:baseline;padding:9px 0;min-width:0;overflow:hidden;
         border-bottom:calc(var(--u)*0.07) solid var(--line)}
   .fire:last-child{border-bottom:none}
-  .fire .nm{font-size:calc(var(--u)*1.05);font-weight:800;white-space:nowrap;flex:none;max-width:55%;overflow:hidden;text-overflow:ellipsis}
-  .fire .ac{font-size:calc(var(--u)*0.92);color:var(--dim);font-weight:700;white-space:nowrap}
-  .fire .ct{font-size:calc(var(--u)*0.85);font-weight:800;white-space:nowrap;color:var(--green)}
+  .fire .nm{font-size:calc(var(--u)*1.05);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fire .ac{font-size:calc(var(--u)*0.92);color:var(--dim);font-weight:700;white-space:nowrap;justify-self:end}
+  .fire .ct{grid-column:1;grid-row:2;font-size:calc(var(--u)*0.85);font-weight:800;white-space:nowrap;color:var(--green)}
   .fire .ct.low{color:var(--heat)}
-  .fire .mi{font-size:calc(var(--u)*0.85);color:var(--faint);font-weight:700;margin-left:auto;white-space:nowrap;flex:none;padding-left:calc(var(--u)*0.5)}
+  .fire .mi{grid-column:2;grid-row:2;font-size:calc(var(--u)*0.85);color:var(--faint);font-weight:700;
+            white-space:nowrap;justify-self:end;max-width:190px;overflow:hidden;text-overflow:ellipsis}
 
-  /* middle column: two cameras stacked, 4:3, never cropped */
-  .cam-col{gap:calc(var(--u)*0.9)}
-  .cam{position:relative;background:#000;border-radius:calc(var(--u)*0.5);overflow:hidden;
-       flex:0 1 47%;aspect-ratio:4/3;min-height:0;width:auto;max-width:100%;max-height:calc(var(--u)*24);margin:0 auto}
+  /* One large camera plus a second picture-in-picture feed. Both stay uncropped. */
+  .cam-col{position:relative;gap:12px;justify-content:flex-start;overflow:hidden}
+  .cam{position:relative;background:#000;border-radius:12px;overflow:hidden;flex:none;min-height:0}
+  .cam.primary{width:100%;aspect-ratio:540/330;margin:auto 0}
+  .cam.secondary{position:absolute;right:18px;top:130px;width:42%;aspect-ratio:540/330;
+                 border:5px solid var(--panel);box-shadow:0 10px 28px rgba(0,0,0,.38);z-index:3}
   .cam img{width:100%;height:100%;object-fit:contain;display:block}
-  .camtag{position:absolute;top:calc(var(--u)*0.55);left:calc(var(--u)*0.55);background:var(--red);color:#fff;
-          font-size:calc(var(--u)*0.8);font-weight:800;letter-spacing:0.12em;padding:calc(var(--u)*0.25) calc(var(--u)*0.6);border-radius:calc(var(--u)*0.2)}
+  .camtag{position:absolute;top:14px;left:14px;background:var(--red);color:#fff;z-index:4;
+          font-size:18px;font-weight:800;letter-spacing:0.12em;padding:6px 13px;border-radius:5px}
+  .camcap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:28px 16px 11px;
+          background:linear-gradient(transparent,rgba(0,0,0,.88));color:#fff;
+          font-size:22px;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cam.secondary .camtag{top:9px;left:9px;font-size:14px;padding:4px 8px}
+  .cam.secondary .camcap{font-size:16px;padding:22px 10px 8px}
 
   /* border */
   .bx{padding:calc(var(--u)*0.42) 0;border-bottom:calc(var(--u)*0.07) solid var(--line)}
@@ -150,29 +159,30 @@
               margin-right:calc(var(--u)*0.5)}
 
   /* upcoming strip */
-  .strip{border-top:calc(var(--u)*0.18) solid var(--ink);margin-top:calc(var(--u)*1.4);padding-top:calc(var(--u)*1)}
-  .ups{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*0.9)}
-  .up{background:var(--amberp);border-radius:calc(var(--u)*0.4);padding:calc(var(--u)*0.6) calc(var(--u)*0.9)}
-  .up .when{font-size:calc(var(--u)*0.92);font-weight:800;color:var(--amber);letter-spacing:0.04em;
-            text-transform:uppercase;margin-bottom:calc(var(--u)*0.25)}
-  .up .rt{font-size:calc(var(--u)*1.1);font-weight:800;margin-bottom:calc(var(--u)*0.15)}
-  .up .tx{font-size:calc(var(--u)*0.9);line-height:1.35;color:var(--dim);
+  .strip{flex:none;border-top:4px solid var(--ink);margin-top:18px;padding-top:13px}
+  .strip .lbl{margin-bottom:8px}
+  .ups{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .up{background:var(--amberp);border-radius:9px;padding:9px 14px}
+  .up .when{font-size:17px;font-weight:800;color:var(--amber);letter-spacing:0.04em;
+            text-transform:uppercase;margin-bottom:3px}
+  .up .rt{font-size:21px;font-weight:800;margin-bottom:2px}
+  .up .tx{font-size:17px;line-height:1.25;color:var(--dim);
           display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 
   /* sponsor slot — one local business at a time, exactly as it runs on a venue board */
-  .sponsor{display:flex;align-items:center;gap:calc(var(--u)*1.1);background:var(--amberp);
-           border-radius:calc(var(--u)*0.4);padding:calc(var(--u)*0.85) calc(var(--u)*1.2);margin-top:calc(var(--u)*1.1)}
-  .sponsor .tag{background:var(--amber);color:#fff;font-size:calc(var(--u)*0.78);font-weight:800;
-                letter-spacing:0.14em;padding:calc(var(--u)*0.25) calc(var(--u)*0.6);border-radius:calc(var(--u)*0.2);white-space:nowrap}
-  .sponsor .txt{font-size:calc(var(--u)*1.35);font-weight:700;color:var(--ink)}
+  .sponsor{display:flex;align-items:center;gap:20px;background:var(--amberp);
+           border-radius:9px;padding:10px 18px;margin-top:12px;flex:none}
+  .sponsor .tag{background:var(--amber);color:#fff;font-size:16px;font-weight:800;
+                letter-spacing:0.14em;padding:5px 11px;border-radius:5px;white-space:nowrap}
+  .sponsor .txt{font-size:25px;font-weight:700;color:var(--ink)}
   .sponsor .txt b{font-weight:800}
 
-  footer{display:flex;justify-content:space-between;align-items:center;
-         padding-top:calc(var(--u)*0.9);font-size:calc(var(--u)*0.82);color:var(--faint);font-weight:600}
+  footer{display:flex;justify-content:space-between;align-items:center;gap:20px;
+         padding-top:10px;font-size:16px;color:var(--faint);font-weight:600;flex:none}
   footer b{color:var(--dim);font-weight:800}
   .err{color:var(--red);font-weight:700}
-  .stamp{display:flex;align-items:center;gap:calc(var(--u)*0.9);font-size:calc(var(--u)*1.05);color:var(--dim);font-weight:700}
-  .stamp img{width:calc(var(--u)*1.5);height:calc(var(--u)*1.5);border-radius:calc(var(--u)*0.28);display:block}
+  .stamp{display:flex;align-items:center;gap:12px;font-size:18px;color:var(--dim);font-weight:700;white-space:nowrap}
+  .stamp img{width:28px;height:28px;border-radius:6px;display:block}
   .stamp b{color:var(--green);font-weight:800}
 </style>
 
@@ -205,20 +215,20 @@
       </div>
     </div>
 
-    <!-- camera -->
+    <!-- primary camera + picture-in-picture backup -->
     <div class="col cam-col">
       <div class="lbl">Freeways near the house</div>
-      <div class="cam"><span class="camtag">LIVE</span><img id="camimg0" alt="Live ADOT freeway camera"><span class="camcap" id="camcap0">&mdash;</span></div>
-      <div class="cam"><span class="camtag">LIVE</span><img id="camimg1" alt="Live ADOT freeway camera"><span class="camcap" id="camcap1">&mdash;</span></div>
+      <div class="cam primary"><span class="camtag">LIVE</span><img id="camimg0" alt="Live ADOT freeway camera"><span class="camcap" id="camcap0">&mdash;</span></div>
+      <div class="cam secondary"><span class="camtag">LIVE</span><img id="camimg1" alt="Second live ADOT freeway camera"><span class="camcap" id="camcap1">&mdash;</span></div>
     </div>
 
     <!-- border -->
     <div class="col">
       <div class="card grow tall">
         <div class="lbl">Border wait</div>
-        <div class="dir"><span class="arrow">MEXICO &rarr; U.S.</span> the wait to get back in, right now</div>
+        <div class="dir"><span class="arrow">MEXICO &rarr; U.S.</span> wait right now</div>
         <div class="scroll" id="border"><div class="none">Loading&hellip;</div></div>
-        <div class="meta" style="font-size:0.82vw;color:var(--faint);font-weight:600;padding-top:0.6vw">
+        <div class="meta" style="font-size:18px;color:var(--faint);font-weight:600;padding-top:12px">
           Northbound only &mdash; CBP publishes no southbound waits.
         </div>
       </div>
@@ -254,7 +264,7 @@
 </div>
 
 <script>
-const BOARD_VERSION = 'v14';   // bump on every deploy — it renders bottom-right so a stale TV is provable
+const BOARD_VERSION = 'v15';   // bump on every deploy — it renders bottom-right so a stale TV is provable
 const API   = 'https://milepost-proxy.leahgerber93.workers.dev';
 const HERE  = [33.5063, -112.0728];            // 85012 — Central Ave corridor
 const NWS   = 'https://api.weather.gov/gridpoints/PSR/159,60/forecast/hourly';
@@ -338,9 +348,10 @@ function nearTown(lat,lon,county){
    and ignored meta tags — the browser has no say in the layout. */
 function fitStage(){
   const w = document.querySelector('.wrap');
-  const s = window.innerWidth / 1920;
+  const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
   w.style.transform = 'scale(' + s + ')';
-  w.style.height = (window.innerHeight / s) + 'px';
+  w.style.left = Math.max(0, (window.innerWidth - 1920 * s) / 2) + 'px';
+  w.style.top = Math.max(0, (window.innerHeight - 1080 * s) / 2) + 'px';
 }
 fitStage();
 window.addEventListener('resize', fitStage);
