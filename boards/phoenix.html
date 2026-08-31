@@ -27,7 +27,7 @@
 -->
 <style>
   :root{
-    --u:25px;  /* fixed 1920 stage, sized for a real 10-foot viewing distance */
+    --u:22px;  /* readable at 10 feet while leaving room for three or more data rows */
     --paper:#F7F5F0; --panel:#FFFFFF; --ink:#17150F; --dim:#6B675C; --faint:#9A968B;
     --line:#E2DFD6; --green:#0B6E4F; --red:#B0332A; --amber:#8A6414; --amberp:#FBF3DF;
     --heat:#C2410C;
@@ -86,23 +86,24 @@
   .col{display:flex;flex-direction:column;gap:20px;min-height:0;overflow:hidden}
   .spacer{flex:1;min-height:0}
 
-  .lbl{font-size:calc(var(--u)*0.95);font-weight:800;letter-spacing:0.16em;text-transform:uppercase;
-       color:var(--faint);margin-bottom:calc(var(--u)*0.45)}
+  .lbl{font-size:19px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;
+       color:var(--faint);margin-bottom:8px}
   .card{background:var(--panel);border:calc(var(--u)*0.08) solid var(--line);border-radius:calc(var(--u)*0.5);
-        padding:calc(var(--u)*0.85) calc(var(--u)*1.1);min-height:0}
+        padding:17px 20px;min-height:0}
   .grow{flex:1 1 0;display:flex;flex-direction:column;min-height:0}
   .grow.tall{flex:1.55 1 0}
   .scroll{overflow:hidden;flex:1;min-height:0}
 
   /* crashes */
-  .crash{display:flex;gap:calc(var(--u)*0.8);padding:calc(var(--u)*0.58) 0;border-bottom:calc(var(--u)*0.07) solid var(--line)}
+  .crash{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:4px;
+         padding:10px 0;border-bottom:calc(var(--u)*0.07) solid var(--line)}
   .crash:last-child{border-bottom:none}
-  .crash .rt{font-size:calc(var(--u)*1.15);font-weight:800;color:var(--red);white-space:nowrap;min-width:calc(var(--u)*6.4)}
-  .crash .tx{font-size:calc(var(--u)*1.02);line-height:1.35;color:var(--ink);
+  .crash .rt{grid-column:1;grid-row:1;font-size:23px;font-weight:800;color:var(--red);white-space:nowrap;min-width:0}
+  .crash .tx{grid-column:1 / 3;grid-row:2;font-size:20px;line-height:1.28;color:var(--ink);
              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .crash .mi{font-size:calc(var(--u)*0.9);color:var(--faint);font-weight:700;white-space:nowrap;margin-left:auto}
-  .scope{display:inline-block;font-size:calc(var(--u)*0.72);font-weight:800;letter-spacing:0.1em;
-         padding:calc(var(--u)*0.12) calc(var(--u)*0.4);border-radius:calc(var(--u)*0.18);margin-right:calc(var(--u)*0.45);vertical-align:calc(var(--u)*0.15);
+  .crash .mi{grid-column:2;grid-row:1;font-size:18px;color:var(--faint);font-weight:700;white-space:nowrap}
+  .scope{display:inline-block;font-size:14px;font-weight:800;letter-spacing:0.1em;
+         padding:3px 8px;border-radius:4px;margin-right:9px;vertical-align:2px;
          background:var(--line);color:var(--dim)}
   .scope.road{background:var(--red);color:#fff}
   .scope.ramp{background:var(--amber);color:#fff}
@@ -116,15 +117,15 @@
   .roy .say b{color:var(--ink);font-weight:800;display:block;font-size:22px;margin-bottom:3px}
   .none{font-size:calc(var(--u)*1.15);color:var(--dim);padding:calc(var(--u)*1.2) 0;line-height:1.5}
   .none b{color:var(--green);font-weight:800}
-  .fire{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:3px;
-        align-items:baseline;padding:9px 0;min-width:0;overflow:hidden;
+  .fire{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:2px;
+        align-items:baseline;padding:7px 0;min-width:0;overflow:hidden;
         border-bottom:calc(var(--u)*0.07) solid var(--line)}
   .fire:last-child{border-bottom:none}
-  .fire .nm{font-size:calc(var(--u)*1.05);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .fire .ac{font-size:calc(var(--u)*0.92);color:var(--dim);font-weight:700;white-space:nowrap;justify-self:end}
-  .fire .ct{grid-column:1;grid-row:2;font-size:calc(var(--u)*0.85);font-weight:800;white-space:nowrap;color:var(--green)}
+  .fire .nm{font-size:21px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fire .ac{font-size:18px;color:var(--dim);font-weight:700;white-space:nowrap;justify-self:end}
+  .fire .ct{grid-column:1;grid-row:2;font-size:17px;font-weight:800;white-space:nowrap;color:var(--green)}
   .fire .ct.low{color:var(--heat)}
-  .fire .mi{grid-column:2;grid-row:2;font-size:calc(var(--u)*0.85);color:var(--faint);font-weight:700;
+  .fire .mi{grid-column:2;grid-row:2;font-size:17px;color:var(--faint);font-weight:700;
             white-space:nowrap;justify-self:end;max-width:190px;overflow:hidden;text-overflow:ellipsis}
 
   /* One large camera plus a second picture-in-picture feed. Both stay uncropped. */
@@ -143,20 +144,20 @@
   .cam.secondary .camcap{font-size:16px;padding:22px 10px 8px}
 
   /* border */
-  .bx{padding:calc(var(--u)*0.42) 0;border-bottom:calc(var(--u)*0.07) solid var(--line)}
+  .bx{padding:8px 0;border-bottom:calc(var(--u)*0.07) solid var(--line)}
   .bx:last-child{border-bottom:none}
   .bx .top{display:flex;justify-content:space-between;align-items:baseline;gap:calc(var(--u)*0.6);min-width:0}
-  .bx .nm{font-size:calc(var(--u)*1.05);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-  .bx .hrs{font-style:normal;font-weight:600;font-size:calc(var(--u)*0.82);color:var(--faint)}
-  .bx .wait{font-size:calc(var(--u)*1.35);white-space:nowrap;font-weight:800;letter-spacing:-0.02em;line-height:1}
-  .bx .wait small{font-size:calc(var(--u)*0.85);font-weight:700;color:var(--dim);letter-spacing:0}
+  .bx .nm{font-size:21px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .bx .hrs{font-style:normal;font-weight:600;font-size:16px;color:var(--faint)}
+  .bx .wait{font-size:25px;white-space:nowrap;font-weight:800;letter-spacing:0;line-height:1}
+  .bx .wait small{font-size:17px;font-weight:700;color:var(--dim);letter-spacing:0}
   .w-ok{color:var(--green)} .w-mid{color:var(--amber)} .w-bad{color:var(--red)}
-  .w-na{color:var(--faint);font-size:calc(var(--u)*1.1);font-weight:700}
-  .bx .meta{font-size:calc(var(--u)*0.88);color:var(--faint);font-weight:600;margin-top:calc(var(--u)*0.2)}
-  .dir{font-size:calc(var(--u)*0.9);color:var(--dim);font-weight:600;margin:calc(var(--u)*-0.3) 0 calc(var(--u)*0.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .w-na{color:var(--faint);font-size:21px;font-weight:700}
+  .bx .meta{font-size:17px;color:var(--faint);font-weight:600;margin-top:4px}
+  .dir{font-size:18px;color:var(--dim);font-weight:600;margin:-3px 0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .dir .arrow{display:inline-block;background:var(--green);color:#fff;font-weight:800;
-              font-size:calc(var(--u)*0.8);letter-spacing:0.08em;padding:calc(var(--u)*0.15) calc(var(--u)*0.45);border-radius:calc(var(--u)*0.18);
-              margin-right:calc(var(--u)*0.5)}
+              font-size:16px;letter-spacing:0.08em;padding:4px 9px;border-radius:4px;
+              margin-right:10px}
 
   /* upcoming strip */
   .strip{flex:none;border-top:4px solid var(--ink);margin-top:18px;padding-top:13px}
@@ -264,7 +265,7 @@
 </div>
 
 <script>
-const BOARD_VERSION = 'v15';   // bump on every deploy — it renders bottom-right so a stale TV is provable
+const BOARD_VERSION = 'v16';   // bump on every deploy — it renders bottom-right so a stale TV is provable
 const API   = 'https://milepost-proxy.leahgerber93.workers.dev';
 const HERE  = [33.5063, -112.0728];            // 85012 — Central Ave corridor
 const NWS   = 'https://api.weather.gov/gridpoints/PSR/159,60/forecast/hourly';
