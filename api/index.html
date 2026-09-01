@@ -198,6 +198,35 @@
   "source_status": { "conditions": "live", "incidents": "live" }
 }</pre>
     </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/fires</span></div>
+      <p class="ep-desc">Active wildfires across the U.S. (NIFC/WFIGS) and British Columbia — name, size, containment, cause, and location.</p>
+      <p class="ep-params"><code>state</code> optional · <code>bbox=minLon,minLat,maxLon,maxLat</code> optional · <code>limit=N</code> optional · <code>exclude_rx=1</code> optional (hide prescribed burns)</p>
+
+      <p class="ep-label">Request</p>
+      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/fires?apikey=YOUR_KEY&amp;state=OR"</pre>
+
+      <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged — array truncated)</span></p>
+      <pre class="codeblock">{
+  "generated_at": "2026-08-31T18:42:00Z",
+  "source": "NIFC/WFIGS + BCWS",
+  "count": 37,
+  "fires": [
+    {
+      "id": "2026-ORXYZ-000123",
+      "name": "Cedar Creek Fire",
+      "acres": 4210,
+      "containedPct": 35,
+      "state": "US-OR",
+      "county": "Lane",
+      "cause": "Lightning",
+      "lat": 43.87, "lon": -122.12,
+      "isNew": false, "isRx": false
+    }
+  ]
+}</pre>
+    </div>
   </div>
 
   <!-- TRY IT -->
@@ -279,7 +308,7 @@
           <p class="price-desc">For evaluation and early integration work.</p>
           <ul class="price-feat">
             <li>1,000 requests / month</li>
-            <li>/v1/locate + /v1/alerts</li>
+            <li>/v1/locate, /v1/alerts + /v1/fires</li>
             <li>Community support</li>
           </ul>
           <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Free%20tier">Get started</a>
@@ -291,7 +320,7 @@
           <p class="price-desc">Best for variable or growing usage beyond the free tier.</p>
           <ul class="price-feat">
             <li>Free tier included, then metered</li>
-            <li>/v1/locate + /v1/alerts</li>
+            <li>/v1/locate, /v1/alerts + /v1/fires</li>
             <li>Email support</li>
           </ul>
           <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Pay-as-you-go">Get started</a>
