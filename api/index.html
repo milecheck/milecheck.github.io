@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email info@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"The Business tier includes a service-level agreement and invoicing for high-volume or mission-critical use. Contact us to discuss terms."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"The Business tier includes a service-level agreement and invoicing for high-volume or mission-critical use. Contact us to discuss terms."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}]}</script>
 
   <style>
     .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
@@ -123,7 +123,7 @@
     <p class="sub">Highway mile markers and live DOT road alerts — all 50 states + British Columbia, one normalized API.</p>
     <p class="value">Nobody else has done the work of normalizing 50+ separate state DOT feeds — each with its own format, auth, and quirks — into a single consistent schema. We already did it for our app. You can build on it too.</p>
     <div class="btns">
-      <a class="primary" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
+      <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
       <a class="ghost" href="#endpoints">View endpoints</a>
     </div>
   </div>
@@ -156,7 +156,7 @@
     <p class="lead">Base URL: <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">https://milepost-proxy.leahgerber93.workers.dev</code></p>
 
     <div class="auth-note">
-      <strong>Authentication</strong> — every request needs an API key. Pass it as a query parameter (<code>?apikey=YOUR_KEY</code>), an <code>x-api-key</code> header, or an <code>Authorization: Bearer YOUR_KEY</code> header. Don't have a key yet? <a href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access" style="color:#0f7a4f;font-weight:700;">Email info@milecheckapp.com</a>.
+      <strong>Authentication</strong> — every request needs an API key. Pass it as a query parameter (<code>?apikey=YOUR_KEY</code>), an <code>x-api-key</code> header, or an <code>Authorization: Bearer YOUR_KEY</code> header. Don't have a key yet? <a href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access" style="color:#0f7a4f;font-weight:700;">Email sales@milecheckapp.com</a>.
     </div>
 
     <div class="ep-card">
@@ -251,7 +251,7 @@
       </div>
       <button class="try-btn" id="try-btn" type="button">Locate</button>
       <pre class="try-out" id="try-out">Response will appear here.</pre>
-      <p class="try-note">Need a key? <a href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access">Email info@milecheckapp.com</a>.</p>
+      <p class="try-note">Need a key? <a href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email sales@milecheckapp.com</a>.</p>
     </div>
   </div>
 
@@ -311,7 +311,7 @@
             <li>/v1/locate, /v1/alerts + /v1/fires</li>
             <li>Community support</li>
           </ul>
-          <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Free%20tier">Get started</a>
+          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Free%20tier">Get started</a>
         </div>
         <div class="price-card featured">
           <div class="price-tier">Pay-as-you-go</div>
@@ -323,7 +323,7 @@
             <li>/v1/locate, /v1/alerts + /v1/fires</li>
             <li>Email support</li>
           </ul>
-          <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Pay-as-you-go">Get started</a>
+          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Pay-as-you-go">Get started</a>
         </div>
         <div class="price-card">
           <div class="price-tier">Business</div>
@@ -334,7 +334,7 @@
             <li>Service-level agreement</li>
             <li>Invoicing &amp; priority support</li>
           </ul>
-          <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Business%20tier">Contact us</a>
+          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Business%20tier">Contact us</a>
         </div>
       </div>
     </div>
@@ -354,7 +354,7 @@
       </details>
       <details>
         <summary>How do API keys work?</summary>
-        <p>Every request needs an API key, passed as a query parameter, an <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">x-api-key</code> header, or an <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">Authorization: Bearer</code> header. Email info@milecheckapp.com to request one.</p>
+        <p>Every request needs an API key, passed as a query parameter, an <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">x-api-key</code> header, or an <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">Authorization: Bearer</code> header. Email sales@milecheckapp.com to request one.</p>
       </details>
       <details>
         <summary>Is there an SLA?</summary>
@@ -373,7 +373,7 @@
       <h3>Ready to integrate?</h3>
       <p>Tell us what you're building and we'll get you a key. Free tier available today; the API is launching, not yet self-serve.</p>
       <div class="btns">
-        <a class="primary" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
+        <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
         <a class="ghost" href="../index.html#b2b">See MileCheck for platforms</a>
       </div>
     </div>
