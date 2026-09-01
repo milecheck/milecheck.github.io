@@ -183,6 +183,82 @@ const GUIDES = [
     ],
     related:`<a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> · <a href="../highway-sign-colors/">Highway sign colors</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
   },
+  {
+    slug:'what-is-511', eyebrow:'Road conditions',
+    title:"What Is 511? The Free Road-Conditions Number",
+    h1:"What is 511? The free travel-info line",
+    lede:`Dial 511 in most US states and you reach a free travel-information service — road conditions, closures, construction, and weather for that state's highways. Here's how it works and where the data comes from.`,
+    sections:[
+      ['What 511 is',`511 is a national, three-digit phone and web service for <strong>traveler information</strong>. The Federal Communications Commission set it aside in 2000 so every state could offer road conditions, crash and construction alerts, weather, and closures through one easy-to-remember number. Most states run their own 511 phone line, website, and app.`],
+      ['What you can get from it',`A typical 511 service reports <strong>current road conditions</strong> (dry, wet, snow, ice), <strong>closures and construction</strong>, <strong>crashes and incidents</strong>, <strong>mountain-pass and chain requirements</strong>, and often <strong>live traffic cameras</strong>. Coverage focuses on interstates and major state highways — the roads a DOT actively monitors.`],
+      ["The catch: it's split across 50+ systems",`Here's the friction: <strong>every state runs its own 511</strong>, with its own phone tree, website, app, and data format. Cross a state line and you're on a different system. Plan a trip through three states and that's three 511 sites to check — there's no single national feed a driver can just glance at.`],
+      ['MileCheck brings it into one place',`MileCheck pulls normalized DOT alerts from all 50 states plus British Columbia into one app — closures, crashes, construction, weather, chain controls, and cameras — on a single map, tied to your exact mile marker as you drive. It's the 511 idea without the 50 different websites. <a href="../cameras/">Browse live highway cameras →</a>`],
+    ],
+    faq:[
+      ['What is 511 used for?',`511 is a free US traveler-information service. It reports road conditions, closures, construction, crashes, weather, mountain-pass status, and often live cameras for a state's highways, by phone or online.`],
+      ['Is 511 free to call?',`Yes. 511 is the FCC's national traveler-information number and is free to call in participating states. Standard mobile minutes may apply, but there's no service charge.`],
+      ['Does every state have 511?',`Most do, but each state runs its own 511 phone line, website, and app with its own coverage and format. A few states don't operate a full 511 service, and there is no single national system.`],
+      ['Is there an app that combines 511 from every state?',`State 511 services are separate. MileCheck combines normalized DOT road alerts and cameras from all 50 states (plus British Columbia) into one app, tied to your live mile marker.`],
+    ],
+    related:`<a href="../cameras/">Live highway cameras</a> · <a href="../chains-required-explained/">What "chains required" means</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
+  {
+    slug:'check-road-conditions-before-a-trip', eyebrow:'Road trips',
+    title:"How to Check Road Conditions Before a Road Trip",
+    h1:"How to check road conditions before a road trip",
+    lede:`Before a long drive — especially over mountain passes or in winter — a few minutes checking conditions can save you from a closure, a chain requirement, or a white-knuckle surprise. Here's a simple pre-trip routine.`,
+    sections:[
+      ['Start with the DOT or 511 for each state',`Your first stop is the state transportation department (DOT) or its 511 service for <strong>every state your route crosses</strong>. They post closures, construction, crashes, and mountain-pass and chain status for the highways you'll actually be on. <a href="../what-is-511/">More on 511 →</a>`],
+      ['Look at live traffic cameras',`A road report tells you the status; a <strong>camera</strong> shows you the reality — how much snow is actually on the pass, whether traffic is crawling. Check cameras at the choke points on your route, especially summits and known bottlenecks. <a href="../cameras/">Browse live highway cameras →</a>`],
+      ['Check the weather along the route, not just the ends',`Weather at your start and destination can be fine while the pass in the middle is in a storm. Look at the forecast for the <strong>high points and passes</strong> on your route, and watch for wind, ice, and snow level — the details that decide whether a mountain highway stays open.`],
+      ["Know your position once you're rolling",`Conditions change mid-drive. Once you're on the road, MileCheck shows your exact mile marker in real time plus live DOT alerts and the nearest camera on your route — so a closure or chain control ahead isn't a surprise, and if you need help you know precisely where you are. Works offline, on CarPlay and Android Auto.`],
+    ],
+    faq:[
+      ['How do I check road conditions for a road trip?',`Check the state DOT or 511 service for every state on your route for closures and pass status, look at live traffic cameras at the summits and bottlenecks, and review the weather forecast for the high points along the way — not just your start and end.`],
+      ['How do I know if a mountain pass is open?',`Check the state DOT's pass report and live cameras for that pass. They post current conditions, chain requirements, and any closures, which can change within an hour during a storm.`],
+      ["What's the best way to check road conditions while driving?",`Use a hands-free app. MileCheck shows your live mile marker, DOT alerts, and the nearest camera on your route on CarPlay or Android Auto, so you get closures and chain controls ahead without stopping.`],
+      ['Should I check road conditions in summer too?',`Yes. Summer brings construction, wildfires and smoke, crashes, and heat-related closures. Roadwork and conditions affect drives year-round, not just in winter.`],
+    ],
+    related:`<a href="../what-is-511/">What is 511?</a> · <a href="../cameras/">Live highway cameras</a> · <a href="../passes/">Mountain pass conditions</a>`,
+  },
+  {
+    slug:'what-is-black-ice', eyebrow:'Winter driving',
+    title:"What Is Black Ice — and How to Drive on It",
+    h1:"What is black ice, and how do you drive on it?",
+    lede:`Black ice is a thin, nearly invisible layer of ice that looks like harmless wet pavement — which is exactly what makes it so dangerous. Here's how to spot it and what to do if you hit it.`,
+    sections:[
+      ["Why it's called black ice",`Black ice is a thin, transparent sheet of ice. It isn't actually black — it's clear, so you see the dark pavement right through it and it just looks <strong>wet</strong>. That camouflage is the danger: drivers don't slow down for what looks like a damp patch.`],
+      ['Where and when it forms',`It forms when a thin layer of water freezes — after rain or melting snow refreezes, and in the <strong>early morning and overnight</strong> as temperatures drop. Watch for it on <strong>bridges and overpasses</strong> (they lose heat from above and below, so they freeze first), in <strong>shaded spots</strong>, and near the bottom of hills where water collects.`],
+      ['How to spot it',`When it's cold enough to freeze, look for pavement that appears <strong>wet or glossy</strong>, especially on bridges and shaded stretches. If the road still looks wet but spray has stopped coming off other cars' tires, that "water" may be ice. Any time it's near or below freezing, treat suspiciously shiny pavement as ice.`],
+      ['What to do if you hit it',`Don't panic and don't slam the brakes — hard braking can throw you into a skid. <strong>Ease off the gas, keep the wheel straight, and let the car slow on its own.</strong> If you start to slide, steer gently in the direction you want the front of the car to go. The best defense is prevention: slow down, leave extra following distance, and be especially careful on bridges. MileCheck's live DOT alerts flag icy conditions ahead, and your exact mile marker means that if you do end up stopped, you can report precisely where you are.`],
+    ],
+    faq:[
+      ['What is black ice?',`Black ice is a thin, transparent layer of ice on the road. It's clear rather than black, so the dark pavement shows through and it looks like ordinary wet road — which makes it hard to see and easy to hit at speed.`],
+      ['Where does black ice form most often?',`On bridges and overpasses (they freeze first because they lose heat from above and below), in shaded areas, and low spots where water pools. It's most common overnight and in the early morning when temperatures drop.`],
+      ['What should you do if you hit black ice?',`Stay calm, ease off the accelerator, and keep the steering wheel straight — don't brake hard. Let the vehicle slow on its own, and if it slides, steer gently in the direction you want to go.`],
+      ['How can you tell if the road has black ice?',`When it's near or below freezing, watch for pavement that looks wet or glossy, especially on bridges and in shade. If the road looks wet but no spray is coming off other tires, it may be ice.`],
+    ],
+    related:`<a href="../chains-required-explained/">What "chains required" means</a> · <a href="../passes/">Mountain pass conditions</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
+  {
+    slug:'steep-grade-signs-explained', eyebrow:'Highway basics',
+    title:"What Steep Grade Signs Mean (6% Grade Ahead)",
+    h1:"What steep grade signs mean",
+    lede:`A yellow sign warning of a "6% GRADE" and "TRUCKS USE LOWER GEAR" tells you the road ahead drops steeply for a distance. Here's what the percentage means and how to descend safely.`,
+    sections:[
+      ['What the percentage means',`The number is the road's <strong>grade</strong> — how many feet it rises or falls per 100 feet of distance. A <strong>6% grade</strong> means the road drops 6 feet for every 100 feet you travel. It sounds small, but over several miles it adds up to a long, demanding descent, which is why anything around 5–7% earns a warning sign.`],
+      ['Why the signs warn trucks',`A heavy truck descending a long grade builds speed and heats its brakes. Ride the brakes the whole way down and they can overheat and fade — lose their grip entirely. That's why the signs say <strong>"trucks use lower gear"</strong>: gearing down lets the engine do the braking, so the brakes stay cool and ready.`],
+      ['How to descend safely',`Whatever you're driving, <strong>shift to a lower gear before you start down</strong>, not partway through. Let engine braking hold your speed, and use the brakes in firm, brief applications rather than riding them continuously. Keep extra distance from the vehicle ahead — a heavy truck can't slow or stop the way a car can.`],
+      ['Runaway ramps are the backup',`On the steepest, longest descents you'll also see signs for a <a href="../runaway-truck-ramps/">runaway truck ramp</a> — an emergency escape lane for a vehicle that has lost its brakes. Their presence is a signal you're on a serious grade. MileCheck shows your exact mile marker as you descend, so if you ever need to report a problem, you know precisely where you are.`],
+    ],
+    faq:[
+      ['What does a 6% grade sign mean?',`It means the road descends (or climbs) 6 feet for every 100 feet of horizontal distance. Over several miles that's a long, steep descent, which is why grades around 5–7% get warning signs.`],
+      ['Why do steep grade signs say trucks use lower gear?',`Heavy trucks that ride their brakes down a long grade can overheat them until they fade. Shifting to a lower gear lets the engine slow the truck, keeping the brakes cool and effective.`],
+      ['How do you drive down a steep grade safely?',`Shift into a lower gear before you start the descent, let engine braking control your speed, apply the brakes in short firm bursts instead of riding them, and leave extra following distance.`],
+      ['What is a runaway truck ramp?',`An emergency escape lane on a steep downgrade, filled with loose gravel or sand, that stops a truck whose brakes have failed. Signs warn of them in advance on the steepest descents.`],
+    ],
+    related:`<a href="../runaway-truck-ramps/">Runaway truck ramps</a> · <a href="../chains-required-explained/">What "chains required" means</a> · <a href="../passes/">Mountain pass conditions</a>`,
+  },
 ];
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
