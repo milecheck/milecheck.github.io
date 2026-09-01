@@ -259,6 +259,63 @@ const GUIDES = [
     ],
     related:`<a href="../runaway-truck-ramps/">Runaway truck ramps</a> · <a href="../chains-required-explained/">What "chains required" means</a> · <a href="../passes/">Mountain pass conditions</a>`,
   },
+  {
+    slug:'dragging-trailer-chains-wildfire', eyebrow:'Road safety',
+    title:"Can Dragging Trailer Chains Start a Wildfire?",
+    h1:"Can dragging trailer chains start a wildfire?",
+    lede:`Yes — safety chains left hanging too low scrape the pavement and throw sparks, and on a dry, windy day those sparks start roadside fires. It's one of the most common preventable wildfire causes, and it's easy to avoid.`,
+    sections:[
+      ['How chains start fires',`Trailer <strong>safety chains</strong> connect the trailer to the tow vehicle as a backup if the hitch fails. If they're too long or hooked so they hang low, they drag on the road as you drive — and steel on pavement throws a shower of <strong>sparks.</strong> Along a dry grassy shoulder in summer, one spark is all it takes. Fire agencies count dragging chains among the top preventable causes of roadside wildfires every year.`],
+      ['Cross them and keep them short',`The fix is simple: <strong>cross the safety chains</strong> in an X under the trailer tongue and hook them back to the tow vehicle. Crossing them cradles the tongue if the coupler ever comes loose, and — done right — keeps the chains up off the ground. Leave just enough slack to turn corners, and <strong>no more.</strong> If a chain still drags, shorten it (twist a link or take up length on the hook) so it can't reach the pavement.`],
+      ["Chains aren't the only spark source",`Anything metal dragging behind a vehicle can do it — a loose strap with a buckle, a dropped exhaust part, or a <strong>blown tire riding on the bare rim.</strong> A hot catalytic converter or exhaust parked over dry grass can ignite it too. On high fire-danger days, walk around your trailer before you leave and glance back now and then to be sure nothing's dragging. <a href="../roadside-wildfire-causes/">More on what starts roadside fires →</a>`],
+      ["Know what's burning on your route",`If a fire does start ahead — from any cause — you want to know before you drive into the smoke. MileCheck shows active wildfires and closures on your route in real time, tied to your exact mile marker, so you can reroute or report a new fire with a precise location. <a href="../fire/">See the live wildfire map →</a>`],
+    ],
+    faq:[
+      ['Can dragging trailer chains really start a fire?',`Yes. Safety chains hanging low enough to scrape the pavement throw sparks, and on dry vegetation those sparks can ignite a wildfire. It's a leading preventable cause of roadside fires in fire-prone states.`],
+      ['How should trailer safety chains be attached?',`Cross them in an X under the trailer tongue and connect them to the tow vehicle. Crossing cradles the tongue if the hitch fails and helps keep the chains off the ground. Leave only enough slack to turn corners.`],
+      ['How do I keep my trailer chains from dragging?',`Shorten them so they can't reach the road — twist links, take up slack on the hook, or cross them under the tongue. Leave just enough length to turn, and check that nothing drags before you drive off.`],
+      ['What should I do if I see a roadside fire start?',`Get to a safe distance and report it with a precise location — your mile marker and route. Apps like MileCheck show your exact mile marker and the active fires on your route so you can give responders an accurate spot.`],
+    ],
+    related:`<a href="../roadside-wildfire-causes/">What causes roadside wildfires</a> · <a href="../report-location/">Report your location</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
+  {
+    slug:'roadside-wildfire-causes', eyebrow:'Road safety',
+    title:"What Causes Roadside Wildfires (and How to Avoid One)",
+    h1:"What causes roadside wildfires — and how to avoid starting one",
+    lede:`A surprising share of wildfires start right along the highway, sparked by vehicles and equipment. Most are completely preventable. Here are the common causes and the simple habits that keep you from starting one.`,
+    sections:[
+      ['Dragging chains and metal parts',`Trailer <strong>safety chains</strong> hung too low scrape the road and throw sparks — a top preventable cause. So does any metal dragging behind a vehicle: a loose tie-down, a dropped exhaust part, or a <strong>blown tire riding on the bare rim.</strong> Cross and shorten trailer chains so they can't reach the pavement, and pull over promptly for a flat. <a href="../dragging-trailer-chains-wildfire/">More on trailer chains and fire →</a>`],
+      ['Hot vehicle parts on dry grass',`A car's <strong>catalytic converter and exhaust run hot enough to ignite dry grass</strong> just by parking over it. Don't pull a hot vehicle onto dry vegetation on the shoulder or at a pullout — park on gravel, dirt, or pavement instead.`],
+      ['Sparks, loose loads, and cigarettes',`Equipment dragged or run along a dry shoulder throws sparks, an improperly secured load can drop metal that sparks on the road, and a tossed cigarette is a classic roadside ignition. On <strong>red-flag (high fire-danger) days</strong>, take extra care: secure your load, skip spark-throwing roadside work, and never toss anything burning from a vehicle.`],
+      ["Know what's burning on your route",`Even when you do everything right, fires start. MileCheck shows active wildfires and closures on your route in real time, tied to your exact mile marker — so you can avoid driving into smoke, reroute around a closure, and report a new fire with a precise location. <a href="../fire/">See the live wildfire map →</a>`],
+    ],
+    faq:[
+      ['What is the most common cause of roadside wildfires?',`Vehicle-related sparks — especially dragging trailer safety chains and blown tires riding on bare rims — plus hot exhaust parts on dry grass and tossed cigarettes. Most are preventable.`],
+      ['Can parking on dry grass start a fire?',`Yes. A vehicle's catalytic converter and exhaust get hot enough to ignite dry grass underneath. Park on gravel, dirt, or pavement instead of dry vegetation, especially in fire season.`],
+      ['What is a red-flag warning?',`A red-flag warning means weather conditions — often hot, dry, and windy — make wildfires far more likely to start and spread. On those days, take extra care with anything that can throw a spark.`],
+      ['How can I see wildfires near a highway?',`MileCheck shows active wildfires and closures along your route in real time, tied to your live mile marker, so you can reroute around smoke or report a new fire with a precise location.`],
+    ],
+    related:`<a href="../dragging-trailer-chains-wildfire/">Can dragging chains start a wildfire?</a> · <a href="../report-location/">Report your location</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
+  {
+    slug:'winter-car-prep-checklist', eyebrow:'Winter driving',
+    title:"How to Get Your Car Ready for Fall and Winter",
+    h1:"How to get your car ready for fall and winter",
+    lede:`Before the first cold snap, an hour of prep makes winter driving safer and heads off the breakdowns that always seem to happen in the worst weather. Here's a straightforward checklist.`,
+    sections:[
+      ['Tires and traction',`Cold weather is hard on tires. Check your <strong>tread depth</strong> and <strong>tire pressure</strong> — pressure drops as temperatures fall, and worn tread loses grip on snow and ice. If you drive mountain or snowy routes, consider <strong>winter (snow) tires</strong>, and carry <strong>chains</strong> for passes that require them. <a href="../chains-required-explained/">What "chains required" means →</a>`],
+      ['Battery, fluids, and wipers',`Cold saps battery power, so have a weak <strong>battery</strong> tested before it strands you. Top off <strong>antifreeze/coolant</strong> to the right mix, switch to <strong>winter windshield washer fluid</strong> rated for freezing temperatures, and replace worn <strong>wiper blades</strong> — you'll use them constantly in slush and snow. Keeping the fuel tank fuller than usual reduces condensation and gives you a buffer.`],
+      ['Lights, heat, and defrost',`Days are short and storms are dark. Check that all your <strong>lights</strong> work and the lenses are clear, and confirm your <strong>heater, defroster, and rear-window defogger</strong> all work before you need them. Clear snow and ice off the <em>whole</em> car — roof included — before you drive.`],
+      ['Pack a winter kit, and know your route',`Keep a cold-weather kit in the car: <strong>ice scraper, blanket, gloves, flashlight, jumper cables, some food and water,</strong> and a phone charger. Before a winter drive, check conditions and passes on your route — and once you're moving, MileCheck shows your exact mile marker plus live DOT alerts and cameras, so a closure or chain control ahead isn't a surprise, and if you're stuck you can report exactly where you are. <a href="../check-road-conditions-before-a-trip/">How to check road conditions →</a>`],
+    ],
+    faq:[
+      ['How do I prepare my car for winter?',`Check tire tread and pressure (and consider snow tires or chains), test a weak battery, top off coolant and switch to winter washer fluid, replace worn wipers, confirm lights and defrosters work, and pack a cold-weather emergency kit.`],
+      ['When should I get my car ready for winter?',`In the fall, before the first hard freeze or snow. It's far easier to test a battery, swap tires, and top off fluids on a mild day than after you're already stranded in the cold.`],
+      ['Do I need winter tires?',`If you regularly drive in snow, ice, or over mountain passes, winter tires grip noticeably better than all-seasons. If not, good all-season tread plus chains for the passes may be enough — check your route's requirements.`],
+      ['What should I keep in my car in winter?',`An ice scraper, a blanket, gloves, a flashlight, jumper cables, some food and water, and a phone charger. Keeping the fuel tank fuller also helps if you're delayed or stuck.`],
+    ],
+    related:`<a href="../chains-required-explained/">What "chains required" means</a> · <a href="../what-is-black-ice/">What is black ice?</a> · <a href="../check-road-conditions-before-a-trip/">Check road conditions</a>`,
+  },
 ];
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
