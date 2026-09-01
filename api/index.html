@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MileCheck API — Mile Markers &amp; Live DOT Alerts | Pricing &amp; Docs</title>
+  <meta name="description" content="The MileCheck API: highway mile-marker geocoding and live, normalized DOT road alerts for all 50 US states plus British Columbia. One schema, 51 upstream feeds, maintained for you.">
+  <link rel="canonical" href="https://milecheckapp.com/api/">
+  <meta property="og:title" content="MileCheck API — Mile Markers &amp; Live DOT Alerts">
+  <meta property="og:description" content="Highway mile-marker geocoding and live, normalized DOT road alerts for all 50 US states plus British Columbia — one API, one schema.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/api/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email info@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"The Business tier includes a service-level agreement and invoicing for high-volume or mission-critical use. Contact us to discuss terms."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}]}</script>
+
+  <style>
+    .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
+    .api-hero .eyebrow{font:800 13px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;margin-bottom:10px;}
+    .api-hero h1{font-size:clamp(30px,5.5vw,48px);line-height:1.1;margin:0 0 14px;letter-spacing:-0.01em;}
+    .api-hero p.sub{font-size:18px;line-height:1.6;color:#3a444d;max-width:62ch;margin:0 auto 10px;}
+    .api-hero p.value{font-size:15px;color:#5b6670;max-width:60ch;margin:0 auto 26px;}
+    .api-hero .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
+    .api-hero .btns a{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;}
+    .api-hero .btns a.primary{background:#0f7a4f;color:#fff;}
+    .api-hero .btns a.ghost{border:1.5px solid #0F1419;color:#0F1419;}
+
+    .api-section{max-width:960px;margin:0 auto;padding:36px 20px;}
+    .api-section h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 8px;letter-spacing:-0.01em;}
+    .api-section p.lead{font-size:15.5px;color:#3a444d;line-height:1.65;max-width:70ch;margin:0 0 22px;}
+
+    .value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    @media(max-width:860px){.value-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:520px){.value-grid{grid-template-columns:1fr;}}
+    .value-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px 16px;}
+    .value-card h3{font-size:15px;margin:0 0 6px;color:#0E1116;}
+    .value-card p{font-size:13.5px;color:#5b6670;line-height:1.55;margin:0;}
+
+    .ep-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;margin-bottom:20px;}
+    .ep-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+    .ep-method{font:800 12.5px 'JetBrains Mono',monospace;background:#0f7a4f;color:#fff;padding:3px 9px;border-radius:6px;letter-spacing:.03em;}
+    .ep-path{font:700 16px 'JetBrains Mono',monospace;color:#0E1116;}
+    .ep-desc{font-size:14.5px;color:#5b6670;margin:6px 0 14px;line-height:1.6;}
+    .ep-params{font-size:13.5px;color:#3a444d;margin:0 0 14px;line-height:1.7;}
+    .ep-params code{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;}
+    .ep-label{font:700 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#8A939B;margin:14px 0 6px;}
+    .ep-label:first-of-type{margin-top:0;}
+    pre.codeblock{background:#0E1116;color:#e6f4ec;border-radius:10px;padding:14px 16px;overflow-x:auto;font:13px/1.6 'JetBrains Mono',monospace;margin:0;}
+    pre.codeblock .cmt{color:#7a8790;}
+
+    .auth-note{border:1px dashed #c9c6b8;border-radius:12px;background:#FBFAF5;padding:14px 16px;font-size:13.5px;color:#3a444d;line-height:1.6;margin-bottom:24px;}
+    .auth-note code{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;}
+
+    .try-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;}
+    .try-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;}
+    @media(max-width:640px){.try-grid{grid-template-columns:1fr;}}
+    .try-field label{display:block;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.03em;color:#5b6670;margin-bottom:5px;}
+    .try-field input{width:100%;padding:10px 12px;border:1px solid #c9c6b8;border-radius:9px;font-size:14px;font-family:inherit;box-sizing:border-box;}
+    .try-field input:focus{outline:2px solid #0f7a4f;outline-offset:1px;}
+    .try-btn{background:#0f7a4f;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:700;font-size:14.5px;cursor:pointer;}
+    .try-btn:hover{background:#0c6540;}
+    .try-out{margin-top:14px;background:#0E1116;color:#e6f4ec;border-radius:10px;padding:14px 16px;font:12.5px/1.6 'JetBrains Mono',monospace;overflow-x:auto;white-space:pre-wrap;word-break:break-word;min-height:44px;}
+    .try-note{font-size:12.5px;color:#8A939B;margin-top:10px;}
+    .try-note a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+
+    .pricing-note{font-size:13px;color:#8A939B;font-style:italic;margin-bottom:18px;}
+    .pricing-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:14px;min-width:680px;}
+    @media(max-width:720px){.pricing-grid{min-width:0;grid-template-columns:1fr;}}
+    .price-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;display:flex;flex-direction:column;}
+    .price-card.featured{border-color:#0f7a4f;box-shadow:0 6px 20px rgba(15,122,79,.12);}
+    .price-tier{font:700 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#8A939B;margin-bottom:6px;}
+    .price-card.featured .price-tier{color:#0f7a4f;}
+    .price-amt{font-size:28px;font-weight:800;color:#0E1116;margin-bottom:2px;}
+    .price-amt span{font-size:14px;font-weight:600;color:#8A939B;}
+    .price-desc{font-size:13.5px;color:#5b6670;margin:6px 0 16px;line-height:1.5;min-height:34px;}
+    .price-feat{list-style:none;padding:0;margin:0 0 18px;font-size:13.5px;color:#3a444d;line-height:1.9;flex-grow:1;}
+    .price-feat li:before{content:"✓ ";color:#0f7a4f;font-weight:800;}
+    .price-cta{display:block;text-align:center;padding:10px 16px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;}
+    .price-card.featured .price-cta{background:#0f7a4f;color:#fff;}
+    .price-card:not(.featured) .price-cta{border:1.5px solid #0F1419;color:#0F1419;}
+
+    .faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .faq summary{font-weight:700;font-size:15.5px;cursor:pointer;}
+    .faq p{margin:10px 0 0;font-size:14.5px;color:#3a444d;line-height:1.65;}
+
+    .cta{border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);padding:26px 22px;margin:8px 0 4px;text-align:center;}
+    .cta h3{font-size:21px;margin:0 0 8px;}
+    .cta p{font-size:15px;color:#3a444d;margin:0 auto 16px;max-width:520px;}
+  </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="api-hero">
+    <div class="eyebrow">Developer API</div>
+    <h1>The MileCheck API</h1>
+    <p class="sub">Highway mile markers and live DOT road alerts — all 50 states + British Columbia, one normalized API.</p>
+    <p class="value">Nobody else has done the work of normalizing 50+ separate state DOT feeds — each with its own format, auth, and quirks — into a single consistent schema. We already did it for our app. You can build on it too.</p>
+    <div class="btns">
+      <a class="primary" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
+      <a class="ghost" href="#endpoints">View endpoints</a>
+    </div>
+  </div>
+
+  <!-- VALUE -->
+  <div class="api-section">
+    <div class="value-grid">
+      <div class="value-card">
+        <h3>One schema, 50 states + BC</h3>
+        <p>Every state and province speaks a different DOT dialect. MileCheck normalizes them all into one consistent response shape.</p>
+      </div>
+      <div class="value-card">
+        <h3>Mile-marker geocoding</h3>
+        <p>Turn GPS coordinates into the nearest highway mile marker — route, milepost, and direction.</p>
+      </div>
+      <div class="value-card">
+        <h3>Live DOT alerts</h3>
+        <p>Closures, crashes, construction, and road-weather — classified and normalized from live state feeds.</p>
+      </div>
+      <div class="value-card">
+        <h3>We maintain the integrations</h3>
+        <p>51 upstream feeds, each with its own auth and shape. When one breaks, we fix it — not you.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENDPOINTS -->
+  <div class="api-section" id="endpoints">
+    <h2>Endpoints</h2>
+    <p class="lead">Base URL: <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">https://milepost-proxy.leahgerber93.workers.dev</code></p>
+
+    <div class="auth-note">
+      <strong>Authentication</strong> — every request needs an API key. Pass it as a query parameter (<code>?apikey=YOUR_KEY</code>), an <code>x-api-key</code> header, or an <code>Authorization: Bearer YOUR_KEY</code> header. Don't have a key yet? <a href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access" style="color:#0f7a4f;font-weight:700;">Email info@milecheckapp.com</a>.
+    </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/locate</span></div>
+      <p class="ep-desc">Coordinates in, nearest highway mile marker out.</p>
+      <p class="ep-params"><code>lat</code> and <code>lon</code> required · <code>state</code> optional (2-letter code, narrows the search)</p>
+
+      <p class="ep-label">Request</p>
+      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/locate?apikey=YOUR_KEY&amp;lat=47.869&amp;lon=-121.760"</pre>
+
+      <p class="ep-label">Response</p>
+      <pre class="codeblock">{
+  "milepost": 25,
+  "route": "SR 2",
+  "route_class": "S",
+  "state": "WA",
+  "direction": null,
+  "distance_mi": 0.04,
+  "coordinates": { "lat": 47.869404, "lon": -121.760126 },
+  "query": { "lat": 47.869, "lon": -121.76 }
+}</pre>
+    </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/alerts</span></div>
+      <p class="ep-desc">Live, normalized DOT road conditions and incidents for a state — closures, crashes, construction, road-weather.</p>
+      <p class="ep-params"><code>state</code> (2-letter code) <em>or</em> <code>lat</code> + <code>lon</code> required · <code>bbox=minLon,minLat,maxLon,maxLat</code> optional · <code>limit=N</code> optional</p>
+
+      <p class="ep-label">Request</p>
+      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/alerts?apikey=YOUR_KEY&amp;state=WA"</pre>
+
+      <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged — arrays truncated)</span></p>
+      <pre class="codeblock">{
+  "state": "WA",
+  "generated_at": "2026-08-31T18:42:00Z",
+  "counts": { "conditions": 16, "incidents": 184 },
+  "conditions": [ <span class="cmt">/* road-weather-reports */</span> ],
+  "incidents": [ <span class="cmt">/* incident-reports: closures, crashes, construction, etc. */</span> ],
+  "source_status": { "conditions": "live", "incidents": "live" }
+}</pre>
+    </div>
+  </div>
+
+  <!-- TRY IT -->
+  <div class="api-section" id="try">
+    <h2>Try it</h2>
+    <p class="lead">Live demo of <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">/v1/locate</code>. Drop in a key, adjust the coordinates, and hit Locate.</p>
+
+    <div class="try-card">
+      <div class="try-grid">
+        <div class="try-field">
+          <label for="try-key">API key</label>
+          <input type="text" id="try-key" placeholder="YOUR_KEY" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="try-field">
+          <label for="try-lat">Latitude</label>
+          <input type="text" id="try-lat" value="47.869" inputmode="decimal" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="try-field">
+          <label for="try-lon">Longitude</label>
+          <input type="text" id="try-lon" value="-121.760" inputmode="decimal" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+      <button class="try-btn" id="try-btn" type="button">Locate</button>
+      <pre class="try-out" id="try-out">Response will appear here.</pre>
+      <p class="try-note">Need a key? <a href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access">Email info@milecheckapp.com</a>.</p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var base = "https://milepost-proxy.leahgerber93.workers.dev";
+    var btn = document.getElementById("try-btn");
+    var out = document.getElementById("try-out");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var key = document.getElementById("try-key").value.trim();
+      var lat = document.getElementById("try-lat").value.trim();
+      var lon = document.getElementById("try-lon").value.trim();
+      if (!lat || !lon) {
+        out.textContent = "Enter a latitude and longitude.";
+        return;
+      }
+      var url = base + "/v1/locate?apikey=" + encodeURIComponent(key) +
+        "&lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon);
+      out.textContent = "Loading…";
+      btn.disabled = true;
+      fetch(url)
+        .then(function (res) {
+          return res.text().then(function (text) {
+            var pretty;
+            try { pretty = JSON.stringify(JSON.parse(text), null, 2); }
+            catch (e) { pretty = text; }
+            if (!res.ok) {
+              out.textContent = "HTTP " + res.status + "\n" + pretty;
+            } else {
+              out.textContent = pretty;
+            }
+          });
+        })
+        .catch(function (err) {
+          out.textContent = "Request failed: " + err.message;
+        })
+        .finally(function () {
+          btn.disabled = false;
+        });
+    });
+  })();
+  </script>
+
+  <!-- PRICING -->
+  <div class="api-section" id="pricing">
+    <h2>Pricing</h2>
+    <p class="pricing-note">Launch pricing — subject to change.</p>
+    <div class="pricing-scroll">
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-tier">Free</div>
+          <div class="price-amt">$0</div>
+          <p class="price-desc">For evaluation and early integration work.</p>
+          <ul class="price-feat">
+            <li>1,000 requests / month</li>
+            <li>/v1/locate + /v1/alerts</li>
+            <li>Community support</li>
+          </ul>
+          <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Free%20tier">Get started</a>
+        </div>
+        <div class="price-card featured">
+          <div class="price-tier">Pay-as-you-go</div>
+          <!-- TODO: Leah to set launch price -->
+          <div class="price-amt">$X <span>/ 1,000 requests</span></div>
+          <p class="price-desc">Best for variable or growing usage beyond the free tier.</p>
+          <ul class="price-feat">
+            <li>Free tier included, then metered</li>
+            <li>/v1/locate + /v1/alerts</li>
+            <li>Email support</li>
+          </ul>
+          <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Pay-as-you-go">Get started</a>
+        </div>
+        <div class="price-card">
+          <div class="price-tier">Business</div>
+          <div class="price-amt">Custom</div>
+          <p class="price-desc">High-volume use, SLA, and invoiced billing.</p>
+          <ul class="price-feat">
+            <li>Volume pricing</li>
+            <li>Service-level agreement</li>
+            <li>Invoicing &amp; priority support</li>
+          </ul>
+          <a class="price-cta" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Business%20tier">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="api-section">
+    <h2>Questions, answered</h2>
+    <div class="faq">
+      <details>
+        <summary>What's covered by the MileCheck API?</summary>
+        <p>Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema.</p>
+      </details>
+      <details>
+        <summary>What's the difference between /v1/locate and /v1/alerts?</summary>
+        <p><code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">/v1/locate</code> turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">/v1/alerts</code> returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location.</p>
+      </details>
+      <details>
+        <summary>How do API keys work?</summary>
+        <p>Every request needs an API key, passed as a query parameter, an <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">x-api-key</code> header, or an <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;">Authorization: Bearer</code> header. Email info@milecheckapp.com to request one.</p>
+      </details>
+      <details>
+        <summary>Is there an SLA?</summary>
+        <p>The Business tier includes a service-level agreement and invoicing for high-volume or mission-critical use. Contact us to discuss terms.</p>
+      </details>
+      <details>
+        <summary>Where does the data come from?</summary>
+        <p>Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema.</p>
+      </details>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="api-section" style="padding-top:0;">
+    <div class="cta">
+      <h3>Ready to integrate?</h3>
+      <p>Tell us what you're building and we'll get you a key. Free tier available today; the API is launching, not yet self-serve.</p>
+      <div class="btns">
+        <a class="primary" href="mailto:info@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
+        <a class="ghost" href="../index.html#b2b">See MileCheck for platforms</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Learn more</p>
+          <ul class="footer-list">
+            <li><a href="../what-is-my-mile-marker/">What is my mile marker?</a></li>
+            <li><a href="../cameras/">Highway cameras</a></li>
+            <li><a href="../passes/">Mountain passes</a></li>
+            <li><a href="../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Always drive to conditions and follow posted signs.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+</body>
+</html>
