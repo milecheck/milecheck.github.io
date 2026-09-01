@@ -316,6 +316,25 @@ const GUIDES = [
     ],
     related:`<a href="../chains-required-explained/">What "chains required" means</a> · <a href="../what-is-black-ice/">What is black ice?</a> · <a href="../check-road-conditions-before-a-trip/">Check road conditions</a>`,
   },
+  {
+    slug:'best-fall-road-trips', eyebrow:'Road trips',
+    title:"The Best Fall Road Trips in the US (Foliage Drives)",
+    h1:"The best fall road trips in the US",
+    lede:`When the leaves turn, a handful of American highways become some of the most beautiful drives on earth. Here are the best fall road trips by region — plus a note on timing, because peak color (and the first mountain snow) waits for no one.`,
+    sections:[
+      ['Northeast — first to turn',`New England peaks earliest, roughly <strong>late September to mid-October.</strong> The <strong>Kancamagus Highway (NH-112)</strong> through New Hampshire's White Mountains is the classic — about 35 miles of blazing color with no gas stations, so fill up first. <strong>Vermont's Route 100</strong> runs the spine of the Green Mountains, and the <strong>Mohawk Trail (MA-2)</strong> in Massachusetts winds through hardwood forest. These are rural, two-lane, and often out of cell range — know your route before you lose signal.`],
+      ['The Appalachians — the main event',`Mid-October is peak for the southern mountains. The <strong>Blue Ridge Parkway</strong> — 469 miles across Virginia and North Carolina — is the definitive American fall drive, and <strong>Skyline Drive</strong> through Shenandoah is its northern companion. Farther south, <strong>Newfound Gap Road (US-441)</strong> climbs through Great Smoky Mountains National Park. Elevation matters here: the color peaks weeks apart between the valley floor and the ridgelines.`],
+      ['The Great Lakes and the Mississippi',`The upper Midwest turns in early-to-mid October. In Michigan, <strong>M-22</strong> and the <strong>Tunnel of Trees (M-119)</strong> hug Lake Michigan under a canopy of color. The <strong>Great River Road</strong> follows the Mississippi through Minnesota, Wisconsin, and Iowa — hundreds of miles of river bluffs and small towns.`],
+      ['The Rockies and the West — timing matters most',`Western color is about <strong>aspens</strong>, and it comes early — <strong>late September</strong> in the high country. Colorado's <strong>Million Dollar Highway (US-550)</strong> through the San Juans and Montana's <strong>Going-to-the-Sun Road</strong> in Glacier are stunners — but Going-to-the-Sun ⚠️ <strong>closes with the first heavy snow, sometimes in September</strong>, so check before you go. Oregon's <strong>Columbia River Gorge (US-30 / I-84)</strong>, California's <strong>US-395</strong> along the Eastern Sierra, and Utah's <strong>Scenic Byway 12</strong> round out the West. These high routes cross passes that can go from foliage to chains-required in a single storm — <a href="../check-road-conditions-before-a-trip/">check conditions before you climb</a> and carry <a href="../chains-required-explained/">chains if the pass requires them.</a>`],
+    ],
+    faq:[
+      ['When is the best time for a fall foliage road trip?',`It depends on latitude and elevation. New England and the high Rockies peak earliest (late September to mid-October), the southern Appalachians peak in mid-to-late October, and lower elevations later still. Higher and farther north turns first.`],
+      ['What is the most famous fall road trip in the US?',`The Blue Ridge Parkway, a 469-mile route through Virginia and North Carolina, is the best-known American fall drive. New Hampshire's Kancamagus Highway and Vermont's Route 100 are the iconic New England drives.`],
+      ['Do mountain roads close in the fall?',`Some do. High-elevation routes like Glacier's Going-to-the-Sun Road close with the first heavy snow, sometimes as early as September, and mountain passes can require chains during fall storms. Always check the road's status and pass conditions before you go.`],
+      ['How do I stay found on remote scenic drives?',`Many fall routes are rural with no cell service. Note your route and watch the mile markers, or use an app like MileCheck that shows your exact mile marker offline — so you always know where you are and can report it if you need help.`],
+    ],
+    related:`<a href="../check-road-conditions-before-a-trip/">Check road conditions</a> · <a href="../chains-required-explained/">What "chains required" means</a> · <a href="../passes/">Mountain pass conditions</a>`,
+  },
 ];
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
