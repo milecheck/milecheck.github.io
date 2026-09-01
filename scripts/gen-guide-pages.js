@@ -7,6 +7,9 @@ const path = require('path');
 const APP = 'https://apps.apple.com/us/app/milecheck/id6759212851';
 const PLAY = 'https://play.google.com/store/apps/details?id=app.milecheck.mobile';
 
+// ⚠️ DRIFT NOTE (2026-08-31): the LIVE chains-required-explained page has a hand-added
+// "Les Schwab installs chains" paragraph NOT encoded here — regenerating that page would drop it.
+// Before rerunning + committing an EXISTING page, git-diff it first. New pages are safe to generate.
 const GUIDES = [
   {
     slug:'mile-markers-vs-exit-numbers', eyebrow:'Highway basics',
@@ -25,7 +28,7 @@ const GUIDES = [
       ['Why do some highways have sequential exit numbers?',`Older systems numbered exits consecutively (1, 2, 3…) instead of by mileage. Most states have switched to mile-based exit numbers, but some toll roads and older routes still use the sequential style.`],
       ['How do I find my mile marker between exits?',`Watch for the small green mile marker signs on the shoulder, or use a GPS app like <a href="`+APP+`" target="_blank" rel="noopener">MileCheck</a>, which shows your exact mile marker continuously — even with no exit or sign nearby.`],
     ],
-    related:`<a href="../what-is-my-mile-marker/">What is my mile marker?</a> · <a href="../how-interstates-are-numbered/">How interstates are numbered</a> · <a href="../report-location/">Report your location</a>`,
+    related:`<a href="../what-is-my-mile-marker/">What is my mile marker?</a> · <a href="../can-google-maps-show-mile-markers/">Can Google Maps show mile markers?</a> · <a href="../how-interstates-are-numbered/">How interstates are numbered</a> · <a href="../report-location/">Report your location</a>`,
   },
   {
     slug:'how-interstates-are-numbered', eyebrow:'Highway basics',
@@ -104,25 +107,104 @@ const GUIDES = [
     ],
     related:`<a href="../passes/">Mountain pass conditions</a> · <a href="../cameras/">Live highway cameras</a> · <a href="../corridors/i-80/">I-80 (Donner Pass)</a>`,
   },
+  {
+    slug:'three-digit-interstate-numbers', eyebrow:'Highway basics',
+    title:"What 3-Digit Interstate Numbers Mean (Loops vs Spurs)",
+    h1:"What do 3-digit interstate numbers mean?",
+    lede:`A three-digit interstate like I-405 or I-295 isn't a separate highway — it's a short auxiliary route tied to a two-digit parent. The first digit tells you whether it loops back or dead-ends.`,
+    sections:[
+      ['The last two digits name the parent',`Every three-digit interstate borrows its last two digits from a two-digit <strong>parent</strong> interstate. I-405, I-205, and I-505 are all auxiliary routes off I-5; I-495 and I-295 branch from I-95. The three-digit number just marks a spur or loop of that parent, almost always in or around a city. <a href="../how-interstates-are-numbered/">More on how interstates are numbered →</a>`],
+      ['Even first digit = a loop or beltway',`By convention, an <strong>even</strong> first digit means the route is a <strong>loop</strong> (or beltway): it leaves the parent interstate and rejoins it at the other end, usually circling a metro area. I-495 around Washington, DC and I-405 around Seattle and Los Angeles are classic loops — get on, and it will bring you back to the parent.`],
+      ['Odd first digit = a spur',`An <strong>odd</strong> first digit means a <strong>spur</strong>: it connects to the parent at only one end and dead-ends into a destination — a downtown, an airport, a port. I-395 and I-195 are spurs. They take you somewhere and stop, rather than looping back.`],
+      ['A strong hint, not an iron rule',`The loop/spur pattern holds for most three-digit interstates, but it isn't enforced everywhere — a few routes break it. And because only the last two digits have to match the parent, the <strong>same three-digit number can be reused</strong> in different states, so there is more than one I-495. Use the first digit as a strong hint, not a guarantee. However you're routed, the MileCheck app reads your exact mile marker on the interstate in real time.`],
+    ],
+    faq:[
+      ['What do the three digits on an interstate mean?',`The last two digits name the two-digit parent interstate; the first digit tells you the type. An even first digit is a loop or beltway that rejoins the parent, and an odd first digit is a spur that connects at one end and dead-ends.`],
+      ['Is I-405 a loop or a spur?',`I-405 is a loop. Its even first digit (4) marks it as a bypass that leaves I-5 and rejoins it, routing around the city.`],
+      ['Why is there more than one I-495?',`Only the last two digits of a three-digit interstate must match its parent, so the same number can be reused for different auxiliary routes in different states. Several I-495s exist across the country.`],
+      ['What is the parent of a 3-digit interstate?',`It's the two-digit interstate formed by the last two digits. I-280's parent is I-80; I-405's parent is I-5.`],
+    ],
+    related:`<a href="../how-interstates-are-numbered/">How interstates are numbered</a> · <a href="../us-highways-vs-interstates/">US highways vs interstates</a> · <a href="../corridors/">Interstate corridors</a>`,
+  },
+  {
+    slug:'road-street-avenue-difference', eyebrow:'Road basics',
+    title:"Road vs Street vs Avenue: What Road Names Mean",
+    h1:"Road, street, avenue, drive: what the suffixes mean",
+    lede:`Street, avenue, boulevard, lane, court — the word at the end of a road name usually follows a loose convention about what kind of road it is. They're traditions, not strict laws, but the patterns are real.`,
+    sections:[
+      ['Street vs avenue: the grid',`Traditionally, a <strong>street</strong> and an <strong>avenue</strong> run perpendicular to each other in a city grid — in many cities the streets run one direction and the avenues cross them. Both are public roads with buildings facing them; the pairing is about orientation, not size.`],
+      ['Boulevard, drive, lane, way',`A <strong>boulevard</strong> is a wide, multi-lane road, often with a landscaped median. A <strong>drive</strong> tends to be a longer road that winds to follow the natural terrain — a hillside or a shoreline. A <strong>lane</strong> is narrow, historically rural. A <strong>way</strong> is a small side road branching off a larger one.`],
+      ['Court, place, terrace: the dead ends',`A <strong>court</strong> (or <strong>cul-de-sac</strong>) ends in a loop with no through traffic. A <strong>place</strong> is usually a short road or dead end with no outlet. A <strong>terrace</strong> follows the top of a slope. These names hint that you won't pass through to somewhere else.`],
+      ['Conventions, not rules',`Here's the honest part: none of this is legally binding. Developers and city planners follow the conventions loosely, and plenty of roads break them — you'll find a "Street" that curves and an "Avenue" with no grid at all. The suffix is a helpful hint about a road's character, not a guarantee. Out on the highway the naming is far stricter — and MileCheck reads your exact mile marker on any numbered route in real time. <a href="../how-interstates-are-numbered/">See how highways are numbered →</a>`],
+    ],
+    faq:[
+      ["What's the difference between a street and an avenue?",`By tradition, streets and avenues run perpendicular to each other in a city grid — often streets one direction and avenues crossing them. Both are public roads lined with buildings, so the difference is orientation, not size. It's a convention, not a law.`],
+      ['What is the difference between a road, a drive, and a lane?',`"Road" is the generic term for any route between two places. A "drive" usually winds to follow the terrain. A "lane" is a narrow, historically rural road. These are loose naming conventions rather than strict rules.`],
+      ['Does a court mean a dead end?',`Usually yes. A court or cul-de-sac ends in a loop or closed end with no through traffic. "Place" and "terrace" often signal a dead end or no-outlet road as well.`],
+      ['Are road name suffixes official rules?',`No. Street, avenue, boulevard and the rest follow common conventions that planners apply loosely. Many roads don't match the traditional meaning, so treat the suffix as a hint, not a guarantee.`],
+    ],
+    related:`<a href="../how-interstates-are-numbered/">How interstates are numbered</a> · <a href="../highway-sign-colors/">Highway sign colors</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
+  {
+    slug:'runaway-truck-ramps', eyebrow:'Highway basics',
+    title:"What Are Runaway Truck Ramps? (How They Work)",
+    h1:"What are runaway truck ramps?",
+    lede:`On steep mountain downgrades you'll see signs for a "runaway truck ramp" — an emergency escape lane built to stop a truck that has lost its brakes. Here's how they work and why they're there.`,
+    sections:[
+      ['Why they exist',`A fully loaded truck descending a long, steep grade can overheat and lose its brakes — a failure called brake fade. A runaway truck ramp (or escape ramp) is a dedicated lane, usually branching uphill off the right shoulder, that gives a brakeless truck a safe place to stop instead of hurtling into traffic at the bottom of the grade.`],
+      ['How they stop a truck',`Most ramps use an <strong>arrester bed</strong> — a long pit of loose gravel or sand, often on an uphill slope. The deep, loose material grabs the wheels and drags the truck to a halt through rolling resistance, while the incline lets gravity help. Some ramps use a steep uphill grade alone, or a pile of sand as the arrestor.`],
+      ["Where you'll find them",`They appear on notorious long descents — mountain passes and grades where the road drops steadily for miles. Signs warn well in advance ("Runaway truck ramp, 1 mile"), so a driver already in trouble knows one is coming and where it is.`],
+      ['What it means for every driver',`Even if you never use one, the presence of runaway ramps is a signal: you're on a serious grade. Gear down, keep your speed in check, and give trucks room — a heavy vehicle can't stop the way you can. MileCheck shows your exact mile marker as you descend, so if you ever have to report a problem or a stopped vehicle, you know precisely where you are. <a href="../passes/">See current mountain pass conditions →</a>`],
+    ],
+    faq:[
+      ['What is a runaway truck ramp?',`It's an emergency escape lane on a steep downgrade, built to stop a truck that has lost its brakes. It usually branches off the right side and uses a bed of loose gravel or sand, often uphill, to bring the vehicle safely to a stop.`],
+      ['How does a runaway truck ramp stop a truck?',`Most use an arrester bed of deep, loose gravel or sand on an uphill slope. The loose material and the incline together drag the truck to a halt through rolling resistance and gravity.`],
+      ['Why do trucks lose their brakes on downgrades?',`Long, steep descents force the brakes to work continuously until they overheat and fade. Truckers gear down to use engine braking, but an escape ramp is the backup if the brakes fail anyway.`],
+      ['Can a car use a runaway truck ramp?',`No. They're built and reserved for trucks and heavy vehicles in a genuine brake emergency. A car should never pull onto one to park or turn around — the loose surface can trap a light vehicle, and a real runaway truck may need it.`],
+    ],
+    related:`<a href="../chains-required-explained/">What "chains required" means</a> · <a href="../passes/">Mountain pass conditions</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
+  {
+    slug:'left-exit-vs-right-exit', eyebrow:'Highway basics',
+    title:"Left Exit vs Right Exit: What the Exit Tab Tells You",
+    h1:"Left exit vs right exit: what the exit tab tells you",
+    lede:`That little "EXIT" tab on top of a green highway sign does more than number the exit — which side it sits on tells you whether you'll leave from the left lane or the right. Here's how to read it.`,
+    sections:[
+      ['The exit tab',`The small tab mounted on top of a big green guide sign carries the exit number. It's called the <strong>exit tab</strong>, and where it sits on the sign is a deliberate signal set by the federal sign manual (the MUTCD) — not just decoration.`],
+      ['Right side = right exit',`By default the exit tab sits on the <strong>right</strong> of the sign, and the great majority of exits leave from the right lane. If the tab is on the right or centered, plan to be in the right-hand lanes to take the ramp.`],
+      ['Left side = left exit',`When the tab is placed on the <strong>left</strong> of the sign — often with the words "LEFT EXIT" — the ramp leaves from the <strong>left</strong> lane instead. Left exits are less common and easy to miss, which is exactly why the tab moves to the left to warn you to get over early.`],
+      ['The number is usually your mile marker',`The number on the tab is usually the exit's mile marker, so it also tells you how far along the highway you are. For your continuous position between exits, watch the small green mile markers — or let MileCheck read your exact mile marker in real time as you drive. <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers →</a>`],
+    ],
+    faq:[
+      ['What does the exit tab on a highway sign mean?',`It shows the exit number, and its position signals the exit side. A tab on the right (the default) means a right-lane exit; a tab on the left means the ramp leaves from the left lane.`],
+      ['How do I know if an exit is on the left?',`Look at the exit tab on the sign. If it's placed on the left side, often labeled "LEFT EXIT," the ramp leaves from the left lane. A right or centered tab means a normal right-side exit.`],
+      ['Why are some highway exits on the left?',`Left exits usually come from the road's design — older interchanges, express/local lane splits, or geography. Because drivers expect right exits, signs move the exit tab to the left to warn them in advance.`],
+      ['Is the exit number the same as the mile marker?',`On most US interstates, yes — exit numbers are mile-based, so the number on the tab is about the same as the nearest mile marker. Some older highways use sequential numbering that doesn't match mileage.`],
+    ],
+    related:`<a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> · <a href="../highway-sign-colors/">Highway sign colors</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
 ];
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
 function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'mainEntityOfPage':'https://milecheckapp.com/'+g.slug+'/'}); }
 
 function page(g){
+  const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const secHtml=g.sections.map(([h,p])=>`    <h2>${h}</h2>\n    <p>${p}</p>`).join('\n');
   const faqHtml=g.faq.map(([q,a])=>`      <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
+  const t=esc(g.title)+' | MileCheck';
+  const desc=esc(g.lede.replace(/<[^>]+>/g,'').slice(0,155));
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${g.title} | MileCheck</title>
-  <meta name="description" content="${g.lede.replace(/<[^>]+>/g,'').slice(0,155)}">
+  <title>${t}</title>
+  <meta name="description" content="${desc}">
   <link rel="canonical" href="https://milecheckapp.com/${g.slug}/">
-  <meta property="og:title" content="${g.title} | MileCheck">
-  <meta property="og:description" content="${g.lede.replace(/<[^>]+>/g,'').slice(0,155)}">
+  <meta property="og:title" content="${t}">
+  <meta property="og:description" content="${desc}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/${g.slug}/">
   <meta property="og:type" content="article">
@@ -172,7 +254,7 @@ function page(g){
         <a href="../index.html#story">Story</a>
         <a href="../index.html#b2b">B2B</a>
         <a href="../blog/">Blog</a>
-        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+        <a href="/get/" class="nav-cta">Get the app</a>
       </nav>
     </div>
   </header>
