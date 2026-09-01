@@ -511,6 +511,42 @@ const GUIDES = [
     title:"What Is a Zipper Merge (and Why You Should Use It)",
     h1:"What is a zipper merge?",
     lede:`When a lane closes ahead, most drivers merge early and leave the closing lane empty — and it actually makes the backup worse. The zipper merge is the fix, and traffic engineers want you to use it.`,
+    figure:`<svg viewBox="0 0 720 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zipper merge diagram: both lanes stay full up to the merge point, then cars alternate one at a time into the open lane.">
+ <rect x="284" y="6" width="168" height="26" rx="5" fill="#f59e0b"/>
+ <text x="368" y="24" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#0E1116">LANE CLOSED AHEAD</text>
+ <rect x="16" y="100" width="688" height="52" rx="4" fill="#333b44"/>
+ <rect x="16" y="48" width="388" height="52" fill="#333b44"/>
+ <line x1="16" y1="100" x2="404" y2="100" stroke="#ffffff" stroke-width="3" stroke-dasharray="15 11"/>
+ <line x1="404" y1="42" x2="404" y2="160" stroke="#c9ced3" stroke-width="2" stroke-dasharray="4 5"/>
+ <g fill="#f59e0b" stroke="#0E1116" stroke-width="1">
+  <polygon points="398,92 410,92 404,76"/><rect x="396" y="93" width="16" height="4" rx="1"/>
+  <polygon points="426,80 438,80 432,64"/><rect x="424" y="81" width="16" height="4" rx="1"/>
+  <polygon points="454,68 466,68 460,52"/><rect x="452" y="69" width="16" height="4" rx="1"/>
+ </g>
+ <g fill="#94a3b8">
+  <g><rect x="30" y="61" width="50" height="26" rx="6"/><rect x="60" y="65" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+  <g><rect x="92" y="61" width="50" height="26" rx="6"/><rect x="122" y="65" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+  <g><rect x="154" y="61" width="50" height="26" rx="6"/><rect x="184" y="65" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+  <g><rect x="216" y="61" width="50" height="26" rx="6"/><rect x="246" y="65" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+  <g><rect x="278" y="61" width="50" height="26" rx="6"/><rect x="308" y="65" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+  <g><rect x="340" y="61" width="50" height="26" rx="6"/><rect x="370" y="65" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+ </g>
+ <path d="M366 76 Q404 84 418 118" fill="none" stroke="#0E1116" stroke-width="3"/>
+ <polygon points="418,126 410,110 426,112" fill="#0E1116"/>
+ <g fill="#0f7a4f">
+  <g><rect x="30" y="113" width="50" height="26" rx="6"/><rect x="60" y="117" width="14" height="18" rx="3" fill="#bfe6d4"/></g>
+  <g><rect x="92" y="113" width="50" height="26" rx="6"/><rect x="122" y="117" width="14" height="18" rx="3" fill="#bfe6d4"/></g>
+  <g><rect x="154" y="113" width="50" height="26" rx="6"/><rect x="184" y="117" width="14" height="18" rx="3" fill="#bfe6d4"/></g>
+  <g><rect x="216" y="113" width="50" height="26" rx="6"/><rect x="246" y="117" width="14" height="18" rx="3" fill="#bfe6d4"/></g>
+  <g><rect x="278" y="113" width="50" height="26" rx="6"/><rect x="308" y="117" width="14" height="18" rx="3" fill="#bfe6d4"/></g>
+  <g><rect x="340" y="113" width="50" height="26" rx="6"/><rect x="370" y="117" width="14" height="18" rx="3" fill="#bfe6d4"/></g>
+ </g>
+ <g fill="#94a3b8"><rect x="500" y="113" width="50" height="26" rx="6"/><rect x="530" y="117" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+ <g fill="#0f7a4f"><rect x="562" y="113" width="50" height="26" rx="6"/><rect x="592" y="117" width="14" height="18" rx="3" fill="#bfe6d4"/></g>
+ <g fill="#94a3b8"><rect x="624" y="113" width="50" height="26" rx="6"/><rect x="654" y="117" width="14" height="18" rx="3" fill="#e9eef2"/></g>
+ <text x="205" y="184" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="12.5" fill="#5b6670">Both lanes full to the merge point</text>
+ <text x="560" y="184" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#0f7a4f">then take turns</text>
+</svg><figcaption>Zipper merge: keep <strong>both lanes full</strong> all the way to the merge point, then <strong>alternate</strong> — one car from each lane — into the open lane.</figcaption>`,
     sections:[
       ['What a zipper merge is',`A <strong>zipper merge</strong> is what you do when a lane is closing for construction or a crash and traffic is heavy: drivers use <strong>both lanes all the way to the merge point</strong>, then take turns — one car from each lane, alternating like the teeth of a zipper — to blend into the open lane. Nobody races ahead and nobody merges a mile early; everyone just takes their turn at the front.`],
       ['Why merging early is actually worse',`It feels polite to merge early and line up in one lane, but in heavy traffic it <strong>lengthens the backup</strong> (you're using only half the road), creates a big speed difference between the packed lane and the empty one, and breeds the road rage that comes when someone seems to "skip ahead." State transportation departments have studied this — the zipper merge can cut the length of a backup significantly and keeps traffic moving more smoothly and fairly.`],
@@ -555,6 +591,8 @@ function page(g){
   const faqHtml=g.faq.map(([q,a])=>`      <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   const t=esc(g.title)+' | MileCheck';
   const desc=esc(g.lede.replace(/<[^>]+>/g,'').slice(0,155));
+  const figHtml=g.figure?`    <figure class="gfig">${g.figure}</figure>\n`:'';
+  const figCss=g.figure?`\n    .gfig{margin:6px 0 24px;}\n    .gfig svg{width:100%;height:auto;display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;}\n    .gfig figcaption{font-size:13px;color:#5b6670;text-align:center;margin-top:8px;line-height:1.5;}`:'';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -597,7 +635,7 @@ function page(g){
     .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
     .faq p{margin:10px 0 0;}
     .g-related{color:#5b6670;font-size:14px;margin-top:26px;}
-    .g-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .g-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}${figCss}
   </style>
 </head>
 <body>
@@ -625,7 +663,7 @@ function page(g){
     <h1>${g.h1}</h1>
     <p class="lede">${g.lede}</p>
 
-${secHtml}
+${figHtml}${secHtml}
 
     <div class="cta">
       <h3>Know exactly where you are — live</h3>
