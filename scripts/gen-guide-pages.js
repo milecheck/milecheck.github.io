@@ -413,9 +413,9 @@ const GUIDES = [
   },
   {
     slug:'driving-a-car-vs-a-truck', eyebrow:'Highway basics',
-    title:"Driving a Car vs a Truck: The Key Differences",
-    h1:"Driving a car vs a truck: the key differences",
-    lede:`A big truck isn't just a bigger car — it stops, turns, sees, and climbs differently in ways that surprise new drivers and matter to everyone sharing the road. Here's how the two really differ.`,
+    title:"Driving a Car vs a Semi-Truck: The Key Differences",
+    h1:"Driving a car vs a semi-truck: the key differences",
+    lede:`A loaded semi-truck — a big rig or 18-wheeler, not a pickup — isn't just a bigger car. It stops, turns, sees, and climbs so differently that it surprises new drivers and matters to everyone sharing the road. Here's how a full-size commercial truck really differs from a car.`,
     sections:[
       ['Stopping distance',`The biggest difference is <strong>stopping.</strong> A loaded truck can take the length of a football field or more to stop from highway speed — far longer than a car. That's why trucks leave big following gaps, and why cutting in front of one and braking is so dangerous: the truck simply can't stop as fast. Give trucks room, especially when you merge in front of them.`],
       ['Blind spots',`Trucks have huge <strong>blind spots</strong> — often called "no-zones" — directly behind, immediately in front, and along both sides, especially the right. The rule of thumb: <strong>if you can't see the driver's mirrors, they can't see you.</strong> Don't linger alongside a truck; pass decisively on the left and move back to where the driver can see you.`],
@@ -505,6 +505,44 @@ const GUIDES = [
       ['Do rumble strips actually prevent crashes?',`Yes. They significantly reduce run-off-road and head-on crashes, which are among the deadliest, and they cost little to install — which is why they're used so widely.`],
     ],
     related:`<a href="../what-is-black-ice/">What is black ice?</a> · <a href="../highway-driving-tips-for-new-drivers/">Highway tips for new drivers</a> · <a href="../highway-sign-colors/">Highway sign colors</a>`,
+  },
+  {
+    slug:'zipper-merge-explained', eyebrow:'Road safety',
+    title:"What Is a Zipper Merge (and Why You Should Use It)",
+    h1:"What is a zipper merge?",
+    lede:`When a lane closes ahead, most drivers merge early and leave the closing lane empty — and it actually makes the backup worse. The zipper merge is the fix, and traffic engineers want you to use it.`,
+    sections:[
+      ['What a zipper merge is',`A <strong>zipper merge</strong> is what you do when a lane is closing for construction or a crash and traffic is heavy: drivers use <strong>both lanes all the way to the merge point</strong>, then take turns — one car from each lane, alternating like the teeth of a zipper — to blend into the open lane. Nobody races ahead and nobody merges a mile early; everyone just takes their turn at the front.`],
+      ['Why merging early is actually worse',`It feels polite to merge early and line up in one lane, but in heavy traffic it <strong>lengthens the backup</strong> (you're using only half the road), creates a big speed difference between the packed lane and the empty one, and breeds the road rage that comes when someone seems to "skip ahead." State transportation departments have studied this — the zipper merge can cut the length of a backup significantly and keeps traffic moving more smoothly and fairly.`],
+      ['When to use it (and when early merging is fine)',`The zipper merge is for <strong>slow, congested traffic</strong> when a lane closes. When traffic is light and moving at highway speed, there's plenty of room to merge early and it doesn't matter. The rule of thumb: <strong>if traffic is backing up, use both lanes to the merge point and take turns;</strong> if it's free-flowing, merge whenever it's safe and convenient.`],
+      ['How to do it right',`Two habits make it work. If you're in the <strong>closing lane</strong>, stay in it up to the merge point, then merge one at a time — you're not cutting, you're using the road as designed. If you're in the <strong>through lane</strong>, let one car in ahead of you at the merge point; alternating is the whole point. MileCheck shows lane closures and construction on your route in real time, tied to your mile marker, so you know a merge is coming and where — no last-second surprise.`],
+    ],
+    faq:[
+      ['What is a zipper merge?',`When a lane closes in heavy traffic, drivers use both lanes up to the merge point and then alternate one at a time into the open lane, like the teeth of a zipper. It uses the full road and keeps the backup shorter.`],
+      ['Is it rude to drive up to the merge point?',`No — in heavy traffic it's exactly what traffic engineers recommend. Using both lanes to the merge point and taking turns is the zipper merge; merging a mile early actually makes the backup longer and traffic more aggressive.`],
+      ['When should you not zipper merge?',`When traffic is light and moving at highway speed. Then there's ample room to merge early and it makes no difference. The zipper merge matters most when traffic is slow and backing up.`],
+      ['Does the zipper merge really reduce backups?',`Yes. By using both lanes all the way to the merge point, it keeps the overall backup shorter, reduces the speed difference between lanes, and cuts the aggressive behavior early merging causes — which is why several state DOTs actively promote it.`],
+    ],
+    related:`<a href="../highway-driving-tips-for-new-drivers/">Highway tips for new drivers</a> · <a href="../check-road-conditions-before-a-trip/">Check road conditions</a> · <a href="../highway-sign-colors/">Highway sign colors</a>`,
+  },
+  {
+    slug:'sand-vs-salt-vs-brine', eyebrow:'Winter driving',
+    title:"Sand vs Salt vs Brine: How Roads Are Treated for Winter",
+    h1:"Sand vs salt vs brine: how roads are treated for winter",
+    lede:`When a winter storm hits, crews reach for one of three tools — salt, sand, or brine. They work in completely different ways, and knowing the difference explains a lot about what you're driving on.`,
+    sections:[
+      ['Salt: melts the ice',`<strong>Salt</strong> (rock salt) is the workhorse. It <strong>lowers the freezing point of water</strong>, so ice and snow melt instead of bonding to the pavement. It needs a little moisture and traffic to get working, and it loses effectiveness in extreme cold — below roughly <strong>15°F</strong>, plain salt struggles. It's cheap and effective in most winter conditions, which is why you see it everywhere.`],
+      ['Sand: adds traction',`<strong>Sand doesn't melt anything.</strong> It's spread on top of packed snow and ice to give your tires something to grip — pure traction. Crews use it when it's <strong>too cold for salt to work</strong>, or for immediate grip on a hill, a curve, or an intersection. The trade-off is cleanup: sand has to be swept up later and can clog storm drains.`],
+      ['Brine: prevents ice before it forms',`<strong>Brine</strong> is salt already dissolved in water — the liquid you see sprayed on the road in stripes <strong>before</strong> a storm arrives. Because it's already wet, it works immediately and sticks to the pavement, keeping snow and ice from <strong>bonding</strong> in the first place — that's called anti-icing. It uses less salt overall and is often cheaper and easier on the environment than dry salt, which is why more agencies pre-treat with it.`],
+      ['Which one, and why it matters to you',`Crews mix and match based on temperature, timing, and the road: brine to pre-treat before a storm, salt to melt during it, sand for traction when it's too cold to melt anything. Knowing what's down helps you read the road — a salted road is melting, a sanded one is likely icy underneath. Snowplow and DOT crews log <strong>what they spread and where</strong> for their records; MileCheck's trip log captures the material (sand, salt, or brine) and the mile markers, so that documentation isn't from memory. <a href="../highway-tips-for-new-snowplow-drivers/">More for snowplow operators →</a>`],
+    ],
+    faq:[
+      ['What is the difference between salt and sand on roads?',`Salt melts ice by lowering water's freezing point, so it removes snow and ice. Sand doesn't melt anything — it sits on top of ice and snow to give tires traction. Salt clears the road; sand provides grip when it's too cold to melt.`],
+      ['What is road brine?',`Brine is salt dissolved in water, sprayed on roads before a storm. Because it's already liquid, it works immediately and keeps snow and ice from bonding to the pavement — a strategy called anti-icing. It uses less salt than dry rock salt.`],
+      ['Why do crews use sand instead of salt sometimes?',`Salt loses effectiveness in extreme cold (below about 15°F) and needs moisture and traffic to work. When it's too cold for salt to melt ice, crews spread sand for immediate traction instead.`],
+      ['Why do roads get sprayed before it even snows?',`That's brine — an anti-icing treatment applied before the storm so snow and ice can't bond to the pavement. Pre-treating makes the eventual plowing and salting far more effective and uses less material overall.`],
+    ],
+    related:`<a href="../highway-tips-for-new-snowplow-drivers/">Highway tips for new snowplow drivers</a> · <a href="../what-is-black-ice/">What is black ice?</a> · <a href="../chains-required-explained/">What "chains required" means</a>`,
   },
 ];
 
