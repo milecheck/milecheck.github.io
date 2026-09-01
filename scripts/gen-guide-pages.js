@@ -430,6 +430,82 @@ const GUIDES = [
     ],
     related:`<a href="../highway-tips-for-new-cdl-drivers/">Highway tips for new CDL drivers</a> · <a href="../steep-grade-signs-explained/">Steep grade signs</a> · <a href="../runaway-truck-ramps/">Runaway truck ramps</a>`,
   },
+  {
+    slug:'highway-vs-freeway-vs-expressway', eyebrow:'Highway basics',
+    title:"Highway vs Freeway vs Expressway: What's the Difference?",
+    h1:"Highway vs freeway vs expressway: what's the difference?",
+    lede:`People use these words interchangeably, but they don't all mean the same thing — and the lines blur by region. Here's the general distinction between a highway, a freeway, and an expressway.`,
+    sections:[
+      ['Highway is the umbrella term',`<strong>Highway</strong> is the broad word for any major public road built for through traffic between places. Every freeway and expressway is a highway, but so is a two-lane US route through the countryside. When people say "highway," they just mean a main road — it says nothing about stoplights or speed.`],
+      ['Freeway: no stops, no cross traffic',`A <strong>freeway</strong> is a highway with <strong>full access control</strong>: no traffic lights, no intersections, no cross traffic. You get on and off only by ramps, and the opposing directions are separated. Interstates are freeways. The name comes from "free-flowing," not "free of tolls" — some freeways are tolled.`],
+      ['Expressway: mostly free-flowing, with exceptions',`An <strong>expressway</strong> sits in between. It's built for higher speeds with limited access, but it may still have an occasional at-grade intersection, signal, or cross street — things a true freeway never has. In practice the terms overlap, and some states use "expressway" for roads others would call freeways.`],
+      ['Why the words blur',`Usage is regional — Californians say "freeway," much of the East and South says "highway" or "expressway," and official road names don't always match the engineering definition. What matters for driving is the actual road: does it have cross traffic and signals, or not? Whatever you're on, MileCheck shows your exact mile marker, live alerts, and the nearest camera.`],
+    ],
+    faq:[
+      ['What is the difference between a highway and a freeway?',`Highway is the general term for any major through road. A freeway is a specific kind of highway with full access control — no intersections, signals, or cross traffic, entered only by ramps. All freeways are highways, but not all highways are freeways.`],
+      ['Is an expressway the same as a freeway?',`Not quite. A freeway has no at-grade intersections or signals at all. An expressway is also built for high-speed, limited-access travel but may keep an occasional intersection or light. The terms overlap and vary by region.`],
+      ["Does \"freeway\" mean it's free of tolls?",`No. "Freeway" refers to free-flowing traffic with no cross streets or signals, not to cost. Some freeways charge tolls.`],
+      ['Are interstates freeways?',`Yes. Interstate highways are built to freeway standards — fully access-controlled, with no intersections or cross traffic, entered and exited only by ramps.`],
+    ],
+    related:`<a href="../us-highways-vs-interstates/">US highways vs interstates</a> · <a href="../how-interstates-are-numbered/">How interstates are numbered</a> · <a href="../highway-sign-colors/">Highway sign colors</a>`,
+  },
+  {
+    slug:'why-no-interstate-50-or-60', eyebrow:'Highway basics',
+    title:"Why Is There No Interstate 50 or Interstate 60?",
+    h1:"Why is there no Interstate 50 or Interstate 60?",
+    lede:`Look at a US interstate map and you'll find I-40 and I-70 — but no I-50 or I-60. It's not an oversight. The numbers were deliberately skipped, and the reason is about avoiding confusion.`,
+    sections:[
+      ['Two road systems share the same numbers',`The US has two separate numbered systems: the older <strong>US routes</strong> and the newer <strong>interstates</strong>. Both use one- and two-digit numbers, so the same number can exist in each. Usually that's fine because the two roads are far apart.`],
+      ['I-50 and I-60 would collide with US-50 and US-60',`But <strong>US-50 and US-60</strong> are major east–west highways that run right across the middle of the country — exactly where an east–west I-50 or I-60 would fall (interstate numbers climb south to north, so 50 and 60 land mid-map). Signing an "I-50" near "US-50" in the same region would confuse drivers, so planners simply <strong>avoided those numbers.</strong>`],
+      ["It's a guideline, not an airtight law",`The rule of thumb is to not duplicate a two-digit interstate and US route in the same part of the country. It's followed closely for big cross-country numbers like 50 and 60, though the system isn't perfectly consistent everywhere. The result is the gap you notice on the map.`],
+      ['Reading the rest of the grid',`The rest of interstate numbering is very logical once you know it — odd numbers run north–south, even run east–west, and they climb from west to east and south to north. <a href="../how-interstates-are-numbered/">See how interstates are numbered →</a> Wherever you are on the grid, MileCheck shows your exact mile marker in real time.`],
+    ],
+    faq:[
+      ['Why is there no Interstate 50?',`To avoid confusion with US Route 50, a major east–west highway across the middle of the country — right where an east–west Interstate 50 would fall. Planners skipped the number rather than sign both in the same region.`],
+      ['Why is there no Interstate 60?',`Same reason as I-50: US-60 is a major mid-country east–west route, and an Interstate 60 would run through the same area, so the number was avoided to prevent confusion.`],
+      ['Are other interstate numbers skipped too?',`The guiding rule is to avoid giving a two-digit interstate the same number as a US route in the same region. I-50 and I-60 are the most famous gaps because US-50 and US-60 are prominent mid-country routes.`],
+      ["Is 'Interstate 60' a real highway?",`No. There is no Interstate 60 in the US system — the number was intentionally not used. (It's also the title of a 2002 movie, which is fictional.)`],
+    ],
+    related:`<a href="../how-interstates-are-numbered/">How interstates are numbered</a> · <a href="../three-digit-interstate-numbers/">3-digit interstate numbers</a> · <a href="../us-highways-vs-interstates/">US highways vs interstates</a>`,
+  },
+  {
+    slug:'loneliest-road-in-america', eyebrow:'Road trips',
+    title:"The Loneliest Road in America: US-50 Across Nevada",
+    h1:"The loneliest road in America: US-50 across Nevada",
+    lede:`In 1986, Life magazine called US-50 across Nevada "The Loneliest Road in America" — as a warning. Nevada leaned in, and it's now one of the most memorable drives in the country. Here's what to know before you go.`,
+    sections:[
+      ['Where it got the name',`A 1986 <strong>Life</strong> magazine article dubbed the Nevada stretch of <strong>US-50</strong> the loneliest road in America, warning of "no points of interest" and saying drivers needed "survival skills." Nevada turned the insult into a tourism campaign — complete with a survival guide and passport stamps at the towns along the way.`],
+      ['What the drive is actually like',`US-50 crosses the wide-open <strong>Great Basin</strong> — long, straight stretches over one mountain range and valley after another, with small towns (Fallon, Austin, Eureka, Ely) spaced far apart and almost nothing in between. It's beautiful in a stark, big-sky way, and genuinely remote.`],
+      ['Come prepared',`Treat the remoteness seriously: <strong>fuel up at every town</strong> (the gaps between gas can be long), carry water, and don't count on cell service for miles at a stretch. Tell someone your route. Because signal is spotty, know your route and watch the mile markers — a paper map or an offline app beats a dead phone.`],
+      ['Knowing where you are out there',`On an empty highway, your <strong>mile marker</strong> is how you tell anyone where you are — a tow, a ranger, a friend. MileCheck shows your exact mile marker even offline, so on a road this empty you always know your spot. <a href="../report-location/">How to report your location →</a>`],
+    ],
+    faq:[
+      ['What is the Loneliest Road in America?',`US Route 50 across Nevada, named "The Loneliest Road in America" by Life magazine in 1986 for its long, remote stretches through the Great Basin, with small towns far apart and little in between.`],
+      ['Why is US-50 in Nevada called the loneliest road?',`Because of how remote and empty it is — long straight stretches across desert basins and mountain ranges, with towns spaced far apart and almost no services between them. A 1986 Life article gave it the nickname.`],
+      ['Is it safe to drive the Loneliest Road?',`Yes, with preparation. Fuel up in every town, carry water, don't rely on cell service, and tell someone your route. The main challenge is the remoteness, not the road itself.`],
+      ['How long is the Loneliest Road?',`The Nevada section of US-50 runs roughly 400 miles across the state. US-50 overall is a coast-to-coast route, but the "loneliest" nickname refers specifically to the Nevada stretch.`],
+    ],
+    related:`<a href="../best-fall-road-trips/">Best fall road trips</a> · <a href="../check-road-conditions-before-a-trip/">Check road conditions</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a>`,
+  },
+  {
+    slug:'what-are-rumble-strips', eyebrow:'Highway basics',
+    title:"What Are Rumble Strips For?",
+    h1:"What are rumble strips for?",
+    lede:`That sudden loud BRRRP when your tires drift onto grooved pavement is a rumble strip — one of the cheapest, most effective safety features on the highway. Here's what they do.`,
+    sections:[
+      ['A wake-up you feel and hear',`Rumble strips are grooved or raised patterns cut into the pavement that make a loud <strong>rumble and vibration</strong> when your tires cross them. The whole point is to grab the attention of a driver who's <strong>drifting</strong> — drowsy, distracted, or looking away — and snap them back before they leave the road.`],
+      ['Shoulder and centerline',`They show up in two main places. <strong>Shoulder</strong> rumble strips warn you when you're drifting off the right edge toward the shoulder or a ditch. <strong>Centerline</strong> rumble strips run down the middle of a two-lane road and warn you when you're drifting into oncoming traffic — one of the deadliest kinds of crash.`],
+      ['Why they work so well',`Run-off-road and head-on crashes are among the most severe, and a huge share involve a driver who simply drifted out of their lane. Rumble strips are inexpensive to install and cut those crashes dramatically — which is why highway agencies use them so widely.`],
+      ['What to do when you hit one',`If you hit a rumble strip you didn't mean to, <strong>don't jerk the wheel.</strong> Ease back into your lane smoothly and treat it as the warning it is — if you're tired, that drift is your signal to rest. On a long empty highway, MileCheck keeps your exact mile marker on screen, so if you do pull off to call for help, you know precisely where you are.`],
+    ],
+    faq:[
+      ['What are rumble strips for?',`They alert a driver who is drifting out of their lane — from drowsiness, distraction, or looking away — with a loud rumble and vibration, giving a chance to correct before running off the road or crossing into oncoming traffic.`],
+      ['What is the difference between shoulder and centerline rumble strips?',`Shoulder rumble strips run along the road's edge and warn you when you drift off the right side. Centerline rumble strips run down the middle of a two-lane road and warn you when you drift toward oncoming traffic.`],
+      ['What should you do if you hit a rumble strip?',`Don't jerk the wheel. Steer smoothly back into your lane, and take the rumble as a warning — if you're drowsy or distracted, it's a sign to refocus or pull over and rest.`],
+      ['Do rumble strips actually prevent crashes?',`Yes. They significantly reduce run-off-road and head-on crashes, which are among the deadliest, and they cost little to install — which is why they're used so widely.`],
+    ],
+    related:`<a href="../what-is-black-ice/">What is black ice?</a> · <a href="../highway-driving-tips-for-new-drivers/">Highway tips for new drivers</a> · <a href="../highway-sign-colors/">Highway sign colors</a>`,
+  },
 ];
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
