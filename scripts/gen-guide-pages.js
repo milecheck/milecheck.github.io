@@ -599,6 +599,28 @@ const GUIDES = [
     ],
     related:`<a href="../highway-tips-for-new-snowplow-drivers/">Highway tips for new snowplow drivers</a> · <a href="../what-is-black-ice/">What is black ice?</a> · <a href="../chains-required-explained/">What "chains required" means</a>`,
   },
+  {
+    slug:'who-maintains-the-roads', eyebrow:'Highway basics',
+    title:"Who Maintains the Roads? Federal, State, County & City",
+    h1:"Who maintains the road you're driving on?",
+    lede:`The interstate, the county road, the city street, and the road through a national park are all run by different agencies — and it's not always the one you'd guess. Here's who's responsible for what.`,
+    sections:[
+      ['State DOTs run the highways',`Each state's <strong>Department of Transportation (DOT)</strong> maintains the interstates, US highways, and state routes within its borders — paving, plowing, signing, and posting the mile markers. State DOTs are also who publish the live road-condition and closure data. The <strong>federal government (FHWA)</strong> funds the Interstate System and sets the standards, but it doesn't do the day-to-day maintenance — the states do. (This is exactly why MileCheck works: it pulls together the data 50 state DOTs publish for their highways.)`],
+      ['Counties and cities run the local roads',`Below the state system, <strong>county</strong> governments maintain county and rural roads, and <strong>city</strong> public-works departments maintain local streets, signals, and signs in town. That's why a pothole on the interstate goes to the state DOT, but one on your street goes to the city. It's also why detailed live road data usually stops at the state-highway level — local streets aren't centrally reported.`],
+      ['The "other" roads: federal land, tribal, and toll',`Some roads answer to none of the above. Roads inside <strong>national parks</strong> (National Park Service) and <strong>national forests</strong> (US Forest Service) are run by those federal agencies. <strong>Tribal</strong> roads on reservations are managed with the Bureau of Indian Affairs. And many <strong>toll roads and turnpikes</strong> are run by a separate toll authority or turnpike commission — not the state DOT — which is why they sometimes have their own signage, apps, and rules.`],
+      ['Buses and trains: transit and rail',`Transit is separate again. <strong>Buses</strong> and light rail are run by local or regional <strong>transit agencies.</strong> Passenger <strong>rail</strong> splits up: Amtrak runs intercity trains, regional authorities run commuter rail, and the tracks themselves are mostly owned by private <strong>freight railroads</strong>, overseen federally by the FRA. That's why a highway agency can't tell you when a train will clear a crossing — it's a completely different owner.`],
+      ['Who enforces vs who maintains',`A DOT builds and maintains roads; it doesn't write tickets. <strong>Enforcement</strong> is a separate job: <strong>state police or highway patrol</strong> work the highways, <strong>county sheriffs</strong> cover unincorporated areas, and <strong>city police</strong> handle local streets. The rules for the <strong>vehicles</strong> themselves are split too — your state DMV handles registration and licensing, while the federal NHTSA sets vehicle-safety standards.`],
+      ['Why it matters on the road',`Knowing who runs a road tells you who to call and what data exists. State-maintained highways are monitored, signed with mile markers, and reported live — which is what MileCheck reads. Off the state system, that coverage thins out. Wherever you are, your mile marker on a highway (or your exact coordinates anywhere) is how you tell someone precisely where you are. <a href="../report-location/">How to report your location →</a>`],
+    ],
+    faq:[
+      ['Who maintains interstate highways?',`The state DOT maintains the interstates within its borders — paving, plowing, signing, and mile markers. The federal government (FHWA) funds and sets standards for the Interstate System but doesn't do the maintenance; the states do.`],
+      ["What's the difference between a state, county, and city road?",`State DOTs run interstates, US highways, and state routes. County governments maintain county and rural roads. Cities maintain local streets, signals, and signs. Which agency you contact about a road depends on which of them owns it.`],
+      ['Who maintains roads in national parks?',`The federal agency that manages the land — the National Park Service in national parks, the US Forest Service in national forests, and similar agencies elsewhere. These roads are not run by the state DOT.`],
+      ['Who is responsible for railroad crossings?',`The railroad that owns the tracks — mostly private freight railroads — along with federal oversight from the FRA. Highway agencies don't control train traffic, which is why they can't tell you when a crossing will clear.`],
+      ['Does the DOT give out tickets?',`No. A DOT builds and maintains roads; it doesn't enforce traffic laws. That's the job of the state police or highway patrol on highways, county sheriffs in unincorporated areas, and city police on local streets.`],
+    ],
+    related:`<a href="../us-highways-vs-interstates/">US highways vs interstates</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a> · <a href="../report-location/">Report your location</a>`,
+  },
 ];
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
