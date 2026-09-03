@@ -54,6 +54,7 @@
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     .br-nm{font-weight:800;font-size:15.5px;}
     .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
+    .br-last{font-size:12px;color:#5b6670;margin-top:2px;}
     .br-card.up .br-st{color:#DC2626;font-weight:800;}
     .br-card.recent .br-st{color:#b45309;font-weight:700;}
     .br-card.unavailable .br-st{color:#8A939B;font-weight:600;font-style:italic;}
@@ -143,7 +144,7 @@
   </div>
 
   <div class="br-notes">
-    <p><b>How it works:</b> status comes from Seattle DOT's live bridge feed. A <b style="color:#DC2626;">red</b> bridge is raised right now; <b style="color:#b45309;">amber</b> means it went down within the last 20 minutes (traffic may still be clearing); <b style="color:#0f7a4f;">green</b> is down and open to traffic. The University and Lower Spokane St bridges don't publish live status. During boating season, Ship Canal bridges open frequently — federal rules give boats priority outside posted rush-hour restrictions.</p>
+    <p><b>How it works:</b> status comes from Seattle DOT's live bridge feed. A <b style="color:#DC2626;">red</b> bridge is raised right now; <b style="color:#b45309;">amber</b> means it went down within the last 20 minutes (traffic may still be clearing); <b style="color:#0f7a4f;">green</b> is down and open to traffic. Bridges that aren't up right now also show when they <b>last opened</b>, from our own record of every raise — a bridge with no line yet is one we haven't recorded an opening for. The University and Lower Spokane St bridges don't publish live status. During boating season, Ship Canal bridges open frequently — federal rules give boats priority outside posted rush-hour restrictions.</p>
     <p><b>Statewide:</b> every regulated Washington drawbridge — Hood Canal, Grays Harbor, the Columbia — with opening rules: <a href="washington/">Washington drawbridge map</a>.</p>
     <p><b>Florida driver?</b> We built the same thing for Florida — live FDOT bridge status plus opening schedules for every regulated drawbridge: <a href="florida/">Florida drawbridge map</a>.</p>
   </div>
@@ -200,6 +201,12 @@ map.fitBounds([[47.512,-122.40],[47.675,-122.29]],{padding:[18,18]});
 let markers=[];
 
 function ago(ts){const m=Math.max(0,Math.round((Date.now()/1000-ts)/60));return m<1?'just now':m+' min';}
+// Coarser units for the "last opened" line, which is usually hours or days old —
+// "raised 4,321 min ago" is unreadable.
+function agoLong(ts){const s2=Math.max(0,Math.floor(Date.now()/1000-ts));
+  const m=Math.floor(s2/60),h=Math.floor(m/60),d=Math.floor(h/24);
+  if(m<1)return'just now';if(m<60)return m+' min ago';if(h<24)return h+(h===1?' hour ago':' hours ago');
+  return d+(d===1?' day ago':' days ago');}
 function matchKey(id){id=(id||'').toLowerCase();return BRIDGES.find(b=>id.includes(b.key));}
 
 // A JSON error body still parses, and fetch() does not reject on HTTP 500 —
@@ -215,7 +222,7 @@ async function fetchFeed(url,opts,validate){
 }
 
 async function refresh(){
-  let data={raised:[],raisedAt:{},loweredAt:{}};
+  let data={raised:[],raisedAt:{},loweredAt:{},lastRaised:{}};
   // Success must be PROVEN, not assumed. If the fetch throws, the response isn't ok,
   // the JSON body is malformed, or the payload doesn't actually carry the `raised`
   // array we read below, `data` stays at its empty defaults — and without this flag
@@ -232,6 +239,13 @@ async function refresh(){
   Object.entries(data.loweredAt||{}).forEach(([id,ts])=>{const b=matchKey(id);
     if(b&&state[b.key].tier==='down'&&(Date.now()/1000-ts)<RECENT_MIN*60){
       state[b.key]={tier:'recent',detail:'Went down '+ago(ts)+' ago — traffic clearing'};}});
+  // "Last opened" — the question people actually arrive with when nothing is up
+  // right now. Sourced from lastRaised (worker v3), which is never cleared. A
+  // bridge missing from that map has NO RECORD yet, so it gets no line at all
+  // rather than anything implying it has never opened.
+  Object.entries(data.lastRaised||{}).forEach(([id,ts])=>{const b=matchKey(id);
+    if(b&&state[b.key]&&state[b.key].tier!=='up'&&state[b.key].tier!=='unavailable'){
+      state[b.key].last='Last opened '+agoLong(ts);}});
 
   // list
   const list=document.getElementById('brList');
@@ -245,7 +259,7 @@ async function refresh(){
       const st=state[b.key];
       const el=document.createElement('div');
       el.className='br-card dyn '+st.tier;
-      el.innerHTML='<span class="br-dot"></span><div><div class="br-nm">'+b.name+'</div><div class="br-st">'+st.detail+'</div></div>';
+      el.innerHTML='<span class="br-dot"></span><div><div class="br-nm">'+b.name+'</div><div class="br-st">'+st.detail+'</div>'+(st.last?'<div class="br-last">'+st.last+'</div>':'')+'</div>';
       frag.appendChild(el);
     });
   list.insertBefore(frag,list.querySelector('.br-cta'));
@@ -265,7 +279,7 @@ async function refresh(){
     const ic=L.divIcon({className:'',iconSize:[110,60],iconAnchor:[55,b.labelUp?42:24],
       html:'<div class="bmk '+cls+'">'+inner+'</div>'});
     const m=L.marker([b.lat,b.lon],{icon:ic}).addTo(map);
-    m.bindPopup('<b>'+b.name+'</b><br>'+st.detail);
+    m.bindPopup('<b>'+b.name+'</b><br>'+st.detail+(st.last?'<br><span style="color:#5b6670;">'+st.last+'</span>':''));
     markers.push(m);
   });
   const nowStr=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
