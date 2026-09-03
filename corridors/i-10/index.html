@@ -201,7 +201,7 @@ const POIS=[];
 // "I-15 SB Lake Mead N" (NV-style). "I-155" / "US-15" / "SR-15" correctly excluded.
 function isRoute(r){r=String(r||'').toUpperCase().trim();var m=r.match(/^I[\s-]?0*(\d+)/);if(m)return +m[1]===NUM;var n=r.match(/^0*(\d+)$/);if(n)return +n[1]===NUM;return false;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
-const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
+const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-10 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
 map.fitBounds([[28.0,-119.0],[35.0,-80.5]]);
 const camLayer=L.layerGroup().addTo(map);
@@ -220,8 +220,8 @@ async function alertsFor(st){const d=await fetchJSON(WORKER+'/incidents?state='+
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){
   camLayer.clearLayers();alrLayer.clearLayers();const b=map.getBounds();
-  if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));
-  if(showAlr)thin(ALERTS.filter(a=>b.contains([a.lat,a.lon])),18).forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:cl?9:6,color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
+  if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));
+  if(showAlr)thin(ALERTS.filter(a=>b.contains([a.lat,a.lon])),18).forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?9:6),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
   const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' on '+NAME:'Toggle a layer to view '+NAME+' data';
 }
 // pass / high-point POI markers (always shown, not thinned)

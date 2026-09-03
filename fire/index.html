@@ -58,7 +58,9 @@
     .fire-legend .lg-pill{color:#fff;font-weight:800;font-size:10px;border-radius:5px;padding:1px 6px;}
     .fire-legend .lg-new{background:#111;}.fire-legend .lg-rx{background:#c47f0a;}
     button.lg-item{font:inherit;font-weight:600;color:#3f4a44;cursor:pointer;}
-    .lg-item.tog:not(.on){opacity:.5;}
+    /* off-state toggles: .5 read as "disabled" to users (QA 2026-09-02) — .78 keeps the
+       on/off distinction while still looking tappable */
+    .lg-item.tog:not(.on){opacity:.78;}
     .lg-item.tog.on{border-color:#c9c9c2;background:#fff;}
     .sw-evac{display:inline-block;width:15px;height:11px;border:1.5px solid #d61f1f;border-radius:3px;background:repeating-linear-gradient(45deg,rgba(214,31,31,.55) 0 3px,transparent 3px 6px);}
     .sw-rfw{display:inline-block;width:15px;height:11px;border:1.5px solid #e08a00;border-radius:3px;background:rgba(224,138,0,.14);}
@@ -109,7 +111,7 @@
     .fire-filter button{flex:1;border:0;background:#fff;font:inherit;font-weight:700;font-size:12.5px;padding:9px 6px;cursor:pointer;color:#5b6670;border-right:1px solid #F0F0F0;}
     .fire-filter button:last-child{border-right:0;}
     .fire-filter button.on{background:#cf3320;color:#fff;}
-    .cl-ic{font-size:14px;line-height:1;text-align:center;cursor:pointer;opacity:.82;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));}
+    .cl-ic{font-size:14px;line-height:30px;text-align:center;cursor:pointer;opacity:.82;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));}
     .cl-legend{position:absolute;top:58px;left:58px;z-index:800;background:#cf3320;color:#fff;border:1.5px solid #fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:800;box-shadow:0 2px 8px rgba(207,51,32,.35);cursor:default;}
     .cl-legend.unavail{background:rgba(255,255,255,.94);color:#5b6670;border:1px solid #E5E5E5;box-shadow:none;font-weight:700;}
     .fire-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
@@ -303,7 +305,8 @@
   </footer>
 
 <script>
-const map=L.map('firemap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;
+const map=L.map('firemap',{gestureHandling:TOUCH,scrollWheelZoom:true,attributionControl:true,preferCanvas:true,renderer:L.canvas({tolerance:TOUCH?14:6})});
 map.createPane('firelblPane');map.getPane('firelblPane').classList.add('leaflet-firelbl-pane');
 // basemap choices (all keyless Esri services)
 const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
@@ -592,7 +595,7 @@ async function loadClosures(){
   let n=0;
   lists.filter(Boolean).flat().forEach(c=>{
     n++;
-    const m=L.marker([c.lat,c.lon],{icon:L.divIcon({className:'',html:'<div class="cl-ic">⛔</div>',iconSize:[16,16],iconAnchor:[8,8]})}).addTo(closureLayer);
+    const m=L.marker([c.lat,c.lon],{icon:L.divIcon({className:'',html:'<div class="cl-ic">⛔</div>',iconSize:[30,30],iconAnchor:[15,15]})}).addTo(closureLayer);
     m.bindPopup(`<div class="fpop"><div class="fp-nm">Road closed</div>
       <div class="fp-st">${[c.route,c.mp?"MP "+Math.round(c.mp):null,c.st].filter(Boolean).join(" · ")}</div>
       <div class="fp-row">${c.head}</div>
@@ -789,7 +792,7 @@ async function loadFireCams(){
   // cap so fires stay the visual priority
   inView.slice(0,CAM_MAX).forEach(c=>{
     const col=c.kind==='avi'?'#64748b':c.kind==='nps'?'#7C3AED':'#0f7a4f';
-    L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:col,fillOpacity:.95})
+    L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:col,fillOpacity:.95})
       .bindPopup(()=>fireCamPopup(c),{maxWidth:290}).addTo(fireCamLayer);
   });
   setCamChip(inView.length>CAM_MAX?`Cameras (${CAM_MAX} of ${inView.length})`:(inView.length?`Cameras (${inView.length})`:'Cameras — none near fires'));

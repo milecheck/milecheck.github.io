@@ -44,7 +44,7 @@ const CORRIDORS = [
     ],
     faq: [
       ['Is I-5 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents as red and orange markers, straight from WSDOT, ODOT, and Caltrans; if a stretch is fully closed, a red banner appears at the top of this page. For a full US view, see the <a href="../../closures/">road closures map</a>. Winter closures on I-5 most often hit <a href="../../passes/siskiyou/">Siskiyou Summit</a> and <a href="../../passes/grapevine/">the Grapevine</a>.`],
-      ['Where can I watch live I-5 traffic cameras?', `Right here — the <a href="#comap">map above</a> shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See <a href="../../cameras/">every highway camera in 25 states</a>. For nearest-camera and mile-marker tracking while you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
+      ['Where can I watch live I-5 traffic cameras?', `Right here — the <a href="#comap">map above</a> shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See <a href="../../cameras/">every highway camera in <!--cov:cameras.us_states-->27<!--/cov--> states</a>. For nearest-camera and mile-marker tracking while you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
       ['What is the highest point on I-5?', `<a href="../../passes/siskiyou/">Siskiyou Summit</a> in southern Oregon, at 4,310 feet — the highest elevation on all 1,381 miles of Interstate 5. It's marked with a ▲ on the map above.`],
       ['Which parts of I-5 close in winter?', `Almost always <a href="../../passes/siskiyou/">Siskiyou Summit</a> in Oregon and <a href="../../passes/grapevine/">the Grapevine</a> in California — both can close for snow, ice, or high wind. Watch the storms behind them on the <a href="../../weather/">road weather map</a>.`],
     ],
@@ -328,7 +328,7 @@ function page(c){
         <a href="../../index.html#story">Story</a>
         <a href="../../index.html#b2b">B2B</a>
         <a href="../../blog/">Blog</a>
-        <a href="https://apps.apple.com/us/app/milecheck/id6759212851" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
+        <a href="/get/" class="nav-cta">Get the app</a>
       </nav>
     </div>
   </header>
@@ -428,7 +428,7 @@ const POIS=${JSON.stringify(c.pois||[])};
 // "I-15 SB Lake Mead N" (NV-style). "I-155" / "US-15" / "SR-15" correctly excluded.
 function isRoute(r){r=String(r||'').toUpperCase().trim();var m=r.match(/^I[\\s-]?0*(\\d+)/);if(m)return +m[1]===NUM;var n=r.match(/^0*(\\d+)$/);if(n)return +n[1]===NUM;return false;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
-const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
+const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · ${c.name} cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
 map.fitBounds(${c.bounds});
 const camLayer=L.layerGroup().addTo(map);
@@ -447,8 +447,8 @@ async function alertsFor(st){const d=await fetchJSON(WORKER+'/incidents?state='+
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){
   camLayer.clearLayers();alrLayer.clearLayers();const b=map.getBounds();
-  if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:5,color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));
-  if(showAlr)thin(ALERTS.filter(a=>b.contains([a.lat,a.lon])),18).forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:cl?9:6,color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
+  if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));
+  if(showAlr)thin(ALERTS.filter(a=>b.contains([a.lat,a.lon])),18).forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?9:6),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
   const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' on '+NAME:'Toggle a layer to view '+NAME+' data';
 }
 // pass / high-point POI markers (always shown, not thinned)
