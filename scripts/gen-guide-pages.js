@@ -26,6 +26,14 @@ const GUIDES = [
       ["Distances are bigger than they look on a map",`A US state can be the size of a small European country. "Just a few inches on the map" can mean two hours with nothing but highway &mdash; no town, no fuel station, sometimes no cell signal. Fill up well before the tank looks low, and don't assume the next exit has services just because there is a next exit.`],
       ["Speed limits and signs work differently",`US speed limits are posted in <strong>miles per hour</strong>, not kilometres per hour &mdash; a 70 mph sign is about 113 km/h, easy to misread at a glance if you're used to metric. Distance signs (to the next town, the next exit) are also in miles. Every rental dashboard in the US displays mph by default; if yours has a settings menu, most modern cars let you switch the digital display to km/h even though the posted signs stay in miles &mdash; know which one you're reading.`],
       ["What a state trooper wants when you're pulled over",`If a police vehicle with flashing lights comes up behind you, <strong>pull over to the right shoulder and stop</strong> &mdash; don't panic and stop in the lane. Turn off the engine, keep your hands visible on the wheel, and wait for the officer to approach. Your passport and rental agreement (or International Driving Permit, if your license requires one) should be reachable without digging through the car. It's normal, not alarming &mdash; American troopers patrol highways routinely and most stops are for a minor traffic matter.`],
+      ["Laws that change at the state line",`The US doesn't have one national traffic code &mdash; each state sets its own, and a few catch visitors off guard because they're the opposite of what "most states" do.<ul style="margin:0 0 14px;padding-left:20px;font-size:16px;line-height:1.7;color:#2a333b;">
+        <li><strong>Turning right on red:</strong> allowed almost everywhere after a full stop, unless a sign says otherwise. <strong>New York City is the reverse</strong> &mdash; right on red is banned in all five boroughs unless a sign specifically permits it.</li>
+        <li><strong>Pumping your own gas:</strong> normal everywhere except <strong>New Jersey</strong>, where self-serve is illegal statewide &mdash; an attendant pumps it for you, and they expect you to stay in the car.</li>
+        <li><strong>Radar detectors:</strong> legal to carry in most states, but <strong>illegal in Virginia and Washington, D.C.</strong> even switched off in the glovebox. Illegal for commercial drivers everywhere.</li>
+        <li><strong>Drink-driving limit:</strong> 0.08% blood alcohol almost nationwide &mdash; except <strong>Utah, at 0.05%</strong>, the strictest in the country.</li>
+        <li><strong>Cannabis:</strong> legal for adults in many states, but it is <strong>illegal everywhere to drive under its influence</strong>, illegal to carry it across a state line even between two legal states, and illegal on federal land (national parks, military bases) regardless of state law.</li>
+        <li><strong>Cell phones:</strong> most states now ban holding a phone at all while driving; a handful only ban texting. If your rental doesn't have hands-free built in, assume holding the phone is illegal until you check.</li>
+      </ul>One rule genuinely is the same everywhere: the <strong>move-over law</strong>. Every state requires slowing down and changing lanes away from any vehicle stopped on the shoulder with flashing lights &mdash; police, tow truck, or a driver with hazards on. It's the law most visitors have never heard of and the one most likely to matter on a long highway drive.`],
       ["The one number worth saving before you drive",`<strong>911</strong> is the emergency number nationwide &mdash; police, fire, medical, all one number, and it works from any phone including a rental's, even without a US SIM. For a breakdown that isn't an emergency, your <strong>rental agreement's own roadside-assistance number</strong> comes first &mdash; save it before you leave the counter, not after you need it.`],
       ["Know your mile marker before you need it",`The single best thing you can do is not wait until something goes wrong to figure out where you are. The MileCheck app shows your exact route, direction, and nearest mile marker in real time as you drive, across all 50 states &mdash; free to use, no account required. If you ever do need to call for help, the answer is already on your screen.`],
     ],
@@ -35,6 +43,9 @@ const GUIDES = [
       ["Are US speed limits in miles or kilometres?",`Miles per hour. A posted "70" means 70 mph, roughly 113 km/h. Distance signs to the next town or exit are also in miles, not kilometres.`],
       ["Do I need an International Driving Permit to drive in the US?",`It depends on your home country and the state you're driving in &mdash; some accept a valid foreign licence alone, others expect an International Driving Permit alongside it. Check before you travel, and keep both with your rental agreement where you can reach them quickly.`],
       ["What do I do if I get pulled over by police in the US?",`Pull onto the right shoulder, stop, turn off the engine, and keep your hands visible on the wheel. Wait for the officer to approach before reaching for documents. It's a routine, common occurrence on American highways.`],
+      ["Do US traffic laws vary by state?",`Yes &mdash; there's no single national code. Most rules are similar, but a few flip entirely: New York City bans right turns on red where most of the country allows them, New Jersey requires an attendant to pump your gas, and Utah's drink-driving limit (0.05%) is stricter than the 0.08% used almost everywhere else.`],
+      ["Can I turn right on red in the US?",`Generally yes, after a full stop, unless a sign says otherwise &mdash; except in New York City, where it's banned in all five boroughs unless specifically signed to allow it.`],
+      ["What is the move-over law in the US?",`Every US state requires drivers to slow down and change lanes away from any vehicle stopped on the shoulder with flashing or hazard lights &mdash; police, tow trucks, road crews, or another driver's breakdown. It applies everywhere, unlike most other traffic rules that vary by state.`],
       ["Is there an app that shows my exact location on US highways?",`Yes &mdash; MileCheck shows your current route, direction, and nearest mile marker in real time, in all 50 states, free to use with no account required. It's built for exactly this: knowing precisely where you are on a highway with no other landmarks in sight.`],
     ],
     related:`<a href="../what-is-my-mile-marker/">What is my mile marker?</a> &middot; <a href="../report-location/">How to report your location in an emergency</a> &middot; <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> &middot; <a href="../breakdown-on-the-autobahn/">Broken down abroad? Germany's Autobahn guide</a>`,
@@ -690,6 +701,18 @@ function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@
 function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'mainEntityOfPage':'https://milecheckapp.com/'+g.slug+'/'}); }
 
 function page(g){
+  // Bilingual pair — targeted to this one guide, not a generic i18n system (Leah,
+  // 2026-09-02: safety content people search for in their own language; the site has
+  // no locale infrastructure yet, so this is scoped narrowly rather than invented
+  // site-wide). See /es/breakdown-on-the-autobahn/.
+  const isBilingual = g.slug === 'breakdown-on-the-autobahn';
+  const hreflangHtml = isBilingual
+    ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/${g.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/${g.slug}/">\n  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/${g.slug}/">\n`
+    : '';
+  const langLinkHtml = isBilingual
+    ? `    <p style="font-size:13px;color:#8a928c;margin:-8px 0 22px;">Léelo en español: <a href="/es/${g.slug}/" style="color:#0f7a4f;font-weight:700;text-decoration:none;">Averiado en la Autobahn</a></p>\n`
+    : '';
+
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const secHtml=g.sections.map(([h,p])=>`    <h2>${h}</h2>\n    <p>${p}</p>`).join('\n');
   const faqHtml=g.faq.map(([q,a])=>`      <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
@@ -706,7 +729,7 @@ function page(g){
   <title>${t}</title>
   <meta name="description" content="${desc}">
   <link rel="canonical" href="https://milecheckapp.com/${g.slug}/">
-  <meta property="og:title" content="${t}">
+${hreflangHtml}  <meta property="og:title" content="${t}">
   <meta property="og:description" content="${desc}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/${g.slug}/">
@@ -774,7 +797,7 @@ function page(g){
     <div class="eyebrow">${g.eyebrow}</div>
     <h1>${g.h1}</h1>
     <p class="lede">${g.lede}</p>
-
+${langLinkHtml}
 ${figHtml}${secHtml}
 
     <div class="cta">
