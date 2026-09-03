@@ -51,6 +51,13 @@
     .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
     .faq p{margin:10px 0 0;}
     .g-related{color:#5b6670;font-size:14px;margin-top:26px;}
+    /* Language toggle — pills at the top of the article, current language
+       highlighted. Not a footnote link (Leah, 2026-09-02). */
+    .lang-switch{display:flex;align-items:center;gap:6px;margin:0 0 16px;}
+    .lang-switch-globe{font-size:14px;opacity:.55;margin-right:2px;}
+    .lang-pill{display:inline-block;padding:4px 11px;border-radius:20px;font-size:12.5px;font-weight:800;letter-spacing:.02em;text-decoration:none;border:1px solid #E5E5E5;color:#5b6670;}
+    a.lang-pill:hover{text-decoration:none;border-color:#0f7a4f;color:#0f7a4f;}
+    .lang-pill.active{background:#0f7a4f;color:#fff;border-color:#0f7a4f;}
     .g-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
   </style>
 </head>
@@ -75,10 +82,10 @@
   </header>
 
   <article class="art">
+    <div class="lang-switch"><span class="lang-switch-globe">&#127760;</span><span class="lang-pill active">EN</span><a href="/es/breakdown-on-the-autobahn/" class="lang-pill">ES</a></div>
     <div class="eyebrow">Driving abroad</div>
     <h1>Broken down on the Autobahn: what to do if you don't speak German</h1>
     <p class="lede">A flat tyre in a country whose language you don't speak is most people's worst road-trip fear. Germany has an unusually good answer to it — and it isn't your phone. Here's the order to do things in, and the one roadside device that solves both the language problem and the "where am I" problem in a single button press.</p>
-    <p style="font-size:13px;color:#8a928c;margin:-8px 0 22px;">Léelo en español: <a href="/es/breakdown-on-the-autobahn/" style="color:#0f7a4f;font-weight:700;text-decoration:none;">Averiado en la Autobahn</a></p>
 
     <h2>First: make yourself safe, in this order</h2>
     <p>Do all of this <strong>before</strong> you call anyone. It takes under a minute and it is the part that actually keeps you alive.<ol class="steps">

@@ -49,6 +49,13 @@
     .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
     .faq p{margin:10px 0 0;}
     .g-related{color:#5b6670;font-size:14px;margin-top:26px;}
+    /* Language toggle — pills at the top of the article, current language
+       highlighted. Not a footnote link (Leah, 2026-09-02). */
+    .lang-switch{display:flex;align-items:center;gap:6px;margin:0 0 16px;}
+    .lang-switch-globe{font-size:14px;opacity:.55;margin-right:2px;}
+    .lang-pill{display:inline-block;padding:4px 11px;border-radius:20px;font-size:12.5px;font-weight:800;letter-spacing:.02em;text-decoration:none;border:1px solid #E5E5E5;color:#5b6670;}
+    a.lang-pill:hover{text-decoration:none;border-color:#0f7a4f;color:#0f7a4f;}
+    .lang-pill.active{background:#0f7a4f;color:#fff;border-color:#0f7a4f;}
     .g-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .lang-note{font-size:13px;color:#8a928c;margin:-8px 0 22px;}
     .lang-note a{color:#0f7a4f;font-weight:700;text-decoration:none;}
@@ -75,11 +82,11 @@
   </header>
 
   <article class="art">
+    <div class="lang-switch"><span class="lang-switch-globe">&#127760;</span><a href="../../breakdown-on-the-autobahn/" class="lang-pill">EN</a><span class="lang-pill active">ES</span></div>
     <div class="eyebrow">Conducir en el extranjero</div>
     <h1>Averiado en la Autobahn: qué hacer si no hablas alemán</h1>
     <p class="lede">Un pinchazo en un país cuyo idioma no hablas es la peor pesadilla de cualquier viajero. Alemania tiene una solución sorprendentemente buena para esto — y no es tu teléfono. Este es el orden en el que debes actuar, y el dispositivo de la carretera que resuelve a la vez el problema del idioma y el de "¿dónde estoy?" con un solo botón.</p>
-    <p class="lang-note">Read this in English: <a href="../../breakdown-on-the-autobahn/">Broken down on the Autobahn</a></p>
-
+    
     <h2>Primero: ponte a salvo, en este orden</h2>
     <p>Haz todo esto <strong>antes</strong> de llamar a nadie. Tarda menos de un minuto y es la parte que realmente te mantiene con vida.<ol class="steps">
         <li><strong>Luces de emergencia encendidas</strong> — en el momento en que notes el problema, antes incluso de empezar a frenar.</li>

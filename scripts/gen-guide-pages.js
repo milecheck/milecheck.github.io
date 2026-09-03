@@ -701,17 +701,31 @@ function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@
 function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'mainEntityOfPage':'https://milecheckapp.com/'+g.slug+'/'}); }
 
 function page(g){
-  // Bilingual pair — targeted to this one guide, not a generic i18n system (Leah,
-  // 2026-09-02: safety content people search for in their own language; the site has
-  // no locale infrastructure yet, so this is scoped narrowly rather than invented
-  // site-wide). See /es/breakdown-on-the-autobahn/.
-  const isBilingual = g.slug === 'breakdown-on-the-autobahn';
-  const hreflangHtml = isBilingual
-    ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/${g.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/${g.slug}/">\n  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/${g.slug}/">\n`
+  // Multi-language guides. A guide's translated locales, beyond English — the site has
+  // no site-wide i18n, so this stays a per-guide registry rather than a generic system
+  // (Leah, 2026-09-02: high-intent safety content people search for in their own
+  // language). Each translated page lives at /<lang>/<slug>/ as its own hand-built HTML
+  // file (not generated) and MUST be kept in sync with this registry — add the language
+  // code here, and it appears in the toggle and hreflang on the English page.
+  const TRANSLATIONS = {
+    'breakdown-on-the-autobahn': { es: true },
+    'driving-in-the-us-foreign-visitor-guide': { es: true },
+  };
+  const LANG_LABEL = { en: 'EN', es: 'ES', fr: 'FR', de: 'DE', pt: 'PT', zh: 'ZH', vi: 'VI', ko: 'KO', ar: 'AR' };
+  const locales = TRANSLATIONS[g.slug];
+  const hreflangHtml = locales
+    ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/${g.slug}/">\n`
+      + Object.keys(locales).map(l=>`  <link rel="alternate" hreflang="${l}" href="https://milecheckapp.com/${l}/${g.slug}/">\n`).join('')
+      + `  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/${g.slug}/">\n`
     : '';
-  const langLinkHtml = isBilingual
-    ? `    <p style="font-size:13px;color:#8a928c;margin:-8px 0 22px;">Léelo en español: <a href="/es/${g.slug}/" style="color:#0f7a4f;font-weight:700;text-decoration:none;">Averiado en la Autobahn</a></p>\n`
+  // Toggle pills at the top of the article — not a footnote link. Current language is
+  // the highlighted pill; every other available translation is a plain link next to it.
+  const langSwitchHtml = locales
+    ? `    <div class="lang-switch"><span class="lang-switch-globe">&#127760;</span><span class="lang-pill active">EN</span>`
+      + Object.keys(locales).map(l=>`<a href="/${l}/${g.slug}/" class="lang-pill">${LANG_LABEL[l]||l.toUpperCase()}</a>`).join('')
+      + `</div>\n`
     : '';
+  const langLinkHtml = ''; // superseded by langSwitchHtml
 
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const secHtml=g.sections.map(([h,p])=>`    <h2>${h}</h2>\n    <p>${p}</p>`).join('\n');
@@ -770,6 +784,13 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
     .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
     .faq p{margin:10px 0 0;}
     .g-related{color:#5b6670;font-size:14px;margin-top:26px;}
+    /* Language toggle — pills at the top of the article, current language
+       highlighted. Not a footnote link (Leah, 2026-09-02). */
+    .lang-switch{display:flex;align-items:center;gap:6px;margin:0 0 16px;}
+    .lang-switch-globe{font-size:14px;opacity:.55;margin-right:2px;}
+    .lang-pill{display:inline-block;padding:4px 11px;border-radius:20px;font-size:12.5px;font-weight:800;letter-spacing:.02em;text-decoration:none;border:1px solid #E5E5E5;color:#5b6670;}
+    a.lang-pill:hover{text-decoration:none;border-color:#0f7a4f;color:#0f7a4f;}
+    .lang-pill.active{background:#0f7a4f;color:#fff;border-color:#0f7a4f;}
     .g-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}${figCss}
   </style>
 </head>
@@ -794,10 +815,10 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
   </header>
 
   <article class="art">
-    <div class="eyebrow">${g.eyebrow}</div>
+${langSwitchHtml}    <div class="eyebrow">${g.eyebrow}</div>
     <h1>${g.h1}</h1>
     <p class="lede">${g.lede}</p>
-${langLinkHtml}
+
 ${figHtml}${secHtml}
 
     <div class="cta">
