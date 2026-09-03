@@ -92,7 +92,9 @@ img, svg { display: block; max-width: 100%; }
 }
 /* hamburger base (some pages relied on their own copy of this; make it global) */
 .nav-toggle { display: none; background: none; border: 0; padding: 6px; cursor: pointer; line-height: 0; }
-@media (max-width: 760px) { .nav-toggle { display: inline-flex; align-items: center; } }
+/* 960px, not 760: the nine-item nav row needs ~950px at its desktop gap, so between 760 and 960
+   it wrapped onto two lines (verified at 770px). The homepage's own inline rule already uses 960. */
+@media (max-width: 960px) { .nav-toggle { display: inline-flex; align-items: center; } }
 
 /* dark header: force light chrome with enough specificity to beat per-page inline styles */
 .site-header .brand { color: var(--paper); }
@@ -734,11 +736,28 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 760px) {
+@media (max-width: 960px) {
   /* dark mobile dropdown — specificity beats the per-page inline .primary-nav blocks */
   .site-header .primary-nav { background: var(--asphalt-2) !important; border-color: rgba(255,255,255,0.1) !important; box-shadow: 0 16px 36px rgba(0,0,0,0.4) !important; }
   .site-header .primary-nav a { color: var(--paper) !important; border-bottom-color: rgba(255,255,255,0.08) !important; }
   .site-header .primary-nav a.nav-cta { color: #23261f !important; }
+
+  /* Collapse the nav into the hamburger. The Night Shift pass assumed every page carried its
+     own "hide .primary-nav on mobile" block — the generated SEO pages (corridors, passes,
+     state/city cameras, guides) never did, so on phones the nav row spilled off the right edge
+     of the header and the whole page scrolled sideways (Leah, 2026-09-02, I-5 page). Making the
+     collapse global here fixes all ~140 pages at once. Guarded with :has(.nav-toggle) so a page
+     with no hamburger button is never left with a hidden, unopenable menu (it keeps today's
+     behavior instead). Specificity (0,3,0) beats the per-page inline blocks; the .open rule
+     below is higher still so those pages' menus still open. */
+  .site-header .header-inner { position: relative; }
+  .site-header:has(.nav-toggle) .primary-nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0; padding: 6px 0; z-index: 50;
+  }
+  .site-header:has(.nav-toggle) .primary-nav.open { display: flex; }
+  .site-header:has(.nav-toggle) .primary-nav a { display: block; padding: 14px 24px; width: 100%; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .site-header:has(.nav-toggle) .primary-nav .nav-cta { margin: 10px 24px 6px; text-align: center; width: auto; }
 }
 
 @media (max-width: 880px) {
