@@ -29,6 +29,14 @@
     .art a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .art a:hover{text-decoration:underline;}
     .art strong{color:#0E1116;}
+    /* Numbered steps. Safety instructions get read under stress, on a roadside,
+       one-handed — they must scan as 1-2-3, never as a paragraph (Leah, 2026-09-02).
+       The global reset strips list margins/markers, so these are set explicitly. */
+    .art ol.steps{list-style:none;counter-reset:step;margin:0 0 18px;padding:0;}
+    .art ol.steps li{counter-increment:step;position:relative;padding:0 0 0 46px;margin:0 0 14px;font-size:16px;line-height:1.65;color:#2a333b;}
+    .art ol.steps li::before{content:counter(step);position:absolute;left:0;top:1px;width:30px;height:30px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;}
+    .art ol.steps li strong{color:#0E1116;}
+    @media(max-width:520px){ .art ol.steps li{padding-left:40px;} .art ol.steps li::before{width:26px;height:26px;font-size:14px;} }
     .cta{border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);padding:24px 22px;margin:28px 0;text-align:center;}
     .cta h3{font-size:21px;margin:0 0 8px;}
     .cta p{font-size:15.5px;color:#3a444d;margin:0 auto 14px;max-width:520px;}

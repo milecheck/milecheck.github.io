@@ -17,8 +17,19 @@ const GUIDES = [
     h1:"Broken down on the Autobahn: what to do if you don't speak German",
     lede:`A flat tyre in a country whose language you don't speak is most people's worst road-trip fear. Germany has an unusually good answer to it — and it isn't your phone. Here's the order to do things in, and the one roadside device that solves both the language problem and the "where am I" problem in a single button press.`,
     sections:[
-      ['First: make yourself safe, in this order',`Before you call anyone. Hazard lights on the moment you notice the problem. Steer onto the hard shoulder, wheels turned right. Put your <strong>high-visibility vest on before you open the door</strong> &mdash; in Germany the driver is legally required to wear one, and it is genuinely the difference between being seen and not being seen. Get out on the <strong>passenger side</strong>, never into the traffic lane, and take everyone with you to wait <strong>behind the guardrail</strong>. Never wait in the car and never stand in front of it.`],
-      ['The warning triangle: 150 m back, or "four posts"',`On the Autobahn the triangle needs to go <strong>at least 150 metres</strong> behind your car &mdash; far more than instinct suggests at motorway speeds. There is a neat trick for measuring it: the white guide posts (<em>Leitpfosten</em>) along the shoulder stand <strong>50 metres apart</strong>, so walk back <strong>four posts</strong> and you are at roughly the right distance. Carry the triangle in front of you as you walk so approaching traffic sees it early.`],
+      ['First: make yourself safe, in this order',`Do all of this <strong>before</strong> you call anyone. It takes under a minute and it is the part that actually keeps you alive.<ol class="steps">
+        <li><strong>Hazard lights on</strong> — the moment you notice the problem, before you even start slowing.</li>
+        <li><strong>Get onto the hard shoulder</strong> and turn the wheels to the right, so the car can't be pushed back into the traffic lane.</li>
+        <li><strong>High-visibility vest ON, before you open the door.</strong> In Germany the driver is legally required to wear one. Keep it in the cabin, not the boot — a vest in the boot is a vest you have to stand in traffic to reach.</li>
+        <li><strong>Get out on the passenger side</strong>, never into the traffic lane, and take everyone with you.</li>
+        <li><strong>Wait behind the guardrail.</strong> Never in the car, and never standing in front of it.</li>
+        <li><strong>Then</strong> put out the triangle and call for help — in that order.</li>
+      </ol>`],
+      ['The warning triangle: 150 m back, or "four posts"',`At motorway speeds the triangle needs to go far further back than instinct suggests, and the roadside gives you a way to measure it.<ol class="steps">
+        <li>On the Autobahn, put it <strong>at least 150 metres</strong> behind the car.</li>
+        <li>The white guide posts (<em>Leitpfosten</em>) stand <strong>50 metres apart</strong> — so walk back <strong>four posts</strong>.</li>
+        <li><strong>Walk behind the guardrail</strong>, not along the lane, and <strong>carry the triangle in front of you</strong> so traffic sees it before it sees you.</li>
+      </ol>`],
       ['Use the orange SOS post, not your mobile',`This is the part most visitors don't know. Germany's Autobahnen have orange emergency call posts (<em>Notrufs&auml;ulen</em>) roughly <strong>every 2 kilometres</strong>, and they are the best tool available to a driver who doesn't speak the language.<br><br>When you press the button, <strong>the post transmits its own exact location automatically</strong>. You do not have to describe where you are, spell a road name, or read a number to anyone &mdash; which is exactly the part that goes wrong when you and the operator don't share a language. Staff answering these calls include speakers of languages other than German.<br><br><strong>To find the nearest one:</strong> look at those same white guide posts. Each carries a small <strong>black arrow pointing toward the closest emergency phone</strong>. Follow the arrows &mdash; behind the guardrail, never along the traffic lane.`],
       ['If you would rather call',`Germany's national breakdown service is the ADAC, and you do not have to be a member to be helped (non-members pay for the callout). From a foreign mobile, dial <strong>+49 89 22 22 22</strong>. From a German number it's <strong>089 20 20 40 00</strong>. The ADAC's breakdown app handles German and English by voice.<br><br>Driving a rental? <strong>Call the breakdown number on your rental agreement first.</strong> Recovery is their contract, and calling someone else can complicate who pays.<br><br>For a medical emergency, fire, or a crash with injuries, the number is <strong>112</strong> &mdash; the same across the whole EU.`],
       ['Why 112 usually already knows where you are',`Germany uses <strong>Advanced Mobile Location</strong>. When you dial 112 from a smartphone, the handset quietly sends your GPS position to the control centre and keeps updating it. So for a genuine emergency you are far less lost than you feel &mdash; the system is doing the locating for you.<br><br>That is precisely why the SOS post matters for a <em>breakdown</em>: a flat tyre isn't a 112 call, and the post gives a breakdown service the same automatic precision.`],
@@ -689,6 +700,14 @@ function page(g){
     .art a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .art a:hover{text-decoration:underline;}
     .art strong{color:#0E1116;}
+    /* Numbered steps. Safety instructions get read under stress, on a roadside,
+       one-handed — they must scan as 1-2-3, never as a paragraph (Leah, 2026-09-02).
+       The global reset strips list margins/markers, so these are set explicitly. */
+    .art ol.steps{list-style:none;counter-reset:step;margin:0 0 18px;padding:0;}
+    .art ol.steps li{counter-increment:step;position:relative;padding:0 0 0 46px;margin:0 0 14px;font-size:16px;line-height:1.65;color:#2a333b;}
+    .art ol.steps li::before{content:counter(step);position:absolute;left:0;top:1px;width:30px;height:30px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;}
+    .art ol.steps li strong{color:#0E1116;}
+    @media(max-width:520px){ .art ol.steps li{padding-left:40px;} .art ol.steps li::before{width:26px;height:26px;font-size:14px;} }
     .cta{border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);padding:24px 22px;margin:28px 0;text-align:center;}
     .cta h3{font-size:21px;margin:0 0 8px;}
     .cta p{font-size:15.5px;color:#3a444d;margin:0 auto 14px;max-width:520px;}
