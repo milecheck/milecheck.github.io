@@ -631,7 +631,11 @@
       </div>
     </section>
 
-    <section data-panel="story" id="story" class="alt">
+    <!-- id is "our-story", NOT "story": the tab switcher writes location.hash="#story",
+     and an element with that id made the browser anchor to THIS section, scrolling
+     straight past the Roy panel above it (Leah, 2026-09-02). Tab hashes must never
+     collide with an element id. -->
+    <section data-panel="story" id="our-story" class="alt">
       <div class="container">
         <span class="section-label">Our story</span>
         <h2 class="section-h2">Why we built MileCheck.</h2>
