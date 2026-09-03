@@ -206,6 +206,18 @@ const API='https://milepost-proxy.leahgerber93.workers.dev/bridge-status';
 // from the first fetch, and is the ONLY status source for the two bridges with
 // no live feed. Display-only: it never overrides the five live bridges. ---
 const SOCRATA_URL='https://data.seattle.gov/resource/gm8h-9449.json?$limit=60&$order=opendatetime%20DESC';
+// The top-60-rows-across-all-bridges feed above never reaches University or
+// Lower Spokane St -- SDOT stopped publishing them months ago (2026-04-21 and
+// 2026-01-23), and the other five bridges combined fill all 60 rows long before
+// a row that old would surface. A targeted one-row query per no-feed bridge
+// fills in its actual last-known date directly (Leah, 2026-09-04: state the
+// date SDOT stopped reporting, not just "no live status").
+const NOFEED_ENTITY_NAME={university:'University','spokane-st':'Lower Spokane St'};
+async function fetchNoFeedLastRaised(entityName){
+  const params=new URLSearchParams({'$where':"entityname like '%"+entityName+"%'",'$order':'opendatetime DESC','$limit':'1'});
+  const rows=await fetchFeed('https://data.seattle.gov/resource/gm8h-9449.json?'+params.toString(),{cache:'no-store'},d=>Array.isArray(d));
+  return rows[0]?parsePacific(rows[0].opendatetime):undefined;
+}
 const SOCRATA_NAME_MATCHERS=[
   [/university/i,'university'],[/ballard/i,'ballard'],[/fremont/i,'fremont'],
   [/montlake/i,'montlake'],[/south\s*park/i,'south-park'],
@@ -282,6 +294,14 @@ async function refreshSocrata(){
       // A row with no closedatetime is an opening still in progress.
       if(!r.closedatetime&&(openAt[key]==null||o>openAt[key]))openAt[key]=o;
     });
+    // Backfill the no-feed bridges the top-60 window can't reach. Best-effort:
+    // a failure here just means those two keep showing "No live status
+    // published" with no date this cycle -- never lets a lookup failure break
+    // the five live-feed bridges' status above.
+    await Promise.all(Object.entries(NOFEED_ENTITY_NAME).map(async([key,name])=>{
+      if(lastRaisedAt[key]!=null)return; // already covered by the top-60 window
+      try{const t=await fetchNoFeedLastRaised(name);if(t!=null)lastRaisedAt[key]=t;}catch(e){}
+    }));
     socrata={lastRaisedAt,openAt,fetchedAt:Math.floor(Date.now()/1000)};
   }catch(e){ /* keep the previous cache; never let history break live status */ }
 }
@@ -327,7 +347,16 @@ async function refresh(){
       }else if(last!=null){
         state[b.key]={tier:'down',detail:'Down',last:suffix};
       }else{
-        state[b.key]={tier:'unknown',detail:'No live status published',last:''};
+        // No row inside the 30-day window — but Socrata may still hold an older
+        // record (the feed stopped, the bridge didn't). Say the actual date SDOT
+        // stopped publishing, so the gap reads as a fact about the feed, not a
+        // fact about the bridge (Leah, 2026-09-04: "state the date SDOT stopped
+        // reporting" when a no-feed bridge is clicked).
+        const stoppedDate=raw!=null
+          ?new Date(raw*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+          :null;
+        state[b.key]={tier:'unknown',detail:'No live status published',
+          last:stoppedDate?('SDOT stopped reporting '+stoppedDate):''};
       }
       return;
     }
