@@ -12,6 +12,34 @@ const PLAY = 'https://play.google.com/store/apps/details?id=app.milecheck.mobile
 // Before rerunning + committing an EXISTING page, git-diff it first. New pages are safe to generate.
 const GUIDES = [
   {
+    slug:'driving-in-the-us-foreign-visitor-guide', eyebrow:'Driving abroad',
+    title:"Driving in the US as a Foreign Visitor: What Nobody Explains to You",
+    h1:"Driving in the US as a foreign visitor: what nobody explains to you",
+    lede:`Renting a car in the US is easy. Understanding what "mile marker 142" means, why the next town is 90 minutes away, or what an American 911 dispatcher actually needs from you &mdash; nobody hands you that at the rental counter. Here's what's different, and what to know before you're the one stuck on the shoulder.`,
+    sections:[
+      ["The US doesn't use kilometre posts &mdash; it uses mile markers",`Most of the world marks distance with a kilometre post. American highways use a small green sign called a <strong>mile marker</strong> (or milepost), planted roughly every mile along the shoulder. It resets to 0 at the state line, or at the start of the highway, and counts up from there &mdash; so the same highway can read "142" for a hundred miles through one state and reset entirely at the next border.<br><br>It isn't decorative. It's how a stranded driver, in a country with genuinely enormous distances between towns, tells someone exactly where they are. <a href="../what-is-my-mile-marker/">More on how mile markers work &rarr;</a>`],
+      ["What to say if you call 911",`In much of Europe, dialling the emergency number from a smartphone sends your GPS position automatically. <strong>That is far less reliable across the US</strong> &mdash; rural counties, older 911 systems, and patchy cell coverage mean the dispatcher often cannot see your location at all. They will ask you to describe where you are, and the fastest possible answer is three things, in this order:<ol class="steps">
+        <li><strong>The route</strong> &mdash; "I-40," "US-93," "State Route 87."</li>
+        <li><strong>The direction you're travelling</strong> &mdash; northbound, southbound, eastbound, westbound.</li>
+        <li><strong>The nearest mile marker</strong> &mdash; the number on the small green sign you just passed.</li>
+      </ol>Those three facts pin your location on a highway that may run for a thousand miles, with no other reference point in sight. <a href="../report-location/">More on reporting your location &rarr;</a>`],
+      ["Distances are bigger than they look on a map",`A US state can be the size of a small European country. "Just a few inches on the map" can mean two hours with nothing but highway &mdash; no town, no fuel station, sometimes no cell signal. Fill up well before the tank looks low, and don't assume the next exit has services just because there is a next exit.`],
+      ["Speed limits and signs work differently",`US speed limits are posted in <strong>miles per hour</strong>, not kilometres per hour &mdash; a 70 mph sign is about 113 km/h, easy to misread at a glance if you're used to metric. Distance signs (to the next town, the next exit) are also in miles. Every rental dashboard in the US displays mph by default; if yours has a settings menu, most modern cars let you switch the digital display to km/h even though the posted signs stay in miles &mdash; know which one you're reading.`],
+      ["What a state trooper wants when you're pulled over",`If a police vehicle with flashing lights comes up behind you, <strong>pull over to the right shoulder and stop</strong> &mdash; don't panic and stop in the lane. Turn off the engine, keep your hands visible on the wheel, and wait for the officer to approach. Your passport and rental agreement (or International Driving Permit, if your license requires one) should be reachable without digging through the car. It's normal, not alarming &mdash; American troopers patrol highways routinely and most stops are for a minor traffic matter.`],
+      ["The one number worth saving before you drive",`<strong>911</strong> is the emergency number nationwide &mdash; police, fire, medical, all one number, and it works from any phone including a rental's, even without a US SIM. For a breakdown that isn't an emergency, your <strong>rental agreement's own roadside-assistance number</strong> comes first &mdash; save it before you leave the counter, not after you need it.`],
+      ["Know your mile marker before you need it",`The single best thing you can do is not wait until something goes wrong to figure out where you are. The MileCheck app shows your exact route, direction, and nearest mile marker in real time as you drive, across all 50 states &mdash; free to use, no account required. If you ever do need to call for help, the answer is already on your screen.`],
+    ],
+    faq:[
+      ["What is a mile marker on a US highway?",`A small green sign posted roughly every mile along the shoulder of a US highway, showing the distance along that road from its starting point or the state line. It's the main way American drivers &mdash; and 911 dispatchers &mdash; describe an exact location on a long highway.`],
+      ["What should I tell 911 if I don't know exactly where I am in the US?",`Give the route number, your direction of travel, and the nearest mile marker &mdash; in that order. Unlike in much of Europe, US 911 often cannot see your phone's GPS location automatically, especially in rural areas, so this is usually the fastest way to be found.`],
+      ["Are US speed limits in miles or kilometres?",`Miles per hour. A posted "70" means 70 mph, roughly 113 km/h. Distance signs to the next town or exit are also in miles, not kilometres.`],
+      ["Do I need an International Driving Permit to drive in the US?",`It depends on your home country and the state you're driving in &mdash; some accept a valid foreign licence alone, others expect an International Driving Permit alongside it. Check before you travel, and keep both with your rental agreement where you can reach them quickly.`],
+      ["What do I do if I get pulled over by police in the US?",`Pull onto the right shoulder, stop, turn off the engine, and keep your hands visible on the wheel. Wait for the officer to approach before reaching for documents. It's a routine, common occurrence on American highways.`],
+      ["Is there an app that shows my exact location on US highways?",`Yes &mdash; MileCheck shows your current route, direction, and nearest mile marker in real time, in all 50 states, free to use with no account required. It's built for exactly this: knowing precisely where you are on a highway with no other landmarks in sight.`],
+    ],
+    related:`<a href="../what-is-my-mile-marker/">What is my mile marker?</a> &middot; <a href="../report-location/">How to report your location in an emergency</a> &middot; <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> &middot; <a href="../breakdown-on-the-autobahn/">Broken down abroad? Germany's Autobahn guide</a>`,
+  },
+  {
     slug:'breakdown-on-the-autobahn', eyebrow:'Driving abroad',
     title:"Broken Down on the Autobahn? What to Do If You Don't Speak German",
     h1:"Broken down on the Autobahn: what to do if you don't speak German",
@@ -44,7 +72,7 @@ const GUIDES = [
       ['Does 112 work in English in Germany?',`112 is the emergency number across the EU and German control centres are used to foreign callers. You also benefit from Advanced Mobile Location, which sends your phone's GPS position to the control centre automatically. For a non-urgent breakdown, though, the roadside SOS post is the surer route, because it removes the need to describe your location at all.`],
       ['Does Germany have mile markers?',`Not mile markers, but something denser. Many guide posts carry a Stationszeichen plate showing the road number and your position along it, every 50 to 100 metres on classified roads. That's the number to read out if you ever have to say where you are.`],
     ],
-    related:`<a href="../report-location/">How to report your location in an emergency</a> &middot; <a href="../what-is-my-mile-marker/">What is my mile marker?</a> &middot; <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a>`,
+    related:`<a href="../report-location/">How to report your location in an emergency</a> &middot; <a href="../what-is-my-mile-marker/">What is my mile marker?</a> &middot; <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> &middot; <a href="../driving-in-the-us-foreign-visitor-guide/">Driving in the US as a foreign visitor</a>`,
   },
   {
     slug:'mile-markers-vs-exit-numbers', eyebrow:'Highway basics',
