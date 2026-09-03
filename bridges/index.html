@@ -8,7 +8,7 @@
   <meta name="description" content="Live status for Seattle's drawbridges — Fremont, Ballard, Montlake, South Park, and 1st Ave S. See if the bridge is up right now, how long it's been up, and when it went back down.">
 
   <meta property="og:title" content="Seattle Drawbridge Status — live">
-  <meta property="og:description" content="Is the Fremont Bridge up right now? Live status for Seattle's five drawbridges, updated every 30 seconds.">
+  <meta property="og:description" content="Is the Fremont Bridge up right now? Live status for Seattle's five live-feed drawbridges, plus when each one last opened.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/bridges/">
   <meta property="og:type" content="website">
@@ -29,7 +29,7 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type":"Question","name":"Is the Fremont Bridge up right now?","acceptedAnswer":{"@type":"Answer","text":"This page shows live raised/lowered status for the Fremont Bridge and Seattle's other drawbridges, refreshed every 30 seconds from Seattle DOT's bridge feed. A raised bridge typically stays up 5 to 15 minutes for boat traffic."}},
-      {"@type":"Question","name":"Which Seattle bridges does this page track?","acceptedAnswer":{"@type":"Answer","text":"The five Seattle drawbridges with live status: Fremont, Ballard, Montlake, South Park, and 1st Ave S. The MileCheck app shows the same bridges on its live map and lets you follow a bridge for status."}},
+      {"@type":"Question","name":"Which Seattle bridges does this page track?","acceptedAnswer":{"@type":"Answer","text":"All seven Seattle drawbridges. Five have live raised\/lowered status: Fremont, Ballard, Montlake, South Park, and 1st Ave S \u2014 each also showing when it last opened. The University and Lower Spokane St bridges are shown for reference; Seattle DOT no longer publishes their status. The MileCheck app shows the same bridges on its live map and lets you follow a bridge for status."}},
       {"@type":"Question","name":"How long do Seattle drawbridge openings last?","acceptedAnswer":{"@type":"Answer","text":"Most openings last 5 to 15 minutes. During boating season openings are frequent on the Ship Canal bridges (Fremont, Ballard, Montlake), and federal rules generally give boats priority except during posted rush-hour restrictions."}}
     ]
   }
@@ -47,16 +47,18 @@
     .br-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
     .br-card.up{border-color:#DC2626;background:#FEF5F5;}
     .br-card.up .br-dot{background:#DC2626;animation:pulse 1.6s infinite;}
-    .br-card.recent .br-dot{background:#F59E0B;}
-    .br-card.down .br-dot{background:#0f7a4f;}
+    .br-card.recent .br-dot{background:#F97316;}
+    .br-card.down .br-dot{background:#12824a;}
     .br-card.unavailable{background:#F6F8F7;}
     .br-card.unavailable .br-dot{background:#8A939B;}
+    .br-card.unknown .br-dot{background:#7C3AED;}
+    .br-card.unknown .br-st{color:#7C3AED;font-weight:600;}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     .br-nm{font-weight:800;font-size:15.5px;}
     .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
     .br-last{font-size:12px;color:#5b6670;margin-top:2px;}
     .br-card.up .br-st{color:#DC2626;font-weight:800;}
-    .br-card.recent .br-st{color:#b45309;font-weight:700;}
+    .br-card.recent .br-st{color:#F97316;font-weight:700;}
     .br-card.unavailable .br-st{color:#8A939B;font-weight:600;font-style:italic;}
     .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:56vh;background:#eef0e9;}
     #brmap{position:absolute;inset:0;}
@@ -64,12 +66,12 @@
     .bmk{display:flex;flex-direction:column;align-items:center;gap:3px;pointer-events:auto;}
     .bmk-ic{width:36px;height:36px;border-radius:50%;background:#fff;border:2.5px solid #7C3AED;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.28);}
     .bmk.bi-up .bmk-ic{background:#DC2626;border-color:#fff;animation:pulse 1.5s infinite;}
-    .bmk.bi-rec .bmk-ic{background:#F59E0B;border-color:#fff;}
-    .bmk.bi-na .bmk-ic{background:#F6F8F7;border-color:#8A939B;opacity:.7;}
+    .bmk.bi-rec .bmk-ic{background:#F97316;border-color:#fff;}
+    .bmk.bi-na .bmk-ic{background:#F6F8F7;border-color:#7C3AED;opacity:.75;}
     .bmk-nm{background:#fff;border:1.5px solid #E5E5E5;color:#0E1116;font-weight:800;font-size:11px;padding:2px 8px;border-radius:8px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.2);}
     .bmk.bi-up .bmk-nm{background:#DC2626;color:#fff;border-color:#fff;}
-    .bmk.bi-rec .bmk-nm{background:#F59E0B;color:#fff;border-color:#fff;}
-    .bmk.bi-na .bmk-nm{background:#F6F8F7;color:#8A939B;border-color:#8A939B;}
+    .bmk.bi-rec .bmk-nm{background:#F97316;color:#fff;border-color:#fff;}
+    .bmk.bi-na .bmk-nm{background:#F6F8F7;color:#7C3AED;border-color:#7C3AED;}
     .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
     .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
     .br-notes b{color:#0E1116;}
@@ -117,7 +119,7 @@
 
   <div class="br-hero">
     <h1>Seattle <span class="accent">drawbridge status</span> — live</h1>
-    <p class="sub">Is the bridge up right now? Live raised/lowered status for Seattle's five drawbridges, straight from the city's bridge feed — refreshed every 30 seconds. Openings usually last 5–15 minutes.</p>
+    <p class="sub">Is the bridge up right now? Live raised/lowered status for Seattle's five live-feed drawbridges, straight from the city's bridge feed — refreshed every 30 seconds — plus when each one last opened. Openings usually last 5–15 minutes.</p>
   </div>
 
   <div class="br-wrap">
@@ -144,7 +146,7 @@
   </div>
 
   <div class="br-notes">
-    <p><b>How it works:</b> status comes from Seattle DOT's live bridge feed. A <b style="color:#DC2626;">red</b> bridge is raised right now; <b style="color:#b45309;">amber</b> means it went down within the last 20 minutes (traffic may still be clearing); <b style="color:#0f7a4f;">green</b> is down and open to traffic. Bridges that aren't up right now also show when they <b>last opened</b>, from our own record of every raise — a bridge with no line yet is one we haven't recorded an opening for. The University and Lower Spokane St bridges don't publish live status. During boating season, Ship Canal bridges open frequently — federal rules give boats priority outside posted rush-hour restrictions.</p>
+    <p><b>How it works:</b> status comes from Seattle DOT's live bridge feed, with opening history from the city's public openings dataset — the same two sources the MileCheck app uses, so the map and the app always agree. <b style="color:#DC2626;">Red</b> is raised right now; <b style="color:#F97316;">orange</b> means it went down within the last 20 minutes (traffic may still be clearing); <b style="color:#12824a;">green</b> is down and open to traffic, with when it last opened. The University and Lower Spokane St bridges aren't in the real-time feed, so they show opening history only — never a live "raised".</p>
     <p><b>Statewide:</b> every regulated Washington drawbridge — Hood Canal, Grays Harbor, the Columbia — with opening rules: <a href="washington/">Washington drawbridge map</a>.</p>
     <p><b>Florida driver?</b> We built the same thing for Florida — live FDOT bridge status plus opening schedules for every regulated drawbridge: <a href="florida/">Florida drawbridge map</a>.</p>
   </div>
@@ -184,15 +186,42 @@
   </footer>
 
 <script>
+// Mirrors the app's SEATTLE_BRIDGES (constants/map.ts) — same ids, names and
+// coordinates, so the map and the app can never disagree about which bridges
+// exist or where they are. `noLiveFeed` bridges are absent from SDOT's
+// real-time GetBridgeData feed and derive status from Socrata history only.
 const BRIDGES=[
-  {key:'fremont',  name:'Fremont Bridge',  lat:47.6567, lon:-122.3501},
-  {key:'ballard',  name:'Ballard Bridge',  lat:47.6584, lon:-122.3764, labelUp:true},
-  {key:'montlake', name:'Montlake Bridge', lat:47.6470, lon:-122.3048},
-  {key:'south',    name:'South Park Bridge', lat:47.5285, lon:-122.3133},
-  {key:'1st',      name:'1st Ave S Bridge',  lat:47.5405, lon:-122.3539},
+  {key:'fremont',    id:'WA-bridge-fremont',    name:'Fremont Bridge',           lat:47.6476, lon:-122.3497},
+  {key:'ballard',    id:'WA-bridge-ballard',    name:'Ballard Bridge',           lat:47.6598, lon:-122.3762, labelUp:true},
+  {key:'university', id:'WA-bridge-university', name:'University Bridge',        lat:47.6527, lon:-122.3204, noLiveFeed:true},
+  {key:'montlake',   id:'WA-bridge-montlake',   name:'Montlake Bridge',          lat:47.6473, lon:-122.3046},
+  {key:'south-park', id:'WA-bridge-south-park', name:'South Park Bridge',        lat:47.5292, lon:-122.3141},
+  {key:'1st-ave-s',  id:'WA-bridge-1st-ave-s',  name:'1st Ave S Bridge',         lat:47.5422, lon:-122.3345},
+  {key:'spokane-st', id:'WA-bridge-spokane-st', name:'Lower Spokane St Bridge',  lat:47.5714, lon:-122.3535, noLiveFeed:true},
 ];
 const API='https://milepost-proxy.leahgerber93.workers.dev/bridge-status';
-const RECENT_MIN=20;
+
+// --- Socrata openings history (same source + same gates as the app's
+// src/hooks/useBridgeStatus.ts). Gives every bridge a real "last raised X ago"
+// from the first fetch, and is the ONLY status source for the two bridges with
+// no live feed. Display-only: it never overrides the five live bridges. ---
+const SOCRATA_URL='https://data.seattle.gov/resource/gm8h-9449.json?$limit=60&$order=opendatetime%20DESC';
+const SOCRATA_NAME_MATCHERS=[
+  [/university/i,'university'],[/ballard/i,'ballard'],[/fremont/i,'fremont'],
+  [/montlake/i,'montlake'],[/south\s*park/i,'south-park'],
+  [/(1st|first)/i,'1st-ave-s'],[/spokane/i,'spokane-st'],
+];
+// App parity (useBridgeStatus.ts):
+const WENT_DOWN_WINDOW_SEC=1200;      // 20 min — "Went down X min ago" window
+const SOCRATA_RAISED_WINDOW_SEC=1800; // open row older than 30 min -> don't claim Raised
+const SOCRATA_FRESH_WINDOW_SEC=900;   // fetch older than 15 min -> stale, don't claim Raised
+// A "last raised" older than this is far more likely a REPORTING gap than a bridge
+// that genuinely sat still for a month — SDOT stopped publishing University
+// (last row 2026-04-21) and Lower Spokane St (2026-01-23) entirely. Showing
+// "last raised 4 months ago" would read as a fact about the bridge when it is
+// really a fact about the feed, so past this age we say nothing.
+const LAST_RAISED_MAX_AGE_SEC=30*24*3600;
+const RECENT_MIN=WENT_DOWN_WINDOW_SEC/60;
 
 const map=L.map('brmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:false});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
@@ -201,18 +230,34 @@ map.fitBounds([[47.512,-122.40],[47.675,-122.29]],{padding:[18,18]});
 let markers=[];
 
 function ago(ts){const m=Math.max(0,Math.round((Date.now()/1000-ts)/60));return m<1?'just now':m+' min';}
-// Coarser units for the "last opened" line, which is usually hours or days old —
-// "raised 4,321 min ago" is unreadable.
-function agoLong(ts){const s2=Math.max(0,Math.floor(Date.now()/1000-ts));
-  const m=Math.floor(s2/60),h=Math.floor(m/60),d=Math.floor(h/24);
+// Coarser units for the "last raised" suffix, which is usually hours or days old.
+function agoLong(ts){const d0=Math.max(0,Math.floor(Date.now()/1000-ts));
+  const m=Math.floor(d0/60),h=Math.floor(m/60),d=Math.floor(h/24);
   if(m<1)return'just now';if(m<60)return m+' min ago';if(h<24)return h+(h===1?' hour ago':' hours ago');
   return d+(d===1?' day ago':' days ago');}
-function matchKey(id){id=(id||'').toLowerCase();return BRIDGES.find(b=>id.includes(b.key));}
+function matchKey(id){id=(id||'').toLowerCase();return BRIDGES.find(b=>id.includes(b.key)||id.includes(b.key.replace(/-/g,'')));}
 
-// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
-// so neither "it returned" nor "it parsed" proves a feed answered. Status
-// AND payload shape are the proof. Anything less is an outage, never an
-// all-clear.
+// Socrata timestamps are Pacific-time FLOATING ("2026-09-01T22:37:00.000", no
+// zone). Same conversion as the app's parsePacificTimestamp: read the wall time
+// as America/Los_Angeles so DST is handled, with a fixed-offset fallback.
+function parsePacific(ts){
+  if(typeof ts!=='string')return undefined;
+  const m=ts.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);
+  if(!m)return undefined;
+  const [,Y,Mo,D,H,Mi,S]=m.map(Number);
+  const asUTC=Date.UTC(Y,Mo-1,D,H,Mi,S)/1000;
+  try{
+    // Find the offset LA had at that wall time by round-tripping through Intl.
+    const dt=new Date(asUTC*1000);
+    const inLA=new Date(dt.toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
+    const inUTC=new Date(dt.toLocaleString('en-US',{timeZone:'UTC'}));
+    return asUTC+(inUTC-inLA)/1000;
+  }catch(e){
+    const pdt=Mo>=3&&Mo<=10; // approximate fallback only
+    return asUTC+(pdt?7:8)*3600;
+  }
+}
+
 async function fetchFeed(url,opts,validate){
   const r=await fetch(url,opts);
   if(!r.ok) throw new Error('HTTP '+r.status);
@@ -221,31 +266,87 @@ async function fetchFeed(url,opts,validate){
   return d;
 }
 
+// Socrata cache — polled far less often than the live feed (history moves slowly).
+let socrata={lastRaisedAt:{},openAt:{},fetchedAt:0};
+async function refreshSocrata(){
+  try{
+    const rows=await fetchFeed(SOCRATA_URL,{cache:'no-store'},d=>Array.isArray(d));
+    const lastRaisedAt={},openAt={};
+    rows.forEach(r=>{
+      const hit=SOCRATA_NAME_MATCHERS.find(([re])=>re.test(r.entityname||''));
+      if(!hit)return;
+      const key=hit[1];
+      const o=parsePacific(r.opendatetime);
+      if(o==null)return;
+      if(lastRaisedAt[key]==null||o>lastRaisedAt[key])lastRaisedAt[key]=o;
+      // A row with no closedatetime is an opening still in progress.
+      if(!r.closedatetime&&(openAt[key]==null||o>openAt[key]))openAt[key]=o;
+    });
+    socrata={lastRaisedAt,openAt,fetchedAt:Math.floor(Date.now()/1000)};
+  }catch(e){ /* keep the previous cache; never let history break live status */ }
+}
+
+// App parity (socrataRaised): claim "Raised" from history ONLY when the open row
+// is recent AND our fetch is fresh. Otherwise it's "Down · last raised X ago" —
+// never a stale raise.
+function socrataRaised(key,nowSec){
+  const o=socrata.openAt[key];
+  if(o==null)return false;
+  if(nowSec-o>SOCRATA_RAISED_WINDOW_SEC)return false;
+  if(!socrata.fetchedAt||nowSec-socrata.fetchedAt>SOCRATA_FRESH_WINDOW_SEC)return false;
+  return true;
+}
+
 async function refresh(){
-  let data={raised:[],raisedAt:{},loweredAt:{},lastRaised:{}};
+  let data={raised:[],raisedAt:{},loweredAt:{}};
   // Success must be PROVEN, not assumed. If the fetch throws, the response isn't ok,
   // the JSON body is malformed, or the payload doesn't actually carry the `raised`
   // array we read below, `data` stays at its empty defaults — and without this flag
-  // that empty state would render as "all 5 bridges down", a confident all-clear the
+  // that empty state would render as "all bridges down", a confident all-clear the
   // page never actually received. A dead feed must look unavailable, not calm.
   let ok=false;
   try{data=await fetchFeed(API,{cache:'no-store'},d=>Array.isArray(d.raised));ok=true;}catch(e){}
+  const nowSec=Math.floor(Date.now()/1000);
+
+  // Tier derivation mirrors the app's bridgeTier() in app/(tabs)/map.tsx:
+  //   raised  #DC2626  "Raised · X min"
+  //   recent  #F97316  "Went down X min ago"  (<= 20 min)
+  //   down    #12824a  "Down"                 (+ "last raised X ago" when known)
+  //   unknown #7C3AED  no feed at all
   const state={};
-  BRIDGES.forEach(b=>state[b.key]=ok
-    ?{tier:'down',detail:'Down — open to traffic'}
-    :{tier:'unavailable',detail:'No live status — feed offline'});
-  (data.raised||[]).forEach(id=>{const b=matchKey(id);if(b){const t=(data.raisedAt||{})[id];
-    state[b.key]={tier:'up',detail:t?('UP — raised '+ago(t)+' ago'):'UP right now'};}});
+  BRIDGES.forEach(b=>{
+    const raw=socrata.lastRaisedAt[b.key];
+    const last=(raw!=null&&nowSec-raw<=LAST_RAISED_MAX_AGE_SEC)?raw:undefined;
+    const suffix=last!=null?'last raised '+agoLong(last):'';
+
+    if(b.noLiveFeed){
+      // No live feed: history is the only source, under the strict rules above.
+      if(socrataRaised(b.key,nowSec)){
+        const up=Math.max(1,Math.round((nowSec-socrata.openAt[b.key])/60));
+        state[b.key]={tier:'up',detail:'Raised · '+up+' min',last:''};
+      }else if(last!=null){
+        state[b.key]={tier:'down',detail:'Down',last:suffix};
+      }else{
+        state[b.key]={tier:'unknown',detail:'No live status published',last:''};
+      }
+      return;
+    }
+
+    if(!ok){state[b.key]={tier:'unavailable',detail:'No live status — feed offline',last:suffix};return;}
+    state[b.key]={tier:'down',detail:'Down',last:suffix};
+  });
+
+  (data.raised||[]).forEach(id=>{const b=matchKey(id);if(b&&!b.noLiveFeed){
+    const t=(data.raisedAt||{})[id];
+    const up=t?Math.max(1,Math.round((nowSec-t)/60)):null;
+    state[b.key]={tier:'up',detail:up?('Raised · '+up+' min'):'Raised',last:''};}});
+
   Object.entries(data.loweredAt||{}).forEach(([id,ts])=>{const b=matchKey(id);
-    if(b&&state[b.key].tier==='down'&&(Date.now()/1000-ts)<RECENT_MIN*60){
-      state[b.key]={tier:'recent',detail:'Went down '+ago(ts)+' ago — traffic clearing'};}});
-  // "Last opened" — the question people actually arrive with when nothing is up
-  // right now. Sourced from lastRaised (worker v3), which is never cleared. A
-  // bridge missing from that map has NO RECORD yet, so it gets no line at all
-  // rather than anything implying it has never opened.
-  Object.entries(data.lastRaised||{}).forEach(([id,ts])=>{const b=matchKey(id);
-    if(b&&state[b.key]&&state[b.key].tier!=='up'&&state[b.key].tier!=='unavailable'){
-      state[b.key].last='Last opened '+agoLong(ts);}});
+    if(b&&state[b.key]&&state[b.key].tier==='down'&&(nowSec-ts)<WENT_DOWN_WINDOW_SEC){
+      const dn=Math.max(1,Math.round((nowSec-ts)/60));
+      state[b.key]={tier:'recent',detail:'Went down '+dn+' min ago',
+        last:(socrata.lastRaisedAt[b.key]!=null&&nowSec-socrata.lastRaisedAt[b.key]<=LAST_RAISED_MAX_AGE_SEC)
+          ?'last raised '+agoLong(socrata.lastRaisedAt[b.key]):''};}});
 
   // list
   const list=document.getElementById('brList');
@@ -254,7 +355,7 @@ async function refresh(){
   // remove loading card
   const loading=list.querySelector('.br-card:not(.dyn)');if(loading&&loading.querySelector('.br-nm').textContent==='Loading…')loading.remove();
   const frag=document.createDocumentFragment();
-  BRIDGES.slice().sort((a,b)=>{const r=t=>t==='up'?0:t==='recent'?1:2;return r(state[a.key].tier)-r(state[b.key].tier);})
+  BRIDGES.slice().sort((a,b)=>{const r=t=>t==='up'?0:t==='recent'?1:t==='down'?2:3;return r(state[a.key].tier)-r(state[b.key].tier);})
     .forEach(b=>{
       const st=state[b.key];
       const el=document.createElement('div');
@@ -270,16 +371,17 @@ async function refresh(){
   const svgOpen='<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h3.5m13 0H22"/><path d="M6.5 16l4.2-8m6.8 8l-4.2-8"/><path d="M10 19.5l1.5-1.2 1.5 1.2 1.5-1.2 1.5 1.2"/></svg>';
   BRIDGES.forEach(b=>{
     const st=state[b.key];
-    const cls=st.tier==='up'?'bi-up':st.tier==='recent'?'bi-rec':st.tier==='unavailable'?'bi-na':'bi-down';
-    const glyph=st.tier==='up'?svgOpen:svgClosed(st.tier==='recent'?'#fff':(st.tier==='unavailable'?'#8A939B':'#7C3AED'));
-    const label=b.name.replace(' Bridge','')+(st.tier==='up'?' · UP':(st.tier==='unavailable'?' · N/A':''));
+    const na=st.tier==='unavailable'||st.tier==='unknown';
+    const cls=st.tier==='up'?'bi-up':st.tier==='recent'?'bi-rec':na?'bi-na':'bi-down';
+    const glyph=st.tier==='up'?svgOpen:svgClosed(st.tier==='recent'?'#fff':(na?'#7C3AED':'#12824a'));
+    const label=b.name.replace(' Bridge','').replace('Lower Spokane St','Spokane St')+(st.tier==='up'?' · UP':(na?' · N/A':''));
     const inner=b.labelUp
       ?'<span class="bmk-nm">'+label+'</span><span class="bmk-ic">'+glyph+'</span>'
       :'<span class="bmk-ic">'+glyph+'</span><span class="bmk-nm">'+label+'</span>';
     const ic=L.divIcon({className:'',iconSize:[110,60],iconAnchor:[55,b.labelUp?42:24],
       html:'<div class="bmk '+cls+'">'+inner+'</div>'});
     const m=L.marker([b.lat,b.lon],{icon:ic}).addTo(map);
-    m.bindPopup('<b>'+b.name+'</b><br>'+st.detail+(st.last?'<br><span style="color:#5b6670;">'+st.last+'</span>':''));
+    m.bindPopup('<b>'+b.name+'</b><br>'+st.detail+(st.last?'<br><span style="color:#5b6670;">'+st.last.charAt(0).toUpperCase()+st.last.slice(1)+'</span>':''));
     markers.push(m);
   });
   const nowStr=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
@@ -287,8 +389,12 @@ async function refresh(){
     ?('Updated '+nowStr+' · refreshes every 30s')
     :('Feed unavailable as of '+nowStr+' · retrying every 30s');
 }
-refresh();
+// Prime the history cache first so the very first paint can already say
+// "last raised X ago", then poll each source on its own cadence (app parity:
+// live 30s here, history every 5 min — openings history moves slowly).
+refreshSocrata().then(refresh);
 setInterval(refresh,30000);
+setInterval(()=>refreshSocrata().then(refresh),300000);
 </script>
 <!-- shared hamburger toggle (was missing on this page; the global collapse in style.css needs it) -->
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
