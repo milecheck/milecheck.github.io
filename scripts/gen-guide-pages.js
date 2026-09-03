@@ -709,7 +709,7 @@ function page(g){
   // code here, and it appears in the toggle and hreflang on the English page.
   const TRANSLATIONS = {
     'breakdown-on-the-autobahn': { es: true },
-    'driving-in-the-us-foreign-visitor-guide': { es: true },
+    'driving-in-the-us-foreign-visitor-guide': { es: true, fr: true },
   };
   const LANG_LABEL = { en: 'EN', es: 'ES', fr: 'FR', de: 'DE', pt: 'PT', zh: 'ZH', vi: 'VI', ko: 'KO', ar: 'AR' };
   const locales = TRANSLATIONS[g.slug];
