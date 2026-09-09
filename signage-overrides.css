@@ -38,8 +38,15 @@
   padding: 0 !important;
 }
 
-/* — Dark sections: blue-black → asphalt green-black — */
-.partners, [style*="#0F1419"] {
+/* — Dark sections: blue-black → asphalt green-black —
+     Scoped to BACKGROUND uses only. `[style*="#0F1419"]` matched any inline style merely
+     CONTAINING the hex, and #0F1419 is also the dark INK these pages set as text on light
+     and green buttons — so it slammed a dark background behind dark text (the Geotab
+     "View on the Geotab Marketplace" button rendered at 1.2:1, and bare headings got a dark
+     block behind them). 8 elements across 5 pages were hit; exactly 1 wanted it. — */
+.partners,
+[style*="background:#0F1419"], [style*="background: #0F1419"],
+[style*="background-color:#0F1419"], [style*="background-color: #0F1419"] {
   background: var(--asphalt) !important;
   border-color: var(--asphalt) !important;
 }
@@ -64,6 +71,19 @@
      (the live-dot animation keeps the brighter live green). — */
 [style*="color:#00C880"], [style*="color: #00C880"] { color: var(--sign) !important; }
 [style*="color:#00A86B"], [style*="color: #00A86B"] { color: var(--sign) !important; }
+
+/* …but NOT inside the dark sections. --sign (#31623f) is a night-shift green chosen for
+   PAPER; on asphalt it measures 2.0-2.2:1 — a whisper. The authored #00C880 was already the
+   right value on these backgrounds (7.0:1), so the retint is simply wrong here and we keep
+   the original. Same trap as the 2026-08-28 black-on-black fix above: a global retint that
+   never asked what it was sitting on. */
+.partners [style*="color:#00C880"], .partners [style*="color: #00C880"],
+.cta-section [style*="color:#00C880"], .cta-section [style*="color: #00C880"],
+.ent-hero [style*="color:#00C880"], .ent-hero [style*="color: #00C880"],
+.demo-phone [style*="color:#00C880"], .demo-phone [style*="color: #00C880"] { color: #00C880 !important; }
+.partners [style*="color:#00A86B"], .partners [style*="color: #00A86B"],
+.cta-section [style*="color:#00A86B"], .cta-section [style*="color: #00A86B"],
+.ent-hero [style*="color:#00A86B"], .ent-hero [style*="color: #00A86B"] { color: #00C880 !important; }
 .hero-fineprint strong { color: var(--sign) !important; }
 
 /* — Store buttons: iOS = asphalt sign, Android = green sign — */
