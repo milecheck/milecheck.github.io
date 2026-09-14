@@ -56,8 +56,8 @@
     <p class="premium">Sign up for Premium to add live DOT road alerts,<br>road cameras, trip logging, and route planning.</p>
     <p class="price"><strong>$49.99/year</strong> or <strong>$9.99/month</strong><br>with a 7-day free trial.</p>
     <p id="redirecting">Taking you to your store&hellip;</p>
-    <a class="store-btn btn-ios" href="https://apps.apple.com/us/app/milecheck/id6759212851" rel="noopener">Download on the App&nbsp;Store</a>
-    <a class="store-btn btn-android" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" rel="noopener">Get it on Google&nbsp;Play</a>
+    <a class="store-btn btn-ios" href="https://apps.apple.com/us/app/milecheck/id6759212851?ct=get&mt=8" rel="noopener">Download on the App&nbsp;Store</a>
+    <a class="store-btn btn-android" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dget" rel="noopener">Get it on Google&nbsp;Play</a>
     <p class="fine">iPhone &amp; iPad on the App Store &middot; Android on Google Play</p>
     <a class="back" href="../">&larr; Back to milecheckapp.com</a>
   </div>
@@ -72,9 +72,9 @@
       var ua = navigator.userAgent || '';
       var target = null;
       if (/android/i.test(ua)) {
-        target = 'https://play.google.com/store/apps/details?id=app.milecheck.mobile';
+        target = 'https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dget';
       } else if (/iphone|ipad|ipod/i.test(ua) && !window.MSStream) {
-        target = 'https://apps.apple.com/us/app/milecheck/id6759212851';
+        target = 'https://apps.apple.com/us/app/milecheck/id6759212851?ct=get&mt=8';
       }
       if (target) {
         document.getElementById('redirecting').style.display = 'block';
