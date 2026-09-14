@@ -19,10 +19,11 @@
   <style>
     .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
     @media(max-width:860px){.mv-hero{grid-template-columns:1fr;}}
-    .mv-get{border:1px solid var(--line);background:var(--surface);padding:16px 18px;margin-top:4px;}
+    .mv-get{border:2px solid var(--ink);background:var(--surface);padding:18px 20px;margin-top:4px;}
+    .mv-get-soon{font-family:var(--display);font-size:26px;font-weight:600;letter-spacing:-0.01em;line-height:1.1;margin:2px 0 8px;}
     .mv-get .mv-stamp{margin-bottom:6px;}
     .mv-get h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:6px;}
-    .mv-get p{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:10px;}
+    .mv-get p{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:0;}
     .mv-get .btn{display:block;text-align:center;}
     .mv-get .mv-soon{display:block;text-align:center;margin-top:8px;}
     .mv-hero h1{font-family:var(--display);font-size:clamp(28px,4.4vw,44px);font-weight:600;letter-spacing:-0.01em;line-height:1.08;text-wrap:balance;}
@@ -98,9 +99,8 @@
     <div class="mv-get">
       <div class="mv-stamp">The app</div>
       <h3>Mountain Visibility Forecast</h3>
-      <p>All four mountains, a push when yours comes out. $0.99 once.</p>
-      <a href="mailto:info@milecheckapp.com?subject=Mountain%20Visibility%20Forecast%20iOS%20beta&body=Send%20me%20a%20TestFlight%20invite." class="btn btn-primary">Join the iOS beta</a>
-      <span class="mv-soon">Android coming soon</span>
+      <div class="mv-get-soon">Coming soon</div>
+      <p>iOS beta first, then Android. All four mountains, a push when yours comes out. $0.99 once.</p>
     </div>
   </div>
   <div class="mv-wrap">
@@ -119,10 +119,7 @@
       <div class="mv-card">
         <h3>Mountain Visibility Forecast</h3>
         <p>Mount Rainier, Mount Hood, Mount Baker, Denali in one app. Picks the mountain nearest you, reads your part of the region, and tells you when it is out. $0.99 once. No account, no ads, your location stays on your phone.</p>
-        <div class="mv-cta">
-          <a href="mailto:info@milecheckapp.com?subject=Mountain%20Visibility%20Forecast%20iOS%20beta&body=Send%20me%20a%20TestFlight%20invite." class="btn btn-primary">Join the iOS beta</a>
-          <span class="mv-soon">Android coming soon</span>
-        </div>
+        <div class="mv-cta"><span class="mv-soon">Coming soon to iOS and Android</span></div>
       </div></div>
   </div>
   <div class="mv-body">
