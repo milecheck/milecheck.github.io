@@ -17,7 +17,14 @@
   <link rel="stylesheet" href="../../../style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does it decide whether Mount Hood is visible?","acceptedAnswer":{"@type":"Answer","text":"It reads the cloud ceilings at the airports along the sightline from Portland to the summit, the mountain's own cloud layers from the MET Norway model, and whether the cloud deck sits below the summit at 11,249 ft. It computes; it does not poll neighbours."}},{"@type":"Question","name":"Why three days and not ten?","acceptedAnswer":{"@type":"Answer","text":"Cloud forecasts stop being useful after about three days. A ten-day visibility forecast is a calendar with random numbers on it."}},{"@type":"Question","name":"Why does Vancouver, WA get a different answer than Portland?","acceptedAnswer":{"@type":"Answer","text":"Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page here reads its own stations."}},{"@type":"Question","name":"What can it not see?","acceptedAnswer":{"@type":"Answer","text":"It cannot see smoke it has not measured. Where it is unsure it says so instead of rounding up."}}]}</script>
   <style>
-    .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;}
+    .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
+    @media(max-width:860px){.mv-hero{grid-template-columns:1fr;}}
+    .mv-get{border:1px solid var(--line);background:var(--surface);padding:16px 18px;margin-top:4px;}
+    .mv-get .mv-stamp{margin-bottom:6px;}
+    .mv-get h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:6px;}
+    .mv-get p{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:10px;}
+    .mv-get .btn{display:block;text-align:center;}
+    .mv-get .mv-soon{display:block;text-align:center;margin-top:8px;}
     .mv-hero h1{font-family:var(--display);font-size:clamp(28px,4.4vw,44px);font-weight:600;letter-spacing:-0.01em;line-height:1.08;text-wrap:balance;}
     .mv-hero p.sub{color:var(--ink-soft);font-size:15.5px;margin-top:10px;max-width:66ch;line-height:1.55;}
     .mv-stamp{font-family:var(--mono-stack);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
@@ -83,16 +90,25 @@
   </header>
   <div class="mv-crumbs"><a href="../../../index.html">MileCheck</a> / <a href="../../../mountains/">Mountains</a> / <a href="../">Mount Hood</a> / Best time</div>
   <div class="mv-hero">
+    <div>
     <div class="mv-stamp">Mount Hood · seasons</div>
     <h1>Best time of year to see Mount Hood</h1>
     <p class="sub">Months, hours, and the one weather pattern that fools people.</p>
+    </div>
+    <div class="mv-get">
+      <div class="mv-stamp">The app</div>
+      <h3>Mountain Visibility Forecast</h3>
+      <p>All four mountains, a push when yours comes out. $0.99 once.</p>
+      <a href="mailto:info@milecheckapp.com?subject=Mountain%20Visibility%20Forecast%20iOS%20beta&body=Send%20me%20a%20TestFlight%20invite." class="btn btn-primary">Join the iOS beta</a>
+      <span class="mv-soon">Android coming soon</span>
+    </div>
   </div>
   <div class="mv-wrap">
     <div><div class="mv-prose"><p>Portland's clearest months are July through September. Hood River, on the dry side of the Cascades, sees the mountain on many days when Portland is under cloud, and Government Camp sits above the valley cloud entirely.</p>
 <p>Autumn inversions put Portland under fog with the mountain in sun above it. Winter is the mountain's quiet season from the city, with clear days coming in short cold spells after a front.</p>
 <p>Sunset light lands on the west face, the Portland side. Sunrise from Hood River lights the north face.</p><h2>Right now</h2></div>
     <div class="mv-verdict">
-      <div class="mv-stamp">Right now · from Portland · Los Angeles time</div>
+      <div class="mv-stamp">Right now · from Portland · Pacific time</div>
       <div class="mv-v" id="mvV">…</div>
       <p class="mv-line" id="mvLine">Reading the airports along the sightline.</p>
       <p class="mv-line" id="mvElse" style="color:var(--sign);font-weight:600;"></p>
@@ -106,7 +122,7 @@
         <h3>Mountain Visibility Forecast</h3>
         <p>Mount Rainier, Mount Hood, Mount Baker, Denali in one app. Picks the mountain nearest you, reads your part of the region, and tells you when it is out. $0.99 once. No account, no ads, your location stays on your phone.</p>
         <div class="mv-cta">
-          <a href="https://testflight.apple.com/join/UnUtmEGg" class="btn btn-primary">Join the iOS beta</a>
+          <a href="mailto:info@milecheckapp.com?subject=Mountain%20Visibility%20Forecast%20iOS%20beta&body=Send%20me%20a%20TestFlight%20invite." class="btn btn-primary">Join the iOS beta</a>
           <span class="mv-soon">Android coming soon</span>
         </div>
       </div></div>
