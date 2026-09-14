@@ -33,7 +33,7 @@ let files = 0, apple = 0, play = 0;
 for (const f of walk(ROOT)) {
   const src = readFileSync(f, 'utf8');
   const slug = slugFor(f);
-  const appleUrl = `https://apps.apple.com/us/app/milecheck/id${APPLE_ID}?ct=${slug}${PT ? `&pt=${PT}` : ''}&mt=8`;
+  const appleUrl = PT ? `https://apps.apple.com/app/apple-store/id${APPLE_ID}?pt=${PT}&ct=${slug}&mt=8` : `https://apps.apple.com/us/app/milecheck/id${APPLE_ID}?ct=${slug}&mt=8`;
   const ref = encodeURIComponent(`utm_source=milecheckapp.com&utm_medium=web&utm_campaign=${slug}`);
   const playUrl = `https://play.google.com/store/apps/details?id=${PKG}&referrer=${ref}`;
   let out = src.replace(APPLE_RE, () => { apple++; return appleUrl; }).replace(PLAY_RE, () => { play++; return playUrl; });
