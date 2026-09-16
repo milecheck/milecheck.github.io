@@ -157,6 +157,7 @@ function page(s){
   <script type="application/ld+json">${crumbJsonLd(s)}</script>
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .co-hero .spon{margin:0 0 18px;}
     .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
     .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
     .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
@@ -217,6 +218,7 @@ ${sp.css}
   </header>
 
   <div class="co-hero">
+${sp.html}
     <div class="eyebrow">Live traffic cameras · ${s.name} · ${s.dot}</div>
     <h1>${s.name} traffic cameras, live</h1>
     <p class="sub">See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and mile marker. Free, no account — tap any camera for the latest image.</p>
@@ -227,7 +229,6 @@ ${sp.css}
   </div>
 
   <div class="co-wrap">
-${sp.html}
     <div style="position:relative;">
       <div id="comap"></div>
       <div class="co-bs" id="coStatus">Loading live ${s.name} cameras…</div>
