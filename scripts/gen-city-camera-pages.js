@@ -3,6 +3,7 @@
 // Proximity-filtered around the metro center. Run: node scripts/gen-city-camera-pages.js
 const fs = require('fs');
 const path = require('path');
+const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2026-09-15)
 
 // state slug map (for cross-linking to the state camera page)
 const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont'};
@@ -99,6 +100,7 @@ function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@
 function crumbJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Cameras','item':'https://milecheckapp.com/cameras/'},{'@type':'ListItem','position':3,'name':c.name+' Cameras','item':'https://milecheckapp.com/cameras/'+c.slug+'/'}]}); }
 
 function page(c){
+  const sp = SPON.slot({ kind: 'cameras', slug: c.slug, state: c.state, name: c.name });
   const faqHtml=faq(c).map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   const ss=STATE_SLUG[c.state], sn=STATE_NAME[c.state];
   return `<!DOCTYPE html>
@@ -164,6 +166,7 @@ function page(c){
     .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
     .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
+${sp.css}
   </style>
 </head>
 <body>
@@ -197,6 +200,7 @@ function page(c){
   </div>
 
   <div class="co-wrap">
+${sp.html}
     <div style="position:relative;">
       <div id="comap"></div>
       <div class="co-bs" id="coStatus">Loading live ${c.name} cameras…</div>
@@ -262,6 +266,7 @@ ${faqHtml}
     </div>
   </footer>
 
+${sp.js}
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 
 <script>
@@ -305,4 +310,5 @@ for(const c of CITIES){
   n++;
   console.log('wrote cameras/'+c.slug+'/index.html  ('+c.name+', '+c.dot+')');
 }
+console.log(SPON.summary());
 console.log('\nGenerated '+n+' city camera pages.');

@@ -1,0 +1,31 @@
+{
+  "_readme": [
+    "One sponsor slot per corridor page and per state/city camera page, directly above the live map.",
+    "Keys, tried most specific first. Corridor pages: corridor:<slug> → corridors:* → *. Camera pages: cameras:<state-or-city-slug> → state:<XX> → cameras:* → *.",
+    "So 'state:WA' covers the Washington page and every Washington city page (Seattle) but no corridor page, because corridors cross states. Buy a corridor with corridor:i-90.",
+    "Dates are inclusive YYYY-MM-DD in UTC. A slot outside its dates is skipped, and the next key is tried; with nothing left the house slot renders. Pages are static, so a date change takes effect when the pages are regenerated.",
+    "Fields: id (letters, digits, dashes; this is what the report groups by), name, copy (one sentence, under 90 characters), url (the sponsor's landing page, with their UTM if they want one), cta (2-4 words), logo (path under /images/sponsors/, PNG or SVG, transparent background, at least 2x for a 36px-tall display), logoW and logoH (the file's pixel size, so the browser reserves the box), start, end.",
+    "After any change, from the site root: node scripts/gen-corridor-pages.js && node scripts/gen-state-camera-pages.js && node scripts/gen-city-camera-pages.js && node scripts/tag-store-links.mjs --pt 128447811 && node scripts/add-analytics.mjs G-CDMSB5630W, then commit and push.",
+    "Counting and the report: docs/website-sponsor-slot.md in the app repo."
+  ],
+  "house": {
+    "url": "/partners/#sponsor",
+    "cta": "Ask about it",
+    "copy": "One sponsor per page, on the website only. The app has no ads."
+  },
+  "_example_slot": {
+    "corridor:i-75": {
+      "id": "example-tire",
+      "name": "Example Tire",
+      "copy": "Winter tires installed while you wait, 40 stores along I-75.",
+      "url": "https://example.com/?utm_source=milecheckapp.com&utm_medium=sponsor&utm_campaign=i-75",
+      "cta": "Find a store",
+      "logo": "/images/sponsors/example-tire.png",
+      "logoW": 264,
+      "logoH": 72,
+      "start": "2026-10-01",
+      "end": "2026-12-31"
+    }
+  },
+  "slots": {}
+}

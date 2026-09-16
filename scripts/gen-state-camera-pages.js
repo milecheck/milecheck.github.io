@@ -4,6 +4,7 @@
 // Run: node scripts/gen-state-camera-pages.js
 const fs = require('fs');
 const path = require('path');
+const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2026-09-15)
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [
@@ -127,6 +128,7 @@ function faqJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@
 function crumbJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Cameras','item':'https://milecheckapp.com/cameras/'},{'@type':'ListItem','position':3,'name':s.name+' Cameras','item':'https://milecheckapp.com/cameras/'+s.slug+'/'}]}); }
 
 function page(s){
+  const sp = SPON.slot({ kind: 'cameras', slug: s.slug, state: s.code, name: s.name });
   const faqHtml=faq(s).map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   return `<!DOCTYPE html>
 <html lang="en">
@@ -191,6 +193,7 @@ function page(s){
     .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
     .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
+${sp.css}
   </style>
 </head>
 <body>
@@ -224,6 +227,7 @@ function page(s){
   </div>
 
   <div class="co-wrap">
+${sp.html}
     <div style="position:relative;">
       <div id="comap"></div>
       <div class="co-bs" id="coStatus">Loading live ${s.name} cameras…</div>
@@ -289,6 +293,7 @@ ${faqHtml}
     </div>
   </footer>
 
+${sp.js}
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 
 <script>
@@ -333,4 +338,5 @@ for(const s of STATES){
   n++;
   console.log('wrote cameras/'+s.slug+'/index.html  ('+s.name+', '+s.dot+')');
 }
+console.log(SPON.summary());
 console.log('\nGenerated '+n+' state camera pages.');

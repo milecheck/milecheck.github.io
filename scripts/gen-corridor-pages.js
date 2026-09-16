@@ -5,6 +5,7 @@
 // unique guide + FAQ, JSON-LD, app CTA.  Run: node scripts/gen-corridor-pages.js
 const fs = require('fs');
 const path = require('path');
+const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2026-09-15)
 
 // States that also have a /bridges/<slug>/ page — interlink corridor pages to
 // bridges (GSC 2026-08-13: /bridges/ converts at 27.4% CTR, 3x the homepage,
@@ -225,6 +226,7 @@ function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@
 function crumbJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Corridors','item':'https://milecheckapp.com/corridors/'},{'@type':'ListItem','position':3,'name':c.name,'item':'https://milecheckapp.com/corridors/'+c.slug+'/'}]}); }
 
 function page(c){
+  const sp = SPON.slot({ kind: 'corridor', slug: c.slug, name: c.name });
   const segHtml=c.segs.map(([h,p])=>`    <div class="co-seg"><h3>${h}</h3><p>${p}</p></div>`).join('\n');
   const faqHtml=c.faq.map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   const hpStat = c.highPass
@@ -311,6 +313,7 @@ function page(c){
     .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
     .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
+${sp.css}
   </style>
 </head>
 <body>
@@ -348,6 +351,7 @@ ${hpStat}
   </div>
 
   <div class="co-wrap">
+${sp.html}
     <div class="co-toggle">
       <button class="co-chip cam on" id="tgCam"><span class="co-dot" style="background:#0f7a4f"></span> Cameras</button>
       <button class="co-chip alr on" id="tgAlr"><span class="co-dot" style="background:#DC2626"></span> Alerts &amp; closures</button>
@@ -416,6 +420,7 @@ ${faqHtml}
     </div>
   </footer>
 
+${sp.js}
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 
 <script>
@@ -478,4 +483,5 @@ for(const c of CORRIDORS){
   n++;
   console.log('wrote corridors/'+c.slug+'/index.html  ('+c.name+', '+c.states.length+' states, '+(c.pois?c.pois.length:0)+' POIs)');
 }
+console.log(SPON.summary());
 console.log('\nGenerated '+n+' corridor pages.');
