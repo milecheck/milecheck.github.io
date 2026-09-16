@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"The Business tier includes a service-level agreement and invoicing for high-volume or mission-critical use. Contact us to discuss terms."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"Fleet and enterprise licences include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}]}</script>
 
   <style>
     .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
@@ -228,6 +229,71 @@
   ]
 }</pre>
     </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/bridges</span></div>
+      <p class="ep-desc">Every USCG-regulated drawbridge in a state, with its federal opening rule (33 CFR 117) and live up or down status where an agency publishes one. Seattle, Florida and Louisiana today. A bridge nobody reports comes back with <code>live: null</code>, never as closed.</p>
+      <p class="ep-params"><code>state</code> optional (2-letter) · <code>limit=N</code> optional</p>
+
+      <p class="ep-label">Request</p>
+      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/bridges?apikey=YOUR_KEY&amp;state=WA"</pre>
+
+      <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged — one bridge shown)</span></p>
+      <pre class="codeblock">{
+  "generated_at": "2026-09-16T00:31:50Z",
+  "state": "WA",
+  "counts": { "total": 19, "with_live_feed": 5, "live_up": 0 },
+  "source_status": { "WA-SDOT": "ok" },
+  "bridges": [
+    {
+      "id": "117.1051-d-2",
+      "name": "Fremont Bridge",
+      "waterway": "Lake Washington Ship Canal",
+      "citation": "33 CFR 117.1051(d)",
+      "rule": "The draws of the Ballard Bridge, mile 1.1, Fremont Bridge, mile 2.6 …",
+      "lat": 47.647772, "lon": -122.349759,
+      "live_feed": true,
+      "live": {
+        "state": "down", "source": "WA-SDOT", "fresh": true,
+        "observed_at": "2026-09-16T00:31:50Z",
+        "last_raised_at": "2026-09-15T22:22:19Z",
+        "last_lowered_at": "2026-09-15T22:26:14Z",
+        "last_up_seconds": 235
+      }
+    }
+  ]
+}</pre>
+    </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/bridges/history</span></div>
+      <p class="ep-desc">The lift log. MileCheck stamps every raise and lower it sees, so each bridge carries lifts this week and this month, the typical and longest lift, which hours it opens most, and the recent lifts with durations. Seattle today.</p>
+      <p class="ep-params"><code>state=WA</code></p>
+
+      <p class="ep-label">Request</p>
+      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/bridges/history?apikey=YOUR_KEY&amp;state=WA"</pre>
+
+      <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged)</span></p>
+      <pre class="codeblock">{
+  "state": "WA",
+  "since": "2026-08-19T18:38:51Z",
+  "timezone": "America/Los_Angeles",
+  "bridges": [
+    {
+      "id": "117.1051-d-2",
+      "lifts_7d": 31,
+      "lifts_30d": 335,
+      "median_duration_sec": 241,
+      "longest_duration_sec": 601,
+      "lifts_by_hour_30d": [0, 0, 0, …],
+      "recent": [
+        { "raised_at": "2026-09-15T22:22:19Z", "lowered_at": "2026-09-15T22:26:14Z", "duration_sec": 235 }
+      ],
+      "currently_up_since": null
+    }
+  ]
+}</pre>
+    </div>
   </div>
 
   <!-- TRY IT -->
@@ -300,41 +366,44 @@
   <!-- PRICING -->
   <div class="api-section" id="pricing">
     <h2>Pricing</h2>
-    <p class="pricing-note">Launch pricing — subject to change.</p>
+    <p class="pricing-note">Two plans on this page. Fleet and enterprise licences are quoted.</p>
     <div class="pricing-scroll">
       <div class="pricing-grid">
         <div class="price-card">
-          <div class="price-tier">Free</div>
+          <div class="price-tier">Developer</div>
           <div class="price-amt">$0</div>
-          <p class="price-desc">For evaluation and early integration work.</p>
+          <p class="price-desc">Try it, build on it, ship a small app on it.</p>
           <ul class="price-feat">
-            <li>1,000 requests / month</li>
-            <li>/v1/locate, /v1/alerts + /v1/fires</li>
-            <li>Community support</li>
+            <li>1,000 calls / day</li>
+            <li>Every endpoint</li>
+            <li>Attribution required</li>
+            <li>No SLA</li>
           </ul>
-          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Free%20tier">Get started</a>
+          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20%E2%80%94%20Developer%20key">Get a key</a>
         </div>
         <div class="price-card featured">
-          <div class="price-tier">Pay-as-you-go</div>
-          <div class="price-amt" style="font-size:22px;">Contact us</div>
-          <p class="price-desc">Best for variable or growing usage beyond the free tier.</p>
+          <div class="price-tier">Business</div>
+          <div class="price-amt">$499<span> / month</span></div>
+          <p class="price-desc">For a product that depends on the data every day.</p>
           <ul class="price-feat">
-            <li>Free tier included, then metered</li>
-            <li>/v1/locate, /v1/alerts + /v1/fires</li>
+            <li>100,000 calls / day</li>
+            <li>Every endpoint</li>
             <li>Email support</li>
+            <li>Invoiced monthly</li>
           </ul>
-          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Pay-as-you-go">Get started</a>
+          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20%E2%80%94%20Business%20plan">Get started</a>
         </div>
         <div class="price-card">
-          <div class="price-tier">Business</div>
-          <div class="price-amt">Custom</div>
-          <p class="price-desc">High-volume use, SLA, and invoiced billing.</p>
+          <div class="price-tier">Fleet &amp; enterprise</div>
+          <div class="price-amt" style="font-size:22px;">Talk to us</div>
+          <p class="price-desc">Annual licence. Volume, SLA, and terms written for your use.</p>
           <ul class="price-feat">
-            <li>Volume pricing</li>
+            <li>Volume beyond 100,000 calls / day</li>
             <li>Service-level agreement</li>
-            <li>Invoicing &amp; priority support</li>
+            <li>Priority support and a named contact</li>
+            <li>Annual invoicing</li>
           </ul>
-          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access%20%E2%80%94%20Business%20tier">Contact us</a>
+          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20%E2%80%94%20Fleet%20or%20enterprise%20licence">Talk to us</a>
         </div>
       </div>
     </div>
@@ -358,7 +427,7 @@
       </details>
       <details>
         <summary>Is there an SLA?</summary>
-        <p>The Business tier includes a service-level agreement and invoicing for high-volume or mission-critical use. Contact us to discuss terms.</p>
+        <p>Fleet and enterprise licences include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA.</p>
       </details>
       <details>
         <summary>Where does the data come from?</summary>
