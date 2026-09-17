@@ -69,6 +69,7 @@
     .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
     .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
     .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon[data-sponsor="house"] .spon-text{font-style:italic;}
     .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
     .spon-body:hover .spon-cta{text-decoration:underline;}
     @media(max-width:600px){ .spon{flex-wrap:wrap;gap:8px 12px;padding:10px 12px;min-height:44px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
@@ -98,7 +99,7 @@
   <aside class="spon" id="spon" data-slot="cameras:nevada" data-sponsor="house" aria-label="Sponsor">
     <span class="spon-tag">Sponsor this page</span>
     <a class="spon-body" href="/sponsor/" data-spon-link>
-      <span class="spon-text">One sponsor per page, on the website only. The app has no ads.</span>
+      <span class="spon-text">One sponsor per page</span>
       <span class="spon-cta">Ask about it →</span>
     </a>
   </aside>
