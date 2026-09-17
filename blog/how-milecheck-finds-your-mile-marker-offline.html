@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How MileCheck Finds Your Mile Marker With No Cell Service — MileCheck</title>
+  <meta name="description" content="Mile markers don't move. Here's how MileCheck turns your GPS position into an exact mile marker, offline, and how it holds your route steady through highway overlaps.">
+
+  <meta property="og:title" content="How MileCheck Finds Your Mile Marker With No Cell Service">
+  <meta property="og:description" content="Mile markers don't move. Here's how MileCheck turns your GPS position into an exact mile marker, offline.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/blog/how-milecheck-finds-your-mile-marker-offline.html">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="blog.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Does MileCheck need cell service to show your mile marker?","acceptedAnswer":{"@type":"Answer","text":"No. Mile marker data for all 50 states ships inside the app, so it works in dead zones. Live DOT alerts and traffic cameras do need a connection; your position on the mile marker does not."}},
+      {"@type":"Question","name":"How does MileCheck get a decimal mile marker like 34.4?","acceptedAnswer":{"@type":"Answer","text":"It measures your GPS position against the two nearest mileposts on your route and interpolates between them, rounding to match where the physical sign is actually posted rather than a straight average."}},
+      {"@type":"Question","name":"How does MileCheck avoid flipping between two overlapping highways?","acceptedAnswer":{"@type":"Answer","text":"State DOT data is checked ahead of time for stretches where two routes share the same pavement, verified against several consecutive mileposts in a row. Once you're on one of those stretches, MileCheck holds your route steady instead of re-guessing at every GPS update."}}
+    ]
+  }
+  </script>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="canonical" href="https://milecheckapp.com/blog/how-milecheck-finds-your-mile-marker-offline.html">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="./" class="active">Blog</a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="article-wrap">
+      <a href="./" class="article-back">All articles</a>
+
+      <p class="article-eyebrow">How it works</p>
+      <h1 class="article-title">How MileCheck Finds Your Mile Marker With No Cell Service</h1>
+      <div class="article-meta">
+        <span>September 16, 2026</span>
+        <span>3 min read</span>
+      </div>
+
+      <div class="article-body">
+        <p>Mile markers on the highway don't move. That's the whole trick.</p>
+
+        <p>Every state maintains a list of them: a route, a mile number, a latitude and longitude. MileCheck bundles that list into the app itself, once per state. No live connection is required to find your position on it.</p>
+
+        <h2>Between two signs</h2>
+        <p>As you drive, the app takes your GPS coordinates and asks one question: which two mileposts on your current route is this closest to? It measures the distance to both, then places you between them. Closer to mile 34 than mile 35, and a little past the midpoint, and you get "34.4."</p>
+
+        <p>The signs themselves aren't always where a database would put them. Some of Oregon's physical mile markers sit at mile 304.9 for the sign that reads "MP 305." MileCheck rounds and interpolates so the number on your screen matches what's stamped in the ground, not a straight-line average between two database entries.</p>
+
+        <h2>Where two highways share the road</h2>
+        <p>The harder problem isn't a single road. It's an interchange. Two highways can run on the same pavement for miles, and the moment your GPS ticks near an off-ramp, a naive search will flip between them, over and over, mid-drive.</p>
+
+        <p>MileCheck scans each state's data once, ahead of time, for stretches where two routes verifiably share pavement, confirmed against several consecutive mileposts in a row rather than one close call. Once you're on one of those stretches, the app holds your route steady instead of re-guessing at every GPS update.</p>
+
+        <h2>Why "offline" isn't a trick</h2>
+        <p>None of this needs a signal. The milepost list ships inside the app. The math runs on the phone. That's the offline part: not a trick, just a list that was already correct before you left town.</p>
+
+        <h2>Keep reading</h2>
+        <p><strong>Related:</strong> <a href="how-to-find-your-mile-marker.html">How to find your mile marker</a> &nbsp;·&nbsp; <a href="what-to-tell-911-highway-breakdown.html">What to tell 911 on the highway</a> &nbsp;·&nbsp; <a href="../states/">All 50 states</a></p>
+      </div>
+
+      <div class="article-cta">
+        <h3>Your mile marker, even with no signal.</h3>
+        <p>MileCheck's mile marker data is bundled into the app for all 50 states, so it works offline. Live DOT alerts layer on top when you have a connection.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-mile-marker-offline&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-mile-marker-offline" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-mile-marker-offline&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-mile-marker-offline" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../fire/">US wildfire map</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Mile marker positions are approximate and may not reflect actual sign locations. Built for highway travelers &mdash; use responsibly.</p>
+    </div>
+  </footer>
+
+  <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+</body>
+</html>

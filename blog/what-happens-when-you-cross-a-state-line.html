@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Happens When You Cross a State Line, Mid-Drive — MileCheck</title>
+  <meta name="description" content="Highways don't stop at state lines. Here's how MileCheck detects the crossing, splits your trip log correctly, and holds your route steady through highway overlaps.">
+
+  <meta property="og:title" content="What Happens When You Cross a State Line, Mid-Drive">
+  <meta property="og:description" content="Highways don't stop at state lines, and neither should a trip log. Here's how MileCheck handles the crossing.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/blog/what-happens-when-you-cross-a-state-line.html">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="blog.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Does MileCheck know when I cross a state line?","acceptedAnswer":{"@type":"Answer","text":"Yes. MileCheck checks your GPS position against each state's boundary as you drive and detects the crossing within a few seconds."}},
+      {"@type":"Question","name":"What happens to a logged trip when I cross a state line?","acceptedAnswer":{"@type":"Answer","text":"If you're logging a trip, MileCheck closes the segment you were on and opens a new one in the state you just entered, on the same highway and direction, instead of recording one long trip between two unrelated mile markers in different states."}}
+    ]
+  }
+  </script>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="canonical" href="https://milecheckapp.com/blog/what-happens-when-you-cross-a-state-line.html">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="./" class="active">Blog</a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="article-wrap">
+      <a href="./" class="article-back">All articles</a>
+
+      <p class="article-eyebrow">How it works</p>
+      <h1 class="article-title">What Happens When You Cross a State Line, Mid-Drive</h1>
+      <div class="article-meta">
+        <span>September 16, 2026</span>
+        <span>3 min read</span>
+      </div>
+
+      <div class="article-body">
+        <p>Highways don't stop at state lines, and neither should a trip log.</p>
+
+        <p>MileCheck watches your GPS position against each state's boundary as you drive. The moment you cross from, say, Washington into Oregon, the app knows before you do, usually within a few seconds of the sign going by.</p>
+
+        <h2>Your trip log splits where the state line actually is</h2>
+        <p>If you were logging a trip, that crossing doesn't just get noted. The app closes out the segment you were on and opens a new one in the state you just entered, on the same highway, in the same direction. Your trip record ends up with two segments instead of one long, technically-wrong line between a mile marker in Washington and an unrelated mile marker in Oregon. A small banner tells you it happened: "Entered Oregon, new trip started."</p>
+
+        <h2>The same logic runs on shared pavement, not just at borders</h2>
+        <p>Interstate 90 and US-93 overlap for stretches in Montana. Take an exit mid-overlap, and the app has to decide which road you're actually still on, without flickering back and forth every time a GPS ping lands a few feet closer to one route's data than the other's. That decision holds steady for as long as you're on the shared stretch, and only changes once you're clearly and consistently on one road alone.</p>
+
+        <h2>A reading from the wrong state doesn't count</h2>
+        <p>None of this is guesswork layered on top of a single location. It's built on the same principle as the mile marker itself: every reading the app trusts carries a record of which state's data it came from, and a reading from the wrong state never extends a trip logged in another one. A GPS fix a few seconds after a border crossing can still pick up an old signal from the state you just left. The app checks for that, not just the fastest read.</p>
+
+        <p>The result is a trip log that looks like the drive actually looked: one continuous highway, split correctly where the state line, or the road, actually changed.</p>
+
+        <h2>Keep reading</h2>
+        <p><strong>Related:</strong> <a href="how-milecheck-finds-your-mile-marker-offline.html">How MileCheck finds your mile marker offline</a> &nbsp;·&nbsp; <a href="how-one-app-reads-fifty-dot-systems.html">How one app reads 50 different state DOT systems</a> &nbsp;·&nbsp; <a href="../states/">All 50 states</a></p>
+      </div>
+
+      <div class="article-cta">
+        <h3>A trip log that gets the state line right.</h3>
+        <p>MileCheck splits and logs your trip correctly when you cross a state line or a highway overlap, automatically.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-state-line-crossing&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-state-line-crossing" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-state-line-crossing&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-state-line-crossing" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../fire/">US wildfire map</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Mile marker positions are approximate and may not reflect actual sign locations. Built for highway travelers &mdash; use responsibly.</p>
+    </div>
+  </footer>
+
+  <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+</body>
+</html>
