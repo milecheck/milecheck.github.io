@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Website sponsorships | MileCheck</title>
-  <meta name="description" content="One sponsor per page on milecheckapp.com: every interstate corridor page and every state and city camera page carries one slot at the top of the page. The numbers, live, and what a page costs.">
+  <meta name="description" content="One sponsor per page: every interstate corridor page and every state and city camera page on milecheckapp.com carries one slot at the top of the page. $300 a month per page or per state. The numbers, live.">
   <link rel="canonical" href="https://milecheckapp.com/sponsor/">
   <meta property="og:title" content="Sponsor a page on milecheckapp.com | MileCheck">
   <meta property="og:description" content="One sponsor per page. Viewable impressions and outbound clicks, counted on the slot itself, updated daily.">
@@ -42,6 +42,9 @@
     .sp-legend{font-size:12px;color:#5b6670;margin-top:8px;}
     .sp-legend i,.sp-legend b{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin-right:4px;}
     .sp-legend i{background:#0f7a4f;} .sp-legend b{background:#DC2626;}
+    .sp-price{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px 20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;}
+    .sp-price .big{font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:700;color:#0f7a4f;line-height:1;}
+    .sp-price .for{font-size:15px;color:#3a444d;font-weight:600;}
     .sp-calc{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#0E1116;}
     .sp-calc label{display:flex;flex-direction:column;gap:4px;font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;}
     .sp-calc input{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;width:150px;padding:8px 10px;border:1px solid #E5E5E5;border-radius:10px;color:#0E1116;background:#FAFAF7;}
@@ -102,17 +105,9 @@
   </section>
 
   <section class="sp-section" id="cost">
-    <h2>What a page costs</h2>
-    <p class="sub">Outbound clicks on your slot, times the price per click. The clicks box starts at the last 28 days across the whole site; type any number.</p>
-    <div class="sp-calc" aria-label="Cost calculator">
-      <label>Clicks <input type="number" id="cClicks" min="0" step="1" value="0" inputmode="numeric"></label>
-      <span class="op">×</span>
-      <label>Price per click <input type="text" id="cRate" value="$0.50" readonly></label>
-      <span class="op">=</span>
-      <span class="out" id="cTotal">$0.00</span>
-      <span class="per">for those clicks</span>
-    </div>
-    <p class="sp-note">Impressions are not charged. A click counts every time someone leaves for your site from the slot, on any page you sponsor. Crawlers and bots are never counted.</p>
+    <h2>What it costs</h2>
+    <div class="sp-price"><span class="big">$300 a month</span><span class="for">per page, or per state. Three-month pilot, then month to month.</span></div>
+    <p class="sp-note">You pay to be on the page, not per click. On the first of every month you get the impressions and clicks for your slot, the same numbers this page shows. When two companies want the same page, the price goes up.</p>
   </section>
 
   <section class="sp-section" id="placements">
@@ -186,15 +181,9 @@
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 <script>
 (function(){
-  // The price per click. One number, shown in the box above and used in the math.
-  var PRICE_PER_CLICK = 0.50;
   var W = 'https://milepost-proxy.leahgerber93.workers.dev';
   var $ = function(id){ return document.getElementById(id); };
-  var money = function(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}); };
   var int = function(n){ return Math.round(n).toLocaleString('en-US'); };
-  $('cRate').value = money(PRICE_PER_CLICK);
-  function calc(){ var c = Math.max(0, parseInt($('cClicks').value || '0', 10) || 0); $('cTotal').textContent = money(c * PRICE_PER_CLICK); }
-  $('cClicks').addEventListener('input', calc); calc();
 
   fetch(W + '/sponsor-stats?days=28').then(function(r){ return r.json(); }).then(function(d){
     if (!d || !d.ok || !d.byDay || !d.byDay.length) return; // no numbers: the section stays hidden
@@ -214,7 +203,6 @@
     });
     $('axFrom').textContent = d.byDay[0].day; $('axTo').textContent = d.byDay[d.byDay.length - 1].day;
     if (d.since) $('since').textContent = d.since;
-    $('cClicks').value = t.clicks; calc();
     $('numbers').hidden = false;
   }).catch(function(){});
 })();
