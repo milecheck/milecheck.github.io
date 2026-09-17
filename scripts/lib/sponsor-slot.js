@@ -31,8 +31,23 @@ function esc(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// A slot is sold by the PAGE and only by the page (Leah, 2026-09-17: state / corridor /
+// whole-site bundles overlap, and whoever bought the narrower key silently outranks the
+// broader buyer — "unfair"). So the config may only carry page keys. Anything broader is
+// refused at generation time, so the rule cannot be broken by a hurried edit.
+const PAGE_KEY_RE = /^(corridor|cameras):[a-z0-9-]{1,40}$/;
+function assertPagesOnly(cfg) {
+  const bad = Object.keys(cfg.slots || {}).filter((k) => !PAGE_KEY_RE.test(k));
+  if (bad.length) {
+    throw new Error(`data/sponsors.json: slots are sold per PAGE only (corridor:<slug> or cameras:<slug>). Refusing: ${bad.join(', ')}`);
+  }
+}
+
 function loadConfig() {
-  if (!cfgCache) cfgCache = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+  if (!cfgCache) {
+    cfgCache = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+    assertPagesOnly(cfgCache);
+  }
   return cfgCache;
 }
 
@@ -42,8 +57,8 @@ function today() {
 
 // Keys to try for a page, most specific first.
 function keysFor(kind, page) {
-  if (kind === 'corridor') return ['corridor:' + page.slug, 'corridors:*', '*'];
-  return ['cameras:' + page.slug, page.state ? 'state:' + page.state : null, 'cameras:*', '*'].filter(Boolean);
+  // One key per page. No state, category or site-wide fallbacks (see assertPagesOnly).
+  return [(kind === 'corridor' ? 'corridor:' : 'cameras:') + page.slug];
 }
 
 function isActive(s, day) {
@@ -128,4 +143,4 @@ function summary() {
   return lines.join('\n');
 }
 
-module.exports = { slot, summary, keysFor, resolve, isActive, slotHtml, BEACON_URL, CONFIG_PATH };
+module.exports = { slot, summary, keysFor, resolve, isActive, slotHtml, assertPagesOnly, PAGE_KEY_RE, BEACON_URL, CONFIG_PATH };
