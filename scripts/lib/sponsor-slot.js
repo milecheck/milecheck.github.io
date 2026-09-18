@@ -35,11 +35,11 @@ function esc(s) {
 // whole-site bundles overlap, and whoever bought the narrower key silently outranks the
 // broader buyer — "unfair"). So the config may only carry page keys. Anything broader is
 // refused at generation time, so the rule cannot be broken by a hurried edit.
-const PAGE_KEY_RE = /^(corridor|cameras):[a-z0-9-]{1,40}$/;
+const PAGE_KEY_RE = /^(corridor|cameras|guide):[a-z0-9-]{1,40}$/;
 function assertPagesOnly(cfg) {
   const bad = Object.keys(cfg.slots || {}).filter((k) => !PAGE_KEY_RE.test(k));
   if (bad.length) {
-    throw new Error(`data/sponsors.json: slots are sold per PAGE only (corridor:<slug> or cameras:<slug>). Refusing: ${bad.join(', ')}`);
+    throw new Error(`data/sponsors.json: slots are sold per PAGE only (corridor:<slug>, cameras:<slug> or guide:<state-slug>). Refusing: ${bad.join(', ')}`);
   }
 }
 
@@ -58,7 +58,7 @@ function today() {
 // Keys to try for a page, most specific first.
 function keysFor(kind, page) {
   // One key per page. No state, category or site-wide fallbacks (see assertPagesOnly).
-  return [(kind === 'corridor' ? 'corridor:' : 'cameras:') + page.slug];
+  return [prefixFor(kind) + page.slug];
 }
 
 function isActive(s, day) {
@@ -119,12 +119,15 @@ const CSS = `    .spon{display:flex;align-items:center;gap:12px;min-height:58px;
 // preflight). Automation (navigator.webdriver) sends nothing.
 const JS = `<script>(function(){var el=document.getElementById('spon');if(!el||navigator.webdriver)return;var B=${JSON.stringify(BEACON_URL)},S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script>`;
 
-// Called once per generated page. kind: 'corridor' | 'cameras'.
+// kind: 'corridor' | 'cameras' | 'guide' (guide = blog/mile-markers-<state>.html, added 2026-09-17).
+function prefixFor(kind) { return kind === 'corridor' ? 'corridor:' : kind === 'guide' ? 'guide:' : 'cameras:'; }
+
+// Called once per generated page.
 // page: { slug, name, state? } — state is the 2-letter code for camera pages.
 function slot({ kind, slug, state, name }) {
   const cfg = loadConfig();
   const day = today();
-  const slotKey = (kind === 'corridor' ? 'corridor:' : 'cameras:') + slug;
+  const slotKey = prefixFor(kind) + slug;
   const { key, sponsor } = resolve(cfg, keysFor(kind, { slug, state }), day);
   const house = Object.assign({ url: '/partners/#sponsor', cta: 'Ask about it', copy: 'One sponsor per page, on the website only. The app has no ads.' }, cfg.house || {});
   placed.push({ slotKey, name, via: key, sponsorId: sponsor ? sponsor.id : 'house' });

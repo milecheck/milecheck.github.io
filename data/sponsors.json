@@ -1,11 +1,11 @@
 {
   "_readme": [
-    "One sponsor slot per corridor page and per state/city camera page, at the top of the page above the live map.",
-    "A slot is sold by the PAGE and only by the page: keys are corridor:<slug> (corridors/i-75 → corridor:i-75) or cameras:<slug> (cameras/ohio → cameras:ohio, cameras/seattle → cameras:seattle). No state, category or site-wide keys — the generator refuses them, because bundles overlap and the narrower buyer would silently outrank the broader one (Leah, 2026-09-17).",
+    "One sponsor slot per corridor page, per state/city camera page, and per state mile-marker guide (blog/mile-markers-<state>.html), at the top of the page.",
+    "A slot is sold by the PAGE and only by the page: keys are corridor:<slug> (corridors/i-75 → corridor:i-75), cameras:<slug> (cameras/ohio → cameras:ohio, cameras/seattle → cameras:seattle) or guide:<state-slug> (blog/mile-markers-ohio.html → guide:ohio). No state, category or site-wide keys — the generator refuses them, because bundles overlap and the narrower buyer would silently outrank the broader one (Leah, 2026-09-17).",
     "$50 a month per page, three-month pilot, then month to month (milecheckapp.com/sponsor/). A sponsor who wants several pages gets one entry per page.",
     "Dates are inclusive YYYY-MM-DD in UTC. A slot outside its dates is skipped and the house slot renders. Pages are static, so a date change takes effect when the pages are regenerated.",
     "Fields: id (letters, digits, dashes; this is what the report groups by), name, copy (one sentence, under 90 characters), url (the sponsor's landing page, with their UTM if they want one), cta (2-4 words), logo (path under /images/sponsors/, PNG or SVG, transparent background, at least 2x for a 36px-tall display), logoW and logoH (the file's pixel size, so the browser reserves the box), start, end.",
-    "After any change, from the site root: node scripts/gen-corridor-pages.js && node scripts/gen-state-camera-pages.js && node scripts/gen-city-camera-pages.js && node scripts/tag-store-links.mjs --pt 128447811 && node scripts/add-analytics.mjs G-CDMSB5630W, then commit and push. Those last two scripts add stray blank lines to unrelated files; revert blank-line-only diffs before committing.",
+    "After any change, from the site root: node scripts/gen-corridor-pages.js && node scripts/gen-state-camera-pages.js && node scripts/gen-city-camera-pages.js && node scripts/add-guide-sponsor-slots.mjs && node scripts/tag-store-links.mjs --pt 128447811 && node scripts/add-analytics.mjs G-CDMSB5630W, then commit and push. Those last two scripts add stray blank lines to unrelated files; revert blank-line-only diffs before committing.",
     "Counting and the report: docs/website-sponsor-slot.md in the app repo."
   ],
   "house": {
