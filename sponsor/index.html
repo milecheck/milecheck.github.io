@@ -90,8 +90,8 @@
   </section>
 
   <section class="sp-section" id="numbers" hidden>
-    <h2>The last 28 days</h2>
-    <p class="sub">Viewable impressions and outbound clicks are counted on the slot itself, across every page that carries one. Updated daily.</p>
+    <h2 id="numbersTitle">Since counting began</h2>
+    <p class="sub">Viewable impressions and outbound clicks are counted on the slot itself, across every page that carries one. Whole days only, ending yesterday. Updated daily.</p>
     <div class="sp-stats">
       <div class="sp-stat"><div class="n live" id="nImp">—</div><div class="l">viewable impressions</div></div>
       <div class="sp-stat"><div class="n" id="nClk">—</div><div class="l">outbound clicks</div></div>
@@ -189,7 +189,15 @@
 
   fetch(W + '/sponsor-stats?days=28').then(function(r){ return r.json(); }).then(function(d){
     if (!d || !d.ok || !d.byDay || !d.byDay.length) return; // no numbers: the section stays hidden
-    var t = d.total || {impressions:0, clicks:0};
+    // Days are UTC on the Worker. Drop the current UTC day: it is partial and
+    // reads as a collapse on the chart and drags the daily average down.
+    var todayUTC = new Date().toISOString().slice(0, 10);
+    d.byDay = d.byDay.filter(function(x){ return x.day < todayUTC; });
+    if (!d.byDay.length) return;
+    var t = {impressions:0, clicks:0};
+    d.byDay.forEach(function(x){ t.impressions += x.impressions; t.clicks += x.clicks; });
+    if (d.byDay.length >= 28) $('numbersTitle').textContent = 'The last 28 days';
+    else $('numbersTitle').textContent = d.byDay.length === 1 ? 'The first full day' : 'The first ' + d.byDay.length + ' full days';
     $('nImp').textContent = int(t.impressions);
     $('nClk').textContent = int(t.clicks);
     $('nCtr').textContent = t.impressions ? (100 * t.clicks / t.impressions).toFixed(1) + '%' : '—';
