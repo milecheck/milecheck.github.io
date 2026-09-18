@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Your MileCheck API key</title>
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    main{max-width:720px;margin:0 auto;padding:64px 16px 96px;font-family:Inter,system-ui,sans-serif}
+    h1{font-size:30px;margin:0 0 12px}
+    p{font-size:16px;line-height:1.6;color:#3a3a3a}
+    .key{font-family:'JetBrains Mono',monospace;font-size:16px;background:#f4f4f4;border:1px solid #e2e2e2;border-radius:8px;padding:14px 16px;word-break:break-all;margin:20px 0}
+    .key.err{color:#9b1c1c;background:#fff5f5;border-color:#f3c5c5}
+    button{font:inherit;font-weight:600;background:#0f7a4f;color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
+    code{font-family:'JetBrains Mono',monospace;font-size:14px;background:#f4f4f4;padding:2px 6px;border-radius:4px}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Your API key</h1>
+  <p>Payment received. This is your key. It is shown once here; copy it now. It is also tied to the email you paid with, so if you lose it, write to <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> and we will send it again.</p>
+  <div class="key" id="key">Fetching your key…</div>
+  <p><button id="copy" hidden>Copy key</button></p>
+  <p>First call: <code>https://milepost-proxy.leahgerber93.workers.dev/v1/alerts?state=WA&amp;apikey=YOUR_KEY</code></p>
+  <p>Docs, every endpoint, and the schema: <a href="/api/">milecheckapp.com/api</a>.</p>
+</main>
+<script>
+(async () => {
+  const el = document.getElementById('key'), btn = document.getElementById('copy');
+  const sid = new URLSearchParams(location.search).get('session_id');
+  if (!sid) { el.textContent = 'No checkout session in the link. Check your email or write to sales@milecheckapp.com.'; el.className = 'key err'; return; }
+  try {
+    const r = await fetch('https://milepost-proxy.leahgerber93.workers.dev/v1/checkout/key?session_id=' + encodeURIComponent(sid));
+    const j = await r.json();
+    if (!r.ok || !j.api_key) throw new Error(j.error || 'Not found');
+    el.textContent = j.api_key; btn.hidden = false;
+    btn.onclick = async () => { try { await navigator.clipboard.writeText(j.api_key); btn.textContent = 'Copied'; } catch { btn.textContent = 'Select and copy'; } };
+  } catch (e) {
+    el.textContent = 'We could not load your key yet. Stripe sometimes takes a minute to tell us. Reload in a moment, or write to sales@milecheckapp.com with your receipt.';
+    el.className = 'key err';
+  }
+})();
+</script>
+</body>
+</html>
