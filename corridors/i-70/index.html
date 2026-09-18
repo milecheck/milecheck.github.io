@@ -185,7 +185,7 @@
     </div>
   </div>
 
-  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../bridges/illinois/">Illinois drawbridges</a> · <a href="../../bridges/indiana/">Indiana drawbridges</a> · <a href="../../bridges/ohio/">Ohio drawbridges</a> · <a href="../../bridges/maryland/">Maryland drawbridges</a> · <a href="../../maps/">all maps</a></p>
+  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../bridges/illinois/">Illinois drawbridges</a> · <a href="../../bridges/indiana/">Indiana drawbridges</a> · <a href="../../bridges/ohio/">Ohio drawbridges</a> · <a href="../../bridges/pennsylvania/">Pennsylvania drawbridges</a> · <a href="../../bridges/maryland/">Maryland drawbridges</a> · <a href="../../maps/">all maps</a></p>
 
   <footer class="site-footer">
     <div class="container">
@@ -227,7 +227,7 @@
 
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
-const STATES=["UT","CO","KS","MO","IL","IN","OH","WV","MD"];
+const STATES=["UT","CO","KS","MO","IL","IN","OH","WV","PA","MD"];
 const NUM=70;
 const NAME="I-70";
 const POIS=[{"name":"Eisenhower Tunnel","slug":"eisenhower","lat":39.6767,"lon":-105.9364},{"name":"Vail Pass","slug":"vail","lat":39.5264,"lon":-106.2136}];
@@ -249,7 +249,11 @@ function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closur
 function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||NAME)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+c.st+' DOT</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
 function alrCard(a){return '<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+NAME+(a.mp>0?' · MP '+Math.round(a.mp):'')+' · '+a.st+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
 function poiCard(p){return '<div class="cc-title">▲ '+esc(p.name)+'</div><div class="cc-meta">Mountain pass on '+NAME+'</div><div class="cc-desc">Live cameras, chain status, and closures for this pass.</div><a class="cc-link" href="../../passes/'+p.slug+'/">Open '+esc(p.name)+' conditions →</a>';}
-async function camsFor(st){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);return ((d&&d.cameras)||[]).filter(c=>c.isActive!==false&&+c.lat&&c.imageUrl&&isRoute(c.route)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,st}));}
+// Some state feeds (KY, NC, most of IL) publish cameras without a route field but with
+// the route in the title ("I-75 at Exit 29"). Fall back to the leading route token so
+// those cameras land on the corridor they sit on (2026-09-17, Leah's TN/KY report).
+function routeFromTitle(t){const m=String(t||'').match(/^\s*(?:I|US|SR)[\s-]?(\d{1,3})\b/i);return m?(String(t).trim().toUpperCase().startsWith('I')?'I-':'X-')+m[1]:'';}
+async function camsFor(st){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);return ((d&&d.cameras)||[]).map(c=>Object.assign({},c,{route:c.route||routeFromTitle(c.title)})).filter(c=>c.isActive!==false&&+c.lat&&c.imageUrl&&isRoute(c.route)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,st}));}
 async function alertsFor(st){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);return ((d&&d['incident-reports'])||[]).filter(a=>{const rid=a.location&&a.location['route-id'];const sl=a.location&&a.location['start-location'];return isRoute(rid)&&sl&&+sl['start-lat'];}).map(a=>{const sl=a.location['start-location'];return {lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:(a.headline||a.description||a['impact-desc']||'Incident').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,140),desc:(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,240),st};});}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){

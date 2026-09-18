@@ -31,7 +31,7 @@ const STATE_NAMES = {
 
 const CORRIDORS = [
   {
-    slug: 'i-5', name: 'I-5', num: 5, states: ['WA','OR','CA'],
+    slug: 'i-5', name: 'I-5', num: 5, states: ['CA','OR','WA'],
     subtitle: 'Washington · Oregon · California', bounds: '[[32.5,-124.4],[49.0,-116.5]]',
     lengthMi: '1,381 mi',
     highPass: { slug: 'siskiyou', name: 'Siskiyou Summit', elev: '4,310 ft' },
@@ -51,7 +51,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-90', name: 'I-90', num: 90, states: ['WA','MT','SD','WI','OH','PA','NY'],
+    slug: 'i-90', name: 'I-90', num: 90, states: ['WA','ID','MT','WY','SD','MN','WI','IL','IN','OH','PA','NY','MA'],
     subtitle: 'Seattle to Boston · the longest interstate', bounds: '[[41.0,-124.5],[49.0,-70.5]]',
     lengthMi: '3,020 mi',
     highPass: { slug: 'snoqualmie', name: 'Snoqualmie Pass', elev: '3,015 ft' },
@@ -70,7 +70,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-95', name: 'I-95', num: 95, states: ['FL','GA','SC','MD','DE','PA','NY','NH','ME'],
+    slug: 'i-95', name: 'I-95', num: 95, states: ['FL','GA','SC','NC','VA','MD','DE','PA','NJ','NY','CT','RI','MA','NH','ME'],
     subtitle: 'Miami to Maine · the East Coast spine', bounds: '[[25.0,-82.5],[47.5,-66.5]]',
     lengthMi: '1,908 mi',
     highPass: null,
@@ -89,7 +89,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-80', name: 'I-80', num: 80, states: ['CA','NV','UT','IA','OH','PA'],
+    slug: 'i-80', name: 'I-80', num: 80, states: ['CA','NV','UT','WY','NE','IA','IL','IN','OH','PA','NJ'],
     subtitle: 'San Francisco to New Jersey · coast to coast', bounds: '[[36.5,-123.0],[42.5,-73.0]]',
     lengthMi: '2,900 mi',
     highPass: { slug: 'donner', name: 'Donner Pass', elev: '7,056 ft' },
@@ -109,7 +109,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-10', name: 'I-10', num: 10, states: ['CA','AZ','AL','LA','FL'],
+    slug: 'i-10', name: 'I-10', num: 10, states: ['CA','AZ','NM','TX','LA','MS','AL','FL'],
     subtitle: 'Los Angeles to Jacksonville · the southern route', bounds: '[[28.0,-119.0],[35.0,-80.5]]',
     lengthMi: '2,460 mi',
     highPass: null,
@@ -128,7 +128,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-15', name: 'I-15', num: 15, states: ['CA','NV','UT','AZ','MT'],
+    slug: 'i-15', name: 'I-15', num: 15, states: ['CA','NV','AZ','UT','ID','MT'],
     subtitle: 'San Diego to Montana · the LA–Las Vegas–Salt Lake route', bounds: '[[32.5,-118.5],[49.0,-110.5]]',
     lengthMi: '1,433 mi',
     highPass: { slug: 'cajon', name: 'Cajon Pass', elev: '~4,190 ft' },
@@ -165,7 +165,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-75', name: 'I-75', num: 75, states: ['FL','GA','OH','MI'],
+    slug: 'i-75', name: 'I-75', num: 75, states: ['FL','GA','TN','KY','OH','MI'],
     subtitle: 'Florida to Michigan · Miami to the Upper Great Lakes', bounds: '[[25.5,-88.0],[47.0,-80.5]]',
     lengthMi: '1,786 mi',
     highPass: null, pois: [],
@@ -183,7 +183,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-94', name: 'I-94', num: 94, states: ['MT','WI','MI'],
+    slug: 'i-94', name: 'I-94', num: 94, states: ['MT','ND','MN','WI','IL','IN','MI'],
     subtitle: 'Montana to Michigan · the northern Great Lakes route', bounds: '[[42.2,-108.6],[48.5,-82.3]]',
     lengthMi: '1,585 mi',
     highPass: null, pois: [],
@@ -201,7 +201,7 @@ const CORRIDORS = [
     ],
   },
   {
-    slug: 'i-70', name: 'I-70', num: 70, states: ['UT','CO','KS','MO','IL','IN','OH','WV','MD'],
+    slug: 'i-70', name: 'I-70', num: 70, states: ['UT','CO','KS','MO','IL','IN','OH','WV','PA','MD'],
     subtitle: 'Utah to Maryland · over the Rockies', bounds: '[[36.5,-112.5],[40.5,-76.5]]',
     lengthMi: '2,153 mi',
     highPass: { slug: 'eisenhower', name: 'Eisenhower Tunnel', elev: '11,158 ft' },
@@ -462,7 +462,11 @@ function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closur
 function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||NAME)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+c.st+' DOT</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
 function alrCard(a){return '<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+NAME+(a.mp>0?' · MP '+Math.round(a.mp):'')+' · '+a.st+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
 function poiCard(p){return '<div class="cc-title">▲ '+esc(p.name)+'</div><div class="cc-meta">Mountain pass on '+NAME+'</div><div class="cc-desc">Live cameras, chain status, and closures for this pass.</div><a class="cc-link" href="../../passes/'+p.slug+'/">Open '+esc(p.name)+' conditions →</a>';}
-async function camsFor(st){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);return ((d&&d.cameras)||[]).filter(c=>c.isActive!==false&&+c.lat&&c.imageUrl&&isRoute(c.route)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,st}));}
+// Some state feeds (KY, NC, most of IL) publish cameras without a route field but with
+// the route in the title ("I-75 at Exit 29"). Fall back to the leading route token so
+// those cameras land on the corridor they sit on (2026-09-17, Leah's TN/KY report).
+function routeFromTitle(t){const m=String(t||'').match(/^\\s*(?:I|US|SR)[\\s-]?(\\d{1,3})\\b/i);return m?(String(t).trim().toUpperCase().startsWith('I')?'I-':'X-')+m[1]:'';}
+async function camsFor(st){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);return ((d&&d.cameras)||[]).map(c=>Object.assign({},c,{route:c.route||routeFromTitle(c.title)})).filter(c=>c.isActive!==false&&+c.lat&&c.imageUrl&&isRoute(c.route)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,st}));}
 async function alertsFor(st){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);return ((d&&d['incident-reports'])||[]).filter(a=>{const rid=a.location&&a.location['route-id'];const sl=a.location&&a.location['start-location'];return isRoute(rid)&&sl&&+sl['start-lat'];}).map(a=>{const sl=a.location['start-location'];return {lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:(a.headline||a.description||a['impact-desc']||'Incident').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim().slice(0,140),desc:(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim().slice(0,240),st};});}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){
