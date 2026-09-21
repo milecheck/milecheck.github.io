@@ -384,6 +384,10 @@ baseTerrain.addTo(map);
 L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreets},null,{position:'bottomright',collapsed:true}).addTo(map);
 // Center on the 3-state coverage area, not the whole US.
 map.setView([41.5,-105],4.4);
+// ?lat=&lon= (from /borders 'cameras at this crossing', 2026-09-21): open centered on that point.
+const CAM_QS=new URLSearchParams(location.search);
+const CAM_AT=(Number.isFinite(parseFloat(CAM_QS.get('lat')))&&Number.isFinite(parseFloat(CAM_QS.get('lon'))))?[parseFloat(CAM_QS.get('lat')),parseFloat(CAM_QS.get('lon'))]:null;
+if(CAM_AT)map.setView(CAM_AT,12);
 
 // US states + Canadian provinces (AB/BC/ON added 2026-07-12 — same Worker
 // /cameras?state= param takes province codes; QC is stream-only, no snapshots
@@ -637,7 +641,7 @@ let mvTimer=null;
 map.on('moveend',()=>{clearTimeout(mvTimer);mvTimer=setTimeout(loadCams,400);});
 document.getElementById('nearMe').onclick=()=>{
   if(!navigator.geolocation)return;
-  navigator.geolocation.getCurrentPosition(p=>{map.setView([p.coords.latitude,p.coords.longitude],9);},()=>{},{timeout:8000});
+  if(!CAM_AT)navigator.geolocation.getCurrentPosition(p=>{map.setView([p.coords.latitude,p.coords.longitude],9);},()=>{},{timeout:8000});
 };
 loadCams(); setInterval(loadCams,600000);
 </script>

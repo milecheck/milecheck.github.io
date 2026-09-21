@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+
+
+
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,6 +73,11 @@
     .bw-min{font-weight:800;font-size:15px;font-variant-numeric:tabular-nums;min-width:52px;text-align:right;}
     .bw-nm{font-weight:700;font-size:13.5px;flex:1;}
     .bw-cr{color:#8A939B;font-size:11.5px;font-weight:600;display:block;margin-top:1px;}
+    .bw-cams{display:flex;gap:6px;margin:8px 15px 4px 0;flex-wrap:wrap;}
+    .bw-cams a{display:block;width:88px;height:56px;border-radius:6px;overflow:hidden;background:#0E1116;flex:none;}
+    .bw-cams img{width:100%;height:100%;object-fit:cover;display:block;}
+    .bw-cams-lbl{font-size:10px;letter-spacing:1.2px;font-weight:700;color:#8A939B;margin:8px 0 0;}
+    .bw-cams-more{font-size:12px;font-weight:600;color:#0f7a4f;text-decoration:none;display:block;margin-top:4px;}
     .bw-closed{color:#8A939B;font-weight:700;font-size:12px;}
     .bw-updated{max-width:1160px;margin:10px auto 0;padding:0 20px;font-size:12px;color:#8A939B;font-weight:600;}
     .bw-notes{max-width:1160px;margin:20px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
@@ -274,6 +282,36 @@ function view(){
   return rows;
 }
 function dirLabel(){return dir==='ca'?'entering Canada':'entering the United States';}
+// Cameras at this crossing (CHANGE 47, 2026-09-21): one Worker join, nearest DOT cams within
+// 3 km. Fetched when a row is opened, cached per crossing; nothing renders when there are none.
+const CAM_API='https://milepost-proxy.leahgerber93.workers.dev/border-cameras';
+const camCache={};
+async function crossingCams(p){
+  const c=coordOf(p);if(!c)return [];
+  const k=c[0].toFixed(4)+','+c[1].toFixed(4);
+  if(camCache[k])return camCache[k];
+  try{const r=await fetch(CAM_API+'?lat='+c[0]+'&lon='+c[1]+'&border='+(p.border||''));const j=r.ok?await r.json():{cameras:[]};camCache[k]=j.cameras||[];}
+  catch(e){camCache[k]=[];}
+  return camCache[k];
+}
+function camsHtml(cams,p){
+  if(!cams.length)return '';
+  const c=coordOf(p);
+  const bust='t='+Date.now();
+  return '<div class="bw-cams-lbl">CAMERAS AT THIS CROSSING</div><div class="bw-cams">'+
+    cams.slice(0,4).map(cm=>'<a href="../cameras/?lat='+cm.lat+'&lon='+cm.lon+'" title="'+String(cm.title||'').replace(/"/g,'')+'">'+(cm.imageUrl?'<img src="'+cm.imageUrl+(cm.imageUrl.includes('?')?'&':'?')+bust+'" alt="'+String(cm.title||'Camera').replace(/"/g,'')+'" loading="lazy">':'')+'</a>').join('')+
+    '</div>'+(c?'<a class="bw-cams-more" href="../cameras/?lat='+c[0]+'&lon='+c[1]+'">All '+cams.length+' camera'+(cams.length===1?'':'s')+' near this crossing &rarr;</a>':'');
+}
+async function openCrossing(el,p){
+  const c=coordOf(p);if(c)map.setView(c,9,{animate:true});
+  let box=el.querySelector('.bw-cams-box');
+  if(box){box.remove();return;}
+  box=document.createElement('div');box.className='bw-cams-box';box.style.flexBasis='100%';
+  el.appendChild(box);
+  const cams=await crossingCams(p);
+  box.innerHTML=camsHtml(cams,p)||'';
+  if(!cams.length)box.remove();
+}
 function render(){
   document.getElementById('bwDirBanner').textContent='Wait times shown are for '+dirLabel();
   const rows=view();
@@ -284,8 +322,8 @@ function render(){
     el.innerHTML='<span class="bw-min" style="color:'+(closed?'#8A939B':color(d))+'">'+(closed?'&#10005;':fmt(d))+'</span>'+
       '<span class="bw-nm">'+p.portName+(closed?' <span class="bw-closed">closed</span>':'')+
       '<span class="bw-cr">'+(p.crossingName||'')+' · '+(p.border==='canadian'?'Canadian':'Mexican')+'</span></span>';
-    const c=coordOf(p);
-    if(c)el.onclick=()=>map.setView(c,9,{animate:true});
+    el.style.flexWrap='wrap';
+    el.onclick=(ev)=>{if(ev.target.closest&&ev.target.closest('a'))return;openCrossing(el,p);};
     box.appendChild(el);
   });
   document.getElementById('bwCount').textContent=rows.length+' crossings';
@@ -300,6 +338,7 @@ function render(){
       html:'<div class="bw-pin" style="width:'+sz+'px;height:'+sz+'px;background:'+(closed?'#9AA4AD':color(d))+'">'+(closed?'&#10005;':fmt(d))+'</div>'});
     const m=L.marker(c,{icon:ic}).addTo(map);
     m.bindPopup('<b>'+p.portName+'</b><br>'+(p.crossingName||'')+'<br>'+(closed?'Closed':(veh==='comm'?'Commercial':'Passenger')+' '+(dir==='ca'?'into Canada':'into the US')+': '+fmt(d)));
+    m.on('popupopen',async()=>{const cams=await crossingCams(p);const h=camsHtml(cams,p);if(h){m.setPopupContent(m.getPopup().getContent()+h);}});
     markers.push(m);
   });
 }
