@@ -1,0 +1,5135 @@
+{
+ "window": "2026-09-03..2026-09-07",
+ "totals": {
+  "records": 10951,
+  "other": 673,
+  "closure": 1971,
+  "construction": 7617,
+  "crash": 444,
+  "weather": 123,
+  "hazard": 123
+ },
+ "perDay": [
+  {
+   "day": "Thursday",
+   "closure": 3093,
+   "crash": 131,
+   "construction": 17837,
+   "weather": 1032,
+   "hazard": 59,
+   "other": 336,
+   "total": 22488
+  },
+  {
+   "day": "Friday",
+   "closure": 3080,
+   "crash": 216,
+   "construction": 17464,
+   "weather": 1028,
+   "hazard": 89,
+   "other": 362,
+   "total": 22239
+  },
+  {
+   "day": "Saturday",
+   "closure": 2980,
+   "crash": 122,
+   "construction": 16935,
+   "weather": 1021,
+   "hazard": 77,
+   "other": 302,
+   "total": 21437
+  },
+  {
+   "day": "Sunday",
+   "closure": 3016,
+   "crash": 137,
+   "construction": 17342,
+   "weather": 1035,
+   "hazard": 63,
+   "other": 315,
+   "total": 21908
+  },
+  {
+   "day": "Monday",
+   "closure": 3027,
+   "crash": 123,
+   "construction": 17494,
+   "weather": 1020,
+   "hazard": 58,
+   "other": 275,
+   "total": 21997
+  }
+ ],
+ "corridors": [
+  {
+   "route": "I-80",
+   "records": 208,
+   "states": 12
+  },
+  {
+   "route": "I-10",
+   "records": 156,
+   "states": 7
+  },
+  {
+   "route": "I-94",
+   "records": 138,
+   "states": 6
+  },
+  {
+   "route": "US-101",
+   "records": 137,
+   "states": 2
+  },
+  {
+   "route": "I-41",
+   "records": 130,
+   "states": 1
+  },
+  {
+   "route": "I-95",
+   "records": 120,
+   "states": 12
+  },
+  {
+   "route": "I-70",
+   "records": 115,
+   "states": 9
+  },
+  {
+   "route": "US-1",
+   "records": 112,
+   "states": 7
+  },
+  {
+   "route": "I-5",
+   "records": 107,
+   "states": 2
+  },
+  {
+   "route": "I-40",
+   "records": 103,
+   "states": 5
+  }
+ ],
+ "crashCorridors": [
+  {
+   "route": "I-95",
+   "crashes": 15
+  },
+  {
+   "route": "I-10",
+   "crashes": 14
+  },
+  {
+   "route": "I-84",
+   "crashes": 12
+  },
+  {
+   "route": "I-15",
+   "crashes": 11
+  },
+  {
+   "route": "I-5",
+   "crashes": 10
+  },
+  {
+   "route": "I-80",
+   "crashes": 8
+  },
+  {
+   "route": "I-90",
+   "crashes": 8
+  },
+  {
+   "route": "I-91",
+   "crashes": 7
+  },
+  {
+   "route": "I-75",
+   "crashes": 7
+  },
+  {
+   "route": "I-39",
+   "crashes": 7
+  },
+  {
+   "route": "I-65",
+   "crashes": 6
+  },
+  {
+   "route": "I-20",
+   "crashes": 6
+  }
+ ],
+ "crashStates": [
+  [
+   "CA",
+   96
+  ],
+  [
+   "NY",
+   47
+  ],
+  [
+   "AL",
+   37
+  ],
+  [
+   "WI",
+   27
+  ],
+  [
+   "OR",
+   25
+  ],
+  [
+   "GA",
+   24
+  ],
+  [
+   "MN",
+   20
+  ],
+  [
+   "FL",
+   19
+  ],
+  [
+   "AZ",
+   15
+  ],
+  [
+   "UT",
+   15
+  ],
+  [
+   "VA",
+   14
+  ],
+  [
+   "LA",
+   10
+  ],
+  [
+   "CO",
+   9
+  ],
+  [
+   "MT",
+   9
+  ],
+  [
+   "WA",
+   8
+  ],
+  [
+   "MS",
+   7
+  ],
+  [
+   "OH",
+   7
+  ],
+  [
+   "PA",
+   7
+  ],
+  [
+   "MI",
+   6
+  ],
+  [
+   "NJ",
+   6
+  ],
+  [
+   "CT",
+   4
+  ],
+  [
+   "KS",
+   4
+  ],
+  [
+   "MA",
+   4
+  ],
+  [
+   "BC",
+   3
+  ],
+  [
+   "IN",
+   3
+  ],
+  [
+   "NV",
+   3
+  ],
+  [
+   "SC",
+   3
+  ],
+  [
+   "TX",
+   3
+  ],
+  [
+   "DE",
+   2
+  ],
+  [
+   "IL",
+   2
+  ],
+  [
+   "MO",
+   2
+  ],
+  [
+   "TN",
+   2
+  ],
+  [
+   "WY",
+   1
+  ]
+ ],
+ "statesWithCrashes": 33,
+ "statesWithRecords": 49,
+ "longTerm": [
+  {
+   "state": "WI",
+   "route": "I-535",
+   "headline": "Roadwork - Mainline Right Shoulder Closed on I-535 SB from MINNESOTA-WISCONSIN STATE LINE to US 53 SB-STH 35 (BRIDGE CROSSING)",
+   "projectDays": 2616,
+   "start": "2022-04-08",
+   "end": "2029-06-06"
+  },
+  {
+   "state": "TX",
+   "route": "US-87",
+   "headline": "- Alternating lanes closed. New construction for divided hwy, improve existing roadway, drainage wor",
+   "projectDays": 2070,
+   "start": "2026-03-02",
+   "end": "2031-10-31"
+  },
+  {
+   "state": "WA",
+   "route": "SR-165",
+   "headline": "SR 165 is closed at the Carbon River/Fairfax Bridge to all vehicles, bicyclists and pedestrians until further notice. The closure means there is no access across the bridge to Mount Rainier National Park Mowich Lake and ",
+   "projectDays": 1902,
+   "start": "2025-04-16",
+   "end": "2030-07-01"
+  },
+  {
+   "state": "NC",
+   "route": "US-17",
+   "headline": "Construction on US 17 Both Directions in Beaufort, Martin County from Mill Inn Rd to  NC 171. 1 Left Lane Intermittent. Id: 904",
+   "projectDays": 1859,
+   "start": "2022-11-28",
+   "end": "2027-12-31"
+  },
+  {
+   "state": "NY",
+   "route": "I-91",
+   "headline": "Safety improvements on I-91 both directions Exit 15 - CT 68 (Wallingford) to Exit 18 - I-691 (Meriden), Monday March 4th, 2024 thru Thursday November 30th, 2028, Monday thru Friday, 09:00 AM thru 03:00 PM All lanes open,",
+   "projectDays": 1733,
+   "start": "2024-03-04",
+   "end": "2028-12-01"
+  },
+  {
+   "state": "AL",
+   "route": "US-231",
+   "headline": "US231/431 NB @ MP 336.9 at Max Luther Dr in Huntsville until US231/431 NB @ MP 337.5 at Mastin Lake Rd in Huntsville",
+   "projectDays": 1287,
+   "start": "2023-06-20",
+   "end": "2026-12-28"
+  },
+  {
+   "state": "ID",
+   "route": "I-84",
+   "headline": "Road construction on I-84 Eastbound from MM (165) to MM (168). All Lanes Intermittent. 7/27/2023 7:00 AM to 11/20/2026 7:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 22ft  Speed Restriction:",
+   "projectDays": 1213,
+   "start": "2023-07-27",
+   "end": "2026-11-21"
+  },
+  {
+   "state": "IL",
+   "route": "I-80",
+   "headline": "Ramp  closed to S Raynor Ave Northbound - Closed.",
+   "projectDays": 1066,
+   "start": "2025-12-22",
+   "end": "2028-11-22"
+  }
+ ],
+ "states": {
+  "AK": {
+   "closure": 1,
+   "crash": 0,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 1,
+   "total": 2,
+   "topRoutes": [
+    [
+     "PARKS HIGHWAY",
+     1
+    ],
+    [
+     "DALTON HIGHWAY",
+     1
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "AL": {
+   "closure": 8,
+   "crash": 37,
+   "construction": 148,
+   "weather": 0,
+   "hazard": 0,
+   "other": 146,
+   "total": 339,
+   "topRoutes": [
+    [
+     "I-65",
+     59
+    ],
+    [
+     "I-20",
+     45
+    ],
+    [
+     "I-565",
+     21
+    ],
+    [
+     "I-10",
+     17
+    ],
+    [
+     "US-31",
+     14
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-65",
+     6
+    ],
+    [
+     "US-280",
+     3
+    ],
+    [
+     "I-20",
+     3
+    ],
+    [
+     "US-72",
+     2
+    ],
+    [
+     "US-31",
+     2
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 3,
+   "longest": {
+    "state": "AL",
+    "route": "US-231",
+    "headline": "US231/431 NB @ MP 336.9 at Max Luther Dr in Huntsville until US231/431 NB @ MP 337.5 at Mastin Lake Rd in Huntsville",
+    "projectDays": 1287,
+    "start": "2023-06-20",
+    "end": "2026-12-28"
+   },
+   "perDay": [
+    210,
+    231,
+    188,
+    174,
+    170
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "AR": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 3,
+   "weather": 0,
+   "hazard": 0,
+   "other": 4,
+   "total": 7,
+   "topRoutes": [
+    [
+     "AR-123",
+     1
+    ],
+    [
+     "AR-120",
+     1
+    ],
+    [
+     "AR-77",
+     1
+    ],
+    [
+     "AR-148",
+     1
+    ],
+    [
+     "AR-140",
+     1
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "AZ": {
+   "closure": 78,
+   "crash": 15,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 33,
+   "total": 126,
+   "topRoutes": [
+    [
+     "SR-202",
+     31
+    ],
+    [
+     "I-10",
+     19
+    ],
+    [
+     "SR-101",
+     18
+    ],
+    [
+     "US-60",
+     17
+    ],
+    [
+     "I-17",
+     10
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-10",
+     4
+    ],
+    [
+     "SR-101",
+     3
+    ],
+    [
+     "SR-51",
+     1
+    ],
+    [
+     "US-60",
+     1
+    ],
+    [
+     "I-17",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 2,
+   "longest": null,
+   "perDay": [
+    85,
+    79,
+    79,
+    77,
+    81
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "BC": {
+   "closure": 4,
+   "crash": 3,
+   "construction": 179,
+   "weather": 38,
+   "hazard": 0,
+   "other": 14,
+   "total": 238,
+   "topRoutes": [
+    [
+     "BC-1",
+     50
+    ],
+    [
+     "BC-97",
+     36
+    ],
+    [
+     "BC-3",
+     23
+    ],
+    [
+     "BC-16",
+     16
+    ],
+    [
+     "BC-19A",
+     11
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "BC-1",
+     2
+    ],
+    [
+     "BC-5",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 2,
+   "longest": {
+    "state": "BC",
+    "route": "BC-10",
+    "headline": "Construction work. Starting Sat Nov 15 until Mon Nov 15. Access to side lane closed. Eastbound lanes unaffected. Watch for crews.",
+    "projectDays": 730,
+    "start": "2025-11-15",
+    "end": "2027-11-15"
+   },
+   "perDay": [
+    190,
+    179,
+    168,
+    178,
+    168
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "CA": {
+   "closure": 359,
+   "crash": 96,
+   "construction": 849,
+   "weather": 77,
+   "hazard": 77,
+   "other": 42,
+   "total": 1500,
+   "topRoutes": [
+    [
+     "US-101",
+     122
+    ],
+    [
+     "I-5",
+     87
+    ],
+    [
+     "I-80",
+     66
+    ],
+    [
+     "SR-1",
+     57
+    ],
+    [
+     "I-10",
+     49
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-5",
+     5
+    ],
+    [
+     "I-10",
+     3
+    ],
+    [
+     "US-101",
+     3
+    ],
+    [
+     "I-80",
+     3
+    ],
+    [
+     "I-880",
+     3
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 21,
+   "longest": null,
+   "perDay": [
+    9488,
+    9797,
+    9338,
+    9435,
+    9379
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "CO": {
+   "closure": 0,
+   "crash": 9,
+   "construction": 247,
+   "weather": 0,
+   "hazard": 1,
+   "other": 17,
+   "total": 274,
+   "topRoutes": [
+    [
+     "I-70",
+     62
+    ],
+    [
+     "SH-470",
+     39
+    ],
+    [
+     "I-25",
+     19
+    ],
+    [
+     "US-24",
+     17
+    ],
+    [
+     "US-40",
+     15
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-25",
+     4
+    ],
+    [
+     "I-225",
+     2
+    ],
+    [
+     "I-76",
+     1
+    ],
+    [
+     "US-50",
+     1
+    ],
+    [
+     "I-70",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 2,
+   "longest": null,
+   "perDay": [
+    107,
+    101,
+    109,
+    108,
+    110
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "CT": {
+   "closure": 7,
+   "crash": 4,
+   "construction": 19,
+   "weather": 0,
+   "hazard": 0,
+   "other": 18,
+   "total": 48,
+   "topRoutes": [
+    [
+     "I-95",
+     15
+    ],
+    [
+     "I-84",
+     10
+    ],
+    [
+     "I-91",
+     6
+    ],
+    [
+     "CT-15",
+     4
+    ],
+    [
+     "CT-8",
+     3
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-91",
+     3
+    ],
+    [
+     "I-84",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    29,
+    12,
+    0,
+    1,
+    6
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "DE": {
+   "closure": 8,
+   "crash": 2,
+   "construction": 13,
+   "weather": 0,
+   "hazard": 0,
+   "other": 15,
+   "total": 38,
+   "topRoutes": [
+    [
+     "DE-1",
+     11
+    ],
+    [
+     "DE-2",
+     3
+    ],
+    [
+     "NEWARK",
+     2
+    ],
+    [
+     "MILFORD",
+     2
+    ],
+    [
+     "CAMDEN",
+     2
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "MILFORD",
+     1
+    ],
+    [
+     "DE-1",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    25,
+    15,
+    12,
+    15,
+    19
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "FL": {
+   "closure": 11,
+   "crash": 19,
+   "construction": 15,
+   "weather": 0,
+   "hazard": 13,
+   "other": 10,
+   "total": 68,
+   "topRoutes": [
+    [
+     "I-10",
+     6
+    ],
+    [
+     "I-4",
+     6
+    ],
+    [
+     "I-75",
+     5
+    ],
+    [
+     "I-95",
+     5
+    ],
+    [
+     "US-441",
+     4
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-75",
+     2
+    ],
+    [
+     "I-4",
+     2
+    ],
+    [
+     "I-95",
+     2
+    ],
+    [
+     "I-110",
+     1
+    ],
+    [
+     "SR-528",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    69,
+    91,
+    70,
+    57,
+    65
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "GA": {
+   "closure": 37,
+   "crash": 24,
+   "construction": 43,
+   "weather": 0,
+   "hazard": 3,
+   "other": 16,
+   "total": 123,
+   "topRoutes": [
+    [
+     "GA-155",
+     9
+    ],
+    [
+     "GA-3",
+     7
+    ],
+    [
+     "I-75",
+     7
+    ],
+    [
+     "I-20",
+     6
+    ],
+    [
+     "GA-9",
+     5
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-285",
+     4
+    ],
+    [
+     "GA-155",
+     3
+    ],
+    [
+     "I-75",
+     3
+    ],
+    [
+     "GA-3",
+     2
+    ],
+    [
+     "I-20",
+     2
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 3,
+   "longest": {
+    "state": "GA",
+    "route": "GA-1",
+    "headline": "Road construction on SR 1  Northbound at MARLETTE DRIVE . Left lane blocked.",
+    "projectDays": 592,
+    "start": "2026-05-19",
+    "end": "2028-01-01"
+   },
+   "perDay": [
+    108,
+    84,
+    85,
+    81,
+    86
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "HI": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 12,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 12,
+   "topRoutes": [
+    [
+     "HI-92",
+     8
+    ],
+    [
+     "HI-30",
+     2
+    ],
+    [
+     "H-201",
+     2
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    12,
+    12,
+    12,
+    12,
+    12
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "IA": {
+   "closure": 77,
+   "crash": 0,
+   "construction": 69,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 146,
+   "topRoutes": [
+    [
+     "I-80",
+     11
+    ],
+    [
+     "I-35",
+     6
+    ],
+    [
+     "US-6",
+     6
+    ],
+    [
+     "US-30",
+     6
+    ],
+    [
+     "I-29",
+     5
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 1,
+   "holidayExamples": [
+    "US-136: Lee County Keokuk Labor Day Parade closed; detour in operation"
+   ],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    238,
+    235,
+    231,
+    229,
+    227
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "ID": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 104,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 104,
+   "topRoutes": [
+    [
+     "US-95",
+     15
+    ],
+    [
+     "I-84",
+     13
+    ],
+    [
+     "SR-55",
+     9
+    ],
+    [
+     "SR-16",
+     7
+    ],
+    [
+     "I-90",
+     7
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": {
+    "state": "ID",
+    "route": "I-84",
+    "headline": "Road construction on I-84 Eastbound from MM (165) to MM (168). All Lanes Intermittent. 7/27/2023 7:00 AM to 11/20/2026 7:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 22ft  Speed Restriction:",
+    "projectDays": 1213,
+    "start": "2023-07-27",
+    "end": "2026-11-21"
+   },
+   "perDay": [
+    592,
+    567,
+    532,
+    532,
+    597
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "IL": {
+   "closure": 125,
+   "crash": 2,
+   "construction": 182,
+   "weather": 0,
+   "hazard": 0,
+   "other": 92,
+   "total": 401,
+   "topRoutes": [
+    [
+     "I-90",
+     31
+    ],
+    [
+     "I-80",
+     21
+    ],
+    [
+     "IL-53",
+     19
+    ],
+    [
+     "I-55",
+     18
+    ],
+    [
+     "I-290",
+     16
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "IL-56",
+     1
+    ],
+    [
+     "I-88",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": {
+    "state": "IL",
+    "route": "I-80",
+    "headline": "Ramp  closed to S Raynor Ave Northbound - Closed.",
+    "projectDays": 1066,
+    "start": "2025-12-22",
+    "end": "2028-11-22"
+   },
+   "perDay": [
+    332,
+    339,
+    311,
+    295,
+    271
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "IN": {
+   "closure": 182,
+   "crash": 3,
+   "construction": 361,
+   "weather": 0,
+   "hazard": 4,
+   "other": 2,
+   "total": 552,
+   "topRoutes": [
+    [
+     "I-65",
+     18
+    ],
+    [
+     "I-70",
+     15
+    ],
+    [
+     "I-69",
+     14
+    ],
+    [
+     "US-31",
+     13
+    ],
+    [
+     "US-231",
+     12
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-70",
+     1
+    ],
+    [
+     "I-465",
+     1
+    ],
+    [
+     "I-80",
+     1
+    ]
+   ],
+   "holidayMentions": 1,
+   "holidayExamples": [
+    "IN-49: Malden Labor Day Parade"
+   ],
+   "fireMentions": 0,
+   "longest": {
+    "state": "IN",
+    "route": "US-27",
+    "headline": "US-27 — permitted oversize loads prohibited",
+    "projectDays": 436,
+    "start": "2026-03-05",
+    "end": "2027-05-15"
+   },
+   "perDay": [
+    835,
+    827,
+    825,
+    819,
+    816
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "KS": {
+   "closure": 56,
+   "crash": 4,
+   "construction": 81,
+   "weather": 0,
+   "hazard": 5,
+   "other": 10,
+   "total": 156,
+   "topRoutes": [
+    [
+     "I-70",
+     11
+    ],
+    [
+     "US-54",
+     8
+    ],
+    [
+     "I-135",
+     6
+    ],
+    [
+     "US-69",
+     6
+    ],
+    [
+     "KS-156",
+     5
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "US-71",
+     1
+    ],
+    [
+     "I-435",
+     1
+    ],
+    [
+     "US-54",
+     1
+    ],
+    [
+     "US-69",
+     1
+    ]
+   ],
+   "holidayMentions": 1,
+   "holidayExamples": [
+    "US-281: US 281 will be closed to through traffic for the Hoisington Labor Day festival starting at Friday Sept"
+   ],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    201,
+    194,
+    190,
+    190,
+    190
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "KY": {
+   "closure": 21,
+   "crash": 0,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 21,
+   "topRoutes": [
+    [
+     "US-60",
+     2
+    ],
+    [
+     "US-62",
+     1
+    ],
+    [
+     "KY-11",
+     1
+    ],
+    [
+     "US-68",
+     1
+    ],
+    [
+     "KY-787",
+     1
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    20,
+    19,
+    19,
+    19,
+    19
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "LA": {
+   "closure": 92,
+   "crash": 10,
+   "construction": 232,
+   "weather": 0,
+   "hazard": 0,
+   "other": 1,
+   "total": 335,
+   "topRoutes": [
+    [
+     "I-10",
+     35
+    ],
+    [
+     "US-90",
+     23
+    ],
+    [
+     "US-165",
+     18
+    ],
+    [
+     "LA-1",
+     12
+    ],
+    [
+     "I-49",
+     11
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-10",
+     3
+    ],
+    [
+     "LA-1",
+     1
+    ],
+    [
+     "LA-818",
+     1
+    ],
+    [
+     "LA-490",
+     1
+    ],
+    [
+     "LA-655",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 1,
+   "longest": {
+    "state": "LA",
+    "route": "LA-10",
+    "headline": "Bridge Maintenance Operations on LA-10 Both Directions from Bayou Ha Ha to Frame St . All lanes closed. Starting 11/26/2025 7:00 AM and Ending 4/28/2028 5:00 PM.",
+    "projectDays": 884,
+    "start": "2025-11-26",
+    "end": "2028-04-28"
+   },
+   "perDay": [
+    313,
+    296,
+    291,
+    291,
+    296
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "MA": {
+   "closure": 0,
+   "crash": 4,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 1,
+   "other": 2,
+   "total": 7,
+   "topRoutes": [
+    [
+     "FORE RIVER BRIDGE (3A)",
+     2
+    ],
+    [
+     "I-93",
+     2
+    ],
+    [
+     "RT-67",
+     1
+    ],
+    [
+     "US-20",
+     1
+    ],
+    [
+     "RT-18",
+     1
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-93",
+     2
+    ],
+    [
+     "RT-67",
+     1
+    ],
+    [
+     "RT-18",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    2,
+    0,
+    3,
+    6,
+    5
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "MD": {
+   "closure": 50,
+   "crash": 0,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 50,
+   "topRoutes": [
+    [
+     "I-695",
+     6
+    ],
+    [
+     "US-301",
+     3
+    ],
+    [
+     "I-70",
+     3
+    ],
+    [
+     "I-95",
+     3
+    ],
+    [
+     "US-50",
+     2
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    49,
+    43,
+    43,
+    43,
+    43
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "ME": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 9,
+   "weather": 0,
+   "hazard": 0,
+   "other": 30,
+   "total": 39,
+   "topRoutes": [
+    [
+     "US-1",
+     6
+    ],
+    [
+     "US-201",
+     4
+    ],
+    [
+     "US-202",
+     3
+    ],
+    [
+     "I-95",
+     3
+    ],
+    [
+     "ME-15",
+     2
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    39,
+    39,
+    39,
+    38,
+    38
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "MI": {
+   "closure": 218,
+   "crash": 6,
+   "construction": 309,
+   "weather": 0,
+   "hazard": 0,
+   "other": 4,
+   "total": 537,
+   "topRoutes": [
+    [
+     "I-94",
+     42
+    ],
+    [
+     "I-96",
+     36
+    ],
+    [
+     "I-696",
+     32
+    ],
+    [
+     "I-75",
+     24
+    ],
+    [
+     "US-131",
+     19
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-94",
+     1
+    ],
+    [
+     "M-6",
+     1
+    ],
+    [
+     "US-10",
+     1
+    ],
+    [
+     "US-131",
+     1
+    ],
+    [
+     "I-275",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    699,
+    668,
+    666,
+    665,
+    671
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "MN": {
+   "closure": 48,
+   "crash": 20,
+   "construction": 139,
+   "weather": 0,
+   "hazard": 0,
+   "other": 6,
+   "total": 213,
+   "topRoutes": [
+    [
+     "US-10",
+     8
+    ],
+    [
+     "US-61",
+     8
+    ],
+    [
+     "US-169",
+     8
+    ],
+    [
+     "US-75",
+     7
+    ],
+    [
+     "US-71",
+     6
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "US-10",
+     2
+    ],
+    [
+     "MN-68",
+     1
+    ],
+    [
+     "I-494",
+     1
+    ],
+    [
+     "US-52",
+     1
+    ],
+    [
+     "MN-252",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    337,
+    324,
+    329,
+    329,
+    334
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "MO": {
+   "closure": 60,
+   "crash": 2,
+   "construction": 321,
+   "weather": 0,
+   "hazard": 0,
+   "other": 6,
+   "total": 389,
+   "topRoutes": [
+    [
+     "US-67",
+     14
+    ],
+    [
+     "I-70",
+     13
+    ],
+    [
+     "I-44",
+     9
+    ],
+    [
+     "US-60",
+     9
+    ],
+    [
+     "US-63",
+     9
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "US-71",
+     1
+    ],
+    [
+     "I-70",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    1143,
+    1125,
+    1080,
+    1075,
+    1072
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "MS": {
+   "closure": 12,
+   "crash": 7,
+   "construction": 65,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 84,
+   "topRoutes": [
+    [
+     "I-55",
+     9
+    ],
+    [
+     "I-22",
+     7
+    ],
+    [
+     "US-51",
+     6
+    ],
+    [
+     "US-49",
+     6
+    ],
+    [
+     "US-90",
+     4
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-55",
+     3
+    ],
+    [
+     "I-22",
+     2
+    ],
+    [
+     "US-49",
+     1
+    ],
+    [
+     "MS-182",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 2,
+   "longest": null,
+   "perDay": [
+    79,
+    78,
+    76,
+    79,
+    76
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "MT": {
+   "closure": 0,
+   "crash": 9,
+   "construction": 0,
+   "weather": 8,
+   "hazard": 0,
+   "other": 7,
+   "total": 24,
+   "topRoutes": [
+    [
+     "US-12",
+     3
+    ],
+    [
+     "US-287",
+     2
+    ],
+    [
+     "I-90",
+     2
+    ],
+    [
+     "MT-35",
+     2
+    ],
+    [
+     "US-87",
+     2
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-90",
+     2
+    ],
+    [
+     "MT-2",
+     1
+    ],
+    [
+     "MT-38",
+     1
+    ],
+    [
+     "S-482",
+     1
+    ],
+    [
+     "US-12",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 2,
+   "longest": null,
+   "perDay": [
+    19,
+    20,
+    20,
+    20,
+    20
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "NC": {
+   "closure": 22,
+   "crash": 0,
+   "construction": 394,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 416,
+   "topRoutes": [
+    [
+     "I-40",
+     79
+    ],
+    [
+     "I-95",
+     36
+    ],
+    [
+     "US-23",
+     32
+    ],
+    [
+     "US-421",
+     30
+    ],
+    [
+     "I-85",
+     28
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 1,
+   "longest": {
+    "state": "NC",
+    "route": "US-17",
+    "headline": "Construction on US 17 Both Directions in Beaufort, Martin County from Mill Inn Rd to  NC 171. 1 Left Lane Intermittent. Id: 904",
+    "projectDays": 1859,
+    "start": "2022-11-28",
+    "end": "2027-12-31"
+   },
+   "perDay": [
+    3447,
+    3226,
+    3180,
+    3207,
+    3281
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "ND": {
+   "closure": 2,
+   "crash": 0,
+   "construction": 38,
+   "weather": 0,
+   "hazard": 4,
+   "other": 2,
+   "total": 46,
+   "topRoutes": [
+    [
+     "I-94",
+     8
+    ],
+    [
+     "I-29",
+     5
+    ],
+    [
+     "US-85",
+     3
+    ],
+    [
+     "ND-1804",
+     2
+    ],
+    [
+     "US-2",
+     2
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    56,
+    55,
+    55,
+    56,
+    55
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "NE": {
+   "closure": 18,
+   "crash": 0,
+   "construction": 81,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 99,
+   "topRoutes": [
+    [
+     "US-6",
+     11
+    ],
+    [
+     "I-80",
+     5
+    ],
+    [
+     "US-30",
+     5
+    ],
+    [
+     "I-180",
+     5
+    ],
+    [
+     "US-275",
+     5
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    162,
+    165,
+    164,
+    161,
+    160
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "NH": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 41,
+   "weather": 0,
+   "hazard": 0,
+   "other": 1,
+   "total": 42,
+   "topRoutes": [
+    [
+     "I-93",
+     15
+    ],
+    [
+     "NH-12",
+     5
+    ],
+    [
+     "NH-101",
+     4
+    ],
+    [
+     "US-3",
+     3
+    ],
+    [
+     "I-95",
+     2
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    42,
+    42,
+    42,
+    42,
+    42
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "NJ": {
+   "closure": 24,
+   "crash": 6,
+   "construction": 508,
+   "weather": 0,
+   "hazard": 5,
+   "other": 50,
+   "total": 593,
+   "topRoutes": [
+    [
+     "US-1",
+     52
+    ],
+    [
+     "GSP",
+     46
+    ],
+    [
+     "NJ TURNPIKE",
+     32
+    ],
+    [
+     "US-206",
+     29
+    ],
+    [
+     "NJ-27",
+     27
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "US-1",
+     2
+    ],
+    [
+     "GSP",
+     2
+    ],
+    [
+     "NJ TURNPIKE",
+     1
+    ],
+    [
+     "NJ-18",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 3,
+   "longest": {
+    "state": "NJ",
+    "route": "US-206",
+    "headline": "NJDOT - STMC: Roadwork on US 202 Southbound near South of US 206/NJ 28 (Raritan Boro), Continuous Friday May 15, 2026 07:00 AM thru Saturday February 27, 2027 07:00 PM,",
+    "projectDays": 301,
+    "start": "2026-05-03",
+    "end": "2027-02-28"
+   },
+   "perDay": [
+    269,
+    356,
+    352,
+    482,
+    490
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "NM": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 0,
+   "topRoutes": [],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "hasRecords": false,
+   "carriesCrashes": false
+  },
+  "NV": {
+   "closure": 11,
+   "crash": 3,
+   "construction": 55,
+   "weather": 0,
+   "hazard": 0,
+   "other": 25,
+   "total": 94,
+   "topRoutes": [
+    [
+     "US-395",
+     16
+    ],
+    [
+     "I-80",
+     14
+    ],
+    [
+     "US-95",
+     6
+    ],
+    [
+     "NV-447",
+     6
+    ],
+    [
+     "I-215",
+     5
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "NV-267",
+     1
+    ],
+    [
+     "I-80",
+     1
+    ],
+    [
+     "US-93",
+     1
+    ]
+   ],
+   "holidayMentions": 4,
+   "holidayExamples": [
+    "NV-321: Public Details: Road closed for the Annual Pioche Labor Day Parade",
+    "NV-321: Public Details: Road closed for the Annual Pioche Labor Day Parade",
+    "NV-321: Public Details: Road closed for the Annual Pioche Labor Day Parade",
+    "NV-322: Public Details: Road closed for the Annual Pioche Labor Day Parade"
+   ],
+   "fireMentions": 0,
+   "longest": {
+    "state": "NV",
+    "route": "I-215",
+    "headline": "Long term road construction on ramp from Southern I-215 Westbound  to Airport Connector . Start time: 2/9/2026 6:00 AM.  End time: 2/9/2027 6:00 AM.  Public Details: Use caution around this area due to a temporary traffi",
+    "projectDays": 365,
+    "start": "2026-02-09",
+    "end": "2027-02-09"
+   },
+   "perDay": [
+    73,
+    75,
+    77,
+    83,
+    80
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "NY": {
+   "closure": 114,
+   "crash": 47,
+   "construction": 892,
+   "weather": 0,
+   "hazard": 0,
+   "other": 27,
+   "total": 1080,
+   "topRoutes": [
+    [
+     "I-287",
+     69
+    ],
+    [
+     "I-84",
+     43
+    ],
+    [
+     "US-1",
+     42
+    ],
+    [
+     "I-81",
+     42
+    ],
+    [
+     "I-80",
+     42
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-95",
+     8
+    ],
+    [
+     "I-190",
+     5
+    ],
+    [
+     "I-84",
+     5
+    ],
+    [
+     "I-91",
+     4
+    ],
+    [
+     "I-87",
+     4
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": {
+    "state": "NY",
+    "route": "I-91",
+    "headline": "Safety improvements on I-91 both directions Exit 15 - CT 68 (Wallingford) to Exit 18 - I-691 (Meriden), Monday March 4th, 2024 thru Thursday November 30th, 2028, Monday thru Friday, 09:00 AM thru 03:00 PM All lanes open,",
+    "projectDays": 1733,
+    "start": "2024-03-04",
+    "end": "2028-12-01"
+   },
+   "perDay": [
+    745,
+    761,
+    749,
+    835,
+    867
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "OH": {
+   "closure": 10,
+   "crash": 7,
+   "construction": 40,
+   "weather": 0,
+   "hazard": 0,
+   "other": 3,
+   "total": 60,
+   "topRoutes": [
+    [
+     "I-75",
+     9
+    ],
+    [
+     "I-71",
+     8
+    ],
+    [
+     "I-90",
+     7
+    ],
+    [
+     "I-70",
+     5
+    ],
+    [
+     "I-77",
+     4
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-75",
+     2
+    ],
+    [
+     "I-76",
+     1
+    ],
+    [
+     "I-77",
+     1
+    ],
+    [
+     "I-471",
+     1
+    ],
+    [
+     "I-90",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 2,
+   "longest": null,
+   "perDay": [
+    60,
+    54,
+    52,
+    52,
+    53
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "OK": {
+   "closure": 4,
+   "crash": 0,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 4,
+   "topRoutes": [
+    [
+     "OK-251A",
+     1
+    ],
+    [
+     "OK-71",
+     1
+    ],
+    [
+     "OK-100",
+     1
+    ],
+    [
+     "OK-80",
+     1
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "OR": {
+   "closure": 0,
+   "crash": 25,
+   "construction": 133,
+   "weather": 0,
+   "hazard": 0,
+   "other": 32,
+   "total": 190,
+   "topRoutes": [
+    [
+     "I-5",
+     20
+    ],
+    [
+     "I-84",
+     20
+    ],
+    [
+     "US-101",
+     15
+    ],
+    [
+     "US-97",
+     8
+    ],
+    [
+     "US-30",
+     7
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-84",
+     5
+    ],
+    [
+     "I-5",
+     5
+    ],
+    [
+     "OR3",
+     2
+    ],
+    [
+     "OR58",
+     1
+    ],
+    [
+     "I-105",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 3,
+   "longest": null,
+   "perDay": [
+    155,
+    150,
+    146,
+    146,
+    141
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "PA": {
+   "closure": 6,
+   "crash": 7,
+   "construction": 122,
+   "weather": 0,
+   "hazard": 1,
+   "other": 5,
+   "total": 141,
+   "topRoutes": [
+    [
+     "I-80",
+     22
+    ],
+    [
+     "I-81",
+     16
+    ],
+    [
+     "US-11",
+     8
+    ],
+    [
+     "I-79",
+     8
+    ],
+    [
+     "US-22",
+     7
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "US-422",
+     2
+    ],
+    [
+     "US-15",
+     2
+    ],
+    [
+     "I-76",
+     1
+    ],
+    [
+     "I-376",
+     1
+    ],
+    [
+     "PA-33",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    130,
+    105,
+    101,
+    99,
+    100
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "RI": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 0,
+   "topRoutes": [],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "hasRecords": false,
+   "carriesCrashes": false
+  },
+  "SC": {
+   "closure": 0,
+   "crash": 3,
+   "construction": 6,
+   "weather": 0,
+   "hazard": 0,
+   "other": 1,
+   "total": 10,
+   "topRoutes": [
+    [
+     "I-26",
+     3
+    ],
+    [
+     "I-20",
+     2
+    ],
+    [
+     "US-501",
+     1
+    ],
+    [
+     "I-77",
+     1
+    ],
+    [
+     "I-95",
+     1
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-85",
+     1
+    ],
+    [
+     "I-26",
+     1
+    ],
+    [
+     "I-20",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    14,
+    4,
+    1,
+    0,
+    0
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "SD": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 142,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 142,
+   "topRoutes": [
+    [
+     "US-14",
+     11
+    ],
+    [
+     "I-90",
+     10
+    ],
+    [
+     "US-281",
+     10
+    ],
+    [
+     "SD-73",
+     9
+    ],
+    [
+     "SD-28",
+     9
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": {
+    "state": "SD",
+    "route": "SD-471",
+    "headline": "Road work: miscellaneous construction, uneven lanes, gravel surface",
+    "projectDays": 114,
+    "start": "2026-07-15",
+    "end": "2026-11-07"
+   },
+   "perDay": [
+    126,
+    125,
+    125,
+    125,
+    125
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "TN": {
+   "closure": 57,
+   "crash": 2,
+   "construction": 74,
+   "weather": 0,
+   "hazard": 0,
+   "other": 3,
+   "total": 136,
+   "topRoutes": [
+    [
+     "I-40",
+     7
+    ],
+    [
+     "I-24",
+     6
+    ],
+    [
+     "TN-1",
+     6
+    ],
+    [
+     "TN-3",
+     5
+    ],
+    [
+     "TN-111",
+     3
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-24",
+     1
+    ],
+    [
+     "I-40",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    173,
+    153,
+    155,
+    151,
+    151
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "TX": {
+   "closure": 6,
+   "crash": 3,
+   "construction": 423,
+   "weather": 0,
+   "hazard": 6,
+   "other": 0,
+   "total": 438,
+   "topRoutes": [
+    [
+     "I-35",
+     46
+    ],
+    [
+     "I-10",
+     26
+    ],
+    [
+     "I-30",
+     26
+    ],
+    [
+     "I-20",
+     16
+    ],
+    [
+     "US-75",
+     12
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "TX-46",
+     1
+    ],
+    [
+     "I-10",
+     1
+    ],
+    [
+     "TX-LOOP-375",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": {
+    "state": "TX",
+    "route": "US-87",
+    "headline": "- Alternating lanes closed. New construction for divided hwy, improve existing roadway, drainage wor",
+    "projectDays": 2070,
+    "start": "2026-03-02",
+    "end": "2031-10-31"
+   },
+   "perDay": [
+    455,
+    396,
+    377,
+    375,
+    352
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "UT": {
+   "closure": 1,
+   "crash": 15,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 4,
+   "total": 20,
+   "topRoutes": [
+    [
+     "I-15",
+     8
+    ],
+    [
+     "I-80",
+     2
+    ],
+    [
+     "SR-201",
+     2
+    ],
+    [
+     "I-84",
+     2
+    ],
+    [
+     "SR-71",
+     1
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-15",
+     8
+    ],
+    [
+     "SR-201",
+     2
+    ],
+    [
+     "I-80",
+     1
+    ],
+    [
+     "SR-154",
+     1
+    ],
+    [
+     "I-84",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 1,
+   "longest": null,
+   "perDay": [
+    7,
+    6,
+    5,
+    5,
+    6
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "VA": {
+   "closure": 44,
+   "crash": 14,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 0,
+   "other": 10,
+   "total": 68,
+   "topRoutes": [
+    [
+     "I-95",
+     17
+    ],
+    [
+     "I-64",
+     11
+    ],
+    [
+     "I-495",
+     10
+    ],
+    [
+     "I-81",
+     9
+    ],
+    [
+     "I-66",
+     8
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-95",
+     5
+    ],
+    [
+     "I-64",
+     3
+    ],
+    [
+     "I-81",
+     2
+    ],
+    [
+     "US-11",
+     1
+    ],
+    [
+     "VA-150",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    17,
+    22,
+    7,
+    8,
+    14
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "VT": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 50,
+   "weather": 0,
+   "hazard": 0,
+   "other": 7,
+   "total": 57,
+   "topRoutes": [
+    [
+     "I-89",
+     11
+    ],
+    [
+     "US-7",
+     5
+    ],
+    [
+     "I-91",
+     4
+    ],
+    [
+     "VT-100",
+     3
+    ],
+    [
+     "VT-12",
+     3
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    57,
+    54,
+    54,
+    54,
+    54
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "WA": {
+   "closure": 4,
+   "crash": 8,
+   "construction": 186,
+   "weather": 0,
+   "hazard": 0,
+   "other": 24,
+   "total": 222,
+   "topRoutes": [
+    [
+     "SR 5",
+     13
+    ],
+    [
+     "SR 90",
+     6
+    ],
+    [
+     "SR 405",
+     6
+    ],
+    [
+     "SR 9",
+     3
+    ],
+    [
+     "SR 99",
+     2
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "SR 5",
+     5
+    ],
+    [
+     "SR 101",
+     1
+    ],
+    [
+     "SR 12",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 1,
+   "longest": {
+    "state": "WA",
+    "route": "SR-165",
+    "headline": "SR 165 is closed at the Carbon River/Fairfax Bridge to all vehicles, bicyclists and pedestrians until further notice. The closure means there is no access across the bridge to Mount Rainier National Park Mowich Lake and ",
+    "projectDays": 1902,
+    "start": "2025-04-16",
+    "end": "2030-07-01"
+   },
+   "perDay": [
+    171,
+    130,
+    122,
+    120,
+    133
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "WI": {
+   "closure": 192,
+   "crash": 27,
+   "construction": 959,
+   "weather": 0,
+   "hazard": 2,
+   "other": 1,
+   "total": 1181,
+   "topRoutes": [
+    [
+     "I-41",
+     130
+    ],
+    [
+     "I-94",
+     69
+    ],
+    [
+     "US-51",
+     62
+    ],
+    [
+     "WI-29",
+     48
+    ],
+    [
+     "US-18",
+     48
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-39",
+     7
+    ],
+    [
+     "I-43",
+     6
+    ],
+    [
+     "US-12",
+     4
+    ],
+    [
+     "I-41",
+     4
+    ],
+    [
+     "I-94",
+     2
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 2,
+   "longest": {
+    "state": "WI",
+    "route": "I-535",
+    "headline": "Roadwork - Mainline Right Shoulder Closed on I-535 SB from MINNESOTA-WISCONSIN STATE LINE to US 53 SB-STH 35 (BRIDGE CROSSING)",
+    "projectDays": 2616,
+    "start": "2022-04-08",
+    "end": "2029-06-06"
+   },
+   "perDay": [
+    971,
+    851,
+    823,
+    1003,
+    989
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  },
+  "WV": {
+   "closure": 0,
+   "crash": 0,
+   "construction": 73,
+   "weather": 0,
+   "hazard": 0,
+   "other": 0,
+   "total": 73,
+   "topRoutes": [
+    [
+     "US-119",
+     6
+    ],
+    [
+     "I-77",
+     6
+    ],
+    [
+     "I-64",
+     5
+    ],
+    [
+     "WV-2",
+     5
+    ],
+    [
+     "I-79",
+     5
+    ]
+   ],
+   "crashRoutes": [],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 0,
+   "longest": null,
+   "perDay": [
+    120,
+    119,
+    119,
+    119,
+    118
+   ],
+   "hasRecords": true,
+   "carriesCrashes": false
+  },
+  "WY": {
+   "closure": 2,
+   "crash": 1,
+   "construction": 0,
+   "weather": 0,
+   "hazard": 1,
+   "other": 2,
+   "total": 6,
+   "topRoutes": [
+    [
+     "I-80",
+     3
+    ],
+    [
+     "WY-22",
+     1
+    ],
+    [
+     "US-20",
+     1
+    ],
+    [
+     "US-26",
+     1
+    ]
+   ],
+   "crashRoutes": [
+    [
+     "I-80",
+     1
+    ]
+   ],
+   "holidayMentions": 0,
+   "holidayExamples": [],
+   "fireMentions": 1,
+   "longest": null,
+   "perDay": [
+    4,
+    3,
+    3,
+    5,
+    3
+   ],
+   "hasRecords": true,
+   "carriesCrashes": true
+  }
+ },
+ "fires": {
+  "asOf": "2026-09-07T23:50:11.590Z",
+  "count": 483,
+  "acres": 5835642,
+  "byState": [
+   {
+    "state": "OR",
+    "count": 74,
+    "acres": 2889707,
+    "top": [
+     {
+      "name": "BIG GRASS",
+      "acres": 578637,
+      "contained": 94,
+      "county": "Malheur"
+     },
+     {
+      "name": "ROWE CREEK COMPLEX",
+      "acres": 373927,
+      "contained": 99,
+      "county": "Wheeler"
+     },
+     {
+      "name": "0445 CROSSWHITE",
+      "acres": 342923,
+      "contained": 92,
+      "county": "Wheeler"
+     },
+     {
+      "name": "Coleman Creek",
+      "acres": 308863,
+      "contained": 99,
+      "county": "Harney"
+     }
+    ],
+    "notContainedOver100k": 6
+   },
+   {
+    "state": "BC",
+    "count": 70,
+    "acres": 1024216,
+    "top": [
+     {
+      "name": "Pear Lake",
+      "acres": 409970,
+      "contained": null,
+      "county": "E of Pear Lake"
+     },
+     {
+      "name": "Ainslie Creek",
+      "acres": 167346,
+      "contained": null,
+      "county": "Ainslie Creek"
+     },
+     {
+      "name": "French Bar Creek",
+      "acres": 152676,
+      "contained": null,
+      "county": "French Bar Creek"
+     },
+     {
+      "name": "Bonanza Creek",
+      "acres": 86467,
+      "contained": null,
+      "county": "Bonanza Creek"
+     }
+    ],
+    "notContainedOver100k": 3
+   },
+   {
+    "state": "WA",
+    "count": 48,
+    "acres": 652207,
+    "top": [
+     {
+      "name": "LITTLE GIANT",
+      "acres": 171163,
+      "contained": 81,
+      "county": "Chelan"
+     },
+     {
+      "name": "SINLAHEKIN",
+      "acres": 166116,
+      "contained": 59,
+      "county": "Okanogan"
+     },
+     {
+      "name": "Kaiser Canyon",
+      "acres": 138293,
+      "contained": 100,
+      "county": "Okanogan"
+     },
+     {
+      "name": "Modrite",
+      "acres": 57594,
+      "contained": 100,
+      "county": "Ferry"
+     }
+    ],
+    "notContainedOver100k": 2
+   },
+   {
+    "state": "ID",
+    "count": 20,
+    "acres": 208599,
+    "top": [
+     {
+      "name": "Tartar",
+      "acres": 158027,
+      "contained": 100,
+      "county": "Washington"
+     },
+     {
+      "name": "CROOKED",
+      "acres": 10118,
+      "contained": 60,
+      "county": "Boise"
+     },
+     {
+      "name": "Cascade",
+      "acres": 7475,
+      "contained": 50,
+      "county": "Idaho"
+     },
+     {
+      "name": "FLINT",
+      "acres": 6936,
+      "contained": 90,
+      "county": "Owyhee"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "UT",
+    "count": 12,
+    "acres": 198209,
+    "top": [
+     {
+      "name": "Widemouth 2",
+      "acres": 129741,
+      "contained": 97,
+      "county": "Millard"
+     },
+     {
+      "name": "Snyder",
+      "acres": 28264,
+      "contained": 100,
+      "county": "Grand"
+     },
+     {
+      "name": "Rocky Canyon",
+      "acres": 16464,
+      "contained": 100,
+      "county": "Morgan"
+     },
+     {
+      "name": "Brushy Canyon",
+      "acres": 10002,
+      "contained": 100,
+      "county": "Box Elder"
+     }
+    ],
+    "notContainedOver100k": 1
+   },
+   {
+    "state": "CO",
+    "count": 10,
+    "acres": 162548,
+    "top": [
+     {
+      "name": "Aspen Acres",
+      "acres": 102004,
+      "contained": 82,
+      "county": "Custer"
+     },
+     {
+      "name": "Gold Mountain",
+      "acres": 39747,
+      "contained": 92,
+      "county": "Ouray"
+     },
+     {
+      "name": "Willow",
+      "acres": 7534,
+      "contained": 80,
+      "county": "Lake"
+     },
+     {
+      "name": "Elk",
+      "acres": 7257,
+      "contained": 73,
+      "county": "Hinsdale"
+     }
+    ],
+    "notContainedOver100k": 1
+   },
+   {
+    "state": "NV",
+    "count": 9,
+    "acres": 154788,
+    "top": [
+     {
+      "name": "MOUSE MEADOW",
+      "acres": 52000,
+      "contained": 100,
+      "county": "Nye"
+     },
+     {
+      "name": "McConnell",
+      "acres": 33241,
+      "contained": 83,
+      "county": "Humboldt"
+     },
+     {
+      "name": "Calico",
+      "acres": 18319,
+      "contained": 98,
+      "county": "Humboldt"
+     },
+     {
+      "name": "Hawk",
+      "acres": 15085,
+      "contained": 98,
+      "county": "Washoe"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "MT",
+    "count": 31,
+    "acres": 114986,
+    "top": [
+     {
+      "name": "Sand Creek",
+      "acres": 35509,
+      "contained": 36,
+      "county": "Beaverhead"
+     },
+     {
+      "name": "Rattlesnake Complex",
+      "acres": 15582,
+      "contained": 97,
+      "county": "Prairie"
+     },
+     {
+      "name": "Snow",
+      "acres": 14056,
+      "contained": 97,
+      "county": "Custer"
+     },
+     {
+      "name": "Bobcat Lakes",
+      "acres": 10895,
+      "contained": 61,
+      "county": "Beaverhead"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "TX",
+    "count": 4,
+    "acres": 90948,
+    "top": [
+     {
+      "name": "Ross",
+      "acres": 90400,
+      "contained": 57,
+      "county": "Palo Pinto"
+     },
+     {
+      "name": "Red Gate",
+      "acres": 466,
+      "contained": 70,
+      "county": "Schleicher"
+     },
+     {
+      "name": "South Day",
+      "acres": 77,
+      "contained": 95,
+      "county": "Sutton"
+     },
+     {
+      "name": "Gregg 8192",
+      "acres": 5,
+      "contained": 50,
+      "county": "Gregg"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "MN",
+    "count": 6,
+    "acres": 74608,
+    "top": [
+     {
+      "name": "Bear Trap",
+      "acres": 30804,
+      "contained": 97,
+      "county": "St. Louis"
+     },
+     {
+      "name": "Thumb",
+      "acres": 25015,
+      "contained": 97,
+      "county": "St. Louis"
+     },
+     {
+      "name": "Wolfpack",
+      "acres": 6871,
+      "contained": 100,
+      "county": "St. Louis"
+     },
+     {
+      "name": "Sioux",
+      "acres": 6833,
+      "contained": 97,
+      "county": "St. Louis"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "NM",
+    "count": 57,
+    "acres": 70215,
+    "top": [
+     {
+      "name": "Line",
+      "acres": 30144,
+      "contained": 100,
+      "county": "Quay"
+     },
+     {
+      "name": "Frijoles",
+      "acres": 15483,
+      "contained": 79,
+      "county": "Santa Fe"
+     },
+     {
+      "name": "Mimms",
+      "acres": 7093,
+      "contained": 100,
+      "county": "Quay"
+     },
+     {
+      "name": "Sparks",
+      "acres": 6000,
+      "contained": 100,
+      "county": "Quay"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "CA",
+    "count": 47,
+    "acres": 66028,
+    "top": [
+     {
+      "name": "Plaskett",
+      "acres": 29862,
+      "contained": 37,
+      "county": "Monterey"
+     },
+     {
+      "name": "Timber",
+      "acres": 25357,
+      "contained": 27,
+      "county": "Monterey"
+     },
+     {
+      "name": "MP18",
+      "acres": 7601,
+      "contained": 95,
+      "county": "Humboldt"
+     },
+     {
+      "name": "SUMMIT",
+      "acres": 2690,
+      "contained": 100,
+      "county": "Los Angeles"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "FL",
+    "count": 11,
+    "acres": 57211,
+    "top": [
+     {
+      "name": "National",
+      "acres": 35027,
+      "contained": 100,
+      "county": "Collier"
+     },
+     {
+      "name": "Chipmunk",
+      "acres": 17000,
+      "contained": 100,
+      "county": "Miami-Dade"
+     },
+     {
+      "name": "Mill Pond",
+      "acres": 1760,
+      "contained": 100,
+      "county": "Liberty"
+     },
+     {
+      "name": "S7",
+      "acres": 884,
+      "contained": 100,
+      "county": "Broward"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "OK",
+    "count": 27,
+    "acres": 39020,
+    "top": [
+     {
+      "name": "Sharpe",
+      "acres": 29209,
+      "contained": 100,
+      "county": "Cimarron"
+     },
+     {
+      "name": "WARE",
+      "acres": 2271,
+      "contained": 100,
+      "county": "Osage"
+     },
+     {
+      "name": "Alexander Trail",
+      "acres": 1600,
+      "contained": 90,
+      "county": "Pushmataha"
+     },
+     {
+      "name": "2690",
+      "acres": 900,
+      "contained": 100,
+      "county": "Caddo"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "AK",
+    "count": 4,
+    "acres": 8399,
+    "top": [
+     {
+      "name": "Mukluk",
+      "acres": 7335,
+      "contained": 29,
+      "county": "Southeast Fairbanks"
+     },
+     {
+      "name": "Canyon",
+      "acres": 1064,
+      "contained": 0,
+      "county": "Yukon-Koyukuk"
+     },
+     {
+      "name": "Winter Island",
+      "acres": 0,
+      "contained": null,
+      "county": "Prince of Wales-Hyder"
+     },
+     {
+      "name": "Sandy Beach",
+      "acres": 0,
+      "contained": null,
+      "county": "Wrangell"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "SD",
+    "count": 14,
+    "acres": 8322,
+    "top": [
+     {
+      "name": "Needles",
+      "acres": 6018,
+      "contained": 45,
+      "county": "Oglala Lakota"
+     },
+     {
+      "name": "XU Hill",
+      "acres": 1297,
+      "contained": 100,
+      "county": "Oglala Lakota"
+     },
+     {
+      "name": "Rancher",
+      "acres": 504,
+      "contained": 100,
+      "county": "Oglala Lakota"
+     },
+     {
+      "name": "Event",
+      "acres": 230,
+      "contained": null,
+      "county": "Oglala Lakota"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "WY",
+    "count": 9,
+    "acres": 7980,
+    "top": [
+     {
+      "name": "Lumin",
+      "acres": 7285,
+      "contained": 100,
+      "county": "Sheridan"
+     },
+     {
+      "name": "COW CAMP",
+      "acres": 282,
+      "contained": 43,
+      "county": "Washakie"
+     },
+     {
+      "name": "Horsetooth",
+      "acres": 168,
+      "contained": 100,
+      "county": "Platte"
+     },
+     {
+      "name": "Chalk Mountain",
+      "acres": 124,
+      "contained": 91,
+      "county": "Carbon"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "MS",
+    "count": 4,
+    "acres": 2084,
+    "top": [
+     {
+      "name": "Jackson - Hwy 90",
+      "acres": 1428,
+      "contained": 100,
+      "county": "Jackson"
+     },
+     {
+      "name": "Hancock - Texas Flat Road",
+      "acres": 410,
+      "contained": 100,
+      "county": "Hancock"
+     },
+     {
+      "name": "Rankin-Lone Pine Church Rd.",
+      "acres": 126,
+      "contained": 100,
+      "county": "Rankin"
+     },
+     {
+      "name": "Lindsey Rd and Horeshoe Bend Rd",
+      "acres": 120,
+      "contained": 100,
+      "county": "Itawamba"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "GA",
+    "count": 2,
+    "acres": 1850,
+    "top": [
+     {
+      "name": "Mitchell",
+      "acres": 1030,
+      "contained": 100,
+      "county": "Ware"
+     },
+     {
+      "name": "Main Trail",
+      "acres": 820,
+      "contained": 87,
+      "county": "Chatham"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "AL",
+    "count": 1,
+    "acres": 1650,
+    "top": [
+     {
+      "name": "Williams Creek",
+      "acres": 1650,
+      "contained": 100,
+      "county": "Perry"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "AZ",
+    "count": 6,
+    "acres": 1112,
+    "top": [
+     {
+      "name": "Paddy Creek",
+      "acres": 668,
+      "contained": 63,
+      "county": "Apache"
+     },
+     {
+      "name": "Mount Emma",
+      "acres": 368,
+      "contained": 100,
+      "county": "Mohave"
+     },
+     {
+      "name": "Last Chance",
+      "acres": 74,
+      "contained": null,
+      "county": "Mohave"
+     },
+     {
+      "name": "Lion",
+      "acres": 1,
+      "contained": null,
+      "county": "Apache"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "HI",
+    "count": 1,
+    "acres": 500,
+    "top": [
+     {
+      "name": "KAWAIHEA ROAD",
+      "acres": 500,
+      "contained": 100,
+      "county": "Hawaii"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "ND",
+    "count": 6,
+    "acres": 400,
+    "top": [
+     {
+      "name": "Hwy 1806",
+      "acres": 350,
+      "contained": 100,
+      "county": "Sioux"
+     },
+     {
+      "name": "Wood House",
+      "acres": 40,
+      "contained": null,
+      "county": "McLean"
+     },
+     {
+      "name": "Bear",
+      "acres": 10,
+      "contained": null,
+      "county": "Dunn"
+     },
+     {
+      "name": "Bird",
+      "acres": 0,
+      "contained": null,
+      "county": "Sioux"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "NC",
+    "count": 1,
+    "acres": 30,
+    "top": [
+     {
+      "name": "WILD BOAR POINT",
+      "acres": 30,
+      "contained": null,
+      "county": "Dare"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "AR",
+    "count": 5,
+    "acres": 15,
+    "top": [
+     {
+      "name": "Sunset 2",
+      "acres": 12,
+      "contained": null,
+      "county": "Garland"
+     },
+     {
+      "name": "Little River 105",
+      "acres": 1,
+      "contained": null,
+      "county": "Little River"
+     },
+     {
+      "name": "Crawford 194",
+      "acres": 1,
+      "contained": null,
+      "county": "Crawford"
+     },
+     {
+      "name": "Sevier 106",
+      "acres": 1,
+      "contained": null,
+      "county": "Sevier"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "NE",
+    "count": 2,
+    "acres": 8,
+    "top": [
+     {
+      "name": "Part Two",
+      "acres": 5,
+      "contained": null,
+      "county": "Sioux"
+     },
+     {
+      "name": "Egan",
+      "acres": 3,
+      "contained": null,
+      "county": "Dawes"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "WI",
+    "count": 1,
+    "acres": 0,
+    "top": [
+     {
+      "name": "Long Lake",
+      "acres": 0,
+      "contained": null,
+      "county": "Oneida"
+     }
+    ],
+    "notContainedOver100k": 0
+   },
+   {
+    "state": "ME",
+    "count": 1,
+    "acres": 0,
+    "top": [
+     {
+      "name": "A&W Fire",
+      "acres": 0,
+      "contained": null,
+      "county": "Sagadahoc"
+     }
+    ],
+    "notContainedOver100k": 0
+   }
+  ]
+ },
+ "border": {
+  "top": [
+   {
+    "port": "Tecate",
+    "crossing": "",
+    "border": "Mexican Border",
+    "state": "CA",
+    "peakMin": 240,
+    "secondMin": 240,
+    "spike": false,
+    "peakLocal": "Sunday 5 PM",
+    "avgMin": 87.4,
+    "hoursOverHour": 90,
+    "samples": 120
+   },
+   {
+    "port": "San Ysidro",
+    "crossing": "",
+    "border": "Mexican Border",
+    "state": "CA",
+    "peakMin": 200,
+    "secondMin": 165,
+    "spike": false,
+    "peakLocal": "Monday 2 AM",
+    "avgMin": 91.2,
+    "hoursOverHour": 92,
+    "samples": 120
+   },
+   {
+    "port": "Del Rio",
+    "crossing": "",
+    "border": "Mexican Border",
+    "state": "TX",
+    "peakMin": 180,
+    "secondMin": 150,
+    "spike": false,
+    "peakLocal": "Monday 6 PM",
+    "avgMin": 32.8,
+    "hoursOverHour": 21,
+    "samples": 120
+   },
+   {
+    "port": "Otay Mesa",
+    "crossing": "Passenger",
+    "border": "Mexican Border",
+    "state": "CA",
+    "peakMin": 180,
+    "secondMin": 170,
+    "spike": false,
+    "peakLocal": "Sunday 5 PM",
+    "avgMin": 67.8,
+    "hoursOverHour": 65,
+    "samples": 120
+   },
+   {
+    "port": "Highgate Springs",
+    "crossing": "",
+    "border": "Canadian Border",
+    "state": "VT",
+    "peakMin": 170,
+    "secondMin": 170,
+    "spike": false,
+    "peakLocal": "Monday 4 PM",
+    "avgMin": 22.9,
+    "hoursOverHour": 14,
+    "samples": 120
+   },
+   {
+    "port": "Brownsville",
+    "crossing": "B&M",
+    "border": "Mexican Border",
+    "state": "TX",
+    "peakMin": 150,
+    "secondMin": 120,
+    "spike": false,
+    "peakLocal": "Monday 6 PM",
+    "avgMin": 22.5,
+    "hoursOverHour": 10,
+    "samples": 120
+   },
+   {
+    "port": "Eagle Pass",
+    "crossing": "Bridge II",
+    "border": "Mexican Border",
+    "state": "TX",
+    "peakMin": 150,
+    "secondMin": 120,
+    "spike": false,
+    "peakLocal": "Monday 5 PM",
+    "avgMin": 29.8,
+    "hoursOverHour": 15,
+    "samples": 120
+   },
+   {
+    "port": "Brownsville",
+    "crossing": "Gateway",
+    "border": "Mexican Border",
+    "state": "TX",
+    "peakMin": 120,
+    "secondMin": 120,
+    "spike": false,
+    "peakLocal": "Monday 4 PM",
+    "avgMin": 28.9,
+    "hoursOverHour": 20,
+    "samples": 120
+   },
+   {
+    "port": "Brownsville",
+    "crossing": "Los Indios",
+    "border": "Mexican Border",
+    "state": "TX",
+    "peakMin": 120,
+    "secondMin": 120,
+    "spike": false,
+    "peakLocal": "Monday 4 PM",
+    "avgMin": 16.5,
+    "hoursOverHour": 8,
+    "samples": 120
+   },
+   {
+    "port": "Calexico",
+    "crossing": "West",
+    "border": "Mexican Border",
+    "state": "CA",
+    "peakMin": 120,
+    "secondMin": 120,
+    "spike": false,
+    "peakLocal": "Saturday 5 PM",
+    "avgMin": 52.7,
+    "hoursOverHour": 56,
+    "samples": 120
+   },
+   {
+    "port": "Calexico",
+    "crossing": "East",
+    "border": "Mexican Border",
+    "state": "CA",
+    "peakMin": 100,
+    "secondMin": 90,
+    "spike": false,
+    "peakLocal": "Sunday 11 AM",
+    "avgMin": 31.6,
+    "hoursOverHour": 38,
+    "samples": 120
+   },
+   {
+    "port": "Andrade",
+    "crossing": "",
+    "border": "Mexican Border",
+    "state": "CA",
+    "peakMin": 90,
+    "secondMin": 90,
+    "spike": false,
+    "peakLocal": "Saturday 7 PM",
+    "avgMin": 12.7,
+    "hoursOverHour": 7,
+    "samples": 120
+   }
+  ],
+  "spikes": [
+   {
+    "port": "Nogales",
+    "crossing": "Mariposa",
+    "border": "Mexican Border",
+    "state": "AZ",
+    "peakMin": 455,
+    "secondMin": 75,
+    "spike": true,
+    "peakLocal": "Thursday 8 AM",
+    "avgMin": 11.9,
+    "hoursOverHour": 4,
+    "samples": 120
+   },
+   {
+    "port": "Lukeville",
+    "crossing": "",
+    "border": "Mexican Border",
+    "state": "AZ",
+    "peakMin": 90,
+    "secondMin": 20,
+    "spike": true,
+    "peakLocal": "Monday 4 PM",
+    "avgMin": 1.8,
+    "hoursOverHour": 1,
+    "samples": 120
+   },
+   {
+    "port": "Calais",
+    "crossing": "Ferry Point",
+    "border": "Canadian Border",
+    "state": "ME",
+    "peakMin": 5,
+    "secondMin": 0,
+    "spike": true,
+    "peakLocal": "Friday 9 AM",
+    "avgMin": 0,
+    "hoursOverHour": 0,
+    "samples": 120
+   }
+  ],
+  "pnw": [
+   {
+    "port": "Blaine",
+    "crossing": "Peace Arch",
+    "border": "Canadian Border",
+    "state": "WA",
+    "peakMin": 50,
+    "secondMin": 50,
+    "spike": false,
+    "peakLocal": "Sunday 9 PM",
+    "avgMin": 9.3,
+    "hoursOverHour": 0,
+    "samples": 120
+   },
+   {
+    "port": "Blaine",
+    "crossing": "Pacific Highway",
+    "border": "Canadian Border",
+    "state": "WA",
+    "peakMin": 45,
+    "secondMin": 45,
+    "spike": false,
+    "peakLocal": "Saturday 12 PM",
+    "avgMin": 7.5,
+    "hoursOverHour": 0,
+    "samples": 120
+   },
+   {
+    "port": "Lynden",
+    "crossing": "",
+    "border": "Canadian Border",
+    "state": "WA",
+    "peakMin": 40,
+    "secondMin": 40,
+    "spike": false,
+    "peakLocal": "Saturday 10 AM",
+    "avgMin": 4.9,
+    "hoursOverHour": 0,
+    "samples": 120
+   },
+   {
+    "port": "Sumas",
+    "crossing": "",
+    "border": "Canadian Border",
+    "state": "WA",
+    "peakMin": 30,
+    "secondMin": 30,
+    "spike": false,
+    "peakLocal": "Thursday 11 AM",
+    "avgMin": 2.3,
+    "hoursOverHour": 0,
+    "samples": 120
+   },
+   {
+    "port": "Blaine",
+    "crossing": "Point Roberts",
+    "border": "Canadian Border",
+    "state": "WA",
+    "peakMin": 0,
+    "secondMin": 0,
+    "spike": false,
+    "peakLocal": "Wednesday 5 PM",
+    "avgMin": 0,
+    "hoursOverHour": 0,
+    "samples": 120
+   }
+  ],
+  "byState": {
+   "AZ": [
+    {
+     "port": "Nogales",
+     "crossing": "Deconcini",
+     "border": "Mexican Border",
+     "state": "AZ",
+     "peakMin": 80,
+     "secondMin": 60,
+     "spike": false,
+     "peakLocal": "Monday 4 PM",
+     "avgMin": 18,
+     "hoursOverHour": 6,
+     "samples": 120
+    },
+    {
+     "port": "Douglas (Raul Hector Castro)",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "AZ",
+     "peakMin": 75,
+     "secondMin": 60,
+     "spike": false,
+     "peakLocal": "Thursday 9 AM",
+     "avgMin": 20.6,
+     "hoursOverHour": 9,
+     "samples": 120
+    },
+    {
+     "port": "Naco",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "AZ",
+     "peakMin": 60,
+     "secondMin": 30,
+     "spike": false,
+     "peakLocal": "Monday 3 PM",
+     "avgMin": 4.5,
+     "hoursOverHour": 1,
+     "samples": 240
+    },
+    {
+     "port": "San Luis",
+     "crossing": "San Luis I",
+     "border": "Mexican Border",
+     "state": "AZ",
+     "peakMin": 55,
+     "secondMin": 50,
+     "spike": false,
+     "peakLocal": "Sunday 2 AM",
+     "avgMin": 18.4,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Nogales",
+     "crossing": "Morley Gate",
+     "border": "Mexican Border",
+     "state": "AZ",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 5 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "San Luis",
+     "crossing": "San Luis II",
+     "border": "Mexican Border",
+     "state": "AZ",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 5 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "CA": [
+    {
+     "port": "Tecate",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "CA",
+     "peakMin": 240,
+     "secondMin": 240,
+     "spike": false,
+     "peakLocal": "Sunday 5 PM",
+     "avgMin": 87.4,
+     "hoursOverHour": 90,
+     "samples": 120
+    },
+    {
+     "port": "San Ysidro",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "CA",
+     "peakMin": 200,
+     "secondMin": 165,
+     "spike": false,
+     "peakLocal": "Monday 2 AM",
+     "avgMin": 91.2,
+     "hoursOverHour": 92,
+     "samples": 120
+    },
+    {
+     "port": "Otay Mesa",
+     "crossing": "Passenger",
+     "border": "Mexican Border",
+     "state": "CA",
+     "peakMin": 180,
+     "secondMin": 170,
+     "spike": false,
+     "peakLocal": "Sunday 5 PM",
+     "avgMin": 67.8,
+     "hoursOverHour": 65,
+     "samples": 120
+    },
+    {
+     "port": "Calexico",
+     "crossing": "West",
+     "border": "Mexican Border",
+     "state": "CA",
+     "peakMin": 120,
+     "secondMin": 120,
+     "spike": false,
+     "peakLocal": "Saturday 5 PM",
+     "avgMin": 52.7,
+     "hoursOverHour": 56,
+     "samples": 120
+    },
+    {
+     "port": "Calexico",
+     "crossing": "East",
+     "border": "Mexican Border",
+     "state": "CA",
+     "peakMin": 100,
+     "secondMin": 90,
+     "spike": false,
+     "peakLocal": "Sunday 11 AM",
+     "avgMin": 31.6,
+     "hoursOverHour": 38,
+     "samples": 120
+    },
+    {
+     "port": "Andrade",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "CA",
+     "peakMin": 90,
+     "secondMin": 90,
+     "spike": false,
+     "peakLocal": "Saturday 7 PM",
+     "avgMin": 12.7,
+     "hoursOverHour": 7,
+     "samples": 120
+    }
+   ],
+   "TX": [
+    {
+     "port": "Del Rio",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "TX",
+     "peakMin": 180,
+     "secondMin": 150,
+     "spike": false,
+     "peakLocal": "Monday 6 PM",
+     "avgMin": 32.8,
+     "hoursOverHour": 21,
+     "samples": 120
+    },
+    {
+     "port": "Brownsville",
+     "crossing": "B&M",
+     "border": "Mexican Border",
+     "state": "TX",
+     "peakMin": 150,
+     "secondMin": 120,
+     "spike": false,
+     "peakLocal": "Monday 6 PM",
+     "avgMin": 22.5,
+     "hoursOverHour": 10,
+     "samples": 120
+    },
+    {
+     "port": "Eagle Pass",
+     "crossing": "Bridge II",
+     "border": "Mexican Border",
+     "state": "TX",
+     "peakMin": 150,
+     "secondMin": 120,
+     "spike": false,
+     "peakLocal": "Monday 5 PM",
+     "avgMin": 29.8,
+     "hoursOverHour": 15,
+     "samples": 120
+    },
+    {
+     "port": "Brownsville",
+     "crossing": "Gateway",
+     "border": "Mexican Border",
+     "state": "TX",
+     "peakMin": 120,
+     "secondMin": 120,
+     "spike": false,
+     "peakLocal": "Monday 4 PM",
+     "avgMin": 28.9,
+     "hoursOverHour": 20,
+     "samples": 120
+    },
+    {
+     "port": "Brownsville",
+     "crossing": "Los Indios",
+     "border": "Mexican Border",
+     "state": "TX",
+     "peakMin": 120,
+     "secondMin": 120,
+     "spike": false,
+     "peakLocal": "Monday 4 PM",
+     "avgMin": 16.5,
+     "hoursOverHour": 8,
+     "samples": 120
+    },
+    {
+     "port": "Brownsville",
+     "crossing": "Veterans International",
+     "border": "Mexican Border",
+     "state": "TX",
+     "peakMin": 90,
+     "secondMin": 90,
+     "spike": false,
+     "peakLocal": "Monday 4 PM",
+     "avgMin": 22,
+     "hoursOverHour": 15,
+     "samples": 120
+    }
+   ],
+   "VT": [
+    {
+     "port": "Highgate Springs",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "VT",
+     "peakMin": 170,
+     "secondMin": 170,
+     "spike": false,
+     "peakLocal": "Monday 4 PM",
+     "avgMin": 22.9,
+     "hoursOverHour": 14,
+     "samples": 120
+    },
+    {
+     "port": "Derby Line",
+     "crossing": "Derby Line I-91",
+     "border": "Canadian Border",
+     "state": "VT",
+     "peakMin": 60,
+     "secondMin": 45,
+     "spike": false,
+     "peakLocal": "Friday 10 PM",
+     "avgMin": 10.8,
+     "hoursOverHour": 1,
+     "samples": 120
+    },
+    {
+     "port": "Norton",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "VT",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 8 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "ELP": [
+    {
+     "port": "El Paso",
+     "crossing": "Bridge of the Americas (BOTA)",
+     "border": "Mexican Border",
+     "state": "ELP",
+     "peakMin": 78,
+     "secondMin": 75,
+     "spike": false,
+     "peakLocal": "Saturday 6 PM",
+     "avgMin": 34.6,
+     "hoursOverHour": 17,
+     "samples": 120
+    },
+    {
+     "port": "El Paso",
+     "crossing": "Paso Del Norte (PDN)",
+     "border": "Mexican Border",
+     "state": "ELP",
+     "peakMin": 78,
+     "secondMin": 77,
+     "spike": false,
+     "peakLocal": "Saturday 8 PM",
+     "avgMin": 34.1,
+     "hoursOverHour": 24,
+     "samples": 120
+    },
+    {
+     "port": "Marcelino Serna",
+     "crossing": "Tornillo",
+     "border": "Mexican Border",
+     "state": "ELP",
+     "peakMin": 40,
+     "secondMin": 40,
+     "spike": false,
+     "peakLocal": "Monday 4 PM",
+     "avgMin": 14.8,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Fort Hancock",
+     "crossing": "Fort Hancock",
+     "border": "Mexican Border",
+     "state": "ELP",
+     "peakMin": 20,
+     "secondMin": 20,
+     "spike": false,
+     "peakLocal": "Sunday 6 PM",
+     "avgMin": 4.7,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "BOTA CARGO FACILITY",
+     "crossing": "BRIDGE OF AMERICAS CARGO FACILITY ",
+     "border": "Mexican Border",
+     "state": "ELP",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 6 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Bridge of the Americas Port of Entry",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "ELP",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 6 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "NY": [
+    {
+     "port": "Champlain",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "NY",
+     "peakMin": 60,
+     "secondMin": 60,
+     "spike": false,
+     "peakLocal": "Monday 4 PM",
+     "avgMin": 10.2,
+     "hoursOverHour": 4,
+     "samples": 120
+    },
+    {
+     "port": "Buffalo/Niagara Falls",
+     "crossing": "Rainbow Bridge",
+     "border": "Canadian Border",
+     "state": "NY",
+     "peakMin": 58,
+     "secondMin": 43,
+     "spike": false,
+     "peakLocal": "Saturday 8 AM",
+     "avgMin": 11.1,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Buffalo/Niagara Falls",
+     "crossing": "Lewiston Bridge",
+     "border": "Canadian Border",
+     "state": "NY",
+     "peakMin": 48,
+     "secondMin": 37,
+     "spike": false,
+     "peakLocal": "Monday 5 PM",
+     "avgMin": 5.9,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Buffalo/Niagara Falls",
+     "crossing": "Peace Bridge",
+     "border": "Canadian Border",
+     "state": "NY",
+     "peakMin": 42,
+     "secondMin": 38,
+     "spike": false,
+     "peakLocal": "Monday 1 PM",
+     "avgMin": 11.3,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Alexandria Bay",
+     "crossing": "Thousand Islands Bridge",
+     "border": "Canadian Border",
+     "state": "NY",
+     "peakMin": 20,
+     "secondMin": 20,
+     "spike": false,
+     "peakLocal": "Saturday 11 AM",
+     "avgMin": 8.2,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Buffalo/Niagara Falls",
+     "crossing": "Whirlpool Bridge",
+     "border": "Canadian Border",
+     "state": "NY",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 8 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "MT": [
+    {
+     "port": "Sweetgrass",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "MT",
+     "peakMin": 60,
+     "secondMin": 60,
+     "spike": false,
+     "peakLocal": "Wednesday 6 PM",
+     "avgMin": 8.7,
+     "hoursOverHour": 2,
+     "samples": 120
+    }
+   ],
+   "NM": [
+    {
+     "port": "Santa Teresa",
+     "crossing": "Santa Teresa Port of Entry",
+     "border": "Mexican Border",
+     "state": "NM",
+     "peakMin": 55,
+     "secondMin": 55,
+     "spike": false,
+     "peakLocal": "Saturday 5 PM",
+     "avgMin": 27.3,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Columbus",
+     "crossing": "",
+     "border": "Mexican Border",
+     "state": "NM",
+     "peakMin": 30,
+     "secondMin": 15,
+     "spike": false,
+     "peakLocal": "Thursday 7 AM",
+     "avgMin": 4.3,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "WA": [
+    {
+     "port": "Blaine",
+     "crossing": "Peace Arch",
+     "border": "Canadian Border",
+     "state": "WA",
+     "peakMin": 50,
+     "secondMin": 50,
+     "spike": false,
+     "peakLocal": "Sunday 9 PM",
+     "avgMin": 9.3,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Blaine",
+     "crossing": "Pacific Highway",
+     "border": "Canadian Border",
+     "state": "WA",
+     "peakMin": 45,
+     "secondMin": 45,
+     "spike": false,
+     "peakLocal": "Saturday 12 PM",
+     "avgMin": 7.5,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Lynden",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "WA",
+     "peakMin": 40,
+     "secondMin": 40,
+     "spike": false,
+     "peakLocal": "Saturday 10 AM",
+     "avgMin": 4.9,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Sumas",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "WA",
+     "peakMin": 30,
+     "secondMin": 30,
+     "spike": false,
+     "peakLocal": "Thursday 11 AM",
+     "avgMin": 2.3,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Blaine",
+     "crossing": "Point Roberts",
+     "border": "Canadian Border",
+     "state": "WA",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 5 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "MI": [
+    {
+     "port": "Detroit",
+     "crossing": "Gordie Howe International Bridge ",
+     "border": "Canadian Border",
+     "state": "MI",
+     "peakMin": 45,
+     "secondMin": 30,
+     "spike": false,
+     "peakLocal": "Monday 1 PM",
+     "avgMin": 6.8,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Port Huron",
+     "crossing": "Bluewater Bridge",
+     "border": "Canadian Border",
+     "state": "MI",
+     "peakMin": 35,
+     "secondMin": 35,
+     "spike": false,
+     "peakLocal": "Monday 5 PM",
+     "avgMin": 4.5,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Detroit",
+     "crossing": "Ambassador Bridge",
+     "border": "Canadian Border",
+     "state": "MI",
+     "peakMin": 25,
+     "secondMin": 25,
+     "spike": false,
+     "peakLocal": "Monday 11 AM",
+     "avgMin": 5.6,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Detroit",
+     "crossing": "Windsor Tunnel",
+     "border": "Canadian Border",
+     "state": "MI",
+     "peakMin": 20,
+     "secondMin": 15,
+     "spike": false,
+     "peakLocal": "Sunday 12 PM",
+     "avgMin": 4.3,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Sault Ste. Marie",
+     "crossing": "International Bridge - SSM",
+     "border": "Canadian Border",
+     "state": "MI",
+     "peakMin": 5,
+     "secondMin": 5,
+     "spike": false,
+     "peakLocal": "Thursday 12 PM",
+     "avgMin": 0.7,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "ME": [
+    {
+     "port": "Jackman",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "ME",
+     "peakMin": 45,
+     "secondMin": 30,
+     "spike": false,
+     "peakLocal": "Monday 1 PM",
+     "avgMin": 2.5,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Houlton",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "ME",
+     "peakMin": 35,
+     "secondMin": 30,
+     "spike": false,
+     "peakLocal": "Friday 1 PM",
+     "avgMin": 3.1,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Madawaska",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "ME",
+     "peakMin": 30,
+     "secondMin": 25,
+     "spike": false,
+     "peakLocal": "Friday 3 PM",
+     "avgMin": 2.1,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Calais",
+     "crossing": "International Avenue",
+     "border": "Canadian Border",
+     "state": "ME",
+     "peakMin": 5,
+     "secondMin": 5,
+     "spike": false,
+     "peakLocal": "Thursday 12 PM",
+     "avgMin": 0.2,
+     "hoursOverHour": 0,
+     "samples": 120
+    },
+    {
+     "port": "Calais",
+     "crossing": "Milltown",
+     "border": "Canadian Border",
+     "state": "ME",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 8 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "ND": [
+    {
+     "port": "Pembina",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "ND",
+     "peakMin": 18,
+     "secondMin": 16,
+     "spike": false,
+     "peakLocal": "Friday 11 AM",
+     "avgMin": 2.1,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ],
+   "MN": [
+    {
+     "port": "International Falls",
+     "crossing": "",
+     "border": "Canadian Border",
+     "state": "MN",
+     "peakMin": 0,
+     "secondMin": 0,
+     "spike": false,
+     "peakLocal": "Wednesday 7 PM",
+     "avgMin": 0,
+     "hoursOverHour": 0,
+     "samples": 120
+    }
+   ]
+  },
+  "unknownPorts": []
+ },
+ "bridges": {
+  "total": 213,
+  "list": [
+   {
+    "bridge": "fremont",
+    "raises": 86,
+    "medianMin": 4,
+    "longestMin": 10
+   },
+   {
+    "bridge": "ballard",
+    "raises": 73,
+    "medianMin": 4,
+    "longestMin": 8
+   },
+   {
+    "bridge": "montlake",
+    "raises": 41,
+    "medianMin": 5.9,
+    "longestMin": 9.9
+   },
+   {
+    "bridge": "1st-ave-s",
+    "raises": 8,
+    "medianMin": 10,
+    "longestMin": 20.1
+   },
+   {
+    "bridge": "south-park",
+    "raises": 5,
+    "medianMin": 5.9,
+    "longestMin": 6
+   }
+  ]
+ },
+ "snowIce": {
+  "byState": {
+   "AK": 6,
+   "CO": 9
+  },
+  "distinct": [
+   [
+    "AK|Sag River — Dalton Highway|Fair — Melting snow, Pothole Damage, Rough surface, Slush, Snow on roadway, Unpaved, Wet s",
+    2
+   ],
+   [
+    "CO|US 50 MP 199.35 EB at Monarch Pass|Icy — Surface 17°F",
+    2
+   ],
+   [
+    "CO|US 50 MP 199.35 EB at Monarch Pass|Icy — Surface 18°F",
+    2
+   ],
+   [
+    "AK|Sag River — Dalton Highway|Fair — Frozen slush, Melting snow, Pothole Damage, Rough surface, Slush, Snow on roadway, ",
+    1
+   ],
+   [
+    "AK|Chandalar — Dalton Highway|Fair — Blowing snow, Icy patches, Melting snow, Packed snow, Plowed snow, Pothole Damage, ",
+    1
+   ],
+   [
+    "AK|Chandalar — Dalton Highway|Difficult — Blowing snow, Ice glaze, Melting snow, Packed snow, Plowed snow, Pothole Damag",
+    1
+   ],
+   [
+    "AK|Sag River — Dalton Highway|Fair — Melting snow, Pothole Damage, Rough surface, Slush, Snow on roadway, Surface water ",
+    1
+   ],
+   [
+    "CO|US 50 MP 199.35 EB at Monarch Pass|Icy — Surface 16°F",
+    1
+   ],
+   [
+    "CO|I-70 205.75 Westbound : 0.3 mile East of US-6/CO-9 Silverthorne|Icy — Surface 17°F",
+    1
+   ],
+   [
+    "CO|I-70 MP 237.25 EB : 0.4 miles W of Fall River Rd|Icy — Surface 16°F",
+    1
+   ],
+   [
+    "CO|I-70 234.20 Eastbound at Mountain Street Dumont|Icy — Surface 18°F",
+    1
+   ],
+   [
+    "CO|I-70 MP 232.60 EB : 0.7 miles E of US 40|Icy — Surface 19°F",
+    1
+   ]
+  ]
+ },
+ "holiday": {
+  "count": 7,
+  "examples": [
+   "IA US-136: US-136 — closed",
+   "IN IN-49: IN-49 — closed",
+   "KS US-281: US-281 — local event",
+   "NV NV-321: Parade on SR-321/Pioche Rd  Both Directions from US-93 to Meadow Valley St . Start time: 9/5/2026 6:00 PM.  End time: 9/",
+   "NV NV-321: Parade on SR-321/Pioche Rd  from Meadow Valley St  to Newark St. Start time: 9/5/2026 6:00 PM.  End time: 9/7/2026 1:00 ",
+   "NV NV-321: Parade on SR-321/Pioche Rd  from Newark St  to Ely Valley Mine Rd. Start time: 9/5/2026 6:00 PM.  End time: 9/7/2026 1:0",
+   "NV NV-322: Parade on SR-322/Main St - Ursine Rd  from Pioche Rd  to US-93. Start time: 9/5/2026 6:00 PM.  End time: 9/7/2026 1:00 P"
+  ]
+ },
+ "fireMentions": 52
+}
