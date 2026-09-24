@@ -1471,6 +1471,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://milecheckapp.com/passes/cabbage-hill/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://milecheckapp.com/mountains/</loc>
     <lastmod>2026-09-24</lastmod>
     <priority>0.8</priority>
@@ -1622,6 +1627,16 @@
   </url>
   <url>
     <loc>https://milecheckapp.com/mountains/denali/best-time/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://milecheckapp.com/mountains/rainier/roads/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://milecheckapp.com/mountains/hood/roads/</loc>
     <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>

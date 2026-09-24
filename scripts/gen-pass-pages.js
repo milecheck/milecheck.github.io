@@ -134,38 +134,182 @@ const PASSES = [
   },
 ];
 
+// ---- Mountain-area pages (2026-09-24, Leah) ---------------------------------
+// Same template, `kind:'area'`: every camera, closure, work zone, road report
+// and wildfire within one radius of a point, listed under the map. `out` is the
+// folder under the site root (the Rainier and Hood pages live under the
+// visibility pages in mountains/<key>/, so the two products link each other).
+// `rMi` is MILES. The pass entries above hand `r` to a kilometre comparison in
+// near(); that is left alone so their pages do not change under them.
+// Facts in the copy are cited in comments; nothing here is a guess.
+const AREAS = [
+  {
+    kind: 'area', slug: 'rainier-roads', out: 'mountains/rainier/roads', up: '../../../',
+    url: 'https://milecheckapp.com/mountains/rainier/roads/',
+    name: 'Mount Rainier', route: 'SR 706', state: 'WA', states: ['WA'], stateName: 'Washington',
+    dot: 'WSDOT', credit: 'WSDOT, National Park Service and NIFC via MileCheck',
+    // Summit coordinates from side-projects/mountain-engine/mountains (the visibility pages use the same point).
+    lat: 46.8523, lon: -121.7603, rMi: 30,
+    title: 'Mount Rainier road cameras and conditions right now | MileCheck',
+    desc: 'Live cameras on the roads to Mount Rainier from the National Park Service and WSDOT, with closures, construction, pass reports and wildfires within 30 miles of the summit. No account.',
+    ogTitle: 'Mount Rainier road cameras and conditions | MileCheck',
+    eyebrow: 'SR 706 · SR 410 · SR 123 · US 12 · Washington',
+    h1: 'Mount Rainier road cameras and conditions',
+    hero: `The cameras on the roads to the park, on one map. Paradise, Longmire and Sunrise from the National Park Service, plus WSDOT cameras on SR 410, on US 12 at Packwood and White Pass, and on SR 7 at Elbe. Closures, construction, pass reports and wildfires within 30 miles of the summit sit under the map.`,
+    camLabel: 'live cameras within 30 mi', elev: '5,400 ft', elevLabel: 'Paradise, per the Park Service',
+    dist: '30 mi', distNote: 'radius from the summit', nearWord: 'within 30 miles of the summit', bannerWhere: 'on the roads around Mount Rainier',
+    aboutH: 'The roads to Mount Rainier',
+    lede: `Four state highways reach the park and the National Park Service runs the roads inside it. What each one does in winter, from the agencies that run them.`,
+    segs: [
+      // NPS Paradise page: 5,400 ft, 640 inches of snow a year, road plowed but closes at night in winter.
+      // NPS road status page: all vehicles must carry tire chains November 1 to May 1.
+      { h: 'The road to Paradise (SR 706)', p: `SR 706 ends at the Nisqually entrance. Inside the park the road continues to Longmire and then Paradise, at 5,400 feet. The Park Service plows it in winter but closes it at night, and every vehicle must carry tire chains from November 1 to May 1, whatever the weather that day. Paradise averages 640 inches of snow a year.` },
+      // Elevations: WSDOT/Wikipedia SR 410 (5,430 ft) and SR 123 (4,675 ft). WSDOT news release 2025-10-24: closed for the season. Reopening late May: WSDOT. Sunrise Road season: NPS Sunrise page.
+      { h: 'Chinook Pass and Cayuse Pass close for the winter', p: `SR 410 over Chinook Pass (5,430 feet) and SR 123 over Cayuse Pass (4,675 feet) close every winter for avalanche danger and reopen in late May, depending on the snow. In 2025 WSDOT closed both on October 24. Sunrise Road, which leaves SR 410 at the White River entrance, usually opens in late June or early July and closes in late September or early October.` },
+      // White Pass 4,500 ft, year-round: Wikipedia White Pass. Repaving project: WSDOT news 2026 (started July 13).
+      { h: 'White Pass stays open', p: `US 12 over White Pass (4,500 feet) is the year-round route along the south side of the park, between Packwood and Naches. WSDOT posts chain requirements there in storms. A two-year project repaving 19 miles of US 12 east and west of the pass started in July 2026, so expect work zones in the list below.` },
+      // NPS road status page: Carbon River and Mowich Lake, no public access from SR 165.
+      { h: 'SR 165 to Carbon River and Mowich Lake', p: `The Park Service says there is no public access to Carbon River or Mowich Lake from SR 165. The WSDOT closure on SR 165 shows on the map as a red marker.` },
+    ],
+    driveP: `The cameras and alerts above are the stationary view, the feeds you would check before you leave. In the MileCheck app the nearest camera and your exact mile marker follow you up the road, hands-free on CarPlay and Android Auto, and the mile marker works without a signal.`,
+    faq: [
+      ['Is the road to Paradise open right now?', `The Park Service posts the status of every park road on its <a href="https://www.nps.gov/mora/planyourvisit/road-status.htm" target="_blank" rel="noopener">road status page</a>. Closures on the state highways around the park show on the <a href="#comap">map above</a> as red markers, from WSDOT, and in the closures list under it.`],
+      ['Are chains required to drive to Paradise?', `From November 1 to May 1 every vehicle entering the park must carry tire chains, and rangers can require them on the road above Longmire. The Longmire and Paradise cameras above show the road surface.`],
+      ['Which roads to Mount Rainier close in winter?', `SR 410 over Chinook Pass, SR 123 over Cayuse Pass and Sunrise Road close every winter. The road to Longmire and Paradise stays open by day. US 12 over White Pass and SR 7 to Elbe stay open. Check the <a href="../../../closures/">road closures map</a> for the rest of the state.`],
+      ['Is Mount Rainier visible right now?', `That is a different question from whether the road is open. The <a href="../">visibility page</a> reads the cloud ceilings between you and the summit and answers it for Seattle, Tacoma and the rest of the region, with a three-day forecast.`],
+      ['Where do the cameras come from?', `The Paradise, Longmire and Sunrise cameras are National Park Service webcams and refresh about every minute. The highway cameras are WSDOT. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame. See <a href="../../../cameras/">every highway camera</a> for the rest of your route.`],
+    ],
+    crumbs: [
+      { name: 'MileCheck', item: 'https://milecheckapp.com/' },
+      { name: 'Mountains', item: 'https://milecheckapp.com/mountains/' },
+      { name: 'Mount Rainier', item: 'https://milecheckapp.com/mountains/rainier/' },
+      { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/rainier/roads/' },
+    ],
+    vis: { h: 'Is Mount Rainier visible right now?', p: `Whether the road is open and whether you can see the mountain are different questions. The visibility page reads the cloud ceilings between you and the summit and answers the second one for Seattle, Tacoma and the rest of the region, with a three-day forecast.`, href: '../', cta: 'Check visibility now' },
+    ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on SR 706, SR 410 and US 12, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    related: (up) => `<a href="../">Is Mount Rainier visible right now?</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+  },
+  {
+    kind: 'area', slug: 'hood-roads', out: 'mountains/hood/roads', up: '../../../',
+    url: 'https://milecheckapp.com/mountains/hood/roads/',
+    name: 'Mount Hood', route: 'US 26', state: 'OR', states: ['OR'], stateName: 'Oregon',
+    dot: 'ODOT', credit: 'ODOT and NIFC via MileCheck',
+    lat: 45.3736, lon: -121.6960, rMi: 25,
+    title: 'Mount Hood road cameras and conditions right now | MileCheck',
+    desc: 'Live ODOT cameras on US 26 and OR 35 around Mount Hood, with closures, construction, road reports and wildfires within 25 miles of the summit. No account.',
+    ogTitle: 'Mount Hood road cameras and conditions | MileCheck',
+    eyebrow: 'US 26 · OR 35 · Oregon',
+    h1: 'Mount Hood road cameras and conditions',
+    hero: `ODOT cameras on US 26 from Brightwood up to Government Camp and over the summit, and on OR 35 toward Hood River, on one map. Closures, construction, road reports and wildfires within 25 miles of the summit sit under the map.`,
+    camLabel: 'live cameras within 25 mi', elev: '3,891 ft', elevLabel: 'Government Camp',
+    dist: '25 mi', distNote: 'radius from the summit', nearWord: 'within 25 miles of the summit', bannerWhere: 'on the roads around Mount Hood',
+    aboutH: 'The roads over Mount Hood',
+    lede: `Two highways cross the mountain. Both stay open through winter, and ODOT posts chain and traction-tire requirements on both when conditions call for it.`,
+    segs: [
+      // Government Camp 3,891 ft and 232.5 in of snow a year: Wikipedia, Government Camp, Oregon. Passes: Wikipedia, U.S. Route 26 in Oregon (Wapinitia just under 4,000 ft; Blue Box 4,017 ft).
+      { h: 'US 26 over the mountain', p: `US 26 climbs from Sandy through Rhododendron to Government Camp, at 3,891 feet, then crosses Wapinitia Pass and Blue Box Pass (4,017 feet) on the way to Madras. Government Camp averages 232 inches of snow a year. Timberline, Mt. Hood Skibowl and Summit Pass all turn off this road, so ski weekends put resort traffic on the grade.` },
+      // OR 35: 41.54 mi, Government Camp to Hood River, Bennett Pass 4,647 ft: Wikipedia, Oregon Route 35. Dry side: the visibility page's own season notes.
+      { h: 'OR 35 to Hood River', p: `OR 35 leaves US 26 near Government Camp and runs 42 miles over Bennett Pass (4,647 feet) to Hood River. Mt. Hood Meadows is on this side. Hood River sits on the dry side of the Cascades, and the cameras at Meadows Drive and Parkdale are the ones to check for the east side of the mountain.` },
+      { h: 'Chains and closures', p: `ODOT posts chain and traction-tire requirements on both highways when conditions call for it, and closes them for storms and avalanche control. Requirements change by the hour in a storm. Check the cameras, then follow the signs at the chain-up areas.` },
+    ],
+    driveP: `The cameras and alerts above are the stationary view, the ODOT feeds you would check before you leave. In the MileCheck app the nearest camera and your exact mile marker follow you up the grade, hands-free on CarPlay and Android Auto.`,
+    faq: [
+      ['Is US 26 over Mount Hood open right now?', `Closures and incidents on US 26 and OR 35 show on the <a href="#comap">map above</a> as red and orange markers, from ODOT, and in the closures list under it. <a href="https://tripcheck.com" target="_blank" rel="noopener">TripCheck</a> is ODOT's own page.`],
+      ['Are chains required on Mount Hood?', `When ODOT posts them. The signs at the chain-up areas on US 26 and OR 35 carry the current requirement. The Government Camp and Meadows Drive cameras above show the road surface before you commit to the climb.`],
+      ['How high is the road over Mount Hood?', `Government Camp on US 26 is 3,891 feet. Bennett Pass on OR 35 is 4,647 feet. Blue Box Pass, on US 26 south of the OR 35 junction, is 4,017 feet.`],
+      ['Is Mount Hood visible right now?', `A different question from whether the road is open. The <a href="../">visibility page</a> reads the cloud ceilings between you and the summit and answers it for Portland, Hood River and the rest of the region, with a three-day forecast.`],
+      ['Where do the cameras come from?', `All of the cameras on this page come from ODOT's TripCheck feed. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame. See <a href="../../../cameras/">every highway camera</a> for the rest of your route.`],
+    ],
+    crumbs: [
+      { name: 'MileCheck', item: 'https://milecheckapp.com/' },
+      { name: 'Mountains', item: 'https://milecheckapp.com/mountains/' },
+      { name: 'Mount Hood', item: 'https://milecheckapp.com/mountains/hood/' },
+      { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/hood/roads/' },
+    ],
+    vis: { h: 'Is Mount Hood visible right now?', p: `Whether the road is open and whether you can see the mountain are different questions. The visibility page reads the cloud ceilings between you and the summit and answers the second one for Portland, Hood River and the rest of the region, with a three-day forecast.`, href: '../', cta: 'Check visibility now' },
+    ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on US 26 and OR 35, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    related: (up) => `<a href="../">Is Mount Hood visible right now?</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+  },
+  {
+    kind: 'area', slug: 'cabbage-hill', out: 'passes/cabbage-hill', up: '../../',
+    url: 'https://milecheckapp.com/passes/cabbage-hill/',
+    name: 'Cabbage Hill', route: 'I-84', state: 'OR', states: ['OR'], stateName: 'Oregon',
+    dot: 'ODOT', credit: 'ODOT and NIFC via MileCheck',
+    // Centre = the I-84 milepost 222 point in the bundled Oregon corpus, mid-grade.
+    lat: 45.5809, lon: -118.6331, rMi: 15,
+    title: 'Cabbage Hill Cameras &amp; Conditions Right Now (I-84) | MileCheck',
+    desc: 'Live ODOT cameras on the Cabbage Hill grade of I-84 east of Pendleton, with closures, construction, road reports and wildfires within 15 miles. The runaway ramps, the chain-up area and Deadman Pass on one map. No account.',
+    ogTitle: 'Cabbage Hill Right Now: Live Cameras &amp; Conditions (I-84) | MileCheck',
+    eyebrow: 'I-84 · Oregon · MP 217 to 227',
+    h1: 'Cabbage Hill right now: live cameras &amp; conditions',
+    hero: `ODOT cameras on the I-84 grade east of Pendleton, from the Mission interchange up to Deadman Pass and on to Meacham. The chain-up area, the runaway truck ramps and the summit on one map, with closures, construction, road reports and wildfires within 15 miles.`,
+    // 3,565 ft: USGS elevation query at the corpus milepost 227 point, 2026-09-24.
+    camLabel: 'live cameras within 15 mi', elev: '3,565 ft', elevLabel: 'I-84 at MP 227, per USGS',
+    dist: '6%', distNote: 'signed downgrade, MP 227 to 217', nearWord: 'within 15 miles of the hill', bannerWhere: 'on I-84 over Cabbage Hill',
+    aboutH: 'About Cabbage Hill',
+    // Every figure below is from ODOT's Emigrant Hill brochure for truck drivers (Form 735-9825a): oregon.gov/ODOT/MCT/Documents/emigranthill.pdf
+    lede: `Emigrant Hill is the official name. Drivers call it Cabbage Hill, and the summit is Deadman Pass. ODOT's brochure for truck drivers is the best short description of it, and every figure below is from that brochure.`,
+    segs: [
+      { h: 'The grade', p: `Westbound, the 6 percent downgrade begins at milepost 227 and continues through milepost 217. In ODOT's words, you lose about 2,000 feet of elevation in six miles and twist through a double hairpin turn. There is a brake check area at the weigh station at milepost 227 and runaway truck ramps at mileposts 221 and 220.` },
+      { h: 'The weather', p: `ODOT says the hill has some of the most changeable and severe weather conditions in the Northwest. Fog, snow and black ice are common between October and April. Oregon law requires you to carry and use tire chains when conditions warrant or signs are posted, and the eastbound chain-up area is at milepost 217, at the bottom of the hill.` },
+      { h: 'The crashes', p: `On average 78 percent of the crashes on Cabbage Hill involve out-of-state motor carriers, and brake problems contribute to 59 percent of them, by ODOT's count. Posted speeds on the descent are maximums for good weather.` },
+    ],
+    driveP: `The cameras and alerts above are the stationary view, the ODOT feeds you would check before you leave Pendleton or La Grande. In the MileCheck app the nearest camera and your exact mile marker follow you down the grade, hands-free on CarPlay and Android Auto, so you know which ramp is next.`,
+    faq: [
+      ['Is Cabbage Hill open right now?', `Closures and incidents on I-84 between Pendleton and Meacham show on the <a href="#comap">map above</a> as red and orange markers, from ODOT, and in the closures list under it. See every ODOT camera on the <a href="../../cameras/oregon/">Oregon cameras page</a>, or the whole country on the <a href="../../closures/">US closures map</a>.`],
+      ['Are chains required on Cabbage Hill?', `When ODOT posts them. The eastbound chain-up area is at milepost 217. The Cabbage Hill cameras at mileposts 220 to 223 show the road surface on the grade.`],
+      ['How steep is Cabbage Hill?', `The signed downgrade is 6 percent, from milepost 227 down to milepost 217, with a double hairpin. ODOT puts the drop at about 2,000 feet in six miles. Runaway truck ramps sit at mileposts 221 and 220.`],
+      ['Where is Cabbage Hill?', `On I-84 east of Pendleton, Oregon, between the Mission interchange and Meacham, 35 miles west of La Grande. Track your exact mile marker on the hill with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
+    ],
+    ctaH: 'Watch the descent, live, hands-free', ctaP: `MileCheck shows your exact mile marker in real time as you drive I-84 over Cabbage Hill, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    related: (up) => `<a href="../">all mountain passes</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+  },
+];
+
 function faqJsonLd(p){
   return JSON.stringify({ '@context':'https://schema.org','@type':'FAQPage','mainEntity':
     p.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}})) });
 }
 function breadcrumbJsonLd(p){
-  return JSON.stringify({ '@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[
-    {'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},
-    {'@type':'ListItem','position':2,'name':'Mountain Passes','item':'https://milecheckapp.com/passes/'},
-    {'@type':'ListItem','position':3,'name':p.name,'item':'https://milecheckapp.com/passes/'+p.slug+'/'} ] });
+  const items = p.crumbs || [
+    {name:'MileCheck',item:'https://milecheckapp.com/'},
+    {name:'Mountain Passes',item:'https://milecheckapp.com/passes/'},
+    {name:p.name,item:'https://milecheckapp.com/passes/'+p.slug+'/'} ];
+  return JSON.stringify({ '@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':
+    items.map((c,i)=>({'@type':'ListItem','position':i+1,'name':c.name,'item':c.item})) });
 }
 
 function page(p){
   const faqHtml = p.faq.map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
+  // Area pages (kind:'area') sit at a different depth and carry their own copy;
+  // every default below reproduces the pass page exactly.
+  const isArea = p.kind === 'area';
+  const up = p.up || '../../';
+  const url = p.url || `https://milecheckapp.com/passes/${p.slug}/`;
+  const credit = p.credit || p.dot;
+  const segs = p.segs || [{ h: 'When it closes', p: p.closes }, p.extra];
+  const segsHtml = segs.map(s=>`    <div class="co-seg"><h3>${s.h}</h3><p>${s.p}</p></div>`).join('\n');
+  const relatedHtml = typeof p.related === 'function' ? p.related(up)
+    : `More passes &amp; routes: <a href="../">all mountain passes</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}maps/">all maps</a>`;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${p.name} Camera &amp; Conditions Right Now (${p.route}) | MileCheck</title>
-  <meta name="description" content="Live ${p.name} cameras and real-time road conditions on ${p.route} — see snow, chains, and closures before you drive it. ${p.dot} cameras, tagged with mile marker. Free, no account.">
-  <link rel="canonical" href="https://milecheckapp.com/passes/${p.slug}/">
-  <meta property="og:title" content="${p.name} Right Now — Live Camera &amp; Conditions | MileCheck">
-  <meta property="og:description" content="Live ${p.route} ${p.name} cameras and conditions. See the pass before you drive it — snow, chains, and closures in real time.">
+  <title>${p.title || `${p.name} Camera &amp; Conditions Right Now (${p.route}) | MileCheck`}</title>
+  <meta name="description" content="${p.desc || `Live ${p.name} cameras and real-time road conditions on ${p.route} — see snow, chains, and closures before you drive it. ${p.dot} cameras, tagged with mile marker. Free, no account.`}">
+  <link rel="canonical" href="${url}">
+  <meta property="og:title" content="${p.ogTitle || `${p.name} Right Now — Live Camera &amp; Conditions | MileCheck`}">
+  <meta property="og:description" content="${p.desc || `Live ${p.route} ${p.name} cameras and conditions. See the pass before you drive it — snow, chains, and closures in real time.`}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
-  <meta property="og:url" content="https://milecheckapp.com/passes/${p.slug}/">
+  <meta property="og:url" content="${url}">
   <meta property="og:type" content="website">
-  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="icon" type="image/png" href="${up}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="${up}style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
@@ -196,6 +340,7 @@ function page(p){
     .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
     .co-layer input:checked+.co-sw.alr{background:#DC2626;}
     .co-layer input:checked+.co-sw.poi{background:#7C3AED;}
+    .co-layer input:checked+.co-sw.fire{background:#EA580C;}
     .co-layer input:checked+.co-sw::after{left:16px;}
     .co-layer input:focus-visible+.co-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
     .co-layer .co-dot{margin-left:2px;}
@@ -235,6 +380,23 @@ function page(p){
     .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
     .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
     .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-vis{background:linear-gradient(135deg,#f2f4ff,#ffffff);margin-bottom:0;}
+    .co-lists{max-width:1000px;margin:26px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr;gap:14px;}
+    .co-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px 20px;}
+    .co-list h2{font-size:20px;margin:0;display:flex;align-items:baseline;gap:10px;}
+    .co-list h2 .cnt{font-size:13px;font-weight:700;color:#0f7a4f;background:#eaf7f0;border-radius:999px;padding:2px 9px;}
+    .co-list .hint{color:#5b6670;font-size:13.5px;margin:4px 0 6px;line-height:1.5;}
+    .co-list ul{list-style:none;margin:0;padding:0;}
+    .co-list li{border-top:1px solid #F0F0F0;padding:10px 0;font-size:14.5px;line-height:1.5;color:#0E1116;}
+    .co-list li:first-child{border-top:0;}
+    .co-list li .m{color:#5b6670;font-size:13px;display:block;}
+    .co-list li .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 6px;margin-right:6px;color:#fff;background:#6B7280;vertical-align:1px;}
+    .co-list li .tag.cl,.co-list li .tag.ac{background:#DC2626;} .co-list li .tag.rw{background:#B45309;} .co-list li .tag.we{background:#2563EB;} .co-list li .tag.hz{background:#F97316;}
+    .co-list li .tag.fire{background:#EA580C;} .co-list li .tag.rx{background:#6B7280;} .co-list li .tag.nps{background:#7C3AED;} .co-list li .tag.dot{background:#0f7a4f;}
+    .co-list .empty{color:#5b6670;font-size:14px;}
+    .lst-tools{margin:0 0 8px;}
+    .lst-tools button,.co-list li button{border:1px solid #0F1419;background:#fff;border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:#0F1419;}
+    .co-list li img{display:block;width:100%;max-width:640px;border-radius:8px;margin-top:8px;background:#f0f0ee;min-height:40px;}
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} }
   </style>
 </head>
@@ -242,17 +404,17 @@ function page(p){
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <a href="${up}index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="${up}assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
       <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <nav class="primary-nav">
-        <a href="../../index.html">Home</a>
-        <a href="../../maps/" class="active">Maps</a>
-        <a href="../../cameras/">Cameras</a>
-        <a href="../../states/">United States</a>
-        <a href="../../canada/">Canada</a>
-        <a href="../../index.html#story">Story</a>
-        <a href="../../index.html#b2b">B2B</a>
-        <a href="../../blog/">Blog</a>
+        <a href="${up}index.html">Home</a>
+        <a href="${up}maps/" class="active">Maps</a>
+        <a href="${up}cameras/">Cameras</a>
+        <a href="${up}states/">United States</a>
+        <a href="${up}canada/">Canada</a>
+        <a href="${up}index.html#story">Story</a>
+        <a href="${up}index.html#b2b">B2B</a>
+        <a href="${up}blog/">Blog</a>
         <a href="/get/" class="nav-cta">Get the app</a>
       </nav>
     </div>
@@ -261,13 +423,13 @@ function page(p){
   <div class="crit-banner" id="critBanner" style="display:none"></div>
 
   <div class="co-hero">
-    <div class="eyebrow">${p.route} · ${p.stateName} · Elevation ${p.elev}</div>
-    <h1>${p.name} right now: live camera &amp; conditions</h1>
+    <div class="eyebrow">${p.eyebrow || `${p.route} · ${p.stateName} · Elevation ${p.elev}`}</div>
+    <h1>${p.h1 || `${p.name} right now: live camera &amp; conditions`}</h1>
     <p class="sub">${p.hero}</p>
     <div class="co-stats">
-      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras near the pass</div></div>
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">${p.camLabel || 'live cameras near the pass'}</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
-      <div class="co-stat"><div class="n">${p.elev}</div><div class="l">summit elevation</div></div>
+      <div class="co-stat"><div class="n">${p.elev}</div><div class="l">${p.elevLabel || 'summit elevation'}</div></div>
       <div class="co-stat"><div class="n">${p.dist}</div><div class="l">${p.distNote}</div></div>
     </div>
   </div>
@@ -278,19 +440,27 @@ function page(p){
       <div class="co-layers" role="group" aria-label="Map layers">
         <div class="lt">Map layers</div>
         <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
-        <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
+        <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>${isArea ? `
+        <label class="co-layer"><input type="checkbox" id="tgFire" checked><span class="co-sw fire"></span><span class="co-dot" style="background:#EA580C"></span>Wildfires</label>` : ''}
       </div>
       <div class="co-bs" id="coStatus">Loading live ${p.name} data…</div>
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
+${isArea ? `
+  <section class="co-lists" aria-label="Conditions within ${p.rMi} miles">
+    <div class="co-list co-list-cams" id="lstCams"><h2>Cameras</h2><p class="hint">Every camera in the feed within ${p.rMi} miles. Tap one to load its latest frame. Park camera frames are large, about 1.5 MB each.</p><div class="lst-tools"><button type="button" id="btnAllCams">Show every camera</button></div><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstSnow"><h2>Snow and ice</h2><p class="hint">Road-surface and pass reports within ${p.rMi} miles, as ${p.dot} posts them, plus weather alerts.</p><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstFire"><h2>Wildfires</h2><p class="hint">Active fires within ${p.rMi} miles, from the national NIFC feed, nearest first. Prescribed burns are marked.</p><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstClos"><h2>Closures and incidents</h2><p class="hint">Closures, crashes and hazards within ${p.rMi} miles, from ${p.dot}. Full closures are marked in red.</p><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstWork"><h2>Construction</h2><p class="hint">Work zones and lane restrictions within ${p.rMi} miles.</p><ul><li class="empty">Loading.</li></ul></div>
+  </section>` : ''}
 
   <section class="co-guide">
-    <h2>About ${p.name}</h2>
-    <p class="lede">${p.name} carries ${p.route} over the ${p.range} at ${p.elev}. Here's what to watch, and when it bites.</p>
-    <div class="co-seg"><h3>When it closes</h3><p>${p.closes}</p></div>
-    <div class="co-seg"><h3>${p.extra.h}</h3><p>${p.extra.p}</p></div>
-    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the stationary view — the ${p.dot} feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.</p></div>
+    <h2>${p.aboutH || `About ${p.name}`}</h2>
+    <p class="lede">${p.lede || `${p.name} carries ${p.route} over the ${p.range} at ${p.elev}. Here's what to watch, and when it bites.`}</p>
+${segsHtml}
+    <div class="co-seg"><h3>Watch it live while you drive</h3><p>${p.driveP || `The cameras and alerts above are the stationary view — the ${p.dot} feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.`}</p></div>
   </section>
 
   <section class="co-faq">
@@ -298,22 +468,31 @@ function page(p){
 ${faqHtml}
   </section>
 
+${p.vis ? `
+  <div class="co-cta co-vis">
+    <h2>${p.vis.h}</h2>
+    <p>${p.vis.p}</p>
+    <div class="btns">
+      <a class="primary" href="${p.vis.href}">${p.vis.cta}</a>
+      <a class="ghost" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" target="_blank" rel="noopener">Mountain Visibility Forecast on the App Store</a>
+    </div>
+  </div>` : ''}
   <div class="co-cta">
-    <h2>Watch the climb — live, hands-free</h2>
-    <p>MileCheck shows your exact mile marker in real time as you drive ${p.route} over ${p.name}, plus the nearest camera and any alert on your route. Free to start, works offline, and runs on CarPlay and Android Auto.</p>
+    <h2>${p.ctaH || 'Watch the climb — live, hands-free'}</h2>
+    <p>${p.ctaP || `MileCheck shows your exact mile marker in real time as you drive ${p.route} over ${p.name}, plus the nearest camera and any alert on your route. Free to start, works offline, and runs on CarPlay and Android Auto.`}</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
     </div>
   </div>
 
-  <p class="co-related">More passes &amp; routes: <a href="../">all mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../closures/">road closures</a> · <a href="../../maps/">all maps</a></p>
+  <p class="co-related">${relatedHtml}</p>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="${up}assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
           <p class="footer-tagline">Mile markers in all 50 US states.</p>
         </div>
         <div class="footer-col">
@@ -326,10 +505,10 @@ ${faqHtml}
         <div class="footer-col">
           <p class="footer-label">Live maps</p>
           <ul class="footer-list">
-            <li><a href="../../cameras/">Highway cameras</a></li>
-            <li><a href="../../closures/">Road closures map</a></li>
-            <li><a href="../../fire/">Wildfire map</a></li>
-            <li><a href="../../maps/">All maps</a></li>
+            <li><a href="${up}cameras/">Highway cameras</a></li>
+            <li><a href="${up}closures/">Road closures map</a></li>
+            <li><a href="${up}fire/">Wildfire map</a></li>
+            <li><a href="${up}maps/">All maps</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -340,7 +519,7 @@ ${faqHtml}
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: ${p.dot} via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: ${credit}. Always drive to conditions and follow posted signs.</p>
     </div>
   </footer>
 
@@ -348,7 +527,7 @@ ${faqHtml}
 
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
-const PASS={state:'${p.state}',lat:${p.lat},lon:${p.lon},radiusKm:${p.r},route:'${p.route}'};
+const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea}};
 function km(a,b,c,d){const R=6371,pi=Math.PI/180;const x=Math.sin((c-a)*pi/2)**2+Math.cos(a*pi)*Math.cos(c*pi)*Math.sin((d-b)*pi/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
 function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon,lat,lon)<=PASS.radiusKm;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
@@ -357,33 +536,64 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map
 map.setView([PASS.lat,PASS.lon],11);
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
-let CAMS=[], ALERTS=[], showCam=true, showAlr=true;
+const fireLayer=L.layerGroup().addTo(map);
+let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], showCam=true, showAlr=true, showFire=true;
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
-async function loadCams(){const d=await fetchJSON(WORKER+'/cameras?state='+PASS.state,3);return ((d&&d.cameras)||[]).filter(c=>c.isActive!==false&&c.imageUrl&&near(+c.lat,+c.lon)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl}));}
-async function loadAlerts(){const d=await fetchJSON(WORKER+'/incidents?state='+PASS.state,3);return ((d&&d['incident-reports'])||[]).filter(a=>{const sl=a.location&&a.location['start-location'];return sl&&near(+sl['start-lat'],+sl['start-long']);}).map(a=>{const sl=a.location['start-location'];return {lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:(a.headline||a.description||a['impact-desc']||'Incident').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim().slice(0,140),desc:(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim().slice(0,240),route:a.location&&a.location['route-id']};});}
+function clean(t,n){return String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim().slice(0,n);}
+async function loadCams(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);for(const c of ((d&&d.cameras)||[])){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
+async function loadAlerts(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);for(const a of ((d&&d['incident-reports'])||[])){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
+async function loadConds(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/conditions?state='+st,3);for(const r of ((d&&d['road-weather-reports'])||[])){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr});}}return out;}
+async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const d=await fetchJSON(WORKER+'/fires?bbox='+bb,3);return ((d&&d.fires)||[]).filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
 const cardEl=document.getElementById('coCard');
 function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closure':'');cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
-function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||PASS.route)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · ${p.dot}</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
+function bust(u){return u+(u.includes('?')?'&':'?')+'t='+Date.now();}
+function camCard(c){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||PASS.route)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+(c.src||'${p.dot}')+(c.park?' · '+esc(c.park):'')+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust(c.img)+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
+function fireCard(f){return '<div class="cc-title">'+esc(f.name)+(f.rx?' (prescribed burn)':'')+'</div><div class="cc-meta">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away'+'</div>';}
 function alrCard(a){return '<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+esc(a.route||PASS.route)+(a.mp>0?' · MP '+Math.round(a.mp):'')+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
-function draw(){camLayer.clearLayers();alrLayer.clearLayers();if(showCam)CAMS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(6),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' near the pass':'Toggle a layer to view pass data';}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();if(showCam)CAMS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+FIRES.length+' fires');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' ${p.nearWord || 'near the pass'}':'Toggle a layer to view ${isArea ? 'the area' : 'pass'} data';}
+const TAGS={CL:['cl','Closed'],AC:['ac','Crash'],RW:['rw','Work'],WE:['we','Weather'],HZ:['hz','Hazard'],IN:['ac','Incident'],OT:['ot','Alert']};
+function tag(k,label){return '<span class="tag '+k+'">'+label+'</span>';}
+function alrLi(a){const t=TAGS[a.type]||TAGS.OT;const full=isFullClosure(a);return '<li>'+tag(full?'cl':t[0],full?'Closed':t[1])+esc(a.title)+'<span class="m">'+esc(a.route||'')+(a.mp>0?' · MP '+Math.round(a.mp):'')+(a.desc&&a.desc!==a.title?' · '+esc(a.desc):'')+'</span></li>';}
+function setList(id,items,empty){const el=document.getElementById(id);if(!el)return;const h=el.querySelector('h2');let c=h.querySelector('.cnt');if(!c){c=document.createElement('span');c.className='cnt';h.appendChild(c);}c.textContent=items.length;el.querySelector('ul').innerHTML=items.length?items.join(''):'<li class="empty">'+empty+'</li>';}
+function loadCamImg(li,c){let img=li.querySelector('img');if(!img){img=document.createElement('img');img.alt='Live: '+c.title;img.loading='lazy';li.appendChild(img);}img.src=bust(c.img);li.querySelector('button').textContent='Refresh';}
+function renderLists(){
+  const camItems=CAMS.map((c,i)=>'<li data-i="'+i+'">'+tag(c.src?'nps':'dot',c.src||'${p.dot}')+esc(c.title)+' <button type="button">Show</button><span class="m">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+(c.park?' · '+esc(c.park):'')+'</span></li>');
+  setList('lstCams',camItems,'No cameras in the feed for this area right now.');
+  document.querySelectorAll('#lstCams li[data-i] button').forEach(b=>{b.onclick=()=>{const li=b.closest('li');loadCamImg(li,CAMS[+li.dataset.i]);};});
+  const all=document.getElementById('btnAllCams');if(all)all.onclick=()=>{document.querySelectorAll('#lstCams li[data-i]').forEach(li=>loadCamImg(li,CAMS[+li.dataset.i]));all.textContent='Refresh every camera';};
+  const snow=CONDS.map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
+  setList('lstSnow',snow,'No snow, ice or pass reports for this area right now.');
+  const fires=FIRES.map(f=>'<li>'+tag(f.rx?'rx':'fire',f.rx?'Prescribed':'Fire')+esc(f.name)+'<span class="m">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away</span></li>');
+  setList('lstFire',fires,'No active fires within '+Math.round(PASS.radiusKm/1.609344)+' miles in the NIFC feed.');
+  const clos=ALERTS.filter(a=>a.type!=='RW'&&a.type!=='WE').sort((a,b)=>(isFullClosure(b)-isFullClosure(a))).map(alrLi);
+  setList('lstClos',clos,'No closures, crashes or hazards reported in this area right now.');
+  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi);
+  setList('lstWork',work,'No work zones reported in this area right now.');
+}
 L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">▲</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('${p.name} · ${p.elev}',{direction:'top',offset:[0,-12]}).addTo(map);
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
+const tgFire=document.getElementById('tgFire');if(tgFire)tgFire.onchange=e=>{showFire=e.target.checked;draw();};
 function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
-Promise.all([loadCams(),loadAlerts()]).then(([c,a])=>{CAMS=c;ALERTS=a;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();const fc=ALERTS.filter(isFullClosure);if(fc.length){const f=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML='⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' on ${p.route}'+(f.mp>0?' near MP '+Math.round(f.mp):'')+'. Tap a red marker for details.';bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([])]).then(([c,a,w,f])=>{CAMS=c;ALERTS=a;CONDS=w;FIRES=f;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();if(PASS.area)renderLists();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within ${p.rMi || ''} miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' ${p.bannerWhere || `on ${p.route}`}'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
 </script>
 
 </body>
 </html>`;
 }
 
+// Optional slugs on the command line write only those pages, e.g.
+//   node scripts/gen-pass-pages.js cabbage-hill rainier-roads
+// No slugs = every pass and area page, as before.
+const only=process.argv.slice(2);
 let n=0;
-for(const p of PASSES){
-  const dir=path.join('passes',p.slug);
+for(const p of [...PASSES, ...AREAS]){
+  if(only.length&&!only.includes(p.slug))continue;
+  const dir=p.out||path.join('passes',p.slug);
   fs.mkdirSync(dir,{recursive:true});
   fs.writeFileSync(path.join(dir,'index.html'),page(p));
   n++;
-  console.log('wrote passes/'+p.slug+'/index.html  ('+p.name+', '+p.route+')');
+  console.log('wrote '+dir+'/index.html  ('+p.name+', '+p.route+')');
 }
-console.log('\nGenerated '+n+' pass pages.');
+console.log('\nGenerated '+n+' page'+(n===1?'':'s')+'.');

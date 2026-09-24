@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mount Rainier road cameras and conditions right now | MileCheck</title>
+  <meta name="description" content="Live cameras on the roads to Mount Rainier from the National Park Service and WSDOT, with closures, construction, pass reports and wildfires within 30 miles of the summit. No account.">
+  <link rel="canonical" href="https://milecheckapp.com/mountains/rainier/roads/">
+  <meta property="og:title" content="Mount Rainier road cameras and conditions | MileCheck">
+  <meta property="og:description" content="Live cameras on the roads to Mount Rainier from the National Park Service and WSDOT, with closures, construction, pass reports and wildfires within 30 miles of the summit. No account.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/mountains/rainier/roads/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the road to Paradise open right now?","acceptedAnswer":{"@type":"Answer","text":"The Park Service posts the status of every park road on its road status page. Closures on the state highways around the park show on the map above as red markers, from WSDOT, and in the closures list under it."}},{"@type":"Question","name":"Are chains required to drive to Paradise?","acceptedAnswer":{"@type":"Answer","text":"From November 1 to May 1 every vehicle entering the park must carry tire chains, and rangers can require them on the road above Longmire. The Longmire and Paradise cameras above show the road surface."}},{"@type":"Question","name":"Which roads to Mount Rainier close in winter?","acceptedAnswer":{"@type":"Answer","text":"SR 410 over Chinook Pass, SR 123 over Cayuse Pass and Sunrise Road close every winter. The road to Longmire and Paradise stays open by day. US 12 over White Pass and SR 7 to Elbe stay open. Check the road closures map for the rest of the state."}},{"@type":"Question","name":"Is Mount Rainier visible right now?","acceptedAnswer":{"@type":"Answer","text":"That is a different question from whether the road is open. The visibility page reads the cloud ceilings between you and the summit and answers it for Seattle, Tacoma and the rest of the region, with a three-day forecast."}},{"@type":"Question","name":"Where do the cameras come from?","acceptedAnswer":{"@type":"Answer","text":"The Paradise, Longmire and Sunrise cameras are National Park Service webcams and refresh about every minute. The highway cameras are WSDOT. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame. See every highway camera for the rest of your route."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Mountains","item":"https://milecheckapp.com/mountains/"},{"@type":"ListItem","position":3,"name":"Mount Rainier","item":"https://milecheckapp.com/mountains/rainier/"},{"@type":"ListItem","position":4,"name":"Road cameras and conditions","item":"https://milecheckapp.com/mountains/rainier/roads/"}]}</script>
+  <style>
+    .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
+    .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
+    .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
+    .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .co-stat .n.live{color:#0f7a4f;}
+    .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    /* Map layers panel — Leah 9-16: the two pills above the map read as labels, not
+       switches ("didn't realize I could click them on/off"). A settings bar on the left
+       edge of the map, with real on/off switches, under Leaflet's zoom control. */
+    .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:196px;font-size:13.5px;}
+    .co-layers .lt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 4px;}
+    .co-layer{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
+    .co-layer input{position:absolute;opacity:0;width:0;height:0;}
+    .co-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+    .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
+    .co-layer input:checked+.co-sw.alr{background:#DC2626;}
+    .co-layer input:checked+.co-sw.poi{background:#7C3AED;}
+    .co-layer input:checked+.co-sw.fire{background:#EA580C;}
+    .co-layer input:checked+.co-sw::after{left:16px;}
+    .co-layer input:focus-visible+.co-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
+    .co-layer .co-dot{margin-left:2px;}
+    @media(max-width:600px){ .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} }
+    .co-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+    .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
+    .campic{width:100%;border-radius:8px;margin-top:6px;display:block;min-height:40px;background:#f0f0ee;}
+    .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
+    .crit-banner a{color:#fff;text-decoration:underline;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card.closure{border:2px solid #DC2626;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card .cc-desc{font-size:13.5px;color:#3a444d;margin-top:8px;line-height:1.5;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .poi-icon{color:#7C3AED;font-size:24px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;cursor:pointer;font-weight:900;}
+    .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
+    .co-guide h2{font-size:26px;margin:0 0 6px;}
+    .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
+    .co-seg{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px 22px;margin-bottom:14px;}
+    .co-seg h3{font-size:19px;margin:0 0 4px;}
+    .co-seg p{color:#3a444d;font-size:15px;line-height:1.6;margin:8px 0 0;}
+    .co-faq{max-width:1000px;margin:34px auto 0;padding:0 20px;}
+    .co-faq h2{font-size:24px;margin:0 0 14px;}
+    .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .co-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-faq a:hover{text-decoration:underline;}
+    .co-cta{max-width:1000px;margin:34px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;}
+    .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-vis{background:linear-gradient(135deg,#f2f4ff,#ffffff);margin-bottom:0;}
+    .co-lists{max-width:1000px;margin:26px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr;gap:14px;}
+    .co-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px 20px;}
+    .co-list h2{font-size:20px;margin:0;display:flex;align-items:baseline;gap:10px;}
+    .co-list h2 .cnt{font-size:13px;font-weight:700;color:#0f7a4f;background:#eaf7f0;border-radius:999px;padding:2px 9px;}
+    .co-list .hint{color:#5b6670;font-size:13.5px;margin:4px 0 6px;line-height:1.5;}
+    .co-list ul{list-style:none;margin:0;padding:0;}
+    .co-list li{border-top:1px solid #F0F0F0;padding:10px 0;font-size:14.5px;line-height:1.5;color:#0E1116;}
+    .co-list li:first-child{border-top:0;}
+    .co-list li .m{color:#5b6670;font-size:13px;display:block;}
+    .co-list li .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 6px;margin-right:6px;color:#fff;background:#6B7280;vertical-align:1px;}
+    .co-list li .tag.cl,.co-list li .tag.ac{background:#DC2626;} .co-list li .tag.rw{background:#B45309;} .co-list li .tag.we{background:#2563EB;} .co-list li .tag.hz{background:#F97316;}
+    .co-list li .tag.fire{background:#EA580C;} .co-list li .tag.rx{background:#6B7280;} .co-list li .tag.nps{background:#7C3AED;} .co-list li .tag.dot{background:#0f7a4f;}
+    .co-list .empty{color:#5b6670;font-size:14px;}
+    .lst-tools{margin:0 0 8px;}
+    .lst-tools button,.co-list li button{border:1px solid #0F1419;background:#fff;border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:#0F1419;}
+    .co-list li img{display:block;width:100%;max-width:640px;border-radius:8px;margin-top:8px;background:#f0f0ee;min-height:40px;}
+    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../../index.html">Home</a>
+        <a href="../../../maps/" class="active">Maps</a>
+        <a href="../../../cameras/">Cameras</a>
+        <a href="../../../states/">United States</a>
+        <a href="../../../canada/">Canada</a>
+        <a href="../../../index.html#story">Story</a>
+        <a href="../../../index.html#b2b">B2B</a>
+        <a href="../../../blog/">Blog</a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="crit-banner" id="critBanner" style="display:none"></div>
+
+  <div class="co-hero">
+    <div class="eyebrow">SR 706 · SR 410 · SR 123 · US 12 · Washington</div>
+    <h1>Mount Rainier road cameras and conditions</h1>
+    <p class="sub">The cameras on the roads to the park, on one map. Paradise, Longmire and Sunrise from the National Park Service, plus WSDOT cameras on SR 410, on US 12 at Packwood and White Pass, and on SR 7 at Elbe. Closures, construction, pass reports and wildfires within 30 miles of the summit sit under the map.</p>
+    <div class="co-stats">
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras within 30 mi</div></div>
+      <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
+      <div class="co-stat"><div class="n">5,400 ft</div><div class="l">Paradise, per the Park Service</div></div>
+      <div class="co-stat"><div class="n">30 mi</div><div class="l">radius from the summit</div></div>
+    </div>
+  </div>
+
+  <div class="co-wrap">
+    <div style="position:relative;">
+      <div id="comap"></div>
+      <div class="co-layers" role="group" aria-label="Map layers">
+        <div class="lt">Map layers</div>
+        <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
+        <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
+        <label class="co-layer"><input type="checkbox" id="tgFire" checked><span class="co-sw fire"></span><span class="co-dot" style="background:#EA580C"></span>Wildfires</label>
+      </div>
+      <div class="co-bs" id="coStatus">Loading live Mount Rainier data…</div>
+      <div class="co-card" id="coCard"></div>
+    </div>
+  </div>
+
+  <section class="co-lists" aria-label="Conditions within 30 miles">
+    <div class="co-list co-list-cams" id="lstCams"><h2>Cameras</h2><p class="hint">Every camera in the feed within 30 miles. Tap one to load its latest frame. Park camera frames are large, about 1.5 MB each.</p><div class="lst-tools"><button type="button" id="btnAllCams">Show every camera</button></div><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstSnow"><h2>Snow and ice</h2><p class="hint">Road-surface and pass reports within 30 miles, as WSDOT posts them, plus weather alerts.</p><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstFire"><h2>Wildfires</h2><p class="hint">Active fires within 30 miles, from the national NIFC feed, nearest first. Prescribed burns are marked.</p><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstClos"><h2>Closures and incidents</h2><p class="hint">Closures, crashes and hazards within 30 miles, from WSDOT. Full closures are marked in red.</p><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstWork"><h2>Construction</h2><p class="hint">Work zones and lane restrictions within 30 miles.</p><ul><li class="empty">Loading.</li></ul></div>
+  </section>
+
+  <section class="co-guide">
+    <h2>The roads to Mount Rainier</h2>
+    <p class="lede">Four state highways reach the park and the National Park Service runs the roads inside it. What each one does in winter, from the agencies that run them.</p>
+    <div class="co-seg"><h3>The road to Paradise (SR 706)</h3><p>SR 706 ends at the Nisqually entrance. Inside the park the road continues to Longmire and then Paradise, at 5,400 feet. The Park Service plows it in winter but closes it at night, and every vehicle must carry tire chains from November 1 to May 1, whatever the weather that day. Paradise averages 640 inches of snow a year.</p></div>
+    <div class="co-seg"><h3>Chinook Pass and Cayuse Pass close for the winter</h3><p>SR 410 over Chinook Pass (5,430 feet) and SR 123 over Cayuse Pass (4,675 feet) close every winter for avalanche danger and reopen in late May, depending on the snow. In 2025 WSDOT closed both on October 24. Sunrise Road, which leaves SR 410 at the White River entrance, usually opens in late June or early July and closes in late September or early October.</p></div>
+    <div class="co-seg"><h3>White Pass stays open</h3><p>US 12 over White Pass (4,500 feet) is the year-round route along the south side of the park, between Packwood and Naches. WSDOT posts chain requirements there in storms. A two-year project repaving 19 miles of US 12 east and west of the pass started in July 2026, so expect work zones in the list below.</p></div>
+    <div class="co-seg"><h3>SR 165 to Carbon River and Mowich Lake</h3><p>The Park Service says there is no public access to Carbon River or Mowich Lake from SR 165. The WSDOT closure on SR 165 shows on the map as a red marker.</p></div>
+    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the stationary view, the feeds you would check before you leave. In the MileCheck app the nearest camera and your exact mile marker follow you up the road, hands-free on CarPlay and Android Auto, and the mile marker works without a signal.</p></div>
+  </section>
+
+  <section class="co-faq">
+    <h2>Mount Rainier questions, answered</h2>
+    <details><summary>Is the road to Paradise open right now?</summary><p>The Park Service posts the status of every park road on its <a href="https://www.nps.gov/mora/planyourvisit/road-status.htm" target="_blank" rel="noopener">road status page</a>. Closures on the state highways around the park show on the <a href="#comap">map above</a> as red markers, from WSDOT, and in the closures list under it.</p></details>
+    <details><summary>Are chains required to drive to Paradise?</summary><p>From November 1 to May 1 every vehicle entering the park must carry tire chains, and rangers can require them on the road above Longmire. The Longmire and Paradise cameras above show the road surface.</p></details>
+    <details><summary>Which roads to Mount Rainier close in winter?</summary><p>SR 410 over Chinook Pass, SR 123 over Cayuse Pass and Sunrise Road close every winter. The road to Longmire and Paradise stays open by day. US 12 over White Pass and SR 7 to Elbe stay open. Check the <a href="../../../closures/">road closures map</a> for the rest of the state.</p></details>
+    <details><summary>Is Mount Rainier visible right now?</summary><p>That is a different question from whether the road is open. The <a href="../">visibility page</a> reads the cloud ceilings between you and the summit and answers it for Seattle, Tacoma and the rest of the region, with a three-day forecast.</p></details>
+    <details><summary>Where do the cameras come from?</summary><p>The Paradise, Longmire and Sunrise cameras are National Park Service webcams and refresh about every minute. The highway cameras are WSDOT. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame. See <a href="../../../cameras/">every highway camera</a> for the rest of your route.</p></details>
+  </section>
+
+
+  <div class="co-cta co-vis">
+    <h2>Is Mount Rainier visible right now?</h2>
+    <p>Whether the road is open and whether you can see the mountain are different questions. The visibility page reads the cloud ceilings between you and the summit and answers the second one for Seattle, Tacoma and the rest of the region, with a three-day forecast.</p>
+    <div class="btns">
+      <a class="primary" href="../">Check visibility now</a>
+      <a class="ghost" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" target="_blank" rel="noopener">Mountain Visibility Forecast on the App Store</a>
+    </div>
+  </div>
+  <div class="co-cta">
+    <h2>Take it with you</h2>
+    <p>MileCheck shows your exact mile marker in real time on SR 706, SR 410 and US 12, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="co-related"><a href="../">Is Mount Rainier visible right now?</a> · <a href="../../../passes/">mountain passes</a> · <a href="../../../cameras/washington/">Washington cameras</a> · <a href="../../../cameras/">all highway cameras</a> · <a href="../../../closures/">road closures</a> · <a href="../../../fire/">wildfire map</a></p>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../../../cameras/">Highway cameras</a></li>
+            <li><a href="../../../closures/">Road closures map</a></li>
+            <li><a href="../../../fire/">Wildfire map</a></li>
+            <li><a href="../../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: WSDOT, National Park Service and NIFC via MileCheck. Always drive to conditions and follow posted signs.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<script>
+const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+const PASS={state:'WA',states:["WA"],lat:46.8523,lon:-121.7603,radiusKm:48.28,route:'SR 706',area:true};
+function km(a,b,c,d){const R=6371,pi=Math.PI/180;const x=Math.sin((c-a)*pi/2)**2+Math.cos(a*pi)*Math.cos(c*pi)*Math.sin((d-b)*pi/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon,lat,lon)<=PASS.radiusKm;}
+const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
+const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Mount Rainier cameras &amp; conditions: WSDOT via MileCheck',maxZoom:16}).addTo(map);
+map.setView([PASS.lat,PASS.lon],11);
+const camLayer=L.layerGroup().addTo(map);
+const alrLayer=L.layerGroup().addTo(map);
+const fireLayer=L.layerGroup().addTo(map);
+let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], showCam=true, showAlr=true, showFire=true;
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
+function clean(t,n){return String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);}
+async function loadCams(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);for(const c of ((d&&d.cameras)||[])){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
+async function loadAlerts(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);for(const a of ((d&&d['incident-reports'])||[])){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
+async function loadConds(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/conditions?state='+st,3);for(const r of ((d&&d['road-weather-reports'])||[])){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr});}}return out;}
+async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const d=await fetchJSON(WORKER+'/fires?bbox='+bb,3);return ((d&&d.fires)||[]).filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
+const cardEl=document.getElementById('coCard');
+function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closure':'');cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+function bust(u){return u+(u.includes('?')?'&':'?')+'t='+Date.now();}
+function camCard(c){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||PASS.route)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+(c.src||'WSDOT')+(c.park?' · '+esc(c.park):'')+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust(c.img)+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function fireCard(f){return '<div class="cc-title">'+esc(f.name)+(f.rx?' (prescribed burn)':'')+'</div><div class="cc-meta">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away'+'</div>';}
+function alrCard(a){return '<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+esc(a.route||PASS.route)+(a.mp>0?' · MP '+Math.round(a.mp):'')+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();if(showCam)CAMS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+FIRES.length+' fires');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' within 30 miles of the summit':'Toggle a layer to view the area data';}
+const TAGS={CL:['cl','Closed'],AC:['ac','Crash'],RW:['rw','Work'],WE:['we','Weather'],HZ:['hz','Hazard'],IN:['ac','Incident'],OT:['ot','Alert']};
+function tag(k,label){return '<span class="tag '+k+'">'+label+'</span>';}
+function alrLi(a){const t=TAGS[a.type]||TAGS.OT;const full=isFullClosure(a);return '<li>'+tag(full?'cl':t[0],full?'Closed':t[1])+esc(a.title)+'<span class="m">'+esc(a.route||'')+(a.mp>0?' · MP '+Math.round(a.mp):'')+(a.desc&&a.desc!==a.title?' · '+esc(a.desc):'')+'</span></li>';}
+function setList(id,items,empty){const el=document.getElementById(id);if(!el)return;const h=el.querySelector('h2');let c=h.querySelector('.cnt');if(!c){c=document.createElement('span');c.className='cnt';h.appendChild(c);}c.textContent=items.length;el.querySelector('ul').innerHTML=items.length?items.join(''):'<li class="empty">'+empty+'</li>';}
+function loadCamImg(li,c){let img=li.querySelector('img');if(!img){img=document.createElement('img');img.alt='Live: '+c.title;img.loading='lazy';li.appendChild(img);}img.src=bust(c.img);li.querySelector('button').textContent='Refresh';}
+function renderLists(){
+  const camItems=CAMS.map((c,i)=>'<li data-i="'+i+'">'+tag(c.src?'nps':'dot',c.src||'WSDOT')+esc(c.title)+' <button type="button">Show</button><span class="m">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+(c.park?' · '+esc(c.park):'')+'</span></li>');
+  setList('lstCams',camItems,'No cameras in the feed for this area right now.');
+  document.querySelectorAll('#lstCams li[data-i] button').forEach(b=>{b.onclick=()=>{const li=b.closest('li');loadCamImg(li,CAMS[+li.dataset.i]);};});
+  const all=document.getElementById('btnAllCams');if(all)all.onclick=()=>{document.querySelectorAll('#lstCams li[data-i]').forEach(li=>loadCamImg(li,CAMS[+li.dataset.i]));all.textContent='Refresh every camera';};
+  const snow=CONDS.map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
+  setList('lstSnow',snow,'No snow, ice or pass reports for this area right now.');
+  const fires=FIRES.map(f=>'<li>'+tag(f.rx?'rx':'fire',f.rx?'Prescribed':'Fire')+esc(f.name)+'<span class="m">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away</span></li>');
+  setList('lstFire',fires,'No active fires within '+Math.round(PASS.radiusKm/1.609344)+' miles in the NIFC feed.');
+  const clos=ALERTS.filter(a=>a.type!=='RW'&&a.type!=='WE').sort((a,b)=>(isFullClosure(b)-isFullClosure(a))).map(alrLi);
+  setList('lstClos',clos,'No closures, crashes or hazards reported in this area right now.');
+  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi);
+  setList('lstWork',work,'No work zones reported in this area right now.');
+}
+L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">▲</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('Mount Rainier · 5,400 ft',{direction:'top',offset:[0,-12]}).addTo(map);
+document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
+document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
+const tgFire=document.getElementById('tgFire');if(tgFire)tgFire.onchange=e=>{showFire=e.target.checked;draw();};
+function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
+Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([])]).then(([c,a,w,f])=>{CAMS=c;ALERTS=a;CONDS=w;FIRES=f;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();if(PASS.area)renderLists();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within 30 miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the Mount Rainier area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' on the roads around Mount Rainier'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+</script>
+
+</body>
+</html>
