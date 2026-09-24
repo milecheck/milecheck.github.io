@@ -13,11 +13,15 @@ const PASSES = [
     hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on I-90 over Snoqualmie Pass — snow, chains, and closures as they happen. It's the busiest mountain pass in Washington and the main link between Seattle and Eastern Washington.`,
     closes: `The pass stays open most of the year, but heavy Cascade snow and scheduled avalanche control work close I-90 over the summit several times each winter — sometimes for a couple of hours, occasionally longer. Closures can happen with little notice, which is exactly why the live cameras above are worth a look before you leave.`,
     extra: { h: 'The busiest crossing', p: `At 3,015 feet, Snoqualmie is the lowest of Washington's major passes, which is part of why it carries the most traffic — it's the everyday route between the Seattle metro and Eastern Washington. Lower doesn't mean easy, though: it still catches heavy, wet Cascade snow.` },
+    // Snow block (2026-09-24). Nearest SNOTEL to the summit (47.4245,-121.4131) is Olallie Meadows, 3.7 mi, 4,010 ft. Resort URLs verified 2026-09-24.
+    snow: { station: '672:WA:SNTL', stationName: 'Olallie Meadows', stationElev: '4,010 ft', stationNote: '3.7 miles from the summit and about 1,000 feet above it', avyCenter: 'NWAC', title: 'Snow at Snoqualmie Pass',
+      resort: { name: 'The Summit at Snoqualmie', report: 'https://www.summitatsnoqualmie.com/mountain-report', tickets: 'https://www.summitatsnoqualmie.com/tickets' } },
     faq: [
       ['Is Snoqualmie Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-90 over the pass as red and orange markers, straight from WSDOT. For closures across the whole US, see the <a href="../../closures/">road closures map</a>. The pass shuts for avalanche control and heavy snow several times each winter.`],
       ['Are chains required on Snoqualmie Pass?', `Requirements change with conditions and are set by WSDOT — watch the <a href="#comap">live cameras above</a> for snow and ice on the roadway, and always follow posted signs. They can jump from none to chains-required within an hour during a storm.`],
       ['How high is Snoqualmie Pass?', `The summit is 3,015 feet — the lowest of Washington's major Cascade passes, which is why it's the busiest. See <a href="../../cameras/">every camera in Washington and 24 other states</a> for the rest of your route.`],
       ['How far is Snoqualmie Pass from Seattle?', `About 52 miles east on I-90, roughly an hour in good conditions. Track your exact mile marker over the pass hands-free with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
+      ['How much snow is at Snoqualmie Pass right now?', `The snow block above reads the USDA SNOTEL station at Olallie Meadows, 3.7 miles from the summit at 4,010 feet. It shows depth, the change over 24 hours, snow water and temperature, updated hourly. <a href="https://www.summitatsnoqualmie.com/mountain-report" target="_blank" rel="noopener">The Summit at Snoqualmie</a> posts its own mountain report and lift status for Alpental, Summit West, Summit Central and Summit East.`],
     ],
   },
   {
@@ -27,11 +31,15 @@ const PASSES = [
     hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on US-2 over Stevens Pass — snow, chains, and closures in real time. It's the northern Cascade crossing between the Seattle area and Wenatchee, and home to the Stevens Pass ski area.`,
     closes: `Stevens is higher and snowier than Snoqualmie, and US-2 over the summit closes regularly through the winter for avalanche control and heavy snowfall — sometimes for extended windows when the avalanche danger is high above the highway. Check the cameras before you leave; conditions here turn quickly.`,
     extra: { h: 'Ski traffic and snow', p: `The Stevens Pass ski resort sits right at the summit, so winter weekends stack recreational traffic on top of freight and commuters — on a snowy Saturday the combination of a chain requirement and a full parking lot can crawl the highway. The cameras show you what you're driving into before you're committed to the climb.` },
+    // Snow block (2026-09-24). Stevens Pass SNOTEL sits 0.2 mi from the summit at 3,940 ft.
+    snow: { station: '791:WA:SNTL', stationName: 'Stevens Pass', stationElev: '3,940 ft', stationNote: 'at the summit', avyCenter: 'NWAC', title: 'Snow at Stevens Pass',
+      resort: { name: 'Stevens Pass', report: 'https://www.stevenspass.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', tickets: 'https://www.stevenspass.com/plan-your-trip/lift-access/tickets.aspx' } },
     faq: [
       ['Is Stevens Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on US-2 over the pass, straight from WSDOT. See the <a href="../../closures/">US road closures map</a> for the bigger picture. Stevens closes for avalanche control and heavy snow several times each winter.`],
       ['Are chains required on Stevens Pass?', `Traction and chain requirements are set by WSDOT and change fast in a storm. Watch the <a href="#comap">live cameras above</a> for snow and ice, and always follow posted signs at the pass.`],
       ['How high is Stevens Pass?', `The summit is 4,061 feet on US-2 in the Cascades — higher and typically snowier than nearby Snoqualmie Pass on I-90. Compare conditions with <a href="../snoqualmie/">Snoqualmie Pass</a>.`],
       ['How far is Stevens Pass from Seattle?', `About 78 miles northeast on US-2, roughly two hours in good weather. Track your mile marker over the pass hands-free with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+      ['How much snow is at Stevens Pass right now?', `The snow block above reads the USDA SNOTEL station at the summit, 3,940 feet. It shows depth, the change over 24 hours, snow water and temperature, updated hourly. The ski area posts its own <a href="https://www.stevenspass.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx" target="_blank" rel="noopener">snow and weather report</a>.`],
     ],
   },
   {
@@ -97,11 +105,15 @@ const PASSES = [
     hero: `See the canyon before you drive it. Live UDOT cameras and real-time conditions on I-80 through Parleys Canyon over Parleys Summit — the main route out of Salt Lake City toward Park City and the Wasatch ski country.`,
     closes: `Parleys Canyon funnels every Salt Lake–to–Park City driver up a steep grade into Wasatch snow, and UDOT runs chain and traction restrictions here through the winter. Heavy snow and blowing snow in the canyon can slow it to a crawl or close it, and truck restrictions are common when the grade turns icy — check the cameras before you head up.`,
     extra: { h: 'Ski-country commute', p: `On a snowy morning, Parleys stacks resort-bound traffic, freight, and commuters onto the same steep grade — which is why a single spun-out truck can back the canyon up for miles. At about 7,020 feet at the summit, conditions here can be completely different from the dry valley floor a few minutes behind you.` },
+    // Snow + plows (2026-09-24). Parleys Summit SNOTEL 0.8 mi from the summit, 7,590 ft. Plows from the Worker /plows?state=UT (UDOT servicevehicles).
+    snow: { station: '684:UT:SNTL', stationName: 'Parleys Summit', stationElev: '7,590 ft', stationNote: 'less than a mile from the summit', avyCenter: 'UAC', title: 'Snow at Parleys Summit' },
+    plows: { states: ['UT'], agency: 'UDOT' },
     faq: [
       ['Is Parleys Canyon (I-80) open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-80 through Parleys, straight from UDOT. See the whole route on the <a href="../../corridors/i-80/">I-80 corridor page</a> or the <a href="../../closures/">US closures map</a>.`],
       ['Are chains or snow tires required on Parleys Summit?', `UDOT sets traction and chain restrictions in Parleys Canyon through the winter, and they change with each storm. Watch the <a href="#comap">live cameras above</a> for snow on the grade and follow posted restrictions.`],
       ['How high is Parleys Summit?', `About 7,020 feet on I-80 in the Wasatch Range — high enough that the summit can be in a snowstorm while Salt Lake City stays dry.`],
       ['Where is Parleys Summit?', `On I-80 just east of Salt Lake City, at the top of Parleys Canyon toward Park City. Track your mile marker up the canyon with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+      ['Where are the plows?', `The Snowplows list above shows UDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
   },
   {
@@ -111,11 +123,15 @@ const PASSES = [
     hero: `See the tunnel before you drive it. Live CDOT cameras and real-time conditions on I-70 at the Eisenhower–Johnson Memorial Tunnels — the highest point on the entire U.S. Interstate Highway System, and the main route from Denver to Colorado's ski country.`,
     closes: `The tunnel bores through the Continental Divide, so it doesn't close for snow the way an open summit does — but the approaches on both sides do, for avalanche control, whiteout conditions, and the crashes that pile up on a steep, high-altitude grade in bad weather. Chain law and traction law restrictions on I-70 through this stretch are common all winter, and holiday ski traffic can back the approaches up for miles even in clear weather.`,
     extra: { h: 'The highest point on the Interstate System', p: `At 11,158 feet, the Eisenhower Tunnel isn't just the high point of I-70 — it's the highest elevation reached anywhere on the U.S. Interstate Highway System. Air is noticeably thinner here, grades are steep on both approaches, and the westbound bore (Eisenhower) and eastbound bore (Johnson) are close enough together that an incident in one often slows traffic in both.` },
+    // Snow + plows (2026-09-24). Loveland Basin SNOTEL 1.8 mi from the tunnel, 11,410 ft. Plows from /plows?state=CO (COtrip snowPlows).
+    snow: { station: '602:CO:SNTL', stationName: 'Loveland Basin', stationElev: '11,410 ft', stationNote: 'about 2 miles from the tunnel', avyCenter: 'CAIC', title: 'Snow at the Eisenhower Tunnel' },
+    plows: { states: ['CO'], agency: 'CDOT' },
     faq: [
       ['Is the Eisenhower Tunnel open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-70 through the tunnel and its approaches, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Closures here are usually avalanche control or weather on the approach grades, not the tunnel itself.`],
       ['Are chains required at the Eisenhower Tunnel?', `CDOT sets traction and chain law restrictions on I-70 through this stretch, and they tighten fast in a storm. Watch the <a href="#comap">live cameras above</a> for conditions on the approach grades, and always follow posted signs.`],
       ['How high is the Eisenhower Tunnel?', `11,158 feet — the highest point on the entire U.S. Interstate Highway System, not just I-70. Compare it with <a href="../vail/">Vail Pass</a> further west on the same corridor.`],
       ['How far is the Eisenhower Tunnel from Denver?', `About 60 miles west on I-70. Track your mile marker through the tunnel and over the Divide with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
+      ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
   },
   {
@@ -125,11 +141,15 @@ const PASSES = [
     hero: `See the summit before you drive it. Live CDOT cameras and real-time conditions on I-70 over Vail Pass — the high, exposed crossing between Copper Mountain and Vail on Colorado's busiest mountain corridor.`,
     closes: `Vail Pass sits well above treeline on both approaches, so it takes the full force of Rocky Mountain storms with little wind protection — heavy snow, whiteouts, and avalanche control work close I-70 here several times most winters, sometimes for hours at a stretch. It's also one of the most crash-prone stretches on the corridor when a storm hits during peak ski traffic.`,
     extra: { h: 'The exposed stretch of I-70', p: `Unlike the tunneled crossing at the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, Vail Pass is a fully exposed summit — the highway climbs into open alpine terrain with no tree cover to block wind and blowing snow. That's why it's often the first part of the Denver-to-Vail drive to see a chain law or full closure when a storm rolls in.` },
+    // Snow + plows (2026-09-24). Copper Mountain SNOTEL 3.4 mi from the summit, 10,500 ft.
+    snow: { station: '415:CO:SNTL', stationName: 'Copper Mountain', stationElev: '10,500 ft', stationNote: 'about 3 miles from the summit', avyCenter: 'CAIC', title: 'Snow at Vail Pass' },
+    plows: { states: ['CO'], agency: 'CDOT' },
     faq: [
       ['Is Vail Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-70 over the pass, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Vail Pass closes for avalanche control and heavy snow several times most winters.`],
       ['Are chains required on Vail Pass?', `CDOT sets traction and chain law restrictions on I-70 over the summit, and they change fast in a storm — this is one of the more frequently restricted stretches on the whole corridor. Watch the <a href="#comap">live cameras above</a> and follow posted signs.`],
       ['How high is Vail Pass?', `10,662 feet — lower than the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, but more exposed to wind and blowing snow since it's an open summit, not a tunnel.`],
       ['How far is Vail Pass from Denver?', `About 100 miles west on I-70. Track your mile marker over the summit with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
+      ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
   },
 ];
@@ -397,6 +417,13 @@ function page(p){
     .lst-tools{margin:0 0 8px;}
     .lst-tools button,.co-list li button{border:1px solid #0F1419;background:#fff;border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:#0F1419;}
     .co-list li img{display:block;width:100%;max-width:640px;border-radius:8px;margin-top:8px;background:#f0f0ee;min-height:40px;}
+    .co-layer input:checked+.co-sw.plow{background:#0369A1;}
+    .co-list li .tag.plow{background:#0369A1;}
+    .plow-icon{color:#0369A1;font-size:20px;line-height:22px;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;font-weight:900;}
+    #snowBox .sn-stats{margin:8px 0 4px;}
+    #snowBox h3{font-size:15px;margin:14px 0 4px;}
+    #snowBox p.m{color:#5b6670;font-size:13.5px;line-height:1.5;margin:0;}
+    #snowBox ul li b{color:#0E1116;}
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} }
   </style>
 </head>
@@ -441,13 +468,24 @@ function page(p){
         <div class="lt">Map layers</div>
         <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
         <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>${isArea ? `
-        <label class="co-layer"><input type="checkbox" id="tgFire" checked><span class="co-sw fire"></span><span class="co-dot" style="background:#EA580C"></span>Wildfires</label>` : ''}
+        <label class="co-layer"><input type="checkbox" id="tgFire" checked><span class="co-sw fire"></span><span class="co-dot" style="background:#EA580C"></span>Wildfires</label>` : ''}${p.plows ? `
+        <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="co-dot" style="background:#0369A1"></span>Snowplows</label>` : ''}
       </div>
       <div class="co-bs" id="coStatus">Loading live ${p.name} data…</div>
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
-${isArea ? `
+${p.snow || p.plows ? `
+  <section class="co-lists co-winter" aria-label="Snow and plows">${p.snow ? `
+    <div class="co-list" id="snowBox"><h2>${p.snow.title || `Snow at ${p.name}`}</h2><p class="hint">USDA SNOTEL station ${p.snow.stationName}, ${p.snow.stationElev}, ${p.snow.stationNote}. Depth and temperature are hourly readings from the station, not the resort's report.</p>
+      <div class="co-stats sn-stats"><div class="co-stat"><div class="n" id="snDepth">—</div><div class="l">snow depth now</div></div><div class="co-stat"><div class="n" id="snDelta">—</div><div class="l">change, 24 h</div></div><div class="co-stat"><div class="n" id="snSwe">—</div><div class="l">snow water</div></div><div class="co-stat"><div class="n" id="snTemp">—</div><div class="l">temperature</div></div></div>
+      <p class="m sn-asof" id="snAsOf">Reading the station.</p>
+      <h3>Forecast at the pass</h3><ul id="snFc"><li class="empty">Loading the NWS forecast.</li></ul>
+      <h3>Avalanche danger</h3><p class="m sn-avy" id="snAvy">Loading.</p>${p.snow.resort ? `
+      <h3>${p.snow.resort.name}</h3><p class="m sn-resort">${p.snow.resort.report ? `The resort posts its own snow report and lift status. <a href="${p.snow.resort.report}" target="_blank" rel="noopener">Mountain report</a> · <a href="${p.snow.resort.tickets}" target="_blank" rel="noopener">Tickets</a>` : `The resort posts its own conditions and tickets at <a href="${p.snow.resort.site}" target="_blank" rel="noopener">${p.snow.resort.site.replace(/^https?:\/\//,'').replace(/\/$/,'')}</a>.`}</p>` : ''}
+    </div>` : ''}${p.plows ? `
+    <div class="co-list" id="lstPlows"><h2>Snowplows</h2><p class="hint">${p.plows.agency} plow positions within the map radius, updated about every minute. Parked and idle trucks are listed too.</p><ul><li class="empty">Loading.</li></ul></div>` : ''}
+  </section>` : ''}${isArea ? `
   <section class="co-lists" aria-label="Conditions within ${p.rMi} miles">
     <div class="co-list co-list-cams" id="lstCams"><h2>Cameras</h2><p class="hint">Every camera in the feed within ${p.rMi} miles. Tap one to load its latest frame. Park camera frames are large, about 1.5 MB each.</p><div class="lst-tools"><button type="button" id="btnAllCams">Show every camera</button></div><ul><li class="empty">Loading.</li></ul></div>
     <div class="co-list" id="lstSnow"><h2>Snow and ice</h2><p class="hint">Road-surface and pass reports within ${p.rMi} miles, as ${p.dot} posts them, plus weather alerts.</p><ul><li class="empty">Loading.</li></ul></div>
@@ -528,6 +566,8 @@ ${p.vis ? `
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea}};
+const SNOW=${p.snow ? JSON.stringify({station:p.snow.station,avyCenter:p.snow.avyCenter}) : 'null'};
+const PLOWS=${p.plows ? JSON.stringify({states:p.plows.states}) : 'null'};
 function km(a,b,c,d){const R=6371,pi=Math.PI/180;const x=Math.sin((c-a)*pi/2)**2+Math.cos(a*pi)*Math.cos(c*pi)*Math.sin((d-b)*pi/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
 function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon,lat,lon)<=PASS.radiusKm;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
@@ -537,7 +577,8 @@ map.setView([PASS.lat,PASS.lon],11);
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const fireLayer=L.layerGroup().addTo(map);
-let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], showCam=true, showAlr=true, showFire=true;
+const plowLayer=L.layerGroup().addTo(map);
+let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], PLOWLIST=[], showCam=true, showAlr=true, showFire=true, showPlow=true;
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
 function clean(t,n){return String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim().slice(0,n);}
@@ -551,7 +592,33 @@ function bust(u){return u+(u.includes('?')?'&':'?')+'t='+Date.now();}
 function camCard(c){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||PASS.route)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+(c.src||'${p.dot}')+(c.park?' · '+esc(c.park):'')+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust(c.img)+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
 function fireCard(f){return '<div class="cc-title">'+esc(f.name)+(f.rx?' (prescribed burn)':'')+'</div><div class="cc-meta">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away'+'</div>';}
 function alrCard(a){return '<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+esc(a.route||PASS.route)+(a.mp>0?' · MP '+Math.round(a.mp):'')+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
-function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();if(showCam)CAMS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+FIRES.length+' fires');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' ${p.nearWord || 'near the pass'}':'Toggle a layer to view ${isArea ? 'the area' : 'pass'} data';}
+function fmtIn(v){return (v==null||!isFinite(v))?'—':(Math.round(v*10)/10)+' in';}
+function stamp(d){const pad=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+async function loadSnow(){if(!SNOW)return;const now=new Date();const begin=stamp(new Date(now.getTime()-48*3600e3))+' 00:00',end=stamp(now)+' 23:00';
+  const j=await fetchJSON('https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1/data?stationTriplets='+encodeURIComponent(SNOW.station)+'&elements=SNWD,WTEQ,TOBS&duration=HOURLY&beginDate='+encodeURIComponent(begin)+'&endDate='+encodeURIComponent(end),2);
+  const st=j&&j[0];const asof=document.getElementById('snAsOf');if(!st){asof.textContent='The station did not answer. Try again in a few minutes.';return;}
+  const series=code=>{const el=(st.data||[]).find(x=>x.stationElement&&x.stationElement.elementCode===code);return el?(el.values||[]).filter(v=>v.value!=null&&isFinite(v.value)):[];};
+  const sn=series('SNWD'),sw=series('WTEQ'),tb=series('TOBS');const last=a=>a.length?a[a.length-1]:null;const ln=last(sn),lw=last(sw),lt=last(tb);
+  const t=s=>Date.parse(String(s).replace(' ','T'));let prev=null;if(ln){const target=t(ln.date)-24*3600e3;prev=sn.filter(v=>t(v.date)<=target).pop()||null;}
+  document.getElementById('snDepth').textContent=ln?fmtIn(ln.value):'—';
+  document.getElementById('snDelta').textContent=(ln&&prev)?((ln.value-prev.value>=0?'+':'')+(Math.round((ln.value-prev.value)*10)/10)+' in'):'—';
+  document.getElementById('snSwe').textContent=lw?fmtIn(lw.value):'—';
+  document.getElementById('snTemp').textContent=lt?Math.round(lt.value)+'°F':'—';
+  asof.textContent=ln?('As of '+ln.date+', station time. Provisional USDA data.'):'No snow depth reading in the last 48 hours.';}
+async function loadForecast(){if(!SNOW)return;const ul=document.getElementById('snFc');const pt=await fetchJSON('https://api.weather.gov/points/'+PASS.lat.toFixed(4)+','+PASS.lon.toFixed(4),2);const url=pt&&pt.properties&&pt.properties.forecast;const fc=url?await fetchJSON(url,2):null;const per=fc&&fc.properties&&fc.properties.periods;
+  if(!per||!per.length){ul.innerHTML='<li class="empty">The NWS forecast did not load.</li>';return;}
+  ul.innerHTML=per.slice(0,4).map(x=>'<li><b>'+esc(x.name)+'</b> '+esc(x.temperature)+'°'+esc(x.temperatureUnit)+' · '+esc(x.shortForecast)+(x.probabilityOfPrecipitation&&x.probabilityOfPrecipitation.value!=null?' · '+x.probabilityOfPrecipitation.value+'% precip':'')+(x.windSpeed?' · wind '+esc(x.windSpeed)+' '+esc(x.windDirection||''):'')+'</li>').join('');
+  const el=fc.properties.elevation;if(el&&isFinite(el.value))ul.insertAdjacentHTML('beforeend','<li class="empty">NWS point forecast for '+Math.round(el.value*3.28084).toLocaleString()+' ft.</li>');}
+function pip(pt,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const xi=poly[i][0],yi=poly[i][1],xj=poly[j][0],yj=poly[j][1];if(((yi>pt[1])!==(yj>pt[1]))&&(pt[0]<(xj-xi)*(pt[1]-yi)/(yj-yi)+xi))inside=!inside;}return inside;}
+function inGeom(pt,g){if(!g)return false;if(g.type==='Polygon')return pip(pt,g.coordinates[0]);if(g.type==='MultiPolygon')return g.coordinates.some(p=>pip(pt,p[0]));return false;}
+async function loadAvy(){if(!SNOW)return;const el=document.getElementById('snAvy');const j=await fetchJSON('https://api.avalanche.org/v2/public/products/map-layer/'+encodeURIComponent(SNOW.avyCenter),2);const f=(j&&j.features)||[];const z=f.find(x=>inGeom([PASS.lon,PASS.lat],x.geometry))||f[0];
+  if(!z){el.textContent='The avalanche center feed did not load.';return;}const pr=z.properties||{};const rating=pr.off_season?'No rating, off season':(typeof pr.danger==='string'&&pr.danger?pr.danger:'See the forecast');
+  const zone=/zone$/i.test(String(pr.name||''))?pr.name:(pr.name?pr.name+' zone':'this zone');const cap=rating.charAt(0).toUpperCase()+rating.slice(1);el.innerHTML='<b>'+esc(cap)+'</b> for the '+esc(zone)+', per the '+esc(pr.center||SNOW.avyCenter)+'. '+(pr.link?'<a href="'+pr.link+'" target="_blank" rel="noopener">Read the forecast</a>. ':'')+'This rating is for backcountry terrain, not the ski area.';}
+async function loadPlows(){if(!PLOWS)return [];const out=[];for(const st of PLOWS.states){const d=await fetchJSON(WORKER+'/plows?state='+st,2);for(const t of ((d&&d.plows)||[])){if(!near(+t.lat,+t.lon))continue;const age=(Date.now()-Date.parse(t.lastUpdated))/60000;const vin=/^[A-Z0-9]{17}$/.test(t.name||'');const agency=clean(t.status||'',40);out.push({lat:+t.lat,lon:+t.lon,bearing:+t.bearing||0,name:vin?((agency||'DOT')+' plow'):clean(t.name||'Plow',60),status:vin?'':agency,age:isFinite(age)?age:null});}}return out.sort((a,b)=>(a.age==null?9e9:a.age)-(b.age==null?9e9:b.age));}
+function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+b+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
+function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>';}
+function renderPlows(){setList('lstPlows',PLOWLIST.map(t=>'<li>'+esc(t.name)+'<span class="m">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</span></li>'),'No plows within the map radius right now.');}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();plowLayer.clearLayers();if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t),false)).addTo(plowLayer));if(showCam)CAMS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+FIRES.length+' fires');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' ${p.nearWord || 'near the pass'}':'Toggle a layer to view ${isArea ? 'the area' : 'pass'} data';}
 const TAGS={CL:['cl','Closed'],AC:['ac','Crash'],RW:['rw','Work'],WE:['we','Weather'],HZ:['hz','Hazard'],IN:['ac','Incident'],OT:['ot','Alert']};
 function tag(k,label){return '<span class="tag '+k+'">'+label+'</span>';}
 function alrLi(a){const t=TAGS[a.type]||TAGS.OT;const full=isFullClosure(a);return '<li>'+tag(full?'cl':t[0],full?'Closed':t[1])+esc(a.title)+'<span class="m">'+esc(a.route||'')+(a.mp>0?' · MP '+Math.round(a.mp):'')+(a.desc&&a.desc!==a.title?' · '+esc(a.desc):'')+'</span></li>';}
@@ -575,8 +642,10 @@ L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 const tgFire=document.getElementById('tgFire');if(tgFire)tgFire.onchange=e=>{showFire=e.target.checked;draw();};
+const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
-Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([])]).then(([c,a,w,f])=>{CAMS=c;ALERTS=a;CONDS=w;FIRES=f;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();if(PASS.area)renderLists();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within ${p.rMi || ''} miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' ${p.bannerWhere || `on ${p.route}`}'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c;ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();if(PASS.area)renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within ${p.rMi || ''} miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' ${p.bannerWhere || `on ${p.route}`}'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+if(SNOW){loadSnow().catch(()=>{document.getElementById('snAsOf').textContent='The station did not answer. Try again in a few minutes.';});loadForecast().catch(()=>{});loadAvy().catch(()=>{});}
 </script>
 
 </body>
