@@ -5,6 +5,11 @@
 const fs = require('fs');
 const path = require('path');
 const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2026-09-15)
+// Snowplows layer (2026-09-24). The Worker's /plows serves UT CO DE MT WV MI NE IN IA MN KS;
+// each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
+// is done. Utah first. Add the code here, then regenerate that one page:
+//   node scripts/gen-state-camera-pages.js utah
+const PLOW_PAGES = new Set(['UT']);
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [
@@ -19,7 +24,7 @@ const STATES = [
     notable:`See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.` },
   { slug:'utah', code:'UT', name:'Utah', dot:'UDOT', bounds:'[[37,-114.05],[42,-109.04]]',
     blurb:`Utah DOT's cameras cover the Wasatch Front, the canyons, and the interstate crossings of the high desert.`,
-    notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas.` },
+    notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas. In winter the Snowplows layer shows where UDOT's trucks are, each with the route and mile marker it is on and how long ago it reported.` },
   { slug:'montana', code:'MT', name:'Montana', dot:'MDT', bounds:'[[44.36,-116.05],[49,-104.04]]',
     blurb:`Montana DOT cameras cover the mountain passes and the long interstate stretches across Big Sky Country, where winter wind and snow are the main story.`,
     notable:`Watch <a href="../../corridors/i-90/">I-90</a> across the western mountains, I-15 north to the Canadian border, and I-94 across the eastern plains.` },
@@ -128,6 +133,7 @@ function faqJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@
 function crumbJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Cameras','item':'https://milecheckapp.com/cameras/'},{'@type':'ListItem','position':3,'name':s.name+' Cameras','item':'https://milecheckapp.com/cameras/'+s.slug+'/'}]}); }
 
 function page(s){
+  const plows = PLOW_PAGES.has(s.code);
   const sp = SPON.slot({ kind: 'cameras', slug: s.slug, state: s.code, name: s.name });
   const faqHtml=faq(s).map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   return `<!DOCTYPE html>
@@ -168,6 +174,17 @@ function page(s){
     .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
     .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
     #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:196px;font-size:13.5px;}
+    .co-layers .lt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 4px;}
+    .co-layer{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
+    .co-layer input{position:absolute;opacity:0;width:0;height:0;}
+    .co-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+    .co-layer input:checked+.co-sw.cam{background:#0f7a4f;} .co-layer input:checked+.co-sw.plow{background:#0369A1;}
+    .co-layer input:checked+.co-sw::after{left:16px;}
+    .co-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+    .plow-icon{color:#0369A1;font-size:20px;line-height:22px;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;font-weight:900;}
+    @media(max-width:600px){ .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} }
     .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
     .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
     .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
@@ -224,14 +241,20 @@ ${sp.html}
     <p class="sub">See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and mile marker. Free, no account — tap any camera for the latest image.</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${s.name}</div></div>
-      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${s.dot.split('(')[0].trim()}</div><div class="l">camera source</div></div>
+      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${s.dot.split('(')[0].trim()}</div><div class="l">camera source</div></div>${plows ? `
+      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">${s.dot.split('(')[0].trim()} plows reporting</div></div>` : ''}
     </div>
   </div>
 
   <div class="co-wrap">
     <div style="position:relative;">
       <div id="comap"></div>
-      <div class="co-bs" id="coStatus">Loading live ${s.name} cameras…</div>
+      <div class="co-bs" id="coStatus">Loading live ${s.name} cameras…</div>${plows ? `
+      <div class="co-layers" role="group" aria-label="Map layers">
+        <div class="lt">Map layers</div>
+        <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
+        <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="co-dot" style="background:#0369A1"></span>Snowplows</label>
+      </div>` : ''}
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
@@ -301,6 +324,7 @@ ${sp.js}
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
+const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
 const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
@@ -309,13 +333,18 @@ const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;con
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · ${s.name} cameras: ${s.dot} via MileCheck',maxZoom:16}).addTo(map);
 map.fitBounds(${s.bounds});
 const camLayer=L.layerGroup().addTo(map);
-let CAMS=[];
+const plowLayer=L.layerGroup().addTo(map);
+let CAMS=[], PLOWLIST=[], showCam=true, showPlow=true;
 function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 const cardEl=document.getElementById('coCard');
 function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
 function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
-function draw(){camLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in ${s.name}'):'No cameras loaded — try again shortly.';}
+function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+(b||0)+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
+function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near MP '+esc(t.mile):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div><div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
+function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in ${s.name}':'Toggle a layer to view ${s.name} data';}
+const tgCam=document.getElementById('tgCam');if(tgCam)tgCam.onchange=e=>{showCam=e.target.checked;draw();};
+const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 // The Worker occasionally 503s on the biggest camera states (cold cache); retry a few times.
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
@@ -325,14 +354,19 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
   document.getElementById('statCams').textContent=CAMS.length;
   draw();
 });
+if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>{const vin=/^[A-Z0-9]{17}$/.test(t.name||'');const agency=String(t.status||'').trim();const age=(Date.now()-Date.parse(t.lastUpdated))/60000;return {lat:+t.lat,lon:+t.lon,bearing:+t.bearing||0,name:vin?((agency||DOT)+' plow'):(t.name||'Plow'),status:vin?'':agency,route:t.route||'',mile:t.mile!=null?t.mile:null,age:isFinite(age)?age:null};});const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.length;draw();});
 </script>
 
 </body>
 </html>`;
 }
 
+// Optional slugs on the command line write only those pages, e.g.
+//   node scripts/gen-state-camera-pages.js utah
+const only=process.argv.slice(2);
 let n=0;
 for(const s of STATES){
+  if(only.length&&!only.includes(s.slug))continue;
   const dir=path.join('cameras',s.slug);
   fs.mkdirSync(dir,{recursive:true});
   fs.writeFileSync(path.join(dir,'index.html'),page(s));
