@@ -64,6 +64,23 @@
     .mv-notes{max-width:1160px;margin:26px auto 48px;padding:0 20px;color:var(--ink-faint);font-size:13px;line-height:1.6;}
     .mv-crumbs{font-family:var(--mono-stack);font-size:12px;color:var(--ink-faint);max-width:1160px;margin:0 auto;padding:16px 20px 0;}
     .mv-crumbs a:hover{color:var(--ink);}
+    .mv-shots{max-width:1160px;margin:22px auto 0;padding:0 20px;}
+    .mv-shots .mv-stamp{margin-bottom:8px;}
+    .mv-shots-row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px;-webkit-overflow-scrolling:touch;}
+    .mv-shot{flex:0 0 auto;width:196px;scroll-snap-align:start;text-decoration:none;color:inherit;}
+    .mv-shot img{display:block;width:196px;height:auto;border-radius:18px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.10);}
+    .mv-shot span{display:block;margin-top:8px;font-size:13px;color:var(--ink-soft);text-align:center;}
+    @media(max-width:600px){.mv-shot{width:150px;} .mv-shot img{width:150px;}}
+    .mv-mtn{display:block;border:1px solid var(--line);background:var(--surface);padding:18px 18px 16px;text-decoration:none;color:inherit;position:relative;}
+    .mv-mtn:hover{border-color:var(--ink);opacity:1;}
+    .mv-mtn h3{font-family:var(--display);font-size:22px;font-weight:600;margin-bottom:4px;padding-right:28px;}
+    .mv-mtn .mv-h{font-family:var(--mono-stack);font-size:12.5px;color:var(--ink-soft);}
+    .mv-mtn .mv-now{margin:12px 0 10px;font-family:var(--display);font-size:30px;font-weight:650;line-height:1;letter-spacing:-0.01em;color:var(--ink-faint);}
+    .mv-mtn .mv-now.OUT{color:var(--sign);} .mv-mtn .mv-now.PARTLY{color:#b07a12;} .mv-mtn .mv-now.HIDDEN{color:#8a3b2e;} .mv-mtn .mv-now.NIGHT{color:var(--ink-soft);}
+    .mv-mtn .mv-nowsub{font-size:13px;color:var(--ink-soft);min-height:18px;}
+    .mv-mtn .mv-go{display:inline-block;margin-top:12px;font-weight:600;font-size:14px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;}
+    .mv-mtn .mv-arrow{position:absolute;top:16px;right:16px;font-size:20px;color:var(--ink-faint);}
+    .mv-mtn:hover .mv-arrow{color:var(--ink);}
     @media (max-width: 960px){
       .header-inner{position:relative;}
       .primary-nav{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;flex-direction:column;align-items:stretch;gap:0;padding:6px 0 10px;z-index:1400;}
@@ -126,6 +143,10 @@
           <span class="mv-soon">Android is in testing. <a href="mailto:feedback@milecheckapp.com?subject=Android%20tester">Email us</a> to be a tester.</span>
         </div>
       </div></div>
+  </div>
+  <div class="mv-shots">
+    <div class="mv-stamp">The app · iPhone</div>
+    <div class="mv-shots-row"><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../../images/mountains/shot-main.jpg" alt="Mountain Visibility Forecast screenshot: Right now" width="1000" height="2164" loading="lazy"><span>Right now</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../../images/mountains/shot-forecast.jpg" alt="Mountain Visibility Forecast screenshot: Three-day forecast" width="1000" height="2164" loading="lazy"><span>Three-day forecast</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../../images/mountains/shot-alpenglow.jpg" alt="Mountain Visibility Forecast screenshot: Sunrise and sunset light" width="1000" height="2164" loading="lazy"><span>Sunrise and sunset light</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../../images/mountains/shot-spots.jpg" alt="Mountain Visibility Forecast screenshot: Viewpoints" width="1000" height="2164" loading="lazy"><span>Viewpoints</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../../images/mountains/shot-hidden.jpg" alt="Mountain Visibility Forecast screenshot: When it is hidden" width="1000" height="2164" loading="lazy"><span>When it is hidden</span></a></div>
   </div>
   <div class="mv-body">
     <div class="mv-prose"><h2>Where are you looking from?</h2><p>Each region reads its own weather stations. Twenty miles can be the difference between fog and a clear view.</p></div>

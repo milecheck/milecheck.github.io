@@ -63,6 +63,23 @@
     .mv-notes{max-width:1160px;margin:26px auto 48px;padding:0 20px;color:var(--ink-faint);font-size:13px;line-height:1.6;}
     .mv-crumbs{font-family:var(--mono-stack);font-size:12px;color:var(--ink-faint);max-width:1160px;margin:0 auto;padding:16px 20px 0;}
     .mv-crumbs a:hover{color:var(--ink);}
+    .mv-shots{max-width:1160px;margin:22px auto 0;padding:0 20px;}
+    .mv-shots .mv-stamp{margin-bottom:8px;}
+    .mv-shots-row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px;-webkit-overflow-scrolling:touch;}
+    .mv-shot{flex:0 0 auto;width:196px;scroll-snap-align:start;text-decoration:none;color:inherit;}
+    .mv-shot img{display:block;width:196px;height:auto;border-radius:18px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.10);}
+    .mv-shot span{display:block;margin-top:8px;font-size:13px;color:var(--ink-soft);text-align:center;}
+    @media(max-width:600px){.mv-shot{width:150px;} .mv-shot img{width:150px;}}
+    .mv-mtn{display:block;border:1px solid var(--line);background:var(--surface);padding:18px 18px 16px;text-decoration:none;color:inherit;position:relative;}
+    .mv-mtn:hover{border-color:var(--ink);opacity:1;}
+    .mv-mtn h3{font-family:var(--display);font-size:22px;font-weight:600;margin-bottom:4px;padding-right:28px;}
+    .mv-mtn .mv-h{font-family:var(--mono-stack);font-size:12.5px;color:var(--ink-soft);}
+    .mv-mtn .mv-now{margin:12px 0 10px;font-family:var(--display);font-size:30px;font-weight:650;line-height:1;letter-spacing:-0.01em;color:var(--ink-faint);}
+    .mv-mtn .mv-now.OUT{color:var(--sign);} .mv-mtn .mv-now.PARTLY{color:#b07a12;} .mv-mtn .mv-now.HIDDEN{color:#8a3b2e;} .mv-mtn .mv-now.NIGHT{color:var(--ink-soft);}
+    .mv-mtn .mv-nowsub{font-size:13px;color:var(--ink-soft);min-height:18px;}
+    .mv-mtn .mv-go{display:inline-block;margin-top:12px;font-weight:600;font-size:14px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;}
+    .mv-mtn .mv-arrow{position:absolute;top:16px;right:16px;font-size:20px;color:var(--ink-faint);}
+    .mv-mtn:hover .mv-arrow{color:var(--ink);}
     @media (max-width: 960px){
       .header-inner{position:relative;}
       .primary-nav{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;flex-direction:column;align-items:stretch;gap:0;padding:6px 0 10px;z-index:1400;}
@@ -105,7 +122,14 @@
     </div>
   </div>
   <div class="mv-body">
-    <div class="mv-grid"><a class="mv-card" href="rainier/"><h3>Mount Rainier</h3><p>From Seattle. 6 regions, 9 viewpoints. 14,410 ft.</p></a><a class="mv-card" href="hood/"><h3>Mount Hood</h3><p>From Portland. 5 regions, 4 viewpoints. 11,249 ft.</p></a><a class="mv-card" href="baker/"><h3>Mount Baker</h3><p>From Vancouver, BC. 6 regions, 4 viewpoints. 10,781 ft.</p></a><a class="mv-card" href="denali/"><h3>Denali</h3><p>From Talkeetna. 5 regions, 4 viewpoints. 20,310 ft.</p></a></div>
+    <div class="mv-prose"><h2>Pick a mountain</h2></div>
+    <div class="mv-grid"><a class="mv-mtn" href="rainier/" data-host="https://rainier-is-out.leahgerber93.workers.dev" data-key="rainier"><span class="mv-arrow">&rarr;</span><h3>Mount Rainier</h3><div class="mv-h">14,410 ft · from Seattle</div><div class="mv-now" id="mvNow-rainier">…</div><div class="mv-nowsub" id="mvSub-rainier">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a><a class="mv-mtn" href="hood/" data-host="https://hood-is-out.leahgerber93.workers.dev" data-key="hood"><span class="mv-arrow">&rarr;</span><h3>Mount Hood</h3><div class="mv-h">11,249 ft · from Portland</div><div class="mv-now" id="mvNow-hood">…</div><div class="mv-nowsub" id="mvSub-hood">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a><a class="mv-mtn" href="baker/" data-host="https://baker-is-out.leahgerber93.workers.dev" data-key="baker"><span class="mv-arrow">&rarr;</span><h3>Mount Baker</h3><div class="mv-h">10,781 ft · from Vancouver, BC</div><div class="mv-now" id="mvNow-baker">…</div><div class="mv-nowsub" id="mvSub-baker">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a><a class="mv-mtn" href="denali/" data-host="https://denali-is-out.leahgerber93.workers.dev" data-key="denali"><span class="mv-arrow">&rarr;</span><h3>Denali</h3><div class="mv-h">20,310 ft · from Talkeetna</div><div class="mv-now" id="mvNow-denali">…</div><div class="mv-nowsub" id="mvSub-denali">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a></div>
+  </div>
+  <div class="mv-shots">
+    <div class="mv-stamp">The app · iPhone</div>
+    <div class="mv-shots-row"><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../images/mountains/shot-main.jpg" alt="Mountain Visibility Forecast screenshot: Right now" width="1000" height="2164" loading="lazy"><span>Right now</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../images/mountains/shot-forecast.jpg" alt="Mountain Visibility Forecast screenshot: Three-day forecast" width="1000" height="2164" loading="lazy"><span>Three-day forecast</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../images/mountains/shot-alpenglow.jpg" alt="Mountain Visibility Forecast screenshot: Sunrise and sunset light" width="1000" height="2164" loading="lazy"><span>Sunrise and sunset light</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../images/mountains/shot-spots.jpg" alt="Mountain Visibility Forecast screenshot: Viewpoints" width="1000" height="2164" loading="lazy"><span>Viewpoints</span></a><a class="mv-shot" href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955"><img src="../images/mountains/shot-hidden.jpg" alt="Mountain Visibility Forecast screenshot: When it is hidden" width="1000" height="2164" loading="lazy"><span>When it is hidden</span></a></div>
+  </div>
+  <div class="mv-body">
     <div class="mv-prose">
       <h2>How we know</h2>
       <p>Each page reads the cloud ceilings at the airports between you and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below the summit. Low cloud and high cloud are scored separately. A thin high layer and a low deck can both read as 60% cloud, and only one of them hides the mountain.</p>
@@ -116,7 +140,19 @@
       <div class="mv-cta"><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get it on the App Store</a><span class="mv-soon">Android is in testing. <a href="mailto:feedback@milecheckapp.com?subject=Android%20tester">Email us</a> to be a tester.</span></div>
     </div>
   </div>
-  <div class="mv-notes">Observations from NOAA aviation weather. Forecast from MET Norway (CC BY 4.0). Smoke from NOAA NDGD. Not affiliated with the National Park Service or any public agency.</div>
+  <div class="mv-notes">Observations from NOAA aviation weather. Forecast from MET Norway (CC BY 4.0). Smoke from NOAA NDGD. Not affiliated with the National Park Service or any public agency.</div><script>
+(function(){
+document.querySelectorAll('a.mv-mtn').forEach(function(a){
+  var k=a.dataset.key, host=a.dataset.host, v=document.getElementById('mvNow-'+k), s=document.getElementById('mvSub-'+k);
+  fetch(host+'/data.json').then(function(r){return r.json();}).then(function(d){
+    var r=d.now||(d.regions||[])[0]; if(!r) throw 0;
+    var night=!(Date.now()>=Date.parse(d.sun.civilDawn)&&Date.now()<Date.parse(d.sun.civilDusk));
+    var vv=night?'NIGHT':r.verdict; v.textContent={OUT:'Visible',PARTLY:'Partly',HIDDEN:'Hidden',NIGHT:'Dark now'}[vv]||vv; v.className='mv-now '+vv;
+    s.textContent=night?'Live again at sunrise.':('Right now from '+r.name+(r.viewerCeilingFt?', cloud at '+r.viewerCeilingFt.toLocaleString()+' ft':', no cloud deck')+'.');
+  }).catch(function(){ v.textContent='Live'; s.textContent='Open the page for the current reading.'; });
+});
+})();
+</script>
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
