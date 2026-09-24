@@ -58,6 +58,8 @@ for (const file of htmlFiles(ROOT)) {
   const m = src.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i);
   // Only index pages that claim themselves as canonical.
   if (!m || m[1] !== want) { skippedNoCanonical++; continue; }
+  // A page that asks not to be indexed does not belong in the sitemap either (2026-09-24: /sponsor/pages/).
+  if (/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(src)) { skippedNoCanonical++; continue; }
   urls.push({ loc: want, priority: priority(rel) });
 }
 

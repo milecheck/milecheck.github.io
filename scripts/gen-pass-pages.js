@@ -4,6 +4,7 @@
 // Run: node scripts/gen-pass-pages.js   (writes files + prints a summary)
 const fs = require('fs');
 const path = require('path');
+const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the eyebrow (2026-09-24)
 
 const PASSES = [
   {
@@ -306,6 +307,7 @@ function page(p){
   const isArea = p.kind === 'area';
   const up = p.up || '../../';
   const url = p.url || `https://milecheckapp.com/passes/${p.slug}/`;
+  const sp = SPON.slot({ kind: 'pass', slug: p.slug, name: p.name });
   const credit = p.credit || p.dot;
   const segs = p.segs || [{ h: 'When it closes', p: p.closes }, p.extra];
   const segsHtml = segs.map(s=>`    <div class="co-seg"><h3>${s.h}</h3><p>${s.p}</p></div>`).join('\n');
@@ -425,6 +427,7 @@ function page(p){
     #snowBox p.m{color:#5b6670;font-size:13.5px;line-height:1.5;margin:0;}
     #snowBox ul li b{color:#0E1116;}
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} }
+${sp.css}
   </style>
 </head>
 <body>
@@ -450,6 +453,7 @@ function page(p){
   <div class="crit-banner" id="critBanner" style="display:none"></div>
 
   <div class="co-hero">
+${sp.html}
     <div class="eyebrow">${p.eyebrow || `${p.route} · ${p.stateName} · Elevation ${p.elev}`}</div>
     <h1>${p.h1 || `${p.name} right now: live camera &amp; conditions`}</h1>
     <p class="sub">${p.hero}</p>
@@ -648,6 +652,7 @@ Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),P
 if(SNOW){loadSnow().catch(()=>{document.getElementById('snAsOf').textContent='The station did not answer. Try again in a few minutes.';});loadForecast().catch(()=>{});loadAvy().catch(()=>{});}
 </script>
 
+${sp.js}
 </body>
 </html>`;
 }

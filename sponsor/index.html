@@ -12,7 +12,7 @@
   <meta name="description" content="One sponsor per page: every interstate corridor page and every state and city camera page on milecheckapp.com carries one slot at the top of the page. $50 a month per page. The numbers, live.">
   <link rel="canonical" href="https://milecheckapp.com/sponsor/">
   <meta property="og:title" content="Sponsor a page on milecheckapp.com | MileCheck">
-  <meta property="og:description" content="One sponsor per page. Viewable impressions and outbound clicks, counted on the slot itself, updated daily.">
+  <meta property="og:description" content="Sponsor a topic on milecheckapp.com. Website only, the app has no ads. Email for pricing, see the traffic.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/sponsor/">
   <meta property="og:type" content="website">
@@ -65,6 +65,16 @@
     .sp-cta{max-width:1120px;margin:0 auto;padding:34px 32px 50px;}
     .sp-cta a.btn{display:inline-block;background:#0f7a4f;color:#fff;font-weight:800;padding:12px 18px;border-radius:12px;text-decoration:none;}
     @media(max-width:600px){ .sp-hero,.sp-section,.sp-cta{padding-left:20px;padding-right:20px;} .sp-calc{font-size:18px;} .sp-calc input{width:120px;font-size:18px;} }
+    .sp-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+    .sp-tab{border:1px solid #E5E5E5;border-radius:999px;padding:8px 16px;text-decoration:none;color:#0E1116;font-weight:700;font-size:14px;background:#fff;}
+    .sp-tab:hover{border-color:#0f7a4f;color:#0f7a4f;}
+    .sp-place .n{font-size:26px;font-weight:800;line-height:1;}
+    .sp-place .f{font-weight:800;margin:6px 0 4px;}
+    .sp-place .l{font-size:14px;color:#3a444d;line-height:1.5;}
+    .sp-place .e{margin-top:8px;font-size:13.5px;font-weight:700;color:#0f7a4f;}
+    .sp-table{width:100%;border-collapse:collapse;font-size:14px;}
+    .sp-table th,.sp-table td{text-align:left;padding:8px 6px;border-bottom:1px solid #eee;}
+    .sp-table th:not(:first-child),.sp-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;}
   </style>
 </head>
 <body>
@@ -88,17 +98,34 @@
 <main>
   <section class="sp-hero">
     <h1 class="sp-label" style="margin-bottom:14px;">Website sponsorships</h1>
-    <p>Every interstate corridor page, every state and city camera page, and every state mile-marker guide carries one sponsor slot, at the top of the page. Buy any page by name, as many as you want. Website only: the app has no ads.</p>
+    <p>milecheckapp.com is where drivers check a road before they drive it: live cameras, pass conditions, drawbridge status, interstate corridors, and how mile markers work in every state. A sponsor slot sits at the top of those pages. Website only. The app has no ads.</p>
+    <p class="sp-note">Sponsorships are sold by topic, not by state: the camera pages, the corridor pages, the pass pages, the drawbridge pages, the mile-marker guides, the highway-basics guides, the reports, the front page, the Mountain Visibility pages, or the Seattle Drawbridges pages. One sponsor per topic, so a tire brand and a towing company are never side by side on the same page.</p>
+    <div class="sp-tabs" role="tablist">
+      <a class="sp-tab" href="#offering">The offering</a>
+      <a class="sp-tab" href="#pricing">Pricing</a>
+      <a class="sp-tab" href="#numbers">Traffic</a>
+    </div>
+  </section>
+
+  <section class="sp-section" id="offering">
+    <h2>What a sponsor gets</h2>
+    <div class="sp-places" id="families"></div>
+    <p class="sp-note">Your logo, one sentence, and a link, in the slot at the top of every page in the topic. Nothing follows the reader around, and no third-party script runs. See the slot on any page: <a href="/passes/snoqualmie/?sponsor=preview">Snoqualmie Pass</a>, <a href="/cameras/ohio/?sponsor=preview">Ohio cameras</a>, <a href="/bridges/washington/?sponsor=preview">Washington drawbridges</a>.</p>
+  </section>
+
+  <section class="sp-section" id="pricing">
+    <h2>Pricing</h2>
+    <p class="sub">Email and say which topic you want. You get the price, the page list, and the numbers for those pages.</p>
+    <a class="btn" href="mailto:sales@milecheckapp.com?subject=Sponsoring%20milecheckapp.com">Email sales@milecheckapp.com</a>
   </section>
 
   <section class="sp-section" id="numbers" hidden>
-    <h2 id="numbersTitle">Since counting began</h2>
-    <p class="sub">Viewable impressions and outbound clicks are counted on the slot itself, across every page that carries one. Whole days only, ending yesterday. Updated daily.</p>
+    <h2 id="numbersTitle">Traffic</h2>
+    <p class="sub">Viewable impressions and outbound clicks, counted on the slot itself across every page that carries one. Whole days only, ending yesterday.</p>
     <div class="sp-stats">
       <div class="sp-stat"><div class="n live" id="nImp">—</div><div class="l">viewable impressions</div></div>
       <div class="sp-stat"><div class="n" id="nClk">—</div><div class="l">outbound clicks</div></div>
-      <div class="sp-stat"><div class="n" id="nCtr">—</div><div class="l">click-through rate</div></div>
-      <div class="sp-stat"><div class="n" id="nPerDay">—</div><div class="l">impressions a day, average</div></div>
+      <div class="sp-stat"><div class="n" id="nPerDay">—</div><div class="l">impressions a day</div></div>
     </div>
     <div class="sp-days">
       <div class="t">By day</div>
@@ -106,30 +133,11 @@
       <div class="sp-axis"><span id="axFrom"></span><span id="axTo"></span></div>
       <div class="sp-legend"><i></i>impressions &nbsp; <b></b>clicks &nbsp; · counting since <span id="since">Sept 15, 2026</span></div>
     </div>
-  </section>
-
-  <section class="sp-section" id="cost">
-    <h2>What it costs</h2>
-    <div class="sp-price"><span class="big">$50 a month per page</span><span class="for">Pick the pages you want. Three-month pilot, then month to month.</span></div>
-    <p class="sp-note">Each page has one sponsor, and it's yours until your dates end. You pay to be on the page, not per click. On the first of every month you get the impressions and clicks for your pages, the same numbers this page shows.</p>
-  </section>
-
-  <section class="sp-section" id="placements">
-    <h2>Where the slot is</h2>
-    <p class="sub">One hundred and six pages today. Each one shows one sponsor, at the top of the page. Buy any of them by name.</p>
-    <div class="sp-places">
-      <a class="sp-place" href="/corridors/"><div class="n">10</div><div class="l">interstate corridor pages. I-5, I-10, I-15, I-70, I-75, I-80, I-90, I-94, I-95, I-4, end to end.</div><div class="e">See I-75 →</div></a>
-      <a class="sp-place" href="/cameras/"><div class="n">22</div><div class="l">state camera pages. Every live DOT camera in the state, tagged with its mile marker.</div><div class="e">See Ohio →</div></a>
-      <a class="sp-place" href="/cameras/"><div class="n">24</div><div class="l">city camera pages. The cameras around one metro, on one map.</div><div class="e">See Los Angeles →</div></a>
-      <a class="sp-place" href="/blog/mile-markers-ohio.html"><div class="n">50</div><div class="l">state mile-marker guides. How the numbers run in that state, which routes to know, and how to report your location there.</div><div class="e">See Ohio →</div></a>
+    <div class="sp-days" style="margin-top:12px;">
+      <div class="t">By topic, same period</div>
+      <table class="sp-table" id="famTable"><thead><tr><th>Topic</th><th>Pages</th><th>Impressions</th><th>Clicks</th></tr></thead><tbody></tbody></table>
+      <p class="sp-note" style="margin-top:10px;">An impression means the slot was at least half visible for one second. Search traffic is separate: about 7,000 clicks from Google in the last 28 days across the site.</p>
     </div>
-    <p class="sp-note">A corridor page covers that interstate end to end. A state page and its city pages are separate pages; take the ones you want.</p>
-  </section>
-
-  <section class="sp-cta">
-    <h2 style="font-size:24px;margin:0 0 8px;">Ask about a page</h2>
-    <p style="font-size:15px;color:#525252;margin:0 0 16px;max-width:740px;line-height:1.6;">Email the pages you want, by name. You get the same numbers this page shows, for your slot, every month.</p>
-    <a class="btn" href="mailto:sales@milecheckapp.com?subject=Sponsor%20a%20page%20on%20milecheckapp.com">Email sales@milecheckapp.com</a>
   </section>
 </main>
 <footer class="site-footer">
@@ -189,21 +197,53 @@
   var W = 'https://milepost-proxy.leahgerber93.workers.dev';
   var $ = function(id){ return document.getElementById(id); };
   var int = function(n){ return Math.round(n).toLocaleString('en-US'); };
-
+  var FAM = {
+    home:    ['Front page', 'The home page and the mile-marker map, the two most-visited pages on the site.', '/'],
+    cameras: ['Cameras', 'Every state and metro camera page: live DOT cameras tagged with their mile marker.', '/cameras/'],
+    corridor:['Interstate corridors', 'I-5, I-10, I-15, I-70, I-75, I-80, I-90, I-94, I-95 and I-4, end to end.', '/corridors/'],
+    pass:    ['Mountain passes', 'Snoqualmie, Stevens, Siskiyou, Donner, Parleys, Eisenhower, Vail and more, with snow, plows and cameras.', '/passes/'],
+    bridge:  ['Drawbridges', 'Live Seattle bridge status and every regulated drawbridge, state by state.', '/bridges/'],
+    guide:   ['Mile-marker guides', 'How the numbers run in each state and province, and how to report your location there.', '/states/'],
+    basics:  ['Highway basics', 'The explainers: chains required, black ice, 511, sign colors, runaway ramps, new-driver tips.', '/what-is-my-mile-marker/'],
+    article: ['Reports and articles', 'The holiday and monthly road reports, and the blog.', '/blog/'],
+    live:    ['Live conditions', 'Border waits, ferries, wildfires, closures and weather, on one map each.', '/closures/'],
+    mountain:['Mountain Visibility', 'Is Rainier, Hood, Baker or Denali visible right now, from each city that can see it. Scenic flights, photo tours, lodging.', '/mountains/'],
+    drawbridge:['Seattle Drawbridges', 'Is the bridge up: the seven Seattle drawbridges, opening rules and rush hours.', '/seattle-drawbridges/']
+  };
+  var pages = null, stats = null;
+  function famOf(k){ return k.split(':')[0]; }
+  function render(){
+    if (!pages) return;
+    var count = {}; pages.forEach(function(p){ var f = famOf(p.key); count[f] = (count[f]||0) + 1; });
+    var box = $('families'); box.innerHTML = '';
+    Object.keys(FAM).forEach(function(f){
+      if (!count[f]) return;
+      var a = document.createElement('a'); a.className = 'sp-place'; a.href = FAM[f][2];
+      a.innerHTML = '<div class="n">' + count[f] + '</div><div class="f"></div><div class="l"></div><div class="e">See the pages →</div>';
+      a.querySelector('.f').textContent = FAM[f][0]; a.querySelector('.l').textContent = FAM[f][1];
+      box.appendChild(a);
+    });
+    if (!stats) return;
+    var by = {}; (stats.bySlot||[]).forEach(function(x){ var f = famOf(x.slot); by[f] = by[f] || {i:0,c:0}; by[f].i += x.impressions; by[f].c += x.clicks; });
+    var tb = $('famTable').querySelector('tbody'); tb.innerHTML = '';
+    Object.keys(FAM).filter(function(f){ return count[f]; }).sort(function(a,b){ return ((by[b]||{i:0}).i) - ((by[a]||{i:0}).i); }).forEach(function(f){
+      var tr = document.createElement('tr'); var s = by[f] || {i:0,c:0};
+      [FAM[f][0], count[f], int(s.i), int(s.c)].forEach(function(v){ var td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  }
+  fetch('/data/sponsor-pages.json').then(function(r){ return r.json(); }).then(function(d){ pages = d.pages || []; render(); }).catch(function(){});
   fetch(W + '/sponsor-stats?days=28').then(function(r){ return r.json(); }).then(function(d){
-    if (!d || !d.ok || !d.byDay || !d.byDay.length) return; // no numbers: the section stays hidden
-    // Days are UTC on the Worker. Drop the current UTC day: it is partial and
-    // reads as a collapse on the chart and drags the daily average down.
+    if (!d || !d.ok || !d.byDay || !d.byDay.length) return;
     var todayUTC = new Date().toISOString().slice(0, 10);
     d.byDay = d.byDay.filter(function(x){ return x.day < todayUTC; });
     if (!d.byDay.length) return;
+    stats = d;
     var t = {impressions:0, clicks:0};
     d.byDay.forEach(function(x){ t.impressions += x.impressions; t.clicks += x.clicks; });
-    if (d.byDay.length >= 28) $('numbersTitle').textContent = 'The last 28 days';
-    else $('numbersTitle').textContent = d.byDay.length === 1 ? 'The first full day' : 'The first ' + d.byDay.length + ' full days';
+    $('numbersTitle').textContent = d.byDay.length >= 28 ? 'Traffic, the last 28 days' : 'Traffic, the first ' + d.byDay.length + ' full days';
     $('nImp').textContent = int(t.impressions);
     $('nClk').textContent = int(t.clicks);
-    $('nCtr').textContent = t.impressions ? (100 * t.clicks / t.impressions).toFixed(1) + '%' : '—';
     $('nPerDay').textContent = int(t.impressions / Math.max(1, d.byDay.length));
     var max = 1; d.byDay.forEach(function(x){ if (x.impressions > max) max = x.impressions; });
     var bars = $('bars'); bars.innerHTML = '';
@@ -217,6 +257,7 @@
     $('axFrom').textContent = d.byDay[0].day; $('axTo').textContent = d.byDay[d.byDay.length - 1].day;
     if (d.since) $('since').textContent = d.since;
     $('numbers').hidden = false;
+    render();
   }).catch(function(){});
 })();
 </script>
