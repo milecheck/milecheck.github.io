@@ -33,273 +33,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
 
-  <!-- Additional styles for new sections (will fold into style.css when shipping) -->
   <style>
-    /* PREVIEW WATERMARK */
-    .preview-banner {
-      background: #FEF3C7;
-      border-bottom: 2px solid #F59E0B;
-      padding: 10px 32px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #92400E;
-    }
-    .preview-banner a { color: #92400E; text-decoration: underline; }
-
-    /* NAV-TO-MP SECTION (new) */
-    .nav-to-mp {
-      padding: 96px 0;
-      border-bottom: 1px solid #E5E5E5;
-      background: #FAFAFA;
-    }
-    .nav-to-mp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .nav-to-mp-tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #00C880;
-      background: rgba(0,200,128,0.1);
-      padding: 6px 12px;
-      border-radius: 3px;
-      margin-bottom: 20px;
-    }
-    .nav-to-mp h2 {
-      font-size: 48px;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.05;
-      margin-bottom: 24px;
-      color: #000;
-    }
-    .nav-to-mp p {
-      font-size: 17px;
-      line-height: 1.6;
-      color: #525252;
-      margin-bottom: 18px;
-      max-width: 540px;
-    }
-    .nav-to-mp p strong { color: #000; font-weight: 600; }
-    .nav-to-mp-footnote {
-      font-size: 13px;
-      color: #999;
-      margin-top: 16px;
-      font-style: italic;
-    }
-    .demo-phone {
-      max-width: 320px;
-      margin: 0 auto;
-      position: relative;
-      border-radius: 38px;
-      padding: 10px;
-      background: #1a1f26;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04);
-    }
-    .demo-phone-inner {
-      border-radius: 30px;
-      overflow: hidden;
-      aspect-ratio: 1320 / 2868;
-      background: #fff;
-      position: relative;
-    }
-    .demo-phone-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-    }
-    .demo-play-badge {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .demo-play-badge::before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      border-left: 11px solid #00C880;
-    }
-
-    /* TWO-COLUMN POSITIONING (revised) */
-    .positioning-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid #E5E5E5;
-    }
-    .positioning-col {
-      padding: 16px 28px 16px 0;
-      border-right: 1px solid #E5E5E5;
-    }
-    .positioning-col:nth-child(2) {
-      padding: 16px 28px 16px 28px;
-    }
-    .positioning-col:last-child {
-      padding: 16px 0 16px 28px;
-      border-right: none;
-    }
-    .positioning-col-num {
-      font-size: 13px;
-      font-weight: 600;
-      color: #999;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-    .positioning-col h3 {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.4px;
-      line-height: 1.2;
-      margin-bottom: 5px;
-      color: #000;
-    }
-    .positioning-col p {
-      font-size: 14px;
-      line-height: 1.5;
-      color: #525252;
-      margin: 0;
-    }
-
-    /* PARTNERS SECTION (new) */
-    .partners {
-      padding: 96px 0;
-      background: #0F1419;
-      color: #fff;
-      border-bottom: 1px solid #0F1419;
-    }
-    .partners .section-label {
-      color: #00C880;
-    }
-    .partners h2 {
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: -1.2px;
-      line-height: 1.1;
-      color: #fff;
-      margin-bottom: 32px;
-      max-width: 720px;
-    }
-    .partners-body {
-      font-size: 16px;
-      line-height: 1.65;
-      color: #A1A8B3;
-      max-width: 680px;
-      margin-bottom: 24px;
-    }
-    .partners-body strong { color: #fff; font-weight: 600; }
-    .partners-cta-row {
-      margin-top: 36px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      gap: 18px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .partners-email {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 15px;
-      font-weight: 600;
-      color: #00C880;
-      text-decoration: none;
-      border-bottom: 1px solid #00C880;
-      padding-bottom: 2px;
-    }
-    .partners-email:hover { opacity: 0.8; }
-    .partners-secondary-link {
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      border: 1px solid #525252;
-      padding: 10px 18px;
-      text-decoration: none;
-    }
-    .partners-secondary-link:hover { background: #fff; color: #0F1419; opacity: 1; }
-
-    /* PREMIUM+ tier preview adjustment */
-    .tier-premiumplus {
-      opacity: 1 !important;
-    }
-    .tier-premiumplus .tier-price {
-      font-size: 18px !important;
-      font-weight: 600 !important;
-      color: #00C880 !important;
-      letter-spacing: 0 !important;
-      line-height: 1.3 !important;
-    }
-    .tier-premiumplus .tier-period {
-      display: none !important;
-    }
-    .tier-premiumplus .tier-meta-promo {
-      font-size: 12px;
-      color: #525252;
-      margin-top: 8px;
-      font-weight: 500;
-    }
-
-    /* Make 4-row audiences work */
-    .partners-footer-link {
-      display: block;
-      margin-top: 4px;
-      font-size: 12px;
-      color: #525252;
-    }
-    .partners-footer-link a {
-      color: inherit;
-      text-decoration: underline;
-      text-decoration-color: #E5E5E5;
-    }
-    .partners-footer-link a:hover { color: #000; }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      .nav-to-mp-grid { grid-template-columns: 1fr; gap: 40px; }
-      .nav-to-mp h2 { font-size: 36px; }
-      .demo-phone { max-width: 240px; }
-      .positioning-grid { grid-template-columns: 1fr; }
-      .positioning-col { padding: 32px 0 !important; border-right: none !important; border-bottom: 1px solid #E5E5E5; }
-      .positioning-col:last-child { border-bottom: none; }
-      .partners h2 { font-size: 30px; }
-    }
-  </style>
-  <style>
-
-    /* PREVIEW WATERMARK */
-    .preview-banner {
-      background: #FEF3C7;
-      border-bottom: 2px solid #F59E0B;
-      padding: 10px 32px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #92400E;
-    }
-    .preview-banner a { color: #92400E; text-decoration: underline; }
 
     /* ENTERPRISE PAGE — calmer, more precise than consumer page */
     body.enterprise { background: #FAFAFA; }
@@ -493,36 +227,6 @@
       font-size: 14px;
       line-height: 1.6;
       color: #525252;
-    }
-
-    /* Shapes of conversation */
-    .shapes-list {
-      list-style: none;
-      padding: 0;
-      max-width: 780px;
-    }
-    .shapes-list li {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #525252;
-      padding: 18px 0 18px 32px;
-      border-bottom: 1px solid #E5E5E5;
-      position: relative;
-    }
-    .shapes-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: #00C880;
-      font-weight: 700;
-      font-size: 18px;
-    }
-    .shapes-list li strong { color: #000; font-weight: 600; }
-    .shapes-footnote {
-      font-size: 14px;
-      color: #525252;
-      margin-top: 22px;
-      font-style: italic;
     }
 
     /* Proof block */
@@ -734,12 +438,6 @@
           .faq-item p{font-size:16px;line-height:1.65;color:#525252;margin:0 0 22px;max-width:700px;}
           .faq-item p a{color:#00A86B;font-weight:600;}
         </style>
-<style>
-            .b2b-acc summary{list-style:none;cursor:pointer;font-size:15px;font-weight:700;color:#00A86B;padding:14px 0;border-top:1px solid #E5E5E5;}
-            .b2b-acc summary::-webkit-details-marker{display:none;}
-            .b2b-acc summary::after{content:'+';float:right;font-weight:400;font-size:18px;color:#00A86B;}
-            .b2b-acc[open] summary::after{content:'\2212';}
-          </style>
 <style>@media (max-width:760px){ .cta-section .container > div{ grid-template-columns:1fr !important; gap:28px !important; } }</style>
 <style>
       .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
@@ -918,7 +616,7 @@
     </section>
 
     <!-- ============== BUILD VS LICENSE ============== -->
-    <section class="ent-section">
+    <section class="ent-section" id="build-vs-license">
       <div class="container">
         <p class="ent-section-label">Build vs. license</p>
         <h2>Building the data is harder than building the app.</h2>
@@ -989,6 +687,28 @@
           <div class="infra-cell">
             <h3>Joint development</h3>
             <p>Co-engineering a vertical use case on top of the highway intelligence layer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FURTHER READING (2026-09-25) ============== -->
+    <section class="ent-section ent-section-alt">
+      <div class="container">
+        <p class="ent-section-label">Further reading</p>
+        <h2>The fleet &amp; data-licensing angle, in more detail.</h2>
+        <div class="infra-grid" style="margin-top:36px;">
+          <div class="infra-cell">
+            <h3><a href="/blog/fleet-dispatch-mile-markers.html" style="color:#000;text-decoration:none;">Why fleet dispatch still runs on mile markers, not GPS pins &rarr;</a></h3>
+            <p>Telematics gives a fleet a coordinate. Dispatch, state DOTs, and roadside assistance still work in route-and-mile-marker. Here&rsquo;s the gap, and how MileCheck closes it.</p>
+          </div>
+          <div class="infra-cell">
+            <h3><a href="/blog/dot-alerts-api-for-fleets.html" style="color:#000;text-decoration:none;">The DOT alerts API: what 50 states actually takes &rarr;</a></h3>
+            <p>No two state DOTs publish road alerts the same way. What building &mdash; or licensing &mdash; one normalized feed from all 50 actually involves.</p>
+          </div>
+          <div class="infra-cell">
+            <h3><a href="/blog/chain-control-alerts-for-fleets.html" style="color:#000;text-decoration:none;">Chain control alerts for multi-state fleets &rarr;</a></h3>
+            <p>Traction laws are set state by state and can change within the hour. Why a corridor-wide feed beats watching each state separately.</p>
           </div>
         </div>
       </div>

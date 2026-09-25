@@ -21,9 +21,27 @@
    "sponsor": "house"
   },
   {
+   "key": "article:chain-control-alerts-for-fleets",
+   "path": "/blog/chain-control-alerts-for-fleets.html",
+   "title": "Chain Control Alerts for Trucking Fleets",
+   "sponsor": "house"
+  },
+  {
+   "key": "article:dot-alerts-api-for-fleets",
+   "path": "/blog/dot-alerts-api-for-fleets.html",
+   "title": "The DOT Alerts API: What It Takes to Get Live Closures From 50 States",
+   "sponsor": "house"
+  },
+  {
    "key": "article:drawbridge-maps",
    "path": "/blog/drawbridge-maps.html",
    "title": "Every Drawbridge in America Has a Rulebook. We Mapped It.",
+   "sponsor": "house"
+  },
+  {
+   "key": "article:fleet-dispatch-mile-markers",
+   "path": "/blog/fleet-dispatch-mile-markers.html",
+   "title": "Why Fleet Dispatch Still Runs on Mile Markers, Not GPS Pins",
    "sponsor": "house"
   },
   {
@@ -1031,7 +1049,7 @@
   {
    "key": "cameras:hub",
    "path": "/cameras/",
-   "title": "Live Highway Cameras — 39 US states + 3 Canadian provinces, route + mile marker tagged",
+   "title": "Live Highway Cameras — 39 US states + 5 Canadian provinces, route + mile marker tagged",
    "sponsor": "house"
   },
   {
