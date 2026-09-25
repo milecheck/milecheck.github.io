@@ -335,7 +335,7 @@ const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|M|Loop|\\d)[- ]?\\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});

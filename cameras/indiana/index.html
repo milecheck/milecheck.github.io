@@ -152,7 +152,7 @@
 
   <section class="co-faq">
     <h2>Indiana camera questions, answered</h2>
-    <details><summary>Where can I watch live Indiana traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live INDOT highway cameras across Indiana, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond Indiana, see <a href="../">every highway camera in <!--cov:cameras.us_states-->27<!--/cov--> states</a>.</p></details>
+    <details><summary>Where can I watch live Indiana traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live INDOT highway cameras across Indiana, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond Indiana, see <a href="../">every highway camera in <!--cov:cameras.us_states-->39<!--/cov--> states</a>.</p></details>
     <details><summary>Are Indiana DOT traffic cameras free?</summary><p>Yes. INDOT publishes its traffic cameras publicly, and MileCheck puts them on one map for free — no account, no sign-up. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-indiana&mt=8" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.</p></details>
     <details><summary>Which highways have cameras in Indiana?</summary><p>Watch I-65 from the Ohio River to Gary, <a href="../../corridors/i-70/">I-70</a> through Indianapolis, <a href="../../corridors/i-94/">I-94</a> and the <a href="../../corridors/i-80/">Toll Road</a> along Lake Michigan, and the I-465 loop. In winter the Snowplows layer shows where INDOT's trucks are, each with the route and mile it reports, what material it is applying, and a photo from the truck's own camera where it sends one.</p></details>
     <details><summary>How often do Indiana traffic cameras update?</summary><p>Most INDOT cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.</p></details>
@@ -213,7 +213,7 @@ const CODE="IN";
 const DOT="INDOT";
 const PLOWS=true;
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|M|Loop|\d)[- ]?\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|CT|QEW|BC|ON|AB|M|Loop|\d)[- ]?\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});

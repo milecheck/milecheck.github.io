@@ -149,6 +149,9 @@ async function main() {
         us_state_codes: liveUS(cameras),
         province_codes: liveCA(cameras),
         total_cameras: cameras.reduce((a, r) => a + r.records, 0),
+        // For prose: the total rounded DOWN to the thousand, printed with a '+' after the marker
+        // ("40,000+"), so a feed dipping by a few hundred never makes a public number wrong.
+        total_cameras_floor: Math.floor(cameras.reduce((a, r) => a + r.records, 0) / 1000) * 1000,
       },
       mileposts: { us_states: 50, note: 'bundled offline in-app; not probed per-request' },
       borders: { crossings: borders.records, status: borders.status },

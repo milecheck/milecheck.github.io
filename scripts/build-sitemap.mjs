@@ -38,6 +38,17 @@ const urlFor = (rel) =>
   : rel.endsWith('/index.html') ? `${BASE}/${rel.slice(0, -'index.html'.length)}`
   : `${BASE}/${rel}`;
 
+/** The page's real last change: its last git commit date. A page that is not in git yet
+ *  (just generated) gets today. Before 2026-09-24 every URL got today's date on every
+ *  rebuild, which told Google all 324 pages changed each time the sitemap was rebuilt. */
+import { execSync } from 'node:child_process';
+function lastChanged(rel) {
+  try {
+    const d = execSync(`git log -1 --format=%cs -- "${rel}"`, { cwd: ROOT, encoding: 'utf8' }).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : TODAY;
+  } catch { return TODAY; }
+}
+
 /** Priority by depth: home > section hub > leaf. */
 function priority(rel) {
   if (rel === 'index.html') return '1.0';
@@ -60,7 +71,7 @@ for (const file of htmlFiles(ROOT)) {
   if (!m || m[1] !== want) { skippedNoCanonical++; continue; }
   // A page that asks not to be indexed does not belong in the sitemap either (2026-09-24: /sponsor/pages/).
   if (/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(src)) { skippedNoCanonical++; continue; }
-  urls.push({ loc: want, priority: priority(rel) });
+  urls.push({ loc: want, priority: priority(rel), lastmod: lastChanged(rel) });
 }
 
 urls.sort((a, b) => (b.priority.localeCompare(a.priority)) || a.loc.localeCompare(b.loc));
@@ -70,7 +81,7 @@ const xml =
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url>
     <loc>${u.loc}</loc>
-    <lastmod>${TODAY}</lastmod>
+    <lastmod>${u.lastmod}</lastmod>
     <priority>${u.priority}</priority>
   </url>`).join('\n')}
 </urlset>
