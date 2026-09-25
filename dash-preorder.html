@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});</script><!-- /ga4 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MileCheck Dash Display — Get Early Access</title>
+  <meta name="description" content="A small vent-mount display that shows your exact mile marker, no phone screen needed. Sign up for early access and the launch price.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,650&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f6f4ec; --paper2:#fbfaf5; --ink:#23261f; --ink2:#5c6156; --rule:#c9c6b8;
+      --safety:#e8a013; --green:#31623f; --brand:#00A86B;
+      --sky1:#2b3a55; --sky2:#59547a; --sky3:#b96d54;
+      --mono:'IBM Plex Mono',monospace; --serif:'Fraunces',Georgia,serif;
+      --sans:'IBM Plex Sans',-apple-system,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.62}
+    a{color:var(--green)}
+    .container{max-width:760px;margin:0 auto;padding:0 24px}
+    .mono{font-family:var(--mono)}
+    .scene{position:relative;overflow:hidden;color:#fff;padding:20px 0 64px;
+      background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 46%,var(--sky3) 78%,#d99a6c 94%,var(--paper) 96%)}
+    .brand{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:#fff;text-decoration:none}
+    .brand img{width:27px;height:27px;border-radius:6px}
+    .kicker{display:block;font:600 12px var(--mono);letter-spacing:.14em;color:var(--safety);text-transform:uppercase;margin:36px 0 10px}
+    h1{font-family:var(--serif);font-weight:650;font-size:clamp(30px,5vw,46px);letter-spacing:-.01em;margin:0 0 14px;max-width:11ch}
+    .sub{font-size:18px;color:rgba(255,255,255,.85);max-width:46ch;margin:0}
+    .device-card{background:var(--paper2);border:1px solid var(--rule);border-radius:14px;padding:28px;margin:-40px 0 32px;
+      box-shadow:0 20px 40px rgba(0,0,0,.18);position:relative;z-index:5}
+    .device-svg{display:block;margin:0 auto 18px}
+    .device-caption{text-align:center;font:500 13px var(--mono);color:var(--ink2)}
+    .section{padding:8px 0 40px}
+    .section h2{font-family:var(--serif);font-weight:650;font-size:24px;margin:0 0 10px}
+    ul.checks{list-style:none;padding:0;margin:0 0 8px}
+    ul.checks li{padding:6px 0 6px 26px;position:relative}
+    ul.checks li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+    form{background:var(--paper2);border:1px solid var(--rule);border-radius:12px;padding:24px;margin-top:8px}
+    label{display:block;font:600 12px var(--mono);letter-spacing:.06em;color:var(--ink2);text-transform:uppercase;margin:0 0 6px}
+    input[type=email],input[type=text]{width:100%;padding:12px 14px;font-size:16px;border:1.5px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink);margin-bottom:16px;font-family:var(--sans)}
+    input:focus{outline:2px solid var(--green);outline-offset:1px}
+    button{width:100%;padding:14px;font:700 15px var(--sans);color:#fff;background:var(--green);border:0;border-radius:8px;cursor:pointer}
+    button:disabled{opacity:.6;cursor:default}
+    .fine{font-size:13px;color:var(--ink2);margin-top:12px}
+    #msg{margin-top:14px;font-weight:600;display:none}
+    #msg.ok{color:var(--green)}
+    #msg.err{color:#a3401f}
+    footer{text-align:center;padding:32px 0;font-size:13px;color:var(--ink2)}
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="container">
+      <a class="brand" href="/"><img src="assets/app-icon-60.png" alt=""> MileCheck</a>
+      <span class="kicker">Coming later — dash display</span>
+      <h1>Your exact mile marker, without looking at your phone.</h1>
+      <p class="sub">A small display that clips to your vent and shows the highway mile marker you're passing, in real time. We're building the first units now — get on the list for early access and the launch price.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="device-card">
+      <img class="device-svg" src="images/dash-display/dash-display-hero.webp" alt="MileCheck dash display, vent-mounted, showing I-5 NB mile marker 142.5" style="width:100%;max-width:520px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.25)">
+      <p class="device-caption">Concept render — final size and mount will change during testing.</p>
+    </div>
+
+    <div class="section">
+      <h2>What it does</h2>
+      <ul class="checks">
+        <li>Shows the mile marker you're currently passing, updated live off GPS</li>
+        <li>Clips to an air vent — no wiring, no phone mount blocking your view</li>
+        <li>Same 50-state milepost data already in the MileCheck app, running on the device</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Get early access</h2>
+      <p>We're hand-building the first units. Signing up doesn't charge you anything — it puts you on the list for a working prototype review and first access to preorder at the launch price before it opens to everyone.</p>
+      <form id="preorderForm">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+        <label for="name">Name (optional)</label>
+        <input type="text" id="name" name="name" placeholder="First name">
+        <button type="submit" id="submitBtn">Get early access</button>
+        <p class="fine">No spam, no charge today. We'll only email you about this device.</p>
+        <div id="msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/">← Back to milecheckapp.com</a>
+  </footer>
+
+  <script>
+    const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev/preorder';
+    const form = document.getElementById('preorderForm');
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('submitBtn');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const name = document.getElementById('name').value.trim();
+      btn.disabled = true; btn.textContent = 'Submitting…';
+      msg.style.display = 'none';
+      try {
+        const res = await fetch(WORKER, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name, source: 'dash-preorder-page' }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Something went wrong');
+        msg.className = 'ok';
+        msg.textContent = data.alreadyOnList
+          ? "You're already on the list — we'll be in touch."
+          : "You're on the list. We'll email you when there's news.";
+        msg.style.display = 'block';
+        form.reset();
+        if (window.gtag) gtag('event', 'dash_preorder_signup');
+      } catch (err) {
+        msg.className = 'err';
+        msg.textContent = 'Could not submit — please try again in a moment.';
+        msg.style.display = 'block';
+      } finally {
+        btn.disabled = false; btn.textContent = 'Get early access';
+      }
+    });
+  </script>
+</body>
+</html>
