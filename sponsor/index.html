@@ -75,6 +75,8 @@
     .sp-table{width:100%;border-collapse:collapse;font-size:14px;}
     .sp-table th,.sp-table td{text-align:left;padding:8px 6px;border-bottom:1px solid #eee;}
     .sp-table th:not(:first-child),.sp-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;}
+    .sp-val{font-size:10.5px;color:#5b6670;white-space:nowrap;margin-bottom:3px;font-family:'JetBrains Mono',monospace;}
+    .sp-bars{height:150px;}
   </style>
 </head>
 <body>
@@ -120,23 +122,24 @@
   </section>
 
   <section class="sp-section" id="numbers" hidden>
-    <h2 id="numbersTitle">Traffic</h2>
-    <p class="sub">Viewable impressions and outbound clicks, counted on the slot itself across every page that carries one. Whole days only, ending yesterday.</p>
+    <h2>Traffic</h2>
+    <p class="sub"><b>Site traffic:</b> Google sent about 7,000 visits in the last 28 days (Search Console, Sept 21, 2026), and the site ranks for over a thousand highway searches. Sponsors get the page-level numbers by email.</p>
+    <p class="sub" style="margin-top:8px;"><b>The slot's own count.</b> Separately, we count how many times the sponsor strip itself was on screen for at least a second (a "view") and how many times someone tapped it. This is the number a sponsor is billed against, so it is shown here as it is. Counting started Sept 16 on 106 pages and reached all 315 on Sept 24, so most topics have a day of data, not weeks.</p>
     <div class="sp-stats">
-      <div class="sp-stat"><div class="n live" id="nImp">—</div><div class="l">viewable impressions</div></div>
-      <div class="sp-stat"><div class="n" id="nClk">—</div><div class="l">outbound clicks</div></div>
-      <div class="sp-stat"><div class="n" id="nPerDay">—</div><div class="l">impressions a day</div></div>
+      <div class="sp-stat"><div class="n live" id="nImp">—</div><div class="l">slot views, <span id="nDays">—</span></div></div>
+      <div class="sp-stat"><div class="n" id="nClk">—</div><div class="l">taps on the slot</div></div>
+      <div class="sp-stat"><div class="n" id="nPerDay">—</div><div class="l">slot views a day</div></div>
     </div>
     <div class="sp-days">
-      <div class="t">By day</div>
+      <div class="t">Slot views by day</div>
       <div class="sp-bars" id="bars"></div>
       <div class="sp-axis"><span id="axFrom"></span><span id="axTo"></span></div>
-      <div class="sp-legend"><i></i>impressions &nbsp; <b></b>clicks &nbsp; · counting since <span id="since">Sept 15, 2026</span></div>
+      <div class="sp-legend">Each bar is one day. Taps that day are in the label.</div>
     </div>
     <div class="sp-days" style="margin-top:12px;">
-      <div class="t">By topic, same period</div>
-      <table class="sp-table" id="famTable"><thead><tr><th>Topic</th><th>Pages</th><th>Impressions</th><th>Clicks</th></tr></thead><tbody></tbody></table>
-      <p class="sp-note" style="margin-top:10px;">An impression means the slot was at least half visible for one second. Search traffic is separate: about 7,000 clicks from Google in the last 28 days across the site.</p>
+      <div class="t">Slot views by topic, same period</div>
+      <table class="sp-table" id="famTable"><thead><tr><th>Topic</th><th>Pages</th><th>Counting since</th><th>Slot views</th><th>Taps</th></tr></thead><tbody></tbody></table>
+      <p class="sp-note" style="margin-top:10px;">Topics that joined on Sept 24 have hours of data here. Their page traffic is not lower; the counter is younger.</p>
     </div>
   </section>
 </main>
@@ -228,7 +231,8 @@
     var tb = $('famTable').querySelector('tbody'); tb.innerHTML = '';
     Object.keys(FAM).filter(function(f){ return count[f]; }).sort(function(a,b){ return ((by[b]||{i:0}).i) - ((by[a]||{i:0}).i); }).forEach(function(f){
       var tr = document.createElement('tr'); var s = by[f] || {i:0,c:0};
-      [FAM[f][0], count[f], int(s.i), int(s.c)].forEach(function(v){ var td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      var since = (f === 'cameras' || f === 'corridor' || f === 'guide') ? 'Sept 16' : 'Sept 24';
+      [FAM[f][0], count[f], since, int(s.i), int(s.c)].forEach(function(v){ var td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
       tb.appendChild(tr);
     });
   }
@@ -241,7 +245,7 @@
     stats = d;
     var t = {impressions:0, clicks:0};
     d.byDay.forEach(function(x){ t.impressions += x.impressions; t.clicks += x.clicks; });
-    $('numbersTitle').textContent = d.byDay.length >= 28 ? 'Traffic, the last 28 days' : 'Traffic, the first ' + d.byDay.length + ' full days';
+    $('nDays').textContent = d.byDay.length >= 28 ? 'last 28 days' : 'first ' + d.byDay.length + ' full day' + (d.byDay.length === 1 ? '' : 's');
     $('nImp').textContent = int(t.impressions);
     $('nClk').textContent = int(t.clicks);
     $('nPerDay').textContent = int(t.impressions / Math.max(1, d.byDay.length));
@@ -249,10 +253,10 @@
     var bars = $('bars'); bars.innerHTML = '';
     d.byDay.forEach(function(x){
       var el = document.createElement('div'); el.className = 'sp-bar';
-      el.setAttribute('data-tip', x.day + ' · ' + int(x.impressions) + ' impressions · ' + int(x.clicks) + ' clicks');
-      var i = document.createElement('i'); i.style.height = Math.max(2, Math.round(100 * x.impressions / max)) + '%';
-      var b = document.createElement('b'); b.style.height = Math.round(100 * x.clicks / max) + '%';
-      el.appendChild(i); el.appendChild(b); bars.appendChild(el);
+      el.setAttribute('data-tip', x.day + ' · ' + int(x.impressions) + ' views · ' + int(x.clicks) + ' taps');
+      var lab = document.createElement('span'); lab.className = 'sp-val'; lab.textContent = int(x.impressions) + (x.clicks ? ' · ' + x.clicks + ' tap' + (x.clicks === 1 ? '' : 's') : '');
+      var i = document.createElement('i'); i.style.height = Math.max(2, Math.round(80 * x.impressions / max)) + '%';
+      el.appendChild(lab); el.appendChild(i); bars.appendChild(el);
     });
     $('axFrom').textContent = d.byDay[0].day; $('axTo').textContent = d.byDay[d.byDay.length - 1].day;
     if (d.since) $('since').textContent = d.since;
