@@ -76,6 +76,7 @@
     .fy-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:#5b6670;margin:10px 2px 0;}
     .fy-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#0f7a4f;vertical-align:-1px;margin-right:6px;}
     .fy-legend b{display:inline-block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #1d4ed8;vertical-align:-1px;margin-right:6px;}
+    .fy-legend .fy-camleg{display:inline-block;width:10px;height:10px;border-radius:2px;background:#f59e0b;vertical-align:-1px;margin-right:6px;}
     .fy-legend u{display:inline-block;width:18px;height:0;border-top:3px solid #1d4ed8;vertical-align:3px;margin-right:6px;text-decoration:none;}
     .fy-lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:18px;}
     .fy-term{background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:14px 16px;}
@@ -88,6 +89,7 @@
     .fy-note p{margin:0 0 10px;}
     .fy-cta{background:#fff;border:1px solid #E5E5E5;border-radius:12px;padding:12px 16px;font-size:14px;}
     .fy-tdot{width:14px;height:14px;border-radius:50%;background:#0f7a4f;border:2.5px solid #fff;box-shadow:0 0 0 1.5px #0f7a4f;}
+    .fy-camdot{width:12px;height:12px;border-radius:3px;background:#f59e0b;border:2px solid #fff;box-shadow:0 0 0 1px #b45309;cursor:pointer;}
     .fy-tdot.dim{background:#9aa5ad;box-shadow:0 0 0 1.5px #9aa5ad;}
     .fy-tlabel{background:transparent;border:0;box-shadow:none;font:700 12px/1 'Inter',sans-serif;color:#0E1116;text-shadow:0 0 3px #fff,0 0 3px #fff;white-space:nowrap;}
     .fy-boat{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:18px solid #1d4ed8;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));transform-origin:50% 60%;}
@@ -108,7 +110,7 @@
     .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
     .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
     .spon-body:hover .spon-cta{text-decoration:underline;}
-    @media(max-width:600px){ .spon-roy{height:48px;margin:-10px 0 -10px -4px;} .spon{flex-wrap:wrap;gap:8px 12px;padding:10px 12px;min-height:44px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+    @media(max-width:600px){ .spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:8px 10px;} .spon-roy{height:46px;margin:0;align-self:center;} .spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:10px 12px;min-height:44px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
 /* /spon:css */
   </style>
 </head>
@@ -156,7 +158,7 @@
       <div id="fyMap"></div>
       <div class="fy-card" id="fyCard"></div>
     </div>
-    <div class="fy-legend"><span><i></i>Terminal (tap for sailings and cameras)</span><span><b></b>Boat, pointing the way it is heading</span><span><u></u>Route, drawn approximately</span></div>
+    <div class="fy-legend"><span><i></i>Terminal (tap for sailings and cameras)</span><span><b></b>Boat, pointing the way it is heading</span><span><em class="fy-camleg"></em>Camera (tap for the picture)</span><span><u></u>Route, drawn approximately</span></div>
     <div class="fy-lists" id="fyLists"></div>
   </div>
 
@@ -208,7 +210,7 @@ sel.addEventListener('change',function(){route=sel.value;try{localStorage.setIte
 
 var map=L.map('fyMap',{zoomControl:true,scrollWheelZoom:false});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles &copy; Esri',maxZoom:18}).addTo(map);
-var lineLayer=L.layerGroup().addTo(map), termLayer=L.layerGroup().addTo(map), boatLayer=L.layerGroup().addTo(map);
+var lineLayer=L.layerGroup().addTo(map), camLayer=L.layerGroup().addTo(map), termLayer=L.layerGroup().addTo(map), boatLayer=L.layerGroup().addTo(map);
 var data=null, cams=[], terminalsByName={};
 function terminalsFor(){return route?R[route].t:Object.keys(T)}
 function fitRoute(){var pts=terminalsFor().map(function(n){return T[n]});if(route){R[route].lines.forEach(function(l){pts=pts.concat(l)})}map.fitBounds(L.latLngBounds(pts).pad(route?0.25:0.08))}
@@ -222,6 +224,14 @@ function drawStatic(){
     m.bindTooltip(n,{permanent:true,direction:'right',offset:[8,0],className:'fy-tlabel'});
     m.on('click',function(){openTerminal(n)});
   });
+}
+function drawCams(){
+  camLayer.clearLayers(); if(!cams.length)return;
+  var seen={};
+  terminalsFor().forEach(function(n){camsNear(n).forEach(function(c){var k=c.lat.toFixed(4)+','+c.lon.toFixed(4)+c.title;if(seen[k])return;seen[k]=1;
+    var m=L.marker([c.lat,c.lon],{icon:L.divIcon({className:'',html:'<div class="fy-camdot" title="'+esc(c.title)+'"></div>',iconSize:[12,12],iconAnchor:[6,6]}),zIndexOffset:150}).addTo(camLayer);
+    m.bindPopup('<a href="'+esc(c.imageUrl)+'" target="_blank" rel="noopener"><img src="'+esc(c.imageUrl)+'" alt="" style="display:block;width:260px;max-width:70vw;border-radius:6px"></a><div style="font:600 12px Inter,sans-serif;margin-top:6px">'+esc(c.title.replace(/^WSF\s+/,''))+'</div>',{maxWidth:300});
+  })});
 }
 function drawBoats(){
   boatLayer.clearLayers(); if(!data||!data.vessels)return;
@@ -257,7 +267,7 @@ function openTerminal(n){
 function closeCard(){$('fyCard').classList.remove('on')}
 function render(){
   if(!data)return;
-  drawStatic();drawBoats();
+  drawStatic();drawCams();drawBoats();
   var list=$('fyLists');list.innerHTML='';
   var names=terminalsFor().filter(function(n){return terminalsByName[n]});
   names.forEach(function(n){
@@ -279,7 +289,7 @@ function load(){
     render();
   }).catch(function(){$('fyUpdated').textContent='WSDOT feed did not answer. Trying again in a minute.'});
 }
-fetch(W+'/cameras?state=WA').then(function(r){return r.json()}).then(function(d){cams=(d.cameras||[]).filter(function(c){return /ferries/i.test(c.route||'')||/^WSF\b/.test(c.title||'')});}).catch(function(){});
+fetch(W+'/cameras?state=WA').then(function(r){return r.json()}).then(function(d){cams=(d.cameras||[]).filter(function(c){return /ferries/i.test(c.route||'')||/^WSF\b/.test(c.title||'')});drawCams();}).catch(function(){});
 fitRoute();load();setInterval(load,60000);
 })();
 </script>

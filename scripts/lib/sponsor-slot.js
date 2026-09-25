@@ -124,7 +124,7 @@ const CSS = `    .spon{display:flex;align-items:center;gap:12px;min-height:58px;
     .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
     .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
     .spon-body:hover .spon-cta{text-decoration:underline;}
-    @media(max-width:600px){ .spon-roy{height:48px;margin:-10px 0 -10px -4px;} .spon{flex-wrap:wrap;gap:8px 12px;padding:10px 12px;min-height:44px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }`;
+    @media(max-width:600px){ .spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:8px 10px;} .spon-roy{height:46px;margin:0;align-self:center;} .spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:10px 12px;min-height:44px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }`;
 
 // Impression = slot at least 50% visible, in a visible tab, for 1 second, once
 // (a browser without IntersectionObserver counts nothing, so every recorded
