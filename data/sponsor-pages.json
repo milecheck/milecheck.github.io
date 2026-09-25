@@ -1155,6 +1155,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:north-carolina",
+   "path": "/cameras/north-carolina/",
+   "title": "North Carolina Traffic Cameras — Live NCDOT (DriveNC) Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:ohio",
    "path": "/cameras/ohio/",
    "title": "Ohio Traffic Cameras — Live ODOT (OHGO) Highway Cams",
