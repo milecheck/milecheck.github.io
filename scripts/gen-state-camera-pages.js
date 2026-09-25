@@ -9,7 +9,7 @@ const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2
 // each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
 // is done. Utah first. Add the code here, then regenerate that one page:
 //   node scripts/gen-state-camera-pages.js utah
-const PLOW_PAGES = new Set(['UT', 'NE', 'IN']);
+const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA']);
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [
@@ -34,6 +34,9 @@ const STATES = [
    { slug:'indiana', code:'IN', name:'Indiana', dot:'INDOT', bounds:'[[37.77,-88.10],[41.76,-84.78]]',
      blurb:`Indiana DOT's cameras follow the interstates that cross the state, I-65 and I-69 north to south, I-70 and I-74 east to west, and the I-465 loop around Indianapolis. The lake-effect corridor near Gary and South Bend has cameras on I-94 and the Toll Road.`,
      notable:`Watch I-65 from the Ohio River to Gary, <a href="../../corridors/i-70/">I-70</a> through Indianapolis, <a href="../../corridors/i-94/">I-94</a> and the <a href="../../corridors/i-80/">Toll Road</a> along Lake Michigan, and the I-465 loop. In winter the Snowplows layer shows where INDOT's trucks are, each with the route and mile it reports, what material it is applying, and a photo from the truck's own camera where it sends one.` },
+   { slug:'iowa', code:'IA', name:'Iowa', dot:'Iowa DOT', bounds:'[[40.37,-96.64],[43.50,-90.14]]',
+     blurb:`Iowa DOT's cameras run the length of I-80 from Council Bluffs to the Quad Cities and up I-35 through Des Moines, with more on I-29, I-380, US-20 and US-30. Most carry the mile marker in the camera name, and the weather stations on the open stretches have cameras of their own.`,
+     notable:`Watch <a href="../../corridors/i-80/">I-80</a> across the state, I-35 north and south of Des Moines, I-29 along the Missouri, and I-380 between Iowa City and Cedar Rapids. In winter the Snowplows layer shows where Iowa DOT's trucks are, each with the route and mile it reports, what material it is applying, and a photo from the truck's own camera where it sends one.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },
