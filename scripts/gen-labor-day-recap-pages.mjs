@@ -129,7 +129,7 @@ ${body}
 
       <div class="article-cta">
         <h3>The live version is in the app.</h3>
-        <p>MileCheck shows DOT alerts for crashes, closures, and delays in all 50 states and British Columbia as they are published, with your nearest mile marker.</p>
+        <p>MileCheck shows DOT alerts for crashes, closures, and delays in all 50 states, British Columbia, Alberta and Manitoba as they are published, with your nearest mile marker.</p>
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>

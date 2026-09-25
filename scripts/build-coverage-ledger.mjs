@@ -65,8 +65,17 @@ const count = (d, keys) => {
  */
 async function probe(kind, code, path, keys) {
   try {
-    const n = count(await getJSON(path), keys);
-    if (kind === 'alerts') return { code, status: 'live', records: n };
+    const body = await getJSON(path);
+    const n = count(body, keys);
+    // 2026-09-25: the Worker now answers `source_status: "unsupported"` (and
+    // `supported: false`) for a region with NO alert integration — an empty
+    // array from one of those is not a quiet day, it is no feed. Before this
+    // check, every km-marker province probed as "live" and canada/ claimed
+    // alerts in 10 provinces when only BC was integrated.
+    if (kind === 'alerts') {
+      const unsupported = body && (body.source_status === 'unsupported' || body.supported === false);
+      return unsupported ? { code, status: 'none', records: 0 } : { code, status: 'live', records: n };
+    }
     if (n > 0) return { code, status: 'live', records: n };
     const known = KNOWN_INTEGRATIONS[kind]?.includes(code);
     return { code, status: known ? 'unavailable' : 'none', records: 0 };
@@ -134,6 +143,14 @@ async function main() {
     generated: new Date().toISOString().slice(0, 10),
     source: WORKER,
     feeds: {
+      // markers = the km/mile-post corpus the Worker serves (supported_states),
+      // a DIFFERENT number from alert coverage (the trap that shipped
+      // "alerts in 10 provinces" — see canada/ which counts km-post provinces).
+      markers: {
+        us_states: supported.filter((c) => !CA.has(c)).length,
+        provinces: supported.filter((c) => CA.has(c)).length,
+        province_codes: supported.filter((c) => CA.has(c)),
+      },
       alerts: {
         us_states: liveUS(alerts).length,
         provinces: liveCA(alerts).length,

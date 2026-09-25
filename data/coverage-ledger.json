@@ -3,16 +3,13 @@
   "generated": "2026-09-25",
   "source": "https://milepost-proxy.leahgerber93.workers.dev",
   "feeds": {
-    "alerts": {
+    "markers": {
       "us_states": 50,
       "provinces": 10,
-      "unavailable": [],
-      "quiet_now": [
-        "NM",
-        "RI",
-        "VA",
+      "province_codes": [
         "ON",
         "QC",
+        "BC",
         "AB",
         "NS",
         "NT",
@@ -20,6 +17,15 @@
         "SK",
         "NB",
         "YT"
+      ]
+    },
+    "alerts": {
+      "us_states": 50,
+      "provinces": 3,
+      "unavailable": [],
+      "quiet_now": [
+        "NM",
+        "RI"
       ],
       "us_state_codes": [
         "AK",
@@ -74,24 +80,15 @@
         "WY"
       ],
       "province_codes": [
-        "ON",
-        "QC",
         "BC",
         "AB",
-        "NS",
-        "NT",
-        "MB",
-        "SK",
-        "NB",
-        "YT"
+        "MB"
       ]
     },
     "cameras": {
       "us_states": 39,
-      "provinces": 3,
-      "unavailable": [
-        "AB"
-      ],
+      "provinces": 5,
+      "unavailable": [],
       "us_state_codes": [
         "AK",
         "AL",
@@ -136,9 +133,11 @@
       "province_codes": [
         "ON",
         "QC",
-        "BC"
+        "BC",
+        "AB",
+        "MB"
       ],
-      "total_cameras": 44112,
+      "total_cameras": 44439,
       "total_cameras_floor": 44000
     },
     "mileposts": {
@@ -151,8 +150,8 @@
     }
   },
   "pages": {
-    "camera_states": 25,
-    "camera_cities": 24,
+    "camera_states": 42,
+    "camera_cities": 25,
     "bridge_states": 26,
     "corridors": 10,
     "passes": 10,

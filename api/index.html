@@ -10,10 +10,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MileCheck API — Mile Markers &amp; Live DOT Alerts | Pricing &amp; Docs</title>
-  <meta name="description" content="The MileCheck API: highway mile-marker geocoding and live, normalized DOT road alerts for all 50 US states plus British Columbia. One schema, 51 upstream feeds, maintained for you.">
+  <meta name="description" content="The MileCheck API: highway mile-marker geocoding and live, normalized DOT road alerts for all 50 US states plus British Columbia, Alberta and Manitoba. One schema, 53 upstream feeds, maintained for you.">
   <link rel="canonical" href="https://milecheckapp.com/api/">
   <meta property="og:title" content="MileCheck API — Mile Markers &amp; Live DOT Alerts">
-  <meta property="og:description" content="Highway mile-marker geocoding and live, normalized DOT road alerts for all 50 US states plus British Columbia — one API, one schema.">
+  <meta property="og:description" content="Highway mile-marker geocoding and live, normalized DOT road alerts for all 50 US states plus British Columbia, Alberta and Manitoba — one API, one schema.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/api/">
   <meta property="og:type" content="website">
@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"Fleet and enterprise licences include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia, Alberta and Manitoba. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"Fleet and enterprise licences include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}]}</script>
 
   <style>
     .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
@@ -125,7 +125,7 @@
   <div class="api-hero">
     <div class="eyebrow">Developer API</div>
     <h1>The MileCheck API</h1>
-    <p class="sub">Highway mile markers and live DOT road alerts — all 50 states + British Columbia, one normalized API.</p>
+    <p class="sub">Highway mile markers and live DOT road alerts — all 50 states + British Columbia, Alberta and Manitoba, one normalized API.</p>
     <p class="value">Nobody else has done the work of normalizing 50+ separate state DOT feeds — each with its own format, auth, and quirks — into a single consistent schema. We already did it for our app. You can build on it too.</p>
     <div class="btns">
       <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
@@ -137,7 +137,7 @@
   <div class="api-section">
     <div class="value-grid">
       <div class="value-card">
-        <h3>One schema, 50 states + BC</h3>
+        <h3>One schema, 50 states + 3 provinces</h3>
         <p>Every state and province speaks a different DOT dialect. MileCheck normalizes them all into one consistent response shape.</p>
       </div>
       <div class="value-card">
@@ -150,7 +150,7 @@
       </div>
       <div class="value-card">
         <h3>We maintain the integrations</h3>
-        <p>51 upstream feeds, each with its own auth and shape. When one breaks, we fix it — not you.</p>
+        <p>53 upstream feeds, each with its own auth and shape. When one breaks, we fix it — not you.</p>
       </div>
     </div>
   </div>
@@ -429,7 +429,7 @@
     <div class="faq">
       <details>
         <summary>What's covered by the MileCheck API?</summary>
-        <p>Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema.</p>
+        <p>Highway mile markers and live DOT road alerts for all 50 US states plus British Columbia, Alberta and Manitoba. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema.</p>
       </details>
       <details>
         <summary>What's the difference between /v1/locate and /v1/alerts?</summary>
