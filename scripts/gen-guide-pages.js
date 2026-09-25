@@ -749,9 +749,14 @@ function breadcrumbJsonLd(g){ const h=g.h1.replace(/<[^>]+>/g,''); return JSON.s
 // always on the same box as the link, never in a footer.
 const DISCOVER_CARS='https://www.discovercars.com/?a_aid=milecheck';
 const AFF_DISCLOSE='MileCheck earns a commission if you book through this link.';
+// Baja Bound agreement (2018 PDF, read 2026-09-25): link only, no insurance advice (we are not
+// an agent), prominent disclosure, and the Baja Bound name never in titles/meta/keywords.
+const BAJA_BOUND='https://www.bajabound.com/quote/?r=milecheckapp';
+const bbLink=(t)=>`<a href="${BAJA_BOUND}" target="_blank" rel="sponsored nofollow noopener">${t}</a>`;
 const affRental=(lead)=>({h:'Comparing rental prices',p:`${lead} <a href="${DISCOVER_CARS}" target="_blank" rel="sponsored nofollow noopener">Search rentals on Discover Cars</a>.`});
 const AFFILIATE_BOX={
-  'rental-car-canada-mexico': affRental('Discover Cars compares rental companies in one search. Check the cross-border rules on the specific car before you book.'),
+  'rental-car-canada-mexico': {h:'Comparing rental prices',p:`Discover Cars compares rental companies in one search. Check the cross-border rules on the specific car before you book. <a href="${DISCOVER_CARS}" target="_blank" rel="sponsored nofollow noopener">Search rentals on Discover Cars</a>.</p><p>Driving into Mexico also needs a Mexican auto policy. Baja Bound sells them online. ${bbLink('Get a quote from Baja Bound')}.`,note:'MileCheck earns a commission if you book or request a quote through these links.'},
+  'mexico-car-insurance': {h:'Getting a Mexico policy',p:`Baja Bound sells Mexican auto insurance online. Check what your rental company or your own insurer requires before you buy. ${bbLink('Get a quote from Baja Bound')}.`,note:'MileCheck earns a commission when you request a quote through this link.'},
   'rental-car-toll-pass': affRental('Discover Cars compares rental companies in one search. Toll pass fees differ by company, so check them on the booking page.'),
   'rental-car-insurance-credit-card': affRental('Discover Cars compares rental companies in one search and sells its own coverage. Compare it with your card before you buy anything at the counter.'),
   'rent-a-car-in-nyc': affRental('If you decide a car makes sense, Discover Cars compares rental companies in one search.'),
@@ -899,7 +904,7 @@ ${langSwitchHtml}    <div class="eyebrow">${g.eyebrow}</div>
 ${g.checked ? `    <p class="g-checked">${T.checked(g.checked)}</p>\n` : ''}
 ${figHtml}${secHtml}
 
-${(lang==='en' && AFFILIATE_BOX[g.slug]) ? `    <aside class="aff"><h3>${AFFILIATE_BOX[g.slug].h}</h3><p>${AFFILIATE_BOX[g.slug].p}</p><p class="aff-note">${AFF_DISCLOSE}</p></aside>\n` : ''}
+${(lang==='en' && AFFILIATE_BOX[g.slug]) ? `    <aside class="aff"><h3>${AFFILIATE_BOX[g.slug].h}</h3><p>${AFFILIATE_BOX[g.slug].p}</p><p class="aff-note">${AFFILIATE_BOX[g.slug].note||AFF_DISCLOSE}</p></aside>\n` : ''}
     <div class="cta">
       <h3>${T.ctaH}</h3>
       <p>${T.ctaP}</p>
