@@ -8,11 +8,11 @@ const SPON = require('./lib/sponsor-slot');
 // Pages that also exist in Spanish (scripts/gen-es-camera-pages.mjs); keep the two lists equal.
 const ES_PAGES = new Set(['florida', 'miami', 'orlando', 'tampa']);
 const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versions (2026-09-25) // one sponsor slot above the map (2026-09-15)
-// Snowplows layer (2026-09-24). The Worker's /plows serves UT CO DE MT WV MI NE IN IA MN KS MB;
+// Snowplows layer (2026-09-24). The Worker's /plows serves UT CO DE MT WV MI NE IN IA MN KS MB ND AK;
 // each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
 // is done. Utah first. Add the code here, then regenerate that one page:
 //   node scripts/gen-state-camera-pages.js utah
-const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS', 'MB']);
+const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS', 'MB', 'AK']);
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [

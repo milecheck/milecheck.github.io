@@ -127,6 +127,7 @@
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in Alaska</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">AKDOT</div><div class="l">camera source</div></div>
+      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">AKDOT plows reporting</div></div>
     </div>
   </div>
 
@@ -134,6 +135,11 @@
     <div style="position:relative;">
       <div id="comap"></div>
       <div class="co-bs" id="coStatus">Loading live Alaska cameras…</div>
+      <div class="co-layers" role="group" aria-label="Map layers">
+        <div class="lt">Map layers</div>
+        <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
+        <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="co-dot" style="background:#0369A1"></span>Snowplows</label>
+      </div>
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
@@ -186,7 +192,7 @@
     </div>
   </section>
 <!-- signup:end -->
-      <footer class="site-footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
@@ -227,10 +233,10 @@
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 const CODE="AK";
-const DOT="AKDOT";
-const PLOWS=false;
+const DOT="AKDOT";const MKR="MP";
+const PLOWS=true;
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|CT|QEW|BC|ON|AB|M|Loop|\d)[- ]?\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|MA|NC|CT|OH|CO|ND|NM|NJ|OK|RI|TN|TX|MS|MO|HI|WY|QEW|BC|ON|AB|MB|A|R|M|Loop|\d)[- ]?\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
@@ -242,14 +248,16 @@ let CAMS=[], PLOWLIST=[], showCam=true, showPlow=true;
 function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 const cardEl=document.getElementById('coCard');
 function showCard(html){if(window.stopStream)stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';if(window.stopStream)stopStream();};}
-function camCard(c){if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function camCard(c){if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
 // HLS playback for stream cameras (DelDOT publishes video only, 2026-09-25): hls.js wherever the browser has Media Source Extensions (every desktop and Android browser), loaded once on the first stream card; iPhone Safari plays the playlist itself, with play retried once the metadata arrives (the first call stalled in testing). One player at a time; closing the card stops it.
 var hlsInst=null,hlsLoading=null;function loadHls(){if(window.Hls)return Promise.resolve();if(hlsLoading)return hlsLoading;hlsLoading=new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);});return hlsLoading;}
 function stopStream(){if(hlsInst){try{hlsInst.destroy();}catch(e){}hlsInst=null;}var v=document.getElementById('ccVid');if(v){try{v.pause();v.removeAttribute('src');v.load();}catch(e){}}}
-function playStream(url){var v=document.getElementById('ccVid');if(!v)return;var native=function(){v.src=url;var go=function(){v.play().catch(function(){});};v.addEventListener('loadedmetadata',go,{once:true});go();};loadHls().then(function(){if(window.Hls&&Hls.isSupported()){hlsInst=new Hls({liveSyncDurationCount:3});hlsInst.loadSource(url);hlsInst.attachMedia(v);hlsInst.on(Hls.Events.MANIFEST_PARSED,function(){v.play().catch(function(){});});}else{native();}}).catch(native);}
+function playStream(url){var v=document.getElementById('ccVid');if(!v)return;var native=function(){v.addEventListener('error',streamOffline,{once:true});v.src=url;var go=function(){v.play().catch(function(){});};v.addEventListener('loadedmetadata',go,{once:true});go();};loadHls().then(function(){if(window.Hls&&Hls.isSupported()){hlsInst=new Hls({liveSyncDurationCount:3});hlsInst.loadSource(url);hlsInst.attachMedia(v);hlsInst.on(Hls.Events.MANIFEST_PARSED,function(){v.play().catch(function(){});});hlsInst.on(Hls.Events.ERROR,function(ev,d){if(d&&d.fatal)streamOffline();});}else{native();}}).catch(native);}
+// A stream the DOT has switched off answers with an empty playlist (WV511 sent 204 for most of its cameras on 2026-09-25). Say so instead of leaving a blank player.
+function streamOffline(){stopStream();var v=document.getElementById('ccVid');if(!v)return;var d=document.createElement('div');d.className='cc-meta';d.textContent='This camera is offline right now. '+DOT+' switches some streams off for stretches.';v.replaceWith(d);}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+(b||0)+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
-function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near MP '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
+function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near '+MKR+' '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
 function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in Alaska':'Toggle a layer to view Alaska data';}
 const tgCam=document.getElementById('tgCam');if(tgCam)tgCam.onchange=e=>{showCam=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
