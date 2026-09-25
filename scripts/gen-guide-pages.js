@@ -701,6 +701,7 @@ GUIDES.push(...require('./guides/decision-guides-2026-09.cjs'));
 GUIDES.push(...require('./guides/decision-guides-batch-2-2026-09.cjs'));
 GUIDES.push(...require('./guides/decision-guides-batch-3-canada-2026-09.cjs'));
 GUIDES.push(...require('./guides/translations-pa-pt-2026-09.cjs'));
+GUIDES.push(...require('./guides/rent-a-car-in-orlando-2026-09-25.cjs'));
 
 // Language-aware routing (2026-09-25). A guide object may carry lang:'fr' (or 'es', …).
 // Identity is lang+slug: English lives at /<slug>/, others at /<lang>/<slug>/.
@@ -764,6 +765,7 @@ const AFFILIATE_BOX={
   'drive-or-fly-seattle-portland': affRental('If you drive, Discover Cars compares rental companies in one search.'),
   'drive-or-fly-orlando-miami': affRental('If you drive, Discover Cars compares rental companies in one search.'),
   'driving-in-the-us-foreign-visitor-guide': affRental('Discover Cars compares rental companies in one search.'),
+  'rent-a-car-in-orlando': affRental('Discover Cars compares rental companies in one search, including Orlando pickup locations.'),
 };
 
 function page(g){
