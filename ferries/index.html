@@ -67,6 +67,10 @@
     .fy-sail .bar i{display:block;height:100%;background:#0f7a4f;}
     .fy-sail.low .sp{color:#b45309;} .fy-sail.low .bar i{background:#f59e0b;}
     .fy-sail.full .sp{color:#b91c1c;} .fy-sail.full .bar i{background:#dc2626;}
+    .fy-fares{font-size:12.5px;color:#3a444d;margin:0 0 6px;line-height:1.6;}
+    .fy-fare{display:inline-block;margin-right:10px;white-space:nowrap;}
+    .fy-walkmode .fy-sail .sp,.fy-walkmode .fy-sail .bar{display:none;}
+    .fy-walkmode .fy-sail{grid-template-columns:auto 1fr;}
     .fy-sail.cx .t,.fy-sail.cx .d{text-decoration:line-through;color:#8a8fa3;}
     .fy-cams{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
     .fy-cam{display:block;border:1px solid #E5E5E5;border-radius:8px;overflow:hidden;text-decoration:none;color:inherit;background:#f6f7f8;}
@@ -81,6 +85,12 @@
     .fy-lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px;}
     .fy-route{margin-top:22px;}
     .fy-route h3{font-size:19px;font-weight:800;margin:0;padding-bottom:6px;border-bottom:2px solid #0f7a4f;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+    .fy-route h3 small{font-size:12.5px;font-weight:600;color:#5b6670;margin-left:8px;flex:1;}
+    .fy-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px;padding:14px 16px;background:#fff;border:1px solid #E5E5E5;border-radius:14px;}
+    .fy-fact .k{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8fa3;margin-bottom:3px;}
+    .fy-fact b{font-size:14.5px;}
+    .fy-factnote{grid-column:1 / -1;font-size:13.5px;color:#3a444d;line-height:1.55;margin:4px 0 0;}
+    .fy-factnote a{color:#0f7a4f;font-weight:700;}
     .fy-route h3 a{font-size:13px;font-weight:700;color:#0f7a4f;text-decoration:none;white-space:nowrap;}
     .fy-term{background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:14px 16px;}
     .fy-term h2{font-size:17px;font-weight:800;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
@@ -154,6 +164,7 @@
     <div class="fy-ctl">
       <label for="fyRoute">Route</label>
       <select id="fyRoute"><option value="">All routes</option></select>
+      <div class="fy-seg" role="group" aria-label="How you board"><button type="button" id="fyDrive" aria-pressed="true">Driving on</button><button type="button" id="fyWalk" aria-pressed="false">Walking on</button></div>
       <div class="fy-seg" role="group" aria-label="Time format"><button type="button" id="fy12" aria-pressed="true">12-hour</button><button type="button" id="fy24" aria-pressed="false">24-hour</button></div>
       <div class="fy-status"><span id="fyNow"></span> · <span id="fyUpdated">Loading…</span></div>
     </div>
@@ -199,16 +210,38 @@ var R={
  's-v':{name:'Southworth / Vashon',t:['Southworth','Vashon Island'],lines:[[[47.5130,-122.4954],[47.5100,-122.4636]]]},
  'ana-sj':{name:'Anacortes / San Juan Islands',t:['Anacortes','Lopez Island','Shaw Island','Orcas Island','Friday Harbor'],lines:[[[48.5069,-122.6790],[48.52,-122.75],[48.55,-122.83],[48.5711,-122.8830],[48.58,-122.92],[48.5840,-122.9296],[48.5978,-122.9440]],[[48.5840,-122.9296],[48.562,-122.975],[48.5352,-123.0142]]]}
 };
+// Route facts. Crossing times are WSDOT's published schedule times, rounded ("about").
+// Reservations: only the San Juan and Port Townsend routes take them (WSDOT Save A Spot).
+var F={
+ 'sea-bi':{cross:'about 35 min',res:false,freq:'roughly every 50 min',note:'Downtown Seattle to Bainbridge. Walk-ons and bikes board first.'},
+ 'sea-br':{cross:'about 60 min',res:false,freq:'roughly every 70 to 90 min',note:'The long Seattle crossing through Rich Passage.'},
+ 'ed-king':{cross:'about 30 min',res:false,freq:'roughly every 40 to 50 min',note:'The main route to the Olympic Peninsula from the north end.'},
+ 'muk-cl':{cross:'about 20 min',res:false,freq:'roughly every 30 min',note:'Whidbey Island. Short, frequent, and the line backs up on summer weekends.'},
+ 'f-v-s':{cross:'about 20 min to Vashon, 40 min to Southworth',res:false,freq:'varies, three-terminal loop',note:'Some sailings stop at Vashon on the way to Southworth. Check the destination on each sailing.'},
+ 'f-s':{cross:'about 35 min',res:false,freq:'varies',note:'Direct Fauntleroy to Southworth sailings.'},
+ 's-v':{cross:'about 10 min',res:false,freq:'varies',note:'The short hop across Colvos Passage.'},
+ 'pd-tal':{cross:'about 15 min',res:false,freq:'roughly every 35 to 55 min',note:'Tacoma to the south end of Vashon.'},
+ 'pt-key':{cross:'about 35 min',res:true,freq:'roughly every 90 min',note:'Reservations recommended in summer. Vehicles over 80 ft cannot board here.'},
+ 'ana-sj':{cross:'about 45 min to Lopez, 60 to 85 min to Orcas, 65 to 105 min to Friday Harbor',res:true,freq:'varies by island',note:'Reservations recommended; drive-up space on peak days is often gone. Sailings can stop at several islands, so the destination list on each sailing matters.'}
+};
+var RULES='Vehicles up to 7 ft 6 in tall pay the standard fare; taller ones pay by length. Walk-on passengers and bicycles are never turned away. Arrive early: WSDOT asks for 20 minutes on most routes and more where reservations run, and a reservation is released if you miss its check-in cutoff. On most Puget Sound routes walk-on fares are collected westbound only, while vehicle fares are collected each way. The fares shown are what WSDOT charges today, per direction.';
 var ORDER=['sea-bi','sea-br','ed-king','muk-cl','f-v-s','f-s','s-v','pd-tal','pt-key','ana-sj'];
 var $=function(id){return document.getElementById(id)};
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
 var h24=false; try{h24=localStorage.getItem('mc_time24')==='1'}catch(e){}
+var walk=false; try{walk=localStorage.getItem('mc_ferry_walk')==='1'}catch(e){}
+var fares=null; // {from,to,adult,vehicleDriver} pairs from the Worker
+function fareFor(from,to){if(!fares)return null;var f=fares.find(function(p){return p.from===from&&p.to===to});return f||null}
+function money(v){return v==null?'—':(v===0?'free':'$'+v.toFixed(2))}
+function setWalk(v){walk=v;try{localStorage.setItem('mc_ferry_walk',v?'1':'0')}catch(e){};$('fyDrive').setAttribute('aria-pressed',String(!v));$('fyWalk').setAttribute('aria-pressed',String(v));document.body.classList.toggle('fy-walkmode',v);render()}
 function fmtTime(iso){var d=new Date(iso);if(isNaN(d))return '';return d.toLocaleTimeString('en-US',{timeZone:TZ,hour:h24?'2-digit':'numeric',minute:'2-digit',hour12:!h24})}
 function tzName(){try{return new Intl.DateTimeFormat('en-US',{timeZone:TZ,timeZoneName:'short'}).formatToParts(new Date()).filter(function(p){return p.type==='timeZoneName'})[0].value}catch(e){return 'PT'}}
 function tick(){var el=$('fyNow');if(el)el.textContent='Now '+fmtTime(new Date().toISOString())+' '+tzName();var n=$('fyTzNote');if(n)n.textContent='All times '+tzName()}
 function setH24(v){h24=v;try{localStorage.setItem('mc_time24',v?'1':'0')}catch(e){};$('fy12').setAttribute('aria-pressed',String(!v));$('fy24').setAttribute('aria-pressed',String(v));render()}
 $('fy12').addEventListener('click',function(){setH24(false)});$('fy24').addEventListener('click',function(){setH24(true)});
 $('fy12').setAttribute('aria-pressed',String(!h24));$('fy24').setAttribute('aria-pressed',String(h24));
+$('fyDrive').addEventListener('click',function(){setWalk(false)});$('fyWalk').addEventListener('click',function(){setWalk(true)});
+$('fyDrive').setAttribute('aria-pressed',String(!walk));$('fyWalk').setAttribute('aria-pressed',String(walk));document.body.classList.toggle('fy-walkmode',walk);
 var sel=$('fyRoute');ORDER.forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=R[k].name;sel.appendChild(o)});
 var route=''; try{var q=new URLSearchParams(location.search).get('route');if(q&&R[q])route=q;else{var st=localStorage.getItem('mc_ferry_route');if(st&&R[st])route=st}}catch(e){}
 sel.value=route;
@@ -258,6 +291,7 @@ function sailRow(dep,short){
   var dest=si?si.to.replace(/\s*->\s*/g,' → '):'';
   return '<div class="'+cls+'"><span class="t">'+esc(fmtTime(dep.departure))+'</span><span class="d">'+esc(short?dest.split(' → ').slice(1).join(' → ')||dest:dest)+(dep.vesselName?'<small>'+esc(dep.vesselName)+(si&&si.res!=null&&si.res>0?' · '+si.res+' reservable':'')+'</small>':'')+'</span><span class="sp">'+esc(spTxt)+'</span>'+(si&&!dep.isCancelled?'<span class="bar"><i style="width:'+w+'%"></i></span>':'')+'</div>';
 }
+function fareLines(n){if(!fares)return '';var mates=[];Object.keys(R).forEach(function(k){if(R[k].t.indexOf(n)>=0)R[k].t.forEach(function(m){if(m!==n&&mates.indexOf(m)<0)mates.push(m)})});var out=mates.map(function(m){var f=fareFor(n,m);if(!f)return '';var v=walk?f.adult:f.vehicleDriver;if(v==null)return '';return '<span class="fy-fare">to '+esc(m)+': <b>'+money(v)+'</b></span>'}).filter(Boolean).join('');return out?'<p class="fy-fares">'+(walk?'Adult walk-on':'Car under 22 ft with driver')+' '+out+'</p>':''}
 function upcoming(t,n){var now=Date.now();return (t.departures||[]).filter(function(d){return new Date(d.departure).getTime()>now-5*60000}).slice(0,n)}
 function camsNear(n){var p=T[n];if(!p)return [];return cams.filter(function(c){var dy=(c.lat-p[0])*111,dx=(c.lon-p[1])*111*Math.cos(p[0]*Math.PI/180);return Math.sqrt(dx*dx+dy*dy)<=2.6}).slice(0,6)}
 function openTerminal(n){
@@ -278,15 +312,26 @@ function render(){
   function card(n){
     var t=terminalsByName[n]; if(!t)return null; var u=upcoming(t,route?8:4); if(!u.length)return null;
     var div=document.createElement('div');div.className='fy-term';
-    div.innerHTML='<h2>'+esc(n)+'<small>space left</small></h2><p class="sub">Departing '+esc(n)+'</p>'+u.map(function(d){return sailRow(d,true)}).join('')+'<a class="more" href="#">Cameras and more sailings →</a>';
+    div.innerHTML='<h2>'+esc(n)+'<small>'+(walk?'walk-on':'space left')+'</small></h2><p class="sub">Departing '+esc(n)+'</p>'+fareLines(n)+u.map(function(d){return sailRow(d,true)}).join('')+'<a class="more" href="#">Cameras and more sailings →</a>';
     div.querySelector('.more').addEventListener('click',function(e){e.preventDefault();openTerminal(n);window.scrollTo({top:$('fyMap').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'})});
     return div;
+  }
+  if(route){
+    var f=F[route]; var boats=(data.vessels||[]).filter(function(v){var n=R[route].t;return n.indexOf(String(v.departingTerminal||'').trim())>=0||n.indexOf(String(v.arrivingTerminal||'').trim())>=0}).map(function(v){return v.name});
+    var fc=document.createElement('div');fc.className='fy-facts';
+    fc.innerHTML='<div class="fy-fact"><span class="k">Crossing</span><b>'+esc(f.cross)+'</b></div>'+
+      '<div class="fy-fact"><span class="k">Reservations</span><b>'+(f.res?'Yes, WSDOT Save A Spot':'No, drive-up only')+'</b></div>'+
+      '<div class="fy-fact"><span class="k">Frequency</span><b>'+esc(f.freq)+'</b></div>'+
+      '<div class="fy-fact"><span class="k">Boats today</span><b>'+(boats.length?esc(boats.join(', ')):'—')+'</b></div>'+
+      (fares?'<div class="fy-fact" style="grid-column:1 / -1"><span class="k">Fares today, WSDOT ('+esc(fares.date||'')+')</span><b>'+R[route].t.map(function(a){return R[route].t.filter(function(b){return b!==a}).map(function(b){var f=fareFor(a,b);return f?esc(a)+' → '+esc(b)+': car '+money(f.vehicleDriver)+', walk-on '+money(f.adult):''}).filter(Boolean).join(' · ')}).filter(Boolean).join(' · ')+'</b></div>':'')+
+      '<p class="fy-factnote">'+(walk?'Walking on: no reservation and no space count applies, walk-ons always board; buy a passenger ticket at the terminal or with the WSDOT app. ':'')+esc(f.note)+' '+RULES+' <a href="https://wsdot.wa.gov/travel/washington-state-ferries" target="_blank" rel="noopener">WSDOT schedules, fares and reservations →</a></p>';
+    list.appendChild(fc);
   }
   var groups=route?[route]:ORDER;
   groups.forEach(function(k){
     var cards=R[k].t.map(card).filter(Boolean); if(!cards.length)return;
     var sec=document.createElement('section');sec.className='fy-route';
-    if(!route){var h=document.createElement('h3');h.innerHTML=esc(R[k].name)+' <a href="?route='+k+'">Just this route →</a>';h.querySelector('a').addEventListener('click',function(e){e.preventDefault();sel.value=k;sel.dispatchEvent(new Event('change'))});sec.appendChild(h)}
+    if(!route){var h=document.createElement('h3');h.innerHTML=esc(R[k].name)+'<small>'+esc(F[k].cross)+' · '+(F[k].res?'reservations':'drive-up only')+'</small> <a href="?route='+k+'">Just this route →</a>';h.querySelector('a').addEventListener('click',function(e){e.preventDefault();sel.value=k;sel.dispatchEvent(new Event('change'))});sec.appendChild(h)}
     var grid=document.createElement('div');grid.className='fy-lists';cards.forEach(function(c){grid.appendChild(c)});sec.appendChild(grid);list.appendChild(sec);
   });
   if(!list.children.length)list.innerHTML='<div class="fy-empty">No sailing space reported on this route right now.</div>';
@@ -302,6 +347,7 @@ function load(){
   }).catch(function(){$('fyUpdated').textContent='WSDOT feed did not answer. Trying again in a minute.';tick()});
 }
 fetch(W+'/cameras?state=WA').then(function(r){return r.json()}).then(function(d){cams=(d.cameras||[]).filter(function(c){return /ferries/i.test(c.route||'')||/^WSF\b/.test(c.title||'')});drawCams();}).catch(function(){});
+fetch(W+'/ferries/fares').then(function(r){return r.json()}).then(function(d){if(d&&d.ok){fares=d.pairs;fares.date=d.date;render()}}).catch(function(){});
 fitRoute();load();tick();setInterval(load,60000);setInterval(tick,15000);
 })();
 </script>
