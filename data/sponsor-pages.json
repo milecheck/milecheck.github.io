@@ -987,6 +987,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:connecticut",
+   "path": "/cameras/connecticut/",
+   "title": "Connecticut Traffic Cameras — Live CTDOT (CTroads) Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:delaware",
    "path": "/cameras/delaware/",
    "title": "Delaware Traffic Cameras — Live DelDOT Highway Cams",
