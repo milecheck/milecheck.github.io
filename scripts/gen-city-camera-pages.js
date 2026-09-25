@@ -93,7 +93,7 @@ function faq(c){
     [`Where can I watch live ${c.name} traffic cameras?`,
       `Right here — the <a href="#comap">map above</a> shows live ${c.dot} cameras across the ${c.name} area, each tagged with its route and mile marker. For the whole state, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
     [`Are ${c.name} traffic cameras free?`,
-      `Yes. ${c.dot} publishes its traffic cameras publicly, and MileCheck puts the ${c.name} ones on one map for free — no account. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
+      `Yes. ${c.dot} publishes its traffic cameras publicly, and MileCheck puts the ${c.name} ones on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
     [`Which freeways have cameras in ${c.name}?`, c.freeways],
     [`How do I check ${c.name} traffic before I leave?`,
       `Open the <a href="#comap">live map above</a> and tap any camera near your route to see the road right now. Conditions change fast in a busy metro, so check just before you go — and in the app, the nearest camera and your mile marker update automatically as you drive.`],
@@ -113,7 +113,7 @@ function page(c){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${c.name} Traffic Cameras — Live ${c.dot} Freeway Cams | MileCheck</title>
-  <meta name="description" content="Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave. Free, no account.">
+  <meta name="description" content="Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave.">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${c.slug}/">
 ${ES_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${c.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${c.slug}/">\n${PT_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${c.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${c.slug}/">` : ''}
   <meta property="og:title" content="${c.name} Traffic Cameras — Live | MileCheck">
@@ -198,7 +198,7 @@ ${sp.css}
 ${sp.html}
 ${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${c.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(c.slug) ? ` · <a href="/pt/cameras/${c.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
     <h1>${c.name} traffic cameras, live</h1>
-    <p class="sub">See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and mile marker. Free, no account — tap any camera for the latest image.</p>
+    <p class="sub">See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and mile marker. Tap any camera for the latest image.</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${c.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${c.dot}</div><div class="l">camera source</div></div>
@@ -227,7 +227,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>The nearest ${c.name} camera, right as you drive</h2>
-    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive ${c.name}'s freeways, plus live DOT alerts on your route. Free to start, works offline, runs on CarPlay and Android Auto.</p>
+    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive ${c.name}'s freeways, plus live DOT alerts on your route. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>

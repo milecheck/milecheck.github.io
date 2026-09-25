@@ -525,7 +525,7 @@ ${p.vis ? `
   </div>` : ''}
   <div class="co-cta">
     <h2>${p.ctaH || 'Watch the climb — live, hands-free'}</h2>
-    <p>${p.ctaP || `MileCheck shows your exact mile marker in real time as you drive ${p.route} over ${p.name}, plus the nearest camera and any alert on your route. Free to start, works offline, and runs on CarPlay and Android Auto.`}</p>
+    <p>${p.ctaP || `MileCheck shows your exact mile marker in real time as you drive ${p.route} over ${p.name}, plus the nearest camera and any alert on your route. Works offline and runs on CarPlay and Android Auto.`}</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>

@@ -239,7 +239,7 @@ function page(c){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${c.name} Live Traffic Cameras &amp; Road Conditions Right Now | MileCheck</title>
-  <meta name="description" content="See ${c.name} right now — live DOT traffic cameras and real-time road conditions along the corridor (${c.subtitle}), each tagged with route and mile marker. Free, no account.">
+  <meta name="description" content="See ${c.name} right now — live DOT traffic cameras and real-time road conditions along the corridor (${c.subtitle}), each tagged with route and mile marker.">
   <link rel="canonical" href="https://milecheckapp.com/corridors/${c.slug}/">
   <meta property="og:title" content="${c.name} Right Now — Live Cameras &amp; Conditions | MileCheck">
   <meta property="og:description" content="Live ${c.name} traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
@@ -391,7 +391,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>Know your exact mile marker on ${c.name} — live</h2>
-    <p>MileCheck shows your nearest mile marker in real time as you drive ${c.name}, plus live DOT alerts on your route and the nearest camera. Free to start, works offline, and runs on CarPlay and Android Auto.</p>
+    <p>MileCheck shows your nearest mile marker in real time as you drive ${c.name}, plus live DOT alerts on your route and the nearest camera. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>

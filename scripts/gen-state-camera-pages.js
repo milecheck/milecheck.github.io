@@ -145,7 +145,7 @@ function faq(s){
     [`Where can I watch live ${s.name} traffic cameras?`,
       `Right here — the <a href="#comap">map above</a> shows live ${s.dot} highway cameras across ${s.name}, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond ${s.name}, see <a href="../">every highway camera in ${HUB_CAMS} states</a>.`],
     [`Are ${s.name} DOT traffic cameras free?`,
-      `Yes. ${s.dot} publishes its traffic cameras publicly, and MileCheck puts them on one map for free — no account, no sign-up. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
+      `Yes. ${s.dot} publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
     [`Which highways have cameras in ${s.name}?`, s.notable],
     [`How often do ${s.name} traffic cameras update?`,
       `Most ${s.dot} cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.`],
@@ -166,7 +166,7 @@ function page(s){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${s.name} Traffic Cameras — Live ${s.dot} Highway Cams | MileCheck</title>
-  <meta name="description" content="Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and mile marker. See the road before you drive it. Free, no account.">
+  <meta name="description" content="Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and mile marker. See the road before you drive it.">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${s.slug}/">
 ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${s.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${s.slug}/">\n${PT_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${s.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${s.slug}/">` : ''}
   <meta property="og:title" content="${s.name} Traffic Cameras — Live | MileCheck">
@@ -262,7 +262,7 @@ ${sp.css}
 ${sp.html}
 ${ES_PAGES.has(s.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${s.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(s.slug) ? ` · <a href="/pt/cameras/${s.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${s.name} · ${s.dot}</div>
     <h1>${s.name} traffic cameras, live</h1>
-    <p class="sub">See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and mile marker. Free, no account — tap any camera for the latest image.</p>
+    <p class="sub">See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and mile marker. Tap any camera for the latest image.</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${s.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${s.dot.split('(')[0].trim()}</div><div class="l">camera source</div></div>${plows ? `
@@ -297,7 +297,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>The nearest ${s.name} camera, right as you drive</h2>
-    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive ${s.name}'s highways, plus live DOT alerts on your route. Free to start, works offline, runs on CarPlay and Android Auto.</p>
+    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive ${s.name}'s highways, plus live DOT alerts on your route. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
