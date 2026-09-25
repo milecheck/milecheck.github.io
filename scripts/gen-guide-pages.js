@@ -698,6 +698,7 @@ const GUIDES = [
 ];
 // Decision guides ("should I…" pages), drafted by ChatGPT from a brief and source-checked by Claude.
 GUIDES.push(...require('./guides/decision-guides-2026-09.cjs'));
+GUIDES.push(...require('./guides/decision-guides-batch-2-2026-09.cjs'));
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
 function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'mainEntityOfPage':'https://milecheckapp.com/'+g.slug+'/'}); }

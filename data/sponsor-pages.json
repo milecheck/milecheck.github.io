@@ -447,6 +447,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:chains-or-all-season-tires",
+   "path": "/chains-or-all-season-tires/",
+   "title": "Do you need chains or are all-season tires enough?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:chains-required-explained",
    "path": "/chains-required-explained/",
    "title": "What &quot;Chains Required&quot; Means (Traction Laws Explained)",
@@ -462,6 +468,30 @@
    "key": "basics:dragging-trailer-chains-wildfire",
    "path": "/dragging-trailer-chains-wildfire/",
    "title": "Can Dragging Trailer Chains Start a Wildfire?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:drive-in-us-foreign-license",
+   "path": "/drive-in-us-foreign-license/",
+   "title": "Can you drive in the US on a foreign licence?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:drive-or-fly-los-angeles-las-vegas",
+   "path": "/drive-or-fly-los-angeles-las-vegas/",
+   "title": "Should you drive or fly from Los Angeles to Las Vegas?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:drive-or-fly-orlando-miami",
+   "path": "/drive-or-fly-orlando-miami/",
+   "title": "Should you drive, fly or take the Orlando–Miami train?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:drive-or-fly-seattle-portland",
+   "path": "/drive-or-fly-seattle-portland/",
+   "title": "Should you drive, fly or take the Seattle–Portland train?",
    "sponsor": "house"
   },
   {
@@ -513,9 +543,21 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:hit-a-deer-what-to-do",
+   "path": "/hit-a-deer-what-to-do/",
+   "title": "What should you do if you hit a deer?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:how-interstates-are-numbered",
    "path": "/how-interstates-are-numbered/",
    "title": "How Interstate Highways Are Numbered (the System Explained)",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:international-driving-permit-usa",
+   "path": "/international-driving-permit-usa/",
+   "title": "Do you need an International Driving Permit in the US?",
    "sponsor": "house"
   },
   {
@@ -549,6 +591,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:night-driving-desert-and-passes",
+   "path": "/night-driving-desert-and-passes/",
+   "title": "Should you drive a desert road or mountain pass at night?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:nyc-airport-taxi-vs-uber",
    "path": "/nyc-airport-taxi-vs-uber/",
    "title": "JFK, LaGuardia or Newark to Manhattan: taxi or train?",
@@ -558,6 +606,24 @@
    "key": "basics:rent-a-car-in-nyc",
    "path": "/rent-a-car-in-nyc/",
    "title": "Should I rent a car in New York City?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:rental-car-canada-mexico",
+   "path": "/rental-car-canada-mexico/",
+   "title": "Can you drive a rental car into Canada or Mexico?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:rental-car-insurance-credit-card",
+   "path": "/rental-car-insurance-credit-card/",
+   "title": "Should you buy rental insurance or use your credit card?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:rental-car-toll-pass",
+   "path": "/rental-car-toll-pass/",
+   "title": "Should you get the rental car’s toll pass?",
    "sponsor": "house"
   },
   {
@@ -588,6 +654,12 @@
    "key": "basics:sand-vs-salt-vs-brine",
    "path": "/sand-vs-salt-vs-brine/",
    "title": "Sand vs Salt vs Brine: How Roads Are Treated for Winter",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:snow-tires-wa-or-co",
+   "path": "/snow-tires-wa-or-co/",
+   "title": "Do you need snow tires in Washington, Oregon or Colorado?",
    "sponsor": "house"
   },
   {
@@ -882,6 +954,12 @@
    "key": "cameras:columbus",
    "path": "/cameras/columbus/",
    "title": "Columbus Traffic Cameras — Live ODOT Freeway Cams",
+   "sponsor": "house"
+  },
+  {
+   "key": "cameras:delaware",
+   "path": "/cameras/delaware/",
+   "title": "Delaware Traffic Cameras — Live DelDOT Highway Cams",
    "sponsor": "house"
   },
   {
