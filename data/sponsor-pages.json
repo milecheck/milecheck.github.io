@@ -1245,6 +1245,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:virginia",
+   "path": "/cameras/virginia/",
+   "title": "Virginia Traffic Cameras — Live VDOT (511 Virginia) Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:washington",
    "path": "/cameras/washington/",
    "title": "Washington Traffic Cameras — Live WSDOT Highway Cams",

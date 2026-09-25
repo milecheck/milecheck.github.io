@@ -55,6 +55,9 @@ const STATES = [
    { slug:'maryland', code:'MD', name:'Maryland', dot:'MDOT SHA (CHART)', bounds:'[[37.91,-79.49],[39.73,-75.04]]',
      blurb:`Maryland's cameras are live video from CHART, the State Highway Administration's traffic center, on I-95 between Washington and Delaware, the Baltimore and Capital beltways, US-50 out to the Eastern Shore and I-70 and I-68 across the west. The map shows only the cameras CHART reports as working, and most carry a mile marker. Tap a camera and it plays in place.`,
      notable:`Watch <a href="../../corridors/i-95/">I-95</a> through Baltimore and the tunnels, I-695 and I-495 around the two beltways, US-50 over the Bay Bridge (the WPL cameras are on the span itself), and I-68 through the western mountains in winter.` },
+   { slug:'virginia', code:'VA', name:'Virginia', dot:'VDOT (511 Virginia)', bounds:'[[36.54,-83.68],[39.47,-75.24]]',
+     blurb:`VDOT's cameras cover the interstates end to end, I-81 down the Shenandoah Valley, I-64 from the mountains to Hampton Roads, I-95 through Richmond and Northern Virginia, and I-66 and I-495 around Washington, plus the Hampton Roads tunnels. Most carry a mile marker. Cameras on roads VDOT names rather than numbers are not on this map.`,
+     notable:`Watch I-81 through the Shenandoah Valley, I-64 over Afton Mountain and down to the Hampton Roads tunnels, <a href="../../corridors/i-95/">I-95</a> between Richmond and Washington, and I-77 over Fancy Gap near the North Carolina line.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },
@@ -356,7 +359,7 @@ const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
