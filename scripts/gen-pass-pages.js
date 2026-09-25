@@ -9,6 +9,10 @@ const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the eyebro
 const PASSES = [
   {
     slug: 'snoqualmie', name: 'Snoqualmie Pass', route: 'I-90', state: 'WA', stateName: 'Washington',
+    // Search Console 2026-09-25: "driving conditions snoqualmie pass" = 5,038 impressions, 0 clicks. Title leads with that phrase.
+    title: 'Snoqualmie Pass Driving Conditions Now: I-90 Cameras &amp; Chains | MileCheck',
+    h1: 'Snoqualmie Pass driving conditions right now',
+    desc: 'Snoqualmie Pass driving conditions on I-90: WSDOT restrictions and chain rules for each direction, summit temperature, live cameras, and closures, with the mile marker on every camera.',
     dot: 'WSDOT', lat: 47.3923, lon: -121.4001, r: 30, elev: '3,015 ft', dist: '~52 mi', distNote: 'east of Seattle on I-90',
     range: 'Cascade Range',
     hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on I-90 over Snoqualmie Pass — snow, chains, and closures as they happen. It's the busiest mountain pass in Washington and the main link between Seattle and Eastern Washington.`,
@@ -320,7 +324,7 @@ function page(p){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${p.title || `${p.name} Camera &amp; Conditions Right Now (${p.route}) | MileCheck`}</title>
-  <meta name="description" content="${p.desc || `Live ${p.name} cameras and real-time road conditions on ${p.route} — see snow, chains, and closures before you drive it. ${p.dot} cameras, tagged with mile marker. Free, no account.`}">
+  <meta name="description" content="${p.desc || `Live ${p.name} cameras and real-time road conditions on ${p.route} — see snow, chains, and closures before you drive it. ${p.dot} cameras, tagged with mile marker.`}">
   <link rel="canonical" href="${url}">
   <meta property="og:title" content="${p.ogTitle || `${p.name} Right Now — Live Camera &amp; Conditions | MileCheck`}">
   <meta property="og:description" content="${p.desc || `Live ${p.route} ${p.name} cameras and conditions. See the pass before you drive it — snow, chains, and closures in real time.`}">
