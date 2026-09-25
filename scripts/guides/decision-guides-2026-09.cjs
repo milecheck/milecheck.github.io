@@ -42,7 +42,7 @@ module.exports = [
       // Checked 2026-09-24: Ángeles Verdes link above.
       ['What number do I call for Ángeles Verdes?', 'Call 078. Give the road number, kilometre marker and direction of travel.'],
     ],
-    related: `<a href="../report-location/">How to report your location</a> &middot; <a href="../driving-in-the-us-foreign-visitor-guide/">Driving in the US as a visitor</a>`,
+    related: `<a href="https://milecheckapp.com/blog/mile-markers-texas.html">Mile markers in Texas</a> &middot; <a href="https://milecheckapp.com/blog/mile-markers-arizona.html">Arizona</a> &middot; <a href="https://milecheckapp.com/blog/mile-markers-california.html">California</a> &middot; <a href="https://milecheckapp.com/borders/">Border wait times</a> &middot; <a href="https://milecheckapp.com/cameras/arizona/">Arizona cameras</a> &middot; <a href="https://milecheckapp.com/cameras/california/">California cameras</a> &middot; <a href="https://milecheckapp.com/report-location/">How to report your location</a> &middot; <a href="https://milecheckapp.com/driving-in-the-us-foreign-visitor-guide/">Driving in the US as a visitor</a>`,
   },
   {
     slug: 'rent-a-car-in-nyc',
@@ -81,7 +81,7 @@ module.exports = [
       // Checked 2026-09-24: NY DMV above.
       ['Can I turn right on red in Brooklyn or Queens?', 'Only where a sign permits it. The default prohibition applies across New York City.'],
     ],
-    related: `<a href="../nyc-airport-taxi-vs-uber/">Taxi, ride share or train from the New York airports</a> &middot; <a href="../driving-in-the-us-foreign-visitor-guide/">Driving in the US as a visitor</a> &middot; <a href="../check-road-conditions-before-a-trip/">Check road conditions before a trip</a>`,
+    related: `<a href="https://milecheckapp.com/nyc-airport-taxi-vs-uber/">Taxi, ride share or train from the New York airports</a> &middot; <a href="https://milecheckapp.com/cameras/new-york-city/">New York City cameras</a> &middot; <a href="https://milecheckapp.com/blog/mile-markers-new-york.html">Mile markers in New York</a> &middot; <a href="https://milecheckapp.com/blog/mile-markers-new-jersey.html">New Jersey</a> &middot; <a href="https://milecheckapp.com/corridors/i-95/">I-95 corridor</a> &middot; <a href="https://milecheckapp.com/check-road-conditions-before-a-trip/">Check road conditions before a trip</a>`,
   },
   {
     slug: 'nyc-airport-taxi-vs-uber',
@@ -127,6 +127,6 @@ module.exports = [
       ['What if we have several large bags?', 'Compare a vehicle that fits everyone with the transfers you would need on transit. Check station elevators before deciding.'],
       ['Should I rent a car just for the airport trip?', 'Usually no for a Manhattan stay. Price a transfer first, then rent when you need to leave the city.'],
     ],
-    related: `<a href="../rent-a-car-in-nyc/">Should I rent a car in New York City?</a> &middot; <a href="../driving-in-the-us-foreign-visitor-guide/">Driving in the US as a visitor</a>`,
+    related: `<a href="https://milecheckapp.com/rent-a-car-in-nyc/">Should I rent a car in New York City?</a> &middot; <a href="https://milecheckapp.com/cameras/new-york-city/">New York City cameras</a> &middot; <a href="https://milecheckapp.com/blog/mile-markers-new-york.html">Mile markers in New York</a> &middot; <a href="https://milecheckapp.com/corridors/i-95/">I-95 corridor</a> &middot; <a href="https://milecheckapp.com/driving-in-the-us-foreign-visitor-guide/">Driving in the US as a visitor</a>`,
   },
 ];
