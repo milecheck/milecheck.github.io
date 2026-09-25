@@ -91,7 +91,7 @@ function slotHtml(slotKey, sponsor, house) {
     return `  <aside class="spon spon-house" id="spon" data-slot="${esc(slotKey)}" data-sponsor="house" aria-label="Sponsor">
     <img class="spon-roy" src="${esc(house.roy || '/images/sponsors/roy-sponsor.png')}" width="276" height="235" alt="" loading="lazy" decoding="async">
     <a class="spon-body" href="${esc(house.url)}" data-spon-link>
-      <span class="spon-text"><strong>${esc(house.title || 'Sponsor this page.')}</strong> ${esc(house.copy)}</span>
+      <span class="spon-text"><strong>${esc(house.title || 'Sponsor this page.')}</strong>${house.copy ? ' ' + esc(house.copy) : ''}</span>
       <span class="spon-cta">${esc(house.cta)} →</span>
     </a>
   </aside>`;
@@ -145,7 +145,7 @@ function slot({ kind, slug, state, name }) {
   const day = today();
   const slotKey = prefixFor(kind) + slug;
   const { key, sponsor } = resolve(cfg, keysFor(kind, { slug, state }), day);
-  const house = Object.assign({ url: '/sponsor/', cta: 'Ask about it', title: 'Sponsor this page.', copy: 'Your logo, one line and a link, up here.' }, cfg.house || {});
+  const house = Object.assign({ url: '/sponsor/', cta: 'Ask about it', title: 'Sponsor this page.', copy: '' }, cfg.house || {});
   placed.push({ slotKey, name, via: key, sponsorId: sponsor ? sponsor.id : 'house' });
   return {
     key: slotKey,
