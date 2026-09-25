@@ -1023,6 +1023,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:idaho",
+   "path": "/cameras/idaho/",
+   "title": "Idaho Traffic Cameras — Live ITD (511 Idaho) Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:illinois",
    "path": "/cameras/illinois/",
    "title": "Illinois Traffic Cameras — Live IDOT (Getting Around Illinois) Highway Cams",
