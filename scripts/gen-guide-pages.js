@@ -724,6 +724,10 @@ const L = {
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
 function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'inLanguage':g.lang||'en','mainEntityOfPage':'https://milecheckapp.com/'+baseOf(g)+'/'}); }
 
+// Breadcrumb trail for search results (2026-09-25). Guides have no index page, so the
+// trail is MileCheck › guide. Other generators use the same MileCheck root name.
+function breadcrumbJsonLd(g){ const h=g.h1.replace(/<[^>]+>/g,''); return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':g.title||h,'item':'https://milecheckapp.com/'+baseOf(g)+'/'}]}); }
+
 function page(g){
   // Multi-language guides. A guide's translated locales, beyond English — the site has
   // no site-wide i18n, so this stays a per-guide registry rather than a generic system
@@ -789,6 +793,7 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
   <link rel="stylesheet" href="${R}style.css">
   <script type="application/ld+json">${faqJsonLd(g)}</script>
   <script type="application/ld+json">${articleJsonLd(g)}</script>
+  <script type="application/ld+json">${breadcrumbJsonLd(g)}</script>
   <style>
     .art{max-width:760px;margin:0 auto;padding:34px 20px 40px;}
     .art .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
