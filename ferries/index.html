@@ -78,7 +78,10 @@
     .fy-legend b{display:inline-block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #1d4ed8;vertical-align:-1px;margin-right:6px;}
     .fy-legend .fy-camleg{display:inline-block;width:10px;height:10px;border-radius:2px;background:#f59e0b;vertical-align:-1px;margin-right:6px;}
     .fy-legend u{display:inline-block;width:18px;height:0;border-top:3px solid #1d4ed8;vertical-align:3px;margin-right:6px;text-decoration:none;}
-    .fy-lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:18px;}
+    .fy-lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px;}
+    .fy-route{margin-top:22px;}
+    .fy-route h3{font-size:19px;font-weight:800;margin:0;padding-bottom:6px;border-bottom:2px solid #0f7a4f;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+    .fy-route h3 a{font-size:13px;font-weight:700;color:#0f7a4f;text-decoration:none;white-space:nowrap;}
     .fy-term{background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:14px 16px;}
     .fy-term h2{font-size:17px;font-weight:800;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
     .fy-term h2 small{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8fa3;}
@@ -160,7 +163,7 @@
       <div class="fy-card" id="fyCard"></div>
     </div>
     <div class="fy-legend"><span><i></i>Terminal (tap for sailings and cameras)</span><span><b></b>Boat, pointing the way it is heading</span><span><em class="fy-camleg"></em>Camera (tap for the picture)</span><span><u></u>Route, drawn approximately</span><span id="fyTzNote"></span></div>
-    <div class="fy-lists" id="fyLists"></div>
+    <div id="fyLists"></div>
   </div>
 
   <div class="fy-note">
@@ -272,13 +275,19 @@ function render(){
   if(!data)return;
   drawStatic();drawCams();drawBoats();
   var list=$('fyLists');list.innerHTML='';
-  var names=terminalsFor().filter(function(n){return terminalsByName[n]});
-  names.forEach(function(n){
-    var t=terminalsByName[n]; var u=upcoming(t,route?8:4); if(!u.length)return;
+  function card(n){
+    var t=terminalsByName[n]; if(!t)return null; var u=upcoming(t,route?8:4); if(!u.length)return null;
     var div=document.createElement('div');div.className='fy-term';
-    div.innerHTML='<h2>'+esc(n)+'<small>space left</small></h2><p class="sub">Departing '+esc(n)+(route?'':' · tap the terminal on the map for cameras')+'</p>'+u.map(function(d){return sailRow(d,true)}).join('')+'<a class="more" href="#" data-t="'+esc(n)+'">Cameras and more sailings →</a>';
+    div.innerHTML='<h2>'+esc(n)+'<small>space left</small></h2><p class="sub">Departing '+esc(n)+'</p>'+u.map(function(d){return sailRow(d,true)}).join('')+'<a class="more" href="#">Cameras and more sailings →</a>';
     div.querySelector('.more').addEventListener('click',function(e){e.preventDefault();openTerminal(n);window.scrollTo({top:$('fyMap').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'})});
-    list.appendChild(div);
+    return div;
+  }
+  var groups=route?[route]:ORDER;
+  groups.forEach(function(k){
+    var cards=R[k].t.map(card).filter(Boolean); if(!cards.length)return;
+    var sec=document.createElement('section');sec.className='fy-route';
+    if(!route){var h=document.createElement('h3');h.innerHTML=esc(R[k].name)+' <a href="?route='+k+'">Just this route →</a>';h.querySelector('a').addEventListener('click',function(e){e.preventDefault();sel.value=k;sel.dispatchEvent(new Event('change'))});sec.appendChild(h)}
+    var grid=document.createElement('div');grid.className='fy-lists';cards.forEach(function(c){grid.appendChild(c)});sec.appendChild(grid);list.appendChild(sec);
   });
   if(!list.children.length)list.innerHTML='<div class="fy-empty">No sailing space reported on this route right now.</div>';
   var dis=(data.routes||[]).filter(function(r){return (!route||r.abbrev===route)&&r.disruptions&&r.disruptions.length});
