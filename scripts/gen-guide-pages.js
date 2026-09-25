@@ -696,6 +696,8 @@ const GUIDES = [
     related:`<a href="../us-highways-vs-interstates/">US highways vs interstates</a> · <a href="../what-is-my-mile-marker/">What is my mile marker?</a> · <a href="../report-location/">Report your location</a>`,
   },
 ];
+// Decision guides ("should I…" pages), drafted by ChatGPT from a brief and source-checked by Claude.
+GUIDES.push(...require('./guides/decision-guides-2026-09.cjs'));
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
 function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'mainEntityOfPage':'https://milecheckapp.com/'+g.slug+'/'}); }
@@ -784,6 +786,7 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
     .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
     .faq p{margin:10px 0 0;}
     .g-related{color:#5b6670;font-size:14px;margin-top:26px;}
+    .g-checked{font-size:13px;color:#5b6670;border-left:3px solid #E5E5E5;padding-left:10px;margin:14px 0 4px;}
     /* Language toggle — pills at the top of the article, current language
        highlighted. Not a footnote link (Leah, 2026-09-02). */
     .lang-switch{display:flex;align-items:center;gap:6px;margin:0 0 16px;}
@@ -818,7 +821,7 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
 ${langSwitchHtml}    <div class="eyebrow">${g.eyebrow}</div>
     <h1>${g.h1}</h1>
     <p class="lede">${g.lede}</p>
-
+${g.checked ? `    <p class="g-checked">Facts checked ${g.checked}. Every number links to its source; prices and rules change, so confirm the day you travel.</p>\n` : ''}
 ${figHtml}${secHtml}
 
     <div class="cta">
@@ -878,8 +881,10 @@ ${faqHtml}
 </html>`;
 }
 
+const ONLY=process.argv.slice(2).filter(a=>!a.startsWith('-'));
 let n=0;
 for(const g of GUIDES){
+  if(ONLY.length && !ONLY.includes(g.slug)) continue;
   const dir=g.slug;
   fs.mkdirSync(dir,{recursive:true});
   fs.writeFileSync(path.join(dir,'index.html'),page(g));
