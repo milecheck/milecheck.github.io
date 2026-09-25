@@ -17,7 +17,7 @@
   <link rel="icon" type="image/png" href="../../images/favicon.png">
   <link rel="stylesheet" href="../../style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do we know if Mount Hood is visible?","acceptedAnswer":{"@type":"Answer","text":"We read the cloud ceilings at the airports between Portland and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 11,249 ft. No crowd reports."}},{"@type":"Question","name":"Why only three days?","acceptedAnswer":{"@type":"Answer","text":"Cloud forecasts are not reliable past about three days, so the forecast stops there."}},{"@type":"Question","name":"Why does Vancouver, WA get a different answer than Portland?","acceptedAnswer":{"@type":"Answer","text":"Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations."}},{"@type":"Question","name":"What it can get wrong","acceptedAnswer":{"@type":"Answer","text":"Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mountain Visibility Forecast","applicationCategory":"WeatherApplication","operatingSystem":"iOS","offers":{"@type":"Offer","price":"0.99","priceCurrency":"USD"},"description":"Whether Mount Rainier, Mount Hood, Mount Baker, Denali are visible right now and for the next three days, by region.","author":{"@type":"Organization","name":"MileCheck LLC"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mountain Visibility Forecast","applicationCategory":"WeatherApplication","operatingSystem":"iOS","offers":{"@type":"Offer","price":"0.99","priceCurrency":"USD"},"description":"Whether Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali are visible right now and for the next three days, by region.","author":{"@type":"Organization","name":"MileCheck LLC"}}</script>
   <style>
     .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
     @media(max-width:860px){.mv-hero{grid-template-columns:1fr;}}
@@ -144,7 +144,7 @@
     <div class="mv-get">
       <div class="mv-stamp">The app</div>
       <h3>Mountain Visibility Forecast</h3>
-      <p>Rainier, Hood, Baker and Denali. Visible now or not, and a three-day forecast. $0.99, one time.</p>
+      <p>Rainier, Hood, Baker, St. Helens and Denali. Visible now or not, and a three-day forecast. $0.99, one time.</p>
       <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get it on the App Store</a>
       <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
     </div>
@@ -164,7 +164,7 @@
       <div class="mv-card"><h3>By region</h3><div class="mv-rows" id="mvRegions"></div></div>
       <div class="mv-card">
         <h3>Mountain Visibility Forecast</h3>
-        <p>Mount Rainier, Mount Hood, Mount Baker, Denali in one app. Shows whether the mountain is visible from where you are, the clear windows in the next three days, and the viewpoints. Made for photographers and anyone driving to a viewpoint. $0.99, one time. No account, no ads.</p>
+        <p>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali in one app. Shows whether the mountain is visible from where you are, the clear windows in the next three days, and the viewpoints. Made for photographers and anyone driving to a viewpoint. $0.99, one time. No account, no ads.</p>
         <div class="mv-cta">
           <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get it on the App Store</a>
           <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
@@ -228,6 +228,7 @@ fetch(HOST+'/data.json').then(r=>r.json()).then(d=>{
             <li><a href="../../mountains/rainier/">Mount Rainier</a></li>
             <li><a href="../../mountains/hood/">Mount Hood</a></li>
             <li><a href="../../mountains/baker/">Mount Baker</a></li>
+            <li><a href="../../mountains/sthelens/">Mount St. Helens</a></li>
             <li><a href="../../mountains/denali/">Denali</a></li>
           </ul>
         </div>
