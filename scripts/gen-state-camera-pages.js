@@ -8,11 +8,11 @@ const SPON = require('./lib/sponsor-slot');
 // Pages that also exist in Spanish (scripts/gen-es-camera-pages.mjs); keep the two lists equal.
 const ES_PAGES = new Set(['florida', 'miami', 'orlando', 'tampa']);
 const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versions (2026-09-25) // one sponsor slot above the map (2026-09-15)
-// Snowplows layer (2026-09-24). The Worker's /plows serves UT CO DE MT WV MI NE IN IA MN KS;
+// Snowplows layer (2026-09-24). The Worker's /plows serves UT CO DE MT WV MI NE IN IA MN KS MB;
 // each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
 // is done. Utah first. Add the code here, then regenerate that one page:
 //   node scripts/gen-state-camera-pages.js utah
-const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS']);
+const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS', 'MB']);
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [
@@ -87,7 +87,7 @@ const STATES = [
      notable:`Watch Highway 2 between Calgary and Edmonton, Highway 1 west through Canmore to Banff, Highway 16 toward Jasper, and Highway 63 north to Fort McMurray.` },
    { slug:'manitoba', code:'MB', country:'CA', name:'Manitoba', dot:'Manitoba 511', bounds:'[[49.00,-102.00],[60.00,-89.00]]',
      blurb:`Manitoba 511's cameras sit on the Trans-Canada (Highway 1) east and west of Winnipeg, Highway 75 south to the border at Emerson, the Perimeter Highway (100) around Winnipeg, and Highways 6 and 10 north.`,
-     notable:`Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg.` },
+     notable:`Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg. In winter the Snowplows layer shows Manitoba's trucks that have reported in the last few hours.` },
    { slug:'ontario', code:'ON', country:'CA', name:'Ontario', dot:'Ontario 511', bounds:'[[41.68,-95.16],[56.86,-74.32]]',
      blurb:`Ontario 511's cameras run the length of Highway 401 from Windsor to the Quebec line, the QEW around the lake to Niagara, and Highways 400, 407 and 417, with more on Highways 11 and 17 across the north.`,
      notable:`Watch Highway 401 through Toronto, the QEW to the Niagara crossings, Highway 400 north to cottage country, and Highway 417 through Ottawa.` },
@@ -434,7 +434,7 @@ function playStream(url){var v=document.getElementById('ccVid');if(!v)return;var
 function streamOffline(){stopStream();var v=document.getElementById('ccVid');if(!v)return;var d=document.createElement('div');d.className='cc-meta';d.textContent='This camera is offline right now. '+DOT+' switches some streams off for stretches.';v.replaceWith(d);}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+(b||0)+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
-function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near MP '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
+function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near '+MKR+' '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
 function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in ${s.name}':'Toggle a layer to view ${s.name} data';}
 const tgCam=document.getElementById('tgCam');if(tgCam)tgCam.onchange=e=>{showCam=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};

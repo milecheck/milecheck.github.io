@@ -23,7 +23,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where can I watch live Manitoba traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"Right here — the map above shows live Manitoba 511 highway cameras across Manitoba, each tagged with its route and kilometre marker so you know which stretch you're seeing. For cameras beyond Manitoba, see every highway camera on MileCheck."}},{"@type":"Question","name":"Are Manitoba traffic cameras free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Manitoba 511 publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the MileCheck app does it hands-free on CarPlay and Android Auto."}},{"@type":"Question","name":"Which highways have cameras in Manitoba?","acceptedAnswer":{"@type":"Answer","text":"Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg."}},{"@type":"Question","name":"How often do Manitoba traffic cameras update?","acceptedAnswer":{"@type":"Answer","text":"Most Manitoba 511 cameras refresh every minute or two, straight from Manitoba 511. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where can I watch live Manitoba traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"Right here — the map above shows live Manitoba 511 highway cameras across Manitoba, each tagged with its route and kilometre marker so you know which stretch you're seeing. For cameras beyond Manitoba, see every highway camera on MileCheck."}},{"@type":"Question","name":"Are Manitoba traffic cameras free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Manitoba 511 publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the MileCheck app does it hands-free on CarPlay and Android Auto."}},{"@type":"Question","name":"Which highways have cameras in Manitoba?","acceptedAnswer":{"@type":"Answer","text":"Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg. In winter the Snowplows layer shows Manitoba's trucks that have reported in the last few hours."}},{"@type":"Question","name":"How often do Manitoba traffic cameras update?","acceptedAnswer":{"@type":"Answer","text":"Most Manitoba 511 cameras refresh every minute or two, straight from Manitoba 511. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Cameras","item":"https://milecheckapp.com/cameras/"},{"@type":"ListItem","position":3,"name":"Manitoba Cameras","item":"https://milecheckapp.com/cameras/manitoba/"}]}</script>
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
@@ -127,6 +127,7 @@
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in Manitoba</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">Manitoba 511</div><div class="l">camera source</div></div>
+      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">Manitoba 511 plows reporting</div></div>
     </div>
   </div>
 
@@ -134,6 +135,11 @@
     <div style="position:relative;">
       <div id="comap"></div>
       <div class="co-bs" id="coStatus">Loading live Manitoba cameras…</div>
+      <div class="co-layers" role="group" aria-label="Map layers">
+        <div class="lt">Map layers</div>
+        <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
+        <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="co-dot" style="background:#0369A1"></span>Snowplows</label>
+      </div>
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
@@ -141,7 +147,7 @@
   <section class="co-guide">
     <h2>Live cameras across Manitoba</h2>
     <p>Manitoba 511's cameras sit on the Trans-Canada (Highway 1) east and west of Winnipeg, Highway 75 south to the border at Emerson, the Perimeter Highway (100) around Winnipeg, and Highways 6 and 10 north.</p>
-    <p>Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg.</p>
+    <p>Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg. In winter the Snowplows layer shows Manitoba's trucks that have reported in the last few hours.</p>
     <p>Every camera on this map comes straight from Manitoba 511 and is tagged with the route and kilometre marker where the province provides it, so you can tell exactly which stretch of road you're looking at. Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
   </section>
 
@@ -149,7 +155,7 @@
     <h2>Manitoba camera questions, answered</h2>
     <details><summary>Where can I watch live Manitoba traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live Manitoba 511 highway cameras across Manitoba, each tagged with its route and kilometre marker so you know which stretch you're seeing. For cameras beyond Manitoba, see <a href="../">every highway camera on MileCheck</a>.</p></details>
     <details><summary>Are Manitoba traffic cameras free?</summary><p>Yes. Manitoba 511 publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-manitoba&mt=8" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.</p></details>
-    <details><summary>Which highways have cameras in Manitoba?</summary><p>Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg.</p></details>
+    <details><summary>Which highways have cameras in Manitoba?</summary><p>Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg. In winter the Snowplows layer shows Manitoba's trucks that have reported in the last few hours.</p></details>
     <details><summary>How often do Manitoba traffic cameras update?</summary><p>Most Manitoba 511 cameras refresh every minute or two, straight from Manitoba 511. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.</p></details>
   </section>
 
@@ -206,7 +212,7 @@
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 const CODE="MB";
 const DOT="Manitoba 511";const MKR="km";
-const PLOWS=false;
+const PLOWS=true;
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
 const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|MA|NC|CT|QEW|BC|ON|AB|MB|A|R|M|Loop|\d)[- ]?\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
@@ -229,7 +235,7 @@ function playStream(url){var v=document.getElementById('ccVid');if(!v)return;var
 function streamOffline(){stopStream();var v=document.getElementById('ccVid');if(!v)return;var d=document.createElement('div');d.className='cc-meta';d.textContent='This camera is offline right now. '+DOT+' switches some streams off for stretches.';v.replaceWith(d);}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+(b||0)+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
-function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near MP '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
+function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near '+MKR+' '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
 function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in Manitoba':'Toggle a layer to view Manitoba data';}
 const tgCam=document.getElementById('tgCam');if(tgCam)tgCam.onchange=e=>{showCam=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
