@@ -70,6 +70,9 @@ const STATES = [
    { slug:'connecticut', code:'CT', name:'Connecticut', dot:'CTDOT (CTroads)', bounds:'[[40.98,-73.73],[42.05,-71.79]]',
      blurb:`CTDOT's cameras on CTroads follow I-95 along the shoreline from Greenwich to New London, I-84 from Danbury through Waterbury and Hartford, and I-91 up the Connecticut River valley, with more on Routes 2, 8, 9 and 15.`,
      notable:`Watch <a href="../../corridors/i-95/">I-95</a> through Stamford, Bridgeport and New Haven, I-84 through Waterbury and Hartford, I-91 from New Haven to the Massachusetts line, and Route 9 through Middletown.` },
+   { slug:'massachusetts', code:'MA', name:'Massachusetts', dot:'MassDOT (Mass511)', bounds:'[[41.18,-73.51],[42.89,-69.93]]',
+     blurb:`MassDOT's cameras on Mass511 follow the Mass Pike (I-90) across the state, I-95 and I-93 around Boston, I-495 around the suburbs and I-91 up the Connecticut River valley, with more on Route 2, Route 3 and US-6 out to the Cape.`,
+     notable:`Watch <a href="../../corridors/i-90/">I-90</a> from the New York line to Boston, <a href="../../corridors/i-95/">I-95</a> and I-93 around the city, and Route 3 and US-6 toward the Sagamore Bridge on a summer Friday.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },
@@ -371,7 +374,7 @@ const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|MA|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
