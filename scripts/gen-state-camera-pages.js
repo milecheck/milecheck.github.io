@@ -9,7 +9,7 @@ const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2
 // each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
 // is done. Utah first. Add the code here, then regenerate that one page:
 //   node scripts/gen-state-camera-pages.js utah
-const PLOW_PAGES = new Set(['UT', 'NE']);
+const PLOW_PAGES = new Set(['UT', 'NE', 'IN']);
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [
@@ -30,7 +30,10 @@ const STATES = [
     notable:`Watch <a href="../../corridors/i-90/">I-90</a> across the western mountains, I-15 north to the Canadian border, and I-94 across the eastern plains.` },
   { slug:'nebraska', code:'NE', name:'Nebraska', dot:'NDOT', bounds:'[[40,-104.05],[43,-95.31]]',
     blurb:`Nebraska DOT's cameras run the length of I-80 and the US highways that cross the state. On the plains the winter story is wind and blowing snow, and the cameras show it before the road report does.`,
-    notable:`Watch <a href="../../corridors/i-80/">I-80</a> from Omaha to the Wyoming line, US-30 along the Platte, and US-81 and US-275 north from the interstate. In winter the Snowplows layer shows where NDOT's trucks are, each with the route and mile it reports, whether it is plowing, and a photo from the truck's own camera where it sends one.` },
+    notable:`Watch <a href="../../corridors/i-80/">I-80</a> from Omaha to the Wyoming line, US-30 along the Platte, and US-81 and US-275 north from the interstate. In winter the Snowplows layer shows where NDOT's trucks are, each with the route and mile it reports, what material it is applying, and a photo from the truck's own camera where it sends one.` },
+   { slug:'indiana', code:'IN', name:'Indiana', dot:'INDOT', bounds:'[[37.77,-88.10],[41.76,-84.78]]',
+     blurb:`Indiana DOT's cameras follow the interstates that cross the state, I-65 and I-69 north to south, I-70 and I-74 east to west, and the I-465 loop around Indianapolis. The lake-effect corridor near Gary and South Bend has cameras on I-94 and the Toll Road.`,
+     notable:`Watch I-65 from the Ohio River to Gary, <a href="../../corridors/i-70/">I-70</a> through Indianapolis, <a href="../../corridors/i-94/">I-94</a> and the <a href="../../corridors/i-80/">Toll Road</a> along Lake Michigan, and the I-465 loop. In winter the Snowplows layer shows where INDOT's trucks are, each with the route and mile it reports, what material it is applying, and a photo from the truck's own camera where it sends one.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },
@@ -329,7 +332,7 @@ const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|M|Loop|\\d)[- ]?\\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
