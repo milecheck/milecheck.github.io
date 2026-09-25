@@ -64,6 +64,9 @@ const STATES = [
    { slug:'arkansas', code:'AR', name:'Arkansas', dot:'ARDOT (IDrive Arkansas)', bounds:'[[33.00,-94.62],[36.50,-89.64]]',
      blurb:`ARDOT's cameras on IDrive Arkansas cover the interstates across the state, I-40 from Fort Smith through Little Rock to West Memphis, I-30 to Texarkana, I-49 up through the northwest and I-55 and I-57 in the northeast, plus the Little Rock loops and a few US and state highways.`,
      notable:`Watch I-40 through Little Rock and across the Delta to Memphis, I-30 southwest to Texarkana, I-49 through Fayetteville and Bentonville, and the I-430 and I-630 loops in Little Rock.` },
+   { slug:'illinois', code:'IL', name:'Illinois', dot:'IDOT (Getting Around Illinois)', bounds:'[[36.97,-91.52],[42.51,-87.02]]',
+     blurb:`IDOT's cameras are thickest in the Chicago area, on the Kennedy, Dan Ryan, Eisenhower and Edens and the I-294 and I-355 tollways, with more on I-55, I-57, I-74 and I-80 downstate. Cameras on roads IDOT names rather than numbers are not on this map.`,
+     notable:`Watch <a href="../../corridors/i-90/">I-90</a> and <a href="../../corridors/i-94/">I-94</a> through Chicago, <a href="../../corridors/i-80/">I-80</a> across the south suburbs to the Quad Cities, I-55 toward St. Louis, and I-74 over the Illinois River in Peoria.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },
@@ -365,7 +368,7 @@ const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
