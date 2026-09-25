@@ -5,11 +5,11 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WA Ferry Space — live drive-up space on Washington State Ferries | MileCheck</title>
-  <meta name="description" content="Live drive-up vehicle space on Washington State Ferries — Edmonds–Kingston, Seattle–Bainbridge, Mukilteo–Clinton, Fauntleroy, Anacortes and more. See how full the next sailings are before you get in line, plus live vessel positions.">
+  <title>Washington Ferries Live — next sailings, space, cameras, boats on the map | MileCheck</title>
+  <meta name="description" content="Pick a Washington State Ferries route and see the next sailings with drive-up space left, the terminal cameras, and the boats moving on the map. Live from WSDOT, refreshed every minute.">
 
-  <meta property="og:title" content="WA Ferry Space — live drive-up space per sailing">
-  <meta property="og:description" content="How full is the next boat? Live drive-up space counts for Washington State Ferries sailings, straight from WSDOT — refreshed every minute.">
+  <meta property="og:title" content="Washington ferries, live: next sailings, space left, cameras, boats on the map">
+  <meta property="og:description" content="Pick a route. Next sailings with space left, terminal cameras, and the boats on the water, live from WSDOT.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/ferries/">
   <meta property="og:type" content="website">
@@ -33,38 +33,66 @@
   }
   </script>
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <style>
-    .fy-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .fy-hero{max-width:1160px;margin:0 auto;padding:30px 20px 6px;}
     .fy-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
     .fy-hero h1 .accent{color:#0f7a4f;}
     .fy-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
-    .fy-status{max-width:1160px;margin:10px auto 0;padding:0 20px;font-size:12.5px;color:#8A939B;}
-    .fy-disrupt{max-width:1160px;margin:14px auto 0;padding:0 20px;display:none;}
-    .fy-disrupt .inner{background:#FEF6EC;border:1px solid #F59E0B;border-radius:12px;padding:12px 16px;font-size:14px;color:#7c4a03;line-height:1.5;}
-    .fy-grid{max-width:1160px;margin:18px auto 40px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;align-items:start;}
-    .fy-term{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;}
-    .fy-term h2{font-size:16.5px;font-weight:800;padding:13px 16px 11px;border-bottom:1px solid #EFEFEF;display:flex;justify-content:space-between;align-items:baseline;}
-    .fy-term h2 small{font-size:11.5px;color:#8A939B;font-weight:600;letter-spacing:.03em;}
-    .fy-sail{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid #F3F4F3;}
-    .fy-sail:last-child{border-bottom:none;}
-    .fy-time{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14.5px;min-width:74px;}
-    .fy-dest{flex:1;min-width:0;}
-    .fy-dest .to{font-size:13px;font-weight:700;}
-    .fy-dest .vs{font-size:11.5px;color:#8A939B;}
-    .fy-space{text-align:right;min-width:96px;}
-    .fy-bar{height:6px;border-radius:3px;background:#EDEFEE;overflow:hidden;margin-top:4px;}
-    .fy-bar i{display:block;height:100%;border-radius:3px;}
-    .fy-pct{font-size:12.5px;font-weight:800;}
-    .lots .fy-pct{color:#0f7a4f;} .lots .fy-bar i{background:#0f7a4f;}
-    .some .fy-pct{color:#b45309;} .some .fy-bar i{background:#F59E0B;}
-    .full .fy-pct{color:#DC2626;} .full .fy-bar i{background:#DC2626;}
-    .cancelled .fy-time,.cancelled .fy-dest .to{color:#DC2626;text-decoration:line-through;}
-    .cancelled .fy-pct{color:#DC2626;}
-    .fy-vessels{max-width:1160px;margin:0 auto 30px;padding:0 20px;font-size:13.5px;color:#5b6670;line-height:1.7;}
-    .fy-vessels b{color:#0F1419;}
-    .fy-note{max-width:1160px;margin:0 auto 40px;padding:0 20px;font-size:13px;color:#8A939B;line-height:1.6;}
-    .fy-cta{border:1px dashed #cfd6d2;border-radius:14px;padding:14px 16px;font-size:13.5px;line-height:1.55;background:#F9FAF9;}
-    .fy-empty{padding:16px;color:#8A939B;font-size:13.5px;font-style:italic;}
+    .fy-wrap{max-width:1160px;margin:0 auto;padding:10px 20px 40px;}
+    .fy-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:14px 0 12px;}
+    .fy-ctl label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;}
+    .fy-ctl select{font:inherit;font-size:15px;font-weight:600;padding:9px 34px 9px 12px;border:1px solid #E5E5E5;border-radius:10px;background:#fff;color:#0E1116;min-width:260px;}
+    .fy-seg{display:inline-flex;border:1px solid #E5E5E5;border-radius:10px;overflow:hidden;background:#fff;}
+    .fy-seg button{font:inherit;font-size:13px;font-weight:700;padding:8px 12px;border:0;background:transparent;color:#5b6670;cursor:pointer;}
+    .fy-seg button[aria-pressed="true"]{background:#0f7a4f;color:#fff;}
+    .fy-status{font-size:12.5px;color:#8a8fa3;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+    .fy-disrupt{display:none;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:10px 14px;margin:0 0 12px;font-size:14px;color:#9a3412;}
+    .fy-disrupt.on{display:block;}
+    .fy-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;background:#fff;}
+    #fyMap{height:62vh;min-height:420px;width:100%;z-index:0;}
+    .fy-card{position:absolute;top:12px;right:12px;width:min(360px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:14px 14px 12px;z-index:500;display:none;}
+    .fy-card.on{display:block;}
+    .fy-card .cx{position:absolute;top:6px;right:8px;border:0;background:transparent;font-size:22px;line-height:1;color:#8a8fa3;cursor:pointer;}
+    .fy-card h3{font-size:17px;font-weight:800;margin:0 26px 2px 0;}
+    .fy-card .k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8fa3;margin:12px 0 6px;}
+    .fy-card .k:first-of-type{margin-top:6px;}
+    .fy-sail{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;padding:6px 0;border-top:1px solid #f0f0f0;font-size:13.5px;}
+    .fy-sail:first-child{border-top:0;}
+    .fy-sail .t{font-family:'JetBrains Mono',monospace;font-weight:700;color:#0E1116;white-space:nowrap;}
+    .fy-sail .d{color:#3a444d;min-width:0;}
+    .fy-sail .d small{display:block;color:#8a8fa3;font-size:12px;}
+    .fy-sail .sp{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;white-space:nowrap;text-align:right;}
+    .fy-sail .bar{grid-column:1 / -1;height:4px;border-radius:2px;background:#eef0f2;overflow:hidden;}
+    .fy-sail .bar i{display:block;height:100%;background:#0f7a4f;}
+    .fy-sail.low .sp{color:#b45309;} .fy-sail.low .bar i{background:#f59e0b;}
+    .fy-sail.full .sp{color:#b91c1c;} .fy-sail.full .bar i{background:#dc2626;}
+    .fy-sail.cx .t,.fy-sail.cx .d{text-decoration:line-through;color:#8a8fa3;}
+    .fy-cams{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .fy-cam{display:block;border:1px solid #E5E5E5;border-radius:8px;overflow:hidden;text-decoration:none;color:inherit;background:#f6f7f8;}
+    .fy-cam img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;}
+    .fy-cam span{display:block;font-size:11.5px;line-height:1.3;padding:5px 7px;color:#3a444d;}
+    .fy-empty{font-size:13.5px;color:#8a8fa3;padding:6px 0;}
+    .fy-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:#5b6670;margin:10px 2px 0;}
+    .fy-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#0f7a4f;vertical-align:-1px;margin-right:6px;}
+    .fy-legend b{display:inline-block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #1d4ed8;vertical-align:-1px;margin-right:6px;}
+    .fy-legend u{display:inline-block;width:18px;height:0;border-top:3px solid #1d4ed8;vertical-align:3px;margin-right:6px;text-decoration:none;}
+    .fy-lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:18px;}
+    .fy-term{background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:14px 16px;}
+    .fy-term h2{font-size:17px;font-weight:800;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+    .fy-term h2 small{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8fa3;}
+    .fy-term .sub{font-size:12.5px;color:#8a8fa3;margin:0 0 6px;}
+    .fy-term .more{font-size:13px;font-weight:700;color:#0f7a4f;text-decoration:none;display:inline-block;margin-top:8px;}
+    .fy-note{max-width:1160px;margin:22px auto 0;padding:0 20px;font-size:14px;color:#5b6670;line-height:1.6;}
+    .fy-note h2{font-size:20px;color:#0E1116;margin:22px 0 8px;}
+    .fy-note p{margin:0 0 10px;}
+    .fy-cta{background:#fff;border:1px solid #E5E5E5;border-radius:12px;padding:12px 16px;font-size:14px;}
+    .fy-tdot{width:14px;height:14px;border-radius:50%;background:#0f7a4f;border:2.5px solid #fff;box-shadow:0 0 0 1.5px #0f7a4f;}
+    .fy-tdot.dim{background:#9aa5ad;box-shadow:0 0 0 1.5px #9aa5ad;}
+    .fy-tlabel{background:transparent;border:0;box-shadow:none;font:700 12px/1 'Inter',sans-serif;color:#0E1116;text-shadow:0 0 3px #fff,0 0 3px #fff;white-space:nowrap;}
+    .fy-boat{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:18px solid #1d4ed8;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));transform-origin:50% 60%;}
+    .fy-boat.dock{border-bottom-color:#64748b;}
+    @media(max-width:720px){ #fyMap{height:52vh;} .fy-card{top:auto;bottom:10px;right:10px;left:10px;width:auto;max-height:55%;} .fy-ctl select{min-width:0;flex:1 1 100%;} .fy-status{margin-left:0;flex-basis:100%;} }
   /* spon:css */
     .spon{display:flex;align-items:center;gap:12px;min-height:58px;margin:0 0 12px;padding:9px 14px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
     .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
@@ -103,7 +131,6 @@
       </nav>
     </div>
   </header>
-
   <div class="fy-hero">
     <!-- spon:start -->
   <aside class="spon spon-house" id="spon" data-slot="live:ferries" data-sponsor="house" aria-label="Sponsor">
@@ -114,24 +141,149 @@
     </a>
   </aside>
 <!-- spon:end -->
-<h1>Washington <span class="accent">ferry space</span> — live</h1>
-    <p class="sub">How full is the next boat? Live drive-up vehicle space for upcoming Washington State Ferries sailings, straight from WSDOT — refreshed every minute. Space changes fast near departure, so treat it as a planning signal, not a promise.</p>
+<h1>Washington <span class="accent">ferries</span>, live</h1>
+    <p class="sub">Pick a route. The next sailings with the drive-up space left on each boat, the cameras at both terminals, and the boats on the water right now. Live from WSDOT, refreshed every minute.</p>
   </div>
-  <div class="fy-status" id="fyUpdated">Loading sailing space…</div>
-  <div class="fy-disrupt" id="fyDisrupt"><div class="inner" id="fyDisruptText"></div></div>
-
-  <div class="fy-grid" id="fyGrid">
-    <div class="fy-term"><h2>Loading terminals…</h2><div class="fy-empty">Checking the WSDOT terminal feed.</div></div>
+  <div class="fy-wrap">
+    <div class="fy-ctl">
+      <label for="fyRoute">Route</label>
+      <select id="fyRoute"><option value="">All routes</option></select>
+      <div class="fy-seg" role="group" aria-label="Time format"><button type="button" id="fy12" aria-pressed="true">12-hour</button><button type="button" id="fy24" aria-pressed="false">24-hour</button></div>
+      <div class="fy-status" id="fyUpdated">Loading…</div>
+    </div>
+    <div class="fy-disrupt" id="fyDisrupt"></div>
+    <div class="fy-mapbox">
+      <div id="fyMap"></div>
+      <div class="fy-card" id="fyCard"></div>
+    </div>
+    <div class="fy-legend"><span><i></i>Terminal (tap for sailings and cameras)</span><span><b></b>Boat, pointing the way it is heading</span><span><u></u>Route, drawn approximately</span></div>
+    <div class="fy-lists" id="fyLists"></div>
   </div>
-
-  <div class="fy-vessels" id="fyVessels"></div>
 
   <div class="fy-note">
-    <div class="fy-cta" style="margin-bottom:14px;"><b>In the car?</b> The MileCheck app shows your nearest mile marker, live road alerts, and pass conditions on the way to the terminal — <a href="/get/">get the app</a>.</div>
-    Space counts are WSDOT's live drive-up figures per sailing and can change in seconds; vehicle loading closes before the posted departure. Reservable routes (Anacortes/San Juans, Port Townsend–Coupeville) also hold reserved space this page doesn't count toward drive-up. Data: WSDOT Ferries.
+    <div class="fy-cta"><b>Driving to the terminal?</b> The MileCheck app shows your nearest mile marker, live road alerts and pass conditions on the way, with CarPlay and Android Auto. <a href="/get/">Get the app</a>.</div>
+    <h2>Reading the space number</h2>
+    <p>"43 of 120 left" means 43 drive-up vehicle spaces remain of the 120 on that sailing, as WSDOT last reported it. "Full" with a number after it means more cars are already in line than the boat holds. Reservable spaces, where a route sells them, are shown separately. Counts move fast in the last half hour before departure. They are a planning signal, not a promise.</p>
+    <h2>What this page covers</h2>
+    <p>Every Washington State Ferries route. Sailing space comes from the terminals that report it (Anacortes, Bainbridge Island, Bremerton, Clinton, Seattle, Edmonds, Friday Harbor, Coupeville, Kingston, Mukilteo, Orcas Island, Point Defiance, Port Townsend). Fauntleroy, Vashon, Southworth, Tahlequah, Lopez and Shaw show their cameras and boats but do not report space. Route lines are drawn approximately, not from the vessels' tracks. Cameras are WSDOT's, refreshed on their schedule.</p>
   </div>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+var W='https://milepost-proxy.leahgerber93.workers.dev';
+var TZ='America/Los_Angeles';
+// Terminal positions (WSDOT terminal docks). Names match the WSDOT feed after trim().
+var T={
+ 'Seattle':[47.6025,-122.3384],'Bainbridge Island':[47.6227,-122.5114],'Bremerton':[47.5623,-122.6247],
+ 'Edmonds':[47.8115,-122.3835],'Kingston':[47.7960,-122.4966],'Mukilteo':[47.9497,-122.3040],'Clinton':[47.9752,-122.3513],
+ 'Anacortes':[48.5069,-122.6790],'Friday Harbor':[48.5352,-123.0142],'Orcas Island':[48.5978,-122.9440],'Lopez Island':[48.5711,-122.8830],'Shaw Island':[48.5840,-122.9296],
+ 'Coupeville':[48.1595,-122.6730],'Port Townsend':[48.1123,-122.7590],'Point Defiance':[47.3064,-122.5145],'Tahlequah':[47.3320,-122.5069],
+ 'Fauntleroy':[47.5232,-122.3929],'Vashon Island':[47.5100,-122.4636],'Southworth':[47.5130,-122.4954]};
+// Routes: feed abbrev → terminals on it and an approximate water line. Hand-placed waypoints, not tracks.
+var R={
+ 'sea-bi':{name:'Seattle / Bainbridge Island',t:['Seattle','Bainbridge Island'],lines:[[[47.6025,-122.3384],[47.608,-122.40],[47.618,-122.48],[47.6227,-122.5114]]]},
+ 'sea-br':{name:'Seattle / Bremerton',t:['Seattle','Bremerton'],lines:[[[47.6025,-122.3384],[47.592,-122.42],[47.578,-122.50],[47.567,-122.56],[47.559,-122.595],[47.5623,-122.6247]]]},
+ 'ed-king':{name:'Edmonds / Kingston',t:['Edmonds','Kingston'],lines:[[[47.8115,-122.3835],[47.805,-122.44],[47.7960,-122.4966]]]},
+ 'muk-cl':{name:'Mukilteo / Clinton',t:['Mukilteo','Clinton'],lines:[[[47.9497,-122.3040],[47.9752,-122.3513]]]},
+ 'pt-key':{name:'Port Townsend / Coupeville',t:['Port Townsend','Coupeville'],lines:[[[48.1123,-122.7590],[48.135,-122.72],[48.1595,-122.6730]]]},
+ 'pd-tal':{name:'Point Defiance / Tahlequah',t:['Point Defiance','Tahlequah'],lines:[[[47.3064,-122.5145],[47.3320,-122.5069]]]},
+ 'f-v-s':{name:'Fauntleroy / Vashon / Southworth',t:['Fauntleroy','Vashon Island','Southworth'],lines:[[[47.5232,-122.3929],[47.5100,-122.4636],[47.5130,-122.4954]]]},
+ 'f-s':{name:'Fauntleroy / Southworth',t:['Fauntleroy','Southworth'],lines:[[[47.5232,-122.3929],[47.518,-122.445],[47.5130,-122.4954]]]},
+ 's-v':{name:'Southworth / Vashon',t:['Southworth','Vashon Island'],lines:[[[47.5130,-122.4954],[47.5100,-122.4636]]]},
+ 'ana-sj':{name:'Anacortes / San Juan Islands',t:['Anacortes','Lopez Island','Shaw Island','Orcas Island','Friday Harbor'],lines:[[[48.5069,-122.6790],[48.52,-122.75],[48.55,-122.83],[48.5711,-122.8830],[48.58,-122.92],[48.5840,-122.9296],[48.5978,-122.9440]],[[48.5840,-122.9296],[48.562,-122.975],[48.5352,-123.0142]]]}
+};
+var ORDER=['sea-bi','sea-br','ed-king','muk-cl','f-v-s','f-s','s-v','pd-tal','pt-key','ana-sj'];
+var $=function(id){return document.getElementById(id)};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var h24=false; try{h24=localStorage.getItem('mc_time24')==='1'}catch(e){}
+function fmtTime(iso){var d=new Date(iso);if(isNaN(d))return '';return d.toLocaleTimeString('en-US',{timeZone:TZ,hour:h24?'2-digit':'numeric',minute:'2-digit',hour12:!h24})}
+function setH24(v){h24=v;try{localStorage.setItem('mc_time24',v?'1':'0')}catch(e){};$('fy12').setAttribute('aria-pressed',String(!v));$('fy24').setAttribute('aria-pressed',String(v));render()}
+$('fy12').addEventListener('click',function(){setH24(false)});$('fy24').addEventListener('click',function(){setH24(true)});
+$('fy12').setAttribute('aria-pressed',String(!h24));$('fy24').setAttribute('aria-pressed',String(h24));
+var sel=$('fyRoute');ORDER.forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=R[k].name;sel.appendChild(o)});
+var route=''; try{var q=new URLSearchParams(location.search).get('route');if(q&&R[q])route=q;else{var st=localStorage.getItem('mc_ferry_route');if(st&&R[st])route=st}}catch(e){}
+sel.value=route;
+sel.addEventListener('change',function(){route=sel.value;try{localStorage.setItem('mc_ferry_route',route)}catch(e){};closeCard();fitRoute();render()});
 
-  <footer class="site-footer">
+var map=L.map('fyMap',{zoomControl:true,scrollWheelZoom:false});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles &copy; Esri',maxZoom:18}).addTo(map);
+var lineLayer=L.layerGroup().addTo(map), termLayer=L.layerGroup().addTo(map), boatLayer=L.layerGroup().addTo(map);
+var data=null, cams=[], terminalsByName={};
+function terminalsFor(){return route?R[route].t:Object.keys(T)}
+function fitRoute(){var pts=terminalsFor().map(function(n){return T[n]});if(route){R[route].lines.forEach(function(l){pts=pts.concat(l)})}map.fitBounds(L.latLngBounds(pts).pad(route?0.25:0.08))}
+function drawStatic(){
+  lineLayer.clearLayers();termLayer.clearLayers();
+  var keys=route?[route]:ORDER;
+  keys.forEach(function(k){R[k].lines.forEach(function(l){L.polyline(l,{color:'#1d4ed8',weight:route?4:2.5,opacity:route?0.85:0.45,dashArray:route?null:'6 6'}).addTo(lineLayer)})});
+  terminalsFor().forEach(function(n){
+    var reports=!!terminalsByName[n];
+    var m=L.marker(T[n],{icon:L.divIcon({className:'',html:'<div class="fy-tdot'+(reports?'':' dim')+'"></div>',iconSize:[14,14],iconAnchor:[7,7]}),zIndexOffset:400}).addTo(termLayer);
+    m.bindTooltip(n,{permanent:true,direction:'right',offset:[8,0],className:'fy-tlabel'});
+    m.on('click',function(){openTerminal(n)});
+  });
+}
+function drawBoats(){
+  boatLayer.clearLayers(); if(!data||!data.vessels)return;
+  var names=terminalsFor();
+  data.vessels.forEach(function(v){
+    if(!isFinite(v.lat)||!isFinite(v.lon))return;
+    if(route&&names.indexOf(String(v.departingTerminal||'').trim())<0&&names.indexOf(String(v.arrivingTerminal||'').trim())<0)return;
+    var m=L.marker([v.lat,v.lon],{icon:L.divIcon({className:'',html:'<div class="fy-boat'+(v.atDock?' dock':'')+'" style="transform:rotate('+(Math.round(v.heading)||0)+'deg)"></div>',iconSize:[16,18],iconAnchor:[8,11]}),zIndexOffset:200}).addTo(boatLayer);
+    var to=v.arrivingTerminal?' → '+esc(v.arrivingTerminal):'';
+    m.bindTooltip('<b>'+esc(v.name)+'</b>'+(v.atDock?' at '+esc(v.departingTerminal||'dock'):' '+esc(v.departingTerminal||'')+to)+(v.eta&&!v.atDock?'<br>ETA '+fmtTime(v.eta):'')+(v.speedKnots&&!v.atDock?' · '+Math.round(v.speedKnots)+' kn':''),{direction:'top',offset:[0,-8]});
+  });
+}
+function spaceInfo(sp){ if(!sp||!sp.length)return null; var s=sp[0]; var left=s.driveUpSpaceCount, max=s.maxSpaceCount; if(left==null||max==null)return null; return {left:left,max:max,res:s.reservableSpaceCount,to:s.arrivingTerminalName||''}; }
+function sailRow(dep,short){
+  var si=spaceInfo(dep.spaces); var cls='fy-sail'; var spTxt='—'; var w=0;
+  if(si){ if(si.left<0){cls+=' full';spTxt='Full · '+(-si.left)+' waiting';w=100;} else {var pct=si.max?si.left/si.max:0; w=Math.round(100*pct); spTxt=si.left+' of '+si.max+' left'; if(pct<0.15)cls+=' low';} }
+  if(dep.isCancelled){cls+=' cx';spTxt='Cancelled'}
+  var dest=si?si.to.replace(/\s*->\s*/g,' → '):'';
+  return '<div class="'+cls+'"><span class="t">'+esc(fmtTime(dep.departure))+'</span><span class="d">'+esc(short?dest.split(' → ').slice(1).join(' → ')||dest:dest)+(dep.vesselName?'<small>'+esc(dep.vesselName)+(si&&si.res!=null&&si.res>0?' · '+si.res+' reservable':'')+'</small>':'')+'</span><span class="sp">'+esc(spTxt)+'</span>'+(si&&!dep.isCancelled?'<span class="bar"><i style="width:'+w+'%"></i></span>':'')+'</div>';
+}
+function upcoming(t,n){var now=Date.now();return (t.departures||[]).filter(function(d){return new Date(d.departure).getTime()>now-5*60000}).slice(0,n)}
+function camsNear(n){var p=T[n];if(!p)return [];return cams.filter(function(c){var dy=(c.lat-p[0])*111,dx=(c.lon-p[1])*111*Math.cos(p[0]*Math.PI/180);return Math.sqrt(dx*dx+dy*dy)<=2.6}).slice(0,6)}
+function openTerminal(n){
+  var t=terminalsByName[n]; var html='<button class="cx" aria-label="Close">×</button><h3>'+esc(n)+'</h3>';
+  html+='<div class="k">Next sailings</div>';
+  if(t){var u=upcoming(t,4);html+=u.length?u.map(function(d){return sailRow(d,true)}).join(''):'<div class="fy-empty">No upcoming sailings reported.</div>'}
+  else html+='<div class="fy-empty">This terminal does not report sailing space. Check the other end of the route.</div>';
+  var cs=camsNear(n); html+='<div class="k">Cameras</div>';
+  html+=cs.length?'<div class="fy-cams">'+cs.map(function(c){return '<a class="fy-cam" href="'+esc(c.imageUrl)+'" target="_blank" rel="noopener"><img src="'+esc(c.imageUrl)+'" alt="" loading="lazy"><span>'+esc(c.title.replace(/^WSF\s+/,''))+'</span></a>'}).join('')+'</div>':'<div class="fy-empty">No WSDOT camera at this terminal.</div>';
+  var el=$('fyCard');el.innerHTML=html;el.classList.add('on');el.querySelector('.cx').addEventListener('click',closeCard);
+  map.panTo(T[n]);
+}
+function closeCard(){$('fyCard').classList.remove('on')}
+function render(){
+  if(!data)return;
+  drawStatic();drawBoats();
+  var list=$('fyLists');list.innerHTML='';
+  var names=terminalsFor().filter(function(n){return terminalsByName[n]});
+  names.forEach(function(n){
+    var t=terminalsByName[n]; var u=upcoming(t,route?8:4); if(!u.length)return;
+    var div=document.createElement('div');div.className='fy-term';
+    div.innerHTML='<h2>'+esc(n)+'<small>space left</small></h2><p class="sub">Departing '+esc(n)+(route?'':' · tap the terminal on the map for cameras')+'</p>'+u.map(function(d){return sailRow(d,true)}).join('')+'<a class="more" href="#" data-t="'+esc(n)+'">Cameras and more sailings →</a>';
+    div.querySelector('.more').addEventListener('click',function(e){e.preventDefault();openTerminal(n);window.scrollTo({top:$('fyMap').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'})});
+    list.appendChild(div);
+  });
+  if(!list.children.length)list.innerHTML='<div class="fy-empty">No sailing space reported on this route right now.</div>';
+  var dis=(data.routes||[]).filter(function(r){return (!route||r.abbrev===route)&&r.disruptions&&r.disruptions.length});
+  var db=$('fyDisrupt'); if(dis.length){db.innerHTML=dis.map(function(r){return '<b>'+esc(r.name)+':</b> '+r.disruptions.map(function(x){return esc(typeof x==='string'?x:(x.description||x.title||JSON.stringify(x)))}).join(' · ')}).join('<br>');db.classList.add('on')}else db.classList.remove('on');
+  var when=data.fetched_at?fmtTime(data.fetched_at):fmtTime(new Date().toISOString());
+  $('fyUpdated').textContent='Updated '+when+' · WSDOT · every minute';
+}
+function load(){
+  fetch(W+'/ferries').then(function(r){return r.json()}).then(function(d){
+    data=d; terminalsByName={}; (d.terminals||[]).forEach(function(t){terminalsByName[String(t.name||'').trim()]=t});
+    render();
+  }).catch(function(){$('fyUpdated').textContent='WSDOT feed did not answer. Trying again in a minute.'});
+}
+fetch(W+'/cameras?state=WA').then(function(r){return r.json()}).then(function(d){cams=(d.cameras||[]).filter(function(c){return /ferries/i.test(c.route||'')||/^WSF\b/.test(c.title||'')});}).catch(function(){});
+fitRoute();load();setInterval(load,60000);
+})();
+</script>
+<footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
@@ -165,87 +317,6 @@
     </div>
   </footer>
 
-<script>
-const API='https://milepost-proxy.leahgerber93.workers.dev/ferries';
-
-function fmtTime(iso){
-  if(!iso) return '—';
-  const d=new Date(iso);
-  if(isNaN(d)) return '—';
-  return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
-}
-
-function spaceTier(count,max){
-  if(count==null||max==null||max<=0) return null;
-  const pct=count/max;
-  if(pct>0.4) return 'lots';
-  if(pct>0.12) return 'some';
-  return 'full';
-}
-
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-
-async function refresh(){
-  const updated=document.getElementById('fyUpdated');
-  let data=null, ok=false;
-  try{
-    const r=await fetch(API);
-    data=await r.json();
-    ok=r.ok && data && data.source_status!=='failed';
-  }catch(e){ ok=false; }
-  const nowStr=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
-  if(!ok){
-    updated.textContent='Feed unavailable as of '+nowStr+' — retrying every minute. (WSDOT outage or a network hiccup; sailing space is unknown, not "empty".)';
-    return; // keep showing last-known board rather than blanking it
-  }
-
-  // Disruptions banner
-  const dis=(data.routes||[]).flatMap(r=>(r.disruptions||[]).map(d=>({route:r.name,text:d})));
-  const disBox=document.getElementById('fyDisrupt');
-  if(dis.length){
-    document.getElementById('fyDisruptText').innerHTML='<b>Service alerts:</b> '+dis.map(d=>'<b>'+esc(d.route)+'</b> — '+esc(d.text)).join(' &middot; ');
-    disBox.style.display='block';
-  } else disBox.style.display='none';
-
-  // Terminal boards — only terminals with upcoming departures, next 4 sailings each
-  const now=Date.now();
-  const grid=document.getElementById('fyGrid');
-  const cards=[];
-  (data.terminals||[]).forEach(t=>{
-    const upcoming=(t.departures||[])
-      .filter(d=>d.departure && new Date(d.departure).getTime()>now-5*60*1000)
-      .slice(0,4);
-    if(!upcoming.length) return;
-    const rows=upcoming.map(d=>{
-      const sp=(d.spaces&&d.spaces[0])||{};
-      const tier=d.isCancelled?'cancelled':spaceTier(sp.driveUpSpaceCount,sp.maxSpaceCount);
-      const pct=(sp.driveUpSpaceCount!=null&&sp.maxSpaceCount)?Math.max(0,Math.min(100,Math.round(100*sp.driveUpSpaceCount/sp.maxSpaceCount))):null;
-      const spaceHtml=d.isCancelled
-        ?'<div class="fy-pct">CANCELLED</div>'
-        :(pct==null
-          ?'<div class="fy-pct" style="color:#8A939B;">no count</div>'
-          :'<div class="fy-pct">'+sp.driveUpSpaceCount+' spaces</div><div class="fy-bar"><i style="width:'+pct+'%"></i></div>');
-      const dests=(d.spaces||[]).map(s=>esc(s.arrivingTerminalName)).filter(Boolean).join(' / ')||'—';
-      return '<div class="fy-sail '+(tier||'')+'">'
-        +'<div class="fy-time">'+fmtTime(d.departure)+'</div>'
-        +'<div class="fy-dest"><div class="to">→ '+dests+'</div><div class="vs">'+esc(d.vesselName||'')+'</div></div>'
-        +'<div class="fy-space">'+spaceHtml+'</div></div>';
-    }).join('');
-    cards.push('<div class="fy-term"><h2>'+esc(t.name)+'<small>drive-up space</small></h2>'+rows+'</div>');
-  });
-  grid.innerHTML=cards.length?cards.join(''):'<div class="fy-term"><h2>No upcoming sailings reported</h2><div class="fy-empty">WSDOT is not listing departures right now — service may be done for the night.</div></div>';
-
-  // Vessels underway
-  const underway=(data.vessels||[]).filter(v=>!v.atDock);
-  document.getElementById('fyVessels').innerHTML=underway.length
-    ?('<b>'+underway.length+' boats underway right now:</b> '+underway.map(v=>esc(v.name)+' ('+esc(v.departingTerminal||'?')+' → '+esc(v.arrivingTerminal||'?')+(v.eta?', ETA '+fmtTime(v.eta):'')+')').join(' · '))
-    :'';
-
-  updated.textContent='Updated '+nowStr+' · refreshes every minute · '+(data.source_status==='partial'?'⚠ one WSDOT feed is down — showing what’s available':'live from WSDOT Ferries');
-}
-refresh();
-setInterval(refresh,60000);
-</script>
 <!-- shared hamburger toggle (was missing on this page; the global collapse in style.css needs it) -->
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 <!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
