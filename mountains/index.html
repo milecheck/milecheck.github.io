@@ -18,14 +18,18 @@
   <link rel="stylesheet" href="../style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mountain Visibility Forecast","applicationCategory":"WeatherApplication","operatingSystem":"iOS","offers":{"@type":"Offer","price":"0.99","priceCurrency":"USD"},"description":"Whether Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali are visible right now and for the next three days, by region.","author":{"@type":"Organization","name":"MileCheck LLC"}}</script>
   <style>
-    .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
-    @media(max-width:860px){.mv-hero{grid-template-columns:1fr;}}
-    .mv-get{border:1px solid var(--line);background:var(--surface);padding:16px 18px;margin-top:4px;}
+    .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;}
+    .mv-get{max-width:1160px;margin:18px auto 0;padding:16px 18px;border:1px solid var(--line);background:var(--surface);display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;}
+    .mv-get>div{flex:1 1 360px;}
+    .mv-get .btn{flex:none;}
+    @media(max-width:860px){.mv-get{display:block;}}
     .mv-get .mv-stamp{margin-bottom:6px;}
     .mv-get h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:6px;}
     .mv-get p{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:10px;}
-    .mv-get .btn{display:block;text-align:center;}
-    .mv-get .mv-soon{display:block;text-align:center;margin-top:8px;}
+    .mv-get .mv-soon{flex-basis:100%;font-size:13px;}
+    .mv-lock{border:1px dashed var(--line);background:var(--surface);padding:16px 18px;}
+    .mv-lock h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:6px;}
+    .mv-lock p{font-size:14px;color:var(--ink-soft);line-height:1.5;margin-bottom:10px;}
     .mv-hero h1{font-family:var(--display);font-size:clamp(28px,4.4vw,44px);font-weight:600;letter-spacing:-0.01em;line-height:1.08;text-wrap:balance;}
     .mv-hero p.sub{color:var(--ink-soft);font-size:15.5px;margin-top:10px;max-width:66ch;line-height:1.55;}
     .mv-stamp{font-family:var(--mono-stack);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
@@ -138,16 +142,16 @@
 <!-- spon:end -->
 <div class="mv-stamp">Live · five mountains · now on iOS</div>
     <h1>Is the mountain visible right now?</h1>
-    <p class="sub">Whether each mountain is visible right now from your part of the region, and the clear windows in the next three days. Read from the airport weather stations between you and the summit and from the cloud layers at the summit.</p>
-    </div>
-    <div class="mv-get">
-      <div class="mv-stamp">The app</div>
-      <h3>Mountain Visibility Forecast</h3>
-      <p>Rainier, Hood, Baker, St. Helens and Denali. Visible now or not, and a three-day forecast. $0.99, one time.</p>
-      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get it on the App Store</a>
-      <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
+    <p class="sub">Whether each mountain is visible right now from your part of the region, from the airport weather stations between you and the summit and from the cloud layers at the summit.</p>
     </div>
   </div>
+    <div class="mv-get">
+      <div><div class="mv-stamp">The app</div>
+      <h3>Mountain Visibility Forecast</h3>
+      <p>Rainier, Hood, Baker, St. Helens and Denali. Visible now or not, the three-day forecast, and the sunrise and sunset light. $0.99, one time.</p></div>
+      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get the app, $0.99</a>
+      <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
+    </div>
   <div class="mv-body">
     <div class="mv-prose"><h2>Pick a mountain</h2></div>
     <div class="mv-grid"><a class="mv-mtn" href="rainier/" data-host="https://rainier-is-out.leahgerber93.workers.dev" data-key="rainier"><span class="mv-arrow">&rarr;</span><h3>Mount Rainier</h3><div class="mv-h">14,410 ft · from Seattle</div><div class="mv-now" id="mvNow-rainier">…</div><div class="mv-nowsub" id="mvSub-rainier">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a><a class="mv-mtn" href="hood/" data-host="https://hood-is-out.leahgerber93.workers.dev" data-key="hood"><span class="mv-arrow">&rarr;</span><h3>Mount Hood</h3><div class="mv-h">11,249 ft · from Portland</div><div class="mv-now" id="mvNow-hood">…</div><div class="mv-nowsub" id="mvSub-hood">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a><a class="mv-mtn" href="baker/" data-host="https://baker-is-out.leahgerber93.workers.dev" data-key="baker"><span class="mv-arrow">&rarr;</span><h3>Mount Baker</h3><div class="mv-h">10,781 ft · from Vancouver, BC</div><div class="mv-now" id="mvNow-baker">…</div><div class="mv-nowsub" id="mvSub-baker">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a><a class="mv-mtn" href="sthelens/" data-host="https://sthelens-is-out.leahgerber93.workers.dev" data-key="sthelens"><span class="mv-arrow">&rarr;</span><h3>Mount St. Helens</h3><div class="mv-h">8,363 ft · from Portland</div><div class="mv-now" id="mvNow-sthelens">…</div><div class="mv-nowsub" id="mvSub-sthelens">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a><a class="mv-mtn" href="denali/" data-host="https://denali-is-out.leahgerber93.workers.dev" data-key="denali"><span class="mv-arrow">&rarr;</span><h3>Denali</h3><div class="mv-h">20,310 ft · from Talkeetna</div><div class="mv-now" id="mvNow-denali">…</div><div class="mv-nowsub" id="mvSub-denali">Checking the sky.</div><span class="mv-go">See the forecast and viewpoints</span></a></div>
@@ -160,7 +164,7 @@
       <h2>The app</h2>
       <p>Mountain Visibility Forecast launched on iOS in September 2026. It has all five mountains and picks the nearest one from your location. Alerts are optional: tap "Tell me when it's out" and it sends a notification when the mountain becomes visible and one before sunrise or sunset light, two a day at most and none at night. Turn them off any time. It is useful for photography and for deciding whether to drive to a viewpoint.</p>
       <p>Android is in testing. If you have an Android phone and want to be a tester, email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a>. The email opens ready to send.</p>
-      <div class="mv-cta"><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get it on the App Store</a><span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span></div>
+      <div class="mv-cta"><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get the app, $0.99</a><span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span></div>
     </div>
   </div>
   <div class="mv-shots">

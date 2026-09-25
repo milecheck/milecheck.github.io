@@ -18,14 +18,18 @@
   <link rel="stylesheet" href="../../../style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do we know if Mount Rainier is visible?","acceptedAnswer":{"@type":"Answer","text":"We read the cloud ceilings at the airports between Seattle and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 14,410 ft. No crowd reports."}},{"@type":"Question","name":"Why only three days?","acceptedAnswer":{"@type":"Answer","text":"Cloud forecasts are not reliable past about three days, so the forecast stops there."}},{"@type":"Question","name":"Why does the Eastside get a different answer than Seattle?","acceptedAnswer":{"@type":"Answer","text":"Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations."}},{"@type":"Question","name":"What it can get wrong","acceptedAnswer":{"@type":"Answer","text":"Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so."}}]}</script>
   <style>
-    .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
-    @media(max-width:860px){.mv-hero{grid-template-columns:1fr;}}
-    .mv-get{border:1px solid var(--line);background:var(--surface);padding:16px 18px;margin-top:4px;}
+    .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;}
+    .mv-get{max-width:1160px;margin:18px auto 0;padding:16px 18px;border:1px solid var(--line);background:var(--surface);display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;}
+    .mv-get>div{flex:1 1 360px;}
+    .mv-get .btn{flex:none;}
+    @media(max-width:860px){.mv-get{display:block;}}
     .mv-get .mv-stamp{margin-bottom:6px;}
     .mv-get h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:6px;}
     .mv-get p{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:10px;}
-    .mv-get .btn{display:block;text-align:center;}
-    .mv-get .mv-soon{display:block;text-align:center;margin-top:8px;}
+    .mv-get .mv-soon{flex-basis:100%;font-size:13px;}
+    .mv-lock{border:1px dashed var(--line);background:var(--surface);padding:16px 18px;}
+    .mv-lock h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:6px;}
+    .mv-lock p{font-size:14px;color:var(--ink-soft);line-height:1.5;margin-bottom:10px;}
     .mv-hero h1{font-family:var(--display);font-size:clamp(28px,4.4vw,44px);font-weight:600;letter-spacing:-0.01em;line-height:1.08;text-wrap:balance;}
     .mv-hero p.sub{color:var(--ink-soft);font-size:15.5px;margin-top:10px;max-width:66ch;line-height:1.55;}
     .mv-stamp{font-family:var(--mono-stack);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
@@ -140,14 +144,14 @@
     <h1>Best time of year to see Mount Rainier</h1>
     <p class="sub">Which months and which hours, from Seattle.</p>
     </div>
+  </div>
     <div class="mv-get">
-      <div class="mv-stamp">The app</div>
+      <div><div class="mv-stamp">The app</div>
       <h3>Mountain Visibility Forecast</h3>
-      <p>Rainier, Hood, Baker, St. Helens and Denali. Visible now or not, and a three-day forecast. $0.99, one time.</p>
-      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get it on the App Store</a>
+      <p>Rainier, Hood, Baker, St. Helens and Denali. Visible now or not, the three-day forecast, and the sunrise and sunset light. $0.99, one time.</p></div>
+      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get the app, $0.99</a>
       <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
     </div>
-  </div>
   <div class="mv-wrap">
     <div><div class="mv-prose"><p>From Seattle the clearest stretch is July through September, when the marine layer is thin and most days deliver the mountain by mid-morning. In June the sun is up seventeen hours but the low cloud often does not burn off until afternoon.</p>
 <p>October and November bring inversions. Seattle sits under fog while the mountain stands above it in sun, so a grey morning in the city can be the best view of the year from Tacoma or the Eastside. The region pages cover this.</p>
@@ -161,14 +165,13 @@
       <div class="mv-meta" id="mvMeta"></div>
     </div></div>
     <div>
-      <div class="mv-card"><h3>Clear windows, next three days</h3><div class="mv-rows" id="mvWindows"><p>Loading.</p></div></div>
-      <div class="mv-card"><h3>Sunrise and sunset light</h3><div class="mv-rows" id="mvGlow"></div></div>
+      <div class="mv-lock"><h3>Three-day forecast and the light</h3><p>The clear windows in the next three days, and the sunrise and sunset light on the summit, are in the app. $0.99, one time.</p><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get the app, $0.99</a></div>
       <div class="mv-card"><h3>By region</h3><div class="mv-rows" id="mvRegions"></div></div>
       <div class="mv-card">
         <h3>Mountain Visibility Forecast</h3>
         <p>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali in one app. Shows whether the mountain is visible from where you are, the clear windows in the next three days, and the viewpoints. Made for photographers and anyone driving to a viewpoint. $0.99, one time. No account, no ads.</p>
         <div class="mv-cta">
-          <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get it on the App Store</a>
+          <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955" class="btn btn-primary">Get the app, $0.99</a>
           <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
         </div>
       </div></div>
@@ -203,9 +206,9 @@ fetch(HOST+'/data.json').then(r=>r.json()).then(d=>{
   const rows=regions.map(x=>'<div class="mv-row"><span class="k">'+x.name+'</span><span class="v '+x.verdict+'">'+({OUT:'Visible',PARTLY:'Partly',HIDDEN:'Hidden'}[x.verdict]||x.verdict)+(x.viewerCeilingFt?' · '+x.viewerCeilingFt.toLocaleString()+' ft':'')+'</span></div>').join('');
   $('mvRegions').innerHTML=rows;
   const w=(d.windows||[]).slice(0,6).map(x=>'<div class="mv-row"><span class="k">'+rel(x.start)+'</span><span class="v">'+hh(x.start)+' to '+hh(x.end)+' · '+Math.round(x.peak*100)+'%</span></div>').join('');
-  $('mvWindows').innerHTML=w||'<p>No clear window in the next three days.</p>';
+  if($('mvWindows'))$('mvWindows').innerHTML=w||'<p>No clear window in the next three days.</p>';
   const g=(d.alpenglow||[]).slice(0,4).map(x=>'<div class="mv-row"><span class="k">'+rel(x.when)+' '+x.kind+' '+hm(x.when)+'</span><span class="v">'+x.label+'</span></div>').join('');
-  $('mvGlow').innerHTML=g;
+  if($('mvGlow'))$('mvGlow').innerHTML=g;
 }).catch(()=>{ $('mvLine').textContent='Live numbers did not load. Try again in a minute.'; });
 })();
 </script>

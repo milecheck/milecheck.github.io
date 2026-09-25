@@ -41,12 +41,33 @@ function htmlFiles(dir, acc = []) {
 }
 
 const RE = /<!--cov:([a-z_.]+)-->(.*?)<!--\/cov-->/gs;
+
+import { RAW_RULES } from './lib/coverage-rules.mjs';
+function applyRaw(rel, src) {
+  let out = src;
+  for (const [fileRe, textRe, key, fmt] of RAW_RULES) {
+    if (!fileRe.test(rel)) continue;
+    const val = lookup(key);
+    if (val === undefined) { missing.push(`${rel} :: ${key} (raw rule)`); continue; }
+    out = out.replace(textRe, (m, ...groups) => {
+      const g = groups.slice(0, -2).find((x) => x !== undefined);
+      if (g === undefined) return m;
+      marks++;
+      const next = fmt(val);
+      if (next !== g) changed++;
+      return m.replace(g, next);
+    });
+  }
+  return out;
+}
 let changed = 0, marks = 0, missing = [];
 
 for (const file of htmlFiles(ROOT)) {
   const src = readFileSync(file, 'utf8');
-  if (!src.includes('<!--cov:')) continue;
-  const out = src.replace(RE, (full, key, current) => {
+  const rel = relative(ROOT, file).split('\\').join('/');
+  const raw = applyRaw(rel, src);
+  if (!raw.includes('<!--cov:')) { if (raw !== src && !DRY) writeFileSync(file, raw); continue; }
+  const out = raw.replace(RE, (full, key, current) => {
     marks++;
     const val = lookup(key);
     if (val === undefined) { missing.push(`${relative(ROOT, file)} :: ${key}`); return full; }

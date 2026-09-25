@@ -16,6 +16,7 @@
  * without blocking on judgment calls.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { RAW_RULES } from './lib/coverage-rules.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join, relative } from 'node:path';
 
@@ -29,6 +30,8 @@ const lookup = (key) =>
 
 function htmlFiles(dir, acc = []) {
   for (const n of readdirSync(dir)) {
+    if (/^(labor-day-weekend|road-report-)/.test(n)) continue; // dated reports keep the numbers of their month
+    if (['design-options','boards','node_modules','.git'].includes(n) || /^(index-v1-classic|index-v2-preview|enterprise-preview)\.html$/.test(n)) continue; // previews and drafts are not public counts
     if (n === 'node_modules' || n === '.git' || n === 'scripts') continue;
     const p = join(dir, n);
     if (statSync(p).isDirectory()) htmlFiles(p, acc);
@@ -67,7 +70,10 @@ for (const file of htmlFiles(ROOT)) {
   }
 
   // strip marked regions before hunting for unmarked ones
-  const stripped = src.replace(MARKED, '');
+  let stripped = src.replace(MARKED, '');
+  // numbers a raw rule governs (title, meta, JSON-LD) are ledger-driven too
+  const relSlash = rel.split('\\').join('/');
+  for (const [fileRe, textRe] of RAW_RULES) if (fileRe.test(relSlash)) stripped = stripped.replace(textRe, '');
   for (const m of stripped.matchAll(UNMARKED)) {
     const text = m[0].replace(/\s+/g, ' ');
     if (STABLE.some((re) => re.test(text))) { stableSkipped++; continue; }
