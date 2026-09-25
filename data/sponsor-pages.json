@@ -1605,12 +1605,6 @@
    "sponsor": "house"
   },
   {
-   "key": "home:index",
-   "path": "/",
-   "title": "MileCheck — Highway Mile Markers & Live DOT Alerts",
-   "sponsor": "house"
-  },
-  {
    "key": "home:mile-marker-map",
    "path": "/maps/mile-markers/",
    "title": "Mile Marker Map — browse mileposts in all 50 states",

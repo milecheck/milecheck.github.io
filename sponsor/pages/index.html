@@ -122,7 +122,7 @@
 <script>
 (function(){
   var W = 'https://milepost-proxy.leahgerber93.workers.dev';
-  var FAM = { home:'Front page', cameras:'Cameras', corridor:'Interstate corridors', pass:'Mountain passes', bridge:'Drawbridges', guide:'Mile-marker guides', basics:'Highway basics', article:'Reports and articles', live:'Live conditions', mountain:'Mountain Visibility', drawbridge:'Seattle Drawbridges' };
+  var FAM = { home:'Mile-marker map', cameras:'Cameras', corridor:'Interstate corridors', pass:'Mountain passes', bridge:'Drawbridges', guide:'Mile-marker guides', basics:'Highway basics', article:'Reports and articles', live:'Live conditions', mountain:'Mountain Visibility', drawbridge:'Seattle Drawbridges' };
   var ORDER = ['home','cameras','corridor','pass','bridge','guide','basics','article','live','mountain','drawbridge'];
   var int = function(n){ return Math.round(n).toLocaleString('en-US'); };
   var pages = null, by = {}, haveStats = false;
@@ -224,7 +224,7 @@
   var $ = function(id){ return document.getElementById(id); };
   var int = function(n){ return Math.round(n).toLocaleString('en-US'); };
   var FAM = {
-    home:    ['Front page', 'The home page and the mile-marker map, the two most-visited pages on the site.', '/'],
+    home:    ['Mile-marker map', 'The 50-state mile-marker map, the third most-visited page on the site.', '/maps/mile-markers/'],
     cameras: ['Cameras', 'Every state and metro camera page: live DOT cameras tagged with their mile marker.', '/cameras/'],
     corridor:['Interstate corridors', 'I-5, I-10, I-15, I-70, I-75, I-80, I-90, I-94, I-95 and I-4, end to end.', '/corridors/'],
     pass:    ['Mountain passes', 'Snoqualmie, Stevens, Siskiyou, Donner, Parleys, Eisenhower, Vail and more, with snow, plows and cameras.', '/passes/'],

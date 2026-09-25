@@ -32,7 +32,7 @@ const LIVE = new Set(['borders', 'ferries', 'fire', 'closures', 'weather']);
 export function keyFor(rel) {
   const parts = rel.split('/');
   if (parts.length === 1) {
-    if (rel === 'index.html') return { kind: 'home', slug: 'index' };
+    if (rel === 'index.html') return null; // the front page sells the app, not a sponsor (Leah, 2026-09-24)
     return null; // googlede…html, previews, android.html
   }
   const [dir, ...rest] = parts;
