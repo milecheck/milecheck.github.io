@@ -153,8 +153,8 @@ ${body}
     </style>
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
-      <h2>Get the report in your inbox</h2>
-      <p class="mc-sub">What happened on America's highways last month, from every state DOT feed. Once a month. No spam.</p>
+      <h2>Closures and crashes on US highways, once a month</h2>
+      <p class="mc-sub">The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/labor-day-weekend-recap-2026.html">See a sample: the Labor Day weekend report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>

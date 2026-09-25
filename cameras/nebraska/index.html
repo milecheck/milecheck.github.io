@@ -170,7 +170,29 @@
 
   <p class="co-related">More: <a href="../">all highway cameras</a> · <a href="../../passes/">mountain passes</a> · <a href="../../corridors/">interstate corridors</a> · <a href="../../maps/">all maps</a></p>
 
-  <footer class="site-footer">
+  <!-- signup:start -->
+  <section class="mc-signup" id="subscribe">
+    <style>
+      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
+      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
+      .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
+      .mc-signup .ml-form-embedContent{display:none !important;}
+      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
+      .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+    </style>
+    <div class="mc-signup-inner">
+      <p class="mc-eyebrow">The Monthly Highway Report</p>
+      <h2>Closures and crashes on US highways, once a month</h2>
+      <p class="mc-sub">The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/labor-day-weekend-recap-2026.html">See a sample: the Labor Day weekend report</a>. No spam.</p>
+      <div class="ml-embedded" data-form="LjADY8"></div>
+    </div>
+  </section>
+<!-- signup:end -->
+      <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
@@ -249,5 +271,11 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
 if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>{const vin=/^[A-Z0-9]{17}$/.test(t.name||'');const agency=String(t.status||'').trim();const age=(Date.now()-Date.parse(t.lastUpdated))/60000;return {lat:+t.lat,lon:+t.lon,bearing:+t.bearing||0,name:vin?((agency||DOT)+' plow'):(t.name||'Plow'),status:vin?'':agency,route:t.route||t.roadName||'',mile:t.mile!=null?t.mile:null,heading:t.heading||'',img:t.imageUrl||'',age:isFinite(age)?age:null};});const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.length;draw();});
 </script>
 
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
 </body>
 </html>
