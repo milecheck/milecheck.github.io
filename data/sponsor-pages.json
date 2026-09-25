@@ -1053,6 +1053,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:maryland",
+   "path": "/cameras/maryland/",
+   "title": "Maryland Traffic Cameras — Live MDOT SHA (CHART) Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:miami",
    "path": "/cameras/miami/",
    "title": "Miami Traffic Cameras — Live FDOT Freeway Cams",
