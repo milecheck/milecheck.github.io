@@ -9,7 +9,7 @@ const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2
 // each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
 // is done. Utah first. Add the code here, then regenerate that one page:
 //   node scripts/gen-state-camera-pages.js utah
-const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN']);
+const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS']);
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [
@@ -40,6 +40,9 @@ const STATES = [
    { slug:'minnesota', code:'MN', name:'Minnesota', dot:'MnDOT', bounds:'[[43.50,-97.21],[49.00,-89.60]]',
      blurb:`MnDOT's cameras are thickest in the Twin Cities, on I-94, I-35W and I-35E and the I-494 and I-694 beltways, and follow US-169, US-52 and US-61 out of the metro. Most carry the direction they face.`,
      notable:`Watch <a href="../../corridors/i-94/">I-94</a> from Moorhead to the Wisconsin line, I-35 through the metro and north to Duluth, and <a href="../../corridors/i-90/">I-90</a> across the south. In winter the Snowplows layer shows where MnDOT's trucks are, each with the route and mile it reports and a photo from the truck's own camera where it sends one.` },
+   { slug:'kansas', code:'KS', name:'Kansas', dot:'KDOT', bounds:'[[37.00,-102.05],[40.00,-94.59]]',
+     blurb:`KDOT's cameras follow I-70 across the state and I-35 and I-135 through Wichita and up to Salina, and the Kansas City Scout network covers the metro on both sides of the state line, I-435, I-635 and US-69. The Kansas Turnpike's toll plazas have cameras of their own.`,
+     notable:`Watch <a href="../../corridors/i-70/">I-70</a> from Kansas City to the Colorado line, I-35 and I-135 through Wichita, and I-435 around Kansas City. In winter the Snowplows layer shows where KDOT's trucks are, each with the route and mile it reports and a photo from the truck's own camera where it sends one.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },

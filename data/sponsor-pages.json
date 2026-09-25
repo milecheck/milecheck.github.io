@@ -903,6 +903,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:kansas",
+   "path": "/cameras/kansas/",
+   "title": "Kansas Traffic Cameras — Live KDOT Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:las-vegas",
    "path": "/cameras/las-vegas/",
    "title": "Las Vegas Traffic Cameras — Live NDOT Freeway Cams",
