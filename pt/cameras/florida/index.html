@@ -1,30 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>California Traffic Cameras — Live Caltrans Highway Cams | MileCheck</title>
-  <meta name="description" content="Watch live California traffic cameras on one map — Caltrans highway and road cameras, each tagged with route and mile marker. See the road before you drive it. Free, no account.">
-  <link rel="canonical" href="https://milecheckapp.com/cameras/california/">
-
-  <meta property="og:title" content="California Traffic Cameras — Live | MileCheck">
-  <meta property="og:description" content="Live California highway cameras on one map, each tagged with route and mile marker.">
+  <title>Câmeras de trânsito na Flórida | MileCheck</title>
+  <meta name="description" content="Confira câmeras de trânsito da FDOT na Flórida. Veja a I-4, I-95, I-75, I-10 e a Florida's Turnpike no mapa antes de dirigir.">
+  <link rel="canonical" href="https://milecheckapp.com/pt/cameras/florida/">
+  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/florida/">
+  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/florida/">
+  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/florida/">
+  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/florida/">
+  <meta property="og:title" content="Câmeras de trânsito na Flórida | MileCheck">
+  <meta property="og:description" content="Confira câmeras de trânsito da FDOT na Flórida. Veja a I-4, I-95, I-75, I-10 e a Florida's Turnpike no mapa antes de dirigir.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
-  <meta property="og:url" content="https://milecheckapp.com/cameras/california/">
+  <meta property="og:url" content="https://milecheckapp.com/pt/cameras/florida/">
   <meta property="og:type" content="website">
-  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where can I watch live California traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"Right here — the map above shows live Caltrans highway cameras across California, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond California, see every highway camera in 39 states."}},{"@type":"Question","name":"Are California DOT traffic cameras free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Caltrans publishes its traffic cameras publicly, and MileCheck puts them on one map for free — no account, no sign-up. To have the nearest camera follow you as you drive, the MileCheck app does it hands-free on CarPlay and Android Auto."}},{"@type":"Question","name":"Which highways have cameras in California?","acceptedAnswer":{"@type":"Answer","text":"See I-5 the length of the state including the Grapevine, I-80 over Donner Pass, Cajon Pass on I-15, and US-101 up the coast."}},{"@type":"Question","name":"How often do California traffic cameras update?","acceptedAnswer":{"@type":"Answer","text":"Most Caltrans cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Cameras","item":"https://milecheckapp.com/cameras/"},{"@type":"ListItem","position":3,"name":"California Cameras","item":"https://milecheckapp.com/cameras/california/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"pt-BR","mainEntity":[{"@type":"Question","name":"Onde vejo câmeras rodoviárias da Flórida?","acceptedAnswer":{"@type":"Answer","text":"No mapa desta página. Toque em uma câmera para abrir a última imagem disponível."}},{"@type":"Question","name":"Preciso de conta para consultar o mapa?","acceptedAnswer":{"@type":"Answer","text":"Não. O mapa da página pode ser consultado sem cadastro. O aplicativo MileCheck tem recursos pagos."}},{"@type":"Question","name":"Quais rodovias têm câmeras?","acceptedAnswer":{"@type":"Answer","text":"O mapa inclui câmeras da I-4, I-95, I-75, I-10 e Florida's Turnpike onde a FDOT fornece imagens."}},{"@type":"Question","name":"As imagens mostram a situação neste instante?","acceptedAnswer":{"@type":"Answer","text":"Elas mostram a imagem mais recente disponível. Verifique o horário da imagem quando ele aparecer. A estrada pode mudar entre atualizações."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Câmeras","item":"https://milecheckapp.com/cameras/"},{"@type":"ListItem","position":3,"name":"Câmeras de Flórida","item":"https://milecheckapp.com/pt/cameras/florida/"}]}</script>
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
     .co-hero .spon{margin:0 0 18px;}
@@ -97,94 +100,93 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <a href="/index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="/assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
       <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <nav class="primary-nav">
-        <a href="../../index.html">Home</a>
-        <a href="../../maps/">Maps</a>
-        <a href="../../cameras/" class="active">Cameras</a>
-        <a href="../../states/">United States</a>
-        <a href="../../canada/">Canada</a>
-        <a href="../../index.html#story">Story</a>
-        <a href="../../index.html#b2b">B2B</a>
-        <a href="../../blog/">Blog</a>
+        <a href="/index.html">Home</a>
+        <a href="/maps/">Maps</a>
+        <a href="/cameras/" class="active">Cameras</a>
+        <a href="/states/">United States</a>
+        <a href="/canada/">Canada</a>
+        <a href="/index.html#story">Story</a>
+        <a href="/index.html#b2b">B2B</a>
+        <a href="/blog/">Blog</a>
         <a href="/get/" class="nav-cta">Get the app</a>
       </nav>
     </div>
   </header>
 
   <div class="co-hero">
-  <aside class="spon spon-house" id="spon" data-slot="cameras:california" data-sponsor="house" aria-label="Sponsor">
+  <aside class="spon spon-house" id="spon" data-slot="cameras:pt-florida" data-sponsor="house" aria-label="Sponsor">
     <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
     <a class="spon-body" href="/sponsor/" data-spon-link>
       <span class="spon-text"><strong>Sponsor this page.</strong></span>
       <span class="spon-cta">Ask about it →</span>
     </a>
   </aside>
-    <div class="eyebrow">Live traffic cameras · California · Caltrans</div>
-    <h1>California traffic cameras, live</h1>
-    <p class="sub">See the actual road before you drive it. Live Caltrans highway cameras across California on one map, each tagged with its route and mile marker. Free, no account — tap any camera for the latest image.</p>
+    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><a href="/cameras/florida/" hreflang="en" lang="en">English</a> · <b lang="pt-BR">Português</b></p>
+    <div class="eyebrow">Câmeras de trânsito ao vivo · Flórida · FDOT (FL511)</div>
+    <h1>Câmeras de trânsito na Flórida</h1>
+    <p class="sub">Veja as imagens das câmeras rodoviárias da FDOT (FL511) em um mapa da Flórida. Cada câmera mostra a rodovia e o marco de milha quando a agência fornece essa referência. Toque em uma câmera para abrir a imagem mais recente.</p>
     <div class="co-stats">
-      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in California</div></div>
-      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">Caltrans</div><div class="l">camera source</div></div>
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">câmeras ao vivo em Flórida</div></div>
+      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">FDOT</div><div class="l">fonte das câmeras</div></div>
     </div>
   </div>
 
   <div class="co-wrap">
     <div style="position:relative;">
       <div id="comap"></div>
-      <div class="co-bs" id="coStatus">Loading live California cameras…</div>
+      <div class="co-bs" id="coStatus">Carregando as câmeras de Flórida…</div>
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
 
   <section class="co-guide">
-    <h2>Live cameras across California</h2>
-    <p>Caltrans operates thousands of cameras statewide — the most of any state on this map — covering everything from Bay Area and LA freeways to the Sierra Nevada passes.</p>
-    <p>See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.</p>
-    <p>Every camera on this map comes straight from Caltrans and is tagged with the route and mile marker where the DOT provides it, so you can tell exactly which stretch of road you're looking at. Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
+    <h2>Câmeras nas rodovias da Flórida</h2>
+    <p>O mapa reúne imagens da I-4 por Orlando e Tampa, da <a href="/corridors/i-95/">I-95</a> na costa leste, da I-75, da <a href="/corridors/i-10/">I-10</a> e da Florida's Turnpike. As imagens vêm da FDOT (FL511). Toque no ponto da câmera e depois na imagem para ampliá-la. Para um mapa mais focado, veja as <a href="/pt/cameras/orlando/">câmeras de Orlando</a>.</p>
   </section>
 
   <section class="co-faq">
-    <h2>California camera questions, answered</h2>
-    <details><summary>Where can I watch live California traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live Caltrans highway cameras across California, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond California, see <a href="../">every highway camera in <!--cov:cameras.us_states-->39<!--/cov--> states</a>.</p></details>
-    <details><summary>Are California DOT traffic cameras free?</summary><p>Yes. Caltrans publishes its traffic cameras publicly, and MileCheck puts them on one map for free — no account, no sign-up. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-california&mt=8" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.</p></details>
-    <details><summary>Which highways have cameras in California?</summary><p>See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.</p></details>
-    <details><summary>How often do California traffic cameras update?</summary><p>Most Caltrans cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.</p></details>
+    <h2>Perguntas frequentes</h2>
+    <details><summary>Onde vejo câmeras rodoviárias da Flórida?</summary><p>No mapa desta página. Toque em uma câmera para abrir a última imagem disponível.</p></details>
+    <details><summary>Preciso de conta para consultar o mapa?</summary><p>Não. O mapa da página pode ser consultado sem cadastro. O aplicativo MileCheck tem recursos pagos.</p></details>
+    <details><summary>Quais rodovias têm câmeras?</summary><p>O mapa inclui câmeras da I-4, I-95, I-75, I-10 e Florida's Turnpike onde a FDOT fornece imagens.</p></details>
+    <details><summary>As imagens mostram a situação neste instante?</summary><p>Elas mostram a imagem mais recente disponível. Verifique o horário da imagem quando ele aparecer. A estrada pode mudar entre atualizações.</p></details>
   </section>
 
   <div class="co-cta">
-    <h2>The nearest California camera, right as you drive</h2>
-    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive California's highways, plus live DOT alerts on your route. Free to start, works offline, runs on CarPlay and Android Auto.</p>
+    <h2>A câmera mais próxima durante a viagem</h2>
+    <p>O aplicativo MileCheck mostra o marco de milha e a câmera próxima durante o trajeto. As imagens e os alertas recentes dependem de conexão para atualizar. O aplicativo está em inglês. Confira também as condições que você vê na estrada.</p>
     <div class="btns">
-      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-california&mt=8" target="_blank" rel="noopener">iOS App Store</a>
-      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcameras-california" target="_blank" rel="noopener">Google Play</a>
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=pt-cameras-florida&mt=8" target="_blank" rel="noopener">App Store (iOS)</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dpt-cameras-florida" target="_blank" rel="noopener">Google Play</a>
     </div>
   </div>
 
-  <p class="co-related">More: <a href="../">all highway cameras</a> · <a href="../los-angeles/">Los Angeles cameras</a> · <a href="../san-francisco/">San Francisco cameras</a> · <a href="../sacramento/">Sacramento cameras</a> · <a href="../san-diego/">San Diego cameras</a> · <a href="../../passes/">mountain passes</a> · <a href="../../corridors/">interstate corridors</a> · <a href="../../bridges/california/">California drawbridges</a> · <a href="../../maps/">all maps</a></p>
+  <p class="co-related">Mais: <a href="/cameras/">todas as câmeras (em inglês)</a> · <a href="/pt/driving-in-the-us-foreign-visitor-guide/">dirigir nos EUA como visitante</a> · <a href="/maps/">mapas (em inglês)</a></p>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
           <p class="footer-tagline">Mile markers in all 50 US states.</p>
         </div>
         <div class="footer-col">
           <p class="footer-label">Get the app</p>
           <ul class="footer-list">
-            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-california&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
-            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcameras-california" target="_blank" rel="noopener">Google Play</a></li>
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=pt-cameras-florida&mt=8" target="_blank" rel="noopener">App Store (iOS)</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dpt-cameras-florida" target="_blank" rel="noopener">Google Play</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <p class="footer-label">Live maps</p>
           <ul class="footer-list">
-            <li><a href="../">Highway cameras</a></li>
-            <li><a href="../../closures/">Road closures map</a></li>
-            <li><a href="../../fire/">Wildfire map</a></li>
-            <li><a href="../../maps/">All maps</a></li>
+            <li><a href="/cameras/">Highway cameras</a></li>
+            <li><a href="/closures/">Road closures map</a></li>
+            <li><a href="/fire/">Wildfire map</a></li>
+            <li><a href="/maps/">All maps</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -195,7 +197,7 @@
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: Caltrans via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: FDOT (FL511) via MileCheck. Always drive to conditions and follow posted signs.</p>
     </div>
   </footer>
 
@@ -204,38 +206,38 @@
 
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
-const CODE="CA";
-const DOT="Caltrans";
+const CODE="FL";
+const DOT="FDOT";
 const PLOWS=false;
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
 const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|CT|QEW|BC|ON|AB|M|Loop|\d)[- ]?\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · California cameras: Caltrans via MileCheck',maxZoom:16}).addTo(map);
-map.fitBounds([[32.5,-124.5],[42,-114.1]]);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Florida cameras: FDOT (FL511) via MileCheck',maxZoom:16}).addTo(map);
+map.fitBounds([[24.40,-87.63],[31.00,-80.03]]);
 const camLayer=L.layerGroup().addTo(map);
 const plowLayer=L.layerGroup().addTo(map);
 let CAMS=[], PLOWLIST=[], showCam=true, showPlow=true;
 function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 const cardEl=document.getElementById('coCard');
 function showCard(html){if(window.stopStream)stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';if(window.stopStream)stopStream();};}
-function camCard(c){if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function camCard(c){if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Abrir imagem completa"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
 // HLS playback for stream cameras (DelDOT publishes video only, 2026-09-25): hls.js wherever the browser has Media Source Extensions (every desktop and Android browser), loaded once on the first stream card; iPhone Safari plays the playlist itself, with play retried once the metadata arrives (the first call stalled in testing). One player at a time; closing the card stops it.
 var hlsInst=null,hlsLoading=null;function loadHls(){if(window.Hls)return Promise.resolve();if(hlsLoading)return hlsLoading;hlsLoading=new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);});return hlsLoading;}
 function stopStream(){if(hlsInst){try{hlsInst.destroy();}catch(e){}hlsInst=null;}var v=document.getElementById('ccVid');if(v){try{v.pause();v.removeAttribute('src');v.load();}catch(e){}}}
 function playStream(url){var v=document.getElementById('ccVid');if(!v)return;var native=function(){v.src=url;var go=function(){v.play().catch(function(){});};v.addEventListener('loadedmetadata',go,{once:true});go();};loadHls().then(function(){if(window.Hls&&Hls.isSupported()){hlsInst=new Hls({liveSyncDurationCount:3});hlsInst.loadSource(url);hlsInst.attachMedia(v);hlsInst.on(Hls.Events.MANIFEST_PARSED,function(){v.play().catch(function(){});});}else{native();}}).catch(native);}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+(b||0)+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
-function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near MP '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
-function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in California':'Toggle a layer to view California data';}
+function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near MP '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Abrir imagem completa"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
+function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' câmeras ao vivo':'nenhuma câmera carregada');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in Florida':'Toggle a layer to view Florida data';}
 const tgCam=document.getElementById('tgCam');if(tgCam)tgCam.onchange=e=>{showCam=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 // The Worker occasionally 503s on the biggest camera states (cold cache); retry a few times.
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
 fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
-  if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
+  if(!d){document.getElementById('coStatus').textContent='As câmeras estão ocupadas agora. Recarregue a página em instantes.';return;}
   CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&(c.imageUrl||c.streamUrl)&&(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||'')||(CODE==='AK'&&AK_HWY_RE.test(c.route||'')))).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||'')}));
   document.getElementById('statCams').textContent=CAMS.length;
   draw();

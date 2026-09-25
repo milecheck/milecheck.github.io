@@ -10,6 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const ES = ['florida', 'miami', 'orlando', 'tampa']; // pages with a Spanish version
+const PTV = ['orlando', 'florida']; // also have Portuguese versions
 const APP = 'https://apps.apple.com/us/app/milecheck/id6759212851';
 
 // [English as generated, Spanish]. Applied in order; each also applied with tags stripped
@@ -145,13 +146,13 @@ for (const slug of ES) {
   // language, canonical, hreflang, links
   out = out.replace('<html lang="en">', '<html lang="es">');
   out = out.replace(`<link rel="canonical" href="https://milecheckapp.com/cameras/${slug}/">`,
-    `<link rel="canonical" href="https://milecheckapp.com/es/cameras/${slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${slug}/">\n  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${slug}/">\n  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${slug}/">`);
+    `<link rel="canonical" href="https://milecheckapp.com/es/cameras/${slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${slug}/">${PTV.includes(slug) ? `\n  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${slug}/">` : ''}\n  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${slug}/">\n  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${slug}/">`);
   out = out.replace(`content="https://milecheckapp.com/cameras/${slug}/"`, `content="https://milecheckapp.com/es/cameras/${slug}/"`);
   out = out.replace(/href="\.\.\/\.\.\//g, 'href="/').replace(/src="\.\.\/\.\.\//g, 'src="/');
   out = out.replace(/href="\.\.\/([a-z-]+)\/"/g, (m2, s2) => ES.includes(s2) ? `href="/es/cameras/${s2}/"` : `href="/cameras/${s2}/"`);
   out = out.replace(/href="\.\.\/"/g, 'href="/cameras/"');
   // language switch above the eyebrow
-  out = out.replace('<div class="eyebrow">', `<p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><a href="/cameras/${slug}/" hreflang="en" lang="en">English</a> · <b lang="es">Español</b></p>\n    <div class="eyebrow">`);
+  out = out.replace('<div class="eyebrow">', `<p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><a href="/cameras/${slug}/" hreflang="en" lang="en">English</a> · <b lang="es">Español</b>${PTV.includes(slug) ? ` · <a href="/pt/cameras/${slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n    <div class="eyebrow">`);
   // sponsor slot key for the Spanish page
   out = out.replace(`data-slot="cameras:${slug}"`, `data-slot="cameras:es-${slug}"`);
   mkdirSync(`es/cameras/${slug}`, { recursive: true });

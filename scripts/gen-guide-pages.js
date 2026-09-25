@@ -700,6 +700,7 @@ const GUIDES = [
 GUIDES.push(...require('./guides/decision-guides-2026-09.cjs'));
 GUIDES.push(...require('./guides/decision-guides-batch-2-2026-09.cjs'));
 GUIDES.push(...require('./guides/decision-guides-batch-3-canada-2026-09.cjs'));
+GUIDES.push(...require('./guides/translations-pa-pt-2026-09.cjs'));
 
 // Language-aware routing (2026-09-25). A guide object may carry lang:'fr' (or 'es', …).
 // Identity is lang+slug: English lives at /<slug>/, others at /<lang>/<slug>/.
@@ -712,6 +713,21 @@ const L = {
       mm:'What is my mile marker?',hc:'Highway cameras',mp:'Mountain passes',am:'All maps',help:'Help &amp; legal',fb:'Send feedback',pp:'Privacy policy',
       fine:'Always drive to conditions and follow posted signs.',
       checked:c=>`Facts checked ${c}. Every number links to its source; prices and rules change, so confirm the day you travel.`},
+  // pa / pt template strings written by Claude 2026-09-25 — flagged for the native-speaker read.
+  pa:{home:'ਮੁੱਖ ਪੰਨਾ',maps:'ਨਕਸ਼ੇ',cams:'ਕੈਮਰੇ',us:'ਅਮਰੀਕਾ',ca:'ਕੈਨੇਡਾ',story:'ਸਾਡੀ ਕਹਾਣੀ',blog:'ਬਲੌਗ',get:'ਐਪ ਲਓ',
+      ctaH:'ਹਾਈਵੇ ਉੱਤੇ ਆਪਣੀ ਥਾਂ ਜਾਣੋ',
+      ctaP:'MileCheck ਤੁਹਾਡਾ ਨੇੜਲਾ mile marker ਦਿਖਾਉਂਦੀ ਹੈ। ਲਾਈਵ DOT alerts ਅਤੇ ਨੇੜਲਾ ਕੈਮਰਾ MileCheck Premium ਵਿੱਚ ਹਨ ਅਤੇ ਇਹਨਾਂ ਲਈ ਇੰਟਰਨੈੱਟ ਚਾਹੀਦਾ ਹੈ। CarPlay ਅਤੇ Android Auto ਉੱਤੇ ਚੱਲਦੀ ਹੈ। ਐਪ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਹੈ।',
+      qa:'ਸਵਾਲ ਅਤੇ ਜਵਾਬ',rel:'ਹੋਰ ਪੜ੍ਹੋ:',tag:'ਅਮਰੀਕਾ ਦੇ ਸਾਰੇ 50 ਸੂਬਿਆਂ ਵਿੱਚ mile marker।',getH:'ਐਪ ਲਓ',learn:'ਹੋਰ ਜਾਣੋ',
+      mm:'ਮੇਰਾ mile marker ਕਿੱਥੇ ਹੈ?',hc:'ਹਾਈਵੇ ਕੈਮਰੇ',mp:'ਪਹਾੜੀ ਦੱਰੇ',am:'ਸਾਰੇ ਨਕਸ਼ੇ',help:'ਮਦਦ',fb:'ਸਾਨੂੰ ਲਿਖੋ',pp:'Privacy policy',
+      fine:'ਹਮੇਸ਼ਾ ਹਾਲਾਤ ਮੁਤਾਬਕ ਚਲਾਓ ਅਤੇ ਸੜਕ ਦੇ ਸਾਈਨ ਮੰਨੋ।',
+      checked:c=>`ਜਾਣਕਾਰੀ ${c} ਵਿੱਚ ਜਾਂਚੀ ਗਈ। ਨਿਯਮ ਬਦਲਦੇ ਹਨ, ਜਾਣ ਵਾਲੇ ਦਿਨ ਦੁਬਾਰਾ ਵੇਖੋ।`},
+  pt:{home:'Início',maps:'Mapas',cams:'Câmeras',us:'Estados Unidos',ca:'Canadá',story:'Nossa história',blog:'Blog',get:'Baixar o app',
+      ctaH:'Saiba exatamente onde você está na rodovia',
+      ctaP:'O MileCheck mostra o marco de milha mais próximo, mesmo sem sinal. Alertas ao vivo dos DOTs e a câmera mais próxima fazem parte do MileCheck Premium e precisam de conexão. Funciona no CarPlay e no Android Auto. O aplicativo está em inglês.',
+      qa:'Perguntas frequentes',rel:'Leia também:',tag:'Marcos de milha nos 50 estados dos EUA.',getH:'Baixar o app',learn:'Saiba mais',
+      mm:'Qual é o meu marco de milha? (em inglês)',hc:'Câmeras nas rodovias',mp:'Passagens de montanha',am:'Todos os mapas',help:'Ajuda e termos',fb:'Fale conosco',pp:'Política de privacidade',
+      fine:'Dirija sempre de acordo com as condições e siga a sinalização.',
+      checked:c=>`Informações verificadas em ${c}. Regras e preços mudam, confirme no dia da viagem.`},
   fr:{home:'Accueil',maps:'Cartes',cams:'Caméras',us:'États-Unis',ca:'Canada',story:'Notre histoire',blog:'Blogue',get:'Obtenir l’application',
       ctaH:'Sachez exactement où vous êtes, en direct',
       ctaP:'MileCheck affiche votre borne en milles ou en kilomètres, même hors connexion. Les alertes routières en direct et la caméra la plus proche font partie de MileCheck Premium et demandent une connexion. Fonctionne avec CarPlay et Android Auto. L’application est en anglais.',
@@ -728,6 +744,23 @@ function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org
 // trail is MileCheck › guide. Other generators use the same MileCheck root name.
 function breadcrumbJsonLd(g){ const h=g.h1.replace(/<[^>]+>/g,''); return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':g.title||h,'item':'https://milecheckapp.com/'+baseOf(g)+'/'}]}); }
 
+// Affiliate placements (2026-09-25, Leah approved the programs). One box per page, above the
+// app CTA, English pages only. rel=sponsored per Google's rules for paid links. Disclosure is
+// always on the same box as the link, never in a footer.
+const DISCOVER_CARS='https://www.discovercars.com/?a_aid=milecheck';
+const AFF_DISCLOSE='MileCheck earns a commission if you book through this link.';
+const affRental=(lead)=>({h:'Comparing rental prices',p:`${lead} <a href="${DISCOVER_CARS}" target="_blank" rel="sponsored nofollow noopener">Search rentals on Discover Cars</a>.`});
+const AFFILIATE_BOX={
+  'rental-car-canada-mexico': affRental('Discover Cars compares rental companies in one search. Check the cross-border rules on the specific car before you book.'),
+  'rental-car-toll-pass': affRental('Discover Cars compares rental companies in one search. Toll pass fees differ by company, so check them on the booking page.'),
+  'rental-car-insurance-credit-card': affRental('Discover Cars compares rental companies in one search and sells its own coverage. Compare it with your card before you buy anything at the counter.'),
+  'rent-a-car-in-nyc': affRental('If you decide a car makes sense, Discover Cars compares rental companies in one search.'),
+  'drive-or-fly-los-angeles-las-vegas': affRental('If you drive, Discover Cars compares rental companies in one search.'),
+  'drive-or-fly-seattle-portland': affRental('If you drive, Discover Cars compares rental companies in one search.'),
+  'drive-or-fly-orlando-miami': affRental('If you drive, Discover Cars compares rental companies in one search.'),
+  'driving-in-the-us-foreign-visitor-guide': affRental('Discover Cars compares rental companies in one search.'),
+};
+
 function page(g){
   // Multi-language guides. A guide's translated locales, beyond English — the site has
   // no site-wide i18n, so this stays a per-guide registry rather than a generic system
@@ -739,19 +772,20 @@ function page(g){
     'breakdown-on-the-autobahn': { es: true },
     'driving-in-the-us-foreign-visitor-guide': { es: true, fr: true },
   };
-  const LANG_LABEL = { en: 'EN', es: 'ES', fr: 'FR', de: 'DE', pt: 'PT', zh: 'ZH', vi: 'VI', ko: 'KO', ar: 'AR' };
+  const LANG_LABEL = { en: 'EN', pa: 'ਪੰਜਾਬੀ', es: 'ES', fr: 'FR', de: 'DE', pt: 'PT', zh: 'ZH', vi: 'VI', ko: 'KO', ar: 'AR' };
   const lang = g.lang || 'en';
   const T = L[lang] || L.en;
   const base = baseOf(g);
   const R = lang==='en' ? '../' : '../../';
   const pairLangs = GUIDES.filter(o=>o.slug===g.slug && (o.lang||'en')!=='en').map(o=>o.lang);
-  const allLangs = [...new Set(['en', ...Object.keys(TRANSLATIONS[g.slug]||{}), ...pairLangs])];
+  const hasEn = GUIDES.some(o=>o.slug===g.slug && (o.lang||'en')==='en') || fs.existsSync(path.join(g.slug,'index.html'));
+  const allLangs = [...new Set([...(hasEn?['en']:[]), ...Object.keys(TRANSLATIONS[g.slug]||{}), ...pairLangs])];
   const locales = allLangs.length>1 ? allLangs : null;
   const urlFor = l => l==='en' ? `https://milecheckapp.com/${g.slug}/` : `https://milecheckapp.com/${l}/${g.slug}/`;
   const hreflangHtml = locales
     ? locales.map(l=>`  <link rel="alternate" hreflang="${l}" href="${urlFor(l)}">
 `).join('')
-      + `  <link rel="alternate" hreflang="x-default" href="${urlFor('en')}">
+      + `  <link rel="alternate" hreflang="x-default" href="${urlFor(hasEn?'en':lang)}">
 `
     : '';
   // Toggle pills at the top of the article — not a footnote link. Current language is
@@ -769,11 +803,11 @@ function page(g){
   const secHtml=g.sections.map(([h,p])=>/^\s*<(!--|p|table|ul|ol|div|figure|h3)/.test(p) ? `    <h2>${h}</h2>\n    ${p}` : `    <h2>${h}</h2>\n    <p>${p}</p>`).join('\n');
   const faqHtml=g.faq.map(([q,a])=>`      <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   const t=esc(g.title)+' | MileCheck';
-  const desc=esc(g.lede.replace(/<[^>]+>/g,'').slice(0,155));
+  const desc=esc(g.desc || g.lede.replace(/<[^>]+>/g,'').slice(0,155));
   const figHtml=g.figure?`    <figure class="gfig">${g.figure}</figure>\n`:'';
   const figCss=g.figure?`\n    .gfig{margin:6px 0 24px;}\n    .gfig svg{width:100%;height:auto;display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;}\n    .gfig figcaption{font-size:13px;color:#5b6670;text-align:center;margin-top:8px;line-height:1.5;}`:'';
   return `<!DOCTYPE html>
-<html lang="${lang==='fr'?'fr-CA':lang}">
+<html lang="${({fr:'fr-CA',pt:'pt-BR'})[lang]||lang}">
 <head>
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
@@ -823,6 +857,10 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
     .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
     .faq p{margin:10px 0 0;}
     .g-related{color:#5b6670;font-size:14px;margin-top:26px;}
+    .aff{border:1px solid #E5E5E5;border-radius:14px;padding:16px 18px;margin:26px 0 0;background:#fff;}
+    .aff h3{font-size:17px;margin:0 0 6px;}
+    .aff p{font-size:15.5px;margin:0 0 6px;}
+    .aff .aff-note{font-size:12.5px;color:#5b6670;margin:0;}
     .g-checked{font-size:13px;color:#5b6670;border-left:3px solid #E5E5E5;padding-left:10px;margin:14px 0 4px;}
     /* Language toggle — pills at the top of the article, current language
        highlighted. Not a footnote link (Leah, 2026-09-02). */
@@ -861,6 +899,7 @@ ${langSwitchHtml}    <div class="eyebrow">${g.eyebrow}</div>
 ${g.checked ? `    <p class="g-checked">${T.checked(g.checked)}</p>\n` : ''}
 ${figHtml}${secHtml}
 
+${(lang==='en' && AFFILIATE_BOX[g.slug]) ? `    <aside class="aff"><h3>${AFFILIATE_BOX[g.slug].h}</h3><p>${AFFILIATE_BOX[g.slug].p}</p><p class="aff-note">${AFF_DISCLOSE}</p></aside>\n` : ''}
     <div class="cta">
       <h3>${T.ctaH}</h3>
       <p>${T.ctaP}</p>
@@ -875,7 +914,7 @@ ${figHtml}${secHtml}
 ${faqHtml}
     </div>
 
-    <p class="g-related">${T.rel} ${g.related}</p>
+${g.related ? `    <p class="g-related">${T.rel} ${g.related}</p>` : ''}
   </article>
 
   <footer class="site-footer">

@@ -5,7 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const SPON = require('./lib/sponsor-slot');
 // Pages that also exist in Spanish (scripts/gen-es-camera-pages.mjs); keep the two lists equal.
-const ES_PAGES = new Set(['florida', 'miami', 'orlando', 'tampa']); // one sponsor slot above the map (2026-09-15)
+const ES_PAGES = new Set(['florida', 'miami', 'orlando', 'tampa']);
+const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versions (2026-09-25) // one sponsor slot above the map (2026-09-15)
 
 // state slug map (for cross-linking to the state camera page)
 const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont'};
@@ -114,7 +115,7 @@ function page(c){
   <title>${c.name} Traffic Cameras — Live ${c.dot} Freeway Cams | MileCheck</title>
   <meta name="description" content="Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave. Free, no account.">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${c.slug}/">
-${ES_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${c.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${c.slug}/">\n  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${c.slug}/">` : ''}
+${ES_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${c.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${c.slug}/">\n${PT_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${c.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${c.slug}/">` : ''}
   <meta property="og:title" content="${c.name} Traffic Cameras — Live | MileCheck">
   <meta property="og:description" content="Live ${c.name} freeway cameras on one map, each tagged with route and mile marker.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
@@ -195,7 +196,7 @@ ${sp.css}
 
   <div class="co-hero">
 ${sp.html}
-${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${c.slug}/" hreflang="es" lang="es">Español</a></p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
+${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${c.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(c.slug) ? ` · <a href="/pt/cameras/${c.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
     <h1>${c.name} traffic cameras, live</h1>
     <p class="sub">See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and mile marker. Free, no account — tap any camera for the latest image.</p>
     <div class="co-stats">

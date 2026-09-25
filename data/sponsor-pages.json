@@ -1167,6 +1167,18 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:pt-florida",
+   "path": "/pt/cameras/florida/",
+   "title": "Câmeras de trânsito na Flórida",
+   "sponsor": "house"
+  },
+  {
+   "key": "cameras:pt-orlando",
+   "path": "/pt/cameras/orlando/",
+   "title": "Câmeras de trânsito em Orlando",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:sacramento",
    "path": "/cameras/sacramento/",
    "title": "Sacramento Traffic Cameras — Live Caltrans Freeway Cams",
