@@ -58,6 +58,9 @@ const STATES = [
    { slug:'virginia', code:'VA', name:'Virginia', dot:'VDOT (511 Virginia)', bounds:'[[36.54,-83.68],[39.47,-75.24]]',
      blurb:`VDOT's cameras cover the interstates end to end, I-81 down the Shenandoah Valley, I-64 from the mountains to Hampton Roads, I-95 through Richmond and Northern Virginia, and I-66 and I-495 around Washington, plus the Hampton Roads tunnels. Most carry a mile marker. Cameras on roads VDOT names rather than numbers are not on this map.`,
      notable:`Watch I-81 through the Shenandoah Valley, I-64 over Afton Mountain and down to the Hampton Roads tunnels, <a href="../../corridors/i-95/">I-95</a> between Richmond and Washington, and I-77 over Fancy Gap near the North Carolina line.` },
+   { slug:'kentucky', code:'KY', name:'Kentucky', dot:'KYTC (GoKY)', bounds:'[[36.50,-89.57],[39.15,-81.96]]',
+     blurb:`Kentucky's cameras come through GoKY and are thickest around Louisville and Northern Kentucky, on I-64, I-65, I-71 and I-264, with more on I-75 south through Lexington and I-24 and I-69 in the west. Most carry the route and mile marker. Cameras on the named parkways and city streets are not on this map.`,
+     notable:`Watch I-65 and I-64 through Louisville, I-71 and I-75 into Cincinnati, <a href="../../corridors/i-75/">I-75</a> at the Clays Ferry Bridge south of Lexington, and I-24 across the west.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },
@@ -359,7 +362,7 @@ const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
