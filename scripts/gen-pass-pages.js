@@ -13,20 +13,22 @@ const PASSES = [
     title: 'Snoqualmie Pass Driving Conditions Now: I-90 Cameras &amp; Chains | MileCheck',
     h1: 'Snoqualmie Pass driving conditions right now',
     desc: 'Snoqualmie Pass driving conditions on I-90: WSDOT restrictions and chain rules for each direction, summit temperature, live cameras, and closures, with the mile marker on every camera.',
-    dot: 'WSDOT', lat: 47.3923, lon: -121.4001, r: 30, elev: '3,015 ft', dist: '~52 mi', distNote: 'east of Seattle on I-90',
+    dot: 'WSDOT', lat: 47.3923, lon: -121.4001, r: 30, elev: '3,022 ft', dist: '~52 mi', distNote: 'east of Seattle on I-90',
     range: 'Cascade Range',
-    hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on I-90 over Snoqualmie Pass — snow, chains, and closures as they happen. It's the busiest mountain pass in Washington and the main link between Seattle and Eastern Washington.`,
+    hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on I-90 over Snoqualmie Pass — snow, chains, and closures as they happen. WSDOT reports about 28,000 vehicles a day over the pass, on the main route between Seattle and Eastern Washington.`,
     closes: `The pass stays open most of the year, but heavy Cascade snow and scheduled avalanche control work close I-90 over the summit several times each winter — sometimes for a couple of hours, occasionally longer. Closures can happen with little notice, which is exactly why the live cameras above are worth a look before you leave.`,
-    extra: { h: 'The busiest crossing', p: `At 3,015 feet, Snoqualmie is the lowest of Washington's major passes, which is part of why it carries the most traffic — it's the everyday route between the Seattle metro and Eastern Washington. Lower doesn't mean easy, though: it still catches heavy, wet Cascade snow.` },
+    // Reference sections + FAQ additions: ChatGPT draft 2026-09-25, sources rechecked (scripts/passes/).
+    segs: [{ h: 'When it closes', p: `The pass stays open most of the year, but heavy Cascade snow and scheduled avalanche control work close I-90 over the summit several times each winter. Closures can happen with little notice, which is why the live cameras above are worth a look before you leave.` }, ...require('./passes/snoqualmie-reference.cjs').segs],
     // Snow block (2026-09-24). Nearest SNOTEL to the summit (47.4245,-121.4131) is Olallie Meadows, 3.7 mi, 4,010 ft. Resort URLs verified 2026-09-24.
     snow: { station: '672:WA:SNTL', stationName: 'Olallie Meadows', stationElev: '4,010 ft', stationNote: '3.7 miles from the summit and about 1,000 feet above it', avyCenter: 'NWAC', title: 'Snow at Snoqualmie Pass',
       resort: { name: 'The Summit at Snoqualmie', report: 'https://www.summitatsnoqualmie.com/mountain-report', tickets: 'https://www.summitatsnoqualmie.com/tickets' } },
     faq: [
       ['Is Snoqualmie Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-90 over the pass as red and orange markers, straight from WSDOT. For closures across the whole US, see the <a href="../../closures/">road closures map</a>. The pass shuts for avalanche control and heavy snow several times each winter.`],
-      ['Are chains required on Snoqualmie Pass?', `Requirements change with conditions and are set by WSDOT — watch the <a href="#comap">live cameras above</a> for snow and ice on the roadway, and always follow posted signs. They can jump from none to chains-required within an hour during a storm.`],
-      ['How high is Snoqualmie Pass?', `The summit is 3,015 feet — the lowest of Washington's major Cascade passes, which is why it's the busiest. See <a href="../../cameras/">every camera in Washington and 24 other states</a> for the rest of your route.`],
+      ['Are chains required on Snoqualmie Pass?', `Requirements change with conditions and are set by WSDOT for each direction. Read the restriction lines above, watch the <a href="#comap">live cameras</a> for snow and ice, and follow the posted signs. See what each restriction line means below.`],
+      ['How high is Snoqualmie Pass?', `The summit is 3,022 feet, according to WSDOT. See <a href="../../cameras/">every camera in Washington and 24 other states</a> for the rest of your route.`],
       ['How far is Snoqualmie Pass from Seattle?', `About 52 miles east on I-90, roughly an hour in good conditions. Track your exact mile marker over the pass hands-free with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
       ['How much snow is at Snoqualmie Pass right now?', `The snow block above reads the USDA SNOTEL station at Olallie Meadows, 3.7 miles from the summit at 4,010 feet. It shows depth, the change over 24 hours, snow water and temperature, updated hourly. <a href="https://www.summitatsnoqualmie.com/mountain-report" target="_blank" rel="noopener">The Summit at Snoqualmie</a> posts its own mountain report and lift status for Alpental, Summit West, Summit Central and Summit East.`],
+      ...require('./passes/snoqualmie-reference.cjs').faq,
     ],
   },
   {
@@ -314,7 +316,7 @@ function page(p){
   const sp = SPON.slot({ kind: 'pass', slug: p.slug, name: p.name });
   const credit = p.credit || p.dot;
   const segs = p.segs || [{ h: 'When it closes', p: p.closes }, p.extra];
-  const segsHtml = segs.map(s=>`    <div class="co-seg"><h3>${s.h}</h3><p>${s.p}</p></div>`).join('\n');
+  const segsHtml = segs.map(s=>`    <div class="co-seg"><h3>${s.h}</h3>${s.html || `<p>${s.p}</p>`}</div>`).join('\n');
   const relatedHtml = typeof p.related === 'function' ? p.related(up)
     : `More passes &amp; routes: <a href="../">all mountain passes</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}maps/">all maps</a>`;
   return `<!DOCTYPE html>
@@ -390,6 +392,12 @@ function page(p){
     .co-seg{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px 22px;margin-bottom:14px;}
     .co-seg h3{font-size:19px;margin:0 0 4px;}
     .co-seg p{color:#3a444d;font-size:15px;line-height:1.6;margin:8px 0 0;}
+    .co-seg .seg-src{font-size:12.5px;color:#5b6670;}
+    .co-seg ul,.co-seg ol{margin:8px 0 0 20px;color:#3a444d;font-size:15px;line-height:1.6;}
+    .seg-table{overflow-x:auto;margin:10px 0 0;}
+    .seg-table table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;}
+    .seg-table th,.seg-table td{border:1px solid #E5E5E5;padding:8px 10px;text-align:left;vertical-align:top;color:#3a444d;}
+    .seg-table th{background:#f6f8f7;color:#0E1116;}
     .co-faq{max-width:1000px;margin:34px auto 0;padding:0 20px;}
     .co-faq h2{font-size:24px;margin:0 0 14px;}
     .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
