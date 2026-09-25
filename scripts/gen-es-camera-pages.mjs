@@ -71,6 +71,33 @@ const COMMON = (name, dot, dotShort) => [
   [`<a href="../../corridors/">interstate corridors</a>`, `<a href="../../corridors/">corredores interestatales</a>`],
   [`drawbridges</a>`, `puentes levadizos</a>`],
   [` live in ${name}`, ` en vivo en ${name}`],
+  [`<p>Every camera on this map comes straight from ${dot} and is tagged with the route and mile marker where the agency provides it. Tap a camera dot to open its latest image; tap the image to see it full-size. For cameras beyond the metro, see <a href="../florida/">Florida traffic cameras</a> or <a href="../">every highway camera</a>.</p>`,
+   `<p>Las imágenes proceden de ${dot}. Mostramos la carretera y el marcador de milla cuando la agencia los proporciona. Toca una cámara para ver su imagen más reciente y toca la imagen para ampliarla. También puedes consultar las <a href="../florida/">cámaras de Florida</a> y el <a href="../">mapa de cámaras de otras carreteras</a>.</p>`],
+  [`Yes. ${dot} publishes its traffic cameras publicly, and MileCheck puts them on one map for free — no account, no sign-up. To have the nearest camera follow you as you drive, the `,
+   `No. Puedes consultar este mapa sin pagar y sin crear una cuenta. Para que la cámara más cercana te siga mientras manejas, la `],
+  [`Yes. ${dot} publishes its traffic cameras publicly, and MileCheck puts the ${name} ones on one map for free — no account. To have the nearest camera follow you as you drive, the `,
+   `No. Puedes consultar este mapa sin pagar y sin crear una cuenta. Para que la cámara más cercana te siga mientras manejas, la `],
+  [`MileCheck app</a> does it hands-free on CarPlay and Android Auto.`, `app MileCheck</a> lo hace sin tocar el teléfono, en CarPlay y Android Auto.`],
+  [`Are ${name} DOT traffic cameras free?`, `¿Hay que pagar para consultar este mapa?`],
+  [`Are ${name} traffic cameras free?`, `¿Hay que pagar para consultar este mapa?`],
+  [`Right here — the <a href="#comap">map above</a> shows live ${dot} highway cameras across ${name}, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond ${name}, see <a href="../">every highway camera in `,
+   `En el mapa de esta página. Toca una cámara para ver su imagen más reciente. Mostramos la carretera y el marcador de milla cuando ${dot} los proporciona. Para el resto del país, mira <a href="../">todas las cámaras de carretera en `],
+  [`Right here — the <a href="#comap">map above</a> shows live ${dot} cameras across the ${name} area, each tagged with its route and mile marker. For the whole state, see <a href="../florida/">Florida traffic cameras</a>.`,
+   `En el mapa de esta página. Toca una cámara para ver su imagen más reciente. Mostramos la carretera y el marcador de milla cuando ${dot} los proporciona. Para todo el estado, mira las <a href="../florida/">cámaras de tráfico de Florida</a>.`],
+  [`How often do ${name} traffic cameras update?`, `¿Cada cuánto se actualizan las imágenes?`],
+  [`Most ${dot} cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.`,
+   `La frecuencia depende de la cámara y de ${dot}. Una imagen puede estar desactualizada o no estar disponible. Conduce según las condiciones que encuentres y respeta las señales.`],
+  [`Open the <a href="#comap">live map above</a> and tap any camera near your route to see the road right now. Conditions change fast in a busy metro, so check just before you go — and in the app, the nearest camera and your mile marker update automatically as you drive.`,
+   `Abre el mapa y toca las cámaras que estén cerca de tu ruta. Consulta la imagen más reciente disponible antes de salir. No uses el mapa mientras conduces.`],
+  [`Live cameras are busy right now — please refresh in a moment.`, `Las cámaras están ocupadas en este momento. Vuelve a cargar la página en un momento.`],
+  [`No cameras loaded — try again shortly.`, `No se cargaron cámaras. Inténtalo de nuevo en un momento.`],
+  [`'no cameras loaded'`, `'no se cargaron cámaras'`],
+  [`title="Open full image"`, `title="Abrir la imagen completa"`],
+  [`' live cameras in ${name}'`, `' cámaras en vivo en ${name}'`],
+  [`' live cameras'`, `' cámaras en vivo'`],
+  [`${name} cameras: ${dot} via MileCheck`, `cámaras de ${name}: ${dot} vía MileCheck`],
+  [`"name":"Cameras","item":"https://milecheckapp.com/cameras/"`, `"name":"Cámaras","item":"https://milecheckapp.com/cameras/"`],
+  [`"name":"${name} Cameras","item":"https://milecheckapp.com/cameras/`, `"name":"Cámaras de ${name}","item":"https://milecheckapp.com/es/cameras/`],
   [`Map layers`, `Capas del mapa`],
   [`>Cameras</label>`, `>Cámaras</label>`],
   [`Show every camera`, `Mostrar todas las cámaras`],
@@ -92,7 +119,7 @@ const PROSE = {
     [`Watch <a href="../../corridors/i-4/">I-4</a> east toward Orlando, I-275 across the bay, <a href="../../corridors/i-75/">I-75</a> to the east, and the Selmon Expressway.`, `Mira la <a href="../../corridors/i-4/">I-4</a> hacia Orlando, la I-275 sobre la bahía, la <a href="../../corridors/i-75/">I-75</a> al este y la Selmon Expressway.`],
   ],
   miami: [
-    [`South Florida's FDOT cameras cover the Miami metro freeways and expressways, some of the busiest in the state.`, `Las cámaras de FDOT en el sur de Florida cubren las autopistas y expressways del área de Miami, de las más transitadas del estado.`],
+    [`South Florida's FDOT cameras cover the Miami metro freeways and expressways, some of the busiest in the state.`, `Las cámaras de FDOT cubren las autopistas y expressways del área de Miami.`],
     [`Watch <a href="../../corridors/i-95/">I-95</a> up the coast, <a href="../../corridors/i-75/">I-75</a> and "Alligator Alley" west, the Palmetto (826), and the Dolphin (836).`, `Mira la <a href="../../corridors/i-95/">I-95</a> por la costa, la <a href="../../corridors/i-75/">I-75</a> y "Alligator Alley" hacia el oeste, el Palmetto (826) y el Dolphin (836).`],
   ],
 };
@@ -105,7 +132,7 @@ for (const slug of ES) {
   const m = src.match(/<h1>([^<]+) traffic cameras, live<\/h1>/); if (!m) { console.error('skip', slug); continue; }
   const name = m[1];
   const dot = (src.match(/Live traffic cameras · [^·]+ · ([^<]+)<\/div>/) || [])[1].trim();
-  let out = src;
+  let out = src.replace(/    <p class="lang-switch"[^\n]*\n/g, '').replace(/  <link rel="alternate" hreflang="[a-z-]+" href="[^"]+">\n?/g, '');
   const pairs = [...(PROSE[slug] || []), ...COMMON(name, dot, dot.split('(')[0].trim())];
   for (const [en, es] of pairs) {
     out = out.split(en).join(es);
