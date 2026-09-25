@@ -477,6 +477,18 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:drive-into-canada",
+   "path": "/drive-into-canada/",
+   "title": "Driving into Canada in your own car",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:drive-into-us-from-canada",
+   "path": "/drive-into-us-from-canada/",
+   "title": "Driving into the US from Canada in your own car",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:drive-or-fly-los-angeles-las-vegas",
    "path": "/drive-or-fly-los-angeles-las-vegas/",
    "title": "Should you drive or fly from Los Angeles to Las Vegas?",
@@ -714,6 +726,18 @@
    "key": "basics:why-no-interstate-50-or-60",
    "path": "/why-no-interstate-50-or-60/",
    "title": "Why Is There No Interstate 50 or Interstate 60?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:will-my-phone-work-in-canada",
+   "path": "/will-my-phone-work-in-canada/",
+   "title": "Will your US phone work in Canada?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:will-my-phone-work-in-the-us",
+   "path": "/will-my-phone-work-in-the-us/",
+   "title": "Will your Canadian phone work in the US?",
    "sponsor": "house"
   },
   {

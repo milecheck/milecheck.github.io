@@ -85,7 +85,7 @@ module.exports = [
       ['Does an IDP extend an expired licence?', 'No. You still need a valid underlying licence.'],
       ['Should you bring a licence photo instead?', 'No. Enterprise requires the original licence, not a photocopy.'],
     ],
-    related: related(sampleStates, [['drive-in-us-foreign-license','Driving on a foreign licence'],['cameras/new-york-city','New York City cameras']]),
+    related: related(sampleStates, [['drive-into-canada','Driving into Canada'],['drive-into-us-from-canada','Driving into the US from Canada'],['will-my-phone-work-in-the-us','Will my phone work in the US?'],['drive-in-us-foreign-license','Driving on a foreign licence'],['cameras/new-york-city','New York City cameras']]),
   },
   {
     slug: 'drive-in-us-foreign-license', checked: 'September 2026', eyebrow: 'Driving abroad',
@@ -109,7 +109,7 @@ module.exports = [
       ['Does an IDP replace the original?', 'No. It translates the licence.'],
       ['Do these rules cover commercial driving?', 'No. Check the commercial-licence rules for your vehicle and work.'],
     ],
-    related: related(sampleStates, [['international-driving-permit-usa','International Driving Permits'],['report-location','Reporting your location']]),
+    related: related(sampleStates, [['drive-into-canada','Driving into Canada'],['drive-into-us-from-canada','Driving into the US from Canada'],['will-my-phone-work-in-the-us','Will my phone work in the US?'],['international-driving-permit-usa','International Driving Permits'],['report-location','Reporting your location']]),
   },
   {
     slug: 'chains-or-all-season-tires', checked: 'September 2026', eyebrow: 'Winter driving',
@@ -181,7 +181,7 @@ module.exports = [
       ['Does Canada permission include a one-way return?', 'Not automatically. Book and confirm the international return separately.'],
       ['What should you confirm before pickup?', 'The countries, vehicle class, insurance documents and return branch. Ask for the applicable terms in writing.'],
     ],
-    related: related([['washington','Washington'],['new-york','New York'],['california','California'],['arizona','Arizona'],['new-mexico','New Mexico'],['texas','Texas']], [['borders','Border waits'],['mexico-car-insurance','Mexican car insurance']]),
+    related: related([['washington','Washington'],['new-york','New York'],['california','California'],['arizona','Arizona'],['new-mexico','New Mexico'],['texas','Texas']], [['drive-into-canada','Driving into Canada'],['drive-into-us-from-canada','Driving into the US from Canada'],['will-my-phone-work-in-the-us','Will my phone work in the US?'],['borders','Border waits'],['mexico-car-insurance','Mexican car insurance']]),
   },
   {
     slug: 'snow-tires-wa-or-co', checked: 'September 2026', eyebrow: 'Winter driving',

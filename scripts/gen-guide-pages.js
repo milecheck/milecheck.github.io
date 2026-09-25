@@ -48,7 +48,7 @@ const GUIDES = [
       ["What is the move-over law in the US?",`Every state has one, but coverage varies. All states protect emergency vehicles at minimum; many extend that to any vehicle with hazard lights on, including a stranded driver. Change lanes away from a stopped vehicle if you can do it safely; if you can't, slow down instead.`],
       ["Is there an app that shows my exact location on US highways?",`Yes &mdash; MileCheck shows your current route, direction, and nearest mile marker in real time, in all 50 states, free to use with no account required. It's built for exactly this: knowing precisely where you are on a highway with no other landmarks in sight.`],
     ],
-    related:`<a href="../what-is-my-mile-marker/">What is my mile marker?</a> &middot; <a href="../report-location/">How to report your location in an emergency</a> &middot; <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> &middot; <a href="../breakdown-on-the-autobahn/">Broken down abroad? Germany's Autobahn guide</a>`,
+    related:`<a href="../what-is-my-mile-marker/">What is my mile marker?</a> &middot; <a href="../report-location/">How to report your location in an emergency</a> &middot; <a href="../mile-markers-vs-exit-numbers/">Mile markers vs exit numbers</a> &middot; <a href="../breakdown-on-the-autobahn/">Broken down abroad? Germany's Autobahn guide</a> · <a href="/drive-into-canada/">Driving into Canada</a> · <a href="/drive-into-us-from-canada/">Driving into the US from Canada</a> · <a href="/will-my-phone-work-in-the-us/">Will my phone work in the US?</a>`,
   },
   {
     slug:'breakdown-on-the-autobahn', eyebrow:'Driving abroad',
@@ -699,9 +699,30 @@ const GUIDES = [
 // Decision guides ("should I…" pages), drafted by ChatGPT from a brief and source-checked by Claude.
 GUIDES.push(...require('./guides/decision-guides-2026-09.cjs'));
 GUIDES.push(...require('./guides/decision-guides-batch-2-2026-09.cjs'));
+GUIDES.push(...require('./guides/decision-guides-batch-3-canada-2026-09.cjs'));
+
+// Language-aware routing (2026-09-25). A guide object may carry lang:'fr' (or 'es', …).
+// Identity is lang+slug: English lives at /<slug>/, others at /<lang>/<slug>/.
+const baseOf = g => (g.lang && g.lang!=='en') ? `${g.lang}/${g.slug}` : g.slug;
+const L = {
+  en:{home:'Home',maps:'Maps',cams:'Cameras',us:'United States',ca:'Canada',story:'Story',blog:'Blog',get:'Get the app',
+      ctaH:'Know exactly where you are — live',
+      ctaP:'Your mile marker is always free to check, even offline. Live DOT alerts and the nearest camera on your route are part of MileCheck Premium and need a connection to update. Runs on CarPlay and Android Auto.',
+      qa:'Questions, answered',rel:'Related:',tag:'Mile markers in all 50 US states.',getH:'Get the app',learn:'Learn more',
+      mm:'What is my mile marker?',hc:'Highway cameras',mp:'Mountain passes',am:'All maps',help:'Help &amp; legal',fb:'Send feedback',pp:'Privacy policy',
+      fine:'Always drive to conditions and follow posted signs.',
+      checked:c=>`Facts checked ${c}. Every number links to its source; prices and rules change, so confirm the day you travel.`},
+  fr:{home:'Accueil',maps:'Cartes',cams:'Caméras',us:'États-Unis',ca:'Canada',story:'Notre histoire',blog:'Blogue',get:'Obtenir l’application',
+      ctaH:'Sachez exactement où vous êtes, en direct',
+      ctaP:'MileCheck affiche votre borne en milles ou en kilomètres, même hors connexion. Les alertes routières en direct et la caméra la plus proche font partie de MileCheck Premium et demandent une connexion. Fonctionne avec CarPlay et Android Auto. L’application est en anglais.',
+      qa:'Vos questions',rel:'À lire aussi :',tag:'Bornes en milles dans les 50 États américains.',getH:'Obtenir l’application',learn:'En savoir plus',
+      mm:'Quelle est ma borne? (en anglais)',hc:'Caméras routières',mp:'Cols de montagne',am:'Toutes les cartes',help:'Aide et mentions légales',fb:'Nous écrire',pp:'Politique de confidentialité',
+      fine:'Adaptez toujours votre conduite aux conditions et respectez la signalisation.',
+      checked:c=>`Faits vérifiés en ${c}. Chaque chiffre renvoie à sa source. Les prix et les règles changent, vérifiez le jour du départ.`},
+};
 
 function faqJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':g.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
-function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'mainEntityOfPage':'https://milecheckapp.com/'+g.slug+'/'}); }
+function articleJsonLd(g){ return JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':g.h1,'author':{'@type':'Organization','name':'MileCheck'},'publisher':{'@type':'Organization','name':'MileCheck'},'inLanguage':g.lang||'en','mainEntityOfPage':'https://milecheckapp.com/'+baseOf(g)+'/'}); }
 
 function page(g){
   // Multi-language guides. A guide's translated locales, beyond English — the site has
@@ -715,47 +736,57 @@ function page(g){
     'driving-in-the-us-foreign-visitor-guide': { es: true, fr: true },
   };
   const LANG_LABEL = { en: 'EN', es: 'ES', fr: 'FR', de: 'DE', pt: 'PT', zh: 'ZH', vi: 'VI', ko: 'KO', ar: 'AR' };
-  const locales = TRANSLATIONS[g.slug];
+  const lang = g.lang || 'en';
+  const T = L[lang] || L.en;
+  const base = baseOf(g);
+  const R = lang==='en' ? '../' : '../../';
+  const pairLangs = GUIDES.filter(o=>o.slug===g.slug && (o.lang||'en')!=='en').map(o=>o.lang);
+  const allLangs = [...new Set(['en', ...Object.keys(TRANSLATIONS[g.slug]||{}), ...pairLangs])];
+  const locales = allLangs.length>1 ? allLangs : null;
+  const urlFor = l => l==='en' ? `https://milecheckapp.com/${g.slug}/` : `https://milecheckapp.com/${l}/${g.slug}/`;
   const hreflangHtml = locales
-    ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/${g.slug}/">\n`
-      + Object.keys(locales).map(l=>`  <link rel="alternate" hreflang="${l}" href="https://milecheckapp.com/${l}/${g.slug}/">\n`).join('')
-      + `  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/${g.slug}/">\n`
+    ? locales.map(l=>`  <link rel="alternate" hreflang="${l}" href="${urlFor(l)}">
+`).join('')
+      + `  <link rel="alternate" hreflang="x-default" href="${urlFor('en')}">
+`
     : '';
   // Toggle pills at the top of the article — not a footnote link. Current language is
   // the highlighted pill; every other available translation is a plain link next to it.
   const langSwitchHtml = locales
-    ? `    <div class="lang-switch"><span class="lang-switch-globe">&#127760;</span><span class="lang-pill active">EN</span>`
-      + Object.keys(locales).map(l=>`<a href="/${l}/${g.slug}/" class="lang-pill">${LANG_LABEL[l]||l.toUpperCase()}</a>`).join('')
-      + `</div>\n`
+    ? `    <div class="lang-switch"><span class="lang-switch-globe">&#127760;</span>`
+      + locales.map(l=> l===lang ? `<span class="lang-pill active">${LANG_LABEL[l]||l.toUpperCase()}</span>`
+          : `<a href="${l==='en'?'/'+g.slug+'/':'/'+l+'/'+g.slug+'/'}" class="lang-pill" hreflang="${l}">${LANG_LABEL[l]||l.toUpperCase()}</a>`).join('')
+      + `</div>
+`
     : '';
   const langLinkHtml = ''; // superseded by langSwitchHtml
 
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  const secHtml=g.sections.map(([h,p])=>`    <h2>${h}</h2>\n    <p>${p}</p>`).join('\n');
+  const secHtml=g.sections.map(([h,p])=>/^\s*<(!--|p|table|ul|ol|div|figure|h3)/.test(p) ? `    <h2>${h}</h2>\n    ${p}` : `    <h2>${h}</h2>\n    <p>${p}</p>`).join('\n');
   const faqHtml=g.faq.map(([q,a])=>`      <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   const t=esc(g.title)+' | MileCheck';
   const desc=esc(g.lede.replace(/<[^>]+>/g,'').slice(0,155));
   const figHtml=g.figure?`    <figure class="gfig">${g.figure}</figure>\n`:'';
   const figCss=g.figure?`\n    .gfig{margin:6px 0 24px;}\n    .gfig svg{width:100%;height:auto;display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;}\n    .gfig figcaption{font-size:13px;color:#5b6670;text-align:center;margin-top:8px;line-height:1.5;}`:'';
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${lang==='fr'?'fr-CA':lang}">
 <head>
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${t}</title>
   <meta name="description" content="${desc}">
-  <link rel="canonical" href="https://milecheckapp.com/${g.slug}/">
+  <link rel="canonical" href="https://milecheckapp.com/${base}/">
 ${hreflangHtml}  <meta property="og:title" content="${t}">
   <meta property="og:description" content="${desc}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
-  <meta property="og:url" content="https://milecheckapp.com/${g.slug}/">
+  <meta property="og:url" content="https://milecheckapp.com/${base}/">
   <meta property="og:type" content="article">
-  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="icon" type="image/png" href="${R}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="${R}style.css">
   <script type="application/ld+json">${faqJsonLd(g)}</script>
   <script type="application/ld+json">${articleJsonLd(g)}</script>
   <style>
@@ -802,18 +833,18 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <a href="${R}index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="${R}assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
       <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <nav class="primary-nav">
-        <a href="../index.html">Home</a>
-        <a href="../maps/">Maps</a>
-        <a href="../cameras/">Cameras</a>
-        <a href="../states/">United States</a>
-        <a href="../canada/">Canada</a>
-        <a href="../index.html#story">Story</a>
-        <a href="../index.html#b2b">B2B</a>
-        <a href="../blog/">Blog</a>
-        <a href="/get/" class="nav-cta">Get the app</a>
+        <a href="${R}index.html">${T.home}</a>
+        <a href="${R}maps/">${T.maps}</a>
+        <a href="${R}cameras/">${T.cams}</a>
+        <a href="${R}states/">${T.us}</a>
+        <a href="${R}canada/">${T.ca}</a>
+        <a href="${R}index.html#story">${T.story}</a>
+        <a href="${R}index.html#b2b">B2B</a>
+        <a href="${R}blog/">${T.blog}</a>
+        <a href="/get/" class="nav-cta">${T.get}</a>
       </nav>
     </div>
   </header>
@@ -822,58 +853,58 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
 ${langSwitchHtml}    <div class="eyebrow">${g.eyebrow}</div>
     <h1>${g.h1}</h1>
     <p class="lede">${g.lede}</p>
-${g.checked ? `    <p class="g-checked">Facts checked ${g.checked}. Every number links to its source; prices and rules change, so confirm the day you travel.</p>\n` : ''}
+${g.checked ? `    <p class="g-checked">${T.checked(g.checked)}</p>\n` : ''}
 ${figHtml}${secHtml}
 
     <div class="cta">
-      <h3>Know exactly where you are — live</h3>
-      <p>Your mile marker is always free to check, even offline. Live DOT alerts and the nearest camera on your route are part of MileCheck Premium and need a connection to update. Runs on CarPlay and Android Auto.</p>
+      <h3>${T.ctaH}</h3>
+      <p>${T.ctaP}</p>
       <div class="btns">
         <a class="primary" href="${APP}" target="_blank" rel="noopener">iOS App Store</a>
         <a class="ghost" href="${PLAY}" target="_blank" rel="noopener">Google Play</a>
       </div>
     </div>
 
-    <h2 style="margin-top:34px">Questions, answered</h2>
+    <h2 style="margin-top:34px">${T.qa}</h2>
     <div class="faq">
 ${faqHtml}
     </div>
 
-    <p class="g-related">Related: ${g.related}</p>
+    <p class="g-related">${T.rel} ${g.related}</p>
   </article>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
-          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="${R}assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">${T.tag}</p>
         </div>
         <div class="footer-col">
-          <p class="footer-label">Get the app</p>
+          <p class="footer-label">${T.getH}</p>
           <ul class="footer-list">
             <li><a href="${APP}" target="_blank" rel="noopener">iOS App Store</a></li>
             <li><a href="${PLAY}" target="_blank" rel="noopener">Google Play</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-label">Learn more</p>
+          <p class="footer-label">${T.learn}</p>
           <ul class="footer-list">
-            <li><a href="../what-is-my-mile-marker/">What is my mile marker?</a></li>
-            <li><a href="../cameras/">Highway cameras</a></li>
-            <li><a href="../passes/">Mountain passes</a></li>
-            <li><a href="../maps/">All maps</a></li>
+            <li><a href="${R}what-is-my-mile-marker/">${T.mm}</a></li>
+            <li><a href="${R}cameras/">${T.hc}</a></li>
+            <li><a href="${R}passes/">${T.mp}</a></li>
+            <li><a href="${R}maps/">${T.am}</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-label">Help &amp; legal</p>
+          <p class="footer-label">${T.help}</p>
           <ul class="footer-list">
-            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
-            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">${T.fb}</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">${T.pp}</a></li>
           </ul>
         </div>
       </div>
-      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. ${T.fine}</p>
     </div>
   </footer>
 
@@ -886,10 +917,10 @@ const ONLY=process.argv.slice(2).filter(a=>!a.startsWith('-'));
 let n=0;
 for(const g of GUIDES){
   if(ONLY.length && !ONLY.includes(g.slug)) continue;
-  const dir=g.slug;
+  const dir=baseOf(g);
   fs.mkdirSync(dir,{recursive:true});
   fs.writeFileSync(path.join(dir,'index.html'),page(g));
   n++;
-  console.log('wrote '+g.slug+'/index.html  ('+g.title+')');
+  console.log('wrote '+baseOf(g)+'/index.html  ('+g.title+')');
 }
 console.log('\nGenerated '+n+' guide pages.');
