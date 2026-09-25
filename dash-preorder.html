@@ -31,10 +31,11 @@
     .kicker{display:block;font:600 12px var(--mono);letter-spacing:.14em;color:var(--safety);text-transform:uppercase;margin:36px 0 10px}
     h1{font-family:var(--serif);font-weight:650;font-size:clamp(30px,5vw,46px);letter-spacing:-.01em;margin:0 0 14px;max-width:11ch}
     .sub{font-size:18px;color:rgba(255,255,255,.85);max-width:46ch;margin:0}
-    .device-card{background:var(--paper2);border:1px solid var(--rule);border-radius:14px;padding:28px;margin:-40px 0 32px;
+    .device-card{background:var(--paper2);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin:-40px 0 32px;
       box-shadow:0 20px 40px rgba(0,0,0,.18);position:relative;z-index:5}
-    .device-svg{display:block;margin:0 auto 18px}
-    .device-caption{text-align:center;font:500 13px var(--mono);color:var(--ink2)}
+    .device-photo-wrap{aspect-ratio:3/2;overflow:hidden;background:#000}
+    .device-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .device-caption{text-align:center;font:500 13px var(--mono);color:var(--ink2);padding:14px 20px}
     .section{padding:8px 0 40px}
     .section h2{font-family:var(--serif);font-weight:650;font-size:24px;margin:0 0 10px}
     ul.checks{list-style:none;padding:0;margin:0 0 8px}
@@ -65,17 +66,25 @@
 
   <div class="container">
     <div class="device-card">
-      <img class="device-svg" src="images/dash-display/dash-display-hero.webp" alt="MileCheck dash display, vent-mounted, showing I-5 NB mile marker 142.5" style="width:100%;max-width:520px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.25)">
+      <div class="device-photo-wrap">
+        <img src="images/dash-display/dash-display-hero.webp" alt="MileCheck dash display, vent-mounted, showing I-5 NB mile marker 142.5">
+      </div>
       <p class="device-caption">Concept render — final size and mount will change during testing.</p>
     </div>
 
     <div class="section">
       <h2>What it does</h2>
       <ul class="checks">
-        <li>Shows the mile marker you're currently passing, updated live off GPS</li>
+        <li>Shows the mile marker you're currently passing, updated live</li>
         <li>Clips to an air vent — no wiring, no phone mount blocking your view</li>
-        <li>Same 50-state milepost data already in the MileCheck app, running on the device</li>
+        <li>Same 50-state milepost data already in the MileCheck app</li>
       </ul>
+    </div>
+
+    <div class="section">
+      <h2>How it updates</h2>
+      <p>The display itself has no GPS chip and no SIM card — that's what keeps it small and the build simple. Your phone does the work: MileCheck runs in the background, tracks your GPS position the same way it does on the Mile tab, and figures out your current mile marker. It then sends that number to the display over Bluetooth, the same way a phone talks to a Bluetooth speaker.</p>
+      <p>So the display is just a screen and a Bluetooth radio &mdash; the phone stays in your pocket or cupholder doing the GPS and lookup work it already does for the app, and the dash unit just shows what it's told. No pairing steps beyond the first setup, no data plan on the device, no separate subscription.</p>
     </div>
 
     <div class="section">
