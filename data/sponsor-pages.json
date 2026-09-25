@@ -389,7 +389,7 @@
   {
    "key": "article:live-highway-cameras",
    "path": "/blog/live-highway-cameras.html",
-   "title": "33,000 Highway Cameras, 27 States, One Map",
+   "title": "44,000+ Highway Cameras, 39 States, One Map",
    "sponsor": "house"
   },
   {
@@ -942,6 +942,12 @@
    "key": "cameras:milwaukee",
    "path": "/cameras/milwaukee/",
    "title": "Milwaukee Traffic Cameras — Live WisDOT Freeway Cams",
+   "sponsor": "house"
+  },
+  {
+   "key": "cameras:minnesota",
+   "path": "/cameras/minnesota/",
+   "title": "Minnesota Traffic Cameras — Live MnDOT Highway Cams",
    "sponsor": "house"
   },
   {
@@ -1830,6 +1836,48 @@
    "key": "mountain:rainier-from-tacoma",
    "path": "/mountains/rainier/from-tacoma/",
    "title": "Is Mount Rainier visible from Tacoma right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:sthelens",
+   "path": "/mountains/sthelens/",
+   "title": "Is Mount St. Helens visible right now? Live from Portland",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:sthelens-best-time",
+   "path": "/mountains/sthelens/best-time/",
+   "title": "Best time of year to see Mount St. Helens",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:sthelens-from-castle-rock",
+   "path": "/mountains/sthelens/from-castle-rock/",
+   "title": "Is Mount St. Helens visible from Castle Rock right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:sthelens-from-longview",
+   "path": "/mountains/sthelens/from-longview/",
+   "title": "Is Mount St. Helens visible from Longview right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:sthelens-from-portland",
+   "path": "/mountains/sthelens/from-portland/",
+   "title": "Is Mount St. Helens visible from Portland right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:sthelens-from-vancouver-wa",
+   "path": "/mountains/sthelens/from-vancouver-wa/",
+   "title": "Is Mount St. Helens visible from Vancouver, WA right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:sthelens-from-woodland",
+   "path": "/mountains/sthelens/from-woodland/",
+   "title": "Is Mount St. Helens visible from Woodland right now?",
    "sponsor": "house"
   },
   {
