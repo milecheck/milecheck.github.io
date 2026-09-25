@@ -151,14 +151,14 @@
       <label for="fyRoute">Route</label>
       <select id="fyRoute"><option value="">All routes</option></select>
       <div class="fy-seg" role="group" aria-label="Time format"><button type="button" id="fy12" aria-pressed="true">12-hour</button><button type="button" id="fy24" aria-pressed="false">24-hour</button></div>
-      <div class="fy-status" id="fyUpdated">Loading…</div>
+      <div class="fy-status"><span id="fyNow"></span> · <span id="fyUpdated">Loading…</span></div>
     </div>
     <div class="fy-disrupt" id="fyDisrupt"></div>
     <div class="fy-mapbox">
       <div id="fyMap"></div>
       <div class="fy-card" id="fyCard"></div>
     </div>
-    <div class="fy-legend"><span><i></i>Terminal (tap for sailings and cameras)</span><span><b></b>Boat, pointing the way it is heading</span><span><em class="fy-camleg"></em>Camera (tap for the picture)</span><span><u></u>Route, drawn approximately</span></div>
+    <div class="fy-legend"><span><i></i>Terminal (tap for sailings and cameras)</span><span><b></b>Boat, pointing the way it is heading</span><span><em class="fy-camleg"></em>Camera (tap for the picture)</span><span><u></u>Route, drawn approximately</span><span id="fyTzNote"></span></div>
     <div class="fy-lists" id="fyLists"></div>
   </div>
 
@@ -200,6 +200,8 @@ var $=function(id){return document.getElementById(id)};
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
 var h24=false; try{h24=localStorage.getItem('mc_time24')==='1'}catch(e){}
 function fmtTime(iso){var d=new Date(iso);if(isNaN(d))return '';return d.toLocaleTimeString('en-US',{timeZone:TZ,hour:h24?'2-digit':'numeric',minute:'2-digit',hour12:!h24})}
+function tzName(){try{return new Intl.DateTimeFormat('en-US',{timeZone:TZ,timeZoneName:'short'}).formatToParts(new Date()).filter(function(p){return p.type==='timeZoneName'})[0].value}catch(e){return 'PT'}}
+function tick(){var el=$('fyNow');if(el)el.textContent='Now '+fmtTime(new Date().toISOString())+' '+tzName();var n=$('fyTzNote');if(n)n.textContent='All times '+tzName()}
 function setH24(v){h24=v;try{localStorage.setItem('mc_time24',v?'1':'0')}catch(e){};$('fy12').setAttribute('aria-pressed',String(!v));$('fy24').setAttribute('aria-pressed',String(v));render()}
 $('fy12').addEventListener('click',function(){setH24(false)});$('fy24').addEventListener('click',function(){setH24(true)});
 $('fy12').setAttribute('aria-pressed',String(!h24));$('fy24').setAttribute('aria-pressed',String(h24));
@@ -281,16 +283,16 @@ function render(){
   var dis=(data.routes||[]).filter(function(r){return (!route||r.abbrev===route)&&r.disruptions&&r.disruptions.length});
   var db=$('fyDisrupt'); if(dis.length){db.innerHTML=dis.map(function(r){return '<b>'+esc(r.name)+':</b> '+r.disruptions.map(function(x){return esc(typeof x==='string'?x:(x.description||x.title||JSON.stringify(x)))}).join(' · ')}).join('<br>');db.classList.add('on')}else db.classList.remove('on');
   var when=data.fetched_at?fmtTime(data.fetched_at):fmtTime(new Date().toISOString());
-  $('fyUpdated').textContent='Updated '+when+' · WSDOT · every minute';
+  $('fyUpdated').textContent='WSDOT data as of '+when+' · refreshed every minute';tick();
 }
 function load(){
   fetch(W+'/ferries').then(function(r){return r.json()}).then(function(d){
     data=d; terminalsByName={}; (d.terminals||[]).forEach(function(t){terminalsByName[String(t.name||'').trim()]=t});
     render();
-  }).catch(function(){$('fyUpdated').textContent='WSDOT feed did not answer. Trying again in a minute.'});
+  }).catch(function(){$('fyUpdated').textContent='WSDOT feed did not answer. Trying again in a minute.';tick()});
 }
 fetch(W+'/cameras?state=WA').then(function(r){return r.json()}).then(function(d){cams=(d.cameras||[]).filter(function(c){return /ferries/i.test(c.route||'')||/^WSF\b/.test(c.title||'')});drawCams();}).catch(function(){});
-fitRoute();load();setInterval(load,60000);
+fitRoute();load();tick();setInterval(load,60000);setInterval(tick,15000);
 })();
 </script>
 <footer class="site-footer">
