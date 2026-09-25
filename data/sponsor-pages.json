@@ -933,6 +933,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:alberta",
+   "path": "/cameras/alberta/",
+   "title": "Alberta Traffic Cameras — Live 511 Alberta Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:arizona",
    "path": "/cameras/arizona/",
    "title": "Arizona Traffic Cameras — Live ADOT (AZ511) Highway Cams",
@@ -954,6 +960,12 @@
    "key": "cameras:birmingham",
    "path": "/cameras/birmingham/",
    "title": "Birmingham Traffic Cameras — Live ALDOT Freeway Cams",
+   "sponsor": "house"
+  },
+  {
+   "key": "cameras:british-columbia",
+   "path": "/cameras/british-columbia/",
+   "title": "British Columbia Traffic Cameras — Live DriveBC (BC Ministry of Transportation) Highway Cams",
    "sponsor": "house"
   },
   {
@@ -1083,6 +1095,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:manitoba",
+   "path": "/cameras/manitoba/",
+   "title": "Manitoba Traffic Cameras — Live Manitoba 511 Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:maryland",
    "path": "/cameras/maryland/",
    "title": "Maryland Traffic Cameras — Live MDOT SHA (CHART) Highway Cams",
@@ -1173,6 +1191,12 @@
    "sponsor": "house"
   },
   {
+   "key": "cameras:ontario",
+   "path": "/cameras/ontario/",
+   "title": "Ontario Traffic Cameras — Live Ontario 511 Highway Cams",
+   "sponsor": "house"
+  },
+  {
    "key": "cameras:oregon",
    "path": "/cameras/oregon/",
    "title": "Oregon Traffic Cameras — Live ODOT (TripCheck) Highway Cams",
@@ -1224,6 +1248,12 @@
    "key": "cameras:pt-orlando",
    "path": "/pt/cameras/orlando/",
    "title": "Câmeras de trânsito em Orlando",
+   "sponsor": "house"
+  },
+  {
+   "key": "cameras:quebec",
+   "path": "/cameras/quebec/",
+   "title": "Québec Traffic Cameras — Live Québec 511 (Transports Québec) Highway Cams",
    "sponsor": "house"
   },
   {

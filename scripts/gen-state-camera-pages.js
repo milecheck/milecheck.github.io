@@ -79,6 +79,21 @@ const STATES = [
    { slug:'idaho', code:'ID', name:'Idaho', dot:'ITD (511 Idaho)', bounds:'[[42.00,-117.24],[49.00,-111.04]]',
      blurb:`ITD's cameras on 511 Idaho follow I-84 across the Snake River Plain through Boise, I-15 up the east side, I-90 across the panhandle, and US-95 north and south, with more on the mountain routes, SH-55 up the Payette River, SH-75 to Sun Valley, US-12 over Lolo Pass and US-93 over Lost Trail Pass. Cameras on Boise city streets are not on this map.`,
      notable:`Watch I-84 through Boise and across the plain, <a href="../../corridors/i-90/">I-90</a> across the panhandle to Montana, <a href="../../corridors/i-15/">I-15</a> north to Monida Pass, and SH-55 on the Payette River run to McCall.` },
+   { slug:'british-columbia', code:'BC', country:'CA', name:'British Columbia', dot:'DriveBC (BC Ministry of Transportation)', bounds:'[[48.30,-139.06],[60.00,-114.03]]',
+     blurb:`DriveBC's cameras cover the Trans-Canada (Highway 1) from Vancouver through the Fraser Canyon and the Rockies, the Sea-to-Sky (Highway 99) to Whistler, the Coquihalla (Highway 5), Highway 97 through the Okanagan and Highway 16 across the north.`,
+     notable:`Watch Highway 5 over the Coquihalla summit, Highway 1 through Rogers Pass, Highway 99 on the Sea-to-Sky, and Highway 3 over the Kootenay Pass in winter.` },
+   { slug:'alberta', code:'AB', country:'CA', name:'Alberta', dot:'511 Alberta', bounds:'[[49.00,-120.00],[60.00,-110.00]]',
+     blurb:`511 Alberta's cameras follow Highway 2 between Calgary and Edmonton, the Trans-Canada (Highway 1) west to Banff, Highway 16 (the Yellowhead) across the province, and the Anthony Henday (Highway 216) around Edmonton. Cameras on roads Alberta names rather than numbers, like Stoney Trail, are not on this map.`,
+     notable:`Watch Highway 2 between Calgary and Edmonton, Highway 1 west through Canmore to Banff, Highway 16 toward Jasper, and Highway 63 north to Fort McMurray.` },
+   { slug:'manitoba', code:'MB', country:'CA', name:'Manitoba', dot:'Manitoba 511', bounds:'[[49.00,-102.00],[60.00,-89.00]]',
+     blurb:`Manitoba 511's cameras sit on the Trans-Canada (Highway 1) east and west of Winnipeg, Highway 75 south to the border at Emerson, the Perimeter Highway (100) around Winnipeg, and Highways 6 and 10 north.`,
+     notable:`Watch Highway 1 across the prairie, Highway 75 to the US border, and the Perimeter around Winnipeg.` },
+   { slug:'ontario', code:'ON', country:'CA', name:'Ontario', dot:'Ontario 511', bounds:'[[41.68,-95.16],[56.86,-74.32]]',
+     blurb:`Ontario 511's cameras run the length of Highway 401 from Windsor to the Quebec line, the QEW around the lake to Niagara, and Highways 400, 407 and 417, with more on Highways 11 and 17 across the north.`,
+     notable:`Watch Highway 401 through Toronto, the QEW to the Niagara crossings, Highway 400 north to cottage country, and Highway 417 through Ottawa.` },
+   { slug:'quebec', code:'QC', country:'CA', name:'Québec', dot:'Québec 511 (Transports Québec)', bounds:'[[44.99,-79.76],[62.58,-57.10]]',
+     blurb:`Québec 511's cameras are live video, on Autoroutes 40 and 20 along the St. Lawrence, Autoroute 15 north to the Laurentians and south to the border, Autoroute 73 through Québec City, and Route 138 along the north shore. Tap a camera and it plays in place.`,
+     notable:`Watch Autoroute 40 across Montréal, Autoroute 20 toward Québec City, Autoroute 15 to the Laurentians, and Route 138 along the north shore.` },
   { slug:'arizona', code:'AZ', name:'Arizona', dot:'ADOT (AZ511)', bounds:'[[31.33,-114.82],[37,-109.04]]',
     blurb:`Arizona DOT's AZ511 cameras cover the Phoenix and Tucson metros, the mountain routes to Flagstaff, and the desert interstates where summer dust storms strike.`,
     notable:`Watch <a href="../../corridors/i-10/">I-10</a> across the southern desert, I-17 up to Flagstaff, I-40 across the north, and the Phoenix-area Loop 101 and Loop 202.` },
@@ -170,15 +185,32 @@ const CITIES_BY_STATE = {
   AL: [{slug:'birmingham', name:'Birmingham'}],
 };
 
+// Canada pages (2026-09-25): a province entry sets country:'CA'. Kilometre
+// markers, the ministry rather than "the DOT", no US-state hub count. A US
+// entry gets exactly the strings the template always had.
+function wording(s){
+  const ca = s.country === 'CA';
+  return {
+    marker: ca ? 'kilometre marker' : 'mile marker',
+    markerShort: ca ? 'km' : 'MP',
+    freeQ: ca ? `Are ${s.name} traffic cameras free?` : `Are ${s.name} DOT traffic cameras free?`,
+    fromAgency: ca ? `straight from ${s.dot.split('(')[0].trim()}` : 'straight from the DOT',
+    whereProvides: ca ? 'where the province provides it' : 'where the DOT provides it',
+    beyond: ca ? `see <a href="../">every highway camera on MileCheck</a>` : `see <a href="../">every highway camera in ${HUB_CAMS} states</a>`,
+    alerts: ca ? 'live road alerts where the province publishes them' : 'live DOT alerts on your route',
+  };
+}
+
 function faq(s){
+  const w = wording(s);
   return [
     [`Where can I watch live ${s.name} traffic cameras?`,
-      `Right here — the <a href="#comap">map above</a> shows live ${s.dot} highway cameras across ${s.name}, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond ${s.name}, see <a href="../">every highway camera in ${HUB_CAMS} states</a>.`],
-    [`Are ${s.name} DOT traffic cameras free?`,
+      `Right here — the <a href="#comap">map above</a> shows live ${s.dot} highway cameras across ${s.name}, each tagged with its route and ${w.marker} so you know which stretch you're seeing. For cameras beyond ${s.name}, ${w.beyond}.`],
+    [w.freeQ,
       `Yes. ${s.dot} publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
     [`Which highways have cameras in ${s.name}?`, s.notable],
     [`How often do ${s.name} traffic cameras update?`,
-      `Most ${s.dot} cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.`],
+      `Most ${s.dot} cameras refresh every minute or two, ${w.fromAgency}. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.`],
   ];
 }
 
@@ -186,6 +218,7 @@ function faqJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@
 function crumbJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Cameras','item':'https://milecheckapp.com/cameras/'},{'@type':'ListItem','position':3,'name':s.name+' Cameras','item':'https://milecheckapp.com/cameras/'+s.slug+'/'}]}); }
 
 function page(s){
+  const w = wording(s);
   const plows = PLOW_PAGES.has(s.code);
   const sp = SPON.slot({ kind: 'cameras', slug: s.slug, state: s.code, name: s.name });
   const faqHtml=faq(s).map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
@@ -196,11 +229,11 @@ function page(s){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${s.name} Traffic Cameras — Live ${s.dot} Highway Cams | MileCheck</title>
-  <meta name="description" content="Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and mile marker. See the road before you drive it.">
+  <meta name="description" content="Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and ${w.marker}. See the road before you drive it.">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${s.slug}/">
 ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${s.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${s.slug}/">\n${PT_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${s.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${s.slug}/">` : ''}
   <meta property="og:title" content="${s.name} Traffic Cameras — Live | MileCheck">
-  <meta property="og:description" content="Live ${s.name} highway cameras on one map, each tagged with route and mile marker.">
+  <meta property="og:description" content="Live ${s.name} highway cameras on one map, each tagged with route and ${w.marker}.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/${s.slug}/">
   <meta property="og:type" content="website">
@@ -292,7 +325,7 @@ ${sp.css}
 ${sp.html}
 ${ES_PAGES.has(s.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${s.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(s.slug) ? ` · <a href="/pt/cameras/${s.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${s.name} · ${s.dot}</div>
     <h1>${s.name} traffic cameras, live</h1>
-    <p class="sub">See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and mile marker. Tap any camera for the latest image.</p>
+    <p class="sub">See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and ${w.marker}. Tap any camera for the latest image.</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${s.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${s.dot.split('(')[0].trim()}</div><div class="l">camera source</div></div>${plows ? `
@@ -317,7 +350,7 @@ ${ES_PAGES.has(s.slug) ? `    <p class="lang-switch" style="font-size:12.5px;col
     <h2>Live cameras across ${s.name}</h2>
     <p>${s.blurb}</p>
     <p>${s.notable}</p>
-    <p>Every camera on this map comes straight from ${s.dot} and is tagged with the route and mile marker where the DOT provides it, so you can tell exactly which stretch of road you're looking at. Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
+    <p>Every camera on this map comes straight from ${s.dot} and is tagged with the route and ${w.marker} ${w.whereProvides}, so you can tell exactly which stretch of road you're looking at. Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
   </section>
 
   <section class="co-faq">
@@ -327,7 +360,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>The nearest ${s.name} camera, right as you drive</h2>
-    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive ${s.name}'s highways, plus live DOT alerts on your route. Works offline and runs on CarPlay and Android Auto.</p>
+    <p>MileCheck shows the nearest camera and your exact ${w.marker} in real time as you drive ${s.name}'s highways, plus ${w.alerts}. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
@@ -377,10 +410,10 @@ ${sp.js}
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 const CODE=${JSON.stringify(s.code)};
-const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};
+const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};const MKR=${JSON.stringify(w.markerShort)};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
-const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|MA|NC|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|MA|NC|CT|QEW|BC|ON|AB|MB|A|R|M|Loop|\\d)[- ]?\\d*/i;
 const AK_HWY_RE=/highway|cutoff|expressway/i;
 const FERRY_RE=/ferr/i;
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
@@ -392,7 +425,7 @@ let CAMS=[], PLOWLIST=[], showCam=true, showPlow=true;
 function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 const cardEl=document.getElementById('coCard');
 function showCard(html){if(window.stopStream)stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';if(window.stopStream)stopStream();};}
-function camCard(c){if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
+function camCard(c){if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
 // HLS playback for stream cameras (DelDOT publishes video only, 2026-09-25): hls.js wherever the browser has Media Source Extensions (every desktop and Android browser), loaded once on the first stream card; iPhone Safari plays the playlist itself, with play retried once the metadata arrives (the first call stalled in testing). One player at a time; closing the card stops it.
 var hlsInst=null,hlsLoading=null;function loadHls(){if(window.Hls)return Promise.resolve();if(hlsLoading)return hlsLoading;hlsLoading=new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);});return hlsLoading;}
 function stopStream(){if(hlsInst){try{hlsInst.destroy();}catch(e){}hlsInst=null;}var v=document.getElementById('ccVid');if(v){try{v.pause();v.removeAttribute('src');v.load();}catch(e){}}}
