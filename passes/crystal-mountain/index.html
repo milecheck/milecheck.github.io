@@ -83,6 +83,7 @@
     .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
     .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
     .poi-icon{color:#DC2626;font-size:24px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;font-weight:900;}
+    .leaflet-marker-icon,.leaflet-interactive{outline:none !important;}
     .poi-tip{background:rgba(255,255,255,.94) !important;border:1px solid #E5E5E5 !important;font-weight:800 !important;font-size:12.5px !important;color:#0E1116 !important;padding:4px 9px !important;box-shadow:0 2px 6px rgba(0,0,0,.12) !important;}
     .poi-tip::before{border-top-color:#E5E5E5 !important;}
     .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
@@ -334,7 +335,9 @@ const cndLayer=L.layerGroup().addTo(map);
 let CAMS=[],ALERTS=[],CONDS=[],showCam=true,showAlr=true,showCnd=true;
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
-function clean(t,n){return String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);}
+// Cut at a word boundary with an ellipsis, not a hard character slice -- a plain
+// .slice(0,140) produced "...traffic wil" mid-word with no indication it was cut.
+function clean(t,n){const s=String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();if(s.length<=n)return s;return s.slice(0,n).replace(/\s+\S*$/,'')+'…';}
 async function loadCams(){const d=await fetchJSON(WORKER+'/cameras?state=WA',3);const out=[];for(const c of ((d&&d.cameras)||[])){if(c.isActive===false||!c.imageUrl)continue;if(!onRoute(c.route,c.mile))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl});}return out;}
 async function loadAlerts(){const d=await fetchJSON(WORKER+'/incidents?state=WA',3);const out=[];for(const a of ((d&&d['incident-reports'])||[])){const sl=a.location&&a.location['start-location'];const routeId=a.location&&a.location['route-id'];if(!sl||!onRoute(routeId,sl['start-mile-marker']))continue;if(!isFinite(+sl['start-lat'])||!isFinite(+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),route:routeId});}return out;}
 async function loadConds(){const d=await fetchJSON(WORKER+'/conditions?state=WA',3);const out=[];for(const r of ((d&&d['road-weather-reports'])||[])){const name=r['location-name']||(r.location&&r.location['location-name'])||'';if(!onRouteName(name))continue;const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!isFinite(lat)||!isFinite(lon))continue;out.push({lat,lon,name:clean(name,80),cond:clean(r['road-surface-condition'],220),elev:r.elevation});}return out;}
