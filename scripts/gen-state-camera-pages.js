@@ -24,7 +24,13 @@ const STATES = [
     notable:`Watch <a href="../../corridors/i-5/">I-5</a> from Portland south over <a href="../../passes/siskiyou/">Siskiyou Summit</a>, plus I-84 through the Columbia Gorge and the mountain passes on US-97 and US-26.` },
   { slug:'california', code:'CA', name:'California', dot:'Caltrans (QuickMap)', bounds:'[[32.5,-124.5],[42,-114.1]]',
     blurb:`Caltrans operates thousands of cameras statewide — the most of any state on this map — covering everything from Bay Area and LA freeways to the Sierra Nevada passes.`,
-    notable:`See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.` },
+    notable:`See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.`,
+    // Single-variable CTR test, 2026-09-26: the default template + "(QuickMap)" ran at
+    // 78 chars, past Google's ~60-char title truncation budget (own SERP data showed
+    // 0.4% CTR at position 7.3 vs 1.6-6.6% for other states). Title/desc override here
+    // shortens both so they don't truncate, kept as override so only CA changes.
+    title:'California Traffic Cameras (Caltrans QuickMap) | MileCheck',
+    desc:'Every Caltrans QuickMap camera in California, on one map, tagged by route and mile marker. See the road before you drive it.' },
   { slug:'utah', code:'UT', name:'Utah', dot:'UDOT', bounds:'[[37,-114.05],[42,-109.04]]',
     blurb:`Utah DOT's cameras cover the Wasatch Front, the canyons, and the interstate crossings of the high desert.`,
     notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas. In winter the Snowplows layer shows where UDOT's trucks are, each with the route and mile marker it is on and how long ago it reported.` },
@@ -237,8 +243,8 @@ function page(s){
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${s.name} Traffic Cameras — Live ${s.dot} Highway Cams | MileCheck</title>
-  <meta name="description" content="Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and ${w.marker}. See the road before you drive it.">
+  <title>${s.title || `${s.name} Traffic Cameras — Live ${s.dot} Highway Cams | MileCheck`}</title>
+  <meta name="description" content="${s.desc || `Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and ${w.marker}. See the road before you drive it.`}">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${s.slug}/">
 ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${s.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${s.slug}/">\n${PT_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${s.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${s.slug}/">` : ''}
   <meta property="og:title" content="${s.name} Traffic Cameras — Live | MileCheck">
