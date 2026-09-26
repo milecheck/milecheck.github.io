@@ -2215,6 +2215,12 @@
    "path": "/cameras/texas/",
    "title": "Texas Traffic Cameras — Live TxDOT Highway Cams",
    "sponsor": "house"
+  },
+  {
+   "key": "cameras:missouri",
+   "path": "/cameras/missouri/",
+   "title": "Missouri Traffic Cameras — Live MoDOT Highway Cams",
+   "sponsor": "house"
   }
  ]
 }
