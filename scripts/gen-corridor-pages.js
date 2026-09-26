@@ -6,6 +6,11 @@
 const fs = require('fs');
 const path = require('path');
 const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the map (2026-09-15)
+// Read live, not hardcoded: the JSON-LD FAQ strips <!--cov--> markers at generation time, so a
+// hardcoded number here goes stale in structured data with no way for apply-coverage-counts.mjs
+// to catch it afterward (i-5's FAQ drifted to 27 vs the ledger's 42, found 2026-09-26).
+const LEDGER = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'coverage-ledger.json'), 'utf8'));
+const CAM_STATES = `<!--cov:cameras.us_states-->${LEDGER.feeds.cameras.us_states}<!--/cov-->`;
 
 // States that also have a /bridges/<slug>/ page — interlink corridor pages to
 // bridges (GSC 2026-08-13: /bridges/ converts at 27.4% CTR, 3x the homepage,
@@ -45,7 +50,7 @@ const CORRIDORS = [
     ],
     faq: [
       ['Is I-5 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents as red and orange markers, straight from WSDOT, ODOT, and Caltrans; if a stretch is fully closed, a red banner appears at the top of this page. For a full US view, see the <a href="../../closures/">road closures map</a>. Winter closures on I-5 most often hit <a href="../../passes/siskiyou/">Siskiyou Summit</a> and <a href="../../passes/grapevine/">the Grapevine</a>.`],
-      ['Where can I watch live I-5 traffic cameras?', `Right here — the <a href="#comap">map above</a> shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See <a href="../../cameras/">every highway camera in <!--cov:cameras.us_states-->27<!--/cov--> states</a>. For nearest-camera and mile-marker tracking while you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
+      ['Where can I watch live I-5 traffic cameras?', `Right here — the <a href="#comap">map above</a> shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See <a href="../../cameras/">every highway camera in ${CAM_STATES} states</a>. For nearest-camera and mile-marker tracking while you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
       ['What is the highest point on I-5?', `<a href="../../passes/siskiyou/">Siskiyou Summit</a> in southern Oregon, at 4,310 feet — the highest elevation on all 1,381 miles of Interstate 5. It's marked with a ▲ on the map above.`],
       ['Which parts of I-5 close in winter?', `Almost always <a href="../../passes/siskiyou/">Siskiyou Summit</a> in Oregon and <a href="../../passes/grapevine/">the Grapevine</a> in California — both can close for snow, ice, or high wind. Watch the storms behind them on the <a href="../../weather/">road weather map</a>.`],
     ],
@@ -236,6 +241,78 @@ const CORRIDORS = [
       ['How long is I-40?', `About 2,557 miles from Barstow, California to Wilmington, North Carolina, the longest west-to-east interstate that doesn't reach either coast at its endpoints.`],
       ['Is I-40 still down in the Pigeon River Gorge after Hurricane Helene?', `Not fully. Flooding from Hurricane Helene in September 2024 collapsed sections of the eastbound lanes into the Pigeon River. A temporary fix reopened the gorge in March 2025 with one lane each direction and a reduced speed limit, and that's still the setup as of 2026. NCDOT's permanent rebuild is now priced at $2.8 billion and targeted for 2029, with two eastbound lanes and one westbound lane expected open by late 2028.`],
       ['Does I-40 get winter weather?', `Yes, mainly two spots: near Flagstaff, Arizona, where the road climbs near 7,000 feet, and the Texas Panhandle and Oklahoma, where wind and ice storms are the bigger risk. Track your mile marker through either one with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
+  {
+    slug: 'i-35', name: 'I-35', num: 35, states: ['TX','OK','KS','MO','IA','MN'],
+    subtitle: 'Texas to Minnesota · Laredo to Duluth', bounds: '[[27.5,-99.5],[47.0,-92.0]]',
+    lengthMi: '1,569 mi',
+    highPass: null, pois: [],
+    hero: `See I-35 right now — live DOT cameras and real-time conditions along the central corridor, from the Mexican border at Laredo to Duluth on Lake Superior, each tagged with its mile marker. Austin's massive rebuild to Minnesota snow, on one map.`,
+    segs: [
+      ['Border to Lake Superior', `I-35 runs about 1,569 miles from Laredo, Texas to Duluth, Minnesota, crossing six states — Texas, Oklahoma, Kansas, Missouri, Iowa, and Minnesota — and threading through San Antonio, Austin, Dallas–Fort Worth, Oklahoma City, Kansas City, and the Twin Cities.`],
+      ['Where the trouble is', `Austin is the standout: TxDOT's multi-billion-dollar Capital Express rebuild has major sections of I-35 through downtown Austin under active construction, with work expected to continue into the early 2030s. Oklahoma and Kansas sit in Tornado Alley, where spring severe thunderstorms and tornadoes can shut the road down with little warning; Texas and Oklahoma also see occasional ice storms that catch the region underprepared. Iowa and Minnesota bring real winter snow the rest of the way north.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-35 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-35 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything else.`],
+      ['How long is I-35?', `About 1,569 miles from Laredo, Texas to Duluth, Minnesota.`],
+      ['Why is I-35 under construction in Austin?', `TxDOT's Capital Express project is rebuilding and widening I-35 through Austin in three phases (North, Central, and South), with the Central segment alone priced around $4.5 billion. Work including bridge rebuilds and a drainage tunnel is active now and expected to run into the early 2030s, so expect lane shifts and ramp closures through the metro for years, not months.`],
+      ['Does I-35 get severe weather?', `Yes — Oklahoma and Kansas are core Tornado Alley territory, with spring severe thunderstorms and tornadoes a real risk, and Texas and Oklahoma both see occasional disruptive ice storms. Track your mile marker through any of it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
+  {
+    slug: 'i-20', name: 'I-20', num: 20, states: ['TX','LA','MS','AL','GA','SC'],
+    subtitle: 'Texas to South Carolina · the Deep South route', bounds: '[[29.5,-104.5],[35.0,-79.5]]',
+    lengthMi: '1,539 mi',
+    highPass: null, pois: [],
+    hero: `See I-20 right now — live DOT cameras and real-time conditions across the Deep South, from the West Texas desert to the South Carolina coast, each tagged with its mile marker. Atlanta traffic to Gulf Coast storms, on one map.`,
+    segs: [
+      ['West Texas to the Carolinas', `I-20 runs about 1,539 miles from an interchange with I-10 in far West Texas to I-95 in Florence, South Carolina, crossing six states — Texas, Louisiana, Mississippi, Alabama, Georgia, and South Carolina — through Odessa, Shreveport, Jackson, Birmingham, and metro Atlanta.`],
+      ['Where the trouble is', `West Texas brings long, service-free stretches with high wind; metro Atlanta, where I-20 crosses I-285 and the I-75/I-85 downtown connector, is chronic, heavy congestion. Across the Deep South — Louisiana, Mississippi, Alabama, and Georgia — summer thunderstorms and the occasional tropical system remnant are the main risk, and winter ice storms, though rare, tend to hit harder here than up north because the roads aren't set up to treat them.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-20 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-20 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything else.`],
+      ['How long is I-20?', `About 1,539 miles from far West Texas, near an I-10 interchange east of Van Horn, to Florence, South Carolina, where it meets I-95.`],
+      ['Where does I-20 get congested?', `Metro Atlanta is the big one — I-20's crossings with I-285 and the downtown connector are chronic bottlenecks. The <a href="#comap">live cameras above</a> show which stretches are moving.`],
+      ['Does I-20 get severe weather?', `The Deep South stretch — Louisiana, Mississippi, Alabama, and Georgia — sees summer thunderstorms and occasional tropical-system remnants, and rare but disruptive winter ice storms. Track your mile marker through it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
+  {
+    slug: 'i-65', name: 'I-65', num: 65, states: ['AL','TN','KY','IN'],
+    subtitle: 'Alabama to Indiana · Mobile to Gary', bounds: '[[30.5,-88.0],[41.7,-85.5]]',
+    lengthMi: '887 mi',
+    highPass: null, pois: [],
+    hero: `See I-65 right now — live DOT cameras and real-time conditions from the Gulf Coast to the Chicago area, each tagged with its mile marker. Nashville and Louisville traffic to Midwest winter weather, on one map.`,
+    segs: [
+      ['Gulf Coast to the Great Lakes', `I-65 runs about 887 miles from Mobile, Alabama to Gary, Indiana, crossing four states — Alabama, Tennessee, Kentucky, and Indiana — through Birmingham, Nashville, Louisville, and Indianapolis.`],
+      ['Where the trouble is', `Nashville's downtown interchange with I-40 and I-24, Louisville, and Indianapolis are the three big metro chokepoints along the route. Near Mobile, Gulf Coast humidity brings frequent summer thunderstorms and occasional hurricane exposure; further north, Kentucky and southern Indiana get real winter snow and ice, and even Alabama and Tennessee see occasional ice storms that catch the South underprepared.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-65 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-65 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything else.`],
+      ['How long is I-65?', `About 887 miles from Mobile, Alabama to Gary, Indiana.`],
+      ['Where does I-65 get congested?', `Nashville, Louisville, and Indianapolis are the three big metro chokepoints. The <a href="#comap">live cameras above</a> show which stretches are moving.`],
+      ['Does I-65 get winter weather?', `Yes — Kentucky and southern Indiana get real snow and ice most winters, and even Alabama and Tennessee see occasional ice storms. Track your mile marker through any of it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
+  {
+    slug: 'i-81', name: 'I-81', num: 81, states: ['TN','VA','WV','MD','PA','NY'],
+    subtitle: 'Tennessee to New York · the Appalachian trucking spine', bounds: '[[36.0,-83.5],[44.5,-75.5]]',
+    lengthMi: '855 mi',
+    highPass: null, pois: [],
+    hero: `See I-81 right now — live DOT cameras and real-time conditions along the Appalachian corridor, from the Tennessee mountains to the Canadian border in upstate New York, each tagged with its mile marker. One of the heaviest truck corridors in the country, on one map.`,
+    segs: [
+      ['Tennessee to the Canadian border', `I-81 runs about 855 miles from its start at I-40 near Dandridge, Tennessee to Wellesley Island, New York at the Canadian border, crossing six states — Tennessee, Virginia, West Virginia, Maryland, Pennsylvania, and New York. Virginia carries the longest and busiest stretch, at roughly 325 miles.`],
+      ['Where the trouble is', `Virginia's stretch of I-81 is one of the most truck-heavy corridors in the country and has one of the highest truck-crash rates in the state, mostly on aging two-lane sections through mountain terrain with steep grades and few passing lanes. VDOT's "Improve 81" program — a $4 billion, 65-project effort including new truck climbing lanes and widening — is actively under construction, with an updated Corridor Improvement Plan approved in January 2026. Winter ice and snow are a real factor the length of the corridor, especially in the Pennsylvania and New York mountains.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-81 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-81 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. Virginia's stretch is the one most likely to have active construction or incident-related restrictions — see the <a href="../../closures/">US closures map</a> for everything else.`],
+      ['How long is I-81?', `About 855 miles from an interchange with I-40 near Dandridge, Tennessee to Wellesley Island, New York at the Canadian border.`],
+      ['Why is I-81 in Virginia under construction?', `VDOT's Improve 81 program is a $4 billion, 65-project effort to widen the interstate, add truck climbing lanes on steep grades, and extend merge lanes across its 325-mile Virginia stretch — the segment with the corridor's worst truck-crash rates and congestion. An updated Corridor Improvement Plan was approved by the Commonwealth Transportation Board in January 2026, and work is actively underway.`],
+      ['Does I-81 get winter weather?', `Yes — the Pennsylvania and New York mountain sections see real snow and ice most winters, and Virginia and West Virginia get occasional ice storms too. Track your mile marker through any of it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
 ];

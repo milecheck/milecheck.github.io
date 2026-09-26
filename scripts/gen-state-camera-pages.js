@@ -157,8 +157,13 @@ const STATES = [
 ];
 
 // Self-updating coverage token — scripts/apply-coverage-counts.mjs refreshes the number
-// from data/coverage-ledger.json. Do NOT hardcode a count here again (drifted 25 vs 27, 2026-09-02).
-const HUB_CAMS = '<!--cov:cameras.us_states-->27<!--/cov-->';
+// from data/coverage-ledger.json. Do NOT hardcode a count here again (drifted 25 vs 27, 2026-09-02,
+// then 27 vs 42, 2026-09-26 — the JSON-LD FAQ strips the <!--cov--> comment markers at generation
+// time, so a stale literal here bakes a stale number into every state page's structured data with
+// no way for apply-coverage-counts.mjs to ever catch it afterward. Reading the ledger directly closes
+// that gap for good.)
+const LEDGER = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'coverage-ledger.json'), 'utf8'));
+const HUB_CAMS = `<!--cov:cameras.us_states-->${LEDGER.feeds.cameras.us_states}<!--/cov-->`;
 // JSON-LD cannot carry a comment marker, so the FAQ answer reads the ledger at build time.
 const LEDGER_CAM_STATES = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', 'data', 'coverage-ledger.json'), 'utf8')).feeds.cameras.us_states;
 

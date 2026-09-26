@@ -1389,6 +1389,30 @@
    "sponsor": "house"
   },
   {
+   "key": "corridor:i-35",
+   "path": "/corridors/i-35/",
+   "title": "I-35 Live Traffic Cameras & Road Conditions Right Now",
+   "sponsor": "house"
+  },
+  {
+   "key": "corridor:i-20",
+   "path": "/corridors/i-20/",
+   "title": "I-20 Live Traffic Cameras & Road Conditions Right Now",
+   "sponsor": "house"
+  },
+  {
+   "key": "corridor:i-65",
+   "path": "/corridors/i-65/",
+   "title": "I-65 Live Traffic Cameras & Road Conditions Right Now",
+   "sponsor": "house"
+  },
+  {
+   "key": "corridor:i-81",
+   "path": "/corridors/i-81/",
+   "title": "I-81 Live Traffic Cameras & Road Conditions Right Now",
+   "sponsor": "house"
+  },
+  {
    "key": "corridor:i-5",
    "path": "/corridors/i-5/",
    "title": "I-5 Live Traffic Cameras & Road Conditions Right Now",
@@ -2136,6 +2160,18 @@
    "key": "pass:cabbage-hill",
    "path": "/passes/cabbage-hill/",
    "title": "Cabbage Hill Cameras & Conditions Right Now (I-84)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:anthony-lakes",
+   "path": "/passes/anthony-lakes/",
+   "title": "Anthony Lakes road conditions right now (I-84 & OR 237)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:little-cottonwood",
+   "path": "/passes/little-cottonwood/",
+   "title": "Little Cottonwood Canyon road conditions right now (UT-210)",
    "sponsor": "house"
   },
   {
