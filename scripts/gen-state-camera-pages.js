@@ -175,6 +175,9 @@ const STATES = [
   { slug:'vermont', code:'VT', name:'Vermont', dot:'VTrans (New England 511)', bounds:'[[42.73,-73.43],[45.02,-71.46]]',
     blurb:`Vermont's cameras cover the interstates and the mountain gaps, where Green Mountain snow closes roads through the winter.`,
     notable:`Watch I-89 and I-91 through the state and its mountain passes.` },
+  { slug:'tennessee', code:'TN', name:'Tennessee', dot:'TDOT (SmartWay)', bounds:'[[34.98,-90.31],[36.68,-81.65]]',
+    blurb:`TDOT's SmartWay cameras cover the interstates end to end — I-40 across the state through Nashville and Knoxville, I-24 and I-65 through Nashville, and I-75 through Chattanooga — plus the fog-prone gorge where I-40 meets the North Carolina line. Most carry the route and mile marker.`,
+    notable:`Watch <a href="../../corridors/i-40/">I-40</a> the length of the state and through the Smokies fog near the North Carolina line, <a href="../../corridors/i-65/">I-65</a> and I-24 through Nashville, and <a href="../../corridors/i-75/">I-75</a> through Knoxville and Chattanooga.` },
 ];
 
 // Self-updating coverage token — scripts/apply-coverage-counts.mjs refreshes the number

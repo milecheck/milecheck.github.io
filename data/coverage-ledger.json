@@ -24,8 +24,7 @@
       "provinces": 3,
       "unavailable": [],
       "quiet_now": [
-        "MS",
-        "RI"
+        "MS"
       ],
       "us_state_codes": [
         "AK",
@@ -86,7 +85,7 @@
       ]
     },
     "cameras": {
-      "us_states": 42,
+      "us_states": 43,
       "provinces": 5,
       "unavailable": [],
       "us_state_codes": [
@@ -125,6 +124,7 @@
         "PA",
         "SC",
         "SD",
+        "TN",
         "TX",
         "UT",
         "VA",
@@ -140,7 +140,7 @@
         "AB",
         "MB"
       ],
-      "total_cameras": 50375,
+      "total_cameras": 50303,
       "total_cameras_floor": 50000
     },
     "mileposts": {
@@ -153,7 +153,7 @@
     }
   },
   "pages": {
-    "camera_states": 45,
+    "camera_states": 46,
     "camera_cities": 25,
     "bridge_states": 26,
     "corridors": 15,
