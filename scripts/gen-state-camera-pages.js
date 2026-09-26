@@ -22,7 +22,7 @@ const STATES = [
   { slug:'oregon', code:'OR', name:'Oregon', dot:'ODOT (TripCheck)', bounds:'[[41.99,-124.57],[46.29,-116.46]]',
     blurb:`Oregon DOT's TripCheck cameras cover the Willamette Valley, the Cascade passes, and the high desert of Eastern Oregon.`,
     notable:`Watch <a href="../../corridors/i-5/">I-5</a> from Portland south over <a href="../../passes/siskiyou/">Siskiyou Summit</a>, plus I-84 through the Columbia Gorge and the mountain passes on US-97 and US-26.` },
-  { slug:'california', code:'CA', name:'California', dot:'Caltrans', bounds:'[[32.5,-124.5],[42,-114.1]]',
+  { slug:'california', code:'CA', name:'California', dot:'Caltrans (QuickMap)', bounds:'[[32.5,-124.5],[42,-114.1]]',
     blurb:`Caltrans operates thousands of cameras statewide — the most of any state on this map — covering everything from Bay Area and LA freeways to the Sierra Nevada passes.`,
     notable:`See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.` },
   { slug:'utah', code:'UT', name:'Utah', dot:'UDOT', bounds:'[[37,-114.05],[42,-109.04]]',
