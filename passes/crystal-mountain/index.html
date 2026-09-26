@@ -294,9 +294,11 @@ const map=L.map('comap',{gestureHandling:TOUCH,scrollWheelZoom:true,preferCanvas
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Route cameras &amp; conditions: WSDOT via MileCheck',maxZoom:16}).addTo(map);
 const CRYSTAL={lat:46.9233,lon:-121.4760};
 const SEATTLE={lat:47.6062,lon:-122.3321};
+const ENUMCLAW={lat:47.2043,lon:-121.9915};
 map.fitBounds([[SEATTLE.lat,SEATTLE.lon],[CRYSTAL.lat,CRYSTAL.lon]],{padding:[36,36]});
 L.marker([CRYSTAL.lat,CRYSTAL.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">&#9650;</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('Crystal Mountain · 4,400 ft base',{direction:'top',offset:[0,-12],permanent:true,className:'poi-tip'}).addTo(map);
 L.marker([SEATTLE.lat,SEATTLE.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" style="color:#0f7a4f;">&#9679;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).bindTooltip('Seattle',{direction:'top',offset:[0,-8]}).addTo(map);
+L.marker([ENUMCLAW.lat,ENUMCLAW.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" style="color:#0f7a4f;">&#9679;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).bindTooltip('Enumclaw · last cell service',{direction:'top',offset:[0,-8]}).addTo(map);
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const cndLayer=L.layerGroup().addTo(map);
