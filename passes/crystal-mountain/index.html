@@ -313,8 +313,12 @@ const SEATTLE={lat:47.6062,lon:-122.3321};
 const ENUMCLAW={lat:47.2043,lon:-121.9915};
 map.fitBounds([[SEATTLE.lat,SEATTLE.lon],[CRYSTAL.lat,CRYSTAL.lon]],{padding:[36,36]});
 L.marker([CRYSTAL.lat,CRYSTAL.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">&#9650;</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('Crystal Mountain · 4,400 ft base',{direction:'top',offset:[0,-12],permanent:true,className:'poi-tip'}).addTo(map);
-L.marker([SEATTLE.lat,SEATTLE.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" style="color:#0f7a4f;">&#9679;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).bindTooltip('Seattle',{direction:'top',offset:[0,-8]}).addTo(map);
-L.marker([ENUMCLAW.lat,ENUMCLAW.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" style="color:#0f7a4f;">&#9679;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).bindTooltip('Enumclaw · last cell service',{direction:'top',offset:[0,-8]}).addTo(map);
+// Town waypoints, styled deliberately unlike the data-layer dots (green=camera,
+// blue=road report, red/orange=alert) so they read as "a place on the route," not
+// another data point.
+function townIcon(){return L.divIcon({className:'',html:'<div style="width:14px;height:14px;background:#0F1419;border:2px solid #fff;border-radius:3px;transform:rotate(45deg);box-shadow:0 1px 3px rgba(0,0,0,.35);"></div>',iconSize:[14,14],iconAnchor:[7,7]});}
+L.marker([SEATTLE.lat,SEATTLE.lon],{icon:townIcon(),zIndexOffset:400}).bindTooltip('Seattle',{direction:'top',offset:[0,-8]}).addTo(map);
+L.marker([ENUMCLAW.lat,ENUMCLAW.lon],{icon:townIcon(),zIndexOffset:400}).bindTooltip('Enumclaw · last cell service',{direction:'top',offset:[0,-8]}).addTo(map);
 // A visual route line, not turn-by-turn geometry -- every waypoint is a real,
 // confirmed coordinate (WSDOT's own camera positions at the I-5/SR 18 interchange,
 // the SR 18/SR 164 split near Auburn, and SR 410 near Enumclaw), connected with
