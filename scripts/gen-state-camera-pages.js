@@ -31,8 +31,11 @@ const STATES = [
     // just the length, leading with the agency name the query actually uses. Title/desc
     // drafted by ChatGPT per docs/emails/chatgpt-brief-camera-page-titles-2026-09-26.md,
     // approved by Leah. Kept as override so only CA changes.
-    title:'Caltrans Cameras | California Traffic Map | MileCheck',
-    desc:'View Caltrans camera images across California on one map. Check I-5, Donner Pass and other routes. Tap a camera for its latest image.' },
+    // Synced 2026-09-26 (later same day): round 2 had been hand-patched onto the built
+    // HTML only, not this source array — a future full regen would have silently
+    // reverted the live page back to round 1's wording. Now matches what's live.
+    title:'Caltrans Cameras | California Highway Map | MileCheck',
+    desc:'View Caltrans highway cameras on one map, with postmile labels where available. Check I-5, I-80, US-101 and SR-99.' },
   { slug:'utah', code:'UT', name:'Utah', dot:'UDOT', bounds:'[[37,-114.05],[42,-109.04]]',
     blurb:`Utah DOT's cameras cover the Wasatch Front, the canyons, and the interstate crossings of the high desert.`,
     notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas. In winter the Snowplows layer shows where UDOT's trucks are, each with the route and mile marker it is on and how long ago it reported.`,
