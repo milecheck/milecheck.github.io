@@ -36,18 +36,20 @@
     .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
     .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
     #comap{width:100%;height:62vh;min-height:440px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
-    .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:196px;font-size:13.5px;}
-    .co-layers .lt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 4px;}
-    .co-layer{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
+.co-layers-toggle{position:absolute;left:12px;top:84px;z-index:850;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;box-shadow:0 2px 8px rgba(0,0,0,.08);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
+    .co-layers{position:absolute;left:12px;top:122px;z-index:850;background:rgba(255,255,255,.97);border:1px solid #E5E5E5;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:6px 10px 4px;min-width:150px;font-size:12px;display:none;}
+    .co-layers.open{display:block;}
+    .co-layers .lt{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#5b6670;margin:0 0 2px;}
+    .co-layer{display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
     .co-layer input{position:absolute;opacity:0;width:0;height:0;}
-    .co-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
-    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+    .co-sw{flex:none;width:24px;height:14px;border-radius:8px;background:#cfd4da;position:relative;transition:background .15s;}
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
     .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
     .co-layer input:checked+.co-sw.alr{background:#DC2626;}
     .co-layer input:checked+.co-sw.cnd{background:#3B82F6;}
-    .co-layer input:checked+.co-sw::after{left:16px;}
-    .co-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:2px;}
-    @media(max-width:600px){ .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} }
+    .co-layer input:checked+.co-sw::after{left:12px;}
+    .co-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:1px;}
+    @media(max-width:600px){ .co-layers-toggle{top:auto;bottom:12px;}.co-layers{top:auto;bottom:54px;min-width:0;} }
     .co-bs{position:absolute;top:12px;right:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:13px;color:#0f7a4f;max-width:52%;text-align:right;}
     .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
     .co-card{position:absolute;bottom:12px;left:12px;width:min(320px,80%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
@@ -146,7 +148,8 @@
   <div class="co-wrap">
     <div style="position:relative;">
       <div id="comap"></div>
-      <div class="co-layers" role="group" aria-label="Map layers">
+      <button type="button" class="co-layers-toggle" id="layersToggle" aria-label="Map layers" title="Map layers">&#9776;</button>
+      <div class="co-layers" role="group" aria-label="Map layers" id="layersPanel">
         <div class="lt">Map layers</div>
         <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
         <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
@@ -194,8 +197,8 @@
 
     <div class="co-seg">
       <h3>The mountain's own snow report</h3>
-      <p>For lift status, snowfall totals, and the resort's own conditions, Crystal Mountain posts its own report directly.</p>
-      <p class="seg-src"><a href="https://www.crystalmountainresort.com/" target="_blank" rel="noopener">Crystal Mountain Resort</a> &middot; <a href="https://www.crystalmountainresort.com/discover-crystal/getting-here" target="_blank" rel="noopener">Getting here, from the resort</a></p>
+      <p>For lift status, snowfall totals, and current conditions, go to Crystal Mountain's website.</p>
+      <p class="seg-src"><a href="https://www.crystalmountainresort.com/" target="_blank" rel="noopener">Crystal Mountain Resort</a> &middot; <a href="https://www.crystalmountainresort.com/discover-crystal/getting-here" target="_blank" rel="noopener">Getting here, from the resort</a> &middot; <a href="https://www.crystalmountainresort.com/plan-your-trip/tickets-and-passes/day-tickets/winter-lift-tickets" target="_blank" rel="noopener">Lift tickets</a></p>
     </div>
   </section>
 
@@ -285,7 +288,20 @@ const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 // Sound ferry cameras that have nothing to do with this drive (checked 2026-09-25).
 // I-5 is capped to the SR 18 interchange stretch; the other three routes are
 // short enough that every real record on them belongs on this page.
-const ROUTES=[{re:/^I-\s*5\b/i,mpMin:135,mpMax:148},{re:/^SR\s*18\b/i},{re:/^SR\s*164\b/i},{re:/^SR\s*410\b/i}];
+// I-5 capped tight to the SR 18 interchange itself, not the whole South King County
+// stretch. SR 18 capped to MP 0-5, before its junction with SR 164 near Auburn --
+// past that, SR 18 continues toward North Bend, a different destination entirely,
+// not this route (checked 2026-09-25, WSDOT's own SR 18 interchange log confirms
+// the SR 164 exit sits in the low single-digit mileposts).
+// SR 410's own mileposts start near Sumner, well west of Enumclaw -- this route
+// joins SR 410 AT Enumclaw via SR 164, not from the Sumner end, so MP 9-17 near
+// Sumner (checked 2026-09-25 against real camera coordinates) isn't actually on
+// this drive either, same overreach as the SR 18 fix above.
+const ROUTES=[{re:/^I-\s*5\b/i,mpMin:139,mpMax:144},{re:/^SR\s*18\b/i,mpMin:0,mpMax:5},{re:/^SR\s*164\b/i},{re:/^SR\s*410\b/i,mpMin:20,mpMax:999}];
+// Thin a dense camera list to one every ~3 miles per route, so the map reads as a
+// handful of waypoints along the drive, not a full inventory of every WSDOT camera
+// near the corridor -- keeps the closest-to-start and closest-to-end cameras always.
+function thin(items,minGapMi){const byRoute={};items.forEach(c=>{const key=String(c.route||'').toUpperCase().replace(/\s+/g,'');(byRoute[key]=byRoute[key]||[]).push(c);});const out=[];for(const key in byRoute){const list=byRoute[key].filter(c=>isFinite(+c.mp)).sort((a,b)=>a.mp-b.mp);let lastMp=null;list.forEach((c,i)=>{if(lastMp==null||c.mp-lastMp>=minGapMi||i===list.length-1){out.push(c);lastMp=c.mp;}});byRoute[key].filter(c=>!isFinite(+c.mp)).forEach(c=>out.push(c));}return out;}
 function onRoute(route,mp){route=String(route||'');for(const r of ROUTES){if(r.re.test(route)){if(r.mpMin==null)return true;const m=Number(mp);return isFinite(m)&&m>=r.mpMin&&m<=r.mpMax;}}return false;}
 function onRouteName(name){return /\b410\b/.test(String(name||''));}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
@@ -299,6 +315,12 @@ map.fitBounds([[SEATTLE.lat,SEATTLE.lon],[CRYSTAL.lat,CRYSTAL.lon]],{padding:[36
 L.marker([CRYSTAL.lat,CRYSTAL.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">&#9650;</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('Crystal Mountain · 4,400 ft base',{direction:'top',offset:[0,-12],permanent:true,className:'poi-tip'}).addTo(map);
 L.marker([SEATTLE.lat,SEATTLE.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" style="color:#0f7a4f;">&#9679;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).bindTooltip('Seattle',{direction:'top',offset:[0,-8]}).addTo(map);
 L.marker([ENUMCLAW.lat,ENUMCLAW.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" style="color:#0f7a4f;">&#9679;</div>',iconSize:[20,20],iconAnchor:[10,10]})}).bindTooltip('Enumclaw · last cell service',{direction:'top',offset:[0,-8]}).addTo(map);
+// A visual route line, not turn-by-turn geometry -- every waypoint is a real,
+// confirmed coordinate (WSDOT's own camera positions at the I-5/SR 18 interchange,
+// the SR 18/SR 164 split near Auburn, and SR 410 near Enumclaw), connected with
+// straight segments so the map reads as "this is roughly your drive," not a
+// promise of exact road-following precision.
+L.polyline([[47.290298,-122.306118],[47.303094,-122.224602],[ENUMCLAW.lat,ENUMCLAW.lon],[47.199387,-121.978888],[CRYSTAL.lat,CRYSTAL.lon]],{color:'#0f7a4f',weight:3,opacity:.55,dashArray:'2,8',lineCap:'round'}).addTo(map);
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const cndLayer=L.layerGroup().addTo(map);
@@ -321,10 +343,11 @@ function draw(){camLayer.clearLayers();alrLayer.clearLayers();cndLayer.clearLaye
   if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
   if(showCnd)CONDS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(8),color:'#fff',weight:1.5,fillColor:'#3B82F6',fillOpacity:.95}).on('click',()=>showCard(cndCard(c),false)).addTo(cndLayer));
   const bits=[];if(showCam)bits.push(CAMS.length+' cameras');if(showAlr)bits.push(ALERTS.length+' alerts');if(showCnd)bits.push(CONDS.length+' road reports');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' on this route':'Toggle a layer to view route data';}
+document.getElementById('layersToggle').onclick=()=>{document.getElementById('layersPanel').classList.toggle('open');};
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 document.getElementById('tgCnd').onchange=e=>{showCnd=e.target.checked;draw();};
-Promise.all([loadCams(),loadAlerts(),loadConds()]).then(([c,a,w])=>{CAMS=c;ALERTS=a;CONDS=w;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();const fc=ALERTS.filter(isFullClosure);if(fc.length){const bn=document.getElementById('critBanner');bn.innerHTML='⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' on your route: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'.';bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+Promise.all([loadCams(),loadAlerts(),loadConds()]).then(([c,a,w])=>{CAMS=thin(c,3);ALERTS=a;CONDS=w;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();const fc=ALERTS.filter(isFullClosure);if(fc.length){const bn=document.getElementById('critBanner');bn.innerHTML='⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' on your route: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'.';bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
 // Snow level (not snow depth) -- the elevation where NWS's grid forecast expects
 // rain to turn to snow right now, at Crystal Mountain's coordinates. Real NWS
 // data (api.weather.gov gridpoints, field "snowLevel", meters), not a guess --
