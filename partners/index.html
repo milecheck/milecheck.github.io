@@ -480,11 +480,13 @@
     <section class="ent-hero">
       <div class="container">
         <p class="eyebrow">For platforms and partners</p>
-        <h1>The highway intelligence layer &mdash; licensable, integrable, already in production.</h1>
+        <h1>Milepost data and road conditions for your platform.</h1>
         <p class="ent-hero-sub">
-          Most milepost data products stop at the static layer: &ldquo;where is MP 142?&rdquo; MileCheck delivers both &mdash; that milepost lookup <em>plus</em> live conditions at MP 142 right now, normalized from 50 state DOT feeds across 19 distinct upstream platform formats. One schema. One API response. No state contracts on your side.
+          Add milepost lookup and DOT alerts to your dispatch software or driver app &mdash; normalized from 50 state DOT feeds across 19 upstream formats into one schema, one API.
         </p>
-        <a href="mailto:info@milecheckapp.com" class="ent-hero-cta">Open a conversation &rarr;</a>
+        <a href="#products" class="ent-hero-cta">Explore the data</a>
+        <span style="display:inline-block;width:24px;"></span>
+        <a href="#contact" class="ent-hero-cta">Discuss an integration &rarr;</a>
         <p style="font-size:13px;color:#6B7280;margin:16px 0 0;font-weight:600;">Live on the Geotab Marketplace &mdash; the fleet add-in runs in MyGeotab today &middot; data API by license.</p>
 
         <!-- Brand proof strip -->
@@ -492,97 +494,12 @@
       </div>
     </section>
 
-    <!-- ============== THE EVIDENCE ============== -->
-    <section class="ent-section ent-section-alt">
-      <div class="container">
-        <p class="ent-section-label">Why the layer matters</p>
-        <h2>The mile marker is the location format institutions actually run on.</h2>
-        <p class="ent-section-intro">GPS didn&rsquo;t retire the mile marker &mdash; it exposed how much emergency response, dispatch, and the entire highway data system still depend on it. The evidence is primary-sourced:</p>
-        <div class="audience-grid">
-          <div class="audience-cell">
-            <h4>It&rsquo;s what dispatch asks for</h4>
-            <p>&ldquo;When calling #77 or 911 for emergency assistance, providing the information on a mile marker sign will help responders reach you quickly.&rdquo;<br><span style="font-size:12px;opacity:.7;">&mdash; Virginia DOT, official guidance</span></p>
-          </div>
-          <div class="audience-cell">
-            <h4>Cell-phone 911 location is often wrong</h4>
-            <p>The FCC requires carriers to deliver an accurate location for only <strong>80% of wireless 911 calls</strong> &mdash; and highways are the worst case, where cell towers line up in a row and triangulation fails.<br><span style="font-size:12px;opacity:.7;">&mdash; FCC E911 location-accuracy rules</span></p>
-          </div>
-          <div class="audience-cell">
-            <h4>The maps in your pocket won&rsquo;t show it</h4>
-            <p>Google and Apple Maps deliberately omit mileposts &mdash; Google&rsquo;s own support threads tell users there&rsquo;s no setting, and to use a dedicated app. The one number a responder needs is the one consumer maps won&rsquo;t display.<br><span style="font-size:12px;opacity:.7;">&mdash; Google Maps support</span></p>
-          </div>
-          <div class="audience-cell">
-            <h4>The whole system is milepost-referenced</h4>
-            <p>DOTs locate nearly everything &mdash; crashes, work zones, signs, 511 alerts &mdash; by route + milepost. Since 2014, FHWA&rsquo;s ARNOLD mandate requires every state to maintain milepost-referenced inventories of all public roads.<br><span style="font-size:12px;opacity:.7;">&mdash; FHWA ARNOLD / Linear Referencing</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== INFRASTRUCTURE ============== -->
-    <section class="ent-section">
-      <div class="container">
-        <p class="ent-section-label">The infrastructure</p>
-        <h2>Six layers, one stack.</h2>
-        <div class="infra-grid">
-          <div class="infra-cell">
-            <div class="infra-cell-num mono">01</div>
-            <h3>Milepost corpus</h3>
-            <p>Every interstate, US highway, and most state routes in all 50 states. Sourced from official DOT and GIS records, never crowdsourced. Bundled offline in the app; available as a licensed dataset.</p>
-          </div>
-          <div class="infra-cell">
-            <div class="infra-cell-num mono">02</div>
-            <h3>DOT integration corpus</h3>
-            <p>50 state DOTs integrated, each on a different platform. One dispatcher normalizes every source into a single conditions and incident schema.</p>
-          </div>
-          <div class="infra-cell">
-            <div class="infra-cell-num mono">03</div>
-            <h3>Navigate-to-milepost primitive</h3>
-            <p>A mile marker is a destination, not just a display element. Tapping one hands off to Google Maps, Apple Maps, or Waze as a routing target &mdash; built for dispatch-to-driver handoffs.</p>
-          </div>
-          <div class="infra-cell">
-            <div class="infra-cell-num mono">04</div>
-            <h3>CarPlay &amp; Android Auto</h3>
-            <p>Live on CarPlay and Android Auto. Apple&rsquo;s Driving Task entitlement requires a separate review most transportation apps don&rsquo;t qualify for &mdash; MileCheck passed it. Same data layer, on the vehicle screen.</p>
-          </div>
-          <div class="infra-cell">
-            <div class="infra-cell-num mono">05</div>
-            <h3>Real-time infrastructure status</h3>
-            <p>Live CBP commercial border-crossing wait times, plus movable-bridge open/closed status in Seattle and Florida &mdash; signals no consumer map surfaces. Federal opening rules for 800+ regulated US drawbridges are normalized in the corpus.</p>
-          </div>
-          <div class="infra-cell" style="grid-column:1 / -1;">
-            <div class="infra-cell-num mono">06</div>
-            <h3>Historical archive</h3>
-            <p>Every state DOT and Canadian provincial feed (DriveBC, Alberta, Manitoba), saved every two hours since September 2026 (daily before that, back to mid-August) &mdash; a growing record of a data source the agencies themselves purge within hours. No public archive like it exists today. This is what let us compute real crash-clearance times, bridge-raise duration histograms, and border-wait curves by hour and day, not estimates &mdash; the underwriting-grade signal a live feed alone can&rsquo;t produce. Available as a historical dataset or a continuous feed, separate from the live API.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== AUDIENCE FIT ============== -->
-    <section class="ent-section ent-section-alt">
-      <div class="container">
-        <p class="ent-section-label">Who we talk to</p>
-        <h2>Seven segments where mile-marker precision is the missing layer.</h2>
-        <div style="max-width:820px;margin-top:28px;">
-          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Fleet management</strong> &mdash; &ldquo;I&rsquo;m at MP 184 on I-80.&rdquo; That&rsquo;s how drivers report location; telematics only logs coordinates. We&rsquo;re the translation layer.</div>
-          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Mapping &amp; navigation</strong> &mdash; 50 GIS negotiations, 19 schemas, or one license. The corpus is licensable today.</div>
-          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>511 / traveler information</strong> &mdash; one corridor, five agency logins. We already normalized all 50.</div>
-          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Digital freight &amp; logistics</strong> &mdash; &ldquo;Meet the driver at I-80 MP 184.&rdquo; No native equivalent in consumer nav today.</div>
-          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Roadside &amp; incident response</strong> &mdash; &ldquo;Can you find a sign and read it back?&rdquo; We turn the marker into a routable point.</div>
-          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Towing &amp; dispatch platforms</strong> &mdash; &ldquo;Disabled vehicle, I-5 NB MP 164.&rdquo; One API call, zero state-DOT contracts on your side.</div>
-          <div style="padding:16px 0;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;"><strong>State DOTs &amp; agencies</strong> &mdash; the corridor doesn&rsquo;t stop at the state line. One feed, every neighboring agency.</div>
-        </div>
-        <p style="margin-top:28px;"><a href="mailto:info@milecheckapp.com" style="color:#00A86B;font-weight:700;text-decoration:none;border-bottom:1px solid #00A86B;">Open a conversation &rarr;</a></p>
-      </div>
-    </section>
-
-    <!-- ============== BUILD VS LICENSE ============== -->
+    <!-- ============== PROOF ============== -->
     <section class="ent-section" id="build-vs-license">
       <div class="container">
         <p class="ent-section-label">Build vs. license</p>
         <h2>Building the data is harder than building the app.</h2>
-        <p class="ent-section-intro">MileCheck runs alongside your routing or weather stack. <strong>Direct-from-state-DOT road events &mdash; closures, construction, crashes, chain controls &mdash; tied to the exact mile marker.</strong> No driver accounts; the vehicle&rsquo;s location stays in your platform, not ours. A coordinate-to-milepost lookup exists elsewhere. The <em>live conditions</em> at that milepost, running in production across 50 agencies, are the hard part to copy.</p>
+        <p class="ent-section-intro">MileCheck runs alongside your routing or weather stack. Direct-from-state-DOT road events &mdash; closures, construction, crashes, chain controls &mdash; tied to the exact mile marker. No driver accounts; the vehicle&rsquo;s location stays in your platform, not ours.</p>
         <div class="proof-grid">
           <div class="proof-cell">
             <div class="proof-cell-num">50</div>
@@ -601,9 +518,8 @@
             <div class="proof-cell-label"><strong>monitored feeds</strong> &mdash; per state</div>
           </div>
         </div>
-        <p style="text-align:center;font-size:14px;font-weight:600;color:#000;margin-top:24px;">Proven in production on iOS, Android, CarPlay, and Android Auto.</p>
-        <p style="text-align:center;font-size:14px;color:#525252;margin-top:10px;max-width:740px;margin-left:auto;margin-right:auto;">Validated continuously by a <strong style="color:#000;">nationwide tester network</strong> of real drivers, plus automated per-source monitoring on the feeds.</p>
-        <p style="text-align:center;font-size:13px;margin-top:8px;opacity:0.8;"><a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="color:#00A86B;font-weight:600;">&#8599; Live API status</a></p>
+        <p style="text-align:center;font-size:14px;font-weight:600;color:#000;margin-top:24px;">Proven in production on iOS, Android, CarPlay, and Android Auto &mdash; and live today inside MyGeotab as a fleet Add-In.</p>
+        <p style="text-align:center;font-size:13px;margin-top:8px;"><a href="#geotab" style="color:#00A86B;font-weight:600;text-decoration:none;border-bottom:1px solid #00A86B;">See the Geotab Add-In &darr;</a> &nbsp;&middot;&nbsp; <a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="color:#00A86B;font-weight:600;text-decoration:none;border-bottom:1px solid #00A86B;">Live API status &#8599;</a></p>
         <div style="margin-top:32px;max-width:820px;margin-left:auto;margin-right:auto;">
           <style>
             .b2b-acc summary{list-style:none;cursor:pointer;font-size:15px;font-weight:700;color:#00A86B;padding:14px 0;border-top:1px solid #E5E5E5;}
@@ -623,8 +539,86 @@
               </ul>
             </div>
           </details>
-          <p style="margin-top:24px;font-size:15px;color:#6B7280;">MileCheck solved this once, in production, for a consumer app live on both stores. Available to license today.</p>
         </div>
+      </div>
+    </section>
+
+
+    <!-- ============== PRODUCTS ============== -->
+    <section class="ent-section" id="products">
+      <div class="container">
+        <p class="ent-section-label">The offer</p>
+        <h2>Three products, each usable on its own.</h2>
+
+        <div style="margin-top:8px;padding:28px 0;border-top:1px solid #E5E5E5;">
+          <h3 style="font-size:20px;font-weight:800;margin:0 0 6px;">Milepost dataset</h3>
+          <p style="font-size:14px;color:#525252;line-height:1.6;max-width:720px;margin:0 0 16px;">Every interstate, US highway, and most state routes in all 50 states. Sourced from official DOT and GIS records, never crowdsourced, interpolated to one-tenth of a mile between markers.</p>
+          <ul style="list-style:none;margin:0;padding:0;font-size:13.5px;color:#525252;line-height:1.9;">
+            <li><strong style="color:#000;">Coverage</strong> &mdash; 50 states, continuously updated as routes are added or reclassified.</li>
+            <li><strong style="color:#000;">Fields</strong> &mdash; route ID, mile, latitude, longitude.</li>
+            <li><strong style="color:#000;">Delivery</strong> &mdash; structured dataset export, or continuous sync.</li>
+            <li><strong style="color:#000;">Also includes</strong> &mdash; a navigate-to-milepost primitive (a marker as a routing target, handed off to Google Maps, Apple Maps, or Waze) and the same data on CarPlay and Android Auto.</li>
+            <li><strong style="color:#000;">Limitation</strong> &mdash; positions are interpolated between physical signs, not individually GPS-surveyed.</li>
+          </ul>
+        </div>
+
+        <div style="padding:28px 0;border-top:1px solid #E5E5E5;">
+          <h3 style="font-size:20px;font-weight:800;margin:0 0 6px;">Live conditions API</h3>
+          <p style="font-size:14px;color:#525252;line-height:1.6;max-width:720px;margin:0 0 16px;">50 state DOTs and 3 Canadian provinces, each on a different upstream platform, normalized into one schema. Closures, construction, crashes, chain controls, and weather &mdash; tied to the exact mile marker.</p>
+          <ul style="list-style:none;margin:0 0 18px;padding:0;font-size:13.5px;color:#525252;line-height:1.9;">
+            <li><strong style="color:#000;">Coverage</strong> &mdash; 50 states + <!--cov:alerts.provinces-->3<!--/cov--> provinces, 19 upstream formats, one schema.</li>
+            <li><strong style="color:#000;">Also normalized</strong> &mdash; live CBP commercial border-crossing waits, and movable-bridge open/closed status (Seattle, Florida).</li>
+            <li><strong style="color:#000;">Refresh</strong> &mdash; matches each source's own posting cadence; every feed is monitored, not polled blind.</li>
+            <li><strong style="color:#000;">Unavailable-source behavior</strong> &mdash; ten states' live feeds don't carry crash data at all (Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, West Virginia); the API says so rather than returning a silent zero.</li>
+          </ul>
+          <p style="font-size:12.5px;color:#999;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin:0 0 8px;">Real response, pulled live</p>
+          <pre style="background:#0F1419;color:#D7DEE5;border-radius:10px;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;overflow-x:auto;margin:0;">{
+  "event-type-id": "CL",
+  "headline": "Bridge demolition work on 101-LOOP Southbound from W Indian School Rd (MP 4) to I-10 Eastbound (MP 2). All lanes closed.",
+  "location": {
+    "route-id": "SR-101",
+    "direction": "South",
+    "start-location": { "start-mile-marker": "4", "start-lat": 33.4939, "start-long": -112.2641 },
+    "end-location":   { "end-mile-marker": "2",   "end-lat": 33.4655,   "end-long": -112.2688 }
+  },
+  "is-full-closure": true,
+  "severity": "Minor",
+  "start-time": 1790395200,
+  "end-time": 1790596800
+}</pre>
+          <p style="font-size:12px;color:#999;margin:8px 0 0;">Arizona DOT, live on <a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="color:#00A86B;">/v1</a>, pulled September 25, 2026.</p>
+        </div>
+
+        <div style="padding:28px 0;border-top:1px solid #E5E5E5;">
+          <h3 style="font-size:20px;font-weight:800;margin:0 0 6px;">Historical archive</h3>
+          <p style="font-size:14px;color:#525252;line-height:1.6;max-width:720px;margin:0 0 16px;">Every state DOT and Canadian provincial feed (DriveBC, Alberta, Manitoba), saved on a schedule &mdash; a growing record of a source the agencies themselves purge within hours. No public archive like it exists today.</p>
+          <ul style="list-style:none;margin:0;padding:0;font-size:13.5px;color:#525252;line-height:1.9;">
+            <li><strong style="color:#000;">Collection interval</strong> &mdash; every two hours since September 2026, daily before that, back to mid-August.</li>
+            <li><strong style="color:#000;">Gaps</strong> &mdash; a jurisdiction's history starts the day its live integration went in, not before.</li>
+            <li><strong style="color:#000;">What it's produced</strong> &mdash; real crash-clearance times, bridge-raise duration histograms, and border-wait curves by hour and day, measured rather than estimated.</li>
+            <li><strong style="color:#000;">Delivery</strong> &mdash; a dated export, or a continuous sync, separate from the live API.</li>
+          </ul>
+        </div>
+
+        <p style="margin-top:24px;font-size:14px;color:#6B7280;">MileCheck solved this once, in production, for a consumer app live on both stores. Available to license today.</p>
+      </div>
+    </section>
+
+    <!-- ============== AUDIENCE FIT ============== -->
+    <section class="ent-section ent-section-alt">
+      <div class="container">
+        <p class="ent-section-label">Who we talk to</p>
+        <h2>Seven segments where mile-marker precision is the missing layer.</h2>
+        <div style="max-width:820px;margin-top:28px;">
+          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Fleet management</strong> &mdash; &ldquo;I&rsquo;m at MP 184 on I-80.&rdquo; That&rsquo;s how drivers report location; telematics only logs coordinates. We&rsquo;re the translation layer.</div>
+          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Mapping &amp; navigation</strong> &mdash; 50 GIS negotiations, 19 schemas, or one license. The corpus is licensable today.</div>
+          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>511 / traveler information</strong> &mdash; one corridor, five agency logins. We already normalized all 50.</div>
+          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Digital freight &amp; logistics</strong> &mdash; &ldquo;Meet the driver at I-80 MP 184.&rdquo; No native equivalent in consumer nav today.</div>
+          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Roadside &amp; incident response</strong> &mdash; &ldquo;Can you find a sign and read it back?&rdquo; We turn the marker into a routable point.</div>
+          <div style="padding:16px 0;border-top:1px solid #E5E5E5;"><strong>Towing &amp; dispatch platforms</strong> &mdash; &ldquo;Disabled vehicle, I-5 NB MP 164.&rdquo; One API call, zero state-DOT contracts on your side.</div>
+          <div style="padding:16px 0;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;"><strong>State DOTs &amp; agencies</strong> &mdash; the corridor doesn&rsquo;t stop at the state line. One feed, every neighboring agency.</div>
+        </div>
+        <p style="margin-top:28px;"><a href="#contact" style="color:#00A86B;font-weight:700;text-decoration:none;border-bottom:1px solid #00A86B;">Request a sample &rarr;</a></p>
       </div>
     </section>
 
@@ -650,61 +644,38 @@
       </div>
     </section>
 
-    <!-- ============== CORRIDOR BOARDS ============== -->
+    <!-- ============== OTHER WAYS IN (link-outs, not full pitches) ============== -->
     <section class="ent-section">
       <div class="container">
-        <p class="ent-section-label">Corridor boards</p>
-        <h2>Live road conditions on a screen in your venue.</h2>
-        <p class="ent-section-intro">A MileCheck corridor board turns any TV in a truck stop, travel center, diner, or gas station into a live dashboard for the highway outside your door &mdash; closures, crashes, chain controls, and weather for your stretch of interstate, updating around the clock from the same direct-from-DOT layer that powers the app.</p>
-        <div class="infra-grid" style="margin-top:36px;">
+        <p class="ent-section-label">Other ways in</p>
+        <h2>Not a data buyer? Two more doors.</h2>
+        <div class="infra-grid">
           <div class="infra-cell">
-            <h3>For venues</h3>
-            <p>The board is free. We configure it for your corridor and your location &mdash; drivers walk in, see exactly what's ahead on their route, and your venue becomes the place that knows the road.</p>
+            <h3>Corridor boards</h3>
+            <p>A free live-conditions screen for your truck stop, travel center, or diner &mdash; one sponsor slot included.</p>
+            <p style="margin-top:14px;"><a href="/partners/corridor-boards.html" style="color:#00A86B;font-weight:700;text-decoration:none;border-bottom:1px solid #00A86B;">See how it works &rarr;</a></p>
           </div>
           <div class="infra-cell">
-            <h3>For sponsors</h3>
-            <p>One sponsor slot per screen &mdash; your brand alongside the one piece of information every driver in the building actually came in wondering about.</p>
-          </div>
-          <div class="infra-cell">
-            <h3>How it runs</h3>
-            <p>Any screen with a browser &mdash; no hardware to buy, nothing to install or maintain. The board is a live web page that keeps itself current.</p>
+            <h3>Website sponsorships</h3>
+            <p>One sponsor slot on camera, corridor, pass, and drawbridge pages that already rank. Website only; the app has no ads.</p>
+            <p style="margin-top:14px;"><a href="/sponsor/" style="color:#00A86B;font-weight:700;text-decoration:none;border-bottom:1px solid #00A86B;">Pricing and traffic &rarr;</a></p>
           </div>
         </div>
-        <figure style="margin:36px 0 10px;">
-          <img src="/images/corridor-board-issaquah.jpg" alt="A MileCheck corridor board showing live Snoqualmie Pass status, a WSDOT camera, travel time over the pass, and a sponsor slot along the bottom" loading="lazy" style="width:100%;max-width:900px;display:block;margin:0 auto;border-radius:10px;border:1px solid rgba(255,255,255,0.14);">
-          <figcaption style="margin:12px auto 0;max-width:900px;font-size:13px;line-height:1.55;color:rgba(255,255,255,0.55);text-align:center;">A board configured for a fuel stop on I-90. Venue and sponsor names shown are examples &mdash; the pass status, camera, and travel time are live from WSDOT.</figcaption>
-        </figure>
-
-        <p style="margin-top:30px;font-size:15px;line-height:1.6;">See one running right now &mdash;
-          <a href="/boards/issaquah.html" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">Snoqualmie Pass</a>,
-          <a href="/boards/blaine.html" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">the Blaine border</a>, or
-          <a href="/boards/ballard.html" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">the Ballard drawbridges</a>.
-          Each one is live data, not a mockup.</p>
-
-        <p style="margin-top:18px;font-size:15px;line-height:1.6;">To put a board in your venue &mdash; or your brand on one &mdash; email <a href="mailto:info@milecheckapp.com" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">info@milecheckapp.com</a>.</p>
-      </div>
-    </section>
-
-    <!-- ============== WEBSITE SPONSORSHIPS (2026-09-15) ============== -->
-    <section class="ent-section" id="sponsor">
-      <div class="container">
-        <p class="ent-section-label">Website sponsorships</p>
-        <h2>Sponsor a topic on milecheckapp.com.</h2>
-        <p class="ent-section-intro">Every camera page, corridor page, pass page, drawbridge page, mile-marker guide and highway-basics guide carries one sponsor slot at the top of the page. Sponsorships are sold by topic, one sponsor per topic. Website only; the app has no ads.</p>
-        <p style="margin-top:18px;font-size:15px;line-height:1.6;">Viewable impressions and outbound clicks are counted on the slot itself. Sponsors get the numbers. Email <a href="mailto:sales@milecheckapp.com" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">sales@milecheckapp.com</a>.</p>
-        <p style="margin-top:12px;font-size:15px;line-height:1.6;"><a href="/sponsor/" style="font-weight:700;">The offering, pricing by email, and the traffic &rarr;</a></p>
       </div>
     </section>
 
     <!-- ============== CTA ============== -->
-    <section class="cta-section">
+    <section class="cta-section" id="geotab">
       <div class="container">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
           <div>
-            <p class="ent-section-label">Open a conversation</p>
-            <h2>Get in touch.</h2>
+            <p class="ent-section-label" id="contact">Request sample data</p>
+            <h2>See it before you commit to it.</h2>
             <p class="cta-body">
-              For partnership and platform inquiries, contact <a href="mailto:info@milecheckapp.com" style="color:#00C880;border-bottom:1px solid #00C880;text-decoration:none;">info@milecheckapp.com</a>.
+              Tell us your intended use and geography &mdash; a state, a corridor, or nationwide &mdash; and which product: milepost dataset, live conditions API, or historical archive. We'll send a real sample back.
+            </p>
+            <p class="cta-body" style="margin-top:14px;">
+              <a href="mailto:info@milecheckapp.com?subject=Sample%20data%20request&body=Product%3A%20(milepost%20dataset%20%2F%20live%20conditions%20API%20%2F%20historical%20archive)%0AIntended%20use%3A%0AGeography%3A%20" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">Request a sample &rarr;</a>
             </p>
           </div>
           <div style="border:1px solid rgba(255,255,255,0.16);border-radius:14px;padding:26px 28px;background:rgba(255,255,255,0.03);">
