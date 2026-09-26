@@ -2203,6 +2203,12 @@
    "path": "/passes/vail/",
    "title": "Vail Pass Camera & Conditions Right Now (I-70)",
    "sponsor": "house"
+  },
+  {
+   "key": "cameras:new-mexico",
+   "path": "/cameras/new-mexico/",
+   "title": "New Mexico Traffic Cameras — Live NMDOT (NMRoads) Highway Cams",
+   "sponsor": "house"
   }
  ]
 }
