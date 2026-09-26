@@ -1,0 +1,13 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-09-26T00:00:00Z"},
+  "title": "MileCheck Sponsor One-Pager",
+  "launch": {"view": "focused", "file": "Main.dc.html"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 880, "h": 1600, "expand": "fill", "title": "Sponsor One-Pager"}
+  },
+  "order": ["Main.dc.html"],
+  "notes": {},
+  "designSystems": []
+}
