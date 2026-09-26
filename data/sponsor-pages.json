@@ -2209,6 +2209,12 @@
    "path": "/cameras/new-mexico/",
    "title": "New Mexico Traffic Cameras — Live NMDOT (NMRoads) Highway Cams",
    "sponsor": "house"
+  },
+  {
+   "key": "cameras:texas",
+   "path": "/cameras/texas/",
+   "title": "Texas Traffic Cameras — Live TxDOT Highway Cams",
+   "sponsor": "house"
   }
  ]
 }
