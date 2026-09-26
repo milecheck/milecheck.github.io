@@ -25,15 +25,22 @@ const STATES = [
   { slug:'california', code:'CA', name:'California', dot:'Caltrans (QuickMap)', bounds:'[[32.5,-124.5],[42,-114.1]]',
     blurb:`Caltrans operates thousands of cameras statewide — the most of any state on this map — covering everything from Bay Area and LA freeways to the Sierra Nevada passes.`,
     notable:`See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.`,
-    // Single-variable CTR test, 2026-09-26: the default template + "(QuickMap)" ran at
-    // 78 chars, past Google's ~60-char title truncation budget (own SERP data showed
-    // 0.4% CTR at position 7.3 vs 1.6-6.6% for other states). Title/desc override here
-    // shortens both so they don't truncate, kept as override so only CA changes.
-    title:'California Traffic Cameras (Caltrans QuickMap) | MileCheck',
-    desc:'Every Caltrans QuickMap camera in California, on one map, tagged by route and mile marker. See the road before you drive it.' },
+    // CTR test round 2, 2026-09-26: own SERP data showed the "caltrans cameras" query
+    // ranking position 7.3 but converting at 0.4% CTR, worst gap on the site. Round 1
+    // (same day) fixed a truncating title; this round changes the strategy instead of
+    // just the length, leading with the agency name the query actually uses. Title/desc
+    // drafted by ChatGPT per docs/emails/chatgpt-brief-camera-page-titles-2026-09-26.md,
+    // approved by Leah. Kept as override so only CA changes.
+    title:'Caltrans Cameras | California Traffic Map | MileCheck',
+    desc:'View Caltrans camera images across California on one map. Check I-5, Donner Pass and other routes. Tap a camera for its latest image.' },
   { slug:'utah', code:'UT', name:'Utah', dot:'UDOT', bounds:'[[37,-114.05],[42,-109.04]]',
     blurb:`Utah DOT's cameras cover the Wasatch Front, the canyons, and the interstate crossings of the high desert.`,
-    notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas. In winter the Snowplows layer shows where UDOT's trucks are, each with the route and mile marker it is on and how long ago it reported.` },
+    notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas. In winter the Snowplows layer shows where UDOT's trucks are, each with the route and mile marker it is on and how long ago it reported.`,
+    // 2026-09-26: "udot cameras" query converts at 1.6% CTR at position 4.5. The default
+    // template already leads with "Utah" not "UDOT" — this leads with the agency name
+    // instead. Per the same brief/approval as California above.
+    title:'UDOT Cameras | Utah Traffic Map | MileCheck',
+    desc:'View UDOT camera images across Utah on one map. Check I-15 and I-80 through Parleys Canyon. Tap a camera for its latest image.' },
   { slug:'montana', code:'MT', name:'Montana', dot:'MDT', bounds:'[[44.36,-116.05],[49,-104.04]]',
     blurb:`Most of Montana's cameras are its weather stations, along I-90, I-15, US-2 and MT-200, with up to four views at a site and each view tagged with the station's route and mile marker. The rest are MDT's own cameras and the border crossings. Winter wind and snow are the story on the open stretches.`,
     notable:`Watch <a href="../../corridors/i-90/">I-90</a> over Lookout, Homestake and Bozeman passes, I-15 from Monida Pass north to the border, US-2 along the Hi-Line, and <a href="../../corridors/i-94/">I-94</a> across the eastern plains. The weather-station views point along the road in each direction.` },
@@ -117,7 +124,15 @@ const STATES = [
     notable:`Watch <a href="../../corridors/i-70/">I-70</a> across the state between Kansas City and St. Louis, I-44 toward Springfield and Joplin, and I-55 south of St. Louis.` },
   { slug:'ohio', code:'OH', name:'Ohio', dot:'ODOT (OHGO)', bounds:'[[38.40,-84.82],[42.00,-80.52]]',
     blurb:`Ohio DOT's OHGO network is one of the densest camera systems in the Midwest, covering the Columbus, Cleveland, and Cincinnati metros and the interstates between them.`,
-    notable:`Watch <a href="../../corridors/i-90/">I-90</a> and <a href="../../corridors/i-80/">I-80</a> (the Ohio Turnpike) across the north, plus I-70, I-71, I-75, and the I-270 and I-275 beltways.` },
+    notable:`Watch <a href="../../corridors/i-90/">I-90</a> and <a href="../../corridors/i-80/">I-80</a> (the Ohio Turnpike) across the north, plus I-70, I-71, I-75, and the I-270 and I-275 beltways.`,
+    // 2026-09-26: Ohio and the Portland (Oregon DOT) page split the ambiguous "odot
+    // cameras" query — Ohio converts at 1.4% CTR, Portland wins the same query at 3.4%.
+    // Title now spells out OHGO instead of leaning on "ODOT" alone; a plain cross-link
+    // sends anyone who meant Oregon to that page instead. Same brief/approval as above.
+    title:'Ohio Traffic Cameras | ODOT OHGO Map | MileCheck',
+    desc:'View Ohio DOT camera images from OHGO on one map. Find a camera along your route and tap it for the latest image.',
+    sub:'View Ohio Department of Transportation (ODOT) cameras from OHGO on one map. Each is tagged with its route and mile marker — tap any camera for the latest image.',
+    crossLinkHtml:'<p class="sub" style="font-size:14px">Looking for Oregon cameras? <a href="https://milecheckapp.com/cameras/oregon/">View the Oregon camera map</a>.</p>' },
   { slug:'wisconsin', code:'WI', name:'Wisconsin', dot:'WisDOT (511WI)', bounds:'[[42.49,-92.89],[47.08,-86.80]]',
     blurb:`Wisconsin DOT's 511WI cameras cover the Milwaukee and Madison metros and the interstates where lake-effect and winter snow hit hard.`,
     notable:`Watch <a href="../../corridors/i-90/">I-90</a>, I-94, and I-43 through the southern half of the state.` },
@@ -247,8 +262,8 @@ function page(s){
   <meta name="description" content="${s.desc || `Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and ${w.marker}. See the road before you drive it.`}">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${s.slug}/">
 ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${s.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${s.slug}/">\n${PT_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${s.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${s.slug}/">` : ''}
-  <meta property="og:title" content="${s.name} Traffic Cameras — Live | MileCheck">
-  <meta property="og:description" content="Live ${s.name} highway cameras on one map, each tagged with route and ${w.marker}.">
+  <meta property="og:title" content="${s.title || `${s.name} Traffic Cameras — Live | MileCheck`}">
+  <meta property="og:description" content="${s.desc || `Live ${s.name} highway cameras on one map, each tagged with route and ${w.marker}.`}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/${s.slug}/">
   <meta property="og:type" content="website">
@@ -340,7 +355,8 @@ ${sp.css}
 ${sp.html}
 ${ES_PAGES.has(s.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${s.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(s.slug) ? ` · <a href="/pt/cameras/${s.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${s.name} · ${s.dot}</div>
     <h1>${s.name} traffic cameras, live</h1>
-    <p class="sub">See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and ${w.marker}. Tap any camera for the latest image.</p>
+    <p class="sub">${s.sub || `See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and ${w.marker}. Tap any camera for the latest image.`}</p>
+${s.crossLinkHtml || ''}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${s.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${s.dot.split('(')[0].trim()}</div><div class="l">camera source</div></div>${plows ? `

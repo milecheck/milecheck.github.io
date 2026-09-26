@@ -18,7 +18,14 @@ const CITIES = [
     freeways:`Watch <a href="../../corridors/i-5/">I-5</a> through downtown, <a href="../../corridors/i-90/">I-90</a> and SR-520 across Lake Washington, and I-405 on the Eastside.` },
   { slug:'portland', name:'Portland', state:'OR', dot:'ODOT', lat:45.52, lon:-122.68, r:40,
     blurb:`Portland's ODOT TripCheck cameras cover the metro freeways and the Columbia River crossings into Washington.`,
-    freeways:`Watch <a href="../../corridors/i-5/">I-5</a> and I-405 through the core, I-84 up the Columbia Gorge, and I-205 on the east side.` },
+    freeways:`Watch <a href="../../corridors/i-5/">I-5</a> and I-405 through the core, I-84 up the Columbia Gorge, and I-205 on the east side.`,
+    // 2026-09-26: splits the ambiguous "odot cameras" query with the Ohio page
+    // (Ohio DOT vs Oregon DOT). Title now says "Oregon" explicitly instead of
+    // just "ODOT" so Google stops blending the two. Per docs/emails/
+    // chatgpt-brief-camera-page-titles-2026-09-26.md, approved by Leah.
+    title:'Portland, Oregon Traffic Cameras | TripCheck | MileCheck',
+    desc:'View Oregon DOT TripCheck camera images around Portland. Check I-5 and I-205 on one map, then tap a camera for its latest image.',
+    sub:'View Oregon Department of Transportation (ODOT) TripCheck cameras around Portland on one map. Each is tagged with its route and mile marker — tap any camera for the latest image.' },
   { slug:'los-angeles', name:'Los Angeles', state:'CA', dot:'Caltrans', lat:34.05, lon:-118.24, r:60,
     blurb:`Los Angeles has the most-watched freeway network in America, and Caltrans covers it with hundreds of live cameras across the basin.`,
     freeways:`Watch <a href="../../corridors/i-5/">I-5</a>, <a href="../../corridors/i-10/">I-10</a>, I-405, US-101, and I-110 — plus <a href="../../passes/grapevine/">the Grapevine</a> on I-5 to the north and <a href="../../passes/cajon/">Cajon Pass</a> on I-15 to the northeast.` },
@@ -112,12 +119,12 @@ function page(c){
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${c.name} Traffic Cameras — Live ${c.dot} Freeway Cams | MileCheck</title>
-  <meta name="description" content="Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave.">
+  <title>${c.title || `${c.name} Traffic Cameras — Live ${c.dot} Freeway Cams | MileCheck`}</title>
+  <meta name="description" content="${c.desc || `Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave.`}">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${c.slug}/">
 ${ES_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${c.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${c.slug}/">\n${PT_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${c.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${c.slug}/">` : ''}
-  <meta property="og:title" content="${c.name} Traffic Cameras — Live | MileCheck">
-  <meta property="og:description" content="Live ${c.name} freeway cameras on one map, each tagged with route and mile marker.">
+  <meta property="og:title" content="${c.title || `${c.name} Traffic Cameras — Live | MileCheck`}">
+  <meta property="og:description" content="${c.desc || `Live ${c.name} freeway cameras on one map, each tagged with route and mile marker.`}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/${c.slug}/">
   <meta property="og:type" content="website">
@@ -198,7 +205,7 @@ ${sp.css}
 ${sp.html}
 ${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${c.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(c.slug) ? ` · <a href="/pt/cameras/${c.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
     <h1>${c.name} traffic cameras, live</h1>
-    <p class="sub">See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and mile marker. Tap any camera for the latest image.</p>
+    <p class="sub">${c.sub || `See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and mile marker. Tap any camera for the latest image.`}</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${c.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${c.dot}</div><div class="l">camera source</div></div>
