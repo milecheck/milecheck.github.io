@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" width="320" height="72" role="img" aria-label="Ritch Industries — Classic Car Restoration">
+  <circle cx="36" cy="36" r="31" fill="#173C2E"/>
+  <circle cx="36" cy="36" r="31" fill="none" stroke="#B8892A" stroke-width="2.25"/>
+  <g fill="#F1E9D8">
+    <path d="M15 42 q2 -9 11 -10 q3 -6 12 -6 q10 0 13 8 l6 0 q3 0 3 3 l0 4 q0 2 -2 2 l-2 0 a5 5 0 0 1 -10 0 l-16 0 a5 5 0 0 1 -10 0 l-3 0 q-2 0 -2 -1 z"/>
+    <circle cx="27" cy="43" r="3.4" fill="#173C2E" stroke="#F1E9D8" stroke-width="1.6"/>
+    <circle cx="49" cy="43" r="3.4" fill="#173C2E" stroke="#F1E9D8" stroke-width="1.6"/>
+    <circle cx="45" cy="30" r="1.6"/>
+  </g>
+  <text x="82" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-weight="700" letter-spacing="0.3" fill="#232323">RITCH INDUSTRIES</text>
+  <text x="82" y="49" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="600" letter-spacing="1.6" fill="#6B6459">CLASSIC CAR RESTORATION</text>
+</svg>

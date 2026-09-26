@@ -30,5 +30,26 @@
       "end": "2026-12-31"
     }
   },
-  "slots": {}
+  "slots": {
+    "pass:cabbage-hill": {
+      "id": "ritch-industries-demo",
+      "name": "Ritch Industries",
+      "copy": "Classic car restoration, right off the hill.",
+      "url": "/sponsor/?demo=ritch-industries",
+      "cta": "See our work",
+      "logo": "/images/sponsors/ritch-industries.svg",
+      "logoW": 320,
+      "logoH": 72
+    },
+    "pass:donner": {
+      "id": "ritch-industries-demo",
+      "name": "Ritch Industries",
+      "copy": "Classic car restoration, right off the hill.",
+      "url": "/sponsor/?demo=ritch-industries",
+      "cta": "See our work",
+      "logo": "/images/sponsors/ritch-industries.svg",
+      "logoW": 320,
+      "logoH": 72
+    }
+  }
 }
