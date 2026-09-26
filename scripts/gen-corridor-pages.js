@@ -220,6 +220,24 @@ const CORRIDORS = [
       ['Does I-70 close for snow in Colorado?', `Yes — CDOT runs traction and chain law restrictions and, in bad storms, full closures over <a href="../../passes/vail/">Vail Pass</a> and through the <a href="../../passes/eisenhower/">Eisenhower Tunnel</a> corridor, especially on winter weekends with heavy ski traffic. Track your mile marker through it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
+  {
+    slug: 'i-40', name: 'I-40', num: 40, states: ['CA','AZ','NM','TX','OK','AR','TN','NC'],
+    subtitle: 'California to North Carolina · Barstow to Wilmington', bounds: '[[32.5,-117.5],[37.5,-77.5]]',
+    lengthMi: '2,557 mi',
+    highPass: null, pois: [],
+    hero: `See I-40 right now — live DOT cameras and real-time conditions across one of the longest interstates in the country, from the Mojave Desert to the North Carolina coast, each tagged with its mile marker. Desert heat to Smoky Mountains storm damage, on one map.`,
+    segs: [
+      ['Coast to coast, almost', `I-40 runs about 2,557 miles from Barstow, California to Wilmington, North Carolina, crossing eight states — California, Arizona, New Mexico, Texas, Oklahoma, Arkansas, Tennessee, and North Carolina. It crosses the Mississippi River at Memphis on the Hernando de Soto Bridge and climbs into the Appalachians at the Tennessee–North Carolina line.`],
+      ['Where the trouble is', `The Mojave stretch through California and Arizona brings extreme summer heat with long gaps between services; near Flagstaff, Arizona, I-40 climbs above 6,900 feet and gets real winter snow and ice. The Texas Panhandle and Oklahoma see high wind and occasional ice storms. At the Tennessee–North Carolina line, I-40 through the Pigeon River Gorge is still recovering from catastrophic 2024 Hurricane Helene flood damage — traffic has run one lane each direction since a partial reopening in March 2025, with the full rebuild targeted for 2029.`],
+      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
+    ],
+    faq: [
+      ['Is I-40 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-40 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. The Pigeon River Gorge at the Tennessee–North Carolina line is the stretch most likely to have lane restrictions right now — see the <a href="../../closures/">US closures map</a> for everything else.`],
+      ['How long is I-40?', `About 2,557 miles from Barstow, California to Wilmington, North Carolina, the longest west-to-east interstate that doesn't reach either coast at its endpoints.`],
+      ['Is I-40 still down in the Pigeon River Gorge after Hurricane Helene?', `Not fully. Flooding from Hurricane Helene in September 2024 collapsed sections of the eastbound lanes into the Pigeon River. A temporary fix reopened the gorge in March 2025 with one lane each direction and a reduced speed limit, and that's still the setup as of 2026. NCDOT's permanent rebuild is now priced at $2.8 billion and targeted for 2029, with two eastbound lanes and one westbound lane expected open by late 2028.`],
+      ['Does I-40 get winter weather?', `Yes, mainly two spots: near Flagstaff, Arizona, where the road climbs near 7,000 feet, and the Texas Panhandle and Oklahoma, where wind and ice storms are the bigger risk. Track your mile marker through either one with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
+    ],
+  },
 ];
 
 function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }

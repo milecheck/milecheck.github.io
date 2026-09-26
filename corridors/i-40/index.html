@@ -5,13 +5,13 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I-5 Live Traffic Cameras &amp; Road Conditions Right Now | MileCheck</title>
-  <meta name="description" content="See I-5 right now — live DOT traffic cameras and real-time road conditions along the corridor (Washington · Oregon · California), each tagged with route and mile marker.">
-  <link rel="canonical" href="https://milecheckapp.com/corridors/i-5/">
-  <meta property="og:title" content="I-5 Right Now — Live Cameras &amp; Conditions | MileCheck">
-  <meta property="og:description" content="Live I-5 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
+  <title>I-40 Live Traffic Cameras &amp; Road Conditions Right Now | MileCheck</title>
+  <meta name="description" content="See I-40 right now — live DOT traffic cameras and real-time road conditions along the corridor (California to North Carolina · Barstow to Wilmington), each tagged with route and mile marker.">
+  <link rel="canonical" href="https://milecheckapp.com/corridors/i-40/">
+  <meta property="og:title" content="I-40 Right Now — Live Cameras &amp; Conditions | MileCheck">
+  <meta property="og:description" content="Live I-40 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
-  <meta property="og:url" content="https://milecheckapp.com/corridors/i-5/">
+  <meta property="og:url" content="https://milecheckapp.com/corridors/i-40/">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +22,8 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is I-5 open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active closures and incidents as red and orange markers, straight from WSDOT, ODOT, and Caltrans; if a stretch is fully closed, a red banner appears at the top of this page. For a full US view, see the road closures map. Winter closures on I-5 most often hit Siskiyou Summit and the Grapevine."}},{"@type":"Question","name":"Where can I watch live I-5 traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"Right here — the map above shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See every highway camera in 27 states. For nearest-camera and mile-marker tracking while you drive, the MileCheck app does it hands-free on CarPlay and Android Auto."}},{"@type":"Question","name":"What is the highest point on I-5?","acceptedAnswer":{"@type":"Answer","text":"Siskiyou Summit in southern Oregon, at 4,310 feet — the highest elevation on all 1,381 miles of Interstate 5. It's marked with a ▲ on the map above."}},{"@type":"Question","name":"Which parts of I-5 close in winter?","acceptedAnswer":{"@type":"Answer","text":"Almost always Siskiyou Summit in Oregon and the Grapevine in California — both can close for snow, ice, or high wind. Watch the storms behind them on the road weather map."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Corridors","item":"https://milecheckapp.com/corridors/"},{"@type":"ListItem","position":3,"name":"I-5","item":"https://milecheckapp.com/corridors/i-5/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is I-40 open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active closures and incidents along I-40 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. The Pigeon River Gorge at the Tennessee–North Carolina line is the stretch most likely to have lane restrictions right now — see the US closures map for everything else."}},{"@type":"Question","name":"How long is I-40?","acceptedAnswer":{"@type":"Answer","text":"About 2,557 miles from Barstow, California to Wilmington, North Carolina, the longest west-to-east interstate that doesn't reach either coast at its endpoints."}},{"@type":"Question","name":"Is I-40 still down in the Pigeon River Gorge after Hurricane Helene?","acceptedAnswer":{"@type":"Answer","text":"Not fully. Flooding from Hurricane Helene in September 2024 collapsed sections of the eastbound lanes into the Pigeon River. A temporary fix reopened the gorge in March 2025 with one lane each direction and a reduced speed limit, and that's still the setup as of 2026. NCDOT's permanent rebuild is now priced at $2.8 billion and targeted for 2029, with two eastbound lanes and one westbound lane expected open by late 2028."}},{"@type":"Question","name":"Does I-40 get winter weather?","acceptedAnswer":{"@type":"Answer","text":"Yes, mainly two spots: near Flagstaff, Arizona, where the road climbs near 7,000 feet, and the Texas Panhandle and Oklahoma, where wind and ice storms are the bigger risk. Track your mile marker through either one with the MileCheck app."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Corridors","item":"https://milecheckapp.com/corridors/"},{"@type":"ListItem","position":3,"name":"I-40","item":"https://milecheckapp.com/corridors/i-40/"}]}</script>
   <style>
     .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
     .crit-banner a{color:#fff;text-decoration:underline;}
@@ -134,21 +134,21 @@
   <div class="crit-banner" id="critBanner" style="display:none"></div>
 
   <div class="co-hero">
-  <aside class="spon spon-house" id="spon" data-slot="corridor:i-5" data-sponsor="house" aria-label="Sponsor">
+  <aside class="spon spon-house" id="spon" data-slot="corridor:i-40" data-sponsor="house" aria-label="Sponsor">
     <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
     <a class="spon-body" href="/sponsor/" data-spon-link>
       <span class="spon-text"><strong>Sponsor this page.</strong></span>
       <span class="spon-cta">Ask about it →</span>
     </a>
   </aside>
-    <div class="eyebrow">Interstate 5 · Washington · Oregon · California</div>
-    <h1>I-5 right now: live cameras &amp; road conditions</h1>
-    <p class="sub">See I-5 right now — live DOT traffic cameras and real-time road conditions from Blaine, WA to the Mexican border, each tagged with route and mile marker. Check Siskiyou Summit, the Grapevine, and every pass before you drive.</p>
+    <div class="eyebrow">Interstate 40 · California to North Carolina · Barstow to Wilmington</div>
+    <h1>I-40 right now: live cameras &amp; road conditions</h1>
+    <p class="sub">See I-40 right now — live DOT cameras and real-time conditions across one of the longest interstates in the country, from the Mojave Desert to the North Carolina coast, each tagged with its mile marker. Desert heat to Smoky Mountains storm damage, on one map.</p>
     <div class="co-stats">
-      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras on I-5</div></div>
-      <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts on I-5</div></div>
-      <div class="co-stat"><div class="n">1,381 mi</div><div class="l">end to end</div></div>
-    <a class="co-stat co-stat-link" href="../../passes/siskiyou/"><div class="n" style="font-size:17px;padding-top:3px">Siskiyou Summit</div><div class="l">4,310 ft · high point ▸</div></a>
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras on I-40</div></div>
+      <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts on I-40</div></div>
+      <div class="co-stat"><div class="n">2,557 mi</div><div class="l">end to end</div></div>
+    <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">California to North Carolina</div><div class="l">2,557 mi end to end</div></div>
     </div>
   </div>
 
@@ -161,37 +161,37 @@
         <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
         <label class="co-layer"><input type="checkbox" id="tgPoi" checked><span class="co-sw poi"></span><span class="co-dot" style="background:#7C3AED"></span>Passes &amp; summits</label>
       </div>
-      <div class="co-bs" id="coStatus">Loading live I-5 data…</div>
+      <div class="co-bs" id="coStatus">Loading live I-40 data…</div>
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
 
   <section class="co-guide">
-    <h2>The I-5 corridor</h2>
-    <p class="lede">Washington · Oregon · California. Here's what to watch, and where the weather actually bites.</p>
-    <div class="co-seg"><h3>I-5 in Washington</h3><p>From the Columbia River at Vancouver north through Kelso, Olympia, Joint Base Lewis-McChord (a chronic congestion choke point), Tacoma, Seattle, and Everett up to the Peace Arch crossing at Blaine, at the British Columbia border (see <a href="/drive-into-canada/">driving into Canada</a> and <a href="/borders/">border wait times</a>). Snow is rare at sea level, but the Seattle–Tacoma stretch is one of the most congested corridors in the country — the cameras here are mostly about traffic, not weather.</p></div>
-    <div class="co-seg"><h3>I-5 in Oregon</h3><p>Portland, Salem, Albany, Eugene, Roseburg, Grants Pass, Medford, and Ashland — then the climb to <a href="../../passes/siskiyou/">Siskiyou Summit</a> at 4,310 feet, the highest point on the entire interstate. This is the winter wildcard: chains, spinouts, and full closures are common from November through March.</p></div>
-    <div class="co-seg"><h3>I-5 in California</h3><p>Down from the Siskiyous past Mount Shasta and Redding, through Sacramento and the length of the Central Valley, over <a href="../../passes/grapevine/">the Grapevine (Tejon Pass, 4,144 ft)</a> into Los Angeles, and on to San Diego. The Grapevine is the other notorious closure point — snow and high wind shut it down several times each winter.</p></div>
+    <h2>The I-40 corridor</h2>
+    <p class="lede">California to North Carolina · Barstow to Wilmington. Here's what to watch, and where the weather actually bites.</p>
+    <div class="co-seg"><h3>Coast to coast, almost</h3><p>I-40 runs about 2,557 miles from Barstow, California to Wilmington, North Carolina, crossing eight states — California, Arizona, New Mexico, Texas, Oklahoma, Arkansas, Tennessee, and North Carolina. It crosses the Mississippi River at Memphis on the Hernando de Soto Bridge and climbs into the Appalachians at the Tennessee–North Carolina line.</p></div>
+    <div class="co-seg"><h3>Where the trouble is</h3><p>The Mojave stretch through California and Arizona brings extreme summer heat with long gaps between services; near Flagstaff, Arizona, I-40 climbs above 6,900 feet and gets real winter snow and ice. The Texas Panhandle and Oklahoma see high wind and occasional ice storms. At the Tennessee–North Carolina line, I-40 through the Pigeon River Gorge is still recovering from catastrophic 2024 Hurricane Helene flood damage — traffic has run one lane each direction since a partial reopening in March 2025, with the full rebuild targeted for 2029.</p></div>
+    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.</p></div>
   </section>
 
   <section class="co-faq">
-    <h2>I-5 questions, answered</h2>
-    <details><summary>Is I-5 open right now?</summary><p>The <a href="#comap">live map above</a> shows active closures and incidents as red and orange markers, straight from WSDOT, ODOT, and Caltrans; if a stretch is fully closed, a red banner appears at the top of this page. For a full US view, see the <a href="../../closures/">road closures map</a>. Winter closures on I-5 most often hit <a href="../../passes/siskiyou/">Siskiyou Summit</a> and <a href="../../passes/grapevine/">the Grapevine</a>.</p></details>
-    <details><summary>Where can I watch live I-5 traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live DOT cameras along the whole corridor, each tagged with its mile marker. Want cameras beyond I-5? See <a href="../../cameras/">every highway camera in <!--cov:cameras.us_states-->42<!--/cov--> states</a>. For nearest-camera and mile-marker tracking while you drive, the <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-5&mt=8" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.</p></details>
-    <details><summary>What is the highest point on I-5?</summary><p><a href="../../passes/siskiyou/">Siskiyou Summit</a> in southern Oregon, at 4,310 feet — the highest elevation on all 1,381 miles of Interstate 5. It's marked with a ▲ on the map above.</p></details>
-    <details><summary>Which parts of I-5 close in winter?</summary><p>Almost always <a href="../../passes/siskiyou/">Siskiyou Summit</a> in Oregon and <a href="../../passes/grapevine/">the Grapevine</a> in California — both can close for snow, ice, or high wind. Watch the storms behind them on the <a href="../../weather/">road weather map</a>.</p></details>
+    <h2>I-40 questions, answered</h2>
+    <details><summary>Is I-40 open right now?</summary><p>The <a href="#comap">live map above</a> shows active closures and incidents along I-40 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. The Pigeon River Gorge at the Tennessee–North Carolina line is the stretch most likely to have lane restrictions right now — see the <a href="../../closures/">US closures map</a> for everything else.</p></details>
+    <details><summary>How long is I-40?</summary><p>About 2,557 miles from Barstow, California to Wilmington, North Carolina, the longest west-to-east interstate that doesn't reach either coast at its endpoints.</p></details>
+    <details><summary>Is I-40 still down in the Pigeon River Gorge after Hurricane Helene?</summary><p>Not fully. Flooding from Hurricane Helene in September 2024 collapsed sections of the eastbound lanes into the Pigeon River. A temporary fix reopened the gorge in March 2025 with one lane each direction and a reduced speed limit, and that's still the setup as of 2026. NCDOT's permanent rebuild is now priced at $2.8 billion and targeted for 2029, with two eastbound lanes and one westbound lane expected open by late 2028.</p></details>
+    <details><summary>Does I-40 get winter weather?</summary><p>Yes, mainly two spots: near Flagstaff, Arizona, where the road climbs near 7,000 feet, and the Texas Panhandle and Oklahoma, where wind and ice storms are the bigger risk. Track your mile marker through either one with the <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-40&mt=8" target="_blank" rel="noopener">MileCheck app</a>.</p></details>
   </section>
 
   <div class="co-cta">
-    <h2>Know your exact mile marker on I-5 — live</h2>
-    <p>MileCheck shows your nearest mile marker in real time as you drive I-5, plus live DOT alerts on your route and the nearest camera. Works offline and runs on CarPlay and Android Auto.</p>
+    <h2>Know your exact mile marker on I-40 — live</h2>
+    <p>MileCheck shows your nearest mile marker in real time as you drive I-40, plus live DOT alerts on your route and the nearest camera. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
-      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-5&mt=8" target="_blank" rel="noopener">iOS App Store</a>
-      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcorridors-i-5" target="_blank" rel="noopener">Google Play</a>
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-40&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcorridors-i-40" target="_blank" rel="noopener">Google Play</a>
     </div>
   </div>
 
-  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../bridges/california/">California drawbridges</a> · <a href="../../bridges/oregon/">Oregon drawbridges</a> · <a href="../../bridges/washington/">Washington drawbridges</a> · <a href="../../maps/">all maps</a></p>
+  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../bridges/california/">California drawbridges</a> · <a href="../../bridges/texas/">Texas drawbridges</a> · <a href="../../bridges/arkansas/">Arkansas drawbridges</a> · <a href="../../bridges/north-carolina/">North Carolina drawbridges</a> · <a href="../../maps/">all maps</a></p>
 
   <!-- signup:start -->
   <section class="mc-signup" id="subscribe">
@@ -215,7 +215,7 @@
     </div>
   </section>
 <!-- signup:end -->
-    <footer class="site-footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
@@ -225,8 +225,8 @@
         <div class="footer-col">
           <p class="footer-label">Get the app</p>
           <ul class="footer-list">
-            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-5&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
-            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcorridors-i-5" target="_blank" rel="noopener">Google Play</a></li>
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-40&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcorridors-i-40" target="_blank" rel="noopener">Google Play</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -255,17 +255,17 @@
 
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
-const STATES=["CA","OR","WA"];
-const NUM=5;
-const NAME="I-5";
-const POIS=[{"name":"Siskiyou Summit","slug":"siskiyou","lat":42.0672,"lon":-122.5606},{"name":"The Grapevine","slug":"grapevine","lat":34.7947,"lon":-118.879}];
+const STATES=["CA","AZ","NM","TX","OK","AR","TN","NC"];
+const NUM=40;
+const NAME="I-40";
+const POIS=[];
 // Match the interstate as the LEADING token: clean "I-5"/"I5"/"005", or descriptive
 // "I-15 SB Lake Mead N" (NV-style). "I-155" / "US-15" / "SR-15" correctly excluded.
 function isRoute(r){r=String(r||'').toUpperCase().trim();var m=r.match(/^I[\s-]?0*(\d+)/);if(m)return +m[1]===NUM;var n=r.match(/^0*(\d+)$/);if(n)return +n[1]===NUM;return false;}
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-5 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
-map.fitBounds([[32.5,-124.4],[49.0,-116.5]]);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-40 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
+map.fitBounds([[32.5,-117.5],[37.5,-77.5]]);
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const poiLayer=L.layerGroup().addTo(map);
