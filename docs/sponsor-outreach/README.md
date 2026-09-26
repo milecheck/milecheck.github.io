@@ -40,17 +40,32 @@ different session can pick it up without re-deriving context. Start with
    `https://claude.ai/artifact/1ST56Xqbn4Eo7r2K1KHZKR` (private; share it from the page's
    Share menu if it needs to go to a prospect directly). This folder is a backup of the
    source only — it won't render as a page from the repo; open the artifact link instead.
+8. **`08-sponsor-page-catalog-and-pricing.md`** — added 2026-09-27. Every page on the site
+   (369, generated straight from `data/sponsor-pages.json`), grouped into 11 categories, so
+   a prospect who wants more than one page can browse and self-select instead of the
+   all-manual "email and say which topic" flow. Carries the standing **volume-tiered catalog
+   rate** ($75/page/mo for 1–10, $60 for 11–50, $50 for 50+) — see "Pricing" below for how
+   this coexists with the $49 founding rate.
 
 ## Pricing (not published anywhere public — the live `/sponsor/` page stays "email for
 pricing" on purpose)
 
-Two tiers, tested prospect-by-prospect rather than fixed: **$49/month single page**
-(the one being led with in every cold email — the natural, low-friction offer for a
-local business), **$99/month full topic family, nationwide** (mentioned only as a
-follow-up after someone says yes to the single-page offer, never in the first email).
-Both month-to-month, cancel anytime, explicitly a "founding rate" while the program has
-zero sponsors and zero case studies — the goal of sale #1 is proof, not the eventual
-market rate.
+**Two separate rates, confirmed 2026-09-27, not two tiers of the same offer:**
+
+- **$49/month, single page — the founding rate.** Hand-picked, personal-outreach only (the
+  wave 1/2/3 emails), sent while the program has zero sponsors and zero case studies. A
+  sponsor who takes it keeps $49 on that one page for as long as they stay subscribed — the
+  same grandfather promise MileCheck makes its own app subscribers when prices rise later.
+  Never offered from the page catalog, and doesn't extend to additional pages.
+- **$75/$60/$50 per page/month (1–10 / 11–50 / 50+), the catalog rate.** The standing price
+  for anyone browsing `08-sponsor-page-catalog-and-pricing.md` and self-selecting page(s),
+  and for any page a founding sponsor adds beyond their original one.
+- **$99/month, full topic family, nationwide** — a separate, larger offer (all pages in one
+  category across the whole country, e.g. all 73 camera pages), mentioned only as a
+  follow-up after someone says yes to a smaller offer, never in a first email.
+
+All month-to-month, cancel anytime. The goal of sale #1 (at the $49 founding rate) is proof,
+not the eventual market rate — the catalog rate above is that eventual market rate.
 
 Every website sponsor also gets first option on MileCheck's *planned* corridor-board
 advertising in their area before it's opened publicly — defined internally as first
