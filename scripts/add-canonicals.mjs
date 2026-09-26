@@ -54,8 +54,12 @@ for (const file of htmlFiles(ROOT)) {
 
   const existing = src.match(/<link\s+rel="canonical"[^>]*>/i);
   if (existing) {
-    if (existing[0] === tag) continue;             // already correct
-    out = src.replace(existing[0], tag); updated++;
+    // Never overwrite an existing canonical: some pages deliberately point
+    // elsewhere (a redirect stub to another domain, an old page deferring to
+    // the current one) and a "self-referencing" rewrite would be wrong for
+    // those. Audit 2026-09-26: this used to auto-"correct" all 7 of them,
+    // including breaking enchantments/index.html's cross-domain canonical.
+    continue;
   } else {
     out = src.replace('</head>', `  ${tag}\n</head>`); added++;
   }
