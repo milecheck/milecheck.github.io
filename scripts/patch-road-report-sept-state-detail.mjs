@@ -33,8 +33,22 @@ const title = (s) => {
 
 // ---------- top-line numbers, all from one snapshot ----------
 const T = D.byType, TOTAL = D.totalUniqueEvents;
-const K = D.keywordCounts, KS_ = D.keywordSamples, KBS = D.keywordByState;
+const K = D.keywordCounts, KS_ = D.keywordSamples, KBS = D.keywordByState, KEX = D.keywordExampleByState, KCLEAN = D.keywordExampleIsClean;
 const FIRES = D.wildfires;
+const NO_CRASH_FEED = new Set(['AK', 'AR', 'HI', 'KY', 'ME', 'ND', 'NM', 'OK', 'SD', 'WV']);
+// Trim a real DOT headline down to one clean clause for a per-state example --
+// stop at the first sentence break if there is one nearby, otherwise hard-cut at a
+// word boundary. Never fabricates text; only shortens what the DOT actually posted.
+function trimExample(h, maxLen = 130) {
+  let t = String(h || '').replace(/\s+/g, ' ').trim();
+  const dot = t.indexOf('. ');
+  if (dot > 10 && dot < maxLen) t = t.slice(0, dot + 1);
+  else if (t.length > maxLen) t = t.slice(0, maxLen).replace(/\s+\S*$/, '') + '…';
+  // The caller always appends its own closing "." -- strip a trailing one here so
+  // real DOT text ending in a period doesn't render as a stray double "..".
+  return t.replace(/\.+$/, '');
+}
+const MENTION_LABEL = { snowice: 'snow or ice', fire: 'fire', flood: 'flooding', fatal: 'fatal-tagged' };
 
 // ---------- long-term closures: drop the NY entry that's really Connecticut's
 // Wallingford–Meriden segment riding NY's feed (same issue fixed in the Labor Day
@@ -65,13 +79,23 @@ function detailBody(j) {
       .map((c) => `${n(j[c])} ${CAT_LABEL[c][j[c] === 1 ? 0 : 1]}`);
     parts.push(`<p>${cats.join(', ')}${cats.length > 1 ? ',' : ''} for ${n(j.total)} total events.</p>`);
   }
+  if (NO_CRASH_FEED.has(j.state)) parts.push(`<p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>`);
   if (j.fires > 0) parts.push(`<p>${n(j.fires)} active ${j.fires === 1 ? 'fire' : 'fires'}, ${n(j.acres)} acres.</p>`);
-  const mentions = [];
-  if (KBS.snowice[j.state]) mentions.push(`${KBS.snowice[j.state]} snow or ice`);
-  if (KBS.fire[j.state]) mentions.push(`${KBS.fire[j.state]} fire`);
-  if (KBS.flood[j.state]) mentions.push(`${KBS.flood[j.state]} flooding`);
-  if (KBS.fatal[j.state]) mentions.push(`${KBS.fatal[j.state]} fatal-tagged`);
-  if (mentions.length) parts.push(`<p>Keyword mentions on the feed: ${mentions.join(', ')}.</p>`);
+  // One line per keyword category that has any mentions, each with a real example
+  // (route + a trimmed excerpt of the actual DOT text) instead of a bare count --
+  // Leah, on Arizona's count: "they are going to want to know what road and near
+  // what town."
+  for (const k of ['snowice', 'fire', 'flood', 'fatal']) {
+    const count = KBS[k][j.state];
+    if (!count) continue;
+    const ex = KEX[k][j.state];
+    // Only show the worked example when it's confirmed clean of a known place-name
+    // collision -- some states' every match is the same real street name (Rufe Snow
+    // Dr. in TX, Snow Rd. in OH), and there's nothing to fall back to. A bare count
+    // with no misleading example is more honest than a confusing one.
+    const where = (ex && KCLEAN[k][j.state]) ? (ex.route ? `${esc(title(ex.route))}: ` : '') + `&ldquo;${esc(trimExample(ex.headline))}&rdquo;` : null;
+    parts.push(`<p><b>${n(count)}</b> ${MENTION_LABEL[k]} ${count === 1 ? 'mention' : 'mentions'} on the feed${where ? ` &mdash; e.g. ${where}` : ''}.</p>`);
+  }
   if (j.topRoutes && j.topRoutes.length) parts.push(`<p>Most-mentioned routes: ${j.topRoutes.map((r) => esc(title(r))).join(', ')}.</p>`);
   return parts.join('\n          ');
 }
@@ -180,7 +204,7 @@ const stateActivitySection = `      <h2 class="rc">State activity</h2>
         <tr><th>State</th><th>Total events</th><th>Crashes</th><th>Fires / acres</th><th>Snow or ice mentions</th></tr>
 ${stateTableRows}
       </table>
-      <p style="font-size:13px;color:#5A6670;margin:-14px 0 20px;">A high total can mean a more detailed feed, not a busier month. Crash counts exclude Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, and West Virginia &mdash; their live DOT feeds don't carry crashes. Snow-or-ice mentions are a keyword match on the event's own text, not weather-station data.</p>
+      <p style="font-size:13px;color:#5A6670;margin:-14px 0 20px;">A high total can mean a more detailed feed, not a busier month. Crash counts exclude Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, and West Virginia &mdash; their live DOT feeds don't carry crashes. Snow-or-ice mentions are a keyword match on the event's own text, not weather-station data, and can include a real place name (a road called "Snow Rd." or "Ice Box Creek") alongside real weather mentions.</p>
 
       <h2 class="rc">Every state and province</h2>
       <p>The same measures for all 51 jurisdictions, alphabetically. Tap a name to expand it.</p>

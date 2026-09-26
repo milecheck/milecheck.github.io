@@ -127,18 +127,18 @@
       <p>31,071 events, 1,918 crashes, and 2,332 active wildfires covering 6,302,665 acres, across every jurisdiction MileCheck tracks. The ten most active by total feed volume:</p>
       <table class="data-table">
         <tr><th>State</th><th>Total events</th><th>Crashes</th><th>Fires / acres</th><th>Snow or ice mentions</th></tr>
-        <tr><td>New York</td><td>4,649</td><td>169</td><td>—</td><td>2</td></tr>
-        <tr><td>California</td><td>3,471</td><td>269</td><td>509 / 87,602 ac</td><td>74</td></tr>
-        <tr><td>New Jersey</td><td>3,364</td><td>33</td><td>1 / 0 ac</td><td>61</td></tr>
-        <tr><td>Wisconsin</td><td>2,738</td><td>135</td><td>79 / 153 ac</td><td>1</td></tr>
-        <tr><td>North Carolina</td><td>1,221</td><td>5</td><td>8 / 2,018 ac</td><td>5</td></tr>
-        <tr><td>Alabama</td><td>1,120</td><td>209</td><td>6 / 2,834 ac</td><td>18</td></tr>
-        <tr><td>Illinois</td><td>1,072</td><td>18</td><td>1 / 0 ac</td><td>7</td></tr>
-        <tr><td>Michigan</td><td>942</td><td>26</td><td>16 / 33 ac</td><td>13</td></tr>
-        <tr><td>Texas</td><td>921</td><td>6</td><td>106 / 143,917 ac</td><td>22</td></tr>
-        <tr><td>Colorado</td><td>905</td><td>53</td><td>42 / 165,470 ac</td><td>60</td></tr>
+        <tr><td>New York</td><td>4,649</td><td>169</td><td>—</td><td>—</td></tr>
+        <tr><td>California</td><td>3,471</td><td>269</td><td>509 / 87,602 ac</td><td>69</td></tr>
+        <tr><td>New Jersey</td><td>3,364</td><td>33</td><td>1 / 0 ac</td><td>—</td></tr>
+        <tr><td>Wisconsin</td><td>2,738</td><td>135</td><td>79 / 153 ac</td><td>—</td></tr>
+        <tr><td>North Carolina</td><td>1,221</td><td>5</td><td>8 / 2,018 ac</td><td>—</td></tr>
+        <tr><td>Alabama</td><td>1,120</td><td>209</td><td>6 / 2,834 ac</td><td>—</td></tr>
+        <tr><td>Illinois</td><td>1,072</td><td>18</td><td>1 / 0 ac</td><td>—</td></tr>
+        <tr><td>Michigan</td><td>942</td><td>26</td><td>16 / 33 ac</td><td>—</td></tr>
+        <tr><td>Texas</td><td>921</td><td>6</td><td>106 / 143,917 ac</td><td>8</td></tr>
+        <tr><td>Colorado</td><td>905</td><td>53</td><td>42 / 165,470 ac</td><td>35</td></tr>
       </table>
-      <p style="font-size:13px;color:#5A6670;margin:-14px 0 20px;">A high total can mean a more detailed feed, not a busier month. Crash counts exclude Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, and West Virginia &mdash; their live DOT feeds don't carry crashes. Snow-or-ice mentions are a keyword match on the event's own text, not weather-station data.</p>
+      <p style="font-size:13px;color:#5A6670;margin:-14px 0 20px;">A high total can mean a more detailed feed, not a busier month. Crash counts exclude Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, and West Virginia &mdash; their live DOT feeds don't carry crashes. Snow-or-ice mentions are a keyword match on the event's own text, not weather-station data, and can include a real place name (a road called "Snow Rd." or "Ice Box Creek") alongside real weather mentions.</p>
 
       <h2 class="rc">Every state and province</h2>
       <p>The same measures for all 51 jurisdictions, alphabetically. Tap a name to expand it.</p>
@@ -147,7 +147,7 @@
         <div class="state-detail">
           <p>209 crashes, 31 closures, 263 construction records, 617 other records, for 1,120 total events.</p>
           <p>6 active fires, 2,834 acres.</p>
-          <p>Keyword mentions on the feed: 18 snow or ice, 4 fire.</p>
+          <p><b>4</b> fire mentions on the feed &mdash; e.g. US-280: &ldquo;…S Uniroyal Rd in Lee County until US280/431 SB @ MP 135 at Firefly Ln in Lee County&rdquo;.</p>
           <p>Most-mentioned routes: I-65, I-20, I-10.</p>
         </div>
       </details>
@@ -155,6 +155,7 @@
         <summary>Alaska &mdash; 3 events</summary>
         <div class="state-detail">
           <p>2 closures, 1 other record, for 3 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>24 active fires, 62,308 acres.</p>
           <p>Most-mentioned routes: Dalton Highway, Parks Highway.</p>
         </div>
@@ -164,7 +165,9 @@
         <div class="state-detail">
           <p>136 crashes, 177 closures, 173 other records, for 486 total events.</p>
           <p>38 active fires, 1,357 acres.</p>
-          <p>Keyword mentions on the feed: 4 snow or ice, 5 fire, 7 flooding.</p>
+          <p><b>1</b> snow or ice mention on the feed.</p>
+          <p><b>5</b> fire mentions on the feed &mdash; e.g. I-15: &ldquo;Vehicle fire on I-15 Northbound near Desert Springs Rd (MP 11)&rdquo;.</p>
+          <p><b>7</b> flooding mentions on the feed &mdash; e.g. US-191: &ldquo;Flooding on roadway on US-191 Northbound Near CR-C462 (MP 453)&rdquo;.</p>
           <p>Most-mentioned routes: I-10, SR-202, SR-101.</p>
         </div>
       </details>
@@ -172,8 +175,9 @@
         <summary>Arkansas &mdash; 10 events</summary>
         <div class="state-detail">
           <p>5 construction records, 5 other records, for 10 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>98 active fires, 4,739 acres.</p>
-          <p>Keyword mentions on the feed: 1 snow or ice, 1 fire.</p>
+          <p><b>1</b> fire mention on the feed &mdash; e.g. AR-274: &ldquo;Wildfire in the area&rdquo;.</p>
           <p>Most-mentioned routes: AR-123, AR-120, AR-77.</p>
         </div>
       </details>
@@ -182,7 +186,9 @@
         <div class="state-detail">
           <p>26 crashes, 22 closures, 687 construction records, 96 weather records, 41 other records, for 872 total events.</p>
           <p>117 active fires, 1,034,563 acres.</p>
-          <p>Keyword mentions on the feed: 38 snow or ice, 4 fire, 3 flooding.</p>
+          <p><b>16</b> snow or ice mentions on the feed &mdash; e.g. BC-97c: &ldquo;…t Exit to Sunset Main Road to At Exit to Brenda Mine Road / Chain off Area&rdquo;.</p>
+          <p><b>4</b> fire mentions on the feed &mdash; e.g. BC-97: &ldquo;Wildfire from Highway 97, In Spallumcheen and At Highway 97 and Old Kamloops Road to At Salmon River Road&rdquo;.</p>
+          <p><b>3</b> flooding mentions on the feed &mdash; e.g. BC-1: &ldquo;…on work from Highway 1, In Hope and 69m West of Exit 168 to Flood-Hope Rd to In Hope and 15m Northeast of Exit 170 to Hope / Hwy…&rdquo;.</p>
           <p>Most-mentioned routes: BC-1, BC-97, BC-16.</p>
         </div>
       </details>
@@ -191,7 +197,10 @@
         <div class="state-detail">
           <p>269 crashes, 893 closures, 1,824 construction records, 85 weather records, 219 hazard records, 181 other records, for 3,471 total events.</p>
           <p>509 active fires, 87,602 acres.</p>
-          <p>Keyword mentions on the feed: 74 snow or ice, 76 fire, 2 flooding, 5 fatal-tagged.</p>
+          <p><b>69</b> snow or ice mentions on the feed &mdash; e.g. US-101: &ldquo;Caltrans chain control in effect&rdquo;.</p>
+          <p><b>76</b> fire mentions on the feed &mdash; e.g. SR-1: &ldquo;Fire Conventional Hwy Roadway is closed&rdquo;.</p>
+          <p><b>2</b> flooding mentions on the feed &mdash; e.g. CA-62: &ldquo;Roadway Flooding — CA-62&rdquo;.</p>
+          <p><b>5</b> fatal-tagged mentions on the feed &mdash; e.g. I-10: &ldquo;Fatality — I-10 WB&rdquo;.</p>
           <p>Most-mentioned routes: US-101, I-5, SR-1.</p>
         </div>
       </details>
@@ -200,7 +209,8 @@
         <div class="state-detail">
           <p>53 crashes, 2 closures, 787 construction records, 2 hazard records, 61 other records, for 905 total events.</p>
           <p>42 active fires, 165,470 acres.</p>
-          <p>Keyword mentions on the feed: 60 snow or ice, 4 fire.</p>
+          <p><b>35</b> snow or ice mentions on the feed &mdash; e.g. I-70: &ldquo;…1, 7:00PM Comment: More project information is available at chainstationupgradeproject@gmail.com or 970-401-7734&rdquo;.</p>
+          <p><b>4</b> fire mentions on the feed &mdash; e.g. SH-119: &ldquo;Between Vista Comm and County Road 7 (Firestone) from Mile Point 61.4 to Mile Point 62.5&rdquo;.</p>
           <p>Most-mentioned routes: I-70, I-25, SH-470.</p>
         </div>
       </details>
@@ -215,7 +225,8 @@
         <summary>Delaware &mdash; 151 events</summary>
         <div class="state-detail">
           <p>5 crashes, 24 closures, 84 construction records, 4 weather records, 34 other records, for 151 total events.</p>
-          <p>Keyword mentions on the feed: 54 snow or ice, 1 fire, 3 flooding.</p>
+          <p><b>1</b> fire mention on the feed &mdash; e.g. I-95: &ldquo;I-95 SOUTHBOUND AT DE-141: RIGHT LANE CLOSED DUE TO VEHICLE FIRE&rdquo;.</p>
+          <p><b>3</b> flooding mentions on the feed &mdash; e.g. Frederica: &ldquo;S MARKET ST BETWEEN FREDERICA RD AND DAVID ST CLOSED DUE TO FLOODING&rdquo;.</p>
           <p>Most-mentioned routes: DE-1, DE-2, I-95.</p>
         </div>
       </details>
@@ -224,7 +235,8 @@
         <div class="state-detail">
           <p>65 crashes, 23 closures, 43 construction records, 3 weather records, 41 hazard records, 39 other records, for 214 total events.</p>
           <p>29 active fires, 82,742 acres.</p>
-          <p>Keyword mentions on the feed: 4 snow or ice, 4 fire, 2 flooding.</p>
+          <p><b>4</b> fire mentions on the feed &mdash; e.g. I-95: &ldquo;Vehicle on fire&rdquo;.</p>
+          <p><b>2</b> flooding mentions on the feed &mdash; e.g. SR-31: &ldquo;Flooding&rdquo;.</p>
           <p>Most-mentioned routes: I-75, I-95, I-10.</p>
         </div>
       </details>
@@ -233,7 +245,8 @@
         <div class="state-detail">
           <p>99 crashes, 104 closures, 235 construction records, 9 hazard records, 36 other records, for 483 total events.</p>
           <p>3 active fires, 1,888 acres.</p>
-          <p>Keyword mentions on the feed: 9 fire, 2 flooding.</p>
+          <p><b>9</b> fire mentions on the feed &mdash; e.g. GA-19: &ldquo;[fire or containment contained] on SR 19 Northbound at QUINN RD&rdquo;.</p>
+          <p><b>2</b> flooding mentions on the feed &mdash; e.g. GA-400: &ldquo;Flooding on GA 400 Southbound at Holcomb Br Rd West/SR 140&rdquo;.</p>
           <p>Most-mentioned routes: I-285, I-20, I-75.</p>
         </div>
       </details>
@@ -241,6 +254,7 @@
         <summary>Hawaii &mdash; 13 events</summary>
         <div class="state-detail">
           <p>13 construction records for 13 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>1 active fire, 500 acres.</p>
           <p>Most-mentioned routes: HI-92, HI-30, H-201.</p>
         </div>
@@ -258,7 +272,6 @@
         <div class="state-detail">
           <p>18 crashes, 273 closures, 487 construction records, 294 other records, for 1,072 total events.</p>
           <p>1 active fire, 0 acres.</p>
-          <p>Keyword mentions on the feed: 7 snow or ice.</p>
           <p>Most-mentioned routes: I-90, I-294, I-88.</p>
         </div>
       </details>
@@ -267,7 +280,6 @@
         <div class="state-detail">
           <p>6 crashes, 238 closures, 415 construction records, 7 hazard records, 6 other records, for 672 total events.</p>
           <p>3 active fires, 7 acres.</p>
-          <p>Keyword mentions on the feed: 17 snow or ice.</p>
           <p>Most-mentioned routes: I-65, I-70, I-69.</p>
         </div>
       </details>
@@ -275,7 +287,8 @@
         <summary>Iowa &mdash; 237 events</summary>
         <div class="state-detail">
           <p>1 crash, 122 closures, 112 construction records, 2 other records, for 237 total events.</p>
-          <p>Keyword mentions on the feed: 1 snow or ice, 1 fire, 1 flooding.</p>
+          <p><b>1</b> fire mention on the feed &mdash; e.g. I-35: &ldquo;Right lane blocked · Vehicle on fire&rdquo;.</p>
+          <p><b>1</b> flooding mention on the feed &mdash; e.g. US-6: &ldquo;Blocked · flooding&rdquo;.</p>
           <p>Most-mentioned routes: I-80, I-380, I-35.</p>
         </div>
       </details>
@@ -283,7 +296,7 @@
         <summary>Kansas &mdash; 211 events</summary>
         <div class="state-detail">
           <p>12 crashes, 78 closures, 89 construction records, 7 hazard records, 25 other records, for 211 total events.</p>
-          <p>Keyword mentions on the feed: 6 snow or ice, 2 fire.</p>
+          <p><b>2</b> fire mentions on the feed &mdash; e.g. I-435: &ldquo;I-435 — vehicle fire&rdquo;.</p>
           <p>Most-mentioned routes: I-70, US-54, I-135.</p>
         </div>
       </details>
@@ -291,8 +304,8 @@
         <summary>Kentucky &mdash; 39 events</summary>
         <div class="state-detail">
           <p>39 closures for 39 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>1 active fire, 0 acres.</p>
-          <p>Keyword mentions on the feed: 2 snow or ice.</p>
           <p>Most-mentioned routes: US-60, KY-773, KY-825.</p>
         </div>
       </details>
@@ -301,7 +314,7 @@
         <div class="state-detail">
           <p>31 crashes, 211 closures, 448 construction records, 4 other records, for 694 total events.</p>
           <p>14 active fires, 1,436 acres.</p>
-          <p>Keyword mentions on the feed: 1 fire.</p>
+          <p><b>1</b> fire mention on the feed &mdash; e.g. LA-1062: &ldquo;…idge Maintenance Operations on LA-1062 Both Directions from Firetower Ln to 1.2 Mi South of Caboose Ln &rdquo;.</p>
           <p>Most-mentioned routes: I-10, US-90, US-165.</p>
         </div>
       </details>
@@ -309,8 +322,8 @@
         <summary>Maine &mdash; 45 events</summary>
         <div class="state-detail">
           <p>12 construction records, 33 other records, for 45 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>14 active fires, 6 acres.</p>
-          <p>Keyword mentions on the feed: 1 snow or ice.</p>
           <p>Most-mentioned routes: US-1, US-201, US-202.</p>
         </div>
       </details>
@@ -335,7 +348,8 @@
         <div class="state-detail">
           <p>26 crashes, 413 closures, 484 construction records, 19 other records, for 942 total events.</p>
           <p>16 active fires, 33 acres.</p>
-          <p>Keyword mentions on the feed: 13 snow or ice, 2 fire, 1 flooding.</p>
+          <p><b>2</b> fire mentions on the feed &mdash; e.g. I-75: &ldquo;Vehicle Fire on SB I-75&rdquo;.</p>
+          <p><b>1</b> flooding mention on the feed &mdash; e.g. I-75: &ldquo;Flooding on SB I-75&rdquo;.</p>
           <p>Most-mentioned routes: I-94, I-96, I-75.</p>
         </div>
       </details>
@@ -352,7 +366,7 @@
         <div class="state-detail">
           <p>21 crashes, 20 closures, 127 construction records, for 168 total events.</p>
           <p>25 active fires, 3,325 acres.</p>
-          <p>Keyword mentions on the feed: 5 snow or ice, 3 fire.</p>
+          <p><b>3</b> fire mentions on the feed &mdash; e.g. MS-14: &ldquo;Road Work : MS 14 between Carter Rd and Firetower Rd - Expect delays&rdquo;.</p>
           <p>Most-mentioned routes: I-55, I-20, US-49.</p>
         </div>
       </details>
@@ -361,7 +375,8 @@
         <div class="state-detail">
           <p>11 crashes, 72 closures, 478 construction records, 13 other records, for 574 total events.</p>
           <p>1 active fire, 150 acres.</p>
-          <p>Keyword mentions on the feed: 4 snow or ice, 1 fire, 1 flooding.</p>
+          <p><b>1</b> fire mention on the feed &mdash; e.g. I-470: &ldquo;…(s) after RP PRYOR RD TO IS470W W — EXPECT DELAYS — VEHICLE FIRE I-470 WB PAST US-50 2 RIGHT LANES CLOSED EST&rdquo;.</p>
+          <p><b>1</b> flooding mention on the feed &mdash; e.g. MO-48: &ldquo;FLOODING — .016 mile(s) after RT C S — .006 mile(s) before CRD 169 E — CLOSED&rdquo;.</p>
           <p>Most-mentioned routes: I-70, US-67, US-54.</p>
         </div>
       </details>
@@ -370,7 +385,8 @@
         <div class="state-detail">
           <p>24 crashes, 15 weather records, 7 other records, for 46 total events.</p>
           <p>163 active fires, 133,572 acres.</p>
-          <p>Keyword mentions on the feed: 43 snow or ice, 3 fire, 1 flooding.</p>
+          <p><b>3</b> fire mentions on the feed &mdash; e.g. MT-38: &ldquo;Travelers can expect the following: fire with flaggers daily between 8:00 AM and 8:00 PM until further notice&rdquo;.</p>
+          <p><b>1</b> flooding mention on the feed &mdash; e.g. S-482: &ldquo;…can expect the following: road closed and Critical incident flood until further notice&rdquo;.</p>
           <p>Most-mentioned routes: I-90, US-12, MT-200.</p>
         </div>
       </details>
@@ -379,7 +395,6 @@
         <div class="state-detail">
           <p>2 crashes, 23 closures, 97 construction records, 1 other record, for 123 total events.</p>
           <p>3 active fires, 9 acres.</p>
-          <p>Keyword mentions on the feed: 6 snow or ice.</p>
           <p>Most-mentioned routes: US-6, I-80, US-30.</p>
         </div>
       </details>
@@ -388,7 +403,7 @@
         <div class="state-detail">
           <p>34 crashes, 44 closures, 149 construction records, 2 hazard records, 122 other records, for 351 total events.</p>
           <p>34 active fires, 164,794 acres.</p>
-          <p>Keyword mentions on the feed: 5 fire.</p>
+          <p><b>5</b> fire mentions on the feed &mdash; e.g. I-80: &ldquo;Major Forest fire on I-80 Westbound 8 Mi After Gold Ranch Rd&rdquo;.</p>
           <p>Most-mentioned routes: I-80, US-395, US-50.</p>
         </div>
       </details>
@@ -397,7 +412,6 @@
         <div class="state-detail">
           <p>3 crashes, 66 construction records, 5 other records, for 74 total events.</p>
           <p>1 active fire, 0 acres.</p>
-          <p>Keyword mentions on the feed: 1 snow or ice.</p>
           <p>Most-mentioned routes: I-93, I-95, NH-12.</p>
         </div>
       </details>
@@ -406,7 +420,8 @@
         <div class="state-detail">
           <p>33 crashes, 129 closures, 2,975 construction records, 14 hazard records, 213 other records, for 3,364 total events.</p>
           <p>1 active fire, 0 acres.</p>
-          <p>Keyword mentions on the feed: 61 snow or ice, 14 fire, 2 flooding.</p>
+          <p><b>14</b> fire mentions on the feed &mdash; e.g. US-40: &ldquo;…ween East of NJDOT Yard (Egg Harbor Twp) and East of CR 651/Fire Rd (Egg Harbor Twp), Wednesday September 2&rdquo;.</p>
+          <p><b>2</b> flooding mentions on the feed &mdash; e.g. US-40: &ldquo;Flooding on US 40 Both Directions West of Atlantic City Expressway (Egg Harbor Twp), All lanes closed eas…&rdquo;.</p>
           <p>Most-mentioned routes: US-1, Nj Turnpike, Gsp.</p>
         </div>
       </details>
@@ -414,6 +429,7 @@
         <summary>New Mexico &mdash; 0 events</summary>
         <div class="state-detail">
           <p>No events were archived from New Mexico's feed in this window. That can mean a live feed issue, not necessarily a quiet month &mdash; see the data limitations above.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>204 active fires, 79,856 acres.</p>
         </div>
       </details>
@@ -421,7 +437,9 @@
         <summary>New York &mdash; 4,649 events</summary>
         <div class="state-detail">
           <p>169 crashes, 265 closures, 4,169 construction records, 4 hazard records, 42 other records, for 4,649 total events.</p>
-          <p>Keyword mentions on the feed: 2 snow or ice, 7 fire, 5 flooding, 1 fatal-tagged.</p>
+          <p><b>7</b> fire mentions on the feed &mdash; e.g. I-90: &ldquo;Vehicle on fire on I-90 - NYS Thruway westbound at Before Exit 28 (I-90) - Fultonville (Rte 30A) starting 5:16 PM,…&rdquo;.</p>
+          <p><b>5</b> flooding mentions on the feed &mdash; e.g. I-190: &ldquo;Flooding ,right lane blocked on I-190 - Niagara Thruway northbound at Before Exit N15 (I-190) - Sheridan…&rdquo;.</p>
+          <p><b>1</b> fatal-tagged mention on the feed &mdash; e.g. NY-9a: &ldquo;Crash investigation and crash with fatality and Downed pole and Road Closure on NY 9A both directions between Old Saw Mill River…&rdquo;.</p>
           <p>Most-mentioned routes: I-80, I-287, US-9.</p>
         </div>
       </details>
@@ -430,7 +448,8 @@
         <div class="state-detail">
           <p>5 crashes, 115 closures, 1,098 construction records, 3 other records, for 1,221 total events.</p>
           <p>8 active fires, 2,018 acres.</p>
-          <p>Keyword mentions on the feed: 5 snow or ice, 3 fire, 4 flooding.</p>
+          <p><b>3</b> fire mentions on the feed &mdash; e.g. NC-42: &ldquo;Construction on NC 42 Both Directions in Wilson County from Firestone Pkwy to Whitley Rd E&rdquo;.</p>
+          <p><b>4</b> flooding mentions on the feed &mdash; e.g. NC-55: &ldquo;…ed on NC-55 Eastbound at Charlies Way in Wake County due to flooding&rdquo;.</p>
           <p>Most-mentioned routes: I-40, I-85, I-95.</p>
         </div>
       </details>
@@ -438,8 +457,8 @@
         <summary>North Dakota &mdash; 73 events</summary>
         <div class="state-detail">
           <p>6 closures, 60 construction records, 5 hazard records, 2 other records, for 73 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>29 active fires, 418 acres.</p>
-          <p>Keyword mentions on the feed: 6 snow or ice.</p>
           <p>Most-mentioned routes: I-94, US-2, I-29.</p>
         </div>
       </details>
@@ -447,7 +466,9 @@
         <summary>Ohio &mdash; 555 events</summary>
         <div class="state-detail">
           <p>49 crashes, 192 closures, 296 construction records, 2 hazard records, 16 other records, for 555 total events.</p>
-          <p>Keyword mentions on the feed: 8 snow or ice, 4 fire, 55 flooding.</p>
+          <p><b>4</b> snow or ice mentions on the feed.</p>
+          <p><b>4</b> fire mentions on the feed &mdash; e.g. I-80: &ldquo;…ect lane closures on I-80/I-90 East beyond SR-109, due to a fire&rdquo;.</p>
+          <p><b>55</b> flooding mentions on the feed &mdash; e.g. OH-669: &ldquo;…miles beyond Ceramic Rd Ne to Lincoln Ave (MM: 13), due to flooding&rdquo;.</p>
           <p>Most-mentioned routes: I-71, I-75, I-70.</p>
         </div>
       </details>
@@ -455,8 +476,9 @@
         <summary>Oklahoma &mdash; 56 events</summary>
         <div class="state-detail">
           <p>4 closures, 51 construction records, 1 other record, for 56 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>104 active fires, 53,148 acres.</p>
-          <p>Keyword mentions on the feed: 1 fire.</p>
+          <p><b>1</b> fire mention on the feed &mdash; e.g. SR-115: &ldquo;…H-115 in Kiowa County near Saddle Mountain is closed due to fires&rdquo;.</p>
           <p>Most-mentioned routes: I-40, I-35, OK-100.</p>
         </div>
       </details>
@@ -465,7 +487,7 @@
         <div class="state-detail">
           <p>116 crashes, 313 construction records, 106 other records, for 535 total events.</p>
           <p>228 active fires, 2,942,779 acres.</p>
-          <p>Keyword mentions on the feed: 7 snow or ice, 9 fire.</p>
+          <p><b>9</b> fire mentions on the feed &mdash; e.g. Or224: &ldquo;A fire is in the area has the SB lanes closed at MP 39&rdquo;.</p>
           <p>Most-mentioned routes: I-5, I-84, US-101.</p>
         </div>
       </details>
@@ -473,7 +495,8 @@
         <summary>Pennsylvania &mdash; 549 events</summary>
         <div class="state-detail">
           <p>41 crashes, 12 closures, 456 construction records, 2 weather records, 2 hazard records, 36 other records, for 549 total events.</p>
-          <p>Keyword mentions on the feed: 3 snow or ice, 2 fire, 4 flooding.</p>
+          <p><b>2</b> fire mentions on the feed &mdash; e.g. I-83: &ldquo;VEHICLE FIRE on I-83 Southbound At MM 18.5&rdquo;.</p>
+          <p><b>4</b> flooding mentions on the feed &mdash; e.g. US-6: &ldquo;FLOODING on US-6 BOTH DIRECTIONS between PERRY HW and SR 0089 SH&rdquo;.</p>
           <p>Most-mentioned routes: I-81, I-80, I-78.</p>
         </div>
       </details>
@@ -481,7 +504,6 @@
         <summary>Rhode Island &mdash; 5 events</summary>
         <div class="state-detail">
           <p>1 crash, 4 hazard records, for 5 total events.</p>
-          <p>Keyword mentions on the feed: 2 snow or ice.</p>
           <p>Most-mentioned routes: I-95, RI-146, I-195.</p>
         </div>
       </details>
@@ -490,7 +512,7 @@
         <div class="state-detail">
           <p>6 crashes, 9 construction records, 7 other records, for 22 total events.</p>
           <p>2 active fires, 86 acres.</p>
-          <p>Keyword mentions on the feed: 1 fire.</p>
+          <p><b>1</b> fire mention on the feed &mdash; e.g. I-77: &ldquo;vehicle on fire&rdquo;.</p>
           <p>Most-mentioned routes: I-77, I-26, I-95.</p>
         </div>
       </details>
@@ -498,8 +520,9 @@
         <summary>South Dakota &mdash; 220 events</summary>
         <div class="state-detail">
           <p>2 closures, 218 construction records, for 220 total events.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
           <p>67 active fires, 10,533 acres.</p>
-          <p>Keyword mentions on the feed: 194 snow or ice.</p>
+          <p><b>2</b> snow or ice mentions on the feed.</p>
           <p>Most-mentioned routes: I-90, US-14, US-281.</p>
         </div>
       </details>
@@ -508,7 +531,9 @@
         <div class="state-detail">
           <p>3 crashes, 101 closures, 123 construction records, 2 weather records, 15 other records, for 244 total events.</p>
           <p>3 active fires, 15 acres.</p>
-          <p>Keyword mentions on the feed: 4 snow or ice, 3 fire, 2 flooding.</p>
+          <p><b>3</b> snow or ice mentions on the feed &mdash; e.g. TN-28: &ldquo;Snowplowable Markers&rdquo;.</p>
+          <p><b>3</b> fire mentions on the feed &mdash; e.g. TN-155: &ldquo;Vehicle Fire&rdquo;.</p>
+          <p><b>2</b> flooding mentions on the feed &mdash; e.g. I-55: &ldquo;Flooding&rdquo;.</p>
           <p>Most-mentioned routes: I-24, I-40, I-75.</p>
         </div>
       </details>
@@ -517,7 +542,8 @@
         <div class="state-detail">
           <p>6 crashes, 17 closures, 885 construction records, 11 hazard records, 2 other records, for 921 total events.</p>
           <p>106 active fires, 143,917 acres.</p>
-          <p>Keyword mentions on the feed: 22 snow or ice, 2 flooding.</p>
+          <p><b>8</b> snow or ice mentions on the feed.</p>
+          <p><b>2</b> flooding mentions on the feed &mdash; e.g. TX-214: &ldquo;- Low water crossings are flooding&rdquo;.</p>
           <p>Most-mentioned routes: I-30, I-35, I-10.</p>
         </div>
       </details>
@@ -526,7 +552,7 @@
         <div class="state-detail">
           <p>94 crashes, 1 closure, 30 other records, for 125 total events.</p>
           <p>55 active fires, 338,368 acres.</p>
-          <p>Keyword mentions on the feed: 1 snow or ice, 4 fire.</p>
+          <p><b>4</b> fire mentions on the feed &mdash; e.g. I-80: &ldquo;Vehicle Fire, WB I-80 at MP 96.9 (Lake Point)&rdquo;.</p>
           <p>Most-mentioned routes: I-15, I-80, I-215.</p>
         </div>
       </details>
@@ -535,7 +561,6 @@
         <div class="state-detail">
           <p>3 crashes, 64 construction records, 12 other records, for 79 total events.</p>
           <p>2 active fires, 1 acres.</p>
-          <p>Keyword mentions on the feed: 4 snow or ice.</p>
           <p>Most-mentioned routes: I-89, I-91, US-7.</p>
         </div>
       </details>
@@ -544,7 +569,6 @@
         <div class="state-detail">
           <p>77 crashes, 214 closures, 87 construction records, 60 other records, for 438 total events.</p>
           <p>2 active fires, 360 acres.</p>
-          <p>Keyword mentions on the feed: 2 snow or ice.</p>
           <p>Most-mentioned routes: I-95, I-81, I-64.</p>
         </div>
       </details>
@@ -553,7 +577,8 @@
         <div class="state-detail">
           <p>41 crashes, 14 closures, 752 construction records, 66 other records, for 873 total events.</p>
           <p>119 active fires, 682,447 acres.</p>
-          <p>Keyword mentions on the feed: 101 snow or ice, 10 fire.</p>
+          <p><b>1</b> snow or ice mention on the feed.</p>
+          <p><b>10</b> fire mentions on the feed &mdash; e.g. &ldquo;…toll lanes and the right general purpose lane&rdquo;.</p>
           <p>Most-mentioned routes: Sr 405, Sr 5, Sr 90.</p>
         </div>
       </details>
@@ -561,7 +586,8 @@
         <summary>West Virginia &mdash; 116 events</summary>
         <div class="state-detail">
           <p>116 construction records for 116 total events.</p>
-          <p>Keyword mentions on the feed: 1 snow or ice.</p>
+          <p><em>No live crash feed for this state &mdash; crashes still happen here, MileCheck just can't count them.</em></p>
+          <p><b>1</b> snow or ice mention on the feed.</p>
           <p>Most-mentioned routes: US-119, I-77, US-50.</p>
         </div>
       </details>
@@ -570,7 +596,8 @@
         <div class="state-detail">
           <p>135 crashes, 412 closures, 2,185 construction records, 5 hazard records, 1 other record, for 2,738 total events.</p>
           <p>79 active fires, 153 acres.</p>
-          <p>Keyword mentions on the feed: 1 snow or ice, 5 fire, 1 flooding.</p>
+          <p><b>5</b> fire mentions on the feed &mdash; e.g. I-94: &ldquo;…ond Ramp from County HH&rdquo;.</p>
+          <p><b>1</b> flooding mention on the feed &mdash; e.g. WI-36: &ldquo;Flooding on roadway on WIS 36 South at WIS 100/Saint Martins Rd&rdquo;.</p>
           <p>Most-mentioned routes: I-41, I-94, I-43.</p>
         </div>
       </details>
@@ -579,13 +606,13 @@
         <div class="state-detail">
           <p>6 crashes, 5 closures, 5 hazard records, 8 other records, for 24 total events.</p>
           <p>41 active fires, 15,947 acres.</p>
-          <p>Keyword mentions on the feed: 4 snow or ice, 3 fire.</p>
+          <p><b>3</b> fire mentions on the feed &mdash; e.g. US-26: &ldquo;US26: Fire, travel lane blocked near Shoshoni from milepost 126 to 127, be prepared to stop, expect delays&rdquo;.</p>
           <p>Most-mentioned routes: I-80, WY-22, I-90.</p>
         </div>
       </details>
 
       <h2 class="rc">Winter is starting early</h2>
-      <p>787 events in this window mentioned snow or ice on the road surface. 192 mentioned fire, 98 mentioned flooding, and 6 were tagged fatal by the reporting DOT.</p>
+      <p>140 events in this window mentioned snow or ice on the road surface. 192 mentioned fire, 98 mentioned flooding, and 6 were tagged fatal by the reporting DOT.</p>
       <p>MileCheck has live snowplow location data in the app for Alaska, Colorado, Delaware, Indiana, Iowa, Kansas, Manitoba, Michigan, Minnesota, Montana, Nebraska, North Dakota, Utah, and West Virginia.</p>
 
       <h2 class="rc">Fatal crashes</h2>

@@ -15,7 +15,7 @@
   "keywordCounts": {
     "fire": 192,
     "flood": 98,
-    "snowice": 787,
+    "snowice": 140,
     "fatal": 6
   },
   "keywordSamples": {
@@ -325,154 +325,154 @@
     ],
     "snowice": [
       {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 NB/SB @ MP 333 at AL67 in Priceville until I-65 NB/SB @ MP 351 at Exit 351: US72 in Athens",
-        "date": "2025-05-12T11:30:00.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "AL-69",
-        "headline": "AL69 NB/SB @ MP 239.46 at I-65 in Cullman until AL69 NB/SB @ MP 242.77 at US31 in Cullman",
-        "date": "2025-07-28T13:30:00.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "AL-157",
-        "headline": "AL157 NB/SB @ MP 6.31 at I-65 in Cullman until AL157 NB/SB @ MP 5.21 at US31 in Cullman",
-        "date": "2025-07-28T13:30:00.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "US-278",
-        "headline": "US278 EB/WB @ MP 77.41 at I-65 in Cullman until US278 EB/WB @ MP 79.5 at US31 in Cullman",
-        "date": "2025-07-28T13:30:00.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 SB @ MP 338 at Upper River Rd in Priceville",
-        "date": "2026-08-28T14:27:49.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 SB @ MP 332.89 at AL67 in Priceville",
-        "date": "2026-08-31T23:57:02.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 SB @ MP 332 at AL67 in Priceville",
-        "date": "2026-09-01T22:17:02.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 SB @ MP 330 at AL67 in Priceville",
-        "date": "2026-09-01T22:22:32.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "AL-297",
-        "headline": "AL297 NB @ MP 0.89 at Rice Mine Rd NE in Holt",
-        "date": "2026-09-04T22:53:29.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "AL-67",
-        "headline": "AL67 NB/SB @ MP 33.21 at Derby Dr in Priceville",
-        "date": "2026-09-04T23:07:51.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 SB @ MP 336 at Upper River Rd in Priceville",
-        "date": "2026-09-07T15:09:36.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "AL-265",
-        "headline": "AL 265 NB/SB @ MP 0.1 at Main St. in Beatrice until AL 265 NB/SB @ MP 0.1 at Main St. in Beatrice",
-        "date": "2026-10-10T13:00:00.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 SB @ MP 335 at Upper River Rd in Priceville",
-        "date": "2026-09-15T14:44:49.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "AL-67",
-        "headline": "AL67 NB/SB @ MP 33.41 at S Bethel Rd in Priceville",
-        "date": "2026-09-15T23:08:15.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 NB @ MP 332.99 at AL67 in Priceville",
-        "date": "2026-09-17T02:42:45.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "US-280",
-        "headline": "US280 WB @ MP 0.8 at Office Park Dr in Mountain Brook",
-        "date": "2026-09-17T12:30:54.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 NB @ MP 334 at Upper River Rd in Priceville",
-        "date": "2026-09-21T16:48:20.000Z"
-      },
-      {
-        "state": "AL",
-        "route": "I-65",
-        "headline": "I-65 NB/SB @ MP 10.19 past Exit 10/W Lee St. in Chickasaw",
-        "date": "2026-09-25T22:32:21.000Z"
-      },
-      {
-        "state": "AR",
-        "route": "AR-42",
-        "headline": "Bridge removed from service.",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "AZ",
-        "route": "US-60",
-        "headline": "Right lanes closed on US-60 Westbound from E Forest Service Rd 320 (MP 239)  to  E Forest Service Rd 320 (MP 238) . All lanes closed.   9/2/2026 6:30 AM  to 9/2/2026 3:30 PM",
-        "date": 1788355800
-      },
-      {
         "state": "AZ",
         "route": "SR-366",
         "headline": "Right lane closed on SR-366 Northbound from Snow Flt (MP 133) to Upper Arcadia (MP 134) . All lanes closed.  9/28/2026 8:00 AM to 9/30/2026 5:00 PM",
         "date": 1790607600
       },
       {
-        "state": "AZ",
-        "route": "SR-202",
-        "headline": "Freeway closed on 202-LOOP Westbound from SR-87 (MP 48) to Price Rd (MP 51) . All lanes closed.  9/25/2026 10:00 PM to 9/28/2026 5:00 AM",
-        "date": 1790398800
-      },
-      {
-        "state": "AZ",
-        "route": "SR-87",
-        "headline": "Wrong-way driver on SR-87 Northbound Near W Forest Service Rd 535 (MP 248).",
-        "date": 1790334360
+        "state": "BC",
+        "route": "BC-97C",
+        "headline": "Road maintenance from Highway 97C, At Exit to Sunset Main Road to At Exit to Brenda Mine Road / Chain off Area. Starting Mon Sep 14 until Fri Sep 18. From 7:00 AM to 5:00 PM PDT, weekdays. Right lane blocked. Shoulder cl",
+        "date": "2026-09-14T14:00:00.000Z"
       },
       {
         "state": "BC",
-        "route": "BC-97",
-        "headline": "Highway 97, southbound. Special event planned between Downtown Dawson Creek and 52nd St NW for 96.6 km (Chetwynd to Dawson Creek). Starting Sat Sep 12 at 8:00 AM MST until Sat Sep 12 at 8:00 PM MST. 2026 Cops for Cancer ",
-        "date": "2026-09-12T15:00:00.000Z"
+        "route": "BC-1",
+        "headline": "Road maintenance from Highway 1, At Bench Snowshed. Starting Tue Sep 8 until Fri Oct 30. All day, every day. Last update: September 1st, 2026 at 10:52am PDT. Snowshed maintenance. Intermittent short term stoppages. Speed",
+        "date": "2026-09-08T16:00:00.000Z"
       },
       {
         "state": "BC",
-        "route": "BC-97",
-        "headline": "Highway 97 (Alaska Highway), southbound. Special event planned between 93 St and 20 St for 70.1 km (Fort St John to Dawson Creek). Starting Fri Sep 11 at 8:00 AM MST until Fri Sep 11 at 8:00 PM MST. 2026 Cops for Cancer ",
-        "date": "2026-09-11T15:00:00.000Z"
+        "route": "BC-37A",
+        "headline": "Highway 37A, in both directions. Maintenance between Surprise Pullout/Windy Chain Up and Surprise Bridge (13 km west of Meziadin). Until Thu Sep 3. Maintenance at Windy Hill Rest Area. Speed reduced to 50km/h on highway.",
+        "date": "2026-08-25T07:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-5",
+        "headline": "Highway 5. Vehicle recovery between Avola Bridge and Finn Creek Rec Site; Messiter NB Chainup for 0.1 km (1 km north of Avola). Single lane alternating traffic. Watch for traffic control. Next update time Wed Sep 2 at 4:",
+        "date": "2026-09-02T14:16:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-1",
+        "headline": "Road maintenance from Highway 1, At Bench Snowshed. Starting Tue Sep 8 until Fri Oct 30. All day, every day. Last update: September 8th, 2026 at 3:18pm PDT. Snowshed maintenance. Intermittent short term stoppages. Speeds",
+        "date": "2026-09-08T16:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-37A",
+        "headline": "Construction work at Highway 37A, At Windy Hill Chain-up Rest Area. Starting Wed Sep 9 until Tue Sep 15. Last update: September 8th, 2026 at 4:54pm PDT. Reduced speeds to 70km/hr through the work zone.",
+        "date": "2026-09-09T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-37",
+        "headline": "Construction work at Highway 37, Meziadin Chain-on/Chain-off area. Starting Wed Sep 9 until Tue Sep 15. Last update: September 8th, 2026 at 4:54pm PDT. Reduced speeds to 70km/hr through the work zone.",
+        "date": "2026-09-09T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-1",
+        "headline": "Road maintenance from Highway 1, At Bench Snowshed. Starting Tue Sep 8 until Fri Oct 30. All day, every day. Last update: September 13th, 2026 at 4:02pm PDT. Snowshed maintenance. Intermittent short term stoppages. Speed",
+        "date": "2026-09-08T16:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-1",
+        "headline": "Construction work from Highway 1, At W/B Exit to Illecillewaet Brake Check / Rest Area to At Jack Macdonald Snowshed. Starting Tue Jul 14. All day, every day. Expect 30 minutes delay. Last update: September 13th, 2026 at",
+        "date": "2026-07-14T22:10:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-37A",
+        "headline": "Construction work at Highway 37A, At Windy Hill Chain-up Rest Area. Starting Wed Sep 9 until Tue Sep 22. From 8:00 AM to 5:00 PM PDT, every day. Last update: September 15th, 2026 at 7:36am PDT. Reduced speeds to 70km/hr ",
+        "date": "2026-09-09T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-37",
+        "headline": "Construction work at Highway 37, Meziadin Chain-on/Chain-off area. Starting Wed Sep 9 until Tue Sep 22. From 8:00 AM to 5:00 PM PDT, every day. Single lane alternating traffic. Expect delays. Speed Limit restriction: 50.",
+        "date": "2026-09-09T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-1",
+        "headline": "Construction work from Highway 1, At W/B Exit to Illecillewaet Brake Check / Rest Area to At Jack Macdonald Snowshed. Starting Tue Jul 14. All day, every day. Expect 30 minutes delay. Last update: September 15th, 2026 at",
+        "date": "2026-07-14T22:10:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-37",
+        "headline": "Construction work at Highway 37, Meziadin Chain-on/Chain-off area. Starting Wed Sep 9 until Tue Sep 22. From 8:00 AM to 5:00 PM PDT, every day. Single lane alternating traffic. Expect delays. Speed Limit restriction: 50.",
+        "date": "2026-09-09T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-37A",
+        "headline": "Construction work at Highway 37A, At Windy Hill Chain-up Rest Area. Starting Wed Sep 9 until Tue Sep 22. From 8:00 AM to 5:00 PM PDT, every day. Last update: September 15th, 2026 at 8:12pm PDT. Reduced speeds to 70km/hr ",
+        "date": "2026-09-09T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-1",
+        "headline": "Road maintenance from Highway 1, At Bench Snowshed. Starting Tue Sep 8 until Fri Oct 30. All day, every day. Last update: September 15th, 2026 at 8:06pm PDT. Snowshed maintenance. Intermittent short term stoppages. Speed",
+        "date": "2026-09-08T16:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-5",
+        "headline": "Construction work from Highway 5, Othello Rd to Sowaqua Chain-up Area. Starting Wed Sep 16 until Sun Sep 27. From 7:00 AM to 7:00 PM PDT, weekdays. Right lane closed. Watch for traffic control. Last update: September 17t",
+        "date": "2026-09-16T14:00:00.000Z"
+      },
+      {
+        "state": "CA",
+        "route": "US-101",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      {
+        "state": "CA",
+        "route": "US-199",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      {
+        "state": "CA",
+        "route": "SR-36",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      {
+        "state": "CA",
+        "route": "SR-299",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      {
+        "state": "CA",
+        "route": "SR-20",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      {
+        "state": "CA",
+        "route": "SR-29",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      {
+        "state": "CA",
+        "route": "SR-175",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      {
+        "state": "CA",
+        "route": "SR-281",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
       }
     ],
     "fatal": [
@@ -568,48 +568,400 @@
       "WI": 1
     },
     "snowice": {
-      "AL": 18,
-      "AR": 1,
-      "AZ": 4,
-      "BC": 38,
-      "CA": 74,
-      "CO": 60,
-      "DE": 54,
-      "FL": 4,
-      "IA": 1,
-      "IL": 7,
-      "IN": 17,
-      "KS": 6,
-      "KY": 2,
-      "ME": 1,
-      "MI": 13,
-      "MO": 4,
-      "MS": 5,
-      "MT": 43,
-      "NC": 5,
-      "ND": 6,
-      "NE": 6,
-      "NH": 1,
-      "NJ": 61,
-      "NY": 2,
-      "OH": 8,
-      "OR": 7,
-      "PA": 3,
-      "RI": 2,
-      "SD": 194,
-      "TN": 4,
-      "TX": 22,
-      "UT": 1,
-      "VA": 2,
-      "VT": 4,
-      "WA": 101,
-      "WI": 1,
-      "WV": 1,
-      "WY": 4
+      "AZ": 1,
+      "BC": 16,
+      "CA": 69,
+      "CO": 35,
+      "OH": 4,
+      "SD": 2,
+      "TN": 3,
+      "TX": 8,
+      "WA": 1,
+      "WV": 1
     },
     "fatal": {
       "CA": 5,
       "NY": 1
+    }
+  },
+  "keywordExampleByState": {
+    "fire": {
+      "AL": {
+        "route": "US-280",
+        "headline": "…S Uniroyal Rd in Lee County until US280/431 SB @ MP 135 at Firefly Ln in Lee County",
+        "date": "2026-08-26T12:00:00.000Z"
+      },
+      "AR": {
+        "route": "AR-274",
+        "headline": "Wildfire in the area",
+        "date": "2026-09-15"
+      },
+      "AZ": {
+        "route": "I-15",
+        "headline": "Vehicle fire on I-15 Northbound near Desert Springs Rd (MP 11).",
+        "date": 1788562200
+      },
+      "BC": {
+        "route": "BC-97",
+        "headline": "Wildfire from Highway 97, In Spallumcheen and At Highway 97 and Old Kamloops Road to At Salmon River Road. R…",
+        "date": "2026-08-02T03:16:00.000Z"
+      },
+      "CA": {
+        "route": "SR-1",
+        "headline": "Fire Conventional Hwy Roadway is closed.",
+        "date": "2026-08-27T20:01:00.000Z"
+      },
+      "CO": {
+        "route": "SH-119",
+        "headline": "Between Vista Comm and County Road 7 (Firestone) from Mile Point 61.4 to Mile Point 62.5. Both shoulders closed due to road construction. Unti…",
+        "date": "2026-02-25T21:10:00Z"
+      },
+      "DE": {
+        "route": "I-95",
+        "headline": "I-95 SOUTHBOUND AT DE-141: RIGHT LANE CLOSED DUE TO VEHICLE FIRE",
+        "date": "2026-09-18"
+      },
+      "FL": {
+        "route": "I-95",
+        "headline": "Vehicle on fire",
+        "date": "2026-09-01T22:54:11.000Z"
+      },
+      "GA": {
+        "route": "GA-19",
+        "headline": "[fire or containment contained] on SR 19 Northbound at QUINN RD. No lanes blocked.",
+        "date": "2026-06-05T16:41:13.000Z"
+      },
+      "IA": {
+        "route": "I-35",
+        "headline": "Right lane blocked · Vehicle on fire",
+        "date": "2026-09-18T23:29:02.000Z"
+      },
+      "KS": {
+        "route": "I-435",
+        "headline": "I-435 — vehicle fire",
+        "date": "2026-09-01T22:19:00.000Z"
+      },
+      "LA": {
+        "route": "LA-1062",
+        "headline": "…idge Maintenance Operations on LA-1062 Both Directions from Firetower Ln to 1.2 Mi South of Caboose Ln . All lanes closed. Starting 1/29/2026 6:00 AM and Ending 10/…",
+        "date": "2026-01-29T12:00:00.000Z"
+      },
+      "MI": {
+        "route": "I-75",
+        "headline": "Vehicle Fire on SB I-75",
+        "date": "2026-09-01"
+      },
+      "MO": {
+        "route": "I-470",
+        "headline": "…(s) after RP PRYOR RD TO IS470W W — EXPECT DELAYS — VEHICLE FIRE I-470 WB PAST US-50 2 RIGHT LANES CLOSED EST. CLEARANCE TIME: 7:00 PM (-94422389,38934660)",
+        "date": "2026-09-13T23:20:00.000Z"
+      },
+      "MS": {
+        "route": "MS-14",
+        "headline": "Road Work : MS 14 between Carter Rd and Firetower Rd - Expect delays",
+        "date": "2026-09-01"
+      },
+      "MT": {
+        "route": "MT-38",
+        "headline": "Travelers can expect the following: fire with flaggers daily between 8:00 AM and 8:00 PM until further notice. TRAFFIC WILL BE PILOTED THROU…",
+        "date": "2026-09-01"
+      },
+      "NC": {
+        "route": "NC-42",
+        "headline": "Construction on NC 42 Both Directions in Wilson County from Firestone Pkwy to Whitley Rd E. All lanes closed. Id: 6436",
+        "date": "2026-08-25T11:00:00.000Z"
+      },
+      "NJ": {
+        "route": "US-40",
+        "headline": "…ween East of NJDOT Yard (Egg Harbor Twp) and East of CR 651/Fire Rd (Egg Harbor Twp), Wednesday September 2",
+        "date": "2026-09-01"
+      },
+      "NV": {
+        "route": "I-80",
+        "headline": "Major Forest fire on I-80 Westbound 8 Mi After Gold Ranch Rd. All lanes blocked - use other routes. Start time: 9/16/…",
+        "date": "2026-09-16T17:50:00.000Z"
+      },
+      "NY": {
+        "route": "I-90",
+        "headline": "Vehicle on fire on I-90 - NYS Thruway westbound at Before Exit 28 (I-90) - Fultonville (Rte 30A) starting 5:16 PM,…",
+        "date": "2026-09-08T21:16:54.000Z"
+      },
+      "OH": {
+        "route": "I-80",
+        "headline": "…ect lane closures on I-80/I-90 East beyond SR-109, due to a fire.",
+        "date": "2026-09-02"
+      },
+      "OK": {
+        "route": "SR-115",
+        "headline": "…H-115 in Kiowa County near Saddle Mountain is closed due to fires. Drivers are encouraged to avoid the area and find an alternate route.",
+        "date": "2026-09-08"
+      },
+      "OR": {
+        "route": "OR224",
+        "headline": "A fire is in the area has the SB lanes closed at MP 39. Use an alternate route.",
+        "date": "2026-09-01"
+      },
+      "PA": {
+        "route": "I-83",
+        "headline": "VEHICLE FIRE on I-83 Southbound At MM 18.5. Right Lane (of 3 Lanes) Blocked.",
+        "date": "2026-09-19"
+      },
+      "SC": {
+        "route": "I-77",
+        "headline": "vehicle on fire",
+        "date": "2026-09-12"
+      },
+      "TN": {
+        "route": "TN-155",
+        "headline": "Vehicle Fire",
+        "date": "2026-09-02T17:49:10.000Z"
+      },
+      "UT": {
+        "route": "I-80",
+        "headline": "Vehicle Fire, WB I-80 at MP 96.9 (Lake Point). Right Shoulder Blocked.",
+        "date": 1788379912
+      },
+      "WA": {
+        "route": null,
+        "headline": "…toll lanes and the right general purpose lane. Medical Aid, Fire Assistance, and the State Patrol have arrived on the scene.",
+        "date": "2026-09-03T22:48:00.000Z"
+      },
+      "WI": {
+        "route": "I-94",
+        "headline": "…ond Ramp from County HH. The right lane is blocked due to a fire.",
+        "date": "2026-09-03T20:25:16.000Z"
+      },
+      "WY": {
+        "route": "US-26",
+        "headline": "US26: Fire, travel lane blocked near Shoshoni from milepost 126 to 127, be prepared to stop, expect delays.",
+        "date": "2026-09-06"
+      }
+    },
+    "flood": {
+      "AZ": {
+        "route": "US-191",
+        "headline": "Flooding on roadway on US-191 Northbound Near CR-C462 (MP 453).",
+        "date": 1789515300
+      },
+      "BC": {
+        "route": "BC-1",
+        "headline": "…on work from Highway 1, In Hope and 69m West of Exit 168 to Flood-Hope Rd to In Hope and 15m Northeast of Exit 170 to Hope / Hwy 1 East. Starting Thu Jul 2 until Wed…",
+        "date": "2026-07-02T12:00:00.000Z"
+      },
+      "CA": {
+        "route": "CA-62",
+        "headline": "Roadway Flooding — CA-62",
+        "date": "2026-09-06"
+      },
+      "DE": {
+        "route": "FREDERICA",
+        "headline": "S MARKET ST BETWEEN FREDERICA RD AND DAVID ST CLOSED DUE TO FLOODING",
+        "date": "2026-09-22"
+      },
+      "FL": {
+        "route": "SR-31",
+        "headline": "Flooding",
+        "date": "2026-09-10T22:59:55.000Z"
+      },
+      "GA": {
+        "route": "GA-400",
+        "headline": "Flooding on GA 400 Southbound at Holcomb Br Rd West/SR 140. Right lane blocked.",
+        "date": "2026-09-11T22:12:44.000Z"
+      },
+      "IA": {
+        "route": "US-6",
+        "headline": "Blocked · flooding",
+        "date": "2026-09-20T15:14:18.000Z"
+      },
+      "MI": {
+        "route": "I-75",
+        "headline": "Flooding on SB I-75",
+        "date": "2026-09-03"
+      },
+      "MO": {
+        "route": "MO-48",
+        "headline": "FLOODING — .016 mile(s) after RT C S — .006 mile(s) before CRD 169 E — CLOSED",
+        "date": "2026-09-14T14:42:00.000Z"
+      },
+      "MT": {
+        "route": "S-482",
+        "headline": "…can expect the following: road closed and Critical incident flood until further notice. FARM TO MARKET ROAD IS CLOSED",
+        "date": "2026-09-01"
+      },
+      "NC": {
+        "route": "NC-55",
+        "headline": "…ed on NC-55 Eastbound at Charlies Way in Wake County due to flooding. Updated 1:36 pm. ID -26091400002.",
+        "date": "2026-09-14T04:36:00.000Z"
+      },
+      "NJ": {
+        "route": "US-40",
+        "headline": "Flooding on US 40 Both Directions West of Atlantic City Expressway (Egg Harbor Twp), All lanes closed eas…",
+        "date": "2026-09-22"
+      },
+      "NY": {
+        "route": "I-190",
+        "headline": "Flooding ,right lane blocked on I-190 - Niagara Thruway northbound at Before Exit N15 (I-190) - Sheridan…",
+        "date": "2026-09-03T23:41:23.000Z"
+      },
+      "OH": {
+        "route": "OH-669",
+        "headline": "…miles beyond Ceramic Rd Ne to Lincoln Ave (MM: 13), due to flooding. Use alternate route.",
+        "date": "2026-09-10"
+      },
+      "PA": {
+        "route": "US-6",
+        "headline": "FLOODING on US-6 BOTH DIRECTIONS between PERRY HW and SR 0089 SH. Closed.",
+        "date": "2026-09-03"
+      },
+      "TN": {
+        "route": "I-55",
+        "headline": "Flooding",
+        "date": "2026-09-11T18:44:44.000Z"
+      },
+      "TX": {
+        "route": "TX-214",
+        "headline": "- Low water crossings are flooding. - Water over roadway. Water over the roadway",
+        "date": "2026-09-25T08:23:00-05:00"
+      },
+      "WI": {
+        "route": "WI-36",
+        "headline": "Flooding on roadway on WIS 36 South at WIS 100/Saint Martins Rd. The left lane is closed.",
+        "date": "2026-09-20T10:14:15.000Z"
+      }
+    },
+    "snowice": {
+      "AZ": {
+        "route": "SR-366",
+        "headline": "Right lane closed on SR-366 Northbound from Snow Flt (MP 133) to Upper Arcadia (MP 134) . All lanes closed. 9/28/2026 8:00 AM to 9/30/2026 5:00 PM",
+        "date": 1790607600
+      },
+      "BC": {
+        "route": "BC-97C",
+        "headline": "…t Exit to Sunset Main Road to At Exit to Brenda Mine Road / Chain off Area. Starting Mon Sep 14 until Fri Sep 18. From 7:00 AM to 5:00 PM PDT, weekdays. Right lane b…",
+        "date": "2026-09-14T14:00:00.000Z"
+      },
+      "CA": {
+        "route": "US-101",
+        "headline": "Caltrans chain control in effect",
+        "date": "2026-09-01"
+      },
+      "CO": {
+        "route": "I-70",
+        "headline": "…1, 7:00PM Comment: More project information is available at chainstationupgradeproject@gmail.com or 970-401-7734.",
+        "date": "2026-09-01T13:00:00Z"
+      },
+      "OH": {
+        "route": "OH-237",
+        "headline": "SR 237 northbound over Snow Rd. will be in a bi-directional traffic pattern beginning on Friday, May 1, through October 2026. O…",
+        "date": "2026-05-01T04:00:00.000Z"
+      },
+      "SD": {
+        "route": "US-14",
+        "headline": "…s structural project to remove and replace a box culvert on Ice Box Creek crossing US14A approximately one quarter mile east of Cheyenne Crossing. Traffic will be…",
+        "date": "2026-08-31T13:37:04.000Z"
+      },
+      "TN": {
+        "route": "TN-28",
+        "headline": "Snowplowable Markers",
+        "date": "2026-06-01T20:00:00.000Z"
+      },
+      "TX": {
+        "route": "I-820",
+        "headline": "…httime closure only. All lanes of westbound I-820 from Rufe Snow Dr. to I-35W will be closed. Traffic will be redirected to the TEXpress lanes at no cost only along…",
+        "date": "2026-08-31T20:00:00-05:00"
+      },
+      "WA": {
+        "route": "SR 542",
+        "headline": "…Hill Climb. Expect flaggers and short-term traffic holds at Snowater Road (milepost 34) and Mount Baker Ski Lodge (milepost 54). For more information, visit the Mou…",
+        "date": "2026-09-11T20:27:00.000Z"
+      },
+      "WV": {
+        "route": "US-50",
+        "headline": "Bridge Work on US-50E from SNOW BIRD to Mile Marker 11.25. Occurring 07:00 AM to 07:00 AM from 09/22/2026 until 11/30/2026. Expires…",
+        "date": "2026-09-22"
+      }
+    },
+    "fatal": {
+      "CA": {
+        "route": "I-10",
+        "headline": "Fatality — I-10 WB",
+        "date": "2026-09-02"
+      },
+      "NY": {
+        "route": "NY-9A",
+        "headline": "Crash investigation and crash with fatality and Downed pole and Road Closure on NY 9A both directions between Old Saw Mill River Road; NY 10…",
+        "date": "2026-09-11T18:35:00.000Z"
+      }
+    }
+  },
+  "keywordExampleIsClean": {
+    "fire": {
+      "AL": true,
+      "AR": true,
+      "AZ": true,
+      "BC": true,
+      "CA": true,
+      "CO": true,
+      "DE": true,
+      "FL": true,
+      "GA": true,
+      "IA": true,
+      "KS": true,
+      "LA": true,
+      "MI": true,
+      "MO": true,
+      "MS": true,
+      "MT": true,
+      "NC": true,
+      "NJ": true,
+      "NV": true,
+      "NY": true,
+      "OH": true,
+      "OK": true,
+      "OR": true,
+      "PA": true,
+      "SC": true,
+      "TN": true,
+      "UT": true,
+      "WA": true,
+      "WI": true,
+      "WY": true
+    },
+    "flood": {
+      "AZ": true,
+      "BC": true,
+      "CA": true,
+      "DE": true,
+      "FL": true,
+      "GA": true,
+      "IA": true,
+      "MI": true,
+      "MO": true,
+      "MT": true,
+      "NC": true,
+      "NJ": true,
+      "NY": true,
+      "OH": true,
+      "PA": true,
+      "TN": true,
+      "TX": true,
+      "WI": true
+    },
+    "snowice": {
+      "AZ": false,
+      "BC": true,
+      "CA": true,
+      "CO": true,
+      "OH": false,
+      "SD": false,
+      "TN": true,
+      "TX": false,
+      "WA": false,
+      "WV": false
+    },
+    "fatal": {
+      "CA": true,
+      "NY": true
     }
   },
   "topCorridors": [
