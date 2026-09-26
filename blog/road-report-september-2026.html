@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MileCheck Road Report: September 1&ndash;25, 2026</title>
-  <meta name="description" content="30,835 road events across all 50 states and British Columbia, September 1 to 25, 2026, from daily and two-hourly state DOT feed archives. Partial month; final numbers after September 30.">
+  <meta name="description" content="31,071 road events across all 50 states and British Columbia, September 1 to 25, 2026, from daily and two-hourly state DOT feed archives. Partial month; final numbers after September 30.">
   <meta name="robots" content="noindex">
 
   <meta property="og:title" content="MileCheck Road Report: September 1–25, 2026">
@@ -37,6 +37,15 @@
     .article-note{font-size:14px;color:#5C6670;background:#F7F8F9;border-radius:9px;padding:12px 15px;margin:18px 0;}
     .article-list{margin:18px 0;padding-left:20px;}
     .article-list li{margin-bottom:11px;line-height:1.6;}
+    .state-acc{border:1px solid #E4E7EA;border-radius:8px;margin:0 0 8px;overflow:hidden;}
+    .state-acc summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:14.5px;color:#0F1419;list-style:none;}
+    .state-acc summary::-webkit-details-marker{display:none;}
+    .state-acc summary::before{content:'\25B8 ';color:#5C6670;}
+    .state-acc[open] summary::before{content:'\25BE ';}
+    .state-acc[open] summary{border-bottom:1px solid #EEF0F2;}
+    .state-detail{padding:12px 14px 14px;font-size:14px;color:#3D454D;}
+    .state-detail p{margin:0 0 8px;}
+    .state-detail p:last-child{margin-bottom:0;}
   </style>
 </head>
 <body>
@@ -78,44 +87,27 @@
         </ul>
       </div>
 
-      <p class="article-lead">30,835 road events across all 50 states and British Columbia, September 1 through 25, from MileCheck's archive of every state DOT and DriveBC alert feed. An event is one closure, crash, or work zone, counted once no matter how many days it stayed on the feed.</p>
+      <p class="article-lead">31,071 road events across all 50 states and British Columbia, September 1 through 25, from MileCheck's archive of every state DOT and DriveBC alert feed. An event is one closure, crash, or work zone, counted once no matter how many days it stayed on the feed.</p>
 
       <div class="stat-band">
-        <div class="stat-cell"><span class="stat-num">30,835</span><span class="stat-label">total events</span></div>
-        <div class="stat-cell"><span class="stat-num">21,399</span><span class="stat-label">construction</span></div>
-        <div class="stat-cell"><span class="stat-num">4,519</span><span class="stat-label">closures</span></div>
-        <div class="stat-cell"><span class="stat-num">1,927</span><span class="stat-label">crashes posted by DOTs</span></div>
+        <div class="stat-cell"><span class="stat-num">31,071</span><span class="stat-label">total events</span></div>
+        <div class="stat-cell"><span class="stat-num">21,568</span><span class="stat-label">construction</span></div>
+        <div class="stat-cell"><span class="stat-num">4,623</span><span class="stat-label">closures</span></div>
+        <div class="stat-cell"><span class="stat-num">1,918</span><span class="stat-label">crashes posted by DOTs</span></div>
       </div>
       <p style="font-size:13px;color:#5A6670;margin:-20px 0 20px;"><strong>Crash count only</strong> &mdash; excludes Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, and West Virginia. Their live DOT feeds don't carry crashes. Crashes still happen in these states; we don't have a live public feed for them.</p>
-
-      <h2 class="rc">Crashes by state</h2>
-      <p>1,927 crashes were posted from September 1 through 25, across the 41 states and provinces that publish crash data on their feed. California reports the most crashes and carries the most traffic, so it leads any national list by volume, not necessarily by rate.</p>
-      <table class="data-table">
-        <tr><th>State</th><th>Crashes</th></tr>
-        <tr><td>California</td><td>255</td></tr>
-        <tr><td>Alabama</td><td>209</td></tr>
-        <tr><td>New York</td><td>189</td></tr>
-        <tr><td>Arizona</td><td>134</td></tr>
-        <tr><td>Wisconsin</td><td>133</td></tr>
-        <tr><td>Oregon</td><td>109</td></tr>
-        <tr><td>Georgia</td><td>101</td></tr>
-        <tr><td>Utah</td><td>96</td></tr>
-        <tr><td>Virginia</td><td>82</td></tr>
-        <tr><td>Florida</td><td>64</td></tr>
-      </table>
-      <p style="font-size:13px;color:#5A6670;margin:-14px 0 20px;">See the crash-data limitations above before comparing states.</p>
 
       <h2 class="rc">Busiest corridors</h2>
       <table class="data-table">
         <tr><th>Corridor</th><th>Events</th></tr>
-        <tr><td>I-80</td><td>855</td></tr>
-        <tr><td>I-95</td><td>560</td></tr>
-        <tr><td>I-10</td><td>502</td></tr>
-        <tr><td>I-287</td><td>436</td></tr>
-        <tr><td>US-1</td><td>427</td></tr>
-        <tr><td>I-70</td><td>402</td></tr>
-        <tr><td>I-41</td><td>362</td></tr>
-        <tr><td>I-94</td><td>353</td></tr>
+        <tr><td>I-80</td><td>852</td></tr>
+        <tr><td>I-95</td><td>549</td></tr>
+        <tr><td>I-10</td><td>497</td></tr>
+        <tr><td>I-287</td><td>431</td></tr>
+        <tr><td>US-1</td><td>426</td></tr>
+        <tr><td>I-70</td><td>420</td></tr>
+        <tr><td>I-41</td><td>364</td></tr>
+        <tr><td>I-90</td><td>355</td></tr>
       </table>
 
       <h2 class="rc">Still closed, years out</h2>
@@ -123,46 +115,477 @@
         <strong>Closures scheduled to run for years, one per state</strong>
         <ul class="article-list" style="margin-top:10px;margin-bottom:0;">
           <li><strong>Wisconsin, I-535</strong> &mdash; 2,616 days, April 8, 2022 through June 6, 2029</li>
+          <li><strong>Ohio, I-75</strong> &mdash; 2,317 days, June 30, 2026 through November 2, 2032</li>
           <li><strong>Virginia, I-81</strong> &mdash; 2,195 days, March 28, 2025 through April 1, 2031</li>
           <li><strong>Texas, US-87</strong> &mdash; 2,070 days, March 2, 2026 through October 31, 2031</li>
           <li><strong>Washington, SR-165</strong> &mdash; 1,902 days, April 16, 2025 through July 1, 2030 &mdash; the Carbon River/Fairfax Bridge, closed to all vehicles, bicyclists, and pedestrians</li>
           <li><strong>North Carolina, US-17</strong> &mdash; 1,859 days, November 28, 2022 through December 31, 2027</li>
-          <li><strong>New York, I-91</strong> &mdash; 1,733 days, March 4, 2024 through December 1, 2028</li>
         </ul>
       </div>
 
-      <h2 class="rc">Wildfires</h2>
-      <p>2,326 fires, deduped by fire id and counted at each one's largest reported size, covering 6,301,607 acres across the states and provinces MileCheck tracks.</p>
+      <h2 class="rc">State activity</h2>
+      <p>31,071 events, 1,918 crashes, and 2,332 active wildfires covering 6,302,665 acres, across every jurisdiction MileCheck tracks. The ten most active by total feed volume:</p>
       <table class="data-table">
-        <tr><th>State / province</th><th>Fires</th><th>Acres</th></tr>
-        <tr><td>Oregon</td><td>228</td><td>2,942,779</td></tr>
-        <tr><td>British Columbia</td><td>117</td><td>1,034,563</td></tr>
-        <tr><td>Washington</td><td>118</td><td>681,415</td></tr>
-        <tr><td>Utah</td><td>55</td><td>338,368</td></tr>
-        <tr><td>Idaho</td><td>67</td><td>210,358</td></tr>
-        <tr><td>Colorado</td><td>42</td><td>165,470</td></tr>
-        <tr><td>Nevada</td><td>33</td><td>164,794</td></tr>
-        <tr><td>Texas</td><td>105</td><td>143,948</td></tr>
-        <tr><td>Montana</td><td>162</td><td>133,572</td></tr>
-        <tr><td>California</td><td>505</td><td>87,544</td></tr>
+        <tr><th>State</th><th>Total events</th><th>Crashes</th><th>Fires / acres</th><th>Snow or ice mentions</th></tr>
+        <tr><td>New York</td><td>4,649</td><td>169</td><td>—</td><td>2</td></tr>
+        <tr><td>California</td><td>3,471</td><td>269</td><td>509 / 87,602 ac</td><td>74</td></tr>
+        <tr><td>New Jersey</td><td>3,364</td><td>33</td><td>1 / 0 ac</td><td>61</td></tr>
+        <tr><td>Wisconsin</td><td>2,738</td><td>135</td><td>79 / 153 ac</td><td>1</td></tr>
+        <tr><td>North Carolina</td><td>1,221</td><td>5</td><td>8 / 2,018 ac</td><td>5</td></tr>
+        <tr><td>Alabama</td><td>1,120</td><td>209</td><td>6 / 2,834 ac</td><td>18</td></tr>
+        <tr><td>Illinois</td><td>1,072</td><td>18</td><td>1 / 0 ac</td><td>7</td></tr>
+        <tr><td>Michigan</td><td>942</td><td>26</td><td>16 / 33 ac</td><td>13</td></tr>
+        <tr><td>Texas</td><td>921</td><td>6</td><td>106 / 143,917 ac</td><td>22</td></tr>
+        <tr><td>Colorado</td><td>905</td><td>53</td><td>42 / 165,470 ac</td><td>60</td></tr>
       </table>
+      <p style="font-size:13px;color:#5A6670;margin:-14px 0 20px;">A high total can mean a more detailed feed, not a busier month. Crash counts exclude Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, and West Virginia &mdash; their live DOT feeds don't carry crashes. Snow-or-ice mentions are a keyword match on the event's own text, not weather-station data.</p>
+
+      <h2 class="rc">Every state and province</h2>
+      <p>The same measures for all 51 jurisdictions, alphabetically. Tap a name to expand it.</p>
+      <details class="state-acc">
+        <summary>Alabama &mdash; 1,120 events</summary>
+        <div class="state-detail">
+          <p>209 crashes, 31 closures, 263 construction records, 617 other records, for 1,120 total events.</p>
+          <p>6 active fires, 2,834 acres.</p>
+          <p>Keyword mentions on the feed: 18 snow or ice, 4 fire.</p>
+          <p>Most-mentioned routes: I-65, I-20, I-10.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Alaska &mdash; 3 events</summary>
+        <div class="state-detail">
+          <p>2 closures, 1 other record, for 3 total events.</p>
+          <p>24 active fires, 62,308 acres.</p>
+          <p>Most-mentioned routes: Dalton Highway, Parks Highway.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Arizona &mdash; 486 events</summary>
+        <div class="state-detail">
+          <p>136 crashes, 177 closures, 173 other records, for 486 total events.</p>
+          <p>38 active fires, 1,357 acres.</p>
+          <p>Keyword mentions on the feed: 4 snow or ice, 5 fire, 7 flooding.</p>
+          <p>Most-mentioned routes: I-10, SR-202, SR-101.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Arkansas &mdash; 10 events</summary>
+        <div class="state-detail">
+          <p>5 construction records, 5 other records, for 10 total events.</p>
+          <p>98 active fires, 4,739 acres.</p>
+          <p>Keyword mentions on the feed: 1 snow or ice, 1 fire.</p>
+          <p>Most-mentioned routes: AR-123, AR-120, AR-77.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>British Columbia &mdash; 872 events</summary>
+        <div class="state-detail">
+          <p>26 crashes, 22 closures, 687 construction records, 96 weather records, 41 other records, for 872 total events.</p>
+          <p>117 active fires, 1,034,563 acres.</p>
+          <p>Keyword mentions on the feed: 38 snow or ice, 4 fire, 3 flooding.</p>
+          <p>Most-mentioned routes: BC-1, BC-97, BC-16.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>California &mdash; 3,471 events</summary>
+        <div class="state-detail">
+          <p>269 crashes, 893 closures, 1,824 construction records, 85 weather records, 219 hazard records, 181 other records, for 3,471 total events.</p>
+          <p>509 active fires, 87,602 acres.</p>
+          <p>Keyword mentions on the feed: 74 snow or ice, 76 fire, 2 flooding, 5 fatal-tagged.</p>
+          <p>Most-mentioned routes: US-101, I-5, SR-1.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Colorado &mdash; 905 events</summary>
+        <div class="state-detail">
+          <p>53 crashes, 2 closures, 787 construction records, 2 hazard records, 61 other records, for 905 total events.</p>
+          <p>42 active fires, 165,470 acres.</p>
+          <p>Keyword mentions on the feed: 60 snow or ice, 4 fire.</p>
+          <p>Most-mentioned routes: I-70, I-25, SH-470.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Connecticut &mdash; 470 events</summary>
+        <div class="state-detail">
+          <p>13 crashes, 98 closures, 307 construction records, 52 other records, for 470 total events.</p>
+          <p>Most-mentioned routes: I-95, I-84, CT-15.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Delaware &mdash; 151 events</summary>
+        <div class="state-detail">
+          <p>5 crashes, 24 closures, 84 construction records, 4 weather records, 34 other records, for 151 total events.</p>
+          <p>Keyword mentions on the feed: 54 snow or ice, 1 fire, 3 flooding.</p>
+          <p>Most-mentioned routes: DE-1, DE-2, I-95.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Florida &mdash; 214 events</summary>
+        <div class="state-detail">
+          <p>65 crashes, 23 closures, 43 construction records, 3 weather records, 41 hazard records, 39 other records, for 214 total events.</p>
+          <p>29 active fires, 82,742 acres.</p>
+          <p>Keyword mentions on the feed: 4 snow or ice, 4 fire, 2 flooding.</p>
+          <p>Most-mentioned routes: I-75, I-95, I-10.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Georgia &mdash; 483 events</summary>
+        <div class="state-detail">
+          <p>99 crashes, 104 closures, 235 construction records, 9 hazard records, 36 other records, for 483 total events.</p>
+          <p>3 active fires, 1,888 acres.</p>
+          <p>Keyword mentions on the feed: 9 fire, 2 flooding.</p>
+          <p>Most-mentioned routes: I-285, I-20, I-75.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Hawaii &mdash; 13 events</summary>
+        <div class="state-detail">
+          <p>13 construction records for 13 total events.</p>
+          <p>1 active fire, 500 acres.</p>
+          <p>Most-mentioned routes: HI-92, HI-30, H-201.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Idaho &mdash; 269 events</summary>
+        <div class="state-detail">
+          <p>2 closures, 267 construction records, for 269 total events.</p>
+          <p>67 active fires, 210,358 acres.</p>
+          <p>Most-mentioned routes: US-95, I-84, SR-55.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Illinois &mdash; 1,072 events</summary>
+        <div class="state-detail">
+          <p>18 crashes, 273 closures, 487 construction records, 294 other records, for 1,072 total events.</p>
+          <p>1 active fire, 0 acres.</p>
+          <p>Keyword mentions on the feed: 7 snow or ice.</p>
+          <p>Most-mentioned routes: I-90, I-294, I-88.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Indiana &mdash; 672 events</summary>
+        <div class="state-detail">
+          <p>6 crashes, 238 closures, 415 construction records, 7 hazard records, 6 other records, for 672 total events.</p>
+          <p>3 active fires, 7 acres.</p>
+          <p>Keyword mentions on the feed: 17 snow or ice.</p>
+          <p>Most-mentioned routes: I-65, I-70, I-69.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Iowa &mdash; 237 events</summary>
+        <div class="state-detail">
+          <p>1 crash, 122 closures, 112 construction records, 2 other records, for 237 total events.</p>
+          <p>Keyword mentions on the feed: 1 snow or ice, 1 fire, 1 flooding.</p>
+          <p>Most-mentioned routes: I-80, I-380, I-35.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Kansas &mdash; 211 events</summary>
+        <div class="state-detail">
+          <p>12 crashes, 78 closures, 89 construction records, 7 hazard records, 25 other records, for 211 total events.</p>
+          <p>Keyword mentions on the feed: 6 snow or ice, 2 fire.</p>
+          <p>Most-mentioned routes: I-70, US-54, I-135.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Kentucky &mdash; 39 events</summary>
+        <div class="state-detail">
+          <p>39 closures for 39 total events.</p>
+          <p>1 active fire, 0 acres.</p>
+          <p>Keyword mentions on the feed: 2 snow or ice.</p>
+          <p>Most-mentioned routes: US-60, KY-773, KY-825.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Louisiana &mdash; 694 events</summary>
+        <div class="state-detail">
+          <p>31 crashes, 211 closures, 448 construction records, 4 other records, for 694 total events.</p>
+          <p>14 active fires, 1,436 acres.</p>
+          <p>Keyword mentions on the feed: 1 fire.</p>
+          <p>Most-mentioned routes: I-10, US-90, US-165.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Maine &mdash; 45 events</summary>
+        <div class="state-detail">
+          <p>12 construction records, 33 other records, for 45 total events.</p>
+          <p>14 active fires, 6 acres.</p>
+          <p>Keyword mentions on the feed: 1 snow or ice.</p>
+          <p>Most-mentioned routes: US-1, US-201, US-202.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Maryland &mdash; 165 events</summary>
+        <div class="state-detail">
+          <p>2 crashes, 159 closures, 1 construction record, 1 hazard record, 2 other records, for 165 total events.</p>
+          <p>1 active fire, 0 acres.</p>
+          <p>Most-mentioned routes: I-95, US-50, I-695.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Massachusetts &mdash; 67 events</summary>
+        <div class="state-detail">
+          <p>18 crashes, 2 closures, 39 construction records, 3 hazard records, 5 other records, for 67 total events.</p>
+          <p>16 active fires, 5 acres.</p>
+          <p>Most-mentioned routes: I-93, I-95, I-90.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Michigan &mdash; 942 events</summary>
+        <div class="state-detail">
+          <p>26 crashes, 413 closures, 484 construction records, 19 other records, for 942 total events.</p>
+          <p>16 active fires, 33 acres.</p>
+          <p>Keyword mentions on the feed: 13 snow or ice, 2 fire, 1 flooding.</p>
+          <p>Most-mentioned routes: I-94, I-96, I-75.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Minnesota &mdash; 317 events</summary>
+        <div class="state-detail">
+          <p>49 crashes, 62 closures, 192 construction records, 14 other records, for 317 total events.</p>
+          <p>21 active fires, 74,612 acres.</p>
+          <p>Most-mentioned routes: US-169, I-35, US-61.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Mississippi &mdash; 168 events</summary>
+        <div class="state-detail">
+          <p>21 crashes, 20 closures, 127 construction records, for 168 total events.</p>
+          <p>25 active fires, 3,325 acres.</p>
+          <p>Keyword mentions on the feed: 5 snow or ice, 3 fire.</p>
+          <p>Most-mentioned routes: I-55, I-20, US-49.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Missouri &mdash; 574 events</summary>
+        <div class="state-detail">
+          <p>11 crashes, 72 closures, 478 construction records, 13 other records, for 574 total events.</p>
+          <p>1 active fire, 150 acres.</p>
+          <p>Keyword mentions on the feed: 4 snow or ice, 1 fire, 1 flooding.</p>
+          <p>Most-mentioned routes: I-70, US-67, US-54.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Montana &mdash; 46 events</summary>
+        <div class="state-detail">
+          <p>24 crashes, 15 weather records, 7 other records, for 46 total events.</p>
+          <p>163 active fires, 133,572 acres.</p>
+          <p>Keyword mentions on the feed: 43 snow or ice, 3 fire, 1 flooding.</p>
+          <p>Most-mentioned routes: I-90, US-12, MT-200.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Nebraska &mdash; 123 events</summary>
+        <div class="state-detail">
+          <p>2 crashes, 23 closures, 97 construction records, 1 other record, for 123 total events.</p>
+          <p>3 active fires, 9 acres.</p>
+          <p>Keyword mentions on the feed: 6 snow or ice.</p>
+          <p>Most-mentioned routes: US-6, I-80, US-30.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Nevada &mdash; 351 events</summary>
+        <div class="state-detail">
+          <p>34 crashes, 44 closures, 149 construction records, 2 hazard records, 122 other records, for 351 total events.</p>
+          <p>34 active fires, 164,794 acres.</p>
+          <p>Keyword mentions on the feed: 5 fire.</p>
+          <p>Most-mentioned routes: I-80, US-395, US-50.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>New Hampshire &mdash; 74 events</summary>
+        <div class="state-detail">
+          <p>3 crashes, 66 construction records, 5 other records, for 74 total events.</p>
+          <p>1 active fire, 0 acres.</p>
+          <p>Keyword mentions on the feed: 1 snow or ice.</p>
+          <p>Most-mentioned routes: I-93, I-95, NH-12.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>New Jersey &mdash; 3,364 events</summary>
+        <div class="state-detail">
+          <p>33 crashes, 129 closures, 2,975 construction records, 14 hazard records, 213 other records, for 3,364 total events.</p>
+          <p>1 active fire, 0 acres.</p>
+          <p>Keyword mentions on the feed: 61 snow or ice, 14 fire, 2 flooding.</p>
+          <p>Most-mentioned routes: US-1, Nj Turnpike, Gsp.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>New Mexico &mdash; 0 events</summary>
+        <div class="state-detail">
+          <p>No events were archived from New Mexico's feed in this window. That can mean a live feed issue, not necessarily a quiet month &mdash; see the data limitations above.</p>
+          <p>204 active fires, 79,856 acres.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>New York &mdash; 4,649 events</summary>
+        <div class="state-detail">
+          <p>169 crashes, 265 closures, 4,169 construction records, 4 hazard records, 42 other records, for 4,649 total events.</p>
+          <p>Keyword mentions on the feed: 2 snow or ice, 7 fire, 5 flooding, 1 fatal-tagged.</p>
+          <p>Most-mentioned routes: I-80, I-287, US-9.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>North Carolina &mdash; 1,221 events</summary>
+        <div class="state-detail">
+          <p>5 crashes, 115 closures, 1,098 construction records, 3 other records, for 1,221 total events.</p>
+          <p>8 active fires, 2,018 acres.</p>
+          <p>Keyword mentions on the feed: 5 snow or ice, 3 fire, 4 flooding.</p>
+          <p>Most-mentioned routes: I-40, I-85, I-95.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>North Dakota &mdash; 73 events</summary>
+        <div class="state-detail">
+          <p>6 closures, 60 construction records, 5 hazard records, 2 other records, for 73 total events.</p>
+          <p>29 active fires, 418 acres.</p>
+          <p>Keyword mentions on the feed: 6 snow or ice.</p>
+          <p>Most-mentioned routes: I-94, US-2, I-29.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Ohio &mdash; 555 events</summary>
+        <div class="state-detail">
+          <p>49 crashes, 192 closures, 296 construction records, 2 hazard records, 16 other records, for 555 total events.</p>
+          <p>Keyword mentions on the feed: 8 snow or ice, 4 fire, 55 flooding.</p>
+          <p>Most-mentioned routes: I-71, I-75, I-70.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Oklahoma &mdash; 56 events</summary>
+        <div class="state-detail">
+          <p>4 closures, 51 construction records, 1 other record, for 56 total events.</p>
+          <p>104 active fires, 53,148 acres.</p>
+          <p>Keyword mentions on the feed: 1 fire.</p>
+          <p>Most-mentioned routes: I-40, I-35, OK-100.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Oregon &mdash; 535 events</summary>
+        <div class="state-detail">
+          <p>116 crashes, 313 construction records, 106 other records, for 535 total events.</p>
+          <p>228 active fires, 2,942,779 acres.</p>
+          <p>Keyword mentions on the feed: 7 snow or ice, 9 fire.</p>
+          <p>Most-mentioned routes: I-5, I-84, US-101.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Pennsylvania &mdash; 549 events</summary>
+        <div class="state-detail">
+          <p>41 crashes, 12 closures, 456 construction records, 2 weather records, 2 hazard records, 36 other records, for 549 total events.</p>
+          <p>Keyword mentions on the feed: 3 snow or ice, 2 fire, 4 flooding.</p>
+          <p>Most-mentioned routes: I-81, I-80, I-78.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Rhode Island &mdash; 5 events</summary>
+        <div class="state-detail">
+          <p>1 crash, 4 hazard records, for 5 total events.</p>
+          <p>Keyword mentions on the feed: 2 snow or ice.</p>
+          <p>Most-mentioned routes: I-95, RI-146, I-195.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>South Carolina &mdash; 22 events</summary>
+        <div class="state-detail">
+          <p>6 crashes, 9 construction records, 7 other records, for 22 total events.</p>
+          <p>2 active fires, 86 acres.</p>
+          <p>Keyword mentions on the feed: 1 fire.</p>
+          <p>Most-mentioned routes: I-77, I-26, I-95.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>South Dakota &mdash; 220 events</summary>
+        <div class="state-detail">
+          <p>2 closures, 218 construction records, for 220 total events.</p>
+          <p>67 active fires, 10,533 acres.</p>
+          <p>Keyword mentions on the feed: 194 snow or ice.</p>
+          <p>Most-mentioned routes: I-90, US-14, US-281.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Tennessee &mdash; 244 events</summary>
+        <div class="state-detail">
+          <p>3 crashes, 101 closures, 123 construction records, 2 weather records, 15 other records, for 244 total events.</p>
+          <p>3 active fires, 15 acres.</p>
+          <p>Keyword mentions on the feed: 4 snow or ice, 3 fire, 2 flooding.</p>
+          <p>Most-mentioned routes: I-24, I-40, I-75.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Texas &mdash; 921 events</summary>
+        <div class="state-detail">
+          <p>6 crashes, 17 closures, 885 construction records, 11 hazard records, 2 other records, for 921 total events.</p>
+          <p>106 active fires, 143,917 acres.</p>
+          <p>Keyword mentions on the feed: 22 snow or ice, 2 flooding.</p>
+          <p>Most-mentioned routes: I-30, I-35, I-10.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Utah &mdash; 125 events</summary>
+        <div class="state-detail">
+          <p>94 crashes, 1 closure, 30 other records, for 125 total events.</p>
+          <p>55 active fires, 338,368 acres.</p>
+          <p>Keyword mentions on the feed: 1 snow or ice, 4 fire.</p>
+          <p>Most-mentioned routes: I-15, I-80, I-215.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Vermont &mdash; 79 events</summary>
+        <div class="state-detail">
+          <p>3 crashes, 64 construction records, 12 other records, for 79 total events.</p>
+          <p>2 active fires, 1 acres.</p>
+          <p>Keyword mentions on the feed: 4 snow or ice.</p>
+          <p>Most-mentioned routes: I-89, I-91, US-7.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Virginia &mdash; 438 events</summary>
+        <div class="state-detail">
+          <p>77 crashes, 214 closures, 87 construction records, 60 other records, for 438 total events.</p>
+          <p>2 active fires, 360 acres.</p>
+          <p>Keyword mentions on the feed: 2 snow or ice.</p>
+          <p>Most-mentioned routes: I-95, I-81, I-64.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Washington &mdash; 873 events</summary>
+        <div class="state-detail">
+          <p>41 crashes, 14 closures, 752 construction records, 66 other records, for 873 total events.</p>
+          <p>119 active fires, 682,447 acres.</p>
+          <p>Keyword mentions on the feed: 101 snow or ice, 10 fire.</p>
+          <p>Most-mentioned routes: Sr 405, Sr 5, Sr 90.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>West Virginia &mdash; 116 events</summary>
+        <div class="state-detail">
+          <p>116 construction records for 116 total events.</p>
+          <p>Keyword mentions on the feed: 1 snow or ice.</p>
+          <p>Most-mentioned routes: US-119, I-77, US-50.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Wisconsin &mdash; 2,738 events</summary>
+        <div class="state-detail">
+          <p>135 crashes, 412 closures, 2,185 construction records, 5 hazard records, 1 other record, for 2,738 total events.</p>
+          <p>79 active fires, 153 acres.</p>
+          <p>Keyword mentions on the feed: 1 snow or ice, 5 fire, 1 flooding.</p>
+          <p>Most-mentioned routes: I-41, I-94, I-43.</p>
+        </div>
+      </details>
+      <details class="state-acc">
+        <summary>Wyoming &mdash; 24 events</summary>
+        <div class="state-detail">
+          <p>6 crashes, 5 closures, 5 hazard records, 8 other records, for 24 total events.</p>
+          <p>41 active fires, 15,947 acres.</p>
+          <p>Keyword mentions on the feed: 4 snow or ice, 3 fire.</p>
+          <p>Most-mentioned routes: I-80, WY-22, I-90.</p>
+        </div>
+      </details>
 
       <h2 class="rc">Winter is starting early</h2>
       <p>787 events in this window mentioned snow or ice on the road surface. 192 mentioned fire, 98 mentioned flooding, and 6 were tagged fatal by the reporting DOT.</p>
-      <table class="data-table">
-        <tr><th>State / province</th><th>Snow or ice mentions</th></tr>
-        <tr><td>South Dakota</td><td>194</td></tr>
-        <tr><td>Washington</td><td>101</td></tr>
-        <tr><td>California</td><td>74</td></tr>
-        <tr><td>New Jersey</td><td>61</td></tr>
-        <tr><td>Colorado</td><td>60</td></tr>
-        <tr><td>Delaware</td><td>54</td></tr>
-        <tr><td>Montana</td><td>43</td></tr>
-        <tr><td>British Columbia</td><td>38</td></tr>
-        <tr><td>Texas</td><td>22</td></tr>
-        <tr><td>Alabama</td><td>18</td></tr>
-      </table>
-      <p style="font-size:13px;color:#5A6670;margin:-14px 0 20px;">Counted by keyword match on the event's own text (snow, ice, or chain), not by weather station data. A high count can mean early-season mountain-pass activity (South Dakota, Colorado, Montana) or routine winter road-treatment language a DOT uses even for a light frost.</p>
       <p>MileCheck has live snowplow location data in the app for Alaska, Colorado, Delaware, Indiana, Iowa, Kansas, Manitoba, Michigan, Minnesota, Montana, Nebraska, North Dakota, Utah, and West Virginia.</p>
 
       <h2 class="rc">Fatal crashes</h2>
