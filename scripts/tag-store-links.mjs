@@ -3,13 +3,15 @@
 // can be attributed per page in Play Console (UTM) and App Store Connect (campaign).
 //
 //   node scripts/tag-store-links.mjs            # rewrite all .html in place
-//   node scripts/tag-store-links.mjs --pt TOKEN # also add Apple's provider token
+//   node scripts/tag-store-links.mjs --pt TOKEN # override Apple's provider token (default: live one)
 //
 // Idempotent: re-running strips old tags and re-applies. Run after any generator.
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-const PT = (() => { const i = process.argv.indexOf('--pt'); return i > -1 ? process.argv[i + 1] : ''; })();
+const PT = (() => { const i = process.argv.indexOf('--pt'); return i > -1 ? process.argv[i + 1] : '128447811'; })();
+// Provider token 128447811 is what every live page carries. A run without it
+// silently rewrote ~360 pages on 2026-09-26, so it is the default now.
 const ROOT = process.cwd();
 const APPLE_ID = '6759212851';
 const PKG = 'app.milecheck.mobile';

@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mile Markers and DOT Alerts for Fleet Dispatch | MileCheck</title>
-  <meta name="description" content="A telematics coordinate doesn't match anything a state DOT, 911, or roadside assistance uses. MileCheck's live conditions API and Geotab Add-In tie every truck's position to its route and mile marker, with alerts already normalized from all 50 states.">
+  <meta name="description" content="Find the nearest highway mile marker from a vehicle location. MileCheck brings together DOT road alerts from all 50 states and British Columbia.">
   <link rel="canonical" href="https://milecheckapp.com/fleets/">
 
   <meta property="og:title" content="Mile Markers and DOT Alerts for Fleet Dispatch | MileCheck">
-  <meta property="og:description" content="A telematics coordinate doesn't match anything a state DOT, 911, or roadside assistance uses. MileCheck's live conditions API and Geotab Add-In tie every truck's position to its route and mile marker, with alerts already normalized from all 50 states.">
+  <meta property="og:description" content="Find the nearest highway mile marker from a vehicle location. MileCheck brings together DOT road alerts from all 50 states and British Columbia.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/fleets/">
   <meta property="og:type" content="website">
@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@milecheckapp">
   <meta name="twitter:title" content="Mile Markers and DOT Alerts for Fleet Dispatch | MileCheck">
-  <meta name="twitter:description" content="A telematics coordinate doesn't match anything a state DOT, 911, or roadside assistance uses. MileCheck ties every truck's position to its route and mile marker, with alerts from all 50 states.">
+  <meta name="twitter:description" content="Find the nearest highway mile marker from a vehicle location. MileCheck brings together DOT road alerts from all 50 states and British Columbia.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
 
   <meta name="keywords" content="fleet dispatch mile markers, trucking fleet DOT alerts, chain control alerts fleet, Geotab Add-In, fleet telematics mile marker, multi-state trucking road alerts">
@@ -68,6 +68,24 @@
       .cta-section h2 { font-size: 28px; }
       .cta-section .container > div { grid-template-columns: 1fr !important; gap: 28px !important; }
     }
+  /* spon:css */
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+/* /spon:css */
   </style>
   <style>
     .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
@@ -119,56 +137,65 @@
   <!-- ============== HERO ============== -->
   <section class="ent-hero">
     <div class="container">
-      <p class="eyebrow">For fleets and dispatch</p>
-      <h1>Your driver says mile marker 184. Your telematics says a coordinate. Someone has to translate.</h1>
+      <!-- spon:start -->
+  <aside class="spon spon-house" id="spon" data-slot="basics:fleets" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Sponsor this page.</strong></span>
+      <span class="spon-cta">Ask about sponsorship →</span>
+    </a>
+  </aside>
+<!-- spon:end -->
+<p class="eyebrow">For fleets and dispatch</p>
+      <h1>Put a mile marker beside your vehicle&rsquo;s location.</h1>
       <p class="ent-hero-sub">
-        State DOTs, 911, and roadside assistance all work in route-and-mile-marker &mdash; because that's the language the road itself is built in. MileCheck ties every vehicle's position to its exact mile marker, with live DOT alerts already normalized from all 50 states, tied to the same marker.
+        MileCheck connects highway locations with nearby mile markers and live DOT road alerts. Use the road reference a driver reports alongside the coordinates your fleet platform records.
       </p>
-      <a href="#geotab" class="ent-hero-cta">Already on Geotab?</a>
+      <a href="#geotab" class="ent-hero-cta">Explore the Geotab Add-In &rarr;</a>
       <span style="display:inline-block;width:24px;"></span>
-      <a href="#contact" class="ent-hero-cta">Build it into your own platform &rarr;</a>
-      <p style="font-size:13px;color:#6B7280;margin:16px 0 0;font-weight:600;">Live on the Geotab Marketplace today &mdash; the fleet Add-In runs in MyGeotab and Geotab Drive now.</p>
-      <p style="font-size:13px;color:#525252;margin-top:48px;padding-top:28px;border-top:1px solid #E5E5E5;">50 states + <!--cov:alerts.provinces-->3<!--/cov--> Canadian provinces &middot; <!--cov:alerts.us_states-->50<!--/cov--> live DOT integrations &nbsp;&middot;&nbsp; CarPlay &amp; Android Auto &nbsp;&middot;&nbsp; AWS Partner Network member</p>
+      <a href="#contact" class="ent-hero-cta">Ask about API access &rarr;</a>
+      <p style="font-size:13px;color:#6B7280;margin:16px 0 0;font-weight:600;">See the Geotab listing and demo below.</p>
+      <p style="font-size:13px;color:#525252;margin-top:48px;padding-top:28px;border-top:1px solid #E5E5E5;">Mile-marker data in all 50 US states and British Columbia. Live DOT alerts across the same area.</p>
     </div>
   </section>
 
   <!-- ============== THE MISMATCH ============== -->
   <section class="ent-section" id="mismatch">
     <div class="container">
-      <p class="ent-section-label">The mismatch</p>
-      <h2>A GPS coordinate doesn't fail. It just doesn't match anything.</h2>
-      <p class="ent-section-intro">A telematics platform records a truck's position the way its GPS chip reports it &mdash; latitude and longitude. State DOTs, 911 dispatch, and roadside assistance all work the other way, by route and mile marker, because that's how mile-marker signs, DOT incident logs, and highway patrol reports are all filed. A dispatcher who wants to know whether a stretch is closed, under construction, or under a chain restriction has to convert the coordinate back to a route and mile marker first, then go look that up somewhere else &mdash; usually while something is already going wrong.</p>
-      <p class="ent-section-intro" style="margin-top:-28px;">Virginia DOT says it plainly in its own driver guidance: &ldquo;When calling #77 or 911 for emergency assistance, providing the information on a mile marker sign will help responders reach you quickly.&rdquo; MileCheck's road-conditions layer is built from that same direction &mdash; every alert already tied to a route and mile marker, because that's how the state DOT that issued it filed it. Hand it a vehicle's coordinate and it runs the same lookup the phone app runs: nearest mile marker, on this route, in this direction, against live DOT data.</p>
+      <p class="ent-section-label">From coordinates to mile markers</p>
+      <h2>A driver reports &ldquo;I-80, mile 184.&rdquo; You need to find that stretch.</h2>
+      <p class="ent-section-intro">Vehicle coordinates and highway mile markers describe location in different ways. MileCheck adds a nearby mile-marker reference to a highway position, giving dispatch another way to match a driver&rsquo;s report with road information.</p>
+      <p class="ent-section-intro" style="margin-top:-28px;">Bring DOT road alerts into that view to check reported conditions along the route. Alert types and location details depend on the state&rsquo;s feed. Mile-marker positions are approximate and may differ from roadside signs.</p>
     </div>
   </section>
 
   <!-- ============== THREE PROBLEMS, ONE FEED ============== -->
   <section class="ent-section ent-section-alt" id="products">
     <div class="container">
-      <p class="ent-section-label">One feed, three problems solved</p>
-      <h2>The things a multi-state fleet actually watches for.</h2>
+      <p class="ent-section-label">Road data for dispatch</p>
+      <h2>Check the road around a vehicle&rsquo;s location.</h2>
       <div class="infra-grid">
         <div class="infra-cell">
           <div class="infra-cell-num">01</div>
-          <h3>Live alerts, 50 states</h3>
-          <p>Closures, crashes, construction, and chain controls, direct from each state DOT &mdash; normalized from 19 different upstream platform formats into one schema, tied to the route and mile marker every time.</p>
+          <h3>Live DOT road alerts</h3>
+          <p>Road alerts from all 50 states and British Columbia in a common format. Available categories depend on the source feed.</p>
         </div>
         <div class="infra-cell">
           <div class="infra-cell-num">02</div>
-          <h3>Chain control, one rulebook</h3>
-          <p>Traction laws are set state by state and can change within the hour. A run through California, Colorado, and Washington means three different systems &mdash; MileCheck carries all of them in the same schema, so a dispatcher watching a corridor overnight sees the same kind of alert the same way, whichever state issued it.</p>
+          <h3>Reported chain controls</h3>
+          <p>Check chain-control alerts where the DOT feed provides them. Requirements vary by location and vehicle. Read the issuing agency&rsquo;s instructions for the restriction that applies.</p>
         </div>
         <div class="infra-cell">
           <div class="infra-cell-num">03</div>
-          <h3>The marker, not just the pin</h3>
-          <p>&ldquo;Meet the driver at I-80 MP 184&rdquo; isn't a lookup a coordinate alone can answer. MileCheck turns a vehicle's live position into the same route-and-mile-marker language dispatch, DOT reports, and roadside assistance already use.</p>
+          <h3>Nearby mile markers</h3>
+          <p>Look up a nearby highway mile marker from a vehicle location. Use it alongside the driver&rsquo;s report and GPS coordinates.</p>
         </div>
       </div>
       <div class="proof-grid" style="margin-top:1px;">
-        <div class="proof-cell"><div class="proof-cell-num">50</div><div class="proof-cell-label"><strong>states</strong> &mdash; live DOT alerts, normalized</div></div>
-        <div class="proof-cell"><div class="proof-cell-num">50</div><div class="proof-cell-label"><strong>state milepost corpus</strong> &mdash; official GIS, never crowdsourced</div></div>
-        <div class="proof-cell"><div class="proof-cell-num">19</div><div class="proof-cell-label"><strong>upstream formats</strong> &mdash; one schema</div></div>
-        <div class="proof-cell"><div class="proof-cell-num">24/7</div><div class="proof-cell-label"><strong>monitored feeds</strong> &mdash; a stale endpoint gets caught, not served quietly</div></div>
+        <div class="proof-cell"><div class="proof-cell-num">50</div><div class="proof-cell-label"><strong>US states</strong> &mdash; mile-marker data</div></div>
+        <div class="proof-cell"><div class="proof-cell-num">BC</div><div class="proof-cell-label"><strong>British Columbia</strong> &mdash; mile-marker data and DOT alerts</div></div>
+        <div class="proof-cell"><div class="proof-cell-num">50</div><div class="proof-cell-label"><strong>US states</strong> &mdash; live DOT road alerts</div></div>
+        <div class="proof-cell"><div class="proof-cell-num">51,000+</div><div class="proof-cell-label"><strong>DOT traffic cameras</strong> &mdash; across 48 regions</div></div>
       </div>
     </div>
   </section>
@@ -176,11 +203,11 @@
   <!-- ============== GEOTAB ============== -->
   <section class="ent-section" id="geotab">
     <div class="container">
-      <p class="ent-section-label">Already running a fleet platform?</p>
-      <h2>MileCheck drops in as a Geotab Add-In &mdash; no rebuild on your side.</h2>
-      <p class="ent-section-intro">It installs inside <strong style="color:#000;">MyGeotab</strong> and <strong style="color:#000;">Geotab Drive</strong> as an Add-In. It reads a vehicle's position straight from the Geotab API and returns the nearest mile marker plus the live alerts ahead &mdash; direction, distance, and severity included &mdash; with no manual lookup in between. Same normalized data layer as the consumer app, live on iOS and Android today.</p>
-      <p style="margin-top:-24px;"><a href="https://marketplace.geotab.com/solutions/milecheck/" target="_blank" rel="noopener" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">View on the Geotab Marketplace &rarr;</a>
-      &nbsp; <a href="/geotab/milecheck-addin.html" style="color:#00A86B;font-weight:700;text-decoration:none;border-bottom:1px solid #00A86B;">See the live Add-In demo &rarr;</a></p>
+      <p class="ent-section-label">Using Geotab?</p>
+      <h2>Explore MileCheck for your fleet.</h2>
+      <p class="ent-section-intro">View the MileCheck listing and demo to see how it fits your workflow. Contact us about installation and the data your dispatch team needs.</p>
+      <p style="margin-top:-24px;"><a href="https://marketplace.geotab.com/solutions/milecheck/" target="_blank" rel="noopener" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">View the Geotab Marketplace listing &rarr;</a>
+      &nbsp; <a href="/geotab/milecheck-addin.html" style="color:#00A86B;font-weight:700;text-decoration:none;border-bottom:1px solid #00A86B;">See the Add-In demo &rarr;</a></p>
     </div>
   </section>
 
@@ -188,11 +215,11 @@
   <section class="ent-section ent-section-alt">
     <div class="container">
       <p class="ent-section-label">Further reading</p>
-      <h2>The fleet story, in more detail.</h2>
+      <h2>Mile markers in fleet dispatch</h2>
       <p style="margin-top:20px;font-size:16px;line-height:1.8;">
-        <a href="/blog/fleet-dispatch-mile-markers.html" style="color:#00A86B;font-weight:600;">Why fleet dispatch still runs on mile markers, not GPS pins &rarr;</a><br>
-        <a href="/blog/dot-alerts-api-for-fleets.html" style="color:#00A86B;font-weight:600;">The DOT alerts API: what 50 states actually takes &rarr;</a><br>
-        <a href="/blog/chain-control-alerts-for-fleets.html" style="color:#00A86B;font-weight:600;">Chain control alerts for multi-state fleets &rarr;</a>
+        <a href="/blog/fleet-dispatch-mile-markers.html" style="color:#00A86B;font-weight:600;">Using mile markers alongside vehicle coordinates &rarr;</a><br>
+        <a href="/blog/dot-alerts-api-for-fleets.html" style="color:#00A86B;font-weight:600;">DOT road alerts across state lines &rarr;</a><br>
+        <a href="/blog/chain-control-alerts-for-fleets.html" style="color:#00A86B;font-weight:600;">Chain-control alerts for fleet dispatch &rarr;</a>
       </p>
     </div>
   </section>
@@ -202,17 +229,18 @@
     <div class="container">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
         <div>
-          <p class="ent-section-label">Not on Geotab, or building your own?</p>
-          <h2>License the same data layer directly.</h2>
-          <p class="cta-body">API access to the live conditions feed, the 50-state milepost corpus as a dataset, or a white-label SDK &mdash; the full pricing and product breakdown is on the partner page.</p>
+          <p class="ent-section-label">Building your own platform?</p>
+          <h2>Ask about MileCheck data access.</h2>
+          <p class="cta-body">Tell us which roads you cover and how you want to use the data. We can discuss the available products and terms for your fleet.</p>
           <p class="cta-body" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
             <a href="/partners/#products" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">See products and pricing &rarr;</a>
-            <a href="mailto:info@milecheckapp.com?subject=Fleet%20integration%20inquiry&body=Fleet%20size%3A%0AStates%2Fcorridors%20run%3A%0ACurrent%20telematics%20platform%20(if%20any)%3A%20" style="display:inline-block;font-size:15px;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,0.28);border-radius:8px;padding:11px 20px;text-decoration:none;">Talk to us about your fleet &rarr;</a>
+            <a href="mailto:info@milecheckapp.com?subject=Fleet%20integration%20inquiry&body=Fleet%20size%3A%0AStates%2Fcorridors%20run%3A%0ACurrent%20telematics%20platform%20(if%20any)%3A%20" style="display:inline-block;font-size:15px;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,0.28);border-radius:8px;padding:11px 20px;text-decoration:none;">Discuss your fleet &rarr;</a>
           </p>
         </div>
         <div style="border:1px solid rgba(255,255,255,0.16);border-radius:14px;padding:26px 28px;background:rgba(255,255,255,0.03);">
-          <p style="font-size:20px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-0.01em;line-height:1.25;">Every driver gets the free app too.</p>
-          <p style="font-size:15px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0 0 0;">Mile markers and DOT alerts on CarPlay and Android Auto, no fleet integration required &mdash; the same normalized data, in the cab, on day one.</p>
+          <p style="font-size:20px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-0.01em;line-height:1.25;">Drivers can use the MileCheck app.</p>
+          <p style="font-size:15px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0 0 0;">Mile markers and DOT road alerts on iPhone and Android, with CarPlay and Android Auto support. Mile-marker lookup works offline. Live alerts need a connection.</p>
+          <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.6);margin:10px 0 0;">Premium is $49.99/year or $9.99/month. Includes a 7-day free trial.</p>
         </div>
       </div>
     </div>
@@ -222,8 +250,8 @@
   <section class="mc-signup" id="subscribe">
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
-      <h2>Closures and crashes on US highways, once a month</h2>
-      <p class="mc-sub">The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/labor-day-weekend-recap-2026.html">See a sample: the Labor Day weekend report</a>. No spam.</p>
+      <h2>A monthly summary of reported highway closures and crashes.</h2>
+      <p class="mc-sub">Based on the DOT reports available to MileCheck. <a href="/blog/labor-day-weekend-recap-2026.html">Read the Labor Day weekend report for a sample</a>.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>
@@ -289,5 +317,6 @@
   ml('account', '2507175');
   </script>
   <!-- End MailerLite Universal -->
+<!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
 </body>
 </html>
