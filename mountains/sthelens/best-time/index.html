@@ -189,7 +189,7 @@ function line(r,sun){
   const now=Date.now(), rise=Date.parse(sun.sunrise), set=Date.parse(sun.sunset), night=!(now>=Date.parse(sun.civilDawn)&&now<Date.parse(sun.civilDusk));
   if(r.outOfArea) return 'This region is outside the area the stations cover.';
   if(night) return 'It is dark at '+MTN+' right now. Sunrise is at '+hm(rise)+'.';
-  if(r.verdict==='OUT') return 'Clear along the sightline from '+r.name+'. '+(r.viewerCeilingFt?'Cloud at '+r.viewerCeilingFt.toLocaleString()+' ft sits below the summit.':'No ceiling overhead.');
+  if(r.verdict==='OUT') return 'Clear along the sightline from '+r.name+'. '+(r.viewerCeilingFt?'Cloud at '+r.viewerCeilingFt.toLocaleString()+' ft '+(r.viewerCeilingFt<SUMMIT?'sits below the summit.':'is above the summit.'):'No ceiling overhead.');
   if(r.verdict==='PARTLY') return 'Some of it. Broken cloud along the sightline from '+r.name+(r.viewerCeilingFt?', deck around '+r.viewerCeilingFt.toLocaleString()+' ft':'')+'.';
   if(r.viewerCeilingFt&&r.viewerCeilingFt<SUMMIT) return 'A cloud deck at about '+r.viewerCeilingFt.toLocaleString()+' ft over '+r.name+' is hiding the summit at '+SUMMIT.toLocaleString()+' ft.';
   if(!r.viewerCeilingFt) return 'No cloud deck over '+r.name+'. The summit itself is in cloud, by the forecast model.';
