@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mountain Visibility for Android | Get notified</title>
+<meta name="description" content="Mountain Visibility tells you whether Rainier, Hood, Baker, St. Helens or Denali is visible right now. Android is coming. Leave an email and we will tell you when it ships.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://milecheckapp.com/mountains/android/">
+<meta property="og:title" content="Mountain Visibility for Android">
+<meta property="og:description" content="Android is coming. Leave an email and we will tell you when it ships.">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<style>
+  :root{color-scheme:dark}
+  body{margin:0;background:#1565c0;color:#fff;font:18px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:540px;margin:0 auto;padding:56px 24px 72px}
+  .kicker{font-size:15px;letter-spacing:.04em;text-transform:uppercase;opacity:.85;margin:0 0 12px}
+  h1{font-size:44px;line-height:1.02;margin:0 0 24px}
+  p{margin:0 0 22px}
+  .card{background:#fff;color:#123;border-radius:18px;padding:24px;margin-top:32px}
+  label{display:block;font-weight:700;margin-bottom:8px}
+  input{box-sizing:border-box;width:100%;padding:14px;border:1px solid #b7c5d6;border-radius:10px;font:inherit}
+  button{margin-top:14px;width:100%;padding:14px;border:0;border-radius:10px;background:#f5c94a;color:#123;font:700 18px inherit;cursor:pointer}
+  button[disabled]{opacity:.6;cursor:default}
+  small{display:block;margin-top:12px;color:#52667d}
+  #msg{display:none;margin-top:14px;padding:12px;border-radius:10px;font-weight:600}
+  #msg.ok{display:block;background:#e6f4ea;color:#1b5e20}
+  #msg.err{display:block;background:#fdecea;color:#b71c1c}
+  .ios{margin-top:28px;font-size:16px;opacity:.9}
+  .ios a{color:#fff}
+  .back{display:inline-block;margin-top:40px;color:#fff;opacity:.8;font-size:15px}
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Mountain Visibility</p>
+  <h1>Android is coming.</h1>
+  <p>Mountain Visibility tells you whether Rainier, Hood, Baker, St. Helens or Denali is visible right now, from where you are standing. It is on iOS today. Android is being built.</p>
+  <p>Leave an email and you get one message when it ships. Nothing else.</p>
+  <div class="card">
+    <form id="notifyForm">
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+      <button type="submit" id="submitBtn">Notify me</button>
+      <small>One email when Android is ready. No list, no marketing.</small>
+      <div id="msg" role="status"></div>
+    </form>
+  </div>
+  <p class="ios">Have an iPhone? <a href="https://apps.apple.com/app/apple-store/id6810003955?pt=128447811&ct=mv-android-page&mt=8">Mountain Visibility on the App Store</a>.</p>
+  <a class="back" href="/mountains/">&larr; Mountain pages on milecheckapp.com</a>
+</main>
+<script>
+  // Same endpoint the Dash early-access page uses; `source` keeps the two lists apart in the export.
+  const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev/preorder';
+  const params = new URLSearchParams(location.search);
+  const campaign = [params.get('utm_source'), params.get('utm_campaign')].filter(Boolean).join('/');
+  const SOURCE = 'mountain-visibility-android' + (campaign ? ' via ' + campaign : '');
+  const form = document.getElementById('notifyForm');
+  const msg = document.getElementById('msg');
+  const btn = document.getElementById('submitBtn');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    btn.disabled = true; btn.textContent = 'Saving…';
+    msg.className = ''; msg.textContent = '';
+    try {
+      const res = await fetch(WORKER, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name: '', source: SOURCE.slice(0, 100) }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Something went wrong');
+      msg.className = 'ok';
+      msg.textContent = data.alreadyOnList ? "You're already on the list." : "Got it. One email when Android ships.";
+      form.reset();
+      if (window.gtag) gtag('event', 'mv_android_notify_signup');
+    } catch (err) {
+      msg.className = 'err';
+      msg.textContent = 'That did not go through. Email mountains@milecheckapp.com and we will add you by hand.';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Notify me';
+    }
+  });
+</script>
+</body>
+</html>
