@@ -486,7 +486,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>Know your exact mile marker on ${c.name} — live</h2>
-    <p>MileCheck shows your nearest mile marker in real time as you drive ${c.name}, plus live DOT alerts on your route and the nearest camera. Works offline and runs on CarPlay and Android Auto.</p>
+    <p>MileCheck shows your nearest mile marker in real time as you drive ${c.name}, plus live state DOT feeds on your route and the nearest camera. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>

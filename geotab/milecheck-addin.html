@@ -111,7 +111,7 @@
 <body>
   <div id="milecheck">
     <div class="mc-header">
-      <div class="mc-title"><b>MileCheck</b><span>Live mile marker &amp; DOT alerts</span></div>
+      <div class="mc-title"><b>MileCheck</b><span>Live mile marker &amp; state DOT feeds</span></div>
       <span class="mc-live" id="mc-live"><span class="dot"></span>Live</span>
       <span class="mc-demo" id="mc-demo">Demo position</span>
     </div>
@@ -128,7 +128,7 @@
    -----------------------------------------------------------------
    Reads the vehicle position from the MyGeotab API, then calls the
    LIVE MileCheck Worker (existing /mileposts + /incidents endpoints)
-   to render the nearest milepost + active DOT alerts. No separate
+   to render the nearest milepost + active state DOT feeds. No separate
    backend required — works against production today.
    ================================================================= */
 (function(){
@@ -320,7 +320,7 @@
 
     var alertsBlock;
     if(data.alertsAvail===false){
-      alertsBlock='<div class="mc-empty">Live DOT alerts aren’t connected in '+esc(data.state)+' yet — mile-marker tracking still works.</div>';
+      alertsBlock='<div class="mc-empty">Live state DOT feeds aren’t connected in '+esc(data.state)+' yet — mile-marker tracking still works.</div>';
     } else {
       var active=[], planned=[];
       alerts.forEach(function(a){ (bucket(a)==="active"?active:planned).push(a); });
@@ -575,7 +575,7 @@
   }
 
   /* ---- Geotab Add-In lifecycle ---------------------------------- */
-  var REFRESH_MS = 60000;  // re-pull position + DOT alerts every 60s while the panel is open
+  var REFRESH_MS = 60000;  // re-pull position + state DOT feeds every 60s while the panel is open
   var STANDALONE = (typeof geotab==="undefined");
   if(STANDALONE){ window.geotab={}; }
   geotab.addin = geotab.addin || {};

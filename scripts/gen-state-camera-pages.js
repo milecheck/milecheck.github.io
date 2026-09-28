@@ -238,7 +238,7 @@ function wording(s){
     fromAgency: ca ? `straight from ${s.dot.split('(')[0].trim()}` : 'straight from the DOT',
     whereProvides: ca ? 'where the province provides it' : 'where the DOT provides it',
     beyond: ca ? `see <a href="../">every highway camera on MileCheck</a>` : `see <a href="../">every highway camera in ${HUB_CAMS} states</a>`,
-    alerts: ca ? 'live road alerts where the province publishes them' : 'live DOT alerts on your route',
+    alerts: ca ? 'live road alerts where the province publishes them' : 'live state DOT feeds on your route',
   };
 }
 
