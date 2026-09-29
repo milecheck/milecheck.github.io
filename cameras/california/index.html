@@ -108,6 +108,7 @@
         <a href="../../index.html#story">Story</a>
         <a href="../../index.html#b2b">B2B</a>
         <a href="../../blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
         <a href="/get/" class="nav-cta">Get the app</a>
       </nav>
     </div>
@@ -186,7 +187,7 @@
     </div>
   </section>
 <!-- signup:end -->
-          <footer class="site-footer">
+            <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
@@ -274,5 +275,11 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
 if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>{const vin=/^[A-Z0-9]{17}$/.test(t.name||'');const agency=String(t.status||'').trim();const age=(Date.now()-Date.parse(t.lastUpdated))/60000;return {lat:+t.lat,lon:+t.lon,bearing:+t.bearing||0,name:vin?((agency||DOT)+' plow'):(t.name||'Plow'),status:vin?'':agency,route:t.route||t.roadName||'',mile:t.mile!=null?t.mile:null,heading:t.heading||'',img:t.imageUrl||'',age:isFinite(age)?age:null};});const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.length;draw();});
 </script>
 
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
 </body>
 </html>

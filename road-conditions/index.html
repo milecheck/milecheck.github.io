@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Road Conditions by State: Live Closures &amp; Crashes | MileCheck</title>
+  <meta name="description" content="Current road conditions for all 50 states, one page per state: live closures and crashes from the state DOT, cameras, mountain passes, interstate corridors and what the season does to the roads.">
+  <link rel="canonical" href="https://milecheckapp.com/road-conditions/">
+  <meta property="og:title" content="Road Conditions by State: Live Closures &amp; Crashes | MileCheck">
+  <meta property="og:description" content="Current road conditions for all 50 states, one page per state: live closures and crashes from the state DOT, cameras, mountain passes, interstate corridors and what the season does to the roads.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/road-conditions/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Road conditions by state","url":"https://milecheckapp.com/road-conditions/","description":"Current road conditions for all 50 states, one page per state: live closures and crashes from the state DOT, cameras, mountain passes, interstate corridors and what the season does to the roads.","isPartOf":{"@type":"WebSite","name":"MileCheck","url":"https://milecheckapp.com/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Road conditions","item":"https://milecheckapp.com/road-conditions/"}]}</script>
+  <style>
+    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;}
+    .rc-eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin:0 0 6px;}
+    .rc-wrap h1{font-size:clamp(27px,4.4vw,40px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 10px;}
+    .rc-lede{font-size:16.5px;line-height:1.6;color:#3a444d;max-width:78ch;margin:0 0 18px;}
+    .rc-lede a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .rc-live{display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
+    @media(max-width:860px){.rc-live{grid-template-columns:1fr;}}
+    .rc-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:400px;height:58vh;background:#eef0e9;}
+    #rcmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .rc-status{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13.5px;color:#0E1116;line-height:1.35;}
+    .rc-status.err{color:#b4231a;}
+    .rc-status .rc-upd{color:#5b6670;font-weight:600;}
+    .rc-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+    .rc-dot.big{width:18px;height:18px;}
+    .rc-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
+    .rc-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:58vh;}
+    .rc-list .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+    .rc-list .lh label{font-size:12px;font-weight:600;color:#5b6670;display:flex;align-items:center;gap:5px;cursor:pointer;}
+    .rc-rows{overflow-y:auto;}
+    .rc-row{padding:11px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;}
+    .rc-row:hover{background:#F7F5EE;}
+    .rc-row .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+    .rc-row .rt{font-weight:800;font-size:14px;}
+    .rc-row .kd{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;}
+    .rc-row .kd.closure{color:#cf3320;} .rc-row .kd.crash{color:#d9640f;} .rc-row .kd.weather{color:#2563eb;} .rc-row .kd.hazard{color:#7C3AED;} .rc-row .kd.work{color:#a16207;}
+    .rc-row .sub{color:#5b6670;font-size:12.5px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .rc-empty{padding:28px 14px;text-align:center;color:#5b6670;font-size:14px;line-height:1.5;}
+    .rc-empty b{color:#0f7a4f;font-size:15px;display:block;margin-bottom:4px;}
+    .rc-empty.err b{color:#b4231a;}
+    .rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#5b6670;margin:10px 0 0;}
+    .rc-legend span{display:inline-flex;align-items:center;gap:6px;}
+    .rc-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
+    .rc-official{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;}
+    .rc-official a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .rc-body{max-width:1160px;margin:0 auto;padding:10px 20px 40px;}
+    .rc-body h2{font-size:23px;margin:32px 0 10px;letter-spacing:-0.01em;}
+    .rc-body p{font-size:16px;line-height:1.7;color:#2a333b;max-width:78ch;margin:0 0 14px;}
+    .rc-body a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .rc-body a:hover{text-decoration:underline;}
+    .rc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:8px 0 6px;}
+    .rc-card{display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;text-decoration:none;color:inherit;}
+    .rc-card:hover{border-color:#0E1116;}
+    .rc-card .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
+    .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
+    .rc-card p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
+    .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
+    .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
+    .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
+    .rc-sept{border-left:3px solid #E5E5E5;padding:2px 0 2px 14px;color:#5b6670;font-size:14.5px;line-height:1.6;max-width:78ch;margin:0 0 6px;}
+    .rc-sept a{color:#0f7a4f;font-weight:700;}
+    .faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
+    .faq p{margin:10px 0 0;}
+    .cta{border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);padding:24px 22px;margin:30px 0 8px;text-align:center;}
+    .cta h3{font-size:21px;margin:0 0 8px;}
+    .cta p{font-size:15.5px;color:#3a444d;margin:0 auto 14px;max-width:560px;}
+    .cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .cta .btns a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .cta .btns a.primary{background:#0f7a4f;color:#fff;}
+    .cta .btns a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .rc-states{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:14px 0 8px;}
+    .rc-state{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:12px 14px;text-decoration:none;color:inherit;}
+    .rc-state:hover{border-color:#0E1116;}
+    .rc-state b{font-size:15px;} .rc-state span{font-size:12px;color:#8A939B;font-weight:700;letter-spacing:.04em;}
+    .rc-related{color:#5b6670;font-size:14px;margin-top:26px;}
+    .rc-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:12px;font-size:12px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}
+  /* spon:css */
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+/* /spon:css */
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="/assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="/">Home</a>
+        <a href="/maps/" class="active">Maps</a>
+        <a href="/cameras/">Cameras</a>
+        <a href="/states/">United States</a>
+        <a href="/canada/">Canada</a>
+        <a href="/#story">Story</a>
+        <a href="/partners/">B2B</a>
+        <a href="/blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="rc-wrap">
+    <!-- spon:start -->
+  <aside class="spon spon-house" id="spon" data-slot="live:road-conditions" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Sponsor this page.</strong></span>
+      <span class="spon-cta">Ask about it →</span>
+    </a>
+  </aside>
+<!-- spon:end -->
+    <p class="rc-eyebrow">Road conditions</p>
+    <h1>Road conditions by state</h1>
+    <p class="rc-lede">One page per state. Each one reads that state's DOT feed every five minutes and puts the current closures and crashes on a map with the route and mile marker, then links the state's cameras, mountain passes and interstate corridors, and says what the season does to its highways. For one national view, use the <a href="/closures/">US closures map</a>.</p>
+    <div class="rc-states">
+      <a class="rc-state" href="/road-conditions/alabama/"><b>Alabama</b><span>ALGO Traffic</span></a>
+      <a class="rc-state" href="/road-conditions/alaska/"><b>Alaska</b><span>AK 511</span></a>
+      <a class="rc-state" href="/road-conditions/arizona/"><b>Arizona</b><span>AZ511</span></a>
+      <a class="rc-state" href="/road-conditions/arkansas/"><b>Arkansas</b><span>IDrive Arkansas</span></a>
+      <a class="rc-state" href="/road-conditions/california/"><b>California</b><span>Caltrans QuickMap</span></a>
+      <a class="rc-state" href="/road-conditions/colorado/"><b>Colorado</b><span>COtrip</span></a>
+      <a class="rc-state" href="/road-conditions/connecticut/"><b>Connecticut</b><span>CTroads</span></a>
+      <a class="rc-state" href="/road-conditions/delaware/"><b>Delaware</b><span>DelDOT</span></a>
+      <a class="rc-state" href="/road-conditions/florida/"><b>Florida</b><span>FL511</span></a>
+      <a class="rc-state" href="/road-conditions/georgia/"><b>Georgia</b><span>511GA</span></a>
+      <a class="rc-state" href="/road-conditions/hawaii/"><b>Hawaii</b><span>Hawaii DOT</span></a>
+      <a class="rc-state" href="/road-conditions/idaho/"><b>Idaho</b><span>511 Idaho</span></a>
+      <a class="rc-state" href="/road-conditions/illinois/"><b>Illinois</b><span>Getting Around Illinois</span></a>
+      <a class="rc-state" href="/road-conditions/indiana/"><b>Indiana</b><span>INDOT TrafficWise</span></a>
+      <a class="rc-state" href="/road-conditions/iowa/"><b>Iowa</b><span>511 Iowa</span></a>
+      <a class="rc-state" href="/road-conditions/kansas/"><b>Kansas</b><span>KanDrive</span></a>
+      <a class="rc-state" href="/road-conditions/kentucky/"><b>Kentucky</b><span>GoKY</span></a>
+      <a class="rc-state" href="/road-conditions/louisiana/"><b>Louisiana</b><span>511LA</span></a>
+      <a class="rc-state" href="/road-conditions/maine/"><b>Maine</b><span>511 Maine</span></a>
+      <a class="rc-state" href="/road-conditions/maryland/"><b>Maryland</b><span>CHART</span></a>
+      <a class="rc-state" href="/road-conditions/massachusetts/"><b>Massachusetts</b><span>Mass511</span></a>
+      <a class="rc-state" href="/road-conditions/michigan/"><b>Michigan</b><span>Mi Drive</span></a>
+      <a class="rc-state" href="/road-conditions/minnesota/"><b>Minnesota</b><span>511MN</span></a>
+      <a class="rc-state" href="/road-conditions/mississippi/"><b>Mississippi</b><span>MDOTtraffic</span></a>
+      <a class="rc-state" href="/road-conditions/missouri/"><b>Missouri</b><span>MoDOT Traveler</span></a>
+      <a class="rc-state" href="/road-conditions/montana/"><b>Montana</b><span>MDT 511</span></a>
+      <a class="rc-state" href="/road-conditions/nebraska/"><b>Nebraska</b><span>Nebraska 511</span></a>
+      <a class="rc-state" href="/road-conditions/nevada/"><b>Nevada</b><span>NVRoads</span></a>
+      <a class="rc-state" href="/road-conditions/new-hampshire/"><b>New Hampshire</b><span>New England 511</span></a>
+      <a class="rc-state" href="/road-conditions/new-jersey/"><b>New Jersey</b><span>511NJ</span></a>
+      <a class="rc-state" href="/road-conditions/new-mexico/"><b>New Mexico</b><span>NMRoads</span></a>
+      <a class="rc-state" href="/road-conditions/new-york/"><b>New York</b><span>511NY</span></a>
+      <a class="rc-state" href="/road-conditions/north-carolina/"><b>North Carolina</b><span>DriveNC</span></a>
+      <a class="rc-state" href="/road-conditions/north-dakota/"><b>North Dakota</b><span>NDRoads</span></a>
+      <a class="rc-state" href="/road-conditions/ohio/"><b>Ohio</b><span>OHGO</span></a>
+      <a class="rc-state" href="/road-conditions/oklahoma/"><b>Oklahoma</b><span>OK Traffic</span></a>
+      <a class="rc-state" href="/road-conditions/oregon/"><b>Oregon</b><span>TripCheck</span></a>
+      <a class="rc-state" href="/road-conditions/pennsylvania/"><b>Pennsylvania</b><span>511PA</span></a>
+      <a class="rc-state" href="/road-conditions/rhode-island/"><b>Rhode Island</b><span>RIDOT</span></a>
+      <a class="rc-state" href="/road-conditions/south-carolina/"><b>South Carolina</b><span>511SC</span></a>
+      <a class="rc-state" href="/road-conditions/south-dakota/"><b>South Dakota</b><span>SD511</span></a>
+      <a class="rc-state" href="/road-conditions/tennessee/"><b>Tennessee</b><span>SmartWay</span></a>
+      <a class="rc-state" href="/road-conditions/texas/"><b>Texas</b><span>DriveTexas</span></a>
+      <a class="rc-state" href="/road-conditions/utah/"><b>Utah</b><span>UDOT Traffic</span></a>
+      <a class="rc-state" href="/road-conditions/vermont/"><b>Vermont</b><span>New England 511</span></a>
+      <a class="rc-state" href="/road-conditions/virginia/"><b>Virginia</b><span>511 Virginia</span></a>
+      <a class="rc-state" href="/road-conditions/washington/"><b>Washington</b><span>WSDOT</span></a>
+      <a class="rc-state" href="/road-conditions/west-virginia/"><b>West Virginia</b><span>WV511</span></a>
+      <a class="rc-state" href="/road-conditions/wisconsin/"><b>Wisconsin</b><span>511WI</span></a>
+      <a class="rc-state" href="/road-conditions/wyoming/"><b>Wyoming</b><span>WYDOT</span></a>
+    </div>
+  </div>
+  <div class="rc-body">
+    <h2>How these pages work</h2>
+    <p>Every state DOT publishes road alerts, and no two publish them the same way. MileCheck's server reads each feed and converts it to one format, the same one the app uses. A closure in Washington and a closure in Texas arrive looking identical. These pages show that feed for one state at a time, so the map is the DOT's own list, not a summary of it. <a href="/blog/how-one-app-reads-fifty-dot-systems.html">How one app reads 50 DOT systems</a> explains the plumbing.</p>
+    <p>What a page can show depends on what the DOT publishes. Some states post closures and crashes with a mile marker on every one. Some post closures only. A quiet map in Kentucky is normal, and a busy one in California is too. Where a feed cannot be reached the page says so instead of showing an empty map.</p>
+    <p class="rc-related">Also: <a href="/passes/">Mountain passes</a> · <a href="/corridors/">Interstate corridors</a> · <a href="/cameras/">Cameras by state and city</a> · <a href="/states/">Mile markers by state</a> · <a href="/canada/">Canada</a></p>
+  </div>
+
+  
+  <!-- signup:start -->
+  <section class="mc-signup" id="subscribe">
+    <style>
+      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
+      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
+      .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
+      .mc-signup .ml-form-embedContent{display:none !important;}
+      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
+      .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+    </style>
+    <div class="mc-signup-inner">
+      <p class="mc-eyebrow">The Monthly Highway Report</p>
+      <h2>Closures and crashes on US highways, once a month</h2>
+      <p class="mc-sub">The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/labor-day-weekend-recap-2026.html">See a sample: the Labor Day weekend report</a>. No spam.</p>
+      <div class="ml-embedded" data-form="LjADY8"></div>
+    </div>
+  </section>
+<!-- signup:end -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=road-conditions&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Droad-conditions" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="/closures/">US closures map</a></li>
+            <li><a href="/cameras/">Live cameras</a></li>
+            <li><a href="/passes/">Mountain passes</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Road data: state DOTs via MileCheck. Always follow posted signs and official detours.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
+<!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
+</body>
+</html>

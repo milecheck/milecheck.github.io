@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How a Crash Report Reaches Your Phone — MileCheck</title>
+  <meta name="description" content="A trooper radios a crash at mile 184. Here is every step between that radio call and the alert on your phone: the DOT's traffic center, the 511 feed, MileCheck's server, and the match to your route. With the minutes each one takes.">
+
+  <meta property="og:title" content="How a Crash Report Reaches Your Phone">
+  <meta property="og:description" content="Every step between a trooper's radio call and the alert on your phone, with the minutes each one takes.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/blog/how-a-crash-report-reaches-your-phone.html">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="blog.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How a crash report reaches your phone",
+    "datePublished": "2026-09-28",
+    "author": {"@type": "Organization", "name": "MileCheck"},
+    "publisher": {"@type": "Organization", "name": "MileCheck"},
+    "mainEntityOfPage": "https://milecheckapp.com/blog/how-a-crash-report-reaches-your-phone.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How long after a crash does it show up in the app?","acceptedAnswer":{"@type":"Answer","text":"Usually two to eleven minutes after the DOT publishes it. The DOT's own entry time is the variable nobody outside the traffic center controls. After that, MileCheck's server refreshes each state's feed on a five-minute cycle and the app refreshes every five minutes by default."}},
+      {"@type":"Question","name":"Does MileCheck see every crash?","acceptedAnswer":{"@type":"Answer","text":"No. It sees what the state DOT publishes. A crash the highway patrol handles without the DOT posting it never reaches any app. California is the exception, because the California Highway Patrol publishes its own dispatch log and MileCheck reads that too."}},
+      {"@type":"Question","name":"Why is the alert given as a mile marker?","acceptedAnswer":{"@type":"Answer","text":"Because that is how the trooper reported it and how the DOT recorded it. The mile marker is the location system the road itself uses. MileCheck matches the DOT's mile marker to your route and direction so it can tell you the crash is ahead of you, and how far."}}
+    ]
+  }
+  </script>
+  <link rel="canonical" href="https://milecheckapp.com/blog/how-a-crash-report-reaches-your-phone.html">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../partners/">B2B</a>
+        <a href="./" class="active">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="article-wrap">
+      <a href="./" class="article-back">All articles</a>
+
+      <p class="article-eyebrow">How it works</p>
+      <h1 class="article-title">How a crash report reaches your phone</h1>
+      <div class="article-meta">
+        <span>September 28, 2026</span>
+        <span>5 min read</span>
+      </div>
+
+      <div class="article-body">
+        <p>A truck jackknifes on I-80 westbound at mile 184. Eleven minutes later a phone forty miles back shows a card that says so. Here is what happened in those eleven minutes, step by step, and where each minute went.</p>
+
+        <h2>Minute 0: the radio call</h2>
+        <p>The first report is a voice. A trooper, a plow driver or a passing motorist calls it in, and the first question dispatch asks is the one every highway worker knows: what mile marker? "I-80 westbound, 184" is a location a dispatcher can act on. A GPS coordinate is not, because nobody on a radio reads out eight decimal places. <a href="../report-location/">This is why the mile marker is the first thing dispatch asks for</a>.</p>
+
+        <h2>Minutes 1 to 5: the traffic center types it in</h2>
+        <p>The state DOT runs a traffic management center. An operator there hears the call, or gets it from the highway patrol's dispatch system, and creates an event in the DOT's software: route, direction, mile marker, what happened, which lanes are blocked. This is the step nobody outside the building controls, and it is where most of the delay lives. A busy center on a snow day can be several minutes behind. A quiet one can post within a minute.</p>
+        <p>What the operator types is what everyone downstream gets. If the direction field is left blank, every app that reads the feed sees a crash with no direction. If the operator writes "101-LOOP" where the map data says "SR-101," someone has to reconcile the two.</p>
+
+        <h2>Minute 5: the DOT publishes the feed</h2>
+        <p>The DOT's system pushes the event into a public data feed. No two states use the same format. Washington serves JSON from its own API. Arizona and a dozen other states run a shared platform called ibi511. Kansas, Iowa, Nebraska, Minnesota and Indiana publish an XML file that overwrites itself every 30 to 60 seconds. New Jersey publishes a work-zone feed on a two-minute cadence. Hawaii updates weekly. Some feeds carry coordinates for every event; Arkansas's carries none.</p>
+        <p>The feed is the DOT's. MileCheck does not change it, and cannot see a crash the DOT never posts. The one exception is California, where the Highway Patrol publishes its own dispatch log as public XML, and MileCheck reads that alongside Caltrans.</p>
+
+        <h2>Minutes 5 to 10: MileCheck's server reads it</h2>
+        <p>A server at Cloudflare fetches each state's feed and holds the result for five minutes before fetching again. California's feeds move every minute, so that one refreshes every 60 seconds. Whenever the fetch happens, the server translates the state's format into one shared shape: a route name the mile-marker data will recognize, a direction, a start and end mile marker, a type code, the time the DOT last touched it.</p>
+        <p>That translation is most of the work. "I-10 Eastbound" becomes I-10 plus a direction. "Interchange ramp closed, all lanes closed" is a ramp closure, not a closed freeway, even though the DOT typed "all lanes closed." A Washington event with no direction field gets its direction read out of the headline text, but only when the text names exactly one direction. <a href="how-one-app-reads-fifty-dot-systems.html">How one app reads 50 DOT systems</a> covers the rest of that.</p>
+
+        <h2>Minutes 10 to 11: your phone asks</h2>
+        <p>The app refreshes its alert list every five minutes by default, so it picks up the new event on its next cycle. Then it does the part no DOT feed does. It knows your route and direction from the mile-marker data it carries offline, and it knows your position. It checks whether the crash is on your route, whether it is ahead of you in your direction of travel, and how far. If all three are true, it becomes the card on the Mile tab: "Crash, I-80 WB, MP 184, 41 miles ahead."</p>
+        <p>The DOT's mile marker and your mile marker are on the same scale. That is the whole trick. The crash was reported as a milepost, recorded as a milepost, and matched to the milepost you are passing.</p>
+
+        <h2>Adding it up</h2>
+        <p>Operator entry, one to five minutes. Server refresh, up to five. App refresh, up to five. A crash posted the instant the trooper calls can be on your screen in two minutes. A crash posted five minutes after the call, on the wrong side of both refresh cycles, takes about eleven. The pull-to-refresh on the Alerts tab skips the app's half of that wait, and the Worker's cache can be no fresher than the feed the DOT publishes.</p>
+
+        <h2>What never arrives</h2>
+        <p>Three things. A crash the DOT does not post, because the highway patrol cleared it before the traffic center logged it. A crash posted without a location the server can place, which happens in states whose feed has no coordinates and no mile marker for that event. And a crash on a road the app does not carry mile markers for, which in most states means a county road. The app shows what the road system reports about itself. It does not invent the rest.</p>
+
+        <h2>Keep reading</h2>
+        <p><strong>Related:</strong> <a href="how-one-app-reads-fifty-dot-systems.html">How one app reads 50 different state DOT systems</a> &nbsp;·&nbsp; <a href="how-milecheck-finds-your-mile-marker-offline.html">How MileCheck finds your mile marker offline</a> &nbsp;·&nbsp; <a href="../road-conditions/">Road conditions by state</a> &nbsp;·&nbsp; <a href="how-roads-are-funded.html">Who pays for the highway you're on</a></p>
+      </div>
+
+      <div class="article-cta">
+        <h3>The same alerts, on your route, ahead of you.</h3>
+        <p>MileCheck reads each state DOT's own feed and shows what is ahead of your position, by mile marker. The mile marker works offline in all 50 states.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-how-a-crash-report-reaches-your-phone&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-how-a-crash-report-reaches-your-phone" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-how-a-crash-report-reaches-your-phone&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-how-a-crash-report-reaches-your-phone" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Learn more</p>
+          <ul class="footer-list">
+            <li><a href="../road-conditions/">Road conditions by state</a></li>
+            <li><a href="../closures/">US closures map</a></li>
+            <li><a href="./">All articles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+</body>
+</html>

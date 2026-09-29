@@ -873,3 +873,11 @@ img, svg { display: block; max-width: 100%; }
   isolation: isolate;
   z-index: 0;
 }
+
+/* Site search link in the nav (2026-09-28, scripts/add-nav-search.mjs). Icon only on
+   desktop, icon + word in the mobile dropdown. */
+.primary-nav .nav-search { display: inline-flex; align-items: center; gap: 7px; }
+.primary-nav .nav-search svg { width: 16px; height: 16px; flex: none; }
+@media (min-width: 761px) {
+  .primary-nav .nav-search span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}

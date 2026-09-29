@@ -68,10 +68,16 @@
         document.getElementById('countNum').textContent = data.count;
         const rows = document.getElementById('rows');
         rows.innerHTML = '';
+        // Signup fields are whatever a stranger typed into the form. Build cells with
+        // textContent so a script in a "name" renders as text, never runs (2026-09-28 review).
+        const cell = (text) => { const td = document.createElement('td'); td.textContent = text; return td; };
         data.entries.slice().reverse().forEach(e => {
           const tr = document.createElement('tr');
           const d = new Date(e.firstSeenAt).toLocaleDateString();
-          tr.innerHTML = `<td>${e.email}</td><td>${e.name || '—'}</td><td>${e.source || '—'}</td><td>${d}</td>`;
+          tr.appendChild(cell(String(e.email || '')));
+          tr.appendChild(cell(e.name ? String(e.name) : '—'));
+          tr.appendChild(cell(e.source ? String(e.source) : '—'));
+          tr.appendChild(cell(d));
           rows.appendChild(tr);
         });
       } catch (e) {

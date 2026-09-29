@@ -62,7 +62,21 @@
     /* off-state toggles: .5 read as "disabled" to users (QA 2026-09-02) — .78 keeps the
        on/off distinction while still looking tappable */
     .lg-item.tog:not(.on){opacity:.78;}
-    .lg-item.tog.on{border-color:#c9c9c2;background:#fff;}
+    .lg-item.tog.on{border-color:#0f7a4f;background:#fff;}
+    /* Legend rows vs layer toggles (Leah, 2026-09-28: "you can click some but not others"). Legend
+       items are plain text; toggles keep the pill and carry a checkbox so they read as switches. */
+    .fire-legend{flex-direction:column;align-items:stretch;gap:8px;}
+    .lg-group{display:flex;gap:6px 8px;align-items:center;flex-wrap:wrap;}
+    .lg-label{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#8A939B;margin-right:2px;white-space:nowrap;}
+    .lg-item:not(.tog){background:transparent;border-color:transparent;padding:3px 4px;cursor:default;}
+    .lg-item.tog::before{content:'';display:inline-block;width:12px;height:12px;border:1.5px solid #9aa3a0;border-radius:3px;background:#fff;box-sizing:border-box;flex:none;}
+    .lg-item.tog.on::before{content:'\2713';color:#fff;background:#0f7a4f;border-color:#0f7a4f;font-size:9px;line-height:9px;text-align:center;font-weight:800;}
+    .map-back{position:absolute;left:12px;bottom:14px;z-index:800;background:#0E1116;color:#fff;border:1.5px solid #fff;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+    .map-back[hidden]{display:none;}
+    .list-back{display:block;width:100%;text-align:left;font:inherit;font-weight:700;font-size:13.5px;color:#0f7a4f;background:#F4F8F6;border:none;border-bottom:1px solid #E5E5E5;padding:10px 16px;cursor:pointer;}
+    .list-back[hidden]{display:none;}
+    .fire-notes summary{font-weight:800;color:#0E1116;cursor:pointer;font-size:14px;}
+    .fire-notes[open] summary{margin-bottom:8px;}
     .sw-evac{display:inline-block;width:15px;height:11px;border:1.5px solid #d61f1f;border-radius:3px;background:repeating-linear-gradient(45deg,rgba(214,31,31,.55) 0 3px,transparent 3px 6px);}
     .sw-rfw{display:inline-block;width:15px;height:11px;border:1.5px solid #e08a00;border-radius:3px;background:rgba(224,138,0,.14);}
     .sw-cam{display:inline-block;width:9px;height:9px;border-radius:50%;background:#0f7a4f;border:1.5px solid #fff;box-shadow:0 0 0 1px #0f7a4f;}
@@ -208,6 +222,7 @@
         <a href="../index.html#story">Story</a>
         <a href="../index.html#b2b">B2B</a>
         <a href="../blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
         <a href="/get/" class="nav-cta">Get the app</a>
       </nav>
     </div>
@@ -233,16 +248,20 @@
         <span class="bigstatus ok" id="bigStatus">Loading fires…</span>
         <button class="nearme" id="nearMe">Fires near me</button>
         <span class="cl-legend" id="clLegend" style="display:none">⛔ road closures · live DOT data via MileCheck</span>
+        <button class="map-back" id="mapBack" hidden type="button">&larr; Back to all fires</button>
         <div id="firemap"></div>
         <div class="fire-loading" id="fireLoading"><div class="fl-spin"></div><div class="fl-txt">Loading live fire data…</div></div>
       </div>
       <div class="fire-legend">
+       <div class="lg-group" aria-label="Legend"><span class="lg-label">Legend</span>
         <span class="lg-item">🔥 Active fire</span>
         <span class="lg-item"><span class="lg-pill lg-new">NEW</span> under 48 hrs</span>
         <span class="lg-item"><span style="color:#cf3320;font-weight:800;">▮</span> Perimeter</span>
         <span class="lg-item">⛔ Road closed</span>
         <span class="lg-item"><span style="opacity:.55;">🔥</span> Faded&thinsp;=&thinsp;contained</span>
         <span class="lg-item"><span class="lg-pill lg-rx">RX</span> Prescribed burn</span>
+       </div>
+       <div class="lg-group" aria-label="Map layers"><span class="lg-label">Layers · tap to show</span>
         <button class="lg-item tog on" id="togEvac" aria-pressed="true" title="Evacuation orders — National Weather Service"><span class="sw-evac"></span> Evacuation</button>
         <button class="lg-item tog" id="togRfw" aria-pressed="false" title="Red Flag Warnings — critical fire weather, National Weather Service"><span class="sw-rfw"></span> Red flag</button>
         <button class="lg-item tog" id="togCam" aria-pressed="false" title="Live cameras within ~20 miles of the fires in view — road (DOT), FAA aviation weather, and national park webcams"><span class="sw-cam"></span> <span id="camChipTxt">Cameras</span></button>
@@ -251,6 +270,7 @@
         <button class="lg-item tog" id="togAqi" aria-pressed="false" title="Current air quality — EPA AirNow AQI areas at Moderate or worse"><span class="sw-aqi"></span> <span id="aqiChipTxt">Air quality</span></button>
         <button class="lg-item tog" id="togHist" aria-pressed="false" title="Past years' burned-area perimeters from NIFC — zoom in to a region to load"><span class="sw-hist"></span> <span id="histChipTxt">History</span></button>
         <button class="lg-item tog" id="togWind" aria-pressed="false" title="Latest station wind near the large fires in view — arrows point the way the wind is blowing (National Weather Service)"><span class="sw-wind">➤</span> <span id="windChipTxt">Wind</span></button>
+       </div>
       </div>
     </div>
     <div class="fire-side">
@@ -266,6 +286,7 @@
       </div>
       <div class="fire-list">
         <div class="lh" id="listHead">Largest active fires</div>
+        <button class="list-back" id="listBack" hidden type="button">&larr; Back to the full list</button>
         <div class="fire-rows" id="fireRows"><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div><div class="skel"><div class="sk w1"></div><div class="sk w2"></div><div class="sk w3"></div></div></div>
       </div>
       <!-- #11: Premium upsell — the fire map is built into the MileCheck app. -->
@@ -284,19 +305,12 @@
     </div>
   </div>
 
-  <div class="fire-notes">
-    <b>About this data:</b> incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live cameras within about 20 miles of the fires in view (zoom in to load them) — road cameras from state DOTs (green), FAA aviation weather cameras (grey), and National Park Service webcams (purple); FAA and most park cameras open on their source site, road cameras show an inline snapshot. The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, air attack, and helicopters working low and slow in the fire area — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. The smoke toggle overlays NOAA's near-surface smoke forecast guidance (HRRR-based) — darker shading means thicker forecast smoke at ground level; it's a model forecast, not a satellite photo. The air-quality toggle shows EPA AirNow's latest AQI contours for areas at Moderate or worse (all-Good areas aren't shaded). The history toggle outlines past years' burned-area perimeters (100+ acres) from NIFC's interagency fire-history archive — zoom in to a region to load them. The wind toggle reads the latest weather-station observation near each large (1,000+ ac) fire in view via the National Weather Service; the arrow points the way the wind is blowing — roughly the direction a fire would be pushed. Zoom and pan the map; the fire list updates to what's in view, largest first.
-  </div>
+  <details class="fire-notes">
+    <summary>About this data and the layers</summary>
+    <span>incidents and perimeters come from NIFC/WFIGS, the National Interagency Fire Center's official feed — the same source behind government fire maps. "% contained" means how much of the fire's edge has a control line firefighters expect to hold, not how much of the fire is out. Amber tags mark prescribed (Rx) burns — planned, controlled fires, not emergencies. Evacuation orders and Red Flag Warnings come live from the National Weather Service alert feed; the camera toggle shows live cameras within about 20 miles of the fires in view (zoom in to load them) — road cameras from state DOTs (green), FAA aviation weather cameras (grey), and National Park Service webcams (purple); FAA and most park cameras open on their source site, road cameras show an inline snapshot. The aircraft toggle shows firefighting aircraft — air tankers, scoopers, lead planes, air attack, and helicopters working low and slow in the fire area — currently airborne near the fires in view, identified by callsign and aircraft type from the <a href="https://adsb.lol" target="_blank" rel="noopener">ADSB.lol</a> community ADS-B network (ODbL). Coverage depends on volunteer radio receivers, so remote fires may show fewer aircraft than are actually flying, and most fire aviation stands down at night. The smoke toggle overlays NOAA's near-surface smoke forecast guidance (HRRR-based) — darker shading means thicker forecast smoke at ground level; it's a model forecast, not a satellite photo. The air-quality toggle shows EPA AirNow's latest AQI contours for areas at Moderate or worse (all-Good areas aren't shaded). The history toggle outlines past years' burned-area perimeters (100+ acres) from NIFC's interagency fire-history archive — zoom in to a region to load them. The wind toggle reads the latest weather-station observation near each large (1,000+ ac) fire in view via the National Weather Service; the arrow points the way the wind is blowing — roughly the direction a fire would be pushed. Zoom and pan the map; the fire list updates to what's in view, largest first. Newsrooms and community sites that want to embed this map, or anyone with a licensing question: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>.</span>
+  </details>
 
-  <div class="cl-notes" style="max-width:1160px;margin:0 auto 40px;padding:0 20px;">
-    <details style="border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:12px 16px;">
-      <summary style="font-weight:800;font-size:13.5px;color:#0E1116;cursor:pointer;">Embed this map on your site (free)</summary>
-      <p style="color:#5b6670;font-size:13px;margin:10px 0 8px;line-height:1.5;">Newsrooms, blogs, and community sites are welcome to embed the live fire map with attribution. Paste this:</p>
-      <pre style="background:#F7F5EE;border:1px solid #E5E5E5;border-radius:8px;padding:10px 12px;font-size:12px;overflow-x:auto;">&lt;iframe src="https://milecheckapp.com/fire/" width="100%" height="620" style="border:1px solid #ddd;border-radius:12px;" title="Live US wildfire map by MileCheck"&gt;&lt;/iframe&gt;
-&lt;p&gt;Live fire &amp; road-closure map by &lt;a href="https://milecheckapp.com"&gt;MileCheck&lt;/a&gt;&lt;/p&gt;</pre>
-      <p style="color:#5b6670;font-size:12.5px;margin-top:8px;"><b style="color:#0E1116;">Commercial or operational use</b> (fleet dashboards, logistics tools, paid products) requires a data license. Questions, licensing, or a custom region view: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a></p>
-    </details>
-  </div>
+  
 
   <footer class="site-footer">
     <div class="container">
@@ -448,8 +462,18 @@ function render(){
     rememberView();
     map.flyTo([f.lat,f.lon],11,{duration:.9});
     L.popup({maxWidth:280}).setLatLng([f.lat,f.lon]).setContent(popupHtml(f)).openOn(map);
+    showBack(true);
+    // on a phone the list sits below the map: bring the map into view so the zoom is seen
+    if(window.innerWidth<861){const mb=document.getElementById('firemap');if(mb&&mb.scrollIntoView)mb.scrollIntoView({behavior:'smooth',block:'start'});}
   });
+  showBack(!!prevView);
 }
+// "Back" after zooming to a fire (Leah, 2026-09-28: tapped a fire, could not get back to the list).
+// Both buttons restore the view saved by rememberView(); closing the popup does the same.
+function showBack(on){for(const id of ['mapBack','listBack']){const b=document.getElementById(id);if(b)b.hidden=!on;}}
+function restoreView(){map.closePopup();if(prevView){map.flyTo(prevView.c,prevView.z,{duration:.8});prevView=null;}showBack(false);}
+document.getElementById('mapBack').addEventListener('click',restoreView);
+document.getElementById('listBack').addEventListener('click',function(){restoreView();const l=document.getElementById('listHead');if(l&&l.scrollIntoView)l.scrollIntoView({behavior:'smooth',block:'start'});});
 const NEW_HOURS=48; // fires discovered within this many hours get a NEW tag
 // Flame-marker diameter by acreage — mirrors the app's fireMarkerDiameter()
 // (app/(tabs)/map.tsx c23 #29). Keep these tiers in sync with the app.
@@ -551,7 +575,7 @@ let prevView=null;
 function rememberView(){ if(!prevView) prevView={c:map.getCenter(),z:map.getZoom()}; }
 map.on('popupclose',()=>{
   setTimeout(()=>{             // wait a beat: if another popup opened (fire-to-fire click), don't restore
-    if(!map._popup && prevView){ map.flyTo(prevView.c,prevView.z,{duration:.8}); prevView=null; }
+    if(!map._popup && prevView){ map.flyTo(prevView.c,prevView.z,{duration:.8}); prevView=null; showBack(false); }
   },250);
 });
 

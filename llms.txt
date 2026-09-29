@@ -4,7 +4,7 @@ MileCheck is a mobile app for iOS and Android that shows your nearest highway mi
 
 ## Key facts
 
-- Coverage: All 50 US states for mile markers. Live DOT alerts in 48 states (as of July 2026); the two remaining are Wyoming and Rhode Island. Live traffic cameras in 20 states.
+- Coverage: mile markers in all 50 US states and kilometre markers in 10 Canadian provinces. Live state DOT feeds in all 50 states plus British Columbia, Alberta and Manitoba (as of September 2026). Live traffic cameras in 27 states and 3 provinces, 31,000+ cameras.
 - Price: Free tier (mile markers only). Premium $49.99/year or $9.99/month — 7-day free trial. Existing subscribers keep the price they signed up at ($4.99/year or $9.99/year).
 - Platforms: iOS (App Store, ID 6759212851) and Android (Google Play, package app.milecheck.mobile).
 - CarPlay and Android Auto: both live. The in-dash screen shows the nearest mile marker and is free for everyone.
@@ -14,7 +14,7 @@ MileCheck is a mobile app for iOS and Android that shows your nearest highway mi
 - Shows the nearest highway mile marker with interpolated decimal position (e.g., "MP 142.4 on I-5 NB").
 - Provides live road alerts: closures, crashes, construction, weather conditions, chain requirements, and bridge status.
 - Shows live DOT traffic cameras on an interactive map — the actual road, updated continuously.
-- Pulls from 48 state DOT feeds updated in real time, normalizing many distinct upstream platform formats into one schema.
+- Pulls from 50 state DOT feeds plus three Canadian provinces, updated in real time, normalizing many distinct upstream platform formats into one schema.
 - Lets users navigate to any specific milepost by typing a route and mile number (e.g., "I-5 MP 200").
 - Tracks Seattle drawbridge status with live open/closed state for the Ballard, Fremont, Montlake, South Park, and 1st Ave S bridges.
 - Shows border crossing wait times for US/Canada and US/Mexico ports of entry.
@@ -66,8 +66,15 @@ MileCheck is a mobile app for iOS and Android that shows your nearest highway mi
 
 ## Live conditions pages
 
-- Interstate corridor conditions (I-5, I-90, I-95, I-80, I-10, I-15, I-4, I-75, I-94) — https://milecheckapp.com/corridors/
-- Mountain pass conditions (Snoqualmie, Stevens, Siskiyou, Grapevine, Donner, Cajon, Parleys) — https://milecheckapp.com/passes/
+- Road conditions by state, one page per state with live closures and crashes from that state's DOT, cameras, passes and corridors — https://milecheckapp.com/road-conditions/ (e.g. https://milecheckapp.com/road-conditions/arizona/)
+- Live US road closures map, all 50 states — https://milecheckapp.com/closures/
+
+- Interstate corridor conditions (I-5, I-90, I-95, I-80, I-10, I-15, I-4, I-75, I-94, I-70, I-40, I-35, I-20, I-65, I-81) — https://milecheckapp.com/corridors/
+- Mountain pass conditions (Snoqualmie, Stevens, Crystal Mountain, Siskiyou, Cabbage Hill, Anthony Lakes, Grapevine, Donner, Cajon, Parleys, Little Cottonwood, Eisenhower, Vail) — https://milecheckapp.com/passes/
+- Drawbridge maps by state, with the federal opening rule for each span — https://milecheckapp.com/bridges/
+- Border wait times, US–Canada and US–Mexico — https://milecheckapp.com/borders/
+- Site search — https://milecheckapp.com/search/
+- Gear the guides recommend (Amazon Associates links) — https://milecheckapp.com/gear/
 - Live traffic cameras by state and city — https://milecheckapp.com/cameras/
 - All maps (mile markers, cameras, road conditions, closures, fire, weather) — https://milecheckapp.com/maps/
 
