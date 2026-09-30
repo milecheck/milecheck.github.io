@@ -50,6 +50,7 @@ export function keyFor(rel) {
   }
   // The other two apps' sites inside this repo (Leah, 2026-09-24: "can go on all websites too").
   if (dir === 'mountains' && rest[rest.length - 1] === 'index.html') {
+    if (rest[0] === 'android') return null; // signup page, not sponsorable (Leah, 2026-09-30)
     if (rest.length === 1) return { kind: 'mountain', slug: 'hub' };
     if (rest.length === 2) return { kind: 'mountain', slug: rest[0] };
     if (rest.length === 3) return { kind: 'mountain', slug: rest[0] + '-' + rest[1] }; // roads/ pages are generator-owned and skipped above
