@@ -1,0 +1,58 @@
+[
+  {
+    "key": "rainier",
+    "question": "Is Mount Rainier visible right now?",
+    "file": "og-rainier.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  },
+  {
+    "key": "hood",
+    "question": "Is Mount Hood visible right now?",
+    "file": "og-hood.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  },
+  {
+    "key": "baker",
+    "question": "Is Mount Baker visible right now?",
+    "file": "og-baker.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  },
+  {
+    "key": "sthelens",
+    "question": "Is Mount St. Helens visible right now?",
+    "file": "og-sthelens.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  },
+  {
+    "key": "denali",
+    "question": "Is Denali visible right now?",
+    "file": "og-denali.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  },
+  {
+    "key": "olympics",
+    "question": "Are the Olympics visible right now?",
+    "file": "og-olympics.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  },
+  {
+    "key": "angeles",
+    "question": "Is Mount Angeles visible right now?",
+    "file": "og-angeles.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  }
+]

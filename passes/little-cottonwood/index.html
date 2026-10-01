@@ -11,6 +11,10 @@
   <meta property="og:title" content="Little Cottonwood Canyon road conditions | MileCheck">
   <meta property="og:description" content="Getting to Snowbird and Alta: live UDOT cameras and alerts on SR-210 up Little Cottonwood Canyon, avalanche closures, traction-law requirements, and the coming toll and gondola plan. No account.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/passes/little-cottonwood/">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
@@ -22,7 +26,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Little Cottonwood Canyon open right now?","acceptedAnswer":{"@type":"Answer","text":"Closures and incidents on SR-210 show on the map above as red and orange markers, from UDOT. See every UDOT camera on the Utah cameras page, or the US closures map for everywhere else."}},{"@type":"Question","name":"Are chains or snow tires required in Little Cottonwood Canyon?","acceptedAnswer":{"@type":"Answer","text":"Yes, by state law, from November 1 to May 1 every year. UDOT can tighten that to chains or 4-wheel drive only when conditions require it. Check the live cameras above for the road surface before you commit to the climb."}},{"@type":"Question","name":"How high are Snowbird and Alta?","acceptedAnswer":{"@type":"Answer","text":"Snowbird's base is 7,760 feet, Alta's is 8,530 feet &mdash; both up SR-210, 13.6 miles from the canyon mouth in the Salt Lake Valley."}},{"@type":"Question","name":"Is there a toll for Little Cottonwood Canyon?","acceptedAnswer":{"@type":"Answer","text":"Not yet as a fixed daily charge, but UDOT's approved plan adds a peak-period toll on busy ski days as part of a phased rollout, alongside more frequent bus service. Check UDOT's Cottonwood Canyons page for what's actually running this season."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Little Cottonwood Canyon open right now?","acceptedAnswer":{"@type":"Answer","text":"Closures and incidents on SR-210 show on the map above as red and orange markers, from UDOT. See every UDOT camera on the Utah cameras page, or the US closures map for everywhere else."}},{"@type":"Question","name":"Are chains or snow tires required in Little Cottonwood Canyon?","acceptedAnswer":{"@type":"Answer","text":"Yes, by state law, from November 1 to May 1 every year. UDOT can tighten that to chains or 4-wheel drive only when conditions require it. Check the live cameras above for the road surface before you commit to the climb."}},{"@type":"Question","name":"How high are Snowbird and Alta?","acceptedAnswer":{"@type":"Answer","text":"Snowbird's base is 7,760 feet, Alta's is 8,530 feet. Both are up SR-210, 13.6 miles from the canyon mouth in the Salt Lake Valley."}},{"@type":"Question","name":"Is there a toll for Little Cottonwood Canyon?","acceptedAnswer":{"@type":"Answer","text":"Not yet as a fixed daily charge, but UDOT's approved plan adds a peak-period toll on busy ski days as part of a phased rollout, alongside more frequent bus service. Check UDOT's Cottonwood Canyons page for what's actually running this season."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Mountain Passes","item":"https://milecheckapp.com/passes/"},{"@type":"ListItem","position":3,"name":"Little Cottonwood Canyon","item":"https://milecheckapp.com/passes/little-cottonwood/"}]}</script>
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
@@ -47,7 +51,7 @@
     .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
     .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
     .co-layer input:checked+.co-sw.alr{background:#DC2626;}
-    .co-layer input:checked+.co-sw.poi{background:#7C3AED;}
+    .co-layer input:checked+.co-sw.poi{background:#E0A100;}
     .co-layer input:checked+.co-sw.fire{background:#EA580C;}
     .co-layer input:checked+.co-sw::after{left:16px;}
     .co-layer input:focus-visible+.co-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
@@ -72,7 +76,11 @@
     /* Selected-camera blink (Leah, 2026-09-25) is done via setStyle() in JS, not
        CSS — this map uses Leaflet's Canvas renderer, so circleMarkers have no
        per-shape DOM element for a CSS animation to target. See selectCamMarker(). */
-    .poi-icon{color:#7C3AED;font-size:24px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;cursor:pointer;font-weight:900;}
+    .poi-icon{color:#F5B301;font-size:30px;line-height:1;text-align:center;text-shadow:0 0 2px #3a2a00,0 0 3px #3a2a00,0 0 1px #000;cursor:pointer;font-weight:900;}
+    /* Key rows under the layer toggles: the destination star, and purple for park webcams (Leah, 9-28). */
+    .co-key{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#4b5a50;margin-top:7px;padding-left:2px;} .co-key .co-star{color:#F5B301;text-shadow:0 0 1px #3a2a00,0 0 2px #3a2a00;font-size:16px;line-height:1;width:14px;text-align:center;}
+    .co-print{font:inherit;font-weight:700;border:2px solid #1d2a1f;background:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;}
+    @media print{header,nav,footer,.co-layers,.lst-tools,.co-print,.co-faq,.co-cta,.leaflet-control-container,#coCard,.co-bs,[class*="sponsor"],[class*="signup"],[class*="sp-slot"]{display:none!important;}body{background:#fff!important;}#comap{height:420px!important;break-inside:avoid;}.co-list{break-inside:avoid;box-shadow:none!important;}.co-list li button{display:none!important;}}
     .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
     .co-guide h2{font-size:26px;margin:0 0 6px;}
     .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
@@ -177,7 +185,8 @@
   </aside>
     <div class="eyebrow">UT-210 · Wasatch Mountains · Utah</div>
     <h1>Little Cottonwood Canyon right now</h1>
-    <p class="sub">SR-210 is the only road to Snowbird and Alta &mdash; 13.6 miles from the mouth of the canyon in the Salt Lake Valley, climbing through some of the most avalanche-exposed terrain of any highway in the country. Live UDOT cameras and alerts on the whole climb, below.</p>
+    <p class="sub">SR-210 is the only road to Snowbird and Alta, 13.6 miles from the mouth of the canyon in the Salt Lake Valley, climbing through some of the most avalanche-exposed terrain of any highway in the country. Live UDOT cameras and alerts on the whole climb, below.</p>
+    
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras within 15 mi</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
@@ -194,6 +203,8 @@
         <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
         <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
         <label class="co-layer"><input type="checkbox" id="tgFire" checked><span class="co-sw fire"></span><span class="co-dot" style="background:#EA580C"></span>Wildfires</label>
+        <div class="co-key"><span class="co-star">★</span>Little Cottonwood Canyon</div>
+        <div class="co-key" id="keyPark" hidden><span class="co-dot" style="background:#7C3AED"></span>Park webcam</div>
       </div>
       <div class="co-bs" id="coStatus">Loading live Little Cottonwood Canyon data…</div>
       <div class="co-card" id="coCard"></div>
@@ -203,17 +214,18 @@
   <section class="co-lists" aria-label="Conditions within 15 miles">
     <div class="co-list co-list-cams" id="lstCams"><h2>Cameras</h2><p class="hint">Every camera in the feed within 15 miles. Tap one to load its latest frame. Park camera frames are large, about 1.5 MB each.</p><div class="lst-tools"><button type="button" id="btnAllCams">Show every camera</button></div><ul><li class="empty">Loading.</li></ul></div>
     <div class="co-list" id="lstSnow"><h2>Snow and ice</h2><p class="hint">Road-surface and pass reports within 15 miles, as UDOT posts them, plus weather alerts.</p><ul><li class="empty">Loading.</li></ul></div>
-    <div class="co-list" id="lstFire"><h2>Wildfires</h2><p class="hint">Active fires within 15 miles, from the national NIFC feed, nearest first. Prescribed burns are marked.</p><ul><li class="empty">Loading.</li></ul></div>
     <div class="co-list" id="lstClos"><h2>Closures and incidents</h2><p class="hint">Closures, crashes and hazards within 15 miles, from UDOT. Full closures are marked in red.</p><ul><li class="empty">Loading.</li></ul></div>
     <div class="co-list" id="lstWork"><h2>Construction</h2><p class="hint">Work zones and lane restrictions within 15 miles.</p><ul><li class="empty">Loading.</li></ul></div>
+    <div class="co-list" id="lstFire"><h2>Wildfires</h2><p class="hint">Active fires within 15 miles, from the national NIFC feed, nearest first. Prescribed burns are marked.</p><ul><li class="empty">Loading.</li></ul></div>
   </section>
 
   <section class="co-guide">
     <h2>Before you drive the canyon</h2>
-    <p class="lede">Little Cottonwood is a working highway with real avalanche control, real winter tire law, and — starting soon — a real toll. Here's what UDOT actually enforces.</p>
-    <div class="co-seg"><h3>Avalanche closures are routine, not rare</h3><p>UDOT counts 64 avalanche paths crossing SR-210, and more than half the highway sits under avalanche threat. Closures for avalanche control, sometimes with little notice, are a normal part of a canyon winter — not an emergency exception.</p></div>
-    <div class="co-seg"><h3>Snow tires or chains are the law, November 1 to May 1</h3><p>Utah requires snow tires or chains in the canyon for that entire window, and UDOT can restrict travel further to snow tires, chains, or 4-wheel drive only when conditions call for it. Follow UDOT Cottonwoods and the signs at the canyon mouth — restrictions can change within the hour.</p></div>
-    <div class="co-seg"><h3>A toll and more buses are coming</h3><p>UDOT's Little Cottonwood Canyon plan adds a peak-period toll (proposed around $25&ndash;$30 on busy ski days, not year-round) and more frequent buses &mdash; every 10&ndash;20 minutes instead of every 30 &mdash; as part of a longer-term plan that also includes a proposed 8-mile gondola. Phase 1 details were still being finalized as of spring 2026; check UDOT's own Cottonwood Canyons page for what's actually in effect this season.</p></div>
+    <p><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>
+    <p class="lede">Little Cottonwood is a working highway with real avalanche control, real winter tire law and, starting soon, a real toll. Here's what UDOT enforces.</p>
+    <div class="co-seg"><h3>Avalanche closures are routine, not rare</h3><p>UDOT counts 64 avalanche paths crossing SR-210, and more than half the highway sits under avalanche threat. Closures for avalanche control, sometimes with little notice, are a normal part of a canyon winter, not an emergency exception.</p></div>
+    <div class="co-seg"><h3>Snow tires or chains are the law, November 1 to May 1</h3><p>Utah requires snow tires or chains in the canyon for that entire window, and UDOT can restrict travel further to snow tires, chains, or 4-wheel drive only when conditions call for it. Follow UDOT Cottonwoods and the signs at the canyon mouth. Restrictions can change within the hour.</p></div>
+    <div class="co-seg"><h3>A toll and more buses are coming</h3><p>UDOT's Little Cottonwood Canyon plan adds a peak-period toll (proposed around $25 to $30 on busy ski days, not year-round) and more frequent buses, every 10 to 20 minutes instead of every 30, as part of a longer-term plan that also includes a proposed 8-mile gondola. Phase 1 details were still being finalized as of spring 2026. Check UDOT's own Cottonwood Canyons page for what's actually in effect this season.</p></div>
     <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the stationary view, the UDOT feed you would check before you leave the valley. In the MileCheck app, your exact mile marker and the nearest camera follow you up the canyon, hands-free on CarPlay and Android Auto.</p></div>
   </section>
 
@@ -221,7 +233,7 @@
     <h2>Little Cottonwood Canyon questions, answered</h2>
     <details><summary>Is Little Cottonwood Canyon open right now?</summary><p>Closures and incidents on SR-210 show on the <a href="#comap">map above</a> as red and orange markers, from UDOT. See every UDOT camera on the <a href="../../cameras/utah/">Utah cameras page</a>, or the <a href="../../closures/">US closures map</a> for everywhere else.</p></details>
     <details><summary>Are chains or snow tires required in Little Cottonwood Canyon?</summary><p>Yes, by state law, from November 1 to May 1 every year. UDOT can tighten that to chains or 4-wheel drive only when conditions require it. Check the <a href="#comap">live cameras above</a> for the road surface before you commit to the climb.</p></details>
-    <details><summary>How high are Snowbird and Alta?</summary><p>Snowbird's base is 7,760 feet, Alta's is 8,530 feet &mdash; both up SR-210, 13.6 miles from the canyon mouth in the Salt Lake Valley.</p></details>
+    <details><summary>How high are Snowbird and Alta?</summary><p>Snowbird's base is 7,760 feet, Alta's is 8,530 feet. Both are up SR-210, 13.6 miles from the canyon mouth in the Salt Lake Valley.</p></details>
     <details><summary>Is there a toll for Little Cottonwood Canyon?</summary><p>Not yet as a fixed daily charge, but UDOT's approved plan adds a peak-period toll on busy ski days as part of a phased rollout, alongside more frequent bus service. Check UDOT's Cottonwood Canyons page for what's actually running this season.</p></details>
   </section>
 
@@ -306,7 +318,7 @@ function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Little Cottonwood Canyon cameras &amp; conditions: UDOT via MileCheck',maxZoom:16}).addTo(map);
-map.setView([PASS.lat,PASS.lon],11);
+if(PASS.area){const dy=PASS.radiusKm/111,dx=dy/Math.cos(PASS.lat*Math.PI/180);map.fitBounds([[PASS.lat-dy,PASS.lon-dx],[PASS.lat+dy,PASS.lon+dx]]);}else{map.setView([PASS.lat,PASS.lon],11);}
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const fireLayer=L.layerGroup().addTo(map);
@@ -314,11 +326,14 @@ const plowLayer=L.layerGroup().addTo(map);
 let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], PLOWLIST=[], showCam=true, showAlr=true, showFire=true, showPlow=true, camMarkers=[];
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
+// Missing feeds are not zero reports. Keep successful layers when another feed fails.
+const failedFeeds=new Set();
+async function feedRows(url,key,label){const d=await fetchJSON(url,3);if(!d||d.unavailable||d.ok===false||d.supported===false||['failed','partial','unavailable','unsupported'].includes(d.source_status)||(Array.isArray(d.errors)&&d.errors.length)||!Array.isArray(d[key]))failedFeeds.add(label);return d&&Array.isArray(d[key])?d[key]:[];}
 function clean(t,n){return String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);}
-async function loadCams(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);for(const c of ((d&&d.cameras)||[])){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
-async function loadAlerts(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);for(const a of ((d&&d['incident-reports'])||[])){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
-async function loadConds(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/conditions?state='+st,3);for(const r of ((d&&d['road-weather-reports'])||[])){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr});}}return out;}
-async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const d=await fetchJSON(WORKER+'/fires?bbox='+bb,3);return ((d&&d.fires)||[]).filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
+async function loadCams(){const out=[];for(const st of PASS.states){for(const c of await feedRows(WORKER+'/cameras?state='+st,'cameras','cameras')){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title&&c.title!=='N/A'?c.title:(c.route||'Traffic')+' camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
+async function loadAlerts(){const out=[];for(const st of PASS.states){for(const a of await feedRows(WORKER+'/incidents?state='+st,'incident-reports','alerts')){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
+async function loadConds(){const out=[];for(const st of PASS.states){for(const r of await feedRows(WORKER+'/conditions?state='+st,'road-weather-reports','road weather')){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr,note:clean(r.comments||'',280)});}}return out;}
+async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const rows=await feedRows(WORKER+'/fires?bbox='+bb,'fires','fires');return rows.filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
 const cardEl=document.getElementById('coCard');
 let selectedMarker=null;
 let blinkTimer=null,blinkBase=null,blinkOn=false;
@@ -355,33 +370,45 @@ async function loadPlows(){if(!PLOWS)return [];const out=[];for(const st of PLOW
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+b+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
 function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>';}
 function renderPlows(){setList('lstPlows',PLOWLIST.map(t=>'<li>'+esc(t.name)+'<span class="m">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</span></li>'),'No plows within the map radius right now.');}
-function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();plowLayer.clearLayers();selectedMarker=null;camMarkers=[];if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t),false)).addTo(plowLayer));if(showCam)CAMS.forEach((c,i)=>{const m=L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c,i),false,i);selectCamMarker(m);}).addTo(camLayer);camMarkers[i]=m;});if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+FIRES.length+' fires');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' within 15 miles of the canyon':'Toggle a layer to view the area data';}
+function feedCount(label,n){return failedFeeds.has(label)?'?':n;}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();plowLayer.clearLayers();selectedMarker=null;camMarkers=[];if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t),false)).addTo(plowLayer));if(showCam)CAMS.forEach((c,i)=>{const m=L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c,i),false,i);selectCamMarker(m);}).addTo(camLayer);camMarkers[i]=m;});if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+feedCount('cameras',CAMS.length)+' cameras');if(showAlr)bits.push('⚠ '+feedCount('alerts',alertCount())+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+feedCount('fires',FIRES.length)+' fires');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows');document.getElementById('statCams').textContent=feedCount('cameras',CAMS.length);document.getElementById('statAlerts').textContent=feedCount('alerts',alertCount());document.getElementById('coStatus').textContent=(bits.length?bits.join(' · ')+' within 15 miles of the canyon':'Toggle a layer to view the area data')+(failedFeeds.size?' · Unavailable or incomplete: '+[...failedFeeds].join(', '):'');}
 const TAGS={CL:['cl','Closed'],AC:['ac','Crash'],RW:['rw','Work'],WE:['we','Weather'],HZ:['hz','Hazard'],IN:['ac','Incident'],OT:['ot','Alert']};
 function tag(k,label){return '<span class="tag '+k+'">'+label+'</span>';}
 function alrLi(a){const t=TAGS[a.type]||TAGS.OT;const full=isFullClosure(a);return '<li>'+tag(full?'cl':t[0],full?'Closed':t[1])+esc(a.title)+'<span class="m">'+esc(a.route||'')+(a.mp>0?' · MP '+Math.round(a.mp):'')+(a.desc&&a.desc!==a.title?' · '+esc(a.desc):'')+'</span></li>';}
 function setList(id,items,empty){const el=document.getElementById(id);if(!el)return;const h=el.querySelector('h2');let c=h.querySelector('.cnt');if(!c){c=document.createElement('span');c.className='cnt';h.appendChild(c);}c.textContent=items.length;el.querySelector('ul').innerHTML=items.length?items.join(''):'<li class="empty">'+empty+'</li>';}
 function loadCamImg(li,c){let img=li.querySelector('img');if(!img){img=document.createElement('img');img.alt='Live: '+c.title;img.loading='lazy';li.appendChild(img);}img.src=bust(c.img);li.querySelector('button').textContent='Refresh';}
+function isWorkCond(w){return /roadwork|maintenance|construction/i.test(w.cond||'');}
+function alertCount(){return ALERTS.length+CONDS.filter(isWorkCond).length;}
+function tcase(x){return x===x.toUpperCase()?x.toLowerCase().replace(/(^|[\s\-\/(])([a-z])/g,function(m,a,b){return a+b.toUpperCase();}).replace(/\bMp\b/g,'MP').replace(/\b(Ii|Iii|Iv)\b/g,function(m){return m.toUpperCase();}):x;}
+function condWorkLi(w){const m=/^([^:]{3,90}):\s*(.+)$/.exec(w.note||'');const t=m?tcase(m[1]):w.name;const d=m?m[2]:(w.note||'');return '<li>'+tag('rw','Work')+esc(t)+'<span class="m">'+esc(w.name)+(d?' · '+esc(d):'')+'</span></li>';}
 function renderLists(){
   const camItems=CAMS.map((c,i)=>'<li data-i="'+i+'">'+tag(c.src?'nps':'dot',c.src||'UDOT')+esc(c.title)+' <button type="button">Show</button><span class="m">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+(c.park?' · '+esc(c.park):'')+'</span></li>');
   setList('lstCams',camItems,'No cameras in the feed for this area right now.');
   document.querySelectorAll('#lstCams li[data-i] button').forEach(b=>{b.onclick=()=>{const li=b.closest('li');loadCamImg(li,CAMS[+li.dataset.i]);};});
   const all=document.getElementById('btnAllCams');if(all)all.onclick=()=>{document.querySelectorAll('#lstCams li[data-i]').forEach(li=>loadCamImg(li,CAMS[+li.dataset.i]));all.textContent='Refresh every camera';};
-  const snow=CONDS.map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
+  const snow=CONDS.filter(w=>!isWorkCond(w)).map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+(w.note?' · '+esc(w.note):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
   setList('lstSnow',snow,'No snow, ice or pass reports for this area right now.');
   const fires=FIRES.map(f=>'<li>'+tag(f.rx?'rx':'fire',f.rx?'Prescribed':'Fire')+esc(f.name)+'<span class="m">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away</span></li>');
   setList('lstFire',fires,'No active fires within '+Math.round(PASS.radiusKm/1.609344)+' miles in the NIFC feed.');
   const clos=ALERTS.filter(a=>a.type!=='RW'&&a.type!=='WE').sort((a,b)=>(isFullClosure(b)-isFullClosure(a))).map(alrLi);
   setList('lstClos',clos,'No closures, crashes or hazards reported in this area right now.');
-  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi);
+  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi).concat(CONDS.filter(isWorkCond).map(condWorkLi));
   setList('lstWork',work,'No work zones reported in this area right now.');
+  for(const [id,deps] of [['lstCams',['cameras']],['lstSnow',['road weather','alerts']],['lstFire',['fires']],['lstClos',['alerts']],['lstWork',['alerts','road weather']]]){
+    if(!deps.some(x=>failedFeeds.has(x)))continue;
+    const el=document.getElementById(id);if(!el)continue;const ul=el.querySelector('ul'),empty=ul.querySelector('.empty');
+    if(empty)empty.remove();
+    ul.insertAdjacentHTML('beforeend','<li class="empty">Feed unavailable or incomplete. Check the agency links for current conditions.</li>');
+    el.querySelector('.cnt').textContent='?';
+  }
 }
-L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">▲</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('Little Cottonwood Canyon · 7,760 ft',{direction:'top',offset:[0,-12]}).addTo(map);
+L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">★</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:500}).bindTooltip('Little Cottonwood Canyon · 7,760 ft',{direction:'top',offset:[0,-12]}).addTo(map);
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 const tgFire=document.getElementById('tgFire');if(tgFire)tgFire.onchange=e=>{showFire=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
-Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c;ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();if(PASS.area)renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within 15 miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the Little Cottonwood Canyon area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' on SR-210 in Little Cottonwood Canyon'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c.slice().sort(function(x,y){return (/airport/i.test(x.route||'')?1:0)-(/airport/i.test(y.route||'')?1:0);});ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;const kp=document.getElementById('keyPark');if(kp&&CAMS.some(x=>x.src))kp.hidden=false;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=alertCount();draw();renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within 15 miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the Little Cottonwood Canyon area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' on SR-210 in Little Cottonwood Canyon'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data is unavailable right now. Try again shortly.';});
 if(SNOW){loadSnow().catch(()=>{document.getElementById('snAsOf').textContent='The station did not answer. Try again in a few minutes.';});loadForecast().catch(()=>{});loadAvy().catch(()=>{});}
 </script>
 

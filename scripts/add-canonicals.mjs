@@ -20,7 +20,8 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = 'https://milecheckapp.com';
 const DRY = process.argv.includes('--dry');
 
-const SKIP = [/-preview\.html$/, /^google[0-9a-f]+\.html$/, /^404\.html$/, /\/drafts?\//];
+// docs/ holds working files (the sponsor one-pager source), not site pages.
+const SKIP = [/-preview\.html$/, /^google[0-9a-f]+\.html$/, /^404\.html$/, /\/drafts?\//, /^docs\//];
 
 function htmlFiles(dir, acc = []) {
   for (const n of readdirSync(dir)) {

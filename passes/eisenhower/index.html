@@ -6,11 +6,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eisenhower Tunnel Camera &amp; Conditions Right Now (I-70) | MileCheck</title>
-  <meta name="description" content="Live Eisenhower Tunnel cameras and real-time road conditions on I-70 — see snow, chains, and closures before you drive it. CDOT cameras, tagged with mile marker.">
+  <meta name="description" content="Live Eisenhower Tunnel cameras and real-time road conditions on I-70. See snow, chains, and closures before you drive it. CDOT cameras, tagged with mile marker.">
   <link rel="canonical" href="https://milecheckapp.com/passes/eisenhower/">
-  <meta property="og:title" content="Eisenhower Tunnel Right Now — Live Camera &amp; Conditions | MileCheck">
-  <meta property="og:description" content="Live I-70 Eisenhower Tunnel cameras and conditions. See the pass before you drive it — snow, chains, and closures in real time.">
+  <meta property="og:title" content="Eisenhower Tunnel Right Now: Live Camera &amp; Conditions | MileCheck">
+  <meta property="og:description" content="Live I-70 Eisenhower Tunnel cameras and conditions. See the pass before you drive it. Snow, chains, and closures in real time.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/passes/eisenhower/">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
@@ -22,7 +26,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the Eisenhower Tunnel open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active closures and incidents on I-70 through the tunnel and its approaches, straight from CDOT. See the whole route on the I-70 corridor page or the US closures map. Closures here are usually avalanche control or weather on the approach grades, not the tunnel itself."}},{"@type":"Question","name":"Are chains required at the Eisenhower Tunnel?","acceptedAnswer":{"@type":"Answer","text":"CDOT sets traction and chain law restrictions on I-70 through this stretch, and they tighten fast in a storm. Watch the live cameras above for conditions on the approach grades, and always follow posted signs."}},{"@type":"Question","name":"How high is the Eisenhower Tunnel?","acceptedAnswer":{"@type":"Answer","text":"11,158 feet — the highest point on the entire U.S. Interstate Highway System, not just I-70. Compare it with Vail Pass further west on the same corridor."}},{"@type":"Question","name":"How far is the Eisenhower Tunnel from Denver?","acceptedAnswer":{"@type":"Answer","text":"About 60 miles west on I-70. Track your mile marker through the tunnel and over the Divide with the MileCheck app on CarPlay or Android Auto."}},{"@type":"Question","name":"Where are the plows?","acceptedAnswer":{"@type":"Answer","text":"The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the Eisenhower Tunnel open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active closures and incidents on I-70 through the tunnel and its approaches, straight from CDOT. See the whole route on the I-70 corridor page or the US closures map. Closures here are usually avalanche control or weather on the approach grades, not the tunnel itself."}},{"@type":"Question","name":"Are chains required at the Eisenhower Tunnel?","acceptedAnswer":{"@type":"Answer","text":"CDOT sets traction and chain law restrictions on I-70 through this stretch, and they tighten fast in a storm. Watch the live cameras above for conditions on the approach grades, and always follow posted signs."}},{"@type":"Question","name":"How high is the Eisenhower Tunnel?","acceptedAnswer":{"@type":"Answer","text":"11,158 feet, the highest point on the U.S. Interstate Highway System. Compare it with Vail Pass further west on the same corridor."}},{"@type":"Question","name":"How far is the Eisenhower Tunnel from Denver?","acceptedAnswer":{"@type":"Answer","text":"About 60 miles west on I-70. Track your mile marker through the tunnel and over the Divide with the MileCheck app on CarPlay or Android Auto."}},{"@type":"Question","name":"Where are the plows?","acceptedAnswer":{"@type":"Answer","text":"The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Mountain Passes","item":"https://milecheckapp.com/passes/"},{"@type":"ListItem","position":3,"name":"Eisenhower Tunnel","item":"https://milecheckapp.com/passes/eisenhower/"}]}</script>
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
@@ -47,7 +51,7 @@
     .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
     .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
     .co-layer input:checked+.co-sw.alr{background:#DC2626;}
-    .co-layer input:checked+.co-sw.poi{background:#7C3AED;}
+    .co-layer input:checked+.co-sw.poi{background:#E0A100;}
     .co-layer input:checked+.co-sw.fire{background:#EA580C;}
     .co-layer input:checked+.co-sw::after{left:16px;}
     .co-layer input:focus-visible+.co-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
@@ -72,7 +76,11 @@
     /* Selected-camera blink (Leah, 2026-09-25) is done via setStyle() in JS, not
        CSS — this map uses Leaflet's Canvas renderer, so circleMarkers have no
        per-shape DOM element for a CSS animation to target. See selectCamMarker(). */
-    .poi-icon{color:#7C3AED;font-size:24px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;cursor:pointer;font-weight:900;}
+    .poi-icon{color:#F5B301;font-size:30px;line-height:1;text-align:center;text-shadow:0 0 2px #3a2a00,0 0 3px #3a2a00,0 0 1px #000;cursor:pointer;font-weight:900;}
+    /* Key rows under the layer toggles: the destination star, and purple for park webcams (Leah, 9-28). */
+    .co-key{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#4b5a50;margin-top:7px;padding-left:2px;} .co-key .co-star{color:#F5B301;text-shadow:0 0 1px #3a2a00,0 0 2px #3a2a00;font-size:16px;line-height:1;width:14px;text-align:center;}
+    .co-print{font:inherit;font-weight:700;border:2px solid #1d2a1f;background:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;}
+    @media print{header,nav,footer,.co-layers,.lst-tools,.co-print,.co-faq,.co-cta,.leaflet-control-container,#coCard,.co-bs,[class*="sponsor"],[class*="signup"],[class*="sp-slot"]{display:none!important;}body{background:#fff!important;}#comap{height:420px!important;break-inside:avoid;}.co-list{break-inside:avoid;box-shadow:none!important;}.co-list li button{display:none!important;}}
     .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
     .co-guide h2{font-size:26px;margin:0 0 6px;}
     .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
@@ -177,7 +185,8 @@
   </aside>
     <div class="eyebrow">I-70 · Colorado · Elevation 11,158 ft</div>
     <h1>Eisenhower Tunnel right now: live camera &amp; conditions</h1>
-    <p class="sub">See the tunnel before you drive it. Live CDOT cameras and real-time conditions on I-70 at the Eisenhower–Johnson Memorial Tunnels — the highest point on the entire U.S. Interstate Highway System, and the main route from Denver to Colorado's ski country.</p>
+    <p class="sub">See the tunnel before you drive it. Live CDOT cameras and real-time conditions on I-70 at the Eisenhower–Johnson Memorial Tunnels, the highest point on the U.S. Interstate Highway System and the main route from Denver to Colorado's ski country.</p>
+    
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras near the pass</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
@@ -194,6 +203,8 @@
         <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
         <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
         <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="co-dot" style="background:#0369A1"></span>Snowplows</label>
+        <div class="co-key"><span class="co-star">★</span>Eisenhower Tunnel</div>
+        <div class="co-key" id="keyPark" hidden><span class="co-dot" style="background:#7C3AED"></span>Park webcam</div>
       </div>
       <div class="co-bs" id="coStatus">Loading live Eisenhower Tunnel data…</div>
       <div class="co-card" id="coCard"></div>
@@ -209,27 +220,31 @@
     </div>
     <div class="co-list" id="lstPlows"><h2>Snowplows</h2><p class="hint">CDOT plow positions within the map radius, updated about every minute. Parked and idle trucks are listed too.</p><ul><li class="empty">Loading.</li></ul></div>
   </section>
+  <section class="co-lists" aria-label="Cameras near Eisenhower Tunnel">
+    <div class="co-list co-list-cams" id="lstCams"><h2>Cameras</h2><p class="hint">Every camera in the feed on this stretch. Tap one to load its latest frame.</p><div class="lst-tools"><button type="button" id="btnAllCams">Show every camera</button></div><ul><li class="empty">Loading.</li></ul></div>
+  </section>
 
   <section class="co-guide">
     <h2>About Eisenhower Tunnel</h2>
+    <p><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>
     <p class="lede">Eisenhower Tunnel carries I-70 over the Continental Divide at 11,158 ft. Here's what to watch, and when it bites.</p>
-    <div class="co-seg"><h3>When it closes</h3><p>The tunnel bores through the Continental Divide, so it doesn't close for snow the way an open summit does — but the approaches on both sides do, for avalanche control, whiteout conditions, and the crashes that pile up on a steep, high-altitude grade in bad weather. Chain law and traction law restrictions on I-70 through this stretch are common all winter, and holiday ski traffic can back the approaches up for miles even in clear weather.</p></div>
-    <div class="co-seg"><h3>The highest point on the Interstate System</h3><p>At 11,158 feet, the Eisenhower Tunnel isn't just the high point of I-70 — it's the highest elevation reached anywhere on the U.S. Interstate Highway System. Air is noticeably thinner here, grades are steep on both approaches, and the westbound bore (Eisenhower) and eastbound bore (Johnson) are close enough together that an incident in one often slows traffic in both.</p></div>
-    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the stationary view — the CDOT feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.</p></div>
+    <div class="co-seg"><h3>When it closes</h3><p>The tunnel bores through the Continental Divide, so it doesn't close for snow the way an open summit does. The approaches on both sides do, for avalanche control, whiteout conditions, and the crashes that pile up on a steep, high-altitude grade in bad weather. Chain law and traction law restrictions on I-70 through this stretch are common all winter, and holiday ski traffic can back the approaches up for miles even in clear weather.</p></div>
+    <div class="co-seg"><h3>The highest point on the Interstate System</h3><p>At 11,158 feet, the Eisenhower Tunnel is the highest elevation reached anywhere on the U.S. Interstate Highway System. Air is noticeably thinner here, grades are steep on both approaches, and the westbound bore (Eisenhower) and eastbound bore (Johnson) are close enough together that an incident in one often slows traffic in both.</p></div>
+    <div class="co-seg"><h3>Watch it live while you drive</h3><p>The cameras and alerts above are the stationary view, the CDOT feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.</p></div>
   </section>
 
   <section class="co-faq">
     <h2>Eisenhower Tunnel questions, answered</h2>
     <details><summary>Is the Eisenhower Tunnel open right now?</summary><p>The <a href="#comap">live map above</a> shows active closures and incidents on I-70 through the tunnel and its approaches, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Closures here are usually avalanche control or weather on the approach grades, not the tunnel itself.</p></details>
     <details><summary>Are chains required at the Eisenhower Tunnel?</summary><p>CDOT sets traction and chain law restrictions on I-70 through this stretch, and they tighten fast in a storm. Watch the <a href="#comap">live cameras above</a> for conditions on the approach grades, and always follow posted signs.</p></details>
-    <details><summary>How high is the Eisenhower Tunnel?</summary><p>11,158 feet — the highest point on the entire U.S. Interstate Highway System, not just I-70. Compare it with <a href="../vail/">Vail Pass</a> further west on the same corridor.</p></details>
+    <details><summary>How high is the Eisenhower Tunnel?</summary><p>11,158 feet, the highest point on the U.S. Interstate Highway System. Compare it with <a href="../vail/">Vail Pass</a> further west on the same corridor.</p></details>
     <details><summary>How far is the Eisenhower Tunnel from Denver?</summary><p>About 60 miles west on I-70. Track your mile marker through the tunnel and over the Divide with the <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=passes-eisenhower&mt=8" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.</p></details>
     <details><summary>Where are the plows?</summary><p>The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.</p></details>
   </section>
 
 
   <div class="co-cta">
-    <h2>Watch the climb — live, hands-free</h2>
+    <h2>Watch the climb live, hands-free</h2>
     <p>MileCheck shows your exact mile marker in real time as you drive I-70 over Eisenhower Tunnel, plus the nearest camera and any alert on your route. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=passes-eisenhower&mt=8" target="_blank" rel="noopener">iOS App Store</a>
@@ -308,7 +323,7 @@ function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Eisenhower Tunnel cameras &amp; conditions: CDOT via MileCheck',maxZoom:16}).addTo(map);
-map.setView([PASS.lat,PASS.lon],11);
+if(PASS.area){const dy=PASS.radiusKm/111,dx=dy/Math.cos(PASS.lat*Math.PI/180);map.fitBounds([[PASS.lat-dy,PASS.lon-dx],[PASS.lat+dy,PASS.lon+dx]]);}else{map.setView([PASS.lat,PASS.lon],11);}
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const fireLayer=L.layerGroup().addTo(map);
@@ -316,11 +331,14 @@ const plowLayer=L.layerGroup().addTo(map);
 let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], PLOWLIST=[], showCam=true, showAlr=true, showFire=true, showPlow=true, camMarkers=[];
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
+// Missing feeds are not zero reports. Keep successful layers when another feed fails.
+const failedFeeds=new Set();
+async function feedRows(url,key,label){const d=await fetchJSON(url,3);if(!d||d.unavailable||d.ok===false||d.supported===false||['failed','partial','unavailable','unsupported'].includes(d.source_status)||(Array.isArray(d.errors)&&d.errors.length)||!Array.isArray(d[key]))failedFeeds.add(label);return d&&Array.isArray(d[key])?d[key]:[];}
 function clean(t,n){return String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);}
-async function loadCams(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);for(const c of ((d&&d.cameras)||[])){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
-async function loadAlerts(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);for(const a of ((d&&d['incident-reports'])||[])){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
-async function loadConds(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/conditions?state='+st,3);for(const r of ((d&&d['road-weather-reports'])||[])){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr});}}return out;}
-async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const d=await fetchJSON(WORKER+'/fires?bbox='+bb,3);return ((d&&d.fires)||[]).filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
+async function loadCams(){const out=[];for(const st of PASS.states){for(const c of await feedRows(WORKER+'/cameras?state='+st,'cameras','cameras')){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title&&c.title!=='N/A'?c.title:(c.route||'Traffic')+' camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
+async function loadAlerts(){const out=[];for(const st of PASS.states){for(const a of await feedRows(WORKER+'/incidents?state='+st,'incident-reports','alerts')){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
+async function loadConds(){const out=[];for(const st of PASS.states){for(const r of await feedRows(WORKER+'/conditions?state='+st,'road-weather-reports','road weather')){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr,note:clean(r.comments||'',280)});}}return out;}
+async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const rows=await feedRows(WORKER+'/fires?bbox='+bb,'fires','fires');return rows.filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
 const cardEl=document.getElementById('coCard');
 let selectedMarker=null;
 let blinkTimer=null,blinkBase=null,blinkOn=false;
@@ -357,33 +375,45 @@ async function loadPlows(){if(!PLOWS)return [];const out=[];for(const st of PLOW
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+b+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
 function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>';}
 function renderPlows(){setList('lstPlows',PLOWLIST.map(t=>'<li>'+esc(t.name)+'<span class="m">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</span></li>'),'No plows within the map radius right now.');}
-function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();plowLayer.clearLayers();selectedMarker=null;camMarkers=[];if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t),false)).addTo(plowLayer));if(showCam)CAMS.forEach((c,i)=>{const m=L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c,i),false,i);selectCamMarker(m);}).addTo(camLayer);camMarkers[i]=m;});if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+FIRES.length+' fires');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' near the pass':'Toggle a layer to view pass data';}
+function feedCount(label,n){return failedFeeds.has(label)?'?':n;}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();plowLayer.clearLayers();selectedMarker=null;camMarkers=[];if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t),false)).addTo(plowLayer));if(showCam)CAMS.forEach((c,i)=>{const m=L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c,i),false,i);selectCamMarker(m);}).addTo(camLayer);camMarkers[i]=m;});if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+feedCount('cameras',CAMS.length)+' cameras');if(showAlr)bits.push('⚠ '+feedCount('alerts',alertCount())+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+feedCount('fires',FIRES.length)+' fires');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows');document.getElementById('statCams').textContent=feedCount('cameras',CAMS.length);document.getElementById('statAlerts').textContent=feedCount('alerts',alertCount());document.getElementById('coStatus').textContent=(bits.length?bits.join(' · ')+' near the pass':'Toggle a layer to view pass data')+(failedFeeds.size?' · Unavailable or incomplete: '+[...failedFeeds].join(', '):'');}
 const TAGS={CL:['cl','Closed'],AC:['ac','Crash'],RW:['rw','Work'],WE:['we','Weather'],HZ:['hz','Hazard'],IN:['ac','Incident'],OT:['ot','Alert']};
 function tag(k,label){return '<span class="tag '+k+'">'+label+'</span>';}
 function alrLi(a){const t=TAGS[a.type]||TAGS.OT;const full=isFullClosure(a);return '<li>'+tag(full?'cl':t[0],full?'Closed':t[1])+esc(a.title)+'<span class="m">'+esc(a.route||'')+(a.mp>0?' · MP '+Math.round(a.mp):'')+(a.desc&&a.desc!==a.title?' · '+esc(a.desc):'')+'</span></li>';}
 function setList(id,items,empty){const el=document.getElementById(id);if(!el)return;const h=el.querySelector('h2');let c=h.querySelector('.cnt');if(!c){c=document.createElement('span');c.className='cnt';h.appendChild(c);}c.textContent=items.length;el.querySelector('ul').innerHTML=items.length?items.join(''):'<li class="empty">'+empty+'</li>';}
 function loadCamImg(li,c){let img=li.querySelector('img');if(!img){img=document.createElement('img');img.alt='Live: '+c.title;img.loading='lazy';li.appendChild(img);}img.src=bust(c.img);li.querySelector('button').textContent='Refresh';}
+function isWorkCond(w){return /roadwork|maintenance|construction/i.test(w.cond||'');}
+function alertCount(){return ALERTS.length+CONDS.filter(isWorkCond).length;}
+function tcase(x){return x===x.toUpperCase()?x.toLowerCase().replace(/(^|[\s\-\/(])([a-z])/g,function(m,a,b){return a+b.toUpperCase();}).replace(/\bMp\b/g,'MP').replace(/\b(Ii|Iii|Iv)\b/g,function(m){return m.toUpperCase();}):x;}
+function condWorkLi(w){const m=/^([^:]{3,90}):\s*(.+)$/.exec(w.note||'');const t=m?tcase(m[1]):w.name;const d=m?m[2]:(w.note||'');return '<li>'+tag('rw','Work')+esc(t)+'<span class="m">'+esc(w.name)+(d?' · '+esc(d):'')+'</span></li>';}
 function renderLists(){
   const camItems=CAMS.map((c,i)=>'<li data-i="'+i+'">'+tag(c.src?'nps':'dot',c.src||'CDOT')+esc(c.title)+' <button type="button">Show</button><span class="m">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+(c.park?' · '+esc(c.park):'')+'</span></li>');
   setList('lstCams',camItems,'No cameras in the feed for this area right now.');
   document.querySelectorAll('#lstCams li[data-i] button').forEach(b=>{b.onclick=()=>{const li=b.closest('li');loadCamImg(li,CAMS[+li.dataset.i]);};});
   const all=document.getElementById('btnAllCams');if(all)all.onclick=()=>{document.querySelectorAll('#lstCams li[data-i]').forEach(li=>loadCamImg(li,CAMS[+li.dataset.i]));all.textContent='Refresh every camera';};
-  const snow=CONDS.map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
+  const snow=CONDS.filter(w=>!isWorkCond(w)).map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+(w.note?' · '+esc(w.note):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
   setList('lstSnow',snow,'No snow, ice or pass reports for this area right now.');
   const fires=FIRES.map(f=>'<li>'+tag(f.rx?'rx':'fire',f.rx?'Prescribed':'Fire')+esc(f.name)+'<span class="m">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away</span></li>');
   setList('lstFire',fires,'No active fires within '+Math.round(PASS.radiusKm/1.609344)+' miles in the NIFC feed.');
   const clos=ALERTS.filter(a=>a.type!=='RW'&&a.type!=='WE').sort((a,b)=>(isFullClosure(b)-isFullClosure(a))).map(alrLi);
   setList('lstClos',clos,'No closures, crashes or hazards reported in this area right now.');
-  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi);
+  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi).concat(CONDS.filter(isWorkCond).map(condWorkLi));
   setList('lstWork',work,'No work zones reported in this area right now.');
+  for(const [id,deps] of [['lstCams',['cameras']],['lstSnow',['road weather','alerts']],['lstFire',['fires']],['lstClos',['alerts']],['lstWork',['alerts','road weather']]]){
+    if(!deps.some(x=>failedFeeds.has(x)))continue;
+    const el=document.getElementById(id);if(!el)continue;const ul=el.querySelector('ul'),empty=ul.querySelector('.empty');
+    if(empty)empty.remove();
+    ul.insertAdjacentHTML('beforeend','<li class="empty">Feed unavailable or incomplete. Check the agency links for current conditions.</li>');
+    el.querySelector('.cnt').textContent='?';
+  }
 }
-L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">▲</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('Eisenhower Tunnel · 11,158 ft',{direction:'top',offset:[0,-12]}).addTo(map);
+L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">★</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:500}).bindTooltip('Eisenhower Tunnel · 11,158 ft',{direction:'top',offset:[0,-12]}).addTo(map);
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 const tgFire=document.getElementById('tgFire');if(tgFire)tgFire.onchange=e=>{showFire=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
-Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c;ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();if(PASS.area)renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within  miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the Eisenhower Tunnel area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' on I-70'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c.slice().sort(function(x,y){return (/airport/i.test(x.route||'')?1:0)-(/airport/i.test(y.route||'')?1:0);});ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;const kp=document.getElementById('keyPark');if(kp&&CAMS.some(x=>x.src))kp.hidden=false;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=alertCount();draw();renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within  miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the Eisenhower Tunnel area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' on I-70'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data is unavailable right now. Try again shortly.';});
 if(SNOW){loadSnow().catch(()=>{document.getElementById('snAsOf').textContent='The station did not answer. Try again in a few minutes.';});loadForecast().catch(()=>{});loadAvy().catch(()=>{});}
 </script>
 

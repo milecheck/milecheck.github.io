@@ -56,7 +56,7 @@ Sources [WSDOT real-time travel map](https://wsdot.wa.gov/travel/real-time), [WS
 
 Read the [WSDOT Snoqualmie report](https://wsdot.com/travel/real-time/mountainpasses/snoqualmie) for your direction, then look at the cameras and closure map. Check fuel, bring warm layers, charge your phone and carry chains that fit your vehicle. Practice fitting them before the trip. If you drive a truck or tow a trailer, check the separate commercial chaining rules and the posted oversize restriction.
 
-For updates, open the WSDOT mobile app and select **Notifications → Snoqualmie Pass I-90**. WSDOT ended the separate I-90 text-alert service on August 31, 2026. The pass report and WSDOT’s **@SnoqualmiePass** account on X are other places to check. Do not promise an alert for every change. Recheck the restriction line before the climb.
+For updates, open the WSDOT mobile app and select **Notifications → Snoqualmie Pass I-90**. WSDOT ended the separate I-90 text-alert service on August 31, 2026. The pass report and WSDOT’s **@SnoqualmiePass** account on X are other places to check. Recheck the restriction line before the climb.
 
 Sources [WSDOT winter driving guide](https://www.wsdot.wa.gov/publications/fulltext/winter/winter-driving-guide.pdf), [WSDOT alert migration notice](https://apps.wsdot.wa.gov/about/news/2026/i-90-text-message-alerts-are-taking-new-route-wsdot-mobile-app), [WSDOT mobile app and social media](https://wsdot.wa.gov/travel/mobile-app-and-social-media).
 

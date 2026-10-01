@@ -15,8 +15,8 @@ const PASSES = [
     desc: 'Snoqualmie Pass driving conditions on I-90: WSDOT restrictions and chain rules for each direction, summit temperature, live cameras, and closures, with the mile marker on every camera.',
     dot: 'WSDOT', lat: 47.3923, lon: -121.4001, r: 30, elev: '3,022 ft', dist: '~52 mi', distNote: 'east of Seattle on I-90',
     range: 'Cascade Range',
-    hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on I-90 over Snoqualmie Pass — snow, chains, and closures as they happen. WSDOT reports about 28,000 vehicles a day over the pass, on the main route between Seattle and Eastern Washington.`,
-    closes: `The pass stays open most of the year, but heavy Cascade snow and scheduled avalanche control work close I-90 over the summit several times each winter — sometimes for a couple of hours, occasionally longer. Closures can happen with little notice, which is exactly why the live cameras above are worth a look before you leave.`,
+    hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on I-90 over Snoqualmie Pass. Snow, chains, and closures as they happen. WSDOT reports about 28,000 vehicles a day over the pass, on the main route between Seattle and Eastern Washington.`,
+    closes: `The pass stays open most of the year, but heavy Cascade snow and scheduled avalanche control work close I-90 over the summit several times each winter, sometimes for a couple of hours and occasionally longer. Closures can happen with little notice, which is exactly why the live cameras above are worth a look before you leave.`,
     // Reference sections + FAQ additions: ChatGPT draft 2026-09-25, sources rechecked (scripts/passes/).
     segs: [{ h: 'When it closes', p: `The pass stays open most of the year, but heavy Cascade snow and scheduled avalanche control work close I-90 over the summit several times each winter. Closures can happen with little notice, which is why the live cameras above are worth a look before you leave.` }, ...require('./passes/snoqualmie-reference.cjs').segs],
     // Snow block (2026-09-24). Nearest SNOTEL to the summit (47.4245,-121.4131) is Olallie Meadows, 3.7 mi, 4,010 ft. Resort URLs verified 2026-09-24.
@@ -35,16 +35,16 @@ const PASSES = [
     slug: 'stevens', name: 'Stevens Pass', route: 'US-2', state: 'WA', stateName: 'Washington',
     dot: 'WSDOT', lat: 47.7462, lon: -121.0890, r: 30, elev: '4,061 ft', dist: '~78 mi', distNote: 'northeast of Seattle on US-2',
     range: 'Cascade Range',
-    hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on US-2 over Stevens Pass — snow, chains, and closures in real time. It's the northern Cascade crossing between the Seattle area and Wenatchee, and home to the Stevens Pass ski area.`,
-    closes: `Stevens is higher and snowier than Snoqualmie, and US-2 over the summit closes regularly through the winter for avalanche control and heavy snowfall — sometimes for extended windows when the avalanche danger is high above the highway. Check the cameras before you leave; conditions here turn quickly.`,
-    extra: { h: 'Ski traffic and snow', p: `The Stevens Pass ski resort sits right at the summit, so winter weekends stack recreational traffic on top of freight and commuters — on a snowy Saturday the combination of a chain requirement and a full parking lot can crawl the highway. The cameras show you what you're driving into before you're committed to the climb.` },
+    hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on US-2 over Stevens Pass. Snow, chains, and closures in real time. It's the northern Cascade crossing between the Seattle area and Wenatchee, and home to the Stevens Pass ski area.`,
+    closes: `Stevens is higher and snowier than Snoqualmie, and US-2 over the summit closes regularly through the winter for avalanche control and heavy snowfall, sometimes for extended windows when the avalanche danger is high above the highway. Check the cameras before you leave. Conditions here turn quickly.`,
+    extra: { h: 'Ski traffic and snow', p: `The Stevens Pass ski resort sits right at the summit, so winter weekends stack recreational traffic on top of freight and commuters. On a snowy Saturday the combination of a chain requirement and a full parking lot can crawl the highway. The cameras show you what you're driving into before you're committed to the climb.` },
     // Snow block (2026-09-24). Stevens Pass SNOTEL sits 0.2 mi from the summit at 3,940 ft.
     snow: { station: '791:WA:SNTL', stationName: 'Stevens Pass', stationElev: '3,940 ft', stationNote: 'at the summit', avyCenter: 'NWAC', title: 'Snow at Stevens Pass',
       resort: { name: 'Stevens Pass', report: 'https://www.stevenspass.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', tickets: 'https://www.stevenspass.com/plan-your-trip/lift-access/tickets.aspx' } },
     faq: [
       ['Is Stevens Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on US-2 over the pass, straight from WSDOT. See the <a href="../../closures/">US road closures map</a> for the bigger picture. Stevens closes for avalanche control and heavy snow several times each winter.`],
       ['Are chains required on Stevens Pass?', `Traction and chain requirements are set by WSDOT and change fast in a storm. Watch the <a href="#comap">live cameras above</a> for snow and ice, and always follow posted signs at the pass.`],
-      ['How high is Stevens Pass?', `The summit is 4,061 feet on US-2 in the Cascades — higher and typically snowier than nearby Snoqualmie Pass on I-90. Compare conditions with <a href="../snoqualmie/">Snoqualmie Pass</a>.`],
+      ['How high is Stevens Pass?', `The summit is 4,061 feet on US-2 in the Cascades, higher and typically snowier than nearby Snoqualmie Pass on I-90. Compare conditions with <a href="../snoqualmie/">Snoqualmie Pass</a>.`],
       ['How far is Stevens Pass from Seattle?', `About 78 miles northeast on US-2, roughly two hours in good weather. Track your mile marker over the pass hands-free with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
       ['How much snow is at Stevens Pass right now?', `The snow block above reads the USDA SNOTEL station at the summit, 3,940 feet. It shows depth, the change over 24 hours, snow water and temperature, updated hourly. The ski area posts its own <a href="https://www.stevenspass.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx" target="_blank" rel="noopener">snow and weather report</a>.`],
     ],
@@ -53,13 +53,13 @@ const PASSES = [
     slug: 'siskiyou', name: 'Siskiyou Summit', route: 'I-5', state: 'OR', stateName: 'Oregon',
     dot: 'ODOT', lat: 42.0672, lon: -122.5606, r: 30, elev: '4,310 ft', dist: 'just north of', distNote: 'the California line, south of Ashland on I-5',
     range: 'Siskiyou Mountains',
-    hero: `See the summit before you drive it. Live ODOT cameras and real-time conditions on I-5 over Siskiyou Summit — the highest point on the entire Interstate 5, and the winter wildcard between Oregon and California.`,
-    closes: `If any part of I-5 is going to close in winter, it's usually here. At 4,310 feet, Siskiyou Summit gets snow and ice that shut the interstate or force chain requirements several times a season — and because it's the only I-5 crossing of this range, a closure here backs up traffic for hours in both states.`,
+    hero: `See the summit before you drive it. Live ODOT cameras and real-time conditions on I-5 over Siskiyou Summit, the highest point on Interstate 5 and the winter wildcard between Oregon and California.`,
+    closes: `If any part of I-5 is going to close in winter, it's usually here. At 4,310 feet, Siskiyou Summit gets snow and ice that shut the interstate or force chain requirements several times a season. Because it's the only I-5 crossing of this range, a closure here backs up traffic for hours in both states.`,
     extra: { h: 'The high point of I-5', p: `Siskiyou Summit is the highest elevation on all 1,381 miles of Interstate 5, from Canada to Mexico. That's why it, and the Grapevine far to the south, are the two spots drivers actually have to plan around in winter. Southbound, it's the last climb before the long drop into California.` },
     faq: [
       ['Is I-5 over Siskiyou Summit open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-5 over the summit, straight from ODOT. See the whole route on the <a href="../../corridors/i-5/">I-5 corridor page</a> or the <a href="../../closures/">US closures map</a>.`],
-      ['Are chains required on Siskiyou Summit?', `Chain and traction requirements are set by ODOT and change with the weather. Watch the <a href="#comap">live cameras above</a> for snow and ice on the roadway, and follow posted signs — this pass can go from clear to chains-required quickly.`],
-      ['What is the highest point on I-5?', `Siskiyou Summit, at 4,310 feet in southern Oregon — the highest elevation on the entire Interstate 5. The <a href="../grapevine/">Grapevine</a> in California is the other big winter closure spot.`],
+      ['Are chains required on Siskiyou Summit?', `Chain and traction requirements are set by ODOT and change with the weather. Watch the <a href="#comap">live cameras above</a> for snow and ice on the roadway, and follow posted signs. This pass can go from clear to chains-required quickly.`],
+      ['What is the highest point on I-5?', `Siskiyou Summit, at 4,310 feet in southern Oregon, the highest elevation on Interstate 5. The <a href="../grapevine/">Grapevine</a> in California is the other big winter closure spot.`],
       ['Where exactly is Siskiyou Summit?', `On I-5 in southern Oregon, a few miles north of the California border and south of Ashland. Track your exact mile marker over the pass with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
@@ -67,13 +67,13 @@ const PASSES = [
     slug: 'grapevine', name: 'The Grapevine (Tejon Pass)', route: 'I-5', state: 'CA', stateName: 'California',
     dot: 'Caltrans', lat: 34.7947, lon: -118.8790, r: 35, elev: '4,144 ft', dist: '~40 mi', distNote: 'north of Los Angeles on I-5',
     range: 'Tehachapi Mountains',
-    hero: `See the pass before you drive it. Live Caltrans cameras and real-time conditions on I-5 over the Grapevine — the steep climb over Tejon Pass between the San Joaquin Valley and Los Angeles, and the spot most likely to close Southern California's main north–south route.`,
+    hero: `See the pass before you drive it. Live Caltrans cameras and real-time conditions on I-5 over the Grapevine, the steep climb over Tejon Pass between the San Joaquin Valley and Los Angeles, and the spot most likely to close Southern California's main north–south route.`,
     closes: `"The Grapevine is closed" makes the news in LA for a reason: snow and high wind shut this stretch of I-5 several times each winter, sometimes stranding traffic for hours because there's no easy detour. When a storm drops the snow level to pass elevation, this is the first place it bites.`,
-    extra: { h: 'No easy way around', p: `Tejon Pass tops out at 4,144 feet, and I-5 is the only fast route over it — the alternatives add hours. That's why a Grapevine closure ripples across the whole state's freight and holiday traffic. The cameras here are the quickest way to know whether the climb is bare, wet, or white before you leave the valley or the basin.` },
+    extra: { h: 'No easy way around', p: `Tejon Pass tops out at 4,144 feet, and I-5 is the only fast route over it. The alternatives add hours. That's why a Grapevine closure ripples across the whole state's freight and holiday traffic. The cameras here are the quickest way to know whether the climb is bare, wet, or white before you leave the valley or the basin.` },
     faq: [
       ['Is the Grapevine closed right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-5 over Tejon Pass, straight from Caltrans. See the full route on the <a href="../../corridors/i-5/">I-5 corridor page</a> or the <a href="../../closures/">US closures map</a>. Snow and wind close it several times a winter.`],
-      ['Why does the Grapevine close so often?', `At 4,144 feet, Tejon Pass catches snow and fierce wind when storms push through, and there's no quick detour — so Caltrans closes I-5 rather than risk it. Watch the <a href="#comap">live cameras above</a> to see conditions on the climb.`],
-      ['How high is the Grapevine?', `Tejon Pass, the summit of the Grapevine, is 4,144 feet — the second big winter closure point on I-5 after <a href="../siskiyou/">Siskiyou Summit</a> in Oregon.`],
+      ['Why does the Grapevine close so often?', `At 4,144 feet, Tejon Pass catches snow and fierce wind when storms push through, and there's no quick detour, so Caltrans closes I-5 rather than risk it. Watch the <a href="#comap">live cameras above</a> to see conditions on the climb.`],
+      ['How high is the Grapevine?', `Tejon Pass, the summit of the Grapevine, is 4,144 feet, the second big winter closure point on I-5 after <a href="../siskiyou/">Siskiyou Summit</a> in Oregon.`],
       ['Where is the Grapevine on I-5?', `About 40 miles north of Los Angeles, between the San Joaquin Valley and the LA Basin. Track your mile marker over the pass with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
     ],
   },
@@ -81,13 +81,13 @@ const PASSES = [
     slug: 'donner', name: 'Donner Pass', route: 'I-80', state: 'CA', stateName: 'California',
     dot: 'Caltrans', lat: 39.3126, lon: -120.3269, r: 30, elev: '7,056 ft', dist: 'near Truckee,', distNote: 'in the Sierra Nevada on I-80',
     range: 'Sierra Nevada',
-    hero: `See the summit before you drive it. Live Caltrans cameras and real-time conditions on I-80 over Donner Pass — one of the snowiest stretches of interstate in America, and the main Sierra Nevada crossing between Sacramento and Reno.`,
-    closes: `Donner is in a league of its own for snow. Sierra storms can drop feet in a day, and Caltrans runs chain controls and full closures on I-80 over the summit throughout the winter. When a big system lines up on the Sierra crest, this pass can close for a day or more — check the cameras and chain status before you head up.`,
-    extra: { h: 'Chain controls are the norm', p: `At 7,056 feet, Donner sees chain requirements far more often than the lower coastal passes — in a wet winter, R2 (chains required) is a regular weekend condition, not a rare event. The name comes from the Donner Party of 1846, stranded here by exactly the kind of snow the cameras now let you check from your couch.` },
+    hero: `See the summit before you drive it. Live Caltrans cameras and real-time conditions on I-80 over Donner Pass, one of the snowiest stretches of interstate in America and the main Sierra Nevada crossing between Sacramento and Reno.`,
+    closes: `Donner is in a league of its own for snow. Sierra storms can drop feet in a day, and Caltrans runs chain controls and full closures on I-80 over the summit throughout the winter. When a big system lines up on the Sierra crest, this pass can close for a day or more. Check the cameras and chain status before you head up.`,
+    extra: { h: 'Chain controls are the norm', p: `At 7,056 feet, Donner sees chain requirements far more often than the lower coastal passes. In a wet winter, R2 (chains required) is a regular weekend condition, not a rare event. The name comes from the Donner Party of 1846, stranded here by exactly the kind of snow the cameras now let you check from your couch.` },
     faq: [
       ['Is Donner Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-80 over the summit, straight from Caltrans. See the whole route on the <a href="../../corridors/i-80/">I-80 corridor page</a> or the <a href="../../closures/">US closures map</a>.`],
-      ['Are chains required on Donner Pass?', `Very often in winter. Caltrans sets chain controls (R1/R2/R3) on I-80 that change with each storm — watch the <a href="#comap">live cameras above</a> for snow on the roadway and always follow the posted control level.`],
-      ['How high is Donner Pass?', `The I-80 summit is 7,056 feet in the Sierra Nevada — far higher and snowier than the coastal passes, which is why chain controls here are routine, not rare.`],
+      ['Are chains required on Donner Pass?', `Very often in winter. Caltrans sets chain controls (R1/R2/R3) on I-80 that change with each storm. Watch the <a href="#comap">live cameras above</a> for snow on the roadway and always follow the posted control level.`],
+      ['How high is Donner Pass?', `The I-80 summit is 7,056 feet in the Sierra Nevada, far higher and snowier than the coastal passes. That is why chain controls here are routine, not rare.`],
       ['Where is Donner Pass?', `On I-80 in the Sierra Nevada near Truckee, between Sacramento and Reno. Track your exact mile marker over the summit with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
@@ -95,12 +95,12 @@ const PASSES = [
     slug: 'cajon', name: 'Cajon Pass', route: 'I-15', state: 'CA', stateName: 'California',
     dot: 'Caltrans', lat: 34.3419, lon: -117.4436, r: 22, elev: '~4,190 ft', dist: '~55 mi', distNote: 'northeast of Los Angeles on I-15',
     range: 'San Bernardino Mountains',
-    hero: `See the pass before you drive it. Live Caltrans cameras and real-time conditions on I-15 over Cajon Pass — the busy gateway between the Los Angeles Basin and the High Desert, and the main route toward Las Vegas.`,
-    closes: `Cajon rarely closes for its elevation alone, but it's a wind, snow, and wildfire funnel. Winter storms occasionally drop snow to the summit and force chain controls; strong Santa Ana and canyon winds flip trucks; and in fire season, blazes in the pass have shut I-15 entirely. The cameras tell you which of those, if any, you're dealing with today.`,
-    extra: { h: 'The LA–Vegas chokepoint', p: `I-15 through Cajon Pass is one of the most heavily traveled mountain crossings in the country — the whole Los Angeles-to-Las Vegas flow squeezes through here, on top of daily High Desert commuters. That volume means even a minor incident on the grade backs traffic up for miles, so a quick camera check before you commit to the climb pays off.` },
+    hero: `See the pass before you drive it. Live Caltrans cameras and real-time conditions on I-15 over Cajon Pass, the busy gateway between the Los Angeles Basin and the High Desert, and the main route toward Las Vegas.`,
+    closes: `Cajon rarely closes for its elevation alone, but it's a wind, snow, and wildfire funnel. Winter storms occasionally drop snow to the summit and force chain controls. Strong Santa Ana and canyon winds flip trucks. In fire season, blazes in the pass have shut I-15 entirely. The cameras tell you which of those, if any, you're dealing with today.`,
+    extra: { h: 'The LA–Vegas chokepoint', p: `I-15 through Cajon Pass is one of the most heavily traveled mountain crossings in the country. The whole Los Angeles-to-Las Vegas flow squeezes through here, on top of daily High Desert commuters. That volume means even a minor incident on the grade backs traffic up for miles, so a quick camera check before you commit to the climb pays off.` },
     faq: [
       ['Is Cajon Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-15 over the pass, straight from Caltrans. For the wider picture, see the <a href="../../closures/">US road closures map</a>.`],
-      ['Does it snow on Cajon Pass?', `Occasionally. At about 4,190 feet, Cajon Summit catches snow only in colder storms, but when it does, Caltrans runs chain controls on I-15. Wind and wildfire close it more often than snow — watch the <a href="#comap">live cameras above</a>.`],
+      ['Does it snow on Cajon Pass?', `Occasionally. At about 4,190 feet, Cajon Summit catches snow only in colder storms, but when it does, Caltrans runs chain controls on I-15. Wind and wildfire close it more often than snow. Watch the <a href="#comap">live cameras above</a>.`],
       ['How high is Cajon Pass?', `Cajon Summit on I-15 is about 4,190 feet, between the LA Basin and the High Desert around Victorville.`],
       ['Where is Cajon Pass?', `On I-15 about 55 miles northeast of Los Angeles, on the main route to Las Vegas. Track your mile marker over the grade with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
     ],
@@ -109,16 +109,16 @@ const PASSES = [
     slug: 'parleys', name: 'Parleys Summit', route: 'I-80', state: 'UT', stateName: 'Utah',
     dot: 'UDOT', lat: 40.7519, lon: -111.6377, r: 20, elev: '~7,020 ft', dist: 'just east of', distNote: 'Salt Lake City on I-80',
     range: 'Wasatch Range',
-    hero: `See the canyon before you drive it. Live UDOT cameras and real-time conditions on I-80 through Parleys Canyon over Parleys Summit — the main route out of Salt Lake City toward Park City and the Wasatch ski country.`,
-    closes: `Parleys Canyon funnels every Salt Lake–to–Park City driver up a steep grade into Wasatch snow, and UDOT runs chain and traction restrictions here through the winter. Heavy snow and blowing snow in the canyon can slow it to a crawl or close it, and truck restrictions are common when the grade turns icy — check the cameras before you head up.`,
-    extra: { h: 'Ski-country commute', p: `On a snowy morning, Parleys stacks resort-bound traffic, freight, and commuters onto the same steep grade — which is why a single spun-out truck can back the canyon up for miles. At about 7,020 feet at the summit, conditions here can be completely different from the dry valley floor a few minutes behind you.` },
+    hero: `See the canyon before you drive it. Live UDOT cameras and real-time conditions on I-80 through Parleys Canyon over Parleys Summit, the main route out of Salt Lake City toward Park City and the Wasatch ski country.`,
+    closes: `Parleys Canyon funnels every Salt Lake–to–Park City driver up a steep grade into Wasatch snow, and UDOT runs chain and traction restrictions here through the winter. Heavy snow and blowing snow in the canyon can slow it to a crawl or close it, and truck restrictions are common when the grade turns icy. Check the cameras before you head up.`,
+    extra: { h: 'Ski-country commute', p: `On a snowy morning, Parleys stacks resort-bound traffic, freight, and commuters onto the same steep grade. That is why a single spun-out truck can back the canyon up for miles. At about 7,020 feet at the summit, conditions here can be completely different from the dry valley floor a few minutes behind you.` },
     // Snow + plows (2026-09-24). Parleys Summit SNOTEL 0.8 mi from the summit, 7,590 ft. Plows from the Worker /plows?state=UT (UDOT servicevehicles).
     snow: { station: '684:UT:SNTL', stationName: 'Parleys Summit', stationElev: '7,590 ft', stationNote: 'less than a mile from the summit', avyCenter: 'UAC', title: 'Snow at Parleys Summit' },
     plows: { states: ['UT'], agency: 'UDOT' },
     faq: [
       ['Is Parleys Canyon (I-80) open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-80 through Parleys, straight from UDOT. See the whole route on the <a href="../../corridors/i-80/">I-80 corridor page</a> or the <a href="../../closures/">US closures map</a>.`],
       ['Are chains or snow tires required on Parleys Summit?', `UDOT sets traction and chain restrictions in Parleys Canyon through the winter, and they change with each storm. Watch the <a href="#comap">live cameras above</a> for snow on the grade and follow posted restrictions.`],
-      ['How high is Parleys Summit?', `About 7,020 feet on I-80 in the Wasatch Range — high enough that the summit can be in a snowstorm while Salt Lake City stays dry.`],
+      ['How high is Parleys Summit?', `About 7,020 feet on I-80 in the Wasatch Range, high enough that the summit can be in a snowstorm while Salt Lake City stays dry.`],
       ['Where is Parleys Summit?', `On I-80 just east of Salt Lake City, at the top of Parleys Canyon toward Park City. Track your mile marker up the canyon with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
       ['Where are the plows?', `The Snowplows list above shows UDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
@@ -127,16 +127,16 @@ const PASSES = [
     slug: 'eisenhower', name: 'Eisenhower Tunnel', route: 'I-70', state: 'CO', stateName: 'Colorado',
     dot: 'CDOT', lat: 39.6767, lon: -105.9364, r: 22, elev: '11,158 ft', dist: '~60 mi', distNote: 'west of Denver on I-70',
     range: 'Continental Divide',
-    hero: `See the tunnel before you drive it. Live CDOT cameras and real-time conditions on I-70 at the Eisenhower–Johnson Memorial Tunnels — the highest point on the entire U.S. Interstate Highway System, and the main route from Denver to Colorado's ski country.`,
-    closes: `The tunnel bores through the Continental Divide, so it doesn't close for snow the way an open summit does — but the approaches on both sides do, for avalanche control, whiteout conditions, and the crashes that pile up on a steep, high-altitude grade in bad weather. Chain law and traction law restrictions on I-70 through this stretch are common all winter, and holiday ski traffic can back the approaches up for miles even in clear weather.`,
-    extra: { h: 'The highest point on the Interstate System', p: `At 11,158 feet, the Eisenhower Tunnel isn't just the high point of I-70 — it's the highest elevation reached anywhere on the U.S. Interstate Highway System. Air is noticeably thinner here, grades are steep on both approaches, and the westbound bore (Eisenhower) and eastbound bore (Johnson) are close enough together that an incident in one often slows traffic in both.` },
+    hero: `See the tunnel before you drive it. Live CDOT cameras and real-time conditions on I-70 at the Eisenhower–Johnson Memorial Tunnels, the highest point on the U.S. Interstate Highway System and the main route from Denver to Colorado's ski country.`,
+    closes: `The tunnel bores through the Continental Divide, so it doesn't close for snow the way an open summit does. The approaches on both sides do, for avalanche control, whiteout conditions, and the crashes that pile up on a steep, high-altitude grade in bad weather. Chain law and traction law restrictions on I-70 through this stretch are common all winter, and holiday ski traffic can back the approaches up for miles even in clear weather.`,
+    extra: { h: 'The highest point on the Interstate System', p: `At 11,158 feet, the Eisenhower Tunnel is the highest elevation reached anywhere on the U.S. Interstate Highway System. Air is noticeably thinner here, grades are steep on both approaches, and the westbound bore (Eisenhower) and eastbound bore (Johnson) are close enough together that an incident in one often slows traffic in both.` },
     // Snow + plows (2026-09-24). Loveland Basin SNOTEL 1.8 mi from the tunnel, 11,410 ft. Plows from /plows?state=CO (COtrip snowPlows).
     snow: { station: '602:CO:SNTL', stationName: 'Loveland Basin', stationElev: '11,410 ft', stationNote: 'about 2 miles from the tunnel', avyCenter: 'CAIC', title: 'Snow at the Eisenhower Tunnel' },
     plows: { states: ['CO'], agency: 'CDOT' },
     faq: [
       ['Is the Eisenhower Tunnel open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-70 through the tunnel and its approaches, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Closures here are usually avalanche control or weather on the approach grades, not the tunnel itself.`],
       ['Are chains required at the Eisenhower Tunnel?', `CDOT sets traction and chain law restrictions on I-70 through this stretch, and they tighten fast in a storm. Watch the <a href="#comap">live cameras above</a> for conditions on the approach grades, and always follow posted signs.`],
-      ['How high is the Eisenhower Tunnel?', `11,158 feet — the highest point on the entire U.S. Interstate Highway System, not just I-70. Compare it with <a href="../vail/">Vail Pass</a> further west on the same corridor.`],
+      ['How high is the Eisenhower Tunnel?', `11,158 feet, the highest point on the U.S. Interstate Highway System. Compare it with <a href="../vail/">Vail Pass</a> further west on the same corridor.`],
       ['How far is the Eisenhower Tunnel from Denver?', `About 60 miles west on I-70. Track your mile marker through the tunnel and over the Divide with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
       ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
@@ -145,16 +145,16 @@ const PASSES = [
     slug: 'vail', name: 'Vail Pass', route: 'I-70', state: 'CO', stateName: 'Colorado',
     dot: 'CDOT', lat: 39.5264, lon: -106.2136, r: 22, elev: '10,662 ft', dist: '~100 mi', distNote: 'west of Denver on I-70',
     range: 'Gore Range',
-    hero: `See the summit before you drive it. Live CDOT cameras and real-time conditions on I-70 over Vail Pass — the high, exposed crossing between Copper Mountain and Vail on Colorado's busiest mountain corridor.`,
-    closes: `Vail Pass sits well above treeline on both approaches, so it takes the full force of Rocky Mountain storms with little wind protection — heavy snow, whiteouts, and avalanche control work close I-70 here several times most winters, sometimes for hours at a stretch. It's also one of the most crash-prone stretches on the corridor when a storm hits during peak ski traffic.`,
-    extra: { h: 'The exposed stretch of I-70', p: `Unlike the tunneled crossing at the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, Vail Pass is a fully exposed summit — the highway climbs into open alpine terrain with no tree cover to block wind and blowing snow. That's why it's often the first part of the Denver-to-Vail drive to see a chain law or full closure when a storm rolls in.` },
+    hero: `See the summit before you drive it. Live CDOT cameras and real-time conditions on I-70 over Vail Pass, the high, exposed crossing between Copper Mountain and Vail on Colorado's busiest mountain corridor.`,
+    closes: `Vail Pass sits well above treeline on both approaches, so it takes the full force of Rocky Mountain storms with little wind protection. Heavy snow, whiteouts, and avalanche control work close I-70 here several times most winters, sometimes for hours at a stretch. It's also one of the most crash-prone stretches on the corridor when a storm hits during peak ski traffic.`,
+    extra: { h: 'The exposed stretch of I-70', p: `Unlike the tunneled crossing at the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, Vail Pass is a fully exposed summit. The highway climbs into open alpine terrain with no tree cover to block wind and blowing snow. That's why it's often the first part of the Denver-to-Vail drive to see a chain law or full closure when a storm rolls in.` },
     // Snow + plows (2026-09-24). Copper Mountain SNOTEL 3.4 mi from the summit, 10,500 ft.
     snow: { station: '415:CO:SNTL', stationName: 'Copper Mountain', stationElev: '10,500 ft', stationNote: 'about 3 miles from the summit', avyCenter: 'CAIC', title: 'Snow at Vail Pass' },
     plows: { states: ['CO'], agency: 'CDOT' },
     faq: [
       ['Is Vail Pass open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents on I-70 over the pass, straight from CDOT. See the whole route on the <a href="../../corridors/i-70/">I-70 corridor page</a> or the <a href="../../closures/">US closures map</a>. Vail Pass closes for avalanche control and heavy snow several times most winters.`],
-      ['Are chains required on Vail Pass?', `CDOT sets traction and chain law restrictions on I-70 over the summit, and they change fast in a storm — this is one of the more frequently restricted stretches on the whole corridor. Watch the <a href="#comap">live cameras above</a> and follow posted signs.`],
-      ['How high is Vail Pass?', `10,662 feet — lower than the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, but more exposed to wind and blowing snow since it's an open summit, not a tunnel.`],
+      ['Are chains required on Vail Pass?', `CDOT sets traction and chain law restrictions on I-70 over the summit, and they change fast in a storm. This is one of the more frequently restricted stretches on the corridor. Watch the <a href="#comap">live cameras above</a> and follow posted signs.`],
+      ['How high is Vail Pass?', `10,662 feet, lower than the <a href="../eisenhower/">Eisenhower Tunnel</a> 40 miles east, but more exposed to wind and blowing snow since it's an open summit, not a tunnel.`],
       ['How far is Vail Pass from Denver?', `About 100 miles west on I-70. Track your mile marker over the summit with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> on CarPlay or Android Auto.`],
       ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
@@ -181,6 +181,15 @@ const AREAS = [
     desc: 'Live cameras on the roads to Mount Rainier from the National Park Service and WSDOT, with closures, construction, pass reports and wildfires within 30 miles of the summit. No account.',
     ogTitle: 'Mount Rainier road cameras and conditions | MileCheck',
     eyebrow: 'SR 706 · SR 410 · SR 123 · US 12 · Washington',
+    // For the printable map sheet: the state highways plus the park roads they lead to,
+    // which are not state highways and would otherwise drop Paradise and Longmire off
+    // the map (review, 9/30). Road names and points from OpenStreetMap, 2026-09-30.
+    mapRoads: ['SR 706', 'SR 410', 'SR 123', 'US 12', 'SR 165', 'Nisqually Entrance to Longmire Road', 'Longmire-to-Paradise Road', 'Stevens Canyon Road', 'Sunrise Park Road'],
+    mapNotes: [
+      { label: 'Longmire. The road above it closes at night in winter', lat: 46.74974, lon: -121.81235, snap: 'Longmire-to-Paradise Road' },
+      { label: 'Paradise, 5,400 ft. Jackson Visitor Center', lat: 46.78587, lon: -121.73676 },
+      { label: 'Sunrise. Road open about July to early October', lat: 46.91445, lon: -121.64345 },
+    ],
     h1: 'Mount Rainier road cameras and conditions',
     hero: `The cameras on the roads to the park, on one map. Paradise, Longmire and Sunrise from the National Park Service, plus WSDOT cameras on SR 410, on US 12 at Packwood and White Pass, and on SR 7 at Elbe. Closures, construction, pass reports and wildfires within 30 miles of the summit sit under the map.`,
     camLabel: 'live cameras within 30 mi', elev: '5,400 ft', elevLabel: 'Paradise, per the Park Service',
@@ -261,33 +270,36 @@ const AREAS = [
     kind: 'area', slug: 'angeles-roads', out: 'mountains/angeles/roads', up: '../../../',
     url: 'https://milecheckapp.com/mountains/angeles/roads/',
     name: 'Mount Angeles', route: 'Hurricane Ridge Road · US 101', state: 'WA', states: ['WA'], stateName: 'Washington',
-    dot: 'NPS and WSDOT', credit: 'National Park Service, WSDOT and NIFC via MileCheck',
+    dot: 'WSDOT', credit: 'National Park Service, WSDOT and NIFC via MileCheck',
     // Centre and radius from docs/seo-briefs-2026-09-28.md. Hurricane Ridge Road facts: NPS places page and winter page. US 101 cameras: WSDOT real-time travel data.
     lat: 47.9956, lon: -123.4633, rMi: 25,
     title: 'Mount Angeles road cameras and conditions right now | MileCheck',
-    desc: 'Live National Park Service cameras on Hurricane Ridge Road and WSDOT cameras on US 101 near Port Angeles and Sequim, with closures, road reports and wildfires within 25 miles of Mount Angeles. No account.',
+    desc: 'Hurricane Ridge road access, NPS ridge webcams and US 101 cameras near Port Angeles and Sequim. Agency reports within 25 miles of Mount Angeles.',
     ogTitle: 'Mount Angeles road cameras and conditions | MileCheck',
     eyebrow: 'Hurricane Ridge Road · US 101 · Washington',
     h1: 'Mount Angeles road cameras and conditions',
-    hero: `Hurricane Ridge Road from Port Angeles to the ridge, on one map. The National Park Service webcam at Hurricane Ridge, WSDOT cameras on US 101 near Port Angeles and Sequim, and closures, road reports and wildfires within 25 miles of Mount Angeles sit below.`,
+    hero: `Check Hurricane Ridge access and US 101 cameras near Port Angeles and Sequim. The map shows agency cameras and reports within 25 miles of Mount Angeles.`,
+    coverage: `The NPS webcams show the ridge and parking lot, not the road below. Check <a href="https://www.nps.gov/olym/planyourvisit/conditions.htm">NPS road status</a> before driving into the park.`,
+    markerLabel: 'Mount Angeles',
     camLabel: 'live cameras within 25 mi', elev: '5,242 ft', elevLabel: 'Hurricane Ridge, per the National Park Service',
     dist: '25 mi', distNote: 'radius from Mount Angeles', nearWord: 'within 25 miles of Mount Angeles', bannerWhere: 'on the roads around Mount Angeles',
     aboutH: 'The road to Hurricane Ridge',
     lede: `Hurricane Ridge Road climbs from Port Angeles into Olympic National Park. US 101 is the through-road around the north side of the peninsula. The agencies that run each road post different data.`,
     segs: [
       // NPS: https://www.nps.gov/places/000/hurricane-ridge-road.htm and https://www.nps.gov/olym/planyourvisit/hurricane-ridge-in-winter.htm
-      { h: 'Hurricane Ridge Road', p: `Hurricane Ridge Road runs 17 miles from Port Angeles to the Hurricane Ridge Visitor Center at 5,242 feet. The National Park Service posts road status and winter opening days. In winter, the road generally opens on scheduled days when weather allows, and every vehicle above Heart O' the Hills must carry tire chains from November 1 through April 1.` },
+      { h: 'Hurricane Ridge Road', p: `Hurricane Ridge Road runs 17 miles from Port Angeles to the ridge at 5,242 feet. NPS posts <a href="https://www.nps.gov/olym/planyourvisit/hurricane-ridge-in-winter.htm">winter opening days and chain requirements</a>. Every vehicle must carry tire chains above Heart O' the Hills from November 1 through April 1, including four-wheel drive.` },
       // NPS: https://www.nps.gov/olym/planyourvisit/hurricane-ridge-in-winter.htm and https://www.nps.gov/olym/learn/photosmultimedia/hurricane-ridge-webcam.htm
       { h: 'The ridge facilities', p: `The Hurricane Ridge Day Lodge burned in May 2023. The park now uses temporary trailers for restrooms and a visitor contact station. The webcam shows the ridge and parking lot, but not the 17 miles of road below it.` },
       // WSDOT real-time travel data: https://wsdot.com/travel/real-time/ and the US 101 camera map.
       { h: 'US 101 around the peninsula', p: `US 101 is the road around the Olympic Peninsula. WSDOT cameras near Port Angeles and Sequim show the approach roads outside the park. The map is limited to the feeds that return inside the radius.` },
     ],
-    driveP: `The cameras and alerts above are the stationary view, the feeds you would check before you leave Port Angeles or cross the peninsula. In the MileCheck app the nearest camera and your exact mile marker follow you on US 101, hands-free on CarPlay and Android Auto.`,
+    // Product features follow the existing Rainier/Hood entries. No camera is promised on an unmonitored road.
+    driveP: `MileCheck shows your mile marker on US 101 as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
     faq: [
       ['Is Hurricane Ridge Road open right now?', `The National Park Service posts current conditions on its <a href="https://www.nps.gov/olym/planyourvisit/conditions.htm" target="_blank" rel="noopener">Olympic National Park conditions page</a>. The cameras above show the ridge and the roads near Port Angeles.`,],
       ['Are chains required on Hurricane Ridge Road?', `Yes. The National Park Service requires every vehicle to carry tire chains above Heart O' the Hills from November 1 through April 1, including four-wheel-drive vehicles.`,],
-      ['How high is Hurricane Ridge?', `The Hurricane Ridge Visitor Center is at 5,242 feet, 17 miles south of Port Angeles.`,],
-      ['Are the Olympics visible right now?', `A different question from whether Hurricane Ridge Road is open. The <a href="../">Olympics visibility page</a> reads the cloud ceilings between Seattle and Mount Constance and answers it for Seattle, Tacoma and the rest of Puget Sound.`,],
+      ['How high is Hurricane Ridge?', `Hurricane Ridge is at 5,242 feet, 17 miles south of Port Angeles.`,],
+      ['Is Mount Angeles visible right now?', `Check the <a href="../">Mount Angeles visibility page</a> for views from Port Angeles, Sequim and the surrounding region. For the range seen from Seattle, use the <a href="../../olympics/">Olympics visibility page</a>.`,],
       ['Where do the cameras come from?', `The Hurricane Ridge cameras are from the National Park Service. The US 101 cameras are from WSDOT. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame.`,],
     ],
     crumbs: [
@@ -296,8 +308,8 @@ const AREAS = [
       { name: 'Mount Angeles', item: 'https://milecheckapp.com/mountains/angeles/' },
       { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/angeles/roads/' },
     ],
-    vis: { h: 'Are the Olympics visible right now?', p: `Whether Hurricane Ridge Road is open and whether you can see the Olympics are different questions. The <a href="../">visibility page</a> reads the cloud ceilings between you and Mount Constance and answers the second one for Seattle, Tacoma and the rest of Puget Sound.`, href: '../', cta: 'Check visibility now' },
-    ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on US 101, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    vis: { h: 'Is Mount Angeles visible right now?', p: `Check the visibility estimate from Port Angeles, Sequim and nearby towns. Road access and a clear view are separate questions.`, href: '../', cta: 'Check visibility now' },
+    ctaH: 'MileCheck on US 101', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
     related: (up) => `<a href="../">Is Mount Angeles visible right now?</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
@@ -308,30 +320,36 @@ const AREAS = [
     // Centre and radius from docs/seo-briefs-2026-09-28.md. SR 542 corridor: WSDOT corridor sketch and pass page.
     lat: 48.7767, lon: -121.8144, rMi: 25,
     title: 'Mount Baker road cameras and conditions right now | MileCheck',
-    desc: 'Live WSDOT cameras on SR 542 around Mount Baker, with closures, construction, road reports and wildfires within 25 miles of the summit. No account.',
+    desc: 'SR 542 and Artist Point road access, seasonal closures and agency reports within 25 miles of Mount Baker. Camera coverage is limited.',
     ogTitle: 'Mount Baker road cameras and conditions | MileCheck',
     eyebrow: 'SR 542 · Mount Baker Highway · Washington',
     h1: 'Mount Baker road cameras and conditions',
-    hero: `The Mount Baker Highway from Bellingham through Glacier to Artist Point, on one map. WSDOT cameras, closures, road reports and wildfires within 25 miles of Mount Baker sit below.`,
+    hero: `SR 542 runs from Bellingham through Glacier to Artist Point. Check seasonal access below, with agency reports within 25 miles of Mount Baker.`,
+    // Live /cameras?state=WA checked 2026-09-28. Only two Mears Field airport cameras returned within 25 mi, no SR 542 camera.
+    coverage: `The September 28, 2026 feed check returned airport views near Concrete, but no SR 542 road camera in this radius. Check <a href="https://wsdot.com/travel/real-time/mountainpasses/mt.-baker">WSDOT's Mt. Baker Highway report</a> for road access.`,
+    markerLabel: 'Mount Baker',
     camLabel: 'live cameras within 25 mi', elev: '5,140 ft', elevLabel: 'Artist Point',
     dist: '25 mi', distNote: 'radius from the summit', nearWord: 'within 25 miles of the summit', bannerWhere: 'on the roads around Mount Baker',
     aboutH: 'The road to Mount Baker',
     lede: `SR 542 is the Mount Baker Highway. It runs from Bellingham through Glacier to Artist Point. WSDOT reports the state highway data.`,
     segs: [
-      // WSDOT: https://wsdot.wa.gov/about/news/2026/sr-542-road-artist-point-mount-baker-reopens-season-wednesday-june-10 and https://wsdot.com/travel/real-time/mountainpasses/mt.-baker
-      { h: 'SR 542 to Artist Point', p: `SR 542, the Mount Baker Highway, runs 58 miles from Bellingham to Artist Point at 5,140 feet. The final 2.7 miles are narrow, with sharp curves and steep slopes. Crews close that section each fall, typically with the first snowfall, and clear it in summer, often opening it in June or July.` },
+      // USFS alert posted September 27, 2026, ends October 7: https://www.fs.usda.gov/r06/mbs/alerts/mt-baker-highway-sr-542-closed-winter-prep
+      { h: 'Daytime closures September 30 to October 6, 2026', p: `The Forest Service lists closures between Silver Fir Campground at milepost 48 and Picture Lake at milepost 54 on September 30, October 1, October 5 and October 6. Hours are 7:30 a.m. to 4 p.m. Traffic cannot pass in either direction during that work. See the <a href="https://www.fs.usda.gov/r06/mbs/alerts/mt-baker-highway-sr-542-closed-winter-prep">winter-preparation alert</a>.` },
+      // Elevation and route: https://www.fs.usda.gov/r06/mbs/recreation/mt-baker-highway-sr-542
+      // Seasonal segment: https://wsdot.wa.gov/about/news/2026/sr-542-road-artist-point-mount-baker-reopens-season-wednesday-june-10
+      { h: 'SR 542 to Artist Point', p: `The Mount Baker Highway climbs from Bellingham to Artist Point at 5,140 feet. The final 2.7 miles above the ski area close for winter. Snow removal determines the opening date. In 2026, WSDOT reopened that section on June 10.` },
       // WSDOT corridor sketch: https://wsdot.wa.gov/sites/default/files/2021-10/CSS272-SR542-SR9JctDeming-ArtistPoint.pdf
-      { h: 'Glacier is the last town', p: `Glacier is the last town on SR 542 before the climb to the ski area and Artist Point. Check the cameras there before the final section.` },
+      { h: 'Through Glacier', p: `SR 542 passes through Glacier before the climb to Heather Meadows and Artist Point. The <a href="https://www.fs.usda.gov/r06/mbs/recreation/mt-baker-highway-sr-542">Forest Service highway page</a> lists the Glacier Public Service Center near milepost 34 for forest-road and trail information.` },
       // WSDOT real-time data: https://wsdot.com/travel/real-time/ and NIFC through MileCheck.
-      { h: 'The road data', p: `The map combines WSDOT cameras, road reports and closures on SR 542. Wildfires within 25 miles come from NIFC.` },
+      { h: 'What the map covers', p: `This is a 25-mile radius around the summit, not the entire drive from Bellingham. It shows WSDOT reports that fall inside that radius and fires from NIFC.` },
     ],
-    driveP: `The cameras and alerts above are the stationary view, the WSDOT feeds you would check before you leave Bellingham or Glacier. In the MileCheck app the nearest camera and your exact mile marker follow you up SR 542, hands-free on CarPlay and Android Auto.`,
+    driveP: `MileCheck shows your mile marker on SR 542 as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
     faq: [
       ['Is the road to Artist Point open right now?', `WSDOT posts the current status on its <a href="https://wsdot.com/travel/real-time/mountainpasses/mt.-baker" target="_blank" rel="noopener">Mt. Baker Highway pass page</a>. The final 2.7 miles close for winter and reopen after crews clear the snow.`,],
       ['How high is Artist Point?', `Artist Point is at about 5,140 feet at the end of SR 542. The WSDOT pass report lists the highway pass elevation separately.`,],
       ['When does the road to Artist Point close?', `WSDOT closes the last 2.7 miles each fall, typically with the first snowfall. The opening date depends on snow removal and road conditions.`,],
       ['Is Mount Baker visible right now?', `A different question from whether SR 542 is open. The <a href="../">visibility page</a> reads the cloud ceilings between Vancouver, Bellingham and the summit and answers it for the region.`,],
-      ['Where do the cameras come from?', `The cameras, closures and road reports come from WSDOT. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame.`,],
+      ['Are there live cameras on SR 542 here?', `The September 28, 2026 feed check returned two WSDOT airport cameras near Concrete and no SR 542 road camera within 25 miles of Mount Baker. The camera list updates when the page loads.`,],
     ],
     crumbs: [
       { name: 'MileCheck', item: 'https://milecheckapp.com/' },
@@ -340,7 +358,7 @@ const AREAS = [
       { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/baker/roads/' },
     ],
     vis: { h: 'Is Mount Baker visible right now?', p: `Whether SR 542 is open and whether you can see Mount Baker are different questions. The <a href="../">visibility page</a> reads the cloud ceilings between you and the summit and answers the second one for Vancouver, Bellingham and the rest of the region.`, href: '../', cta: 'Check visibility now' },
-    ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on SR 542, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    ctaH: 'MileCheck on SR 542', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
     related: (up) => `<a href="../">Is Mount Baker visible right now?</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
@@ -351,28 +369,38 @@ const AREAS = [
     // Centre and radius from docs/seo-briefs-2026-09-28.md. SR 504 status: WSDOT project page, current 2026 end point is the winter gate at MP 45.2.
     lat: 46.1914, lon: -122.1956, rMi: 25,
     title: 'Mount St. Helens road cameras and conditions right now | MileCheck',
-    desc: 'Live WSDOT cameras on SR 504 around Mount St. Helens, with closures, construction, road reports and wildfires within 25 miles of the summit. No account.',
+    desc: 'SR 504 closure details, forest-road access and agency reports within 25 miles of Mount St. Helens. Includes the WSDOT camera at milepost 33.',
     ogTitle: 'Mount St. Helens road cameras and conditions | MileCheck',
     eyebrow: 'SR 504 · FR 83 · FR 90 · FR 99 · Washington',
+    // For the printable map sheet: the roads the sheet is about, and points to label on the
+    // front. The closure point is the South Coldwater slide, at the trailhead of that name.
+    mapRoads: ['SR 504', 'FR 83', 'FR 90', 'FR 99', 'Spirit Lake Highway'],
+    mapNotes: [
+      { label: 'SR 504 closed beyond MP 45.2', lat: 46.28568, lon: -122.25383, snap: 'SR 504' },
+    ],
     h1: 'Mount St. Helens road cameras and conditions',
-    hero: `SR 504 from Castle Rock toward Coldwater Lake, plus Forest Roads 83, 90 and 99 on the south and east sides, on one map. WSDOT cameras, closures, road reports and wildfires within 25 miles of Mount St. Helens sit below.`,
-    camLabel: 'live cameras within 25 mi', elev: '8,363 ft', elevLabel: 'Mount St. Helens summit',
+    hero: `Check SR 504 from Castle Rock toward Coldwater Lake and forest-road access on the south and east sides. The map shows agency reports within 25 miles of Mount St. Helens.`,
+    coverage: `The SR 504 camera at milepost 33 does not show the closure farther east or the forest roads. Check <a href="https://www.fs.usda.gov/r06/giffordpinchot/conditions">Forest Service conditions</a> for those roads.`,
+    markerLabel: 'Mount St. Helens',
+    camLabel: 'live cameras within 25 mi', elev: 'MP 45.2', elevLabel: 'SR 504 closure, checked September 28, 2026',
     dist: '25 mi', distNote: 'radius from the summit', nearWord: 'within 25 miles of the summit', bannerWhere: 'on the roads around Mount St. Helens',
     aboutH: 'The roads around Mount St. Helens',
     lede: `SR 504 is the state highway from Castle Rock. The forest roads reach recreation areas on the south and east sides, and their seasonal status can differ from the state highway.`,
     segs: [
       // WSDOT: https://wsdot.wa.gov/construction-planning/search-projects/sr-504-south-coldwater-slide-spirit-lake-outlet-bridge-washout
-      { h: 'SR 504 ends at the winter gate', p: `SR 504, the Spirit Lake Memorial Highway, runs east from Castle Rock on I-5 to the Mount St. Helens visitor area. The public road is closed at the winter gate at milepost 45.2, east of Coldwater Lake, after the May 2023 slide destroyed the Spirit Lake Outlet Bridge. WSDOT is rebuilding the bridge, with work expected to finish in spring 2027.` },
+      { h: 'SR 504 closure at milepost 45.2', p: `SR 504, the Spirit Lake Memorial Highway, runs east from Castle Rock on I-5. As checked September 28, 2026, WSDOT closes it at the winter gate at milepost 45.2. A May 2023 slide destroyed the Spirit Lake Outlet Bridge farther east. WSDOT expects bridge work to finish in spring 2027, followed by Forest Service work at Johnston Ridge Observatory. See the <a href="https://wsdot.wa.gov/construction-planning/search-projects/sr-504-south-coldwater-slide-spirit-lake-outlet-bridge-washout">project update</a>.` },
       // Forest Service: https://www.fs.usda.gov/r06/giffordpinchot/recreation?page=0%2C7 and https://www.fs.usda.gov/sites/nfs/files/legacy-media/giffordpinchot/2023-Visitor%20Guide.pdf
-      { h: 'South and east side forest roads', p: `Forest Road 83 provides access to Ape Cave. Forest Road 90 runs through the south side of the forest toward the Lewis River recreation areas. Forest Road 99 continues toward Windy Ridge and is generally accessible after snow melts, then closes in winter.` },
+      { h: 'Ape Cave and Lava Canyon', p: `On the south side, Forest Roads 90 and 83 lead toward Ape Cave and Lava Canyon. Ape Cave is on the 8303 spur. Road 83 above Marble Mountain Sno-Park has a winter gate. Check the <a href="https://www.fs.usda.gov/r06/giffordpinchot/conditions">Forest Service conditions page</a> for road and recreation-site closures.` },
+      // USFS visitor guide https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd544862.pdf and current-conditions page linked above.
+      { h: 'Windy Ridge', p: `Forest Road 99 reaches Windy Ridge from Road 25 on the east side. Road 99 closes for winter. Check both roads before choosing an approach.` },
       // WSDOT road feeds and Forest Service road pages. The page shows feed data, not a status inferred for an unmonitored forest road.
-      { h: 'The road data', p: `The map combines WSDOT cameras and reports on SR 504 with road data within 25 miles. It does not infer the condition of a forest road that has no live feed.` },
+      { h: 'What the map covers', p: `The September 28, 2026 feed check returned the WSDOT camera on SR 504 at milepost 33. The map also loads agency reports and NIFC fires within 25 miles. An empty alert list does not establish that a road is open.` },
     ],
-    driveP: `The cameras and alerts above are the stationary view, the WSDOT feeds you would check before you leave Castle Rock or the south side. In the MileCheck app the nearest camera and your exact mile marker follow you on SR 504, hands-free on CarPlay and Android Auto.`,
+    driveP: `MileCheck shows your mile marker on SR 504 as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
     faq: [
       ['Is SR 504 to Mount St. Helens open right now?', `WSDOT lists the current closure point and construction status on its <a href="https://wsdot.wa.gov/construction-planning/search-projects/sr-504-south-coldwater-slide-spirit-lake-outlet-bridge-washout" target="_blank" rel="noopener">SR 504 South Coldwater Slide project page</a>. The winter gate is at milepost 45.2.`,],
-      ['Can I drive to Johnston Ridge Observatory?', `Not right now. WSDOT says the road is closed at milepost 45.2 while the Spirit Lake Outlet Bridge is rebuilt. The project page expects construction to finish in spring 2027, followed by Forest Service work at the observatory.`,],
-      ['Are the Forest Roads to Ape Cave and Windy Ridge open?', `Forest Road 83, Forest Road 90 and Forest Road 99 are seasonal forest roads. Their status can differ from SR 504 and is not represented by a DOT camera when no feed covers the road.`,],
+      ['Can I drive to Johnston Ridge Observatory?', `As checked September 28, 2026, no. WSDOT lists the closure at milepost 45.2. Bridge construction is expected to finish in spring 2027, followed by Forest Service work at the observatory.`,],
+      ['Are the roads to Ape Cave and Windy Ridge open?', `Use the <a href="https://www.fs.usda.gov/r06/giffordpinchot/conditions">Forest Service conditions page</a>. Winter gates, road damage and recreation-site closures can affect each approach differently.`,],
       ['Is Mount St. Helens visible right now?', `A different question from whether SR 504 is open. The <a href="../">visibility page</a> reads the cloud ceilings between Portland and the summit and answers it for Portland, Vancouver, Woodland and the I-5 towns.`,],
       ['Where do the cameras come from?', `The cameras, closures and road reports come from WSDOT. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame.`,],
     ],
@@ -383,41 +411,55 @@ const AREAS = [
       { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/sthelens/roads/' },
     ],
     vis: { h: 'Is Mount St. Helens visible right now?', p: `Whether SR 504 is open and whether you can see Mount St. Helens are different questions. The <a href="../">visibility page</a> reads the cloud ceilings between you and the summit and answers the second one for Portland, Vancouver, Woodland and the I-5 towns.`, href: '../', cta: 'Check visibility now' },
-    ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on SR 504, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    ctaH: 'MileCheck on SR 504', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
     related: (up) => `<a href="../">Is Mount St. Helens visible right now?</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
     kind: 'area', slug: 'denali-roads', out: 'mountains/denali/roads', up: '../../../',
     url: 'https://milecheckapp.com/mountains/denali/roads/',
     name: 'Denali', route: 'Denali Park Road · AK-3', state: 'AK', states: ['AK'], stateName: 'Alaska',
-    dot: 'AK511 and NPS', credit: 'AK511, National Park Service and NIFC via MileCheck',
+    dot: 'AK511', credit: 'AK511, National Park Service and NIFC via MileCheck',
     // Centre and radius from docs/seo-briefs-2026-09-28.md. AK511 camera config is in MileCheck's cloudflare-worker.js. NPS Eielson webcam is fixed in NPS_WEBCAMS.
     lat: 63.0692, lon: -151.0070, rMi: 60,
     title: 'Denali road cameras and conditions right now | MileCheck',
-    desc: 'Live AK511 cameras and road reports on the Parks Highway and Denali Park Road, plus the National Park Service webcam, with incidents and wildfires within 60 miles of Denali. No account.',
+    desc: 'Denali Park Road access and Parks Highway camera coverage. Agency reports within 60 miles of Denali, with an NPS mountain webcam from Eielson.',
     ogTitle: 'Denali road cameras and conditions | MileCheck',
     eyebrow: 'Denali Park Road · AK-3 · Alaska',
+    // For the printable map sheet (scripts/gen-map-sheets.mjs): the roads the sheet is
+    // about, and points to label on the front. Coordinates from OpenStreetMap, 2026-09-30.
+    mapRoads: ['Denali Park Road', 'AK-3'],
+    mapNotes: [
+      { label: 'Park entrance and visitor center, mile 1.5', lat: 63.73088, lon: -148.91721, snap: 'Denali Park Road' },
+      { label: 'Savage River, mile 15. Private cars turn around here in summer', lat: 63.74007, lon: -149.29394, snap: 'Denali Park Road' },
+      { label: 'Teklanika, mile 30. The fall limit for private cars', lat: 63.65456, lon: -149.56759, snap: 'Denali Park Road' },
+    ],
     h1: 'Denali road cameras and conditions',
-    hero: `The Parks Highway and Denali Park Road on one map. AK511 cameras and road reports, the National Park Service webcam from Eielson and closures and wildfires within 60 miles of Denali sit below.`,
-    camLabel: 'live cameras within 60 mi', elev: '20,310 ft', elevLabel: 'Denali summit',
+    hero: `Check Denali Park Road access and nearby Parks Highway reports. The map covers a 60-mile radius around Denali, not the whole drive from Anchorage or Fairbanks.`,
+    // /cameras?state=AK checked 2026-09-28: AK-38-175 on Parks Highway and NPS-DENA-air at Eielson within 60 mi.
+    coverage: `The September 28, 2026 feed check returned one Parks Highway camera and the NPS Eielson mountain webcam. Eielson is a scenic view, not a Park Road traffic camera. Check <a href="https://www.nps.gov/dena/planyourvisit/conditions.htm">NPS conditions</a> for park access.`,
+    markerLabel: 'Denali',
+    camLabel: 'cameras within 60 mi', elev: '92 mi', elevLabel: 'full length of Denali Park Road',
     dist: '60 mi', distNote: 'radius from the summit', nearWord: 'within 60 miles of Denali', bannerWhere: 'on the roads around Denali',
     aboutH: 'The roads to Denali',
     lede: `Denali Park Road is inside the national park. AK-3, the Parks Highway, is the approach road from Anchorage and Fairbanks. The two roads have different operators and different access rules.`,
     segs: [
       // NPS: https://www.nps.gov/dena/planyourvisit/basicinfo.htm, https://www.nps.gov/dena/planyourvisit/visiting-denali.htm and https://www.nps.gov/dena/learn/news/pretty-rocks-bridge-complete-090226.htm
-      { h: 'Denali Park Road', p: `The Denali Park Road runs 92 miles from the park entrance to Kantishna. During the main summer season, private vehicles can drive to Savage River at mile 15. The Pretty Rocks bridge is complete, but bus service still turns around at East Fork near mile 43 for the rest of 2026. NPS expects full bus service west of the bridge to resume in 2027.` },
+      { h: 'Denali Park Road', p: `Denali Park Road runs 92 miles to Kantishna. During summer bus operations, private vehicles can drive to Savage River at mile 15. After buses stop in September, NPS allows private vehicles to Teklanika River at mile 30, weather permitting, through October 15. Snow or ice can close the road earlier at park headquarters. Check the <a href="https://www.nps.gov/dena/planyourvisit/shoulder-season.htm">NPS seasonal access page</a>.` },
+      // https://www.nps.gov/dena/learn/news/pretty-rocks-bridge-complete-090226.htm, September 3, 2026. Bridge MP 45 and bus turnaround MP 43 are different places.
+      { h: 'Pretty Rocks bridge is complete', p: `NPS announced completion on September 3, 2026. The bridge crosses the landslide near mile 45. Hikers and cyclists could cross from August 27, but buses were limited to East Fork at mile 43 for the 2026 season. Full bus service is expected in 2027. See the <a href="https://www.nps.gov/dena/learn/news/pretty-rocks-bridge-complete-090226.htm">NPS bridge update</a>.` },
       // NPS park brochure: https://www.nps.gov/dena/planyourvisit/park-brochure.htm. Alaska Route 3 is the George Parks Highway.
-      { h: 'AK-3, the Parks Highway', p: `AK-3 is the George Parks Highway, the approach from Anchorage and Fairbanks. The Denali View South and Denali View North pullouts at miles 135 and 162.7 are the road stops most visitors use for views from the south side of the park.` },
+      // Alaska State Parks lists South at MP 134.8 (often rounded to 135), North at 162.7: https://dnr.alaska.gov/parks/units/campsitelist.htm
+      { h: 'AK-3, the Parks Highway', p: `AK-3, the George Parks Highway, is the approach from Anchorage and Fairbanks. Alaska State Parks lists Denali View South at mile 134.8, near mile 135, and Denali View North at mile 162.7. Both are in Denali State Park, outside the national park.` },
       // AK511 via MileCheck and NPS webcam: https://511.alaska.gov/ and https://www.nps.gov/dena/learn/photosmultimedia/webcams.htm
-      { h: 'The road data', p: `The map loads AK511 cameras, road reports and incidents when the Alaska feed returns them, plus the National Park Service webcam from Eielson. Wildfires within 60 miles come from NIFC.` },
+      { h: 'What the map covers', p: `AK511 supplies highway reports. NPS supplies the Eielson mountain view, and NIFC supplies fire locations. The map filters each feed to 60 miles from the summit. It does not establish whether Denali Park Road is open.` },
     ],
-    driveP: `The cameras and alerts above are the stationary view, the feeds you would check before you leave Talkeetna, the park entrance or the Parks Highway. In the MileCheck app the nearest camera and your exact mile marker follow you on AK-3, hands-free on CarPlay and Android Auto.`,
+    driveP: `MileCheck shows your mile marker on AK-3 as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
     faq: [
       ['Is Denali Park Road open right now?', `The National Park Service posts current access and closure information on its <a href="https://www.nps.gov/dena/planyourvisit/basicinfo.htm" target="_blank" rel="noopener">Denali basic information page</a>. During the main summer season, private vehicles go to Savage River at mile 15.`,],
-      ['How far can private vehicles drive in Denali?', `In the main summer season, private vehicles can drive the Denali Park Road to Savage River at mile 15. Beyond that, access depends on the park's transportation and seasonal rules.`,],
-      ['Is the Pretty Rocks bridge open?', `The bridge is complete. For the rest of the 2026 visitor season, NPS buses turn around at East Fork near mile 43 while the park repairs the road and facilities west of the bridge. Full bus service is expected to resume in 2027.`,],
+      ['How far can private vehicles drive in Denali?', `During summer bus operations, private vehicles can go to Savage River at mile 15. In fall, after bus service ends, NPS allows travel to Teklanika River at mile 30 through October 15 if weather permits. Check current NPS conditions before leaving.`,],
+      ['Is the Pretty Rocks bridge open?', `NPS announced the bridge complete on September 3, 2026. Hikers and cyclists could cross from August 27. Buses were limited to mile 43 for the 2026 season, with full service expected in 2027. This does not extend private-vehicle access.`,],
       ['What is AK-3?', `AK-3 is the George Parks Highway. It connects Anchorage and Fairbanks and runs past the Denali park entrance.`,],
-      ['Is Denali visible right now?', `A different question from whether the park road is open. The <a href="../">visibility page</a> reads the cloud layers between Talkeetna and the summit and shows a three-day forecast.`,],
+      ['Is Denali visible right now?', `Check the <a href="../">Denali visibility page</a> for the current estimate from Talkeetna and other viewing areas. Road access and a clear view are separate questions.`,],
       ['Where do the cameras come from?', `The road cameras and reports come from AK511. The Eielson webcam comes from the National Park Service. Wildfires come from the national NIFC feed. Tap any camera on the map, or in the list, to see its latest frame.`,],
     ],
     crumbs: [
@@ -426,8 +468,8 @@ const AREAS = [
       { name: 'Denali', item: 'https://milecheckapp.com/mountains/denali/' },
       { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/denali/roads/' },
     ],
-    vis: { h: 'Is Denali visible right now?', p: `Whether the park road is open and whether you can see Denali are different questions. The <a href="../">visibility page</a> reads the cloud layers between Talkeetna and the summit and shows a three-day forecast.`, href: '../', cta: 'Check visibility now' },
-    ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on AK-3, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    vis: { h: 'Is Denali visible right now?', p: `Check the visibility estimate from Talkeetna and other viewing areas. Road access and a clear view are separate questions.`, href: '../', cta: 'Check visibility now' },
+    ctaH: 'MileCheck on the Parks Highway', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
     related: (up) => `<a href="../">Is Denali visible right now?</a> · <a href="${up}cameras/alaska/">Alaska cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
@@ -475,22 +517,25 @@ const AREAS = [
     desc: 'Getting to Anthony Lakes Mountain Resort: live ODOT cameras and alerts on I-84 and OR 237 near North Powder, Oregon, plus what to know about the final unpatrolled miles up to the resort. No account.',
     ogTitle: 'Anthony Lakes road conditions | MileCheck',
     eyebrow: 'I-84 · OR 237 · Elkhorn Mountains · Oregon',
+    // For the printable map sheet: the drive is I-84, OR 237, then the county and forest
+    // road to the resort, which is not a state highway.
+    mapRoads: ['I-84', 'OR 237', 'Anthony Lakes Highway', 'NF 73'],
     h1: 'Getting to Anthony Lakes',
-    hero: `Anthony Lakes Mountain Resort sits at 7,100 feet in the Elkhorn Mountains, the highest base elevation of any ski area in Oregon &mdash; and one of the most remote. This page covers what ODOT actually tracks on the way there: I-84 and OR 237 near North Powder, within 20 miles of the resort. The last stretch of the drive isn't a state highway, and there's no live camera or alert feed for it &mdash; see below.`,
-    camLabel: 'live cameras within 20 mi', elev: '7,100 ft', elevLabel: 'resort base, highest in Oregon',
+    hero: `Anthony Lakes Mountain Resort sits at 7,100 feet in the Elkhorn Mountains. This page covers what ODOT actually tracks on the way there: I-84 and OR 237 near North Powder, within 20 miles of the resort. The last stretch of the drive isn't a state highway, and there's no live camera or alert feed for it. See below.`,
+    camLabel: 'live cameras within 20 mi', elev: '7,100 ft', elevLabel: 'resort base',
     dist: '35 mi', distNote: 'from Baker City', nearWord: 'within 20 miles of the resort', bannerWhere: 'on I-84 and OR 237 near North Powder',
     aboutH: 'Before you leave',
     lede: `Anthony Lakes is reached by leaving the state highway system. Here's exactly where that happens, and what that means for what MileCheck can and can't show you live.`,
     segs: [
-      { h: 'The route', p: `From I-84, take exit 285 at North Powder &mdash; 19 miles north of Baker City, or 24 miles south of La Grande. From there it's OR 237 for about 4 miles, then the Anthony Lake Highway (county-maintained, becoming national forest Road 73) for roughly 16 more paved miles west to the resort. The road is described by the Forest Service as narrow and winding; it is paved and maintained the whole way to the resort.` },
-      { h: 'Where the live data stops', p: `ODOT's cameras and alerts cover I-84 and the short OR 237 stretch near North Powder &mdash; that's what the map above actually shows. The Anthony Lake Highway and Forest Road 73 beyond it aren't state-maintained roads, so there's no DOT camera or incident feed for the resort access road itself. Check the resort's own site for current road and snow conditions before you commit to the drive.` },
-      { h: 'Winter access', p: `The resort operates all winter, so the access road is plowed and maintained up to the resort and campground. The road continuing west past the lakes, deeper into the Wallowa-Whitman National Forest, is not maintained for winter travel and effectively closes. Chains or good winter tires are a sensible precaution regardless &mdash; it's a narrow, winding two-lane road at elevation.` },
+      { h: 'The route', p: `From I-84, take exit 285 at North Powder, 19 miles north of Baker City or 24 miles south of La Grande. From there it's OR 237 for about 4 miles, then the Anthony Lake Highway (county-maintained, becoming national forest Road 73) for roughly 16 more paved miles west to the resort. The road is described by the Forest Service as narrow and winding. It is paved and maintained the whole way to the resort.` },
+      { h: 'Where the live data stops', p: `ODOT's cameras and alerts cover I-84 and the short OR 237 stretch near North Powder. That is what the map above shows. The Anthony Lake Highway and Forest Road 73 beyond it aren't state-maintained roads, so there's no DOT camera or incident feed for the resort access road itself. Check the resort's own site for current road and snow conditions before you commit to the drive.` },
+      { h: 'Winter access', p: `The resort operates all winter, so the access road is plowed and maintained up to the resort and campground. The road continuing west past the lakes, deeper into the Wallowa-Whitman National Forest, is not maintained for winter travel and effectively closes. Chains or good winter tires are a sensible precaution regardless. It's a narrow, winding two-lane road at elevation.` },
     ],
     driveP: `The cameras and alerts above are the stationary view of I-84 and OR 237 before you leave North Powder. In the MileCheck app, your exact mile marker and the nearest camera follow you on the highway approach, hands-free on CarPlay and Android Auto.`,
     faq: [
       ['Is I-84 near North Powder open right now?', `Closures and incidents on I-84 and OR 237 near North Powder show on the <a href="#comap">map above</a> as red and orange markers, from ODOT. See every ODOT camera on the <a href="../../cameras/oregon/">Oregon cameras page</a>, or the <a href="../../closures/">US closures map</a> for everywhere else.`],
-      ['Is the road to Anthony Lakes plowed in winter?', `Yes, up to the resort — it operates all winter and the access road (the Anthony Lake Highway and Forest Road 73) is maintained that far. The road continuing west past the lakes into the national forest is not maintained for winter travel.`],
-      ['How high is Anthony Lakes?', `The resort's base is 7,100 feet, the highest base elevation of any ski area in Oregon, with an 8,000-foot summit.`],
+      ['Is the road to Anthony Lakes plowed in winter?', `Yes, up to the resort. It operates all winter and the access road (the Anthony Lake Highway and Forest Road 73) is maintained that far. The road continuing west past the lakes into the national forest is not maintained for winter travel.`],
+      ['How high is Anthony Lakes?', `The resort's base is 7,100 feet, with an 8,000-foot summit.`],
       ['How far is Anthony Lakes from Baker City?', `About 35 miles: I-84 north 19 miles to the North Powder exit, then about 20 miles west on OR 237 and the Anthony Lake Highway. From La Grande it's about 45 miles, via I-84 south 24 miles to the same exit.`],
     ],
     ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on I-84 and OR 237 near North Powder, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
@@ -508,21 +553,21 @@ const AREAS = [
     ogTitle: 'Little Cottonwood Canyon road conditions | MileCheck',
     eyebrow: 'UT-210 · Wasatch Mountains · Utah',
     h1: 'Little Cottonwood Canyon right now',
-    hero: `SR-210 is the only road to Snowbird and Alta &mdash; 13.6 miles from the mouth of the canyon in the Salt Lake Valley, climbing through some of the most avalanche-exposed terrain of any highway in the country. Live UDOT cameras and alerts on the whole climb, below.`,
+    hero: `SR-210 is the only road to Snowbird and Alta, 13.6 miles from the mouth of the canyon in the Salt Lake Valley, climbing through some of the most avalanche-exposed terrain of any highway in the country. Live UDOT cameras and alerts on the whole climb, below.`,
     camLabel: 'live cameras within 15 mi', elev: '7,760 ft', elevLabel: 'Snowbird base (Alta base: 8,530 ft)',
     dist: '13.6 mi', distNote: 'SR-210, canyon mouth to Alta', nearWord: 'within 15 miles of the canyon', bannerWhere: 'on SR-210 in Little Cottonwood Canyon',
     aboutH: 'Before you drive the canyon',
-    lede: `Little Cottonwood is a working highway with real avalanche control, real winter tire law, and — starting soon — a real toll. Here's what UDOT actually enforces.`,
+    lede: `Little Cottonwood is a working highway with real avalanche control, real winter tire law and, starting soon, a real toll. Here's what UDOT enforces.`,
     segs: [
-      { h: 'Avalanche closures are routine, not rare', p: `UDOT counts 64 avalanche paths crossing SR-210, and more than half the highway sits under avalanche threat. Closures for avalanche control, sometimes with little notice, are a normal part of a canyon winter — not an emergency exception.` },
-      { h: 'Snow tires or chains are the law, November 1 to May 1', p: `Utah requires snow tires or chains in the canyon for that entire window, and UDOT can restrict travel further to snow tires, chains, or 4-wheel drive only when conditions call for it. Follow UDOT Cottonwoods and the signs at the canyon mouth — restrictions can change within the hour.` },
-      { h: 'A toll and more buses are coming', p: `UDOT's Little Cottonwood Canyon plan adds a peak-period toll (proposed around $25&ndash;$30 on busy ski days, not year-round) and more frequent buses &mdash; every 10&ndash;20 minutes instead of every 30 &mdash; as part of a longer-term plan that also includes a proposed 8-mile gondola. Phase 1 details were still being finalized as of spring 2026; check UDOT's own Cottonwood Canyons page for what's actually in effect this season.`, },
+      { h: 'Avalanche closures are routine, not rare', p: `UDOT counts 64 avalanche paths crossing SR-210, and more than half the highway sits under avalanche threat. Closures for avalanche control, sometimes with little notice, are a normal part of a canyon winter, not an emergency exception.` },
+      { h: 'Snow tires or chains are the law, November 1 to May 1', p: `Utah requires snow tires or chains in the canyon for that entire window, and UDOT can restrict travel further to snow tires, chains, or 4-wheel drive only when conditions call for it. Follow UDOT Cottonwoods and the signs at the canyon mouth. Restrictions can change within the hour.` },
+      { h: 'A toll and more buses are coming', p: `UDOT's Little Cottonwood Canyon plan adds a peak-period toll (proposed around $25 to $30 on busy ski days, not year-round) and more frequent buses, every 10 to 20 minutes instead of every 30, as part of a longer-term plan that also includes a proposed 8-mile gondola. Phase 1 details were still being finalized as of spring 2026. Check UDOT's own Cottonwood Canyons page for what's actually in effect this season.`, },
     ],
     driveP: `The cameras and alerts above are the stationary view, the UDOT feed you would check before you leave the valley. In the MileCheck app, your exact mile marker and the nearest camera follow you up the canyon, hands-free on CarPlay and Android Auto.`,
     faq: [
       ['Is Little Cottonwood Canyon open right now?', `Closures and incidents on SR-210 show on the <a href="#comap">map above</a> as red and orange markers, from UDOT. See every UDOT camera on the <a href="../../cameras/utah/">Utah cameras page</a>, or the <a href="../../closures/">US closures map</a> for everywhere else.`],
       ['Are chains or snow tires required in Little Cottonwood Canyon?', `Yes, by state law, from November 1 to May 1 every year. UDOT can tighten that to chains or 4-wheel drive only when conditions require it. Check the <a href="#comap">live cameras above</a> for the road surface before you commit to the climb.`],
-      ['How high are Snowbird and Alta?', `Snowbird's base is 7,760 feet, Alta's is 8,530 feet &mdash; both up SR-210, 13.6 miles from the canyon mouth in the Salt Lake Valley.`],
+      ['How high are Snowbird and Alta?', `Snowbird's base is 7,760 feet, Alta's is 8,530 feet. Both are up SR-210, 13.6 miles from the canyon mouth in the Salt Lake Valley.`],
       ['Is there a toll for Little Cottonwood Canyon?', `Not yet as a fixed daily charge, but UDOT's approved plan adds a peak-period toll on busy ski days as part of a phased rollout, alongside more frequent bus service. Check UDOT's Cottonwood Canyons page for what's actually running this season.`],
     ],
     ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on SR-210 up the canyon, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
@@ -552,6 +597,9 @@ function page(p){
   const url = p.url || `https://milecheckapp.com/passes/${p.slug}/`;
   const sp = SPON.slot({ kind: 'pass', slug: p.slug, name: p.name });
   const credit = p.credit || p.dot;
+  const mountainKey = (p.out || '').match(/^mountains\/([^/]+)\/roads$/)?.[1];
+  const imagePath = mountainKey && `images/mountains/og-${mountainKey}.png`;
+  const shareImage = imagePath && fs.existsSync(imagePath) ? `https://milecheckapp.com/${imagePath}` : 'https://milecheckapp.com/images/og-banner-light.png';
   const segs = p.segs || [{ h: 'When it closes', p: p.closes }, p.extra];
   const segsHtml = segs.map(s=>`    <div class="co-seg"><h3>${s.h}</h3>${s.html || `<p>${s.p}</p>`}</div>`).join('\n');
   const relatedHtml = typeof p.related === 'function' ? p.related(up)
@@ -563,11 +611,15 @@ function page(p){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${p.title || `${p.name} Camera &amp; Conditions Right Now (${p.route}) | MileCheck`}</title>
-  <meta name="description" content="${p.desc || `Live ${p.name} cameras and real-time road conditions on ${p.route} — see snow, chains, and closures before you drive it. ${p.dot} cameras, tagged with mile marker.`}">
+  <meta name="description" content="${p.desc || `Live ${p.name} cameras and real-time road conditions on ${p.route}. See snow, chains, and closures before you drive it. ${p.dot} cameras, tagged with mile marker.`}">
   <link rel="canonical" href="${url}">
-  <meta property="og:title" content="${p.ogTitle || `${p.name} Right Now — Live Camera &amp; Conditions | MileCheck`}">
-  <meta property="og:description" content="${p.desc || `Live ${p.route} ${p.name} cameras and conditions. See the pass before you drive it — snow, chains, and closures in real time.`}">
-  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:title" content="${p.ogTitle || `${p.name} Right Now: Live Camera &amp; Conditions | MileCheck`}">
+  <meta property="og:description" content="${p.desc || `Live ${p.route} ${p.name} cameras and conditions. See the pass before you drive it. Snow, chains, and closures in real time.`}">
+  <meta property="og:image" content="${shareImage}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${shareImage}">
   <meta property="og:url" content="${url}">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="${up}images/favicon.png">
@@ -604,7 +656,7 @@ function page(p){
     .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
     .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
     .co-layer input:checked+.co-sw.alr{background:#DC2626;}
-    .co-layer input:checked+.co-sw.poi{background:#7C3AED;}
+    .co-layer input:checked+.co-sw.poi{background:#E0A100;}
     .co-layer input:checked+.co-sw.fire{background:#EA580C;}
     .co-layer input:checked+.co-sw::after{left:16px;}
     .co-layer input:focus-visible+.co-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
@@ -629,7 +681,11 @@ function page(p){
     /* Selected-camera blink (Leah, 2026-09-25) is done via setStyle() in JS, not
        CSS — this map uses Leaflet's Canvas renderer, so circleMarkers have no
        per-shape DOM element for a CSS animation to target. See selectCamMarker(). */
-    .poi-icon{color:#7C3AED;font-size:24px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;cursor:pointer;font-weight:900;}
+    .poi-icon{color:#F5B301;font-size:30px;line-height:1;text-align:center;text-shadow:0 0 2px #3a2a00,0 0 3px #3a2a00,0 0 1px #000;cursor:pointer;font-weight:900;}
+    /* Key rows under the layer toggles: the destination star, and purple for park webcams (Leah, 9-28). */
+    .co-key{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#4b5a50;margin-top:7px;padding-left:2px;} .co-key .co-star{color:#F5B301;text-shadow:0 0 1px #3a2a00,0 0 2px #3a2a00;font-size:16px;line-height:1;width:14px;text-align:center;}
+    .co-print{font:inherit;font-weight:700;border:2px solid #1d2a1f;background:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;}
+    @media print{header,nav,footer,.co-layers,.lst-tools,.co-print,.co-faq,.co-cta,.leaflet-control-container,#coCard,.co-bs,[class*="sponsor"],[class*="signup"],[class*="sp-slot"]{display:none!important;}body{background:#fff!important;}#comap{height:420px!important;break-inside:avoid;}.co-list{break-inside:avoid;box-shadow:none!important;}.co-list li button{display:none!important;}}
     .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
     .co-guide h2{font-size:26px;margin:0 0 6px;}
     .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
@@ -713,6 +769,7 @@ ${sp.html}
     <div class="eyebrow">${p.eyebrow || `${p.route} · ${p.stateName} · Elevation ${p.elev}`}</div>
     <h1>${p.h1 || `${p.name} right now: live camera &amp; conditions`}</h1>
     <p class="sub">${p.hero}</p>
+    ${p.coverage ? `<p class="sub">${p.coverage}</p>` : ''}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">${p.camLabel || 'live cameras near the pass'}</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
@@ -730,6 +787,8 @@ ${sp.html}
         <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>${isArea ? `
         <label class="co-layer"><input type="checkbox" id="tgFire" checked><span class="co-sw fire"></span><span class="co-dot" style="background:#EA580C"></span>Wildfires</label>` : ''}${p.plows ? `
         <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="co-dot" style="background:#0369A1"></span>Snowplows</label>` : ''}
+        <div class="co-key"><span class="co-star">★</span>${p.name}</div>
+        <div class="co-key" id="keyPark" hidden><span class="co-dot" style="background:#7C3AED"></span>Park webcam</div>
       </div>
       <div class="co-bs" id="coStatus">Loading live ${p.name} data…</div>
       <div class="co-card" id="coCard"></div>
@@ -749,16 +808,20 @@ ${p.snow || p.plows ? `
   <section class="co-lists" aria-label="Conditions within ${p.rMi} miles">
     <div class="co-list co-list-cams" id="lstCams"><h2>Cameras</h2><p class="hint">Every camera in the feed within ${p.rMi} miles. Tap one to load its latest frame. Park camera frames are large, about 1.5 MB each.</p><div class="lst-tools"><button type="button" id="btnAllCams">Show every camera</button></div><ul><li class="empty">Loading.</li></ul></div>
     <div class="co-list" id="lstSnow"><h2>Snow and ice</h2><p class="hint">Road-surface and pass reports within ${p.rMi} miles, as ${p.dot} posts them, plus weather alerts.</p><ul><li class="empty">Loading.</li></ul></div>
-    <div class="co-list" id="lstFire"><h2>Wildfires</h2><p class="hint">Active fires within ${p.rMi} miles, from the national NIFC feed, nearest first. Prescribed burns are marked.</p><ul><li class="empty">Loading.</li></ul></div>
     <div class="co-list" id="lstClos"><h2>Closures and incidents</h2><p class="hint">Closures, crashes and hazards within ${p.rMi} miles, from ${p.dot}. Full closures are marked in red.</p><ul><li class="empty">Loading.</li></ul></div>
     <div class="co-list" id="lstWork"><h2>Construction</h2><p class="hint">Work zones and lane restrictions within ${p.rMi} miles.</p><ul><li class="empty">Loading.</li></ul></div>
-  </section>` : ''}
+    <div class="co-list" id="lstFire"><h2>Wildfires</h2><p class="hint">Active fires within ${p.rMi} miles, from the national NIFC feed, nearest first. Prescribed burns are marked.</p><ul><li class="empty">Loading.</li></ul></div>
+  </section>` : `
+  <section class="co-lists" aria-label="Cameras near ${p.name}">
+    <div class="co-list co-list-cams" id="lstCams"><h2>Cameras</h2><p class="hint">Every camera in the feed on this stretch. Tap one to load its latest frame.</p><div class="lst-tools"><button type="button" id="btnAllCams">Show every camera</button></div><ul><li class="empty">Loading.</li></ul></div>
+  </section>`}
 
   <section class="co-guide">
     <h2>${p.aboutH || `About ${p.name}`}</h2>
+    <p><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>
     <p class="lede">${p.lede || `${p.name} carries ${p.route} over the ${p.range} at ${p.elev}. Here's what to watch, and when it bites.`}</p>
 ${segsHtml}
-    <div class="co-seg"><h3>Watch it live while you drive</h3><p>${p.driveP || `The cameras and alerts above are the stationary view — the ${p.dot} feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.`}</p></div>
+    <div class="co-seg"><h3>Watch it live while you drive</h3><p>${p.driveP || `The cameras and alerts above are the stationary view, the ${p.dot} feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.`}</p></div>
   </section>
 
   <section class="co-faq">
@@ -776,7 +839,7 @@ ${p.vis ? `
     </div>
   </div>` : ''}
   <div class="co-cta">
-    <h2>${p.ctaH || 'Watch the climb — live, hands-free'}</h2>
+    <h2>${p.ctaH || 'Watch the climb live, hands-free'}</h2>
     <p>${p.ctaP || `MileCheck shows your exact mile marker in real time as you drive ${p.route} over ${p.name}, plus the nearest camera and any alert on your route. Works offline and runs on CarPlay and Android Auto.`}</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
@@ -833,7 +896,7 @@ function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · ${p.name} cameras &amp; conditions: ${p.dot} via MileCheck',maxZoom:16}).addTo(map);
-map.setView([PASS.lat,PASS.lon],11);
+if(PASS.area){const dy=PASS.radiusKm/111,dx=dy/Math.cos(PASS.lat*Math.PI/180);map.fitBounds([[PASS.lat-dy,PASS.lon-dx],[PASS.lat+dy,PASS.lon+dx]]);}else{map.setView([PASS.lat,PASS.lon],11);}
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const fireLayer=L.layerGroup().addTo(map);
@@ -841,11 +904,14 @@ const plowLayer=L.layerGroup().addTo(map);
 let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], PLOWLIST=[], showCam=true, showAlr=true, showFire=true, showPlow=true, camMarkers=[];
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
+// Missing feeds are not zero reports. Keep successful layers when another feed fails.
+const failedFeeds=new Set();
+async function feedRows(url,key,label){const d=await fetchJSON(url,3);if(!d||d.unavailable||d.ok===false||d.supported===false||['failed','partial','unavailable','unsupported'].includes(d.source_status)||(Array.isArray(d.errors)&&d.errors.length)||!Array.isArray(d[key]))failedFeeds.add(label);return d&&Array.isArray(d[key])?d[key]:[];}
 function clean(t,n){return String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim().slice(0,n);}
-async function loadCams(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);for(const c of ((d&&d.cameras)||[])){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
-async function loadAlerts(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);for(const a of ((d&&d['incident-reports'])||[])){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
-async function loadConds(){const out=[];for(const st of PASS.states){const d=await fetchJSON(WORKER+'/conditions?state='+st,3);for(const r of ((d&&d['road-weather-reports'])||[])){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr});}}return out;}
-async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const d=await fetchJSON(WORKER+'/fires?bbox='+bb,3);return ((d&&d.fires)||[]).filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
+async function loadCams(){const out=[];for(const st of PASS.states){for(const c of await feedRows(WORKER+'/cameras?state='+st,'cameras','cameras')){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title&&c.title!=='N/A'?c.title:(c.route||'Traffic')+' camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
+async function loadAlerts(){const out=[];for(const st of PASS.states){for(const a of await feedRows(WORKER+'/incidents?state='+st,'incident-reports','alerts')){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id']});}}return out;}
+async function loadConds(){const out=[];for(const st of PASS.states){for(const r of await feedRows(WORKER+'/conditions?state='+st,'road-weather-reports','road weather')){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr,note:clean(r.comments||'',280)});}}return out;}
+async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const rows=await feedRows(WORKER+'/fires?bbox='+bb,'fires','fires');return rows.filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}
 const cardEl=document.getElementById('coCard');
 let selectedMarker=null;
 let blinkTimer=null,blinkBase=null,blinkOn=false;
@@ -882,33 +948,45 @@ async function loadPlows(){if(!PLOWS)return [];const out=[];for(const st of PLOW
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+b+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
 function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>';}
 function renderPlows(){setList('lstPlows',PLOWLIST.map(t=>'<li>'+esc(t.name)+'<span class="m">'+(t.status?esc(t.status)+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</span></li>'),'No plows within the map radius right now.');}
-function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();plowLayer.clearLayers();selectedMarker=null;camMarkers=[];if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t),false)).addTo(plowLayer));if(showCam)CAMS.forEach((c,i)=>{const m=L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c,i),false,i);selectCamMarker(m);}).addTo(camLayer);camMarkers[i]=m;});if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+FIRES.length+' fires');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' ${p.nearWord || 'near the pass'}':'Toggle a layer to view ${isArea ? 'the area' : 'pass'} data';}
+function feedCount(label,n){return failedFeeds.has(label)?'?':n;}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();fireLayer.clearLayers();plowLayer.clearLayers();selectedMarker=null;camMarkers=[];if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t),false)).addTo(plowLayer));if(showCam)CAMS.forEach((c,i)=>{const m=L.circleMarker([c.lat,c.lon],{radius:RS(c.src?7:6),color:'#fff',weight:1.5,fillColor:c.src?'#7C3AED':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c,i),false,i);selectCamMarker(m);}).addTo(camLayer);camMarkers[i]=m;});if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL';L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:1}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});if(PASS.area&&showFire)FIRES.forEach(f=>L.circleMarker([f.lat,f.lon],{radius:RS(f.rx?6:9),color:'#fff',weight:1.5,fillColor:f.rx?'#9CA3AF':'#EA580C',fillOpacity:.95}).on('click',()=>showCard(fireCard(f),false)).addTo(fireLayer));const bits=[];if(showCam)bits.push('📷 '+feedCount('cameras',CAMS.length)+' cameras');if(showAlr)bits.push('⚠ '+feedCount('alerts',alertCount())+' alerts');if(PASS.area&&showFire)bits.push('🔥 '+feedCount('fires',FIRES.length)+' fires');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows');document.getElementById('statCams').textContent=feedCount('cameras',CAMS.length);document.getElementById('statAlerts').textContent=feedCount('alerts',alertCount());document.getElementById('coStatus').textContent=(bits.length?bits.join(' · ')+' ${p.nearWord || 'near the pass'}':'Toggle a layer to view ${isArea ? 'the area' : 'pass'} data')+(failedFeeds.size?' · Unavailable or incomplete: '+[...failedFeeds].join(', '):'');}
 const TAGS={CL:['cl','Closed'],AC:['ac','Crash'],RW:['rw','Work'],WE:['we','Weather'],HZ:['hz','Hazard'],IN:['ac','Incident'],OT:['ot','Alert']};
 function tag(k,label){return '<span class="tag '+k+'">'+label+'</span>';}
 function alrLi(a){const t=TAGS[a.type]||TAGS.OT;const full=isFullClosure(a);return '<li>'+tag(full?'cl':t[0],full?'Closed':t[1])+esc(a.title)+'<span class="m">'+esc(a.route||'')+(a.mp>0?' · MP '+Math.round(a.mp):'')+(a.desc&&a.desc!==a.title?' · '+esc(a.desc):'')+'</span></li>';}
 function setList(id,items,empty){const el=document.getElementById(id);if(!el)return;const h=el.querySelector('h2');let c=h.querySelector('.cnt');if(!c){c=document.createElement('span');c.className='cnt';h.appendChild(c);}c.textContent=items.length;el.querySelector('ul').innerHTML=items.length?items.join(''):'<li class="empty">'+empty+'</li>';}
 function loadCamImg(li,c){let img=li.querySelector('img');if(!img){img=document.createElement('img');img.alt='Live: '+c.title;img.loading='lazy';li.appendChild(img);}img.src=bust(c.img);li.querySelector('button').textContent='Refresh';}
+function isWorkCond(w){return /roadwork|maintenance|construction/i.test(w.cond||'');}
+function alertCount(){return ALERTS.length+CONDS.filter(isWorkCond).length;}
+function tcase(x){return x===x.toUpperCase()?x.toLowerCase().replace(/(^|[\\s\\-\\/(])([a-z])/g,function(m,a,b){return a+b.toUpperCase();}).replace(/\\bMp\\b/g,'MP').replace(/\\b(Ii|Iii|Iv)\\b/g,function(m){return m.toUpperCase();}):x;}
+function condWorkLi(w){const m=/^([^:]{3,90}):\\s*(.+)$/.exec(w.note||'');const t=m?tcase(m[1]):w.name;const d=m?m[2]:(w.note||'');return '<li>'+tag('rw','Work')+esc(t)+'<span class="m">'+esc(w.name)+(d?' · '+esc(d):'')+'</span></li>';}
 function renderLists(){
   const camItems=CAMS.map((c,i)=>'<li data-i="'+i+'">'+tag(c.src?'nps':'dot',c.src||'${p.dot}')+esc(c.title)+' <button type="button">Show</button><span class="m">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+(c.park?' · '+esc(c.park):'')+'</span></li>');
   setList('lstCams',camItems,'No cameras in the feed for this area right now.');
   document.querySelectorAll('#lstCams li[data-i] button').forEach(b=>{b.onclick=()=>{const li=b.closest('li');loadCamImg(li,CAMS[+li.dataset.i]);};});
   const all=document.getElementById('btnAllCams');if(all)all.onclick=()=>{document.querySelectorAll('#lstCams li[data-i]').forEach(li=>loadCamImg(li,CAMS[+li.dataset.i]));all.textContent='Refresh every camera';};
-  const snow=CONDS.map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
+  const snow=CONDS.filter(w=>!isWorkCond(w)).map(w=>'<li>'+tag('we','Report')+esc(w.name)+'<span class="m">'+esc(w.cond||'No surface report')+(w.wx?' · '+esc(w.wx):'')+(w.temp?' · '+esc(w.temp)+'°F':'')+(w.restr.length?' · '+esc(w.restr.join(' · ')):'')+(w.note?' · '+esc(w.note):'')+'</span></li>').concat(ALERTS.filter(a=>a.type==='WE').map(alrLi));
   setList('lstSnow',snow,'No snow, ice or pass reports for this area right now.');
   const fires=FIRES.map(f=>'<li>'+tag(f.rx?'rx':'fire',f.rx?'Prescribed':'Fire')+esc(f.name)+'<span class="m">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away</span></li>');
   setList('lstFire',fires,'No active fires within '+Math.round(PASS.radiusKm/1.609344)+' miles in the NIFC feed.');
   const clos=ALERTS.filter(a=>a.type!=='RW'&&a.type!=='WE').sort((a,b)=>(isFullClosure(b)-isFullClosure(a))).map(alrLi);
   setList('lstClos',clos,'No closures, crashes or hazards reported in this area right now.');
-  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi);
+  const work=ALERTS.filter(a=>a.type==='RW').map(alrLi).concat(CONDS.filter(isWorkCond).map(condWorkLi));
   setList('lstWork',work,'No work zones reported in this area right now.');
+  for(const [id,deps] of [['lstCams',['cameras']],['lstSnow',['road weather','alerts']],['lstFire',['fires']],['lstClos',['alerts']],['lstWork',['alerts','road weather']]]){
+    if(!deps.some(x=>failedFeeds.has(x)))continue;
+    const el=document.getElementById(id);if(!el)continue;const ul=el.querySelector('ul'),empty=ul.querySelector('.empty');
+    if(empty)empty.remove();
+    ul.insertAdjacentHTML('beforeend','<li class="empty">Feed unavailable or incomplete. Check the agency links for current conditions.</li>');
+    el.querySelector('.cnt').textContent='?';
+  }
 }
-L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">▲</div>',iconSize:[28,28],iconAnchor:[14,14]}),zIndexOffset:500}).bindTooltip('${p.name} · ${p.elev}',{direction:'top',offset:[0,-12]}).addTo(map);
+L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">★</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:500}).bindTooltip('${p.markerLabel || `${p.name} · ${p.elev}`}',{direction:'top',offset:[0,-12]}).addTo(map);
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 const tgFire=document.getElementById('tgFire');if(tgFire)tgFire.onchange=e=>{showFire=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 function isFullClosure(a){const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
-Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c;ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.length;draw();if(PASS.area)renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within ${p.rMi || ''} miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' ${p.bannerWhere || `on ${p.route}`}'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c.slice().sort(function(x,y){return (/airport/i.test(x.route||'')?1:0)-(/airport/i.test(y.route||'')?1:0);});ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;const kp=document.getElementById('keyPark');if(kp&&CAMS.some(x=>x.src))kp.hidden=false;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=alertCount();draw();renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within ${p.rMi || ''} miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' ${p.bannerWhere || `on ${p.route}`}'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data is unavailable right now. Try again shortly.';});
 if(SNOW){loadSnow().catch(()=>{document.getElementById('snAsOf').textContent='The station did not answer. Try again in a few minutes.';});loadForecast().catch(()=>{});loadAvy().catch(()=>{});}
 </script>
 
@@ -920,6 +998,10 @@ ${sp.js}
 // Optional slugs on the command line write only those pages, e.g.
 //   node scripts/gen-pass-pages.js cabbage-hill rainier-roads
 // No slugs = every pass and area page, as before.
+// The config is shared with scripts/gen-map-sheets.mjs (the printable maps), so the
+// pages are only written when this file is run directly.
+module.exports={PASSES,AREAS};
+if(require.main===module){
 const only=process.argv.slice(2);
 let n=0;
 for(const p of [...PASSES, ...AREAS]){
@@ -931,3 +1013,4 @@ for(const p of [...PASSES, ...AREAS]){
   console.log('wrote '+dir+'/index.html  ('+p.name+', '+p.route+')');
 }
 console.log('\nGenerated '+n+' page'+(n===1?'':'s')+'.');
+}

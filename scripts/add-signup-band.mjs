@@ -2,7 +2,8 @@
 // add-signup-band.mjs — the Highway Report email signup (MailerLite form LjADY8) on the
 // pages that carry the traffic, plus one offer everywhere (Leah, 2026-09-25: the form had
 // 6,148 views and 1 signup, so the offer now links a real sample report).
-// Run after the generators, alongside add-sponsor-slots.mjs. Idempotent.
+// Run after the generators, alongside add-sponsor-slots.mjs. Idempotent: a second run
+// writes nothing (checked 2026-09-28 by running it twice on a copy of the site).
 //   - pages that already have a band: eyebrow/h2/sub rewritten to the current copy
 //   - camera, pass, corridor and guide pages (English, from data/sponsor-pages.json): band
 //     inserted above the footer between <!-- signup:start/end --> markers
@@ -59,7 +60,11 @@ for (const f of execSync(`grep -rl 'data-form="LjADY8"' --include='*.html' . || 
 let updated = 0, added = 0;
 for (const f of targets) {
   let s = readFileSync(f, 'utf8'); const o = s;
-  s = s.replace(/<!-- signup:start -->[\s\S]*?<!-- signup:end -->\n?/, '');
+  // The band goes in with a two-space indent (see the insert below), so the strip has to
+  // take that indent with it. Until 2026-09-28 it started at the comment marker, left the
+  // two spaces behind, and every run pushed the footer two spaces further right: 219 pages
+  // rewritten per run with nothing but whitespace.
+  s = s.replace(/[ \t]*<!-- signup:start -->[\s\S]*?<!-- signup:end -->\n?/, '');
   if (/data-form="LjADY8"/.test(s)) {
     s = s.replace(/<p class="mc-eyebrow">[\s\S]*?<\/p>\s*<h2>[\s\S]*?<\/h2>\s*<p class="mc-sub">[\s\S]*?<\/p>/, inner);
     if (!s.includes('.mc-signup .mc-sub a')) s = s.replace('.mc-signup .ml-form-embedContent{', '.mc-signup .mc-sub a{color:#00A86B;font-weight:700;}\n      .mc-signup .ml-form-embedContent{');
