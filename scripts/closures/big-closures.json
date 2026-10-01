@@ -243,5 +243,195 @@
    "missedChecks": 0,
    "note": null
   }
+ },
+ {
+  "slug": "us-62-simon-kenton-bridge-maysville",
+  "state": "Kentucky",
+  "road": "US 62",
+  "title": "US 62 Simon Kenton Bridge closed at Maysville",
+  "when": "Since June 8, 2026, no reopening date posted",
+  "whenFaq": "Since June 8, 2026. KYTC has not posted a reopening date",
+  "between": "The Simon Kenton Memorial Bridge over the Ohio River, between Maysville, Kentucky and Aberdeen, Ohio",
+  "miles": "Not posted",
+  "dir": "Both directions",
+  "what": "Bridge closed to traffic",
+  "around": "KYTC sends traffic over the US 68 William H. Harsha Bridge instead, using US 52 on the Ohio side and KY 8 on the Kentucky side.",
+  "id": "KY-TOC-24686",
+  "dot": "goKY",
+  "dotUrl": "https://goky.ky.gov/",
+  "verifiedAt": "2026-09-30",
+  "source": {
+   "state": "KY",
+   "recordId": "KY-TOC-24686"
+  },
+  "schedule": {
+   "startsAt": "2026-06-08T07:00:00-04:00",
+   "endsAt": null,
+   "endEstimated": true
+  },
+  "status": {
+   "state": "reported-closed",
+   "missedChecks": 0,
+   "note": null
+  }
+ },
+ {
+  "slug": "us-60-magdalena-bridge-damage",
+  "state": "New Mexico",
+  "road": "US 60",
+  "title": "US 60 closed west of Magdalena for bridge damage",
+  "when": "Since September 30, 2026, no reopening date posted",
+  "whenFaq": "Since the afternoon of September 30, 2026. NMDOT had not set a reopening date; a bridge inspection team was on the way",
+  "between": "US 60 from 1 mile west of Magdalena to 2 miles west of Escondida, Socorro County",
+  "miles": "112 to 136",
+  "dir": "Both directions",
+  "what": "Bridge damage",
+  "around": "NMDOT is setting up a detour on NM 107. NMDOT says it is very muddy and recommends four-wheel drive.",
+  "id": "NM-rts-1f78231a-fd6a-4a20-ab2f-c1b534d0b81e",
+  "dot": "NMRoads",
+  "dotUrl": "https://nmroads.com/",
+  "verifiedAt": "2026-09-30",
+  "source": {
+   "state": "NM",
+   "recordId": "NM-rts-1f78231a-fd6a-4a20-ab2f-c1b534d0b81e",
+   "fingerprint": {
+    "route": "US-60",
+    "startTime": "2026-09-30T22:24:01.000Z"
+   }
+  },
+  "schedule": {
+   "startsAt": "2026-09-30T16:24:00-06:00",
+   "endsAt": null,
+   "endEstimated": true
+  },
+  "status": {
+   "state": "reported-closed",
+   "missedChecks": 0,
+   "note": null
+  }
+ },
+ {
+  "slug": "us-62-st-francis-river-bridge",
+  "state": "Arkansas",
+  "road": "US 62",
+  "title": "US 62 St. Francis River Bridge closed at the Missouri line",
+  "when": "Since January 14, 2026, planned to reopen by December 1, 2026",
+  "whenFaq": "Since January 14, 2026. MoDOT plans to reopen the new bridge by December 1, 2026",
+  "between": "The US 62 bridge over the St. Francis River on the Arkansas–Missouri state line, east of Piggott",
+  "miles": "7.46 to 7.71 (Arkansas)",
+  "dir": "Both directions",
+  "what": "Bridge replacement by MoDOT",
+  "around": "No through traffic. Local traffic can drive up to the bridge. Use another St. Francis River crossing.",
+  "id": "6931",
+  "dot": "IDrive Arkansas",
+  "dotUrl": "https://www.idrivearkansas.com/",
+  "verifiedAt": "2026-09-30",
+  "source": {
+   "state": "AR",
+   "recordId": "6931"
+  },
+  "schedule": {
+   "startsAt": "2026-01-14T08:48:00-06:00",
+   "endsAt": "2026-12-01T00:00:00-06:00",
+   "endEstimated": true
+  },
+  "status": {
+   "state": "reported-closed",
+   "missedChecks": 0,
+   "note": null
+  }
+ },
+ {
+  "slug": "us-52-metamora-brookville",
+  "state": "Indiana",
+  "road": "US 52",
+  "title": "US 52 closed between Metamora and Brookville",
+  "when": "October 5 to November 9, 2026",
+  "whenFaq": "From about 7 a.m. Eastern on October 5, 2026 to about 5 p.m. on November 9, 2026",
+  "between": "US 52 from IN 229 near Metamora to IN 1 at Brookville, Franklin County",
+  "miles": "112.3 to 129.7",
+  "dir": "Both directions",
+  "what": "Box culvert replacement",
+  "around": "INDOT has a posted detour.",
+  "id": "CARSy-505",
+  "dot": "INDOT TrafficWise",
+  "dotUrl": "https://indot.carsprogram.org/",
+  "verifiedAt": "2026-09-30",
+  "source": {
+   "state": "IN",
+   "recordId": "CARSy-505"
+  },
+  "schedule": {
+   "startsAt": "2026-10-05T07:00:00-04:00",
+   "endsAt": "2026-11-09T17:00:00-05:00",
+   "endEstimated": false
+  },
+  "status": {
+   "state": "scheduled",
+   "missedChecks": 0,
+   "note": null
+  }
+ },
+ {
+  "slug": "us-421-greensburg",
+  "state": "Indiana",
+  "road": "US 421",
+  "title": "US 421 closed south of Greensburg",
+  "when": "Until October 30, 2026",
+  "whenFaq": "Since August 7, 2026, until about noon Eastern on October 30, 2026",
+  "between": "US 421 between S 280 E (2 miles south of Greensburg) and E 100 S, Decatur County",
+  "miles": "45.9 to 48",
+  "dir": "Both directions",
+  "what": "Road closed for work",
+  "around": "INDOT has a posted detour.",
+  "id": "CARSy-1527",
+  "dot": "INDOT TrafficWise",
+  "dotUrl": "https://indot.carsprogram.org/",
+  "verifiedAt": "2026-09-30",
+  "source": {
+   "state": "IN",
+   "recordId": "CARSy-1527"
+  },
+  "schedule": {
+   "startsAt": "2026-08-07T10:38:00-04:00",
+   "endsAt": "2026-10-30T12:00:00-04:00",
+   "endEstimated": false
+  },
+  "status": {
+   "state": "reported-closed",
+   "missedChecks": 0,
+   "note": null
+  }
+ },
+ {
+  "slug": "us-16a-keystone-bridge",
+  "state": "South Dakota",
+  "road": "US 16A",
+  "title": "US 16A closed near Keystone for bridge removal",
+  "when": "From October 5, 2026, no reopening date posted",
+  "whenFaq": "From October 5, 2026. SDDOT has not posted a reopening date",
+  "between": "US 16A near Keystone in the Black Hills, mile 56.9",
+  "miles": "56.9 to 57",
+  "dir": "Both directions",
+  "what": "Removing the old bridge",
+  "around": "SDDOT says a detour will be posted.",
+  "id": "SD-12907881",
+  "dot": "SD511",
+  "dotUrl": "https://www.sd511.org/",
+  "verifiedAt": "2026-09-30",
+  "source": {
+   "state": "SD",
+   "recordId": "SD-12907881"
+  },
+  "schedule": {
+   "startsAt": "2026-10-05T00:00:00-06:00",
+   "endsAt": null,
+   "endEstimated": true
+  },
+  "status": {
+   "state": "scheduled",
+   "missedChecks": 0,
+   "note": null
+  }
  }
 ]

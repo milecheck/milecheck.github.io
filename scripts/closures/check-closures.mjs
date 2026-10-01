@@ -40,7 +40,7 @@ for (const c of items) {
     delete st.lastCheckFailed; delete st.failReason;
     const fp = c.source.fingerprint;
     // Some feeds (Illinois) mint a new id on every fetch; those entries match on route + start time.
-    const rec = f.list.find(i => (i['incident-id'] || i.id) === c.source.recordId)
+    const rec = f.list.find(i => String(i['incident-id'] || i.id) === c.source.recordId)
       || (fp && f.list.find(i => (i.location || {})['route-id'] === fp.route && i['start-time'] === fp.startTime));
     if (rec) {
       st.missedChecks = 0;
