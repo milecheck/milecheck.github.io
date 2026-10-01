@@ -367,7 +367,7 @@ function statePage(s) {
     if (sept.weather) bits.push(`${sept.weather.toLocaleString('en-US')} weather ${sept.weather === 1 ? 'report' : 'reports'}`);
     const routes = (sept.topRoutes || []).filter((r) => /^(I|US|SR|[A-Z]{2})-\d/.test(r)).slice(0, 3);
     septHtml = `    <h2>What September looked like</h2>
-    <p class="rc-sept">Over 25 daily snapshots from September 1 to 25, 2026, MileCheck's archive of the ${s.dot} feed held ${sept.total.toLocaleString('en-US')} unique ${sept.total === 1 ? 'report' : 'reports'}${bits.length ? `, including ${joinList(bits)}` : ''}.${routes.length ? ` The routes with the most reports were ${joinList(routes)}.` : ''} Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/road-report-september-2026.html">Read the September Highway Report</a>.</p>
+    <p class="rc-sept">In September 2026, MileCheck's archive of the ${s.dot} feed held ${sept.total.toLocaleString('en-US')} unique ${sept.total === 1 ? 'report' : 'reports'}${bits.length ? `, including ${joinList(bits)}` : ''}.${routes.length ? ` The routes with the most reports were ${joinList(routes)}.` : ''} Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/road-report-september-2026.html">Read the September Highway Report</a>.</p>
 `;
   }
 

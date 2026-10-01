@@ -1,22 +1,22 @@
 {
   "month": "2026-09",
-  "window": "2026-09-01..2026-09-25",
+  "window": "2026-09-01..2026-09-30",
   "method": "incident snapshots (1/state/day) deduped by incident-id",
   "statesWithData": 51,
-  "totalUniqueEvents": 31071,
+  "totalUniqueEvents": 35529,
   "byType": {
-    "other": 2412,
-    "closure": 4623,
-    "construction": 21568,
-    "crash": 1918,
-    "weather": 207,
-    "hazard": 343
+    "other": 2810,
+    "closure": 5122,
+    "construction": 24482,
+    "crash": 2227,
+    "weather": 274,
+    "hazard": 614
   },
   "keywordCounts": {
-    "fire": 192,
-    "flood": 98,
-    "snowice": 140,
-    "fatal": 6
+    "fire": 220,
+    "flood": 173,
+    "snowice": 144,
+    "fatal": 7
   },
   "keywordSamples": {
     "fire": [
@@ -43,6 +43,12 @@
         "route": "I-65",
         "headline": "I-65 SB @ MP 190.02 before CR40 in Pine Level",
         "date": "2026-09-14T23:12:38.000Z"
+      },
+      {
+        "state": "AL",
+        "route": "I-22",
+        "headline": "I-22 EB @ MP 61.17 past Exit 61: AL69 in Jasper",
+        "date": "2026-09-28T23:42:03.000Z"
       },
       {
         "state": "AR",
@@ -81,6 +87,30 @@
         "date": 1789852980
       },
       {
+        "state": "AZ",
+        "route": "SR-101",
+        "headline": "Vehicle fire on 101-LOOP Northbound Near McDonald Dr (MP 46).",
+        "date": 1790460480
+      },
+      {
+        "state": "AZ",
+        "route": "SR-68",
+        "headline": "Vehicle fire on SR-68 Westbound Near N Egar Rd (MP 16).",
+        "date": 1790465460
+      },
+      {
+        "state": "AZ",
+        "route": "I-10",
+        "headline": "Vehicle fire on I-10 Westbound Near E Dragoon Rd (MP 318).",
+        "date": 1790719200
+      },
+      {
+        "state": "AZ",
+        "route": "US-93",
+        "headline": "Vehicle fire on US-93 Southbound Near CR-159 (MP 126).",
+        "date": 1790724780
+      },
+      {
         "state": "BC",
         "route": "BC-97",
         "headline": "Wildfire from Highway 97, In Spallumcheen and At Highway 97 and Old Kamloops Road to At Salmon River Road. Road open. Watch for traffic control. Last update: August 31st, 2026 at 12:47pm PDT. Next update: September 4th, ",
@@ -103,6 +133,12 @@
         "route": "BC-16",
         "headline": "Highway 16 (Yellowhead Highway). Vehicle fire between Tapping Rd and Hillcrest Way for 0.9 km (6 to 5 km west of Bednesti Norman). Single lane alternating traffic. Debris on roadway. Estimated time of re-opening Thu Sep ",
         "date": "2026-09-24T22:30:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-97",
+        "headline": "Roadside brushing at Highway 97, In Quesnel and At Northstar Road Overpass. Starting Mon Sep 28 until Sun Nov 1. From 9:00 AM to 3:00 PM PDT, weekdays. Watch for traffic control. Last update: September 29th, 2026 at 1:24",
+        "date": "2026-09-28T16:00:00.000Z"
       },
       {
         "state": "CA",
@@ -132,42 +168,6 @@
         "state": "CA",
         "route": "SR-1",
         "headline": "DUE TO FIRE / HWY 1 CLSD 29 MILES AHEAD",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "SR-1",
-        "headline": "DUE TO FIRE / HWY CLOSED 16 MILES AHEAD",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "SR-68",
-        "headline": "DUE TO FIRE / HWY 1 CLOSED 16 MILES SOUTH OF CARMEL",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "SR-1",
-        "headline": "DUE TO FIRE / HWY CLSD 16 MILES AHEAD",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "CA-4",
-        "headline": "Fire Near Roadway — CA-4",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "I-580",
-        "headline": "Fire Near Roadway — I-580 WB",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "I-10",
-        "headline": "Fire Near Roadway — I-10 EB",
         "date": "2026-09-01"
       }
     ],
@@ -215,6 +215,30 @@
         "date": 1790263260
       },
       {
+        "state": "AZ",
+        "route": "US-70",
+        "headline": "Flooding on roadway on US-70 Eastbound Near Cox Ranch Rd (MP 374).",
+        "date": 1790716800
+      },
+      {
+        "state": "AZ",
+        "route": "SR-75",
+        "headline": "Flooding on roadway on SR-75 Northbound Near Sweetwater Rd (MP 385).",
+        "date": 1790719980
+      },
+      {
+        "state": "AZ",
+        "route": "US-70",
+        "headline": "Road closed due to flooding on US-70 Eastbound Near Center Ave (MP 380).",
+        "date": 1790720640
+      },
+      {
+        "state": "AZ",
+        "route": "US-191",
+        "headline": "Flooding on roadway on US-191 Northbound Near Site 2 (MP 168).",
+        "date": 1790725020
+      },
+      {
         "state": "BC",
         "route": "BC-1",
         "headline": "Construction work from Highway 1, In Hope and 69m West of Exit 168 to Flood-Hope Rd to In Hope and 15m Northeast of Exit 170 to Hope / Hwy 1 East. Starting Thu Jul 2 until Wed Sep 30. From 6:00 AM to 6:00 PM PDT, every d",
@@ -245,6 +269,18 @@
         "date": "2026-09-10"
       },
       {
+        "state": "CA",
+        "route": "SR-1",
+        "headline": "Caltrans lane closure T1IA",
+        "date": "2026-09-29T21:15:00.000Z"
+      },
+      {
+        "state": "CO",
+        "route": "SH-78",
+        "headline": "Between Ridge Road and 3R Road (near Beulah Valley) from Mile Point 9 to Mile Point 13. Look out for flooding. Slower speeds are advised.",
+        "date": "2026-09-29T23:32:16.520Z"
+      },
+      {
         "state": "DE",
         "route": "FREDERICA",
         "headline": "S MARKET ST BETWEEN FREDERICA RD AND DAVID ST CLOSED DUE TO FLOODING",
@@ -263,64 +299,28 @@
         "date": "2026-09-24"
       },
       {
-        "state": "FL",
-        "route": "SR-31",
-        "headline": "Flooding",
-        "date": "2026-09-10T22:59:55.000Z"
+        "state": "DE",
+        "route": "FELTON",
+        "headline": "FORK LANDING RD CLOSED IN BOTH DIRECTIONS BETWEEN CARPENTER BRIDGE RD AND ROTHERMEL RD DUE TO FLOODING",
+        "date": "2026-09-26"
       },
       {
-        "state": "FL",
-        "route": "I-110",
-        "headline": "Flooding",
-        "date": "2026-09-12T20:44:27.000Z"
+        "state": "DE",
+        "route": "FREDERICA",
+        "headline": "FREDERICA RD CLOSED IN BOTH DIRECTIONS BETWEEN E DAVID ST AND MARKET ST DUE TO FLOODING.",
+        "date": "2026-09-26"
       },
       {
-        "state": "GA",
-        "route": "GA-400",
-        "headline": "Flooding on GA 400 Southbound at Holcomb Br Rd West/SR 140. Right lane blocked.",
-        "date": "2026-09-11T22:12:44.000Z"
+        "state": "DE",
+        "route": "MILFORD",
+        "headline": "NEW WHARF RD CLOSED BETWEEN NE 10TH ST AND BIG STONE BEACH RD DUE TO FLOODING.",
+        "date": "2026-09-26"
       },
       {
-        "state": "GA",
-        "route": "I-285",
-        "headline": "Flooding on I-285 WB Westbound at I-85 SB. All lanes closed.",
-        "date": "2026-09-11T23:46:05.000Z"
-      },
-      {
-        "state": "IA",
-        "route": "US-6",
-        "headline": "US-6 — blocked",
-        "date": "2026-09-20T15:14:18.000Z"
-      },
-      {
-        "state": "MI",
-        "route": "I-75",
-        "headline": "Flooding on SB  I-75",
-        "date": "2026-09-03"
-      },
-      {
-        "state": "MO",
-        "route": "MO-48",
-        "headline": "MO-48 Closed",
-        "date": "2026-09-14T14:42:00.000Z"
-      },
-      {
-        "state": "MT",
-        "route": "S-482",
-        "headline": "Travelers can expect the following: road closed and Critical incident flood until further notice. FARM TO MARKET ROAD IS CLOSED",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "NC",
-        "route": "NC-55",
-        "headline": "The 2 right lanes are closed on NC-55 Eastbound at Charlies Way in Wake County due to flooding. Updated 1:36 pm. ID -26091400002.",
-        "date": "2026-09-14T04:36:00.000Z"
-      },
-      {
-        "state": "NC",
-        "route": "NC-12",
-        "headline": "NC-12 CLOSED in both directions from Sea Oats Dr to Oregon Inlet Rd in Dare County due to flooding. Updated 7:28 am. ID 26092400022.",
-        "date": "2026-09-24T11:05:19.000Z"
+        "state": "DE",
+        "route": "MILFORD",
+        "headline": "BIG STONE BEACH RD CLOSED BETWEEN NEW WHARF RD AND HERING RD DUE TO FLOODING.",
+        "date": "2026-09-26"
       }
     ],
     "snowice": [
@@ -427,6 +427,24 @@
         "date": "2026-09-16T14:00:00.000Z"
       },
       {
+        "state": "BC",
+        "route": "BC-37",
+        "headline": "Construction work at Highway 37, Meziadin Chain-on/Chain-off area. Starting Tue Sep 22 until Tue Sep 29. From 8:00 AM to 5:00 PM PDT, every day. Single lane alternating traffic. Expect delays. Speed Limit restriction: 50",
+        "date": "2026-09-22T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-37A",
+        "headline": "Construction work at Highway 37A, At Windy Hill Chain-up Rest Area. Starting Tue Sep 22 until Tue Sep 29. From 8:00 AM to 5:00 PM PDT, every day. Last update: September 25th, 2026 at 4:29pm PDT. Reduced speeds to 50km/hr",
+        "date": "2026-09-22T15:00:00.000Z"
+      },
+      {
+        "state": "BC",
+        "route": "BC-1",
+        "headline": "Construction work from Highway 1, At W/B Exit to Illecillewaet Brake Check / Rest Area to At Jack Macdonald Snowshed. Starting Tue Jul 14. All day, every day. Last update: September 29th, 2026 at 4:52pm PDT. Reduced spee",
+        "date": "2026-07-14T22:10:00.000Z"
+      },
+      {
         "state": "CA",
         "route": "US-101",
         "headline": "Caltrans chain control in effect",
@@ -453,24 +471,6 @@
       {
         "state": "CA",
         "route": "SR-20",
-        "headline": "Caltrans chain control in effect",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "SR-29",
-        "headline": "Caltrans chain control in effect",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "SR-175",
-        "headline": "Caltrans chain control in effect",
-        "date": "2026-09-01"
-      },
-      {
-        "state": "CA",
-        "route": "SR-281",
         "headline": "Caltrans chain control in effect",
         "date": "2026-09-01"
       }
@@ -507,6 +507,12 @@
         "date": "2026-09-12"
       },
       {
+        "state": "CA",
+        "route": "CA-58",
+        "headline": "Fatality — CA-58 WB",
+        "date": "2026-09-28T17:26:00.000Z"
+      },
+      {
         "state": "NY",
         "route": "NY-9A",
         "headline": "Crash investigation and crash with fatality and Downed pole and Road Closure on NY 9A both directions between Old Saw Mill River Road; NY 100C (Greenburgh) and Hunter Lane (Greenburgh) all lanes of 4 lanes closed",
@@ -516,62 +522,71 @@
   },
   "keywordByState": {
     "fire": {
-      "AL": 4,
+      "AL": 5,
       "AR": 1,
-      "AZ": 5,
-      "BC": 4,
-      "CA": 76,
+      "AZ": 9,
+      "BC": 5,
+      "CA": 80,
       "CO": 4,
       "DE": 1,
-      "FL": 4,
-      "GA": 9,
-      "IA": 1,
+      "FL": 5,
+      "GA": 11,
+      "IA": 2,
       "KS": 2,
+      "KY": 1,
       "LA": 1,
-      "MI": 2,
+      "MA": 2,
+      "MD": 1,
+      "MI": 3,
       "MO": 1,
       "MS": 3,
       "MT": 3,
       "NC": 3,
       "NJ": 14,
+      "NM": 1,
       "NV": 5,
       "NY": 7,
       "OH": 4,
       "OK": 1,
-      "OR": 9,
+      "OR": 14,
       "PA": 2,
       "SC": 1,
       "TN": 3,
       "UT": 4,
-      "WA": 10,
+      "WA": 13,
       "WI": 5,
       "WY": 3
     },
     "flood": {
-      "AZ": 7,
+      "AZ": 11,
       "BC": 3,
-      "CA": 2,
-      "DE": 3,
+      "CA": 3,
+      "CO": 1,
+      "DE": 19,
       "FL": 2,
       "GA": 2,
       "IA": 1,
+      "KS": 2,
+      "MA": 2,
       "MI": 1,
       "MO": 1,
       "MT": 1,
-      "NC": 4,
-      "NJ": 2,
-      "NY": 5,
-      "OH": 55,
+      "NC": 5,
+      "NJ": 22,
+      "NM": 25,
+      "NY": 6,
+      "OH": 56,
       "PA": 4,
       "TN": 2,
-      "TX": 2,
+      "TX": 3,
       "WI": 1
     },
     "snowice": {
       "AZ": 1,
-      "BC": 16,
+      "BC": 19,
       "CA": 69,
       "CO": 35,
+      "NM": 1,
       "OH": 4,
       "SD": 2,
       "TN": 3,
@@ -580,7 +595,7 @@
       "WV": 1
     },
     "fatal": {
-      "CA": 5,
+      "CA": 6,
       "NY": 1
     }
   },
@@ -641,10 +656,25 @@
         "headline": "I-435 — vehicle fire",
         "date": "2026-09-01T22:19:00.000Z"
       },
+      "KY": {
+        "route": "KY-841",
+        "headline": "Report of vehicle fire at bottom of ramp",
+        "date": "2026-09-28T01:26:00.000Z"
+      },
       "LA": {
         "route": "LA-1062",
         "headline": "…idge Maintenance Operations on LA-1062 Both Directions from Firetower Ln to 1.2 Mi South of Caboose Ln . All lanes closed. Starting 1/29/2026 6:00 AM and Ending 10/…",
         "date": "2026-01-29T12:00:00.000Z"
+      },
+      "MA": {
+        "route": "I-93",
+        "headline": "I-93 — Vehicle Fire — I-93 SB Exit 25",
+        "date": "2026-09-29"
+      },
+      "MD": {
+        "route": "I-95",
+        "headline": "Vehicle Fire — I-95 SB",
+        "date": "2026-09-30T20:02:29.000Z"
       },
       "MI": {
         "route": "I-75",
@@ -675,6 +705,11 @@
         "route": "US-40",
         "headline": "…ween East of NJDOT Yard (Egg Harbor Twp) and East of CR 651/Fire Rd (Egg Harbor Twp), Wednesday September 2",
         "date": "2026-09-01"
+      },
+      "NM": {
+        "route": "NM-14",
+        "headline": "…l be closed in each direction between Rancho Viejo Blvd and Fire Place Rd. for a sewer installation project. Please obey all traffic control personnel and proceed w…",
+        "date": "2025-07-21T18:56:08.000Z"
       },
       "NV": {
         "route": "I-80",
@@ -753,6 +788,11 @@
         "headline": "Roadway Flooding — CA-62",
         "date": "2026-09-06"
       },
+      "CO": {
+        "route": "SH-78",
+        "headline": "…ah Valley) from Mile Point 9 to Mile Point 13. Look out for flooding. Slower speeds are advised.",
+        "date": "2026-09-29T23:32:16.520Z"
+      },
       "DE": {
         "route": "FREDERICA",
         "headline": "S MARKET ST BETWEEN FREDERICA RD AND DAVID ST CLOSED DUE TO FLOODING",
@@ -772,6 +812,16 @@
         "route": "US-6",
         "headline": "Blocked · flooding",
         "date": "2026-09-20T15:14:18.000Z"
+      },
+      "KS": {
+        "route": "KS-87",
+        "headline": "Closed · flooding · K87 closed due to flooding. Find alternate route.",
+        "date": "2026-09-30T16:30:00.000Z"
+      },
+      "MA": {
+        "route": "US-6",
+        "headline": "US-6 — Flood — US-6 EB Exit #3103",
+        "date": "2026-09-26"
       },
       "MI": {
         "route": "I-75",
@@ -797,6 +847,11 @@
         "route": "US-40",
         "headline": "Flooding on US 40 Both Directions West of Atlantic City Expressway (Egg Harbor Twp), All lanes closed eas…",
         "date": "2026-09-22"
+      },
+      "NM": {
+        "route": "NM-225",
+        "headline": "…water on roadway. Use extreme caution. When the roadway is flooded do not cross and seek an alternate route. Turn around, don’t drown.",
+        "date": "2026-09-22T21:08:31.000Z"
       },
       "NY": {
         "route": "I-190",
@@ -849,6 +904,11 @@
         "route": "I-70",
         "headline": "…1, 7:00PM Comment: More project information is available at chainstationupgradeproject@gmail.com or 970-401-7734.",
         "date": "2026-09-01T13:00:00Z"
+      },
+      "NM": {
+        "route": "NM-120",
+        "headline": "…limited width clearance. Tree cover will produce prolonged icy and snow-packed road conditions, four-wheel drive vehicles are recommended.",
+        "date": "2024-12-23T07:00:00.000Z"
       },
       "OH": {
         "route": "OH-237",
@@ -907,13 +967,17 @@
       "GA": true,
       "IA": true,
       "KS": true,
+      "KY": true,
       "LA": true,
+      "MA": true,
+      "MD": true,
       "MI": true,
       "MO": true,
       "MS": true,
       "MT": true,
       "NC": true,
       "NJ": true,
+      "NM": true,
       "NV": true,
       "NY": true,
       "OH": true,
@@ -931,15 +995,19 @@
       "AZ": true,
       "BC": true,
       "CA": true,
+      "CO": true,
       "DE": true,
       "FL": true,
       "GA": true,
       "IA": true,
+      "KS": true,
+      "MA": true,
       "MI": true,
       "MO": true,
       "MT": true,
       "NC": true,
       "NJ": true,
+      "NM": true,
       "NY": true,
       "OH": true,
       "PA": true,
@@ -952,6 +1020,7 @@
       "BC": true,
       "CA": true,
       "CO": true,
+      "NM": true,
       "OH": false,
       "SD": false,
       "TN": true,
@@ -967,35 +1036,35 @@
   "topCorridors": [
     [
       "I-80",
-      852
+      988
     ],
     [
       "I-95",
-      549
+      635
     ],
     [
       "I-10",
-      497
+      560
     ],
     [
       "I-287",
-      431
+      490
     ],
     [
       "US-1",
-      426
+      476
     ],
     [
       "I-70",
-      420
+      472
+    ],
+    [
+      "I-90",
+      397
     ],
     [
       "I-41",
       364
-    ],
-    [
-      "I-90",
-      355
     ]
   ],
   "longTermProjects": [
@@ -1067,309 +1136,309 @@
   "stateCoverage": [
     {
       "state": "AK",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "AL",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "AR",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "AZ",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "BC",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "CA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "CO",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "CT",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "DE",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "FL",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "GA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "HI",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "IA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "ID",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "IL",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "IN",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "KS",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "KY",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "LA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "MA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "MD",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "ME",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "MI",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "MN",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "MO",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "MS",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "MT",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "NC",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "ND",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "NE",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "NH",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "NJ",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "NM",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "NV",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "NY",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "OH",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "OK",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "OR",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "PA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "RI",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "SC",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "SD",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "TN",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "TX",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "UT",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "VA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "VT",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "WA",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "WI",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "WV",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     },
     {
       "state": "WY",
-      "files": 25,
+      "files": 30,
       "from": "2026-09-01",
-      "to": "2026-09-25"
+      "to": "2026-09-30"
     }
   ],
   "jurisdictionSummary": [
@@ -1380,8 +1449,8 @@
       "construction": 0,
       "weather": 0,
       "hazard": 0,
-      "other": 1,
-      "total": 3,
+      "other": 2,
+      "total": 4,
       "fires": 24,
       "acres": 62308,
       "topRoutes": [
@@ -1391,15 +1460,15 @@
     },
     {
       "state": "AL",
-      "closure": 31,
-      "crash": 209,
-      "construction": 263,
+      "closure": 54,
+      "crash": 228,
+      "construction": 281,
       "weather": 0,
       "hazard": 0,
-      "other": 617,
-      "total": 1120,
-      "fires": 6,
-      "acres": 2834,
+      "other": 696,
+      "total": 1259,
+      "fires": 8,
+      "acres": 3274,
       "topRoutes": [
         "I-65",
         "I-20",
@@ -1415,8 +1484,8 @@
       "hazard": 0,
       "other": 5,
       "total": 10,
-      "fires": 98,
-      "acres": 4739,
+      "fires": 108,
+      "acres": 4758,
       "topRoutes": [
         "AR-123",
         "AR-120",
@@ -1425,13 +1494,13 @@
     },
     {
       "state": "AZ",
-      "closure": 177,
-      "crash": 136,
+      "closure": 201,
+      "crash": 169,
       "construction": 0,
       "weather": 0,
       "hazard": 0,
-      "other": 173,
-      "total": 486,
+      "other": 206,
+      "total": 576,
       "fires": 38,
       "acres": 1357,
       "topRoutes": [
@@ -1442,13 +1511,13 @@
     },
     {
       "state": "BC",
-      "closure": 22,
-      "crash": 26,
-      "construction": 687,
-      "weather": 96,
+      "closure": 23,
+      "crash": 30,
+      "construction": 754,
+      "weather": 130,
       "hazard": 0,
-      "other": 41,
-      "total": 872,
+      "other": 42,
+      "total": 979,
       "fires": 117,
       "acres": 1034563,
       "topRoutes": [
@@ -1459,31 +1528,31 @@
     },
     {
       "state": "CA",
-      "closure": 893,
-      "crash": 269,
-      "construction": 1824,
-      "weather": 85,
-      "hazard": 219,
-      "other": 181,
-      "total": 3471,
-      "fires": 509,
-      "acres": 87602,
+      "closure": 960,
+      "crash": 287,
+      "construction": 1966,
+      "weather": 86,
+      "hazard": 228,
+      "other": 215,
+      "total": 3742,
+      "fires": 608,
+      "acres": 88972,
       "topRoutes": [
         "US-101",
         "I-5",
-        "SR-1"
+        "I-80"
       ]
     },
     {
       "state": "CO",
       "closure": 2,
-      "crash": 53,
-      "construction": 787,
-      "weather": 0,
-      "hazard": 2,
-      "other": 61,
-      "total": 905,
-      "fires": 42,
+      "crash": 65,
+      "construction": 849,
+      "weather": 1,
+      "hazard": 3,
+      "other": 70,
+      "total": 990,
+      "fires": 43,
       "acres": 165470,
       "topRoutes": [
         "I-70",
@@ -1493,13 +1562,13 @@
     },
     {
       "state": "CT",
-      "closure": 98,
-      "crash": 13,
-      "construction": 307,
+      "closure": 112,
+      "crash": 16,
+      "construction": 385,
       "weather": 0,
       "hazard": 0,
-      "other": 52,
-      "total": 470,
+      "other": 54,
+      "total": 567,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
@@ -1510,13 +1579,13 @@
     },
     {
       "state": "DE",
-      "closure": 24,
+      "closure": 51,
       "crash": 5,
-      "construction": 84,
-      "weather": 4,
+      "construction": 108,
+      "weather": 5,
       "hazard": 0,
       "other": 34,
-      "total": 151,
+      "total": 203,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
@@ -1527,64 +1596,64 @@
     },
     {
       "state": "FL",
-      "closure": 23,
-      "crash": 65,
-      "construction": 43,
+      "closure": 24,
+      "crash": 66,
+      "construction": 47,
       "weather": 3,
-      "hazard": 41,
-      "other": 39,
-      "total": 214,
-      "fires": 29,
-      "acres": 82742,
+      "hazard": 44,
+      "other": 41,
+      "total": 225,
+      "fires": 32,
+      "acres": 83517,
       "topRoutes": [
-        "I-75",
         "I-95",
+        "I-75",
         "I-10"
       ]
     },
     {
       "state": "GA",
-      "closure": 104,
+      "closure": 116,
       "crash": 99,
-      "construction": 235,
+      "construction": 282,
       "weather": 0,
-      "hazard": 9,
-      "other": 36,
-      "total": 483,
+      "hazard": 26,
+      "other": 37,
+      "total": 560,
       "fires": 3,
       "acres": 1888,
       "topRoutes": [
+        "I-75",
         "I-285",
-        "I-20",
-        "I-75"
+        "I-20"
       ]
     },
     {
       "state": "HI",
       "closure": 0,
       "crash": 0,
-      "construction": 13,
+      "construction": 64,
       "weather": 0,
       "hazard": 0,
       "other": 0,
-      "total": 13,
+      "total": 64,
       "fires": 1,
       "acres": 500,
       "topRoutes": [
         "HI-92",
-        "HI-30",
-        "H-201"
+        "H-1",
+        "HI-30"
       ]
     },
     {
       "state": "IA",
-      "closure": 122,
-      "crash": 1,
-      "construction": 112,
+      "closure": 128,
+      "crash": 2,
+      "construction": 117,
       "weather": 0,
       "hazard": 0,
-      "other": 2,
-      "total": 237,
+      "other": 3,
+      "total": 250,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
@@ -1595,14 +1664,14 @@
     },
     {
       "state": "ID",
-      "closure": 2,
-      "crash": 0,
-      "construction": 267,
+      "closure": 4,
+      "crash": 1,
+      "construction": 307,
       "weather": 0,
       "hazard": 0,
       "other": 0,
-      "total": 269,
-      "fires": 67,
+      "total": 312,
+      "fires": 69,
       "acres": 210358,
       "topRoutes": [
         "US-95",
@@ -1612,14 +1681,14 @@
     },
     {
       "state": "IL",
-      "closure": 273,
+      "closure": 284,
       "crash": 18,
-      "construction": 487,
+      "construction": 521,
       "weather": 0,
       "hazard": 0,
-      "other": 294,
-      "total": 1072,
-      "fires": 1,
+      "other": 329,
+      "total": 1152,
+      "fires": 2,
       "acres": 0,
       "topRoutes": [
         "I-90",
@@ -1629,13 +1698,13 @@
     },
     {
       "state": "IN",
-      "closure": 238,
+      "closure": 249,
       "crash": 6,
-      "construction": 415,
+      "construction": 422,
       "weather": 0,
       "hazard": 7,
-      "other": 6,
-      "total": 672,
+      "other": 8,
+      "total": 692,
       "fires": 3,
       "acres": 7,
       "topRoutes": [
@@ -1646,13 +1715,13 @@
     },
     {
       "state": "KS",
-      "closure": 78,
-      "crash": 12,
+      "closure": 84,
+      "crash": 13,
       "construction": 89,
       "weather": 0,
       "hazard": 7,
-      "other": 25,
-      "total": 211,
+      "other": 26,
+      "total": 219,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
@@ -1664,30 +1733,30 @@
     {
       "state": "KY",
       "closure": 39,
-      "crash": 0,
-      "construction": 0,
+      "crash": 64,
+      "construction": 161,
       "weather": 0,
-      "hazard": 0,
-      "other": 0,
-      "total": 39,
-      "fires": 1,
-      "acres": 0,
+      "hazard": 194,
+      "other": 7,
+      "total": 465,
+      "fires": 3,
+      "acres": 15,
       "topRoutes": [
-        "US-60",
-        "KY-773",
-        "KY-825"
+        "I-64",
+        "I-65",
+        "I-75"
       ]
     },
     {
       "state": "LA",
-      "closure": 211,
-      "crash": 31,
-      "construction": 448,
+      "closure": 226,
+      "crash": 32,
+      "construction": 498,
       "weather": 0,
       "hazard": 0,
-      "other": 4,
-      "total": 694,
-      "fires": 14,
+      "other": 5,
+      "total": 761,
+      "fires": 15,
       "acres": 1436,
       "topRoutes": [
         "I-10",
@@ -1697,30 +1766,30 @@
     },
     {
       "state": "MA",
-      "closure": 2,
-      "crash": 18,
-      "construction": 39,
-      "weather": 0,
-      "hazard": 3,
-      "other": 5,
-      "total": 67,
-      "fires": 16,
+      "closure": 9,
+      "crash": 25,
+      "construction": 100,
+      "weather": 2,
+      "hazard": 4,
+      "other": 9,
+      "total": 149,
+      "fires": 17,
       "acres": 5,
       "topRoutes": [
         "I-93",
-        "I-95",
-        "I-90"
+        "I-90",
+        "I-95"
       ]
     },
     {
       "state": "MD",
-      "closure": 159,
-      "crash": 2,
+      "closure": 169,
+      "crash": 3,
       "construction": 1,
       "weather": 0,
-      "hazard": 1,
-      "other": 2,
-      "total": 165,
+      "hazard": 13,
+      "other": 12,
+      "total": 198,
       "fires": 1,
       "acres": 0,
       "topRoutes": [
@@ -1733,64 +1802,64 @@
       "state": "ME",
       "closure": 0,
       "crash": 0,
-      "construction": 12,
+      "construction": 13,
       "weather": 0,
       "hazard": 0,
       "other": 33,
-      "total": 45,
-      "fires": 14,
+      "total": 46,
+      "fires": 15,
       "acres": 6,
       "topRoutes": [
         "US-1",
         "US-201",
-        "US-202"
+        "I-95"
       ]
     },
     {
       "state": "MI",
-      "closure": 413,
-      "crash": 26,
-      "construction": 484,
+      "closure": 459,
+      "crash": 33,
+      "construction": 521,
       "weather": 0,
       "hazard": 0,
-      "other": 19,
-      "total": 942,
-      "fires": 16,
+      "other": 20,
+      "total": 1033,
+      "fires": 17,
       "acres": 33,
       "topRoutes": [
         "I-94",
-        "I-96",
-        "I-75"
+        "I-75",
+        "I-96"
       ]
     },
     {
       "state": "MN",
-      "closure": 62,
-      "crash": 49,
-      "construction": 192,
+      "closure": 63,
+      "crash": 51,
+      "construction": 198,
       "weather": 0,
       "hazard": 0,
-      "other": 14,
-      "total": 317,
-      "fires": 21,
-      "acres": 74612,
+      "other": 19,
+      "total": 331,
+      "fires": 26,
+      "acres": 74618,
       "topRoutes": [
-        "US-169",
         "I-35",
+        "US-169",
         "US-61"
       ]
     },
     {
       "state": "MO",
-      "closure": 72,
-      "crash": 11,
-      "construction": 478,
+      "closure": 73,
+      "crash": 12,
+      "construction": 496,
       "weather": 0,
       "hazard": 0,
-      "other": 13,
-      "total": 574,
-      "fires": 1,
-      "acres": 150,
+      "other": 16,
+      "total": 597,
+      "fires": 3,
+      "acres": 553,
       "topRoutes": [
         "I-70",
         "US-67",
@@ -1799,15 +1868,15 @@
     },
     {
       "state": "MS",
-      "closure": 20,
-      "crash": 21,
-      "construction": 127,
+      "closure": 25,
+      "crash": 25,
+      "construction": 142,
       "weather": 0,
       "hazard": 0,
       "other": 0,
-      "total": 168,
-      "fires": 25,
-      "acres": 3325,
+      "total": 192,
+      "fires": 34,
+      "acres": 4203,
       "topRoutes": [
         "I-55",
         "I-20",
@@ -1817,14 +1886,14 @@
     {
       "state": "MT",
       "closure": 0,
-      "crash": 24,
+      "crash": 26,
       "construction": 0,
-      "weather": 15,
+      "weather": 17,
       "hazard": 0,
       "other": 7,
-      "total": 46,
-      "fires": 163,
-      "acres": 133572,
+      "total": 50,
+      "fires": 170,
+      "acres": 133573,
       "topRoutes": [
         "I-90",
         "US-12",
@@ -1833,32 +1902,32 @@
     },
     {
       "state": "NC",
-      "closure": 115,
-      "crash": 5,
-      "construction": 1098,
+      "closure": 157,
+      "crash": 12,
+      "construction": 1267,
       "weather": 0,
       "hazard": 0,
       "other": 3,
-      "total": 1221,
+      "total": 1439,
       "fires": 8,
       "acres": 2018,
       "topRoutes": [
         "I-40",
         "I-85",
-        "I-95"
+        "I-77"
       ]
     },
     {
       "state": "ND",
-      "closure": 6,
+      "closure": 7,
       "crash": 0,
-      "construction": 60,
+      "construction": 66,
       "weather": 0,
-      "hazard": 5,
+      "hazard": 6,
       "other": 2,
-      "total": 73,
-      "fires": 29,
-      "acres": 418,
+      "total": 81,
+      "fires": 30,
+      "acres": 419,
       "topRoutes": [
         "I-94",
         "US-2",
@@ -1867,13 +1936,13 @@
     },
     {
       "state": "NE",
-      "closure": 23,
-      "crash": 2,
+      "closure": 25,
+      "crash": 3,
       "construction": 97,
       "weather": 0,
       "hazard": 0,
       "other": 1,
-      "total": 123,
+      "total": 126,
       "fires": 3,
       "acres": 9,
       "topRoutes": [
@@ -1886,11 +1955,11 @@
       "state": "NH",
       "closure": 0,
       "crash": 3,
-      "construction": 66,
+      "construction": 68,
       "weather": 0,
       "hazard": 0,
       "other": 5,
-      "total": 74,
+      "total": 76,
       "fires": 1,
       "acres": 0,
       "topRoutes": [
@@ -1901,60 +1970,64 @@
     },
     {
       "state": "NJ",
-      "closure": 129,
-      "crash": 33,
-      "construction": 2975,
+      "closure": 189,
+      "crash": 42,
+      "construction": 3918,
       "weather": 0,
-      "hazard": 14,
-      "other": 213,
-      "total": 3364,
-      "fires": 1,
-      "acres": 0,
+      "hazard": 24,
+      "other": 232,
+      "total": 4405,
+      "fires": 2,
+      "acres": 20,
       "topRoutes": [
-        "US-1",
         "NJ TURNPIKE",
-        "GSP"
+        "US-1",
+        "I-80"
       ]
     },
     {
       "state": "NM",
-      "closure": 0,
-      "crash": 0,
-      "construction": 0,
-      "weather": 0,
-      "hazard": 0,
+      "closure": 30,
+      "crash": 2,
+      "construction": 66,
+      "weather": 26,
+      "hazard": 18,
       "other": 0,
-      "total": 0,
-      "fires": 204,
+      "total": 142,
+      "fires": 206,
       "acres": 79856,
-      "topRoutes": []
+      "topRoutes": [
+        "I-25",
+        "I-40",
+        "US-550"
+      ]
     },
     {
       "state": "NV",
-      "closure": 44,
-      "crash": 34,
-      "construction": 149,
+      "closure": 52,
+      "crash": 38,
+      "construction": 165,
       "weather": 0,
-      "hazard": 2,
-      "other": 122,
-      "total": 351,
-      "fires": 34,
-      "acres": 164794,
+      "hazard": 4,
+      "other": 141,
+      "total": 400,
+      "fires": 36,
+      "acres": 202693,
       "topRoutes": [
         "I-80",
-        "US-395",
-        "US-50"
+        "US-50",
+        "US-395"
       ]
     },
     {
       "state": "NY",
-      "closure": 265,
-      "crash": 169,
-      "construction": 4169,
+      "closure": 289,
+      "crash": 190,
+      "construction": 4419,
       "weather": 0,
       "hazard": 4,
       "other": 42,
-      "total": 4649,
+      "total": 4944,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
@@ -1965,18 +2038,18 @@
     },
     {
       "state": "OH",
-      "closure": 192,
-      "crash": 49,
-      "construction": 296,
+      "closure": 216,
+      "crash": 56,
+      "construction": 331,
       "weather": 0,
-      "hazard": 2,
-      "other": 16,
-      "total": 555,
+      "hazard": 3,
+      "other": 26,
+      "total": 632,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
-        "I-71",
         "I-75",
+        "I-71",
         "I-70"
       ]
     },
@@ -1989,8 +2062,8 @@
       "hazard": 0,
       "other": 1,
       "total": 56,
-      "fires": 104,
-      "acres": 53148,
+      "fires": 117,
+      "acres": 53670,
       "topRoutes": [
         "I-40",
         "I-35",
@@ -2000,14 +2073,14 @@
     {
       "state": "OR",
       "closure": 0,
-      "crash": 116,
-      "construction": 313,
+      "crash": 140,
+      "construction": 353,
       "weather": 0,
       "hazard": 0,
-      "other": 106,
-      "total": 535,
-      "fires": 228,
-      "acres": 2942779,
+      "other": 127,
+      "total": 620,
+      "fires": 247,
+      "acres": 2943134,
       "topRoutes": [
         "I-5",
         "I-84",
@@ -2016,13 +2089,13 @@
     },
     {
       "state": "PA",
-      "closure": 12,
-      "crash": 41,
-      "construction": 456,
+      "closure": 14,
+      "crash": 49,
+      "construction": 508,
       "weather": 2,
       "hazard": 2,
-      "other": 36,
-      "total": 549,
+      "other": 40,
+      "total": 615,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
@@ -2034,12 +2107,12 @@
     {
       "state": "RI",
       "closure": 0,
-      "crash": 1,
+      "crash": 2,
       "construction": 0,
       "weather": 0,
       "hazard": 4,
       "other": 0,
-      "total": 5,
+      "total": 6,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
@@ -2052,11 +2125,11 @@
       "state": "SC",
       "closure": 0,
       "crash": 6,
-      "construction": 9,
+      "construction": 10,
       "weather": 0,
       "hazard": 0,
       "other": 7,
-      "total": 22,
+      "total": 23,
       "fires": 2,
       "acres": 86,
       "topRoutes": [
@@ -2067,14 +2140,14 @@
     },
     {
       "state": "SD",
-      "closure": 2,
+      "closure": 3,
       "crash": 0,
-      "construction": 218,
+      "construction": 222,
       "weather": 0,
       "hazard": 0,
       "other": 0,
-      "total": 220,
-      "fires": 67,
+      "total": 225,
+      "fires": 68,
       "acres": 10533,
       "topRoutes": [
         "I-90",
@@ -2084,15 +2157,15 @@
     },
     {
       "state": "TN",
-      "closure": 101,
-      "crash": 3,
-      "construction": 123,
+      "closure": 103,
+      "crash": 6,
+      "construction": 165,
       "weather": 2,
-      "hazard": 0,
+      "hazard": 1,
       "other": 15,
-      "total": 244,
-      "fires": 3,
-      "acres": 15,
+      "total": 292,
+      "fires": 9,
+      "acres": 114,
       "topRoutes": [
         "I-24",
         "I-40",
@@ -2101,15 +2174,15 @@
     },
     {
       "state": "TX",
-      "closure": 17,
-      "crash": 6,
-      "construction": 885,
+      "closure": 18,
+      "crash": 7,
+      "construction": 991,
       "weather": 0,
-      "hazard": 11,
+      "hazard": 12,
       "other": 2,
-      "total": 921,
-      "fires": 106,
-      "acres": 143917,
+      "total": 1030,
+      "fires": 122,
+      "acres": 147445,
       "topRoutes": [
         "I-30",
         "I-35",
@@ -2118,14 +2191,14 @@
     },
     {
       "state": "UT",
-      "closure": 1,
-      "crash": 94,
+      "closure": 3,
+      "crash": 109,
       "construction": 0,
       "weather": 0,
       "hazard": 0,
-      "other": 30,
-      "total": 125,
-      "fires": 55,
+      "other": 35,
+      "total": 147,
+      "fires": 56,
       "acres": 338368,
       "topRoutes": [
         "I-15",
@@ -2135,13 +2208,13 @@
     },
     {
       "state": "VA",
-      "closure": 214,
-      "crash": 77,
-      "construction": 87,
+      "closure": 223,
+      "crash": 95,
+      "construction": 234,
       "weather": 0,
       "hazard": 0,
-      "other": 60,
-      "total": 438,
+      "other": 131,
+      "total": 683,
       "fires": 2,
       "acres": 360,
       "topRoutes": [
@@ -2154,11 +2227,11 @@
       "state": "VT",
       "closure": 0,
       "crash": 3,
-      "construction": 64,
+      "construction": 66,
       "weather": 0,
       "hazard": 0,
-      "other": 12,
-      "total": 79,
+      "other": 17,
+      "total": 86,
       "fires": 2,
       "acres": 1,
       "topRoutes": [
@@ -2169,15 +2242,15 @@
     },
     {
       "state": "WA",
-      "closure": 14,
-      "crash": 41,
-      "construction": 752,
+      "closure": 15,
+      "crash": 47,
+      "construction": 853,
       "weather": 0,
       "hazard": 0,
-      "other": 66,
-      "total": 873,
-      "fires": 119,
-      "acres": 682447,
+      "other": 78,
+      "total": 993,
+      "fires": 130,
+      "acres": 689138,
       "topRoutes": [
         "SR 405",
         "SR 5",
@@ -2193,8 +2266,8 @@
       "hazard": 5,
       "other": 1,
       "total": 2738,
-      "fires": 79,
-      "acres": 153,
+      "fires": 81,
+      "acres": 157,
       "topRoutes": [
         "I-41",
         "I-94",
@@ -2205,17 +2278,17 @@
       "state": "WV",
       "closure": 0,
       "crash": 0,
-      "construction": 116,
+      "construction": 120,
       "weather": 0,
       "hazard": 0,
       "other": 0,
-      "total": 116,
+      "total": 120,
       "fires": 0,
       "acres": 0,
       "topRoutes": [
-        "US-119",
         "I-77",
-        "US-50"
+        "US-119",
+        "I-79"
       ]
     },
     {
@@ -2227,8 +2300,8 @@
       "hazard": 5,
       "other": 8,
       "total": 24,
-      "fires": 41,
-      "acres": 15947,
+      "fires": 44,
+      "acres": 15989,
       "topRoutes": [
         "I-80",
         "WY-22",
@@ -2237,13 +2310,13 @@
     }
   ],
   "wildfires": {
-    "totalFires": 2332,
-    "totalAcres": 6302665,
+    "totalFires": 2557,
+    "totalAcres": 6355733,
     "byState": [
       {
         "state": "OR",
-        "fires": 228,
-        "acres": 2942779
+        "fires": 247,
+        "acres": 2943134
       },
       {
         "state": "BC",
@@ -2252,58 +2325,58 @@
       },
       {
         "state": "WA",
-        "fires": 119,
-        "acres": 682447
+        "fires": 130,
+        "acres": 689138
       },
       {
         "state": "UT",
-        "fires": 55,
+        "fires": 56,
         "acres": 338368
       },
       {
         "state": "ID",
-        "fires": 67,
+        "fires": 69,
         "acres": 210358
       },
       {
+        "state": "NV",
+        "fires": 36,
+        "acres": 202693
+      },
+      {
         "state": "CO",
-        "fires": 42,
+        "fires": 43,
         "acres": 165470
       },
       {
-        "state": "NV",
-        "fires": 34,
-        "acres": 164794
-      },
-      {
         "state": "TX",
-        "fires": 106,
-        "acres": 143917
+        "fires": 122,
+        "acres": 147445
       },
       {
         "state": "MT",
-        "fires": 163,
-        "acres": 133572
+        "fires": 170,
+        "acres": 133573
       },
       {
         "state": "CA",
-        "fires": 509,
-        "acres": 87602
+        "fires": 608,
+        "acres": 88972
       },
       {
         "state": "FL",
-        "fires": 29,
-        "acres": 82742
+        "fires": 32,
+        "acres": 83517
       },
       {
         "state": "NM",
-        "fires": 204,
+        "fires": 206,
         "acres": 79856
       },
       {
         "state": "MN",
-        "fires": 21,
-        "acres": 74612
+        "fires": 26,
+        "acres": 74618
       },
       {
         "state": "AK",
@@ -2312,33 +2385,33 @@
       },
       {
         "state": "OK",
-        "fires": 104,
-        "acres": 53148
+        "fires": 117,
+        "acres": 53670
       },
       {
         "state": "WY",
-        "fires": 41,
-        "acres": 15947
+        "fires": 44,
+        "acres": 15989
       },
       {
         "state": "SD",
-        "fires": 67,
+        "fires": 68,
         "acres": 10533
       },
       {
         "state": "AR",
-        "fires": 98,
-        "acres": 4739
+        "fires": 108,
+        "acres": 4758
       },
       {
         "state": "MS",
-        "fires": 25,
-        "acres": 3325
+        "fires": 34,
+        "acres": 4203
       },
       {
         "state": "AL",
-        "fires": 6,
-        "acres": 2834
+        "fires": 8,
+        "acres": 3274
       },
       {
         "state": "NC",
@@ -2352,7 +2425,7 @@
       },
       {
         "state": "LA",
-        "fires": 14,
+        "fires": 15,
         "acres": 1436
       },
       {
@@ -2361,14 +2434,19 @@
         "acres": 1357
       },
       {
+        "state": "MO",
+        "fires": 3,
+        "acres": 553
+      },
+      {
         "state": "HI",
         "fires": 1,
         "acres": 500
       },
       {
         "state": "ND",
-        "fires": 29,
-        "acres": 418
+        "fires": 30,
+        "acres": 419
       },
       {
         "state": "VA",
@@ -2382,13 +2460,13 @@
       },
       {
         "state": "WI",
-        "fires": 79,
-        "acres": 153
+        "fires": 81,
+        "acres": 157
       },
       {
-        "state": "MO",
-        "fires": 1,
-        "acres": 150
+        "state": "TN",
+        "fires": 9,
+        "acres": 114
       },
       {
         "state": "SC",
@@ -2397,11 +2475,16 @@
       },
       {
         "state": "MI",
-        "fires": 16,
+        "fires": 17,
         "acres": 33
       },
       {
-        "state": "TN",
+        "state": "NJ",
+        "fires": 2,
+        "acres": 20
+      },
+      {
+        "state": "KY",
         "fires": 3,
         "acres": 15
       },
@@ -2417,12 +2500,12 @@
       },
       {
         "state": "ME",
-        "fires": 14,
+        "fires": 15,
         "acres": 6
       },
       {
         "state": "MA",
-        "fires": 16,
+        "fires": 17,
         "acres": 5
       },
       {
@@ -2436,23 +2519,13 @@
         "acres": 0
       },
       {
-        "state": "NJ",
-        "fires": 1,
-        "acres": 0
-      },
-      {
-        "state": "KY",
-        "fires": 1,
-        "acres": 0
-      },
-      {
         "state": "NH",
         "fires": 1,
         "acres": 0
       },
       {
         "state": "IL",
-        "fires": 1,
+        "fires": 2,
         "acres": 0
       }
     ]
