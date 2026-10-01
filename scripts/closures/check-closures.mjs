@@ -30,11 +30,11 @@ const feeds = Object.fromEntries(await Promise.all(states.map(async s => [s, awa
 let changed = 0;
 for (const c of items) {
   if (!c.source || c.status?.state === 'reopened') continue;
-  const before = JSON.stringify(c.status);
+  const before = JSON.stringify([c.status, c.verifiedAt]);
   const f = feeds[c.source.state];
   const st = c.status;
   if (!f.ok) {
-    st.lastCheckFailed = now.toISOString();
+    st.lastCheckFailed ??= now.toISOString(); // first failure only, so a long outage is one commit
     st.failReason = f.why;
   } else {
     delete st.lastCheckFailed; delete st.failReason;
@@ -44,7 +44,6 @@ for (const c of items) {
       || (fp && f.list.find(i => (i.location || {})['route-id'] === fp.route && i['start-time'] === fp.startTime));
     if (rec) {
       st.missedChecks = 0;
-      st.lastCheckOk = now.toISOString();
       c.verifiedAt = now.toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }); // YYYY-MM-DD, US Central
       const starts = c.schedule?.startsAt ? new Date(c.schedule.startsAt) : null;
       st.state = starts && now < starts ? 'scheduled' : 'reported-closed';
@@ -55,8 +54,9 @@ for (const c of items) {
       if (st.missedChecks >= 2) st.state = 'unconfirmed';
     }
   }
-  if (JSON.stringify(st) !== before) changed++;
+  if (JSON.stringify([st, c.verifiedAt]) !== before) changed++;
   console.log(c.slug.padEnd(40), st.state, st.missedChecks ? `missed ${st.missedChecks}` : '', st.lastCheckFailed ? `FEED FAIL ${st.failReason}` : '', st.note || '');
 }
-fs.writeFileSync(FILE, JSON.stringify(items, null, 1) + '\n');
+// Write only on a real change so the hourly job doesn't commit every hour.
+if (changed) fs.writeFileSync(FILE, JSON.stringify(items, null, 1) + '\n');
 console.log(`${changed} status change(s)`);
