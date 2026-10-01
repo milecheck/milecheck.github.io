@@ -133,8 +133,11 @@ ${FOOTER}
   const idx = 'closures/index.html';
   let s = fs.readFileSync(idx, 'utf8');
   const data = items.map(c => ({ slug: c.slug, t: statusOf(c).prefix + c.title, w: c.when, lat: c.lat, lon: c.lon, col: statusOf(c).color }));
-  const links = items.map((c, k) => `<li><button type="button" class="lc-go" data-k="${k}">${esc(statusOf(c).prefix + c.title)}</button> · ${esc(c.when)} · <a href="/closures/${c.slug}/">details</a></li>`).join('');
-  const block = `<!-- big:start --><div style="max-width:1160px;margin:6px auto 0;padding:0 20px"><p style="font-weight:700;margin:0 0 4px">Long closures</p><ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7">${links}</ul></div>
+  // One list per state, states in alphabetical order (Leah, 2026-10-01: "divide by
+  // state?"). data-k stays the index into `items`, which the map script uses.
+  const states = [...new Set(items.map(c => c.state))].sort();
+  const links = states.map(st => `<p style="font-weight:600;margin:10px 0 2px">${esc(st)}</p><ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7">${items.map((c, k) => c.state === st ? `<li><button type="button" class="lc-go" data-k="${k}">${esc(statusOf(c).prefix + c.title)}</button> · ${esc(c.when)} · <a href="/closures/${c.slug}/">details</a></li>` : '').join('')}</ul>`).join('');
+  const block = `<!-- big:start --><div style="max-width:1160px;margin:6px auto 0;padding:0 20px"><p style="font-weight:700;margin:0 0 4px">Long closures</p>${links}</div>
 <style>.lc-go{background:none;border:0;padding:0;font:inherit;color:#1a5fb4;text-decoration:underline;cursor:pointer;text-align:left}</style>
 <script>window.addEventListener('load',function(){if(typeof map==='undefined'||!window.L)return;var D=${safeJson(data)};var mk=D.map(function(c){return L.circleMarker([c.lat,c.lon],{radius:8,color:'#fff',weight:3,fillColor:c.col,fillOpacity:1}).bindPopup('<strong>'+c.t.replace(/</g,'&lt;')+'</strong><br>'+c.w.replace(/</g,'&lt;')+'<br><a href="/closures/'+c.slug+'/">Details →</a>').addTo(map);});document.querySelectorAll('.lc-go').forEach(function(b){b.addEventListener('click',function(){var k=+b.dataset.k,c=D[k];var el=document.getElementById('clmap');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});map.flyTo([c.lat,c.lon],10,{duration:.9});setTimeout(function(){mk[k].openPopup();},950);});});});</script><!-- big:end -->`;
   if (s.includes('<!-- big:start -->')) s = s.replace(/<!-- big:start -->[\s\S]*?<!-- big:end -->/, () => block);
