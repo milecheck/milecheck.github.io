@@ -4,15 +4,20 @@
 import fs from 'node:fs';
 const items = JSON.parse(fs.readFileSync('scripts/closures/big-closures.json', 'utf8'));
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+// "Last checked" is the date someone verified the record, never the build date.
+const fmt = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+// JSON inside <script> must not be able to close the tag.
+const safeJson = o => JSON.stringify(o).replace(/</g, '\\u003c');
 for (const c of items) {
   if (c.handwritten) continue;
+  if (!/^[a-z0-9-]+$/.test(c.slug) || !/^https:\/\//.test(c.dotUrl) || !c.verifiedAt) throw new Error('bad entry ' + c.slug);
   const faq = [
     [`When is ${c.road} closed?`, `${c.whenFaq}. Dates come from ${c.dot}, the ${c.state} DOT feed, and can change.`],
     [`Where is the ${c.road} closure?`, `${c.road}, ${c.between}, ${c.state}. ${c.dir}.`],
     [`How do I get around it?`, c.around],
   ];
-  const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+  const url = `https://milecheckapp.com/closures/${c.slug}/`;
+  const ld = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url, url, name: c.title, description: `${c.when}. ${c.between}, ${c.state}.`, lastReviewed: c.verifiedAt, publisher: { '@type': 'Organization', name: 'MileCheck', url: 'https://milecheckapp.com/' } };
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +33,7 @@ for (const c of items) {
   <meta property="og:url" content="https://milecheckapp.com/closures/${c.slug}/">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
   <link rel="stylesheet" href="../../style.css">
-  <script type="application/ld+json">${JSON.stringify(ld)}</script>
+  <script type="application/ld+json">${safeJson(ld)}</script>
 </head>
 <body>
 <main style="max-width:760px;margin:0 auto;padding:34px 20px;line-height:1.6">
@@ -42,11 +47,12 @@ for (const c of items) {
     <tr><td style="padding:4px 16px 4px 0"><b>Direction</b></td><td>${esc(c.dir)}</td></tr>
     <tr><td style="padding:4px 16px 4px 0"><b>Source</b></td><td>${esc(c.dot)}, record ${esc(c.id)}</td></tr>
   </table>
+  ${faq.map(([q, a]) => `<h2 style="font-size:19px">${esc(q)}</h2>\n  <p>${esc(a)}</p>`).join('\n  ')}
   <h2>Getting around it</h2>
   <p>${esc(c.around)}</p>
-  <p>Dates on long closures move. Check <a href="${c.dotUrl}">${esc(c.dot)}</a> before you drive.</p>
-  <p>This page comes from the same state DOT feed the MileCheck app uses. For every current closure, see the <a href="../">live closures map</a>.</p>
-  <p style="color:#666;font-size:14px">Last checked ${today}.</p>
+  <p>Dates on long closures move. Check <a href="${esc(c.dotUrl)}">${esc(c.dot)}</a> before you drive.</p>
+  <p>This page comes from the same state DOT feed the MileCheck app uses. See the <a href="../">road closures map</a>.</p>
+  <p style="color:#666;font-size:14px">Last checked ${fmt(c.verifiedAt)}.</p>
 </main>
 </body>
 </html>
@@ -60,11 +66,18 @@ for (const c of items) {
 {
   const idx = 'closures/index.html';
   let s = fs.readFileSync(idx, 'utf8');
-  const titles = { 'us-101-hoh-river-bridge': 'US 101 Hoh River Bridge closed, Oct 1–6' };
-  const links = items.map(c => `<li><a href="/closures/${c.slug}/">${esc(c.title || titles[c.slug] || c.slug)}</a>${c.when ? ` · ${esc(c.when)}` : ''}</li>`).join('');
+    const links = items.map(c => `<li><a href="/closures/${c.slug}/">${esc(c.title)}</a>${c.when ? ` · ${esc(c.when)}` : ''}</li>`).join('');
   const block = `<!-- big:start --><div style="max-width:1160px;margin:6px auto 0;padding:0 20px"><p style="font-weight:700;margin:0 0 4px">Long closures</p><ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7">${links}</ul></div><!-- big:end -->`;
   if (s.includes('<!-- big:start -->')) s = s.replace(/<!-- big:start -->[\s\S]*?<!-- big:end -->/, block);
   else s = s.replace('\n  <div class="cl-wrap">', `\n  ${block}\n\n  <div class="cl-wrap">`);
   fs.writeFileSync(idx, s);
   console.log('linked', items.length, 'from', idx);
 }
+
+// Separate sitemap so these don't wait on the main sitemap.xml.
+fs.writeFileSync('closures-sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${items.map(c => `  <url><loc>https://milecheckapp.com/closures/${c.slug}/</loc><lastmod>${c.verifiedAt}</lastmod></url>`).join('\n')}
+</urlset>
+`);
+console.log('wrote closures-sitemap.xml');
