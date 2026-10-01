@@ -332,8 +332,8 @@
    "endEstimated": true
   },
   "status": {
-   "state": "reported-closed",
-   "missedChecks": 1,
+   "state": "unconfirmed",
+   "missedChecks": 2,
    "note": null
   },
   "lat": 34.0173,
@@ -367,9 +367,7 @@
   "status": {
    "state": "reported-closed",
    "missedChecks": 0,
-   "note": null,
-   "lastCheckFailed": "2026-10-01T17:03:00.420Z",
-   "failReason": "empty feed"
+   "note": null
   },
   "lat": 36.4547,
   "lon": -90.1396
