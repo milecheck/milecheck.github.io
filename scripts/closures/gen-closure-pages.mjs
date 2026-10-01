@@ -8,8 +8,31 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 const fmt = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 // JSON inside <script> must not be able to close the tag.
 const safeJson = o => JSON.stringify(o).replace(/</g, '\\u003c');
+// Status shown on every page and in its title. Only a person sets "reopened".
+function statusOf(c) {
+  const st = c.status || { state: 'reported-closed' };
+  const dot = esc(c.dot);
+  if (st.state === 'reopened') return { prefix: 'Reopened: ', color: '#1d7a3a', text: `Reported open by ${dot}${st.reopenedOn ? ` on ${esc(fmt(st.reopenedOn))}` : ''}. This page is kept as a record.` };
+  if (st.state === 'unconfirmed') return { prefix: 'Status unconfirmed: ', color: '#8a5a00', text: `This closure no longer appears in ${dot}'s feed. That does not mean the road is open. Check <a href="${esc(c.dotUrl)}">${dot}</a> before you drive.` };
+  let text = st.state === 'scheduled' ? `Scheduled. Not closed yet. ${dot} lists it.` : `Reported closed by ${dot}.`;
+  if (st.note === 'past-scheduled-end') text += ` The scheduled end has passed, but ${dot} still lists it.`;
+  if (st.lastCheckFailed) text += ` Our last update attempt failed. Status as of ${esc(fmt(c.verifiedAt))}.`;
+  return { prefix: '', color: '#b3261e', text };
+}
+const banner = c => { const s = statusOf(c); return `<!-- status:start --><p style="border-left:4px solid ${s.color};padding:8px 12px;background:#f6f4ec;margin:12px 0"><strong>${s.text}</strong> Last checked ${esc(fmt(c.verifiedAt))}.</p><!-- status:end -->`; };
+
 for (const c of items) {
-  if (c.handwritten) continue;
+  if (c.handwritten) {
+    // Hand-written page: only the status banner and title prefix are managed here.
+    const f = `closures/${c.slug}/index.html`;
+    let h = fs.readFileSync(f, 'utf8');
+    const s = statusOf(c);
+    h = h.replace(/<!-- status:start -->[\s\S]*?<!-- status:end -->/, banner(c));
+    h = h.replace(/<title>(?:Reopened: |Status unconfirmed: )?/, `<title>${s.prefix}`);
+    fs.writeFileSync(f, h);
+    console.log('status', c.slug, c.status?.state);
+    continue;
+  }
   if (!/^[a-z0-9-]+$/.test(c.slug) || !/^https:\/\//.test(c.dotUrl) || !c.verifiedAt) throw new Error('bad entry ' + c.slug);
   const faq = [
     [`When is ${c.road} closed?`, `${c.whenFaq}. Dates come from ${c.dot}, the ${c.state} DOT feed, and can change.`],
@@ -17,7 +40,7 @@ for (const c of items) {
     [`How do I get around it?`, c.around],
   ];
   const url = `https://milecheckapp.com/closures/${c.slug}/`;
-  const ld = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url, url, name: c.title, description: `${c.when}. ${c.between}, ${c.state}.`, lastReviewed: c.verifiedAt, publisher: { '@type': 'Organization', name: 'MileCheck', url: 'https://milecheckapp.com/' } };
+  const ld = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url, url, name: statusOf(c).prefix + c.title, description: `${c.when}. ${c.between}, ${c.state}.`, lastReviewed: c.verifiedAt, publisher: { '@type': 'Organization', name: 'MileCheck', url: 'https://milecheckapp.com/' } };
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,10 +48,10 @@ for (const c of items) {
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${esc(c.title)}, ${esc(c.when)} | MileCheck</title>
+  <title>${statusOf(c).prefix}${esc(c.title)}, ${esc(c.when)} | MileCheck</title>
   <meta name="description" content="${esc(`${c.title}. ${c.when}. ${c.dir}, ${c.between}. ${c.around}`)}">
   <link rel="canonical" href="https://milecheckapp.com/closures/${c.slug}/">
-  <meta property="og:title" content="${esc(c.title)}">
+  <meta property="og:title" content="${esc(statusOf(c).prefix + c.title)}">
   <meta property="og:description" content="${esc(`${c.when}. ${c.between}.`)}">
   <meta property="og:url" content="https://milecheckapp.com/closures/${c.slug}/">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
@@ -39,6 +62,7 @@ for (const c of items) {
 <main style="max-width:760px;margin:0 auto;padding:34px 20px;line-height:1.6">
   <p><a href="../">← All live closures</a></p>
   <h1>${esc(c.title)}</h1>
+  ${banner(c)}
   <p><strong>${esc(c.when)}.</strong> ${esc(c.what)}.</p>
   <table style="border-collapse:collapse;margin:16px 0">
     <tr><td style="padding:4px 16px 4px 0"><b>Road</b></td><td>${esc(c.road)}, ${esc(c.state)}</td></tr>
@@ -52,7 +76,6 @@ for (const c of items) {
   <p>${esc(c.around)}</p>
   <p>Dates on long closures move. Check <a href="${esc(c.dotUrl)}">${esc(c.dot)}</a> before you drive.</p>
   <p>This page comes from the same state DOT feed the MileCheck app uses. See the <a href="../">road closures map</a>.</p>
-  <p style="color:#666;font-size:14px">Last checked ${fmt(c.verifiedAt)}.</p>
 </main>
 </body>
 </html>
@@ -66,7 +89,7 @@ for (const c of items) {
 {
   const idx = 'closures/index.html';
   let s = fs.readFileSync(idx, 'utf8');
-    const links = items.map(c => `<li><a href="/closures/${c.slug}/">${esc(c.title)}</a>${c.when ? ` · ${esc(c.when)}` : ''}</li>`).join('');
+    const links = items.map(c => `<li><a href="/closures/${c.slug}/">${esc(statusOf(c).prefix + c.title)}</a>${c.when ? ` · ${esc(c.when)}` : ''}</li>`).join('');
   const block = `<!-- big:start --><div style="max-width:1160px;margin:6px auto 0;padding:0 20px"><p style="font-weight:700;margin:0 0 4px">Long closures</p><ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7">${links}</ul></div><!-- big:end -->`;
   if (s.includes('<!-- big:start -->')) s = s.replace(/<!-- big:start -->[\s\S]*?<!-- big:end -->/, block);
   else s = s.replace('\n  <div class="cl-wrap">', `\n  ${block}\n\n  <div class="cl-wrap">`);
