@@ -1,10 +1,9 @@
 [
  {
   "slug": "us-101-hoh-river-bridge",
-  "handwritten": true,
   "verifiedAt": "2026-09-30",
-  "title": "US 101 Hoh River Bridge closed, Oct 1–6",
-  "when": "Oct 1 to noon Oct 6, 2026",
+  "title": "US 101 closed at the Hoh River Bridge",
+  "when": "5 a.m. Oct 1 to noon Oct 6, 2026",
   "source": {
    "state": "WA",
    "recordId": "WA-705229"
@@ -20,7 +19,19 @@
    "note": null
   },
   "dot": "WSDOT",
-  "dotUrl": "https://wsdot.wa.gov/construction-planning/search-projects/us-101-hoh-river-bridge-emergency-repair"
+  "dotUrl": "https://wsdot.wa.gov/construction-planning/search-projects/us-101-hoh-river-bridge-emergency-repair",
+  "lat": 47.8054,
+  "lon": -124.2499,
+  "state": "Washington",
+  "road": "US 101",
+  "whenFaq": "From 5 a.m. Thursday, October 1, 2026 to noon Tuesday, October 6, 2026, around the clock",
+  "between": "The Hoh River Bridge between Forks and Kalaloch / Ruby Beach, Jefferson County, Olympic Peninsula",
+  "miles": "176.5 to 176.8",
+  "dir": "Both directions",
+  "what": "Inspectors found cracks in a support beam, and WSDOT is repairing them",
+  "around": "There is no nearby detour. With the bridge shut, US 101 can't cross the Hoh River. Getting between Forks and Kalaloch means going back east around the Olympic Peninsula and down through Aberdeen. Plan on several extra hours. WSDOT's posted way around: US 101 along Hood Canal, then SR 108, or SR 8 to US 12 into Aberdeen.",
+  "id": "WA-705229",
+  "extra": "If the Olympic Peninsula loop is your plan that week, drive it as two out-and-back halves, or after the bridge reopens. WSDOT schedules reopening for noon Oct 6. Check WSDOT for confirmation before you take this route."
  },
  {
   "slug": "i-70-topeka",
@@ -51,7 +62,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 39.0618,
+  "lon": -95.6792
  },
  {
   "slug": "sr-116-chimacum",
@@ -82,7 +95,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 48.0305,
+  "lon": -122.777
  },
  {
   "slug": "us-31-southbound-106th-street",
@@ -113,7 +128,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 39.9305,
+  "lon": -86.1579
  },
  {
   "slug": "us-35-la-porte",
@@ -144,7 +161,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 41.597,
+  "lon": -86.7098
  },
  {
   "slug": "us-50-slide-repair-mile-47",
@@ -175,7 +194,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 38.6899,
+  "lon": -86.7318
  },
  {
   "slug": "us-6-andover-bridge",
@@ -206,7 +227,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 41.6106,
+  "lon": -80.5713
  },
  {
   "slug": "il-9-mississippi-river-bridge-niota",
@@ -242,7 +265,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 40.624,
+  "lon": -91.2928
  },
  {
   "slug": "us-62-simon-kenton-bridge-maysville",
@@ -273,7 +298,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 38.6458,
+  "lon": -83.7624
  },
  {
   "slug": "us-60-magdalena-bridge-damage",
@@ -308,7 +335,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 34.0173,
+  "lon": -107.0364
  },
  {
   "slug": "us-62-st-francis-river-bridge",
@@ -339,7 +368,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 36.4547,
+  "lon": -90.1396
  },
  {
   "slug": "us-52-metamora-brookville",
@@ -370,7 +401,9 @@
    "state": "scheduled",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 39.4976,
+  "lon": -85.284
  },
  {
   "slug": "us-421-greensburg",
@@ -401,7 +434,9 @@
    "state": "reported-closed",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 39.3044,
+  "lon": -85.4287
  },
  {
   "slug": "us-16a-keystone-bridge",
@@ -432,6 +467,8 @@
    "state": "scheduled",
    "missedChecks": 0,
    "note": null
-  }
+  },
+  "lat": 43.8938,
+  "lon": -103.4253
  }
 ]
