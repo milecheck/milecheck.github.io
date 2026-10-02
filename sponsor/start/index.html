@@ -155,7 +155,7 @@
     <label for="email">Email for the receipt and reports</label><input id="email" name="email" type="email" required>
     <label for="site">Link for your slot</label><input id="site" name="url" type="url" placeholder="https://" required>
     <label for="line">One sentence about your business <small>(optional now, under 90 characters)</small></label><input id="line" maxlength="90">
-    <p class="ps-msg">You&rsquo;ll pay on the next screen by Stripe. Send your logo to <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> after. By continuing you agree to the <a href="/sponsor/terms/">sponsorship terms</a>.</p>
+    <p class="ps-msg">Sending this opens an email to <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> with your picks filled in. Attach your logo if you have it. We confirm the pages are yours and send an invoice, usually the same day. By sending you agree to the <a href="/sponsor/terms/">sponsorship terms</a>.</p>
   </form>
 </div>
 <div class="ps-bar" id="bar"><div class="ps-bar-in"><div class="s" id="sum"></div><button type="button" id="go">Continue</button></div></div>
@@ -202,7 +202,7 @@
     var keys=Object.keys(picked), n=keys.length, total=keys.reduce(function(s,k){return s+picked[k]},0);
     $('bar').classList.toggle('show',n>0);
     $('sum').innerHTML='<b>'+n+'</b> page'+(n===1?'':'s')+' &middot; <b>'+money(total)+'</b> a month';
-    $('go').textContent=step===1?'Continue':'Continue to payment';
+    $('go').textContent=step===1?'Continue':'Send request';
     chips();
   }
   $('chips').addEventListener('click',function(e){var b=e.target.closest('[data-f]');if(!b)return;fam=b.getAttribute('data-f');chips();render()});
@@ -213,16 +213,11 @@
     if(step===1){step=2;$('details').classList.add('show');$('details').scrollIntoView({behavior:'smooth'});summary();return}
     var f=$('details');if(!f.reportValidity())return;
     var body={pages:Object.keys(picked),company:$('company').value.trim(),email:$('email').value.trim(),url:$('site').value.trim(),line:$('line').value.trim()};
-    $('go').disabled=true;$('go').textContent='Opening checkout...';
-    fetch(W+'/sponsor/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
-      .then(function(r){return r.ok?r.json():Promise.reject(r.status)})
-      .then(function(d){if(d&&d.url)location.href=d.url;else throw 0})
-      .catch(function(){
-        var list=body.pages.map(function(k){var p=pages.find(function(x){return x.key===k});return '- '+p.title+' ('+p.path+')'}).join('\n');
-        var mail='mailto:sales@milecheckapp.com?subject='+encodeURIComponent('Sponsoring '+body.pages.length+' page(s): '+body.company)+'&body='+encodeURIComponent('Company: '+body.company+'\nLink: '+body.url+'\nSentence: '+body.line+'\n\nPages:\n'+list+'\n');
-        $('go').disabled=false;$('go').textContent='Continue to payment';
-        $('details').insertAdjacentHTML('beforeend','<p class="ps-msg"><b>Online checkout isn&rsquo;t open yet.</b> <a href="'+mail+'">Email your picks to sales@milecheckapp.com</a> and we&rsquo;ll send a payment link the same day.</p>');
-      });
+    var list=body.pages.map(function(k){var p=pages.find(function(x){return x.key===k});return '- '+p.title+' ($'+picked[k]+'/mo) https://milecheckapp.com'+p.path}).join('\n');
+    var total=body.pages.reduce(function(s,k){return s+picked[k]},0);
+    var mail='mailto:sales@milecheckapp.com?subject='+encodeURIComponent('Sponsor request: '+body.company+', '+body.pages.length+' page'+(body.pages.length===1?'':'s'))+'&body='+encodeURIComponent('Company: '+body.company+'\nEmail: '+body.email+'\nLink for the slot: '+body.url+'\nSentence: '+body.line+'\n\nPages ('+body.pages.length+', $'+total+' a month at the founding rate):\n'+list+'\n\n(Logo attached if I have it.)\n');
+    location.href=mail;
+    if(!$('sent'))$('details').insertAdjacentHTML('beforeend','<p class="ps-msg" id="sent"><b>Your email app should open with your request.</b> If it didn&rsquo;t, <a href="'+mail+'">tap here</a> or email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> with the pages you picked.</p>');
   });
   Promise.all([
     fetch('/data/sponsor-pages.json').then(function(r){return r.json()}),
