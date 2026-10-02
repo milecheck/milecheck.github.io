@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-28",
+ "generated": "2026-10-02",
  "families": [
   "home",
   "cameras",
@@ -63,6 +63,12 @@
    "sponsor": "house"
   },
   {
+   "key": "article:how-a-crash-report-reaches-your-phone",
+   "path": "/blog/how-a-crash-report-reaches-your-phone.html",
+   "title": "How a Crash Report Reaches Your Phone",
+   "sponsor": "house"
+  },
+  {
    "key": "article:how-milecheck-finds-your-mile-marker-offline",
    "path": "/blog/how-milecheck-finds-your-mile-marker-offline.html",
    "title": "How MileCheck Finds Your Mile Marker With No Cell Service",
@@ -72,6 +78,12 @@
    "key": "article:how-one-app-reads-fifty-dot-systems",
    "path": "/blog/how-one-app-reads-fifty-dot-systems.html",
    "title": "How One App Reads 50 Different State DOT Systems",
+   "sponsor": "house"
+  },
+  {
+   "key": "article:how-roads-are-funded",
+   "path": "/blog/how-roads-are-funded.html",
+   "title": "Who Pays for the Highway You're On",
    "sponsor": "house"
   },
   {
@@ -437,7 +449,7 @@
   {
    "key": "article:road-report-september-2026",
    "path": "/blog/road-report-september-2026.html",
-   "title": "MileCheck Road Report: September 1&ndash;25, 2026",
+   "title": "Highway Report, September 2026",
    "sponsor": "house"
   },
   {
@@ -597,6 +609,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:gear",
+   "path": "/gear/",
+   "title": "Every Gear Pick in One Place",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:highway-driving-tips-for-new-drivers",
    "path": "/highway-driving-tips-for-new-drivers/",
    "title": "Highway Driving Tips for New Drivers",
@@ -699,6 +717,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:rent-a-car-in-arizona",
+   "path": "/rent-a-car-in-arizona/",
+   "title": "Renting a Car in Arizona: I Said No to the First Car",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:rent-a-car-in-nyc",
    "path": "/rent-a-car-in-nyc/",
    "title": "Should I rent a car in New York City?",
@@ -735,6 +759,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:road-conditions",
+   "path": "/road-conditions/",
+   "title": "Road Conditions by State: Live Closures & Crashes",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:road-street-avenue-difference",
    "path": "/road-street-avenue-difference/",
    "title": "Road vs Street vs Avenue: What Road Names Mean",
@@ -756,6 +786,12 @@
    "key": "basics:sand-vs-salt-vs-brine",
    "path": "/sand-vs-salt-vs-brine/",
    "title": "Sand vs Salt vs Brine: How Roads Are Treated for Winter",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:search",
+   "path": "/search/",
+   "title": "Search MileCheck",
    "sponsor": "house"
   },
   {
@@ -2073,6 +2109,12 @@
    "sponsor": "house"
   },
   {
+   "key": "mountain:angeles-history",
+   "path": "/mountains/angeles/history/",
+   "title": "How often is Mount Angeles visible from Port Angeles?",
+   "sponsor": "house"
+  },
+  {
    "key": "mountain:baker",
    "path": "/mountains/baker/",
    "title": "Is Mount Baker visible right now? Live from Vancouver, BC",
@@ -2139,6 +2181,12 @@
    "sponsor": "house"
   },
   {
+   "key": "mountain:baker-history",
+   "path": "/mountains/baker/history/",
+   "title": "How often is Mount Baker visible from Vancouver, BC?",
+   "sponsor": "house"
+  },
+  {
    "key": "mountain:denali",
    "path": "/mountains/denali/",
    "title": "Is Denali visible right now? Live from Talkeetna",
@@ -2181,6 +2229,12 @@
    "sponsor": "house"
   },
   {
+   "key": "mountain:denali-history",
+   "path": "/mountains/denali/history/",
+   "title": "How often is Denali visible from Talkeetna?",
+   "sponsor": "house"
+  },
+  {
    "key": "mountain:hood",
    "path": "/mountains/hood/",
    "title": "Is Mount Hood visible right now? Live from Portland",
@@ -2220,6 +2274,12 @@
    "key": "mountain:hood-from-vancouver-wa",
    "path": "/mountains/hood/from-vancouver-wa/",
    "title": "Is Mount Hood visible from Vancouver, WA right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:hood-history",
+   "path": "/mountains/hood/history/",
+   "title": "How often is Mount Hood visible from Portland?",
    "sponsor": "house"
   },
   {
@@ -2277,6 +2337,12 @@
    "sponsor": "house"
   },
   {
+   "key": "mountain:olympics-history",
+   "path": "/mountains/olympics/history/",
+   "title": "How often are the Olympics visible from Seattle?",
+   "sponsor": "house"
+  },
+  {
    "key": "mountain:rainier",
    "path": "/mountains/rainier/",
    "title": "Is Mount Rainier visible right now? Live from Seattle",
@@ -2325,6 +2391,12 @@
    "sponsor": "house"
   },
   {
+   "key": "mountain:rainier-history",
+   "path": "/mountains/rainier/history/",
+   "title": "How often is Mount Rainier visible from Seattle?",
+   "sponsor": "house"
+  },
+  {
    "key": "mountain:sthelens",
    "path": "/mountains/sthelens/",
    "title": "Is Mount St. Helens visible right now? Live from Portland",
@@ -2367,9 +2439,27 @@
    "sponsor": "house"
   },
   {
+   "key": "mountain:sthelens-history",
+   "path": "/mountains/sthelens/history/",
+   "title": "How often is Mount St. Helens visible from Portland?",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:angeles-roads",
+   "path": "/mountains/angeles/roads/",
+   "title": "Mount Angeles road cameras and conditions right now",
+   "sponsor": "house"
+  },
+  {
    "key": "pass:anthony-lakes",
    "path": "/passes/anthony-lakes/",
    "title": "Anthony Lakes road conditions right now (I-84 & OR 237)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:baker-roads",
+   "path": "/mountains/baker/roads/",
+   "title": "Mount Baker road cameras and conditions right now",
    "sponsor": "house"
   },
   {
@@ -2388,6 +2478,12 @@
    "key": "pass:crystal-mountain",
    "path": "/passes/crystal-mountain/",
    "title": "Getting to Crystal Mountain: Live Alerts on SR 410 & the Drive from Seattle",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:denali-roads",
+   "path": "/mountains/denali/roads/",
+   "title": "Denali road cameras and conditions right now",
    "sponsor": "house"
   },
   {
@@ -2447,13 +2543,19 @@
   {
    "key": "pass:snoqualmie",
    "path": "/passes/snoqualmie/",
-   "title": "Snoqualmie Pass Conditions & Chain Requirements",
+   "title": "Snoqualmie Pass Driving Conditions Now: I-90 Cameras & Chains",
    "sponsor": "house"
   },
   {
    "key": "pass:stevens",
    "path": "/passes/stevens/",
    "title": "Stevens Pass Camera & Conditions Right Now (US-2)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:sthelens-roads",
+   "path": "/mountains/sthelens/roads/",
+   "title": "Mount St. Helens road cameras and conditions right now",
    "sponsor": "house"
   },
   {

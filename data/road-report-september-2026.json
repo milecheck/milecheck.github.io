@@ -2529,5 +2529,1648 @@
         "acres": 0
       }
     ]
-  }
+  },
+  "firesAsOf": {
+    "snapshot": "2026-09-30T23:00Z",
+    "byState": {
+      "MT": {
+        "active": 22,
+        "acres": 90497,
+        "largest": [
+          {
+            "name": "Sand Creek",
+            "county": "Beaverhead",
+            "acres": 35520,
+            "containedPct": 83
+          },
+          {
+            "name": "Davis Coulee",
+            "county": "Big Horn",
+            "acres": 15470,
+            "containedPct": 100
+          },
+          {
+            "name": "Bobcat Lakes",
+            "county": "Beaverhead",
+            "acres": 10896,
+            "containedPct": 91
+          },
+          {
+            "name": "Camp Creek",
+            "county": "Powell",
+            "acres": 9725,
+            "containedPct": 100
+          }
+        ]
+      },
+      "MN": {
+        "active": 9,
+        "acres": 55826,
+        "largest": [
+          {
+            "name": "Bear Trap",
+            "county": "St. Louis",
+            "acres": 30804,
+            "containedPct": 100
+          },
+          {
+            "name": "Thumb",
+            "county": "St. Louis",
+            "acres": 25015,
+            "containedPct": 100
+          },
+          {
+            "name": "Bald Eagle",
+            "county": "Pine",
+            "acres": 5,
+            "containedPct": null
+          },
+          {
+            "name": "Red Oak",
+            "county": "Pine",
+            "acres": 2,
+            "containedPct": null
+          }
+        ]
+      },
+      "NJ": {
+        "active": 1,
+        "acres": 20,
+        "largest": [
+          {
+            "name": "Alexander",
+            "county": "Cape May",
+            "acres": 20,
+            "containedPct": null
+          }
+        ]
+      },
+      "NC": {
+        "active": 2,
+        "acres": 1279,
+        "largest": [
+          {
+            "name": "Rosindale Road",
+            "county": "Bladen",
+            "acres": 748,
+            "containedPct": 100
+          },
+          {
+            "name": "Rose Hill Bay",
+            "county": "Duplin",
+            "acres": 531,
+            "containedPct": 100
+          }
+        ]
+      },
+      "NM": {
+        "active": 12,
+        "acres": 28559,
+        "largest": [
+          {
+            "name": "Frijoles",
+            "county": "Santa Fe",
+            "acres": 15956,
+            "containedPct": 90
+          },
+          {
+            "name": "Mimms",
+            "county": "Quay",
+            "acres": 7093,
+            "containedPct": 100
+          },
+          {
+            "name": "Trigg",
+            "county": "San Miguel",
+            "acres": 2000,
+            "containedPct": 95
+          },
+          {
+            "name": "Rayado Mesa",
+            "county": "Colfax",
+            "acres": 934,
+            "containedPct": 100
+          }
+        ]
+      },
+      "WA": {
+        "active": 25,
+        "acres": 610212,
+        "largest": [
+          {
+            "name": "LITTLE GIANT",
+            "county": "Chelan",
+            "acres": 172896,
+            "containedPct": 93
+          },
+          {
+            "name": "SINLAHEKIN",
+            "county": "Okanogan",
+            "acres": 166007,
+            "containedPct": 93
+          },
+          {
+            "name": "Kaiser Canyon",
+            "county": "Okanogan",
+            "acres": 138293,
+            "containedPct": 100
+          },
+          {
+            "name": "Modrite",
+            "county": "Ferry",
+            "acres": 57594,
+            "containedPct": 100
+          }
+        ]
+      },
+      "AR": {
+        "active": 5,
+        "acres": 2857,
+        "largest": [
+          {
+            "name": "Bunker Fire",
+            "county": "Calhoun",
+            "acres": 2849,
+            "containedPct": 95
+          },
+          {
+            "name": "Perry 89",
+            "county": "Perry",
+            "acres": 5,
+            "containedPct": null
+          },
+          {
+            "name": "White 186",
+            "county": "White",
+            "acres": 1,
+            "containedPct": null
+          },
+          {
+            "name": "Logan 214",
+            "county": "Logan",
+            "acres": 1,
+            "containedPct": null
+          }
+        ]
+      },
+      "AZ": {
+        "active": 2,
+        "acres": 502,
+        "largest": [
+          {
+            "name": "Mount Emma",
+            "county": "Mohave",
+            "acres": 368,
+            "containedPct": 100
+          },
+          {
+            "name": "Flat",
+            "county": "Navajo",
+            "acres": 134,
+            "containedPct": 100
+          }
+        ]
+      },
+      "AK": {
+        "active": 3,
+        "acres": 11251,
+        "largest": [
+          {
+            "name": "Mukluk",
+            "county": "Southeast Fairbanks",
+            "acres": 7339,
+            "containedPct": 70
+          },
+          {
+            "name": "Shaw",
+            "county": "Southeast Fairbanks",
+            "acres": 3459,
+            "containedPct": 0
+          },
+          {
+            "name": "Pogo",
+            "county": "Southeast Fairbanks",
+            "acres": 453,
+            "containedPct": 0
+          }
+        ]
+      },
+      "CO": {
+        "active": 6,
+        "acres": 161479,
+        "largest": [
+          {
+            "name": "Aspen Acres",
+            "county": "Custer",
+            "acres": 102004,
+            "containedPct": 82
+          },
+          {
+            "name": "Gold Mountain",
+            "county": "Ouray",
+            "acres": 39747,
+            "containedPct": 92
+          },
+          {
+            "name": "Willow",
+            "county": "Lake",
+            "acres": 7359,
+            "containedPct": 80
+          },
+          {
+            "name": "Elk",
+            "county": "Hinsdale",
+            "acres": 7257,
+            "containedPct": 73
+          }
+        ]
+      },
+      "OR": {
+        "active": 44,
+        "acres": 1345225,
+        "largest": [
+          {
+            "name": "ROWE CREEK COMPLEX",
+            "county": "Wheeler",
+            "acres": 373929,
+            "containedPct": 99
+          },
+          {
+            "name": "0445 CROSSWHITE",
+            "county": "Wheeler",
+            "acres": 342923,
+            "containedPct": 99
+          },
+          {
+            "name": "Second Flat",
+            "county": "Harney",
+            "acres": 105854,
+            "containedPct": 99
+          },
+          {
+            "name": "GRASSHOPPER",
+            "county": "Wasco",
+            "acres": 93972,
+            "containedPct": 98
+          }
+        ]
+      },
+      "ID": {
+        "active": 12,
+        "acres": 189524,
+        "largest": [
+          {
+            "name": "Tartar",
+            "county": "Washington",
+            "acres": 158027,
+            "containedPct": 100
+          },
+          {
+            "name": "Cascade",
+            "county": "Idaho",
+            "acres": 7475,
+            "containedPct": 80
+          },
+          {
+            "name": "Moose Mountain",
+            "county": "Clearwater",
+            "acres": 5831,
+            "containedPct": 90
+          },
+          {
+            "name": "Upper Smith",
+            "county": "Boundary",
+            "acres": 4848,
+            "containedPct": 41
+          }
+        ]
+      },
+      "CA": {
+        "active": 75,
+        "acres": 69384,
+        "largest": [
+          {
+            "name": "Plaskett",
+            "county": "Monterey",
+            "acres": 29993,
+            "containedPct": 100
+          },
+          {
+            "name": "Timber",
+            "county": "Monterey",
+            "acres": 25349,
+            "containedPct": 88
+          },
+          {
+            "name": "MP18",
+            "county": "Humboldt",
+            "acres": 7599,
+            "containedPct": 100
+          },
+          {
+            "name": "DOME",
+            "county": "Mariposa",
+            "acres": 5410,
+            "containedPct": 39
+          }
+        ]
+      },
+      "FL": {
+        "active": 8,
+        "acres": 19579,
+        "largest": [
+          {
+            "name": "Chipmunk",
+            "county": "Miami-Dade",
+            "acres": 17000,
+            "containedPct": 100
+          },
+          {
+            "name": "BLUE LAKE",
+            "county": "Indian River",
+            "acres": 950,
+            "containedPct": 100
+          },
+          {
+            "name": "3 ALPHA SIERRA",
+            "county": "Broward",
+            "acres": 774,
+            "containedPct": 100
+          },
+          {
+            "name": "H2",
+            "county": "Palm Beach",
+            "acres": 631,
+            "containedPct": 100
+          }
+        ]
+      },
+      "NV": {
+        "active": 4,
+        "acres": 99527,
+        "largest": [
+          {
+            "name": "MOUSE MEADOW",
+            "county": "Nye",
+            "acres": 52000,
+            "containedPct": 100
+          },
+          {
+            "name": "McConnell",
+            "county": "Humboldt",
+            "acres": 33762,
+            "containedPct": 99
+          },
+          {
+            "name": "QUAIL SPRINGS",
+            "county": "Lincoln",
+            "acres": 13619,
+            "containedPct": 100
+          },
+          {
+            "name": "Harvey",
+            "county": "Esmeralda",
+            "acres": 146,
+            "containedPct": 100
+          }
+        ]
+      },
+      "SD": {
+        "active": 4,
+        "acres": 818,
+        "largest": [
+          {
+            "name": "Fairpoint",
+            "county": "Meade",
+            "acres": 510,
+            "containedPct": 100
+          },
+          {
+            "name": "Gilbert",
+            "county": "Harding",
+            "acres": 211,
+            "containedPct": null
+          },
+          {
+            "name": "Dry Grass",
+            "county": "Pennington",
+            "acres": 97,
+            "containedPct": null
+          },
+          {
+            "name": "Badger",
+            "county": "Oglala Lakota",
+            "acres": 0,
+            "containedPct": null
+          }
+        ]
+      },
+      "UT": {
+        "active": 2,
+        "acres": 4774,
+        "largest": [
+          {
+            "name": "Slough Canyon",
+            "county": "Grand",
+            "acres": 4774,
+            "containedPct": 80
+          },
+          {
+            "name": "Thomas Ridge",
+            "county": "Juab",
+            "acres": 0,
+            "containedPct": null
+          }
+        ]
+      },
+      "OK": {
+        "active": 26,
+        "acres": 9654,
+        "largest": [
+          {
+            "name": "GRACEMONT",
+            "county": "Caddo",
+            "acres": 2690,
+            "containedPct": 99
+          },
+          {
+            "name": "Black Kettle",
+            "county": "Roger Mills",
+            "acres": 1527,
+            "containedPct": 100
+          },
+          {
+            "name": "MEERS",
+            "county": "Comanche",
+            "acres": 914,
+            "containedPct": 99
+          },
+          {
+            "name": "Calvary Creek",
+            "county": "Washita",
+            "acres": 906,
+            "containedPct": 100
+          }
+        ]
+      },
+      "WI": {
+        "active": 11,
+        "acres": 98,
+        "largest": [
+          {
+            "name": "Bog",
+            "county": "Iron",
+            "acres": 94,
+            "containedPct": null
+          },
+          {
+            "name": "Murray South",
+            "county": "Iron",
+            "acres": 4,
+            "containedPct": null
+          },
+          {
+            "name": "Keller Rd",
+            "county": "Sauk",
+            "acres": 0,
+            "containedPct": null
+          },
+          {
+            "name": "Woodland",
+            "county": "Oneida",
+            "acres": 0,
+            "containedPct": null
+          }
+        ]
+      },
+      "WY": {
+        "active": 4,
+        "acres": 7515,
+        "largest": [
+          {
+            "name": "Moonshine",
+            "county": "Albany",
+            "acres": 7325,
+            "containedPct": 90
+          },
+          {
+            "name": "CABIN SPRINGS",
+            "county": "Washakie",
+            "acres": 149,
+            "containedPct": 100
+          },
+          {
+            "name": "MONK",
+            "county": "Park",
+            "acres": 41,
+            "containedPct": null
+          },
+          {
+            "name": "Pacific Creek",
+            "county": "Teton",
+            "acres": 0,
+            "containedPct": null
+          }
+        ]
+      },
+      "LA": {
+        "active": 4,
+        "acres": 1146,
+        "largest": [
+          {
+            "name": "Round Prarie",
+            "county": "Morehouse",
+            "acres": 739,
+            "containedPct": 100
+          },
+          {
+            "name": "Gordie Branch",
+            "county": "Vernon",
+            "acres": 271,
+            "containedPct": 100
+          },
+          {
+            "name": "Dean",
+            "county": "Union",
+            "acres": 93,
+            "containedPct": null
+          },
+          {
+            "name": "Wild Goose",
+            "county": "Natchitoches",
+            "acres": 43,
+            "containedPct": null
+          }
+        ]
+      },
+      "TX": {
+        "active": 4,
+        "acres": 16942,
+        "largest": [
+          {
+            "name": "Star Lake",
+            "county": "Jefferson",
+            "acres": 16412,
+            "containedPct": 100
+          },
+          {
+            "name": "SAN FRANCISCO 2",
+            "county": "Starr",
+            "acres": 510,
+            "containedPct": 10
+          },
+          {
+            "name": "Brown",
+            "county": "Kaufman",
+            "acres": 15,
+            "containedPct": 10
+          },
+          {
+            "name": "Gregg 9107",
+            "county": "Gregg",
+            "acres": 5,
+            "containedPct": 0
+          }
+        ]
+      },
+      "MS": {
+        "active": 9,
+        "acres": 983,
+        "largest": [
+          {
+            "name": "Alcorn- Blue Room Rd",
+            "county": "Panola",
+            "acres": 180,
+            "containedPct": 50
+          },
+          {
+            "name": "East side of Ewell Rd. Centreville",
+            "county": "Amite",
+            "acres": 150,
+            "containedPct": 100
+          },
+          {
+            "name": "Carroll- CR 62",
+            "county": "Carroll",
+            "acres": 143,
+            "containedPct": 100
+          },
+          {
+            "name": "Attala Hwy 14",
+            "county": "Attala",
+            "acres": 124,
+            "containedPct": 100
+          }
+        ]
+      },
+      "AL": {
+        "active": 2,
+        "acres": 440,
+        "largest": [
+          {
+            "name": "OAK MOUNTAIN STATE PARK",
+            "county": "Shelby",
+            "acres": 250,
+            "containedPct": 65
+          },
+          {
+            "name": "Oak Ridge Road",
+            "county": "Fayette",
+            "acres": 190,
+            "containedPct": 95
+          }
+        ]
+      },
+      "MI": {
+        "active": 1,
+        "acres": 0,
+        "largest": [
+          {
+            "name": "Iosco-08 Roadway Smoke Check",
+            "county": "Iosco",
+            "acres": 0,
+            "containedPct": null
+          }
+        ]
+      },
+      "IL": {
+        "active": 1,
+        "acres": 0,
+        "largest": [
+          {
+            "name": "Red Bud Lane",
+            "county": "Pope",
+            "acres": 0,
+            "containedPct": null
+          }
+        ]
+      },
+      "MO": {
+        "active": 1,
+        "acres": 400,
+        "largest": [
+          {
+            "name": "HWY B",
+            "county": "Texas",
+            "acres": 400,
+            "containedPct": null
+          }
+        ]
+      },
+      "TN": {
+        "active": 2,
+        "acres": 11,
+        "largest": [
+          {
+            "name": "Chester - Roby Road",
+            "county": "Chester",
+            "acres": 11,
+            "containedPct": 0
+          },
+          {
+            "name": "DeKalb - Butterbaugh Road",
+            "county": "DeKalb",
+            "acres": 0,
+            "containedPct": 0
+          }
+        ]
+      },
+      "KY": {
+        "active": 1,
+        "acres": 3,
+        "largest": [
+          {
+            "name": "Mook-Centerview",
+            "county": "Breckinridge",
+            "acres": 3,
+            "containedPct": 0
+          }
+        ]
+      },
+      "ND": {
+        "active": 1,
+        "acres": 1,
+        "largest": [
+          {
+            "name": "Cedar Top",
+            "county": "Billings",
+            "acres": 1,
+            "containedPct": null
+          }
+        ]
+      },
+      "BC": {
+        "active": 17,
+        "acres": 170954,
+        "largest": [
+          {
+            "name": "French Bar Creek",
+            "county": "French Bar Creek",
+            "acres": 150858,
+            "containedPct": null
+          },
+          {
+            "name": "Felker Fire",
+            "county": "2.2km NW of Rosa Creek ",
+            "acres": 10421,
+            "containedPct": null
+          },
+          {
+            "name": "C10952",
+            "county": "6.4 km S of Kluskoil Lake",
+            "acres": 3924,
+            "containedPct": null
+          },
+          {
+            "name": "Sea Lion Mountain",
+            "county": "Sea Lion Mountain",
+            "acres": 3351,
+            "containedPct": null
+          }
+        ]
+      }
+    }
+  },
+  "borderWaits": {
+    "snapshots": 715,
+    "glitchesDropped": 12,
+    "all": [
+      {
+        "state": "NY",
+        "port": "Alexandria Bay",
+        "crossing": "Thousand Islands Bridge",
+        "border": "Canadian Border",
+        "readings": 640,
+        "avgMin": 5,
+        "maxMin": 20,
+        "maxAt": "2026-09-05T15:00Z"
+      },
+      {
+        "state": "WA",
+        "port": "Blaine",
+        "crossing": "Pacific Highway",
+        "border": "Canadian Border",
+        "readings": 713,
+        "avgMin": 8,
+        "maxMin": 70,
+        "maxAt": "2026-09-30T20:00Z"
+      },
+      {
+        "state": "WA",
+        "port": "Blaine",
+        "crossing": "Peace Arch",
+        "border": "Canadian Border",
+        "readings": 713,
+        "avgMin": 12,
+        "maxMin": 150,
+        "maxAt": "2026-09-21T20:00Z"
+      },
+      {
+        "state": "NY",
+        "port": "Buffalo/Niagara Falls",
+        "crossing": "Lewiston Bridge",
+        "border": "Canadian Border",
+        "readings": 713,
+        "avgMin": 3,
+        "maxMin": 48,
+        "maxAt": "2026-09-07T21:00Z"
+      },
+      {
+        "state": "NY",
+        "port": "Buffalo/Niagara Falls",
+        "crossing": "Peace Bridge",
+        "border": "Canadian Border",
+        "readings": 713,
+        "avgMin": 7,
+        "maxMin": 42,
+        "maxAt": "2026-09-07T17:00Z"
+      },
+      {
+        "state": "NY",
+        "port": "Buffalo/Niagara Falls",
+        "crossing": "Rainbow Bridge",
+        "border": "Canadian Border",
+        "readings": 715,
+        "avgMin": 7,
+        "maxMin": 90,
+        "maxAt": "2026-09-30T02:00Z"
+      },
+      {
+        "state": "ME",
+        "port": "Calais",
+        "crossing": "Ferry Point",
+        "border": "Canadian Border",
+        "readings": 657,
+        "avgMin": 0,
+        "maxMin": 5,
+        "maxAt": "2026-09-04T13:00Z"
+      },
+      {
+        "state": "ME",
+        "port": "Calais",
+        "crossing": "International Avenue",
+        "border": "Canadian Border",
+        "readings": 650,
+        "avgMin": 0,
+        "maxMin": 15,
+        "maxAt": "2026-09-30T14:00Z"
+      },
+      {
+        "state": "ME",
+        "port": "Calais",
+        "crossing": "Milltown",
+        "border": "Canadian Border",
+        "readings": 227,
+        "avgMin": 0,
+        "maxMin": 5,
+        "maxAt": "2026-09-10T14:00Z"
+      },
+      {
+        "state": "NY",
+        "port": "Champlain",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 590,
+        "avgMin": 5,
+        "maxMin": 60,
+        "maxAt": "2026-09-07T20:00Z"
+      },
+      {
+        "state": "VT",
+        "port": "Derby Line",
+        "crossing": "Derby Line I-91",
+        "border": "Canadian Border",
+        "readings": 649,
+        "avgMin": 5,
+        "maxMin": 60,
+        "maxAt": "2026-09-05T02:00Z"
+      },
+      {
+        "state": "MI",
+        "port": "Detroit",
+        "crossing": "Ambassador Bridge",
+        "border": "Canadian Border",
+        "readings": 715,
+        "avgMin": 4,
+        "maxMin": 30,
+        "maxAt": "2026-09-13T18:00Z"
+      },
+      {
+        "state": null,
+        "port": "Detroit",
+        "crossing": "Gordie Howe International Bridge ",
+        "border": "Canadian Border",
+        "readings": 715,
+        "avgMin": 4,
+        "maxMin": 45,
+        "maxAt": "2026-09-07T17:00Z"
+      },
+      {
+        "state": "MI",
+        "port": "Detroit",
+        "crossing": "Windsor Tunnel",
+        "border": "Canadian Border",
+        "readings": 715,
+        "avgMin": 4,
+        "maxMin": 20,
+        "maxAt": "2026-09-06T16:00Z"
+      },
+      {
+        "state": "VT",
+        "port": "Highgate Springs",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 643,
+        "avgMin": 9,
+        "maxMin": 170,
+        "maxAt": "2026-09-07T20:00Z"
+      },
+      {
+        "state": "ME",
+        "port": "Houlton",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 694,
+        "avgMin": 3,
+        "maxMin": 40,
+        "maxAt": "2026-09-02T18:00Z"
+      },
+      {
+        "state": "MN",
+        "port": "International Falls",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 701,
+        "avgMin": 1,
+        "maxMin": 40,
+        "maxAt": "2026-09-11T17:00Z"
+      },
+      {
+        "state": "ME",
+        "port": "Jackman",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 700,
+        "avgMin": 0,
+        "maxMin": 45,
+        "maxAt": "2026-09-07T17:00Z"
+      },
+      {
+        "state": "WA",
+        "port": "Lynden",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 377,
+        "avgMin": 6,
+        "maxMin": 45,
+        "maxAt": "2026-09-30T19:00Z"
+      },
+      {
+        "state": null,
+        "port": "Madawaska",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 694,
+        "avgMin": 2,
+        "maxMin": 30,
+        "maxAt": "2026-09-04T19:00Z"
+      },
+      {
+        "state": "NY",
+        "port": "Massena",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 673,
+        "avgMin": 0,
+        "maxMin": 0,
+        "maxAt": null
+      },
+      {
+        "state": "VT",
+        "port": "Norton",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 655,
+        "avgMin": 0,
+        "maxMin": 15,
+        "maxAt": "2026-09-23T20:00Z"
+      },
+      {
+        "state": "NY",
+        "port": "Ogdensburg",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 694,
+        "avgMin": 0,
+        "maxMin": 0,
+        "maxAt": null
+      },
+      {
+        "state": "ND",
+        "port": "Pembina",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 481,
+        "avgMin": 3,
+        "maxMin": 28,
+        "maxAt": "2026-09-01T18:00Z"
+      },
+      {
+        "state": "MI",
+        "port": "Port Huron",
+        "crossing": "Bluewater Bridge",
+        "border": "Canadian Border",
+        "readings": 689,
+        "avgMin": 4,
+        "maxMin": 86,
+        "maxAt": "2026-09-18T19:00Z"
+      },
+      {
+        "state": "MI",
+        "port": "Sault Ste. Marie",
+        "crossing": "International Bridge - SSM",
+        "border": "Canadian Border",
+        "readings": 690,
+        "avgMin": 0,
+        "maxMin": 10,
+        "maxAt": "2026-09-25T20:00Z"
+      },
+      {
+        "state": "WA",
+        "port": "Sumas",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 682,
+        "avgMin": 4,
+        "maxMin": 40,
+        "maxAt": "2026-09-27T17:00Z"
+      },
+      {
+        "state": "MT",
+        "port": "Sweetgrass",
+        "crossing": "",
+        "border": "Canadian Border",
+        "readings": 704,
+        "avgMin": 7,
+        "maxMin": 90,
+        "maxAt": "2026-09-09T03:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Andrade",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 528,
+        "avgMin": 29,
+        "maxMin": 110,
+        "maxAt": "2026-09-08T03:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Brownsville",
+        "crossing": "B&M",
+        "border": "Mexican Border",
+        "readings": 635,
+        "avgMin": 29,
+        "maxMin": 180,
+        "maxAt": "2026-09-08T01:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Brownsville",
+        "crossing": "Gateway",
+        "border": "Mexican Border",
+        "readings": 620,
+        "avgMin": 26,
+        "maxMin": 120,
+        "maxAt": "2026-09-07T21:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Brownsville",
+        "crossing": "Los Indios",
+        "border": "Mexican Border",
+        "readings": 411,
+        "avgMin": 16,
+        "maxMin": 120,
+        "maxAt": "2026-09-07T21:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Brownsville",
+        "crossing": "Veterans International",
+        "border": "Mexican Border",
+        "readings": 533,
+        "avgMin": 28,
+        "maxMin": 150,
+        "maxAt": "2026-09-15T16:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Calexico",
+        "crossing": "East",
+        "border": "Mexican Border",
+        "readings": 483,
+        "avgMin": 51,
+        "maxMin": 200,
+        "maxAt": "2026-09-15T21:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Calexico",
+        "crossing": "West",
+        "border": "Mexican Border",
+        "readings": 713,
+        "avgMin": 63,
+        "maxMin": 240,
+        "maxAt": "2026-09-08T04:00Z"
+      },
+      {
+        "state": "NM",
+        "port": "Columbus",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 707,
+        "avgMin": 5,
+        "maxMin": 30,
+        "maxAt": "2026-09-03T13:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Del Rio",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 646,
+        "avgMin": 21,
+        "maxMin": 180,
+        "maxAt": "2026-09-07T23:00Z"
+      },
+      {
+        "state": "AZ",
+        "port": "Douglas (Raul Hector Castro)",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 656,
+        "avgMin": 24,
+        "maxMin": 120,
+        "maxAt": "2026-09-14T03:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Eagle Pass",
+        "crossing": "Bridge II",
+        "border": "Mexican Border",
+        "readings": 709,
+        "avgMin": 42,
+        "maxMin": 210,
+        "maxAt": "2026-09-15T09:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "El Paso",
+        "crossing": "Bridge of the Americas (BOTA)",
+        "border": "Mexican Border",
+        "readings": 691,
+        "avgMin": 43,
+        "maxMin": 90,
+        "maxAt": "2026-09-21T04:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "El Paso",
+        "crossing": "Paso Del Norte (PDN)",
+        "border": "Mexican Border",
+        "readings": 654,
+        "avgMin": 38,
+        "maxMin": 85,
+        "maxAt": "2026-09-08T14:00Z"
+      },
+      {
+        "state": null,
+        "port": "Fort Hancock",
+        "crossing": "Fort Hancock",
+        "border": "Mexican Border",
+        "readings": 532,
+        "avgMin": 5,
+        "maxMin": 20,
+        "maxAt": "2026-09-07T00:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Hidalgo/Pharr",
+        "crossing": "Anzalduas International Bridge",
+        "border": "Mexican Border",
+        "readings": 521,
+        "avgMin": 29,
+        "maxMin": 90,
+        "maxAt": "2026-09-14T00:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Hidalgo/Pharr",
+        "crossing": "Hidalgo",
+        "border": "Mexican Border",
+        "readings": 663,
+        "avgMin": 30,
+        "maxMin": 90,
+        "maxAt": "2026-09-14T06:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Hidalgo/Pharr",
+        "crossing": "Pharr",
+        "border": "Mexican Border",
+        "readings": 207,
+        "avgMin": 22,
+        "maxMin": 60,
+        "maxAt": "2026-09-13T00:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Laredo",
+        "crossing": "Bridge II",
+        "border": "Mexican Border",
+        "readings": 704,
+        "avgMin": 28,
+        "maxMin": 80,
+        "maxAt": "2026-09-16T19:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Laredo",
+        "crossing": "Colombia Solidarity",
+        "border": "Mexican Border",
+        "readings": 345,
+        "avgMin": 5,
+        "maxMin": 60,
+        "maxAt": "2026-09-07T23:00Z"
+      },
+      {
+        "state": "AZ",
+        "port": "Lukeville",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 399,
+        "avgMin": 4,
+        "maxMin": 90,
+        "maxAt": "2026-09-07T23:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Marcelino Serna",
+        "crossing": "Tornillo",
+        "border": "Mexican Border",
+        "readings": 534,
+        "avgMin": 19,
+        "maxMin": 55,
+        "maxAt": "2026-09-21T03:00Z"
+      },
+      {
+        "state": "AZ",
+        "port": "Naco",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 510,
+        "avgMin": 9,
+        "maxMin": 60,
+        "maxAt": "2026-09-07T22:00Z"
+      },
+      {
+        "state": "AZ",
+        "port": "Nogales",
+        "crossing": "Deconcini",
+        "border": "Mexican Border",
+        "readings": 699,
+        "avgMin": 24,
+        "maxMin": 180,
+        "maxAt": "2026-09-21T09:00Z"
+      },
+      {
+        "state": "AZ",
+        "port": "Nogales",
+        "crossing": "Mariposa",
+        "border": "Mexican Border",
+        "readings": 517,
+        "avgMin": 17,
+        "maxMin": 120,
+        "maxAt": "2026-09-08T04:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Otay Mesa",
+        "crossing": "Passenger",
+        "border": "Mexican Border",
+        "readings": 699,
+        "avgMin": 92,
+        "maxMin": 240,
+        "maxAt": "2026-09-28T05:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Presidio",
+        "crossing": "PRESIDIO PORT OF ENTRY",
+        "border": "Mexican Border",
+        "readings": 705,
+        "avgMin": 8,
+        "maxMin": 60,
+        "maxAt": "2026-09-09T20:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Progreso",
+        "crossing": "Donna International Bridge",
+        "border": "Mexican Border",
+        "readings": 378,
+        "avgMin": 42,
+        "maxMin": 75,
+        "maxAt": "2026-09-05T22:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Progreso",
+        "crossing": "Progreso International Bridge",
+        "border": "Mexican Border",
+        "readings": 669,
+        "avgMin": 19,
+        "maxMin": 60,
+        "maxAt": "2026-09-08T06:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Rio Grande City",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 481,
+        "avgMin": 6,
+        "maxMin": 25,
+        "maxAt": "2026-09-06T03:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Roma",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 479,
+        "avgMin": 5,
+        "maxMin": 30,
+        "maxAt": "2026-09-08T03:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "San Luis",
+        "crossing": "San Luis I",
+        "border": "Mexican Border",
+        "readings": 703,
+        "avgMin": 27,
+        "maxMin": 180,
+        "maxAt": "2026-09-28T05:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "San Ysidro",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 687,
+        "avgMin": 108,
+        "maxMin": 240,
+        "maxAt": "2026-09-08T07:00Z"
+      },
+      {
+        "state": "NM",
+        "port": "Santa Teresa",
+        "crossing": "Santa Teresa Port of Entry",
+        "border": "Mexican Border",
+        "readings": 493,
+        "avgMin": 39,
+        "maxMin": 80,
+        "maxAt": "2026-09-08T04:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Tecate",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 531,
+        "avgMin": 125,
+        "maxMin": 300,
+        "maxAt": "2026-09-08T19:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Eagle Pass",
+        "crossing": "Bridge I",
+        "border": "Mexican Border",
+        "readings": 72,
+        "avgMin": 53,
+        "maxMin": 120,
+        "maxAt": "2026-09-14T17:00Z"
+      },
+      {
+        "state": "AZ",
+        "port": "Naco",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 36,
+        "avgMin": 31,
+        "maxMin": 90,
+        "maxAt": "2026-09-14T01:00Z"
+      }
+    ],
+    "byAvg": [
+      {
+        "state": "CA",
+        "port": "Tecate",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 531,
+        "avgMin": 125,
+        "maxMin": 300,
+        "maxAt": "2026-09-08T19:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "San Ysidro",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 687,
+        "avgMin": 108,
+        "maxMin": 240,
+        "maxAt": "2026-09-08T07:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Otay Mesa",
+        "crossing": "Passenger",
+        "border": "Mexican Border",
+        "readings": 699,
+        "avgMin": 92,
+        "maxMin": 240,
+        "maxAt": "2026-09-28T05:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Calexico",
+        "crossing": "West",
+        "border": "Mexican Border",
+        "readings": 713,
+        "avgMin": 63,
+        "maxMin": 240,
+        "maxAt": "2026-09-08T04:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Eagle Pass",
+        "crossing": "Bridge I",
+        "border": "Mexican Border",
+        "readings": 72,
+        "avgMin": 53,
+        "maxMin": 120,
+        "maxAt": "2026-09-14T17:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Calexico",
+        "crossing": "East",
+        "border": "Mexican Border",
+        "readings": 483,
+        "avgMin": 51,
+        "maxMin": 200,
+        "maxAt": "2026-09-15T21:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "El Paso",
+        "crossing": "Bridge of the Americas (BOTA)",
+        "border": "Mexican Border",
+        "readings": 691,
+        "avgMin": 43,
+        "maxMin": 90,
+        "maxAt": "2026-09-21T04:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Eagle Pass",
+        "crossing": "Bridge II",
+        "border": "Mexican Border",
+        "readings": 709,
+        "avgMin": 42,
+        "maxMin": 210,
+        "maxAt": "2026-09-15T09:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Progreso",
+        "crossing": "Donna International Bridge",
+        "border": "Mexican Border",
+        "readings": 378,
+        "avgMin": 42,
+        "maxMin": 75,
+        "maxAt": "2026-09-05T22:00Z"
+      },
+      {
+        "state": "NM",
+        "port": "Santa Teresa",
+        "crossing": "Santa Teresa Port of Entry",
+        "border": "Mexican Border",
+        "readings": 493,
+        "avgMin": 39,
+        "maxMin": 80,
+        "maxAt": "2026-09-08T04:00Z"
+      }
+    ],
+    "byMax": [
+      {
+        "state": "CA",
+        "port": "Tecate",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 531,
+        "avgMin": 125,
+        "maxMin": 300,
+        "maxAt": "2026-09-08T19:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Calexico",
+        "crossing": "West",
+        "border": "Mexican Border",
+        "readings": 713,
+        "avgMin": 63,
+        "maxMin": 240,
+        "maxAt": "2026-09-08T04:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Otay Mesa",
+        "crossing": "Passenger",
+        "border": "Mexican Border",
+        "readings": 699,
+        "avgMin": 92,
+        "maxMin": 240,
+        "maxAt": "2026-09-28T05:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "San Ysidro",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 687,
+        "avgMin": 108,
+        "maxMin": 240,
+        "maxAt": "2026-09-08T07:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Eagle Pass",
+        "crossing": "Bridge II",
+        "border": "Mexican Border",
+        "readings": 709,
+        "avgMin": 42,
+        "maxMin": 210,
+        "maxAt": "2026-09-15T09:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "Calexico",
+        "crossing": "East",
+        "border": "Mexican Border",
+        "readings": 483,
+        "avgMin": 51,
+        "maxMin": 200,
+        "maxAt": "2026-09-15T21:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Brownsville",
+        "crossing": "B&M",
+        "border": "Mexican Border",
+        "readings": 635,
+        "avgMin": 29,
+        "maxMin": 180,
+        "maxAt": "2026-09-08T01:00Z"
+      },
+      {
+        "state": "TX",
+        "port": "Del Rio",
+        "crossing": "",
+        "border": "Mexican Border",
+        "readings": 646,
+        "avgMin": 21,
+        "maxMin": 180,
+        "maxAt": "2026-09-07T23:00Z"
+      },
+      {
+        "state": "AZ",
+        "port": "Nogales",
+        "crossing": "Deconcini",
+        "border": "Mexican Border",
+        "readings": 699,
+        "avgMin": 24,
+        "maxMin": 180,
+        "maxAt": "2026-09-21T09:00Z"
+      },
+      {
+        "state": "CA",
+        "port": "San Luis",
+        "crossing": "San Luis I",
+        "border": "Mexican Border",
+        "readings": 703,
+        "avgMin": 27,
+        "maxMin": 180,
+        "maxAt": "2026-09-28T05:00Z"
+      }
+    ]
+  },
+  "bridges": [
+    {
+      "id": "WA-bridge-fremont",
+      "openings": 382,
+      "medianMin": 6,
+      "longestMin": 12
+    },
+    {
+      "id": "WA-bridge-ballard",
+      "openings": 272,
+      "medianMin": 4,
+      "longestMin": 10
+    },
+    {
+      "id": "WA-bridge-montlake",
+      "openings": 102,
+      "medianMin": 6,
+      "longestMin": 12
+    },
+    {
+      "id": "WA-bridge-south-park",
+      "openings": 49,
+      "medianMin": 6,
+      "longestMin": 14
+    },
+    {
+      "id": "WA-bridge-1st-ave-s",
+      "openings": 38,
+      "medianMin": 10,
+      "longestMin": 24
+    }
+  ]
 }
