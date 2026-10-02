@@ -702,6 +702,8 @@ GUIDES.push(...require('./guides/decision-guides-batch-2-2026-09.cjs'));
 GUIDES.push(...require('./guides/decision-guides-batch-3-canada-2026-09.cjs'));
 GUIDES.push(...require('./guides/translations-pa-pt-2026-09.cjs'));
 GUIDES.push(...require('./guides/rent-a-car-in-orlando-2026-09-25.cjs'));
+// Articles from the Codex batch of 2026-10-02 (copy as written, sourced inline, no FAQ).
+GUIDES.push(...require('./guides/articles-2026-10-02.cjs'));
 
 // Language-aware routing (2026-09-25). A guide object may carry lang:'fr' (or 'es', …).
 // Identity is lang+slug: English lives at /<slug>/, others at /<lang>/<slug>/.
@@ -832,8 +834,7 @@ ${hreflangHtml}  <meta property="og:title" content="${t}">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="${R}style.css">
-  <script type="application/ld+json">${faqJsonLd(g)}</script>
-  <script type="application/ld+json">${articleJsonLd(g)}</script>
+${g.faq && g.faq.length ? `  <script type="application/ld+json">${faqJsonLd(g)}</script>\n` : ''}  <script type="application/ld+json">${articleJsonLd(g)}</script>
   <script type="application/ld+json">${breadcrumbJsonLd(g)}</script>
   <style>
     .art{max-width:760px;margin:0 auto;padding:34px 20px 40px;}
@@ -916,11 +917,11 @@ ${(lang==='en' && AFFILIATE_BOX[g.slug]) ? `    <aside class="aff"><h3>${AFFILIA
       </div>
     </div>
 
-    <h2 style="margin-top:34px">${T.qa}</h2>
+${g.faq && g.faq.length ? `    <h2 style="margin-top:34px">${T.qa}</h2>
     <div class="faq">
 ${faqHtml}
     </div>
-
+` : ''}
 ${g.related ? `    <p class="g-related">${T.rel} ${g.related}</p>` : ''}
   </article>
 
@@ -956,6 +957,7 @@ ${g.related ? `    <p class="g-related">${T.rel} ${g.related}</p>` : ''}
         </div>
       </div>
       <p class="footer-fineprint">&copy; 2026 MileCheck LLC. ${T.fine}</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
     </div>
   </footer>
 
