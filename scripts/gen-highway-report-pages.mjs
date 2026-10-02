@@ -341,6 +341,7 @@ if (FA) {
     national.push(`<ul class="state-grid">\n        ${wst.map((k) => `<li><a href="${STATE_DIR_NAME}/${slug(k)}.html">${NAMES[k]}</a></li>`).join('\n        ')}\n      </ul>`);
   }
 }
+national.push(`<p style="margin:30px 0 0;font-size:15px;"><a href="#subscribe" style="color:#0f7a4f;font-weight:700;text-decoration:none;border-bottom:1px solid #9fd3b8;">&#9993; Get next month's report by email &rarr;</a></p>`);
 national.push(`<h2 class="rc" id="by-state">By state</h2>`);
 national.push(`<p>Each state and province has its own page with the same measures.</p>`);
 national.push(`<ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map((st) => `<li><a href="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul>`);
