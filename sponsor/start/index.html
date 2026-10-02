@@ -140,9 +140,15 @@
 <div class="ps-wrap">
   <p class="sp-label" style="margin:0 0 8px;"><a href="/sponsor/" style="color:inherit;text-decoration:none">&lsaquo; Website sponsorships</a></p>
   <h1>Pick your pages</h1>
-  <p class="ps-sub">Tick the pages you want. Each one gets your logo, one sentence and a link in the slot at the top. One sponsor per page. Founding rate, locked for the first three months, then month to month. Views are how often the slot on that page was seen in the last 28 days.</p>
+  <div style="background:#fff;border:1px solid #e3ddcf;border-left:4px solid #0f7a4f;border-radius:10px;padding:14px 18px;max-width:760px;margin:0 0 14px">
+    <p style="margin:0 0 4px;font-weight:700;color:#0f7a4f">Founding sponsor rate: $50 a month per page</p>
+    <p style="margin:0;color:#3d3d3d;font-size:15px;line-height:1.55">This is the rate for our first sponsors. It holds for your first three months, then the sponsorship continues month to month. One sponsor per page, so nobody else shares your spot.</p>
+    <p id="live30" style="display:none;margin:8px 0 0;font-size:14px;color:#0f7a4f;font-weight:600"></p>
+  </div>
+  <p class="ps-sub">Tick the pages you want. Each one gets your logo, one sentence and a link in the slot at the top. <strong style="color:#0f7a4f">View counts are live. They show how often the slot on that page was seen in the last 28 days. We started counting on September 16.</strong> Don&rsquo;t see your town, pass or highway? <a href="mailto:sales@milecheckapp.com?subject=Page%20request&body=The%20page%20I%27d%20like%20to%20sponsor%3A%20%0AMy%20business%3A%20" style="color:#0f7a4f;font-weight:600">Request a page</a> and we&rsquo;ll tell you if we can build it.</p>
   <div class="ps-filters">
     <input class="ps-search" id="q" type="search" placeholder="Search pages: Snoqualmie, Ohio, I-90&hellip;" aria-label="Search pages">
+    <select class="ps-sel" id="st" aria-label="State"><option value="">All states</option></select>
     <select class="ps-sel" id="sort" aria-label="Sort"><option value="views">Most views first</option><option value="az">A to Z</option></select>
     <label class="ps-chk"><input type="checkbox" id="showTaken"> Show taken pages</label>
   </div>
@@ -167,6 +173,39 @@
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var pages=[], views={}, taken={}, picked={}, fam='all', step=1;
   function famOf(k){return k.split(':')[0]}
+  var SN={AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'District of Columbia',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',
+    AB:'Alberta',BC:'British Columbia',MB:'Manitoba',ON:'Ontario',QC:'Quebec',NS:'Nova Scotia',NT:'Northwest Territories'};
+  var SLUG={};Object.keys(SN).forEach(function(c){SLUG[SN[c].toLowerCase().replace(/ /g,'-')]=c});
+  var CITY={atlanta:'GA',birmingham:'AL',buffalo:'NY',cincinnati:'OH',cleveland:'OH',columbus:'OH',detroit:'MI','las-vegas':'NV','los-angeles':'CA',sacramento:'CA','san-diego':'CA','san-francisco':'CA',miami:'FL',orlando:'FL',tampa:'FL',milwaukee:'WI','new-orleans':'LA','new-york-city':'NY',philadelphia:'PA',pittsburgh:'PA',phoenix:'AZ',portland:'OR','salt-lake-city':'UT',seattle:'WA',nyc:'NY',
+    'vancouver-bc':'BC',surrey:'BC',richmond:'BC',abbotsford:'BC','victoria-bc':'BC',gresham:'OR','government-camp':'OR','hood-river':'OR','vancouver-wa':'WA',longview:'WA','castle-rock':'WA',woodland:'WA',bellingham:'WA',everett:'WA',anacortes:'WA',woodinville:'WA',tacoma:'WA',olympia:'WA',kitsap:'WA',eastside:'WA','port-angeles':'WA','port-townsend':'WA',sequim:'WA','whidbey-island':'WA','san-juans':'WA',
+    anchorage:'AK',fairbanks:'AK',talkeetna:'AK',wasilla:'AK','denali-park':'AK'};
+  var COR={'i-5':'WA OR CA','i-10':'CA AZ NM TX LA MS AL FL','i-15':'CA NV AZ UT ID MT','i-20':'TX LA MS AL GA SC','i-35':'TX OK KS MO IA MN','i-4':'FL','i-40':'CA AZ NM TX OK AR TN NC','i-65':'AL TN KY IN','i-70':'UT CO KS MO IL IN OH WV PA MD','i-75':'FL GA TN KY OH MI','i-80':'CA NV UT WY NE IA IL IN OH PA NJ','i-81':'TN VA WV MD PA NY','i-90':'WA ID MT WY SD MN WI IL IN OH PA NY MA','i-94':'MT ND MN WI IL IN MI','i-95':'FL GA SC NC VA DC MD DE PA NJ NY CT RI MA NH ME'};
+  var PASS={'angeles-roads':'WA','anthony-lakes':'OR','baker-roads':'WA','cabbage-hill':'OR',cajon:'CA','crystal-mountain':'WA','denali-roads':'AK',donner:'CA',eisenhower:'CO',grapevine:'CA','hood-roads':'OR','little-cottonwood':'UT',parleys:'UT','rainier-roads':'WA',siskiyou:'OR',snoqualmie:'WA',stevens:'WA','sthelens-roads':'WA',vail:'CO'};
+  var MTN={angeles:'WA',baker:'WA',denali:'AK',hood:'OR',olympics:'WA',rainier:'WA',sthelens:'WA'};
+  var stCache={};
+  function statesOf(p){
+    if(stCache[p.key])return stCache[p.key];
+    var f=famOf(p.key), id=p.key.slice(f.length+1).replace(/^(es|pt|fr)-/,'').replace(/^km-markers-/,''), out={};
+    var add=function(c){if(c)c.split(' ').forEach(function(x){out[x]=1})};
+    if(f==='corridor')add(COR[id]);
+    else if(f==='pass')add(PASS[id]);
+    else if(f==='drawbridge')add('WA');
+    else if(f==='mountain'){var m=id.split('-')[0];var fr=id.indexOf('-from-')>-1?id.split('-from-')[1]:'';add(fr&&CITY[fr]?CITY[fr]:MTN[m])}
+    else if(p.key==='live:ferries'||p.key==='bridge:hub')add('WA');
+    else if(p.key==='bridge:more-states')add('GA ID DC KY NH VT KS SD TN');
+    else{add(SLUG[id]||CITY[id]);
+      if(!Object.keys(out).length){var w=(p.path||'').toLowerCase();Object.keys(SLUG).forEach(function(n){if(w.indexOf(n)>-1)add(SLUG[n])});Object.keys(CITY).forEach(function(n){if((n.length>5||n==='nyc')&&w.indexOf(n)>-1)add(CITY[n])});
+        if(w.indexOf('wa-or-co')>-1)add('WA OR CO');}}
+    return stCache[p.key]=Object.keys(out);
+  }
+  function langOf(p){var m=p.key.match(/:(es|pt|fr)-/);return m?{es:'En español',pt:'Em português',fr:'En français'}[m[1]]:''}
+  function stateOpts(){
+    var c={},none=0;pages.forEach(function(p){var a=statesOf(p);if(!a.length)none++;a.forEach(function(x){c[x]=(c[x]||0)+1})});
+    var cur=$('st').value, h='<option value="">All states</option>';
+    Object.keys(c).sort(function(a,b){return SN[a].localeCompare(SN[b])}).forEach(function(x){h+='<option value="'+x+'">'+esc(SN[x])+' ('+c[x]+')</option>'});
+    h+='<option value="none">Nationwide pages ('+none+')</option>';
+    $('st').innerHTML=h;$('st').value=cur;
+  }
   function priceOf(p){return typeof p.price==='number'?p.price:DEFAULT_PRICE}
   function money(n){return '$'+n.toLocaleString('en-US')}
   function chips(){
@@ -181,6 +220,7 @@
     var rows=pages.filter(function(p){
       if(fam==='picked'?!picked[p.key]:(fam!=='all'&&famOf(p.key)!==fam))return false;
       if(!showTaken&&taken[p.key]&&!picked[p.key])return false;
+      var stv=$('st').value; if(stv){var sa=statesOf(p); if(stv==='none'?sa.length:sa.indexOf(stv)<0)return false}
       return !q||(p.title+' '+p.path+' '+p.key).toLowerCase().indexOf(q)>-1;
     });
     rows.sort(sort==='az'?function(a,b){return a.title.localeCompare(b.title)}:function(a,b){return (views[b.key]||0)-(views[a.key]||0)||a.title.localeCompare(b.title)});
@@ -192,7 +232,7 @@
       h+='<div class="ps-group"><h2><span>'+esc(FAM[f]||f)+'</span><button type="button" data-all="'+f+'">Select all shown</button></h2>';
       groups[f].forEach(function(p){
         var tk=taken[p.key]&&!picked[p.key], v=views[p.key];
-        h+='<label class="ps-row'+(tk?' taken':'')+'"><input type="checkbox" data-k="'+esc(p.key)+'"'+(picked[p.key]?' checked':'')+(tk?' disabled':'')+'><span class="t"><b>'+esc(p.title)+'</b><a href="'+esc(p.path)+'" target="_blank" rel="noopener">'+esc(p.path)+'</a></span><span class="v">'+(v?v.toLocaleString('en-US')+' views':'New page')+'</span><span class="p">'+(tk?'Taken':money(priceOf(p))+'/mo')+'</span></label>';
+        h+='<label class="ps-row'+(tk?' taken':'')+'"><input type="checkbox" data-k="'+esc(p.key)+'"'+(picked[p.key]?' checked':'')+(tk?' disabled':'')+'><span class="t"><b>'+esc(p.title)+(langOf(p)?' <span style="font-size:11px;font-weight:600;color:#0f7a4f;border:1px solid #0f7a4f;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap">'+langOf(p)+'</span>':'')+'</b><a href="'+esc(p.path)+'" target="_blank" rel="noopener">'+esc(p.path)+'</a></span><span class="v">'+(v?v.toLocaleString('en-US')+' views':'New page')+'</span><span class="p">'+(tk?'Taken':money(priceOf(p))+'/mo')+'</span></label>';
       });
       h+='</div>';
     });
@@ -208,7 +248,7 @@
   $('chips').addEventListener('click',function(e){var b=e.target.closest('[data-f]');if(!b)return;fam=b.getAttribute('data-f');chips();render()});
   $('list').addEventListener('change',function(e){var k=e.target.getAttribute('data-k');if(!k)return;var p=pages.find(function(x){return x.key===k});if(e.target.checked)picked[k]=priceOf(p);else delete picked[k];summary()});
   $('list').addEventListener('click',function(e){var b=e.target.closest('[data-all]');if(!b)return;e.preventDefault();[].forEach.call($('list').querySelectorAll('.ps-group'),function(g){if(g.querySelector('[data-all]')!==b)return;[].forEach.call(g.querySelectorAll('input[data-k]:not([disabled])'),function(i){var p=pages.find(function(x){return x.key===i.getAttribute('data-k')});picked[p.key]=priceOf(p);i.checked=true})});summary()});
-  ['q','sort','showTaken'].forEach(function(id){$(id).addEventListener(id==='q'?'input':'change',render)});
+  ['q','sort','showTaken','st'].forEach(function(id){$(id).addEventListener(id==='q'?'input':'change',render)});
   $('go').addEventListener('click',function(){
     if(step===1){step=2;$('details').classList.add('show');$('details').scrollIntoView({behavior:'smooth'});summary();return}
     var f=$('details');if(!f.reportValidity())return;
@@ -230,7 +270,11 @@
     ((a[2]&&a[2].bySlot)||[]).forEach(function(x){views[x.slot]=x.impressions});
     var pre=new URLSearchParams(location.search).get('page');
     if(pre){var p=pages.find(function(x){return x.key===pre});if(p&&!taken[pre]){picked[pre]=priceOf(p);fam='picked'}}
-    chips();render();summary();
+    stateOpts();chips();render();summary();
+    fetch(W+'/sponsor-stats?minutes=30').then(function(r){return r.json()}).then(function(d){
+      var n=d&&d.ok&&d.minutes===30&&d.total?d.total.impressions:0;
+      if(n>0){$('live30').textContent='Live: sponsor spots across the site were seen '+n.toLocaleString('en-US')+' times in the last 30 minutes.';$('live30').style.display='block'}
+    }).catch(function(){});
   }).catch(function(){$('list').innerHTML='<p class="ps-empty">Couldn&rsquo;t load the page list. Email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>.</p>'});
 })();
 </script>
