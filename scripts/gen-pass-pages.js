@@ -542,6 +542,62 @@ const AREAS = [
     related: (up) => `<a href="../">all mountain passes</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
+    // The drive to the Enchantments trailheads. Leah, build-26 review of the Enchantments
+    // app, 2026-10-01: "make a dedicated page for the closures and the special map for
+    // that", then "maybe even a map like we did for others", "printable". Every fact
+    // below is from the Forest Service pages the Enchantments app cites (its
+    // access.seed.json, Stuart Lake and Snow Lakes trailhead pages; advisory.json for the
+    // orders). The storm-damage order and the alerts list were re-read 2026-10-01.
+    kind: 'area', slug: 'enchantments-roads', out: 'enchantments/roads', up: '../../',
+    url: 'https://milecheckapp.com/enchantments/roads/',
+    name: 'The Enchantments', route: 'Icicle Road', state: 'WA', states: ['WA'], stateName: 'Washington',
+    dot: 'WSDOT', credit: 'WSDOT, US Forest Service and NIFC via MileCheck',
+    // Centred on Perfection Lake in the core (the app's water.seed, OSM), because the
+    // map sheet puts its star at the centre. 14 miles holds Leavenworth, both
+    // trailheads and the US 2 / US 97 junction.
+    lat: 47.480206, lon: -120.797163, rMi: 14, markerLabel: 'Perfection Lake, the Enchantments core',
+    title: 'Enchantments trailhead roads and closures right now | MileCheck',
+    desc: 'The drive to the Stuart Lake, Snow Lakes and Eightmile trailheads from Leavenworth: Icicle Road, the storm-damage closure order, live WSDOT cameras on US 2 and US 97, and wildfires nearby. Printable map. No account.',
+    ogTitle: 'Enchantments trailhead roads and closures | MileCheck',
+    eyebrow: 'Icicle Road · Eightmile Road · US 2 · US 97 · Washington',
+    // OSM: FS 7600 is Icicle Road; FS 7601 is tagged "Eight Mile Road".
+    mapRoads: ['US 2', 'US 97', 'Icicle Road', 'FS 7600', 'FS 7601'],
+    // The turn to two of the three trailheads. Labelled on the printed sheet (review, 10/1).
+    mapLabels: { 'FS 7601': 'Eightmile Rd · FSR 7601' },
+    // Stuart Lake and Snow Lakes trailheads come in from OSM as numbered stops. Eightmile
+    // is a trailhead node the stop query does not return (OSM node 12053857534).
+    mapNotes: [
+      { label: 'Eightmile Trailhead', lat: 47.53598, lon: -120.8137, snap: 'FS 7601' },
+    ],
+    h1: 'The roads to the Enchantments',
+    hero: `Three trailheads, all off Icicle Road west of Leavenworth. Snow Lakes is 4.3 miles up the road. Stuart Lake and Eightmile are up Eightmile Road, FSR 7601. Closures, WSDOT cameras on US 2 and US 97, and wildfires within 14 miles sit under the map.`,
+    camLabel: 'live cameras within 14 mi', elev: '3,400 ft', elevLabel: 'Stuart Lake Trailhead',
+    dist: '14 mi', distNote: 'radius from the core lakes', nearWord: 'within 14 miles of the core', bannerWhere: 'on the roads to the Enchantments',
+    aboutH: 'The roads to the Enchantments',
+    lede: `What the Forest Service says about each road and trailhead, as of the dates given. Road status can change after them. Read the orders themselves before you drive.`,
+    segs: [
+      { h: 'Icicle Road and the storm-damage order', p: `Forest Order 06-17-07-2026-11 closes Forest Road 7600, Icicle Road, "starting in Sec. 1, T. 24 N., R. 15 E and continues to the end." It runs May 20, 2026 through December 31, 2027. The forest's road table, as of September 3, 2026, describes the damage as beginning near Eightmile and lists Eightmile Road 7601 to the Stuart Lake Trailhead as open. The order names neither trailhead. MileCheck last re-read the order on October 1, 2026. This is not a live feed, so road status can change after that date. <a href="https://www.fs.usda.gov/r06/okanogan-wenatchee/alerts/storm-damaged-roads-closure-wenatchee-river-district" target="_blank" rel="noopener">Read the order</a>.` },
+      { h: 'Stuart Lake Trailhead', p: `From Leavenworth, Icicle Road about 8.5 miles, left on Eightmile Road, stay right on FSR 7601 and follow it about 4 miles. The Forest Service says the road is steep and becomes washboarded, recommends high clearance and 4x4 if possible, and closes FSR 7601 to vehicles each winter. Start of the Colchuck Lake and Stuart Lake day hikes and the west end of the traverse.` },
+      { h: 'Snow Lakes Trailhead', p: `Icicle Road for 4.3 miles from Leavenworth, below the Eightmile turnoff. Vault toilets. The east end of the traverse.` },
+      { h: 'Parking and permits', p: `Parking needs a Northwest Forest Pass, an America the Beautiful pass, or the $5 day pass. From May 15 through October 31 a day-use permit is free and self-issued at the trailhead. Camping in the permit area needs an overnight permit from recreation.gov. The lots fill. Carpool or get dropped off.` },
+    ],
+    driveP: `The cameras and alerts above are the view before you leave town. In the MileCheck app your exact mile marker on US 2 and the nearest camera follow you to Leavenworth, hands-free on CarPlay and Android Auto, and the mile marker works without a signal. For the trail itself, the <a href="https://enchantmentstraverse.app/" target="_blank" rel="noopener">Enchantments Traverse Planner</a> works with no signal in the core.`,
+    faq: [
+      ['Is Icicle Road open to the Enchantments trailheads?', `The storm-damage order closes FSR 7600 from a point it gives by section, township and range to the end of the road. The Forest Service road table, as of September 3, 2026, lists Eightmile Road 7601 to the Stuart Lake Trailhead as open, and Snow Lakes Trailhead is at mile 4.3, below the Eightmile turnoff. The order names neither trailhead. Check the <a href="https://www.fs.usda.gov/r06/okanogan-wenatchee/alerts" target="_blank" rel="noopener">forest alerts page</a> before you drive.`],
+      ['Do I need high clearance for the Stuart Lake Trailhead?', `The Forest Service recommends it. FSR 7601 is steep and becomes washboarded, and the page says 4x4 if possible.`],
+      ['How far is each trailhead from Leavenworth?', `Snow Lakes Trailhead is 4.3 miles up Icicle Road. Stuart Lake Trailhead is about 8.5 miles up Icicle Road, then about 4 miles up FSR 7601.`],
+      ['What pass do I need to park?', `A Northwest Forest Pass, an America the Beautiful pass, or the $5 day pass. The day-use wilderness permit is separate, free and self-issued at the trailhead May 15 through October 31.`],
+      ['Are there fires near the Enchantments?', `Wildfires within 14 miles show on the <a href="#comap">map above</a>, from the national NIFC feed. Fire closures are separate Forest Service orders. The <a href="../../fire/">wildfire map</a> covers the rest of the state.`],
+    ],
+    crumbs: [
+      { name: 'MileCheck', item: 'https://milecheckapp.com/' },
+      { name: 'Mountain Passes', item: 'https://milecheckapp.com/passes/' },
+      { name: 'The Enchantments', item: 'https://milecheckapp.com/enchantments/roads/' },
+    ],
+    ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on US 2 and US 97, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
+    related: (up) => `<a href="${up}passes/stevens/">Stevens Pass</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a> · <a href="https://enchantmentstraverse.app/">Enchantments Traverse Planner</a>`,
+  },
+  {
     kind: 'area', slug: 'little-cottonwood', out: 'passes/little-cottonwood', up: '../../',
     url: 'https://milecheckapp.com/passes/little-cottonwood/',
     name: 'Little Cottonwood Canyon', route: 'UT-210', state: 'UT', states: ['UT'], stateName: 'Utah',

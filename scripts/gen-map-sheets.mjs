@@ -504,7 +504,7 @@ function layout(p, d) {
   const northLeft = !!(inset && inset.corner === 'tr');
   taken.push(northLeft ? { x0: 0, y0: 0, x1: 46, y1: 52 } : { x0: W - 46, y0: 0, x1: W, y1: 52 });
 
-  const roadLabels = placeRoadLabels(d, main, W, H, taken, hit, 12);
+  const roadLabels = placeRoadLabels(d, main, W, H, taken, hit, 12, p.mapLabels);
   const towns = placeTowns(p, d, main, W, H, taken, hit, stops, 10);
 
   if (inset) {
@@ -520,35 +520,46 @@ function layout(p, d) {
   return { wide, W, H, main, stops, onMain, star, inset, roadLabels, towns, notes, northLeft, centre: d.centre, roads: d.roads };
 }
 
-function placeRoadLabels(d, v, W, H, taken, hit, max) {
+// mapLabels (optional, per page): { 'FS 7601': 'Eightmile Rd · FS 7601' }. Those roads are
+// labelled first, with that text, even when short. Added for the Enchantments sheet, where
+// the turn readers need to find is a short forest road (review, 10/1).
+function placeRoadLabels(d, v, W, H, taken, hit, max, must = {}) {
   const groupsByLabel = new Map();
   for (const r of d.roads) {
     // A route number or a road the page names. A city street's name is noise here.
     if (!r.label || !(r.cls === 'named' || (r.ref && (MAJOR.has(r.cls) || r.cls === 'secondary')))) continue;
-    const label = r.ref ? ((r.label.match(/^[A-Z]{1,4}[ -]?\d+[A-Z]?/) || [r.label.slice(0, 8)])[0]) : r.label;
-    const g = groupsByLabel.get(label) || { cls: r.cls, px: [] };
+    const short = r.ref ? ((r.label.match(/^[A-Z]{1,4}[ -]?\d+[A-Z]?/) || [r.label.slice(0, 8)])[0]) : r.label;
+    const label = must[r.label] || must[short] || short;
+    const g = groupsByLabel.get(label) || { cls: r.cls, px: [], must: label in Object.fromEntries(Object.values(must).map((x) => [x, 1])) };
     for (const q of r.pts) { const [x, y] = v.px(q[0], q[1]); if (x > 30 && x < W - 30 && y > 20 && y < H - 20) g.px.push([x, y]); }
     groupsByLabel.set(label, g);
   }
   const out = [];
   const rank = { named: 0, motorway: 0, trunk: 1, primary: 1, secondary: 2 };
-  for (const [text, g] of [...groupsByLabel.entries()].sort((a, c) => rank[a[1].cls] - rank[c[1].cls] || c[1].px.length - a[1].px.length)) {
-    if (g.px.length < 4 || out.length >= max) continue;
+  for (const [text, g] of [...groupsByLabel.entries()].sort((a, c) => (c[1].must - a[1].must) || rank[a[1].cls] - rank[c[1].cls] || c[1].px.length - a[1].px.length)) {
+    if (g.px.length < (g.must ? 2 : 4) || (out.length >= max && !g.must)) continue;
     const xs = g.px.map((q) => q[0]), ys = g.px.map((q) => q[1]);
     const ext = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
-    if (ext < 60) continue;
+    if (ext < (g.must ? 15 : 60)) continue;
     const axis = Math.max(...xs) - Math.min(...xs) >= Math.max(...ys) - Math.min(...ys) ? 0 : 1;
     const sorted = g.px.slice().sort((a, c) => a[axis] - c[axis]);
     const w = text.length * 5.6 + 12;
     const want = ext > 420 ? 2 : 1;
     const placed = [];
+    // A must-label road may sit beside the line when every spot on it is taken (a short
+    // forest road crowded by its own trailhead markers).
+    const nudges = g.must ? [[0, 0], [-(w / 2 + 10), 0], [w / 2 + 10, 0], [0, -16], [0, 16], [-(w / 2 + 10), -16], [w / 2 + 10, 16]] : [[0, 0]];
     for (const f of [0.5, 0.3, 0.7, 0.2, 0.8, 0.4, 0.6, 0.12, 0.88]) {
       if (placed.length >= want) break;
-      const [x, y] = sorted[Math.floor(f * (sorted.length - 1))];
-      const r = { x0: x - w / 2, y0: y - 8, x1: x + w / 2, y1: y + 8 };
-      if (hit(r) || placed.some((q) => Math.hypot(q.x - x, q.y - y) < 240)) continue;
-      placed.push({ x, y }); taken.push(r);
-      out.push({ text, x: Math.round(x), y: Math.round(y), kind: /^I-\d/.test(text) ? 'i' : 'h' });
+      const [px, py] = sorted[Math.floor(f * (sorted.length - 1))];
+      for (const [dx, dy] of nudges) {
+        const x = px + dx, y = py + dy;
+        const r = { x0: x - w / 2, y0: y - 8, x1: x + w / 2, y1: y + 8 };
+        if ((g.must && (r.x0 < 4 || r.x1 > W - 4)) || hit(r) || placed.some((q) => Math.hypot(q.x - x, q.y - y) < 240)) continue;
+        placed.push({ x, y }); taken.push(r);
+        out.push({ text, x: Math.round(x), y: Math.round(y), kind: /^I-\d/.test(text) ? 'i' : 'h' });
+        break;
+      }
     }
   }
   return out;
