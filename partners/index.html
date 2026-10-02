@@ -78,6 +78,13 @@
       border-bottom: 1px solid #E5E5E5;
       background: #FFFFFF;
     }
+    .fit-wrap{overflow-x:auto;margin-top:24px;-webkit-overflow-scrolling:touch;}
+    .fit-table{border-collapse:collapse;width:100%;min-width:720px;font-size:14.5px;line-height:1.5;background:#fff;}
+    .fit-table th,.fit-table td{border:1px solid #E5E5E5;padding:12px 14px;text-align:left;vertical-align:top;}
+    .fit-table thead th{background:#0E1116;color:#fff;font-weight:700;}
+    .fit-table tbody th{font-weight:700;color:#000;white-space:nowrap;}
+    .fit-table a,.fit-note a{color:#00A86B;font-weight:700;}
+    .fit-note{margin-top:16px;font-size:16px;line-height:1.6;max-width:760px;}
     .ent-section-alt {
       background: #FAFAFA;
     }
@@ -593,6 +600,28 @@
       </div>
     </section>
 
+    <!-- ============== WHICH ONE FITS ============== -->
+    <section class="ent-section ent-section-alt" id="which-fits">
+      <div class="container">
+        <p class="ent-section-label">Ways to work together</p>
+        <h2>Which one fits?</h2>
+        <div class="fit-wrap">
+        <table class="fit-table">
+          <thead><tr><th></th><th>API</th><th>Data license</th><th>White-label SDK</th><th>Website sponsorship</th></tr></thead>
+          <tbody>
+            <tr><th>What you get</th><td>Live mile-marker lookups, road alerts and border waits</td><td>The whole milepost dataset, with updates</td><td>Mile markers and alerts inside your app</td><td>Your logo atop the pages you pick</td></tr>
+            <tr><th>Your app does</th><td>Requests live data when needed</td><td>Stores the dataset and draws its own map layer</td><td>Displays our component</td><td>No integration needed</td></tr>
+            <tr><th>Best for</th><td>Live lookups and dispatch tools</td><td>Map layers, offline use and analytics</td><td>Apps without a map team</td><td>Local businesses near the passes</td></tr>
+            <tr><th>How you pay</th><td>Dev $0. Business $499/month for 100,000 calls/day. Enterprise quoted. <a href="/api/">API page</a></td><td>Yearly quote based on use and update frequency</td><td>Quoted</td><td>$50/page/month for three months, then month to month. <a href="/sponsor/">Sponsor page</a></td></tr>
+            <tr><th>Example</th><td>A dispatch screen showing &ldquo;I-80 mile 184&rdquo;</td><td>A wildfire app&rsquo;s mile-marker map layer</td><td>A trucking app&rsquo;s driver screen</td><td>A ski shop on the Stevens Pass page</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="fit-note">Only requests that reach our server count toward your plan. For the whole dataset in your own map, choose a data license.</p>
+        <p class="fit-note">Building something bigger? We also take on joint development, quoted case by case. <a href="#contact">Get in touch</a></p>
+      </div>
+    </section>
+
     <!-- ============== AUDIENCE FIT ============== -->
     <section class="ent-section ent-section-alt">
       <div class="container">
@@ -611,14 +640,6 @@
       </div>
     </section>
 
-    <!-- ============== SHAPES OF CONVERSATION ============== -->
-    <section class="ent-section ent-section-alt">
-      <div class="container">
-        <p class="ent-section-label">Ways to work together</p>
-        <h2>Pick the model that fits &mdash; we're flexible.</h2>
-        <p style="margin-top:20px;font-size:16px;line-height:1.7;max-width:760px;"><strong>API access</strong> &mdash; the unified state DOT feeds feed, plus live commercial border-crossing waits, through one normalized endpoint. &nbsp;&middot;&nbsp; <strong>Data licensing</strong> &mdash; the 50-state milepost corpus as a static dataset or continuous sync. &nbsp;&middot;&nbsp; <strong>White-label SDK</strong> &mdash; mile-marker display and state DOT feeds embedded in your app. &nbsp;&middot;&nbsp; <strong>Joint development</strong> &mdash; co-engineering a vertical use case on the highway intelligence layer.</p>
-      </div>
-    </section>
 
     <!-- ============== FURTHER READING (2026-09-25) ============== -->
     <section class="ent-section ent-section-alt">
@@ -666,7 +687,7 @@
             </p>
             <p class="cta-body" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
               <a href="/api/" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">See the API, endpoints and pricing &rarr;</a>
-              <a href="mailto:info@milecheckapp.com?subject=Sample%20data%20request&body=Product%3A%20(milepost%20dataset%20%2F%20live%20conditions%20API%20%2F%20historical%20archive)%0AIntended%20use%3A%0AGeography%3A%20" style="display:inline-block;font-size:15px;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,0.28);border-radius:8px;padding:11px 20px;text-decoration:none;">Request a sample &rarr;</a>
+              <a href="mailto:sales@milecheckapp.com?subject=Sample%20data%20request&body=Product%3A%20(milepost%20dataset%20%2F%20live%20conditions%20API%20%2F%20historical%20archive)%0AIntended%20use%3A%0AGeography%3A%20" style="display:inline-block;font-size:15px;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,0.28);border-radius:8px;padding:11px 20px;text-decoration:none;">Request a sample &rarr;</a>
             </p>
             <p class="cta-body" style="margin-top:10px;font-size:14px;opacity:.75;">
               Developer keys are free. Business is $499 a month for 100,000 calls a day. Fleet and enterprise licences are quoted.
