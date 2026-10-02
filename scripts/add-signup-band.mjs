@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const EYEBROW = 'The Monthly Highway Report';
 const H2 = 'Closures and crashes on US highways, once a month';
-const SUB = `The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/labor-day-weekend-recap-2026.html">See a sample: the Labor Day weekend report</a>. No spam.`;
+const SUB = `The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.`;
 const FAMILIES = new Set(['cameras', 'pass', 'corridor', 'guide']);
 
 const CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
