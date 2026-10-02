@@ -23,7 +23,13 @@
   "sourceUrl": "https://www.nps.gov/mora/learn/news/chinook-cayuse-close-for-the-season-nov-20-2018.htm",
   "sourceQuote": "Chinook Pass will close between Crystal Mountain Boulevard, about 12 miles northwest of the summit, and Morse Creek, 5 miles east of the summit. These mountain passes typically close sometime in mid-November each year.",
   "retrieved": "2026-10-02",
-  "publicLine": "Usually closes mid-November and reopens late May."
+  "publicLine": "Usually closes mid-November and reopens late May.",
+  "extraSources": [
+   {
+    "label": "Reopening",
+    "url": "https://www.nps.gov/mora/learn/news/chinook-and-cayuse-passes-are-closed-for-the-season.htm"
+   }
+  ]
  },
  {
   "state": "WA",
@@ -48,7 +54,13 @@
   "sourceUrl": "https://www.nps.gov/mora/learn/news/chinook-cayuse-close-for-the-season-nov-20-2018.htm",
   "sourceQuote": "Cayuse Pass will close within the boundaries of Mount Rainier National Park between Crystal Mountain Boulevard and the Stevens Canyon Road entrance. These mountain passes typically close sometime in mid-November each year.",
   "retrieved": "2026-10-02",
-  "publicLine": "Usually closes mid-November and reopens late May."
+  "publicLine": "Usually closes mid-November and reopens late May.",
+  "extraSources": [
+   {
+    "label": "Reopening",
+    "url": "https://www.nps.gov/mora/learn/news/chinook-and-cayuse-passes-are-closed-for-the-season.htm"
+   }
+  ]
  },
  {
   "state": "WA",
@@ -196,7 +208,7 @@
  {
   "state": "WY",
   "route": "WY-296",
-  "name": "Chief Joseph Scenic Byway (NPS-described segment)",
+  "name": "Chief Joseph Scenic Byway, Cooke City to Pilot Creek",
   "segment": "9-mile segment toward Cooke City, MT closes to wheeled vehicles in winter; open year-round WY-120 to Pilot Creek",
   "typicalClose": "Winter (no date given)",
   "typicalReopen": "Mid-May through early November is open window",
@@ -204,7 +216,7 @@
   "sourceUrl": "https://www.nps.gov/yell/planyourvisit/parkroads.htm",
   "sourceQuote": "Open year-round from WY-120 to Pilot Creek Parking Lot. The 9-mile segment toward Cooke City closes to wheeled vehicles in winter, reopening mid-May through early November.",
   "retrieved": "2026-10-02",
-  "publicLine": "Open mid-May to early November."
+  "publicLine": "The 9 miles from Cooke City to Pilot Creek close to cars in winter and are usually open mid-May to early November. The rest of the byway, from WY-120 to Pilot Creek, is open all year."
  },
  {
   "state": "MT/WY",

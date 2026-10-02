@@ -21,7 +21,7 @@
   ]},
   { "heading": "For businesses", "items": [
     { "text": "Sponsor a page on milecheckapp.com, or the next Highway Report.", "href": "/sponsor/" },
-    { "text": "The MileCheck data API: mile markers, alerts, bridges.", "href": "/api/" },
+    { "text": "The MileCheck data API, for businesses that want our mile markers and road alerts in their own systems.", "href": "/api/" },
     { "text": "A page for fleets.", "href": "/fleets/" },
     { "text": "Early access list for a dash display that shows your mile marker.", "href": "/dash-preorder.html" }
   ]}

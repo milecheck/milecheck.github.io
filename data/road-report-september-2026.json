@@ -4894,7 +4894,7 @@
         "maxAt": "2026-09-13T18:00Z"
       },
       {
-        "state": null,
+        "state": "MI",
         "port": "Detroit",
         "crossing": "Gordie Howe International Bridge ",
         "border": "Canadian Border",
@@ -4964,7 +4964,7 @@
         "maxAt": "2026-09-30T19:00Z"
       },
       {
-        "state": null,
+        "state": "ME",
         "port": "Madawaska",
         "crossing": "",
         "border": "Canadian Border",
@@ -5184,7 +5184,7 @@
         "maxAt": "2026-09-08T14:00Z"
       },
       {
-        "state": null,
+        "state": "TX",
         "port": "Fort Hancock",
         "crossing": "Fort Hancock",
         "border": "Mexican Border",
@@ -5354,7 +5354,7 @@
         "maxAt": "2026-09-08T03:00Z"
       },
       {
-        "state": "CA",
+        "state": "AZ",
         "port": "San Luis",
         "crossing": "San Luis I",
         "border": "Mexican Border",
@@ -5608,7 +5608,7 @@
         "maxAt": "2026-09-21T09:00Z"
       },
       {
-        "state": "CA",
+        "state": "AZ",
         "port": "San Luis",
         "crossing": "San Luis I",
         "border": "Mexican Border",
