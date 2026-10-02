@@ -2517,6 +2517,34 @@
       "places": []
     }
   },
+  "seasonalClosures": {
+    "SD": [
+      {
+        "route": "US-18",
+        "headline": "Incident/event: ROAD CLOSED FOR THE SEASON, rough road",
+        "firstSeen": "2026-09-29",
+        "start": "2026-09-29T20:52:18.000Z",
+        "end": null
+      }
+    ],
+    "WA": [
+      {
+        "route": null,
+        "headline": "Beginning Monday, April 27, until further notice: Crews are rebuilding the SR 504 Spirit Lake Outlet Bridge over South Coldwater Creek between mileposts 49-49.24. \r\n\r\nThe road remains closed beyond the winter gate due to",
+        "firstSeen": "2026-09-01",
+        "start": "2026-04-27T15:00:00.000Z",
+        "end": null
+      },
+      {
+        "route": null,
+        "headline": "Beginning Monday, April 27th, 2026, until further notice: Both directions of SR 504 at milepost 45.0 remain CLOSED at the winter gate for construction to rebuild the bridge and roadway. Construction is expected to be com",
+        "firstSeen": "2026-09-01",
+        "start": "2026-05-15T23:19:00.000Z",
+        "end": null
+      }
+    ]
+  },
+  "seasonalAsOf": "2026-09-30",
   "longTermProjects": [
     {
       "state": "WI",

@@ -1,7 +1,7 @@
 {
   "_readme": [
     "One sponsor slot at the top of every sponsorable page on milecheckapp.com: the home page and mile-marker map (home:), state and metro camera pages (cameras:), interstate corridors (corridor:), mountain passes (pass:), drawbridge pages (bridge:), state and province mile-marker guides (guide:), highway-basics explainers (basics:), blog posts and reports (article:), and the live-conditions pages (live:).",
-    "Sponsorships are sold by TOPIC, one sponsor per topic (Leah, 2026-09-24: not by state or location). The config still carries one entry per page, keyed <family>:<slug>; a topic sale is one entry per page in that family. Keys of any other shape are refused by the generator.",
+    "Sponsorships are sold BY PAGE, one sponsor per page (Leah, 2026-10-01; replaces the 2026-09-24 topic rule). One entry per sold page, keyed <family>:<slug>. Keys of any other shape are refused by the generator.",
     "Pricing is not public. The house slot and /sponsor/ send people to sales@milecheckapp.com. There is no online checkout (dropped 2026-09-24).",
     "Dates are inclusive YYYY-MM-DD in UTC. A slot outside its dates is skipped and the house slot renders. Pages are static, so a date change takes effect when the pages are regenerated.",
     "Fields: id (letters, digits, dashes; this is what the report groups by), name, copy (one sentence, under 90 characters), url (the sponsor's landing page, with their UTM if they want one), cta (2-4 words), logo (path under /images/sponsors/, PNG or SVG, transparent background, at least 2x for a 36px-tall display), logoW and logoH (the file's pixel size, so the browser reserves the box), start, end.",
@@ -51,5 +51,6 @@
       "logoW": 320,
       "logoH": 72
     }
-  }
+  },
+  "reportSponsorUrl": "https://buy.stripe.com/3cIaEZdwE1Du5XU0aiaAw01"
 }

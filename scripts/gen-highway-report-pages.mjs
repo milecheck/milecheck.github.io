@@ -233,6 +233,21 @@ ${body}
 
 // A "place" from a DOT feed is often a road name (101-Loop, Pacific Highway, I-70e). Keep real places only.
 const realPlace = (p) => p && p.length <= 30 && !/\d/.test(p) && !/\b(highway|hwy|freeway|fwy|loop|interstate|route|pacific|parkway|pkwy|trail|expressway|turnpike|bypass|nb|sb|eb|wb)\b/i.test(p);
+// Recurring winter closures, researched with an official source per entry (data/seasonal-closures.json,
+// refreshed each fall). "In effect" comes from the month's feed archive (D.seasonalClosures).
+let SEASONAL = [];
+try { SEASONAL = JSON.parse(readFileSync(resolve(ROOT, 'data/seasonal-closures.json'), 'utf8')).filter((e) => !/See prior entry/i.test(e.typicalClose || '')); } catch {}
+const seasonalOf = (st) => SEASONAL.filter((e) => e.publicLine).filter((e) => String(e.state).split('/').includes(st));
+const winterSection = (st, name) => {
+  const live = ((D.seasonalClosures && D.seasonalClosures[st]) || []).filter((c) => !/construct|rebuild|bridge work/i.test(c.headline));
+  const usual = seasonalOf(st);
+  if (!live.length && !usual.length) return '';
+  const out = [`<h2 class="rc">Winter closures</h2>`];
+  if (live.length) out.push(box(`On ${name}'s feed as of ${dateLong(D.seasonalAsOf).replace(/, \d{4}$/, '')}`, live.map((c) => `<strong>${esc(route(st, c.route || ''))}</strong> &mdash; &ldquo;${esc(quote(c.headline).slice(0, 200))}&rdquo;`)));
+  if (usual.length) out.push(box('Roads that usually close for winter', usual.map((e) => `<strong>${esc(e.route)}, ${esc(e.name)}</strong> &mdash; ${esc(e.publicLine || `${e.typicalClose}. ${e.typicalReopen}.`)} <a href="${esc(e.sourceUrl)}" rel="noopener" target="_blank">Source</a>`)));
+  out.push(`<p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>`);
+  return out.join('\n');
+};
 // ---------- data ----------
 const T = D.byType, J = D.jurisdictionSummary;
 const jOf = (st) => J.find((x) => x.state === st) || { state: st, crash: 0, closure: 0, construction: 0, total: 0, topRoutes: [] };
@@ -318,6 +333,14 @@ if (FA) {
   national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
   national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
 }
+{
+  const wst = [...new Set(SEASONAL.flatMap((e) => String(e.state).split('/')))].filter((k) => NAMES[k]).sort((x, y) => NAMES[x].localeCompare(NAMES[y]));
+  if (wst.length) {
+    national.push(`<h2 class="rc">Winter closures</h2>`);
+    national.push(`<p>Some mountain roads close every winter. These states have them, and each state page lists the roads, their usual closing and reopening times, and the agency source. We update the list each month through winter.</p>`);
+    national.push(`<ul class="state-grid">\n        ${wst.map((k) => `<li><a href="${STATE_DIR_NAME}/${slug(k)}.html">${NAMES[k]}</a></li>`).join('\n        ')}\n      </ul>`);
+  }
+}
 national.push(`<h2 class="rc" id="by-state">By state</h2>`);
 national.push(`<p>Each state and province has its own page with the same measures.</p>`);
 national.push(`<ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map((st) => `<li><a href="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul>`);
@@ -364,6 +387,7 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     if (S.topRoutes && S.topRoutes.length) parts.push(`<p>The routes with the most alerts were ${S.topRoutes.map((r) => esc(route(st, r))).join(', ').replace(/, ([^,]*)$/, ' and $1')}.</p>`);
   }
+  { const w = winterSection(st, name); if (w) parts.push(w); }
   if (ports.length) {
     parts.push(`<h2 class="rc">Border waits</h2><p>Passenger-lane waits at ${name}'s crossings in ${MONTH_NAME}, from hourly readings.</p>`);
     parts.push(box('By crossing', ports.map((p) => `<strong>${portLabel(p)}</strong> &mdash; highest ${hm(p.maxMin)} (${dayOf(p.maxAt)}), average ${hm(p.avgMin)}`)));
