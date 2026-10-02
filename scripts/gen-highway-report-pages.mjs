@@ -346,6 +346,14 @@ national.push(`<h2 class="rc" id="by-state">By state</h2>`);
 national.push(`<p>Each state and province has its own page with the same measures.</p>`);
 national.push(`<ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map((st) => `<li><a href="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul>`);
 
+// "What's new at MileCheck" (Leah: on every report, at the end). One file per month, written by hand
+// from that month's git log; only shipped, live things.
+try {
+  const WN = JSON.parse(readFileSync(resolve(ROOT, `data/highway-report-whats-new-${MONTH}.json`), 'utf8'));
+  national.push(`<h2 class="rc">What's new at MileCheck</h2>`);
+  national.push(`<ul class="article-list">${WN.map((w) => `<li>${w.href ? `<a href="${esc(w.href)}">${esc(w.text)}</a>` : esc(w.text)}</li>`).join('')}</ul>`);
+} catch {}
+
 const NAT_DESC = `${n(T.crash)} crashes reported in ${crashStates.length} states, ${n(T.closure)} closures and ${n(T.construction)} roadwork records on every state DOT feed in ${MONTH_NAME} ${YEAR}, with a page for each state.`;
 const natCanon = `https://milecheckapp.com/${NATIONAL_FILE}`;
 writeFileSync(resolve(ROOT, NATIONAL_FILE), page({
