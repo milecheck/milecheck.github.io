@@ -26,7 +26,7 @@ const OUT_DIR = resolve(ROOT, 'blog', STATE_DIR_NAME);
 mkdirSync(OUT_DIR, { recursive: true });
 const PUBLISHED = process.env.PUBLISHED || new Date().toISOString().slice(0, 10);
 const pubLong = new Date(PUBLISHED + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-const H1 = `Highway Report, ${MONTH_NAME} ${YEAR}`;
+const H1 = `MileCheck Highway Report, ${MONTH_NAME} ${YEAR}`;
 const WINDOW = `${MON_ABBR} 1 through ${MON_ABBR} ${LAST_DAY}`;
 const NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming', BC:'British Columbia' };
 const slug = (st) => NAMES[st].toLowerCase().replace(/\s+/g, '-');
@@ -139,7 +139,7 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
     <div class="article-wrap">
       <a href="${rel}blog/" class="article-back">All articles</a>
 
-      <p class="article-eyebrow">Highway Report</p>
+      <p class="article-eyebrow">MileCheck Highway Report</p>
       <h1 class="article-title">${esc(h1)}</h1>
       <p class="article-byline">${byline}</p>
 
@@ -325,7 +325,7 @@ national.push(`<ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b)
 const NAT_DESC = `${n(T.crash)} crashes reported in ${crashStates.length} states, ${n(T.closure)} closures and ${n(T.construction)} roadwork records on every state DOT feed in ${MONTH_NAME} ${YEAR}, with a page for each state.`;
 const natCanon = `https://milecheckapp.com/${NATIONAL_FILE}`;
 writeFileSync(resolve(ROOT, NATIONAL_FILE), page({
-  rel: '../', canonical: natCanon, pageTitle: `${H1} | MileCheck`, description: NAT_DESC, h1: H1,
+  rel: '../', canonical: natCanon, pageTitle: H1, description: NAT_DESC, h1: H1,
   byline: `by MileCheck &middot; ${pubLong}`,
   body: national.map((p) => '      ' + p).join('\n\n'),
   jsonld: { '@context': 'https://schema.org', '@type': 'NewsArticle', headline: H1, datePublished: PUBLISHED, dateModified: PUBLISHED, author: { '@type': 'Organization', name: 'MileCheck' }, publisher: { '@type': 'Organization', name: 'MileCheck', url: 'https://milecheckapp.com' }, mainEntityOfPage: natCanon, description: NAT_DESC },
@@ -380,11 +380,11 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<p>Live fire perimeters are at <a href="../../fire/">milecheckapp.com/fire</a>.</p>`);
   }
   parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state</a>.</p>`);
-  const h1 = `${name} ${H1}`;
+  const h1 = `MileCheck Highway Report: ${name}, ${MONTH_NAME} ${YEAR}`;
   const desc = `${S.crash > 0 ? `${n(S.crash)} crashes, ` : ''}${n(S.closure)} closures and ${n(S.construction)} roadwork records on ${name}'s DOT feed in ${MONTH_NAME} ${YEAR}${ports.length ? ', plus border waits' : ''}${fire ? ', plus wildfires' : ''}.`;
   const canonical = `https://milecheckapp.com/blog/${STATE_DIR_NAME}/${slug(st)}.html`;
   writeFileSync(resolve(OUT_DIR, `${slug(st)}.html`), page({
-    rel: '../../', canonical, pageTitle: `${h1} | MileCheck`, description: desc, h1,
+    rel: '../../', canonical, pageTitle: h1, description: desc, h1,
     byline: `by MileCheck &middot; ${pubLong}`,
     body: parts.map((p) => '      ' + p).join('\n\n'),
     jsonld: { '@context': 'https://schema.org', '@type': 'NewsArticle', headline: h1, datePublished: PUBLISHED, dateModified: PUBLISHED, author: { '@type': 'Organization', name: 'MileCheck' }, publisher: { '@type': 'Organization', name: 'MileCheck', url: 'https://milecheckapp.com' }, mainEntityOfPage: canonical, description: desc, isPartOf: natCanon },
@@ -393,7 +393,7 @@ for (const st of Object.keys(NAMES)) {
 }
 const idxCanon = `https://milecheckapp.com/blog/${STATE_DIR_NAME}/`;
 writeFileSync(resolve(OUT_DIR, 'index.html'), page({
-  rel: '../../', canonical: idxCanon, pageTitle: `${H1}, by State | MileCheck`,
+  rel: '../../', canonical: idxCanon, pageTitle: `${H1}, by State`,
   description: `The ${H1} for every US state and British Columbia: crashes, closures and roadwork from each state DOT feed.`,
   h1: `${H1}, by State`, byline: `by MileCheck &middot; ${pubLong}`,
   body: `      <p class="article-lead">One page per state and province, with the same measures. The <a href="../road-report-${KEY}.html">national report</a> has the totals.</p>\n      <ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map((st) => `<li><a href="${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul>`,
