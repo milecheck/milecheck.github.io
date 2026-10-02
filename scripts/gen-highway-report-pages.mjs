@@ -7,7 +7,7 @@
 // No keyword-derived weather claims (the Oct 1 review showed "snow"/"fire" matches hit street names).
 //
 //   node scripts/gen-highway-report-pages.mjs 2026-09
-//   then: add-sponsor-slots -> tag-store-links -> add-signup-band -> add-nav-search -> build-search-index -> build-sitemap
+//   then: add-sponsor-slots -> tag-store-links -> add-signup-band -> add-signup-ctas -> add-nav-search -> build-search-index -> build-sitemap -> link-jsonld (always LAST)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
