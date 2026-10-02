@@ -21,17 +21,7 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="blog.css">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type":"Question","name":"Does MileCheck need cell service to show your mile marker?","acceptedAnswer":{"@type":"Answer","text":"No. Mile marker data for all 50 states ships inside the app, so it works in dead zones. Live state DOT feeds and traffic cameras do need a connection; your position on the mile marker does not."}},
-      {"@type":"Question","name":"How does MileCheck get a decimal mile marker like 34.4?","acceptedAnswer":{"@type":"Answer","text":"It measures your GPS position against the two nearest mileposts on your route and interpolates between them, rounding to match where the physical sign is actually posted rather than a straight average."}},
-      {"@type":"Question","name":"How does MileCheck avoid flipping between two overlapping highways?","acceptedAnswer":{"@type":"Answer","text":"State DOT data is checked ahead of time for stretches where two routes share the same pavement, verified against several consecutive mileposts in a row. Once you're on one of those stretches, MileCheck holds your route steady instead of re-guessing at every GPS update."}}
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does MileCheck need cell service to show your mile marker?","acceptedAnswer":{"@type":"Answer","text":"No. Mile marker data for all 50 states ships inside the app, so it works in dead zones. Live state DOT feeds and traffic cameras do need a connection; your position on the mile marker does not."}},{"@type":"Question","name":"How does MileCheck get a decimal mile marker like 34.4?","acceptedAnswer":{"@type":"Answer","text":"It measures your GPS position against the two nearest mileposts on your route and interpolates between them, rounding to match where the physical sign is actually posted rather than a straight average."}},{"@type":"Question","name":"How does MileCheck avoid flipping between two overlapping highways?","acceptedAnswer":{"@type":"Answer","text":"State DOT data is checked ahead of time for stretches where two routes share the same pavement, verified against several consecutive mileposts in a row. Once you're on one of those stretches, MileCheck holds your route steady instead of re-guessing at every GPS update."}}],"@id":"https://milecheckapp.com/blog/how-milecheck-finds-your-mile-marker-offline.html#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
   <link rel="canonical" href="https://milecheckapp.com/blog/how-milecheck-finds-your-mile-marker-offline.html">
 <style>

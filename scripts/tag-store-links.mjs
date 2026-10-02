@@ -38,7 +38,10 @@ for (const f of walk(ROOT)) {
   const appleUrl = PT ? `https://apps.apple.com/app/apple-store/id${APPLE_ID}?pt=${PT}&ct=${slug}&mt=8` : `https://apps.apple.com/us/app/milecheck/id${APPLE_ID}?ct=${slug}&mt=8`;
   const ref = encodeURIComponent(`utm_source=milecheckapp.com&utm_medium=web&utm_campaign=${slug}`);
   const playUrl = `https://play.google.com/store/apps/details?id=${PKG}&referrer=${ref}`;
-  let out = src.replace(APPLE_RE, () => { apple++; return appleUrl; }).replace(PLAY_RE, () => { play++; return playUrl; });
+  // Leave JSON-LD alone: its sameAs must stay the canonical, untracked store URLs (link-jsonld.mjs, 2026-10-02).
+  let out = src.split(/(<script type="application\/ld\+json">[\s\S]*?<\/script>)/).map((part, i) => (i % 2
+    ? part
+    : part.replace(APPLE_RE, () => { apple++; return appleUrl; }).replace(PLAY_RE, () => { play++; return playUrl; }))).join('');
   if (out !== src) { writeFileSync(f, out); files++; }
 }
 console.log(`tagged ${apple} App Store + ${play} Play links across ${files} files${PT ? ' (with pt)' : ' (no pt yet)'}`);
