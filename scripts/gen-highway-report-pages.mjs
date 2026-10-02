@@ -50,6 +50,7 @@ const quote = (h) => { let t = String(h).replace(/\s+/g, ' ').replace(/^[-\u2013
 const dateLong = (iso) => { const [y, mo, d] = iso.split('-').map(Number); return new Date(Date.UTC(y, mo - 1, d)).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' }); };
 const fireLine = (f, st) => `${esc(title(f.name))}${f.county && st !== 'BC' ? ` (${esc(f.county)} County)` : ''}, ${n(f.acres)} acres, ${f.containedPct == null ? 'containment not published' : `${f.containedPct}% contained`}`;
 const bridgeName = (id) => ({ 'WA-bridge-fremont': 'Fremont Bridge', 'WA-bridge-ballard': 'Ballard Bridge', 'WA-bridge-university': 'University Bridge', 'WA-bridge-montlake': 'Montlake Bridge', 'WA-bridge-south-park': 'South Park Bridge', 'WA-bridge-1st-ave-s': '1st Ave S Bridge', 'WA-bridge-spokane-st': 'Lower Spokane St Bridge' }[id] || id);
+const hm = (m) => { m = Math.round(m); const h = Math.floor(m / 60), r = m % 60; return h ? `${h} hr${r ? ` ${r} min` : ''}` : `${r} min`; };
 const dayOf = (iso) => !iso ? 'no wait recorded' : dateLong(iso.slice(0, 10)).replace(/, \d{4}$/, '');
 const utcToPacific = (iso) => { const d = new Date(iso.replace(/Z$/, ':00Z').replace(':00:00Z', ':00Z')); const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', month: 'numeric', day: 'numeric', hour: 'numeric' }).formatToParts(d).map((x) => [x.type, x.value])); return `${['Jan.', 'Feb.', 'March', 'April', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'][p.month - 1]} ${p.day}, ${p.hour} ${p.dayPeriod}`; };
 // Alerts the DOT posts for multi-year projects: describe what is actually restricted. Fallback = trimmed headline.
@@ -230,6 +231,8 @@ ${body}
 }
 
 
+// A "place" from a DOT feed is often a road name (101-Loop, Pacific Highway, I-70e). Keep real places only.
+const realPlace = (p) => p && p.length <= 30 && !/\d/.test(p) && !/\b(highway|hwy|freeway|fwy|loop|interstate|route|pacific|parkway|pkwy|trail|expressway|turnpike|bypass|nb|sb|eb|wb)\b/i.test(p);
 // ---------- data ----------
 const T = D.byType, J = D.jurisdictionSummary;
 const jOf = (st) => J.find((x) => x.state === st) || { state: st, crash: 0, closure: 0, construction: 0, total: 0, topRoutes: [] };
@@ -263,21 +266,42 @@ const nums = [
 const national = [];
 national.push(`<p class="article-lead">What the state road feeds showed in ${MONTH_NAME} ${YEAR}, in all 50 states and British Columbia. ${[ 'Crashes', 'closures', 'roadwork', BW && 'border waits', BR && "Seattle's drawbridges", FA && 'wildfires'].filter(Boolean).join(', ').replace(/, ([^,]*)$/, ' and $1')}.</p>`);
 national.push(methodBox('those feeds', extras({ fires: true, border: true })));
+const JUMP = `<p style="margin:4px 0 30px;"><a href="#by-state" style="display:inline-block;background:#0F1419;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;">Find your state &darr;</a></p>`;
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
+national.push(JUMP);
 national.push(`<h2 class="rc">Crashes</h2>`);
 national.push(`<p>${n(T.crash)} crashes were reported in ${MONTH_NAME}, in the ${crashStates.length} states and provinces that publish crash data. California reports the most crashes and carries the most traffic, so it leads any national list.</p>`);
 national.push(box(`Crashes reported by state, ${MONTH_NAME}`, crashStates.slice(0, 10).map((x) => `<strong>${NAMES[x.state]}</strong> &mdash; ${n(x.crash)}`)));
+const CH = D.crashHotspots || null;
+if (CH) {
+  const rows = crashStates.slice(0, 8).filter((x) => CH[x.state] && CH[x.state].routes.length).map((x) => {
+    const h = CH[x.state]; const [r, c] = h.routes[0]; const pl = h.places.find((q) => realPlace(q.place));
+    return `<strong>${NAMES[x.state]}, ${esc(route(x.state, r))}</strong> &mdash; ${n(c)} of the state's ${n(x.crash)} crashes${pl ? `. Statewide, the most-named area was ${esc(title(pl.place))} (${pl.crashes})` : ''}`;
+  });
+  if (rows.length) national.push(box('Route with the most crash alerts, by state', rows));
+}
 if (fatal.length) national.push(`<p>${fatal.length} crashes were marked fatal by the reporting DOT.</p>` + box('Crashes marked fatal', [...fatal].sort((a, b) => a.date.localeCompare(b.date)).map((f) => `<strong>${NAMES[f.state]}, ${esc(route(f.state, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
+national.push(JUMP);
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
 national.push(`<p>${n(T.closure)} closures and ${n(T.construction)} roadwork records were on the feeds in ${MONTH_NAME}, across all 51 jurisdictions.</p>`);
-national.push(box('Routes with the most alerts, all types', D.topCorridors.slice(0, 8).map(([r, c]) => `<strong>${esc(r)}</strong> &mdash; ${n(c)}`)));
+const TYPE_WORD = { construction: 'roadwork', closure: 'closures', crash: 'crashes', weather: 'weather', hazard: 'hazards', other: 'other notices' };
+const corridorLine = (c) => {
+  const st = c.states.slice(0, 3).map(([k, v]) => `${NAMES[k] || k} ${n(v)}`).join(', ');
+  const more = c.states.length > 3 ? ` and ${c.states.length - 3} more ${c.states.length - 3 === 1 ? 'state' : 'states'}` : '';
+  const tp = (c.topPlaces || []).filter(([p]) => realPlace(p));
+  const t = c.types[0] ? ` Mostly ${TYPE_WORD[c.types[0][0]] || c.types[0][0]} (${Math.round(c.types[0][1] / c.total * 100)}%).` : '';
+  const pl = tp.length ? ` Most-named spot in ${NAMES[c.states[0][0]]} is ${esc(title(tp[0][0]))}.` : '';
+  return `<strong>${esc(c.route)}</strong> &mdash; ${n(c.total)} alerts. ${st}${more}.${t}${pl}`;
+};
+national.push(D.corridorDetail
+  ? box('Routes with the most alerts, all types. States are the feed the alert came from.', D.corridorDetail.map(corridorLine)) + `<p class="rc-fig">Some state feeds also carry a neighbor's roads. New York's feed covers northern New Jersey, which is why I-80 shows up under New York.</p>`
+  : box('Routes with the most alerts, all types', D.topCorridors.slice(0, 8).map(([r, c]) => `<strong>${esc(r)}</strong> &mdash; ${n(c)}`)));
 national.push(`<p>See any of these live on <a href="../corridors/">the corridor maps</a>.</p>`);
-national.push(box('Long-term restrictions, one per state. Dates are the window the alert posts, not a confirmed reopening.', longTerm.slice(0, 6).map(ltLine)));
 if (BW && BW.byMax.length) {
   national.push(`<h2 class="rc">Border waits</h2>`);
   national.push(`<p>Passenger-lane waits at U.S. land crossings in ${MONTH_NAME}, from hourly readings.</p>`);
-  national.push(box('Highest single reading', BW.byMax.slice(0, 6).map((p) => `<strong>${portLabel(p)}</strong>${p.state ? ` (${NAMES[p.state]})` : ''} &mdash; ${p.maxMin} min, ${dayOf(p.maxAt)}`)));
-  national.push(box('Longest average wait', BW.byAvg.slice(0, 6).map((p) => `<strong>${portLabel(p)}</strong>${p.state ? ` (${NAMES[p.state]})` : ''} &mdash; ${p.avgMin} min average`)));
+  national.push(box('Highest single reading', [...BW.all].sort((x, y) => y.maxMin - x.maxMin || y.avgMin - x.avgMin).slice(0, 6).map((p) => `<strong>${portLabel(p)}</strong>${p.state ? ` (${NAMES[p.state]})` : ''} &mdash; ${hm(p.maxMin)}, ${dayOf(p.maxAt)}`)));
+  national.push(box('Longest average wait', BW.byAvg.slice(0, 6).map((p) => `<strong>${portLabel(p)}</strong>${p.state ? ` (${NAMES[p.state]})` : ''} &mdash; ${hm(p.avgMin)} average`)));
   national.push(`<p>Live waits for all 85 crossings are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
 }
 if (BR && BR.length) {
@@ -291,9 +315,10 @@ if (FA) {
   national.push(`<h2 class="rc">Wildfires</h2>`);
   national.push(`<p>${n(faTotals.active)} wildfires were on the national wildfire list ${fireAsOf}, in the states and provinces we track. Many are mostly or fully contained.</p>`);
   national.push(box(`Largest fires by state, ${fireAsOf}`, fireStates.slice(0, 8).map(([st, s]) => `<strong>${NAMES[st]}</strong>: ${n(s.active)} listed. ${s.largest.slice(0, 3).map((f) => fireLine(f, st)).join('; ')}.`)));
+  national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
   national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
 }
-national.push(`<h2 class="rc">By state</h2>`);
+national.push(`<h2 class="rc" id="by-state">By state</h2>`);
 national.push(`<p>Each state and province has its own page with the same measures.</p>`);
 national.push(`<ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map((st) => `<li><a href="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul>`);
 
@@ -312,7 +337,7 @@ for (const st of Object.keys(NAMES)) {
   const S = jOf(st), name = NAMES[st];
   const feed = st === 'BC' ? 'the DriveBC feed' : `${name}'s department of transportation (DOT) feed`;
   const fire = FA && FA.byState[st];
-  const ports = BW ? BW.all.filter((p) => p.state === st).sort((a, b) => b.maxMin - a.maxMin).slice(0, 6) : [];
+  const ports = BW ? BW.all.filter((p) => p.state === st).sort((a, b) => b.maxMin - a.maxMin || b.avgMin - a.avgMin).slice(0, 6) : [];
   const lt = ltOf(st);
   const parts = [];
   parts.push(`<p class="article-lead">What ${feed} showed in ${MONTH_NAME} ${YEAR}. Part of the <a href="../road-report-${KEY}.html">national ${H1}</a>.</p>`);
@@ -329,16 +354,19 @@ for (const st of Object.keys(NAMES)) {
   } else {
     parts.push(`<h2 class="rc">Crashes</h2>`);
     parts.push(S.crash > 0 ? `<p>${n(S.crash)} ${S.crash === 1 ? 'crash was' : 'crashes were'} reported in ${name} in ${MONTH_NAME}.</p>` : `<p>No crashes were on ${name}'s feed in ${MONTH_NAME}. Not all states publish crash reports.</p>`);
+    const hs = D.crashHotspots && D.crashHotspots[st];
+    if (hs && hs.routes.length) parts.push(box('Routes with the most crash alerts', hs.routes.map(([r, c]) => `<strong>${esc(route(st, r))}</strong> &mdash; ${n(c)}`)));
+    const hp = hs ? hs.places.filter((q) => realPlace(q.place)) : [];
+    if (hp.length) parts.push(box('Areas named in two or more crash alerts', hp.map((p) => `<strong>${esc(title(p.place))}</strong>${p.route ? ` (${esc(route(st, p.route))})` : ''} &mdash; ${n(p.crashes)}`)));
     const fs = fatal.filter((f) => f.state === st);
     if (fs.length) parts.push(box('Crashes marked fatal by the DOT', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
     parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     if (S.topRoutes && S.topRoutes.length) parts.push(`<p>The routes with the most alerts were ${S.topRoutes.map((r) => esc(route(st, r))).join(', ').replace(/, ([^,]*)$/, ' and $1')}.</p>`);
-    if (lt) parts.push(box('Longest posted restriction. Dates are the window the alert posts, not a confirmed reopening.', [ltLine(lt)]));
   }
   if (ports.length) {
     parts.push(`<h2 class="rc">Border waits</h2><p>Passenger-lane waits at ${name}'s crossings in ${MONTH_NAME}, from hourly readings.</p>`);
-    parts.push(box('By crossing', ports.map((p) => `<strong>${portLabel(p)}</strong> &mdash; highest ${p.maxMin} min (${dayOf(p.maxAt)}), average ${p.avgMin} min`)));
+    parts.push(box('By crossing', ports.map((p) => `<strong>${portLabel(p)}</strong> &mdash; highest ${hm(p.maxMin)} (${dayOf(p.maxAt)}), average ${hm(p.avgMin)}`)));
     parts.push(`<p>Live waits are at <a href="../../borders/">milecheckapp.com/borders</a>.</p>`);
   }
   if (st === 'WA' && BR && BR.length) {
@@ -348,6 +376,7 @@ for (const st of Object.keys(NAMES)) {
   if (fire) {
     parts.push(`<h2 class="rc">Wildfires</h2><p>${name} had ${n(fire.active)} ${fire.active === 1 ? 'fire' : 'fires'} on the national wildfire list ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
     parts.push(box(`Largest fires, ${fireAsOf}`, fire.largest.map((f) => fireLine(f, st))));
+    parts.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
     parts.push(`<p>Live fire perimeters are at <a href="../../fire/">milecheckapp.com/fire</a>.</p>`);
   }
   parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state</a>.</p>`);

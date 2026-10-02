@@ -146,6 +146,8 @@ function slot({ kind, slug, state, name }) {
   const slotKey = prefixFor(kind) + slug;
   const { key, sponsor } = resolve(cfg, keysFor(kind, { slug, state }), day);
   const house = Object.assign({ url: '/sponsor/', cta: 'Ask about it', title: 'Sponsor this page.', copy: '' }, cfg.house || {});
+  // Monthly Highway Report pages sell the NEXT report, not the page (Leah 10/1).
+  if (/road-report|highway-report/.test(slug)) Object.assign(house, { title: "Sponsor next month's Highway Report.", url: cfg.reportSponsorUrl || '/sponsor/#report' });
   placed.push({ slotKey, name, via: key, sponsorId: sponsor ? sponsor.id : 'house' });
   return {
     key: slotKey,
