@@ -1,0 +1,28 @@
+[
+  { "heading": "In the app", "items": [
+    { "text": "Live road alerts now cover Alberta and Manitoba, alongside all 50 states and British Columbia." }
+  ]},
+  { "heading": "Cameras", "items": [
+    { "text": "More than 44,000 DOT cameras in 39 states and 3 provinces.", "href": "/cameras/" },
+    { "text": "New camera pages for British Columbia, Alberta, Manitoba, Ontario and Quebec.", "href": "/cameras/manitoba/" },
+    { "text": "New state pages for Tennessee, Texas, Kentucky, Massachusetts, West Virginia and Montana.", "href": "/cameras/tennessee/" }
+  ]},
+  { "heading": "Roads and closures", "items": [
+    { "text": "Pages for 14 roads that are closed for months, with the posted dates and a map.", "href": "/closures/" },
+    { "text": "Road conditions for every state.", "href": "/road-conditions/" },
+    { "text": "Mountain pass pages draw each alert along the road, with a printable map sheet.", "href": "/passes/" },
+    { "text": "An I-40 corridor map.", "href": "/corridors/i-40/" }
+  ]},
+  { "heading": "In other languages", "items": [
+    { "text": "Driving in the US, in Spanish, French and Brazilian Portuguese.", "href": "/es/driving-in-the-us-foreign-visitor-guide/" },
+    { "text": "Florida traffic cameras in Spanish and Portuguese.", "href": "/es/cameras/" },
+    { "text": "Crossing into Canada and back, and whether your phone works there, in English and Quebec French.", "href": "/fr/drive-into-canada/" },
+    { "text": "Mile marker and location pages in Punjabi.", "href": "/pa/what-is-my-mile-marker/" }
+  ]},
+  { "heading": "For businesses", "items": [
+    { "text": "Sponsor a page on milecheckapp.com, or the next Highway Report.", "href": "/sponsor/" },
+    { "text": "The MileCheck data API: mile markers, alerts, bridges.", "href": "/api/" },
+    { "text": "A page for fleets.", "href": "/fleets/" },
+    { "text": "Early access list for a dash display that shows your mile marker.", "href": "/dash-preorder.html" }
+  ]}
+]
