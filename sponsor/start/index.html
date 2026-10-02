@@ -4,15 +4,18 @@
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
 
 
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website sponsorships | MileCheck</title>
-  <meta name="description" content="Sponsor a page on milecheckapp.com: a mountain pass, a camera map, an interstate corridor, a drawbridge map, a mile-marker guide. Website only. Email for pricing, see the traffic.">
-  <link rel="canonical" href="https://milecheckapp.com/sponsor/">
+  <title>Pick your pages | MileCheck sponsorships</title>
+  <meta name="description" content="Pick the milecheckapp.com pages you want to sponsor. $50 a month per page, founding rate.">
+  <link rel="canonical" href="https://milecheckapp.com/sponsor/start/">
+  <meta name="robots" content="noindex">
   <meta property="og:title" content="Sponsor a page on milecheckapp.com | MileCheck">
   <meta property="og:description" content="Sponsor a page on milecheckapp.com. Website only, the app has no ads. Email for pricing, see the traffic.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
-  <meta property="og:url" content="https://milecheckapp.com/sponsor/">
+  <meta property="og:url" content="https://milecheckapp.com/sponsor/start/">
   <meta property="og:type" content="website">
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <link rel="icon" type="image/png" href="/images/favicon.png">
@@ -53,8 +56,6 @@
     .sp-calc .op{font-size:24px;color:#8a8fa3;padding-top:14px;}
     .sp-calc .out{font-size:30px;color:#0f7a4f;padding-top:14px;}
     .sp-calc .per{font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#5b6670;padding-top:14px;}
-    .sp-steps{list-style:decimal;margin:0;padding-left:22px;max-width:740px;font-size:15px;line-height:1.6;color:#3a444d;}
-    .sp-steps li{margin:0 0 10px;}
     .sp-note{font-size:13.5px;color:#5b6670;line-height:1.55;margin:12px 0 0;max-width:740px;}
     .sp-places{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
     .sp-place{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px 18px;text-decoration:none;color:inherit;display:block;}
@@ -77,7 +78,44 @@
     .sp-table th:not(:first-child),.sp-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;}
     .sp-val{font-size:10.5px;color:#5b6670;white-space:nowrap;margin-bottom:3px;font-family:'JetBrains Mono',monospace;}
     .sp-bars{height:150px;}
-  </style>
+  
+  .ps-wrap{max-width:1120px;margin:0 auto;padding:28px 32px 140px}
+  .ps-wrap h1{font-size:32px;margin:0 0 6px}
+  .ps-sub{color:#525252;font-size:15px;line-height:1.6;max-width:760px;margin:0 0 18px}
+  .ps-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 10px}
+  .ps-search{flex:1 1 260px;min-width:220px;font:inherit;font-size:15px;padding:10px 12px;border:1px solid #d4d4d4;border-radius:10px;background:#fff}
+  .ps-sel{font:inherit;font-size:14px;padding:9px 10px;border:1px solid #d4d4d4;border-radius:10px;background:#fff}
+  .ps-chk{font-size:14px;color:#3a444d;display:flex;gap:6px;align-items:center}
+  .ps-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .ps-chip{font:inherit;font-size:13px;padding:7px 12px;border:1px solid #d4d4d4;border-radius:999px;background:#fff;cursor:pointer;color:#3a444d}
+  .ps-chip.on{background:#0E1116;color:#fff;border-color:#0E1116}
+  .ps-group{margin:18px 0 0}
+  .ps-group h2{font-size:17px;margin:0 0 4px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .ps-group h2 button{font:inherit;font-size:13px;font-weight:600;color:#0f7a4f;background:none;border:0;cursor:pointer;padding:0}
+  .ps-row{display:flex;align-items:center;gap:12px;padding:11px 4px;border-top:1px solid #E5E5E5;cursor:pointer}
+  .ps-row input{width:18px;height:18px;flex:none;accent-color:#0f7a4f}
+  .ps-row .t{flex:1;min-width:0}
+  .ps-row .t b{font-weight:600;font-size:15px;display:block}
+  .ps-row .t a{font-size:12.5px;color:#5b6670;text-decoration:none}
+  .ps-row .v{font-size:13px;color:#5b6670;white-space:nowrap;text-align:right;min-width:92px}
+  .ps-row .p{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;white-space:nowrap;min-width:84px;text-align:right}
+  .ps-row.taken{opacity:.45;cursor:default}
+  .ps-row.taken .p{font-family:inherit;font-weight:600;font-size:12.5px}
+  .ps-empty{color:#5b6670;font-size:14px;padding:16px 4px}
+  .ps-details{display:none;margin:26px 0 0;max-width:620px}
+  .ps-details.show{display:block}
+  .ps-details label{display:block;font-size:13px;font-weight:600;color:#3a444d;margin:12px 0 5px}
+  .ps-details input,.ps-details textarea{width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:10px 12px;border:1px solid #d4d4d4;border-radius:10px;background:#fff}
+  .ps-details small{color:#5b6670;font-size:12.5px}
+  .ps-bar{position:fixed;left:0;right:0;bottom:0;background:#0E1116;color:#fff;z-index:50;transform:translateY(100%);transition:transform .2s}
+  .ps-bar.show{transform:none}
+  .ps-bar-in{max-width:1120px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+  .ps-bar .s{font-size:15px}.ps-bar .s b{font-family:'JetBrains Mono',monospace;color:#00e094}
+  .ps-bar button{font:inherit;font-weight:800;font-size:15px;background:#00e094;color:#04130d;border:0;border-radius:10px;padding:11px 18px;cursor:pointer}
+  .ps-bar button[disabled]{opacity:.5;cursor:default}
+  .ps-msg{margin-top:12px;font-size:14px;color:#3a444d}
+  @media(max-width:600px){.ps-wrap{padding:20px 16px 150px}.ps-row .v{display:none}.ps-bar-in{padding:12px 16px}.ps-wrap h1{font-size:26px}}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -99,62 +137,108 @@
     </div>
   </header>
 <main>
-  <section class="sp-hero">
-    <h1 class="sp-label" style="margin-bottom:14px;">Website sponsorships</h1>
-    <p>milecheckapp.com is where drivers check a road before they drive: live cameras, pass conditions, drawbridge status, interstate corridors, and how mile markers work in every state. A sponsor slot sits at the top of those pages. Website only. The app has no ads.</p>
-    <p class="sp-note">Sponsorships are sold by page. Pick the page your customers already read, the Snoqualmie Pass page, the Crystal Mountain page, the I-90 corridor, the Seattle cameras, and the slot at the top of that page is yours. One sponsor per page, so a tire brand and a towing company are never side by side. The groups below show where the pages are and what each group draws.</p>
-    <div class="sp-tabs" role="tablist">
-      <a class="sp-tab" href="#how">How it works</a>
-      <a class="sp-tab" href="#pricing">Pricing</a>
-      <a class="sp-tab" href="#offering">The offering</a>
-      <a class="sp-tab" href="#numbers">Traffic</a>
-    </div>
-  </section>
+<div class="ps-wrap">
+  <p class="sp-label" style="margin:0 0 8px;"><a href="/sponsor/" style="color:inherit;text-decoration:none">&lsaquo; Website sponsorships</a></p>
+  <h1>Pick your pages</h1>
+  <p class="ps-sub">Tick the pages you want. Each one gets your logo, one sentence and a link in the slot at the top. One sponsor per page. Founding rate, locked for the first three months, then month to month. Views are how often the slot on that page was seen in the last 28 days.</p>
+  <div class="ps-filters">
+    <input class="ps-search" id="q" type="search" placeholder="Search pages: Snoqualmie, Ohio, I-90&hellip;" aria-label="Search pages">
+    <select class="ps-sel" id="sort" aria-label="Sort"><option value="views">Most views first</option><option value="az">A to Z</option></select>
+    <label class="ps-chk"><input type="checkbox" id="showTaken"> Show taken pages</label>
+  </div>
+  <div class="ps-chips" id="chips"></div>
+  <div id="list"><p class="ps-empty">Loading pages&hellip;</p></div>
 
-  <section class="sp-section" id="how">
-    <h2>How it works</h2>
-    <ol class="sp-steps">
-      <li><b>Pick your pages.</b> Any page with a "Sponsor this page" slot at the top. One sponsor per page.</li>
-      <li><b>Pay online or email us.</b> Tick the pages you want below and pay by card, or email first and we'll send that page's numbers. If a page you paid for is already taken, you pick another or get your money back.</li>
-      <li><b>Send your logo, one sentence and your link.</b> Your slot goes live within two business days of getting them. Your first month starts that day.</li>
-      <li><b>Get a report each month.</b> Views and clicks for your slot. Three-month minimum, then month to month.</li>
-    </ol>
-  </section>
-
-  <section class="sp-section" id="pricing">
-    <h2>Pricing</h2>
-    <p class="sub"><b>Founding rate: $50 a month per page.</b> Locked for the first three months, then month to month. Your first month starts the day your slot goes live.</p>
-    <a class="btn" href="/sponsor/start/">Pick your pages</a>
-    <p class="sub" style="margin-top:14px">Questions first? <a href="mailto:sales@milecheckapp.com?subject=Sponsoring%20milecheckapp.com">Email sales@milecheckapp.com</a>. By paying you agree to the <a href="/sponsor/terms/">sponsorship terms</a>.</p>
-  </section>
-
-  <section class="sp-section" id="offering">
-    <h2>What a sponsor gets</h2>
-    <div class="sp-places" id="families"></div>
-    <p class="sp-note">Your logo, one sentence, and a link, in the slot at the top of the page you pick. Nothing follows the reader around, and sponsor placements use no third-party ad scripts. See the slot on any page: <a href="/passes/snoqualmie/?sponsor=preview">Snoqualmie Pass</a>, <a href="/cameras/ohio/?sponsor=preview">Ohio cameras</a>, <a href="/bridges/washington/?sponsor=preview">Washington drawbridges</a>.</p>
-  </section>
-
-  <section class="sp-section" id="numbers" hidden>
-    <h2>Traffic</h2>
-    <p class="sub"><b>Site traffic:</b> Google sent about 7,000 visits in the last 28 days (Search Console, Sept 21, 2026), and the site ranks for over a thousand highway searches. Sponsors get the page-level numbers by email.</p>
-    <p class="sub" style="margin-top:8px;"><b>The slot's own count.</b> Separately, we count how many times the sponsor strip itself was on screen for at least a second (a "view") and how many times someone tapped it. This is the number a sponsor is billed against, so it is shown here as it is. Counting started Sept 16 on 106 pages and reached all 315 on Sept 24, so most topics have a day of data, not weeks.</p>
-    <div class="sp-stats">
-      <div class="sp-stat"><div class="n live" id="nImp">—</div><div class="l">slot views, <span id="nDays">—</span></div></div>
-      <div class="sp-stat"><div class="n" id="nClk">—</div><div class="l">taps on the slot</div></div>
-      <div class="sp-stat"><div class="n" id="nPerDay">—</div><div class="l">slot views a day</div></div>
-    </div>
-    <div class="sp-days">
-      <div class="t">Slot views by day</div>
-      <div class="sp-bars" id="bars"></div>
-      <div class="sp-axis"><span id="axFrom"></span><span id="axTo"></span></div>
-      <div class="sp-legend">Each bar is one day. Taps that day are in the label.</div>
-    </div>
-    <div class="sp-days" style="margin-top:12px;">
-      <div class="t">Slot views by page group, same period</div>
-      <table class="sp-table" id="famTable"><thead><tr><th>Page group</th><th>Pages</th><th>Counting since</th><th>Slot views</th><th>Taps</th></tr></thead><tbody></tbody></table>
-      <p class="sp-note" style="margin-top:10px;">Topics that joined on Sept 24 have hours of data here. Their page traffic is not lower; the counter is younger.</p>
-    </div>
-  </section>
+  <form class="ps-details" id="details" autocomplete="on">
+    <h2 style="font-size:20px;margin:0">Your details</h2>
+    <label for="company">Company</label><input id="company" name="organization" required>
+    <label for="email">Email for the receipt and reports</label><input id="email" name="email" type="email" required>
+    <label for="site">Link for your slot</label><input id="site" name="url" type="url" placeholder="https://" required>
+    <label for="line">One sentence about your business <small>(optional now, under 90 characters)</small></label><input id="line" maxlength="90">
+    <p class="ps-msg">You&rsquo;ll pay on the next screen by Stripe. Send your logo to <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> after. By continuing you agree to the <a href="/sponsor/terms/">sponsorship terms</a>.</p>
+  </form>
+</div>
+<div class="ps-bar" id="bar"><div class="ps-bar-in"><div class="s" id="sum"></div><button type="button" id="go">Continue</button></div></div>
+<script>
+(function(){
+  var W='https://milepost-proxy.leahgerber93.workers.dev', DEFAULT_PRICE=50;
+  var FAM={home:'Mile-marker map',cameras:'Cameras',corridor:'Interstate corridors',pass:'Mountain passes',bridge:'Drawbridges',guide:'Mile-marker guides',basics:'Highway basics',article:'Reports and articles',live:'Live conditions',mountain:'Mountain Visibility',drawbridge:'Seattle Drawbridges'};
+  var $=function(id){return document.getElementById(id)};
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var pages=[], views={}, taken={}, picked={}, fam='all', step=1;
+  function famOf(k){return k.split(':')[0]}
+  function priceOf(p){return typeof p.price==='number'?p.price:DEFAULT_PRICE}
+  function money(n){return '$'+n.toLocaleString('en-US')}
+  function chips(){
+    var c={};pages.forEach(function(p){var f=famOf(p.key);c[f]=(c[f]||0)+1});
+    var h='<button type="button" class="ps-chip'+(fam==='all'?' on':'')+'" data-f="all">All ('+pages.length+')</button>';
+    Object.keys(FAM).forEach(function(f){if(c[f])h+='<button type="button" class="ps-chip'+(fam===f?' on':'')+'" data-f="'+f+'">'+esc(FAM[f])+' ('+c[f]+')</button>'});
+    var n=Object.keys(picked).length; if(n) h+='<button type="button" class="ps-chip'+(fam==='picked'?' on':'')+'" data-f="picked">Picked ('+n+')</button>';
+    $('chips').innerHTML=h;
+  }
+  function render(){
+    var q=$('q').value.trim().toLowerCase(), showTaken=$('showTaken').checked, sort=$('sort').value;
+    var rows=pages.filter(function(p){
+      if(fam==='picked'?!picked[p.key]:(fam!=='all'&&famOf(p.key)!==fam))return false;
+      if(!showTaken&&taken[p.key]&&!picked[p.key])return false;
+      return !q||(p.title+' '+p.path+' '+p.key).toLowerCase().indexOf(q)>-1;
+    });
+    rows.sort(sort==='az'?function(a,b){return a.title.localeCompare(b.title)}:function(a,b){return (views[b.key]||0)-(views[a.key]||0)||a.title.localeCompare(b.title)});
+    if(!rows.length){$('list').innerHTML='<p class="ps-empty">No pages match. Try another search or group.</p>';return}
+    var groups={},order=[];
+    rows.forEach(function(p){var f=(fam==='all'||fam==='picked')?famOf(p.key):fam;if(!groups[f]){groups[f]=[];order.push(f)}groups[f].push(p)});
+    var h='';
+    order.forEach(function(f){
+      h+='<div class="ps-group"><h2><span>'+esc(FAM[f]||f)+'</span><button type="button" data-all="'+f+'">Select all shown</button></h2>';
+      groups[f].forEach(function(p){
+        var tk=taken[p.key]&&!picked[p.key], v=views[p.key];
+        h+='<label class="ps-row'+(tk?' taken':'')+'"><input type="checkbox" data-k="'+esc(p.key)+'"'+(picked[p.key]?' checked':'')+(tk?' disabled':'')+'><span class="t"><b>'+esc(p.title)+'</b><a href="'+esc(p.path)+'" target="_blank" rel="noopener">'+esc(p.path)+'</a></span><span class="v">'+(v?v.toLocaleString('en-US')+' views':'New page')+'</span><span class="p">'+(tk?'Taken':money(priceOf(p))+'/mo')+'</span></label>';
+      });
+      h+='</div>';
+    });
+    $('list').innerHTML=h;
+  }
+  function summary(){
+    var keys=Object.keys(picked), n=keys.length, total=keys.reduce(function(s,k){return s+picked[k]},0);
+    $('bar').classList.toggle('show',n>0);
+    $('sum').innerHTML='<b>'+n+'</b> page'+(n===1?'':'s')+' &middot; <b>'+money(total)+'</b> a month';
+    $('go').textContent=step===1?'Continue':'Continue to payment';
+    chips();
+  }
+  $('chips').addEventListener('click',function(e){var b=e.target.closest('[data-f]');if(!b)return;fam=b.getAttribute('data-f');chips();render()});
+  $('list').addEventListener('change',function(e){var k=e.target.getAttribute('data-k');if(!k)return;var p=pages.find(function(x){return x.key===k});if(e.target.checked)picked[k]=priceOf(p);else delete picked[k];summary()});
+  $('list').addEventListener('click',function(e){var b=e.target.closest('[data-all]');if(!b)return;e.preventDefault();[].forEach.call($('list').querySelectorAll('.ps-group'),function(g){if(g.querySelector('[data-all]')!==b)return;[].forEach.call(g.querySelectorAll('input[data-k]:not([disabled])'),function(i){var p=pages.find(function(x){return x.key===i.getAttribute('data-k')});picked[p.key]=priceOf(p);i.checked=true})});summary()});
+  ['q','sort','showTaken'].forEach(function(id){$(id).addEventListener(id==='q'?'input':'change',render)});
+  $('go').addEventListener('click',function(){
+    if(step===1){step=2;$('details').classList.add('show');$('details').scrollIntoView({behavior:'smooth'});summary();return}
+    var f=$('details');if(!f.reportValidity())return;
+    var body={pages:Object.keys(picked),company:$('company').value.trim(),email:$('email').value.trim(),url:$('site').value.trim(),line:$('line').value.trim()};
+    $('go').disabled=true;$('go').textContent='Opening checkout...';
+    fetch(W+'/sponsor/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.ok?r.json():Promise.reject(r.status)})
+      .then(function(d){if(d&&d.url)location.href=d.url;else throw 0})
+      .catch(function(){
+        var list=body.pages.map(function(k){var p=pages.find(function(x){return x.key===k});return '- '+p.title+' ('+p.path+')'}).join('\n');
+        var mail='mailto:sales@milecheckapp.com?subject='+encodeURIComponent('Sponsoring '+body.pages.length+' page(s): '+body.company)+'&body='+encodeURIComponent('Company: '+body.company+'\nLink: '+body.url+'\nSentence: '+body.line+'\n\nPages:\n'+list+'\n');
+        $('go').disabled=false;$('go').textContent='Continue to payment';
+        $('details').insertAdjacentHTML('beforeend','<p class="ps-msg"><b>Online checkout isn&rsquo;t open yet.</b> <a href="'+mail+'">Email your picks to sales@milecheckapp.com</a> and we&rsquo;ll send a payment link the same day.</p>');
+      });
+  });
+  Promise.all([
+    fetch('/data/sponsor-pages.json').then(function(r){return r.json()}),
+    fetch('/data/sponsors.json').then(function(r){return r.json()}).catch(function(){return {}}),
+    fetch(W+'/sponsor-stats?days=28').then(function(r){return r.json()}).catch(function(){return {}})
+  ]).then(function(a){
+    pages=(a[0].pages||[]).slice();
+    var slots=(a[1]&&a[1].slots)||{};
+    Object.keys(slots).forEach(function(k){var s=slots[k];if(s&&s.id&&!/demo/i.test(s.id))taken[k]=1});
+    ((a[2]&&a[2].bySlot)||[]).forEach(function(x){views[x.slot]=x.impressions});
+    var pre=new URLSearchParams(location.search).get('page');
+    if(pre){var p=pages.find(function(x){return x.key===pre});if(p&&!taken[pre])picked[pre]=priceOf(p)}
+    chips();render();summary();
+  }).catch(function(){$('list').innerHTML='<p class="ps-empty">Couldn&rsquo;t load the page list. Email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>.</p>'});
+})();
+</script>
 </main>
 <footer class="site-footer">
     <div class="container">
@@ -166,8 +250,8 @@
         <div class="footer-col">
           <p class="footer-label">Get the app</p>
           <ul class="footer-list">
-            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=sponsor&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
-            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dsponsor" target="_blank" rel="noopener">Google Play</a></li>
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=sponsor-thanks&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dsponsor-thanks" target="_blank" rel="noopener">Google Play</a></li>
           </ul>
         </div>
         <div class="footer-col">
