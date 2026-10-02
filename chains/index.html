@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chain Control Map: live chain and traction rules by state | MileCheck</title>
+  <meta name="description" content="Are chains required? Live chain controls and traction rules from state DOTs on one map, with route and mile marker. Updates every 5 minutes.">
+
+  <meta property="og:title" content="Chain Control Map, live by state | MileCheck">
+  <meta property="og:description" content="Live chain controls and traction rules from state DOTs on one map, with route and mile marker.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/chains/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are chains required right now?","acceptedAnswer":{"@type":"Answer","text":"This map shows chain controls and traction rules that state DOTs are posting right now, with the route and mile marker. If nothing shows in your area, no chain rule is posted in the feeds. Always follow the signs on the road."}},{"@type":"Question","name":"What do R-1, R-2 and R-3 mean in California?","acceptedAnswer":{"@type":"Answer","text":"They are Caltrans chain control levels. R-1 and R-2 require chains on most vehicles, with exceptions for some four-wheel or all-wheel drive vehicles with snow tires that still carry chains. R-3 requires chains on all vehicles. See the Caltrans chain controls page for the exact rules."}},{"@type":"Question","name":"Where does this data come from?","acceptedAnswer":{"@type":"Answer","text":"From state DOT road feeds, the same ones that power the MileCheck app, refreshed every 5 minutes. Not every state publishes chain rules in its feed."}}],"@id":"https://milecheckapp.com/chains/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+
+  <style>
+    .cl-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .cl-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .cl-hero h1 .accent{color:#cf3320;}
+    .cl-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
+    .cl-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
+    @media(max-width:860px){.cl-wrap{grid-template-columns:1fr;}}
+    .cl-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
+    #clmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bigstatus{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;color:#cf3320;}
+    .bigstatus.hint{color:#5b6670;font-weight:700;}
+    .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
+    .nearme:hover{background:#2a2f36;}
+    .cl-ic{font-size:23px;line-height:1;text-align:center;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));}
+    .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
+    .fpop .fp-nm{font-weight:800;font-size:15px;}
+    .fpop .fp-st{color:#5b6670;font-size:12.5px;font-weight:600;margin:2px 0 8px;}
+    .fpop .fp-row{font-size:13px;margin:3px 0;line-height:1.45;}
+
+    .cl-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
+    .state-sel{display:flex;gap:8px;align-items:center;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 14px;}
+    .state-sel label{font-weight:800;font-size:13px;}
+    .state-sel select{flex:1;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;}
+    .cl-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
+    .cl-list .lh{padding:12px 16px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;}
+    .cl-rows{overflow-y:auto;}
+    .crow{padding:12px 16px;border-bottom:1px solid #F0F0EE;cursor:pointer;}
+    .crow:hover{background:#F7F5EE;}
+    .crow:last-child{border-bottom:none;}
+    .crow .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+    .crow .rt{font-weight:800;font-size:14.5px;}
+    .crow .stb{font-weight:800;color:#cf3320;font-size:12.5px;white-space:nowrap;}
+    .crow .sub{color:#5b6670;font-size:12.5px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .cl-empty{padding:34px 16px;text-align:center;color:#0f7a4f;font-weight:800;font-size:16px;}
+    .cl-empty small{display:block;color:#5b6670;font-weight:500;margin-top:6px;line-height:1.5;}
+
+    .cl-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;}
+    .cl-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .cl-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .cl-cta .btn{display:inline-block;margin:0 8px 8px 0;}
+
+    .cl-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .cl-notes b{color:#0E1116;}
+
+    /* Responsive mobile nav (same rules as blog.css) */
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+      .cl-mapbox{height:56vh;}
+      .leaflet-control-zoom{display:none;}
+      .bigstatus{font-size:12px;padding:6px 10px;max-width:56%;left:12px;line-height:1.3;}
+      .nearme{font-size:12px;padding:8px 11px;}
+      .cl-list{max-height:none;}
+      .cl-rows{max-height:52vh;}
+    }
+  /* spon:css */
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+/* /spon:css */
+  </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="canonical" href="https://milecheckapp.com/chains/">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/" class="active">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cl-hero">
+    <!-- spon:start -->
+  <aside class="spon spon-house" id="spon" data-slot="live:chains" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Sponsor this page.</strong></span>
+      <span class="spon-cta">Ask about it →</span>
+    </a>
+  </aside>
+<!-- spon:end -->
+<h1>Chain control <span class="accent">map</span></h1>
+    <p class="sub">Chain controls and traction rules that state DOTs are posting right now, with route and mile marker. Most show up in the western mountain states from late fall to spring. Updates every 5 minutes. Always follow the signs on the road. How-to: <a href="../how-to-put-on-tire-chains/" style="color:#0f7a4f;font-weight:700">putting on chains</a> · <a href="../chains-required-explained/" style="color:#0f7a4f;font-weight:700">what chains required means</a></p>
+  </div>
+
+  
+
+  <div class="cl-wrap">
+    <div class="cl-mapbox">
+      <span class="bigstatus hint" id="bigStatus">Pick a state or zoom in. Chain rules load at state level</span>
+      <button class="nearme" id="nearMe">Chain rules near me</button>
+      <div id="clmap"></div>
+    </div>
+    <div class="cl-side">
+      <div class="state-sel"><label for="stateSel">State</label>
+        <select id="stateSel"><option value="">Choose a state…</option></select>
+      </div>
+      <div class="cl-list">
+        <div class="lh">Chain rules in view</div>
+        <div class="cl-rows" id="clRows"><div class="cl-empty">Pick a state to load chain rules<small>Or zoom the map into your area. They come straight from each state DOT and refresh every 5 minutes.</small></div></div>
+      </div>
+      <div class="cl-cta">
+        <h3>Know where you are relative to what's closed.</h3>
+        <p>Chain rules are posted by route and mile marker, and MileCheck shows yours in real time, plus these alerts on your route. Works offline in all 50 states.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=chains&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dchains" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl-notes">
+    <b>About this data:</b> chain controls and traction rules come from state DOT feeds, the same ones behind the MileCheck app. Not every state publishes chain rules in its feed, and some post them only on their own 511 sites, so check the state DOT before you drive a pass. For closures, see the <a href="../closures/" style="color:#0f7a4f;font-weight:700;">road closures map</a>.</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=chains&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dchains" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../fire/">Wildfire map</a></li>
+            <li><a href="../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Chain rule data: state DOTs via MileCheck. Always follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>
+const map=L.map('clmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+const ATTR='Esri, USGS · chain rules: state DOTs via MileCheck';
+const baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});
+const baseSat=L.layerGroup([
+  L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17}),
+  L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
+]);
+const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
+baseTerrain.addTo(map);
+L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreets},null,{position:'bottomright',collapsed:true}).addTo(map);
+map.setView([42.5,-114],5);
+
+const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"ID":[42,-117.24,49,-111.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"UT":[37,-114.05,42,-109.04],"CO":[37,-109.05,41,-102.04],"NM":[31.33,-109.05,37,-103],"AK":[54.5,-165,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"ND":[45.94,-104.05,49,-96.55],"NE":[40,-104.05,43,-95.31],"KS":[37,-102.05,40,-94.59],"WI":[42.49,-92.89,47.08,-86.8],"MN":[43.5,-97.21,49,-89.6],"IA":[40.37,-96.64,43.5,-90.14],"IL":[36.97,-91.52,42.51,-87.02],"WY":[40.99,-111.06,45.01,-104.05],"ME":[43.06,-71.08,47.46,-66.95],"RI":[41.15,-71.86,42.02,-71.12],"MI":[41.7,-90.42,48.3,-82.12],"NV":[35,-120.01,42,-114.04],"NJ":[38.92,-75.56,41.36,-73.89],"DE":[38.45,-75.79,39.84,-75.04],"MD":[37.91,-79.49,39.73,-75.04],"VA":[36.54,-83.68,39.47,-75.24],"WV":[37.2,-82.65,40.64,-77.72],"OH":[38.4,-84.82,42,-80.52],"PA":[39.72,-80.52,42.27,-74.69],"MA":[41.18,-73.51,42.89,-69.93],"VT":[42.73,-73.43,45.02,-71.46],"NH":[42.7,-72.56,45.31,-70.7],"CT":[40.98,-73.73,42.05,-71.79],"NY":[40.48,-79.77,45.02,-71.86],"FL":[24.4,-87.63,31,-80.03],"GA":[30.36,-85.61,35,-80.84],"NC":[33.84,-84.32,36.59,-75.46],"SC":[32.03,-83.35,35.22,-78.54],"MS":[30.17,-91.66,35,-88.1],"AL":[30.22,-88.47,35.01,-84.89],"AR":[33,-94.62,36.5,-89.64],"LA":[28.93,-94.04,33.02,-88.82],"OK":[33.62,-103,37,-94.43],"TN":[34.98,-90.31,36.68,-81.65],"KY":[36.5,-89.57,39.15,-81.96],"IN":[37.77,-88.1,41.76,-84.78],"MO":[36,-95.77,40.61,-89.1],"CA":[32.5,-124.5,42,-114.1],"HI":[18.5,-160.5,22.5,-154.5],"TX":[25.8,-106.7,36.5,-93.5]};
+const NAMES={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+const NO_FEED=new Set(["WY","RI"]);
+const sel=document.getElementById('stateSel');
+Object.keys(NAMES).sort((a,b)=>NAMES[a].localeCompare(NAMES[b])).forEach(c=>{
+  if(!SB[c])return; const o=document.createElement('option');o.value=c;o.textContent=NAMES[c]+(NO_FEED.has(c)?" (no DOT feed yet)":"");sel.appendChild(o);});
+sel.onchange=()=>{const c=sel.value;
+  if(!c){map.setView([42.5,-114],5);return;}
+  const b=SB[c];map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9});};
+
+const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
+let clLayer=L.layerGroup().addTo(map);
+const clCache={};
+const clFail={};   // state -> ms timestamp of last failed fetch (backoff only, never data)
+let CLOSURES=[];
+let FAILED_STATES=new Set();
+function statesInView(){
+  const b=map.getBounds(),out=[];
+  for(const[c,v]of Object.entries(SB)){
+    if(NO_FEED.has(c))continue;
+    if(b.getWest()<v[3]&&b.getEast()>v[1]&&b.getSouth()<v[2]&&b.getNorth()>v[0])out.push(c);}
+  return out;
+}
+function isClosed(r){
+  const t=((r.headline||"")+" "+(r["impact-desc"]||"")+" "+(r.description||"")+" "+(r["road-surface-condition"]||"")+" "+(r["location-name"]||"")).toLowerCase();
+  if(/chain[- ]?link/.test(t))return false;
+  return /\bchains?\b[^.]{0,40}\b(required|control|controls|law|in effect)\b|\bchain control\b|traction (law|device|tire|tyre)s?\b|\br-[123]\b/.test(t);
+}
+// A JSON error body still parses, and fetch() does not reject on HTTP 500 —
+// so neither "it returned" nor "it parsed" proves a feed answered. Status
+// AND payload shape are the proof. Anything less is an outage, never an
+// all-clear.
+async function fetchFeed(url,opts,validate){
+  const r=await fetch(url,opts);
+  if(!r.ok)throw new Error('HTTP '+r.status);
+  const d=await r.json();
+  if(typeof validate==='function'&&!validate(d))throw new Error('unexpected payload');
+  return d;
+}
+async function closuresFor(st){
+  const c=clCache[st];
+  if(c&&Date.now()-c.t<300000)return {ok:true,list:c.list};
+  // Failures are never cached as DATA (that was the original bug: one blip hid
+  // real closures for 5 minutes). But a hard outage + repeated panning would
+  // otherwise fan out six state requests per pan with no backoff, so remember
+  // the FAILURE STATUS briefly — 20 s — and keep serving whatever stale list we
+  // have, still flagged ok:false so the UI keeps saying "unavailable".
+  // (ChatGPT review 2026-08-21, P2 #8.)
+  const f=clFail[st];
+  if(f&&Date.now()-f<20000)return {ok:false,list:(c&&c.list)||[]};
+  try{
+    const d=await fetchFeed(WORKER+"/incidents?state="+st,{cache:"no-store"},pd=>Array.isArray(pd["incident-reports"]));
+    let cond=[];try{const dc=await fetchFeed(WORKER+"/conditions?state="+st,{cache:"no-store"},pd=>Array.isArray(pd["road-weather-reports"]));cond=(dc["road-weather-reports"]||[]).map(r=>Object.assign({},r,{headline:((r["location-name"]||"")+": "+(r["road-surface-condition"]||"")).trim(),location:r.location||{"route-id":r["route-id"],"start-location":{"start-lat":r.latitude,"start-long":r.longitude}}}));}catch(e){}
+    const list=(d["incident-reports"]||[]).concat(cond).filter(isClosed).map(r=>{
+      const sl=(r.location||{})["start-location"]||{};
+      const lat=+sl["start-lat"],lon=+sl["start-long"];
+      if(!isFinite(lat)||!isFinite(lon)||!lat)return null;
+      return {lat,lon,head:(r.headline||"Chain rule posted").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().slice(0,180),
+        route:((r.location||{})["route-id"]||"").trim(),mp:sl["start-mile-marker"],st};
+    }).filter(Boolean);
+    clCache[st]={t:Date.now(),list};
+    return {ok:true,list};
+  }catch(e){
+    clFail[st]=Date.now();
+    // A fetch failure (network blip, Worker timeout, bad JSON) must NEVER be
+    // cached and must NEVER be treated as "this state has zero closures" —
+    // a dead feed reads identically to a quiet one unless we say so. Do not
+    // write clCache[st] here (a stale-but-real cached list, if any, is left
+    // untouched so it can still be shown), and report ok:false so the caller
+    // marks this state's data unavailable instead of implying an all-clear.
+    return {ok:false,list:(c&&c.list)||[]};
+  }
+}
+function popupHtml(c){
+  return `<div class="fpop"><div class="fp-nm">⛓ Chain rule posted</div>
+    <div class="fp-st">${[c.route,c.mp?"MP "+Math.round(c.mp):null,NAMES[c.st]||c.st].filter(Boolean).join(" · ")}</div>
+    <div class="fp-row">${c.head}</div>
+    <div class="fp-row" style="margin-top:6px"><a href="https://milecheckapp.com" style="font-weight:700">These alerts, on your route — MileCheck →</a></div></div>`;
+}
+let prevView=null;
+function rememberView(){ if(!prevView) prevView={c:map.getCenter(),z:map.getZoom()}; }
+map.on('popupclose',()=>{setTimeout(()=>{if(!map._popup && prevView){map.flyTo(prevView.c,prevView.z,{duration:.8});prevView=null;}},250);});
+
+function render(){
+  clLayer.clearLayers();
+  const bs=document.getElementById("bigStatus");
+  const z=map.getZoom();
+  if(z<5){bs.className="bigstatus hint";bs.textContent="Pick a state or zoom in. Chain rules load at state level";
+    document.getElementById("clRows").innerHTML=`<div class="cl-empty">Pick a state to load chain rules<small>Or zoom the map into your area. They come straight from each state DOT and refresh every 5 minutes.</small></div>`;
+    return;}
+  const b=map.getBounds();
+  const inView=CLOSURES.filter(c=>b.contains([c.lat,c.lon]));
+  inView.forEach((c,i)=>{
+    const m=L.marker([c.lat,c.lon],{icon:L.divIcon({className:'',html:'<div class="cl-ic">⛔</div>',iconSize:[26,26],iconAnchor:[13,13]})}).addTo(clLayer);
+    m.bindPopup(popupHtml(c),{maxWidth:290});
+    m.on('click',()=>{rememberView();map.flyTo([c.lat,c.lon],Math.max(map.getZoom(),10),{duration:.8});});
+  });
+  // A feed that failed to load for a state currently in view must never be
+  // presented as "no closures here" — that would be a dead feed dressed up
+  // as a confirmed all-clear. Surface it explicitly instead, separate from
+  // the genuine "we checked, roads are open" state below.
+  const failedNames=[...FAILED_STATES].map(c=>NAMES[c]||c);
+  const failedNote=failedNames.length
+    ? "Chain data unavailable for "+failedNames.join(", ")+" — feed didn't respond, not a confirmed clear."
+    : "";
+
+  if(failedNames.length){
+    bs.className="bigstatus hint";
+    bs.textContent=inView.length
+      ? ("⛓ "+inView.length+" chain rule"+(inView.length>1?"s":"")+" in view · "+failedNote)
+      : failedNote;
+  } else {
+    bs.className="bigstatus";
+    bs.textContent=inView.length?("⛓ "+inView.length+" chain rule"+(inView.length>1?"s":"")+" in view"):"No chain rules posted in view";
+    if(!inView.length)bs.className="bigstatus hint";
+  }
+
+  const rows=document.getElementById("clRows");
+  const failedBanner=failedNames.length
+    ? `<div style="padding:10px 16px;border-bottom:1px solid #F0F0EE;background:#FAFAF7;color:#5b6670;font-size:12.5px;line-height:1.5;font-weight:600;">⚠ ${failedNote}</div>`
+    : "";
+  if(!inView.length){
+    rows.innerHTML = failedNames.length
+      ? failedBanner+`<div class="cl-empty" style="color:#5b6670;">Chain data unavailable<small>Try again in a moment, or pick a different state — this is not a confirmed clear.</small></div>`
+      : `<div class="cl-empty">✓ No chain rules posted here<small>The state DOT feeds in this view show no chain controls or traction rules right now. Signs on the road always win.</small></div>`;
+    return;
+  }
+  const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route));
+  rows.innerHTML=failedBanner+sorted.slice(0,40).map((c,i)=>`<div class="crow" data-i="${i}">
+      <div class="t"><span class="rt">${c.route||"Local road"}${c.mp?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
+      <div class="sub">${c.head}</div>
+    </div>`).join("");
+  rows.querySelectorAll('.crow[data-i]').forEach(el=>el.onclick=()=>{
+    const c=sorted[+el.dataset.i]; if(!c)return;
+    rememberView();
+    map.flyTo([c.lat,c.lon],10,{duration:.9});
+    L.popup({maxWidth:290}).setLatLng([c.lat,c.lon]).setContent(popupHtml(c)).openOn(map);
+  });
+}
+let busy=false;
+async function loadClosures(){
+  if(busy)return; busy=true;
+  const z=map.getZoom();
+  if(z>=5){
+    const sts=statesInView().slice(0,6);
+    const results=await Promise.all(sts.map(closuresFor));
+    // Track per-state fetch failures separately from empty-but-successful
+    // results — a state whose feed failed must not be silently folded into
+    // "0 closures" and reported as roads-are-open.
+    const failed=new Set();
+    const lists=[];
+    results.forEach((r,i)=>{
+      if(!r.ok)failed.add(sts[i]);
+      if(r.list&&r.list.length)lists.push(r.list);
+    });
+    FAILED_STATES=failed;
+    CLOSURES=lists.flat();
+  } else {
+    FAILED_STATES=new Set();
+  }
+  busy=false; render();
+}
+let mvTimer=null;
+map.on('moveend',()=>{clearTimeout(mvTimer);mvTimer=setTimeout(loadClosures,400);});
+// "Closures near me": tell the person what happened. It used to fail silently when location was
+// blocked, timed out, or the page was open in an in-app browser (Instagram, Facebook).
+(function(){
+  const btn=document.getElementById('nearMe'), bs=document.getElementById('bigStatus');
+  L.DomEvent.disableClickPropagation(btn);
+  const say=t=>{bs.className="bigstatus hint";bs.textContent=t;};
+  btn.onclick=()=>{
+    if(!navigator.geolocation||!window.isSecureContext){say("Location isn't available in this browser. Pick your state above.");return;}
+    btn.disabled=true; const label=btn.textContent; btn.textContent="Finding you…";
+    navigator.geolocation.getCurrentPosition(p=>{
+      btn.disabled=false; btn.textContent=label;
+      map.setView([p.coords.latitude,p.coords.longitude],8);
+    },e=>{
+      btn.disabled=false; btn.textContent=label;
+      say(e.code===1?"Location is blocked for this site. Allow it in your browser settings, or pick your state above."
+        :"Couldn't get your location. Pick your state above.");
+    },{enableHighAccuracy:false,timeout:15000,maximumAge:600000});
+  };
+})();
+loadClosures(); setInterval(loadClosures,300000);
+</script>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+<!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
+</body>
+</html>
