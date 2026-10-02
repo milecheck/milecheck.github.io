@@ -229,7 +229,7 @@
     Object.keys(slots).forEach(function(k){var s=slots[k];if(s&&s.id&&!/demo/i.test(s.id))taken[k]=1});
     ((a[2]&&a[2].bySlot)||[]).forEach(function(x){views[x.slot]=x.impressions});
     var pre=new URLSearchParams(location.search).get('page');
-    if(pre){var p=pages.find(function(x){return x.key===pre});if(p&&!taken[pre])picked[pre]=priceOf(p)}
+    if(pre){var p=pages.find(function(x){return x.key===pre});if(p&&!taken[pre]){picked[pre]=priceOf(p);fam='picked'}}
     chips();render();summary();
   }).catch(function(){$('list').innerHTML='<p class="ps-empty">Couldn&rsquo;t load the page list. Email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>.</p>'});
 })();
