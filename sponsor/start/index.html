@@ -171,7 +171,7 @@
   var FAM={home:'Mile-marker map',cameras:'Cameras',corridor:'Interstate corridors',pass:'Mountain passes',bridge:'Drawbridges',guide:'Mile-marker guides',basics:'Highway basics',article:'Reports and articles',live:'Live conditions',mountain:'Mountain Visibility',drawbridge:'Seattle Drawbridges'};
   var $=function(id){return document.getElementById(id)};
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
-  var pages=[], views={}, taken={}, picked={}, fam='all', step=1;
+  var pages=[], views={}, taken={}, picked={}, fam='all', step=1, surge={};
   function famOf(k){return k.split(':')[0]}
   var SN={AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'District of Columbia',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',
     AB:'Alberta',BC:'British Columbia',MB:'Manitoba',ON:'Ontario',QC:'Quebec',NS:'Nova Scotia',NT:'Northwest Territories'};
@@ -212,13 +212,14 @@
     var c={};pages.forEach(function(p){var f=famOf(p.key);c[f]=(c[f]||0)+1});
     var h='<button type="button" class="ps-chip'+(fam==='all'?' on':'')+'" data-f="all">All ('+pages.length+')</button>';
     Object.keys(FAM).forEach(function(f){if(c[f])h+='<button type="button" class="ps-chip'+(fam===f?' on':'')+'" data-f="'+f+'">'+esc(FAM[f])+' ('+c[f]+')</button>'});
+    var ns=pages.filter(function(p){return surge[p.key]}).length; if(ns) h+='<button type="button" class="ps-chip'+(fam==='surging'?' on':'')+'" data-f="surging">&#9650; Surging ('+ns+')</button>';
     var n=Object.keys(picked).length; if(n) h+='<button type="button" class="ps-chip'+(fam==='picked'?' on':'')+'" data-f="picked">Picked ('+n+')</button>';
     $('chips').innerHTML=h;
   }
   function render(){
     var q=$('q').value.trim().toLowerCase(), showTaken=$('showTaken').checked, sort=$('sort').value;
     var rows=pages.filter(function(p){
-      if(fam==='picked'?!picked[p.key]:(fam!=='all'&&famOf(p.key)!==fam))return false;
+      if(fam==='picked'?!picked[p.key]:fam==='surging'?!surge[p.key]:(fam!=='all'&&famOf(p.key)!==fam))return false;
       if(!showTaken&&taken[p.key]&&!picked[p.key])return false;
       var stv=$('st').value; if(stv){var sa=statesOf(p); if(stv==='none'?sa.length:sa.indexOf(stv)<0)return false}
       return !q||(p.title+' '+p.path+' '+p.key).toLowerCase().indexOf(q)>-1;
@@ -226,13 +227,13 @@
     rows.sort(sort==='az'?function(a,b){return a.title.localeCompare(b.title)}:function(a,b){return (views[b.key]||0)-(views[a.key]||0)||a.title.localeCompare(b.title)});
     if(!rows.length){$('list').innerHTML='<p class="ps-empty">No pages match. Try another search or group.</p>';return}
     var groups={},order=[];
-    rows.forEach(function(p){var f=(fam==='all'||fam==='picked')?famOf(p.key):fam;if(!groups[f]){groups[f]=[];order.push(f)}groups[f].push(p)});
+    rows.forEach(function(p){var f=(fam==='all'||fam==='picked'||fam==='surging')?famOf(p.key):fam;if(!groups[f]){groups[f]=[];order.push(f)}groups[f].push(p)});
     var h='';
     order.forEach(function(f){
       h+='<div class="ps-group"><h2><span>'+esc(FAM[f]||f)+'</span><button type="button" data-all="'+f+'">Select all shown</button></h2>';
       groups[f].forEach(function(p){
         var tk=taken[p.key]&&!picked[p.key], v=views[p.key];
-        h+='<label class="ps-row'+(tk?' taken':'')+'"><input type="checkbox" data-k="'+esc(p.key)+'"'+(picked[p.key]?' checked':'')+(tk?' disabled':'')+'><span class="t"><b>'+esc(p.title)+(langOf(p)?' <span style="font-size:11px;font-weight:600;color:#0f7a4f;border:1px solid #0f7a4f;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap">'+langOf(p)+'</span>':'')+'</b><a href="'+esc(p.path)+'" target="_blank" rel="noopener">'+esc(p.path)+'</a></span><span class="v">'+(v?v.toLocaleString('en-US')+' views':'New page')+'</span><span class="p">'+(tk?'Taken':money(priceOf(p))+'/mo')+'</span></label>';
+        h+='<label class="ps-row'+(tk?' taken':'')+'"><input type="checkbox" data-k="'+esc(p.key)+'"'+(picked[p.key]?' checked':'')+(tk?' disabled':'')+'><span class="t"><b>'+esc(p.title)+(surge[p.key]?' <span title="Views at least doubled this week" style=\"font-size:11px;font-weight:700;color:#fff;background:#e8a317;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap\">&#9650; Surging</span>':'')+(langOf(p)?' <span style="font-size:11px;font-weight:600;color:#0f7a4f;border:1px solid #0f7a4f;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap">'+langOf(p)+'</span>':'')+'</b><a href="'+esc(p.path)+'" target="_blank" rel="noopener">'+esc(p.path)+'</a></span><span class="v">'+(v>=5?v.toLocaleString('en-US')+' views':'Under 5 views')+'</span><span class="p">'+(tk?'Taken':money(priceOf(p))+'/mo')+'</span></label>';
       });
       h+='</div>';
     });
@@ -262,14 +263,20 @@
   Promise.all([
     fetch('/data/sponsor-pages.json').then(function(r){return r.json()}),
     fetch('/data/sponsors.json').then(function(r){return r.json()}).catch(function(){return {}}),
-    fetch(W+'/sponsor-stats?days=28').then(function(r){return r.json()}).catch(function(){return {}})
+    fetch(W+'/sponsor-stats?days=28').then(function(r){return r.json()}).catch(function(){return {}}),
+    fetch(W+'/sponsor-stats?days=7').then(function(r){return r.json()}).catch(function(){return {}}),
+    fetch(W+'/sponsor-stats?days=14').then(function(r){return r.json()}).catch(function(){return {}})
   ]).then(function(a){
+    // Surging = last 7 days at least double the 7 days before, with 30+ views this week and 10+ the week before.
+    // Off until Oct 16 2026: some slots went in mid-September, so earlier "doubling" was just counting starting.
+    var w1={},w2={};((a[3]&&a[3].bySlot)||[]).forEach(function(x){w1[x.slot]=x.impressions});((a[4]&&a[4].bySlot)||[]).forEach(function(x){w2[x.slot]=x.impressions});
+    if(Date.now()>=Date.UTC(2026,9,16))Object.keys(w1).forEach(function(k){var prev=(w2[k]||0)-w1[k];if(w1[k]>=30&&prev>=10&&w1[k]>=2*prev)surge[k]=1});
     pages=(a[0].pages||[]).slice();
     var slots=(a[1]&&a[1].slots)||{};
     Object.keys(slots).forEach(function(k){var s=slots[k];if(s&&s.id&&!/demo/i.test(s.id))taken[k]=1});
     ((a[2]&&a[2].bySlot)||[]).forEach(function(x){views[x.slot]=x.impressions});
     var pre=new URLSearchParams(location.search).get('page');
-    if(pre){var p=pages.find(function(x){return x.key===pre});if(p&&!taken[pre]){picked[pre]=priceOf(p);fam='picked'}}
+    if(pre){pre.split(',').forEach(function(k){var p=pages.find(function(x){return x.key===k});if(p&&!taken[k]){picked[k]=priceOf(p);fam='picked'}})}
     stateOpts();chips();render();summary();
     fetch(W+'/sponsor-stats?minutes=30').then(function(r){return r.json()}).then(function(d){
       var n=d&&d.ok&&d.minutes===30&&d.total?d.total.impressions:0;
