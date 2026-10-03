@@ -40,7 +40,7 @@
     @media(max-width:860px){.mv-wrap{grid-template-columns:1fr;}}
     .mv-verdict{border:1px solid var(--line);background:var(--surface);padding:22px 22px 18px;}
     .mv-v{font-family:var(--display);font-size:clamp(44px,8vw,84px);line-height:1;font-weight:650;letter-spacing:-0.02em;}
-    .mv-v.OUT{color:var(--sign);} .mv-v.PARTLY{color:#b07a12;} .mv-v.HIDDEN{color:#8a3b2e;} .mv-v.NIGHT{color:var(--ink-soft);}
+    .mv-v.OUT{color:var(--sign);} .mv-v.PARTLY{color:#b07a12;} .mv-v.HIDDEN{color:#8a3b2e;} .mv-v.NIGHT{color:var(--ink-soft);} .mv-v.LOCK{color:var(--ink-soft);}
     .mv-line{font-size:16px;margin-top:10px;max-width:60ch;line-height:1.5;}
     .mv-meta{display:flex;flex-wrap:wrap;gap:14px 22px;margin-top:14px;font-family:var(--mono-stack);font-size:12.5px;color:var(--ink-soft);}
     .mv-meta b{color:var(--ink);font-weight:600;}
@@ -181,6 +181,18 @@ function line(r,sun){
   if(!r.viewerCeilingFt) return 'No cloud deck over '+r.name+'. The summit itself is in cloud, by the forecast model.';
   return 'Cloud on the sightline from '+r.name+' is hiding the mountain.';
 }
+// One free reading a day on the web (Leah, 2026-10-03). The first mountain or region page a
+// visitor opens each day shows the live answer. Every other page that day points to the app.
+// localStorage only, so a private window resets it. That is fine: the app is the product.
+const FREE='mvFreeRead', TODAY=new Date().toLocaleDateString('en-CA'), PAGE=location.pathname;
+let used=null; try{used=JSON.parse(localStorage.getItem(FREE)||'null');}catch(e){}
+if(used&&used.day===TODAY&&used.path!==PAGE){
+  $('mvV').textContent='In the app'; $('mvV').className='mv-v LOCK';
+  $('mvLine').innerHTML='Today&#39;s free reading went to another page. Mountain Visibility has every mountain, from every town, any time. <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-olympics-spots-alki-point&amp;mt=8" class="btn btn-primary" style="margin-top:12px;display:inline-block;">Get the app, $1.99</a>';
+  if($('mvRegions'))$('mvRegions').innerHTML='<p>Every region&#39;s reading is in the app.</p>';
+  return;
+}
+try{localStorage.setItem(FREE,JSON.stringify({day:TODAY,path:PAGE}));}catch(e){}
 fetch(HOST+'/data.json').then(r=>r.json()).then(d=>{
   const regions=d.regions||[]; const r=(REGION&&regions.find(x=>x.key===REGION))||d.now||regions[0]; if(!r) return;
   const night=!(Date.now()>=Date.parse(d.sun.civilDawn)&&Date.now()<Date.parse(d.sun.civilDusk));
@@ -188,8 +200,7 @@ fetch(HOST+'/data.json').then(r=>r.json()).then(d=>{
   $('mvV').textContent=label; $('mvV').className='mv-v '+v; $('mvLine').textContent=line(r,d.sun);
   $('mvMeta').innerHTML='<span>Score <b>'+Math.round(r.score*100)+'%</b></span><span>Ceiling <b>'+(r.viewerCeilingFt?r.viewerCeilingFt.toLocaleString()+' ft':'none')+'</b></span><span>Summit <b>'+SUMMIT.toLocaleString()+' ft</b></span><span>Distance <b>'+r.distanceToSummitMi+' mi</b></span><span>Sun <b>'+hm(d.sun.sunrise)+' to '+hm(d.sun.sunset)+'</b></span><span>Updated <b>'+hm(d.generatedAt)+'</b></span>'+(d.volcano&&d.volcano.alertLevel!=='UNKNOWN'?'<span>USGS volcano <b><a href="'+(d.volcano.noticeUrl||d.volcano.url)+'" target="_blank" rel="noopener">'+d.volcano.alertLevel.charAt(0)+d.volcano.alertLevel.slice(1).toLowerCase()+'</a></b></span>':'');
   if(r.verdict!=='OUT'&&!night){const better=regions.filter(x=>x.verdict==='OUT'&&x.key!==r.key)[0]; if(better) $('mvElse').textContent='Visible from '+better.name+' right now.';}
-  const rows=regions.map(x=>'<div class="mv-row"><span class="k">'+x.name+'</span><span class="v '+x.verdict+'">'+({OUT:'Visible',PARTLY:'Partly',HIDDEN:'Hidden'}[x.verdict]||x.verdict)+(x.viewerCeilingFt?' · '+x.viewerCeilingFt.toLocaleString()+' ft':'')+'</span></div>').join('');
-  $('mvRegions').innerHTML=rows;
+  if($('mvRegions'))$('mvRegions').innerHTML='<p>'+regions.length+' regions read live in the app, including '+regions.filter(x=>x.key!==r.key).slice(0,2).map(x=>x.name).join(' and ')+'.</p><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-olympics-spots-alki-point&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a>';
   const w=(d.windows||[]).slice(0,6).map(x=>'<div class="mv-row"><span class="k">'+rel(x.start)+'</span><span class="v">'+hh(x.start)+' to '+hh(x.end)+' · '+Math.round(x.peak*100)+'%</span></div>').join('');
   if($('mvWindows'))$('mvWindows').innerHTML=w||'<p>No clear window in the next three days.</p>';
   const g=(d.alpenglow||[]).slice(0,4).map(x=>'<div class="mv-row"><span class="k">'+rel(x.when)+' '+x.kind+' '+hm(x.when)+'</span><span class="v">'+x.label+'</span></div>').join('');
