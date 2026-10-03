@@ -332,13 +332,14 @@ async function loadLive(){
   let nc=0,nch=0,nw=0;const failed=[],noCams=[];
   res.forEach((r,i)=>{const st=sts[i];
     if(!r.ok)failed.push(NAMES[st]||st); else if(!r.camsOk)noCams.push(NAMES[st]||st);
-    for(const c of r.cams){const g=nearGrade(c.lat,c.lon,st);if(!g)continue;nc++;
+    // Cameras only from zoom 8 in. At state view they bury the grade lines (Leah's phone, 10/3).
+    if(map.getZoom()>=8)for(const c of r.cams){const g=nearGrade(c.lat,c.lon,st);if(!g)continue;nc++;
       const body=c.img?`<img src="${esc(c.img)}" alt="" loading="lazy" style="width:260px;max-width:100%;border-radius:8px;display:block;margin-top:6px">`:(c.stream?`<a href="${esc(c.stream)}" target="_blank" rel="noopener">Open the live stream</a>`:'');
       L.marker([c.lat,c.lon],{icon:L.divIcon({className:'',html:'<div style="font-size:11px;line-height:18px;width:18px;height:18px;text-align:center;border-radius:50%;background:#0E1116;border:1.5px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.4)">📷</div>',iconSize:[18,18],iconAnchor:[9,9]})}).addTo(camLayer).bindPopup(`<div class="fpop"><div class="fp-nm">${esc(c.title)}</div><div class="fp-st">${esc([c.route,c.mp?'MP '+Math.round(c.mp):null,NAMES[st]].filter(Boolean).join(' · '))}</div><div class="fp-row">On ${esc(g.route)} grade, MP ${g.from} to ${g.to} (${g.avg}%)</div>${body}</div>`,{maxWidth:290});}
     for(const c of r.chains){nch++;L.marker([c.lat,c.lon],{icon:ic('⛓','#cf3320')}).addTo(chainLayer).bindPopup(`<div class="fpop"><div class="fp-nm">Chain rule posted</div><div class="fp-st">${esc([c.route,c.name,NAMES[c.st]].filter(Boolean).join(' · '))}</div><div class="fp-row">${esc(c.text)}</div></div>`,{maxWidth:290});}
     for(const c of r.wx){nw++;L.marker([c.lat,c.lon],{icon:ic('❄','#2563eb')}).addTo(wxLayer).bindPopup(`<div class="fpop"><div class="fp-nm">Winter road report</div><div class="fp-st">${esc([c.route,c.name,NAMES[c.st]].filter(Boolean).join(' · '))}</div><div class="fp-row">${esc(c.text)}</div></div>`,{maxWidth:290});}
   });
-  const parts=[`${nc} camera${nc===1?'':'s'} on grades`,`${nch} chain rule${nch===1?'':'s'}`,`${nw} winter report${nw===1?'':'s'}`];
+  const parts=[map.getZoom()>=8?`${nc} camera${nc===1?'':'s'} on grades`:'zoom in for cameras',`${nch} chain rule${nch===1?'':'s'}`,`${nw} winter report${nw===1?'':'s'}`];
   let t='Live in view: '+parts.join(' · ')+'.';
   if(!nch&&!nw&&!failed.length)t+=' No chain rules or winter reports posted here right now.';
   if(noCams.length)t+=' No camera feed for '+noCams.join(', ')+'.';

@@ -318,7 +318,7 @@ const GUIDES = [
     slug:'steep-grade-signs-explained', eyebrow:'Highway basics',
     title:"What Steep Grade Signs Mean (6% Grade Ahead)",
     h1:"What steep grade signs mean",
-    lede:`A yellow sign warning of a "6% GRADE" and "TRUCKS USE LOWER GEAR" tells you the road ahead drops steeply for a distance. Here's what the percentage means and how to descend safely.`,
+    lede:`A yellow sign warning of a "6% GRADE" and "TRUCKS USE LOWER GEAR" tells you the road ahead drops steeply for a distance. Here's what the percentage means and how to descend safely. To see where the long grades are, open the <a href="../grades/"><strong>steep grades map</strong></a>. It shows 410 long climbs on interstates and US routes by mile marker.`,
     sections:[
       ['What the percentage means',`The number is the road's <strong>grade</strong> — how many feet it rises or falls per 100 feet of distance. A <strong>6% grade</strong> means the road drops 6 feet for every 100 feet you travel. It sounds small, but over several miles it adds up to a long, demanding descent, which is why anything around 5–7% earns a warning sign.`],
       ['Why the signs warn trucks',`A heavy truck descending a long grade builds speed and heats its brakes. Ride the brakes the whole way down and they can overheat and fade — lose their grip entirely. That's why the signs say <strong>"trucks use lower gear"</strong>: gearing down lets the engine do the braking, so the brakes stay cool and ready.`],
