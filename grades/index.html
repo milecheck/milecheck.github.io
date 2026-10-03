@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steep Grades Map: long highway climbs by route and mile marker | MileCheck</title>
+  <meta name="description" content="Map of 410 long steep grades on US interstates and US routes, calculated from elevation at each mile marker, with route, mile markers, average grade and climb.">
+
+  <meta property="og:title" content="Steep Grades Map | MileCheck">
+  <meta property="og:description" content="Long steep grades on interstates and US routes, by route and mile marker.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/grades/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+
+  <style>
+    .cl-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .cl-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .cl-hero h1 .accent{color:#cf3320;}
+    .cl-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
+    .cl-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
+    @media(max-width:860px){.cl-wrap{grid-template-columns:1fr;}}
+    .cl-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
+    #clmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bigstatus{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;color:#cf3320;}
+    .bigstatus.hint{color:#5b6670;font-weight:700;}
+    .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
+    .nearme:hover{background:#2a2f36;}
+    .cl-ic{font-size:23px;line-height:1;text-align:center;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));}
+    .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
+    .fpop .fp-nm{font-weight:800;font-size:15px;}
+    .fpop .fp-st{color:#5b6670;font-size:12.5px;font-weight:600;margin:2px 0 8px;}
+    .fpop .fp-row{font-size:13px;margin:3px 0;line-height:1.45;}
+
+    .cl-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
+    .state-sel{display:flex;gap:8px;align-items:center;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 14px;}
+    .state-sel label{font-weight:800;font-size:13px;}
+    .state-sel select{flex:1;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;}
+    .cl-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
+    .cl-list .lh{padding:12px 16px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;}
+    .cl-rows{overflow-y:auto;}
+    .crow{padding:12px 16px;border-bottom:1px solid #F0F0EE;cursor:pointer;}
+    .crow:hover{background:#F7F5EE;}
+    .crow:last-child{border-bottom:none;}
+    .crow .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+    .crow .rt{font-weight:800;font-size:14.5px;}
+    .crow .stb{font-weight:800;color:#cf3320;font-size:12.5px;white-space:nowrap;}
+    .crow .sub{color:#5b6670;font-size:12.5px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .cl-empty{padding:34px 16px;text-align:center;color:#0f7a4f;font-weight:800;font-size:16px;}
+    .cl-empty small{display:block;color:#5b6670;font-weight:500;margin-top:6px;line-height:1.5;}
+
+    .cl-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;}
+    .cl-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .cl-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .cl-cta .btn{display:inline-block;margin:0 8px 8px 0;}
+
+    .cl-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .cl-notes b{color:#0E1116;}
+
+    /* Responsive mobile nav (same rules as blog.css) */
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+      .cl-mapbox{height:56vh;}
+      .leaflet-control-zoom{display:none;}
+      .bigstatus{font-size:12px;padding:6px 10px;max-width:56%;left:12px;line-height:1.3;}
+      .nearme{font-size:12px;padding:8px 11px;}
+      .cl-list{max-height:none;}
+      .cl-rows{max-height:52vh;}
+    }
+      .gr-key{display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:#5b6670;font-weight:600;padding:10px 14px;border:1px solid #E5E5E5;border-radius:14px;background:#fff;}
+    .gr-key i{display:inline-block;width:18px;height:5px;border-radius:3px;margin-right:6px;vertical-align:middle;}
+    .crow .stb.g{color:#b45309;}
+  /* spon:css */
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+/* /spon:css */
+  </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="canonical" href="https://milecheckapp.com/grades/">
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/" class="active">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cl-hero">
+    <!-- spon:start -->
+  <aside class="spon spon-house" id="spon" data-slot="live:grades" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Sponsor this page.</strong></span>
+      <span class="spon-cta">Ask about it →</span>
+    </a>
+  </aside>
+<!-- spon:end -->
+<h1>Steep grades <span class="accent">map</span></h1>
+    <p class="sub">Long climbs and descents on interstates and US routes, by route and mile marker. Each line is a calculated stretch of two miles or more that averages a 4% grade or steeper. These are terrain-based estimates over whole miles. Short sections of road can be steeper than the average shown. Follow the grade signs on the road.</p>
+  </div>
+
+  <div class="cl-wrap">
+    <div class="cl-mapbox">
+      <span class="bigstatus hint" id="bigStatus">Loading grades…</span>
+      <button class="nearme" id="nearMe">Grades near me</button>
+      <div id="clmap"></div>
+    </div>
+    <div class="cl-side">
+      <div class="state-sel"><label for="stateSel">State</label>
+        <select id="stateSel"><option value="">All states</option></select>
+      </div>
+      <div class="gr-key"><span><i style="background:#f59e0b"></i>4 to 5%</span><span><i style="background:#dc2626"></i>5 to 6%</span><span><i style="background:#7f1d1d"></i>6% and up</span></div>
+      <div class="cl-list">
+        <div class="lh" id="listHead">Steep grades in view</div>
+        <div class="cl-rows" id="clRows"></div>
+      </div>
+      <div class="cl-cta">
+        <h3>See the mile marker as you drive.</h3>
+        <p>MileCheck shows your nearest mile marker in real time, so you can compare where you are with the mile markers on this map. Works offline in all 50 states.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=grades&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dgrades" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl-notes">
+    <b>How this was built:</b> we took the elevation at each mile marker on US interstates and US routes in the MileCheck milepost data and calculated the elevation change between consecutive markers. Distance between two markers is estimated as one mile, or the straight-line distance when that is longer. We don't have measured road distance. Elevation comes from Mapzen Terrain Tiles hosted on AWS, which use USGS 3DEP, SRTM and other terrain sources. A stretch appears when two or more miles in a row have a calculated average grade of 4% or more in the same direction. That cutoff is our own choice, not a DOT threshold. These are terrain-based estimates over whole miles, not surveyed roadway grades. A single steep mile does not qualify by itself. Single miles calculated over 12% on interstates or 15% on US routes are left out, because terrain above a tunnel can read as a false grade. That can also leave out a few real steep miles. California uses county-based postmiles on many routes, so California coverage is incomplete. This is not a DOT grade list. Road signs are the source to follow while driving. United States 3DEP (formerly NED) and global GMTED2010 and SRTM terrain data courtesy of the U.S. Geological Survey. Built October 3, 2026. See also <a href="../steep-grade-signs-explained/">steep grade signs explained</a>, <a href="../runaway-truck-ramps/">runaway truck ramps</a> and the <a href="../chains/">chain control map</a>.
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><span style="font-weight:700;font-size:18px;">MileCheck</span></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=grades&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dgrades" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../fire/">Wildfire map</a></li>
+            <li><a href="../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Grades: calculated by MileCheck from Mapzen Terrain Tiles (USGS 3DEP, SRTM, GMTED2010). Always follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>
+const map=L.map('clmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+const ATTR='Esri, USGS · elevation: Mapzen Terrain Tiles (USGS 3DEP, SRTM, GMTED2010) · grades: MileCheck';
+const baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14});
+const baseSat=L.layerGroup([
+  L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17}),
+  L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
+]);
+const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
+baseTerrain.addTo(map);
+L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreets},null,{position:'bottomright',collapsed:true}).addTo(map);
+map.setView([40,-100],4);
+const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"ID":[42,-117.24,49,-111.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"UT":[37,-114.05,42,-109.04],"CO":[37,-109.05,41,-102.04],"NM":[31.33,-109.05,37,-103],"AK":[54.5,-165,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"ND":[45.94,-104.05,49,-96.55],"NE":[40,-104.05,43,-95.31],"KS":[37,-102.05,40,-94.59],"WI":[42.49,-92.89,47.08,-86.8],"MN":[43.5,-97.21,49,-89.6],"IA":[40.37,-96.64,43.5,-90.14],"IL":[36.97,-91.52,42.51,-87.02],"WY":[40.99,-111.06,45.01,-104.05],"ME":[43.06,-71.08,47.46,-66.95],"RI":[41.15,-71.86,42.02,-71.12],"MI":[41.7,-90.42,48.3,-82.12],"NV":[35,-120.01,42,-114.04],"NJ":[38.92,-75.56,41.36,-73.89],"DE":[38.45,-75.79,39.84,-75.04],"MD":[37.91,-79.49,39.73,-75.04],"VA":[36.54,-83.68,39.47,-75.24],"WV":[37.2,-82.65,40.64,-77.72],"OH":[38.4,-84.82,42,-80.52],"PA":[39.72,-80.52,42.27,-74.69],"MA":[41.18,-73.51,42.89,-69.93],"VT":[42.73,-73.43,45.02,-71.46],"NH":[42.7,-72.56,45.31,-70.7],"CT":[40.98,-73.73,42.05,-71.79],"NY":[40.48,-79.77,45.02,-71.86],"FL":[24.4,-87.63,31,-80.03],"GA":[30.36,-85.61,35,-80.84],"NC":[33.84,-84.32,36.59,-75.46],"SC":[32.03,-83.35,35.22,-78.54],"MS":[30.17,-91.66,35,-88.1],"AL":[30.22,-88.47,35.01,-84.89],"AR":[33,-94.62,36.5,-89.64],"LA":[28.93,-94.04,33.02,-88.82],"OK":[33.62,-103,37,-94.43],"TN":[34.98,-90.31,36.68,-81.65],"KY":[36.5,-89.57,39.15,-81.96],"IN":[37.77,-88.1,41.76,-84.78],"MO":[36,-95.77,40.61,-89.1],"CA":[32.5,-124.5,42,-114.1],"HI":[18.5,-160.5,22.5,-154.5],"TX":[25.8,-106.7,36.5,-93.5]};
+const NAMES={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+const sel=document.getElementById('stateSel');
+const color=g=>g>=6?'#7f1d1d':g>=5?'#dc2626':'#f59e0b';
+let G=[];
+let LOAD='loading';   // loading | ok | failed. Empty-result text only shows after a good load.
+const layer=L.layerGroup().addTo(map);
+function popupHtml(s){
+  const lo=s.upWithMiles?s.from:s.to, hi=s.upWithMiles?s.to:s.from;
+  return `<div class="fpop"><div class="fp-nm">${s.route} · MP ${s.from} to ${s.to}</div>
+    <div class="fp-st">${NAMES[s.state]||s.state} · ${s.miles} miles</div>
+    <div class="fp-row"><b>${s.avg}% calculated average grade</b>, about ${s.climbFt.toLocaleString()} ft of elevation gain.</div>
+    <div class="fp-row">Calculated uphill from MP ${lo} toward MP ${hi}. Downhill the other way.</div>
+    <div class="fp-row" style="color:#5b6670;font-size:12px">Steepest calculated mile about ${s.max}%. Based on elevation change between mile markers.</div></div>`;
+}
+function draw(){
+  layer.clearLayers();
+  const st=sel.value;
+  G.filter(s=>!st||s.state===st).forEach(s=>{
+    const pl=L.polyline(s.line,{color:color(s.avg),weight:6,opacity:.9}).addTo(layer);
+    pl.bindPopup(popupHtml(s),{maxWidth:290});
+  });
+}
+function render(){
+  const bs0=document.getElementById('bigStatus');
+  if(LOAD==='loading'){bs0.textContent='Loading grades…';return;}
+  if(LOAD==='failed'){bs0.className='bigstatus hint';bs0.textContent="Couldn't load the grade data. Try reloading.";
+    document.getElementById('clRows').innerHTML='<div class="cl-empty" style="color:#5b6670">Grade data didn\'t load<small>This is a loading problem, not an empty map. Reload the page to try again.</small></div>';return;}
+  const b=map.getBounds(), st=sel.value;
+  const list=G.filter(s=>(st?s.state===st:true)&&b.intersects(L.latLngBounds(s.line)))
+    .sort((a,c)=>c.avg-a.avg);
+  const bs=document.getElementById('bigStatus');
+  bs.className='bigstatus'; bs.style.color='#b45309';
+  bs.textContent=list.length+' steep grade'+(list.length===1?'':'s')+' in view';
+  document.getElementById('listHead').textContent='Steep grades in view, steepest first';
+  const rows=document.getElementById('clRows');
+  if(!list.length){rows.innerHTML='<div class="cl-empty" style="color:#5b6670">No long steep grades in view<small>Zoom out or pick another state. Only stretches of 2+ miles averaging 4% or more are shown.</small></div>';return;}
+  rows.innerHTML=list.slice(0,60).map((s,i)=>`<div class="crow" data-i="${i}">
+      <div class="t"><span class="rt">${s.route} · MP ${s.from} to ${s.to}</span><span class="stb g">${s.avg}%</span></div>
+      <div class="sub">${NAMES[s.state]||s.state} · ${s.miles} miles · about ${s.climbFt.toLocaleString()} ft</div></div>`).join('');
+  rows.querySelectorAll('.crow').forEach(el=>el.onclick=()=>{
+    const s=list[+el.dataset.i]; map.flyToBounds(L.latLngBounds(s.line).pad(.6),{duration:.9,maxZoom:12});
+    L.popup({maxWidth:290}).setLatLng([s.lat,s.lon]).setContent(popupHtml(s)).openOn(map);
+  });
+}
+sel.onchange=()=>{const c=sel.value; draw();
+  if(!c){map.setView([40,-100],4);return;}
+  const b=SB[c]; if(b) map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9}); else render();};
+map.on('moveend',render);
+fetch('/data/grades.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{
+  G=d.stretches;
+  const have=new Set(G.map(s=>s.state));
+  Object.keys(NAMES).filter(c=>have.has(c)).sort((a,b)=>NAMES[a].localeCompare(NAMES[b])).forEach(c=>{
+    const o=document.createElement('option');o.value=c;o.textContent=NAMES[c];sel.appendChild(o);});
+  LOAD='ok'; draw(); render();
+}).catch(()=>{LOAD='failed'; render();});
+(function(){
+  const btn=document.getElementById('nearMe'), bs=document.getElementById('bigStatus');
+  L.DomEvent.disableClickPropagation(btn);
+  btn.onclick=()=>{
+    if(!navigator.geolocation||!window.isSecureContext){bs.textContent="Location isn't available in this browser. Pick your state above.";return;}
+    btn.disabled=true;
+    navigator.geolocation.getCurrentPosition(p=>{btn.disabled=false;
+      // Clear any state filter first, or a Colorado filter hides everything near you in Washington.
+      if(sel.value){sel.value='';draw();}
+      map.setView([p.coords.latitude,p.coords.longitude],8);},
+      e=>{btn.disabled=false;bs.textContent=e.code===1?"Location is blocked for this site. Pick your state above.":"Couldn't get your location. Pick your state above.";},
+      {enableHighAccuracy:false,timeout:15000,maximumAge:600000});
+  };
+})();
+</script>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+<!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
+</body>
+</html>

@@ -331,7 +331,7 @@ const GUIDES = [
       ['How do you drive down a steep grade safely?',`Shift into a lower gear before you start the descent, let engine braking control your speed, apply the brakes in short firm bursts instead of riding them, and leave extra following distance.`],
       ['What is a runaway truck ramp?',`An emergency escape lane on a steep downgrade, filled with loose gravel or sand, that stops a truck whose brakes have failed. Signs warn of them in advance on the steepest descents.`],
     ],
-    related:`<a href="../runaway-truck-ramps/">Runaway truck ramps</a> · <a href="../chains-required-explained/">What "chains required" means</a> · <a href="../passes/">Mountain pass conditions</a>`,
+    related:`<a href="../grades/">Steep grades map</a> · <a href="../runaway-truck-ramps/">Runaway truck ramps</a> · <a href="../chains-required-explained/">What "chains required" means</a> · <a href="../passes/">Mountain pass conditions</a>`,
   },
   {
     slug:'dragging-trailer-chains-wildfire', eyebrow:'Road safety',
@@ -822,6 +822,7 @@ function page(g){
   return `<!DOCTYPE html>
 <html lang="${({fr:'fr-CA',pt:'pt-BR'})[lang]||lang}">
 <head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\\.apple\\.com|play\\.google\\.com|testflight\\.apple\\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
