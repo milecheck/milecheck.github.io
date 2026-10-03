@@ -4,19 +4,19 @@
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MileCheck — Highway Mile Markers &amp; Live State DOT Feeds</title>
-  <meta name="description" content="The only mile-marker app on either store with live state DOT data. Real-time mile markers in all 50 US states. Live road alerts from 50 state DOTs. Navigate to any milepost.">
+  <title>MileCheck | Road Conditions &amp; Highway Mile Markers</title>
+  <meta name="description" content="Road conditions from official state feeds in all 50 states, plus your nearest highway mile marker, live and offline. iOS and Android.">
 
-  <meta property="og:title" content="MileCheck — Highway Mile Markers & Live State DOT Feeds">
-  <meta property="og:description" content="The only app on iOS or Android with live state DOT data. 50 states of mile markers, all 50 with live state DOT feeds.">
+  <meta property="og:title" content="MileCheck | Road Conditions & Highway Mile Markers">
+  <meta property="og:description" content="Road conditions from official state feeds in all 50 states, plus your nearest highway mile marker.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com">
   <meta property="og:type" content="website">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@milecheckapp">
-  <meta name="twitter:title" content="MileCheck — Highway Mile Markers &amp; Live State DOT Feeds">
-  <meta name="twitter:description" content="Real-time highway mile markers in all 50 US states. Live state DOT feeds from 50 states. Seattle drawbridge push notifications. $49.99/yr — 7-day free trial.">
+  <meta name="twitter:title" content="MileCheck | Road Conditions &amp; Highway Mile Markers">
+  <meta name="twitter:description" content="Road conditions from official state feeds in all 50 states, plus your nearest highway mile marker.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
 
   <meta name="keywords" content="highway mile marker app, milepost app, live state DOT feeds, road conditions app, iOS mile marker, Android mile marker, Seattle bridge alerts, drawbridge notifications, truck driver navigation, milepost GPS, highway navigation, road alert app, mile marker locator, DOT traffic alerts">
@@ -84,7 +84,7 @@
     .eyebrow{display:inline-block;font:600 12px var(--mono);letter-spacing:.1em;border:1.5px solid rgba(255,255,255,.8);padding:5px 10px;transform:rotate(-1deg);color:#fff;margin:0}
     .hero-h1{font-family:var(--serif);font-weight:650;font-size:clamp(36px,5.4vw,60px);line-height:1.07;letter-spacing:-.01em;margin:20px 0 0;max-width:22ch;color:#fff}
     @media (max-width:840px){.hero-h1{margin-left:auto;margin-right:auto}}
-    .hero-sub{margin:16px 0 0;font-size:17.5px;color:rgba(255,255,255,.85);max-width:46ch}
+    .hero-sub{margin:16px 0 0;font-size:16px;color:rgba(255,255,255,.85);max-width:46ch}
     @media (max-width:840px){.hero-sub{margin-left:auto;margin-right:auto}}
     .hero-carplay{display:inline-block;font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#ffd479;margin:14px 0 0}
     .hero-ctas{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
@@ -136,7 +136,14 @@
     .linkrow h3{margin:0;font-family:var(--serif);font-size:20px;font-weight:650}
     .linkrow p{margin:4px 0 0;font-size:14.5px;color:var(--ink2);max-width:62ch}
     .linkrow .go{font-size:20px;color:var(--green)}
+    #livemaps .linkrow{grid-template-columns:150px 1fr;padding:14px 0}
+    #livemaps .linkrow h3 .go{font-size:18px;margin-left:6px}
     .linkrow:hover h3{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+    .more-guides{margin-top:22px}
+    .more-guides summary{cursor:pointer;font:600 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green);list-style:none}
+    .more-guides summary::-webkit-details-marker{display:none}
+    .more-guides summary::after{content:" +"}
+    .more-guides[open] summary::after{content:" \2212"}
     .basics{margin-top:22px;font-size:14.5px;color:var(--ink2)}
     .basics a{color:var(--green);font-weight:600}
 
@@ -165,6 +172,21 @@
     .price p{color:rgba(246,244,236,.72);margin:14px 0 0;font-size:16px;max-width:48ch}
     .price .num{font:600 54px var(--mono);line-height:1}
     .price .num small{font:500 20px var(--sans);color:rgba(246,244,236,.6)}
+    #pricing{scroll-margin-top:72px}
+    .price-lede{max-width:60ch}
+    .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+    @media (max-width:760px){.plan-grid{grid-template-columns:1fr}}
+    .plan-grid.plan-compact{grid-template-columns:repeat(2,minmax(0,260px));gap:12px;margin-top:20px}
+    .plan-compact .plan{padding:14px 16px;gap:8px}
+    .plan-compact .num{font-size:30px}
+    .plan-compact .btn{padding:10px 12px;font-size:13px;white-space:nowrap}
+    @media (max-width:760px){.plan-grid.plan-compact{grid-template-columns:1fr 1fr}.plan-compact .num{font-size:24px}.plan-compact .num small{font-size:14px}}
+    .plan{border:1px solid rgba(246,244,236,.25);padding:22px;display:flex;flex-direction:column;gap:12px}
+    .plan-main{border:2px solid var(--safety)}
+    .plan-name{font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:rgba(246,244,236,.7)}
+    .plan .num{font-size:40px}
+    .plan ul{margin:0;padding:0 0 0 18px;color:rgba(246,244,236,.8);font-size:15px;line-height:1.6;flex:1}
+    .plan .btn{align-self:flex-start;margin-top:6px}
     .price .or{font:500 13.5px var(--mono);color:rgba(246,244,236,.55);margin:10px 0 20px}
 
     /* ---- FAQ ---- */
@@ -194,7 +216,7 @@
     /* ---- B2B (ent) sections ---- */
     .ent-hero{background:var(--ink);color:var(--paper);padding:64px 0}
     .ent-hero .eyebrow{border-color:rgba(246,244,236,.6);color:var(--paper)}
-    .ent-hero h1{font-family:var(--serif);font-weight:650;font-size:clamp(28px,4vw,44px);line-height:1.15;letter-spacing:-.01em;margin:18px 0 0;max-width:26ch;color:var(--paper)}
+    .ent-hero h1,.ent-hero h2{font-family:var(--serif);font-weight:650;font-size:clamp(28px,4vw,44px);line-height:1.15;letter-spacing:-.01em;margin:18px 0 0;max-width:26ch;color:var(--paper)}
     .ent-hero-sub{margin:18px 0 0;font-size:16.5px;line-height:1.65;color:rgba(246,244,236,.75);max-width:72ch}
     .ent-hero-cta{display:inline-block;margin-top:24px;padding:13px 22px;font:600 14.5px var(--mono);text-decoration:none;background:var(--safety);color:#23261f;border:2px solid var(--safety)}
     .ent-hero .proofline{font-size:13px;color:rgba(246,244,236,.6);margin:16px 0 0;font-weight:600}
@@ -296,91 +318,9 @@
     #dlClose{position:absolute;top:10px;right:14px;border:0;background:none;font-size:24px;color:var(--ink2);cursor:pointer;line-height:1}
   </style>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "MileCheck",
-    "alternateName": ["Mile Check", "Milecheck", "MileCheck App"],
-    "url": "https://milecheckapp.com",
-    "logo": "https://milecheckapp.com/assets/app-icon-60.png",
-    "description": "MileCheck shows your nearest highway mile marker in real time across all 50 US states, plus live road conditions and state DOT feeds pulled straight from state departments of transportation.",
-    "email": "info@milecheckapp.com",
-    "founder": {
-      "@type": "Person",
-      "name": "Leah Gerber",
-      "jobTitle": "Founder",
-      "description": "Founder of MileCheck, the highway intelligence app. (Distinct from Dr. Leah Gerber, the ASU conservation-science professor — a different person.)"
-    },
-    "sameAs": [
-      "https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=home&mt=8",
-      "https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhome",
-      "https://marketplace.geotab.com/solutions/milecheck",
-      "https://www.instagram.com/milecheck_app",
-      "https://www.facebook.com/share/1FT9JtkH5D/",
-      "https://www.linkedin.com/company/milecheck",
-      "https://www.reddit.com/user/MileCheckApp/"
-    ]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "MileCheck",
-    "alternateName": ["Mile Check", "Milecheck", "MileCheck App"],
-    "description": "Real-time highway mile markers in all 50 US states. Live state DOT feeds from 50 state departments of transportation. Navigate to any milepost. Includes Seattle drawbridge push notifications when a bridge is raised.",
-    "url": "https://milecheckapp.com",
-    "applicationCategory": "NavigationApplication",
-    "operatingSystem": "iOS, Android",
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "Premium Annual",
-        "price": "49.99",
-        "priceCurrency": "USD",
-        "description": "7-day free trial included",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "billingDuration": "P1Y"
-        }
-      },
-      {
-        "@type": "Offer",
-        "name": "Premium Monthly",
-        "price": "9.99",
-        "priceCurrency": "USD",
-        "description": "7-day free trial included",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "billingDuration": "P1M"
-        }
-      }
-    ],
-    "author": {
-      "@type": "Organization",
-      "name": "MileCheck",
-      "url": "https://milecheckapp.com",
-      "email": "info@milecheckapp.com"
-    },
-    "downloadUrl": [
-      "https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=home&mt=8",
-      "https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhome"
-    ],
-    "screenshot": "https://milecheckapp.com/images/og-banner-light.png",
-    "featureList": [
-      "Real-time highway mile markers in all 50 US states",
-      "Live state DOT feeds from 50 state departments of transportation",
-      "Navigate to any milepost by route and mile number",
-      "Seattle drawbridge alerts with push notifications for the Fremont, Ballard, Montlake, South Park, and 1st Ave S bridges",
-      "Interactive map with milepost markers and alert overlays",
-      "Trip logging with route, milepost range, timestamps, and CSV export",
-      "Offline-ready with bundled milepost data for all 50 states",
-      "Apple CarPlay and Android Auto support"
-    ],
-    "keywords": "highway mile marker, milepost, state DOT feeds, live road conditions, bridge alerts, Seattle bridges, GPS milepost, truck driver app, highway navigation, road conditions"
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does MileCheck do?","acceptedAnswer":{"@type":"Answer","text":"MileCheck shows road conditions from official state feeds across all 50 states. It also shows your nearest highway mile marker, live. New to mile markers? Mile markers vs. GPS — why both still matter →"}},{"@type":"Question","name":"Which states are covered?","acceptedAnswer":{"@type":"Answer","text":"Mile markers in all 50 states. Live state DOT feeds in all 50 states."}},{"@type":"Question","name":"Does it work without cell service?","acceptedAnswer":{"@type":"Answer","text":"Yes — mile markers are stored on your phone, so they work in dead zones. Live alerts need a connection."}},{"@type":"Question","name":"What’s free, and what’s premium?","acceptedAnswer":{"@type":"Answer","text":"Your current mile marker is always free. Premium costs $49.99/yr or $9.99/mo and includes a 7-day free trial. It adds the live map, state DOT feeds and trip tools."}},{"@type":"Question","name":"Does it work with CarPlay and Android Auto?","acceptedAnswer":{"@type":"Answer","text":"Yes, both — and the car screen is free. It’s deliberately simple right now: your highway, mile marker, and current road conditions, glance-and-go. Just the one thing you need while driving, with no clutter. A richer car screen is on the way."}},{"@type":"Question","name":"Do I need an account? What happens to my location data?","acceptedAnswer":{"@type":"Answer","text":"No sign-up, no email, no phone number — just open it and drive. Your mile marker is found on your device, not a server, so where you are never gets sent anywhere just to show you a mile marker. Trips you log stay on your device too — export or delete them any time from the Trips tab. Background tracking while your phone is locked is off by default and only turns on if you enable it. MileCheck has no ad network and doesn’t sell personal data. Read the full privacy policy →"}},{"@type":"Question","name":"Can my company license the data?","acceptedAnswer":{"@type":"Answer","text":"Yes. The 50-state milepost corpus and the live 50-state DOT feed layer are available to license — one schema, one API, no state-by-state agency negotiations on your side. Fleets on Geotab can add MileCheck today from the Geotab Marketplace . For API access or fleet licensing, email info@milecheckapp.com — details on the B2B page ."}},{"@type":"Question","name":"Can I embed or republish MileCheck’s maps and data?","acceptedAnswer":{"@type":"Answer","text":"Contact us about embedding maps or republishing data: info@milecheckapp.com . Newsrooms and public-interest sites can ask to cite the data with credit and a link. Commercial use of the data or maps requires a license."}}],"@id":"https://milecheckapp.com/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"MileCheck","alternateName":["Mile Check","Milecheck","MileCheck App"],"url":"https://milecheckapp.com/","logo":"https://milecheckapp.com/assets/app-icon-60.png","description":"MileCheck provides road conditions from official state feeds across all 50 states through web maps, an app and licensed data.","email":"info@milecheckapp.com","founder":{"@type":"Person","name":"Leah Gerber","jobTitle":"Founder","description":"Founder of MileCheck, the highway intelligence app. (Distinct from Dr. Leah Gerber, the ASU conservation-science professor — a different person.)"},"sameAs":["https://apps.apple.com/app/id6759212851","https://play.google.com/store/apps/details?id=app.milecheck.mobile","https://www.instagram.com/milecheck_app","https://www.facebook.com/share/1FT9JtkH5D/","https://www.linkedin.com/company/milecheck","https://x.com/milecheckapp","https://www.youtube.com/channel/UCBEZIoTz6LChUKZ8TymdJaw","https://www.reddit.com/user/MileCheckApp/"],"@id":"https://milecheckapp.com/#org","legalName":"MileCheck LLC","contactPoint":[{"@type":"ContactPoint","contactType":"sales","email":"sales@milecheckapp.com"},{"@type":"ContactPoint","contactType":"customer support","email":"info@milecheckapp.com"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MileCheck","alternateName":["Mile Check","Milecheck","MileCheck App"],"description":"Road conditions from official state feeds across all 50 states, plus your nearest highway mile marker. Open a milepost in your navigation app. Includes Seattle drawbridge status.","url":"https://milecheckapp.com","applicationCategory":"TravelApplication","operatingSystem":"iOS, Android","offers":[{"@type":"Offer","name":"Premium Annual","price":"49.99","priceCurrency":"USD","description":"7-day free trial included","priceSpecification":{"@type":"UnitPriceSpecification","billingDuration":"P1Y"}},{"@type":"Offer","name":"Premium Monthly","price":"9.99","priceCurrency":"USD","description":"7-day free trial included","priceSpecification":{"@type":"UnitPriceSpecification","billingDuration":"P1M"}}],"author":{"@id":"https://milecheckapp.com/#org"},"downloadUrl":["https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=home&mt=8","https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhome"],"screenshot":"https://milecheckapp.com/images/og-banner-light.png","featureList":["Real-time highway mile markers in all 50 US states","Live state DOT feeds from 50 state departments of transportation","Open a milepost in your navigation app","Seattle drawbridge alerts with push notifications for the Fremont, Ballard, Montlake, South Park, and 1st Ave S bridges","Interactive map with milepost markers and alert overlays","Trip logging with route, milepost range, timestamps, and CSV export","Offline-ready with bundled milepost data for all 50 states","Apple CarPlay and Android Auto support"],"keywords":"highway mile marker, milepost, state DOT feeds, live road conditions, bridge alerts, Seattle bridges, GPS milepost, truck driver app, highway navigation, road conditions","@id":"https://milecheckapp.com/#app","publisher":{"@id":"https://milecheckapp.com/#org"}}</script>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
 <body>
@@ -402,6 +342,7 @@
           <a href="canada/">Canada</a>
           <a href="#" data-tab="story">Story</a>
           <a href="/partners/">B2B</a>
+          <a href="#" data-tab="home" data-goto="pricing">Pricing</a>
           <a href="blog/">Blog</a>
           <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
           <a href="#" data-dl class="nav-cta">GET THE APP</a>
@@ -414,16 +355,16 @@
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">iOS · ANDROID · ALL 50 STATES</p>
-            <h1 class="hero-h1">Know exactly where you are on the highway.</h1>
-            <p class="hero-sub">Your nearest mile marker, live — plus road alerts from all 50 state DOTs. It&rsquo;s the first thing dispatch asks for.</p>
+            <p class="eyebrow">WEB · iOS · ANDROID</p>
+            <h1 class="hero-h1">Mile markers and road conditions for all 50 states.</h1>
+            <p class="hero-sub">Official state feeds on the web and in the app, with cameras and chain controls where available. The app shows your nearest mile marker, live.</p>
             <p class="hero-carplay">Now on CarPlay &amp; Android Auto</p>
             <div class="hero-ctas">
-              <a href="#" data-dl class="btn btn-primary">GET THE APP</a>
-              <a href="maps/" class="btn">SEE THE LIVE MAPS</a>
+              <a href="maps/" class="btn btn-primary">SEE THE LIVE MAPS</a>
+              <a href="#" data-dl class="btn">GET THE APP</a>
             </div>
-            <p class="hero-fineprint"><strong>Your mile marker is always free.</strong> Premium &mdash; map, live alerts, trip tools &mdash; $49.99/yr or $9.99/mo, 7-day free trial.</p>
-            <p class="hero-features">Real-time mile markers (50 states) &middot; Live state DOT feeds (50 states) &middot; Border wait times &middot; Seattle bridge status &middot; Crosswind warnings &middot; Works offline</p>
+            <p class="hero-fineprint"><strong>Your mile marker is always free.</strong> Premium adds the live map, alerts and route planning, with a free trial. <a href="#pricing" style="color:inherit;text-decoration:underline;">See pricing</a></p>
+            <p class="mc-cta-line" style="margin:16px 0 0;font-size:19px;line-height:1.35;"><a href="/blog/road-report-september-2026.html" style="display:inline-block;background:#23261f;color:#f6f4ec;font-weight:700;text-decoration:none;padding:11px 16px;border-left:4px solid #e0a23b;">Read the Monthly Highway Report, September 2026 &rarr;</a></p>
           </div>
           <div class="hero-roy" aria-hidden="true">
             <img src="images/roy-nightshift.png" alt="Roy, MileCheck's road-crew badger, on the night shift">
@@ -439,16 +380,16 @@
       <div class="container" style="padding:0 24px;">
         <div class="ledger-grid">
           <div class="cell">
+            <div class="k">Live state DOT feeds<span class="live-dot" aria-hidden="true"></span></div>
+            <div class="v">50</div>
+            <div class="s">of 50 US states &mdash; <strong style="color:var(--ink);">every U.S. state.</strong></div>
+            <div class="t" style="color:var(--ink2);">Free web maps · Premium in the app</div>
+          </div>
+          <div class="cell">
             <div class="k">Mile markers</div>
             <div class="v">50</div>
             <div class="s">US states</div>
             <div class="t">Always free</div>
-          </div>
-          <div class="cell">
-            <div class="k">Live state DOT feeds<span class="live-dot" aria-hidden="true"></span></div>
-            <div class="v">50</div>
-            <div class="s">of 50 US states &mdash; <strong style="color:var(--ink);">every U.S. state.</strong></div>
-            <div class="t" style="color:var(--ink2);">Premium · $49.99/yr</div>
           </div>
           <div class="cell">
             <div class="k">Stability</div>
@@ -460,56 +401,31 @@
       </div>
     </section>
 
-    <!-- ============== WHAT YOU GET (logbook entries) ============== -->
-    <section data-panel="home">
-      <div class="container">
-        <span class="section-label">Inside the app</span>
-        <h2 class="section-h2">Far more than a mile marker.</h2>
-        <div class="entries">
-          <div class="entry"><span class="no">ENTRY 01</span><div><h3>What you&rsquo;d expect.</h3><p>Your nearest mile marker, live (all 50 states) &middot; live state DOT feeds &middot; offline mile-marker lookup &middot; live map &middot; GPS speed.</p></div></div>
-          <div class="entry"><span class="no">ENTRY 02</span><div><h3>The extras.</h3><p>Border wait times &middot; Seattle bridge status &middot; crosswind warnings &middot; trip logging &middot; share your location &middot; navigate to any milepost.</p></div></div>
-          <div class="entry"><span class="no">ENTRY 03</span><div><h3>On the car screen.</h3><p>CarPlay and Android Auto show your highway and mile marker at a glance.</p></div></div>
-          <div class="entry"><span class="no">ENTRY 04</span><div><h3>Route planning.<span class="tag">PREMIUM</span></h3><p>Plan a corridor, see it drawn on the map, and get the alerts that are actually on your route, with an estimated arrival time.</p></div></div>
-          <div class="entry"><span class="no">ENTRY 05</span><div><h3>Road information in one app.</h3><p>Mile markers in all 50 US states and British Columbia, with offline lookup. Live state DOT feeds across the same area. 51,000+ DOT traffic cameras across 48 regions.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== LIVE MAPS ============== -->
+    <!-- ============== THE WEBSITE ============== -->
     <section data-panel="home" class="alt" id="livemaps">
       <div class="container">
-        <span class="section-label">Free on the web</span>
-        <h2 class="section-h2">See our live maps.</h2>
-        <p class="mp-sub">Free highway intelligence on the web, built on the same data as the app.</p>
+        <span class="section-label" id="routes">The website</span>
+        <h2 class="section-h2">Live maps for every state.</h2>
+        <p class="mp-sub">Built on the same data as the app, free to use. Plus guides to the road itself.</p>
         <div class="linklist">
-          <a class="linkrow" href="maps/mile-markers/"><span class="tag">&#9679; Live</span><span><h3>Mile Marker Map</h3><p>Browse the mile markers of any highway in all 50 states, straight from the data the app runs on.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="closures/"><span class="tag">&#9679; Live</span><span><h3>Road Closures Map</h3><p>Every current highway closure from 50 state DOTs on one national map.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="cameras/"><span class="tag">&#9679; Live</span><span><h3>Highway Cameras</h3><p>Live DOT cameras in <!--cov:cameras.us_states-->43<!--/cov--> states coast to coast &mdash; see the pass before you drive it.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="ferries/"><span class="tag">&#9679; Live</span><span><h3>Washington ferries</h3><p>Next sailings, space left on each boat, terminal cameras, and the boats on the map.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="maps/#drawbridges"><span class="tag">&#9679; Live</span><span><h3>Drawbridge Maps</h3><p>Live Seattle &amp; Florida bridge status, plus every US drawbridge&rsquo;s opening rules &mdash; 26 states and counting.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="borders/"><span class="tag">&#9679; Live</span><span><h3>Border Wait Times</h3><p>Live waits at every US land crossing &mdash; passenger and commercial, both directions.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="fire/"><span class="tag">&#9679; Live</span><span><h3>US Wildfire Map</h3><p>Every active fire with acres and containment, plus the live road closures fires cause.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="maps/"><span class="tag">&#9679; All maps</span><span><h3>All live maps</h3><p>The full set &mdash; state drawbridge pages, the fire map, and everything above in one place.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="maps/mile-markers/"><span class="tag">&#9679; Live</span><span><h3>Mile Marker Map <span class="go">&rarr;</span></h3><p>Browse the mile markers of any highway in all 50 states.</p></span></a>
+          <a class="linkrow" href="closures/"><span class="tag">&#9679; Live</span><span><h3>Road Closures Map <span class="go">&rarr;</span></h3><p>Highway closures reported by state DOT feeds, all 50 states.</p></span></a>
+          <a class="linkrow" href="cameras/"><span class="tag">&#9679; Live</span><span><h3>Highway Cameras <span class="go">&rarr;</span></h3><p>Live DOT cameras in <!--cov:cameras.us_states-->43<!--/cov--> states.</p></span></a>
+          <a class="linkrow" href="passes/"><span class="tag">&#9679; <!--cov:pages.passes-->13<!--/cov--> passes</span><span><h3>Mountain pass conditions <span class="go">&rarr;</span></h3><p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon.</p></span></a>
+          <a class="linkrow" href="maps/"><span class="tag">&#9679; All maps</span><span><h3>All live maps <span class="go">&rarr;</span></h3><p>Drawbridges, ferries, border waits and the rest.</p></span></a>
         </div>
-      </div>
-    </section>
-
-    <!-- ============== CHECK YOUR ROUTE ============== -->
-    <section data-panel="home" id="routes">
-      <div class="container">
-        <span class="section-label">Plan ahead</span>
-        <h2 class="section-h2">Check your route.</h2>
-        <p class="mp-sub">Live cameras and road conditions for the highways, passes, and states drivers search most.</p>
-        <div class="linklist">
-          <a class="linkrow" href="corridors/"><span class="tag">&#9679; <!--cov:pages.corridors-->15<!--/cov--> interstates</span><span><h3>Interstate corridors</h3><p>See a whole interstate right now &mdash; I-5, I-75, I-95, I-15, and more, tagged with mile markers.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="passes/"><span class="tag">&#9679; <!--cov:pages.passes-->13<!--/cov--> passes</span><span><h3>Mountain pass conditions</h3><p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon &mdash; see the snow before you drive the summit.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="cameras/"><span class="tag">&#9679; <!--cov:pages.camera_states-->46<!--/cov--> states</span><span><h3>Cameras by state</h3><p>Live traffic cameras for your state &mdash; Washington, Florida, California, and 19 more.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="what-is-my-mile-marker/"><span class="tag">&#9679; Guide</span><span><h3>What is my mile marker?</h3><p>How mile markers work, how to find yours right now, and why 911 and tow trucks ask for it.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="report-location/"><span class="tag">&#9679; Guide</span><span><h3>Report your location</h3><p>Broke down on the highway? Exactly what to tell 911, a tow, or roadside assistance.</p></span><span class="go">&rarr;</span></a>
-            <!-- signupcta:start --><p class="mc-cta-line" style="margin:6px 0 26px;font-size:15px;margin:14px 0 0;"><a href="#subscribe" style="color:#0f7a4f;font-weight:700;text-decoration:none;border-bottom:1px solid #9fd3b8;">&#9993; Get the MileCheck Highway Report by email, once a month &rarr;</a></p><!-- signupcta:end -->
-            
-        </div>
-        <p class="basics">Highway basics:
+        <details class="more-guides">
+          <summary>More maps and driving guides</summary>
+          <p class="basics">
+          <a href="corridors/">interstate corridors</a> &middot;
+          <a href="fire/">US wildfire map</a> &middot;
+          <a href="blog/">all driving guides</a> &middot;
+          <a href="what-is-my-mile-marker/">what is my mile marker</a> &middot;
+          <a href="maps/mile-markers/">mile marker map</a> &middot;
+          <a href="report-location/">what to tell 911 when you break down</a> &middot;
+          <a href="ferries/">Washington ferries</a> &middot;
+          <a href="borders/">border wait times</a> &middot;
+          <a href="cameras/">cameras by state</a> &middot;
           <a href="mexico-car-insurance/">do I need Mexican car insurance</a> &middot;
           <a href="international-driving-permit-usa/">do I need an International Driving Permit</a> &middot;
           <a href="drive-in-us-foreign-license/">driving on a foreign licence</a> &middot;
@@ -557,8 +473,21 @@
           <a href="what-are-rumble-strips/">what rumble strips are for</a> &middot;
           <a href="zipper-merge-explained/">what is a zipper merge</a> &middot;
           <a href="sand-vs-salt-vs-brine/">sand vs salt vs brine</a> &middot;
-          <a href="who-maintains-the-roads/">who maintains the roads</a>
-        </p>
+          <a href="who-maintains-the-roads/">who maintains the roads</a></p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============== WHAT IT SHOWS ============== -->
+    <section data-panel="home" id="the-app" style="padding-bottom:8px;">
+      <div class="container">
+        <span class="section-label">The app</span>
+        <h2 class="section-h2">Where you are, and what&rsquo;s ahead.</h2>
+        <div class="entries">
+          <div class="entry"><span class="no">01</span><div><h3>Your mile marker.</h3><p>Your nearest highway mile marker, shown to a tenth of a mile. The data is stored on your phone, so it works with no signal. All 50 states, plus kilometre markers in 10 Canadian provinces and territories. Always free.</p></div></div>
+          <div class="entry"><span class="no">02</span><div><h3>Road conditions and cameras.<span class="tag">PREMIUM</span></h3><p>Closures, crashes, chain controls and construction from official state feeds, on a live map, with DOT cameras where states publish them.</p></div></div>
+          <div class="entry"><span class="no">03</span><div><h3>Trip planning.<span class="tag">PREMIUM</span></h3><p>Plan a corridor to filter road alerts for your route and see an estimated arrival time. Border waits, Seattle drawbridges and crosswind warnings are in there too.</p></div></div>
+        </div>
       </div>
     </section>
 
@@ -566,47 +495,41 @@
     <section data-panel="home" class="screens">
       <div class="carousel-track">
         <div class="carousel-card">
-          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-01-mile.png" alt="Mile tab showing nearest mile marker"></div></div>
-          <div class="cc-eyebrow">Mile Tab</div>
-          <div class="cc-title">Your nearest mile marker.</div>
-          <div class="cc-sub">Accurate to one-tenth of a mile, live as you drive.</div>
-        </div>
-        <div class="carousel-card">
           <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-08-alerts.png" alt="Alerts tab"></div></div>
           <div class="cc-eyebrow">Alerts</div>
           <div class="cc-title">Live state DOT feeds in your state.</div>
           <div class="cc-sub">Grouped by route, straight from the official feed.</div>
         </div>
         <div class="carousel-card">
+          <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-01-mile.png" alt="Mile tab showing nearest mile marker"></div></div>
+          <div class="cc-eyebrow">Mile Tab</div>
+          <div class="cc-title">Your nearest mile marker.</div>
+          <div class="cc-sub">Shown to a tenth of a mile, live as you drive.</div>
+        </div>
+        <div class="carousel-card">
           <div class="cc-phone"><div class="cc-phone-inner"><img src="images/cs-02-navmp.png" alt="Map tab navigate to milepost"></div></div>
           <div class="cc-eyebrow">Map</div>
-          <div class="cc-title">Navigate to any mile marker.</div>
+          <div class="cc-title">Open a mile marker in your nav app.</div>
           <div class="cc-sub">Tap a marker, hand off to your nav app.</div>
         </div>
       </div>
     </section>
 
-    <!-- ============== SEATTLE / PNW ============== -->
-    <section data-panel="home" class="alt">
-      <div class="container">
-        <span class="section-label">Built for the Northwest</span>
-        <h2 class="section-h2">Beat the bridge. Beat the pass.</h2>
-        <p class="prose">If you drive Seattle, MileCheck shows the city&rsquo;s drawbridges &mdash; Fremont, Ballard, Montlake, South Park, and 1st Ave S &mdash; raised or lowered, live on the map, so you can see if the bridge is up before you&rsquo;re stuck behind it. Headed over the mountains? You get Snoqualmie and Stevens pass conditions and chain controls, straight from WSDOT.</p>
-      </div>
-    </section>
-
     <!-- ============== PRICING ============== -->
-    <section data-panel="home" class="price">
+    <section data-panel="home" class="price" id="pricing" style="padding:40px 0;">
       <div class="container">
-        <div class="price-grid">
-          <div>
-            <h2>Your mile marker is always free.</h2>
-            <p>Premium adds the live map, state DOT feeds on your route, route planning, and trip tools. 7-day free trial, cancel anytime. Early subscribers keep their price.</p>
-          </div>
-          <div>
+        <h2 style="font-size:28px;">Your mile marker is always free.</h2>
+        <p class="price-lede" style="margin-top:10px;">Free also covers offline use in all 50 states, plus CarPlay and Android Auto. Premium adds the live map, state DOT feeds on your route, route planning and trip tools. 7-day free trial, cancel anytime. Early subscribers keep their price.</p>
+        <div class="plan-grid plan-compact">
+          <div class="plan plan-main">
+            <div class="plan-name">Premium annual</div>
             <div class="num">$49.99<small>/yr</small></div>
-            <div class="or">or $9.99/month</div>
-            <a href="#" data-dl class="btn btn-primary">START THE FREE TRIAL</a>
+            <a href="#" data-dl class="btn btn-primary">START FREE TRIAL</a>
+          </div>
+          <div class="plan">
+            <div class="plan-name">Premium monthly</div>
+            <div class="num">$9.99<small>/mo</small></div>
+            <a href="#" data-dl class="btn btn-primary">START FREE TRIAL</a>
           </div>
         </div>
       </div>
@@ -618,14 +541,29 @@
         <span class="section-label">FAQ</span>
         <h2 class="section-h2">Questions, answered.</h2>
         <div class="faq-list">
-          <details class="faq-item"><summary>What does MileCheck do?</summary><p>It shows your nearest highway mile marker in real time, anywhere in all 50 states &mdash; plus live road conditions and alerts pulled straight from state DOTs. You always know exactly where you are, and what&rsquo;s ahead on your route.</p><p>New to mile markers? <a href="/blog/mile-markers-vs-gps.html">Mile markers vs. GPS &mdash; why both still matter &rarr;</a></p></details>
+          <details class="faq-item"><summary>What does MileCheck do?</summary><p>MileCheck shows road conditions from official state feeds across all 50 states. It also shows your nearest highway mile marker, live.</p><p>New to mile markers? <a href="/blog/mile-markers-vs-gps.html">Mile markers vs. GPS &mdash; why both still matter &rarr;</a></p></details>
           <details class="faq-item"><summary>Which states are covered?</summary><p>Mile markers in all 50 states. Live state DOT feeds in all 50 states.</p></details>
           <details class="faq-item"><summary>Does it work without cell service?</summary><p>Yes &mdash; mile markers are stored on your phone, so they work in dead zones. Live alerts need a connection.</p></details>
-          <details class="faq-item"><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium &mdash; the live map, state DOT feeds, and trip tools &mdash; is <span class="mono">$49.99/yr</span> or <span class="mono">$9.99/mo</span>, with a 7-day free trial.</p></details>
+          <details class="faq-item"><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium costs <span class="mono">$49.99/yr</span> or <span class="mono">$9.99/mo</span> and includes a 7-day free trial. It adds the live map, state DOT feeds and trip tools.</p></details>
           <details class="faq-item"><summary>Does it work with CarPlay and Android Auto?</summary><p>Yes, both &mdash; and the car screen is free. It&rsquo;s deliberately simple right now: your highway, mile marker, and current road conditions, glance-and-go. Just the one thing you need while driving, with no clutter. A richer car screen is on the way.</p></details>
           <details class="faq-item"><summary>Do I need an account? What happens to my location data?</summary><p>No sign-up, no email, no phone number &mdash; just open it and drive. Your mile marker is found on your device, not a server, so where you are never gets sent anywhere just to show you a mile marker. Trips you log stay on your device too &mdash; export or delete them any time from the Trips tab. Background tracking while your phone is locked is off by default and only turns on if you enable it. MileCheck has no ad network and doesn&rsquo;t sell personal data. <a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener">Read the full privacy policy &rarr;</a></p></details>
           <details class="faq-item"><summary>Can my company license the data?</summary><p>Yes. The 50-state milepost corpus and the live 50-state DOT feed layer are available to license &mdash; one schema, one API, no state-by-state agency negotiations on your side. Fleets on Geotab can add MileCheck today from the <a href="blog/geotab-marketplace.html">Geotab Marketplace</a>. For API access or fleet licensing, email <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a> &mdash; details on the <a href="/partners/">B2B page</a>.</p></details>
-          <details class="faq-item"><summary>Can I embed or republish MileCheck&rsquo;s maps and data?</summary><p>Newsrooms and public-interest sites are welcome to embed our live maps or cite the data with credit and a link &mdash; just tell us where it&rsquo;s running. Any commercial use of the data or maps &mdash; inside a product, service, or paid publication &mdash; requires a license first: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>.</p></details>
+          <details class="faq-item"><summary>Can I embed or republish MileCheck&rsquo;s maps and data?</summary><p>Contact us about embedding maps or republishing data: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>. Newsrooms and public-interest sites can ask to cite the data with credit and a link. Commercial use of the data or maps requires a license.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FOR BUSINESS ============== -->
+    <section data-panel="home" class="alt" id="for-business">
+      <div class="container">
+        <span class="section-label">For business</span>
+        <h2 class="section-h2">Mile markers and road data for your business.</h2>
+        <p class="mp-sub">One normalized layer under the app and the website. 50 state DOT feeds in 19 source formats, one schema. AWS Partner Network member.</p>
+        <div class="linklist">
+          <a class="linkrow" href="partners/"><span class="tag">&#9679; Data</span><span><h3>Fleets, dispatch and software teams</h3><p>Dispatch and fleets report location by mile marker. Get the milepost data as a file you keep, or connect to the live road feeds. Geotab fleets can use the MileCheck Add-In.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="partners/corridor-boards.html"><span class="tag">&#9679; Venues</span><span><h3>Truck stops, travel centers and diners</h3><p>Show road conditions for your highway on a TV with a browser. Include cameras and weather where available.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="sponsor/"><span class="tag">&#9679; Sponsors</span><span><h3>Local businesses</h3><p>Sponsor a page on this site. One sponsor per page.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="mailto:info@milecheckapp.com?subject=Embedding%20MileCheck%20maps"><span class="tag">&#9679; Press</span><span><h3>Newsrooms</h3><p>Contact us about embedding maps or republishing data. Commercial use requires a license.</p></span><span class="go">&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -637,7 +575,7 @@
           <img src="images/dash-display/dash-display-hero.webp" alt="MileCheck dash display, vent-mounted, showing I-5 NB mile marker 142.5" style="width:100%;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.18)">
           <div>
             <span class="section-label">In development</span>
-            <h2 class="section-h2">A dash display, for your exact mile marker.</h2>
+            <h2 class="section-h2">A dash display for your mile marker.</h2>
             <p class="prose" style="margin:14px 0 20px">A compact vent-mount display showing the highway and mile marker you&rsquo;re passing, no phone screen needed. First prototypes are in development now. We need sign-ups to get the funding to make it real.</p>
             <a href="/dash-preorder.html?utm_source=site&amp;utm_campaign=dash-home" class="btn btn-primary">SIGN UP &rarr;</a>
           </div>
@@ -670,7 +608,7 @@
         <span class="section-label">Our story</span>
         <h2 class="section-h2">Why we built MileCheck.</h2>
         <div class="story-body">
-          <p>My dad took a seasonal job driving snowplows for ODOT. Before long I realized how much of that job revolves around mile markers &mdash; every radio call, every crash report, every road closure. They&rsquo;re how crews track where sand, salt, and brine have been applied, and how dispatchers coordinate a response.</p>
+          <p>My dad took a seasonal job driving snowplows for ODOT. Before long I realized how much of that job revolves around mile markers &mdash; radio calls, crash reports, and closures. They&rsquo;re how crews track where sand, salt, and brine have been applied, and how dispatchers coordinate a response.</p>
           <p>If you call for help on a mountain highway, how do you tell anyone exactly where you are? That&rsquo;s what mile markers are for. Most drivers pass hundreds of them without a second thought. But the people who keep roads open, respond to emergencies, and help stranded motorists rely on them every day.</p>
           <p>There was one app for this, but it only worked on iPhone. My dad uses Android. So I built him a web app that showed his nearest Oregon mile marker from GPS. My mom, my sister, and I spent hours driving highways and back roads, checking numbers, making adjustments. I still remember the first time the number changed at exactly the right moment.</p>
           <p>My dad showed it to coworkers. They showed it to others. Feedback came from truck drivers, road crews, first responders, and everyday drivers. Nearly every feature in MileCheck exists because someone on a real road asked for it.</p>
@@ -698,7 +636,7 @@
     <section class="ent-hero">
       <div class="container">
         <p class="eyebrow">FOR PLATFORMS AND PARTNERS</p>
-        <h1>The highway intelligence layer &mdash; licensable, integrable, already in production.</h1>
+        <h2>The highway intelligence layer &mdash; licensable, integrable, already in production.</h2>
         <p class="ent-hero-sub">
           Most milepost data products stop at the static layer: &ldquo;where is MP 142?&rdquo; MileCheck delivers both &mdash; that milepost lookup <em>plus</em> live conditions at MP 142 right now, normalized from 50 state DOT feeds across 19 distinct upstream platform formats. One schema. One API response. No state contracts on your side.
         </p>
@@ -724,7 +662,7 @@
           </div>
           <div class="audience-cell">
             <h4>Cell-phone 911 location is often wrong</h4>
-            <p>The FCC requires carriers to deliver an accurate location for only <strong>80% of wireless 911 calls</strong> &mdash; and highways are the worst case, where cell towers line up in a row and triangulation fails.<br><span style="font-size:12px;opacity:.7;">&mdash; FCC E911 location-accuracy rules</span></p>
+            <p>The FCC requires carriers to deliver an accurate location for only <strong>80% of wireless 911 calls</strong>. On highways, cell towers line up in a row and triangulation can fail.<br><span style="font-size:12px;opacity:.7;">&mdash; FCC E911 location-accuracy rules</span></p>
           </div>
           <div class="audience-cell">
             <h4>The maps in your pocket won&rsquo;t show it</h4>
@@ -756,7 +694,7 @@
           <div class="infra-cell">
             <div class="infra-cell-num">03</div>
             <h3>Navigate-to-milepost primitive</h3>
-            <p>The first consumer nav stack where a mile marker is a destination, not a display element. Tapping a milepost in the map hands off to Google Maps, Apple Maps, or Waze with the milepost coordinate as the routing target. Direct workflow value for dispatch-to-driver handoffs in fleet, roadside, and emergency-response use cases.</p>
+            <p>Tap a milepost in the map to send its coordinates to Google Maps, Apple Maps, or Waze. Direct workflow value for dispatch-to-driver handoffs in fleet, roadside, and emergency-response use cases.</p>
           </div>
           <div class="infra-cell">
             <div class="infra-cell-num">04</div>
@@ -766,12 +704,12 @@
           <div class="infra-cell">
             <div class="infra-cell-num">05</div>
             <h3>Real-time infrastructure status</h3>
-            <p>Beyond state DOT feeds: live commercial border-crossing wait times for all supported CBP land crossings (commercial and FAST lanes, direct from CBP), plus live movable-bridge open/closed status &mdash; hyper-local, time-critical signals no consumer map surfaces. Live drawbridge status runs in Seattle and Florida (state DOT sensors) with Louisiana road/marine status behind it &mdash; and the federal opening rules for 800+ regulated US drawbridges are already normalized in the corpus, published as state-by-state web maps.</p>
+            <p>Beyond state DOT feeds: live commercial border-crossing wait times for all supported CBP land crossings (commercial and FAST lanes, direct from CBP), plus drawbridge status where available. Live drawbridge status runs in Seattle and Florida (state DOT sensors) with Louisiana road/marine status behind it &mdash; and the federal opening rules for 800+ regulated US drawbridges are already normalized in the corpus, published as state-by-state web maps.</p>
           </div>
           <div class="infra-cell" style="grid-column:1 / -1;">
             <div class="infra-cell-num">06</div>
             <h3>Historical archive</h3>
-            <p>Every state DOT and Canadian provincial feed (DriveBC, Alberta, Manitoba), archived every two hours since September 2026 (daily before that, back to mid-August) &mdash; a running record of a source every agency purges on its own within hours. Nothing like it exists publicly today. It's what let us compute real crash-clearance times, bridge-raise duration histograms, and border-wait curves by hour and day &mdash; measured, not estimated. It compounds every week it runs, and it's what an underwriting or risk-scoring buyer needs that a live feed alone can't supply. Available as a historical dataset or a continuous sync, separate from the live API.</p>
+            <p>State DOT and Canadian provincial feeds (DriveBC, Alberta, Manitoba), with snapshots collected every two hours since September 2026 (daily before that, back to mid-August). Coverage starts when each jurisdiction was integrated. It's what let us compute real crash-clearance times, bridge-raise duration histograms, and border-wait curves by hour and day &mdash; measured, not estimated. It compounds every week it runs, and it's what an underwriting or risk-scoring buyer needs that a live feed alone can't supply. Available as a historical dataset or a continuous sync, separate from the live API.</p>
           </div>
         </div>
       </div>
@@ -780,7 +718,7 @@
     <section class="ent-section ent-section-alt">
       <div class="container">
         <span class="ent-section-label">Who we talk to</span>
-        <h2>Seven segments where mile-marker precision is the missing layer.</h2>
+        <h2>Seven segments that already work in mile markers.</h2>
         <div class="seg-grid">
           <div class="seg-card"><span class="seg-num">01</span>
             <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg></div>
@@ -792,7 +730,7 @@
             <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg></div>
             <h4>Mapping &amp; navigation</h4>
             <div class="seg-quote">50 GIS negotiations &middot; 19 schemas &middot; or 1 license.</div>
-            <p class="seg-body">Adding a milepost layer yourself means fifty state negotiations and a pipeline to keep it current. Most platforms skip it. <strong>The corpus is licensable today.</strong></p>
+            <p class="seg-body">Combining state road data requires source checks, normalization and ongoing updates. Most platforms skip it. <strong>The corpus is licensable today.</strong></p>
           </div>
           <div class="seg-card"><span class="seg-num">03</span>
             <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></div>
@@ -804,7 +742,7 @@
             <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v13h-2M16 8h-5V3H3v13h3"/><circle cx="7.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="M10 18.5h5"/></svg></div>
             <h4>Digital freight &amp; logistics</h4>
             <div class="seg-quote">&ldquo;Meet the driver at I-80 MP 184.&rdquo;</div>
-            <p class="seg-body">No native equivalent in consumer nav &mdash; drivers send approximate pins, dispatchers guess. Plus live commercial waits at supported land borders, <strong>an input no fleet platform surfaces today.</strong></p>
+            <p class="seg-body">Send a milepost to a navigation app. View commercial border waits at supported crossings.</p>
           </div>
           <div class="seg-card"><span class="seg-num">05</span>
             <div class="seg-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
@@ -837,7 +775,7 @@
       <div class="container">
         <span class="ent-section-label">Build vs. license</span>
         <h2>Building the data is harder than building the app.</h2>
-        <p class="ent-section-intro">MileCheck runs alongside your routing or weather stack: <strong>direct-from-state-DOT road events &mdash; closures, construction, crashes, chain controls &mdash; tied to the exact mile marker.</strong> It&rsquo;s privacy-light by design &mdash; no driver accounts, and the vehicle&rsquo;s location stays in your platform, not on our servers. A coordinate-to-milepost lookup is available elsewhere &mdash; the <em>live conditions</em> at that milepost, normalized across 50 agencies and running in production, are the part that&rsquo;s hard to copy.</p>
+        <p class="ent-section-intro">MileCheck runs alongside your routing or weather stack: <strong>direct-from-state-DOT road events &mdash; closures, construction, crashes, chain controls &mdash; referenced by highway and milepost.</strong> It&rsquo;s privacy-light by design &mdash; no driver accounts, and the vehicle&rsquo;s location stays in your platform, not on our servers. A coordinate-to-milepost lookup is available elsewhere &mdash; the <em>live conditions</em> at that milepost, normalized across 50 agencies and running in production, are the part that&rsquo;s hard to copy.</p>
         <div class="proof-grid">
           <div class="proof-cell">
             <div class="proof-cell-num">50</div>
@@ -857,7 +795,7 @@
           </div>
         </div>
         <p class="centered-note" style="font-weight:600;color:var(--ink);">Proven in production through the MileCheck iOS, Android, CarPlay, and Android Auto applications.</p>
-        <p class="centered-note" style="max-width:740px;margin-left:auto;margin-right:auto;">Validated continuously by a <strong>nationwide tester network</strong> &mdash; real drivers across the country who flag issues in the field, so a data problem surfaces before someone hits it in an emergency. Automated per-source monitoring catches the feeds; the testers catch the road.</p>
+        <p class="centered-note" style="max-width:740px;margin-left:auto;margin-right:auto;">Validated continuously by a <strong>nationwide tester network</strong> &mdash; testers across the country who flag issues in the field, so a data problem surfaces before someone hits it in an emergency. Automated monitoring checks the feeds. Testers report issues they find while driving.</p>
         <p class="centered-note" style="font-size:13px;"><a href="https://status.milecheckapp.com" target="_blank" rel="noopener" style="font-weight:600;">&#8599; Live API status</a> &nbsp;&middot;&nbsp; DOT feed uptime monitored 24/7</p>
         <details class="b2b-acc">
           <summary>Why it&rsquo;s hard to build in-house</summary>
@@ -950,7 +888,7 @@
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
       <h2>Closures and crashes on US highways, once a month</h2>
-      <p class="mc-sub">The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/labor-day-weekend-recap-2026.html">See a sample: the Labor Day weekend report</a>. No spam.</p>
+      <p class="mc-sub">The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>
@@ -961,7 +899,7 @@
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand">MileCheck</p></div>
-          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+          <p class="footer-tagline">Road conditions and highway mile markers across all 50 states.</p>
         </div>
         <div class="footer-col">
           <p class="footer-label">Get the app</p>
@@ -1023,7 +961,7 @@
     }
     document.addEventListener('click', function(e){
       var t = e.target.closest ? e.target.closest('[data-tab]') : null;
-      if(t){ e.preventDefault(); show(t.getAttribute('data-tab')); }
+      if(t){ e.preventDefault(); show(t.getAttribute('data-tab')); var g=t.getAttribute('data-goto'); if(g){ var el=document.getElementById(g); if(el) el.scrollIntoView(); } }
     });
     var valid=['home','story','b2b'];
     var hsh=(location.hash||'').replace('#','');

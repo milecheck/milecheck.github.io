@@ -5,7 +5,7 @@
 // are links, not more forms. Idempotent: everything sits between <!-- signupcta:start/end -->.
 //   - every .mc-signup band gets id="subscribe"
 //   - blog articles: one link under the opening paragraph
-//   - homepage: one link under the hero fine print
+//   - homepage: none (the hero carries a report link; signup is the band below)
 // Run after add-signup-band.mjs.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,6 +27,6 @@ for (const d of fs.readdirSync(path.join(ROOT, 'blog'), { withFileTypes: true })
     fix(`blog/${d.name}/${f}`, (h) => (h.includes('class="mc-signup"') ? h.replace(/(<p class="article-lead">[\s\S]*?<\/p>)/, `$1\n      ${CTA()}`) : h));
   }
 }
-fix('index.html', (h) => h.replace(/(<p class="hero-fineprint">[\s\S]*?<\/p>)/, `$1\n            ${CTA('margin:14px 0 0;')}`));
+// index.html: the hero carries one report link instead (2026-10-03); signup lives in the band below.
 fix('blog/index.html', (h) => h.replace(/(<!-- More articles — newest first -->)/, `${CTA('text-align:center;')}\n        $1`));
 console.log(`signup CTAs: ${n} pages written`);
