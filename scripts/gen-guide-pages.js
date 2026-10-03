@@ -706,6 +706,8 @@ GUIDES.push(...require('./guides/rent-a-car-in-orlando-2026-09-25.cjs'));
 GUIDES.push(...require('./guides/articles-2026-10-02.cjs'));
 // Fall cross-country guides from HeyCatch Reddit catches, 2026-10-02.
 GUIDES.push(...require('./guides/fall-drives-2026-10-02.cjs'));
+// Parking brake guide, 2026-10-03 (ChatGPT copy, sources checked by Claude).
+GUIDES.push(...require('./guides/parking-brake-2026-10-03.cjs'));
 
 // Language-aware routing (2026-09-25). A guide object may carry lang:'fr' (or 'es', …).
 // Identity is lang+slug: English lives at /<slug>/, others at /<lang>/<slug>/.
