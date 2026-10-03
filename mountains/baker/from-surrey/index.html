@@ -206,9 +206,9 @@ function line(r,sun){
 const FREE='mvFreeRead', TODAY=new Date().toLocaleDateString('en-CA'), PAGE=location.pathname;
 let used=null; try{used=JSON.parse(localStorage.getItem(FREE)||'null');}catch(e){}
 if(used&&used.day===TODAY&&used.path!==PAGE){
-  $('mvV').textContent='In the app'; $('mvV').className='mv-v LOCK';
-  $('mvLine').innerHTML='Today&#39;s free reading went to another page. Mountain Visibility has every mountain, from every town, any time. <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-baker-from-surrey&amp;mt=8" class="btn btn-primary" style="margin-top:12px;display:inline-block;">Get the app, $1.99</a>';
-  if($('mvRegions'))$('mvRegions').innerHTML='<p>Every region&#39;s reading is in the app.</p>';
+  $('mvV').textContent='Get the app'; $('mvV').className='mv-v LOCK';
+  $('mvLine').innerHTML='One reading is free here each day. Get the rest in Mountain Visibility. <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-baker-from-surrey&amp;mt=8" class="btn btn-primary" style="margin-top:12px;display:inline-block;">Get the app, $1.99</a>';
+  if($('mvRegions'))$('mvRegions').innerHTML='<p>Get every region&#39;s reading in Mountain Visibility.</p>';
   return;
 }
 try{localStorage.setItem(FREE,JSON.stringify({day:TODAY,path:PAGE}));}catch(e){}
