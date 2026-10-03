@@ -8,7 +8,9 @@
   <meta name="robots" content="noindex, nofollow">
   <style>
     body{margin:0;background:#0f1116;color:#e8e8e8;font-family:-apple-system,sans-serif;padding:32px 20px}
-    .wrap{max-width:640px;margin:0 auto}
+    .wrap{max-width:860px;margin:0 auto}
+    .tbl-wrap{overflow-x:auto}
+    .units{color:#9aa0a8;font-size:13px;margin-top:6px}
     h1{font-size:20px;margin:0 0 6px}
     .sub{color:#9aa0a8;font-size:13px;margin:0 0 24px}
     input{width:100%;padding:12px 14px;font-size:15px;border-radius:8px;border:1px solid #333;background:#1a1d24;color:#fff;margin-bottom:12px;box-sizing:border-box}
@@ -39,11 +41,12 @@
     <div id="data">
       <div class="count" id="countNum">—</div>
       <div class="count-label">Total signups</div>
+      <div class="units" id="units"></div>
       <a class="refresh" onclick="load()">Refresh</a>
-      <table id="tbl">
-        <thead><tr><th>Email</th><th>Name</th><th>Source</th><th>Signed up</th></tr></thead>
+      <div class="tbl-wrap"><table id="tbl">
+        <thead><tr><th>Email</th><th>Name</th><th>Drives for</th><th>How many</th><th>Source</th><th>Signed up</th></tr></thead>
         <tbody id="rows"></tbody>
-      </table>
+      </table></div>
     </div>
   </div>
 
@@ -66,6 +69,14 @@
         document.getElementById('gate').style.display = 'none';
         document.getElementById('data').style.display = 'block';
         document.getElementById('countNum').textContent = data.count;
+        // role + quantity were added 2026-10-03. Older signups have neither.
+        const ROLE_LABELS = { trucker: 'Truck driver', plow: 'Snow plow', tow: 'Tow', dot: 'DOT / road crew',
+          ems: 'EMS / first responder', fleet: 'Fleet manager', everyday: 'Everyday driver', other: 'Other' };
+        const asked = data.entries.filter(e => Number(e.quantity) > 0);
+        const units = asked.reduce((n, e) => n + Number(e.quantity), 0);
+        document.getElementById('units').textContent = asked.length
+          ? `${units} units asked for, across ${asked.length} signup${asked.length === 1 ? '' : 's'} that gave a number`
+          : '';
         const rows = document.getElementById('rows');
         rows.innerHTML = '';
         // Signup fields are whatever a stranger typed into the form. Build cells with
@@ -76,6 +87,8 @@
           const d = new Date(e.firstSeenAt).toLocaleDateString();
           tr.appendChild(cell(String(e.email || '')));
           tr.appendChild(cell(e.name ? String(e.name) : '—'));
+          tr.appendChild(cell(e.role ? (ROLE_LABELS[e.role] || String(e.role)) : '—'));
+          tr.appendChild(cell(Number(e.quantity) > 0 ? String(e.quantity) : '—'));
           tr.appendChild(cell(e.source ? String(e.source) : '—'));
           tr.appendChild(cell(d));
           rows.appendChild(tr);
