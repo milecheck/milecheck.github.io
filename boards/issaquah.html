@@ -122,6 +122,7 @@
   .ad{flex:1;display:flex;align-items:center;gap:min(1.2vw, 2.133vh);padding:min(1.1vw, 1.956vh) min(2vw, 3.556vh);min-width:0}
   .adtag{flex:none;font-size:min(1vw, 1.778vh);font-weight:800;letter-spacing:.13em;color:#fff;
          background:var(--amber);padding:min(.35vw, 0.622vh) min(.9vw, 1.6vh);border-radius:min(.25vw, 0.444vh)}
+  .adtag.house{background:#17150f}
   .adtxt{font-size:min(1.65vw, 2.933vh);font-weight:700;color:#6d4a10;white-space:nowrap;overflow:hidden;
          text-overflow:ellipsis;animation:fadein .5s ease}
   .qr{flex:none;display:flex;align-items:center;gap:min(.9vw, 1.6vh);padding:min(.8vw, 1.422vh) min(2vw, 3.556vh) min(.8vw, 1.422vh) min(1.4vw, 2.489vh);
@@ -183,7 +184,7 @@
 
   <footer>
     <div class="ad">
-      <span class="adtag">SPONSOR</span>
+      <span class="adtag" id="adtag">SPONSOR</span>
       <span class="adtxt" id="adtxt">&nbsp;</span>
     </div>
     <div class="qr">
@@ -338,15 +339,19 @@ const _pin = new URLSearchParams(location.search).get('cam');
 if (_pin !== null) { ci = (parseInt(_pin,10) || 0) - 1; nextCam(); }
 else { nextCam(); setInterval(nextCam, DWELL); }
 
-/* ---------- ad rotation ---------- */
-let ai = -1;
-function nextAd(){
-  ai = (ai + 1) % ADS.length;
-  const el = $('adtxt');
-  el.textContent = ADS[ai];
-  el.style.animation='none'; void el.offsetWidth; el.style.animation='';
-}
-nextAd(); setInterval(nextAd, 20000);
+/* ---------- house card ---------- */
+// ?house=Hot breakfast until 10:30|Showers available
+// The store's own lines, set from the board link. Up to 3, 70 chars each, rendered as
+// text only. They alternate with the sponsor line under an "IN THE STORE" tag.
+const HOUSE = (new URLSearchParams(location.search).get('house') || '')
+  .split('|').map(s => s.trim().slice(0, 70)).filter(Boolean).slice(0, 3);
+const ROTATION = [];
+ADS.forEach((t, i) => { ROTATION.push({t, house:false}); if (HOUSE.length) ROTATION.push({t: HOUSE[i % HOUSE.length], house:true}); });
+let ai=-1;
+function nextAd(){ai=(ai+1)%ROTATION.length;const r=ROTATION[ai];const e=$('adtxt');e.textContent=r.t;
+  const tg=$('adtag');tg.textContent=r.house?'IN THE STORE':'SPONSOR';tg.classList.toggle('house',r.house);
+  e.style.animation='none';void e.offsetWidth;e.style.animation='';}
+nextAd();setInterval(nextAd,20000);
 
 /* ---------- live data ---------- */
 // Feeds hand back unix seconds, unix ms, or an ISO string depending on the
