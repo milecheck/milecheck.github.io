@@ -4,13 +4,17 @@
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dash Display — Preorder List (internal)</title>
+  <title>Sign-up lists (internal)</title>
   <meta name="robots" content="noindex, nofollow">
   <style>
     body{margin:0;background:#0f1116;color:#e8e8e8;font-family:-apple-system,sans-serif;padding:32px 20px}
     .wrap{max-width:860px;margin:0 auto}
     .tbl-wrap{overflow-x:auto}
     .units{color:#9aa0a8;font-size:13px;margin-top:6px}
+    h2{font-size:16px;margin:40px 0 0;padding-top:24px;border-top:1px solid #262a33}
+    .empty{color:#9aa0a8;font-size:13px;margin-top:12px}
+    button.copy{margin-top:14px;background:#262a33;font-weight:500}
+    .copied{color:#00A86B;font-size:13px;margin-left:10px}
     h1{font-size:20px;margin:0 0 6px}
     .sub{color:#9aa0a8;font-size:13px;margin:0 0 24px}
     input{width:100%;padding:12px 14px;font-size:15px;border-radius:8px;border:1px solid #333;background:#1a1d24;color:#fff;margin-bottom:12px;box-sizing:border-box}
@@ -29,7 +33,7 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>Dash display — preorder list</h1>
+    <h1>Sign-up lists</h1>
     <p class="sub">Internal only. Not linked anywhere, no search indexing.</p>
 
     <div id="gate">
@@ -39,13 +43,23 @@
     </div>
 
     <div id="data">
-      <div class="count" id="countNum">—</div>
-      <div class="count-label">Total signups</div>
-      <div class="units" id="units"></div>
       <a class="refresh" onclick="load()">Refresh</a>
+      <h2>Dash display early access</h2>
+      <div class="count" id="countNum">—</div>
+      <div class="count-label">Sign-ups</div>
+      <div class="units" id="units"></div>
+      <button class="copy" onclick="copyEmails('dash', this)">Copy all emails</button>
       <div class="tbl-wrap"><table id="tbl">
         <thead><tr><th>Email</th><th>Name</th><th>Drives for</th><th>How many</th><th>Source</th><th>Signed up</th></tr></thead>
         <tbody id="rows"></tbody>
+      </table></div>
+      <h2>Mountain Visibility Android waitlist</h2>
+      <div class="count" id="mvCount">—</div>
+      <div class="count-label">Sign-ups</div>
+      <button class="copy" onclick="copyEmails('mv', this)">Copy all emails</button>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Email</th><th>Source</th><th>Signed up</th></tr></thead>
+        <tbody id="mvRows"></tbody>
       </table></div>
     </div>
   </div>
@@ -68,34 +82,65 @@
         localStorage.setItem(KEY, secret);
         document.getElementById('gate').style.display = 'none';
         document.getElementById('data').style.display = 'block';
-        document.getElementById('countNum').textContent = data.count;
+        // Each entry carries `list` (Worker 2026-10-03). Older exports don't; their
+        // Mountain sign-ups are the ones whose source starts "mountain-visibility".
+        const listOf = (e) => e.list || (/^mountain-visibility/i.test(String(e.source || '')) ? 'mountain-android' : 'dash');
+        const dash = data.entries.filter(e => listOf(e) === 'dash');
+        // A Mountain sign-up from before the split can also exist under the new key.
+        // Entries arrive oldest first, so keep the first one per email.
+        const seen = new Set();
+        const mv = data.entries.filter(e => listOf(e) === 'mountain-android')
+          .filter(e => (seen.has(e.email) ? false : seen.add(e.email)));
+        // For the day the device ships: paste into the BCC line, never To or CC.
+        window.__lists = { dash: dash.map(e => e.email), mv: mv.map(e => e.email) };
+        document.getElementById('countNum').textContent = dash.length;
+        document.getElementById('mvCount').textContent = mv.length;
         // role + quantity were added 2026-10-03. Older signups have neither.
         const ROLE_LABELS = { trucker: 'Truck driver', plow: 'Snow plow', tow: 'Tow', dot: 'DOT / road crew',
           ems: 'EMS / first responder', fleet: 'Fleet manager', everyday: 'Everyday driver', other: 'Other' };
-        const asked = data.entries.filter(e => Number(e.quantity) > 0);
+        const asked = dash.filter(e => Number(e.quantity) > 0);
         const units = asked.reduce((n, e) => n + Number(e.quantity), 0);
         document.getElementById('units').textContent = asked.length
           ? `${units} units asked for, across ${asked.length} signup${asked.length === 1 ? '' : 's'} that gave a number`
           : '';
-        const rows = document.getElementById('rows');
-        rows.innerHTML = '';
         // Signup fields are whatever a stranger typed into the form. Build cells with
         // textContent so a script in a "name" renders as text, never runs (2026-09-28 review).
         const cell = (text) => { const td = document.createElement('td'); td.textContent = text; return td; };
-        data.entries.slice().reverse().forEach(e => {
-          const tr = document.createElement('tr');
-          const d = new Date(e.firstSeenAt).toLocaleDateString();
-          tr.appendChild(cell(String(e.email || '')));
-          tr.appendChild(cell(e.name ? String(e.name) : '—'));
-          tr.appendChild(cell(e.role ? (ROLE_LABELS[e.role] || String(e.role)) : '—'));
-          tr.appendChild(cell(Number(e.quantity) > 0 ? String(e.quantity) : '—'));
-          tr.appendChild(cell(e.source ? String(e.source) : '—'));
-          tr.appendChild(cell(d));
-          rows.appendChild(tr);
-        });
+        const fill = (tbodyId, list, columns) => {
+          const tbody = document.getElementById(tbodyId);
+          tbody.innerHTML = '';
+          list.slice().reverse().forEach(e => {
+            const tr = document.createElement('tr');
+            columns.forEach(fn => tr.appendChild(cell(fn(e))));
+            tbody.appendChild(tr);
+          });
+        };
+        const email = (e) => String(e.email || '');
+        const source = (e) => (e.source ? String(e.source) : '—');
+        const date = (e) => new Date(e.firstSeenAt).toLocaleDateString();
+        fill('rows', dash, [
+          email,
+          (e) => (e.name ? String(e.name) : '—'),
+          (e) => (e.role ? (ROLE_LABELS[e.role] || String(e.role)) : '—'),
+          (e) => (Number(e.quantity) > 0 ? String(e.quantity) : '—'),
+          source,
+          date,
+        ]);
+        fill('mvRows', mv, [email, source, date]);
       } catch (e) {
         err.style.display = 'block';
       }
+    }
+    async function copyEmails(which, btn) {
+      const emails = (window.__lists && window.__lists[which]) || [];
+      const text = emails.join(', ');
+      try { await navigator.clipboard.writeText(text); }
+      catch { window.prompt('Copy these emails:', text); return; }
+      const note = document.createElement('span');
+      note.className = 'copied';
+      note.textContent = `${emails.length} copied. Paste into BCC.`;
+      btn.after(note);
+      setTimeout(() => note.remove(), 4000);
     }
     if (stored) load();
   </script>

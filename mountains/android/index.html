@@ -69,7 +69,7 @@
   <a class="back" href="/mountains/">&larr; Mountain pages on milecheckapp.com</a>
 </main>
 <script>
-  // Same endpoint the Dash early-access page uses; `source` keeps the two lists apart in the export.
+  // Same endpoint as the Dash early-access page, its own list (`list: 'mountain-android'`, 2026-10-03).
   const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev/preorder';
   const params = new URLSearchParams(location.search);
   const campaign = [params.get('utm_source'), params.get('utm_campaign')].filter(Boolean).join('/');
@@ -86,7 +86,7 @@
       const res = await fetch(WORKER, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name: '', source: SOURCE.slice(0, 100) }),
+        body: JSON.stringify({ email, name: '', list: 'mountain-android', source: SOURCE.slice(0, 100) }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Something went wrong');
