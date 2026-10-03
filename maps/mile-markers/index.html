@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="../../style.css">
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
   <link rel="canonical" href="https://milecheckapp.com/maps/mile-markers/">
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -56,7 +59,18 @@
           .mile-map-pick{display:flex;align-items:center;gap:10px;font-size:14px;color:#525252;}
           #mile-map-state{font-family:inherit;font-size:15px;padding:9px 12px;border:1px solid #d1d5db;border-radius:8px;background:#fff;color:#0F1419;}
           .leaflet-popup-content{font-family:'Inter',sans-serif;}
-          @media(max-width:880px){#mile-map{height:300px;}}
+          /* Find my mile marker (2026-10-03). The top search query is "what mile marker am i at". */
+          .mm-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
+          .mm-find{font:inherit;font-size:15px;font-weight:700;padding:10px 16px;border:0;border-radius:8px;background:#00C880;color:#0F1419;cursor:pointer;}
+          .mm-find:hover{background:#00b373;}
+          .mm-find[disabled]{opacity:.6;cursor:wait;}
+          .mm-answer{font-size:16px;line-height:1.5;color:#0F1419;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:12px 14px;margin:0 0 14px;}
+          .mm-answer small{display:block;color:#525252;font-size:13px;margin-top:2px;}
+          .mm-list{margin:4px 0 2px 18px;padding:0;}
+          .mm-pin.mm-near{background:#0F1419;font-size:13px;padding:5px 8px;}
+          .mm-you{width:14px;height:14px;border-radius:50%;background:#2563EB;border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.2);}
+          @media(max-width:880px){#mile-map{height:58vh;min-height:340px;}}
+          @media(max-width:600px){.mm-controls{width:100%;}.mm-find{flex:1 1 100%;}}
         
     /* Responsive mobile nav (same rules as blog.css) */
     .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
@@ -98,13 +112,17 @@
 <!-- spon:end -->
 <div class="mile-map-head">
           <div class="mm-copy">
-            <h2 style="font-size:28px;font-weight:800;letter-spacing:-0.5px;color:#0F1419;margin:0 0 4px;">The 50-state mile marker map.</h2>
+            <h1 style="font-size:28px;font-weight:800;letter-spacing:-0.5px;color:#0F1419;margin:0 0 4px;">The 50-state mile marker map.</h1>
             <p style="font-size:15px;color:#525252;margin:0;">50 states. 50 live DOT feeds.</p>
           </div>
-          <label class="mile-map-pick">State
-            <select id="mile-map-state" aria-label="Choose a state to view mile markers"></select>
-          </label>
+          <div class="mm-controls">
+            <button type="button" class="mm-find" id="mile-map-find">Find my mile marker</button>
+            <label class="mile-map-pick">State
+              <select id="mile-map-state" aria-label="Choose a state to view mile markers"></select>
+            </label>
+          </div>
         </div>
+        <p class="mm-answer" id="mile-map-answer" role="status" hidden></p>
         <div id="mile-map"></div>
         <p class="mile-map-status" id="mile-map-status">Loading mile markers&hellip;</p>
       </div>
@@ -113,6 +131,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="/assets/mc-routes.js"></script>
     <script>
     (function(){
       var WORKER='https://milepost-proxy.leahgerber93.workers.dev/mileposts?state=';
@@ -121,50 +140,139 @@
       if(!mapEl||typeof L==='undefined') return;
       var map=L.map('mile-map',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true}).setView([47.3,-120.6],6);
       var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
-      var baseLight=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:18});
+      // CARTO's free basemap started answering every tile with an "API KEY REQUIRED"
+      // image (found 2026-10-03; the live page showed a blank, watermarked map). Esri's
+      // street map needs no key, is what the camera and pass pages use, and shows
+      // highway shields, which suit a mile-marker map.
+      var baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, HERE, Garmin, USGS',maxZoom:19});
       var baseTerrain=L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS',maxZoom:14});
       var baseSat=L.layerGroup([
         L.tileLayer(ESRI+'World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri',maxZoom:17}),
         L.tileLayer(ESRI+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:17})
       ]);
-      baseLight.addTo(map);
-      L.control.layers({'Light':baseLight,'Terrain':baseTerrain,'Satellite':baseSat},null,{position:'bottomright',collapsed:true}).addTo(map);
+      baseStreets.addTo(map);
+      L.control.layers({'Streets':baseStreets,'Terrain':baseTerrain,'Satellite':baseSat},null,{position:'bottomright',collapsed:true}).addTo(map);
       var cluster=L.markerClusterGroup({chunkedLoading:true,maxClusterRadius:50});
       map.addLayer(cluster);
       var sel=document.getElementById('mile-map-state');
       var status=document.getElementById('mile-map-status');
       STATES.forEach(function(s){var o=document.createElement('option');o.value=s[0];o.textContent=s[1];sel.appendChild(o);});
       function num(v){return typeof v==='number'?v:parseFloat(v);}
-      function load(code){
-        status.textContent='Loading mile markers…'; cluster.clearLayers();
-        fetch(WORKER+code).then(function(r){return r.json();}).then(function(d){
-          var arr=Array.isArray(d)?d:(d.mileposts||d.data||null);
-          if(!Array.isArray(arr)){arr=[];for(var k in d){if(Array.isArray(d[k]))arr=arr.concat(d[k]);}}
-          var markers=[],seen={};
-          arr.forEach(function(mp){
+      // Route names as the app shows them (assets/mc-routes.js, built from the app's
+      // src/utils/routes.ts): WA "SR 5" is I-5, OR "PACIFIC" is I-5 / OR-99.
+      function routeName(route,code){
+        if(!route) return '';
+        var n=(window.MCRoutes&&MCRoutes.formatRouteName)?MCRoutes.formatRouteName(route,code):route;
+        return /\d/.test(n)?n:'';
+      }
+      // One fetch per state, kept for the page's life. Arizona's file is grouped by
+      // route, so the group key is the route when a post has none of its own.
+      var cache={};
+      function posts(code){
+        if(cache[code]) return cache[code];
+        cache[code]=fetch(WORKER+code).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
+          var out=[];
+          function add(mp,key){
             var lat=num(mp.lat!=null?mp.lat:mp.latitude);
             var lon=num(mp.lon!=null?mp.lon:(mp.lng!=null?mp.lng:mp.longitude));
             var mile=num(mp.milepost!=null?mp.milepost:mp.mile);
-            var route=mp.route||mp.highway||mp['route-id']||'';
             if(isNaN(lat)||isNaN(lon)||isNaN(mile)) return;
-            var whole=Math.round(mile);
-            if(Math.abs(mile-whole)>0.15) return;
-            var key=route+'-'+whole; if(seen[key]) return; seen[key]=1;
-            var icon=L.divIcon({className:'',html:'<div class="mm-pin">'+whole+'</div>',iconSize:null});
-            var m=L.marker([lat,lon],{icon:icon});
-            var displayRoute=(route&&/\d/.test(route))?route:'Mile marker';
-            m.bindPopup('<b>'+displayRoute+'</b><br>Mile '+whole);
-            markers.push(m);
-          });
-          cluster.addLayers(markers);
-          if(markers.length){
+            out.push({lat:lat,lon:lon,mile:mile,route:mp.route||mp.highway||mp['route-id']||key||'',code:code});
+          }
+          var arr=Array.isArray(d)?d:(d.mileposts||d.data||null);
+          if(Array.isArray(arr)) arr.forEach(function(mp){add(mp);});
+          else for(var k in d){if(Array.isArray(d[k]))d[k].forEach(function(mp){add(mp,k);});}
+          return out;
+        });
+        cache[code].catch(function(){delete cache[code];});
+        return cache[code];
+      }
+      function label(mile){var w=Math.round(mile);return Math.abs(mile-w)<=0.15?String(w):mile.toFixed(1);}
+      var nearMarker=null, youMarker=null;
+      function render(code,list){
+        cluster.clearLayers();
+        var markers=[],seen={};
+        list.forEach(function(p){
+          var whole=Math.round(p.mile);
+          if(Math.abs(p.mile-whole)>0.15) return;
+          var key=p.route+'-'+whole; if(seen[key]) return; seen[key]=1;
+          var icon=L.divIcon({className:'',html:'<div class="mm-pin">'+whole+'</div>',iconSize:null});
+          var m=L.marker([p.lat,p.lon],{icon:icon});
+          m.bindPopup('<b>'+(routeName(p.route,code)||'Mile marker')+'</b><br>Mile '+whole);
+          markers.push(m);
+        });
+        cluster.addLayers(markers);
+        return markers.length;
+      }
+      function load(code){
+        status.textContent='Loading mile markers…'; cluster.clearLayers();
+        return posts(code).then(function(list){
+          var n=render(code,list);
+          if(n){
             try{map.fitBounds(cluster.getBounds().pad(0.08));}catch(e){}
-            status.textContent=markers.length.toLocaleString()+' mile markers — zoom in to explore. Tap one for its road and mile.';
+            status.textContent=n.toLocaleString()+' mile markers. Zoom in to explore. Tap one for its road and mile.';
           } else {
             status.textContent='No mile markers to show for this state right now.';
           }
         }).catch(function(){
-          status.textContent='Could not load the live map right now — it works great in the app.';
+          status.textContent='Could not load the live map right now. It works in the app.';
+        });
+      }
+
+      // Find my mile marker. Every state whose box holds the position is searched,
+      // because the boxes overlap at borders (constants/states.ts orders them for
+      // first-match; here the nearest post across all candidates wins instead).
+      // The position stays in the browser.
+      var findBtn=document.getElementById('mile-map-find');
+      var answer=document.getElementById('mile-map-answer');
+      var CODES={};STATES.forEach(function(s){CODES[s[0]]=s[1];});
+      function miles(a,b,c,d){var R=3958.8,r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2);var h=x*x+Math.cos(a*r)*Math.cos(c*r)*y*y;return 2*R*Math.asin(Math.sqrt(h));}
+      function say(html){answer.innerHTML=html;answer.hidden=false;}
+      function candidates(lat,lon){
+        var B=(window.MCRoutes&&MCRoutes.STATE_BOUNDS)||{},out=[];
+        for(var c in B){if(!CODES[c])continue;var b=B[c];if(lat>=b.minLat-0.1&&lat<=b.maxLat+0.1&&lon>=b.minLon-0.1&&lon<=b.maxLon+0.1)out.push(c);}
+        return out;
+      }
+      if(findBtn){
+        if(!navigator.geolocation){findBtn.hidden=true;}
+        findBtn.addEventListener('click',function(){
+          findBtn.disabled=true;findBtn.textContent='Finding you…';
+          function done(){findBtn.disabled=false;findBtn.textContent='Find my mile marker';}
+          navigator.geolocation.getCurrentPosition(function(pos){
+            var lat=pos.coords.latitude,lon=pos.coords.longitude,codes=candidates(lat,lon);
+            if(!codes.length){done();say('You are outside the 50 states this map covers.');return;}
+            Promise.all(codes.map(function(c){return posts(c).catch(function(){return [];});})).then(function(lists){
+              // Nearest three, one per road and mile (the files repeat posts per direction).
+              var all=[];
+              lists.forEach(function(list){list.forEach(function(p){all.push({p:p,d:miles(lat,lon,p.lat,p.lon)});});});
+              all.sort(function(a,b){return a.d-b.d;});
+              var top=[],seen={};
+              for(var i=0;i<all.length&&top.length<3;i++){var q=all[i],k=q.p.code+'|'+q.p.route+'|'+Math.round(q.p.mile);if(seen[k])continue;seen[k]=1;top.push(q);}
+              done();
+              if(!top.length){say('Could not load mile markers for your area. Try again in a minute.');return;}
+              var best=top[0].p,bd=top[0].d;
+              sel.value=best.code;
+              render(best.code,lists[codes.indexOf(best.code)]);
+              status.textContent='Showing '+CODES[best.code]+'.';
+              if(nearMarker)map.removeLayer(nearMarker);
+              if(youMarker)map.removeLayer(youMarker);
+              function name(p){var r=routeName(p.route,p.code);return r?r+', mile '+label(p.mile):'Mile '+label(p.mile);}
+              function far(d){return d<0.1?Math.round(d*5280)+' ft':d.toFixed(1)+' mi';}
+              nearMarker=L.marker([best.lat,best.lon],{icon:L.divIcon({className:'',html:'<div class="mm-pin mm-near">'+label(best.mile)+'</div>',iconSize:null}),zIndexOffset:1000}).bindPopup('<b>'+name(best)+'</b>').addTo(map);
+              youMarker=L.marker([lat,lon],{icon:L.divIcon({className:'',html:'<div class="mm-you"></div>',iconSize:[20,20],iconAnchor:[10,10]}),interactive:false,zIndexOffset:1100}).addTo(map);
+              map.setView([best.lat,best.lon],bd<2?14:11);
+              var note='<small>Positions are approximate. In the app, the mile marker updates as you drive, to a tenth of a mile.</small>';
+              // One clear winner names it. Several posts about as close (an interchange,
+              // a city street, or a misplaced post in a DOT file) list the nearest three
+              // rather than pick one with confidence it has not earned.
+              var clear=top.length<2||top[1].d>Math.max(bd*1.6,bd+0.15);
+              if(clear) say('<b>'+name(best)+'</b> is the nearest mile marker, '+far(bd)+' from you.'+note);
+              else say('Mile markers near you:<ul class="mm-list">'+top.map(function(q){return '<li><b>'+name(q.p)+'</b> · '+far(q.d)+'</li>';}).join('')+'</ul>'+note);
+            });
+          },function(err){
+            done();
+            say(err&&err.code===1?'Location is turned off for this site. Turn it on in your browser settings, or pick your state below.':'Your location did not come through. Try again.');
+          },{enableHighAccuracy:true,timeout:15000,maximumAge:30000});
         });
       }
       sel.value='WA'; load('WA');

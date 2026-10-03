@@ -1,0 +1,96 @@
+/* map-kit.css: the live map (#comap) on phones.
+   Leah, 2026-10-03: "the camera maps are clunky on mobile view". Measured at 375px:
+   a tapped camera opened in a 201px card with a 171px image, the status chip ran off
+   the map, the layers panel covered a quarter of it, and the credit line wrapped to
+   three lines. Linked from every page with the map: state and city camera pages,
+   passes, corridors (scripts/add-map-kit.mjs adds the tags to built pages; the
+   four generators carry them too). Selectors start with "html" so they beat each
+   page's inline <style> whatever order the tags land in. Desktop gets the near-me and layers buttons; the rest is phone-only.
+   Since 10-03 every other Leaflet map on the site links this file too (closures, road
+   conditions, bridges, fire, weather, grades, chains, ferries, borders, the cameras hub,
+   Canada, the mile-marker map). They get only the parts that fit any map: the one-line
+   credit and the lighter status type. Everything keyed on #comap/.co-* stays theirs-free. */
+
+/* Type on the map overlays (Leah 10-03: "make the font look less AI"). The pages are
+   set in IBM Plex Sans; the overlays used it at 800 with a tiny tracked all-caps title.
+   Sentence case, 500-600 weights. */
+html .co-layers .lt{text-transform:none;letter-spacing:0;font-size:13px;font-weight:600;color:#0E1116;margin:0 0 2px;}
+html .co-layer{font-weight:500;}
+html .co-bs{font-weight:600;}
+html .co-card .cc-title{font-weight:600;}
+html #bigStatus,html #rcStatus{font-weight:600;}
+
+/* Near-me button, under Leaflet's zoom control. Every width. */
+.cm-locate a.cm-busy{opacity:.5;}
+.cm-locate svg{width:17px;height:17px;}
+.cm-toast{position:absolute;left:50%;transform:translateX(-50%);bottom:34px;z-index:950;max-width:calc(100% - 24px);background:#0E1116;color:#fff;font-size:13px;font-weight:600;line-height:1.4;padding:8px 12px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.25);}
+.cm-toast a{color:#86efac;}
+/* Layers (option C, Leah 10-03): the icon button opens and closes the panel. The panel
+   opens level with the button (map-kit.js sets its top) with a pointer to it, and
+   on phones the button pulses three times on load. Every width. */
+.cm-locate a,.cm-layers-btn a{display:flex!important;align-items:center;justify-content:center;color:#0E1116;}
+.cm-layers-btn svg{width:18px;height:18px;}
+.cm-layers-btn a.cm-on{background:#E8F5EE;color:#0f7a4f;}
+.cm-layers-btn.cm-pulse{animation:cmPulse 1.6s ease-out 3;}
+@keyframes cmPulse{0%{box-shadow:0 0 0 0 rgba(15,122,79,.55);}100%{box-shadow:0 0 0 12px rgba(15,122,79,0);}}
+@media (prefers-reduced-motion:reduce){.cm-layers-btn.cm-pulse{animation:none;}}
+html .co-layers{left:54px;top:124px;bottom:auto;min-width:0;max-width:calc(100% - 66px);padding:8px 12px 6px;}
+html .co-layers::before{content:"";position:absolute;left:-7px;top:14px;width:12px;height:12px;background:#fff;border-left:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;transform:rotate(45deg);}
+html .co-layers.cm-closed{display:none!important;}
+/* The "Park webcam" key is marked hidden until a park camera loads, but .co-key's
+   display:flex beat the hidden attribute, so every pass page showed it. */
+html .co-layers [hidden]{display:none!important;}
+
+@media (max-width:600px){
+  /* Stats: a 2-up grid instead of cards wrapping one, two, one. */
+  html .co-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  html .co-stat{min-width:0;padding:9px 12px;}
+  html .co-stat .n{font-size:21px;}
+  html .co-stat .l{font-size:12px;}
+
+  /* Tapped camera or alert: a sheet across the bottom of the map. */
+  html .co-card{left:8px;right:8px;top:auto;bottom:24px;width:auto;max-height:calc(100% - 72px);border-radius:14px;padding:12px 12px 10px;}
+  html .co-card .cc-title{font-size:15px;}
+  /* Reserve the image box so the card does not jump when the frame arrives. */
+  html .co-card img.cc-img,html .co-card video.cc-img{margin-top:8px;aspect-ratio:4/3;height:auto;object-fit:contain;}
+  html .co-card img.cc-img.cm-loaded{aspect-ratio:auto;}
+
+  /* Status chip: one line, inside the map. */
+  html .co-bs{left:52px;right:10px;top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;padding:7px 10px;}
+
+  html .co-layers{font-size:13px;}
+
+  /* Credit line: one line; tap it to read all of it. */
+  html .leaflet-container .leaflet-control-attribution{font-size:10px;line-height:1.4;max-width:calc(100vw - 60px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+  html .leaflet-container .leaflet-control-attribution.cm-open{white-space:normal;}
+
+  html .cm-toast{bottom:64px;}
+}
+
+/* Map options panel for maps that declare window.mcMapOptions (map-kit.js #5). Same
+   option C as the camera maps' layers panel: icon button, pointer, pulse on phones. */
+.cm-opts{position:relative;}
+.cm-opts-panel{position:absolute;z-index:1000;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:9px 12px 10px;min-width:200px;max-width:calc(100vw - 48px);font-size:13px;line-height:1.3;color:#0E1116;text-align:left;cursor:default;}
+.cm-opts-panel.cm-closed{display:none;}
+.leaflet-right .cm-opts-panel{right:0;}
+.leaflet-left .cm-opts-panel{left:0;}
+.leaflet-bottom .cm-opts-panel{bottom:calc(100% + 12px);}
+.leaflet-top .cm-opts-panel{top:calc(100% + 12px);}
+.cm-opts-panel::after{content:"";position:absolute;width:12px;height:12px;background:#fff;transform:rotate(45deg);}
+.leaflet-bottom .cm-opts-panel::after{bottom:-7px;border-right:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
+.leaflet-top .cm-opts-panel::after{top:-7px;border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;}
+.leaflet-right .cm-opts-panel::after{right:10px;}
+.leaflet-left .cm-opts-panel::after{left:10px;}
+.cm-opts-panel .lt{font-size:13px;font-weight:600;margin:0 0 4px;}
+.cm-opts-row{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;font-weight:500;position:relative;}
+.cm-opts-row input{position:absolute;opacity:0;width:0;height:0;}
+.cm-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
+.cm-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+.cm-opts-row input:checked+.cm-sw{background:var(--on,#0f7a4f);}
+.cm-opts-row input:checked+.cm-sw::after{left:16px;}
+.cm-opts-row input:focus-visible+.cm-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
+.cm-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;}
+.cm-opts-sub{font-size:12px;font-weight:600;color:#5b6670;margin:8px 0 6px;padding-top:8px;border-top:1px solid #F0F0EE;}
+.cm-opts-bases{display:flex;gap:6px;}
+.cm-opts-bases button{flex:1;font:inherit;font-size:12.5px;font-weight:500;padding:6px 8px;border:1px solid #E5E5E5;border-radius:8px;background:#fff;color:#0E1116;cursor:pointer;}
+.cm-opts-bases button.cm-on{background:#0E1116;border-color:#0E1116;color:#fff;}
