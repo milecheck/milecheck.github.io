@@ -152,6 +152,43 @@
   // Built on window load: some pages add their layers in a load handler of their own.
   if (document.readyState === 'complete') buildOptions(); else window.addEventListener('load', buildOptions);
 
+  // 6. Long camera lists fold to three. Leah, 10-03: "cameras should collapse to like
+  // showing 3 or so bc then you never get to the other info" (Cajon listed 43 before the
+  // closures and work zones). The page's own "Show every camera" (load every frame) also
+  // unfolds it. Pass, mountain-roads and Enchantments pages (#lstCams).
+  var lst = document.getElementById('lstCams');
+  var lul = lst && lst.querySelector('ul');
+  if (lul) {
+    var unfolded = false, more = null;
+    var fold = function () {
+      var items = [].slice.call(lul.querySelectorAll('li[data-i]'));
+      if (items.length <= 4) {
+        items.forEach(function (li) { li.hidden = false; });
+        if (more) more.hidden = true;
+        return;
+      }
+      items.forEach(function (li, i) { li.hidden = !unfolded && i >= 3; });
+      if (!more) {
+        more = document.createElement('button');
+        more.type = 'button';
+        more.className = 'cm-more';
+        more.addEventListener('click', function () {
+          unfolded = !unfolded;
+          fold();
+          if (!unfolded && lst.getBoundingClientRect().top < 0) lst.scrollIntoView({ block: 'start' });
+        });
+        lul.parentNode.insertBefore(more, lul.nextSibling);
+      }
+      more.hidden = false;
+      more.textContent = unfolded ? 'Show fewer cameras' : 'Show all ' + items.length + ' cameras';
+      more.setAttribute('aria-expanded', unfolded ? 'true' : 'false');
+    };
+    new MutationObserver(fold).observe(lul, { childList: true });
+    fold();
+    var allBtn = document.getElementById('btnAllCams');
+    if (allBtn) allBtn.addEventListener('click', function () { unfolded = true; fold(); });
+  }
+
   // ---- The live #comap map (cameras, passes, corridors, mountain roads) --------------
   var el = document.getElementById('comap');
   if (!el) return;

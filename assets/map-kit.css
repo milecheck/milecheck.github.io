@@ -94,3 +94,8 @@ html .co-layers [hidden]{display:none!important;}
 .cm-opts-bases{display:flex;gap:6px;}
 .cm-opts-bases button{flex:1;font:inherit;font-size:12.5px;font-weight:500;padding:6px 8px;border:1px solid #E5E5E5;border-radius:8px;background:#fff;color:#0E1116;cursor:pointer;}
 .cm-opts-bases button.cm-on{background:#0E1116;border-color:#0E1116;color:#fff;}
+
+/* Camera list folds to three (map-kit.js #6). */
+html .co-list li[hidden]{display:none!important;}
+.cm-more{display:block;width:100%;margin:10px 0 2px;font:inherit;font-size:14px;font-weight:600;color:#0f7a4f;background:#f2f7f3;border:1px solid #d6e8dc;border-radius:10px;padding:10px 14px;cursor:pointer;}
+.cm-more:hover{background:#e8f2eb;}
