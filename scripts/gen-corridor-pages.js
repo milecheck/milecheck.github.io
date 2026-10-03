@@ -423,6 +423,9 @@ function page(c){
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
 ${sp.css}
   </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
 

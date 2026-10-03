@@ -151,6 +151,9 @@
     .spon-body:hover .spon-cta{text-decoration:underline;}
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
   </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
 
@@ -337,8 +340,12 @@ let CAMS=[], ALERTS=[], CONDS=[], FIRES=[], PLOWLIST=[], showCam=true, showAlr=t
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
 // Missing feeds are not zero reports. Keep successful layers when another feed fails.
-const failedFeeds=new Set();
-async function feedRows(url,key,label){const d=await fetchJSON(url,3);if(!d||d.unavailable||d.ok===false||d.supported===false||['failed','partial','unavailable','unsupported'].includes(d.source_status)||(Array.isArray(d.errors)&&d.errors.length)||!Array.isArray(d[key]))failedFeeds.add(label);return d&&Array.isArray(d[key])?d[key]:[];}
+// A "partial" feed that still sent rows is not missing (2026-10-03: one malformed
+// Caltrans weather file in Stockton turned every California pass's alert count into
+// "?" while 11,510 rows, 17 of them Cajon closures, arrived fine). Its counts show;
+// its empty lists say they may be incomplete. A partial feed with no rows stays "?".
+const failedFeeds=new Set(),partialFeeds=new Set();
+async function feedRows(url,key,label){const d=await fetchJSON(url,3);const rows=d&&Array.isArray(d[key])?d[key]:null;const hard=!d||d.unavailable||d.ok===false||d.supported===false||['failed','unavailable','unsupported'].includes(d.source_status)||!rows;const soft=!hard&&(d.source_status==='partial'||(Array.isArray(d.errors)&&d.errors.length));if(hard||(soft&&!rows.length))failedFeeds.add(label);else if(soft)partialFeeds.add(label);return rows||[];}
 function clean(t,n){const x=String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();if(x.length<=n)return x;const cut=x.slice(0,n);const sp=cut.lastIndexOf(' ');return (sp>n*0.6?cut.slice(0,sp):cut)+'…';}
 // A title for an alert that has no headline of its own: the first sentence, whole,
 // or the first clause before a comma. Build 9/30: a 140-character cut of the
@@ -426,7 +433,11 @@ function renderLists(){
   const work=ALERTS.filter(a=>a.type==='RW').map(alrLi).concat(CONDS.filter(isWorkCond).map(condWorkLi));
   setList('lstWork',work,'No work zones reported in this area right now.');
   for(const [id,deps] of [['lstCams',['cameras']],['lstSnow',['road weather','alerts']],['lstFire',['fires']],['lstClos',['alerts']],['lstWork',['alerts','road weather']]]){
-    if(!deps.some(x=>failedFeeds.has(x)))continue;
+    if(!deps.some(x=>failedFeeds.has(x))){
+      const pe=deps.some(x=>partialFeeds.has(x))&&document.querySelector('#'+id+' ul .empty');
+      if(pe)pe.textContent+=' Part of the agency feed did not load, so this list may be incomplete.';
+      continue;
+    }
     const el=document.getElementById(id);if(!el)continue;const ul=el.querySelector('ul'),empty=ul.querySelector('.empty');
     if(empty)empty.remove();
     ul.insertAdjacentHTML('beforeend','<li class="empty">Feed unavailable or incomplete. Check the agency links for current conditions.</li>');

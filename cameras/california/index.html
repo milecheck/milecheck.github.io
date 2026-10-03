@@ -23,7 +23,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where can I watch live California traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"Right here — the map above shows live Caltrans (QuickMap) highway cameras across California, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond California, see every highway camera in 43 states."}},{"@type":"Question","name":"Are California DOT traffic cameras free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Caltrans (QuickMap) publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the MileCheck app does it hands-free on CarPlay and Android Auto."}},{"@type":"Question","name":"Which highways have cameras in California?","acceptedAnswer":{"@type":"Answer","text":"See I-5 the length of the state including the Grapevine, I-80 over Donner Pass, Cajon Pass on I-15, and US-101 up the coast."}},{"@type":"Question","name":"How often do California traffic cameras update?","acceptedAnswer":{"@type":"Answer","text":"Most Caltrans (QuickMap) cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see."}}],"@id":"https://milecheckapp.com/cameras/california/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where can I watch live California traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"Right here — the map above shows live Caltrans (QuickMap) highway cameras across California, each tagged with its route and postmile so you know which stretch you're seeing. For cameras beyond California, see every highway camera in 43 states."}},{"@type":"Question","name":"Are California DOT traffic cameras free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Caltrans (QuickMap) publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the MileCheck app does it hands-free on CarPlay and Android Auto."}},{"@type":"Question","name":"Which highways have cameras in California?","acceptedAnswer":{"@type":"Answer","text":"See I-5 the length of the state including the Grapevine, I-80 over Donner Pass, Cajon Pass on I-15, and US-101 up the coast."}},{"@type":"Question","name":"How often do California traffic cameras update?","acceptedAnswer":{"@type":"Answer","text":"Most Caltrans (QuickMap) cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see."}}],"@id":"https://milecheckapp.com/cameras/california/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Cameras","item":"https://milecheckapp.com/cameras/"},{"@type":"ListItem","position":3,"name":"California Cameras","item":"https://milecheckapp.com/cameras/california/"}]}</script>
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
@@ -92,6 +92,9 @@
     .spon-body:hover .spon-cta{text-decoration:underline;}
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
   </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
 
@@ -124,7 +127,8 @@
   </aside>
     <div class="eyebrow">Live traffic cameras · California · Caltrans (QuickMap)</div>
     <h1>Caltrans cameras across California</h1>
-    <p class="sub">See the actual road before you drive it. Live Caltrans (QuickMap) highway cameras across California on one map, each tagged with its route and mile marker. Tap any camera for the latest image.</p>
+    <p class="sub">See the actual road before you drive it. Live Caltrans (QuickMap) highway cameras across California on one map, each tagged with its route and postmile. Tap any camera for the latest image.</p>
+
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in California</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">Caltrans</div><div class="l">camera source</div></div>
@@ -143,12 +147,12 @@
     <h2>Live cameras across California</h2>
     <p>Caltrans operates thousands of cameras statewide — the most of any state on this map — covering everything from Bay Area and LA freeways to the Sierra Nevada passes.</p>
     <p>See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.</p>
-    <p>Every camera on this map comes straight from Caltrans (QuickMap) and is tagged with the route and mile marker where the DOT provides it, so you can tell exactly which stretch of road you're looking at. Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
+    <p>Every camera on this map comes straight from Caltrans (QuickMap) and is tagged with the route and postmile where the DOT provides it, so you can tell exactly which stretch of road you're looking at. Caltrans postmiles restart at each county line, so every label carries the county. Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
   </section>
 
   <section class="co-faq">
     <h2>California camera questions, answered</h2>
-    <details><summary>Where can I watch live California traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live Caltrans (QuickMap) highway cameras across California, each tagged with its route and mile marker so you know which stretch you're seeing. For cameras beyond California, see <a href="../">every highway camera in <!--cov:cameras.us_states-->43<!--/cov--> states</a>.</p></details>
+    <details><summary>Where can I watch live California traffic cameras?</summary><p>Right here — the <a href="#comap">map above</a> shows live Caltrans (QuickMap) highway cameras across California, each tagged with its route and postmile so you know which stretch you're seeing. For cameras beyond California, see <a href="../">every highway camera in <!--cov:cameras.us_states-->43<!--/cov--> states</a>.</p></details>
     <details><summary>Are California DOT traffic cameras free?</summary><p>Yes. Caltrans (QuickMap) publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-california&mt=8" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.</p></details>
     <details><summary>Which highways have cameras in California?</summary><p>See <a href="../../corridors/i-5/">I-5</a> the length of the state including <a href="../../passes/grapevine/">the Grapevine</a>, <a href="../../corridors/i-80/">I-80</a> over <a href="../../passes/donner/">Donner Pass</a>, <a href="../../passes/cajon/">Cajon Pass</a> on I-15, and US-101 up the coast.</p></details>
     <details><summary>How often do California traffic cameras update?</summary><p>Most Caltrans (QuickMap) cameras refresh every minute or two, straight from the DOT. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.</p></details>
@@ -156,7 +160,7 @@
 
   <div class="co-cta">
     <h2>The nearest California camera, right as you drive</h2>
-    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive California's highways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.</p>
+    <p>MileCheck shows the nearest camera and your exact postmile in real time as you drive California's highways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-california&mt=8" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcameras-california" target="_blank" rel="noopener">Google Play</a>
@@ -187,7 +191,7 @@
     </div>
   </section>
 <!-- signup:end -->
-            <footer class="site-footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
@@ -229,7 +233,7 @@
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 const CODE="CA";
-const DOT="Caltrans";const MKR="MP";
+const DOT="Caltrans";const MKR="PM";
 const PLOWS=false;
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).
 const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|NE|KS|IA|MN|IN|DE|WV|VA|KY|AR|IL|MA|NC|CT|OH|CO|ND|NM|NJ|OK|RI|TN|TX|MS|MO|HI|WY|QEW|BC|ON|AB|MB|A|R|M|Loop|\d)[- ]?\d*/i;
@@ -246,10 +250,11 @@ const cardEl=document.getElementById('coCard');
 function showCard(html){if(window.stopStream)stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';if(window.stopStream)stopStream();};}
 function camCard(c){
   // CA postmiles are county-relative, not statewide (I-5 runs ~796mi in CA;
-  // the same route+MP recurs in different counties) — the county rides along
-  // whenever the Worker sends one so the label doesn't read as a single
-  // unambiguous statewide mile the way it does in every other state (2026-09-26).
-  var loc=esc(c.route||'')+(c.county?' · '+esc(c.county)+' Co.':'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'');
+  // the same route+postmile recurs in different counties), so the label is the
+  // app's: "SR-99 · PM 21.1 (Kern)" — one decimal when fractional, county in
+  // parentheses (src/utils/cameraLabel.ts, 2026-10-02).
+  function fmtMile(m){var r=Math.round(m*10)/10;return r%1===0?String(r):r.toFixed(1);}
+  var loc=esc(c.route||'')+(c.mp>0?' · '+MKR+' '+fmtMile(c.mp)+(c.county?' ('+esc(c.county)+')':''):'');
   if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
 // HLS playback for stream cameras (DelDOT publishes video only, 2026-09-25): hls.js wherever the browser has Media Source Extensions (every desktop and Android browser), loaded once on the first stream card; iPhone Safari plays the playlist itself, with play retried once the metadata arrives (the first call stalled in testing). One player at a time; closing the card stops it.
 var hlsInst=null,hlsLoading=null;function loadHls(){if(window.Hls)return Promise.resolve();if(hlsLoading)return hlsLoading;hlsLoading=new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);});return hlsLoading;}

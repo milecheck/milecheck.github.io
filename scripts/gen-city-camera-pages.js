@@ -94,16 +94,22 @@ const CITIES = [
     freeways:`Watch <a href="../../corridors/i-90/">I-90</a> (the Thruway), I-190 to the Peace Bridge, I-290, and the Kensington (NY-33).` },
 ];
 
+// California (2026-10-02): Caltrans postmiles restart at every county line, so the
+// number is a "postmile", not a mile marker, and the app labels it "PM 47.2 (Kern)"
+// (src/utils/cameraLabel.ts). The four California metros say the same thing; every
+// other city keeps the strings it always had.
+const marker = (c) => c.state === 'CA' ? 'postmile' : 'mile marker';
+
 function faq(c){
   const ss=STATE_SLUG[c.state], sn=STATE_NAME[c.state];
   return [
     [`Where can I watch live ${c.name} traffic cameras?`,
-      `Right here — the <a href="#comap">map above</a> shows live ${c.dot} cameras across the ${c.name} area, each tagged with its route and mile marker. For the whole state, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
+      `Right here — the <a href="#comap">map above</a> shows live ${c.dot} cameras across the ${c.name} area, each tagged with its route and ${marker(c)}. For the whole state, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
     [`Are ${c.name} traffic cameras free?`,
       `Yes. ${c.dot} publishes its traffic cameras publicly, and MileCheck puts the ${c.name} ones on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
     [`Which freeways have cameras in ${c.name}?`, c.freeways],
     [`How do I check ${c.name} traffic before I leave?`,
-      `Open the <a href="#comap">live map above</a> and tap any camera near your route to see the road right now. Conditions change fast in a busy metro, so check just before you go — and in the app, the nearest camera and your mile marker update automatically as you drive.`],
+      `Open the <a href="#comap">live map above</a> and tap any camera near your route to see the road right now. Conditions change fast in a busy metro, so check just before you go — and in the app, the nearest camera and your ${marker(c)} update automatically as you drive.`],
   ];
 }
 function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faq(c).map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
@@ -120,11 +126,11 @@ function page(c){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${c.title || `${c.name} Traffic Cameras — Live ${c.dot} Freeway Cams | MileCheck`}</title>
-  <meta name="description" content="${c.desc || `Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave.`}">
+  <meta name="description" content="${c.desc || `Watch live ${c.name} traffic cameras on one map — ${c.dot} freeway and highway cameras across the metro, each tagged with route and ${marker(c)}. See traffic before you leave.`}">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${c.slug}/">
 ${ES_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${c.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${c.slug}/">\n${PT_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${c.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${c.slug}/">` : ''}
   <meta property="og:title" content="${c.title || `${c.name} Traffic Cameras — Live | MileCheck`}">
-  <meta property="og:description" content="${c.desc || `Live ${c.name} freeway cameras on one map, each tagged with route and mile marker.`}">
+  <meta property="og:description" content="${c.desc || `Live ${c.name} freeway cameras on one map, each tagged with route and ${marker(c)}.`}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/${c.slug}/">
   <meta property="og:type" content="website">
@@ -180,6 +186,9 @@ ${ES_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="en" href="https://mi
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
 ${sp.css}
   </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
 
@@ -205,7 +214,7 @@ ${sp.css}
 ${sp.html}
 ${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${c.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(c.slug) ? ` · <a href="/pt/cameras/${c.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
     <h1>${c.name} traffic cameras, live</h1>
-    <p class="sub">${c.sub || `See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and mile marker. Tap any camera for the latest image.`}</p>
+    <p class="sub">${c.sub || `See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and ${marker(c)}. Tap any camera for the latest image.`}</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${c.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${c.dot}</div><div class="l">camera source</div></div>
@@ -224,7 +233,7 @@ ${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;col
     <h2>Live traffic cameras across ${c.name}</h2>
     <p>${c.blurb}</p>
     <p>${c.freeways}</p>
-    <p>Every camera on this map comes straight from ${c.dot} and is tagged with the route and mile marker where the agency provides it. Tap a camera dot to open its latest image; tap the image to see it full-size. For cameras beyond the metro, see <a href="../${ss}/">${sn} traffic cameras</a> or <a href="../">every highway camera</a>.</p>
+    <p>Every camera on this map comes straight from ${c.dot} and is tagged with the route and ${marker(c)} where the agency provides it.${c.state === 'CA' ? ' Caltrans postmiles restart at each county line, so every label carries the county.' : ''} Tap a camera dot to open its latest image; tap the image to see it full-size. For cameras beyond the metro, see <a href="../${ss}/">${sn} traffic cameras</a> or <a href="../">every highway camera</a>.</p>
   </section>
 
   <section class="co-faq">
@@ -234,7 +243,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>The nearest ${c.name} camera, right as you drive</h2>
-    <p>MileCheck shows the nearest camera and your exact mile marker in real time as you drive ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.</p>
+    <p>MileCheck shows the nearest camera and your exact ${marker(c)} in real time as you drive ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
@@ -275,6 +284,7 @@ ${faqHtml}
         </div>
       </div>
       <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: ${c.dot} via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
     </div>
   </footer>
 
@@ -297,14 +307,16 @@ let CAMS=[];
 function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 const cardEl=document.getElementById('coCard');
 function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
-function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
+${c.state === 'CA' ? `// CA postmiles are county-relative, so the label is the app's: "SR-99 · PM 21.1 (Kern)" (src/utils/cameraLabel.ts, 2026-10-02).
+function fmtMile(m){var r=Math.round(m*10)/10;return r%1===0?String(r):r.toFixed(1);}
+function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · PM '+fmtMile(c.mp)+(c.county?' ('+esc(c.county)+')':''):'')+' · '+DOT+'</div>` : `function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div>`}<a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
 function thin(items,cellPx){const z=map.getZoom();if(z>=12||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){camLayer.clearLayers();const b=map.getBounds();thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:FERRY_RE.test(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in ${c.name}'):'No cameras loaded — try again shortly.';}
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
 fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
   if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
-  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||''))&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl}));
+  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||''))&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,${c.state === 'CA' ? "county:(c.county||'').trim()," : ''}img:c.imageUrl}));
   document.getElementById('statCams').textContent=CAMS.length;
   draw();
 });

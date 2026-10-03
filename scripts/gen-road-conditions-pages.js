@@ -189,6 +189,9 @@ ${CSS}
 ${SLOT_CSS}
 /* /spon:css */
   </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
 

@@ -35,7 +35,12 @@ const STATES = [
     // HTML only, not this source array — a future full regen would have silently
     // reverted the live page back to round 1's wording. Now matches what's live.
     title:'Caltrans Cameras | California Highway Map | MileCheck',
-    desc:'View Caltrans highway cameras on one map, with postmile labels where available. Check I-5, I-80, US-101 and SR-99.' },
+    desc:'View Caltrans highway cameras on one map, with postmile labels where available. Check I-5, I-80, US-101 and SR-99.',
+    // Synced 2026-10-02: the same round 2 also hand-patched the H1 and og:title on the
+    // built page (og:title without the "| MileCheck" suffix). They were never in this
+    // array, so the 2026-10-02 postmile regen would have reverted them. Now they are.
+    h1:'Caltrans cameras across California',
+    ogTitle:'Caltrans Cameras | California Highway Map' },
   { slug:'utah', code:'UT', name:'Utah', dot:'UDOT', bounds:'[[37,-114.05],[42,-109.04]]',
     blurb:`Utah DOT's cameras cover the Wasatch Front, the canyons, and the interstate crossings of the high desert.`,
     notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas. In winter the Snowplows layer shows where UDOT's trucks are, each with the route and mile marker it is on and how long ago it reported.`,
@@ -229,11 +234,17 @@ const CITIES_BY_STATE = {
 // Canada pages (2026-09-25): a province entry sets country:'CA'. Kilometre
 // markers, the ministry rather than "the DOT", no US-state hub count. A US
 // entry gets exactly the strings the template always had.
+// California (2026-10-02): Caltrans postmiles restart at every county line, so
+// the number is a "postmile", not a mile marker, and the app labels it
+// "PM 47.2 (Kern)" (src/utils/cameraLabel.ts). The page says the same thing.
+// Every other state keeps the strings it always had.
 function wording(s){
   const ca = s.country === 'CA';
+  const pm = s.code === 'CA';
   return {
-    marker: ca ? 'kilometre marker' : 'mile marker',
-    markerShort: ca ? 'km' : 'MP',
+    marker: pm ? 'postmile' : ca ? 'kilometre marker' : 'mile marker',
+    markerShort: pm ? 'PM' : ca ? 'km' : 'MP',
+    markerNote: pm ? ' Caltrans postmiles restart at each county line, so every label carries the county.' : '',
     freeQ: ca ? `Are ${s.name} traffic cameras free?` : `Are ${s.name} DOT traffic cameras free?`,
     fromAgency: ca ? `straight from ${s.dot.split('(')[0].trim()}` : 'straight from the DOT',
     whereProvides: ca ? 'where the province provides it' : 'where the DOT provides it',
@@ -273,7 +284,7 @@ function page(s){
   <meta name="description" content="${s.desc || `Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and ${w.marker}. See the road before you drive it.`}">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${s.slug}/">
 ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${s.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${s.slug}/">\n${PT_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${s.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${s.slug}/">` : ''}
-  <meta property="og:title" content="${s.title || `${s.name} Traffic Cameras — Live | MileCheck`}">
+  <meta property="og:title" content="${s.ogTitle || s.title || `${s.name} Traffic Cameras — Live | MileCheck`}">
   <meta property="og:description" content="${s.desc || `Live ${s.name} highway cameras on one map, each tagged with route and ${w.marker}.`}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/${s.slug}/">
@@ -341,6 +352,9 @@ ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://mi
     @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
 ${sp.css}
   </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
 
@@ -365,7 +379,7 @@ ${sp.css}
   <div class="co-hero">
 ${sp.html}
 ${ES_PAGES.has(s.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${s.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(s.slug) ? ` · <a href="/pt/cameras/${s.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${s.name} · ${s.dot}</div>
-    <h1>${s.name} traffic cameras, live</h1>
+    <h1>${s.h1 || `${s.name} traffic cameras, live`}</h1>
     <p class="sub">${s.sub || `See the actual road before you drive it. Live ${s.dot} highway cameras across ${s.name} on one map, each tagged with its route and ${w.marker}. Tap any camera for the latest image.`}</p>
 ${s.crossLinkHtml || ''}
     <div class="co-stats">
@@ -392,7 +406,7 @@ ${s.crossLinkHtml || ''}
     <h2>Live cameras across ${s.name}</h2>
     <p>${s.blurb}</p>
     <p>${s.notable}</p>
-    <p>Every camera on this map comes straight from ${s.dot} and is tagged with the route and ${w.marker} ${w.whereProvides}, so you can tell exactly which stretch of road you're looking at. Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
+    <p>Every camera on this map comes straight from ${s.dot} and is tagged with the route and ${w.marker} ${w.whereProvides}, so you can tell exactly which stretch of road you're looking at.${w.markerNote} Tap a camera dot to open its latest image; tap the image to see it full-size.</p>
   </section>
 
   <section class="co-faq">
@@ -443,6 +457,7 @@ ${faqHtml}
         </div>
       </div>
       <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: ${s.dot} via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
     </div>
   </footer>
 
@@ -468,11 +483,16 @@ function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'
 const cardEl=document.getElementById('coCard');
 function showCard(html){if(window.stopStream)stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';if(window.stopStream)stopStream();};}
 function camCard(c){
-  // CA postmiles are county-relative, not statewide (I-5 runs ~796mi in CA;
+${s.code === 'CA' ? `  // CA postmiles are county-relative, not statewide (I-5 runs ~796mi in CA;
+  // the same route+postmile recurs in different counties), so the label is the
+  // app's: "SR-99 · PM 21.1 (Kern)" — one decimal when fractional, county in
+  // parentheses (src/utils/cameraLabel.ts, 2026-10-02).
+  function fmtMile(m){var r=Math.round(m*10)/10;return r%1===0?String(r):r.toFixed(1);}
+  var loc=esc(c.route||'')+(c.mp>0?' · '+MKR+' '+fmtMile(c.mp)+(c.county?' ('+esc(c.county)+')':''):'');` : `  // CA postmiles are county-relative, not statewide (I-5 runs ~796mi in CA;
   // the same route+MP recurs in different counties) — the county rides along
   // whenever the Worker sends one so the label doesn't read as a single
   // unambiguous statewide mile the way it does in every other state (2026-09-26).
-  var loc=esc(c.route||'')+(c.county?' · '+esc(c.county)+' Co.':'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'');
+  var loc=esc(c.route||'')+(c.county?' · '+esc(c.county)+' Co.':'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'');`}
   if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · live video from '+DOT+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
 // HLS playback for stream cameras (DelDOT publishes video only, 2026-09-25): hls.js wherever the browser has Media Source Extensions (every desktop and Android browser), loaded once on the first stream card; iPhone Safari plays the playlist itself, with play retried once the metadata arrives (the first call stalled in testing). One player at a time; closing the card stops it.
 var hlsInst=null,hlsLoading=null;function loadHls(){if(window.Hls)return Promise.resolve();if(hlsLoading)return hlsLoading;hlsLoading=new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);});return hlsLoading;}
