@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-02",
+ "generated": "2026-10-03",
  "families": [
   "home",
   "cameras",
@@ -690,6 +690,12 @@
    "key": "basics:how-to-put-on-tire-chains",
    "path": "/how-to-put-on-tire-chains/",
    "title": "How to Put On Tire Chains",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:how-to-use-your-parking-brake",
+   "path": "/how-to-use-your-parking-brake/",
+   "title": "How to Use Your Parking Brake Correctly",
    "sponsor": "house"
   },
   {
@@ -2088,6 +2094,12 @@
    "key": "live:fire",
    "path": "/fire/",
    "title": "Live US Wildfire Map — active fires, acres, containment",
+   "sponsor": "house"
+  },
+  {
+   "key": "live:grades",
+   "path": "/grades/",
+   "title": "Steep Grades Map: long highway climbs by route and mile marker",
    "sponsor": "house"
   },
   {
