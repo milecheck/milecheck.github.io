@@ -12,7 +12,7 @@ const CDL = a('https://dol.wa.gov/driver-licenses-and-permits/commercial-driver-
 
 module.exports = [
   {
-    slug: 'how-to-use-your-parking-brake', checked: 'October 2026', eyebrow: 'Winter driving',
+    slug: 'how-to-use-your-parking-brake', dated: ['2026-10-03', 'October 3, 2026'], eyebrow: 'Winter driving',
     title: 'How to Use Your Parking Brake Correctly',
     h1: 'How to use your parking brake correctly',
     desc: 'When to set the parking brake, the right order with an automatic, which way to turn your wheels on a hill, electronic brakes, and freezing weather.',

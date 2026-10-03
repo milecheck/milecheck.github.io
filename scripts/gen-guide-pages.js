@@ -873,6 +873,7 @@ ${g.faq && g.faq.length ? `  <script type="application/ld+json">${faqJsonLd(g)}<
     .aff h3{font-size:17px;margin:0 0 6px;}
     .aff p{font-size:15.5px;margin:0 0 6px;}
     .aff .aff-note{font-size:12.5px;color:#5b6670;margin:0;}
+    .g-dated{font-size:13px;color:#5b6670;margin:2px 0 10px;}
     .g-checked{font-size:13px;color:#5b6670;border-left:3px solid #E5E5E5;padding-left:10px;margin:14px 0 4px;}
     /* Language toggle — pills at the top of the article, current language
        highlighted. Not a footnote link (Leah, 2026-09-02). */
@@ -906,9 +907,9 @@ ${g.faq && g.faq.length ? `  <script type="application/ld+json">${faqJsonLd(g)}<
 
   <article class="art">
 ${langSwitchHtml}    <div class="eyebrow">${g.eyebrow}</div>
-    <h1>${g.h1}</h1>
+${g.dated ? `    <p class="g-dated"><time datetime="${g.dated[0]}">${g.dated[1]}</time></p>\n` : ''}    <h1>${g.h1}</h1>
     <p class="lede">${g.lede}</p>
-${g.checked ? `    <p class="g-checked">${T.checked(g.checked)}</p>\n` : ''}
+${(g.checked && !g.dated) ? `    <p class="g-checked">${T.checked(g.checked)}</p>\n` : ''}
 ${figHtml}${secHtml}
 
 ${(lang==='en' && AFFILIATE_BOX[g.slug]) ? `    <aside class="aff"><h3>${AFFILIATE_BOX[g.slug].h}</h3><p>${AFFILIATE_BOX[g.slug].p}</p><p class="aff-note">${AFFILIATE_BOX[g.slug].note||AFF_DISCLOSE}</p></aside>\n` : ''}
