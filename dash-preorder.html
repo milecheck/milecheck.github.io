@@ -4,21 +4,22 @@
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MileCheck Dash Display | Join the Early Access List</title>
-  <meta name="description" content="A highway mile-marker display in development. Join the MileCheck Dash early access list for prototype and launch updates.">
-  <meta name="robots" content="noindex">
+  <title>Mile Marker Display for Your Dash | MileCheck GPS Milepost Display</title>
+  <meta name="description" content="A GPS mile marker display for your dash. It shows the highway and mile marker you're passing, with no phone needed. In development. Sign up to help fund it.">
   <link rel="canonical" href="https://milecheckapp.com/dash-preorder.html">
-  <meta property="og:title" content="MileCheck Dash Display | Join the Early Access List">
-  <meta property="og:description" content="A highway mile-marker display in development. Join the MileCheck Dash early access list for prototype and launch updates.">
+  <meta property="og:title" content="Mile Marker Display for Your Dash | MileCheck GPS Milepost Display">
+  <meta property="og:description" content="A GPS mile marker display for your dash. It shows the highway and mile marker you're passing, with no phone needed. In development. Sign up to help fund it.">
   <meta property="og:image" content="https://milecheckapp.com/images/dash-display/dash-display-og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="800">
   <meta property="og:url" content="https://milecheckapp.com/dash-preorder.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MileCheck Dash Display | Join the Early Access List">
-  <meta name="twitter:description" content="A highway mile-marker display in development. Join the MileCheck Dash early access list for prototype and launch updates.">
+  <meta name="twitter:title" content="Mile Marker Display for Your Dash | MileCheck GPS Milepost Display">
+  <meta name="twitter:description" content="A GPS mile marker display for your dash. It shows the highway and mile marker you're passing, with no phone needed. In development. Sign up to help fund it.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/dash-display/dash-display-og.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the MileCheck mile marker display for sale?","acceptedAnswer":{"@type":"Answer","text":"Not yet. It's in development, and we need sign-ups to get the funding to build it. Signing up costs nothing, and everyone on the list hears first when you can order one."}},{"@type":"Question","name":"How does a GPS mile marker display work?","acceptedAnswer":{"@type":"Answer","text":"It reads your position from its own GPS, finds the nearest milepost in the mile marker data stored on the device, and shows the highway and mile number. It doesn't need your phone or a cell signal to do that."}},{"@type":"Question","name":"Does it need my phone?","acceptedAnswer":{"@type":"Answer","text":"No. The display has its own GPS and its own rechargeable battery. Your phone is only used every so often over Bluetooth to update the milepost data and the software."}},{"@type":"Question","name":"Will it work in my state?","acceptedAnswer":{"@type":"Answer","text":"The plan is all 50 US states, using the same milepost data as the MileCheck app. The first prototype only has I-90 loaded so far."}},{"@type":"Question","name":"How much will it cost, and when will it ship?","acceptedAnswer":{"@type":"Answer","text":"There's no price or ship date yet. Both depend on the funding. Everyone who signs up hears first."}},{"@type":"Question","name":"Can I get them for my fleet, plow trucks, or tow trucks?","acceptedAnswer":{"@type":"Answer","text":"Yes. Put the number of vehicles in the \"How many would you want?\" box when you sign up. Fleet numbers help the most with funding."}},{"@type":"Question","name":"Is there a way to see my mile marker right now?","acceptedAnswer":{"@type":"Answer","text":"Yes. The MileCheck app shows your nearest mile marker on your phone in all 50 states, and the 50-state mile marker map works in any browser."}}],"@id":"https://milecheckapp.com/dash-preorder.html#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Mile Marker Display","item":"https://milecheckapp.com/dash-preorder.html"}]}</script>
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,6 +86,15 @@
     #msg.ok{color:var(--green)}
     #msg.err{color:#a3401f}
     footer{text-align:center;padding:32px 0;font-size:13px;color:var(--ink2)}
+    .hero-cta{display:inline-block;margin-top:22px;padding:13px 26px;background:var(--safety);color:#23261f;font:700 15px var(--sans);text-decoration:none;border-radius:8px;border:2px solid #fff}
+    .who{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:6px}
+    .who div{background:var(--paper2);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+    .who h3{margin:0 0 4px;font-size:16px}
+    .who p{margin:0;font-size:15px;color:var(--ink2)}
+    details.faq{border-top:1px solid var(--rule);padding:12px 0}
+    details.faq:last-of-type{border-bottom:1px solid var(--rule)}
+    details.faq summary{cursor:pointer;font-weight:600}
+    details.faq p{margin:8px 0 0;color:var(--ink2)}
   </style>
 </head>
 <body>
@@ -108,46 +118,59 @@
       </div>
     </header>
     <div class="container">
-      <span class="kicker">In development — MileCheck dash display</span>
-      <h1>Your exact mile marker, without looking at your phone.</h1>
-      <p class="sub">A compact display that clips to your vent and shows the highway and mile marker you're passing in real time. First prototypes are in development now. Join the early-access list for testing updates and launch pricing.</p>
+      <span class="kicker">In development · GPS mile marker display</span>
+      <h1>A mile marker display for your dash.</h1>
+      <p class="sub">Your exact mile marker, without looking at your phone. It clips to your vent and shows the highway and mile marker you're passing, live. First prototypes are in development. We need your sign-up to get the funding to make it real.</p>
+      <a class="hero-cta" href="#signup">Sign up to help fund it</a>
     </div>
   </div>
 
   <div class="container">
     <div class="device-card">
       <div class="device-photo-wrap">
-        <img src="images/dash-display/dash-display-hero.webp" alt="MileCheck dash display, vent-mounted, showing I-5 NB mile marker 142.5">
+        <img src="images/dash-display/dash-display-hero.webp" width="1536" height="1024" alt="Concept render of the MileCheck GPS mile marker display on a car air vent, showing I-5 northbound mile marker 142.5">
       </div>
-      <p class="device-caption">Concept render — final size and mount will change during testing.</p>
+      <p class="device-caption">Concept render. Final size and mount will change during testing.</p>
     </div>
 
     <div class="section">
       <h2>The first prototype</h2>
       <figure class="proto">
-        <img src="images/dash-display/first-prototype-2026-10.webp" width="1200" height="900" loading="lazy" alt="The first MileCheck dash display prototype on a breadboard. The color screen reads I-90 MILE 47.3.">
+        <img src="images/dash-display/first-prototype-2026-10.webp" width="1200" height="900" loading="lazy" alt="First prototype of the MileCheck mile marker display on a breadboard. The color screen reads I-90 MILE 47.3.">
         <figcaption>October 2026. The screen shows a demo number until the GPS goes in.</figcaption>
       </figure>
     </div>
 
     <div class="section">
-      <h2>What it does</h2>
+      <h2>What the mile marker display does</h2>
       <ul class="checks">
-        <li>Shows the mile marker you're currently passing, updated live</li>
-        <li>Clips to an air vent — no wiring, no phone mount blocking your view</li>
-        <li>Same 50-state milepost data already in the MileCheck app</li>
+        <li>Shows the highway and the mile marker you're passing, updated live</li>
+        <li>Has its own GPS, so your phone can stay in your pocket</li>
+        <li>Clips to an air vent and runs on a rechargeable battery. No wiring, and no phone mount in your view</li>
+        <li>Built on the milepost data in the MileCheck app, which covers all 50 US states</li>
       </ul>
     </div>
 
     <div class="section">
-      <h2>How it works</h2>
-      <p>The display has its own GPS, so it tracks your position and finds your mile marker on its own — no phone needed once it's set up, no lag waiting on a Bluetooth link while you're driving.</p>
-      <p>Bluetooth is only for occasional syncs: pairing with your phone every so often to pull the latest milepost data (new states, corrected mile markers, road-alert info) and any firmware updates. Day to day it just runs on its own.</p>
+      <h2>Who it's for</h2>
+      <div class="who">
+        <div><h3>Snow plow drivers and DOT road crews</h3><p>Call in a location by mile marker without picking up a phone.</p></div>
+        <div><h3>Truck drivers</h3><p>The mile marker at a glance for dispatch, breakdowns and log notes.</p></div>
+        <div><h3>Tow operators</h3><p>Know when you've reached the mile marker the caller gave you.</p></div>
+        <div><h3>EMS and first responders</h3><p>Your mile marker in view when you report where you are.</p></div>
+        <div><h3>Fleets</h3><p>One per vehicle. Tell us how many in the sign-up form.</p></div>
+      </div>
     </div>
 
     <div class="section">
-      <h2>Get early access</h2>
-      <p>We're hand-building the first units. Signing up doesn't charge you anything — it puts you on the list for a working prototype review and first access to preorder at the launch price before it opens to everyone.</p>
+      <h2>How it works</h2>
+      <p>The display has its own GPS, so it tracks your position and finds your mile marker on its own. It doesn't need your phone once it's set up, and it doesn't wait on a Bluetooth link while you drive.</p>
+      <p>Bluetooth is only for occasional updates. Every so often it pairs with your phone to pull the latest milepost data and any software updates. Day to day it runs on its own.</p>
+    </div>
+
+    <div class="section" id="signup">
+      <h2>Sign up to help make it real</h2>
+      <p>We need sign-ups to get the funding to build this. The more people who sign up, the stronger the case. Signing up costs nothing. We'll email you about the prototype and when you can order one.</p>
       <form id="preorderForm">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required placeholder="you@example.com">
@@ -167,10 +190,21 @@
         </select>
         <label for="quantity">How many would you want? (optional)</label>
         <input type="number" id="quantity" name="quantity" min="1" max="10000" step="1" inputmode="numeric" placeholder="1">
-        <button type="submit" id="submitBtn">Get early access</button>
+        <button type="submit" id="submitBtn">Sign up</button>
         <p class="fine">No spam, no charge today. We'll only email you about this device.</p>
         <div id="msg"></div>
       </form>
+    </div>
+
+    <div class="section">
+      <h2>Questions about the mile marker display</h2>
+      <details class="faq"><summary>Is the MileCheck mile marker display for sale?</summary><p>Not yet. It's in development, and we need sign-ups to get the funding to build it. Signing up costs nothing, and everyone on the list hears first when you can order one.</p></details>
+      <details class="faq"><summary>How does a GPS mile marker display work?</summary><p>It reads your position from its own GPS, finds the nearest milepost in the mile marker data stored on the device, and shows the highway and mile number. It doesn't need your phone or a cell signal to do that.</p></details>
+      <details class="faq"><summary>Does it need my phone?</summary><p>No. The display has its own GPS and its own rechargeable battery. Your phone is only used every so often over Bluetooth to update the milepost data and the software.</p></details>
+      <details class="faq"><summary>Will it work in my state?</summary><p>The plan is all 50 US states, using the same milepost data as the MileCheck app. The first prototype only has I-90 loaded so far.</p></details>
+      <details class="faq"><summary>How much will it cost, and when will it ship?</summary><p>There's no price or ship date yet. Both depend on the funding. Everyone who signs up hears first.</p></details>
+      <details class="faq"><summary>Can I get them for my fleet, plow trucks, or tow trucks?</summary><p>Yes. Put the number of vehicles in the "How many would you want?" box when you sign up. Fleet numbers help the most with funding.</p></details>
+      <details class="faq"><summary>Is there a way to see my mile marker right now?</summary><p>Yes. The <a href="/get/?utm_source=site&amp;utm_campaign=dash-faq">MileCheck app</a> shows your nearest mile marker on your phone in all 50 states, and the <a href="/maps/mile-markers/">50-state mile marker map</a> works in any browser.</p></details>
     </div>
   </div>
 
@@ -207,17 +241,17 @@
         if (!res.ok) throw new Error(data.error || 'Something went wrong');
         msg.className = 'ok';
         msg.textContent = data.alreadyOnList
-          ? "You're already on the list — we'll be in touch."
+          ? "You're already signed up. We'll be in touch."
           : "You're on the list. We'll email you when there's news.";
         msg.style.display = 'block';
         form.reset();
         if (window.gtag) gtag('event', 'dash_preorder_signup');
       } catch (err) {
         msg.className = 'err';
-        msg.textContent = 'Could not submit — please try again in a moment.';
+        msg.textContent = 'That didn\'t go through. Please try again in a moment.';
         msg.style.display = 'block';
       } finally {
-        btn.disabled = false; btn.textContent = 'Get early access';
+        btn.disabled = false; btn.textContent = 'Sign up';
       }
     });
     (function(){var t=document.querySelector('.nav-toggle'),n=document.querySelector('.primary-nav');if(t&&n){t.addEventListener('click',function(){n.classList.toggle('open');});document.addEventListener('click',function(e){if(!e.target.closest('.header-inner'))n.classList.remove('open');});}})();
