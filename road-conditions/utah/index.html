@@ -297,7 +297,7 @@ var status=document.getElementById('rcStatus'),rows=document.getElementById('rcR
 var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
 var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
 var ON_TOGGLE={partial:1,work:1,other:1};
-function clean(t,n){return (t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/g,' ').replace(/\s+/g,' ').trim().slice(0,n||200);}
+function clean(t,n){var x=(t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/g,' ').replace(/\s+/g,' ').replace(/(\s*\|)+\s*(Status:\s*\w+)?\s*$/i,'').trim();n=n||200;if(x.length<=n)return x;var c=x.slice(0,n),sp=c.lastIndexOf(' ');return (sp>n*0.6?c.slice(0,sp):c).replace(/[\s,;:.|-]+$/,'')+'…';}
 function partial(txt){return /\b(ramp|shoulder|sidewalk|rest area)\b/.test(txt)||/\b(right|left|center|middle|one|two|three|hov|express|inside|outside|slow|fast) lanes?\b/.test(txt)||/\blane (closed|closure|blocked|restriction)/.test(txt)||/\blanes? (is|are) (closed|blocked)/.test(txt)||/\bsingle lane\b|\balternating\b|\breduced to one lane\b/.test(txt);}
 function fullWords(txt){return /\b(freeway|roadway|highway|road|route|interstate|bridge|tunnel|pass) (is )?closed\b|\bclosed (in )?both directions\b|\bfull closure\b|\bclosed to (all|thru|through) traffic\b/.test(txt);}
 function kind(r){var t=String(r['event-type-id']||'').toUpperCase(),txt=(clean(r.headline)+' '+clean(r['impact-desc'])+' '+clean(r.description)).toLowerCase();
@@ -319,7 +319,7 @@ function render(list){
   layer.clearLayers();workLayer.clearLayers();markers={};
   var shown=0;
   list.forEach(function(a,i){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;if(ON_TOGGLE[a.k]&&shown>500)return;var m=L.marker([a.lat,a.lon],{icon:icon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});
-    m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · MP '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+'</div><div class="fp-row">'+esc(a.head)+'</div>'+(a.desc&&a.desc!==a.head?'<div class="fp-row">'+esc(a.desc)+'</div>':'')+'</div>');
+    m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · MP '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+'</div><div class="fp-row">'+esc(a.fd&&a.fd.indexOf(a.fh)>=0?a.fd:a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});
     (ON_TOGGLE[a.k]?workLayer:layer).addLayer(m);markers[i]=m;shown++;});
   var listed=list.filter(function(a){return !ON_TOGGLE[a.k];}).slice(0,80);
   if(!listed.length){rows.innerHTML='<div class="rc-empty"><b>No closures or crashes in the '+esc(DOT)+' feed right now.</b>Ramp, lane and work-zone alerts are on the map when the box above is checked. '+esc(DOT)+' is the official source.</div>';}
@@ -337,7 +337,7 @@ var last=null;
 function load(){
   fetch(WORKER+'/incidents?state='+ST,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){
     if(!Array.isArray(d['incident-reports']))throw new Error('unexpected payload');
-    var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),desc:clean(r.description||r['impact-desc']||'',240),at:when(r),start:st,future:future};});
+    var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),fh:clean(r.headline||r.description||r['impact-desc']||'Alert',1500),fd:clean(r.description||r['impact-desc']||'',1500),at:when(r),start:st,future:future};});
     var order={closure:0,crash:1,weather:2,hazard:3,partial:4,other:5,work:6};
     list.sort(function(a,b){return (a.future-b.future)||order[a.k]-order[b.k]||((b.at?b.at.getTime():0)-(a.at?a.at.getTime():0));});
     last=list;render(list);
