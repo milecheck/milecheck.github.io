@@ -159,7 +159,7 @@
       </div>
       <div class="rc-side">
         <div class="rc-list">
-          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span><label><input type="checkbox" id="rcWork"> Ramps, lanes, work zones</label></div>
+          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span><label><input type="checkbox" id="rcWork"> Restrictions, roadwork and other reports</label></div>
           <div class="rc-rows" id="rcRows"><div class="rc-empty">Loading the Mass511 feed&hellip;</div></div>
         </div>
         <div class="rc-official">Source: <a href="https://www.mass511.com" target="_blank" rel="noopener">Mass511</a>, read every five minutes and converted to the same format MileCheck uses for all 50 states. Ramp, lane and shoulder closures are listed under the toggle, not as full closures. Closures with a future start date are marked scheduled. Positions are the DOT's; mile markers are approximate.</div>
@@ -218,7 +218,6 @@
     <p class="rc-related">Other states: <a href="/road-conditions/">road conditions by state</a> · <a href="/closures/">US closures map</a> · <a href="/passes/">Mountain passes</a> · <a href="/corridors/">Interstate corridors</a> · <a href="/cameras/">Cameras</a></p>
   </div>
 
-
   <!-- signup:start -->
   <section class="mc-signup" id="subscribe">
     <style>
@@ -241,6 +240,7 @@
     </div>
   </section>
 <!-- signup:end -->
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -300,15 +300,19 @@ function clean(t,n){var x=(t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/
 function partial(txt){return /\b(ramp|shoulder|sidewalk|rest area)\b/.test(txt)||/\b(right|left|center|middle|one|two|three|hov|express|inside|outside|slow|fast) lanes?\b/.test(txt)||/\blane (closed|closure|blocked|restriction)/.test(txt)||/\blanes? (is|are) (closed|blocked)/.test(txt)||/\bsingle lane\b|\balternating\b|\breduced to one lane\b/.test(txt);}
 function fullWords(txt){return /\b(freeway|roadway|highway|road|route|interstate|bridge|tunnel|pass) (is )?closed\b|\bclosed (in )?both directions\b|\bfull closure\b|\bclosed to (all|thru|through) traffic\b/.test(txt);}
 function kind(r){var t=String(r['event-type-id']||'').toUpperCase(),txt=(clean(r.headline)+' '+clean(r['impact-desc'])+' '+clean(r.description)).toLowerCase();
-  var closedText=/\bclos(ed|ure)\b/.test(txt);
-  if((t==='CL'||closedText)&&(fullWords(txt)||!partial(txt)))return 'closure';
-  if((t==='CL'||closedText)&&partial(txt))return 'partial';
+  // Explicit negation is handled first: "not closed", "no full closure is required", "no longer closed".
+  var neg=/\b(not|no|without|never)\s+(?:(?:yet|been|be|longer|full|complete|road|lane|highway|any)\s+)*clos(?:ed|ure|ures)\b|\bopen to traffic\b/.test(txt);
+  var closedText=!neg&&/\bclos(ed|ure)\b/.test(txt);
+  var isCL=t==='CL'&&!neg;
+  if(closedText&&partial(txt))return 'partial';
+  if(isCL&&!partial(txt))return 'closure';
+  if(closedText&&fullWords(txt))return 'closure';
   if(t==='AC'||/\b(crash|collision|accident|overturn|rollover|jackknif)/.test(txt))return 'crash';
   if(t==='WE'||/\b(snow|ice|icy|flood|fog|high wind|chain|blizzard|slick)/.test(txt))return 'weather';
   if(t==='HZ')return 'hazard';
   if(t==='RW')return 'work';
   return 'other';}
-function when(r){var v=r['last-updated']||r['update-time']||r['date-updated']||r['entry-time']||r['start-time'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
+function when(r){var v=r['last-updated']||r['update-time']||r['date-updated'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
 function dirN(d){d=String(d||'').trim().toLowerCase();if(!d||/^(both|all|unknown|n\/a)/.test(d))return '';var m=d.match(/^(north|south|east|west)/);if(m)return m[1][0].toUpperCase()+'B';return /^(nb|sb|eb|wb)$/.test(d)?d.toUpperCase():'';}
 function starts(r){var v=r['start-time'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
 function ago(d){var m=Math.round((Date.now()-d.getTime())/60000);if(m<1)return 'just now';if(m<60)return m+' min ago';var h=Math.round(m/60);if(h<48)return h+' h ago';return Math.round(h/24)+' d ago';}
@@ -321,12 +325,12 @@ function render(list){
     m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · MP '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+'</div><div class="fp-row">'+esc(a.fd&&a.fd.indexOf(a.fh)>=0?a.fd:a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});
     (ON_TOGGLE[a.k]?workLayer:layer).addLayer(m);markers[i]=m;shown++;});
   var listed=list.filter(function(a){return !ON_TOGGLE[a.k];}).slice(0,80);
-  if(!listed.length){rows.innerHTML='<div class="rc-empty"><b>No closures or crashes in the '+esc(DOT)+' feed right now.</b>Ramp, lane and work-zone alerts are on the map when the box above is checked. '+esc(DOT)+' is the official source.</div>';}
+  if(!listed.length){rows.innerHTML='<div class="rc-empty"><b>No closures or crashes in the '+esc(DOT)+' feed right now.</b>Restrictions, roadwork and other reports are on the map when the box above is checked. '+esc(DOT)+' is the official source.</div>';}
   else rows.innerHTML=listed.map(function(a){var i=list.indexOf(a);return '<div class="rc-row" data-i="'+i+'"><div class="t"><span class="rt">'+esc(a.route||LABEL[a.k])+(a.mp?' · MP '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</span><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span></div><div class="sub">'+(a.future?'<b>Starts '+a.start.toLocaleDateString([], {month:'short',day:'numeric'})+'.</b> ':'')+esc(a.head)+(a.at?' <span style="white-space:nowrap">· '+ago(a.at)+'</span>':'')+'</div></div>';}).join('');
   var n={},sched=0;list.forEach(function(a){if(a.future){if(!ON_TOGGLE[a.k])sched++;return;}n[a.k]=(n[a.k]||0)+1;});
   var parts=[];['closure','crash','weather','hazard'].forEach(function(k){if(n[k])parts.push(n[k]+' '+(k==='closure'?(n[k]===1?'closure':'closures'):k==='crash'?(n[k]===1?'crash':'crashes'):k));});
-  if(sched)parts.push(sched+' scheduled');if(n.partial||n.work)parts.push(((n.partial||0)+(n.work||0))+' ramp, lane and work-zone alerts');
-  status.className='rc-status';status.innerHTML=(parts.length?parts.join(' · '):'No active alerts')+' <span class="rc-upd">· '+esc(DOT)+' via MileCheck · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'</span>';
+  if(sched)parts.push(sched+' scheduled');if(n.partial||n.work)parts.push(((n.partial||0)+(n.work||0))+' ramp, lane and work-zone alerts');if(n.other)parts.push(n.other+(n.other===1?' other report':' other reports'));
+  status.className='rc-status';status.innerHTML=(parts.length?parts.join(' · '):(list.length?'Reports are listed under the toggle':'No reports returned by the feed'))+' <span class="rc-upd">· '+esc(DOT)+' via MileCheck · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'</span>';
   count.textContent=listed.length?listed.length+' listed':'';
 }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}

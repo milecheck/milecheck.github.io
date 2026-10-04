@@ -108,6 +108,9 @@
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
 /* /spon:css */
   </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
 </head>
 <body>
 
@@ -131,9 +134,8 @@
   </header>
 
   <div class="rc-wrap">
-        <p class="rc-eyebrow">Road conditions</p>
     <!-- spon:start -->
-  <aside class="spon spon-house" id="spon" data-slot="basics:road-conditions" data-sponsor="house" aria-label="Sponsor">
+  <aside class="spon spon-house" id="spon" data-slot="live:road-conditions" data-sponsor="house" aria-label="Sponsor">
     <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
     <a class="spon-body" href="/sponsor/" data-spon-link>
       <span class="spon-text"><strong>Sponsor this page.</strong></span>
@@ -141,7 +143,8 @@
     </a>
   </aside>
 <!-- spon:end -->
-<h1>Road conditions by state</h1>
+    <p class="rc-eyebrow">Road conditions</p>
+    <h1>Road conditions by state</h1>
     <p class="rc-lede">One page per state. Each one reads that state's DOT feed every five minutes and puts the current closures and crashes on a map with the route and mile marker, then links the state's cameras, mountain passes and interstate corridors, and says what the season does to its highways. For one national view, use the <a href="/closures/">US closures map</a>.</p>
     <div class="rc-states">
       <a class="rc-state" href="/road-conditions/alabama/"><b>Alabama</b><span>ALGO Traffic</span></a>
@@ -162,7 +165,7 @@
       <a class="rc-state" href="/road-conditions/kansas/"><b>Kansas</b><span>KanDrive</span></a>
       <a class="rc-state" href="/road-conditions/kentucky/"><b>Kentucky</b><span>GoKY</span></a>
       <a class="rc-state" href="/road-conditions/louisiana/"><b>Louisiana</b><span>511LA</span></a>
-      <a class="rc-state" href="/road-conditions/maine/"><b>Maine</b><span>511 Maine</span></a>
+      <a class="rc-state" href="/road-conditions/maine/"><b>Maine</b><span>New England 511</span></a>
       <a class="rc-state" href="/road-conditions/maryland/"><b>Maryland</b><span>CHART</span></a>
       <a class="rc-state" href="/road-conditions/massachusetts/"><b>Massachusetts</b><span>Mass511</span></a>
       <a class="rc-state" href="/road-conditions/michigan/"><b>Michigan</b><span>Mi Drive</span></a>
@@ -203,7 +206,6 @@
     <p class="rc-related">Also: <a href="/passes/">Mountain passes</a> · <a href="/corridors/">Interstate corridors</a> · <a href="/cameras/">Cameras by state and city</a> · <a href="/states/">Mile markers by state</a> · <a href="/canada/">Canada</a></p>
   </div>
 
-
   <!-- signup:start -->
   <section class="mc-signup" id="subscribe">
     <style>
@@ -226,6 +228,7 @@
     </div>
   </section>
 <!-- signup:end -->
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
