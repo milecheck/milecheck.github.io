@@ -75,7 +75,8 @@
     ul.checks li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
     form{background:var(--paper2);border:1px solid var(--rule);border-radius:12px;padding:24px;margin-top:8px}
     label{display:block;font:600 12px var(--mono);letter-spacing:.06em;color:var(--ink2);text-transform:uppercase;margin:0 0 6px}
-    input[type=email],input[type=text],input[type=number],select{width:100%;padding:12px 14px;font-size:16px;border:1.5px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink);margin-bottom:16px;font-family:var(--sans)}
+    input[type=email],input[type=text],input[type=number],select,textarea{width:100%;padding:12px 14px;font-size:16px;border:1.5px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink);margin-bottom:16px;font-family:var(--sans)}
+    textarea{resize:vertical;min-height:80px;line-height:1.4}
     select{appearance:none;-webkit-appearance:none;padding-right:40px;
       background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235c6156' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 14px center}
     input:focus,select:focus{outline:2px solid var(--green);outline-offset:1px}
@@ -190,6 +191,8 @@
         </select>
         <label for="quantity">How many would you want? (optional)</label>
         <input type="number" id="quantity" name="quantity" min="1" max="10000" step="1" inputmode="numeric" placeholder="1">
+        <label for="comments">Comments (optional)</label>
+        <textarea id="comments" name="comments" rows="3" maxlength="500" placeholder="Anything else you want us to know"></textarea>
         <button type="submit" id="submitBtn">Sign up</button>
         <p class="fine">No spam, no charge today. We'll only email you about this device.</p>
         <div id="msg"></div>
@@ -223,6 +226,7 @@
       const name = document.getElementById('name').value.trim();
       const role = document.getElementById('role').value;
       const quantity = document.getElementById('quantity').value;
+      const comments = document.getElementById('comments').value.trim();
       // Which post or message sent them: ?utm_source=instagram&utm_campaign=dash-signups
       // becomes "instagram/dash-signups". The Worker keeps the first one it sees per email.
       const qs = new URLSearchParams(location.search);
@@ -235,7 +239,7 @@
         const res = await fetch(WORKER, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, name, role, quantity, source }),
+          body: JSON.stringify({ email, name, role, quantity, comments, source }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Something went wrong');

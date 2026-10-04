@@ -50,7 +50,7 @@
       <div class="units" id="units"></div>
       <button class="copy" onclick="copyEmails('dash', this)">Copy all emails</button>
       <div class="tbl-wrap"><table id="tbl">
-        <thead><tr><th>Email</th><th>Name</th><th>Drives for</th><th>How many</th><th>Source</th><th>Signed up</th></tr></thead>
+        <thead><tr><th>Email</th><th>Name</th><th>Drives for</th><th>How many</th><th>Comments</th><th>Source</th><th>Signed up</th></tr></thead>
         <tbody id="rows"></tbody>
       </table></div>
       <h2>Mountain Visibility Android waitlist</h2>
@@ -123,6 +123,7 @@
           (e) => (e.name ? String(e.name) : '—'),
           (e) => (e.role ? (ROLE_LABELS[e.role] || String(e.role)) : '—'),
           (e) => (Number(e.quantity) > 0 ? String(e.quantity) : '—'),
+          (e) => (e.comments ? String(e.comments) : '—'),
           source,
           date,
         ]);
