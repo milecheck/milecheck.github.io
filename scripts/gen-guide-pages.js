@@ -477,12 +477,12 @@ const GUIDES = [
     sections:[
       ['Get the location right, fast',`Half the job is getting to the right spot. Dispatch gives you a location in <strong>route, direction, and mile marker</strong> — "I-5 southbound, mile 142" — and you relay your own position the same way. Being fluent in mile markers gets you there faster and keeps everyone coordinated. MileCheck shows your exact mile marker in real time plus the nearest DOT camera, so you can read the scene before you arrive. <a href="../what-is-my-mile-marker/">More on mile markers →</a>`],
       ['The shoulder is the danger zone',`Most tow-operator injuries happen at the roadside, struck by passing traffic. Wear your high-visibility gear, position the truck to <strong>shield your work area</strong> with its lights and mass, set out cones or flares where allowed, and stay aware of traffic the entire time. Work from the side away from live lanes whenever you can, and never turn your back on moving traffic.`],
-      ['Move-over laws and approaching a scene',`Every US state has a <strong>move-over law</strong> requiring drivers to slow down and move over for stopped emergency and service vehicles with their lights on — but not everyone obeys it, so protect yourself as if they won't. Approach a disabled vehicle slowly, park to protect the scene, and size up the situation before you get out: traffic, footing, and where the driver and passengers are standing.`],
+      ['Move-over laws and approaching a scene',`Every US state has a <strong>move-over law</strong> requiring drivers to move over for stopped emergency and service vehicles with their lights on, or slow down when they can't (<a href="../move-over-laws/">what each state requires</a>) — but not everyone obeys it, so protect yourself as if they won't. Approach a disabled vehicle slowly, park to protect the scene, and size up the situation before you get out: traffic, footing, and where the driver and passengers are standing.`],
       ['The load and the long haul',`Secure every hookup and check your rigging before you pull — a shifting load at highway speed is a disaster. Know your truck's height, weight, and stopping distance; a tow truck with a vehicle in tow stops much slower than you'd expect. And on long recoveries far from town, your <strong>mile marker</strong> is what pins the exact spot for dispatch, the customer, and law enforcement.`],
     ],
     faq:[
       ['What is the most dangerous part of being a tow truck driver?',`Working at the roadside. Most tow-operator injuries come from being struck by passing traffic on the shoulder, so high-visibility gear, protective truck positioning, and constant traffic awareness matter more than anything.`],
-      ['What is a move-over law?',`A law requiring drivers to slow down and change lanes away from stopped emergency and service vehicles, including tow trucks, that have their lights on. Every US state has one, though the specifics and enforcement vary — so tow operators protect themselves as if drivers won't comply.`],
+      ['What is a move-over law?',`A law requiring drivers to change lanes away from stopped emergency and service vehicles, including tow trucks, that have their lights on, or slow down when they can't. Every US state has one, though the specifics and enforcement vary — so tow operators protect themselves as if drivers won't comply.`],
       ['How do tow operators find a stranded vehicle?',`By route, direction, and mile marker — the location dispatch provides and the driver reports. Knowing mile markers, and using tools that show them live, gets the operator to the exact spot faster.`],
       ['How should a tow truck approach a disabled vehicle on the highway?',`Slowly and deliberately — park to shield the work area with the truck's lights and mass, size up the traffic and footing before getting out, and stay clear of live lanes. Never turn your back on moving traffic.`],
     ],
@@ -708,6 +708,8 @@ GUIDES.push(...require('./guides/articles-2026-10-02.cjs'));
 GUIDES.push(...require('./guides/fall-drives-2026-10-02.cjs'));
 // Parking brake guide, 2026-10-03 (ChatGPT copy, sources checked by Claude).
 GUIDES.push(...require('./guides/parking-brake-2026-10-03.cjs'));
+// Move Over laws, 2026-10-03 (ChatGPT copy from Claude's sourced brief, numbers checked by Claude).
+GUIDES.push(...require('./guides/move-over-laws-2026-10-03.cjs'));
 
 // Language-aware routing (2026-09-25). A guide object may carry lang:'fr' (or 'es', …).
 // Identity is lang+slug: English lives at /<slug>/, others at /<lang>/<slug>/.
