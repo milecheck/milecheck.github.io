@@ -16,7 +16,7 @@
   "status": {
    "state": "reported-closed",
    "missedChecks": 0,
-   "note": null
+   "note": "past-scheduled-end"
   },
   "dot": "WSDOT",
   "dotUrl": "https://wsdot.wa.gov/construction-planning/search-projects/us-101-hoh-river-bridge-emergency-repair",
@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 23,
+   "missedChecks": 24,
    "note": null
   },
   "lat": 34.0173,
