@@ -30,6 +30,10 @@
     .art a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .art a:hover{text-decoration:underline;}
     .art .disclaimer{border-left:4px solid #0f7a4f;background:#f4fbf7;padding:12px 16px;border-radius:0 10px 10px 0;}
+    .flow{margin:6px 0 10px;}
+    .flow-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px;}
+    .flow svg{display:block;width:100%;min-width:560px;height:auto;}
+    .flow figcaption{font-size:13.5px;color:#5b6670;margin-top:8px;max-width:760px;}
     .tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 6px;border:1px solid #E5E5E5;border-radius:12px;}
     .tbl table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px;line-height:1.45;}
     .tbl th{text-align:left;background:#f6f7f8;padding:9px 12px;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;color:#5b6670;border-bottom:1px solid #E5E5E5;}
@@ -71,6 +75,49 @@
     <h2>How the data gets to you</h2>
     <p>Each agency publishes in its own format. MileCheck reads the feed, converts it to one format, and refreshes it every 5 to 15 minutes depending on the source. We sort alerts into types such as crash, closure and construction. We do not write alerts of our own. An alert appears in MileCheck after the agency posts it, so it is never ahead of the source.</p>
     <p>Mile marker positions come from each state&rsquo;s published highway location data. Where a state publishes none for a road, the federal HPMS road dataset fills the gap. Mile markers are stored in the app and work with no signal. Alerts and cameras need a connection.</p>
+    <figure class="flow" aria-label="How data moves from agencies to MileCheck">
+      <div class="flow-scroll"><svg viewBox="0 0 790 330" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Agency feeds go to MileCheck's server, which converts them to one format and serves the app, the website and business customers. Mile marker positions are built into the app.</title>
+        <defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a4f"/></marker>
+        <marker id="fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a928c"/></marker></defs>
+        <g font-family="IBM Plex Sans, -apple-system, sans-serif">
+          <rect x="10" y="40" width="200" height="86" rx="8" fill="#f4fbf7" stroke="#0f7a4f" stroke-width="1.5"/>
+          <text x="24" y="68" font-size="15" font-weight="700" fill="#23261f">Agency feeds</text>
+          <text x="24" y="90" font-size="12.5" fill="#5c6156">50 states and 3 provinces</text>
+          <text x="24" y="108" font-size="12.5" fill="#5c6156">each in its own format</text>
+
+          <rect x="280" y="30" width="200" height="106" rx="8" fill="#23261f"/>
+          <text x="380" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">MileCheck&#8217;s server</text>
+          <text x="380" y="84" text-anchor="middle" font-size="12.5" fill="#d9dccf">reads each feed</text>
+          <text x="380" y="102" text-anchor="middle" font-size="12.5" fill="#d9dccf">converts it to one format</text>
+          <text x="380" y="120" text-anchor="middle" font-size="12.5" fill="#d9dccf">sorts alerts by type</text>
+
+          <path d="M210 83 H274" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
+          <text x="242" y="74" text-anchor="middle" font-size="11.5" fill="#5c6156">5&#8211;15 min</text>
+
+          <rect x="550" y="10" width="200" height="56" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5"/>
+          <text x="564" y="34" font-size="14.5" font-weight="700" fill="#23261f">MileCheck app</text>
+          <text x="564" y="53" font-size="12.5" fill="#5c6156">alerts, cameras, map</text>
+          <rect x="550" y="80" width="200" height="56" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5"/>
+          <text x="564" y="104" font-size="14.5" font-weight="700" fill="#23261f">milecheckapp.com</text>
+          <text x="564" y="123" font-size="12.5" fill="#5c6156">state, closure and camera pages</text>
+          <rect x="550" y="150" width="200" height="56" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5"/>
+          <text x="564" y="174" font-size="14.5" font-weight="700" fill="#23261f">Businesses</text>
+          <text x="564" y="193" font-size="12.5" fill="#5c6156">API and data license</text>
+
+          <path d="M480 66 L544 42" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
+          <path d="M480 96 L544 106" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
+          <path d="M480 124 L544 170" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
+
+          <rect x="10" y="236" width="240" height="72" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="24" y="262" font-size="15" font-weight="700" fill="#23261f">Mile marker positions</text>
+          <text x="24" y="283" font-size="12.5" fill="#5c6156">state highway data + federal HPMS</text>
+          <path d="M250 272 H772 V38 H756" stroke="#8a928c" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#fg)"/>
+          <text x="510" y="292" text-anchor="middle" font-size="11.5" fill="#5c6156">built into the app, works with no signal</text>
+        </g>
+      </svg></div>
+      <figcaption>Alerts and cameras travel the green path and need a connection. Mile markers travel the dashed path once, inside the app.</figcaption>
+    </figure>
 
     <h2>United States: state transportation agencies</h2>
     <p>Alerts are live for all 50 states. Cameras are live for 43 states.</p>
