@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where MileCheck Gets Its Road Data | MileCheck</title>
+  <meta name="description" content="MileCheck is not a government app. Every state DOT, province, federal agency and weather source it reads, with a link to each one.">
+  <link rel="canonical" href="https://milecheckapp.com/data-sources/">
+  <meta property="og:title" content="Where MileCheck Gets Its Road Data | MileCheck">
+  <meta property="og:description" content="MileCheck is not a government app. Every state DOT, province, federal agency and weather source it reads, with a link to each one.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/data-sources/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://milecheckapp.com/data-sources/#webpage","isPartOf":{"@id":"https://milecheckapp.com/#website"},"name":"Data sources","url":"https://milecheckapp.com/data-sources/","description":"MileCheck is not a government app. Every state DOT, province, federal agency and weather source it reads, with a link to each one.","inLanguage":"en","publisher":{"@id":"https://milecheckapp.com/#org"},"dateModified":"2026-10-07"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Data sources","item":"https://milecheckapp.com/data-sources/"}]}</script>
+  <style>
+    .art{max-width:900px;margin:0 auto;padding:34px 20px 40px;}
+    .art .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .art h1{font-size:clamp(28px,5vw,42px);line-height:1.12;margin:0 0 14px;}
+    .art .lede{font-size:18px;line-height:1.6;color:#3a444d;margin:0 0 16px;max-width:760px;}
+    .art h2{font-size:23px;margin:34px 0 8px;}
+    .art p{font-size:16px;line-height:1.7;color:#2a333b;margin:0 0 14px;max-width:760px;}
+    .art a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .art a:hover{text-decoration:underline;}
+    .art .disclaimer{border-left:4px solid #0f7a4f;background:#f4fbf7;padding:12px 16px;border-radius:0 10px 10px 0;}
+    .tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 6px;border:1px solid #E5E5E5;border-radius:12px;}
+    .tbl table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px;line-height:1.45;}
+    .tbl th{text-align:left;background:#f6f7f8;padding:9px 12px;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;color:#5b6670;border-bottom:1px solid #E5E5E5;}
+    .tbl td{padding:10px 12px;border-bottom:1px solid #EEF0F1;vertical-align:top;color:#2a333b;}
+    .tbl tr:last-child td{border-bottom:0;}
+    .tbl td:nth-child(3),.tbl td:nth-child(4),.tbl th:nth-child(3),.tbl th:nth-child(4){text-align:center;white-space:nowrap;}
+    .tbl .y{color:#0f7a4f;font-weight:800;} .tbl .n{color:#9aa3ab;}
+    .tbl .note{font-size:13px;color:#5b6670;}
+    .checked{font-size:13px;color:#5b6670;margin-top:24px;}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../index.html">Home</a>
+        <a href="../maps/">Maps</a>
+        <a href="../cameras/">Cameras</a>
+        <a href="../states/">United States</a>
+        <a href="../canada/">Canada</a>
+        <a href="../index.html#story">Story</a>
+        <a href="../index.html#b2b">B2B</a>
+        <a href="../blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="art">
+    <div class="eyebrow">Data sources</div>
+    <h1>Where MileCheck gets its road data</h1>
+    <p class="lede">MileCheck is not a government app and does not speak for any agency. It reads public feeds from the agencies below and shows them by mile marker.</p>
+    <p class="disclaimer">For anything official, such as a closure order or a legal restriction, use the agency&rsquo;s own site, linked in each row. If MileCheck and the agency disagree, the agency is right.</p>
+
+    <h2>How the data gets to you</h2>
+    <p>Each agency publishes in its own format. MileCheck reads the feed, converts it to one format, and refreshes it every 5 to 15 minutes depending on the source. We sort alerts into types such as crash, closure and construction. We do not write alerts of our own. An alert appears in MileCheck after the agency posts it, so it is never ahead of the source.</p>
+    <p>Mile marker positions come from each state&rsquo;s published highway location data. Where a state publishes none for a road, the federal HPMS road dataset fills the gap. Mile markers are stored in the app and work with no signal. Alerts and cameras need a connection.</p>
+
+    <h2>United States: state transportation agencies</h2>
+    <p>Alerts are live for all 50 states. Cameras are live for 43 states.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>State</th><th>Agency and public site</th><th>Alerts</th><th>Cameras</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Alabama</strong></td><td>Alabama DOT (ALGO Traffic)<br><a href="https://algotraffic.com" target="_blank" rel="noopener">algotraffic.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Alaska</strong></td><td>Alaska DOT&amp;PF (Alaska 511)<br><a href="https://511.alaska.gov" target="_blank" rel="noopener">511.alaska.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Arizona</strong></td><td>Arizona DOT (AZ511)<br><a href="https://az511.gov" target="_blank" rel="noopener">az511.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Arkansas</strong></td><td>Arkansas DOT (IDrive Arkansas)<br><a href="https://www.idrivearkansas.com" target="_blank" rel="noopener">idrivearkansas.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>California</strong></td><td>Caltrans (QuickMap)<br><a href="https://quickmap.dot.ca.gov" target="_blank" rel="noopener">quickmap.dot.ca.gov</a><br><span class="note">Incidents also from the California Highway Patrol public incident feed.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Colorado</strong></td><td>Colorado DOT (COtrip)<br><a href="https://www.cotrip.org" target="_blank" rel="noopener">cotrip.org</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>Connecticut</strong></td><td>Connecticut DOT (CTroads)<br><a href="https://www.ctroads.org" target="_blank" rel="noopener">ctroads.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Delaware</strong></td><td>Delaware DOT (DelDOT)<br><a href="https://deldot.gov" target="_blank" rel="noopener">deldot.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Florida</strong></td><td>Florida DOT (FL511)<br><a href="https://fl511.com" target="_blank" rel="noopener">fl511.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Georgia</strong></td><td>Georgia DOT (511GA)<br><a href="https://511ga.org" target="_blank" rel="noopener">511ga.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Hawaii</strong></td><td>Hawaii DOT<br><a href="https://hidot.hawaii.gov" target="_blank" rel="noopener">hidot.hawaii.gov</a><br><span class="note">Work zones from the department's public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>Idaho</strong></td><td>Idaho Transportation Department (Idaho 511)<br><a href="https://511.idaho.gov" target="_blank" rel="noopener">511.idaho.gov</a><br><span class="note">Incidents from the public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Illinois</strong></td><td>Illinois DOT (Getting Around Illinois)<br><a href="https://www.gettingaroundillinois.com" target="_blank" rel="noopener">gettingaroundillinois.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Indiana</strong></td><td>Indiana DOT (TrafficWise)<br><a href="https://511in.org" target="_blank" rel="noopener">511in.org</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Iowa</strong></td><td>Iowa DOT (511 Iowa)<br><a href="https://511ia.org" target="_blank" rel="noopener">511ia.org</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Kansas</strong></td><td>Kansas DOT (KanDrive)<br><a href="https://www.kandrive.gov" target="_blank" rel="noopener">kandrive.gov</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Kentucky</strong></td><td>Kentucky Transportation Cabinet (goKY)<br><a href="https://goky.ky.gov" target="_blank" rel="noopener">goky.ky.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Louisiana</strong></td><td>Louisiana DOTD (511LA)<br><a href="https://www.511la.org" target="_blank" rel="noopener">511la.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Maine</strong></td><td>Maine DOT (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a><br><span class="note">Read through the New England Compass data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Maryland</strong></td><td>Maryland DOT SHA (CHART)<br><a href="https://chart.maryland.gov" target="_blank" rel="noopener">chart.maryland.gov</a><br><span class="note">Incidents from the state's open data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Massachusetts</strong></td><td>MassDOT (Mass511)<br><a href="https://www.mass511.com" target="_blank" rel="noopener">mass511.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Michigan</strong></td><td>Michigan DOT (Mi Drive)<br><a href="https://mdotjboss.state.mi.us/MiDrive" target="_blank" rel="noopener">mdotjboss.state.mi.us</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Minnesota</strong></td><td>Minnesota DOT (511MN)<br><a href="https://511mn.org" target="_blank" rel="noopener">511mn.org</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Mississippi</strong></td><td>Mississippi DOT (MDOTtraffic)<br><a href="https://www.mdottraffic.com" target="_blank" rel="noopener">mdottraffic.com</a><br><span class="note">Copied to our own storage every 30 minutes, because the agency's server does not answer ours directly.</span></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>Missouri</strong></td><td>Missouri DOT (Traveler Information)<br><a href="https://traveler.modot.org" target="_blank" rel="noopener">traveler.modot.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Montana</strong></td><td>Montana DOT (511 Montana)<br><a href="https://www.511mt.net" target="_blank" rel="noopener">511mt.net</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Nebraska</strong></td><td>Nebraska DOT (Nebraska 511)<br><a href="https://511.nebraska.gov" target="_blank" rel="noopener">511.nebraska.gov</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Nevada</strong></td><td>Nevada DOT (NVRoads)<br><a href="https://www.nvroads.com" target="_blank" rel="noopener">nvroads.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>New Hampshire</strong></td><td>NH DOT (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a><br><span class="note">Read through the New England Compass data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>New Jersey</strong></td><td>NJ DOT (511NJ)<br><a href="https://511nj.org" target="_blank" rel="noopener">511nj.org</a><br><span class="note">Work zones from the public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>New Mexico</strong></td><td>New Mexico DOT (NMRoads)<br><a href="https://nmroads.com" target="_blank" rel="noopener">nmroads.com</a><br><span class="note">Work zones from the public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>New York</strong></td><td>New York State DOT (511NY)<br><a href="https://511ny.org" target="_blank" rel="noopener">511ny.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>North Carolina</strong></td><td>NCDOT (DriveNC)<br><a href="https://www.drivenc.gov" target="_blank" rel="noopener">drivenc.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>North Dakota</strong></td><td>North Dakota DOT (Travel Information)<br><a href="https://travel.dot.nd.gov" target="_blank" rel="noopener">travel.dot.nd.gov</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>Ohio</strong></td><td>Ohio DOT (OHGO)<br><a href="https://www.ohgo.com" target="_blank" rel="noopener">ohgo.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Oklahoma</strong></td><td>Oklahoma DOT (OK Traffic)<br><a href="https://oktraffic.org" target="_blank" rel="noopener">oktraffic.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Oregon</strong></td><td>Oregon DOT (TripCheck)<br><a href="https://tripcheck.com" target="_blank" rel="noopener">tripcheck.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Pennsylvania</strong></td><td>PennDOT (511PA)<br><a href="https://www.511pa.com" target="_blank" rel="noopener">511pa.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Rhode Island</strong></td><td>Rhode Island DOT<br><a href="https://www.dot.ri.gov" target="_blank" rel="noopener">dot.ri.gov</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>South Carolina</strong></td><td>South Carolina DOT (511SC)<br><a href="https://www.511sc.org" target="_blank" rel="noopener">511sc.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>South Dakota</strong></td><td>South Dakota DOT (SD511)<br><a href="https://www.sd511.org" target="_blank" rel="noopener">sd511.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Tennessee</strong></td><td>Tennessee DOT (SmartWay)<br><a href="https://smartway.tn.gov/traffic" target="_blank" rel="noopener">smartway.tn.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Texas</strong></td><td>Texas DOT (DriveTexas)<br><a href="https://drivetexas.org" target="_blank" rel="noopener">drivetexas.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Utah</strong></td><td>Utah DOT (UDOT Traffic)<br><a href="https://www.udottraffic.utah.gov" target="_blank" rel="noopener">udottraffic.utah.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Vermont</strong></td><td>Vermont Agency of Transportation (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a><br><span class="note">Read through the New England Compass data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Virginia</strong></td><td>Virginia DOT (511 Virginia)<br><a href="https://511.vdot.virginia.gov" target="_blank" rel="noopener">511.vdot.virginia.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Washington</strong></td><td>Washington State DOT<br><a href="https://wsdot.com/travel/real-time/map/" target="_blank" rel="noopener">wsdot.com</a><br><span class="note">Drawbridge status from Seattle DOT.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>West Virginia</strong></td><td>West Virginia DOT (WV511)<br><a href="https://wv511.org" target="_blank" rel="noopener">wv511.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Wisconsin</strong></td><td>Wisconsin DOT (511 Wisconsin)<br><a href="https://511wi.gov" target="_blank" rel="noopener">511wi.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Wyoming</strong></td><td>Wyoming DOT (WyoRoad)<br><a href="https://wyoroad.info" target="_blank" rel="noopener">wyoroad.info</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+      </tbody></table></div>
+
+    <h2>Canada: provincial agencies</h2>
+    <p>Kilometre markers cover ten provinces. Live alerts and cameras are listed below.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Province</th><th>Agency and public site</th><th>Alerts</th><th>Cameras</th></tr></thead>
+      <tbody>
+        <tr><td><strong>British Columbia</strong></td><td>BC Ministry of Transportation and Transit (DriveBC)<br><a href="https://www.drivebc.ca" target="_blank" rel="noopener">drivebc.ca</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Alberta</strong></td><td>Alberta Transportation (511 Alberta)<br><a href="https://511.alberta.ca" target="_blank" rel="noopener">511.alberta.ca</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Manitoba</strong></td><td>Manitoba Infrastructure (Manitoba 511)<br><a href="https://www.manitoba511.ca" target="_blank" rel="noopener">manitoba511.ca</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Ontario</strong></td><td>Ontario Ministry of Transportation (Ontario 511)<br><a href="https://511on.ca" target="_blank" rel="noopener">511on.ca</a></td><td><span class="n">&ndash;</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Quebec</strong></td><td>Transports Québec (Québec 511)<br><a href="https://www.quebec511.info" target="_blank" rel="noopener">quebec511.info</a></td><td><span class="n">&ndash;</span></td><td><span class="y">Yes</span></td></tr>
+      </tbody></table></div>
+
+    <h2>Federal and other sources</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Data</th><th>Source</th><th colspan="2">What MileCheck uses it for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Weather, forecasts, wind</strong></td><td>National Weather Service<br><a href="https://www.weather.gov" target="_blank" rel="noopener">weather.gov</a></td><td colspan="2">Temperature, forecast, wind and weather alerts.</td></tr>
+        <tr><td><strong>Wildfires</strong></td><td>National Interagency Fire Center (WFIGS)<br><a href="https://www.nifc.gov" target="_blank" rel="noopener">nifc.gov</a></td><td colspan="2">Active US wildfire locations and perimeters. British Columbia fires come from the BC Wildfire Service.</td></tr>
+        <tr><td><strong>Wildfires (BC)</strong></td><td>BC Wildfire Service<br><a href="https://www2.gov.bc.ca/gov/content/safety/wildfire-status" target="_blank" rel="noopener">www2.gov.bc.ca</a></td><td colspan="2">British Columbia fire locations.</td></tr>
+        <tr><td><strong>Border wait times (US ports)</strong></td><td>US Customs and Border Protection<br><a href="https://bwt.cbp.gov" target="_blank" rel="noopener">bwt.cbp.gov</a></td><td colspan="2">Wait times for crossings into the US.</td></tr>
+        <tr><td><strong>Border wait times (Canadian ports)</strong></td><td>Canada Border Services Agency<br><a href="https://www.cbsa-asfc.gc.ca/bwt-taf/menu-eng.html" target="_blank" rel="noopener">cbsa-asfc.gc.ca</a></td><td colspan="2">Wait times for crossings into Canada.</td></tr>
+        <tr><td><strong>Drawbridge status</strong></td><td>Seattle DOT<br><a href="https://web.seattle.gov/Travelers/" target="_blank" rel="noopener">web.seattle.gov</a></td><td colspan="2">Open and closed status for the Seattle drawbridges.</td></tr>
+        <tr><td><strong>Drawbridge opening rules</strong></td><td>US Government, 33 CFR Part 117<br><a href="https://www.ecfr.gov/current/title-33/chapter-I/subchapter-J/part-117" target="_blank" rel="noopener">ecfr.gov</a></td><td colspan="2">The federal regulations that set when a drawbridge must open.</td></tr>
+        <tr><td><strong>Ferries</strong></td><td>Washington State Ferries<br><a href="https://wsdot.wa.gov/travel/washington-state-ferries" target="_blank" rel="noopener">wsdot.wa.gov</a></td><td colspan="2">Ferry schedules and status.</td></tr>
+        <tr><td><strong>Airport and park cameras</strong></td><td>FAA Weather Cameras and National Park Service<br><a href="https://weathercams.faa.gov" target="_blank" rel="noopener">weathercams.faa.gov</a></td><td colspan="2">Aviation weather cameras in remote areas, and park webcams.</td></tr>
+        <tr><td><strong>Mile marker positions (fallback)</strong></td><td>Federal Highway Administration, HPMS<br><a href="https://www.fhwa.dot.gov/policyinformation/hpms.cfm" target="_blank" rel="noopener">fhwa.dot.gov</a></td><td colspan="2">Used where a state publishes no mile marker points of its own.</td></tr>
+      </tbody></table></div>
+
+    <h2>Found an error?</h2>
+    <p>Email <a href="mailto:feedback@milecheckapp.com">feedback@milecheckapp.com</a> with the page or alert and what is wrong. Fixes to an agency&rsquo;s own data have to come from the agency.</p>
+    <p class="checked">Links last checked 2026-10-07.</p>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=data-sources&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Ddata-sources" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Learn more</p>
+          <ul class="footer-list">
+            <li><a href="../what-is-my-mile-marker/">What is my mile marker?</a></li>
+            <li><a href="../cameras/">Highway cameras</a></li>
+            <li><a href="../passes/">Mountain passes</a></li>
+            <li><a href="../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+</body>
+</html>
