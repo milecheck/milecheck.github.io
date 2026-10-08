@@ -97,7 +97,7 @@
         document.getElementById('mvCount').textContent = mv.length;
         // role + quantity were added 2026-10-03. Older signups have neither.
         const ROLE_LABELS = { trucker: 'Truck driver', plow: 'Snow plow', tow: 'Tow', dot: 'DOT / road crew',
-          ems: 'EMS / first responder', fleet: 'Fleet manager', everyday: 'Everyday driver', other: 'Other' };
+          ems: 'EMS / fire / law enforcement', fleet: 'Fleet manager', everyday: 'Everyday driver', other: 'Other' };
         const asked = dash.filter(e => Number(e.quantity) > 0);
         const units = asked.reduce((n, e) => n + Number(e.quantity), 0);
         document.getElementById('units').textContent = asked.length
