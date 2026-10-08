@@ -64,15 +64,21 @@ for (const f of targets) {
   // take that indent with it. Until 2026-09-28 it started at the comment marker, left the
   // two spaces behind, and every run pushed the footer two spaces further right: 219 pages
   // rewritten per run with nothing but whitespace.
-  s = s.replace(/[ \t]*<!-- signup:start -->[\s\S]*?<!-- signup:end -->\n?/, '');
+  const STRIP = /[ \t]*<!-- signup:start -->[\s\S]*?<!-- signup:end -->\n?/;
+  const was = s.search(STRIP); // put the band back exactly where it was, so a re-run is a no-op
+  s = s.replace(STRIP, '');
   if (/data-form="LjADY8"/.test(s)) {
     s = s.replace(/<p class="mc-eyebrow">[\s\S]*?<\/p>\s*<h2>[\s\S]*?<\/h2>\s*<p class="mc-sub">[\s\S]*?<\/p>/, inner);
     if (!s.includes('.mc-signup .mc-sub a')) s = s.replace('.mc-signup .ml-form-embedContent{', '.mc-signup .mc-sub a{color:#00A86B;font-weight:700;}\n      .mc-signup .ml-form-embedContent{');
     if (s !== o) updated++;
   } else {
-    const anchor = s.indexOf('<footer class="site-footer">');
-    if (anchor < 0) { console.error('no footer:', f); continue; }
-    const lineStart = s.lastIndexOf('\n', anchor) + 1;
+    // The desktop QR block (add-desktop-qr.mjs) also sits right above the footer, below this
+    // band. Insert above it when it is there, or the two scripts swap places on every run.
+    const footer = s.indexOf('<footer class="site-footer">');
+    if (footer < 0) { console.error('no footer:', f); continue; }
+    const dq = s.indexOf('<!-- dq:start -->');
+    const anchor = dq > -1 && dq < footer ? dq : footer;
+    const lineStart = was > -1 ? was : s.lastIndexOf('\n', anchor) + 1;
     s = s.slice(0, lineStart) + '  ' + BAND + s.slice(lineStart);
     if (!o.includes('<!-- signup:start -->')) added++;
   }

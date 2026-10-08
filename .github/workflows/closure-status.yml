@@ -17,13 +17,17 @@ jobs:
         with: { node-version: 20 }
       - run: node scripts/closures/check-closures.mjs
       - run: node scripts/closures/gen-closure-pages.mjs
+      # Put back what the generator leaves off (map kit, store tags, signup, Search link, QR box,
+      # footer link, linked JSON-LD). Without this every run stripped them from the closure pages.
+      - run: node scripts/finish-pages.mjs --pages-only
       - name: Commit if changed
         run: |
           git config user.name "milecheck-bot"
           git config user.email "info@milecheckapp.com"
-          git add scripts/closures/big-closures.json closures closures-sitemap.xml
+          git add scripts/closures/big-closures.json closures closures-sitemap.xml data/sponsor-pages.json
           git diff --cached --quiet && exit 0
           git commit -m "Closure status check $(date -u +%Y-%m-%dT%H:%MZ)"
+          git stash --include-untracked --quiet || true  # finish-pages may touch other pages; this job only commits closures
           git pull --rebase origin main && git push origin HEAD:main
       - name: Daily candidate list
         run: |

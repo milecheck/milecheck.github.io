@@ -89,6 +89,7 @@ function walk(d, out = []) {
   return out;
 }
 
+const GENERATOR_HUBS = new Set(['road-conditions/index.html']); // gen-road-conditions-pages.js
 const inventory = [];
 let placed = 0, kept = 0, skippedShape = [];
 for (const f of walk(ROOT).sort()) {
@@ -96,7 +97,9 @@ for (const f of walk(ROOT).sort()) {
   if (SKIP_FILES.has(path.basename(rel))) continue;
   let html = fs.readFileSync(f, 'utf8');
   const key = keyFor(rel);
-  const generatorOwned = !html.includes(START) && html.includes('id="spon"');
+  // GENERATOR_HUBS carry the spon markers but are still written by their generator, so placing
+  // our slot too made the two scripts trade it on every run (road-conditions/, 2026-10-08).
+  const generatorOwned = (!html.includes(START) || GENERATOR_HUBS.has(rel)) && html.includes('id="spon"');
   if (generatorOwned) {
     // corridors, cameras, passes: the generator placed it; record it for the inventory
     const m = html.match(/id="spon" data-slot="([^"]+)" data-sponsor="([^"]+)"/);
