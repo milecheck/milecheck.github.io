@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03",
+ "generated": "2026-10-08",
  "families": [
   "home",
   "cameras",
@@ -561,6 +561,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:data-sources",
+   "path": "/data-sources/",
+   "title": "Where MileCheck Gets Its Road Data",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:dragging-trailer-chains-wildfire",
    "path": "/dragging-trailer-chains-wildfire/",
    "title": "Can Dragging Trailer Chains Start a Wildfire?",
@@ -735,6 +741,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:move-over-laws",
+   "path": "/move-over-laws/",
+   "title": "Do You Have to Move Over for a Car With Hazard Lights On?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:night-driving-desert-and-passes",
    "path": "/night-driving-desert-and-passes/",
    "title": "Should you drive a desert road or mountain pass at night?",
@@ -786,12 +798,6 @@
    "key": "basics:report-location",
    "path": "/report-location/",
    "title": "How to Report Your Location on the Highway (to 911, a Tow, or Roadside Assistance)",
-   "sponsor": "house"
-  },
-  {
-   "key": "basics:road-conditions",
-   "path": "/road-conditions/",
-   "title": "Road Conditions by State: Live Closures & Crashes",
    "sponsor": "house"
   },
   {
@@ -876,6 +882,12 @@
    "key": "basics:what-is-my-mile-marker",
    "path": "/what-is-my-mile-marker/",
    "title": "What Is My Mile Marker? How to Find It (and Why It Matters)",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:what-km-marker-am-i-at",
+   "path": "/what-km-marker-am-i-at/",
+   "title": "What km marker am I at in Canada?",
    "sponsor": "house"
   },
   {
@@ -2103,6 +2115,12 @@
    "sponsor": "house"
   },
   {
+   "key": "live:road-conditions",
+   "path": "/road-conditions/",
+   "title": "Road Conditions by State: Live Closures & Crashes",
+   "sponsor": "house"
+  },
+  {
    "key": "live:weather",
    "path": "/weather/",
    "title": "US Road Weather Map — storms, hurricanes & the closures they cause",
@@ -2610,12 +2628,6 @@
    "key": "pass:vail",
    "path": "/passes/vail/",
    "title": "Vail Pass Camera & Conditions Right Now (I-70)",
-   "sponsor": "house"
-  },
-  {
-   "key": "basics:move-over-laws",
-   "path": "/move-over-laws/",
-   "title": "Do You Have to Move Over for a Car With Hazard Lights On?",
    "sponsor": "house"
   }
  ]
