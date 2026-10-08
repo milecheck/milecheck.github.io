@@ -98,10 +98,13 @@
         // role + quantity were added 2026-10-03. Older signups have neither.
         const ROLE_LABELS = { trucker: 'Truck driver', plow: 'Snow plow', tow: 'Tow', dot: 'DOT / road crew',
           ems: 'EMS / fire / law enforcement', fleet: 'Fleet manager', everyday: 'Everyday driver', other: 'Other' };
-        const asked = dash.filter(e => Number(e.quantity) > 0);
-        const units = asked.reduce((n, e) => n + Number(e.quantity), 0);
-        document.getElementById('units').textContent = asked.length
-          ? `${units} units asked for, across ${asked.length} signup${asked.length === 1 ? '' : 's'} that gave a number`
+        // A signup with no quantity counts as 1 unit (Leah 10-8): they signed up for one.
+        // The 9/25 deploy-check test record is not a person and counts as nothing.
+        const real = dash.filter(e => !/deploy-check/i.test(String(e.source || '') + String(e.email || '')));
+        const asked = real.filter(e => Number(e.quantity) > 0);
+        const units = real.reduce((n, e) => n + (Number(e.quantity) > 0 ? Number(e.quantity) : 1), 0);
+        document.getElementById('units').textContent = real.length
+          ? `${units} units wanted across ${real.length} signup${real.length === 1 ? '' : 's'} (a blank quantity counts as 1; ${asked.length} gave a number)`
           : '';
         // Signup fields are whatever a stranger typed into the form. Build cells with
         // textContent so a script in a "name" renders as text, never runs (2026-09-28 review).
