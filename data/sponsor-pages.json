@@ -765,6 +765,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:october-mountain-views",
+   "path": "/october-mountain-views/",
+   "title": "Where to See the Mountains in October",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:rent-a-car-in-arizona",
    "path": "/rent-a-car-in-arizona/",
    "title": "Renting a Car in Arizona: I Said No to the First Car",
@@ -867,6 +873,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:washington-larch-season",
+   "path": "/washington-larch-season/",
+   "title": "When and Where to See Golden Larches in Washington",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:what-are-rumble-strips",
    "path": "/what-are-rumble-strips/",
    "title": "What Are Rumble Strips For?",
@@ -906,6 +918,12 @@
    "key": "basics:why-no-interstate-50-or-60",
    "path": "/why-no-interstate-50-or-60/",
    "title": "Why Is There No Interstate 50 or Interstate 60?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:why-rainier-looks-so-big",
+   "path": "/why-rainier-looks-so-big/",
+   "title": "Why Mount Rainier Looks So Big From Seattle",
    "sponsor": "house"
   },
   {
@@ -2256,66 +2274,6 @@
    "key": "mountain:baker-history",
    "path": "/mountains/baker/history/",
    "title": "How often is Mount Baker visible from Vancouver, BC?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy",
-   "path": "/mountains/baldy/",
-   "title": "Is Mount Baldy visible right now? Live from Los Angeles",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-best-time",
-   "path": "/mountains/baldy/best-time/",
-   "title": "Best time of year to see Mount Baldy",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-alhambra",
-   "path": "/mountains/baldy/from-alhambra/",
-   "title": "Is Mount Baldy visible from Alhambra right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-chino",
-   "path": "/mountains/baldy/from-chino/",
-   "title": "Is Mount Baldy visible from Chino right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-claremont",
-   "path": "/mountains/baldy/from-claremont/",
-   "title": "Is Mount Baldy visible from Claremont right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-long-beach",
-   "path": "/mountains/baldy/from-long-beach/",
-   "title": "Is Mount Baldy visible from Long Beach right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-los-angeles",
-   "path": "/mountains/baldy/from-los-angeles/",
-   "title": "Is Mount Baldy visible from Los Angeles right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-riverside",
-   "path": "/mountains/baldy/from-riverside/",
-   "title": "Is Mount Baldy visible from Riverside right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-west-covina",
-   "path": "/mountains/baldy/from-west-covina/",
-   "title": "Is Mount Baldy visible from West Covina right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-history",
-   "path": "/mountains/baldy/history/",
-   "title": "How often is Mount Baldy visible from Los Angeles?",
    "sponsor": "house"
   },
   {
