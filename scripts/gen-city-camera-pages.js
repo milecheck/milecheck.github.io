@@ -18,6 +18,8 @@ const CITIES = [
     freeways:`Watch <a href="../../corridors/i-5/">I-5</a> through downtown, <a href="../../corridors/i-90/">I-90</a> and SR-520 across Lake Washington, and I-405 on the Eastside.` },
   { slug:'portland', name:'Portland', state:'OR', dot:'ODOT', lat:45.52, lon:-122.68, r:40,
     blurb:`Portland's ODOT TripCheck cameras cover the metro freeways and the Columbia River crossings into Washington.`,
+    // "odot cameras" splits Oregon and Ohio searchers (GSC 2026-10-08), so point the other way.
+    crossLinkHtml:'<p class="sub" style="font-size:14px">Looking for Ohio\'s ODOT cameras? <a href="https://milecheckapp.com/cameras/ohio/">View the Ohio camera map</a>.</p>',
     freeways:`Watch <a href="../../corridors/i-5/">I-5</a> and I-405 through the core, I-84 up the Columbia Gorge, and I-205 on the east side.`,
     // 2026-09-26: splits the ambiguous "odot cameras" query with the Ohio page
     // (Ohio DOT vs Oregon DOT). Title now says "Oregon" explicitly instead of
@@ -215,6 +217,7 @@ ${sp.html}
 ${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${c.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(c.slug) ? ` · <a href="/pt/cameras/${c.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
     <h1>${c.name} traffic cameras, live</h1>
     <p class="sub">${c.sub || `See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and ${marker(c)}. Tap any camera for the latest image.`}</p>
+${c.crossLinkHtml || ''}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${c.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${c.dot}</div><div class="l">camera source</div></div>
