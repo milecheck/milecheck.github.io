@@ -580,11 +580,11 @@ document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 document.getElementById('tgPoi').onchange=e=>{if(e.target.checked)poiLayer.addTo(map);else map.removeLayer(poiLayer);};
 function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
-// Full closure from the record's text. Negations first ("no full closure", "reopened"). Explicit
-// full-closure wording wins over location words like exit or shoulder. Anything else that names a
-// lane, ramp, exit, shoulder or connector is a partial closure. ChatGPT review, 2026-10-08.
-function fullText(t){if(/\\b(no|not)\\s+(a\\s+)?(full\\s+)?(closure|closed)|\\breopen/.test(t))return false;if(/(all lanes (are )?closed|roadway is closed|full closure|road (is )?closed|closed in both directions)/.test(t))return true;if(/(ramp|exit|rest area|shoulder|connector|lane)/.test(t))return false;return /clos/.test(t);}
-function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&fullText((a.title+' '+(a.desc||'')).toLowerCase());}
+// What is closed and how completely, clause by clause. A ramp, exit, connector, shoulder or rest area
+// closure is never a highway closure, even when it says "full closure". Negations and "reopened"
+// count as no closure. No stated extent is unspecified, not full. ChatGPT review 3, 2026-10-08.
+function closureKind(t){var r={none:0,unspecified:1,partial:2,full:3},k='none';String(t||'').toLowerCase().split(/[.;]+/).forEach(function(c){if(!/clos/.test(c)||/\\b(no|not)\\s+(a\\s+)?(full\\s+)?(closure|closed)|\\breopen/.test(c))return;var feat=/(on-?ramp|off-?ramp|\\bramps?\\b|connector|rest area|shoulder)/.test(c)||/\\bexit\\b/.test(c.replace(/\\b(near|at|past|before|after|by|from|to|between)\\s+exit\\b/g,''));var full=/(all lanes (are )?closed|roadway is closed|full closure|closed in both directions|\\b(highway|hwy|road|roadway|route|pass|interstate|(i|us|sr|ca|or|wa|id|mt|ut|co|nv|az)-?\\s?\\d+[a-z]?)\\s+(is\\s+|are\\s+)?closed\\b)/.test(c);var x=feat?'partial':full?'full':/\\blanes?\\b/.test(c)?'partial':'unspecified';if(r[x]>r[k])k=x;});return k;}
+function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&closureKind(a.title+' '+(a.desc||''))==='full';}
 Promise.all([Promise.all(STATES.map(camsFor)),Promise.all(STATES.map(alertsFor))]).then(([cams,alerts])=>{
   CAMS=cams.flat();ALERTS=alerts.flat();
   document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.filter(liveNow).length;
