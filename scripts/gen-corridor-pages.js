@@ -579,8 +579,8 @@ let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 document.getElementById('tgPoi').onchange=e=>{if(e.target.checked)poiLayer.addTo(map);else map.removeLayer(poiLayer);};
-function liveNow(a){var n=Date.now();return !(a.t0>n+3600e3)&&!(a.t1<n);}
-function isFullClosure(a){if(!liveNow(a))return false;const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(lane|ramp|exit|rest area|shoulder|on ?ramp|off ?ramp|connector)/.test(t);}
+function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
+function isFullClosure(a){if(!liveNow(a))return false;const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(ramp|exit|rest area|shoulder|connector)/.test(t)&&!(/lane/.test(t)&&!/(all lanes|roadway is closed|full closure)/.test(t));}
 Promise.all([Promise.all(STATES.map(camsFor)),Promise.all(STATES.map(alertsFor))]).then(([cams,alerts])=>{
   CAMS=cams.flat();ALERTS=alerts.flat();
   document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.filter(liveNow).length;
