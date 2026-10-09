@@ -100,15 +100,25 @@
     </div>
   </header>
 <main>
+  <section class="sp-hero" id="thxCheck" style="padding-bottom:24px;">
+    <h1 class="sp-label" style="margin-bottom:14px;">Checking your payment&hellip;</h1>
+  </section>
+  <section class="sp-hero" id="thxNone" hidden style="padding-bottom:64px;">
+    <h1 class="sp-label" style="margin-bottom:14px;">Thanks</h1>
+    <p>We couldn't confirm a payment for this link. If you paid, your receipt from Stripe is the confirmation. Questions? Email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>.</p>
+  </section>
   <section class="sp-hero" id="thxPages" hidden style="padding-bottom:64px;">
     <h1 class="sp-label" style="margin-bottom:14px;">Payment received</h1>
-    <p>Thanks for sponsoring pages on milecheckapp.com. Stripe will email your receipt to your billing email.</p>
-    <p>We have everything we need: your pages, logo, sentence, button text, website and phone. Need to change something? Reply to your receipt or email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>.</p>
-    <p>Your slot goes live within 3 business days. We'll email you when it does. You can cancel anytime, and your slot runs through the end of the month you've paid for.</p>
+    <p>Thanks for sponsoring pages on milecheckapp.com. Stripe emails your receipt to your billing email.</p>
+    <ul id="thxFacts" style="list-style:none;padding:0;margin:4px 0 14px;line-height:1.7;"></ul>
+    <p>Your slot goes live within 3 business days, and we'll email you when it does. Need to change your logo, sentence or link? Email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> with your reference.</p>
+    <p>You can cancel anytime. Your slot runs through the end of your current billing period.</p>
   </section>
-  <section class="sp-hero" id="thxReport" style="padding-bottom:64px;">
+  <section class="sp-hero" id="thxReport" hidden style="padding-bottom:64px;">
     <h1 class="sp-label" style="margin-bottom:14px;">Payment received</h1>
-    <p>Thanks for sponsoring the MileCheck Highway Report. Stripe will email your receipt.</p>
+    <p>Thanks for sponsoring the MileCheck Highway Report. Stripe will email your receipt. <span id="thxRef"></span></p>
+  </section>
+  <section class="sp-hero" id="thxReportNext" hidden style="padding-bottom:64px;">
     <p>Next, email <a href="mailto:sales@milecheckapp.com?subject=Sponsor%20slot%20files">sales@milecheckapp.com</a> with:</p>
     <ul style="list-style:disc;padding-left:22px;margin:4px 0 14px;">
       <li>Your logo, PNG or SVG, transparent background, 264 &times; 72 px or the same shape</li>
@@ -119,7 +129,41 @@
     <p>We'll confirm which issue your sponsorship appears in and email you when it's published.</p>
   </section>
 </main>
-<script>if(new URLSearchParams(location.search).get('for')==='pages'){document.getElementById('thxPages').hidden=false;document.getElementById('thxReport').hidden=true;}</script>
+<script>
+// "Payment received" only when the Worker has checked the session with Stripe (2026-10-09 review:
+// this page used to say it for anyone who opened the link). The Worker answers paid, the pages,
+// the paid page count, the monthly total, the date and a reference. No email or name.
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var q=new URLSearchParams(location.search), sid=q.get('session_id')||'', forWhat=q.get('for')||'';
+  var report=forWhat!=='pages';
+  function show(id){$('thxCheck').hidden=true;$(id).hidden=false;if(report)$('thxReportNext').hidden=false}
+  function none(){show('thxNone')}
+  if(!/^cs_(test|live)_[A-Za-z0-9]{10,200}$/.test(sid)){none();return}
+  fetch('https://milepost-proxy.leahgerber93.workers.dev/sponsor-session?session_id='+encodeURIComponent(sid),{cache:'no-store'})
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(!d||d.paid!==true){none();return}
+      try{sessionStorage.removeItem('mcSponsorSession')}catch(e){}
+      if(!d.pages||!d.pages.length){$('thxRef').textContent=d.reference?'Your reference is '+d.reference+'.':'';show('thxReport');return}
+      report=false;
+      var ul=$('thxFacts'), add=function(label,val){var li=document.createElement('li');var b=document.createElement('b');b.textContent=label+': ';li.appendChild(b);li.appendChild(document.createTextNode(val));ul.appendChild(li)};
+      var inc=d.pages.length-(d.paid_pages||0);
+      add('Pages',d.paid_pages!=null?d.paid_pages+(inc>0?', plus '+inc+' included':''):String(d.pages.length));
+      if(typeof d.monthly_total==='number')add('Monthly charge','$'+d.monthly_total.toLocaleString('en-US',{minimumFractionDigits:d.monthly_total%1?2:0,maximumFractionDigits:2}));
+      if(d.created)add('Paid on',new Date(d.created+'T00:00:00Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}));
+      if(d.reference)add('Reference',d.reference);
+      var li=document.createElement('li');li.style.marginTop='6px';li.style.fontSize='14px';li.style.color='#3a444d';li.textContent=d.pages.join(', ');ul.appendChild(li);
+      show('thxPages');
+      // Page names instead of keys, from the site's own inventory.
+      fetch('/data/sponsor-pages.json').then(function(r){return r.json()}).then(function(inv){
+        var t={};(inv.pages||[]).forEach(function(p){t[p.key]=p.title});
+        li.textContent=d.pages.map(function(k){return t[k]||k}).join(', ');
+      }).catch(function(){});
+    })
+    .catch(none);
+})();
+</script>
 <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">

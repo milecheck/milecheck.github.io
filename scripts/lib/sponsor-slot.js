@@ -30,7 +30,35 @@ const placed = [];
 
 function esc(s) {
   return String(s == null ? '' : s)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); // every attribute is double-quoted
+}
+
+// Every href and src the slot writes goes through this (2026-10-09 sponsor review). Allowed:
+// https:// and http:// web addresses, tel: with digits and an optional +, and site-relative paths
+// (/sponsor/, /images/sponsors/x.png). Anything else (javascript:, data:, //host, a URL with a
+// login) returns '' and the generator refuses the config, so a bad link never reaches a page.
+function safeHref(u, { tel = true, relative = true } = {}) {
+  const s = String(u == null ? '' : u).trim();
+  if (!s || /[\u0000-\u001f\u007f\s<>"'`]/.test(s)) return '';
+  if (tel && /^tel:\+?\d{7,15}$/i.test(s)) return s;
+  if (relative && /^\/(?!\/)/.test(s)) return s;
+  let url;
+  try { url = new URL(s); } catch (e) { return ''; }
+  if ((url.protocol !== 'https:' && url.protocol !== 'http:') || !url.hostname || url.username || url.password) return '';
+  return url.href;
+}
+function assertSafeLinks(cfg) {
+  const bad = [];
+  for (const [k, s] of Object.entries(cfg.slots || {})) {
+    if (!s || typeof s !== 'object') continue;
+    if (s.url && !safeHref(s.url)) bad.push(k + '.url');
+    if (s.logo && !safeHref(s.logo, { tel: false })) bad.push(k + '.logo');
+  }
+  const h = cfg.house || {};
+  if (h.url && !safeHref(h.url, { tel: false })) bad.push('house.url');
+  if (h.roy && !safeHref(h.roy, { tel: false })) bad.push('house.roy');
+  if (cfg.reportSponsorUrl && !safeHref(cfg.reportSponsorUrl, { tel: false, relative: false })) bad.push('reportSponsorUrl');
+  if (bad.length) throw new Error('data/sponsors.json: links must be https://, http://, tel:+digits or a /site path. Refusing: ' + bad.join(', '));
 }
 
 // A slot key is <family>:<slug>. Families are what sales sells (2026-09-24, Leah:
@@ -55,6 +83,7 @@ function loadConfig() {
   if (!cfgCache) {
     cfgCache = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
     assertPagesOnly(cfgCache);
+    assertSafeLinks(cfgCache);
   }
   return cfgCache;
 }
@@ -70,7 +99,7 @@ function keysFor(kind, page) {
 }
 
 function isActive(s, day) {
-  if (!s || typeof s !== 'object' || !s.id || !s.url || !s.name) return false;
+  if (!s || typeof s !== 'object' || !s.id || !safeHref(s.url) || !s.name) return false;
   if (s.start && day < s.start) return false;
   if (s.end && day > s.end) return false;
   return true;
@@ -89,19 +118,20 @@ function slotHtml(slotKey, sponsor, house) {
     // House version: Roy on the left, pointing at the message (Leah, 2026-09-24).
     // The placeholder is a crop of roy-crew.png until the pointing Roy arrives.
     return `  <aside class="spon spon-house" id="spon" data-slot="${esc(slotKey)}" data-sponsor="house" aria-label="Sponsor">
-    <img class="spon-roy" src="${esc(house.roy || '/images/sponsors/roy-sponsor.png')}" width="276" height="235" alt="" loading="lazy" decoding="async">
-    <a class="spon-body" href="${esc(house.url)}" data-spon-link>
+    <img class="spon-roy" src="${esc(safeHref(house.roy, { tel: false }) || '/images/sponsors/roy-sponsor.png')}" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="${esc(safeHref(house.url, { tel: false }) || '/sponsor/')}" data-spon-link>
       <span class="spon-text"><strong>${esc(house.title || 'Sponsor this page.')}</strong>${house.copy ? ' ' + esc(house.copy) : ''}</span>
       <span class="spon-cta">${esc(house.cta)} →</span>
     </a>
   </aside>`;
   }
-  const logo = sponsor.logo
-    ? `\n      <img class="spon-logo" src="${esc(sponsor.logo)}" width="${+sponsor.logoW || 264}" height="${+sponsor.logoH || 72}" alt="" loading="lazy" decoding="async">`
+  const logoSrc = safeHref(sponsor.logo, { tel: false });
+  const logo = logoSrc
+    ? `\n      <img class="spon-logo" src="${esc(logoSrc)}" width="${Math.round(+sponsor.logoW) || 264}" height="${Math.round(+sponsor.logoH) || 72}" alt="" loading="lazy" decoding="async">`
     : '';
   return `  <aside class="spon" id="spon" data-slot="${esc(slotKey)}" data-sponsor="${esc(sponsor.id)}" aria-label="Sponsor">
     <span class="spon-tag">Sponsor</span>
-    <a class="spon-body" href="${esc(sponsor.url)}" rel="sponsored noopener" target="_blank" data-spon-link>${logo}
+    <a class="spon-body" href="${esc(safeHref(sponsor.url))}" rel="sponsored noopener" target="_blank" data-spon-link>${logo}
       <span class="spon-text"><strong>${esc(sponsor.name)}</strong> ${esc(sponsor.copy || '')}</span>
       <span class="spon-cta">${esc(sponsor.cta || 'Learn more')} →</span>
     </a>
@@ -166,4 +196,4 @@ function summary() {
   return lines.join('\n');
 }
 
-module.exports = { slot, summary, keysFor, resolve, isActive, slotHtml, assertPagesOnly, PAGE_KEY_RE, FAMILIES, BEACON_URL, CONFIG_PATH };
+module.exports = { slot, summary, keysFor, resolve, isActive, slotHtml, assertPagesOnly, assertSafeLinks, safeHref, esc, PAGE_KEY_RE, FAMILIES, BEACON_URL, CONFIG_PATH };

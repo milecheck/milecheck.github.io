@@ -101,7 +101,7 @@
 <main>
   <section class="sp-hero">
     <h1 class="sp-label" style="margin-bottom:14px;">Website sponsorships</h1>
-    <p>MileCheck&rsquo;s website is growing fast. Visitors were up 39% last week, and our Google search traffic is about 16 times what it was in mid-July.</p>
+    <p>Visitors to milecheckapp.com were up 39% from Sept 18&ndash;24 to Sept 25&ndash;Oct 1 (Google Analytics).</p>
     <p style="margin-top:12px">We&rsquo;re now offering page sponsorships, and we&rsquo;d love to have you be one of our first sponsors. Your logo and a link sit at the top of the page. One sponsor per page. Website only. The app has no ads.</p>
     <div class="dev-pie" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:16px 0 18px"><div role="img" aria-label="Google search visits by device, last 28 days: phone 73 percent, computer 25 percent, tablet 2 percent" style="flex:none;width:120px;height:120px;border-radius:50%;background:conic-gradient(#00a86b 0 73%,#e8a317 73% 98%,#1d211c 98% 100%)"></div><div style="font-size:15px;line-height:1.7;color:#0E1116"><div><span style="color:#00a86b">&#9632;</span> <b>Phone 73%</b></div><div><span style="color:#e8a317">&#9632;</span> <b>Computer 25%</b></div><div><span style="color:#1d211c">&#9632;</span> Tablet 2%</div><div style="font-size:13px;color:#3a444d">Google search visits, Sept 9 to Oct 6 (Search Console).</div></div></div>
     <p class="sp-note">Pick the pages your customers already read, like the Snoqualmie Pass page, the I-75 corridor or the Utah cameras. Drivers use them to check a road before they drive it.</p>
@@ -125,7 +125,7 @@
 
   <section class="sp-section" id="pricing">
     <h2>Pricing</h2>
-    <p class="sub"><b>Founding rate: $50 a month per page, or $40 a page for three or more.</b> Month to month, cancel anytime. Billing starts the day you pay. Your slot goes live within 3 business days and runs through the end of the month you've paid for.</p>
+    <p class="sub"><b>Founding rate: $50 a month per page, or $40 a page for three or more.</b> Month to month, cancel anytime. Billing starts the day you pay. Your slot goes live within 3 business days and runs through the end of your current billing period.</p>
     <a class="btn" href="/sponsor/start/">Pick your pages</a>
     <p class="sub" style="margin-top:14px">Questions first? <a href="mailto:sales@milecheckapp.com?subject=Sponsoring%20milecheckapp.com">Email sales@milecheckapp.com</a>. By sending a request you agree to the <a href="/sponsor/terms/">sponsorship terms</a>.</p>
   </section>
@@ -139,7 +139,7 @@
   <section class="sp-section" id="numbers" hidden>
     <h2>Traffic</h2>
     <p class="sub"><b>Site traffic:</b> Google sent 8,810 visits in the last 28 days, more than double the 28 days before (Search Console, Oct 2, 2026). Sponsors get their own page numbers by email.</p>
-    <p class="sub" style="margin-top:8px;"><b>The slot's own count.</b> Separately, we count how many times the sponsor strip itself was on screen for at least a second (a "view") and how many times someone tapped it. It&rsquo;s the number in your monthly report. Counting started Sept 16 and covered every page by Sept 24.</p>
+    <p class="sub" style="margin-top:8px;"><b>The slot's own count.</b> Separately, we count how many times the sponsor strip itself was on screen for at least a second (a "view") and how many times someone tapped it. Totals add up every page's views. They count views, not people. It&rsquo;s the number in your monthly report. Counting started Sept 16 and covered every page by Sept 24.</p>
     <div class="sp-stats">
       <div class="sp-stat"><div class="n live" id="nImp">—</div><div class="l">slot views, <span id="nDays">—</span></div></div>
       <div class="sp-stat"><div class="n" id="nClk">—</div><div class="l">taps on the slot</div></div>
@@ -261,7 +261,9 @@
     stats = d;
     var t = {impressions:0, clicks:0};
     d.byDay.forEach(function(x){ t.impressions += x.impressions; t.clicks += x.clicks; });
-    $('nDays').textContent = d.byDay.length >= 28 ? 'last 28 days' : 'first ' + d.byDay.length + ' full day' + (d.byDay.length === 1 ? '' : 's');
+    // Counting started Sept 16, so until 28 full days exist, say the actual dates instead of "last 28 days".
+    var dd = function(iso){ return new Date(iso + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }); };
+    $('nDays').textContent = d.byDay.length >= 28 ? 'last 28 days, ' + dd(d.byDay[0].day) + ' to ' + dd(d.byDay[d.byDay.length - 1].day) : 'since ' + dd(d.byDay[0].day) + ' (' + d.byDay.length + ' full day' + (d.byDay.length === 1 ? '' : 's') + ')';
     $('nImp').textContent = int(t.impressions);
     $('nClk').textContent = int(t.clicks);
     $('nPerDay').textContent = int(t.impressions / Math.max(1, d.byDay.length));
