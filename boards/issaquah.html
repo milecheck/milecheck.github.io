@@ -190,7 +190,7 @@
     <div class="qr">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" width="100%" height="100%" class="segno"><path class="qrline" stroke="#17150f" d="M0 0.5h7m1 0h1m1 0h1m2 0h4m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h2m5 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m5 0h1m1 0h4m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h4m2 0h1m4 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h2m1 0h1m-15 1h1m2 0h7m2 0h7m2 0h1m2 0h1m1 0h3m-28 1h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h4m2 0h2m1 0h2m-28 1h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m1 0h3m3 0h2m2 0h1m1 0h1m-26 1h2m4 0h1m1 0h3m2 0h1m2 0h1m3 0h1m2 0h2m2 0h1m-29 1h1m3 0h3m3 0h6m2 0h2m2 0h2m4 0h1m-28 1h3m1 0h1m2 0h1m3 0h1m2 0h3m4 0h7m-29 1h1m1 0h1m1 0h3m2 0h1m4 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m-29 1h1m1 0h4m1 0h8m1 0h1m3 0h1m1 0h2m2 0h1m1 0h1m-28 1h1m2 0h3m2 0h1m2 0h1m2 0h2m6 0h1m1 0h1m-26 1h3m1 0h2m1 0h2m6 0h1m1 0h1m1 0h2m3 0h1m1 0h2m-28 1h4m1 0h2m1 0h3m1 0h4m3 0h1m2 0h1m1 0h2m2 0h1m-29 1h2m3 0h1m2 0h2m3 0h1m4 0h4m3 0h2m-27 1h2m1 0h1m1 0h4m4 0h1m1 0h13m-20 1h1m1 0h4m1 0h1m1 0h1m2 0h1m3 0h2m-26 1h7m1 0h6m1 0h3m1 0h2m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h1m1 0h4m1 0h3m1 0h2m3 0h1m3 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h1m1 0h1m3 0h7m2 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h5m2 0h1m6 0h1m-29 1h1m1 0h3m1 0h1m4 0h2m2 0h1m2 0h4m1 0h2m1 0h3m-29 1h1m5 0h1m2 0h1m1 0h2m1 0h3m5 0h5m1 0h1m-29 1h7m1 0h5m2 0h2m2 0h2m1 0h1"/></svg>
 
-      <div class="qrtx">Take the pass<br>with you<small>Scan &middot; free app</small></div>
+      <div class="qrtx">Take the pass<br>with you<small>Scan &middot; MileCheck app</small></div>
     </div>
   </footer>
 </div>
@@ -215,9 +215,9 @@ const CAMS = [
 // One advertiser per month is the real model; rotating here so the demo shows
 // what the slot looks like sold.
 const ADS = [
-  'Cascade Towing — 24-hour recovery, Exit 34 to Cle Elum',
-  'Pass Tire & Chain — free chain fitting while you wait',
-  'Mountain View Diner — open till 10, two blocks from here',
+  'Demo sponsor — chains, wipers and tire checks',
+  'Demo sponsor — a chain fitter near the pass',
+  'Demo sponsor — a diner two blocks away',
 ];
 
 const $ = id => document.getElementById(id);
@@ -498,7 +498,7 @@ async function load(){
         ? list.map(a =>
             `<div class="al${a.hot?' hot':''}"><span class="mp">${a.mp!=null?'MP '+Math.round(a.mp):''}</span>`
             + `<span class="tx">${a.head}</span></div>`).join('')
-        : '<div class="none">Nothing reported on I-90 east.<br>Clear to the pass.</div>';
+        : '<div class="none">WSDOT reports nothing on I-90 east.</div>';
     }
 
   }catch(e){
