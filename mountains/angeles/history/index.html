@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="../../../images/favicon.png">
   <link rel="stylesheet" href="../../../style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do we know if Mount Angeles is visible?","acceptedAnswer":{"@type":"Answer","text":"We read the cloud ceilings at the airports between Port Angeles and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 6,454 ft. No crowd reports."}},{"@type":"Question","name":"Why only three days?","acceptedAnswer":{"@type":"Answer","text":"Cloud forecasts are not reliable past about three days, so the forecast stops there."}},{"@type":"Question","name":"Why does Sequim get a different answer than Port Angeles?","acceptedAnswer":{"@type":"Answer","text":"Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations."}},{"@type":"Question","name":"What it can get wrong","acceptedAnswer":{"@type":"Answer","text":"Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so."}}],"@id":"https://milecheckapp.com/mountains/angeles/history/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do we know if Mount Angeles is visible?","acceptedAnswer":{"@type":"Answer","text":"We read the cloud ceilings at the airports between Port Angeles and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 6,454 ft. No crowd reports."}},{"@type":"Question","name":"Why only five days?","acceptedAnswer":{"@type":"Answer","text":"Cloud forecasts get less reliable the further out they go. Days four and five are drawn in six-hour steps for that reason, and the forecast stops at five."}},{"@type":"Question","name":"Why does Sequim get a different answer than Port Angeles?","acceptedAnswer":{"@type":"Answer","text":"Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations."}},{"@type":"Question","name":"What it can get wrong","acceptedAnswer":{"@type":"Answer","text":"Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so."}}]}</script>
   <style>
     .mv-hero{max-width:1160px;margin:0 auto;padding:34px 20px 8px;}
     .mv-get{max-width:1160px;margin:18px auto 0;padding:16px 18px;border:1px solid var(--line);background:var(--surface);display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;}
@@ -54,6 +54,12 @@
     .mv-row .v{font-weight:600;font-variant-numeric:tabular-nums;text-align:right;}
     .mv-row .v.OUT{color:var(--sign);} .mv-row .v.PARTLY{color:#b07a12;} .mv-row .v.HIDDEN{color:#8a3b2e;}
     .mv-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+    .mv-app .mv-stamp{margin-bottom:4px;}
+    .mv-feat{list-style:none;margin:8px 0 12px;padding:0;}
+    .mv-feat li{position:relative;padding:8px 0 8px 24px;border-top:1px solid var(--line);font-size:15px;line-height:1.45;color:var(--ink);}
+    .mv-feat li:first-child{border-top:0;}
+    .mv-feat li::before{content:"\2713";position:absolute;left:2px;top:8px;color:var(--sign);font-weight:700;}
+    .mv-price{font-size:14px;color:var(--ink-soft);line-height:1.5;}
     .mv-soon{display:inline-block;border:1px dashed var(--line);padding:10px 14px;font-size:14px;color:var(--ink-faint);}
     .mv-body{max-width:1160px;margin:26px auto 0;padding:0 20px;}
     .mv-prose{max-width:66ch;font-size:15.5px;line-height:1.6;}
@@ -151,7 +157,7 @@
     <div class="mv-get">
       <div><div class="mv-stamp">The app</div>
       <h3>Mountain Visibility</h3>
-      <p>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, The Olympics and Mount Angeles. Visible now or not, the three-day forecast, and the sunrise and sunset light. $1.99, one time.</p></div>
+      <p>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, The Olympics, Mount Angeles and Mount Baldy. Visible now or not, the five-day forecast, and the sunrise and sunset light. $1.99, one time.</p></div>
       <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-angeles-history&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a>
       <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
     </div>
@@ -161,18 +167,23 @@
       <div class="mv-prose"><h2>How this is counted</h2><p>The live page reads the airport cloud ceilings between Port Angeles and the summit every fifteen minutes. A day's entry is the best of those daylight readings, so one clear hour counts the day as out. Nights are ignored. Smoke and haze count against it the same way they do on the live page.</p></div>
     </div>
     <div>
-      <div class="mv-lock"><h3>Three-day forecast and the light</h3><p>The clear windows in the next three days, and the sunrise and sunset light on the summit, are in the app. $1.99, one time.</p><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-angeles-history&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a></div>
-      <div class="mv-card"><h3>By region</h3><div class="mv-rows" id="mvRegions"></div></div>
-      <div class="mv-card">
+      <div class="mv-card mv-app">
+        <div class="mv-stamp">In the app</div>
         <h3>Mountain Visibility</h3>
-        <p>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, The Olympics, Mount Angeles in one app. Shows whether the mountain is visible from where you are, the clear windows in the next three days, and the viewpoints. Made for photographers and anyone driving to a viewpoint. $1.99, one time. No account needed. No ads in the app.</p>
+        <ul class="mv-feat">
+          <li>Clear windows in the next five days</li>
+          <li>Sunrise and sunset light on the summit</li>
+          <li id="mvRegions">Every region&#39;s reading, live</li>
+          <li>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, The Olympics, Mount Angeles and Mount Baldy in one app</li>
+        </ul>
+        <p class="mv-price">$1.99, one time. No account needed. No ads in the app.</p>
         <div class="mv-cta">
           <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-angeles-history&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a>
           <span class="mv-soon">Android is in testing. Email <a href="mailto:mountains@milecheckapp.com?subject=Android%20tester%20for%20Mountain%20Visibility%20Forecast&body=Hi%2C%20I%20have%20an%20Android%20phone%20and%20want%20to%20test%20the%20app.">mountains@milecheckapp.com</a> to be a tester.</span>
         </div>
       </div></div>
   </div>
-  <div class="mv-body"><div class="mv-prose"><h2>Questions</h2></div><div class="mv-faq"><details><summary>How do we know if Mount Angeles is visible?</summary><p>We read the cloud ceilings at the airports between Port Angeles and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 6,454 ft. No crowd reports.</p></details><details><summary>Why only three days?</summary><p>Cloud forecasts are not reliable past about three days, so the forecast stops there.</p></details><details><summary>Why does Sequim get a different answer than Port Angeles?</summary><p>Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations.</p></details><details><summary>What it can get wrong</summary><p>Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so.</p></details></div></div>
+  <div class="mv-body"><div class="mv-prose"><h2>Questions</h2></div><div class="mv-faq"><details><summary>How do we know if Mount Angeles is visible?</summary><p>We read the cloud ceilings at the airports between Port Angeles and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 6,454 ft. No crowd reports.</p></details><details><summary>Why only five days?</summary><p>Cloud forecasts get less reliable the further out they go. Days four and five are drawn in six-hour steps for that reason, and the forecast stops at five.</p></details><details><summary>Why does Sequim get a different answer than Port Angeles?</summary><p>Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations.</p></details><details><summary>What it can get wrong</summary><p>Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so.</p></details></div></div>
   <div class="mv-notes">The record starts the day the Worker for this mountain went live. Percentages from a few days are noise, and the page says so.</div>
   <script>
 (function(){
@@ -185,21 +196,7 @@ fetch(HOST+'/history.json').then(r=>r.json()).then(h=>{
 }).catch(()=>{$.textContent='The record did not load. Pull the page again.';});
 })();
 </script>
-  <!-- gear-card -->
-<section class="mc-gear" aria-label="Gear guides" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">
-  <div style="border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5">
-    <div style="font-weight:700;font-size:16px;margin-bottom:6px">Gear for the view</div>
-    <p style="margin:0 0 6px">Our pick for binoculars: <a href="https://www.amazon.com/s?k=Vortex+Diamondback+HD+10x42&tag=trailapps-20" target="_blank" rel="sponsored noopener" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Vortex Diamondback HD 10x42 on Amazon</a></p>
-    <div style="font-size:14px;font-weight:700;margin:10px 0 4px">More picks, compared</div>
-    <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
-      <li style="margin:2px 0"><a href="/best-binoculars-for-mountain-views/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Binoculars for mountain views</a></li>
-    </ul>
-    <div style="font-size:13px;opacity:.75">Product links go to Amazon. MileCheck earns a commission if you buy through them. The price is the same for you.</div>
-  </div>
-</section>
-<!-- /gear-card -->
-
-<footer class="site-footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
@@ -216,6 +213,7 @@ fetch(HOST+'/history.json').then(r=>r.json()).then(h=>{
             <li><a href="../../../mountains/denali/">Denali</a></li>
             <li><a href="../../../mountains/olympics/">The Olympics</a></li>
             <li><a href="../../../mountains/angeles/">Mount Angeles</a></li>
+            <li><a href="../../../mountains/baldy/">Mount Baldy</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -229,7 +227,6 @@ fetch(HOST+'/history.json').then(r=>r.json()).then(h=>{
         <div class="footer-col">
           <p class="footer-label">Help &amp; legal</p>
           <ul class="footer-list">
-            <li><a href="/data-sources/">Data sources</a></li>
             <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
             <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
           </ul>

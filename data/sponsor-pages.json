@@ -2259,6 +2259,66 @@
    "sponsor": "house"
   },
   {
+   "key": "mountain:baldy",
+   "path": "/mountains/baldy/",
+   "title": "Is Mount Baldy visible right now? Live from Los Angeles",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-best-time",
+   "path": "/mountains/baldy/best-time/",
+   "title": "Best time of year to see Mount Baldy",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-alhambra",
+   "path": "/mountains/baldy/from-alhambra/",
+   "title": "Is Mount Baldy visible from Alhambra right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-chino",
+   "path": "/mountains/baldy/from-chino/",
+   "title": "Is Mount Baldy visible from Chino right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-claremont",
+   "path": "/mountains/baldy/from-claremont/",
+   "title": "Is Mount Baldy visible from Claremont right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-long-beach",
+   "path": "/mountains/baldy/from-long-beach/",
+   "title": "Is Mount Baldy visible from Long Beach right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-los-angeles",
+   "path": "/mountains/baldy/from-los-angeles/",
+   "title": "Is Mount Baldy visible from Los Angeles right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-riverside",
+   "path": "/mountains/baldy/from-riverside/",
+   "title": "Is Mount Baldy visible from Riverside right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-west-covina",
+   "path": "/mountains/baldy/from-west-covina/",
+   "title": "Is Mount Baldy visible from West Covina right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-history",
+   "path": "/mountains/baldy/history/",
+   "title": "How often is Mount Baldy visible from Los Angeles?",
+   "sponsor": "house"
+  },
+  {
    "key": "mountain:denali",
    "path": "/mountains/denali/",
    "title": "Is Denali visible right now? Live from Talkeetna",
@@ -2460,6 +2520,12 @@
    "key": "mountain:rainier-from-tacoma",
    "path": "/mountains/rainier/from-tacoma/",
    "title": "Is Mount Rainier visible from Tacoma right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:rainier-from-yakima",
+   "path": "/mountains/rainier/from-yakima/",
+   "title": "Is Mount Rainier visible from Yakima right now?",
    "sponsor": "house"
   },
   {
