@@ -133,6 +133,7 @@
   .pk-card button{margin-top:14px;font:inherit;font-weight:800;font-size:15px;background:#0E1116;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
   .pk-card.rec button{background:#0f7a4f}
   .pk-or{margin:14px 0 0;font-size:14px;color:#5b6670}
+  .pk-lab{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:10px 0 6px}
 </style>
 </head>
 <body>
@@ -166,7 +167,7 @@
   <section class="pk" id="pk" style="display:none">
     <h2>Start with a package</h2>
     <p class="pk-sub">Pick the road your customers drive. View counts are from the last 28 days.</p>
-    <div class="ps-chips" id="pkR"></div>
+    <div id="pkR"></div>
     <div class="pk-cards" id="pkC"></div>
     <p class="pk-or">Or pick pages one by one below.</p>
   </section>
@@ -281,15 +282,25 @@
     {name:'Florida',states:['FL'],route:'I-4, Tampa and Orlando',keys:['corridor:i-4','cameras:tampa','cameras:orlando']},
     {name:'Ohio and Michigan',states:['OH','MI'],route:'Ohio, I-75 and Cincinnati',keys:['cameras:ohio','corridor:i-75','cameras:cincinnati']},
     {name:'Washington and Oregon',states:['WA','OR'],route:'Portland, I-5 and Washington',keys:['cameras:portland','corridor:i-5','cameras:washington']},
-    {name:'Utah',states:['UT'],route:'Utah, I-15 and Salt Lake City',keys:['cameras:utah','corridor:i-15','cameras:salt-lake-city']}
+    {name:'Utah',states:['UT'],route:'Utah, I-15 and Salt Lake City',keys:['cameras:utah','corridor:i-15','cameras:salt-lake-city']},
+    {name:'Pennsylvania',states:['PA'],route:'Pittsburgh, Philadelphia and Pennsylvania',keys:['cameras:pittsburgh','cameras:philadelphia','cameras:pennsylvania']},
+    {name:'Arizona',states:['AZ'],route:'Phoenix, Arizona and I-40',keys:['cameras:phoenix','cameras:arizona','corridor:i-40']},
+    {name:'The Carolinas',states:['NC','SC'],route:'I-95, South Carolina and North Carolina',keys:['corridor:i-95','cameras:south-carolina','cameras:north-carolina']},
+    {name:'Delaware and Maryland',states:['DE','MD'],route:'Delaware, Maryland and I-95',keys:['cameras:delaware','cameras:maryland','corridor:i-95']},
+    // Topics: matched by page family, or nationwide = pages with no state.
+    {name:'Nationwide',topic:true,nationwide:true,route:'Mile-marker map, maps and closures',keys:['home:mile-marker-map','basics:maps','live:closures']},
+    {name:'Interstate corridors',topic:true,fams:['corridor'],route:'I-75, I-4 and I-15',keys:['corridor:i-75','corridor:i-4','corridor:i-15']},
+    {name:'Mountain passes',topic:true,fams:['pass'],route:'Cajon, Snoqualmie and the Grapevine',keys:['pass:cajon','pass:snoqualmie','pass:grapevine']},
+    {name:'Drawbridges',topic:true,fams:['bridge','drawbridge'],route:'Seattle, Oregon and Florida drawbridges',keys:['bridge:hub','bridge:oregon','bridge:florida']}
   ];
   function pageOf(k){return pages.find(function(x){return x.key===k})}
   function openPg(k){var p=pageOf(k);return p&&!taken[k]?p:null}
   function shortName(p){
     var f=famOf(p.key), id=p.key.slice(f.length+1);
+    if(id==='hub'&&f!=='bridge')return {cameras:'Camera map',pass:'Pass map',corridor:'Corridor map'}[f]||p.title;
     if(f==='corridor')return id.toUpperCase();
     if(f==='cameras'){var c=SLUG[id];return (c?SN[c]:id.split('-').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(' '))+' cameras'}
-    return p.title.split(/ — | \| | Camera| Live | Driving|: /)[0];
+    return p.title.split(/ — | \| | Camera| Live | Driving|: |\? | road cameras/)[0];
   }
   function viewsOf(keys){return keys.reduce(function(s,k){return s+(views[k]||0)},0)}
   function packagesFor(r){
@@ -297,13 +308,21 @@
     var top=route[0];
     if(top)out.push({name:shortName(pageOf(top)),keys:[top]});
     if(route.length===3)out.push({name:r.route,keys:route,rec:true});
-    var reg=pages.filter(function(p){if(taken[p.key]||langOf(p)||(views[p.key]||0)<5||['home','article','mountain','drawbridge'].indexOf(famOf(p.key))>-1)return false;var s=statesOf(p);return s.some(function(x){return r.states.indexOf(x)>-1})})
+    var reg=pages.filter(function(p){
+      var f=famOf(p.key);
+      if(taken[p.key]||langOf(p)||(views[p.key]||0)<5||f==='article'||f==='mountain')return false;
+      if(r.fams)return r.fams.indexOf(f)>-1;
+      if(f==='home'||f==='drawbridge')return !!r.nationwide&&f==='home';
+      var s=statesOf(p);
+      return r.nationwide?!s.length:s.some(function(x){return r.states.indexOf(x)>-1})})
       .sort(function(a,b){return (views[b.key]||0)-(views[a.key]||0)}).slice(0,10).map(function(p){return p.key});
     if(reg.length>=5)out.push({name:r.name,keys:reg});
     return out;
   }
   function pkRender(){
-    $('pkR').innerHTML=REGIONS.map(function(r,i){return '<button type="button" class="ps-chip'+(i===region?' on':'')+'" data-r="'+i+'">'+esc(r.name)+'</button>'}).join('');
+    var chip=function(r,i){return '<button type="button" class="ps-chip'+(i===region?' on':'')+'" data-r="'+i+'">'+esc(r.name)+'</button>'};
+    $('pkR').innerHTML='<div class="pk-lab">By region</div><div class="ps-chips">'+REGIONS.map(function(r,i){return r.topic?'':chip(r,i)}).join('')+'</div>'+
+      '<div class="pk-lab">Nationwide and by topic</div><div class="ps-chips">'+REGIONS.map(function(r,i){return r.topic?chip(r,i):''}).join('')+'</div>';
     var list=packagesFor(REGIONS[region]);
     $('pkC').innerHTML=list.map(function(k,i){
       var n=k.keys.length, price=pkPrice(n);

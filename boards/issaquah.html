@@ -49,6 +49,7 @@
   .eyebrow{font-size:min(1.25vw, 2.222vh);font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
   .passname{font-size:min(3.3vw, 5.867vh);font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:min(.3vw, 0.533vh)}
   .status{font-size:min(5.4vw, 9.6vh);font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:min(.6vw, 1.067vh)}
+  .status .asof{font-size:.3em;font-weight:800;color:var(--amber);letter-spacing:0;margin-left:.45em;vertical-align:.55em;white-space:nowrap}
   .st-open{color:var(--green)} .st-warn{color:var(--amber)} .st-bad{color:var(--red)} .st-unknown{color:var(--dim)}
   .statusline{font-size:min(1.3vw, 2.311vh);font-weight:700;color:var(--dim);margin-top:min(.4vw, 0.711vh);line-height:1.3}
 
@@ -387,6 +388,17 @@ async function fetchFeed(url, validate){
   return d;
 }
 
+
+// Date of the WSDOT pass report, shown beside the status so a stale report is never read as live.
+function asOf(ts){
+  if (ts == null || ts === '') return null;
+  let ms;
+  if (typeof ts === 'number') ms = ts > 1e12 ? ts : ts * 1000;
+  else { const n = Number(ts); ms = Number.isFinite(n) ? (n > 1e12 ? n : n * 1000) : Date.parse(ts); }
+  if (!Number.isFinite(ms)) return null;
+  return new Date(ms).toLocaleDateString('en-US', {month:'short', day:'numeric'});
+}
+
 async function load(){
   // Feed success is proven per-endpoint, never assumed. A Worker outage, CORS
   // failure, or bad JSON must not read the same as a verified-clear response —
@@ -425,8 +437,9 @@ async function load(){
       $('status').textContent = 'STATUS\nUNAVAILABLE';
       $('statusline').textContent = 'Conditions feed unavailable — pass status unknown.';
     } else if (offSeason){
+      const reportDate = asOf(pass && (pass['date-updated'] || pass['last-updated'] || pass['entry-time']));
       $('status').className = 'status st-open';
-      $('status').textContent = 'OPEN';
+      $('status').innerHTML = 'OPEN' + (reportDate ? '<span class="asof">Last reported \u00b7 ' + reportDate + '</span>' : '');
       // Two lines, not four: the old blurb explained the whole seasonal policy and
       // pushed the alerts panel off the bottom of the board. A venue only needs to
       // know the pass panel isn't broken, it's out of season.
@@ -498,7 +511,7 @@ async function load(){
         ? list.map(a =>
             `<div class="al${a.hot?' hot':''}"><span class="mp">${a.mp!=null?'MP '+Math.round(a.mp):''}</span>`
             + `<span class="tx">${a.head}</span></div>`).join('')
-        : '<div class="none">WSDOT reports nothing on I-90 east.</div>';
+        : '<div class="none">No incident reports from WSDOT for I-90 east.</div>';
     }
 
   }catch(e){
