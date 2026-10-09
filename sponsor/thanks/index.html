@@ -100,11 +100,17 @@
     </div>
   </header>
 <main>
-  <section class="sp-hero">
+  <section class="sp-hero" id="thxPages" hidden style="padding-bottom:64px;">
+    <h1 class="sp-label" style="margin-bottom:14px;">Payment received</h1>
+    <p>Thanks for sponsoring pages on milecheckapp.com. Stripe will email your receipt to your billing email.</p>
+    <p>We have everything we need: your pages, logo, sentence, button text, website and phone. Need to change something? Reply to your receipt or email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>.</p>
+    <p>Your slot goes live within 3 business days. We'll email you when it does. You can cancel anytime, and your slot runs through the end of the month you've paid for.</p>
+  </section>
+  <section class="sp-hero" id="thxReport" style="padding-bottom:64px;">
     <h1 class="sp-label" style="margin-bottom:14px;">Payment received</h1>
     <p>Thanks for sponsoring the MileCheck Highway Report. Stripe will email your receipt.</p>
     <p>Next, email <a href="mailto:sales@milecheckapp.com?subject=Sponsor%20slot%20files">sales@milecheckapp.com</a> with:</p>
-    <ul>
+    <ul style="list-style:disc;padding-left:22px;margin:4px 0 14px;">
       <li>Your logo, PNG or SVG, transparent background, 264 &times; 72 px or the same shape</li>
       <li>One sentence about your business, under 90 characters</li>
       <li>A short button label, 2 to 4 words</li>
@@ -113,6 +119,7 @@
     <p>We'll confirm which issue your sponsorship appears in and email you when it's published.</p>
   </section>
 </main>
+<script>if(new URLSearchParams(location.search).get('for')==='pages'){document.getElementById('thxPages').hidden=false;document.getElementById('thxReport').hidden=true;}</script>
 <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">

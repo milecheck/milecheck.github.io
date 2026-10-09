@@ -96,13 +96,16 @@
   .ps-row input{width:18px;height:18px;flex:none;accent-color:#0f7a4f}
   .ps-row .t{flex:1;min-width:0}
   .ps-row .t b{font-weight:600;font-size:15px;display:block}
-  .ps-row .t a{font-size:12.5px;color:#5b6670;text-decoration:none}
+  .ps-row .t a{font-size:13px;color:#0f7a4f;font-weight:600;text-decoration:none}
+  .ps-row .t a:hover{text-decoration:underline}
   .ps-row .v{font-size:13px;color:#5b6670;white-space:nowrap;text-align:right;min-width:92px}
   .ps-row .p{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;white-space:nowrap;min-width:84px;text-align:right}
   .ps-row.taken{opacity:.45;cursor:default}
   .ps-row.taken .p{font-family:inherit;font-weight:600;font-size:12.5px}
   .ps-empty{color:#5b6670;font-size:14px;padding:16px 4px}
-  .ps-details{display:none;margin:26px 0 0;max-width:620px}
+  .ps-details{display:none;margin:26px 0 0}
+  .ps-details>h2,.ps-details>label,.ps-details>input,.ps-details>.ps-msg{max-width:620px}
+  .ps-details input[type=file]{padding:8px;background:#fff}
   .ps-details.show{display:block}
   .ps-details label{display:block;font-size:13px;font-weight:600;color:#3a444d;margin:12px 0 5px}
   .ps-details input,.ps-details textarea{width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:10px 12px;border:1px solid #d4d4d4;border-radius:10px;background:#fff}
@@ -114,7 +117,7 @@
   .ps-bar button{font:inherit;font-weight:800;font-size:15px;background:#00e094;color:#04130d;border:0;border-radius:10px;padding:11px 18px;cursor:pointer}
   .ps-bar button[disabled]{opacity:.5;cursor:default}
   .ps-msg{margin-top:12px;font-size:14px;color:#3a444d}
-  @media(max-width:600px){.ps-wrap{padding:20px 16px 150px}.ps-row .v{display:none}.ps-bar-in{padding:12px 16px}.ps-wrap h1{font-size:26px}}
+  @media(max-width:600px){.ps-wrap{padding:20px 16px 150px}.ps-row .v{min-width:0;font-size:12.5px;white-space:normal;text-align:right;max-width:64px}.ps-bar-in{padding:12px 16px}.ps-wrap h1{font-size:26px}}
   .pk{margin:6px 0 26px}
   .pk h2{font-size:20px;margin:0 0 4px}
   .pk-sub{margin:0 0 12px;font-size:14.5px;color:#3a444d}
@@ -123,16 +126,58 @@
   .pk-card.rec{border:2px solid #0f7a4f}
   .pk-badge{position:absolute;top:-11px;left:16px;background:#0f7a4f;color:#fff;font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 10px}
   .pk-name{font-weight:800;font-size:17px;color:#0E1116}
-  .pk-n{font-size:13px;color:#5b6670;margin-top:2px}
-  .pk-list{margin:10px 0 0;padding:0;list-style:none;font-size:13.5px;color:#3a444d;line-height:1.55}
+  .pk-n{font-size:13px;color:#3a444d;margin-top:2px}
+  .pk-list{margin:10px 0 0;padding:0;list-style:none;font-size:14px;color:#0E1116;line-height:1.5}
+  .pk-list li{padding:3px 0}
+  .pk-list a{color:#0E1116;font-weight:700;text-decoration:underline;text-decoration-color:#0f7a4f;text-underline-offset:3px}
+  .pk-list a:hover{color:#0f7a4f}
+  .pk-desc{display:block;font-size:12.5px;color:#3a444d;font-weight:400;line-height:1.4}
+  .pk-get{margin-top:10px;font-size:13.5px;color:#0E1116;line-height:1.45}
+  .pk-sub a{color:#0f7a4f;font-weight:700}
   .pk-list li{display:flex;justify-content:space-between;gap:10px}
-  .pk-list li span:last-child{color:#5b6670;white-space:nowrap}
+  .pk-list li>span:last-child{color:#0E1116;white-space:nowrap;font-variant-numeric:tabular-nums}
   .pk-views{margin-top:10px;font-size:14px;font-weight:700;color:#0f7a4f}
+  .pk-trend{margin-top:4px;font-size:13.5px;font-weight:700;color:#c2410c}
   .pk-price{margin-top:12px;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:20px;color:#0E1116}
-  .pk-per{font-size:13px;color:#5b6670;margin-top:2px}
+  .pk-per{font-size:13px;color:#3a444d;margin-top:2px}
   .pk-card button{margin-top:14px;font:inherit;font-weight:800;font-size:15px;background:#0E1116;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
   .pk-card.rec button{background:#0f7a4f}
   .pk-or{margin:14px 0 0;font-size:14px;color:#5b6670}
+  .pv{margin:18px 0 4px}
+  .pv-h{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#3a444d;margin-bottom:8px}
+  .pv .spon{display:flex;align-items:center;gap:12px;min-height:74px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box}
+  .pv .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3}
+  .pv .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;color:#0E1116}
+  .pv .spon-logo-ph{flex:none;display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8}
+  .pv .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d}
+  .pv .spon-text strong{color:#0E1116;font-weight:800}
+  .pv .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap}
+  @media(max-width:600px){.pv .spon{flex-wrap:wrap}.pv .spon-body{flex-basis:100%;flex-wrap:wrap}.pv .spon-text{flex:1 1 60%}}
+  .pv-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+  .pv-tabs button{font:inherit;font-size:13px;padding:6px 11px;border:1px solid #d4d4d4;border-radius:999px;background:#fff;cursor:pointer;color:#0E1116}
+  .pv-tabs button.on{background:#0E1116;color:#fff;border-color:#0E1116}
+  /* A crop of the real page, scaled to the form's width: the desktop layout on a computer, the phone
+     layout on a phone. The iframe is a picture: taps open the full page. */
+  .pv-clip{display:block;position:relative;width:100%;height:440px;overflow:hidden;border:6px solid #0E1116;border-radius:16px;background:#fff;margin:0 0 12px;box-sizing:border-box}
+  .pv-clip iframe{height:1400px;border:0;transform-origin:0 0;pointer-events:none}
+  .pv-links{font-size:14px;margin:10px 0 0;color:#0E1116}
+  .pv-links a{color:#0f7a4f;font-weight:700}
+  .pk-share{margin:4px 0 10px;padding:12px 14px;border:1px solid #e3ddcf;border-left:4px solid #0f7a4f;border-radius:0 10px 10px 0;background:#fff;font-size:14.5px;line-height:1.5;color:#0E1116}
+  .pk-share a{color:#0f7a4f;font-weight:700}
+  .bo-list{display:flex;flex-direction:column;gap:6px;max-width:620px}
+  .bo{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid #e3ddcf;border-radius:10px;background:#fff;padding:10px 12px;font-size:15px;cursor:pointer;margin:0!important;font-weight:400!important;color:#0E1116!important}
+  .bo b{min-width:110px}
+  .bo span{color:#3a444d;font-size:14px}
+  .bo-own input[type=text],.bo-own #btnOwn{flex:1 1 140px;width:auto!important;padding:8px 10px!important}
+  .bo-own select{flex:0 0 auto;padding:8px}
+  .lg-help{font-size:13.5px;color:#3a444d;line-height:1.5;margin:6px 0 0;max-width:620px}
+  .lg-pv{display:flex;align-items:center;gap:12px;margin:10px 0 0;max-width:620px}
+  .lg-box{flex:none;border:1px solid #E5E5E5;border-radius:8px;background:#fff;padding:10px 12px}
+  .lg-box img{display:block;height:36px;width:auto;max-width:132px;object-fit:contain}
+  #lgMsg{font-size:13.5px;margin:0;color:#0E1116}
+  .lg-warn{color:#92400e;font-weight:600}
+  .pk-hint{margin:6px 4px 10px;font-size:14px;color:#0E1116}
+  .pk-browse{font:inherit;font-weight:700;font-size:14.5px;background:#fff;color:#0E1116;border:1px solid #0E1116;border-radius:10px;padding:9px 14px;cursor:pointer}
   .pk-lab{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:10px 0 6px}
 </style>
 </head>
@@ -160,13 +205,14 @@
   <p class="sp-label" style="margin:0 0 8px;"><a href="/sponsor/" style="color:inherit;text-decoration:none">&lsaquo; Website sponsorships</a></p>
   <h1>Pick your pages</h1>
   <div style="background:#fff;border:1px solid #e3ddcf;border-left:4px solid #0f7a4f;border-radius:10px;padding:14px 18px;max-width:760px;margin:0 0 14px">
-    <p style="margin:0 0 4px;font-weight:700;color:#0f7a4f">Founding sponsor rate: $50 a month per page</p>
-    <p style="margin:0;color:#3d3d3d;font-size:15px;line-height:1.55">This is the rate for our first sponsors. It holds for your first three months, then the sponsorship continues month to month. One sponsor per page, so nobody else shares your spot.</p>
+    <p style="margin:0 0 4px;font-weight:700;color:#0f7a4f">Founding sponsor rate: $50 a month per page. Three or more pages are $40 each.</p>
+    <p style="margin:0;color:#3d3d3d;font-size:15px;line-height:1.55">Month to month, cancel anytime. Your slot runs through the end of the month you've paid for, and payments aren't refunded. One sponsor per page, so nobody else shares your spot.</p>
     <p id="live30" style="display:none;margin:8px 0 0;font-size:14px;color:#0f7a4f;font-weight:600"></p>
   </div>
   <section class="pk" id="pk" style="display:none">
     <h2>Start with a package</h2>
-    <p class="pk-sub">Pick the road your customers drive. View counts are from the last 28 days.</p>
+    <p class="pk-sub">Pick the road your customers drive. Each page name opens the live page. View counts are from the last 28 days.</p>
+    <div class="dev-pie" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:4px 0 14px"><div role="img" aria-label="Google search visits by device, last 28 days: phone 73 percent, computer 25 percent, tablet 2 percent" style="flex:none;width:96px;height:96px;border-radius:50%;background:conic-gradient(#00a86b 0 73%,#e8a317 73% 98%,#1d211c 98% 100%)"></div><div style="font-size:15px;line-height:1.7;color:#0E1116"><div><span style="color:#00a86b">&#9632;</span> <b>Phone 73%</b></div><div><span style="color:#e8a317">&#9632;</span> <b>Computer 25%</b></div><div><span style="color:#1d211c">&#9632;</span> Tablet 2%</div><div style="font-size:13px;color:#3a444d">Google search visits, Sept 9 to Oct 6 (Search Console).</div></div></div>
     <div id="pkR"></div>
     <div class="pk-cards" id="pkC"></div>
     <p class="pk-or">Or pick pages one by one below.</p>
@@ -176,18 +222,39 @@
     <input class="ps-search" id="q" type="search" placeholder="Search pages: Snoqualmie, Ohio, I-90&hellip;" aria-label="Search pages">
     <select class="ps-sel" id="st" aria-label="State"><option value="">All states</option></select>
     <select class="ps-sel" id="sort" aria-label="Sort"><option value="views">Most views first</option><option value="az">A to Z</option></select>
-    <label class="ps-chk"><input type="checkbox" id="showTaken"> Show taken pages</label>
+    <label class="ps-chk"><input type="checkbox" id="showTaken" checked> Show sold and pending pages</label>
   </div>
   <div class="ps-chips" id="chips"></div>
   <div id="list"><p class="ps-empty">Loading pages&hellip;</p></div>
 
   <form class="ps-details" id="details" autocomplete="on">
     <h2 style="font-size:20px;margin:0">Your details</h2>
-    <label for="company">Company</label><input id="company" name="organization" required>
-    <label for="email">Email for the receipt and reports</label><input id="email" name="email" type="email" required>
-    <label for="site">Link for your slot</label><input id="site" name="url" type="url" placeholder="https://" required>
-    <label for="line">One sentence about your business <small>(optional now, under 90 characters)</small></label><input id="line" maxlength="90">
-    <p class="ps-msg">Sending this opens an email to <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> with your picks filled in. Attach your logo if you have it. We confirm the pages are open and send your invoice. By sending you agree to the <a href="/sponsor/terms/">sponsorship terms</a>.</p>
+    <label for="company">Business name</label><input id="company" name="organization" required>
+    <label for="email">Contact email <small>(who we talk to about your slot)</small></label><input id="email" name="email" type="email" required>
+    <label for="billing">Billing email for receipts and invoices <small>(optional, often accounting. Blank uses the contact email.)</small></label><input id="billing" type="email">
+    <label for="phone">Business phone</label><input id="phone" name="tel" type="tel" placeholder="760-555-0100" required>
+    <label for="site">Website</label><input id="site" name="url" placeholder="yourshop.com" required>
+    <label for="line">One sentence about your business <small>(under 90 characters)</small></label><input id="line" maxlength="90" placeholder="24-hour towing on I-15, Cajon Pass to Victorville.">
+    <label>Your button <small>(what it says, and what happens when someone taps it)</small></label>
+    <div class="bo-list" id="btnOpts">
+      <label class="bo"><input type="radio" name="btn" value="Call us|phone" checked><b>Call us</b><span>calls your phone</span></label>
+      <label class="bo"><input type="radio" name="btn" value="Visit our site|site"><b>Visit our site</b><span>opens your website</span></label>
+      <label class="bo"><input type="radio" name="btn" value="Get a quote|site"><b>Get a quote</b><span>opens your website</span></label>
+      <label class="bo bo-own"><input type="radio" name="btn" value="own"><b>Your own words</b><input id="btnOwn" maxlength="30" placeholder="2 to 4 words"><select id="btnOwnTo" class="ps-sel"><option value="phone">calls your phone</option><option value="site">opens your website</option></select></label>
+    </div>
+    <input type="hidden" id="target" value="phone"><input type="hidden" id="cta" value="Call us">
+    <label for="logo">Your logo <small>(required)</small></label><input id="logo" type="file" accept="image/png,image/svg+xml,image/jpeg,image/webp" required>
+    <p class="lg-help">PNG or SVG with a transparent background works best. JPG and WebP also work. Under 2 MB.<br>In the slot your logo shows 36 px tall and up to 132 px wide, so a wide logo reads best. Send it at <b>264 &times; 72 px or larger</b>, in that same wide shape.</p>
+    <div class="lg-pv" id="lgPv" hidden><div class="lg-box"><img id="lgImg" alt="Your logo at slot size"></div><p id="lgMsg"></p></div>
+    <div class="pv">
+      <div class="pv-h">How your slot will look</div>
+      <div class="pv-tabs" id="pvDev"><button type="button" data-dev="phone">On a phone</button><button type="button" data-dev="computer">On a computer</button></div>
+      <div class="pv-tabs" id="pvTabs"></div>
+      <a class="pv-clip" id="pvClip" target="_blank" rel="noopener" style="display:none"><iframe id="pvFrame" title="Your slot on the page" tabindex="-1" loading="lazy"></iframe></a>
+      <div class="spon" id="pvSlot"><span class="spon-tag">Sponsor</span><span class="spon-body"><span class="spon-logo-ph">Your logo</span><span class="spon-text"><strong id="pvName">Your company</strong> <span id="pvLine">One sentence about what you do.</span></span><span class="spon-cta" id="pvCta">Call us &rarr;</span></span></div>
+      <p class="pv-links" id="pvLinks"></p>
+    </div>
+    <p class="ps-msg">You pay with Stripe. Billing starts the day you pay. Your slot goes live within 3 business days, and we email you when it does. Month to month, cancel anytime. By paying you agree to the <a href="/sponsor/terms/">sponsorship terms</a>. Questions first? <a id="mailAlt" href="mailto:sales@milecheckapp.com">Email sales@milecheckapp.com</a> with your picks instead.</p>
   </form>
 </div>
 <div class="ps-bar" id="bar"><div class="ps-bar-in"><div class="s" id="sum"></div><button type="button" id="go">Continue</button></div></div>
@@ -197,7 +264,7 @@
   var FAM={home:'Mile-marker map',cameras:'Cameras',corridor:'Interstate corridors',pass:'Mountain passes',bridge:'Drawbridges',guide:'Mile-marker guides',basics:'Highway basics',article:'Reports and articles',live:'Live conditions',mountain:'Mountain Visibility',drawbridge:'Seattle Drawbridges'};
   var $=function(id){return document.getElementById(id)};
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
-  var pages=[], views={}, taken={}, picked={}, fam='all', step=1, surge={};
+  var pages=[], views={}, taken={}, picked={}, fam='all', step=1, surge={}, wk={};
   function famOf(k){return k.split(':')[0]}
   var SN={AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'District of Columbia',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',
     AB:'Alberta',BC:'British Columbia',MB:'Manitoba',ON:'Ontario',QC:'Quebec',NS:'Nova Scotia',NT:'Northwest Territories'};
@@ -238,15 +305,67 @@
     var c={};pages.forEach(function(p){var f=famOf(p.key);c[f]=(c[f]||0)+1});
     var h='<button type="button" class="ps-chip'+(fam==='all'?' on':'')+'" data-f="all">All ('+pages.length+')</button>';
     Object.keys(FAM).forEach(function(f){if(c[f])h+='<button type="button" class="ps-chip'+(fam===f?' on':'')+'" data-f="'+f+'">'+esc(FAM[f])+' ('+c[f]+')</button>'});
-    var ns=pages.filter(function(p){return surge[p.key]}).length; if(ns) h+='<button type="button" class="ps-chip'+(fam==='surging'?' on':'')+'" data-f="surging">&#9650; Surging ('+ns+')</button>';
-    var n=Object.keys(picked).length; if(n) h+='<button type="button" class="ps-chip'+(fam==='picked'?' on':'')+'" data-f="picked">Picked ('+n+')</button>';
+    var ns=pages.filter(function(p){return surge[p.key]}).length; if(ns) h+='<button type="button" class="ps-chip'+(fam==='surging'?' on':'')+'" data-f="surging">&#9650; Growing ('+ns+')</button>';
+    var n=paidKeys().length; if(n) h+='<button type="button" class="ps-chip'+(fam==='mine'?' on':'')+'" data-f="mine">Your pages ('+n+')</button>';
     $('chips').innerHTML=h;
   }
+  function rowHtml(p,priceTxt){
+    var tk=taken[p.key]&&!(p.key in picked), v=views[p.key];
+    return '<label class="ps-row'+(tk?' taken':'')+'"><input type="checkbox" data-k="'+esc(p.key)+'"'+((p.key in picked)?' checked':'')+(tk?' disabled':'')+'><span class="t"><b>'+esc(p.title)+(surge[p.key]?' '+growBadge(p.key):'')+(langOf(p)?' <span style="font-size:11px;font-weight:600;color:#0f7a4f;border:1px solid #0f7a4f;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap">'+langOf(p)+'</span>':'')+'</b><a href="'+esc(p.path)+'" target="_blank" rel="noopener">See the page &#8599;</a></span><span class="v">'+(v>=5?v.toLocaleString('en-US')+' views':'Under 5 views')+'</span><span class="p">'+(tk?(taken[p.key]==='pending'?'Pending':'Sold'):priceTxt)+'</span></label>';
+  }
+  // Suggestions sit close to what they picked: same states, or the same topic. Busiest first.
+  function suggestions(){
+    var pk=paidKeys(), st={}, fams={};
+    pk.forEach(function(k){var p=pageOf(k);if(!p)return;statesOf(p).forEach(function(s){st[s]=1});fams[famOf(k)]=1});
+    var r=base!=null?REGIONS[base]:null, topic=r&&r.topic?r:null;
+    // Picked from a region: stay inside it. Corridor pages span many states, so their states alone would wander.
+    if(r&&!r.topic){st={};r.states.forEach(function(s){st[s]=1})}
+    var ok=function(p){var f=famOf(p.key);
+      if(p.key in picked||taken[p.key]||langOf(p)||(views[p.key]||0)<5||f==='article'||f==='mountain'||f==='drawbridge')return false;
+      if(topic&&topic.fams)return topic.fams.indexOf(f)>-1;
+      var s=statesOf(p);
+      if(topic&&topic.nationwide)return !s.length;
+      return s.some(function(x){return st[x]})};
+    var byV=function(a,b){return (views[b.key]||0)-(views[a.key]||0)};
+    var out=pages.filter(ok).sort(byV).slice(0,6);
+    // Few nearby pages: top up with nationwide pages (no state), which suit any business. Never another region's pages.
+    if(out.length<4)out=out.concat(pages.filter(function(p){return out.indexOf(p)<0&&!(p.key in picked)&&!taken[p.key]&&!langOf(p)&&(views[p.key]||0)>=5&&famOf(p.key)!=='article'&&!statesOf(p).length}).sort(byV).slice(0,6-out.length));
+    return out;
+  }
+  // A ready-to-forward summary for whoever approves the spend. Opens their own mail app, no address filled in.
+  function shareMail(){
+    var pk=paidKeys().map(pageOf).filter(Boolean).sort(function(a,b){return (views[b.key]||0)-(views[a.key]||0)});
+    var n=pk.length, total=pkPrice(n), all=pk.map(function(p){return p.key}).join(',');
+    var lines=pk.map(function(p){var v=views[p.key]||0;return '- '+shortName(p)+': '+(v>=5?v.toLocaleString('en-US'):'under 5')+' views in 28 days. https://milecheckapp.com'+p.path}).join('\n');
+    var ex=Object.keys(picked).filter(function(k){return picked[k]===0}).length;
+    var nm=($('company')&&$('company').value.trim())||'';
+    var body='MileCheck sells one sponsor slot at the top of each page on milecheckapp.com, a highway camera and road conditions site. Drivers check these pages before they drive.\n\n'+
+      (pkg?'Package: '+pkg.name+'\n':'')+'Pages ('+n+'):\n'+lines+(ex?'\n- Plus '+ex+' Seattle drawbridge pages, included':'')+'\n\n'+
+      'Price: $'+total+' a month. Month to month, cancel anytime. The slot runs through the end of the paid month.\n'+
+      'What we get: our logo, one sentence and a link (or a tap-to-call number) at the top of each page. One sponsor per page.\n\n'+
+      'Pick these pages: https://milecheckapp.com/sponsor/start/?page='+encodeURIComponent(all)+'\n'+
+      'Terms: https://milecheckapp.com/sponsor/terms/\n';
+    return 'mailto:?subject='+encodeURIComponent('MileCheck sponsorship'+(nm?' for '+nm:'')+': $'+total+' a month, '+n+' page'+(n===1?'':'s'))+'&body='+encodeURIComponent(body);
+  }
+  function renderMine(){
+    var pk=paidKeys().map(pageOf).filter(Boolean).sort(function(a,b){return (views[b.key]||0)-(views[a.key]||0)});
+    var n=pk.length, per=n<=2?50:40, next=pkPrice(n+1)-pkPrice(n), ex=Object.keys(picked).filter(function(k){return picked[k]===0});
+    var h='<div class="ps-group"><h2><span>Your pages'+(pkg?' &middot; '+esc(pkg.name):'')+'</span><button type="button" data-f2="all">Browse all pages</button></h2>';
+    pk.forEach(function(p){h+=rowHtml(p,money(per)+'/mo')});
+    if(ex.length)h+='<p class="pk-hint">Plus '+ex.length+' Seattle drawbridge pages, included.</p>';
+    h+='</div><div class="ps-group"><h2><span>Add a page or two</span></h2><p class="pk-hint">'+
+      (n>=3?'Each added page is $40 a month.':n===2?'A third page brings every page to $40. Your total goes up $'+next+'.':'A second page is $50 a month.')+'</p>';
+    suggestions().forEach(function(p){h+=rowHtml(p,'+'+money(next)+'/mo')});
+    h+='</div><p><button type="button" class="pk-browse" data-f2="all">See all '+pages.length+' pages</button></p>';
+    h+='<div class="pk-share"><b>Need a yes from your boss or accounting?</b> Send them the pages, the views and the price. <a href="'+esc(shareMail())+'">Email this for approval &#8594;</a></div>';
+    $('list').innerHTML=h;
+  }
   function render(){
+    if(fam==='mine'){if(paidKeys().length)return renderMine();fam='all'}
     var q=$('q').value.trim().toLowerCase(), showTaken=$('showTaken').checked, sort=$('sort').value;
     var rows=pages.filter(function(p){
-      if(fam==='picked'?!picked[p.key]:fam==='surging'?!surge[p.key]:(fam!=='all'&&famOf(p.key)!==fam))return false;
-      if(!showTaken&&taken[p.key]&&!picked[p.key])return false;
+      if(fam==='picked'?!(p.key in picked):fam==='surging'?!surge[p.key]:(fam!=='all'&&famOf(p.key)!==fam))return false;
+      if(!showTaken&&taken[p.key]&&!(p.key in picked))return false;
       var stv=$('st').value; if(stv){var sa=statesOf(p); if(stv==='none'?sa.length:sa.indexOf(stv)<0)return false}
       return !q||(p.title+' '+p.path+' '+p.key).toLowerCase().indexOf(q)>-1;
     });
@@ -258,24 +377,25 @@
     order.forEach(function(f){
       h+='<div class="ps-group"><h2><span>'+esc(FAM[f]||f)+'</span><button type="button" data-all="'+f+'">Select all shown</button></h2>';
       groups[f].forEach(function(p){
-        var tk=taken[p.key]&&!picked[p.key], v=views[p.key];
-        h+='<label class="ps-row'+(tk?' taken':'')+'"><input type="checkbox" data-k="'+esc(p.key)+'"'+(picked[p.key]?' checked':'')+(tk?' disabled':'')+'><span class="t"><b>'+esc(p.title)+(surge[p.key]?' <span title="Views at least doubled this week" style=\"font-size:11px;font-weight:700;color:#fff;background:#e8a317;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap\">&#9650; Surging</span>':'')+(langOf(p)?' <span style="font-size:11px;font-weight:600;color:#0f7a4f;border:1px solid #0f7a4f;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap">'+langOf(p)+'</span>':'')+'</b><a href="'+esc(p.path)+'" target="_blank" rel="noopener">'+esc(p.path)+'</a></span><span class="v">'+(v>=5?v.toLocaleString('en-US')+' views':'Under 5 views')+'</span><span class="p">'+(tk?'Taken':money(priceOf(p))+'/mo')+'</span></label>';
+        h+=rowHtml(p,money(priceOf(p))+'/mo');
       });
       h+='</div>';
     });
     $('list').innerHTML=h;
   }
   function summary(){
+    reprice();
     var keys=Object.keys(picked), n=keys.length, total=keys.reduce(function(s,k){return s+picked[k]},0);
     $('bar').classList.toggle('show',n>0);
     $('sum').innerHTML='<b>'+n+'</b> page'+(n===1?'':'s')+' &middot; <b>'+money(total)+'</b> a month';
-    $('go').textContent=step===1?'Continue':'Send request';
+    $('go').textContent=step===1?'Continue':'Pay '+money(total)+' a month with Stripe';
+    if($('pvLinks'))preview();
     chips();
   }
   // Packages (2026-10-08). A region's route is three named pages; its region package is the busiest (up to ten)
   // open pages in its states. One page is $50; three or more are $40 a page. Package price spreads over its pages, so the bar and the email add up.
-  var pkg=null, region=0;
-  function pkPrice(n){return n===1?50:40*n}
+  var pkg=null, region=0, base=null;
+  function pkPrice(n){return n<=2?50*n:40*n}
   var REGIONS=[
     {name:'California and Nevada',states:['CA','NV'],route:'Cajon Pass, I-15 and Los Angeles',keys:['pass:cajon','corridor:i-15','cameras:los-angeles']},
     {name:'Georgia',states:['GA'],route:'Atlanta, I-75 and Georgia',keys:['cameras:atlanta','corridor:i-75','cameras:georgia']},
@@ -291,7 +411,7 @@
     {name:'Nationwide',topic:true,nationwide:true,route:'Mile-marker map, maps and closures',keys:['home:mile-marker-map','basics:maps','live:closures']},
     {name:'Interstate corridors',topic:true,fams:['corridor'],route:'I-75, I-4 and I-15',keys:['corridor:i-75','corridor:i-4','corridor:i-15']},
     {name:'Mountain passes',topic:true,fams:['pass'],route:'Cajon, Snoqualmie and the Grapevine',keys:['pass:cajon','pass:snoqualmie','pass:grapevine']},
-    {name:'Drawbridges',topic:true,fams:['bridge','drawbridge'],route:'Seattle, Oregon and Florida drawbridges',keys:['bridge:hub','bridge:oregon','bridge:florida']}
+    {name:'Drawbridges',topic:true,fams:['bridge'],route:'Seattle, Oregon and Florida drawbridges',keys:['bridge:hub','bridge:oregon','bridge:florida']}
   ];
   function pageOf(k){return pages.find(function(x){return x.key===k})}
   function openPg(k){var p=pageOf(k);return p&&!taken[k]?p:null}
@@ -302,7 +422,14 @@
     if(f==='cameras'){var c=SLUG[id];return (c?SN[c]:id.split('-').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(' '))+' cameras'}
     return p.title.split(/ — | \| | Camera| Live | Driving|: |\? | road cameras/)[0];
   }
+  function growPct(k){var g=wk[k];return g&&g.w2?Math.round(100*(g.w1-g.w2)/g.w2):0}
+  function growBadge(k){
+    var g=wk[k], hot=g.w1>=2*g.w2;
+    return '<span title="'+g.w1.toLocaleString('en-US')+' views this week, up from '+g.w2.toLocaleString('en-US')+' last week" style="font-size:11px;font-weight:700;color:#fff;background:'+(hot?'#c2410c':'#e8a317')+';border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap">'+(hot?'Hot ':'')+'&#9650; '+growPct(k)+'%</span>';
+  }
   function viewsOf(keys){return keys.reduce(function(s,k){return s+(views[k]||0)},0)}
+  // The Seattle drawbridge page (/bridges/) brings its /seattle-drawbridges/ sub pages along at no extra cost (Leah 10/8).
+  function extrasOf(keys){return keys.indexOf('bridge:hub')>-1?pages.filter(function(p){return famOf(p.key)==='drawbridge'&&!taken[p.key]&&!langOf(p)}).map(function(p){return p.key}):[]}
   function packagesFor(r){
     var route=r.keys.filter(openPg), out=[];
     var top=route[0];
@@ -319,6 +446,12 @@
     if(reg.length>=5)out.push({name:r.name,keys:reg});
     return out;
   }
+  // Package trend: this week vs last, over pages whose slots have three weeks of counts.
+  function pkGrowth(keys){
+    var a=0,b=0;keys.forEach(function(k){if(wk[k]){a+=wk[k].w1;b+=wk[k].w2}});
+    if(b<20||a<1.25*b)return '';
+    return '<div class="pk-trend">&#9650; '+a.toLocaleString('en-US')+' views this week, up from '+b.toLocaleString('en-US')+'</div>';
+  }
   function pkRender(){
     var chip=function(r,i){return '<button type="button" class="ps-chip'+(i===region?' on':'')+'" data-r="'+i+'">'+esc(r.name)+'</button>'};
     $('pkR').innerHTML='<div class="pk-lab">By region</div><div class="ps-chips">'+REGIONS.map(function(r,i){return r.topic?'':chip(r,i)}).join('')+'</div>'+
@@ -326,12 +459,17 @@
     var list=packagesFor(REGIONS[region]);
     $('pkC').innerHTML=list.map(function(k,i){
       var n=k.keys.length, price=pkPrice(n);
-      var rows=k.keys.map(function(key){var v=views[key]||0;return '<li><span>'+esc(shortName(pageOf(key)))+'</span><span>'+(v>=5?v.toLocaleString('en-US'):'Under 5')+'</span></li>'}).join('');
+      var ex=extrasOf(k.keys);
+      var rows=k.keys.map(function(key){var pg=pageOf(key),v=views[key]||0;
+        return '<li><span><a href="'+esc(pg.path)+'" target="_blank" rel="noopener">'+esc(shortName(pg))+' &#8599;</a>'+(surge[key]?' '+growBadge(key):'')+
+          (n<=3?'<span class="pk-desc">'+esc(pg.title)+'</span>':'')+'</span><span>'+(v>=5?v.toLocaleString('en-US'):'Under 5')+' views</span></li>'}).join('')+
+        (ex.length?'<li><span>Plus '+ex.length+' Seattle drawbridge pages, included</span><span>'+viewsOf(ex).toLocaleString('en-US')+'</span></li>':'');
       return '<div class="pk-card'+(k.rec?' rec':'')+'">'+(k.rec?'<span class="pk-badge">Recommended</span>':'')+
         '<div class="pk-name">'+esc(k.name)+'</div><div class="pk-n">'+n+' page'+(n===1?'':'s')+'</div>'+
+        '<div class="pk-views">'+viewsOf(k.keys.concat(ex)).toLocaleString('en-US')+' views in 28 days</div>'+pkGrowth(k.keys)+
         '<ul class="pk-list">'+rows+'</ul>'+
-        '<div class="pk-views">'+viewsOf(k.keys).toLocaleString('en-US')+' views in 28 days</div>'+
-        '<div class="pk-price">'+money(price)+' a month</div><div class="pk-per">'+money(price/n)+' a page</div>'+
+        '<div class="pk-get">You get your logo, one sentence and a link at the top of '+(n===1?'this page':'each page')+'. One sponsor per page.</div>'+
+        '<div class="pk-price">'+money(price)+' a month</div>'+(n>1?'<div class="pk-per">'+money(price/n)+' a page</div>':'')+
         '<button type="button" data-pk="'+i+'">Choose '+esc(k.name)+'</button></div>';
     }).join('');
     $('pk').style.display=list.length?'block':'none';
@@ -340,45 +478,136 @@
   $('pkC').addEventListener('click',function(e){
     var b=e.target.closest('[data-pk]');if(!b)return;
     var k=packagesFor(REGIONS[region])[+b.getAttribute('data-pk')], n=k.keys.length;
-    pkg={name:k.name,n:n,price:pkPrice(n)};picked={};
-    k.keys.forEach(function(key){picked[key]=pkPrice(n)/n});
-    fam='picked';step=2;$('details').classList.add('show');render();summary();
-    $('details').scrollIntoView({behavior:'smooth'});
+    pkg={name:k.name,n:n,price:pkPrice(n)};base=region;picked={};
+    k.keys.forEach(function(key){picked[key]=1});
+    extrasOf(k.keys).forEach(function(key){picked[key]=0});
+    fam='mine';step=2;$('details').classList.add('show');summary();render();
+    $('list').scrollIntoView({behavior:'smooth'});
   });
-  // Editing the picks by hand leaves the package and goes back to the per-page rate.
-  function dropPkg(){if(!pkg)return;pkg=null;Object.keys(picked).forEach(function(k){picked[k]=priceOf(pageOf(k))})}
+  // Editing the picks by hand leaves the package, drops its included pages and goes back to the per-page rate.
+  // Hand picks: /bridges/ brings its sub pages at $0; unpicking it takes them away.
+  function syncExtras(){var ex=extrasOf(Object.keys(picked));Object.keys(picked).forEach(function(k){if(picked[k]===0&&ex.indexOf(k)<0)delete picked[k]});ex.forEach(function(k){if(!(k in picked))picked[k]=0});render()}
+  function dropPkg(){pkg=null}
+  // One rule for every selection: one or two pages are $50 each, three or more are $40 each.
+  // Included pages (the Seattle drawbridge sub pages) stay at 0.
+  function paidKeys(){return Object.keys(picked).filter(function(k){return picked[k]!==0})}
+  function reprice(){var pk=paidKeys(), per=pk.length<=2?50:40;pk.forEach(function(k){picked[k]=per})}
   $('chips').addEventListener('click',function(e){var b=e.target.closest('[data-f]');if(!b)return;fam=b.getAttribute('data-f');chips();render()});
-  $('list').addEventListener('change',function(e){var k=e.target.getAttribute('data-k');if(!k)return;dropPkg();var p=pages.find(function(x){return x.key===k});if(e.target.checked)picked[k]=priceOf(p);else delete picked[k];summary()});
-  $('list').addEventListener('click',function(e){var b=e.target.closest('[data-all]');if(!b)return;e.preventDefault();dropPkg();[].forEach.call($('list').querySelectorAll('.ps-group'),function(g){if(g.querySelector('[data-all]')!==b)return;[].forEach.call(g.querySelectorAll('input[data-k]:not([disabled])'),function(i){var p=pages.find(function(x){return x.key===i.getAttribute('data-k')});picked[p.key]=priceOf(p);i.checked=true})});summary()});
+  $('list').addEventListener('change',function(e){var k=e.target.getAttribute('data-k');if(!k)return;dropPkg();var p=pages.find(function(x){return x.key===k});if(e.target.checked)picked[k]=1;else delete picked[k];syncExtras();summary();if(fam==='mine')render()});
+  $('list').addEventListener('click',function(e){var f2=e.target.closest('[data-f2]');if(f2){e.preventDefault();fam='all';chips();render();return}var b=e.target.closest('[data-all]');if(!b)return;e.preventDefault();dropPkg();[].forEach.call($('list').querySelectorAll('.ps-group'),function(g){if(g.querySelector('[data-all]')!==b)return;[].forEach.call(g.querySelectorAll('input[data-k]:not([disabled])'),function(i){var p=pages.find(function(x){return x.key===i.getAttribute('data-k')});picked[p.key]=priceOf(p);i.checked=true})});syncExtras();summary()});
   ['q','sort','showTaken','st'].forEach(function(id){$(id).addEventListener(id==='q'?'input':'change',render)});
   $('go').addEventListener('click',function(){
     if(step===1){step=2;$('details').classList.add('show');$('details').scrollIntoView({behavior:'smooth'});summary();return}
-    var f=$('details');if(!f.reportValidity())return;
-    var body={pages:Object.keys(picked),company:$('company').value.trim(),email:$('email').value.trim(),url:$('site').value.trim(),line:$('line').value.trim()};
-    var list=body.pages.map(function(k){var p=pages.find(function(x){return x.key===k});return '- '+p.title+' ($'+picked[k]+'/mo) https://milecheckapp.com'+p.path}).join('\n');
+    var f=$('details');
+    // Website and phone are separate; the button's choice must be filled in.
+    var tg=$('target').value,need=tg==='phone'?$('phone'):$('site');
+    $('site').setCustomValidity('');$('phone').setCustomValidity('');
+    if(!need.value.trim())need.setCustomValidity(tg==='phone'?'Add the phone number your button should call.':'Add the website your button should open.');
+    var own=document.querySelector('input[name=btn][value=own]');if(own&&own.checked&&!$('btnOwn').value.trim())$('btnOwn').setCustomValidity('Add 2 to 4 words for your button.');
+    if(!f.reportValidity())return;
+    var body={pages:Object.keys(picked),company:$('company').value.trim(),email:$('email').value.trim(),billing:$('billing').value.trim(),website:siteOf($('site').value),phone:$('phone').value.trim(),url:$('target').value==='phone'?telOf($('phone').value):siteOf($('site').value),line:$('line').value.trim(),cta:$('cta').value.trim()||'Call us'};
+    var list=body.pages.map(function(k){var p=pages.find(function(x){return x.key===k});return '- '+p.title+' ('+(picked[k]?'$'+picked[k]+'/mo':'included')+') https://milecheckapp.com'+p.path}).join('\n');
     var total=body.pages.reduce(function(s,k){return s+picked[k]},0);
-    var mail='mailto:sales@milecheckapp.com?subject='+encodeURIComponent('Sponsor request: '+body.company+', '+body.pages.length+' page'+(body.pages.length===1?'':'s'))+'&body='+encodeURIComponent('Company: '+body.company+'\nEmail: '+body.email+'\nLink for the slot: '+body.url+'\nSentence: '+body.line+'\n\n'+(pkg?'Package: '+pkg.name+' ('+pkg.n+' page'+(pkg.n===1?'':'s')+', $'+pkg.price+' a month)\n':'')+'Pages ('+body.pages.length+', $'+total+' a month'+(pkg?'':' at the founding rate')+'):\n'+list+'\n\n(Logo attached if I have it.)\n');
-    location.href=mail;
-    if(!$('sent'))$('details').insertAdjacentHTML('beforeend','<p class="ps-msg" id="sent"><b>Your email app should open with your request.</b> If it didn&rsquo;t, <a href="'+mail+'">tap here</a> or email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> with the pages you picked.</p>');
+    var mail='mailto:sales@milecheckapp.com?subject='+encodeURIComponent('Sponsor request: '+body.company+', '+body.pages.length+' page'+(body.pages.length===1?'':'s'))+'&body='+encodeURIComponent('Company: '+body.company+'\nContact email: '+body.email+'\nBilling email: '+(body.billing||'same as contact')+'\nWebsite: '+(body.website||'none')+'\nPhone: '+(body.phone||'none')+'\nButton goes to: '+body.url+'\nSentence: '+body.line+'\nButton text: '+body.cta+'\n\n'+(pkg?'Package: '+pkg.name+' ('+pkg.n+' page'+(pkg.n===1?'':'s')+', $'+pkg.price+' a month)\n':'')+'Pages ('+body.pages.length+', $'+total+' a month'+(pkg?'':' at the founding rate')+'):\n'+list+'\n\n(Logo attached if I have it.)\n');
+    $('mailAlt').href=mail;
+    // Stripe Checkout through our server, which re-checks the pages and sets the price itself.
+    // Any failure (not set up, page taken, Stripe down) falls back to the email request.
+    var go=$('go');go.disabled=true;go.textContent='Opening Stripe…';
+    fetch(W+'/sponsor-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pages:body.pages,contact_email:body.email,billing_email:body.billing,company:body.company,url:body.url,website:body.website,phone:body.phone,line:body.line,cta:body.cta,pkg:pkg?pkg.name:''})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,j:j}})})
+      .then(function(x){if(!(x.ok&&x.j.url&&x.j.id))throw new Error(x.j.error||'');
+        // The logo is required: upload it to this checkout before sending them to Stripe.
+        go.textContent='Uploading your logo…';var fd=new FormData();fd.append('session_id',x.j.id);fd.append('logo',$('logo').files[0]);
+        return fetch(W+'/sponsor-logo',{method:'POST',body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(u){if(!r.ok||!u.ok)throw new Error(u.error||'The logo did not upload.');location.href=x.j.url;})});})
+      .catch(function(e){go.disabled=false;summary();
+        var msg='<b>Stripe checkout isn&rsquo;t available right now.</b> '+(e&&e.message?esc(e.message)+' ':'')+'<a href="'+mail+'">Send your request by email instead</a> and we&rsquo;ll send an invoice.';
+        if($('sent'))$('sent').innerHTML=msg;else $('details').insertAdjacentHTML('beforeend','<p class="ps-msg" id="sent">'+msg+'</p>');});
   });
+  // A bare domain gets https; a phone number becomes a tel: link for tap-to-call.
+  function siteOf(v){v=(v||'').trim();if(v&&!/^[a-z]+:/i.test(v))return 'https://'+v;return v}
+  function telOf(v){v=(v||'').replace(/[^\d+]/g,'');return v?'tel:'+v:''}
+  // Live preview, plus links that show it in the real slot on their own pages (?sponsor=preview).
+  function preview(){
+    var nm=$('company').value.trim()||'Your company', ln=$('line').value.trim()||'One sentence about what you do.', ct=$('cta').value.trim()||'Call us';
+    var sh=document.querySelector('.pk-share a');if(sh)sh.href=shareMail();
+    $('pvName').textContent=nm;$('pvLine').textContent=ln;$('pvCta').textContent=ct+' \u2192';
+    var pk=paidKeys().map(pageOf).filter(Boolean).sort(function(a,b){return (views[b.key]||0)-(views[a.key]||0)}).slice(0,3);
+    var qs='?sponsor=preview&name='+encodeURIComponent(nm)+'&copy='+encodeURIComponent(ln)+'&cta='+encodeURIComponent(ct);
+    $('pvLinks').innerHTML=pk.length?'See it on your pages: '+pk.map(function(p){return '<a href="'+esc(p.path+qs)+'" target="_blank" rel="noopener">'+esc(shortName(p))+' &#8599;</a>'}).join(' &middot; '):'';
+    // Cropped view of one of their real pages with the preview in the slot. Reload is debounced while typing.
+    if(!pk.length){$('pvClip').style.display='none';$('pvTabs').innerHTML='';$('pvSlot').style.display='';return}
+    if(!pk.some(function(p){return p.key===pvKey}))pvKey=pk[0].key;
+    $('pvTabs').innerHTML=pk.length>1?pk.map(function(p){return '<button type="button" data-pv="'+esc(p.key)+'"'+(p.key===pvKey?' class="on"':'')+'>'+esc(shortName(p))+'</button>'}).join(''):'';
+    var src=pageOf(pvKey).path+qs;
+    $('pvClip').href=src;$('pvClip').style.display='block';$('pvSlot').style.display='none';pvFit();
+    clearTimeout(pvT);pvT=setTimeout(function(){if($('pvFrame').getAttribute('src')!==src)$('pvFrame').setAttribute('src',src)},600);
+  }
+  var pvKey=null,pvT=0;
+  var pvDev=null;
+  function pvFit(){var c=$('pvClip'),f=$('pvFrame');if(!c||c.style.display==='none')return;var w=c.clientWidth;if(!pvDev)pvDev=w<520?'phone':'computer';var iw=pvDev==='phone'?390:1000;
+    c.style.maxWidth=pvDev==='phone'?'360px':'';w=c.clientWidth;
+    [].forEach.call($('pvDev').querySelectorAll('button'),function(b){b.className=b.getAttribute('data-dev')===pvDev?'on':''});f.style.width=iw+'px';f.style.transform='scale('+(w/iw)+')'}
+  window.addEventListener('resize',pvFit);
+  $('pvDev').addEventListener('click',function(e){var b=e.target.closest('[data-dev]');if(!b)return;pvDev=b.getAttribute('data-dev');pvFit()});
+  $('pvTabs').addEventListener('click',function(e){var b=e.target.closest('[data-pv]');if(!b)return;pvKey=b.getAttribute('data-pv');preview()});
+  ['company','line','cta'].forEach(function(id){$(id).addEventListener('input',preview)});
+  $('phone').addEventListener('input',function(){this.setCustomValidity('');});
+  $('site').addEventListener('input',function(){this.setCustomValidity('');});
+  // One question sets both the button's words and where it goes.
+  function btnSync(){var r=document.querySelector('input[name=btn]:checked'),v=r?r.value:'Call us|phone';
+    if(v==='own'){$('cta').value=$('btnOwn').value.trim();$('target').value=$('btnOwnTo').value;}else{var s=v.split('|');$('cta').value=s[0];$('target').value=s[1];}
+    $('btnOwn').setCustomValidity('');$('site').setCustomValidity('');preview();}
+  $('btnOpts').addEventListener('change',btnSync);$('btnOwn').addEventListener('input',function(){var o=document.querySelector('input[name=btn][value=own]');o.checked=true;btnSync();});
+  $('btnOwn').addEventListener('focus',function(){document.querySelector('input[name=btn][value=own]').checked=true;btnSync();});
+  // Logo: check type and size, show it at slot size (36 px tall, up to 132 px wide), and say whether it fits.
+  $('logo').addEventListener('change',function(){
+    var f=this.files&&this.files[0],inp=this,msg=$('lgMsg');inp.setCustomValidity('');
+    if(!f){$('lgPv').hidden=true;return}
+    if(['image/png','image/svg+xml','image/jpeg','image/webp'].indexOf(f.type)<0){inp.setCustomValidity('Logo must be PNG, SVG, JPG or WebP.');inp.reportValidity();$('lgPv').hidden=true;return}
+    if(f.size>2*1024*1024){inp.setCustomValidity('Logo must be under 2 MB.');inp.reportValidity();$('lgPv').hidden=true;return}
+    var u=URL.createObjectURL(f),im=$('lgImg');im.onload=function(){
+      var w=im.naturalWidth,h=im.naturalHeight,notes=[];
+      if(f.type==='image/svg+xml')notes.push('SVG scales to any size.');
+      else{notes.push(w+' &times; '+h+' px.');if(w<264||h<72)notes.push('<span class="lg-warn">Smaller than 264 &times; 72 px, so it may look soft on sharp screens.</span>');}
+      if(h&&w/h<1.5)notes.push('<span class="lg-warn">This logo is tall for the slot, so it will show small. A wide version works best.</span>');
+      if(notes.length===1)notes.push('Good fit.');
+      msg.innerHTML='This is how it shows in the slot. '+notes.join(' ');};
+    im.src=u;$('lgPv').hidden=false;
+  });
+  function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
   Promise.all([
     fetch('/data/sponsor-pages.json').then(function(r){return r.json()}),
     fetch('/data/sponsors.json').then(function(r){return r.json()}).catch(function(){return {}}),
     fetch(W+'/sponsor-stats?days=28').then(function(r){return r.json()}).catch(function(){return {}}),
     fetch(W+'/sponsor-stats?days=7').then(function(r){return r.json()}).catch(function(){return {}}),
-    fetch(W+'/sponsor-stats?days=14').then(function(r){return r.json()}).catch(function(){return {}})
+    fetch(W+'/sponsor-stats?days=14').then(function(r){return r.json()}).catch(function(){return {}}),
+    fetch(W+'/sponsor-stats?days=21').then(function(r){return r.json()}).catch(function(){return {}}),
+    fetch(W+'/sponsor-claims').then(function(r){return r.json()}).catch(function(){return {}})
   ]).then(function(a){
-    // Surging = last 7 days at least double the 7 days before, with 30+ views this week and 10+ the week before.
-    // Off until Oct 16 2026: some slots went in mid-September, so earlier "doubling" was just counting starting.
-    var w1={},w2={};((a[3]&&a[3].bySlot)||[]).forEach(function(x){w1[x.slot]=x.impressions});((a[4]&&a[4].bySlot)||[]).forEach(function(x){w2[x.slot]=x.impressions});
-    if(Date.now()>=Date.UTC(2026,9,16))Object.keys(w1).forEach(function(k){var prev=(w2[k]||0)-w1[k];if(w1[k]>=30&&prev>=10&&w1[k]>=2*prev)surge[k]=1});
+    // Growing = this week up 25%+ on last week, with 30+ views this week and 20+ last week. Hot = doubled.
+    // The slot must also have views three weeks back: slots went in on different dates, and a slot added
+    // last week would otherwise look like it grew (corridor:i-40 read +148% on 10/8 for that reason).
+    var c7={},c14={},c21={};
+    ((a[3]&&a[3].bySlot)||[]).forEach(function(x){c7[x.slot]=x.impressions});
+    ((a[4]&&a[4].bySlot)||[]).forEach(function(x){c14[x.slot]=x.impressions});
+    ((a[5]&&a[5].bySlot)||[]).forEach(function(x){c21[x.slot]=x.impressions});
+    Object.keys(c7).forEach(function(k){
+      var w1=c7[k], w2=(c14[k]||0)-w1, w3=(c21[k]||0)-(c14[k]||0);
+      if(w3>=1)wk[k]={w1:w1,w2:w2};
+      if(w3>=1&&w2>=20&&w1>=30&&w1>=1.25*w2)surge[k]=1;
+    });
     pages=(a[0].pages||[]).slice();
     var slots=(a[1]&&a[1].slots)||{};
-    Object.keys(slots).forEach(function(k){var s=slots[k];if(s&&s.id&&!/demo/i.test(s.id))taken[k]=1});
+    Object.keys(slots).forEach(function(k){var s=slots[k];if(s&&s.id&&!/demo/i.test(s.id))taken[k]='sold'});
+    // Paid but not live yet (sold), or in someone's open checkout (pending). Greyed out, can't be picked.
+    var cl=(a[6]&&a[6].claims)||{};Object.keys(cl).forEach(function(k){if(!taken[k])taken[k]=cl[k]});
     ((a[2]&&a[2].bySlot)||[]).forEach(function(x){views[x.slot]=x.impressions});
     var pre=new URLSearchParams(location.search).get('page');
-    if(pre){pre.split(',').forEach(function(k){var p=pages.find(function(x){return x.key===k});if(p&&!taken[k]){picked[k]=priceOf(p);fam='picked'}})}
-    stateOpts();chips();render();summary();pkRender();
+    if(pre){pre.split(',').forEach(function(k){var p=pages.find(function(x){return x.key===k});if(p&&!taken[k]){picked[k]=1;fam='mine'}})}
+    var rq=new URLSearchParams(location.search).get('region');
+    if(rq){REGIONS.forEach(function(r,i){if(slug(r.name)===slug(rq))region=i})}
+    stateOpts();chips();render();summary();pkRender();preview();
+    if(rq)$('pk').scrollIntoView();
     fetch(W+'/sponsor-stats?minutes=30').then(function(r){return r.json()}).then(function(d){
       var n=d&&d.ok&&d.minutes===30&&d.total?d.total.impressions:0;
       if(n>0){$('live30').textContent='Live: sponsor spots across the site were seen '+n.toLocaleString('en-US')+' times in the last 30 minutes.';$('live30').style.display='block'}

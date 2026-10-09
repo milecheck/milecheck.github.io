@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New sponsors (internal)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    body{margin:0;background:#0f1116;color:#e8e8e8;font-family:-apple-system,sans-serif;padding:32px 20px}
+    .wrap{max-width:900px;margin:0 auto}
+    h1{font-size:20px;margin:0 0 6px}
+    .sub{color:#9aa0a8;font-size:13px;margin:0 0 24px;line-height:1.5}
+    input{width:100%;padding:12px 14px;font-size:15px;border-radius:8px;border:1px solid #333;background:#1a1d24;color:#fff;margin-bottom:12px;box-sizing:border-box}
+    button{padding:9px 16px;font-size:14px;font-weight:600;border-radius:8px;border:0;background:#00A86B;color:#fff;cursor:pointer}
+    #err{color:#e08a6b;font-size:13px;margin-top:8px;display:none}
+    #data{display:none}
+    a.refresh{color:#00A86B;font-size:13px;cursor:pointer;text-decoration:underline}
+    .card{border:1px solid #262a33;border-radius:12px;padding:14px 16px;margin-top:14px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .logo{flex:none;width:150px;height:56px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px;box-sizing:border-box}
+    .logo img{max-width:132px;max-height:36px;object-fit:contain}
+    .meta{flex:1;min-width:240px;font-size:13.5px;line-height:1.6}
+    .meta b{font-size:15px}
+    .k{color:#9aa0a8}
+    .empty{color:#9aa0a8;font-size:13px;margin-top:12px}
+    ol{font-size:13.5px;line-height:1.6;color:#c9cdd2;padding-left:20px}
+    .pd{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;margin-right:4px}
+    .pd.ok{background:#00A86B;color:#fff}
+    .pd.mid{background:#e8a317;color:#111}
+    .pd.no{background:#3a3f4a;color:#c9cdd2}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>New sponsors</h1>
+    <p class="sub">Internal only. Not linked anywhere, no search indexing. Every logo uploaded with a sponsor checkout, newest first. Payment details are in Stripe: Subscriptions, then open the subscription for its pages, sentence, button and link.</p>
+
+    <div id="gate">
+      <input type="password" id="secret" placeholder="Admin secret (same as the sign-up lists page)">
+      <button onclick="load()">View sponsors</button>
+      <div id="err">Wrong secret, or the endpoint is down.</div>
+    </div>
+
+    <div id="data">
+      <a class="refresh" onclick="load()">Refresh</a>
+      <h2 style="font-size:15px;margin:22px 0 4px">To put a sponsor live (within 3 business days of payment)</h2>
+      <ol>
+        <li>Only <b>Paid</b> sponsors go live. Check the payment in Stripe and note the pages, sentence, button and link.</li>
+        <li>Download the logo here.</li>
+        <li>Ask Claude to put the sponsor live with those details. It adds them to <code>data/sponsors.json</code>, runs the slot script and pushes the site after your go.</li>
+        <li>Email the contact that the slot is live.</li>
+      </ol>
+      <div id="list"></div>
+    </div>
+  </div>
+
+  <script>
+    const KEY = 'preorder_admin_secret';
+    const API = 'https://milepost-proxy.leahgerber93.workers.dev';
+    const stored = localStorage.getItem(KEY);
+    if (stored) document.getElementById('secret').value = stored;
+    const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    async function file(key, secret) {
+      const r = await fetch(API + '/sponsor-logo/file?key=' + encodeURIComponent(key), { headers: { 'x-admin-secret': secret } });
+      if (!r.ok) throw new Error('file');
+      return r.blob();
+    }
+
+    async function load() {
+      const secret = document.getElementById('secret').value.trim();
+      const err = document.getElementById('err');
+      err.style.display = 'none';
+      try {
+        const res = await fetch(API + '/sponsor-logo/list', { headers: { 'x-admin-secret': secret } });
+        if (!res.ok) throw new Error('bad response');
+        const data = await res.json();
+        localStorage.setItem(KEY, secret);
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('data').style.display = 'block';
+        // Paid first, then open checkouts, then abandoned ones; newest first within each.
+        const rank = { complete: 0, open: 1, unknown: 2, expired: 3 };
+        const logos = (data.logos || []).sort((a, b) => ((rank[a.status] ?? 2) - (rank[b.status] ?? 2)) || String(b.uploaded).localeCompare(String(a.uploaded)));
+        const badge = (s) => s === 'complete' ? '<span class="pd ok">Paid</span>' : s === 'open' ? '<span class="pd mid">Checkout open, not paid yet</span>' : s === 'expired' ? '<span class="pd no">Not paid. Checkout expired</span>' : '<span class="pd mid">Payment status unknown</span>';
+        const list = document.getElementById('list');
+        if (!logos.length) { list.innerHTML = '<p class="empty">No logos uploaded yet.</p>'; return; }
+        list.innerHTML = logos.map((l, i) =>
+          '<div class="card"><div class="logo"><img id="img' + i + '" alt=""></div><div class="meta">' +
+          badge(l.status) + ' <b>' + esc(l.company || 'No company name') + '</b>' + (/cs_test_/.test(l.key) ? ' <span class="k">(test mode)</span>' : '') + '<br>' +
+          '<span class="k">Pages:</span> ' + esc((l.pages || '').split(',').join(', ')) + '<br>' +
+          '<span class="k">Contact:</span> ' + esc(l.contact || '?') + ' &middot; <span class="k">Billing:</span> ' + esc(l.email || '?') + '<br>' +
+          '<span class="k">Uploaded:</span> ' + esc(new Date(l.uploaded).toLocaleString()) + ' &middot; ' + esc(l.file || '') + ', ' + Math.round((l.size || 0) / 1024) + ' KB<br>' +
+          '<button style="margin-top:8px" data-i="' + i + '">Download logo</button></div></div>').join('');
+        logos.forEach(async (l, i) => {
+          try { const b = await file(l.key, secret); document.getElementById('img' + i).src = URL.createObjectURL(b); } catch (e) {}
+        });
+        list.querySelectorAll('button[data-i]').forEach((btn) => btn.onclick = async () => {
+          const l = logos[+btn.dataset.i];
+          const b = await file(l.key, secret);
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(b);
+          a.download = (l.company || 'sponsor').replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-logo.' + l.key.split('.').pop();
+          a.click();
+        });
+      } catch (e) {
+        err.style.display = 'block';
+      }
+    }
+    if (stored) load();
+  </script>
+</body>
+</html>
