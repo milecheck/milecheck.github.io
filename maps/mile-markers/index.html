@@ -65,6 +65,8 @@
           .mm-find:hover{background:#00b373;}
           .mm-find[disabled]{opacity:.6;cursor:wait;}
           .mm-answer{font-size:16px;line-height:1.5;color:#0F1419;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:12px 14px;margin:0 0 14px;}
+          .mm-dash{font-size:14px;color:#525252;margin:-6px 0 14px;}
+          .mm-dash a{color:#007a4d;font-weight:700;}
           .mm-answer small{display:block;color:#525252;font-size:13px;margin-top:2px;}
           .mm-list{margin:4px 0 2px 18px;padding:0;}
           .mm-pin.mm-near{background:#0F1419;font-size:13px;padding:5px 8px;}
@@ -123,6 +125,7 @@
           </div>
         </div>
         <p class="mm-answer" id="mile-map-answer" role="status" hidden></p>
+        <p class="mm-dash" id="mile-map-dash" hidden>We're building a dash display that shows your mile marker. We need sign-ups to get funding to make it real. <a href="/dash-preorder.html?utm_source=site&amp;utm_campaign=dash-mile-marker-map">Sign up</a></p>
         <div id="mile-map"></div>
         <p class="mile-map-status" id="mile-map-status">Loading mile markers&hellip;</p>
       </div>
@@ -227,7 +230,7 @@
       var answer=document.getElementById('mile-map-answer');
       var CODES={};STATES.forEach(function(s){CODES[s[0]]=s[1];});
       function miles(a,b,c,d){var R=3958.8,r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2);var h=x*x+Math.cos(a*r)*Math.cos(c*r)*y*y;return 2*R*Math.asin(Math.sqrt(h));}
-      function say(html){answer.innerHTML=html;answer.hidden=false;}
+      function say(html){answer.innerHTML=html;answer.hidden=false;document.getElementById('mile-map-dash').hidden=false;}
       function candidates(lat,lon){
         var B=(window.MCRoutes&&MCRoutes.STATE_BOUNDS)||{},out=[];
         for(var c in B){if(!CODES[c])continue;var b=B[c];if(lat>=b.minLat-0.1&&lat<=b.maxLat+0.1&&lon>=b.minLon-0.1&&lon<=b.maxLon+0.1)out.push(c);}
