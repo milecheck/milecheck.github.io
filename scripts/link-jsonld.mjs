@@ -79,6 +79,9 @@ function orgDefinition(existing) {
   return o;
 }
 
+// Google's Dataset parser wants a typed object for creator/publisher, not a bare @id reference.
+const DATASET_ORG = { '@type': 'Organization', '@id': ORG, name: 'MileCheck', url: `${BASE}/` };
+
 function datasetFor(rel, canon) {
   // National: blog/road-report-<month>-<year>.html ; states: blog/highway-report-<month>-<year>-states/<state>.html
   let m = rel.match(/^blog\/road-report-([a-z]+-\d{4})\.html$/), state = null;
@@ -106,8 +109,8 @@ function datasetFor(rel, canon) {
       ? { '@type': 'Place', name: stateName === 'British Columbia' ? 'British Columbia, Canada' : `${stateName}, United States` }
       : { '@type': 'Place', name: juris.includes('BC') ? 'United States and British Columbia, Canada' : 'United States' },
     measurementTechnique: d.method || undefined,
-    creator: { '@id': ORG },
-    publisher: { '@id': ORG },
+    creator: DATASET_ORG,
+    publisher: DATASET_ORG,
     isPartOf: { '@id': SITE },
     isAccessibleForFree: true,
     distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `${BASE}/${dataRel}` }],
@@ -146,6 +149,7 @@ for (const f of walk(ROOT)) {
       d = { ...refOurs(d), '@id': SITE, url: `${BASE}/`, publisher: { '@id': ORG } };
     } else {
       d = refOurs(d);
+      if (has(d, 'Dataset')) { d.creator = DATASET_ORG; d.publisher = DATASET_ORG; }
       if (MAIN.some((t) => has(d, t))) {
         const t = typesOf(d).find((x) => MAIN.includes(x));
         if (!d['@id']) { d['@id'] = `${canon}#${t.toLowerCase()}`; idsAdded++; }
