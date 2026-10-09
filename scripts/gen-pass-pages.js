@@ -877,10 +877,9 @@ ${p.snow || p.plows ? `
 
   <section class="co-guide">
     <h2>${p.aboutH || `About ${p.name}`}</h2>
-    <p><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>
+    <p style="margin:10px 0 18px"><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>
     <p class="lede">${p.lede || `${p.name} carries ${p.route} over the ${p.range} at ${p.elev}. Here's what to watch, and when it bites.`}</p>
 ${segsHtml}
-    <div class="co-seg"><h3>Watch it live while you drive</h3><p>${p.driveP || `The cameras and alerts above are the stationary view, the ${p.dot} feeds you'd check before you leave. In the MileCheck app, the nearest camera and your exact mile marker follow you up the grade automatically, hands-free on CarPlay and Android Auto, so you're never guessing which stretch you're on.`}</p></div>
   </section>
 
   <section class="co-faq">

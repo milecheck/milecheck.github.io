@@ -65,7 +65,6 @@ const CORRIDORS = [
     segs: [
       ['The longest interstate', `At about 3,020 miles, I-90 is the longest interstate highway in the United States — a continuous route across the northern tier from Seattle to Boston. It climbs the Cascades at <a href="../../passes/snoqualmie/">Snoqualmie Pass</a>, crosses Montana and the Dakotas, threads the Great Lakes states, and runs the width of New York.`],
       ['Where the weather bites', `Three trouble zones dominate I-90 in winter: <a href="../../passes/snoqualmie/">Snoqualmie Pass</a> in Washington, where avalanche control and heavy snow close the highway several times a season; the open northern plains of Montana and South Dakota, where ground blizzards and wind drop visibility to nothing; and the Great Lakes snow belt from Wisconsin through Ohio and western New York, where lake-effect bands can bury a stretch in hours.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the stationary view — the DOT feeds you'd check before you leave. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-90 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-90, straight from each state DOT; a red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href="../../closures/">road closures map</a>. The most common winter closures are at <a href="../../passes/snoqualmie/">Snoqualmie Pass</a> and across the northern plains.`],
@@ -84,7 +83,6 @@ const CORRIDORS = [
     segs: [
       ['The busiest interstate', `I-95 runs about 1,908 miles up the entire East Coast and carries more traffic than any other interstate. It links nearly every major city on the seaboard — Miami, Jacksonville, Savannah, the Carolinas, Washington, Baltimore, Philadelphia, New York, Boston, and on into New England.`],
       ['Where it slows down', `Congestion is the everyday story on I-95 — the DC–Baltimore–Philadelphia–New York–Boston stretch is chronically jammed, and a single incident ripples for miles. Weather adds to it: Northeast snow and ice from Pennsylvania to Maine in winter, and Atlantic hurricanes and tropical flooding across the Southeast in late summer, when evacuations can turn the whole corridor northbound.`],
-      ['Watch it live while you drive', `The cameras and alerts above are what you'd check before leaving. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto — handy on a road this long and this busy.`],
     ],
     faq: [
       ['Is I-95 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-95 from the DOT feeds we cover; a red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href="../../closures/">road closures map</a>. (Camera and alert coverage is live in most I-95 states and still filling in along the mid-Atlantic.)`],
@@ -104,7 +102,6 @@ const CORRIDORS = [
     segs: [
       ['Coast to coast', `I-80 runs about 2,900 miles from the San Francisco Bay Area to the edge of New York City, roughly tracing the old transcontinental routes. It crosses the Sierra Nevada, the Nevada and Utah desert, the Wasatch, the Great Plains, and the industrial Midwest.`],
       ['Where the weather bites', `Two mountain crossings define I-80's winter: <a href="../../passes/donner/">Donner Pass</a> in the Sierra Nevada, one of the snowiest stretches of interstate anywhere, and <a href="../../passes/parleys/">Parleys Summit</a> east of Salt Lake City. Beyond the mountains, the open stretches across Nevada, Wyoming, and Nebraska are notorious for wind and ground blizzards that close the road with no mountains in sight.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you over Donner and across the desert, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-80 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-80, straight from each state DOT; a red banner appears at the top of this page if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything. The most common winter closure is <a href="../../passes/donner/">Donner Pass</a>.`],
@@ -123,7 +120,6 @@ const CORRIDORS = [
     segs: [
       ['The southern route', `I-10 runs about 2,460 miles across the bottom of the country, from Los Angeles through Phoenix, the West Texas desert, the Gulf Coast, and on to Jacksonville, Florida. It's the warm-weather transcontinental route — but "warm" doesn't mean trouble-free.`],
       ['Where the weather bites', `The desert stretch through Arizona is hit by summer <strong>dust storms</strong> — haboobs that drop visibility to zero in seconds and cause chain-reaction pileups. Along the Gulf Coast, from Louisiana through Alabama to Florida, hurricanes, tropical flooding, and dense fog close or evacuate the highway. The cameras tell you which hazard, if any, is live today.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you across the desert and the coast, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-10 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-10 from the state DOT feeds we cover; a red banner appears at the top of this page if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for the whole country.`],
@@ -142,7 +138,6 @@ const CORRIDORS = [
     segs: [
       ['The LA–Las Vegas–Salt Lake corridor', `I-15 runs about 1,433 miles from San Diego up through the Los Angeles Basin, over <a href="../../passes/cajon/">Cajon Pass</a>, across the Mojave to Las Vegas, over the mountains to Salt Lake City, and north through Idaho into Montana. The LA–Vegas stretch is one of the busiest desert highways in the country.`],
       ['Where the weather bites', `The Southern California end climbs <a href="../../passes/cajon/">Cajon Pass</a>, a wind, snow, and wildfire funnel between the LA Basin and the High Desert. Further north, winter snow and blowing snow hit the Utah, Idaho, and Montana stretches, and the Virgin River Gorge on the Arizona line is a narrow, weather-exposed choke point.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you from the desert to the mountains, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-15 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-15 from the state DOT feeds; a red banner appears at the top of this page if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything.`],
@@ -160,7 +155,6 @@ const CORRIDORS = [
     segs: [
       ['The Central Florida spine', `I-4 runs about 132 miles across the middle of Florida, linking Tampa, Lakeland, Orlando, and the theme-park corridor out to Daytona Beach on the Atlantic. It's the main route through the fastest-growing part of the state — and one of the busiest.`],
       ['Where it slows down', `Congestion and crashes are the everyday story on I-4, especially through Orlando and the attractions area. Summer thunderstorms and dense morning fog cut visibility fast, and the corridor sees hurricane and tropical-storm impacts in late summer.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you across Central Florida, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-4 backed up right now?', `The <a href="#comap">live map above</a> shows active incidents and closures along I-4, straight from FDOT. For every Florida camera, see the <a href="../../cameras/florida/">Florida traffic cameras</a> page.`],
@@ -178,7 +172,6 @@ const CORRIDORS = [
     segs: [
       ['Florida to the Great Lakes', `I-75 runs about 1,786 miles from Miami and Naples up through Georgia and Atlanta, across the Tennessee and Kentucky mountains, into Ohio and Michigan and on to the Upper Peninsula. In Florida it includes "Alligator Alley," the long straight run across the Everglades.`],
       ['Where the trouble is', `Congestion dominates the metro stretches — Atlanta's I-75 is among the busiest in the Southeast, and Detroit's is heavy too. Weather-wise, the northern end sees Great Lakes snow through Ohio and Michigan, while Florida brings summer thunderstorms, fog, and hurricanes.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-75 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-75 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything.`],
@@ -196,7 +189,6 @@ const CORRIDORS = [
     segs: [
       ['Across the northern tier', `I-94 runs about 1,585 miles from Billings, Montana across the Dakotas and Minnesota, through Wisconsin and the Chicago area, and into Michigan to Detroit and Port Huron. It's a major freight and commuter route through the Upper Midwest.`],
       ['Where the weather bites', `The open plains of eastern Montana and the Dakotas bring ground blizzards and wind that close the road with no mountains in sight; from Wisconsin through Michigan, Great Lakes and lake-effect snow are the winter story. Milwaukee, Chicago, and Detroit add heavy metro congestion.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you across the plains and the lakes, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-94 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-94 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything.`],
@@ -216,7 +208,6 @@ const CORRIDORS = [
     segs: [
       ['Over the Rockies', `I-70 runs about 2,153 miles from central Utah to just outside Baltimore, and its signature stretch is Colorado — climbing out of Denver into the high country through <a href="../../passes/vail/">Vail Pass</a> and the <a href="../../passes/eisenhower/">Eisenhower Tunnel</a>, the highest point on the entire Interstate Highway System at 11,158 feet.`],
       ['Where the weather bites', `The I-70 mountain corridor west of Denver is one of the most weather-sensitive stretches of interstate in the country — snow, avalanche control closures, and holiday ski traffic all combine through Georgetown, the tunnel, and Vail Pass. East of the Rockies, the high plains of eastern Colorado and Kansas bring wind and occasional ground blizzards; further east, Midwest ice storms hit Missouri, Illinois, Indiana, and Ohio in winter.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you through the tunnel and over the passes, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-70 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-70, straight from each state DOT; a red banner appears at the top of this page if a stretch is fully closed. The most common winter closures are at the <a href="../../passes/eisenhower/">Eisenhower Tunnel</a> and <a href="../../passes/vail/">Vail Pass</a> in Colorado. See the <a href="../../closures/">US closures map</a> for everything.`],
@@ -234,7 +225,6 @@ const CORRIDORS = [
     segs: [
       ['Coast to coast, almost', `I-40 runs about 2,557 miles from Barstow, California to Wilmington, North Carolina, crossing eight states — California, Arizona, New Mexico, Texas, Oklahoma, Arkansas, Tennessee, and North Carolina. It crosses the Mississippi River at Memphis on the Hernando de Soto Bridge and climbs into the Appalachians at the Tennessee–North Carolina line.`],
       ['Where the trouble is', `The Mojave stretch through California and Arizona brings extreme summer heat with long gaps between services; near Flagstaff, Arizona, I-40 climbs above 6,900 feet and gets real winter snow and ice. The Texas Panhandle and Oklahoma see high wind and occasional ice storms. At the Tennessee–North Carolina line, I-40 through the Pigeon River Gorge is still recovering from catastrophic 2024 Hurricane Helene flood damage — traffic has run one lane each direction since a partial reopening in March 2025, with the full rebuild targeted for 2029.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-40 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-40 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. The Pigeon River Gorge at the Tennessee–North Carolina line is the stretch most likely to have lane restrictions right now — see the <a href="../../closures/">US closures map</a> for everything else.`],
@@ -252,7 +242,6 @@ const CORRIDORS = [
     segs: [
       ['Border to Lake Superior', `I-35 runs about 1,569 miles from Laredo, Texas to Duluth, Minnesota, crossing six states — Texas, Oklahoma, Kansas, Missouri, Iowa, and Minnesota — and threading through San Antonio, Austin, Dallas–Fort Worth, Oklahoma City, Kansas City, and the Twin Cities.`],
       ['Where the trouble is', `Austin is the standout: TxDOT's multi-billion-dollar Capital Express rebuild has major sections of I-35 through downtown Austin under active construction, with work expected to continue into the early 2030s. Oklahoma and Kansas sit in Tornado Alley, where spring severe thunderstorms and tornadoes can shut the road down with little warning; Texas and Oklahoma also see occasional ice storms that catch the region underprepared. Iowa and Minnesota bring real winter snow the rest of the way north.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-35 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-35 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything else.`],
@@ -270,7 +259,6 @@ const CORRIDORS = [
     segs: [
       ['West Texas to the Carolinas', `I-20 runs about 1,539 miles from an interchange with I-10 in far West Texas to I-95 in Florence, South Carolina, crossing six states — Texas, Louisiana, Mississippi, Alabama, Georgia, and South Carolina — through Odessa, Shreveport, Jackson, Birmingham, and metro Atlanta.`],
       ['Where the trouble is', `West Texas brings long, service-free stretches with high wind; metro Atlanta, where I-20 crosses I-285 and the I-75/I-85 downtown connector, is chronic, heavy congestion. Across the Deep South — Louisiana, Mississippi, Alabama, and Georgia — summer thunderstorms and the occasional tropical system remnant are the main risk, and winter ice storms, though rare, tend to hit harder here than up north because the roads aren't set up to treat them.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-20 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-20 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything else.`],
@@ -288,7 +276,6 @@ const CORRIDORS = [
     segs: [
       ['Gulf Coast to the Great Lakes', `I-65 runs about 887 miles from Mobile, Alabama to Gary, Indiana, crossing four states — Alabama, Tennessee, Kentucky, and Indiana — through Birmingham, Nashville, Louisville, and Indianapolis.`],
       ['Where the trouble is', `Nashville's downtown interchange with I-40 and I-24, Louisville, and Indianapolis are the three big metro chokepoints along the route. Near Mobile, Gulf Coast humidity brings frequent summer thunderstorms and occasional hurricane exposure; further north, Kentucky and southern Indiana get real winter snow and ice, and even Alabama and Tennessee see occasional ice storms that catch the South underprepared.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-65 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-65 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. See the <a href="../../closures/">US closures map</a> for everything else.`],
@@ -306,7 +293,6 @@ const CORRIDORS = [
     segs: [
       ['Tennessee to the Canadian border', `I-81 runs about 855 miles from its start at I-40 near Dandridge, Tennessee to Wellesley Island, New York at the Canadian border, crossing six states — Tennessee, Virginia, West Virginia, Maryland, Pennsylvania, and New York. Virginia carries the longest and busiest stretch, at roughly 325 miles.`],
       ['Where the trouble is', `Virginia's stretch of I-81 is one of the most truck-heavy corridors in the country and has one of the highest truck-crash rates in the state, mostly on aging two-lane sections through mountain terrain with steep grades and few passing lanes. VDOT's "Improve 81" program — a $4 billion, 65-project effort including new truck climbing lanes and widening — is actively under construction, with an updated Corridor Improvement Plan approved in January 2026. Winter ice and snow are a real factor the length of the corridor, especially in the Pennsylvania and New York mountains.`],
-      ['Watch it live while you drive', `The cameras and alerts above are the before-you-leave view. In the MileCheck app, your exact mile marker and the nearest camera follow you the whole way, hands-free on CarPlay and Android Auto.`],
     ],
     faq: [
       ['Is I-81 open right now?', `The <a href="#comap">live map above</a> shows active closures and incidents along I-81 from the state DOT feeds we cover; a red banner appears at the top if a stretch is fully closed. Virginia's stretch is the one most likely to have active construction or incident-related restrictions — see the <a href="../../closures/">US closures map</a> for everything else.`],
