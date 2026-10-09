@@ -115,6 +115,24 @@
   .ps-bar button[disabled]{opacity:.5;cursor:default}
   .ps-msg{margin-top:12px;font-size:14px;color:#3a444d}
   @media(max-width:600px){.ps-wrap{padding:20px 16px 150px}.ps-row .v{display:none}.ps-bar-in{padding:12px 16px}.ps-wrap h1{font-size:26px}}
+  .pk{margin:6px 0 26px}
+  .pk h2{font-size:20px;margin:0 0 4px}
+  .pk-sub{margin:0 0 12px;font-size:14.5px;color:#3a444d}
+  .pk-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px}
+  .pk-card{position:relative;background:#fff;border:1px solid #e3ddcf;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column}
+  .pk-card.rec{border:2px solid #0f7a4f}
+  .pk-badge{position:absolute;top:-11px;left:16px;background:#0f7a4f;color:#fff;font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 10px}
+  .pk-name{font-weight:800;font-size:17px;color:#0E1116}
+  .pk-n{font-size:13px;color:#5b6670;margin-top:2px}
+  .pk-list{margin:10px 0 0;padding:0;list-style:none;font-size:13.5px;color:#3a444d;line-height:1.55}
+  .pk-list li{display:flex;justify-content:space-between;gap:10px}
+  .pk-list li span:last-child{color:#5b6670;white-space:nowrap}
+  .pk-views{margin-top:10px;font-size:14px;font-weight:700;color:#0f7a4f}
+  .pk-price{margin-top:12px;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:20px;color:#0E1116}
+  .pk-per{font-size:13px;color:#5b6670;margin-top:2px}
+  .pk-card button{margin-top:14px;font:inherit;font-weight:800;font-size:15px;background:#0E1116;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+  .pk-card.rec button{background:#0f7a4f}
+  .pk-or{margin:14px 0 0;font-size:14px;color:#5b6670}
 </style>
 </head>
 <body>
@@ -145,6 +163,13 @@
     <p style="margin:0;color:#3d3d3d;font-size:15px;line-height:1.55">This is the rate for our first sponsors. It holds for your first three months, then the sponsorship continues month to month. One sponsor per page, so nobody else shares your spot.</p>
     <p id="live30" style="display:none;margin:8px 0 0;font-size:14px;color:#0f7a4f;font-weight:600"></p>
   </div>
+  <section class="pk" id="pk" style="display:none">
+    <h2>Start with a package</h2>
+    <p class="pk-sub">Pick the road your customers drive. View counts are from the last 28 days.</p>
+    <div class="ps-chips" id="pkR"></div>
+    <div class="pk-cards" id="pkC"></div>
+    <p class="pk-or">Or pick pages one by one below.</p>
+  </section>
   <p class="ps-sub">Tick the pages you want. Each one gets your logo, one sentence and a link in the slot at the top. <strong style="color:#0f7a4f">View counts are live. They show how often the slot on that page was seen in the last 28 days. We started counting on September 16.</strong> Don&rsquo;t see your town, pass or highway? <a href="mailto:sales@milecheckapp.com?subject=Page%20request&body=The%20page%20I%27d%20like%20to%20sponsor%3A%20%0AMy%20business%3A%20" style="color:#0f7a4f;font-weight:600">Request a page</a> and we&rsquo;ll tell you if we can build it.</p>
   <div class="ps-filters">
     <input class="ps-search" id="q" type="search" placeholder="Search pages: Snoqualmie, Ohio, I-90&hellip;" aria-label="Search pages">
@@ -246,9 +271,66 @@
     $('go').textContent=step===1?'Continue':'Send request';
     chips();
   }
+  // Packages (2026-10-08). A region's route is three named pages; its region package is the busiest (up to ten)
+  // open pages in its states. One page is $50; three or more are $40 a page. Package price spreads over its pages, so the bar and the email add up.
+  var pkg=null, region=0;
+  function pkPrice(n){return n===1?50:40*n}
+  var REGIONS=[
+    {name:'California and Nevada',states:['CA','NV'],route:'Cajon Pass, I-15 and Los Angeles',keys:['pass:cajon','corridor:i-15','cameras:los-angeles']},
+    {name:'Georgia',states:['GA'],route:'Atlanta, I-75 and Georgia',keys:['cameras:atlanta','corridor:i-75','cameras:georgia']},
+    {name:'Florida',states:['FL'],route:'I-4, Tampa and Orlando',keys:['corridor:i-4','cameras:tampa','cameras:orlando']},
+    {name:'Ohio and Michigan',states:['OH','MI'],route:'Ohio, I-75 and Cincinnati',keys:['cameras:ohio','corridor:i-75','cameras:cincinnati']},
+    {name:'Washington and Oregon',states:['WA','OR'],route:'Portland, I-5 and Washington',keys:['cameras:portland','corridor:i-5','cameras:washington']},
+    {name:'Utah',states:['UT'],route:'Utah, I-15 and Salt Lake City',keys:['cameras:utah','corridor:i-15','cameras:salt-lake-city']}
+  ];
+  function pageOf(k){return pages.find(function(x){return x.key===k})}
+  function openPg(k){var p=pageOf(k);return p&&!taken[k]?p:null}
+  function shortName(p){
+    var f=famOf(p.key), id=p.key.slice(f.length+1);
+    if(f==='corridor')return id.toUpperCase();
+    if(f==='cameras'){var c=SLUG[id];return (c?SN[c]:id.split('-').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(' '))+' cameras'}
+    return p.title.split(/ — | \| | Camera| Live | Driving|: /)[0];
+  }
+  function viewsOf(keys){return keys.reduce(function(s,k){return s+(views[k]||0)},0)}
+  function packagesFor(r){
+    var route=r.keys.filter(openPg), out=[];
+    var top=route[0];
+    if(top)out.push({name:shortName(pageOf(top)),keys:[top]});
+    if(route.length===3)out.push({name:r.route,keys:route,rec:true});
+    var reg=pages.filter(function(p){if(taken[p.key]||langOf(p)||(views[p.key]||0)<5||['home','article','mountain','drawbridge'].indexOf(famOf(p.key))>-1)return false;var s=statesOf(p);return s.some(function(x){return r.states.indexOf(x)>-1})})
+      .sort(function(a,b){return (views[b.key]||0)-(views[a.key]||0)}).slice(0,10).map(function(p){return p.key});
+    if(reg.length>=5)out.push({name:r.name,keys:reg});
+    return out;
+  }
+  function pkRender(){
+    $('pkR').innerHTML=REGIONS.map(function(r,i){return '<button type="button" class="ps-chip'+(i===region?' on':'')+'" data-r="'+i+'">'+esc(r.name)+'</button>'}).join('');
+    var list=packagesFor(REGIONS[region]);
+    $('pkC').innerHTML=list.map(function(k,i){
+      var n=k.keys.length, price=pkPrice(n);
+      var rows=k.keys.map(function(key){var v=views[key]||0;return '<li><span>'+esc(shortName(pageOf(key)))+'</span><span>'+(v>=5?v.toLocaleString('en-US'):'Under 5')+'</span></li>'}).join('');
+      return '<div class="pk-card'+(k.rec?' rec':'')+'">'+(k.rec?'<span class="pk-badge">Recommended</span>':'')+
+        '<div class="pk-name">'+esc(k.name)+'</div><div class="pk-n">'+n+' page'+(n===1?'':'s')+'</div>'+
+        '<ul class="pk-list">'+rows+'</ul>'+
+        '<div class="pk-views">'+viewsOf(k.keys).toLocaleString('en-US')+' views in 28 days</div>'+
+        '<div class="pk-price">'+money(price)+' a month</div><div class="pk-per">'+money(price/n)+' a page</div>'+
+        '<button type="button" data-pk="'+i+'">Choose '+esc(k.name)+'</button></div>';
+    }).join('');
+    $('pk').style.display=list.length?'block':'none';
+  }
+  $('pkR').addEventListener('click',function(e){var b=e.target.closest('[data-r]');if(!b)return;region=+b.getAttribute('data-r');pkRender()});
+  $('pkC').addEventListener('click',function(e){
+    var b=e.target.closest('[data-pk]');if(!b)return;
+    var k=packagesFor(REGIONS[region])[+b.getAttribute('data-pk')], n=k.keys.length;
+    pkg={name:k.name,n:n,price:pkPrice(n)};picked={};
+    k.keys.forEach(function(key){picked[key]=pkPrice(n)/n});
+    fam='picked';step=2;$('details').classList.add('show');render();summary();
+    $('details').scrollIntoView({behavior:'smooth'});
+  });
+  // Editing the picks by hand leaves the package and goes back to the per-page rate.
+  function dropPkg(){if(!pkg)return;pkg=null;Object.keys(picked).forEach(function(k){picked[k]=priceOf(pageOf(k))})}
   $('chips').addEventListener('click',function(e){var b=e.target.closest('[data-f]');if(!b)return;fam=b.getAttribute('data-f');chips();render()});
-  $('list').addEventListener('change',function(e){var k=e.target.getAttribute('data-k');if(!k)return;var p=pages.find(function(x){return x.key===k});if(e.target.checked)picked[k]=priceOf(p);else delete picked[k];summary()});
-  $('list').addEventListener('click',function(e){var b=e.target.closest('[data-all]');if(!b)return;e.preventDefault();[].forEach.call($('list').querySelectorAll('.ps-group'),function(g){if(g.querySelector('[data-all]')!==b)return;[].forEach.call(g.querySelectorAll('input[data-k]:not([disabled])'),function(i){var p=pages.find(function(x){return x.key===i.getAttribute('data-k')});picked[p.key]=priceOf(p);i.checked=true})});summary()});
+  $('list').addEventListener('change',function(e){var k=e.target.getAttribute('data-k');if(!k)return;dropPkg();var p=pages.find(function(x){return x.key===k});if(e.target.checked)picked[k]=priceOf(p);else delete picked[k];summary()});
+  $('list').addEventListener('click',function(e){var b=e.target.closest('[data-all]');if(!b)return;e.preventDefault();dropPkg();[].forEach.call($('list').querySelectorAll('.ps-group'),function(g){if(g.querySelector('[data-all]')!==b)return;[].forEach.call(g.querySelectorAll('input[data-k]:not([disabled])'),function(i){var p=pages.find(function(x){return x.key===i.getAttribute('data-k')});picked[p.key]=priceOf(p);i.checked=true})});summary()});
   ['q','sort','showTaken','st'].forEach(function(id){$(id).addEventListener(id==='q'?'input':'change',render)});
   $('go').addEventListener('click',function(){
     if(step===1){step=2;$('details').classList.add('show');$('details').scrollIntoView({behavior:'smooth'});summary();return}
@@ -256,7 +338,7 @@
     var body={pages:Object.keys(picked),company:$('company').value.trim(),email:$('email').value.trim(),url:$('site').value.trim(),line:$('line').value.trim()};
     var list=body.pages.map(function(k){var p=pages.find(function(x){return x.key===k});return '- '+p.title+' ($'+picked[k]+'/mo) https://milecheckapp.com'+p.path}).join('\n');
     var total=body.pages.reduce(function(s,k){return s+picked[k]},0);
-    var mail='mailto:sales@milecheckapp.com?subject='+encodeURIComponent('Sponsor request: '+body.company+', '+body.pages.length+' page'+(body.pages.length===1?'':'s'))+'&body='+encodeURIComponent('Company: '+body.company+'\nEmail: '+body.email+'\nLink for the slot: '+body.url+'\nSentence: '+body.line+'\n\nPages ('+body.pages.length+', $'+total+' a month at the founding rate):\n'+list+'\n\n(Logo attached if I have it.)\n');
+    var mail='mailto:sales@milecheckapp.com?subject='+encodeURIComponent('Sponsor request: '+body.company+', '+body.pages.length+' page'+(body.pages.length===1?'':'s'))+'&body='+encodeURIComponent('Company: '+body.company+'\nEmail: '+body.email+'\nLink for the slot: '+body.url+'\nSentence: '+body.line+'\n\n'+(pkg?'Package: '+pkg.name+' ('+pkg.n+' page'+(pkg.n===1?'':'s')+', $'+pkg.price+' a month)\n':'')+'Pages ('+body.pages.length+', $'+total+' a month'+(pkg?'':' at the founding rate')+'):\n'+list+'\n\n(Logo attached if I have it.)\n');
     location.href=mail;
     if(!$('sent'))$('details').insertAdjacentHTML('beforeend','<p class="ps-msg" id="sent"><b>Your email app should open with your request.</b> If it didn&rsquo;t, <a href="'+mail+'">tap here</a> or email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> with the pages you picked.</p>');
   });
@@ -277,7 +359,7 @@
     ((a[2]&&a[2].bySlot)||[]).forEach(function(x){views[x.slot]=x.impressions});
     var pre=new URLSearchParams(location.search).get('page');
     if(pre){pre.split(',').forEach(function(k){var p=pages.find(function(x){return x.key===k});if(p&&!taken[k]){picked[k]=priceOf(p);fam='picked'}})}
-    stateOpts();chips();render();summary();
+    stateOpts();chips();render();summary();pkRender();
     fetch(W+'/sponsor-stats?minutes=30').then(function(r){return r.json()}).then(function(d){
       var n=d&&d.ok&&d.minutes===30&&d.total?d.total.impressions:0;
       if(n>0){$('live30').textContent='Live: sponsor spots across the site were seen '+n.toLocaleString('en-US')+' times in the last 30 minutes.';$('live30').style.display='block'}
