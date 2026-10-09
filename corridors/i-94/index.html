@@ -306,7 +306,11 @@ document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 document.getElementById('tgPoi').onchange=e=>{if(e.target.checked)poiLayer.addTo(map);else map.removeLayer(poiLayer);};
 function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
-function isFullClosure(a){if(!liveNow(a))return false;const t=(a.title+' '+(a.desc||'')).toLowerCase();return a.type==='CL'&&/clos/.test(t)&&!/(ramp|exit|rest area|shoulder|connector)/.test(t)&&!(/lane/.test(t)&&!/(all lanes|roadway is closed|full closure)/.test(t));}
+// Full closure from the record's text. Negations first ("no full closure", "reopened"). Explicit
+// full-closure wording wins over location words like exit or shoulder. Anything else that names a
+// lane, ramp, exit, shoulder or connector is a partial closure. ChatGPT review, 2026-10-08.
+function fullText(t){if(/\b(no|not)\s+(a\s+)?(full\s+)?(closure|closed)|\breopen/.test(t))return false;if(/(all lanes (are )?closed|roadway is closed|full closure|road (is )?closed|closed in both directions)/.test(t))return true;if(/(ramp|exit|rest area|shoulder|connector|lane)/.test(t))return false;return /clos/.test(t);}
+function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&fullText((a.title+' '+(a.desc||'')).toLowerCase());}
 Promise.all([Promise.all(STATES.map(camsFor)),Promise.all(STATES.map(alertsFor))]).then(([cams,alerts])=>{
   CAMS=cams.flat();ALERTS=alerts.flat();
   document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.filter(liveNow).length;
