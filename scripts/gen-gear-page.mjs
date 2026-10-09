@@ -11,6 +11,7 @@ const GUIDES = [
   ['best-portable-jump-starters', 'Portable jump starters', 'By the size of the engine you actually have.'],
   ['best-portable-tire-inflators', 'Portable tire inflators', 'Cordless, cheap, or tool-brand rugged.'],
   ['best-dash-cams-for-your-car', 'Dash cams', 'Sharpest footage, easiest setup, or footage that survives the camera.'],
+  ['best-binoculars-for-mountain-views', 'Binoculars for mountain views', 'One all-around pair, one budget pair, and a tripod adapter.'],
 ];
 const dec = (s) => s.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
 const sections = GUIDES.map(([slug, title, sub]) => {
