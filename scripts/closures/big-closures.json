@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 48,
+   "missedChecks": 49,
    "note": null
   },
   "lat": 34.0173,
@@ -432,7 +432,7 @@
   },
   "status": {
    "state": "reported-closed",
-   "missedChecks": 0,
+   "missedChecks": 1,
    "note": null
   },
   "lat": 39.3044,
