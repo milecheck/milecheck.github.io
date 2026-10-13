@@ -5,6 +5,7 @@
 // Run AFTER the camera generators and gen-es-camera-pages.mjs, before the injectors.
 // Runtime-label translations are Claude's (2026-09-25) — flagged for the native-speaker read.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { applyFixes } from './lib/es-pt-fixes.mjs'; // native-speaker review fixes (nav/footer, wording)
 const PT = ['orlando', 'florida'];
 const draft = readFileSync('scripts/guides/drafts/portuguese-florida-pages.md', 'utf8');
 const md = (s) => s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
@@ -69,6 +70,7 @@ for (const slug of PT) {
   out = out.replace(/href="\.\.\/\.\.\//g, 'href="/').replace(/src="\.\.\/\.\.\//g, 'src="/');
   out = out.replace(/href="\.\.\/([a-z-]+)\/"/g, (m, s) => PT.includes(s) ? `href="/pt/cameras/${s}/"` : `href="/cameras/${s}/"`).replace(/href="\.\.\/"/g, 'href="/cameras/"');
   out = out.replace(`data-slot="cameras:${slug}"`, `data-slot="cameras:pt-${slug}"`);
+  out = applyFixes('pt-cam', out);
   mkdirSync(`pt/cameras/${slug}`, { recursive: true });
   writeFileSync(`pt/cameras/${slug}/index.html`, out);
   const vis = strip(out.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<header[\s\S]*?<\/header>|<footer[\s\S]*?<\/footer>/g, ''));

@@ -8,6 +8,7 @@
 // English page. Internal links become root-relative so the extra path depth is harmless;
 // links to pages that have a Spanish version point at it.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { applyFixes } from './lib/es-pt-fixes.mjs'; // native-speaker review fixes (nav/footer, wording)
 
 const ES = ['florida', 'miami', 'orlando', 'tampa']; // pages with a Spanish version
 const PTV = ['orlando', 'florida']; // also have Portuguese versions
@@ -155,6 +156,7 @@ for (const slug of ES) {
   out = out.replace('<div class="eyebrow">', `<p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><a href="/cameras/${slug}/" hreflang="en" lang="en">English</a> · <b lang="es">Español</b>${PTV.includes(slug) ? ` · <a href="/pt/cameras/${slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n    <div class="eyebrow">`);
   // sponsor slot key for the Spanish page
   out = out.replace(`data-slot="cameras:${slug}"`, `data-slot="cameras:es-${slug}"`);
+  out = applyFixes('es-cam', out);
   mkdirSync(`es/cameras/${slug}`, { recursive: true });
   writeFileSync(`es/cameras/${slug}/index.html`, out);
   const left = (out.match(/traffic cameras|Live cameras|camera source|Loading live|tap any camera/g) || []).length;
