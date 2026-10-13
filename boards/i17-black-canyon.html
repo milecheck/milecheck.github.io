@@ -106,7 +106,7 @@
   <div class="adbanner" id="adBanner"></div>
 
   <div class="foot">
-    <div class="ticker"><span class="tk-lbl" id="tkLbl">⚾ SCORES</span><div class="tk-wrap"><span class="tk-scroll" id="tkScroll">Live cameras & DOT alerts · updated every minute</span></div></div>
+    <div class="ticker"><span class="tk-lbl" id="tkLbl">● LIVE</span><div class="tk-wrap"><span class="tk-scroll" id="tkScroll">Live cameras & DOT alerts · updated every minute</span></div></div>
     <div class="app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fmilecheckapp.com%2Fget%2F%3Futm_source%3Dboard%26utm_medium%3Dqr%26utm_campaign%3Di17-black-canyon" alt=""><div class="t"><b>Take these alerts with you</b><br>Scan · milecheckapp.com</div></div>
     <span class="up" id="updated">—</span>
   </div>
@@ -183,10 +183,10 @@ async function poll(){
       .map(r=>{const sl=(r.location||{})["start-location"]||{};let lat=sl["start-lat"],lon=sl["start-long"];let mp=sl["start-mile-marker"]!=null&&isFinite(+sl["start-mile-marker"])?+sl["start-mile-marker"]:(lat!=null&&lon!=null?estimateMp(lat,lon):null);if(mp==null)return null;const t=txtOf(r);return {kind:"alert",name:cleanTxt(r.headline)||"Incident",mp,st:statusOf(t),stop:isFullClose(t)};}).filter(Boolean);
     const closed=alerts.find(a=>a.stop),winter=(cond["road-weather-reports"]||[]).map(r=>r["road-surface-condition"]||"").find(s=>/snow|ice|pack|slush|chain/i.test(s));
     const sv=document.getElementById("statusVal"),sd=document.getElementById("statusDesc");
-    if(closed){sv.className="sv stop";sv.textContent="CLOSED";sd.textContent="MP "+Math.round(closed.mp)+" · "+closed.name;}
-    else if(/chain/i.test(winter||"")){sv.className="sv warn";sv.textContent="CHAINS REQ'D";sd.textContent="Winter conditions — "+P.region;}
-    else if(winter){sv.className="sv warn";sv.textContent="WINTER";sd.textContent=winter;}
-    else{sv.className="sv ok";sv.textContent="OPEN · CLEAR";sd.textContent="Bare & dry, no winter conditions";}
+    if(closed){sv.className="sv stop";sv.textContent="CLOSURE REPORTED";sd.textContent=P.dot+" · MP "+Math.round(closed.mp)+" · "+closed.name;}
+    else if(/chain/i.test(winter||"")){sv.className="sv warn";sv.textContent="CHAINS REPORTED";sd.textContent=P.dot+": "+winter;}
+    else if(winter){sv.className="sv warn";sv.textContent="WINTER REPORT";sd.textContent=P.dot+": "+winter;}
+    else{sv.className="sv ok";sv.textContent="NO CLOSURES REPORTED";sd.textContent=P.dot+" reports no closures or winter conditions on "+P.route+" here";}
     const cams=P.cameras.map(c=>({kind:"cam",name:c.name,mp:c.mp}));
     const all=cams.concat(alerts);
     const west=all.filter(x=>x.mp<=P.mile).sort((a,b)=>(P.mile-a.mp)-(P.mile-b.mp));
@@ -198,7 +198,7 @@ async function poll(){
 }
 function renderRows(elId,list,side){
   const el=document.getElementById(elId);
-  if(!list.length){el.innerHTML=`<div class="empty">✓ Clear ${side==="west"?P.dec.to:P.inc.to}</div>`;return;}
+  if(!list.length){el.innerHTML=`<div class="empty">No ${P.dot} reports ${side==="west"?P.dec.to:P.inc.to}</div>`;return;}
   el.innerHTML=list.slice(0,5).map(x=>{
     const dist=Math.round(Math.abs(x.mp-P.mile))+" mi";
     if(x.kind==="cam")return `<div class="row"><div class="nm"><span class="icn">📷</span>${x.name}<span class="sub">Live camera</span></div><div class="rt"><div class="st cam">CAM</div><div class="dist">MP ${x.mp} · ${dist}</div></div></div>`;
@@ -226,20 +226,8 @@ function renderAd(){const a=P.services[adi%P.services.length];adi++;const b=docu
   if(a.url){const q=document.createElement("img");q.className="aq";q.alt="";q.src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data="+encodeURIComponent(a.url);b.appendChild(q);}}
 renderAd(); setInterval(renderAd,10000);
 
-// live sports ticker (ESPN, keyless — MLB in season)
-async function loadScores(){
-  try{
-    const d=await fetch("https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",{cache:"no-store"}).then(r=>r.json());
-    const games=(d.events||[]).map(g=>{const c=(g.competitions&&g.competitions[0]&&g.competitions[0].competitors)||[];if(c.length<2)return null;
-      const away=c.find(x=>x.homeAway==="away")||c[1],home=c.find(x=>x.homeAway==="home")||c[0];
-      const st=(g.status&&g.status.type&&g.status.type.shortDetail)||"";
-      return `${away.team.abbreviation} ${away.score}–${home.score} ${home.team.abbreviation} · ${st}`;}).filter(Boolean);
-    const txt=games.length?games.join("       "):"Live cameras & DOT alerts along "+P.route+" · updated every minute";
-    document.getElementById("tkScroll").innerHTML=(txt+"       ·       ").repeat(2);
-    document.getElementById("tkLbl").textContent=games.length?"⚾ SCORES":"● LIVE";
-  }catch(e){}
-}
-loadScores(); setInterval(loadScores,120000);
+document.getElementById("tkScroll").innerHTML=(("Live cameras & "+P.dot+" reports along "+P.route+" · updated every minute")+"       ·       ").repeat(2);
+document.getElementById("tkLbl").textContent="● LIVE";
 
 poll(); setInterval(poll,60000); setInterval(tick,1000);
 </script>
