@@ -11,7 +11,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const EYEBROW = 'The Monthly Highway Report';
-const H2 = 'Closures and crashes on US highways, once a month';
+const H2 = 'Which highways had the most closures and crashes this month';
 const SUB = `The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.`;
 const FAMILIES = new Set(['cameras', 'pass', 'corridor', 'guide']);
 

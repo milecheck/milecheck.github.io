@@ -120,7 +120,7 @@ function slotHtml(slotKey, sponsor, house) {
     return `  <aside class="spon spon-house" id="spon" data-slot="${esc(slotKey)}" data-sponsor="house" aria-label="Sponsor">
     <img class="spon-roy" src="${esc(safeHref(house.roy, { tel: false }) || '/images/sponsors/roy-sponsor.png')}" width="276" height="235" alt="" loading="lazy" decoding="async">
     <a class="spon-body" href="${esc(safeHref(house.url, { tel: false }) || '/sponsor/')}" data-spon-link>
-      <span class="spon-text"><strong>${esc(house.title || 'Sponsor this page.')}</strong>${house.copy ? ' ' + esc(house.copy) : ''}</span>
+      <span class="spon-text"><strong>${esc(house.title || 'Sponsor a corridor board.')}</strong>${house.copy ? ' ' + esc(house.copy) : ''}</span>
       <span class="spon-cta">${esc(house.cta)} →</span>
     </a>
   </aside>`;
@@ -175,7 +175,7 @@ function slot({ kind, slug, state, name }) {
   const day = today();
   const slotKey = prefixFor(kind) + slug;
   const { key, sponsor } = resolve(cfg, keysFor(kind, { slug, state }), day);
-  const house = Object.assign({ url: '/sponsor/', cta: 'Ask about it', title: 'Sponsor this page.', copy: '' }, cfg.house || {});
+  const house = Object.assign({ url: '/sponsor/', cta: 'Learn more', title: 'Sponsor a corridor board.', copy: '' }, cfg.house || {});
   // Monthly Highway Report pages sell the NEXT report, not the page (Leah 10/1).
   if (/road-report|highway-report/.test(slug)) Object.assign(house, { title: "Sponsor next month's Highway Report.", url: cfg.reportSponsorUrl || '/sponsor/#report', cta: cfg.reportSponsorUrl ? 'Book it, $500' : house.cta });
   placed.push({ slotKey, name, via: key, sponsorId: sponsor ? sponsor.id : 'house' });
