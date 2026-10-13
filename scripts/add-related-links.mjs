@@ -17,6 +17,9 @@ const skipArg = process.argv.find(a => a.startsWith('--skip-file='));
 const SKIP = new Set(skipArg ? readFileSync(skipArg.slice(12), 'utf8').split('\n').filter(Boolean) : []);
 
 const ST = { AL:'alabama',AK:'alaska',AZ:'arizona',AR:'arkansas',CA:'california',CO:'colorado',CT:'connecticut',DE:'delaware',FL:'florida',GA:'georgia',HI:'hawaii',ID:'idaho',IL:'illinois',IN:'indiana',IA:'iowa',KS:'kansas',KY:'kentucky',LA:'louisiana',ME:'maine',MD:'maryland',MA:'massachusetts',MI:'michigan',MN:'minnesota',MS:'mississippi',MO:'missouri',MT:'montana',NE:'nebraska',NV:'nevada',NH:'new-hampshire',NJ:'new-jersey',NM:'new-mexico',NY:'new-york',NC:'north-carolina',ND:'north-dakota',OH:'ohio',OK:'oklahoma',OR:'oregon',PA:'pennsylvania',RI:'rhode-island',SC:'south-carolina',SD:'south-dakota',TN:'tennessee',TX:'texas',UT:'utah',VT:'vermont',VA:'virginia',WA:'washington',WV:'west-virginia',WI:'wisconsin',WY:'wyoming' };
+// Neighboring states (shared land border), so a driver crossing a line finds the next state.
+const NB_RAW = 'WA:OR,ID|OR:WA,ID,CA,NV|CA:OR,NV,AZ|NV:CA,OR,ID,UT,AZ|ID:WA,OR,NV,UT,WY,MT|MT:ID,WY,SD,ND|WY:MT,SD,NE,CO,UT,ID|UT:ID,WY,CO,AZ,NV|AZ:CA,NV,UT,NM|CO:WY,NE,KS,OK,NM,UT|NM:AZ,CO,OK,TX|ND:MT,SD,MN|SD:ND,MN,IA,NE,WY,MT|NE:SD,IA,MO,KS,CO,WY|KS:NE,MO,OK,CO|OK:KS,MO,AR,TX,NM,CO|TX:NM,OK,AR,LA|MN:ND,SD,IA,WI|IA:MN,WI,IL,MO,NE,SD|MO:IA,IL,KY,TN,AR,OK,KS,NE|AR:MO,TN,MS,LA,TX,OK|LA:AR,MS,TX|WI:MN,IA,IL,MI|IL:WI,IA,MO,KY,IN|MI:WI,IN,OH|IN:MI,IL,KY,OH|OH:MI,IN,KY,WV,PA|KY:IL,IN,OH,WV,VA,TN,MO|TN:KY,VA,NC,GA,AL,MS,AR,MO|MS:TN,AL,LA,AR|AL:TN,GA,FL,MS|GA:TN,NC,SC,FL,AL|FL:GA,AL|SC:NC,GA|NC:VA,TN,GA,SC|VA:MD,WV,KY,TN,NC|WV:OH,PA,MD,VA,KY|MD:PA,DE,VA,WV|DE:PA,NJ,MD|PA:NY,NJ,DE,MD,WV,OH|NJ:NY,PA,DE|NY:VT,MA,CT,NJ,PA|CT:NY,MA,RI|RI:CT,MA|MA:NH,VT,NY,CT,RI|VT:NH,MA,NY|NH:ME,VT,MA|ME:NH';
+const NB = {}; for (const part of NB_RAW.split('|')) { const [k, v] = part.split(':'); NB[ST[k]] = v.split(',').map(x => ST[x]); }
 const slugOfName = n => n.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
 
 const dirs = d => existsSync(d) ? readdirSync(d, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => e.name) : [];
@@ -94,7 +97,7 @@ function related(n) {
     case 'cameras':
       push(first('conditions', s), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('guide', s)); break;
     case 'conditions':
-      push(first('cameras', s), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('guide', s)); break;
+      push(first('cameras', s), (NB[s] || []).slice(0, 2).flatMap(x => first('conditions', x)), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('guide', s)); break;
     case 'bridges':
       push(first('cameras', s), first('conditions', s), passesHere.slice(0, 1), corridorsHere.slice(0, 2), first('guide', s)); break;
     case 'guide':
