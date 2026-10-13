@@ -8,6 +8,9 @@
 //   2. Copy blog/road-report-september-2026.html to blog/road-report-october-2026.html.
 //   3. Review LT_WHAT below against October's longTermProjects (it is empty on purpose)
 //      and the September-only "partial month" title swaps further down.
+//   4. After this script: node scripts/add-highway-lookup.mjs blog/road-report-october-2026.html data/road-report-october-2026.json October
+//      (needs the JSON from gen-road-report.mjs on or after 2026-10-13, which carries highwayTable).
+//   5. New York: alerts were down from 9/30 (511NY site move). Say "no October data" for NY, not a low count.
 // Rewrites every number and data-driven block on blog/road-report-october-2026.html from
 // data/road-report-october-2026.json (the Oct 1-31 archive pull), and drops the
 // "partial month" framing. Region-based (heading to heading), so it can be re-run.
