@@ -278,8 +278,47 @@
           },{enableHighAccuracy:true,timeout:15000,maximumAge:30000});
         });
       }
-      sel.value='WA'; load('WA');
       sel.addEventListener('change',function(){load(sel.value);});
+
+      // Link straight to a spot: ?route=I-84&mp=147 (also i84, "I 84"), optional &state=OR.
+      var jumpMarker=null;
+      function rkey(r){return String(r||'').toLowerCase().replace(/[^a-z0-9]+/g,'');}
+      function jump(rawRoute,mpRaw,stateRaw){
+        var want=rkey(rawRoute),mp=parseFloat(mpRaw),nice=String(rawRoute).replace(/^\s*([a-zA-Z]+)[\s-]*(\d)/,function(m,a,d){return a.toUpperCase()+'-'+d;});
+        var st=String(stateRaw||'').toUpperCase();
+        var codes=CODES[st]?[st]:STATES.map(function(x){return x[0];});
+        var miss='No mile marker '+(isNaN(mp)?String(mpRaw):label(mp))+' on '+nice+(CODES[st]?' in '+CODES[st]:'')+' in our data.';
+        function none(){status.textContent=miss;}
+        if(!want||isNaN(mp)){status.textContent='That link needs a route and a mile, like ?route=I-84&mp=147.';return Promise.resolve(false);}
+        status.textContent='Looking for '+nice+', mile '+label(mp)+'…';
+        return Promise.all(codes.map(function(c){return posts(c).catch(function(){return [];});})).then(function(lists){
+          var hits=[];
+          lists.forEach(function(list,i){
+            var best=null;
+            list.forEach(function(p){
+              var d=Math.abs(p.mile-mp); if(d>0.15) return;
+              var names=(routeName(p.route,p.code)||'').split('/').map(rkey);names.push(rkey(p.route));
+              if(names.indexOf(want)<0) return;
+              if(!best||d<best.d) best={p:p,d:d};
+            });
+            if(best) hits.push({code:codes[i],list:list,p:best.p});
+          });
+          if(!hits.length){none();return false;}
+          var h=hits[0];
+          sel.value=h.code; render(h.code,h.list);
+          if(jumpMarker) map.removeLayer(jumpMarker);
+          var nm=(routeName(h.p.route,h.code)||nice)+', mile '+label(h.p.mile);
+          jumpMarker=L.marker([h.p.lat,h.p.lon],{icon:L.divIcon({className:'',html:'<div class="mm-pin mm-near">'+label(h.p.mile)+'</div>',iconSize:null}),zIndexOffset:1000}).bindPopup('<b>'+nm+'</b><br>'+CODES[h.code]).addTo(map);
+          map.setView([h.p.lat,h.p.lon],14); jumpMarker.openPopup();
+          status.textContent='Showing '+nm+' in '+CODES[h.code]+'.'+(hits.length>1?' Also in '+hits.slice(1).map(function(x){return CODES[x.code];}).join(', ')+'. Add &state= to pick one.':'');
+          return true;
+        });
+      }
+      var qs=new URLSearchParams(location.search);
+      if(qs.get('route')&&qs.get('mp')){
+        // Default view stays put (and the state list stays on Washington) if nothing matches.
+        sel.value='WA'; load('WA').then(function(){return jump(qs.get('route'),qs.get('mp'),qs.get('state'));});
+      } else { sel.value='WA'; load('WA'); }
     })();
     </script>
 

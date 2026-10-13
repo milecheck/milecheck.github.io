@@ -211,7 +211,14 @@ function hitHtml(p, pats) {
 function mileCard(q) {
   var rt = q.routes.length ? dashed(q.routes[0]).toUpperCase() : '';
   var what = 'Mile marker' + (q.mileNum ? ' ' + esc(q.mileNum) : '') + (rt ? ' on ' + esc(rt) : '');
-  return '<a class="card" href="/maps/mile-markers/"><div class="sec">Mile marker map</div><h2>' + what + '</h2><p>Open the 50-state mile marker map' + (rt ? ', find ' + esc(rt) + ' and tap a marker to read its number' : ' and tap a marker to read its number') + '. The map does not take a route or mile in the link yet.</p><div class="u">milecheckapp.com/maps/mile-markers/</div></a>';
+  var href = '/maps/mile-markers/', code = '', i;
+  var mp = q.mileNum ? String(q.mileNum).replace(/ /g, '.') : '';
+  for (i = 0; i < q.toks.length && !code; i++) {
+    if (q.toks[i].k === 's' && NAME2CODE[q.toks[i].v] && NAME2CODE[q.toks[i].v].length === 2) code = NAME2CODE[q.toks[i].v].toUpperCase();
+  }
+  var jump = rt && mp;
+  if (jump) href += '?route=' + encodeURIComponent(rt) + '&mp=' + encodeURIComponent(mp) + (code ? '&state=' + code : '');
+  return '<a class="card" href="' + esc(href) + '"><div class="sec">Mile marker map</div><h2>' + what + '</h2><p>' + (jump ? 'Open the map at ' + esc(rt) + ', mile ' + esc(mp) + '.' : 'Open the 50-state mile marker map' + (rt ? ', find ' + esc(rt) + ' and tap a marker to read its number' : ' and tap a marker to read its number') + '.') + '</p><div class="u">milecheckapp.com' + esc(href) + '</div></a>';
 }
 function stateHubs(q, skip) {
   var out = [];
