@@ -254,7 +254,9 @@ function drawStatic(){
   terminalsFor().forEach(function(n){
     var reports=!!terminalsByName[n];
     var m=L.marker(T[n],{icon:L.divIcon({className:'',html:'<div class="fy-tdot'+(reports?'':' dim')+'"></div>',iconSize:[14,14],iconAnchor:[7,7]}),zIndexOffset:400}).addTo(termLayer);
-    m.bindTooltip(n,{permanent:true,direction:'right',offset:[8,0],className:'fy-tlabel'});
+    // The topo base already prints the town names, so a permanent label printed each one twice
+    // (Leah 10-13). Terminal name shows on hover; tapping opens the terminal.
+    m.bindTooltip(n,{direction:'right',offset:[8,0],className:'fy-tlabel'});
     m.on('click',function(){openTerminal(n)});
   });
 }
