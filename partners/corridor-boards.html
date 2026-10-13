@@ -197,7 +197,9 @@
     // ?board=i17-black-canyon&venue=Rock%20Springs%20Cafe&mp=242&utm_source=email&utm_campaign=store-rock-springs-cafe
     var BOARDS = [
       ['issaquah', 'Snoqualmie Pass (I-90)'],
+      ['i84-gorge', 'I-84 Columbia Gorge'],
       ['i84-pendleton', 'I-84 Pendleton'],
+      ['i84-baker-city', 'I-84 La Grande to Ontario'],
       ['i17-black-canyon', 'I-17 Black Canyon City'],
       ['blaine', 'Blaine border crossing'],
       ['ballard', 'Ballard drawbridges']
@@ -205,6 +207,7 @@
     var q = new URLSearchParams(location.search);
     var ids = BOARDS.map(function(b){ return b[0]; });
     var board = ids.indexOf(q.get('board')) >= 0 ? q.get('board') : 'issaquah';
+    var linkedBoard = board;
     var venue = (q.get('venue') || '').slice(0, 40);
     var mp = (q.get('mp') || '').replace(/[^0-9A-Za-z]/g, '').slice(0, 6);
     var frame = document.getElementById('cb-board');
@@ -212,7 +215,7 @@
     function boardUrl(id){
       var p = new URLSearchParams();
       if (venue) p.set('venue', venue);
-      if (mp && /^(i84|i17)-/.test(id)) p.set('mp', mp);
+      if (mp && id === linkedBoard) p.set('mp', mp);
       var qs = p.toString();
       return '/boards/' + id + (qs ? '?' + qs : '');
     }
