@@ -20,7 +20,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;overflow:hidden}
   body{background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;letter-spacing:-.01em;height:100vh;display:flex;flex-direction:column;padding:1.8vh 2vw;gap:1.2vh}
+    -webkit-font-smoothing:antialiased;letter-spacing:-.01em;height:100vh;display:flex;flex-direction:column;padding:5vh 5vw;gap:1.2vh}
   .head{display:flex;align-items:center;gap:1.2vw;flex:none}
   .logo{width:2.2vh;height:2.2vh;border-radius:50%;background:var(--green)}
   .head h1{font-size:2.7vh;font-weight:800}.head .pb{font-size:1.6vh;color:var(--dim);font-weight:600;font-style:italic}
@@ -48,23 +48,23 @@
   .bhd{flex:none;display:flex;align-items:baseline;justify-content:space-between;padding:1.2vh 1.4vw;border-bottom:2px solid var(--line)}
   .bhd .dir{font-size:2.4vh;font-weight:900;letter-spacing:.04em}
   .bhd.west .dir{color:var(--green)}.bhd.east .dir{color:var(--blue)}
-  .bhd .to{font-size:1.6vh;font-weight:700;color:var(--dim)}
+  .bhd .to{font-size:2.1vh;font-weight:700;color:var(--dim)}
   .rows{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
   .row{flex:1;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1vw;padding:0 1.4vw;border-bottom:1px solid var(--line)}
   .row:nth-child(even){background:#faf8f1}
   .row:last-child{border-bottom:none}
   .row .icn{font-size:2.6vh;margin-right:.6vw}
-  .row .nm{font-size:2.3vh;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .row .nm .sub{display:block;font-size:1.5vh;font-weight:700;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .row .rt{text-align:right;white-space:nowrap}
-  .row .st{font-size:2vh;font-weight:900;font-variant-numeric:tabular-nums}
+  .row .nm{min-width:0;font-size:3vh;line-height:1.15;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .nm .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:2.5vh;font-weight:700;color:#5d584d;white-space:normal;overflow:hidden;line-height:1.15}
+  .row .rt{text-align:right;white-space:nowrap;min-width:9vw}.row .dist.big{font-size:2.8vh;color:var(--ink)}
+  .row .st{font-size:2.3vh;font-weight:900;font-variant-numeric:tabular-nums}
   .st.ok{color:var(--green)}.st.warn{color:var(--amber)}.st.stop{color:var(--red)}.st.cam{color:var(--blue)}
-  .row .dist{font-size:1.5vh;font-weight:700;color:var(--dim);font-variant-numeric:tabular-nums}
+  .row .dist{font-size:2.2vh;font-weight:700;color:var(--dim);font-variant-numeric:tabular-nums}
   .empty{flex:1;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:2vh;font-weight:700}
 
   /* rotating sponsor ad banner (the venue's revenue slot) */
   .adbanner{flex:none;display:flex;align-items:center;gap:1.3vw;background:#faf6ee;border:1px solid var(--line);border-left:.55vh solid var(--amber);border-radius:1vh;padding:1vh 1.4vw;min-height:9.4vh}
-  .adbanner .adtag{flex:none;font-size:1.3vh;font-weight:800;letter-spacing:.12em;color:var(--amber);border:1.5px solid var(--amber);border-radius:.5vh;padding:.3vh .8vw}
+  .adbanner .adtag{flex:none;font-size:2vh;font-weight:800;letter-spacing:.12em;color:var(--amber);border:1.5px solid var(--amber);border-radius:.5vh;padding:.3vh .8vw}
   .adbanner .anm{flex:1;min-width:0}
   .adbanner .anm b{font-size:2.9vh;font-weight:900;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .adbanner .anm span{font-size:1.85vh;font-weight:700;color:var(--dim);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -76,20 +76,22 @@
   .foot .ticker{flex:1;display:flex;align-items:center;gap:1vw;overflow:hidden}
   .foot .ticker .tk-lbl{flex:none;font-size:1.5vh;font-weight:800;letter-spacing:.08em;color:var(--green)}
   .foot .ticker .tk-wrap{flex:1;overflow:hidden;white-space:nowrap}
-  .foot .tk-scroll{display:inline-block;white-space:nowrap;font-size:1.8vh;font-weight:800;font-variant-numeric:tabular-nums;animation:tkscroll 42s linear infinite}
+  .foot .tk-scroll{display:inline-block;white-space:nowrap;font-size:1.8vh;font-weight:800;font-variant-numeric:tabular-nums;animation:none}
   @keyframes tkscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .foot .app{display:flex;align-items:center;gap:1vw;margin-left:auto}
   .foot .app img{width:6.6vh;height:6.6vh;border-radius:1vh;background:#fff;padding:.4vh;border:1px solid var(--line)}
   .foot .app .t{font-size:1.6vh;font-weight:700;color:#6b6456;line-height:1.2}.foot .app .t b{color:var(--ink)}
-  .foot .up{font-size:1.4vh;color:#a99e88;font-weight:700}
+  .foot .up{font-size:1.8vh;color:#a99e88;font-weight:700}
 .wxsun{font-size:14px;opacity:.75;margin-right:14px;white-space:nowrap}.wxsun b{font-weight:700}
+body.noinset{padding:1.8vh 2vw}
 </style>
 </head>
 <body>
+<script>if(new URLSearchParams(location.search).get("inset")==="0")document.body.classList.add("noinset");</script>
   <div class="head">
     <span class="logo"></span>
     <h1 id="hostName">Welcome</h1><span class="pb">powered by MileCheck</span>
-    <span class="sp"></span><span class="wxsun" id="wxSun"></span><span class="clock" id="clock">—</span>
+    <span class="sp"></span><span class="clock" id="clock">—</span>
     <span class="live"><span class="r"></span>LIVE</span>
   </div>
 
@@ -107,7 +109,7 @@
 
   <div class="foot">
     <div class="ticker"><span class="tk-lbl" id="tkLbl">● LIVE</span><div class="tk-wrap"><span class="tk-scroll" id="tkScroll">Live cameras & DOT alerts · updated every minute</span></div></div>
-    <div class="app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fmilecheckapp.com%2Fget%2F%3Futm_source%3Dboard%26utm_medium%3Dqr%26utm_campaign%3Di84-pendleton" alt=""><div class="t"><b>Take these alerts with you</b><br>Scan · milecheckapp.com</div></div>
+    <div class="app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fmilecheckapp.com%2Fget%2F%3Futm_source%3Dboard%26utm_medium%3Dqr%26utm_campaign%3Di84-pendleton" alt=""><div class="t"><b>MileCheck app</b><br>Scan for your phone</div></div>
     <span class="up" id="updated">—</span>
   </div>
 
@@ -121,9 +123,9 @@ const PCFG={
   venue:_venue||"your store", short:"Pendleton",
   corridorLabel:"I-84 · Pendleton, Oregon", region:"Blue Mountains",
   here:[45.672,-118.788], route:"I-84", mile:_mp,
-  condState:"OR", dot:"ODOT", alertRid:"I84", alertRe:/^I-?84$/,
-  dec:{name:"WESTBOUND",to:"toward Hermiston and Portland"},
-  inc:{name:"EASTBOUND",to:"toward Cabbage Hill and La Grande"},
+  condState:"OR", stateName:"Oregon", towns:[{n:"Portland",mp:2},{n:"Cascade Locks",mp:44},{n:"Hood River",mp:63},{n:"The Dalles",mp:85},{n:"Biggs Junction",mp:104},{n:"Rufus",mp:109},{n:"Arlington",mp:137},{n:"Boardman",mp:164},{n:"Hermiston",mp:180},{n:"Stanfield",mp:188},{n:"Pendleton",mp:210},{n:"Cabbage Hill",mp:224},{n:"Meacham",mp:234},{n:"La Grande",mp:261},{n:"North Powder",mp:285},{n:"Baker City",mp:304},{n:"Durkee",mp:327},{n:"Huntington",mp:353},{n:"Ontario",mp:376},{n:"Boise",mp:425}], tz:"America/Los_Angeles", tzEast:{from:356,tz:"America/Boise"}, dot:"ODOT", alertRid:"I84", alertRe:/^I-?84$/,
+  dec:{name:"WEST OF HERE",short:"W"},
+  inc:{name:"EAST OF HERE",short:"E"},
   camBase:"https://milepost-proxy.leahgerber93.workers.dev/camera-image?state=OR&id=",
   cameras:[
     {name:"Boardman",mp:168,lat:45.8336,lon:-119.6232,file:"OR-537"},
@@ -138,7 +140,7 @@ const PCFG={
     {name:"Spring Creek",mp:247,lat:45.3893,lon:-118.3195,file:"OR-1040"},
   ],
   services:[
-    {name:"Your business here",headline:"One sponsor per board · demo",url:"https://milecheckapp.com/partners/corridor-boards.html",demo:true},
+    {name:"Demo sponsor space",headline:"One local business per board",url:"https://milecheckapp.com/partners/corridor-boards.html",demo:true},
   ].concat(_house.map(h=>({name:h,headline:"",house:true}))),
 };
 function resolveLocation(){return {slug:"i84-pendleton",cfg:PCFG};}
@@ -148,14 +150,6 @@ function pingBoardView(){}
 const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
 const {slug:LOC,cfg:P}=resolveLocation();
 const HERE=P.here;
-// sunrise/sunset line — restored 2026-07-22 (existed v3–v5a, dropped in the v5b+
-// rewrite; Leah flagged the regression). Compact single-day form from mobile-v6.
-(async()=>{try{
-  const u=`https://api.open-meteo.com/v1/forecast?latitude=${HERE[0]}&longitude=${HERE[1]}&daily=sunrise,sunset&timezone=auto&forecast_days=1`;
-  const d=(await (await fetch(u)).json()).daily;
-  const fmtT=x=>new Date(x).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
-  if(d) document.getElementById("wxSun").innerHTML=`☀ <b>${fmtT(d.sunrise[0])}</b> · 🌙 <b>${fmtT(d.sunset[0])}</b>`;
-}catch(e){}})();
 const CAM_BASE=P.camBase;
 document.getElementById("hostName").textContent=_venue?"Welcome to "+P.venue:"Your store name goes here";
 document.getElementById("corridorLabel").textContent=P.corridorLabel;
@@ -174,49 +168,136 @@ let lastFetch=0,err=false;
 const CLOSE_RE=/\b(?:road|highway|interstate|all lanes)\b[^.]{0,40}\bclos|closed to (?:all )?traffic|no travel|avalanche|blocked/i,PARTIAL_RE=/lane|shoulder|ramp|frontage|exit/i,CHAIN_RE=/chain/i;
 const isFullClose=t=>CLOSE_RE.test(t)&&!PARTIAL_RE.test(t);
 function statusOf(txt){if(isFullClose(txt))return"stop";if(CHAIN_RE.test(txt)||/snow|ice|pack|slush/i.test(txt))return"warn";return"warn";}
+// Venue demo board, v2 display logic (2026-10-13, after the ChatGPT review).
+// Injected by scripts/gen-venue-demo-boards.py in place of the private board's poll/render code.
+// Changes, each from the review:
+//  - an alert with no usable milepost is placed by its coordinates, or dropped. Never "MP 0".
+//  - columns are places ("WEST OF HERE"), and each alert says which lanes it affects.
+//  - a scheduled closure shows its start date and never counts as a current closure.
+//  - "No traffic impacts" notices are dropped.
+//  - place name, "toward" towns, clock time zone and the first camera all follow the store's exit.
+const TOWNS = P.towns;
+const tzAt = m => (P.tzEast && m >= P.tzEast.from) ? P.tzEast.tz : P.tz;
+const TZ = tzAt(P.mile);
+function nearTown(m){let b=null;for(const t of TOWNS){const d=Math.abs(t.mp-m);if(!b||d<b.d)b={n:t.n,d};}return b&&b.d<=12?b.n:null;}
+function towardTowns(side){
+  const list=TOWNS.filter(t=>side==="dec"?t.mp<P.mile-5:t.mp>P.mile+5).sort((a,b)=>side==="dec"?b.mp-a.mp:a.mp-b.mp);
+  if(!list.length)return "";
+  const picks=[list[0]];const far=list.filter(t=>Math.abs(t.mp-P.mile)<=150).pop()||list[0];if(far!==list[0])picks.push(far);
+  return "toward "+picks.map(t=>t.n).join(" and ");
+}
+const _near=nearTown(P.mile);
+document.getElementById("corridorLabel").textContent=P.route+" · "+(_near?"near "+_near:"milepost "+Math.round(P.mile))+", "+P.stateName;
+document.getElementById("decDir").textContent="◀ "+P.dec.name;
+document.getElementById("decTo").textContent=towardTowns("dec");
+document.getElementById("incDir").textContent=P.inc.name+" ▶";
+document.getElementById("incTo").textContent=towardTowns("inc");
+document.getElementById("hostName").textContent=_venue?"Demo for "+P.venue:"Demo board";
+document.title="MileCheck demo board · "+(_near||P.route);
+
+MPA.splice(0,1);  // review v2 #3: P.here belongs to the base exit, not this store's
+function anchorDist(lat,lon){return Math.min(...MPA.map(a=>miles(lat,lon,a.lat,a.lon)));}
+const TYPE={AC:"Crash",CL:"Closure",RW:"Roadwork",IN:"Incident",HZ:"Hazard",WE:"Weather",VH:"Vehicle",OT:"Notice",CO:"Roadwork"};
+function dirOf(r,t){const d=String(((r.location||{}).direction)||"")+" "+t;
+  if(/\b(both|all) directions\b/i.test(d))return "both directions";
+  const m=d.match(/\b(north|south|east|west)/i);return m?m[1][0].toUpperCase()+"B lanes":"";}
+// A named place only: "Near E Dugas Rd (MP 268)" -> "E Dugas Rd". Never a route name or a fragment.
+function placeOf(t){const m=t.match(/\b(?:near|at|from)\s+([A-Z][^(.,;]{2,30}?)\s*\(MP/)||t.match(/\b(?:near|at)\s+([A-Z][A-Za-z .'-]{2,30}?)(?=[.,;(]|$)/);
+  if(!m)return "";const p=m[1].trim();return /^(I-?\d|US|SR|OR|AZ|Loop|roadway|the )/i.test(p)?"":p;}
+const NEAR_MI=60;  // alerts farther than this aren't about the road outside the store
+function schedText(st,en){const sameDay=fmtDay(st)===fmtDay(Date.now()/1000);
+  const t=new Date(st*1000).toLocaleTimeString([],{hour:"numeric",minute:"2-digit",timeZone:TZ});
+  return sameDay?"Scheduled today at "+t:"Scheduled "+fmtDay(st)+(en&&fmtDay(en)!==fmtDay(st)?" through "+fmtDay(en):"");}
+const fmtDay=s=>new Date(s*1000).toLocaleDateString([],{month:"short",day:"numeric",timeZone:TZ});
+function ago(s){if(!s)return "";const m=Math.round((Date.now()/1000-s)/60);if(m<60)return m+" min ago";const h=Math.round(m/60);return h<48?h+" hr ago":Math.round(h/24)+" days ago";}
+
+async function getFeed(path,key){
+  const r=await fetch(WORKER+path,{cache:"no-store"});
+  if(!r.ok)throw new Error(path+" "+r.status);
+  const j=await r.json();
+  if(!j||!Array.isArray(j[key]))throw new Error(path+" bad shape");
+  return j;
+}
+// Milepost of a feed endpoint, or null. Blank or zero is not a milepost.
+function mpOf(loc,k){const raw=loc[k+"-mile-marker"];return (raw!==""&&raw!=null&&isFinite(+raw)&&+raw>0)?+raw:null;}
 async function poll(){
   try{
     const [cond,inc]=await Promise.all([
-      fetch(WORKER+"/conditions?state="+P.condState,{cache:"no-store"}).then(r=>r.json()).catch(()=>({})),
-      fetch(WORKER+"/incidents?state="+P.condState,{cache:"no-store"}).then(r=>r.json()).catch(()=>({})),
+      getFeed("/conditions?state="+P.condState,"road-weather-reports"),
+      getFeed("/incidents?state="+P.condState,"incident-reports"),
     ]);
-    const txtOf=r=>cleanTxt(r.headline)+" "+cleanTxt(r["impact-desc"]);
+    const now=Date.now()/1000;
     const alerts=(inc["incident-reports"]||[]).filter(r=>{const rid=String((r.location||{})["route-id"]||"").trim();return rid===P.alertRid||P.alertRe.test(rid);})
-      .map(r=>{const sl=(r.location||{})["start-location"]||{};let lat=sl["start-lat"],lon=sl["start-long"];let mp=sl["start-mile-marker"]!=null&&isFinite(+sl["start-mile-marker"])?+sl["start-mile-marker"]:(lat!=null&&lon!=null?estimateMp(lat,lon):null);if(mp==null)return null;const t=txtOf(r);return {kind:"alert",name:cleanTxt(r.headline)||"Incident",mp,st:statusOf(t),stop:isFullClose(t)};}).filter(Boolean);
-    const closed=alerts.find(a=>a.stop),winter=(cond["road-weather-reports"]||[]).map(r=>r["road-surface-condition"]||"").find(s=>/snow|ice|pack|slush|chain/i.test(s));
+      .map(r=>{
+        const t=cleanTxt(r.headline)+" "+cleanTxt(r["impact-desc"]);
+        if(/no traffic impacts?/i.test(t))return null;
+        const L=r.location||{},sl=L["start-location"]||{},el=L["end-location"]||{};
+        const at=(ll,k)=>{let m=mpOf(ll,k);const la=ll[k+"-lat"],lo=ll[k+"-long"];
+          if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<20)m=estimateMp(+la,+lo);return m;};
+        let a=at(sl,"start"),b=at(el,"end");if(a==null)a=b;if(b==null)b=a;
+        if(a==null)return null;
+        const lo=Math.min(a,b),hi=Math.max(a,b);
+        const mp=P.mile<lo?lo:(P.mile>hi?hi:P.mile);  // nearest point of the affected stretch
+        if(Math.abs(mp-P.mile)>NEAR_MI)return null;
+        const full=r["is-full-closure"]===true||isFullClose(t);
+        const start=+r["start-time"]||0,end=+r["end-time"]||0;
+        if(end&&end<now)return null;
+        const future=start>now;
+        let type=TYPE[r["event-type-id"]]||"Notice";if(type==="Closure"&&!full)type=/ramp|exit/i.test(t)?"Ramp closure":"Lane closure";
+        if(type==="Notice"&&/ramp/i.test(t))type="Ramp work";
+        const place=placeOf(t);
+        return {kind:"alert",name:type+(place?" · "+place:""),mp,stop:full&&!future,future,
+          when:future?schedText(start,end):"",dir:dirOf(r,t),upd:ago(+r["last-updated"]),
+          st:full?"stop":"warn"};
+      }).filter(Boolean);
+    const closed=alerts.filter(a=>a.stop).sort((a,b)=>Math.abs(a.mp-P.mile)-Math.abs(b.mp-P.mile))[0];
+    const winter=cond["road-weather-reports"].filter(r=>{const L=r.location||{};const rid=String(L["route-id"]||r["route-id"]||"").trim();
+        if(!(rid===P.alertRid||P.alertRe.test(rid)))return false;
+        let m=mpOf(L["start-location"]||{},"start");const la=r.latitude,lo=r.longitude;
+        if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<20)m=estimateMp(+la,+lo);
+        return m!=null&&Math.abs(m-P.mile)<=NEAR_MI;})
+      .map(r=>r["road-surface-condition"]||"").find(s=>/snow|ice|pack|slush|chain/i.test(s));
     const sv=document.getElementById("statusVal"),sd=document.getElementById("statusDesc");
-    if(closed){sv.className="sv stop";sv.textContent="CLOSURE REPORTED";sd.textContent=P.dot+" · MP "+Math.round(closed.mp)+" · "+closed.name;}
+    if(closed){sv.className="sv stop";sv.textContent="CLOSURE REPORTED";const cd=Math.round(Math.abs(closed.mp-P.mile));sd.textContent=P.dot+": "+closed.name+", "+(cd<1?"at this exit":cd+" mi "+(closed.mp<P.mile?P.dec.short:P.inc.short))+(closed.dir?" · "+closed.dir:"");}
     else if(/chain/i.test(winter||"")){sv.className="sv warn";sv.textContent="CHAINS REPORTED";sd.textContent=P.dot+": "+winter;}
     else if(winter){sv.className="sv warn";sv.textContent="WINTER REPORT";sd.textContent=P.dot+": "+winter;}
-    else{sv.className="sv ok";sv.textContent="NO CLOSURES REPORTED";sd.textContent=P.dot+" reports no closures or winter conditions on "+P.route+" here";}
-    const cams=P.cameras.map(c=>({kind:"cam",name:c.name,mp:c.mp}));
-    const all=cams.concat(alerts);
-    const west=all.filter(x=>x.mp<=P.mile).sort((a,b)=>(P.mile-a.mp)-(P.mile-b.mp));
-    const east=all.filter(x=>x.mp>P.mile).sort((a,b)=>(a.mp-P.mile)-(b.mp-P.mile));
-    renderRows("westRows",west,"west"); renderRows("eastRows",east,"east");
+    else{sv.className="sv ok";sv.textContent="NO CLOSURES REPORTED";sd.textContent=P.dot+" reports no current closures on "+P.route+" within "+NEAR_MI+" mi";}
+    const cams=P.cameras.filter(c=>Math.abs(c.mp-P.mile)<=NEAR_MI).map(c=>({kind:"cam",name:c.name,mp:c.mp}));
+    // Alerts first, nearest first, then the nearest cameras. Three rows a side: details wrap to two lines on a TV.
+    const side=(f)=>{const a=alerts.filter(x=>f(x.mp)),c=cams.filter(x=>f(x.mp));const by=(p,q)=>Math.abs(p.mp-P.mile)-Math.abs(q.mp-P.mile);
+      return a.sort(by).slice(0,3).concat(c.sort(by)).slice(0,3);};
+    renderRows("westRows",side(m=>m<=P.mile),"dec"); renderRows("eastRows",side(m=>m>P.mile),"inc");
     lastFetch=Date.now();err=false;
-  }catch(e){err=true;}
+  }catch(e){err=true;
+    const sv=document.getElementById("statusVal");sv.className="sv warn";sv.textContent="REPORTS UNAVAILABLE";
+    document.getElementById("statusDesc").textContent="Can't reach "+P.dot+" reports right now. Retrying every minute.";}
   tick();
 }
 function renderRows(elId,list,side){
   const el=document.getElementById(elId);
-  if(!list.length){el.innerHTML=`<div class="empty">No ${P.dot} reports ${side==="west"?P.dec.to:P.inc.to}</div>`;return;}
-  el.innerHTML=list.slice(0,5).map(x=>{
-    const dist=Math.round(Math.abs(x.mp-P.mile))+" mi";
-    if(x.kind==="cam")return `<div class="row"><div class="nm"><span class="icn">📷</span>${x.name}<span class="sub">Live camera</span></div><div class="rt"><div class="st cam">CAM</div><div class="dist">MP ${x.mp} · ${dist}</div></div></div>`;
-    const label=x.stop?"CLOSED":(x.st==="warn"?"CAUTION":"ALERT");
-    return `<div class="row"><div class="nm"><span class="icn">${x.stop?"⛔":"⚠"}</span>${x.name}<span class="sub">${P.dot} live alert</span></div><div class="rt"><div class="st ${x.st}">${label}</div><div class="dist">MP ${Math.round(x.mp)} · ${dist}</div></div></div>`;
+  if(!list.length){el.innerHTML=`<div class="empty">No ${P.dot} reports ${towardTowns(side)}</div>`;return;}
+  el.innerHTML=list.map(x=>{
+    const dm=Math.round(Math.abs(x.mp-P.mile)),dist=dm<1?"here":dm+" mi";
+    if(x.kind==="cam")return `<div class="row"><div class="nm"><span class="icn">📷</span>${x.name}</div><div class="rt"><div class="dist big">${dist}</div></div></div>`;
+    const label=x.future?"SCHEDULED":(x.stop?"CLOSED":"REPORTED");
+    const sub=[x.when,x.dir,P.dot+(x.upd?" · "+x.upd:"")].filter(Boolean).join(" · ");
+    return `<div class="row"><div class="nm"><span class="icn">${x.stop?"⛔":(x.future?"🗓":"⚠")}</span>${x.name}<span class="sub">${sub}</span></div><div class="rt"><div class="st ${x.future?"cam":x.st}">${label}</div><div class="dist">${dist}</div></div></div>`;
   }).join("");
 }
-function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});const u=document.getElementById("updated");if(err){u.textContent="reconnecting…";return;}if(lastFetch){const s=Math.round((Date.now()-lastFetch)/1000);u.textContent=s<8?"updated just now":"updated "+s+"s ago";}}
-
+function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit",timeZone:TZ});
+  const u=document.getElementById("updated");if(err){u.textContent="reconnecting…";return;}
+  if(lastFetch){const s=Math.round((Date.now()-lastFetch)/1000);u.textContent="Board checked "+(s<8?"just now":s+"s ago");}}
+// Hero camera: nearest first, then outward. Far ones say so.
+const _byDist=P.cameras.slice().sort((a,b)=>Math.abs(a.mp-P.mile)-Math.abs(b.mp-P.mile));
+const _close=_byDist.filter(c=>Math.abs(c.mp-P.mile)<=30);
+const CAMS=_close.length?_close.slice(0,5):_byDist.slice(0,1);  // stay near the store when we can
 let ci=0;
-function cycleCam(){const c=P.cameras[ci%P.cameras.length];ci++;
+function cycleCam(){const c=CAMS[ci%CAMS.length];ci++;const d=Math.round(Math.abs(c.mp-P.mile));
   document.getElementById("camImg").src=CAM_BASE+encodeURIComponent(c.file)+"&t="+Date.now();
-  document.getElementById("camCap").innerHTML=`${c.name} <span class="mi">· MP ${c.mp} · ${Math.round(Math.abs(c.mp-P.mile))} mi ${c.mp<P.mile?P.dec.name[0]:P.inc.name[0]}</span>`;}
+  document.getElementById("camCap").innerHTML=`${c.name} <span class="mi">· ${d<1?"here":d+" mi "+(c.mp<P.mile?P.dec.short:P.inc.short)}${d>30?" · farther along "+P.route:""}</span>`;}
 // ADOT/ODOT serve a 540x330 "no live feed" card for dark cameras. Skip it, but
 // stop after one full lap so an all-dark corridor doesn't loop forever.
-let _dead=0;document.getElementById("camImg").addEventListener("load",e=>{const i=e.target;if(i.naturalWidth===540&&i.naturalHeight===330){if(++_dead<P.cameras.length)cycleCam();}else _dead=0;});
+let _dead=0;document.getElementById("camImg").addEventListener("load",e=>{const i=e.target;if(i.naturalWidth===540&&i.naturalHeight===330){if(++_dead<CAMS.length)cycleCam();}else _dead=0;});
 cycleCam(); setInterval(cycleCam,6000);
 
 // rotating sponsor ad
@@ -224,11 +305,11 @@ let adi=0;
 function renderAd(){const a=P.services[adi%P.services.length];adi++;const b=document.getElementById("adBanner");
   b.innerHTML="";const nm=document.createElement("span");nm.className="anm";const bb=document.createElement("b");bb.textContent=a.name;nm.appendChild(bb);
   const hs=document.createElement("span");hs.textContent=a.headline;nm.appendChild(hs);b.appendChild(nm);
-  const tg=document.createElement("span");tg.className="adtag";tg.textContent=a.house?"IN THE STORE":(a.demo?"SPONSOR · DEMO":"SPONSOR");if(a.house)tg.style.background="#17150f";b.appendChild(tg);
+  const tg=document.createElement("span");tg.className="adtag";tg.textContent=a.house?"IN THE STORE":(a.demo?"DEMO SPONSOR SPACE":"SPONSOR");if(a.house)tg.style.background="#17150f";b.appendChild(tg);
   if(a.url){const q=document.createElement("img");q.className="aq";q.alt="";q.src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data="+encodeURIComponent(a.url);b.appendChild(q);}}
 renderAd(); setInterval(renderAd,10000);
 
-document.getElementById("tkScroll").innerHTML=(("Live cameras & "+P.dot+" reports along "+P.route+" · updated every minute")+"       ·       ").repeat(2);
+document.getElementById("tkScroll").textContent="Demo using live "+P.dot+" reports for "+P.route;
 document.getElementById("tkLbl").textContent="● LIVE";
 
 poll(); setInterval(poll,60000); setInterval(tick,1000);
