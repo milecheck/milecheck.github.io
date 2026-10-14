@@ -60,6 +60,17 @@
     .crow .rt{font-weight:800;font-size:14.5px;}
     .crow .stb{font-weight:800;color:#cf3320;font-size:12.5px;white-space:nowrap;}
     .crow .sub{color:#5b6670;font-size:12.5px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.crow .go{margin-top:5px;font-size:12px;line-height:1.5;}
+.crow .go a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+.crow .go a:hover{text-decoration:underline;}
+.st-grid{max-width:1160px;margin:22px auto 0;padding:0 20px;}
+.st-grid h2{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 6px;}
+.st-grid p{color:#5b6670;font-size:13.5px;line-height:1.5;margin:0 0 10px;}
+.st-grid ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;}
+.st-grid ul a{display:block;background:#fff;border:1px solid #E4EAE6;border-radius:8px;padding:8px 11px;font-size:13.5px;font-weight:600;color:#0F1419;text-decoration:none;}
+.st-grid ul a:hover{border-color:#00A86B;color:#00A86B;}
+.st-grid .st-more{margin-top:10px;}
+.st-grid .st-more a{color:#0f7a4f;font-weight:700;}
     .cl-empty{padding:34px 16px;text-align:center;color:#0f7a4f;font-weight:800;font-size:16px;}
     .cl-empty small{display:block;color:#5b6670;font-weight:500;margin-top:6px;line-height:1.5;}
 
@@ -189,8 +200,66 @@
   </div>
 
   <div class="cl-notes">
-    <b>About this data:</b> closures come directly from state departments of transportation — the same official feeds that power the MileCheck app, normalized from dozens of different state systems into one format. Full road closures only (lane and shoulder closures are filtered out here; the app carries those too). If a state shows no closures, that usually means the roads are simply open — a quiet map is good news. For one state at a time, with crashes and weather alerts as well as closures, see <a href="../road-conditions/" style="color:#0f7a4f;font-weight:700;">road conditions by state</a>.
+    <b>About this data:</b> closures come directly from state departments of transportation — the same official feeds that power the MileCheck app, normalized from dozens of different state systems into one format. Full road closures only (lane and shoulder closures are filtered out here; the app carries those too). If a state shows no closures, its DOT feed lists none right now. For one state at a time, with crashes and weather alerts as well as closures, see <a href="../road-conditions/" style="color:#0f7a4f;font-weight:700;">road conditions by state</a>.
   </div>
+
+  <section class="st-grid" aria-label="Road conditions by state">
+    <h2>Road conditions by state</h2>
+    <p>Closures, crashes, construction and weather alerts for one state at a time.</p>
+    <ul>
+      <li><a href="/road-conditions/alabama/">Alabama</a></li>
+      <li><a href="/road-conditions/alaska/">Alaska</a></li>
+      <li><a href="/road-conditions/arizona/">Arizona</a></li>
+      <li><a href="/road-conditions/arkansas/">Arkansas</a></li>
+      <li><a href="/road-conditions/california/">California</a></li>
+      <li><a href="/road-conditions/colorado/">Colorado</a></li>
+      <li><a href="/road-conditions/connecticut/">Connecticut</a></li>
+      <li><a href="/road-conditions/delaware/">Delaware</a></li>
+      <li><a href="/road-conditions/florida/">Florida</a></li>
+      <li><a href="/road-conditions/georgia/">Georgia</a></li>
+      <li><a href="/road-conditions/hawaii/">Hawaii</a></li>
+      <li><a href="/road-conditions/idaho/">Idaho</a></li>
+      <li><a href="/road-conditions/illinois/">Illinois</a></li>
+      <li><a href="/road-conditions/indiana/">Indiana</a></li>
+      <li><a href="/road-conditions/iowa/">Iowa</a></li>
+      <li><a href="/road-conditions/kansas/">Kansas</a></li>
+      <li><a href="/road-conditions/kentucky/">Kentucky</a></li>
+      <li><a href="/road-conditions/louisiana/">Louisiana</a></li>
+      <li><a href="/road-conditions/maine/">Maine</a></li>
+      <li><a href="/road-conditions/maryland/">Maryland</a></li>
+      <li><a href="/road-conditions/massachusetts/">Massachusetts</a></li>
+      <li><a href="/road-conditions/michigan/">Michigan</a></li>
+      <li><a href="/road-conditions/minnesota/">Minnesota</a></li>
+      <li><a href="/road-conditions/mississippi/">Mississippi</a></li>
+      <li><a href="/road-conditions/missouri/">Missouri</a></li>
+      <li><a href="/road-conditions/montana/">Montana</a></li>
+      <li><a href="/road-conditions/nebraska/">Nebraska</a></li>
+      <li><a href="/road-conditions/nevada/">Nevada</a></li>
+      <li><a href="/road-conditions/new-hampshire/">New Hampshire</a></li>
+      <li><a href="/road-conditions/new-jersey/">New Jersey</a></li>
+      <li><a href="/road-conditions/new-mexico/">New Mexico</a></li>
+      <li><a href="/road-conditions/new-york/">New York</a></li>
+      <li><a href="/road-conditions/north-carolina/">North Carolina</a></li>
+      <li><a href="/road-conditions/north-dakota/">North Dakota</a></li>
+      <li><a href="/road-conditions/ohio/">Ohio</a></li>
+      <li><a href="/road-conditions/oklahoma/">Oklahoma</a></li>
+      <li><a href="/road-conditions/oregon/">Oregon</a></li>
+      <li><a href="/road-conditions/pennsylvania/">Pennsylvania</a></li>
+      <li><a href="/road-conditions/rhode-island/">Rhode Island</a></li>
+      <li><a href="/road-conditions/south-carolina/">South Carolina</a></li>
+      <li><a href="/road-conditions/south-dakota/">South Dakota</a></li>
+      <li><a href="/road-conditions/tennessee/">Tennessee</a></li>
+      <li><a href="/road-conditions/texas/">Texas</a></li>
+      <li><a href="/road-conditions/utah/">Utah</a></li>
+      <li><a href="/road-conditions/vermont/">Vermont</a></li>
+      <li><a href="/road-conditions/virginia/">Virginia</a></li>
+      <li><a href="/road-conditions/washington/">Washington</a></li>
+      <li><a href="/road-conditions/west-virginia/">West Virginia</a></li>
+      <li><a href="/road-conditions/wisconsin/">Wisconsin</a></li>
+      <li><a href="/road-conditions/wyoming/">Wyoming</a></li>
+    </ul>
+    <p class="st-more"><a href="/road-conditions/canada/">Canada</a> · <a href="/road-conditions/">All states and provinces</a></p>
+  </section>
 
   <!-- dq:start -->
 <aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-closures.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
@@ -355,10 +424,21 @@ async function closuresFor(st){
     return {ok:false,list:(c&&c.list)||[]};
   }
 }
+function stSlug(st){return (NAMES[st]||"").toLowerCase().replace(/\s+/g,"-");}
+// Links out of a closure: the mile-marker map at that mile (whole miles only, the map
+// matches a post within 0.15 mi) and the state's road-conditions page.
+function goLinks(c){
+  const out=[], mp=+c.mp;
+  if(c.route&&/\d/.test(c.route)&&isFinite(mp)&&mp>0)
+    out.push(`<a href="/maps/mile-markers/?route=${encodeURIComponent(c.route)}&mp=${Math.round(mp)}&state=${c.st}">MP ${Math.round(mp)} on the mile marker map</a>`);
+  if(NAMES[c.st]) out.push(`<a href="/road-conditions/${stSlug(c.st)}/">${NAMES[c.st]} road conditions</a>`);
+  return out.join(" · ");
+}
 function popupHtml(c){
   return `<div class="fpop"><div class="fp-nm">⛔ Road closed</div>
     <div class="fp-st">${[c.route,c.mp?"MP "+Math.round(c.mp):null,NAMES[c.st]||c.st].filter(Boolean).join(" · ")}</div>
     <div class="fp-row">${c.head}</div>
+    <div class="fp-row" style="margin-top:6px">${goLinks(c)}</div>
     <div class="fp-row" style="margin-top:6px"><a href="https://milecheckapp.com" style="font-weight:700">These alerts, on your route — MileCheck →</a></div></div>`;
 }
 let prevView=null;
@@ -395,7 +475,7 @@ function render(){
       : failedNote;
   } else {
     bs.className="bigstatus";
-    bs.textContent=inView.length?("⛔ "+inView.length+" road closure"+(inView.length>1?"s":"")+" in view"):"No closures in view — roads are open";
+    bs.textContent=inView.length?("⛔ "+inView.length+" road closure"+(inView.length>1?"s":"")+" in view"):"No closures reported in view";
     if(!inView.length)bs.className="bigstatus hint";
   }
 
@@ -406,15 +486,16 @@ function render(){
   if(!inView.length){
     rows.innerHTML = failedNames.length
       ? failedBanner+`<div class="cl-empty" style="color:#5b6670;">Closure data unavailable<small>Try again in a moment, or pick a different state — this is not a confirmed clear.</small></div>`
-      : `<div class="cl-empty">✓ No closures here<small>Every highway in this view is open per the state DOT feeds. A quiet map is good news.</small></div>`;
+      : `<div class="cl-empty">No closures reported here<small>The state DOT feeds for this view list no full closures right now.</small></div>`;
     return;
   }
   const sorted=inView.slice().sort((a,b)=>(a.st+a.route).localeCompare(b.st+b.route));
   rows.innerHTML=failedBanner+sorted.slice(0,40).map((c,i)=>`<div class="crow" data-i="${i}">
       <div class="t"><span class="rt">${c.route||"Local road"}${c.mp?" · MP "+Math.round(c.mp):""}</span><span class="stb">${c.st}</span></div>
-      <div class="sub">${c.head}</div>
+      <div class="sub">${c.head}</div>${goLinks(c)?`<div class="go">${goLinks(c)}</div>`:""}
     </div>`).join("");
-  rows.querySelectorAll('.crow[data-i]').forEach(el=>el.onclick=()=>{
+  rows.querySelectorAll('.crow[data-i]').forEach(el=>el.onclick=(e)=>{
+    if(e.target.closest('a'))return;
     const c=sorted[+el.dataset.i]; if(!c)return;
     rememberView();
     map.flyTo([c.lat,c.lon],10,{duration:.9});
