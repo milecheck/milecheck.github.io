@@ -84,6 +84,7 @@
   .foot .up{font-size:1.8vh;color:#a99e88;font-weight:700}
 .wxsun{font-size:14px;opacity:.75;margin-right:14px;white-space:nowrap}.wxsun b{font-weight:700}
 body.noinset{padding:1.8vh 2vw}
+.livebox{display:flex;flex-direction:column;align-items:flex-end;margin-left:1.2vw}.livebox .live{margin-left:0}.livebox .up{font-size:1.6vh;color:#8a8170;font-weight:700;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -92,7 +93,7 @@ body.noinset{padding:1.8vh 2vw}
     <span class="logo"></span>
     <h1 id="hostName">Welcome</h1><span class="pb">powered by MileCheck</span>
     <span class="sp"></span><span class="clock" id="clock">—</span>
-    <span class="live"><span class="r"></span>LIVE</span>
+    <span class="livebox"><span class="live"><span class="r"></span>LIVE</span><span class="up" id="updated">—</span></span>
   </div>
 
   <div class="top">
@@ -110,7 +111,7 @@ body.noinset{padding:1.8vh 2vw}
   <div class="foot">
     <div class="ticker"><span class="tk-lbl" id="tkLbl">● LIVE</span><div class="tk-wrap"><span class="tk-scroll" id="tkScroll">Live cameras & DOT alerts · updated every minute</span></div></div>
     <div class="app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fmilecheckapp.com%2Fget%2F%3Futm_source%3Dboard%26utm_medium%3Dqr%26utm_campaign%3Di17-black-canyon" alt=""><div class="t"><b>MileCheck app</b><br>Scan for your phone</div></div>
-    <span class="up" id="updated">—</span>
+    
   </div>
 
 <script>
@@ -139,7 +140,7 @@ const PCFG={
     {name:"Flagstaff",mp:335,lat:35.1011,lon:-111.6820,file:"AZ-1317-1486"},
   ],
   services:[
-    {name:"Demo sponsor space",headline:"One local business per board",url:"https://milecheckapp.com/partners/corridor-boards.html",demo:true},
+    {name:"Demo sponsor space",headline:"One sponsor per board",url:"https://milecheckapp.com/partners/corridor-boards.html",demo:true},
   ].concat(_house.map(h=>({name:h,headline:"",house:true}))),
 };
 function resolveLocation(){return {slug:"i17-black-canyon",cfg:PCFG};}
@@ -241,6 +242,10 @@ async function poll(){
         const full=r["is-full-closure"]===true||isFullClose(t);
         const start=+r["start-time"]||0,end=+r["end-time"]||0;
         if(end&&end<now)return null;
+        // Short-lived events the DOT forgot to clear (a crash with no end time, untouched for 12 h): drop.
+        // Roadwork and closures run for weeks and keep showing.
+        const upd=+r["last-updated"]||start;
+        if(/^(AC|IN|HZ|VH)$/.test(r["event-type-id"]||"")&&!end&&upd&&now-upd>12*3600)return null;
         const future=start>now;
         let type=TYPE[r["event-type-id"]]||"Notice";if(type==="Closure"&&!full)type=/ramp|exit/i.test(t)?"Ramp closure":"Lane closure";
         if(type==="Notice"&&/ramp/i.test(t))type="Ramp work";
@@ -279,7 +284,7 @@ function renderRows(elId,list,side){
     const dm=Math.round(Math.abs(x.mp-P.mile)),dist=dm<1?"here":dm+" mi";
     if(x.kind==="cam")return `<div class="row"><div class="nm"><span class="icn">📷</span>${x.name}</div><div class="rt"><div class="dist big">${dist}</div></div></div>`;
     const label=x.future?"SCHEDULED":(x.stop?"CLOSED":"REPORTED");
-    const sub=[x.when,x.dir,P.dot+(x.upd?" · "+x.upd:"")].filter(Boolean).join(" · ");
+    const sub=[x.when,x.dir,P.dot+(x.upd&&!x.future?" · "+x.upd:"")].filter(Boolean).join(" · ");  // a schedule's posting age reads as stale
     return `<div class="row"><div class="nm"><span class="icn">${x.stop?"⛔":(x.future?"🗓":"⚠")}</span>${x.name}<span class="sub">${sub}</span></div><div class="rt"><div class="st ${x.future?"cam":x.st}">${label}</div><div class="dist">${dist}</div></div></div>`;
   }).join("");
 }
