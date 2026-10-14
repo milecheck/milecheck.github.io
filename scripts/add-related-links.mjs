@@ -92,6 +92,8 @@ for (const n of nodes) {
 }
 
 // ---- relations
+// Interstate that runs through each camera city. A city with none of our corridor pages (Pittsburgh) gets no corridor link.
+const CITY_CORRIDOR = { atlanta:'i-75', birmingham:'i-65', buffalo:'i-90', cincinnati:'i-75', cleveland:'i-90', columbus:'i-70', detroit:'i-75', 'las-vegas':'i-15', 'los-angeles':'i-5', miami:'i-95', milwaukee:'i-94', 'new-orleans':'i-10', 'new-york-city':'i-95', orlando:'i-4', philadelphia:'i-95', phoenix:'i-10', portland:'i-5', sacramento:'i-80', 'salt-lake-city':'i-15', 'san-diego':'i-5', 'san-francisco':'i-80', seattle:'i-5', tampa:'i-75' };
 const by = (type, pred = () => true) => nodes.filter(n => n.type === type && pred(n));
 const first = (type, s) => by(type, n => n.states.includes(s));
 function related(n) {
@@ -119,7 +121,7 @@ function related(n) {
       push(first('cameras', s), sameRoute, first('conditions', s), passesHere.slice(0, 2), passesRoute.slice(0, 2), first('bridges', s), first('guide', s)); break;
     case 'cameras': {
       const stateCams = first('cameras', s).filter(c => !c.city), cities = first('cameras', s).filter(c => c.city && c !== n);
-      if (n.city) push(stateCams, first('conditions', s), cities.slice(0, 2), corridorsHere.slice(0, 1), first('report', s), first('guide', s));
+      if (n.city) push(stateCams, first('conditions', s), cities.slice(0, 2), nodes.filter(c => c.type === 'corridor' && c.url === `/corridors/${CITY_CORRIDOR[n.url.split('/')[2]]}/`), first('report', s), first('guide', s));
       else push(first('conditions', s), cities.slice(0, 2), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('report', s), first('guide', s));
       if (out.length < 3) push((NB[s] || []).slice(0, 2).flatMap(x => first('conditions', x)));
       break;
