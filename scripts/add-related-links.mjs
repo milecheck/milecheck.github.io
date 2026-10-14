@@ -163,6 +163,10 @@ ${links.map(l => `      <li><a href="${l.url}">${esc(l.title)}</a></li>`).join('
 <!-- related:end -->
 `;
 const STRIP = /[ \t]*<!-- related:start -->[\s\S]*?<!-- related:end -->\n?/;
+// Top row: the first three links again, right under the title, so a phone reader sees an onward link
+// in the first screen (Raptive prep 10/13: 39% of landings had none).
+const TOP_STRIP = /<!-- toplinks:start -->[\s\S]*?<!-- toplinks:end -->/;
+const topRow = links => `<!-- toplinks:start --><nav class="mc-toplinks" aria-label="Related pages" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${links.map(l => `<a href="${l.url}" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">${esc(l.title)}</a>`).join('')}</nav><!-- toplinks:end -->`;
 
 let changed = 0, skipped = [], checked = 0;
 for (const n of nodes) {
@@ -170,7 +174,7 @@ for (const n of nodes) {
   if (SKIP.has(n.file)) { if (SKIP.has(n.file)) skipped.push(n.file); continue; }
   checked++;
   const o = readFileSync(n.file, 'utf8');
-  let s = o.replace(STRIP, '');
+  let s = o.replace(STRIP, '').replace(TOP_STRIP, '');
   const links = related(n);
   if (links.length >= 3) {
     let at = s.search(/[ \t]*<!-- signup:start -->/);
@@ -178,6 +182,8 @@ for (const n of nodes) {
     if (at < 0) at = s.search(/[ \t]*<footer class="site-footer">/);
     if (at < 0) { console.error('no anchor:', n.file); continue; }
     s = s.slice(0, at) + '  ' + block(links) + s.slice(at);
+    const h1 = s.indexOf('</h1>');
+    if (h1 >= 0) s = s.slice(0, h1 + 5) + topRow(links.slice(0, 3)) + s.slice(h1 + 5);
   }
   if (s !== o) { writeFileSync(n.file, s); changed++; }
 }
