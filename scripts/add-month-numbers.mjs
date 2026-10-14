@@ -4,7 +4,11 @@
 // takes over without a code change).
 //   1. One paragraph on /road-conditions/<state>/ and /cameras/<state>/ (skipped on road-conditions
 //      pages that already carry the generator's own .rc-sept paragraph).
-//   2. A "Busiest highways in <Month Year>" box on /closures/ and /maps/mile-markers/.
+//   2. (Retired 10/13) A "Busiest highways in <Month Year>" box on /closures/ and /maps/mile-markers/.
+//      It ranked highways by alert counts summed across states, and states post very differently
+//      (September: I-80 "led" with 988, but 314 came from New York's feed and I-80 never enters
+//      New York; 776 were roadwork). Leah: counts across states aren't fair. The hub targets below
+//      now only strip the old box. Compare a state with itself, never across states.
 // The report page itself already lists ranked routes, so it is left alone.
 // Blocks sit between <!-- monthnum:start --> and <!-- monthnum:end -->. Idempotent: strips its own
 // block and re-inserts it in the same place, so a second run writes nothing.
@@ -48,7 +52,8 @@ function statePara(code, slug) {
   let t = `In ${label}, ${name}'s DOT feed carried ${num(j.total)} ${j.total === 1 ? 'alert' : 'alerts'}`;
   t += parts.length ? `: ${list(parts)}.` : '.';
   const routes = (j.topRoutes || []).slice(0, 3).map(niceRoute);
-  if (routes.length) t += ` The busiest routes were ${list(routes)}.`;
+  if (routes.length) t += ` The routes with the most alerts were ${list(routes)}.`;
+  t += ' Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures.';
   if (existsSync(`${statesDir}/${slug}.html`)) t += ` <a href="/${statesDir}/${slug}.html">See the full ${name} report</a>.`;
   return t;
 }
@@ -84,8 +89,9 @@ for (const dir of ['cameras', 'road-conditions']) {
     targets.push({ file, block: t ? paraBlock(t) : null, anchors, rc: dir === 'road-conditions' });
   }
 }
-targets.push({ file: 'closures/index.html', block: top5.length ? boxBlock : null, anchors: [/[ \t]*<!-- big:start -->/, /[ \t]*<div class="cl-wrap">/, /[ \t]*<!-- related:start -->/] });
-targets.push({ file: 'maps/mile-markers/index.html', block: top5.length ? boxBlock : null, anchors: [/[ \t]*<!-- related:start -->/] });
+// Cross-state rankings retired (see header): block null strips the old box from both hubs.
+targets.push({ file: 'closures/index.html', block: null, anchors: [] });
+targets.push({ file: 'maps/mile-markers/index.html', block: null, anchors: [] });
 
 let changed = 0, checked = 0; const skipped = [], noAnchor = [], dupes = [];
 for (const t of targets) {
