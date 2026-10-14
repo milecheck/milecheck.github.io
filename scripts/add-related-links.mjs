@@ -6,6 +6,9 @@
 //   cameras/, road-conditions/, bridges/   state = the directory name
 //   blog/mile-markers-<state>.html         state = the file name
 //   closures/<slug>/                       state = addressRegion in the page's JSON-LD
+//   cameras/<city>/                        state = the city's state in scripts/gen-city-camera-pages.js
+//   blog/km-markers-<province>.html        province = the file name
+//   blog/highway-report-<month>-states/    each state's page in the newest monthly report
 // Same state first, then same route across states. Only pages that exist on disk are linked.
 // Block sits between <!-- related:start --> and <!-- related:end -->, just before the signup
 // band, else before </main>, else before the footer. Idempotent: strips its own block and
@@ -19,7 +22,9 @@ const SKIP = new Set(skipArg ? readFileSync(skipArg.slice(12), 'utf8').split('\n
 const ST = { AL:'alabama',AK:'alaska',AZ:'arizona',AR:'arkansas',CA:'california',CO:'colorado',CT:'connecticut',DE:'delaware',FL:'florida',GA:'georgia',HI:'hawaii',ID:'idaho',IL:'illinois',IN:'indiana',IA:'iowa',KS:'kansas',KY:'kentucky',LA:'louisiana',ME:'maine',MD:'maryland',MA:'massachusetts',MI:'michigan',MN:'minnesota',MS:'mississippi',MO:'missouri',MT:'montana',NE:'nebraska',NV:'nevada',NH:'new-hampshire',NJ:'new-jersey',NM:'new-mexico',NY:'new-york',NC:'north-carolina',ND:'north-dakota',OH:'ohio',OK:'oklahoma',OR:'oregon',PA:'pennsylvania',RI:'rhode-island',SC:'south-carolina',SD:'south-dakota',TN:'tennessee',TX:'texas',UT:'utah',VT:'vermont',VA:'virginia',WA:'washington',WV:'west-virginia',WI:'wisconsin',WY:'wyoming' };
 // Neighboring states (shared land border), so a driver crossing a line finds the next state.
 const NB_RAW = 'WA:OR,ID|OR:WA,ID,CA,NV|CA:OR,NV,AZ|NV:CA,OR,ID,UT,AZ|ID:WA,OR,NV,UT,WY,MT|MT:ID,WY,SD,ND|WY:MT,SD,NE,CO,UT,ID|UT:ID,WY,CO,AZ,NV|AZ:CA,NV,UT,NM|CO:WY,NE,KS,OK,NM,UT|NM:AZ,CO,OK,TX|ND:MT,SD,MN|SD:ND,MN,IA,NE,WY,MT|NE:SD,IA,MO,KS,CO,WY|KS:NE,MO,OK,CO|OK:KS,MO,AR,TX,NM,CO|TX:NM,OK,AR,LA|MN:ND,SD,IA,WI|IA:MN,WI,IL,MO,NE,SD|MO:IA,IL,KY,TN,AR,OK,KS,NE|AR:MO,TN,MS,LA,TX,OK|LA:AR,MS,TX|WI:MN,IA,IL,MI|IL:WI,IA,MO,KY,IN|MI:WI,IN,OH|IN:MI,IL,KY,OH|OH:MI,IN,KY,WV,PA|KY:IL,IN,OH,WV,VA,TN,MO|TN:KY,VA,NC,GA,AL,MS,AR,MO|MS:TN,AL,LA,AR|AL:TN,GA,FL,MS|GA:TN,NC,SC,FL,AL|FL:GA,AL|SC:NC,GA|NC:VA,TN,GA,SC|VA:MD,WV,KY,TN,NC|WV:OH,PA,MD,VA,KY|MD:PA,DE,VA,WV|DE:PA,NJ,MD|PA:NY,NJ,DE,MD,WV,OH|NJ:NY,PA,DE|NY:VT,MA,CT,NJ,PA|CT:NY,MA,RI|RI:CT,MA|MA:NH,VT,NY,CT,RI|VT:NH,MA,NY|NH:ME,VT,MA|ME:NH';
+const NB_PROV = 'british-columbia:alberta,washington,idaho,montana|alberta:british-columbia,montana|manitoba:north-dakota,minnesota|ontario:michigan,new-york,minnesota|quebec:new-york,vermont,maine';
 const NB = {}; for (const part of NB_RAW.split('|')) { const [k, v] = part.split(':'); NB[ST[k]] = v.split(',').map(x => ST[x]); }
+for (const part of NB_PROV.split('|')) { const [k, v] = part.split(':'); NB[k] = v.split(','); }
 const slugOfName = n => n.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
 
 const dirs = d => existsSync(d) ? readdirSync(d, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => e.name) : [];
@@ -28,10 +33,27 @@ const page = (...parts) => { const p = parts.join('/'); return existsSync(p) ? p
 // ---- nodes: { file, url, type, states:[slug], route }
 const nodes = [];
 const add = n => { if (n.file && existsSync(n.file)) nodes.push(n); };
-for (const s of dirs('cameras')) add({ file: `cameras/${s}/index.html`, url: `/cameras/${s}/`, type: 'cameras', states: [s] });
+const CITY_STATE = {};
+if (existsSync('scripts/gen-city-camera-pages.js'))
+  for (const m of readFileSync('scripts/gen-city-camera-pages.js', 'utf8').matchAll(/slug:'([^']+)', name:'[^']*', state:'([A-Z]{2})'/g)) CITY_STATE[m[1]] = ST[m[2]];
+for (const s of dirs('cameras')) add(CITY_STATE[s]
+  ? { file: `cameras/${s}/index.html`, url: `/cameras/${s}/`, type: 'cameras', states: [CITY_STATE[s]], city: true }
+  : { file: `cameras/${s}/index.html`, url: `/cameras/${s}/`, type: 'cameras', states: [s] });
 for (const s of dirs('road-conditions')) add({ file: `road-conditions/${s}/index.html`, url: `/road-conditions/${s}/`, type: 'conditions', states: [s] });
 for (const s of dirs('bridges')) add({ file: `bridges/${s}/index.html`, url: `/bridges/${s}/`, type: 'bridges', states: [s] });
-for (const f of readdirSync('blog')) { const m = f.match(/^mile-markers-(.+)\.html$/); if (m) add({ file: `blog/${f}`, url: `/blog/${f}`, type: 'guide', states: [m[1]] }); }
+for (const f of readdirSync('blog')) { const m = f.match(/^(?:mile|km)-markers-(.+)\.html$/); if (m) add({ file: `blog/${f}`, url: `/blog/${f}`, type: 'guide', states: [m[1]] }); }
+const MONTHS = ['january','february','march','april','may','june','july','august','september','october','november','december'];
+const reportDirs = dirs('blog').map(d => d.match(/^highway-report-([a-z]+)-(\d{4})-states$/)).filter(m => m && MONTHS.includes(m[1]))
+  .sort((a, b) => (+b[2] - +a[2]) || (MONTHS.indexOf(b[1]) - MONTHS.indexOf(a[1])));
+const titleCase = w => w.split('-').map(x => x[0].toUpperCase() + x.slice(1)).join(' ');
+if (reportDirs.length) {
+  const [dir, mon, yr] = reportDirs[0];
+  for (const f of readdirSync(`blog/${dir}`)) {
+    const m = f.match(/^([a-z-]+)\.html$/); if (!m || f === 'index.html') continue;
+    add({ file: `blog/${dir}/${f}`, url: `/blog/${dir}/${f}`, type: 'report', states: [m[1]], noBlock: true,
+      fixedTitle: `${titleCase(m[1])} road report, ${titleCase(mon)} ${yr}` });
+  }
+}
 const passSrc = readFileSync('scripts/gen-pass-pages.js', 'utf8');
 for (const m of passSrc.matchAll(/slug: '([^']+)', name: '[^']*', route: '([^']+)', state: '([^']+)'/g))
   add({ file: `passes/${m[1]}/index.html`, url: `/passes/${m[1]}/`, type: 'pass', states: [ST[m[3]]].filter(Boolean), route: m[2] });
@@ -65,6 +87,7 @@ function shortTitle(file) {
 for (const n of nodes) {
   n.title = shortTitle(n.file);
   if (n.type === 'corridor') n.title = `${n.route} cameras and road conditions`;
+  if (n.fixedTitle) n.title = n.fixedTitle;
   if (n.title && /unconfirmed/i.test(n.title)) n.title = null; // placeholder title: never a link
 }
 
@@ -94,10 +117,15 @@ function related(n) {
   switch (n.type) {
     case 'pass':
       push(first('cameras', s), sameRoute, first('conditions', s), passesHere.slice(0, 2), passesRoute.slice(0, 2), first('bridges', s), first('guide', s)); break;
-    case 'cameras':
-      push(first('conditions', s), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('guide', s)); break;
+    case 'cameras': {
+      const stateCams = first('cameras', s).filter(c => !c.city), cities = first('cameras', s).filter(c => c.city && c !== n);
+      if (n.city) push(stateCams, first('conditions', s), cities.slice(0, 2), corridorsHere.slice(0, 1), first('report', s), first('guide', s));
+      else push(first('conditions', s), cities.slice(0, 2), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('report', s), first('guide', s));
+      if (out.length < 3) push((NB[s] || []).slice(0, 2).flatMap(x => first('conditions', x)));
+      break;
+    }
     case 'conditions':
-      push(first('cameras', s), (NB[s] || []).slice(0, 2).flatMap(x => first('conditions', x)), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('guide', s)); break;
+      push(first('cameras', s).filter(c => !c.city), (NB[s] || []).slice(0, 2).flatMap(x => first('conditions', x)), passesHere.slice(0, 2), corridorsHere.slice(0, 2), first('bridges', s), first('report', s), first('guide', s)); break;
     case 'bridges':
       push(first('cameras', s), first('conditions', s), passesHere.slice(0, 1), corridorsHere.slice(0, 2), first('guide', s)); break;
     case 'guide':
@@ -110,6 +138,8 @@ function related(n) {
     case 'closure':
       push(first('conditions', s), first('cameras', s), passesHere.slice(0, 1), first('guide', s)); break;
   }
+  // Last resort for places with few pages (Hawaii has no camera page): the national maps.
+  if (out.length < 3) push(nodes.find(x => x.url === '/maps/mile-markers/'), nodes.find(x => x.url === '/closures/'));
   return out.slice(0, 6);
 }
 
@@ -136,6 +166,7 @@ const STRIP = /[ \t]*<!-- related:start -->[\s\S]*?<!-- related:end -->\n?/;
 
 let changed = 0, skipped = [], checked = 0;
 for (const n of nodes) {
+  if (n.noBlock) continue;
   if (SKIP.has(n.file)) { if (SKIP.has(n.file)) skipped.push(n.file); continue; }
   checked++;
   const o = readFileSync(n.file, 'utf8');
