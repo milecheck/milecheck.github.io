@@ -70,6 +70,9 @@
       .primary-nav.open { display:flex !important; }
       .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
     }
+      .cb-faq{max-width:760px;border-bottom:1px solid #E5E5E5;padding:14px 0}
+    .cb-faq summary{font-size:17px;font-weight:700;cursor:pointer}
+    .cb-faq p{margin-top:8px;font-size:15px;line-height:1.6;color:#525252}
   </style>
 
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
@@ -135,6 +138,21 @@
             <p>You need Wi-Fi and a TV with a working web browser. We check it works on yours first. Nothing to buy from us.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="ent-section">
+      <div class="container">
+        <p class="ent-section-label">Questions</p>
+        <h2>Before you try the board</h2>
+          <details class="cb-faq"><summary>What TV do I need?</summary><p>You need Wi-Fi and a TV with a working web browser. We check the board on your TV before setting it up.</p></details>
+          <details class="cb-faq"><summary>What does it cost?</summary><p>The board is free for your store. You provide the TV and Wi-Fi.</p></details>
+          <details class="cb-faq"><summary>Who sells the sponsor slot, and can I refuse a sponsor?</summary><p>MileCheck sells the sponsor slot. Sponsor approval and removal terms are set in your agreement.</p></details>
+          <details class="cb-faq"><summary>How do I get paid?</summary><p>Your store gets a share of sponsor payments when the slot is sold. Payment is monthly, for the money collected the month before.</p></details>
+          <details class="cb-faq"><summary>Can I put my own specials on it?</summary><p>Yes, the board can show your store's specials. Email the lines to sales@milecheckapp.com.</p></details>
+          <details class="cb-faq"><summary>What if the internet drops?</summary><p>The board needs Wi-Fi to fetch new reports. If it says "Reports unavailable", check the connection and reopen the board.</p></details>
+          <details class="cb-faq"><summary>Can I end it?</summary><p>Cancellation and notice terms are set in your agreement. Email sales@milecheckapp.com to discuss ending the arrangement.</p></details>
+          <details class="cb-faq"><summary>Who do I contact if something looks wrong?</summary><p>Email sales@milecheckapp.com with the store name and what looks wrong. The road reports come from the DOT.</p></details>
       </div>
     </section>
 
@@ -206,7 +224,7 @@
     ];
     var q = new URLSearchParams(location.search);
     var ids = BOARDS.map(function(b){ return b[0]; });
-    var board = ids.indexOf(q.get('board')) >= 0 ? q.get('board') : 'issaquah';
+    var board = ids.indexOf(q.get('board')) >= 0 ? q.get('board') : 'i84-pendleton';
     var linkedBoard = board;
     var venue = (q.get('venue') || '').slice(0, 40);
     var mp = (q.get('mp') || '').replace(/[^0-9A-Za-z]/g, '').slice(0, 6);

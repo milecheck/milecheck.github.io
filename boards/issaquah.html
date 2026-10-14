@@ -439,7 +439,7 @@ async function load(){
     } else if (offSeason){
       const reportDate = asOf(pass && (pass['date-updated'] || pass['last-updated'] || pass['entry-time']));
       $('status').className = 'status st-open';
-      $('status').innerHTML = 'OPEN' + (reportDate ? '<span class="asof">Last reported \u00b7 ' + reportDate + '</span>' : '');
+      $('status').innerHTML = 'NO CLOSURE\nREPORTED' + (reportDate ? '<span class="asof">Last reported \u00b7 ' + reportDate + '</span>' : '');
       // Two lines, not four: the old blurb explained the whole seasonal policy and
       // pushed the alerts panel off the bottom of the board. A venue only needs to
       // know the pass panel isn't broken, it's out of season.
@@ -448,12 +448,12 @@ async function load(){
         + 'reporting resume Nov&nbsp;1.</span>';
     } else if (txt){
       $('status').className = 'status ' + (bad ? 'st-bad' : warn ? 'st-warn' : 'st-open');
-      $('status').textContent = bad ? 'CHAINS\nREQUIRED' : warn ? 'SNOW &\nICE' : 'OPEN';
+      $('status').textContent = bad ? 'CHAINS\nREPORTED' : warn ? 'SNOW &\nICE REPORTED' : 'NO CLOSURE\nREPORTED';  // restate WSDOT, no verdict (audit 10/13)
       $('statusline').textContent = txt;
     } else {
       $('status').className = 'status st-open';
-      $('status').textContent = 'OPEN';
-      $('statusline').textContent = 'No restrictions reported.';
+      $('status').textContent = 'NO CLOSURE\nREPORTED';
+      $('statusline').textContent = 'WSDOT reports no restrictions.';
     }
     // WSDOT stops touching the pass report Apr–Nov, and the stale record still
     // carries an air-temperature that drifted 57→56→66 in one night. A number
