@@ -196,7 +196,9 @@ document.title="MileCheck demo board · "+(_near||P.route);
 MPA.splice(0,1);  // review v2 #3: P.here belongs to the base exit, not this store's
 function anchorDist(lat,lon){return Math.min(...MPA.map(a=>miles(lat,lon,a.lat,a.lon)));}
 const TYPE={AC:"Crash",CL:"Closure",RW:"Roadwork",IN:"Incident",HZ:"Hazard",WE:"Weather",VH:"Vehicle",OT:"Notice",CO:"Roadwork"};
-function dirOf(r,t){const d=String(((r.location||{}).direction)||"")+" "+t;
+function dirOf(r,t){const raw=String(((r.location||{}).direction)||"").trim();
+  const code=raw.toUpperCase().match(/^(NB|SB|EB|WB)$/);if(code)return code[1]+" lanes";if(/^both$/i.test(raw))return "both directions";
+  const d=raw+" "+t;
   if(/\b(both|all) directions\b/i.test(d))return "both directions";
   const m=d.match(/\b(north|south|east|west)/i);return m?m[1][0].toUpperCase()+"B lanes":"";}
 // A named place only: "Near E Dugas Rd (MP 268)" -> "E Dugas Rd". Never a route name or a fragment.
@@ -207,17 +209,25 @@ function schedText(st,en){const sameDay=fmtDay(st)===fmtDay(Date.now()/1000);
   const t=new Date(st*1000).toLocaleTimeString([],{hour:"numeric",minute:"2-digit",timeZone:TZ});
   return sameDay?"Scheduled today at "+t:"Scheduled "+fmtDay(st)+(en&&fmtDay(en)!==fmtDay(st)?" through "+fmtDay(en):"");}
 const fmtDay=s=>new Date(s*1000).toLocaleDateString([],{month:"short",day:"numeric",timeZone:TZ});
+function toSec(v){if(v==null||v==="")return 0;if(typeof v==="number")return v>1e12?v/1000:v;
+  if(/^\d+$/.test(String(v))){const n=+v;return n>1e12?n/1000:n;}const t=Date.parse(v);return isFinite(t)?t/1000:0;}
 function ago(s){if(!s)return "";const m=Math.round((Date.now()/1000-s)/60);if(m<60)return m+" min ago";const h=Math.round(m/60);return h<48?h+" hr ago":Math.round(h/24)+" days ago";}
 
 async function getFeed(path,key){
-  const r=await fetch(WORKER+path,{cache:"no-store"});
+  // 20 s timeout on every browser: abort when supported, and a race that rejects either way (older TV browsers).
+  const ac=(typeof AbortController!=="undefined")?new AbortController():null;
+  const req=fetch(WORKER+path,ac?{cache:"no-store",signal:ac.signal}:{cache:"no-store"});
+  let tm;const r=(typeof setTimeout==="function")
+    ?await Promise.race([req,new Promise((_,no)=>{tm=setTimeout(()=>{if(ac)ac.abort();no(new Error(path+" timeout"));},20000);})]).finally(()=>clearTimeout(tm))
+    :await req;  // a hung Worker must not leave LIVE over old rows
   if(!r.ok)throw new Error(path+" "+r.status);
   const j=await r.json();
   if(!j||!Array.isArray(j[key]))throw new Error(path+" bad shape");
   return j;
 }
 // Milepost of a feed endpoint, or null. Blank or zero is not a milepost.
-function mpOf(loc,k){const raw=loc[k+"-mile-marker"];return (raw!==""&&raw!=null&&isFinite(+raw)&&+raw>0)?+raw:null;}
+function mpOf(loc,k){const raw=loc[k+"-mile-marker"]??loc[k+"-milepost"];  // AZ: -mile-marker, OR: -milepost (Fable 10/13)
+  return (raw!==""&&raw!=null&&isFinite(+raw)&&+raw>0)?+raw:null;}
 async function poll(){
   try{
     const [cond,inc]=await Promise.all([
@@ -231,32 +241,33 @@ async function poll(){
         if(/no traffic impacts?/i.test(t))return null;
         const L=r.location||{},sl=L["start-location"]||{},el=L["end-location"]||{};
         const at=(ll,k)=>{let m=mpOf(ll,k);const la=ll[k+"-lat"],lo=ll[k+"-long"];
-          if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<20)m=estimateMp(+la,+lo);return m;};
+          if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<8)m=estimateMp(+la,+lo);return m;};
         let a=at(sl,"start"),b=at(el,"end");if(a==null)a=b;if(b==null)b=a;
         if(a==null)return null;
         const lo=Math.min(a,b),hi=Math.max(a,b);
         const mp=P.mile<lo?lo:(P.mile>hi?hi:P.mile);  // nearest point of the affected stretch
         if(Math.abs(mp-P.mile)>NEAR_MI)return null;
         const full=r["is-full-closure"]===true||isFullClose(t);
-        const start=+r["start-time"]||0,end=+r["end-time"]||0;
+        const start=toSec(r["start-time"]),end=toSec(r["end-time"]);
         if(end&&end<now)return null;
         // Short-lived events the DOT forgot to clear (a crash with no end time, untouched for 12 h): drop.
         // Roadwork and closures run for weeks and keep showing.
-        const upd=+r["last-updated"]||start;
+        const upd=toSec(r["last-updated"]??r["update-time"])||start;
         if(/^(AC|IN|HZ|VH)$/.test(r["event-type-id"]||"")&&!end&&upd&&now-upd>12*3600)return null;
         const future=start>now;
         let type=TYPE[r["event-type-id"]]||"Notice";if(type==="Closure"&&!full)type=/ramp|exit/i.test(t)?"Ramp closure":"Lane closure";
         if(type==="Notice"&&/ramp/i.test(t))type="Ramp work";
-        const place=placeOf(t);
+        const ld=String(sl["location-desc"]||"").replace(/^I-?\d+,?\s*/i,"").trim();
+        const place=ld&&ld.length<=40?ld:placeOf(t);
         return {kind:"alert",name:type+(place?" · "+place:""),mp,stop:full&&!future,future,
-          when:future?schedText(start,end):"",dir:dirOf(r,t),upd:ago(+r["last-updated"]),
+          when:future?schedText(start,end):"",dir:dirOf(r,t),upd:ago(upd),
           st:full?"stop":"warn"};
       }).filter(Boolean);
     const closed=alerts.filter(a=>a.stop).sort((a,b)=>Math.abs(a.mp-P.mile)-Math.abs(b.mp-P.mile))[0];
     const winter=cond["road-weather-reports"].filter(r=>{const L=r.location||{};const rid=String(L["route-id"]||r["route-id"]||"").trim();
         if(!(rid===P.alertRid||P.alertRe.test(rid)))return false;
         let m=mpOf(L["start-location"]||{},"start");const la=r.latitude,lo=r.longitude;
-        if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<20)m=estimateMp(+la,+lo);
+        if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<8)m=estimateMp(+la,+lo);
         return m!=null&&Math.abs(m-P.mile)<=NEAR_MI;})
       .map(r=>r["road-surface-condition"]||"").find(s=>/snow|ice|pack|slush|chain/i.test(s));
     const sv=document.getElementById("statusVal"),sd=document.getElementById("statusDesc");
@@ -294,7 +305,8 @@ const _byDist=P.cameras.slice().sort((a,b)=>Math.abs(a.mp-P.mile)-Math.abs(b.mp-
 const _close=_byDist.filter(c=>Math.abs(c.mp-P.mile)<=30);
 const CAMS=_close.length?_close.slice(0,5):_byDist.slice(0,1);  // stay near the store when we can
 let ci=0;
-function cycleCam(){const c=CAMS[ci%CAMS.length];ci++;const d=Math.round(Math.abs(c.mp-P.mile));
+document.getElementById("camImg").addEventListener("error",()=>{if(++_camErr<CAMS.length)cycleCam();});let _camErr=0;
+function cycleCam(){const c=CAMS[ci%CAMS.length];ci++;if(ci%CAMS.length===0)_camErr=0;const d=Math.round(Math.abs(c.mp-P.mile));
   document.getElementById("camImg").src=CAM_BASE+encodeURIComponent(c.file)+"&t="+Date.now();
   document.getElementById("camCap").innerHTML=`${c.name} <span class="mi">· ${d<1?"here":d+" mi "+(c.mp<P.mile?P.dec.short:P.inc.short)}${d>30?" · farther along "+P.route:""}</span>`;}
 // ADOT/ODOT serve a 540x330 "no live feed" card for dark cameras. Skip it, but
