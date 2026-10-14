@@ -192,7 +192,7 @@
   },
   "status": {
    "state": "reported-closed",
-   "missedChecks": 0,
+   "missedChecks": 1,
    "note": null
   },
   "lat": 38.6899,
@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 57,
+   "missedChecks": 58,
    "note": null
   },
   "lat": 34.0173,
@@ -367,9 +367,7 @@
   "status": {
    "state": "reported-closed",
    "missedChecks": 0,
-   "note": null,
-   "lastCheckFailed": "2026-10-14T17:15:49.607Z",
-   "failReason": "empty feed"
+   "note": null
   },
   "lat": 36.4547,
   "lon": -90.1396
@@ -434,7 +432,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 9,
+   "missedChecks": 10,
    "note": null
   },
   "lat": 39.3044,
