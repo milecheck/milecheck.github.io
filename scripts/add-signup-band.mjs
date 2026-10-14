@@ -11,8 +11,8 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const EYEBROW = 'The Monthly Highway Report';
-const H2 = 'Which highways had the most closures and crashes this month';
-const SUB = `The month's numbers from DOT feeds in all 50 states and BC. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.`;
+const H2 = "Get your state's monthly road alert report";
+const SUB = `Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.`;
 const FAMILIES = new Set(['cameras', 'pass', 'corridor', 'guide']);
 
 const CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
