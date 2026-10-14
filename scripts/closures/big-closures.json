@@ -1,7 +1,7 @@
 [
  {
   "slug": "us-101-hoh-river-bridge",
-  "verifiedAt": "2026-10-13",
+  "verifiedAt": "2026-10-14",
   "title": "US 101 closed at the Hoh River Bridge",
   "when": "5 a.m. Oct 1 to noon Oct 6, 2026",
   "source": {
@@ -14,8 +14,8 @@
    "endEstimated": false
   },
   "status": {
-   "state": "unconfirmed",
-   "missedChecks": 2,
+   "state": "reported-closed",
+   "missedChecks": 0,
    "note": "past-scheduled-end"
   },
   "dot": "WSDOT",
@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 56,
+   "missedChecks": 57,
    "note": null
   },
   "lat": 34.0173,
@@ -367,7 +367,9 @@
   "status": {
    "state": "reported-closed",
    "missedChecks": 0,
-   "note": null
+   "note": null,
+   "lastCheckFailed": "2026-10-14T17:15:49.607Z",
+   "failReason": "empty feed"
   },
   "lat": 36.4547,
   "lon": -90.1396
@@ -432,7 +434,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 8,
+   "missedChecks": 9,
    "note": null
   },
   "lat": 39.3044,
