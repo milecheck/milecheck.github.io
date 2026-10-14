@@ -14,8 +14,8 @@
    "endEstimated": false
   },
   "status": {
-   "state": "reported-closed",
-   "missedChecks": 1,
+   "state": "unconfirmed",
+   "missedChecks": 2,
    "note": "past-scheduled-end"
   },
   "dot": "WSDOT",
@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 55,
+   "missedChecks": 56,
    "note": null
   },
   "lat": 34.0173,
@@ -432,7 +432,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 7,
+   "missedChecks": 8,
    "note": null
   },
   "lat": 39.3044,
