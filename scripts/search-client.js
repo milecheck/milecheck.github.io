@@ -16,7 +16,7 @@
 //  6. Nothing matched everything -> closest partial matches, then the state hubs, then the hubs.
 (function () {
 var IDX = null, Q = document.getElementById('q'), R = document.getElementById('results'), C = document.getElementById('count'), CH = document.getElementById('chips'), sec = '';
-var STOP = {the:1,a:1,an:1,of:1,in:1,on:1,for:1,to:1,and:1,is:1,are:1,my:1,near:1,me:1,now:1,live:1,current:1,open:1,opened:1,closed:1,today:1,right:1,tonight:1,what:1,whats:1,how:1,can:1,do:1,does:1,it:1,there:1,any:1,or:1,at:1,by:1,from:1,with:1,about:1,show:1,find:1,get:1,go:1,going:1,drive:1,driving:1,status:1,update:1,updates:1,latest:1,rn:1};
+var STOP = {am:1,i:1,where:1,the:1,a:1,an:1,of:1,in:1,on:1,for:1,to:1,and:1,is:1,are:1,my:1,near:1,me:1,now:1,live:1,current:1,open:1,opened:1,closed:1,today:1,right:1,tonight:1,what:1,whats:1,how:1,can:1,do:1,does:1,it:1,there:1,any:1,or:1,at:1,by:1,from:1,with:1,about:1,show:1,find:1,get:1,go:1,going:1,drive:1,driving:1,status:1,update:1,updates:1,latest:1,rn:1};
 var SOFT = {road:1,roads:1,conditions:1,condition:1,traffic:1};
 var SYN = {cams:'cameras',cam:'cameras',camera:'cameras',webcam:'cameras',webcams:'cameras',closure:'closures',mp:'mile',milepost:'mile',mileposts:'mile',mm:'mile',markers:'marker',hwy:'highway',hwys:'highway',freeway:'highway',passes:'pass',mountain:'pass',snow:'pass',chain:'chains',bridge:'drawbridge',bridges:'drawbridge',borders:'border',crossing:'border'};
 // name|code, lowercase. Provinces included because the site has pages for them.
@@ -64,9 +64,12 @@ function dashed(r) { return r.replace(/^([a-z]+)(\d)/, '$1-$2'); }
 
 // ---- query parsing ----
 function parseQuery(raw) {
-  var s = canonRoutes(norm(raw)), t = ' ' + s + ' ', toks = [], i, k;
-  var mileIntent = /\b(mile ?markers?|mile ?posts?|milepost|mm|mp|mile)\b/.test(s) && (/\b\d{1,4}\b/.test(s) || /\b(i|us|sr)\d/.test(s)) && /\b(mile|mm|mp|milepost|marker|markers|post)/.test(s);
-  var mileNum = (s.match(/\b(?:mile ?markers?|mile ?posts?|milepost|mm|mp|mile)\s*(\d{1,4}(?: \d)?)\b/) || [])[1];
+  var s = canonRoutes(norm(raw).replace(/\b(mile|milepost|mp|mm)(?=\d)/g, '$1 ')), t = ' ' + s + ' ', toks = [], i, k;
+  var mileIntent = /\b(mile ?markers?|mile ?posts?|mileposts?|mm|mp|mile)\b/.test(s);
+  // Read the number before normalization removes its decimal point. Zero is a valid mile.
+  var mileToken = (raw.match(/\b(?:mile[ -]?markers?|mile[ -]?posts?|mileposts?|mm|mp|mile)\s*(\S+)/i) || [])[1];
+  var mileNum = mileToken && /^\d{1,4}(?:\.\d+)?$/.test(mileToken) ? mileToken : undefined;
+  var upperCodes = {}; (raw.match(/\b[A-Z]{2}\b/g) || []).forEach(function (c) { upperCodes[c.toLowerCase()] = 1; });
   // phrases first: cities, then states
   var marks = {};
   for (i = 0; i < CITY_LIST.length; i++) { k = ' ' + CITY_LIST[i] + ' '; if (t.indexOf(k) >= 0) { t = t.split(k).join(' @c' + CITY_LIST[i].replace(/ /g, '_') + ' '); } }
@@ -79,9 +82,16 @@ function parseQuery(raw) {
       else toks.push({k: 's', v: w.slice(2).replace(/_/g, ' ')});
       continue;
     }
-    if (STOP[w] && !(AMBIG[w] && i === ws.length - 1 && ws.length > 1 && CODE2NAME[w])) continue;
+    // A capitalized code before an intent also works ("I5 OR mile markers").
+    // Keep conjunctions and prepositions in "I5 or I90" and "I75 in Florida" as words.
+    var next = ws[i + 1] || '', intentNext = /^(mile|marker|milepost|mm|mp|cameras|camera|cams|webcams|road|roads|conditions|closures)$/.test(next);
+    var namedPlace = ws.some(function (x) { return /^@[sc]/.test(x); });
+    var stateCode = CODE2NAME[w] && w.length === 2 && (!AMBIG[w] ||
+      (i === ws.length - 1 && ws.length > 1 && ws[i - 1] !== 'near') ||
+      (upperCodes[w] && intentNext && !namedPlace));
+    if (STOP[w] && !stateCode) continue;
     if (CODE2NAME[w] && w.length === 2) {
-      if (!AMBIG[w] || (i === ws.length - 1 && ws.length > 1)) { toks.push({k: 's', v: CODE2NAME[w]}); continue; }
+      if (stateCode) { toks.push({k: 's', v: CODE2NAME[w]}); continue; }
     }
     if (isRoute(w)) { toks.push({k: 'r', v: w}); continue; }
     if (mileIntent && /^\d+$/.test(w)) continue;
@@ -134,12 +144,14 @@ function boost(p, q) {
   var b = 0, u = p.u, i, st;
   for (i = 0; i < q.routes.length; i++) {
     var d = dashed(q.routes[i]);
-    if (u === '/corridors/' + d + '/') b += 1000;
+    if (u === '/corridors/' + d + '/') b += q.hasState ? 500 : 1000;
     else if (u.indexOf('/corridors/' + d + '/') === 0) b += 40;
+    for (st in q.states) if (u === '/corridors/' + d + '/' + st.replace(/ /g, '-') + '/') b += 1200;
   }
   if (q.wordsSet.chains) { if (u === '/chains/') b += 150; else if (u === '/chains-required-explained/') b += 20; }
   if (q.wordsSet.closures && !q.hasState && u === '/closures/') b += 8;
   if (q.mile && u === '/maps/mile-markers/') b += 500;
+  if (q.mile && !q.routes.length && !q.hasState && q.mileNum === undefined && u === '/what-mile-marker-am-i-at/') b += 700;
   if (q.hasState) {
     for (st in q.states) {
       var slug = st.replace(/ /g, '-');
@@ -154,16 +166,24 @@ function boost(p, q) {
 function relevantToStates(p, q) {
   if (!q.hasState) return true;
   var explicit = Object.keys(p._ts);
-  if (!explicit.length) return true;
+  if (!explicit.length) {
+    if (!Object.keys(p._is).length) return true;
+    for (var state in q.states) if (p._is[state]) return true;
+    return false;
+  }
   for (var st in q.states) if (p._ts[st]) return true;
   return false;
+}
+function relevantToRoutes(p, q) {
+  if (!q.routes.length || !p._routes.length) return true;
+  return q.routes.some(function (r) { return p._routes.indexOf(r) >= 0; });
 }
 function search(q) {
   var hits = [], i, p, base, b, sc;
   for (i = 0; i < IDX.length; i++) {
     p = IDX[i];
     if (sec && p.s !== sec) continue;
-    if (!relevantToStates(p, q)) continue;
+    if (!relevantToStates(p, q) || !relevantToRoutes(p, q)) continue;
     base = pageScore(p, q, false); b = boost(p, q);
     if (base && p._nts >= 3 && q.hasState) base *= 0.6;
     sc = base + b;
@@ -177,6 +197,7 @@ function partialSearch(q) {
   for (var i = 0; i < IDX.length; i++) {
     var p = IDX[i];
     if (sec && p.s !== sec) continue;
+    if (!relevantToStates(p, q) || !relevantToRoutes(p, q)) continue;
     var s = pageScore(p, q, true);
     if (s > 0) hits.push([s, p]);
   }
@@ -209,16 +230,34 @@ function hitHtml(p, pats) {
   return '<a class="hit" href="' + esc(p.u) + '"><div class="sec">' + esc(p.s) + (p.l !== 'en' ? '<span class="lg">' + esc(p.l.toUpperCase()) + '</span>' : '') + '</div><h2>' + hl(p.t, pats) + '</h2>' + (p.d ? '<p>' + hl(p.d, pats) + '</p>' : '') + '<div class="u">milecheckapp.com' + esc(p.u) + '</div></a>';
 }
 function mileCard(q) {
+  if (!q.routes.length && !q.hasState && q.mileNum === undefined) return '<a class="card" href="/what-mile-marker-am-i-at/"><div class="sec">Mile marker lookup</div><h2>What mile marker am I at?</h2><p>Use your location to find a nearby recorded marker.</p><div class="u">milecheckapp.com/what-mile-marker-am-i-at/</div></a>';
   var rt = q.routes.length ? dashed(q.routes[0]).toUpperCase() : '';
-  var what = 'Mile marker' + (q.mileNum ? ' ' + esc(q.mileNum) : '') + (rt ? ' on ' + esc(rt) : '');
+  var what = 'Mile marker' + (q.mileNum !== undefined ? ' ' + esc(q.mileNum) : '') + (rt ? ' on ' + esc(rt) : '');
   var href = '/maps/mile-markers/', code = '', i;
-  var mp = q.mileNum ? String(q.mileNum).replace(/ /g, '.') : '';
+  var mp = q.mileNum !== undefined ? String(q.mileNum) : '';
   for (i = 0; i < q.toks.length && !code; i++) {
     if (q.toks[i].k === 's' && NAME2CODE[q.toks[i].v] && NAME2CODE[q.toks[i].v].length === 2) code = NAME2CODE[q.toks[i].v].toUpperCase();
   }
-  var jump = rt && mp;
-  if (jump) href += '?route=' + encodeURIComponent(rt) + '&mp=' + encodeURIComponent(mp) + (code ? '&state=' + code : '');
-  return '<a class="card" href="' + esc(href) + '"><div class="sec">Mile marker map</div><h2>' + what + '</h2><p>' + (jump ? 'Open the map at ' + esc(rt) + ', mile ' + esc(mp) + '.' : 'Open the 50-state mile marker map' + (rt ? ', find ' + esc(rt) + ' and tap a marker to read its number' : ' and tap a marker to read its number') + '.') + '</p><div class="u">milecheckapp.com' + esc(href) + '</div></a>';
+  var jump = rt && mp !== '', params = [];
+  if (rt && (code || jump)) params.push('route=' + encodeURIComponent(rt));
+  if (jump) params.push('mp=' + encodeURIComponent(mp));
+  if (code) params.push('state=' + code);
+  if (params.length) href += '?' + params.join('&');
+  var browse = rt && !code ? 'Choose a state, then select ' + esc(rt) + ' and tap a marker to read its number.' : 'Open the mile marker map' + (rt ? ' for ' + esc(rt) : '') + (code ? ' in ' + esc(CODE2NAME[code.toLowerCase()].replace(/\b\w/g, function (c) { return c.toUpperCase(); })) : '') + ' and tap a marker to read its number.';
+  return '<a class="card" href="' + esc(href) + '"><div class="sec">Mile marker map</div><h2>' + what + '</h2><p>' + (jump ? 'Open the map at ' + esc(rt) + ', mile ' + esc(mp) + '.' : browse) + '</p><div class="u">milecheckapp.com' + esc(href) + '</div></a>';
+}
+function cameraCard(q) {
+  var states = Object.keys(q.states);
+  if (!q.wordsSet.cameras || q.routes.length !== 1 || states.length !== 1) return '';
+  var st = states[0], code = NAME2CODE[st], route = q.routes[0];
+  // The highway selector is installed on US state pages, not the province camera pages.
+  if (['bc', 'ab', 'mb', 'on', 'qc'].indexOf(code) >= 0) return '';
+  if (CORR[route] && CORR[route].split(' ').indexOf(code.toUpperCase()) < 0) return '';
+  var path = '/cameras/' + st.replace(/ /g, '-') + '/';
+  if (!IDX.some(function (p) { return p.u === path; })) return '';
+  var rt = dashed(route).toUpperCase(), href = path + '?route=' + encodeURIComponent(rt);
+  var title = rt + ' cameras in ' + st.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  return '<a class="card" href="' + esc(href) + '"><div class="sec">Cameras</div><h2>' + esc(title) + '</h2><p>Open the state camera map with ' + esc(rt) + ' selected. The feed shows whether cameras are available for this highway.</p><div class="u">milecheckapp.com' + esc(href) + '</div></a>';
 }
 function stateHubs(q, skip) {
   var out = [];
@@ -240,14 +279,14 @@ function render() {
   var q = parseQuery(raw); resolveCities(q);
   if (q.softState && q.toks.length > 1 && !search(q).some(function (h) { return h[2] > 0; })) { q = parseQuery(raw); resolveCities(q, true); }
   var pats = hlPatterns(q), html = '', shown = {}, n = 0;
-  var card = (q.mile && !sec) ? mileCard(q) : '';
+  var card = (q.mile && !sec) ? mileCard(q) : ((!sec || sec === 'Cameras') ? cameraCard(q) : '');
   var hits = q.toks.length ? search(q) : [];
   if (!hits.length && q.toks.length) hits = relatedForCity(q);
   else if (hits.length && q.softState) {
     var seen = {}; hits.forEach(function (h) { seen[h[1].u] = 1; });
     relatedForCity(q).forEach(function (h) { if (!seen[h[1].u]) hits.push(h); });
   }
-  if (card) hits = hits.filter(function (h) { return h[1].u !== '/maps/mile-markers/'; });
+  if (card) hits = hits.filter(function (h) { return q.mile ? h[1].u !== '/maps/mile-markers/' : h[1].u !== '/cameras/' + Object.keys(q.states)[0].replace(/ /g, '-') + '/'; });
   if (hits.length) {
     C.textContent = hits.length + (hits.length === 1 ? ' page' : ' pages') + ' for “' + raw + '”' + (sec ? ' in ' + sec : '');
     hits.slice(0, 40).forEach(function (h) { html += hitHtml(h[1], pats); shown[h[1].u] = 1; n++; });
@@ -275,6 +314,7 @@ fetch('/search-index.json', {cache: 'no-cache'}).then(function (r) { return r.js
   IDX = j.pages.map(function (p) {
     p._t = words(p.t); p._h = words(p.h); p._d = words(p.d);
     p._u = words(p.u.replace(/[\/-]/g, ' ').replace(/\.html$/, ''));
+    p._routes = p._t.concat(p._h, p._u).filter(isRoute);
     p._ft = ' ' + norm(p.t + ' ' + p.h + ' ' + p.u.replace(/[\/-]/g, ' ')) + ' ';
     p._ts = statesIn(p.t + ' ' + p.h + ' ' + p.u.replace(/[\/-]/g, ' ')) || {};
     p._ds = statesIn(p.d) || {};

@@ -1,0 +1,32 @@
+# page_build includes failed attempts, so require its documented successful status.
+# https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#page_build
+# https://docs.github.com/en/webhooks/webhook-events-and-payloads#page_build
+# https://docs.github.com/en/rest/pages/pages#list-github-pages-builds
+name: IndexNow changed pages
+on:
+  page_build:
+permissions:
+  contents: read
+concurrency:
+  group: indexnow-${{ github.event.build.commit }}
+  cancel-in-progress: false
+jobs:
+  notify:
+    if: ${{ github.event.build.status == 'built' && github.event.build.commit != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.build.commit }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Deliberately notify only this built commit's diff, not the site's full history.
+      # Multi-commit publication ranges can be reviewed with the CLI after deployment.
+      - name: Notify IndexNow about changed public HTML
+        env:
+          BUILT_SHA: ${{ github.event.build.commit }}
+        run: node scripts/submit-indexnow.mjs --from "${BUILT_SHA}^" --to "$BUILT_SHA" --submit

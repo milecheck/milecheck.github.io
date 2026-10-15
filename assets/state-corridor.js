@@ -48,7 +48,10 @@ var map;
   return box;
  }
  const mapStatus=document.getElementById('sc-map-status');let cameraLayer,alertLayer;
- if(root.L){map=root.L.map('comap',{scrollWheelZoom:false}).fitBounds(config.bounds);const tiles=root.L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Esri, USGS · DOT records via MileCheck'}).addTo(map);cameraLayer=root.L.layerGroup().addTo(map);alertLayer=root.L.layerGroup().addTo(map);root.mcMapOptions={layers:[{label:'DOT reports',color:'#b45309',layer:alertLayer},{label:'DOT cameras',color:'#0f7a4f',layer:cameraLayer}]};tiles.on('tileerror',()=>{mapStatus.textContent='Some map tiles are unavailable. Use the report and camera lists below.';});mapStatus.textContent='Amber markers are DOT reports. Green markers are cameras.';}else{document.getElementById('comap').hidden=true;mapStatus.textContent='Map unavailable. DOT reports and cameras are listed below.';}
+ if(root.L){const touch=('ontouchstart' in root)||!!(root.matchMedia&&root.matchMedia('(any-pointer:coarse)').matches);map=root.L.map('comap',{scrollWheelZoom:false,gestureHandling:touch}).fitBounds(config.bounds);
+  // A failed optional gesture script must not trap one-finger page scrolling.
+  if(touch&&!map.gestureHandling&&map.dragging)map.dragging.disable();
+  const tiles=root.L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Esri, USGS · DOT records via MileCheck'}).addTo(map);cameraLayer=root.L.layerGroup().addTo(map);alertLayer=root.L.layerGroup().addTo(map);root.mcMapOptions={layers:[{label:'DOT reports',color:'#b45309',layer:alertLayer},{label:'DOT cameras',color:'#0f7a4f',layer:cameraLayer}]};tiles.on('tileerror',()=>{mapStatus.textContent='Some map tiles are unavailable. Use the report and camera lists below.';});mapStatus.textContent='Amber markers are DOT reports. Green markers are cameras.';}else{document.getElementById('comap').hidden=true;mapStatus.textContent='Map unavailable. DOT reports and cameras are listed below.';}
  const refreshButton=document.getElementById('sc-refresh'),more=document.getElementById('sc-camera-more');
  const states={reports:{items:[],retrieved:null},cameras:{items:[],retrieved:null}};
  let cameraShown=0,requestVersion=0,inflight=null,lastAttempt=0;

@@ -13,14 +13,15 @@
   <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/what-is-my-mile-marker/">
   <meta property="og:title" content="What Is My Mile Marker? How to Find It | MileCheck">
   <meta property="og:description" content="How mile markers work and how to find yours right now — plus the app that shows your exact mile marker live as you drive.">
-  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:image" content="https://milecheckapp.com/images/guides/mile-marker-finder.webp">
+  <meta property="og:image:alt" content="MileCheck map showing the recorded I-84 milepost 147.03 in Oregon.">
   <meta property="og:url" content="https://milecheckapp.com/what-is-my-mile-marker/">
   <meta property="og:type" content="article">
   <link rel="icon" type="image/png" href="../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css?v=20261015-2">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find my mile marker?","acceptedAnswer":{"@type":"Answer","text":"Look for the small green mile marker signs along the shoulder — the number is your position in miles along that highway within the state. Between signs, you can estimate, or use a GPS app like MileCheck that calculates your exact mile marker continuously as you drive, even with no signs in sight."}},{"@type":"Question","name":"What is a mile marker?","acceptedAnswer":{"@type":"Answer","text":"A mile marker is a small roadside sign that counts the miles along a highway. Numbering starts at 0 at the southern or western edge of each state (or the start of the route) and counts up. The number tells you exactly where you are, which is why 911 and roadside assistance ask for it."}},{"@type":"Question","name":"Do mile markers go up or down?","acceptedAnswer":{"@type":"Answer","text":"Mile markers increase as you travel north or east, and decrease as you travel south or west. They reset to 0 at each state line, so the same mile number appears in every state a highway passes through."}},{"@type":"Question","name":"What is the difference between a mile marker and an exit number?","acceptedAnswer":{"@type":"Answer","text":"On most interstates the exit number matches the nearest mile marker — Exit 34 sits near mile marker 34 — so exits and mile markers count up together. A mile marker tells you your continuous position; an exit number only appears at interchanges."}}],"@id":"https://milecheckapp.com/what-is-my-mile-marker/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
   <style>
     .art{max-width:760px;margin:0 auto;padding:34px 20px 40px;}
@@ -63,27 +64,34 @@
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
 /* /spon:css */
   </style>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
-      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <nav class="primary-nav">
-        <a href="../index.html">Home</a>
-        <a href="../maps/">Maps</a>
-        <a href="../cameras/">Cameras</a>
-        <a href="../states/">United States</a>
-        <a href="../canada/">Canada</a>
-        <a href="../index.html#story">Story</a>
-        <a href="../index.html#b2b">B2B</a>
-        <a href="../blog/">Blog</a>
-        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
-        <a href="/get/" class="nav-cta">Get the app</a>
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/#pricing" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
       </nav>
     </div>
   </header>
+<!-- /site-nav:header -->
 
   <article class="art">
     <!-- spon:start -->
@@ -101,8 +109,8 @@
     <p class="lede">Mile markers are the small green signs that count the miles along a highway. The number is a precise, agreed-upon answer to "where are you?" — which is exactly why 911, tow trucks, and roadside assistance ask for it. Here's how they work and how to find yours right now.</p>
 <!-- mile-map-action:start -->
     <aside style="margin:16px 0 22px;padding:16px;border:1px solid #cfe3d7;border-radius:10px;background:#f3f9f6;" aria-label="Find a mile marker">
-      <a href="/maps/mile-markers/" style="display:inline-block;font-weight:700;color:#006b46;font-size:17px;line-height:1.4;">Find your mile marker on the map</a>
-      <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:#3a444d;">Choose your state and highway, or tap Find my mile marker to look up nearby markers using your location. Positions are approximate.</p>
+      <a href="/what-mile-marker-am-i-at/" style="display:inline-block;font-weight:700;color:#006b46;font-size:17px;line-height:1.4;">What mile marker am I at?</a>
+      <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:#3a444d;">Use your location to find a nearby recorded marker. Or <a href="/maps/mile-markers/">choose a highway on the map</a>.</p>
     </aside>
 <!-- mile-map-action:end -->
 
@@ -140,6 +148,21 @@
 
     <p style="color:#5b6670;font-size:15px;">More highway basics: <a href="../mile-markers-vs-exit-numbers/">mile markers vs exit numbers</a> · <a href="../how-interstates-are-numbered/">how interstates are numbered</a> · <a href="../us-highways-vs-interstates/">US highways vs interstates</a> · <a href="../highway-sign-colors/">what highway sign colors mean</a> · <a href="../chains-required-explained/">what "chains required" means</a>.</p>
 
+<!-- mile-finder-media:start -->
+    <section class="mc-mile-demo" aria-labelledby="mile-demo-heading" style="margin:24px 0;padding:18px;border:1px solid #dbe5df;border-radius:12px;background:#fff;">
+      <h2 id="mile-demo-heading" style="scroll-margin-top:112px;">How do you find a mile marker?</h2>
+      <figure style="margin:16px 0;"><img src="/images/guides/mile-marker-finder.webp" width="1056" height="1180" loading="lazy" decoding="async" alt="MileCheck map with Oregon and I-84 selected, showing the recorded milepost at 147.03." style="display:block;width:100%;max-width:440px;height:auto;border:1px solid #e5e5e5;border-radius:8px;"></figure>
+      <details><summary>Watch the walkthrough</summary>
+      <video controls playsinline preload="none" width="792" height="884" poster="/images/guides/mile-marker-finder.webp" aria-label="Example of finding a recorded mile marker on MileCheck" style="display:block;width:100%;max-width:440px;height:auto;border:1px solid #e5e5e5;border-radius:8px;margin:12px 0;">
+        <source src="/video/find-a-mile-marker.mp4" type="video/mp4">
+        <track kind="captions" src="/video/find-a-mile-marker.vtt" srclang="en" label="English" default>
+        <a href="/video/find-a-mile-marker.mp4">Watch the mile marker example</a>.
+      </video>
+      </details>
+      <details><summary>What does the pin show?</summary><p>Pins show recorded DOT mileposts. Positions are approximate. If the requested number is missing, the tool may show a nearby recorded post and name its actual mile. It does not calculate a position between posts.</p></details>
+      <p><a href="/maps/mile-markers/?state=OR&amp;route=I-84">Try the mile marker finder</a></p>
+    </section>
+<!-- mile-finder-media:end -->
     <h2 style="margin-top:34px">Mile marker questions, answered</h2>
     <div class="faq">
       <details><summary>How do I find my mile marker?</summary><p>Look for the small green signs on the shoulder — the number is your mile marker. Between signs, estimate, or use <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=what-is-my-mile-marker&mt=8" target="_blank" rel="noopener">MileCheck</a>, which shows your exact mile marker live from GPS even with no signs in sight.</p></details>

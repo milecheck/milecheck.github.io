@@ -1,12 +1,25 @@
 #!/usr/bin/env node
 // Add an explicit filter hook to existing US state camera maps. No generator execution.
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const src=readFileSync(resolve(ROOT,'scripts/gen-state-camera-pages.js'),'utf8');
 const stateData=src.match(/const STATES = \[([\s\S]*?)\n\];/)[1];
 const states=[...stateData.matchAll(/slug:'([^']+)', code:'([A-Z]{2})'/g)].filter(m=>!['BC','AB','MB','ON','QC','NB','NS','PE','NL','YT','NT','NU'].includes(m[2]));
+// Migrate only the shared playback block, including province pages. Never run the
+// generator to apply this fix: it would overwrite unrelated page finishing work.
+const streamPattern=/var hlsInst=null,hlsLoading=null[^\n]*\nfunction stopStream[^\n]*\nfunction playStream[^\n]*\n/;
+const streamRuntime=src.match(streamPattern)?.[0];
+if(!streamRuntime)throw Error('Missing guarded stream runtime in camera generator');
+let streamChanged=0;
+for(const entry of readdirSync(resolve(ROOT,'cameras'),{withFileTypes:true})){
+ if(!entry.isDirectory())continue;
+ const path=resolve(ROOT,'cameras',entry.name,'index.html');if(!existsSync(path))continue;
+ const html=readFileSync(path,'utf8');if(!streamPattern.test(html))continue;
+ const next=html.replace(streamPattern,()=>streamRuntime);
+ if(next!==html){writeFileSync(path,next);streamChanged++;}
+}
 const control=`<!-- camera-route:start -->
   <div class="co-wrap" style="margin-bottom:12px">
     <label for="camera-route" style="font-weight:600">Highway</label>
@@ -51,3 +64,4 @@ for(const [,slug] of states){
  if(html!==original){writeFileSync(path,html);changed++;}
 }
 console.log('Camera highway filter: '+changed+' updated, '+existing+' existing US state pages checked; '+migrated+' supporting-count blocks moved after the map.');
+console.log('Camera stream guard: '+streamChanged+' existing state/province playback runtimes updated.');

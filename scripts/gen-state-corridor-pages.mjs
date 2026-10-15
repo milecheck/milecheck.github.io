@@ -40,7 +40,9 @@ ${analytics}
 <script type="application/ld+json">${JSON.stringify(graph).replaceAll('<','\\u003c')}</script>
 <link rel="canonical" href="${url}"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/assets/state-corridor.css"><link rel="stylesheet" href="/assets/map-kit.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js" defer></script>
 <script src="/assets/state-corridor.js" defer></script><script src="/assets/map-kit.js" defer></script>
 </head><body>${header}
 <main class="state-corridor"><nav aria-label="Breadcrumb"><a href="/corridors/">Corridors</a> / <a href="/corridors/i-75/">I-75</a> / ${esc(s.name)}</nav>

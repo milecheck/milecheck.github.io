@@ -878,6 +878,29 @@ img, svg { display: block; max-width: 100%; }
    desktop, icon + word in the mobile dropdown. */
 .primary-nav .nav-search { display: inline-flex; align-items: center; gap: 7px; }
 .primary-nav .nav-search svg { width: 16px; height: 16px; flex: none; }
+/* Touch controls stay readable without iPhone focus zoom. Keep browser pinch zoom enabled. */
+@media (max-width:960px), (any-pointer:coarse) {
+  .site-header .nav-toggle { min-width:44px; min-height:44px; align-items:center; justify-content:center; }
+  .site-header:has(.nav-toggle) .primary-nav { max-height:calc(100vh - 80px); max-height:calc(100dvh - 80px); overflow-y:auto; overscroll-behavior:contain; }
+  #mile-map-state, #mile-map-route, #mile-map-mile, #mile-map-copy-url, #camera-route {
+    font-size:16px !important; min-height:44px; box-sizing:border-box;
+  }
+  #mile-map-state, #mile-map-route, #camera-route { height:44px; }
+  .mm-find, .sc-more, .srch button { min-height:44px; }
+  .sc-tools a { min-height:44px; box-sizing:border-box; }
+  .mile-map-sec .leaflet-control-zoom.leaflet-bar a, .state-corridor .leaflet-control-zoom.leaflet-bar a, .co-wrap .leaflet-control-zoom.leaflet-bar a {
+    width:44px; height:44px; line-height:44px;
+  }
+  .mile-map-sec .leaflet-control-layers-toggle, .state-corridor .leaflet-control-layers-toggle { min-width:44px; min-height:44px; }
+  .co-card button.cx { width:44px; height:44px; line-height:44px; top:4px; right:4px; }
+  .co-card div.cc-title { padding-right:44px; }
+}
+@media (max-width:600px) {
+  .co-wrap .co-card { width:calc(100% - 24px); max-width:360px; box-sizing:border-box; }
+}
+@media (max-width:960px) {
+  .site-header .nav-toggle { display:inline-flex; }
+}
 @media (min-width: 761px) {
   .primary-nav .nav-search span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }

@@ -43,8 +43,8 @@ for (const slug of ['what-is-my-mile-marker', 'can-google-maps-show-mile-markers
   let html = original.replace(/\s*<!-- mile-map-action:start -->[\s\S]*?<!-- mile-map-action:end -->/g, '');
   const action = `\n<!-- mile-map-action:start -->
     <aside style="margin:16px 0 22px;padding:16px;border:1px solid #cfe3d7;border-radius:10px;background:#f3f9f6;" aria-label="Find a mile marker">
-      <a href="/maps/mile-markers/" style="display:inline-block;font-weight:700;color:#006b46;font-size:17px;line-height:1.4;">Find your mile marker on the map</a>
-      <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:#3a444d;">Choose your state and highway, or tap Find my mile marker to look up nearby markers using your location. Positions are approximate.</p>
+      <a href="/what-mile-marker-am-i-at/" style="display:inline-block;font-weight:700;color:#006b46;font-size:17px;line-height:1.4;">What mile marker am I at?</a>
+      <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:#3a444d;">Use your location to find a nearby recorded marker. Or <a href="/maps/mile-markers/">choose a highway on the map</a>.</p>
     </aside>
 <!-- mile-map-action:end -->`;
   html = html.replace(/(<p class="lede">[\s\S]*?<\/p>)/, `$1${action}`);

@@ -10,14 +10,15 @@
   <link rel="canonical" href="https://milecheckapp.com/can-google-maps-show-mile-markers/">
   <meta property="og:title" content="Can Google Maps Show Mile Markers? | MileCheck">
   <meta property="og:description" content="Google Maps doesn't reliably show mile markers as you drive — here's why, and what to use instead.">
-  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:image" content="https://milecheckapp.com/images/guides/mile-marker-finder.webp">
+  <meta property="og:image:alt" content="MileCheck map showing the recorded I-84 milepost 147.03 in Oregon.">
   <meta property="og:url" content="https://milecheckapp.com/can-google-maps-show-mile-markers/">
   <meta property="og:type" content="article">
   <link rel="icon" type="image/png" href="../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css?v=20261015-2">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Google Maps show mile markers?","acceptedAnswer":{"@type":"Answer","text":"Not reliably. Google Maps is built around addresses, place names, and turn-by-turn directions — it doesn't show a continuous, always-visible mile marker as you drive down a highway the way a dedicated mile-marker app does."}},{"@type":"Question","name":"How do I find mile markers on Google Maps?","acceptedAnswer":{"@type":"Answer","text":"You generally can't, in real time. Some historical Street View imagery happens to catch a mile marker sign, and satellite view can sometimes show the physical signs if you zoom in closely enough on a highway shoulder, but there's no live, continuously-updating mile marker readout in Google Maps."}},{"@type":"Question","name":"Why doesn't Google Maps show my exact highway position?","acceptedAnswer":{"@type":"Answer","text":"Google Maps is a routing and navigation app — it's optimized for getting you from A to B, not for reporting your continuous position along a specific numbered route. Mile markers require route-aware, DOT-sourced data that general-purpose mapping apps don't build in."}},{"@type":"Question","name":"What app shows mile markers in real time?","acceptedAnswer":{"@type":"Answer","text":"MileCheck shows your nearest mile marker in real time as you drive, interpolated between DOT sign positions to the tenth of a mile, across all 50 US states and 10 Canadian provinces — plus live state DOT feeds and the nearest highway camera on your route."}}],"@id":"https://milecheckapp.com/can-google-maps-show-mile-markers/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Can Google Maps show mile markers?","author":{"@id":"https://milecheckapp.com/#org"},"publisher":{"@id":"https://milecheckapp.com/#org"},"mainEntityOfPage":"https://milecheckapp.com/can-google-maps-show-mile-markers/","@id":"https://milecheckapp.com/can-google-maps-show-mile-markers/#article","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
   <style>
@@ -61,27 +62,34 @@
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
 /* /spon:css */
   </style>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
-      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <nav class="primary-nav">
-        <a href="../index.html">Home</a>
-        <a href="../maps/">Maps</a>
-        <a href="../cameras/">Cameras</a>
-        <a href="../states/">United States</a>
-        <a href="../canada/">Canada</a>
-        <a href="../index.html#story">Story</a>
-        <a href="../index.html#b2b">B2B</a>
-        <a href="../blog/">Blog</a>
-        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
-        <a href="/get/" class="nav-cta">Get the app</a>
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/#pricing" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
       </nav>
     </div>
   </header>
+<!-- /site-nav:header -->
 
   <article class="art">
     <!-- spon:start -->
@@ -98,8 +106,8 @@
     <p class="lede">Short answer: not reliably. Google Maps is one of the best tools ever built for getting from A to B — but "what's my current mile marker" is a different question than "how do I get there," and it's not one Google Maps was built to answer.</p>
 <!-- mile-map-action:start -->
     <aside style="margin:16px 0 22px;padding:16px;border:1px solid #cfe3d7;border-radius:10px;background:#f3f9f6;" aria-label="Find a mile marker">
-      <a href="/maps/mile-markers/" style="display:inline-block;font-weight:700;color:#006b46;font-size:17px;line-height:1.4;">Find your mile marker on the map</a>
-      <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:#3a444d;">Choose your state and highway, or tap Find my mile marker to look up nearby markers using your location. Positions are approximate.</p>
+      <a href="/what-mile-marker-am-i-at/" style="display:inline-block;font-weight:700;color:#006b46;font-size:17px;line-height:1.4;">What mile marker am I at?</a>
+      <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:#3a444d;">Use your location to find a nearby recorded marker. Or <a href="/maps/mile-markers/">choose a highway on the map</a>.</p>
     </aside>
 <!-- mile-map-action:end -->
 
@@ -122,6 +130,21 @@
       </div>
     </div>
 
+<!-- mile-finder-media:start -->
+    <section class="mc-mile-demo" aria-labelledby="mile-demo-heading" style="margin:24px 0;padding:18px;border:1px solid #dbe5df;border-radius:12px;background:#fff;">
+      <h2 id="mile-demo-heading" style="scroll-margin-top:112px;">How do you find a mile marker?</h2>
+      <figure style="margin:16px 0;"><img src="/images/guides/mile-marker-finder.webp" width="1056" height="1180" loading="lazy" decoding="async" alt="MileCheck map with Oregon and I-84 selected, showing the recorded milepost at 147.03." style="display:block;width:100%;max-width:440px;height:auto;border:1px solid #e5e5e5;border-radius:8px;"></figure>
+      <details><summary>Watch the walkthrough</summary>
+      <video controls playsinline preload="none" width="792" height="884" poster="/images/guides/mile-marker-finder.webp" aria-label="Example of finding a recorded mile marker on MileCheck" style="display:block;width:100%;max-width:440px;height:auto;border:1px solid #e5e5e5;border-radius:8px;margin:12px 0;">
+        <source src="/video/find-a-mile-marker.mp4" type="video/mp4">
+        <track kind="captions" src="/video/find-a-mile-marker.vtt" srclang="en" label="English" default>
+        <a href="/video/find-a-mile-marker.mp4">Watch the mile marker example</a>.
+      </video>
+      </details>
+      <details><summary>What does the pin show?</summary><p>Pins show recorded DOT mileposts. Positions are approximate. If the requested number is missing, the tool may show a nearby recorded post and name its actual mile. It does not calculate a position between posts.</p></details>
+      <p><a href="/maps/mile-markers/?state=OR&amp;route=I-84">Try the mile marker finder</a></p>
+    </section>
+<!-- mile-finder-media:end -->
     <h2 style="margin-top:34px">Questions, answered</h2>
     <div class="faq">
       <details><summary>Can Google Maps show mile markers?</summary><p>Not reliably. Google Maps is built around addresses, place names, and turn-by-turn directions — it doesn't show a continuous, always-visible mile marker as you drive down a highway the way a dedicated mile-marker app does.</p></details>

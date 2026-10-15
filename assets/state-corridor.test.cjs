@@ -13,10 +13,28 @@ function browser(incidentPayload,cameraPayload,fail=false,options={}){
  for(const id of ['state-corridor-config','sc-map-status','comap','sc-alert-status','sc-camera-status','sc-alerts','sc-cameras','sc-camera-more','sc-refresh'])nodes[id]=node('div');
  nodes['state-corridor-config'].textContent=JSON.stringify({...config,state:'FL',slug:'florida',name:'Florida',dot:'FL511'});
  const document={visibilityState:'visible',handlers:{},getElementById:id=>nodes[id],createElement:node,querySelector:()=>null,addEventListener(name,fn){this.handlers[name]=fn;}};
- const window={fetch:options.fetch|| (async url=>{if(fail)throw Error('offline');return {ok:true,json:async()=>url.includes('/cameras')?cameraPayload:incidentPayload};})};
+ const window={...options.window,fetch:options.fetch|| (async url=>{if(fail)throw Error('offline');return {ok:true,json:async()=>url.includes('/cameras')?cameraPayload:incidentPayload};})};
  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'state-corridor.js'),'utf8'),{window,document,URL,console,AbortController,setTimeout:options.setTimeout||setTimeout,clearTimeout,setInterval(fn){nodes.interval=fn;},Date:options.Date||Date});nodes.document=document;return nodes;
 }
 const settle=()=>new Promise(resolve=>setImmediate(resolve));
+test('touch maps allow page scrolling even when the optional gesture plugin fails',async()=>{
+ for(const [touch,plugin] of [[true,true],[true,false],[false,false]]){
+  let disabled=0,options;const map={fitBounds(){return this},dragging:{disable(){disabled++}}};
+  if(plugin)map.gestureHandling={};
+  const layer=()=>({addTo(){return this},clearLayers(){},on(){return this}});
+  const window={L:{map(id,value){assert.equal(id,'comap');options=value;return map},tileLayer:layer,layerGroup:layer}};
+  if(touch)window.ontouchstart=null;
+  browser({'incident-reports':[]},{cameras:[]},false,{window});await settle();
+  assert.equal(options.gestureHandling,touch);assert.equal(options.scrollWheelZoom,false);
+  assert.equal(disabled,touch&&!plugin?1:0);
+ }
+ for(const r of require('../data/state-corridors.json')){
+  const html=fs.readFileSync(path.join(__dirname,'../corridors/i-75',r.slug,'index.html'),'utf8');
+  assert.match(html,/leaflet-gesture-handling@1\.2\.2\/dist\/leaflet-gesture-handling\.min\.css/);
+  assert.ok(html.indexOf('leaflet@1.9.4/dist/leaflet.js')<html.indexOf('leaflet-gesture-handling.min.js'));
+  assert.ok(html.indexOf('leaflet-gesture-handling.min.js')<html.indexOf('/assets/state-corridor.js'));
+ }
+});
 test('hostile DOT text renders only as text, while executable camera URLs are excluded',async()=>{const hostile='<img src=x onerror=alert(1)><script>alert(2)</script>';const nodes=browser({'incident-reports':[{...incident(),headline:hostile,description:hostile}]},{cameras:[{title:hostile,route:'I-75',lat:28,lon:-82,imageUrl:'javascript:alert(3)'}]});await settle();const texts=[];const tags=[];function scan(n){texts.push(n.textContent);tags.push(n.tagName);n.children.forEach(scan);}scan(nodes['sc-alerts']);assert.ok(texts.includes(hostile));assert.equal(tags.includes('script'),false);assert.equal(tags.includes('img'),false);assert.equal(nodes['sc-cameras'].children.length,0);});
 test('browser failure messages differ from successful zero records',async()=>{const empty=browser({'incident-reports':[]},{cameras:[]});const failed=browser(null,null,true);const malformed=browser({},{});await settle();assert.match(empty['sc-alert-status'].textContent,/No matching I-75 reports returned/);assert.match(empty['sc-camera-status'].textContent,/No matching I-75 cameras returned/);assert.match(failed['sc-alert-status'].textContent,/unavailable/);assert.match(malformed['sc-alert-status'].textContent,/unavailable/);assert.match(failed['sc-map-status'].textContent,/Map unavailable/);});
 test('hung requests time out and abort; timeout handles are cleared on success and failure',async()=>{let pending=0;const window={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'state-corridor.js'),'utf8'),{window,URL,AbortController,setTimeout(fn,ms){pending++;return setTimeout(fn,ms)},clearTimeout(timer){pending--;clearTimeout(timer)}});let signal;await assert.rejects(window.StateCorridor.load(async(url,options)=>{signal=options.signal;return new Promise(()=>{});},'test','cameras',config,undefined,10),/timed out/);assert.equal(signal.aborted,true);assert.equal(pending,0);await window.StateCorridor.load(async()=>({ok:true,json:async()=>({cameras:[]})}),'test','cameras',config);assert.equal(pending,0);});

@@ -102,23 +102,28 @@
     .hero-fineprint a{display:inline-block;padding:10px 2px}
     .hero-features{margin:12px 0 56px;max-width:46ch;font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.6)}
     @media (max-width:840px){.hero-features{margin-left:auto;margin-right:auto}}
+    .hero-copy{padding-bottom:28px}
     .hero-roy{align-self:end;margin-bottom:-5px}
     .hero-roy img{width:min(280px,80%);display:block;margin:0 auto}
 
-    /* ---- ledger stats ---- */
-    .ledger{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--paper)}
-    .ledger-grid{display:grid;grid-template-columns:1fr 1fr 1fr}
-    @media (max-width:700px){.ledger-grid{grid-template-columns:1fr}}
-    .cell{padding:20px 22px;border-left:1px solid var(--rule)}
-    .cell:first-child{border-left:none}
-    @media (max-width:700px){.cell{border-left:none;border-top:1px solid var(--rule)}.cell:first-child{border-top:none}}
-    .cell .k{font:600 11.5px var(--mono);letter-spacing:.12em;color:var(--green);text-transform:uppercase}
-    .cell .v{font:600 30px var(--mono);margin-top:2px}
-    .cell .s{font-size:13px;color:var(--ink2)}
-    .cell .t{margin-top:6px;font:600 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
-    .cell .q{margin-top:8px;font-size:12.5px;color:var(--ink2);line-height:1.45}
-    .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);margin-left:5px;vertical-align:1px;animation:ld 2s infinite}
-    @keyframes ld{0%,100%{opacity:1}50%{opacity:.3}}
+    /* ---- immediate highway tools ---- */
+    .highway-tools{border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);background:var(--paper);padding:32px 0}
+    .highway-tools-inner{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+    .location-tool{display:block;color:var(--ink);text-decoration:none;padding:8px 0}
+    .location-tool h2{font:650 clamp(25px,3vw,32px)/1.2 var(--serif);margin:0 0 10px}
+    .location-tool span{display:inline-block;background:var(--safety);color:var(--ink);padding:11px 16px;font:600 14px var(--mono)}
+    .location-tool:hover span{text-decoration:underline}
+    .highway-search label{display:block;font-weight:600;margin-bottom:8px}
+    .highway-search-row{display:flex;gap:8px}
+    .highway-search input{min-width:0;width:100%;padding:12px;border:1px solid var(--ink2);background:#fff;color:var(--ink);font:16px var(--sans)}
+    .highway-search button{border:2px solid var(--ink);background:var(--ink);color:var(--paper);font:600 13px var(--mono);padding:10px 16px;cursor:pointer;white-space:nowrap}
+    .highway-tool-links{font-size:14px;margin:14px 0 0;line-height:1.8}
+    .highway-tool-links a{color:var(--green);font-weight:600}
+    .home-report{padding:26px 0;background:var(--paper2)}
+    .home-report p{margin:0;font-size:16px;line-height:1.5}
+    .home-report a{color:var(--green);font-weight:600;text-decoration:underline;text-underline-offset:4px}
+    .aws-member{display:inline-block;white-space:nowrap}
+    @media(max-width:700px){.highway-tools-inner{grid-template-columns:1fr;gap:24px}.highway-tools{padding:26px 0}.highway-search-row{flex-wrap:wrap}.highway-search button{width:100%}}
 
     /* ---- generic sections ---- */
     section{padding:56px 0}
@@ -329,6 +334,10 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"MileCheck","alternateName":["Mile Check","Milecheck","MileCheck App"],"url":"https://milecheckapp.com/","logo":"https://milecheckapp.com/assets/app-icon-60.png","description":"MileCheck provides road conditions from official state feeds across all 50 states through web maps, an app and licensed data.","email":"info@milecheckapp.com","founder":{"@type":"Person","name":"Leah Gerber","jobTitle":"Founder","description":"Founder of MileCheck, the highway intelligence app. (Distinct from Dr. Leah Gerber, the ASU conservation-science professor — a different person.)"},"sameAs":["https://apps.apple.com/app/id6759212851","https://play.google.com/store/apps/details?id=app.milecheck.mobile","https://www.instagram.com/milecheck_app","https://www.facebook.com/share/1FT9JtkH5D/","https://www.linkedin.com/company/milecheck","https://x.com/milecheckapp","https://www.youtube.com/channel/UCBEZIoTz6LChUKZ8TymdJaw","https://www.reddit.com/user/MileCheckApp/"],"@id":"https://milecheckapp.com/#org","legalName":"MileCheck LLC","contactPoint":[{"@type":"ContactPoint","contactType":"sales","email":"sales@milecheckapp.com"},{"@type":"ContactPoint","contactType":"customer support","email":"info@milecheckapp.com"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MileCheck","alternateName":["Mile Check","Milecheck","MileCheck App"],"description":"Road conditions from official state feeds across all 50 states, plus your nearest highway mile marker. Open a milepost in your navigation app. Includes Seattle drawbridge status.","url":"https://milecheckapp.com","applicationCategory":"TravelApplication","operatingSystem":"iOS, Android","offers":[{"@type":"Offer","name":"Premium Annual","price":"49.99","priceCurrency":"USD","description":"7-day free trial included","priceSpecification":{"@type":"UnitPriceSpecification","billingDuration":"P1Y"}},{"@type":"Offer","name":"Premium Monthly","price":"9.99","priceCurrency":"USD","description":"7-day free trial included","priceSpecification":{"@type":"UnitPriceSpecification","billingDuration":"P1M"}}],"author":{"@id":"https://milecheckapp.com/#org"},"downloadUrl":["https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=home&mt=8","https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhome"],"screenshot":"https://milecheckapp.com/images/og-banner-light.png","featureList":["Real-time highway mile markers in all 50 US states","Live state DOT feeds from 50 state departments of transportation","Open a milepost in your navigation app","Seattle drawbridge alerts with push notifications for the Fremont, Ballard, Montlake, South Park, and 1st Ave S bridges","Interactive map with milepost markers and alert overlays","Trip logging with route, milepost range, timestamps, and CSV export","Offline-ready with bundled milepost data for all 50 states","Apple CarPlay and Android Auto support"],"keywords":"highway mile marker, milepost, state DOT feeds, live road conditions, bridge alerts, Seattle bridges, GPS milepost, truck driver app, highway navigation, road conditions","@id":"https://milecheckapp.com/#app","publisher":{"@id":"https://milecheckapp.com/#org"}}</script>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
 </head>
 <body>
 
@@ -337,25 +346,27 @@
       <i style="left:8%;top:110px"></i><i style="left:17%;top:190px"></i><i style="left:28%;top:95px"></i>
       <i style="left:48%;top:150px"></i><i style="left:70%;top:120px"></i><i style="left:83%;top:220px"></i><i style="left:93%;top:105px"></i>
     </div>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a href="#" data-tab="home" class="brand"><img src="assets/app-icon-60.png" alt="">MileCheck</a>
-        <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-        <nav class="primary-nav">
-          <a href="#" data-tab="home">Home</a>
-          <a href="maps/">Maps</a>
-          <a href="cameras/">Cameras</a>
-          <a href="states/">United States</a>
-          <a href="canada/">Canada</a>
-          <a href="#" data-tab="story">Story</a>
-          <a href="/partners/">B2B</a>
-          <a href="#" data-tab="home" data-goto="pricing">Pricing</a>
-          <a href="blog/">Blog</a>
-          <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
-          <a href="#" data-dl class="nav-cta">GET THE APP</a>
-        </nav>
-      </div>
-    </header>
+    <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand" data-tab="home"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home" aria-current="page" data-tab="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story" data-tab="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/#pricing" data-nav-link="pricing" data-tab="home" data-goto="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta" data-dl>Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
 
     <!-- ============== HERO (Night Shift) ============== -->
     <section data-panel="home" style="padding:0;">
@@ -363,17 +374,14 @@
         <div class="hero-grid">
           <div class="hero-copy">
             <p class="eyebrow">WEB · iOS · ANDROID</p>
-            <p class="hero-icp">For DOT road crews, first responders and dispatch</p>
             <h1 class="hero-h1">Mile markers and road conditions for all 50 states.</h1>
-            <p class="hero-sub">Official state feeds on the web and in the app, with cameras and chain controls where available. The app shows your nearest mile marker, live.</p>
+            <p class="hero-sub">Check DOT reports and highway cameras. Find your nearest mile marker on the web or in the app.</p>
             <p class="hero-carplay">Now on CarPlay &amp; Android Auto</p>
             <div class="hero-ctas">
-              <a href="maps/" class="btn btn-primary">SEE THE LIVE MAPS</a>
+              <a href="/what-mile-marker-am-i-at/" class="btn btn-primary">FIND MY MILE MARKER</a>
               <a href="#" data-dl class="btn">GET THE APP</a>
             </div>
-            <p class="hero-fineprint"><strong>Your mile marker is always free.</strong> Premium adds the live map, alerts and route planning, with a free trial. <a href="#pricing" style="color:inherit;text-decoration:underline;">See pricing</a></p>
-            <p class="hero-trust">Live on the <a href="/partners/">Geotab Marketplace</a> &middot; AWS Partner Network member</p>
-            <p class="mc-cta-line" style="margin:16px 0 0;font-size:19px;line-height:1.35;"><a href="/blog/road-report-september-2026.html" style="display:inline-block;background:#23261f;color:#f6f4ec;font-weight:700;text-decoration:none;padding:11px 16px;border-left:4px solid #e0a23b;">Read the Monthly Highway Report, September 2026 &rarr;</a></p>
+            <p class="hero-trust">Live on the <a href="/partners/">Geotab Marketplace</a> &middot; <span class="aws-member">AWS Partner Network member</span></p>
           </div>
           <div class="hero-roy" aria-hidden="true">
             <img src="images/roy-nightshift.png" alt="Roy, MileCheck's road-crew badger, on the night shift">
@@ -384,30 +392,28 @@
   </div>
 
   <main>
-    <!-- ============== LEDGER STATS ============== -->
-    <section data-panel="home" class="ledger" style="padding:0;">
-      <div class="container" style="padding:0 24px;">
-        <div class="ledger-grid">
-          <div class="cell">
-            <div class="k">Live state DOT feeds<span class="live-dot" aria-hidden="true"></span></div>
-            <div class="v">50</div>
-            <div class="s">of 50 US states &mdash; <strong style="color:var(--ink);">every U.S. state.</strong></div>
-            <div class="t" style="color:var(--ink2);">Free web maps · Premium in the app</div>
-          </div>
-          <div class="cell">
-            <div class="k">Mile markers</div>
-            <div class="v">50</div>
-            <div class="s">US states</div>
-            <div class="t">Always free</div>
-          </div>
-          <div class="cell">
-            <div class="k">Stability</div>
-            <div class="v">0.00<span style="font-size:16px;">%</span></div>
-            <div class="s"><a href="https://status.milecheckapp.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">crash rate</a></div>
-            <div class="q">&ldquo;The app I didn&rsquo;t know I needed and now cannot live without!&rdquo; <span style="color:#F5A623;">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span style="color:var(--ink2);">dayjules, App Store</span></div>
-          </div>
+    <!-- ============== HIGHWAY TOOLS ============== -->
+    <section data-panel="home" class="highway-tools" aria-label="Highway tools">
+      <div class="container highway-tools-inner">
+        <a href="/what-mile-marker-am-i-at/" class="location-tool">
+          <h2>What mile marker am I at?</h2>
+          <span>Use my location &rarr;</span>
+        </a>
+        <div>
+          <form class="highway-search" action="/search/" method="get" role="search">
+            <label for="home-highway-search">Search a highway or state</label>
+            <div class="highway-search-row">
+              <input id="home-highway-search" name="q" type="search" placeholder="I-75 Florida" required>
+              <button type="submit">Search maps</button>
+            </div>
+          </form>
+          <p class="highway-tool-links"><a href="/road-conditions/">Road reports by state</a> &middot; <a href="/cameras/">Highway cameras</a></p>
         </div>
       </div>
+    </section>
+
+    <section data-panel="home" class="home-report" aria-label="Monthly Highway Report">
+      <div class="container"><p><a href="/blog/road-report-september-2026.html">Read the September Highway Report &rarr;</a></p></div>
     </section>
 
     <!-- ============== THE WEBSITE ============== -->
@@ -525,7 +531,7 @@
       <div class="container">
         <span class="section-label">For business</span>
         <h2 class="section-h2">Mile markers and road data for your business.</h2>
-        <p class="mp-sub">One normalized layer under the app and the website. 50 state DOT feeds in 19 source formats, one schema. AWS Partner Network member.</p>
+        <p class="mp-sub">One normalized layer under the app and the website. 50 state DOT feeds in 19 source formats, one schema. <span class="aws-member">AWS Partner Network member</span>.</p>
         <div class="linklist">
           <a class="linkrow" href="partners/"><span class="tag">&#9679; Data</span><span><h3>Fleets, dispatch and software teams</h3><p>Dispatch and fleets report location by mile marker. Get the milepost data as a file you keep, or connect to the live road feeds. Geotab fleets can use the MileCheck Add-In.</p></span><span class="go">&rarr;</span></a>
           <a class="linkrow" href="partners/corridor-boards.html"><span class="tag">&#9679; Venues</span><span><h3>Truck stops, travel centers and diners</h3><p>Show road conditions for your highway on a TV with a browser. Include cameras and weather where available.</p></span><span class="go">&rarr;</span></a>
@@ -671,23 +677,25 @@
         s.style.display = (s.getAttribute('data-panel')===tab) ? '' : 'none';
       });
       document.querySelectorAll('.primary-nav a[data-tab]').forEach(function(a){
-        a.classList.toggle('active', a.getAttribute('data-tab')===tab);
+        a.classList.toggle('active', a.getAttribute('data-tab')===tab && !a.hasAttribute('data-goto'));
       });
       window.scrollTo(0,0);
       try{ history.replaceState(null,'', tab==='home'?location.pathname+location.search:('#'+tab)); }catch(err){}
     }
     document.addEventListener('click', function(e){
       var t = e.target.closest ? e.target.closest('[data-tab]') : null;
-      if(t){ e.preventDefault(); show(t.getAttribute('data-tab')); var g=t.getAttribute('data-goto'); if(g){ var el=document.getElementById(g); if(el) el.scrollIntoView(); } }
+      if(t){ e.preventDefault(); show(t.getAttribute('data-tab')); var g=t.getAttribute('data-goto'); if(g){ try{history.replaceState(null,'','#'+g);}catch(err){} var el=document.getElementById(g); if(el) el.scrollIntoView(); } }
     });
     var valid=['home','story'];
     var hsh=(location.hash||'').replace('#','');
     if(hsh==='b2b'){ location.replace('/partners/'); return; }
     show(valid.indexOf(hsh)>=0?hsh:'home');
+    if(hsh==='pricing'){try{history.replaceState(null,'','#pricing');}catch(err){} var pricing=document.getElementById('pricing'); if(pricing) pricing.scrollIntoView();}
     window.addEventListener('hashchange',function(){
       var x=(location.hash||'').replace('#','');
       if(x==='b2b'){ location.replace('/partners/'); return; }
       if(valid.indexOf(x)>=0) show(x);
+      else if(x==='pricing'){show('home');try{history.replaceState(null,'','#pricing');}catch(err){}var pricing=document.getElementById('pricing');if(pricing)pricing.scrollIntoView();}
     });
   })();
   </script>
