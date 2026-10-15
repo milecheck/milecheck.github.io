@@ -48,7 +48,7 @@
 
   .eyebrow{font-size:min(1.25vw, 2.222vh);font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
   .passname{font-size:min(3.3vw, 5.867vh);font-weight:800;line-height:1;letter-spacing:-.02em;margin-top:min(.3vw, 0.533vh)}
-  .status{font-size:min(5.4vw, 9.6vh);font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:min(.6vw, 1.067vh)}
+  .status{font-size:min(3.9vw, 6.9vh);font-weight:800;line-height:.94;letter-spacing:-.03em;margin-top:min(.6vw, 1.067vh)}
   .status .asof{font-size:.3em;font-weight:800;color:var(--amber);letter-spacing:0;margin-left:.45em;vertical-align:.55em;white-space:nowrap}
   .st-open{color:var(--green)} .st-warn{color:var(--amber)} .st-bad{color:var(--red)} .st-unknown{color:var(--dim)}
   .statusline{font-size:min(1.3vw, 2.311vh);font-weight:700;color:var(--dim);margin-top:min(.4vw, 0.711vh);line-height:1.3}
@@ -63,7 +63,7 @@
   .muted{color:var(--dim);font-weight:700}
 
   /* alerts list */
-  #alerts{flex:1;min-height:0;overflow:hidden}
+  #alerts{flex:1;min-height:min(4vw, 7vh);overflow:hidden}
   .al{display:flex;gap:min(.8vw, 1.422vh);padding:min(.6vw, 1.067vh) 0;border-bottom:1px dashed var(--line);font-size:min(1.35vw, 2.4vh);font-weight:700}
   .al:last-child{border-bottom:none}
   .al .mp{flex:none;width:min(6.4vw, 11.378vh);color:var(--dim);font-variant-numeric:tabular-nums}
@@ -165,7 +165,7 @@
         <div class="row" style="font-size:1.15cqw"><span class="muted" id="src">&nbsp;</span></div>
       </div>
 
-      <div class="card" style="flex:1;min-height:0">
+      <div class="card" style="flex:1;min-height:min(8.5vw, 15vh)">
         <h4>On I-90 ahead</h4>
         <div id="alerts"><div class="none">Loading&hellip;</div></div>
       </div>
@@ -301,7 +301,7 @@ async function loadPassTime(){
     const eb=(d.routes||[]).find(r=>/North Bend to Ellensburg/i.test(r.name));
     const el=$('ttime'); if(!el) return;
     if(!eb||eb.currentMinutes==null){ el.textContent='—'; return; }
-    const over=eb.currentMinutes-(eb.averageMinutes??eb.currentMinutes);
+    const over=eb.currentMinutes-(eb.averageMinutes!=null?eb.averageMinutes:eb.currentMinutes);
     el.textContent=`${eb.currentMinutes} min`+(over>=5?` · ${over} over typical`:'');
     el.className='v'+(over>=5?' warn':'');
     const nb=$('ttnote');
@@ -460,7 +460,7 @@ async function load(){
     // that old must not be printed as a current summit condition, so off-season
     // the weather rows show what they are: awaiting the season. Snow depth is the
     // same row a venue will watch all winter, so it stays visible year-round.
-    const snowVal = pass && (pass['adjacent-snow-depth'] ?? pass['snow-depth']);
+    const snowVal = pass && (pass['adjacent-snow-depth']!=null ? pass['adjacent-snow-depth'] : pass['snow-depth']);
     const stamp   = ago(pass && (pass['date-updated'] || pass['last-updated'] || pass['entry-time']));
 
     // Snow depth genuinely is a winter measurement — WSDOT doesn't report it in

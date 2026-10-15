@@ -237,7 +237,7 @@ rotateCams();setInterval(rotateCams,CAMDWELL);
 function cbpLane(L){
   if(!L) return {n:null,closed:false,na:true};
   const st=(L.operational_status||'').toLowerCase();
-  const raw=(L.delay_minutes??'').toString().trim();
+  const raw=(L.delay_minutes!=null?L.delay_minutes:'').toString().trim();
   const n=raw===''?null:parseInt(raw,10);
   return {n:Number.isFinite(n)?n:null, closed:st.includes('closed'), na:st==='n/a'};
 }

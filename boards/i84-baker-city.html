@@ -30,17 +30,17 @@
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 
   /* status strip + hero cam header */
-  .top{flex:none;display:grid;grid-template-columns:1.15fr .85fr;gap:1.2vw;height:33vh}
+  .top{flex:none;display:grid;grid-template-columns:1.15fr .85fr;gap:1.2vw;height:24vh}
   .statusbox{background:var(--panel);border:1px solid var(--line);border-radius:1vh;padding:1.4vh 1.6vw;display:flex;flex-direction:column;justify-content:center;gap:.4vh}
   .statusbox .sl{font-size:1.5vh;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
   .statusbox .sv{font-size:4.4vh;font-weight:900;line-height:1}
   .sv.ok{color:var(--green)}.sv.warn{color:var(--amber)}.sv.stop{color:var(--red)}
   .statusbox .sd{font-size:1.9vh;font-weight:700;color:var(--dim)}
   .herocam{background:#e7ede8;border:1px solid var(--line);border-radius:1vh;overflow:hidden;position:relative;min-height:0}
-  .herocam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .herocam .hc{position:absolute;left:0;right:0;bottom:0;padding:1vh 1.2vw;background:linear-gradient(transparent,rgba(12,14,10,.82));color:#fff;font-size:1.9vh;font-weight:800}
+  .herocam img{position:absolute;top:0;left:0;right:0;bottom:4.2vh;width:100%;height:calc(100% - 4.2vh);object-fit:contain;display:block;background:#11130f;z-index:0}
+  .herocam .hc{z-index:2;position:absolute;left:0;right:0;bottom:0;height:4.2vh;display:flex;align-items:center;padding:0 1.2vw;background:#11130f;color:#fff;font-size:1.9vh;font-weight:800}
   .herocam .hc .mi{color:#d8d3c5;font-weight:700}
-  .herocam .tag{position:absolute;top:1vh;left:1vw;font-size:1.3vh;font-weight:800;letter-spacing:.1em;background:var(--red);color:#fff;padding:.3vh .8vw;border-radius:.5vh}
+  .herocam .tag{z-index:2;position:absolute;top:1vh;left:1vw;font-size:1.3vh;font-weight:800;letter-spacing:.1em;background:var(--red);color:#fff;padding:.3vh .8vw;border-radius:.5vh}
 
   /* the two directional boards */
   .boards{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;min-height:0}
@@ -85,6 +85,16 @@
 .wxsun{font-size:14px;opacity:.75;margin-right:14px;white-space:nowrap}.wxsun b{font-weight:700}
 body.noinset{padding:1.8vh 2vw}
 .livebox{display:flex;flex-direction:column;align-items:flex-end;margin-left:1.2vw}.livebox .live{margin-left:0}.livebox .up{font-size:1.6vh;color:#8a8170;font-weight:700;white-space:nowrap}
+
+.row.alert-row{flex:2.5;align-items:start;padding-top:1.5vh;padding-bottom:.7vh}
+.row.camera-row{flex:1}
+.row.alert-row .nm{white-space:normal;overflow:visible;font-size:3vh}
+.row .alert-title{display:block;font-weight:800;line-height:1.15}
+.row .impact{display:block;font-size:2.5vh;font-weight:600;line-height:1.2;margin-top:.6vh;overflow-wrap:break-word}
+.row.alert-row .nm .sub{display:block;font-size:2vh;line-height:1.2;overflow:visible;margin-top:.6vh}
+.row .delay-note{display:block;font-size:2.2vh;line-height:1.2;margin-top:.6vh;color:#5d584d}
+.row .detail-counter{display:block;font-size:1.8vh;color:#5d584d;margin-top:.6vh}
+.row.alert-row .rt{align-self:start;padding-top:.2vh;min-width:7vw}
 </style>
 </head>
 <body>
@@ -147,188 +157,366 @@ function resolveLocation(){return {slug:"i84-baker-city",cfg:PCFG};}
 function pingBoardView(){}
 </script>
 <script>
-const WORKER="https://milepost-proxy.leahgerber93.workers.dev";
-const {slug:LOC,cfg:P}=resolveLocation();
-const HERE=P.here;
-const CAM_BASE=P.camBase;
-document.getElementById("hostName").textContent=_venue?"Welcome to "+P.venue:"Your store name goes here";
-document.getElementById("corridorLabel").textContent=P.corridorLabel;
-document.getElementById("decDir").textContent="\u25C0 "+P.dec.name;
-document.getElementById("decTo").textContent=P.dec.to;
-document.getElementById("incDir").textContent=P.inc.name+" \u25B6";
-document.getElementById("incTo").textContent=P.inc.to;
-document.title="MileCheck \u2014 "+P.short+" Corridor Board";
-pingBoardView(LOC,"tv");
-function cleanTxt(s){return (s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();}
-function miles(a,b,c,d){const R=3958.8,x=Math.sin((c-a)*Math.PI/360)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin((d-b)*Math.PI/360)**2;return R*2*Math.asin(Math.sqrt(x));}
-const MPA=[{mp:P.mile,lat:HERE[0],lon:HERE[1]}].concat(P.cameras.map(c=>({mp:c.mp,lat:c.lat,lon:c.lon})));
-function estimateMp(lat,lon){const s=MPA.map(a=>({mp:a.mp,d:miles(lat,lon,a.lat,a.lon)})).sort((x,y)=>x.d-y.d);const[a,b]=s;if(a.d<0.6)return Math.round(a.mp);return Math.round(a.mp+(b.mp-a.mp)*(a.d/(a.d+b.d)));}
-
-let lastFetch=0,err=false;
-const CLOSE_RE=/\b(?:road|highway|interstate|all lanes)\b[^.]{0,40}\bclos|closed to (?:all )?traffic|no travel|avalanche|blocked/i,PARTIAL_RE=/lane|shoulder|ramp|frontage|exit/i,CHAIN_RE=/chain/i;
-const isFullClose=t=>CLOSE_RE.test(t)&&!PARTIAL_RE.test(t);
-function statusOf(txt){if(isFullClose(txt))return"stop";if(CHAIN_RE.test(txt)||/snow|ice|pack|slush/i.test(txt))return"warn";return"warn";}
-// Venue demo board, v2 display logic (2026-10-13, after the ChatGPT review).
-// Injected by scripts/gen-venue-demo-boards.py in place of the private board's poll/render code.
-// Changes, each from the review:
-//  - an alert with no usable milepost is placed by its coordinates, or dropped. Never "MP 0".
-//  - columns are places ("WEST OF HERE"), and each alert says which lanes it affects.
-//  - a scheduled closure shows its start date and never counts as a current closure.
-//  - "No traffic impacts" notices are dropped.
-//  - place name, "toward" towns, clock time zone and the first camera all follow the store's exit.
-const TOWNS = P.towns;
-const tzAt = m => (P.tzEast && m >= P.tzEast.from) ? P.tzEast.tz : P.tz;
-const TZ = tzAt(P.mile);
-function nearTown(m){let b=null;for(const t of TOWNS){const d=Math.abs(t.mp-m);if(!b||d<b.d)b={n:t.n,d};}return b&&b.d<=12?b.n:null;}
-function towardTowns(side){
-  const list=TOWNS.filter(t=>side==="dec"?t.mp<P.mile-5:t.mp>P.mile+5).sort((a,b)=>side==="dec"?b.mp-a.mp:a.mp-b.mp);
-  if(!list.length)return "";
-  const picks=[list[0]];const far=list.filter(t=>Math.abs(t.mp-P.mile)<=150).pop()||list[0];if(far!==list[0])picks.push(far);
-  return "toward "+picks.map(t=>t.n).join(" and ");
+const WORKER = "https://milepost-proxy.leahgerber93.workers.dev";
+const { slug: LOC, cfg: P } = resolveLocation();
+const HERE = P.here;
+const CAM_BASE = P.camBase;
+document.getElementById("hostName").textContent = _venue ? "Welcome to " + P.venue : "Your store name goes here";
+document.getElementById("corridorLabel").textContent = P.corridorLabel;
+document.getElementById("decDir").textContent = "\u25C0 " + P.dec.name;
+document.getElementById("decTo").textContent = P.dec.to;
+document.getElementById("incDir").textContent = P.inc.name + " \u25B6";
+document.getElementById("incTo").textContent = P.inc.to;
+document.title = "MileCheck \u2014 " + P.short + " Corridor Board";
+pingBoardView(LOC, "tv");
+function cleanTxt(s) {
+  return (s || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
-const _near=nearTown(P.mile);
-document.getElementById("corridorLabel").textContent=P.route+" · "+(_near?"near "+_near:"milepost "+Math.round(P.mile))+", "+P.stateName;
-document.getElementById("decDir").textContent="◀ "+P.dec.name;
-document.getElementById("decTo").textContent=towardTowns("dec");
-document.getElementById("incDir").textContent=P.inc.name+" ▶";
-document.getElementById("incTo").textContent=towardTowns("inc");
-document.getElementById("hostName").textContent=_venue?"Demo for "+P.venue:"Demo board";
-document.title="MileCheck demo board · "+(_near||P.route);
-
-MPA.splice(0,1);  // review v2 #3: P.here belongs to the base exit, not this store's
-function anchorDist(lat,lon){return Math.min(...MPA.map(a=>miles(lat,lon,a.lat,a.lon)));}
-const TYPE={AC:"Crash",CL:"Closure",RW:"Roadwork",IN:"Incident",HZ:"Hazard",WE:"Weather",VH:"Vehicle",OT:"Notice",CO:"Roadwork"};
-function dirOf(r,t){const raw=String(((r.location||{}).direction)||"").trim();
-  const code=raw.toUpperCase().match(/^(NB|SB|EB|WB)$/);if(code)return code[1]+" lanes";if(/^both$/i.test(raw))return "both directions";
-  const d=raw+" "+t;
-  if(/\b(both|all) directions\b/i.test(d))return "both directions";
-  const m=d.match(/\b(north|south|east|west)/i);return m?m[1][0].toUpperCase()+"B lanes":"";}
-// A named place only: "Near E Dugas Rd (MP 268)" -> "E Dugas Rd". Never a route name or a fragment.
-function placeOf(t){const m=t.match(/\b(?:near|at|from)\s+([A-Z][^(.,;]{2,30}?)\s*\(MP/)||t.match(/\b(?:near|at)\s+([A-Z][A-Za-z .'-]{2,30}?)(?=[.,;(]|$)/);
-  if(!m)return "";const p=m[1].trim();return /^(I-?\d|US|SR|OR|AZ|Loop|roadway|the )/i.test(p)?"":p;}
-const NEAR_MI=60;  // alerts farther than this aren't about the road outside the store
-function schedText(st,en){const sameDay=fmtDay(st)===fmtDay(Date.now()/1000);
-  const t=new Date(st*1000).toLocaleTimeString([],{hour:"numeric",minute:"2-digit",timeZone:TZ});
-  return sameDay?"Scheduled today at "+t:"Scheduled "+fmtDay(st)+(en&&fmtDay(en)!==fmtDay(st)?" through "+fmtDay(en):"");}
-const fmtDay=s=>new Date(s*1000).toLocaleDateString([],{month:"short",day:"numeric",timeZone:TZ});
-function toSec(v){if(v==null||v==="")return 0;if(typeof v==="number")return v>1e12?v/1000:v;
-  if(/^\d+$/.test(String(v))){const n=+v;return n>1e12?n/1000:n;}const t=Date.parse(v);return isFinite(t)?t/1000:0;}
-function ago(s){if(!s)return "";const m=Math.round((Date.now()/1000-s)/60);if(m<60)return m+" min ago";const h=Math.round(m/60);return h<48?h+" hr ago":Math.round(h/24)+" days ago";}
-
-async function getFeed(path,key){
-  // 20 s timeout on every browser: abort when supported, and a race that rejects either way (older TV browsers).
-  const ac=(typeof AbortController!=="undefined")?new AbortController():null;
-  const req=fetch(WORKER+path,ac?{cache:"no-store",signal:ac.signal}:{cache:"no-store"});
-  let tm;const r=(typeof setTimeout==="function")
-    ?await Promise.race([req,new Promise((_,no)=>{tm=setTimeout(()=>{if(ac)ac.abort();no(new Error(path+" timeout"));},20000);})]).finally(()=>clearTimeout(tm))
-    :await req;  // a hung Worker must not leave LIVE over old rows
-  if(!r.ok)throw new Error(path+" "+r.status);
-  const j=await r.json();
-  if(!j||!Array.isArray(j[key]))throw new Error(path+" bad shape");
+function miles(a, b, c, d) {
+  const R = 3958.8, x = Math.sin((c - a) * Math.PI / 360) ** 2 + Math.cos(a * Math.PI / 180) * Math.cos(c * Math.PI / 180) * Math.sin((d - b) * Math.PI / 360) ** 2;
+  return R * 2 * Math.asin(Math.sqrt(x));
+}
+const MPA = [{ mp: P.mile, lat: HERE[0], lon: HERE[1] }].concat(P.cameras.map((c) => ({ mp: c.mp, lat: c.lat, lon: c.lon })));
+function estimateMp(lat, lon) {
+  const s = MPA.map((a2) => ({ mp: a2.mp, d: miles(lat, lon, a2.lat, a2.lon) })).sort((x, y) => x.d - y.d);
+  const [a, b] = s;
+  if (a.d < 0.6) return Math.round(a.mp);
+  return Math.round(a.mp + (b.mp - a.mp) * (a.d / (a.d + b.d)));
+}
+let lastFetch = 0, err = false;
+const CLOSE_RE = /\b(?:road|highway|interstate|all lanes)\b[^.]{0,40}\bclos|closed to (?:all )?traffic|no travel|avalanche|blocked/i, PARTIAL_RE = /lane|shoulder|ramp|frontage|exit/i, CHAIN_RE = /chain/i;
+const isFullClose = (t) => CLOSE_RE.test(t) && !PARTIAL_RE.test(t);
+function statusOf(txt) {
+  if (isFullClose(txt)) return "stop";
+  if (CHAIN_RE.test(txt) || /snow|ice|pack|slush/i.test(txt)) return "warn";
+  return "warn";
+}
+const TOWNS = P.towns;
+const tzAt = (m) => P.tzEast && m >= P.tzEast.from ? P.tzEast.tz : P.tz;
+const TZ = tzAt(P.mile);
+function nearTown(m) {
+  let b = null;
+  for (const t of TOWNS) {
+    const d = Math.abs(t.mp - m);
+    if (!b || d < b.d) b = { n: t.n, d };
+  }
+  return b && b.d <= 12 ? b.n : null;
+}
+function towardTowns(side) {
+  const list = TOWNS.filter((t) => side === "dec" ? t.mp < P.mile - 5 : t.mp > P.mile + 5).sort((a, b) => side === "dec" ? b.mp - a.mp : a.mp - b.mp);
+  if (!list.length) return "";
+  const picks = [list[0]];
+  const far = list.filter((t) => Math.abs(t.mp - P.mile) <= 150).pop() || list[0];
+  if (far !== list[0]) picks.push(far);
+  return "toward " + picks.map((t) => t.n).join(" and ");
+}
+const _near = nearTown(P.mile);
+document.getElementById("corridorLabel").textContent = P.route + " \xB7 " + (_near ? "near " + _near : "milepost " + Math.round(P.mile)) + ", " + P.stateName;
+document.getElementById("decDir").textContent = "\u25C0 " + P.dec.name;
+document.getElementById("decTo").textContent = towardTowns("dec");
+document.getElementById("incDir").textContent = P.inc.name + " \u25B6";
+document.getElementById("incTo").textContent = towardTowns("inc");
+document.getElementById("hostName").textContent = _venue ? "Demo for " + P.venue : "Demo board";
+document.title = "MileCheck demo board \xB7 " + (_near || P.route);
+MPA.splice(0, 1);
+function anchorDist(lat, lon) {
+  return Math.min(...MPA.map((a) => miles(lat, lon, a.lat, a.lon)));
+}
+const TYPE = { AC: "Crash", CL: "Closure", RW: "Roadwork", IN: "Incident", HZ: "Hazard", WE: "Weather", VH: "Vehicle", OT: "Notice", CO: "Roadwork" };
+function dirOf(r, t) {
+  const raw = String((r.location || {}).direction || "").trim();
+  const code = raw.toUpperCase().match(/^(NB|SB|EB|WB)$/);
+  if (code) return code[1] + " lanes";
+  if (/^both$/i.test(raw)) return "both directions";
+  const d = raw + " " + t;
+  if (/\b(both|all) directions\b/i.test(d)) return "both directions";
+  const m = d.match(/\b(north|south|east|west)/i);
+  return m ? m[1][0].toUpperCase() + "B lanes" : "";
+}
+function placeOf(t) {
+  const m = t.match(/\b(?:near|at|from)\s+([A-Z][^(.,;]{2,30}?)\s*\(MP/) || t.match(/\b(?:near|at)\s+([A-Z][A-Za-z .'-]{2,30}?)(?=[.,;(]|$)/);
+  if (!m) return "";
+  const p = m[1].trim();
+  return /^(I-?\d|US|SR|OR|AZ|Loop|roadway|the )/i.test(p) ? "" : p;
+}
+const NEAR_MI = 60;
+const rowFrames = {};
+let detailStep = 0;
+function escapeText(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+}
+function detailPages(s) {
+  const words = String(s || "").split(/\s+/).filter(Boolean).flatMap((w) => w.match(/.{1,160}/g) || []), pages = [];
+  let line = "";
+  for (const word of words) {
+    if (line && (line + " " + word).length > 160) {
+      pages.push(line);
+      line = word;
+    } else line += (line ? " " : "") + word;
+  }
+  if (line) pages.push(line);
+  return pages.length ? pages : ["Impact details not provided."];
+}
+function impactText(r) {
+  const parts = [r["impact-desc"], r.description, r.headline].map((x) => cleanTxt(String(x || ""))).filter(Boolean);
+  if (parts.length > 1 && /^(roadwork|road work|incident|notice|crash|closure|vehicle|hazard|weather)\.?$/i.test(parts[parts.length - 1])) parts.pop();
+  return parts.filter((s, i) => !parts.some((other, j) => j !== i && other.toLowerCase().includes(s.toLowerCase()) && (other.length > s.length || j < i))).map((s) => /[.!?]$/.test(s) ? s : s + ".").join(" ");
+}
+function schedText(st, en) {
+  const sameDay = fmtDay(st) === fmtDay(Date.now() / 1e3);
+  const t = new Date(st * 1e3).toLocaleTimeString([], { hour: "numeric", minute: "2-digit", timeZone: TZ });
+  return sameDay ? "Scheduled today at " + t : "Scheduled " + fmtDay(st) + (en && fmtDay(en) !== fmtDay(st) ? " through " + fmtDay(en) : "");
+}
+const fmtDay = (s) => new Date(s * 1e3).toLocaleDateString([], { month: "short", day: "numeric", timeZone: TZ });
+function toSec(v) {
+  if (v == null || v === "") return 0;
+  if (typeof v === "number") return v > 1e12 ? v / 1e3 : v;
+  if (/^\d+$/.test(String(v))) {
+    const n = +v;
+    return n > 1e12 ? n / 1e3 : n;
+  }
+  const t = Date.parse(v);
+  return isFinite(t) ? t / 1e3 : 0;
+}
+function ago(s) {
+  if (!s) return "";
+  const m = Math.round((Date.now() / 1e3 - s) / 60);
+  if (m < 60) return m + " min ago";
+  const h = Math.round(m / 60);
+  return h < 48 ? h + " hr ago" : Math.round(h / 24) + " days ago";
+}
+async function getFeed(path, key) {
+  const ac = typeof AbortController !== "undefined" ? new AbortController() : null;
+  const req = fetch(WORKER + path, ac ? { cache: "no-store", signal: ac.signal } : { cache: "no-store" });
+  let tm;
+  const r = typeof setTimeout === "function" ? await Promise.race([req, new Promise((_, no) => {
+    tm = setTimeout(() => {
+      if (ac) ac.abort();
+      no(new Error(path + " timeout"));
+    }, 2e4);
+  })]).finally(() => clearTimeout(tm)) : await req;
+  if (!r.ok) throw new Error(path + " " + r.status);
+  const j = await r.json();
+  if (!j || !Array.isArray(j[key])) throw new Error(path + " bad shape");
   return j;
 }
-// Milepost of a feed endpoint, or null. Blank or zero is not a milepost.
-function mpOf(loc,k){const raw=loc[k+"-mile-marker"]??loc[k+"-milepost"];  // AZ: -mile-marker, OR: -milepost (Fable 10/13)
-  return (raw!==""&&raw!=null&&isFinite(+raw)&&+raw>0)?+raw:null;}
-async function poll(){
-  try{
-    const [cond,inc]=await Promise.all([
-      getFeed("/conditions?state="+P.condState,"road-weather-reports"),
-      getFeed("/incidents?state="+P.condState,"incident-reports"),
+function mpOf(loc, k) {
+  var _a;
+  const raw = (_a = loc[k + "-mile-marker"]) != null ? _a : loc[k + "-milepost"];
+  return raw !== "" && raw != null && isFinite(+raw) && +raw > 0 ? +raw : null;
+}
+async function poll() {
+  try {
+    const [cond, inc] = await Promise.all([
+      getFeed("/conditions?state=" + P.condState, "road-weather-reports"),
+      getFeed("/incidents?state=" + P.condState, "incident-reports")
     ]);
-    const now=Date.now()/1000;
-    const alerts=(inc["incident-reports"]||[]).filter(r=>{const rid=String((r.location||{})["route-id"]||"").trim();return rid===P.alertRid||P.alertRe.test(rid);})
-      .map(r=>{
-        const t=cleanTxt(r.headline)+" "+cleanTxt(r["impact-desc"]);
-        if(/no traffic impacts?/i.test(t))return null;
-        const L=r.location||{},sl=L["start-location"]||{},el=L["end-location"]||{};
-        const at=(ll,k)=>{let m=mpOf(ll,k);const la=ll[k+"-lat"],lo=ll[k+"-long"];
-          if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<8)m=estimateMp(+la,+lo);return m;};
-        let a=at(sl,"start"),b=at(el,"end");if(a==null)a=b;if(b==null)b=a;
-        if(a==null)return null;
-        const lo=Math.min(a,b),hi=Math.max(a,b);
-        const mp=P.mile<lo?lo:(P.mile>hi?hi:P.mile);  // nearest point of the affected stretch
-        if(Math.abs(mp-P.mile)>NEAR_MI)return null;
-        const full=r["is-full-closure"]===true||isFullClose(t);
-        const start=toSec(r["start-time"]),end=toSec(r["end-time"]);
-        if(end&&end<now)return null;
-        // Short-lived events the DOT forgot to clear (a crash with no end time, untouched for 12 h): drop.
-        // Roadwork and closures run for weeks and keep showing.
-        const upd=toSec(r["last-updated"]??r["update-time"])||start;
-        if(/^(AC|IN|HZ|VH)$/.test(r["event-type-id"]||"")&&!end&&upd&&now-upd>12*3600)return null;
-        const future=start>now;
-        let type=TYPE[r["event-type-id"]]||"Notice";if(type==="Closure"&&!full)type=/ramp|exit/i.test(t)?"Ramp closure":"Lane closure";
-        if(type==="Notice"&&/ramp/i.test(t))type="Ramp work";
-        const ld=String(sl["location-desc"]||"").replace(/^I-?\d+,?\s*/i,"").trim();
-        const place=ld&&ld.length<=40?ld:placeOf(t);
-        return {kind:"alert",name:type+(place?" · "+place:""),mp,stop:full&&!future,future,
-          when:future?schedText(start,end):"",dir:dirOf(r,t),upd:ago(upd),
-          st:full?"stop":"warn"};
-      }).filter(Boolean);
-    const closed=alerts.filter(a=>a.stop).sort((a,b)=>Math.abs(a.mp-P.mile)-Math.abs(b.mp-P.mile))[0];
-    const winter=cond["road-weather-reports"].filter(r=>{const L=r.location||{};const rid=String(L["route-id"]||r["route-id"]||"").trim();
-        if(!(rid===P.alertRid||P.alertRe.test(rid)))return false;
-        let m=mpOf(L["start-location"]||{},"start");const la=r.latitude,lo=r.longitude;
-        if(m==null&&la!=null&&lo!=null&&anchorDist(+la,+lo)<8)m=estimateMp(+la,+lo);
-        return m!=null&&Math.abs(m-P.mile)<=NEAR_MI;})
-      .map(r=>r["road-surface-condition"]||"").find(s=>/snow|ice|pack|slush|chain/i.test(s));
-    const sv=document.getElementById("statusVal"),sd=document.getElementById("statusDesc");
-    if(closed){sv.className="sv stop";sv.textContent="CLOSURE REPORTED";const cd=Math.round(Math.abs(closed.mp-P.mile));sd.textContent=P.dot+": "+closed.name+", "+(cd<1?"at this exit":cd+" mi "+(closed.mp<P.mile?P.dec.short:P.inc.short))+(closed.dir?" · "+closed.dir:"");}
-    else if(/chain/i.test(winter||"")){sv.className="sv warn";sv.textContent="CHAINS REPORTED";sd.textContent=P.dot+": "+winter;}
-    else if(winter){sv.className="sv warn";sv.textContent="WINTER REPORT";sd.textContent=P.dot+": "+winter;}
-    else{sv.className="sv ok";sv.textContent="NO CLOSURES REPORTED";sd.textContent=P.dot+" reports no current closures on "+P.route+" within "+NEAR_MI+" mi";}
-    const cams=P.cameras.filter(c=>Math.abs(c.mp-P.mile)<=NEAR_MI).map(c=>({kind:"cam",name:c.name,mp:c.mp}));
-    // Alerts first, nearest first, then the nearest cameras. Three rows a side: details wrap to two lines on a TV.
-    const side=(f)=>{const a=alerts.filter(x=>f(x.mp)),c=cams.filter(x=>f(x.mp));const by=(p,q)=>Math.abs(p.mp-P.mile)-Math.abs(q.mp-P.mile);
-      return a.sort(by).slice(0,3).concat(c.sort(by)).slice(0,3);};
-    renderRows("westRows",side(m=>m<=P.mile),"dec"); renderRows("eastRows",side(m=>m>P.mile),"inc");
-    lastFetch=Date.now();err=false;
-  }catch(e){err=true;
-    const sv=document.getElementById("statusVal");sv.className="sv warn";sv.textContent="REPORTS UNAVAILABLE";
-    document.getElementById("statusDesc").textContent="Can't reach "+P.dot+" reports right now. Retrying every minute.";}
+    const now = Date.now() / 1e3;
+    const alerts = (inc["incident-reports"] || []).filter((r) => {
+      const rid = String((r.location || {})["route-id"] || "").trim();
+      return rid === P.alertRid || P.alertRe.test(rid);
+    }).map((r) => {
+      var _a;
+      const t = cleanTxt(r.headline) + " " + cleanTxt(r["impact-desc"]);
+      if (/no traffic impacts?/i.test(t)) return null;
+      const L = r.location || {}, sl = L["start-location"] || {}, el = L["end-location"] || {};
+      const at = (ll, k) => {
+        let m = mpOf(ll, k);
+        const la = ll[k + "-lat"], lo2 = ll[k + "-long"];
+        if (m == null && la != null && lo2 != null && anchorDist(+la, +lo2) < 8) m = estimateMp(+la, +lo2);
+        return m;
+      };
+      let a = at(sl, "start"), b = at(el, "end");
+      if (a == null) a = b;
+      if (b == null) b = a;
+      if (a == null) return null;
+      const lo = Math.min(a, b), hi = Math.max(a, b);
+      const mp = P.mile < lo ? lo : P.mile > hi ? hi : P.mile;
+      if (Math.abs(mp - P.mile) > NEAR_MI) return null;
+      const full = r["is-full-closure"] === true || isFullClose(t);
+      const start = toSec(r["start-time"]), end = toSec(r["end-time"]);
+      if (end && end < now) return null;
+      const updated = toSec((_a = r["last-updated"]) != null ? _a : r["update-time"]), upd = updated || start;
+      if (/^(AC|IN|HZ|VH)$/.test(r["event-type-id"] || "") && !end && upd && now - upd > 12 * 3600) return null;
+      const future = start > now;
+      let type = TYPE[r["event-type-id"]] || "Notice";
+      if (type === "Closure" && !full) type = /ramp|exit/i.test(t) ? "Ramp closure" : "Lane closure";
+      if (type === "Notice" && /ramp/i.test(t)) type = "Ramp work";
+      const ld = String(sl["location-desc"] || "").replace(/^I-?\d+,?\s*/i, "").trim();
+      const place = ld && ld.length <= 40 ? ld : placeOf(t);
+      const impact = impactText(r);
+      return {
+        kind: "alert",
+        name: type + (place ? " \xB7 " + place : ""),
+        mp,
+        stop: full && !future,
+        future,
+        when: future ? schedText(start, end) : "",
+        dir: dirOf(r, t),
+        upd: ago(updated),
+        details: detailPages(impact),
+        delayMissing: !/\bdelay|\btravel time|\bwait time/i.test(impact),
+        st: full ? "stop" : "warn"
+      };
+    }).filter(Boolean);
+    const closed = alerts.filter((a) => a.stop).sort((a, b) => Math.abs(a.mp - P.mile) - Math.abs(b.mp - P.mile))[0];
+    const winter = cond["road-weather-reports"].filter((r) => {
+      const L = r.location || {};
+      const rid = String(L["route-id"] || r["route-id"] || "").trim();
+      if (!(rid === P.alertRid || P.alertRe.test(rid))) return false;
+      let m = mpOf(L["start-location"] || {}, "start");
+      const la = r.latitude, lo = r.longitude;
+      if (m == null && la != null && lo != null && anchorDist(+la, +lo) < 8) m = estimateMp(+la, +lo);
+      return m != null && Math.abs(m - P.mile) <= NEAR_MI;
+    }).map((r) => r["road-surface-condition"] || "").find((s) => /snow|ice|pack|slush|chain/i.test(s));
+    const sv = document.getElementById("statusVal"), sd = document.getElementById("statusDesc");
+    if (closed) {
+      sv.className = "sv stop";
+      sv.textContent = "CLOSURE REPORTED";
+      const cd = Math.round(Math.abs(closed.mp - P.mile));
+      sd.textContent = P.dot + ": " + closed.name + ", " + (cd < 1 ? "at this exit" : cd + " mi " + (closed.mp < P.mile ? P.dec.short : P.inc.short)) + (closed.dir ? " \xB7 " + closed.dir : "");
+    } else if (/chain/i.test(winter || "")) {
+      sv.className = "sv warn";
+      sv.textContent = "CHAINS REPORTED";
+      sd.textContent = P.dot + ": " + winter;
+    } else if (winter) {
+      sv.className = "sv warn";
+      sv.textContent = "WINTER REPORT";
+      sd.textContent = P.dot + ": " + winter;
+    } else {
+      sv.className = "sv ok";
+      sv.textContent = "NO CLOSURES REPORTED";
+      sd.textContent = P.dot + " reports no current closures on " + P.route + " within " + NEAR_MI + " mi";
+    }
+    const cams = P.cameras.filter((c) => Math.abs(c.mp - P.mile) <= NEAR_MI).map((c) => ({ kind: "cam", name: c.name, mp: c.mp }));
+    const side = (f) => {
+      const a = alerts.filter((x) => f(x.mp)), c = cams.filter((x) => f(x.mp));
+      const by = (p, q) => Math.abs(p.mp - P.mile) - Math.abs(q.mp - P.mile);
+      const ranked = a.sort((p, q) => Number(q.stop) - Number(p.stop) || Number(p.future) - Number(q.future) || by(p, q));
+      return ranked.length ? ranked : c.sort(by).slice(0, 2);
+    };
+    renderRows("westRows", side((m) => m <= P.mile), "dec");
+    renderRows("eastRows", side((m) => m > P.mile), "inc");
+    lastFetch = Date.now();
+    err = false;
+  } catch (e) {
+    err = true;
+    for (const id of ["westRows", "eastRows"]) {
+      delete rowFrames[id];
+      document.getElementById(id).innerHTML = '<div class="empty">' + P.dot + " reports unavailable</div>";
+    }
+    const sv = document.getElementById("statusVal");
+    sv.className = "sv warn";
+    sv.textContent = "REPORTS UNAVAILABLE";
+    document.getElementById("statusDesc").textContent = "Can't reach " + P.dot + " reports right now. Retrying every minute.";
+  }
   tick();
 }
-function renderRows(elId,list,side){
-  const el=document.getElementById(elId);
-  if(!list.length){el.innerHTML=`<div class="empty">No ${P.dot} reports ${towardTowns(side)}</div>`;return;}
-  el.innerHTML=list.map(x=>{
-    const dm=Math.round(Math.abs(x.mp-P.mile)),dist=dm<1?"here":dm+" mi";
-    if(x.kind==="cam")return `<div class="row"><div class="nm"><span class="icn">📷</span>${x.name}</div><div class="rt"><div class="dist big">${dist}</div></div></div>`;
-    const label=x.future?"SCHEDULED":(x.stop?"CLOSED":"REPORTED");
-    const sub=[x.when,x.dir,P.dot+(x.upd&&!x.future?" · "+x.upd:"")].filter(Boolean).join(" · ");  // a schedule's posting age reads as stale
-    return `<div class="row"><div class="nm"><span class="icn">${x.stop?"⛔":(x.future?"🗓":"⚠")}</span>${x.name}<span class="sub">${sub}</span></div><div class="rt"><div class="st ${x.future?"cam":x.st}">${label}</div><div class="dist">${dist}</div></div></div>`;
+function renderRows(elId, list, side) {
+  const el = document.getElementById(elId);
+  if (!list.length) {
+    delete rowFrames[elId];
+    el.innerHTML = `<div class="empty">No ${P.dot} reports ${escapeText(towardTowns(side))}</div>`;
+    return;
+  }
+  const frames = [], total = list.filter((x) => x.kind === "alert").length, pageSize = total ? 1 : 2;
+  for (let i = 0; i < list.length; i += pageSize) {
+    const group = list.slice(i, i + pageSize), count = Math.max(...group.map((x) => x.details ? x.details.length : 1));
+    for (let p = 0; p < count; p++) frames.push(group.map((x, j) => ({ x, detail: p, number: i + j + 1, total })));
+  }
+  rowFrames[elId] = frames;
+  presentRows(elId);
+}
+function presentRows(elId) {
+  const frames = rowFrames[elId];
+  if (!frames || !frames.length) return;
+  document.getElementById(elId).innerHTML = frames[detailStep % frames.length].map(({ x, detail, number, total }) => {
+    const dm = Math.round(Math.abs(x.mp - P.mile)), dist = dm < 1 ? "here" : dm + " mi";
+    if (x.kind === "cam") return `<div class="row camera-row"><div class="nm"><span class="icn">\u{1F4F7}</span>${escapeText(x.name)}</div><div class="rt"><div class="dist big">${dist}</div></div></div>`;
+    const label = x.future ? "SCHEDULED" : x.stop ? "CLOSED" : "REPORTED";
+    const pages = x.details || ["Impact details not provided."], page = Math.min(detail, pages.length - 1);
+    const sub = [x.when, x.dir, x.upd ? P.dot + " updated " + x.upd : P.dot + " update time not provided"].filter(Boolean).join(" \xB7 ");
+    const counter = [total > 1 ? "Alert " + number + " of " + total : "", pages.length > 1 ? "Details " + (page + 1) + " of " + pages.length : ""].filter(Boolean).join(" \xB7 ");
+    return `<div class="row alert-row"><div class="nm"><span class="alert-title">${escapeText(x.name)}</span><span class="impact">${escapeText(pages[page])}</span>${x.delayMissing ? '<span class="delay-note">Delay not provided by ' + P.dot + "</span>" : ""}<span class="sub">${escapeText(sub)}</span>${counter ? '<span class="detail-counter">' + counter + "</span>" : ""}</div><div class="rt"><div class="st ${x.future ? "cam" : x.st}">${label}</div><div class="dist">${dist}</div></div></div>`;
   }).join("");
 }
-function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit",timeZone:TZ});
-  const u=document.getElementById("updated");if(err){u.textContent="reconnecting…";return;}
-  if(lastFetch){const s=Math.round((Date.now()-lastFetch)/1000);u.textContent="Board checked "+(s<8?"just now":s+"s ago");}}
-// Hero camera: nearest first, then outward. Far ones say so.
-const _byDist=P.cameras.slice().sort((a,b)=>Math.abs(a.mp-P.mile)-Math.abs(b.mp-P.mile));
-const _close=_byDist.filter(c=>Math.abs(c.mp-P.mile)<=30);
-const CAMS=_close.length?_close.slice(0,5):_byDist.slice(0,1);  // stay near the store when we can
-let ci=0;
-document.getElementById("camImg").addEventListener("error",()=>{if(++_camErr<CAMS.length)cycleCam();});let _camErr=0;
-function cycleCam(){const c=CAMS[ci%CAMS.length];ci++;if(ci%CAMS.length===0)_camErr=0;const d=Math.round(Math.abs(c.mp-P.mile));
-  document.getElementById("camImg").src=CAM_BASE+encodeURIComponent(c.file)+"&t="+Date.now();
-  document.getElementById("camCap").innerHTML=`${c.name} <span class="mi">· ${d<1?"here":d+" mi "+(c.mp<P.mile?P.dec.short:P.inc.short)}${d>30?" · farther along "+P.route:""}</span>`;}
-// ADOT/ODOT serve a 540x330 "no live feed" card for dark cameras. Skip it, but
-// stop after one full lap so an all-dark corridor doesn't loop forever.
-let _dead=0;document.getElementById("camImg").addEventListener("load",e=>{const i=e.target;if(i.naturalWidth===540&&i.naturalHeight===330){if(++_dead<CAMS.length)cycleCam();}else _dead=0;});
-cycleCam(); setInterval(cycleCam,6000);
-
-// rotating sponsor ad
-let adi=0;
-function renderAd(){const a=P.services[adi%P.services.length];adi++;const b=document.getElementById("adBanner");
-  b.innerHTML="";const nm=document.createElement("span");nm.className="anm";const bb=document.createElement("b");bb.textContent=a.name;nm.appendChild(bb);
-  const hs=document.createElement("span");hs.textContent=a.headline;nm.appendChild(hs);b.appendChild(nm);
-  const tg=document.createElement("span");tg.className="adtag";tg.textContent=a.house?"IN THE STORE":(a.demo?"DEMO SPONSOR SPACE":"SPONSOR");if(a.house)tg.style.background="#17150f";b.appendChild(tg);
-  if(a.url){const q=document.createElement("img");q.className="aq";q.alt="";q.src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data="+encodeURIComponent(a.url);b.appendChild(q);}}
-renderAd(); setInterval(renderAd,10000);
-
-document.getElementById("tkScroll").textContent="Demo using live "+P.dot+" reports for "+P.route;
-document.getElementById("tkLbl").textContent="● LIVE";
-
-poll(); setInterval(poll,60000); setInterval(tick,1000);
+setInterval(() => {
+  detailStep++;
+  presentRows("westRows");
+  presentRows("eastRows");
+}, 12e3);
+function tick() {
+  document.getElementById("clock").textContent = (/* @__PURE__ */ new Date()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit", timeZone: TZ });
+  const u = document.getElementById("updated");
+  if (err) {
+    u.textContent = "reconnecting\u2026";
+    return;
+  }
+  if (lastFetch) {
+    const s = Math.round((Date.now() - lastFetch) / 1e3);
+    u.textContent = "Board checked " + (s < 8 ? "just now" : s + "s ago");
+  }
+}
+const _byDist = P.cameras.slice().sort((a, b) => Math.abs(a.mp - P.mile) - Math.abs(b.mp - P.mile));
+const _close = _byDist.filter((c) => Math.abs(c.mp - P.mile) <= 30);
+const CAMS = _close.length ? _close.slice(0, 5) : _byDist.slice(0, 1);
+let ci = 0;
+document.getElementById("camImg").addEventListener("error", () => {
+  if (++_camErr < CAMS.length) cycleCam();
+});
+let _camErr = 0;
+function cycleCam() {
+  const c = CAMS[ci % CAMS.length];
+  ci++;
+  if (ci % CAMS.length === 0) _camErr = 0;
+  const d = Math.round(Math.abs(c.mp - P.mile));
+  document.getElementById("camImg").src = CAM_BASE + encodeURIComponent(c.file) + "&t=" + Date.now();
+  document.getElementById("camCap").innerHTML = `${c.name} <span class="mi">\xB7 ${d < 1 ? "here" : d + " mi " + (c.mp < P.mile ? P.dec.short : P.inc.short)}${d > 30 ? " \xB7 farther along " + P.route : ""}</span>`;
+}
+let _dead = 0;
+document.getElementById("camImg").addEventListener("load", (e) => {
+  const i = e.target;
+  if (i.naturalWidth === 540 && i.naturalHeight === 330) {
+    if (++_dead < CAMS.length) cycleCam();
+  } else _dead = 0;
+});
+cycleCam();
+setInterval(cycleCam, 6e3);
+let adi = 0;
+function renderAd() {
+  const a = P.services[adi % P.services.length];
+  adi++;
+  const b = document.getElementById("adBanner");
+  b.innerHTML = "";
+  const nm = document.createElement("span");
+  nm.className = "anm";
+  const bb = document.createElement("b");
+  bb.textContent = a.name;
+  nm.appendChild(bb);
+  const hs = document.createElement("span");
+  hs.textContent = a.headline;
+  nm.appendChild(hs);
+  b.appendChild(nm);
+  const tg = document.createElement("span");
+  tg.className = "adtag";
+  tg.textContent = a.house ? "IN THE STORE" : a.demo ? "DEMO SPONSOR SPACE" : "SPONSOR";
+  if (a.house) tg.style.background = "#17150f";
+  b.appendChild(tg);
+  if (a.url) {
+    const q = document.createElement("img");
+    q.className = "aq";
+    q.alt = "";
+    q.src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=" + encodeURIComponent(a.url);
+    b.appendChild(q);
+  }
+}
+renderAd();
+setInterval(renderAd, 1e4);
+document.getElementById("tkScroll").textContent = "Demo using live " + P.dot + " reports for " + P.route;
+document.getElementById("tkLbl").textContent = "\u25CF LIVE";
+poll();
+setInterval(poll, 6e4);
+setInterval(tick, 1e3);
 </script>
 </body>
 </html>
