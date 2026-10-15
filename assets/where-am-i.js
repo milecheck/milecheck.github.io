@@ -60,5 +60,7 @@
     }
     try{root.navigator.geolocation.getCurrentPosition(onPosition,onError,{enableHighAccuracy:true,timeout:15000,maximumAge:0});}catch(error){onError(error);}
   });
+  // Arrived from a 'Find my mile marker' button (?go=1): the reader already tapped once, start now.
+  if(root.location&&/[?&]go=1\b/.test(root.location.search||""))button.click();
   doc.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-marker-action]');if(a)event(a.getAttribute('data-marker-action'));});
 })(window);
