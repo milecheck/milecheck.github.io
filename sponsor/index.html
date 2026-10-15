@@ -77,6 +77,14 @@
     .sp-table th:not(:first-child),.sp-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;}
     .sp-val{font-size:10.5px;color:#5b6670;white-space:nowrap;margin-bottom:3px;font-family:'JetBrains Mono',monospace;}
     .sp-bars{height:150px;}
+    .sp-boards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+    .sp-board{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px 18px;display:flex;flex-direction:column;}
+    .sp-board .k{font-size:17px;font-weight:700;color:#0E1116;margin:0 0 4px;}
+    .sp-board .v{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 8px;}
+    .sp-board .d{font-size:14px;line-height:1.5;color:#3a444d;margin:0 0 12px;flex:1;}
+    .sp-board .p{font-size:14px;color:#3a444d;margin:0 0 12px;} .sp-board .p b{font-family:'JetBrains Mono',monospace;font-size:20px;color:#0f7a4f;}
+    .sp-board .a{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;font-weight:600;}
+    .sp-board .a .btn{margin:0;padding:8px 14px;font-size:14px;}
   </style>
 </head>
 <body>
@@ -108,7 +116,7 @@
     <p class="sp-note">One sponsor per screen. MileCheck is an AWS Partner Network member and runs a live add-in on the <a href="/partners/">Geotab Marketplace</a>.</p>
     <div class="sp-tabs" role="tablist">
       <a class="sp-tab" href="#how">How it works</a>
-      <a class="sp-tab" href="#see">See a board</a>
+      <a class="sp-tab" href="#see">Pick a board</a>
       <a class="sp-tab" href="#pricing">Pricing</a>
     </div>
   </section>
@@ -123,14 +131,66 @@
   </section>
 
   <section class="sp-section" id="see">
-    <h2>See a board</h2>
-    <p class="sub">These run on live data. The venue and sponsor names on them are examples.</p>
-    <ul class="sp-steps">
-      <li><a href="/boards/i84-pendleton.html">I-84 at Pendleton</a></li>
-      <li><a href="/boards/i17-black-canyon.html">I-17 at Black Canyon City</a></li>
-      <li><a href="/boards/blaine.html">The Blaine border crossing</a></li>
-      <li><a href="/boards/ballard.html">The Ballard drawbridge</a></li>
-    </ul>
+    <h2>Pick a board</h2>
+    <p class="sub">Each board shows live data for one stretch of road and has one sponsor slot. Open one to see what drivers see. The venue and sponsor names on the demos are examples. Want a highway that isn&rsquo;t here? <a href="mailto:sales@milecheckapp.com?subject=Corridor%20board%20request">Tell us which one</a>.</p>
+    <div class="sp-boards">
+      <div class="sp-board">
+        <p class="k">I-84 &middot; Pendleton, OR</p>
+        <p class="v">Truck stop, diner or gas station</p>
+        <p class="d">I-84 over the Blue Mountains near Pendleton, with ODOT cameras.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/i84-pendleton.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Pendleton%2C%20OR%20(I-84)">Claim this board</a></div>
+      </div>
+      <div class="sp-board">
+        <p class="k">I-84 &middot; Baker City, OR</p>
+        <p class="v">Truck stop, diner or gas station</p>
+        <p class="d">I-84 over the Blue Mountains and Ladd Canyon, with ODOT cameras.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/i84-baker-city.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Baker%20City%2C%20OR%20(I-84)">Claim this board</a></div>
+      </div>
+      <div class="sp-board">
+        <p class="k">I-84 &middot; Columbia River Gorge, OR</p>
+        <p class="v">Truck stop, diner or gas station</p>
+        <p class="d">I-84 through the Columbia River Gorge, with ODOT cameras.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/i84-gorge.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Columbia%20River%20Gorge%2C%20OR%20(I-84)">Claim this board</a></div>
+      </div>
+      <div class="sp-board">
+        <p class="k">I-17 &middot; Black Canyon City, AZ</p>
+        <p class="v">Truck stop, diner or gas station</p>
+        <p class="d">I-17 between Phoenix and Flagstaff, with ADOT closures and crashes.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/i17-black-canyon.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Black%20Canyon%20City%2C%20AZ%20(I-17)">Claim this board</a></div>
+      </div>
+      <div class="sp-board">
+        <p class="k">I-90 &middot; Issaquah, WA</p>
+        <p class="v">Gas station before the pass</p>
+        <p class="d">Snoqualmie Pass status, chain controls and eight WSDOT summit cameras.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/issaquah.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Issaquah%2C%20WA%20(I-90)">Claim this board</a></div>
+      </div>
+      <div class="sp-board">
+        <p class="k">I-5 &middot; Blaine, WA</p>
+        <p class="v">Border-town business</p>
+        <p class="d">Peace Arch, Pacific Highway and Lynden waits from CBP, side by side.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/blaine.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Blaine%2C%20WA%20(I-5)">Claim this board</a></div>
+      </div>
+      <div class="sp-board">
+        <p class="k">Ship Canal &middot; Magnolia, Seattle</p>
+        <p class="v">Gas station</p>
+        <p class="d">Ballard and Fremont bridges, live, with how long each has been down.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/magnolia.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Magnolia%2C%20Seattle%20(Ship%20Canal)">Claim this board</a></div>
+      </div>
+      <div class="sp-board">
+        <p class="k">Ship Canal &middot; Ballard, Seattle</p>
+        <p class="v">Café, bar or shop</p>
+        <p class="d">The Ballard Bridge, drawn, raising when the real one does.</p>
+        <p class="p"><b>$99</b> a month</p>
+        <div class="a"><a href="/boards/ballard-bridge.html" target="_blank" rel="noopener">See it live</a><a class="btn" href="mailto:sales@milecheckapp.com?subject=Corridor%20board%3A%20Ballard%2C%20Seattle%20(Ship%20Canal)">Claim this board</a></div>
+      </div>
+    </div>
   </section>
 
   <section class="sp-section" id="pricing">
