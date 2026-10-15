@@ -20,6 +20,8 @@
     .marker-result{margin:30px auto 22px;padding:22px 18px 25px;background:#fff;border:1px solid #c9c6b8;border-top:4px solid #285b3b;border-radius:5px;max-width:450px}.marker-result .eyebrow{margin:0;font-size:13px;color:#5c6156}.marker-sign{display:table;margin:16px auto;padding:10px 24px 13px;background:#285b3b;color:#fff;border:3px solid #fff;outline:2px solid #285b3b;border-radius:5px;font-family:ui-monospace,Menlo,monospace}.marker-sign small{display:block;font-family:inherit;font-size:14px;letter-spacing:2px}.marker-sign strong{display:block;font-size:clamp(42px,10vw,68px);line-height:1.15;overflow-wrap:anywhere}#marker-road{font-size:19px;font-weight:650;margin:14px 0 4px}#marker-distance{font-size:13px;color:#5c6156;margin:0 0 14px}.marker-map{display:inline-flex;align-items:center;justify-content:center;min-height:44px;font-weight:600}#marker-next{border-top:1px solid #c9c6b8;margin:30px auto 0;padding-top:17px;max-width:450px}#marker-next a{display:block;min-height:44px;padding:10px 4px}#marker-next a.marker-app{background:#285b3b;color:#fff;border-radius:6px;padding:12px 14px;margin:0 0 10px;font-weight:650;text-decoration:none}#marker-next a.marker-app span{display:block;font-size:13px;font-weight:500;opacity:.85}#marker-choices{list-style:none;padding:0;margin:22px auto;max-width:450px}#marker-choices li{border-top:1px solid #c9c6b8}#marker-choices a{display:block;min-height:48px;padding:12px}
     .marker-fallback{margin-top:30px;font-size:14px}.marker-fallback>a{display:inline-block;min-height:44px;padding:10px 0}.marker-details{font-size:13px;color:#5c6156;text-align:left;max-width:440px;margin:18px auto 0}.marker-details summary{cursor:pointer;min-height:44px;padding:12px 0}.marker-details p{margin:4px 0 12px}.marker-details a{display:inline-block;padding:5px 0}footer{text-align:center;font-size:12px;padding:0 20px 24px;color:#5c6156}footer a{display:inline-block;min-height:44px;padding:12px 7px}
     @media(max-width:480px){main{padding-top:48px}h1{font-size:38px}button{width:100%;max-width:340px}}@media(max-height:520px) and (min-width:600px){main{padding-top:28px}.marker-brand{margin-top:14px}h1{font-size:36px;margin-bottom:20px;max-width:none}}
+#marker-road{font-size:20px}#marker-distance{font-size:15px!important;color:#2c2f29!important;font-weight:500}.marker-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.marker-actions .marker-map,#marker-copy{min-height:44px;padding:0 16px;border:1px solid #285b3b;border-radius:6px;background:#fff;color:#285b3b;font:inherit;font-weight:600;text-decoration:none;cursor:pointer;width:auto;max-width:none}#marker-copied{font-size:13px;color:#5c6156;min-height:1em;margin:8px 0 0}.marker-app-note{font-size:13px;color:#5c6156;margin:-4px 0 12px}
+body.found h1,body.found .marker-note{display:none}body.found main{padding-top:18px}body.found #locate{font-size:15px;padding:10px 16px;min-height:44px;background:#fff;color:#285b3b;border:1px solid #285b3b;width:auto;order:2}
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"What mile marker am I at?","url":"https://milecheckapp.com/what-mile-marker-am-i-at/","description":"Find a nearby recorded highway mile marker using your browser's location.","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
 </head>
@@ -28,18 +30,19 @@
   <main>
     <h1>What mile marker am I at?</h1>
     <button id="locate" type="button">Use my location</button>
-    <p class="marker-note">Your coordinates stay in this browser.</p>
+    <p class="marker-note">U.S. highways. Your coordinates stay in this browser.</p>
     <p id="location-status" role="status" aria-live="polite" aria-atomic="true"></p>
     <section id="marker-result" class="marker-result" aria-label="Nearby mile marker" aria-live="polite" aria-atomic="true" hidden>
-      <p class="eyebrow">Nearest recorded marker</p>
+      <p class="eyebrow">Nearest recorded milepost</p>
       <div class="marker-sign"><small>MILE</small><strong id="marker-number"></strong></div>
       <p id="marker-road"></p>
       <p id="marker-distance"></p>
-      <a id="marker-map" class="marker-map" data-marker-action="open_map" href="/maps/mile-markers/">Show on map</a>
+      <div class="marker-actions"><a id="marker-map" class="marker-map" data-marker-action="open_map" href="/maps/mile-markers/">Show on map</a><button id="marker-copy" type="button" data-marker-action="copy">Copy milepost</button></div><p id="marker-copied" role="status"></p>
     </section>
     <ul id="marker-choices" aria-label="Nearby mile markers" hidden></ul>
     <nav id="marker-next" aria-label="Check this state" hidden>
-      <a class="marker-app" href="/get/?utm_source=web&amp;utm_medium=finder&amp;utm_campaign=mile-marker-result" data-marker-action="app">Keep it on screen while you drive<span>Get the MileCheck app</span></a>
+      <a class="marker-app" href="/get/?utm_source=web&amp;utm_medium=finder&amp;utm_campaign=mile-marker-result" data-marker-action="app">See your mile marker update as you drive<span>Get the MileCheck app</span></a>
+      <p class="marker-app-note">Your mile marker is free in the app. Alerts and cameras need a subscription.</p>
       <a id="marker-conditions" data-marker-action="conditions" href="/road-conditions/">Road conditions</a>
       <a id="marker-cameras" data-marker-action="cameras" href="/cameras/">Highway cameras</a>
       <a href="/#subscribe" data-marker-action="report">Get your state's monthly road alert report</a>

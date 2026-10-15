@@ -45,13 +45,14 @@
         var q=outcome.nearest,post=q.post;
         doc.getElementById('marker-number').textContent=String(post.mile);
         doc.getElementById('marker-road').textContent=name(post);
-        doc.getElementById('marker-distance').textContent=away(q.distance)+' Positions are approximate.';
+        doc.getElementById('marker-distance').textContent=away(q.distance).replace(' away.',' from your reported location.');
         doc.getElementById('marker-map').href=mapLink(post);
         var state=states.find(function(s){return s.code===post.code;});
         var conditions=doc.getElementById('marker-conditions');conditions.href='/road-conditions/'+state.slug+'/';conditions.textContent=state.name+' road conditions';
         var cameras=doc.getElementById('marker-cameras');cameras.hidden=!state.cameras;
         if(state.cameras){cameras.href='/cameras/'+state.slug+'/?route='+encodeURIComponent(routeAlias(post));cameras.textContent=state.name+' highway cameras';}
-        result.hidden=false;next.hidden=false;finish('Nearest recorded marker. '+post.route+', mile '+post.mile+', '+state.name+'.',true);event('result');
+        copyText=post.route+', recorded milepost '+post.mile+', '+state.name+'. '+away(q.distance).replace(' away.',' from my reported location.');if(doc.body&&doc.body.classList)doc.body.classList.add('found');button.textContent='Update my location';
+        result.hidden=false;next.hidden=false;if(root.scrollTo)root.scrollTo&&root.scrollTo(0,0);finish('Nearest recorded marker. '+post.route+', mile '+post.mile+', '+state.name+'.',true);event('result');
       }).catch(function(){if(current())fail('Some mile marker data did not load. Try again or choose a highway on the map.');});
     }
     function onError(error){
@@ -60,6 +61,8 @@
     }
     try{root.navigator.geolocation.getCurrentPosition(onPosition,onError,{enableHighAccuracy:true,timeout:15000,maximumAge:0});}catch(error){onError(error);}
   });
+  var copyText='',copyBtn=doc.getElementById('marker-copy'),copied=doc.getElementById('marker-copied');
+  if(copyBtn)copyBtn.addEventListener('click',function(){var ok=function(){copied.textContent='Copied: '+copyText;},no=function(){copied.textContent=copyText;};try{root.navigator.clipboard.writeText(copyText).then(ok,no);}catch(e){no();}});
   // Arrived from a 'Find my mile marker' button (?go=1): the reader already tapped once, start now.
   if(root.location&&/[?&]go=1\b/.test(root.location.search||""))button.click();
   doc.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-marker-action]');if(a)event(a.getAttribute('data-marker-action'));});
