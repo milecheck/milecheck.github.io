@@ -73,6 +73,7 @@
       .cb-faq{max-width:760px;border-bottom:1px solid #E5E5E5;padding:14px 0}
     .cb-faq summary{font-size:17px;font-weight:700;cursor:pointer}
     .cb-faq p{margin-top:8px;font-size:15px;line-height:1.6;color:#525252}
+      .cb-cta { display:inline-block; margin-top:6px; font-size:18px; font-weight:700; padding:14px 22px; border-radius:8px; background:#0f7a4f; color:#fff; text-decoration:none; }
   </style>
 
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
@@ -113,19 +114,17 @@
         <p class="eyebrow">Corridor Board &middot; for stores on the highway</p>
         <h1>Live DOT road reports on your store's TV.</h1>
         <p class="ent-hero-sub">Free for your store. Earn a share of sponsor payments. Runs in your TV's browser.</p>
-        <video class="cb-video" controls playsinline preload="metadata" poster="/video/corridor-board-store-scene.jpg">
-          <source src="/video/corridor-board-store-scene.mp4" type="video/mp4">
-        </video>
+        <a href="#ask" class="cb-cta">Get a board for your store</a>
       </div>
     </section>
 
     <section class="ent-section">
       <div class="container">
-        <p class="ent-section-label">Your board, live</p>
-        <h2 id="cb-board-title">This is a real board. The data on it is live right now.</h2>
+        <p class="ent-section-label">See a demo</p>
+        <h2 id="cb-board-title">Demo using live DOT reports.</h2>
         <div class="cb-tabs" id="cb-tabs"></div>
         <div class="cb-frame"><iframe id="cb-board" title="Live MileCheck corridor board" loading="lazy"></iframe></div>
-        <p class="cb-note"><a id="cb-open" href="/boards/i84-pendleton.html" target="_blank" rel="noopener" style="font-weight:700;color:#0f7a4f">Open this demo full screen &rarr;</a><br>This is a demo using live DOT reports. The sponsor space along the bottom is empty until a sponsor buys it.</p>
+        <p class="cb-note"><a id="cb-open" href="/boards/i84-pendleton.html" target="_blank" rel="noopener" style="font-weight:700;color:#0f7a4f">Open this demo full screen &rarr;</a><br>The sponsor space along the bottom is empty until a sponsor buys it.</p>
       </div>
     </section>
 
@@ -134,18 +133,27 @@
         <p class="ent-section-label">How it works</p>
         <div class="infra-grid">
           <div class="infra-cell">
-            <h3>Free to the store</h3>
-            <p>We set it up for your exit. It updates itself. You can add your own lines, like a food special or &ldquo;Showers available.&rdquo;</p>
+            <h3>1. Tell us where your store is</h3>
+            <p>Send the form below. We set the board up for the highway outside your door.</p>
           </div>
           <div class="infra-cell">
-            <h3>You share the sponsor money</h3>
-            <p>One sponsor slot per screen. It can be a local business or a regional or national brand. Your store gets a share of what it earns. The split is set in your agreement.</p>
-          </div>
-          <div class="infra-cell">
-            <h3>Runs in your TV's browser</h3>
+            <h3>2. We test it on your TV</h3>
             <p>You provide the TV and Wi-Fi. We test the board in your TV or streaming device's browser before setup. Nothing to buy from us.</p>
           </div>
+          <div class="infra-cell">
+            <h3>3. It runs itself</h3>
+            <p>It updates itself. One sponsor slot per screen, sold by MileCheck. Your store gets a share of sponsor payments when the slot is sold.</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="ent-section">
+      <div class="container">
+        <p class="ent-section-label">In a store</p>
+        <video class="cb-video" controls playsinline preload="metadata" poster="/video/corridor-board-store-scene.jpg">
+          <source src="/video/corridor-board-store-scene.mp4" type="video/mp4">
+        </video>
       </div>
     </section>
 
@@ -167,14 +175,18 @@
     <section class="cta-section" id="ask">
       <div class="container">
         <p class="ent-section-label">Get a board for your store</p>
-        <h2>We'll set it up for your exit.</h2>
+        <h2>Tell us where your store is.</h2>
         <form id="cb-form" class="cb-form">
-          <label for="cb-store">Store name and exit</label>
-          <input id="cb-store" required maxlength="100" placeholder="Store name, exit 242">
+          <label for="cb-store">Store name</label>
+          <input id="cb-store" required maxlength="100" autocomplete="organization">
+          <label for="cb-addr">Store address</label>
+          <input id="cb-addr" required maxlength="160" autocomplete="street-address" placeholder="Street, town, state">
+          <label for="cb-name">Your name</label>
+          <input id="cb-name" maxlength="80" autocomplete="name">
           <label for="cb-email">Email</label>
-          <input id="cb-email" type="email" required maxlength="254" placeholder="you@example.com">
+          <input id="cb-email" type="email" required maxlength="254" autocomplete="email">
           <label for="cb-phone">Phone (optional)</label>
-          <input id="cb-phone" type="tel" maxlength="40" placeholder="Best number for a 10-minute call">
+          <input id="cb-phone" type="tel" maxlength="40" autocomplete="tel">
           <button type="submit" id="cb-submit">Send</button>
           <p class="cb-msg" id="cb-msg" role="status"></p>
         </form>
@@ -258,8 +270,8 @@
       tabs.appendChild(a);
     });
     if (venue) {
-      document.getElementById('cb-board-title').textContent = 'Your board, with ' + venue + ' at the top.';
-      document.getElementById('cb-store').value = venue + (mp ? ', exit ' + mp : '');
+      document.getElementById('cb-board-title').textContent = 'Demo for ' + venue + ', using live DOT reports.';
+      document.getElementById('cb-store').value = venue;
     }
     show(board);
 
@@ -283,7 +295,7 @@
           list: 'venue',
           email: document.getElementById('cb-email').value.trim(),
           name: document.getElementById('cb-store').value.trim(),
-          comments: (phone ? 'phone: ' + phone + ' · ' : '') + 'board: ' + board,
+          comments: ['address: ' + document.getElementById('cb-addr').value.trim(), document.getElementById('cb-name').value.trim() ? 'contact: ' + document.getElementById('cb-name').value.trim() : '', phone ? 'phone: ' + phone : '', 'board: ' + board].filter(Boolean).join(' · ').slice(0, 500),
           source: source
         })
       }).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })

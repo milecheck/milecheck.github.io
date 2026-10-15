@@ -95,6 +95,7 @@ body.noinset{padding:1.8vh 2vw}
 .row .delay-note{display:block;font-size:2.2vh;line-height:1.2;margin-top:.6vh;color:#5d584d}
 .row .detail-counter{display:block;font-size:1.8vh;color:#5d584d;margin-top:.6vh}
 .row.alert-row .rt{align-self:start;padding-top:.2vh;min-width:7vw}
+.row .nm .cam-line{display:block;margin-top:1vh;font-size:2.2vh;font-weight:800;color:#2f6ea0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body>
@@ -410,6 +411,7 @@ async function poll() {
   }
   tick();
 }
+const rowCams = {};
 function renderRows(elId, list, side) {
   const el = document.getElementById(elId);
   if (!list.length) {
@@ -422,6 +424,11 @@ function renderRows(elId, list, side) {
     const group = list.slice(i, i + pageSize), count = Math.max(...group.map((x) => x.details ? x.details.length : 1));
     for (let p = 0; p < count; p++) frames.push(group.map((x, j) => ({ x, detail: p, number: i + j + 1, total })));
   }
+  const sideCams = P.cameras.filter((c) => (side === "dec" ? c.mp <= P.mile : c.mp > P.mile) && Math.abs(c.mp - P.mile) <= NEAR_MI).sort((a, b) => Math.abs(a.mp - P.mile) - Math.abs(b.mp - P.mile)).slice(0, 3).map((c) => {
+    const d = Math.round(Math.abs(c.mp - P.mile));
+    return c.name + " " + (d < 1 ? "here" : d + " mi");
+  });
+  rowCams[elId] = sideCams.length ? "Cameras: " + sideCams.join(" \xB7 ") : "";
   rowFrames[elId] = frames;
   presentRows(elId);
 }
@@ -435,7 +442,7 @@ function presentRows(elId) {
     const pages = x.details || ["Impact details not provided."], page = Math.min(detail, pages.length - 1);
     const sub = [x.when, x.dir, x.upd ? P.dot + " updated " + x.upd : P.dot + " update time not provided"].filter(Boolean).join(" \xB7 ");
     const counter = [total > 1 ? "Alert " + number + " of " + total : "", pages.length > 1 ? "Details " + (page + 1) + " of " + pages.length : ""].filter(Boolean).join(" \xB7 ");
-    return `<div class="row alert-row"><div class="nm"><span class="alert-title">${escapeText(x.name)}</span><span class="impact">${escapeText(pages[page])}</span>${x.delayMissing ? '<span class="delay-note">Delay not provided by ' + P.dot + "</span>" : ""}<span class="sub">${escapeText(sub)}</span>${counter ? '<span class="detail-counter">' + counter + "</span>" : ""}</div><div class="rt"><div class="st ${x.future ? "cam" : x.st}">${label}</div><div class="dist">${dist}</div></div></div>`;
+    return `<div class="row alert-row"><div class="nm"><span class="alert-title">${escapeText(x.name)}</span><span class="impact">${escapeText(pages[page])}</span>${x.delayMissing ? '<span class="delay-note">Delay not provided by ' + P.dot + "</span>" : ""}<span class="sub">${escapeText(sub)}</span>${counter ? '<span class="detail-counter">' + counter + "</span>" : ""}${rowCams[elId] ? '<span class="cam-line">\u{1F4F7} ' + escapeText(rowCams[elId].replace(/^Cameras: /, "")) + "</span>" : ""}</div><div class="rt"><div class="st ${x.future ? "cam" : x.st}">${label}</div><div class="dist">${dist}</div></div></div>`;
   }).join("");
 }
 setInterval(() => {
