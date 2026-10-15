@@ -35,21 +35,17 @@ const STATES = [
     // Synced 2026-09-26 (later same day): round 2 had been hand-patched onto the built
     // HTML only, not this source array — a future full regen would have silently
     // reverted the live page back to round 1's wording. Now matches what's live.
-    title:'Caltrans Cameras | California Highway Map | MileCheck',
-    desc:'View Caltrans highway cameras on one map, with postmile labels where available. Check I-5, I-80, US-101 and SR-99.',
     // Synced 2026-10-02: the same round 2 also hand-patched the H1 and og:title on the
     // built page (og:title without the "| MileCheck" suffix). They were never in this
     // array, so the 2026-10-02 postmile regen would have reverted them. Now they are.
-    h1:'Caltrans cameras across California',
-    ogTitle:'Caltrans Cameras | California Highway Map' },
+    h1:'Caltrans cameras across California' },
   { slug:'utah', code:'UT', name:'Utah', dot:'UDOT', bounds:'[[37,-114.05],[42,-109.04]]',
     blurb:`Utah DOT's cameras cover the Wasatch Front, the canyons, and the interstate crossings of the high desert.`,
     notable:`Watch <a href="../../corridors/i-80/">I-80</a> through <a href="../../passes/parleys/">Parleys Canyon</a> toward Park City, I-15 up the Wasatch Front, and the Cottonwood and Provo canyon roads to the ski areas. In winter the Snowplows layer shows where UDOT's trucks are, each with the route and mile marker it is on and how long ago it reported.`,
     // 2026-09-26: "udot cameras" query converts at 1.6% CTR at position 4.5. The default
     // template already leads with "Utah" not "UDOT" — this leads with the agency name
     // instead. Per the same brief/approval as California above.
-    title:'UDOT Cameras | Utah Traffic Map | MileCheck',
-    desc:'View UDOT camera images across Utah on one map. Check I-15 and I-80 through Parleys Canyon. Tap a camera for its latest image.' },
+  },
   { slug:'montana', code:'MT', name:'Montana', dot:'MDT', bounds:'[[44.36,-116.05],[49,-104.04]]',
     blurb:`Most of Montana's cameras are its weather stations, along I-90, I-15, US-2 and MT-200, with up to four views at a site and each view tagged with the station's route and mile marker. The rest are MDT's own cameras and the border crossings. Winter wind and snow are the story on the open stretches.`,
     notable:`Watch <a href="../../corridors/i-90/">I-90</a> over Lookout, Homestake and Bozeman passes, I-15 from Monida Pass north to the border, US-2 along the Hi-Line, and <a href="../../corridors/i-94/">I-94</a> across the eastern plains. The weather-station views point along the road in each direction.` },
@@ -138,8 +134,6 @@ const STATES = [
     // cameras" query — Ohio converts at 1.4% CTR, Portland wins the same query at 3.4%.
     // Title now spells out OHGO instead of leaning on "ODOT" alone; a plain cross-link
     // sends anyone who meant Oregon to that page instead. Same brief/approval as above.
-    title:'Ohio Traffic Cameras | ODOT OHGO Map | MileCheck',
-    desc:'View Ohio DOT camera images from OHGO on one map. Find a camera along your route and tap it for the latest image.',
     sub:'View Ohio Department of Transportation (ODOT) cameras from OHGO on one map. Each is tagged with its route and mile marker — tap any camera for the latest image.',
     crossLinkHtml:'<p class="sub" style="font-size:14px">Looking for Oregon\'s ODOT cameras? <a href="https://milecheckapp.com/cameras/oregon/">View the Oregon camera map</a>.</p>' },
   { slug:'wisconsin', code:'WI', name:'Wisconsin', dot:'WisDOT (511WI)', bounds:'[[42.49,-92.89],[47.08,-86.80]]',
@@ -270,6 +264,19 @@ function faq(s){
 function faqJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faq(s).map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
 function crumbJsonLd(s){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Cameras','item':'https://milecheckapp.com/cameras/'},{'@type':'ListItem','position':3,'name':s.name+' Cameras','item':'https://milecheckapp.com/cameras/'+s.slug+'/'}]}); }
 
+
+// Search titles (2026-10-15). Searchers type the agency: "caltrans cameras" had 4,397
+// impressions and 20 clicks. Agency + "cameras" first, under 60 characters, brand
+// appended only when it fits. Old copy and the new list: docs/chatgpt-review/camera-titles-2026-10-15.md
+const agencyOf = (s) => s.dot.replace(/\s*\(.*\)$/, '');
+function seoTitle(s){
+  const t = `${agencyOf(s)} Cameras: Live ${s.name} Highway Cameras`;
+  return (t + ' | MileCheck').length < 60 ? t + ' | MileCheck' : t;
+}
+function seoDesc(s, w){
+  return `Live ${agencyOf(s)} traffic cameras across ${s.name} on one map. Each camera shows its route and ${w.marker}. Tap one for the latest image.`;
+}
+
 function page(s){
   const w = wording(s);
   const plows = PLOW_PAGES.has(s.code);
@@ -281,12 +288,12 @@ function page(s){
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${s.title || `${s.name} Traffic Cameras — Live ${s.dot} Highway Cams | MileCheck`}</title>
-  <meta name="description" content="${s.desc || `Watch live ${s.name} traffic cameras on one map — ${s.dot} highway and road cameras, each tagged with route and ${w.marker}. See the road before you drive it.`}">
+  <title>${s.title || seoTitle(s)}</title>
+  <meta name="description" content="${s.desc || seoDesc(s, w)}">
   <link rel="canonical" href="https://milecheckapp.com/cameras/${s.slug}/">
 ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://milecheckapp.com/cameras/${s.slug}/">\n  <link rel="alternate" hreflang="es" href="https://milecheckapp.com/es/cameras/${s.slug}/">\n${PT_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="pt" href="https://milecheckapp.com/pt/cameras/${s.slug}/">\n` : ''}  <link rel="alternate" hreflang="x-default" href="https://milecheckapp.com/cameras/${s.slug}/">` : ''}
-  <meta property="og:title" content="${s.ogTitle || s.title || `${s.name} Traffic Cameras — Live | MileCheck`}">
-  <meta property="og:description" content="${s.desc || `Live ${s.name} highway cameras on one map, each tagged with route and ${w.marker}.`}">
+  <meta property="og:title" content="${s.ogTitle || s.title || seoTitle(s)}">
+  <meta property="og:description" content="${s.desc || seoDesc(s, w)}">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/${s.slug}/">
   <meta property="og:type" content="website">
