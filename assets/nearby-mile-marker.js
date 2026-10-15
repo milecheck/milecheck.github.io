@@ -31,6 +31,8 @@
       if(lat===null||lon===null||!coordinate(lat,lon)||mile===null||mile<0||typeof raw!=='string')return;
       var route=formatRoute?formatRoute(raw,code):raw;
       if(typeof route!=='string'||!route.trim()||!/[0-9]/.test(route))return;
+      // Internal state road IDs with no signed number (Montana 'Route 81003') are not something a driver can match to a sign.
+      if(/^Route \d{4,}$/.test(route.trim()))return;
       out.push({lat:lat,lon:lon,mile:mile,route:route.trim(),code:code});
     }
     var body=Array.isArray(data)?data:data.mileposts||data.data||data;

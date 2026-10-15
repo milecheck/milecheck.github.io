@@ -96,3 +96,8 @@ test('real Oregon compound route keeps its complete display name but opens an in
   const map=require('./mile-map-context.js');assert.equal(map.filter(decoded,url.searchParams.get('route'),r=>r).length,1);
   assert.equal(new URL(p.nodes['marker-cameras'].href,'https://milecheckapp.com').searchParams.get('route'),'I-84');
 });
+
+test('internal road IDs with no signed number never become a highway choice',()=>{
+  const out=core.decode([{route:'Route 81003',lat:47.2,lon:-111.8,milepost:33},{route:'I-15',lat:47.2,lon:-111.8,milepost:249}],'MT');
+  assert.deepEqual(out.map(p=>p.route),['I-15']);
+});
