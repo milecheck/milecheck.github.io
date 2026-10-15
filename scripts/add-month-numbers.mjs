@@ -84,7 +84,10 @@ for (const dir of ['cameras', 'road-conditions']) {
     if (!e.isDirectory() || !SLUG2CODE[e.name]) continue;
     const file = `${dir}/${e.name}/index.html`; if (!existsSync(file)) continue;
     const t = statePara(SLUG2CODE[e.name], e.name);
-    const anchors = dir === 'cameras' ? [/[ \t]*<div class="co-wrap">/, /[ \t]*<!-- related:start -->/]
+    // Keep the supporting monthly paragraph below the map after the camera
+    // postprocessor has migrated the layout. Fresh pages still use the old anchor
+    // once, then add-camera-route-filter moves the paragraph with the stats.
+    const anchors = dir === 'cameras' ? [/[ \t]*<!-- camera-after-map:end -->/, /[ \t]*<div class="co-wrap">/, /[ \t]*<!-- related:start -->/]
       : [/[ \t]*<div class="rc-live">/, /[ \t]*<!-- related:start -->/];
     targets.push({ file, block: t ? paraBlock(t) : null, anchors, rc: dir === 'road-conditions' });
   }

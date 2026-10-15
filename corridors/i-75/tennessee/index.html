@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+<title>What are the road conditions on I-75 in Tennessee? | MileCheck</title><meta name="description" content="Check I-75 alerts and DOT cameras in Tennessee. Read reported closures, roadwork and incident details, with source times when provided.">
+<meta property="og:title" content="What are the road conditions on I-75 in Tennessee? | MileCheck"><meta property="og:description" content="Check I-75 alerts and DOT cameras in Tennessee. Read reported closures, roadwork and incident details, with source times when provided."><meta property="og:url" content="https://milecheckapp.com/corridors/i-75/tennessee/"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://milecheckapp.com/corridors/i-75/tennessee/#webpage","url":"https://milecheckapp.com/corridors/i-75/tennessee/","name":"What are the road conditions on I-75 in Tennessee?","description":"Check I-75 alerts and DOT cameras in Tennessee. Read reported closures, roadwork and incident details, with source times when provided.","isPartOf":{"@id":"https://milecheckapp.com/#website"},"publisher":{"@id":"https://milecheckapp.com/#org"},"breadcrumb":{"@id":"https://milecheckapp.com/corridors/i-75/tennessee/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://milecheckapp.com/corridors/i-75/tennessee/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Corridors","item":"https://milecheckapp.com/corridors/"},{"@type":"ListItem","position":3,"name":"I-75","item":"https://milecheckapp.com/corridors/i-75/"},{"@type":"ListItem","position":4,"name":"Tennessee","item":"https://milecheckapp.com/corridors/i-75/tennessee/"}]}]}</script>
+<link rel="canonical" href="https://milecheckapp.com/corridors/i-75/tennessee/"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/assets/state-corridor.css"><link rel="stylesheet" href="/assets/map-kit.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="/assets/state-corridor.js" defer></script><script src="/assets/map-kit.js" defer></script>
+</head><body><header class="site-header">
+    <div class="container header-inner">
+      <a href="/index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="/assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="/index.html">Home</a>
+        <a href="/maps/" class="active">Maps</a>
+        <a href="/cameras/">Cameras</a>
+        <a href="/states/">United States</a>
+        <a href="/canada/">Canada</a>
+        <a href="/index.html#story">Story</a>
+        <a href="/index.html#b2b">B2B</a>
+        <a href="/blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<main class="state-corridor"><nav aria-label="Breadcrumb"><a href="/corridors/">Corridors</a> / <a href="/corridors/i-75/">I-75</a> / Tennessee</nav>
+<h1>What are the road conditions on I-75 in Tennessee?</h1><p class="sc-lede">I-75 links Chattanooga and Knoxville on its way to Kentucky.</p>
+<p>Check the map and lists below for I-75 reports and cameras from <a href="https://smartway.tn.gov/traffic" rel="noopener">SmartWay, the official DOT traveler source</a>.</p>
+<nav class="sc-tools" aria-label="I-75 tools"><a href="/cameras/tennessee/?route=I-75">I-75 cameras in Tennessee</a><a href="/maps/mile-markers/?state=TN&amp;route=I-75">Find an I-75 mile marker</a><a href="/road-conditions/tennessee/">All Tennessee road reports</a></nav>
+<button id="sc-refresh" class="sc-more" type="button">Refresh reports and cameras</button><p class="sc-meta">Reports and cameras refresh every five minutes while this page is visible. “Retrieved” shows when this page fetched the feed, separate from the DOT’s source update time.</p>
+<div id="comap" role="region" aria-label="Map of I-75 reports and cameras in Tennessee"></div><p id="sc-map-status" role="status"></p>
+<section aria-labelledby="alerts-heading"><h2 id="alerts-heading">What alerts has SmartWay reported on I-75?</h2><p id="sc-alert-status" role="status">Loading DOT reports.</p><div id="sc-alerts"></div></section>
+<section aria-labelledby="cameras-heading"><h2 id="cameras-heading">Where can you see I-75 cameras in Tennessee?</h2><p id="sc-camera-status" role="status">Loading DOT cameras.</p><div id="sc-cameras" class="sc-cameras"></div><button id="sc-camera-more" class="sc-more" type="button" hidden>Show more cameras</button></section>
+<section><h2>How should you read these reports?</h2><p>These I-75 reports come from SmartWay. Headlines and event type codes are shown as supplied by the feed. Reports missing coordinates may be omitted.</p><p>Future start times are labeled scheduled. Source update times appear only when supplied. An alert does not establish that the whole highway is closed.</p><p>No reports returned does not establish that the road is clear. A failed feed is labeled unavailable. Camera capture times may be unavailable.</p><p>Check <a href="https://smartway.tn.gov/traffic">SmartWay</a> for official updates and follow posted signs. <a href="/data-sources/">Read about the data sources.</a></p></section>
+<section><h2>Where does I-75 go next?</h2><p><a href="/corridors/i-75/georgia/">I-75 in Georgia</a> · <a href="/corridors/i-75/kentucky/">I-75 in Kentucky</a></p><p><a href="/corridors/i-75/">See the full I-75 corridor</a> · <a href="/blog/mile-markers-tennessee.html">Tennessee mile-marker guide</a></p></section>
+<noscript><p>The live map and records need JavaScript. Use the official DOT link above to check current reports.</p></noscript></main><!-- signup:start -->
+  <section class="mc-signup" id="subscribe">
+    <style>
+      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
+      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
+      .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
+      .mc-signup .ml-form-embedContent{display:none !important;}
+      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
+      .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+    </style>
+    <div class="mc-signup-inner">
+      <p class="mc-eyebrow">The Monthly Highway Report</p>
+      <h2>Get your state's monthly road alert report</h2>
+      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
+      <div class="ml-embedded" data-form="LjADY8"></div>
+    </div>
+  </section>
+<!-- signup:end --><footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-75-tennessee&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcorridors-i-75-tennessee" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="/cameras/">Highway cameras</a></li>
+            <li><a href="/closures/">Road closures map</a></li>
+            <li><a href="/fire/">Wildfire map</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: state DOTs via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics --><!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
+<script id="state-corridor-config" type="application/json">{"state":"TN","slug":"tennessee","name":"Tennessee","dot":"SmartWay","bounds":[[34.98,-90.31],[36.68,-81.65]],"dotUrl":"https://smartway.tn.gov/traffic"}</script></body></html>

@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mile Marker Map — browse mileposts in all 50 states | MileCheck</title>
-  <meta name="description" content="Free live mile marker map: browse the mileposts of any US highway in all 50 states — the same data that powers the MileCheck app, straight from state DOT sources.">
+  <meta name="description" content="Browse DOT milepost data by state and highway. Open a map for your route or use your location to find nearby mile markers. Positions are approximate.">
   <meta property="og:title" content="The 50-State Mile Marker Map — MileCheck">
   <meta property="og:description" content="Browse the mile markers of any highway in all 50 states, live.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
@@ -57,7 +57,7 @@
           .mm-pin{background:#00C880;color:#fff;border:2px solid #fff;border-radius:6px;font:600 11px/1 'Inter',sans-serif;padding:3px 5px;box-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap;text-align:center;}
           .mile-map-status{font-size:13px;color:#6b7280;margin-top:12px;}
           .mile-map-pick{display:flex;align-items:center;gap:10px;font-size:14px;color:#525252;}
-          #mile-map-state{font-family:inherit;font-size:15px;padding:9px 12px;border:1px solid #d1d5db;border-radius:8px;background:#fff;color:#0F1419;}
+          #mile-map-state,#mile-map-route{font-family:inherit;font-size:15px;padding:9px 12px;border:1px solid #d1d5db;border-radius:8px;background:#fff;color:#0F1419;}
           .leaflet-popup-content{font-family:'Inter',sans-serif;}
           /* Find my mile marker (2026-10-03). The top search query is "what mile marker am i at". */
           .mm-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
@@ -115,19 +115,23 @@
 <div class="mile-map-head">
           <div class="mm-copy">
             <h1 style="font-size:28px;font-weight:800;letter-spacing:-0.5px;color:#0F1419;margin:0 0 4px;">The 50-state mile marker map.</h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Related pages" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><a href="/road-conditions/washington/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Washington Road Conditions Now</a><a href="/road-conditions/california/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">California Road Conditions Now</a><a href="/road-conditions/colorado/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Colorado Road Conditions Now</a></nav><!-- toplinks:end -->
-            <p style="font-size:15px;color:#525252;margin:0;">50 states. 50 live DOT feeds.</p>
+            <p style="font-size:15px;color:#525252;margin:0;">Choose your state and highway to browse DOT milepost data.</p>
           </div>
           <div class="mm-controls">
             <button type="button" class="mm-find" id="mile-map-find">Find my mile marker</button>
             <label class="mile-map-pick">State
               <select id="mile-map-state" aria-label="Choose a state to view mile markers"></select>
             </label>
+            <label class="mile-map-pick">Highway
+              <select id="mile-map-route" aria-label="Choose a highway" disabled><option value="">All highways</option></select>
+            </label>
           </div>
         </div>
         <p class="mm-answer" id="mile-map-answer" role="status" hidden></p>
         <p class="mm-dash" id="mile-map-dash" hidden>We're building a dash display that shows your mile marker. We need sign-ups to get funding to make it real. <a href="/dash-preorder.html?utm_source=site&amp;utm_campaign=dash-mile-marker-map">Sign up</a></p>
         <div id="mile-map"></div>
-        <p class="mile-map-status" id="mile-map-status">Loading mile markers&hellip;</p>
+        <p class="mile-map-status" id="mile-map-status" role="status">Loading mile markers&hellip;</p>
+        <nav id="mile-map-links" aria-label="More in this state"></nav>
       </div>
     </section>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -135,6 +139,7 @@
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script src="/assets/mc-routes.js"></script>
+    <script src="/assets/mile-map-context.js"></script>
     <script>
     (function(){
       var WORKER='https://milepost-proxy.leahgerber93.workers.dev/mileposts?state=';
@@ -159,6 +164,14 @@
       map.addLayer(cluster);
       var sel=document.getElementById('mile-map-state');
       var status=document.getElementById('mile-map-status');
+      var context=window.MileMapContext,routeSel=document.getElementById('mile-map-route'),revision=0;
+      function esc(value){return String(value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+      function share(code,route,mile){var u=new URL(location.href);u.searchParams.delete('state');u.searchParams.delete('route');u.searchParams.delete('mp');new URLSearchParams(context.query(code,route,mile)).forEach(function(v,k){u.searchParams.set(k,v);});history.replaceState(null,'',u);}
+      function clearHighlights(){[nearMarker,youMarker,jumpMarker].forEach(function(m){if(m)map.removeLayer(m);});nearMarker=youMarker=jumpMarker=null;answer.hidden=true;}
+      function options(code,list,chosen){routeSel.innerHTML='';var all=document.createElement('option');all.value='';all.textContent='All highways';routeSel.appendChild(all);context.routes(list,routeName).forEach(function(name){var o=document.createElement('option');o.value=name;o.textContent=name;routeSel.appendChild(o);});routeSel.value=chosen||'';routeSel.disabled=!list.length;}
+      var STATE_LINKS={"AK":[["/blog/mile-markers-alaska.html","Alaska mile marker guide"],["/road-conditions/alaska/","Alaska road conditions"],["/cameras/alaska/","Alaska cameras"]],"AL":[["/blog/mile-markers-alabama.html","Alabama mile marker guide"],["/road-conditions/alabama/","Alabama road conditions"],["/cameras/alabama/","Alabama cameras"]],"AR":[["/blog/mile-markers-arkansas.html","Arkansas mile marker guide"],["/road-conditions/arkansas/","Arkansas road conditions"],["/cameras/arkansas/","Arkansas cameras"]],"AZ":[["/blog/mile-markers-arizona.html","Arizona mile marker guide"],["/road-conditions/arizona/","Arizona road conditions"],["/cameras/arizona/","Arizona cameras"]],"CA":[["/blog/mile-markers-california.html","California mile marker guide"],["/road-conditions/california/","California road conditions"],["/cameras/california/","California cameras"]],"CO":[["/blog/mile-markers-colorado.html","Colorado mile marker guide"],["/road-conditions/colorado/","Colorado road conditions"]],"CT":[["/blog/mile-markers-connecticut.html","Connecticut mile marker guide"],["/road-conditions/connecticut/","Connecticut road conditions"],["/cameras/connecticut/","Connecticut cameras"]],"DE":[["/blog/mile-markers-delaware.html","Delaware mile marker guide"],["/road-conditions/delaware/","Delaware road conditions"],["/cameras/delaware/","Delaware cameras"]],"FL":[["/blog/mile-markers-florida.html","Florida mile marker guide"],["/road-conditions/florida/","Florida road conditions"],["/cameras/florida/","Florida cameras"]],"GA":[["/blog/mile-markers-georgia.html","Georgia mile marker guide"],["/road-conditions/georgia/","Georgia road conditions"],["/cameras/georgia/","Georgia cameras"]],"HI":[["/blog/mile-markers-hawaii.html","Hawaii mile marker guide"],["/road-conditions/hawaii/","Hawaii road conditions"]],"IA":[["/blog/mile-markers-iowa.html","Iowa mile marker guide"],["/road-conditions/iowa/","Iowa road conditions"],["/cameras/iowa/","Iowa cameras"]],"ID":[["/blog/mile-markers-idaho.html","Idaho mile marker guide"],["/road-conditions/idaho/","Idaho road conditions"],["/cameras/idaho/","Idaho cameras"]],"IL":[["/blog/mile-markers-illinois.html","Illinois mile marker guide"],["/road-conditions/illinois/","Illinois road conditions"],["/cameras/illinois/","Illinois cameras"]],"IN":[["/blog/mile-markers-indiana.html","Indiana mile marker guide"],["/road-conditions/indiana/","Indiana road conditions"],["/cameras/indiana/","Indiana cameras"]],"KS":[["/blog/mile-markers-kansas.html","Kansas mile marker guide"],["/road-conditions/kansas/","Kansas road conditions"],["/cameras/kansas/","Kansas cameras"]],"KY":[["/blog/mile-markers-kentucky.html","Kentucky mile marker guide"],["/road-conditions/kentucky/","Kentucky road conditions"],["/cameras/kentucky/","Kentucky cameras"]],"LA":[["/blog/mile-markers-louisiana.html","Louisiana mile marker guide"],["/road-conditions/louisiana/","Louisiana road conditions"],["/cameras/louisiana/","Louisiana cameras"]],"MA":[["/blog/mile-markers-massachusetts.html","Massachusetts mile marker guide"],["/road-conditions/massachusetts/","Massachusetts road conditions"],["/cameras/massachusetts/","Massachusetts cameras"]],"MD":[["/blog/mile-markers-maryland.html","Maryland mile marker guide"],["/road-conditions/maryland/","Maryland road conditions"],["/cameras/maryland/","Maryland cameras"]],"ME":[["/blog/mile-markers-maine.html","Maine mile marker guide"],["/road-conditions/maine/","Maine road conditions"],["/cameras/maine/","Maine cameras"]],"MI":[["/blog/mile-markers-michigan.html","Michigan mile marker guide"],["/road-conditions/michigan/","Michigan road conditions"],["/cameras/michigan/","Michigan cameras"]],"MN":[["/blog/mile-markers-minnesota.html","Minnesota mile marker guide"],["/road-conditions/minnesota/","Minnesota road conditions"],["/cameras/minnesota/","Minnesota cameras"]],"MO":[["/blog/mile-markers-missouri.html","Missouri mile marker guide"],["/road-conditions/missouri/","Missouri road conditions"],["/cameras/missouri/","Missouri cameras"]],"MS":[["/blog/mile-markers-mississippi.html","Mississippi mile marker guide"],["/road-conditions/mississippi/","Mississippi road conditions"]],"MT":[["/blog/mile-markers-montana.html","Montana mile marker guide"],["/road-conditions/montana/","Montana road conditions"],["/cameras/montana/","Montana cameras"]],"NC":[["/blog/mile-markers-north-carolina.html","North Carolina mile marker guide"],["/road-conditions/north-carolina/","North Carolina road conditions"],["/cameras/north-carolina/","North Carolina cameras"]],"ND":[["/blog/mile-markers-north-dakota.html","North Dakota mile marker guide"],["/road-conditions/north-dakota/","North Dakota road conditions"]],"NE":[["/blog/mile-markers-nebraska.html","Nebraska mile marker guide"],["/road-conditions/nebraska/","Nebraska road conditions"],["/cameras/nebraska/","Nebraska cameras"]],"NH":[["/blog/mile-markers-new-hampshire.html","New Hampshire mile marker guide"],["/road-conditions/new-hampshire/","New Hampshire road conditions"],["/cameras/new-hampshire/","New Hampshire cameras"]],"NJ":[["/blog/mile-markers-new-jersey.html","New Jersey mile marker guide"],["/road-conditions/new-jersey/","New Jersey road conditions"]],"NM":[["/blog/mile-markers-new-mexico.html","New Mexico mile marker guide"],["/road-conditions/new-mexico/","New Mexico road conditions"],["/cameras/new-mexico/","New Mexico cameras"]],"NV":[["/blog/mile-markers-nevada.html","Nevada mile marker guide"],["/road-conditions/nevada/","Nevada road conditions"],["/cameras/nevada/","Nevada cameras"]],"NY":[["/blog/mile-markers-new-york.html","New York mile marker guide"],["/road-conditions/new-york/","New York road conditions"],["/cameras/new-york/","New York cameras"]],"OH":[["/blog/mile-markers-ohio.html","Ohio mile marker guide"],["/road-conditions/ohio/","Ohio road conditions"],["/cameras/ohio/","Ohio cameras"]],"OK":[["/blog/mile-markers-oklahoma.html","Oklahoma mile marker guide"],["/road-conditions/oklahoma/","Oklahoma road conditions"]],"OR":[["/blog/mile-markers-oregon.html","Oregon mile marker guide"],["/road-conditions/oregon/","Oregon road conditions"],["/cameras/oregon/","Oregon cameras"]],"PA":[["/blog/mile-markers-pennsylvania.html","Pennsylvania mile marker guide"],["/road-conditions/pennsylvania/","Pennsylvania road conditions"],["/cameras/pennsylvania/","Pennsylvania cameras"]],"RI":[["/blog/mile-markers-rhode-island.html","Rhode Island mile marker guide"],["/road-conditions/rhode-island/","Rhode Island road conditions"]],"SC":[["/blog/mile-markers-south-carolina.html","South Carolina mile marker guide"],["/road-conditions/south-carolina/","South Carolina road conditions"],["/cameras/south-carolina/","South Carolina cameras"]],"SD":[["/blog/mile-markers-south-dakota.html","South Dakota mile marker guide"],["/road-conditions/south-dakota/","South Dakota road conditions"],["/cameras/south-dakota/","South Dakota cameras"]],"TN":[["/blog/mile-markers-tennessee.html","Tennessee mile marker guide"],["/road-conditions/tennessee/","Tennessee road conditions"],["/cameras/tennessee/","Tennessee cameras"]],"TX":[["/blog/mile-markers-texas.html","Texas mile marker guide"],["/road-conditions/texas/","Texas road conditions"],["/cameras/texas/","Texas cameras"]],"UT":[["/blog/mile-markers-utah.html","Utah mile marker guide"],["/road-conditions/utah/","Utah road conditions"],["/cameras/utah/","Utah cameras"]],"VA":[["/blog/mile-markers-virginia.html","Virginia mile marker guide"],["/road-conditions/virginia/","Virginia road conditions"],["/cameras/virginia/","Virginia cameras"]],"VT":[["/blog/mile-markers-vermont.html","Vermont mile marker guide"],["/road-conditions/vermont/","Vermont road conditions"],["/cameras/vermont/","Vermont cameras"]],"WA":[["/blog/mile-markers-washington.html","Washington mile marker guide"],["/road-conditions/washington/","Washington road conditions"],["/cameras/washington/","Washington cameras"]],"WI":[["/blog/mile-markers-wisconsin.html","Wisconsin mile marker guide"],["/road-conditions/wisconsin/","Wisconsin road conditions"],["/cameras/wisconsin/","Wisconsin cameras"]],"WV":[["/blog/mile-markers-west-virginia.html","West Virginia mile marker guide"],["/road-conditions/west-virginia/","West Virginia road conditions"],["/cameras/west-virginia/","West Virginia cameras"]],"WY":[["/blog/mile-markers-wyoming.html","Wyoming mile marker guide"],["/road-conditions/wyoming/","Wyoming road conditions"]]};
+      function links(code){var box=document.getElementById('mile-map-links');box.replaceChildren();(STATE_LINKS[code]||[]).forEach(function(item,i){if(i)box.appendChild(document.createTextNode(' · '));var a=document.createElement('a');a.href=item[0];a.textContent=item[1];box.appendChild(a);});var top=document.querySelector('.mc-toplinks');if(top){top.replaceChildren();(STATE_LINKS[code]||[]).forEach(function(item){var a=document.createElement('a');a.href=item[0];a.textContent=item[1];a.style.cssText='font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;';top.appendChild(a);});}}
+
       STATES.forEach(function(s){var o=document.createElement('option');o.value=s[0];o.textContent=s[1];sel.appendChild(o);});
       function num(v){return typeof v==='number'?v:parseFloat(v);}
       // Route names as the app shows them (assets/mc-routes.js, built from the app's
@@ -179,7 +192,7 @@
             var lat=num(mp.lat!=null?mp.lat:mp.latitude);
             var lon=num(mp.lon!=null?mp.lon:(mp.lng!=null?mp.lng:mp.longitude));
             var mile=num(mp.milepost!=null?mp.milepost:mp.mile);
-            if(isNaN(lat)||isNaN(lon)||isNaN(mile)) return;
+            if(!Number.isFinite(lat)||!Number.isFinite(lon)||!Number.isFinite(mile)||Math.abs(lat)>90||Math.abs(lon)>180) return;
             out.push({lat:lat,lon:lon,mile:mile,route:mp.route||mp.highway||mp['route-id']||key||'',code:code});
           }
           var arr=Array.isArray(d)?d:(d.mileposts||d.data||null);
@@ -201,25 +214,27 @@
           var key=p.route+'-'+whole; if(seen[key]) return; seen[key]=1;
           var icon=L.divIcon({className:'',html:'<div class="mm-pin">'+whole+'</div>',iconSize:null});
           var m=L.marker([p.lat,p.lon],{icon:icon});
-          m.bindPopup('<b>'+(routeName(p.route,code)||'Mile marker')+'</b><br>Mile '+whole);
+          m.bindPopup('<b>'+esc(routeName(p.route,code)||'Mile marker')+'</b><br>Mile '+whole);
           markers.push(m);
         });
         cluster.addLayers(markers);
         return markers.length;
       }
-      function load(code){
-        status.textContent='Loading mile markers…'; cluster.clearLayers();
+      function load(code,wantedRoute){
+        var request=++revision;clearHighlights();links(code);routeSel.disabled=true;
+        status.textContent='Loading mile markers…';cluster.clearLayers();
         return posts(code).then(function(list){
-          var n=render(code,list);
-          if(n){
-            try{map.fitBounds(cluster.getBounds().pad(0.08));}catch(e){}
-            status.textContent=n.toLocaleString()+' mile markers. Zoom in to explore. Tap one for its road and mile.';
-          } else {
-            status.textContent='No mile markers to show for this state right now.';
-          }
-        }).catch(function(){
-          status.textContent='Could not load the live map right now. It works in the app.';
-        });
+          if(request!==revision)return false;
+          options(code,list,'');
+          var route= wantedRoute ? context.routes(list,routeName).find(function(r){return context.routeKey(r)===context.routeKey(wantedRoute);}) : '';
+          if(wantedRoute&&!route){status.textContent='No mile markers for '+wantedRoute+' in '+CODES[code]+' in our data. Choose another highway.';return false;}
+          routeSel.value=route||'';
+          var n=render(code,context.filter(list,route,routeName));share(code,route);
+          if(n){try{map.fitBounds(cluster.getBounds().pad(0.08));}catch(e){}
+            status.textContent=n.toLocaleString()+' displayed mile markers in '+CODES[code]+(route?' on '+route:'')+'. Zoom in and tap a marker.';
+          }else status.textContent='No whole-mile markers to display'+(route?' on '+route:' in '+CODES[code])+'. This does not establish whether the highway has posted signs.';
+          return true;
+        }).catch(function(){if(request!==revision)return false;options(code,[],'');status.textContent='Mile marker data for '+CODES[code]+' is unavailable right now. Try again later.';return false;});
       }
 
       // Find my mile marker. Every state whose box holds the position is searched,
@@ -239,12 +254,14 @@
       if(findBtn){
         if(!navigator.geolocation){findBtn.hidden=true;}
         findBtn.addEventListener('click',function(){
-          findBtn.disabled=true;findBtn.textContent='Finding you…';
+          var request=++revision;clearHighlights();findBtn.disabled=true;findBtn.textContent='Finding you…';
           function done(){findBtn.disabled=false;findBtn.textContent='Find my mile marker';}
           navigator.geolocation.getCurrentPosition(function(pos){
+            if(request!==revision){done();return;}
             var lat=pos.coords.latitude,lon=pos.coords.longitude,codes=candidates(lat,lon);
             if(!codes.length){done();say('You are outside the 50 states this map covers.');return;}
             Promise.all(codes.map(function(c){return posts(c).catch(function(){return [];});})).then(function(lists){
+              if(request!==revision){done();return;}
               // Nearest three, one per road and mile (the files repeat posts per direction).
               var all=[];
               lists.forEach(function(list){list.forEach(function(p){all.push({p:p,d:miles(lat,lon,p.lat,p.lon)});});});
@@ -255,11 +272,11 @@
               if(!top.length){say('Could not load mile markers for your area. Try again in a minute.');return;}
               var best=top[0].p,bd=top[0].d;
               sel.value=best.code;
-              render(best.code,lists[codes.indexOf(best.code)]);
+              var stateList=lists[codes.indexOf(best.code)];options(best.code,stateList,'');links(best.code);share(best.code,'');render(best.code,stateList);
               status.textContent='Showing '+CODES[best.code]+'.';
               if(nearMarker)map.removeLayer(nearMarker);
               if(youMarker)map.removeLayer(youMarker);
-              function name(p){var r=routeName(p.route,p.code);return r?r+', mile '+label(p.mile):'Mile '+label(p.mile);}
+              function name(p){var r=routeName(p.route,p.code);return r?esc(r)+', mile '+label(p.mile):'Mile '+label(p.mile);}
               function far(d){return d<0.1?Math.round(d*5280)+' ft':d.toFixed(1)+' mi';}
               nearMarker=L.marker([best.lat,best.lon],{icon:L.divIcon({className:'',html:'<div class="mm-pin mm-near">'+label(best.mile)+'</div>',iconSize:null}),zIndexOffset:1000}).bindPopup('<b>'+name(best)+'</b>').addTo(map);
               youMarker=L.marker([lat,lon],{icon:L.divIcon({className:'',html:'<div class="mm-you"></div>',iconSize:[20,20],iconAnchor:[10,10]}),interactive:false,zIndexOffset:1100}).addTo(map);
@@ -273,25 +290,29 @@
               else say('Mile markers near you:<ul class="mm-list">'+top.map(function(q){return '<li><b>'+name(q.p)+'</b> · '+far(q.d)+'</li>';}).join('')+'</ul>'+note);
             });
           },function(err){
-            done();
+            done();if(request!==revision)return;
             say(err&&err.code===1?'Location is turned off for this site. Turn it on in your browser settings, or pick your state below.':'Your location did not come through. Try again.');
           },{enableHighAccuracy:true,timeout:15000,maximumAge:30000});
         });
       }
-      sel.addEventListener('change',function(){load(sel.value);});
+      sel.addEventListener('change',function(){share(sel.value,'');load(sel.value);});
+      routeSel.addEventListener('change',function(){load(sel.value,routeSel.value);});
 
       // Link straight to a spot: ?route=I-84&mp=147 (also i84, "I 84"), optional &state=OR.
       var jumpMarker=null;
-      function rkey(r){return String(r||'').toLowerCase().replace(/[^a-z0-9]+/g,'');}
+      function rkey(r){return context.routeKey(r);}
       function jump(rawRoute,mpRaw,stateRaw){
-        var want=rkey(rawRoute),mp=parseFloat(mpRaw),nice=String(rawRoute).replace(/^\s*([a-zA-Z]+)[\s-]*(\d)/,function(m,a,d){return a.toUpperCase()+'-'+d;});
+        var request=++revision;clearHighlights();cluster.clearLayers();routeSel.disabled=true;
+        var want=rkey(rawRoute),mp=Number(mpRaw),nice=String(rawRoute).replace(/^\s*([a-zA-Z]+)[\s-]*(\d)/,function(m,a,d){return a.toUpperCase()+'-'+d;});
         var st=String(stateRaw||'').toUpperCase();
         var codes=CODES[st]?[st]:STATES.map(function(x){return x[0];});
         var miss='No mile marker '+(isNaN(mp)?String(mpRaw):label(mp))+' on '+nice+(CODES[st]?' in '+CODES[st]:'')+' in our data.';
         function none(){status.textContent=miss;}
         if(!want||isNaN(mp)){status.textContent='That link needs a route and a mile, like ?route=I-84&mp=147.';return Promise.resolve(false);}
         status.textContent='Looking for '+nice+', mile '+label(mp)+'…';
-        return Promise.all(codes.map(function(c){return posts(c).catch(function(){return [];});})).then(function(lists){
+        var failed=[];
+        return Promise.all(codes.map(function(c){return posts(c).catch(function(){failed.push(c);return [];});})).then(function(lists){
+          if(request!==revision)return false;
           var hits=[];
           lists.forEach(function(list,i){
             var best=null;
@@ -303,22 +324,22 @@
             });
             if(best) hits.push({code:codes[i],list:list,p:best.p});
           });
-          if(!hits.length){none();return false;}
+          if(!hits.length){if(failed.length)status.textContent='Some mile marker data is unavailable. We could not complete that lookup.';else none();if(CODES[st]){links(st);options(st,lists[0],'');}return false;}
           var h=hits[0];
-          sel.value=h.code; render(h.code,h.list);
+          sel.value=h.code;options(h.code,h.list,'');links(h.code);render(h.code,h.list);share(h.code,rawRoute,mp);
           if(jumpMarker) map.removeLayer(jumpMarker);
           var nm=(routeName(h.p.route,h.code)||nice)+', mile '+label(h.p.mile);
-          jumpMarker=L.marker([h.p.lat,h.p.lon],{icon:L.divIcon({className:'',html:'<div class="mm-pin mm-near">'+label(h.p.mile)+'</div>',iconSize:null}),zIndexOffset:1000}).bindPopup('<b>'+nm+'</b><br>'+CODES[h.code]).addTo(map);
+          jumpMarker=L.marker([h.p.lat,h.p.lon],{icon:L.divIcon({className:'',html:'<div class="mm-pin mm-near">'+label(h.p.mile)+'</div>',iconSize:null}),zIndexOffset:1000}).bindPopup('<b>'+esc(nm)+'</b><br>'+CODES[h.code]).addTo(map);
           map.setView([h.p.lat,h.p.lon],14); jumpMarker.openPopup();
-          status.textContent='Showing '+nm+' in '+CODES[h.code]+'.'+(hits.length>1?' Also in '+hits.slice(1).map(function(x){return CODES[x.code];}).join(', ')+'. Add &state= to pick one.':'');
+          status.textContent='Showing '+nm+' in '+CODES[h.code]+'.'+(hits.length>1?' Also in '+hits.slice(1).map(function(x){return CODES[x.code];}).join(', ')+'. Add &state= to pick one.':'')+(failed.length?' Some other states could not be checked.':'');
           return true;
         });
       }
-      var qs=new URLSearchParams(location.search);
-      if(qs.get('route')&&qs.get('mp')){
-        // Default view stays put (and the state list stays on Washington) if nothing matches.
-        sel.value='WA'; load('WA').then(function(){return jump(qs.get('route'),qs.get('mp'),qs.get('state'));});
-      } else { sel.value='WA'; load('WA'); }
+      var initial=context.parse(location.search,STATES.map(function(s){return s[0];}));
+      if(initial.error){sel.value='WA';status.textContent=initial.error;links('WA');}
+      else if(initial.mile!==null){sel.value=initial.state||'WA';jump(initial.route,initial.mile,initial.state);}
+      else {sel.value=initial.state||'WA';load(sel.value,initial.route);}
+
     })();
     </script>
 

@@ -1,0 +1,8 @@
+[
+  {"state":"FL","slug":"florida","context":"I-75 comes up Florida’s Gulf side through Naples, the Tampa Bay area and Gainesville, crossing the Everglades on Alligator Alley.","cities":["tampa"]},
+  {"state":"GA","slug":"georgia","context":"I-75 runs from the Florida line to the Tennessee line through Macon and Atlanta.","cities":["atlanta"]},
+  {"state":"TN","slug":"tennessee","context":"I-75 links Chattanooga and Knoxville on its way to Kentucky.","cities":[]},
+  {"state":"KY","slug":"kentucky","context":"I-75 runs from the Tennessee line through London and Lexington toward Cincinnati.","cities":[]},
+  {"state":"OH","slug":"ohio","context":"I-75 runs north to south through Toledo, Dayton and Cincinnati.","cities":["cincinnati"]},
+  {"state":"MI","slug":"michigan","context":"I-75 runs from the Ohio line through Detroit, Flint and Grayling, across the Mackinac Bridge and on to Sault Ste. Marie.","cities":["detroit"]}
+]

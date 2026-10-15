@@ -31,6 +31,8 @@ for (const f of htmlFiles(ROOT)) {
   const rel = relative(ROOT, f).replace(/\\/g, '/');
   if (SKIP.some((re) => re.test(rel))) continue;
   const s = readFileSync(f, 'utf8');
+  // Do not surface checkout receipts or other explicitly excluded pages in site search.
+  if (/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(s)) continue;
   const canon = (s.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
   if (!canon || canon !== urlFor(rel)) continue;
   const title = clean((s.match(/<title>([\s\S]*?)<\/title>/) || [])[1]).replace(/\s*[|—–-]\s*MileCheck\s*$/i, '');

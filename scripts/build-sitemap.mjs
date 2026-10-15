@@ -21,7 +21,7 @@ const BASE = 'https://milecheckapp.com';
 const DRY = process.argv.includes('--dry');
 const TODAY = new Date().toISOString().slice(0, 10);
 
-const SKIP = [/-preview\.html$/, /^google[0-9a-f]+\.html$/, /^404\.html$/, /^boards\//];
+const SKIP = [/-preview\.html$/, /^google[0-9a-f]+\.html$/, /^404\.html$/, /^boards\//, /^internal\//, /^design-options\//];
 
 function htmlFiles(dir, acc = []) {
   for (const n of readdirSync(dir)) {

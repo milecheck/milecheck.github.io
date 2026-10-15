@@ -128,15 +128,16 @@
     <div class="eyebrow">Live traffic cameras · Idaho · ITD (511 Idaho)</div>
     <h1>Idaho traffic cameras, live</h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Related pages" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><a href="/road-conditions/idaho/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Idaho Road Conditions Now</a><a href="/corridors/i-90/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">I-90 cameras and road conditions</a><a href="/corridors/i-15/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">I-15 cameras and road conditions</a></nav><!-- toplinks:end -->
     <p class="sub">See the actual road before you drive it. Live ITD (511 Idaho) highway cameras across Idaho on one map, each tagged with its route and mile marker. Tap any camera for the latest image.</p>
-    <div class="co-stats">
-      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in Idaho</div></div>
-      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">ITD</div><div class="l">camera source</div></div>
-    </div>
+
   </div>
 
-  <!-- monthnum:start -->
-  <div class="mc-monthnum"><style>.mc-monthnum{max-width:760px;margin:12px auto;padding:0 16px;font:15px/1.55 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#3a444d;}.mc-monthnum p{margin:0;}.mc-monthnum a{color:#00A86B;font-weight:700;}</style><p>In September 2026, Idaho's DOT feed carried 312 alerts: 4 closures, 1 crash and 307 construction reports. The routes with the most alerts were US-95, I-84 and SR-55. Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/highway-report-september-2026-states/idaho.html">See the full Idaho report</a>.</p></div>
-<!-- monthnum:end -->
+<!-- camera-route:start -->
+  <div class="co-wrap" style="margin-bottom:12px">
+    <label for="camera-route" style="font-weight:600">Highway</label>
+    <select id="camera-route" disabled style="font:inherit;padding:9px 12px;border:1px solid #d1d5db;border-radius:8px;background:#fff;color:#0F1419;max-width:100%"><option value="">All highways</option></select>
+    <p id="camera-route-note" role="status" style="font-size:14px;margin:8px 0">Highway choices load with the camera feed.</p>
+  </div>
+<!-- camera-route:end -->
   <div class="co-wrap">
     <div style="position:relative;">
       <div id="comap"></div>
@@ -144,6 +145,18 @@
       <div class="co-card" id="coCard"></div>
     </div>
   </div>
+
+<!-- camera-after-map:start -->
+  <div class="co-wrap" style="max-width:1000px">
+    <div class="co-stats">
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in Idaho</div></div>
+      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">ITD</div><div class="l">camera source</div></div>
+    </div>
+  </div>
+  <!-- monthnum:start -->
+  <div class="mc-monthnum"><style>.mc-monthnum{max-width:760px;margin:12px auto;padding:0 16px;font:15px/1.55 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#3a444d;}.mc-monthnum p{margin:0;}.mc-monthnum a{color:#00A86B;font-weight:700;}</style><p>In September 2026, Idaho's DOT feed carried 312 alerts: 4 closures, 1 crash and 307 construction reports. The routes with the most alerts were US-95, I-84 and SR-55. Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/highway-report-september-2026-states/idaho.html">See the full Idaho report</a>.</p></div>
+<!-- monthnum:end -->
+<!-- camera-after-map:end -->
 
   <section class="co-guide">
     <h2>Live cameras across Idaho</h2>
@@ -272,6 +285,7 @@
 <script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script>
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 
+<script src="/assets/camera-route-filter.js"></script>
 <script>
 const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 const CODE="ID";
@@ -287,6 +301,9 @@ map.fitBounds([[42.00,-117.24],[49.00,-111.04]]);
 const camLayer=L.layerGroup().addTo(map);
 const plowLayer=L.layerGroup().addTo(map);
 let CAMS=[], PLOWLIST=[], showCam=true, showPlow=true;
+/* camera-route:hook */
+const cameraRouteFilter=MCCameraRoutes.create({map:map,draw:draw,plows:PLOWS,closeCard:function(){cardEl.style.display='none';stopStream();}});
+/* /camera-route:hook */
 function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 const cardEl=document.getElementById('coCard');
 function showCard(html){if(window.stopStream)stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';if(window.stopStream)stopStream();};}
@@ -300,16 +317,17 @@ function streamOffline(){stopStream();var v=document.getElementById('ccVid');if(
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+(b||0)+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
 function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near '+MKR+' '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
-function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in Idaho':'Toggle a layer to view Idaho data';}
+function draw(){const routeCameras=cameraRouteFilter.filter(CAMS);camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(routeCameras.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(routeCameras.length?'📷 '+routeCameras.length+' live cameras':'no matching cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in Idaho':'Toggle a layer to view Idaho data';}
 const tgCam=document.getElementById('tgCam');if(tgCam)tgCam.onchange=e=>{showCam=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 // The Worker occasionally 503s on the biggest camera states (cold cache); retry a few times.
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
 fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
-  if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
+  if(!d){cameraRouteFilter.unavailable();document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
   CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&(c.imageUrl||c.streamUrl)&&(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||'')||(CODE==='AK'&&AK_HWY_RE.test(c.route||'')))).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||'')}));
   document.getElementById('statCams').textContent=CAMS.length;
+  cameraRouteFilter.loaded(CAMS);
   draw();
 });
 if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>{const vin=/^[A-Z0-9]{17}$/.test(t.name||'');const agency=String(t.status||'').trim();const age=(Date.now()-Date.parse(t.lastUpdated))/60000;return {lat:+t.lat,lon:+t.lon,bearing:+t.bearing||0,name:vin?((agency||DOT)+' plow'):(t.name||'Plow'),status:vin?'':agency,route:t.route||t.roadName||'',mile:t.mile!=null?t.mile:null,heading:t.heading||'',img:t.imageUrl||'',age:isFinite(age)?age:null};});const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.length;draw();});
