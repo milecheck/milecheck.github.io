@@ -43,16 +43,22 @@
         }
         if(outcome.kind!=='found'){fail('Could not find a mile marker. Try again.');return;}
         var q=outcome.nearest,post=q.post;
+        var st0=states.find(function(s){return s.code===post.code;})||{},km=!!st0.km;
+        // BC posts kilometre markers: the number is already km, only the label changes. Distance goes to metres/km.
+        var far=function(mi,who){var d=km?(mi*1.60934<0.15?'About '+Math.max(10,Math.round(mi*1609.34/10)*10)+' metres':'About '+(mi*1.60934).toFixed(1)+' km'):away(mi).replace(' away.','');return d+' from '+who+' reported location.';};
+        doc.getElementById('marker-unit').textContent=km?'KM':'MILE';
+        doc.getElementById('marker-eyebrow').textContent=km?'Nearest recorded kilometre post':'Nearest recorded milepost';
+        doc.getElementById('marker-map').hidden=km;doc.getElementById('marker-copy').textContent=km?'Copy kilometre post':'Copy milepost';
         doc.getElementById('marker-number').textContent=String(post.mile);
         doc.getElementById('marker-road').textContent=name(post);
-        doc.getElementById('marker-distance').textContent=away(q.distance).replace(' away.',' from your reported location.');
+        doc.getElementById('marker-distance').textContent=far(q.distance,'your');
         doc.getElementById('marker-map').href=mapLink(post);
         var state=states.find(function(s){return s.code===post.code;});
         var conditions=doc.getElementById('marker-conditions');conditions.href='/road-conditions/'+state.slug+'/';conditions.textContent=state.name+' road conditions';
         var cameras=doc.getElementById('marker-cameras');cameras.hidden=!state.cameras;
         if(state.cameras){cameras.href='/cameras/'+state.slug+'/?route='+encodeURIComponent(routeAlias(post));cameras.textContent=state.name+' highway cameras';}
-        copyText=post.route+', recorded milepost '+post.mile+', '+state.name+'. '+away(q.distance).replace(' away.',' from my reported location.');if(doc.body&&doc.body.classList)doc.body.classList.add('found');button.textContent='Update my location';
-        result.hidden=false;next.hidden=false;if(root.scrollTo)root.scrollTo&&root.scrollTo(0,0);finish('Nearest recorded marker. '+post.route+', mile '+post.mile+', '+state.name+'.',true);event('result');
+        copyText=post.route+', recorded '+(km?'kilometre post ':'milepost ')+post.mile+', '+state.name+'. '+far(q.distance,'my');if(doc.body&&doc.body.classList)doc.body.classList.add('found');button.textContent='Update my location';
+        result.hidden=false;next.hidden=false;if(root.scrollTo)root.scrollTo&&root.scrollTo(0,0);finish('Nearest recorded marker. '+post.route+(km?', kilometre ':', mile ')+post.mile+', '+state.name+'.',true);event('result');
       }).catch(function(){if(current())fail('Some mile marker data did not load. Try again or choose a highway on the map.');});
     }
     function onError(error){
