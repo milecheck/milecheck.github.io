@@ -25,6 +25,17 @@
    "url": "https://azdot.gov/business/highway-maintenance/rest-areas/rest-area-rules"
   },
   {
+   "code": "CA",
+   "name": "California",
+   "slug": "california",
+   "answer": "Yes, but no more than 8 hours in any 24-hour period.",
+   "cars": "Vehicles can't be parked, and people can't stay, for more than 8 hours in any 24 hours.",
+   "trucks": "Same 8-hour rule. Park only in designated parking areas.",
+   "camping": "Camping, tents and other shelters, and campfires are prohibited. Gas stoves are allowed inside equipped vehicles like RVs.",
+   "source": "21 CCR 2205",
+   "url": "https://govt.westlaw.com/calregs/Document/IA33FEE034C8511ECB533000D3A7C4BC3"
+  },
+  {
    "code": "FL",
    "name": "Florida",
    "slug": "florida",
