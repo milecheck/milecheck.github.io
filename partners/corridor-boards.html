@@ -74,6 +74,14 @@
     .cb-faq summary{font-size:17px;font-weight:700;cursor:pointer}
     .cb-faq p{margin-top:8px;font-size:15px;line-height:1.6;color:#525252}
       .cb-cta { display:inline-block; margin-top:6px; font-size:18px; font-weight:700; padding:14px 22px; border-radius:8px; background:#0f7a4f; color:#fff; text-decoration:none; }
+      .cb-row { display:grid; grid-template-columns:2fr 1fr 1fr; gap:10px; }
+    .cb-row input { width:100%; box-sizing:border-box; }
+    .cb-form textarea { width:100%; box-sizing:border-box; font:inherit; font-size:16px; padding:12px 14px; border-radius:8px; border:1px solid #2A323C; background:#161C22; color:#fff; }
+    .cb-done { max-width:440px; background:#0f7a4f; color:#fff; border-radius:10px; padding:22px 24px; }
+    .cb-done h3 { font-size:24px; margin:0 0 6px; color:#fff; }
+    .cb-done p { margin:0 0 8px; color:#e6f4ec; font-size:16px; line-height:1.5; }
+    .cb-done a { color:#fff; font-weight:700; }
+    .cb-form select { font:inherit; font-size:16px; padding:12px 14px; border-radius:8px; border:1px solid #2A323C; background:#161C22; color:#fff; }
   </style>
 
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
@@ -175,21 +183,56 @@
     <section class="cta-section" id="ask">
       <div class="container">
         <p class="ent-section-label">Get a board for your store</p>
-        <h2>Tell us where your store is.</h2>
+        <h2>Get a test board for your store.</h2>
         <form id="cb-form" class="cb-form">
-          <label for="cb-store">Store name</label>
-          <input id="cb-store" required maxlength="100" autocomplete="organization">
-          <label for="cb-addr">Store address</label>
-          <input id="cb-addr" required maxlength="160" autocomplete="street-address" placeholder="Street, town, state">
           <label for="cb-name">Your name</label>
-          <input id="cb-name" maxlength="80" autocomplete="name">
-          <label for="cb-email">Email</label>
+          <input id="cb-name" required maxlength="80" autocomplete="name">
+          <label for="cb-email">Your email</label>
           <input id="cb-email" type="email" required maxlength="254" autocomplete="email">
           <label for="cb-phone">Phone (optional)</label>
           <input id="cb-phone" type="tel" maxlength="40" autocomplete="tel">
+          <label for="cb-store">What's the store called?</label>
+          <input id="cb-store" required maxlength="100" autocomplete="organization" placeholder="Example: Rock Springs Chevron">
+          <label for="cb-brand">Brand</label>
+          <select id="cb-brand" required>
+            <option value="">Choose one</option>
+            <option>Chevron</option>
+            <option>Shell</option>
+            <option>Pilot or Flying J</option>
+            <option>Love's</option>
+            <option>Maverik</option>
+            <option>Sinclair</option>
+            <option>76</option>
+            <option>Exxon</option>
+            <option>Conoco</option>
+            <option>Circle K</option>
+            <option>Independent, no brand</option>
+            <option>Other</option>
+          </select>
+          <label for="cb-addr">Store address</label>
+          <input id="cb-addr" required maxlength="120" autocomplete="address-line1" placeholder="Street">
+          <div class="cb-row">
+            <div><label for="cb-city">City</label><input id="cb-city" required maxlength="60" autocomplete="address-level2"></div>
+            <div><label for="cb-state">State</label><input id="cb-state" required maxlength="20" autocomplete="address-level1"></div>
+            <div><label for="cb-zip">ZIP</label><input id="cb-zip" required maxlength="10" inputmode="numeric" autocomplete="postal-code"></div>
+          </div>
+          <label for="cb-more-q">Do you have other stores?</label>
+          <select id="cb-more-q">
+            <option value="1">No, just this one</option>
+            <option value="2-5">Yes, 2 to 5</option>
+            <option value="6-20">Yes, 6 to 20</option>
+            <option value="21+">Yes, more than 20</option>
+          </select>
           <button type="submit" id="cb-submit">Send</button>
           <p class="cb-msg" id="cb-msg" role="status"></p>
         </form>
+        <div id="cb-done" class="cb-done" style="display:none" role="status" tabindex="-1">
+          <h3>Got it, <span id="cb-done-name"></span>.</h3>
+          <p>We received your request for <b id="cb-done-store"></b>.</p>
+          <p><b>Next steps</b><br>&bull; We build a board for your store's stretch of highway.<br>&bull; We email you a link and a code to try it on your TV.<br>&bull; We adjust it with you, then it goes live.</p>
+          <p><a id="cb-done-demo" href="/boards/i84-pendleton.html" target="_blank" rel="noopener">See a demo board</a> &middot; <a id="cb-done-pdf" href="/partners/corridor-board-onepager-i84.pdf" target="_blank" rel="noopener">Download the one-pager</a></p>
+          <p id="cb-done-sub"></p>
+        </div>
         <p class="cta-body" style="margin-top:22px;">Or email <a href="mailto:sales@milecheckapp.com?subject=Corridor%20board%20for%20my%20store">sales@milecheckapp.com</a>.</p>
       </div>
     </section>
@@ -276,6 +319,7 @@
     show(board);
 
     // Leads land in the Worker's `venue` list (PREORDER_LISTS). Read them with /preorder/export.
+    function v(id){ var e = document.getElementById(id); return e ? e.value.trim() : ''; }
     var form = document.getElementById('cb-form'), msg = document.getElementById('cb-msg'), btn = document.getElementById('cb-submit');
     var src = q.get('utm_source') || q.get('src'), camp = q.get('utm_campaign');
     var source = (src ? src + (camp ? '/' + camp : '') : 'partners-page').slice(0, 100);
@@ -293,15 +337,24 @@
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           list: 'venue',
-          email: document.getElementById('cb-email').value.trim(),
-          name: document.getElementById('cb-store').value.trim(),
-          comments: ['address: ' + document.getElementById('cb-addr').value.trim(), document.getElementById('cb-name').value.trim() ? 'contact: ' + document.getElementById('cb-name').value.trim() : '', phone ? 'phone: ' + phone : '', 'board: ' + board].filter(Boolean).join(' · ').slice(0, 500),
+          email: v('cb-email'),
+          name: v('cb-store'),
+          comments: ['contact: ' + v('cb-name'), 'brand: ' + v('cb-brand'), 'address: ' + [v('cb-addr'), v('cb-city'), v('cb-state'), v('cb-zip')].join(', '),
+                     'stores: ' + v('cb-more-q'), phone ? 'phone: ' + phone : '', 'board: ' + board].filter(Boolean).join(' · ').slice(0, 500),
+          venue: { contact: v('cb-name'), store: v('cb-store'), brand: v('cb-brand'), street: v('cb-addr'), city: v('cb-city'),
+                   state: v('cb-state'), zip: v('cb-zip'), stores: v('cb-more-q'), phone: phone, board: board },
           source: source
         })
       }).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(function(){
-          msg.textContent = "Got it. We'll be in touch within a day.";
-          form.reset();
+          // A clear done state instead of a quiet reset (Leah 10/15: the reset made it look unsent).
+          document.getElementById('cb-done-name').textContent = v('cb-name').split(' ')[0] || 'thanks';
+          document.getElementById('cb-done-store').textContent = v('cb-store');
+          document.getElementById('cb-done-demo').href = boardUrl(board);
+          document.getElementById('cb-done-pdf').href = /^i17/.test(board) ? '/partners/corridor-board-onepager-i17.pdf' : '/partners/corridor-board-onepager-i84.pdf';
+          document.getElementById('cb-done-sub').textContent = 'We sent a copy to ' + v('cb-email') + '. Questions: sales@milecheckapp.com';
+          form.style.display = 'none';
+          var done = document.getElementById('cb-done'); done.style.display = 'block'; done.focus(); done.scrollIntoView({block: 'center'});
           if (window.gtag) gtag('event', 'venue_lead', { source: source, board: board });
         })
         .catch(fail)
