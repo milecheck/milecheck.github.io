@@ -2,7 +2,7 @@
 // One compact block right after the title row (first phone screen), tagged per page for App Store Connect (ct=) and Play (utm_campaign=).
 // Idempotent: strips its own block and re-adds. Held road-status pages are never in the list.
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
-const pages = ['closures/index.html', 'maps/mile-markers/index.html', 'rest-areas/index.html',
+const pages = ['closures/index.html', 'maps/mile-markers/index.html', 'rest-areas/index.html', 'highway-vs-interstate/index.html', 'street-vs-avenue/index.html', 'runaway-truck-ramp/index.html', 'what-is-my-mile-marker/index.html',
   ...readdirSync('cameras').filter(d => existsSync(`cameras/${d}/index.html`)).map(d => `cameras/${d}/index.html`),
   ...(existsSync('rest-areas') ? readdirSync('rest-areas').filter(d => existsSync(`rest-areas/${d}/index.html`)).map(d => `rest-areas/${d}/index.html`) : [])];
 const STRIP = /<!-- app-block:start -->[\s\S]*?<!-- app-block:end -->/g;
