@@ -36,6 +36,17 @@
    "url": "https://www.flrules.org/gateway/ruleNo.asp?id=14-28.002"
   },
   {
+   "code": "HI",
+   "name": "Hawaii",
+   "slug": "hawaii",
+   "answer": "Not overnight. Hawaii bans using a vehicle as a place to live or sleep on public property between 6 p.m. and 6 a.m.",
+   "cars": "No one may use a vehicle for human habitation while parked on a road, highway or other public property from 6 p.m. to 6 a.m.",
+   "trucks": "Same rule.",
+   "camping": "Parks, camps and recreation areas used under their own rules are exempt.",
+   "source": "HRS 291C-112",
+   "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0291C/HRS_0291C-0112.htm"
+  },
+  {
    "code": "ID",
    "name": "Idaho",
    "slug": "idaho",
