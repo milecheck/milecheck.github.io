@@ -13,6 +13,34 @@
   function away(n){return n<.1?'About '+Math.max(10,Math.round(n*5280/10)*10)+' feet away.':'About '+n.toFixed(1)+' miles away.';}
   function fail(error){finish(error);event('unavailable');}
   function clear(){status.className='';result.hidden=true;next.hidden=true;choices.replaceChildren();choices.hidden=true;}
+  // One-decimal estimate like the app: place the reader between the nearest recorded post and the next
+  // post on the same road, by projecting onto the line between them. Falls back to the post's own number.
+  var lastAll=[],lastCoords=null;
+  function estimate(p1){
+    var c=lastCoords;if(!c)return {mile:p1.mile};
+    var k=Math.cos(c.latitude*Math.PI/180),X=function(q){return q.lon*k;},best=null;
+    lastAll.forEach(function(p2){
+      if(p2.code!==p1.code||p2.route!==p1.route)return;
+      var dm=Math.abs(p2.mile-p1.mile);if(dm<0.5||dm>2.5)return;
+      var dx=X(p2)-X(p1),dy=p2.lat-p1.lat,L=dx*dx+dy*dy;if(!L)return;
+      var tt=((c.longitude*k-X(p1))*dx+(c.latitude-p1.lat)*dy)/L;
+      var off=Math.abs((c.longitude*k-X(p1))*dy-(c.latitude-p1.lat)*dx)/Math.sqrt(L);
+      var score=(tt>=0&&tt<=1?0:1)*10+off*69+Math.abs(dm-1);
+      if(!best||score<best.score)best={p2:p2,t:Math.max(0,Math.min(1,tt)),score:score};
+    });
+    if(!best)return {mile:p1.mile};
+    var lo=p1.mile<best.p2.mile?p1:best.p2,hi=lo===p1?best.p2:p1,out={mile:p1.mile+best.t*(best.p2.mile-p1.mile),lo:lo.mile,hi:hi.mile};
+    // Direction only from a moving device's GPS course (speed over ~3 mph). A parked phone gets none.
+    var h=Number(c.heading),v=Number(c.speed);
+    if(c.heading!=null&&isFinite(h)&&isFinite(v)&&v>1.4){
+      var by=hi.lat-lo.lat,bx=(hi.lon-lo.lon)*k,inc=(Math.atan2(bx,by)*180/Math.PI+360)%360;
+      var d=Math.abs(((h-inc)%360+540)%360-180),up=d<90,ns=Math.abs(by)>=Math.abs(bx);
+      var pos=ns?(by>0?'Northbound':'Southbound'):(bx>0?'Eastbound':'Westbound');
+      var neg={Northbound:'Southbound',Southbound:'Northbound',Eastbound:'Westbound',Westbound:'Eastbound'}[pos];
+      out.dir=up?pos:neg;
+    }
+    return out;
+  }
   // One renderer for a found marker and for a road the reader picked from the close-roads list.
   function show(q,picked){
     var post=q.post;
@@ -22,15 +50,17 @@
     doc.getElementById('marker-unit').textContent=km?'KM':'MILE';
     doc.getElementById('marker-eyebrow').textContent=km?'Nearest recorded kilometre post':'Nearest recorded milepost';
     doc.getElementById('marker-map').hidden=km;doc.getElementById('marker-copy').textContent=km?'Copy kilometre post':'Copy milepost';
-    doc.getElementById('marker-number').textContent=String(post.mile);
-    doc.getElementById('marker-road').textContent=name(post);
-    doc.getElementById('marker-distance').textContent=far(q.distance,'your');
+    var est=estimate(post);
+    var shown=est.lo!=null?Number(est.mile).toFixed(1):String(post.mile);
+    doc.getElementById('marker-number').textContent=shown;
+    doc.getElementById('marker-road').textContent=name(post)+(est.dir?' · '+est.dir:'');
+    doc.getElementById('marker-distance').textContent=(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+est.lo+' and '+est.hi+'.':(km?'Nearest recorded kilometre post, ':'Nearest recorded milepost, ')+far(q.distance,'your').replace(/^About/,'about'));
     doc.getElementById('marker-map').href=mapLink(post);
     var state=states.find(function(s){return s.code===post.code;});
     var conditions=doc.getElementById('marker-conditions');conditions.href='/road-conditions/'+state.slug+'/';conditions.textContent=state.name+' road conditions';
     var cameras=doc.getElementById('marker-cameras');cameras.hidden=!state.cameras;
     if(state.cameras){cameras.href='/cameras/'+state.slug+'/?route='+encodeURIComponent(routeAlias(post));cameras.textContent=state.name+' highway cameras';}
-    copyText=post.route+', recorded '+(km?'kilometre post ':'milepost ')+post.mile+', '+state.name+'. '+far(q.distance,'my');if(doc.body&&doc.body.classList)doc.body.classList.add('found');
+    copyText=post.route+(est.dir?' '+est.dir:'')+', '+(km?'kilometre ':'mile ')+shown+', '+state.name+'. '+(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+est.lo+' and '+est.hi+'.':'Nearest recorded '+(km?'kilometre post':'milepost')+', '+far(q.distance,'my').replace(/^About/,'about'));if(doc.body&&doc.body.classList)doc.body.classList.add('found');
     result.hidden=false;next.hidden=false;if(root.scrollTo)root.scrollTo(0,0);finish('Nearest recorded marker. '+post.route+(km?', kilometre ':', mile ')+post.mile+', '+state.name+'.',true);event(picked?'picked':'result');
   }
   button.addEventListener('click',function(){
@@ -54,7 +84,8 @@
         return root.fetch('https://milepost-proxy.leahgerber93.workers.dev/mileposts?state='+code,{credentials:'omit',referrerPolicy:'no-referrer'}).then(function(r){if(!r.ok)throw Error('Unavailable');return r.json();}).then(function(data){return core.decode(data,code,routes.formatRouteName);});
       })).then(function(lists){
         if(!current())return;
-        var outcome=core.locate(p,[].concat.apply([],lists));
+        lastAll=[].concat.apply([],lists);lastCoords=p;
+        var outcome=core.locate(p,lastAll);
         if(outcome.kind==='empty'||outcome.kind==='distant'){fail('No recorded mile marker found within a mile of you. You can choose a highway on the map.');return;}
         if(outcome.kind==='ambiguous'){
           finish('Which highway are you on?');
