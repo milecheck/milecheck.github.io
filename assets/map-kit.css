@@ -122,3 +122,6 @@ html .co-list li[hidden]{display:none!important;}
   html #comap,html .rc-mapbox{height:82vh !important;height:82dvh !important;min-height:0 !important;}
   html .co-card{max-height:calc(100% - 16px);}
 }
+
+/* 8. Status pill (map-kit.js section 8): hidden while it repeats the counts the stat cards show. */
+html .co-bs.cm-hide{display:none !important;}

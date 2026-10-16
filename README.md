@@ -30,6 +30,10 @@ or behave there, once, and every map gets it. Do not patch map pages one by one.
   The kit needs the page-level `map` (a `const map` at script top level, or `window.map = ...`
   when the page builds its map inside a function, as the road-conditions pages now do). Pages
   whose map is local to a function get no kit controls at all; expose it, do not patch the page.
+- The status pill on the map (added 2026-10-16, Leah: "you have the live cam count twice. remove
+  from map. it clutters it."): map-kit.js section 8 hides `.co-bs` whenever its text has a number
+  in it, because the stat cards already show the counts, and shows it only for a message
+  ("Loading…", "cameras unavailable"). Do not add a second count line to a map.
 - Before asking to push a map change: share a preview link and let Leah look first.
 
 ## Analytics + attribution (added 2026-09-14)

@@ -446,3 +446,18 @@
   document.addEventListener('fullscreenerror', function () { pin(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && target.classList.contains('cm-fs')) exit(); });
 })();
+
+/* 8. The status pill on the map (Leah, 2026-10-16: "you have the live cam count twice. remove from
+   map. it clutters it."). The stat cards under the hero already carry the counts, so the pill
+   (.co-bs on the camera, pass, corridor and ski maps) is hidden whenever it is showing numbers,
+   and shown only for a message with none: "Loading…", "cameras unavailable", "plow feed
+   unavailable", "Live cameras are busy right now". Each page keeps writing the pill as before. */
+(function () {
+  var pills = document.querySelectorAll('.co-bs');
+  if (!pills.length) return;
+  function apply(p) { var t = (p.textContent || '').trim(); p.classList.toggle('cm-hide', /\d/.test(t)); }
+  pills.forEach(function (p) {
+    apply(p);
+    new MutationObserver(function () { apply(p); }).observe(p, { childList: true, characterData: true, subtree: true });
+  });
+})();
