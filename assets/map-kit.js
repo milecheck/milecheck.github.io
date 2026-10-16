@@ -13,6 +13,30 @@
       The position stays in the browser. Nothing is sent anywhere.
    Each page declares `const map` in its own inline script, which runs before this
    deferred file. If a page has no map, this does nothing. */
+
+/* 0. Every Leaflet map on the page, for the sections that work on any map (full screen).
+   Most pages declare `map` where this file can read it. The road-conditions, closures,
+   corridor, ferry and Canada pages build theirs inside a function of their own, where no
+   other script can see it (Leah, 2026-10-16: full screen was missing there). Leaflet
+   answers a window resize by calling invalidateSize on every map it made, so one resize
+   names them all (pinned to leaflet@1.9.4, which every page loads). Maps made later, after
+   a page's own fetch, are caught as they are created. No page has to change. */
+(function () {
+  if (typeof L === 'undefined' || !L.Map || window.MCMaps) return;
+  var maps = [], subs = [];
+  function add(m) {
+    if (!m || maps.indexOf(m) >= 0) return;
+    maps.push(m);
+    subs.forEach(function (f) { try { f(m); } catch (e) {} });
+  }
+  window.MCMaps = { each: function (f) { subs.push(f); maps.slice().forEach(function (m) { try { f(m); } catch (e) {} }); } };
+  try { if (typeof map !== 'undefined' && map instanceof L.Map) add(map); } catch (e) {}
+  L.Map.addInitHook(function () { var m = this; setTimeout(function () { add(m); }, 0); });
+  var P = L.Map.prototype, size = P.invalidateSize;
+  P.invalidateSize = function () { add(this); return size.apply(this, arguments); };
+  if (document.querySelectorAll('.leaflet-container').length > maps.length) window.dispatchEvent(new Event('resize'));
+})();
+
 (function () {
   // 2. Credit line, on every Leaflet map on the page (any template): tap to read all of
   // it. Delegated, so maps created after this file runs are covered too.
@@ -307,12 +331,15 @@
     });
     m.addControl(new Layers());
     L.DomEvent.disableClickPropagation(panel);
-    var fit = function () { set(!phone.matches); };
+    // A phone turned sideways is wider than 600px but under 520px tall (map-kit.css section 7).
+    // There the open panel covered the left third of the map, so it starts closed there too.
+    var compact = window.matchMedia('(max-width:600px), (max-height:520px)');
+    var fit = function () { set(!compact.matches); };
     fit();
-    if (phone.matches && lbtn) lbtn.parentNode.classList.add('cm-pulse');
+    if (compact.matches && lbtn) lbtn.parentNode.classList.add('cm-pulse');
     window.addEventListener('resize', function () { if (!panel.classList.contains('cm-closed')) place(); });
-    if (phone.addEventListener) phone.addEventListener('change', fit);
-    m.on('click', function () { if (phone.matches) set(false); });
+    if (compact.addEventListener) compact.addEventListener('change', fit);
+    m.on('click', function () { if (compact.matches) set(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.classList.contains('cm-closed')) set(false); });
   }
 })();
@@ -402,10 +429,13 @@
    it (desktop, Android); on iPhone Safari, which has no requestFullscreen for a div, the map's
    box is pinned over the page instead. The button, Esc, or the browser's own exit leaves it.
    The box that goes full screen is the map's wrapper when the page has one (the camera card,
-   the status pill and the layers panel sit inside it, so they come along), else the map itself. */
+   the status pill and the layers panel sit inside it, so they come along), else the map itself.
+   Every map section 0 finds gets the button, including maps a page keeps inside a function. */
 (function () {
-  var m; try { m = (typeof map !== 'undefined' && map && map.getContainer) ? map : null; } catch (e) { m = null; }
-  if (!m || typeof L === 'undefined') return;
+  if (!window.MCMaps) return;
+  MCMaps.each(function (m) {
+  if (m._mcFs || !m.getContainer) return;
+  m._mcFs = true;
   var el = m.getContainer(), wrap = el.parentElement;
   var target = (wrap && wrap !== document.body && getComputedStyle(wrap).position === 'relative') ? wrap : el;
   var native = !!(target.requestFullscreen && document.exitFullscreen);
@@ -445,6 +475,7 @@
   document.addEventListener('fullscreenchange', settle);
   document.addEventListener('fullscreenerror', function () { pin(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && target.classList.contains('cm-fs')) exit(); });
+  });
 })();
 
 /* 8. The status pill on the map (Leah, 2026-10-16: "you have the live cam count twice. remove from
@@ -460,4 +491,21 @@
     apply(p);
     new MutationObserver(function () { apply(p); }).observe(p, { childList: true, characterData: true, subtree: true });
   });
+})();
+
+/* 9. 511 Alberta's "No live camera feed at this time" card (Leah, 2026-10-16). When an Alberta
+   camera has no feed, 511 Alberta answers with its own 540 x 330 picture saying so, and a camera
+   card showed it as if it were the road. Any camera image on any page that loads as exactly that
+   picture is replaced with a line saying what it is. The ski pages found it first. */
+(function () {
+  document.addEventListener('load', function (e) {
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !/state=AB/.test(img.src || '')) return;
+    if (img.naturalWidth !== 540 || img.naturalHeight !== 330) return;
+    var d = document.createElement('div');
+    d.className = 'cc-meta cm-nofeed';
+    d.textContent = '511 Alberta has no live feed from this camera right now.';
+    var a = img.closest('a');
+    (a || img).replaceWith(d);
+  }, true);
 })();

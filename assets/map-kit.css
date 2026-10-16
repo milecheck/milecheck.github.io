@@ -125,3 +125,6 @@ html .co-list li[hidden]{display:none!important;}
 
 /* 8. Status pill (map-kit.js section 8): hidden while it repeats the counts the stat cards show. */
 html .co-bs.cm-hide{display:none !important;}
+
+/* 9. 511 Alberta no-feed line (map-kit.js section 9), in place of its "No live camera feed" picture. */
+.cm-nofeed{margin-top:8px;padding:10px 12px;border:1px dashed #cfd4da;border-radius:8px;color:#5b6670;}
