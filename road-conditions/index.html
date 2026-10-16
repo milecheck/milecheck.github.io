@@ -33,7 +33,7 @@
     .leaflet-container{font-family:Inter,sans-serif;}
     .rc-status{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13.5px;color:#0E1116;line-height:1.35;}
     .rc-status.err{color:#b4231a;}
-    .rc-status .rc-upd{color:#5b6670;font-weight:600;}
+    .rc-status.ok{display:none;}
     .rc-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
     .rc-dot.big{width:18px;height:18px;}
     .rc-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
@@ -91,7 +91,7 @@
     .rc-state b{font-size:15px;} .rc-state span{font-size:12px;color:#8A939B;font-weight:700;letter-spacing:.04em;}
     .rc-related{color:#5b6670;font-size:14px;margin-top:26px;}
     .rc-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
-    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:12px;font-size:12px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}
+    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:56px;font-size:12px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}
   /* spon:css */
     .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
     .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}

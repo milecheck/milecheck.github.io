@@ -106,7 +106,7 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .leaflet-container{font-family:Inter,sans-serif;}
     .rc-status{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13.5px;color:#0E1116;line-height:1.35;}
     .rc-status.err{color:#b4231a;}
-    .rc-status .rc-upd{color:#5b6670;font-weight:600;}
+    .rc-status.ok{display:none;}
     .rc-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
     .rc-dot.big{width:18px;height:18px;}
     .rc-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
@@ -164,7 +164,7 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-state b{font-size:15px;} .rc-state span{font-size:12px;color:#8A939B;font-weight:700;letter-spacing:.04em;}
     .rc-related{color:#5b6670;font-size:14px;margin-top:26px;}
     .rc-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
-    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:12px;font-size:12px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}`;
+    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:56px;font-size:12px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}`;
 
 function head({ title, desc, url, ld, extraHead = '' }) {
   return `<!DOCTYPE html>
@@ -316,11 +316,10 @@ function render(list){
   var listed=list.filter(function(a){return !ON_TOGGLE[a.k];}).slice(0,80);
   if(!listed.length){rows.innerHTML='<div class="rc-empty"><b>No closures or crashes in the '+esc(DOT)+' feed right now.</b>Restrictions, roadwork and other reports are on the map when the box above is checked. '+esc(DOT)+' is the official source.</div>';}
   else rows.innerHTML=listed.map(function(a){var i=list.indexOf(a);return '<div class="rc-row" data-i="'+i+'"><div class="t"><span class="rt">'+esc(a.route||LABEL[a.k])+(a.mp?' · MP '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</span><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span></div><div class="sub">'+(a.future?'<b>Starts '+a.start.toLocaleDateString([], {month:'short',day:'numeric'})+'.</b> ':'')+esc(a.head)+(a.at?' <span style="white-space:nowrap">· '+ago(a.at)+'</span>':'')+'</div></div>';}).join('');
-  var n={},sched=0;list.forEach(function(a){if(a.future){if(!ON_TOGGLE[a.k])sched++;return;}n[a.k]=(n[a.k]||0)+1;});
-  var parts=[];['closure','crash','weather','hazard'].forEach(function(k){if(n[k])parts.push(n[k]+' '+(k==='closure'?(n[k]===1?'closure':'closures'):k==='crash'?(n[k]===1?'crash':'crashes'):k));});
-  if(sched)parts.push(sched+' scheduled');if(n.partial||n.work)parts.push(((n.partial||0)+(n.work||0))+' ramp, lane and work-zone alerts');if(n.other)parts.push(n.other+(n.other===1?' other report':' other reports'));
-  status.className='rc-status';status.innerHTML=(parts.length?parts.join(' · '):(list.length?'Reports are listed under the toggle':'No reports returned by the feed'))+' <span class="rc-upd">· '+esc(DOT)+' via MileCheck · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'</span>';
-  count.textContent=listed.length?listed.length+' listed':'';
+  // Counts left the map 2026-10-16 (Leah: they repeat the list below and clutter the map, as on /fire/).
+  // The pill now shows only while loading or when the feed fails; the update time moved to the list header.
+  status.className='rc-status ok';
+  count.textContent=(listed.length?listed.length+' listed · ':'')+'updated '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
 }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 rows.addEventListener('click',function(e){var r=e.target.closest('.rc-row');if(!r)return;var m=markers[r.getAttribute('data-i')];if(!m)return;if(!map.hasLayer(workLayer)&&workLayer.hasLayer(m))return;map.setView(m.getLatLng(),Math.max(map.getZoom(),9));m.openPopup();});
