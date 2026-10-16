@@ -43,7 +43,7 @@ function gasSeasonChart() {
 // the Nth "<p><strong>" step paragraph, which keeps its place in every translation.
 function addStepImages(slug, html, alt) {
   let n = 0;
-  return html.replace(/<p><strong>[\s\S]*?<\/p>/g, m => {
+  return html.replace(/<p><strong>[^<]{0,24}\d[\s\S]*?<\/p>/g, m => {
     n++;
     const f = `images/fuel/${slug}/step-${n}.webp`;
     return existsSync(f) ? `${m}\n<figure style="margin:4px 0 22px"><img src="/${f}" alt="${esc(alt(n))}" width="800" loading="lazy" decoding="async" style="width:100%;max-width:560px;height:auto;border-radius:10px;display:block"></figure>` : m;
@@ -59,7 +59,7 @@ for (const a of list) {
     ...langs.map(l => ({ lang: l, path: `/${l}/${a.slug}/`, meta: JSON.parse(readFileSync(`data/explainers/${a.slug}.${l}.json`, 'utf8')), html: readFileSync(`data/explainers/${a.slug}.${l}.html`, 'utf8') }))];
   for (const v of versions) {
     const lede = (v.html.match(/<p class="lede">([\s\S]*?)<\/p>/) || [, v.meta.desc])[1].replace(/<[^>]+>/g, '');
-    const steps = [...v.html.matchAll(/<p><strong>([\s\S]*?)<\/strong>/g)].map(m => m[1].replace(/<[^>]+>/g, ''));
+    const steps = [...v.html.matchAll(/<p><strong>([^<]{0,24}\d[\s\S]*?)<\/strong>/g)].map(m => m[1].replace(/<[^>]+>/g, ''));
     let body = v.html.replace('<div class="chart" data-chart="gas-seasonality"></div>', gasSeasonChart());
     body = addStepImages(a.slug, body, n => steps[n - 1] || v.meta.h1);
     page({ path: v.path, title: v.meta.title, desc: v.meta.desc, h1: v.meta.h1, eyebrow: v.lang === 'en' ? a.eyebrow : (v.meta.eyebrow || a.eyebrow), body, lang: v.lang, alts,
