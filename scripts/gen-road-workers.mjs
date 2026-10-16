@@ -50,15 +50,18 @@ console.log(`road workers: ${rows.length} states, US median ${$(us.median)}`);
   const C = JSON.parse(readFileSync('data/dot-careers.json', 'utf8'));
   const list = Object.entries(C).map(([st, v]) => ({ st, name: NAMES[st], ...v })).sort((a, b) => a.name.localeCompare(b.name));
   const pay = st => D.states[st]?.[OCC] ? $(D.states[st][OCC].median) : 'Not published';
-  const rows2 = list.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.short || r.agency)} careers</a></td><td ${td}>${pay(r.st)}</td></tr>`).join('\n');
+  const v = st => D.states[st]?.[OCC];
+  const rows2 = list.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.short || r.agency)} careers</a></td><td ${td}>${v(r.st) ? v(r.st).employment.toLocaleString('en-US') : '–'}</td><td ${td}>${pay(r.st)}</td><td ${td}>${v(r.st) ? $(v(r.st).mean) : '–'}</td></tr>`).join('\n');
   const h1b = 'How do you get a job at your state DOT?';
   const body2 = `    <p class="lede"><strong>Every state hires its own road crews. Find your state below and go to its official careers page.</strong></p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:6px 0 18px">${[[(Math.round(us.employment/100)*100).toLocaleString('en-US'),'highway maintenance workers in the U.S.'],[$(us.median),'median pay a year'],[$(us.mean),'average pay a year'],[rows.reduce((a,r)=>r.employment>a.employment?r:a).name,'has the most highway maintenance workers']].map(([n,l])=>`<div style="background:#fff;border:1px solid #e3e0d6;border-radius:12px;padding:14px"><div style="font:800 24px/1.15 var(--serif,Georgia);color:#0f7a4f">${esc(n)}</div><div style="font-size:13px;color:#5b6670;margin-top:4px">${esc(l)}</div></div>`).join('')}</div>
     <p>State DOTs hire highway maintenance workers, equipment operators, engineers, inspectors and office staff. Many maintenance jobs list a commercial driver's license (CDL), because crews drive plows and dump trucks. Each job posting says what it needs.</p>
     <h2>Where are the job openings for each state DOT?</h2>
-    <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.45"><thead><tr><th ${th}>State</th><th ${th}>Official careers page</th><th ${th}>Median pay, highway maintenance</th></tr></thead><tbody>
+    <div style="overflow-x:auto"><table data-sortable style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.45"><thead><tr><th ${th}>State</th><th ${th}>Official careers page</th><th ${th}>Highway maintenance workers</th><th ${th}>Median pay</th><th ${th}>Average pay</th></tr></thead><tbody>
 ${rows2}
 </tbody></table></div>
-    <p>Links checked October 16, 2026. Pay is the BLS median for highway maintenance workers in that state, all employers, May ${year}. <a href="/road-workers/">See pay and jobs by state</a>.</p>
+${sortJs}
+    <p>Links checked October 16, 2026. Worker counts and pay are BLS figures for highway maintenance workers for highway maintenance workers in that state, all employers, May ${year}. <a href="/road-workers/">See pay and jobs by state</a>.</p>
     <h2>What does the job look like through the year?</h2>
     <p>In winter, crews plow and treat the roads, often through the night. In spring and summer they patch pavement, fix guardrails and signs, and mow along the road. All year they clear crashes and debris so the road can reopen.</p>
     <p>If you drive past a crew, slow down and give them room.</p>`;
