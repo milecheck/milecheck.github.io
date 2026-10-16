@@ -651,6 +651,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:gas-prices",
+   "path": "/gas-prices/",
+   "title": "What are gas prices in my state this week? Regular and diesel",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:gear",
    "path": "/gear/",
    "title": "Every Gear Pick in One Place",
@@ -698,7 +704,6 @@
    "title": "Highway vs Freeway vs Expressway: What's the Difference?",
    "sponsor": "house"
   },
-  
   {
    "key": "basics:hit-a-deer-what-to-do",
    "path": "/hit-a-deer-what-to-do/",
@@ -706,9 +711,27 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:how-do-you-drive-safely-in-winter-conditions",
+   "path": "/how-do-you-drive-safely-in-winter-conditions/",
+   "title": "How do you drive safely in winter conditions?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:how-do-you-know-if-a-mountain-pass-is-open",
+   "path": "/how-do-you-know-if-a-mountain-pass-is-open/",
+   "title": "How do you know if a mountain pass is open?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:how-interstates-are-numbered",
    "path": "/how-interstates-are-numbered/",
    "title": "How Interstate Highways Are Numbered (the System Explained)",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:how-to-pump-gas",
+   "path": "/how-to-pump-gas/",
+   "title": "How do you pump gas? Step by step for first-time drivers",
    "sponsor": "house"
   },
   {
@@ -880,9 +903,21 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:show-pass-closures-on-store-tv",
+   "path": "/show-pass-closures-on-store-tv/",
+   "title": "How can customers check if a mountain pass is open before leaving my store?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:snow-tires-wa-or-co",
    "path": "/snow-tires-wa-or-co/",
    "title": "Do you need snow tires in Washington, Oregon or Colorado?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:snowplows",
+   "path": "/snowplows/",
+   "title": "Where are the snowplows right now? Live plow map, 17 states and provinces",
    "sponsor": "house"
   },
   {
@@ -891,7 +926,6 @@
    "title": "What Steep Grade Signs Mean (6% Grade Ahead)",
    "sponsor": "house"
   },
-  
   {
    "key": "basics:three-digit-interstate-numbers",
    "path": "/three-digit-interstate-numbers/",
@@ -902,6 +936,12 @@
    "key": "basics:tv",
    "path": "/tv/",
    "title": "MileCheck board setup",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:tv-road-conditions-gas-station",
+   "path": "/tv-road-conditions-gas-station/",
+   "title": "How can I show road conditions on a TV in my gas station?",
    "sponsor": "house"
   },
   {
@@ -962,6 +1002,30 @@
    "key": "basics:what-mile-marker-am-i-at",
    "path": "/what-mile-marker-am-i-at/",
    "title": "What mile marker am I at?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:what-to-put-on-convenience-store-tv",
+   "path": "/what-to-put-on-convenience-store-tv/",
+   "title": "What can I put on the TV in my convenience store for customers?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:when-is-gas-cheapest",
+   "path": "/when-is-gas-cheapest/",
+   "title": "When is gas cheapest during the year? 21 years of prices",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:which-highways-are-most-dangerous-in-winter",
+   "path": "/which-highways-are-most-dangerous-in-winter/",
+   "title": "Which highways are most dangerous in winter?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:which-states-pump-your-gas",
+   "path": "/which-states-pump-your-gas/",
+   "title": "Which states pump your gas for you? New Jersey and Oregon rules",
    "sponsor": "house"
   },
   {
@@ -2348,6 +2412,66 @@
    "key": "mountain:baker-history",
    "path": "/mountains/baker/history/",
    "title": "How often is Mount Baker visible from Vancouver, BC?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy",
+   "path": "/mountains/baldy/",
+   "title": "Is Mount Baldy visible right now? Live from Los Angeles",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-best-time",
+   "path": "/mountains/baldy/best-time/",
+   "title": "Best time of year to see Mount Baldy",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-alhambra",
+   "path": "/mountains/baldy/from-alhambra/",
+   "title": "Is Mount Baldy visible from Alhambra right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-chino",
+   "path": "/mountains/baldy/from-chino/",
+   "title": "Is Mount Baldy visible from Chino right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-claremont",
+   "path": "/mountains/baldy/from-claremont/",
+   "title": "Is Mount Baldy visible from Claremont right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-long-beach",
+   "path": "/mountains/baldy/from-long-beach/",
+   "title": "Is Mount Baldy visible from Long Beach right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-los-angeles",
+   "path": "/mountains/baldy/from-los-angeles/",
+   "title": "Is Mount Baldy visible from Los Angeles right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-riverside",
+   "path": "/mountains/baldy/from-riverside/",
+   "title": "Is Mount Baldy visible from Riverside right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-from-west-covina",
+   "path": "/mountains/baldy/from-west-covina/",
+   "title": "Is Mount Baldy visible from West Covina right now?",
+   "sponsor": "house"
+  },
+  {
+   "key": "mountain:baldy-history",
+   "path": "/mountains/baldy/history/",
+   "title": "How often is Mount Baldy visible from Los Angeles?",
    "sponsor": "house"
   },
   {
