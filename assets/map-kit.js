@@ -384,7 +384,7 @@
     var cur = current(all); if (!cur) { curSeq = null; return; }
     curSeq = sequence(all, cur); if (curSeq.i < 0) { curSeq = null; return; }
     var nav = document.createElement('div'); nav.className = 'cm-camnav';
-    nav.innerHTML = '<button type="button" class="cm-prev" aria-label="Previous camera">‹</button><span>Camera ' + (curSeq.i + 1) + ' of ' + curSeq.list.length + ', ' + curSeq.label + '</span><button type="button" class="cm-next" aria-label="Next camera">›</button>';
+    nav.innerHTML = '<button type="button" class="cm-prev" aria-label="Previous camera">‹</button><span title="Camera ' + (curSeq.i + 1) + ' of ' + curSeq.list.length + ', ' + curSeq.label + '">' + (curSeq.i + 1) + ' of ' + curSeq.list.length + ' \u00B7 ' + curSeq.label.replace(/^on /, '') + '</span><button type="button" class="cm-next" aria-label="Next camera">›</button>';
     nav.querySelector('.cm-prev').addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
     nav.querySelector('.cm-next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
     var title = card.querySelector('.cc-title');

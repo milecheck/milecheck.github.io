@@ -101,10 +101,10 @@ html .co-list li[hidden]{display:none!important;}
 .cm-more:hover{background:#e8f2eb;}
 
 /* 5. Camera card arrows (map-kit.js section 5). One rule for every camera map. */
-.cm-camnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 30px 8px 0;font-size:12px;color:#5b6670;}
+.cm-camnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 40px 8px 0;font-size:12px;color:#5b6670;}
 .cm-camnav button{flex:none;border:1px solid #E5E5E5;background:#fff;border-radius:8px;width:36px;height:30px;font-size:20px;line-height:1;cursor:pointer;color:#0E1116;padding:0;}
 .cm-camnav button:hover{border-color:#0E1116;}
-.cm-camnav span{flex:1;text-align:center;}
+.cm-camnav span{flex:1;min-width:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 /* 6. Full screen (map-kit.js section 6). .cm-fs-on is set in both native and pinned modes; .cm-fs only in the pinned fallback. */
 .cm-fs-btn a{display:flex;align-items:center;justify-content:center;width:30px;height:30px;color:#0E1116;}
@@ -115,3 +115,10 @@ html .co-list li[hidden]{display:none!important;}
 .cm-fs-on .leaflet-container.leaflet-container{position:absolute;inset:0;}
 .cm-fs-on .co-card,.cm-fs-on .sk-card{max-height:calc(100% - 24px);}
 .cm-fs-doc{overflow:hidden;}
+
+/* 7. Landscape phones (Leah, 2026-10-16: "landscape on mobile even"): a map with a 440-460px minimum is taller than a
+   375px-high screen. Below 520px of height the map takes most of the screen and drops its minimum, on every map page. */
+@media (max-height:520px){
+  html #comap,html .rc-mapbox{height:82vh !important;height:82dvh !important;min-height:0 !important;}
+  html .co-card{max-height:calc(100% - 16px);}
+}

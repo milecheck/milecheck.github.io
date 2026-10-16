@@ -337,7 +337,7 @@ function draw(){
   bits.push(camErr?'cameras unavailable':'\\uD83D\\uDCF7 '+CAMS.length+(CAMS.length===1?' camera':' cameras'));
   var cc=ALERTS.filter(function(a){return !a.future&&(a.k==='closure'||a.k==='crash');}).length;
   bits.push(alertErr?'alerts unavailable':(cc?cc+(cc===1?' closure or crash':' closures and crashes'):'no closures or crashes'));
-  status.className='sk-bs'+(plowErr&&alertErr?' err':'');status.textContent=bits.join(' · ')+' on the road';
+  status.className='co-bs sk-bs'+(plowErr&&alertErr?' err':'');status.textContent=bits.join(' · ')+' on the road';
 }
 var tg=function(id,fn){var el=document.getElementById(id);if(el)el.onchange=function(e){fn(e.target.checked);draw();};};
 tg('tgCam',function(v){showCam=v;});tg('tgPlow',function(v){showPlow=v;});tg('tgAlert',function(v){showAlert=v;});
@@ -447,25 +447,25 @@ ${sp.html}
     <div class="eyebrow">Ski resort roads · ${reg.name} · ${reg.dot}</div>
     <h1>What is the road to ${r.name} like right now?</h1>
     <p class="sub">${esc(r.road.charAt(0).toUpperCase() + r.road.slice(1))}. ${plows ? `This page puts ${reg.dot}'s plow trucks, ${reg.trafficName}'s cameras and its closure and crash reports for that road on one map, refreshed every minute.` : `This page puts ${reg.trafficName}'s cameras and its closure and crash reports for that road on one map. ${reg.name} publishes no plow positions, and the page says so instead of guessing.`} The resort's own <a href="${esc(r.report)}" target="_blank" rel="noopener">${r.reportName ? esc(r.reportName) : 'snow report'}</a> covers the mountain itself.${r.note ? ` ${esc(r.note)}` : ''}</p>
-    <div class="sk-stats">${plows ? `
-      <div class="sk-stat"><div class="n plow" id="statPlows">—</div><div class="l">${reg.dot} plows reporting on the road</div></div>` : `
-      <div class="sk-stat"><div class="n" style="font-size:15px;padding-top:5px">none published</div><div class="l">${reg.dot} plow positions</div></div>`}
-      <div class="sk-stat"><div class="n live" id="statCams">—</div><div class="l">cameras within ${radiusTxt}</div></div>
-      <div class="sk-stat"><div class="n" id="statAlerts">—</div><div class="l">closures and crashes on the road</div></div>
+    <div class="co-stats sk-stats">${plows ? `
+      <div class="co-stat sk-stat"><div class="n plow" id="statPlows">—</div><div class="l">${reg.dot} plows reporting on the road</div></div>` : `
+      <div class="co-stat sk-stat"><div class="n" style="font-size:15px;padding-top:5px">none published</div><div class="l">${reg.dot} plow positions</div></div>`}
+      <div class="co-stat sk-stat"><div class="n live" id="statCams">—</div><div class="l">cameras within ${radiusTxt}</div></div>
+      <div class="co-stat sk-stat"><div class="n" id="statAlerts">—</div><div class="l">closures and crashes on the road</div></div>
     </div>
   </div>
 
   <div class="sk-wrap">
     <div style="position:relative;">
       <div id="comap" role="region" aria-label="Map of the road to ${esc(r.name)}"></div>
-      <div class="sk-bs" id="skStatus">Loading ${reg.trafficName} data&hellip;</div>
+      <div class="co-bs sk-bs" id="skStatus">Loading ${reg.trafficName} data&hellip;</div>
       <div class="co-layers" role="group" aria-label="Map layers">
         <div class="lt">Map layers</div>${plows ? `
         <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="sk-dot" style="background:#0369A1"></span>Snowplows</label>` : ''}
         <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="sk-dot" style="background:#0f7a4f"></span>Cameras</label>
         <label class="co-layer"><input type="checkbox" id="tgAlert" checked><span class="co-sw alert"></span><span class="sk-dot" style="background:#cf3320"></span>Closures and crashes</label>
       </div>
-      <div class="sk-card" id="skCard"></div>
+      <div class="co-card sk-card" id="skCard"></div><!-- co-* classes: assets/map-kit.css phone layout (bottom-sheet card, one-line status, 2-up stats) applies to this page too -->
     </div>
     <div class="sk-legend"><span><i style="background:#0E1116"></i>Resort base</span>${plows ? `<span><i style="background:#0369A1"></i>Plow truck, last reported position</span>` : ''}<span><i style="background:#0f7a4f"></i>Camera</span><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#a16207"></i>Ramp or lane</span><span style="color:#8A939B">Dashed ring: the ${radiusTxt} search area</span></div>
   </div>
