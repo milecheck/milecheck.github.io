@@ -396,3 +396,53 @@
     if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } else if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
   });
 })();
+
+/* 6. Full screen (Leah, 2026-10-16: "can we pop out or full screen a map?"). One button on every
+   map that loads this kit, under the zoom control. Native full screen where the browser offers
+   it (desktop, Android); on iPhone Safari, which has no requestFullscreen for a div, the map's
+   box is pinned over the page instead. The button, Esc, or the browser's own exit leaves it.
+   The box that goes full screen is the map's wrapper when the page has one (the camera card,
+   the status pill and the layers panel sit inside it, so they come along), else the map itself. */
+(function () {
+  var m; try { m = (typeof map !== 'undefined' && map && map.getContainer) ? map : null; } catch (e) { m = null; }
+  if (!m || typeof L === 'undefined') return;
+  var el = m.getContainer(), wrap = el.parentElement;
+  var target = (wrap && wrap !== document.body && getComputedStyle(wrap).position === 'relative') ? wrap : el;
+  var native = !!(target.requestFullscreen && document.exitFullscreen);
+  var btn = null;
+  var ICON_IN = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  var ICON_OUT = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+  function isOn() { return document.fullscreenElement === target || target.classList.contains('cm-fs'); }
+  function settle() {
+    var on = isOn();
+    target.classList.toggle('cm-fs-on', on);
+    document.documentElement.classList.toggle('cm-fs-doc', on);
+    if (btn) { btn.innerHTML = on ? ICON_OUT : ICON_IN; btn.title = on ? 'Exit full screen' : 'Full screen'; btn.setAttribute('aria-label', btn.title); }
+    setTimeout(function () { m.invalidateSize(); }, 80);
+    setTimeout(function () { m.invalidateSize(); }, 400);
+  }
+  function pin() { if (!isOn()) { target.classList.add('cm-fs'); settle(); } }
+  function enter() {
+    if (!native) return pin();
+    // Some embedders leave the native request pending with no answer; after 700 ms the pinned mode takes over.
+    var t = setTimeout(pin, 700);
+    var p; try { p = target.requestFullscreen(); } catch (e) { clearTimeout(t); return pin(); }
+    if (p && p.then) p.then(function () { clearTimeout(t); settle(); }, function () { clearTimeout(t); pin(); });
+  }
+  function exit() {
+    if (document.fullscreenElement === target) { document.exitFullscreen().catch(function () {}); }
+    target.classList.remove('cm-fs'); settle();
+  }
+  var Ctl = L.Control.extend({ options: { position: 'topleft' }, onAdd: function () {
+    var box = L.DomUtil.create('div', 'leaflet-bar leaflet-control cm-fs-btn');
+    btn = L.DomUtil.create('a', '', box); btn.href = '#'; btn.setAttribute('role', 'button');
+    L.DomEvent.on(btn, 'click', function (e) { L.DomEvent.stop(e); if (isOn()) exit(); else enter(); });
+    L.DomEvent.disableClickPropagation(box);
+    settle();
+    return box;
+  } });
+  m.addControl(new Ctl());
+  document.addEventListener('fullscreenchange', settle);
+  document.addEventListener('fullscreenerror', function () { pin(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && target.classList.contains('cm-fs')) exit(); });
+})();

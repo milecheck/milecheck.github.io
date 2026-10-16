@@ -23,6 +23,13 @@ or behave there, once, and every map gets it. Do not patch map pages one by one.
   has to keep the conventions every camera map already uses (`let CAMS` with lat, lon, title,
   route, mp, img, stream; `function showCard`; `function camCard`; the page-level `map`), or
   register `window.MCCamMap = { list, open }` when it groups cameras (the ski pages do).
+- Full screen (added 2026-10-16, Leah: "can we pop out or full screen a map?"): map-kit.js
+  section 6 puts a full-screen button under the zoom control on every map it can see. Native
+  full screen where the browser allows it; on iPhone, and wherever the native request does not
+  answer within 700 ms, the map's box is pinned over the page instead. Esc or the button exits.
+  The kit needs the page-level `map` (a `const map` at script top level, or `window.map = ...`
+  when the page builds its map inside a function, as the road-conditions pages now do). Pages
+  whose map is local to a function get no kit controls at all; expose it, do not patch the page.
 - Before asking to push a map change: share a preview link and let Leah look first.
 
 ## Analytics + attribution (added 2026-09-14)

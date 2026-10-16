@@ -269,7 +269,8 @@ function liveJs(s) {
 (function(){
 var ST=${JSON.stringify(s.code)},DOT=${JSON.stringify(s.dot)},DOTURL=${JSON.stringify(s.dotUrl)},B=${JSON.stringify(s.bounds)};
 var WORKER="https://milepost-proxy.leahgerber93.workers.dev";
-var map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+/* window.map: assets/map-kit.js reads the page-level map for its shared controls (full screen, 2026-10-16). */
+var map=window.map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
 var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
 L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · alerts: '+DOT+' via MileCheck',maxZoom:14}).addTo(map);
 map.fitBounds(B);

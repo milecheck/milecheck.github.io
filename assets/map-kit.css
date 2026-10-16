@@ -105,3 +105,13 @@ html .co-list li[hidden]{display:none!important;}
 .cm-camnav button{flex:none;border:1px solid #E5E5E5;background:#fff;border-radius:8px;width:36px;height:30px;font-size:20px;line-height:1;cursor:pointer;color:#0E1116;padding:0;}
 .cm-camnav button:hover{border-color:#0E1116;}
 .cm-camnav span{flex:1;text-align:center;}
+
+/* 6. Full screen (map-kit.js section 6). .cm-fs-on is set in both native and pinned modes; .cm-fs only in the pinned fallback. */
+.cm-fs-btn a{display:flex;align-items:center;justify-content:center;width:30px;height:30px;color:#0E1116;}
+.cm-fs-on{background:#eef0e9;}
+.cm-fs-on:fullscreen{border-radius:0;}
+.cm-fs{position:fixed !important;inset:0 !important;z-index:6000 !important;width:auto !important;height:100vh !important;height:100dvh !important;max-height:none !important;margin:0 !important;border-radius:0 !important;}
+.cm-fs-on > .leaflet-container{width:100% !important;height:100% !important;min-height:0 !important;max-height:none !important;border-radius:0 !important;}
+.cm-fs-on .leaflet-container.leaflet-container{position:absolute;inset:0;}
+.cm-fs-on .co-card,.cm-fs-on .sk-card{max-height:calc(100% - 24px);}
+.cm-fs-doc{overflow:hidden;}
