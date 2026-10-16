@@ -18,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
+  <script src="/assets/plows.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
@@ -72,6 +73,7 @@
     .rc-card .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
     .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
     .rc-card p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
+    .rc-card p.rc-app{margin-top:8px;color:#3a444d;}
     .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
     .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
     .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
@@ -155,7 +157,7 @@
   </aside>
 <!-- spon:end -->
     <p class="rc-eyebrow">Road conditions</p>
-    <h1>Kentucky road conditions right now</h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Related pages" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><a href="/cameras/kentucky/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Kentucky Traffic Cameras</a><a href="/road-conditions/illinois/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Illinois Road Conditions Now</a><a href="/road-conditions/indiana/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Indiana Road Conditions Now</a></nav><!-- toplinks:end -->
+    <h1>Kentucky road conditions right now</h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Related pages" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><a href="/cameras/kentucky/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">KYTC Cameras in Kentucky</a><a href="/road-conditions/illinois/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Illinois Road Conditions Now</a><a href="/road-conditions/indiana/" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">Indiana Road Conditions Now</a></nav><!-- toplinks:end -->
 <!-- state-corridor-link:start --><p style="font-size:15px;margin:12px 0 18px;"><a href="/corridors/i-75/kentucky/" style="color:#006b46;font-weight:700;">Check I-75 reports and cameras in Kentucky</a></p><!-- state-corridor-link:end -->
     <p class="rc-lede">Every closure and crash GoKY is publishing, on one map with the route and mile marker. Below it: the <a href="/cameras/kentucky/">live cameras</a>, the <a href="/corridors/i-75/">I-75</a> and <a href="/corridors/i-65/">I-65</a> corridor pages, and what the season does to Kentucky's highways. For the whole country, see the <a href="/closures/">US closures map</a>.</p>
 
@@ -178,7 +180,7 @@
   <div class="rc-body">
     <h2>Where to look next</h2>
     <div class="rc-cards">
-      <a class="rc-card" href="https://goky.ky.gov/" target="_blank" rel="noopener"><span class="k">Official source</span><h3>GoKY</h3><p>Kentucky's DOT traveler site. The list of record for closures, restrictions and detours.</p></a>
+      <a class="rc-card" href="https://goky.ky.gov/" target="_blank" rel="noopener"><span class="k">Official source</span><h3>GoKY</h3><p>Kentucky's DOT traveler site. The list of record for closures, restrictions and detours.</p><p class="rc-app">Kentucky has had no official road conditions app since 2016. KYTC points drivers to the GoKY website and Waze.</p></a>
       <a class="rc-card" href="/cameras/kentucky/"><span class="k">Cameras</span><h3>Kentucky highway cameras</h3><p>Every GoKY camera on one map, with the route and mile marker where the DOT gives one.</p></a>
       <a class="rc-card" href="/corridors/i-75/"><span class="k">Corridor</span><h3>I-75 conditions</h3><p>The whole I-75 corridor, every state it crosses, alerts by mile marker.</p></a>
       <a class="rc-card" href="/corridors/i-65/"><span class="k">Corridor</span><h3>I-65 conditions</h3><p>The whole I-65 corridor, every state it crosses, alerts by mile marker.</p></a>
@@ -236,7 +238,7 @@
     </style>
     <h2>Nearby on MileCheck</h2>
     <ul>
-      <li><a href="/cameras/kentucky/">Kentucky Traffic Cameras</a></li>
+      <li><a href="/cameras/kentucky/">KYTC Cameras in Kentucky</a></li>
       <li><a href="/road-conditions/illinois/">Illinois Road Conditions Now</a></li>
       <li><a href="/road-conditions/indiana/">Indiana Road Conditions Now</a></li>
       <li><a href="/corridors/i-75/">I-75 cameras and road conditions</a></li>
@@ -318,11 +320,14 @@
 (function(){
 var ST="KY",DOT="GoKY",DOTURL="https://goky.ky.gov/",B=[[36.5,-89.57],[39.15,-81.96]];
 var WORKER="https://milepost-proxy.leahgerber93.workers.dev";
-var map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+/* window.map: assets/map-kit.js reads the page-level map for its shared controls (full screen, 2026-10-16). */
+var map=window.map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
 var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
 L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · alerts: '+DOT+' via MileCheck',maxZoom:14}).addTo(map);
 map.fitBounds(B);
-var layer=L.layerGroup().addTo(map),workLayer=L.layerGroup();
+var layer=L.layerGroup().addTo(map),workLayer=L.layerGroup(),plowLayer=L.layerGroup().addTo(map);
+// Snowplows (2026-10-15): only for states whose DOT publishes truck positions. assets/plows.js owns the pin and card.
+var PLOWS=!!MCPlows.AGENCY[ST],plowToggle=document.getElementById('rcPlows'),plowNote='';
 var status=document.getElementById('rcStatus'),rows=document.getElementById('rcRows'),count=document.getElementById('rcCount'),workToggle=document.getElementById('rcWork');
 var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
 var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
@@ -380,7 +385,9 @@ function load(){
     if(!last)rows.innerHTML='<div class="rc-empty err"><b>Could not load the '+esc(DOT)+' feed.</b>That is an outage, not an all-clear. <a href="'+esc(DOTURL)+'" target="_blank" rel="noopener">Open '+esc(DOT)+'</a> for the official list.</div>';
   });
 }
-load();setInterval(load,300000);
+function loadPlows(){if(!PLOWS)return;fetch(WORKER+'/plows?state='+ST,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){plowLayer.clearLayers();var list=MCPlows.sort(((d&&d.plows)||[]).filter(function(t){return isFinite(+t.lat)&&isFinite(+t.lon);}).map(function(t){return MCPlows.normalize(t);}));list.forEach(function(t){var m=L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700});m.bindPopup('<div class="fpop">'+MCPlows.card(t)+'</div>');plowLayer.addLayer(m);});var el=document.getElementById('rcPlowCount');if(el)el.textContent=MCPlows.summary(list);var cn=document.getElementById('rcPlowNote');if(cn){var txt=MCPlows.cameraNote(list);cn.textContent=txt;cn.style.display=txt?'block':'none';}}).catch(function(){var el=document.getElementById('rcPlowCount');if(el)el.textContent='plow feed unavailable';});}
+if(plowToggle)plowToggle.addEventListener('change',function(){if(plowToggle.checked)plowLayer.addTo(map);else map.removeLayer(plowLayer);});
+load();loadPlows();setInterval(load,300000);setInterval(loadPlows,60000);
 })();</script>
 <!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
 </body>

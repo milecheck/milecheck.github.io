@@ -18,6 +18,7 @@ const fs = require('fs');
 const path = require('path');
 const SPON = require('./lib/sponsor-slot');
 const STATES = require('./road-conditions/states.cjs');
+const APPS = require('./road-conditions/state-apps.cjs'); // official DOT app line per state, 2026-10-16
 const SLOT_CSS = SPON.slot({ kind: 'live', slug: 'road-conditions', name: '(css only)' }).css; // one call, reused by every page's <style>
 
 const ROOT = path.resolve(__dirname, '..');
@@ -139,6 +140,7 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-card .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
     .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
     .rc-card p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
+    .rc-card p.rc-app{margin-top:8px;color:#3a444d;}
     .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
     .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
     .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
@@ -356,8 +358,11 @@ function statePage(s) {
   const sept = SEPT[s.code];
   const sp = SPON.slot({ kind: 'live', slug: `road-conditions-${slug}`, state: s.code, name: s.name });
 
+  const app = APPS[s.code];
+  if (!app) throw new Error(`no official-app line for ${s.code} in road-conditions/state-apps.cjs`);
+  const appLine = app.none || `${s.name}'s official road conditions app is ${app.app}.`;
   const cards = [];
-  cards.push(['Official source', s.dot, `${s.name}'s DOT traveler site. The list of record for closures, restrictions and detours.`, s.dotUrl, true]);
+  cards.push(['Official source', s.dot, `${s.name}'s DOT traveler site. The list of record for closures, restrictions and detours.`, s.dotUrl, true, appLine]);
   if (cams) cards.push(['Cameras', `${s.name} highway cameras`, `Every ${s.dot} camera on one map, with the route and mile marker where the DOT gives one.`, `/cameras/${slug}/`]);
   for (const c of cities) cards.push(['City cameras', `${cityName(c)} cameras`, `Live cameras on the ${cityName(c)} freeways.`, `/cameras/${c}/`]);
   for (const [ps, pn, pr] of passes) cards.push(['Mountain pass', pn, `${pr} over the summit: cameras, restrictions and closures on one page.`, `/passes/${ps}/`]);
@@ -366,7 +371,7 @@ function statePage(s) {
   for (const m of mountains) cards.push(['Mountain visibility', `Is ${MOUNTAIN_NAMES[m]} out?`, `Whether the mountain is visible right now, and from where.`, `/mountains/${m}/`]);
   if (guide) cards.push(['Mile markers', `Mile markers in ${s.name}`, `How ${s.name} numbers its highways and where the markers matter most.`, `/blog/mile-markers-${slug}.html`]);
   if (recap) cards.push(['Report', `Labor Day 2026 in ${s.name}`, `What the ${s.dot} feed carried over the holiday weekend.`, `/blog/labor-day-weekend-recap-2026-states/${slug}.html`]);
-  const cardsHtml = cards.map(([k, h, p, href, ext]) => `      <a class="rc-card" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}><span class="k">${k}</span><h3>${h}</h3><p>${p}</p></a>`).join('\n');
+  const cardsHtml = cards.map(([k, h, p, href, ext, more]) => `      <a class="rc-card" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}><span class="k">${k}</span><h3>${h}</h3><p>${p}</p>${more ? `<p class="rc-app">${esc(more)}</p>` : ''}</a>`).join('\n');
 
   const corridorLinks = corridors.map(([cs, cn]) => `<a href="/corridors/${cs}/">${cn}</a>`);
   const passLinks = passes.map(([ps, pn]) => `<a href="/passes/${ps}/">${pn}</a>`);

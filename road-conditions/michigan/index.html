@@ -73,6 +73,7 @@
     .rc-card .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
     .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
     .rc-card p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
+    .rc-card p.rc-app{margin-top:8px;color:#3a444d;}
     .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
     .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
     .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
@@ -180,7 +181,7 @@
   <div class="rc-body">
     <h2>Where to look next</h2>
     <div class="rc-cards">
-      <a class="rc-card" href="https://mdotjboss.state.mi.us/MiDrive" target="_blank" rel="noopener"><span class="k">Official source</span><h3>Mi Drive</h3><p>Michigan's DOT traveler site. The list of record for closures, restrictions and detours.</p></a>
+      <a class="rc-card" href="https://mdotjboss.state.mi.us/MiDrive" target="_blank" rel="noopener"><span class="k">Official source</span><h3>Mi Drive</h3><p>Michigan's DOT traveler site. The list of record for closures, restrictions and detours.</p><p class="rc-app">Michigan has no official road conditions app. Mi Drive is gone from both app stores, and MDOT points drivers to the Mi Drive website.</p></a>
       <a class="rc-card" href="/cameras/michigan/"><span class="k">Cameras</span><h3>Michigan highway cameras</h3><p>Every Mi Drive camera on one map, with the route and mile marker where the DOT gives one.</p></a>
       <a class="rc-card" href="/cameras/detroit/"><span class="k">City cameras</span><h3>Detroit cameras</h3><p>Live cameras on the Detroit freeways.</p></a>
       <a class="rc-card" href="/corridors/i-75/"><span class="k">Corridor</span><h3>I-75 conditions</h3><p>The whole I-75 corridor, every state it crosses, alerts by mile marker.</p></a>
@@ -322,7 +323,8 @@
 (function(){
 var ST="MI",DOT="Mi Drive",DOTURL="https://mdotjboss.state.mi.us/MiDrive",B=[[41.7,-90.42],[48.3,-82.12]];
 var WORKER="https://milepost-proxy.leahgerber93.workers.dev";
-var map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+/* window.map: assets/map-kit.js reads the page-level map for its shared controls (full screen, 2026-10-16). */
+var map=window.map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
 var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
 L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · alerts: '+DOT+' via MileCheck',maxZoom:14}).addTo(map);
 map.fitBounds(B);
