@@ -9,10 +9,10 @@ const headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <scrip
 const headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">'));
 const tail = tpl.slice(tpl.indexOf('  </article>'));
 const readDate = 'October 15, 2026';
-function page({ path, title, desc, h1, body, ld, eyebrow }) {
+function page({ path, title, desc, h1, body, ld, eyebrow, lang = 'en', alts = '' }) {
   const url = `https://milecheckapp.com${path}`;
-  const html = headA +
-    `  <title>${esc(title)}</title>\n  <meta name="description" content="${esc(desc)}">\n  <link rel="canonical" href="${url}">\n` +
+  const html = headA.replace('<html lang="en">', `<html lang="${lang}">`) +
+    `  <title>${esc(title)}</title>\n  <meta name="description" content="${esc(desc)}">\n  <link rel="canonical" href="${url}">\n${alts}` +
     `  <meta property="og:title" content="${esc(h1)}">\n  <meta property="og:description" content="${esc(desc)}">\n  <meta property="og:url" content="${url}">\n  <meta property="og:type" content="article">\n` +
     headB.replace(/href="\.\.\//g, 'href="/') +
     `  <script type="application/ld+json">${JSON.stringify(ld)}</script>\n` +
@@ -39,10 +39,32 @@ function gasSeasonChart() {
     return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" rx="3" fill="${d >= 0 ? '#C2410C' : '#0F766E'}"><title>${M[i]} ${lab}</title></rect><text x="${(x + bw / 2).toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" font-size="11" fill="#33414d">${lab}</text><text x="${(x + bw / 2).toFixed(1)}" y="${H - 6}" text-anchor="middle" font-size="12" fill="#5b6670">${M[i]}</text>`; }).join('');
   return `<figure style="margin:18px 0 22px"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Typical U.S. regular gas price by month compared with the year's average, 2005 to 2025" style="width:100%;height:auto;display:block"><line x1="10" x2="${W - 10}" y1="${mid}" y2="${mid}" stroke="#c9d1d8"/>${bars}</svg><figcaption style="font-size:13px;color:#5b6670;margin-top:6px">Typical price each month compared with that year's average, U.S. regular gas, 2005 to 2025 (median). Green is below average, orange above. Source: EIA weekly prices, MileCheck analysis.</figcaption></figure>`;
 }
-for (const a of list) {
-  const html = readFileSync(`data/explainers/${a.slug}.html`, 'utf8');
-  const lede = (html.match(/<p class="lede">([\s\S]*?)<\/p>/) || [, a.desc])[1].replace(/<[^>]+>/g, '');
-  page({ path: `/${a.slug}/`, title: a.title, desc: a.desc, h1: a.h1, eyebrow: a.eyebrow, body: html.replace('<div class="chart" data-chart="gas-seasonality"></div>', gasSeasonChart()),
-    ld: { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: a.h1, acceptedAnswer: { '@type': 'Answer', text: lede } }] } });
+// Step images: /images/fuel/<slug>/step-N.webp (no text in them, so every language shares them). Inserted after
+// the Nth "<p><strong>" step paragraph, which keeps its place in every translation.
+function addStepImages(slug, html, alt) {
+  let n = 0;
+  return html.replace(/<p><strong>[\s\S]*?<\/p>/g, m => {
+    n++;
+    const f = `images/fuel/${slug}/step-${n}.webp`;
+    return existsSync(f) ? `${m}\n<figure style="margin:4px 0 22px"><img src="/${f}" alt="${esc(alt(n))}" width="800" loading="lazy" decoding="async" style="width:100%;max-width:560px;height:auto;border-radius:10px;display:block"></figure>` : m;
+  });
 }
-console.log(`explainers: ${list.length} pages`);
+const LOCALE = { es: 'es_419', fr: 'fr_FR', pt: 'pt_BR', pa: 'pa_IN', zh: 'zh_CN', vi: 'vi_VN' };
+let count = 0;
+for (const a of list) {
+  const langs = (a.langs || []).filter(l => existsSync(`data/explainers/${a.slug}.${l}.html`) && existsSync(`data/explainers/${a.slug}.${l}.json`));
+  const alts = langs.length ? [['en', `/${a.slug}/`], ...langs.map(l => [l, `/${l}/${a.slug}/`]), ['x-default', `/${a.slug}/`]]
+    .map(([l, u]) => `  <link rel="alternate" hreflang="${l}" href="https://milecheckapp.com${u}">\n`).join('') : '';
+  const versions = [{ lang: 'en', path: `/${a.slug}/`, meta: a, html: readFileSync(`data/explainers/${a.slug}.html`, 'utf8') },
+    ...langs.map(l => ({ lang: l, path: `/${l}/${a.slug}/`, meta: JSON.parse(readFileSync(`data/explainers/${a.slug}.${l}.json`, 'utf8')), html: readFileSync(`data/explainers/${a.slug}.${l}.html`, 'utf8') }))];
+  for (const v of versions) {
+    const lede = (v.html.match(/<p class="lede">([\s\S]*?)<\/p>/) || [, v.meta.desc])[1].replace(/<[^>]+>/g, '');
+    const steps = [...v.html.matchAll(/<p><strong>([\s\S]*?)<\/strong>/g)].map(m => m[1].replace(/<[^>]+>/g, ''));
+    let body = v.html.replace('<div class="chart" data-chart="gas-seasonality"></div>', gasSeasonChart());
+    body = addStepImages(a.slug, body, n => steps[n - 1] || v.meta.h1);
+    page({ path: v.path, title: v.meta.title, desc: v.meta.desc, h1: v.meta.h1, eyebrow: v.lang === 'en' ? a.eyebrow : (v.meta.eyebrow || a.eyebrow), body, lang: v.lang, alts,
+      ld: { '@context': 'https://schema.org', '@type': 'FAQPage', inLanguage: v.lang, mainEntity: [{ '@type': 'Question', name: v.meta.h1, acceptedAnswer: { '@type': 'Answer', text: lede } }] } });
+    count++;
+  }
+}
+console.log(`explainers: ${count} pages`);
