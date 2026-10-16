@@ -1,0 +1,41 @@
+{
+ "checked": "2026-10-16",
+ "rule": "name starts with another road and does not mention the listed one, within 0.5 mi of its markers, 0.75 to 5 mi from the nearest marker of the listed road",
+ "cameras": {
+  "FL-850": {
+   "on": "I-4",
+   "listed": "FL-438",
+   "title": "I-4 @ MM 85.1-SCCTV1 WB",
+   "mi_named": 0.18,
+   "mi_listed": 1.76
+  },
+  "FL-1794": {
+   "on": "I-95",
+   "listed": "I-10",
+   "title": "I-95 NB Collector (roselle) CCTV_19",
+   "mi_named": 0.17,
+   "mi_listed": 1.43
+  },
+  "UT-164905-164905": {
+   "on": "I-215",
+   "listed": "I-15",
+   "title": "I-215 W SB @ 1000 S / MP 21.14, SLC",
+   "mi_named": 0.25,
+   "mi_listed": 2.04
+  },
+  "UT-166085-166085": {
+   "on": "I-215",
+   "listed": "I-80",
+   "title": "I-215 W SB @ 450 N / MP 23.31, SLC",
+   "mi_named": 0.31,
+   "mi_listed": 1.03
+  },
+  "UT-166215-166215": {
+   "on": "I-215",
+   "listed": "I-15",
+   "title": "I-215 W NB @ 4700 S / SR-266 / MP 15.46, TAY",
+   "mi_named": 0.43,
+   "mi_listed": 2.68
+  }
+ }
+}

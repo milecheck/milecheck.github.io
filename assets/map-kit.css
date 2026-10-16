@@ -128,3 +128,6 @@ html .co-bs.cm-hide{display:none !important;}
 
 /* 9. 511 Alberta no-feed line (map-kit.js section 9), in place of its "No live camera feed" picture. */
 .cm-nofeed{margin-top:8px;padding:10px 12px;border:1px dashed #cfd4da;border-radius:8px;color:#5b6670;}
+
+/* 10. Camera filed under the wrong road (map-kit.js section 10). */
+.cm-routenote{margin-top:8px;font-size:13px;font-style:italic;color:#b91c1c;line-height:1.4;}

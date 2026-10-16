@@ -509,3 +509,33 @@
     (a || img).replaceWith(d);
   }, true);
 })();
+
+/* 10. A camera the DOT files under the wrong road (Leah, 2026-10-16: UDOT lists "I-215 W SB @ 450 N" under
+   I-80). data/camera-route-notes.json holds only cameras whose own name names another road, that sit within
+   half a mile of that road and well off the one they are filed under (scripts/check-camera-routes.mjs).
+   The open card gets one line saying so. The list loads once, the first time a card opens. */
+(function () {
+  var card = document.querySelector('.co-card, .sk-card');
+  if (!card) return;
+  var notes = null, asked = false;
+  function idOf() {
+    var img = card.querySelector('img.cc-img');
+    var m = img && String(img.getAttribute('src') || '').match(/[?&]id=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  function apply() {
+    if (!notes || card.querySelector('.cm-routenote')) return;
+    var n = notes[idOf()];
+    if (!n) return;
+    var d = document.createElement('div');
+    d.className = 'cm-routenote';
+    d.textContent = 'This camera appears to be on ' + n.on + ', not ' + n.listed + ' as the DOT feed lists it.';
+    card.appendChild(d);
+  }
+  function load() {
+    if (asked) return apply();
+    asked = true;
+    fetch('/data/camera-route-notes.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { notes = (j && j.cameras) || {}; apply(); }).catch(function () { notes = {}; });
+  }
+  new MutationObserver(function () { if (card.style.display !== 'none' && card.querySelector('img.cc-img')) load(); }).observe(card, { childList: true, subtree: true });
+})();
