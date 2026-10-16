@@ -99,3 +99,9 @@ html .co-layers [hidden]{display:none!important;}
 html .co-list li[hidden]{display:none!important;}
 .cm-more{display:block;width:100%;margin:10px 0 2px;font:inherit;font-size:14px;font-weight:600;color:#0f7a4f;background:#f2f7f3;border:1px solid #d6e8dc;border-radius:10px;padding:10px 14px;cursor:pointer;}
 .cm-more:hover{background:#e8f2eb;}
+
+/* 5. Camera card arrows (map-kit.js section 5). One rule for every camera map. */
+.cm-camnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 30px 8px 0;font-size:12px;color:#5b6670;}
+.cm-camnav button{flex:none;border:1px solid #E5E5E5;background:#fff;border-radius:8px;width:36px;height:30px;font-size:20px;line-height:1;cursor:pointer;color:#0E1116;padding:0;}
+.cm-camnav button:hover{border-color:#0E1116;}
+.cm-camnav span{flex:1;text-align:center;}

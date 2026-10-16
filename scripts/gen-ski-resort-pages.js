@@ -297,7 +297,7 @@ map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*2),{padding:
 L.circle([RES.lat,RES.lon],{radius:RES.radius*1609.34,color:'#0f7a4f',weight:1.5,dashArray:'4 5',fill:false,interactive:false}).addTo(map);
 L.marker([RES.lat,RES.lon],{icon:L.divIcon({className:'',iconSize:[30,30],iconAnchor:[15,15],html:'<div class="sk-base" title="'+esc(RES.name)+' base">⛷</div>'}),zIndexOffset:1200,interactive:false}).addTo(map);
 var camLayer=L.layerGroup().addTo(map),alertLayer=L.layerGroup().addTo(map),plowLayer=L.layerGroup().addTo(map);
-var CAMS=[],ALERTS=[],PLOWLIST=[],plowErr=false,alertErr=false,camErr=false,plowStatewide=0,plowMarkers=[],alertMarkers=[];
+var CAMS=[],ALERTS=[],PLOWLIST=[],plowErr=false,alertErr=false,camErr=false,plowStatewide=0,plowMarkers=[],alertMarkers=[],GROUPS=[];
 var cardEl=document.getElementById('skCard'),status=document.getElementById('skStatus');
 function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function showCard(html){stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';stopStream();};}
@@ -308,6 +308,12 @@ function camCard(c){var loc=esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c
 // 511 Alberta answers a camera with no feed with its own 540 x 330 "No live camera feed at this time" card (all three
 // Lake Louise TCH views on 2026-10-16). Shown as-is it reads like a picture of the road. Say what it is instead.
 window.noFeed=function(img){if(img.naturalWidth===540&&img.naturalHeight===330&&/state=AB/.test(img.src)){var d=document.createElement('div');d.className='cc-meta';d.style.cssText='margin-top:8px;padding:10px 12px;border:1px dashed #cfd4da;border-radius:8px;color:#5b6670;';d.textContent=TRAFFIC+' reports no live feed from this camera right now. Nothing has been shown in its place.';var a=img.closest('a');(a||img).replaceWith(d);}};
+// Cameras sharing a pole are one group; groups keep CAMS' nearest-first order, so the arrows walk outward from the base.
+function groupCams(){var groups={},order=[];CAMS.forEach(function(c){var k=c.lat.toFixed(4)+','+c.lon.toFixed(4);if(!groups[k]){groups[k]=[];order.push(k);}groups[k].push(c);});return order.map(function(k){return groups[k];});}
+// The ‹ › arrows on the card come from assets/map-kit.js (section 5), the one place camera-card behaviour lives.
+// This page groups cameras per pole, so it registers the groups' lead cameras through the MCCamMap protocol.
+function openCam(gi,pan){var N=GROUPS.length;if(!N)return;gi=((gi%N)+N)%N;var g=GROUPS[gi];showCard(groupCard(g));if(pan)map.panTo([g[0].lat,g[0].lon]);var sc=g.filter(function(c){return c.stream;})[0];if(sc)playStream(sc.stream);}
+window.MCCamMap={list:function(){return GROUPS.map(function(g){return g[0];});},open:function(c,pan){for(var i=0;i<GROUPS.length;i++)if(GROUPS[i][0]===c)return openCam(i,pan);}};
 // Several cameras on one pole (511 Alberta gives the NW / SE / SW views one coordinate): one card, every view, one dot on the map.
 function groupCard(g){if(g.length===1)return camCard(g[0]);var seen=false;return '<div class="cc-title">'+g.length+' cameras at this spot</div><div class="cc-meta">'+esc(g[0].route||'')+(g[0].mp>0?' · '+MKR+' '+Math.round(g[0].mp):'')+' · '+esc(TRAFFIC)+'</div>'+g.map(function(c){if(c.stream){if(seen)return '<div class="cc-meta" style="margin-top:10px"><b>'+esc(c.title)+'</b> · live video, open the '+esc(TRAFFIC)+' site for this view.</div>';seen=true;return '<div class="cc-meta" style="margin-top:10px"><b>'+esc(c.title)+'</b></div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video>';}var bust=c.img+(c.img.indexOf('?')>=0?'&':'?')+'t='+Date.now();return '<div class="cc-meta" style="margin-top:10px"><b>'+esc(c.title)+'</b></div><a href="'+esc(c.img)+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+esc(bust)+'" alt="Live: '+esc(c.title)+'" onload="noFeed(this)" onerror="this.alt=\\'image unavailable\\'"></a>';}).join('');}
 var hlsInst=null,hlsLoading=null,streamGeneration=0;function loadHls(){if(window.Hls)return Promise.resolve();if(hlsLoading)return hlsLoading;hlsLoading=new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);}).catch(function(e){hlsLoading=null;throw e;});return hlsLoading;}
@@ -323,8 +329,7 @@ function aIcon(k){return L.divIcon({className:'',html:'<span class="rc-dot'+(k==
 var showCam=true,showPlow=true,showAlert=true;
 function draw(){
   camLayer.clearLayers();alertLayer.clearLayers();plowLayer.clearLayers();plowMarkers=[];alertMarkers=[];
-  if(showCam){var groups={},order=[];CAMS.forEach(function(c){var k=c.lat.toFixed(4)+','+c.lon.toFixed(4);if(!groups[k]){groups[k]=[];order.push(k);}groups[k].push(c);});
-    order.forEach(function(k){var g=groups[k];L.circleMarker([g[0].lat,g[0].lon],{radius:RS(g.length>1?6:5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',function(){showCard(groupCard(g));var sc=g.filter(function(c){return c.stream;})[0];if(sc)playStream(sc.stream);}).addTo(camLayer);});}
+  if(showCam)GROUPS.forEach(function(g,gi){L.circleMarker([g[0].lat,g[0].lon],{radius:RS(g.length>1?6:5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',function(){openCam(gi,false);}).addTo(camLayer);});
   if(showAlert)ALERTS.forEach(function(a,i){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;var m=L.marker([a.lat,a.lon],{icon:aIcon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · '+MKR+' '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+(a.future?' · scheduled':'')+'</div><div class="fp-row">'+esc(a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});alertLayer.addLayer(m);alertMarkers[i]=m;});
   if(PLOWS&&showPlow)PLOWLIST.forEach(function(t,i){plowMarkers[i]=L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700}).on('click',function(){showCard(MCPlows.card(t));}).addTo(plowLayer);});
   var bits=[];
@@ -341,6 +346,7 @@ function fetchJSON(url,tries){return new Promise(function(resolve){var i=0;(func
 function loadCams(){fetchJSON(WORKER+'/cameras?state='+RES.state,4).then(function(d){
   if(!d){camErr=true;draw();return;}camErr=false;
   CAMS=(d.cameras||[]).filter(function(c){return c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&(c.imageUrl||c.streamUrl)&&hav(RES.lat,RES.lon,+c.lat,+c.lon)<=RES.radius;}).map(function(c){return {lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||''),d:hav(RES.lat,RES.lon,+c.lat,+c.lon)};}).sort(function(a,b){return a.d-b.d;});
+  GROUPS=groupCams();
   var el=document.getElementById('statCams');if(el)el.textContent=CAMS.length;
   var ul=document.getElementById('camList');if(ul)ul.innerHTML=CAMS.length?CAMS.slice(0,12).map(function(c){return '<li>'+esc(c.title)+'<span class="m">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+(KM?Math.round(c.d*1.609)+' km':c.d.toFixed(1)+' mi')+' from the base</span></li>';}).join('')+(CAMS.length>12?'<li class="none">'+(CAMS.length-12)+' more on the map.</li>':''):'<li class="none">'+esc(TRAFFIC)+' has no camera within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base.</li>';
   draw();});}

@@ -316,3 +316,83 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.classList.contains('cm-closed')) set(false); });
   }
 })();
+
+/* 5. Camera card arrows (Leah, 2026-10-16: "want arrows to skip thru cams" and "need this fix on
+   many pages if its not right here and make rule in future"). RULE: camera-card behaviour lives
+   HERE, once, not in a page generator. Every camera map (state, city, pass, corridor, ski,
+   es/pt) loads this file, so a change here reaches all of them without regenerating a page.
+   How it finds the cameras: a page may register window.MCCamMap = { list: fn -> cameras,
+   open: fn(camera, pan) } (the ski pages do, because they group cameras per pole); otherwise
+   the page conventions are used as they are: `let CAMS` (objects with lat, lon, title, route,
+   mp, img, stream), `function showCard`, `function camCard`, optional `function playStream`,
+   and the page-level `map`. The card is `.co-card` or `.sk-card`.
+   Order: the cameras on the same route as the open one, by mile marker (a driver steps along
+   the road); a camera with no route or no mile falls back to nearest-first from the open one.
+   ‹ › buttons at the top of the card and the keyboard arrows while the card is open. The map
+   pans to each camera as you step. */
+(function () {
+  var card = document.querySelector('.co-card, .sk-card');
+  if (!card) return;
+  function pageMap() { try { return (typeof map !== 'undefined' && map && map.panTo) ? map : null; } catch (e) { return null; } }
+  function api() {
+    if (window.MCCamMap && typeof window.MCCamMap.list === 'function' && typeof window.MCCamMap.open === 'function') return window.MCCamMap;
+    try {
+      if (typeof CAMS !== 'undefined' && Array.isArray(CAMS) && typeof showCard === 'function' && typeof camCard === 'function') {
+        return { list: function () { return CAMS; }, open: function (c, pan) { showCard(camCard(c)); if (c.stream && typeof playStream === 'function') playStream(c.stream); var m = pageMap(); if (pan && m) m.panTo([c.lat, c.lon]); } };
+      }
+    } catch (e) {}
+    return null;
+  }
+  function routeKey(c) { return String(c.route || '').toUpperCase().replace(/\s+/g, ' ').trim(); }
+  function dist(a, b) { var p = Math.PI / 180, x = (b.lat - a.lat) * p, y = (b.lon - a.lon) * p, h = Math.sin(x / 2) * Math.sin(x / 2) + Math.cos(a.lat * p) * Math.cos(b.lat * p) * Math.sin(y / 2) * Math.sin(y / 2); return 2 * 6371 * Math.asin(Math.sqrt(h)); }
+  // The sequence the arrows walk, and where the open camera sits in it.
+  function sequence(all, cur) {
+    var r = routeKey(cur), list = [], label;
+    if (r && isFinite(+cur.mp) && +cur.mp > 0) {
+      list = all.filter(function (c) { return routeKey(c) === r && isFinite(+c.mp) && +c.mp > 0; });
+      list.sort(function (a, b) { return (+a.mp - +b.mp) || String(a.title).localeCompare(String(b.title)); });
+      label = 'on ' + cur.route + ' by mile';
+    }
+    if (list.length < 2) {
+      list = all.slice().sort(function (a, b) { return dist(cur, a) - dist(cur, b); });
+      label = 'nearest first';
+    }
+    return { list: list, i: list.indexOf(cur), label: label };
+  }
+  // Which camera is the card showing? Match the image (before the cache-buster), then the title.
+  function current(all) {
+    var img = card.querySelector('img.cc-img'), title = card.querySelector('.cc-title');
+    var src = img ? String(img.getAttribute('src') || '').replace(/[?&]t=\d+$/, '') : '';
+    var t = title ? title.textContent.replace(/^\d+ cameras at this spot/, '').trim() : '';
+    var hit = null;
+    if (src) hit = all.filter(function (c) { return c.img && String(c.img).replace(/[?&]t=\d+$/, '') === src; })[0];
+    if (!hit && t) hit = all.filter(function (c) { return String(c.title || '').trim() === t; })[0];
+    return hit || null;
+  }
+  var busy = false, curSeq = null;
+  function step(d) {
+    if (!curSeq || curSeq.i < 0) return;
+    var A = api(); if (!A) return;
+    var n = curSeq.list.length, j = ((curSeq.i + d) % n + n) % n;
+    busy = true; A.open(curSeq.list[j], true); busy = false;
+    decorate();
+  }
+  function decorate() {
+    if (card.style.display === 'none' || card.querySelector('.cm-camnav')) return;
+    var A = api(); if (!A) return;
+    var all = A.list(); if (!all || all.length < 2) return;
+    var cur = current(all); if (!cur) { curSeq = null; return; }
+    curSeq = sequence(all, cur); if (curSeq.i < 0) { curSeq = null; return; }
+    var nav = document.createElement('div'); nav.className = 'cm-camnav';
+    nav.innerHTML = '<button type="button" class="cm-prev" aria-label="Previous camera">‹</button><span>Camera ' + (curSeq.i + 1) + ' of ' + curSeq.list.length + ', ' + curSeq.label + '</span><button type="button" class="cm-next" aria-label="Next camera">›</button>';
+    nav.querySelector('.cm-prev').addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+    nav.querySelector('.cm-next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+    var title = card.querySelector('.cc-title');
+    if (title) card.insertBefore(nav, title); else card.appendChild(nav);
+  }
+  new MutationObserver(function () { if (!busy) decorate(); }).observe(card, { childList: true });
+  document.addEventListener('keydown', function (e) {
+    if (card.style.display === 'none' || !card.querySelector('.cm-camnav')) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } else if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+  });
+})();

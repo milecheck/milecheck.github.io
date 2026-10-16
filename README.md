@@ -15,6 +15,14 @@ or behave there, once, and every map gets it. Do not patch map pages one by one.
   missing it). The six map generators already emit the tags.
 - Map tiles: Esri (`server.arcgisonline.com`). CARTO's free tiles return an "API KEY
   REQUIRED" image since 2026-10-03.
+- Camera card arrows (added 2026-10-16, Leah: "want arrows to skip thru cams ... need this fix on
+  many pages ... make rule in future"): the ‹ › buttons on every camera card, and the keyboard
+  arrows while the card is open, live in map-kit.js section 5. They step along the open camera's
+  route by mile marker, nearest-first when the camera has no route or mile, and pan the map to
+  each one. RULE: camera-card behaviour goes in map-kit, never in a page generator. A page only
+  has to keep the conventions every camera map already uses (`let CAMS` with lat, lon, title,
+  route, mp, img, stream; `function showCard`; `function camCard`; the page-level `map`), or
+  register `window.MCCamMap = { list, open }` when it groups cameras (the ski pages do).
 - Before asking to push a map change: share a preview link and let Leah look first.
 
 ## Analytics + attribution (added 2026-09-14)
