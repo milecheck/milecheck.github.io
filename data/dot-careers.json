@@ -1,0 +1,383 @@
+{
+ "AL": {
+  "agency": "Alabama Department of Transportation",
+  "short": "ALDOT",
+  "url": "https://www.dot.state.al.us/business/careers.html",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "AK": {
+  "agency": "Alaska Department of Transportation & Public Facilities",
+  "short": "DOT&PF",
+  "url": "https://alaska.attract.neogov.com/dotpf",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "State NEOGOV board for DOT&PF; dot.alaska.gov/job-opportunities links to it but blocks automated fetch."
+ },
+ "AZ": {
+  "agency": "Arizona Department of Transportation",
+  "short": "ADOT",
+  "url": "https://azdot.gov/about/careers-adot",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "AR": {
+  "agency": "Arkansas Department of Transportation",
+  "short": "ARDOT",
+  "url": "https://ardot.gov/?p=50",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "CA": {
+  "agency": "California Department of Transportation",
+  "short": "Caltrans",
+  "url": "https://dot.ca.gov/programs/human-resources/talent-acquisition-recruitment",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "CO": {
+  "agency": "Colorado Department of Transportation",
+  "short": "CDOT",
+  "url": "https://www.codot.gov/about/employment",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "CT": {
+  "agency": "Connecticut Department of Transportation",
+  "short": "CTDOT",
+  "url": "https://portal.ct.gov/dot/ct-careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "DE": {
+  "agency": "Delaware Department of Transportation",
+  "short": "DelDOT",
+  "url": "https://deldot.gov/About/employment/",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "DC": {
+  "agency": "District Department of Transportation",
+  "short": "DDOT",
+  "url": "https://careers.dc.gov/",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16. DC hires through the city careers site."
+ },
+ "FL": {
+  "agency": "Florida Department of Transportation",
+  "short": "FDOT",
+  "url": "https://www.fdot.gov/agencyresources/employment.shtm",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "GA": {
+  "agency": "Georgia Department of Transportation",
+  "short": "GDOT",
+  "url": "https://employment-gdot.hub.arcgis.com/",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16. Linked from the GDOT homepage."
+ },
+ "HI": {
+  "agency": "Hawaii Department of Transportation",
+  "short": "HDOT",
+  "url": "https://hidot.hawaii.gov/jobs/",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "ID": {
+  "agency": "Idaho Transportation Department",
+  "short": "ITD",
+  "url": "https://itd.idaho.gov/careers/",
+  "cdl": "yes",
+  "checked": "2026-10-16",
+  "note": "Page says a Class A CDL is required within 60 days of hire for the listed maintenance track."
+ },
+ "IL": {
+  "agency": "Illinois Department of Transportation",
+  "short": "IDOT",
+  "url": "https://idot.illinois.gov/careers.html",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "IN": {
+  "agency": "Indiana Department of Transportation",
+  "short": "INDOT",
+  "url": "https://www.in.gov/indot/careers-with-indot/",
+  "cdl": "yes",
+  "checked": "2026-10-16",
+  "note": "Page: valid CDL or ability to obtain within 90 days; INDOT pays CDL training."
+ },
+ "IA": {
+  "agency": "Iowa Department of Transportation",
+  "short": "Iowa DOT",
+  "url": "https://iowa.attract.neogov.com/recruitment/p/dot",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "State NEOGOV board; linked as Careers from iowadot.gov."
+ },
+ "KS": {
+  "agency": "Kansas Department of Transportation",
+  "short": "KDOT",
+  "url": "https://www.ksdot.gov/about/employment",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "KY": {
+  "agency": "Kentucky Transportation Cabinet",
+  "short": "KYTC",
+  "url": "https://transportation.ky.gov/pages/careers.aspx",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "LA": {
+  "agency": "Louisiana Department of Transportation and Development",
+  "short": "DOTD",
+  "url": "https://dotd.la.gov/about/office-of-management-and-finance/human-resources/career-center/all-job-openings/",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "ME": {
+  "agency": "Maine Department of Transportation",
+  "short": "MaineDOT",
+  "url": "https://www.maine.gov/dot/about/careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "MD": {
+  "agency": "Maryland Department of Transportation State Highway Administration",
+  "short": "MDOT SHA",
+  "url": "https://roads.maryland.gov/mdotsha/pages/Index.aspx?PageId=730",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "MA": {
+  "agency": "Massachusetts Department of Transportation",
+  "short": "MassDOT",
+  "url": "https://www.mass.gov/massdot-careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "MI": {
+  "agency": "Michigan Department of Transportation",
+  "short": "MDOT",
+  "url": "https://www.michigan.gov/mdot/careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "MN": {
+  "agency": "Minnesota Department of Transportation",
+  "short": "MnDOT",
+  "url": "https://www.dot.state.mn.us/careers/",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Page mentions free CDL info sessions, no requirement stated."
+ },
+ "MS": {
+  "agency": "Mississippi Department of Transportation",
+  "short": "MDOT",
+  "url": "https://mdot.ms.gov/careers/",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "MO": {
+  "agency": "Missouri Department of Transportation",
+  "short": "MoDOT",
+  "url": "https://www.modot.org/careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "MT": {
+  "agency": "Montana Department of Transportation",
+  "short": "MDT",
+  "url": "https://www.mdt.mt.gov/jobs/",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Page links entry-level driver training and CDL info; no requirement stated."
+ },
+ "NE": {
+  "agency": "Nebraska Department of Transportation",
+  "short": "NDOT",
+  "url": "https://dot.nebraska.gov/about/careers/",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "NV": {
+  "agency": "Nevada Department of Transportation",
+  "short": "NDOT",
+  "url": "https://www.dot.nv.gov/doing-business/careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "NH": {
+  "agency": "New Hampshire Department of Transportation",
+  "short": "NHDOT",
+  "url": "https://www.dot.nh.gov/employment",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "NJ": {
+  "agency": "New Jersey Department of Transportation",
+  "short": "NJDOT",
+  "url": "https://dot.nj.gov/transportation/careers/jobopeningshr.shtml",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Loaded via web fetch; 403 to curl."
+ },
+ "NM": {
+  "agency": "New Mexico Department of Transportation",
+  "short": "NMDOT",
+  "url": "https://www.dot.nm.gov/careers/",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "NY": {
+  "agency": "New York State Department of Transportation",
+  "short": "NYSDOT",
+  "url": "https://www.ny.gov/programs/nysdot-employment-opportunities",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Hosted on ny.gov (state portal); page offers CDL training."
+ },
+ "NC": {
+  "agency": "North Carolina Department of Transportation",
+  "short": "NCDOT",
+  "url": "https://www.ncdot.gov/about-us/our-people/careers/Pages/default.aspx",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "ND": {
+  "agency": "North Dakota Department of Transportation",
+  "short": "NDDOT",
+  "url": "https://www.dot.nd.gov/about-nddot/careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "OH": {
+  "agency": "Ohio Department of Transportation",
+  "short": "ODOT",
+  "url": "https://www.transportation.ohio.gov/about/careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "OK": {
+  "agency": "Oklahoma Department of Transportation",
+  "short": "ODOT",
+  "url": "https://oklahoma.gov/odot/about-us/careers.html",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "OR": {
+  "agency": "Oregon Department of Transportation",
+  "short": "ODOT",
+  "url": "https://www.oregon.gov/odot/about/pages/career-opportunities.aspx",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "PA": {
+  "agency": "Pennsylvania Department of Transportation",
+  "short": "PennDOT",
+  "url": "https://www.pa.gov/agencies/penndot/employment",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Lists CDL operator roles, no maintenance-worker requirement stated."
+ },
+ "RI": {
+  "agency": "Rhode Island Department of Transportation",
+  "short": "RIDOT",
+  "url": "https://apply.ri.gov/",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "State job portal linked from dot.ri.gov homepage; titled RIDOT Jobs. RIDOT has no separate careers page."
+ },
+ "SC": {
+  "agency": "South Carolina Department of Transportation",
+  "short": "SCDOT",
+  "url": "https://www.scdot.org/inside/employment-home.html",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "SD": {
+  "agency": "South Dakota Department of Transportation",
+  "short": "SDDOT",
+  "url": "https://dot.sd.gov/inside-sddot/about-sddot/careers-at-the-sddot/",
+  "cdl": "yes",
+  "checked": "2026-10-16",
+  "note": "Page offers CDL training assistance; state postings require Class A CDL within 120 days of hire."
+ },
+ "TN": {
+  "agency": "Tennessee Department of Transportation",
+  "short": "TDOT",
+  "url": "https://www.tn.gov/tdot/human-resources-home/tdot-careers.html",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Checked in a browser 2026-10-16."
+ },
+ "TX": {
+  "agency": "Texas Department of Transportation",
+  "short": "TxDOT",
+  "url": "https://www.txdot.gov/about/careers.html",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "UT": {
+  "agency": "Utah Department of Transportation",
+  "short": "UDOT",
+  "url": "https://connect.udot.utah.gov/public/rotational-engineer-program/",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Engineering entry-level program page (loaded via web fetch). Main careers page is blocked to automated fetch; UDOT HR sends applicants to governmentjobs.com/careers/utah."
+ },
+ "VT": {
+  "agency": "Vermont Agency of Transportation",
+  "short": "VTrans",
+  "url": "https://vtrans.vermont.gov/aot-recruitment",
+  "cdl": "no",
+  "checked": "2026-10-16",
+  "note": "Page lists a bonus for both CDL and non-CDL holders hired into maintenance."
+ },
+ "VA": {
+  "agency": "Virginia Department of Transportation",
+  "short": "VDOT",
+  "url": "https://www.vdot.virginia.gov/careers/",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "WA": {
+  "agency": "Washington State Department of Transportation",
+  "short": "WSDOT",
+  "url": "https://wsdot.wa.gov/about/employment",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "WV": {
+  "agency": "West Virginia Department of Transportation",
+  "short": "WVDOT",
+  "url": "https://transportation.wv.gov/careers",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "WI": {
+  "agency": "Wisconsin Department of Transportation",
+  "short": "WisDOT",
+  "url": "https://wisconsindot.gov/Pages/about-wisdot/careers/default.aspx",
+  "cdl": "not stated",
+  "checked": "2026-10-16"
+ },
+ "WY": {
+  "agency": "Wyoming Department of Transportation",
+  "short": "WYDOT",
+  "url": "https://www.dot.state.wy.us/home/Human_Resources.html",
+  "cdl": "not stated",
+  "checked": "2026-10-16",
+  "note": "Page covers CDL applicants and Clearinghouse registration; requirement per job not stated."
+ }
+}

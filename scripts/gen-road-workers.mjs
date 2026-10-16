@@ -30,7 +30,7 @@ ${sortJs}
     <h2>Source</h2>
     <p><a href="https://www.bls.gov/oes/current/oes474051.htm" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics, highway maintenance workers (47-4051)</a>, May ${year} estimates. Updated each spring.</p>
     <h2>On the road</h2>
-    <ul><li><a href="/road-conditions/">Road conditions by state</a></li><li><a href="/snowplows/">Where are the snowplows?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li></ul>`;
+    <ul><li><a href="/road-workers/dot-jobs/">How do you get a job at your state DOT?</a></li><li><a href="/road-conditions/">Road conditions by state</a></li><li><a href="/snowplows/">Where are the snowplows?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'How much do highway maintenance workers make in each state?';
@@ -44,3 +44,29 @@ const html = headA + `  <title>${esc(title)}</title>\n  <meta name="description"
 mkdirSync('road-workers', { recursive: true });
 writeFileSync('road-workers/index.html', html.replace(/href="\.\.\//g, 'href="/').replace(/src="\.\.\//g, 'src="/'));
 console.log(`road workers: ${rows.length} states, US median ${$(us.median)}`);
+
+// ---- /road-workers/dot-jobs/: official careers page for every state DOT (data/dot-careers.json, checked by hand) ----
+{
+  const C = JSON.parse(readFileSync('data/dot-careers.json', 'utf8'));
+  const list = Object.entries(C).map(([st, v]) => ({ st, name: NAMES[st], ...v })).sort((a, b) => a.name.localeCompare(b.name));
+  const pay = st => D.states[st] ? $(D.states[st][OCC].median) : 'Not published';
+  const rows2 = list.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.short || r.agency)} careers</a></td><td ${td}>${pay(r.st)}</td></tr>`).join('\n');
+  const h1b = 'How do you get a job at your state DOT?';
+  const body2 = `    <p class="lede"><strong>Every state hires its own road crews. Find your state below and go to its official careers page.</strong></p>
+    <p>State DOTs hire highway maintenance workers, equipment operators, engineers, inspectors and office staff. Many maintenance jobs list a commercial driver's license (CDL), because crews drive plows and dump trucks. Each job posting says what it needs.</p>
+    <h2>Where are the job openings for each state DOT?</h2>
+    <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.45"><thead><tr><th ${th}>State</th><th ${th}>Official careers page</th><th ${th}>Median pay, highway maintenance</th></tr></thead><tbody>
+${rows2}
+</tbody></table></div>
+    <p>Links checked October 16, 2026. Pay is the BLS median for highway maintenance workers in that state, all employers, May ${year}. <a href="/road-workers/">See pay and jobs by state</a>.</p>
+    <h2>What does the job look like through the year?</h2>
+    <p>In winter, crews plow and treat the roads, often through the night. In spring and summer they patch pavement, fix guardrails and signs, and mow along the road. All year they clear crashes and debris so the road can reopen.</p>
+    <p>If you drive past a crew, slow down and give them room.</p>`;
+  const ld2 = { '@context': 'https://schema.org', '@type': 'WebPage', name: h1b, url: 'https://milecheckapp.com/road-workers/dot-jobs/' };
+  const html2 = headA + `  <title>${esc(h1b)} Careers pages for all 50 states | MileCheck</title>\n  <meta name="description" content="Official careers pages for every state department of transportation, with median pay for highway maintenance workers in each state.">\n  <link rel="canonical" href="https://milecheckapp.com/road-workers/dot-jobs/">\n  <meta property="og:title" content="${esc(h1b)}">\n  <meta property="og:url" content="https://milecheckapp.com/road-workers/dot-jobs/">\n  <meta property="og:type" content="article">\n` +
+    headB.replace(/href="\.\.\//g, 'href="/') + `  <script type="application/ld+json">${JSON.stringify(ld2)}</script>\n` + headC.replace(/href="\.\.\//g, 'href="/') +
+    `  <article class="art">\n<div class="eyebrow">Road crews</div>\n    <h1>${esc(h1b)}</h1>\n${body2}\n` + tail;
+  mkdirSync('road-workers/dot-jobs', { recursive: true });
+  writeFileSync('road-workers/dot-jobs/index.html', html2.replace(/href="\.\.\//g, 'href="/').replace(/src="\.\.\//g, 'src="/'));
+  console.log(`dot jobs: ${list.length} careers links`);
+}
