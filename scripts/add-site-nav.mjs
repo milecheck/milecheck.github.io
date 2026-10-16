@@ -12,7 +12,7 @@ const VERSION = '20261015-1';
 export const LINKS = [
   ['home', 'Home', '/'], ['maps', 'Maps', '/maps/'], ['cameras', 'Cameras', '/cameras/'],
   ['states', 'United States', '/states/'], ['canada', 'Canada', '/canada/'], ['story', 'Story', '/#story'],
-  ['b2b', 'B2B', '/partners/'], ['pricing', 'Pricing', '/#pricing'], ['blog', 'Blog', '/blog/'],
+  ['b2b', 'B2B', '/partners/'], ['blog', 'Blog', '/blog/'],
   ['search', 'Search', '/search/'], ['get', 'Get the app', '/get/'],
 ];
 const I75 = new Set(['florida', 'georgia', 'kentucky', 'michigan', 'ohio', 'tennessee']);

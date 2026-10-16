@@ -12,7 +12,7 @@ const root = fileURLToPath(new URL('../../', import.meta.url));
 
 test('every canonical header has the required absolute link order and one actual active section', () => {
   const expected = [['Home', '/'], ['Maps', '/maps/'], ['Cameras', '/cameras/'], ['United States', '/states/'],
-    ['Canada', '/canada/'], ['Story', '/#story'], ['B2B', '/partners/'], ['Pricing', '/#pricing'],
+    ['Canada', '/canada/'], ['Story', '/#story'], ['B2B', '/partners/'],
     ['Blog', '/blog/'], ['Search', '/search/'], ['Get the app', '/get/']];
   assert.deepEqual(LINKS.map(([, label, url]) => [label, url]), expected);
   for (const [file, section] of [['index.html', 'home'], ['maps/index.html', 'maps'], ['maps/mile-markers/index.html', 'maps'],
@@ -33,7 +33,7 @@ test('home tabs and its download modal retain their existing delegated handlers'
   const transformed = transformPage(original, 'index.html');
   const header = transformed.match(/<!-- site-nav:header -->[\s\S]*?<!-- \/site-nav:header -->/)[0];
   assert.match(header, /href="\/#story" data-nav-link="story" data-tab="story"/);
-  assert.match(header, /href="\/#pricing" data-nav-link="pricing" data-tab="home" data-goto="pricing"/);
+  assert.doesNotMatch(header, /data-nav-link="pricing"/);
   assert.match(header, /href="\/get\/" data-nav-link="get"[^>]*data-dl/);
   const scripts = [...original.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m => m[1]).filter(s => s.includes('function show(tab)') || s.includes('dlModal'));
   assert.equal(scripts.length, 2);
@@ -115,18 +115,14 @@ function harness(pathname = '/', hash = '') {
   };
 }
 
-test('Home and Pricing active states follow the actual route/hash, including history and homepage clicks', async () => {
-  assert.equal(activeSection('/', ''), 'home'); assert.equal(activeSection('/', '#pricing'), 'pricing');
-  assert.equal(activeSection('/index.html', '#story'), 'story'); assert.equal(activeSection('/maps/', '#pricing'), 'maps');
+test('Home and Story active states follow the actual route/hash, including history and homepage clicks', async () => {
+  assert.equal(activeSection('/', ''), 'home');
+  assert.equal(activeSection('/index.html', '#story'), 'story');
   assert.equal(activeSection('/canada/', ''), 'canada'); assert.equal(activeSection('/road-conditions/british-columbia/', ''), 'canada');
   const page = harness(); assert.deepEqual(page.active(), ['home']);
-  const pricing = page.links.find(l => l.getAttribute('data-nav-link') === 'pricing');
-  page.nav.emit('click', { target: pricing });
-  page.win.location.hash = '#pricing'; // Existing delegated home handler runs later in the same click.
-  await Promise.resolve(); assert.deepEqual(page.active(), ['pricing']);
+  assert.equal(page.links.find(l => l.getAttribute('data-nav-link') === 'pricing'), undefined);
   page.win.location.hash = '#story'; page.win.emit('hashchange'); assert.deepEqual(page.active(), ['story']);
   page.win.location.hash = ''; page.win.emit('popstate'); assert.deepEqual(page.active(), ['home']);
-  assert.equal(page.links.find(l => l.getAttribute('data-nav-link') === 'pricing').getAttribute('aria-current'), null);
 });
 
 test('mobile controls expose expansion state, focus the links and restore focus on Escape', () => {
