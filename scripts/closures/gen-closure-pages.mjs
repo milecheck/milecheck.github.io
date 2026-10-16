@@ -25,7 +25,8 @@ const SITE = 'https://milecheckapp.com';
 const stateSlug = s => s.toLowerCase().replace(/ /g, '-');
 // Header and footer come from a live road-conditions page so these pages match the site.
 const shell = fs.readFileSync('road-conditions/washington/index.html', 'utf8');
-const HEADER = shell.match(/<header class="site-header">[\s\S]*?<\/header>/)[0].replace(' class="active"', '');
+// The shared menu (10/15) wraps the header in site-nav markers; older pages had a bare site-header.
+const HEADER = (shell.match(/<!-- site-nav:header -->[\s\S]*?<!-- \/site-nav:header -->/) || shell.match(/<header class="site-header">[\s\S]*?<\/header>/))[0].replace(' class="active"', '').replace(/ aria-current="page"/g, '');
 const FOOTER = shell.match(/<footer class="site-footer">[\s\S]*?<\/footer>\s*<script>[\s\S]*?<\/script>/)[0]
   .replace(/road-conditions-washington/g, 'closures');
 const trim = (t, n) => t.length <= n ? t : t.slice(0, n - 1).replace(/\s+\S*$/, '') + '…';
