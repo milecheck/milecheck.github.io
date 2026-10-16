@@ -1,0 +1,296 @@
+{
+ "from": "2026-09-25T20:00:00.000Z",
+ "to": "2026-10-16T06:56:19.776Z",
+ "crashes": 16436,
+ "median": 48,
+ "states": [
+  {
+   "st": "AL",
+   "name": "Alabama",
+   "n": 692,
+   "median": 48,
+   "p25": 32,
+   "p75": 64
+  },
+  {
+   "st": "AZ",
+   "name": "Arizona",
+   "n": 940,
+   "median": 64,
+   "p25": 48,
+   "p75": 112
+  },
+  {
+   "st": "BC",
+   "name": "British Columbia",
+   "n": 102,
+   "median": 48,
+   "p25": 31,
+   "p75": 112
+  },
+  {
+   "st": "CO",
+   "name": "Colorado",
+   "n": 437,
+   "median": 48,
+   "p25": 32,
+   "p75": 80
+  },
+  {
+   "st": "CT",
+   "name": "Connecticut",
+   "n": 242,
+   "median": 32,
+   "p25": 16,
+   "p75": 64
+  },
+  {
+   "st": "DE",
+   "name": "Delaware",
+   "n": 76,
+   "median": 48,
+   "p25": 16,
+   "p75": 96
+  },
+  {
+   "st": "FL",
+   "name": "Florida",
+   "n": 2291,
+   "median": 49,
+   "p25": 32,
+   "p75": 96
+  },
+  {
+   "st": "GA",
+   "name": "Georgia",
+   "n": 19,
+   "median": 49,
+   "p25": 32,
+   "p75": 144
+  },
+  {
+   "st": "ID",
+   "name": "Idaho",
+   "n": 55,
+   "median": 96,
+   "p25": 48,
+   "p75": 144
+  },
+  {
+   "st": "IN",
+   "name": "Indiana",
+   "n": 102,
+   "median": 47,
+   "p25": 32,
+   "p75": 64
+  },
+  {
+   "st": "KS",
+   "name": "Kansas",
+   "n": 279,
+   "median": 32,
+   "p25": 16,
+   "p75": 48
+  },
+  {
+   "st": "LA",
+   "name": "Louisiana",
+   "n": 140,
+   "median": 32,
+   "p25": 16,
+   "p75": 64
+  },
+  {
+   "st": "MD",
+   "name": "Maryland",
+   "n": 350,
+   "median": 32,
+   "p25": 16,
+   "p75": 63
+  },
+  {
+   "st": "MA",
+   "name": "Massachusetts",
+   "n": 552,
+   "median": 32,
+   "p25": 16,
+   "p75": 48
+  },
+  {
+   "st": "MI",
+   "name": "Michigan",
+   "n": 667,
+   "median": 32,
+   "p25": 17,
+   "p75": 64
+  },
+  {
+   "st": "MN",
+   "name": "Minnesota",
+   "n": 1533,
+   "median": 48,
+   "p25": 32,
+   "p75": 112
+  },
+  {
+   "st": "MS",
+   "name": "Mississippi",
+   "n": 75,
+   "median": 96,
+   "p25": 48,
+   "p75": 113
+  },
+  {
+   "st": "MO",
+   "name": "Missouri",
+   "n": 213,
+   "median": 32,
+   "p25": 16,
+   "p75": 48
+  },
+  {
+   "st": "MT",
+   "name": "Montana",
+   "n": 87,
+   "median": 112,
+   "p25": 64,
+   "p75": 240
+  },
+  {
+   "st": "NE",
+   "name": "Nebraska",
+   "n": 52,
+   "median": 48,
+   "p25": 32,
+   "p75": 96
+  },
+  {
+   "st": "NV",
+   "name": "Nevada",
+   "n": 143,
+   "median": 48,
+   "p25": 32,
+   "p75": 96
+  },
+  {
+   "st": "NJ",
+   "name": "New Jersey",
+   "n": 529,
+   "median": 32,
+   "p25": 16,
+   "p75": 62
+  },
+  {
+   "st": "NM",
+   "name": "New Mexico",
+   "n": 38,
+   "median": 80,
+   "p25": 32,
+   "p75": 173
+  },
+  {
+   "st": "NY",
+   "name": "New York",
+   "n": 340,
+   "median": 48,
+   "p25": 32,
+   "p75": 80
+  },
+  {
+   "st": "NC",
+   "name": "North Carolina",
+   "n": 944,
+   "median": 48,
+   "p25": 17,
+   "p75": 65
+  },
+  {
+   "st": "OH",
+   "name": "Ohio",
+   "n": 1009,
+   "median": 32,
+   "p25": 16,
+   "p75": 64
+  },
+  {
+   "st": "OR",
+   "name": "Oregon",
+   "n": 605,
+   "median": 48,
+   "p25": 32,
+   "p75": 80
+  },
+  {
+   "st": "PA",
+   "name": "Pennsylvania",
+   "n": 342,
+   "median": 48,
+   "p25": 32,
+   "p75": 64
+  },
+  {
+   "st": "RI",
+   "name": "Rhode Island",
+   "n": 37,
+   "median": 17,
+   "p25": 16,
+   "p75": 32
+  },
+  {
+   "st": "SC",
+   "name": "South Carolina",
+   "n": 275,
+   "median": 48,
+   "p25": 32,
+   "p75": 80
+  },
+  {
+   "st": "TN",
+   "name": "Tennessee",
+   "n": 145,
+   "median": 48,
+   "p25": 31,
+   "p75": 64
+  },
+  {
+   "st": "UT",
+   "name": "Utah",
+   "n": 230,
+   "median": 48,
+   "p25": 32,
+   "p75": 80
+  },
+  {
+   "st": "VA",
+   "name": "Virginia",
+   "n": 1580,
+   "median": 48,
+   "p25": 32,
+   "p75": 64
+  },
+  {
+   "st": "WA",
+   "name": "Washington",
+   "n": 343,
+   "median": 47,
+   "p25": 16,
+   "p75": 80
+  },
+  {
+   "st": "WI",
+   "name": "Wisconsin",
+   "n": 445,
+   "median": 34,
+   "p25": 16,
+   "p75": 80
+  },
+  {
+   "st": "WY",
+   "name": "Wyoming",
+   "n": 36,
+   "median": 80,
+   "p25": 48,
+   "p75": 128
+  }
+ ]
+}
