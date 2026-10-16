@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-15",
+ "generated": "2026-10-16",
  "families": [
   "home",
   "cameras",
@@ -543,6 +543,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:chain-laws",
+   "path": "/chain-laws/",
+   "title": "Which states have chain laws? Chain and traction laws by state",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:chains-or-all-season-tires",
    "path": "/chains-or-all-season-tires/",
    "title": "Do you need chains or are all-season tires enough?",
@@ -693,6 +699,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:highway-vs-interstate",
+   "path": "/highway-vs-interstate/",
+   "title": "Highway vs. Interstate: What's the Difference?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:hit-a-deer-what-to-do",
    "path": "/hit-a-deer-what-to-do/",
    "title": "What should you do if you hit a deer?",
@@ -819,6 +831,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:rest-areas",
+   "path": "/rest-areas/",
+   "title": "Can you sleep at a rest area? Rules by state",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:road-street-avenue-difference",
    "path": "/road-street-avenue-difference/",
    "title": "Road vs Street vs Avenue: What Road Names Mean",
@@ -834,6 +852,12 @@
    "key": "basics:roadside-wildfire-causes",
    "path": "/roadside-wildfire-causes/",
    "title": "What Causes Roadside Wildfires (and How to Avoid One)",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:runaway-truck-ramp",
+   "path": "/runaway-truck-ramp/",
+   "title": "What Is a Runaway Truck Ramp?",
    "sponsor": "house"
   },
   {
@@ -855,6 +879,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:seasonal",
+   "path": "/seasonal/",
+   "title": "Which mountain roads close for the winter? Seasonal closures by state",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:snow-tires-wa-or-co",
    "path": "/snow-tires-wa-or-co/",
    "title": "Do you need snow tires in Washington, Oregon or Colorado?",
@@ -867,9 +897,21 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:street-vs-avenue",
+   "path": "/street-vs-avenue/",
+   "title": "Street vs. Avenue: What's the Difference?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:three-digit-interstate-numbers",
    "path": "/three-digit-interstate-numbers/",
    "title": "What 3-Digit Interstate Numbers Mean (Loops vs Spurs)",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:tv",
+   "path": "/tv/",
+   "title": "MileCheck board setup",
    "sponsor": "house"
   },
   {
@@ -888,6 +930,18 @@
    "key": "basics:what-are-rumble-strips",
    "path": "/what-are-rumble-strips/",
    "title": "What Are Rumble Strips For?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:what-do-r1-r2-r3-chain-controls-mean-on-i-80",
+   "path": "/what-do-r1-r2-r3-chain-controls-mean-on-i-80/",
+   "title": "What do R1, R2 and R3 chain controls mean on I-80 over Donner Pass?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:what-highway-am-i-on",
+   "path": "/what-highway-am-i-on/",
+   "title": "What highway am I on?",
    "sponsor": "house"
   },
   {
@@ -915,9 +969,33 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:what-mile-marker-am-i-at",
+   "path": "/what-mile-marker-am-i-at/",
+   "title": "What mile marker am I at?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:who-maintains-the-roads",
    "path": "/who-maintains-the-roads/",
    "title": "Who Maintains the Roads? Federal, State, County & City",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:why-does-i-70-close-in-colorado",
+   "path": "/why-does-i-70-close-in-colorado/",
+   "title": "Why does I-70 close so often in Colorado?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:why-does-i-80-close-in-wyoming",
+   "path": "/why-does-i-80-close-in-wyoming/",
+   "title": "Why does I-80 close so often in Wyoming?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:why-does-snoqualmie-pass-close",
+   "path": "/why-does-snoqualmie-pass-close/",
+   "title": "Why does Snoqualmie Pass close so often in winter?",
    "sponsor": "house"
   },
   {
@@ -1127,31 +1205,31 @@
   {
    "key": "cameras:alabama",
    "path": "/cameras/alabama/",
-   "title": "Alabama Traffic Cameras — Live ALDOT (ALGO Traffic) Highway Cams",
+   "title": "ALDOT Cameras in Alabama",
    "sponsor": "house"
   },
   {
    "key": "cameras:alaska",
    "path": "/cameras/alaska/",
-   "title": "Alaska Traffic Cameras — Live AKDOT (511 Alaska) Highway Cams",
+   "title": "AKDOT Cameras in Alaska",
    "sponsor": "house"
   },
   {
    "key": "cameras:alberta",
    "path": "/cameras/alberta/",
-   "title": "Alberta Traffic Cameras — Live 511 Alberta Highway Cams",
+   "title": "511 Alberta Cameras in Alberta",
    "sponsor": "house"
   },
   {
    "key": "cameras:arizona",
    "path": "/cameras/arizona/",
-   "title": "Arizona Traffic Cameras — Live ADOT (AZ511) Highway Cams",
+   "title": "ADOT Cameras in Arizona",
    "sponsor": "house"
   },
   {
    "key": "cameras:arkansas",
    "path": "/cameras/arkansas/",
-   "title": "Arkansas Traffic Cameras — Live ARDOT (IDrive Arkansas) Highway Cams",
+   "title": "ARDOT Cameras in Arkansas",
    "sponsor": "house"
   },
   {
@@ -1169,7 +1247,7 @@
   {
    "key": "cameras:british-columbia",
    "path": "/cameras/british-columbia/",
-   "title": "British Columbia Traffic Cameras — Live DriveBC (BC Ministry of Transportation) Highway Cams",
+   "title": "DriveBC Cameras in British Columbia",
    "sponsor": "house"
   },
   {
@@ -1181,7 +1259,7 @@
   {
    "key": "cameras:california",
    "path": "/cameras/california/",
-   "title": "Caltrans Cameras | California Highway Map",
+   "title": "Caltrans Cameras in California",
    "sponsor": "house"
   },
   {
@@ -1205,13 +1283,13 @@
   {
    "key": "cameras:connecticut",
    "path": "/cameras/connecticut/",
-   "title": "Connecticut Traffic Cameras — Live CTDOT (CTroads) Highway Cams",
+   "title": "CTDOT Cameras in Connecticut",
    "sponsor": "house"
   },
   {
    "key": "cameras:delaware",
    "path": "/cameras/delaware/",
-   "title": "Delaware Traffic Cameras — Live DelDOT Highway Cams",
+   "title": "DelDOT Cameras in Delaware",
    "sponsor": "house"
   },
   {
@@ -1223,13 +1301,13 @@
   {
    "key": "cameras:florida",
    "path": "/cameras/florida/",
-   "title": "Florida Traffic Cameras — Live FDOT (FL511) Highway Cams",
+   "title": "FDOT Cameras in Florida",
    "sponsor": "house"
   },
   {
    "key": "cameras:georgia",
    "path": "/cameras/georgia/",
-   "title": "Georgia Traffic Cameras — Live GDOT (511GA) Highway Cams",
+   "title": "GDOT Cameras in Georgia",
    "sponsor": "house"
   },
   {
@@ -1241,37 +1319,37 @@
   {
    "key": "cameras:idaho",
    "path": "/cameras/idaho/",
-   "title": "Idaho Traffic Cameras — Live ITD (511 Idaho) Highway Cams",
+   "title": "ITD Cameras in Idaho",
    "sponsor": "house"
   },
   {
    "key": "cameras:illinois",
    "path": "/cameras/illinois/",
-   "title": "Illinois Traffic Cameras — Live IDOT (Getting Around Illinois) Highway Cams",
+   "title": "IDOT Cameras in Illinois",
    "sponsor": "house"
   },
   {
    "key": "cameras:indiana",
    "path": "/cameras/indiana/",
-   "title": "Indiana Traffic Cameras — Live INDOT Highway Cams",
+   "title": "INDOT Cameras in Indiana",
    "sponsor": "house"
   },
   {
    "key": "cameras:iowa",
    "path": "/cameras/iowa/",
-   "title": "Iowa Traffic Cameras — Live Iowa DOT Highway Cams",
+   "title": "Iowa DOT Cameras in Iowa",
    "sponsor": "house"
   },
   {
    "key": "cameras:kansas",
    "path": "/cameras/kansas/",
-   "title": "Kansas Traffic Cameras — Live KDOT Highway Cams",
+   "title": "KDOT Cameras in Kansas",
    "sponsor": "house"
   },
   {
    "key": "cameras:kentucky",
    "path": "/cameras/kentucky/",
-   "title": "Kentucky Traffic Cameras — Live KYTC (GoKY) Highway Cams",
+   "title": "KYTC Cameras in Kentucky",
    "sponsor": "house"
   },
   {
@@ -1289,31 +1367,31 @@
   {
    "key": "cameras:louisiana",
    "path": "/cameras/louisiana/",
-   "title": "Louisiana Traffic Cameras — Live DOTD (511LA) Highway Cams",
+   "title": "DOTD Cameras in Louisiana",
    "sponsor": "house"
   },
   {
    "key": "cameras:maine",
    "path": "/cameras/maine/",
-   "title": "Maine Traffic Cameras — Live MaineDOT (511 Maine) Highway Cams",
+   "title": "MaineDOT Cameras in Maine",
    "sponsor": "house"
   },
   {
    "key": "cameras:manitoba",
    "path": "/cameras/manitoba/",
-   "title": "Manitoba Traffic Cameras — Live Manitoba 511 Highway Cams",
+   "title": "Manitoba 511 Cameras in Manitoba",
    "sponsor": "house"
   },
   {
    "key": "cameras:maryland",
    "path": "/cameras/maryland/",
-   "title": "Maryland Traffic Cameras — Live MDOT SHA (CHART) Highway Cams",
+   "title": "MDOT SHA Cameras in Maryland",
    "sponsor": "house"
   },
   {
    "key": "cameras:massachusetts",
    "path": "/cameras/massachusetts/",
-   "title": "Massachusetts Traffic Cameras — Live MassDOT (Mass511) Highway Cams",
+   "title": "MassDOT Cameras in Massachusetts",
    "sponsor": "house"
   },
   {
@@ -1325,7 +1403,7 @@
   {
    "key": "cameras:michigan",
    "path": "/cameras/michigan/",
-   "title": "Michigan Traffic Cameras — Live MDOT (Mi Drive) Highway Cams",
+   "title": "MDOT Cameras in Michigan",
    "sponsor": "house"
   },
   {
@@ -1337,43 +1415,43 @@
   {
    "key": "cameras:minnesota",
    "path": "/cameras/minnesota/",
-   "title": "Minnesota Traffic Cameras — Live MnDOT Highway Cams",
+   "title": "MnDOT Cameras in Minnesota",
    "sponsor": "house"
   },
   {
    "key": "cameras:missouri",
    "path": "/cameras/missouri/",
-   "title": "Missouri Traffic Cameras — Live MoDOT Highway Cams",
+   "title": "MoDOT Cameras in Missouri",
    "sponsor": "house"
   },
   {
    "key": "cameras:montana",
    "path": "/cameras/montana/",
-   "title": "Montana Traffic Cameras — Live MDT Highway Cams",
+   "title": "MDT Cameras in Montana",
    "sponsor": "house"
   },
   {
    "key": "cameras:nebraska",
    "path": "/cameras/nebraska/",
-   "title": "Nebraska Traffic Cameras — Live NDOT Highway Cams",
+   "title": "NDOT Cameras in Nebraska",
    "sponsor": "house"
   },
   {
    "key": "cameras:nevada",
    "path": "/cameras/nevada/",
-   "title": "Nevada Traffic Cameras — Live NDOT (NVRoads) Highway Cams",
+   "title": "NDOT Cameras in Nevada",
    "sponsor": "house"
   },
   {
    "key": "cameras:new-hampshire",
    "path": "/cameras/new-hampshire/",
-   "title": "New Hampshire Traffic Cameras — Live NHDOT (New England 511) Highway Cams",
+   "title": "NHDOT Cameras in New Hampshire",
    "sponsor": "house"
   },
   {
    "key": "cameras:new-mexico",
    "path": "/cameras/new-mexico/",
-   "title": "New Mexico Traffic Cameras — Live NMDOT (NMRoads) Highway Cams",
+   "title": "NMDOT Cameras in New Mexico",
    "sponsor": "house"
   },
   {
@@ -1385,7 +1463,7 @@
   {
    "key": "cameras:new-york",
    "path": "/cameras/new-york/",
-   "title": "New York Traffic Cameras — Live NYSDOT (511NY) Highway Cams",
+   "title": "NYSDOT Cameras in New York",
    "sponsor": "house"
   },
   {
@@ -1397,25 +1475,25 @@
   {
    "key": "cameras:north-carolina",
    "path": "/cameras/north-carolina/",
-   "title": "North Carolina Traffic Cameras — Live NCDOT (DriveNC) Highway Cams",
+   "title": "NCDOT Cameras in North Carolina",
    "sponsor": "house"
   },
   {
    "key": "cameras:ohio",
    "path": "/cameras/ohio/",
-   "title": "Ohio Traffic Cameras | ODOT OHGO Map",
+   "title": "ODOT Cameras in Ohio",
    "sponsor": "house"
   },
   {
    "key": "cameras:ontario",
    "path": "/cameras/ontario/",
-   "title": "Ontario Traffic Cameras — Live Ontario 511 Highway Cams",
+   "title": "Ontario 511 Cameras in Ontario",
    "sponsor": "house"
   },
   {
    "key": "cameras:oregon",
    "path": "/cameras/oregon/",
-   "title": "Oregon Traffic Cameras — Live ODOT (TripCheck) Highway Cams",
+   "title": "ODOT Cameras in Oregon",
    "sponsor": "house"
   },
   {
@@ -1427,7 +1505,7 @@
   {
    "key": "cameras:pennsylvania",
    "path": "/cameras/pennsylvania/",
-   "title": "Pennsylvania Traffic Cameras — Live PennDOT (511PA) Highway Cams",
+   "title": "PennDOT Cameras in Pennsylvania",
    "sponsor": "house"
   },
   {
@@ -1451,7 +1529,7 @@
   {
    "key": "cameras:portland",
    "path": "/cameras/portland/",
-   "title": "Portland, Oregon Traffic Cameras | TripCheck",
+   "title": "Portland ODOT Cameras",
    "sponsor": "house"
   },
   {
@@ -1469,7 +1547,7 @@
   {
    "key": "cameras:quebec",
    "path": "/cameras/quebec/",
-   "title": "Québec Traffic Cameras — Live Québec 511 (Transports Québec) Highway Cams",
+   "title": "Québec 511 Cameras in Québec",
    "sponsor": "house"
   },
   {
@@ -1505,13 +1583,13 @@
   {
    "key": "cameras:south-carolina",
    "path": "/cameras/south-carolina/",
-   "title": "South Carolina Traffic Cameras — Live SCDOT (511SC) Highway Cams",
+   "title": "SCDOT Cameras in South Carolina",
    "sponsor": "house"
   },
   {
    "key": "cameras:south-dakota",
    "path": "/cameras/south-dakota/",
-   "title": "South Dakota Traffic Cameras — Live SDDOT (SD511) Highway Cams",
+   "title": "SDDOT Cameras in South Dakota",
    "sponsor": "house"
   },
   {
@@ -1523,49 +1601,49 @@
   {
    "key": "cameras:tennessee",
    "path": "/cameras/tennessee/",
-   "title": "Tennessee Traffic Cameras — Live TDOT (SmartWay) Highway Cams",
+   "title": "TDOT Cameras in Tennessee",
    "sponsor": "house"
   },
   {
    "key": "cameras:texas",
    "path": "/cameras/texas/",
-   "title": "Texas Traffic Cameras — Live TxDOT Highway Cams",
+   "title": "TxDOT Cameras in Texas",
    "sponsor": "house"
   },
   {
    "key": "cameras:utah",
    "path": "/cameras/utah/",
-   "title": "UDOT Cameras | Utah Traffic Map",
+   "title": "UDOT Cameras in Utah",
    "sponsor": "house"
   },
   {
    "key": "cameras:vermont",
    "path": "/cameras/vermont/",
-   "title": "Vermont Traffic Cameras — Live VTrans (New England 511) Highway Cams",
+   "title": "VTrans Cameras in Vermont",
    "sponsor": "house"
   },
   {
    "key": "cameras:virginia",
    "path": "/cameras/virginia/",
-   "title": "Virginia Traffic Cameras — Live VDOT (511 Virginia) Highway Cams",
+   "title": "VDOT Cameras in Virginia",
    "sponsor": "house"
   },
   {
    "key": "cameras:washington",
    "path": "/cameras/washington/",
-   "title": "Washington Traffic Cameras — Live WSDOT Highway Cams",
+   "title": "WSDOT Cameras in Washington",
    "sponsor": "house"
   },
   {
    "key": "cameras:west-virginia",
    "path": "/cameras/west-virginia/",
-   "title": "West Virginia Traffic Cameras — Live WVDOT (WV511) Highway Cams",
+   "title": "WVDOT Cameras in West Virginia",
    "sponsor": "house"
   },
   {
    "key": "cameras:wisconsin",
    "path": "/cameras/wisconsin/",
-   "title": "Wisconsin Traffic Cameras — Live WisDOT (511WI) Highway Cams",
+   "title": "WisDOT Cameras in Wisconsin",
    "sponsor": "house"
   },
   {
