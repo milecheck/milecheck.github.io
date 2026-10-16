@@ -18,7 +18,7 @@ const SITE = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PAGES_ONLY = process.argv.includes('--pages-only');
 const STEPS = [
   'add-sponsor-slots.mjs', 'add-map-kit.mjs', 'tag-store-links.mjs', 'add-related-links.mjs', 'add-app-block.mjs', 'add-month-numbers.mjs', 'add-signup-band.mjs',
-  'add-signup-ctas.mjs', 'add-gear-cards.mjs', 'add-nav-search.mjs', 'add-desktop-qr.mjs', 'add-data-sources-link.mjs', 'add-state-map-links.mjs', 'add-mile-finder-media.mjs', 'add-camera-route-filter.mjs', 'add-state-corridor-links.mjs', 'add-browser-style-version.mjs', 'add-site-nav.mjs',
+  'add-signup-ctas.mjs', 'add-gear-cards.mjs', 'add-nav-search.mjs', 'add-desktop-qr.mjs', 'add-data-sources-link.mjs', 'add-state-map-links.mjs', 'add-mile-finder-media.mjs', 'add-camera-route-filter.mjs', 'add-state-corridor-links.mjs', 'add-browser-style-version.mjs', 'add-site-nav.mjs', 'add-openmb-attribution.mjs',
   ...(PAGES_ONLY ? [] : ['build-search-index.mjs', 'build-sitemap.mjs']),
   'link-jsonld.mjs',
 ];
