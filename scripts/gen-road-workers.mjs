@@ -8,7 +8,7 @@ const OCC = '474051';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const $ = n => '$' + Math.round(n).toLocaleString('en-US');
 const us = D.us[OCC], year = D.year;
-const rows = Object.entries(D.states).map(([st, v]) => ({ st, name: NAMES[st], ...v[OCC] })).sort((a, b) => b.median - a.median);
+const rows = Object.entries(D.states).filter(([, v]) => v[OCC]).map(([st, v]) => ({ st, name: NAMES[st], ...v[OCC] })).sort((a, b) => b.median - a.median);
 const top = rows[0], bottom = rows.at(-1);
 const td = 'style="padding:9px 6px;border-bottom:1px solid #eee;vertical-align:top"', th = 'style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5"';
 const table = `<div style="overflow-x:auto"><table data-sortable style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.45"><thead><tr><th ${th}>State</th><th ${th}>Median pay</th><th ${th}>Average pay</th><th ${th}>Workers</th></tr></thead><tbody>
@@ -30,7 +30,7 @@ ${sortJs}
     <h2>Source</h2>
     <p><a href="https://www.bls.gov/oes/current/oes474051.htm" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics, highway maintenance workers (47-4051)</a>, May ${year} estimates. Updated each spring.</p>
     <h2>On the road</h2>
-    <ul><li><a href="/road-workers/dot-jobs/">How do you get a job at your state DOT?</a></li><li><a href="/road-conditions/">Road conditions by state</a></li><li><a href="/snowplows/">Where are the snowplows?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li></ul>`;
+    <ul><li><a href="/road-workers/dot-jobs/">How do you get a job at your state DOT?</a></li><li><a href="/road-workers/truck-drivers/">How much do truck drivers make in each state?</a></li><li><a href="/road-workers/emts/">How much do EMTs make in each state?</a></li><li><a href="/road-conditions/">Road conditions by state</a></li><li><a href="/snowplows/">Where are the snowplows?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'How much do highway maintenance workers make in each state?';
@@ -49,7 +49,7 @@ console.log(`road workers: ${rows.length} states, US median ${$(us.median)}`);
 {
   const C = JSON.parse(readFileSync('data/dot-careers.json', 'utf8'));
   const list = Object.entries(C).map(([st, v]) => ({ st, name: NAMES[st], ...v })).sort((a, b) => a.name.localeCompare(b.name));
-  const pay = st => D.states[st] ? $(D.states[st][OCC].median) : 'Not published';
+  const pay = st => D.states[st]?.[OCC] ? $(D.states[st][OCC].median) : 'Not published';
   const rows2 = list.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.short || r.agency)} careers</a></td><td ${td}>${pay(r.st)}</td></tr>`).join('\n');
   const h1b = 'How do you get a job at your state DOT?';
   const body2 = `    <p class="lede"><strong>Every state hires its own road crews. Find your state below and go to its official careers page.</strong></p>

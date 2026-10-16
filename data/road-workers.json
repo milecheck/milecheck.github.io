@@ -1,359 +1,885 @@
 {
  "source": "U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics",
- "fetched": "2026-10-16T06:35:15.354Z",
+ "fetched": "2026-10-16T06:54:02.982Z",
  "year": "2025",
  "occupations": {
-  "474051": "Highway maintenance workers"
+  "292042": "Emergency medical technicians",
+  "474051": "Highway maintenance workers",
+  "533032": "Heavy and tractor-trailer truck drivers"
  },
  "us": {
+  "292042": {
+   "median": 44470,
+   "employment": 180510,
+   "mean": 46830
+  },
   "474051": {
    "median": 50260,
    "employment": 154960,
    "mean": 53080
+  },
+  "533032": {
+   "median": 58640,
+   "employment": 2062040,
+   "mean": 59710
   }
  },
  "states": {
   "AL": {
+   "292042": {
+    "median": 37810,
+    "employment": 2020,
+    "mean": 39100
+   },
    "474051": {
     "median": 37430,
     "employment": 2730,
     "mean": 38990
+   },
+   "533032": {
+    "median": 52120,
+    "employment": 36650,
+    "mean": 56230
    }
   },
   "AK": {
+   "292042": {
+    "median": 57440,
+    "employment": 310,
+    "mean": 58800
+   },
    "474051": {
     "median": 54090,
     "employment": 50,
     "mean": 59650
+   },
+   "533032": {
+    "median": 70100,
+    "employment": 3420,
+    "mean": 69520
    }
   },
   "AZ": {
+   "292042": {
+    "median": 39500,
+    "employment": 3970,
+    "mean": 42180
+   },
    "474051": {
     "median": 50850,
     "employment": 1410,
     "mean": 50260
+   },
+   "533032": {
+    "median": 58080,
+    "employment": 40150,
+    "mean": 58870
    }
   },
   "AR": {
+   "292042": {
+    "median": 36230,
+    "employment": 1120,
+    "mean": 38230
+   },
    "474051": {
     "median": 35740,
     "employment": 860,
     "mean": 36310
+   },
+   "533032": {
+    "median": 51550,
+    "employment": 32220,
+    "mean": 57390
    }
   },
   "CA": {
+   "292042": {
+    "median": 46380,
+    "employment": 21880,
+    "mean": 52900
+   },
    "474051": {
     "median": 59580,
     "employment": 8150,
     "mean": 63070
+   },
+   "533032": {
+    "median": 60230,
+    "employment": 205090,
+    "mean": 62020
    }
   },
   "CO": {
+   "292042": {
+    "median": 45750,
+    "employment": 3060,
+    "mean": 46830
+   },
    "474051": {
     "median": 52350,
     "employment": 1990,
     "mean": 55710
+   },
+   "533032": {
+    "median": 61500,
+    "employment": 25350,
+    "mean": 63650
    }
   },
   "CT": {
+   "292042": {
+    "median": 50640,
+    "employment": 2190,
+    "mean": 51300
+   },
    "474051": {
     "median": 64870,
     "employment": 2130,
     "mean": 66700
+   },
+   "533032": {
+    "median": 60490,
+    "employment": 15740,
+    "mean": 61980
    }
   },
   "DE": {
+   "292042": {
+    "median": 46790,
+    "employment": 950,
+    "mean": 49420
+   },
    "474051": {
     "median": 45450,
     "employment": 90,
     "mean": 47160
+   },
+   "533032": {
+    "median": 57590,
+    "employment": 9040,
+    "mean": 57380
+   }
+  },
+  "DC": {
+   "292042": {
+    "median": 46650,
+    "employment": 370,
+    "mean": 51220
+   },
+   "533032": {
+    "median": 64170,
+    "employment": 830,
+    "mean": 67710
    }
   },
   "FL": {
+   "292042": {
+    "median": 39870,
+    "employment": 6060,
+    "mean": 44130
+   },
    "474051": {
     "median": 42210,
     "employment": 2530,
     "mean": 43130
+   },
+   "533032": {
+    "median": 50640,
+    "employment": 112920,
+    "mean": 54850
    }
   },
   "GA": {
+   "292042": {
+    "median": 45550,
+    "employment": 6260,
+    "mean": 44240
+   },
    "474051": {
     "median": 37560,
     "employment": 1980,
     "mean": 39710
+   },
+   "533032": {
+    "median": 57050,
+    "employment": 74840,
+    "mean": 57780
+   }
+  },
+  "HI": {
+   "292042": {
+    "median": 66410,
+    "employment": 560,
+    "mean": 68110
+   },
+   "533032": {
+    "median": 59820,
+    "employment": 4070,
+    "mean": 60850
    }
   },
   "ID": {
+   "292042": {
+    "median": 38840,
+    "employment": 780,
+    "mean": 39740
+   },
    "474051": {
     "median": 52050,
     "employment": 1340,
     "mean": 55280
+   },
+   "533032": {
+    "median": 58770,
+    "employment": 15920,
+    "mean": 59160
    }
   },
   "IL": {
+   "292042": {
+    "median": 42260,
+    "employment": 7840,
+    "mean": 56080
+   },
    "474051": {
     "median": 61700,
     "employment": 10790,
     "mean": 66410
+   },
+   "533032": {
+    "median": 60320,
+    "employment": 84200,
+    "mean": 62430
    }
   },
   "IN": {
+   "292042": {
+    "median": 42740,
+    "employment": 4160,
+    "mean": 44230
+   },
    "474051": {
     "median": 48480,
     "employment": 4380,
     "mean": 49430
+   },
+   "533032": {
+    "median": 60290,
+    "employment": 59090,
+    "mean": 60950
    }
   },
   "IA": {
+   "292042": {
+    "median": 40660,
+    "employment": 1510,
+    "mean": 44970
+   },
    "474051": {
     "median": 58490,
     "employment": 4000,
     "mean": 57670
+   },
+   "533032": {
+    "median": 58070,
+    "employment": 35040,
+    "mean": 60070
    }
   },
   "KS": {
+   "292042": {
+    "median": 35780,
+    "employment": 1510,
+    "mean": 37870
+   },
    "474051": {
     "median": 46050,
     "employment": 1960,
     "mean": 45970
+   },
+   "533032": {
+    "median": 58920,
+    "employment": 24220,
+    "mean": 60480
    }
   },
   "KY": {
+   "292042": {
+    "median": 36800,
+    "employment": 2770,
+    "mean": 38990
+   },
    "474051": {
     "median": 40400,
     "employment": 3030,
     "mean": 41960
+   },
+   "533032": {
+    "median": 56340,
+    "employment": 31760,
+    "mean": 59870
    }
   },
   "LA": {
+   "292042": {
+    "median": 35870,
+    "employment": 2450,
+    "mean": 36770
+   },
    "474051": {
     "median": 44790,
     "employment": 1050,
     "mean": 44970
+   },
+   "533032": {
+    "median": 49320,
+    "employment": 28540,
+    "mean": 51930
    }
   },
   "ME": {
+   "292042": {
+    "median": 46340,
+    "employment": 1110,
+    "mean": 47310
+   },
    "474051": {
     "median": 49030,
     "employment": 1620,
     "mean": 49300
+   },
+   "533032": {
+    "median": 57050,
+    "employment": 9980,
+    "mean": 55980
    }
   },
   "MD": {
+   "292042": {
+    "median": 48100,
+    "employment": 3400,
+    "mean": 55790
+   },
    "474051": {
     "median": 49030,
     "employment": 620,
     "mean": 55040
+   },
+   "533032": {
+    "median": 59360,
+    "employment": 29150,
+    "mean": 60590
    }
   },
   "MA": {
+   "292042": {
+    "median": 50230,
+    "employment": 4550,
+    "mean": 52500
+   },
    "474051": {
     "median": 61500,
     "employment": 2000,
     "mean": 61800
+   },
+   "533032": {
+    "median": 63030,
+    "employment": 30890,
+    "mean": 63570
    }
   },
   "MI": {
+   "292042": {
+    "median": 39870,
+    "employment": 4230,
+    "mean": 42180
+   },
    "474051": {
     "median": 53750,
     "employment": 5230,
     "mean": 51910
+   },
+   "533032": {
+    "median": 57180,
+    "employment": 60800,
+    "mean": 56370
    }
   },
   "MN": {
+   "292042": {
+    "median": 48090,
+    "employment": 3160,
+    "mean": 47470
+   },
    "474051": {
     "median": 63150,
     "employment": 4610,
     "mean": 60280
+   },
+   "533032": {
+    "median": 61990,
+    "employment": 38770,
+    "mean": 63630
    }
   },
   "MS": {
+   "292042": {
+    "median": 36630,
+    "employment": 1390,
+    "mean": 36390
+   },
    "474051": {
     "median": 35120,
     "employment": 4160,
     "mean": 35140
+   },
+   "533032": {
+    "median": 51820,
+    "employment": 24160,
+    "mean": 55910
    }
   },
   "MO": {
+   "292042": {
+    "median": 42160,
+    "employment": 2800,
+    "mean": 43330
+   },
    "474051": {
     "median": 47470,
     "employment": 5470,
     "mean": 48470
+   },
+   "533032": {
+    "median": 54550,
+    "employment": 47760,
+    "mean": 56830
    }
   },
   "MT": {
+   "292042": {
+    "median": 36140,
+    "employment": 860,
+    "mean": 36820
+   },
    "474051": {
     "median": 60960,
     "employment": 1140,
     "mean": 60320
+   },
+   "533032": {
+    "median": 58870,
+    "employment": 7830,
+    "mean": 59180
    }
   },
   "NE": {
+   "292042": {
+    "median": 41710,
+    "employment": 540,
+    "mean": 48700
+   },
    "474051": {
     "median": 48650,
     "employment": 2580,
     "mean": 50920
+   },
+   "533032": {
+    "median": 58390,
+    "employment": 23160,
+    "mean": 60070
    }
   },
   "NV": {
+   "292042": {
+    "median": 37560,
+    "employment": 1530,
+    "mean": 43050
+   },
    "474051": {
     "median": 49320,
     "employment": 990,
     "mean": 52510
+   },
+   "533032": {
+    "median": 62290,
+    "employment": 15010,
+    "mean": 65010
    }
   },
   "NH": {
+   "292042": {
+    "median": 46790,
+    "employment": 1010,
+    "mean": 47180
+   },
    "474051": {
     "median": 51050,
     "employment": 1230,
     "mean": 52940
+   },
+   "533032": {
+    "median": 60280,
+    "employment": 6960,
+    "mean": 60600
    }
   },
   "NJ": {
+   "292042": {
+    "median": 53610,
+    "employment": 6120,
+    "mean": 55280
+   },
    "474051": {
     "median": 51720,
     "employment": 4850,
     "mean": 56570
+   },
+   "533032": {
+    "median": 63570,
+    "employment": 47980,
+    "mean": 66770
    }
   },
   "NM": {
+   "292042": {
+    "median": 37550,
+    "employment": 1260,
+    "mean": 42160
+   },
    "474051": {
     "median": 47740,
     "employment": 1470,
     "mean": 47340
+   },
+   "533032": {
+    "median": 50500,
+    "employment": 11820,
+    "mean": 53100
    }
   },
   "NY": {
+   "292042": {
+    "median": 48400,
+    "employment": 14840,
+    "mean": 52870
+   },
    "474051": {
     "median": 55210,
     "employment": 13820,
     "mean": 57190
+   },
+   "533032": {
+    "median": 62050,
+    "employment": 63700,
+    "mean": 65780
    }
   },
   "NC": {
+   "292042": {
+    "median": 44250,
+    "employment": 6680,
+    "mean": 45790
+   },
    "474051": {
     "median": 47880,
     "employment": 3750,
     "mean": 47300
+   },
+   "533032": {
+    "median": 51530,
+    "employment": 62400,
+    "mean": 55810
    }
   },
   "ND": {
+   "292042": {
+    "median": 39670,
+    "employment": 760,
+    "mean": 44480
+   },
    "474051": {
     "median": 60630,
     "employment": 1240,
     "mean": 62150
+   },
+   "533032": {
+    "median": 60910,
+    "employment": 11870,
+    "mean": 63330
    }
   },
   "OH": {
+   "292042": {
+    "median": 40220,
+    "employment": 5560,
+    "mean": 42930
+   },
    "474051": {
     "median": 48880,
     "employment": 6070,
     "mean": 51170
+   },
+   "533032": {
+    "median": 59800,
+    "employment": 83060,
+    "mean": 60660
    }
   },
   "OK": {
+   "292042": {
+    "median": 34170,
+    "employment": 2410,
+    "mean": 35050
+   },
    "474051": {
     "median": 38840,
     "employment": 3180,
     "mean": 40570
+   },
+   "533032": {
+    "median": 54410,
+    "employment": 27840,
+    "mean": 57670
    }
   },
   "OR": {
+   "292042": {
+    "median": 49270,
+    "employment": 1970,
+    "mean": 50040
+   },
    "474051": {
     "median": 65330,
     "employment": 1650,
     "mean": 63650
+   },
+   "533032": {
+    "median": 61980,
+    "employment": 23970,
+    "mean": 64080
    }
   },
   "PA": {
+   "292042": {
+    "median": 43310,
+    "employment": 10160,
+    "mean": 43820
+   },
    "474051": {
     "median": 47690,
     "employment": 11140,
     "mean": 50060
+   },
+   "533032": {
+    "median": 58580,
+    "employment": 87550,
+    "mean": 59640
    }
   },
   "RI": {
+   "292042": {
+    "median": 51290,
+    "employment": 430,
+    "mean": 51280
+   },
    "474051": {
     "median": 57950,
     "employment": 620,
     "mean": 56390
+   },
+   "533032": {
+    "median": 60190,
+    "employment": 3620,
+    "mean": 59660
    }
   },
   "SC": {
+   "292042": {
+    "median": 40370,
+    "employment": 4010,
+    "mean": 41940
+   },
    "474051": {
     "median": 48130,
     "employment": 2290,
     "mean": 48900
+   },
+   "533032": {
+    "median": 51130,
+    "employment": 34170,
+    "mean": 55680
    }
   },
   "SD": {
+   "292042": {
+    "median": 36800,
+    "employment": 600,
+    "mean": 39110
+   },
    "474051": {
     "median": 48610,
     "employment": 1800,
     "mean": 50470
+   },
+   "533032": {
+    "median": 58690,
+    "employment": 6470,
+    "mean": 58550
    }
   },
   "TN": {
+   "292042": {
+    "median": 40330,
+    "employment": 3860,
+    "mean": 43370
+   },
    "474051": {
     "median": 46070,
     "employment": 2280,
     "mean": 46070
+   },
+   "533032": {
+    "median": 58620,
+    "employment": 64890,
+    "mean": 60440
    }
   },
   "TX": {
+   "292042": {
+    "median": 37260,
+    "employment": 12770,
+    "mean": 40190
+   },
    "474051": {
     "median": 45540,
     "employment": 6630,
     "mean": 44770
+   },
+   "533032": {
+    "median": 56290,
+    "employment": 209680,
+    "mean": 57990
    }
   },
   "UT": {
+   "292042": {
+    "median": 38930,
+    "employment": 1280,
+    "mean": 40470
+   },
    "474051": {
     "median": 55970,
     "employment": 1240,
     "mean": 56390
+   },
+   "533032": {
+    "median": 60620,
+    "employment": 25060,
+    "mean": 60900
    }
   },
   "VT": {
+   "292042": {
+    "median": 45600,
+    "employment": 790,
+    "mean": 45650
+   },
    "474051": {
     "median": 58460,
     "employment": 1170,
     "mean": 56930
+   },
+   "533032": {
+    "median": 60830,
+    "employment": 3560,
+    "mean": 61100
    }
   },
   "VA": {
+   "292042": {
+    "median": 45420,
+    "employment": 4490,
+    "mean": 46370
+   },
    "474051": {
     "median": 50800,
     "employment": 3400,
     "mean": 51790
+   },
+   "533032": {
+    "median": 56860,
+    "employment": 48750,
+    "mean": 57770
    }
   },
   "WA": {
+   "292042": {
+    "median": 52690,
+    "employment": 2940,
+    "mean": 52000
+   },
    "474051": {
     "median": 65300,
     "employment": 2590,
     "mean": 67870
+   },
+   "533032": {
+    "median": 64760,
+    "employment": 40530,
+    "mean": 68230
    }
   },
   "WV": {
+   "292042": {
+    "median": 34360,
+    "employment": 900,
+    "mean": 35910
+   },
    "474051": {
     "median": 45260,
     "employment": 730,
     "mean": 45290
+   },
+   "533032": {
+    "median": 49480,
+    "employment": 12190,
+    "mean": 52440
    }
   },
   "WI": {
+   "292042": {
+    "median": 43060,
+    "employment": 3930,
+    "mean": 45170
+   },
    "474051": {
     "median": 58000,
     "employment": 6000,
     "mean": 56080
+   },
+   "533032": {
+    "median": 58610,
+    "employment": 53330,
+    "mean": 58890
    }
   },
   "WY": {
+   "292042": {
+    "median": 47070,
+    "employment": 400,
+    "mean": 45090
+   },
    "474051": {
     "median": 48190,
     "employment": 820,
     "mean": 51900
+   },
+   "533032": {
+    "median": 60310,
+    "employment": 6050,
+    "mean": 63180
    }
   }
  }
