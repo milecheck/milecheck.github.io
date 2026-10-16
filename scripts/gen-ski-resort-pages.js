@@ -53,11 +53,14 @@ const REGION = {
 };
 // /chain-laws/<page>/ for the states that have one (scripts/gen-chain-law-pages.js); the rest link the hub.
 const CHAIN_PAGE = { CO: 'colorado', UT: 'utah', MT: 'montana', WA: 'washington', OR: 'oregon', AK: 'arizona-new-mexico-alaska' };
-const PASS_NAME = { snoqualmie: 'Snoqualmie Pass', stevens: 'Stevens Pass', 'crystal-mountain': 'Crystal Mountain (SR 410)', parleys: 'Parleys Summit', 'little-cottonwood': 'Little Cottonwood Canyon', eisenhower: 'Eisenhower Tunnel', vail: 'Vail Pass' };
+// Every slug under /passes/ (scripts/gen-pass-pages.js). A resort that names a pass not listed here fails the build
+// rather than printing the slug as a title (Anthony Lakes did, 2026-10-16).
+const PASS_NAME = { snoqualmie: 'Snoqualmie Pass', stevens: 'Stevens Pass', 'crystal-mountain': 'Crystal Mountain (SR 410)', parleys: 'Parleys Summit', 'little-cottonwood': 'Little Cottonwood Canyon', eisenhower: 'Eisenhower Tunnel', vail: 'Vail Pass', 'anthony-lakes': 'Anthony Lakes (I-84 and OR 237)', siskiyou: 'Siskiyou Summit', 'cabbage-hill': 'Cabbage Hill', grapevine: 'The Grapevine (Tejon Pass)', donner: 'Donner Pass', cajon: 'Cajon Pass' };
 
 for (const r of RESORTS) {
   if (!REGION[r.state]) throw new Error(`ski-resorts.cjs: no REGION entry for ${r.state} (${r.slug})`);
   if (r.pass && !exists(`passes/${r.pass}/index.html`)) throw new Error(`${r.slug}: pass page passes/${r.pass}/ does not exist`);
+  if (r.pass && !PASS_NAME[r.pass]) throw new Error(`${r.slug}: add passes/${r.pass}/ to PASS_NAME`);
   if (r.corridor && !exists(`corridors/${r.corridor}/index.html`)) throw new Error(`${r.slug}: corridor page corridors/${r.corridor}/ does not exist`);
   if (!(r.radius >= 10 && r.radius <= 25)) throw new Error(`${r.slug}: radius must be 10..25 mi`);
 }
@@ -388,7 +391,7 @@ function resortPage(r) {
   const cards = [];
   if (plows) cards.push(['Snowplows', `Where are the ${reg.dot} plows right now?`, `Every ${reg.dot} truck that reports a position, statewide, on one map.`, '/snowplows/']);
   cards.push(['Snow report', r.reportName || `${r.name} snow report`, `The resort's own report: snowfall, lifts and runs. Opens the resort's site.`, r.report, true]);
-  if (r.pass) cards.push(['Mountain pass', PASS_NAME[r.pass] || r.pass, `The pass page for the same road: cameras, restrictions and closures, with the summit weather.`, `/passes/${r.pass}/`]);
+  if (r.pass) cards.push(['Mountain pass', PASS_NAME[r.pass], `The pass page for the same road: cameras, restrictions and closures, with the summit weather.`, `/passes/${r.pass}/`]);
   if (r.corridor) cards.push(['Corridor', `${r.corridor.toUpperCase()} conditions`, `The whole ${r.corridor.toUpperCase()} corridor, every state it crosses, alerts by mile marker.`, `/corridors/${r.corridor}/`]);
   cards.push(['Chain law', chain[1], chain[2], chain[0]]);
   if (cams) cards.push(['Cameras', `${reg.name} highway cameras`, `Every ${reg.trafficName} camera on one map, with the route and ${km ? 'kilometre' : 'mile'} marker where the DOT gives one.`, `/cameras/${reg.slug}/`]);
