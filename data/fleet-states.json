@@ -1,0 +1,586 @@
+{
+ "checked": "2026-10-16",
+ "method": "Searched each state open data portal, fleet office and legislative reports for a published list of state-owned vehicles. Every make and model count was recomputed from the source file on the date checked.",
+ "fhwa": {
+  "source": "FHWA Highway Statistics 2024, Table MV-7, published January 2026",
+  "url": "https://www.fhwa.dot.gov/policyinformation/statistics/2024/mv7.cfm",
+  "scm_total": 4215404,
+  "scm_auto": 1295922,
+  "scm_bus": 462306,
+  "scm_truck": 2457176,
+  "fed_total": 492199
+ },
+ "states": [
+  {
+   "code": "AL",
+   "name": "Alabama",
+   "fhwa": 9466,
+   "fhwa_partial": true,
+   "federal": 8097,
+   "list": "none"
+  },
+  {
+   "code": "AK",
+   "name": "Alaska",
+   "fhwa": 11919,
+   "fhwa_partial": false,
+   "federal": 2538,
+   "list": "none"
+  },
+  {
+   "code": "AZ",
+   "name": "Arizona",
+   "fhwa": 104954,
+   "fhwa_partial": false,
+   "federal": 11753,
+   "list": "none"
+  },
+  {
+   "code": "AR",
+   "name": "Arkansas",
+   "fhwa": 72382,
+   "fhwa_partial": true,
+   "federal": 4064,
+   "source": {
+    "name": "State Vehicle Inventory Search, Arkansas Dept. of Finance and Administration",
+    "url": "https://www.dfa.arkansas.gov/state-vehicle-inventory-search/",
+    "year": "2026"
+   },
+   "police": {
+    "agency": "Arkansas State Police",
+    "top": "Dodge Charger",
+    "n": 426,
+    "of": 983
+   },
+   "dot": null,
+   "note": "The list has no vehicles under the Arkansas DOT.",
+   "list": "list"
+  },
+  {
+   "code": "CA",
+   "name": "California",
+   "fhwa": 611902,
+   "fhwa_partial": false,
+   "federal": 58878,
+   "list": "live"
+  },
+  {
+   "code": "CO",
+   "name": "Colorado",
+   "fhwa": 60524,
+   "fhwa_partial": false,
+   "federal": 8804,
+   "list": "totals",
+   "source": {
+    "name": "State Fleet Management and Costs, Colorado Legislative Council",
+    "url": "https://content.leg.colorado.gov/sites/default/files/r25-450_state_fleet_vehicle_management_and_costs-accessible.pdf",
+    "year": "2025"
+   }
+  },
+  {
+   "code": "CT",
+   "name": "Connecticut",
+   "fhwa": 0,
+   "fhwa_partial": true,
+   "federal": 5014,
+   "source": {
+    "name": "DESPP Fleet Asset List 2020, Connecticut DAS",
+    "url": "https://portal.ct.gov/das/-/media/das/fleet-operations/2020-year-end-fleet-report/despp-assets-2020.pdf",
+    "year": "2020"
+   },
+   "police": {
+    "agency": "Emergency Services and Public Protection (State Police)",
+    "top": "Ford Interceptor",
+    "n": 636,
+    "of": 1778
+   },
+   "dot": null,
+   "note": "The newest list is from 2020 and includes boats and trailers. The DOT list names makers but not models.",
+   "list": "list"
+  },
+  {
+   "code": "DE",
+   "name": "Delaware",
+   "fhwa": 6221,
+   "fhwa_partial": false,
+   "federal": 1540,
+   "list": "none"
+  },
+  {
+   "code": "DC",
+   "name": "District of Columbia",
+   "fhwa": 22755,
+   "fhwa_partial": false,
+   "federal": 6065,
+   "list": "none"
+  },
+  {
+   "code": "FL",
+   "name": "Florida",
+   "fhwa": 278944,
+   "fhwa_partial": false,
+   "federal": 29258,
+   "list": "none"
+  },
+  {
+   "code": "GA",
+   "name": "Georgia",
+   "fhwa": 167172,
+   "fhwa_partial": false,
+   "federal": 17089,
+   "list": "none"
+  },
+  {
+   "code": "HI",
+   "name": "Hawaii",
+   "fhwa": 19329,
+   "fhwa_partial": false,
+   "federal": 5730,
+   "list": "none"
+  },
+  {
+   "code": "ID",
+   "name": "Idaho",
+   "fhwa": 25593,
+   "fhwa_partial": false,
+   "federal": 3983,
+   "list": "none"
+  },
+  {
+   "code": "IL",
+   "name": "Illinois",
+   "fhwa": 203985,
+   "fhwa_partial": false,
+   "federal": 16976,
+   "source": {
+    "name": "FY2025 Vehicle Cost Data Report, Illinois Central Management Services",
+    "url": "https://cms.illinois.gov/content/dam/soi/en/web/cms/documents/Fiscal%20Year%202025%20Vehicle%20Cost%20Data%20Report%20FINAL.pdf",
+    "year": "2025"
+   },
+   "police": {
+    "agency": "Illinois State Police",
+    "top": "Ford Explorer Police Interceptor",
+    "n": 1252,
+    "of": 2743
+   },
+   "dot": {
+    "agency": "Illinois DOT",
+    "top": "Ford F-150",
+    "n": 1489,
+    "of": 2758
+   },
+   "note": "The report lists models without makes. Heavy trucks do not appear in it.",
+   "list": "list"
+  },
+  {
+   "code": "IN",
+   "name": "Indiana",
+   "fhwa": 144635,
+   "fhwa_partial": false,
+   "federal": 7583,
+   "source": {
+    "name": "Assets Data, Indiana Transparency Portal",
+    "url": "https://hub.mph.in.gov/dataset/assets-data",
+    "year": "2026"
+   },
+   "police": {
+    "agency": "Indiana State Police (central fleet units)",
+    "top": "Dodge Durango",
+    "n": 770,
+    "of": 1027
+   },
+   "dot": {
+    "agency": "Indiana DOT (central fleet units)",
+    "top": "Ford F-150",
+    "n": 364,
+    "of": 986
+   },
+   "note": "Counted from the central fleet units the Department of Administration holds for each agency. The agencies own other vehicles too.",
+   "list": "list"
+  },
+  {
+   "code": "IA",
+   "name": "Iowa",
+   "fhwa": 36000,
+   "fhwa_partial": false,
+   "federal": 3663,
+   "list": "totals",
+   "source": {
+    "name": "State Renewable Fuels Compliance Report 2024, Iowa DAS",
+    "url": "https://www.legis.iowa.gov/docs/publications/DF/1523727.pdf",
+    "year": "2025"
+   }
+  },
+  {
+   "code": "KS",
+   "name": "Kansas",
+   "fhwa": 4658,
+   "fhwa_partial": false,
+   "federal": 4486,
+   "list": "none"
+  },
+  {
+   "code": "KY",
+   "name": "Kentucky",
+   "fhwa": 93338,
+   "fhwa_partial": false,
+   "federal": 6160,
+   "list": "none"
+  },
+  {
+   "code": "LA",
+   "name": "Louisiana",
+   "fhwa": 112619,
+   "fhwa_partial": false,
+   "federal": 7168,
+   "list": "none"
+  },
+  {
+   "code": "ME",
+   "name": "Maine",
+   "fhwa": 27208,
+   "fhwa_partial": false,
+   "federal": 2135,
+   "source": {
+    "name": "2025 Annual Report of State Owned Vehicles, Maine Central Fleet Management",
+    "url": "https://www.maine.gov/bgs/centralfleet/documents/TITLE%205-ANNUAL%20REPORT-2025_Final.pdf",
+    "year": "2025"
+   },
+   "police": {
+    "agency": "Maine State Police",
+    "top": "Ford police SUV",
+    "n": 275,
+    "of": 810
+   },
+   "dot": {
+    "agency": "Maine DOT",
+    "top": "International 7400 truck",
+    "n": 152,
+    "of": 1079
+   },
+   "note": "The State Police list names the model \"SUV-PI\".",
+   "list": "list"
+  },
+  {
+   "code": "MD",
+   "name": "Maryland",
+   "fhwa": 69902,
+   "fhwa_partial": false,
+   "federal": 13528,
+   "list": "totals",
+   "source": {
+    "name": "State-Owned Motor Vehicles Report FY2025, Maryland DBM",
+    "url": "https://dlslibrary.state.md.us/publications/Exec/DBM/SF3-503(c)_2025.pdf",
+    "year": "2025"
+   }
+  },
+  {
+   "code": "MA",
+   "name": "Massachusetts",
+   "fhwa": 47959,
+   "fhwa_partial": false,
+   "federal": 9024,
+   "list": "none"
+  },
+  {
+   "code": "MI",
+   "name": "Michigan",
+   "fhwa": 0,
+   "fhwa_partial": true,
+   "federal": 11746,
+   "list": "totals",
+   "source": {
+    "name": "State of Michigan Fleet Plan FY2026",
+    "url": "https://www.michigan.gov/dtmb/-/media/Project/Websites/dtmb/Archive/Law-and-Policies/Legislative-Reports/FY2026/2026-Fleet-Plan.pdf",
+    "year": "2025"
+   }
+  },
+  {
+   "code": "MN",
+   "name": "Minnesota",
+   "fhwa": 58173,
+   "fhwa_partial": true,
+   "federal": 5844,
+   "list": "totals",
+   "source": {
+    "name": "State Light Vehicle Fleet report FY2018, Minnesota Admin",
+    "url": "https://www.lrl.mn.gov/docs/2019/mandated/190289.pdf",
+    "year": "2019"
+   }
+  },
+  {
+   "code": "MS",
+   "name": "Mississippi",
+   "fhwa": 10848,
+   "fhwa_partial": false,
+   "federal": 5052,
+   "list": "totals",
+   "source": {
+    "name": "PEER Report 613, State-Owned Vehicles",
+    "url": "https://peer.ms.gov/sites/default/files/peer_publications/613.pdf",
+    "year": "2017"
+   }
+  },
+  {
+   "code": "MO",
+   "name": "Missouri",
+   "fhwa": 0,
+   "fhwa_partial": true,
+   "federal": 9356,
+   "list": "totals",
+   "source": {
+    "name": "FY25 State Fleet Management Annual Report",
+    "url": "https://genserv.oa.mo.gov/sites/g/files/zuston251/files/media/pdf/2025/12/FY25%20Annual%20Fleet%20Report_FINAL.pdf",
+    "year": "2025"
+   }
+  },
+  {
+   "code": "MT",
+   "name": "Montana",
+   "fhwa": 1810,
+   "fhwa_partial": false,
+   "federal": 3363,
+   "list": "none"
+  },
+  {
+   "code": "NE",
+   "name": "Nebraska",
+   "fhwa": 37416,
+   "fhwa_partial": false,
+   "federal": 2864,
+   "list": "none"
+  },
+  {
+   "code": "NV",
+   "name": "Nevada",
+   "fhwa": 35383,
+   "fhwa_partial": false,
+   "federal": 4624,
+   "list": "none"
+  },
+  {
+   "code": "NH",
+   "name": "New Hampshire",
+   "fhwa": 10792,
+   "fhwa_partial": false,
+   "federal": 1705,
+   "list": "none"
+  },
+  {
+   "code": "NJ",
+   "name": "New Jersey",
+   "fhwa": 61593,
+   "fhwa_partial": true,
+   "federal": 12265,
+   "list": "none"
+  },
+  {
+   "code": "NM",
+   "name": "New Mexico",
+   "fhwa": 61510,
+   "fhwa_partial": false,
+   "federal": 8243,
+   "list": "none"
+  },
+  {
+   "code": "NY",
+   "name": "New York",
+   "fhwa": 68468,
+   "fhwa_partial": false,
+   "federal": 20960,
+   "list": "totals",
+   "source": {
+    "name": "Fleet data, NYS Office of General Services",
+    "url": "https://ogs.ny.gov/fleet-data",
+    "year": "2026"
+   }
+  },
+  {
+   "code": "NC",
+   "name": "North Carolina",
+   "fhwa": 139672,
+   "fhwa_partial": false,
+   "federal": 13883,
+   "list": "none"
+  },
+  {
+   "code": "ND",
+   "name": "North Dakota",
+   "fhwa": 19356,
+   "fhwa_partial": false,
+   "federal": 2436,
+   "list": "none"
+  },
+  {
+   "code": "OH",
+   "name": "Ohio",
+   "fhwa": 112034,
+   "fhwa_partial": false,
+   "federal": 13992,
+   "list": "none"
+  },
+  {
+   "code": "OK",
+   "name": "Oklahoma",
+   "fhwa": 16648,
+   "fhwa_partial": false,
+   "federal": 6437,
+   "list": "none"
+  },
+  {
+   "code": "OR",
+   "name": "Oregon",
+   "fhwa": 63085,
+   "fhwa_partial": false,
+   "federal": 6179,
+   "list": "totals",
+   "source": {
+    "name": "Biennial Examination on Use of State-Owned Vehicles, Oregon DAS",
+    "url": "https://apps.oregonlegislature.gov/liz/2023R1/Downloads/CommitteeMeetingDocument/262613",
+    "year": "2023"
+   }
+  },
+  {
+   "code": "PA",
+   "name": "Pennsylvania",
+   "fhwa": 117546,
+   "fhwa_partial": false,
+   "federal": 16156,
+   "list": "none"
+  },
+  {
+   "code": "RI",
+   "name": "Rhode Island",
+   "fhwa": 11690,
+   "fhwa_partial": false,
+   "federal": 1749,
+   "list": "none"
+  },
+  {
+   "code": "SC",
+   "name": "South Carolina",
+   "fhwa": 180204,
+   "fhwa_partial": false,
+   "federal": 8331,
+   "list": "none"
+  },
+  {
+   "code": "SD",
+   "name": "South Dakota",
+   "fhwa": 49301,
+   "fhwa_partial": false,
+   "federal": 1888,
+   "list": "none"
+  },
+  {
+   "code": "TN",
+   "name": "Tennessee",
+   "fhwa": 130899,
+   "fhwa_partial": false,
+   "federal": 10114,
+   "list": "none"
+  },
+  {
+   "code": "TX",
+   "name": "Texas",
+   "fhwa": 340151,
+   "fhwa_partial": false,
+   "federal": 38624,
+   "list": "totals",
+   "source": {
+    "name": "State of the Fleet Report 2025, Texas Comptroller",
+    "url": "https://comptroller.texas.gov/purchasing/docs/ovfm/96-1736.pdf",
+    "year": "2025"
+   }
+  },
+  {
+   "code": "UT",
+   "name": "Utah",
+   "fhwa": 60370,
+   "fhwa_partial": false,
+   "federal": 5336,
+   "source": {
+    "name": "2023 State Vehicle Report, Utah Division of Fleet Operations",
+    "url": "https://fleet.utah.gov/wp-content/uploads/2023-State-Vehicle-Report.pdf",
+    "year": "2023"
+   },
+   "police": {
+    "agency": "Department of Public Safety",
+    "top": "Dodge Charger",
+    "n": 153,
+    "of": 551
+   },
+   "dot": {
+    "agency": "Utah DOT",
+    "top": "Mack GU713 truck",
+    "n": 176,
+    "of": 1787
+   },
+   "note": "Active vehicles. 204 Public Safety vehicles are listed as unmarked with no model and are not counted.",
+   "list": "list"
+  },
+  {
+   "code": "VT",
+   "name": "Vermont",
+   "fhwa": 6786,
+   "fhwa_partial": false,
+   "federal": 766,
+   "list": "totals",
+   "source": {
+    "name": "Fleet Vehicle Update, Vermont BGS",
+    "url": "https://legislature.vermont.gov/Documents/2024/WorkGroups/Senate%20Transportation/BGS/W~Jennifer%20Fitch~Fleet%20Vehicle%20Update~2-8-2024.pdf",
+    "year": "2024"
+   }
+  },
+  {
+   "code": "VA",
+   "name": "Virginia",
+   "fhwa": 126254,
+   "fhwa_partial": false,
+   "federal": 21341,
+   "list": "none"
+  },
+  {
+   "code": "WA",
+   "name": "Washington",
+   "fhwa": 186775,
+   "fhwa_partial": true,
+   "federal": 13846,
+   "list": "totals",
+   "source": {
+    "name": "Fleet Utilization Report, Washington DES",
+    "url": "https://des.wa.gov/sites/default/files/2022-06/2021DES-FleetUtilizationReport.pdf",
+    "year": "2021"
+   }
+  },
+  {
+   "code": "WV",
+   "name": "West Virginia",
+   "fhwa": 25807,
+   "fhwa_partial": true,
+   "federal": 2801,
+   "list": "totals",
+   "source": {
+    "name": "State Vehicle Fleet Annual Report, WV Fleet Management",
+    "url": "https://fleet.wv.gov/reports",
+    "year": "2025"
+   }
+  },
+  {
+   "code": "WI",
+   "name": "Wisconsin",
+   "fhwa": 108170,
+   "fhwa_partial": true,
+   "federal": 6657,
+   "list": "none"
+  },
+  {
+   "code": "WY",
+   "name": "Wyoming",
+   "fhwa": 43198,
+   "fhwa_partial": false,
+   "federal": 2105,
+   "list": "none"
+  }
+ ]
+}

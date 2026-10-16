@@ -1,7 +1,7 @@
 // /what-vehicles-do-state-dots-and-police-drive/: what the California Highway Patrol, Caltrans, Seattle Police and
 // Seattle's DOT drive, from their public fleet records. Input: data/fleet-vehicles.json (scripts/fetch-fleet-vehicles.mjs).
 // No national share is quoted anywhere: no free official count of police or DOT vehicles exists for the U.S.
-// Run, then node scripts/finish-pages.mjs.
+// National overview + state table: data/fleet-states.json (hand-checked lists, FHWA MV-7). Run, then node scripts/finish-pages.mjs.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 const d = JSON.parse(readFileSync('data/fleet-vehicles.json', 'utf8'));
 const { ca, seattle } = d;
@@ -64,10 +64,37 @@ const seaEle = k => seattle[k].fuel.filter(f => f.f === 'ELE').reduce((a, f) => 
 
 const charger = fold(chp.models).find(r => /CHARGER/.test(r.m));
 const ctTop = ct.models.filter(r => /^Pickup/.test(r.t))[0], ctHeavy = ct.models.filter(r => r.t === 'Truck-HD')[0];
+// National overview (FHWA MV-7) and the state table come from data/fleet-states.json: every make and model
+// count there was recomputed from the state's own file on the date it records. California's row is live.
+const FS = JSON.parse(readFileSync('data/fleet-states.json', 'utf8')), fh = FS.fhwa;
+const ctPickTop = ct.models.filter(r => /^Pickup/.test(r.t))[0];
+const caRow = { police: { agency: 'California Highway Patrol', top: caName(charger.m), n: charger.n, of: chp.total }, dot: { agency: 'Caltrans', top: caName(ctPickTop.m), n: ctPickTop.n, of: ct.total }, source: { name: 'California State Fleet, Department of General Services', url: 'https://data.ca.gov/dataset/california-state-fleet', year: String(ca.year) } };
+const cell = (x, row) => x ? `${esc(x.top)} <span style="color:#5b6670;white-space:nowrap">(${num(x.n)} of ${num(x.of)})</span>${row.code === 'CT' ? ' <span style="color:#5b6670">2020</span>' : ''}` : '';
+const stRows = FS.states.map(r0 => {
+  const r = r0.code === 'CA' ? { ...r0, ...caRow, list: 'list' } : r0;
+  const veh = r.fhwa ? num(r.fhwa) + (r.fhwa_partial ? '*' : '') : 'Not reported';
+  const listCell = r.list === 'list' ? `<a href="${esc(r.source.url)}" target="_blank" rel="noopener">Makes and models, ${esc(r.source.year)}</a>` : r.list === 'totals' ? `<a href="${esc(r.source.url)}" target="_blank" rel="noopener">Totals only, ${esc(r.source.year)}</a>` : 'None found';
+  return [esc(r.name), veh, r.list === 'list' ? (cell(r.police, r) || 'Not in the list') : '', r.list === 'list' ? (cell(r.dot, r) || 'Not in the list') : '', listCell];
+});
+const stTable = `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.45"><thead><tr><th ${th}>State</th><th ${thn}>Government vehicles, 2024</th><th ${th}>State police, most common</th><th ${th}>DOT, most common</th><th ${th}>Published list</th></tr></thead><tbody>
+${stRows.map(r => `<tr><td ${td}>${r[0]}</td><td ${tdn}>${r[1]}</td><td ${td}>${r[2]}</td><td ${td}>${r[3]}</td><td ${td}>${r[4]}</td></tr>`).join('\n')}
+</tbody></table></div>`;
+const listed = FS.states.filter(r => r.list === 'list' || r.code === 'CA'), totalsN = FS.states.filter(r => r.list === 'totals').length, noneN = FS.states.filter(r => r.list === 'none' && r.code !== 'DC').length;
+const notes = FS.states.filter(r => r.list === 'list' && r.note).map(r => `<li><strong>${esc(r.name)}:</strong> ${esc(r.note)}</li>`).join('');
+const notReported = FS.states.filter(r => !r.fhwa).map(r => r.name);
+const word = n => n < 10 ? ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'][n] : String(n);
 const h1 = 'What vehicles do state DOTs and police drive?', url = 'https://milecheckapp.com/what-vehicles-do-state-dots-and-police-drive/';
-const lede = `The California Highway Patrol's most common vehicle is the Dodge Charger. It had ${num(charger.n)} of them in ${ca.year}, out of ${num(chp.total)} vehicles. Caltrans, California's DOT, mostly drives pickups and heavy trucks. Its most common are the ${caName(ctTop.m)} pickup and the ${caName(ctHeavy.m)} truck.`;
+const lede = `State, county and city governments own about ${(fh.scm_total / 1e6).toFixed(1)} million vehicles, by their 2024 reports to the Federal Highway Administration. No national count says which makes they are. ${word(listed.length)} states publish lists that do. In most of them the state police drive Dodge Chargers or Ford police vehicles, and DOT crews drive pickups and heavy trucks.`;
 const body = `    <p class="lede"><strong>${esc(lede)}</strong></p>
-    <p>These counts come from public fleet records. California publishes its state agencies' vehicles once a year. Seattle publishes a list of its city fleet. There is no free official count of police or DOT vehicles for the whole country, so this page sticks to fleets that publish their lists.</p>
+    <h2>How many vehicles do state and local governments own?</h2>
+    <p>${num(fh.scm_total)} motor vehicles in 2024. That is ${num(fh.scm_auto)} cars, ${num(fh.scm_bus)} buses and ${num(fh.scm_truck)} trucks, owned by states, counties and cities together. Federal agencies had another ${num(fh.fed_total)} on the road in the states.</p>
+    <p>${notReported.join(', ').replace(/, ([^,]*)$/, ' and $1')} reported none, so the real total is higher. FHWA publishes what each state reports. It does not break the count out by agency or by make.</p>
+    <h2>What do state police and DOTs drive in each state?</h2>
+    <p>Where a state publishes a list of its own vehicles with makes or models, the table shows the most common one for the state police and for the DOT. The Dodge Charger leads in California, Arkansas and Utah. A Ford police Explorer or police SUV leads in Illinois and Maine. Indiana's State Police units are mostly Dodge Durangos.</p>
+    <p>DOT crews mostly drive pickups and big trucks. The Ford F-150 leads in Illinois and Indiana, and the Chevrolet Silverado in California. Maine's and Utah's DOTs list more of one heavy truck than anything else, the International 7400 and the Mack GU713.</p>
+    <p><strong>Who is counted:</strong> the government vehicles column counts every car, bus and truck owned by the state, its counties and its cities, as each state reported it to FHWA for 2024. The other columns count only the state police and the state DOT, from the state's own list. ${totalsN} more states publish totals without makes, and ${noneN} publish no list we could find.</p>
+${stTable}
+    <ul style="font-size:13.5px;color:#33404a;line-height:1.5">${notes}<li>* The state left one or more vehicle types out of its FHWA report.</li><li>Models are shown the way each list names them. A count of 153 of 551 means 153 of the agency's 551 listed vehicles.</li></ul>
     <h2>What does the California Highway Patrol drive?</h2>
     <p><strong>Who is counted:</strong> California Highway Patrol vehicles in the state's ${ca.year} fleet report, not counting ones sold or retired that year. Cars, SUVs, pickups, vans, trucks and motorcycles are counted. Trailers, aircraft and boats are not.</p>
 ${chpTable}
@@ -90,16 +117,18 @@ ${sdotTable}
     <p>${num(seaEle('sdot'))} of SDOT's ${num(sdot.total)} vehicles run on electricity. For Seattle police it is ${num(seaEle('spd'))} of ${num(spd.total)}. The city lists hybrids as gas.</p>
     <h2>Where does this come from?</h2>
     <ul>
+      <li><a href="${fh.url}" rel="noopener" target="_blank">${esc(fh.source)}</a>, publicly owned vehicles by state.</li>
+${FS.states.filter(r => r.list === 'list').map(r => `      <li><a href="${esc(r.source.url)}" rel="noopener" target="_blank">${esc(r.source.name)}</a>.</li>`).join('\n')}
       <li><a href="https://data.ca.gov/dataset/california-state-fleet" rel="noopener" target="_blank">California State Fleet</a>, California Department of General Services. ${ca.year} report year, last updated ${day(ca.updated)}.</li>
       <li><a href="https://cos-data.seattle.gov/d/enxu-fgzb" rel="noopener" target="_blank">Active Fleet Complement</a>, City of Seattle. Public domain, updated ${day(seattle.updated)}.</li>
     </ul>
-    <p>MileCheck counted these on ${day(d.pulled)}. Models are shown the way each fleet record names them.</p>
+    <p>MileCheck looked for a published vehicle list in every state on ${day(FS.checked)}, in open data portals, fleet offices and legislative reports, and counted each list from the state's own file. California and Seattle were counted on ${day(d.pulled)}.</p>
     <h2>More</h2>
     <ul><li><a href="/road-workers/">How much do highway maintenance workers make?</a></li><li><a href="/road-workers/dot-jobs/">How do you get a job at a state DOT?</a></li><li><a href="/snowplows/">Where are the snowplows right now?</a></li><li><a href="/how-long-do-crashes-take-to-clear/">How long does it take to clear a highway crash?</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
-const desc = `The CHP's most common vehicle is the Dodge Charger, ${num(charger.n)} of ${num(chp.total)}. Caltrans mostly drives pickups and heavy trucks. Counts from California and Seattle fleet records.`;
-const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, url, dateModified: d.pulled, author: { '@type': 'Organization', name: 'MileCheck' }, isBasedOn: ['https://data.ca.gov/dataset/california-state-fleet', 'https://cos-data.seattle.gov/d/enxu-fgzb'] };
+const desc = `State and local governments own about ${(fh.scm_total / 1e6).toFixed(1)} million vehicles (FHWA, 2024). In the ${word(listed.length).toLowerCase()} states that list makes, state police mostly drive Dodge Chargers or Ford police vehicles, and DOTs drive pickups and heavy trucks.`;
+const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, url, dateModified: d.pulled, author: { '@type': 'Organization', name: 'MileCheck' }, isBasedOn: [fh.url, ...FS.states.filter(r => r.list === 'list').map(r => r.source.url), 'https://data.ca.gov/dataset/california-state-fleet', 'https://cos-data.seattle.gov/d/enxu-fgzb'] };
 const html = headA + `  <title>${esc(h1)} | MileCheck</title>\n  <meta name="description" content="${esc(desc)}">\n  <link rel="canonical" href="${url}">\n  <meta property="og:title" content="${esc(h1)}">\n  <meta property="og:url" content="${url}">\n  <meta property="og:type" content="article">\n` +
   headB.replace(/href="\.\.\//g, 'href="/') + `  <script type="application/ld+json">${JSON.stringify(ld)}</script>\n` + headC.replace(/href="\.\.\//g, 'href="/') +
   `  <article class="art">\n<div class="eyebrow">Road crews</div>\n    <h1>${esc(h1)}</h1>\n${body}\n` + tail;
