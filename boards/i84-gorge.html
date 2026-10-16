@@ -257,7 +257,7 @@ function detailPages(s) {
   return pages.length ? pages : ["Impact details not provided."];
 }
 function impactText(r) {
-  const parts = [r["impact-desc"], r.description, r.headline].map((x) => cleanTxt(String(x || ""))).filter(Boolean);
+  const parts = [r["impact-desc"], r.description, r.headline].map((x) => cleanTxt(String(x || "")).replace(/^No Data\.?\s*/i, "")).filter(Boolean);
   if (parts.length > 1 && /^(roadwork|road work|incident|notice|crash|closure|vehicle|hazard|weather)\.?$/i.test(parts[parts.length - 1])) parts.pop();
   return parts.filter((s, i) => !parts.some((other, j) => j !== i && other.toLowerCase().includes(s.toLowerCase()) && (other.length > s.length || j < i))).map((s) => /[.!?]$/.test(s) ? s : s + ".").join(" ");
 }
@@ -362,6 +362,7 @@ async function poll() {
     const winter = cond["road-weather-reports"].filter((r) => {
       const L = r.location || {};
       const rid = String(L["route-id"] || r["route-id"] || "").trim();
+      if (!rid && P.condNameRe && P.condNameRe.test(r["location-name"] || "")) return true;
       if (!(rid === P.alertRid || P.alertRe.test(rid))) return false;
       let m = mpOf(L["start-location"] || {}, "start");
       const la = r.latitude, lo = r.longitude;
@@ -387,7 +388,7 @@ async function poll() {
       sv.textContent = "NO CLOSURES REPORTED";
       sd.textContent = P.dot + " reports no current closures on " + P.route + " within " + NEAR_MI + " mi";
     }
-    const cams = P.cameras.filter((c) => Math.abs(c.mp - P.mile) <= NEAR_MI).map((c) => ({ kind: "cam", name: c.name, mp: c.mp }));
+    const cams = P.cameras.filter((c) => Math.abs(c.mp - P.mile) <= NEAR_MI).map((c) => ({ kind: "cam", name: c.name, mp: c.mp, file: c.file }));
     const side = (f) => {
       const a = alerts.filter((x) => f(x.mp)), c = cams.filter((x) => f(x.mp));
       const by = (p, q) => Math.abs(p.mp - P.mile) - Math.abs(q.mp - P.mile);
@@ -429,6 +430,14 @@ function renderRows(elId, list, side) {
     return c.name + " " + (d < 1 ? "here" : d + " mi");
   });
   rowCams[elId] = sideCams.length ? "Cameras: " + sideCams.join(" \xB7 ") : "";
+  if (!total) {
+    delete rowFrames[elId];
+    el.innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 22px">' + list.slice(0, 2).map((x) => {
+      const d = Math.round(Math.abs(x.mp - P.mile));
+      return '<div style="position:relative;border-radius:10px;overflow:hidden;background:#1d1d1a;aspect-ratio:4/3"><img src="' + CAM_BASE + encodeURIComponent(x.file) + "&t=" + Math.floor(Date.now() / 6e4) + `" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.visibility='hidden'"><div style="position:absolute;left:0;right:0;bottom:0;padding:8px 12px;background:rgba(0,0,0,.6);color:#fff;font-weight:700;font-size:20px">\u{1F4F7} ` + escapeText(x.name) + ' <span style="opacity:.8;font-weight:500">\xB7 ' + (d < 1 ? "here" : d + " mi") + "</span></div></div>";
+    }).join("") + "</div>";
+    return;
+  }
   rowFrames[elId] = frames;
   presentRows(elId);
 }
@@ -437,7 +446,7 @@ function presentRows(elId) {
   if (!frames || !frames.length) return;
   document.getElementById(elId).innerHTML = frames[detailStep % frames.length].map(({ x, detail, number, total }) => {
     const dm = Math.round(Math.abs(x.mp - P.mile)), dist = dm < 1 ? "here" : dm + " mi";
-    if (x.kind === "cam") return `<div class="row camera-row"><div class="nm"><span class="icn">\u{1F4F7}</span>${escapeText(x.name)}</div><div class="rt"><div class="dist big">${dist}</div></div></div>`;
+    if (x.kind === "cam") return `<div class="row camera-row" style="align-items:center"><img src="${CAM_BASE + encodeURIComponent(x.file) + "&t=" + Math.floor(Date.now() / 6e4)}" alt="" style="width:46%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;margin-right:14px;background:#222" onerror="this.style.visibility='hidden'"><div class="nm"><span class="icn">\u{1F4F7}</span>${escapeText(x.name)}</div><div class="rt"><div class="dist big">${dist}</div></div></div>`;
     const label = x.future ? "SCHEDULED" : x.stop ? "CLOSED" : "REPORTED";
     const pages = x.details || ["Impact details not provided."], page = Math.min(detail, pages.length - 1);
     const sub = [x.when, x.dir, x.upd ? P.dot + " updated " + x.upd : P.dot + " update time not provided"].filter(Boolean).join(" \xB7 ");
