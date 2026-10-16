@@ -84,5 +84,5 @@
     var mixed=list.some(function(t){return t.mixed;}),one=mixed?' truck':' plow',many=mixed?' trucks':' plows';
     return fresh+(fresh===1?one:many)+' reporting'+(old?' · '+old+' older':'');}
   function sort(list){return list.sort(function(a,b){return (a.stale-b.stale)||((a.age==null?9e9:a.age)-(b.age==null?9e9:b.age));});}
-  window.MCPlows={AGENCY:AGENCY,cameraNote:cameraNote,normalize:normalize,icon:icon,card:card,listItem:listItem,summary:summary,sort:sort,age:age,BLUE:BLUE};
+  window.MCPlows={AGENCY:AGENCY,MIXED:MIXED,cameraNote:cameraNote,normalize:normalize,icon:icon,card:card,listItem:listItem,summary:summary,sort:sort,age:age,BLUE:BLUE};
 })();

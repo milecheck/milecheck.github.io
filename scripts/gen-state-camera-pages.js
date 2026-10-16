@@ -12,6 +12,8 @@ const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versio
 // each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
 // is done. Utah first. Add the code here, then regenerate that one page:
 //   node scripts/gen-state-camera-pages.js utah
+// Feeds that mix plows with other maintenance trucks (assets/plows.js MIXED): count says trucks.
+const MIXED_PLOW = new Set(['AB', 'AK']);
 const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS', 'MB', 'AK', 'DE', 'MT', 'WV', 'MI', 'AB', 'PA', 'ON']); // every state the Worker serves plows for that has a camera page (CO and ND have no camera page); AB/PA/ON joined 2026-10-15
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
@@ -394,7 +396,7 @@ ${s.crossLinkHtml || ''}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${s.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${s.dot.split('(')[0].trim()}</div><div class="l">camera source</div></div>${plows ? `
-      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">${s.dot.split('(')[0].trim()} plows reporting</div><div class="l" id="plowCamNote" style="color:#0369A1;margin-top:4px"></div></div>` : ''}
+      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">${s.dot.split('(')[0].trim()} ${MIXED_PLOW.has(s.code) ? 'trucks' : 'plows'} reporting</div><div class="l" id="plowCamNote" style="color:#0369A1;margin-top:4px"></div></div>` : ''}
     </div>
   </div>
 
