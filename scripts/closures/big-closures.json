@@ -192,7 +192,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 10,
+   "missedChecks": 11,
    "note": null
   },
   "lat": 38.6899,
@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 67,
+   "missedChecks": 68,
    "note": null
   },
   "lat": 34.0173,
@@ -432,7 +432,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 19,
+   "missedChecks": 20,
    "note": null
   },
   "lat": 39.3044,
