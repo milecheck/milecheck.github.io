@@ -270,11 +270,11 @@ function crumbJsonLd(s){ return JSON.stringify({'@context':'https://schema.org',
 // appended only when it fits. Old copy and the new list: docs/chatgpt-review/camera-titles-2026-10-15.md
 const agencyOf = (s) => s.dot.replace(/\s*\(.*\)$/, '');
 function seoTitle(s){
-  const t = `${agencyOf(s)} Cameras: Live ${s.name} Highway Cameras`;
+  const t = `${agencyOf(s)} Cameras in ${s.name}`;  // ChatGPT pass 10/15: no colon, no repeat
   return (t + ' | MileCheck').length < 60 ? t + ' | MileCheck' : t;
 }
 function seoDesc(s, w){
-  return `Live ${agencyOf(s)} traffic cameras across ${s.name} on one map. Each camera shows its route and ${w.marker}. Tap one for the latest image.`;
+  return `View ${agencyOf(s)} traffic cameras across ${s.name} on a map. Browse camera locations by route and see available camera images.`;
 }
 
 function page(s){

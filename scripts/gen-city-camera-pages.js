@@ -25,8 +25,8 @@ const CITIES = [
     // (Ohio DOT vs Oregon DOT). Title now says "Oregon" explicitly instead of
     // just "ODOT" so Google stops blending the two. Per docs/emails/
     // chatgpt-brief-camera-page-titles-2026-09-26.md, approved by Leah.
-    title:'Portland, Oregon Traffic Cameras | TripCheck | MileCheck',
-    desc:'View Oregon DOT TripCheck camera images around Portland. Check I-5 and I-205 on one map, then tap a camera for its latest image.',
+    title:'Portland ODOT Cameras | MileCheck',
+    desc:'View ODOT cameras around Portland, Oregon, on a traffic map. Browse highway camera locations and available images.',
     sub:'View Oregon Department of Transportation (ODOT) TripCheck cameras around Portland on one map. Each is tagged with its route and mile marker — tap any camera for the latest image.' },
   { slug:'los-angeles', name:'Los Angeles', state:'CA', dot:'Caltrans', lat:34.05, lon:-118.24, r:60,
     blurb:`Los Angeles has the most-watched freeway network in America, and Caltrans covers it with hundreds of live cameras across the basin.`,
