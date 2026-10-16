@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is the road to Sundance like right now? Plows, cameras and closures | MileCheck</title>
+  <meta name="description" content="Live UDOT plow truck positions, UDOT Traffic cameras and closures on SR-92, US-189, the road to Sundance. Updates every minute. No account.">
+  <link rel="canonical" href="https://milecheckapp.com/ski/sundance/">
+  <meta property="og:title" content="What is the road to Sundance like right now? Plows, cameras and closures | MileCheck">
+  <meta property="og:description" content="Live UDOT plow truck positions, UDOT Traffic cameras and closures on SR-92, US-189, the road to Sundance. Updates every minute. No account.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/ski/sundance/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script src="/assets/plows.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"The road to Sundance right now","url":"https://milecheckapp.com/ski/sundance/","description":"Live UDOT plow truck positions, UDOT Traffic cameras and closures on SR-92, US-189, the road to Sundance. Updates every minute. No account.","isPartOf":{"@id":"https://milecheckapp.com/#website"},"about":{"@type":"SkiResort","name":"Sundance","geo":{"@type":"GeoCoordinates","latitude":40.3909,"longitude":-111.5777}},"@id":"https://milecheckapp.com/ski/sundance/#webpage"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the road to Sundance open right now?","acceptedAnswer":{"@type":"Answer","text":"The map shows every closure and crash UDOT Traffic is publishing on SR-92, US-189 as a red or orange marker, and the list under it says when the DOT last updated each one. No marker means UDOT Traffic has not posted a closure, not that the road is open. It reloads every five minutes. For the official word, open UDOT Traffic."}},{"@type":"Question","name":"Where are the plows on the road to Sundance?","acceptedAnswer":{"@type":"Answer","text":"On the map, as blue truck pins. Each is a UDOT truck's last reported GPS position, with the route and mile the DOT snapped it to, how long ago it reported, and the material it is spreading where the DOT sends that. A pin tells you a truck was there at that moment. It does not tell you the lane behind it is bare. Trucks that have not reported in an hour are faded and say so."}},{"@type":"Question","name":"Are chains required on the road to Sundance?","acceptedAnswer":{"@type":"Answer","text":"Chain and traction requirements are set by UDOT per road and per storm, and they show up in the UDOT Traffic feed as restrictions, which this page lists when they are on SR-92, US-189. Utah's chain law explains the levels and who they apply to. Always follow the posted signs."}},{"@type":"Question","name":"How often does this page update?","acceptedAnswer":{"@type":"Answer","text":"Plow positions every minute, closures and crashes every five minutes, the camera list every ten. MileCheck's server reads the UDOT and UDOT Traffic feeds and converts them to one format. Each truck and each alert carries its own time stamp from the DOT, shown next to it."}}],"@id":"https://milecheckapp.com/ski/sundance/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Ski resort roads","item":"https://milecheckapp.com/ski/"},{"@type":"ListItem","position":3,"name":"Sundance","item":"https://milecheckapp.com/ski/sundance/"}]}</script>
+  <style>
+    .sk-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .sk-hero .spon{margin:0 0 18px;}
+    .sk-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .sk-hero h1{font-size:clamp(28px,4.6vw,42px);line-height:1.1;letter-spacing:-0.01em;margin:0 0 10px;}
+    .sk-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:780px;}
+    .sk-hero .sub a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .sk-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:130px;}
+    .sk-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .sk-stat .n.live{color:#0f7a4f;} .sk-stat .n.plow{color:#0369A1;}
+    .sk-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .sk-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:62vh;min-height:440px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    .sk-bs{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13.5px;color:#0E1116;line-height:1.35;}
+    .sk-bs.err{color:#b4231a;}
+    .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:190px;font-size:13.5px;}
+    .co-layers .lt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 4px;}
+    .co-layer{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
+    .co-layer input{position:absolute;opacity:0;width:0;height:0;}
+    .co-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+    .co-layer input:checked+.co-sw.cam{background:#0f7a4f;} .co-layer input:checked+.co-sw.plow{background:#0369A1;} .co-layer input:checked+.co-sw.alert{background:#cf3320;}
+    .co-layer input:checked+.co-sw::after{left:16px;}
+    .sk-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+    .sk-base{width:30px;height:30px;border-radius:50%;background:#0E1116;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;line-height:1;}
+    .rc-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+    .rc-dot.big{width:18px;height:18px;}
+    .sk-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .sk-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .sk-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .sk-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .sk-card img.cc-img,.sk-card video.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .fpop .fp-nm{font-weight:800;font-size:14px;} .fpop .fp-st{font-size:12px;color:#5b6670;margin:2px 0 6px;} .fpop .fp-row{font-size:13px;line-height:1.45;margin-top:4px;}
+    .sk-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#5b6670;margin:10px 0 0;}
+    .sk-legend span{display:inline-flex;align-items:center;gap:6px;}
+    .sk-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
+    .sk-grid{max-width:1160px;margin:26px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:860px){.sk-grid{grid-template-columns:1fr;}}
+    .sk-box{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px 18px;}
+    .sk-box h2{font-size:19px;margin:0 0 4px;}
+    .sk-box .hint{font-size:13px;color:#5b6670;margin:0 0 10px;line-height:1.5;}
+    .sk-box .hint a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-box ul{list-style:none;padding:0;margin:0;}
+    .sk-box li{padding:9px 0;border-top:1px solid #F0F0EE;font-size:14.5px;line-height:1.4;}
+    .sk-box li .m{display:block;font-size:12.5px;color:#5b6670;margin-top:2px;}
+    .sk-box li.none{color:#5b6670;font-size:14px;}
+    .sk-box .kd{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin-left:8px;}
+    .kd.closure{color:#cf3320;} .kd.crash{color:#d9640f;} .kd.weather{color:#2563eb;} .kd.hazard{color:#7C3AED;} .kd.partial{color:#a16207;}
+    .sk-box .pn{font-size:13px;color:#0369A1;font-weight:600;margin:6px 0 0;}
+    .sk-box .pnote{font-size:13px;color:#5b6670;margin:8px 0 0;line-height:1.5;font-style:italic;}
+    .sk-links{max-width:1160px;margin:22px auto 0;padding:0 20px;}
+    .sk-links h2{font-size:23px;margin:0 0 10px;}
+    .sk-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+    .sk-cardlink{display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;text-decoration:none;color:inherit;}
+    .sk-cardlink:hover{border-color:#0E1116;}
+    .sk-cardlink .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
+    .sk-cardlink h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
+    .sk-cardlink p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
+    .sk-guide{max-width:1000px;margin:36px auto 0;padding:0 20px;}
+    .sk-guide h2{font-size:24px;margin:0 0 6px;}
+    .sk-guide p{color:#3a444d;font-size:16px;line-height:1.65;margin:0 0 14px;}
+    .sk-guide a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-faq{max-width:1000px;margin:24px auto 0;padding:0 20px;}
+    .sk-faq h2{font-size:24px;margin:0 0 14px;}
+    .sk-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .sk-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .sk-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .sk-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;} .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .sk-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .sk-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-states{max-width:1160px;margin:20px auto 0;padding:0 20px;}
+    .sk-states h2{font-size:22px;margin:26px 0 10px;}
+    .sk-rows{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;}
+    .sk-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid #F0F0EE;text-decoration:none;color:inherit;}
+    .sk-row:first-child{border-top:0;} .sk-row:hover{background:#F7F5EE;}
+    .sk-row b{font-size:15.5px;} .sk-row .rd{display:block;font-size:13px;color:#5b6670;margin-top:2px;font-weight:400;}
+    .sk-row .ct{flex:none;font-size:12.5px;font-weight:700;color:#0369A1;text-align:right;max-width:40%;}
+    .sk-row .ct.none{color:#8A939B;font-weight:600;}
+    @media(max-width:600px){ #comap{height:56vh;} .sk-bs{left:12px;font-size:12px;padding:6px 10px;} .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} .sk-card{width:60%;} .leaflet-control-zoom{display:none;} }
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+  </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/#pricing" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <div class="sk-hero">
+  <aside class="spon spon-house" id="spon" data-slot="pass:ski-sundance" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Want to advertise with us?</strong></span>
+      <span class="spon-cta">Learn more →</span>
+    </a>
+  </aside>
+    <div class="eyebrow">Ski resort roads · Utah · UDOT</div>
+    <h1>What is the road to Sundance like right now?</h1>
+    <p class="sub">US-189 up Provo Canyon, then SR-92 north. This page puts UDOT's plow trucks, UDOT Traffic's cameras and its closure and crash reports for that road on one map, refreshed every minute. The resort's own <a href="https://www.sundanceresort.com/mountain-report/" target="_blank" rel="noopener">snow report</a> covers the mountain itself.</p>
+    <div class="sk-stats">
+      <div class="sk-stat"><div class="n plow" id="statPlows">—</div><div class="l">UDOT plows reporting on the road</div></div>
+      <div class="sk-stat"><div class="n live" id="statCams">—</div><div class="l">cameras within 12 miles</div></div>
+      <div class="sk-stat"><div class="n" id="statAlerts">—</div><div class="l">closures and crashes on the road</div></div>
+    </div>
+  </div>
+
+  <div class="sk-wrap">
+    <div style="position:relative;">
+      <div id="comap" role="region" aria-label="Map of the road to Sundance"></div>
+      <div class="sk-bs" id="skStatus">Loading UDOT Traffic data&hellip;</div>
+      <div class="co-layers" role="group" aria-label="Map layers">
+        <div class="lt">Map layers</div>
+        <label class="co-layer"><input type="checkbox" id="tgPlow" checked><span class="co-sw plow"></span><span class="sk-dot" style="background:#0369A1"></span>Snowplows</label>
+        <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="sk-dot" style="background:#0f7a4f"></span>Cameras</label>
+        <label class="co-layer"><input type="checkbox" id="tgAlert" checked><span class="co-sw alert"></span><span class="sk-dot" style="background:#cf3320"></span>Closures and crashes</label>
+      </div>
+      <div class="sk-card" id="skCard"></div>
+    </div>
+    <div class="sk-legend"><span><i style="background:#0E1116"></i>Resort base</span><span><i style="background:#0369A1"></i>Plow truck, last reported position</span><span><i style="background:#0f7a4f"></i>Camera</span><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#a16207"></i>Ramp or lane</span><span style="color:#8A939B">Dashed ring: the 12 miles search area</span></div>
+  </div>
+
+  <div class="sk-grid">
+      <div class="sk-box">
+        <h2>Plows on the road right now</h2>
+        <p class="hint">UDOT trucks reporting a position on SR-92, US-189 within 36 miles of the base, or on any road within 12 miles. A pin is a position, not proof the road is open or bare. Trucks not heard from in 60 minutes are faded. <span id="plowSummary"></span></p>
+        <ul id="plowList"><li class="none">Loading the UDOT feed&hellip;</li></ul>
+        <p class="pn" id="plowCamNote" style="display:none"></p>
+        <p class="pnote">Positions come from the trucks' own GPS, through UDOT, and refresh here every minute. "Last reported" is the truck's time, not ours.</p>
+      </div>
+      <div class="sk-box">
+        <h2>Closures and crashes on the road</h2>
+        <p class="hint">UDOT Traffic reports on SR-92, US-189 within 36 miles of the base, or on any road inside the 12 miles ring: full closures, crashes, weather, hazards and lane or ramp closures. Scheduled closures are marked. Nothing listed means nothing posted, not an all-clear.</p>
+        <ul id="alertList"><li class="none">Loading the UDOT Traffic feed&hellip;</li></ul>
+      </div>
+  </div>
+
+  <div class="sk-links">
+    <h2>Before you go</h2>
+    <div class="sk-cards">
+      <a class="sk-cardlink" href="/snowplows/"><span class="k">Snowplows</span><h3>Where are the UDOT plows right now?</h3><p>Every UDOT truck that reports a position, statewide, on one map.</p></a>
+      <a class="sk-cardlink" href="https://www.sundanceresort.com/mountain-report/" target="_blank" rel="noopener"><span class="k">Snow report</span><h3>Sundance snow report</h3><p>The resort's own report: snowfall, lifts and runs. Opens the resort's site.</p></a>
+      <a class="sk-cardlink" href="/chain-laws/utah/"><span class="k">Chain law</span><h3>Utah chain and traction law</h3><p>When chains or traction tires are required on Utah highways, and the fines where the law states them.</p></a>
+      <a class="sk-cardlink" href="/cameras/utah/"><span class="k">Cameras</span><h3>Utah highway cameras</h3><p>Every UDOT Traffic camera on one map, with the route and mile marker where the DOT gives one.</p></a>
+      <a class="sk-cardlink" href="/road-conditions/utah/"><span class="k">Road conditions</span><h3>Utah road conditions</h3><p>Every closure and crash UDOT Traffic is publishing, statewide.</p></a>
+      <a class="sk-cardlink" href="https://udottraffic.utah.gov" target="_blank" rel="noopener"><span class="k">Official source</span><h3>UDOT Traffic</h3><p>Utah's traveler information site. The list of record for closures, restrictions and detours.</p></a>
+    </div>
+  </div>
+
+  <section class="sk-guide">
+    <h2>What this page can and cannot tell you</h2>
+    <p>A plow pin is where a UDOT truck was when it last reported, with the route and mile the DOT attached. It says a truck was there. It does not say the road behind it is bare, and it does not say when the next pass comes. The DOT's camera, where there is one on SR-92, US-189, shows the surface itself. The closure list is UDOT Traffic's own feed, read every five minutes and converted to the format MileCheck uses for every state. A quiet list means UDOT Traffic has posted nothing for these roads, which is different from a road being open.</p>
+    <p>The 12 miles ring is the search area for trucks and cameras. A truck reporting on SR-92, US-189 is kept out to 36 miles from the base, the stretch a driver is actually on; anything inside the ring is kept whatever road it is on, so a truck on a side road near the base still shows. The resort's own <a href="https://www.sundanceresort.com/mountain-report/" target="_blank" rel="noopener">snow report</a> is the source for snowfall, lifts and the parking lots.</p>
+  </section>
+
+  <section class="sk-faq">
+    <h2>Questions about the road to Sundance</h2>
+    <details><summary>Is the road to Sundance open right now?</summary><p>The map shows every closure and crash UDOT Traffic is publishing on SR-92, US-189 as a red or orange marker, and the list under it says when the DOT last updated each one. No marker means UDOT Traffic has not posted a closure, not that the road is open. It reloads every five minutes. For the official word, open <a href="https://udottraffic.utah.gov" target="_blank" rel="noopener">UDOT Traffic</a>.</p></details>
+    <details><summary>Where are the plows on the road to Sundance?</summary><p>On the map, as blue truck pins. Each is a UDOT truck's last reported GPS position, with the route and mile the DOT snapped it to, how long ago it reported, and the material it is spreading where the DOT sends that. A pin tells you a truck was there at that moment. It does not tell you the lane behind it is bare. Trucks that have not reported in an hour are faded and say so.</p></details>
+    <details><summary>Are chains required on the road to Sundance?</summary><p>Chain and traction requirements are set by UDOT per road and per storm, and they show up in the UDOT Traffic feed as restrictions, which this page lists when they are on SR-92, US-189. <a href="/chain-laws/utah/">Utah's chain law</a> explains the levels and who they apply to. Always follow the posted signs.</p></details>
+    <details><summary>How often does this page update?</summary><p>Plow positions every minute, closures and crashes every five minutes, the camera list every ten. MileCheck's server reads the UDOT and UDOT Traffic feeds and converts them to one format. Each truck and each alert carries its own time stamp from the DOT, shown next to it.</p></details>
+  </section>
+
+  <div class="co-cta">
+    <h2>The same alerts on your route, as you drive</h2>
+    <p>MileCheck shows your mile marker and the UDOT Traffic alerts ahead of you on SR-92, US-189, offline in dead zones, on CarPlay and Android Auto. Premium starts with a free trial.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ski-sundance&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dski-sundance" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="sk-related">More: <a href="/ski/">every ski resort road</a> · <a href="/snowplows/">snowplow map</a> · <a href="/passes/">mountain passes</a> · <a href="/cameras/utah/">Utah cameras</a> · <a href="/road-conditions/utah/">Utah road conditions</a> · <a href="/maps/">all maps</a></p>
+
+  <!-- signup:start -->
+  <section class="mc-signup" id="subscribe">
+    <style>
+      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
+      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
+      .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
+      .mc-signup .ml-form-embedContent{display:none !important;}
+      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
+      .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+    </style>
+    <div class="mc-signup-inner">
+      <p class="mc-eyebrow">The Monthly Highway Report</p>
+      <h2>Get your state's monthly road alert report</h2>
+      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
+      <div class="ml-embedded" data-form="LjADY8"></div>
+    </div>
+  </section>
+<!-- signup:end -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ski-sundance&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dski-sundance" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="/snowplows/">Snowplow map</a></li>
+            <li><a href="/passes/">Mountain passes</a></li>
+            <li><a href="/cameras/">Highway cameras</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Plow, camera and alert data: UDOT and UDOT Traffic via MileCheck. A plow pin is a reported position, not a statement about the road surface. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+<script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script>
+<script>
+// Page-level `map`: assets/map-kit.js (deferred) reads it for the phone layers popout and the near-me button.
+const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
+(function(){
+var RES={"slug":"sundance","name":"Sundance","state":"UT","lat":40.3909,"lon":-111.5777,"radius":12,"routes":["SR-92","US-189"]};
+var DOT="UDOT",TRAFFIC="UDOT Traffic",TRAFFICURL="https://udottraffic.utah.gov",PLOWS=true,KM=false;
+var WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+function normKey(r,st){var s=String(r||'').toUpperCase().replace(/\s+/g,' ').trim();if(!s)return '';var m=s.match(/^(I|US|SR|SH|S|M|ROUTE|HWY|PTH|PR|[A-Z]{2})[- ]?(\d+[A-Z]?)$/);if(!m)return 'N:'+s.replace(/[^A-Z0-9]+/g,' ').trim();var t=m[1],n=m[2];if(st==='WA')return 'W:'+n;return (t==='I'?'I':t==='US'?'U':'S')+n;}
+function hav(a,b,c,d){var p=Math.PI/180,x=(c-a)*p,y=(d-b)*p,h=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*p)*Math.cos(c*p)*Math.sin(y/2)*Math.sin(y/2);return 2*3958.8*Math.asin(Math.sqrt(h));}
+function onRoad(res,keys,lat,lon,route){var d=(isFinite(lat)&&isFinite(lon))?hav(res.lat,res.lon,lat,lon):Infinity;if(route&&keys[normKey(route,res.state)])return d<=res.radius*3;return d<=res.radius;}
+function keysOf(res){var k={};res.routes.forEach(function(r){k[normKey(r,res.state)]=1;});return k;}
+var KEYS=keysOf(RES);
+var TOUCH=('ontouchstart' in window),RS=function(v){return TOUCH?Math.round(v*1.6):v;};
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+DOT+' and '+TRAFFIC+' via MileCheck',maxZoom:16}).addTo(map);
+// Set the view before adding layers: a circle added to a map with no view has no _map yet, so its getBounds() throws.
+map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*2),{padding:[6,6]});
+L.circle([RES.lat,RES.lon],{radius:RES.radius*1609.34,color:'#0f7a4f',weight:1.5,dashArray:'4 5',fill:false,interactive:false}).addTo(map);
+L.marker([RES.lat,RES.lon],{icon:L.divIcon({className:'',iconSize:[30,30],iconAnchor:[15,15],html:'<div class="sk-base" title="'+esc(RES.name)+' base">⛷</div>'}),zIndexOffset:1200,interactive:false}).addTo(map);
+var camLayer=L.layerGroup().addTo(map),alertLayer=L.layerGroup().addTo(map),plowLayer=L.layerGroup().addTo(map);
+var CAMS=[],ALERTS=[],PLOWLIST=[],plowErr=false,alertErr=false,camErr=false,plowStatewide=0;
+var cardEl=document.getElementById('skCard'),status=document.getElementById('skStatus');
+function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function showCard(html){stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';stopStream();};}
+// Camera card + stream playback: the same code gen-state-camera-pages.js writes (image cameras get a
+// cache-busted still; stream-only cameras (COtrip, DelDOT) play through hls.js, loaded on first use).
+var MKR=KM?'km':'MP';
+function camCard(c){var loc=esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'');if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · live video from '+esc(TRAFFIC)+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}var bust=c.img+(c.img.indexOf('?')>=0?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · '+esc(TRAFFIC)+'</div><a href="'+esc(c.img)+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+esc(bust)+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+var hlsInst=null,hlsLoading=null,streamGeneration=0;function loadHls(){if(window.Hls)return Promise.resolve();if(hlsLoading)return hlsLoading;hlsLoading=new Promise(function(res,rej){var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);}).catch(function(e){hlsLoading=null;throw e;});return hlsLoading;}
+function stopStream(){streamGeneration++;if(hlsInst){try{hlsInst.destroy();}catch(e){}hlsInst=null;}var v=document.getElementById('ccVid');if(v){try{v.pause();v.removeAttribute('src');v.load();}catch(e){}}}
+function playStream(url){stopStream();var v=document.getElementById('ccVid');if(!v)return;var generation=streamGeneration;var current=function(){return generation===streamGeneration&&v.isConnected&&document.getElementById('ccVid')===v&&cardEl.style.display!=='none';};var go=function(){if(!current())return;try{var p=v.play();if(p&&p.catch)p.catch(function(){});}catch(e){}};var offline=function(){if(current())streamOffline();};var native=function(){if(!current())return;v.addEventListener('error',offline,{once:true});v.addEventListener('loadedmetadata',go,{once:true});try{v.src=url;go();}catch(e){offline();}};loadHls().then(function(){if(!current())return;if(window.Hls&&Hls.isSupported()){hlsInst=new Hls({liveSyncDurationCount:3});hlsInst.loadSource(url);hlsInst.attachMedia(v);hlsInst.on(Hls.Events.MANIFEST_PARSED,go);hlsInst.on(Hls.Events.ERROR,function(ev,d){if(d&&d.fatal)offline();});}else{native();}}).catch(function(){if(!current())return;if(hlsInst){try{hlsInst.destroy();}catch(e){}hlsInst=null;}native();});}
+function streamOffline(){stopStream();var v=document.getElementById('ccVid');if(!v)return;var d=document.createElement('div');d.className='cc-meta';d.textContent='This camera is offline right now. '+TRAFFIC+' switches some streams off for stretches.';v.replaceWith(d);}
+// Closure / crash classification: lifted from gen-road-conditions-pages.js at build time (clean, partial, fullWords, kind, when, dirN, starts, ago).
+function clean(t,n){var x=(t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/g,' ').replace(/\s+/g,' ').replace(/(\s*\|)+\s*(Status:\s*\w+)?\s*$/i,'').trim();n=n||200;if(x.length<=n)return x;var c=x.slice(0,n),sp=c.lastIndexOf(' ');return (sp>n*0.6?c.slice(0,sp):c).replace(/[\s,;:.|-]+$/,'')+'…';}
+function partial(txt){return /\b(ramp|shoulder|sidewalk|rest area)\b/.test(txt)||/\b(right|left|center|middle|one|two|three|hov|express|inside|outside|slow|fast) lanes?\b/.test(txt)||/\blane (closed|closure|blocked|restriction)/.test(txt)||/\blanes? (is|are) (closed|blocked)/.test(txt)||/\bsingle lane\b|\balternating\b|\breduced to one lane\b/.test(txt);}
+function fullWords(txt){return /\b(freeway|roadway|highway|road|route|interstate|bridge|tunnel|pass) (is )?closed\b|\bclosed (in )?both directions\b|\bfull closure\b|\bclosed to (all|thru|through) traffic\b/.test(txt);}
+function kind(r){var t=String(r['event-type-id']||'').toUpperCase(),txt=(clean(r.headline)+' '+clean(r['impact-desc'])+' '+clean(r.description)).toLowerCase();
+  // Explicit negation is handled first: "not closed", "no full closure is required", "no longer closed".
+  var neg=/\b(not|no|without|never)\s+(?:(?:yet|been|be|longer|full|complete|road|lane|highway|any)\s+)*clos(?:ed|ure|ures)\b|\bopen to traffic\b/.test(txt);
+  var closedText=!neg&&/\bclos(ed|ure)\b/.test(txt);
+  var isCL=t==='CL'&&!neg;
+  if(closedText&&partial(txt))return 'partial';
+  if(isCL&&!partial(txt))return 'closure';
+  if(closedText&&fullWords(txt))return 'closure';
+  if(t==='AC'||/\b(crash|collision|accident|overturn|rollover|jackknif)/.test(txt))return 'crash';
+  if(t==='WE'||/\b(snow|ice|icy|flood|fog|high wind|chain|blizzard|slick)/.test(txt))return 'weather';
+  if(t==='HZ')return 'hazard';
+  if(t==='RW')return 'work';
+  return 'other';}
+function when(r){var v=r['last-updated']||r['update-time']||r['date-updated'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
+function dirN(d){d=String(d||'').trim().toLowerCase();if(!d||/^(both|all|unknown|n\/a)/.test(d))return '';var m=d.match(/^(north|south|east|west)/);if(m)return m[1][0].toUpperCase()+'B';return /^(nb|sb|eb|wb)$/.test(d)?d.toUpperCase():'';}
+function starts(r){var v=r['start-time'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
+function ago(d){var m=Math.round((Date.now()-d.getTime())/60000);if(m<1)return 'just now';if(m<60)return m+' min ago';var h=Math.round(m/60);if(h<48)return h+' h ago';return Math.round(h/24)+' d ago';}
+
+var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
+var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
+var LISTED={closure:1,crash:1,weather:1,hazard:1,partial:1};
+function aIcon(k){return L.divIcon({className:'',html:'<span class="rc-dot'+(k==='closure'?' big':'')+'" style="background:'+COLOR[k]+'"></span>',iconSize:[k==='closure'?18:14,k==='closure'?18:14],iconAnchor:[k==='closure'?9:7,k==='closure'?9:7]});}
+var showCam=true,showPlow=true,showAlert=true;
+function draw(){
+  camLayer.clearLayers();alertLayer.clearLayers();plowLayer.clearLayers();
+  if(showCam)CAMS.forEach(function(c){L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',function(){showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer);});
+  if(showAlert)ALERTS.forEach(function(a){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;var m=L.marker([a.lat,a.lon],{icon:aIcon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · '+MKR+' '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+(a.future?' · scheduled':'')+'</div><div class="fp-row">'+esc(a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});alertLayer.addLayer(m);});
+  if(PLOWS&&showPlow)PLOWLIST.forEach(function(t){L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700}).on('click',function(){showCard(MCPlows.card(t));}).addTo(plowLayer);});
+  var bits=[];
+  if(PLOWS)bits.push(plowErr?'plow feed unavailable':'\uD83D\uDE9A '+MCPlows.summary(PLOWLIST));
+  bits.push(camErr?'cameras unavailable':'\uD83D\uDCF7 '+CAMS.length+(CAMS.length===1?' camera':' cameras'));
+  var cc=ALERTS.filter(function(a){return !a.future&&(a.k==='closure'||a.k==='crash');}).length;
+  bits.push(alertErr?'alerts unavailable':(cc?cc+(cc===1?' closure or crash':' closures and crashes'):'no closures or crashes'));
+  status.className='sk-bs'+(plowErr&&alertErr?' err':'');status.textContent=bits.join(' · ')+' on the road';
+}
+var tg=function(id,fn){var el=document.getElementById(id);if(el)el.onchange=function(e){fn(e.target.checked);draw();};};
+tg('tgCam',function(v){showCam=v;});tg('tgPlow',function(v){showPlow=v;});tg('tgAlert',function(v){showAlert=v;});
+function fetchJSON(url,tries){return new Promise(function(resolve){var i=0;(function go(){fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(resolve).catch(function(){if(++i<tries)setTimeout(go,1200);else resolve(null);});})();});}
+// Every active camera inside the ring is kept, highway or not: near a resort a park-road or town camera still shows the weather.
+function loadCams(){fetchJSON(WORKER+'/cameras?state='+RES.state,4).then(function(d){
+  if(!d){camErr=true;draw();return;}camErr=false;
+  CAMS=(d.cameras||[]).filter(function(c){return c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&(c.imageUrl||c.streamUrl)&&hav(RES.lat,RES.lon,+c.lat,+c.lon)<=RES.radius;}).map(function(c){return {lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||''),d:hav(RES.lat,RES.lon,+c.lat,+c.lon)};}).sort(function(a,b){return a.d-b.d;});
+  var el=document.getElementById('statCams');if(el)el.textContent=CAMS.length;
+  var ul=document.getElementById('camList');if(ul)ul.innerHTML=CAMS.length?CAMS.slice(0,12).map(function(c){return '<li>'+esc(c.title)+'<span class="m">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+(KM?Math.round(c.d*1.609)+' km':c.d.toFixed(1)+' mi')+' from the base</span></li>';}).join('')+(CAMS.length>12?'<li class="none">'+(CAMS.length-12)+' more on the map.</li>':''):'<li class="none">'+esc(TRAFFIC)+' has no camera within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base.</li>';
+  draw();});}
+function loadAlerts(){fetchJSON(WORKER+'/incidents?state='+RES.state,3).then(function(d){
+  if(!d||!Array.isArray(d['incident-reports'])){alertErr=true;draw();return;}alertErr=false;
+  var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),fh:clean(r.headline||r.description||r['impact-desc']||'Alert',1500),fd:clean(r.description||r['impact-desc']||'',1500),at:when(r),start:st,future:future};})
+    .filter(function(a){return LISTED[a.k]&&onRoad(RES,KEYS,a.lat,a.lon,a.route);});
+  var order={closure:0,crash:1,weather:2,hazard:3,partial:4};
+  list.sort(function(a,b){return (a.future-b.future)||order[a.k]-order[b.k]||((b.at?b.at.getTime():0)-(a.at?a.at.getTime():0));});
+  ALERTS=list;
+  var ul=document.getElementById('alertList');
+  if(ul)ul.innerHTML=list.length?list.slice(0,30).map(function(a){return '<li><b>'+esc(a.route||LABEL[a.k])+(a.mp?' · '+MKR+' '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</b><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span><span class="m">'+(a.future&&a.start?'Starts '+a.start.toLocaleDateString([],{month:'short',day:'numeric'})+'. ':'')+esc(a.head)+(a.at?' · '+ago(a.at):'')+'</span></li>';}).join(''):'<li class="none">No closure, crash, weather or lane report from '+esc(TRAFFIC)+' on these roads right now. A quiet feed is not an all-clear; '+esc(TRAFFIC)+' is the official list.</li>';
+  var cc=list.filter(function(a){return !a.future&&(a.k==='closure'||a.k==='crash');}).length;var el=document.getElementById('statAlerts');if(el)el.textContent=cc;
+  draw();}).catch(function(){alertErr=true;draw();});}
+function loadPlows(){if(!PLOWS)return;fetchJSON(WORKER+'/plows?state='+RES.state,3).then(function(d){
+  var el=document.getElementById('statPlows'),ul=document.getElementById('plowList'),sm=document.getElementById('plowSummary'),cn=document.getElementById('plowCamNote');
+  if(!d||!Array.isArray(d.plows)){plowErr=true;if(el)el.textContent='—';if(ul)ul.innerHTML='<li class="none">The '+esc(DOT)+' plow feed is not answering right now. That is an outage, not an empty road.</li>';draw();return;}
+  plowErr=false;
+  var all=d.plows.filter(function(t){return isFinite(+t.lat)&&isFinite(+t.lon);}).map(function(t){return MCPlows.normalize(t,DOT);});
+  plowStatewide=all.length;
+  PLOWLIST=MCPlows.sort(all.filter(function(t){return onRoad(RES,KEYS,t.lat,t.lon,t.route);}));
+  var fresh=PLOWLIST.filter(function(t){return !t.stale;}).length;
+  if(el)el.textContent=fresh;
+  if(sm)sm.textContent=PLOWLIST.length?MCPlows.summary(PLOWLIST):'';
+  if(ul)ul.innerHTML=PLOWLIST.length?PLOWLIST.slice(0,20).map(MCPlows.listItem).join(''):'<li class="none">No '+esc(DOT)+' truck is reporting a position on '+esc(RES.routes.join(', '))+' within '+(KM?Math.round(RES.radius*4.827)+' km':RES.radius*3+' miles')+', or within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base, right now'+(plowStatewide?'. '+plowStatewide+(plowStatewide===1?' truck is':' trucks are')+' reporting elsewhere in the '+esc(DOT)+' feed.':'. The '+esc(DOT)+' feed has no trucks reporting anywhere at the moment.')+'</li>';
+  if(cn){var txt=MCPlows.cameraNote(PLOWLIST);cn.textContent=txt;cn.style.display=txt?'block':'none';}
+  draw();});}
+loadCams();loadAlerts();loadPlows();
+setInterval(loadAlerts,300000);setInterval(loadPlows,60000);setInterval(loadCams,600000);
+})();</script>
+
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
+</body>
+</html>

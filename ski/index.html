@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is the road to your ski resort like right now? 62 resorts, live plows and cameras | MileCheck</title>
+  <meta name="description" content="One page per ski resort: the DOT's plow trucks on the access road, the cameras within reach of the base, and closures and crashes on the road. 62 resorts in 16 states and provinces.">
+  <link rel="canonical" href="https://milecheckapp.com/ski/">
+  <meta property="og:title" content="What is the road to your ski resort like right now? 62 resorts, live plows and cameras | MileCheck">
+  <meta property="og:description" content="One page per ski resort: the DOT's plow trucks on the access road, the cameras within reach of the base, and closures and crashes on the road. 62 resorts in 16 states and provinces.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/ski/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script src="/assets/plows.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Ski resort roads, live","url":"https://milecheckapp.com/ski/","description":"One page per ski resort: the DOT's plow trucks on the access road, the cameras within reach of the base, and closures and crashes on the road. 62 resorts in 16 states and provinces.","isPartOf":{"@id":"https://milecheckapp.com/#website"},"@id":"https://milecheckapp.com/ski/#collectionpage"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the count next to each resort mean?","acceptedAnswer":{"@type":"Answer","text":"The number of DOT plow trucks whose last reported position is on that resort's access road within three search radii of the base, or inside the ring around the base, right now. It comes from each state's or province's own truck feed and refreshes when you load the page. A count of zero means no truck is reporting there at the moment, not that the road has been neglected."}},{"@type":"Question","name":"Why do the Washington and Oregon resorts say no truck positions?","acceptedAnswer":{"@type":"Answer","text":"WSDOT and ODOT do not put their plows on a public feed. Their resort pages show the cameras within reach of the base and the closure and crash reports instead, and say so plainly."}},{"@type":"Question","name":"Is a plow on the road the same as the road being open?","acceptedAnswer":{"@type":"Answer","text":"No. A pin is a position a truck reported. The closure list on each page is the DOT's own word on whether the road is open, and the resort's snow report covers the mountain and the parking. The three together are the picture; none of them alone is."}}],"@id":"https://milecheckapp.com/ski/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Ski resort roads","item":"https://milecheckapp.com/ski/"}]}</script>
+  <style>
+    .sk-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .sk-hero .spon{margin:0 0 18px;}
+    .sk-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .sk-hero h1{font-size:clamp(28px,4.6vw,42px);line-height:1.1;letter-spacing:-0.01em;margin:0 0 10px;}
+    .sk-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:780px;}
+    .sk-hero .sub a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .sk-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:130px;}
+    .sk-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .sk-stat .n.live{color:#0f7a4f;} .sk-stat .n.plow{color:#0369A1;}
+    .sk-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .sk-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:62vh;min-height:440px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    .sk-bs{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13.5px;color:#0E1116;line-height:1.35;}
+    .sk-bs.err{color:#b4231a;}
+    .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:190px;font-size:13.5px;}
+    .co-layers .lt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 4px;}
+    .co-layer{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
+    .co-layer input{position:absolute;opacity:0;width:0;height:0;}
+    .co-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+    .co-layer input:checked+.co-sw.cam{background:#0f7a4f;} .co-layer input:checked+.co-sw.plow{background:#0369A1;} .co-layer input:checked+.co-sw.alert{background:#cf3320;}
+    .co-layer input:checked+.co-sw::after{left:16px;}
+    .sk-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+    .sk-base{width:30px;height:30px;border-radius:50%;background:#0E1116;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;line-height:1;}
+    .rc-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+    .rc-dot.big{width:18px;height:18px;}
+    .sk-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .sk-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .sk-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .sk-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .sk-card img.cc-img,.sk-card video.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .fpop .fp-nm{font-weight:800;font-size:14px;} .fpop .fp-st{font-size:12px;color:#5b6670;margin:2px 0 6px;} .fpop .fp-row{font-size:13px;line-height:1.45;margin-top:4px;}
+    .sk-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#5b6670;margin:10px 0 0;}
+    .sk-legend span{display:inline-flex;align-items:center;gap:6px;}
+    .sk-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
+    .sk-grid{max-width:1160px;margin:26px auto 0;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:860px){.sk-grid{grid-template-columns:1fr;}}
+    .sk-box{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px 18px;}
+    .sk-box h2{font-size:19px;margin:0 0 4px;}
+    .sk-box .hint{font-size:13px;color:#5b6670;margin:0 0 10px;line-height:1.5;}
+    .sk-box .hint a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-box ul{list-style:none;padding:0;margin:0;}
+    .sk-box li{padding:9px 0;border-top:1px solid #F0F0EE;font-size:14.5px;line-height:1.4;}
+    .sk-box li .m{display:block;font-size:12.5px;color:#5b6670;margin-top:2px;}
+    .sk-box li.none{color:#5b6670;font-size:14px;}
+    .sk-box .kd{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin-left:8px;}
+    .kd.closure{color:#cf3320;} .kd.crash{color:#d9640f;} .kd.weather{color:#2563eb;} .kd.hazard{color:#7C3AED;} .kd.partial{color:#a16207;}
+    .sk-box .pn{font-size:13px;color:#0369A1;font-weight:600;margin:6px 0 0;}
+    .sk-box .pnote{font-size:13px;color:#5b6670;margin:8px 0 0;line-height:1.5;font-style:italic;}
+    .sk-links{max-width:1160px;margin:22px auto 0;padding:0 20px;}
+    .sk-links h2{font-size:23px;margin:0 0 10px;}
+    .sk-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+    .sk-cardlink{display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;text-decoration:none;color:inherit;}
+    .sk-cardlink:hover{border-color:#0E1116;}
+    .sk-cardlink .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
+    .sk-cardlink h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
+    .sk-cardlink p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
+    .sk-guide{max-width:1000px;margin:36px auto 0;padding:0 20px;}
+    .sk-guide h2{font-size:24px;margin:0 0 6px;}
+    .sk-guide p{color:#3a444d;font-size:16px;line-height:1.65;margin:0 0 14px;}
+    .sk-guide a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-faq{max-width:1000px;margin:24px auto 0;padding:0 20px;}
+    .sk-faq h2{font-size:24px;margin:0 0 14px;}
+    .sk-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .sk-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .sk-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .sk-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;} .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .sk-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .sk-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-states{max-width:1160px;margin:20px auto 0;padding:0 20px;}
+    .sk-states h2{font-size:22px;margin:26px 0 10px;}
+    .sk-rows{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;}
+    .sk-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid #F0F0EE;text-decoration:none;color:inherit;}
+    .sk-row:first-child{border-top:0;} .sk-row:hover{background:#F7F5EE;}
+    .sk-row b{font-size:15.5px;} .sk-row .rd{display:block;font-size:13px;color:#5b6670;margin-top:2px;font-weight:400;}
+    .sk-row .ct{flex:none;font-size:12.5px;font-weight:700;color:#0369A1;text-align:right;max-width:40%;}
+    .sk-row .ct.none{color:#8A939B;font-weight:600;}
+    @media(max-width:600px){ #comap{height:56vh;} .sk-bs{left:12px;font-size:12px;padding:6px 10px;} .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} .sk-card{width:60%;} .leaflet-control-zoom{display:none;} }
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+  </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/#pricing" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <div class="sk-hero">
+  <aside class="spon spon-house" id="spon" data-slot="pass:ski-hub" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Want to advertise with us?</strong></span>
+      <span class="spon-cta">Learn more →</span>
+    </a>
+  </aside>
+    <div class="eyebrow">Ski resort roads · 62 resorts · 16 states and provinces</div>
+    <h1>What is the road to your ski resort like right now?</h1>
+    <p class="sub">One page per resort. Each one puts the DOT's plow trucks on the access road, the cameras within reach of the base, and the closures and crashes on that road on one map, with the chain law and the resort's own snow report beside it. Colorado, Utah, Alberta, Ontario, Pennsylvania, Minnesota, Michigan, Montana, Alaska, West Virginia, Indiana, Iowa, North Dakota and Manitoba publish truck positions. Washington and Oregon do not, and those pages say so and show the cameras instead. The count beside each resort is the trucks reporting on its road now; it refreshes when you load the page.</p>
+  </div>
+
+  <div class="sk-states">
+    <h2>Colorado <span style="font-size:13px;color:#5b6670;font-weight:600">· CDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/vail/"><span><b>Vail</b><span class="rd">I-70, exits 173 to 180, with Vail Pass 10 miles east</span></span><span class="ct" id="c-vail">loading</span></a>
+      <a class="sk-row" href="/ski/breckenridge/"><span><b>Breckenridge</b><span class="rd">SH-9 south from I-70 exit 203 at Frisco</span></span><span class="ct" id="c-breckenridge">loading</span></a>
+      <a class="sk-row" href="/ski/keystone/"><span><b>Keystone</b><span class="rd">US-6 east from I-70 exit 205 at Silverthorne</span></span><span class="ct" id="c-keystone">loading</span></a>
+      <a class="sk-row" href="/ski/arapahoe-basin/"><span><b>Arapahoe Basin</b><span class="rd">US-6 over Loveland Pass, from I-70 exit 205 or exit 216</span></span><span class="ct" id="c-arapahoe-basin">loading</span></a>
+      <a class="sk-row" href="/ski/copper-mountain/"><span><b>Copper Mountain</b><span class="rd">I-70 exit 195, where SH-91 leaves for Leadville</span></span><span class="ct" id="c-copper-mountain">loading</span></a>
+      <a class="sk-row" href="/ski/loveland/"><span><b>Loveland Ski Area</b><span class="rd">I-70 exit 216, just east of the Eisenhower Tunnel</span></span><span class="ct" id="c-loveland">loading</span></a>
+      <a class="sk-row" href="/ski/winter-park/"><span><b>Winter Park</b><span class="rd">US-40 over Berthoud Pass, from I-70 exit 232 at Empire</span></span><span class="ct" id="c-winter-park">loading</span></a>
+      <a class="sk-row" href="/ski/steamboat/"><span><b>Steamboat</b><span class="rd">US-40 over Rabbit Ears Pass into Steamboat Springs</span></span><span class="ct" id="c-steamboat">loading</span></a>
+      <a class="sk-row" href="/ski/aspen-snowmass/"><span><b>Aspen Snowmass</b><span class="rd">SH-82 up the Roaring Fork Valley from I-70 at Glenwood Springs</span></span><span class="ct" id="c-aspen-snowmass">loading</span></a>
+      <a class="sk-row" href="/ski/beaver-creek/"><span><b>Beaver Creek</b><span class="rd">I-70 exit 167 at Avon, then US-6 to Village Road</span></span><span class="ct" id="c-beaver-creek">loading</span></a>
+      <a class="sk-row" href="/ski/telluride/"><span><b>Telluride</b><span class="rd">SH-145 into Telluride and Mountain Village</span></span><span class="ct" id="c-telluride">loading</span></a>
+      <a class="sk-row" href="/ski/crested-butte/"><span><b>Crested Butte</b><span class="rd">SH-135 north from US-50 at Gunnison</span></span><span class="ct" id="c-crested-butte">loading</span></a>
+      <a class="sk-row" href="/ski/wolf-creek/"><span><b>Wolf Creek</b><span class="rd">US-160 at the top of Wolf Creek Pass, between South Fork and Pagosa Springs</span></span><span class="ct" id="c-wolf-creek">loading</span></a>
+    </div>
+    <h2>Utah <span style="font-size:13px;color:#5b6670;font-weight:600">· UDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/snowbird/"><span><b>Snowbird</b><span class="rd">SR-210 up Little Cottonwood Canyon from I-215 exit 6</span></span><span class="ct" id="c-snowbird">loading</span></a>
+      <a class="sk-row" href="/ski/alta/"><span><b>Alta</b><span class="rd">SR-210, the end of Little Cottonwood Canyon</span></span><span class="ct" id="c-alta">loading</span></a>
+      <a class="sk-row" href="/ski/brighton/"><span><b>Brighton</b><span class="rd">SR-190 to the top of Big Cottonwood Canyon</span></span><span class="ct" id="c-brighton">loading</span></a>
+      <a class="sk-row" href="/ski/solitude/"><span><b>Solitude</b><span class="rd">SR-190 up Big Cottonwood Canyon</span></span><span class="ct" id="c-solitude">loading</span></a>
+      <a class="sk-row" href="/ski/park-city/"><span><b>Park City Mountain</b><span class="rd">SR-224 south from I-80 exit 145, after Parleys Summit</span></span><span class="ct" id="c-park-city">loading</span></a>
+      <a class="sk-row" href="/ski/deer-valley/"><span><b>Deer Valley</b><span class="rd">SR-224 from I-80, or SR-248 from US-40 at Kimball Junction</span></span><span class="ct" id="c-deer-valley">loading</span></a>
+      <a class="sk-row" href="/ski/snowbasin/"><span><b>Snowbasin</b><span class="rd">SR-167 over Trappers Loop from I-84 exit 92, then SR-226</span></span><span class="ct" id="c-snowbasin">loading</span></a>
+      <a class="sk-row" href="/ski/powder-mountain/"><span><b>Powder Mountain</b><span class="rd">SR-39 up Ogden Canyon, then SR-158 through Eden to the top</span></span><span class="ct" id="c-powder-mountain">loading</span></a>
+      <a class="sk-row" href="/ski/sundance/"><span><b>Sundance</b><span class="rd">US-189 up Provo Canyon, then SR-92 north</span></span><span class="ct" id="c-sundance">loading</span></a>
+    </div>
+    <h2>Alberta <span style="font-size:13px;color:#5b6670;font-weight:600">· 511 Alberta publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/lake-louise/"><span><b>Lake Louise</b><span class="rd">AB-1, the Trans-Canada, to the Lake Louise exit</span></span><span class="ct" id="c-lake-louise">loading</span></a>
+      <a class="sk-row" href="/ski/sunshine-village/"><span><b>Sunshine Village</b><span class="rd">AB-1 west of Banff to the Sunshine Road turnoff</span></span><span class="ct" id="c-sunshine-village">loading</span></a>
+      <a class="sk-row" href="/ski/mount-norquay/"><span><b>Mt Norquay</b><span class="rd">AB-1 at Banff, then Mount Norquay Road up the switchbacks</span></span><span class="ct" id="c-mount-norquay">loading</span></a>
+      <a class="sk-row" href="/ski/marmot-basin/"><span><b>Marmot Basin</b><span class="rd">AB-16 to Jasper, then AB-93 south to Marmot Basin Road</span></span><span class="ct" id="c-marmot-basin">loading</span></a>
+      <a class="sk-row" href="/ski/nakiska/"><span><b>Nakiska</b><span class="rd">AB-40 south from AB-1 into Kananaskis Country</span></span><span class="ct" id="c-nakiska">loading</span></a>
+      <a class="sk-row" href="/ski/castle-mountain/"><span><b>Castle Mountain</b><span class="rd">AB-3 to Pincher Creek, then AB-507 and AB-774 to the end of the road</span></span><span class="ct" id="c-castle-mountain">loading</span></a>
+    </div>
+    <h2>Ontario <span style="font-size:13px;color:#5b6670;font-weight:600">· Ontario 511 publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/blue-mountain/"><span><b>Blue Mountain</b><span class="rd">ON-26 west through Collingwood, after ON-400 to Barrie</span></span><span class="ct" id="c-blue-mountain">loading</span></a>
+      <a class="sk-row" href="/ski/mount-st-louis-moonstone/"><span><b>Mount St. Louis Moonstone</b><span class="rd">ON-400 exit 131, Moonstone Road</span></span><span class="ct" id="c-mount-st-louis-moonstone">loading</span></a>
+    </div>
+    <h2>Pennsylvania <span style="font-size:13px;color:#5b6670;font-weight:600">· PennDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/seven-springs/"><span><b>Seven Springs</b><span class="rd">PA Turnpike exit 91 at Donegal, then PA-31 east</span></span><span class="ct" id="c-seven-springs">loading</span></a>
+      <a class="sk-row" href="/ski/camelback/"><span><b>Camelback</b><span class="rd">I-80 exit 299 at Tannersville, then PA-715 north</span></span><span class="ct" id="c-camelback">loading</span></a>
+      <a class="sk-row" href="/ski/elk-mountain/"><span><b>Elk Mountain</b><span class="rd">I-81 exit 206 at Lenox, then PA-374 east</span></span><span class="ct" id="c-elk-mountain">loading</span></a>
+    </div>
+    <h2>Minnesota <span style="font-size:13px;color:#5b6670;font-weight:600">· MnDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/lutsen/"><span><b>Lutsen Mountains</b><span class="rd">MN-61 up the North Shore from Duluth</span></span><span class="ct" id="c-lutsen">loading</span></a>
+      <a class="sk-row" href="/ski/spirit-mountain/"><span><b>Spirit Mountain</b><span class="rd">I-35 exit 249 on the west side of Duluth</span></span><span class="ct" id="c-spirit-mountain">loading</span></a>
+      <a class="sk-row" href="/ski/afton-alps/"><span><b>Afton Alps</b><span class="rd">I-94 east of St. Paul, then MN-95 south at Lakeland</span></span><span class="ct" id="c-afton-alps">loading</span></a>
+    </div>
+    <h2>Michigan <span style="font-size:13px;color:#5b6670;font-weight:600">· MDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/boyne-mountain/"><span><b>Boyne Mountain</b><span class="rd">US-131 at Boyne Falls</span></span><span class="ct" id="c-boyne-mountain">loading</span></a>
+      <a class="sk-row" href="/ski/the-highlands/"><span><b>The Highlands</b><span class="rd">US-31 to Petoskey, then M-119 toward Harbor Springs</span></span><span class="ct" id="c-the-highlands">loading</span></a>
+      <a class="sk-row" href="/ski/crystal-mountain-michigan/"><span><b>Crystal Mountain (Michigan)</b><span class="rd">M-115 at Thompsonville, 28 miles southwest of Traverse City</span></span><span class="ct" id="c-crystal-mountain-michigan">loading</span></a>
+    </div>
+    <h2>Montana <span style="font-size:13px;color:#5b6670;font-weight:600">· MDT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/big-sky/"><span><b>Big Sky</b><span class="rd">US-191 through Gallatin Canyon, then MT-64 up to Mountain Village</span></span><span class="ct" id="c-big-sky">loading</span></a>
+      <a class="sk-row" href="/ski/whitefish/"><span><b>Whitefish Mountain Resort</b><span class="rd">US-93 to Whitefish, then Big Mountain Road (a county road) for the last 8 miles</span></span><span class="ct" id="c-whitefish">loading</span></a>
+      <a class="sk-row" href="/ski/bridger-bowl/"><span><b>Bridger Bowl</b><span class="rd">MT-86, Bridger Canyon Road, 16 miles north of Bozeman</span></span><span class="ct" id="c-bridger-bowl">loading</span></a>
+      <a class="sk-row" href="/ski/red-lodge/"><span><b>Red Lodge Mountain</b><span class="rd">US-212 into Red Lodge, then Ski Run Road for the last 6 miles</span></span><span class="ct" id="c-red-lodge">loading</span></a>
+      <a class="sk-row" href="/ski/discovery/"><span><b>Discovery Ski Area</b><span class="rd">MT-1 from I-90 at Drummond or from Anaconda, to Georgetown Lake</span></span><span class="ct" id="c-discovery">loading</span></a>
+    </div>
+    <h2>Alaska <span style="font-size:13px;color:#5b6670;font-weight:600">· Alaska DOT&PF publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/alyeska/"><span><b>Alyeska</b><span class="rd">The Seward Highway along Turnagain Arm, then the Alyeska Highway into Girdwood</span></span><span class="ct" id="c-alyeska">loading</span></a>
+    </div>
+    <h2>West Virginia <span style="font-size:13px;color:#5b6670;font-weight:600">· WVDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/snowshoe/"><span><b>Snowshoe</b><span class="rd">US-219 to Slatyfork, then WV-66 up the mountain</span></span><span class="ct" id="c-snowshoe">loading</span></a>
+      <a class="sk-row" href="/ski/canaan-valley/"><span><b>Canaan Valley</b><span class="rd">WV-32 through Davis into Canaan Valley</span></span><span class="ct" id="c-canaan-valley">loading</span></a>
+    </div>
+    <h2>Indiana <span style="font-size:13px;color:#5b6670;font-weight:600">· INDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/perfect-north/"><span><b>Perfect North Slopes</b><span class="rd">I-275 exit 16 at Lawrenceburg, then IN-1 north</span></span><span class="ct" id="c-perfect-north">loading</span></a>
+      <a class="sk-row" href="/ski/paoli-peaks/"><span><b>Paoli Peaks</b><span class="rd">US-150 and IN-56 at Paoli</span></span><span class="ct" id="c-paoli-peaks">loading</span></a>
+    </div>
+    <h2>Iowa <span style="font-size:13px;color:#5b6670;font-weight:600">· Iowa DOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/sundown/"><span><b>Sundown Mountain</b><span class="rd">US-20 on the west side of Dubuque, then Asbury Road</span></span><span class="ct" id="c-sundown">loading</span></a>
+    </div>
+    <h2>North Dakota <span style="font-size:13px;color:#5b6670;font-weight:600">· NDDOT publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/huff-hills/"><span><b>Huff Hills</b><span class="rd">ND-1806 south of Mandan, 15 miles</span></span><span class="ct" id="c-huff-hills">loading</span></a>
+    </div>
+    <h2>Manitoba <span style="font-size:13px;color:#5b6670;font-weight:600">· Manitoba 511 publishes truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/asessippi/"><span><b>Asessippi</b><span class="rd">MB-83 north from Russell and the Yellowhead, then MB-482</span></span><span class="ct" id="c-asessippi">loading</span></a>
+    </div>
+    <h2>Washington <span style="font-size:13px;color:#5b6670;font-weight:600">· WSDOT publishes no truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/crystal-mountain/"><span><b>Crystal Mountain</b><span class="rd">SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard</span></span><span class="ct none" id="c-crystal-mountain">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/summit-at-snoqualmie/"><span><b>The Summit at Snoqualmie</b><span class="rd">I-90 at the top of Snoqualmie Pass, exits 52 to 54</span></span><span class="ct none" id="c-summit-at-snoqualmie">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/stevens-pass/"><span><b>Stevens Pass</b><span class="rd">US 2 at the top of Stevens Pass</span></span><span class="ct none" id="c-stevens-pass">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/mt-baker/"><span><b>Mt. Baker</b><span class="rd">SR 542, the Mt. Baker Highway, 56 miles east of Bellingham</span></span><span class="ct none" id="c-mt-baker">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/white-pass/"><span><b>White Pass</b><span class="rd">US 12 at the top of White Pass, between Packwood and Naches</span></span><span class="ct none" id="c-white-pass">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/mission-ridge/"><span><b>Mission Ridge</b><span class="rd">US 2 or US 97 into Wenatchee, then Squilchuck Road (a county road) for 12 miles</span></span><span class="ct none" id="c-mission-ridge">no truck positions published</span></a>
+    </div>
+    <h2>Oregon <span style="font-size:13px;color:#5b6670;font-weight:600">· ODOT publishes no truck positions</span></h2>
+    <div class="sk-rows">
+      <a class="sk-row" href="/ski/mt-hood-meadows/"><span><b>Mt. Hood Meadows</b><span class="rd">OR-35, from Hood River or from US-26 at the Government Camp junction</span></span><span class="ct none" id="c-mt-hood-meadows">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/timberline/"><span><b>Timberline</b><span class="rd">US-26 to Government Camp, then Timberline Road for the last 6 miles</span></span><span class="ct none" id="c-timberline">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/mt-bachelor/"><span><b>Mt. Bachelor</b><span class="rd">US-97 to Bend, then Century Drive (OR-372) for 22 miles</span></span><span class="ct none" id="c-mt-bachelor">no truck positions published</span></a>
+      <a class="sk-row" href="/ski/hoodoo/"><span><b>Hoodoo</b><span class="rd">US-20 at the top of Santiam Pass</span></span><span class="ct none" id="c-hoodoo">no truck positions published</span></a>
+    </div>
+  </div>
+
+  <section class="sk-guide">
+    <h2>How to read a resort page</h2>
+    <p>A plow pin is where a truck was when it last reported, with the route and mile the DOT snapped it to and the time of that report. It is a position, not a statement about the lane behind it. Trucks that have not reported in an hour are faded and labelled. The camera dots show the surface itself where the DOT has one on the road. The closure list is the DOT's own feed; nothing listed means nothing posted, which is not the same as open. The resort's snow report, linked on every page, covers the mountain and the lots.</p>
+    <p>Statewide, the same trucks are on the <a href="/snowplows/">snowplow map</a>. The summit pages for <a href="/passes/">the mountain passes</a> add the summit weather, and the <a href="/chain-laws/">chain law pages</a> explain the restriction levels before a storm puts them on a sign.</p>
+  </section>
+
+  <section class="sk-faq">
+    <h2>Questions</h2>
+    <details><summary>What does the count next to each resort mean?</summary><p>The number of DOT plow trucks whose last reported position is on that resort's access road within three search radii of the base, or inside the ring around the base, right now. It comes from each state's or province's own truck feed and refreshes when you load the page. A count of zero means no truck is reporting there at the moment, not that the road has been neglected.</p></details>
+    <details><summary>Why do the Washington and Oregon resorts say no truck positions?</summary><p>WSDOT and ODOT do not put their plows on a public feed. Their resort pages show the cameras within reach of the base and the closure and crash reports instead, and say so plainly.</p></details>
+    <details><summary>Is a plow on the road the same as the road being open?</summary><p>No. A pin is a position a truck reported. The closure list on each page is the DOT's own word on whether the road is open, and the resort's snow report covers the mountain and the parking. The three together are the picture; none of them alone is.</p></details>
+  </section>
+
+  <div class="co-cta">
+    <h2>The same alerts on your route, as you drive</h2>
+    <p>MileCheck shows your mile marker and the DOT alerts ahead of you, offline in dead zones, on CarPlay and Android Auto. Premium starts with a free trial.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ski&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dski" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="sk-related">More: <a href="/snowplows/">snowplow map</a> · <a href="/passes/">mountain passes</a> · <a href="/chain-laws/">chain laws</a> · <a href="/cameras/">highway cameras</a> · <a href="/maps/">all maps</a></p>
+
+  <!-- signup:start -->
+  <section class="mc-signup" id="subscribe">
+    <style>
+      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
+      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
+      .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
+      .mc-signup .ml-form-embedContent{display:none !important;}
+      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
+      .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+    </style>
+    <div class="mc-signup-inner">
+      <p class="mc-eyebrow">The Monthly Highway Report</p>
+      <h2>Get your state's monthly road alert report</h2>
+      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
+      <div class="ml-embedded" data-form="LjADY8"></div>
+    </div>
+  </section>
+<!-- signup:end -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ski&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dski" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="/snowplows/">Snowplow map</a></li>
+            <li><a href="/passes/">Mountain passes</a></li>
+            <li><a href="/cameras/">Highway cameras</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Plow positions: state and provincial DOTs via MileCheck. A plow pin is a reported position, not a statement about the road surface. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+<script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script>
+<script>
+(function(){
+var WORKER='https://milepost-proxy.leahgerber93.workers.dev',AGENCY=window.MCPlows?MCPlows.AGENCY:{};
+var RES=[{"slug":"vail","state":"CO","lat":39.6403,"lon":-106.3742,"radius":15,"routes":["I-70"]},{"slug":"breckenridge","state":"CO","lat":39.4805,"lon":-106.0667,"radius":15,"routes":["SH-9","I-70"]},{"slug":"keystone","state":"CO","lat":39.6046,"lon":-105.9538,"radius":12,"routes":["US-6","I-70"]},{"slug":"arapahoe-basin","state":"CO","lat":39.6419,"lon":-105.8721,"radius":12,"routes":["US-6","I-70"]},{"slug":"copper-mountain","state":"CO","lat":39.4994,"lon":-106.1563,"radius":12,"routes":["I-70","SH-91"]},{"slug":"loveland","state":"CO","lat":39.6783,"lon":-105.9105,"radius":10,"routes":["I-70","US-6"]},{"slug":"winter-park","state":"CO","lat":39.862,"lon":-105.7738,"radius":15,"routes":["US-40"]},{"slug":"steamboat","state":"CO","lat":40.4563,"lon":-106.7662,"radius":20,"routes":["US-40","SH-131"]},{"slug":"aspen-snowmass","state":"CO","lat":39.1857,"lon":-106.9449,"radius":20,"routes":["SH-82"]},{"slug":"beaver-creek","state":"CO","lat":39.6042,"lon":-106.5165,"radius":12,"routes":["I-70","US-6"]},{"slug":"telluride","state":"CO","lat":37.9362,"lon":-107.8451,"radius":20,"routes":["SH-145","SH-62"]},{"slug":"crested-butte","state":"CO","lat":38.897,"lon":-106.9447,"radius":20,"routes":["SH-135","US-50"]},{"slug":"wolf-creek","state":"CO","lat":37.4647,"lon":-106.7865,"radius":20,"routes":["US-160"]},{"slug":"snowbird","state":"UT","lat":40.5807,"lon":-111.6573,"radius":12,"routes":["SR-210","I-215"]},{"slug":"alta","state":"UT","lat":40.5882,"lon":-111.6384,"radius":12,"routes":["SR-210","I-215"]},{"slug":"brighton","state":"UT","lat":40.5983,"lon":-111.5837,"radius":12,"routes":["SR-190","I-215"]},{"slug":"solitude","state":"UT","lat":40.6231,"lon":-111.5976,"radius":12,"routes":["SR-190","I-215"]},{"slug":"park-city","state":"UT","lat":40.6514,"lon":-111.5077,"radius":12,"routes":["SR-224","I-80","SR-248"]},{"slug":"deer-valley","state":"UT","lat":40.6374,"lon":-111.4783,"radius":12,"routes":["SR-224","SR-248","I-80","US-40"]},{"slug":"snowbasin","state":"UT","lat":41.2004,"lon":-111.8653,"radius":15,"routes":["SR-226","SR-167","I-84"]},{"slug":"powder-mountain","state":"UT","lat":41.379,"lon":-111.7804,"radius":15,"routes":["SR-158","SR-39","SR-162"]},{"slug":"sundance","state":"UT","lat":40.3909,"lon":-111.5777,"radius":12,"routes":["SR-92","US-189"]},{"slug":"lake-louise","state":"AB","lat":51.4423,"lon":-116.1619,"radius":20,"routes":["AB-1","AB-93"]},{"slug":"sunshine-village","state":"AB","lat":51.1163,"lon":-115.7623,"radius":20,"routes":["AB-1"]},{"slug":"mount-norquay","state":"AB","lat":51.1996,"lon":-115.5941,"radius":15,"routes":["AB-1"]},{"slug":"marmot-basin","state":"AB","lat":52.7954,"lon":-118.1061,"radius":20,"routes":["AB-93","AB-16"]},{"slug":"nakiska","state":"AB","lat":50.9419,"lon":-115.1513,"radius":20,"routes":["AB-40","AB-1"]},{"slug":"castle-mountain","state":"AB","lat":49.3089,"lon":-114.4253,"radius":25,"routes":["AB-774","AB-507","AB-3"]},{"slug":"blue-mountain","state":"ON","lat":44.5058,"lon":-80.3073,"radius":20,"routes":["ON-26","ON-400"]},{"slug":"mount-st-louis-moonstone","state":"ON","lat":44.6236,"lon":-79.6667,"radius":15,"routes":["ON-400"]},{"slug":"seven-springs","state":"PA","lat":40.0235,"lon":-79.2982,"radius":15,"routes":["I-76","PA-31"]},{"slug":"camelback","state":"PA","lat":41.0492,"lon":-75.3504,"radius":12,"routes":["I-80","PA-715"]},{"slug":"elk-mountain","state":"PA","lat":41.7196,"lon":-75.5584,"radius":12,"routes":["I-81","PA-374"]},{"slug":"lutsen","state":"MN","lat":47.656,"lon":-90.7251,"radius":20,"routes":["MN-61"]},{"slug":"spirit-mountain","state":"MN","lat":46.7176,"lon":-92.2124,"radius":12,"routes":["I-35"]},{"slug":"afton-alps","state":"MN","lat":44.8576,"lon":-92.7879,"radius":12,"routes":["MN-95","I-94"]},{"slug":"boyne-mountain","state":"MI","lat":45.1636,"lon":-84.9298,"radius":15,"routes":["US-131"]},{"slug":"the-highlands","state":"MI","lat":45.468,"lon":-84.9318,"radius":15,"routes":["US-31","M-119"]},{"slug":"crystal-mountain-michigan","state":"MI","lat":44.5193,"lon":-85.9907,"radius":20,"routes":["M-115","US-31","US-131"]},{"slug":"big-sky","state":"MT","lat":45.284,"lon":-111.4011,"radius":20,"routes":["MT-64","US-191"]},{"slug":"whitefish","state":"MT","lat":48.4811,"lon":-114.3579,"radius":15,"routes":["US-93"]},{"slug":"bridger-bowl","state":"MT","lat":45.8163,"lon":-110.9104,"radius":20,"routes":["MT-86","I-90"]},{"slug":"red-lodge","state":"MT","lat":45.1908,"lon":-109.3369,"radius":15,"routes":["US-212"]},{"slug":"discovery","state":"MT","lat":46.2637,"lon":-113.2424,"radius":20,"routes":["MT-1","I-90"]},{"slug":"alyeska","state":"AK","lat":60.9703,"lon":-149.0987,"radius":20,"routes":["Seward Highway","Alyeska Highway"]},{"slug":"snowshoe","state":"WV","lat":38.4109,"lon":-79.9908,"radius":20,"routes":["WV-66","US-219"]},{"slug":"canaan-valley","state":"WV","lat":39.0336,"lon":-79.4408,"radius":15,"routes":["WV-32","US-33"]},{"slug":"perfect-north","state":"IN","lat":39.1472,"lon":-84.8873,"radius":12,"routes":["IN-1","I-275","I-74"]},{"slug":"paoli-peaks","state":"IN","lat":38.5559,"lon":-86.5122,"radius":15,"routes":["US-150","IN-56"]},{"slug":"sundown","state":"IA","lat":42.5165,"lon":-90.8226,"radius":12,"routes":["US-20","US-52"]},{"slug":"huff-hills","state":"ND","lat":46.6239,"lon":-100.6518,"radius":20,"routes":["ND-1806","I-94"]},{"slug":"asessippi","state":"MB","lat":50.9517,"lon":-101.3395,"radius":25,"routes":["MB-83","MB-482","MB-16"]}];
+function normKey(r,st){var s=String(r||'').toUpperCase().replace(/\s+/g,' ').trim();if(!s)return '';var m=s.match(/^(I|US|SR|SH|S|M|ROUTE|HWY|PTH|PR|[A-Z]{2})[- ]?(\d+[A-Z]?)$/);if(!m)return 'N:'+s.replace(/[^A-Z0-9]+/g,' ').trim();var t=m[1],n=m[2];if(st==='WA')return 'W:'+n;return (t==='I'?'I':t==='US'?'U':'S')+n;}
+function hav(a,b,c,d){var p=Math.PI/180,x=(c-a)*p,y=(d-b)*p,h=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*p)*Math.cos(c*p)*Math.sin(y/2)*Math.sin(y/2);return 2*3958.8*Math.asin(Math.sqrt(h));}
+function onRoad(res,keys,lat,lon,route){var d=(isFinite(lat)&&isFinite(lon))?hav(res.lat,res.lon,lat,lon):Infinity;if(route&&keys[normKey(route,res.state)])return d<=res.radius*3;return d<=res.radius;}
+function keysOf(res){var k={};res.routes.forEach(function(r){k[normKey(r,res.state)]=1;});return k;}
+var byState={};RES.forEach(function(r){(byState[r.state]=byState[r.state]||[]).push(r);});
+Object.keys(byState).forEach(function(st){
+  fetch(WORKER+'/plows?state='+st,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
+    var all=((d&&d.plows)||[]).filter(function(t){return isFinite(+t.lat)&&isFinite(+t.lon);}).map(function(t){return MCPlows.normalize(t,AGENCY[st]);});
+    byState[st].forEach(function(res){var keys=keysOf(res);var hit=all.filter(function(t){return onRoad(res,keys,t.lat,t.lon,t.route);});var fresh=hit.filter(function(t){return !t.stale;}).length,old=hit.length-fresh;var el=document.getElementById('c-'+res.slug);if(!el)return;if(!hit.length){el.textContent='no plows reporting now';el.className='ct none';}else if(!fresh){el.textContent=old+(old===1?' older report only':' older reports only');el.className='ct none';}else{el.textContent=fresh+(fresh===1?' plow':' plows')+' reporting'+(old?' · '+old+' older':'');el.className='ct';}});
+  }).catch(function(){byState[st].forEach(function(res){var el=document.getElementById('c-'+res.slug);if(el){el.textContent='feed unavailable';el.className='ct none';}});});
+});
+})();</script>
+
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
+</body>
+</html>
