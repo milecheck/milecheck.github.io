@@ -18,12 +18,13 @@ jobs:
       - run: node scripts/gen-gas-prices.mjs
       - run: node scripts/gen-ev-chargers.mjs
       - run: node scripts/gen-ev-charging-cost.mjs
+      - run: node scripts/gen-gas-vs-ev.mjs
       - run: node scripts/finish-pages.mjs --pages-only
       - name: Commit if changed
         run: |
           git config user.name "milecheck-bot"
           git config user.email "info@milecheckapp.com"
-          git add gas-prices data/gas-prices.json data/gas-prices-history.csv ev-chargers data/ev-chargers.json data/ev-chargers-history.csv ev-charging-cost data/electricity-prices.json data/electricity-prices-history.csv
+          git add gas-prices data/gas-prices.json data/gas-prices-history.csv ev-chargers data/ev-chargers.json data/ev-chargers-history.csv ev-charging-cost data/electricity-prices.json data/electricity-prices-history.csv gas-vs-electric-car
           git diff --cached --quiet && exit 0
           git commit -m "Gas prices: EIA weekly update $(date -u +%Y-%m-%d)"
           git stash --include-untracked --quiet || true
