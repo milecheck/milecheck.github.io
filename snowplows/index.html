@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <title>Where are the snowplows right now? Live plow map, 14 states and provinces | MileCheck</title>
+  <meta name="description" content="Live snowplow positions from state DOT truck feeds: Colorado, Utah, Indiana, Iowa, Minnesota, Kansas, Nebraska, Alaska, Michigan, Montana, Delaware, West Virginia, North Dakota and Manitoba. Each truck shows its route, mile marker and when it last reported.">
+  <link rel="canonical" href="https://milecheckapp.com/snowplows/">
+  <meta property="og:title" content="Where are the snowplows right now?">
+  <meta property="og:description" content="Live DOT plow truck positions in 14 states and provinces, with route, mile marker and last report time.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/snowplows/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
+  <script src="/assets/plows.js"></script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
+  <style>
+    .sp-hero{max-width:1160px;margin:0 auto;padding:38px 20px 8px;}
+    .sp-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .sp-hero p.sub{color:#5b6670;font-size:15.5px;margin-top:8px;max-width:72ch;line-height:1.55;}
+    .sp-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #map{height:min(72vh,640px);border-radius:14px;border:1px solid #E5E5E5;position:relative;overflow:hidden;}
+    .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0369A1;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .sp-note{max-width:1160px;margin:10px auto 0;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.5;}
+    .sp-table{max-width:1160px;margin:26px auto 0;padding:0 20px;}
+    .sp-table h2{font-size:22px;font-weight:800;margin:0 0 10px;}
+    table.sp{width:100%;border-collapse:collapse;font-size:14.5px;background:#fff;border:1px solid #E5E5E5;border-radius:12px;overflow:hidden;}
+    table.sp th,table.sp td{text-align:left;padding:9px 12px;border-bottom:1px solid #F0F0EE;}
+    table.sp th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;background:#FAFAF8;}
+    table.sp td.n{font-weight:800;color:#0369A1;} table.sp td.o{color:#92400E;font-size:13px;}
+    table.sp tr{cursor:pointer;} table.sp tr:hover td{background:#f6f9fb;}
+    table.sp a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sp-guide{max-width:1000px;margin:36px auto 0;padding:0 20px;}
+    .sp-guide h2{font-size:24px;margin:0 0 6px;}
+    .sp-guide p{color:#3a444d;font-size:16px;line-height:1.65;margin:0 0 14px;}
+    .sp-guide a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;} .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    @media(max-width:600px){ table.sp th:nth-child(5),table.sp td:nth-child(5){display:none;} }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Where are the snowplows right now?","url":"https://milecheckapp.com/snowplows/","description":"Live DOT plow truck positions in 14 states and provinces."}</script>
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps" aria-current="page">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/#pricing" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <div class="sp-hero">
+    <h1>Where are the snowplows right now?</h1>
+    <p class="sub">Every truck a state DOT publishes a live position for, on one map. Tap a truck for its route, mile marker, heading and when it last reported. Trucks that have not reported in an hour are faded. This is where the trucks are. It is not a report that any road has been plowed.</p>
+  </div>
+
+  <div class="sp-wrap">
+    <div id="map">
+      <div class="co-bs" id="coStatus">Loading plow feeds…</div>
+      <div class="co-card" id="card"></div>
+    </div>
+  </div>
+  <p class="sp-note">Positions come straight from each DOT's truck feed and refresh every minute. A parked truck keeps reporting from the yard, so a pin is not a sign that the road is being worked. Washington, Oregon, California and most other states do not publish truck positions.</p>
+
+  <div class="sp-table">
+    <h2>States and provinces with a live plow feed</h2>
+    <table class="sp"><thead><tr><th>State</th><th>Agency</th><th>Reporting now</th><th></th><th>State page</th></tr></thead><tbody><tr data-st="UT"><td>Utah</td><td>UDOT</td><td class="n" id="n-UT">…</td><td class="o" id="o-UT"></td><td><a href="/cameras/utah/">cameras + plows</a></td></tr><tr data-st="CO"><td>Colorado</td><td>CDOT</td><td class="n" id="n-CO">…</td><td class="o" id="o-CO"></td><td></td></tr><tr data-st="DE"><td>Delaware</td><td>DelDOT</td><td class="n" id="n-DE">…</td><td class="o" id="o-DE"></td><td></td></tr><tr data-st="MT"><td>Montana</td><td>MDT</td><td class="n" id="n-MT">…</td><td class="o" id="o-MT"></td><td></td></tr><tr data-st="WV"><td>West Virginia</td><td>WVDOT</td><td class="n" id="n-WV">…</td><td class="o" id="o-WV"></td><td></td></tr><tr data-st="MI"><td>Michigan</td><td>MDOT</td><td class="n" id="n-MI">…</td><td class="o" id="o-MI"></td><td></td></tr><tr data-st="NE"><td>Nebraska</td><td>NDOT</td><td class="n" id="n-NE">…</td><td class="o" id="o-NE"></td><td><a href="/cameras/nebraska/">cameras + plows</a></td></tr><tr data-st="IN"><td>Indiana</td><td>INDOT</td><td class="n" id="n-IN">…</td><td class="o" id="o-IN"></td><td><a href="/cameras/indiana/">cameras + plows</a></td></tr><tr data-st="IA"><td>Iowa</td><td>Iowa DOT</td><td class="n" id="n-IA">…</td><td class="o" id="o-IA"></td><td><a href="/cameras/iowa/">cameras + plows</a></td></tr><tr data-st="MN"><td>Minnesota</td><td>MnDOT</td><td class="n" id="n-MN">…</td><td class="o" id="o-MN"></td><td><a href="/cameras/minnesota/">cameras + plows</a></td></tr><tr data-st="KS"><td>Kansas</td><td>KDOT</td><td class="n" id="n-KS">…</td><td class="o" id="o-KS"></td><td><a href="/cameras/kansas/">cameras + plows</a></td></tr><tr data-st="MB"><td>Manitoba</td><td>Manitoba 511</td><td class="n" id="n-MB">…</td><td class="o" id="o-MB"></td><td><a href="/cameras/manitoba/">cameras + plows</a></td></tr><tr data-st="AK"><td>Alaska</td><td>Alaska DOT&amp;PF</td><td class="n" id="n-AK">…</td><td class="o" id="o-AK"></td><td><a href="/cameras/alaska/">cameras + plows</a></td></tr><tr data-st="ND"><td>North Dakota</td><td>NDDOT</td><td class="n" id="n-ND">…</td><td class="o" id="o-ND"></td><td></td></tr></tbody></table>
+  </div>
+
+  <div class="sp-guide">
+    <h2>What the map shows</h2>
+    <p>Each pin is a truck's last GPS report. "Reporting now" counts trucks heard from in the last hour. "Older" counts trucks whose last report is more than an hour old; they stay on the map, faded. Indiana, Iowa, Minnesota, Kansas and Nebraska trucks also report what material they are putting down and, on some trucks, a photo from the truck's own camera. Colorado's feed is CDOT's whole fleet, so only vehicles CDOT names as snow plows are shown.</p>
+    <p>The same layer is in the MileCheck app under Map Options, with the trucks drawn around your own position. The app also shows <a href="/cameras/">DOT cameras</a>, live closures and your nearest mile marker.</p>
+  </div>
+
+  <div class="co-cta">
+    <h2>Plows, cameras and closures around you</h2>
+    <p>The MileCheck app shows the plows near your position on the same map as the DOT cameras and live closures, with your nearest mile marker on screen while you drive.</p>
+    <div class="btns"><a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851">App Store</a><a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile">Google Play</a></div>
+  </div>
+
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=maps&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmaps" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>
+const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+const STATES=[["UT", "Utah", "UDOT"], ["CO", "Colorado", "CDOT"], ["DE", "Delaware", "DelDOT"], ["MT", "Montana", "MDT"], ["WV", "West Virginia", "WVDOT"], ["MI", "Michigan", "MDOT"], ["NE", "Nebraska", "NDOT"], ["IN", "Indiana", "INDOT"], ["IA", "Iowa", "Iowa DOT"], ["MN", "Minnesota", "MnDOT"], ["KS", "Kansas", "KDOT"], ["MB", "Manitoba", "Manitoba 511"], ["AK", "Alaska", "Alaska DOT&PF"], ["ND", "North Dakota", "NDDOT"]];
+const map=L.map('map',{gestureHandling:('ontouchstart' in window),zoomControl:true}).setView([41.5,-100],4);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Plow positions: state DOT feeds via MileCheck',maxZoom:16}).addTo(map);
+const layer=L.layerGroup().addTo(map);
+const cardEl=document.getElementById('card');
+function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=()=>{cardEl.style.display='none';};}
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
+let ALL={};
+function draw(){layer.clearLayers();let fresh=0,old=0,failed=[];for(const [st,name,dot] of STATES){const l=ALL[st];const nEl=document.getElementById('n-'+st),oEl=document.getElementById('o-'+st);if(!l){nEl.textContent='feed down';nEl.style.color='#92400E';failed.push(name);continue;}const f=l.filter(t=>!t.stale).length,o=l.length-f;fresh+=f;old+=o;nEl.textContent=f;oEl.textContent=o?o+' older':'';l.forEach(t=>L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?0:500}).on('click',()=>showCard(MCPlows.card(t))).addTo(layer));}
+  document.getElementById('coStatus').textContent='🚚 '+fresh+(fresh===1?' plow':' plows')+' reporting'+(old?' · '+old+' older':'')+(failed.length?' · unavailable: '+failed.join(', '):'');}
+async function load(){await Promise.all(STATES.map(async([st,name,dot])=>{const d=await fetchJSON(WORKER+'/plows?state='+st,2);if(!d||!Array.isArray(d.plows)){ALL[st]=null;return;}ALL[st]=MCPlows.sort(d.plows.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>MCPlows.normalize(t,dot)));}));draw();}
+load();setInterval(load,60000);
+document.querySelectorAll('table.sp tr[data-st]').forEach(tr=>tr.addEventListener('click',e=>{if(e.target.tagName==='A')return;const l=ALL[tr.dataset.st];if(l&&l.length){map.fitBounds(L.latLngBounds(l.map(t=>[t.lat,t.lon])).pad(0.2));document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});}}));
+</script>
+</body>
+</html>

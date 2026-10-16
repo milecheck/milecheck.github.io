@@ -363,6 +363,7 @@ ${sp.css}
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
   <link rel="stylesheet" href="/assets/map-kit.css">
   <script src="/assets/map-kit.js" defer></script>
+  <script src="/assets/plows.js"></script>
 </head>
 <body>
 
@@ -509,9 +510,9 @@ function playStream(url){stopStream();var v=document.getElementById('ccVid');if(
 // A stream the DOT has switched off answers with an empty playlist (WV511 sent 204 for most of its cameras on 2026-09-25). Say so instead of leaving a blank player.
 function streamOffline(){stopStream();var v=document.getElementById('ccVid');if(!v)return;var d=document.createElement('div');d.className='cc-meta';d.textContent='This camera is offline right now. '+DOT+' switches some streams off for stretches.';v.replaceWith(d);}
 function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
-function plowIcon(b){return L.divIcon({className:'',html:'<div class="plow-icon" style="transform:rotate('+(b||0)+'deg)">▲</div>',iconSize:[22,22],iconAnchor:[11,11]});}
-function plowCard(t){return '<div class="cc-title">'+esc(t.name)+'</div><div class="cc-meta">'+(t.route?esc(t.route)+(t.mile!=null?' near '+MKR+' '+esc(Math.round(t.mile*10)/10):'')+' · ':'')+(t.status?esc(t.status)+' · ':'')+(t.heading?'heading '+esc(t.heading).toLowerCase()+' · ':'')+(t.age!=null?'seen '+Math.round(t.age)+' min ago':'no timestamp')+'</div>'+(t.img?'<a href="'+t.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+t.img+'" alt="Photo from the truck camera" loading="lazy"></a><div class="cc-meta">Photo from the truck\\'s own camera, as sent to '+DOT+'.</div>':'')+'<div class="cc-meta">Position from '+DOT+'. It says where the truck is, not that the road is plowed.</div>';}
-function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t.bearing)}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚜 '+PLOWLIST.length+' plows reporting');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in ${s.name}':'Toggle a layer to view ${s.name} data';}
+function plowIcon(t){return MCPlows.icon(t,L);}
+function plowCard(t){return MCPlows.card(t);}
+function draw(){camLayer.clearLayers();plowLayer.clearLayers();const b=map.getBounds();const cferry=(r)=>FERRY_RE.test(r);if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:cferry(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));if(c.stream)playStream(c.stream);}).addTo(camLayer));if(PLOWS&&showPlow)PLOWLIST.forEach(t=>L.marker([t.lat,t.lon],{icon:plowIcon(t),zIndexOffset:500}).on('click',()=>showCard(plowCard(t))).addTo(plowLayer));const bits=[];if(showCam)bits.push(CAMS.length?'📷 '+CAMS.length+' live cameras':'no cameras loaded');if(PLOWS&&showPlow)bits.push('🚚 '+MCPlows.summary(PLOWLIST));document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' in ${s.name}':'Toggle a layer to view ${s.name} data';}
 const tgCam=document.getElementById('tgCam');if(tgCam)tgCam.onchange=e=>{showCam=e.target.checked;draw();};
 const tgPlow=document.getElementById('tgPlow');if(tgPlow)tgPlow.onchange=e=>{showPlow=e.target.checked;draw();};
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
@@ -523,7 +524,7 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
   document.getElementById('statCams').textContent=CAMS.length;
   draw();
 });
-if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>{const vin=/^[A-Z0-9]{17}$/.test(t.name||'');const agency=String(t.status||'').trim();const age=(Date.now()-Date.parse(t.lastUpdated))/60000;return {lat:+t.lat,lon:+t.lon,bearing:+t.bearing||0,name:vin?((agency||DOT)+' plow'):(t.name||'Plow'),status:vin?'':agency,route:t.route||t.roadName||'',mile:t.mile!=null?t.mile:null,heading:t.heading||'',img:t.imageUrl||'',age:isFinite(age)?age:null};});const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.length;draw();});
+if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=MCPlows.sort(list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>MCPlows.normalize(t,DOT)));const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.filter(t=>!t.stale).length;draw();});
 </script>
 
 </body>
