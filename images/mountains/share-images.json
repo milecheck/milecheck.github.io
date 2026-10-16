@@ -54,5 +54,13 @@
     "width": 1200,
     "height": 630,
     "background": "#1d5fa8"
+  },
+  {
+    "key": "baldy",
+    "question": "Is Mount Baldy visible right now?",
+    "file": "og-baldy.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
   }
 ]
