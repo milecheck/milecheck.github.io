@@ -387,7 +387,7 @@ function resortPage(r) {
 
   const cards = [];
   if (plows) cards.push(['Snowplows', `Where are the ${reg.dot} plows right now?`, `Every ${reg.dot} truck that reports a position, statewide, on one map.`, '/snowplows/']);
-  cards.push(['Snow report', `${r.name} snow report`, `The resort's own report: snowfall, lifts and runs. Opens the resort's site.`, r.report, true]);
+  cards.push(['Snow report', r.reportName || `${r.name} snow report`, `The resort's own report: snowfall, lifts and runs. Opens the resort's site.`, r.report, true]);
   if (r.pass) cards.push(['Mountain pass', PASS_NAME[r.pass] || r.pass, `The pass page for the same road: cameras, restrictions and closures, with the summit weather.`, `/passes/${r.pass}/`]);
   if (r.corridor) cards.push(['Corridor', `${r.corridor.toUpperCase()} conditions`, `The whole ${r.corridor.toUpperCase()} corridor, every state it crosses, alerts by mile marker.`, `/corridors/${r.corridor}/`]);
   cards.push(['Chain law', chain[1], chain[2], chain[0]]);
@@ -431,7 +431,7 @@ function resortPage(r) {
 ${sp.html}
     <div class="eyebrow">Ski resort roads · ${reg.name} · ${reg.dot}</div>
     <h1>What is the road to ${r.name} like right now?</h1>
-    <p class="sub">${esc(r.road.charAt(0).toUpperCase() + r.road.slice(1))}. ${plows ? `This page puts ${reg.dot}'s plow trucks, ${reg.trafficName}'s cameras and its closure and crash reports for that road on one map, refreshed every minute.` : `This page puts ${reg.trafficName}'s cameras and its closure and crash reports for that road on one map. ${reg.name} publishes no plow positions, and the page says so instead of guessing.`} The resort's own <a href="${esc(r.report)}" target="_blank" rel="noopener">snow report</a> covers the mountain itself.${r.note ? ` ${esc(r.note)}` : ''}</p>
+    <p class="sub">${esc(r.road.charAt(0).toUpperCase() + r.road.slice(1))}. ${plows ? `This page puts ${reg.dot}'s plow trucks, ${reg.trafficName}'s cameras and its closure and crash reports for that road on one map, refreshed every minute.` : `This page puts ${reg.trafficName}'s cameras and its closure and crash reports for that road on one map. ${reg.name} publishes no plow positions, and the page says so instead of guessing.`} The resort's own <a href="${esc(r.report)}" target="_blank" rel="noopener">${r.reportName ? esc(r.reportName) : 'snow report'}</a> covers the mountain itself.${r.note ? ` ${esc(r.note)}` : ''}</p>
     <div class="sk-stats">${plows ? `
       <div class="sk-stat"><div class="n plow" id="statPlows">—</div><div class="l">${reg.dot} plows reporting on the road</div></div>` : `
       <div class="sk-stat"><div class="n" style="font-size:15px;padding-top:5px">none published</div><div class="l">${reg.dot} plow positions</div></div>`}
@@ -474,7 +474,7 @@ ${cardsHtml}
   <section class="sk-guide">
     <h2>What this page can and cannot tell you</h2>
     <p>${plows ? `A plow pin is where a ${reg.dot} truck was when it last reported, with the route and ${km ? 'kilometre' : 'mile'} the DOT attached. It says a truck was there. It does not say the road behind it is bare, and it does not say when the next pass comes. The DOT's camera, where there is one on ${esc(routesTxt)}, shows the surface itself.` : `${reg.dot} publishes its cameras and its closure and crash reports, and that is what this page shows. It does not publish where its trucks are, so no page can show that for ${reg.name}.`} The closure list is ${reg.trafficName}'s own feed, read every five minutes and converted to the format MileCheck uses for every state. A quiet list means ${reg.trafficName} has posted nothing for these roads, which is different from a road being open.</p>
-    <p>The ${radiusTxt} ring is the search area for trucks and cameras. A truck reporting on ${esc(routesTxt)} is kept out to ${farTxt} from the base, the stretch a driver is actually on; anything inside the ring is kept whatever road it is on, so a truck on a side road near the base still shows. The resort's own <a href="${esc(r.report)}" target="_blank" rel="noopener">snow report</a> is the source for snowfall, lifts and the parking lots.${r.note ? ` ${esc(r.note)}` : ''}</p>
+    <p>The ${radiusTxt} ring is the search area for trucks and cameras. A truck reporting on ${esc(routesTxt)} is kept out to ${farTxt} from the base, the stretch a driver is actually on; anything inside the ring is kept whatever road it is on, so a truck on a side road near the base still shows. The resort's own <a href="${esc(r.report)}" target="_blank" rel="noopener">${r.reportName ? esc(r.reportName) : 'snow report'}</a> is the source for snowfall, lifts and the parking lots.${r.note ? ` ${esc(r.note)}` : ''}</p>
   </section>
 
   <section class="sk-faq">
