@@ -525,6 +525,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:border-wait-times",
+   "path": "/border-wait-times/",
+   "title": "When is the border wait shortest at each crossing? Canada and Mexico, by day and hour",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:breakdown-on-the-autobahn",
    "path": "/breakdown-on-the-autobahn/",
    "title": "Broken Down on the Autobahn? What to Do If You Don't Speak German",
@@ -744,6 +750,12 @@
    "key": "basics:how-interstates-are-numbered",
    "path": "/how-interstates-are-numbered/",
    "title": "How Interstate Highways Are Numbered (the System Explained)",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:how-long-do-crashes-take-to-clear",
+   "path": "/how-long-do-crashes-take-to-clear/",
+   "title": "How long does it take to clear a highway crash? Times by state",
    "sponsor": "house"
   },
   {
