@@ -52,7 +52,7 @@ ${sortJs}
     <h2>Source</h2>
     <p><a href="${SRC}" target="_blank" rel="noopener">U.S. Department of Energy, Alternative Fuels Data Center, station counts by state</a> and <a href="https://afdc.energy.gov/fuels/electricity-stations" target="_blank" rel="noopener">charging levels</a>. Data as of ${day}. This page updates every week.</p>
     <h2>More</h2>
-    <ul><li><a href="/ev-charging-cost/">How much does it cost to charge an EV in each state?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li><li><a href="/road-conditions/">Road conditions by state</a></li></ul>`;
+    <ul><li><a href="/how-to-charge-an-electric-car/">How do you charge an electric car at a public charger?</a></li><li><a href="/ev-charging-cost/">How much does it cost to charge an EV in each state?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li><li><a href="/road-conditions/">Road conditions by state</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'How many EV chargers are in each state?', url = 'https://milecheckapp.com/ev-chargers/';
