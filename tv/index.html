@@ -30,6 +30,7 @@
   <p class="small">No code? Email sales@milecheckapp.com</p>
 </div>
 <script src="codes.js"></script>
+<script>document.write('<script src="access.js?v='+Date.now()+'"><\/script>');</script>
 <script>
 (function(){
   var KEY = 'mcTvCode';
@@ -38,14 +39,20 @@
   function go(code){
     var c = (window.TV_CODES || {})[code];
     if (!c) { document.getElementById('err').innerHTML = 'That code isn’t right. Check it and try again.'; store(null); return false; }
+    // Test links last 24 hours (tv/access.js, set by scripts/tv-access.py). Signed stores never expire.
+    var a = (window.TV_ACCESS || {})[code], extra = '';
+    if (a && a.signed) extra = '';
+    else if (a && a.until > new Date().getTime()) extra = '&until=' + a.until;
+    else { document.getElementById('err').innerHTML = 'This code isn’t active. Email sales@milecheckapp.com to turn it on.'; return false; }
     store(code);
-    location.href = '/boards/' + c.board + '?' + c.q;
+    location.href = '/boards/' + c.board + '?' + c.q + extra;
     return true;
   }
   var q = location.search.match(/[?&]c=(\d{4})/);
   var change = /[?&]change=1/.test(location.search);
   if (change) store(null);
-  var s = q ? q[1] : (change ? null : saved());
+  if (/[?&]expired=1/.test(location.search)) document.getElementById('err').innerHTML = 'The 24-hour test has ended. Email sales@milecheckapp.com to keep the board.';
+  var s = q ? q[1] : ((change || /[?&]expired=1/.test(location.search)) ? null : saved());
   if (s && window.TV_CODES && window.TV_CODES[s]) {
     // Remembered store: say where we're going, give 4 seconds to change it with the remote.
     document.getElementById('lead').innerHTML = 'Opening the board for <b>' + window.TV_CODES[s].store.replace(/</g,'&lt;') + '</b>…';

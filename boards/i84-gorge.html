@@ -478,6 +478,16 @@ function cycleCam() {
   document.getElementById("camImg").src = CAM_BASE + encodeURIComponent(c.file) + "&t=" + Date.now();
   document.getElementById("camCap").innerHTML = `${c.name} <span class="mi">\xB7 ${d < 1 ? "here" : d + " mi " + (c.mp < P.mile ? P.dec.short : P.inc.short)}${d > 30 ? " \xB7 farther along " + P.route : ""}</span>`;
 }
+(function() {
+  var m = location.search.match(/[?&]until=(\d+)/);
+  if (!m) return;
+  var u = +m[1];
+  function chk() {
+    if (Date.now() > u) location.href = "/tv/?expired=1";
+  }
+  chk();
+  setInterval(chk, 6e4);
+})();
 let _dead = 0;
 document.getElementById("camImg").addEventListener("load", (e) => {
   const i = e.target;
