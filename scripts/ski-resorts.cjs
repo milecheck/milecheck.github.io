@@ -14,7 +14,10 @@
 //   road         one line for the reader: the road in plain words.
 //   radius       miles. The plow and camera search circle around the base. 10 to 25.
 //   report       the resort's own snow report (external, new tab). reportName: what the resort calls it, when it
-//                has a name of its own (Anthony Lakes: Bert's Daily Report). Checked 2026-10-15; see the
+//                has a name of its own (Anthony Lakes: Bert's Daily Report, Mt Norquay: daily report) or calls it
+//                something other than a snow report (mountain report, current conditions). Read from each page's
+//                title, 2026-10-16. Leah: "do others have that too on their resort sites" — only Anthony Lakes has a
+//                personal name. Checked 2026-10-15; see the
 //                generator log for any that did not answer.
 //   pass         slug under /passes/ for the same road, if one exists. corridor: slug under /corridors/.
 //   note         an honest line the page prints when the live data does not cover the last miles.
@@ -48,13 +51,13 @@ module.exports = [
   R({ name: 'Loveland Ski Area', slug: 'loveland', state: 'CO', lat: 39.6783, lon: -105.9105, routes: ['I-70', 'US-6'], road: 'I-70 exit 216, just east of the Eisenhower Tunnel', radius: 10, report: 'https://skiloveland.com/snow-report/', pass: 'eisenhower', corridor: 'i-70' }),
   // Winter Park: OSM search 2026-10-15 (resort node 39.8620,-105.7738). Access: US-40 over Berthoud
   // Pass from I-70 exit 232 (winterparkresort.com/plan-your-trip/getting-here).
-  R({ name: 'Winter Park', slug: 'winter-park', state: 'CO', lat: 39.8620, lon: -105.7738, routes: ['US-40'], road: 'US-40 over Berthoud Pass, from I-70 exit 232 at Empire', radius: 15, report: 'https://www.winterparkresort.com/the-mountain/mountain-report', corridor: 'i-70' }),
+  R({ name: 'Winter Park', slug: 'winter-park', state: 'CO', lat: 39.8620, lon: -105.7738, routes: ['US-40'], road: 'US-40 over Berthoud Pass, from I-70 exit 232 at Empire', radius: 15, report: 'https://www.winterparkresort.com/the-mountain/mountain-report', reportName: 'Winter Park mountain report', corridor: 'i-70' }),
   // Steamboat: OSM search 2026-10-15. Access: US-40 over Rabbit Ears Pass from I-70 at Silverthorne via
   // SH-9, or from Kremmling (steamboat.com/plan-your-trip/getting-here).
-  R({ name: 'Steamboat', slug: 'steamboat', state: 'CO', lat: 40.4563, lon: -106.7662, routes: ['US-40', 'SH-131'], road: 'US-40 over Rabbit Ears Pass into Steamboat Springs', radius: 20, report: 'https://www.steamboat.com/the-mountain/mountain-report' }),
+  R({ name: 'Steamboat', slug: 'steamboat', state: 'CO', lat: 40.4563, lon: -106.7662, routes: ['US-40', 'SH-131'], road: 'US-40 over Rabbit Ears Pass into Steamboat Springs', radius: 20, report: 'https://www.steamboat.com/the-mountain/mountain-report', reportName: 'Steamboat mountain report' }),
   // Aspen Snowmass: Snowmass Village base. OSM search 2026-10-15. Access: SH-82 from I-70 exit 116 at
   // Glenwood Springs, 40 mi (aspensnowmass.com/plan-your-trip/getting-here).
-  R({ name: 'Aspen Snowmass', slug: 'aspen-snowmass', state: 'CO', lat: 39.1857, lon: -106.9449, routes: ['SH-82'], road: 'SH-82 up the Roaring Fork Valley from I-70 at Glenwood Springs', radius: 20, report: 'https://www.aspensnowmass.com/four-mountains/snow-report', corridor: 'i-70' }),
+  R({ name: 'Aspen Snowmass', slug: 'aspen-snowmass', state: 'CO', lat: 39.1857, lon: -106.9449, routes: ['SH-82'], road: 'SH-82 up the Roaring Fork Valley from I-70 at Glenwood Springs', radius: 20, report: 'https://www.aspensnowmass.com/four-mountains/snow-report', reportName: 'Aspen Snowmass conditions', corridor: 'i-70' }),
   // Beaver Creek: village base. OSM reverse 2026-10-15. Access: I-70 exit 167 at Avon, then US-6 to
   // Village Road (beavercreek.com/plan-your-trip/getting-here.aspx).
   R({ name: 'Beaver Creek', slug: 'beaver-creek', state: 'CO', lat: 39.6042, lon: -106.5165, routes: ['I-70', 'US-6'], road: 'I-70 exit 167 at Avon, then US-6 to Village Road', radius: 12, report: 'https://www.beavercreek.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', pass: 'vail', corridor: 'i-70' }),
@@ -72,39 +75,39 @@ module.exports = [
   // Canyon from I-215 exit 6 (snowbird.com/getting-here). Corpus spells it SR-210; UDOT cameras 'SR 210'.
   R({ name: 'Snowbird', slug: 'snowbird', state: 'UT', lat: 40.5807, lon: -111.6573, routes: ['SR-210', 'I-215'], road: 'SR-210 up Little Cottonwood Canyon from I-215 exit 6', radius: 12, report: 'https://www.snowbird.com/the-mountain/mountain-report/current-conditions-weather/', pass: 'little-cottonwood' }),
   // Alta: OSM search 2026-10-15. Access: SR-210, the end of the road past Snowbird (alta.com/getting-here).
-  R({ name: 'Alta', slug: 'alta', state: 'UT', lat: 40.5882, lon: -111.6384, routes: ['SR-210', 'I-215'], road: 'SR-210, the end of Little Cottonwood Canyon', radius: 12, report: 'https://www.alta.com/weather', pass: 'little-cottonwood' }),
+  R({ name: 'Alta', slug: 'alta', state: 'UT', lat: 40.5882, lon: -111.6384, routes: ['SR-210', 'I-215'], road: 'SR-210, the end of Little Cottonwood Canyon', radius: 12, report: 'https://www.alta.com/weather', reportName: 'Alta weather and snow report', pass: 'little-cottonwood' }),
   // Brighton: OSM search 2026-10-15. Access: SR-190 up Big Cottonwood Canyon from I-215 exit 6 (brightonresort.com/getting-here).
-  R({ name: 'Brighton', slug: 'brighton', state: 'UT', lat: 40.5983, lon: -111.5837, routes: ['SR-190', 'I-215'], road: 'SR-190 to the top of Big Cottonwood Canyon', radius: 12, report: 'https://www.brightonresort.com/conditions' }),
+  R({ name: 'Brighton', slug: 'brighton', state: 'UT', lat: 40.5983, lon: -111.5837, routes: ['SR-190', 'I-215'], road: 'SR-190 to the top of Big Cottonwood Canyon', radius: 12, report: 'https://www.brightonresort.com/conditions', reportName: 'Brighton conditions' }),
   // Solitude: OSM search 2026-10-15. Access: SR-190, Big Cottonwood Canyon (solitudemountain.com/getting-here).
-  R({ name: 'Solitude', slug: 'solitude', state: 'UT', lat: 40.6231, lon: -111.5976, routes: ['SR-190', 'I-215'], road: 'SR-190 up Big Cottonwood Canyon', radius: 12, report: 'https://www.solitudemountain.com/mountain-and-village/conditions-and-maps' }),
+  R({ name: 'Solitude', slug: 'solitude', state: 'UT', lat: 40.6231, lon: -111.5976, routes: ['SR-190', 'I-215'], road: 'SR-190 up Big Cottonwood Canyon', radius: 12, report: 'https://www.solitudemountain.com/mountain-and-village/conditions-and-maps', reportName: 'Solitude weather and snow report' }),
   // Park City Mountain: Mountain Village base. OSM search 2026-10-15. Access: I-80 exit 145 to SR-224
   // south (parkcitymountain.com/plan-your-trip/getting-here.aspx). Parleys Summit is on I-80 west of the exit.
   R({ name: 'Park City Mountain', slug: 'park-city', state: 'UT', lat: 40.6514, lon: -111.5077, routes: ['SR-224', 'I-80', 'SR-248'], road: 'SR-224 south from I-80 exit 145, after Parleys Summit', radius: 12, report: 'https://www.parkcitymountain.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', pass: 'parleys', corridor: 'i-80' }),
   // Deer Valley: Snow Park base. OSM search 2026-10-15 (sports_centre node 40.6374,-111.4783). Access:
   // SR-224 from I-80, or SR-248 from US-40 (deervalley.com/plan-your-trip/getting-here).
-  R({ name: 'Deer Valley', slug: 'deer-valley', state: 'UT', lat: 40.6374, lon: -111.4783, routes: ['SR-224', 'SR-248', 'I-80', 'US-40'], road: 'SR-224 from I-80, or SR-248 from US-40 at Kimball Junction', radius: 12, report: 'https://www.deervalley.com/explore-the-mountain/mountain-report', pass: 'parleys', corridor: 'i-80' }),
+  R({ name: 'Deer Valley', slug: 'deer-valley', state: 'UT', lat: 40.6374, lon: -111.4783, routes: ['SR-224', 'SR-248', 'I-80', 'US-40'], road: 'SR-224 from I-80, or SR-248 from US-40 at Kimball Junction', radius: 12, report: 'https://www.deervalley.com/explore-the-mountain/mountain-report', reportName: 'Deer Valley mountain report', pass: 'parleys', corridor: 'i-80' }),
   // Snowbasin: OSM search 2026-10-15. Access: I-84 exit 92 to SR-167 (Trappers Loop), then SR-226
   // (snowbasin.com/plan-your-visit/getting-here).
-  R({ name: 'Snowbasin', slug: 'snowbasin', state: 'UT', lat: 41.2004, lon: -111.8653, routes: ['SR-226', 'SR-167', 'I-84'], road: 'SR-167 over Trappers Loop from I-84 exit 92, then SR-226', radius: 15, report: 'https://www.snowbasin.com/the-mountain/mountain-report/' }),
+  R({ name: 'Snowbasin', slug: 'snowbasin', state: 'UT', lat: 41.2004, lon: -111.8653, routes: ['SR-226', 'SR-167', 'I-84'], road: 'SR-167 over Trappers Loop from I-84 exit 92, then SR-226', radius: 15, report: 'https://www.snowbasin.com/the-mountain/mountain-report/', reportName: 'Snowbasin mountain report' }),
   // Powder Mountain: base at the top of SR-158. OSM reverse 2026-10-15. Access: SR-39 up Ogden Canyon
   // from I-15, then SR-158 through Eden (powdermountain.com/getting-here).
-  R({ name: 'Powder Mountain', slug: 'powder-mountain', state: 'UT', lat: 41.3790, lon: -111.7804, routes: ['SR-158', 'SR-39', 'SR-162'], road: 'SR-39 up Ogden Canyon, then SR-158 through Eden to the top', radius: 15, report: 'https://www.powdermountain.com/conditions' }),
+  R({ name: 'Powder Mountain', slug: 'powder-mountain', state: 'UT', lat: 41.3790, lon: -111.7804, routes: ['SR-158', 'SR-39', 'SR-162'], road: 'SR-39 up Ogden Canyon, then SR-158 through Eden to the top', radius: 15, report: 'https://www.powdermountain.com/conditions', reportName: 'Powder Mountain current conditions' }),
   // Sundance: OSM search 2026-10-15. Access: US-189 up Provo Canyon from I-15, then SR-92 (sundanceresort.com/directions).
-  R({ name: 'Sundance', slug: 'sundance', state: 'UT', lat: 40.3909, lon: -111.5777, routes: ['SR-92', 'US-189'], road: 'US-189 up Provo Canyon, then SR-92 north', radius: 12, report: 'https://www.sundanceresort.com/mountain-report/' }),
+  R({ name: 'Sundance', slug: 'sundance', state: 'UT', lat: 40.3909, lon: -111.5777, routes: ['SR-92', 'US-189'], road: 'US-189 up Provo Canyon, then SR-92 north', radius: 12, report: 'https://www.sundanceresort.com/mountain-report/', reportName: 'Sundance mountain report' }),
 
   // ───────── Alberta (511 Alberta plows, km) ─────────
   // Lake Louise: OSM search 2026-10-15. Access: AB-1 (Trans-Canada) to the Lake Louise exit, then
   // Whitehorn Road (skilouise.com/getting-here).
-  R({ name: 'Lake Louise', slug: 'lake-louise', state: 'AB', lat: 51.4423, lon: -116.1619, routes: ['AB-1', 'AB-93'], road: 'AB-1, the Trans-Canada, to the Lake Louise exit', radius: 20, report: 'https://www.skilouise.com/snow-conditions/' }),
+  R({ name: 'Lake Louise', slug: 'lake-louise', state: 'AB', lat: 51.4423, lon: -116.1619, routes: ['AB-1', 'AB-93'], road: 'AB-1, the Trans-Canada, to the Lake Louise exit', radius: 20, report: 'https://www.skilouise.com/snow-conditions/', reportName: 'Lake Louise conditions and weather' }),
   // Sunshine Village: gondola base at the end of Sunshine Road (OSM reverse 2026-10-15). Access: AB-1,
   // 8 km west of Banff, then Sunshine Road (skibanff.com/getting-here).
-  R({ name: 'Sunshine Village', slug: 'sunshine-village', state: 'AB', lat: 51.1163, lon: -115.7623, routes: ['AB-1'], road: 'AB-1 west of Banff to the Sunshine Road turnoff', radius: 20, report: 'https://www.skibanff.com/the-mountain/mountain-report/current-conditions' }),
+  R({ name: 'Sunshine Village', slug: 'sunshine-village', state: 'AB', lat: 51.1163, lon: -115.7623, routes: ['AB-1'], road: 'AB-1 west of Banff to the Sunshine Road turnoff', radius: 20, report: 'https://www.skibanff.com/the-mountain/mountain-report/current-conditions', reportName: 'Sunshine Village current conditions' }),
   // Mt Norquay: base lodge. OSM reverse 2026-10-15. Access: AB-1 at the Banff west exit, then Mount
   // Norquay Road (banffnorquay.com/getting-here).
-  R({ name: 'Mt Norquay', slug: 'mount-norquay', state: 'AB', lat: 51.1996, lon: -115.5941, routes: ['AB-1'], road: 'AB-1 at Banff, then Mount Norquay Road up the switchbacks', radius: 15, report: 'https://banffnorquay.com/conditions/' }),
+  R({ name: 'Mt Norquay', slug: 'mount-norquay', state: 'AB', lat: 51.1996, lon: -115.5941, routes: ['AB-1'], road: 'AB-1 at Banff, then Mount Norquay Road up the switchbacks', radius: 15, report: 'https://banffnorquay.com/conditions/', reportName: 'Mt Norquay daily report' }),
   // Marmot Basin: OSM search 2026-10-15. Access: AB-16 to Jasper, then AB-93 south and Marmot Basin
   // Road (skimarmot.com/getting-here).
-  R({ name: 'Marmot Basin', slug: 'marmot-basin', state: 'AB', lat: 52.7954, lon: -118.1061, routes: ['AB-93', 'AB-16'], road: 'AB-16 to Jasper, then AB-93 south to Marmot Basin Road', radius: 20, report: 'https://www.skimarmot.com/news-snow-report/' }),
+  R({ name: 'Marmot Basin', slug: 'marmot-basin', state: 'AB', lat: 52.7954, lon: -118.1061, routes: ['AB-93', 'AB-16'], road: 'AB-16 to Jasper, then AB-93 south to Marmot Basin Road', radius: 20, report: 'https://www.skimarmot.com/news-snow-report/', reportName: 'Marmot Basin news and snow report' }),
   // Nakiska: OSM search 2026-10-15. Access: AB-1 to AB-40 south into Kananaskis (skinakiska.com/getting-here).
   R({ name: 'Nakiska', slug: 'nakiska', state: 'AB', lat: 50.9419, lon: -115.1513, routes: ['AB-40', 'AB-1'], road: 'AB-40 south from AB-1 into Kananaskis Country', radius: 20, report: 'https://skinakiska.com/conditions/snow-report/' }),
   // Castle Mountain: OSM search 2026-10-15. Access: AB-3 to Pincher Creek, AB-507 and AB-774 (skicastle.ca/getting-here).
@@ -114,7 +117,7 @@ module.exports = [
   // Blue Mountain: village. OSM search 2026-10-15. Access: ON-400 north to Barrie, ON-26 west through
   // Collingwood (bluemountain.ca/plan/getting-here). ON-26 is not in the milepost corpus; Ontario 511
   // cameras use it, so it stays listed.
-  R({ name: 'Blue Mountain', slug: 'blue-mountain', state: 'ON', lat: 44.5058, lon: -80.3073, routes: ['ON-26', 'ON-400'], road: 'ON-26 west through Collingwood, after ON-400 to Barrie', radius: 20, report: 'https://www.bluemountain.ca/mountain/mountain-report' }),
+  R({ name: 'Blue Mountain', slug: 'blue-mountain', state: 'ON', lat: 44.5058, lon: -80.3073, routes: ['ON-26', 'ON-400'], road: 'ON-26 west through Collingwood, after ON-400 to Barrie', radius: 20, report: 'https://www.bluemountain.ca/mountain/mountain-report', reportName: 'Blue Mountain weather and trail conditions' }),
   // Mount St. Louis Moonstone: OSM search 2026-10-15. Access: ON-400 exit 131 at Moonstone Road (mountstlouis.com/directions).
   R({ name: 'Mount St. Louis Moonstone', slug: 'mount-st-louis-moonstone', state: 'ON', lat: 44.6236, lon: -79.6667, routes: ['ON-400'], road: 'ON-400 exit 131, Moonstone Road', radius: 15, report: 'https://www.mountstlouis.com/' }),
 
@@ -126,11 +129,11 @@ module.exports = [
   // Camelback: OSM search 2026-10-15. Access: I-80 exit 299 at Tannersville, then PA-715 (camelbackresort.com/directions).
   R({ name: 'Camelback', slug: 'camelback', state: 'PA', lat: 41.0492, lon: -75.3504, routes: ['I-80', 'PA-715'], road: 'I-80 exit 299 at Tannersville, then PA-715 north', radius: 12, report: 'https://www.camelbackresort.com/snow-report-conditions', corridor: 'i-80' }),
   // Elk Mountain: OSM search 2026-10-15. Access: I-81 exit 206 at Lenox, then PA-374 (elkskier.com/directions).
-  R({ name: 'Elk Mountain', slug: 'elk-mountain', state: 'PA', lat: 41.7196, lon: -75.5584, routes: ['I-81', 'PA-374'], road: 'I-81 exit 206 at Lenox, then PA-374 east', radius: 12, report: 'https://www.elkskier.com/conditions/', corridor: 'i-81' }),
+  R({ name: 'Elk Mountain', slug: 'elk-mountain', state: 'PA', lat: 41.7196, lon: -75.5584, routes: ['I-81', 'PA-374'], road: 'I-81 exit 206 at Lenox, then PA-374 east', radius: 12, report: 'https://www.elkskier.com/conditions/', reportName: 'Elk Mountain conditions', corridor: 'i-81' }),
 
   // ───────── Minnesota (MnDOT plows) ─────────
   // Lutsen Mountains: OSM search 2026-10-15. Access: MN-61 along the North Shore, 90 mi from Duluth (lutsen.com/directions).
-  R({ name: 'Lutsen Mountains', slug: 'lutsen', state: 'MN', lat: 47.6560, lon: -90.7251, routes: ['MN-61'], road: 'MN-61 up the North Shore from Duluth', radius: 20, report: 'https://www.lutsen.com/mountain-info/mountain-report' }),
+  R({ name: 'Lutsen Mountains', slug: 'lutsen', state: 'MN', lat: 47.6560, lon: -90.7251, routes: ['MN-61'], road: 'MN-61 up the North Shore from Duluth', radius: 20, report: 'https://www.lutsen.com/mountain-info/mountain-report', reportName: 'Lutsen mountain report' }),
   // Spirit Mountain: OSM search 2026-10-15. Access: I-35 exit 249 in Duluth (spiritmt.com/directions).
   R({ name: 'Spirit Mountain', slug: 'spirit-mountain', state: 'MN', lat: 46.7176, lon: -92.2124, routes: ['I-35'], road: 'I-35 exit 249 on the west side of Duluth', radius: 12, report: 'https://spiritmt.com/winter/snow-report/', corridor: 'i-35' }),
   // Afton Alps: OSM search 2026-10-15. Access: I-94 east of St. Paul to MN-95 south at Lakeland
@@ -147,15 +150,15 @@ module.exports = [
   R({ name: 'The Highlands', slug: 'the-highlands', state: 'MI', lat: 45.4680, lon: -84.9318, routes: ['US-31', 'M-119'], road: 'US-31 to Petoskey, then M-119 toward Harbor Springs', radius: 15, report: 'https://www.highlandsharborsprings.com/' }),
   // Crystal Mountain, Michigan: OSM search 2026-10-15. Access: M-115 at Thompsonville, between US-31 and
   // US-131 (crystalmountain.com/directions). M-115 is not in the corpus; Mi Drive uses it.
-  R({ name: 'Crystal Mountain (Michigan)', slug: 'crystal-mountain-michigan', state: 'MI', lat: 44.5193, lon: -85.9907, routes: ['M-115', 'US-31', 'US-131'], road: 'M-115 at Thompsonville, 28 miles southwest of Traverse City', radius: 20, report: 'https://www.crystalmountain.com/ski/cams-conditions/mountain-report' }),
+  R({ name: 'Crystal Mountain (Michigan)', slug: 'crystal-mountain-michigan', state: 'MI', lat: 44.5193, lon: -85.9907, routes: ['M-115', 'US-31', 'US-131'], road: 'M-115 at Thompsonville, 28 miles southwest of Traverse City', radius: 20, report: 'https://www.crystalmountain.com/ski/cams-conditions/mountain-report', reportName: 'Crystal Mountain mountain report' }),
 
   // ───────── Montana (MDT plows) ─────────
   // Big Sky: Mountain Village. OSM search 2026-10-15. Access: US-191 through Gallatin Canyon, then MT-64
   // (Lone Mountain Trail) 9 mi (bigskyresort.com/plan-your-trip/getting-here).
-  R({ name: 'Big Sky', slug: 'big-sky', state: 'MT', lat: 45.2840, lon: -111.4011, routes: ['MT-64', 'US-191'], road: 'US-191 through Gallatin Canyon, then MT-64 up to Mountain Village', radius: 20, report: 'https://www.bigskyresort.com/current-conditions' }),
+  R({ name: 'Big Sky', slug: 'big-sky', state: 'MT', lat: 45.2840, lon: -111.4011, routes: ['MT-64', 'US-191'], road: 'US-191 through Gallatin Canyon, then MT-64 up to Mountain Village', radius: 20, report: 'https://www.bigskyresort.com/current-conditions', reportName: 'Big Sky current conditions' }),
   // Whitefish Mountain Resort: base village. OSM reverse 2026-10-15. Access: US-93 to Whitefish, then Big
   // Mountain Road, 8 mi (skiwhitefish.com/plan-your-trip/getting-here).
-  R({ name: 'Whitefish Mountain Resort', slug: 'whitefish', state: 'MT', lat: 48.4811, lon: -114.3579, routes: ['US-93'], road: 'US-93 to Whitefish, then Big Mountain Road (a county road) for the last 8 miles', radius: 15, report: 'https://skiwhitefish.com/snow-report/', note: 'MDT trucks and cameras cover US-93. Big Mountain Road is county-maintained and has no DOT feed.' }),
+  R({ name: 'Whitefish Mountain Resort', slug: 'whitefish', state: 'MT', lat: 48.4811, lon: -114.3579, routes: ['US-93'], road: 'US-93 to Whitefish, then Big Mountain Road (a county road) for the last 8 miles', radius: 15, report: 'https://skiwhitefish.com/snowreport/', note: 'MDT trucks and cameras cover US-93. Big Mountain Road is county-maintained and has no DOT feed.' }),
   // Bridger Bowl: OSM search 2026-10-15. Access: MT-86 (Bridger Canyon Road) 16 mi from Bozeman (bridgerbowl.com/getting-here).
   R({ name: 'Bridger Bowl', slug: 'bridger-bowl', state: 'MT', lat: 45.8163, lon: -110.9104, routes: ['MT-86', 'I-90'], road: 'MT-86, Bridger Canyon Road, 16 miles north of Bozeman', radius: 20, report: 'https://bridgerbowl.com/weather/snow-report', corridor: 'i-90' }),
   // Red Lodge Mountain: OSM search 2026-10-15. Access: US-212 to Red Lodge, then Ski Run Road (redlodgemountain.com/getting-here).
@@ -171,7 +174,7 @@ module.exports = [
 
   // ───────── West Virginia (WVDOT plows) ─────────
   // Snowshoe: OSM search 2026-10-15. Access: US-219 to WV-66 at Slatyfork, then Snowshoe Drive (snowshoemtn.com/plan-your-trip/getting-here).
-  R({ name: 'Snowshoe', slug: 'snowshoe', state: 'WV', lat: 38.4109, lon: -79.9908, routes: ['WV-66', 'US-219'], road: 'US-219 to Slatyfork, then WV-66 up the mountain', radius: 20, report: 'https://www.snowshoemtn.com/mountain-info/mountain-report' }),
+  R({ name: 'Snowshoe', slug: 'snowshoe', state: 'WV', lat: 38.4109, lon: -79.9908, routes: ['WV-66', 'US-219'], road: 'US-219 to Slatyfork, then WV-66 up the mountain', radius: 20, report: 'https://www.snowshoemtn.com/mountain-info/mountain-report', reportName: 'Snowshoe mountain report' }),
   // Canaan Valley Resort: ski area. OSM reverse 2026-10-15. Access: WV-32 through Davis (canaanresort.com/directions).
   R({ name: 'Canaan Valley', slug: 'canaan-valley', state: 'WV', lat: 39.0336, lon: -79.4408, routes: ['WV-32', 'US-33'], road: 'WV-32 through Davis into Canaan Valley', radius: 15, report: 'https://www.canaanresort.com/' }),
 
@@ -179,11 +182,11 @@ module.exports = [
   // Perfect North Slopes: OSM search 2026-10-15. Access: I-275 exit 16 to IN-1 north (perfectnorth.com/directions).
   R({ name: 'Perfect North Slopes', slug: 'perfect-north', state: 'IN', lat: 39.1472, lon: -84.8873, routes: ['IN-1', 'I-275', 'I-74'], road: 'I-275 exit 16 at Lawrenceburg, then IN-1 north', radius: 12, report: 'https://perfectnorth.com/snow-report/' }),
   // Paoli Peaks: OSM search 2026-10-15. Access: US-150 and IN-56 at Paoli (paolipeaks.com/plan-your-trip/getting-here).
-  R({ name: 'Paoli Peaks', slug: 'paoli-peaks', state: 'IN', lat: 38.5559, lon: -86.5122, routes: ['US-150', 'IN-56'], road: 'US-150 and IN-56 at Paoli', radius: 15, report: 'https://www.paolipeaks.com/the-mountain/mountain-report' }),
+  R({ name: 'Paoli Peaks', slug: 'paoli-peaks', state: 'IN', lat: 38.5559, lon: -86.5122, routes: ['US-150', 'IN-56'], road: 'US-150 and IN-56 at Paoli', radius: 15, report: 'https://www.paolipeaks.com/the-mountain/mountain-report', reportName: 'Paoli Peaks mountain report' }),
 
   // ───────── Iowa (Iowa DOT plows) ─────────
   // Sundown Mountain: OSM search 2026-10-15. Access: US-20 west of Dubuque, then Asbury Road (sundownmtn.com/directions).
-  R({ name: 'Sundown Mountain', slug: 'sundown', state: 'IA', lat: 42.5165, lon: -90.8226, routes: ['US-20', 'US-52'], road: 'US-20 on the west side of Dubuque, then Asbury Road', radius: 12, report: 'https://sundownmtn.com/the-mountain/snow-report-trail-map/' }),
+  R({ name: 'Sundown Mountain', slug: 'sundown', state: 'IA', lat: 42.5165, lon: -90.8226, routes: ['US-20', 'US-52'], road: 'US-20 on the west side of Dubuque, then Asbury Road', radius: 12, report: 'https://sundownmtn.com/the-mountain/snow-report-trail-map/', reportName: 'Sundown daily snow report' }),
 
   // ───────── North Dakota (NDDOT plows) ─────────
   // Huff Hills: the hamlet of Huff on ND-1806 (OSM search 2026-10-15); the ski area is on ND-1806 beside it.
@@ -200,19 +203,19 @@ module.exports = [
   // I-90 / US 2 / SR 410, and WA route numbers are unique across types, so the page matches on the number.
   // Crystal Mountain: OSM search 2026-10-15. Access: SR 410 from Enumclaw, then Crystal Mountain
   // Boulevard 6 mi (crystalmountainresort.com/plan-your-trip/getting-here).
-  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report', pass: 'crystal-mountain', note: 'WSDOT cameras sit on SR 410 well below the resort; the last 6 miles up Crystal Mountain Boulevard have no DOT feed.' }),
+  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report', reportName: 'Crystal Mountain mountain report', pass: 'crystal-mountain', note: 'WSDOT cameras sit on SR 410 well below the resort; the last 6 miles up Crystal Mountain Boulevard have no DOT feed.' }),
   // The Summit at Snoqualmie: Summit West. OSM search 2026-10-15. Access: I-90 exits 52 to 54 (summitatsnoqualmie.com/getting-here).
-  R({ name: 'The Summit at Snoqualmie', slug: 'summit-at-snoqualmie', state: 'WA', lat: 47.4208, lon: -121.4222, routes: ['SR 90'], road: 'I-90 at the top of Snoqualmie Pass, exits 52 to 54', radius: 15, report: 'https://www.summitatsnoqualmie.com/mountain-report', pass: 'snoqualmie', corridor: 'i-90' }),
+  R({ name: 'The Summit at Snoqualmie', slug: 'summit-at-snoqualmie', state: 'WA', lat: 47.4208, lon: -121.4222, routes: ['SR 90'], road: 'I-90 at the top of Snoqualmie Pass, exits 52 to 54', radius: 15, report: 'https://www.summitatsnoqualmie.com/mountain-report', reportName: 'Summit mountain report', pass: 'snoqualmie', corridor: 'i-90' }),
   // Stevens Pass: base at the summit. OSM reverse 2026-10-15. Access: US 2 (stevenspass.com/plan-your-trip/getting-here.aspx).
   R({ name: 'Stevens Pass', slug: 'stevens-pass', state: 'WA', lat: 47.7448, lon: -121.0890, routes: ['SR 2'], road: 'US 2 at the top of Stevens Pass', radius: 15, report: 'https://www.stevenspass.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', pass: 'stevens' }),
   // Mt. Baker Ski Area: OSM search 2026-10-15. Access: SR 542, the Mt. Baker Highway, 56 mi from
   // Bellingham (mtbaker.us/getting-here).
   R({ name: 'Mt. Baker', slug: 'mt-baker', state: 'WA', lat: 48.8617, lon: -121.6538, routes: ['SR 542'], road: 'SR 542, the Mt. Baker Highway, 56 miles east of Bellingham', radius: 25, report: 'https://www.mtbaker.us/snow-report/' }),
   // White Pass: OSM search 2026-10-15. Access: US 12 at the summit (skiwhitepass.com/getting-here).
-  R({ name: 'White Pass', slug: 'white-pass', state: 'WA', lat: 46.6213, lon: -121.3941, routes: ['SR 12'], road: 'US 12 at the top of White Pass, between Packwood and Naches', radius: 25, report: 'https://skiwhitepass.com/the-mountain/snow-report' }),
+  R({ name: 'White Pass', slug: 'white-pass', state: 'WA', lat: 46.6213, lon: -121.3941, routes: ['SR 12'], road: 'US 12 at the top of White Pass, between Packwood and Naches', radius: 25, report: 'https://skiwhitepass.com/the-mountain/snow-report', reportName: 'White Pass current conditions' }),
   // Mission Ridge: base. OSM reverse 2026-10-15. Access: US 2 / US 97 to Wenatchee, then Squilchuck Road
   // 12 mi (missionridge.com/getting-here).
-  R({ name: 'Mission Ridge', slug: 'mission-ridge', state: 'WA', lat: 47.2928, lon: -120.3990, routes: ['SR 2', 'SR 97', 'SR 28'], road: 'US 2 or US 97 into Wenatchee, then Squilchuck Road (a county road) for 12 miles', radius: 20, report: 'https://www.missionridge.com/mountain-report/', note: 'WSDOT cameras cover the highways into Wenatchee. Squilchuck Road is county-maintained and has no DOT feed.' }),
+  R({ name: 'Mission Ridge', slug: 'mission-ridge', state: 'WA', lat: 47.2928, lon: -120.3990, routes: ['SR 2', 'SR 97', 'SR 28'], road: 'US 2 or US 97 into Wenatchee, then Squilchuck Road (a county road) for 12 miles', radius: 20, report: 'https://www.missionridge.com/mountain-report/', reportName: 'Mission Ridge mountain report', note: 'WSDOT cameras cover the highways into Wenatchee. Squilchuck Road is county-maintained and has no DOT feed.' }),
 
   // ───────── Oregon (ODOT publishes no truck positions) ─────────
   // OR corpus uses ODOT highway names (MT HOOD HWY, etc.); TripCheck cameras and alerts use US-26 / OR-35.
@@ -221,14 +224,14 @@ module.exports = [
   R({ name: 'Mt. Hood Meadows', slug: 'mt-hood-meadows', state: 'OR', lat: 45.3317, lon: -121.6647, routes: ['OR-35', 'US-26'], road: 'OR-35, from Hood River or from US-26 at the Government Camp junction', radius: 20, report: 'https://www.skihood.com/mountain-report' }),
   // Timberline: Timberline Lodge. OSM search 2026-10-15. Access: US-26 to Government Camp, then Timberline
   // Road 6 mi (timberlinelodge.com/directions).
-  R({ name: 'Timberline', slug: 'timberline', state: 'OR', lat: 45.3311, lon: -121.7118, routes: ['US-26', 'OR-35'], road: 'US-26 to Government Camp, then Timberline Road for the last 6 miles', radius: 20, report: 'https://timberlinelodge.com/conditions/' }),
+  R({ name: 'Timberline', slug: 'timberline', state: 'OR', lat: 45.3311, lon: -121.7118, routes: ['US-26', 'OR-35'], road: 'US-26 to Government Camp, then Timberline Road for the last 6 miles', radius: 20, report: 'https://timberlinelodge.com/conditions/', reportName: 'Timberline current conditions' }),
   // Mt. Bachelor: West Village base. OSM reverse 2026-10-15. Access: US-97 to Bend, then Century Drive
   // (OR-372, Cascade Lakes Highway) 22 mi (mtbachelor.com/plan-your-trip/getting-here).
-  R({ name: 'Mt. Bachelor', slug: 'mt-bachelor', state: 'OR', lat: 43.9904, lon: -121.6838, routes: ['OR-372', 'US-97'], road: 'US-97 to Bend, then Century Drive (OR-372) for 22 miles', radius: 25, report: 'https://www.mtbachelor.com/the-mountain/mountain-report/', note: 'TripCheck cameras cover US-97 and one point on Century Drive. The rest of the Cascade Lakes Highway has no DOT feed.' }),
+  R({ name: 'Mt. Bachelor', slug: 'mt-bachelor', state: 'OR', lat: 43.9904, lon: -121.6838, routes: ['OR-372', 'US-97'], road: 'US-97 to Bend, then Century Drive (OR-372) for 22 miles', radius: 25, report: 'https://www.mtbachelor.com/the-mountain/mountain-report/', reportName: 'Mt. Bachelor mountain report', note: 'TripCheck cameras cover US-97 and one point on Century Drive. The rest of the Cascade Lakes Highway has no DOT feed.' }),
   // Anthony Lakes: OSM search 2026-10-15 (44.9600,-118.2400). Access: I-84 exit 285 at North Powder, OR-237 for 4 mi,
   // then the Anthony Lake Highway / Forest Road 73 for 16 mi (anthonylakes.com; same facts as passes/anthony-lakes/).
   // The pass page for the same road already exists; the resort's report is "Bert's Daily Report".
   R({ name: 'Anthony Lakes', slug: 'anthony-lakes', state: 'OR', lat: 44.9600, lon: -118.2400, routes: ['I-84', 'OR-237'], road: 'I-84 exit 285 at North Powder, OR-237 for 4 miles, then the Anthony Lake Highway for 16', radius: 20, report: 'https://anthonylakes.com/berts-daily-report/', reportName: "Bert's Daily Report", pass: 'anthony-lakes', note: 'ODOT cameras and alerts stop at I-84 and OR-237 near North Powder. The Anthony Lake Highway and Forest Road 73, the last 16 miles, are county and Forest Service roads with no DOT feed.' }),
   // Hoodoo: OSM search 2026-10-15. Access: US-20 at Santiam Pass (skihoodoo.com/directions).
-  R({ name: 'Hoodoo', slug: 'hoodoo', state: 'OR', lat: 44.4034, lon: -121.8818, routes: ['US-20', 'OR-22', 'OR-126'], road: 'US-20 at the top of Santiam Pass', radius: 20, report: 'https://hoodoo.com/the-mountain/mountain-conditions/' }),
+  R({ name: 'Hoodoo', slug: 'hoodoo', state: 'OR', lat: 44.4034, lon: -121.8818, routes: ['US-20', 'OR-22', 'OR-126'], road: 'US-20 at the top of Santiam Pass', radius: 20, report: 'https://hoodoo.com/the-mountain/mountain-conditions/', reportName: 'Hoodoo mountain conditions' }),
 ];
