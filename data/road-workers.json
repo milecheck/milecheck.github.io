@@ -1,0 +1,360 @@
+{
+ "source": "U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics",
+ "fetched": "2026-10-16T06:35:15.354Z",
+ "year": "2025",
+ "occupations": {
+  "474051": "Highway maintenance workers"
+ },
+ "us": {
+  "474051": {
+   "median": 50260,
+   "employment": 154960,
+   "mean": 53080
+  }
+ },
+ "states": {
+  "AL": {
+   "474051": {
+    "median": 37430,
+    "employment": 2730,
+    "mean": 38990
+   }
+  },
+  "AK": {
+   "474051": {
+    "median": 54090,
+    "employment": 50,
+    "mean": 59650
+   }
+  },
+  "AZ": {
+   "474051": {
+    "median": 50850,
+    "employment": 1410,
+    "mean": 50260
+   }
+  },
+  "AR": {
+   "474051": {
+    "median": 35740,
+    "employment": 860,
+    "mean": 36310
+   }
+  },
+  "CA": {
+   "474051": {
+    "median": 59580,
+    "employment": 8150,
+    "mean": 63070
+   }
+  },
+  "CO": {
+   "474051": {
+    "median": 52350,
+    "employment": 1990,
+    "mean": 55710
+   }
+  },
+  "CT": {
+   "474051": {
+    "median": 64870,
+    "employment": 2130,
+    "mean": 66700
+   }
+  },
+  "DE": {
+   "474051": {
+    "median": 45450,
+    "employment": 90,
+    "mean": 47160
+   }
+  },
+  "FL": {
+   "474051": {
+    "median": 42210,
+    "employment": 2530,
+    "mean": 43130
+   }
+  },
+  "GA": {
+   "474051": {
+    "median": 37560,
+    "employment": 1980,
+    "mean": 39710
+   }
+  },
+  "ID": {
+   "474051": {
+    "median": 52050,
+    "employment": 1340,
+    "mean": 55280
+   }
+  },
+  "IL": {
+   "474051": {
+    "median": 61700,
+    "employment": 10790,
+    "mean": 66410
+   }
+  },
+  "IN": {
+   "474051": {
+    "median": 48480,
+    "employment": 4380,
+    "mean": 49430
+   }
+  },
+  "IA": {
+   "474051": {
+    "median": 58490,
+    "employment": 4000,
+    "mean": 57670
+   }
+  },
+  "KS": {
+   "474051": {
+    "median": 46050,
+    "employment": 1960,
+    "mean": 45970
+   }
+  },
+  "KY": {
+   "474051": {
+    "median": 40400,
+    "employment": 3030,
+    "mean": 41960
+   }
+  },
+  "LA": {
+   "474051": {
+    "median": 44790,
+    "employment": 1050,
+    "mean": 44970
+   }
+  },
+  "ME": {
+   "474051": {
+    "median": 49030,
+    "employment": 1620,
+    "mean": 49300
+   }
+  },
+  "MD": {
+   "474051": {
+    "median": 49030,
+    "employment": 620,
+    "mean": 55040
+   }
+  },
+  "MA": {
+   "474051": {
+    "median": 61500,
+    "employment": 2000,
+    "mean": 61800
+   }
+  },
+  "MI": {
+   "474051": {
+    "median": 53750,
+    "employment": 5230,
+    "mean": 51910
+   }
+  },
+  "MN": {
+   "474051": {
+    "median": 63150,
+    "employment": 4610,
+    "mean": 60280
+   }
+  },
+  "MS": {
+   "474051": {
+    "median": 35120,
+    "employment": 4160,
+    "mean": 35140
+   }
+  },
+  "MO": {
+   "474051": {
+    "median": 47470,
+    "employment": 5470,
+    "mean": 48470
+   }
+  },
+  "MT": {
+   "474051": {
+    "median": 60960,
+    "employment": 1140,
+    "mean": 60320
+   }
+  },
+  "NE": {
+   "474051": {
+    "median": 48650,
+    "employment": 2580,
+    "mean": 50920
+   }
+  },
+  "NV": {
+   "474051": {
+    "median": 49320,
+    "employment": 990,
+    "mean": 52510
+   }
+  },
+  "NH": {
+   "474051": {
+    "median": 51050,
+    "employment": 1230,
+    "mean": 52940
+   }
+  },
+  "NJ": {
+   "474051": {
+    "median": 51720,
+    "employment": 4850,
+    "mean": 56570
+   }
+  },
+  "NM": {
+   "474051": {
+    "median": 47740,
+    "employment": 1470,
+    "mean": 47340
+   }
+  },
+  "NY": {
+   "474051": {
+    "median": 55210,
+    "employment": 13820,
+    "mean": 57190
+   }
+  },
+  "NC": {
+   "474051": {
+    "median": 47880,
+    "employment": 3750,
+    "mean": 47300
+   }
+  },
+  "ND": {
+   "474051": {
+    "median": 60630,
+    "employment": 1240,
+    "mean": 62150
+   }
+  },
+  "OH": {
+   "474051": {
+    "median": 48880,
+    "employment": 6070,
+    "mean": 51170
+   }
+  },
+  "OK": {
+   "474051": {
+    "median": 38840,
+    "employment": 3180,
+    "mean": 40570
+   }
+  },
+  "OR": {
+   "474051": {
+    "median": 65330,
+    "employment": 1650,
+    "mean": 63650
+   }
+  },
+  "PA": {
+   "474051": {
+    "median": 47690,
+    "employment": 11140,
+    "mean": 50060
+   }
+  },
+  "RI": {
+   "474051": {
+    "median": 57950,
+    "employment": 620,
+    "mean": 56390
+   }
+  },
+  "SC": {
+   "474051": {
+    "median": 48130,
+    "employment": 2290,
+    "mean": 48900
+   }
+  },
+  "SD": {
+   "474051": {
+    "median": 48610,
+    "employment": 1800,
+    "mean": 50470
+   }
+  },
+  "TN": {
+   "474051": {
+    "median": 46070,
+    "employment": 2280,
+    "mean": 46070
+   }
+  },
+  "TX": {
+   "474051": {
+    "median": 45540,
+    "employment": 6630,
+    "mean": 44770
+   }
+  },
+  "UT": {
+   "474051": {
+    "median": 55970,
+    "employment": 1240,
+    "mean": 56390
+   }
+  },
+  "VT": {
+   "474051": {
+    "median": 58460,
+    "employment": 1170,
+    "mean": 56930
+   }
+  },
+  "VA": {
+   "474051": {
+    "median": 50800,
+    "employment": 3400,
+    "mean": 51790
+   }
+  },
+  "WA": {
+   "474051": {
+    "median": 65300,
+    "employment": 2590,
+    "mean": 67870
+   }
+  },
+  "WV": {
+   "474051": {
+    "median": 45260,
+    "employment": 730,
+    "mean": 45290
+   }
+  },
+  "WI": {
+   "474051": {
+    "median": 58000,
+    "employment": 6000,
+    "mean": 56080
+   }
+  },
+  "WY": {
+   "474051": {
+    "median": 48190,
+    "employment": 820,
+    "mean": 51900
+   }
+  }
+ }
+}
