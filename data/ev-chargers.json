@@ -3,10 +3,10 @@
  "updated": "2026-10-16",
  "us": {
   "name": "Total",
-  "locations": 82686,
-  "ports": 260753,
+  "locations": 82684,
+  "ports": 260737,
   "l1": 693,
-  "l2": 181082,
+  "l2": 181066,
   "dc": 78966
  },
  "states": [
@@ -84,10 +84,10 @@
   },
   {
    "name": "Florida",
-   "locations": 4406,
-   "ports": 15377,
+   "locations": 4407,
+   "ports": 15381,
    "l1": 33,
-   "l2": 9905,
+   "l2": 9909,
    "dc": 5439
   },
   {
@@ -252,10 +252,10 @@
   },
   {
    "name": "New Jersey",
-   "locations": 2067,
-   "ports": 7015,
+   "locations": 2065,
+   "ports": 7001,
    "l1": 11,
-   "l2": 4844,
+   "l2": 4830,
    "dc": 2160
   },
   {
@@ -268,10 +268,10 @@
   },
   {
    "name": "New York",
-   "locations": 5438,
-   "ports": 20056,
+   "locations": 5437,
+   "ports": 20050,
    "l1": 9,
-   "l2": 16738,
+   "l2": 16732,
    "dc": 3309
   },
   {
