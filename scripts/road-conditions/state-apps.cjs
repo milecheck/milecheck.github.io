@@ -3,9 +3,10 @@
 // the app repo's docs/content/state-dot-apps-2026-10-16.csv (App Store and Play research).
 //
 // `app` = the app's name; the page says "<State>'s official road conditions app is <app>."
-// `none` = the whole line for a state without one: that it has none, then where the state
-// sends drivers instead. One fact. No ratings, no judgment of the app. No store links until
-// the App Store / Play URL is verified, and the card is itself a link, so none go inside it.
+// `line` = the whole line for a state without a DOT app of its own: where the DOT points
+// drivers instead, and any other agency's app (NJ, TN). One fact. No ratings, no judgment
+// of the app, no claims about which store carries what. No store links until the App Store /
+// Play URL is verified. ChatGPT review 2026-10-16 corrected NJ, HI and MI.
 module.exports = {
   AL: { app: 'ALGO Traffic' },
   AK: { app: '511 Alaska' },
@@ -13,45 +14,45 @@ module.exports = {
   AR: { app: 'IDrive Arkansas' },
   CA: { app: 'Caltrans QuickMap' },
   CO: { app: 'COtrip Planner' },
-  CT: { none: 'Connecticut has no official road conditions app. CTDOT points drivers to the CTroads.org website.' },
+  CT: { line: 'Connecticut has no official road conditions app. CTDOT points drivers to the CTroads.org website.' },
   DE: { app: 'DelDOT' },
   FL: { app: 'Florida 511' },
   GA: { app: '511 Georgia' },
-  HI: { none: 'Hawaii has no official road conditions app. GoAkamai is gone from both app stores, and the GoAkamai.org website still carries some cameras.' },
+  HI: { line: 'Hawaii has no official road conditions app. HDOT points drivers to the GoAkamai.org website.' },
   ID: { app: 'Idaho 511' },
-  IL: { none: 'Illinois has no official road conditions app. IDOT points drivers to the GettingAroundIllinois.com website.' },
+  IL: { line: 'Illinois has no official road conditions app. IDOT points drivers to the GettingAroundIllinois.com website.' },
   IN: { app: 'INDOT Trafficwise' },
   IA: { app: 'Iowa 511' },
   KS: { app: 'KanDrive' },
-  KY: { none: 'Kentucky has had no official road conditions app since 2016. KYTC points drivers to the GoKY website and Waze.' },
+  KY: { line: 'Kentucky has had no official road conditions app since 2016. KYTC points drivers to the GoKY website and Waze.' },
   LA: { app: 'Louisiana 511' },
-  ME: { none: 'Maine has no official road conditions app. MaineDOT points drivers to the New England 511 website.' },
-  MD: { none: 'Maryland has no official road conditions app. The state points drivers to the CHART website.' },
+  ME: { line: 'Maine has no official road conditions app. MaineDOT points drivers to the New England 511 website.' },
+  MD: { line: 'Maryland has no official road conditions app. The state points drivers to the CHART website.' },
   MA: { app: 'Mass511' },
-  MI: { none: 'Michigan has no official road conditions app. Mi Drive is gone from both app stores, and MDOT points drivers to the Mi Drive website.' },
+  MI: { line: 'Michigan has no official road conditions app. MDOT points drivers to the Mi Drive website.' },
   MN: { app: 'Minnesota 511' },
   MS: { app: 'MDOT Traffic' },
   MO: { app: 'MoDOT Traveler Information' },
   MT: { app: 'MDT 511 Travel Info' },
   NE: { app: 'Nebraska 511' },
   NV: { app: 'Nevada 511' },
-  NH: { none: 'New Hampshire has no official road conditions app. NHDOT points drivers to the New England 511 website.' },
-  NJ: { none: 'New Jersey\'s DOT has no road conditions app. NJDOT points drivers to the 511nj.org website, and the Turnpike Authority links SafeTrip NJ, an audio-only app.' },
+  NH: { line: 'New Hampshire has no official road conditions app. NHDOT points drivers to the New England 511 website.' },
+  NJ: { line: 'NJDOT points drivers to the 511NJ website. The New Jersey Turnpike Authority also offers the SafeTripNJ app, with traffic alerts, a traffic map and cameras.' }, // njta.gov/travel-resources/safetripnj-app, read 2026-10-16
   NM: { app: 'NMRoads' },
   NY: { app: '511NY' },
   NC: { app: 'DriveNC' },
   ND: { app: 'NDRoads' },
   OH: { app: 'OHGO' },
   OK: { app: 'Drive Oklahoma' },
-  OR: { none: 'Oregon has no official road conditions app. ODOT points drivers to TripCheck.com and 511 by phone.' },
+  OR: { line: 'Oregon has no official road conditions app. ODOT points drivers to TripCheck.com and 511 by phone.' },
   PA: { app: '511PA' },
-  RI: { none: 'Rhode Island has no official road conditions app. RIDOT points drivers to its dot.ri.gov/travel website.' },
+  RI: { line: 'Rhode Island has no official road conditions app. RIDOT points drivers to its dot.ri.gov/travel website.' },
   SC: { app: '511 South Carolina Traffic' },
   SD: { app: 'SDDOT 511' },
-  TN: { none: 'Tennessee has no standalone road conditions app. Traffic is a section of the state\'s MyTN app, and TDOT points drivers to the SmartWay website.' },
+  TN: { line: 'Tennessee has no standalone road conditions app. Traffic is a section of the state\'s MyTN app, and TDOT points drivers to the SmartWay website.' },
   TX: { app: 'DriveTexas' },
   UT: { app: 'UDOT Traffic' },
-  VT: { none: 'Vermont has no official road conditions app. VTrans points drivers to the New England 511 website.' },
+  VT: { line: 'Vermont has no official road conditions app. VTrans points drivers to the New England 511 website.' },
   VA: { app: 'VDOT 511 Virginia Traffic' },
   WA: { app: 'WSDOT' },
   WV: { app: 'WV 511 Drive Safe' },

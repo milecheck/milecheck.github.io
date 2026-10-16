@@ -140,7 +140,9 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-card .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
     .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
     .rc-card p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
-    .rc-card p.rc-app{margin-top:8px;color:#3a444d;}
+    .rc-src:hover{border-color:#E5E5E5;} .rc-src:has(.rc-src-link:hover){border-color:#0E1116;}
+    .rc-src-link{display:block;text-decoration:none;color:inherit;}
+    .rc-card p.rc-app{margin-top:10px;padding-top:10px;border-top:1px solid #F0F0EE;color:#3a444d;}
     .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
     .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
     .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
@@ -278,7 +280,7 @@ L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri,
 map.fitBounds(B);
 var layer=L.layerGroup().addTo(map),workLayer=L.layerGroup(),plowLayer=L.layerGroup().addTo(map);
 // Snowplows (2026-10-15): only for states whose DOT publishes truck positions. assets/plows.js owns the pin and card.
-var PLOWS=!!MCPlows.AGENCY[ST],plowToggle=document.getElementById('rcPlows'),plowNote='';
+var PLOWS=!!(window.MCPlows&&MCPlows.AGENCY&&MCPlows.AGENCY[ST]),plowToggle=document.getElementById('rcPlows'),plowNote='';
 var status=document.getElementById('rcStatus'),rows=document.getElementById('rcRows'),count=document.getElementById('rcCount'),workToggle=document.getElementById('rcWork');
 var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
 var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
@@ -360,7 +362,7 @@ function statePage(s) {
 
   const app = APPS[s.code];
   if (!app) throw new Error(`no official-app line for ${s.code} in road-conditions/state-apps.cjs`);
-  const appLine = app.none || `${s.name}'s official road conditions app is ${app.app}.`;
+  const appLine = app.line || `${s.name}'s official road conditions app is ${app.app}.`;
   const cards = [];
   cards.push(['Official source', s.dot, `${s.name}'s DOT traveler site. The list of record for closures, restrictions and detours.`, s.dotUrl, true, appLine]);
   if (cams) cards.push(['Cameras', `${s.name} highway cameras`, `Every ${s.dot} camera on one map, with the route and mile marker where the DOT gives one.`, `/cameras/${slug}/`]);
@@ -371,7 +373,11 @@ function statePage(s) {
   for (const m of mountains) cards.push(['Mountain visibility', `Is ${MOUNTAIN_NAMES[m]} out?`, `Whether the mountain is visible right now, and from where.`, `/mountains/${m}/`]);
   if (guide) cards.push(['Mile markers', `Mile markers in ${s.name}`, `How ${s.name} numbers its highways and where the markers matter most.`, `/blog/mile-markers-${slug}.html`]);
   if (recap) cards.push(['Report', `Labor Day 2026 in ${s.name}`, `What the ${s.dot} feed carried over the holiday weekend.`, `/blog/labor-day-weekend-recap-2026-states/${slug}.html`]);
-  const cardsHtml = cards.map(([k, h, p, href, ext, more]) => `      <a class="rc-card" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}><span class="k">${k}</span><h3>${h}</h3><p>${p}</p>${more ? `<p class="rc-app">${esc(more)}</p>` : ''}</a>`).join('\n');
+  const cardsHtml = cards.map(([k, h, p, href, ext, more]) => {
+    const link = `<a class="rc-card" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}><span class="k">${k}</span><h3>${h}</h3><p>${p}</p></a>`;
+    // The official-app line is not part of the DOT-site link (ChatGPT review 2026-10-16), so it sits beside the anchor.
+    return more ? `      <div class="rc-card rc-src">${link.replace('class="rc-card"', 'class="rc-src-link"')}<p class="rc-app">${esc(more)}</p></div>` : `      ${link}`;
+  }).join('\n');
 
   const corridorLinks = corridors.map(([cs, cn]) => `<a href="/corridors/${cs}/">${cn}</a>`);
   const passLinks = passes.map(([ps, pn]) => `<a href="/passes/${ps}/">${pn}</a>`);

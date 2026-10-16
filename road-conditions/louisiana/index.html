@@ -73,7 +73,9 @@
     .rc-card .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
     .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
     .rc-card p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
-    .rc-card p.rc-app{margin-top:8px;color:#3a444d;}
+    .rc-src:hover{border-color:#E5E5E5;} .rc-src:has(.rc-src-link:hover){border-color:#0E1116;}
+    .rc-src-link{display:block;text-decoration:none;color:inherit;}
+    .rc-card p.rc-app{margin-top:10px;padding-top:10px;border-top:1px solid #F0F0EE;color:#3a444d;}
     .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
     .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
     .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
@@ -179,7 +181,7 @@
   <div class="rc-body">
     <h2>Where to look next</h2>
     <div class="rc-cards">
-      <a class="rc-card" href="https://www.511la.org/" target="_blank" rel="noopener"><span class="k">Official source</span><h3>511LA</h3><p>Louisiana's DOT traveler site. The list of record for closures, restrictions and detours.</p><p class="rc-app">Louisiana's official road conditions app is Louisiana 511.</p></a>
+      <div class="rc-card rc-src"><a class="rc-src-link" href="https://www.511la.org/" target="_blank" rel="noopener"><span class="k">Official source</span><h3>511LA</h3><p>Louisiana's DOT traveler site. The list of record for closures, restrictions and detours.</p></a><p class="rc-app">Louisiana's official road conditions app is Louisiana 511.</p></div>
       <a class="rc-card" href="/cameras/louisiana/"><span class="k">Cameras</span><h3>Louisiana highway cameras</h3><p>Every 511LA camera on one map, with the route and mile marker where the DOT gives one.</p></a>
       <a class="rc-card" href="/cameras/new-orleans/"><span class="k">City cameras</span><h3>New Orleans cameras</h3><p>Live cameras on the New Orleans freeways.</p></a>
       <a class="rc-card" href="/corridors/i-10/"><span class="k">Corridor</span><h3>I-10 conditions</h3><p>The whole I-10 corridor, every state it crosses, alerts by mile marker.</p></a>
@@ -328,7 +330,7 @@ L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri,
 map.fitBounds(B);
 var layer=L.layerGroup().addTo(map),workLayer=L.layerGroup(),plowLayer=L.layerGroup().addTo(map);
 // Snowplows (2026-10-15): only for states whose DOT publishes truck positions. assets/plows.js owns the pin and card.
-var PLOWS=!!MCPlows.AGENCY[ST],plowToggle=document.getElementById('rcPlows'),plowNote='';
+var PLOWS=!!(window.MCPlows&&MCPlows.AGENCY&&MCPlows.AGENCY[ST]),plowToggle=document.getElementById('rcPlows'),plowNote='';
 var status=document.getElementById('rcStatus'),rows=document.getElementById('rcRows'),count=document.getElementById('rcCount'),workToggle=document.getElementById('rcWork');
 var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
 var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
