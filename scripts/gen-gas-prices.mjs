@@ -79,9 +79,7 @@ const stateVals = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES
   return { n, r: own ? reg.out[n].now : reg.out[r[0]]?.now, d: dsl.out[r[0]]?.now, rOwn: !!own, dOwn: false, region: r[1] };
 });
 const sorted = [...stateVals].sort((a, b) => b.r - a.r || a.n.localeCompare(b.n));
-const rankOf = v => 1 + sorted.filter(x => x.r > v).length;
-const tied = v => sorted.filter(x => x.r === v).length > 1;
-const stateRows = sorted.map(x => [`${tied(x.r) ? 'T-' : ''}${rankOf(x.r)}`, esc(x.n), x.rOwn ? `<strong>${$(x.r)}</strong>` : $(x.r), $(x.d), esc(x.region)]);
+const stateRows = sorted.map(x => [esc(x.n), x.rOwn ? `<strong>${$(x.r)}</strong>` : $(x.r), $(x.d), esc(x.region)]);
 
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>'));
@@ -98,14 +96,30 @@ const updated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'nu
 const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><strong>Last updated ${updated}</strong> · EIA prices for the week of ${week}</p>
     <p class="lede"><strong>${esc(lede)}</strong></p>
     <p>Prices are averages across stations, including taxes. The station on your exit can be higher or lower.</p>
-    <h2>Gas prices by state, ranked</h2>
-    <p>Ranked by the price of regular, most expensive first. T means tied: states that share a regional average share a rank. EIA publishes its own weekly number for 9 states, shown in <strong>bold</strong>. Every other price is the average for the EIA region in the last column.</p>
-${table(['Rank', 'State', 'Regular', 'Diesel', 'EIA region'], stateRows)}
+    <h2>Gas prices by state</h2>
+    <p>Sorted by regular, most expensive first. Tap a column name to sort by it.</p>
+    <p>The government survey behind these prices (EIA) reports a separate price for only 9 states, shown in <strong>bold</strong>. Every other state shows the average for its region, named in the last column.</p>
+${table(['State', 'Regular', 'Diesel', 'Region'], stateRows).replace('<table ', '<table data-sortable ')}
+<script>
+document.querySelectorAll('table[data-sortable]').forEach(t => {
+  t.querySelectorAll('th').forEach((th, i) => {
+    th.style.cursor = 'pointer'; th.setAttribute('role', 'button'); th.tabIndex = 0;
+    let dir = 1;
+    const go = () => {
+      const tb = t.tBodies[0], rows = [...tb.rows], val = r => r.cells[i].textContent.trim(), num = v => parseFloat(v.replace(/[^0-9.]/g, ''));
+      rows.sort((a, b) => { const x = val(a), y = val(b), nx = num(x), ny = num(y); return (isNaN(nx) || isNaN(ny) ? x.localeCompare(y) : nx - ny) * dir; });
+      rows.forEach(r => tb.appendChild(r));
+      t.querySelectorAll('th').forEach(h => h.textContent = h.textContent.replace(/ [▲▼]$/, '')); th.textContent += dir > 0 ? ' ▲' : ' ▼';
+      dir = -dir;
+    };
+    th.addEventListener('click', go); th.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+  });
+});
+</script>
     <h2>Regions</h2>
 ${table(['Region', 'Regular', 'vs last week', 'Diesel', 'vs last week'], regionRows)}
-    <h2>States with their own weekly number</h2>
-${table(['State', 'Regular', 'vs last week'], ownRows)}
     <h2>Cities</h2>
+    <p>EIA reports weekly prices for these 10 cities only.</p>
 ${table(['City', 'Regular', 'vs last week'], cityRows)}
     <h2>Why don't all states have their own number?</h2>
     <p>EIA surveys stations each Monday and publishes the U.S. average, seven regional averages, and nine states it samples separately. The rest of the states are covered inside their regional average. California is broken out because its prices run well above the rest of the West Coast.</p>
