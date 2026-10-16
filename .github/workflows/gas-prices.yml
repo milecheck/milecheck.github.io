@@ -21,7 +21,7 @@ jobs:
         run: |
           git config user.name "milecheck-bot"
           git config user.email "info@milecheckapp.com"
-          git add gas-prices data/gas-prices.json
+          git add gas-prices data/gas-prices.json data/gas-prices-history.csv
           git diff --cached --quiet && exit 0
           git commit -m "Gas prices: EIA weekly update $(date -u +%Y-%m-%d)"
           git stash --include-untracked --quiet || true

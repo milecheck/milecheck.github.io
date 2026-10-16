@@ -3,6 +3,7 @@
 // its EIA region's average, labeled as a regional average. Rebuilt weekly by .github/workflows/gas-prices.yml.
 // Run, then node scripts/finish-pages.mjs --pages-only for the add-on blocks.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { upsert, iso } from './gas-history.mjs';
 
 const SRC = {
   regular: 'https://www.eia.gov/dnav/pet/pet_pri_gnd_a_epmr_pte_dpgal_w.htm',
@@ -16,8 +17,11 @@ async function fetchSeries(url) {
   const out = {};
   for (const part of s.split('<td class="DataStub1">').slice(1)) {
     const name = part.split('</td>')[0].replace(/<[^>]+>/g, '').trim();
-    const vals = [...part.split('class="DataHist"')[0].matchAll(/class="(?:DataB|Current2)">\s*([\d.]+)/g)].map(m => +m[1]);
-    if (vals.length >= 2) out[name] = { now: vals.at(-1), prev: vals.at(-2) };
+    const [cellsPart, histPart = ''] = part.split('class="DataHist"');
+    const cells = [...cellsPart.matchAll(/class="(?:DataB|Current2)">([^<]*)</g)].map(m => parseFloat(m[1].trim()));
+    const series = (histPart.match(/s=([A-Z0-9_]+)&/) || [])[1];
+    const vals = cells.filter(v => !isNaN(v));
+    if (vals.length >= 2) out[name] = { now: vals.at(-1), prev: vals.at(-2), series, weeks: Object.fromEntries(cells.map((v, i) => [dates[i], v]).filter(([d, v]) => d && !isNaN(v))) };
   }
   const release = (s.match(/Release Date:\s*([\d/]+)/) || [])[1];
   const next = (s.match(/Next Release Date:\s*([\d/]+)/) || [])[1];
@@ -26,6 +30,9 @@ async function fetchSeries(url) {
 const reg = await fetchSeries(SRC.regular);
 const dsl = await fetchSeries(SRC.diesel);
 if (!reg.out['U.S.'] || !dsl.out['U.S.'] || Object.keys(reg.out).length < 20) throw new Error('EIA layout changed; refusing to publish');
+const hist = upsert([['regular', reg], ['diesel', dsl]].flatMap(([product, src]) => Object.entries(src.out).filter(([, v]) => v.series)
+  .flatMap(([area, v]) => Object.entries(v.weeks).map(([d, price]) => ({ week: iso(d), product, area, series: v.series, price })))));
+console.log(`history: ${hist.total} rows (+${hist.added})`);
 writeFileSync('data/gas-prices.json', JSON.stringify({ fetched: new Date().toISOString(), regular: reg, diesel: dsl }, null, 1) + '\n');
 
 // EIA region names as published, and the states in each (EIA PADD definitions).
@@ -71,15 +78,10 @@ const stateVals = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES
   const own = OWN.includes(n) && reg.out[n];
   return { n, r: own ? reg.out[n].now : reg.out[r[0]]?.now, d: dsl.out[r[0]]?.now, rOwn: !!own, dOwn: false, region: r[1] };
 });
-const ext = k => { const v = stateVals.map(x => x[k]).filter(x => x != null); return { hi: Math.max(...v), lo: Math.min(...v) }; };
-const X = { r: ext('r'), d: ext('d') };
-const cell = (v, own, k) => {
-  let t = own ? `<strong>${$(v)}</strong>` : $(v);
-  if (v === X[k].hi) t = `<span style="background:#FDE2E1;color:#9B1C1C;padding:2px 6px;border-radius:4px;white-space:nowrap">▲ ${t}</span>`;
-  else if (v === X[k].lo) t = `<span style="background:#DDF5E6;color:#14632F;padding:2px 6px;border-radius:4px;white-space:nowrap">▼ ${t}</span>`;
-  return t;
-};
-const stateRows = stateVals.map(x => [esc(x.n), cell(x.r, x.rOwn, 'r'), cell(x.d, x.dOwn, 'd'), esc(x.region)]);
+const sorted = [...stateVals].sort((a, b) => b.r - a.r || a.n.localeCompare(b.n));
+const rankOf = v => 1 + sorted.filter(x => x.r > v).length;
+const tied = v => sorted.filter(x => x.r === v).length > 1;
+const stateRows = sorted.map(x => [`${tied(x.r) ? 'T-' : ''}${rankOf(x.r)}`, esc(x.n), x.rOwn ? `<strong>${$(x.r)}</strong>` : $(x.r), $(x.d), esc(x.region)]);
 
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>'));
@@ -96,9 +98,9 @@ const updated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'nu
 const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><strong>Last updated ${updated}</strong> · EIA prices for the week of ${week}</p>
     <p class="lede"><strong>${esc(lede)}</strong></p>
     <p>Prices are averages across stations, including taxes. The station on your exit can be higher or lower.</p>
-    <h2>Find your state</h2>
-    <p>EIA publishes its own weekly number for 9 states, shown in <strong>bold</strong>. Every other price is the average for the EIA region in the last column. <span style="background:#FDE2E1;color:#9B1C1C;padding:1px 5px;border-radius:4px">▲ highest</span> and <span style="background:#DDF5E6;color:#14632F;padding:1px 5px;border-radius:4px">▼ lowest</span> are marked in each column.</p>
-${table(['State', 'Regular', 'Diesel', 'EIA region'], stateRows)}
+    <h2>Gas prices by state, ranked</h2>
+    <p>Ranked by the price of regular, most expensive first. T means tied: states that share a regional average share a rank. EIA publishes its own weekly number for 9 states, shown in <strong>bold</strong>. Every other price is the average for the EIA region in the last column.</p>
+${table(['Rank', 'State', 'Regular', 'Diesel', 'EIA region'], stateRows)}
     <h2>Regions</h2>
 ${table(['Region', 'Regular', 'vs last week', 'Diesel', 'vs last week'], regionRows)}
     <h2>States with their own weekly number</h2>
