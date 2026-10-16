@@ -44,7 +44,7 @@ ${sortJs}
     <h2>Source</h2>
     <p><a href="${SRC}" target="_blank" rel="noopener">U.S. Energy Information Administration, Electric Power Monthly, table 5.6.A</a>, average residential price, ${esc(month)}. <a href="https://www.fueleconomy.gov/" target="_blank" rel="noopener">fueleconomy.gov</a> lists each EV's kWh per 100 miles.</p>
     <h2>More</h2>
-    <ul><li><a href="/how-to-charge-an-electric-car/">How do you charge an electric car at a public charger?</a></li><li><a href="/ev-chargers/">How many EV chargers are in each state?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li><li><a href="/gas-vs-electric-car/">Is a gas car or an electric car cheaper to drive in your state?</a></li></ul>`;
+    <ul><li><a href="/how-to-charge-an-electric-car/">How do you charge an electric car at a public charger?</a></li><li><a href="/ev-chargers/">How many EV chargers are in each state?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li><li><a href="/gas-vs-electric-car/">Gas, hybrid or electric car: which is cheapest to drive in your state?</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'How much does it cost to charge an EV in each state?', url = 'https://milecheckapp.com/ev-charging-cost/';

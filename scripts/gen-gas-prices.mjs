@@ -126,7 +126,7 @@ ${table(['City', 'Regular', 'vs last week'], cityRows)}
     <h2>Source</h2>
     <p><a href="${SRC.regular}" target="_blank" rel="noopener">EIA weekly retail gasoline prices</a> and <a href="${SRC.diesel}" target="_blank" rel="noopener">EIA weekly on-highway diesel prices</a>. Week of ${week}, released ${day(reg.release)}. Next release ${day(reg.next)}. This page updates on its own after each release.</p>
     <h2>More about gas</h2>
-    <ul><li><a href="/when-is-gas-cheapest/">When is gas cheapest during the year?</a></li><li><a href="/which-states-pump-your-gas/">Which states pump your gas for you?</a></li><li><a href="/how-to-pump-gas/">How do you pump gas?</a></li><li><a href="/gas-vs-electric-car/">Is a gas car or an electric car cheaper to drive in your state?</a></li></ul>
+    <ul><li><a href="/when-is-gas-cheapest/">When is gas cheapest during the year?</a></li><li><a href="/which-states-pump-your-gas/">Which states pump your gas for you?</a></li><li><a href="/how-to-pump-gas/">How do you pump gas?</a></li><li><a href="/gas-vs-electric-car/">Gas, hybrid or electric car: which is cheapest to drive in your state?</a></li></ul>
     <h2>On the road</h2>
     <ul><li><a href="/rest-areas/">Can you sleep at a rest area? Rules by state</a></li><li><a href="/road-conditions/">Road conditions by state</a></li><li><a href="/what-mile-marker-am-i-at/">What mile marker am I at?</a></li></ul>`;
 const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
