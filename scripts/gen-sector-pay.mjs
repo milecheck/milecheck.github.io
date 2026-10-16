@@ -25,11 +25,10 @@ ${rows.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}>${$(r.median)}</td><
   const body = `    <p class="lede"><strong>${esc(lede)}</strong></p>
     <p>${esc(P.thanks)}</p>
     <h2>${esc(P.h1)}</h2>
+    <p><strong>Who is counted:</strong> ${esc(P.note)}</p>
     <p>Sorted by median pay, highest first. Tap a column name to sort by it. The median is the middle of the pay range, so half earn more and half earn less.</p>
 ${table}
 ${sortJs}
-    <h2>Who is counted?</h2>
-    <p>${esc(P.note)}</p>
     <h2>Source</h2>
     <p><a href="${P.blsUrl}" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics</a>, May ${year} estimates. Updated each spring.</p>
     <h2>More road jobs</h2>

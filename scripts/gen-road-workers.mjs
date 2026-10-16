@@ -21,12 +21,11 @@ const body = `    <p class="lede"><strong>${esc(lede)}</strong></p>
     <h2>What does a highway maintenance worker do?</h2>
     <p>The Bureau of Labor Statistics describes the job as keeping highways, local roads and rights-of-way in working order. That means patching broken pavement, repairing guardrails, signs and snow fences, mowing and clearing brush along the road, and plowing snow.</p>
     <h2>How much do highway maintenance workers make in each state?</h2>
+    <p><strong>Who is counted:</strong> Everyone in this job, whoever they work for. That includes state DOT crews, county and city road crews, and private contractors. The pay shown is base wages. BLS does not count overtime, so storm shifts are not in these numbers.</p>
     <p>Sorted by median pay, highest first. Tap a column name to sort by it. The median is the middle of the pay range, so half earn more and half earn less.</p>
 ${table}
 ${sortJs}
     <p>Hawaii and the District of Columbia are not shown because BLS does not publish a separate number for them for this job.</p>
-    <h2>Who counts as a highway maintenance worker here?</h2>
-    <p>Everyone in this job, whoever they work for. That includes state DOT crews, county and city road crews, and private contractors. The pay shown is base wages. BLS does not count overtime, so storm shifts are not in these numbers.</p>
     <h2>Source</h2>
     <p><a href="https://www.bls.gov/oes/current/oes474051.htm" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics, highway maintenance workers (47-4051)</a>, May ${year} estimates. Updated each spring.</p>
     <h2>On the road</h2>
