@@ -57,8 +57,10 @@
     var where=t.route?(esc(t.route)+(t.mile!=null?' near '+t.unit+' '+t.mile:'')):esc(t.name||'Truck');
     return '<li'+(t.stale?' style="opacity:.6"':'')+'>'+where+'<span class="m">'+(t.status?esc(t.status)+' · ':'')+(t.age==null?'no report time':'last reported '+age(t.age))+'</span></li>';
   }
+  // Leah 10-15: a mini notice about the cab cameras, only where a truck actually sends one.
+  function cameraNote(list){var n=list.filter(function(t){return t.img;}).length;if(!n)return '';return n+(n===1?' truck':' trucks')+' here send a photo from the cab. Look for the camera badge and tap the truck.';}
   function summary(list){var fresh=list.filter(function(t){return !t.stale;}).length,old=list.length-fresh;
     return fresh+(fresh===1?' plow':' plows')+' reporting'+(old?' · '+old+' older':'');}
   function sort(list){return list.sort(function(a,b){return (a.stale-b.stale)||((a.age==null?9e9:a.age)-(b.age==null?9e9:b.age));});}
-  window.MCPlows={AGENCY:AGENCY,normalize:normalize,icon:icon,card:card,listItem:listItem,summary:summary,sort:sort,age:age,BLUE:BLUE};
+  window.MCPlows={AGENCY:AGENCY,cameraNote:cameraNote,normalize:normalize,icon:icon,card:card,listItem:listItem,summary:summary,sort:sort,age:age,BLUE:BLUE};
 })();

@@ -164,10 +164,10 @@
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in Alaska</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">AKDOT</div><div class="l">camera source</div></div>
-      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">AKDOT plows reporting</div></div>
+      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">AKDOT plows reporting</div><div class="l" id="plowCamNote" style="color:#0369A1;margin-top:4px"></div></div>
     </div>
   </div>
-<!-- monthnum:start -->
+  <!-- monthnum:start -->
   <div class="mc-monthnum"><style>.mc-monthnum{max-width:760px;margin:12px auto;padding:0 16px;font:15px/1.55 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#3a444d;}.mc-monthnum p{margin:0;}.mc-monthnum a{color:#00A86B;font-weight:700;}</style><p>In September 2026, Alaska's DOT feed carried 4 alerts: 2 closures. The routes with the most alerts were Dalton Highway and Parks Highway. Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/highway-report-september-2026-states/alaska.html">See the full Alaska report</a>.</p></div>
 <!-- monthnum:end -->
 <!-- camera-after-map:end -->
@@ -348,7 +348,7 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
   cameraRouteFilter.loaded(CAMS);
   draw();
 });
-if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=MCPlows.sort(list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>MCPlows.normalize(t,DOT)));const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.filter(t=>!t.stale).length;draw();});
+if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=MCPlows.sort(list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>MCPlows.normalize(t,DOT)));const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.filter(t=>!t.stale).length;const cn=document.getElementById('plowCamNote');if(cn)cn.textContent=MCPlows.cameraNote(PLOWLIST);draw();});
 </script>
 
   <!-- MailerLite Universal -->

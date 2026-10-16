@@ -394,7 +394,7 @@ ${s.crossLinkHtml || ''}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in ${s.name}</div></div>
       <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${s.dot.split('(')[0].trim()}</div><div class="l">camera source</div></div>${plows ? `
-      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">${s.dot.split('(')[0].trim()} plows reporting</div></div>` : ''}
+      <div class="co-stat"><div class="n live" id="statPlows">—</div><div class="l">${s.dot.split('(')[0].trim()} plows reporting</div><div class="l" id="plowCamNote" style="color:#0369A1;margin-top:4px"></div></div>` : ''}
     </div>
   </div>
 
@@ -524,7 +524,7 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
   document.getElementById('statCams').textContent=CAMS.length;
   draw();
 });
-if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=MCPlows.sort(list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>MCPlows.normalize(t,DOT)));const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.filter(t=>!t.stale).length;draw();});
+if(PLOWS)fetchJSON(WORKER+'/plows?state='+CODE,3).then(d=>{const list=(d&&d.plows)||[];PLOWLIST=MCPlows.sort(list.filter(t=>isFinite(+t.lat)&&isFinite(+t.lon)).map(t=>MCPlows.normalize(t,DOT)));const st=document.getElementById('statPlows');if(st)st.textContent=PLOWLIST.filter(t=>!t.stale).length;const cn=document.getElementById('plowCamNote');if(cn)cn.textContent=MCPlows.cameraNote(PLOWLIST);draw();});
 </script>
 
 </body>
