@@ -26,7 +26,7 @@ const exists = (p) => fs.existsSync(rel(p));
 const slugOf = (name) => name.toLowerCase().replace(/[^a-z]+/g, '-');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const only = process.argv.slice(2);
-const PLOW_FEEDS = new Set(['UT','CO','DE','MT','WV','MI','NE','IN','IA','MN','KS','MB','AK','ND']); // cloudflare-worker.js PLOW_STATE_FETCHERS
+const PLOW_FEEDS = new Set(['UT','CO','DE','MT','WV','MI','NE','IN','IA','MN','KS','MB','AK','ND','AB','PA','ON']); // cloudflare-worker.js PLOW_STATE_FETCHERS
 
 // Site inventory these pages link into. Keep in step with the generators named.
 const CORRIDORS = [ // scripts/gen-corridor-pages.js
