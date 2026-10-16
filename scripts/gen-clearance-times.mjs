@@ -26,8 +26,9 @@ const table = `<div style="overflow-x:auto"><table style="width:100%;border-coll
 ${states.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}>${hm(r.median)}</td><td ${td}>${hm(r.p25)} and ${hm(r.p75)}</td><td ${td}>${r.n.toLocaleString('en-US')}</td></tr>`).join('\n')}
 </tbody></table></div>`;
 const kept = crashes.filter(r => !EXCLUDE[r.state]).length;
-const lede = `A highway crash stays on a state DOT's feed for about ${hm(usMedian)} before it is cleared, in the middle case. That is from ${kept.toLocaleString('en-US')} crashes MileCheck logged across ${states.length} states and provinces from ${day(first)} to ${day(last)}.`;
+const lede = `A crash on a state highway stays on the state DOT's feed for about ${hm(usMedian)} before it is cleared, in the middle case. That is from ${kept.toLocaleString('en-US')} crashes MileCheck logged across ${states.length} states and provinces from ${day(first)} to ${day(last)}.`;
 const body = `    <p class="lede"><strong>${esc(lede)}</strong></p>
+    <p><strong>These are state highways, not city streets.</strong> The crashes come from each state DOT's feed, which covers interstates, U.S. routes and state routes. City and county streets are not counted.</p>
     <p>Clearing a crash means moving the cars, cleaning up debris and reopening the lanes. These times run from when the DOT first posted the crash to when it took it down.</p>
     <h2>How long do crashes take to clear in each state?</h2>
     <p><strong>How to read this:</strong> each state's DOT decides when to post a crash and when to remove it, and some post unconfirmed reports. So compare a state with itself over time, not with other states. MileCheck reads every feed about every 16 minutes, so each time is accurate to about 16 minutes. Crashes seen only once are left out. States with fewer than 10 logged crashes are not shown. Left out because their feed timing does not show clearance: ${Object.values(EXCLUDE).join('. ')}.</p>
