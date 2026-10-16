@@ -1,0 +1,177 @@
+{
+ "fetched": "2026-10-16T03:07:21.152Z",
+ "regular": {
+  "out": {
+   "U.S.": {
+    "now": 4.331,
+    "prev": 4.354
+   },
+   "East Coast (PADD1)": {
+    "now": 4.118,
+    "prev": 4.147
+   },
+   "New England (PADD 1A)": {
+    "now": 4.291,
+    "prev": 4.343
+   },
+   "Central Atlantic (PADD 1B)": {
+    "now": 4.347,
+    "prev": 4.363
+   },
+   "Lower Atlantic (PADD 1C)": {
+    "now": 3.929,
+    "prev": 3.959
+   },
+   "Midwest (PADD 2)": {
+    "now": 4.145,
+    "prev": 4.109
+   },
+   "Gulf Coast (PADD 3)": {
+    "now": 3.851,
+    "prev": 3.911
+   },
+   "Rocky Mountain (PADD 4)": {
+    "now": 4.439,
+    "prev": 4.417
+   },
+   "West Coast (PADD 5)": {
+    "now": 5.639,
+    "prev": 5.727
+   },
+   "West Coast less California": {
+    "now": 5.071,
+    "prev": 5.116
+   },
+   "California": {
+    "now": 6.104,
+    "prev": 6.227
+   },
+   "Colorado": {
+    "now": 4.175,
+    "prev": 4.02
+   },
+   "Florida": {
+    "now": 3.982,
+    "prev": 3.97
+   },
+   "Massachusetts": {
+    "now": 4.258,
+    "prev": 4.302
+   },
+   "Minnesota": {
+    "now": 4.184,
+    "prev": 4.2
+   },
+   "New York": {
+    "now": 4.353,
+    "prev": 4.38
+   },
+   "Ohio": {
+    "now": 3.87,
+    "prev": 3.829
+   },
+   "Texas": {
+    "now": 3.779,
+    "prev": 3.874
+   },
+   "Washington": {
+    "now": 5.377,
+    "prev": 5.424
+   },
+   "Boston": {
+    "now": 4.305,
+    "prev": 4.333
+   },
+   "Chicago": {
+    "now": 4.695,
+    "prev": 4.633
+   },
+   "Cleveland": {
+    "now": 3.851,
+    "prev": 3.859
+   },
+   "Denver": {
+    "now": 4.153,
+    "prev": 3.979
+   },
+   "Houston": {
+    "now": 3.762,
+    "prev": 3.836
+   },
+   "Los Angeles": {
+    "now": 6.082,
+    "prev": 6.209
+   },
+   "Miami": {
+    "now": 4.071,
+    "prev": 4.075
+   },
+   "New York City": {
+    "now": 4.314,
+    "prev": 4.34
+   },
+   "San Francisco": {
+    "now": 6.154,
+    "prev": 6.306
+   },
+   "Seattle": {
+    "now": 5.606,
+    "prev": 5.656
+   }
+  },
+  "week": "10/12/26",
+  "release": "10/14/2026",
+  "next": "10/20/2026"
+ },
+ "diesel": {
+  "out": {
+   "U.S.": {
+    "now": 6.179,
+    "prev": 6.199
+   },
+   "East Coast (PADD1)": {
+    "now": 5.908,
+    "prev": 5.951
+   },
+   "New England (PADD 1A)": {
+    "now": 6.441,
+    "prev": 6.476
+   },
+   "Central Atlantic (PADD 1B)": {
+    "now": 6.471,
+    "prev": 6.485
+   },
+   "Lower Atlantic (PADD 1C)": {
+    "now": 5.645,
+    "prev": 5.699
+   },
+   "Midwest (PADD 2)": {
+    "now": 6.259,
+    "prev": 6.286
+   },
+   "Gulf Coast (PADD 3)": {
+    "now": 5.809,
+    "prev": 5.819
+   },
+   "Rocky Mountain (PADD 4)": {
+    "now": 6.302,
+    "prev": 6.267
+   },
+   "West Coast (PADD 5)": {
+    "now": 7.24,
+    "prev": 7.229
+   },
+   "West Coast less California": {
+    "now": 6.503,
+    "prev": 6.49
+   },
+   "California": {
+    "now": 8.091,
+    "prev": 8.082
+   }
+  },
+  "week": "10/12/26",
+  "release": "10/14/2026",
+  "next": "10/20/2026"
+ }
+}
