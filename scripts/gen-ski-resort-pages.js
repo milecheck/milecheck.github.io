@@ -127,6 +127,8 @@ const CSS = `    .sk-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
     .sk-box li{padding:9px 0;border-top:1px solid #F0F0EE;font-size:14.5px;line-height:1.4;}
     .sk-box li .m{display:block;font-size:12.5px;color:#5b6670;margin-top:2px;}
     .sk-box li.none{color:#5b6670;font-size:14px;}
+    .sk-box li.sk-go{cursor:pointer;margin:0 -8px;padding-left:8px;padding-right:8px;border-radius:8px;}
+    .sk-box li.sk-go:hover{background:#F7F5EE;}
     .sk-box .kd{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin-left:8px;}
     .kd.closure{color:#cf3320;} .kd.crash{color:#d9640f;} .kd.weather{color:#2563eb;} .kd.hazard{color:#7C3AED;} .kd.partial{color:#a16207;}
     .sk-box .pn{font-size:13px;color:#0369A1;font-weight:600;margin:6px 0 0;}
@@ -295,7 +297,7 @@ map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*2),{padding:
 L.circle([RES.lat,RES.lon],{radius:RES.radius*1609.34,color:'#0f7a4f',weight:1.5,dashArray:'4 5',fill:false,interactive:false}).addTo(map);
 L.marker([RES.lat,RES.lon],{icon:L.divIcon({className:'',iconSize:[30,30],iconAnchor:[15,15],html:'<div class="sk-base" title="'+esc(RES.name)+' base">⛷</div>'}),zIndexOffset:1200,interactive:false}).addTo(map);
 var camLayer=L.layerGroup().addTo(map),alertLayer=L.layerGroup().addTo(map),plowLayer=L.layerGroup().addTo(map);
-var CAMS=[],ALERTS=[],PLOWLIST=[],plowErr=false,alertErr=false,camErr=false,plowStatewide=0;
+var CAMS=[],ALERTS=[],PLOWLIST=[],plowErr=false,alertErr=false,camErr=false,plowStatewide=0,plowMarkers=[],alertMarkers=[];
 var cardEl=document.getElementById('skCard'),status=document.getElementById('skStatus');
 function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function showCard(html){stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';stopStream();};}
@@ -320,11 +322,11 @@ var LISTED={closure:1,crash:1,weather:1,hazard:1,partial:1};
 function aIcon(k){return L.divIcon({className:'',html:'<span class="rc-dot'+(k==='closure'?' big':'')+'" style="background:'+COLOR[k]+'"></span>',iconSize:[k==='closure'?18:14,k==='closure'?18:14],iconAnchor:[k==='closure'?9:7,k==='closure'?9:7]});}
 var showCam=true,showPlow=true,showAlert=true;
 function draw(){
-  camLayer.clearLayers();alertLayer.clearLayers();plowLayer.clearLayers();
+  camLayer.clearLayers();alertLayer.clearLayers();plowLayer.clearLayers();plowMarkers=[];alertMarkers=[];
   if(showCam){var groups={},order=[];CAMS.forEach(function(c){var k=c.lat.toFixed(4)+','+c.lon.toFixed(4);if(!groups[k]){groups[k]=[];order.push(k);}groups[k].push(c);});
     order.forEach(function(k){var g=groups[k];L.circleMarker([g[0].lat,g[0].lon],{radius:RS(g.length>1?6:5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',function(){showCard(groupCard(g));var sc=g.filter(function(c){return c.stream;})[0];if(sc)playStream(sc.stream);}).addTo(camLayer);});}
-  if(showAlert)ALERTS.forEach(function(a){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;var m=L.marker([a.lat,a.lon],{icon:aIcon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · '+MKR+' '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+(a.future?' · scheduled':'')+'</div><div class="fp-row">'+esc(a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});alertLayer.addLayer(m);});
-  if(PLOWS&&showPlow)PLOWLIST.forEach(function(t){L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700}).on('click',function(){showCard(MCPlows.card(t));}).addTo(plowLayer);});
+  if(showAlert)ALERTS.forEach(function(a,i){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;var m=L.marker([a.lat,a.lon],{icon:aIcon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · '+MKR+' '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+(a.future?' · scheduled':'')+'</div><div class="fp-row">'+esc(a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});alertLayer.addLayer(m);alertMarkers[i]=m;});
+  if(PLOWS&&showPlow)PLOWLIST.forEach(function(t,i){plowMarkers[i]=L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700}).on('click',function(){showCard(MCPlows.card(t));}).addTo(plowLayer);});
   var bits=[];
   if(PLOWS)bits.push(plowErr?'plow feed unavailable':'\\uD83D\\uDE9A '+MCPlows.summary(PLOWLIST));
   bits.push(camErr?'cameras unavailable':'\\uD83D\\uDCF7 '+CAMS.length+(CAMS.length===1?' camera':' cameras'));
@@ -350,7 +352,7 @@ function loadAlerts(){fetchJSON(WORKER+'/incidents?state='+RES.state,3).then(fun
   list.sort(function(a,b){return (a.future-b.future)||order[a.k]-order[b.k]||((b.at?b.at.getTime():0)-(a.at?a.at.getTime():0));});
   ALERTS=list;
   var ul=document.getElementById('alertList');
-  if(ul)ul.innerHTML=list.length?list.slice(0,30).map(function(a){return '<li><b>'+esc(a.route||LABEL[a.k])+(a.mp?' · '+MKR+' '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</b><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span><span class="m">'+(a.future&&a.start?'Starts '+a.start.toLocaleDateString([],{month:'short',day:'numeric'})+'. ':'')+esc(a.head)+(a.at?' · '+ago(a.at):'')+'</span></li>';}).join(''):'<li class="none">No closure, crash, weather or lane report from '+esc(TRAFFIC)+' on these roads right now. A quiet feed is not an all-clear; '+esc(TRAFFIC)+' is the official list.</li>';
+  if(ul)ul.innerHTML=list.length?list.slice(0,30).map(function(a,i){return '<li'+(isFinite(a.lat)&&a.lat?' class="sk-go" data-i="'+i+'" title="Show on the map"':'')+'><b>'+esc(a.route||LABEL[a.k])+(a.mp?' · '+MKR+' '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</b><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span><span class="m">'+(a.future&&a.start?'Starts '+a.start.toLocaleDateString([],{month:'short',day:'numeric'})+'. ':'')+esc(a.head)+(a.at?' · '+ago(a.at):'')+'</span></li>';}).join(''):'<li class="none">No closure, crash, weather or lane report from '+esc(TRAFFIC)+' on these roads right now. A quiet feed is not an all-clear; '+esc(TRAFFIC)+' is the official list.</li>';
   var cc=list.filter(function(a){return !a.future&&(a.k==='closure'||a.k==='crash');}).length;var el=document.getElementById('statAlerts');if(el)el.textContent=cc;
   draw();}).catch(function(){alertErr=true;draw();});}
 function loadPlows(){if(!PLOWS)return;fetchJSON(WORKER+'/plows?state='+RES.state,3).then(function(d){
@@ -363,9 +365,13 @@ function loadPlows(){if(!PLOWS)return;fetchJSON(WORKER+'/plows?state='+RES.state
   var fresh=PLOWLIST.filter(function(t){return !t.stale;}).length;
   if(el)el.textContent=fresh;
   if(sm)sm.textContent=PLOWLIST.length?MCPlows.summary(PLOWLIST):'';
-  if(ul)ul.innerHTML=PLOWLIST.length?PLOWLIST.slice(0,20).map(MCPlows.listItem).join(''):'<li class="none">No '+esc(DOT)+' truck is reporting a position on '+esc(RES.routes.join(', '))+' within '+(KM?Math.round(RES.radius*4.827)+' km':RES.radius*3+' miles')+', or within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base, right now'+(plowStatewide?'. '+plowStatewide+(plowStatewide===1?' truck is':' trucks are')+' reporting elsewhere in the '+esc(DOT)+' feed.':'. The '+esc(DOT)+' feed has no trucks reporting anywhere at the moment.')+'</li>';
+  if(ul)ul.innerHTML=PLOWLIST.length?PLOWLIST.slice(0,20).map(function(t,i){return MCPlows.listItem(t).replace('<li','<li class="sk-go" data-i="'+i+'" title="Show on the map"');}).join(''):'<li class="none">No '+esc(DOT)+' truck is reporting a position on '+esc(RES.routes.join(', '))+' within '+(KM?Math.round(RES.radius*4.827)+' km':RES.radius*3+' miles')+', or within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base, right now'+(plowStatewide?'. '+plowStatewide+(plowStatewide===1?' truck is':' trucks are')+' reporting elsewhere in the '+esc(DOT)+' feed.':'. The '+esc(DOT)+' feed has no trucks reporting anywhere at the moment.')+'</li>';
   if(cn){var txt=MCPlows.cameraNote(PLOWLIST);cn.textContent=txt;cn.style.display=txt?'block':'none';}
   draw();});}
+// Leah 2026-10-16: tap a truck or a closure in the list and the map goes to it and opens it.
+function jumpTo(m,open){if(!m)return;document.getElementById('comap').scrollIntoView({behavior:'smooth',block:'start'});map.setView(m.getLatLng(),Math.max(map.getZoom(),12),{animate:true});setTimeout(open,350);}
+var pl=document.getElementById('plowList');if(pl)pl.addEventListener('click',function(e){var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showPlow){showPlow=true;var t=document.getElementById('tgPlow');if(t)t.checked=true;draw();}var t2=PLOWLIST[i];jumpTo(plowMarkers[i],function(){if(t2)showCard(MCPlows.card(t2));});});
+var al=document.getElementById('alertList');if(al)al.addEventListener('click',function(e){var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showAlert){showAlert=true;var t=document.getElementById('tgAlert');if(t)t.checked=true;draw();}jumpTo(alertMarkers[i],function(){if(alertMarkers[i])alertMarkers[i].openPopup();});});
 loadCams();loadAlerts();loadPlows();
 setInterval(loadAlerts,300000);setInterval(loadPlows,60000);setInterval(loadCams,600000);
 })();</script>`;
