@@ -645,6 +645,18 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:ev-chargers",
+   "path": "/ev-chargers/",
+   "title": "How many EV chargers are in each state? Fast and Level 2",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:ev-charging-cost",
+   "path": "/ev-charging-cost/",
+   "title": "How much does it cost to charge an EV in each state?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:fleets",
    "path": "/fleets/",
    "title": "Mile Markers and State DOT Feeds for Fleet Dispatch",
@@ -654,6 +666,12 @@
    "key": "basics:gas-prices",
    "path": "/gas-prices/",
    "title": "What are gas prices in my state this week? Regular and diesel",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:gas-vs-electric-car",
+   "path": "/gas-vs-electric-car/",
+   "title": "Gas, hybrid or electric car: which is cheapest to drive in your state?",
    "sponsor": "house"
   },
   {
@@ -726,6 +744,12 @@
    "key": "basics:how-interstates-are-numbered",
    "path": "/how-interstates-are-numbered/",
    "title": "How Interstate Highways Are Numbered (the System Explained)",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:how-to-charge-an-electric-car",
+   "path": "/how-to-charge-an-electric-car/",
+   "title": "How do you charge an electric car at a public charger? Step by step",
    "sponsor": "house"
   },
   {
@@ -864,6 +888,12 @@
    "key": "basics:road-trip-with-a-dog",
    "path": "/road-trip-with-a-dog/",
    "title": "Road Trip With a Dog: Stops on the Big Interstates",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:road-workers",
+   "path": "/road-workers/",
+   "title": "How much do highway maintenance workers make in each state? (2025)",
    "sponsor": "house"
   },
   {
@@ -2415,66 +2445,6 @@
    "sponsor": "house"
   },
   {
-   "key": "mountain:baldy",
-   "path": "/mountains/baldy/",
-   "title": "Is Mount Baldy visible right now? Live from Los Angeles",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-best-time",
-   "path": "/mountains/baldy/best-time/",
-   "title": "Best time of year to see Mount Baldy",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-alhambra",
-   "path": "/mountains/baldy/from-alhambra/",
-   "title": "Is Mount Baldy visible from Alhambra right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-chino",
-   "path": "/mountains/baldy/from-chino/",
-   "title": "Is Mount Baldy visible from Chino right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-claremont",
-   "path": "/mountains/baldy/from-claremont/",
-   "title": "Is Mount Baldy visible from Claremont right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-long-beach",
-   "path": "/mountains/baldy/from-long-beach/",
-   "title": "Is Mount Baldy visible from Long Beach right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-los-angeles",
-   "path": "/mountains/baldy/from-los-angeles/",
-   "title": "Is Mount Baldy visible from Los Angeles right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-riverside",
-   "path": "/mountains/baldy/from-riverside/",
-   "title": "Is Mount Baldy visible from Riverside right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-from-west-covina",
-   "path": "/mountains/baldy/from-west-covina/",
-   "title": "Is Mount Baldy visible from West Covina right now?",
-   "sponsor": "house"
-  },
-  {
-   "key": "mountain:baldy-history",
-   "path": "/mountains/baldy/history/",
-   "title": "How often is Mount Baldy visible from Los Angeles?",
-   "sponsor": "house"
-  },
-  {
    "key": "mountain:denali",
    "path": "/mountains/denali/",
    "title": "Is Denali visible right now? Live from Talkeetna",
@@ -2832,6 +2802,390 @@
    "key": "pass:siskiyou",
    "path": "/passes/siskiyou/",
    "title": "Siskiyou Summit Camera & Conditions Right Now (I-5)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-afton-alps",
+   "path": "/ski/afton-alps/",
+   "title": "What is the road to Afton Alps like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-alta",
+   "path": "/ski/alta/",
+   "title": "What is the road to Alta like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-alyeska",
+   "path": "/ski/alyeska/",
+   "title": "What is the road to Alyeska like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-anthony-lakes",
+   "path": "/ski/anthony-lakes/",
+   "title": "What is the road to Anthony Lakes like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-arapahoe-basin",
+   "path": "/ski/arapahoe-basin/",
+   "title": "What is the road to Arapahoe Basin like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-asessippi",
+   "path": "/ski/asessippi/",
+   "title": "What is the road to Asessippi like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-aspen-snowmass",
+   "path": "/ski/aspen-snowmass/",
+   "title": "What is the road to Aspen Snowmass like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-beaver-creek",
+   "path": "/ski/beaver-creek/",
+   "title": "What is the road to Beaver Creek like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-big-sky",
+   "path": "/ski/big-sky/",
+   "title": "What is the road to Big Sky like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-blue-mountain",
+   "path": "/ski/blue-mountain/",
+   "title": "What is the road to Blue Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-boyne-mountain",
+   "path": "/ski/boyne-mountain/",
+   "title": "What is the road to Boyne Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-breckenridge",
+   "path": "/ski/breckenridge/",
+   "title": "What is the road to Breckenridge like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-bridger-bowl",
+   "path": "/ski/bridger-bowl/",
+   "title": "What is the road to Bridger Bowl like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-brighton",
+   "path": "/ski/brighton/",
+   "title": "What is the road to Brighton like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-camelback",
+   "path": "/ski/camelback/",
+   "title": "What is the road to Camelback like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-canaan-valley",
+   "path": "/ski/canaan-valley/",
+   "title": "What is the road to Canaan Valley like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-castle-mountain",
+   "path": "/ski/castle-mountain/",
+   "title": "What is the road to Castle Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-copper-mountain",
+   "path": "/ski/copper-mountain/",
+   "title": "What is the road to Copper Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-crested-butte",
+   "path": "/ski/crested-butte/",
+   "title": "What is the road to Crested Butte like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-crystal-mountain",
+   "path": "/ski/crystal-mountain/",
+   "title": "What is the road to Crystal Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-crystal-mountain-michigan",
+   "path": "/ski/crystal-mountain-michigan/",
+   "title": "What is the road to Crystal Mountain (Michigan) like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-deer-valley",
+   "path": "/ski/deer-valley/",
+   "title": "What is the road to Deer Valley like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-discovery",
+   "path": "/ski/discovery/",
+   "title": "What is the road to Discovery Ski Area like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-elk-mountain",
+   "path": "/ski/elk-mountain/",
+   "title": "What is the road to Elk Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-hoodoo",
+   "path": "/ski/hoodoo/",
+   "title": "What is the road to Hoodoo like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-hub",
+   "path": "/ski/",
+   "title": "What is the road to your ski resort like right now? 63 resorts, live plows and cameras",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-huff-hills",
+   "path": "/ski/huff-hills/",
+   "title": "What is the road to Huff Hills like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-keystone",
+   "path": "/ski/keystone/",
+   "title": "What is the road to Keystone like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-lake-louise",
+   "path": "/ski/lake-louise/",
+   "title": "What is the road to Lake Louise like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-loveland",
+   "path": "/ski/loveland/",
+   "title": "What is the road to Loveland Ski Area like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-lutsen",
+   "path": "/ski/lutsen/",
+   "title": "What is the road to Lutsen Mountains like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-marmot-basin",
+   "path": "/ski/marmot-basin/",
+   "title": "What is the road to Marmot Basin like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-mission-ridge",
+   "path": "/ski/mission-ridge/",
+   "title": "What is the road to Mission Ridge like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-mount-norquay",
+   "path": "/ski/mount-norquay/",
+   "title": "What is the road to Mt Norquay like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-mount-st-louis-moonstone",
+   "path": "/ski/mount-st-louis-moonstone/",
+   "title": "What is the road to Mount St. Louis Moonstone like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-mt-bachelor",
+   "path": "/ski/mt-bachelor/",
+   "title": "What is the road to Mt. Bachelor like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-mt-baker",
+   "path": "/ski/mt-baker/",
+   "title": "What is the road to Mt. Baker like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-mt-hood-meadows",
+   "path": "/ski/mt-hood-meadows/",
+   "title": "What is the road to Mt. Hood Meadows like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-nakiska",
+   "path": "/ski/nakiska/",
+   "title": "What is the road to Nakiska like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-paoli-peaks",
+   "path": "/ski/paoli-peaks/",
+   "title": "What is the road to Paoli Peaks like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-park-city",
+   "path": "/ski/park-city/",
+   "title": "What is the road to Park City Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-perfect-north",
+   "path": "/ski/perfect-north/",
+   "title": "What is the road to Perfect North Slopes like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-powder-mountain",
+   "path": "/ski/powder-mountain/",
+   "title": "What is the road to Powder Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-red-lodge",
+   "path": "/ski/red-lodge/",
+   "title": "What is the road to Red Lodge Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-seven-springs",
+   "path": "/ski/seven-springs/",
+   "title": "What is the road to Seven Springs like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-snowbasin",
+   "path": "/ski/snowbasin/",
+   "title": "What is the road to Snowbasin like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-snowbird",
+   "path": "/ski/snowbird/",
+   "title": "What is the road to Snowbird like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-snowshoe",
+   "path": "/ski/snowshoe/",
+   "title": "What is the road to Snowshoe like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-solitude",
+   "path": "/ski/solitude/",
+   "title": "What is the road to Solitude like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-spirit-mountain",
+   "path": "/ski/spirit-mountain/",
+   "title": "What is the road to Spirit Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-steamboat",
+   "path": "/ski/steamboat/",
+   "title": "What is the road to Steamboat like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-stevens-pass",
+   "path": "/ski/stevens-pass/",
+   "title": "What is the road to Stevens Pass like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-summit-at-snoqualmie",
+   "path": "/ski/summit-at-snoqualmie/",
+   "title": "What is the road to The Summit at Snoqualmie like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-sundance",
+   "path": "/ski/sundance/",
+   "title": "What is the road to Sundance like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-sundown",
+   "path": "/ski/sundown/",
+   "title": "What is the road to Sundown Mountain like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-sunshine-village",
+   "path": "/ski/sunshine-village/",
+   "title": "What is the road to Sunshine Village like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-telluride",
+   "path": "/ski/telluride/",
+   "title": "What is the road to Telluride like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-the-highlands",
+   "path": "/ski/the-highlands/",
+   "title": "What is the road to The Highlands like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-timberline",
+   "path": "/ski/timberline/",
+   "title": "What is the road to Timberline like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-vail",
+   "path": "/ski/vail/",
+   "title": "What is the road to Vail like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-white-pass",
+   "path": "/ski/white-pass/",
+   "title": "What is the road to White Pass like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-whitefish",
+   "path": "/ski/whitefish/",
+   "title": "What is the road to Whitefish Mountain Resort like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-winter-park",
+   "path": "/ski/winter-park/",
+   "title": "What is the road to Winter Park like right now? Plows, cameras and closures",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:ski-wolf-creek",
+   "path": "/ski/wolf-creek/",
+   "title": "What is the road to Wolf Creek like right now? Plows, cameras and closures",
    "sponsor": "house"
   },
   {
