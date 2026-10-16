@@ -57,7 +57,7 @@
     doc.getElementById('marker-distance').textContent=(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+est.lo+' and '+est.hi+'.':(km?'Nearest recorded kilometre post, ':'Nearest recorded milepost, ')+far(q.distance,'your').replace(/^About/,'about'));
     doc.getElementById('marker-map').href=mapLink(post);
     var state=states.find(function(s){return s.code===post.code;});
-    var conditions=doc.getElementById('marker-conditions');conditions.href='/road-conditions/'+state.slug+'/';conditions.textContent=state.name+' road conditions';
+    var conditions=doc.getElementById('marker-conditions');conditions.hidden=state.conditions===false;conditions.href='/road-conditions/'+state.slug+'/';conditions.textContent=state.name+' road conditions';
     var cameras=doc.getElementById('marker-cameras');cameras.hidden=!state.cameras;
     if(state.cameras){cameras.href='/cameras/'+state.slug+'/?route='+encodeURIComponent(routeAlias(post));cameras.textContent=state.name+' highway cameras';}
     copyText=post.route+(est.dir?' '+est.dir:'')+', '+(km?'kilometre ':'mile ')+shown+', '+state.name+'. '+(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+est.lo+' and '+est.hi+'.':'Nearest recorded '+(km?'kilometre post':'milepost')+', '+far(q.distance,'my').replace(/^About/,'about'));if(doc.body&&doc.body.classList)doc.body.classList.add('found');
