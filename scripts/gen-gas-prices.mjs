@@ -64,13 +64,22 @@ const ownRows = OWN.map(n => [n, $(reg.out[n]?.now), chg(reg.out[n])]);
 const CITIES = ['Boston', 'Chicago', 'Cleveland', 'Denver', 'Houston', 'Los Angeles', 'Miami', 'New York City', 'San Francisco', 'Seattle'];
 const cityRows = CITIES.filter(c => reg.out[c]).map(c => [c, $(reg.out[c].now), chg(reg.out[c])]);
 
-const stateRows = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map(ab => {
+const stateVals = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map(ab => {
   const n = NAMES[ab];
-  if (ab === 'CA') return [n, `<strong>${$(reg.out.California?.now)}</strong>`, `<strong>${$(dsl.out.California?.now)}</strong>`, 'California'];
+  if (ab === 'CA') return { n, r: reg.out.California?.now, d: dsl.out.California?.now, rOwn: true, dOwn: true, region: 'California' };
   const r = REGIONS.find(x => x[2].includes(ab));
   const own = OWN.includes(n) && reg.out[n];
-  return [n, own ? `<strong>${$(reg.out[n].now)}</strong>` : $(reg.out[r[0]]?.now), $(dsl.out[r[0]]?.now), esc(r[1])];
+  return { n, r: own ? reg.out[n].now : reg.out[r[0]]?.now, d: dsl.out[r[0]]?.now, rOwn: !!own, dOwn: false, region: r[1] };
 });
+const ext = k => { const v = stateVals.map(x => x[k]).filter(x => x != null); return { hi: Math.max(...v), lo: Math.min(...v) }; };
+const X = { r: ext('r'), d: ext('d') };
+const cell = (v, own, k) => {
+  let t = own ? `<strong>${$(v)}</strong>` : $(v);
+  if (v === X[k].hi) t = `<span style="background:#FDE2E1;color:#9B1C1C;padding:2px 6px;border-radius:4px;white-space:nowrap">▲ ${t}</span>`;
+  else if (v === X[k].lo) t = `<span style="background:#DDF5E6;color:#14632F;padding:2px 6px;border-radius:4px;white-space:nowrap">▼ ${t}</span>`;
+  return t;
+};
+const stateRows = stateVals.map(x => [esc(x.n), cell(x.r, x.rOwn, 'r'), cell(x.d, x.dOwn, 'd'), esc(x.region)]);
 
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>'));
@@ -88,7 +97,7 @@ const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><stron
     <p class="lede"><strong>${esc(lede)}</strong></p>
     <p>Prices are averages across stations, including taxes. The station on your exit can be higher or lower.</p>
     <h2>Find your state</h2>
-    <p>EIA publishes its own weekly number for 9 states, shown in <strong>bold</strong>. Every other price is the average for the EIA region in the last column.</p>
+    <p>EIA publishes its own weekly number for 9 states, shown in <strong>bold</strong>. Every other price is the average for the EIA region in the last column. <span style="background:#FDE2E1;color:#9B1C1C;padding:1px 5px;border-radius:4px">▲ highest</span> and <span style="background:#DDF5E6;color:#14632F;padding:1px 5px;border-radius:4px">▼ lowest</span> are marked in each column.</p>
 ${table(['State', 'Regular', 'Diesel', 'EIA region'], stateRows)}
     <h2>Regions</h2>
 ${table(['Region', 'Regular', 'vs last week', 'Diesel', 'vs last week'], regionRows)}
