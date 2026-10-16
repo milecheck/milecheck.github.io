@@ -83,7 +83,9 @@ const url = 'https://milecheckapp.com/gas-prices/';
 const title = 'What are gas prices in my state this week? Regular and diesel | MileCheck';
 const lede = `The U.S. average for regular gas was ${$(us.now)} a gallon for the week of ${week}, ${chg(us)} from the week before. Diesel averaged ${$(usD.now)}, ${chg(usD)}.`;
 const desc = `${lede} Regular and diesel averages by state and region from the U.S. Energy Information Administration, updated weekly.`;
-const body = `    <p class="lede"><strong>${esc(lede)}</strong></p>
+const updated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' });
+const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><strong>Last updated ${updated}</strong> · EIA prices for the week of ${week}</p>
+    <p class="lede"><strong>${esc(lede)}</strong></p>
     <p>Prices are averages across stations, including taxes. The station on your exit can be higher or lower.</p>
     <h2>Find your state</h2>
     <p>EIA publishes its own weekly number for 9 states, shown in <strong>bold</strong>. Every other price is the average for the EIA region in the last column.</p>
