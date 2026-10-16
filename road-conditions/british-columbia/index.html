@@ -348,9 +348,10 @@ function render(list){
   if(!listed.length){rows.innerHTML='<div class="rc-empty"><b>No closures or crashes in the '+esc(DOT)+' feed right now.</b>Restrictions, roadwork and other reports are on the map when the box above is checked. '+esc(DOT)+' is the official source.</div>';}
   else rows.innerHTML=listed.map(function(a){var i=list.indexOf(a);return '<div class="rc-row" data-i="'+i+'"><div class="t"><span class="rt">'+esc(a.route||LABEL[a.k])+(a.mp?' · KM '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</span><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span></div><div class="sub">'+(a.future?'<b>Starts '+a.start.toLocaleDateString([], {month:'short',day:'numeric'})+'.</b> ':'')+esc(a.head)+(a.at?' <span style="white-space:nowrap">· '+ago(a.at)+'</span>':'')+'</div></div>';}).join('');
   // Counts left the map 2026-10-16 (Leah: they repeat the list below and clutter the map, as on /fire/).
-  // The pill now shows only while loading or when the feed fails; the update time moved to the list header.
+  // The pill now shows only while loading or when the feed fails; the feed time moved to the list header,
+  // source first ("TripCheck as of 2:55 PM") so the time reads as the DOT feed's, not MileCheck's (Leah, 2026-10-16).
   status.className='rc-status ok';
-  count.textContent=(listed.length?listed.length+' listed · ':'')+'updated '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+  count.textContent=(listed.length?listed.length+' listed · ':'')+DOT+' as of '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
 }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 rows.addEventListener('click',function(e){var r=e.target.closest('.rc-row');if(!r)return;var m=markers[r.getAttribute('data-i')];if(!m)return;if(!map.hasLayer(workLayer)&&workLayer.hasLayer(m))return;map.setView(m.getLatLng(),Math.max(map.getZoom(),9));m.openPopup();});
