@@ -224,6 +224,10 @@ module.exports = [
   // Mt. Bachelor: West Village base. OSM reverse 2026-10-15. Access: US-97 to Bend, then Century Drive
   // (OR-372, Cascade Lakes Highway) 22 mi (mtbachelor.com/plan-your-trip/getting-here).
   R({ name: 'Mt. Bachelor', slug: 'mt-bachelor', state: 'OR', lat: 43.9904, lon: -121.6838, routes: ['OR-372', 'US-97'], road: 'US-97 to Bend, then Century Drive (OR-372) for 22 miles', radius: 25, report: 'https://www.mtbachelor.com/the-mountain/mountain-report/', note: 'TripCheck cameras cover US-97 and one point on Century Drive. The rest of the Cascade Lakes Highway has no DOT feed.' }),
+  // Anthony Lakes: OSM search 2026-10-15 (44.9600,-118.2400). Access: I-84 exit 285 at North Powder, OR-237 for 4 mi,
+  // then the Anthony Lake Highway / Forest Road 73 for 16 mi (anthonylakes.com; same facts as passes/anthony-lakes/).
+  // The pass page for the same road already exists; the resort's report is "Bert's Daily Report".
+  R({ name: 'Anthony Lakes', slug: 'anthony-lakes', state: 'OR', lat: 44.9600, lon: -118.2400, routes: ['I-84', 'OR-237'], road: 'I-84 exit 285 at North Powder, OR-237 for 4 miles, then the Anthony Lake Highway for 16', radius: 20, report: 'https://anthonylakes.com/berts-daily-report/', pass: 'anthony-lakes', note: 'ODOT cameras and alerts stop at I-84 and OR-237 near North Powder. The Anthony Lake Highway and Forest Road 73, the last 16 miles, are county and Forest Service roads with no DOT feed.' }),
   // Hoodoo: OSM search 2026-10-15. Access: US-20 at Santiam Pass (skihoodoo.com/directions).
   R({ name: 'Hoodoo', slug: 'hoodoo', state: 'OR', lat: 44.4034, lon: -121.8818, routes: ['US-20', 'OR-22', 'OR-126'], road: 'US-20 at the top of Santiam Pass', radius: 20, report: 'https://hoodoo.com/the-mountain/mountain-conditions/' }),
 ];
