@@ -12,7 +12,7 @@ const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versio
 // each state's page gets the layer when that state's pass (plows + alert/camera/guide audit)
 // is done. Utah first. Add the code here, then regenerate that one page:
 //   node scripts/gen-state-camera-pages.js utah
-const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS', 'MB', 'AK']);
+const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS', 'MB', 'AK', 'DE', 'MT', 'WV', 'MI']); // every state the Worker serves plows for that has a camera page (CO and ND have no camera page)
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [

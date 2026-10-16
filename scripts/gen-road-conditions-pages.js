@@ -26,6 +26,7 @@ const exists = (p) => fs.existsSync(rel(p));
 const slugOf = (name) => name.toLowerCase().replace(/[^a-z]+/g, '-');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const only = process.argv.slice(2);
+const PLOW_FEEDS = new Set(['UT','CO','DE','MT','WV','MI','NE','IN','IA','MN','KS','MB','AK','ND']); // cloudflare-worker.js PLOW_STATE_FETCHERS
 
 // Site inventory these pages link into. Keep in step with the generators named.
 const CORRIDORS = [ // scripts/gen-corridor-pages.js
@@ -253,7 +254,8 @@ ${NAV_JS}
 `;
 }
 
-const LEAFLET = `  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+const LEAFLET = `  <script src="/assets/plows.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
@@ -271,7 +273,9 @@ var map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoo
 var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
 L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · alerts: '+DOT+' via MileCheck',maxZoom:14}).addTo(map);
 map.fitBounds(B);
-var layer=L.layerGroup().addTo(map),workLayer=L.layerGroup();
+var layer=L.layerGroup().addTo(map),workLayer=L.layerGroup(),plowLayer=L.layerGroup().addTo(map);
+// Snowplows (2026-10-15): only for states whose DOT publishes truck positions. assets/plows.js owns the pin and card.
+var PLOWS=!!MCPlows.AGENCY[ST],plowToggle=document.getElementById('rcPlows'),plowNote='';
 var status=document.getElementById('rcStatus'),rows=document.getElementById('rcRows'),count=document.getElementById('rcCount'),workToggle=document.getElementById('rcWork');
 var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
 var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
@@ -329,7 +333,9 @@ function load(){
     if(!last)rows.innerHTML='<div class="rc-empty err"><b>Could not load the '+esc(DOT)+' feed.</b>That is an outage, not an all-clear. <a href="'+esc(DOTURL)+'" target="_blank" rel="noopener">Open '+esc(DOT)+'</a> for the official list.</div>';
   });
 }
-load();setInterval(load,300000);
+function loadPlows(){if(!PLOWS)return;fetch(WORKER+'/plows?state='+ST,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){plowLayer.clearLayers();var list=MCPlows.sort(((d&&d.plows)||[]).filter(function(t){return isFinite(+t.lat)&&isFinite(+t.lon);}).map(function(t){return MCPlows.normalize(t);}));list.forEach(function(t){var m=L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700});m.bindPopup('<div class="fpop">'+MCPlows.card(t)+'</div>');plowLayer.addLayer(m);});var el=document.getElementById('rcPlowCount');if(el)el.textContent=MCPlows.summary(list);}).catch(function(){var el=document.getElementById('rcPlowCount');if(el)el.textContent='plow feed unavailable';});}
+if(plowToggle)plowToggle.addEventListener('change',function(){if(plowToggle.checked)plowLayer.addTo(map);else map.removeLayer(plowLayer);});
+load();loadPlows();setInterval(load,300000);setInterval(loadPlows,60000);
 })();</script>`;
 }
 
@@ -410,7 +416,8 @@ ${sp.html}
       </div>
       <div class="rc-side">
         <div class="rc-list">
-          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span><label><input type="checkbox" id="rcWork"> Restrictions, roadwork and other reports</label></div>
+          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span><label><input type="checkbox" id="rcWork"> Restrictions, roadwork and other reports</label></div>${PLOW_FEEDS.has(s.code) ? `
+          <div class="lh" style="margin-top:6px"><span>Snowplows <span id="rcPlowCount" style="color:#0369A1;font-weight:600;font-size:12px;">loading</span></span><label><input type="checkbox" id="rcPlows" checked> Show trucks</label></div>` : ''}
           <div class="rc-rows" id="rcRows"><div class="rc-empty">Loading the ${s.dot} feed&hellip;</div></div>
         </div>
         <div class="rc-official">Source: <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a>, read every five minutes and converted to the same format MileCheck uses for all 50 states. Ramp, lane and shoulder closures are listed under the toggle, not as full closures. Closures with a future start date are marked scheduled. Positions are the DOT's; mile markers are approximate.</div>
