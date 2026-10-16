@@ -1,0 +1,2968 @@
+{
+ "pulled": "2026-10-16",
+ "ca": {
+  "year": 2025,
+  "updated": "2026-10-01",
+  "chp": {
+   "total": 4320,
+   "ev": [
+    {
+     "m": "CHEVROLET VOLT",
+     "n": 35
+    },
+    {
+     "m": "GLOBAL ELECTRIC MOTORS E4",
+     "n": 3
+    }
+   ],
+   "models": [
+    {
+     "m": "DODGE CHARGER",
+     "t": "Auto-Fullsize",
+     "n": 1535
+    },
+    {
+     "m": "CHEVROLET TAHOE",
+     "t": "SUV-LD",
+     "n": 825
+    },
+    {
+     "m": "BMW R 1250",
+     "t": "Motorcycle",
+     "n": 360
+    },
+    {
+     "m": "FORD EXPLORER",
+     "t": "SUV-LD",
+     "n": 339
+    },
+    {
+     "m": "FORD EXPLORER POLICE INTERCEPT",
+     "t": "SUV-LD",
+     "n": 278
+    },
+    {
+     "m": "DODGE DURANGO",
+     "t": "SUV-LD",
+     "n": 111
+    },
+    {
+     "m": "FORD F250",
+     "t": "Pickup-MD",
+     "n": 106
+    },
+    {
+     "m": "CHEVROLET EXPRESS G3500",
+     "t": "Van-LD-Other",
+     "n": 103
+    },
+    {
+     "m": "FORD ECONOLINE",
+     "t": "Van-LD-Other",
+     "n": 89
+    },
+    {
+     "m": "RAM 2500",
+     "t": "Pickup-MD",
+     "n": 78
+    },
+    {
+     "m": "RAM PROMASTER 2500",
+     "t": "Van-LD-Other",
+     "n": 58
+    },
+    {
+     "m": "RAM 1500",
+     "t": "Pickup-MD",
+     "n": 38
+    },
+    {
+     "m": "CHEVROLET VOLT",
+     "t": "Auto-Compact",
+     "n": 35
+    },
+    {
+     "m": "FORD EXPEDITION",
+     "t": "SUV-LD",
+     "n": 33
+    },
+    {
+     "m": "CHEVROLET SILVERADO",
+     "t": "Pickup-MD",
+     "n": 31
+    },
+    {
+     "m": "CHEVROLET IMPALA",
+     "t": "Auto-Fullsize",
+     "n": 20
+    },
+    {
+     "m": "FORD F550",
+     "t": "Truck-MD",
+     "n": 17
+    },
+    {
+     "m": "CHEVROLET IMPALA LIMITED LS",
+     "t": "Auto-Fullsize",
+     "n": 17
+    },
+    {
+     "m": "CHEVROLET TRAVERSE",
+     "t": "SUV-LD",
+     "n": 16
+    },
+    {
+     "m": "HARLEY-DAVIDSON FLHTP",
+     "t": "Motorcycle",
+     "n": 15
+    },
+    {
+     "m": "FORD F350",
+     "t": "Pickup-MD",
+     "n": 13
+    },
+    {
+     "m": "CHEVROLET CAMARO",
+     "t": "Auto-Midsize",
+     "n": 11
+    },
+    {
+     "m": "DODGE STRATUS",
+     "t": "Auto-Midsize",
+     "n": 11
+    },
+    {
+     "m": "CHRYSLER SEBRING",
+     "t": "Auto-Midsize",
+     "n": 11
+    },
+    {
+     "m": "DODGE RAM VAN",
+     "t": "Van-LD-Other",
+     "n": 10
+    },
+    {
+     "m": "FORD TRANSIT",
+     "t": "Van-LD-Other",
+     "n": 9
+    },
+    {
+     "m": "CHEVROLET SUBURBAN",
+     "t": "SUV-LD",
+     "n": 9
+    },
+    {
+     "m": "FORD F650",
+     "t": "Truck-MD",
+     "n": 8
+    },
+    {
+     "m": "FORD CROWN VICTORIA",
+     "t": "Auto-Fullsize",
+     "n": 7
+    },
+    {
+     "m": "CHEVROLET SUBURBAN",
+     "t": "SUV-MD",
+     "n": 7
+    },
+    {
+     "m": "HONDA CIVIC",
+     "t": "Auto-Compact",
+     "n": 7
+    },
+    {
+     "m": "CHEVROLET COLORADO",
+     "t": "Pickup-LD",
+     "n": 6
+    },
+    {
+     "m": "TOYOTA RAV4",
+     "t": "SUV-LD",
+     "n": 5
+    },
+    {
+     "m": "NISSAN FRONTIER",
+     "t": "Pickup-LD",
+     "n": 5
+    },
+    {
+     "m": "DODGE GRAND CARAVAN",
+     "t": "Van-LD-Other",
+     "n": 5
+    },
+    {
+     "m": "CHEVROLET C1500 SILVERADO",
+     "t": "Pickup-MD",
+     "n": 5
+    },
+    {
+     "m": "CHEVROLET UPLANDER",
+     "t": "Van-LD-Other",
+     "n": 4
+    },
+    {
+     "m": "FORD F450",
+     "t": "Truck-MD",
+     "n": 4
+    },
+    {
+     "m": "GMC SIERRA",
+     "t": "Pickup-MD",
+     "n": 3
+    },
+    {
+     "m": "GMC VANDURA",
+     "t": "Van-LD-Other",
+     "n": 3
+    },
+    {
+     "m": "JEEP WRANGLER UNLIMITED",
+     "t": "SUV-LD",
+     "n": 3
+    },
+    {
+     "m": "FORD TAURUS",
+     "t": "Auto-Fullsize",
+     "n": 3
+    },
+    {
+     "m": "DODGE RAM 2500",
+     "t": "Pickup-MD",
+     "n": 3
+    },
+    {
+     "m": "GLOBAL ELECTRIC MOTORS E4",
+     "t": "Low Speed Vehicle (NEV)",
+     "n": 3
+    },
+    {
+     "m": "WESTERN STAR/AUTO CAR 47X CHASSIS",
+     "t": "Truck-HD",
+     "n": 2
+    },
+    {
+     "m": "BOBCAT T300",
+     "t": "Low Speed Vehicle (NEV)",
+     "n": 2
+    },
+    {
+     "m": "CHEVROLET EXPRESS G2500",
+     "t": "Van-LD-Other",
+     "n": 2
+    },
+    {
+     "m": "FORD F150",
+     "t": "Pickup-MD",
+     "n": 2
+    },
+    {
+     "m": "FORD F450",
+     "t": "Pickup-MD",
+     "n": 2
+    },
+    {
+     "m": "FORD TAURUS INTERCEPTOR AWD",
+     "t": "Auto-Fullsize",
+     "n": 2
+    },
+    {
+     "m": "FORD TRANSIT",
+     "t": "Van-LD-Minivan",
+     "n": 2
+    },
+    {
+     "m": "FREIGHTLINER CHASSIS",
+     "t": "Truck-MD",
+     "n": 2
+    },
+    {
+     "m": "INTERNATIONAL PROSTAR",
+     "t": "Truck-HD",
+     "n": 2
+    },
+    {
+     "m": "JEEP GRAND CHEROKEE",
+     "t": "SUV-LD",
+     "n": 2
+    },
+    {
+     "m": "KAWASAKI KZ1000-P",
+     "t": "Motorcycle",
+     "n": 2
+    },
+    {
+     "m": "RAM 1500 CLASSIC",
+     "t": "Pickup-MD",
+     "n": 2
+    },
+    {
+     "m": "RAM 5500",
+     "t": "Truck-MD",
+     "n": 2
+    },
+    {
+     "m": "SUBARU CROSSTREK",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "DODGE NITRO",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "TOYOTA 4RUNNER",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "DODGE JOURNEY",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "DODGE D-SERIES",
+     "t": "Pickup-LD",
+     "n": 1
+    },
+    {
+     "m": "GMC TOPKICK",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "GMC TOPKICK",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "DODGE DAKOTA",
+     "t": "Pickup-MD",
+     "n": 1
+    },
+    {
+     "m": "CLUB CAR CARRYALL",
+     "t": "Auto-Compact",
+     "n": 1
+    },
+    {
+     "m": "HONDA ACCORD",
+     "t": "Auto-Midsize",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET T-SERIES",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "HONDA RIDGELINE",
+     "t": "Pickup-MD",
+     "n": 1
+    },
+    {
+     "m": "INTERNATIONAL 4000",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "BMW 328",
+     "t": "Auto-Compact",
+     "n": 1
+    },
+    {
+     "m": "JEEP CHEROKEE",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "TOYOTA TACOMA",
+     "t": "Pickup-LD",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET TAHOE POLICE",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "TOYOTA TUNDRA",
+     "t": "Pickup-MD",
+     "n": 1
+    },
+    {
+     "m": "KUBOTA TRACTOR",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "MERCEDES-BENZ SPRINTER",
+     "t": "Van-MD",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET MALIBU",
+     "t": "Auto-Midsize",
+     "n": 1
+    },
+    {
+     "m": "NISSAN ROGUE",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "POLARIS RANGER",
+     "t": "Motorcycle",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET GMT-400",
+     "t": "Pickup-MD",
+     "n": 1
+    },
+    {
+     "m": "TUCKER 1643",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET EXPRESS G3500",
+     "t": "Van-MD",
+     "n": 1
+    },
+    {
+     "m": "AUDI A6",
+     "t": "Auto-Midsize",
+     "n": 1
+    },
+    {
+     "m": "FORD ECONOLINE E350 SUPER DUTY",
+     "t": "Van-LD-Other",
+     "n": 1
+    },
+    {
+     "m": "DOOSAN GC20S-9",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "FORD F600",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "FORD F600",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "DOOSAN G33N-7",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "FORD RANGER",
+     "t": "Pickup-LD",
+     "n": 1
+    },
+    {
+     "m": "DOOSAN FORK LIFT",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET C6500",
+     "t": "Truck-HD",
+     "n": 1
+    }
+   ],
+   "types": [
+    {
+     "t": "SUV-LD",
+     "n": 1628
+    },
+    {
+     "t": "Auto-Fullsize",
+     "n": 1584
+    },
+    {
+     "t": "Motorcycle",
+     "n": 378
+    },
+    {
+     "t": "Pickup-MD",
+     "n": 287
+    },
+    {
+     "t": "Van-LD-Other",
+     "n": 284
+    },
+    {
+     "t": "Auto-Compact",
+     "n": 44
+    },
+    {
+     "t": "Auto-Midsize",
+     "n": 36
+    },
+    {
+     "t": "Truck-MD",
+     "n": 36
+    },
+    {
+     "t": "Pickup-LD",
+     "n": 14
+    },
+    {
+     "t": "Truck-HD",
+     "n": 8
+    },
+    {
+     "t": "SUV-MD",
+     "n": 7
+    },
+    {
+     "t": "General Purpose",
+     "n": 5
+    },
+    {
+     "t": "Low Speed Vehicle (NEV)",
+     "n": 5
+    },
+    {
+     "t": "Van-LD-Minivan",
+     "n": 2
+    },
+    {
+     "t": "Van-MD",
+     "n": 2
+    }
+   ],
+   "fuel": [
+    {
+     "f": "Gasoline",
+     "n": 2289
+    },
+    {
+     "f": "85% Ethanol",
+     "n": 1954
+    },
+    {
+     "f": "Diesel",
+     "n": 39
+    },
+    {
+     "f": "Electricity (battery powered)",
+     "n": 38
+    }
+   ]
+  },
+  "caltrans": {
+   "total": 9512,
+   "ev": [
+    {
+     "m": "CHEVROLET SILVERADO",
+     "n": 587
+    },
+    {
+     "m": "TESLA MODEL 3",
+     "n": 393
+    },
+    {
+     "m": "VOLKSWAGEN ID.4",
+     "n": 232
+    },
+    {
+     "m": "RIVIAN R1T",
+     "n": 199
+    },
+    {
+     "m": "CHEVROLET VOLT",
+     "n": 101
+    }
+   ],
+   "models": [
+    {
+     "m": "CHEVROLET SILVERADO",
+     "t": "Pickup-MD",
+     "n": 812
+    },
+    {
+     "m": "RAM 3500",
+     "t": "Pickup-MD",
+     "n": 643
+    },
+    {
+     "m": "FORD F350",
+     "t": "Pickup-MD",
+     "n": 601
+    },
+    {
+     "m": "INTERNATIONAL 7000",
+     "t": "Truck-HD",
+     "n": 591
+    },
+    {
+     "m": "FORD F450",
+     "t": "Truck-MD",
+     "n": 401
+    },
+    {
+     "m": "TESLA MODEL 3",
+     "t": "Auto-Compact",
+     "n": 393
+    },
+    {
+     "m": "FORD F550",
+     "t": "Truck-MD",
+     "n": 339
+    },
+    {
+     "m": "INTERNATIONAL 4000",
+     "t": "Truck-HD",
+     "n": 313
+    },
+    {
+     "m": "FORD F250",
+     "t": "Pickup-MD",
+     "n": 309
+    },
+    {
+     "m": "FORD F650",
+     "t": "Truck-MD",
+     "n": 304
+    },
+    {
+     "m": "FORD F150",
+     "t": "Pickup-MD",
+     "n": 272
+    },
+    {
+     "m": "FREIGHTLINER 114SD",
+     "t": "Truck-HD",
+     "n": 245
+    },
+    {
+     "m": "VOLKSWAGEN ID.4",
+     "t": "SUV-LD",
+     "n": 232
+    },
+    {
+     "m": "CHEVROLET TAHOE",
+     "t": "SUV-LD",
+     "n": 229
+    },
+    {
+     "m": "FORD F450",
+     "t": "Pickup-MD",
+     "n": 210
+    },
+    {
+     "m": "RIVIAN R1T",
+     "t": "Pickup-MD",
+     "n": 199
+    },
+    {
+     "m": "RAM 1500",
+     "t": "Pickup-MD",
+     "n": 189
+    },
+    {
+     "m": "TOYOTA TACOMA",
+     "t": "Pickup-LD",
+     "n": 161
+    },
+    {
+     "m": "FREIGHTLINER M2",
+     "t": "Truck-HD",
+     "n": 158
+    },
+    {
+     "m": "NISSAN FRONTIER",
+     "t": "Pickup-LD",
+     "n": 154
+    },
+    {
+     "m": "INTERNATIONAL HX520",
+     "t": "Truck-HD",
+     "n": 109
+    },
+    {
+     "m": "INTERNATIONAL HV507",
+     "t": "Truck-HD",
+     "n": 105
+    },
+    {
+     "m": "RAM 4500",
+     "t": "Truck-MD",
+     "n": 103
+    },
+    {
+     "m": "CHEVROLET VOLT",
+     "t": "Auto-Compact",
+     "n": 101
+    },
+    {
+     "m": "DODGE RAM 2500",
+     "t": "Pickup-MD",
+     "n": 93
+    },
+    {
+     "m": "JOHN DEERE 444C",
+     "t": "Construction Equipment",
+     "n": 81
+    },
+    {
+     "m": "WESTERN STAR/AUTO CAR CONVENTIONAL",
+     "t": "Truck-HD",
+     "n": 66
+    },
+    {
+     "m": "DOOSAN G30E3-5LP",
+     "t": "General Purpose",
+     "n": 61
+    },
+    {
+     "m": "INTERNATIONAL 4000",
+     "t": "Truck-MD",
+     "n": 58
+    },
+    {
+     "m": "INTERNATIONAL 5500",
+     "t": "Truck-HD",
+     "n": 56
+    },
+    {
+     "m": "INTERNATIONAL HV607",
+     "t": "Truck-HD",
+     "n": 56
+    },
+    {
+     "m": "CHEVROLET EXPRESS G3500",
+     "t": "Van-LD-Other",
+     "n": 56
+    },
+    {
+     "m": "FORD TRANSIT",
+     "t": "Van-LD-Other",
+     "n": 53
+    },
+    {
+     "m": "CHEVROLET COLORADO",
+     "t": "Pickup-LD",
+     "n": 51
+    },
+    {
+     "m": "FORD ECONOLINE",
+     "t": "Van-LD-Other",
+     "n": 47
+    },
+    {
+     "m": "GMC SAVANA",
+     "t": "Van-LD-Other",
+     "n": 46
+    },
+    {
+     "m": "GLOBAL ENVIRONMENTAL PRODUCTS MECHANICAL",
+     "t": "General Purpose",
+     "n": 45
+    },
+    {
+     "m": "JOHN DEERE 672G",
+     "t": "Construction Equipment",
+     "n": 43
+    },
+    {
+     "m": "INTERNATIONAL CV515",
+     "t": "Truck-MD",
+     "n": 43
+    },
+    {
+     "m": "RIVIAN R1S",
+     "t": "SUV-LD",
+     "n": 42
+    },
+    {
+     "m": "DODGE GRAND CARAVAN",
+     "t": "Van-LD-Other",
+     "n": 38
+    },
+    {
+     "m": "INTERNATIONAL 2000",
+     "t": "Truck-HD",
+     "n": 38
+    },
+    {
+     "m": "AUTOCAR LLC XPEDITOR",
+     "t": "Truck-HD",
+     "n": 35
+    },
+    {
+     "m": "CATERPILLAR D6R XL DS",
+     "t": "Construction Equipment",
+     "n": 34
+    },
+    {
+     "m": "TOYOTA MIRAI",
+     "t": "Auto-Midsize",
+     "n": 33
+    },
+    {
+     "m": "JOHN DEERE 772D",
+     "t": "Construction Equipment",
+     "n": 30
+    },
+    {
+     "m": "JOHN DEERE 524K",
+     "t": "Farm Equipment",
+     "n": 30
+    },
+    {
+     "m": "FREIGHTLINER MEDIUM CONVENTIONAL",
+     "t": "Truck-HD",
+     "n": 26
+    },
+    {
+     "m": "CATERPILLAR 143H",
+     "t": "Construction Equipment",
+     "n": 25
+    },
+    {
+     "m": "GLOBAL ENVIRONMENTAL PRODUCTS HIGH SIDE DUMP",
+     "t": "General Purpose",
+     "n": 25
+    },
+    {
+     "m": "CATERPILLAR 140M3",
+     "t": "Construction Equipment",
+     "n": 24
+    },
+    {
+     "m": "KODIAK SNOW BLOWER",
+     "t": "General Purpose",
+     "n": 23
+    },
+    {
+     "m": "DODGE RAM 3500",
+     "t": "Pickup-MD",
+     "n": 23
+    },
+    {
+     "m": "TOYOTA RAV4 EV",
+     "t": "SUV-LD",
+     "n": 23
+    },
+    {
+     "m": "TOYOTA PRIUS V",
+     "t": "Auto-Compact",
+     "n": 23
+    },
+    {
+     "m": "KOMATSU WA200PT5L",
+     "t": "Construction Equipment",
+     "n": 22
+    },
+    {
+     "m": "FORD RANGER",
+     "t": "Pickup-LD",
+     "n": 21
+    },
+    {
+     "m": "CASE 621",
+     "t": "Construction Equipment",
+     "n": 20
+    },
+    {
+     "m": "JOHN DEERE 6430",
+     "t": "Riding Lawnmower",
+     "n": 19
+    },
+    {
+     "m": "JOHN DEERE 524K",
+     "t": "Construction Equipment",
+     "n": 19
+    },
+    {
+     "m": "CHEVROLET C4500",
+     "t": "Truck-MD",
+     "n": 19
+    },
+    {
+     "m": "JOHN DEERE 6410",
+     "t": "Riding Lawnmower",
+     "n": 18
+    },
+    {
+     "m": "GMC C6500",
+     "t": "Truck-MD",
+     "n": 18
+    },
+    {
+     "m": "FORD ECONOLINE E350 SUPER DUTY",
+     "t": "Van-LD-Other",
+     "n": 18
+    },
+    {
+     "m": "INTERNATIONAL HV513",
+     "t": "Truck-HD",
+     "n": 17
+    },
+    {
+     "m": "GMC C7500",
+     "t": "Truck-MD",
+     "n": 17
+    },
+    {
+     "m": "GMC SIERRA",
+     "t": "Pickup-MD",
+     "n": 17
+    },
+    {
+     "m": "MITSUBISHI FORKLIFT",
+     "t": "General Purpose",
+     "n": 17
+    },
+    {
+     "m": "DODGE DURANGO",
+     "t": "SUV-LD",
+     "n": 16
+    },
+    {
+     "m": "YALE EKC30AC",
+     "t": "General Purpose",
+     "n": 16
+    },
+    {
+     "m": "YALE FORKLIFT",
+     "t": "General Purpose",
+     "n": 15
+    },
+    {
+     "m": "CHEVROLET BOLT EV",
+     "t": "Auto-Subcompact",
+     "n": 15
+    },
+    {
+     "m": "INTERNATIONAL 5600",
+     "t": "Truck-HD",
+     "n": 15
+    },
+    {
+     "m": "JOHN DEERE 772G",
+     "t": "Construction Equipment",
+     "n": 15
+    },
+    {
+     "m": "TOYOTA RAV4 HV",
+     "t": "SUV-LD",
+     "n": 14
+    },
+    {
+     "m": "VOLVO CONVENTIONAL",
+     "t": "Truck-HD",
+     "n": 14
+    },
+    {
+     "m": "RAM PROMASTER 1500",
+     "t": "Van-LD-Other",
+     "n": 14
+    },
+    {
+     "m": "CLARK C20 FORKLIFT",
+     "t": "General Purpose",
+     "n": 14
+    },
+    {
+     "m": "INTERNATIONAL 5900",
+     "t": "Truck-HD",
+     "n": 13
+    },
+    {
+     "m": "FORD F150 HERITAGE",
+     "t": "Pickup-MD",
+     "n": 13
+    },
+    {
+     "m": "FREIGHTLINER M2 106 MEDIUM DUTY",
+     "t": "Truck-HD",
+     "n": 12
+    },
+    {
+     "m": "FORD F350 SUPER DUTY",
+     "t": "Pickup-MD",
+     "n": 12
+    },
+    {
+     "m": "VOLVO GRADER",
+     "t": "Construction Equipment",
+     "n": 12
+    },
+    {
+     "m": "JOHN DEERE 6110M",
+     "t": "Farm Equipment",
+     "n": 12
+    },
+    {
+     "m": "CHEVROLET UPLANDER",
+     "t": "Van-LD-Other",
+     "n": 11
+    },
+    {
+     "m": "WAUSAU SNOWPLOW",
+     "t": "General Purpose",
+     "n": 11
+    },
+    {
+     "m": "CHEVROLET SUBURBAN",
+     "t": "SUV-LD",
+     "n": 11
+    },
+    {
+     "m": "STERLING TRUCK L",
+     "t": "Truck-HD",
+     "n": 11
+    },
+    {
+     "m": "KUBOTA TRACTOR",
+     "t": "General Purpose",
+     "n": 9
+    },
+    {
+     "m": "VOLVO VHD",
+     "t": "Truck-HD",
+     "n": 9
+    },
+    {
+     "m": "FORD FOCUS",
+     "t": "Auto-Compact",
+     "n": 9
+    },
+    {
+     "m": "WIRTGEN W120CFI",
+     "t": "Construction Equipment",
+     "n": 9
+    },
+    {
+     "m": "TOYOTA PRIUS PLUG-IN",
+     "t": "Auto-Midsize",
+     "n": 9
+    },
+    {
+     "m": "SCHMIDT SNOWPLOW",
+     "t": "General Purpose",
+     "n": 9
+    },
+    {
+     "m": "GMC SIERRA",
+     "t": "Truck-MD",
+     "n": 9
+    },
+    {
+     "m": "CHEVROLET C1500 SILVERADO",
+     "t": "Pickup-MD",
+     "n": 9
+    },
+    {
+     "m": "PONTIAC VIBE",
+     "t": "Auto-Compact",
+     "n": 9
+    },
+    {
+     "m": "CHEVROLET MALIBU",
+     "t": "Auto-Midsize",
+     "n": 9
+    },
+    {
+     "m": "JOHN DEERE 310SE",
+     "t": "Construction Equipment",
+     "n": 9
+    },
+    {
+     "m": "BOBCAT T300",
+     "t": "Construction Equipment",
+     "n": 8
+    },
+    {
+     "m": "DODGE NITRO",
+     "t": "SUV-LD",
+     "n": 8
+    },
+    {
+     "m": "FREIGHTLINER HC CARGO",
+     "t": "Truck-HD",
+     "n": 8
+    },
+    {
+     "m": "DODGE DAKOTA",
+     "t": "Pickup-MD",
+     "n": 8
+    },
+    {
+     "m": "VOLVO FE",
+     "t": "Truck-HD",
+     "n": 8
+    },
+    {
+     "m": "INTERNATIONAL PAYSTAR",
+     "t": "Truck-HD",
+     "n": 8
+    },
+    {
+     "m": "FORD TRANSIT CONNECT",
+     "t": "Van-LD-Minivan",
+     "n": 8
+    },
+    {
+     "m": "GMC C6500",
+     "t": "Truck-HD",
+     "n": 8
+    },
+    {
+     "m": "CHEVROLET GMT-400",
+     "t": "Truck-MD",
+     "n": 7
+    },
+    {
+     "m": "CLARK FORKLIFT",
+     "t": "General Purpose",
+     "n": 7
+    },
+    {
+     "m": "CHEVROLET IMPALA",
+     "t": "Auto-Fullsize",
+     "n": 7
+    },
+    {
+     "m": "DAEWOO FORKLIFT",
+     "t": "General Purpose",
+     "n": 6
+    },
+    {
+     "m": "FORD EXPEDITION",
+     "t": "SUV-LD",
+     "n": 6
+    },
+    {
+     "m": "GMC C5500",
+     "t": "Truck-MD",
+     "n": 6
+    },
+    {
+     "m": "GMC TOPKICK",
+     "t": "Truck-HD",
+     "n": 6
+    },
+    {
+     "m": "INTERNATIONAL HX620",
+     "t": "Truck-HD",
+     "n": 6
+    },
+    {
+     "m": "JOHN DEERE 310L",
+     "t": "Construction Equipment",
+     "n": 6
+    },
+    {
+     "m": "CHEVROLET SILVERADO C2500HD",
+     "t": "Pickup-MD",
+     "n": 6
+    },
+    {
+     "m": "JOHN DEERE 624K",
+     "t": "Farm Equipment",
+     "n": 6
+    },
+    {
+     "m": "OSHKOSH MOTOR TRUCK CO. CONVENTIONAL",
+     "t": "Truck-HD",
+     "n": 6
+    },
+    {
+     "m": "RAM PROMASTER 3500",
+     "t": "Van-LD-Other",
+     "n": 6
+    },
+    {
+     "m": "CATERPILLAR GP20 FORKLIFT",
+     "t": "General Purpose",
+     "n": 6
+    },
+    {
+     "m": "ROLBA S1000",
+     "t": "General Purpose",
+     "n": 5
+    },
+    {
+     "m": "CHRYSLER PACIFICA",
+     "t": "Van-LD-Other",
+     "n": 5
+    },
+    {
+     "m": "WALDON SWEEPMASTER",
+     "t": "General Purpose",
+     "n": 5
+    },
+    {
+     "m": "CHEVROLET EQUINOX",
+     "t": "SUV-LD",
+     "n": 5
+    },
+    {
+     "m": "VOLVO XPEDITOR",
+     "t": "Truck-HD",
+     "n": 5
+    },
+    {
+     "m": "INTERNATIONAL 9400",
+     "t": "Truck-HD",
+     "n": 5
+    },
+    {
+     "m": "AEBI TT75",
+     "t": "Riding Lawnmower",
+     "n": 5
+    },
+    {
+     "m": "FREIGHTLINER CHASSIS",
+     "t": "Truck-MD",
+     "n": 5
+    },
+    {
+     "m": "JOHN DEERE 7220",
+     "t": "Riding Lawnmower",
+     "n": 5
+    },
+    {
+     "m": "CHEVROLET SILVERADO MEDIUM DUTY",
+     "t": "Truck-MD",
+     "n": 5
+    },
+    {
+     "m": "FREIGHTLINER MEDIUM CONVENTIONAL",
+     "t": "Truck-MD",
+     "n": 5
+    },
+    {
+     "m": "HONDA CIVIC",
+     "t": "Auto-Compact",
+     "n": 4
+    },
+    {
+     "m": "RAM 2500",
+     "t": "Pickup-MD",
+     "n": 4
+    },
+    {
+     "m": "JOHN DEERE 624K",
+     "t": "Construction Equipment",
+     "n": 4
+    },
+    {
+     "m": "CATERPILLAR 950",
+     "t": "Construction Equipment",
+     "n": 4
+    },
+    {
+     "m": "BARRIER SYSTEMS BTM2000",
+     "t": "General Purpose",
+     "n": 4
+    },
+    {
+     "m": "FORD TRANSIT",
+     "t": "Van-LD-Minivan",
+     "n": 4
+    },
+    {
+     "m": "KENWORTH CONSTRUCTION",
+     "t": "Truck-HD",
+     "n": 4
+    },
+    {
+     "m": "CHEVROLET EXPRESS G2500",
+     "t": "Van-LD-Other",
+     "n": 4
+    },
+    {
+     "m": "HAMM HD70HV",
+     "t": "Construction Equipment",
+     "n": 4
+    },
+    {
+     "m": "GRADALL G880E",
+     "t": "Construction Equipment",
+     "n": 3
+    },
+    {
+     "m": "TOYOTA FORKLIFT",
+     "t": "General Purpose",
+     "n": 3
+    },
+    {
+     "m": "NISSAN JUKE",
+     "t": "SUV-LD",
+     "n": 3
+    },
+    {
+     "m": "WORKHORSE CUSTOM CHASSIS COMMERCIAL CHASSIS",
+     "t": "Truck-MD",
+     "n": 3
+    },
+    {
+     "m": "VOLVO LOADER",
+     "t": "Construction Equipment",
+     "n": 3
+    },
+    {
+     "m": "FREIGHTLINER COE",
+     "t": "Truck-HD",
+     "n": 3
+    },
+    {
+     "m": "FORD ECONOLINE E250",
+     "t": "Van-MD",
+     "n": 3
+    },
+    {
+     "m": "WESTERN STAR/AUTO CAR 49X CHASSIS",
+     "t": "Truck-HD",
+     "n": 3
+    },
+    {
+     "m": "GMC NEW SIERRA",
+     "t": "Pickup-MD",
+     "n": 3
+    },
+    {
+     "m": "KOMATSU WA380",
+     "t": "Construction Equipment",
+     "n": 3
+    },
+    {
+     "m": "DODGE RAM 1500",
+     "t": "Pickup-MD",
+     "n": 3
+    },
+    {
+     "m": "GMC TOPKICK",
+     "t": "Truck-MD",
+     "n": 3
+    },
+    {
+     "m": "GMC T-SERIES",
+     "t": "Truck-HD",
+     "n": 3
+    },
+    {
+     "m": "JLG INDUSTRY SCISSOR LIFT",
+     "t": "General Purpose",
+     "n": 3
+    },
+    {
+     "m": "JOHN DEERE 2032R",
+     "t": "Construction Equipment",
+     "n": 3
+    },
+    {
+     "m": "GMC C-SERIES",
+     "t": "Truck-HD",
+     "n": 3
+    },
+    {
+     "m": "GMC C7500",
+     "t": "Truck-HD",
+     "n": 3
+    },
+    {
+     "m": "CHEVROLET TRAVERSE",
+     "t": "SUV-LD",
+     "n": 3
+    },
+    {
+     "m": "MITSUBISHI FG40N",
+     "t": "General Purpose",
+     "n": 3
+    },
+    {
+     "m": "WOODSMAN 770T",
+     "t": "General Purpose",
+     "n": 3
+    },
+    {
+     "m": "CHEVROLET TRAILBLAZER",
+     "t": "SUV-LD",
+     "n": 3
+    },
+    {
+     "m": "JOHN DEERE 7210",
+     "t": "Riding Lawnmower",
+     "n": 3
+    },
+    {
+     "m": "FORD EXCURSION",
+     "t": "SUV-LD",
+     "n": 3
+    },
+    {
+     "m": "VOLVO ACL",
+     "t": "Truck-HD",
+     "n": 3
+    },
+    {
+     "m": "FORD F",
+     "t": "Truck-MD",
+     "n": 2
+    },
+    {
+     "m": "FREIGHTLINER CONVENTIONAL",
+     "t": "Truck-HD",
+     "n": 2
+    },
+    {
+     "m": "CLARK CGP30 FORKLIFT",
+     "t": "General Purpose",
+     "n": 2
+    },
+    {
+     "m": "CASE 621",
+     "t": "Riding Lawnmower",
+     "n": 2
+    },
+    {
+     "m": "CHEVROLET GMT-400",
+     "t": "Pickup-MD",
+     "n": 2
+    },
+    {
+     "m": "FORD WINDSTAR",
+     "t": "Van-LD-Other",
+     "n": 2
+    },
+    {
+     "m": "RAM 5500",
+     "t": "Truck-MD",
+     "n": 2
+    },
+    {
+     "m": "TUCKER SNOWCAT",
+     "t": "General Purpose",
+     "n": 2
+    },
+    {
+     "m": "WHITE/GMC XPEDITOR",
+     "t": "Truck-HD",
+     "n": 2
+    },
+    {
+     "m": "GMC B-SERIES",
+     "t": "Truck-HD",
+     "n": 2
+    },
+    {
+     "m": "KOMATSU 200PT",
+     "t": "Construction Equipment",
+     "n": 2
+    },
+    {
+     "m": "CATERPILLAR D6",
+     "t": "Construction Equipment",
+     "n": 2
+    },
+    {
+     "m": "GMC C4500",
+     "t": "Truck-MD",
+     "n": 2
+    },
+    {
+     "m": "KOMATSU GD5553C",
+     "t": "Construction Equipment",
+     "n": 2
+    },
+    {
+     "m": "CHEVROLET EXPRESS G1500",
+     "t": "Van-LD-Other",
+     "n": 2
+    },
+    {
+     "m": "PETERBILT 220",
+     "t": "Truck-HD",
+     "n": 2
+    },
+    {
+     "m": "DODGE CARAVAN",
+     "t": "Van-LD-Other",
+     "n": 2
+    },
+    {
+     "m": "CATERPILLAR TRACTOR",
+     "t": "Construction Equipment",
+     "n": 2
+    },
+    {
+     "m": "JEEP CHEROKEE",
+     "t": "SUV-LD",
+     "n": 2
+    },
+    {
+     "m": "VOLVO VNR",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "HYSTER FORKLIFT",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "CLUB CAR CARRYALL",
+     "t": "Low Speed Vehicle (NEV)",
+     "n": 1
+    },
+    {
+     "m": "INTERNATIONAL 3000",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "CLARK CGP40",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "AMERICAN LA FRANCE CONDOR",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "INTERNATIONAL 9000",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "DODGE DAKOTA",
+     "t": "Pickup-LD",
+     "n": 1
+    },
+    {
+     "m": "JCB BACKHOE",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "WIGGINS HD64ST FORKLIFT",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET S TRUCK",
+     "t": "Pickup-LD",
+     "n": 1
+    },
+    {
+     "m": "JOHN DEERE 5100M",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "JOHN DEERE 5210",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "FORD ESCAPE",
+     "t": "SUV-LD",
+     "n": 1
+    },
+    {
+     "m": "JOHN DEERE 5410",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "DODGE GRAND CARAVAN",
+     "t": "Van-LD-Minivan",
+     "n": 1
+    },
+    {
+     "m": "GLOBAL ENVIRONMENTAL PRODUCTS ELECTRIC",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "GALION ROLL-O-MATIC",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "JOHN DEERE WHEEL TRACTOR",
+     "t": "Riding Lawnmower",
+     "n": 1
+    },
+    {
+     "m": "JOHNSTON 4000",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "KOMATSU FORKLIFT",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "LIFT KING 6M22",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "LOGAN MFG CO 1800",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "MACK 200",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "MITSUBISHI FG30",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "CHEVROLET C5500 C5V042",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "PETERBILT 367",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "PISTEN BULLY PB 300",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "CATERPILLAR P5000G FORKLIFT",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "RAYMOND FORKLIFT",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "RIZON ELECTRIC FEC9KS",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "FREIGHTLINER 114SD",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "SNOCAT SNOW VEHICLE",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "DODGE RAM VAN B350",
+     "t": "Van-MD",
+     "n": 1
+    },
+    {
+     "m": "STERLING TRUCK LT",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "SUPERIOR SWEEPER",
+     "t": "General Purpose",
+     "n": 1
+    },
+    {
+     "m": "TEREX ADVANCE MIXER ADVANCE MIXER",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "CATERPILLAR 420F2",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "TOYOTA PRIUS",
+     "t": "Auto-Compact",
+     "n": 1
+    },
+    {
+     "m": "FREIGHTLINER 108SD",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "BOMAG BW900-2",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "DODGE RAM WAGON",
+     "t": "Van-LD-Other",
+     "n": 1
+    },
+    {
+     "m": "VOGELE VISION 5100-2",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "DRESSER 538",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "FORD F700",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "FENDT FT410",
+     "t": "Riding Lawnmower",
+     "n": 1
+    },
+    {
+     "m": "AUSTIN 77",
+     "t": "Construction Equipment",
+     "n": 1
+    },
+    {
+     "m": "WHITE/GMC ACL",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "DODGE CALIBER",
+     "t": "Auto-Compact",
+     "n": 1
+    },
+    {
+     "m": "FORD F250",
+     "t": "Truck-MD",
+     "n": 1
+    },
+    {
+     "m": "GMC SAFARI",
+     "t": "Van-LD-Other",
+     "n": 1
+    },
+    {
+     "m": "WHITE/GMC CONVENTIONAL",
+     "t": "Truck-HD",
+     "n": 1
+    },
+    {
+     "m": "GMC VANDURA",
+     "t": "Van-LD-Other",
+     "n": 1
+    }
+   ],
+   "types": [
+    {
+     "t": "Pickup-MD",
+     "n": 3428
+    },
+    {
+     "t": "Truck-HD",
+     "n": 1989
+    },
+    {
+     "t": "Truck-MD",
+     "n": 1356
+    },
+    {
+     "t": "SUV-LD",
+     "n": 601
+    },
+    {
+     "t": "Auto-Compact",
+     "n": 541
+    },
+    {
+     "t": "Construction Equipment",
+     "n": 401
+    },
+    {
+     "t": "Pickup-LD",
+     "n": 389
+    },
+    {
+     "t": "General Purpose",
+     "n": 307
+    },
+    {
+     "t": "Van-LD-Other",
+     "n": 307
+    },
+    {
+     "t": "Riding Lawnmower",
+     "n": 54
+    },
+    {
+     "t": "Auto-Midsize",
+     "n": 51
+    },
+    {
+     "t": "Farm Equipment",
+     "n": 48
+    },
+    {
+     "t": "Auto-Subcompact",
+     "n": 15
+    },
+    {
+     "t": "Van-LD-Minivan",
+     "n": 13
+    },
+    {
+     "t": "Auto-Fullsize",
+     "n": 7
+    },
+    {
+     "t": "Van-MD",
+     "n": 4
+    },
+    {
+     "t": "Low Speed Vehicle (NEV)",
+     "n": 1
+    }
+   ],
+   "fuel": [
+    {
+     "f": "Gasoline",
+     "n": 3564
+    },
+    {
+     "f": "Diesel",
+     "n": 3232
+    },
+    {
+     "f": "Electricity (battery powered)",
+     "n": 1623
+    },
+    {
+     "f": "85% Ethanol",
+     "n": 700
+    },
+    {
+     "f": "Compressed Natural Gas",
+     "n": 200
+    },
+    {
+     "f": "LPG/Propane",
+     "n": 159
+    },
+    {
+     "f": "Hydrogen",
+     "n": 33
+    },
+    {
+     "f": "Not Applicable",
+     "n": 1
+    }
+   ]
+  },
+  "chpTrend": {
+   "2020": {
+    "Dodge Charger": 1637,
+    "Chevrolet Tahoe": 563,
+    "Ford Explorer": 1169,
+    "Other": 265
+   },
+   "2021": {
+    "Dodge Charger": 1711,
+    "Chevrolet Tahoe": 570,
+    "Ford Explorer": 1218,
+    "Other": 265
+   },
+   "2022": {
+    "Dodge Charger": 1759,
+    "Chevrolet Tahoe": 568,
+    "Ford Explorer": 1201,
+    "Other": 257
+   },
+   "2023": {
+    "Dodge Charger": 1950,
+    "Chevrolet Tahoe": 569,
+    "Ford Explorer": 1342,
+    "Other": 206
+   },
+   "2024": {
+    "Dodge Charger": 1875,
+    "Chevrolet Tahoe": 858,
+    "Ford Explorer": 825,
+    "Other": 181
+   },
+   "2025": {
+    "Dodge Charger": 1535,
+    "Chevrolet Tahoe": 826,
+    "Ford Explorer": 617,
+    "Other": 234
+   }
+  }
+ },
+ "seattle": {
+  "updated": "2026-08-18",
+  "spd": {
+   "total": 769,
+   "models": [
+    {
+     "make": "FORD",
+     "model": "PIUH",
+     "n": 298
+    },
+    {
+     "make": "FORD",
+     "model": "FUSIONENERGI",
+     "n": 52
+    },
+    {
+     "make": "FORD",
+     "model": "PIU",
+     "n": 49
+    },
+    {
+     "make": "NISS",
+     "model": "LEAF",
+     "n": 49
+    },
+    {
+     "make": "HARL",
+     "model": "FLHTP",
+     "n": 30
+    },
+    {
+     "make": "FORD",
+     "model": "ESCAPE",
+     "n": 25
+    },
+    {
+     "make": "FORD",
+     "model": "ESCAPEP",
+     "n": 21
+    },
+    {
+     "make": "WESW",
+     "model": "GO4",
+     "n": 16
+    },
+    {
+     "make": "FORD",
+     "model": "CMAXENERGI",
+     "n": 16
+    },
+    {
+     "make": "CHEV",
+     "model": "EXPRESS",
+     "n": 14
+    },
+    {
+     "make": "TOYT",
+     "model": "CAMRY",
+     "n": 11
+    },
+    {
+     "make": "CHEV",
+     "model": "TAHOE",
+     "n": 10
+    },
+    {
+     "make": "FORD",
+     "model": "FUSIONSSV",
+     "n": 9
+    },
+    {
+     "make": "FORD",
+     "model": "TRANSCT",
+     "n": 9
+    },
+    {
+     "make": "FORD",
+     "model": "TRANSIT350",
+     "n": 8
+    },
+    {
+     "make": "FORD",
+     "model": "F250",
+     "n": 8
+    },
+    {
+     "make": "FORD",
+     "model": "CMAX",
+     "n": 8
+    },
+    {
+     "make": "CHEV",
+     "model": "TAHOEPPV",
+     "n": 7
+    },
+    {
+     "make": "FORD",
+     "model": "F350",
+     "n": 7
+    },
+    {
+     "make": "FORD",
+     "model": "TRANSIT",
+     "n": 6
+    },
+    {
+     "make": "FORD",
+     "model": "E450",
+     "n": 5
+    },
+    {
+     "make": "FORD",
+     "model": "F150",
+     "n": 5
+    },
+    {
+     "make": "TOYT",
+     "model": "RAV4H",
+     "n": 5
+    },
+    {
+     "make": "CHEV",
+     "model": "BLAZER",
+     "n": 5
+    },
+    {
+     "make": "FORD",
+     "model": "F150RESP",
+     "n": 5
+    }
+   ],
+   "makeTypes": [
+    {
+     "make": "FORD",
+     "t": "SUV - PATROL - HYBRID",
+     "n": 288
+    },
+    {
+     "make": "FORD",
+     "t": "SEDAN - MED - PHEV",
+     "n": 56
+    },
+    {
+     "make": "NISS",
+     "t": "SEDAN - SML - ELECTRIC",
+     "n": 49
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - PATROL",
+     "n": 45
+    },
+    {
+     "make": "HARL",
+     "t": "MOTORCYCLE - PATROL",
+     "n": 31
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - SML",
+     "n": 24
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - LIGHT",
+     "n": 24
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - SML - PHEV",
+     "n": 22
+    },
+    {
+     "make": "FORD",
+     "t": "SEDAN - SML - PHEV",
+     "n": 21
+    },
+    {
+     "make": "FORD",
+     "t": "VAN",
+     "n": 19
+    },
+    {
+     "make": "CHEV",
+     "t": "SUV - LRG",
+     "n": 18
+    },
+    {
+     "make": "WESW",
+     "t": "SCOOTER",
+     "n": 16
+    },
+    {
+     "make": "FORD",
+     "t": "NONE",
+     "n": 15
+    },
+    {
+     "make": "CHEV",
+     "t": "VAN",
+     "n": 14
+    },
+    {
+     "make": "TOYT",
+     "t": "SEDAN - MED - HYBRID",
+     "n": 11
+    },
+    {
+     "make": "FORD",
+     "t": "VAN - MINIVAN",
+     "n": 9
+    },
+    {
+     "make": "FORD",
+     "t": "SEDAN - SML - HYBRID",
+     "n": 8
+    },
+    {
+     "make": "CHEV",
+     "t": "SUV - MED - ELE",
+     "n": 6
+    },
+    {
+     "make": "TOYT",
+     "t": "SEDAN - SML - HYBRID",
+     "n": 5
+    },
+    {
+     "make": "TOYT",
+     "t": "SUV - SML - HYBRID",
+     "n": 5
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - PATROL",
+     "n": 5
+    },
+    {
+     "make": "CHEV",
+     "t": "SUV - PATROL",
+     "n": 4
+    },
+    {
+     "make": "TOYT",
+     "t": "SUV - MED - HYBRID",
+     "n": 4
+    },
+    {
+     "make": "NISS",
+     "t": "SUV - MED - ELE",
+     "n": 3
+    },
+    {
+     "make": "KVCH",
+     "t": "BOAT - PATROL",
+     "n": 3
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - MED - LREV",
+     "n": 2
+    },
+    {
+     "make": "CHEV",
+     "t": "TRUCK - LIGHT",
+     "n": 2
+    },
+    {
+     "make": "TOYT",
+     "t": "FORKLIFT",
+     "n": 2
+    },
+    {
+     "make": "CHEV",
+     "t": "SEDAN - SML - LREV",
+     "n": 2
+    },
+    {
+     "make": "ZODC",
+     "t": "BOAT - PATROL",
+     "n": 2
+    },
+    {
+     "make": "RAYM",
+     "t": "FORKLIFT - ELECTRIC",
+     "n": 2
+    },
+    {
+     "make": "MERC",
+     "t": "COMMAND CENTER - POLICE",
+     "n": 2
+    },
+    {
+     "make": "JLGX",
+     "t": "FORKLIFT - ELECTRIC",
+     "n": 2
+    },
+    {
+     "make": "HARL",
+     "t": "NONE",
+     "n": 2
+    },
+    {
+     "make": "TOYT",
+     "t": "SUV - MED - ELE",
+     "n": 2
+    },
+    {
+     "make": "GMCX",
+     "t": "VAN - WALKIN",
+     "n": 2
+    },
+    {
+     "make": "HOND",
+     "t": "UTILITY VEHICLE",
+     "n": 2
+    },
+    {
+     "make": "GMCX",
+     "t": "SUV - LRG",
+     "n": 2
+    },
+    {
+     "make": "MERC",
+     "t": "VAN",
+     "n": 2
+    },
+    {
+     "make": "BOBC",
+     "t": "EXCAVATOR",
+     "n": 1
+    },
+    {
+     "make": "JNDR",
+     "t": "UTILITY VEHICLE",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - LIGHT - ELECTRIC",
+     "n": 1
+    },
+    {
+     "make": "LENC",
+     "t": "TRUCK - HEAVY",
+     "n": 1
+    },
+    {
+     "make": "INTR",
+     "t": "COMMAND CENTER - POLICE",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "ARMORED VEHICLE",
+     "n": 1
+    },
+    {
+     "make": "NRVR",
+     "t": "BOAT - PATROL",
+     "n": 1
+    },
+    {
+     "make": "ISUZ",
+     "t": "TRUCK - HEAVY",
+     "n": 1
+    },
+    {
+     "make": "LENC",
+     "t": "ARMORED VEHICLE",
+     "n": 1
+    },
+    {
+     "make": "TOYT",
+     "t": "NONE",
+     "n": 1
+    },
+    {
+     "make": "MDTC",
+     "t": "BOAT - PATROL",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - AERIAL - BUCKET",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "VAN - WALKIN",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "VAN - XL HYBRID",
+     "n": 1
+    },
+    {
+     "make": "TOYT",
+     "t": "FORKLIFT - ELECTRIC",
+     "n": 1
+    },
+    {
+     "make": "PETE",
+     "t": "TRUCK - DUMP TRUCK",
+     "n": 1
+    },
+    {
+     "make": "SFBT",
+     "t": "BOAT - PATROL",
+     "n": 1
+    },
+    {
+     "make": "GMCX",
+     "t": "VAN",
+     "n": 1
+    },
+    {
+     "make": "FREI",
+     "t": "COMMAND CENTER - POLICE",
+     "n": 1
+    },
+    {
+     "make": "MNSN",
+     "t": "BOAT - PATROL",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "SEDAN - MED - HYBRID",
+     "n": 1
+    },
+    {
+     "make": "WHAL",
+     "t": "BOAT - PATROL",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - SML - HYBRID",
+     "n": 1
+    },
+    {
+     "make": "KUBO",
+     "t": "UTILITY VEHICLE",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "MEDIC UNIT",
+     "n": 1
+    },
+    {
+     "make": "BOBC",
+     "t": "LOADER - SKID STEER",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "SEDAN - PATROL",
+     "n": 1
+    },
+    {
+     "make": "CHRY",
+     "t": "VAN - MINIVAN",
+     "n": 1
+    },
+    {
+     "make": "UNKN",
+     "t": "BOMB CONTAINMENT",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - LIGHT - HYBRID",
+     "n": 1
+    },
+    {
+     "make": "CHEV",
+     "t": "SEDAN - SML - ELECTRIC",
+     "n": 1
+    },
+    {
+     "make": "KAWA",
+     "t": "UTILITY VEHICLE",
+     "n": 1
+    },
+    {
+     "make": "PETE",
+     "t": "COMMAND CENTER - POLICE",
+     "n": 1
+    },
+    {
+     "make": "GMCX",
+     "t": "TRUCK - HEAVY",
+     "n": 1
+    },
+    {
+     "make": "STNG",
+     "t": "FORKLIFT",
+     "n": 1
+    },
+    {
+     "make": "CUSH",
+     "t": "GOLF CART - ELECTRIC",
+     "n": 1
+    }
+   ],
+   "fuel": [
+    {
+     "f": "UNL",
+     "n": 650
+    },
+    {
+     "f": "ELE",
+     "n": 76
+    },
+    {
+     "f": "DSL",
+     "n": 38
+    },
+    {
+     "f": "NON",
+     "n": 3
+    },
+    {
+     "f": "",
+     "n": 2
+    }
+   ]
+  },
+  "sdot": {
+   "total": 409,
+   "models": [
+    {
+     "make": "FORD",
+     "model": "F550",
+     "n": 66
+    },
+    {
+     "make": "FORD",
+     "model": "F350",
+     "n": 30
+    },
+    {
+     "make": "NISS",
+     "model": "LEAF",
+     "n": 23
+    },
+    {
+     "make": "PETE",
+     "model": "567",
+     "n": 23
+    },
+    {
+     "make": "FORD",
+     "model": "TRANSCT",
+     "n": 19
+    },
+    {
+     "make": "FORD",
+     "model": "F150",
+     "n": 19
+    },
+    {
+     "make": "PETE",
+     "model": "348",
+     "n": 18
+    },
+    {
+     "make": "FORD",
+     "model": "F150LIGHTNING",
+     "n": 17
+    },
+    {
+     "make": "TOYT",
+     "model": "BZ4X",
+     "n": 16
+    },
+    {
+     "make": "FORD",
+     "model": "F450",
+     "n": 16
+    },
+    {
+     "make": "FREI",
+     "model": "M2",
+     "n": 11
+    },
+    {
+     "make": "FORD",
+     "model": "ESCAPE",
+     "n": 11
+    },
+    {
+     "make": "FORD",
+     "model": "CMAX",
+     "n": 10
+    },
+    {
+     "make": "CHEV",
+     "model": "BOLT",
+     "n": 10
+    },
+    {
+     "make": "FORD",
+     "model": "F250",
+     "n": 6
+    },
+    {
+     "make": "CHEV",
+     "model": "COLRADO",
+     "n": 6
+    },
+    {
+     "make": "CASE",
+     "model": "590SN",
+     "n": 5
+    },
+    {
+     "make": "FORD",
+     "model": "PIUH",
+     "n": 5
+    },
+    {
+     "make": "FORD",
+     "model": "CMAXENERGI",
+     "n": 5
+    },
+    {
+     "make": "PETE",
+     "model": "337",
+     "n": 4
+    },
+    {
+     "make": "JNDR",
+     "model": "6110M",
+     "n": 4
+    },
+    {
+     "make": "JNDR",
+     "model": "624KII",
+     "n": 4
+    },
+    {
+     "make": "PETE",
+     "model": "520",
+     "n": 4
+    },
+    {
+     "make": "TOYT",
+     "model": "PRIUS",
+     "n": 3
+    },
+    {
+     "make": "BAND",
+     "model": "250XP",
+     "n": 3
+    }
+   ],
+   "makeTypes": [
+    {
+     "make": "FORD",
+     "t": "TRUCK - LIGHT",
+     "n": 53
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - FLATBED",
+     "n": 30
+    },
+    {
+     "make": "PETE",
+     "t": "TRUCK - HEAVY",
+     "n": 27
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - HEAVY",
+     "n": 24
+    },
+    {
+     "make": "NISS",
+     "t": "SEDAN - SML - ELECTRIC",
+     "n": 23
+    },
+    {
+     "make": "FORD",
+     "t": "VAN - MINIVAN",
+     "n": 20
+    },
+    {
+     "make": "PETE",
+     "t": "TRUCK - DUMP TRUCK",
+     "n": 20
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - LIGHT - ELECTRIC",
+     "n": 17
+    },
+    {
+     "make": "TOYT",
+     "t": "SUV - MED - ELE",
+     "n": 16
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - DUMPING FLATBED",
+     "n": 13
+    },
+    {
+     "make": "FREI",
+     "t": "SWEEPER - STREET",
+     "n": 11
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - SML",
+     "n": 11
+    },
+    {
+     "make": "FORD",
+     "t": "SEDAN - SML - HYBRID",
+     "n": 10
+    },
+    {
+     "make": "CHEV",
+     "t": "SEDAN - SML - ELECTRIC",
+     "n": 7
+    },
+    {
+     "make": "CHEV",
+     "t": "TRUCK - LIGHT",
+     "n": 7
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - AERIAL - BUCKET",
+     "n": 6
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - DUMP TRUCK",
+     "n": 6
+    },
+    {
+     "make": "FORD",
+     "t": "SEDAN - SML - PHEV",
+     "n": 5
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - PATROL - HYBRID",
+     "n": 5
+    },
+    {
+     "make": "JNDR",
+     "t": "EXCAVATOR",
+     "n": 5
+    },
+    {
+     "make": "BAND",
+     "t": "CHIPPER",
+     "n": 4
+    },
+    {
+     "make": "PETE",
+     "t": "TRUCK - DUMPING FLATBED",
+     "n": 4
+    },
+    {
+     "make": "JNDR",
+     "t": "TRACTOR - MOWER",
+     "n": 4
+    },
+    {
+     "make": "JNDR",
+     "t": "LOADER - WHEEL",
+     "n": 4
+    },
+    {
+     "make": "TOYT",
+     "t": "SEDAN - SML - HYBRID",
+     "n": 3
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - ASPHALT RAKER",
+     "n": 3
+    },
+    {
+     "make": "FORD",
+     "t": "NONE",
+     "n": 3
+    },
+    {
+     "make": "CHEV",
+     "t": "SEDAN - SML - LREV",
+     "n": 3
+    },
+    {
+     "make": "CASE",
+     "t": "LOADER - BACKHOE",
+     "n": 3
+    },
+    {
+     "make": "PETE",
+     "t": "NONE",
+     "n": 3
+    },
+    {
+     "make": "CATP",
+     "t": "ROLLER",
+     "n": 3
+    },
+    {
+     "make": "JNDR",
+     "t": "LOADER - SKID STEER",
+     "n": 2
+    },
+    {
+     "make": "CATP",
+     "t": "LOADER - BACKHOE",
+     "n": 2
+    },
+    {
+     "make": "CASE",
+     "t": "NONE",
+     "n": 2
+    },
+    {
+     "make": "TOYT",
+     "t": "NONE",
+     "n": 2
+    },
+    {
+     "make": "VOGL",
+     "t": "PAVER",
+     "n": 2
+    },
+    {
+     "make": "TOYT",
+     "t": "FORKLIFT",
+     "n": 2
+    },
+    {
+     "make": "PETE",
+     "t": "TRUCK - AERIAL - BUCKET",
+     "n": 2
+    },
+    {
+     "make": "SAKA",
+     "t": "ROLLER",
+     "n": 2
+    },
+    {
+     "make": "SULV",
+     "t": "COMPRESSOR",
+     "n": 2
+    },
+    {
+     "make": "TERX",
+     "t": "LIGHT TOWER",
+     "n": 2
+    },
+    {
+     "make": "DOOS",
+     "t": "COMPRESSOR",
+     "n": 2
+    },
+    {
+     "make": "WIRT",
+     "t": "GRINDER",
+     "n": 2
+    },
+    {
+     "make": "WKSF",
+     "t": "BOAT",
+     "n": 2
+    },
+    {
+     "make": "JNDR",
+     "t": "GRADER",
+     "n": 1
+    },
+    {
+     "make": "NISS",
+     "t": "SUV - MED - ELE",
+     "n": 1
+    },
+    {
+     "make": "GMCX",
+     "t": "TRUCK - FLATBED",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "AERIAL - PLATFORM",
+     "n": 1
+    },
+    {
+     "make": "ABSC",
+     "t": "SWEEPER - STREET",
+     "n": 1
+    },
+    {
+     "make": "PETE",
+     "t": "TRACTOR",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "AERIAL - BUCKET",
+     "n": 1
+    },
+    {
+     "make": "DYNP",
+     "t": "PAVER",
+     "n": 1
+    },
+    {
+     "make": "CASE",
+     "t": "LOADER - WHEEL",
+     "n": 1
+    },
+    {
+     "make": "INTR",
+     "t": "TRUCK - AERIAL - BUCKET",
+     "n": 1
+    },
+    {
+     "make": "SCAG",
+     "t": "MOWER",
+     "n": 1
+    },
+    {
+     "make": "JNDR",
+     "t": "TRACTOR",
+     "n": 1
+    },
+    {
+     "make": "LEEB",
+     "t": "NONE",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "VAN - HYBRID",
+     "n": 1
+    },
+    {
+     "make": "DYNP",
+     "t": "ROLLER",
+     "n": 1
+    },
+    {
+     "make": "MBCI",
+     "t": "SWEEPER - STREET",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - AERIAL - BUCKET - EPTO",
+     "n": 1
+    },
+    {
+     "make": "SALS",
+     "t": "PAVER",
+     "n": 1
+    },
+    {
+     "make": "CATP",
+     "t": "EXCAVATOR",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "TRUCK - DUMPING CHIP BODY",
+     "n": 1
+    },
+    {
+     "make": "BOMA",
+     "t": "ROLLER",
+     "n": 1
+    },
+    {
+     "make": "TOYT",
+     "t": "SUV - SML - HYBRID",
+     "n": 1
+    },
+    {
+     "make": "CATP",
+     "t": "PAVER",
+     "n": 1
+    },
+    {
+     "make": "FORD",
+     "t": "SUV - MED",
+     "n": 1
+    },
+    {
+     "make": "KUBO",
+     "t": "MOWER",
+     "n": 1
+    },
+    {
+     "make": "PETE",
+     "t": "TRUCK - FLATBED",
+     "n": 1
+    },
+    {
+     "make": "TOYT",
+     "t": "FORKLIFT - ELECTRIC",
+     "n": 1
+    },
+    {
+     "make": "KENW",
+     "t": "TRUCK - CEMENT MIXER",
+     "n": 1
+    },
+    {
+     "make": "MRL",
+     "t": "PAINT STRIPER",
+     "n": 1
+    },
+    {
+     "make": "HAMM",
+     "t": "ROLLER",
+     "n": 1
+    }
+   ],
+   "fuel": [
+    {
+     "f": "DSL",
+     "n": 243
+    },
+    {
+     "f": "UNL",
+     "n": 93
+    },
+    {
+     "f": "ELE",
+     "n": 71
+    },
+    {
+     "f": "",
+     "n": 2
+    }
+   ]
+  }
+ }
+}
