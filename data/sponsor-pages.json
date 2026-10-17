@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-16",
+ "generated": "2026-10-17",
  "families": [
   "home",
   "cameras",
@@ -582,6 +582,12 @@
    "key": "basics:data-sources",
    "path": "/data-sources/",
    "title": "Where MileCheck Gets Its Road Data",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:dot-jobs",
+   "path": "/dot-jobs/",
+   "title": "Which state DOTs are hiring seasonal highway workers right now?",
    "sponsor": "house"
   },
   {
