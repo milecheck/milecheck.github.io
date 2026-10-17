@@ -1,0 +1,27 @@
+# Every 6 hours: re-read the open DOT job postings (Oregon Workday JSON, MnDOT openings page), rebuild /dot-jobs/, commit if changed.
+name: dot-jobs
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: dot-jobs
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node scripts/gen-dot-jobs.mjs
+      - run: node scripts/finish-pages.mjs --pages-only
+      - name: Commit if changed
+        run: |
+          git config user.name "milecheck-bot"
+          git config user.email "info@milecheckapp.com"
+          git add data/dot-jobs.json dot-jobs/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "DOT jobs refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git stash --include-untracked --quiet || true
+          git pull --rebase origin main && git push origin HEAD:main
