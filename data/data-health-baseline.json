@@ -4,276 +4,325 @@
  "allowZeroAlerts": [
   "UT"
  ],
+ "knownBroken": {},
  "states": {
   "AL": {
-   "cameras": 591,
-   "alerts": 194,
+   "cameras": 616,
+   "cameraSupported": true,
+   "alerts": 200,
    "alertStatus": "live"
   },
   "AK": {
    "cameras": 473,
+   "cameraSupported": true,
    "alerts": 3,
    "alertStatus": "live"
   },
   "AZ": {
    "cameras": 678,
-   "alerts": 49,
+   "cameraSupported": true,
+   "alerts": 50,
    "alertStatus": "live"
   },
   "AR": {
    "cameras": 551,
+   "cameraSupported": true,
    "alerts": 7,
    "alertStatus": "live"
   },
   "CA": {
    "cameras": 3407,
-   "alerts": 13744,
-   "alertStatus": "partial"
+   "cameraSupported": true,
+   "alerts": 13230,
+   "alertStatus": "live"
   },
   "CO": {
-   "cameras": 1314,
-   "alerts": 430,
+   "cameras": 1313,
+   "cameraSupported": true,
+   "alerts": 423,
    "alertStatus": "live"
   },
   "CT": {
    "cameras": 347,
-   "alerts": 11,
+   "cameraSupported": true,
+   "alerts": 10,
    "alertStatus": "live"
   },
   "DE": {
    "cameras": 362,
-   "alerts": 15,
+   "cameraSupported": true,
+   "alerts": 14,
    "alertStatus": "live"
   },
   "FL": {
-   "cameras": 4887,
-   "alerts": 59,
+   "cameras": 4988,
+   "cameraSupported": true,
+   "alerts": 55,
    "alertStatus": "live"
   },
   "GA": {
    "cameras": 4331,
-   "alerts": 130,
+   "cameraSupported": true,
+   "alerts": 125,
    "alertStatus": "live"
   },
   "HI": {
    "cameras": 0,
-   "alerts": 41,
+   "cameraSupported": false,
+   "alerts": 70,
    "alertStatus": "live"
   },
   "ID": {
    "cameras": 730,
+   "cameraSupported": true,
    "alerts": 485,
    "alertStatus": "live"
   },
   "IL": {
    "cameras": 3807,
-   "alerts": 208,
+   "cameraSupported": true,
+   "alerts": 214,
    "alertStatus": "live"
   },
   "IN": {
-   "cameras": 709,
-   "alerts": 756,
+   "cameras": 747,
+   "cameraSupported": true,
+   "alerts": 757,
    "alertStatus": "live"
   },
   "IA": {
-   "cameras": 846,
-   "alerts": 237,
+   "cameras": 850,
+   "cameraSupported": true,
+   "alerts": 236,
    "alertStatus": "live"
   },
   "KS": {
    "cameras": 418,
-   "alerts": 170,
+   "cameraSupported": true,
+   "alerts": 167,
    "alertStatus": "live"
   },
   "KY": {
    "cameras": 256,
-   "alerts": 279,
+   "cameraSupported": true,
+   "alerts": 268,
    "alertStatus": "live"
   },
   "LA": {
    "cameras": 490,
-   "alerts": 333,
+   "cameraSupported": true,
+   "alerts": 343,
    "alertStatus": "live"
   },
   "ME": {
    "cameras": 135,
+   "cameraSupported": true,
    "alerts": 24,
    "alertStatus": "live"
   },
   "MD": {
-   "cameras": 495,
-   "alerts": 55,
+   "cameras": 490,
+   "cameraSupported": true,
+   "alerts": 58,
    "alertStatus": "live"
   },
   "MA": {
    "cameras": 309,
-   "alerts": 84,
+   "cameraSupported": true,
+   "alerts": 60,
    "alertStatus": "live"
   },
   "MI": {
-   "cameras": 0,
-   "alerts": 593,
+   "cameras": 804,
+   "cameraSupported": true,
+   "alerts": 596,
    "alertStatus": "live"
   },
   "MN": {
-   "cameras": 1529,
-   "alerts": 289,
+   "cameras": 1516,
+   "cameraSupported": true,
+   "alerts": 294,
    "alertStatus": "live"
   },
   "MS": {
    "cameras": 0,
-   "alerts": 69,
+   "cameraSupported": false,
+   "alerts": 70,
    "alertStatus": "live"
   },
   "MO": {
    "cameras": 891,
-   "alerts": 982,
+   "cameraSupported": true,
+   "alerts": 984,
    "alertStatus": "live"
   },
   "MT": {
    "cameras": 464,
-   "alerts": 18,
+   "cameraSupported": true,
+   "alerts": 27,
    "alertStatus": "live"
   },
   "NE": {
    "cameras": 339,
+   "cameraSupported": true,
    "alerts": 157,
    "alertStatus": "live"
   },
   "NV": {
    "cameras": 652,
-   "alerts": 80,
+   "cameraSupported": true,
+   "alerts": 81,
    "alertStatus": "live"
   },
   "NH": {
    "cameras": 183,
+   "cameraSupported": true,
    "alerts": 27,
    "alertStatus": "live"
   },
   "NJ": {
    "cameras": 0,
-   "alerts": 518,
+   "cameraSupported": false,
+   "alerts": 445,
    "alertStatus": "live"
   },
   "NM": {
    "cameras": 185,
-   "alerts": 74,
+   "cameraSupported": true,
+   "alerts": 76,
    "alertStatus": "live"
   },
   "NY": {
-   "cameras": 0,
-   "alerts": 0,
-   "alertStatus": "failed"
+   "cameras": 2738,
+   "cameraSupported": true,
+   "alerts": 302,
+   "alertStatus": "live"
   },
   "NC": {
    "cameras": 1026,
+   "cameraSupported": true,
    "alerts": 442,
    "alertStatus": "live"
   },
   "ND": {
    "cameras": 0,
+   "cameraSupported": false,
    "alerts": 47,
    "alertStatus": "live"
   },
   "OH": {
    "cameras": 1122,
-   "alerts": 347,
+   "cameraSupported": true,
+   "alerts": 340,
    "alertStatus": "live"
   },
   "OK": {
    "cameras": 194,
+   "cameraSupported": true,
    "alerts": 73,
    "alertStatus": "live"
   },
   "OR": {
-   "cameras": 1112,
-   "alerts": 136,
+   "cameras": 1129,
+   "cameraSupported": true,
+   "alerts": 133,
    "alertStatus": "live"
   },
   "PA": {
    "cameras": 1565,
+   "cameraSupported": true,
    "alerts": 119,
    "alertStatus": "live"
   },
   "RI": {
    "cameras": 0,
-   "alerts": 0,
-   "alertStatus": "live_empty"
+   "cameraSupported": false,
+   "alerts": 1,
+   "alertStatus": "live"
   },
   "SC": {
    "cameras": 791,
-   "alerts": 16,
+   "cameraSupported": true,
+   "alerts": 1,
    "alertStatus": "live"
   },
   "SD": {
    "cameras": 167,
+   "cameraSupported": true,
    "alerts": 106,
    "alertStatus": "live"
   },
   "TN": {
    "cameras": 669,
-   "alerts": 163,
+   "cameraSupported": true,
+   "alerts": 165,
    "alertStatus": "live"
   },
   "TX": {
-   "cameras": 4153,
-   "alerts": 477,
+   "cameras": 4143,
+   "cameraSupported": true,
+   "alerts": 440,
    "alertStatus": "live"
   },
   "UT": {
    "cameras": 2084,
-   "alerts": 0,
-   "alertStatus": "live_empty"
+   "cameraSupported": true,
+   "alerts": 1,
+   "alertStatus": "live"
   },
   "VT": {
    "cameras": 89,
+   "cameraSupported": true,
    "alerts": 51,
    "alertStatus": "live"
   },
   "VA": {
-   "cameras": 1704,
-   "alerts": 106,
+   "cameras": 1668,
+   "cameraSupported": true,
+   "alerts": 144,
    "alertStatus": "live"
   },
   "WA": {
    "cameras": 1717,
-   "alerts": 152,
+   "cameraSupported": true,
+   "alerts": 131,
    "alertStatus": "live"
   },
   "WV": {
    "cameras": 133,
+   "cameraSupported": true,
    "alerts": 88,
    "alertStatus": "live"
   },
   "WI": {
    "cameras": 490,
-   "alerts": 1052,
+   "cameraSupported": true,
+   "alerts": 993,
    "alertStatus": "live"
   },
   "WY": {
    "cameras": 0,
-   "alerts": 3,
+   "cameraSupported": false,
+   "alerts": 4,
    "alertStatus": "live"
   },
   "BC": {
    "cameras": 1042,
-   "alerts": 197,
+   "cameraSupported": true,
+   "alerts": 196,
    "alertStatus": "live"
   },
   "ON": {
    "cameras": 925,
+   "cameraSupported": true,
    "alerts": 0,
    "alertStatus": "unsupported"
   },
   "AB": {
    "cameras": 583,
-   "alerts": 230,
+   "cameraSupported": true,
+   "alerts": 224,
    "alertStatus": "live"
   }
- },
- "knownBroken": {
-  "NY:cameras": "ibi511 cameras unavailable as of 2026-10-17",
-  "MI:cameras": "cameras unavailable as of 2026-10-17",
-  "NY:alerts": "alert feed failed as of 2026-10-17"
  }
 }
