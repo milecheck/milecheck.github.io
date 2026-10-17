@@ -16,7 +16,6 @@ jobs:
         with: { node-version: 20 }
       - id: gen
         run: node scripts/gen-dot-jobs.mjs
-        env: { SKIP_OR: '1' }
         continue-on-error: true
       - run: node scripts/finish-pages.mjs --pages-only
       - name: Commit if changed
