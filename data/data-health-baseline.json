@@ -1,0 +1,279 @@
+{
+ "_note": "Checked daily by scripts/check-data-health.mjs. cameras 0 = state has no camera feed (not checked). allowZeroAlerts = empty alert feed is normal there. Refresh with --update-baseline and review the diff.",
+ "updated": "2026-10-17",
+ "allowZeroAlerts": [
+  "UT"
+ ],
+ "states": {
+  "AL": {
+   "cameras": 591,
+   "alerts": 194,
+   "alertStatus": "live"
+  },
+  "AK": {
+   "cameras": 473,
+   "alerts": 3,
+   "alertStatus": "live"
+  },
+  "AZ": {
+   "cameras": 678,
+   "alerts": 49,
+   "alertStatus": "live"
+  },
+  "AR": {
+   "cameras": 551,
+   "alerts": 7,
+   "alertStatus": "live"
+  },
+  "CA": {
+   "cameras": 3407,
+   "alerts": 13744,
+   "alertStatus": "partial"
+  },
+  "CO": {
+   "cameras": 1314,
+   "alerts": 430,
+   "alertStatus": "live"
+  },
+  "CT": {
+   "cameras": 347,
+   "alerts": 11,
+   "alertStatus": "live"
+  },
+  "DE": {
+   "cameras": 362,
+   "alerts": 15,
+   "alertStatus": "live"
+  },
+  "FL": {
+   "cameras": 4887,
+   "alerts": 59,
+   "alertStatus": "live"
+  },
+  "GA": {
+   "cameras": 4331,
+   "alerts": 130,
+   "alertStatus": "live"
+  },
+  "HI": {
+   "cameras": 0,
+   "alerts": 41,
+   "alertStatus": "live"
+  },
+  "ID": {
+   "cameras": 730,
+   "alerts": 485,
+   "alertStatus": "live"
+  },
+  "IL": {
+   "cameras": 3807,
+   "alerts": 208,
+   "alertStatus": "live"
+  },
+  "IN": {
+   "cameras": 709,
+   "alerts": 756,
+   "alertStatus": "live"
+  },
+  "IA": {
+   "cameras": 846,
+   "alerts": 237,
+   "alertStatus": "live"
+  },
+  "KS": {
+   "cameras": 418,
+   "alerts": 170,
+   "alertStatus": "live"
+  },
+  "KY": {
+   "cameras": 256,
+   "alerts": 279,
+   "alertStatus": "live"
+  },
+  "LA": {
+   "cameras": 490,
+   "alerts": 333,
+   "alertStatus": "live"
+  },
+  "ME": {
+   "cameras": 135,
+   "alerts": 24,
+   "alertStatus": "live"
+  },
+  "MD": {
+   "cameras": 495,
+   "alerts": 55,
+   "alertStatus": "live"
+  },
+  "MA": {
+   "cameras": 309,
+   "alerts": 84,
+   "alertStatus": "live"
+  },
+  "MI": {
+   "cameras": 0,
+   "alerts": 593,
+   "alertStatus": "live"
+  },
+  "MN": {
+   "cameras": 1529,
+   "alerts": 289,
+   "alertStatus": "live"
+  },
+  "MS": {
+   "cameras": 0,
+   "alerts": 69,
+   "alertStatus": "live"
+  },
+  "MO": {
+   "cameras": 891,
+   "alerts": 982,
+   "alertStatus": "live"
+  },
+  "MT": {
+   "cameras": 464,
+   "alerts": 18,
+   "alertStatus": "live"
+  },
+  "NE": {
+   "cameras": 339,
+   "alerts": 157,
+   "alertStatus": "live"
+  },
+  "NV": {
+   "cameras": 652,
+   "alerts": 80,
+   "alertStatus": "live"
+  },
+  "NH": {
+   "cameras": 183,
+   "alerts": 27,
+   "alertStatus": "live"
+  },
+  "NJ": {
+   "cameras": 0,
+   "alerts": 518,
+   "alertStatus": "live"
+  },
+  "NM": {
+   "cameras": 185,
+   "alerts": 74,
+   "alertStatus": "live"
+  },
+  "NY": {
+   "cameras": 0,
+   "alerts": 0,
+   "alertStatus": "failed"
+  },
+  "NC": {
+   "cameras": 1026,
+   "alerts": 442,
+   "alertStatus": "live"
+  },
+  "ND": {
+   "cameras": 0,
+   "alerts": 47,
+   "alertStatus": "live"
+  },
+  "OH": {
+   "cameras": 1122,
+   "alerts": 347,
+   "alertStatus": "live"
+  },
+  "OK": {
+   "cameras": 194,
+   "alerts": 73,
+   "alertStatus": "live"
+  },
+  "OR": {
+   "cameras": 1112,
+   "alerts": 136,
+   "alertStatus": "live"
+  },
+  "PA": {
+   "cameras": 1565,
+   "alerts": 119,
+   "alertStatus": "live"
+  },
+  "RI": {
+   "cameras": 0,
+   "alerts": 0,
+   "alertStatus": "live_empty"
+  },
+  "SC": {
+   "cameras": 791,
+   "alerts": 16,
+   "alertStatus": "live"
+  },
+  "SD": {
+   "cameras": 167,
+   "alerts": 106,
+   "alertStatus": "live"
+  },
+  "TN": {
+   "cameras": 669,
+   "alerts": 163,
+   "alertStatus": "live"
+  },
+  "TX": {
+   "cameras": 4153,
+   "alerts": 477,
+   "alertStatus": "live"
+  },
+  "UT": {
+   "cameras": 2084,
+   "alerts": 0,
+   "alertStatus": "live_empty"
+  },
+  "VT": {
+   "cameras": 89,
+   "alerts": 51,
+   "alertStatus": "live"
+  },
+  "VA": {
+   "cameras": 1704,
+   "alerts": 106,
+   "alertStatus": "live"
+  },
+  "WA": {
+   "cameras": 1717,
+   "alerts": 152,
+   "alertStatus": "live"
+  },
+  "WV": {
+   "cameras": 133,
+   "alerts": 88,
+   "alertStatus": "live"
+  },
+  "WI": {
+   "cameras": 490,
+   "alerts": 1052,
+   "alertStatus": "live"
+  },
+  "WY": {
+   "cameras": 0,
+   "alerts": 3,
+   "alertStatus": "live"
+  },
+  "BC": {
+   "cameras": 1042,
+   "alerts": 197,
+   "alertStatus": "live"
+  },
+  "ON": {
+   "cameras": 925,
+   "alerts": 0,
+   "alertStatus": "unsupported"
+  },
+  "AB": {
+   "cameras": 583,
+   "alerts": 230,
+   "alertStatus": "live"
+  }
+ },
+ "knownBroken": {
+  "NY:cameras": "ibi511 cameras unavailable as of 2026-10-17",
+  "MI:cameras": "cameras unavailable as of 2026-10-17",
+  "NY:alerts": "alert feed failed as of 2026-10-17"
+ }
+}
