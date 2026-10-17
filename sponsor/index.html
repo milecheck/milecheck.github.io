@@ -86,6 +86,15 @@
     .sp-board .a{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;font-weight:600;}
     .sp-board .a .btn{margin:0;padding:8px 14px;font-size:14px;}
     .sp-section{scroll-margin-top:76px;}
+    .sp-statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:4px 0 6px;}
+    .sp-shot{position:relative;margin:6px 0 16px;}
+    .sp-slotmark{position:absolute;left:1%;top:5%;width:98%;height:30%;border:3px dashed #DC2626;border-radius:12px;pointer-events:none;}
+    .sp-slottag{position:absolute;right:2%;top:36%;background:#DC2626;color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;}
+    .sp-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .sp-groups .sp-board{padding:12px 14px;}
+    .sp-groups .sp-board .k{font-size:15px;margin:0 0 2px;}
+    .sp-groups .sp-board p{font-size:13.5px;line-height:1.45;margin:0;color:#3a444d;}
+    @media(max-width:700px){.sp-statgrid{grid-template-columns:repeat(2,1fr);}.sp-groups{grid-template-columns:1fr;gap:8px;}.sp-slottag{font-size:10px;top:37%;}}
     .sp-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:6px 0 22px;}
     .sp-videos figure{margin:0;}
     .sp-videos video{display:block;width:100%;aspect-ratio:16/9;background:#0E1116;border:1px solid #e3e0d6;border-radius:12px;}
@@ -131,15 +140,16 @@
     <p class="sp-label">Option 1</p>
     <h2>Sponsor a group of web pages</h2>
     <p class="sub">Pick the drivers you want to reach. Your name goes in the slot at the top of every page in the group, and new pages join the group as we add them.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:4px 0 6px">
+    <div class="sp-statgrid">
       <div style="background:#fff;border:1px solid #e3e0d6;border-radius:12px;padding:14px"><div style="font:800 30px/1.1 var(--serif,Georgia);color:#0f7a4f">+89%</div><div class="sp-note" style="margin:4px 0 0">Google clicks, last 28 days vs the 28 days before (6,250 to 11,800)</div></div>
       <div style="background:#fff;border:1px solid #e3e0d6;border-radius:12px;padding:14px"><div style="font:800 30px/1.1 var(--serif,Georgia);color:#0f7a4f">476,000</div><div class="sp-note" style="margin:4px 0 0">times our pages showed in Google search in 28 days, up from 226,000</div></div>
       <div style="background:#fff;border:1px solid #e3e0d6;border-radius:12px;padding:14px"><div style="font:800 30px/1.1 var(--serif,Georgia);color:#0f7a4f">20,583</div><div class="sp-note" style="margin:4px 0 0">page views in 28 days</div></div>
       <div style="background:#fff;border:1px solid #e3e0d6;border-radius:12px;padding:14px"><div style="font:800 30px/1.1 var(--serif,Georgia);color:#0f7a4f">500+</div><div class="sp-note" style="margin:4px 0 0">pages with a sponsor slot, and we add more every week</div></div>
     </div>
-    <p class="sp-note" style="margin:8px 0 18px">Google Search Console and MileCheck counts, 28 days to October 13, 2026. These are totals for the whole site, not views of one sponsor slot. Winter is our busy season. <a href="/sponsor/stats/" style="color:#0f7a4f">Live sponsor slot numbers</a></p>
-    <img src="/images/sponsors/web-slot-utah.webp" alt="Utah road conditions page with a sample sponsor in the slot at the top" width="900" loading="lazy" style="width:100%;height:auto;border:1px solid #e3e0d6;border-radius:12px;margin:6px 0 16px">
-    <div class="sp-boards">
+    <p class="sp-note" style="margin:8px 0 6px">Google Search Console and MileCheck counts, 28 days to October 13, 2026. These are totals for the whole site, not views of one sponsor slot. Winter is our busy season.</p>
+    <p style="margin:0 0 18px"><a href="/sponsor/stats/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Live sponsor slot numbers &rarr;</a></p>
+    <div class="sp-shot"><img src="/images/sponsors/web-slot-utah.webp" alt="Utah road conditions page with a sample sponsor in the slot at the top" width="900" loading="lazy" style="width:100%;height:auto;border:1px solid #e3e0d6;border-radius:12px;margin:0"><span class="sp-slotmark" aria-hidden="true"></span><span class="sp-slottag">Your name goes here</span></div>
+    <div class="sp-groups">
       <div class="sp-board"><p class="k">A state or region</p><p>Every road conditions, camera, pass, chain law and rest area page for the states you pick. For example California, Nevada and Utah.</p></div>
       <div class="sp-board"><p class="k">A corridor</p><p>Every page along one highway, like I-80 over Donner, I-90 over Snoqualmie or I-84 through the Blue Mountains.</p></div>
       <div class="sp-board"><p class="k">A topic</p><p>Every highway camera page, every mountain pass page, or every gas price and fueling page.</p></div>
