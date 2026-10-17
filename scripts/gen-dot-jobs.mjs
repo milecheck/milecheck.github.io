@@ -85,16 +85,16 @@ async function fetchMinnesota() {
     const loc = block.match(/Location:\s*(.*?)\s*Salary range:/);
     const pay = block.match(/Salary range:\s*(.*?)\s*Closing date:/);
     const close = block.match(/Closing date:\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-    const isTemp = /\b(temporary|seasonal)\b|\bemergency (snow|transportation|plow)/i.test(title);
+    const isTemp = /\b(temporary|seasonal)\b/i.test(title);
     const isSnow = /snow\s*(&|and)\s*ice|snow ?plow/i.test(title);
     if (!isTemp && !isSnow) continue;
     rows.push({
       id: m[2], state: 'MN', agency: 'Minnesota Department of Transportation',
-      title, location: `${(loc ? loc[1] : '').replace(/ - \d+ positions?$/i, '')}, MN`,
+      title, location: (loc ? loc[1] : '').replace(/ - \d+ positions?$/i, '').replace(/^(.*?) Truck$/i, '$1, MN (truck station)').replace(/^(?!.*, MN)(.*)$/, '$1, MN'),
       pay: pay ? pay[1].replace(/\s*\/\s*hourly/, ' an hour').replace(/\s*\/\s*annually/, ' a year').replace(/\s*\/\s*hr\b/g, ' an hour').replace(/\s*\/\s*$/, '').trim() : null,
       closes: close ? `${close[3]}-${close[1].padStart(2, '0')}-${close[2].padStart(2, '0')}` : null,
       closesNote: null,
-      kind: isTemp ? 'Seasonal or temporary (from the title)' : 'Regular position with snow and ice duties (from the title)',
+      kind: isTemp ? 'Seasonal or temporary (from the title)' : 'Appointment type not confirmed',
       url: m[1].replace(/&amp;/g, '&'), recruiter: null,
     });
   }
@@ -138,16 +138,22 @@ const readOn = (k) => store.sources[k]?.fetchedAt ? fmt(PT(new Date(store.source
 
 const TD = 'padding:10px 6px;border-bottom:1px solid #eee;vertical-align:top';
 const TH = 'text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5';
-const table = rows => `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5"><thead><tr><th style="${TH}">Position</th><th style="${TH}">Agency and place</th><th style="${TH}">Pay</th><th style="${TH}">Closes</th></tr></thead><tbody>
-${rows.map(r => `<tr><td style="${TD}"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.multiple ? ' (more than one opening)' : ''}<br><span style="font-size:13px;color:#5b6670">${esc(r.kind)}</span></td><td style="${TD}">${esc(r.agency)}<br>${esc(r.location)}</td><td style="${TD}">${esc(r.pay || 'Not listed')}</td><td style="${TD}">${r.closesNote ? 'First review ' : ''}${fmt(r.closes)}${r.closesNote ? `<br><span style="font-size:13px;color:#5b6670">${esc(r.closesNote)}</span>` : ''}</td></tr>`).join('\n')}
+const table = rows => `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5"><thead><tr><th style="${TH}">Position</th><th style="${TH}">Agency and place</th><th style="${TH}">Pay</th><th style="${TH}">Deadline or first review</th></tr></thead><tbody>
+${rows.map(r => `<tr><td style="${TD}"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.multiple ? ' (more than one opening)' : ''}${r.state === 'MN' ? `<br><span style="font-size:13px;color:#5b6670">Job ID ${esc(r.id)}. If the link fails, search this ID on <a href="https://dot.mn.gov/careers/job-openings.html" target="_blank" rel="noopener">MnDOT job openings</a>.</span>` : ''}<br><span style="font-size:13px;color:#5b6670">${esc(r.kind)}</span></td><td style="${TD}">${esc(r.agency)}<br>${esc(r.location)}</td><td style="${TD}">${esc(r.pay || 'Not listed').replace(/ (Transportation Associate)/, '<br>$1')}</td><td style="${TD}">${r.closesNote ? 'First review ' : ''}${fmt(r.closes)}${r.closesNote ? `<br><span style="font-size:13px;color:#5b6670">${esc(r.closesNote)}</span>` : ''}</td></tr>`).join('\n')}
 </tbody></table></div>`;
 
-const seasonal = all.filter(r => !r.kind.startsWith('Regular'));
-const regular = all.filter(r => r.kind.startsWith('Regular'));
+const isSeasonal = r => r.state !== 'MN' || /\b(temporary|seasonal)\b/i.test(r.title);
+for (const r of all) if (r.state === 'MN') {
+  if (!isSeasonal(r)) r.kind = 'Appointment type not confirmed';
+  r.location = r.location.replace(/^(.*?) Truck, MN$/i, '$1, MN (truck station)');
+}
+const seasonal = all.filter(isSeasonal);
+const regular = all.filter(r => !isSeasonal(r));
+const anyFresh = Object.values(store.sources).some(fresh);
 
 const PORTALS = [
   ['Washington', 'WSDOT and other state agencies', 'https://www.governmentjobs.com/careers/washington', 'careers.wa.gov'],
-  ['Idaho', 'the Idaho Transportation Department', 'https://statecareers.idaho.gov/', 'State of Idaho careers'],
+  ['Idaho', 'the Idaho Transportation Department', 'https://itd.idaho.gov/careers/', 'Idaho Transportation Department careers'],
   ['Montana', 'the Montana Department of Transportation', 'https://mtstatejobs.taleo.net/careersection/200/jobsearch.ftl?lang=en', 'Montana state jobs'],
   ['Colorado', 'CDOT', 'https://www.governmentjobs.com/careers/Colorado', 'careers.colorado.gov'],
   ['Utah', 'UDOT', 'https://www.governmentjobs.com/careers/utah', 'State of Utah jobs'],
@@ -156,13 +162,13 @@ const PORTALS = [
 const page = `<div class="eyebrow">Jobs</div>
     <h1>Which state DOTs are hiring seasonal highway workers right now?</h1>
     <p class="lede">These are open postings from state DOTs, pulled from the agencies' own job sites. Each one links to the official posting. The list covers Oregon and Minnesota so far. Updated ${esc(updated)}.</p>
-    ${Object.entries(store.sources).filter(([, s]) => !s.ok || !fresh(s)).map(([k, s]) => `<p><strong>${k === 'OR' ? 'Oregon' : 'Minnesota'} could not be reached on the last check.</strong> ${fresh(s) ? `These rows were last read ${readOn(k)} and may be out of date.` : (s.fetchedAt ? `Its rows are hidden because they were last read ${readOn(k)}.` : 'There has been no successful read yet.')}</p>`).join('\n    ')}
-    <h2>Seasonal and temporary positions</h2>
-    ${seasonal.length ? table(seasonal) : '<p>No open seasonal postings found on the last check.</p>'}
-    ${regular.length ? `<h2>Other snow and ice positions</h2><p>These titles mention snow and ice work but not seasonal or temporary. Check the posting for the appointment type.</p>${table(regular)}` : ''}
+    ${Object.entries(store.sources).filter(([, s]) => !s.ok || !fresh(s)).map(([k, s]) => `<p><strong>${k === 'OR' ? 'Oregon' : 'Minnesota'} ${s.ok ? 'has not been read in more than 48 hours.' : 'could not be reached on the last check.'}</strong> ${fresh(s) ? `These rows were last read ${readOn(k)} and may be out of date.` : (s.fetchedAt ? `Its rows are hidden because they were last read ${readOn(k)}.` : 'There has been no successful read yet.')}</p>`).join('\n    ')}
+    <h2>Which seasonal and temporary jobs are open?</h2>
+    ${seasonal.length ? table(seasonal) : anyFresh ? '<p>No open seasonal postings found on the last check.</p>' : '<p>Current job listings are unavailable. The last successful checks are more than 48 hours old.</p>'}
+    ${regular.length ? `<h2>What other snow and ice jobs are listed?</h2><p>These titles mention snow and ice work but do not say seasonal or temporary. Check the posting for the appointment type.</p>${table(regular)}` : ''}
     <p style="font-size:14px;color:#5b6670">Pay is as posted. Oregon lists monthly pay. Check the posting for the shift, license and physical requirements. Oregon postings that say open until filled may stop considering applications after the first review date, so apply early. Seasonal or regular is our reading of the posting title.</p>
 
-    <h2>Other states</h2>
+    <h2>Where can I find DOT jobs in other states?</h2>
     <p>For these states we link to the official hiring site instead of copying listings. Search for "seasonal" or "highway maintenance."</p>
     <ul>
 ${PORTALS.map(p => `      <li><a href="${esc(p[2])}" target="_blank" rel="noopener">${esc(p[0])}</a> for ${esc(p[1])} (${esc(p[3])})</li>`).join('\n')}
@@ -175,7 +181,7 @@ ${PORTALS.map(p => `      <li><a href="${esc(p[2])}" target="_blank" rel="noopen
       <li><strong>Seasonal and permanent jobs may have separate postings.</strong> Apply to each position you want.</li>
       <li><strong>Veterans get preference in Oregon.</strong> Oregon gives qualifying veterans and other eligible servicemembers hiring preference. For scored evaluations it is generally 5 percentage points, or 10 for disabled veterans. ORS 408.237 generally requires interviews for veteran applicants who show the required qualifications and skills, with a limited exception. See Oregon's <a href="https://www.oregon.gov/boli/workers/pages/veterans-preference.aspx" target="_blank" rel="noopener">veterans' preference page</a>, ORS 408.230 and ORS 408.237. Other states have their own laws.</li>
       <li><strong>State hiring follows written policy.</strong> Oregon's is <a href="https://www.oregon.gov/das/Policies/40-010-02.pdf" target="_blank" rel="noopener">DAS policy 40.010.02</a>.</li>
-      <li><strong>You can ask for feedback.</strong> Postings name a recruiter. If you are not selected, you can email and ask how your application could be stronger. They may not be able to say much.</li>
+      <li><strong>You can ask for feedback.</strong> ODOT postings include a recruitment contact. If you are not selected, you can ask how your application could be stronger. They may not be able to say much.</li>
     </ul>
     <p>We do not know how any agency scores interviews beyond what it publishes.</p>
     <p style="font-size:14px;color:#5b6670">Sources are ODOT's Workday careers site (read ${esc(readOn('OR'))}) and MnDOT's current job openings page (read ${esc(readOn('MN'))}). Closing dates and pay come from the postings. Check the posting before you apply.</p>
