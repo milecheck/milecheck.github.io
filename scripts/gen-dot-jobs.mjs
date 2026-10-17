@@ -108,6 +108,7 @@ let store = existsSync(DATA) ? JSON.parse(readFileSync(DATA, 'utf8')) : { source
 if (!OFFLINE) {
   const now = new Date().toISOString();
   for (const [key, fn] of [['OR', fetchOregon], ['MN', fetchMinnesota]]) {
+    if (key === 'OR' && process.env.SKIP_OR) continue; // Workday blocks GitHub's runner IPs; Oregon is refreshed from a Mac, see scripts/refresh-dot-jobs-local.sh
     try {
       const rows = await fn();
       store.sources[key] = { fetchedAt: now, ok: true, rows };
