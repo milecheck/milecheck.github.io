@@ -117,6 +117,7 @@ if (!OFFLINE) {
       store.sources[key] = { ...(store.sources[key] || { rows: [] }), ok: false };
     }
   }
+  if (Object.values(store.sources).some(x => !x.ok)) process.exitCode = 2; // lets the workflow go red so GitHub emails the failure
   store.updatedAt = now;
   mkdirSync(dirname(DATA), { recursive: true });
   writeFileSync(DATA, JSON.stringify(store, null, 1) + '\n');

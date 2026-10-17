@@ -14,7 +14,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
-      - run: node scripts/gen-dot-jobs.mjs
+      - id: gen
+        run: node scripts/gen-dot-jobs.mjs
+        continue-on-error: true
       - run: node scripts/finish-pages.mjs --pages-only
       - name: Commit if changed
         run: |
@@ -25,3 +27,6 @@ jobs:
           git commit -m "DOT jobs refresh $(date -u +%Y-%m-%dT%H:%MZ)"
           git stash --include-untracked --quiet || true
           git pull --rebase origin main && git push origin HEAD:main
+      - name: Fail loudly if a source broke
+        if: steps.gen.outcome == 'failure'
+        run: echo 'A DOT jobs source failed or its layout changed. See the gen step log.' && exit 1
