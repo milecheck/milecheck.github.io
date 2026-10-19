@@ -99,6 +99,12 @@
    "sponsor": "house"
   },
   {
+   "key": "article:insurance-claim-mile-marker",
+   "path": "/blog/insurance-claim-mile-marker.html",
+   "title": "What mile marker do I put on an insurance claim after a crash or deer hit?",
+   "sponsor": "house"
+  },
+  {
    "key": "article:labor-day-2026-alabama",
    "path": "/blog/labor-day-weekend-recap-2026-states/alabama.html",
    "title": "Alabama Labor Day Weekend Road Recap",
@@ -765,6 +771,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:how-long-does-it-take-an-ambulance-to-reach-a-crash",
+   "path": "/how-long-does-it-take-an-ambulance-to-reach-a-crash/",
+   "title": "How long does it take an ambulance to reach a crash scene?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:how-to-charge-an-electric-car",
    "path": "/how-to-charge-an-electric-car/",
    "title": "How do you charge an electric car at a public charger? Step by step",
@@ -1062,6 +1074,12 @@
    "key": "basics:what-to-put-on-convenience-store-tv",
    "path": "/what-to-put-on-convenience-store-tv/",
    "title": "What can I put on the TV in my convenience store for customers?",
+   "sponsor": "house"
+  },
+  {
+   "key": "basics:what-vehicles-do-cal-fire-and-seattle-fire-drive",
+   "path": "/what-vehicles-do-cal-fire-and-seattle-fire-drive/",
+   "title": "What vehicles do CAL FIRE and Seattle Fire drive?",
    "sponsor": "house"
   },
   {
@@ -2295,15 +2313,15 @@
    "sponsor": "house"
   },
   {
-   "key": "home:mile-marker-map",
-   "path": "/maps/mile-markers/",
-   "title": "Mile Marker Map — browse mileposts in all 50 states",
+   "key": "home:front-page",
+   "path": "/",
+   "title": "MileCheck | Road Conditions & Highway Mile Markers",
    "sponsor": "house"
   },
   {
-   "key": "home:front-page",
-   "path": "/",
-   "title": "MileCheck",
+   "key": "home:mile-marker-map",
+   "path": "/maps/mile-markers/",
+   "title": "Mile Marker Map — browse mileposts in all 50 states",
    "sponsor": "house"
   },
   {
