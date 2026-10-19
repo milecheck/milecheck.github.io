@@ -10,7 +10,7 @@ import { writeFileSync } from 'node:fs';
 const CA = '065249ff-32c0-424f-b960-78c3fdbf7244';
 const caSql = async sql => { const r = await fetch('https://data.ca.gov/api/3/action/datastore_search_sql?' + new URLSearchParams({ sql })); const j = await r.json(); if (!j.success) throw new Error('data.ca.gov: ' + JSON.stringify(j.error)); return j.result.records; };
 const sea = async query => { const r = await fetch('https://cos-data.seattle.gov/resource/enxu-fgzb.json?' + new URLSearchParams({ $query: query })); if (!r.ok) throw new Error('Seattle ' + r.status); return r.json(); };
-const AGENCY = { chp: "\"Agency\" LIKE 'California Highway Patrol%'", caltrans: "\"Agency\" LIKE 'Transportation, Department of%'" };
+const AGENCY = { chp: "\"Agency\" LIKE 'California Highway Patrol%'", caltrans: "\"Agency\" LIKE 'Transportation, Department of%'", calfire: "\"Agency\" LIKE 'Forestry and Fire Protection%'" };
 const [{ y: year }] = await caSql(`SELECT max("Report_Year") y FROM "${CA}"`);
 const ground = `FROM "${CA}" WHERE "Report_Year"=${year} AND "Disposed"='No' AND "Asset_Category"='Ground' AND "Asset_Type" NOT IN ('Non-Self Propelled','Not Applicable') AND "Make_Model"<>'Not Applicable'`;
 const ca = {};
@@ -30,7 +30,7 @@ const chpTrend = {};
 for (const r of trend) { const y = String(r.y); (chpTrend[y] ||= { 'Dodge Charger': 0, 'Chevrolet Tahoe': 0, 'Ford Explorer': 0, Other: 0 })[fam(r.m)] += Number(r.n); }
 const NOT_TRAILER = "equipment_type not like 'TRAILER%'";
 const seattle = {};
-for (const [k, dept] of Object.entries({ spd: 'SPD', sdot: 'SDOT' })) {
+for (const [k, dept] of Object.entries({ spd: 'SPD', sdot: 'SDOT', sfd: 'SFD' })) {
   const [{ n }] = await sea(`SELECT count(*) AS n WHERE dept='${dept}' AND ${NOT_TRAILER}`);
   const models = await sea(`SELECT make, model, count(*) AS n WHERE dept='${dept}' AND ${NOT_TRAILER} GROUP BY make, model ORDER BY n DESC LIMIT 25`);
   const makeTypes = await sea(`SELECT make, equipment_type, count(*) AS n WHERE dept='${dept}' AND ${NOT_TRAILER} GROUP BY make, equipment_type ORDER BY n DESC LIMIT 200`);
