@@ -30,6 +30,7 @@ const FAMILIES = {
   passes: { picks: [P.sz143, P.vetoos], guides: [G.chains, G.kits, G.jump] },
   chains: { picks: [P.sz143, P.konig], guides: [G.chains, G.kits, G.air] },
   cameras: { picks: [P.viofo], guides: [G.cams, G.kits, G.air] },
+  'chain-laws': { title: 'Gear for chain laws', picks: [P.sz143, P.konig], guides: [G.chains, G.kits] },
   closures: { picks: [P.vetoos, P.noco], guides: [G.kits, G.jump, G.air] },
   bridges: { picks: [P.viofo], guides: [G.cams, G.jump] },
   mountains: { title: 'Gear for the view', picks: [P.vortex], guides: [G.bino], recursive: true, skip: ['android'] },
@@ -40,7 +41,7 @@ const card = ({ picks, guides: links, title = 'Gear for this drive' }) => `${STA
 <section class="mc-gear" aria-label="Gear guides" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">
   <div style="border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5">
     <div style="font-weight:700;font-size:16px;margin-bottom:6px">${title}</div>
-${picks.map(([name, what]) => `    <p style="margin:0 0 6px">Our pick for ${what}: <a href="${amz(name)}" target="_blank" rel="sponsored noopener" style="color:#0f7a4f;text-decoration:underline;font-weight:600">${name} on Amazon</a></p>`).join('\n')}
+${picks.map(([name, what]) => `    <p style="margin:0 0 6px">Our pick for ${what}: <a href="${amz(name)}" target="_blank" rel="sponsored noopener" onclick="window.gtag&&gtag('event','affiliate_click',{partner:'amazon',placement:'gear-card',page_path:location.pathname})" style="color:#0f7a4f;text-decoration:underline;font-weight:600">${name} on Amazon</a></p>`).join('\n')}
     <div style="font-size:14px;font-weight:700;margin:10px 0 4px">More picks, compared</div>
     <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
 ${links.map(([href, label]) => `      <li style="margin:2px 0"><a href="${href}" style="color:#0f7a4f;text-decoration:underline;font-weight:600">${label}</a></li>`).join('\n')}

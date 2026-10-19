@@ -776,6 +776,12 @@ const AFFILIATE_BOX={
   'drive-or-fly-seattle-portland': affRental('If you drive, Discover Cars compares rental companies in one search.'),
   'drive-or-fly-orlando-miami': affRental('If you drive, Discover Cars compares rental companies in one search.'),
   'driving-in-the-us-foreign-visitor-guide': affRental('Discover Cars compares rental companies in one search.'),
+  'drive-into-canada': affRental('If you rent a car in the US, check the rental company\'s cross-border rules for the specific car before you book. Discover Cars compares rental companies in one search.'),
+  'drive-into-us-from-canada': affRental('If you rent a car in Canada for a US trip, check the rental company\'s cross-border rules for the specific car before you book. Discover Cars compares rental companies in one search.'),
+  // Airalo eSIM card for 'will-my-phone-work-in-canada' and the border pages is prepared but OFF
+  // until the Impact application (submitted 10/8) is approved and Leah has the tracking link.
+  // To turn on: set AIRALO_URL and add the entry below to AFFILIATE_BOX.
+  //   'will-my-phone-work-in-canada': {h:'If your plan does not cover Canada',p:`Airalo sells prepaid eSIM data plans by country. Check that your phone is unlocked and supports eSIM first. <a href="${AIRALO_URL}" target="_blank" rel="sponsored nofollow noopener">See Airalo Canada plans</a>.`,note:'MileCheck earns a commission if you buy through this link.'},
   'rent-a-car-in-orlando': affRental('Discover Cars compares rental companies in one search, including Orlando pickup locations.'),
 };
 
@@ -918,7 +924,7 @@ ${g.dated ? `    <p class="g-dated"><time datetime="${g.dated[0]}">${g.dated[1]}
 ${(g.checked && !g.dated) ? `    <p class="g-checked">${T.checked(g.checked)}</p>\n` : ''}
 ${figHtml}${secHtml}
 
-${(lang==='en' && AFFILIATE_BOX[g.slug]) ? `    <aside class="aff"><h3>${AFFILIATE_BOX[g.slug].h}</h3><p>${AFFILIATE_BOX[g.slug].p}</p><p class="aff-note">${AFFILIATE_BOX[g.slug].note||AFF_DISCLOSE}</p></aside>\n` : ''}
+${(lang==='en' && AFFILIATE_BOX[g.slug]) ? `    <aside class="aff"><h3>${AFFILIATE_BOX[g.slug].h}</h3><p>${AFFILIATE_BOX[g.slug].p.replace(/<a href="(https:\/\/www\.(discovercars|bajabound)\.com[^"]*)"/g,(m,u,pn)=>`<a onclick="window.gtag&&gtag('event','affiliate_click',{partner:'${pn}',placement:'guide-box',page_path:location.pathname})" href="${u}"`)}</p><p class="aff-note">${AFFILIATE_BOX[g.slug].note||AFF_DISCLOSE}</p></aside>\n` : ''}
     <div class="cta">
       <h3>${T.ctaH}</h3>
       <p>${T.ctaP}</p>
