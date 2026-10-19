@@ -15,6 +15,11 @@ const UA = 'MileCheck-DataHealth/1.0 (+https://milecheckapp.com)';
 const CAMERA_DROP = 0.4;          // fail if cameras fall more than 40% below baseline
 const ALERT_MIN_BASELINE = 10;    // only fail an empty alert feed when the baseline had at least this many
 const STALE_HOURS = 6;            // fetched_at older than this = stale feed
+const AVG_DROP = 0.3;             // fail if a count falls more than 30% below its 7-day average (Uptime 2, 10/19)
+const AVG_MIN = 20;               // ...only when that average is at least this (small feeds swing too much)
+const AVG_MIN_DAYS = 3;           // ...and only once there are this many days of history
+const CAP_COUNTS = new Set([100, 500, 1000]); // a count of exactly this is usually a source's page cap (COtrip hid half its data behind 100)
+const HISTORY_FILE = process.env.DATA_HEALTH_HISTORY || path.join(ROOT, '.data-health-history.json'); // kept by the workflow's cache, not committed
 
 const STATES = 'AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' ');
 const PROVINCES = ['BC', 'ON', 'AB'];
@@ -37,7 +42,7 @@ async function getJson(url) {
 }
 
 async function probe(st) {
-  const out = { cameras: null, cameraSupported: true, cameraUnavailable: false, alerts: null, alertStatus: null, alertErrors: 0, fetchedAt: null, errors: [] };
+  const out = { cameras: null, cameraSupported: true, cameraUnavailable: false, alerts: null, alertStatus: null, alertErrors: 0, fetchedAt: null, conditions: null, errors: [] };
   try {
     const c = await getJson(`${WORKER}/cameras?state=${st}`);
     out.cameras = Array.isArray(c.cameras) ? c.cameras.length : 0;
@@ -51,6 +56,10 @@ async function probe(st) {
     out.alertErrors = (a.errors || []).length;
     out.fetchedAt = a.fetched_at || null;
   } catch (e) { out.errors.push(`alerts: ${e.message}`); }
+  try {
+    const c = await getJson(`${WORKER}/conditions?state=${st}`);
+    if (c.source_status !== 'unsupported') out.conditions = (c['road-weather-reports'] || []).length;
+  } catch { /* conditions are only checked for a page cap; a failure here is not a data-health failure */ }
   if (fake[0] === st && fake[1] === 'cameras') out.cameras = 0;
   if (fake[0] === st && fake[1] === 'alerts') out.alerts = 0;
   return out;
@@ -112,6 +121,41 @@ for (const st of ALL) {
     }
   }
 }
+
+// 7-day average: today vs the mean of the previous days kept in the history file.
+let history = {};
+try { history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8')); } catch { history = {}; }
+const today = new Date().toISOString().slice(0, 10);
+const pastDays = Object.keys(history).filter((d) => d < today).sort().slice(-7);
+// Round-number counts: a source that stops at its page size looks healthy but is cut off.
+// One day at exactly 100/500/1000 can be chance (WI read 1000, then 1002 a minute later, 10/19),
+// so it fails only when yesterday's count for the same feed was the same round number.
+const lastDay = pastDays[pastDays.length - 1];
+for (const st of ALL) {
+  const p = live[st];
+  for (const [kind, n] of [['cameras', p.cameras], ['alerts', p.alerts], ['conditions', p.conditions]]) {
+    if (!CAP_COUNTS.has(n)) continue;
+    const msg = `${st}: ${kind} returned exactly ${n}, which looks like a page cap (data may be cut off)`;
+    if (lastDay && history[lastDay]?.[st]?.[kind] === n) flag(`${st}:${kind}`, `${msg}, two days running`);
+    else warnings.push(msg);
+  }
+}
+if (pastDays.length >= AVG_MIN_DAYS) {
+  for (const st of ALL) {
+    const p = live[st];
+    for (const kind of ['cameras', 'alerts']) {
+      const vals = pastDays.map((d) => history[d]?.[st]?.[kind]).filter((v) => typeof v === 'number');
+      if (vals.length < AVG_MIN_DAYS || p[kind] == null) continue;
+      const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
+      if (avg >= AVG_MIN && p[kind] < avg * (1 - AVG_DROP)) flag(`${st}:${kind}`, `${st}: ${kind} at ${p[kind]}, over ${AVG_DROP * 100}% below the ${vals.length}-day average of ${Math.round(avg)}`);
+    }
+  }
+} else {
+  warnings.push(`7-day average check waits for history (${pastDays.length} of ${AVG_MIN_DAYS} days so far)`);
+}
+history[today] = Object.fromEntries(ALL.filter((st) => !live[st].errors.length).map((st) => [st, { cameras: live[st].cameras, alerts: live[st].alerts, conditions: live[st].conditions }]));
+for (const d of Object.keys(history).sort().slice(0, -8)) delete history[d];
+try { fs.writeFileSync(HISTORY_FILE, JSON.stringify(history)); } catch (e) { warnings.push(`could not save history: ${e.message}`); }
 
 for (const k of Object.keys(known)) if (!seenBroken.has(k)) warnings.push(`${k} is listed in knownBroken but looks healthy now. Remove it and run --update-baseline.`);
 const cams = ALL.filter((s) => live[s].cameras > 0).length;

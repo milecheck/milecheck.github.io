@@ -15,5 +15,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
+      # History of daily counts for the 7-day average check. Kept in the Actions cache, never committed.
+      - uses: actions/cache/restore@v4
+        with:
+          path: .data-health-history.json
+          key: data-health-history-${{ github.run_id }}
+          restore-keys: data-health-history-
       - name: Check camera and alert data per state
+        id: check
         run: node scripts/check-data-health.mjs
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .data-health-history.json
+          key: data-health-history-${{ github.run_id }}
