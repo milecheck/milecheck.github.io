@@ -2301,6 +2301,12 @@
    "sponsor": "house"
   },
   {
+   "key": "home:front-page",
+   "path": "/",
+   "title": "MileCheck",
+   "sponsor": "house"
+  },
+  {
    "key": "live:borders",
    "path": "/borders/",
    "title": "Border Crossing Wait Times — live US/Canada & US/Mexico",
