@@ -108,9 +108,9 @@
 .who{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}@media(max-width:620px){.who{grid-template-columns:1fr}}
 .who div{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px}.who h3{font-size:15px;margin:0 0 4px}.who p{font-size:14px;color:#3a444d;line-height:1.55;margin:0}
 .tbl{overflow-x:auto}.tbl table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}.tbl th,.tbl td{border-bottom:1px solid #E5E5E5;padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font:700 12px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:#8A939B}
-.api-section{padding:18px 20px}.api-hero{padding-bottom:0}.api-section h2{margin-bottom:12px}.two .ep-card{margin-bottom:0}.ep-desc{margin:0}.api-section p.lead{margin-bottom:12px}.cta{margin:0}
-.two .ep-label{color:#0f7a4f;font-size:13px;margin-bottom:10px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.two{grid-template-columns:1fr}}
+.api-section{padding:18px 20px}.api-hero{padding-bottom:0}.api-section h2{margin-bottom:12px}.three .ep-card{margin-bottom:0}.ep-desc{margin:0}.api-section p.lead{margin-bottom:12px}.cta{margin:0}
+.three .ep-label{color:#0f7a4f;font-size:13px;margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}@media(max-width:860px){.three{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -139,21 +139,23 @@
 <section class="api-hero">
   <div class="eyebrow">Road data</div>
   <h1>What road data can I buy from MileCheck?</h1>
-  <p class="sub">Two things. A live feed of state road alerts in one format. And records of when those alerts appeared and when they were no longer there.</p>
-  <p class="value">The live feed is available now. The records of past alerts are offered only where the source owner has confirmed permission. We are asking agencies now.</p>
+  <p class="sub">Three things. Highway mile markers for every state. A live feed of state road alerts in one format. And records of when those alerts appeared and when they were no longer there.</p>
+  <p class="value">Mile markers and the live feed are available now. The records of past alerts are offered only where the source owner has confirmed permission. We are asking agencies now.</p>
 </section>
 
 <section class="api-section">
   <h2>What you get</h2>
-  <div class="two">
-    <div class="ep-card"><div class="ep-label">Live feed. Available now.</div><p class="ep-desc">Road alerts and conditions from state DOTs, through one API. Closures, crashes, construction and weather for all 50 states and British Columbia, Alberta and Manitoba. Coverage depends on what each agency publishes. Also the nearest mapped highway mile marker for a point, active wildfires, and Seattle drawbridge status. Test calls and field lists are on the <a href="/api/">API page</a>.</p></div>
-    <div class="ep-card"><div class="ep-label">Records of past alerts. Not yet available.</div><p class="ep-desc">A row for each alert we detected, and each Seattle bridge lift. We check each feed about every 16 minutes. The row says when we first saw the alert and when we last saw it. Offered as a monthly file or through the API, once the source is confirmed. Pricing is below.</p></div>
+  <div class="three">
+    <div class="ep-card"><div class="ep-label">Mile markers. Available now.</div><p class="ep-desc">Give us a point and we return the highway, mile and direction. Positions for every state and British Columbia, built from state DOT and federal highway data. Use the lookup through the API, or license the whole set as a file.</p></div>
+    <div class="ep-card"><div class="ep-label">Live alerts. Available now.</div><p class="ep-desc">Closures, crashes, construction and weather from state DOTs for all 50 states and British Columbia, Alberta and Manitoba, through one API. Coverage depends on what each agency publishes. Also active wildfires and Seattle drawbridge status. Test calls are on the <a href="/api/">API page</a>.</p></div>
+    <div class="ep-card"><div class="ep-label">Records of past alerts. Not yet available.</div><p class="ep-desc">A row for each alert we detected, and each Seattle bridge lift. We check each feed about every 16 minutes. The row says when we first saw the alert and when we last saw it. Offered as a monthly file or through the API, once the source is confirmed.</p></div>
   </div>
 </section>
 
 <section class="api-section">
   <h2>What people use it for</h2>
   <div class="who">
+    <div><h3>Dispatch, roadside and emergency services</h3><p>Turn a GPS point into the highway and mile marker a caller or driver can say out loud.</p></div>
     <div><h3>Fleet and routing software</h3><p>Show reported closures and crashes in dispatch screens without building a connection to each state.</p></div>
     <div><h3>Freight and logistics</h3><p>With the records, review closure alerts we recorded along a route and how long each stayed on the feed.</p></div>
     <div><h3>Insurers and claims teams</h3><p>With the records, review alerts a state DOT had posted near a route around a date.</p></div>
@@ -205,7 +207,7 @@
 
 <section class="api-section">
   <h2>What it costs</h2>
-  <p class="pricing-note">Developer and Business are the live feed. Records of past alerts are quoted.</p>
+  <p class="pricing-note">Developer and Business cover the live API. The mile marker file and the records of past alerts are quoted.</p>
   <div class="pricing-scroll"><div class="pricing-grid">
     <div class="price-card"><div class="price-tier">Developer</div><div class="price-amt">$0</div><div class="price-desc">Try the live feed or build a small app.</div>
       <ul class="price-feat"><li>1,000 calls a day</li><li>Live alerts and nearest mile marker</li><li>You credit MileCheck in your product</li><li>No support</li></ul>
@@ -217,7 +219,8 @@
       <ul class="price-feat"><li>Volume above Business</li><li>Records of past alerts, for sources that have been confirmed</li><li>Monthly files or the API</li><li>Service terms and a named contact written into the agreement</li></ul>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Enterprise%20data%20licence">Email for a quote</a></div>
   </div></div>
-  <p class="lead" style="margin-top:14px">Records of past alerts are quoted because each source has its own terms. We tell you which sources we can include before we quote.</p>
+  <p class="lead" style="margin-top:14px"><strong>Mile marker file.</strong> Every state and British Columbia, by route and mile, as GeoJSON and CSV. Yearly licence to show it in your product. No resale. Updated when a state changes its markers. Email for a sample and a price.</p>
+  <p class="lead">Records of past alerts are quoted because each source has its own terms. We tell you which sources we can include before we quote.</p>
 </section>
 
 <section class="api-section">
