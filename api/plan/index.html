@@ -131,106 +131,48 @@
 <section class="api-hero">
   <div class="eyebrow">Data plan</div>
   <h1>Road data, as history files and an API</h1>
-  <p class="sub">MileCheck reads the live traffic feeds of all 50 state DOTs and three Canadian provinces. We also keep a log of when each record appeared and when it went away. That log is what we offer, next to the live API.</p>
+  <p class="sub">MileCheck reads the live traffic feeds of all 50 state DOTs and three Canadian provinces. We also keep a log of when we first and last saw each record. We plan to offer that log, next to the live API.</p>
   <p class="value">This page says what is for sale, what is not, and why. The live API is on the <a href="/api/">API page</a>.</p>
 </section>
 
 <section class="api-section">
-  <h2>Three history products</h2>
-  <p class="lead">Each one is built from our own log. Each is offered only for sources whose owners allow it. If a state or a feed is not cleared, it is not in the file.</p>
+  <h2>Three history products we are preparing</h2>
+  <p class="lead">None of these is on sale yet. Each is built from our own log, and each will be offered only for sources whose owners confirm in writing that we may license it. Until then, we are taking questions, not orders.</p>
   <div class="value-grid" style="grid-template-columns:repeat(3,1fr)">
-    <div class="value-card"><h3>Drawbridge lift history</h3><p>Every raise and lower of the Seattle drawbridges that Seattle DOT reports, with the length of each lift. Counts by hour, median and longest lift, and the full list of lifts. Daily file or API.</p></div>
-    <div class="value-card"><h3>Crash posting times</h3><p>For each crash on a state DOT feed, when it first appeared and when it came off, by state, route and hour. This is how long the agency kept it posted. It is not a measured clearance time, and every file says so.</p></div>
+    <div class="value-card"><h3>Drawbridge lift history</h3><p>Bridge raises and lowers that MileCheck observed on the Seattle drawbridges Seattle DOT reports, with the length of each lift. Counts by hour, median and longest lift. Gaps in the city feed show up as gaps in the log.</p></div>
+    <div class="value-card"><h3>Crash posting times</h3><p>For each crash on a state DOT feed, when MileCheck first saw it and when it was no longer on a later check, by state, route and hour. We check about every 16 minutes. This is how long the agency kept it posted. It is not a measured clearance time, and every file says so.</p></div>
     <div class="value-card"><h3>Closure history by route</h3><p>Closures and hazards by route, mile range and season. It separates a closure posted for 82 minutes from one posted for five days, which a "closed now" feed cannot do.</p></div>
   </div>
 </section>
 
 <section class="api-section">
-  <h2>Real sample: the Ballard Bridge</h2>
-  <p class="lead">The 30 days to the evening of October 15, 2026, Pacific time. It lifted 259 times. The middle lift lasted 243 seconds (about 4 minutes) and the longest 751 seconds. Most lifts start between 9 AM and 3 PM. The data is from our own log of the city's live bridge status.</p>
-  <div class="ep-card">
-    <div class="ep-label">Response</div>
-    <pre class="codeblock">{
-  "bridge": "Ballard Bridge",
-  "citation": "33 CFR 117.1051",
-  "window": {
-    "from": "2026-09-16T00:00:00Z",
-    "to": "2026-10-16T00:00:00Z",
-    "hours_timezone": "America/Los_Angeles"
-  },
-  "lifts": 259,
-  "median_duration_sec": 243,
-  "p90_duration_sec": 439,
-  "longest_duration_sec": 751,
-  "lifts_by_local_hour": [
-    4,
-    1,
-    1,
-    1,
-    2,
-    2,
-    8,
-    2,
-    7,
-    28,
-    20,
-    28,
-    16,
-    18,
-    24,
-    22,
-    9,
-    6,
-    23,
-    18,
-    10,
-    3,
-    5,
-    1
-  ],
-  "recent": [
-    {
-      "raised_at": "2026-10-15T20:49:53Z",
-      "lowered_at": "2026-10-15T20:52:47Z",
-      "duration_sec": 174
-    },
-    {
-      "raised_at": "2026-10-15T22:19:22Z",
-      "lowered_at": "2026-10-15T22:22:36Z",
-      "duration_sec": 194
-    },
-    {
-      "raised_at": "2026-10-15T22:41:20Z",
-      "lowered_at": "2026-10-15T22:50:45Z",
-      "duration_sec": 565
-    }
-  ]
-}</pre>
-  </div>
-  <p class="lead">Crash posting times are published as state summaries on <a href="/how-long-do-crashes-take-to-clear/">How long do crashes take to clear?</a> That page covers 16,436 crashes in 36 states from September 25 to October 16, 2026. The history file carries the same measure, per crash.</p>
+  <h2>What the log looks like: the Ballard Bridge</h2>
+  <p class="lead">In the 30 days to the evening of October 15, 2026, Pacific time, we observed 259 lifts. The middle lift lasted 243 seconds (about 4 minutes) and the longest 751 seconds. Most started between 9 AM and 3 PM. The city's feed can miss a lift or split one in two, so treat these as counts of what we observed. We will share record-level samples once the source terms are settled.</p>
+  
+  <p class="lead">Crash posting times are published as state summaries on <a href="/how-long-do-crashes-take-to-clear/">How long do crashes take to clear?</a> That page covers 15,961 crashes in 36 states and provinces from September 25 to October 16, 2026. A history file would carry the same measure, per crash.</p>
 </section>
 
 <section class="api-section">
   <h2>Prices</h2>
-  <p class="pricing-note">The same plans as the API page. History files are in Business and Enterprise.</p>
+  <p class="pricing-note">The same plans as the API page. History files are not part of any plan yet.</p>
   <div class="pricing-scroll"><div class="pricing-grid">
     <div class="price-card"><div class="price-tier">Developer</div><div class="price-amt">$0</div><div class="price-desc">Try it and build a small app.</div>
-      <ul class="price-feat"><li>1,000 calls / day</li><li>Live alerts and nearest mile marker</li><li>Attribution required</li><li>No history files</li></ul>
+      <ul class="price-feat"><li>1,000 calls / day</li><li>Live alerts and nearest mile marker</li><li>Attribution required</li></ul>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Developer%20key">Get a key</a></div>
     <div class="price-card featured"><div class="price-tier">Business</div><div class="price-amt">$499 <span>/ month</span></div><div class="price-desc">For a product that uses the data every day.</div>
-      <ul class="price-feat"><li>100,000 calls / day</li><li>Every endpoint</li><li>History files for cleared sources</li><li>Invoiced monthly</li></ul>
+      <ul class="price-feat"><li>100,000 calls / day</li><li>Every endpoint</li><li>Invoiced monthly</li></ul>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Business%20plan">Get started</a></div>
     <div class="price-card"><div class="price-tier">Enterprise</div><div class="price-amt">By quote</div><div class="price-desc">Annual licence with volume and terms written for you.</div>
-      <ul class="price-feat"><li>More than 100,000 calls / day</li><li>Bulk history files and archives</li><li>Service-level agreement</li><li>Named contact</li></ul>
+      <ul class="price-feat"><li>More than 100,000 calls / day</li><li>Service-level agreement</li><li>Named contact</li></ul>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Enterprise%20data%20licence">Talk to us</a></div>
   </div></div>
-  <p class="lead" style="margin-top:14px">Researchers who will cite us get the history files at no charge. Ask.</p>
+  <p class="lead" style="margin-top:14px">Researchers and reporters: tell us what records would help your work. We will say what we can share.</p>
 </section>
 
 <section class="api-section">
   <h2>What we do not sell, and why</h2>
   <div class="faq">
-    <details open><summary>Any state whose terms we have not confirmed</summary><p>A feed being public and keyless does not mean the agency allows resale. We check each agency's reuse terms and sell a state's history only when they are clear, or when the agency says yes in writing. Ask us which states are cleared today.</p></details>
+    <details open><summary>Any source whose terms we have not confirmed</summary><p>A feed being public and keyless does not mean the agency allows resale. We check each agency's reuse terms and sell a state's history only when they are clear, or when the agency says yes in writing. Ask us which states are cleared today.</p></details>
     <details><summary>North Dakota</summary><p>North Dakota DOT says its feed files are for processing only and not for public-facing use. We do not include it.</p></details>
     <details><summary>Camera images</summary><p>Some camera images belong to third parties, and the agencies' terms differ. We do not sell camera images or our incident camera archive.</p></details>
     <details><summary>Official closure orders and legal restrictions</summary><p>Our data follows the agency feeds and can be late or wrong. It is not a source for a closure order. Where it matters, use the agency's own site.</p></details>
@@ -239,7 +181,7 @@
 </section>
 
 <section class="api-section">
-  <div class="cta"><h3>Want a sample for your corridor?</h3><p>Tell us the state, route or bridge. We send a real sample and the source terms that apply to it.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Data%20sample">Email sales@milecheckapp.com</a></div>
+  <div class="cta"><h3>Want a sample for your corridor?</h3><p>Tell us the state, route or bridge. We will say whether it is cleared and what we can send.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Data%20sample">Email sales@milecheckapp.com</a></div>
 </section>
 
 <section class="mc-values" style="max-width:760px;margin:34px auto 30px;padding:24px 20px 6px;border-top:1px solid #e3e0d6">
