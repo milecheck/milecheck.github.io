@@ -19,12 +19,15 @@ const track = (partner, placement) =>
   `onclick="window.gtag&&gtag('event','affiliate_click',{partner:'${partner}',placement:'${placement}',page_path:location.pathname})"`;
 const link = 'style="color:#0f7a4f;text-decoration:underline;font-weight:600"';
 
-const card = `${START}
+const EXTRA = {
+  'corridors/i-5': `<p style="margin:0 0 6px">Driving around Seattle: SR 520, the SR 99 tunnel and the I-405 express lanes are tolled. See the <a href="/rental-car-toll-pass/" ${link}>Washington section of the toll guide</a>.</p>`,
+};
+const card = (extra = '') => `${START}
 <section class="mc-rental" aria-label="Renting a car" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">
   <div style="border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5">
     <div style="font-weight:700;font-size:16px;margin-bottom:6px">Renting a car for this drive?</div>
     <p style="margin:0 0 6px">Rental companies charge different fees for toll passes and for coverage. Check both before you book.</p>
-    <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
+${extra}    <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
       <li style="margin:2px 0"><a href="/rental-car-toll-pass/" ${link}>Should you get the rental car’s toll pass?</a></li>
       <li style="margin:2px 0"><a href="/rental-car-insurance-credit-card/" ${link}>Should you buy rental insurance or use your credit card?</a></li>
       <li style="margin:2px 0"><a href="${DISCOVER_CARS}" target="_blank" rel="sponsored nofollow noopener" ${track('discovercars', 'rental-card')} ${link}>Search rentals on Discover Cars</a></li>
@@ -41,9 +44,9 @@ for (const p of PAGES) {
   if (!existsSync(f)) { missing++; continue; }
   let s = readFileSync(f, 'utf8');
   const re = new RegExp(`${START}[\\s\\S]*?${END}\\n?`);
-  if (re.test(s)) { const n = s.replace(re, card); if (n !== s) { writeFileSync(f, n); updated++; } continue; }
+  if (re.test(s)) { const n = s.replace(re, card(EXTRA[p])); if (n !== s) { writeFileSync(f, n); updated++; } continue; }
   const i = s.includes('<!-- gear-card -->') ? s.indexOf('<!-- gear-card -->') : s.search(/<footer[\s>]/);
   if (i < 0) { missing++; continue; }
-  writeFileSync(f, s.slice(0, i) + card + '\n' + s.slice(i)); added++;
+  writeFileSync(f, s.slice(0, i) + card(EXTRA[p]) + '\n' + s.slice(i)); added++;
 }
 console.log(`rental cards: ${added} added, ${updated} updated, ${missing} skipped`);
