@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+
+
+
+
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MileCheck Data Plan: History Files and API</title>
+  <meta name="description" content="What MileCheck sells as data, what each product is, a real sample, prices, and what we do not sell and why.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://milecheckapp.com/api/plan/">
+  <meta property="og:title" content="MileCheck Data Plan">
+  <meta property="og:description" content="History files and an API for road data. What we sell and what we do not.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/api/plan/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+
+
+  <style>
+    .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
+    .api-hero .eyebrow{font:800 13px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;margin-bottom:10px;}
+    .api-hero h1{font-size:clamp(30px,5.5vw,48px);line-height:1.1;margin:0 0 14px;letter-spacing:-0.01em;}
+    .api-hero p.sub{font-size:18px;line-height:1.6;color:#3a444d;max-width:62ch;margin:0 auto 10px;}
+    .api-hero p.value{font-size:15px;color:#5b6670;max-width:60ch;margin:0 auto 26px;}
+    .api-hero .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
+    .api-hero .btns a{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;}
+    .api-hero .btns a.primary{background:#0f7a4f;color:#fff;}
+    .api-hero .btns a.ghost{border:1.5px solid #0F1419;color:#0F1419;}
+
+    .api-section{max-width:960px;margin:0 auto;padding:36px 20px;}
+    .api-section h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 8px;letter-spacing:-0.01em;}
+    .api-section p.lead{font-size:15.5px;color:#3a444d;line-height:1.65;max-width:70ch;margin:0 0 22px;}
+
+    .value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    @media(max-width:860px){.value-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:520px){.value-grid{grid-template-columns:1fr;}}
+    .value-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px 16px;}
+    .value-card h3{font-size:15px;margin:0 0 6px;color:#0E1116;}
+    .value-card p{font-size:13.5px;color:#5b6670;line-height:1.55;margin:0;}
+
+    .ep-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;margin-bottom:20px;}
+    .ep-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+    .ep-method{font:800 12.5px 'JetBrains Mono',monospace;background:#0f7a4f;color:#fff;padding:3px 9px;border-radius:6px;letter-spacing:.03em;}
+    .ep-path{font:700 16px 'JetBrains Mono',monospace;color:#0E1116;}
+    .ep-desc{font-size:14.5px;color:#5b6670;margin:6px 0 14px;line-height:1.6;}
+    .ep-params{font-size:13.5px;color:#3a444d;margin:0 0 14px;line-height:1.7;}
+    .ep-params code{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;}
+    .ep-label{font:700 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#8A939B;margin:14px 0 6px;}
+    .ep-label:first-of-type{margin-top:0;}
+    pre.codeblock{background:#0E1116;color:#e6f4ec;border-radius:10px;padding:14px 16px;overflow-x:auto;font:13px/1.6 'JetBrains Mono',monospace;margin:0;}
+    pre.codeblock .cmt{color:#7a8790;}
+
+    .auth-note{border:1px dashed #c9c6b8;border-radius:12px;background:#FBFAF5;padding:14px 16px;font-size:13.5px;color:#3a444d;line-height:1.6;margin-bottom:24px;}
+    .auth-note code{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;}
+
+    .try-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;}
+    .try-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;}
+    @media(max-width:640px){.try-grid{grid-template-columns:1fr;}}
+    .try-field label{display:block;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.03em;color:#5b6670;margin-bottom:5px;}
+    .try-field input{width:100%;padding:10px 12px;border:1px solid #c9c6b8;border-radius:9px;font-size:14px;font-family:inherit;box-sizing:border-box;}
+    .try-field input:focus{outline:2px solid #0f7a4f;outline-offset:1px;}
+    .try-btn{background:#0f7a4f;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:700;font-size:14.5px;cursor:pointer;}
+    .try-btn:hover{background:#0c6540;}
+    .try-out{margin-top:14px;background:#0E1116;color:#e6f4ec;border-radius:10px;padding:14px 16px;font:12.5px/1.6 'JetBrains Mono',monospace;overflow-x:auto;white-space:pre-wrap;word-break:break-word;min-height:44px;}
+    .try-note{font-size:12.5px;color:#8A939B;margin-top:10px;}
+    .try-note a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+
+    .pricing-note{font-size:13px;color:#8A939B;font-style:italic;margin-bottom:18px;}
+    .pricing-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:14px;min-width:680px;}
+    @media(max-width:720px){.pricing-grid{min-width:0;grid-template-columns:1fr;}}
+    .price-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;display:flex;flex-direction:column;}
+    .price-card.featured{border-color:#0f7a4f;box-shadow:0 6px 20px rgba(15,122,79,.12);}
+    .price-tier{font:700 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#8A939B;margin-bottom:6px;}
+    .price-card.featured .price-tier{color:#0f7a4f;}
+    .price-amt{font-size:28px;font-weight:800;color:#0E1116;margin-bottom:2px;}
+    .price-amt span{font-size:14px;font-weight:600;color:#8A939B;}
+    .price-desc{font-size:13.5px;color:#5b6670;margin:6px 0 16px;line-height:1.5;min-height:34px;}
+    .price-feat{list-style:none;padding:0;margin:0 0 18px;font-size:13.5px;color:#3a444d;line-height:1.9;flex-grow:1;}
+    .price-feat li:before{content:"✓ ";color:#0f7a4f;font-weight:800;}
+    .price-cta{display:block;text-align:center;padding:10px 16px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;}
+    .price-card.featured .price-cta{background:#0f7a4f;color:#fff;}
+    .price-card:not(.featured) .price-cta{border:1.5px solid #0F1419;color:#0F1419;}
+
+    .faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .faq summary{font-weight:700;font-size:15.5px;cursor:pointer;}
+    .faq p{margin:10px 0 0;font-size:14.5px;color:#3a444d;line-height:1.65;}
+
+    .cta{border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);padding:26px 22px;margin:8px 0 4px;text-align:center;}
+    .cta h3{font-size:21px;margin:0 0 8px;}
+    .cta p{font-size:15px;color:#3a444d;margin:0 auto 16px;max-width:520px;}
+  </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b" aria-current="page">B2B</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+<section class="api-hero">
+  <div class="eyebrow">Data plan</div>
+  <h1>Road data, as history files and an API</h1>
+  <p class="sub">MileCheck reads the live traffic feeds of all 50 state DOTs and three Canadian provinces. We also keep a log of when each record appeared and when it went away. That log is what we offer, next to the live API.</p>
+  <p class="value">This page says what is for sale, what is not, and why. The live API is on the <a href="/api/">API page</a>.</p>
+</section>
+
+<section class="api-section">
+  <h2>Three history products</h2>
+  <p class="lead">Each one is built from our own log. Each is offered only for sources whose owners allow it. If a state or a feed is not cleared, it is not in the file.</p>
+  <div class="value-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="value-card"><h3>Drawbridge lift history</h3><p>Every raise and lower of the Seattle drawbridges that Seattle DOT reports, with the length of each lift. Counts by hour, median and longest lift, and the full list of lifts. Daily file or API.</p></div>
+    <div class="value-card"><h3>Crash posting times</h3><p>For each crash on a state DOT feed, when it first appeared and when it came off, by state, route and hour. This is how long the agency kept it posted. It is not a measured clearance time, and every file says so.</p></div>
+    <div class="value-card"><h3>Closure history by route</h3><p>Closures and hazards by route, mile range and season. It separates a closure posted for 82 minutes from one posted for five days, which a "closed now" feed cannot do.</p></div>
+  </div>
+</section>
+
+<section class="api-section">
+  <h2>Real sample: the Ballard Bridge</h2>
+  <p class="lead">The 30 days to the evening of October 15, 2026, Pacific time. It lifted 259 times. The middle lift lasted 243 seconds (about 4 minutes) and the longest 751 seconds. Most lifts start between 9 AM and 3 PM. The data is from our own log of the city's live bridge status.</p>
+  <div class="ep-card">
+    <div class="ep-label">Response</div>
+    <pre class="codeblock">{
+  "bridge": "Ballard Bridge",
+  "citation": "33 CFR 117.1051",
+  "window": {
+    "from": "2026-09-16T00:00:00Z",
+    "to": "2026-10-16T00:00:00Z",
+    "hours_timezone": "America/Los_Angeles"
+  },
+  "lifts": 259,
+  "median_duration_sec": 243,
+  "p90_duration_sec": 439,
+  "longest_duration_sec": 751,
+  "lifts_by_local_hour": [
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    8,
+    2,
+    7,
+    28,
+    20,
+    28,
+    16,
+    18,
+    24,
+    22,
+    9,
+    6,
+    23,
+    18,
+    10,
+    3,
+    5,
+    1
+  ],
+  "recent": [
+    {
+      "raised_at": "2026-10-15T20:49:53Z",
+      "lowered_at": "2026-10-15T20:52:47Z",
+      "duration_sec": 174
+    },
+    {
+      "raised_at": "2026-10-15T22:19:22Z",
+      "lowered_at": "2026-10-15T22:22:36Z",
+      "duration_sec": 194
+    },
+    {
+      "raised_at": "2026-10-15T22:41:20Z",
+      "lowered_at": "2026-10-15T22:50:45Z",
+      "duration_sec": 565
+    }
+  ]
+}</pre>
+  </div>
+  <p class="lead">Crash posting times are published as state summaries on <a href="/how-long-do-crashes-take-to-clear/">How long do crashes take to clear?</a> That page covers 16,436 crashes in 36 states from September 25 to October 16, 2026. The history file carries the same measure, per crash.</p>
+</section>
+
+<section class="api-section">
+  <h2>Prices</h2>
+  <p class="pricing-note">The same plans as the API page. History files are in Business and Enterprise.</p>
+  <div class="pricing-scroll"><div class="pricing-grid">
+    <div class="price-card"><div class="price-tier">Developer</div><div class="price-amt">$0</div><div class="price-desc">Try it and build a small app.</div>
+      <ul class="price-feat"><li>1,000 calls / day</li><li>Live alerts and nearest mile marker</li><li>Attribution required</li><li>No history files</li></ul>
+      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Developer%20key">Get a key</a></div>
+    <div class="price-card featured"><div class="price-tier">Business</div><div class="price-amt">$499 <span>/ month</span></div><div class="price-desc">For a product that uses the data every day.</div>
+      <ul class="price-feat"><li>100,000 calls / day</li><li>Every endpoint</li><li>History files for cleared sources</li><li>Invoiced monthly</li></ul>
+      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Business%20plan">Get started</a></div>
+    <div class="price-card"><div class="price-tier">Enterprise</div><div class="price-amt">By quote</div><div class="price-desc">Annual licence with volume and terms written for you.</div>
+      <ul class="price-feat"><li>More than 100,000 calls / day</li><li>Bulk history files and archives</li><li>Service-level agreement</li><li>Named contact</li></ul>
+      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Enterprise%20data%20licence">Talk to us</a></div>
+  </div></div>
+  <p class="lead" style="margin-top:14px">Researchers who will cite us get the history files at no charge. Ask.</p>
+</section>
+
+<section class="api-section">
+  <h2>What we do not sell, and why</h2>
+  <div class="faq">
+    <details open><summary>Any state whose terms we have not confirmed</summary><p>A feed being public and keyless does not mean the agency allows resale. We check each agency's reuse terms and sell a state's history only when they are clear, or when the agency says yes in writing. Ask us which states are cleared today.</p></details>
+    <details><summary>North Dakota</summary><p>North Dakota DOT says its feed files are for processing only and not for public-facing use. We do not include it.</p></details>
+    <details><summary>Camera images</summary><p>Some camera images belong to third parties, and the agencies' terms differ. We do not sell camera images or our incident camera archive.</p></details>
+    <details><summary>Official closure orders and legal restrictions</summary><p>Our data follows the agency feeds and can be late or wrong. It is not a source for a closure order. Where it matters, use the agency's own site.</p></details>
+    <details><summary>Anything about people</summary><p>We sell road data. We do not collect or sell data about app users.</p></details>
+  </div>
+</section>
+
+<section class="api-section">
+  <div class="cta"><h3>Want a sample for your corridor?</h3><p>Tell us the state, route or bridge. We send a real sample and the source terms that apply to it.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Data%20sample">Email sales@milecheckapp.com</a></div>
+</section>
+
+<section class="mc-values" style="max-width:760px;margin:34px auto 30px;padding:24px 20px 6px;border-top:1px solid #e3e0d6">
+  <h2 style="font-size:24px;margin:0 0 8px">Our mission</h2>
+  <p style="font-size:16px;line-height:1.7;margin:0 0 18px">Become the trusted source for road information across North America, from today&rsquo;s closures to next season&rsquo;s roadwork.</p>
+  <h2 style="font-size:24px;margin:0 0 8px">What we do</h2>
+  <p style="font-size:16px;line-height:1.7;margin:0 0 18px">We put every state&rsquo;s Department of Transportation data in one place, on your phone, in your car and in your browser.</p>
+  <h2 style="font-size:24px;margin:0 0 10px">Our values</h2>
+  <ul style="margin:0 0 14px;padding-left:20px;font-size:16px;line-height:1.7">
+    <li style="margin-bottom:8px"><strong>No ads in the app.</strong> Our website is free to use, so it has a clearly marked sponsor slot to help pay for it, without pop-ups.</li>
+    <li style="margin-bottom:8px"><strong>Road data, not your data.</strong> We collect road data from state DOTs, not data about you. You don&rsquo;t need an account, your mile marker is calculated on your phone, your trip history stays there, and we never sell your data.</li>
+    <li style="margin-bottom:8px"><strong>Only what&rsquo;s needed.</strong> Weather sends your approximate location to the National Weather Service, route planning sends your location and destination to Google, and wildfire alerts send a location rounded to about 7 miles only if you turn them on. Sentry receives anonymous crash reports, we count feature use without location or identity, and Apple or Google handles subscriptions.</li>
+    <li style="margin-bottom:8px"><strong>Built for real roads.</strong> Nearly every feature exists because someone on a real road asked for it.</li>
+  </ul>
+  <p style="font-size:15px">More in our <a href="https://milecheck.github.io/milecheck-privacy/" style="color:#0f7a4f;text-decoration:underline">privacy policy</a> and <a href="/#story" style="color:#0f7a4f;text-decoration:underline">our story</a>.</p>
+</section>
+<!-- values:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=api&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dapi" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Learn more</p>
+          <ul class="footer-list">
+            <li><a href="/what-is-my-mile-marker/">What is my mile marker?</a></li>
+            <li><a href="/cameras/">Highway cameras</a></li>
+            <li><a href="/passes/">Mountain passes</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+</body>
+</html>
