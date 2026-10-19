@@ -177,14 +177,14 @@ ${PORTALS.map(p => `      <li><a href="${esc(p[2])}" target="_blank" rel="noopen
     <h2>How does state DOT hiring work?</h2>
     <p>Rules differ by state and by agency. Most of what is published below comes from Oregon. Check your own state's rules.</p>
     <ul>
-      <li><strong>Applications are scored against the posting.</strong> ODOT says it scores applications against the "What we'd like to see" list in each posting, so answer every item with specific experience. <a href="https://www.oregon.gov/odot/about/pages/applicant-information.aspx" target="_blank" rel="noopener">ODOT applicant information</a>.</li>
+      <li><strong>Applications are scored against the posting.</strong> Oregon DOT says it scores applications against the "What we'd like to see" list in each posting, so answer every item with specific experience. <a href="https://www.oregon.gov/odot/about/pages/applicant-information.aspx" target="_blank" rel="noopener">Oregon DOT applicant information</a>.</li>
       <li><strong>Seasonal and permanent jobs may have separate postings.</strong> Apply to each position you want.</li>
       <li><strong>Veterans get preference in Oregon.</strong> Oregon gives qualifying veterans and other eligible servicemembers hiring preference. For scored evaluations it is generally 5 percentage points, or 10 for disabled veterans. ORS 408.237 generally requires interviews for veteran applicants who show the required qualifications and skills, with a limited exception. See Oregon's <a href="https://www.oregon.gov/boli/workers/pages/veterans-preference.aspx" target="_blank" rel="noopener">veterans' preference page</a>, ORS 408.230 and ORS 408.237. Other states have their own laws.</li>
       <li><strong>State hiring follows written policy.</strong> Oregon's is <a href="https://www.oregon.gov/das/Policies/40-010-02.pdf" target="_blank" rel="noopener">DAS policy 40.010.02</a>.</li>
-      <li><strong>You can ask for feedback.</strong> ODOT postings include a recruitment contact. If you are not selected, you can ask how to strengthen a future application. They may not be able to give detailed feedback.</li>
+      <li><strong>You can ask for feedback.</strong> Oregon DOT postings include a recruitment contact. If you are not selected, you can ask how to strengthen a future application. They may not be able to give detailed feedback.</li>
     </ul>
     <p>We do not know how any agency scores interviews beyond what it publishes.</p>
-    <p style="font-size:14px;color:#5b6670">Sources are ODOT's Workday careers site (read ${esc(readOn('OR'))}) and MnDOT's current job openings page (read ${esc(readOn('MN'))}). Closing dates and pay come from the postings. Check the posting before you apply.</p>
+    <p style="font-size:14px;color:#5b6670">Sources are Oregon DOT's Workday careers site (read ${esc(readOn('OR'))}) and MnDOT's current job openings page (read ${esc(readOn('MN'))}). Closing dates and pay come from the postings. Check the posting before you apply.</p>
 
     <div class="cta">
       <h3>Already on a DOT crew?</h3>
