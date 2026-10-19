@@ -9,12 +9,12 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MileCheck Data Plan: History Files and API</title>
-  <meta name="description" content="What MileCheck sells as data, what each product is, a real sample, prices, and what we do not sell and why.">
+  <title>What road data can I buy from MileCheck?</title>
+  <meta name="description" content="MileCheck sells live road data and records of past closures, crashes and bridge lifts. What each is, what it is for, and what it costs.">
   <meta name="robots" content="noindex,nofollow">
   <link rel="canonical" href="https://milecheckapp.com/api/plan/">
-  <meta property="og:title" content="MileCheck Data Plan">
-  <meta property="og:description" content="History files and an API for road data. What we sell and what we do not.">
+  <meta property="og:title" content="What road data can I buy from MileCheck?">
+  <meta property="og:description" content="Live road data and records of past closures, crashes and bridge lifts.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/api/plan/">
   <meta property="og:type" content="website">
@@ -129,60 +129,54 @@
 <!-- /site-nav:header -->
 
 <section class="api-hero">
-  <div class="eyebrow">Data plan</div>
-  <h1>Road data, as history files and an API</h1>
-  <p class="sub"><strong>Drawbridge lift history is the one we would offer first.</strong> It comes from one source, Seattle DOT, and we need the city to confirm we may license it. The crash and closure products need each state agency to confirm the same thing.</p>
-  <p class="sub">MileCheck reads the live traffic feeds of all 50 state DOTs and three Canadian provinces. We also keep a log of when we first and last saw each record. We plan to offer that log, next to the live API.</p>
-  <p class="value">This page says what is for sale, what is not, and why. The live API is on the <a href="/api/">API page</a>.</p>
+  <div class="eyebrow">Road data</div>
+  <h1>What road data can I buy from MileCheck?</h1>
+  <p class="sub">Two things. Live road data, and records of what happened on the road in the past. Both come from the traffic feeds of all 50 state DOTs and three Canadian provinces, in one format.</p>
+  <p class="value">The live data is on the <a href="/api/">API page</a>. This page is about the records of the past.</p>
 </section>
 
 <section class="api-section">
-  <h2>Three history products we are preparing</h2>
-  <p class="lead">None of these is on sale yet. Each is built from our own log, and each will be offered only for sources whose owners confirm in writing that we may license it. Until then, we are taking questions, not orders.</p>
+  <h2>Records of the past</h2>
+  <p class="lead">A live feed shows what is happening now. It forgets the rest. We keep a log of when each closure, crash and bridge lift appeared and when it ended, so you can ask how long things usually last.</p>
   <div class="value-grid" style="grid-template-columns:repeat(3,1fr)">
-    <div class="value-card"><h3>Drawbridge lift history</h3><p>Bridge raises and lowers that MileCheck observed on the Seattle drawbridges Seattle DOT reports, with the length of each lift. Counts by hour, median and longest lift. Gaps in the city feed show up as gaps in the log.</p></div>
-    <div class="value-card"><h3>Crash posting times</h3><p>For each crash on a state DOT feed, when MileCheck first saw it and when it was no longer on a later check, by state, route and hour. We check about every 16 minutes. This is how long the agency kept it posted. It is not a measured clearance time, and every file says so.</p></div>
-    <div class="value-card"><h3>Closure history by route</h3><p>Closures and hazards by route, mile range and season. It separates a closure posted for 82 minutes from one posted for five days, which a "closed now" feed cannot do.</p></div>
+    <div class="value-card"><h3>How long is a bridge up?</h3><p>In the 30 days to October 15, 2026, we saw the Ballard Bridge in Seattle lift 259 times. The middle lift lasted about 4 minutes and the longest 12. Most started between 9 AM and 3 PM.</p></div>
+    <div class="value-card"><h3>How long does a crash stay posted?</h3><p>Across 15,961 crashes in 36 states and provinces, from September 25 to October 16, 2026, the middle crash stayed on the DOT feed for 48 minutes. We have it by state, route and hour.</p></div>
+    <div class="value-card"><h3>Is this closure short or long?</h3><p>In October, two closures on the same Washington highway were posted for 82 minutes and for about five days. A feed that only says "closed" cannot tell them apart. The log can.</p></div>
   </div>
-</section>
-
-<section class="api-section">
-  <h2>What the log looks like: the Ballard Bridge</h2>
-  <p class="lead">In the 30 days to the evening of October 15, 2026, Pacific time, we observed 259 lifts. The middle lift lasted 243 seconds (about 4 minutes) and the longest 751 seconds. Most started between 9 AM and 3 PM. The city's feed can miss a lift or split one in two, so treat these as counts of what we observed. We will share record-level samples once the source terms are settled.</p>
-  
-  <p class="lead">Crash posting times are published as state summaries on <a href="/how-long-do-crashes-take-to-clear/">How long do crashes take to clear?</a> That page covers 15,961 crashes in 36 states and provinces from September 25 to October 16, 2026. A history file would carry the same measure, per crash.</p>
+  <p class="lead" style="margin-top:18px"><strong>Who uses it.</strong> Routing and fleet software to set detour rules and arrival times. Insurers and claims teams checking what was posted near a route. Reporters and city planners counting bridge lifts and closures.</p>
+  <p class="lead"><strong>What the numbers are.</strong> They are what MileCheck saw when it checked each feed, about every 16 minutes. A crash that left the feed is not proof the road was clear. A feed can miss a lift or split one in two. Every file says this.</p>
+  <p class="lead"><strong>Which records you can get.</strong> It depends on the agency. We include a state or a bridge only after its owner confirms we may license the records. Ask us which are open today.</p>
 </section>
 
 <section class="api-section">
   <h2>Prices</h2>
-  <p class="pricing-note">The same plans as the API page. History files are not part of any plan yet.</p>
+  <p class="pricing-note">The live data plans are the same as on the API page. The records of the past are priced when we quote them.</p>
   <div class="pricing-scroll"><div class="pricing-grid">
     <div class="price-card"><div class="price-tier">Developer</div><div class="price-amt">$0</div><div class="price-desc">Try it and build a small app.</div>
       <ul class="price-feat"><li>1,000 calls / day</li><li>Live alerts and nearest mile marker</li><li>Attribution required</li></ul>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Developer%20key">Get a key</a></div>
     <div class="price-card featured"><div class="price-tier">Business</div><div class="price-amt">$499 <span>/ month</span></div><div class="price-desc">For a product that uses the data every day.</div>
-      <ul class="price-feat"><li>100,000 calls / day</li><li>Every endpoint</li><li>Invoiced monthly</li></ul>
+      <ul class="price-feat"><li>100,000 calls / day</li><li>Every live endpoint</li><li>Invoiced monthly</li></ul>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Business%20plan">Get started</a></div>
-    <div class="price-card"><div class="price-tier">Enterprise</div><div class="price-amt">By quote</div><div class="price-desc">Annual licence with volume and terms written for you.</div>
-      <ul class="price-feat"><li>More than 100,000 calls / day</li><li>Service-level agreement</li><li>Named contact</li></ul>
+    <div class="price-card"><div class="price-tier">Enterprise</div><div class="price-amt">By quote</div><div class="price-desc">Annual licence, with terms written for you.</div>
+      <ul class="price-feat"><li>More than 100,000 calls / day</li><li>Records of the past, where cleared</li><li>Service-level agreement</li><li>Named contact</li></ul>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Enterprise%20data%20licence">Talk to us</a></div>
   </div></div>
-  <p class="lead" style="margin-top:14px">Researchers and reporters: tell us what records would help your work. We will say what we can share.</p>
 </section>
 
 <section class="api-section">
   <h2>What we do not sell, and why</h2>
   <div class="faq">
-    <details open><summary>Any source whose terms we have not confirmed</summary><p>A feed being public and keyless does not mean the agency allows resale. We check each agency's reuse terms and sell a state's history only when they are clear, or when the agency says yes in writing. Ask us which states are cleared today.</p></details>
+    <details open><summary>Records from any source whose owner has not said yes</summary><p>A feed being public does not mean the agency lets us resell it. We check each agency's terms, and we ask when they are unclear.</p></details>
     <details><summary>North Dakota</summary><p>North Dakota DOT says its feed files are for processing only and not for public-facing use. We do not include it.</p></details>
-    <details><summary>Camera images</summary><p>Some camera images belong to third parties, and the agencies' terms differ. We do not sell camera images or our incident camera archive.</p></details>
-    <details><summary>Official closure orders and legal restrictions</summary><p>Our data follows the agency feeds and can be late or wrong. It is not a source for a closure order. Where it matters, use the agency's own site.</p></details>
+    <details><summary>Camera images</summary><p>Some camera images belong to third parties, and the agencies' terms differ.</p></details>
+    <details><summary>Official closure orders</summary><p>Our data follows the agency feeds and can be late or wrong. For anything legal, use the agency's own site.</p></details>
     <details><summary>Anything about people</summary><p>We sell road data. We do not collect or sell data about app users.</p></details>
   </div>
 </section>
 
 <section class="api-section">
-  <div class="cta"><h3>Want a sample for your corridor?</h3><p>Tell us the state, route or bridge. We will say whether it is cleared and what we can send.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Data%20sample">Email sales@milecheckapp.com</a></div>
+  <div class="cta"><h3>Tell us the state, route or bridge.</h3><p>We will say whether we can send it and what it would cost.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Road%20data%20records">Email sales@milecheckapp.com</a></div>
 </section>
 
 <section class="mc-values" style="max-width:760px;margin:34px auto 30px;padding:24px 20px 6px;border-top:1px solid #e3e0d6">
