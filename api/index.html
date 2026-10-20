@@ -110,6 +110,13 @@
 .shots figcaption{font-size:13.5px;line-height:1.5;color:#5b6670;margin-top:8px;text-align:left}
 @media(max-width:560px){.shots{grid-template-columns:minmax(0,1fr);gap:22px}.shots figure{max-width:320px;margin:0 auto}}
 </style>
+<style>
+.mocks{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.mock{margin:0}.mock img{display:block;width:100%;height:auto;border:1px solid #d9dedc;border-radius:12px}
+.mock a{display:block}.mock figcaption{font-size:14px;line-height:1.5;color:#3a444d;margin-top:8px}
+.mocks-h{font-size:19px;margin:22px 0 4px}
+.badge{display:inline-block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;background:#e6f4ec;color:#0f7a4f}.badge.dl{background:#eef0f7;color:#3b4a8a}
+</style>
 </head>
 <body>
 
@@ -189,6 +196,7 @@
     <div class="ep-card">
       <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/locate</span></div>
       <p class="ep-desc">Coordinates in, nearest highway mile marker out.</p>
+      <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/01-fleet-dispatch-mile-marker.webp" target="_blank" rel="noopener"><img src="/images/mockups/01-fleet-dispatch-mile-marker.webp" width="1200" height="771" loading="lazy" alt="Fleet dispatch screen: a map of I-90 in Montana with a truck at mile 47.3 eastbound and the lookup response beside it"></a><figcaption><span class="badge">API</span> <strong>Mile marker lookup.</strong> A fleet dispatch tool uses the lookup and the truck's GPS to read out its highway and mile. The same markers are also licensed as a file with no call limits.</figcaption></figure></div>
       <p class="ep-params"><code>lat</code> and <code>lon</code> required · <code>state</code> optional (2-letter code, narrows the search)</p>
 
       <p class="ep-label">Request</p>
@@ -210,6 +218,7 @@
     <div class="ep-card">
       <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/alerts</span></div>
       <p class="ep-desc">Live, normalized DOT road conditions and incidents for a state — closures, crashes, construction, road-weather.</p>
+      <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/05-work-zone-routing-app.webp" target="_blank" rel="noopener"><img src="/images/mockups/05-work-zone-routing-app.webp" width="1200" height="737" loading="lazy" alt="Routing app map of New Jersey with five numbered reported work zones and a list of each one"></a><figcaption><span class="badge">API</span> <strong>Work zones.</strong> A routing app shows reported work zones across part of New Jersey. Data from NJIT and TRANSCOM.</figcaption></figure></div>
       <p class="ep-params"><code>state</code> (2-letter code) <em>or</em> <code>lat</code> + <code>lon</code> required · <code>bbox=minLon,minLat,maxLon,maxLat</code> optional · <code>limit=N</code> optional</p>
 
       <p class="ep-label">Request</p>
@@ -304,6 +313,7 @@
     <div class="ep-card">
       <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/bridges/history</span></div>
       <p class="ep-desc">The lift log. MileCheck stamps every raise and lower it sees, so each bridge carries lifts this week and this month, the typical and longest lift, which hours it opens most, and the recent lifts with durations. Seattle today.</p>
+      <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/02-bridge-lift-planner.webp" target="_blank" rel="noopener"><img src="/images/mockups/02-bridge-lift-planner.webp" width="1200" height="677" loading="lazy" alt="Route planner for the Ballard Bridge in Seattle: 259 lifts in 30 days, a typical lift of 4 minutes, a chart of lifts by hour and the five Seattle drawbridges"></a><figcaption><span class="badge">API</span> <strong>Seattle bridge lift history.</strong> A route planner shows how often and how long the Ballard Bridge lifts, and which daytime hours had the fewest lifts in the last 30 days.</figcaption></figure></div>
       <p class="ep-params"><code>state=WA</code></p>
 
       <p class="ep-label">Request</p>
@@ -333,6 +343,12 @@
   </div>
 
   <!-- TRY IT -->
+  <div class="api-section">
+    <h2>Usage and keys</h2>
+    <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px"><figure class="mock"><a href="/images/mockups/08-api-console.webp" target="_blank" rel="noopener"><img src="/images/mockups/08-api-console.webp" width="1200" height="651" loading="lazy" alt="API console showing a key, 41,206 of 100,000 calls used today, calls by day and by endpoint, and the latest requests"></a><figcaption><span class="badge">API</span> <strong>Example usage dashboard.</strong> A key, today's calls against the daily limit, calls by day and endpoint, and the latest requests.</figcaption></figure></div>
+    <p class="lead" style="margin-top:12px">See all eight example screens on <a href="/api/plan/#screens">what road data you can buy</a>.</p>
+  </div>
+
   <div class="api-section" id="try">
     <h2>Try it</h2>
     <p class="lead">Live demo of <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">/v1/locate</code>. Drop in a key, adjust the coordinates, and hit Locate.</p>
@@ -452,6 +468,7 @@
         <li>Updates when a state's markers change</li>
         <li>Yearly license to display it in your product. No resale. A data license has no call limits.</li>
       </ul>
+      <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/07-data-license-delivery.webp" target="_blank" rel="noopener"><img src="/images/mockups/07-data-license-delivery.webp" width="1200" height="686" loading="lazy" alt="Customer data portal listing mile marker files by state in GeoJSON and CSV, monthly archive files and license terms with no call limits"></a><figcaption><span class="badge dl">Data license</span> <strong>Milepost dataset and Historical archive.</strong> Files by state in GeoJSON and CSV, monthly archive files, and terms with no call limits.</figcaption></figure></div>
       <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Mile-marker%20dataset%20licence%20%E2%80%94%20sample%20request">Ask for a sample</a>
     </div>
   </div>
