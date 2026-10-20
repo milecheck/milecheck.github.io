@@ -126,6 +126,12 @@
 .faq details{padding:10px 16px;margin-bottom:8px}.faq summary{font-size:15px}.faq p{margin-top:6px;font-size:14px}.faq a,.api-section p.lead a{color:#0f7a4f;font-weight:700}
 .badge{display:inline-block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;background:#e6f4ec;color:#0f7a4f}.badge.dl{background:#eef0f7;color:#3b4a8a}
 </style>
+<style>
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,300px));gap:18px;justify-content:center;margin:6px 0 4px}
+.shots figure{margin:0}.shots img{display:block;width:100%;height:auto;border:1px solid #E5E5E5;border-radius:22px}
+.shots figcaption{font-size:13.5px;line-height:1.5;color:#5b6670;margin-top:8px;text-align:left}
+@media(max-width:560px){.shots{grid-template-columns:minmax(0,1fr);gap:22px}.shots figure{max-width:320px;margin:0 auto}}
+</style>
 </head>
 <body>
 
@@ -185,6 +191,15 @@
       <tr><td><strong>Seattle bridge lift history</strong></td><td>Each raise and lower of Seattle's five drawbridges, with how long each lasted.</td><td><span class="badge">API</span> Business $299 a month<br><span class="badge dl">Data license</span> included in the Historical archive, priced by yearly quote</td></tr>
       <tr><td><strong>Historical archive</strong></td><td>Records of when road alerts appeared in our checks, by state, plus Seattle bridge lifts. Crashes and closures cover 36 states and provinces. Date ranges vary by source, so ask for yours.</td><td><span class="badge dl">Data license</span><br>Yearly quote</td></tr>
     </tbody></table></div>
+</section>
+
+<section class="api-section">
+  <h2>What the data looks like</h2>
+  <p class="lead">The same data runs MileCheck's own app, so these screens are real output.</p>
+  <div class="shots">
+    <figure><img src="/images/cs-2026-10-mile.webp" width="660" height="1434" loading="lazy" alt="MileCheck app showing I-90 East at mile 50.4, with the distance to the markers on each side"><figcaption><strong>Mile marker lookup.</strong> I-90 East, mile 50.4, 0.42 miles past marker 50. This is the answer the lookup returns, shown in our app.</figcaption></figure>
+    <figure><img src="/images/cs-2026-10-alerts.webp" width="660" height="1434" loading="lazy" alt="MileCheck app alerts list for Washington with two southbound crashes on I-5, each with route and mile marker"><figcaption><strong>Live alerts.</strong> Crashes grouped by route and direction, each with its mile marker, from the Washington DOT feed. The API returns the same alerts.</figcaption></figure>
+  </div>
 </section>
 
 <section class="api-section">
