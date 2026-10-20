@@ -11,8 +11,8 @@
   function mapLink(p){var q=new URLSearchParams({state:p.code,route:routeAlias(p),mp:String(p.mile)});return '/maps/mile-markers/?'+q.toString();}
   function name(p){return p.route+' · '+states.find(function(s){return s.code===p.code;}).name;}
   function away(n){return n<.1?'About '+Math.max(10,Math.round(n*5280/10)*10)+' feet away.':'About '+n.toFixed(1)+' miles away.';}
-  function fail(error){finish(error);event('unavailable');}
-  function clear(){status.className='';result.hidden=true;next.hidden=true;choices.replaceChildren();choices.hidden=true;}
+  function fail(error){finish(error);event('unavailable');var fa=doc.getElementById('marker-fail-app');if(fa)fa.hidden=false;}
+  function clear(){var fa=doc.getElementById('marker-fail-app');if(fa)fa.hidden=true;status.className='';result.hidden=true;next.hidden=true;choices.replaceChildren();choices.hidden=true;}
   // One-decimal estimate like the app: place the reader between the nearest recorded post and the next
   // post on the same road, by projecting onto the line between them. Falls back to the post's own number.
   var lastAll=[],lastCoords=null;

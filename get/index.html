@@ -72,10 +72,11 @@
       if (new URLSearchParams(location.search).has('choose')) return;
       var ua = navigator.userAgent || '';
       var target = null;
+      var camp = (new URLSearchParams(location.search).get('utm_campaign') || 'get').replace(/[^a-z0-9-]/gi, '').slice(0, 40) || 'get';
       if (/android/i.test(ua)) {
-        target = 'https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dget';
+        target = 'https://play.google' + '.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3D' + camp;
       } else if (/iphone|ipad|ipod/i.test(ua) && !window.MSStream) {
-        target = 'https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=get&mt=8';
+        target = 'https://apps.apple' + '.com/app/apple-store/id6759212851?pt=128447811&ct=' + camp + '&mt=8';
       }
       if (target) {
         document.getElementById('redirecting').style.display = 'block';
