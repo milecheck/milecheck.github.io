@@ -59705,3 +59705,43 @@ week,product,area,series,price
 2026-10-12,regular,"Washington",EMM_EPMR_PTE_SWA_DPG,5.377
 2026-10-12,regular,"West Coast (PADD 5)",EMM_EPMR_PTE_R50_DPG,5.639
 2026-10-12,regular,"West Coast less California",EMM_EPMR_PTE_R5XCA_DPG,5.071
+2026-10-19,diesel,"California",EMD_EPD2D_PTE_SCA_DPG,8.242
+2026-10-19,diesel,"Central Atlantic (PADD 1B)",EMD_EPD2D_PTE_R1Y_DPG,6.508
+2026-10-19,diesel,"East Coast (PADD1)",EMD_EPD2D_PTE_R10_DPG,5.984
+2026-10-19,diesel,"Gulf Coast (PADD 3)",EMD_EPD2D_PTE_R30_DPG,5.903
+2026-10-19,diesel,"Lower Atlantic (PADD 1C)",EMD_EPD2D_PTE_R1Z_DPG,5.740
+2026-10-19,diesel,"Midwest (PADD 2)",EMD_EPD2D_PTE_R20_DPG,6.352
+2026-10-19,diesel,"New England (PADD 1A)",EMD_EPD2D_PTE_R1X_DPG,6.470
+2026-10-19,diesel,"Rocky Mountain (PADD 4)",EMD_EPD2D_PTE_R40_DPG,6.422
+2026-10-19,diesel,"U.S.",EMD_EPD2D_PTE_NUS_DPG,6.276
+2026-10-19,diesel,"West Coast (PADD 5)",EMD_EPD2D_PTE_R50_DPG,7.394
+2026-10-19,diesel,"West Coast less California",EMD_EPD2D_PTE_R5XCA_DPG,6.659
+2026-10-19,regular,"Boston",EMM_EPMR_PTE_YBOS_DPG,4.249
+2026-10-19,regular,"California",EMM_EPMR_PTE_SCA_DPG,6.031
+2026-10-19,regular,"Central Atlantic (PADD 1B)",EMM_EPMR_PTE_R1Y_DPG,4.312
+2026-10-19,regular,"Chicago",EMM_EPMR_PTE_YORD_DPG,4.705
+2026-10-19,regular,"Cleveland",EMM_EPMR_PTE_YCLE_DPG,4.090
+2026-10-19,regular,"Colorado",EMM_EPMR_PTE_SCO_DPG,4.274
+2026-10-19,regular,"Denver",EMM_EPMR_PTE_YDEN_DPG,4.244
+2026-10-19,regular,"East Coast (PADD1)",EMM_EPMR_PTE_R10_DPG,4.064
+2026-10-19,regular,"Florida",EMM_EPMR_PTE_SFL_DPG,3.981
+2026-10-19,regular,"Gulf Coast (PADD 3)",EMM_EPMR_PTE_R30_DPG,3.784
+2026-10-19,regular,"Houston",EMM_EPMR_PTE_Y44HO_DPG,3.710
+2026-10-19,regular,"Los Angeles",EMM_EPMR_PTE_Y05LA_DPG,6.021
+2026-10-19,regular,"Lower Atlantic (PADD 1C)",EMM_EPMR_PTE_R1Z_DPG,3.860
+2026-10-19,regular,"Massachusetts",EMM_EPMR_PTE_SMA_DPG,4.202
+2026-10-19,regular,"Miami",EMM_EPMR_PTE_YMIA_DPG,4.079
+2026-10-19,regular,"Midwest (PADD 2)",EMM_EPMR_PTE_R20_DPG,4.145
+2026-10-19,regular,"Minnesota",EMM_EPMR_PTE_SMN_DPG,4.180
+2026-10-19,regular,"New England (PADD 1A)",EMM_EPMR_PTE_R1X_DPG,4.249
+2026-10-19,regular,"New York City",EMM_EPMR_PTE_Y35NY_DPG,4.249
+2026-10-19,regular,"New York",EMM_EPMR_PTE_SNY_DPG,4.313
+2026-10-19,regular,"Ohio",EMM_EPMR_PTE_SOH_DPG,4.049
+2026-10-19,regular,"Rocky Mountain (PADD 4)",EMM_EPMR_PTE_R40_DPG,4.468
+2026-10-19,regular,"San Francisco",EMM_EPMR_PTE_Y05SF_DPG,6.001
+2026-10-19,regular,"Seattle",EMM_EPMR_PTE_Y48SE_DPG,5.527
+2026-10-19,regular,"Texas",EMM_EPMR_PTE_STX_DPG,3.704
+2026-10-19,regular,"U.S.",EMM_EPMR_PTE_NUS_DPG,4.284
+2026-10-19,regular,"Washington",EMM_EPMR_PTE_SWA_DPG,5.332
+2026-10-19,regular,"West Coast (PADD 5)",EMM_EPMR_PTE_R50_DPG,5.557
+2026-10-19,regular,"West Coast less California",EMM_EPMR_PTE_R5XCA_DPG,5.007
