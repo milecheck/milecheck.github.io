@@ -28,6 +28,20 @@
     var button = header.querySelector('.mc-nav-toggle'), nav = header.querySelector('.mc-primary-nav');
     if (!button || !nav) return;
     header.setAttribute('data-nav-bound', 'true');
+    // Footer link to the business data page on every page that carries the shared nav.
+    try {
+      var here = (win.location.pathname || '').replace(/\/index\.html$/, '/');
+      var foot = doc.querySelector('.site-footer');
+      if (foot && here.indexOf('/api/plan/') !== 0 && !foot.querySelector('a[href="/api/plan/"]')) {
+        var lists = foot.querySelectorAll('.footer-list');
+        var host = lists.length ? lists[lists.length - 1] : null;
+        if (host) {
+          var li = doc.createElement('li'), a = doc.createElement('a');
+          a.href = '/api/plan/'; a.textContent = 'For businesses: API and data';
+          li.appendChild(a); host.insertBefore(li, host.firstChild);
+        }
+      }
+    } catch (e) { /* the footer link is optional */ }
     var links = Array.prototype.slice.call(nav.querySelectorAll('[data-nav-link]'));
     function syncActive() {
       var section = activeSection(win.location.pathname, win.location.hash);
