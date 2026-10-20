@@ -10,8 +10,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What road data can I buy from MileCheck?</title>
-  <meta name="description" content="Mile marker files for every state, live road alerts through an API, and records of how long closures, crashes and bridge lifts lasted. What each is and what it costs.">
-  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="What MileCheck sells to companies: mile marker files, a live road alerts API, and records of past alerts. API plans start at $0. Data licenses are a flat yearly fee.">
   <link rel="canonical" href="https://milecheckapp.com/api/plan/">
   <meta property="og:title" content="What road data can I buy from MileCheck?">
   <meta property="og:description" content="Live road data and records of past closures, crashes and bridge lifts.">
@@ -113,6 +112,15 @@
 .pricing-grid.two{grid-template-columns:repeat(2,1fr);min-width:0}@media(max-width:720px){.pricing-grid.two{grid-template-columns:1fr}}
 .api-hero p.value{margin-bottom:16px}
 </style>
+<style>
+.three-lines{max-width:62ch;margin:0 auto 14px;text-align:left;display:grid;gap:8px}
+.three-lines p{margin:0;font-size:17px;line-height:1.5;color:#3a444d}.three-lines strong{color:#0f7a4f}
+.defs{max-width:62ch;margin:0 auto 22px;font-size:15px;line-height:1.6;color:#3a444d;text-align:left;background:#fff;border:1px solid #E5E5E5;border-radius:12px;padding:12px 16px}
+.defs p{margin:0 0 6px}.defs p:last-child{margin:0}
+.tbl{overflow-x:auto}.tbl table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}.tbl th,.tbl td{border-bottom:1px solid #E5E5E5;padding:10px 12px;text-align:left;vertical-align:top;line-height:1.5}.tbl th{font:700 12px 'JetBrains Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#8A939B}
+@media(max-width:700px){.tbl table{min-width:0}.tbl thead{display:none}.tbl tr{display:block;border-bottom:1px solid #E5E5E5;padding:12px 0}.tbl td{display:block;border:0;padding:3px 0}}
+.badge{display:inline-block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;background:#e6f4ec;color:#0f7a4f}.badge.dl{background:#eef0f7;color:#3b4a8a}
+</style>
 </head>
 <body>
 
@@ -138,61 +146,70 @@
 <!-- /site-nav:header -->
 
 <section class="api-hero">
-  <div class="eyebrow">Road data</div>
+  <div class="eyebrow">Road data for companies</div>
   <h1>What road data can I buy from MileCheck?</h1>
-  <p class="sub">Highway mile markers for every US state and British Columbia, live road alerts through one API, and records of how long past alerts lasted. We sell them to companies that build fleet, dispatch, navigation, freight, insurance and media products.</p>
-  <p class="value">Mile markers come as a file you license for a flat monthly or yearly fee. Live alerts are priced by calls a day.</p>
-  <div class="btns"><a class="primary" href="mailto:sales@milecheckapp.com?subject=Road%20data">Email sales</a><a class="ghost" href="/api/">See the live API</a></div>
+  <div class="three-lines">
+    <p><strong>What we sell.</strong> Live road alerts and mile marker lookups through an API, and delivered files of mile markers and past road alerts.</p>
+    <p><strong>Who buys it.</strong> Fleet, dispatch, navigation, freight, insurance and media teams.</p>
+    <p><strong>What it costs.</strong> The API starts at $0 and Business is $299 a month. Data licenses are a flat yearly fee, quoted.</p>
+  </div>
+  <div class="defs">
+    <p><strong>API.</strong> Your software asks MileCheck for data when it needs it. Each request counts toward a daily limit, and you pay per month by calls.</p>
+    <p><strong>Data license.</strong> We deliver a file for your own systems. You pay a flat yearly fee, with no call limits.</p>
+  </div>
+  <div class="btns"><a class="primary" href="mailto:sales@milecheckapp.com?subject=Road%20data">Email sales</a><a class="ghost" href="/api/">See the API and test it</a></div>
 </section>
 
 <section class="api-section">
   <h2>What can I buy?</h2>
-  <div class="three">
-    <div class="ep-card"><div class="ep-label">Mile markers</div><p class="ep-desc">Every highway mile marker in all 50 states and British Columbia, by route and mile, as a GeoJSON and CSV file. You show it in your product for a flat monthly or yearly fee, with no call limits. We send an update when a state changes its markers. If you only need lookups, the API takes a GPS point and returns the highway, mile and direction.</p></div>
-    <div class="ep-card"><div class="ep-label">Live alerts and conditions</div><p class="ep-desc">Closures, crashes, construction and road weather from state and provincial DOT feeds. All 50 states plus British Columbia, Alberta and Manitoba, in one format through one API. Also active wildfires and Seattle drawbridge status. Priced by calls a day.</p></div>
-    <div class="ep-card"><div class="ep-label">Records of past alerts</div><p class="ep-desc">How long closures, crashes and Seattle drawbridge lifts lasted, by state and date range. Sent as a monthly file or through the API. In the 30 days to Oct 15, 2026, Seattle's Ballard Bridge lifted 259 times. The median lift was about 4 minutes.</p></div>
-  </div>
+  <p class="lead">Mile markers come both ways. Live road alerts are an API. Past alerts are a data license, and Seattle bridge lift history is also in the API.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Product</th><th>What you get</th><th>How you buy it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Mile marker lookup</strong></td><td>Send a GPS point, get the nearest highway and mile marker. Direction is included when we have it.</td><td><span class="badge">API</span><br>Developer $0 or Business $299 a month</td></tr>
+      <tr><td><strong>Milepost dataset</strong></td><td>Route, mile, latitude and longitude for every state and British Columbia, as GeoJSON and CSV. Updated when a state changes its markers. Show it in your product, no resale.</td><td><span class="badge dl">Data license</span><br>Yearly quote</td></tr>
+      <tr><td><strong>Live conditions API</strong></td><td>Road reports from all 50 states, British Columbia, Alberta and Manitoba in one format. Reports include closures, crashes, construction, chain controls and weather. Report types vary by source, and ten states do not publish crashes. Business also adds wildfires and drawbridge status.</td><td><span class="badge">API only</span><br>Developer $0 or Business $299 a month</td></tr>
+      <tr><td><strong>Seattle bridge lift history</strong></td><td>Each raise and lower of Seattle's five drawbridges, with how long each lasted.</td><td><span class="badge">API</span> Business $299 a month<br><span class="badge dl">Data license</span> inside the archive</td></tr>
+      <tr><td><strong>Historical archive</strong></td><td>Records of when road alerts appeared in our checks, by state, plus Seattle bridge lifts. Crashes and closures cover 36 states and provinces. Date ranges vary by source, so ask for yours.</td><td><span class="badge dl">Data license</span><br>Yearly quote</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="api-section">
+  <h2>What does it cost?</h2>
+  <h3 style="margin:0 0 8px">API plans <span class="badge">API</span></h3>
+  <p class="lead">Developer and Business have daily request limits. Only requests that reach our server count.</p>
+  <div class="pricing-scroll"><div class="pricing-grid">
+    <div class="price-card"><div class="price-tier">Developer</div><div class="price-amt">$0</div><div class="price-desc">For testing and small apps.</div>
+      <ul class="price-feat"><li>1,000 calls a day</li><li>Live alerts and the mile marker lookup</li><li>You credit MileCheck in your product</li><li>No support or SLA</li></ul>
+      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Developer%20key">Email for a key</a></div>
+    <div class="price-card featured"><div class="price-tier">Business</div><div class="price-amt">$299 <span>/ month</span></div><div class="price-desc">For a product that uses live data every day.</div>
+      <ul class="price-feat"><li>100,000 calls a day</li><li>Every endpoint, including wildfires, drawbridges and Seattle bridge lift history</li><li>Email support</li><li>Invoiced monthly</li></ul>
+      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Business%20plan">Email to start</a></div>
+    <div class="price-card"><div class="price-tier">Fleet and enterprise</div><div class="price-amt">By quote</div><div class="price-desc">For more than 100,000 calls a day.</div>
+      <ul class="price-feat"><li>Higher daily limit</li><li>Service-level agreement and priority support</li><li>A named contact</li><li>Invoiced yearly</li></ul>
+      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Fleet%20and%20enterprise%20plan">Email for a quote</a></div>
+  </div></div>
+  <h3 style="margin:26px 0 8px">Data licenses <span class="badge dl">Data license</span></h3>
+  <p class="lead">The Milepost dataset and the Historical archive are each a flat yearly fee. We quote it from how you use the data and how often you want updates. There are no call limits. Ask for a sample file before you decide.</p>
+  <div class="btns" style="justify-content:flex-start"><a class="primary" style="background:#0f7a4f;color:#fff;padding:10px 20px;border-radius:10px;text-decoration:none;font-weight:700" href="mailto:sales@milecheckapp.com?subject=Data%20license%20sample">Email for a sample and a price</a></div>
 </section>
 
 <section class="api-section">
   <h2>Who uses it?</h2>
   <div class="who">
-    <div><h3>Dispatch and emergency services</h3><p>Turn a caller's GPS point into the highway, mile marker and direction crews use. Use the file for your own maps, or the lookup for single calls.</p></div>
+    <div><h3>Dispatch and emergency services</h3><p>Turn a caller's GPS point into the highway and mile marker crews use. Use the API lookup for single calls, or the dataset for your own maps.</p></div>
     <div><h3>Fleet and routing software</h3><p>Show live closures and crashes in your dispatch screens through one API, instead of one connection per state.</p></div>
-    <div><h3>Navigation and traffic apps</h3><p>Put mile markers on your map from the file. Add live alerts from the API.</p></div>
-    <div><h3>Freight and logistics</h3><p>Use the records to see how long closures and crashes on your lanes lasted.</p></div>
-    <div><h3>Insurers and claims teams</h3><p>Use the records to see which closures and crashes were posted near a place around a date.</p></div>
-    <div><h3>Media, cities and researchers</h3><p>Use the records to count drawbridge lifts and road alerts by date. From Sept 25 to Oct 16, 2026 we recorded 15,961 crashes in 36 states and provinces. The median crash stayed posted 48 minutes.</p></div>
+    <div><h3>Navigation and traffic apps</h3><p>Put mile markers on your map from the dataset. Add live alerts from the API.</p></div>
+    <div><h3>Freight and logistics</h3><p>Use the archive to see how long closures and crashes on your lanes were posted.</p></div>
+    <div><h3>Insurers and claims teams</h3><p>Use the archive to see which closures and crashes were posted near a place around a date.</p></div>
+    <div><h3>Media, cities and researchers</h3><p>Use the archive to count drawbridge lifts and road alerts by date. In the 30 days to Oct 15, 2026, Seattle's Ballard Bridge lifted 259 times. The median lift was about 4 minutes.</p></div>
   </div>
 </section>
 
 <section class="api-section">
-  <h2>What does it cost?</h2>
-  <p class="lead">The live API is priced by calls a day, because live data changes by the minute. The mile marker lookup is included.</p>
-  <div class="pricing-scroll"><div class="pricing-grid">
-    <div class="price-card"><div class="price-tier">Developer</div><div class="price-amt">$0</div><div class="price-desc">For testing and small apps.</div>
-      <ul class="price-feat"><li>1,000 calls a day</li><li>Live alerts and the mile marker lookup</li><li>You credit MileCheck in your product</li><li>No support</li></ul>
-      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Developer%20key">Email for a key</a></div>
-    <div class="price-card featured"><div class="price-tier">Business</div><div class="price-amt">$299 <span>/ month</span></div><div class="price-desc">For a product that uses live data every day.</div>
-      <ul class="price-feat"><li>100,000 calls a day</li><li>Every live endpoint, including wildfires and Seattle bridges</li><li>Email support</li><li>Invoiced monthly</li></ul>
-      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Business%20plan">Email to start</a></div>
-    <div class="price-card"><div class="price-tier">Enterprise</div><div class="price-amt">By quote</div><div class="price-desc">For more than 100,000 calls a day.</div>
-      <ul class="price-feat"><li>Volume above Business</li><li>Service terms in the agreement</li><li>A named contact</li><li>Invoiced yearly</li></ul>
-      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Enterprise%20plan">Email for a quote</a></div>
-  </div></div>
-  <p class="lead" style="margin-top:16px">The mile marker file and the records are flat licences. Mile marker positions do not change from one call to the next, so we do not count calls for the file.</p>
-  <div class="pricing-grid two">
-    <div class="price-card featured"><div class="price-tier">Mile marker file</div><div class="price-amt">Flat fee</div><div class="price-desc">Quoted monthly or yearly.</div>
-      <ul class="price-feat"><li>All 50 states and British Columbia, by route and mile</li><li>GeoJSON and CSV</li><li>Updates when a state changes its markers</li><li>Show it in your product, no resale</li><li>No call limits</li></ul>
-      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Mile%20marker%20file">Email for a sample and a price</a></div>
-    <div class="price-card"><div class="price-tier">Records of past alerts</div><div class="price-amt">Flat fee</div><div class="price-desc">Quoted by state, bridge and date range.</div>
-      <ul class="price-feat"><li>Crashes and closures in 36 states and provinces since Sept 25, 2026</li><li>Seattle's five drawbridges since Sept 1, 2026</li><li>Monthly file or through the API</li></ul>
-      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Records%20of%20past%20alerts">Email for a quote</a></div>
-  </div>
-</section>
-
-<section class="api-section">
-  <div class="cta"><h3>Tell us what you need.</h3><p>Say which states, routes or bridges you need, and whether you want the mile marker file, the live API or the records. We reply with a price.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Road%20data">Email sales@milecheckapp.com</a></div>
+  <h2>More</h2>
+  <p class="lead">The <a href="/partners/">partners page</a> covers the fleet add-in, the white-label SDK and sponsorships. The <a href="/api/">API page</a> has every endpoint, example responses and a live test. The <a href="/data-sources/">data sources page</a> lists where each state's data comes from.</p>
+  <div class="cta"><h3>Tell us what you need.</h3><p>Say which states, routes or bridges you need, and whether you want the API or a data license. We reply with a price.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Road%20data">Email sales@milecheckapp.com</a></div>
 </section>
 
 <section class="mc-values" style="max-width:760px;margin:34px auto 30px;padding:24px 20px 6px;border-top:1px solid #e3e0d6">

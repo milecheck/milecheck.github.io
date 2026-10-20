@@ -569,7 +569,7 @@
           <p style="font-size:14px;color:#525252;line-height:1.6;max-width:720px;margin:0 0 16px;">50 state DOTs and 3 Canadian provinces, each on a different upstream platform, normalized into one schema. Closures, construction, crashes, chain controls, and weather &mdash; referenced by highway and milepost.</p>
           <ul style="list-style:none;margin:0 0 18px;padding:0;font-size:13.5px;color:#525252;line-height:1.9;">
             <li><strong style="color:#000;">Coverage</strong> &mdash; 50 states + <!--cov:alerts.provinces-->3<!--/cov--> provinces, 19 upstream formats, one schema.</li>
-            <li><strong style="color:#000;">Also normalized</strong> &mdash; live CBP commercial border-crossing waits, and movable-bridge open/closed status (Seattle, Florida).</li>
+            <li><strong style="color:#000;">Also normalized</strong> &mdash; live CBP commercial border-crossing waits, and movable-bridge open/closed status (Seattle, Florida and Louisiana).</li>
             <li><strong style="color:#000;">Refresh</strong> &mdash; matches each source's own posting cadence; every feed is monitored, not polled blind.</li>
             <li><strong style="color:#000;">Unavailable-source behavior</strong> &mdash; ten states' live feeds don't carry crash data at all (Alaska, Arkansas, Hawaii, Kentucky, Maine, North Dakota, New Mexico, Oklahoma, South Dakota, West Virginia); the API says so rather than returning a silent zero.</li>
           </ul>
@@ -597,7 +597,7 @@
           <ul style="list-style:none;margin:0;padding:0;font-size:13.5px;color:#525252;line-height:1.9;">
             <li><strong style="color:#000;">Collection interval</strong> &mdash; every two hours since September 2026, daily before that, back to mid-August.</li>
             <li><strong style="color:#000;">Gaps</strong> &mdash; a jurisdiction's history starts the day its live integration went in, not before.</li>
-            <li><strong style="color:#000;">What it's produced</strong> &mdash; real crash-clearance times, bridge-raise duration histograms, and border-wait curves by hour and day, measured rather than estimated.</li>
+            <li><strong style="color:#000;">What it's produced</strong> &mdash; how long crashes and closures stayed posted on each feed, bridge-raise duration histograms, and border-wait curves by hour and day, measured from our own checks rather than estimated.</li>
             <li><strong style="color:#000;">Delivery</strong> &mdash; a dated export, or a continuous sync, separate from the live API.</li>
           </ul>
         </div>
@@ -618,12 +618,12 @@
             <tr><th>What you get</th><td>Live mile-marker lookups, road alerts and border waits</td><td>The whole milepost dataset, with updates</td><td>Mile markers and alerts inside your app</td><td>Your logo atop the pages you pick</td></tr>
             <tr><th>Your app does</th><td>Requests live data when needed</td><td>Stores the dataset and draws its own map layer</td><td>Displays our component</td><td>No integration needed</td></tr>
             <tr><th>Best for</th><td>Live lookups and dispatch tools</td><td>Map layers, offline use and analytics</td><td>Apps without a map team</td><td>Local businesses that serve drivers</td></tr>
-            <tr><th>How you pay</th><td>Dev $0. Business $299/month for 100,000 calls/day. Enterprise quoted. <a href="/api/">API page</a></td><td>Yearly quote based on use and update frequency</td><td>Quoted</td><td>One sponsor per monthly issue. <a href="mailto:sales@milecheckapp.com?subject=Highway%20Report%20sponsorship">Email sales@</a></td></tr>
+            <tr><th>How you pay</th><td>Dev $0. Business $299/month for 100,000 calls/day. Fleet and enterprise quoted. <a href="/api/">API page</a></td><td>Yearly quote based on use and update frequency</td><td>Quoted</td><td>One sponsor per monthly issue. <a href="mailto:sales@milecheckapp.com?subject=Highway%20Report%20sponsorship">Email sales@</a></td></tr>
             <tr><th>Example</th><td>A dispatch screen showing &ldquo;I-80 mile 184&rdquo;</td><td>A wildfire app&rsquo;s mile-marker map layer</td><td>A trucking app&rsquo;s driver screen</td><td>A ski shop on the Stevens Pass page</td></tr>
           </tbody>
         </table>
         </div>
-        <p class="fit-note">Only requests that reach our server count toward your plan. For the whole dataset in your own map, choose a data license.</p>
+        <p class="fit-note">Only requests that reach our server count toward your plan. For the whole dataset in your own map, choose a data license. <a href="/api/plan/">What each product is and costs</a>.</p>
         <p class="fit-note">Building something bigger? We also take on joint development, quoted case by case. <a href="#contact">Get in touch</a></p>
       </div>
     </section>
