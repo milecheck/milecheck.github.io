@@ -119,6 +119,11 @@
 .defs p{margin:0 0 6px}.defs p:last-child{margin:0}
 .tbl{overflow-x:auto}.tbl table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}.tbl th,.tbl td{border-bottom:1px solid #E5E5E5;padding:10px 12px;text-align:left;vertical-align:top;line-height:1.5}.tbl th{font:700 12px 'JetBrains Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#8A939B}
 @media(max-width:700px){.tbl table{min-width:0}.tbl thead{display:none}.tbl tr{display:block;border-bottom:1px solid #E5E5E5;padding:12px 0}.tbl td{display:block;border:0;padding:3px 0}}
+.proof{max-width:760px;margin:16px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:left}@media(max-width:620px){.proof{grid-template-columns:1fr 1fr}}
+.proof div{border:1px solid #E5E5E5;border-radius:10px;background:#fff;padding:9px 12px;font-size:13px;line-height:1.4;color:#5b6670}.proof b{display:block;font-size:17px;color:#0E1116}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:s}@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.steps li{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;counter-increment:s}.steps li:before{content:counter(s);display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;margin:0 8px 0 0;vertical-align:middle}.steps b{color:#0E1116}.steps b:after{content:"";display:block;margin-bottom:4px}
+.faq details{padding:10px 16px;margin-bottom:8px}.faq summary{font-size:15px}.faq p{margin-top:6px;font-size:14px}.faq a,.api-section p.lead a{color:#0f7a4f;font-weight:700}
 .badge{display:inline-block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;background:#e6f4ec;color:#0f7a4f}.badge.dl{background:#eef0f7;color:#3b4a8a}
 </style>
 </head>
@@ -149,27 +154,35 @@
   <div class="eyebrow">Road data for companies</div>
   <h1>What road data can I buy from MileCheck?</h1>
   <div class="three-lines">
-    <p><strong>What we sell.</strong> Live road alerts and mile marker lookups through an API, and delivered files of mile markers and past road alerts.</p>
-    <p><strong>Who buys it.</strong> Fleet, dispatch, navigation, freight, insurance and media teams.</p>
+    <p><strong>What we sell.</strong> Live road alerts and GPS-to-mile-marker lookups for your software. Also files of mile markers and past road alerts.</p>
+    <p><strong>Who buys it.</strong> Fleet, dispatch, navigation, freight, insurance, media and government teams.</p>
     <p><strong>What it costs.</strong> The API starts at $0 and Business is $299 a month. Data licenses are a flat yearly fee, quoted.</p>
   </div>
   <div class="defs">
-    <p><strong>API.</strong> Your software asks MileCheck for data when it needs it. Each request counts toward a daily limit, and you pay per month by calls.</p>
+    <p><strong>API.</strong> Your software asks MileCheck for data when it needs it. Each request counts toward your daily limit. Plans have a fixed monthly price based on how many calls you need a day.</p>
     <p><strong>Data license.</strong> We deliver a file for your own systems. You pay a flat yearly fee, with no call limits.</p>
   </div>
   <div class="btns"><a class="primary" href="mailto:sales@milecheckapp.com?subject=Road%20data">Email sales</a><a class="ghost" href="/api/">See the API and test it</a></div>
+  <div class="proof">
+    <div><b>50 states + 3 provinces</b>Live alerts, with British Columbia, Alberta and Manitoba</div>
+    <div><b>50 states + 10 provinces and territories</b>Mile markers, in kilometres in Canada</div>
+    <div><b>19 formats, one schema</b>Each state publishes its own way</div>
+    <div><b>24/7</b>Every feed is monitored</div>
+    <div><b>Geotab Marketplace</b>Our fleet add-in runs in MyGeotab</div>
+    <div><b>AWS Partner Network</b>Member</div>
+  </div>
 </section>
 
 <section class="api-section">
   <h2>What can I buy?</h2>
-  <p class="lead">Mile markers come both ways. Live road alerts are an API. Past alerts are a data license, and Seattle bridge lift history is also in the API.</p>
+  <p class="lead">Mile markers come both ways. Live road alerts are an API. Past alerts are a data license. Seattle bridge lift history comes both ways.</p>
   <div class="tbl"><table>
     <thead><tr><th>Product</th><th>What you get</th><th>How you buy it</th></tr></thead>
     <tbody>
       <tr><td><strong>Mile marker lookup</strong></td><td>Send a GPS point, get the nearest highway and mile marker. Direction is included when we have it.</td><td><span class="badge">API</span><br>Developer $0 or Business $299 a month</td></tr>
-      <tr><td><strong>Milepost dataset</strong></td><td>Route, mile, latitude and longitude for every state and British Columbia, as GeoJSON and CSV. Updated when a state changes its markers. Show it in your product, no resale.</td><td><span class="badge dl">Data license</span><br>Yearly quote</td></tr>
-      <tr><td><strong>Live conditions API</strong></td><td>Road reports from all 50 states, British Columbia, Alberta and Manitoba in one format. Reports include closures, crashes, construction, chain controls and weather. Report types vary by source, and ten states do not publish crashes. Business also adds wildfires and drawbridge status.</td><td><span class="badge">API only</span><br>Developer $0 or Business $299 a month</td></tr>
-      <tr><td><strong>Seattle bridge lift history</strong></td><td>Each raise and lower of Seattle's five drawbridges, with how long each lasted.</td><td><span class="badge">API</span> Business $299 a month<br><span class="badge dl">Data license</span> inside the archive</td></tr>
+      <tr><td><strong>Milepost dataset</strong></td><td>Route, mile, latitude and longitude for all 50 states, plus kilometre markers for ten Canadian provinces and territories, as GeoJSON and CSV. Updated when a state changes its markers.</td><td><span class="badge dl">Data license</span><br>Yearly quote</td></tr>
+      <tr><td><strong>Live conditions API</strong></td><td>Road reports from all 50 states, British Columbia, Alberta and Manitoba in one format. Reports include closures, crashes, construction, chain controls and weather. Ten state feeds do not report crashes. Business adds wildfires and drawbridge status.</td><td><span class="badge">API only</span><br>Developer $0 for alerts. Business $299 a month for every endpoint.</td></tr>
+      <tr><td><strong>Seattle bridge lift history</strong></td><td>Each raise and lower of Seattle's five drawbridges, with how long each lasted.</td><td><span class="badge">API</span> Business $299 a month<br><span class="badge dl">Data license</span> included in the Historical archive, priced by yearly quote</td></tr>
       <tr><td><strong>Historical archive</strong></td><td>Records of when road alerts appeared in our checks, by state, plus Seattle bridge lifts. Crashes and closures cover 36 states and provinces. Date ranges vary by source, so ask for yours.</td><td><span class="badge dl">Data license</span><br>Yearly quote</td></tr>
     </tbody></table></div>
 </section>
@@ -177,7 +190,7 @@
 <section class="api-section">
   <h2>What does it cost?</h2>
   <h3 style="margin:0 0 8px">API plans <span class="badge">API</span></h3>
-  <p class="lead">Developer and Business have daily request limits. Only requests that reach our server count.</p>
+  <p class="lead">Each plan has a daily call limit.</p>
   <div class="pricing-scroll"><div class="pricing-grid">
     <div class="price-card"><div class="price-tier">Developer</div><div class="price-amt">$0</div><div class="price-desc">For testing and small apps.</div>
       <ul class="price-feat"><li>1,000 calls a day</li><li>Live alerts and the mile marker lookup</li><li>You credit MileCheck in your product</li><li>No support or SLA</li></ul>
@@ -200,15 +213,35 @@
     <div><h3>Dispatch and emergency services</h3><p>Turn a caller's GPS point into the highway and mile marker crews use. Use the API lookup for single calls, or the dataset for your own maps.</p></div>
     <div><h3>Fleet and routing software</h3><p>Show live closures and crashes in your dispatch screens through one API, instead of one connection per state.</p></div>
     <div><h3>Navigation and traffic apps</h3><p>Put mile markers on your map from the dataset. Add live alerts from the API.</p></div>
-    <div><h3>Freight and logistics</h3><p>Use the archive to see how long closures and crashes on your lanes were posted.</p></div>
-    <div><h3>Insurers and claims teams</h3><p>Use the archive to see which closures and crashes were posted near a place around a date.</p></div>
+    <div><h3>State DOTs and agencies</h3><p>See alerts from neighboring states and provinces in the same format as your own.</p></div>
+    <div><h3>Freight, insurers and claims teams</h3><p>Use the archive to see when we saw closure and crash reports on a route or near a place, and how long they stayed on the feed.</p></div>
     <div><h3>Media, cities and researchers</h3><p>Use the archive to count drawbridge lifts and road alerts by date. In the 30 days to Oct 15, 2026, Seattle's Ballard Bridge lifted 259 times. The median lift was about 4 minutes.</p></div>
   </div>
 </section>
 
 <section class="api-section">
-  <h2>More</h2>
-  <p class="lead">The <a href="/partners/">partners page</a> covers the fleet add-in, the white-label SDK and sponsorships. The <a href="/api/">API page</a> has every endpoint, example responses and a live test. The <a href="/data-sources/">data sources page</a> lists where each state's data comes from.</p>
+  <h2>How do I start?</h2>
+  <ol class="steps">
+    <li><b>Email us</b>Write to <a href="mailto:sales@milecheckapp.com?subject=Road%20data" style="color:#0f7a4f;font-weight:700">sales@milecheckapp.com</a>. Say which states, routes or bridges you need and how you will use the data.</li>
+    <li><b>We send what fits</b>We reply with the API plan or data license that matches, and a price. For a data license we can send a sample file.</li>
+    <li><b>You get a key or a file</b>An API plan comes with a key. A data license comes as a file for your own systems.</li>
+  </ol>
+</section>
+
+<section class="api-section faq">
+  <h2>Questions buyers ask</h2>
+  <details><summary>Do I need the API or a data license?</summary><p>Take the API if your software needs live alerts or one mile marker at a time. Take a data license if you want the whole mile marker file or past alerts inside your own systems. You can buy both.</p></details>
+  <details><summary>How are API calls counted?</summary><p>Only requests that reach our server count toward your daily limit.</p></details>
+  <details><summary>Can I try it before I pay?</summary><p>Yes. The Developer plan is $0 for 1,000 calls a day. The <a href="/api/">API page</a> has a live test of the mile marker lookup. For a data license, ask for a sample file.</p></details>
+  <details><summary>How do I get an API key?</summary><p>Email <a href="mailto:sales@milecheckapp.com?subject=API%20key">sales@milecheckapp.com</a> with what you are building. We send a key. The <a href="/api/">API page</a> shows how to send it with each request.</p></details>
+  <details><summary>Can I resell the data?</summary><p>No. The dataset license lets you show the data in your product. It does not cover resale.</p></details>
+  <details><summary>What if a state's feed has no crash data?</summary><p>Ten states' live feeds do not carry crashes. The API says so for those states. It does not return a zero that looks like a quiet road.</p></details>
+  <details><summary>Do you cover Canada?</summary><p>Live alerts cover British Columbia, Alberta and Manitoba. The Milepost dataset also has kilometre markers for ten Canadian provinces and territories.</p></details>
+  <details><summary>Where does the data come from?</summary><p>Mile marker positions come from state DOT reference-marker datasets. Road alerts come from each state and provincial DOT feed. The <a href="/data-sources/">data sources page</a> lists each one.</p></details>
+</section>
+
+<section class="api-section">
+  <p class="lead">The <a href="/partners/">partners page</a> covers the fleet add-in, the white-label SDK and sponsorships.</p>
   <div class="cta"><h3>Tell us what you need.</h3><p>Say which states, routes or bridges you need, and whether you want the API or a data license. We reply with a price.</p><a class="price-cta" style="display:inline-block;background:#0f7a4f;color:#fff;padding:10px 22px" href="mailto:sales@milecheckapp.com?subject=Road%20data">Email sales@milecheckapp.com</a></div>
 </section>
 
