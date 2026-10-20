@@ -32,7 +32,7 @@ ${sortJs}
     <h2>Source</h2>
     <p><a href="${P.blsUrl}" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics</a>, May ${year} estimates. Updated each spring.</p>
     <h2>More road jobs</h2>
-    <ul><li><a href="/road-workers/">How much do highway maintenance workers make in each state?</a></li><li><a href="/road-workers/dot-jobs/">How do you get a job at your state DOT?</a></li>${PAGES.filter(x => x !== P).map(x => `<li><a href="/${x.slug}/">${esc(x.h1)}</a></li>`).join('')}</ul>`;
+    <ul><li><a href="/how-long-does-it-take-an-ambulance-to-reach-a-crash/">How long does it take an ambulance to reach a crash scene?</a></li><li><a href="/what-vehicles-do-cal-fire-and-seattle-fire-drive/">What vehicles do CAL FIRE and Seattle Fire drive?</a></li><li><a href="/road-workers/">How much do highway maintenance workers make in each state?</a></li><li><a href="/road-workers/dot-jobs/">How do you get a job at your state DOT?</a></li>${PAGES.filter(x => x !== P).map(x => `<li><a href="/${x.slug}/">${esc(x.h1)}</a></li>`).join('')}</ul>`;
   const url = `https://milecheckapp.com/${P.slug}/`;
   const desc = `${P.who} earn a median of ${$(us.median)} a year. Pay and number of workers in every state, from the Bureau of Labor Statistics.`;
   const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: P.h1, acceptedAnswer: { '@type': 'Answer', text: lede } }] };
