@@ -551,19 +551,28 @@
     });
   }
 
+  var backoffUntil = 0;
+
   // Pull the vehicle's last-known position from MyGeotab (null in a demo DB w/ no device).
   function getVehiclePosition(api, state){
     return new Promise(function(resolve){
       if(!api){ return resolve(null); }
-      var search={};
-      if(state&&state.device&&state.device.id){ search.deviceSearch={ id:state.device.id }; }
+      // Always ask for ONE vehicle. An empty search returns every device in the database,
+      // which is what Geotab's Nov 15 2026 API limits are aimed at. No vehicle selected = no call.
+      var deviceId = state&&state.device&&state.device.id;
+      if(!deviceId){ return resolve(null); }
+      if(Date.now() < backoffUntil){ return resolve(null); }
       try{
-        api.call("Get", {typeName:"DeviceStatusInfo", search:search}, function(result){
+        api.call("Get", {typeName:"DeviceStatusInfo", search:{ deviceSearch:{ id:deviceId } }}, function(result){
           var pick=null;
           (result||[]).forEach(function(r){ if(r&&r.latitude!=null&&r.longitude!=null&&(r.latitude||r.longitude)){
             if(!pick||(r.dateTime||"")>(pick.dateTime||"")) pick=r; } });
           resolve(pick?{lat:pick.latitude,lon:pick.longitude,bearing:pick.bearing,speed:pick.speed!=null?Math.round(pick.speed*0.621371):null}:null);
-        }, function(){ resolve(null); });
+        }, function(err){
+          // OverLimitException: stop calling for 2 minutes instead of retrying into the limit.
+          if(/OverLimit/i.test(String((err&&(err.name||err.message))||err))){ backoffUntil = Date.now()+120000; }
+          resolve(null);
+        });
       }catch(e){ resolve(null); }
     });
   }
