@@ -214,6 +214,7 @@
           <option value="everyday">Everyday driver</option>
           <option value="other">Other</option>
         </select>
+        <input type="text" id="role-other" maxlength="80" placeholder="What do you drive for?" aria-label="What do you drive for" hidden style="margin-top:8px">
         <label for="quantity">How many would you want? An estimate is fine. (optional)</label>
         <input type="number" id="quantity" name="quantity" min="1" max="10000" step="1" inputmode="numeric" placeholder="1">
         <p class="fine" style="margin:4px 0 0">We add these up to show investors how much demand there is. It is not an order and you will not be charged.</p>
@@ -252,7 +253,8 @@
       const name = document.getElementById('name').value.trim();
       const role = document.getElementById('role').value;
       const quantity = document.getElementById('quantity').value;
-      const comments = document.getElementById('comments').value.trim();
+      const roleOther = role === 'other' ? document.getElementById('role-other').value.trim() : '';
+      const comments = ((roleOther ? 'Drives for: ' + roleOther + '. ' : '') + document.getElementById('comments').value.trim()).slice(0, 500);
       // Which post or message sent them: ?utm_source=instagram&utm_campaign=dash-signups
       // becomes "instagram/dash-signups". The Worker keeps the first one it sees per email.
       const qs = new URLSearchParams(location.search);
@@ -286,5 +288,6 @@
     });
     (function(){var t=document.querySelector('.nav-toggle'),n=document.querySelector('.primary-nav');if(t&&n){t.addEventListener('click',function(){n.classList.toggle('open');});document.addEventListener('click',function(e){if(!e.target.closest('.header-inner'))n.classList.remove('open');});}})();
   </script>
+<script>(function(){var r=document.getElementById("role"),o=document.getElementById("role-other");if(!r||!o)return;r.addEventListener("change",function(){o.hidden=r.value!=="other";if(!o.hidden)o.focus();});})();</script>
 </body>
 </html>
