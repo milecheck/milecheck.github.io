@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-10-20T21:44:43.678Z",
+   "fetchedAt": "2026-10-21T05:02:33.323Z",
    "ok": true,
    "rows": [
     {
@@ -115,11 +115,25 @@
      "kind": "Seasonal",
      "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Maupin--ODOT--Maintenance/Highway-Maintenance-Specialist--Seasonal---Multiple-Positions-_REQ-208114",
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
+    },
+    {
+     "id": "REQ-208636",
+     "state": "OR",
+     "agency": "Oregon Department of Transportation",
+     "title": "Highway Maintenance Specialist (Seasonal)",
+     "multiple": true,
+     "location": "Bend, OR",
+     "pay": "$4,312 to $5,988 a month",
+     "closes": "2026-11-03",
+     "closesNote": null,
+     "kind": "Seasonal",
+     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Bend--ODOT--Building-B/Highway-Maintenance-Specialist--Seasonal---Multiple-Positions-_REQ-208636",
+     "recruiter": "ODOTRecruitment@odot.oregon.gov"
     }
    ]
   },
   "MN": {
-   "fetchedAt": "2026-10-20T21:44:43.678Z",
+   "fetchedAt": "2026-10-21T05:02:33.323Z",
    "ok": true,
    "rows": [
     {
@@ -242,5 +256,5 @@
    ]
   }
  },
- "updatedAt": "2026-10-20T21:44:43.678Z"
+ "updatedAt": "2026-10-21T05:02:33.323Z"
 }
