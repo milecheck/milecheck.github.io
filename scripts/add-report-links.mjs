@@ -59,3 +59,21 @@ if (latest) for (const f of readdirSync(resolve(blog, latest.dir))) {
   }
 }
 console.log(`add-report-links: ${changed} file(s) changed`);
+
+// "Advertise with us" on every Highway Report page (Leah 10/21: the report had no way to advertise).
+// Same wording as the sponsor slot. Skips pages that already carry the sponsor slot.
+const AD = `<!-- report-ad:start --><aside class="report-ad" style="margin:24px max(16px, calc((100% - 720px) / 2));padding:14px 16px;border:1px solid #cfe3d7;border-radius:10px;background:#f3f7f4;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between"><strong style="color:#1f3b2d">Want to advertise with us?</strong><a href="/sponsor/" style="display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:#0f7a4f">Learn more &rarr;</a></aside><!-- report-ad:end -->`;
+const adPages = [resolve(root, 'report', 'index.html')];
+for (const f of readdirSync(blog)) if (/^road-report-[a-z]+-\d{4}\.html$/.test(f)) adPages.push(resolve(blog, f));
+for (const d of dirs) for (const f of readdirSync(resolve(blog, d.dir))) if (f.endsWith('.html')) adPages.push(resolve(blog, d.dir, f));
+let ads = 0;
+for (const p of adPages) {
+  if (!existsSync(p)) continue;
+  const s = readFileSync(p, 'utf8');
+  let out;
+  if (s.includes('<!-- report-ad:start -->')) out = s.replace(/<!-- report-ad:start -->[\s\S]*?<!-- report-ad:end -->/, AD);
+  else if (s.includes('id="spon"')) continue;
+  else { const i = s.lastIndexOf('</main>'); if (i < 0) continue; out = s.slice(0, i) + '  ' + AD + '\n' + s.slice(i); }
+  if (out !== s) { writeFileSync(p, out); ads++; }
+}
+console.log(`add-report-links: advertise line on ${ads} page(s)`);
