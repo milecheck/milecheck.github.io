@@ -96,7 +96,7 @@
     details.faq:last-of-type{border-bottom:1px solid var(--rule)}
     details.faq summary{cursor:pointer;font-weight:600}
     details.faq p{margin:8px 0 0;color:var(--ink2)}
-  </style>
+  .dash-media{display:grid;gap:14px;max-width:860px;margin:28px auto}.dash-media figure{margin:0}.dash-media figcaption{font-size:14px;color:#5b6670;margin-top:6px}.dash-open{position:relative;display:block;width:100%;padding:0;border:0;background:#111;border-radius:10px;overflow:hidden;cursor:zoom-in}.dash-open img{display:block;width:100%;height:auto;max-width:100%}.dash-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dash-pair img{aspect-ratio:4/3;object-fit:cover}.dash-play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.6)}.dash-play::before{content:"";position:absolute;left:25px;top:20px;border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent}.dash-open:focus-visible{outline:3px solid #e2a21c;outline-offset:2px}#dash-box{border:0;padding:0;background:transparent;max-width:94vw}#dash-box::backdrop{background:rgba(0,0,0,.88)}#dash-box img,#dash-box video{display:block;max-width:94vw;max-height:88vh;border-radius:8px}.dash-close{position:absolute;top:8px;right:8px;z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:24px;cursor:pointer}@media (max-width:480px){.dash-pair{gap:8px}.dash-media figcaption{font-size:13px}}</style>
   <!-- site-nav:assets -->
   <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
   <script src="/assets/site-nav.js?v=20261015-1" defer></script>
@@ -133,30 +133,40 @@
   </div>
 
   <div class="container">
-    <div class="device-card">
-      <div class="device-photo-wrap">
-        <img src="images/dash-display/dash-display-hero.webp" width="1536" height="1024" alt="Concept render of the MileCheck GPS mile marker display on a car air vent, showing I-5 northbound mile marker 142.5">
+    <div class="dash-media">
+      <figure class="dash-video">
+        <button type="button" class="dash-open" data-video aria-label="Play the concept video">
+          <img src="/video/dash-display-16x9.jpg" width="1280" height="720" alt="Concept video: the road on the left, the display reading I-5 NB mp 40.0 on the right">
+          <span class="dash-play" aria-hidden="true"></span>
+        </button>
+        <figcaption>Concept video. Tap to play.</figcaption>
+      </figure>
+      <div class="dash-pair">
+        <figure>
+          <button type="button" class="dash-open" data-img="images/dash-display/dash-display-hero.webp" aria-label="Open the concept render">
+            <img src="images/dash-display/dash-display-hero.webp" width="1536" height="1024" loading="lazy" alt="Concept render of the MileCheck GPS mile marker display on a car air vent, showing I-5 northbound mile marker 142.5">
+          </button>
+          <figcaption>Concept render. Final size and mount will change.</figcaption>
+        </figure>
+        <figure>
+          <button type="button" class="dash-open" data-img="images/dash-display/first-prototype-2026-10.webp" aria-label="Open the first prototype photo">
+            <img src="images/dash-display/first-prototype-2026-10.webp" width="1200" height="900" loading="lazy" alt="First prototype of the MileCheck mile marker display on a breadboard. The color screen reads I-90 MILE 47.3.">
+          </button>
+          <figcaption>First prototype, October 2026. Demo number until the GPS goes in.</figcaption>
+        </figure>
       </div>
-      <p class="device-caption">Concept render. Final size and mount will change during testing.</p>
     </div>
-
-    <div class="section">
-      <h2>How it's meant to work</h2>
-      <figure style="margin:16px auto;max-width:360px;text-align:center">
-        <video controls playsinline muted preload="none" poster="/video/dash-display.jpg" width="360" height="640" style="display:block;width:100%;height:auto;border-radius:12px;background:#111" aria-label="Concept video of the mile marker display on a dash">
-          <source src="/video/dash-display.mp4" type="video/mp4">
-        </video>
-        <figcaption style="font-size:14px;color:#5b6670;margin-top:8px">Concept video. The working prototype is below.</figcaption>
-      </figure>
-    </div>
-
-    <div class="section">
-      <h2>The first prototype</h2>
-      <figure class="proto">
-        <img src="images/dash-display/first-prototype-2026-10.webp" width="1200" height="900" loading="lazy" alt="First prototype of the MileCheck mile marker display on a breadboard. The color screen reads I-90 MILE 47.3.">
-        <figcaption>October 2026. The screen shows a demo number until the GPS goes in.</figcaption>
-      </figure>
-    </div>
+    <dialog id="dash-box" aria-label="Enlarged view"><button type="button" class="dash-close" aria-label="Close">&times;</button><div id="dash-slot"></div></dialog>
+    <script>
+    (function(){var box=document.getElementById('dash-box'),slot=document.getElementById('dash-slot');if(!box||!box.showModal)return;
+    function open(html){slot.innerHTML=html;box.showModal();}
+    document.querySelectorAll('.dash-open').forEach(function(b){b.addEventListener('click',function(){
+      if(b.hasAttribute('data-video'))open('<video controls playsinline autoplay muted poster="/video/dash-display-16x9.jpg"><source src="/video/dash-display-16x9.mp4" type="video/mp4"></video>');
+      else open('<img src="'+b.getAttribute('data-img')+'" alt="">');});});
+    box.querySelector('.dash-close').addEventListener('click',function(){box.close();});
+    box.addEventListener('click',function(e){if(e.target===box)box.close();});
+    box.addEventListener('close',function(){slot.innerHTML='';});})();
+    </script>
 
     <div class="section">
       <h2>What the mile marker display does</h2>
