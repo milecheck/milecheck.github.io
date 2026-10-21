@@ -405,7 +405,8 @@ for (const st of Object.keys(NAMES)) {
     parts.push(S.crash > 0 ? `<p>${n(S.crash)} ${S.crash === 1 ? 'crash was' : 'crashes were'} reported in ${name} in ${MONTH_NAME}.</p>` : `<p>No crashes were on ${name}'s feed in ${MONTH_NAME}. Not all states publish crash reports.</p>`);
     const hs = D.crashHotspots && D.crashHotspots[st];
     if (hs && hs.routes.length) parts.push(box('Routes with the most crash alerts', hs.routes.map(([r, c]) => `<strong>${esc(route(st, r))}</strong> &mdash; ${n(c)}`)));
-    const hp = hs ? hs.places.filter((q) => realPlace(q.place)) : [];
+    // Oregon's feed puts ODOT highway names (Pacific, Columbia River, Old Oregon Trail) in the place field, not areas.
+    const hp = hs && st !== 'OR' ? hs.places.filter((q) => realPlace(q.place)) : [];
     if (hp.length) parts.push(box('Areas named in two or more crash alerts', hp.map((p) => `<strong>${esc(title(p.place))}</strong>${p.route ? ` (${esc(route(st, p.route))})` : ''} &mdash; ${n(p.crashes)}`)));
     const fs = fatal.filter((f) => f.state === st);
     if (fs.length) parts.push(box('Crashes marked fatal by the DOT', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
