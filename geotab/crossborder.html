@@ -3,86 +3,162 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="data:," />
 <title>MileCheck Cross-Border</title>
 <style>
   /* ----------------------------------------------------------------
-     Fleet-ops console styling — muted, dense, squared-off. Designed
-     to read as a native MyGeotab / Geotab Drive data widget, not a
-     consumer app card. One deep-navy accent; severity shown by a thin
-     muted tick, not a rainbow.
+     2026-10-22 redesign: the milepost sign is the hero (same green sign,
+     white border, route + one-decimal mile as the phone app), with a small
+     map beside it. Cameras and drawbridges sit right under the sign, then
+     the alerts. Built to fit one screen at MyGeotab panel width.
   ----------------------------------------------------------------- */
   :root{
-    --ink:#161a1f; --muted:#6e7782; --faint:#5f6873; --line:#dce0e6;
-    --surface:#fff; --bg:#eceef1; --accent:#27496d;
-    --crit:#9f2a1f; --warn:#875708; --cool:#3f5a73; --info:#5b6770;
+    --ink:#161a1f; --muted:#5d6670; --faint:#5f6873; --line:#dce0e6;
+    --surface:#fff; --bg:#f1f2f4; --accent:#27496d; --sign:#0b6b3a;
+    --crit:#9f2a1f; --warn:#875708; --cool:#3f5a73; --info:#5b6770; --ok:#1d6b46;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;}
-  #milecheck{max-width:720px;margin:0 auto;padding:14px 16px;}
+  #milecheck{max-width:1280px;margin:0 auto;padding:12px 16px;}
+  img{max-width:100%;}
 
-  .mc-header{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:14px;}
-  .mc-title{display:flex;align-items:baseline;gap:8px;flex:1;min-width:0;}
-  .mc-title b{font-size:12.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;}
-  .mc-title span{color:var(--muted);font-size:11.5px;}
+  .mc-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px;}
+  .mc-brand{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;}
+  .mc-brand i{width:12px;height:12px;border-radius:50%;background:var(--sign);display:inline-block;}
+  .mc-vehicle{flex:1;min-width:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .mc-vname{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
   .mc-demo,.mc-live{display:none;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
-  .mc-demo{color:#7a5b00;background:#f5efdb;border:1px solid #e4d8ad;}
-  .mc-live{color:#1d6b46;background:#e6f1ea;border:1px solid #c2dcce;}
+  .mc-demo{color:#6b5000;background:#f5efdb;border:1px solid #e4d8ad;}
+  .mc-live{color:var(--ok);background:#e6f1ea;border:1px solid #c2dcce;}
   .mc-demo.on,.mc-live.on{display:inline-block;}
-  .mc-live .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#1d6b46;margin-right:5px;vertical-align:1px;}
+  .mc-live .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ok);margin-right:5px;vertical-align:1px;}
+  .mc-veh{display:none;font:inherit;font-size:12px;max-width:240px;padding:4px 6px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);}
+  .mc-veh.on{display:inline-block;}
 
-  /* hero: the milepost as a data readout, not a colored card */
+  /* ---- Hero: sign + map ---------------------------------------------- */
+  .mc-top{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:12px;margin-bottom:12px;}
+  .mc-sign{position:relative;background:var(--sign);color:#fff;border:3px solid #fff;outline:1px solid #c9d2cc;border-radius:10px;padding:16px 16px 12px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.12);}
+  .mc-sign .spd{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.3);border-radius:6px;padding:4px 9px;line-height:1.1;}
+  .mc-sign .spd b{display:block;font-size:19px;font-variant-numeric:tabular-nums;}
+  .mc-sign .spd span{font-size:8.5px;letter-spacing:1px;color:rgba(255,255,255,.85);}
+  .mc-sign .hdg{position:absolute;top:10px;right:10px;width:34px;height:34px;border:1.5px solid rgba(255,255,255,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+  .mc-sign .rt{font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+  .mc-sign .mi{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:76px;font-weight:700;line-height:1;letter-spacing:-3px;margin:6px 0 2px;font-variant-numeric:tabular-nums;}
+  .mc-sign .lbl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.85);}
+  .mc-sign .none{font-size:16px;font-weight:700;padding:28px 0;}
+  .mc-line{margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,.25);}
+  .mc-line .bar{position:relative;height:6px;border-radius:3px;background:rgba(255,255,255,.3);margin:0 4px;}
+  .mc-line .bar i{position:absolute;top:-4px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(0,0,0,.18);}
+  .mc-line .ends{display:flex;justify-content:space-between;font-size:11.5px;margin-top:6px;font-variant-numeric:tabular-nums;}
+  .mc-line .ends b{font-size:13px;}
 
-  .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:600;margin:0 0 7px 1px;}
-  .mc-count{background:var(--line);color:var(--muted);font-size:10px;font-weight:700;border-radius:3px;padding:0 5px;line-height:16px;}
-  /* alerts: tight, muted rows — thin severity tick, no rainbow cards */
-  .mc-empty{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px;text-align:center;color:var(--muted);}
-  .mc-foot{margin-top:16px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .mc-map{position:relative;min-height:200px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#e8e6df;}
+  .mc-map .tile{position:absolute;width:256px;height:256px;}
+  .mc-map .me{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#1a6fd6;border:3px solid #fff;box-shadow:0 0 0 6px rgba(26,111,214,.25),0 1px 3px rgba(0,0,0,.4);}
+  .mc-map .me::after{content:"";position:absolute;left:50%;top:-14px;margin-left:-5px;border:5px solid transparent;border-bottom:8px solid #1a6fd6;}
+  .mc-map .brg{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:2px;background:var(--ok);border:2px solid #fff;}
+  .mc-map .brg.up{background:var(--crit);}
+  .mc-map .cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:rgba(255,255,255,.94);padding:5px 10px;font-size:11.5px;color:var(--ink);}
+  .mc-map .cap b{font-weight:700;}
+  .mc-map .attr{position:absolute;right:4px;top:3px;font-size:9.5px;color:#333;background:rgba(255,255,255,.8);padding:0 4px;border-radius:2px;}
+
+  .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:700;margin:0 0 6px 1px;}
+  .mc-mid{display:grid;grid-template-columns:1fr 260px;gap:12px;margin-bottom:12px;}
+  .mc-mid.nobr{grid-template-columns:1fr;}
+  /* ---- Cameras: the actual road, nearest first ---------------------- */
+  .mc-cams{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .mc-cam{background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+  .mc-cam .shot{width:100%;aspect-ratio:16/9;object-fit:cover;background:#dfe3e7;display:block;}
+  .mc-cam .cap{padding:5px 8px 6px;}
+  .mc-cam .nm{font-size:11.5px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .mc-cam .mt{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;}
+  /* ---- Drawbridges: only where live status actually exists ---------- */
+  .mc-bridges{display:flex;flex-direction:column;gap:5px;}
+  .mc-bridge{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:4px;padding:6px 10px;}
+  .mc-bridge.up{border-left-color:var(--crit);background:#fbf0ee;}
+  .mc-bridge .nm{flex:1;font-size:12.5px;font-weight:700;}
+  .mc-bridge .st{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--ok);}
+  .mc-bridge.up .st{color:var(--crit);}
+  .mc-bridge .dist{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;min-width:36px;text-align:right;}
+
+  /* ---- Fleet Safety strip ------------------------------------------ */
+  .mc-safety{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .mc-chip{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--info);border-radius:3px;padding:7px 12px;min-width:0;}
+  .mc-chip .k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);white-space:nowrap;}
+  .mc-chip .v{font-size:12.5px;font-weight:600;}
+  .mc-chip .sub{font-size:11px;color:var(--faint);}
+  .mc-chip.caution,.mc-chip.strong{border-left-color:var(--warn);} .mc-chip.caution .k,.mc-chip.strong .k{color:var(--warn);}
+  .mc-chip.strong{background:#fdf8ec;}
+  .mc-chip.dangerous,.mc-chip.chains{border-left-color:var(--crit);background:#fbf0ee;} .mc-chip.dangerous .k,.mc-chip.chains .k{color:var(--crit);}
+  .mc-chip.surface{border-left-color:var(--cool);} .mc-chip.surface .k{color:var(--cool);}
+
+  /* ---- Alerts -------------------------------------------------------- */
+  .mc-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;}
+  .mc-col-h{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 6px 1px;}
+  .mc-col-active .mc-col-h{color:var(--crit);}
+  .mc-count{background:var(--line);color:var(--ink);font-size:10px;font-weight:700;border-radius:3px;padding:0 5px;line-height:16px;}
+  .mc-col-empty{font-size:12px;color:var(--faint);padding:10px 12px;border:1px dashed #c4cad2;border-radius:3px;background:var(--surface);}
+  .mc-alert{display:flex;gap:11px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--info);border-radius:3px;padding:8px 12px;margin-bottom:5px;}
+  .mc-alert .body{flex:1;min-width:0;}
+  .mc-alert .type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);}
+  .mc-alert .type-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .mc-alert .dist{font-size:11px;font-weight:700;background:var(--line);border-radius:3px;padding:1px 7px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .mc-alert .desc{margin:2px 0 3px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .mc-alert .meta{font-size:11.5px;color:var(--faint);display:flex;gap:9px;flex-wrap:wrap;}
+  .mc-alert.closure{border-left-color:var(--crit);} .mc-alert.closure .type{color:var(--crit);}
+  .mc-alert.construction{border-left-color:var(--warn);} .mc-alert.construction .type{color:var(--warn);}
+  .mc-alert.weather{border-left-color:var(--cool);} .mc-alert.weather .type{color:var(--cool);}
+  .mc-empty{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:16px;text-align:center;color:var(--muted);}
+  .mc-foot{margin-top:14px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
   .mc-foot a{color:var(--accent);text-decoration:none;font-weight:600;}
   .mc-skeleton{color:var(--muted);padding:20px;text-align:center;}
-
-  /* ---- Fleet Safety strip: crosswind / chains / road surface --------
-     Only renders the conditions that are actually present. An empty
-     safety strip is the correct output on a calm dry day — it must never
-     invent a reassurance ("all clear") the data can't support. */
-           border-left:3px solid var(--info);border-radius:3px;padding:8px 12px;min-width:0;}
-
-  /* ---- Cameras: the actual road, nearest first ---------------------- */
-              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-
-  /* ---- Drawbridges: only where live status actually exists ---------- */
-             border-left:3px solid #1d6b46;border-radius:3px;padding:8px 12px;}
-  .mc-block{margin-top:16px;}
-  .mc-veh{display:none;font:inherit;font-size:12px;max-width:220px;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);}
-  .mc-veh.on{display:inline-block;}
   .mc-err{display:none;margin:0 0 12px;padding:8px 12px;border:1px solid #e4c9c4;background:#fbf0ee;color:var(--crit);border-radius:3px;font-size:12px;font-weight:600;}
   .mc-err.on{display:block;}
   .mc-stale{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--warn);}
 
-  .bx{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:10px 12px;margin-bottom:8px;}
-  .bx.closed{border-left-color:var(--crit);}
-  .bx-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;}
-  .bx-n{font-size:13.5px;font-weight:700;}
-  .bx-n span{font-weight:400;color:var(--muted);}
-  .bx-d{font-size:11px;font-weight:700;background:var(--line);border-radius:3px;padding:1px 7px;font-variant-numeric:tabular-nums;white-space:nowrap;}
-  .bx-meta{font-size:11.5px;color:var(--muted);margin:2px 0 7px;}
-  .bx-meta .closed{color:var(--crit);font-weight:700;}
-  table.bx-t{width:100%;border-collapse:collapse;font-size:12px;}
-  .bx-t th{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--faint);font-weight:600;text-align:left;padding:3px 6px 3px 0;border-bottom:1px solid var(--line);}
-  .bx-t td{padding:4px 6px 4px 0;border-bottom:1px solid #eef0f3;font-variant-numeric:tabular-nums;}
-  .bx-t td.w{font-weight:700;}
-  .bx-t td.na{color:var(--faint);}
-  .bx-note{font-size:11px;color:var(--warn);margin-top:6px;}
-  .bx-src{font-size:10.5px;color:var(--faint);margin-top:6px;}
-  .mc-pos{font-size:11.5px;color:var(--muted);margin:0 0 10px 1px;}
+  @media (max-width:900px){ .mc-mid{grid-template-columns:1fr;} .mc-cams{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:640px){ .mc-top{grid-template-columns:1fr;} .mc-cols{grid-template-columns:1fr;} .mc-map{min-height:170px;} .mc-sign .mi{font-size:64px;} #milecheck{padding:10px 12px;} .mc-vname{white-space:normal;} }
+  /* ---- Crossings: wait times big, at a glance ------------------------ */
+  .xc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:10px;}
+  .xc{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:6px;padding:10px 12px 9px;}
+  .xc.closed{border-top-color:var(--crit);}
+  .xc.near{border-top-color:var(--sign);}
+  .xc-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+  .xc-n{font-size:15px;font-weight:800;}
+  .xc-n span{display:block;font-size:12px;font-weight:600;color:var(--muted);}
+  .xc-d{font-size:12px;font-weight:800;background:var(--line);border-radius:3px;padding:2px 8px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .xc-meta{font-size:11.5px;color:var(--muted);margin:3px 0 8px;}
+  .xc-meta .closed{color:var(--crit);font-weight:700;}
+  .xc-dir{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--faint);margin:6px 0 4px;}
+  .xc-w{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .xc-w.two{grid-template-columns:repeat(2,1fr);}
+  .xw{background:#f6f7f9;border:1px solid #e6e9ed;border-radius:4px;padding:6px 8px;min-width:0;}
+  .xw .k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .xw .v{font-size:24px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;}
+  .xw .v small{font-size:12px;font-weight:700;margin-left:2px;}
+  .xw .s{font-size:10.5px;color:var(--faint);}
+  .xw.na .v{font-size:13px;font-weight:700;color:var(--faint);padding:6px 0 3px;}
+  .xw.long .v{color:var(--crit);} .xw.mid .v{color:var(--warn);} .xw.ok .v{color:var(--ok);}
+  .xc-note{font-size:11px;color:var(--warn);margin-top:6px;}
+  .xc-src{font-size:10.5px;color:var(--faint);margin-top:7px;}
+  @media (max-width:640px){ .xc-grid{grid-template-columns:1fr;} .xw .v{font-size:21px;} }
+
+  .mc-sw{display:none;border:1px solid #c4cad2;border-radius:4px;overflow:hidden;background:var(--surface);}
+  .mc-sw.on{display:inline-flex;}
+  .mc-sw button{font:inherit;font-size:11px;font-weight:700;border:0;background:transparent;color:var(--muted);padding:3px 9px;min-height:26px;cursor:pointer;white-space:nowrap;}
+  .mc-sw button+button{border-left:1px solid #c4cad2;}
+  .mc-sw button[aria-pressed="true"]{background:var(--accent);color:#fff;}
 </style>
 </head>
 <body>
   <div id="milecheck">
     <div class="mc-header">
-      <div class="mc-title"><b>MileCheck Cross-Border</b><span>US land border wait times</span></div>
+      <div class="mc-brand"><i aria-hidden="true"></i>MileCheck Cross-Border</div>
+      <div class="mc-vehicle"><span class="mc-vname" id="mc-vname">&nbsp;</span>
+        <span class="mc-live" id="mc-live"><span class="dot"></span>Live</span>
+        <span class="mc-demo" id="mc-demo" title="Example vehicle shown with live border data. Pick one of your vehicles inside MyGeotab.">Sample vehicle</span>
+        <span class="mc-sw" id="mc-sw" role="group" aria-label="Sample direction"></span></div>
       <select class="mc-veh" id="mc-veh" aria-label="Choose vehicle"></select>
-      <span class="mc-live" id="mc-live"><span class="dot"></span>Live</span>
-      <span class="mc-demo" id="mc-demo">Demo position</span>
     </div>
     <div class="mc-err" id="mc-err" role="status"></div>
     <div id="mc-content"><div class="mc-skeleton">Locating vehicle&hellip;</div></div>
@@ -102,8 +178,15 @@
 (function(){
   "use strict";
   var MILECHECK_API = "https://milepost-proxy.leahgerber93.workers.dev";
-  // Demo position when not running inside Geotab: I-5 just south of Blaine, WA.
-  var DEMO_POS = { lat:48.9600, lon:-122.7400 };
+  // Sample vehicles when not running inside Geotab. Southbound: I-5 just south of the
+  // Blaine port, in Washington. Northbound: BC-99 just north of Douglas (Peace Arch),
+  // between km posts 1 and 2 on the BC corpus. speed is mph like a live reading.
+  var SAMPLES = {
+    sb:{ label:"Southbound into US", lat:48.9780, lon:-122.7265, bearing:150, speed:48 },
+    nb:{ label:"Northbound into Canada", lat:49.0140, lon:-122.7588, bearing:345, speed:31 }
+  };
+  var SAMPLE_ORDER = ["sb","nb"];
+  var DEMO_NAME = "Unit 108 \u00b7 Kenworth T680";
   var MAX_CROSSINGS = 5;
 
   function haversine(a,b,c,d){ var R=3958.8,p=Math.PI/180,dLat=(c-a)*p,dLon=(d-b)*p;
@@ -127,42 +210,257 @@
   }
   function cbsaCell(n){ var w=fmtMin(n); return w?'<td class="w">'+esc(w)+'</td>':'<td class="na">No data</td>'; }
 
+  // Bounding boxes — all 50 states (mirrors constants/states.ts). Order matters:
+  // first match wins; ID before MT (MT's box extends into the Idaho panhandle).
+  var STATE_BOUNDS = {
+    WA:{minLat:45.54,maxLat:49.00,minLon:-124.85,maxLon:-116.91}, OR:{minLat:41.99,maxLat:46.29,minLon:-124.57,maxLon:-116.46},
+    ID:{minLat:42.00,maxLat:49.00,minLon:-117.24,maxLon:-111.04}, MT:{minLat:44.36,maxLat:49.00,minLon:-116.05,maxLon:-104.04},
+    AZ:{minLat:31.33,maxLat:36.999,minLon:-114.82,maxLon:-109.04}, UT:{minLat:37.00,maxLat:42.00,minLon:-114.05,maxLon:-109.04},
+    CO:{minLat:37.001,maxLat:41.00,minLon:-109.05,maxLon:-102.04}, NM:{minLat:31.33,maxLat:37.00,minLon:-109.05,maxLon:-103.00},
+    AK:{minLat:54.50,maxLat:71.50,minLon:-165.00,maxLon:-129.50}, SD:{minLat:42.48,maxLat:45.94,minLon:-104.06,maxLon:-96.43},
+    ND:{minLat:45.94,maxLat:49.00,minLon:-104.05,maxLon:-96.55}, NE:{minLat:40.00,maxLat:43.00,minLon:-104.05,maxLon:-95.31},
+    KS:{minLat:37.00,maxLat:40.00,minLon:-102.05,maxLon:-94.59}, WI:{minLat:42.49,maxLat:47.08,minLon:-92.89,maxLon:-86.80},
+    MN:{minLat:43.50,maxLat:49.00,minLon:-97.21,maxLon:-89.60}, IA:{minLat:40.37,maxLat:43.50,minLon:-96.64,maxLon:-90.14},
+    IL:{minLat:36.97,maxLat:42.51,minLon:-91.52,maxLon:-87.02}, WY:{minLat:40.99,maxLat:45.01,minLon:-111.06,maxLon:-104.05},
+    ME:{minLat:43.06,maxLat:47.46,minLon:-71.08,maxLon:-66.95}, RI:{minLat:41.15,maxLat:42.02,minLon:-71.86,maxLon:-71.12},
+    MI:{minLat:41.70,maxLat:48.30,minLon:-90.42,maxLon:-82.12}, NV:{minLat:35.00,maxLat:42.00,minLon:-120.01,maxLon:-114.04},
+    NJ:{minLat:38.92,maxLat:41.36,minLon:-75.56,maxLon:-73.89}, DE:{minLat:38.45,maxLat:39.84,minLon:-75.79,maxLon:-75.04},
+    MD:{minLat:37.91,maxLat:39.73,minLon:-79.49,maxLon:-75.04}, VA:{minLat:36.54,maxLat:39.47,minLon:-83.68,maxLon:-75.24},
+    WV:{minLat:37.20,maxLat:40.64,minLon:-82.65,maxLon:-77.72}, OH:{minLat:38.40,maxLat:42.00,minLon:-84.82,maxLon:-80.52},
+    PA:{minLat:39.72,maxLat:42.27,minLon:-80.52,maxLon:-74.69}, MA:{minLat:41.18,maxLat:42.89,minLon:-73.51,maxLon:-69.93},
+    VT:{minLat:42.73,maxLat:45.02,minLon:-73.43,maxLon:-71.46}, NH:{minLat:42.70,maxLat:45.31,minLon:-72.56,maxLon:-70.70},
+    CT:{minLat:40.98,maxLat:42.05,minLon:-73.73,maxLon:-71.79}, NY:{minLat:40.48,maxLat:45.02,minLon:-79.77,maxLon:-71.86},
+    FL:{minLat:24.40,maxLat:31.00,minLon:-87.63,maxLon:-80.03}, GA:{minLat:30.36,maxLat:35.00,minLon:-85.61,maxLon:-80.84},
+    NC:{minLat:33.84,maxLat:36.59,minLon:-84.32,maxLon:-75.46}, SC:{minLat:32.03,maxLat:35.22,minLon:-83.35,maxLon:-78.54},
+    MS:{minLat:30.17,maxLat:35.00,minLon:-91.66,maxLon:-88.10}, AL:{minLat:30.22,maxLat:35.01,minLon:-88.47,maxLon:-84.89},
+    AR:{minLat:33.00,maxLat:36.50,minLon:-94.62,maxLon:-89.64}, LA:{minLat:28.93,maxLat:33.02,minLon:-94.04,maxLon:-88.82},
+    OK:{minLat:33.62,maxLat:37.00,minLon:-103.00,maxLon:-94.43}, TN:{minLat:34.98,maxLat:36.68,minLon:-90.31,maxLon:-81.65},
+    KY:{minLat:36.50,maxLat:39.15,minLon:-89.57,maxLon:-81.96}, IN:{minLat:37.77,maxLat:41.76,minLon:-88.10,maxLon:-84.78},
+    MO:{minLat:36.00,maxLat:40.61,minLon:-95.77,maxLon:-89.10}, CA:{minLat:32.5,maxLat:42.0,minLon:-124.5,maxLon:-114.1},
+    HI:{minLat:18.5,maxLat:22.5,minLon:-160.5,maxLon:-154.5}, TX:{minLat:25.8,maxLat:36.5,minLon:-106.7,maxLon:-93.5},
+    // Canadian provinces and territories, LAST so every US state wins at the border
+    // (same order as constants/states.ts). Their posts are kilometre markers.
+    ON:{minLat:41.66,maxLat:56.90,minLon:-95.16,maxLon:-74.32}, QC:{minLat:44.99,maxLat:62.60,minLon:-79.77,maxLon:-57.10},
+    BC:{minLat:48.30,maxLat:60.02,minLon:-139.06,maxLon:-114.03}, AB:{minLat:48.99,maxLat:60.00,minLon:-120.01,maxLon:-109.95},
+    NS:{minLat:43.35,maxLat:47.10,minLon:-66.50,maxLon:-59.60}, NT:{minLat:59.98,maxLat:70.20,minLon:-137.00,maxLon:-110.00},
+    MB:{minLat:48.99,maxLat:60.00,minLon:-102.11,maxLon:-88.90}, SK:{minLat:48.99,maxLat:60.00,minLon:-110.10,maxLon:-101.30},
+    NB:{minLat:44.55,maxLat:48.10,minLon:-69.10,maxLon:-63.70}, YT:{minLat:59.90,maxLat:69.70,minLon:-141.01,maxLon:-123.80}
+  };
+  // name + DOT label per state; alerts:1 = live DOT feed (50 states), 0 = mileposts only (WY, RI).
+  var STATE_META = {
+    WA:{name:"Washington",dot:"WSDOT",alerts:1}, OR:{name:"Oregon",dot:"TripCheck",alerts:1},
+    ID:{name:"Idaho",dot:"ITD 511",alerts:1}, MT:{name:"Montana",dot:"MDT",alerts:1},
+    AZ:{name:"Arizona",dot:"AZ511",alerts:1}, UT:{name:"Utah",dot:"UDOT",alerts:1},
+    CO:{name:"Colorado",dot:"COtrip",alerts:1}, NM:{name:"New Mexico",dot:"NM 511",alerts:1},
+    AK:{name:"Alaska",dot:"AK 511",alerts:1}, SD:{name:"South Dakota",dot:"SD511",alerts:1},
+    ND:{name:"North Dakota",dot:"NDRoads",alerts:1}, NE:{name:"Nebraska",dot:"NE 511",alerts:1},
+    KS:{name:"Kansas",dot:"KanDrive",alerts:1}, WI:{name:"Wisconsin",dot:"511WI",alerts:1},
+    MN:{name:"Minnesota",dot:"511MN",alerts:1}, IA:{name:"Iowa",dot:"511IA",alerts:1},
+    IL:{name:"Illinois",dot:"IDOT",alerts:1}, WY:{name:"Wyoming",dot:"WYDOT",alerts:1},
+    ME:{name:"Maine",dot:"MaineDOT",alerts:1}, RI:{name:"Rhode Island",dot:"RIDOT",alerts:1},
+    MI:{name:"Michigan",dot:"Mi Drive",alerts:1}, NV:{name:"Nevada",dot:"NVRoads",alerts:1},
+    NJ:{name:"New Jersey",dot:"511NJ",alerts:1}, DE:{name:"Delaware",dot:"DelDOT",alerts:1},
+    MD:{name:"Maryland",dot:"MD 511",alerts:1}, VA:{name:"Virginia",dot:"VA 511",alerts:1},
+    WV:{name:"West Virginia",dot:"WV 511",alerts:1}, OH:{name:"Ohio",dot:"OHGO",alerts:1},
+    PA:{name:"Pennsylvania",dot:"511PA",alerts:1}, MA:{name:"Massachusetts",dot:"MassDOT",alerts:1},
+    VT:{name:"Vermont",dot:"VTrans",alerts:1}, NH:{name:"New Hampshire",dot:"NHDOT",alerts:1},
+    CT:{name:"Connecticut",dot:"CTDOT",alerts:1}, NY:{name:"New York",dot:"511NY",alerts:1},
+    FL:{name:"Florida",dot:"FL511",alerts:1}, GA:{name:"Georgia",dot:"511GA",alerts:1},
+    NC:{name:"North Carolina",dot:"NCDOT",alerts:1}, SC:{name:"South Carolina",dot:"511SC",alerts:1},
+    MS:{name:"Mississippi",dot:"MDOTtraffic",alerts:1}, AL:{name:"Alabama",dot:"ALGO",alerts:1},
+    AR:{name:"Arkansas",dot:"IDrive",alerts:1}, LA:{name:"Louisiana",dot:"511LA",alerts:1},
+    OK:{name:"Oklahoma",dot:"OK 511",alerts:1}, TN:{name:"Tennessee",dot:"SmartWay",alerts:1},
+    KY:{name:"Kentucky",dot:"goKY",alerts:1}, IN:{name:"Indiana",dot:"INDOT",alerts:1},
+    MO:{name:"Missouri",dot:"MoDOT",alerts:1}, CA:{name:"California",dot:"QuickMap",alerts:1},
+    HI:{name:"Hawaii",dot:"HI DOT",alerts:1}, TX:{name:"Texas",dot:"DriveTexas",alerts:1},
+    // km:1 = kilometre posts. Live alerts only where the Worker has a vetted feed (BC, AB, MB).
+    ON:{name:"Ontario",km:1,alerts:0}, QC:{name:"Quebec",km:1,alerts:0},
+    BC:{name:"British Columbia",dot:"DriveBC",km:1,alerts:1}, AB:{name:"Alberta",dot:"511 Alberta",km:1,alerts:1},
+    NS:{name:"Nova Scotia",km:1,alerts:0}, NT:{name:"Northwest Territories",km:1,alerts:0},
+    MB:{name:"Manitoba",dot:"Manitoba 511",km:1,alerts:1}, SK:{name:"Saskatchewan",km:1,alerts:0},
+    NB:{name:"New Brunswick",km:1,alerts:0}, YT:{name:"Yukon",km:1,alerts:0}
+  };
+  var KM_PER_MI = 1.609344;
+
+  function detectState(lat,lon){ for(var s in STATE_BOUNDS){ var b=STATE_BOUNDS[s];
+    if(lat>=b.minLat&&lat<=b.maxLat&&lon>=b.minLon&&lon<=b.maxLon) return s; } return null; }
+  function haversine(a,b,c,d){ var R=3958.8,p=Math.PI/180,dLat=(c-a)*p,dLon=(d-b)*p;
+    var x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a*p)*Math.cos(c*p)*Math.sin(dLon/2)*Math.sin(dLon/2);
+    return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x)); }
+  function bearingToDir(b){ if(b==null) return ""; b=((b%360)+360)%360;
+    return b>=45&&b<135?"EB":b>=135&&b<225?"SB":b>=225&&b<315?"WB":"NB"; }
+
+  var WA_INTERSTATES={"5":1,"82":1,"90":1,"182":1,"205":1,"405":1,"705":1};
+  function normalizeRoad(h){ if(!h) return ""; var m=h.match(/^SR[\s-]?(\d+)$/i);
+    if(m&&WA_INTERSTATES[m[1]]) return "I-"+m[1]; if(m) return "SR-"+m[1]; return h; }
+
+  /* ---- Hero helpers --------------------------------------------- */
+  var HDG=["N","NE","E","SE","S","SW","W","NW"];
+  function compass(b){ if(b==null) return ""; return HDG[Math.round((((b%360)+360)%360)/45)%8]; }
+  function fmtD(d, km){
+    if(km){ var k=d*KM_PER_MI; return k<0.1 ? Math.round(k*1000/10)*10+" m" : k.toFixed(1)+" km"; }
+    return d<0.1 ? Math.round(d*5280/10)*10+" ft" : d.toFixed(1)+" mi"; }
+  // Whole-number distance label: "<1 mi" / "12 km".
+  function fmtDist(d, km){ var v=km?d*KM_PER_MI:d, u=km?" km":" mi"; return (v<1?"<1":Math.round(v))+u; }
+  function signHtml(d){
+    var dir=d.direction?(" "+d.direction):"";
+    // d.speed is mph throughout; kilometre regions show km/h.
+    var km=!!d.km, P=km?"KM":"MP", spdV=d.speed!=null?Math.round(km?d.speed*KM_PER_MI:d.speed):null;
+    var spd=spdV!=null?'<div class="spd"><b>'+spdV+'</b><span>'+(km?'KM/H':'MPH')+'</span></div>':'';
+    var hdg=d.bearing!=null?'<div class="hdg" aria-label="Heading '+compass(d.bearing)+'">'+compass(d.bearing)+'</div>':'';
+    if(d.milepost==null){
+      return '<div class="mc-sign" role="img" aria-label="No mile marker found near this vehicle">'+spd+hdg
+        +'<div class="none">No '+(km?'kilometre':'mile')+' marker within range</div><div class="lbl">'+esc(d.state||"")+'</div></div>';
+    }
+    var line='';
+    if(d.seg){
+      // Lower mile marker always on the left, like the phone app's slider.
+      var g=d.seg, L=g.lo, R=g.hi, Ld=g.loD, Rd=g.hiD;
+      var pct=Math.max(4,Math.min(96,(Ld/(Ld+Rd||1))*100));
+      line='<div class="mc-line"><div class="bar"><i style="left:'+pct.toFixed(1)+'%"></i></div>'
+        +'<div class="ends"><span><b>'+P+' '+L+'</b> &middot; '+fmtD(Ld,km)+'</span><span>'+fmtD(Rd,km)+' &middot; <b>'+P+' '+R+'</b></span></div></div>';
+    }
+    return '<div class="mc-sign" role="img" aria-label="'+esc((d.route||"")+dir+(km?", kilometre ":", mile ")+d.milepost.toFixed(1)+(spdV!=null?", "+spdV+(km?" km/h":" mph"):""))+'">'+spd+hdg
+      +'<div class="rt">'+esc(d.route||"")+esc(dir)+'</div>'
+      +'<div class="mi">'+d.milepost.toFixed(1)+'</div>'
+      +'<div class="lbl">'+(km?'Kilometre marker':'Mile marker')+' &middot; '+esc(d.state||"")+'</div>'+line+'</div>';
+  }
+  // Small position map from Esri street tiles (no key). 3x3 tiles centred on the vehicle.
+  function mapHtml(d){
+    if(d.lat==null) return '';
+    var z=13, n=Math.pow(2,z), r=d.lat*Math.PI/180;
+    var px=(d.lon+180)/360*n*256, py=(1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*n*256;
+    var tx=Math.floor(px/256), ty=Math.floor(py/256), t='';
+    for(var i=-2;i<=2;i++) for(var k=-1;k<=1;k++){
+      var x=tx+i, y=ty+k;
+      t+='<img class="tile" alt="" src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/'+z+'/'+y+'/'+x+'" '
+        +'style="left:calc(50% + '+Math.round(x*256-px)+'px);top:calc(50% + '+Math.round(y*256-py)+'px)">';
+    }
+    (d.bridges||[]).forEach(function(b){
+      var br=b.lat*Math.PI/180, bx=(b.lon+180)/360*n*256-px, by=(1-Math.log(Math.tan(br)+1/Math.cos(br))/Math.PI)/2*n*256-py;
+      if(Math.abs(bx)<600&&Math.abs(by)<120) t+='<span class="brg'+(b.up?' up':'')+'" title="'+esc(b.name)+' Bridge" style="left:calc(50% + '+Math.round(bx)+'px);top:calc(50% + '+Math.round(by)+'px)"></span>';
+    });
+    var rot=d.bearing!=null?' style="transform:rotate('+Math.round(d.bearing)+'deg)"':'';
+    return '<div class="mc-map" role="img" aria-label="Map of the vehicle position, '+esc(d.lat.toFixed(4)+", "+d.lon.toFixed(4))+'">'+t
+      +'<span class="me"'+rot+'></span><span class="attr">Esri</span>'
+      +'<div class="cap"><span><b>'+esc(d.route||"Off highway")+(d.direction?" "+esc(d.direction):"")+'</b>'
+      +(d.milepost!=null?' near '+(d.km?'KM ':'MP ')+d.milepost.toFixed(1):'')+', '+esc(d.state||"")+'</span>'
+      +'<span>'+d.lat.toFixed(4)+', '+d.lon.toFixed(4)+'</span></div></div>';
+  }
+
+  // Parsed milepost file per state, kept for the session. The file is 1-2 MB;
+  // only position and alerts are refetched on each refresh.
+  var MP_CACHE = {};
+  function okJson(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); }
+  function getMileposts(state){
+    if(MP_CACHE[state]) return Promise.resolve(MP_CACHE[state]);
+    return fetch(MILECHECK_API+"/mileposts?state="+state).then(okJson);
+  }
+
+
+  /* ---- Nearest mile marker for the hero sign (same logic as the main add-in) ---- */
+  function findMilepost(lat, lon, bearing, speed){
+    var state=detectState(lat,lon), meta=state?STATE_META[state]:null;
+    var out={state:meta?meta.name:"",km:!!(meta&&meta.km),route:"",direction:bearingToDir(bearing),speed:(speed!=null?speed:null),milepost:null,lat:lat,lon:lon,bearing:bearing};
+    if(!state) return Promise.resolve(out);
+    return getMileposts(state).then(function(mps){
+        // Some states (e.g. AZ) return mileposts grouped by route:
+        //   { "I-40":[{mile,lat,lng},...], "US-89":[...] }  — route is the KEY, coords use `lng`.
+        // Flatten to a flat array, attaching the route key to each point and dropping
+        // junk routes with <=2 points (mirrors the phone app's useAllMileposts filter).
+        if(!Array.isArray(mps)){
+          if(mps&&typeof mps==="object"){ var flat=[];
+            for(var rk in mps){ var arr=mps[rk]; if(!Array.isArray(arr)||arr.length<=2) continue;
+              for(var qi=0;qi<arr.length;qi++){ var e=arr[qi]; if(!e) continue;
+                if(e.route==null&&e.highway==null) e.route=rk; flat.push(e); } }
+            mps=flat;
+          } else { return; }
+        }
+        MP_CACHE[state]=mps;
+        if(!mps.length) return;
+        var best=null,bd=Infinity,major=null,md=Infinity;
+        for(var i=0;i<mps.length;i++){ var m=mps[i];
+          var la=m.lat!=null?m.lat:m.latitude, lo=m.lon!=null?m.lon:(m.lng!=null?m.lng:m.longitude);
+          if(la==null||lo==null) continue;
+          m._d=haversine(lat,lon,la,lo);
+          if(m._d<bd){ bd=m._d; best=m; }
+          if(/^I-/.test(normalizeRoad(m.highway||m.route||""))&&m._d<md){ md=m._d; major=m; } }
+        var pick=(major&&md<=bd+2.0)?major:best;
+        if(!pick) return;
+        out.route=normalizeRoad(pick.highway||pick.route||"");
+        var mileOf=function(m){ return m.milepost!=null?m.milepost:m.mile; };
+        // Interpolate a 1-decimal position from the two nearest markers on this
+        // route with different whole-mile values (mirrors the phone app).
+        var same=mps.filter(function(m){ return m._d!=null && normalizeRoad(m.highway||m.route||"")===out.route && mileOf(m)!=null; })
+                    .sort(function(x,y){ return x._d-y._d; });
+        var a=same[0], b=null;
+        if(a){ var ra=Math.round(mileOf(a));
+          for(var k=1;k<same.length;k++){ if(Math.round(mileOf(same[k]))!==ra){ b=same[k]; break; } } }
+        if(a&&b&&Math.abs(Math.round(mileOf(a))-Math.round(mileOf(b)))<=3){
+          var ma=Math.round(mileOf(a)), mb=Math.round(mileOf(b));
+          var lom=Math.min(ma,mb), him=Math.max(ma,mb);
+          var lod=(ma<mb)?a._d:b._d, tot=a._d+b._d, frac=tot>0?lod/tot:0;
+          out.milepost=Math.round((lom+frac*(him-lom))*10)/10;
+          out.seg={lo:lom,hi:him,loD:lod,hiD:tot-lod};
+        } else if(a){ out.milepost=Math.round(mileOf(a)*10)/10; }
+      }).catch(function(){ delete MP_CACHE[state]; }).then(function(){ return out; });
+  }
+
   var lastUpdated=null, lastGood=null;
-  function render(list, meta, isLive, pos, errMsg){
+  function waitTile(label, w, sub){
+    if(w==null) return '<div class="xw na"><div class="k">'+esc(label)+'</div><div class="v">'+esc(sub||"No data")+'</div></div>';
+    var cls=w>=60?"long":w>=20?"mid":"ok";
+    var big=w===0?'0<small>min</small>':(w<60?w+'<small>min</small>':Math.floor(w/60)+'<small>hr</small> '+(w%60?(w%60)+'<small>min</small>':''));
+    return '<div class="xw '+cls+'"><div class="k">'+esc(label)+'</div><div class="v">'+big+'</div>'+(sub?'<div class="s">'+esc(sub)+'</div>':'')+'</div>';
+  }
+  function cbpTile(label, l){
+    if(!l||!l.available) return waitTile(label, null, "Not offered");
+    if(l.delayMinutes!=null) return waitTile(label, l.delayMinutes, l.lanesOpen!=null?(l.lanesOpen+(l.lanesOpen===1?" lane open":" lanes open")):"");
+    return waitTile(label, null, l.status||"No data");
+  }
+  function render(list, meta, isLive, pos, errMsg, hero){
     el("mc-live").classList.toggle("on", !!isLive);
     el("mc-demo").classList.toggle("on", !isLive);
-    var html='<div class="mc-pos">'+(isLive?'Vehicle position':'Demo position (near Blaine, WA)')+': '
-      +pos.lat.toFixed(4)+', '+pos.lon.toFixed(4)+' &middot; nearest '+list.length+' crossings by straight-line distance</div>';
+    el("mc-sw").classList.toggle("on", !isLive);
+    var h=hero||{lat:pos.lat,lon:pos.lon,milepost:null,state:""};
+    if(list.length){ h.route=h.route||""; }
+    var html='<div class="mc-top">'+signHtml(h)+mapHtml(h)+'</div>';
+    html+='<div class="mc-section-label">Nearest '+list.length+' crossings by straight-line distance &middot; wait times</div>';
     if(meta&&meta.waitsUnavailable) html+='<div class="mc-empty" style="margin-bottom:8px">CBP wait times are unavailable right now. Crossing locations below; no waits shown.</div>';
     if(!list.length) html+='<div class="mc-empty">No crossing data could be loaded.</div>';
-    html+=list.map(function(r){
+    html+='<div class="xc-grid">'+list.map(function(r,idx){
       var closed=/closed/i.test(r.portStatus||"");
-      var dist=r._d<1?"<1 mi":Math.round(r._d)+" mi";
+      var dist=fmtDist(r._d, h.km);
       var into=r.intoCanada;
-      var rows='<tr><th scope="col">Lane</th><th scope="col">Into the US (CBP)</th>'+(into?'<th scope="col">Into Canada (CBSA)</th>':'')+'</tr>'
-        +'<tr><td>Commercial, standard</td>'+laneCell(r.commercial&&r.commercial.standard)+(into?cbsaCell(into.commercial):'')+'</tr>'
-        +'<tr><td>Commercial, FAST</td>'+laneCell(r.commercial&&r.commercial.fast)+(into?'<td class="na">Not reported</td>':'')+'</tr>'
-        +'<tr><td>Passenger, standard</td>'+laneCell(r.passenger&&r.passenger.standard)+(into?cbsaCell(into.passenger):'')+'</tr>';
+      var us='<div class="xc-dir">Into the US &middot; CBP</div><div class="xc-w">'
+        +cbpTile("Commercial", r.commercial&&r.commercial.standard)
+        +cbpTile("FAST", r.commercial&&r.commercial.fast)
+        +cbpTile("Passenger", r.passenger&&r.passenger.standard)+'</div>';
+      var ca=into?('<div class="xc-dir">Into Canada &middot; CBSA</div><div class="xc-w two">'
+        +waitTile("Commercial", into.commercial, into.commercial==null?"No data":"")
+        +waitTile("Passenger", into.passenger, into.passenger==null?"No data":"")+'</div>'):'';
       var src='CBP updated '+(r.lastUpdated?esc(relIso(r.lastUpdated)):'time not given')
         +(into&&into.lastUpdated?' &middot; CBSA updated '+esc(relIso(into.lastUpdated)):'')
         +(r.stale?' &middot; <span class="mc-stale">Stale</span>':'');
-      return '<div class="bx'+(closed?' closed':'')+'">'
-        +'<div class="bx-h"><div class="bx-n">'+esc(r.portName)+(r.crossingName?' <span>&middot; '+esc(r.crossingName)+'</span>':'')+'</div>'
-        +'<span class="bx-d">'+dist+'</span></div>'
-        +'<div class="bx-meta">'+(r.border==="mexican"?"US / Mexico":r.border==="canadian"?"US / Canada":"")
+      return '<div class="xc'+(closed?' closed':(idx===0?' near':''))+'">'
+        +'<div class="xc-h"><div class="xc-n">'+esc(r.portName)+(r.crossingName?'<span>'+esc(r.crossingName)+'</span>':'')+'</div>'
+        +'<span class="xc-d">'+dist+'</span></div>'
+        +'<div class="xc-meta">'+(r.border==="mexican"?"US / Mexico":r.border==="canadian"?"US / Canada":"")
         +(r.portStatus?' &middot; <span class="'+(closed?'closed':'')+'">'+esc(r.portStatus)+'</span>':'')
-        +(r.hours?' &middot; Hours: '+esc(r.hours):'')+'</div>'
-        +'<table class="bx-t">'+rows+'</table>'
-        +(r.constructionNotice?'<div class="bx-note">'+esc(r.constructionNotice.slice(0,200))+'</div>':'')
-        +'<div class="bx-src">'+src+'</div></div>';
-    }).join("");
+        +(r.hours?' &middot; '+esc(r.hours):'')+'</div>'
+        +us+ca
+        +(r.constructionNotice?'<div class="xc-note">'+esc(r.constructionNotice.slice(0,200))+'</div>':'')
+        +'<div class="xc-src">'+src+'</div></div>';
+    }).join("")+'</div>';
     el("mc-content").innerHTML=html;
     lastUpdated=new Date();
     el("mc-updated").textContent="Updated "+hhmm(lastUpdated);
     showErr(errMsg||"");
   }
 
+  var lastHero=null;
   function loadFor(pos, isLive){
+    var heroP=findMilepost(pos.lat, pos.lon, pos.bearing, pos.speed).then(function(h){ lastHero=h; return h; }, function(){ return lastHero; });
     fetch(MILECHECK_API+"/border-crossings").then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
       .then(function(j){
         var all=(j&&j["border-crossings"])||[], meta=(j&&j.meta)||{};
@@ -172,13 +470,25 @@
           .sort(function(a,b){ return a._d-b._d; }).slice(0,MAX_CROSSINGS);
         if(!list.length) throw new Error("empty");
         lastGood={list:list,meta:meta};
-        render(list, meta, isLive, pos, "");
+        return heroP.then(function(h){ render(list, meta, isLive, pos, "", h); });
       }).catch(function(){
         var msg="Could not reach MileCheck border data. "+(lastGood?"Showing the last data that loaded. ":"")+"Retrying in 60 seconds.";
-        if(lastGood) render(lastGood.list, lastGood.meta, isLive, pos, msg);
+        if(lastGood) render(lastGood.list, lastGood.meta, isLive, pos, msg, lastHero);
         else { el("mc-content").innerHTML='<div class="mc-empty">No border data loaded.</div>'; showErr(msg);
-          el("mc-live").classList.toggle("on", !!isLive); el("mc-demo").classList.toggle("on", !isLive); }
+          el("mc-live").classList.toggle("on", !!isLive); el("mc-demo").classList.toggle("on", !isLive); el("mc-sw").classList.toggle("on", !isLive); }
       });
+  }
+
+  /* ---- Sample switch (standalone/demo only) ---------------------- */
+  var sampleKey = SAMPLE_ORDER[0];
+  function setupSwitch(){
+    var sw=el("mc-sw"); if(!sw||sw.childNodes.length) return;
+    sw.innerHTML=SAMPLE_ORDER.map(function(k){ return '<button type="button" data-k="'+k+'" aria-pressed="'+(k===sampleKey)+'">'+esc(SAMPLES[k].label)+'</button>'; }).join("");
+    sw.onclick=function(e){ var b=e.target.closest&&e.target.closest("button"); if(!b||b.getAttribute("data-k")===sampleKey) return;
+      sampleKey=b.getAttribute("data-k");
+      [].forEach.call(sw.querySelectorAll("button"),function(x){ x.setAttribute("aria-pressed", String(x.getAttribute("data-k")===sampleKey)); });
+      el("mc-content").innerHTML='<div class="mc-skeleton">Locating vehicle&hellip;</div>';
+      load(currentApi, pickerState); };
   }
 
   /* ---- MyGeotab position: one device per call, OverLimit backoff ---- */
@@ -194,7 +504,7 @@
           var pick=null;
           (result||[]).forEach(function(r){ if(r&&r.latitude!=null&&r.longitude!=null&&(r.latitude||r.longitude)){
             if(!pick||(r.dateTime||"")>(pick.dateTime||"")) pick=r; } });
-          resolve(pick?{lat:pick.latitude,lon:pick.longitude}:null);
+          resolve(pick?{lat:pick.latitude,lon:pick.longitude,bearing:pick.bearing,speed:pick.speed!=null?Math.round(pick.speed*0.621371):null}:null);
         }, function(err){
           if(/OverLimit/i.test(String((err&&(err.name||err.message))||err))){ backoffUntil=Date.now()+120000; }
           resolve(null);
@@ -250,7 +560,9 @@
   }
   function load2(api, state){
     getVehiclePosition(api, state).then(function(pos){
-      if(pos) loadFor(pos, true); else loadFor(DEMO_POS, false);
+      var sel=el("mc-veh"), nm=(sel&&sel.selectedIndex>=0&&sel.options[sel.selectedIndex])?sel.options[sel.selectedIndex].text:"";
+      el("mc-vname").textContent = pos ? (nm || (state&&state.device&&state.device.name) || "Selected vehicle") : DEMO_NAME;
+      if(pos) loadFor(pos, true); else { setupSwitch(); loadFor(SAMPLES[sampleKey], false); }
     });
   }
 

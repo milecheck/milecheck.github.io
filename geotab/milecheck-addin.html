@@ -3,125 +3,143 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="data:," />
 <title>MileCheck</title>
 <style>
   /* ----------------------------------------------------------------
-     Fleet-ops console styling — muted, dense, squared-off. Designed
-     to read as a native MyGeotab / Geotab Drive data widget, not a
-     consumer app card. One deep-navy accent; severity shown by a thin
-     muted tick, not a rainbow.
+     2026-10-22 redesign: the milepost sign is the hero (same green sign,
+     white border, route + one-decimal mile as the phone app), with a small
+     map beside it. Cameras and drawbridges sit right under the sign, then
+     the alerts. Built to fit one screen at MyGeotab panel width.
   ----------------------------------------------------------------- */
   :root{
-    --ink:#161a1f; --muted:#6e7782; --faint:#5f6873; --line:#dce0e6;
-    --surface:#fff; --bg:#eceef1; --accent:#27496d;
-    --crit:#9f2a1f; --warn:#875708; --cool:#3f5a73; --info:#5b6770;
+    --ink:#161a1f; --muted:#5d6670; --faint:#5f6873; --line:#dce0e6;
+    --surface:#fff; --bg:#f1f2f4; --accent:#27496d; --sign:#0b6b3a;
+    --crit:#9f2a1f; --warn:#875708; --cool:#3f5a73; --info:#5b6770; --ok:#1d6b46;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;}
-  #milecheck{max-width:720px;margin:0 auto;padding:14px 16px;}
+  #milecheck{max-width:1280px;margin:0 auto;padding:12px 16px;}
+  img{max-width:100%;}
 
-  .mc-header{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:14px;}
-  .mc-title{display:flex;align-items:baseline;gap:8px;flex:1;min-width:0;}
-  .mc-title b{font-size:12.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;}
-  .mc-title span{color:var(--muted);font-size:11.5px;}
+  .mc-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px;}
+  .mc-brand{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;}
+  .mc-brand i{width:12px;height:12px;border-radius:50%;background:var(--sign);display:inline-block;}
+  .mc-vehicle{flex:1;min-width:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .mc-vname{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
   .mc-demo,.mc-live{display:none;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
-  .mc-demo{color:#7a5b00;background:#f5efdb;border:1px solid #e4d8ad;}
-  .mc-live{color:#1d6b46;background:#e6f1ea;border:1px solid #c2dcce;}
+  .mc-demo{color:#6b5000;background:#f5efdb;border:1px solid #e4d8ad;}
+  .mc-live{color:var(--ok);background:#e6f1ea;border:1px solid #c2dcce;}
   .mc-demo.on,.mc-live.on{display:inline-block;}
-  .mc-live .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#1d6b46;margin-right:5px;vertical-align:1px;}
+  .mc-live .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ok);margin-right:5px;vertical-align:1px;}
+  .mc-veh{display:none;font:inherit;font-size:12px;max-width:240px;padding:4px 6px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);}
+  .mc-veh.on{display:inline-block;}
 
-  /* hero: the milepost as a data readout, not a colored card */
-  .mc-hero{background:#fafbfc;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:12px 16px;margin-bottom:16px;}
-  .mc-hero .label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:600;}
-  .mc-mp{display:flex;align-items:baseline;gap:5px;margin:3px 0 1px;}
-  .mc-mp .num{font-size:33px;font-weight:700;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.5px;}
-  .mc-mp .unit{font-size:12px;color:var(--faint);font-weight:600;text-transform:uppercase;}
-  .mc-route{font-size:13px;color:var(--muted);}
-  .mc-route strong{color:var(--ink);font-weight:700;}
-  .mc-route .sep{color:var(--line);margin:0 7px;}
-  .mc-route .state{color:var(--muted);}
-  .mc-route .spd{color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;}
+  /* ---- Hero: sign + map ---------------------------------------------- */
+  .mc-top{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:12px;margin-bottom:12px;}
+  .mc-sign{position:relative;background:var(--sign);color:#fff;border:3px solid #fff;outline:1px solid #c9d2cc;border-radius:10px;padding:16px 16px 12px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.12);}
+  .mc-sign .spd{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.3);border-radius:6px;padding:4px 9px;line-height:1.1;}
+  .mc-sign .spd b{display:block;font-size:19px;font-variant-numeric:tabular-nums;}
+  .mc-sign .spd span{font-size:8.5px;letter-spacing:1px;color:rgba(255,255,255,.85);}
+  .mc-sign .hdg{position:absolute;top:10px;right:10px;width:34px;height:34px;border:1.5px solid rgba(255,255,255,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+  .mc-sign .rt{font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+  .mc-sign .mi{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:76px;font-weight:700;line-height:1;letter-spacing:-3px;margin:6px 0 2px;font-variant-numeric:tabular-nums;}
+  .mc-sign .lbl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.85);}
+  .mc-sign .none{font-size:16px;font-weight:700;padding:28px 0;}
+  .mc-line{margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,.25);}
+  .mc-line .bar{position:relative;height:6px;border-radius:3px;background:rgba(255,255,255,.3);margin:0 4px;}
+  .mc-line .bar i{position:absolute;top:-4px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(0,0,0,.18);}
+  .mc-line .ends{display:flex;justify-content:space-between;font-size:11.5px;margin-top:6px;font-variant-numeric:tabular-nums;}
+  .mc-line .ends b{font-size:13px;}
 
-  .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:600;margin:0 0 7px 1px;}
-  .mc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
-  @media (max-width:560px){ .mc-cols{grid-template-columns:1fr;} }
-  .mc-col-h{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 7px 1px;}
+  .mc-map{position:relative;min-height:200px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#e8e6df;}
+  .mc-map .tile{position:absolute;width:256px;height:256px;}
+  .mc-map .me{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#1a6fd6;border:3px solid #fff;box-shadow:0 0 0 6px rgba(26,111,214,.25),0 1px 3px rgba(0,0,0,.4);}
+  .mc-map .me::after{content:"";position:absolute;left:50%;top:-14px;margin-left:-5px;border:5px solid transparent;border-bottom:8px solid #1a6fd6;}
+  .mc-map .brg{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:2px;background:var(--ok);border:2px solid #fff;}
+  .mc-map .brg.up{background:var(--crit);}
+  .mc-map .cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:rgba(255,255,255,.94);padding:5px 10px;font-size:11.5px;color:var(--ink);}
+  .mc-map .cap b{font-weight:700;}
+  .mc-map .attr{position:absolute;right:4px;top:3px;font-size:9.5px;color:#333;background:rgba(255,255,255,.8);padding:0 4px;border-radius:2px;}
+
+  .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:700;margin:0 0 6px 1px;}
+  .mc-mid{display:grid;grid-template-columns:1fr 260px;gap:12px;margin-bottom:12px;}
+  .mc-mid.nobr{grid-template-columns:1fr;}
+  /* ---- Cameras: the actual road, nearest first ---------------------- */
+  .mc-cams{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .mc-cam{background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+  .mc-cam .shot{width:100%;aspect-ratio:16/9;object-fit:cover;background:#dfe3e7;display:block;}
+  .mc-cam .cap{padding:5px 8px 6px;}
+  .mc-cam .nm{font-size:11.5px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .mc-cam .mt{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;}
+  /* ---- Drawbridges: only where live status actually exists ---------- */
+  .mc-bridges{display:flex;flex-direction:column;gap:5px;}
+  .mc-bridge{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:4px;padding:6px 10px;}
+  .mc-bridge.up{border-left-color:var(--crit);background:#fbf0ee;}
+  .mc-bridge .nm{flex:1;font-size:12.5px;font-weight:700;}
+  .mc-bridge .st{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--ok);}
+  .mc-bridge.up .st{color:var(--crit);}
+  .mc-bridge .dist{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;min-width:36px;text-align:right;}
+
+  /* ---- Fleet Safety strip ------------------------------------------ */
+  .mc-safety{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .mc-chip{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--info);border-radius:3px;padding:7px 12px;min-width:0;}
+  .mc-chip .k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);white-space:nowrap;}
+  .mc-chip .v{font-size:12.5px;font-weight:600;}
+  .mc-chip .sub{font-size:11px;color:var(--faint);}
+  .mc-chip.caution,.mc-chip.strong{border-left-color:var(--warn);} .mc-chip.caution .k,.mc-chip.strong .k{color:var(--warn);}
+  .mc-chip.strong{background:#fdf8ec;}
+  .mc-chip.dangerous,.mc-chip.chains{border-left-color:var(--crit);background:#fbf0ee;} .mc-chip.dangerous .k,.mc-chip.chains .k{color:var(--crit);}
+  .mc-chip.surface{border-left-color:var(--cool);} .mc-chip.surface .k{color:var(--cool);}
+
+  /* ---- Alerts -------------------------------------------------------- */
+  .mc-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;}
+  .mc-col-h{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 6px 1px;}
   .mc-col-active .mc-col-h{color:var(--crit);}
-  .mc-count{background:var(--line);color:var(--muted);font-size:10px;font-weight:700;border-radius:3px;padding:0 5px;line-height:16px;}
-  .mc-col-empty{font-size:12px;color:var(--faint);padding:11px 12px;border:1px dashed var(--line);border-radius:3px;}
-  /* alerts: tight, muted rows — thin severity tick, no rainbow cards */
-  .mc-alert{display:flex;gap:11px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--info);border-radius:3px;padding:9px 12px;margin-bottom:5px;}
+  .mc-count{background:var(--line);color:var(--ink);font-size:10px;font-weight:700;border-radius:3px;padding:0 5px;line-height:16px;}
+  .mc-col-empty{font-size:12px;color:var(--faint);padding:10px 12px;border:1px dashed #c4cad2;border-radius:3px;background:var(--surface);}
+  .mc-alert{display:flex;gap:11px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--info);border-radius:3px;padding:8px 12px;margin-bottom:5px;}
   .mc-alert .body{flex:1;min-width:0;}
   .mc-alert .type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);}
   .mc-alert .type-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-  .mc-alert .dist{font-size:11px;font-weight:700;color:var(--ink);background:var(--line);border-radius:3px;padding:1px 7px;white-space:nowrap;font-variant-numeric:tabular-nums;}
-  .mc-alert .desc{margin:2px 0 3px;color:var(--ink);line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .mc-alert .dist{font-size:11px;font-weight:700;background:var(--line);border-radius:3px;padding:1px 7px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .mc-alert .desc{margin:2px 0 3px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
   .mc-alert .meta{font-size:11.5px;color:var(--faint);display:flex;gap:9px;flex-wrap:wrap;}
   .mc-alert.closure{border-left-color:var(--crit);} .mc-alert.closure .type{color:var(--crit);}
   .mc-alert.construction{border-left-color:var(--warn);} .mc-alert.construction .type{color:var(--warn);}
   .mc-alert.weather{border-left-color:var(--cool);} .mc-alert.weather .type{color:var(--cool);}
-  .mc-alert.info{border-left-color:var(--info);} .mc-alert.info .type{color:var(--info);}
-  .mc-empty{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px;text-align:center;color:var(--muted);}
-  .mc-foot{margin-top:16px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .mc-empty{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:16px;text-align:center;color:var(--muted);}
+  .mc-foot{margin-top:14px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
   .mc-foot a{color:var(--accent);text-decoration:none;font-weight:600;}
   .mc-skeleton{color:var(--muted);padding:20px;text-align:center;}
-
-  /* ---- Fleet Safety strip: crosswind / chains / road surface --------
-     Only renders the conditions that are actually present. An empty
-     safety strip is the correct output on a calm dry day — it must never
-     invent a reassurance ("all clear") the data can't support. */
-  .mc-safety{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-  .mc-chip{display:flex;align-items:baseline;gap:7px;background:var(--surface);border:1px solid var(--line);
-           border-left:3px solid var(--info);border-radius:3px;padding:8px 12px;min-width:0;}
-  .mc-chip .k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--info);white-space:nowrap;}
-  .mc-chip .v{font-size:12.5px;color:var(--ink);font-weight:600;}
-  .mc-chip .sub{font-size:11px;color:var(--faint);}
-  .mc-chip.caution{border-left-color:var(--warn);} .mc-chip.caution .k{color:var(--warn);}
-  .mc-chip.strong{border-left-color:var(--warn);background:#fdf8ec;} .mc-chip.strong .k{color:var(--warn);}
-  .mc-chip.dangerous{border-left-color:var(--crit);background:#fbf0ee;} .mc-chip.dangerous .k{color:var(--crit);}
-  .mc-chip.chains{border-left-color:var(--crit);background:#fbf0ee;} .mc-chip.chains .k{color:var(--crit);}
-  .mc-chip.surface{border-left-color:var(--cool);} .mc-chip.surface .k{color:var(--cool);}
-
-  /* ---- Cameras: the actual road, nearest first ---------------------- */
-  .mc-cams{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-  @media (max-width:560px){ .mc-cams{grid-template-columns:1fr 1fr;} }
-  .mc-cam{background:var(--surface);border:1px solid var(--line);border-radius:3px;overflow:hidden;}
-  .mc-cam .shot{width:100%;aspect-ratio:16/9;object-fit:cover;background:#e4e7eb;display:block;}
-  .mc-cam .cap{padding:6px 8px 7px;}
-  .mc-cam .nm{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.3;
-              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-  .mc-cam .mt{font-size:10.5px;color:var(--faint);margin-top:2px;font-variant-numeric:tabular-nums;}
-
-  /* ---- Drawbridges: only where live status actually exists ---------- */
-  .mc-bridges{display:flex;gap:8px;flex-wrap:wrap;}
-  .mc-bridge{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);
-             border-left:3px solid #1d6b46;border-radius:3px;padding:8px 12px;}
-  .mc-bridge.up{border-left-color:var(--crit);background:#fbf0ee;}
-  .mc-bridge .nm{font-size:12px;font-weight:600;}
-  .mc-bridge .st{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#1d6b46;}
-  .mc-bridge.up .st{color:var(--crit);}
-  .mc-bridge .dist{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;}
-  .mc-block{margin-top:16px;}
-  .mc-veh{display:none;font:inherit;font-size:12px;max-width:220px;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);}
-  .mc-veh.on{display:inline-block;}
   .mc-err{display:none;margin:0 0 12px;padding:8px 12px;border:1px solid #e4c9c4;background:#fbf0ee;color:var(--crit);border-radius:3px;font-size:12px;font-weight:600;}
   .mc-err.on{display:block;}
   .mc-stale{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--warn);}
+
+  @media (max-width:900px){ .mc-mid{grid-template-columns:1fr;} .mc-cams{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:640px){ .mc-top{grid-template-columns:1fr;} .mc-cols{grid-template-columns:1fr;} .mc-map{min-height:170px;} .mc-sign .mi{font-size:64px;} #milecheck{padding:10px 12px;} .mc-vname{white-space:normal;} }
+  .mc-sw{display:none;border:1px solid #c4cad2;border-radius:4px;overflow:hidden;background:var(--surface);}
+  .mc-sw.on{display:inline-flex;}
+  .mc-sw button{font:inherit;font-size:11px;font-weight:700;border:0;background:transparent;color:var(--muted);padding:3px 9px;min-height:26px;cursor:pointer;white-space:nowrap;}
+  .mc-sw button+button{border-left:1px solid #c4cad2;}
+  .mc-sw button[aria-pressed="true"]{background:var(--accent);color:#fff;}
 </style>
 </head>
 <body>
   <div id="milecheck">
     <div class="mc-header">
-      <div class="mc-title"><b>MileCheck</b><span>Live mile marker &amp; state DOT feeds</span></div>
+      <div class="mc-brand"><i aria-hidden="true"></i>MileCheck</div>
+      <div class="mc-vehicle"><span class="mc-vname" id="mc-vname">&nbsp;</span>
+        <span class="mc-live" id="mc-live"><span class="dot"></span>Live</span>
+        <span class="mc-demo" id="mc-demo" title="Example vehicle shown with live road data. Pick one of your vehicles inside MyGeotab.">Sample vehicle</span>
+        <span class="mc-sw" id="mc-sw" role="group" aria-label="Sample location"></span></div>
       <select class="mc-veh" id="mc-veh" aria-label="Choose vehicle"></select>
-      <span class="mc-live" id="mc-live"><span class="dot"></span>Live</span>
-      <span class="mc-demo" id="mc-demo">Demo position</span>
     </div>
     <div class="mc-err" id="mc-err" role="status"></div>
     <div id="mc-content"><div class="mc-skeleton">Locating vehicle&hellip;</div></div>
     <div class="mc-foot">
       <span id="mc-updated">&mdash;</span>
-      <span>All 50 US states &middot; Support: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a></span>
+      <span>All 50 US states and 10 Canadian provinces and territories &middot; Support: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a></span>
     </div>
   </div>
 
@@ -138,8 +156,17 @@
   "use strict";
 
   var MILECHECK_API = "https://milepost-proxy.leahgerber93.workers.dev";
-  // Demo vehicle position when not running inside Geotab (I-5, WA — Tacoma corridor).
-  var DEMO_POS = { lat:47.2400, lon:-122.4300, bearing:0, speed:62 };
+  // Sample vehicle when not running inside Geotab: southbound I-5 in Seattle at NE 45th St,
+  // where WSDOT cameras, live alerts and the five SDOT drawbridges all have real data.
+  // Second sample: eastbound BC-1 (Trans-Canada) just west of Hope, between km posts
+  // 170 and 171 on the BC corpus; DriveBC's Hope cameras are about 2.5 km away.
+  // speed is mph like a live reading (56 mph shows as 90 km/h).
+  var SAMPLES = {
+    sea:{ label:"Seattle, WA", lat:47.6610, lon:-122.3225, bearing:180, speed:54 },
+    bc:{ label:"Hope, BC", lat:49.3722, lon:-121.4460, bearing:45, speed:56 }
+  };
+  var SAMPLE_ORDER = ["sea","bc"];
+  var DEMO_NAME = "Unit 214 \u00b7 Freightliner Cascadia";
   var ALERT_RADIUS_MI = 60, MAX_ALERTS = 12;
 
   /* ---- Add-on module config (2026-08-29) ---------------------------
@@ -148,7 +175,7 @@
      production; each renders ONLY when it has real data for this
      vehicle's position, so a calm dry day correctly shows nothing
      rather than an invented all-clear. */
-  var CAM_RADIUS_MI = 40, MAX_CAMS = 3;     // nearest cameras worth showing
+  var CAM_RADIUS_MI = 40, MAX_CAMS = 4;     // nearest cameras worth showing
   var COND_RADIUS_MI = 60;                  // road-surface report relevance
   var BRIDGE_RADIUS_MI = 25;                // drawbridges near the vehicle
 
@@ -196,7 +223,14 @@
     OK:{minLat:33.62,maxLat:37.00,minLon:-103.00,maxLon:-94.43}, TN:{minLat:34.98,maxLat:36.68,minLon:-90.31,maxLon:-81.65},
     KY:{minLat:36.50,maxLat:39.15,minLon:-89.57,maxLon:-81.96}, IN:{minLat:37.77,maxLat:41.76,minLon:-88.10,maxLon:-84.78},
     MO:{minLat:36.00,maxLat:40.61,minLon:-95.77,maxLon:-89.10}, CA:{minLat:32.5,maxLat:42.0,minLon:-124.5,maxLon:-114.1},
-    HI:{minLat:18.5,maxLat:22.5,minLon:-160.5,maxLon:-154.5}, TX:{minLat:25.8,maxLat:36.5,minLon:-106.7,maxLon:-93.5}
+    HI:{minLat:18.5,maxLat:22.5,minLon:-160.5,maxLon:-154.5}, TX:{minLat:25.8,maxLat:36.5,minLon:-106.7,maxLon:-93.5},
+    // Canadian provinces and territories, LAST so every US state wins at the border
+    // (same order as constants/states.ts). Their posts are kilometre markers.
+    ON:{minLat:41.66,maxLat:56.90,minLon:-95.16,maxLon:-74.32}, QC:{minLat:44.99,maxLat:62.60,minLon:-79.77,maxLon:-57.10},
+    BC:{minLat:48.30,maxLat:60.02,minLon:-139.06,maxLon:-114.03}, AB:{minLat:48.99,maxLat:60.00,minLon:-120.01,maxLon:-109.95},
+    NS:{minLat:43.35,maxLat:47.10,minLon:-66.50,maxLon:-59.60}, NT:{minLat:59.98,maxLat:70.20,minLon:-137.00,maxLon:-110.00},
+    MB:{minLat:48.99,maxLat:60.00,minLon:-102.11,maxLon:-88.90}, SK:{minLat:48.99,maxLat:60.00,minLon:-110.10,maxLon:-101.30},
+    NB:{minLat:44.55,maxLat:48.10,minLon:-69.10,maxLon:-63.70}, YT:{minLat:59.90,maxLat:69.70,minLon:-141.01,maxLon:-123.80}
   };
   // name + DOT label per state; alerts:1 = live DOT feed (50 states), 0 = mileposts only (WY, RI).
   var STATE_META = {
@@ -224,8 +258,15 @@
     OK:{name:"Oklahoma",dot:"OK 511",alerts:1}, TN:{name:"Tennessee",dot:"SmartWay",alerts:1},
     KY:{name:"Kentucky",dot:"goKY",alerts:1}, IN:{name:"Indiana",dot:"INDOT",alerts:1},
     MO:{name:"Missouri",dot:"MoDOT",alerts:1}, CA:{name:"California",dot:"QuickMap",alerts:1},
-    HI:{name:"Hawaii",dot:"HI DOT",alerts:1}, TX:{name:"Texas",dot:"DriveTexas",alerts:1}
+    HI:{name:"Hawaii",dot:"HI DOT",alerts:1}, TX:{name:"Texas",dot:"DriveTexas",alerts:1},
+    // km:1 = kilometre posts. Live alerts only where the Worker has a vetted feed (BC, AB, MB).
+    ON:{name:"Ontario",km:1,alerts:0}, QC:{name:"Quebec",km:1,alerts:0},
+    BC:{name:"British Columbia",dot:"DriveBC",km:1,alerts:1}, AB:{name:"Alberta",dot:"511 Alberta",km:1,alerts:1},
+    NS:{name:"Nova Scotia",km:1,alerts:0}, NT:{name:"Northwest Territories",km:1,alerts:0},
+    MB:{name:"Manitoba",dot:"Manitoba 511",km:1,alerts:1}, SK:{name:"Saskatchewan",km:1,alerts:0},
+    NB:{name:"New Brunswick",km:1,alerts:0}, YT:{name:"Yukon",km:1,alerts:0}
   };
+  var KM_PER_MI = 1.609344;
 
   function detectState(lat,lon){ for(var s in STATE_BOUNDS){ var b=STATE_BOUNDS[s];
     if(lat>=b.minLat&&lat<=b.maxLat&&lon>=b.minLon&&lon<=b.maxLon) return s; } return null; }
@@ -300,18 +341,73 @@
     return "planned"; // nightly / long-term closures, construction, weather
   }
 
+  /* ---- Hero helpers --------------------------------------------- */
+  var HDG=["N","NE","E","SE","S","SW","W","NW"];
+  function compass(b){ if(b==null) return ""; return HDG[Math.round((((b%360)+360)%360)/45)%8]; }
+  function fmtD(d, km){
+    if(km){ var k=d*KM_PER_MI; return k<0.1 ? Math.round(k*1000/10)*10+" m" : k.toFixed(1)+" km"; }
+    return d<0.1 ? Math.round(d*5280/10)*10+" ft" : d.toFixed(1)+" mi"; }
+  // Whole-number distance label: "<1 mi" / "12 km".
+  function fmtDist(d, km){ var v=km?d*KM_PER_MI:d, u=km?" km":" mi"; return (v<1?"<1":Math.round(v))+u; }
+  function signHtml(d){
+    var dir=d.direction?(" "+d.direction):"";
+    // d.speed is mph throughout; kilometre regions show km/h.
+    var km=!!d.km, P=km?"KM":"MP", spdV=d.speed!=null?Math.round(km?d.speed*KM_PER_MI:d.speed):null;
+    var spd=spdV!=null?'<div class="spd"><b>'+spdV+'</b><span>'+(km?'KM/H':'MPH')+'</span></div>':'';
+    var hdg=d.bearing!=null?'<div class="hdg" aria-label="Heading '+compass(d.bearing)+'">'+compass(d.bearing)+'</div>':'';
+    if(d.milepost==null){
+      return '<div class="mc-sign" role="img" aria-label="No mile marker found near this vehicle">'+spd+hdg
+        +'<div class="none">No '+(km?'kilometre':'mile')+' marker within range</div><div class="lbl">'+esc(d.state||"")+'</div></div>';
+    }
+    var line='';
+    if(d.seg){
+      // Lower mile marker always on the left, like the phone app's slider.
+      var g=d.seg, L=g.lo, R=g.hi, Ld=g.loD, Rd=g.hiD;
+      var pct=Math.max(4,Math.min(96,(Ld/(Ld+Rd||1))*100));
+      line='<div class="mc-line"><div class="bar"><i style="left:'+pct.toFixed(1)+'%"></i></div>'
+        +'<div class="ends"><span><b>'+P+' '+L+'</b> &middot; '+fmtD(Ld,km)+'</span><span>'+fmtD(Rd,km)+' &middot; <b>'+P+' '+R+'</b></span></div></div>';
+    }
+    return '<div class="mc-sign" role="img" aria-label="'+esc((d.route||"")+dir+(km?", kilometre ":", mile ")+d.milepost.toFixed(1)+(spdV!=null?", "+spdV+(km?" km/h":" mph"):""))+'">'+spd+hdg
+      +'<div class="rt">'+esc(d.route||"")+esc(dir)+'</div>'
+      +'<div class="mi">'+d.milepost.toFixed(1)+'</div>'
+      +'<div class="lbl">'+(km?'Kilometre marker':'Mile marker')+' &middot; '+esc(d.state||"")+'</div>'+line+'</div>';
+  }
+  // Small position map from Esri street tiles (no key). 3x3 tiles centred on the vehicle.
+  function mapHtml(d){
+    if(d.lat==null) return '';
+    var z=13, n=Math.pow(2,z), r=d.lat*Math.PI/180;
+    var px=(d.lon+180)/360*n*256, py=(1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*n*256;
+    var tx=Math.floor(px/256), ty=Math.floor(py/256), t='';
+    for(var i=-2;i<=2;i++) for(var k=-1;k<=1;k++){
+      var x=tx+i, y=ty+k;
+      t+='<img class="tile" alt="" src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/'+z+'/'+y+'/'+x+'" '
+        +'style="left:calc(50% + '+Math.round(x*256-px)+'px);top:calc(50% + '+Math.round(y*256-py)+'px)">';
+    }
+    (d.bridges||[]).forEach(function(b){
+      var br=b.lat*Math.PI/180, bx=(b.lon+180)/360*n*256-px, by=(1-Math.log(Math.tan(br)+1/Math.cos(br))/Math.PI)/2*n*256-py;
+      if(Math.abs(bx)<600&&Math.abs(by)<120) t+='<span class="brg'+(b.up?' up':'')+'" title="'+esc(b.name)+' Bridge" style="left:calc(50% + '+Math.round(bx)+'px);top:calc(50% + '+Math.round(by)+'px)"></span>';
+    });
+    var rot=d.bearing!=null?' style="transform:rotate('+Math.round(d.bearing)+'deg)"':'';
+    return '<div class="mc-map" role="img" aria-label="Map of the vehicle position, '+esc(d.lat.toFixed(4)+", "+d.lon.toFixed(4))+'">'+t
+      +'<span class="me"'+rot+'></span><span class="attr">Esri</span>'
+      +'<div class="cap"><span><b>'+esc(d.route||"Off highway")+(d.direction?" "+esc(d.direction):"")+'</b>'
+      +(d.milepost!=null?' near '+(d.km?'KM ':'MP ')+d.milepost.toFixed(1):'')+', '+esc(d.state||"")+'</span>'
+      +'<span>'+d.lat.toFixed(4)+', '+d.lon.toFixed(4)+'</span></div></div>';
+  }
+
   var lastUpdated = null;
   function hhmm(d){ return d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); }
   function showErr(msg){ var e=el("mc-err"); e.textContent=msg||""; e.classList.toggle("on", !!msg); }
   function render(data, isLive){
     el("mc-live").classList.toggle("on", !!isLive);
     el("mc-demo").classList.toggle("on", !isLive);
+    el("mc-sw").classList.toggle("on", !isLive);
     var alerts=data.alerts||[];
     var dir=data.direction?(" "+data.direction):"";
 
     function alertCard(a){
-      var dtxt=a.dist==null?"":(a.dist<1?"<1 mi":Math.round(a.dist)+" mi");
-      var mpTxt=(a.mp!=null&&a.mp!=="")?(' &middot; MP '+esc(String(a.mp))):'';
+      var dtxt=a.dist==null?"":fmtDist(a.dist, data.km);
+      var mpTxt=(a.mp!=null&&a.mp!=="")?(' &middot; '+(data.km?'KM ':'MP ')+esc(String(a.mp))):'';
       return '<div class="mc-alert '+a.cls+'"><div class="body">'
         +'<div class="type-row"><span class="type">'+esc(a.label)+'</span>'
         +(dtxt?'<span class="dist">'+dtxt+'</span>':'')+'</div>'
@@ -329,7 +425,7 @@
 
     var alertsBlock;
     if(data.alertsAvail===false){
-      alertsBlock='<div class="mc-empty">Live state DOT feeds aren’t connected in '+esc(data.state)+' yet — mile-marker tracking still works.</div>';
+      alertsBlock='<div class="mc-empty">Live '+(data.km?'provincial road':'state DOT')+' feeds aren’t connected in '+esc(data.state)+' yet. '+(data.km?'Kilometre':'Mile')+'-marker tracking still works.</div>';
     } else {
       var active=[], planned=[];
       alerts.forEach(function(a){ (bucket(a)==="active"?active:planned).push(a); });
@@ -338,13 +434,7 @@
         +col("Planned / ongoing", planned, "planned")+'</div>';
     }
 
-    var heroHtml = data.milepost!=null ?
-      '<div class="mc-hero"><div class="label">Nearest mile marker</div>'
-      +'<div class="mc-mp"><span class="num">'+data.milepost.toFixed(1)+'</span><span class="unit">MP</span></div>'
-      +'<div class="mc-route"><strong>'+esc(data.route||"")+dir+'</strong>'
-      +(data.speed!=null?'<span class="sep">&middot;</span><span class="spd">'+Math.round(data.speed)+' mph</span>':'')
-      +'<span class="sep">|</span><span class="state">'+esc(data.state||"")+'</span></div></div>' : '';
-
+    var heroHtml = signHtml(data) + mapHtml(data);
     /* ---- Fleet Safety strip ----------------------------------------
        Chain controls are derived from the alerts already loaded rather
        than a second call — the DOT feed is where chain restrictions
@@ -363,7 +453,7 @@
     if(chainAlert){
       chips.push('<div class="mc-chip chains"><span class="k">Chain control</span>'
         +'<span class="v">'+esc((chainAlert.route||"In effect")).slice(0,22)+'</span>'
-        +(chainAlert.dist!=null?'<span class="sub">'+(chainAlert.dist<1?"<1":Math.round(chainAlert.dist))+' mi</span>':'')
+        +(chainAlert.dist!=null?'<span class="sub">'+fmtDist(chainAlert.dist, data.km)+'</span>':'')
         +'</div>');
     }
     if(data.surface){
@@ -378,22 +468,22 @@
     /* ---- Cameras ---------------------------------------------------- */
     var camBlock='';
     if(data.cameras&&data.cameras.length){
-      camBlock='<div class="mc-block"><div class="mc-section-label">Cameras near this vehicle</div><div class="mc-cams">'
+      camBlock='<div><div class="mc-section-label">Cameras nearest this vehicle</div><div class="mc-cams">'
         +data.cameras.map(function(c){
-          var meta=(c.route?esc(c.route):"")+(c.mile!=null?" &middot; MP "+esc(String(c.mile)):"");
+          var meta=(c.route?esc(c.route):"")+((c._m!=null||c.mile!=null)?" &middot; "+(data.km?"KM ":"MP ")+esc(String(c._m!=null?c._m:c.mile)):"");
           return '<div class="mc-cam">'
             +'<img class="shot" loading="lazy" alt="'+esc("Traffic camera: "+(c.title||"near vehicle"))+'" src="'+esc(c.imageUrl)+'" '
             +'onerror="this.style.visibility=\'hidden\'">'
             +'<div class="cap"><div class="nm">'+esc(c.title||"Traffic camera")+'</div>'
             +'<div class="mt">'+(meta?meta+' &middot; ':'')
-            +(c._d<1?"<1":Math.round(c._d))+' mi</div></div></div>';
+            +fmtDist(c._d, data.km)+'</div></div></div>';
         }).join("")+'</div></div>';
     }
 
     /* ---- Drawbridges ------------------------------------------------ */
     var bridgeBlock='';
     if(data.bridges&&data.bridges.length){
-      bridgeBlock='<div class="mc-block"><div class="mc-section-label">Drawbridges</div><div class="mc-bridges">'
+      bridgeBlock='<div><div class="mc-section-label">Seattle drawbridges (SDOT)</div><div class="mc-bridges">'
         +data.bridges.map(function(b){
           return '<div class="mc-bridge'+(b.up?' up':'')+'">'
             +'<span class="nm">'+esc(b.name)+'</span>'
@@ -402,7 +492,10 @@
         }).join("")+'</div></div>';
     }
 
-    el("mc-content").innerHTML = heroHtml + safetyBlock + alertsBlock + camBlock + bridgeBlock;
+    var hasBr=!!bridgeBlock;
+    var midHtml=(camBlock||hasBr)?'<div class="mc-mid'+(hasBr?'':' nobr')+'">'+(camBlock||'<div></div>')+bridgeBlock+'</div>':'';
+    el("mc-content").innerHTML = '<div class="mc-top">'+heroHtml+'</div>' + midHtml + safetyBlock
+      + '<div class="mc-section-label">'+(data.km?'Provincial road alerts within '+Math.round(ALERT_RADIUS_MI*KM_PER_MI)+' km':'State DOT alerts within '+ALERT_RADIUS_MI+' mi')+'</div>' + alertsBlock;
     lastUpdated = new Date();
     el("mc-updated").textContent = "Updated "+hhmm(lastUpdated);
     showErr(data.fetchErr ? "Could not reach MileCheck data. Showing what loaded; retrying in 60 seconds." : "");
@@ -420,7 +513,7 @@
   function loadFor(lat, lon, bearing, isLive, speed){
     var state=detectState(lat,lon), meta=state?STATE_META[state]:null;
     if(!state){ render({state:"this area",milepost:null,alerts:[],alertsAvail:false}, isLive); return; }
-    var out={state:meta.name,route:"",direction:bearingToDir(bearing),speed:(speed!=null?speed:null),milepost:null,
+    var out={state:meta.name,km:!!meta.km,route:"",direction:bearingToDir(bearing),speed:(speed!=null?speed:null),milepost:null,lat:lat,lon:lon,bearing:bearing,
              alertsAvail:!!meta.alerts,alerts:[]};
     var jobs=[
       getMileposts(state).then(function(mps){
@@ -461,6 +554,7 @@
           var lom=Math.min(ma,mb), him=Math.max(ma,mb);
           var lod=(ma<mb)?a._d:b._d, tot=a._d+b._d, frac=tot>0?lod/tot:0;
           out.milepost=Math.round((lom+frac*(him-lom))*10)/10;
+          out.seg={lo:lom,hi:him,loD:lod,hiD:tot-lod};
         } else if(a){ out.milepost=Math.round(mileOf(a)*10)/10; }
       }).catch(function(){ delete MP_CACHE[state]; out.fetchErr=true; })
     ];
@@ -487,7 +581,8 @@
        access-control-allow-origin:*, verified). Two hops: /points to get
        the forecast grid, then the forecast itself. Any failure is silent —
        a missing crosswind reading must never block the milepost. */
-    if(bearing!=null){
+    // NWS covers the US only; skip the call in Canada instead of logging a 404.
+    if(bearing!=null && !out.km){
       jobs.push(
         fetch("https://api.weather.gov/points/"+lat.toFixed(4)+","+lon.toFixed(4))
           .then(function(r){ return r.ok?r.json():null; })
@@ -539,8 +634,16 @@
         }).map(function(c){
           c._d=haversine(lat,lon,c.lat,c.lon); return c;
         }).filter(function(c){ return c._d<=CAM_RADIUS_MI; })
-          .sort(function(a,b){ return a._d-b._d; })
-          .slice(0,MAX_CAMS);
+          .sort(function(a,b){ return a._d-b._d; });
+        // Prefer cameras on the vehicle's own highway, one per mile, so the strip
+        // shows the road ahead and behind instead of four views of one interchange.
+        var rt=(out.route||"").replace(/[^A-Z0-9]/gi,"").toUpperCase(), pick=[];
+        var camMile=function(c){ var m=/\bMP\s*(\d+(?:\.\d+)?)/i.exec(c.title||""); return m?parseFloat(m[1]):(c.mile!=null?+c.mile:null); };
+        near.forEach(function(c){ var cr=(c.route||"").replace(/[^A-Z0-9]/gi,"").toUpperCase(), cm=camMile(c);
+          if(!rt||cr!==rt||pick.length>=MAX_CAMS||cm==null) return;
+          if(pick.every(function(p){ return Math.abs(p._m-cm)>=0.7; })){ c._m=cm; pick.push(c); } });
+        near.forEach(function(c){ if(pick.length<MAX_CAMS&&pick.indexOf(c)<0) pick.push(c); });
+        near=pick;
         if(near.length) out.cameras=near;
       }).catch(function(){}));
 
@@ -557,7 +660,7 @@
         .then(function(j){
           var raised=(j&&j.raised)||[];
           out.bridges=nearBridges.map(function(x){
-            return { name:x.b.name, dist:x.d, up:raised.indexOf(x.b.id)>=0 };
+            return { name:x.b.name, dist:x.d, lat:x.b.lat, lon:x.b.lon, up:raised.indexOf(x.b.id)>=0 };
           });
         }).catch(function(){}));
     }
@@ -569,6 +672,18 @@
       out.alerts=out.alerts.slice(0,MAX_ALERTS);
       render(out, isLive);
     });
+  }
+
+  /* ---- Sample switch (standalone/demo only) ---------------------- */
+  var sampleKey = SAMPLE_ORDER[0];
+  function setupSwitch(){
+    var sw=el("mc-sw"); if(!sw||sw.childNodes.length) return;
+    sw.innerHTML=SAMPLE_ORDER.map(function(k){ return '<button type="button" data-k="'+k+'" aria-pressed="'+(k===sampleKey)+'">'+esc(SAMPLES[k].label)+'</button>'; }).join("");
+    sw.onclick=function(e){ var b=e.target.closest&&e.target.closest("button"); if(!b||b.getAttribute("data-k")===sampleKey) return;
+      sampleKey=b.getAttribute("data-k");
+      [].forEach.call(sw.querySelectorAll("button"),function(x){ x.setAttribute("aria-pressed", String(x.getAttribute("data-k")===sampleKey)); });
+      el("mc-content").innerHTML='<div class="mc-skeleton">Locating vehicle&hellip;</div>';
+      load(currentApi, pickerState); };
   }
 
   var backoffUntil = 0;
@@ -652,8 +767,10 @@
   }
   function load2(api, state){
     getVehiclePosition(api, state).then(function(pos){
+      var sel=el("mc-veh"), nm=(sel&&sel.selectedIndex>=0&&sel.options[sel.selectedIndex])?sel.options[sel.selectedIndex].text:"";
+      el("mc-vname").textContent = pos ? (nm || (state&&state.device&&state.device.name) || "Selected vehicle") : DEMO_NAME;
       if(pos){ loadFor(pos.lat, pos.lon, pos.bearing, true, pos.speed); }
-      else { loadFor(DEMO_POS.lat, DEMO_POS.lon, DEMO_POS.bearing, false, DEMO_POS.speed); }
+      else { setupSwitch(); var sp=SAMPLES[sampleKey]; loadFor(sp.lat, sp.lon, sp.bearing, false, sp.speed); }
     });
   }
 
