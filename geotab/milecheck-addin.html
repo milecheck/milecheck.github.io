@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
-  <meta name="apple-itunes-app" content="app-id=6759212851">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MileCheck</title>
@@ -14,7 +12,7 @@
      muted tick, not a rainbow.
   ----------------------------------------------------------------- */
   :root{
-    --ink:#161a1f; --muted:#6e7782; --faint:#99a2ac; --line:#dce0e6;
+    --ink:#161a1f; --muted:#6e7782; --faint:#5f6873; --line:#dce0e6;
     --surface:#fff; --bg:#eceef1; --accent:#27496d;
     --crit:#9f2a1f; --warn:#875708; --cool:#3f5a73; --info:#5b6770;
   }
@@ -104,22 +102,26 @@
   .mc-bridge.up .st{color:var(--crit);}
   .mc-bridge .dist{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;}
   .mc-block{margin-top:16px;}
+  .mc-veh{display:none;font:inherit;font-size:12px;max-width:220px;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);}
+  .mc-veh.on{display:inline-block;}
+  .mc-err{display:none;margin:0 0 12px;padding:8px 12px;border:1px solid #e4c9c4;background:#fbf0ee;color:var(--crit);border-radius:3px;font-size:12px;font-weight:600;}
+  .mc-err.on{display:block;}
+  .mc-stale{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--warn);}
 </style>
-  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
-  <link rel="canonical" href="https://milecheckapp.com/geotab/milecheck-addin.html">
 </head>
 <body>
   <div id="milecheck">
     <div class="mc-header">
       <div class="mc-title"><b>MileCheck</b><span>Live mile marker &amp; state DOT feeds</span></div>
+      <select class="mc-veh" id="mc-veh" aria-label="Choose vehicle"></select>
       <span class="mc-live" id="mc-live"><span class="dot"></span>Live</span>
       <span class="mc-demo" id="mc-demo">Demo position</span>
     </div>
+    <div class="mc-err" id="mc-err" role="status"></div>
     <div id="mc-content"><div class="mc-skeleton">Locating vehicle&hellip;</div></div>
-    <div class="mc-foot" style="text-align:right"><a href="/api/plan/#screens" target="_blank" rel="noopener" style="color:inherit;font-size:12px">See how other buyers use the data</a></div>
     <div class="mc-foot">
       <span id="mc-updated">&mdash;</span>
-      <span>50 states, BC, AB &amp; MB &middot; live DOT feeds &middot; <a href="https://milecheckapp.com" target="_blank" rel="noopener">milecheckapp.com</a></span>
+      <span>All 50 US states &middot; Support: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a></span>
     </div>
   </div>
 
@@ -252,7 +254,7 @@
     var m=Math.round((Date.now()-ms)/60000); return (m>=0&&m<60*24*30)?m:null; }
   function rel(m){ if(m==null) return ""; if(m<1) return "just now"; if(m<60) return m+" min ago";
     var h=Math.floor(m/60); return h+(h===1?" hr ago":" hrs ago"); }
-  function esc(t){ return (t||"").replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c];}); }
+  function esc(t){ return (t||"").replace(/[<>&"]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c];}); }
   function el(id){ return document.getElementById(id); }
 
   /* ---- Crosswind (Fleet Safety module) -----------------------------
@@ -287,7 +289,9 @@
   }
 
   // Triage an alert into the two columns the dispatcher cares about.
+  var STALE_MIN = 48*60;  // alerts not updated in 48 h are labelled stale, never "Active"
   function bucket(a){
+    if(a.updated!=null && a.updated>STALE_MIN) return "planned";
     var s=(a.desc||"").toLowerCase();
     var planned=/nightly|overnight|night work|nighttime|each night|seasonal|long-term|until further notice|reopening|scheduled|begins? \w+ \d|through \w+ \d|\d\s*(p\.?m\.?)\s*(-|to)\s*\d/.test(s);
     if(a.label==="Crash") return "active";
@@ -296,6 +300,9 @@
     return "planned"; // nightly / long-term closures, construction, weather
   }
 
+  var lastUpdated = null;
+  function hhmm(d){ return d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); }
+  function showErr(msg){ var e=el("mc-err"); e.textContent=msg||""; e.classList.toggle("on", !!msg); }
   function render(data, isLive){
     el("mc-live").classList.toggle("on", !!isLive);
     el("mc-demo").classList.toggle("on", !isLive);
@@ -310,7 +317,8 @@
         +(dtxt?'<span class="dist">'+dtxt+'</span>':'')+'</div>'
         +(a.desc?'<div class="desc">'+esc(a.desc)+'</div>':'')
         +'<div class="meta"><span>'+esc(a.route||"")+mpTxt+'</span>'
-        +'<span>'+(a.source?esc(a.source):'')+(a.updated!=null?(a.source?' &middot; ':'')+rel(a.updated):'')+'</span></div>'
+        +'<span>'+(a.source?esc(a.source):'')+(a.updated!=null?(a.source?' &middot; ':'')+rel(a.updated):'')+'</span>'
+        +((a.updated!=null&&a.updated>STALE_MIN)?'<span class="mc-stale">Stale</span>':'')+'</div>'
         +'</div></div>';
     }
     function col(title, arr, kind){
@@ -374,7 +382,7 @@
         +data.cameras.map(function(c){
           var meta=(c.route?esc(c.route):"")+(c.mile!=null?" &middot; MP "+esc(String(c.mile)):"");
           return '<div class="mc-cam">'
-            +'<img class="shot" loading="lazy" alt="" src="'+esc(c.imageUrl)+'" '
+            +'<img class="shot" loading="lazy" alt="'+esc("Traffic camera: "+(c.title||"near vehicle"))+'" src="'+esc(c.imageUrl)+'" '
             +'onerror="this.style.visibility=\'hidden\'">'
             +'<div class="cap"><div class="nm">'+esc(c.title||"Traffic camera")+'</div>'
             +'<div class="mt">'+(meta?meta+' &middot; ':'')
@@ -395,7 +403,18 @@
     }
 
     el("mc-content").innerHTML = heroHtml + safetyBlock + alertsBlock + camBlock + bridgeBlock;
-    el("mc-updated").textContent = "Updated "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+    lastUpdated = new Date();
+    el("mc-updated").textContent = "Updated "+hhmm(lastUpdated);
+    showErr(data.fetchErr ? "Could not reach MileCheck data. Showing what loaded; retrying in 60 seconds." : "");
+  }
+
+  // Parsed milepost file per state, kept for the session. The file is 1-2 MB;
+  // only position and alerts are refetched on each refresh.
+  var MP_CACHE = {};
+  function okJson(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); }
+  function getMileposts(state){
+    if(MP_CACHE[state]) return Promise.resolve(MP_CACHE[state]);
+    return fetch(MILECHECK_API+"/mileposts?state="+state).then(okJson);
   }
 
   function loadFor(lat, lon, bearing, isLive, speed){
@@ -404,7 +423,7 @@
     var out={state:meta.name,route:"",direction:bearingToDir(bearing),speed:(speed!=null?speed:null),milepost:null,
              alertsAvail:!!meta.alerts,alerts:[]};
     var jobs=[
-      fetch(MILECHECK_API+"/mileposts?state="+state).then(function(r){return r.json();}).then(function(mps){
+      getMileposts(state).then(function(mps){
         // Some states (e.g. AZ) return mileposts grouped by route:
         //   { "I-40":[{mile,lat,lng},...], "US-89":[...] }  — route is the KEY, coords use `lng`.
         // Flatten to a flat array, attaching the route key to each point and dropping
@@ -417,6 +436,7 @@
             mps=flat;
           } else { return; }
         }
+        MP_CACHE[state]=mps;
         if(!mps.length) return;
         var best=null,bd=Infinity,major=null,md=Infinity;
         for(var i=0;i<mps.length;i++){ var m=mps[i];
@@ -442,10 +462,10 @@
           var lod=(ma<mb)?a._d:b._d, tot=a._d+b._d, frac=tot>0?lod/tot:0;
           out.milepost=Math.round((lom+frac*(him-lom))*10)/10;
         } else if(a){ out.milepost=Math.round(mileOf(a)*10)/10; }
-      }).catch(function(){})
+      }).catch(function(){ delete MP_CACHE[state]; out.fetchErr=true; })
     ];
     if(out.alertsAvail){
-      jobs.push(fetch(MILECHECK_API+"/incidents?state="+state).then(function(r){return r.json();}).then(function(j){
+      jobs.push(fetch(MILECHECK_API+"/incidents?state="+state).then(okJson).then(function(j){
         var list=(j&&j["incident-reports"])||[];
         list.forEach(function(inc){
           var loc=inc.location||{}, sl=loc["start-location"]||{};
@@ -460,7 +480,7 @@
             desc:((inc["impact-desc"]||inc.description||inc.headline||"").replace(/<[^>]+>/g," ").trim()).slice(0,160),
             source:meta.dot, updated:minsAgo(inc["last-updated"]||inc["update-time"]), dist:dist });
         });
-      }).catch(function(){}));
+      }).catch(function(){ out.fetchErr=true; }));
     }
     /* ---- MODULE: Fleet Safety — crosswind ---------------------------
        NWS is called directly from the browser (it sends
@@ -559,7 +579,8 @@
       if(!api){ return resolve(null); }
       // Always ask for ONE vehicle. An empty search returns every device in the database,
       // which is what Geotab's Nov 15 2026 API limits are aimed at. No vehicle selected = no call.
-      var deviceId = state&&state.device&&state.device.id;
+      // Geotab Drive passes state.device; MyGeotab has no device, so use the picker.
+      var deviceId = (state&&state.device&&state.device.id) || selectedDeviceId;
       if(!deviceId){ return resolve(null); }
       if(Date.now() < backoffUntil){ return resolve(null); }
       try{
@@ -577,7 +598,59 @@
     });
   }
 
+  /* ---- Vehicle picker (MyGeotab) ---------------------------------
+     One Get Device call per session, scoped to the user's group filter and
+     capped by resultsLimit. Position is then read for the chosen id only. */
+  var DEVICE_LIMIT = 500, PICK_KEY = "milecheckDevice";
+  var devicesLoaded = false, selectedDeviceId = null, pickerState = null;
+  function readSavedChoice(state){
+    try{ var g=state&&state.getState&&state.getState(); if(g&&g[PICK_KEY]) return g[PICK_KEY]; }catch(e){}
+    try{ return window.localStorage.getItem("mc."+PICK_KEY); }catch(e){}
+    return null;
+  }
+  function saveChoice(state, id){
+    try{ if(state&&state.setState){ var o={}; o[PICK_KEY]=id; state.setState(o); } }catch(e){}
+    try{ window.localStorage.setItem("mc."+PICK_KEY, id); }catch(e){}
+  }
+  function initPicker(api, state, done){
+    if(!api || (state&&state.device&&state.device.id) || devicesLoaded){ return done(); }
+    devicesLoaded = true;
+    var search = { fromDate: new Date().toISOString() };  // active devices only
+    try{ var gf = state&&state.getGroupFilter&&state.getGroupFilter(); if(gf&&gf.length) search.groups = gf; }catch(e){}
+    try{
+      api.call("Get", {typeName:"Device", resultsLimit:DEVICE_LIMIT, search:search}, function(list){
+        list = (list||[]).filter(function(d){ return d&&d.id; })
+          .sort(function(a,b){ return String(a.name||"").localeCompare(String(b.name||"")); });
+        var sel = el("mc-veh"), saved = readSavedChoice(state);
+        if(!list.length){ return done(); }
+        sel.innerHTML = list.map(function(d){
+          return '<option value="'+esc(d.id)+'">'+esc(d.name||d.id)+'</option>'; }).join("");
+        var has = list.some(function(d){ return d.id===saved; });
+        selectedDeviceId = has ? saved : list[0].id;
+        sel.value = selectedDeviceId;
+        sel.classList.add("on");
+        sel.onchange = function(){ selectedDeviceId = sel.value; saveChoice(pickerState, selectedDeviceId); load(currentApi, pickerState); };
+        done();
+      }, function(){ devicesLoaded = false; done(); });
+    }catch(e){ devicesLoaded = false; done(); }
+  }
+
+  var currentApi = null;
   function load(api, state){
+    currentApi = api; pickerState = state;
+    // Geotab asks add-ins to handle a dropped connection. Keep the last render
+    // instead of showing empty alert columns that read as "all clear".
+    if(state && state.online === false){
+      el("mc-updated").textContent = lastUpdated ? "Offline, last updated "+hhmm(lastUpdated) : "Offline";
+      showErr(lastUpdated ? "Offline, last updated "+hhmm(lastUpdated)+". Data below may be out of date." : "Offline. MileCheck data will load when the connection returns.");
+      return;
+    }
+    if(api && !devicesLoaded && !(state&&state.device&&state.device.id)){
+      return initPicker(api, state, function(){ load2(api, state); });
+    }
+    load2(api, state);
+  }
+  function load2(api, state){
     getVehiclePosition(api, state).then(function(pos){
       if(pos){ loadFor(pos.lat, pos.lon, pos.bearing, true, pos.speed); }
       else { loadFor(DEMO_POS.lat, DEMO_POS.lon, DEMO_POS.bearing, false, DEMO_POS.speed); }

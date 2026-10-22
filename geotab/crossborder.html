@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MileCheck Cross-Border</title>
+<style>
+  /* ----------------------------------------------------------------
+     Fleet-ops console styling — muted, dense, squared-off. Designed
+     to read as a native MyGeotab / Geotab Drive data widget, not a
+     consumer app card. One deep-navy accent; severity shown by a thin
+     muted tick, not a rainbow.
+  ----------------------------------------------------------------- */
+  :root{
+    --ink:#161a1f; --muted:#6e7782; --faint:#5f6873; --line:#dce0e6;
+    --surface:#fff; --bg:#eceef1; --accent:#27496d;
+    --crit:#9f2a1f; --warn:#875708; --cool:#3f5a73; --info:#5b6770;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;}
+  #milecheck{max-width:720px;margin:0 auto;padding:14px 16px;}
+
+  .mc-header{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:14px;}
+  .mc-title{display:flex;align-items:baseline;gap:8px;flex:1;min-width:0;}
+  .mc-title b{font-size:12.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;}
+  .mc-title span{color:var(--muted);font-size:11.5px;}
+  .mc-demo,.mc-live{display:none;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+  .mc-demo{color:#7a5b00;background:#f5efdb;border:1px solid #e4d8ad;}
+  .mc-live{color:#1d6b46;background:#e6f1ea;border:1px solid #c2dcce;}
+  .mc-demo.on,.mc-live.on{display:inline-block;}
+  .mc-live .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#1d6b46;margin-right:5px;vertical-align:1px;}
+
+  /* hero: the milepost as a data readout, not a colored card */
+
+  .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:600;margin:0 0 7px 1px;}
+  .mc-count{background:var(--line);color:var(--muted);font-size:10px;font-weight:700;border-radius:3px;padding:0 5px;line-height:16px;}
+  /* alerts: tight, muted rows — thin severity tick, no rainbow cards */
+  .mc-empty{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px;text-align:center;color:var(--muted);}
+  .mc-foot{margin-top:16px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .mc-foot a{color:var(--accent);text-decoration:none;font-weight:600;}
+  .mc-skeleton{color:var(--muted);padding:20px;text-align:center;}
+
+  /* ---- Fleet Safety strip: crosswind / chains / road surface --------
+     Only renders the conditions that are actually present. An empty
+     safety strip is the correct output on a calm dry day — it must never
+     invent a reassurance ("all clear") the data can't support. */
+           border-left:3px solid var(--info);border-radius:3px;padding:8px 12px;min-width:0;}
+
+  /* ---- Cameras: the actual road, nearest first ---------------------- */
+              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+  /* ---- Drawbridges: only where live status actually exists ---------- */
+             border-left:3px solid #1d6b46;border-radius:3px;padding:8px 12px;}
+  .mc-block{margin-top:16px;}
+  .mc-veh{display:none;font:inherit;font-size:12px;max-width:220px;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);}
+  .mc-veh.on{display:inline-block;}
+  .mc-err{display:none;margin:0 0 12px;padding:8px 12px;border:1px solid #e4c9c4;background:#fbf0ee;color:var(--crit);border-radius:3px;font-size:12px;font-weight:600;}
+  .mc-err.on{display:block;}
+  .mc-stale{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--warn);}
+
+  .bx{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:10px 12px;margin-bottom:8px;}
+  .bx.closed{border-left-color:var(--crit);}
+  .bx-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .bx-n{font-size:13.5px;font-weight:700;}
+  .bx-n span{font-weight:400;color:var(--muted);}
+  .bx-d{font-size:11px;font-weight:700;background:var(--line);border-radius:3px;padding:1px 7px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .bx-meta{font-size:11.5px;color:var(--muted);margin:2px 0 7px;}
+  .bx-meta .closed{color:var(--crit);font-weight:700;}
+  table.bx-t{width:100%;border-collapse:collapse;font-size:12px;}
+  .bx-t th{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--faint);font-weight:600;text-align:left;padding:3px 6px 3px 0;border-bottom:1px solid var(--line);}
+  .bx-t td{padding:4px 6px 4px 0;border-bottom:1px solid #eef0f3;font-variant-numeric:tabular-nums;}
+  .bx-t td.w{font-weight:700;}
+  .bx-t td.na{color:var(--faint);}
+  .bx-note{font-size:11px;color:var(--warn);margin-top:6px;}
+  .bx-src{font-size:10.5px;color:var(--faint);margin-top:6px;}
+  .mc-pos{font-size:11.5px;color:var(--muted);margin:0 0 10px 1px;}
+</style>
+</head>
+<body>
+  <div id="milecheck">
+    <div class="mc-header">
+      <div class="mc-title"><b>MileCheck Cross-Border</b><span>US land border wait times</span></div>
+      <select class="mc-veh" id="mc-veh" aria-label="Choose vehicle"></select>
+      <span class="mc-live" id="mc-live"><span class="dot"></span>Live</span>
+      <span class="mc-demo" id="mc-demo">Demo position</span>
+    </div>
+    <div class="mc-err" id="mc-err" role="status"></div>
+    <div id="mc-content"><div class="mc-skeleton">Locating vehicle&hellip;</div></div>
+    <div class="mc-foot">
+      <span id="mc-updated">&mdash;</span>
+      <span>Waits from CBP (into the US) and CBSA (into Canada) &middot; Support: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a></span>
+    </div>
+  </div>
+
+<script>
+/* =================================================================
+   MileCheck Cross-Border Add-In for MyGeotab / Geotab Drive
+   Reads ONE vehicle's position from MyGeotab, then calls the live
+   MileCheck Worker /border-crossings (CBP Border Wait Times, plus CBSA
+   into-Canada where matched). Shows only what the feed provides.
+   ================================================================= */
+(function(){
+  "use strict";
+  var MILECHECK_API = "https://milepost-proxy.leahgerber93.workers.dev";
+  // Demo position when not running inside Geotab: I-5 just south of Blaine, WA.
+  var DEMO_POS = { lat:48.9600, lon:-122.7400 };
+  var MAX_CROSSINGS = 5;
+
+  function haversine(a,b,c,d){ var R=3958.8,p=Math.PI/180,dLat=(c-a)*p,dLon=(d-b)*p;
+    var x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a*p)*Math.cos(c*p)*Math.sin(dLon/2)*Math.sin(dLon/2);
+    return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x)); }
+  function esc(t){ return String(t==null?"":t).replace(/[<>&"]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c];}); }
+  function el(id){ return document.getElementById(id); }
+  function hhmm(d){ return d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); }
+  function showErr(msg){ var e=el("mc-err"); e.textContent=msg||""; e.classList.toggle("on", !!msg); }
+  function relIso(iso){ if(!iso) return ""; var t=Date.parse(iso); if(isNaN(t)) return "";
+    var m=Math.round((Date.now()-t)/60000); if(m<1) return "just now"; if(m<60) return m+" min ago";
+    var h=Math.floor(m/60); return h+(h===1?" hr ago":" hrs ago"); }
+  function fmtMin(n){ if(n==null) return null; if(n===0) return "No delay";
+    if(n<60) return n+" min"; var h=Math.floor(n/60), m=n%60; return h+" hr"+(m?" "+m+" min":""); }
+  // A CBP lane cell: wait if numeric, else the status text CBP gave (e.g. "Lanes Closed"), else n/a.
+  function laneCell(l){
+    if(!l||!l.available) return '<td class="na">Not offered</td>';
+    var w=fmtMin(l.delayMinutes);
+    if(w) return '<td class="w">'+esc(w)+(l.lanesOpen!=null?' <span style="font-weight:400;color:var(--muted)">('+l.lanesOpen+' open)</span>':'')+'</td>';
+    return '<td class="na">'+esc(l.status||"No data")+'</td>';
+  }
+  function cbsaCell(n){ var w=fmtMin(n); return w?'<td class="w">'+esc(w)+'</td>':'<td class="na">No data</td>'; }
+
+  var lastUpdated=null, lastGood=null;
+  function render(list, meta, isLive, pos, errMsg){
+    el("mc-live").classList.toggle("on", !!isLive);
+    el("mc-demo").classList.toggle("on", !isLive);
+    var html='<div class="mc-pos">'+(isLive?'Vehicle position':'Demo position (near Blaine, WA)')+': '
+      +pos.lat.toFixed(4)+', '+pos.lon.toFixed(4)+' &middot; nearest '+list.length+' crossings by straight-line distance</div>';
+    if(meta&&meta.waitsUnavailable) html+='<div class="mc-empty" style="margin-bottom:8px">CBP wait times are unavailable right now. Crossing locations below; no waits shown.</div>';
+    if(!list.length) html+='<div class="mc-empty">No crossing data could be loaded.</div>';
+    html+=list.map(function(r){
+      var closed=/closed/i.test(r.portStatus||"");
+      var dist=r._d<1?"<1 mi":Math.round(r._d)+" mi";
+      var into=r.intoCanada;
+      var rows='<tr><th scope="col">Lane</th><th scope="col">Into the US (CBP)</th>'+(into?'<th scope="col">Into Canada (CBSA)</th>':'')+'</tr>'
+        +'<tr><td>Commercial, standard</td>'+laneCell(r.commercial&&r.commercial.standard)+(into?cbsaCell(into.commercial):'')+'</tr>'
+        +'<tr><td>Commercial, FAST</td>'+laneCell(r.commercial&&r.commercial.fast)+(into?'<td class="na">Not reported</td>':'')+'</tr>'
+        +'<tr><td>Passenger, standard</td>'+laneCell(r.passenger&&r.passenger.standard)+(into?cbsaCell(into.passenger):'')+'</tr>';
+      var src='CBP updated '+(r.lastUpdated?esc(relIso(r.lastUpdated)):'time not given')
+        +(into&&into.lastUpdated?' &middot; CBSA updated '+esc(relIso(into.lastUpdated)):'')
+        +(r.stale?' &middot; <span class="mc-stale">Stale</span>':'');
+      return '<div class="bx'+(closed?' closed':'')+'">'
+        +'<div class="bx-h"><div class="bx-n">'+esc(r.portName)+(r.crossingName?' <span>&middot; '+esc(r.crossingName)+'</span>':'')+'</div>'
+        +'<span class="bx-d">'+dist+'</span></div>'
+        +'<div class="bx-meta">'+(r.border==="mexican"?"US / Mexico":r.border==="canadian"?"US / Canada":"")
+        +(r.portStatus?' &middot; <span class="'+(closed?'closed':'')+'">'+esc(r.portStatus)+'</span>':'')
+        +(r.hours?' &middot; Hours: '+esc(r.hours):'')+'</div>'
+        +'<table class="bx-t">'+rows+'</table>'
+        +(r.constructionNotice?'<div class="bx-note">'+esc(r.constructionNotice.slice(0,200))+'</div>':'')
+        +'<div class="bx-src">'+src+'</div></div>';
+    }).join("");
+    el("mc-content").innerHTML=html;
+    lastUpdated=new Date();
+    el("mc-updated").textContent="Updated "+hhmm(lastUpdated);
+    showErr(errMsg||"");
+  }
+
+  function loadFor(pos, isLive){
+    fetch(MILECHECK_API+"/border-crossings").then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(function(j){
+        var all=(j&&j["border-crossings"])||[], meta=(j&&j.meta)||{};
+        if(meta.error) throw new Error(meta.error);
+        var list=all.filter(function(r){ return r&&r.hasCoords&&r.lat!=null&&r.lon!=null; })
+          .map(function(r){ r._d=haversine(pos.lat,pos.lon,r.lat,r.lon); return r; })
+          .sort(function(a,b){ return a._d-b._d; }).slice(0,MAX_CROSSINGS);
+        if(!list.length) throw new Error("empty");
+        lastGood={list:list,meta:meta};
+        render(list, meta, isLive, pos, "");
+      }).catch(function(){
+        var msg="Could not reach MileCheck border data. "+(lastGood?"Showing the last data that loaded. ":"")+"Retrying in 60 seconds.";
+        if(lastGood) render(lastGood.list, lastGood.meta, isLive, pos, msg);
+        else { el("mc-content").innerHTML='<div class="mc-empty">No border data loaded.</div>'; showErr(msg);
+          el("mc-live").classList.toggle("on", !!isLive); el("mc-demo").classList.toggle("on", !isLive); }
+      });
+  }
+
+  /* ---- MyGeotab position: one device per call, OverLimit backoff ---- */
+  var backoffUntil=0;
+  function getVehiclePosition(api, state){
+    return new Promise(function(resolve){
+      if(!api) return resolve(null);
+      var deviceId=(state&&state.device&&state.device.id)||selectedDeviceId;
+      if(!deviceId) return resolve(null);
+      if(Date.now()<backoffUntil) return resolve(null);
+      try{
+        api.call("Get", {typeName:"DeviceStatusInfo", search:{ deviceSearch:{ id:deviceId } }}, function(result){
+          var pick=null;
+          (result||[]).forEach(function(r){ if(r&&r.latitude!=null&&r.longitude!=null&&(r.latitude||r.longitude)){
+            if(!pick||(r.dateTime||"")>(pick.dateTime||"")) pick=r; } });
+          resolve(pick?{lat:pick.latitude,lon:pick.longitude}:null);
+        }, function(err){
+          if(/OverLimit/i.test(String((err&&(err.name||err.message))||err))){ backoffUntil=Date.now()+120000; }
+          resolve(null);
+        });
+      }catch(e){ resolve(null); }
+    });
+  }
+
+  var DEVICE_LIMIT=500, PICK_KEY="milecheckCrossBorderDevice";
+  var devicesLoaded=false, selectedDeviceId=null, pickerState=null;
+  function readSavedChoice(state){
+    try{ var g=state&&state.getState&&state.getState(); if(g&&g[PICK_KEY]) return g[PICK_KEY]; }catch(e){}
+    try{ return window.localStorage.getItem("mc."+PICK_KEY); }catch(e){}
+    return null;
+  }
+  function saveChoice(state, id){
+    try{ if(state&&state.setState){ var o={}; o[PICK_KEY]=id; state.setState(o); } }catch(e){}
+    try{ window.localStorage.setItem("mc."+PICK_KEY, id); }catch(e){}
+  }
+  function initPicker(api, state, done){
+    if(!api||(state&&state.device&&state.device.id)||devicesLoaded) return done();
+    devicesLoaded=true;
+    var search={ fromDate:new Date().toISOString() };
+    try{ var gf=state&&state.getGroupFilter&&state.getGroupFilter(); if(gf&&gf.length) search.groups=gf; }catch(e){}
+    try{
+      api.call("Get", {typeName:"Device", resultsLimit:DEVICE_LIMIT, search:search}, function(list){
+        list=(list||[]).filter(function(d){ return d&&d.id; })
+          .sort(function(a,b){ return String(a.name||"").localeCompare(String(b.name||"")); });
+        var sel=el("mc-veh"), saved=readSavedChoice(state);
+        if(!list.length) return done();
+        sel.innerHTML=list.map(function(d){ return '<option value="'+esc(d.id)+'">'+esc(d.name||d.id)+'</option>'; }).join("");
+        selectedDeviceId=list.some(function(d){ return d.id===saved; })?saved:list[0].id;
+        sel.value=selectedDeviceId; sel.classList.add("on");
+        sel.onchange=function(){ selectedDeviceId=sel.value; saveChoice(pickerState, selectedDeviceId); load(currentApi, pickerState); };
+        done();
+      }, function(err){
+        if(/OverLimit/i.test(String((err&&(err.name||err.message))||err))){ backoffUntil=Date.now()+120000; }
+        devicesLoaded=false; done();
+      });
+    }catch(e){ devicesLoaded=false; done(); }
+  }
+
+  var currentApi=null;
+  function load(api, state){
+    currentApi=api; pickerState=state;
+    if(state&&state.online===false){
+      el("mc-updated").textContent=lastUpdated?"Offline, last updated "+hhmm(lastUpdated):"Offline";
+      showErr(lastUpdated?"Offline, last updated "+hhmm(lastUpdated)+". Waits below may be out of date.":"Offline. Border data will load when the connection returns.");
+      return;
+    }
+    if(api&&!devicesLoaded&&!(state&&state.device&&state.device.id)) return initPicker(api, state, function(){ load2(api, state); });
+    load2(api, state);
+  }
+  function load2(api, state){
+    getVehiclePosition(api, state).then(function(pos){
+      if(pos) loadFor(pos, true); else loadFor(DEMO_POS, false);
+    });
+  }
+
+  var REFRESH_MS=60000;
+  var STANDALONE=(typeof geotab==="undefined");
+  if(STANDALONE){ window.geotab={}; }
+  geotab.addin=geotab.addin||{};
+  geotab.addin.crossborder=function(){
+    var api, st, timer;
+    return {
+      initialize:function(freshApi, state, callback){ api=freshApi; st=state; if(callback) callback(); },
+      focus:function(freshApi, state){ api=freshApi||api; st=state||st; load(api, st);
+        if(timer) clearInterval(timer); timer=setInterval(function(){ load(api, st); }, REFRESH_MS); },
+      blur:function(){ if(timer){ clearInterval(timer); timer=null; } }
+    };
+  };
+  if(STANDALONE){
+    var run=function(){ load(null, null); };
+    if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", run); else run();
+    setInterval(run, REFRESH_MS);
+  }
+})();
+</script>
+</body>
+</html>
