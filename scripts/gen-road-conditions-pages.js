@@ -348,7 +348,7 @@ function statePage(s) {
   const slug = slugOf(s.name);
   const url = `https://milecheckapp.com/road-conditions/${slug}/`;
   const title = `${s.name} Road Conditions Now: Closures &amp; Cameras | MileCheck`;
-  const desc = `Live ${s.name} road conditions from ${s.dot}: closures and crashes by route and mile marker, with cameras, passes and corridors. Updates every 5 minutes.`;
+  const desc = `Live ${s.name} road conditions from ${s.dot}: closures and crashes by route and mile marker, with cameras, passes and corridors. Checks for updates every five minutes.`;
   const cams = exists(`cameras/${slug}/index.html`);
   const cities = Object.entries(CITY_CAMS).filter(([, st]) => st === s.code).map(([c]) => c);
   const passes = PASSES.filter((p) => p[3] === s.code);
@@ -398,10 +398,10 @@ function statePage(s) {
 
   const chains = /chain/i.test(s.season);
   const faq = [
-    [`Is the highway closed in ${s.name} right now?`, `The map above shows every full closure ${s.dot} is publishing as a red marker, crashes in orange, and weather and hazard alerts in blue and purple. Closures the DOT has posted for a future date are listed as scheduled, and ramp and lane closures sit under the toggle so the list stays readable. It reloads every five minutes. If the feed cannot be reached the page says so instead of showing an empty map. For the official list, open <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a>.`],
+    [`Is the highway closed in ${s.name} right now?`, `The map above shows full closures from the ${s.dot} feed as red markers, crashes in orange, and weather and hazard alerts in blue and purple. Closures the DOT has posted for a future date are listed as scheduled, and ramp and lane closures sit under the toggle so the list stays readable. The page checks MileCheck's feed every five minutes. If the feed cannot be reached the page says so instead of showing an empty map. For the official list, open <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a>.`],
     [`Where do I check ${s.name} road conditions?`, `<a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a> is the official source, and dialing 511 in most states reaches the same information by phone. This page reads the same ${s.dot} feed and adds ${cams ? `the <a href="/cameras/${slug}/">${s.name} cameras</a>, ` : ''}the corridor and pass pages, and your own mile marker if you carry the app.`],
     ...(chains ? [[`Are chains required in ${s.name}?`, `Chain and traction rules are set by ${s.dot} per road and per direction, and they change with the storm. Restrictions the DOT publishes as alerts appear on the map above and on ${passLinks.length ? `the ${joinList(passLinks)} ${passLinks.length === 1 ? 'page' : 'pages'}` : 'the corridor pages'}. Always follow the posted signs. <a href="/chains-required-explained/">What "chains required" means</a> explains the levels.`]] : []),
-    [`How often does this page update?`, `Every five minutes. MileCheck's server fetches the ${s.dot} feed, converts it to one format shared by all 50 states, and caches it for five minutes. Each alert also carries the time the DOT last updated it, shown in the list.`],
+    [`How often does this page update?`, `This page checks MileCheck's feed every five minutes. ${s.dot} updates individual reports on its own schedule. Source update times are shown when available.`],
     [`Does the MileCheck app show these alerts?`, `Yes. The app shows the same ${s.dot} alerts on your route, ahead of your position, with the mile marker you are passing. The mile marker works offline in all 50 states. Live alerts are part of MileCheck Premium, $19.99 a year or $4.99 a month after a 2-week free trial.`],
   ];
   const faqHtml = faq.map(([q, a]) => `      <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
@@ -419,7 +419,7 @@ ${sp.html}
 <!-- spon:end -->
     <p class="rc-eyebrow">Road conditions</p>
     <h1>${s.name} road conditions right now</h1>
-    <p class="rc-lede">Every closure and crash ${s.dot} is publishing, on one map with the route and mile marker. Below it: ${cams ? `the <a href="/cameras/${slug}/">live cameras</a>, ` : ''}${passLinks.length ? `${joinList(passLinks)}, ` : ''}${corridorLinks.length ? `the ${joinList(corridorLinks)} corridor ${corridorLinks.length === 1 ? 'page' : 'pages'}, ` : ''}and what the season does to ${s.name}'s highways. For the whole country, see the <a href="/closures/">US closures map</a>.</p>
+    <p class="rc-lede">Closures and crashes from ${s.dot}, on one map with the route and mile marker. Below it: ${cams ? `the <a href="/cameras/${slug}/">live cameras</a>, ` : ''}${passLinks.length ? `${joinList(passLinks)}, ` : ''}${corridorLinks.length ? `the ${joinList(corridorLinks)} corridor ${corridorLinks.length === 1 ? 'page' : 'pages'}, ` : ''}and what the season does to ${s.name}'s highways. For the whole country, see the <a href="/closures/">US closures map</a>.</p>
 
     <div class="rc-live">
       <div class="rc-mapbox">
@@ -432,7 +432,7 @@ ${sp.html}
           <div class="lh" style="margin-top:6px"><span>Snowplows <span id="rcPlowCount" style="color:#0369A1;font-weight:600;font-size:12px;">loading</span></span><label><input type="checkbox" id="rcPlows" checked> Show trucks</label></div><div id="rcPlowNote" style="display:none;padding:4px 14px 8px;font-size:12.5px;color:#0369A1;font-weight:600"></div>` : ''}
           <div class="rc-rows" id="rcRows"><div class="rc-empty">Loading the ${s.dot} feed&hellip;</div></div>
         </div>
-        <div class="rc-official">Source: <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a>, read every five minutes and converted to the same format MileCheck uses for all 50 states. Ramp, lane and shoulder closures are listed under the toggle, not as full closures. Closures with a future start date are marked scheduled. Positions are the DOT's; mile markers are approximate.</div>
+        <div class="rc-official">Source: <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a>, through MileCheck's feed, checked every five minutes and converted to the same format MileCheck uses for all 50 states. Ramp, lane and shoulder closures are listed under the toggle, not as full closures. Closures with a future start date are marked scheduled. Positions are the DOT's; mile markers are approximate.</div>
       </div>
     </div>
     <div class="rc-legend"><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#a16207"></i>Ramp or lane</span><span><i style="background:#F59E0B"></i>Work zone</span><span style="color:#8A939B">Faded markers are scheduled, not active</span></div>
@@ -506,7 +506,7 @@ ${sp.html}
 <!-- spon:end -->
     <p class="rc-eyebrow">Road conditions</p>
     <h1>Road conditions by state</h1>
-    <p class="rc-lede">One page per state. Each one reads that state's DOT feed every five minutes and puts the current closures and crashes on a map with the route and mile marker, then links the state's cameras, mountain passes and interstate corridors, and says what the season does to its highways. For one national view, use the <a href="/closures/">US closures map</a>.</p>
+    <p class="rc-lede">One page per state. Each one checks that state's DOT feed through MileCheck every five minutes and puts closures and crashes on a map with the route and mile marker, then links the state's cameras, mountain passes and interstate corridors, and says what the season does to its highways. For one national view, use the <a href="/closures/">US closures map</a>.</p>
     <div class="rc-states">
 ${cards}
     </div>
