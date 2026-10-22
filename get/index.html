@@ -2,88 +2,35 @@
 <html lang="en">
 <head>
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get MileCheck — iOS &amp; Android</title>
-  <meta name="description" content="Download MileCheck for iPhone or Android. Real-time highway mile markers, live state DOT feeds, and trip logging in all 50 US states.">
-  <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://milecheckapp.com/get/">
-  <link rel="icon" type="image/png" href="../images/favicon.png">
-  <meta name="apple-itunes-app" content="app-id=6759212851">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-      background:#F7F5F0; color:#0F1419;
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
-      padding:24px;
-    }
-    .card {
-      background:#fff; border:1px solid #E5E5E5; border-radius:18px;
-      max-width:420px; width:100%; padding:40px 32px 34px; text-align:center;
-      box-shadow:0 8px 40px rgba(15,20,25,0.06);
-    }
-    .logo { width:72px; height:72px; border-radius:16px; margin:0 auto 18px; display:block; }
-    h1 { font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px; }
-    p.sub { font-size:14px; color:#6b7280; line-height:1.55; margin-bottom:16px; }
-    p.price { font-size:13px; color:#0F1419; line-height:1.6; margin-bottom:6px; }
-    p.price:last-of-type { margin-bottom:26px; }
-    p.price strong { font-weight:700; }
-    p.price .free { color:#00A86B; font-weight:700; }
-    p.premium { font-size:13px; color:#6b7280; line-height:1.6; margin-bottom:6px; }
-    .store-btn {
-      display:block; text-decoration:none; font-weight:700; font-size:15px;
-      padding:15px; border-radius:12px; color:#fff; margin-bottom:12px;
-      transition:opacity .15s;
-    }
-    .store-btn:hover { opacity:0.9; }
-    .btn-ios { background:#0A84FF; }
-    .btn-android { background:#00C880; }
-    p.fine { font-size:12px; color:#9aa1ab; margin-top:16px; line-height:1.5; }
-    a.back { display:inline-block; margin-top:20px; font-size:13px; color:#6b7280; text-decoration:none; }
-    a.back:hover { color:#0F1419; }
-    #redirecting { display:none; font-size:13px; color:#6b7280; margin-bottom:14px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get MileCheck</title>
+<meta name="description" content="Download MileCheck for iPhone or Android. Your nearest highway mile marker and live state DOT road feeds.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://milecheckapp.com/get/">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<meta name="apple-itunes-app" content="app-id=6759212851">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:#F7F5F0;color:#0F1419;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{background:#fff;border:1px solid #E5E5E5;border-radius:18px;max-width:400px;width:100%;padding:32px 22px 22px;text-align:center;box-shadow:0 8px 40px rgba(15,20,25,.06)}
+.icon{width:76px;height:76px;border-radius:18px;display:block;margin:0 auto 14px}h1{font-size:24px;font-weight:800;letter-spacing:-.02em}.what{color:#5b6058;margin:6px 0 18px;line-height:1.5}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:12px;background:#0F1419;color:#fff;font-weight:600;font-size:16px;text-decoration:none;margin:0 0 10px;border:0;cursor:pointer;font-family:inherit}
+.pair{display:flex;gap:8px}.notify input{flex:1.4;min-width:0;min-height:48px;border:1px solid #E5E5E5;border-radius:12px;padding:0 12px;font:inherit;font-size:16px}.notify .btn{flex:1}
+.foot{font-size:13px;color:#5b6058;line-height:1.5;margin:4px 0 0}
+.more{margin-top:20px;border-top:1px solid #E5E5E5;padding-top:14px;text-align:left}.more>p{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#5b6058;margin:0 0 6px}
+.app{display:flex;align-items:center;gap:12px;padding:8px 0;min-height:56px;color:inherit;text-decoration:none}.app img{width:44px;height:44px;border-radius:11px}.app b{display:block;font-size:15px}.app span{font-size:13px;color:#5b6058}
+.home{display:inline-block;margin-top:14px;font-size:13px;color:#5b6058;text-decoration:none;padding:8px}</style>
 </head>
 <body>
-  <div class="card">
-    <img class="logo" src="../images/icon.png" alt="MileCheck" onerror="this.style.display='none'">
-    <h1>Get MileCheck</h1>
-    <p class="sub">Your nearest mile marker in real time,<br>wherever you're driving.</p>
-    <p class="price"><span class="free">Your mile marker is always free.</span></p>
-    <p class="premium">Sign up for Premium to add live state DOT feeds,<br>road cameras, trip logging, and route planning.</p>
-    <p class="price"><strong>$19.99/year</strong> or <strong>$4.99/month</strong><br>with a 2-week free trial.</p>
-    <p id="redirecting">Taking you to your store&hellip;</p>
-    <a class="store-btn btn-ios" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=get&mt=8" rel="noopener">Download on the App&nbsp;Store</a>
-    <a class="store-btn btn-android" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dget" rel="noopener">Get it on Google&nbsp;Play</a>
-    <p class="fine">iPhone &amp; iPad on the App Store &middot; Android on Google Play</p>
-    <a class="back" href="../">&larr; Back to milecheckapp.com</a>
-  </div>
-  <script>
-  // On a phone, skip the chooser and go straight to the right store (one
-  // less tap). Desktop and anything unrecognized just sees both buttons.
-  // ?choose=1 suppresses the redirect so the chooser page itself stays
-  // reachable/testable from any device.
-  (function(){
-    try {
-      if (new URLSearchParams(location.search).has('choose')) return;
-      var ua = navigator.userAgent || '';
-      var target = null;
-      var camp = (new URLSearchParams(location.search).get('utm_campaign') || 'get').replace(/[^a-z0-9-]/gi, '').slice(0, 40) || 'get';
-      if (/android/i.test(ua)) {
-        target = 'https://play.google' + '.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3D' + camp;
-      } else if (/iphone|ipad|ipod/i.test(ua) && !window.MSStream) {
-        target = 'https://apps.apple' + '.com/app/apple-store/id6759212851?pt=128447811&ct=' + camp + '&mt=8';
-      }
-      if (target) {
-        document.getElementById('redirecting').style.display = 'block';
-        location.replace(target);
-      }
-    } catch (e) { /* chooser stays visible — fine */ }
-  })();
-  </script>
+<main class="card">
+<img class="icon" src="/images/app-icons/milecheck.png" width="76" height="76" alt="MileCheck icon">
+<h1>MileCheck</h1>
+<p class="what">Your nearest highway mile marker, plus live state DOT road feeds.</p>
+<a class="btn" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=get&mt=8" rel="noopener">App Store <svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg></a>
+<a class="btn" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dget" rel="noopener">Google Play <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l17-9.5z"/></svg></a>
+<p class="foot">Premium includes a free trial.</p>
+<div class="more"><p>More from MileCheck</p><a class="app" href="/get/mountains/"><img src="/images/app-icons/mountain-visibility.png" width="44" height="44" alt="Mountain Visibility icon" loading="lazy"><div><b>Mountain Visibility</b><span>Will the mountain be out today?</span></div></a><a class="app" href="/get/drawbridges/"><img src="/images/app-icons/seattle-drawbridges.png" width="44" height="44" alt="Seattle Drawbridges icon" loading="lazy"><div><b>Seattle Drawbridges</b><span>Which bridges are up right now</span></div></a></div>
+<a class="home" href="/">milecheckapp.com</a>
+</main>
+<script>(function(){try{var c=(new URLSearchParams(location.search).get('utm_campaign')||'').replace(/[^a-z0-9-]/gi,'').slice(0,40);if(!c)return;document.querySelectorAll('a.btn').forEach(function(l){l.href=l.href.replace('ct=get','ct='+c).replace('utm_campaign%3Dget','utm_campaign%3D'+c);});}catch(e){}})();</script>
 </body>
 </html>
