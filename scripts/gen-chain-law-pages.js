@@ -47,12 +47,15 @@ const U = {
   caltrans: 'https://dot.ca.gov/travel/winter-driving-tips/chain-controls',
   cdot: 'https://www.codot.gov/travel/winter-driving/TractionLaw',
   id49948: 'https://legislature.idaho.gov/statutesrules/idstat/Title49/T49CH9/SECT49-948/',
-  mca520: 'https://archive.legmt.gov/bills/MCA/title_0610/chapter_0090/part_0050/section_0200/0610-0090-0050-0200.html',
+  mca520: 'https://leg.mt.gov/bills/mca/title_0610/chapter_0090/part_0050/section_0200/0610-0090-0050-0200.html',
+  mca406: 'https://leg.mt.gov/bills/mca/title_0610/chapter_0090/part_0040/section_0060/0610-0090-0040-0060.html',
+  ut715: 'https://le.utah.gov/xcode/Title41/Chapter6A/41-6a-S715.html',
   mdt: 'https://www.mdt.mt.gov/travinfo/',
   wydot: 'https://dot.state.wy.us/home/travel/winter/chain_law.html',
   wyDefs: 'https://www.wyoroad.info/Highway/definitions.html',
   udotCc: 'https://cottonwoodcanyons.udot.utah.gov/traction-law/',
   nrs484d: 'https://www.leg.state.nv.us/NRS/NRS-484D.html#NRS484DSec520',
+  nrs515: 'https://www.leg.state.nv.us/NRS/NRS-484D.html#NRS484DSec515',
   nrs484a: 'https://www.leg.state.nv.us/NRS/NRS-484A.html',
   bcRoutes: 'https://www2.gov.bc.ca/gov/content/transportation/driving-and-cycling/traveller-information/seasonal/winter-driving/winter-tire-and-chain-up-routes',
   bcEnf: 'https://www2.gov.bc.ca/gov/content/transportation/driving-and-cycling/traveller-information/seasonal/winter-driving/enforcement',
@@ -67,7 +70,7 @@ const cite = (url, label) => ` <span class="cl-src">Source: <a href="${url}" tar
 const PAGES = [
   {
     code: 'WA', q: 'Do I need chains in Washington?',
-    lede: 'WSDOT posts traction and chain requirements by pass and direction. For passenger vehicles the rule applies when the sign or the pass report says it does. Vehicles over 10,000 lb must carry chains from November 1 to April 1.',
+    lede: 'WSDOT posts traction and chain requirements by pass and direction. Posted chain controls depend on conditions. Vehicles over 10,000 lb GVWR must also carry chains on specified routes from November 1 through April 1.',
     levels: [
       ['Traction tires advised', 'Advised, not required. Oversize loads are not allowed.', U.wsdotCv],
       ['Traction tires required', 'Passenger vehicles need approved traction tires.', U.wsdotCv],
@@ -75,7 +78,7 @@ const PAGES = [
       ['Chains required on all vehicles', 'Includes 4WD and AWD.', U.wsdotCv],
     ],
     rules: [
-      ['From November 1 to April 1, vehicles over 10,000 lb must carry chains at all times, whatever the road conditions.', U.wsdotCv10k],
+      ['From November 1 through April 1, vehicles over 10,000 lb GVWR must carry chains on specified routes, whatever the road conditions.', U.wsdotCv10k],
       ['When a chain requirement is posted, vehicles and combinations over 10,000 lb chain according to their axle setup. WSDOT\'s page shows the placement.', U.wsdotCv10k],
       ['WSDOT posts the current requirement for each pass and each direction on its mountain pass pages.', U.wsdotPass],
     ],
@@ -87,8 +90,8 @@ const PAGES = [
     code: 'OR', q: 'Do I need chains in Oregon?',
     lede: 'Oregon posts chain requirements by sign in snow zones. There are no fixed dates. TripCheck lists the current requirement by highway.',
     levels: [
-      ['Chains required on vehicles towing or single drive axles over 10,000 GVW', 'Trucks over 10,000 lb with a single drive axle chain up. Tandem drive axle trucks are exempt.', U.odotCv],
-      ['Chains required on vehicles towing or over 10,000 GVW', 'All trucks over 10,000 lb chain up, and so does anything towing.', U.odotCv],
+      ['Chains required on vehicles towing or single drive axles over 10,000 GVW', 'Under this posted restriction, vehicles over 10,000 lb GVW with a single drive axle must use chains. Tandem-drive-axle vehicles are not covered by this specific restriction. Other posted chain requirements may apply.', U.odotCv],
+      ['Chains required on vehicles towing or over 10,000 GVW', 'Under this restriction, vehicles over 10,000 lb GVW and vehicles towing must use chains. Trailers must also be chained when required.', U.odotCv],
     ],
     rules: [
       ['Vehicles over 10,000 lb GVW must carry chains when road conditions might require them or when Snow Zone signs are posted. ODOT\'s words: "must carry chains whenever road conditions might require their use."', U.odotCv],
@@ -101,21 +104,22 @@ const PAGES = [
   },
   {
     code: 'CA', q: 'Do I need chains in California?',
-    lede: 'Caltrans posts chain controls in three levels, R1, R2 and R3. They go up in the mountains during the winter months. There are no fixed dates.',
+    lede: 'Caltrans posts chain controls in three levels, R1, R2 and R3. Caltrans posts chain controls when snow and road conditions require them. There are no fixed dates.',
     levels: [
       ['R1', 'Chains required. Passenger cars and light trucks under 6,000 lb with snow tires on at least two drive wheels are exempt, but must carry chains. Vehicles towing trailers need chains on one drive axle, and trailers with brakes need chains on at least one axle.', U.caltrans],
       ['R2', 'Chains or traction devices required. 4WD and AWD with snow-tread tires on all four wheels are exempt, but must carry traction devices.', U.caltrans],
-      ['R3', 'All vehicles, no exceptions.', U.caltrans],
+      ['R3', 'All vehicles must use chains or approved traction devices. There are no exemptions.', U.caltrans],
     ],
     rules: [
       ['Caltrans says drivers who ignore chain controls "can be cited by the California Highway Patrol and fined."', U.caltrans],
+      ['Commercial vehicles over 6,500 lb must chain when chain controls are posted. Vehicles exempt from installing chains must still carry traction devices.', U.caltrans],
     ],
     fines: [],
-    noFine: 'The Caltrans page gives no fine amount. This page does not state one.',
+    noFine: 'Caltrans says drivers who ignore chain controls can be cited and fined. The cited guidance does not specify an amount.',
   },
   {
     code: 'CO', q: 'Do I need chains in Colorado?',
-    lede: 'Colorado has a Traction Law and a Passenger Vehicle Chain Law. CDOT can put the Traction Law into effect at any time of year.',
+    lede: 'Colorado has a Traction Law and a Passenger Vehicle Chain Law. CDOT can activate traction requirements when conditions warrant. On I-70 between Morrison and Dotsero, the traction requirements also apply from September 1 through May 31.',
     levels: [
       ['Traction Law', 'Passenger vehicles need all-weather or winter tires (mountain-snowflake, M+S or M/S) with at least 3/16-inch tread, or chains or an approved alternative traction device. AWD or 4WD alone does not meet it.', U.cdot],
       ['Passenger Vehicle Chain Law', 'Chains or an approved alternative on every passenger vehicle, 4WD and AWD included. CDOT uses it as the last step before closing the road.', U.cdot],
@@ -128,23 +132,26 @@ const PAGES = [
   },
   {
     code: 'ID', q: 'Do I need chains in Idaho?',
-    lede: 'Idaho\'s chain rule in Idaho Code 49-948 is for commercial vehicles. ITD can require chains when conditions are unsafe. There are no named levels.',
+    lede: 'Idaho Code 49-948 requires certain commercial vehicles over 26,000 lb to use chains when the restriction is active. The law lists exemptions. ITD may activate commercial chain requirements on designated routes when roadway conditions meet the law\'s requirements. There are no named levels.',
     levels: [],
     rules: [
       ['The routes named in the statute are I-90 at Lookout Pass, I-90 at Fourth of July Pass, and US-12 at Lolo Pass.', U.id49948, 'Idaho Code 49-948'],
-      ['When chain restrictions are in effect, nonexempt commercial vehicles chain the required drive and towed-vehicle axles. The statute also allows some alternative traction devices and lists exempt vehicle types.', U.id49948, 'Idaho Code 49-948'],
+      ['A covered commercial vehicle must chain at least one tire on each side of a drive axle. Each covered towed vehicle must have chains on one tire on each side of an axle at or near the rear. The statute also allows some alternative traction devices and lists exempt vehicle types.', U.id49948, 'Idaho Code 49-948'],
       ['ITD must give advance notice, provide a pull-out area before the zone, and not require chains on bare pavement.', U.id49948, 'Idaho Code 49-948'],
     ],
     fines: [],
-    noFine: 'No fine amount was found. This page does not state one.',
+    noFine: 'The applicable citation amount has not been verified. Follow posted chain requirements.',
   },
   {
     code: 'MT', q: 'Do I need chains in Montana?',
-    lede: 'Montana posts chain and traction requirements by sign. MDT\'s traveler page carries current conditions.',
+    lede: 'Montana may require chains or traction devices on signed highway sections. MCA 61-9-406 sets the applicable equipment rules. Montana does not use California\'s R1, R2 and R3 levels. Chain restrictions depend on posted conditions.',
     levels: [],
-    rules: [['MDT posts current road conditions and restrictions on its traveler information page.', U.mdt]],
+    rules: [
+      ['When a chain requirement is posted, MCA 61-9-406 governs the use of chains or traction devices on the driving wheels of one axle.', U.mca406, 'MCA 61-9-406'],
+      ['MDT posts current road conditions and restrictions on its traveler information page.', U.mdt],
+    ],
     fines: [
-      ['$250 for not following a posted chain or traction requirement. $750 if it closes all lanes in one or both directions. It is a nonmoving violation.', U.mca520, 'MCA 61-9-520'],
+      ['$250 for not following a posted chain or traction requirement. The penalty is $750 when a violation causes all lanes in one or both directions to close. It is a nonmoving violation.', U.mca520, 'MCA 61-9-520'],
     ],
   },
   {
@@ -152,7 +159,7 @@ const PAGES = [
     lede: 'WYDOT uses two chain law levels. They apply to passenger and commercial vehicles, on the routes WYDOT names.',
     levels: [
       ['Level 1', 'Chains, adequate snow tires, or AWD.', U.wydot],
-      ['Level 2', 'Chains, or AWD with adequate M+S or all-weather tires. Commercial vehicles chain two drive wheels on one axle.', U.wydot],
+      ['Level 2', 'Chains, or AWD with adequate M+S or all-weather tires. Under Level 2, commercial vehicles must chain at least two drive wheels at opposite ends of the same axle.', U.wydot],
     ],
     rules: [
       ['WYDOT turns on chain restrictions on specific highway sections when conditions call for it. Check the current road report and the posted signs for active locations.', U.wydot],
@@ -166,34 +173,38 @@ const PAGES = [
     code: 'UT', q: 'Do I need chains in Utah?',
     lede: 'Utah can require traction devices on designated roads during severe winter conditions. Big and Little Cottonwood Canyons have additional requirements, and flashing beacons at the canyon mouths show when they are in effect.',
     levels: [
-      ['Traction Law (beacons flashing)', 'AWD and 4WD need M+S or 3-peak mountain snowflake tires on all wheels. 2WD needs 3-peak mountain snowflake tires on all wheels, or chains or socks on the two drive wheels.', U.udotCc],
-      ['Class 3', 'The stricter Cottonwood Canyon class. Vehicles must meet the posted Class 3 equipment rules. UDOT can turn on traction requirements up to 24 hours before a predicted storm.', U.udotCc],
+      ['Cottonwood Canyon traction requirements', 'AWD and 4WD need M+S or 3-peak mountain snowflake tires on all wheels. 2WD needs 3-peak mountain snowflake tires on all wheels, or chains or socks on the two drive wheels.', U.udotCc],
+      ['Class 3', 'Class 3 applies stricter traction requirements on designated Cottonwood Canyon roads. Vehicles must meet the posted Class 3 equipment rules. UDOT can turn on traction requirements up to 24 hours before a predicted storm.', U.udotCc],
     ],
-    rules: [['In the Cottonwood Canyons, tires need at least 5/32-inch tread.', U.udotCc]],
-    fines: [],
-    noFine: 'No fine amount was confirmed on an official page. This page does not state one.',
+    rules: [
+      ['Utah has Class 1, Class 2 and Class 3 traction restrictions. Requirements vary by vehicle and road. Class 3 has stricter rules for the Cottonwood Canyons.', U.udotCc],
+      ['In the Cottonwood Canyons, tires need at least 5/32-inch tread.', U.udotCc],
+    ],
+    fines: [
+      ['Violating a posted traction restriction can result in an infraction under Utah Code 41-6a-715(6). A specific standard traction-law ticket amount has not been verified. The amount assessed for a particular violation may differ from the statutory maximum.', U.ut715, 'Utah Code 41-6a-715'],
+    ],
   },
   {
     code: 'NV', q: 'Do I need chains in Nevada?',
     lede: 'Nevada\'s chain rules are in NRS 484D.515 and 484D.520. NDOT posts them by sign. There are no fixed dates. NV Roads carries current requirements.',
     levels: [],
     rules: [
-      ['NRS 484D.515 lets the state require chains or snow tires on posted highways.', U.nrs484d, 'NRS 484D.515'],
-      ['Vehicles or combinations over 10,000 lb gross must use tire chains when chain restrictions are posted. Lighter vehicles may use chains, snow tires or permitted traction devices, depending on the sign.', U.nrs484d, 'NRS 484D.520'],
+      ['Posted signs determine which traction equipment is required. Some restrictions allow snow tires or other traction devices. NRS 484D.520 also sets conditions for a four-wheel-drive exemption.', U.nrs515, 'NRS 484D.515'],
+      ['When the highway is posted for traction equipment, vehicles or combinations over 10,000 lb gross weight must use tire chains. Lighter vehicles may use chains, snow tires or permitted traction devices, depending on the sign.', U.nrs484d, 'NRS 484D.520'],
     ],
     fines: [
-      ['A violation is a civil infraction, not a misdemeanor. The civil penalty is up to $500 per violation, plus administrative assessments.', U.nrs484a, 'NRS 484A.900 and 484A.7043'],
+      ['Failure to comply with a posted chain requirement is generally enforced as a civil traffic infraction. Nevada\'s general civil traffic penalty ceiling is $500, plus applicable assessments. This is not a fixed chain-law fine.', U.nrs484a, 'NRS 484A.900 and 484A.7043'],
     ],
   },
   {
     code: 'BC', q: 'Do I need winter tires or chains in British Columbia?',
-    lede: 'BC requires winter tires or chains on most highways in the Interior and the north, and on some coastal routes, from October 1 to April 30. Some routes that are not through passes or high-snowfall areas end on March 31.',
+    lede: 'British Columbia requires approved winter tires on designated highways from October 1 through March 31 or April 30, depending on the route. Commercial chain requirements also apply to covered vehicles.',
     levels: [],
     rules: [
       ['Dates: October 1 to April 30 on most routes. March 31 on select routes not through mountain passes or high-snowfall areas.', U.bcRoutes, 'BC winter tire and chain-up routes'],
       ['Tires: the 3-peak mountain snowflake or M+S symbol, with at least 3.5 mm of tread.', U.bcRoutes, 'BC winter tire and chain-up routes'],
-      ['Designated routes include highways in the Interior, northern BC, the South Coast and Vancouver Island. The province\'s route map shows the exact roads and dates.', U.bcRoutes, 'BC winter tire and chain-up routes'],
-      ['Commercial drivers outside Greater Vancouver and Greater Victoria must carry chains or other accepted traction devices where required, and obey posted chain-up signs.', U.bcEnf, 'BC enforcement'],
+      ['Designated routes include highways in northern and Interior British Columbia, the Sea to Sky Highway, the Malahat and parts of Vancouver Island. Check the provincial map for the exact sections.', U.bcRoutes, 'BC winter tire and chain-up routes'],
+      ['Commercial vehicles covered by British Columbia\'s chain requirements must carry chains on designated routes during the required period. Outside Greater Vancouver and Greater Victoria, obey posted chain-up signs.', U.bcEnf, 'BC enforcement'],
     ],
     fines: [
       ['$121 for no winter tires where they are required (Motor Vehicle Act s. 125).', U.bcEnf, 'BC enforcement'],
@@ -206,11 +217,11 @@ const PAGES = [
 const COMBINED = {
   codes: ['AZ', 'NM', 'AK'], slug: 'arizona-new-mexico-alaska',
   q: 'Do I need chains in Arizona, New Mexico or Alaska?',
-  lede: 'No chain-level system like California\'s or Colorado\'s was found for these three states. Requirements are posted by sign when they apply. The state 511 sites carry them.',
+  lede: 'These states do not use the California R1, R2 and R3 labels on this page. Check current road restrictions before driving. Follow posted signs and instructions from state transportation agencies. State 511 sites publish road conditions and some restrictions.',
   blocks: [
-    ['AZ', 'No ADOT chain law page was found. Requirements are posted by sign. AZ 511 carries current conditions. No fine amount was found.'],
-    ['NM', 'No chain-level system or fine amount was found. NM Roads carries current conditions.'],
-    ['AK', 'Alaska can post chain requirements on specific highway sections. Check 511 Alaska and the road signs. No chain fine amount was confirmed.'],
+    ['AZ', 'Check AZ511 for Arizona road conditions and active restrictions. Follow signs and official road restrictions.'],
+    ['NM', 'The applicable chain requirements and penalties have not been independently verified. Check NMRoads and posted restrictions.'],
+    ['AK', 'Alaska has seasonal rules for studded tires. Check current road conditions and any posted equipment restrictions separately. Check current Alaska DPS notices for studded-tire deadlines and extensions.'],
   ],
 };
 
@@ -430,7 +441,7 @@ function statePage(p) {
   const url = `${HUB_URL}${slug}/`;
   const campaign = `chain-laws-${slug}`;
   const sp = SPON.slot({ kind: 'live', slug: campaign, state: p.code === 'BC' ? '' : p.code, name: p.q });
-  const fineLine = p.fines.length ? p.fines.map((f) => f[0]).join(' ') : (p.noFine || 'No fine amount was found.');
+  const fineLine = p.fines.length ? p.fines.map((f) => f[0]).join(' ') : (p.noFine || 'The applicable fine amount has not been verified.');
   const desc = `${p.lede.split('. ')[0]}. The rules and fines with links to the official source, and the chain reports ${s.dot} is posting right now.`;
   const title = `${esc(p.q)} Chain and traction law | MileCheck`;
   const hasSeasonal = exists(`seasonal/${slug}/index.html`);
@@ -449,7 +460,7 @@ ${p.rules.map(([t, u, l]) => `      <li>${esc(t)}${cite(u, l)}</li>`).join('\n')
   const finesHtml = `    <h2>The fines</h2>
 ${p.fines.length ? `    <ul class="cl-list">
 ${p.fines.map(([t, u, l]) => `      <li>${esc(t)}${cite(u, l)}</li>`).join('\n')}
-    </ul>` : `    <p>${esc(p.noFine || 'No fine amount was found.')}</p>`}
+    </ul>` : `    <p>${esc(p.noFine || 'The applicable fine amount has not been verified.')}</p>`}
 ${(p.notes || []).map((n) => `    <p class="cl-note">${esc(n)}</p>`).join('\n')}
 `;
 
@@ -554,7 +565,7 @@ ${sp.html}
 ${blocks}
     <p class="sc-related">Official pages read ${READ}.</p>
 ${CTA(campaign, 'DOT')}
-    <p class="sc-related">States with chain levels: ${PAGES.map((o) => `<a href="/chain-laws/${slugOf(o.code)}/">${esc(STATE[o.code].name)}</a>`).join(' · ')} · <a href="/chain-laws/">All chain laws</a></p>
+    <p class="sc-related">Other chain law pages: ${PAGES.map((o) => `<a href="/chain-laws/${slugOf(o.code)}/">${esc(STATE[o.code].name)}</a>`).join(' · ')} · <a href="/chain-laws/">All chain laws</a></p>
   </div>
 
   ${SIGNUP}
@@ -577,7 +588,7 @@ function hubPage() {
     const s = STATE[p.code];
     const tag = p.levels.length ? `${p.levels.length} levels` : 'posted by sign';
     return `      <a class="sc-card" href="/chain-laws/${slugOf(p.code)}/"><span class="k">${esc(s.name)} · ${tag}</span><h3>${esc(p.q)}</h3><p>${esc(p.lede.split('. ')[0])}.</p></a>`;
-  }).join('\n') + `\n      <a class="sc-card" href="/chain-laws/${COMBINED.slug}/"><span class="k">AZ · NM · AK</span><h3>${esc(COMBINED.q)}</h3><p>No chain-level system was found for these three states.</p></a>`;
+  }).join('\n') + `\n      <a class="sc-card" href="/chain-laws/${COMBINED.slug}/"><span class="k">AZ · NM · AK</span><h3>${esc(COMBINED.q)}</h3><p>Arizona, New Mexico and Alaska do not use the California R1, R2 and R3 system.</p></a>`;
   const ld = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', name: q, url: HUB_URL, description: desc, isPartOf: { '@type': 'WebSite', name: 'MileCheck', url: 'https://milecheckapp.com/' } },
     breadcrumb([['MileCheck', 'https://milecheckapp.com/'], ['Chain laws', HUB_URL]]),
@@ -589,14 +600,14 @@ ${sp.html}
 <!-- spon:end -->
     <p class="sc-eyebrow">Chain and traction laws</p>
     <h1>${q}</h1>
-    <p class="sc-lede">Chain requirements, vehicle rules and published fines by state or province. Each page links to its official sources and shows chain reports from the state feed. For a live view across states, use the <a href="/chains/">chain control map</a>.</p>
+    <p class="sc-lede">Chain requirements, vehicle rules and published fines by state or province. Each page links to its official sources and shows chain reports from the state feed. Use the <a href="/chains/">chain control map</a> to see restrictions reported by state DOT feeds.</p>
     <div class="sc-cards">
 ${cards}
     </div>
   </div>
   <div class="sc-body">
     <h2>What these pages do and do not say</h2>
-    <p>They state the law and link the source. They do not say whether a road needs chains today. The sign on the road and the DOT posting decide that. Where a fine amount could not be confirmed on an official page, the page says so instead of guessing.</p>
+    <p>They state the law and link the source. They do not say whether a road needs chains today. The sign on the road and the DOT posting decide that. Fine amounts are included where an applicable official statute or agency source supports them.</p>
     <p class="sc-related">Official pages read ${READ}. Also: <a href="/how-to-put-on-tire-chains/">How to put on tire chains</a> · <a href="/chains-required-explained/">What chains required means</a> · <a href="/seasonal/">Seasonal closures</a></p>
   </div>
 
