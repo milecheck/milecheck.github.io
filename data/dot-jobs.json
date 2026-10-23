@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-10-23T11:51:47.758Z",
+   "fetchedAt": "2026-10-23T17:18:47.595Z",
    "ok": true,
    "rows": [
     {
@@ -75,6 +75,20 @@
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
     },
     {
+     "id": "REQ-208811",
+     "state": "OR",
+     "agency": "Oregon Department of Transportation",
+     "title": "Highway Maintenance Specialist (Seasonal)",
+     "multiple": false,
+     "location": "Government Camp, OR",
+     "pay": "$4,312 to $5,988 a month",
+     "closes": "2026-11-05",
+     "closesNote": null,
+     "kind": "Seasonal",
+     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Government-Camp--ODOT--MS/Highway-Maintenance-Specialist--Seasonal-_REQ-208811",
+     "recruiter": "ODOTRecruitment@odot.oregon.gov"
+    },
+    {
      "id": "REQ-204716",
      "state": "OR",
      "agency": "Oregon Department of Transportation",
@@ -133,9 +147,48 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-10-23T11:51:47.758Z",
+   "fetchedAt": "2026-10-23T17:18:47.595Z",
    "ok": true,
    "rows": [
+    {
+     "id": "97935",
+     "state": "MN",
+     "agency": "Minnesota Department of Transportation",
+     "title": "Emergency Snow Plow Operators - Transportation Generalist",
+     "location": "Various, MN",
+     "pay": "$25.19 - $31.60 an hour",
+     "closes": "2026-11-30",
+     "closesNote": null,
+     "kind": "Appointment type not confirmed",
+     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97935&PostingSeq=1",
+     "recruiter": null
+    },
+    {
+     "id": "97443",
+     "state": "MN",
+     "agency": "Minnesota Department of Transportation",
+     "title": "Emergency Snow Plow Operator",
+     "location": "Various, MN",
+     "pay": "$23.57 - $31.60 an hour",
+     "closes": "2026-11-13",
+     "closesNote": null,
+     "kind": "Appointment type not confirmed",
+     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97443&PostingSeq=1",
+     "recruiter": null
+    },
+    {
+     "id": "97458",
+     "state": "MN",
+     "agency": "Minnesota Department of Transportation",
+     "title": "Temporary Snow Plow Operator",
+     "location": "Various, MN",
+     "pay": "$23.57 - $31.60 an hour",
+     "closes": "2026-11-13",
+     "closesNote": null,
+     "kind": "Seasonal or temporary (from the title)",
+     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97458&PostingSeq=1",
+     "recruiter": null
+    },
     {
      "id": "97656",
      "state": "MN",
@@ -202,32 +255,6 @@
      "recruiter": null
     },
     {
-     "id": "97443",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Emergency Snow Plow Operator",
-     "location": "Various, MN",
-     "pay": "$23.57 - $31.60 an hour",
-     "closes": "2026-10-19",
-     "closesNote": null,
-     "kind": "Appointment type not confirmed",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97443&PostingSeq=1",
-     "recruiter": null
-    },
-    {
-     "id": "97458",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Temporary Snow Plow Operator",
-     "location": "Various, MN",
-     "pay": "$49,214 - $65,980 a year",
-     "closes": "2026-10-19",
-     "closesNote": null,
-     "kind": "Seasonal or temporary (from the title)",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97458&PostingSeq=1",
-     "recruiter": null
-    },
-    {
      "id": "96061",
      "state": "MN",
      "agency": "Minnesota Department of Transportation",
@@ -246,7 +273,7 @@
      "agency": "Minnesota Department of Transportation",
      "title": "Temporary Snowplow Operators",
      "location": "Various, MN",
-     "pay": "Transportation Generalist: $25.19 - $31.60 an hour Transportation Associate: $23.57 - $24.28 an hour",
+     "pay": "$23.57 - $31.60 an hour",
      "closes": "2027-01-27",
      "closesNote": null,
      "kind": "Seasonal or temporary (from the title)",
@@ -256,5 +283,5 @@
    ]
   }
  },
- "updatedAt": "2026-10-23T11:51:47.758Z"
+ "updatedAt": "2026-10-23T17:18:47.595Z"
 }
