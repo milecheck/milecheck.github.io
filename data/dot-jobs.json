@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-10-23T17:18:47.595Z",
+   "fetchedAt": "2026-10-23T21:32:22.199Z",
    "ok": true,
    "rows": [
     {
@@ -96,7 +96,7 @@
      "multiple": true,
      "location": "Pendleton, OR",
      "pay": "$4,312 to $5,988 a month",
-     "closes": "2026-10-07",
+     "closes": "2026-11-04",
      "closesNote": "Open until filled. May close any time after this date.",
      "kind": "Seasonal",
      "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Pendleton--ODOT--Construction/Highway-Maintenance-Specialist--Seasonal---Multiple-Positions-_REQ-204716",
@@ -147,7 +147,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-10-23T17:18:47.595Z",
+   "fetchedAt": "2026-10-23T21:32:22.199Z",
    "ok": true,
    "rows": [
     {
@@ -283,5 +283,5 @@
    ]
   }
  },
- "updatedAt": "2026-10-23T17:18:47.595Z"
+ "updatedAt": "2026-10-23T21:32:22.199Z"
 }
