@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Traffic and cameras near American Family Field on game day | MileCheck</title>
+  <meta name="description" content="Live WisDOT cameras within 2 miles of American Family Field, plus current I-94, WIS 175 and I-43 alerts and long-term I-94 lane closures near the stadium.">
+  <link rel="canonical" href="https://milecheckapp.com/stadiums/american-family-field/">
+  <meta property="og:title" content="Traffic and cameras near American Family Field on game day">
+  <meta property="og:description" content="Live WisDOT cameras within 2 miles of American Family Field, plus current I-94, WIS 175 and I-43 alerts and long-term I-94 lane closures near the stadium.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/stadiums/american-family-field/">
+  <meta property="og:type" content="website">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css?v=20261015-2">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  </style>
+ 
+  <style> 
+    .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;} 
+    .co-hero .spon{margin:0 0 18px;} 
+    .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;} 
+    .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;} 
+    .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;} 
+    .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;} 
+    .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;} 
+    .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;} 
+    .co-stat .n.live{color:#0f7a4f;} 
+    .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;} 
+    .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;} 
+    #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;} 
+    .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:196px;font-size:13.5px;} 
+    .co-layers .lt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 4px;} 
+    .co-layer{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;} 
+    .co-layer input{position:absolute;opacity:0;width:0;height:0;} 
+    .co-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;} 
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;} 
+    .co-layer input:checked+.co-sw.cam{background:#0f7a4f;} .co-layer input:checked+.co-sw.plow{background:#0369A1;} 
+    .co-layer input:checked+.co-sw::after{left:16px;} 
+    .co-dot{width:10px;height:10px;border-radius:50%;display:inline-block;} 
+    .plow-icon{color:#0369A1;font-size:20px;line-height:22px;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;font-weight:900;} 
+    @media(max-width:600px){ .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} } 
+    .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;} 
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;} 
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;} 
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;} 
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;} 
+    .co-card img.cc-img,.co-card video.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;} 
+    .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;} 
+    .co-guide h2{font-size:26px;margin:0 0 6px;} 
+    .co-guide p{color:#3a444d;font-size:16px;line-height:1.65;margin:0 0 14px;} 
+    .co-guide a{color:#0f7a4f;font-weight:700;text-decoration:none;} 
+    .co-faq{max-width:1000px;margin:24px auto 0;padding:0 20px;} 
+    .co-faq h2{font-size:24px;margin:0 0 14px;} 
+    .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;} 
+    .co-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;} 
+    .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;} 
+    .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;} 
+    .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;} 
+    .co-cta h2{font-size:24px;margin:0 0 8px;} 
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;} 
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;} 
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;} 
+    .co-cta a.primary{background:#0f7a4f;color:#fff;} 
+    .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;} 
+    .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;} 
+    .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;} 
+    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} } 
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;} 
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;} 
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;} 
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;} 
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;} 
+    .spon-text strong{color:#0E1116;font-weight:800;} 
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;} 
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;} 
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;} 
+    .spon-house .spon-text{color:#1f3b2d;} 
+    .spon-house .spon-text strong{color:#0f7a4f;} 
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;} 
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;} 
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;} 
+    .spon-body:hover .spon-cta{text-decoration:underline;} 
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} } 
+  </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+<main>
+<section class="co-hero">
+  <div class="eyebrow">Milwaukee · Brewers · World Series 2026</div>
+  <h1>Traffic and cameras near American Family Field on game day</h1>
+  <p class="sub">Live WisDOT cameras within about 2 miles of the stadium, and current alerts on I-94, WIS 175 and I-43 nearby. Both refresh from the DOT while this page is open.</p>
+  <div class="co-stats">
+    <div class="co-stat"><div class="n live" id="nCam">–</div><div class="l">Cameras near the stadium</div></div>
+    <div class="co-stat"><div class="n" id="nAl">–</div><div class="l">Alerts nearby</div></div>
+    <div class="co-stat"><div class="n" id="nLong">–</div><div class="l">Long-term lane closures</div></div>
+  </div>
+</section>
+<div class="co-wrap"><div id="comap" style="height:52vh;min-height:320px"></div></div>
+<section class="co-guide">
+  <h2>Cameras around the stadium</h2>
+  <p>Tap a camera to open it full size. Images come from WisDOT and update every minute or two.</p>
+  <div id="camGrid" class="amf-grid"><p>Loading cameras…</p></div>
+
+  <h2 style="margin-top:32px">Long-term I-94 lane closures</h2>
+  <p>Roadwork on I-94 near the stadium that is scheduled to last more than 30 days, pulled live from WisDOT.</p>
+  <ul id="longList" class="amf-list"><li>Loading…</li></ul>
+
+  <h2 style="margin-top:32px">Other alerts near the stadium</h2>
+  <ul id="alList" class="amf-list"><li>Loading…</li></ul>
+
+  <h2 style="margin-top:32px">Game-day facts</h2>
+  <p>American Family Field sits on WIS 175 (Stadium Freeway) just south of I-94, west of downtown Milwaukee.</p>
+  <p>The I-94 East-West project runs through this stretch. WisDOT keeps an event page for Brewers 2026 with routes to the stadium: <a href="https://94eastwest.wisconsindot.gov/amfamfield" target="_blank" rel="noopener">94 East-West: Brewers 2026</a>.</p>
+  <p>For crashes and closures elsewhere in the state, see <a href="/road-conditions/wisconsin/">Wisconsin road conditions</a>. For every Milwaukee camera, see <a href="/cameras/milwaukee/">Milwaukee traffic cameras</a>.</p>
+  <p>The MileCheck app shows these cameras and alerts on CarPlay and Android Auto, with your nearest mile marker. <a href="/get/">Get the app</a>.</p>
+</section>
+</main>
+<style>
+.amf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.amf-cam{border:1px solid #E5E5E5;border-radius:12px;overflow:hidden;background:#fff;text-decoration:none;color:#0E1116}
+.amf-cam img{width:100%;max-width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#f0f0ee}
+.amf-cam div{padding:8px 10px;font-weight:700;font-size:14px;min-height:44px}
+.amf-list{padding-left:18px;font-size:15px;line-height:1.5;color:#3a444d}
+.amf-list li{margin:0 0 10px}
+.amf-list small{color:#5b6670}
+</style>
+<script>
+(function(){
+var W='https://milepost-proxy.leahgerber93.workers.dev',C=[43.028,-87.971],R=2.2;
+function mi(a,b,c,d){var r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return 3959*Math.sqrt(x*x+y*y);}
+function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var map=L.map('comap',{gestureHandling:true}).setView(C,14);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:18}).addTo(map);
+L.marker(C).addTo(map).bindPopup('American Family Field');
+fetch(W+'/cameras?state=WI').then(function(r){return r.json();}).then(function(d){
+  var cams=(d.cameras||[]).filter(function(c){return c.isActive!==false&&mi(C[0],C[1],c.lat,c.lon)<=R;})
+    .sort(function(a,b){return mi(C[0],C[1],a.lat,a.lon)-mi(C[0],C[1],b.lat,b.lon);});
+  document.getElementById('nCam').textContent=cams.length;
+  document.getElementById('camGrid').innerHTML=cams.length?cams.map(function(c){
+    L.circleMarker([c.lat,c.lon],{radius:7,color:'#fff',weight:2,fillColor:'#0f7a4f',fillOpacity:1}).addTo(map)
+      .bindPopup('<b>'+esc(c.title)+'</b><br><img src="'+esc(c.imageUrl)+'" width="240" height="180" style="max-width:100%;height:auto" alt="'+esc(c.title)+'">');
+    return '<a class="amf-cam" href="'+esc(c.imageUrl)+'" target="_blank" rel="noopener"><img src="'+esc(c.imageUrl)+'" width="320" height="240" loading="lazy" alt="WisDOT camera: '+esc(c.title)+'"><div>'+esc(c.title)+'</div></a>';
+  }).join(''):'<p>No cameras are reporting right now.</p>';
+}).catch(function(){document.getElementById('camGrid').innerHTML='<p>Cameras could not load. Try again in a minute.</p>';});
+fetch(W+'/incidents?state=WI').then(function(r){return r.json();}).then(function(d){
+  var now=Date.now(),list=(d['incident-reports']||[]).filter(function(a){
+    var l=a.location||{},s=l['start-location']||{},rt=String(l['route-id']||'').toUpperCase().replace(/\s+/g,' ');
+    if(!/^(I-94|I-43|WIS[- ]?175|WI-175)$/.test(rt))return false;
+    return s['start-lat']&&mi(C[0],C[1],s['start-lat'],s['start-long'])<=3;});
+  var isLong=function(a){var st=Date.parse(a['start-time']),en=Date.parse(a['end-time']);return a['event-type-id']==='RW'&&/I-94/.test((a.location||{})['route-id'])&&en&&st&&(en-st)>30*864e5&&en>now;};
+  var lng=list.filter(isLong),oth=list.filter(function(a){return !isLong(a);});
+  function li(a){var en=Date.parse(a['end-time']),s=(a.location||{})['start-location']||{};
+    if(s['start-lat'])L.circleMarker([s['start-lat'],s['start-long']],{radius:6,color:'#fff',weight:2,fillColor:'#F59E0B',fillOpacity:1}).addTo(map).bindPopup(esc(a.headline));
+    return '<li>'+esc(a.headline||a.description)+(en?'<br><small>Scheduled to end '+new Date(en).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'</small>':'')+'</li>';}
+  document.getElementById('nLong').textContent=lng.length;document.getElementById('nAl').textContent=oth.length;
+  document.getElementById('longList').innerHTML=lng.length?lng.map(li).join(''):'<li>None reported right now.</li>';
+  document.getElementById('alList').innerHTML=oth.length?oth.map(li).join(''):'<li>No other alerts nearby right now.</li>';
+}).catch(function(){document.getElementById('longList').innerHTML=document.getElementById('alList').innerHTML='<li>Alerts could not load. Try again in a minute.</li>';});
+})();
+</script>
+
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=stadiums-american-family-field&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dstadiums-american-family-field" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../">Highway cameras</a></li>
+            <li><a href="../../closures/">Road closures map</a></li>
+            <li><a href="../../fire/">Wildfire map</a></li>
+            <li><a href="../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: WisDOT (511WI) via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+</body>
+</html>
