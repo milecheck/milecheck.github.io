@@ -539,3 +539,23 @@
   }
   new MutationObserver(function () { if (card.style.display !== 'none' && card.querySelector('img.cc-img')) load(); }).observe(card, { childList: true, subtree: true });
 })();
+
+/* 11. Credit line at the top right on phones and short screens (map-kit.css section 11). Safari's
+   floating address bar covers the bottom of the screen, where Leaflet puts the credit. A copy of
+   the credit goes in the top-right corner; CSS shows it and hides the bottom one at those sizes. */
+(function () {
+  if (!window.MCMaps) return;
+  window.MCMaps.each(function (m) {
+    var c = m.getContainer(), src = c.querySelector('.leaflet-control-attribution');
+    var tr = c.querySelector('.leaflet-top.leaflet-right');
+    if (!src || !tr || tr.querySelector('.cm-attr-top')) return;
+    var d = document.createElement('div');
+    d.className = 'leaflet-control cm-attr-top';
+    function sync() { d.innerHTML = src.innerHTML; }
+    sync();
+    new MutationObserver(sync).observe(src, { childList: true, subtree: true, characterData: true });
+    d.addEventListener('click', function (e) { if (!e.target.closest('a')) d.classList.toggle('cm-open'); });
+    L.DomEvent.disableClickPropagation(d);
+    tr.appendChild(d);
+  });
+})();

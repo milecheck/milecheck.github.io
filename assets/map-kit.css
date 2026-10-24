@@ -131,3 +131,27 @@ html .co-bs.cm-hide{display:none !important;}
 
 /* 10. Camera filed under the wrong road (map-kit.js section 10). */
 .cm-routenote{margin-top:8px;font-size:13px;font-style:italic;color:#b91c1c;line-height:1.4;}
+
+/* 11. Camera card above the map controls (Leah, 2026-10-23, SR 410 / Crystal Mountain page on a phone:
+   zoom, near-me, layers and full-screen buttons sat on top of "3 of 3 · SR 18"; worse in landscape).
+   The card was z-index 900 and Leaflet's control corners are 1000, so the buttons won. The card now
+   sits above them; it has its own close button. On phones and short screens the card also stops below
+   the button column where there is room, and the credit line moves to the top right so the browser's
+   floating address bar (the "milecheckapp.com" pill in Safari) never covers it. */
+html .co-card{z-index:1100;}
+@media (max-width:600px){
+  html .co-card{max-height:max(55%,calc(100% - 196px));}
+}
+@media (max-width:900px),(max-height:520px){
+  html .leaflet-container .leaflet-bottom.leaflet-right .leaflet-control-attribution{display:none;}
+  html .leaflet-container .leaflet-top.leaflet-right .cm-attr-top{display:block;}
+}
+@media (max-height:520px){
+  /* Landscape phone: card on the right half so the left button column stays usable. */
+  html .co-card{left:auto;right:8px;top:26px;bottom:8px;width:min(340px,48%);max-height:none;}
+  html .leaflet-control-zoom a,html .cm-locate a,html .cm-layers-btn a,html .cm-fs-btn a{width:28px!important;height:28px!important;line-height:28px!important;}
+  html .leaflet-top.leaflet-left .leaflet-control{margin-top:6px;margin-left:6px;}
+}
+.cm-attr-top{display:none;font-size:10px;line-height:1.4;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.8);padding:0 5px;margin:0!important;color:#333;cursor:pointer;}
+.cm-attr-top.cm-open{white-space:normal;}
+.cm-attr-top a{color:#0078A8;}
