@@ -2367,6 +2367,12 @@
    "sponsor": "house"
   },
   {
+   "key": "live:stadium-american-family-field",
+   "path": "/stadiums/american-family-field/",
+   "title": "Traffic and cameras near American Family Field on game day",
+   "sponsor": "house"
+  },
+  {
    "key": "live:weather",
    "path": "/weather/",
    "title": "US Road Weather Map — storms, hurricanes & the closures they cause",

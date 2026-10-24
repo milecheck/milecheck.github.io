@@ -55,6 +55,8 @@ export function keyFor(rel) {
     if (rest.length === 2) return { kind: 'mountain', slug: rest[0] };
     if (rest.length === 3) return { kind: 'mountain', slug: rest[0] + '-' + rest[1] }; // roads/ pages are generator-owned and skipped above
   }
+  // Stadium game-day traffic pages (2026-10-23): live cameras + alerts, so the live family.
+  if (dir === 'stadiums' && rest.length === 2 && rest[1] === 'index.html') return { kind: 'live', slug: 'stadium-' + rest[0] };
   if (dir === 'seattle-drawbridges' && rest[rest.length - 1] === 'index.html') return { kind: 'drawbridge', slug: rest.length === 1 ? 'hub' : rest[0] };
   if (rest.length === 1 && rest[0] === 'index.html') {
     if (dir === 'bridges' || dir === 'corridors' || dir === 'cameras' || dir === 'passes') return { kind: { bridges: 'bridge', corridors: 'corridor', cameras: 'cameras', passes: 'pass' }[dir], slug: 'hub' };
@@ -71,6 +73,8 @@ const strip = (html) => html
   .replace(/\n?\s*\/\* spon:css \*\/[\s\S]*?\/\* \/spon:css \*\//g, '')
   .replace(/<style><\/style>\n(?=<\/head>)/g, ''); // the block this script adds to a page with no <style> of its own
 
+const SPON_CSS = SPON.CSS;
+const GRID_HEROS = ['<div class="hero-grid">', '<div class="sd-hero">'];
 const ANCHORS = ['<p class="eyebrow">', '<div class="eyebrow">', '<p class="article-eyebrow">', '<div class="mile-map-head">', '<div class="mv-stamp">', '<div class="sd-stamp">', '<h1'];
 
 function titleOf(html, fallback) {
@@ -97,6 +101,15 @@ for (const f of walk(ROOT).sort()) {
   if (SKIP_FILES.has(path.basename(rel))) continue;
   let html = fs.readFileSync(f, 'utf8');
   const key = keyFor(rel);
+  if (html.includes('id="spon"')) {
+    // Every page with a slot (generator pages, and pages this script has no key for) takes the current slot CSS, so a CSS
+    // fix in lib/sponsor-slot.js reaches every page without re-running each generator (2026-10-23).
+    // Generators write the CSS bare (no markers): it is the run of lines starting `.spon` or the
+    // slot's @media line, beginning with `.spon{display:flex`.
+    const fresh = html.replace(/^[ \t]*\.spon\{display:flex[^\n]*\n(?:[ \t]*(?:\.spon|@media\(max-width:600px\)\{ \.spon)[^\n]*\n)*/m, () => SPON_CSS + '\n')
+    .replace(/\/\* spon:css \*\/[\s\S]*?\/\* \/spon:css \*\//, () => '/* spon:css */\n' + SPON_CSS + '\n/* /spon:css */');
+    if (fresh !== html) { html = fresh; fs.writeFileSync(f, html); }
+  }
   // GENERATOR_HUBS carry the spon markers but are still written by their generator, so placing
   // our slot too made the two scripts trade it on every run (road-conditions/, 2026-10-08).
   const generatorOwned = (!html.includes(START) || GENERATOR_HUBS.has(rel)) && html.includes('id="spon"');
@@ -108,12 +121,19 @@ for (const f of walk(ROOT).sort()) {
   }
   if (!key) continue;
   html = strip(html);
-  const anchor = ANCHORS.find((a) => html.includes(a));
+  // A two-column hero grid: put the slot inside the grid as its first child so grid-column:1/-1
+  // stretches it across both columns (home, Seattle Drawbridges, 2026-10-23).
+  const gridOpen = GRID_HEROS.find((g) => html.includes(g));
+  const anchor = gridOpen ? null : ANCHORS.find((a) => html.includes(a));
   const styleClose = html.indexOf('</style>');
-  if (!anchor || !html.includes('</body>')) { skippedShape.push(rel); continue; }
+  // A stray </style> with no <style> before it (stadiums/, 2026-10-23) would put the CSS in the head as text.
+  const styleOk = styleClose >= 0 && html.lastIndexOf('<style', styleClose) >= 0;
+  if ((!anchor && !gridOpen) || !html.includes('</body>')) { skippedShape.push(rel); continue; }
   const sp = SPON.slot({ kind: key.kind, slug: key.slug, name: titleOf(html, rel) });
-  html = html.replace(anchor, START + '\n' + sp.html + '\n' + END + '\n' + anchor);
-  html = styleClose >= 0
+  html = gridOpen
+    ? html.replace(gridOpen, gridOpen + '\n' + START + '\n' + sp.html + '\n' + END)
+    : html.replace(anchor, START + '\n' + sp.html + '\n' + END + '\n' + anchor);
+  html = styleOk
     ? html.replace('</style>', '/* spon:css */\n' + sp.css + '\n/* /spon:css */\n  </style>')
     : html.replace('</head>', '<style>/* spon:css */\n' + sp.css + '\n/* /spon:css */</style>\n</head>');
   html = html.replace('</body>', START + sp.js + END + '\n</body>');
