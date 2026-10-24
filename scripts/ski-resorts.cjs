@@ -203,7 +203,31 @@ module.exports = [
   // I-90 / US 2 / SR 410, and WA route numbers are unique across types, so the page matches on the number.
   // Crystal Mountain: OSM search 2026-10-15. Access: SR 410 from Enumclaw, then Crystal Mountain
   // Boulevard 6 mi (crystalmountainresort.com/plan-your-trip/getting-here).
-  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report', reportName: 'Crystal Mountain mountain report', pass: 'crystal-mountain', note: 'WSDOT cameras sit on SR 410 well below the resort; the last 6 miles up Crystal Mountain Boulevard have no DOT feed.' }),
+  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams', reportName: 'Crystal Mountain mountain report', pass: 'crystal-mountain', note: 'WSDOT cameras sit on SR 410 well below the resort; the last 6 miles up Crystal Mountain Boulevard have no DOT feed.',
+    // 2026-10-23 template upgrade (Leah's resort feedback). Every field below is optional per resort; the
+    // generator only prints a section when its data is here. Sources checked 2026-10-23.
+    // cams: WSDOT SR 410 cameras out to MP 60 (they stop at MP 24.9, Watson Rd, Enumclaw) plus, inside the ring,
+    //   only the NPS Sunrise camera (Sunrise Park Rd leaves SR 410). Airport and Paradise cameras are not on the route.
+    cams: { routes: [['SR 410', 0, 60]], ring: ['Sunrise Park Rd'] },
+    // The resort's webcams sit behind an Imperva bot wall and the site grants no embed permission: link out only.
+    resortCams: 'https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams/webcams',
+    // NWS grid cells (2.5 km): 145,31 holds the base area, 145,32 the highest cell over the ski area. Elevations
+    // printed on the page come from the API response, not from here.
+    forecast: [{ label: 'Base area', grid: 'SEW/145,31' }, { label: 'Upper mountain', grid: 'SEW/145,32' }],
+    // NRCS SNOTEL Morse Lake (642:WA:SNTL, 5,400 ft, 1.9 mi south of the base). Public domain, CORS open.
+    snotel: { triplet: '642:WA:SNTL', name: 'Morse Lake', elev: 5400, miles: 1.9 },
+    // WSDOT mountain pass reports, matched on location-name in /conditions?state=WA.
+    passReports: [
+      { name: 'Crystal to Greenwater SR 410', label: 'SR 410, Greenwater to Crystal Mountain Boulevard', url: 'https://wsdot.wa.gov/travel/real-time/mountainpasses' },
+      { name: 'Chinook Pass SR 410', label: 'Chinook Pass, SR 410', url: 'https://wsdot.wa.gov/travel/real-time/mountainpasses/chinook' },
+      { name: 'Cayuse Pass SR 123', label: 'Cayuse Pass, SR 123', url: 'https://wsdot.wa.gov/travel/real-time/mountainpasses/cayuse' },
+    ],
+    // Drive times: OSRM over OpenStreetMap, no traffic, no chain stops, 2026-10-23.
+    drives: [{ from: 'Seattle (downtown)', miles: 82, minutes: 126 }, { from: 'Tacoma (downtown)', miles: 66, minutes: 110 }],
+    closures: 'SR 410 east of Crystal Mountain Boulevard (Chinook Pass) and SR 123 (Cayuse Pass) close for the winter. WSDOT announces the dates each fall; the road to the resort stays open.',
+    parking: { text: 'Crystal Mountain sets parking reservation rules each season. Check the parking page before a weekend or holiday trip.', url: 'https://www.crystalmountainresort.com/plan-your-trip/parking-and-shuttle-information', name: 'Crystal Mountain parking and shuttle information' },
+    gettingHere: 'https://www.crystalmountainresort.com/discover-crystal/getting-here',
+  }),
   // The Summit at Snoqualmie: Summit West. OSM search 2026-10-15. Access: I-90 exits 52 to 54 (summitatsnoqualmie.com/getting-here).
   R({ name: 'The Summit at Snoqualmie', slug: 'summit-at-snoqualmie', state: 'WA', lat: 47.4208, lon: -121.4222, routes: ['SR 90'], road: 'I-90 at the top of Snoqualmie Pass, exits 52 to 54', radius: 15, report: 'https://www.summitatsnoqualmie.com/mountain-report', reportName: 'Summit mountain report', pass: 'snoqualmie', corridor: 'i-90' }),
   // Stevens Pass: base at the summit. OSM reverse 2026-10-15. Access: US 2 (stevenspass.com/plan-your-trip/getting-here.aspx).

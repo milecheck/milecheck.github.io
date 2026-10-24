@@ -113,6 +113,17 @@
     .sk-row b{font-size:15.5px;} .sk-row .rd{display:block;font-size:13px;color:#5b6670;margin-top:2px;font-weight:400;}
     .sk-row .ct{flex:none;font-size:12.5px;font-weight:700;color:#0369A1;text-align:right;max-width:40%;}
     .sk-row .ct.none{color:#8A939B;font-weight:600;}
+    .sk-fc{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px;}
+    .sk-fc th,.sk-fc td{padding:7px 6px;border-top:1px solid #F0F0EE;text-align:left;white-space:nowrap;}
+    .sk-fc th{font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#5b6670;}
+    .sk-fc td.sn{font-weight:800;color:#0369A1;} .sk-fc td.z{color:#8A939B;font-weight:600;}
+    .sk-fcw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .sk-src{font-size:12.5px;color:#5b6670;margin:8px 0 0;line-height:1.5;} .sk-src a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .sk-kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 0;}
+    .sk-kv div{border:1px solid #F0F0EE;border-radius:10px;padding:8px 10px;} .sk-kv b{display:block;font-size:20px;color:#0E1116;} .sk-kv span{font-size:12px;color:#5b6670;}
+    .sk-btn{display:inline-block;margin-top:10px;padding:11px 14px;border-radius:9px;background:#0f7a4f;color:#fff !important;font-weight:700;font-size:14px;text-decoration:none;}
+    .sk-wide{grid-column:1/-1;}
+    .sk-grid>*{min-width:0;}
     @media(max-width:600px){ #comap{height:56vh;} .sk-bs{left:12px;font-size:12px;padding:6px 10px;} .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} .sk-card{width:60%;} .leaflet-control-zoom{display:none;} }
     .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;}
     .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
@@ -208,6 +219,11 @@
         <p class="hint">Ontario 511 reports on ON-26, ON-400 within 97 km of the base, or on any road inside the 32 km ring: full closures, crashes, weather, hazards and lane or ramp closures. Scheduled closures are marked. Nothing listed means nothing posted, not an all-clear.</p>
         <ul id="alertList"><li class="none">Loading the Ontario 511 feed&hellip;</li></ul>
       </div>
+      <div class="sk-box">
+        <h2>Snow report</h2>
+        <p class="hint">Base depth, new snow in the last 24 and 48 hours, and lifts open come from Blue Mountain itself. MileCheck has no licensed feed for the resort's numbers, so it links to them instead of copying them.</p>
+        <a class="sk-btn" href="https://www.bluemountain.ca/mountain/mountain-report" target="_blank" rel="noopener">Open the Blue Mountain weather and trail conditions</a>
+      </div>
   </div>
 
   <div class="sk-links">
@@ -237,7 +253,7 @@
 
   <div class="co-cta">
     <h2>The same alerts on your route, as you drive</h2>
-    <p>MileCheck shows your mile marker and the Ontario 511 alerts ahead of you on ON-26, ON-400, offline in dead zones, on CarPlay and Android Auto. Premium starts with a free trial.</p>
+    <p>MileCheck shows your mile marker and the Ontario 511 alerts ahead of you on ON-26, ON-400, offline in dead zones, on CarPlay and Android Auto. Premium starts with a trial.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ski-blue-mountain&mt=8" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dski-blue-mountain" target="_blank" rel="noopener">Google Play</a>
@@ -310,7 +326,7 @@
 // Page-level `map`: assets/map-kit.js (deferred) reads it for the phone layers popout and the near-me button.
 const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
 (function(){
-var RES={"slug":"blue-mountain","name":"Blue Mountain","state":"ON","lat":44.5058,"lon":-80.3073,"radius":20,"routes":["ON-26","ON-400"]};
+var RES={"slug":"blue-mountain","name":"Blue Mountain","state":"ON","lat":44.5058,"lon":-80.3073,"radius":20,"routes":["ON-26","ON-400"],"cams":null};
 var DOT="Ontario 511",TRAFFIC="Ontario 511",TRAFFICURL="https://511on.ca",PLOWS=true,KM=true;
 var WORKER='https://milepost-proxy.leahgerber93.workers.dev';
 function normKey(r,st){var s=String(r||'').toUpperCase().replace(/\s+/g,' ').trim();if(!s)return '';var m=s.match(/^(I|US|SR|SH|S|M|ROUTE|HWY|PTH|PR|[A-Z]{2})[- ]?(\d+[A-Z]?)$/);if(!m)return 'N:'+s.replace(/[^A-Z0-9]+/g,' ').trim();var t=m[1],n=m[2];if(st==='WA')return 'W:'+n;return (t==='I'?'I':t==='US'?'U':'S')+n;}
@@ -319,9 +335,16 @@ function onRoad(res,keys,lat,lon,route){var d=(isFinite(lat)&&isFinite(lon))?hav
 function keysOf(res){var k={};res.routes.forEach(function(r){k[normKey(r,res.state)]=1;});return k;}
 var KEYS=keysOf(RES);
 var TOUCH=('ontouchstart' in window),RS=function(v){return TOUCH?Math.round(v*1.6):v;};
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+DOT+' and '+TRAFFIC+' via MileCheck',maxZoom:16}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+DOT+' and '+TRAFFIC+' via MileCheck'+(false?' · access road © OpenStreetMap contributors':''),maxZoom:16}).addTo(map);
 // Set the view before adding layers: a circle added to a map with no view has no _map yet, so its getBounds() throws.
-map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*2),{padding:[6,6]});
+// Leah 2026-10-23: open centred and zoomed on the resort with the access road in view. With a drawn access road the
+// view fits the focus line (the last road up) plus the base; without one, a box 0.8 radius wide around the base.
+var ACCESS=[];
+var focus=ACCESS.filter(function(a){return a.focus;});
+if(focus.length){var fb=L.latLngBounds([[RES.lat,RES.lon]]);focus.forEach(function(a){a.pts.forEach(function(p){fb.extend(p);});});map.fitBounds(fb,{padding:[40,40],maxZoom:14});}
+else map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*0.8),{padding:[6,6]});
+// Access roads drawn solid (the Esri topo basemap draws some of these roads dashed, which reads as a trail).
+ACCESS.forEach(function(a){L.polyline(a.pts,{color:'#ffffff',weight:8,opacity:.9,interactive:false}).addTo(map);L.polyline(a.pts,{color:'#0E1116',weight:4,opacity:.9}).bindTooltip(esc(a.name),{sticky:true}).addTo(map);});
 L.circle([RES.lat,RES.lon],{radius:RES.radius*1609.34,color:'#0f7a4f',weight:1.5,dashArray:'4 5',fill:false,interactive:false}).addTo(map);
 L.marker([RES.lat,RES.lon],{icon:L.divIcon({className:'',iconSize:[30,30],iconAnchor:[15,15],html:'<div class="sk-base" title="'+esc(RES.name)+' base">⛷</div>'}),zIndexOffset:1200,interactive:false}).addTo(map);
 var camLayer=L.layerGroup().addTo(map),alertLayer=L.layerGroup().addTo(map),plowLayer=L.layerGroup().addTo(map);
@@ -332,7 +355,7 @@ function showCard(html){stopStream();cardEl.innerHTML='<button class="cx" aria-l
 // Camera card + stream playback: the same code gen-state-camera-pages.js writes (image cameras get a
 // cache-busted still; stream-only cameras (COtrip, DelDOT) play through hls.js, loaded on first use).
 var MKR=KM?'km':'MP';
-function camCard(c){var loc=esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'');if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · live video from '+esc(TRAFFIC)+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}var bust=c.img+(c.img.indexOf('?')>=0?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · '+esc(TRAFFIC)+'</div><a href="'+esc(c.img)+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+esc(bust)+'" alt="Live: '+esc(c.title)+'" onload="noFeed(this)" onerror="this.alt=\'image unavailable\'"></a>';}
+function camCard(c){var loc=esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'');if(c.stream){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · live video from '+esc(TRAFFIC)+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';}var bust=c.img+(c.img.indexOf('?')>=0?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+loc+' · camera: '+esc(c.src||TRAFFIC)+'</div><a href="'+esc(c.img)+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+esc(bust)+'" alt="Live: '+esc(c.title)+'" onload="noFeed(this)" onerror="this.alt=\'image unavailable\'"></a>';}
 // 511 Alberta answers a camera with no feed with its own 540 x 330 "No live camera feed at this time" card (all three
 // Lake Louise TCH views on 2026-10-16). Shown as-is it reads like a picture of the road. Say what it is instead.
 window.noFeed=function(img){if(img.naturalWidth===540&&img.naturalHeight===330&&/state=AB/.test(img.src)){var d=document.createElement('div');d.className='cc-meta';d.style.cssText='margin-top:8px;padding:10px 12px;border:1px dashed #cfd4da;border-radius:8px;color:#5b6670;';d.textContent=TRAFFIC+' reports no live feed from this camera right now. Nothing has been shown in its place.';var a=img.closest('a');(a||img).replaceWith(d);}};
@@ -391,12 +414,15 @@ var tg=function(id,fn){var el=document.getElementById(id);if(el)el.onchange=func
 tg('tgCam',function(v){showCam=v;});tg('tgPlow',function(v){showPlow=v;});tg('tgAlert',function(v){showAlert=v;});
 function fetchJSON(url,tries){return new Promise(function(resolve){var i=0;(function go(){fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(resolve).catch(function(){if(++i<tries)setTimeout(go,1200);else resolve(null);});})();});}
 // Every active camera inside the ring is kept, highway or not: near a resort a park-road or town camera still shows the weather.
+// A resort with a cams rule (ski-resorts.cjs) keeps the cameras on its access routes inside a milepost range, and only
+// the listed roads inside the ring; the rest keep every camera inside the ring.
+var CR=RES.cams;function camKeep(c){var d=hav(RES.lat,RES.lon,+c.lat,+c.lon),rt=(c.route||'').trim();if(!CR)return d<=RES.radius;if(CR.routes&&CR.routes.some(function(x){return normKey(x[0],RES.state)===normKey(rt,RES.state)&&isFinite(+c.mile)&&+c.mile>=x[1]&&+c.mile<=x[2];}))return true;return d<=RES.radius&&(CR.ring||[]).indexOf(rt)>=0;}
 function loadCams(){fetchJSON(WORKER+'/cameras?state='+RES.state,4).then(function(d){
   if(!d){camErr=true;draw();return;}camErr=false;
-  CAMS=(d.cameras||[]).filter(function(c){return c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&(c.imageUrl||c.streamUrl)&&hav(RES.lat,RES.lon,+c.lat,+c.lon)<=RES.radius;}).map(function(c){return {lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||''),d:hav(RES.lat,RES.lon,+c.lat,+c.lon)};}).sort(function(a,b){return a.d-b.d;});
+  CAMS=(d.cameras||[]).filter(function(c){return c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&(c.imageUrl||c.streamUrl)&&camKeep(c);}).map(function(c){return {lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||''),src:c.source==='NPS'?'National Park Service'+(c.park?', '+c.park:''):TRAFFIC,d:hav(RES.lat,RES.lon,+c.lat,+c.lon)};}).sort(function(a,b){return a.d-b.d;});
   GROUPS=groupCams();
   var el=document.getElementById('statCams');if(el)el.textContent=CAMS.length;
-  var ul=document.getElementById('camList');if(ul)ul.innerHTML=CAMS.length?CAMS.slice(0,12).map(function(c){return '<li>'+esc(c.title)+'<span class="m">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+(KM?Math.round(c.d*1.609)+' km':c.d.toFixed(1)+' mi')+' from the base</span></li>';}).join('')+(CAMS.length>12?'<li class="none">'+(CAMS.length-12)+' more on the map.</li>':''):'<li class="none">'+esc(TRAFFIC)+' has no camera within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base.</li>';
+  var ul=document.getElementById('camList');if(ul)ul.innerHTML=CAMS.length?CAMS.slice(0,12).map(function(c){return '<li>'+esc(c.title)+'<span class="m">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+(KM?Math.round(c.d*1.609)+' km':c.d.toFixed(1)+' mi')+' from the base · '+esc(c.src||TRAFFIC)+'</span></li>';}).join('')+(CAMS.length>12?'<li class="none">'+(CAMS.length-12)+' more on the map.</li>':''):'<li class="none">'+(CR?'No public camera is on the access road right now.':esc(TRAFFIC)+' has no camera within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base.')+'</li>';
   draw();});}
 function loadAlerts(){fetchJSON(WORKER+'/incidents?state='+RES.state,3).then(function(d){
   if(!d||!Array.isArray(d['incident-reports'])){alertErr=true;draw();return;}alertErr=false;
@@ -428,6 +454,45 @@ var pl=document.getElementById('plowList');if(pl)pl.addEventListener('click',fun
 var al=document.getElementById('alertList');if(al)al.addEventListener('click',function(e){var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showAlert){showAlert=true;var t=document.getElementById('tgAlert');if(t)t.checked=true;draw();}jumpTo(alertMarkers[i],function(){if(alertMarkers[i])alertMarkers[i].openPopup();});});
 loadCams();loadAlerts();loadPlows();
 setInterval(loadAlerts,300000);setInterval(loadPlows,60000);setInterval(loadCams,600000);
+})();</script>
+<script>
+(function(){
+var C={"tzState":"ON","forecast":null,"snotel":null,"passReports":null},LAT=44.5058,LON=-80.3073,WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function J(u,t){return new Promise(function(res){var i=0;(function go(){fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(res).catch(function(){if(++i<(t||2))setTimeout(go,1500);else res(null);});})();});}
+function hrs(d){var m=/PT?(?:(\d+)D)?T?(?:(\d+)H)?/.exec(d||'');return m?((+m[1]||0)*24+(+m[2]||0)):1;}
+// Snowfall by local day from the NWS gridded forecast (snowfallAmount, mm per period), with the base cell's high and low.
+async function forecast(){var box=document.getElementById('fcBody');if(!C.forecast||!box)return;
+  var pt=await J('https://api.weather.gov/points/'+LAT.toFixed(4)+','+LON.toFixed(4));
+  if(!pt||!pt.properties){box.innerHTML='<p class="hint">The National Weather Service forecast did not load. <a href="https://forecast.weather.gov/MapClick.php?lat='+LAT+'&lon='+LON+'" target="_blank" rel="noopener">Open it on weather.gov</a>.</p>';return;}
+  var tz=pt.properties.timeZone,dayKey=function(t){return new Date(t).toLocaleDateString('en-CA',{timeZone:tz});};
+  var cells=await Promise.all(C.forecast.map(function(f){return J(f.grid?'https://api.weather.gov/gridpoints/'+f.grid:pt.properties.forecastGridData);}));
+  var days={},order=[],cols=[],updated='';
+  cells.forEach(function(g,ci){if(!g||!g.properties)return;var P=g.properties;cols.push({ci:ci,label:C.forecast[ci].label,ft:P.elevation&&isFinite(P.elevation.value)?Math.round(P.elevation.value*3.28084):null});updated=updated||P.updateTime;
+    (P.snowfallAmount&&P.snowfallAmount.values||[]).forEach(function(v){var st=v.validTime.split('/')[0],k=dayKey(st);if(!days[k]){days[k]={s:{},hi:null,lo:null};order.push(k);}days[k].s[ci]=(days[k].s[ci]||0)+(+v.value||0);});
+    if(ci===0){['maxTemperature','minTemperature'].forEach(function(n,j){(P[n]&&P[n].values||[]).forEach(function(v){var k=dayKey(v.validTime.split('/')[0]);if(days[k])days[k][j?'lo':'hi']=Math.round(v.value*9/5+32);});});}});
+  if(!cols.length){box.innerHTML='<p class="hint">The National Weather Service forecast did not load. <a href="https://forecast.weather.gov/MapClick.php?lat='+LAT+'&lon='+LON+'" target="_blank" rel="noopener">Open it on weather.gov</a>.</p>';return;}
+  order.sort();var today=dayKey(Date.now());order=order.filter(function(k){return k>=today;}).slice(0,7);
+  var inch=function(mm){if(mm==null)return '<td class="z">no data</td>';var x=mm/25.4;return x<0.05?'<td class="z">0 in</td>':'<td class="sn">'+(x<1?x.toFixed(1):Math.round(x))+' in</td>';};
+  var hd='<tr><th>Day</th>'+cols.map(function(c){return '<th>'+esc(c.label)+(c.ft?' · '+c.ft.toLocaleString()+' ft':'')+'</th>';}).join('')+'<th>High / low'+(cols.length>1?' (base)':'')+'</th></tr>';
+  var rows=order.map(function(k){var d=days[k],dt=new Date(k+'T12:00:00');return '<tr><td>'+dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+'</td>'+cols.map(function(c){return inch(d.s[c.ci]);}).join('')+'<td>'+(d.hi!=null?d.hi+'°':'–')+' / '+(d.lo!=null?d.lo+'°':'–')+'</td></tr>';}).join('');
+  box.innerHTML='<div class="sk-fcw"><table class="sk-fc">'+hd+rows+'</table></div><p class="sk-src">Snowfall is the National Weather Service gridded forecast for each 2.5 km cell; the elevation shown is the cell average, which is lower than a summit. Totals are summed by local day. '+(updated?'NWS updated it '+new Date(updated).toLocaleString('en-US',{timeZone:tz,month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'. ':'')+'<a href="https://forecast.weather.gov/MapClick.php?lat='+LAT+'&lon='+LON+'" target="_blank" rel="noopener">Full forecast on weather.gov</a>.</p>';}
+// Nearby SNOTEL snow depth (NRCS, hourly, inches). Depth change is not the same as new snow: snow settles.
+async function snotel(){var el=document.getElementById('stBody');if(!C.snotel||!el)return;
+  var pad=function(n){return (n<10?'0':'')+n;},fmt=function(d){var x=new Date(d.getTime()-8*3600000);return x.getUTCFullYear()+'-'+pad(x.getUTCMonth()+1)+'-'+pad(x.getUTCDate())+'%20'+pad(x.getUTCHours())+':00';};
+  var now=new Date(),j=await J('https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1/data?stationTriplets='+C.snotel.triplet+'&elements=SNWD&duration=HOURLY&beginDate='+fmt(new Date(now-55*3600000))+'&endDate='+fmt(new Date(now.getTime()+3600000)));
+  var v=j&&j[0]&&j[0].data&&j[0].data[0]&&j[0].data[0].values||[];v=v.filter(function(x){return x.value!=null;});
+  if(!v.length){el.innerHTML='<p class="hint">The SNOTEL station did not report in the last two days.</p>';return;}
+  var t=function(x){return Date.parse(x.date.replace(' ','T')+':00-08:00');},last=v[v.length-1],T=t(last);
+  var back=function(h){var c=null;v.forEach(function(x){if(t(x)<=T-h*3600000)c=x;});return c;},d24=back(24),d48=back(48);
+  var ch=function(b){if(!b)return '–';var x=last.value-b.value;return (x>0?'+':'')+x+' in';};
+  el.innerHTML='<div class="sk-kv"><div><b>'+last.value+' in</b><span>snow depth now</span></div><div><b>'+ch(d24)+'</b><span>depth change, 24 h</span></div><div><b>'+ch(d48)+'</b><span>depth change, 48 h</span></div></div><p class="sk-src">NRCS SNOTEL '+esc(C.snotel.name)+', '+C.snotel.elev.toLocaleString()+' ft, '+C.snotel.miles+' miles from the base. Reading from '+new Date(T).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'. This is a federal snow gauge near the resort, not the resort report. <a href="https://wcc.sc.egov.usda.gov/nwcc/site?sitenum='+C.snotel.triplet.split(':')[0]+'" target="_blank" rel="noopener">Station page</a>.</p>';}
+// WSDOT mountain pass reports for the named stretches, from the Worker's /conditions feed.
+async function passes(){var ul=document.getElementById('prList');if(!C.passReports||!ul)return;var d=await J(WORKER+'/conditions?state='+C.tzState,3);var list=d&&d['road-weather-reports'];
+  ul.innerHTML=C.passReports.map(function(p){var x=(list||[]).filter(function(y){return y['location-name']===p.name;})[0];if(!x)return '<li><b>'+esc(p.label)+'</b><span class="m">'+(list?'No report in the WSDOT feed right now.':'The WSDOT feed did not load.')+' <a href="'+esc(p.url)+'" target="_blank" rel="noopener">WSDOT page</a></span></li>';
+    var r=[x['restriction-one'],x['restriction-two']].filter(function(y,i,a){return y&&a.indexOf(y)===i;}).join(' / ');var txt=String(x['road-surface-condition']||'').slice(0,240);
+    return '<li><b>'+esc(p.label)+'</b><span class="m">'+esc(txt)+(r?' Restrictions: '+esc(r)+'.':'')+(x['air-temperature']!=null?' '+x['air-temperature']+'°F.':'')+(x['date-updated']?' WSDOT updated '+new Date(x['date-updated']).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'.':'')+' <a href="'+esc(p.url)+'" target="_blank" rel="noopener">WSDOT page</a></span></li>';}).join('');}
+forecast();snotel();passes();setInterval(passes,600000);
 })();</script>
 
   <!-- MailerLite Universal -->
