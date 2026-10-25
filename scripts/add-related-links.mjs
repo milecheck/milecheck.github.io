@@ -168,7 +168,10 @@ const STRIP = /[ \t]*<!-- related:start -->[\s\S]*?<!-- related:end -->\n?/;
 // Top row: the first three links again, right under the title, so a phone reader sees an onward link
 // in the first screen (Raptive prep 10/13: 39% of landings had none).
 const TOP_STRIP = /<!-- toplinks:start -->[\s\S]*?<!-- toplinks:end -->/;
-const topRow = links => `<!-- toplinks:start --><nav class="mc-toplinks" aria-label="Related pages" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${links.map(l => `<a href="${l.url}" style="font-size:13px;font-weight:600;color:#00704A;background:#E8F6EF;border-radius:999px;padding:6px 11px;text-decoration:none;line-height:1.3;">${esc(l.title)}</a>`).join('')}</nav><!-- toplinks:end -->`;
+const KICK = { cameras:'Live cameras', conditions:'Road conditions', pass:'Mountain pass', corridor:'Interstate corridor', bridges:'Bridges', guide:'Guide', report:'Monthly report', hub:'Maps', closure:'Closure' };
+// Leah 10-25: the pills read as tags, not links. Now labeled cards, "Keep exploring", under the
+// closures list on map pages (inside .rc-side), else right under the title.
+const topRow = links => `<!-- toplinks:start --><nav class="mc-toplinks" aria-label="Keep exploring" style="margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00704A;margin:0 0 6px;">Keep exploring</div><div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${links.map(l => `<a href="${l.url}" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">${KICK[l.type] || 'Map'}</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">${esc(l.title)}</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a>`).join('')}</div></nav><!-- toplinks:end -->`;
 
 let changed = 0, skipped = [], checked = 0;
 for (const n of nodes) {
@@ -184,8 +187,10 @@ for (const n of nodes) {
     if (at < 0) at = s.search(/[ \t]*<footer class="site-footer">/);
     if (at < 0) { console.error('no anchor:', n.file); continue; }
     s = s.slice(0, at) + '  ' + block(links) + s.slice(at);
+    const side = s.search(/<div class="rc-official">/);
     const h1 = s.indexOf('</h1>');
-    if (h1 >= 0) s = s.slice(0, h1 + 5) + topRow(links.slice(0, 3)) + s.slice(h1 + 5);
+    if (side >= 0) s = s.slice(0, side) + topRow(links.slice(0, 3)) + s.slice(side);
+    else if (h1 >= 0) s = s.slice(0, h1 + 5) + topRow(links.slice(0, 3)) + s.slice(h1 + 5);
   }
   if (s !== o) { writeFileSync(n.file, s); changed++; }
 }
