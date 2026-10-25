@@ -191,7 +191,7 @@
       var p = document.createElement('p');
       p.className = 'mc-fb';
       p.style.cssText = 'margin:4px 2px 0;text-align:right;font-size:12px;font-style:italic;color:#6b7280';
-      p.innerHTML = 'See any issue? <a href="mailto:feedback@milecheckapp.com?subject=Map%20issue%3A%20' + encodeURIComponent(location.pathname) + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat looks wrong:\n') + '" style="color:inherit;text-decoration:underline">Tell us</a>';
+      p.innerHTML = 'See any issues? <a href="mailto:feedback@milecheckapp.com?subject=Map%20issue%3A%20' + encodeURIComponent(location.pathname) + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat looks wrong:\n') + '" style="color:inherit;text-decoration:underline">Tell us</a>';
       box.insertAdjacentElement('afterend', p);
     });
   }
