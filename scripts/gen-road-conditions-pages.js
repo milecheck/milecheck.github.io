@@ -126,7 +126,7 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-empty.err b{color:#b4231a;}
     .rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#5b6670;margin:10px 0 0;}
     .rc-legend span{display:inline-flex;align-items:center;gap:6px;}
-    .rc-legend .rc-work{flex-basis:100%;font-weight:700;color:#1d1f1c;font-size:14px;gap:8px;}.rc-legend .rc-work input{width:18px;height:18px;}
+    .rc-legend .rc-work{flex-basis:100%;font-weight:600;color:#1d1f1c;font-size:13.5px;}.rc-legend .rc-work input{width:18px;height:18px;}
     .rc-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
     .rc-official{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;}
     .rc-official a{color:#0f7a4f;font-weight:700;text-decoration:none;}
@@ -325,7 +325,8 @@ function render(list){
 }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 rows.addEventListener('click',function(e){var r=e.target.closest('.rc-row');if(!r)return;var m=markers[r.getAttribute('data-i')];if(!m)return;if(!map.hasLayer(workLayer)&&workLayer.hasLayer(m))return;map.setView(m.getLatLng(),Math.max(map.getZoom(),9));m.openPopup();});
-workToggle.addEventListener('change',function(){if(workToggle.checked)workLayer.addTo(map);else map.removeLayer(workLayer);});
+if(workToggle)workToggle.addEventListener('change',function(){if(workToggle.checked)workLayer.addTo(map);else map.removeLayer(workLayer);});
+window.mcMapOptions={layers:[{label:'Closures and crashes',color:'#cf3320',layer:layer},{label:'Restrictions and roadwork',color:'#F59E0B',layer:workLayer},(typeof PLOWS!=='undefined'&&PLOWS)?{label:'Snowplows',color:'#0369A1',layer:plowLayer}:null].filter(Boolean)};
 var last=null;
 function load(){
   fetch(WORKER+'/incidents?state='+ST,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){
@@ -428,7 +429,7 @@ ${sp.html}
         <div id="rcmap" role="region" aria-label="${s.name} road alerts map"></div>
       </div>
       <div class="rc-side">
-        <div class="rc-legend" style="margin:0"><label class="rc-work"><input type="checkbox" id="rcWork"> Show restrictions and roadwork on the map</label><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#a16207"></i>Ramp or lane</span><span><i style="background:#F59E0B"></i>Work zone</span><span style="color:#8A939B">Faded markers are scheduled, not active</span></div>
+        <div class="rc-legend" style="margin:0"><span class="rc-work">More on the map: tap the layers button at the top left of the map.</span><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#a16207"></i>Ramp or lane</span><span><i style="background:#F59E0B"></i>Work zone</span><span style="color:#8A939B">Faded markers are scheduled, not active</span></div>
         <div class="rc-list">
           <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span></div>${PLOW_FEEDS.has(s.code) ? `
           <div class="lh" style="margin-top:6px"><span>Snowplows <span id="rcPlowCount" style="color:#0369A1;font-weight:600;font-size:12px;">loading</span></span><label><input type="checkbox" id="rcPlows" checked> Show trucks</label></div><div id="rcPlowNote" style="display:none;padding:4px 14px 8px;font-size:12.5px;color:#0369A1;font-weight:600"></div>` : ''}
