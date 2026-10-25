@@ -337,7 +337,7 @@
       btn.disabled = true; btn.textContent = 'Sending...'; msg.className = 'cb-msg'; msg.textContent = '';
       var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
       var tmo = setTimeout(function(){ if (ctl) ctl.abort(); fail(); btn.disabled = false; btn.textContent = 'Send'; }, 20000);
-      fetch('https://milepost-proxy.leahgerber93.workers.dev/preorder', { signal: ctl ? ctl.signal : undefined,
+      fetch('https://api.milecheckapp.com/preorder', { signal: ctl ? ctl.signal : undefined,
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           list: 'venue',

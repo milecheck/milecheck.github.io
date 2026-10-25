@@ -140,7 +140,7 @@
   function show(id){$('thxCheck').hidden=true;$(id).hidden=false;if(report)$('thxReportNext').hidden=false}
   function none(){show('thxNone')}
   if(!/^cs_(test|live)_[A-Za-z0-9]{10,200}$/.test(sid)){none();return}
-  fetch('https://milepost-proxy.leahgerber93.workers.dev/sponsor-session?session_id='+encodeURIComponent(sid),{cache:'no-store'})
+  fetch('https://api.milecheckapp.com/sponsor-session?session_id='+encodeURIComponent(sid),{cache:'no-store'})
     .then(function(r){return r.json()})
     .then(function(d){
       if(!d||d.paid!==true){none();return}
@@ -220,7 +220,7 @@
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 <script>
 (function(){
-  var W = 'https://milepost-proxy.leahgerber93.workers.dev';
+  var W = 'https://api.milecheckapp.com';
   var $ = function(id){ return document.getElementById(id); };
   var int = function(n){ return Math.round(n).toLocaleString('en-US'); };
   var FAM = {

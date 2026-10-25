@@ -410,7 +410,7 @@ const CTA = (campaign, dot) => `    <div class="cta">
 function liveJs(code, dot) {
   return `<script>
 (function(){
-var ST=${JSON.stringify(code)},DOT=${JSON.stringify(dot)},WORKER="https://milepost-proxy.leahgerber93.workers.dev";
+var ST=${JSON.stringify(code)},DOT=${JSON.stringify(dot)},WORKER="https://api.milecheckapp.com";
 var status=document.getElementById('clStatus'),rows=document.getElementById('clRows'),when=document.getElementById('clWhen');
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function clean(t){return String(t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/g,' ').replace(/\\s+/g,' ').trim().slice(0,200);}

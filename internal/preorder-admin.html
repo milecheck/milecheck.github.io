@@ -74,7 +74,7 @@
       const err = document.getElementById('err');
       err.style.display = 'none';
       try {
-        const res = await fetch('https://milepost-proxy.leahgerber93.workers.dev/preorder/export', {
+        const res = await fetch('https://api.milecheckapp.com/preorder/export', {
           headers: { 'x-admin-secret': secret },
         });
         if (!res.ok) throw new Error('bad response');

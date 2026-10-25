@@ -476,7 +476,7 @@ ${sp.js}
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 
 <script>
-const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+const WORKER='https://api.milecheckapp.com';
 const CODE=${JSON.stringify(s.code)};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};const MKR=${JSON.stringify(w.markerShort)};
 const PLOWS=${plows};

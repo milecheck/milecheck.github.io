@@ -34,7 +34,7 @@ const BODY = `    <p class="lede">How often the sponsor slot at the top of MileC
     (function(){
       var G=[['All camera pages',/^cameras:/],['California, Nevada and Utah',/california|los-angeles|san-diego|san-francisco|sacramento|cajon|donner|grapevine|tejon|nevada|las-vegas|reno|utah|salt-lake|parleys|cottonwood/],['Washington',/washington|seattle|snoqualmie|stevens|bridge/],['Oregon',/oregon|portland|gorge|hood/],['Mountain passes',/^pass:/],['Corridors (interstates)',/^corridor:/]];
       var fmt=function(n){return Number(n).toLocaleString('en-US')};
-      fetch('https://milepost-proxy.leahgerber93.workers.dev/sponsor-stats').then(function(r){return r.json()}).then(function(d){
+      fetch('https://api.milecheckapp.com/sponsor-stats').then(function(r){return r.json()}).then(function(d){
         var big=function(n,l){return '<div><div style="font-size:34px;font-weight:800;line-height:1">'+n+'</div><div style="font-size:13px;color:#5b6670;margin-top:4px">'+l+'</div></div>'};
         document.getElementById('ss-total').innerHTML=big(fmt(d.total.impressions),'sponsor slot views, last '+d.days+' days')+big(fmt(d.total.clicks),'clicks');
         document.getElementById('ss-range').textContent='Since '+d.since+'. Updated '+new Date(d.generatedAt||Date.now()).toLocaleString('en-US')+'.';

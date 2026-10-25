@@ -30,7 +30,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev';
+const WORKER = 'https://api.milecheckapp.com';
 const DRY = process.argv.includes('--dry');
 
 // Integrations that exist but whose upstream is known-flaky. Present here so a

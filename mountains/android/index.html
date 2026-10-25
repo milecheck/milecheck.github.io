@@ -70,7 +70,7 @@
 </main>
 <script>
   // Same endpoint as the Dash early-access page, its own list (`list: 'mountain-android'`, 2026-10-03).
-  const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev/preorder';
+  const WORKER = 'https://api.milecheckapp.com/preorder';
   const params = new URLSearchParams(location.search);
   const campaign = [params.get('utm_source'), params.get('utm_campaign')].filter(Boolean).join('/');
   const SOURCE = 'mountain-visibility-android' + (campaign ? ' via ' + campaign : '');

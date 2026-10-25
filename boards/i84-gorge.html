@@ -138,7 +138,7 @@ const PCFG={
   condState:"OR", stateName:"Oregon", towns:[{n:"Portland",mp:2},{n:"Cascade Locks",mp:44},{n:"Hood River",mp:63},{n:"The Dalles",mp:85},{n:"Biggs Junction",mp:104},{n:"Rufus",mp:109},{n:"Arlington",mp:137},{n:"Boardman",mp:164},{n:"Hermiston",mp:180},{n:"Stanfield",mp:188},{n:"Pendleton",mp:210},{n:"Cabbage Hill",mp:224},{n:"Meacham",mp:234},{n:"La Grande",mp:261},{n:"North Powder",mp:285},{n:"Baker City",mp:304},{n:"Durkee",mp:327},{n:"Huntington",mp:353},{n:"Ontario",mp:376},{n:"Boise",mp:425}], tz:"America/Los_Angeles", tzEast:{from:356,tz:"America/Boise"}, dot:"ODOT", alertRid:"I84", alertRe:/^I-?84$/,
   dec:{name:"WEST OF HERE",short:"W"},
   inc:{name:"EAST OF HERE",short:"E"},
-  camBase:"https://milepost-proxy.leahgerber93.workers.dev/camera-image?state=OR&id=",
+  camBase:"https://api.milecheckapp.com/camera-image?state=OR&id=",
   cameras:[
     {name:"Cascade Locks",mp:45,lat:45.66931,lon:-121.88484,file:"OR-205"},
     {name:"Wyeth",mp:54,lat:45.68788,lon:-121.70189,file:"OR-1125"},
@@ -156,7 +156,7 @@ function resolveLocation(){return {slug:"i84-gorge",cfg:PCFG};}
 function pingBoardView(){}
 </script>
 <script>
-const WORKER = "https://milepost-proxy.leahgerber93.workers.dev";
+const WORKER = "https://api.milecheckapp.com";
 const { slug: LOC, cfg: P } = resolveLocation();
 const HERE = P.here;
 const CAM_BASE = P.camBase;

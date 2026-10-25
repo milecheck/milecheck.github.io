@@ -10,7 +10,7 @@
 //  - verifiedAt (shown as "Last checked") moves only when the record was found in a healthy feed.
 import fs from 'node:fs';
 const FILE = process.env.CLOSURES_FILE || 'scripts/closures/big-closures.json';
-const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev';
+const WORKER = 'https://api.milecheckapp.com';
 const items = JSON.parse(fs.readFileSync(FILE, 'utf8'));
 const now = new Date();
 

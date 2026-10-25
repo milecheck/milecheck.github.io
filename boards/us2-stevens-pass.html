@@ -159,7 +159,7 @@ const PCFG={
   condState:"WA", stateName:"Washington", towns:[{n:"Everett",mp:0},{n:"Snohomish",mp:5},{n:"Monroe",mp:14},{n:"Sultan",mp:23},{n:"Gold Bar",mp:28},{n:"Index",mp:36},{n:"Skykomish",mp:49},{n:"Stevens Pass",mp:64},{n:"Coles Corner",mp:84},{n:"Leavenworth",mp:100},{n:"Cashmere",mp:112},{n:"Wenatchee",mp:119}], tz:"America/Los_Angeles", dot:"WSDOT", alertRid:"SR 2", alertRe:/^(SR |US-? ?)2$/, condNameRe:/US ?2\b/,
   dec:{name:"WEST OF HERE",short:"W"},
   inc:{name:"EAST OF HERE",short:"E"},
-  camBase:"https://milepost-proxy.leahgerber93.workers.dev/camera-image?state=WA&id=",
+  camBase:"https://api.milecheckapp.com/camera-image?state=WA&id=",
   cameras:[
     {name:"SR 9 interchange",mp:5,lat:47.9519,lon:-122.1041,file:"WA-9265"},
     {name:"Monroe, SR 522",mp:14,lat:47.8632,lon:-121.9845,file:"WA-5000"},
@@ -183,7 +183,7 @@ function resolveLocation(){return {slug:"us2-stevens-pass",cfg:PCFG};}
 function pingBoardView(){}
 </script>
 <script>
-const WORKER = "https://milepost-proxy.leahgerber93.workers.dev";
+const WORKER = "https://api.milecheckapp.com";
 const { slug: LOC, cfg: P } = resolveLocation();
 const HERE = P.here;
 const CAM_BASE = P.camBase;

@@ -138,7 +138,7 @@ const PCFG={
   condState:"WA", stateName:"Washington", towns:[{n:"Moses Lake",mp:176},{n:"Ritzville",mp:221},{n:"Sprague",mp:245},{n:"Tyler",mp:257},{n:"Cheney",mp:270},{n:"Airway Heights",mp:276},{n:"Spokane",mp:281},{n:"Spokane Valley",mp:289},{n:"Liberty Lake",mp:296},{n:"Idaho line",mp:299}], tz:"America/Los_Angeles", dot:"WSDOT", alertRid:"SR 90", alertRe:/^(SR |I-?)90$/, condNameRe:/I-?90/,
   dec:{name:"WEST OF HERE",short:"W"},
   inc:{name:"EAST OF HERE",short:"E"},
-  camBase:"https://milepost-proxy.leahgerber93.workers.dev/camera-image?state=WA&id=",
+  camBase:"https://api.milecheckapp.com/camera-image?state=WA&id=",
   cameras:[
     {name:"Ritzville",mp:218,lat:47.1111,lon:-118.3997,file:"WA-8313"},
     {name:"Tyler",mp:258,lat:47.4334,lon:-117.7934,file:"WA-8260"},
@@ -164,7 +164,7 @@ function resolveLocation(){return {slug:"i90-spokane",cfg:PCFG};}
 function pingBoardView(){}
 </script>
 <script>
-const WORKER = "https://milepost-proxy.leahgerber93.workers.dev";
+const WORKER = "https://api.milecheckapp.com";
 const { slug: LOC, cfg: P } = resolveLocation();
 const HERE = P.here;
 const CAM_BASE = P.camBase;

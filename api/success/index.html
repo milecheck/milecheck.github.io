@@ -27,7 +27,7 @@
   <p>Payment received. This is your key. It is shown once here; copy it now. It is also tied to the email you paid with, so if you lose it, write to <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> and we will send it again.</p>
   <div class="key" id="key">Fetching your key…</div>
   <p><button id="copy" hidden>Copy key</button></p>
-  <p>First call: <code>https://milepost-proxy.leahgerber93.workers.dev/v1/alerts?state=WA&amp;apikey=YOUR_KEY</code></p>
+  <p>First call: <code>https://api.milecheckapp.com/v1/alerts?state=WA&amp;apikey=YOUR_KEY</code></p>
   <p>Docs, every endpoint, and the schema: <a href="/api/">milecheckapp.com/api</a>.</p>
 </main>
 <script>
@@ -36,7 +36,7 @@
   const sid = new URLSearchParams(location.search).get('session_id');
   if (!sid) { el.textContent = 'No checkout session in the link. Check your email or write to sales@milecheckapp.com.'; el.className = 'key err'; return; }
   try {
-    const r = await fetch('https://milepost-proxy.leahgerber93.workers.dev/v1/checkout/key?session_id=' + encodeURIComponent(sid));
+    const r = await fetch('https://api.milecheckapp.com/v1/checkout/key?session_id=' + encodeURIComponent(sid));
     const j = await r.json();
     if (!r.ok || !j.api_key) throw new Error(j.error || 'Not found');
     el.textContent = j.api_key; btn.hidden = false;

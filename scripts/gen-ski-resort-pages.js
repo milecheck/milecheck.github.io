@@ -301,7 +301,7 @@ const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZ
 (function(){
 var RES=${JSON.stringify({ slug: r.slug, name: r.name, state: r.state, lat: r.lat, lon: r.lon, radius: r.radius, routes: r.routes, cams: r.cams || null })};
 var DOT=${JSON.stringify(reg.dot)},TRAFFIC=${JSON.stringify(reg.trafficName)},TRAFFICURL=${JSON.stringify(reg.traffic)},PLOWS=${plows},KM=${KM.has(r.state)};
-var WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+var WORKER='https://api.milecheckapp.com';
 ${MATCH_JS}
 var KEYS=keysOf(RES);
 var TOUCH=('ontouchstart' in window),RS=function(v){return TOUCH?Math.round(v*1.6):v;};
@@ -418,7 +418,7 @@ function extrasJs(r) {
   };
   return `<script>
 (function(){
-var C=${JSON.stringify(cfg)},LAT=${r.lat},LON=${r.lon},WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+var C=${JSON.stringify(cfg)},LAT=${r.lat},LON=${r.lon},WORKER='https://api.milecheckapp.com';
 function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function J(u,t){return new Promise(function(res){var i=0;(function go(){fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(res).catch(function(){if(++i<(t||2))setTimeout(go,1500);else res(null);});})();});}
 function hrs(d){var m=/PT?(?:(\\d+)D)?T?(?:(\\d+)H)?/.exec(d||'');return m?((+m[1]||0)*24+(+m[2]||0)):1;}
@@ -689,7 +689,7 @@ ${faqHtml}
 ` + footer('Plow positions: state and provincial DOTs via MileCheck. A plow pin is a reported position, not a statement about the road surface.') + sp.js + `
 <script>
 (function(){
-var WORKER='https://milepost-proxy.leahgerber93.workers.dev',AGENCY=window.MCPlows?MCPlows.AGENCY:{};
+var WORKER='https://api.milecheckapp.com',AGENCY=window.MCPlows?MCPlows.AGENCY:{};
 var RES=${JSON.stringify(hubData)};
 ${MATCH_JS}
 var byState={};RES.forEach(function(r){(byState[r.state]=byState[r.state]||[]).push(r);});

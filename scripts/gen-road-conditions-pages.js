@@ -273,7 +273,7 @@ function liveJs(s) {
   return `<script>
 (function(){
 var ST=${JSON.stringify(s.code)},DOT=${JSON.stringify(s.dot)},DOTURL=${JSON.stringify(s.dotUrl)},B=${JSON.stringify(s.bounds)};
-var WORKER="https://milepost-proxy.leahgerber93.workers.dev";
+var WORKER="https://api.milecheckapp.com";
 /* window.map: assets/map-kit.js reads the page-level map for its shared controls (full screen, 2026-10-16). */
 var map=window.map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
 var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
@@ -326,7 +326,14 @@ function render(list){
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 rows.addEventListener('click',function(e){var r=e.target.closest('.rc-row');if(!r)return;var m=markers[r.getAttribute('data-i')];if(!m)return;if(!map.hasLayer(workLayer)&&workLayer.hasLayer(m))return;map.setView(m.getLatLng(),Math.max(map.getZoom(),9));m.openPopup();});
 if(workToggle)workToggle.addEventListener('change',function(){if(workToggle.checked)workLayer.addTo(map);else map.removeLayer(workLayer);});
-window.mcMapOptions={layers:[{label:'Closures and crashes',color:'#cf3320',layer:layer},{label:'Restrictions and roadwork',color:'#F59E0B',layer:workLayer},(typeof PLOWS!=='undefined'&&PLOWS)?{label:'Snowplows',color:'#0369A1',layer:plowLayer}:null].filter(Boolean)};
+// Wildfires (10-25): the Worker's /fires list (NIFC + BC), this state only, prescribed burns left out. Off by default.
+var fireLayer=L.layerGroup();
+fetch(WORKER+'/fires',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){((d&&d.fires)||[]).forEach(function(x){if(x.state!=='US-'+ST||x.isRx||!isFinite(x.lat))return;L.circleMarker([x.lat,x.lon],{radius:Math.min(14,5+Math.log10((x.acres||1)+1)*2),color:'#7f1d1d',weight:1,fillColor:'#B91C1C',fillOpacity:.8}).bindPopup('<b>'+esc(x.name||'Fire')+'</b><br>'+(x.acres!=null?Math.round(x.acres).toLocaleString()+' acres':'Size not reported')+(x.containedPct!=null?' · '+x.containedPct+'% contained':'')+'<br><span style="color:#8A939B">Source: NIFC via MileCheck</span>').addTo(fireLayer);});}).catch(function(){});
+// Seattle drawbridges (10-25): the five bridges SDOT reports live, from /bridge-status. WA only.
+var bridgeLayer=L.layerGroup();
+if(ST==='WA'){var BR=[['fremont','Fremont Bridge',47.6476,-122.3499],['ballard','Ballard Bridge',47.6596,-122.3765],['montlake','Montlake Bridge',47.6473,-122.3045],['south-park','South Park Bridge',47.5290,-122.3140],['first-ave-s','1st Ave S Bridge',47.5420,-122.3343]];
+fetch(WORKER+'/bridge-status',{cache:'no-store'}).then(function(r){return r.ok?r.json():{};}).catch(function(){return {};}).then(function(d){var up=(d&&d.raised)||[];BR.forEach(function(b){var isUp=up.indexOf('WA-bridge-'+b[0])>=0;L.circleMarker([b[2],b[3]],{radius:7,color:'#4c1d95',weight:1,fillColor:isUp?'#DC2626':'#7C3AED',fillOpacity:.9}).bindPopup('<b>'+b[1]+'</b><br>'+(isUp?'Raised now':'Down, open to traffic')+'<br><a href="/seattle-drawbridges/" target="_blank" rel="noopener">Seattle drawbridges live</a>').addTo(bridgeLayer);});});}
+window.mcMapOptions={layers:[{label:'Closures and crashes',color:'#cf3320',layer:layer},{label:'Restrictions and roadwork',color:'#F59E0B',layer:workLayer},(typeof PLOWS!=='undefined'&&PLOWS)?{label:'Snowplows',color:'#0369A1',layer:plowLayer}:null,{label:'Wildfires',color:'#B91C1C',layer:fireLayer},(ST==='WA')?{label:'Seattle drawbridges',color:'#7C3AED',layer:bridgeLayer}:null].filter(Boolean)};
 var last=null;
 function load(){
   fetch(WORKER+'/incidents?state='+ST,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){

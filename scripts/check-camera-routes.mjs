@@ -8,7 +8,7 @@
 // Output: data/camera-route-notes.json, read by assets/map-kit.js section 10, which puts a note on the card.
 // Needs the app repo's milepost corpus (../assets/data). Run: node scripts/check-camera-routes.mjs
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev';
+const WORKER = 'https://api.milecheckapp.com';
 const HDR = { 'User-Agent': 'MileCheck/1.10.43 (ios)', 'X-MC-Client': 'milecheck-app/1.10.43 (ios)' };
 const STATES = 'AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY AB BC MB ON QC NB NS SK YT NT'.split(' ');
 const norm = r => String(r || '').toUpperCase().replace(/[\s-]+/g, '');

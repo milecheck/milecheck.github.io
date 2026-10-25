@@ -945,7 +945,7 @@ ${p.vis ? `
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
 
 <script>
-const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+const WORKER='https://api.milecheckapp.com';
 const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea}};
 const SNOW=${p.snow ? JSON.stringify({station:p.snow.station,avyCenter:p.snow.avyCenter}) : 'null'};
 const PLOWS=${p.plows ? JSON.stringify({states:p.plows.states}) : 'null'};

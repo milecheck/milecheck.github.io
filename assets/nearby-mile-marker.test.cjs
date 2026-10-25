@@ -55,7 +55,7 @@ test('page requests location only on a click, sends only state codes and immedia
   const p=page();assert.equal(p.gps,undefined);assert.equal(p.requests.length,0);
   p.click();assert.equal(p.gps.settings.maximumAge,0);assert.equal(p.gps.settings.timeout,15000);
   p.gps.success({coords:point});assert.equal(p.requests.length,1);
-  assert.equal(p.requests[0].url,'https://milepost-proxy.leahgerber93.workers.dev/mileposts?state=OR');
+  assert.equal(p.requests[0].url,'https://api.milecheckapp.com/mileposts?state=OR');
   assert.equal(p.requests[0].settings.referrerPolicy,'no-referrer');
   p.pending.OR.resolve([post({mile:147.03})]);await settle();
   assert.equal(p.nodes['marker-result'].hidden,false);assert.equal(p.nodes['marker-number'].textContent,'147.03');

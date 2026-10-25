@@ -2,7 +2,7 @@
 var map;
 (function(root){
  'use strict';
- const WORKER='https://milepost-proxy.leahgerber93.workers.dev';
+ const WORKER='https://api.milecheckapp.com';
  function isRoute(value){return /^(?:I[ -]?0*75(?=$|[\s/,;])|0*75$)/i.test(String(value||'').trim());}
  // Bounds are a coarse state rectangle from states.cjs, not an exact state polygon.
  // This rejects distant misassigned records but cannot establish border-side provenance.

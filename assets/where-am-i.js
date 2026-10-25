@@ -81,7 +81,7 @@
       status.textContent='Finding nearby mile markers…';
       Promise.all(codes.map(function(code){
         // Only a state code leaves the browser. No latitude, longitude or accuracy.
-        return root.fetch('https://milepost-proxy.leahgerber93.workers.dev/mileposts?state='+code,{credentials:'omit',referrerPolicy:'no-referrer'}).then(function(r){if(!r.ok)throw Error('Unavailable');return r.json();}).then(function(data){return core.decode(data,code,routes.formatRouteName);});
+        return root.fetch('https://api.milecheckapp.com/mileposts?state='+code,{credentials:'omit',referrerPolicy:'no-referrer'}).then(function(r){if(!r.ok)throw Error('Unavailable');return r.json();}).then(function(data){return core.decode(data,code,routes.formatRouteName);});
       })).then(function(lists){
         if(!current())return;
         lastAll=[].concat.apply([],lists);lastCoords=p;

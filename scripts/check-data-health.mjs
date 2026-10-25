@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BASE_FILE = path.join(ROOT, 'data', 'data-health-baseline.json');
-const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev';
+const WORKER = 'https://api.milecheckapp.com';
 const UA = 'MileCheck-DataHealth/1.0 (+https://milecheckapp.com)';
 const CAMERA_DROP = 0.4;          // fail if cameras fall more than 40% below baseline
 const ALERT_MIN_BASELINE = 10;    // only fail an empty alert feed when the baseline had at least this many

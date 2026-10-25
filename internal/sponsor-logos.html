@@ -55,7 +55,7 @@
 
   <script>
     const KEY = 'preorder_admin_secret';
-    const API = 'https://milepost-proxy.leahgerber93.workers.dev';
+    const API = 'https://api.milecheckapp.com';
     const stored = localStorage.getItem(KEY);
     if (stored) document.getElementById('secret').value = stored;
     const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

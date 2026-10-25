@@ -23,7 +23,7 @@ const fs = require('fs');
 const path = require('path');
 
 const CONFIG_PATH = path.join(__dirname, '..', '..', 'data', 'sponsors.json');
-const BEACON_URL = 'https://milepost-proxy.leahgerber93.workers.dev/sponsor-beacon';
+const BEACON_URL = 'https://api.milecheckapp.com/sponsor-beacon';
 
 let cfgCache = null;
 const placed = [];

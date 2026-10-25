@@ -343,7 +343,7 @@ function liveJs(r) {
   return `<script>
 (function(){
 var STATES=${JSON.stringify(r.states)},DOTS=${JSON.stringify(dots)},KEYS=${JSON.stringify(keys)},WORDS=${JSON.stringify(r.words.map((w) => w.toLowerCase()))},ROUTE=${JSON.stringify(r.routes.join(' / '))};
-var WORKER="https://milepost-proxy.leahgerber93.workers.dev";
+var WORKER="https://api.milecheckapp.com";
 var status=document.getElementById('scStatus'),rows=document.getElementById('scRows'),when=document.getElementById('scWhen');
 var LABEL={closure:'Closed',partial:'Ramp / lane',weather:'Weather',work:'Work zone',crash:'Crash',hazard:'Hazard',other:'Report'};
 function clean(t,n){var x=(t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/g,' ').replace(/\\s+/g,' ').trim();n=n||220;if(x.length<=n)return x;var c=x.slice(0,n),sp=c.lastIndexOf(' ');return (sp>n*0.6?c.slice(0,sp):c).replace(/[\\s,;:.|-]+$/,'')+'…';}

@@ -117,7 +117,7 @@
   const foot=document.getElementById('boardFoot');
   document.getElementById('boardTime').textContent=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
   try{
-    const r=await fetch('https://milepost-proxy.leahgerber93.workers.dev/incidents?state=WA');
+    const r=await fetch('https://api.milecheckapp.com/incidents?state=WA');
     const d=await r.json();
     const incs=d['incident-reports']||[];
     document.getElementById('stAlerts').textContent=incs.length;

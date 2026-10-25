@@ -31,10 +31,18 @@
     .api-hero h1{font-size:clamp(30px,5.5vw,48px);line-height:1.1;margin:0 0 14px;letter-spacing:-0.01em;}
     .api-hero p.sub{font-size:18px;line-height:1.6;color:#3a444d;max-width:62ch;margin:0 auto 10px;}
     .api-hero p.value{font-size:15px;color:#5b6670;max-width:60ch;margin:0 auto 26px;}
-    .api-hero .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
-    .api-hero .btns a{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;}
-    .api-hero .btns a.primary{background:#0f7a4f;color:#fff;}
-    .api-hero .btns a.ghost{border:1.5px solid #0F1419;color:#0F1419;}
+    .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
+    .btns a{display:inline-flex;align-items:center;min-height:44px;padding:12px 22px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;}
+    .btns a.primary{background:#0f7a4f;color:#fff;}
+    .btns a.ghost{border:1.5px solid #0F1419;color:#0F1419;background:#fff;}
+    .btn-note{font-size:13.5px;color:#5b6670;margin:8px 0 0;}
+    .ep-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:26px;align-items:start;margin-top:14px;}
+    .ep-visual{position:sticky;top:84px;margin:0;}
+    .ep-visual img{display:block;width:100%;height:auto;border:1px solid #E5E5E5;border-radius:14px;}
+    .ep-visual.phone img{max-width:300px;margin:0 auto;border-radius:22px;}
+    .ep-visual figcaption{font-size:13.5px;line-height:1.5;color:#5b6670;margin-top:8px;}
+    .ep-code{min-width:0;}
+    @media(max-width:860px){.ep-row{grid-template-columns:minmax(0,1fr);}.ep-visual{position:static;order:-1;}}
 
     .api-section{max-width:960px;margin:0 auto;padding:36px 20px;}
     .api-section h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 8px;letter-spacing:-0.01em;}
@@ -143,51 +151,44 @@
 
   <!-- HERO -->
   <div class="api-hero">
-    <div class="eyebrow">Developer API</div>
+    <div class="eyebrow">For developers</div>
     <h1>The MileCheck API</h1>
-    <p class="sub">Highway mile markers and live state DOT feeds — all 50 states + British Columbia, Alberta and Manitoba, one normalized API.</p>
-    <p class="value">The API puts 50+ separate state DOT feeds, each with its own format, auth and quirks, into one consistent schema. It is the same feed our app uses.</p>
+    <p class="sub">For dispatch, fleet and routing software that needs to know which highway and mile marker a vehicle is on, and what is happening on the road ahead.</p>
+    <p class="value">It is the same data that runs the MileCheck app: mile markers for all 50 states and 10 Canadian provinces and territories, and live road alerts from every state DOT plus British Columbia, Alberta and Manitoba.</p>
     <div class="btns">
-      <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
-      <a class="ghost" href="#endpoints">View endpoints</a>
+      <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email us for an API key</a>
+      <a class="ghost" href="#pricing">See pricing</a>
     </div>
+    <p class="btn-note">The key button opens an email to sales@milecheckapp.com. Developer keys are free.</p>
   </div>
 
   <!-- VALUE -->
   <div class="api-section">
     <div class="value-grid">
       <div class="value-card">
-        <h3>One schema, 50 states + 3 provinces</h3>
-        <p>Every state and province speaks a different DOT dialect. MileCheck normalizes them all into one consistent response shape.</p>
+        <h3>One format for every state</h3>
+        <p>Each state DOT publishes its data its own way. The API returns all of it in one response shape.</p>
       </div>
       <div class="value-card">
         <h3>Mile-marker lookup</h3>
-        <p>Turn GPS coordinates into the nearest highway mile marker — route, milepost, and direction.</p>
+        <p>Send GPS coordinates; get the highway, nearest mile marker and direction.</p>
       </div>
       <div class="value-card">
         <h3>Live state DOT feeds</h3>
-        <p>Closures, crashes, construction, and road-weather — classified and normalized from live state feeds.</p>
+        <p>Closures, crashes, construction, chain controls and road weather, each tied to a highway and mile marker.</p>
       </div>
       <div class="value-card">
         <h3>We maintain the integrations</h3>
-        <p>53 upstream feeds, each with its own auth and shape. When one breaks, we fix it — not you.</p>
+        <p>53 upstream feeds, each with its own login and format. When one changes, we fix it.</p>
       </div>
     </div>
   </div>
 
   <!-- ENDPOINTS -->
-  <div class="api-section">
-    <h2>What the data looks like</h2>
-    <p class="lead">The same data runs MileCheck's own app, so these screens are real output.</p>
-    <div class="shots">
-    <figure><img src="/images/cs-2026-10-mile.webp" width="660" height="1434" loading="lazy" alt="MileCheck app showing I-90 East at mile 50.4, with the distance to the markers on each side"><figcaption><strong>Mile marker lookup.</strong> I-90 East, mile 50.4, 0.42 miles past marker 50. This is the answer the lookup returns, shown in our app.</figcaption></figure>
-    <figure><img src="/images/cs-2026-10-alerts.webp" width="660" height="1434" loading="lazy" alt="MileCheck app alerts list for Washington with two southbound crashes on I-5, each with route and mile marker"><figcaption><strong>Live alerts.</strong> Crashes grouped by route and direction, each with its mile marker, from the Washington DOT feed. The API returns the same alerts.</figcaption></figure>
-  </div>
-  </div>
-
   <div class="api-section" id="endpoints">
     <h2>Endpoints</h2>
-    <p class="lead">Base URL: <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">https://milepost-proxy.leahgerber93.workers.dev</code></p>
+    <p class="lead">Each endpoint shows the request and response on the left and the same data on a real screen on the right.</p>
+    <p class="lead">Base URL: <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">https://api.milecheckapp.com</code></p>
 
     <div class="auth-note">
       <strong>Authentication</strong> — every request needs an API key. Pass it as a query parameter (<code>?apikey=YOUR_KEY</code>), an <code>x-api-key</code> header, or an <code>Authorization: Bearer YOUR_KEY</code> header. Don't have a key yet? <a href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access" style="color:#0f7a4f;font-weight:700;">Email sales@milecheckapp.com</a>.
@@ -196,11 +197,12 @@
     <div class="ep-card">
       <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/locate</span></div>
       <p class="ep-desc">Coordinates in, nearest highway mile marker out.</p>
-      <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/01-fleet-dispatch-mile-marker.webp" target="_blank" rel="noopener"><img src="/images/mockups/01-fleet-dispatch-mile-marker.webp" width="1200" height="771" loading="lazy" alt="Fleet dispatch screen: a map of I-90 in Montana with a truck at mile 47.3 eastbound and the lookup response beside it"></a><figcaption><span class="badge">API</span> <strong>Mile marker lookup.</strong> A fleet dispatch tool uses the lookup and the truck's GPS to read out its highway and mile. The same markers are also licensed as a file with no call limits.</figcaption></figure></div>
+      <div class="ep-row">
+      <div class="ep-code">
       <p class="ep-params"><code>lat</code> and <code>lon</code> required · <code>state</code> optional (2-letter code, narrows the search)</p>
 
       <p class="ep-label">Request</p>
-      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/locate?apikey=YOUR_KEY&amp;lat=47.869&amp;lon=-121.760"</pre>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/locate?apikey=YOUR_KEY&amp;lat=47.869&amp;lon=-121.760"</pre>
 
       <p class="ep-label">Response</p>
       <pre class="codeblock">{
@@ -213,16 +215,20 @@
   "coordinates": { "lat": 47.869404, "lon": -121.760126 },
   "query": { "lat": 47.869, "lon": -121.76 }
 }</pre>
+      </div>
+      <figure class="ep-visual"><a href="/images/mockups/01-fleet-dispatch-mile-marker.webp" target="_blank" rel="noopener"><img src="/images/mockups/01-fleet-dispatch-mile-marker.webp" width="1200" height="771" loading="lazy" alt="Fleet dispatch screen: a map of I-90 in Montana with a truck at mile 47.3 eastbound and the lookup response beside it"></a><figcaption><span class="badge">API</span> <strong>Mile marker lookup.</strong> A fleet dispatch tool uses the lookup and the truck's GPS to read out its highway and mile. The same markers are also licensed as a file with no call limits.</figcaption></figure>
+    </div>
     </div>
 
     <div class="ep-card">
       <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/alerts</span></div>
       <p class="ep-desc">Live, normalized DOT road conditions and incidents for a state — closures, crashes, construction, road-weather.</p>
-      <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/05-work-zone-routing-app.webp" target="_blank" rel="noopener"><img src="/images/mockups/05-work-zone-routing-app.webp" width="1200" height="737" loading="lazy" alt="Routing app map of New Jersey with five numbered reported work zones and a list of each one"></a><figcaption><span class="badge">API</span> <strong>Work zones.</strong> A routing app shows reported work zones across part of New Jersey. Data from NJIT and TRANSCOM.</figcaption></figure></div>
+      <div class="ep-row">
+      <div class="ep-code">
       <p class="ep-params"><code>state</code> (2-letter code) <em>or</em> <code>lat</code> + <code>lon</code> required · <code>bbox=minLon,minLat,maxLon,maxLat</code> optional · <code>limit=N</code> optional</p>
 
       <p class="ep-label">Request</p>
-      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/alerts?apikey=YOUR_KEY&amp;state=WA"</pre>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/alerts?apikey=YOUR_KEY&amp;state=WA"</pre>
 
       <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged — arrays truncated)</span></p>
       <pre class="codeblock">{
@@ -233,6 +239,9 @@
   "incidents": [ <span class="cmt">/* incident-reports: closures, crashes, construction, etc. */</span> ],
   "source_status": { "conditions": "live", "incidents": "live" }
 }</pre>
+      </div>
+      <figure class="ep-visual phone"><img src="/images/cs-2026-10-alerts.webp" width="660" height="1434" loading="lazy" alt="MileCheck app alerts list for Washington with two southbound crashes on I-5, each with route and mile marker"><figcaption><strong>Real output.</strong> Crashes grouped by road and direction, each with its mile marker, from the Washington DOT feed. The API returns the same alerts.</figcaption></figure>
+    </div>
     </div>
 
     <div class="ep-card">
@@ -241,7 +250,7 @@
       <p class="ep-params"><code>state</code> optional · <code>bbox=minLon,minLat,maxLon,maxLat</code> optional · <code>limit=N</code> optional · <code>exclude_rx=1</code> optional (hide prescribed burns)</p>
 
       <p class="ep-label">Request</p>
-      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/fires?apikey=YOUR_KEY&amp;state=OR"</pre>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/fires?apikey=YOUR_KEY&amp;state=OR"</pre>
 
       <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged — array truncated)</span></p>
       <pre class="codeblock">{
@@ -270,7 +279,7 @@
       <p class="ep-params"><code>state</code> optional (2-letter) · <code>limit=N</code> optional</p>
 
       <p class="ep-label">Request</p>
-      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/bridges?apikey=YOUR_KEY&amp;state=WA"</pre>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/bridges?apikey=YOUR_KEY&amp;state=WA"</pre>
 
       <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged — one bridge shown)</span></p>
       <pre class="codeblock">{
@@ -313,11 +322,12 @@
     <div class="ep-card">
       <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/bridges/history</span></div>
       <p class="ep-desc">The lift log. MileCheck stamps every raise and lower it sees, so each bridge carries lifts this week and this month, the typical and longest lift, which hours it opens most, and the recent lifts with durations. Seattle today.</p>
-      <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/02-bridge-lift-planner.webp" target="_blank" rel="noopener"><img src="/images/mockups/02-bridge-lift-planner.webp" width="1200" height="677" loading="lazy" alt="Route planner for the Ballard Bridge in Seattle: 259 lifts in 30 days, a typical lift of 4 minutes, a chart of lifts by hour and the five Seattle drawbridges"></a><figcaption><span class="badge">API</span> <strong>Seattle bridge lift history.</strong> A route planner shows how often and how long the Ballard Bridge lifts, and which daytime hours had the fewest lifts in the last 30 days.</figcaption></figure></div>
+      <div class="ep-row">
+      <div class="ep-code">
       <p class="ep-params"><code>state=WA</code></p>
 
       <p class="ep-label">Request</p>
-      <pre class="codeblock">curl "https://milepost-proxy.leahgerber93.workers.dev/v1/bridges/history?apikey=YOUR_KEY&amp;state=WA"</pre>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/bridges/history?apikey=YOUR_KEY&amp;state=WA"</pre>
 
       <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged)</span></p>
       <pre class="codeblock">{
@@ -340,9 +350,12 @@
   ]
 }</pre>
     </div>
-  </div>
+      </div>
+      <figure class="ep-visual"><a href="/images/mockups/02-bridge-lift-planner.webp" target="_blank" rel="noopener"><img src="/images/mockups/02-bridge-lift-planner.webp" width="1200" height="677" loading="lazy" alt="Route planner for the Ballard Bridge in Seattle: 259 lifts in 30 days, a typical lift of 4 minutes, a chart of lifts by hour and the five Seattle drawbridges"></a><figcaption><span class="badge">API</span> <strong>Seattle bridge lift history.</strong> A route planner shows how often and how long the Ballard Bridge lifts, and which daytime hours had the fewest lifts in the last 30 days.</figcaption></figure>
+    </div>
+    </div>
 
-  <!-- TRY IT -->
+<!-- TRY IT -->
   <div class="api-section">
     <h2>Usage and keys</h2>
     <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px"><figure class="mock"><a href="/images/mockups/08-api-console.webp" target="_blank" rel="noopener"><img src="/images/mockups/08-api-console.webp" width="1200" height="651" loading="lazy" alt="API console showing a key, 41,206 of 100,000 calls used today, calls by day and by endpoint, and the latest requests"></a><figcaption><span class="badge">API</span> <strong>Example usage dashboard.</strong> A key, today's calls against the daily limit, calls by day and endpoint, and the latest requests.</figcaption></figure></div>
@@ -376,7 +389,7 @@
 
   <script>
   (function () {
-    var base = "https://milepost-proxy.leahgerber93.workers.dev";
+    var base = "https://api.milecheckapp.com";
     var btn = document.getElementById("try-btn");
     var out = document.getElementById("try-out");
     if (!btn) return;
@@ -506,8 +519,8 @@
       <h3>Ready to integrate?</h3>
       <p>Tell us what you're building and we'll get you a key. Free tier available today; the API is launching, not yet self-serve.</p>
       <div class="btns">
-        <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Get an API key</a>
-        <a class="ghost" href="../index.html#b2b">See MileCheck for platforms</a>
+        <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email us for an API key</a>
+        <a class="ghost" href="/partners/">Licensing for fleets and software companies</a>
       </div>
     </div>
   </div>

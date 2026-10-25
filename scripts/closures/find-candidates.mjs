@@ -2,7 +2,7 @@
 // Output is a review list for a person. Nothing here publishes.
 // Usage: node scripts/closures/find-candidates.mjs > candidates.md
 import fs from 'node:fs';
-const WORKER = 'https://milepost-proxy.leahgerber93.workers.dev';
+const WORKER = 'https://api.milecheckapp.com';
 const STATES = 'AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' ');
 const have = new Set(JSON.parse(fs.readFileSync('scripts/closures/big-closures.json', 'utf8')).map(c => c.source?.recordId).filter(Boolean));
 const CLOSED = /closed to all|close to all traffic|full closure|(?:road|roadway|bridge|highway) (?:is |will be )?closed|around-the-clock closure|is closed|will close/i;
