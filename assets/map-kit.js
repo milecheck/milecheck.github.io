@@ -183,6 +183,20 @@
   // Built on window load: some pages add their layers in a load handler of their own.
   if (document.readyState === 'complete') buildOptions(); else window.addEventListener('load', buildOptions);
 
+  // 5b. Feedback line under every map. Leah, 10-25.
+  function addFeedback() {
+    document.querySelectorAll('.leaflet-container').forEach(function (m) {
+      var box = m.parentElement && /mapbox|map-wrap|rc-mapbox/.test(m.parentElement.className) ? m.parentElement : m;
+      if (box.nextElementSibling && box.nextElementSibling.classList.contains('mc-fb')) return;
+      var p = document.createElement('p');
+      p.className = 'mc-fb';
+      p.style.cssText = 'margin:4px 2px 0;text-align:right;font-size:12px;font-style:italic;color:#6b7280';
+      p.innerHTML = 'See any issues? <a href="mailto:feedback@milecheckapp.com?subject=Map%20issue%3A%20' + encodeURIComponent(location.pathname) + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat looks wrong:\n') + '" style="color:inherit;text-decoration:underline">Tell us</a>';
+      box.insertAdjacentElement('afterend', p);
+    });
+  }
+  if (document.readyState === 'complete') addFeedback(); else window.addEventListener('load', addFeedback);
+
   // 6. Long camera lists fold to three. Leah, 10-03: "cameras should collapse to like
   // showing 3 or so bc then you never get to the other info" (Cajon listed 43 before the
   // closures and work zones). The page's own "Show every camera" (load every frame) also
