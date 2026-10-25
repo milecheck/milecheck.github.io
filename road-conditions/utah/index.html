@@ -59,6 +59,7 @@
     .rc-empty.err b{color:#b4231a;}
     .rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#5b6670;margin:10px 0 0;}
     .rc-legend span{display:inline-flex;align-items:center;gap:6px;}
+    .rc-legend .rc-work{flex-basis:100%;font-weight:700;color:#1d1f1c;font-size:14px;gap:8px;}.rc-legend .rc-work input{width:18px;height:18px;}
     .rc-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
     .rc-official{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;}
     .rc-official a{color:#0f7a4f;font-weight:700;text-decoration:none;}
@@ -118,8 +119,8 @@
 /* /spon:css */
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css">
-  <script src="/assets/map-kit.js" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261024">
+  <script src="/assets/map-kit.js?v=20261024" defer></script>
   <!-- site-nav:assets -->
   <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
   <script src="/assets/site-nav.js?v=20261015-1" defer></script>
@@ -168,15 +169,15 @@
         <div id="rcmap" role="region" aria-label="Utah road alerts map"></div>
       </div>
       <div class="rc-side">
+        <div class="rc-legend" style="margin:0"><label class="rc-work"><input type="checkbox" id="rcWork"> Show restrictions and roadwork on the map</label><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#a16207"></i>Ramp or lane</span><span><i style="background:#F59E0B"></i>Work zone</span><span style="color:#8A939B">Faded markers are scheduled, not active</span></div>
         <div class="rc-list">
-          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span><label><input type="checkbox" id="rcWork"> Restrictions, roadwork and other reports</label></div>
+          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span></div>
           <div class="lh" style="margin-top:6px"><span>Snowplows <span id="rcPlowCount" style="color:#0369A1;font-weight:600;font-size:12px;">loading</span></span><label><input type="checkbox" id="rcPlows" checked> Show trucks</label></div><div id="rcPlowNote" style="display:none;padding:4px 14px 8px;font-size:12.5px;color:#0369A1;font-weight:600"></div>
           <div class="rc-rows" id="rcRows"><div class="rc-empty">Loading the UDOT Traffic feed&hellip;</div></div>
         </div>
         <div class="rc-official">Source: <a href="https://udottraffic.utah.gov" target="_blank" rel="noopener">UDOT Traffic</a>, through MileCheck's feed, checked every five minutes and converted to the same format MileCheck uses for all 50 states. Ramp, lane and shoulder closures are listed under the toggle, not as full closures. Closures with a future start date are marked scheduled. Positions are the DOT's; mile markers are approximate.</div>
       </div>
     </div>
-    <div class="rc-legend"><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#a16207"></i>Ramp or lane</span><span><i style="background:#F59E0B"></i>Work zone</span><span style="color:#8A939B">Faded markers are scheduled, not active</span></div>
   </div>
 
   <div class="rc-body">

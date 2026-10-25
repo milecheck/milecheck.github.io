@@ -116,6 +116,7 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-empty.err b{color:#b4231a;}
     .rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#5b6670;margin:10px 0 0;}
     .rc-legend span{display:inline-flex;align-items:center;gap:6px;}
+    .rc-legend .rc-work{flex-basis:100%;font-weight:700;color:#1d1f1c;font-size:14px;gap:8px;}.rc-legend .rc-work input{width:18px;height:18px;}
     .rc-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
     .rc-official{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;}
     .rc-official a{color:#0f7a4f;font-weight:700;text-decoration:none;}
@@ -376,14 +377,14 @@ function provincePage(p) {
         <div id="rcmap" role="region" aria-label="${p.name} road alerts map"></div>
       </div>
       <div class="rc-side">
+        <div class="rc-legend" style="margin:0"><label class="rc-work"><input type="checkbox" id="rcWork"> Show restrictions and roadwork on the map</label><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#F59E0B"></i>Work zone</span></div>
         <div class="rc-list">
-          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span><label><input type="checkbox" id="rcWork"> Restrictions, roadwork and other reports</label></div>
+          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span></div>
           <div class="rc-rows" id="rcRows"><div class="rc-empty">Loading the ${p.dot} feed&hellip;</div></div>
         </div>
         <div class="rc-official">Source: <a href="${p.dotUrl}" target="_blank" rel="noopener">${p.dot}</a>, through MileCheck's feed, checked every five minutes. Restrictions, roadwork and other reports are listed under the toggle. Reports without a location are not mapped.</div>
       </div>
     </div>
-    <div class="rc-legend"><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#F59E0B"></i>Work zone</span></div>
   </div>
 
   <div class="rc-body">
