@@ -607,7 +607,7 @@
             </tbody>
           </table>
         </div>
-        <p class="fit-note">Mile markers do not change call to call, so they are sold as a file. Live data changes by the minute, so it is sold by the call. You can buy both.</p>
+        <p class="fit-note">Mile markers do not change, so the whole set is sold as a file you keep. One lookup at a time is also in the API (<code>/v1/locate</code>). Live road conditions change by the minute, so they are sold by the call. You can buy both.</p>
       </div>
     </section>
 
@@ -631,7 +631,7 @@
       <div class="container">
         <p class="ent-section-label">Why buy it instead of building it</p>
         <h2>The data is harder to build than the app.</h2>
-        <p class="ent-section-intro">Every state publishes road data its own way. MileCheck already did the 53 integrations, keeps them running and fixes them when a state changes its format. Your vehicle locations stay in your platform. We never see them.</p>
+        <p class="ent-section-intro">Every state publishes road data its own way. MileCheck already did the 53 integrations across 19 formats, keeps them running and fixes them when a state changes its format. With a file licence, lookups never leave your systems. An API lookup sends only the coordinates in that request. MileCheck has no driver accounts and keeps no trip history.</p>
         <div class="proof-grid">
           <div class="proof-cell"><div class="proof-cell-num">50</div><div class="proof-cell-label"><strong>state mile marker files</strong>, from official DOT and GIS records</div></div>
           <div class="proof-cell"><div class="proof-cell-num">53</div><div class="proof-cell-label"><strong>live feeds</strong>, 50 states and 3 provinces</div></div>
@@ -649,7 +649,7 @@
             <summary>What building it in-house takes</summary>
             <div class="why-content" style="margin-top:4px;">
               <ul>
-                <li><strong>53 integrations.</strong> Each has its own login, rate limit and schema.</li>
+                <li><strong>53 integrations in 19 formats.</strong> Many sit behind their own registration, API key and rate limit.</li>
                 <li><strong>No common standard.</strong> No two states publish road data the same way.</li>
                 <li><strong>Constant upkeep.</strong> Route names and mile formats change without notice.</li>
                 <li><strong>Feed monitoring.</strong> Without it, your app serves stale data and does not know.</li>

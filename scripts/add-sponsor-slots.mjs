@@ -24,7 +24,7 @@ const ROOT = process.cwd();
 const START = '<!-- spon:start -->', END = '<!-- spon:end -->';
 // Not sponsorable: other apps' sites, drafts and previews, sales pages, tooling.
 const SKIP_DIRS = new Set(['es', 'fr', 'geotab', 'design-options', 'boards',
-  'sponsor', 'partners', 'get', 'api', 'images', 'assets', 'data', 'scripts', 'node_modules', 'or-family', 'enchantments']);
+  'sponsor', 'partners', 'fleets', 'get', 'api', 'images', 'assets', 'data', 'scripts', 'node_modules', 'or-family', 'enchantments']);
 const SKIP_FILES = new Set(['404.html', 'index-v1-classic.html', 'index-v2-preview.html', 'enterprise-preview.html', 'android.html']);
 const LIVE = new Set(['borders', 'ferries', 'fire', 'closures', 'weather', 'chains', 'grades']);
 
