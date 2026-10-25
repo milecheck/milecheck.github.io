@@ -63,7 +63,9 @@
       .ent-hero h1 { font-size: 30px; }
       .infra-grid { grid-template-columns: 1fr; }
       .infra-cell { padding: 28px 20px; }
-      .proof-grid { grid-template-columns: 1fr 1fr; }
+      .proof-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .proof-cell { padding: 28px 12px; }
+      .proof-cell-num { font-size: 36px; letter-spacing: -1px; }
       .ent-section h2 { font-size: 22px; }
       .cta-section h2 { font-size: 28px; }
       .cta-section .container > div { grid-template-columns: 1fr !important; gap: 28px !important; }
@@ -153,7 +155,7 @@
     </a>
   </aside>
 <!-- spon:end -->
-<p class="eyebrow">For fleets and dispatch</p>
+<p class="eyebrow"><a href="/partners/" style="color:inherit;text-decoration:none;">MileCheck for business</a> &rsaquo; For fleets and dispatch</p>
       <h1>Put a mile marker beside your vehicle&rsquo;s location.</h1>
       <p class="ent-hero-sub">
         MileCheck connects highway locations with nearby mile markers and live state DOT feeds. Use the road reference a driver reports alongside the coordinates your fleet platform records.
@@ -162,7 +164,7 @@
       <span style="display:inline-block;width:24px;"></span>
       <a href="#contact" class="ent-hero-cta">Ask about API access &rarr;</a>
       <p style="font-size:13px;color:#6B7280;margin:16px 0 0;font-weight:600;">See the Geotab listing and demo below.</p>
-      <p style="font-size:13px;color:#525252;margin-top:48px;padding-top:28px;border-top:1px solid #E5E5E5;">Mile-marker data in all 50 US states and British Columbia. Live state DOT feeds across the same area.</p>
+      <p style="font-size:13px;color:#525252;margin-top:48px;padding-top:28px;border-top:1px solid #E5E5E5;">Mile markers in all 50 US states and 10 Canadian provinces and territories. Live state DOT feeds in all 50 states plus British Columbia, Alberta and Manitoba.</p>
     </div>
   </section>
 
@@ -185,7 +187,7 @@
         <div class="infra-cell">
           <div class="infra-cell-num">01</div>
           <h3>Live state DOT feeds</h3>
-          <p>Road alerts from all 50 states and British Columbia in a common format. Available categories depend on the source feed.</p>
+          <p>Road reports from all 50 states plus British Columbia, Alberta and Manitoba in a common format. Available categories depend on the source feed.</p>
         </div>
         <div class="infra-cell">
           <div class="infra-cell-num">02</div>
@@ -200,7 +202,7 @@
       </div>
       <div class="proof-grid" style="margin-top:1px;">
         <div class="proof-cell"><div class="proof-cell-num">50</div><div class="proof-cell-label"><strong>US states</strong> &mdash; mile-marker data</div></div>
-        <div class="proof-cell"><div class="proof-cell-num">BC</div><div class="proof-cell-label"><strong>British Columbia</strong> &mdash; mile-marker data and state DOT feeds</div></div>
+        <div class="proof-cell"><div class="proof-cell-num">10</div><div class="proof-cell-label"><strong>Canadian provinces and territories</strong> &mdash; kilometre markers; live feeds for BC, AB and MB</div></div>
         <div class="proof-cell"><div class="proof-cell-num">50</div><div class="proof-cell-label"><strong>US states</strong> &mdash; live state DOT feeds</div></div>
         <div class="proof-cell"><div class="proof-cell-num">51,000+</div><div class="proof-cell-label"><strong>DOT traffic cameras</strong> &mdash; across 48 regions</div></div>
       </div>
@@ -238,9 +240,9 @@
         <div>
           <p class="ent-section-label">Building your own platform?</p>
           <h2>Ask about MileCheck data access.</h2>
-          <p class="cta-body">Tell us which roads you cover and how you want to use the data. We can discuss the available products and terms for your fleet.</p>
+          <p class="cta-body">Not on Geotab? Your platform can call the API for live road reports and mile marker lookups, or licence the mile marker file to keep. Tell us which roads you cover and how you want to use the data.</p>
           <p class="cta-body" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
-            <a href="/partners/#products" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">See products and pricing &rarr;</a> <a href="/api/plan/" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;border:1.5px solid #0F1419;border-radius:8px;padding:10px 20px;text-decoration:none;margin-left:8px;">API or data license: what each costs &rarr;</a>
+            <a href="/api/" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;background:#00C880;border-radius:8px;padding:11px 20px;text-decoration:none;">See the API and pricing &rarr;</a> <a href="/api/plan/" style="display:inline-block;font-size:15px;font-weight:700;color:#0F1419;border:1.5px solid #0F1419;border-radius:8px;padding:10px 20px;text-decoration:none;margin-left:8px;">API or data license: what each costs &rarr;</a>
             <a href="mailto:sales@milecheckapp.com?subject=Fleet%20integration%20inquiry&body=Fleet%20size%3A%0AStates%2Fcorridors%20run%3A%0ACurrent%20telematics%20platform%20(if%20any)%3A%20" style="display:inline-block;font-size:15px;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,0.28);border-radius:8px;padding:11px 20px;text-decoration:none;">Discuss your fleet &rarr;</a>
           </p>
         </div>
@@ -309,9 +311,11 @@
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-label">For partners</p>
+          <p class="footer-label">For business</p>
           <ul class="footer-list">
-            <li><a href="/partners/">For partners</a></li>
+            <li><a href="/partners/">MileCheck for business</a></li>
+            <li><a href="/api/">Developer API</a></li>
+            <li><a href="/sponsor/">Advertise</a></li>
             <li><a href="https://marketplace.geotab.com/solutions/milecheck/" target="_blank" rel="noopener">Geotab Marketplace</a></li>
             <li><a href="mailto:sales@milecheckapp.com">Email partnerships</a></li>
           </ul>
