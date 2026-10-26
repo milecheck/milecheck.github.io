@@ -120,8 +120,8 @@
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
   <link rel="canonical" href="https://milecheckapp.com/closures/">
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261026">
-  <script src="/assets/map-kit.js?v=20261026" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261026b">
+  <script src="/assets/map-kit.js?v=20261026b" defer></script>
   <!-- site-nav:assets -->
   <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
   <script src="/assets/site-nav.js?v=20261015-1" defer></script>
@@ -341,7 +341,7 @@ const baseSat=L.layerGroup([
 ]);
 const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
 baseTerrain.addTo(map);
-L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreets},null,{position:'bottomright',collapsed:true}).addTo(map);
+window.mcExtraLayers={state:'ALL'};
 map.setView([39.5,-98.35],4);
 
 const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"ID":[42,-117.24,49,-111.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"UT":[37,-114.05,42,-109.04],"CO":[37,-109.05,41,-102.04],"NM":[31.33,-109.05,37,-103],"AK":[54.5,-165,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"ND":[45.94,-104.05,49,-96.55],"NE":[40,-104.05,43,-95.31],"KS":[37,-102.05,40,-94.59],"WI":[42.49,-92.89,47.08,-86.8],"MN":[43.5,-97.21,49,-89.6],"IA":[40.37,-96.64,43.5,-90.14],"IL":[36.97,-91.52,42.51,-87.02],"WY":[40.99,-111.06,45.01,-104.05],"ME":[43.06,-71.08,47.46,-66.95],"RI":[41.15,-71.86,42.02,-71.12],"MI":[41.7,-90.42,48.3,-82.12],"NV":[35,-120.01,42,-114.04],"NJ":[38.92,-75.56,41.36,-73.89],"DE":[38.45,-75.79,39.84,-75.04],"MD":[37.91,-79.49,39.73,-75.04],"VA":[36.54,-83.68,39.47,-75.24],"WV":[37.2,-82.65,40.64,-77.72],"OH":[38.4,-84.82,42,-80.52],"PA":[39.72,-80.52,42.27,-74.69],"MA":[41.18,-73.51,42.89,-69.93],"VT":[42.73,-73.43,45.02,-71.46],"NH":[42.7,-72.56,45.31,-70.7],"CT":[40.98,-73.73,42.05,-71.79],"NY":[40.48,-79.77,45.02,-71.86],"FL":[24.4,-87.63,31,-80.03],"GA":[30.36,-85.61,35,-80.84],"NC":[33.84,-84.32,36.59,-75.46],"SC":[32.03,-83.35,35.22,-78.54],"MS":[30.17,-91.66,35,-88.1],"AL":[30.22,-88.47,35.01,-84.89],"AR":[33,-94.62,36.5,-89.64],"LA":[28.93,-94.04,33.02,-88.82],"OK":[33.62,-103,37,-94.43],"TN":[34.98,-90.31,36.68,-81.65],"KY":[36.5,-89.57,39.15,-81.96],"IN":[37.77,-88.1,41.76,-84.78],"MO":[36,-95.77,40.61,-89.1],"CA":[32.5,-124.5,42,-114.1],"HI":[18.5,-160.5,22.5,-154.5],"TX":[25.8,-106.7,36.5,-93.5]};
@@ -355,7 +355,7 @@ sel.onchange=()=>{const c=sel.value;
   const b=SB[c];map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9});};
 
 const WORKER="https://api.milecheckapp.com";
-let clLayer=L.layerGroup().addTo(map);
+let clLayer=L.layerGroup().addTo(map);window.mcMapOptions={layers:[{label:'Closures and crashes',color:'#DC2626',layer:clLayer}]};
 const clCache={};
 const clFail={};   // state -> ms timestamp of last failed fetch (backoff only, never data)
 let CLOSURES=[];

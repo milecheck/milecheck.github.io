@@ -115,7 +115,7 @@
   function extraLayers() {
     var X = window.mcExtraLayers;
     if (!X || !X.state || !gm) return [];
-    var W = 'https://api.milecheckapp.com', st = X.state;
+    var W = 'https://api.milecheckapp.com', st = X.state, all = st === 'ALL';
     var e = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
     var clos = L.layerGroup(), fires = L.layerGroup(), out = [];
     var loaded = {};
@@ -138,14 +138,14 @@
     fires.on('add', once('f', function () {
       fetch(W + '/fires', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
         ((d && d.fires) || []).forEach(function (x) {
-          if (x.state !== 'US-' + st || x.isRx || !isFinite(x.lat)) return;
+          if ((all ? !/^US-/.test(x.state || '') : x.state !== 'US-' + st) || x.isRx || !isFinite(x.lat)) return;
           L.circleMarker([x.lat, x.lon], { radius: Math.min(14, 5 + Math.log10((x.acres || 1) + 1) * 2), color: '#9a3412', weight: 1, fillColor: '#EA580C', fillOpacity: .8 })
             .bindPopup('<b>' + e(x.name || 'Fire') + '</b><br>' + (x.acres != null ? Math.round(x.acres).toLocaleString() + ' acres' : 'Size not reported') + (x.containedPct != null ? ' · ' + x.containedPct + '% contained' : '') + '<br><span style="color:#8A939B">Source: NIFC via MileCheck</span>')
             .addTo(fires);
         });
       }).catch(function () {});
     }));
-    out.push({ label: 'Closures and crashes', color: '#DC2626', layer: clos });
+    if (!all && X.closures !== false) out.push({ label: 'Closures and crashes', color: '#DC2626', layer: clos });
     if (X.fires !== false) out.push({ label: 'Wildfires', color: '#EA580C', layer: fires });
     return out;
   }
@@ -204,7 +204,7 @@
       });
       return;
     }
-    var layers = (O.layers || []).concat(window.mcMapOptions ? [] : extraLayers()).filter(function (l) { return l && l.layer; });
+    var layers = (O.layers || []).concat(extraLayers()).filter(function (l) { return l && l.layer; });
     // Weather radar on every map, off by default (Leah, 10-24). Same NEXRAD composite the
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
     layers.unshift({ label: 'Weather radar', color: '#2563EB', layer: radarLayer() });
