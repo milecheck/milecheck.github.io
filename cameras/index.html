@@ -500,7 +500,7 @@ const baseSat=L.layerGroup([
 ]);
 const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
 baseTerrain.addTo(map);
-L.control.layers({'Terrain':baseTerrain,'Satellite':baseSat,'Streets':baseStreets},null,{position:'bottomright',collapsed:true}).addTo(map);
+window.mcMapOptions={layers:[]};
 // Center on the 3-state coverage area, not the whole US.
 map.setView([41.5,-105],4.4);
 // ?lat=&lon= (from /borders 'cameras at this crossing', 2026-09-21): open centered on that point.

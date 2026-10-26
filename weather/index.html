@@ -296,8 +296,7 @@ const baseSat=L.layerGroup([
 ]);
 const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
 baseTerrain.addTo(map);   // terrain default for weather (Leah 2026-07-12: events read better than on satellite)
-L.control.layers({'Terrain':baseTerrain,'Streets':baseStreets,'Satellite':baseSat},null,
-  {position:'bottomright',collapsed:true}).addTo(map);
+window.mcMapOptions={layers:[]};
 map.setView([39.5,-98.35],4);   // lower 48
 
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
