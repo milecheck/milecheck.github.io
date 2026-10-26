@@ -235,6 +235,7 @@ function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
 
 const LA_URL='https://api.milecheckapp.com/la-bridges';
 
+window.mcExtraLayers={state:'LA',fires:false};
 const map=L.map('brmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Esri · live status: LA DOTD · schedules: 33 CFR 117 via MileCheck',maxZoom:17}).addTo(map);
