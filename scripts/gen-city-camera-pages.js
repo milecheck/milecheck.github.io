@@ -245,8 +245,8 @@ ${faqHtml}
   </section>
 
   <div class="co-cta">
-    <h2>The nearest ${c.name} camera, right as you drive</h2>
-    <p>MileCheck shows the nearest camera and your exact ${marker(c)} in real time as you drive ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.</p>
+    <h2>Check the nearest ${c.name} camera before you go</h2>
+    <p>In the MileCheck app, the nearest camera and your exact ${marker(c)} follow you hands-free on ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
