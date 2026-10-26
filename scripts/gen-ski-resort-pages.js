@@ -515,6 +515,9 @@ function resortPage(r) {
   if (plows) cards.push(['Snowplows', `Where are the ${reg.dot} plows right now?`, `Every ${reg.dot} truck that reports a position, statewide, on one map.`, '/snowplows/']);
   cards.push(['Snow report', r.reportName || `${r.name} snow report`, `The resort's own report: snowfall, lifts and runs. Opens the resort's site.`, r.report, true]);
   if (r.pass) cards.push(['Mountain pass', PASS_NAME[r.pass], `The pass page for the same road: cameras, restrictions and closures, with the summit weather.`, `/passes/${r.pass}/`]);
+  const MOUNTAIN_VIEW = { 'crystal-mountain': ['rainier', 'Mount Rainier'], 'white-pass': ['rainier', 'Mount Rainier'], 'mt-baker': ['baker', 'Mount Baker'], 'mt-hood-meadows': ['hood', 'Mount Hood'], 'timberline': ['hood', 'Mount Hood'] };
+  const mv = MOUNTAIN_VIEW[r.slug];
+  if (mv) cards.push(['Mountain view', `Is ${mv[1]} out right now?`, `Whether ${mv[1]} is visible right now, and the clear windows in the next five days.`, `/mountains/${mv[0]}/`]);
   if (r.corridor) cards.push(['Corridor', `${r.corridor.toUpperCase()} conditions`, `The whole ${r.corridor.toUpperCase()} corridor, every state it crosses, alerts by mile marker.`, `/corridors/${r.corridor}/`]);
   cards.push(['Chain law', chain[1], chain[2], chain[0]]);
   if (cams) cards.push(['Cameras', `${reg.name} highway cameras`, `Every ${reg.trafficName} camera on one map, with the route and ${km ? 'kilometre' : 'mile'} marker where the DOT gives one.`, `/cameras/${reg.slug}/`]);
