@@ -119,6 +119,7 @@ MileCheck is a mobile app for iOS and Android that shows your nearest highway mi
 - All maps (mile markers, cameras, road conditions, closures, fire, weather) — https://milecheckapp.com/maps/
 - Live snowplow map, 17 states and provinces — https://milecheckapp.com/snowplows/
 - Railroad crossing map, 20,031 crossings on state highways (FRA inventory) — https://milecheckapp.com/railroad-crossings/
+- Where is there no cell service on the highway? Highways in WA, OR, ID, MT, NV, WY and UT colored by how many carriers (AT&T, T-Mobile, Verizon) report in-vehicle 4G coverage at each mile marker; FCC National Broadband Map, carrier-reported, approximate — https://milecheckapp.com/cell-coverage/
 - Ski resort roads, 63 resorts: the DOT's plow trucks on the access road, cameras near the base, closures and crashes — https://milecheckapp.com/ski/ (e.g. https://milecheckapp.com/ski/vail/)
 
 ## Technical architecture

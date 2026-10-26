@@ -1,0 +1,46 @@
+{
+ "source": "FCC National Broadband Map, mobile broadband (BDC), 4G LTE in-vehicle",
+ "filing": "December 31, 2025",
+ "carriers": {
+  "AT&T": 1,
+  "T-Mobile": 2,
+  "Verizon": 4
+ },
+ "states": {
+  "WA": {
+   "posts": 14256,
+   "none": 3070,
+   "all3": 6772
+  },
+  "OR": {
+   "posts": 7662,
+   "none": 2110,
+   "all3": 3271
+  },
+  "ID": {
+   "posts": 4873,
+   "none": 1389,
+   "all3": 1964
+  },
+  "MT": {
+   "posts": 13734,
+   "none": 4554,
+   "all3": 3934
+  },
+  "NV": {
+   "posts": 3386,
+   "none": 915,
+   "all3": 1164
+  },
+  "WY": {
+   "posts": 8871,
+   "none": 2490,
+   "all3": 2644
+  },
+  "UT": {
+   "posts": 7487,
+   "none": 1583,
+   "all3": 3893
+  }
+ }
+}

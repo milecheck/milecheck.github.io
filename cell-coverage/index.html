@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&!h.includes(location.hostname)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where is there no cell service on the highway? | MileCheck</title>
+  <meta name="description" content="Map of highways in Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming colored by how many carriers (AT&T, T-Mobile, Verizon) report 4G coverage in a moving vehicle at each mile marker. FCC National Broadband Map, December 2025 data.">
+
+  <meta property="og:title" content="Where is there no cell service on the highway? | MileCheck">
+  <meta property="og:description" content="Highways colored by how many carriers report in-vehicle 4G coverage, mile marker by mile marker.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/cell-coverage/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+
+  <link rel="canonical" href="https://milecheckapp.com/cell-coverage/">
+  <style>
+    .cl-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .cl-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .cl-hero h1 .accent{color:#cf3320;}
+    .cl-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:70ch;line-height:1.55;}
+    .cl-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
+    @media(max-width:860px){.cl-wrap{grid-template-columns:1fr;}}
+    .cl-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:420px;height:62vh;background:#eef0e9;}
+    #clmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bigstatus{position:absolute;top:12px;left:58px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;color:#cf3320;}
+    .bigstatus.hint{color:#5b6670;font-weight:700;}
+    .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
+    .nearme:hover{background:#2a2f36;}
+    .cl-ic{font-size:23px;line-height:1;text-align:center;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4));}
+    .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
+    .fpop .fp-nm{font-weight:800;font-size:15px;}
+    .fpop .fp-st{color:#5b6670;font-size:12.5px;font-weight:600;margin:2px 0 8px;}
+    .fpop .fp-row{font-size:13px;margin:3px 0;line-height:1.45;}
+
+    .cl-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
+    .state-sel{display:flex;gap:8px;align-items:center;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 14px;}
+    .state-sel label{font-weight:800;font-size:13px;}
+    .state-sel select{flex:1;font-family:inherit;font-size:14px;font-weight:600;padding:8px 10px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;}
+    .cl-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:62vh;}
+    .cl-list .lh{padding:12px 16px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;}
+    .cl-rows{overflow-y:auto;}
+    .crow{padding:12px 16px;border-bottom:1px solid #F0F0EE;cursor:pointer;}
+    .crow:hover{background:#F7F5EE;}
+    .crow:last-child{border-bottom:none;}
+    .crow .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+    .crow .rt{font-weight:800;font-size:14.5px;}
+    .crow .stb{font-weight:800;color:#cf3320;font-size:12.5px;white-space:nowrap;}
+    .crow .sub{color:#5b6670;font-size:12.5px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .cl-empty{padding:34px 16px;text-align:center;color:#0f7a4f;font-weight:800;font-size:16px;}
+    .cl-empty small{display:block;color:#5b6670;font-weight:500;margin-top:6px;line-height:1.5;}
+
+    .cl-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;}
+    .cl-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .cl-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .cl-cta .btn{display:inline-block;margin:0 8px 8px 0;}
+
+    .cl-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .cl-notes b{color:#0E1116;}
+
+    /* Responsive mobile nav (same rules as blog.css) */
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+      .cl-mapbox{height:56vh;}
+      .leaflet-control-zoom{display:none;}
+      .bigstatus{font-size:12px;padding:6px 10px;max-width:56%;left:12px;line-height:1.3;}
+      .nearme{font-size:12px;padding:8px 11px;}
+      .cl-list{max-height:none;}
+      .cl-rows{max-height:52vh;}
+    }
+      .gr-key{display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:#5b6670;font-weight:600;padding:10px 14px;border:1px solid #E5E5E5;border-radius:14px;background:#fff;}
+    .gr-key i{display:inline-block;width:18px;height:5px;border-radius:3px;margin-right:6px;vertical-align:middle;}
+    .crow .stb.g{color:#b45309;}
+      .cc-filter{display:flex;flex-wrap:wrap;gap:6px;border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:10px 12px;}
+    .cc-filter span{font-weight:800;font-size:13px;width:100%;}
+    .cc-filter button{font:600 13.5px Inter,sans-serif;min-height:44px;padding:0 14px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;cursor:pointer;}
+    .cc-filter button[aria-pressed="true"]{background:#0E1116;color:#fff;border-color:#0E1116;}
+    .cc-caveat{border-left:4px solid #f59e0b;background:#FFFBEB;padding:10px 14px;border-radius:8px;font-size:14px;line-height:1.55;color:#3b3f45;max-width:78ch;margin-top:12px;}
+  /* spon:css */
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;width:100%;max-width:100%;flex-shrink:0;align-self:stretch;grid-column:1/-1;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+/* /spon:css */
+  </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="canonical" href="https://milecheckapp.com/grades/">
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261026c">
+  <script src="/assets/map-kit.js?v=20261026c" defer></script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+  <div class="cl-hero">
+    <!-- spon:start -->
+  <aside class="spon spon-house" id="spon" data-slot="basics:cell-coverage" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Want to advertise with us?</strong></span>
+      <span class="spon-cta">Learn more →</span>
+    </a>
+  </aside>
+<!-- spon:end -->
+<h1>Where is there no cell service on the highway?</h1>
+    <p class="sub">Red is a highway stretch where no carrier (AT&amp;T, T-Mobile, Verizon) reports in-vehicle 4G coverage. Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming.</p>
+    <p class="cc-caveat"><b>Carrier-reported and approximate. US only.</b> <a href="#about">What this means</a> · <a href="https://broadbandmap.fcc.gov/" target="_blank" rel="noopener">FCC National Broadband Map</a>, December 31, 2025 filing.</p>
+  </div>
+
+  <div class="cl-wrap">
+    <div class="cl-mapbox">
+      <span class="bigstatus hint" id="bigStatus">Loading coverage…</span>
+      <button class="nearme" id="nearMe">Near me</button>
+      <div id="clmap"></div>
+    </div>
+    <div class="cl-side">
+      <div class="state-sel"><label for="stateSel">State</label>
+        <select id="stateSel"><option value="">All mapped states</option><option value="ID">Idaho</option><option value="MT">Montana</option><option value="NV">Nevada</option><option value="OR">Oregon</option><option value="UT">Utah</option><option value="WA">Washington</option><option value="WY">Wyoming</option></select>
+      </div>
+      <div class="cc-filter" role="group" aria-label="Carrier">
+        <span>Carrier</span>
+        <button data-c="7" aria-pressed="true">All three</button>
+        <button data-c="1" aria-pressed="false">AT&amp;T</button>
+        <button data-c="2" aria-pressed="false">T-Mobile</button>
+        <button data-c="4" aria-pressed="false">Verizon</button>
+      </div>
+      <div class="gr-key" id="key"></div>
+      <div class="cl-list">
+        <div class="lh" id="listHead">Longest stretches in view</div>
+        <div class="cl-rows" id="clRows"></div>
+      </div>
+      <div class="cl-cta">
+        <h3>Mile markers keep working without signal.</h3>
+        <p>MileCheck bundles mile marker data for all 50 states on the phone, so your nearest mile marker still shows in a dead zone. That is the first thing dispatch asks for.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cell-coverage&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcell-coverage" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl-notes" id="about">
+    <p><b>What this means.</b> These are the coverage maps each carrier files with the FCC, not measured signal. Carriers miss real signal in places and claim signal that is not there in others, and mountain passes are where the maps are weakest. Red means no carrier reports coverage, not that your phone will have none.</p>
+    <p><b>How this was built.</b> For every mile marker in the MileCheck milepost data in these states, we looked up the H3 hexagon (about 0.1 square kilometer) that contains it in each carrier's FCC filing, and kept only the "in a moving vehicle" layer at 4G LTE 5/1 Mbps. A road segment takes the color of the mile marker it starts at, so a short gap between two markers can hide a dead spot. 5G-only coverage is not counted. Regional carriers are not shown.</p>
+    <p><b>States mapped so far:</b> Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming. More states are coming. If you know a stretch where the map is wrong, tell us at <a href="mailto:feedback@milecheckapp.com">feedback@milecheckapp.com</a>. You can also challenge a carrier's map with the FCC on the <a href="https://broadbandmap.fcc.gov/" target="_blank" rel="noopener">National Broadband Map</a>.</p>
+    <p><b>Related:</b> <a href="/contact-help-no-cell-signal/">How to contact help with no cell signal</a> · <a href="/maps/mile-markers/">Mile marker map</a> · <a href="/passes/">Mountain pass conditions</a> · <a href="/road-conditions/">Road conditions map</a></p>
+  </div>
+
+  <!-- dq:start -->
+<aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-grades.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
+<!-- dq:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><span style="font-weight:700;font-size:18px;">MileCheck</span></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cell-coverage&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcell-coverage" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../fire/">Wildfire map</a></li>
+            <li><a href="../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Cell coverage: FCC National Broadband Map, mobile broadband, December 31, 2025 filing, carrier-reported. Always follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>
+const map=L.map('clmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true,preferCanvas:true});
+const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+const ATTR='Esri, USGS · coverage: FCC National Broadband Map (December 2025), carrier-reported';
+L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14}).addTo(map);
+window.mcMapOptions={layers:[]};
+const SB={"WA": [45.54, -124.85, 49, -116.91], "OR": [41.99, -124.57, 46.29, -116.46], "ID": [42, -117.24, 49, -111.04], "MT": [44.36, -116.05, 49, -104.04], "NV": [35, -120.01, 42, -114.04], "WY": [40.99, -111.06, 45.01, -104.05], "UT": [37, -114.05, 42, -109.04]};
+const NAMES={"WA": "Washington", "OR": "Oregon", "ID": "Idaho", "MT": "Montana", "NV": "Nevada", "WY": "Wyoming", "UT": "Utah"};
+const STATES=["ID", "MT", "NV", "OR", "UT", "WA", "WY"];
+const CN={1:'AT&T',2:'T-Mobile',4:'Verizon'};
+const sel=document.getElementById('stateSel');
+let CF=7;          // carrier filter bitmask: 7 = all three
+const D={};        // state -> routes
+let LOAD='loading';
+const layer=L.layerGroup().addTo(map);
+map.fitBounds([[37,-124.8],[49,-104]]);
+setTimeout(()=>{map.invalidateSize();if(!sel.value)map.fitBounds([[37,-124.8],[49,-104]]);},300);
+const bits=m=>(m&1)+((m>>1)&1)+((m>>2)&1);
+// One carrier picked: covered or not. All three: how many report.
+function lvl(m){return CF===7?bits(m):((m&CF)?3:0);}
+const COL=['#dc2626','#f59e0b','#84cc16','#15803d'];
+function key(){
+  document.getElementById('key').innerHTML=CF===7
+    ?'<span><i style="background:#dc2626"></i>No carrier reports coverage</span><span><i style="background:#f59e0b"></i>1 carrier</span><span><i style="background:#84cc16"></i>2 carriers</span><span><i style="background:#15803d"></i>All 3</span>'
+    :`<span><i style="background:#dc2626"></i>${CN[CF]} reports no coverage</span><span><i style="background:#15803d"></i>${CN[CF]} reports coverage</span>`;
+}
+function miles(a,b){const R=3958.8,r=Math.PI/180,x=(b[2]-a[2])*r*Math.cos((a[1]+b[1])/2*r),y=(b[1]-a[1])*r;return R*Math.hypot(x,y);}
+function who(m){const o=[1,2,4].filter(b=>m&b).map(b=>CN[b]);return o.length?o.join(', '):'None of the three';}
+function pop(st,route,a,b){
+  return `<div class="fpop"><div class="fp-nm">${route} · MP ${a[0]} to ${b[0]}</div><div class="fp-st">${NAMES[st]}</div>
+  <div class="fp-row">At MP ${a[0]}: <b>${who(a[3])}</b> ${a[3]?'report':'reports'} in-vehicle 4G coverage.</div>
+  <div class="fp-row" style="color:#5b6670;font-size:12px">Carrier-reported, FCC National Broadband Map. Approximate.</div></div>`;
+}
+// Segments: consecutive posts on one route, skipping jumps (missing posts, other branches).
+function segs(st){const out=[];for(const[route,ps]of Object.entries(D[st]))for(let i=0;i<ps.length-1;i++){const a=ps[i],b=ps[i+1];
+  if(b[0]-a[0]>3||miles(a,b)>4)continue;out.push([route,a,b]);}return out;}
+const SEG={};
+function draw(){
+  layer.clearLayers();
+  for(const st of Object.keys(D)){if(sel.value&&st!==sel.value)continue;
+    for(const[route,a,b]of SEG[st]){const l=lvl(a[3]);
+      L.polyline([[a[1],a[2]],[b[1],b[2]]],{color:COL[l],weight:l===0?5:3.5,opacity:.9}).addTo(layer).bindPopup(pop(st,route,a,b),{maxWidth:280});}}
+}
+// Runs of consecutive "no coverage" segments, for the list.
+function runs(){const out=[];for(const st of Object.keys(D)){if(sel.value&&st!==sel.value)continue;
+  for(const[route,ps]of Object.entries(D[st])){let s=null;
+    for(let i=0;i<ps.length;i++){const p=ps[i],ok=lvl(p[3])>0,jump=i>0&&(p[0]-ps[i-1][0]>3||miles(ps[i-1],p)>4);
+      if(s&&(ok||jump)){const e=ps[i-1];if(!jump&&ok)out.push({st,route,a:s,b:p});else out.push({st,route,a:s,b:e});s=null;}
+      if(!ok&&!s)s=p;}
+    if(s)out.push({st,route,a:s,b:ps[ps.length-1]});}}
+  out.forEach(r=>r.len=Math.round(Math.abs(r.b[0]-r.a[0])*10)/10);return out.filter(r=>r.len>=2);}
+function render(){
+  const bs=document.getElementById('bigStatus');
+  if(LOAD==='loading'){bs.hidden=false;bs.textContent='Loading coverage…';return;}
+  if(LOAD==='failed'){bs.hidden=false;bs.textContent="Couldn't load the coverage data. Try reloading.";
+    document.getElementById('clRows').innerHTML='<div class="cl-empty" style="color:#5b6670">Coverage data didn\'t load<small>This is a loading problem, not an empty map. Reload the page to try again.</small></div>';return;}
+  bs.hidden=true;
+  const b=map.getBounds();
+  const list=runs().filter(r=>b.contains([r.a[1],r.a[2]])||b.contains([r.b[1],r.b[2]])).sort((x,y)=>y.len-x.len);
+  const what=CF===7?'no carrier reports coverage':CN[CF]+' reports no coverage';
+  document.getElementById('listHead').textContent=list.length+' stretch'+(list.length===1?'':'es')+' in view where '+what+', longest first';
+  const rows=document.getElementById('clRows');
+  if(!list.length){rows.innerHTML='<div class="cl-empty">None in view<small>Only stretches of 2 or more miles are listed. Zoom out or pick another state.</small></div>';return;}
+  rows.innerHTML=list.slice(0,60).map((r,i)=>`<div class="crow" data-i="${i}"><div class="t"><span class="rt">${r.route} · MP ${r.a[0]} to ${r.b[0]}</span><span class="stb">${r.len} mi</span></div><div class="sub">${NAMES[r.st]}</div></div>`).join('');
+  rows.querySelectorAll('.crow').forEach(el=>el.onclick=()=>{const r=list[+el.dataset.i];
+    map.flyToBounds(L.latLngBounds([[r.a[1],r.a[2]],[r.b[1],r.b[2]]]).pad(.5),{duration:.9,maxZoom:11});});
+}
+document.querySelectorAll('.cc-filter button').forEach(btn=>btn.onclick=()=>{
+  CF=+btn.dataset.c;document.querySelectorAll('.cc-filter button').forEach(x=>x.setAttribute('aria-pressed',x===btn));key();draw();render();});
+sel.onchange=()=>{const c=sel.value;draw();if(!c){map.fitBounds([[37,-124.8],[49,-104]]);return;}const b=SB[c];map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9});};
+map.on('moveend',render);
+key();
+Promise.all(STATES.map(s=>fetch('/data/cell-coverage/'+s+'.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{D[s]=d.routes;SEG[s]=segs(s);})))
+  .then(()=>{LOAD='ok';draw();render();}).catch(()=>{LOAD='failed';render();});
+(function(){const btn=document.getElementById('nearMe'),bs=document.getElementById('bigStatus');L.DomEvent.disableClickPropagation(btn);
+  btn.onclick=()=>{if(!navigator.geolocation||!window.isSecureContext){bs.hidden=false;bs.textContent="Location isn't available in this browser. Pick a state.";return;}
+    btn.disabled=true;navigator.geolocation.getCurrentPosition(p=>{btn.disabled=false;if(sel.value){sel.value='';draw();}map.setView([p.coords.latitude,p.coords.longitude],9);},
+    e=>{btn.disabled=false;bs.hidden=false;bs.textContent=e.code===1?"Location is blocked for this site. Pick a state.":"Couldn't get your location. Pick a state.";},{timeout:15000,maximumAge:600000});};})();
+</script>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");});}})();</script>
+<!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://api.milecheckapp.com/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
+</body>
+</html>
