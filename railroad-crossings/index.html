@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <title>Where are the railroad crossings on this highway? Map of 20,031 state highway crossings | MileCheck</title>
-  <meta name="description" content="A map of every open, public, at-grade railroad crossing on a state highway, from the FRA Grade Crossing Inventory. Tap a crossing for the road, railroad, number of tracks and whether it has gates or flashing lights.">
+  <meta name="description" content="A map of 20,031 open, public, at-grade railroad crossings on state highway systems, from the FRA crossing inventory. Tap a crossing for the road, railroad, number of tracks and whether it has gates or flashing lights.">
   <link rel="canonical" href="https://milecheckapp.com/railroad-crossings/">
   <meta property="og:title" content="Where are the railroad crossings on this highway?">
   <meta property="og:description" content="20,031 railroad crossings on state highways, from the FRA inventory. Road, railroad, tracks, gates and flashers.">
@@ -118,7 +118,7 @@
   </aside>
 <!-- spon:end -->
 <h1>Where are the railroad crossings on this highway?</h1>
-    <p class="sub">Every open, public railroad crossing at road level on a state highway, from the Federal Railroad Administration's crossing inventory. Zoom in on a highway to see its crossings, then tap one for the road, the railroad, the number of tracks and whether it has gates or flashing lights.</p>
+    <p class="sub">20,031 open, public, at-grade railroad crossings that the Federal Railroad Administration's crossing inventory lists on a state highway system, as of October 26, 2026. Pick a state or zoom in, then tap a crossing for the road, the railroad, the number of tracks and whether it has gates or flashing lights.</p>
   </div>
 
   <div class="sp-wrap">
@@ -127,7 +127,8 @@
       <div class="co-card" id="card"></div>
     </div>
   </div>
-  <p class="sp-note"><strong>This map does not show whether a train is on a crossing.</strong> Live blocked status is not available yet. It shows where crossings are. A red ring means the crossing has gate arms.</p>
+  <p class="sp-note"><strong>This map does not show whether a train is on a crossing.</strong> It shows where crossings are. A red ring means the crossing has gate arms.</p>
+  <p class="sp-note">Source: <a href="https://data.transportation.gov/d/m2f8-22s6" target="_blank" rel="noopener">FRA Crossing Inventory Data (Form 71), Current</a>, U.S. DOT, pulled October 26, 2026. Crossing locations are as filed with FRA. Mile numbers are MileCheck's estimate.</p>
 
   <div class="sp-table">
     <h2>Crossings by state</h2>
@@ -137,7 +138,8 @@
 
   <div class="sp-guide">
     <h2>What the map shows</h2>
-    <p>The FRA keeps a record for every railroad crossing in the country, about 439,000 of them. This map keeps the 20,031 that are open, public, at road level and on a state highway system, which are the numbered routes most drivers use between towns. Private farm and plant crossings, bridges and underpasses, and closed crossings are left out.</p>
+    <p>The FRA keeps a record for every railroad crossing in the country, about 439,000 of them. This map keeps the records marked open, public, at road level and on a state highway system: 20,054 records, of which 23 have no usable location and are left off, leaving 20,031. Private farm and plant crossings, bridges and underpasses, and closed crossings are left out. "On a state highway system" is FRA's flag, so a few crossings sit on a state-maintained road that is not a numbered route.</p>
+    <p>Where a crossing is on the same highway FRA names and within 150 meters of MileCheck's mile marker line for that highway, the card shows an approximate mile, worked out between the two nearest mile markers. That is about 4,300 crossings. The rest show no mile, because we could not confirm the highway. The mile is our estimate, not part of the FRA record.</p>
     <p>Each record is filed by the railroad and the state. Locations come from those records and some are off by a few hundred feet. Track counts and gate equipment come from the last time the railroad updated the record, shown on each card. Train counts are railroad-reported and can be years old.</p>
     <p>If a crossing's gates are stuck or something is on the tracks, call the number on the blue Emergency Notification sign posted at the crossing. Every crossing has one, with the crossing number. The card shows the railroad's emergency number from the FRA record too.</p>
     <p>On the road, the MileCheck app shows your nearest <a href="/what-mile-marker-am-i-at/">mile marker</a>, live <a href="/closures/">closures</a> and <a href="/cameras/">DOT cameras</a>. See also <a href="/seattle-drawbridges/">Seattle drawbridges</a>, <a href="/grades/">steep grades</a> and <a href="/maps/">every MileCheck map</a>.</p>
@@ -191,12 +193,12 @@
 // Crossings draw only at zoom 10+, and only for states whose box touches the view.
 (function(){
 const NAMES={AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming'};
-const MINZOOM=10, MAXDRAW=600;
-const map=L.map('map',{gestureHandling:('ontouchstart' in window),zoomControl:true}).setView([41.5,-100],4);
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri · Crossings: FRA Grade Crossing Inventory',maxZoom:18}).addTo(map);
+const MINZOOM=10, MAXDRAW=600, DOTZOOM=6;
+const map=L.map('map',{preferCanvas:true,gestureHandling:('ontouchstart' in window),zoomControl:true}).setView([41.5,-100],4);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles &copy; Esri &mdash; Sources: Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, &copy; OpenStreetMap contributors, and the GIS User Community · Crossings: FRA Crossing Inventory',maxZoom:18}).addTo(map);
 const layer=L.layerGroup().addTo(map);
 const statusEl=document.getElementById('coStatus'), cardEl=document.getElementById('card');
-let INDEX=null; const DATA={}, LOADING={};
+let INDEX=null, PICKED=null; const DATA={}, LOADING={};
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function warning(c){
   if(c.gates>0&&c.flashers>0)return 'Gates and flashing lights';
@@ -213,7 +215,7 @@ function tracks(c){
 function card(c){
   const road=c.highwayName||c.road||'Road not listed';
   const place=[c.road&&c.road!==road?c.road:null,c.city,NAMES[c.state]||c.state].filter(Boolean).join(' · ');
-  const mile=c.route&&c.mile!=null?esc(c.route)+' near mile '+c.mile.toFixed(1):null;
+  const mile=c.route&&c.mile!=null?'About mile '+c.mile.toFixed(1)+(c.highwayName?' on '+esc(c.highwayName):'')+' <span style="color:#5b6670;font-weight:500">(MileCheck estimate)</span>':null;
   let h='<div class="cc-title">Railroad crossing '+esc(c.id)+'</div><div class="cc-meta">'+esc(road)+(place?' · '+esc(place):'')+'</div><dl>';
   if(mile)h+='<dt>Location</dt><dd>'+mile+'</dd>';
   h+='<dt>Railroad</dt><dd>'+esc(c.railroad||'Not listed')+'</dd>';
@@ -222,7 +224,7 @@ function card(c){
   h+='<dt>Warning</dt><dd>'+esc(warning(c))+'</dd>';
   if(c.trainsPerDay>0)h+='<dt>Trains</dt><dd>About '+c.trainsPerDay+' a day (railroad-reported)</dd>';
   if(c.emergencyPhone)h+='<dt>Emergency</dt><dd><a href="tel:'+esc(c.emergencyPhone.replace(/-/g,''))+'">'+esc(c.emergencyPhone)+'</a></dd>';
-  h+='</dl><div class="cc-note">Live blocked status is not available yet. This shows where the crossing is, not whether a train is on it. The sign posted at the crossing has the number to call.'+
+  h+='</dl><div class="cc-note">This shows where the crossing is, not whether a train is on it. The sign posted at the crossing has the number to call.'+
     (c.revised?' Record updated '+esc(c.revised)+'.':'')+
     ' <a href="https://safetydata.fra.dot.gov/OfficeofSafety/PublicSite/Crossing/Crossing.aspx?phasetype=C&rpttype=I&txtcrossingnum='+encodeURIComponent(c.id)+'" target="_blank" rel="noopener">FRA record</a></div>';
   return h;
@@ -239,8 +241,17 @@ function load(st){
 }
 function draw(){
   layer.clearLayers();
-  if(map.getZoom()<MINZOOM){statusEl.textContent='Zoom in on a highway to see its crossings.';return;}
-  const b=map.getBounds(), sts=statesInView(b);
+  const z=map.getZoom();
+  if(z<DOTZOOM&&!PICKED){statusEl.textContent='Pick a state below or zoom in to see crossings.';return;}
+  const b=map.getBounds(), sts=z<DOTZOOM?[PICKED]:statesInView(b);
+  if(z<MINZOOM){
+    let n=0,waiting=false;
+    for(const st of sts){if(!DATA[st]){waiting=true;load(st);continue;}
+      for(const c of DATA[st]){if(!b.contains([c.lat,c.lon]))continue;n++;
+        L.circleMarker([c.lat,c.lon],{radius:3,weight:1,color:c.gates>0?'#B91C1C':'#1f2328',fillColor:'#fff',fillOpacity:1}).addTo(layer);}}
+    statusEl.textContent=waiting&&!n?'Loading crossings…':n?n.toLocaleString()+(n===1?' crossing':' crossings')+' in view. Zoom in to tap one.':'No state highway crossings in view.';
+    return;
+  }
   let n=0, waiting=false;
   for(const st of sts){
     if(!DATA[st]){waiting=true;load(st);continue;}
@@ -261,7 +272,7 @@ fetch('/data/rail-crossings/index.json').then(r=>r.json()).then(idx=>{
     if(!s.n)return;
     const bt=document.createElement('button');bt.type='button';
     bt.innerHTML=esc(NAMES[st]||st)+' <span>'+s.n.toLocaleString()+'</span>';
-    bt.onclick=()=>{map.fitBounds([[s.bbox[0],s.bbox[1]],[s.bbox[2],s.bbox[3]]]);document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});};
+    bt.onclick=()=>{PICKED=st;map.fitBounds([[s.bbox[0],s.bbox[1]],[s.bbox[2],s.bbox[3]]]);draw();document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});};
     grid.appendChild(bt);
   });
   draw();
