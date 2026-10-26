@@ -2871,6 +2871,12 @@
    "sponsor": "house"
   },
   {
+   "key": "pass:coquihalla",
+   "path": "/passes/coquihalla/",
+   "title": "Coquihalla Highway conditions right now (Hwy 5)",
+   "sponsor": "house"
+  },
+  {
    "key": "pass:crystal-mountain",
    "path": "/passes/crystal-mountain/",
    "title": "Getting to Crystal Mountain: Live Alerts on SR 410 & the Drive from Seattle",
@@ -2919,6 +2925,12 @@
    "sponsor": "house"
   },
   {
+   "key": "pass:kootenay-pass",
+   "path": "/passes/kootenay-pass/",
+   "title": "Kootenay Pass conditions right now (Hwy 3 Salmo to Creston)",
+   "sponsor": "house"
+  },
+  {
    "key": "pass:little-cottonwood",
    "path": "/passes/little-cottonwood/",
    "title": "Little Cottonwood Canyon road conditions right now (UT-210)",
@@ -2961,9 +2973,21 @@
    "sponsor": "house"
   },
   {
+   "key": "pass:rogers-pass",
+   "path": "/passes/rogers-pass/",
+   "title": "Rogers Pass conditions right now (Trans-Canada Hwy 1)",
+   "sponsor": "house"
+  },
+  {
    "key": "pass:santiam",
    "path": "/passes/santiam/",
    "title": "Santiam Pass Camera & Conditions Right Now (US-20)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:sea-to-sky",
+   "path": "/passes/sea-to-sky/",
+   "title": "Sea-to-Sky Highway conditions right now (Hwy 99 to Whistler)",
    "sponsor": "house"
   },
   {
