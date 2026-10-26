@@ -232,7 +232,8 @@ const baseSat=L.layerGroup([
 ]);
 const baseStreets=L.tileLayer(ESRI+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:17});
 baseTerrain.addTo(map);
-const baseCtl=window.mcMapOptions={layers:[]};
+window.mcMapOptions={layers:[]};
+const baseCtl={addOverlay:function(l,n){window.mcMapOptions.layers.push({label:n,layer:l});}};
 map.setView([40,-100],4);
 const SB={"WA":[45.54,-124.85,49,-116.91],"OR":[41.99,-124.57,46.29,-116.46],"ID":[42,-117.24,49,-111.04],"MT":[44.36,-116.05,49,-104.04],"AZ":[31.33,-114.82,37,-109.04],"UT":[37,-114.05,42,-109.04],"CO":[37,-109.05,41,-102.04],"NM":[31.33,-109.05,37,-103],"AK":[54.5,-165,71.5,-129.5],"SD":[42.48,-104.06,45.94,-96.43],"ND":[45.94,-104.05,49,-96.55],"NE":[40,-104.05,43,-95.31],"KS":[37,-102.05,40,-94.59],"WI":[42.49,-92.89,47.08,-86.8],"MN":[43.5,-97.21,49,-89.6],"IA":[40.37,-96.64,43.5,-90.14],"IL":[36.97,-91.52,42.51,-87.02],"WY":[40.99,-111.06,45.01,-104.05],"ME":[43.06,-71.08,47.46,-66.95],"RI":[41.15,-71.86,42.02,-71.12],"MI":[41.7,-90.42,48.3,-82.12],"NV":[35,-120.01,42,-114.04],"NJ":[38.92,-75.56,41.36,-73.89],"DE":[38.45,-75.79,39.84,-75.04],"MD":[37.91,-79.49,39.73,-75.04],"VA":[36.54,-83.68,39.47,-75.24],"WV":[37.2,-82.65,40.64,-77.72],"OH":[38.4,-84.82,42,-80.52],"PA":[39.72,-80.52,42.27,-74.69],"MA":[41.18,-73.51,42.89,-69.93],"VT":[42.73,-73.43,45.02,-71.46],"NH":[42.7,-72.56,45.31,-70.7],"CT":[40.98,-73.73,42.05,-71.79],"NY":[40.48,-79.77,45.02,-71.86],"FL":[24.4,-87.63,31,-80.03],"GA":[30.36,-85.61,35,-80.84],"NC":[33.84,-84.32,36.59,-75.46],"SC":[32.03,-83.35,35.22,-78.54],"MS":[30.17,-91.66,35,-88.1],"AL":[30.22,-88.47,35.01,-84.89],"AR":[33,-94.62,36.5,-89.64],"LA":[28.93,-94.04,33.02,-88.82],"OK":[33.62,-103,37,-94.43],"TN":[34.98,-90.31,36.68,-81.65],"KY":[36.5,-89.57,39.15,-81.96],"IN":[37.77,-88.1,41.76,-84.78],"MO":[36,-95.77,40.61,-89.1],"CA":[32.5,-124.5,42,-114.1],"HI":[18.5,-160.5,22.5,-154.5],"TX":[25.8,-106.7,36.5,-93.5]};
 const NAMES={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
@@ -266,9 +267,8 @@ function render(){
   const list=G.filter(s=>(st?s.state===st:true)&&b.intersects(L.latLngBounds(s.line)))
     .sort((a,c)=>c.avg-a.avg);
   const bs=document.getElementById('bigStatus');
-  bs.className='bigstatus'; bs.style.color='#b45309';
-  bs.textContent=list.length+' steep grade'+(list.length===1?'':'s')+' in view';
-  document.getElementById('listHead').textContent='Steep grades in view, steepest first';
+  bs.hidden=true;  // counts go in the list header, not on the map (site map rule)
+  document.getElementById('listHead').textContent=list.length+' steep grade'+(list.length===1?'':'s')+' in view, steepest first';
   const rows=document.getElementById('clRows');
   if(!list.length){rows.innerHTML='<div class="cl-empty" style="color:#5b6670">No long steep grades in view<small>Zoom out or pick another state. Only stretches of 2+ miles averaging 4% or more are shown.</small></div>';return;}
   rows.innerHTML=list.slice(0,60).map((s,i)=>`<div class="crow" data-i="${i}">
@@ -369,13 +369,13 @@ fetch('/data/grades.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>
   const btn=document.getElementById('nearMe'), bs=document.getElementById('bigStatus');
   L.DomEvent.disableClickPropagation(btn);
   btn.onclick=()=>{
-    if(!navigator.geolocation||!window.isSecureContext){bs.textContent="Location isn't available in this browser. Pick your state above.";return;}
+    if(!navigator.geolocation||!window.isSecureContext){bs.hidden=false;bs.textContent="Location isn't available in this browser. Pick your state above.";return;}
     btn.disabled=true;
     navigator.geolocation.getCurrentPosition(p=>{btn.disabled=false;
       // Clear any state filter first, or a Colorado filter hides everything near you in Washington.
       if(sel.value){sel.value='';draw();}
       map.setView([p.coords.latitude,p.coords.longitude],8);},
-      e=>{btn.disabled=false;bs.textContent=e.code===1?"Location is blocked for this site. Pick your state above.":"Couldn't get your location. Pick your state above.";},
+      e=>{btn.disabled=false;bs.hidden=false;bs.textContent=e.code===1?"Location is blocked for this site. Pick your state above.":"Couldn't get your location. Pick your state above.";},
       {enableHighAccuracy:false,timeout:15000,maximumAge:600000});
   };
 })();
