@@ -114,6 +114,20 @@
     // A page with Leaflet's own layers control and no options keeps that control alone.
     if (!window.mcMapOptions && gm.getContainer().querySelector('.leaflet-control-layers')) return;
     gm._mcOpts = true;
+    // Pages with their own layer box (.co-layers, the pass pages) get radar as one more
+    // row in that box, so the map keeps a single layers button (Leah, 10-25).
+    var own = !window.mcMapOptions && document.querySelector('.co-layers');
+    if (own) {
+      var rl = L.tileLayer('https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png',
+        { opacity: 0.55, zIndex: 300, maxNativeZoom: 12, attribution: 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' });
+      var lab = document.createElement('label');
+      lab.className = 'co-layer';
+      lab.innerHTML = '<input type="checkbox"><span class="co-sw"></span><span class="co-dot" style="background:#2563EB"></span>Weather radar';
+      var keyRow = own.querySelector('.co-key');
+      own.insertBefore(lab, keyRow || null);
+      lab.querySelector('input').onchange = function (e) { if (e.target.checked) rl.addTo(gm); else gm.removeLayer(rl); };
+      return;
+    }
     var layers = (O.layers || []).filter(function (l) { return l && l.layer; });
     // Weather radar on every map, off by default (Leah, 10-24). Same NEXRAD composite the
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
