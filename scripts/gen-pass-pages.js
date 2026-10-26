@@ -786,19 +786,19 @@ const AREAS = [
   {
     // 2026-10-26, Leah: "what about canada pages". DriveBC cameras + events through MileCheck's Worker (state=BC).
     // Summit 1,244 m: BC Geographical Names, Coquihalla Pass. Hope to Merritt 115 km. Opened 1986.
-    kind: 'area', slug: 'coquihalla', conds: false, out: 'passes/coquihalla', up: '../../',
+    kind: 'area', slug: 'coquihalla', conds: false, only: ['BC-5'], out: 'passes/coquihalla', up: '../../',
     url: 'https://milecheckapp.com/passes/coquihalla/',
     name: 'Coquihalla Highway', route: 'BC-5', state: 'BC', states: ['BC'], stateName: 'British Columbia',
     dot: 'DriveBC', credit: 'DriveBC via MileCheck',
-    lat: 49.5935, lon: -121.095, rMi: 30,
+    lat: 49.5935, lon: -121.095, rMi: 45,
     title: 'Coquihalla Highway conditions right now (Hwy 5) | MileCheck',
     desc: 'Coquihalla Highway conditions on BC Highway 5 from Hope to Merritt: live DriveBC cameras at the summit and the Great Bear Snowshed, closures and road work, and the winter tire rule.',
     ogTitle: 'Coquihalla Highway conditions right now | MileCheck',
     eyebrow: 'Hwy 5 · Cascade Mountains · British Columbia',
     h1: 'Coquihalla Highway right now',
     hero: `Live DriveBC cameras and road events on Highway 5 between Hope and Merritt, including the summit at 1,244 m (4,081 ft) and the Great Bear Snowshed.`,
-    camLabel: 'live cameras within 30 mi', elev: '1,244 m', elevLabel: 'Coquihalla summit (4,081 ft)',
-    dist: '115 km', distNote: 'Hope to Merritt (71 mi)', nearWord: 'within 30 miles of the summit', bannerWhere: 'on Highway 5 near the Coquihalla summit',
+    camLabel: 'live cameras on Hwy 5', elev: '1,244 m', elevLabel: 'Coquihalla summit (4,081 ft)',
+    dist: '115 km', distNote: 'Hope to Merritt (71 mi)', nearWord: 'on Highway 5 within 45 miles of the summit', bannerWhere: 'on Highway 5 near the Coquihalla summit',
     aboutH: 'Before you drive the Coquihalla',
     lede: `The Coquihalla is a four-lane freeway, but it climbs about 1,200 m from Hope in under 60 km and gets heavy snow. Here is what applies.`,
     segs: [
@@ -818,7 +818,7 @@ const AREAS = [
   },
   {
     // Vancouver to Whistler about 120 km. Whistler village 675 m: Resort Municipality of Whistler.
-    kind: 'area', slug: 'sea-to-sky', conds: false, out: 'passes/sea-to-sky', up: '../../',
+    kind: 'area', slug: 'sea-to-sky', conds: false, only: ['BC-99'], out: 'passes/sea-to-sky', up: '../../',
     url: 'https://milecheckapp.com/passes/sea-to-sky/',
     name: 'Sea-to-Sky Highway', route: 'BC-99', state: 'BC', states: ['BC'], stateName: 'British Columbia',
     dot: 'DriveBC', credit: 'DriveBC via MileCheck',
@@ -829,8 +829,8 @@ const AREAS = [
     eyebrow: 'Hwy 99 · Coast Mountains · British Columbia',
     h1: 'Sea-to-Sky Highway right now',
     hero: `Live DriveBC cameras and road events on Highway 99 from Horseshoe Bay through Squamish to Whistler and Pemberton.`,
-    camLabel: 'live cameras within 40 mi', elev: '675 m', elevLabel: 'Whistler Village (2,214 ft)',
-    dist: '~120 km', distNote: 'Vancouver to Whistler (75 mi)', nearWord: 'within 40 miles of Daisy Lake', bannerWhere: 'on Highway 99 between Squamish and Whistler',
+    camLabel: 'live cameras on Hwy 99', elev: '675 m', elevLabel: 'Whistler Village (2,214 ft)',
+    dist: '~120 km', distNote: 'Vancouver to Whistler (75 mi)', nearWord: 'on Highway 99 within 40 miles of Daisy Lake', bannerWhere: 'on Highway 99 between Squamish and Whistler',
     aboutH: 'Before you drive to Whistler',
     lede: `Highway 99 is the only road between Vancouver and Whistler. A crash or rockfall can close it with no detour. Here is what applies.`,
     segs: [
@@ -1165,7 +1165,7 @@ ${p.vis ? `
 
 <script>
 const WORKER='https://api.milecheckapp.com';
-const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea},conds:${p.conds!==false}};
+const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea},conds:${p.conds!==false},only:${p.only?JSON.stringify(p.only):'null'}};
 const SNOW=${p.snow ? JSON.stringify({station:p.snow.station,avyCenter:p.snow.avyCenter}) : 'null'};
 const PLOWS=${p.plows ? JSON.stringify({states:p.plows.states}) : 'null'};
 function km(a,b,c,d){const R=6371,pi=Math.PI/180;const x=Math.sin((c-a)*pi/2)**2+Math.cos(a*pi)*Math.cos(c*pi)*Math.sin((d-b)*pi/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
@@ -1193,8 +1193,8 @@ function clean(t,n){const x=String(t==null?'':t).replace(/<[^>]+>/g,' ').replace
 // or the first clause before a comma. Build 9/30: a 140-character cut of the
 // description ended "there will be con" (Leah: "text cuts off on alert").
 function alertTitle(a){const h=clean(a.headline||'',140);const d=String(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();if(h&&h!==clean(d,140))return h;if(!d)return 'Incident';const first=(d.match(/^.*?[.!?](\\s|$)/)||[d])[0].trim();if(first.length<=110)return first;const cl=first.indexOf(', ');return cl>20&&cl<=110?first.slice(0,cl):clean(first,90);}
-async function loadCams(){const out=[];for(const st of PASS.states){for(const c of await feedRows(WORKER+'/cameras?state='+st,'cameras','cameras')){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title&&c.title!=='N/A'?c.title:(c.route||'Traffic')+' camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
-async function loadAlerts(){const out=[];for(const st of PASS.states){for(const a of await feedRows(WORKER+'/incidents?state='+st,'incident-reports','alerts')){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;if(Date.parse(a['end-time'])<Date.now())continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:alertTitle(a),desc:clean(a.description||a['impact-desc']||'',700),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id'],end:alertEnd(a,sl),t0:Date.parse(a['start-time']||''),t1:Date.parse(a['end-time']||'')});}}return out;}
+async function loadCams(){const out=[];for(const st of PASS.states){for(const c of await feedRows(WORKER+'/cameras?state='+st,'cameras','cameras')){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;if(PASS.only&&PASS.only.indexOf(c.route)<0)continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title&&c.title!=='N/A'?c.title:(c.route||'Traffic')+' camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
+async function loadAlerts(){const out=[];for(const st of PASS.states){for(const a of await feedRows(WORKER+'/incidents?state='+st,'incident-reports','alerts')){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;if(PASS.only&&PASS.only.indexOf(a.location&&a.location['route-id'])<0)continue;if(Date.parse(a['end-time'])<Date.now())continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:alertTitle(a),desc:clean(a.description||a['impact-desc']||'',700),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id'],end:alertEnd(a,sl),t0:Date.parse(a['start-time']||''),t1:Date.parse(a['end-time']||'')});}}return out;}
 // The feed's end location, when it is somewhere else. Leah, 2026-10-01: "show the
 // line between MPs?" The span is drawn along the road (see spanLine).
 function alertEnd(a,sl){var el=a.location&&a.location['end-location'];if(!el)return null;var la=+el['end-lat'],lo=+el['end-long'];if(!isFinite(la)||!isFinite(lo))return null;if(Math.abs(la-+sl['start-lat'])<1e-4&&Math.abs(lo-+sl['start-long'])<1e-4)return null;return {lat:la,lon:lo,mp:el['end-mile-marker']};}
