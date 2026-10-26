@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <title>Where are the railroad crossings on this highway? Map of 20,031 state highway crossings | MileCheck</title>
+  <meta name="description" content="A map of every open, public, at-grade railroad crossing on a state highway, from the FRA Grade Crossing Inventory. Tap a crossing for the road, railroad, number of tracks and whether it has gates or flashing lights.">
+  <link rel="canonical" href="https://milecheckapp.com/railroad-crossings/">
+  <meta property="og:title" content="Where are the railroad crossings on this highway?">
+  <meta property="og:description" content="20,031 railroad crossings on state highways, from the FRA inventory. Road, railroad, tracks, gates and flashers.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/railroad-crossings/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261026c">
+  <script src="/assets/map-kit.js?v=20261026c" defer></script>
+    <style>
+    .sp-hero{max-width:1160px;margin:0 auto;padding:38px 20px 8px;}
+    .sp-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .sp-hero p.sub{color:#5b6670;font-size:15.5px;margin-top:8px;max-width:72ch;line-height:1.55;}
+    .sp-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #map{height:min(72vh,640px);border-radius:14px;border:1px solid #E5E5E5;position:relative;overflow:hidden;}
+    .co-bs{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:700;font-size:14px;color:#3a444d;width:max-content;max-width:calc(100% - 68px);box-sizing:border-box;}
+    .co-bs:empty{display:none;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(310px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;box-sizing:border-box;}
+    .co-card .cx{position:absolute;top:6px;right:6px;border:0;background:#f0f0ee;border-radius:50%;width:44px;height:44px;cursor:pointer;font-size:20px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:44px;line-height:1.3;}
+    .co-card .cc-meta{font-size:13px;color:#5b6670;margin-top:3px;padding-right:44px;}
+    .co-card dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:10px 0 0;font-size:14px;}
+    .co-card dt{color:#5b6670;} .co-card dd{margin:0;font-weight:600;color:#0E1116;}
+    .co-card .cc-note{margin-top:10px;padding-top:8px;border-top:1px solid #F0F0EE;font-size:13px;color:#5b6670;line-height:1.45;}
+    .co-card a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .rx{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid #1f2328;box-shadow:0 1px 4px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font:800 13px/1 Inter,sans-serif;color:#1f2328;box-sizing:border-box;}
+    .rx.g{border-color:#B91C1C;color:#B91C1C;}
+    .sp-note{max-width:1160px;margin:10px auto 0;padding:0 20px;color:#5b6670;font-size:14px;line-height:1.5;}
+    .sp-table{max-width:1160px;margin:26px auto 0;padding:0 20px;}
+    .sp-table h2{font-size:22px;font-weight:800;margin:0 0 10px;}
+    .st-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
+    .st-grid button{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:8px 12px;border:1px solid #E5E5E5;border-radius:10px;background:#fff;font:600 14.5px Inter,sans-serif;color:#0E1116;cursor:pointer;text-align:left;}
+    .st-grid button span{color:#5b6670;font-weight:700;font-variant-numeric:tabular-nums;}
+    .st-grid button:hover{background:#f6f9fb;}
+    .sp-guide{max-width:1000px;margin:36px auto 0;padding:0 20px;}
+    .sp-guide h2{font-size:24px;margin:0 0 6px;}
+    .sp-guide p{color:#3a444d;font-size:16px;line-height:1.65;margin:0 0 14px;}
+    .sp-guide a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:12px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;} .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    /* spon:css */
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;width:100%;max-width:100%;flex-shrink:0;align-self:stretch;grid-column:1/-1;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+/* /spon:css */
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Where are the railroad crossings on this highway?","url":"https://milecheckapp.com/railroad-crossings/","description":"Map of open, public, at-grade railroad crossings on state highways, from the FRA Grade Crossing Inventory.","@id":"https://milecheckapp.com/railroad-crossings/#webpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261015-1">
+  <script src="/assets/site-nav.js?v=20261015-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261015-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <div class="sp-hero">
+    <!-- spon:start -->
+  <aside class="spon spon-house" id="spon" data-slot="basics:railroad-crossings" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Want to advertise with us?</strong></span>
+      <span class="spon-cta">Learn more →</span>
+    </a>
+  </aside>
+<!-- spon:end -->
+<h1>Where are the railroad crossings on this highway?</h1>
+    <p class="sub">Every open, public railroad crossing at road level on a state highway, from the Federal Railroad Administration's crossing inventory. Zoom in on a highway to see its crossings, then tap one for the road, the railroad, the number of tracks and whether it has gates or flashing lights.</p>
+  </div>
+
+  <div class="sp-wrap">
+    <div id="map">
+      <div class="co-bs" id="coStatus">Zoom in on a highway to see its crossings.</div>
+      <div class="co-card" id="card"></div>
+    </div>
+  </div>
+  <p class="sp-note"><strong>This map does not show whether a train is on a crossing.</strong> Live blocked status is not available yet. It shows where crossings are. A red ring means the crossing has gate arms.</p>
+
+  <div class="sp-table">
+    <h2>Crossings by state</h2>
+    <p class="sp-note" style="padding:0;margin:0 0 10px">Tap a state to zoom the map to it.</p>
+    <div class="st-grid" id="stGrid"></div>
+  </div>
+
+  <div class="sp-guide">
+    <h2>What the map shows</h2>
+    <p>The FRA keeps a record for every railroad crossing in the country, about 439,000 of them. This map keeps the 20,031 that are open, public, at road level and on a state highway system, which are the numbered routes most drivers use between towns. Private farm and plant crossings, bridges and underpasses, and closed crossings are left out.</p>
+    <p>Each record is filed by the railroad and the state. Locations come from those records and some are off by a few hundred feet. Track counts and gate equipment come from the last time the railroad updated the record, shown on each card. Train counts are railroad-reported and can be years old.</p>
+    <p>If a crossing's gates are stuck or something is on the tracks, call the number on the blue Emergency Notification sign posted at the crossing. Every crossing has one, with the crossing number. The card shows the railroad's emergency number from the FRA record too.</p>
+    <p>On the road, the MileCheck app shows your nearest <a href="/what-mile-marker-am-i-at/">mile marker</a>, live <a href="/closures/">closures</a> and <a href="/cameras/">DOT cameras</a>. See also <a href="/seattle-drawbridges/">Seattle drawbridges</a>, <a href="/grades/">steep grades</a> and <a href="/maps/">every MileCheck map</a>.</p>
+  </div>
+
+  <div class="co-cta">
+    <h2>Your mile marker and the road ahead</h2>
+    <p>The MileCheck app shows your nearest mile marker, live DOT closures and cameras on one map while you drive.</p>
+    <div class="btns"><a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=railroad-crossings&mt=8">App Store</a><a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Drailroad-crossings">Google Play</a></div>
+  </div>
+
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=railroad-crossings&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Drailroad-crossings" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Follow</p>
+          <ul class="footer-list">
+            <li><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/share/1FT9JtkH5D/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/company/milecheck" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>
+// Railroad crossings map (CHANGE 87, web first). Data: /data/rail-crossings/<st>.json,
+// built by MILECHECKAPP/scripts/convert-rail-crossings.mjs from the FRA inventory.
+// Crossings draw only at zoom 10+, and only for states whose box touches the view.
+(function(){
+const NAMES={AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming'};
+const MINZOOM=10, MAXDRAW=600;
+const map=L.map('map',{gestureHandling:('ontouchstart' in window),zoomControl:true}).setView([41.5,-100],4);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri · Crossings: FRA Grade Crossing Inventory',maxZoom:18}).addTo(map);
+const layer=L.layerGroup().addTo(map);
+const statusEl=document.getElementById('coStatus'), cardEl=document.getElementById('card');
+let INDEX=null; const DATA={}, LOADING={};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function warning(c){
+  if(c.gates>0&&c.flashers>0)return 'Gates and flashing lights';
+  if(c.gates>0)return 'Gates';
+  if(c.flashers>0)return 'Flashing lights';
+  if(c.trafficSignal)return 'Traffic signal';
+  return 'No gates or flashing lights listed';
+}
+function tracks(c){
+  const m=c.mainTracks, o=c.otherTracks||0;
+  if(m==null&&!o)return 'Not listed';
+  return (m==null?'':m+' main')+(o?(m==null?'':' · ')+o+' other':'');
+}
+function card(c){
+  const road=c.highwayName||c.road||'Road not listed';
+  const place=[c.road&&c.road!==road?c.road:null,c.city,NAMES[c.state]||c.state].filter(Boolean).join(' · ');
+  const mile=c.route&&c.mile!=null?esc(c.route)+' near mile '+c.mile.toFixed(1):null;
+  let h='<div class="cc-title">Railroad crossing '+esc(c.id)+'</div><div class="cc-meta">'+esc(road)+(place?' · '+esc(place):'')+'</div><dl>';
+  if(mile)h+='<dt>Location</dt><dd>'+mile+'</dd>';
+  h+='<dt>Railroad</dt><dd>'+esc(c.railroad||'Not listed')+'</dd>';
+  h+='<dt>Tracks</dt><dd>'+esc(tracks(c))+'</dd>';
+  h+='<dt>Type</dt><dd>Public, at road level</dd>';
+  h+='<dt>Warning</dt><dd>'+esc(warning(c))+'</dd>';
+  if(c.trainsPerDay>0)h+='<dt>Trains</dt><dd>About '+c.trainsPerDay+' a day (railroad-reported)</dd>';
+  if(c.emergencyPhone)h+='<dt>Emergency</dt><dd><a href="tel:'+esc(c.emergencyPhone.replace(/-/g,''))+'">'+esc(c.emergencyPhone)+'</a></dd>';
+  h+='</dl><div class="cc-note">Live blocked status is not available yet. This shows where the crossing is, not whether a train is on it. The sign posted at the crossing has the number to call.'+
+    (c.revised?' Record updated '+esc(c.revised)+'.':'')+
+    ' <a href="https://safetydata.fra.dot.gov/OfficeofSafety/PublicSite/Crossing/Crossing.aspx?phasetype=C&rpttype=I&txtcrossingnum='+encodeURIComponent(c.id)+'" target="_blank" rel="noopener">FRA record</a></div>';
+  return h;
+}
+function showCard(c){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+card(c);cardEl.style.display='block';cardEl.querySelector('.cx').onclick=()=>{cardEl.style.display='none';};}
+function icon(c){return L.divIcon({className:'',html:'<div class="rx'+(c.gates>0?' g':'')+'">✕</div>',iconSize:[22,22],iconAnchor:[11,11]});}
+function statesInView(b){
+  if(!INDEX)return [];
+  return Object.entries(INDEX.states).filter(([,s])=>s.n&&!(s.bbox[2]<b.getSouth()||s.bbox[0]>b.getNorth()||s.bbox[3]<b.getWest()||s.bbox[1]>b.getEast())).map(([k])=>k);
+}
+function load(st){
+  if(DATA[st]||LOADING[st])return LOADING[st]||Promise.resolve();
+  return LOADING[st]=fetch('/data/rail-crossings/'+st.toLowerCase()+'.json').then(r=>r.ok?r.json():null).then(d=>{DATA[st]=d?d.crossings.map(c=>(c.state=st,c)):[];draw();}).catch(()=>{DATA[st]=[];draw();});
+}
+function draw(){
+  layer.clearLayers();
+  if(map.getZoom()<MINZOOM){statusEl.textContent='Zoom in on a highway to see its crossings.';return;}
+  const b=map.getBounds(), sts=statesInView(b);
+  let n=0, waiting=false;
+  for(const st of sts){
+    if(!DATA[st]){waiting=true;load(st);continue;}
+    for(const c of DATA[st]){
+      if(!b.contains([c.lat,c.lon]))continue;
+      if(n>=MAXDRAW)break;
+      n++;
+      L.marker([c.lat,c.lon],{icon:icon(c),title:'Crossing '+c.id}).on('click',()=>showCard(c)).addTo(layer);
+    }
+  }
+  statusEl.textContent=waiting&&!n?'Loading crossings…':n?(n+(n===1?' crossing':' crossings')+' in view'+(n>=MAXDRAW?', zoom in for all':'')):'No state highway crossings in view.';
+}
+map.on('moveend',draw);
+fetch('/data/rail-crossings/index.json').then(r=>r.json()).then(idx=>{
+  INDEX=idx;
+  const grid=document.getElementById('stGrid');
+  Object.entries(idx.states).sort((a,b)=>(NAMES[a[0]]||a[0]).localeCompare(NAMES[b[0]]||b[0])).forEach(([st,s])=>{
+    if(!s.n)return;
+    const bt=document.createElement('button');bt.type='button';
+    bt.innerHTML=esc(NAMES[st]||st)+' <span>'+s.n.toLocaleString()+'</span>';
+    bt.onclick=()=>{map.fitBounds([[s.bbox[0],s.bbox[1]],[s.bbox[2],s.bbox[3]]]);document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});};
+    grid.appendChild(bt);
+  });
+  draw();
+}).catch(()=>{statusEl.textContent='Crossing data did not load. Refresh to try again.';});
+})();
+</script>
+<!-- spon:start --><script>(function(){var el=document.getElementById('spon');if(!el)return;var q=new URLSearchParams(location.search);if(q.get('sponsor')==='preview'){var nm=(q.get('name')||'Your company').slice(0,60),cp=(q.get('copy')||'One sentence about what you do for the drivers on this page.').slice(0,120),ct=(q.get('cta')||'Your link').slice(0,30);el.setAttribute('data-sponsor','preview');el.innerHTML='';var tg=document.createElement('span');tg.className='spon-tag';tg.textContent='Sponsor';var a=document.createElement('a');a.className='spon-body';a.href='#';a.addEventListener('click',function(ev){ev.preventDefault();});var lg=document.createElement('span');lg.className='spon-logo spon-logo-ph';lg.textContent='Your logo';var tx=document.createElement('span');tx.className='spon-text';var st=document.createElement('strong');st.textContent=nm;tx.appendChild(st);tx.appendChild(document.createTextNode(' '+cp));var c=document.createElement('span');c.className='spon-cta';c.textContent=ct+' →';a.appendChild(lg);a.appendChild(tx);a.appendChild(c);el.appendChild(tg);el.appendChild(a);var pv=document.createElement('span');pv.className='spon-preview';pv.textContent='Preview';el.appendChild(pv);return;}if(navigator.webdriver)return;var B="https://api.milecheckapp.com/sponsor-beacon",S=el.getAttribute('data-slot'),A=el.getAttribute('data-sponsor'),P=location.pathname;function send(e){var u=B+'?e='+e+'&s='+encodeURIComponent(S)+'&a='+encodeURIComponent(A)+'&p='+encodeURIComponent(P);try{if(navigator.sendBeacon)navigator.sendBeacon(u);else fetch(u,{method:'POST',keepalive:true}).catch(function(){});}catch(x){}}var done=false,t=null,inView=false,io=null;function arm(){if(done||t||!inView||document.visibilityState!=='visible')return;t=setTimeout(function(){t=null;if(done||!inView||document.visibilityState!=='visible')return;done=true;if(io)io.disconnect();send('imp');},1000);}function disarm(){if(t){clearTimeout(t);t=null;}}if('IntersectionObserver' in window){io=new IntersectionObserver(function(en){en.forEach(function(x){inView=x.isIntersecting&&x.intersectionRatio>=0.5;if(inView)arm();else disarm();});},{threshold:[0,0.5,1]});io.observe(el);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')arm();else disarm();});}var a=el.querySelector('[data-spon-link]');if(a){a.addEventListener('click',function(){send('click');});a.addEventListener('auxclick',function(ev){if(ev.button===1)send('click');});}})();</script><!-- spon:end -->
+</body>
+</html>
