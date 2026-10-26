@@ -555,6 +555,12 @@
    "sponsor": "house"
   },
   {
+   "key": "basics:cell-coverage",
+   "path": "/cell-coverage/",
+   "title": "Where do cell carriers report no 4G coverage on the highway?",
+   "sponsor": "house"
+  },
+  {
    "key": "basics:chain-laws",
    "path": "/chain-laws/",
    "title": "Which states have chain laws? Chain and traction laws by state",
@@ -1445,7 +1451,7 @@
   {
    "key": "cameras:hub",
    "path": "/cameras/",
-   "title": "Live Highway Cameras — 43 US states + 5 Canadian provinces, route + mile marker tagged",
+   "title": "Live highway cameras by state",
    "sponsor": "house"
   },
   {
