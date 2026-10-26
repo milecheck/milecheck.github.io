@@ -242,10 +242,12 @@ const color=g=>g>=6?'#7f1d1d':g>=5?'#dc2626':'#f59e0b';
 let G=[];
 let LOAD='loading';   // loading | ok | failed. Empty-result text only shows after a good load.
 const layer=L.layerGroup().addTo(map);
+function escN(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function popupHtml(s){
   const lo=s.upWithMiles?s.from:s.to, hi=s.upWithMiles?s.to:s.from;
-  return `<div class="fpop"><div class="fp-nm">${s.route} · MP ${s.from} to ${s.to}</div>
-    <div class="fp-st">${NAMES[s.state]||s.state} · ${s.miles} miles</div>
+  const nm=s.name?escN(s.name):'';
+  return `<div class="fpop"><div class="fp-nm">${nm||`${s.route} · MP ${s.from} to ${s.to}`}</div>
+    <div class="fp-st">${nm?`${s.route} · MP ${s.from} to ${s.to} · `:''}${NAMES[s.state]||s.state} · ${s.miles} miles</div>
     <div class="fp-row"><b>${s.avg}% calculated average grade</b>, about ${s.climbFt.toLocaleString()} ft of elevation gain.</div>
     <div class="fp-row">Calculated uphill from MP ${lo} toward MP ${hi}. Downhill the other way.</div>
     <div class="fp-row" style="color:#5b6670;font-size:12px">Steepest calculated mile about ${s.max}%. Based on elevation change between mile markers.</div></div>`;
@@ -272,7 +274,7 @@ function render(){
   const rows=document.getElementById('clRows');
   if(!list.length){rows.innerHTML='<div class="cl-empty" style="color:#5b6670">No long steep grades in view<small>Zoom out or pick another state. Only stretches of 2+ miles averaging 4% or more are shown.</small></div>';return;}
   rows.innerHTML=list.slice(0,60).map((s,i)=>`<div class="crow" data-i="${i}">
-      <div class="t"><span class="rt">${s.route} · MP ${s.from} to ${s.to}</span><span class="stb g">${s.avg}%</span></div>
+      <div class="t"><span class="rt">${s.name?escN(s.name)+' · ':''}${s.route} · MP ${s.from} to ${s.to}</span><span class="stb g">${s.avg}%</span></div>
       <div class="sub">${NAMES[s.state]||s.state} · ${s.miles} miles · about ${s.climbFt.toLocaleString()} ft</div></div>`).join('');
   rows.querySelectorAll('.crow').forEach(el=>el.onclick=()=>{
     const s=list[+el.dataset.i]; map.flyToBounds(L.latLngBounds(s.line).pad(.6),{duration:.9,maxZoom:12});
@@ -295,6 +297,12 @@ const liveCache={}, liveFail={};
 const CAM_MI=1;   // a camera counts as "on a grade" within this many miles of the stretch
 const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function milesBetween(a,b,c,d){const R=3958.8,r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return R*Math.hypot(x,y);}
+// Feed text often repeats itself ("Foggy Pass Closed Pass Closed Cayuse Pass SR 123"):
+// drop the place name (it is already on the card) and any phrase said twice.
+function tidyText(t,name){let x=String(t||'');if(name&&name.length>3)x=x.split(name).join(' ');
+  x=x.replace(/\s+/g,' ').trim();let prev;do{prev=x;x=x.replace(/\b(\w+(?:\s+\w+){0,3})\s+\1\b/gi,'$1');}while(x!==prev);
+  const seen=new Set();x=x.split(/(?<=[.!?])\s+/).filter(p=>{const k=p.toLowerCase().replace(/[^a-z0-9]/g,'');if(!k||seen.has(k))return false;seen.add(k);return true;}).join(' ');
+  return x.replace(/\s+([.,])/g,'$1').trim();}
 async function feed(path,key){
   for(let i=0;i<3;i++){try{const r=await fetch(WORKER+path,{cache:'no-store'});if(r.ok){const d=await r.json();if(Array.isArray(d[key]))return {ok:true,d};}}catch(e){}
     if(i<2)await new Promise(res=>setTimeout(res,1000));}
@@ -315,7 +323,7 @@ async function liveFor(st){
   const all=[...(inc.ok?inc.d['incident-reports']:[]),...(con.ok?con.d['road-weather-reports']:[])];
   for(const r of all){const t=txt(r),lt=t.toLowerCase(),p=pt(r);if(!p||SEASON_OVER_RE.test(t))continue;
     if(/chain[- ]?link/.test(lt))continue;
-    const item={lat:p[0],lon:p[1],st,route:(((r.location||{})['route-id'])||r['route-id']||'').trim(),name:r['location-name']||((r.location||{})['location-name'])||'',text:t.slice(0,240)};
+    const item={lat:p[0],lon:p[1],st,route:(((r.location||{})['route-id'])||r['route-id']||'').trim(),name:r['location-name']||((r.location||{})['location-name'])||'',text:tidyText(t,r['location-name']||((r.location||{})['location-name'])||'').slice(0,240)};
     if(CHAIN_RE.test(lt))chains.push(item); else if(WX_RE.test(lt))wx.push(item);}
   // A state with no camera feed (supported:false) is a gap, not a failure. Only a feed that didn't answer is.
   const out={t:Date.now(),ok:ca.ok&&inc.ok&&con.ok,camsOk,cams,chains,wx};
