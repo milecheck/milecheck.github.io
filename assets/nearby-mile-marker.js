@@ -33,7 +33,11 @@
       if(typeof route!=='string'||!route.trim()||!/[0-9]/.test(route))return;
       // Internal state road IDs with no signed number (Montana 'Route 81003') are not something a driver can match to a sign.
       if(/^Route \d{4,}$/.test(route.trim()))return;
-      out.push({lat:lat,lon:lon,mile:mile,route:route.trim(),code:code});
+      var o={lat:lat,lon:lon,mile:mile,route:route.trim(),code:code};
+      // County-relative states (GA, CA, KY, WV, TN, AR, FL, MO, SC) restart numbering at county lines;
+      // CA also has postmile prefixes/suffixes. Kept so the estimate never pairs across numberings.
+      ['county','pmPrefix','pmSuffix','rteSuffix'].forEach(function(f){if(typeof p[f]==='string'&&p[f])o[f]=p[f];});
+      out.push(o);
     }
     var body=Array.isArray(data)?data:data.mileposts||data.data||data;
     if(Array.isArray(body)){recognized=true;body.forEach(function(p){add(p);});}

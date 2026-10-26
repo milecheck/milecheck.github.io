@@ -16,11 +16,16 @@
   // One-decimal estimate like the app: place the reader between the nearest recorded post and the next
   // post on the same road, by projecting onto the line between them. Falls back to the post's own number.
   var lastAll=[],lastCoords=null;
+  // Same rule as the app (nearestMilepost.ts): never interpolate between posts of different county or
+  // CA postmile qualifier. "R 22.0" and "22.0" in one county are different spots.
+  function sameNumbering(a,b){return (a.county||'')===(b.county||'')&&(a.pmPrefix||'')===(b.pmPrefix||'')&&(a.pmSuffix||'')===(b.pmSuffix||'')&&(a.rteSuffix||'')===(b.rteSuffix||'');}
+  function pm(p,n){return (p.pmPrefix?p.pmPrefix+' ':'')+n;}
   function estimate(p1){
     var c=lastCoords;if(!c)return {mile:p1.mile};
     var k=Math.cos(c.latitude*Math.PI/180),X=function(q){return q.lon*k;},best=null;
     lastAll.forEach(function(p2){
       if(p2.code!==p1.code||p2.route!==p1.route)return;
+      if(!sameNumbering(p1,p2))return;
       var dm=Math.abs(p2.mile-p1.mile);if(dm<0.5||dm>2.5)return;
       var dx=X(p2)-X(p1),dy=p2.lat-p1.lat,L=dx*dx+dy*dy;if(!L)return;
       var tt=((c.longitude*k-X(p1))*dx+(c.latitude-p1.lat)*dy)/L;
@@ -51,17 +56,17 @@
     doc.getElementById('marker-eyebrow').textContent=km?'Nearest recorded kilometre post':'Nearest recorded milepost';
     doc.getElementById('marker-map').hidden=km;doc.getElementById('marker-copy').textContent=km?'Copy kilometre post':'Copy milepost';
     var est=estimate(post);
-    var shown=est.lo!=null?Number(est.mile).toFixed(1):String(post.mile);
+    var shown=pm(post,est.lo!=null?Number(est.mile).toFixed(1):String(post.mile));
     doc.getElementById('marker-number').textContent=shown;
     doc.getElementById('marker-road').textContent=name(post)+(est.dir?' · '+est.dir:'');
-    doc.getElementById('marker-distance').textContent=(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+est.lo+' and '+est.hi+'.':(km?'Nearest recorded kilometre post, ':'Nearest recorded milepost, ')+far(q.distance,'your').replace(/^About/,'about'));
+    doc.getElementById('marker-distance').textContent=(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+pm(post,est.lo)+' and '+pm(post,est.hi)+'.':(km?'Nearest recorded kilometre post, ':'Nearest recorded milepost, ')+far(q.distance,'your').replace(/^About/,'about'));
     doc.getElementById('marker-map').href=mapLink(post);
     var state=states.find(function(s){return s.code===post.code;});
     var conditions=doc.getElementById('marker-conditions');conditions.hidden=state.conditions===false;conditions.href='/road-conditions/'+state.slug+'/';conditions.textContent=state.name+' road conditions';
     var cameras=doc.getElementById('marker-cameras');cameras.hidden=!state.cameras;
     if(state.cameras){cameras.href='/cameras/'+state.slug+'/?route='+encodeURIComponent(routeAlias(post));cameras.textContent=state.name+' highway cameras';}
-    copyText=post.route+(est.dir?' '+est.dir:'')+', '+(km?'kilometre ':'mile ')+shown+', '+state.name+'. '+(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+est.lo+' and '+est.hi+'.':'Nearest recorded '+(km?'kilometre post':'milepost')+', '+far(q.distance,'my').replace(/^About/,'about'));if(doc.body&&doc.body.classList)doc.body.classList.add('found');
-    result.hidden=false;next.hidden=false;if(root.scrollTo)root.scrollTo(0,0);finish('Nearest recorded marker. '+post.route+(km?', kilometre ':', mile ')+post.mile+', '+state.name+'.',true);event(picked?'picked':'result');
+    copyText=post.route+(est.dir?' '+est.dir:'')+', '+(km?'kilometre ':'mile ')+shown+', '+state.name+'. '+(est.lo!=null?'Estimated between recorded '+(km?'kilometre posts ':'mileposts ')+pm(post,est.lo)+' and '+pm(post,est.hi)+'.':'Nearest recorded '+(km?'kilometre post':'milepost')+', '+far(q.distance,'my').replace(/^About/,'about'));if(doc.body&&doc.body.classList)doc.body.classList.add('found');
+    result.hidden=false;next.hidden=false;if(root.scrollTo)root.scrollTo(0,0);finish('Nearest recorded marker. '+post.route+(km?', kilometre ':', mile ')+pm(post,post.mile)+', '+state.name+'.',true);event(picked?'picked':'result');
   }
   button.addEventListener('click',function(){
     var request=++revision;clear();event('start');
