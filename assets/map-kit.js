@@ -150,15 +150,15 @@
       var lab = document.createElement('label');
       lab.className = 'co-layer';
       lab.innerHTML = '<input type="checkbox"><span class="co-sw"></span><span class="co-dot" style="background:#2563EB"></span>Weather radar';
-      var keyRow = own.querySelector('.co-key');
-      own.insertBefore(lab, keyRow || null);
+      var first = own.querySelector('.co-layer');
+      own.insertBefore(lab, first || null);
       lab.querySelector('input').onchange = function (e) { if (e.target.checked) rl.addTo(gm); else gm.removeLayer(rl); };
       return;
     }
     var layers = (O.layers || []).filter(function (l) { return l && l.layer; });
     // Weather radar on every map, off by default (Leah, 10-24). Same NEXRAD composite the
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
-    layers.push({ label: 'Weather radar', color: '#2563EB', layer: radarLayer() });
+    layers.unshift({ label: 'Weather radar', color: '#2563EB', layer: radarLayer() });
     var bases = O.bases || {};
     var baseNames = Object.keys(bases);
     var Opts = L.Control.extend({
