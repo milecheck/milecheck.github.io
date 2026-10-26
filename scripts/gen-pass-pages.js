@@ -159,6 +159,60 @@ const PASSES = [
       ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
   },
+  // ---- Rockies + Wyoming (2026-10-26, Mile Check Maps session) ----
+  // SNOTEL triplets read from the NRCS AWDB API 2026-10-26. CAIC covers all of Colorado.
+  {
+    slug: 'wolf-creek', name: 'Wolf Creek Pass', route: 'US-160', state: 'CO', stateName: 'Colorado',
+    title: 'Wolf Creek Pass Road Conditions Right Now (US-160) | MileCheck', ogTitle: 'Wolf Creek Pass road conditions | MileCheck', h1: 'Wolf Creek Pass road conditions right now',
+    dot: 'CDOT', lat: 37.4829, lon: -106.8017, r: 30, elev: '10,857 ft', dist: '~23 mi', distNote: 'northeast of Pagosa Springs on US-160',
+    range: 'San Juan Mountains',
+    hero: `Live CDOT road alerts, snow and plow positions on US-160 over Wolf Creek Pass, between Pagosa Springs and South Fork. Wolf Creek Ski Area sits at the summit.`,
+    closes: `Wolf Creek Pass gets more snow than almost any other Colorado highway pass, and CDOT closes US-160 here for avalanche control and storms several times most winters. The west side drops steeply toward Pagosa Springs with sharp curves, and the chain law is common in a storm.`,
+    extra: { h: 'Ski area at the summit', p: `The Wolf Creek Ski Area entrance is right at the summit, so weekend ski traffic and freight share the top of the pass. CDOT's cameras at the summit aren't in MileCheck's feed yet, so the map shows alerts, snow and plows.` },
+    snow: { station: '874:CO:SNTL', stationName: 'Wolf Creek Summit', stationElev: '10,930 ft', stationNote: 'at the summit', avyCenter: 'CAIC', title: 'Snow at Wolf Creek Pass',
+      resort: { name: 'Wolf Creek Ski Area', site: 'https://wolfcreekski.com/' } },
+    plows: { states: ['CO'], agency: 'CDOT' },
+    faq: [
+      ['Is Wolf Creek Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-160 near the summit, from CDOT. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
+      ['Is the chain law on for Wolf Creek Pass?', `CDOT sets the traction and chain law on US-160 and posts it on signs and COtrip. It changes quickly in a storm.`],
+      ['How high is Wolf Creek Pass?', `The summit is 10,857 feet on US-160. Compare <a href="../monarch/">Monarch Pass</a> on US-50.`],
+      ['How much snow is at Wolf Creek Pass?', `The snow block above reads the USDA SNOTEL station at the summit, 10,930 feet, updated hourly. See the <a href="../../ski/wolf-creek/">Wolf Creek ski page</a>.`],
+    ],
+  },
+  {
+    slug: 'monarch', name: 'Monarch Pass', route: 'US-50', state: 'CO', stateName: 'Colorado',
+    title: 'Monarch Pass Road Conditions Right Now (US-50) | MileCheck', ogTitle: 'Monarch Pass road conditions | MileCheck', h1: 'Monarch Pass road conditions right now',
+    dot: 'CDOT', lat: 38.4967, lon: -106.3253, r: 30, elev: '11,312 ft', dist: '~18 mi', distNote: 'west of Poncha Springs on US-50',
+    range: 'Sawatch Range',
+    hero: `Live CDOT road alerts, snow and plow positions on US-50 over Monarch Pass, between Salida and Gunnison. Monarch Mountain ski area sits just below the summit on the east side.`,
+    closes: `Monarch Pass crosses the Continental Divide at 11,312 feet. CDOT closes US-50 here for heavy snow and crashes in winter, and the chain law is common on both sides. There is no easy detour, so a closure can mean a long wait or a long way around.`,
+    extra: { h: 'Monarch Mountain', p: `Monarch Mountain's entrance is on US-50 a short way below the summit on the Salida side. CDOT's cameras at the summit aren't in MileCheck's feed yet, so the map shows alerts, snow and plows.` },
+    snow: { station: '701:CO:SNTL', stationName: 'Porphyry Creek', stationElev: '10,790 ft', stationNote: 'about a mile from the summit', avyCenter: 'CAIC', title: 'Snow at Monarch Pass',
+      resort: { name: 'Monarch Mountain', site: 'https://www.skimonarch.com/' } },
+    plows: { states: ['CO'], agency: 'CDOT' },
+    faq: [
+      ['Is Monarch Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-50 near the summit, from CDOT. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
+      ['Is the chain law on for Monarch Pass?', `CDOT sets the traction and chain law on US-50 and posts it on signs and COtrip.`],
+      ['How high is Monarch Pass?', `The summit is 11,312 feet on US-50, on the Continental Divide. Compare <a href="../wolf-creek/">Wolf Creek Pass</a> on US-160.`],
+      ['How far is Monarch Pass from Salida?', `About 22 miles west of Salida on US-50, through Poncha Springs.`],
+    ],
+  },
+  {
+    slug: 'i80-wyoming', name: 'I-80 Summit (Laramie)', route: 'I-80', state: 'WY', stateName: 'Wyoming',
+    title: 'Is I-80 Open Between Laramie and Cheyenne? Road Conditions Right Now | MileCheck', ogTitle: 'I-80 Laramie to Cheyenne road conditions | MileCheck', h1: 'Is I-80 open between Laramie and Cheyenne right now?',
+    dot: 'WYDOT', lat: 41.2367, lon: -105.4369, r: 30, elev: '8,640 ft', dist: '~8 mi', distNote: 'southeast of Laramie on I-80',
+    range: 'Laramie Mountains', markerLabel: 'I-80 Summit · 8,640 ft',
+    hero: `Live WYDOT road alerts and snow on I-80 over the summit between Laramie and Cheyenne, the highest point on I-80.`,
+    closes: `WYDOT closes I-80 between Laramie and Cheyenne for snow, blowing snow and high wind several times most winters, and the stretch west of Laramie toward Arlington and Elk Mountain closes for wind even more often. High-profile vehicles are often restricted before the full closure. Read <a href="../../why-does-i-80-close-in-wyoming/">why I-80 closes in Wyoming</a>.`,
+    extra: { h: 'Wind is the main reason', p: `On this part of I-80 the closures come from wind and blowing snow more than from deep snow. Light, high-profile trailers are the first to be restricted. WYDOT's cameras aren't in MileCheck's feed yet, so the map shows alerts and snow.` },
+    snow: { station: '1045:WY:SNTL', stationName: 'Crow Creek', stationElev: '8,320 ft', stationNote: 'about 3 miles east of the summit', title: 'Snow at the I-80 summit' },
+    faq: [
+      ['Is I-80 open between Laramie and Cheyenne?', `The <a href="#comap">live map above</a> shows closures and incidents on I-80 near the summit, from WYDOT. See the <a href="../../road-conditions/wyoming/">Wyoming road conditions map</a>.`],
+      ['Why does I-80 close in Wyoming?', `Mostly wind and blowing snow. See <a href="../../why-does-i-80-close-in-wyoming/">why I-80 closes in Wyoming</a>.`],
+      ['How high is the I-80 summit?', `8,640 feet, between Laramie and Cheyenne, the highest point on I-80. Compare <a href="../donner/">Donner Pass</a> and <a href="../parleys/">Parleys Summit</a>.`],
+      ['How far is the summit from Laramie?', `About 8 miles southeast on I-80, and about 40 miles west of Cheyenne.`],
+    ],
+  },
   // ---- PNW winter additions (2026-10-25, Mile Check Maps session) ----
   // Summit coordinates and elevations: WSDOT/ODOT/ITD pass pages and USGS GNIS.
   // SNOTEL triplets, elevations and coordinates read from the NRCS AWDB API 2026-10-25.
@@ -959,7 +1013,7 @@ ${p.snow || p.plows ? `
       <div class="co-stats sn-stats"><div class="co-stat"><div class="n" id="snDepth">—</div><div class="l">snow depth now</div></div><div class="co-stat"><div class="n" id="snDelta">—</div><div class="l">change, 24 h</div></div><div class="co-stat"><div class="n" id="snSwe">—</div><div class="l">snow water</div></div><div class="co-stat"><div class="n" id="snTemp">—</div><div class="l">temperature</div></div></div>
       <p class="m sn-asof" id="snAsOf">Reading the station.</p>
       <h3>Forecast at the pass</h3><ul id="snFc"><li class="empty">Loading the NWS forecast.</li></ul>
-      <h3>Avalanche danger</h3><p class="m sn-avy" id="snAvy">Loading.</p>${p.snow.resort ? `
+      ${p.snow.avyCenter ? '<h3>Avalanche danger</h3><p class="m sn-avy" id="snAvy">Loading.</p>' : ''}${p.snow.resort ? `
       <h3>${p.snow.resort.name}</h3><p class="m sn-resort">${p.snow.resort.report ? `The resort posts its own snow report and lift status. <a href="${p.snow.resort.report}" target="_blank" rel="noopener">Mountain report</a> · <a href="${p.snow.resort.tickets}" target="_blank" rel="noopener">Tickets</a>` : `The resort posts its own conditions and tickets at <a href="${p.snow.resort.site}" target="_blank" rel="noopener">${p.snow.resort.site.replace(/^https?:\/\//,'').replace(/\/$/,'')}</a>.`}</p>` : ''}
     </div>` : ''}${p.plows ? `
     <div class="co-list" id="lstPlows"><h2>Snowplows</h2><p class="hint">${p.plows.agency} plow positions within the map radius, updated about every minute. Parked and idle trucks are listed too.</p><ul><li class="empty">Loading.</li></ul></div>` : ''}
@@ -1126,7 +1180,7 @@ async function loadForecast(){if(!SNOW)return;const ul=document.getElementById('
   const el=fc.properties.elevation;if(el&&isFinite(el.value))ul.insertAdjacentHTML('beforeend','<li class="empty">NWS point forecast for '+Math.round(el.value*3.28084).toLocaleString()+' ft.</li>');}
 function pip(pt,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const xi=poly[i][0],yi=poly[i][1],xj=poly[j][0],yj=poly[j][1];if(((yi>pt[1])!==(yj>pt[1]))&&(pt[0]<(xj-xi)*(pt[1]-yi)/(yj-yi)+xi))inside=!inside;}return inside;}
 function inGeom(pt,g){if(!g)return false;if(g.type==='Polygon')return pip(pt,g.coordinates[0]);if(g.type==='MultiPolygon')return g.coordinates.some(p=>pip(pt,p[0]));return false;}
-async function loadAvy(){if(!SNOW)return;const el=document.getElementById('snAvy');const j=await fetchJSON('https://api.avalanche.org/v2/public/products/map-layer/'+encodeURIComponent(SNOW.avyCenter),2);const f=(j&&j.features)||[];const z=f.find(x=>inGeom([PASS.lon,PASS.lat],x.geometry))||f[0];
+async function loadAvy(){if(!SNOW||!SNOW.avyCenter)return;const el=document.getElementById('snAvy');const j=await fetchJSON('https://api.avalanche.org/v2/public/products/map-layer/'+encodeURIComponent(SNOW.avyCenter),2);const f=(j&&j.features)||[];const z=f.find(x=>inGeom([PASS.lon,PASS.lat],x.geometry))||f[0];
   if(!z){el.textContent='The avalanche center feed did not load.';return;}const pr=z.properties||{};const rating=pr.off_season?'No rating, off season':(typeof pr.danger==='string'&&pr.danger?pr.danger:'See the forecast');
   const zone=/zone$/i.test(String(pr.name||''))?pr.name:(pr.name?pr.name+' zone':'this zone');const cap=rating.charAt(0).toUpperCase()+rating.slice(1);el.innerHTML='<b>'+esc(cap)+'</b> for the '+esc(zone)+', per the '+esc(pr.center||SNOW.avyCenter)+'. '+(pr.link?'<a href="'+pr.link+'" target="_blank" rel="noopener">Read the forecast</a>. ':'')+'This rating is for backcountry terrain, not the ski area.';}
 async function loadPlows(){if(!PLOWS)return [];const out=[];for(const st of PLOWS.states){const d=await fetchJSON(WORKER+'/plows?state='+st,2);for(const t of ((d&&d.plows)||[])){if(!near(+t.lat,+t.lon))continue;const age=(Date.now()-Date.parse(t.lastUpdated))/60000;const vin=/^[A-Z0-9]{17}$/.test(t.name||'');const agency=clean(t.status||'',40);out.push({lat:+t.lat,lon:+t.lon,bearing:+t.bearing||0,name:vin?((agency||'DOT')+' plow'):clean(t.name||'Plow',60),status:vin?'':agency,age:isFinite(age)?age:null});}}return out.sort((a,b)=>(a.age==null?9e9:a.age)-(b.age==null?9e9:b.age));}

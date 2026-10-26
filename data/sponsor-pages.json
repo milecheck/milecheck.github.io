@@ -2913,6 +2913,12 @@
    "sponsor": "house"
   },
   {
+   "key": "pass:i80-wyoming",
+   "path": "/passes/i80-wyoming/",
+   "title": "Is I-80 Open Between Laramie and Cheyenne? Road Conditions Right Now",
+   "sponsor": "house"
+  },
+  {
    "key": "pass:little-cottonwood",
    "path": "/passes/little-cottonwood/",
    "title": "Little Cottonwood Canyon road conditions right now (UT-210)",
@@ -2922,6 +2928,12 @@
    "key": "pass:lookout",
    "path": "/passes/lookout/",
    "title": "Lookout Pass Camera & Conditions Right Now (I-90)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:monarch",
+   "path": "/passes/monarch/",
+   "title": "Monarch Pass Road Conditions Right Now (US-50)",
    "sponsor": "house"
   },
   {
@@ -3378,6 +3390,12 @@
    "key": "pass:willamette",
    "path": "/passes/willamette/",
    "title": "Willamette Pass Camera & Conditions Right Now (OR-58)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:wolf-creek",
+   "path": "/passes/wolf-creek/",
+   "title": "Wolf Creek Pass Road Conditions Right Now (US-160)",
    "sponsor": "house"
   }
  ]
