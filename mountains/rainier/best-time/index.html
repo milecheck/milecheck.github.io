@@ -45,6 +45,8 @@
     .mv-meta b{color:var(--ink);font-weight:600;}
     .mv-card{border:1px solid var(--line);background:var(--surface);padding:16px 18px;}
     .mv-card+.mv-card{margin-top:12px;}
+    .mv-near{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:6px;}
+    .mv-near a,.mv-back a{display:flex;align-items:center;min-height:44px;padding:4px 0;}
     .mv-card h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:8px;}
     .mv-card p{font-size:14px;color:var(--ink-soft);line-height:1.55;}
     .mv-rows{display:flex;flex-direction:column;}
@@ -197,7 +199,7 @@
         </div>
       </div></div>
   </div>
-  <div class="mv-body"><div class="mv-prose"><h2>Questions</h2></div><div class="mv-faq"><details><summary>How do we know if Mount Rainier is visible?</summary><p>We read the cloud ceilings at the airports between Seattle and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 14,410 ft. No crowd reports.</p></details><details><summary>Why only five days?</summary><p>Cloud forecasts get less reliable the further out they go. Days four and five are drawn in six-hour steps for that reason, and the forecast stops at five.</p></details><details><summary>Why does the Eastside get a different answer than Seattle?</summary><p>Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations.</p></details><details><summary>What it can get wrong</summary><p>Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so.</p></details></div></div>
+  <div class="mv-body"><p class="mv-back"><a href="../">Is Mount Rainier out right now?</a></p><div class="mv-prose"><h2>Questions</h2></div><div class="mv-faq"><details><summary>How do we know if Mount Rainier is visible?</summary><p>We read the cloud ceilings at the airports between Seattle and the summit, the cloud layers at the summit from the MET Norway model, and whether that cloud sits below 14,410 ft. No crowd reports.</p></details><details><summary>Why only five days?</summary><p>Cloud forecasts get less reliable the further out they go. Days four and five are drawn in six-hour steps for that reason, and the forecast stops at five.</p></details><details><summary>Why does the Eastside get a different answer than Seattle?</summary><p>Different weather stations, different sky. The same morning can be fog in one and clear in the other, twenty miles apart. Each region page reads its own stations.</p></details><details><summary>What it can get wrong</summary><p>Wildfire smoke and haze can hide the mountain on a day the cloud numbers say clear. When the numbers are unsure, the page says so.</p></details></div></div>
   <div class="mv-notes">Seasonal notes are general patterns, not a forecast. The live panel is the forecast.</div><script>
 (function(){
 const HOST="https://rainier-is-out.leahgerber93.workers.dev", TZ="America/Los_Angeles", REGION="seattle", MTN="Rainier", SUMMIT=14410;
