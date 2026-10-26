@@ -29,9 +29,10 @@
     .sp-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
     .sp-hero p.sub{color:#5b6670;font-size:15.5px;margin-top:8px;max-width:72ch;line-height:1.55;}
     .sp-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
-    #map{height:min(72vh,640px);border-radius:14px;border:1px solid #E5E5E5;position:relative;overflow:hidden;}
+    #map{scroll-margin-top:72px;height:min(72vh,640px);border-radius:14px;border:1px solid #E5E5E5;position:relative;overflow:hidden;}
     .co-bs{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:700;font-size:14px;color:#3a444d;width:max-content;max-width:calc(100% - 68px);box-sizing:border-box;}
     .co-bs:empty{display:none;}
+    @media (max-width:900px),(max-height:520px){ html body .co-bs{top:24px;font-size:12.5px;padding:6px 10px;white-space:normal;} }
     .co-card{position:absolute;top:12px;right:12px;width:min(310px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;box-sizing:border-box;}
     .co-card .cx{position:absolute;top:6px;right:6px;border:0;background:#f0f0ee;border-radius:50%;width:44px;height:44px;cursor:pointer;font-size:20px;line-height:1;color:#5b6670;}
     .co-card .cc-title{font-weight:800;font-size:15px;padding-right:44px;line-height:1.3;}
@@ -127,7 +128,7 @@
       <div class="co-card" id="card"></div>
     </div>
   </div>
-  <p class="sp-note"><strong>This map does not show whether a train is on a crossing.</strong> It shows where crossings are. A red ring means the crossing has gate arms.</p>
+  <p class="sp-note"><strong>This map does not show whether a train is on a crossing.</strong> It shows where crossings on state highways are. A red ring means FRA lists gate arms at the crossing.</p>
   <p class="sp-note">Source: <a href="https://data.transportation.gov/d/m2f8-22s6" target="_blank" rel="noopener">FRA Crossing Inventory Data (Form 71), Current</a>, U.S. DOT, pulled October 26, 2026. Crossing locations are as filed with FRA. Mile numbers are MileCheck's estimate.</p>
 
   <div class="sp-table">
@@ -138,10 +139,10 @@
 
   <div class="sp-guide">
     <h2>What the map shows</h2>
-    <p>The FRA keeps a record for every railroad crossing in the country, about 439,000 of them. This map keeps the records marked open, public, at road level and on a state highway system: 20,054 records, of which 23 have no usable location and are left off, leaving 20,031. Private farm and plant crossings, bridges and underpasses, and closed crossings are left out. "On a state highway system" is FRA's flag, so a few crossings sit on a state-maintained road that is not a numbered route.</p>
+    <p>The FRA keeps a record for every railroad crossing in the country, about 439,000 records counting closed ones. This map keeps the records marked open, public, at road level and on a state highway system: 20,054 records, of which 23 have no usable location and are left off, leaving 20,031. Private farm and plant crossings, bridges and underpasses, and closed crossings are left out. "On a state highway system" is FRA's flag, so a few crossings sit on a state-maintained road that is not a numbered route.</p>
     <p>Where a crossing is on the same highway FRA names and within 150 meters of MileCheck's mile marker line for that highway, the card shows an approximate mile, worked out between the two nearest mile markers. That is about 4,300 crossings. The rest show no mile, because we could not confirm the highway. The mile is our estimate, not part of the FRA record.</p>
     <p>Each record is filed by the railroad and the state. Locations come from those records and some are off by a few hundred feet. Track counts and gate equipment come from the last time the railroad updated the record, shown on each card. Train counts are railroad-reported and can be years old.</p>
-    <p>If a crossing's gates are stuck or something is on the tracks, call the number on the blue Emergency Notification sign posted at the crossing. Every crossing has one, with the crossing number. The card shows the railroad's emergency number from the FRA record too.</p>
+    <p>If a crossing's gates are stuck or something is on the tracks, call the number on the blue Emergency Notification sign posted at the crossing. Public crossings are required to have one, with the crossing number on it. The card also shows the railroad's number from the FRA record, which can be out of date, so the sign comes first. If anyone is in danger, call 911.</p>
     <p>On the road, the MileCheck app shows your nearest <a href="/what-mile-marker-am-i-at/">mile marker</a>, live <a href="/closures/">closures</a> and <a href="/cameras/">DOT cameras</a>. See also <a href="/seattle-drawbridges/">Seattle drawbridges</a>, <a href="/grades/">steep grades</a> and <a href="/maps/">every MileCheck map</a>.</p>
   </div>
 
@@ -213,18 +214,19 @@ function tracks(c){
   return (m==null?'':m+' main')+(o?(m==null?'':' · ')+o+' other':'');
 }
 function card(c){
-  const road=c.highwayName||c.road||'Road not listed';
-  const place=[c.road&&c.road!==road?c.road:null,c.city,NAMES[c.state]||c.state].filter(Boolean).join(' · ');
-  const mile=c.route&&c.mile!=null?'About mile '+c.mile.toFixed(1)+(c.highwayName?' on '+esc(c.highwayName):'')+' <span style="color:#5b6670;font-weight:500">(MileCheck estimate)</span>':null;
+  const road=c.road||c.highwayName||'Road not listed';
+  const norm=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+  const place=[c.highwayName&&norm(c.highwayName)!==norm(road)?c.highwayName:null,c.city,NAMES[c.state]||c.state].filter(Boolean).join(' · ');
+  const mile=c.route&&c.mile!=null?'About mile '+c.mile.toFixed(1)+' on '+esc(c.route)+' <span style="color:#5b6670;font-weight:500">(MileCheck estimate)</span>':null;
   let h='<div class="cc-title">Railroad crossing '+esc(c.id)+'</div><div class="cc-meta">'+esc(road)+(place?' · '+esc(place):'')+'</div><dl>';
   if(mile)h+='<dt>Location</dt><dd>'+mile+'</dd>';
   h+='<dt>Railroad</dt><dd>'+esc(c.railroad||'Not listed')+'</dd>';
   h+='<dt>Tracks</dt><dd>'+esc(tracks(c))+'</dd>';
   h+='<dt>Type</dt><dd>Public, at road level</dd>';
-  h+='<dt>Warning</dt><dd>'+esc(warning(c))+'</dd>';
+  h+='<dt>Warning</dt><dd>'+esc(warning(c))+' <span style="color:#5b6670">(FRA record)</span></dd>';
   if(c.trainsPerDay>0)h+='<dt>Trains</dt><dd>About '+c.trainsPerDay+' a day (railroad-reported)</dd>';
-  if(c.emergencyPhone)h+='<dt>Emergency</dt><dd><a href="tel:'+esc(c.emergencyPhone.replace(/-/g,''))+'">'+esc(c.emergencyPhone)+'</a></dd>';
-  h+='</dl><div class="cc-note">This shows where the crossing is, not whether a train is on it. The sign posted at the crossing has the number to call.'+
+  if(c.emergencyPhone)h+='<dt>Railroad emergency</dt><dd><a href="tel:'+esc(c.emergencyPhone.replace(/-/g,''))+'">'+esc(c.emergencyPhone)+'</a></dd>';
+  h+='</dl><div class="cc-note">This shows where the crossing is, not whether a train is on it. If anyone is in danger, call 911. Otherwise call the number on the blue sign at the crossing. The number above is from the FRA record and can be out of date.'+
     (c.revised?' Record updated '+esc(c.revised)+'.':'')+
     ' <a href="https://safetydata.fra.dot.gov/OfficeofSafety/PublicSite/Crossing/Crossing.aspx?phasetype=C&rpttype=I&txtcrossingnum='+encodeURIComponent(c.id)+'" target="_blank" rel="noopener">FRA record</a></div>';
   return h;
@@ -249,20 +251,20 @@ function draw(){
     for(const st of sts){if(!DATA[st]){waiting=true;load(st);continue;}
       for(const c of DATA[st]){if(!b.contains([c.lat,c.lon]))continue;n++;
         L.circleMarker([c.lat,c.lon],{radius:3,weight:1,color:c.gates>0?'#B91C1C':'#1f2328',fillColor:'#fff',fillOpacity:1}).addTo(layer);}}
-    statusEl.textContent=waiting&&!n?'Loading crossings…':n?n.toLocaleString()+(n===1?' crossing':' crossings')+' in view. Zoom in to tap one.':'No state highway crossings in view.';
+    statusEl.textContent=waiting&&!n?'Loading crossings…':n?'Zoom in to tap a crossing.':'No state highway crossings here.';
     return;
   }
   let n=0, waiting=false;
-  for(const st of sts){
+  outer: for(const st of sts){
     if(!DATA[st]){waiting=true;load(st);continue;}
     for(const c of DATA[st]){
       if(!b.contains([c.lat,c.lon]))continue;
-      if(n>=MAXDRAW)break;
+      if(n>=MAXDRAW)break outer;
       n++;
       L.marker([c.lat,c.lon],{icon:icon(c),title:'Crossing '+c.id}).on('click',()=>showCard(c)).addTo(layer);
     }
   }
-  statusEl.textContent=waiting&&!n?'Loading crossings…':n?(n+(n===1?' crossing':' crossings')+' in view'+(n>=MAXDRAW?', zoom in for all':'')):'No state highway crossings in view.';
+  statusEl.textContent=waiting&&!n?'Loading crossings…':n?(n>=MAXDRAW?'Zoom in to see every crossing.':''):'No state highway crossings here.';
 }
 map.on('moveend',draw);
 fetch('/data/rail-crossings/index.json').then(r=>r.json()).then(idx=>{
