@@ -119,7 +119,7 @@
     var own = !window.mcMapOptions && document.querySelector('.co-layers');
     if (own) {
       var rl = L.tileLayer('https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png',
-        { opacity: 0.55, zIndex: 300, maxNativeZoom: 12, attribution: 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' });
+        { opacity: 0.55, zIndex: 300, maxNativeZoom: 8, updateWhenZooming: false, attribution: 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' });
       var lab = document.createElement('label');
       lab.className = 'co-layer';
       lab.innerHTML = '<input type="checkbox"><span class="co-sw"></span><span class="co-dot" style="background:#2563EB"></span>Weather radar';
@@ -133,7 +133,7 @@
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
     layers.push({ label: 'Weather radar', color: '#2563EB', layer: L.tileLayer(
       'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png',
-      { opacity: 0.55, zIndex: 300, maxNativeZoom: 12, attribution: 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' }) });
+      { opacity: 0.55, zIndex: 300, maxNativeZoom: 8, updateWhenZooming: false, attribution: 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' }) });
     var bases = O.bases || {};
     var baseNames = Object.keys(bases);
     var Opts = L.Control.extend({
