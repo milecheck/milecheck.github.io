@@ -116,10 +116,37 @@
     gm._mcOpts = true;
     // Pages with their own layer box (.co-layers, the pass pages) get radar as one more
     // row in that box, so the map keeps a single layers button (Leah, 10-25).
+    // Radar as a loop of the last 50 minutes in 10-minute steps, so you can see which way
+    // the weather is moving (Leah, 10-25). Frames load hidden, then play once they are in.
+    function radarLayer() {
+      var steps = ['-m50m', '-m40m', '-m30m', '-m20m', '-m10m', ''];
+      var frames = steps.map(function (st, i) {
+        return L.tileLayer('https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913' + st + '/{z}/{x}/{y}.png',
+          { opacity: 0, zIndex: 300 + i, maxNativeZoom: 8, updateWhenZooming: false,
+            attribution: i === 5 ? 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' : '' });
+      });
+      var g = L.layerGroup(frames), timer = null, tag = null, k = 5;
+      function show(n) {
+        frames.forEach(function (f, i) { f.setOpacity(i === n ? 0.55 : 0); });
+        if (tag) tag.textContent = n === 5 ? 'Radar now' : 'Radar ' + (50 - n * 10) + ' min ago';
+      }
+      g.on('add', function () {
+        var c = gm.getContainer();
+        tag = document.createElement('div');
+        tag.style.cssText = 'position:absolute;right:8px;bottom:22px;z-index:800;background:rgba(255,255,255,.92);border-radius:6px;padding:2px 8px;font:600 12px/1.6 system-ui,sans-serif;color:#1d1f1c;pointer-events:none';
+        c.appendChild(tag);
+        show(5);
+        setTimeout(function () {
+          if (!tag) return;
+          (function tick() { timer = setTimeout(function () { if (!tag) return; k = (k + 1) % 6; show(k); tick(); }, k === 5 ? 1800 : 700); })();
+        }, 1500);
+      });
+      g.on('remove', function () { clearTimeout(timer); clearInterval(timer); if (tag) tag.remove(); tag = null; k = 5; });
+      return g;
+    }
     var own = !window.mcMapOptions && document.querySelector('.co-layers');
     if (own) {
-      var rl = L.tileLayer('https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png',
-        { opacity: 0.55, zIndex: 300, maxNativeZoom: 8, updateWhenZooming: false, attribution: 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' });
+      var rl = radarLayer();
       var lab = document.createElement('label');
       lab.className = 'co-layer';
       lab.innerHTML = '<input type="checkbox"><span class="co-sw"></span><span class="co-dot" style="background:#2563EB"></span>Weather radar';
@@ -131,9 +158,7 @@
     var layers = (O.layers || []).filter(function (l) { return l && l.layer; });
     // Weather radar on every map, off by default (Leah, 10-24). Same NEXRAD composite the
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
-    layers.push({ label: 'Weather radar', color: '#2563EB', layer: L.tileLayer(
-      'https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png',
-      { opacity: 0.55, zIndex: 300, maxNativeZoom: 8, updateWhenZooming: false, attribution: 'Radar: NWS NEXRAD via Iowa Environmental Mesonet' }) });
+    layers.push({ label: 'Weather radar', color: '#2563EB', layer: radarLayer() });
     var bases = O.bases || {};
     var baseNames = Object.keys(bases);
     var Opts = L.Control.extend({
