@@ -783,6 +783,71 @@ const AREAS = [
     ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on SR-210 up the canyon, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
     related: (up) => `<a href="../">all mountain passes</a> · <a href="${up}passes/parleys/">Parleys Summit</a> · <a href="${up}cameras/utah/">Utah cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a>`,
   },
+  {
+    // 2026-10-26, Leah: "what about canada pages". DriveBC cameras + events through MileCheck's Worker (state=BC).
+    // Summit 1,244 m: BC Geographical Names, Coquihalla Pass. Hope to Merritt 115 km. Opened 1986.
+    kind: 'area', slug: 'coquihalla', conds: false, out: 'passes/coquihalla', up: '../../',
+    url: 'https://milecheckapp.com/passes/coquihalla/',
+    name: 'Coquihalla Highway', route: 'BC-5', state: 'BC', states: ['BC'], stateName: 'British Columbia',
+    dot: 'DriveBC', credit: 'DriveBC via MileCheck',
+    lat: 49.5935, lon: -121.095, rMi: 30,
+    title: 'Coquihalla Highway conditions right now (Hwy 5) | MileCheck',
+    desc: 'Coquihalla Highway conditions on BC Highway 5 from Hope to Merritt: live DriveBC cameras at the summit and the Great Bear Snowshed, closures and road work, and the winter tire rule.',
+    ogTitle: 'Coquihalla Highway conditions right now | MileCheck',
+    eyebrow: 'Hwy 5 · Cascade Mountains · British Columbia',
+    h1: 'Coquihalla Highway right now',
+    hero: `Live DriveBC cameras and road events on Highway 5 between Hope and Merritt, including the summit at 1,244 m (4,081 ft) and the Great Bear Snowshed.`,
+    camLabel: 'live cameras within 30 mi', elev: '1,244 m', elevLabel: 'Coquihalla summit (4,081 ft)',
+    dist: '115 km', distNote: 'Hope to Merritt (71 mi)', nearWord: 'within 30 miles of the summit', bannerWhere: 'on Highway 5 near the Coquihalla summit',
+    aboutH: 'Before you drive the Coquihalla',
+    lede: `The Coquihalla is a four-lane freeway, but it climbs about 1,200 m from Hope in under 60 km and gets heavy snow. Here is what applies.`,
+    segs: [
+      { h: 'Winter tires or chains', p: `BC requires winter tires (M+S or the mountain snowflake) or chains on Highway 5 from October 1. Signs at Hope and Merritt show the dates in force. Commercial trucks must carry chains in that window and use the chain-up areas when DriveBC calls for them.` },
+      { h: 'When it closes', p: `Highway 5 closes for crashes, spun-out trucks and avalanche control, sometimes for hours. When it does, the detours are Highway 3 through Princeton or Highway 1 through the Fraser Canyon, both much longer. Check the map before you leave Hope.` },
+      { h: 'From Seattle', p: `Cross at Sumas–Abbotsford, take Highway 1 east to Hope, then Highway 5. The cameras here start near Box Canyon and run to the Coquihalla Lakes area.` },
+    ],
+    driveP: `The cameras and events above are DriveBC's, the same feed you would check before leaving Hope. MileCheck's live position and kilometre markers in BC are in the app. Check the cameras before you go, not while driving.`,
+    faq: [
+      ['Is the Coquihalla open right now?', `Closures and incidents on Highway 5 show on the <a href="#comap">map above</a> from DriveBC. Red markers are closures. See every BC camera on the <a href="../../cameras/british-columbia/">BC cameras page</a>.`],
+      ['Do I need winter tires on the Coquihalla?', `Yes. BC requires winter tires or chains on Highway 5 from October 1. Signs at Hope and Merritt show the dates in force.`],
+      ['How high is the Coquihalla summit?', `1,244 m, or 4,081 ft. Compare <a href="../snoqualmie/">Snoqualmie Pass</a> at about 3,000 ft and <a href="../stevens/">Stevens Pass</a> at about 4,060 ft.`],
+      ['How long is the Coquihalla?', `About 115 km (71 mi) from Hope to Merritt, then the highway continues to Kamloops.`],
+    ],
+    ctaH: 'Take it with you', ctaP: `MileCheck shows live DOT and DriveBC alerts and cameras on both sides of the border. Runs on CarPlay and Android Auto.`,
+    related: (up) => `<a href="../sea-to-sky/">Sea-to-Sky Highway</a> · <a href="../">all mountain passes</a> · <a href="${up}cameras/british-columbia/">BC cameras</a> · <a href="${up}passes/snoqualmie/">Snoqualmie Pass</a> · <a href="${up}canada/">Canada</a>`,
+  },
+  {
+    // Vancouver to Whistler about 120 km. Whistler village 675 m: Resort Municipality of Whistler.
+    kind: 'area', slug: 'sea-to-sky', conds: false, out: 'passes/sea-to-sky', up: '../../',
+    url: 'https://milecheckapp.com/passes/sea-to-sky/',
+    name: 'Sea-to-Sky Highway', route: 'BC-99', state: 'BC', states: ['BC'], stateName: 'British Columbia',
+    dot: 'DriveBC', credit: 'DriveBC via MileCheck',
+    lat: 49.98, lon: -123.13, rMi: 40,
+    title: 'Sea-to-Sky Highway conditions right now (Hwy 99 to Whistler) | MileCheck',
+    desc: 'Sea-to-Sky Highway conditions on BC Highway 99 from Horseshoe Bay through Squamish to Whistler: live DriveBC cameras, closures and road work, and the winter tire rule.',
+    ogTitle: 'Sea-to-Sky Highway conditions right now | MileCheck',
+    eyebrow: 'Hwy 99 · Coast Mountains · British Columbia',
+    h1: 'Sea-to-Sky Highway right now',
+    hero: `Live DriveBC cameras and road events on Highway 99 from Horseshoe Bay through Squamish to Whistler and Pemberton.`,
+    camLabel: 'live cameras within 40 mi', elev: '675 m', elevLabel: 'Whistler Village (2,214 ft)',
+    dist: '~120 km', distNote: 'Vancouver to Whistler (75 mi)', nearWord: 'within 40 miles of Daisy Lake', bannerWhere: 'on Highway 99 between Squamish and Whistler',
+    aboutH: 'Before you drive to Whistler',
+    lede: `Highway 99 is the only road between Vancouver and Whistler. A crash or rockfall can close it with no detour. Here is what applies.`,
+    segs: [
+      { h: 'Winter tires or chains', p: `BC requires winter tires (M+S or the mountain snowflake) or chains on Highway 99 north of Horseshoe Bay from October 1. Signs on the highway mark the zone and the end date.` },
+      { h: 'When it closes', p: `Closures come from crashes, rockfall and slides along Howe Sound. There is no alternate road between Squamish and Whistler, so a closure means waiting. Ski weekends bring heavy northbound traffic Saturday morning and southbound Sunday afternoon.` },
+      { h: 'From Seattle', p: `Cross at Blaine (Peace Arch or Pacific Highway), drive through Vancouver to Horseshoe Bay, then north on Highway 99. Border wait times are on the <a href="../../border-wait-times/">border page</a>.` },
+    ],
+    driveP: `The cameras and events above are DriveBC's, the same feed you would check before leaving Vancouver. Check them before you go, not while driving.`,
+    faq: [
+      ['Is the Sea-to-Sky Highway open right now?', `Closures and incidents on Highway 99 show on the <a href="#comap">map above</a> from DriveBC. Red markers are closures. See every BC camera on the <a href="../../cameras/british-columbia/">BC cameras page</a>.`],
+      ['Do I need winter tires to drive to Whistler?', `Yes, from October 1. BC requires winter tires or chains on Highway 99 north of Horseshoe Bay.`],
+      ['How long is the drive from Vancouver to Whistler?', `About 120 km (75 mi), roughly two hours in good conditions.`],
+      ['Is there another road to Whistler?', `No. Highway 99 is the only road. North of Pemberton it continues as the Duffey Lake Road to Lillooet.`],
+    ],
+    ctaH: 'Take it with you', ctaP: `MileCheck shows live DOT and DriveBC alerts and cameras on both sides of the border. Runs on CarPlay and Android Auto.`,
+    related: (up) => `<a href="../coquihalla/">Coquihalla Highway</a> · <a href="../">all mountain passes</a> · <a href="${up}cameras/british-columbia/">BC cameras</a> · <a href="${up}border-wait-times/">border wait times</a> · <a href="${up}canada/">Canada</a>`,
+  },
 ];
 
 function faqJsonLd(p){
@@ -1100,7 +1165,7 @@ ${p.vis ? `
 
 <script>
 const WORKER='https://api.milecheckapp.com';
-const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea}};
+const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea},conds:${p.conds!==false}};
 const SNOW=${p.snow ? JSON.stringify({station:p.snow.station,avyCenter:p.snow.avyCenter}) : 'null'};
 const PLOWS=${p.plows ? JSON.stringify({states:p.plows.states}) : 'null'};
 function km(a,b,c,d){const R=6371,pi=Math.PI/180;const x=Math.sin((c-a)*pi/2)**2+Math.cos(a*pi)*Math.cos(c*pi)*Math.sin((d-b)*pi/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
@@ -1235,7 +1300,7 @@ function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
 // count as no closure. No stated extent is unspecified, not full. ChatGPT review 3, 2026-10-08.
 function closureKind(t){var r={none:0,unspecified:1,partial:2,full:3},k='none';String(t||'').toLowerCase().split(/[.;]+/).forEach(function(c){if(!/clos/.test(c)||/\\b(no|not)\\s+(a\\s+)?(full\\s+)?(closure|closed)|\\breopen/.test(c))return;var feat=/(on-?ramp|off-?ramp|\\bramps?\\b|connector|rest area|shoulder)/.test(c)||/\\bexit\\b/.test(c.replace(/\\b(near|at|past|before|after|by|from|to|between)\\s+exit\\b/g,''));var full=/(all lanes (are )?closed|roadway is closed|full closure|closed in both directions|\\b(highway|hwy|road|roadway|route|pass|interstate|(i|us|sr|ca|or|wa|id|mt|ut|co|nv|az)-?\\s?\\d+[a-z]?)\\s+(is\\s+|are\\s+)?closed\\b)/.test(c);var x=feat?'partial':full?'full':/\\blanes?\\b/.test(c)?'partial':'unspecified';if(r[x]>r[k])k=x;});return k;}
 function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&closureKind(a.title+' '+(a.desc||''))==='full';}
-Promise.all([loadCams(),loadAlerts(),PASS.area?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c.slice().sort(function(x,y){return (/airport/i.test(x.route||'')?1:0)-(/airport/i.test(y.route||'')?1:0);});ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;const kp=document.getElementById('keyPark');if(kp&&CAMS.some(x=>x.src))kp.hidden=false;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=alertCount();draw();renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within ${p.rMi || ''} miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' ${p.bannerWhere || `on ${p.route}`}'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data is unavailable right now. Try again shortly.';});
+Promise.all([loadCams(),loadAlerts(),PASS.area&&PASS.conds?loadConds():Promise.resolve([]),PASS.area?loadFires():Promise.resolve([]),PLOWS?loadPlows():Promise.resolve([])]).then(([c,a,w,f,pl])=>{CAMS=c.slice().sort(function(x,y){return (/airport/i.test(x.route||'')?1:0)-(/airport/i.test(y.route||'')?1:0);});ALERTS=a;CONDS=w;FIRES=f;PLOWLIST=pl;const kp=document.getElementById('keyPark');if(kp&&CAMS.some(x=>x.src))kp.hidden=false;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=alertCount();draw();renderLists();if(PLOWS)renderPlows();const fc=ALERTS.filter(isFullClosure);if(fc.length){const fl=fc[0];const bn=document.getElementById('critBanner');bn.innerHTML=PASS.area?('⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' within ${p.rMi || ''} miles: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'. Details in the closures list below.'):('⚠ CRITICAL: the ${p.name} area has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' ${p.bannerWhere || `on ${p.route}`}'+(fl.mp>0?' near MP '+Math.round(fl.mp):'')+'. Tap a red marker for details.');bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data is unavailable right now. Try again shortly.';});
 if(SNOW){loadSnow().catch(()=>{document.getElementById('snAsOf').textContent='The station did not answer. Try again in a few minutes.';});loadForecast().catch(()=>{});loadAvy().catch(()=>{});}
 </script>
 
