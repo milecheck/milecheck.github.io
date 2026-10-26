@@ -227,11 +227,56 @@
     document.querySelectorAll('.leaflet-container').forEach(function (m) {
       var box = m.parentElement && /mapbox|map-wrap|rc-mapbox/.test(m.parentElement.className) ? m.parentElement : m;
       if (box.nextElementSibling && box.nextElementSibling.classList.contains('mc-fb')) return;
-      var p = document.createElement('p');
+      var p = document.createElement('div');
       p.className = 'mc-fb';
-      p.style.cssText = 'margin:4px 2px 0;text-align:right;font-size:12px;font-style:italic;color:#6b7280';
-      p.innerHTML = 'See any issues? <a href="mailto:feedback@milecheckapp.com?subject=Map%20issue%3A%20' + encodeURIComponent(location.pathname) + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat looks wrong:\n') + '" style="color:inherit;text-decoration:underline">Tell us</a>';
+      p.style.cssText = 'display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin:4px 2px 0;font-size:12px;color:#6b7280';
+      var fb = '<span style="font-style:italic;margin-left:auto">See any issues? <a href="mailto:feedback@milecheckapp.com?subject=Map%20issue%3A%20' + encodeURIComponent(location.pathname) + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat looks wrong:\n') + '" style="color:inherit;text-decoration:underline">Tell us</a></span>';
+      p.innerHTML = (gm && m === gm.getContainer() ? stylePicker() : '') + fb;
       box.insertAdjacentElement('afterend', p);
+      wirePicker(p);
+    });
+  }
+  // Map style picker under the map, bottom left (Leah, 10-25). Esri tiles need no key.
+  var STYLES = {
+    map: { label: 'Map', url: null },
+    satellite: { label: 'Satellite', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', att: 'Imagery: Esri, Maxar, Earthstar Geographics' },
+    terrain: { label: 'Terrain', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', att: 'Esri, USGS' },
+    dark: { label: 'Dark', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', att: 'Esri' }
+  };
+  var baseLayer = null, styleLayer = null;
+  function stylePicker() {
+    return '<span class="mc-style" role="group" aria-label="Map style">' + Object.keys(STYLES).map(function (k) {
+      return '<a href="#" data-style="' + k + '" style="color:inherit;text-decoration:none;padding:6px 4px;display:inline-block;min-height:24px">' + STYLES[k].label + '</a>';
+    }).join('<span aria-hidden="true">·</span>') + '</span>';
+  }
+  function setStyle(k, wrap) {
+    if (!STYLES[k]) k = 'map';
+    if (!baseLayer) gm.eachLayer(function (l) { if (!baseLayer && l instanceof L.TileLayer && !/nexrad/.test(l._url || '')) baseLayer = l; });
+    if (styleLayer) { gm.removeLayer(styleLayer); styleLayer = null; }
+    if (STYLES[k].url) {
+      styleLayer = L.tileLayer(STYLES[k].url, { maxZoom: 19, maxNativeZoom: k === 'dark' ? 16 : 19, attribution: STYLES[k].att, zIndex: 2 }).addTo(gm);
+      if (baseLayer && gm.hasLayer(baseLayer)) gm.removeLayer(baseLayer);
+    } else if (baseLayer && !gm.hasLayer(baseLayer)) baseLayer.addTo(gm);
+    if (wrap) wrap.querySelectorAll('[data-style]').forEach(function (a) {
+      var on = a.getAttribute('data-style') === k;
+      a.style.fontWeight = on ? '700' : '400';
+      a.style.color = on ? '#0f7a4f' : 'inherit';
+      a.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+  function wirePicker(p) {
+    var w = p.querySelector('.mc-style');
+    if (!w) return;
+    var saved = 'map';
+    try { saved = localStorage.getItem('mcMapStyle') || 'map'; } catch (e) {}
+    setStyle(saved, w);
+    w.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-style]');
+      if (!a) return;
+      e.preventDefault();
+      var k = a.getAttribute('data-style');
+      setStyle(k, w);
+      try { localStorage.setItem('mcMapStyle', k); } catch (e2) {}
     });
   }
   if (document.readyState === 'complete') addFeedback(); else window.addEventListener('load', addFeedback);
