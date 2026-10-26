@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-25",
+ "generated": "2026-10-26",
  "families": [
   "home",
   "cameras",
@@ -672,12 +672,6 @@
    "key": "basics:ev-charging-cost",
    "path": "/ev-charging-cost/",
    "title": "How much does it cost to charge an EV in each state?",
-   "sponsor": "house"
-  },
-  {
-   "key": "basics:fleets",
-   "path": "/fleets/",
-   "title": "Mile Markers and State DOT Feeds for Fleet Dispatch",
    "sponsor": "house"
   },
   {
