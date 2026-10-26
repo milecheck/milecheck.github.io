@@ -296,7 +296,7 @@ ${sp.js}
 
 <script>
 const WORKER='https://api.milecheckapp.com';
-const CODE=${JSON.stringify(c.state)};
+const CODE=${JSON.stringify(c.state)};window.mcExtraLayers={state:CODE,fires:false};
 const DOT=${JSON.stringify(c.dot)};
 const CTR=[${c.lat},${c.lon}], RKM=${c.r};
 const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|CT|QEW|BC|ON|AB|M|Loop|\\d)[- ]?\\d*/i;

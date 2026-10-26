@@ -477,7 +477,7 @@ ${sp.js}
 
 <script>
 const WORKER='https://api.milecheckapp.com';
-const CODE=${JSON.stringify(s.code)};
+const CODE=${JSON.stringify(s.code)};window.mcExtraLayers={state:CODE,fires:${['AB','BC','MB','ON','QC'].includes(s.code)?'false':'true'}};
 const DOT=${JSON.stringify(s.dot.split('(')[0].trim())};const MKR=${JSON.stringify(w.markerShort)};
 const PLOWS=${plows};
 // Keep highway + ferry cameras; drop city-street cams (matches the main cameras page).

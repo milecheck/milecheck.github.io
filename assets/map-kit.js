@@ -108,6 +108,48 @@
   // joins them, it starts closed on phones and pulses three times there. It replaces
   // Leaflet's own basemap control (Leah, 10-03: "I don't see a map options. Just the
   // satellite etc options").
+  // Closures and wildfires for maps that only carry their own data (the camera maps).
+  // A page sets window.mcExtraLayers = { state:'WA' } and gets two rows in its layers
+  // panel, both off: closures and crashes from /incidents, and wildfires from /fires,
+  // that state only, prescribed burns left out (site map-layers plan, 10-25).
+  function extraLayers() {
+    var X = window.mcExtraLayers;
+    if (!X || !X.state || !gm) return [];
+    var W = 'https://api.milecheckapp.com', st = X.state;
+    var e = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var clos = L.layerGroup(), fires = L.layerGroup(), out = [];
+    var loaded = {};
+    function once(key, fn) { return function () { if (loaded[key]) return; loaded[key] = 1; fn(); }; }
+    clos.on('add', once('c', function () {
+      fetch(W + '/incidents?state=' + st, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        ((d && d['incident-reports']) || []).forEach(function (r) {
+          var t = r['event-type-id'], sl = ((r.location || {})['start-location']) || {};
+          var txt = String(r.headline || r.description || r['impact-desc'] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+          if (!(t === 'CL' || t === 'AC' || /\b(closed|closure|crash)\b/i.test(txt)) || /\b(ramp|exit|rest area|shoulder)\b/i.test(txt)) return;
+          var la = +sl['start-lat'], lo = +sl['start-long'];
+          if (!isFinite(la) || !isFinite(lo) || (!la && !lo)) return;
+          var rt = ((r.location || {})['route-id'] || '').trim();
+          L.circleMarker([la, lo], { radius: 7, color: '#fff', weight: 1.5, fillColor: '#DC2626', fillOpacity: .95 })
+            .bindPopup('<b>' + e(t === 'AC' ? 'Crash' : 'Closure') + (rt ? ' · ' + e(rt) : '') + '</b><br>' + e(txt.slice(0, 280)) + '<br><span style="color:#8A939B">Source: state DOT via MileCheck</span>')
+            .addTo(clos);
+        });
+      }).catch(function () {});
+    }));
+    fires.on('add', once('f', function () {
+      fetch(W + '/fires', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        ((d && d.fires) || []).forEach(function (x) {
+          if (x.state !== 'US-' + st || x.isRx || !isFinite(x.lat)) return;
+          L.circleMarker([x.lat, x.lon], { radius: Math.min(14, 5 + Math.log10((x.acres || 1) + 1) * 2), color: '#9a3412', weight: 1, fillColor: '#EA580C', fillOpacity: .8 })
+            .bindPopup('<b>' + e(x.name || 'Fire') + '</b><br>' + (x.acres != null ? Math.round(x.acres).toLocaleString() + ' acres' : 'Size not reported') + (x.containedPct != null ? ' · ' + x.containedPct + '% contained' : '') + '<br><span style="color:#8A939B">Source: NIFC via MileCheck</span>')
+            .addTo(fires);
+        });
+      }).catch(function () {});
+    }));
+    out.push({ label: 'Closures and crashes', color: '#DC2626', layer: clos });
+    if (X.fires !== false) out.push({ label: 'Wildfires', color: '#EA580C', layer: fires });
+    return out;
+  }
+
   function buildOptions() {
     var O = window.mcMapOptions || {};
     if (!gm || gm._mcOpts) return;
@@ -153,9 +195,16 @@
       var first = own.querySelector('.co-layer');
       own.insertBefore(lab, first || null);
       lab.querySelector('input').onchange = function (e) { if (e.target.checked) rl.addTo(gm); else gm.removeLayer(rl); };
+      extraLayers().forEach(function (x) {
+        var l2 = document.createElement('label');
+        l2.className = 'co-layer';
+        l2.innerHTML = '<input type="checkbox"><span class="co-sw"></span><span class="co-dot" style="background:' + x.color + '"></span>' + x.label;
+        own.appendChild(l2);
+        l2.querySelector('input').onchange = function (e) { if (e.target.checked) x.layer.addTo(gm); else gm.removeLayer(x.layer); };
+      });
       return;
     }
-    var layers = (O.layers || []).filter(function (l) { return l && l.layer; });
+    var layers = (O.layers || []).concat(window.mcMapOptions ? [] : extraLayers()).filter(function (l) { return l && l.layer; });
     // Weather radar on every map, off by default (Leah, 10-24). Same NEXRAD composite the
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
     layers.unshift({ label: 'Weather radar', color: '#2563EB', layer: radarLayer() });
