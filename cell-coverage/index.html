@@ -5,10 +5,10 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Where is there no cell service on the highway? | MileCheck</title>
+  <title>Where do cell carriers report no 4G coverage on the highway? | MileCheck</title>
   <meta name="description" content="Map of highways in Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming colored by how many carriers (AT&T, T-Mobile, Verizon) report 4G coverage in a moving vehicle at each mile marker. FCC National Broadband Map, December 2025 data.">
 
-  <meta property="og:title" content="Where is there no cell service on the highway? | MileCheck">
+  <meta property="og:title" content="Where do cell carriers report no 4G coverage on the highway? | MileCheck">
   <meta property="og:description" content="Highways colored by how many carriers report in-vehicle 4G coverage, mile marker by mile marker.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cell-coverage/">
@@ -93,6 +93,9 @@
     .cc-filter span{font-weight:800;font-size:13px;width:100%;}
     .cc-filter button{font:600 13.5px Inter,sans-serif;min-height:44px;padding:0 14px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;cursor:pointer;}
     .cc-filter button[aria-pressed="true"]{background:#0E1116;color:#fff;border-color:#0E1116;}
+    .cc-src{color:#5b6670;font-size:13px;line-height:1.5;margin-top:8px;max-width:78ch;}
+    .gr-key small{flex-basis:100%;font-weight:500;color:#5b6670;line-height:1.45;}
+    @media(max-width:860px){.cl-side{display:contents;}.cl-wrap>.cl-mapbox{order:3;}.state-sel{order:0;}.cc-filter{order:1;}.gr-key{order:2;}.cl-list{order:4;}.cl-cta{order:5;}}
     .cc-caveat{border-left:4px solid #f59e0b;background:#FFFBEB;padding:10px 14px;border-radius:8px;font-size:14px;line-height:1.55;color:#3b3f45;max-width:78ch;margin-top:12px;}
   /* spon:css */
     .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;width:100%;max-width:100%;flex-shrink:0;align-self:stretch;grid-column:1/-1;}
@@ -114,7 +117,6 @@
 /* /spon:css */
   </style>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
-  <link rel="canonical" href="https://milecheckapp.com/grades/">
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
   <link rel="stylesheet" href="/assets/map-kit.css?v=20261026c">
   <script src="/assets/map-kit.js?v=20261026c" defer></script>
@@ -155,9 +157,10 @@
     </a>
   </aside>
 <!-- spon:end -->
-<h1>Where is there no cell service on the highway?</h1>
-    <p class="sub">Red is a highway stretch where no carrier (AT&amp;T, T-Mobile, Verizon) reports in-vehicle 4G coverage. Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming.</p>
-    <p class="cc-caveat"><b>Carrier-reported and approximate. US only.</b> <a href="#about">What this means</a> · <a href="https://broadbandmap.fcc.gov/" target="_blank" rel="noopener">FCC National Broadband Map</a>, December 31, 2025 filing.</p>
+<h1>Where do cell carriers report no 4G coverage on the highway?</h1>
+    <p class="sub">Red marks a highway stretch where none of AT&amp;T, T-Mobile or Verizon reports 4G LTE coverage for a moving vehicle in its FCC filing. It does not mean your phone will have no signal. Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming.</p>
+    <p class="cc-caveat"><b>Carrier-reported and approximate.</b> Coverage is checked only at each mile marker. 5G-only and regional carriers are not counted. <a href="#about">What this means</a></p>
+    <p class="cc-src">Source: <a href="https://broadbandmap.fcc.gov/data-download/nationwide-data" target="_blank" rel="noopener">FCC National Broadband Map</a>, mobile broadband availability as of December 31, 2025, 4G LTE, in-vehicle. Processed by MileCheck October 26, 2026.</p>
   </div>
 
   <div class="cl-wrap">
@@ -184,7 +187,7 @@
       </div>
       <div class="cl-cta">
         <h3>Mile markers keep working without signal.</h3>
-        <p>MileCheck bundles mile marker data for all 50 states on the phone, so your nearest mile marker still shows in a dead zone. That is the first thing dispatch asks for.</p>
+        <p>MileCheck keeps mile marker data for all 50 states on the phone, so your nearest mile marker still shows with no signal. That is the first thing dispatch asks for.</p>
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cell-coverage&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcell-coverage" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>
@@ -192,8 +195,8 @@
   </div>
 
   <div class="cl-notes" id="about">
-    <p><b>What this means.</b> These are the coverage maps each carrier files with the FCC, not measured signal. Carriers miss real signal in places and claim signal that is not there in others, and mountain passes are where the maps are weakest. Red means no carrier reports coverage, not that your phone will have none.</p>
-    <p><b>How this was built.</b> For every mile marker in the MileCheck milepost data in these states, we looked up the H3 hexagon (about 0.1 square kilometer) that contains it in each carrier's FCC filing, and kept only the "in a moving vehicle" layer at 4G LTE 5/1 Mbps. A road segment takes the color of the mile marker it starts at, so a short gap between two markers can hide a dead spot. 5G-only coverage is not counted. Regional carriers are not shown.</p>
+    <p><b>What this means.</b> These are the coverage maps each carrier files with the FCC, not measured signal. Carriers miss real signal in places and claim signal that is not there in others, and mountain passes are where the maps are weakest. Red means none of the three carriers reports coverage, not that your phone will have none. You may still reach 911 through another carrier's network, a regional carrier or satellite messaging.</p>
+    <p><b>How this was built.</b> For every mile marker in the MileCheck milepost data in these states, we looked up the H3 hexagon (about 0.1 square kilometer) that contains it in each carrier's FCC filing, and kept only the "in a moving vehicle" layer at 4G LTE 5/1 Mbps. The lines between mile markers are drawn in the color of the marker they start at. They are not a survey of the whole road, and a short gap between two markers can hide a stretch with no reported coverage. 5G-only coverage is not counted. Regional carriers are not shown.</p>
     <p><b>States mapped so far:</b> Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming. More states are coming. If you know a stretch where the map is wrong, tell us at <a href="mailto:feedback@milecheckapp.com">feedback@milecheckapp.com</a>. You can also challenge a carrier's map with the FCC on the <a href="https://broadbandmap.fcc.gov/" target="_blank" rel="noopener">National Broadband Map</a>.</p>
     <p><b>Related:</b> <a href="/contact-help-no-cell-signal/">How to contact help with no cell signal</a> · <a href="/maps/mile-markers/">Mile marker map</a> · <a href="/passes/">Mountain pass conditions</a> · <a href="/road-conditions/">Road conditions map</a></p>
   </div>
@@ -240,7 +243,7 @@
 <script>
 const map=L.map('clmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true,preferCanvas:true});
 const ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
-const ATTR='Esri, USGS · coverage: FCC National Broadband Map (December 2025), carrier-reported';
+const ATTR='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community · Coverage: FCC National Broadband Map (December 2025), carrier-reported';
 L.tileLayer(ESRI+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:ATTR,maxZoom:14}).addTo(map);
 window.mcMapOptions={layers:[]};
 const SB={"WA": [45.54, -124.85, 49, -116.91], "OR": [41.99, -124.57, 46.29, -116.46], "ID": [42, -117.24, 49, -111.04], "MT": [44.36, -116.05, 49, -104.04], "NV": [35, -120.01, 42, -114.04], "WY": [40.99, -111.06, 45.01, -104.05], "UT": [37, -114.05, 42, -109.04]};
@@ -258,10 +261,11 @@ const bits=m=>(m&1)+((m>>1)&1)+((m>>2)&1);
 // One carrier picked: covered or not. All three: how many report.
 function lvl(m){return CF===7?bits(m):((m&CF)?3:0);}
 const COL=['#dc2626','#f59e0b','#84cc16','#15803d'];
+const NOTE='<small>In-vehicle 4G LTE, checked at each mile marker. Lines between markers take the color of the first marker.</small>';
 function key(){
   document.getElementById('key').innerHTML=CF===7
-    ?'<span><i style="background:#dc2626"></i>No carrier reports coverage</span><span><i style="background:#f59e0b"></i>1 carrier</span><span><i style="background:#84cc16"></i>2 carriers</span><span><i style="background:#15803d"></i>All 3</span>'
-    :`<span><i style="background:#dc2626"></i>${CN[CF]} reports no coverage</span><span><i style="background:#15803d"></i>${CN[CF]} reports coverage</span>`;
+    ?'<span><i style="background:#dc2626"></i>0 of 3 report 4G</span><span><i style="background:#f59e0b"></i>1 of 3</span><span><i style="background:#84cc16"></i>2 of 3</span><span><i style="background:#15803d"></i>3 of 3</span>'+NOTE
+    :`<span><i style="background:#dc2626"></i>${CN[CF]} reports no 4G</span><span><i style="background:#15803d"></i>${CN[CF]} reports 4G</span>`+NOTE;
 }
 function miles(a,b){const R=3958.8,r=Math.PI/180,x=(b[2]-a[2])*r*Math.cos((a[1]+b[1])/2*r),y=(b[1]-a[1])*r;return R*Math.hypot(x,y);}
 function who(m){const o=[1,2,4].filter(b=>m&b).map(b=>CN[b]);return o.length?o.join(', '):'None of the three';}
@@ -282,21 +286,22 @@ function draw(){
 }
 // Runs of consecutive "no coverage" segments, for the list.
 function runs(){const out=[];for(const st of Object.keys(D)){if(sel.value&&st!==sel.value)continue;
-  for(const[route,ps]of Object.entries(D[st])){let s=null;
+  for(const[route,ps]of Object.entries(D[st])){let s=null,si=0;
     for(let i=0;i<ps.length;i++){const p=ps[i],ok=lvl(p[3])>0,jump=i>0&&(p[0]-ps[i-1][0]>3||miles(ps[i-1],p)>4);
-      if(s&&(ok||jump)){const e=ps[i-1];if(!jump&&ok)out.push({st,route,a:s,b:p});else out.push({st,route,a:s,b:e});s=null;}
-      if(!ok&&!s)s=p;}
-    if(s)out.push({st,route,a:s,b:ps[ps.length-1]});}}
+      if(s&&(ok||jump)){const e=ps[i-1];if(!jump&&ok)out.push({st,route,a:s,b:p,pts:ps.slice(si,i+1)});else out.push({st,route,a:s,b:e,pts:ps.slice(si,i)});s=null;}
+      if(!ok&&!s){s=p;si=i;}}
+    if(s)out.push({st,route,a:s,b:ps[ps.length-1],pts:ps.slice(si)});}}
   out.forEach(r=>r.len=Math.round(Math.abs(r.b[0]-r.a[0])*10)/10);return out.filter(r=>r.len>=2);}
 function render(){
   const bs=document.getElementById('bigStatus');
   if(LOAD==='loading'){bs.hidden=false;bs.textContent='Loading coverage…';return;}
   if(LOAD==='failed'){bs.hidden=false;bs.textContent="Couldn't load the coverage data. Try reloading.";
     document.getElementById('clRows').innerHTML='<div class="cl-empty" style="color:#5b6670">Coverage data didn\'t load<small>This is a loading problem, not an empty map. Reload the page to try again.</small></div>';return;}
-  bs.hidden=true;
+  if(MISSING.length){bs.hidden=false;bs.textContent="Couldn't load "+MISSING.map(s=>NAMES[s]).join(', ')+'. Those highways are not drawn. Reload to try again.';}
+  else bs.hidden=true;
   const b=map.getBounds();
-  const list=runs().filter(r=>b.contains([r.a[1],r.a[2]])||b.contains([r.b[1],r.b[2]])).sort((x,y)=>y.len-x.len);
-  const what=CF===7?'no carrier reports coverage':CN[CF]+' reports no coverage';
+  const list=runs().filter(r=>b.intersects(L.latLngBounds(r.pts.map(p=>[p[1],p[2]])))).sort((x,y)=>y.len-x.len);
+  const what=CF===7?'none of the 3 carriers reports 4G':CN[CF]+' reports no 4G';
   document.getElementById('listHead').textContent=list.length+' stretch'+(list.length===1?'':'es')+' in view where '+what+', longest first';
   const rows=document.getElementById('clRows');
   if(!list.length){rows.innerHTML='<div class="cl-empty">None in view<small>Only stretches of 2 or more miles are listed. Zoom out or pick another state.</small></div>';return;}
@@ -309,8 +314,9 @@ document.querySelectorAll('.cc-filter button').forEach(btn=>btn.onclick=()=>{
 sel.onchange=()=>{const c=sel.value;draw();if(!c){map.fitBounds([[37,-124.8],[49,-104]]);return;}const b=SB[c];map.flyToBounds([[b[0],b[1]],[b[2],b[3]]],{duration:.9});};
 map.on('moveend',render);
 key();
-Promise.all(STATES.map(s=>fetch('/data/cell-coverage/'+s+'.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{D[s]=d.routes;SEG[s]=segs(s);})))
-  .then(()=>{LOAD='ok';draw();render();}).catch(()=>{LOAD='failed';render();});
+let MISSING=[];
+Promise.allSettled(STATES.map(s=>fetch('/data/cell-coverage/'+s+'.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{D[s]=d.routes;SEG[s]=segs(s);})))
+  .then(res=>{MISSING=STATES.filter((s,i)=>res[i].status!=='fulfilled');LOAD=MISSING.length===STATES.length?'failed':'ok';draw();render();});
 (function(){const btn=document.getElementById('nearMe'),bs=document.getElementById('bigStatus');L.DomEvent.disableClickPropagation(btn);
   btn.onclick=()=>{if(!navigator.geolocation||!window.isSecureContext){bs.hidden=false;bs.textContent="Location isn't available in this browser. Pick a state.";return;}
     btn.disabled=true;navigator.geolocation.getCurrentPosition(p=>{btn.disabled=false;if(sel.value){sel.value='';draw();}map.setView([p.coords.latitude,p.coords.longitude],9);},
