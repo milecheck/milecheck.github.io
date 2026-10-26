@@ -159,6 +159,106 @@ const PASSES = [
       ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. The map draws each one as an arrow pointing the way it is heading. Parked trucks are listed too.`],
     ],
   },
+  // ---- PNW winter additions (2026-10-25, Mile Check Maps session) ----
+  // Summit coordinates and elevations: WSDOT/ODOT/ITD pass pages and USGS GNIS.
+  // SNOTEL triplets, elevations and coordinates read from the NRCS AWDB API 2026-10-25.
+  // Avalanche centers checked on api.avalanche.org 2026-10-25 (NWAC Mt Hood zone, COAA, IPAC).
+  {
+    slug: 'mt-hood', name: 'Government Camp (Mt Hood)', route: 'US-26', state: 'OR', stateName: 'Oregon',
+    dot: 'ODOT', lat: 45.3029, lon: -121.7421, r: 30, elev: '3,980 ft', dist: '~55 mi', distNote: 'east of Portland on US-26',
+    range: 'Cascade Range', markerLabel: 'Government Camp · 3,980 ft',
+    hero: `Live ODOT cameras and road alerts on US-26 through Government Camp and OR-35 toward Mt Hood Meadows. This is the drive from Portland to Timberline, Skibowl and Meadows.`,
+    closes: `US-26 rarely closes for long, but chains or traction tires are often required over Government Camp in a storm, and crashes on the climb from Rhododendron stop traffic both ways. OR-35 over Bennett Pass to Meadows sees the same requirements. Check the cameras before you leave Sandy.`,
+    extra: { h: 'Ski traffic and Sno-Parks', p: `Weekend mornings bring Portland ski traffic into Government Camp all at once. Oregon also requires a Sno-Park permit to park at most winter lots on the mountain from November through April. To check whether Hood is out before you go, see <a href="../../mountains/hood/">Is Mt Hood out?</a>` },
+    snow: { station: '651:OR:SNTL', stationName: 'Mt Hood Test Site', stationElev: '5,380 ft', stationNote: 'near Mt Hood Meadows, about 1,400 feet above Government Camp', avyCenter: 'NWAC', title: 'Snow on Mt Hood',
+      resort: { name: 'Mt Hood Meadows', site: 'https://www.skihood.com/' } },
+    faq: [
+      ['Is US-26 to Mt Hood open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-26 and OR-35 from ODOT. See every camera on the <a href="../../cameras/oregon/">Oregon cameras page</a>.`],
+      ['Do I need chains to drive to Mt Hood?', `ODOT sets chain and traction tire requirements over Government Camp and posts them on signs and TripCheck. Carry chains from November through March.`],
+      ['How far is Mt Hood from Portland?', `Government Camp is about 55 miles east of Portland on US-26, roughly an hour and a quarter in good weather.`],
+      ['How much snow is on Mt Hood right now?', `The snow block above reads the USDA SNOTEL station near Mt Hood Meadows at 5,380 feet, updated hourly. Resort pages: <a href="../../ski/mt-hood-meadows/">Mt Hood Meadows</a> and <a href="../../ski/timberline/">Timberline</a>.`],
+    ],
+  },
+  {
+    slug: 'santiam', name: 'Santiam Pass', route: 'US-20', state: 'OR', stateName: 'Oregon',
+    dot: 'ODOT', lat: 44.4258, lon: -121.8547, r: 30, elev: '4,817 ft', dist: '~40 mi', distNote: 'northwest of Bend on US-20',
+    range: 'Cascade Range',
+    hero: `Live ODOT cameras and road alerts on US-20 over Santiam Pass, the main winter route between the Willamette Valley and Bend. Hoodoo ski area sits at the summit.`,
+    closes: `Santiam Pass is one of Oregon's busiest Cascade crossings in winter. ODOT often requires chains or traction tires at the summit during storms, and crashes on the grades on either side can close the highway for hours. OR-22 from Salem joins US-20 at Santiam Junction, west of the summit.`,
+    extra: { h: 'Hoodoo and the summit', p: `Hoodoo's turnoff is right at the summit, so ski traffic merges with freight there on winter weekends.` },
+    snow: { station: '526:OR:SNTL', stationName: 'Hogg Pass', stationElev: '4,800 ft', stationNote: 'about half a mile from the summit', avyCenter: 'COAA', title: 'Snow at Santiam Pass',
+      resort: { name: 'Hoodoo', site: 'https://www.hoodoo.com/' } },
+    faq: [
+      ['Is Santiam Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-20 near the summit, from ODOT. See every camera on the <a href="../../cameras/oregon/">Oregon cameras page</a>.`],
+      ['Are chains required on Santiam Pass?', `ODOT sets chain requirements at the summit and posts them on signs and TripCheck. They change quickly in a storm.`],
+      ['How high is Santiam Pass?', `The summit is 4,817 feet on US-20. Compare <a href="../willamette/">Willamette Pass</a> on OR-58 to the south.`],
+      ['How far is Santiam Pass from Bend?', `About 40 miles northwest on US-20 through Sisters.`],
+    ],
+  },
+  {
+    slug: 'willamette', name: 'Willamette Pass', route: 'OR-58', state: 'OR', stateName: 'Oregon',
+    dot: 'ODOT', lat: 43.5916, lon: -122.0377, r: 30, elev: '5,128 ft', dist: '~69 mi', distNote: 'southeast of Eugene on OR-58',
+    range: 'Cascade Range',
+    hero: `Live ODOT cameras and road alerts on OR-58 over Willamette Pass, the route from Eugene to US-97 and the Willamette Pass ski area.`,
+    closes: `OR-58 is a major freight route between I-5 and US-97, so storms here bring chain requirements and truck spinouts on the grades. The summit is higher than Santiam Pass and holds snow longer into spring.`,
+    extra: { h: 'Ski area at the summit', p: `Willamette Pass Resort sits on OR-58 at the summit. Salt Creek Falls and the Gold Lake Sno-Park are nearby winter stops.` },
+    snow: { station: '729:OR:SNTL', stationName: 'Salt Creek Falls', stationElev: '4,220 ft', stationNote: 'about 4 miles west of the summit and 900 feet below it', avyCenter: 'COAA', title: 'Snow at Willamette Pass',
+      resort: { name: 'Willamette Pass Resort', site: 'https://www.willamettepass.ski/' } },
+    faq: [
+      ['Is Willamette Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on OR-58 near the summit, from ODOT. See the <a href="../../cameras/oregon/">Oregon cameras page</a>.`],
+      ['Are chains required on Willamette Pass?', `ODOT sets chain requirements on OR-58 and posts them on signs and TripCheck.`],
+      ['How high is Willamette Pass?', `The summit is 5,128 feet on OR-58. Compare <a href="../santiam/">Santiam Pass</a> to the north.`],
+      ['How far is Willamette Pass from Eugene?', `About 69 miles southeast on OR-58 through Oakridge.`],
+    ],
+  },
+  {
+    slug: 'lookout', name: 'Lookout Pass', route: 'I-90', state: 'ID', states: ['ID', 'MT'], stateName: 'Idaho and Montana',
+    dot: 'ITD and MDT', lat: 47.4567, lon: -115.6967, r: 30, elev: '4,710 ft', dist: '~105 mi', distNote: 'east of Spokane on I-90',
+    range: 'Bitterroot Range',
+    hero: `Live cameras and road alerts on I-90 over Lookout Pass on the Idaho and Montana line, from ITD and MDT. Lookout Pass Ski Area sits right off the interstate at the summit.`,
+    closes: `Lookout Pass is a steep freight climb on I-90, and winter storms bring chain requirements for trucks and slow traffic on both grades. Fourth of July Pass, west of Coeur d'Alene, is a lower climb on the same drive.`,
+    extra: { h: 'Freight and ski traffic', p: `I-90 here is the main truck route between the Northwest and Montana. The ski area exit is at the summit, so skiers merge with freight at the top of the grade.` },
+    snow: { station: '594:ID:SNTL', stationName: 'Lookout', stationElev: '5,180 ft', stationNote: 'less than a mile from the summit', avyCenter: 'IPAC', title: 'Snow at Lookout Pass',
+      resort: { name: 'Lookout Pass Ski Area', site: 'https://skilookout.com/' } },
+    faq: [
+      ['Is I-90 over Lookout Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on I-90 near the summit, from ITD and MDT. See the <a href="../../cameras/idaho/">Idaho cameras page</a>.`],
+      ['Are chains required on Lookout Pass?', `Idaho and Montana set chain requirements for commercial vehicles on I-90 in winter storms and post them on signs and 511.`],
+      ['How high is Lookout Pass?', `The summit is 4,710 feet on I-90 at the Idaho and Montana line.`],
+      ['How far is Lookout Pass from Spokane?', `About 105 miles east on I-90 through Coeur d'Alene and Wallace.`],
+    ],
+  },
+  {
+    slug: 'white', name: 'White Pass', route: 'US-12', state: 'WA', stateName: 'Washington',
+    dot: 'WSDOT', lat: 46.6378, lon: -121.3906, r: 30, elev: '4,500 ft', dist: '~55 mi', distNote: 'west of Yakima on US-12',
+    range: 'Cascade Range',
+    hero: `Live WSDOT cameras and road alerts on US-12 over White Pass, the southern Cascade crossing between Yakima and I-5. White Pass ski area sits at the summit.`,
+    closes: `WSDOT often requires traction tires or chains at the summit in storms, and US-12 can close for avalanche control or collisions. Chinook and Cayuse passes to the north close for the winter, so White Pass is the only open crossing south of Snoqualmie near Rainier.`,
+    extra: { h: 'Ski area at the summit', p: `The ski area is right at the summit, so winter weekends bring Yakima and Tri-Cities traffic to the top of the pass. Rainier is in view from the top. See <a href="../../mountains/rainier/">Is Rainier out?</a>` },
+    snow: { station: '863:WA:SNTL', stationName: 'White Pass E.S.', stationElev: '4,440 ft', stationNote: 'about half a mile from the summit', avyCenter: 'NWAC', title: 'Snow at White Pass',
+      resort: { name: 'White Pass', site: 'https://skiwhitepass.com/' } },
+    faq: [
+      ['Is White Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-12 near the summit, from WSDOT. See <a href="../../seasonal/chinook-pass/">Chinook Pass</a> for the winter closure to the north.`],
+      ['Are chains required on White Pass?', `WSDOT sets traction and chain requirements at the summit and posts them on signs and its pass report.`],
+      ['How high is White Pass?', `The summit is about 4,500 feet on US-12. Compare <a href="../stevens/">Stevens</a> and <a href="../snoqualmie/">Snoqualmie</a>.`],
+      ['How far is White Pass from Yakima?', `About 55 miles west on US-12.`],
+    ],
+  },
+  {
+    slug: 'mt-baker-highway', name: 'Mt Baker Highway', route: 'SR-542', state: 'WA', stateName: 'Washington',
+    dot: 'WSDOT', lat: 48.8616, lon: -121.6797, r: 30, elev: '4,200 ft', dist: '~56 mi', distNote: 'east of Bellingham on SR-542',
+    range: 'Cascade Range', markerLabel: 'Mt Baker Ski Area · 4,200 ft',
+    hero: `Live WSDOT cameras and road alerts on SR-542, the Mt Baker Highway from Bellingham through Glacier to the Mt Baker Ski Area.`,
+    closes: `SR-542 is plowed to the ski area all winter. The last miles past the ski area to Artist Point close for the season, usually from fall until midsummer. Above Glacier the road is narrow and winding, and WSDOT often requires traction tires or chains in storms.`,
+    extra: { h: 'Before you leave Glacier', p: `Glacier is the last town with services on the way up. Cell coverage is spotty above it. WSDOT runs no traffic cameras on SR-542 (checked October 2026), so the map shows alerts only. To see whether Baker is out today, use the <a href="../../mountains/baker/">Mt Baker view page</a>.` },
+    snow: { station: '909:WA:SNTL', stationName: 'Wells Creek', stationElev: '4,040 ft', stationNote: 'about 6 miles west of the ski area', avyCenter: 'NWAC', title: 'Snow on Mt Baker',
+      resort: { name: 'Mt Baker Ski Area', site: 'https://www.mtbaker.us/' } },
+    faq: [
+      ['Is the Mt Baker Highway open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on SR-542 from WSDOT. The road past the ski area to Artist Point closes seasonally. See <a href="../../seasonal/artist-point/">Artist Point</a>.`],
+      ['Do I need chains to drive to Mt Baker?', `WSDOT sets traction and chain requirements on SR-542 above Glacier in winter and posts them on signs.`],
+      ['How far is Mt Baker Ski Area from Bellingham?', `About 56 miles east on SR-542, roughly 75 minutes in good weather.`],
+      ['How much snow is at Mt Baker right now?', `The snow block above reads the USDA SNOTEL station at Wells Creek, 4,040 feet. See the <a href="../../ski/mt-baker/">Mt Baker ski page</a> and the <a href="../../mountains/baker/">Mt Baker view page</a>.`],
+    ],
+  },
 ];
 
 // ---- Mountain-area pages (2026-09-24, Leah) ---------------------------------
@@ -223,7 +323,7 @@ const AREAS = [
     ],
     vis: { h: 'Is Mount Rainier visible right now?', p: `Whether the road is open and whether you can see the mountain are different questions. The visibility page reads the cloud ceilings between you and the summit and answers the second one for Seattle, Tacoma and the rest of the region, with a three-day forecast.`, href: '../', cta: 'Check visibility now' },
     ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on SR 706, SR 410 and US 12, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
-    related: (up) => `<a href="../">Is Mount Rainier visible right now?</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+    related: (up) => `<a href="../">Is Mount Rainier visible right now?</a> · <a href="${up}passes/white/">White Pass</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
     kind: 'area', slug: 'hood-roads', out: 'mountains/hood/roads', up: '../../../',
@@ -264,7 +364,7 @@ const AREAS = [
     ],
     vis: { h: 'Is Mount Hood visible right now?', p: `Whether the road is open and whether you can see the mountain are different questions. The visibility page reads the cloud ceilings between you and the summit and answers the second one for Portland, Hood River and the rest of the region, with a three-day forecast.`, href: '../', cta: 'Check visibility now' },
     ctaH: 'Take it with you', ctaP: `MileCheck shows your exact mile marker in real time on US 26 and OR 35, plus the nearest camera and any alert on your route. Runs on CarPlay and Android Auto. The mile marker works without a signal.`,
-    related: (up) => `<a href="../">Is Mount Hood visible right now?</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+    related: (up) => `<a href="../">Is Mount Hood visible right now?</a> · <a href="${up}passes/mt-hood/">US-26 to Government Camp</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
     kind: 'area', slug: 'angeles-roads', out: 'mountains/angeles/roads', up: '../../../',
@@ -359,7 +459,7 @@ const AREAS = [
     ],
     vis: { h: 'Is Mount Baker visible right now?', p: `Whether SR 542 is open and whether you can see Mount Baker are different questions. The <a href="../">visibility page</a> reads the cloud ceilings between you and the summit and answers the second one for Vancouver, Bellingham and the rest of the region.`, href: '../', cta: 'Check visibility now' },
     ctaH: 'MileCheck on SR 542', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
-    related: (up) => `<a href="../">Is Mount Baker visible right now?</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+    related: (up) => `<a href="../">Is Mount Baker visible right now?</a> · <a href="${up}passes/mt-baker-highway/">Mt Baker Highway</a> · <a href="${up}passes/">mountain passes</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
   {
     kind: 'area', slug: 'sthelens-roads', out: 'mountains/sthelens/roads', up: '../../../',
@@ -659,7 +759,7 @@ function page(p){
   const segs = p.segs || [{ h: 'When it closes', p: p.closes }, p.extra];
   const segsHtml = segs.map(s=>`    <div class="co-seg"><h3>${s.h}</h3>${s.html || `<p>${s.p}</p>`}</div>`).join('\n');
   const relatedHtml = typeof p.related === 'function' ? p.related(up)
-    : `More passes &amp; routes: <a href="../">all mountain passes</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}maps/">all maps</a>`;
+    : `More passes &amp; routes: ${PASSES.filter(q=>q!==p&&(q.state===p.state||q.route===p.route)).map(q=>`<a href="../${q.slug}/">${q.name}</a>`).join(' · ')}${PASSES.some(q=>q!==p&&(q.state===p.state||q.route===p.route))?' · ':''}<a href="../">all mountain passes</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}maps/">all maps</a>`;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1004,8 +1104,8 @@ function bust(u){return u+(u.includes('?')?'&':'?')+'t='+Date.now();}
 function camCard(c,i){const nav=(i!=null&&CAMS.length>1)?'<div class="cc-nav"><button type="button" class="cc-prev">&lsaquo; Prev</button><span class="cc-count">'+(i+1)+' / '+CAMS.length+'</span><button type="button" class="cc-next">Next &rsaquo;</button></div>':'';return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||PASS.route)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+(c.src||'${p.dot}')+(c.park?' · '+esc(c.park):'')+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust(c.img)+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>'+nav;}
 function showCamAt(i){const n=((i%CAMS.length)+CAMS.length)%CAMS.length;const c=CAMS[n];showCard(camCard(c,n),false,n);selectCamMarker(camMarkers[n]);map.panTo([c.lat,c.lon]);}
 function fireCard(f){return '<div class="cc-title">'+esc(f.name)+(f.rx?' (prescribed burn)':'')+'</div><div class="cc-meta">'+(f.acres!=null?Math.round(f.acres).toLocaleString()+' acres · ':'')+(f.pct!=null?f.pct+'% contained · ':'')+f.dist.toFixed(0)+' mi away'+'</div>';}
-function alrTitle(a){var t=a.title||'',d=a.desc||'';if(d&&t&&d.indexOf(t.replace(/\.$/,''))===0){return {CL:'Closure',RW:'Roadwork',AC:'Crash',WE:'Weather',HZ:'Hazard'}[a.type]||(/lane|width|restrict/i.test(d)?'Lane restriction':'Road alert');}return t;}
-function alrRoute(a){var r=a.route||PASS.route,m=/^SR[ -]?(\d+)$/.exec(r||''),p=/^I-(\d+)$/.exec(PASS.route||'');return m&&p&&m[1]===p[1]?PASS.route:r;}
+function alrTitle(a){var t=a.title||'',d=a.desc||'';if(d&&t&&d.indexOf(t.replace(/\\.$/,''))===0){return {CL:'Closure',RW:'Roadwork',AC:'Crash',WE:'Weather',HZ:'Hazard'}[a.type]||(/lane|width|restrict/i.test(d)?'Lane restriction':'Road alert');}return t;}
+function alrRoute(a){var r=a.route||PASS.route,m=/^SR[ -]?(\\d+)$/.exec(r||''),p=/^I-(\\d+)$/.exec(PASS.route||'');return m&&p&&m[1]===p[1]?PASS.route:r;}
 function alrCard(a){var pl=!liveNow(a)&&a.t0>Date.now();return (pl?'<div class="cc-meta" style="color:#92400e;font-weight:700">Planned, not in effect now. Starts '+new Date(a.t0).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</div>':'')+'<div class="cc-title">'+esc(alrTitle(a))+'</div><div class="cc-meta">'+esc(alrRoute(a))+mpText(a)+'</div>'+(a.desc&&a.desc!==alrTitle(a)?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
 function fmtIn(v){return (v==null||!isFinite(v))?'—':(Math.round(v*10)/10)+' in';}
 function stamp(d){const pad=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}

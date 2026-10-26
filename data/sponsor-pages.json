@@ -2919,6 +2919,24 @@
    "sponsor": "house"
   },
   {
+   "key": "pass:lookout",
+   "path": "/passes/lookout/",
+   "title": "Lookout Pass Camera & Conditions Right Now (I-90)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:mt-baker-highway",
+   "path": "/passes/mt-baker-highway/",
+   "title": "Mt Baker Highway Camera & Conditions Right Now (SR-542)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:mt-hood",
+   "path": "/passes/mt-hood/",
+   "title": "Government Camp (Mt Hood) Camera & Conditions Right Now (US-26)",
+   "sponsor": "house"
+  },
+  {
    "key": "pass:parleys",
    "path": "/passes/parleys/",
    "title": "Parleys Summit Camera & Conditions Right Now (I-80)",
@@ -2928,6 +2946,12 @@
    "key": "pass:rainier-roads",
    "path": "/mountains/rainier/roads/",
    "title": "Mount Rainier road cameras and conditions right now",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:santiam",
+   "path": "/passes/santiam/",
+   "title": "Santiam Pass Camera & Conditions Right Now (US-20)",
    "sponsor": "house"
   },
   {
@@ -3342,6 +3366,18 @@
    "key": "pass:vail",
    "path": "/passes/vail/",
    "title": "Vail Pass Camera & Conditions Right Now (I-70)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:white",
+   "path": "/passes/white/",
+   "title": "White Pass Camera & Conditions Right Now (US-12)",
+   "sponsor": "house"
+  },
+  {
+   "key": "pass:willamette",
+   "path": "/passes/willamette/",
+   "title": "Willamette Pass Camera & Conditions Right Now (OR-58)",
    "sponsor": "house"
   }
  ]
