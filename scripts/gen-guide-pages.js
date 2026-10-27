@@ -713,6 +713,8 @@ GUIDES.push(...require('./guides/fall-drives-2026-10-02.cjs'));
 GUIDES.push(...require('./guides/parking-brake-2026-10-03.cjs'));
 // Move Over laws, 2026-10-03 (ChatGPT copy from Claude's sourced brief, numbers checked by Claude).
 GUIDES.push(...require('./guides/move-over-laws-2026-10-03.cjs'));
+// Late-November corridor pages for Thanksgiving 2026 (sourced brief, ChatGPT copy).
+GUIDES.push(...require('./guides/late-november-2026-10-27.cjs'));
 
 // Language-aware routing (2026-09-25). A guide object may carry lang:'fr' (or 'es', …).
 // Identity is lang+slug: English lives at /<slug>/, others at /<lang>/<slug>/.

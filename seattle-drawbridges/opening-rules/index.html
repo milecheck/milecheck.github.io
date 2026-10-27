@@ -181,7 +181,20 @@
     var t=document.getElementById('sd-checked'); if(t){t.textContent=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit'})+' Pacific';}
   }
   function fail(){document.querySelectorAll('[data-kv]').forEach(function(el){el.className=el.className.replace(/\bWAIT\b/,'')+' NONE';el.textContent=el.classList.contains('sd-v')?'NO SIGNAL':'no signal';});document.querySelectorAll('[data-line]').forEach(function(el){el.textContent='Could not reach the status feed. Nothing here is a reading.';});}
-  function go(){fetch("https://api.milecheckapp.com/bridge-status",{cache:'no-store'}).then(function(r){return r.json();}).then(paint).catch(fail);}
+  // One free live check a day on the web, same as Mountain Visibility (Leah, 2026-10-27). The first
+  // bridge page a visitor opens each day shows live status and keeps refreshing. Every other page that
+  // day points to the app. localStorage only, so a private window resets it. The rules on each page
+  // stay readable for everyone; only the live up/down is held back.
+  var FREE='sdFreeCheck', TODAY=new Date().toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'}), PAGE=location.pathname, used=null;
+  try{used=JSON.parse(localStorage.getItem(FREE)||'null');}catch(e){}
+  if(used&&used.day===TODAY&&used.path!==PAGE){
+    document.querySelectorAll('[data-kv]').forEach(function(el){el.className=el.className.replace(/(UP|DOWN|NONE|WAIT)/g,'')+' NONE';el.textContent=el.classList.contains('sd-v')?'IN THE APP':'in the app';});
+    document.querySelectorAll('[data-line]').forEach(function(el){el.innerHTML='One live check is free here each day. Get the rest in Seattle Drawbridges. <a href="https://milecheckapp.com/get/drawbridges/?utm_source=web&amp;utm_medium=limit&amp;utm_campaign=free-check" class="btn btn-primary" style="margin-top:12px;display:inline-block;">Get the app</a>';});
+    var n=document.getElementById('sd-count'); if(n){n.textContent='Live status in the app';}
+    return;
+  }
+  try{localStorage.setItem(FREE,JSON.stringify({day:TODAY,path:PAGE}));}catch(e){}
+  function go(){fetch("https://milepost-proxy.leahgerber93.workers.dev/bridge-status",{cache:'no-store'}).then(function(r){return r.json();}).then(paint).catch(fail);}
   go(); setInterval(go,120000);
 })();
 </script>
