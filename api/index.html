@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live state DOT feeds for all 50 US states plus British Columbia, Alberta and Manitoba. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"Fleet and enterprise licences include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}],"@id":"https://milecheckapp.com/api/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live state DOT feeds for all 50 US states plus British Columbia, Alberta and Manitoba. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"Fleet and enterprise licenses include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}],"@id":"https://milecheckapp.com/api/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
 
   <style>
     .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
@@ -159,7 +159,7 @@
       <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email us for an API key</a>
       <a class="ghost" href="#two-prices">How pricing works</a>
     </div>
-    <p class="btn-note">The key button opens an email to sales@milecheckapp.com. A test key is free for 14 days, 100 calls a day.</p>
+    <p class="btn-note">The key button opens an email to sales@milecheckapp.com. A test key runs 14 days at 100 calls a day.</p>
   </div>
 
   <!-- VALUE -->
@@ -190,17 +190,17 @@
     <p class="lead">Mile markers and live road conditions are sold differently, because they behave differently.</p>
     <div class="value-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));">
       <div class="value-card">
-        <h3>Mile markers: a data licence</h3>
+        <h3>Mile markers: a data license</h3>
         <p>Mile markers do not move. You get the whole file (GeoJSON and CSV, all 50 states and 10 Canadian provinces and territories) for a flat yearly fee, and you keep it. We send an update when we learn about new roads or a state renumbers a highway. The lookup only needs a GPS position, not a good cell signal. No call counting.</p>
-        <p style="margin-top:8px"><a href="#dataset" style="color:#00A86B;font-weight:700;">The mile marker dataset licence &darr;</a></p>
+        <p style="margin-top:8px"><a href="#dataset" style="color:#00A86B;font-weight:700;">The mile marker dataset license &darr;</a></p>
       </div>
       <div class="value-card">
         <h3>Live conditions: the API, priced by use</h3>
-        <p>Closures, crashes, construction, chain controls, wildfires and drawbridge status change by the minute, so your software asks for them when it needs them. Each request your software sends to our server is one API call. Plans are priced by how many calls a day you need: a free 14-day test key at 100 calls a day, Business $299 a month for 100,000, more by quote.</p>
+        <p>Closures, crashes, construction, chain controls, wildfires and drawbridge status change by the minute, so your software asks for them when it needs them. Each request your software sends to our server is one API call. Plans are priced by how many calls a day you need: a 14-day test key at 100 calls a day, Business $299 a month for 100,000, more by quote.</p>
         <p style="margin-top:8px"><a href="#pricing" style="color:#00A86B;font-weight:700;">API plans &darr;</a></p>
       </div>
     </div>
-    <p class="lead" style="margin-top:14px">The mile marker lookup (<code>/v1/locate</code>) is also in the API for teams that only need one point at a time. If you want mile markers on your own map, take the licence. You can buy both. Not a developer? Start at <a href="/partners/">MileCheck for business</a>.</p>
+    <p class="lead" style="margin-top:14px">The mile marker lookup (<code>/v1/locate</code>) is also in the API for teams that only need one point at a time. If you want mile markers on your own map, take the license. You can buy both. Not a developer? Start at <a href="/partners/">MileCheck for business</a>.</p>
   </div>
 
   <!-- ENDPOINTS -->
@@ -450,13 +450,13 @@
   <!-- PRICING -->
   <div class="api-section" id="pricing">
     <h2>Pricing</h2>
-    <p class="pricing-note">API plans are priced by calls a day. An API call is one request your software sends to our server. Fleet and enterprise plans are quoted. Want the mile markers as a file you keep? See the <a href="#dataset">mile marker dataset licence</a> below, or <a href="/api/plan/">everything you can buy and what each costs</a>.</p>
+    <p class="pricing-note">API plans are priced by calls a day. An API call is one request your software sends to our server. Fleet and enterprise plans are quoted. Want the mile markers as a file you keep? See the <a href="#dataset">mile marker dataset license</a> below, or <a href="/api/plan/">everything you can buy and what each costs</a>.</p>
     <div class="pricing-scroll">
       <div class="pricing-grid">
         <div class="price-card">
           <div class="price-tier">Developer</div>
           <div class="price-amt">$0</div>
-          <p class="price-desc">Free 14-day test key, 100 calls a day.</p>
+          <p class="price-desc">14-day test key, 100 calls a day.</p>
           <ul class="price-feat">
             <li>100 calls / day for 14 days</li>
             <li>Live state DOT feeds and the nearest-mile-marker lookup</li>
@@ -487,21 +487,21 @@
             <li>Priority support and a named contact</li>
             <li>Annual invoicing</li>
           </ul>
-          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20%E2%80%94%20Fleet%20or%20enterprise%20licence">Talk to us</a>
+          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20%E2%80%94%20Fleet%20or%20enterprise%20license">Talk to us</a>
         </div>
       </div>
     </div>
     <div id="dataset" style="margin-top:28px;border:1px solid #E4EAE6;border-radius:14px;background:#fff;padding:20px 22px">
-      <h3 style="margin:0 0 6px;font-size:20px">Mile marker dataset licence</h3>
-      <p style="margin:0 0 10px;line-height:1.6">Want the mile markers as a map layer in your own app? Licence the file instead of calling the API. Mile markers do not move, so you download the dataset once, keep it, and get an update when we learn about new roads or a state changes its markers. The lookup only needs a GPS position, not a good cell signal. Flat yearly fee, quoted. No call limits.</p>
+      <h3 style="margin:0 0 6px;font-size:20px">Mile marker dataset license</h3>
+      <p style="margin:0 0 10px;line-height:1.6">Want the mile markers as a map layer in your own app? License the file instead of calling the API. Mile markers do not move, so you download the dataset once, keep it, and get an update when we learn about new roads or a state changes its markers. The lookup only needs a GPS position, not a good cell signal. Flat yearly fee, quoted. No call limits.</p>
       <ul class="price-feat" style="margin:0 0 14px">
         <li>All 50 US states, plus kilometre markers for ten Canadian provinces and territories, by route and mile</li>
         <li>GeoJSON and CSV</li>
         <li>Updates when a state's markers change</li>
-        <li>Yearly licence to display it in your product. No resale. Flat fee, no call limits.</li>
+        <li>Yearly license to display it in your product. No resale. Flat fee, no call limits.</li>
       </ul>
       <div class="mocks" style="grid-template-columns:minmax(0,1fr);max-width:620px;margin:14px 0 6px"><figure class="mock"><a href="/images/mockups/07-data-license-delivery.webp" target="_blank" rel="noopener"><img src="/images/mockups/07-data-license-delivery.webp" width="1200" height="686" loading="lazy" alt="Customer data portal listing mile marker files by state in GeoJSON and CSV, monthly archive files and license terms with no call limits"></a><figcaption><span class="badge dl">Data license</span> <strong>Milepost dataset and Historical archive.</strong> Files by state in GeoJSON and CSV, monthly archive files, and terms with no call limits.</figcaption></figure></div>
-      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Mile-marker%20dataset%20licence%20%E2%80%94%20sample%20request">Ask for a sample</a>
+      <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=Mile-marker%20dataset%20license%20%E2%80%94%20sample%20request">Ask for a sample</a>
     </div>
   </div>
 
@@ -523,7 +523,7 @@
       </details>
       <details>
         <summary>Is there an SLA?</summary>
-        <p>Fleet and enterprise licences include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA.</p>
+        <p>Fleet and enterprise licenses include a service-level agreement and annual invoicing. Developer and Business plans do not carry an SLA.</p>
       </details>
       <details>
         <summary>Where does the data come from?</summary>
@@ -536,7 +536,7 @@
   <div class="api-section" style="padding-top:0;">
     <div class="cta">
       <h3>Ready to integrate?</h3>
-      <p>Tell us what you're building and we'll get you a key. A test key is free for 14 days, 100 calls a day. Keys are issued by email, not self-serve yet.</p>
+      <p>Tell us what you're building and we'll get you a key. A test key runs 14 days at 100 calls a day. Keys are issued by email, not self-serve yet.</p>
       <div class="btns">
         <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email us for an API key</a>
         <a class="ghost" href="/partners/">All MileCheck business products</a>

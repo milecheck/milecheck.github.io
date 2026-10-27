@@ -108,6 +108,14 @@
     @media (max-width:768px){.hero-roy{display:none}}
 
     /* ---- immediate highway tools ---- */
+    /* home sponsor line: small, one line, in the highway-tools band (Leah 10/27) */
+    .home-spon .spon.spon-house{min-height:0;margin:0;padding:6px 12px;gap:10px;flex-wrap:nowrap;background:transparent;border-color:var(--rule)}
+    .home-spon .spon.spon-house .spon-roy{height:30px}
+    .home-spon .spon.spon-house .spon-body{flex-direction:row;align-items:center;flex-wrap:nowrap;gap:10px}
+    .home-spon .spon.spon-house .spon-text{font-size:13px;color:var(--ink)}
+    .home-spon .spon.spon-house .spon-text strong{font-weight:600;color:inherit}
+    .home-spon .spon.spon-house .spon-cta{font-size:13px;margin-left:auto}
+    .home-spon{padding:14px 0;background:var(--paper)}
     .highway-tools{border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);background:var(--paper);padding:32px 0}
     .highway-tools-inner{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
     .location-tool{display:block;color:var(--ink);text-decoration:none;padding:8px 0}
@@ -149,6 +157,7 @@
     .linkrow p{margin:4px 0 0;font-size:14.5px;color:var(--ink2);max-width:62ch}
     .linkrow .go{font-size:20px;color:var(--green)}
     #livemaps .linkrow{grid-template-columns:150px 1fr;padding:14px 0}
+    @media (max-width:700px){#livemaps .linkrow{grid-template-columns:1fr;gap:4px}}
     #livemaps .linkrow h3 .go{font-size:18px;margin-left:6px}
     .linkrow:hover h3{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
     .more-guides{margin-top:22px}
@@ -182,7 +191,7 @@
     @media (max-width:760px){.price-grid{grid-template-columns:1fr}}
     .price h2{color:var(--paper)}
     .price p{color:rgba(246,244,236,.72);margin:14px 0 0;font-size:16px;max-width:48ch}
-    .price .num{font:600 54px var(--mono);line-height:1}
+    .price .num{font:600 40px var(--mono);line-height:1}
     .price .num small{font:500 20px var(--sans);color:rgba(246,244,236,.6)}
     #pricing{scroll-margin-top:72px}
     .price-lede{max-width:60ch}
@@ -197,7 +206,6 @@
     .plan{border:1px solid rgba(246,244,236,.25);padding:22px;display:flex;flex-direction:column;gap:12px}
     .plan-main{border:2px solid var(--safety)}
     .plan-name{font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:rgba(246,244,236,.7)}
-    .plan .num{font-size:40px}
     .plan ul{margin:0;padding:0 0 0 18px;color:rgba(246,244,236,.8);font-size:15px;line-height:1.6;flex:1}
     .plan .btn{align-self:flex-start;margin-top:6px}
     .price .or{font:500 13.5px var(--mono);color:rgba(246,244,236,.55);margin:10px 0 20px}
@@ -390,15 +398,6 @@
     <section data-panel="home" style="padding:0;">
       <div class="container">
         <div class="hero-grid">
-<!-- spon:start -->
-  <aside class="spon spon-house" id="spon" data-slot="home:front-page" data-sponsor="house" aria-label="Sponsor">
-    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
-    <a class="spon-body" href="/sponsor/" data-spon-link>
-      <span class="spon-text"><strong>Want to advertise with us?</strong></span>
-      <span class="spon-cta">Learn more →</span>
-    </a>
-  </aside>
-<!-- spon:end -->
           <div class="hero-copy">
             <p class="eyebrow">WEB · iOS · ANDROID</p>
             <h1 class="hero-h1">Mile markers and road conditions for all 50 states.</h1>
@@ -419,23 +418,18 @@
   </div>
 
   <main>
-    <!-- ============== HIGHWAY TOOLS ============== -->
-    <section data-panel="home" class="highway-tools" aria-label="Highway tools">
-      <div class="container highway-tools-inner">
-        <a href="/what-mile-marker-am-i-at/?go=1" class="location-tool">
-          <h2>What mile marker am I at?</h2>
-          <span>Use my location &rarr;</span>
-        </a>
-        <div>
-          <form class="highway-search" action="/search/" method="get" role="search">
-            <label for="home-highway-search">Search a highway or state</label>
-            <div class="highway-search-row">
-              <input id="home-highway-search" name="q" type="search" placeholder="I-75 Florida" required>
-              <button type="submit">Search maps</button>
-            </div>
-          </form>
-          <p class="highway-tool-links"><a href="/road-conditions/">Road reports by state</a> &middot; <a href="/cameras/">Highway cameras</a></p>
-        </div>
+    <!-- ============== ADVERTISE LINE (Leah 10/27: replaces the mile-marker + search band) ============== -->
+    <section data-panel="home" class="home-spon" aria-label="Advertise">
+      <div class="container home-spon-inner">
+<!-- spon:start -->
+  <aside class="spon spon-house" id="spon" data-slot="home:front-page" data-sponsor="house" aria-label="Sponsor">
+    <img class="spon-roy" src="/images/sponsors/roy-sponsor.png" width="276" height="235" alt="" loading="lazy" decoding="async">
+    <a class="spon-body" href="/sponsor/" data-spon-link>
+      <span class="spon-text"><strong>Want to advertise with us?</strong></span>
+      <span class="spon-cta">Learn more →</span>
+    </a>
+  </aside>
+<!-- spon:end -->
       </div>
     </section>
 
@@ -452,8 +446,8 @@
         <div class="linklist">
           <a class="linkrow" href="maps/mile-markers/"><span class="tag">&#9679; Live</span><span><h3>Mile Marker Map <span class="go">&rarr;</span></h3><p>Browse the mile markers of any highway in all 50 states.</p></span></a>
           <a class="linkrow" href="closures/"><span class="tag">&#9679; Live</span><span><h3>Road Closures Map <span class="go">&rarr;</span></h3><p>Highway closures reported by state DOT feeds, all 50 states.</p></span></a>
-          <a class="linkrow" href="cameras/"><span class="tag">&#9679; Live</span><span><h3>Highway Cameras <span class="go">&rarr;</span></h3><p>Live DOT cameras in <!--cov:cameras.us_states-->43<!--/cov--> states.</p></span></a>
-          <a class="linkrow" href="passes/"><span class="tag">&#9679; <!--cov:pages.passes-->13<!--/cov--> passes</span><span><h3>Mountain pass conditions <span class="go">&rarr;</span></h3><p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon.</p></span></a>
+          <a class="linkrow" href="cameras/"><span class="tag">&#9679; Live</span><span><h3>Highway Cameras <span class="go">&rarr;</span></h3><p>Live DOT cameras in <!--cov:cameras.us_states-->44<!--/cov--> states.</p></span></a>
+          <a class="linkrow" href="passes/"><span class="tag">&#9679; <!--cov:pages.passes-->26<!--/cov--> passes</span><span><h3>Mountain pass conditions <span class="go">&rarr;</span></h3><p>Snoqualmie, Donner, the Grapevine, Siskiyou, Cajon.</p></span></a>
           <a class="linkrow" href="maps/"><span class="tag">&#9679; All maps</span><span><h3>All live maps <span class="go">&rarr;</span></h3><p>Drawbridges, ferries, border waits and the rest.</p></span></a>
         </div>
         <details class="more-guides">
@@ -515,6 +509,22 @@
       </div>
     </section>
 
+    <section data-panel="home" id="faq">
+      <div class="container">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-h2">Questions, answered.</h2>
+        <div class="faq-list">
+          <details class="faq-item"><summary>What does MileCheck do?</summary><p>MileCheck shows road conditions from official state feeds across all 50 states. It also shows your nearest highway mile marker, live.</p><p>New to mile markers? <a href="/blog/mile-markers-vs-gps.html">Mile markers vs. GPS &mdash; why both still matter &rarr;</a></p></details>
+          <details class="faq-item"><summary>Which states are covered?</summary><p>Mile markers in all 50 states, plus kilometre markers on supported highways in 10 Canadian provinces and territories. Live state DOT feeds in all 50 states. Road conditions for <a href="/road-conditions/canada/">British Columbia, Alberta and Manitoba</a> are on the website.</p></details>
+          <details class="faq-item"><summary>Does it work without cell service?</summary><p>Yes &mdash; mile markers are stored on your phone, so they work in dead zones. Live alerts need a connection.</p></details>
+          <details class="faq-item"><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium costs <span class="mono">$19.99/yr</span> or <span class="mono">$4.99/mo</span> and includes a 2-week free trial. It adds the live map, state DOT feeds and trip tools.</p></details>
+          <details class="faq-item"><summary>Does it work with CarPlay and Android Auto?</summary><p>Yes, both &mdash; and the car screen is free. It&rsquo;s deliberately simple right now: your highway, mile marker, and current road conditions, glance-and-go. Just the one thing you need while driving, with no clutter. A richer car screen is on the way.</p></details>
+          <details class="faq-item"><summary>Do I need an account? What happens to my location data?</summary><p>No sign-up, no email, no phone number &mdash; just open it and drive. Your mile marker is found on your device, not a server, so where you are never gets sent anywhere just to show you a mile marker. Trips you log stay on your device too &mdash; export or delete them any time from the Trips tab. Background tracking while your phone is locked is off by default and only turns on if you enable it. MileCheck has no ad network and doesn&rsquo;t sell personal data. <a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener">Read the full privacy policy &rarr;</a></p></details>
+          <details class="faq-item"><summary>Can my company license the data?</summary><p>Yes. The 50-state milepost corpus and the live 50-state DOT feed layer are available to license &mdash; one schema, one API, no state-by-state agency negotiations on your side. Fleets on Geotab can add MileCheck today from the <a href="blog/geotab-marketplace.html">Geotab Marketplace</a>. For API access, a data license or fleet licensing, email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>. Every product and price is on <a href="/partners/">MileCheck for business</a>.</p></details>
+          <details class="faq-item"><summary>Can I embed or republish MileCheck&rsquo;s maps and data?</summary><p>Contact us about embedding maps or republishing data: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>. Newsrooms and public-interest sites can ask to cite the data with credit and a link. Commercial use of the data or maps requires a license.</p></details>
+        </div>
+      </div>
+    </section>
     <!-- ============== PRICING ============== -->
     <section data-panel="home" class="price" id="pricing" style="padding:40px 0;">
       <div class="container">
@@ -536,32 +546,16 @@
     </section>
 
     <!-- ============== FAQ ============== -->
-    <section data-panel="home" id="faq">
-      <div class="container">
-        <span class="section-label">FAQ</span>
-        <h2 class="section-h2">Questions, answered.</h2>
-        <div class="faq-list">
-          <details class="faq-item"><summary>What does MileCheck do?</summary><p>MileCheck shows road conditions from official state feeds across all 50 states. It also shows your nearest highway mile marker, live.</p><p>New to mile markers? <a href="/blog/mile-markers-vs-gps.html">Mile markers vs. GPS &mdash; why both still matter &rarr;</a></p></details>
-          <details class="faq-item"><summary>Which states are covered?</summary><p>Mile markers in all 50 states, plus kilometre markers on supported highways in 10 Canadian provinces and territories. Live state DOT feeds in all 50 states. Road conditions for <a href="/road-conditions/canada/">British Columbia, Alberta and Manitoba</a> are on the website.</p></details>
-          <details class="faq-item"><summary>Does it work without cell service?</summary><p>Yes &mdash; mile markers are stored on your phone, so they work in dead zones. Live alerts need a connection.</p></details>
-          <details class="faq-item"><summary>What&rsquo;s free, and what&rsquo;s premium?</summary><p>Your current mile marker is always free. Premium costs <span class="mono">$19.99/yr</span> or <span class="mono">$4.99/mo</span> and includes a 2-week free trial. It adds the live map, state DOT feeds and trip tools.</p></details>
-          <details class="faq-item"><summary>Does it work with CarPlay and Android Auto?</summary><p>Yes, both &mdash; and the car screen is free. It&rsquo;s deliberately simple right now: your highway, mile marker, and current road conditions, glance-and-go. Just the one thing you need while driving, with no clutter. A richer car screen is on the way.</p></details>
-          <details class="faq-item"><summary>Do I need an account? What happens to my location data?</summary><p>No sign-up, no email, no phone number &mdash; just open it and drive. Your mile marker is found on your device, not a server, so where you are never gets sent anywhere just to show you a mile marker. Trips you log stay on your device too &mdash; export or delete them any time from the Trips tab. Background tracking while your phone is locked is off by default and only turns on if you enable it. MileCheck has no ad network and doesn&rsquo;t sell personal data. <a href="https://milecheck.github.io/milecheck-privacy/" target="_blank" rel="noopener">Read the full privacy policy &rarr;</a></p></details>
-          <details class="faq-item"><summary>Can my company license the data?</summary><p>Yes. The 50-state milepost corpus and the live 50-state DOT feed layer are available to license &mdash; one schema, one API, no state-by-state agency negotiations on your side. Fleets on Geotab can add MileCheck today from the <a href="blog/geotab-marketplace.html">Geotab Marketplace</a>. For API access, a data licence or fleet licensing, email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>. Every product and price is on <a href="/partners/">MileCheck for business</a>.</p></details>
-          <details class="faq-item"><summary>Can I embed or republish MileCheck&rsquo;s maps and data?</summary><p>Contact us about embedding maps or republishing data: <a href="mailto:info@milecheckapp.com">info@milecheckapp.com</a>. Newsrooms and public-interest sites can ask to cite the data with credit and a link. Commercial use of the data or maps requires a license.</p></details>
-        </div>
-      </div>
-    </section>
 
     <!-- ============== FOR BUSINESS ============== -->
     <section data-panel="home" class="alt" id="for-business">
       <div class="container">
         <span class="section-label">For business</span>
         <h2 class="section-h2">Which MileCheck product fits your business?</h2>
-        <p class="mp-sub">Mile markers for all 50 states and 10 Canadian provinces and territories. Live state DOT feeds for all 50 states plus BC, Alberta and Manitoba. One schema. Five ways to buy it. <span class="aws-member">AWS Partner Network member</span>.</p>
+        <p class="mp-sub">Mile markers for all 50 states and 10 Canadian provinces and territories. Live state DOT feeds for all 50 states plus BC, Alberta and Manitoba. Every feed is normalized into one schema, and there are five ways to buy it. <span class="aws-member">AWS Partner Network member</span>.</p>
         <div class="linklist">
-          <a class="linkrow" href="api/"><span class="tag">&#9679; Software</span><span><h3>The API</h3><p>Live road conditions and mile marker lookups by the call. Developer $0, Business $299 a month, enterprise quoted.</p></span><span class="go">&rarr;</span></a>
-          <a class="linkrow" href="api/plan/"><span class="tag">&#9679; Data</span><span><h3>Data licences</h3><p>The mile marker file for all 50 states and Canada, and the historical archive. Flat yearly fee, quoted, no call limits.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="api/"><span class="tag">&#9679; Software</span><span><h3>The API</h3><p>Live road conditions and mile marker lookups by the call. Developer tier for testing, 100 calls a day for 14 days. Business $299 a month. Enterprise quoted.</p></span><span class="go">&rarr;</span></a>
+          <a class="linkrow" href="api/plan/"><span class="tag">&#9679; Data</span><span><h3>Data licenses</h3><p>The mile marker file for all 50 states and Canada, and the historical archive. Flat yearly fee, quoted, no call limits.</p></span><span class="go">&rarr;</span></a>
           <a class="linkrow" href="fleets/"><span class="tag">&#9679; Fleets</span><span><h3>Fleets and dispatch</h3><p>Drivers report location by mile marker. Put it beside the vehicle. On Geotab today as an Add-In.</p></span><span class="go">&rarr;</span></a>
           <a class="linkrow" href="partners/corridor-boards.html"><span class="tag">&#9679; Stores</span><span><h3>Truck stops, travel centers and diners</h3><p>A free TV board showing live road conditions for your highway. MileCheck sells the one sponsor slot and pays you a share.</p></span><span class="go">&rarr;</span></a>
           <a class="linkrow" href="sponsor/"><span class="tag">&#9679; Advertise</span><span><h3>Businesses that serve drivers</h3><p>Sponsor a page on this site ($50 a month), a corridor board ($99 a month per screen) or the monthly Highway Report email.</p></span><span class="go">&rarr;</span></a>

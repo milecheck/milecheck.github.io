@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 const M = {
   rainier: { name: 'Mount Rainier', line: 'Is Mount Rainier visible right now? Mountain Visibility shows current visibility from Seattle and 9 other regions, updated every 10 minutes, plus clear windows over the next five days.' },
-  hood: { name: 'Mount Hood', line: 'Is Mount Hood visible right now? Mountain Visibility shows current visibility from Portland, updated every 10 minutes, plus clear windows over the next five days.' },
+  hood: { name: 'Mount Hood', line: 'Is Mount Hood visible right now? Mountain Visibility shows current visibility from Portland and 4 other regions, updated every 10 minutes, plus clear windows over the next five days.' },
 };
 const pages = {
   rainier: ['cameras/washington', 'cameras/seattle', 'passes/snoqualmie', 'passes/stevens', 'passes/white', 'seasonal/chinook-pass', 'seasonal/cayuse-pass'],

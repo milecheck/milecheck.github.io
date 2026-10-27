@@ -75,6 +75,7 @@ const strip = (html) => html
 
 const SPON_CSS = SPON.CSS;
 const GRID_HEROS = ['<div class="hero-grid">', '<div class="sd-hero">'];
+const HOME_GRID = '<div class="container home-spon-inner">';
 const ANCHORS = ['<p class="eyebrow">', '<div class="eyebrow">', '<p class="article-eyebrow">', '<div class="mile-map-head">', '<div class="mv-stamp">', '<div class="sd-stamp">', '<h1'];
 
 function titleOf(html, fallback) {
@@ -123,7 +124,8 @@ for (const f of walk(ROOT).sort()) {
   html = strip(html);
   // A two-column hero grid: put the slot inside the grid as its first child so grid-column:1/-1
   // stretches it across both columns (home, Seattle Drawbridges, 2026-10-23).
-  const gridOpen = GRID_HEROS.find((g) => html.includes(g));
+  // Home: the slot sits small, in its own thin band under the hero (Leah 10/27: "move the ad block down").
+  const gridOpen = rel === 'index.html' ? HOME_GRID : GRID_HEROS.find((g) => html.includes(g));
   const anchor = gridOpen ? null : ANCHORS.find((a) => html.includes(a));
   const styleClose = html.indexOf('</style>');
   // A stray </style> with no <style> before it (stadiums/, 2026-10-23) would put the CSS in the head as text.

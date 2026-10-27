@@ -59,7 +59,7 @@ const CORRIDORS = [
     slug: 'i-90', name: 'I-90', num: 90, states: ['WA','ID','MT','WY','SD','MN','WI','IL','IN','OH','PA','NY','MA'],
     subtitle: 'Seattle to Boston · the longest interstate', bounds: '[[41.0,-124.5],[49.0,-70.5]]',
     lengthMi: '3,020 mi',
-    highPass: { slug: 'snoqualmie', name: 'Snoqualmie Pass', elev: '3,015 ft' },
+    highPass: { label: 'summit', slug: 'snoqualmie', name: 'Snoqualmie Pass', elev: '3,022 ft' },
     pois: [ {name:'Snoqualmie Pass', slug:'snoqualmie', lat:47.3923, lon:-121.4001} ],
     hero: `See I-90 right now — live DOT cameras and real-time conditions along America's longest interstate, from Seattle to Boston, each tagged with its mile marker. Snoqualmie Pass, the northern plains, and the Great Lakes snow belt, all on one map.`,
     segs: [
@@ -95,7 +95,7 @@ const CORRIDORS = [
     slug: 'i-80', name: 'I-80', num: 80, states: ['CA','NV','UT','WY','NE','IA','IL','IN','OH','PA','NJ'],
     subtitle: 'San Francisco to New Jersey · coast to coast', bounds: '[[36.5,-123.0],[42.5,-73.0]]',
     lengthMi: '2,900 mi',
-    highPass: { slug: 'donner', name: 'Donner Pass', elev: '7,056 ft' },
+    highPass: { label: 'summit', slug: 'donner', name: 'Donner Summit', elev: '7,239 ft' },
     pois: [ {name:'Donner Pass', slug:'donner', lat:39.3126, lon:-120.3269},
             {name:'Parleys Summit', slug:'parleys', lat:40.7519, lon:-111.6377} ],
     hero: `See I-80 right now — live DOT cameras and real-time conditions along the great coast-to-coast route, from San Francisco to the New York area, each tagged with its mile marker. Donner Pass and the Wasatch to the Great Lakes, on one map.`,
@@ -132,7 +132,7 @@ const CORRIDORS = [
     slug: 'i-15', name: 'I-15', num: 15, states: ['CA','NV','AZ','UT','ID','MT'],
     subtitle: 'San Diego to Montana · the LA–Las Vegas–Salt Lake route', bounds: '[[32.5,-118.5],[49.0,-110.5]]',
     lengthMi: '1,433 mi',
-    highPass: { slug: 'cajon', name: 'Cajon Pass', elev: '~4,190 ft' },
+    highPass: { label: 'summit', slug: 'cajon', name: 'Cajon Pass', elev: '~4,190 ft' },
     pois: [ {name:'Cajon Pass', slug:'cajon', lat:34.3419, lon:-117.4436} ],
     hero: `See I-15 right now — live DOT cameras and real-time conditions from Southern California through Las Vegas and Salt Lake City to Montana, each tagged with its mile marker. Cajon Pass, the Mojave, and the Wasatch, all on one map.`,
     segs: [
@@ -311,7 +311,7 @@ function page(c){
   const segHtml=c.segs.map(([h,p])=>`    <div class="co-seg"><h3>${h}</h3><p>${p}</p></div>`).join('\n');
   const faqHtml=c.faq.map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
   const hpStat = c.highPass
-    ? `    <a class="co-stat co-stat-link" href="../../passes/${c.highPass.slug}/"><div class="n" style="font-size:17px;padding-top:3px">${c.highPass.name}</div><div class="l">${c.highPass.elev} · high point ▸</div></a>`
+    ? `    <a class="co-stat co-stat-link" href="../../passes/${c.highPass.slug}/"><div class="n" style="font-size:17px;padding-top:3px">${c.highPass.name}</div><div class="l">${c.highPass.elev} · ${c.highPass.label || 'high point'} ▸</div></a>`
     : `    <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">${c.subtitle.split('·')[0].trim()}</div><div class="l">${c.lengthMi} end to end</div></div>`;
   return `<!DOCTYPE html>
 <html lang="en">
