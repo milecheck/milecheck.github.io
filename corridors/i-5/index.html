@@ -228,6 +228,7 @@
       .mc-signup .ml-form-embedContent{display:none !important;}
       .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
       .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup select[name="fields[state]"]{border-radius:8px !important;height:auto;min-height:44px;font-size:14px;padding:10px 12px;background:#fff;border:1px solid #cccccc;color:#333;}
       .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
     </style>
     <div class="mc-signup-inner">
@@ -361,5 +362,6 @@ Promise.all([Promise.all(STATES.map(camsFor)),Promise.all(STATES.map(alertsFor))
   ml('account', '2507175');
   </script>
   <!-- End MailerLite Universal -->
+  <script src="/assets/state-pick.js" defer></script>
 </body>
 </html>

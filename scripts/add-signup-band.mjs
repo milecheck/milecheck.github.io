@@ -24,6 +24,7 @@ const CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-b
       .mc-signup .ml-form-embedContent{display:none !important;}
       .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
       .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup select[name="fields[state]"]{border-radius:8px !important;height:auto;min-height:44px;font-size:14px;padding:10px 12px;background:#fff;border:1px solid #cccccc;color:#333;}
       .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}`;
 const inner = `<p class="mc-eyebrow">${EYEBROW}</p>
       <h2>${H2}</h2>
@@ -70,6 +71,7 @@ for (const f of targets) {
   if (/data-form="LjADY8"/.test(s)) {
     s = s.replace(/<p class="mc-eyebrow">[\s\S]*?<\/p>\s*<h2>[\s\S]*?<\/h2>\s*<p class="mc-sub">[\s\S]*?<\/p>/, inner);
     if (!s.includes('.mc-signup .mc-sub a')) s = s.replace('.mc-signup .ml-form-embedContent{', '.mc-signup .mc-sub a{color:#00A86B;font-weight:700;}\n      .mc-signup .ml-form-embedContent{');
+    if (!s.includes('.mc-signup select[name="fields[state]"]')) s = s.replace('.mc-signup input[type=email]{border-radius:8px !important;}', '.mc-signup input[type=email]{border-radius:8px !important;}\n      .mc-signup select[name="fields[state]"]{border-radius:8px !important;height:auto;min-height:44px;font-size:14px;padding:10px 12px;background:#fff;border:1px solid #cccccc;color:#333;}');
     if (s !== o) updated++;
   } else {
     // The desktop QR block (add-desktop-qr.mjs) also sits right above the footer, below this
@@ -83,6 +85,8 @@ for (const f of targets) {
     if (!o.includes('<!-- signup:start -->')) added++;
   }
   if (!s.includes('assets.mailerlite.com/js/universal.js')) s = s.replace('</body>', '  ' + LOADER + '</body>');
+  // State dropdown for the signup (assets/state-pick.js). One tag per page, after the loader.
+  if (!s.includes('/assets/state-pick.js')) s = s.replace('</body>', '  <script src="/assets/state-pick.js" defer></script>\n</body>');
   if (s !== o) writeFileSync(f, s);
 }
 console.log(`signup band: ${updated} updated, ${added} added, ${targets.size} pages checked`);
