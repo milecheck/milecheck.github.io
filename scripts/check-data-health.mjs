@@ -15,7 +15,7 @@ const UA = 'MileCheck-DataHealth/1.0 (+https://milecheckapp.com)';
 const CAMERA_DROP = 0.4;          // fail if cameras fall more than 40% below baseline
 const ALERT_MIN_BASELINE = 10;    // only fail an empty alert feed when the baseline had at least this many
 const STALE_HOURS = 6;            // fetched_at older than this = stale feed
-const AVG_DROP = 0.3;             // fail if a count falls more than 30% below its 7-day average (Uptime 2, 10/19)
+const AVG_DROP = 0.3;             // fail if a count falls more than 30% below its 7-day average (alerts: same-weekday average, two runs in a row)
 const AVG_MIN = 20;               // ...only when that average is at least this (small feeds swing too much)
 const AVG_MIN_DAYS = 3;           // ...and only once there are this many days of history
 const CAP_COUNTS = new Set([100, 500, 1000]); // a count of exactly this is usually a source's page cap (COtrip hid half its data behind 100)
@@ -126,7 +126,9 @@ for (const st of ALL) {
 let history = {};
 try { history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8')); } catch { history = {}; }
 const today = new Date().toISOString().slice(0, 10);
-const pastDays = Object.keys(history).filter((d) => d < today).sort().slice(-7);
+const allDays = Object.keys(history).filter((d) => d < today).sort();
+const pastDays = allDays.slice(-7);
+const lowAlerts = new Set();
 // Round-number counts: a source that stops at its page size looks healthy but is cut off.
 // One day at exactly 100/500/1000 can be chance (WI read 1000, then 1002 a minute later, 10/19),
 // so it fails only when yesterday's count for the same feed was the same round number.
@@ -141,20 +143,36 @@ for (const st of ALL) {
   }
 }
 if (pastDays.length >= AVG_MIN_DAYS) {
+  // Alerts are mostly roadwork in many states, and roadwork posts drop on weekends and at some
+  // hours (MA 59-78 over a weekend vs a 144-178 average, 10/24-10/26; MD, DE, VA, CT the same).
+  // So alerts compare against the same weekday when there are 2+ of them in history, and a low
+  // count fails only when the previous run was low too. One low run is a warning.
+  const dow = new Date(today + 'T12:00:00Z').getUTCDay();
+  const sameDow = allDays.filter((d) => new Date(d + 'T12:00:00Z').getUTCDay() === dow);
   for (const st of ALL) {
     const p = live[st];
     for (const kind of ['cameras', 'alerts']) {
-      const vals = pastDays.map((d) => history[d]?.[st]?.[kind]).filter((v) => typeof v === 'number');
-      if (vals.length < AVG_MIN_DAYS || p[kind] == null) continue;
+      const days = kind === 'alerts' && sameDow.length >= 2 ? sameDow : pastDays;
+      const vals = days.map((d) => history[d]?.[st]?.[kind]).filter((v) => typeof v === 'number');
+      const minVals = days === sameDow ? 2 : AVG_MIN_DAYS;
+      if (vals.length < minVals || p[kind] == null) continue;
       const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
-      if (avg >= AVG_MIN && p[kind] < avg * (1 - AVG_DROP)) flag(`${st}:${kind}`, `${st}: ${kind} at ${p[kind]}, over ${AVG_DROP * 100}% below the ${vals.length}-day average of ${Math.round(avg)}`);
+      if (!(avg >= AVG_MIN && p[kind] < avg * (1 - AVG_DROP))) continue;
+      const label = days === sameDow ? `${vals.length}-${['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dow]} average` : `${vals.length}-day average`;
+      const msg = `${st}: ${kind} at ${p[kind]}, over ${AVG_DROP * 100}% below the ${label} of ${Math.round(avg)}`;
+      if (kind === 'alerts') {
+        lowAlerts.add(st);
+        if (lastDay && history[lastDay]?.[st]?.alertsLow) flag(`${st}:alerts`, `${msg}, two runs in a row`);
+        else warnings.push(`${msg} (first low run, fails if the next run is low too)`);
+      } else flag(`${st}:${kind}`, msg);
     }
   }
 } else {
   warnings.push(`7-day average check waits for history (${pastDays.length} of ${AVG_MIN_DAYS} days so far)`);
 }
-history[today] = Object.fromEntries(ALL.filter((st) => !live[st].errors.length).map((st) => [st, { cameras: live[st].cameras, alerts: live[st].alerts, conditions: live[st].conditions }]));
-for (const d of Object.keys(history).sort().slice(0, -8)) delete history[d];
+history[today] = Object.fromEntries(ALL.filter((st) => !live[st].errors.length).map((st) => [st, { cameras: live[st].cameras, alerts: live[st].alerts, conditions: live[st].conditions, ...(lowAlerts.has(st) ? { alertsLow: true } : {}) }]));
+// 29 days: enough for four same-weekday samples.
+for (const d of Object.keys(history).sort().slice(0, -29)) delete history[d];
 try { fs.writeFileSync(HISTORY_FILE, JSON.stringify(history)); } catch (e) { warnings.push(`could not save history: ${e.message}`); }
 
 for (const k of Object.keys(known)) if (!seenBroken.has(k)) warnings.push(`${k} is listed in knownBroken but looks healthy now. Remove it and run --update-baseline.`);
