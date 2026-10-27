@@ -1,265 +1,265 @@
 {
  "source": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a",
- "month": "July 2026",
+ "month": "August 2026",
  "us": {
-  "now": 18.31,
-  "prev": 17.45
+  "now": 18.16,
+  "prev": 17.57
  },
  "states": [
   {
    "name": "Alabama",
-   "now": 16.4,
-   "prev": 15.93
+   "now": 16.33,
+   "prev": 16.26
   },
   {
    "name": "Alaska",
-   "now": 28.83,
-   "prev": 27.3
+   "now": 29.41,
+   "prev": 27.79
   },
   {
    "name": "Arizona",
-   "now": 15.38,
-   "prev": 15.34
+   "now": 15.05,
+   "prev": 15.09
   },
   {
    "name": "Arkansas",
-   "now": 14.33,
-   "prev": 13.26
+   "now": 14.37,
+   "prev": 13.33
   },
   {
    "name": "California",
-   "now": 33.61,
-   "prev": 32.66
+   "now": 29.75,
+   "prev": 30.92
   },
   {
    "name": "Colorado",
-   "now": 17,
-   "prev": 15.99
+   "now": 17.17,
+   "prev": 16.21
   },
   {
    "name": "Connecticut",
-   "now": 24.16,
-   "prev": 27.6
+   "now": 24.51,
+   "prev": 30.17
   },
   {
    "name": "Delaware",
-   "now": 18.48,
-   "prev": 16.58
+   "now": 18.7,
+   "prev": 16.85
   },
   {
    "name": "District of Columbia",
-   "now": 25.21,
-   "prev": 23.04
+   "now": 25.98,
+   "prev": 23.18
   },
   {
    "name": "Florida",
-   "now": 15.03,
-   "prev": 15.11
+   "now": 14.99,
+   "prev": 15.33
   },
   {
    "name": "Georgia",
-   "now": 16.27,
-   "prev": 15.56
+   "now": 15.9,
+   "prev": 15.55
   },
   {
    "name": "Hawaii",
-   "now": 48,
-   "prev": 39.36
+   "now": 47.18,
+   "prev": 38.53
   },
   {
    "name": "Idaho",
-   "now": 13.73,
-   "prev": 12.28
+   "now": 13.37,
+   "prev": 12.08
   },
   {
    "name": "Illinois",
-   "now": 19.22,
-   "prev": 17.22
+   "now": 19.32,
+   "prev": 18.03
   },
   {
    "name": "Indiana",
-   "now": 16.73,
-   "prev": 16.18
+   "now": 17.02,
+   "prev": 16.21
   },
   {
    "name": "Iowa",
-   "now": 15.99,
-   "prev": 15.31
+   "now": 17.06,
+   "prev": 15.48
   },
   {
    "name": "Kansas",
-   "now": 15.27,
-   "prev": 14.46
+   "now": 15.47,
+   "prev": 14.65
   },
   {
    "name": "Kentucky",
-   "now": 13.81,
-   "prev": 13.13
+   "now": 13.8,
+   "prev": 13.1
   },
   {
    "name": "Louisiana",
-   "now": 12.72,
-   "prev": 13.12
+   "now": 12.87,
+   "prev": 12.55
   },
   {
    "name": "Maine",
-   "now": 32.41,
-   "prev": 27.98
+   "now": 32.11,
+   "prev": 28.14
   },
   {
    "name": "Maryland",
-   "now": 21.41,
-   "prev": 18.83
+   "now": 21.4,
+   "prev": 19.89
   },
   {
    "name": "Massachusetts",
-   "now": 30.49,
-   "prev": 30.07
+   "now": 30.48,
+   "prev": 30.55
   },
   {
    "name": "Michigan",
-   "now": 23.05,
-   "prev": 20.55
+   "now": 22.99,
+   "prev": 20.73
   },
   {
    "name": "Minnesota",
-   "now": 17.45,
-   "prev": 16.92
+   "now": 17.2,
+   "prev": 16.89
   },
   {
    "name": "Mississippi",
-   "now": 14.54,
-   "prev": 13.58
+   "now": 14.43,
+   "prev": 13.61
   },
   {
    "name": "Missouri",
-   "now": 16.09,
-   "prev": 15.56
+   "now": 16.02,
+   "prev": 15.32
   },
   {
    "name": "Montana",
-   "now": 14.99,
-   "prev": 14.27
+   "now": 15.57,
+   "prev": 14.29
   },
   {
    "name": "Nebraska",
-   "now": 13.78,
-   "prev": 12.84
+   "now": 13.54,
+   "prev": 12.8
   },
   {
    "name": "Nevada",
-   "now": 12.77,
-   "prev": 12.39
+   "now": 12.72,
+   "prev": 12.54
   },
   {
    "name": "New Hampshire",
-   "now": 26.6,
-   "prev": 22.79
+   "now": 27.64,
+   "prev": 24.44
   },
   {
    "name": "New Jersey",
-   "now": 25.19,
-   "prev": 25.32
+   "now": 24.61,
+   "prev": 24.7
   },
   {
    "name": "New Mexico",
-   "now": 16.09,
-   "prev": 15.8
+   "now": 16.51,
+   "prev": 15.98
   },
   {
    "name": "New York",
-   "now": 29.9,
-   "prev": 26.22
+   "now": 28.65,
+   "prev": 26.64
   },
   {
    "name": "North Carolina",
-   "now": 15.16,
-   "prev": 13.37
+   "now": 14.95,
+   "prev": 14.59
   },
   {
    "name": "North Dakota",
-   "now": 13.41,
-   "prev": 13.31
+   "now": 13.31,
+   "prev": 12.97
   },
   {
    "name": "Ohio",
-   "now": 19.45,
-   "prev": 17.38
+   "now": 19.38,
+   "prev": 17.55
   },
   {
    "name": "Oklahoma",
-   "now": 14.35,
-   "prev": 13.52
+   "now": 14.82,
+   "prev": 14.42
   },
   {
    "name": "Oregon",
-   "now": 15.97,
-   "prev": 15.61
+   "now": 15.92,
+   "prev": 15.85
   },
   {
    "name": "Pennsylvania",
-   "now": 21.72,
-   "prev": 19.51
+   "now": 21.77,
+   "prev": 19.93
   },
   {
    "name": "Rhode Island",
-   "now": 28.29,
-   "prev": 26.18
+   "now": 28.18,
+   "prev": 26.53
   },
   {
    "name": "South Carolina",
-   "now": 15.47,
-   "prev": 14.7
+   "now": 15.76,
+   "prev": 15.16
   },
   {
    "name": "South Dakota",
-   "now": 15.37,
-   "prev": 14.52
+   "now": 15.15,
+   "prev": 13.9
   },
   {
    "name": "Tennessee",
-   "now": 13.71,
-   "prev": 13.21
+   "now": 13.42,
+   "prev": 13.09
   },
   {
    "name": "Texas",
-   "now": 15.88,
-   "prev": 15.36
+   "now": 15.91,
+   "prev": 15.4
   },
   {
    "name": "Utah",
-   "now": 13.12,
-   "prev": 13.45
+   "now": 13.31,
+   "prev": 13.62
   },
   {
    "name": "Vermont",
-   "now": 23.75,
-   "prev": 22.14
+   "now": 23.84,
+   "prev": 22.1
   },
   {
    "name": "Virginia",
-   "now": 17.55,
-   "prev": 15.78
+   "now": 17.64,
+   "prev": 15.85
   },
   {
    "name": "Washington",
-   "now": 14.71,
-   "prev": 13.45
+   "now": 14.63,
+   "prev": 13.65
   },
   {
    "name": "West Virginia",
-   "now": 15.78,
-   "prev": 15.43
+   "now": 16.31,
+   "prev": 15.62
   },
   {
    "name": "Wisconsin",
-   "now": 19.06,
-   "prev": 18.25
+   "now": 19.41,
+   "prev": 18.44
   },
   {
    "name": "Wyoming",
-   "now": 14.36,
-   "prev": 14.64
+   "now": 14.43,
+   "prev": 14.33
   }
  ]
 }
