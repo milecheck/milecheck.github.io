@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-10-28T05:57:26.191Z",
+   "fetchedAt": "2026-10-28T13:16:08.086Z",
    "ok": true,
    "rows": [
     {
@@ -16,20 +16,6 @@
      "closesNote": "Open until filled. May close any time after this date.",
      "kind": "Seasonal",
      "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Ukiah--ODOT--Maintenance/Highway-Maintenance-Specialist--Seasonal-_REQ-207063",
-     "recruiter": "ODOTRecruitment@odot.oregon.gov"
-    },
-    {
-     "id": "REQ-208322",
-     "state": "OR",
-     "agency": "Oregon Department of Transportation",
-     "title": "Highway Maintenance Specialist (Seasonal)",
-     "multiple": false,
-     "location": "Parkdale, OR",
-     "pay": "$4,312 to $5,988 a month",
-     "closes": "2026-10-27",
-     "closesNote": null,
-     "kind": "Seasonal",
-     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Parkdale--ODOT--MS/Highway-Maintenance-Specialist--Seasonal-_REQ-208322",
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
     },
     {
@@ -147,7 +133,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-10-28T05:57:26.191Z",
+   "fetchedAt": "2026-10-28T13:16:08.086Z",
    "ok": true,
    "rows": [
     {
@@ -283,5 +269,5 @@
    ]
   }
  },
- "updatedAt": "2026-10-28T05:57:26.191Z"
+ "updatedAt": "2026-10-28T13:16:08.086Z"
 }
