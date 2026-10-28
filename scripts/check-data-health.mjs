@@ -176,6 +176,13 @@ for (const d of Object.keys(history).sort().slice(0, -29)) delete history[d];
 try { fs.writeFileSync(HISTORY_FILE, JSON.stringify(history)); } catch (e) { warnings.push(`could not save history: ${e.message}`); }
 
 for (const k of Object.keys(known)) if (!seenBroken.has(k)) warnings.push(`${k} is listed in knownBroken but looks healthy now. Remove it and run --update-baseline.`);
+// Every public page must carry the current GA4 tag (scripts/ga4-check.mjs).
+try {
+  const { checkGa4 } = await import('./ga4-check.mjs');
+  const ga = checkGa4();
+  if (ga.missing.length) flag('site:ga4', `site: ${ga.missing.length} page(s) have no GA4 tag, for example ${ga.missing.slice(0, 3).join(', ')}`);
+  if (ga.stale.length) warnings.push(`site: ${ga.stale.length} page(s) carry an old GA4 tag; run node scripts/add-analytics.mjs`);
+} catch (e) { warnings.push(`GA4 check could not run: ${e.message}`); }
 const cams = ALL.filter((s) => live[s].cameras > 0).length;
 console.log(`Checked ${ALL.length} areas. ${cams} with cameras, ${problems.length} problem(s), ${warnings.length} warning(s).`);
 for (const w of warnings) console.log(`  warn  ${w}`);
