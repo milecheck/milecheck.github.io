@@ -429,7 +429,7 @@ function goLinks(c){
   const out=[], mp=+c.mp;
   if(c.route&&/\d/.test(c.route)&&isFinite(mp)&&mp>0)
     out.push(`<a target="_blank" rel="noopener" href="/maps/mile-markers/?route=${encodeURIComponent(c.route)}&mp=${Math.round(mp)}&state=${c.st}">MP ${Math.round(mp)} on the mile marker map</a>`);
-  if(NAMES[c.st]) out.push(`<a target="_blank" rel="noopener" href="/road-conditions/${stSlug(c.st)}/">${NAMES[c.st]} road conditions</a>`);
+  if(NAMES[c.st]) out.push('<a target="_blank" rel="noopener" href="/road-conditions/' + stSlug(c.st) + '/">' + NAMES[c.st] + ' road conditions</a>');
   return out.join(" · ");
 }
 function popupHtml(c){
