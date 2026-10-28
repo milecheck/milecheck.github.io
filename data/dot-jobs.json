@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-10-28T13:16:08.086Z",
+   "fetchedAt": "2026-10-28T22:43:07.430Z",
    "ok": true,
    "rows": [
     {
@@ -133,7 +133,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-10-28T13:16:08.086Z",
+   "fetchedAt": "2026-10-28T22:43:07.430Z",
    "ok": true,
    "rows": [
     {
@@ -176,71 +176,6 @@
      "recruiter": null
     },
     {
-     "id": "97656",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Transportation Associate - Highway Maintenance / Snow & Ice – Hutchinson",
-     "location": "Hutchinson, MN",
-     "pay": "$49,214 - $50,696 a year",
-     "closes": "2026-10-26",
-     "closesNote": null,
-     "kind": "Appointment type not confirmed",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97656&PostingSeq=1",
-     "recruiter": null
-    },
-    {
-     "id": "97652",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Transportation Generalist - Highway Maintenance / Snow & Ice - Olivia (2 Positions)",
-     "location": "Olivia, MN",
-     "pay": "$52,596 - $65,980 a year",
-     "closes": "2026-10-26",
-     "closesNote": null,
-     "kind": "Appointment type not confirmed",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97652&PostingSeq=1",
-     "recruiter": null
-    },
-    {
-     "id": "97651",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Transportation Generalist - Highway Maintenance/Snow & Ice - Hutchinson (2 Positions)",
-     "location": "Hutchinson, MN",
-     "pay": "$52,596 - $65,980 a year",
-     "closes": "2026-10-26",
-     "closesNote": null,
-     "kind": "Appointment type not confirmed",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97651&PostingSeq=1",
-     "recruiter": null
-    },
-    {
-     "id": "97662",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Transportation Generalist or Transportation Associate - Highway Maintenance / Snow & Ice – Pipestone",
-     "location": "Pipestone, MN",
-     "pay": "$49,214 - $65,980 a year",
-     "closes": "2026-10-26",
-     "closesNote": null,
-     "kind": "Appointment type not confirmed",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97662&PostingSeq=1",
-     "recruiter": null
-    },
-    {
-     "id": "97642",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Transportation Generalist - Highway Maintenance / Snow & Ice – Glencoe",
-     "location": "Glencoe, MN",
-     "pay": "$52,596 - $65,980 a year",
-     "closes": "2026-10-26",
-     "closesNote": null,
-     "kind": "Appointment type not confirmed",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97642&PostingSeq=1",
-     "recruiter": null
-    },
-    {
      "id": "96061",
      "state": "MN",
      "agency": "Minnesota Department of Transportation",
@@ -269,5 +204,5 @@
    ]
   }
  },
- "updatedAt": "2026-10-28T13:16:08.086Z"
+ "updatedAt": "2026-10-28T22:43:07.430Z"
 }
