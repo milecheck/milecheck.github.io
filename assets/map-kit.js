@@ -271,6 +271,19 @@
   // Built on window load: some pages add their layers in a load handler of their own.
   if (document.readyState === 'complete') buildOptions(); else window.addEventListener('load', buildOptions);
 
+  // 5b. Camera image clicks (Leah, 10-28). Camera links now point at api.milecheckapp.com/camera-image,
+  // and the page tracker counts a link as outbound only when its address does not CONTAIN the page's
+  // hostname, so "api.milecheckapp.com" read as the same site and outbound_click on camera pages fell
+  // from about 170 a day to a handful. The links worked the whole time. This sends the same event for them.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var h = a.getAttribute('href') || '';
+    if (/^https:\/\/api\.milecheckapp\.com\/camera-image/.test(h) && window.gtag) {
+      window.gtag('event', 'outbound_click', { link_url: h, page_path: location.pathname });
+    }
+  }, true);
+
   // 6. App card after a few camera views (Leah, 10-26): after someone opens a third
   // different camera, a small card offers the app. It never blocks the page, closes
   // with ×, and does not come back for 14 days. Page views are what the site earns
