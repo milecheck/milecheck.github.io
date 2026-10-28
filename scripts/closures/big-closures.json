@@ -1,7 +1,7 @@
 [
  {
   "slug": "us-101-hoh-river-bridge",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "title": "US 101 closed at the Hoh River Bridge",
   "when": "5 a.m. Oct 1 to noon Oct 6, 2026",
   "source": {
@@ -60,7 +60,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 61,
+   "missedChecks": 62,
    "note": null
   },
   "lat": 39.0618,
@@ -81,7 +81,7 @@
   "id": "WA-707121",
   "dot": "WSDOT",
   "dotUrl": "https://wsdot.wa.gov/travel/real-time/map",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "WA",
    "recordId": "WA-707121"
@@ -114,7 +114,7 @@
   "id": "CARSy-595",
   "dot": "INDOT TrafficWise",
   "dotUrl": "https://indot.carsprogram.org/",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "IN",
    "recordId": "CARSy-595"
@@ -147,7 +147,7 @@
   "id": "CARSy-717",
   "dot": "INDOT TrafficWise",
   "dotUrl": "https://indot.carsprogram.org/",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "IN",
    "recordId": "CARSy-717"
@@ -192,7 +192,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 72,
+   "missedChecks": 73,
    "note": null
   },
   "lat": 38.6899,
@@ -225,7 +225,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 44,
+   "missedChecks": 45,
    "note": null
   },
   "lat": 41.6106,
@@ -246,7 +246,7 @@
   "id": "IL-closure-cb10b647",
   "dot": "Getting Around Illinois",
   "dotUrl": "https://www.gettingaroundillinois.com/",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "IL",
    "recordId": "IL-closure-cb10b647-5467-4ae5-a26e-7f5e3626caf3",
@@ -284,7 +284,7 @@
   "id": "KY-TOC-24686",
   "dot": "goKY",
   "dotUrl": "https://goky.ky.gov/",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "KY",
    "recordId": "KY-TOC-24686"
@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 129,
+   "missedChecks": 130,
    "note": null
   },
   "lat": 34.0173,
@@ -354,7 +354,7 @@
   "id": "6931",
   "dot": "IDrive Arkansas",
   "dotUrl": "https://www.idrivearkansas.com/",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "AR",
    "recordId": "6931"
@@ -387,7 +387,7 @@
   "id": "CARSy-505",
   "dot": "INDOT TrafficWise",
   "dotUrl": "https://indot.carsprogram.org/",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "IN",
    "recordId": "CARSy-505"
@@ -432,7 +432,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 81,
+   "missedChecks": 82,
    "note": null
   },
   "lat": 39.3044,
@@ -453,7 +453,7 @@
   "id": "SD-12907881",
   "dot": "SD511",
   "dotUrl": "https://www.sd511.org/",
-  "verifiedAt": "2026-10-27",
+  "verifiedAt": "2026-10-28",
   "source": {
    "state": "SD",
    "recordId": "SD-12907881"
