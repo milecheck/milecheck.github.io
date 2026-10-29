@@ -359,8 +359,10 @@ load();loadPlows();setInterval(load,300000);setInterval(loadPlows,60000);
 function statePage(s) {
   const slug = slugOf(s.name);
   const url = `https://milecheckapp.com/road-conditions/${slug}/`;
-  const title = `${s.name} Road Conditions Now: Closures &amp; Cameras | MileCheck`;
-  const desc = `Live ${s.name} road conditions from ${s.dot}: closures and crashes by route and mile marker, with cameras, passes and corridors. Checks for updates every five minutes.`;
+  // 2026-10-29 winter pass: what people type in a storm. Chain rules only where the site has a chain-law page.
+  const hasChains = exists(`chain-laws/${slug}/index.html`) || ['arizona', 'new-mexico', 'alaska'].includes(slug);
+  const title = hasChains ? `${s.name} road conditions, chain rules and closures now | MileCheck` : `${s.name} road conditions, closures and cameras now | MileCheck`;
+  const desc = `Live ${s.name} road conditions from ${s.dot}: closures and crashes by route and mile marker${hasChains ? ', chain and traction rules,' : ','} cameras, passes and corridors. Checked every five minutes.`;
   const cams = exists(`cameras/${slug}/index.html`);
   const cities = Object.entries(CITY_CAMS).filter(([, st]) => st === s.code).map(([c]) => c);
   const passes = PASSES.filter((p) => p[3] === s.code);

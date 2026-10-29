@@ -10,7 +10,7 @@ const PASSES = [
   {
     slug: 'snoqualmie', name: 'Snoqualmie Pass', route: 'I-90', state: 'WA', stateName: 'Washington',
     // Search Console 2026-09-25: "driving conditions snoqualmie pass" = 5,038 impressions, 0 clicks. Title leads with that phrase.
-    title: 'Snoqualmie Pass Driving Conditions Now: I-90 Cameras &amp; Chains | MileCheck',
+    title: 'Snoqualmie Pass driving conditions, chains and cameras now | MileCheck',
     h1: 'Snoqualmie Pass driving conditions right now',
     desc: 'Snoqualmie Pass driving conditions on I-90: WSDOT restrictions and chain rules for each direction, summit temperature, live cameras, and closures, with the mile marker on every camera.',
     dot: 'WSDOT', lat: 47.3923, lon: -121.4001, r: 30, elev: '3,022 ft', dist: '~52 mi', distNote: 'east of Seattle on I-90',
@@ -163,7 +163,7 @@ const PASSES = [
   // SNOTEL triplets read from the NRCS AWDB API 2026-10-26. CAIC covers all of Colorado.
   {
     slug: 'wolf-creek', name: 'Wolf Creek Pass', route: 'US-160', state: 'CO', stateName: 'Colorado',
-    title: 'Wolf Creek Pass Road Conditions Right Now (US-160) | MileCheck', ogTitle: 'Wolf Creek Pass road conditions | MileCheck', h1: 'Wolf Creek Pass road conditions right now',
+    title: 'Wolf Creek Pass road conditions, chains and cameras now | MileCheck', ogTitle: 'Wolf Creek Pass road conditions | MileCheck', h1: 'Wolf Creek Pass road conditions right now',
     dot: 'CDOT', lat: 37.4829, lon: -106.8017, r: 30, elev: '10,857 ft', dist: '~23 mi', distNote: 'northeast of Pagosa Springs on US-160',
     range: 'San Juan Mountains',
     hero: `Live CDOT road alerts, snow and plow positions on US-160 over Wolf Creek Pass, between Pagosa Springs and South Fork. Wolf Creek Ski Area sits at the summit.`,
@@ -181,7 +181,7 @@ const PASSES = [
   },
   {
     slug: 'monarch', name: 'Monarch Pass', route: 'US-50', state: 'CO', stateName: 'Colorado',
-    title: 'Monarch Pass Road Conditions Right Now (US-50) | MileCheck', ogTitle: 'Monarch Pass road conditions | MileCheck', h1: 'Monarch Pass road conditions right now',
+    title: 'Monarch Pass road conditions, chains and cameras now | MileCheck', ogTitle: 'Monarch Pass road conditions | MileCheck', h1: 'Monarch Pass road conditions right now',
     dot: 'CDOT', lat: 38.4967, lon: -106.3253, r: 30, elev: '11,312 ft', dist: '~18 mi', distNote: 'west of Poncha Springs on US-50',
     range: 'Sawatch Range',
     hero: `Live CDOT road alerts, snow and plow positions on US-50 over Monarch Pass, between Salida and Gunnison. Monarch Mountain ski area sits just below the summit on the east side.`,
@@ -199,7 +199,7 @@ const PASSES = [
   },
   {
     slug: 'i80-wyoming', name: 'I-80 Summit (Laramie)', route: 'I-80', state: 'WY', stateName: 'Wyoming',
-    title: 'Is I-80 Open Between Laramie and Cheyenne? Road Conditions Right Now | MileCheck', ogTitle: 'I-80 Laramie to Cheyenne road conditions | MileCheck', h1: 'Is I-80 open between Laramie and Cheyenne right now?',
+    title: 'Is I-80 open between Laramie and Cheyenne? Road conditions now | MileCheck', ogTitle: 'I-80 Laramie to Cheyenne road conditions | MileCheck', h1: 'Is I-80 open between Laramie and Cheyenne right now?',
     dot: 'WYDOT', lat: 41.2367, lon: -105.4369, r: 30, elev: '8,640 ft', dist: '~8 mi', distNote: 'southeast of Laramie on I-80',
     range: 'Laramie Mountains', markerLabel: 'I-80 Summit · 8,640 ft',
     hero: `Live WYDOT road alerts and snow on I-80 over the summit between Laramie and Cheyenne, the highest point on I-80.`,
@@ -633,7 +633,7 @@ const AREAS = [
     dot: 'ODOT', credit: 'ODOT and NIFC via MileCheck',
     // Centre = the I-84 milepost 222 point in the bundled Oregon corpus, mid-grade.
     lat: 45.5809, lon: -118.6331, rMi: 15,
-    title: 'Cabbage Hill Cameras &amp; Conditions Right Now (I-84) | MileCheck',
+    title: 'Cabbage Hill road conditions, chains and cameras now | MileCheck',
     desc: 'Live ODOT cameras on the Cabbage Hill grade of I-84 east of Pendleton, with closures, construction, road reports and wildfires within 15 miles. The runaway ramps, the chain-up area and Deadman Pass on one map. No account.',
     ogTitle: 'Cabbage Hill Right Now: Live Cameras &amp; Conditions (I-84) | MileCheck',
     eyebrow: 'I-84 · Oregon · MP 217 to 227',
@@ -667,7 +667,7 @@ const AREAS = [
     dot: 'ODOT', credit: 'ODOT via MileCheck',
     // Resort coordinates: Wikipedia, Anthony Lakes (ski area), 44.964N -118.235W.
     lat: 44.964, lon: -118.235, rMi: 20,
-    title: 'Anthony Lakes road conditions right now (I-84 &amp; OR 237) | MileCheck',
+    title: 'Anthony Lakes road conditions, chains and cameras now | MileCheck',
     desc: 'Getting to Anthony Lakes Mountain Resort: live ODOT cameras and alerts on I-84 and OR 237 near North Powder, Oregon, plus what to know about the final unpatrolled miles up to the resort. No account.',
     ogTitle: 'Anthony Lakes road conditions | MileCheck',
     eyebrow: 'I-84 · OR 237 · Elkhorn Mountains · Oregon',
@@ -758,7 +758,7 @@ const AREAS = [
     dot: 'UDOT', credit: 'UDOT via MileCheck',
     // Centre near Snowbird, mid-canyon: Wikipedia, Snowbird, Utah, 40.582N -111.656W.
     lat: 40.582, lon: -111.656, rMi: 15,
-    title: 'Little Cottonwood Canyon road conditions right now (UT-210) | MileCheck',
+    title: 'Little Cottonwood Canyon road conditions, traction law and cameras now | MileCheck',
     desc: 'Getting to Snowbird and Alta: live UDOT cameras and alerts on SR-210 up Little Cottonwood Canyon, avalanche closures, traction-law requirements, and the coming toll and gondola plan. No account.',
     ogTitle: 'Little Cottonwood Canyon road conditions | MileCheck',
     eyebrow: 'UT-210 · Wasatch Mountains · Utah',
@@ -791,7 +791,7 @@ const AREAS = [
     name: 'Coquihalla Highway', route: 'BC-5', state: 'BC', states: ['BC'], stateName: 'British Columbia',
     dot: 'DriveBC', credit: 'DriveBC via MileCheck',
     lat: 49.5935, lon: -121.095, rMi: 45,
-    title: 'Coquihalla Highway conditions right now (Hwy 5) | MileCheck',
+    title: 'Coquihalla Highway road conditions, winter tire rules and cameras now | MileCheck',
     desc: 'Coquihalla Highway conditions on BC Highway 5 from Hope to Merritt: live DriveBC cameras at the summit and the Great Bear Snowshed, closures and road work, and the winter tire rule.',
     ogTitle: 'Coquihalla Highway conditions right now | MileCheck',
     eyebrow: 'Hwy 5 · Cascade Mountains · British Columbia',
@@ -823,7 +823,7 @@ const AREAS = [
     name: 'Sea-to-Sky Highway', route: 'BC-99', state: 'BC', states: ['BC'], stateName: 'British Columbia',
     dot: 'DriveBC', credit: 'DriveBC via MileCheck',
     lat: 49.98, lon: -123.13, rMi: 40,
-    title: 'Sea-to-Sky Highway conditions right now (Hwy 99 to Whistler) | MileCheck',
+    title: 'Sea-to-Sky Highway road conditions and cameras now | MileCheck',
     desc: 'Sea-to-Sky Highway conditions on BC Highway 99 from Horseshoe Bay through Squamish to Whistler: live DriveBC cameras, closures and road work, and the winter tire rule.',
     ogTitle: 'Sea-to-Sky Highway conditions right now | MileCheck',
     eyebrow: 'Hwy 99 · Coast Mountains · British Columbia',
@@ -855,7 +855,7 @@ const AREAS = [
     name: 'Rogers Pass', route: 'BC-1', state: 'BC', states: ['BC'], stateName: 'British Columbia',
     dot: 'DriveBC', credit: 'DriveBC via MileCheck',
     lat: 51.301, lon: -117.517, rMi: 45,
-    title: 'Rogers Pass conditions right now (Trans-Canada Hwy 1) | MileCheck',
+    title: 'Rogers Pass road conditions and cameras now | MileCheck',
     desc: 'Rogers Pass conditions on the Trans-Canada Highway between Revelstoke and Golden: live DriveBC cameras at the summit and snowsheds, avalanche-control closures, and road events.',
     ogTitle: 'Rogers Pass conditions right now | MileCheck',
     eyebrow: 'Hwy 1 · Selkirk Mountains · British Columbia',
@@ -887,7 +887,7 @@ const AREAS = [
     name: 'Kootenay Pass', route: 'BC-3', state: 'BC', states: ['BC'], stateName: 'British Columbia',
     dot: 'DriveBC', credit: 'DriveBC via MileCheck',
     lat: 49.058, lon: -117.039, rMi: 40,
-    title: 'Kootenay Pass conditions right now (Hwy 3 Salmo to Creston) | MileCheck',
+    title: 'Kootenay Pass road conditions and cameras now | MileCheck',
     desc: 'Kootenay Pass conditions on BC Highway 3 between Salmo and Creston: live DriveBC cameras at the summit, avalanche-control closures, and road events.',
     ogTitle: 'Kootenay Pass conditions right now | MileCheck',
     eyebrow: 'Hwy 3 · Selkirk Mountains · British Columbia',
@@ -949,10 +949,10 @@ function page(p){
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${p.title || `${p.name} Camera &amp; Conditions Right Now (${p.route}) | MileCheck`}</title>
-  <meta name="description" content="${p.desc || `Live ${p.name} cameras and real-time road conditions on ${p.route}. See snow, chains, and closures before you drive it. ${p.dot} cameras, tagged with mile marker.`}">
+  <title>${p.title || `${p.name} road conditions, chains and cameras now | MileCheck`}</title>
+  <meta name="description" content="${p.desc || `${p.name} road conditions on ${p.route} now: live ${p.dot} cameras with the mile marker, chain and traction rules, closures and snow. Check the pass before you drive it.`}">
   <link rel="canonical" href="${url}">
-  <meta property="og:title" content="${p.ogTitle || `${p.name} Right Now: Live Camera &amp; Conditions | MileCheck`}">
+  <meta property="og:title" content="${p.ogTitle || `${p.name} road conditions and cameras now | MileCheck`}">
   <meta property="og:description" content="${p.desc || `Live ${p.route} ${p.name} cameras and conditions. See the pass before you drive it. Snow, chains, and closures in real time.`}">
   <meta property="og:image" content="${shareImage}">
   <meta property="og:image:width" content="1200">

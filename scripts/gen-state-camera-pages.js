@@ -272,11 +272,12 @@ function crumbJsonLd(s){ return JSON.stringify({'@context':'https://schema.org',
 // appended only when it fits. Old copy and the new list: docs/chatgpt-review/camera-titles-2026-10-15.md
 const agencyOf = (s) => s.dot.replace(/\s*\(.*\)$/, '');
 function seoTitle(s){
-  const t = `${agencyOf(s)} Cameras in ${s.name}`;  // ChatGPT pass 10/15: no colon, no repeat
-  return (t + ' | MileCheck').length < 60 ? t + ' | MileCheck' : t;
+  // 2026-10-29 winter pass: agency + cameras still lead (the query people type), then what they want in a storm.
+  const t = `${agencyOf(s)} cameras and road conditions in ${s.name}`;
+  return (t + ' | MileCheck').length < 66 ? t + ' | MileCheck' : t;
 }
 function seoDesc(s, w){
-  return `View ${agencyOf(s)} traffic cameras across ${s.name} on a map. Browse camera locations by route and see available camera images.`;
+  return `Live ${agencyOf(s)} traffic cameras across ${s.name} on a map, by route and mile marker. Check the road, snow and closures before you drive.`;
 }
 
 function page(s){

@@ -443,7 +443,7 @@ function statePage(p) {
   const sp = SPON.slot({ kind: 'live', slug: campaign, state: p.code === 'BC' ? '' : p.code, name: p.q });
   const fineLine = p.fines.length ? p.fines.map((f) => f[0]).join(' ') : (p.noFine || 'The applicable fine amount has not been verified.');
   const desc = `${p.lede.split('. ')[0]}. The rules and fines with links to the official source, and the chain reports ${s.dot} is posting right now.`;
-  const title = `${esc(p.q)} Chain and traction law | MileCheck`;
+  const title = `${esc(p.q)} ${esc(p.q).length > 40 ? 'Winter rules' : 'Chain law and live reports'} | MileCheck`; // 2026-10-29 winter pass
   const hasSeasonal = exists(`seasonal/${slug}/index.html`);
   const hasRc = exists(`road-conditions/${slug}/index.html`);
 
