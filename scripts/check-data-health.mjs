@@ -132,6 +132,20 @@ for (const st of ALL) {
   }
 }
 
+// Incident lifecycle (crash log) freshness. The sweep writes each state's open.json about every 16 minutes. IL, MI, NH,
+// PA and VT sat frozen from 10/21 to 10/29 with nothing reporting it, so a state whose list is hours old now fails.
+// Before the Worker route exists (404) this is skipped, not failed.
+const LIFECYCLE_STALE_HOURS = 3;
+try {
+  const lf = await getJson(`${WORKER}/lifecycle-freshness`);
+  for (const [st, at] of Object.entries(lf.states || {})) {
+    if (!ALL.includes(st) && st.length !== 2) continue;
+    if (!at) { warnings.push(`${st}: no incident-lifecycle list yet`); continue; }
+    const ageH = (Date.now() - new Date(at).getTime()) / 36e5;
+    if (ageH > LIFECYCLE_STALE_HOURS) flag(`${st}:lifecycle`, `${st}: crash log not written for ${ageH.toFixed(1)}h (last ${at}); its incidents are not being recorded`);
+  }
+} catch (e) { warnings.push(`lifecycle freshness not checked (${e.message})`); }
+
 // 7-day average: today vs the mean of the previous days kept in the history file.
 let history = {};
 try { history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8')); } catch { history = {}; }
