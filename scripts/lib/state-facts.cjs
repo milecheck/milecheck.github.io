@@ -37,6 +37,9 @@ function stateFacts(rc, slug) {
     const b = COMBINED.blocks.find((x) => x[0] === rc.code);
     if (b) items.push(`<li><b>Chains.</b> ${esc(b[1])} <a href="/chain-laws/${COMBINED.slug}/">Chain and traction notes for Arizona, New Mexico and Alaska</a>.</li>`);
   }
+  if (rc.code === 'WA' && fileExists('how-often-are-chains-required-on-washington-passes/index.html')) {
+    items.push('<li><b>Chains by pass.</b> Hours each Washington pass was under a traction or chain requirement this season, counted from WSDOT pass reports. <a href="/how-often-are-chains-required-on-washington-passes/">How often chains are required on Washington passes</a>.</li>');
+  }
   const r = REST_BY[rc.code];
   if (r && fileExists(`rest-areas/${slug}/index.html`)) {
     items.push(`<li><b>Sleeping at a rest area.</b> ${esc(r.answer)} Source: <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source)}</a>. <a href="/rest-areas/${slug}/">${esc(rc.name)} rest area rules</a>.</li>`);

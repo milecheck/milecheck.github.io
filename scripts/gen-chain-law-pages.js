@@ -468,6 +468,7 @@ ${(p.notes || []).map((n) => `    <p class="cl-note">${esc(n)}</p>`).join('\n')}
   cards.push(['Official source', s.dot, `${s.name}'s traveler site. Current chain and traction requirements are posted there.`, s.dotUrl, true]);
   if (hasRc) cards.push(['Road conditions', `${s.name} road conditions`, `Closures and alerts reported through ${s.dot}, on one map.`, `/road-conditions/${slug}/`]);
   if (hasSeasonal) cards.push(['Winter closures', `Which roads close for winter in ${s.name}?`, `Seasonal closures with the dates each agency gives.`, `/seasonal/${slug}/`]);
+  if (slug === 'washington') cards.push(['From our archive', 'How often are chains required on Washington passes?', 'Hour counts for each pass this season, from WSDOT pass reports.', '/how-often-are-chains-required-on-washington-passes/']);
   cards.push(['Live map', 'Chain control map', 'Chain and traction reports from supported state feeds on one map.', '/chains/']);
   const cardsHtml = cards.map(([k, h, d, href, ext]) => `      <a class="sc-card" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}><span class="k">${k}</span><h3>${esc(h)}</h3><p>${esc(d)}</p></a>`).join('\n');
 

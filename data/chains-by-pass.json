@@ -1,0 +1,329 @@
+{
+ "asOf": "2026-10-29T07:00:00-07:00",
+ "from": "2026-09-26T17:00:00-07:00",
+ "snapshots": 724,
+ "expectedSnapshots": 783,
+ "passes": [
+  {
+   "name": "Blewett Pass US 97",
+   "snapshots": 723,
+   "none": 717,
+   "nodata": 0,
+   "advised": 6,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [
+    {
+     "start": "2026-10-28T04:00:00-07:00",
+     "end": "2026-10-28T10:00:00-07:00",
+     "hours": 6
+    }
+   ],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Cayuse Pass SR 123",
+   "snapshots": 706,
+   "none": 665,
+   "nodata": 0,
+   "advised": 24,
+   "required": 0,
+   "closed": 17,
+   "advisedEpisodes": [
+    {
+     "start": "2026-10-28T06:00:00-07:00",
+     "end": "2026-10-29T06:00:00-07:00",
+     "hours": 24
+    }
+   ],
+   "requiredEpisodes": [],
+   "closedEpisodes": [
+    {
+     "start": "2026-10-25T20:00:00-07:00",
+     "end": "2026-10-26T13:00:00-07:00",
+     "hours": 17
+    }
+   ]
+  },
+  {
+   "name": "Chinook Pass SR 410",
+   "snapshots": 723,
+   "none": 699,
+   "nodata": 0,
+   "advised": 0,
+   "required": 4,
+   "closed": 20,
+   "advisedEpisodes": [
+    {
+     "start": "2026-10-29T04:00:00-07:00",
+     "end": "2026-10-29T08:00:00-07:00",
+     "hours": 4
+    }
+   ],
+   "requiredEpisodes": [
+    {
+     "start": "2026-10-29T04:00:00-07:00",
+     "end": "2026-10-29T08:00:00-07:00",
+     "hours": 4
+    }
+   ],
+   "closedEpisodes": [
+    {
+     "start": "2026-10-25T17:00:00-07:00",
+     "end": "2026-10-26T13:00:00-07:00",
+     "hours": 20
+    }
+   ]
+  },
+  {
+   "name": "Crystal to Greenwater SR 410",
+   "snapshots": 690,
+   "none": 665,
+   "nodata": 0,
+   "advised": 0,
+   "required": 4,
+   "closed": 21,
+   "advisedEpisodes": [
+    {
+     "start": "2026-10-29T00:00:00-07:00",
+     "end": "2026-10-29T04:00:00-07:00",
+     "hours": 4
+    }
+   ],
+   "requiredEpisodes": [
+    {
+     "start": "2026-10-29T00:00:00-07:00",
+     "end": "2026-10-29T04:00:00-07:00",
+     "hours": 4
+    }
+   ],
+   "closedEpisodes": [
+    {
+     "start": "2026-10-25T16:00:00-07:00",
+     "end": "2026-10-26T13:00:00-07:00",
+     "hours": 21
+    }
+   ]
+  },
+  {
+   "name": "Disautel Pass SR 155",
+   "snapshots": 723,
+   "none": 723,
+   "nodata": 0,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Loup Loup Pass SR 20",
+   "snapshots": 723,
+   "none": 0,
+   "nodata": 723,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Manastash Ridge I-82",
+   "snapshots": 723,
+   "none": 723,
+   "nodata": 0,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Mt. Baker Hwy SR 542",
+   "snapshots": 704,
+   "none": 638,
+   "nodata": 0,
+   "advised": 0,
+   "required": 0,
+   "closed": 66,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": [
+    {
+     "start": "2026-10-25T16:00:00-07:00",
+     "end": "2026-10-26T16:00:00-07:00",
+     "hours": 24
+    },
+    {
+     "start": "2026-10-27T12:00:00-07:00",
+     "end": "2026-10-29T08:00:00-07:00",
+     "hours": 42
+    }
+   ]
+  },
+  {
+   "name": "North Cascade Hwy SR 20",
+   "snapshots": 723,
+   "none": 76,
+   "nodata": 647,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Satus Pass US 97",
+   "snapshots": 723,
+   "none": 723,
+   "nodata": 0,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Sherman Pass SR 20",
+   "snapshots": 723,
+   "none": 723,
+   "nodata": 0,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Snoqualmie Pass I-90",
+   "snapshots": 723,
+   "none": 717,
+   "nodata": 0,
+   "advised": 6,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [
+    {
+     "start": "2026-10-28T04:00:00-07:00",
+     "end": "2026-10-28T10:00:00-07:00",
+     "hours": 6
+    }
+   ],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Stevens Pass US 2",
+   "snapshots": 723,
+   "none": 713,
+   "nodata": 0,
+   "advised": 10,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [
+    {
+     "start": "2026-10-28T03:00:00-07:00",
+     "end": "2026-10-28T13:00:00-07:00",
+     "hours": 10
+    }
+   ],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Tiger Mountain SR18",
+   "snapshots": 723,
+   "none": 723,
+   "nodata": 0,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "Wauconda Pass SR 20",
+   "snapshots": 723,
+   "none": 0,
+   "nodata": 723,
+   "advised": 0,
+   "required": 0,
+   "closed": 0,
+   "advisedEpisodes": [],
+   "requiredEpisodes": [],
+   "closedEpisodes": []
+  },
+  {
+   "name": "White Pass  US 12",
+   "snapshots": 723,
+   "none": 706,
+   "nodata": 0,
+   "advised": 16,
+   "required": 1,
+   "closed": 0,
+   "advisedEpisodes": [
+    {
+     "start": "2026-10-28T03:00:00-07:00",
+     "end": "2026-10-28T20:00:00-07:00",
+     "hours": 17
+    }
+   ],
+   "requiredEpisodes": [
+    {
+     "start": "2026-10-28T03:00:00-07:00",
+     "end": "2026-10-28T04:00:00-07:00",
+     "hours": 1
+    }
+   ],
+   "closedEpisodes": []
+  }
+ ],
+ "co": {
+  "postings": 9,
+  "days": [
+   "2026-10-14",
+   "2026-10-24"
+  ],
+  "roads": [
+   "I-70",
+   "SH-9",
+   "US-550"
+  ],
+  "byRoad": {
+   "I-70": 1,
+   "SH-9": 1,
+   "US-550": 7
+  }
+ },
+ "mt": {
+  "postings": 14,
+  "days": [
+   "2026-10-11",
+   "2026-10-23",
+   "2026-10-26",
+   "2026-10-28"
+  ],
+  "roads": [
+   "I-15",
+   "I-90",
+   "MT-200",
+   "US-12",
+   "US-287"
+  ],
+  "byRoad": {
+   "I-15": 2,
+   "I-90": 3,
+   "MT-200": 3,
+   "US-12": 4,
+   "US-287": 2
+  }
+ }
+}
