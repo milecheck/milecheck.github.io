@@ -34,26 +34,26 @@ const list = (a) => a.length <= 1 ? a.join('') : a.slice(0, -1).join(', ') + ' a
 const days = (a) => list(a.map(d => { const [, m, dd] = d.split('-').map(Number); return `${MON[m]} ${dd}`; }));
 const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><strong>Counted through ${esc(when(asOf))} Pacific</strong> · from WSDOT's pass reports, saved every hour since ${esc(dayOnly(from))}</p>
     <p class="lede"><strong>${esc(lede)}</strong></p>
-    <p>It is early. Most Washington passes post no rule for most of the year, and the rules start when the first real storms arrive. This page keeps the count as the winter goes on.</p>
+    <p>These counts start September 26 and run through the time above. We update them as more restrictions are posted.</p>
     <h2>What did each pass show?</h2>
     <p>Each number is the count of hourly reports in which WSDOT's restriction line for that pass read closed, traction tires advised, or traction tires required. One hour is one report. All times are Pacific.</p>
     <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5"><thead><tr><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Pass</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Closed</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Traction tires advised</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Traction tires required</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">First posted</th></tr></thead><tbody>
 ${tbl.replace(/<td>/g, '<td style="padding:10px 6px;border-bottom:1px solid #eee;vertical-align:top">')}
 </tbody></table></div>
-    <p>Required hours are also counted under advised, because a pass that requires traction tires was advised first. WSDOT's "traction tires required" line on White Pass, Chinook Pass and SR 410 also said chains are required on vehicles over 10,000 pounds gross weight.</p>
+    <p>The advised column counts hours at advised only. A pass that requires traction tires was advised first, and those hours are in the required column. WSDOT's "traction tires required" line on White Pass, Chinook Pass and SR 410 also said chains are required on vehicles over 10,000 pounds gross weight.</p>
     <h2>When did it happen?</h2>
     <ul>
-      <li><strong>October 25 and 26.</strong> WSDOT listed Cayuse Pass, Chinook Pass, SR 410 from Crystal Mountain to Greenwater and the Mt. Baker Highway as closed, for between 17 and 24 hours each. The Mt. Baker Highway was listed as closed again from October 27 at noon, 42 hours so far.</li>
-      <li><strong>October 28.</strong> Traction tires advised from about 3 AM on Stevens Pass (10 hours) and White Pass (17 hours, with one hour of traction tires required), from 4 AM on Snoqualmie Pass and Blewett Pass (6 hours each), and from 6 AM on Cayuse Pass (24 hours).</li>
+      <li><strong>October 25 and 26.</strong> WSDOT listed Cayuse Pass, Chinook Pass, SR 410 from Crystal Mountain to Greenwater and the Mt. Baker Highway as closed, for between 17 and 24 hours each. The Mt. Baker Highway was listed as closed again from October 27 at noon, with 42 hourly reports so far.</li>
+      <li><strong>October 28.</strong> Traction tires advised from about 3 AM on Stevens Pass (10 hours) and White Pass (16 hours advised and one hour required), from 4 AM on Snoqualmie Pass and Blewett Pass (6 hours each), and from 6 AM on Cayuse Pass (24 hours).</li>
       <li><strong>October 29.</strong> Traction tires required on SR 410 near Crystal Mountain from about midnight and on Chinook Pass from about 4 AM, 4 hours each in the reports so far.</li>
     </ul>
     <h2>What does this not tell you?</h2>
     <ul>
-      <li>One early storm is not a pattern. Ask again in January.</li>
+      <li>These early-season counts do not show how often restrictions are posted over a full winter.</li>
       <li>WSDOT posts one restriction line for each pass. It does not separate eastbound from westbound in this report.</li>
-      <li>We saved ${D.snapshots} of ${D.expectedSnapshots} possible hourly reports. An hour we did not save is not counted, so a count can be low by an hour or two.</li>
+      <li>We saved ${D.snapshots} of ${D.expectedSnapshots} possible hourly reports. The ${D.expectedSnapshots - D.snapshots} hours we did not save are not counted, so some totals may be low.</li>
       <li>${esc(list(noInfo))} showed "no current information available" for most or all of the period, so they are not in the table.</li>
-      <li>The table says what WSDOT posted. The sign on the road and the WSDOT pass page decide what you need.</li>
+      <li>These are past restrictions. Check the current WSDOT pass report and the signs on the road before you drive.</li>
     </ul>
     <h2>What about Colorado and Montana?</h2>
     <p>Their feeds post notices rather than a line for each pass, so we count postings, not hours. Colorado posted its Traction Law (Code 15) ${co.postings} times on ${esc(list(co.roads))}, on ${esc(days(co.days))}. Montana posted "chains required for towing units" ${mt.postings} times on ${esc(list(mt.roads))}, on ${esc(days(mt.days))}. California's chain control records in our log all carry one label and one start day, so we cannot tell separate events apart and leave them out.</p>
