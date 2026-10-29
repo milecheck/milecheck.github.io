@@ -48,6 +48,9 @@ async function probe(st) {
     out.cameras = Array.isArray(c.cameras) ? c.cameras.length : 0;
     if (c.supported === false) out.cameraSupported = false;
     if (c.supported !== false && c.unavailable) out.cameraUnavailable = true;
+    // The Worker serves a saved copy (up to 24 h old) when the DOT feed is down, marked stale + since. Users still
+    // see cameras, so that is a warning until the copy is older than STALE_HOURS, not an outage (10/29).
+    if (c.stale && out.cameras > 0) { out.cameraStale = true; out.cameraSince = c.since || null; }
   } catch (e) { out.errors.push(`cameras: ${e.message}`); }
   try {
     const a = await getJson(`${WORKER}/incidents?state=${st}`);
@@ -106,13 +109,20 @@ for (const st of ALL) {
   const b = base.states[st]; const p = live[st];
   if (!b) { warnings.push(`${st}: not in baseline (run --update-baseline)`); continue; }
   for (const e of p.errors) problems.push(`${st}: Worker request failed, ${e}`);
-  if (p.cameraUnavailable) { seenBroken.add(`${st}:cameras`); flag(`${st}:cameras`, `${st}: camera feed says unavailable (supported, but the DOT source is not answering)`); }
+  if (p.cameraUnavailable && p.cameraStale) {
+    const ageH = p.cameraSince ? (Date.now() - new Date(p.cameraSince).getTime()) / 36e5 : null;
+    const note = `${st}: cameras are a saved copy from ${p.cameraSince ? `${ageH.toFixed(1)}h ago` : 'an unknown time'} (the DOT feed is not answering; users still see ${p.cameras} cameras)`;
+    seenBroken.add(`${st}:cameras`);
+    if (ageH == null || ageH > STALE_HOURS) flag(`${st}:cameras`, `${note}, older than ${STALE_HOURS}h`);
+    else warnings.push(note);
+  } else if (p.cameraUnavailable) { seenBroken.add(`${st}:cameras`); flag(`${st}:cameras`, `${st}: camera feed says unavailable (supported, but the DOT source is not answering)`); }
   else if (p.cameras != null && b.cameras > 0) {
     if (p.cameras === 0) flag(`${st}:cameras`, `${st}: cameras dropped to 0 (baseline ${b.cameras})`);
     else if (p.cameras < b.cameras * (1 - CAMERA_DROP)) flag(`${st}:cameras`, `${st}: cameras fell to ${p.cameras} (baseline ${b.cameras}, over ${CAMERA_DROP * 100}% drop)`);
   }
   if (p.alerts != null) {
     if (p.alertStatus === 'failed') { seenBroken.add(`${st}:alerts`); flag(`${st}:alerts`, `${st}: alert feed status is "failed"`); }
+    else if (p.alertStatus === 'stale') warnings.push(`${st}: alert feed is a saved copy (the DOT feed is not answering)`);
     else if (p.alertStatus === 'partial' || p.alertErrors) warnings.push(`${st}: alert feed partial (${p.alertErrors} source error(s))`);
     if (p.alerts === 0 && b.alerts >= ALERT_MIN_BASELINE && !allow.has(st)) problems.push(`${st}: alert feed empty (baseline ${b.alerts})`);
     if (p.fetchedAt) {
