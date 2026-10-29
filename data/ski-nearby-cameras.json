@@ -9,6 +9,8 @@
     "route": "I-70",
     "direction": "EB",
     "mile": 195.26,
+    "lat": 39.5065,
+    "lon": -106.1435,
     "d": 0.8,
     "views": 1
    },
@@ -17,6 +19,8 @@
     "route": "SH-91",
     "direction": "NB",
     "mile": 22.23,
+    "lat": 39.5043,
+    "lon": -106.1413,
     "d": 0.9,
     "views": 1
    },
@@ -25,6 +29,8 @@
     "route": "I-70",
     "direction": "WB",
     "mile": 195.86,
+    "lat": 39.515,
+    "lon": -106.1455,
     "d": 1.2,
     "views": 1
    },
@@ -33,6 +39,8 @@
     "route": "I-70",
     "direction": "WB",
     "mile": 193.09,
+    "lat": 39.5055,
+    "lon": -106.1806,
     "d": 1.4,
     "views": 1
    },
@@ -41,6 +49,8 @@
     "route": "I-70",
     "direction": "WB",
     "mile": 192.1,
+    "lat": 39.5074,
+    "lon": -106.1998,
     "d": 2.4,
     "views": 1
    },
@@ -49,6 +59,8 @@
     "route": "I-70",
     "direction": "WB",
     "mile": 191.79,
+    "lat": 39.5092,
+    "lon": -106.2016,
     "d": 2.5,
     "views": 1
    },
@@ -57,6 +69,8 @@
     "route": "I-70",
     "direction": "WB",
     "mile": 197.8,
+    "lat": 39.5369,
+    "lon": -106.1434,
     "d": 2.7,
     "views": 1
    },
@@ -65,6 +79,8 @@
     "route": "I-70",
     "direction": "EB",
     "mile": 198.39,
+    "lat": 39.5442,
+    "lon": -106.1391,
     "d": 3.2,
     "views": 1
    },
@@ -73,6 +89,8 @@
     "route": "I-70",
     "direction": "WB",
     "mile": 198.68,
+    "lat": 39.5483,
+    "lon": -106.1383,
     "d": 3.5,
     "views": 1
    },
@@ -81,6 +99,8 @@
     "route": "I-70",
     "direction": "WB",
     "mile": 190.42,
+    "lat": 39.5251,
+    "lon": -106.2153,
     "d": 3.6,
     "views": 1
    }
@@ -96,6 +116,8 @@
     "route": "SH-145",
     "direction": "NB",
     "mile": 70.55,
+    "lat": 37.9431,
+    "lon": -107.8821,
     "d": 2.1,
     "views": 3
    },
@@ -104,6 +126,8 @@
     "route": "US-550",
     "direction": "NB",
     "mile": 87.94,
+    "lat": 37.9686,
+    "lon": -107.6592,
     "d": 10.4,
     "views": 3
    },
@@ -112,6 +136,8 @@
     "route": "SH-62",
     "direction": "SB",
     "mile": 13.05,
+    "lat": 38.0943,
+    "lon": -107.8808,
     "d": 11.1,
     "views": 3
    },
@@ -120,6 +146,8 @@
     "route": "US-550",
     "direction": "NB",
     "mile": 70.62,
+    "lat": 37.8065,
+    "lon": -107.6731,
     "d": 13,
     "views": 3
    },
@@ -128,6 +156,8 @@
     "route": "US-550",
     "direction": "SB",
     "mile": 103.7,
+    "lat": 38.1517,
+    "lon": -107.7485,
     "d": 15.8,
     "views": 4
    },
@@ -136,6 +166,8 @@
     "route": "US-550",
     "direction": "SB",
     "mile": 104,
+    "lat": 38.1552,
+    "lon": -107.7521,
     "d": 16,
     "views": 3
    },
@@ -144,6 +176,8 @@
     "route": "SH-145",
     "direction": "SB",
     "mile": 47.25,
+    "lat": 37.6939,
+    "lon": -108.0316,
     "d": 19.6,
     "views": 2
    }
@@ -159,6 +193,8 @@
     "route": "MT-1",
     "direction": "",
     "mile": 25.4,
+    "lat": 46.1908,
+    "lon": -113.2653,
     "d": 5.2,
     "views": 1
    },
@@ -167,6 +203,8 @@
     "route": "MT-1",
     "direction": "",
     "mile": 25.4,
+    "lat": 46.1908,
+    "lon": -113.2653,
     "d": 5.2,
     "views": 1
    },
@@ -175,6 +213,8 @@
     "route": "MT-1",
     "direction": "",
     "mile": 25.4,
+    "lat": 46.1908,
+    "lon": -113.2653,
     "d": 5.2,
     "views": 1
    }
@@ -190,6 +230,8 @@
     "route": "CITY",
     "direction": "",
     "mile": 21.11,
+    "lat": 43.9918,
+    "lon": -121.6566,
     "d": 1.4,
     "views": 2
    },
@@ -198,6 +240,8 @@
     "route": "US-97",
     "direction": "NB",
     "mile": 146.55,
+    "lat": 43.9491,
+    "lon": -121.3496,
     "d": 16.9,
     "views": 1
    },
@@ -206,6 +250,8 @@
     "route": "US-97",
     "direction": "SB",
     "mile": 146.55,
+    "lat": 43.9491,
+    "lon": -121.3496,
     "d": 16.9,
     "views": 1
    },
@@ -214,6 +260,8 @@
     "route": "US-97",
     "direction": "NB",
     "mile": 150,
+    "lat": 43.9068,
+    "lon": -121.3574,
     "d": 17.2,
     "views": 2
    },
@@ -222,6 +270,8 @@
     "route": "US-97",
     "direction": "NB",
     "mile": 142.76,
+    "lat": 44.0011,
+    "lon": -121.3288,
     "d": 17.7,
     "views": 2
    },
@@ -230,6 +280,8 @@
     "route": "US-97",
     "direction": "",
     "mile": 141.09,
+    "lat": 44.013,
+    "lon": -121.3201,
     "d": 18.1,
     "views": 1
    },
@@ -238,6 +290,8 @@
     "route": "US-97",
     "direction": "",
     "mile": 139.98,
+    "lat": 44.029,
+    "lon": -121.3155,
     "d": 18.5,
     "views": 1
    },
@@ -246,6 +300,8 @@
     "route": "City",
     "direction": "",
     "mile": null,
+    "lat": 44.0508,
+    "lon": -121.3192,
     "d": 18.6,
     "views": 1
    },
@@ -254,6 +310,8 @@
     "route": "City",
     "direction": "",
     "mile": null,
+    "lat": 44.0523,
+    "lon": -121.3177,
     "d": 18.7,
     "views": 1
    },
@@ -262,6 +320,8 @@
     "route": "City",
     "direction": "",
     "mile": null,
+    "lat": 44.0516,
+    "lon": -121.3164,
     "d": 18.7,
     "views": 1
    }

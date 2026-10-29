@@ -75,6 +75,9 @@
     .sk-box li.none{color:#5b6670;font-size:14px;}
     .sk-box li.sk-go{cursor:pointer;margin:0 -8px;padding-left:8px;padding-right:8px;border-radius:8px;}
     .sk-box li.sk-go:hover{background:#F7F5EE;}
+    .sk-box li.sk-more{display:none;} .sk-box ul.open li.sk-more{display:list-item;}
+    .sk-box li.sk-seemore{border-bottom:0;padding:8px 0 2px;} .sk-seemore button{font:inherit;font-weight:800;font-size:14px;color:#0f7a4f;background:none;border:0;padding:10px 0;min-height:44px;cursor:pointer;text-decoration:underline;}
+    .kd.delay{color:#b4231a;} .sk-stat.sk-tap{cursor:pointer;}
     .sk-box .kd{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin-left:8px;}
     .kd.closure{color:#cf3320;} .kd.crash{color:#d9640f;} .kd.weather{color:#2563eb;} .kd.hazard{color:#7C3AED;} .kd.partial{color:#a16207;}
     .sk-box .pn{font-size:13px;color:#0369A1;font-weight:600;margin:6px 0 0;}
@@ -230,17 +233,17 @@
       <div class="sk-box">
         <h2>TripCheck cameras near Mt. Bachelor</h2>
         <p class="hint">10 cameras listed within 25 miles of the base on 2026-10-29, nearest first, with the names ODOT gives them. The live pictures are on the map above and in the list at the top of the page.</p>
-        <ul>
-        <li><b>Century Drive at MP 21.11</b> <span class="none">· 2 views</span> <span class="none">· 1.4 miles from the base</span></li>
-        <li><b>US97 at Bend Scales NB</b> <span class="none">· 16.9 miles from the base</span></li>
-        <li><b>US97 at Bend Scales SB</b> <span class="none">· 16.9 miles from the base</span></li>
-        <li><b>US97 at Lava Butte</b> <span class="none">· 2 views</span> <span class="none">· 17.2 miles from the base</span></li>
-        <li><b>US97 at Rocking Horse</b> <span class="none">· 2 views</span> <span class="none">· 17.7 miles from the base</span></li>
-        <li><b>US97 at Murphy Rd Exit</b> <span class="none">· 18.1 miles from the base</span></li>
-        <li><b>US97 at Powers Rd</b> <span class="none">· 18.5 miles from the base</span></li>
-        <li><b>Bend SW Colorado Ave at SW Industrial Dr</b> <span class="none">· 18.6 miles from the base</span></li>
-        <li><b>Bend NW Colorado Ave at NW Wall St</b> <span class="none">· 18.7 miles from the base</span></li>
-        <li><b>Bend NW Arizona Ave at NW Bond St</b> <span class="none">· 18.7 miles from the base</span></li>
+        <ul id="camStatic">
+        <li class="sk-go" data-cam="43.9918,-121.6566" title="Show on the map"><b>Century Drive at MP 21.11</b> <span class="none">· 2 views</span> <span class="none">· 1.4 miles from the base</span></li>
+        <li class="sk-go" data-cam="43.9491,-121.3496" title="Show on the map"><b>US97 at Bend Scales NB</b> <span class="none">· 16.9 miles from the base</span></li>
+        <li class="sk-go" data-cam="43.9491,-121.3496" title="Show on the map"><b>US97 at Bend Scales SB</b> <span class="none">· 16.9 miles from the base</span></li>
+        <li class="sk-go" data-cam="43.9068,-121.3574" title="Show on the map"><b>US97 at Lava Butte</b> <span class="none">· 2 views</span> <span class="none">· 17.2 miles from the base</span></li>
+        <li class="sk-go" data-cam="44.0011,-121.3288" title="Show on the map"><b>US97 at Rocking Horse</b> <span class="none">· 2 views</span> <span class="none">· 17.7 miles from the base</span></li>
+        <li class="sk-go" data-cam="44.0130,-121.3201" title="Show on the map"><b>US97 at Murphy Rd Exit</b> <span class="none">· 18.1 miles from the base</span></li>
+        <li class="sk-go" data-cam="44.0290,-121.3155" title="Show on the map"><b>US97 at Powers Rd</b> <span class="none">· 18.5 miles from the base</span></li>
+        <li class="sk-go" data-cam="44.0508,-121.3192" title="Show on the map"><b>Bend SW Colorado Ave at SW Industrial Dr</b> <span class="none">· 18.6 miles from the base</span></li>
+        <li class="sk-go" data-cam="44.0523,-121.3177" title="Show on the map"><b>Bend NW Colorado Ave at NW Wall St</b> <span class="none">· 18.7 miles from the base</span></li>
+        <li class="sk-go" data-cam="44.0516,-121.3164" title="Show on the map"><b>Bend NW Arizona Ave at NW Bond St</b> <span class="none">· 18.7 miles from the base</span></li>
         </ul>
         <p class="pnote"><b>Oregon chain and traction law.</b> Oregon posts chain requirements by sign in snow zones. There are no fixed dates. TripCheck lists the current requirement by highway. <a href="/chain-laws/oregon/">The law, with its sources</a>.</p>
       </div>
@@ -414,11 +417,12 @@ function dirN(d){d=String(d||'').trim().toLowerCase();if(!d||/^(both|all|unknown
 function starts(r){var v=r['start-time'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
 function ago(d){var m=Math.round((Date.now()-d.getTime())/60000);if(m<1)return 'just now';if(m<60)return m+' min ago';var h=Math.round(m/60);if(h<48)return h+' h ago';return Math.round(h/24)+' d ago';}
 
+function ends(r){var v=r['end-time'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
 var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
 var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
 var LISTED={closure:1,crash:1,weather:1,hazard:1,partial:1};
 function aIcon(k){return L.divIcon({className:'',html:'<span class="rc-dot'+(k==='closure'?' big':'')+'" style="background:'+COLOR[k]+'"></span>',iconSize:[k==='closure'?18:14,k==='closure'?18:14],iconAnchor:[k==='closure'?9:7,k==='closure'?9:7]});}
-var showCam=true,showPlow=true,showAlert=true;
+var showCam=true,showPlow=true,showAlert=true,alertsOpen=false;
 function draw(){
   camLayer.clearLayers();alertLayer.clearLayers();plowLayer.clearLayers();plowMarkers=[];alertMarkers=[];
   if(showCam)GROUPS.forEach(function(g,gi){L.circleMarker([g[0].lat,g[0].lon],{radius:RS(g.length>1?6:5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',function(){openCam(gi,false);}).addTo(camLayer);});
@@ -443,17 +447,19 @@ function loadCams(){fetchJSON(WORKER+'/cameras?state='+RES.state,4).then(functio
   CAMS=(d.cameras||[]).filter(function(c){return c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&(c.imageUrl||c.streamUrl)&&camKeep(c);}).map(function(c){return {lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||''),src:c.source==='NPS'?'National Park Service'+(c.park?', '+c.park:''):TRAFFIC,d:hav(RES.lat,RES.lon,+c.lat,+c.lon)};}).sort(function(a,b){return a.d-b.d;});
   GROUPS=groupCams();
   var el=document.getElementById('statCams');if(el)el.textContent=CAMS.length;
-  var ul=document.getElementById('camList');if(ul)ul.innerHTML=CAMS.length?CAMS.slice(0,12).map(function(c){return '<li>'+esc(c.title)+'<span class="m">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+(KM?Math.round(c.d*1.609)+' km':c.d.toFixed(1)+' mi')+' from the base · '+esc(c.src||TRAFFIC)+'</span></li>';}).join('')+(CAMS.length>12?'<li class="none">'+(CAMS.length-12)+' more on the map.</li>':''):'<li class="none">'+(CR?'No public camera is on the access road right now.':esc(TRAFFIC)+' has no camera within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base.')+'</li>';
+  var ul=document.getElementById('camList');if(ul)ul.innerHTML=CAMS.length?CAMS.slice(0,12).map(function(c){return '<li class="sk-go" data-cam="'+c.lat.toFixed(4)+','+c.lon.toFixed(4)+'" title="Show on the map">'+esc(c.title)+'<span class="m">'+esc(c.route||'')+(c.mp>0?' · '+MKR+' '+Math.round(c.mp):'')+' · '+(KM?Math.round(c.d*1.609)+' km':c.d.toFixed(1)+' mi')+' from the base · '+esc(c.src||TRAFFIC)+'</span></li>';}).join('')+(CAMS.length>12?'<li class="none">'+(CAMS.length-12)+' more on the map.</li>':''):'<li class="none">'+(CR?'No public camera is on the access road right now.':esc(TRAFFIC)+' has no camera within '+(KM?Math.round(RES.radius*1.609)+' km':RES.radius+' miles')+' of the base.')+'</li>';
   draw();});}
 function loadAlerts(){fetchJSON(WORKER+'/incidents?state='+RES.state,3).then(function(d){
   if(!d||!Array.isArray(d['incident-reports'])){alertErr=true;draw();return;}alertErr=false;
-  var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),fh:clean(r.headline||r.description||r['impact-desc']||'Alert',1500),fd:clean(r.description||r['impact-desc']||'',1500),at:when(r),start:st,future:future};})
+  var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),fh:clean(r.headline||r.description||r['impact-desc']||'Alert',1500),fd:clean(r.description||r['impact-desc']||'',1500),at:when(r),start:st,end:ends(r),future:future};})
     .filter(function(a){return LISTED[a.k]&&onRoad(RES,KEYS,a.lat,a.lon,a.route);});
   var order={closure:0,crash:1,weather:2,hazard:3,partial:4};
   list.sort(function(a,b){return (a.future-b.future)||order[a.k]-order[b.k]||((b.at?b.at.getTime():0)-(a.at?a.at.getTime():0));});
   ALERTS=list;
   var ul=document.getElementById('alertList');
-  if(ul)ul.innerHTML=list.length?list.slice(0,30).map(function(a,i){return '<li'+(isFinite(a.lat)&&a.lat?' class="sk-go" data-i="'+i+'" title="Show on the map"':'')+'><b>'+esc(a.route||LABEL[a.k])+(a.mp?' · '+MKR+' '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</b><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span><span class="m">'+(a.future&&a.start?'Starts '+a.start.toLocaleDateString([],{month:'short',day:'numeric'})+'. ':'')+esc(a.head)+(a.at?' · '+ago(a.at):'')+'</span></li>';}).join(''):'<li class="none">No closure, crash, weather or lane report from '+esc(TRAFFIC)+' on these roads right now. A quiet feed is not an all-clear; '+esc(TRAFFIC)+' is the official list.</li>';
+  var SHOWN=3,MD=function(d){return d.toLocaleDateString([],{month:'short',day:'numeric'});};
+  if(ul){ul.innerHTML=list.length?list.slice(0,30).map(function(a,i){var dates=a.future&&a.start?' · '+MD(a.start)+' – '+(a.end&&a.end>a.start?MD(a.end):'to be announced'):'';return '<li class="'+(isFinite(a.lat)&&a.lat?'sk-go':'')+(i>=SHOWN?' sk-more':'')+'"'+(isFinite(a.lat)&&a.lat?' data-i="'+i+'" title="Show on the map"':'')+'><b>'+esc(a.route||LABEL[a.k])+(a.mp?' · '+MKR+' '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</b><span class="kd '+a.k+'">'+(a.future?'Scheduled'+dates:LABEL[a.k])+'</span>'+(a.k==='closure'?'<span class="kd delay">Expect delays</span>':'')+'<span class="m">'+esc(a.head)+(a.at?' · '+ago(a.at):'')+'</span></li>';}).join('')+(Math.min(list.length,30)>SHOWN?'<li class="sk-seemore"><button type="button" id="alertMore" aria-expanded="'+(alertsOpen?'true':'false')+'">'+(alertsOpen?'Show fewer':'See '+(Math.min(list.length,30)-SHOWN)+' more')+'</button></li>':''):'<li class="none">No closure, crash, weather or lane report from '+esc(TRAFFIC)+' on these roads right now. A quiet feed is not an all-clear; '+esc(TRAFFIC)+' is the official list.</li>';
+    ul.classList.toggle('open',alertsOpen);ul.setAttribute('data-total',Math.min(list.length,30));}
   var cc=list.filter(function(a){return !a.future&&(a.k==='closure'||a.k==='crash');}).length;var el=document.getElementById('statAlerts');if(el)el.textContent=cc;
   draw();}).catch(function(){alertErr=true;draw();});}
 function loadPlows(){if(!PLOWS)return;fetchJSON(WORKER+'/plows?state='+RES.state,3).then(function(d){
@@ -472,7 +478,11 @@ function loadPlows(){if(!PLOWS)return;fetchJSON(WORKER+'/plows?state='+RES.state
 // Leah 2026-10-16: tap a truck or a closure in the list and the map goes to it and opens it.
 function jumpTo(m,open){if(!m)return;document.getElementById('comap').scrollIntoView({behavior:'smooth',block:'start'});map.setView(m.getLatLng(),Math.max(map.getZoom(),12),{animate:true});setTimeout(open,350);}
 var pl=document.getElementById('plowList');if(pl)pl.addEventListener('click',function(e){var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showPlow){showPlow=true;var t=document.getElementById('tgPlow');if(t)t.checked=true;draw();}var t2=PLOWLIST[i];jumpTo(plowMarkers[i],function(){if(t2)showCard(MCPlows.card(t2));});});
-var al=document.getElementById('alertList');if(al)al.addEventListener('click',function(e){var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showAlert){showAlert=true;var t=document.getElementById('tgAlert');if(t)t.checked=true;draw();}jumpTo(alertMarkers[i],function(){if(alertMarkers[i])alertMarkers[i].openPopup();});});
+var al=document.getElementById('alertList');if(al)al.addEventListener('click',function(e){var mb=e.target.closest('#alertMore');if(mb){alertsOpen=!alertsOpen;al.classList.toggle('open',alertsOpen);mb.textContent=alertsOpen?'Show fewer':'See '+(+al.getAttribute('data-total')-3)+' more';mb.setAttribute('aria-expanded',alertsOpen?'true':'false');return;}var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showAlert){showAlert=true;var t=document.getElementById('tgAlert');if(t)t.checked=true;draw();}jumpTo(alertMarkers[i],function(){if(alertMarkers[i])alertMarkers[i].openPopup();});});
+// 2026-10-29: tap a camera in a list (or the cameras stat) and the map goes to it and opens its picture.
+function goCam(key){for(var gi=0;gi<GROUPS.length;gi++){var g=GROUPS[gi];if(g[0].lat.toFixed(4)+','+g[0].lon.toFixed(4)===key){if(!showCam){showCam=true;var t=document.getElementById('tgCam');if(t)t.checked=true;draw();}document.getElementById('comap').scrollIntoView({behavior:'smooth',block:'start'});map.setView([g[0].lat,g[0].lon],Math.max(map.getZoom(),13),{animate:true});setTimeout(function(){openCam(gi,false);},350);return true;}}return false;}
+['camList','camStatic'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){var li=e.target.closest('li[data-cam]');if(li&&e.target.tagName!=='A')goCam(li.getAttribute('data-cam'));});});
+var sc=document.getElementById('statCams');if(sc){var box=sc.closest('.sk-stat');if(box){box.classList.add('sk-tap');box.setAttribute('role','button');box.setAttribute('tabindex','0');var go=function(){var t=document.getElementById('camStatic')||document.getElementById('camList');if(t)t.scrollIntoView({behavior:'smooth',block:'center'});else document.getElementById('comap').scrollIntoView({behavior:'smooth',block:'start'});};box.addEventListener('click',go);box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});}}
 loadCams();loadAlerts();loadPlows();
 setInterval(loadAlerts,300000);setInterval(loadPlows,60000);setInterval(loadCams,600000);
 })();</script>
