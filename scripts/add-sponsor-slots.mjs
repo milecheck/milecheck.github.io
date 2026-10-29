@@ -132,6 +132,7 @@ for (const f of walk(ROOT).sort()) {
   const styleOk = styleClose >= 0 && html.lastIndexOf('<style', styleClose) >= 0;
   if ((!anchor && !gridOpen) || !html.includes('</body>')) { skippedShape.push(rel); continue; }
   const sp = SPON.slot({ kind: key.kind, slug: key.slug, name: titleOf(html, rel) });
+  if (!sp.html) { fs.writeFileSync(f, html); continue; } // web sponsor offer is off (lib/sponsor-slot.js WEB_SPONSORS_ENABLED); html is already stripped
   html = gridOpen
     ? html.replace(gridOpen, gridOpen + '\n' + START + '\n' + sp.html + '\n' + END)
     : html.replace(anchor, START + '\n' + sp.html + '\n' + END + '\n' + anchor);

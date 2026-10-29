@@ -1,3 +1,5 @@
+// DISABLED 2026-10-29: the web sponsor offer is off (Leah, printed list 10/29) and /sponsor/stats/ was removed. Delete this file if it stays off.
+console.log('gen-sponsor-stats-page: web sponsor offer is off, nothing written');process.exit(0);
 // Live sponsor-slot stats page (/sponsor/stats/), read from the Worker /sponsor-stats endpoint in the browser.
 // Explainer pages for curiosity searches (docs/curiosity-searches-2026-10-15.md). Bodies in data/explainers/<slug>.html,
 // written by ChatGPT 10/15 with sources and checked by Claude. Same shell as gen-rest-area-pages.mjs.

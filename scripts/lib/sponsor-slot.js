@@ -170,12 +170,18 @@ const JS = `<script>(function(){var el=document.getElementById('spon');if(!el)re
 // kind = the family (see FAMILIES). 'cameras' and 'corridor' keep their 2026-09-15 spellings.
 function prefixFor(kind) { if (!FAMILIES.includes(kind)) throw new Error('sponsor-slot: unknown family ' + kind); return kind + ':'; }
 
+// 2026-10-29 (Leah, printed list: "Remove web sponsor. Raptive will just do it once approved. Monthly report sponsor stays."):
+// the web-page sponsor offer is off. slot() writes nothing for a page unless it is a monthly Highway Report page, which
+// keeps its "Sponsor next month's Highway Report" slot. scripts/remove-web-sponsor-slots.mjs took the old slots off the pages.
+const WEB_SPONSORS_ENABLED = false;
+
 // Called once per generated page.
 // page: { slug, name, state? } — state is the 2-letter code for camera pages.
 function slot({ kind, slug, state, name }) {
   const cfg = loadConfig();
   const day = today();
   const slotKey = prefixFor(kind) + slug;
+  if (!WEB_SPONSORS_ENABLED && !/road-report|highway-report/.test(slug)) return { key: slotKey, sponsorId: 'none', html: '', css: '', js: '' };
   const { key, sponsor } = resolve(cfg, keysFor(kind, { slug, state }), day);
   const house = Object.assign({ url: '/sponsor/', cta: 'Learn more', title: 'Want to advertise with us?', copy: '' }, cfg.house || {});
   // Monthly Highway Report pages sell the NEXT report, not the page (Leah 10/1).
@@ -198,4 +204,4 @@ function summary() {
   return lines.join('\n');
 }
 
-module.exports = { CSS, slot, summary, keysFor, resolve, isActive, slotHtml, assertPagesOnly, assertSafeLinks, safeHref, esc, PAGE_KEY_RE, FAMILIES, BEACON_URL, CONFIG_PATH };
+module.exports = { WEB_SPONSORS_ENABLED, CSS, slot, summary, keysFor, resolve, isActive, slotHtml, assertPagesOnly, assertSafeLinks, safeHref, esc, PAGE_KEY_RE, FAMILIES, BEACON_URL, CONFIG_PATH };
