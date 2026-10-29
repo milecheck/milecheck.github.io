@@ -14,6 +14,9 @@ const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Mo
 
 const CITIES = [
   { slug:'seattle', name:'Seattle', state:'WA', dot:'WSDOT', lat:47.606, lon:-122.332, r:45,
+    h1:'Seattle area traffic cameras, live',
+    desc:'Watch live Seattle area traffic cameras on one map. These are WSDOT freeway and highway cameras within about 28 miles of downtown, each tagged with route and mile marker. See traffic before you leave.',
+    title:'Seattle Area Traffic Cameras — Live WSDOT Cams | MileCheck', // 10/29: the page is filtered to a 45 km radius of downtown, not statewide; "Area" says so (Leah, TODO 10/21)
     blurb:`Seattle's freeways are among the most congested in the country, and WSDOT watches them with a dense camera network across the metro and the floating bridges.`,
     freeways:`Watch <a href="../../corridors/i-5/">I-5</a> through downtown, <a href="../../corridors/i-90/">I-90</a> and SR-520 across Lake Washington, and I-405 on the Eastside.` },
   { slug:'portland', name:'Portland', state:'OR', dot:'ODOT', lat:45.52, lon:-122.68, r:40,
@@ -215,7 +218,7 @@ ${sp.css}
   <div class="co-hero">
 ${sp.html}
 ${ES_PAGES.has(c.slug) ? `    <p class="lang-switch" style="font-size:12.5px;color:#5b6670;margin:0 0 8px"><b lang="en">English</b> · <a href="/es/cameras/${c.slug}/" hreflang="es" lang="es">Español</a>${PT_PAGES.has(c.slug) ? ` · <a href="/pt/cameras/${c.slug}/" hreflang="pt" lang="pt-BR">Português</a>` : ''}</p>\n` : ''}    <div class="eyebrow">Live traffic cameras · ${c.name} · ${c.dot}</div>
-    <h1>${c.name} traffic cameras, live</h1>
+    <h1>${c.h1 || `${c.name} traffic cameras, live`}</h1>
     <p class="sub">${c.sub || `See ${c.name} traffic before you leave. Live ${c.dot} freeway cameras across the metro on one map, each tagged with its route and ${marker(c)}. Tap any camera for the latest image.`}</p>
 ${c.crossLinkHtml || ''}
     <div class="co-stats">
