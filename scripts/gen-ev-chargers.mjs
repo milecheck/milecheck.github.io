@@ -38,6 +38,17 @@ const table = `<div style="overflow-x:auto"><table data-sortable style="width:10
 ${sorted.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}>${f(r.dc)}</td><td ${td}>${f(r.l2)}</td><td ${td}>${f(r.ports)}</td><td ${td}>${f(r.locations)}</td></tr>`).join('\n')}
 </tbody></table></div>`;
 const sortJs = readFileSync('gas-prices/index.html', 'utf8').match(/<script>\ndocument\.querySelectorAll\('table\[data-sortable\]'\)[\s\S]*?<\/script>/)[0];
+// What changed since the first archived snapshot (data/ev-chargers-history.csv, one row per state per run).
+const histRows = readFileSync('data/ev-chargers-history.csv', 'utf8').trim().split('\n').slice(1).map(l => { const p = l.split(','); return { date: p[0], name: p[1].replace(/"/g, ''), dc: Number(p[6]), ports: Number(p[3]) }; });
+const firstDate = histRows.reduce((m, r) => r.date < m ? r.date : m, iso);
+const before = Object.fromEntries(histRows.filter(r => r.date === firstDate).map(r => [r.name, r]));
+const gain = states.filter(r => before[r.name]).map(r => ({ name: r.name, d: r.dc - before[r.name].dc })).sort((a, b) => b.d - a.d);
+const usBefore = before['Total'];
+const dayOf = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+const share = Math.round(us.dc / us.ports * 100);
+const changed = (firstDate < iso && usBefore && gain.length) ? `    <h2>How fast is fast charging growing?</h2>
+    <p>${share} percent of U.S. charging ports are DC fast chargers. MileCheck saves the Department of Energy's count every time it updates. Between ${dayOf(firstDate)} and ${dayOf(iso)}, the count of fast charging ports went from ${f(usBefore.dc)} to ${f(us.dc)}, a change of ${us.dc - usBefore.dc >= 0 ? '+' : ''}${f(us.dc - usBefore.dc)}. The states with the biggest gains in that time were ${gain.filter(g => g.d > 0).slice(0, 5).map(g => `${esc(g.name)} (+${f(g.d)})`).join(', ') || 'none; the counts did not rise'}.</p>
+    <p>Counts can move because chargers open, close or get re-listed, so a short gap is not a trend. This section grows as more weekly counts are saved.</p>` : '';
 const lede = `The U.S. has ${f(us.locations)} EV charging locations with ${f(us.ports)} charging ports. ${f(us.dc)} of those ports are DC fast chargers, the kind you use on a road trip.`;
 const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><strong>Last updated ${day}</strong> · U.S. Department of Energy station counts</p>
     <p class="lede"><strong>${esc(lede)}</strong></p>
@@ -48,6 +59,7 @@ const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><stron
     <p>Sorted by fast charging ports, most first. Tap a column name to sort by it. A location can have many ports.</p>
 ${table}
 ${sortJs}
+${changed}
     <p>Counts include public and private chargers in the Department of Energy's station locator, including older ones. They do not include chargers at people's homes.</p>
     <h2>Source</h2>
     <p><a href="${SRC}" target="_blank" rel="noopener">U.S. Department of Energy, Alternative Fuels Data Center, station counts by state</a> and <a href="https://afdc.energy.gov/fuels/electricity-stations" target="_blank" rel="noopener">charging levels</a>. Data as of ${day}. This page updates every week.</p>
