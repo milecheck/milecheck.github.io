@@ -18,6 +18,7 @@ const fs = require('fs');
 const path = require('path');
 const SPON = require('./lib/sponsor-slot');
 const STATES = require('./road-conditions/states.cjs');
+const { stateFacts } = require('./lib/state-facts.cjs'); // sourced per-state facts, 2026-10-29
 const APPS = require('./road-conditions/state-apps.cjs'); // official DOT app line per state, 2026-10-16
 const SLOT_CSS = SPON.slot({ kind: 'live', slug: 'road-conditions', name: '(css only)' }).css; // one call, reused by every page's <style>
 
@@ -97,6 +98,8 @@ const SEARCH_LINK = `<a href="/search/" class="nav-search"><svg width="16" heigh
 const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;}
     .rc-eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin:0 0 6px;}
     .rc-wrap h1{font-size:clamp(27px,4.4vw,40px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 10px;}
+    .rc-facts{margin:0 0 6px;padding-left:20px;max-width:78ch;}
+    .rc-facts li{margin:0 0 10px;line-height:1.6;}
     .rc-lede{font-size:16.5px;line-height:1.6;color:#3a444d;max-width:78ch;margin:0 0 18px;}
     .rc-lede a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .rc-live{display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
@@ -405,6 +408,14 @@ function statePage(s) {
 `;
   }
 
+  const factItems = stateFacts(s, slug);
+  const factsHtml = factItems.length ? `    <h2>${s.name} facts, with sources</h2>
+    <ul class="rc-facts">
+${factItems.map((i) => '      ' + i).join('\n')}
+    </ul>
+
+` : '';
+
   const chains = /chain/i.test(s.season);
   const faq = [
     [`Is the highway closed in ${s.name} right now?`, `The map above shows full closures from the ${s.dot} feed as red markers, crashes in orange, and weather and hazard alerts in blue and purple. Closures the DOT has posted for a future date are listed as scheduled, and ramp and lane closures sit under the toggle so the list stays readable. The page checks MileCheck's feed every five minutes. If the feed cannot be reached the page says so instead of showing an empty map. For the official list, open <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a>.`],
@@ -459,7 +470,7 @@ ${cardsHtml}
     <h2>What the season does to ${s.name}'s highways</h2>
     <p>${s.season}</p>
 
-    <h2>Before a ${s.name} road trip</h2>
+${factsHtml}    <h2>Before a ${s.name} road trip</h2>
     <ol class="rc-steps">
       <li>Check the map above for anything red on your route, then open <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a> for the DOT's own detour and restriction text.</li>
       ${cams ? `<li>Look at the road. The <a href="/cameras/${slug}/">${s.name} cameras</a> show the pavement itself, and most carry the mile marker.</li>` : `<li>Look at the road where you can. MileCheck's <a href="/cameras/">camera maps</a> cover 27 states; ${s.dot} may carry ${s.name}'s own.</li>`}

@@ -23,6 +23,9 @@ const fs = require('fs');
 const path = require('path');
 const SPON = require('./lib/sponsor-slot');
 const RESORTS = require('./ski-resorts.cjs');
+const FACTS_FOR = new Set(['copper-mountain', 'telluride', 'discovery', 'mt-bachelor']); // the four Google crawled and left out 2026-10-28: they get a text list of the DOT cameras near the base and the state's chain-law line
+const NEARBY = fs.existsSync(path.join(__dirname, '..', 'data', 'ski-nearby-cameras.json')) ? JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'ski-nearby-cameras.json'), 'utf8')) : {};
+const CHAIN_LEDE = (() => { try { return Object.fromEntries(require('./gen-chain-law-pages.js').PAGES.map((p) => [p.code, p.lede])); } catch (e) { return {}; } })();
 const ACCESS = require('./ski-access.json'); // solid access-road lines per slug (2026-10-23)
 // US resorts get the NWS snow forecast (api.weather.gov covers the US only).
 const NWS = new Set(['CO', 'UT', 'PA', 'MN', 'MI', 'MT', 'AK', 'WV', 'IN', 'IA', 'ND', 'WA', 'OR', 'ID', 'WY', 'NM', 'CA', 'NV', 'VT', 'NH', 'ME', 'NY', 'WI', 'MA']);
@@ -494,6 +497,23 @@ function extraBoxes(r, reg) {
   return out.join('\n');
 }
 
+
+// Text a crawler can read: the DOT cameras inside the radius, nearest first, named as the DOT names them
+// (data/ski-nearby-cameras.json from scripts/fetch-ski-cameras.mjs), and the state's chain-law line.
+function staticFacts(r, reg, km, radiusTxt) {
+  if (!FACTS_FOR.has(r.slug)) return '';
+  const n = NEARBY[r.slug];
+  const rows = n && n.cams && n.cams.length ? n.cams.map((c) => `        <li><b>${esc(c.title)}</b>${c.views > 1 ? ` <span class="none">· ${c.views} views</span>` : ''} <span class="none">· ${c.d} ${km ? 'km' : 'miles'} from the base</span></li>`).join('\n') : '';
+  const chainLine = CHAIN_LEDE[r.state] && CHAIN_PAGE[r.state] ? `\n        <p class="pnote"><b>${esc(reg.name)} chain and traction law.</b> ${esc(CHAIN_LEDE[r.state])} <a href="/chain-laws/${CHAIN_PAGE[r.state]}/">The law, with its sources</a>.</p>` : '';
+  if (!rows && !chainLine) return '';
+  return `      <div class="sk-box">
+        <h2>${reg.trafficName} cameras near ${esc(r.name)}</h2>${rows ? `
+        <p class="hint">${n.count} ${n.count === 1 ? 'camera' : 'cameras'} listed within ${radiusTxt} of the base on ${n.read}, nearest first, with the names ${esc(reg.dot)} gives them. The live pictures are on the map above and in the list at the top of the page.</p>
+        <ul>
+${rows}
+        </ul>` : ''}${chainLine}
+      </div>`;
+}
 function resortPage(r) {
   const reg = REGION[r.state];
   const plows = PLOW_FEEDS.has(r.state);
@@ -592,6 +612,7 @@ ${plowBox}
         <ul id="alertList"><li class="none">Loading the ${reg.trafficName} feed&hellip;</li></ul>
       </div>
 ${extraBoxes(r, reg)}
+${staticFacts(r, reg, km, radiusTxt)}
   </div>
 
   <div class="sk-links">

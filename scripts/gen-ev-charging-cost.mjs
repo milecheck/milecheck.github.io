@@ -31,6 +31,12 @@ ${sorted.map(r => `<tr><td ${td}>${esc(r.name)}</td><td ${td}>${per100(r.now)}</
 </tbody></table></div>`;
 const sortJs = readFileSync('gas-prices/index.html', 'utf8').match(/<script>\ndocument\.querySelectorAll\('table\[data-sortable\]'\)[\s\S]*?<\/script>/)[0];
 const lo = sorted.at(-1), hi = sorted[0];
+const trip300 = v => `$${(v * KWH * 3 / 100).toFixed(2)}`;
+const rose = [...states].map(r => ({ name: r.name, d: r.now - r.prev })).sort((a, b) => b.d - a.d);
+const trip = `    <h2>What does a 300-mile trip cost at home prices?</h2>
+    <p>At the same ${KWH} kWh per 100 miles, 300 miles comes to about ${trip300(us.now)} at the U.S. average of ${c(us.now)}. It is ${trip300(lo.now)} at ${esc(lo.name)} prices and ${trip300(hi.now)} at ${esc(hi.name)} prices. This is what the electricity costs if you charge at home, so it leaves out public charger fees.</p>
+    <h2>Where did home electricity rise the most in a year?</h2>
+    <p>Compared with a year earlier, the largest increases in cents per kilowatt-hour were ${rose.slice(0, 3).map(r => `${esc(r.name)} (${r.d >= 0 ? '+' : ''}${r.d.toFixed(1)}¢)`).join(', ')}. ${rose.filter(r => r.d < 0).length ? `Prices fell the most in ${esc(rose.at(-1).name)} (${rose.at(-1).d.toFixed(1)}¢).` : ''} The "A year earlier" column in the table has each state's number.</p>`;
 const lede = `Home electricity averaged ${c(us.now)} per kilowatt-hour in the U.S. in ${month}. For a car rated ${KWH} kWh per 100 miles, that is about ${per100(us.now)} to drive 100 miles, from ${per100(lo.now)} in ${lo.name} to ${per100(hi.now)} in ${hi.name}.`;
 const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><strong>${esc(month)} prices</strong> · U.S. Energy Information Administration</p>
     <p class="lede"><strong>${esc(lede)}</strong></p>
@@ -41,6 +47,7 @@ const body = `    <p style="font-size:14px;color:#5b6670;margin:0 0 12px"><stron
     <p>Sorted by price, highest first. Tap a column name to sort by it.</p>
 ${table}
 ${sortJs}
+${trip}
     <h2>Source</h2>
     <p><a href="${SRC}" target="_blank" rel="noopener">U.S. Energy Information Administration, Electric Power Monthly, table 5.6.A</a>, average residential price, ${esc(month)}. <a href="https://www.fueleconomy.gov/" target="_blank" rel="noopener">fueleconomy.gov</a> lists each EV's kWh per 100 miles.</p>
     <h2>More</h2>

@@ -7,6 +7,7 @@ on:
   page_build:
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: indexnow-${{ github.event.build.commit }}
   cancel-in-progress: false
@@ -19,14 +20,28 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.build.commit }}
-          fetch-depth: 2
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      # Deliberately notify only this built commit's diff, not the site's full history.
-      # Multi-commit publication ranges can be reviewed with the CLI after deployment.
+      # Notify every page changed since the last build IndexNow already handled. A push of several
+      # commits makes one page_build for the last one, so diffing only BUILT_SHA^ missed the rest.
+      # Falls back to the built commit's own diff if there is no earlier successful run or it is
+      # not an ancestor (force-push), and caps the range at 500 commits.
       - name: Notify IndexNow about changed public HTML
         env:
           BUILT_SHA: ${{ github.event.build.commit }}
-        run: node scripts/submit-indexnow.mjs --from "${BUILT_SHA}^" --to "$BUILT_SHA" --submit
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          FROM="${BUILT_SHA}^"
+          PREV=$(gh run list --workflow indexnow.yml --status success --limit 20 --json databaseId,headSha \
+            --jq "[.[] | select(.databaseId != ${RUN_ID})][0].headSha" 2>/dev/null || true)
+          if [ -n "$PREV" ] && [ "$PREV" != "null" ] && [ "$PREV" != "$BUILT_SHA" ] \
+             && git merge-base --is-ancestor "$PREV" "$BUILT_SHA" 2>/dev/null \
+             && [ "$(git rev-list --count "$PREV..$BUILT_SHA")" -le 500 ]; then
+            FROM="$PREV"
+          fi
+          echo "IndexNow range: $FROM..$BUILT_SHA"
+          node scripts/submit-indexnow.mjs --from "$FROM" --to "$BUILT_SHA" --submit

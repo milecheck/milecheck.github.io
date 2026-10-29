@@ -622,7 +622,10 @@ ${cards}
   return 'chain-laws/';
 }
 
-const written = [hubPage(), ...PAGES.map(statePage), combinedPage()];
-console.log(`chain-laws: ${written.length} pages`);
-written.forEach((p) => console.log('  ' + p));
-console.log(SPON.summary());
+module.exports = { PAGES, COMBINED }; // scripts/lib/state-facts.cjs reads the sourced ledes
+if (require.main === module) {
+  const written = [hubPage(), ...PAGES.map(statePage), combinedPage()];
+  console.log(`chain-laws: ${written.length} pages`);
+  written.forEach((p) => console.log('  ' + p));
+  console.log(SPON.summary());
+}
