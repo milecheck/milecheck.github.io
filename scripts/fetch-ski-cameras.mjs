@@ -21,7 +21,7 @@ for (const slug of slugs) {
     feeds[r.state] = (await res.json()).cameras || [];
   }
   const cams = feeds[r.state].filter(c => c.isActive !== false && isFinite(+c.lat) && +c.lat && (c.imageUrl || c.streamUrl))
-    .map(c => ({ title: String(c.title || '').trim(), route: String(c.route || '').trim(), direction: c.direction || '', mile: c.mile ?? null, d: hav(r.lat, r.lon, +c.lat, +c.lon) }))
+    .map(c => ({ title: String(c.title || '').trim(), route: String(c.route || '').trim(), direction: c.direction || '', mile: c.mile ?? null, lat: Math.round(+c.lat * 1e4) / 1e4, lon: Math.round(+c.lon * 1e4) / 1e4, d: hav(r.lat, r.lon, +c.lat, +c.lon) }))
     .filter(c => c.d <= r.radius && c.title).sort((a, b) => a.d - b.d)
     .reduce((acc, c) => { // several views on one pole share a title up to "· Looking North": one row, with the view count
       const base = c.title.replace(/\s*·\s*Looking.*$/i, '').trim();
