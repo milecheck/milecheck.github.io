@@ -75,8 +75,10 @@
     .sk-box li.none{color:#5b6670;font-size:14px;}
     .sk-box li.sk-go{cursor:pointer;margin:0 -8px;padding-left:8px;padding-right:8px;border-radius:8px;}
     .sk-box li.sk-go:hover{background:#F7F5EE;}
-    .sk-box li.sk-more{display:none;} .sk-box ul.open li.sk-more{display:list-item;}
-    .sk-box li.sk-seemore{border-bottom:0;padding:8px 0 2px;} .sk-seemore button{font:inherit;font-weight:800;font-size:14px;color:#0f7a4f;background:none;border:0;padding:10px 0;min-height:44px;cursor:pointer;text-decoration:underline;}
+    .sk-box li.sk-row{cursor:pointer;} .sk-box li.sk-row:hover{background:#F7F5EE;} .sk-what{font-weight:700;color:#1b2420;} .sk-more{color:#0f7a4f;font-weight:700;white-space:nowrap;}
+    .sk-det{display:none;margin:6px 0 4px;font-size:13.5px;line-height:1.5;color:#3a444d;} li.sk-open .sk-det{display:block;} .sk-map{font:inherit;font-weight:800;font-size:13.5px;color:#0f7a4f;background:none;border:1px solid #0f7a4f;border-radius:8px;padding:10px 14px;min-height:44px;margin-top:8px;cursor:pointer;}
+    .fp-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;font-size:13px;color:#5b6670;} .fp-nav button{font:inherit;font-size:20px;line-height:1;width:44px;height:44px;border-radius:50%;border:1px solid #cfd4da;background:#fff;color:#0f7a4f;cursor:pointer;} .fp-what{font-weight:800;font-size:14px;margin:2px 0;}
+    .sk-box ul.sk-bl,.fpop ul.sk-bl{list-style:disc;margin:4px 0 0;padding-left:20px;} .sk-box ul.sk-bl li,.fpop ul.sk-bl li{border:0;padding:1px 0;margin:0 0 3px;}
     .kd.delay{color:#b4231a;} .sk-stat.sk-tap{cursor:pointer;}
     .sk-box .kd{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin-left:8px;}
     .kd.closure{color:#cf3320;} .kd.crash{color:#d9640f;} .kd.weather{color:#2563eb;} .kd.hazard{color:#7C3AED;} .kd.partial{color:#a16207;}
@@ -405,15 +407,32 @@ function starts(r){var v=r['start-time'];if(!v)return null;var d=typeof v==='num
 function ago(d){var m=Math.round((Date.now()-d.getTime())/60000);if(m<1)return 'just now';if(m<60)return m+' min ago';var h=Math.round(m/60);if(h<48)return h+' h ago';return Math.round(h/24)+' d ago';}
 
 function ends(r){var v=r['end-time'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
+// A short "what is it" for the row, read from the DOT's own words. The full text stays under the row until it is tapped.
+// The DOT's text is one run-on paragraph (and sometimes several, joined by <br>). Split it into short lines, one fact each.
+function bullets(r){var seen={},out=[];[String(r.headline||r.description||r['impact-desc']||''),String(r.description||'')].forEach(function(x){x.replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,' ').replace(/([.!?])\s+(?=[A-Z])/g,'$1\n').split('\n').forEach(function(sn){sn=sn.replace(/\s+/g,' ').trim();if(sn.length>2){var k=sn.toLowerCase();if(!seen[k]){seen[k]=1;out.push(sn);}}});});return out.slice(0,10);}
+function bulletsHtml(a,max){return a.bl&&a.bl.length?'<ul class="sk-bl">'+a.bl.slice(0,max||10).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'<p style="margin:4px 0 0">'+esc(a.fh)+'</p>';}
+function what(a){var t=(a.fh+' '+(a.fd||'')).toLowerCase(),m;
+  if(a.k==='closure')return 'Road closed';
+  if(a.k==='crash')return 'Crash';
+  if(/ramp[^.]{0,30}clos|clos[^.]{0,20}ramp/.test(t))return 'Ramp closed';
+  if(/shoulders?[^.]{0,12}clos|clos[^.]{0,25}shoulder/.test(t))return /both shoulders/.test(t)?'Both shoulders closed':(m=t.match(/(left|right) shoulder/))?m[1][0].toUpperCase()+m[1].slice(1)+' shoulder closed':'Shoulder closed';
+  if(m=t.match(/(left|right|center|centre|middle) lanes?[^.]{0,12}(clos|block)/))return m[1][0].toUpperCase()+m[1].slice(1)+' lane closed';
+  if(/lanes?[^.]{0,12}(clos|block)|lane closure|clos[^.]{0,12}lanes?/.test(t))return 'Lane closed';
+  if(/alternating traffic/.test(t))return 'Alternating traffic';
+  if(/flood/.test(t))return 'Flooding';
+  if(/rock|slide|debris/.test(t))return 'Rock or debris';
+  if(/snow|ice|icy|slick/.test(t))return 'Snow or ice';
+  if(/construction|road ?work|maintenance|paving|repair/.test(t))return 'Road work';
+  return LABEL[a.k];}
 var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
 var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
 var LISTED={closure:1,crash:1,weather:1,hazard:1,partial:1};
 function aIcon(k){return L.divIcon({className:'',html:'<span class="rc-dot'+(k==='closure'?' big':'')+'" style="background:'+COLOR[k]+'"></span>',iconSize:[k==='closure'?18:14,k==='closure'?18:14],iconAnchor:[k==='closure'?9:7,k==='closure'?9:7]});}
-var showCam=true,showPlow=true,showAlert=true,alertsOpen=false;
+var showCam=true,showPlow=true,showAlert=true;
 function draw(){
   camLayer.clearLayers();alertLayer.clearLayers();plowLayer.clearLayers();plowMarkers=[];alertMarkers=[];
   if(showCam)GROUPS.forEach(function(g,gi){L.circleMarker([g[0].lat,g[0].lon],{radius:RS(g.length>1?6:5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',function(){openCam(gi,false);}).addTo(camLayer);});
-  if(showAlert)ALERTS.forEach(function(a,i){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;var m=L.marker([a.lat,a.lon],{icon:aIcon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · '+MKR+' '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+(a.future?' · scheduled':'')+'</div><div class="fp-row">'+esc(a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});alertLayer.addLayer(m);alertMarkers[i]=m;});
+  if(showAlert)ALERTS.forEach(function(a,i){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;var m=L.marker([a.lat,a.lon],{icon:aIcon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});var ids=[];ALERTS.forEach(function(x,k){if(isFinite(x.lat)&&isFinite(x.lon)&&x.lat)ids.push(k);});var pos=ids.indexOf(i);var nav=ids.length>1?'<div class="fp-nav"><button type="button" aria-label="Previous closure" onclick="skAlertGo('+i+',-1)">&#8249;</button><span>'+(pos+1)+' of '+ids.length+'</span><button type="button" aria-label="Next closure" onclick="skAlertGo('+i+',1)">&#8250;</button></div>':'';m.bindPopup('<div class="fpop">'+nav+'<div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · '+MKR+' '+a.mp:''):LABEL[a.k])+'</div><div class="fp-what">'+esc(what(a))+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+(a.future?' · scheduled':'')+'</div><div class="fp-row">'+bulletsHtml(a,4)+(a.bl&&a.bl.length>4?'<div class="fp-more">More in the list under the map.</div>':'')+'</div></div>',{maxHeight:260,maxWidth:320});alertLayer.addLayer(m);alertMarkers[i]=m;});
   if(PLOWS&&showPlow)PLOWLIST.forEach(function(t,i){plowMarkers[i]=L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700}).on('click',function(){showCard(MCPlows.card(t));}).addTo(plowLayer);});
   var bits=[];
   if(PLOWS)bits.push(plowErr?'plow feed unavailable':'\uD83D\uDE9A '+MCPlows.summary(PLOWLIST));
@@ -422,6 +441,7 @@ function draw(){
   bits.push(alertErr?'alerts unavailable':(cc?cc+(cc===1?' closure or crash':' closures and crashes'):'no closures or crashes'));
   status.className='co-bs sk-bs'+(plowErr&&alertErr?' err':'');status.textContent=bits.join(' · ')+' on the road';
 }
+window.skAlertGo=function(i,d){var ids=[];ALERTS.forEach(function(x,k){if(alertMarkers[k])ids.push(k);});var p=ids.indexOf(i);if(p<0)return;var j=ids[(p+d+ids.length)%ids.length],m=alertMarkers[j];map.panTo(m.getLatLng());m.openPopup();};
 var tg=function(id,fn){var el=document.getElementById(id);if(el)el.onchange=function(e){fn(e.target.checked);draw();};};
 tg('tgCam',function(v){showCam=v;});tg('tgPlow',function(v){showPlow=v;});tg('tgAlert',function(v){showAlert=v;});
 function fetchJSON(url,tries){return new Promise(function(resolve){var i=0;(function go(){fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(resolve).catch(function(){if(++i<tries)setTimeout(go,1200);else resolve(null);});})();});}
@@ -438,15 +458,19 @@ function loadCams(){fetchJSON(WORKER+'/cameras?state='+RES.state,4).then(functio
   draw();});}
 function loadAlerts(){fetchJSON(WORKER+'/incidents?state='+RES.state,3).then(function(d){
   if(!d||!Array.isArray(d['incident-reports'])){alertErr=true;draw();return;}alertErr=false;
-  var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),fh:clean(r.headline||r.description||r['impact-desc']||'Alert',1500),fd:clean(r.description||r['impact-desc']||'',1500),at:when(r),start:st,end:ends(r),future:future};})
+  var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),fh:clean(r.headline||r.description||r['impact-desc']||'Alert',1500),fd:clean(r.description||r['impact-desc']||'',1500),at:when(r),start:st,end:ends(r),bl:bullets(r),future:future};})
     .filter(function(a){return LISTED[a.k]&&onRoad(RES,KEYS,a.lat,a.lon,a.route);});
   var order={closure:0,crash:1,weather:2,hazard:3,partial:4};
   list.sort(function(a,b){return (a.future-b.future)||order[a.k]-order[b.k]||((b.at?b.at.getTime():0)-(a.at?a.at.getTime():0));});
   ALERTS=list;
   var ul=document.getElementById('alertList');
   var SHOWN=3,MD=function(d){return d.toLocaleDateString([],{month:'short',day:'numeric'});};
-  if(ul){ul.innerHTML=list.length?list.slice(0,30).map(function(a,i){var dates=a.future&&a.start?' · '+MD(a.start)+' – '+(a.end&&a.end>a.start?MD(a.end):'to be announced'):'';return '<li class="'+(isFinite(a.lat)&&a.lat?'sk-go':'')+(i>=SHOWN?' sk-more':'')+'"'+(isFinite(a.lat)&&a.lat?' data-i="'+i+'" title="Show on the map"':'')+'><b>'+esc(a.route||LABEL[a.k])+(a.mp?' · '+MKR+' '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</b><span class="kd '+a.k+'">'+(a.future?'Scheduled'+dates:LABEL[a.k])+'</span>'+(a.k==='closure'?'<span class="kd delay">Expect delays</span>':'')+'<span class="m">'+esc(a.head)+(a.at?' · '+ago(a.at):'')+'</span></li>';}).join('')+(Math.min(list.length,30)>SHOWN?'<li class="sk-seemore"><button type="button" id="alertMore" aria-expanded="'+(alertsOpen?'true':'false')+'">'+(alertsOpen?'Show fewer':'See '+(Math.min(list.length,30)-SHOWN)+' more')+'</button></li>':''):'<li class="none">No closure, crash, weather or lane report from '+esc(TRAFFIC)+' on these roads right now. A quiet feed is not an all-clear; '+esc(TRAFFIC)+' is the official list.</li>';
-    ul.classList.toggle('open',alertsOpen);ul.setAttribute('data-total',Math.min(list.length,30));}
+  if(ul){ul.innerHTML=list.length?list.slice(0,30).map(function(a,i){var dates=a.future&&a.start?' · '+MD(a.start)+' – '+(a.end&&a.end>a.start?MD(a.end):'to be announced'):'';return '<li class="sk-row'+(isFinite(a.lat)&&a.lat?' sk-go':'')+'" data-i="'+i+'" tabindex="0" role="button" aria-expanded="false"><b>'+esc(a.route||LABEL[a.k])+(a.mp?' · '+MKR+' '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</b><span class="kd '+a.k+'">'+(a.future?'Scheduled'+dates:LABEL[a.k])+'</span>'+(a.k==='closure'?'<span class="kd delay">Expect delays</span>':'')+'<span class="m"><b class="sk-what">'+esc(what(a))+'</b>'+(a.at?' · '+ago(a.at):'')+' <span class="sk-more">Details &#9662;</span></span><div class="sk-det">'+bulletsHtml(a)+(isFinite(a.lat)&&a.lat?'<button type="button" class="sk-map">Show on the map</button>':'')+'</div></li>';}).join(''):'<li class="none">No closure, crash, weather or lane report from '+esc(TRAFFIC)+' on these roads right now. A quiet feed is not an all-clear; '+esc(TRAFFIC)+' is the official list.</li>';
+    // Leah 2026-10-29: the box shows three alerts and scrolls inside itself for the rest, so the page never grows past the snow forecast.
+    var rows=ul.querySelectorAll('li.sk-row'),cap=document.getElementById('alertCap');
+    if(!cap){cap=document.createElement('p');cap.id='alertCap';cap.className='pnote';cap.style.margin='6px 0 0';ul.parentNode.insertBefore(cap,ul.nextSibling);}
+    if(rows.length>SHOWN){var h=0;for(var q=0;q<SHOWN;q++)h+=rows[q].offsetHeight;ul.style.maxHeight=(h+2)+'px';ul.setAttribute('data-h',h+2);ul.style.overflowY='auto';ul.style.overscrollBehavior='contain';ul.style.borderBottom='1px solid #E5E5E5';cap.textContent='Showing 3 of '+rows.length+'. Scroll this box for the rest.';}
+    else{ul.style.maxHeight='';ul.style.overflowY='';ul.style.borderBottom='';cap.textContent='';}}
   var cc=list.filter(function(a){return !a.future&&(a.k==='closure'||a.k==='crash');}).length;var el=document.getElementById('statAlerts');if(el)el.textContent=cc;
   draw();}).catch(function(){alertErr=true;draw();});}
 function loadPlows(){if(!PLOWS)return;fetchJSON(WORKER+'/plows?state='+RES.state,3).then(function(d){
@@ -465,7 +489,9 @@ function loadPlows(){if(!PLOWS)return;fetchJSON(WORKER+'/plows?state='+RES.state
 // Leah 2026-10-16: tap a truck or a closure in the list and the map goes to it and opens it.
 function jumpTo(m,open){if(!m)return;document.getElementById('comap').scrollIntoView({behavior:'smooth',block:'start'});map.setView(m.getLatLng(),Math.max(map.getZoom(),12),{animate:true});setTimeout(open,350);}
 var pl=document.getElementById('plowList');if(pl)pl.addEventListener('click',function(e){var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showPlow){showPlow=true;var t=document.getElementById('tgPlow');if(t)t.checked=true;draw();}var t2=PLOWLIST[i];jumpTo(plowMarkers[i],function(){if(t2)showCard(MCPlows.card(t2));});});
-var al=document.getElementById('alertList');if(al)al.addEventListener('click',function(e){var mb=e.target.closest('#alertMore');if(mb){alertsOpen=!alertsOpen;al.classList.toggle('open',alertsOpen);mb.textContent=alertsOpen?'Show fewer':'See '+(+al.getAttribute('data-total')-3)+' more';mb.setAttribute('aria-expanded',alertsOpen?'true':'false');return;}var li=e.target.closest('li.sk-go');if(!li)return;var i=+li.getAttribute('data-i');if(!showAlert){showAlert=true;var t=document.getElementById('tgAlert');if(t)t.checked=true;draw();}jumpTo(alertMarkers[i],function(){if(alertMarkers[i])alertMarkers[i].openPopup();});});
+var al=document.getElementById('alertList');function skToggle(li){var o=li.classList.toggle('sk-open');li.setAttribute('aria-expanded',o?'true':'false');var mo=li.querySelector('.sk-more');if(mo)mo.innerHTML=o?'Hide &#9652;':'Details &#9662;';if(o)li.scrollIntoView({block:'nearest',behavior:'smooth'});}
+if(al)al.addEventListener('keydown',function(e){var li=e.target.closest('li.sk-row');if(li&&e.target===li&&(e.key==='Enter'||e.key===' ')){e.preventDefault();skToggle(li);}});
+if(al)al.addEventListener('click',function(e){var li=e.target.closest('li.sk-row');if(!li)return;if(!e.target.closest('.sk-map')){skToggle(li);return;}var i=+li.getAttribute('data-i');if(!showAlert){showAlert=true;var t=document.getElementById('tgAlert');if(t)t.checked=true;draw();}jumpTo(alertMarkers[i],function(){if(alertMarkers[i])alertMarkers[i].openPopup();});});
 // 2026-10-29: tap a camera in a list (or the cameras stat) and the map goes to it and opens its picture.
 function goCam(key){for(var gi=0;gi<GROUPS.length;gi++){var g=GROUPS[gi];if(g[0].lat.toFixed(4)+','+g[0].lon.toFixed(4)===key){if(!showCam){showCam=true;var t=document.getElementById('tgCam');if(t)t.checked=true;draw();}document.getElementById('comap').scrollIntoView({behavior:'smooth',block:'start'});map.setView([g[0].lat,g[0].lon],Math.max(map.getZoom(),13),{animate:true});setTimeout(function(){openCam(gi,false);},350);return true;}}return false;}
 ['camList','camStatic'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){var li=e.target.closest('li[data-cam]');if(li&&e.target.tagName!=='A')goCam(li.getAttribute('data-cam'));});});
