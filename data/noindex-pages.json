@@ -1,0 +1,5 @@
+{
+  "_comment": "Pages that stay up for readers and old links but are kept out of search and the sitemap. Read by scripts/noindex-old-reports.mjs (runs in finish-pages). A directory means every .html file in it. 2026-10-30: the dated per-state pages from last month's reports (Search Console showed 336 of 1,118 pages Discovered but not indexed on 10/28, and these are near-duplicates of each other by design). The national report pages stay indexed.",
+  "dirs": ["blog/highway-report-september-2026-states", "blog/labor-day-weekend-recap-2026-states"],
+  "files": []
+}
