@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-10-29T22:52:19.889Z",
+   "fetchedAt": "2026-10-30T06:04:17.068Z",
    "ok": true,
    "rows": [
     {
@@ -82,7 +82,7 @@
      "multiple": true,
      "location": "Maupin, OR",
      "pay": "$4,312 to $5,988 a month",
-     "closes": "2026-10-26",
+     "closes": "2026-11-12",
      "closesNote": "Open until filled. May close any time after this date.",
      "kind": "Seasonal",
      "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Maupin--ODOT--Maintenance/Highway-Maintenance-Specialist--Seasonal---Multiple-Positions-_REQ-208114",
@@ -119,7 +119,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-10-29T22:52:19.889Z",
+   "fetchedAt": "2026-10-30T06:04:17.068Z",
    "ok": true,
    "rows": [
     {
@@ -190,5 +190,5 @@
    ]
   }
  },
- "updatedAt": "2026-10-29T22:52:19.889Z"
+ "updatedAt": "2026-10-30T06:04:17.068Z"
 }
