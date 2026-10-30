@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // gen-api-docs-pages.mjs — the developer-facing API reference pages (2026-10-30):
-//   /api/versioning/  /api/changelog/  /api/errors/  /api/data/
+//   /api/versioning/  /api/changelog/  /api/errors/  /api/data-accuracy/
 // Built from the head, nav, values block and footer of /api/plan/ so they follow the site template.
 // Facts come from the Worker (cloudflare-worker.js on branch api-pro) and the coverage ledger. When the API
 // changes, add a line to CHANGELOG below and re-run. Then: node scripts/add-social-tags.mjs
@@ -56,7 +56,7 @@ function shell({ slug, title, desc, body }) {
     .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`)
     .replace(/\n\s*<meta name="twitter:[^>]*>/g, '')
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, '');
-  const nav = `<nav class="mc-crumbs" aria-label="API reference" style="max-width:820px;margin:18px auto 0;padding:0 20px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 16px"><a href="/api/">API</a><a href="/api/errors/">Errors and limits</a><a href="/api/data/">Data and accuracy</a><a href="/api/versioning/">Versioning</a><a href="/api/changelog/">Changelog</a><a href="https://status.milecheckapp.com/" target="_blank" rel="noopener">Status</a></nav>`;
+  const nav = `<nav class="mc-crumbs" aria-label="API reference" style="max-width:820px;margin:18px auto 0;padding:0 20px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 16px"><a href="/api/">API</a><a href="/api/errors/">Errors and limits</a><a href="/api/data-accuracy/">Data and accuracy</a><a href="/api/versioning/">Versioning</a><a href="/api/changelog/">Changelog</a><a href="https://status.milecheckapp.com/" target="_blank" rel="noopener">Status</a></nav>`;
   const ld = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'TechArticle', headline: title, description: desc, url, publisher: { '@type': 'Organization', name: 'MileCheck', url: 'https://milecheckapp.com/' } })}</script>`;
   return head.replace('</head>', `${ld}\n</head>`) + `\n${nav}\n${body}\n` + tpl.slice(valuesAt);
 }
@@ -115,7 +115,7 @@ pages.versioning = shell({
   title: 'How does the MileCheck API handle version changes?',
   desc: 'What changes inside v1 without notice, what counts as a breaking change, how much notice you get before anything is removed, and where to watch for it.',
   body: hero('How does the MileCheck API handle version changes?', 'The version is in the URL. Inside a version we add things and do not take them away. If we must remove or change something, you hear first.') +
-  section(`<h2>Inside v1 (no notice needed)</h2><ul class="lead"><li>New endpoints.</li><li>New optional request parameters.</li><li>New fields in a response. Code that reads JSON should ignore fields it does not know.</li><li>New values in fields that are open sets, such as event types, source names and error codes. Handle an unknown value as "other".</li><li>Faster or slower feed refresh where a state changes how it publishes.</li><li>Corrections to wrong data. See <a href="/api/data/">data and accuracy</a>.</li></ul>`) +
+  section(`<h2>Inside v1 (no notice needed)</h2><ul class="lead"><li>New endpoints.</li><li>New optional request parameters.</li><li>New fields in a response. Code that reads JSON should ignore fields it does not know.</li><li>New values in fields that are open sets, such as event types, source names and error codes. Handle an unknown value as "other".</li><li>Faster or slower feed refresh where a state changes how it publishes.</li><li>Corrections to wrong data. See <a href="/api/data-accuracy/">data and accuracy</a>.</li></ul>`) +
   section(`<h2>Breaking changes (a new version, or notice)</h2><ul class="lead"><li>Removing or renaming an endpoint, parameter or field.</li><li>Changing the type or meaning of a field.</li><li>Making an optional parameter required.</li><li>Changing a status code for the same situation.</li></ul><p class="lead">Breaking changes ship as <code>/v2</code>, not inside <code>/v1</code>.</p>`) +
   section(`<h2>Notice</h2>` + table(['What', 'Notice', 'How you hear'], [
     ['Deprecating a field or endpoint inside v1', '90 days before it is removed', 'Email to the address on the key, a line in the <a href="/api/changelog/">changelog</a>, and <code>Deprecation</code> and <code>Sunset</code> headers on affected responses'],
@@ -136,8 +136,8 @@ pages.changelog = shell({
 
 // ================= data =================
 const L = ledger.feeds || {};
-pages.data = shell({
-  slug: 'data',
+pages['data-accuracy'] = shell({
+  slug: 'data-accuracy',
   title: 'What is in the MileCheck API data, and how accurate is it?',
   desc: 'Response fields, how IDs behave, where each state\'s data comes from, how fresh it is, and the known limits of the mile marker and alert data.',
   body: hero('What is in the MileCheck API data, and how accurate is it?', 'What each field is, which IDs you can store, where the data comes from, and where it is wrong or missing. Written for the engineer who has to rely on it.') +
