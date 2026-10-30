@@ -16,6 +16,7 @@
     if (/^\/(?:states|road-conditions)(?:\/|$)/.test(path)) return 'states';
     if (/^\/(?:maps|closures|fire|borders|ferries|passes|grades|corridors|bridges|mountains|mountain-roads|enchantments-roads)(?:\/|$)/.test(path)) return 'maps';
     if (/^\/(?:partners|api)(?:\/|$)/.test(path)) return 'b2b';
+    if (/^\/pricing(?:\/|$)/.test(path)) return 'pricing';
     if (/^\/blog(?:\/|$)/.test(path)) return 'blog';
     if (/^\/search(?:\/|$)/.test(path)) return 'search';
     if (/^\/get(?:\/|$)/.test(path)) return 'get';
