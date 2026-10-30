@@ -15,6 +15,7 @@
 // /closures/ rule, ChatGPT review 2026-08-21).
 'use strict';
 const fs = require('fs');
+const CAM_STATES = require('../data/coverage-ledger.json').feeds.cameras.us_states; // ledger number, never typed by hand
 const path = require('path');
 const SPON = require('./lib/sponsor-slot');
 const STATES = require('./road-conditions/states.cjs');
@@ -475,7 +476,7 @@ ${cardsHtml}
 ${factsHtml}    <h2>Before a ${s.name} road trip</h2>
     <ol class="rc-steps">
       <li>Check the map above for anything red on your route, then open <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a> for the DOT's own detour and restriction text.</li>
-      ${cams ? `<li>Look at the road. The <a href="/cameras/${slug}/">${s.name} cameras</a> show the pavement itself, and most carry the mile marker.</li>` : `<li>Look at the road where you can. MileCheck's <a href="/cameras/">camera maps</a> cover 27 states; ${s.dot} may carry ${s.name}'s own.</li>`}
+      ${cams ? `<li>Look at the road. The <a href="/cameras/${slug}/">${s.name} cameras</a> show the pavement itself, and most carry the mile marker.</li>` : `<li>Look at the road where you can. MileCheck's <a href="/cameras/">camera maps</a> cover <!--cov:cameras.us_states-->${CAM_STATES}<!--/cov--> states; ${s.dot} may carry ${s.name}'s own.</li>`}
       ${passLinks.length ? `<li>If the route crosses ${joinList(passLinks)}, read the pass page for the summit cameras, snow depth and chain rules.</li>` : ''}
       ${corridorLinks.length ? `<li>For the long haul, the ${joinList(corridorLinks)} corridor ${corridorLinks.length === 1 ? 'page carries' : 'pages carry'} alerts for every state the route crosses, not only ${s.name}.</li>` : ''}
       <li>Know how to say where you are. Dispatch, 911 and tow companies ask for the route, the direction and the mile marker. <a href="/report-location/">How to report your location on the highway</a>.</li>

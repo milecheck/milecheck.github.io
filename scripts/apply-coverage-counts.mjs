@@ -42,7 +42,7 @@ function htmlFiles(dir, acc = []) {
 
 const RE = /<!--cov:([a-z_.]+)-->(.*?)<!--\/cov-->/gs;
 
-import { RAW_RULES } from './lib/coverage-rules.mjs';
+import { RAW_RULES, unwrapMarkersInTextSpots } from './lib/coverage-rules.mjs';
 function applyRaw(rel, src) {
   let out = src;
   for (const [fileRe, textRe, key, fmt] of RAW_RULES) {
@@ -65,7 +65,7 @@ let changed = 0, marks = 0, missing = [];
 for (const file of htmlFiles(ROOT)) {
   const src = readFileSync(file, 'utf8');
   const rel = relative(ROOT, file).split('\\').join('/');
-  const raw = applyRaw(rel, src);
+  const raw = applyRaw(rel, unwrapMarkersInTextSpots(src));
   if (!raw.includes('<!--cov:')) { if (raw !== src && !DRY) writeFileSync(file, raw); continue; }
   const out = raw.replace(RE, (full, key, current) => {
     marks++;

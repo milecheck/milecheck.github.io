@@ -15,3 +15,19 @@ export const RAW_RULES = [
   [/^corridors\/i-5\/index\.html$/, /cameras in (\d[\d,]*) states/g, 'cameras.us_states', fmtInt],
   [/^blog\/(labor-day-weekend-recap-2026(-states\/[a-z-]+)?|road-report-august-2026)\.html$/, /all (\d[\d,]*) crossings/g, 'borders.crossings', fmtInt],
 ];
+
+// A comment marker is literal text inside <title>, <meta ...> and JSON-LD. Counts there are
+// governed by RAW_RULES, so any marker pair found in those spots is unwrapped to its number.
+// Used by apply-coverage-counts.mjs (heals) and check-coverage-drift.mjs (fails).
+const MARK_PAIR = /<!--cov:[a-z_.]+-->(.*?)<!--\/cov-->/gs;
+const TEXT_SPOTS = /<meta\b(?:"[^"]*"|'[^']*'|[^>"'])*>|<title>[\s\S]*?<\/title>|<script type="application\/ld\+json">[\s\S]*?<\/script>/g;
+export function markersInTextSpots(html) {
+  const hits = [];
+  for (const m of html.matchAll(TEXT_SPOTS)) if (m[0].includes('<!--cov:')) hits.push(m[0].slice(0, 80).replace(/\s+/g, ' '));
+  return hits;
+}
+export function unwrapMarkersInTextSpots(html) {
+  return html.replace(TEXT_SPOTS, (tag) => (tag.includes('<!--cov:') ? tag.replace(MARK_PAIR, '$1') : tag));
+}
+// Provinces: the other ledger count that appears in the cameras description.
+RAW_RULES.push([/^cameras\/index\.html$/, /(\d[\d,]*) Canadian provinces/g, 'cameras.provinces', fmtInt]);

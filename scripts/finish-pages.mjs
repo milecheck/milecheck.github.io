@@ -19,7 +19,7 @@ const PAGES_ONLY = process.argv.includes('--pages-only');
 const STEPS = [
   'add-sponsor-slots.mjs', 'remove-web-sponsor-slots.mjs', 'add-map-kit.mjs', 'tag-store-links.mjs', 'add-related-links.mjs', 'add-report-links.mjs', 'add-app-block.mjs', 'add-mountain-card.mjs', 'add-guide-sections.mjs', 'add-month-numbers.mjs', 'add-signup-band.mjs',
   'add-signup-ctas.mjs', 'add-gear-cards.mjs', 'add-nav-search.mjs', 'add-desktop-qr.mjs', 'add-data-sources-link.mjs', 'add-state-map-links.mjs', 'add-mile-finder-media.mjs', 'add-camera-route-filter.mjs', 'add-state-corridor-links.mjs', 'add-browser-style-version.mjs', 'add-site-nav.mjs', 'add-openmb-attribution.mjs',
-  'add-footer-hub.mjs',
+  'add-footer-hub.mjs', 'add-social-tags.mjs',
   ...(PAGES_ONLY ? [] : ['build-search-index.mjs', 'build-sitemap.mjs']),
   'add-analytics.mjs',
   'link-jsonld.mjs',

@@ -16,7 +16,7 @@
  * without blocking on judgment calls.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { RAW_RULES } from './lib/coverage-rules.mjs';
+import { RAW_RULES, markersInTextSpots } from './lib/coverage-rules.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join, relative } from 'node:path';
 
@@ -61,6 +61,7 @@ for (const file of htmlFiles(ROOT)) {
   const src = readFileSync(file, 'utf8');
   const rel = relative(ROOT, file);
 
+  for (const h of markersInTextSpots(src)) mismatches.push(`${rel} :: comment marker inside <title>/<meta>/JSON-LD prints as text (${h}) — run apply-coverage-counts.mjs`);
   for (const m of src.matchAll(MARKED)) {
     markedTotal++;
     const want = lookup(m[1]);
