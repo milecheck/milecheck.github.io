@@ -220,6 +220,24 @@
     </div>
 
     <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/usage</span></div>
+      <p class="ep-desc">Your key's own numbers: calls today, the daily limit, when it resets, and calls by endpoint for the last 30 days. It does not count against your limit. Every response also carries <code>X-Request-Id</code> and, for limited keys, <code>X-RateLimit-Limit</code>, <code>-Remaining</code> and <code>-Reset</code>.</p>
+      <div class="ep-row">
+      <div class="ep-code">
+      <p class="ep-label">Request</p>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/usage?apikey=YOUR_KEY"</pre>
+      <p class="ep-label">Response <em>(abridged)</em></p>
+      <pre class="codeblock">{
+  "key": { "prefix": "mk_live_ab12…", "plan": "business", "expires_at": null },
+  "today": { "date": "2026-10-30", "calls": 412, "limit": 100000, "remaining": 99588, "resets_at": "2026-10-31T00:00:00.000Z" },
+  "last_30_days": { "total": 9120, "by_endpoint": { "/v1/alerts": 8400, "/v1/locate": 720 } }
+}</pre>
+      <p class="ep-params">Reference: <a href="/api/errors/" style="color:#0f7a4f;font-weight:700;">errors and limits</a>, <a href="/api/data/" style="color:#0f7a4f;font-weight:700;">data and accuracy</a>, <a href="/api/versioning/" style="color:#0f7a4f;font-weight:700;">versioning</a> and the <a href="/api/changelog/" style="color:#0f7a4f;font-weight:700;">changelog</a>. <code>POST /v1/keys/rotate</code> issues a new key with the same plan and end date; the old key works for 24 more hours.</p>
+      </div>
+      </div>
+    </div>
+
+    <div class="ep-card">
       <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/locate</span></div>
       <p class="ep-desc">Coordinates in, nearest highway mile marker out.</p>
       <div class="ep-row">

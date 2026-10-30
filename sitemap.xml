@@ -1146,6 +1146,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://milecheckapp.com/api/errors/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://milecheckapp.com/api/data/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://milecheckapp.com/api/versioning/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://milecheckapp.com/api/changelog/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://milecheckapp.com/api/plan/</loc>
     <lastmod>2026-10-30</lastmod>
     <priority>0.6</priority>
