@@ -196,7 +196,7 @@
       </div>
       <div class="value-card">
         <h3>Live conditions: the API, priced by use</h3>
-        <p>Closures, crashes, construction, chain controls, wildfires and drawbridge status change by the minute, so your software asks for them when it needs them. Each request your software sends to our server is one API call. Plans are priced by how many calls a day you need: a 14-day test key at 100 calls a day, Business $299 a month for 100,000, more by quote.</p>
+        <p>Closures, crashes, construction, chain controls, wildfires, drawbridge status and border waits change by the minute, so your software asks for them when it needs them. Each request your software sends to our server is one API call. Plans are priced by how many calls a day you need: a 14-day test key at 100 calls a day, Business $299 a month for 100,000, more by quote.</p>
         <p style="margin-top:8px"><a href="#pricing" style="color:#00A86B;font-weight:700;">API plans &darr;</a></p>
       </div>
     </div>
@@ -289,6 +289,53 @@
       "isNew": false, "isRx": false
     }
   ]
+}</pre>
+    </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/borders</span></div>
+      <p class="ep-desc">Live wait times at U.S. land border crossings. Into the U.S. from U.S. Customs and Border Protection (standard, FAST, NEXUS/SENTRI and Ready lanes), and into Canada from the Canada Border Services Agency for the busiest crossings. Each crossing has its port ID, name, state, coordinates, hours and last update time.</p>
+      <p class="ep-params"><code>state</code> optional · <code>country=canada|mexico</code> optional · <code>lat</code> + <code>lon</code> + <code>radius=miles</code> optional (default 50, nearest first) · <code>limit=N</code> optional</p>
+
+      <p class="ep-label">Request</p>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/borders?apikey=YOUR_KEY&amp;state=WA"</pre>
+
+      <p class="ep-label">Response <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#8A939B;">(abridged — one crossing shown, lanes without a report are null)</span></p>
+      <pre class="codeblock">{
+  "generated_at": "2026-10-30T02:45:10Z",
+  "count": 5,
+  "feed_time": "2026-10-30T02:38:19Z",
+  "crossings": [
+    {
+      "port_id": "300402",
+      "port_name": "Blaine",
+      "crossing_name": "Peace Arch",
+      "country": "canada",
+      "state": "WA",
+      "lat": 49.002083, "lon": -122.755889,
+      "status": "Open",
+      "hours": "24 hrs/day",
+      "directions": [
+        {
+          "direction": "into_us", "source": "CBP",
+          "commercial": { "standard": null, "fast": null },
+          "passenger": {
+            "standard": { "delay_minutes": 0, "lanes_open": 2, "status": "no delay" },
+            "nexus_sentri": { "delay_minutes": 0, "lanes_open": 1, "status": "no delay" },
+            "ready": null
+          },
+          "last_updated": "2026-10-30T02:38:18Z", "stale": false
+        },
+        {
+          "direction": "into_canada", "source": "CBSA",
+          "commercial": { "standard": { "delay_minutes": 0 } },
+          "passenger": { "standard": { "delay_minutes": 10 } },
+          "last_updated": "2026-10-30T02:15:00Z"
+        }
+      ]
+    }
+  ],
+  "source_status": "live"
 }</pre>
     </div>
 
@@ -511,7 +558,7 @@
     <div class="faq">
       <details>
         <summary>What's covered by the MileCheck API?</summary>
-        <p>Mile markers for all 50 US states and 10 Canadian provinces and territories. Live state DOT feeds (closures, crashes, construction, chain controls, road weather) for all 50 states plus British Columbia, Alberta and Manitoba, normalized from 53 separate feeds into one schema. Wildfires and drawbridge status are on the Business plan.</p>
+        <p>Mile markers for all 50 US states and 10 Canadian provinces and territories. Live state DOT feeds (closures, crashes, construction, chain controls, road weather) for all 50 states plus British Columbia, Alberta and Manitoba, normalized from 53 separate feeds into one schema. Wildfires, drawbridge status and border wait times are on the Business plan.</p>
       </details>
       <details>
         <summary>What's the difference between /v1/locate and /v1/alerts?</summary>
