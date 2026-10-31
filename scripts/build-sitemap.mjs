@@ -21,7 +21,9 @@ const BASE = 'https://milecheckapp.com';
 const DRY = process.argv.includes('--dry');
 const TODAY = new Date().toISOString().slice(0, 10);
 
-const SKIP = [/-preview\.html$/, /^google[0-9a-f]+\.html$/, /^404\.html$/, /^boards\//, /^internal\//, /^design-options\//];
+// closures/<slug>/ pages live in closures-sitemap.xml (written by scripts/closures/gen-closure-pages.mjs);
+// listing them here too made 14 duplicate URLs across the two sitemaps. The /closures/ hub stays.
+const SKIP = [/-preview\.html$/, /^google[0-9a-f]+\.html$/, /^404\.html$/, /^boards\//, /^internal\//, /^design-options\//, /^closures\/[^/]+\/index\.html$/];
 
 function htmlFiles(dir, acc = []) {
   for (const n of readdirSync(dir)) {
