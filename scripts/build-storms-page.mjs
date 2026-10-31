@@ -132,6 +132,9 @@ ${ga}  <meta charset="UTF-8">
     .st-wrap{max-width:1000px;margin:0 auto;padding:34px 20px 48px;}
     .st-wrap h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 10px;}
     .st-intro{font-size:17px;line-height:1.55;color:#3a444d;margin:0 0 22px;}
+    .st-check{font-size:14.5px;color:#5b6670;margin:-12px 0 18px;}
+    .st-stale{font-size:15px;line-height:1.45;border:1px solid #e3c98a;background:#fff8e6;border-radius:10px;padding:12px 14px;margin:0 0 18px;}
+    .st-stale[hidden]{display:none;}
     .st-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
     .st-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;}
     .st-card h2{font-size:22px;margin:0 0 6px;}
@@ -155,9 +158,11 @@ ${ga}  <meta charset="UTF-8">
 </head>
 <body>
   ${header}
-  <main class="st-wrap">
+  <main class="st-wrap" id="st-main" data-generated="${iso}">
     <h1>Where are the winter storms right now?</h1>
     <p class="st-intro">${esc(intro)}</p>
+    <p class="st-check">Checked about twice a day, morning and mid-afternoon Pacific. The time on each card is when it was last checked.</p>
+    <p class="st-stale" id="st-stale" hidden>This page has not refreshed recently. The state pages linked below show live DOT feeds.</p>
     ${appCard}
     ${body}
     <p class="st-report"><em><a href="/#subscribe">Sign up to receive the monthly Highway Report</a></em></p>
@@ -166,6 +171,7 @@ ${ga}  <meta charset="UTF-8">
   </main>
   ${footer}
   ${navJs}
+  <script>try{var m=document.getElementById('st-main'),g=Date.parse(m.getAttribute('data-generated'));if(g&&Date.now()-g>20*3600000){document.getElementById('st-stale').hidden=false;}}catch(e){}</script>
 </body>
 </html>
 `;
