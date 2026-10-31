@@ -15,6 +15,7 @@ const UA = 'MileCheck-DataHealth/1.0 (+https://milecheckapp.com)';
 const CAMERA_DROP = 0.4;          // fail if cameras fall more than 40% below baseline
 const ALERT_MIN_BASELINE = 10;    // only fail an empty alert feed when the baseline had at least this many
 const STALE_HOURS = 6;            // fetched_at older than this = stale feed
+const FORWARD_WINDOW = new Set(['HI']); // feed shows only the next 48h, so a Friday night run sees a weekend-only count (HI 41 vs 203, 10/30): alerts compare to same weekday only
 const AVG_DROP = 0.3;             // fail if a count falls more than 30% below its 7-day average (alerts: same-weekday average, two runs in a row)
 const AVG_MIN = 20;               // ...only when that average is at least this (small feeds swing too much)
 const AVG_MIN_DAYS = 3;           // ...and only once there are this many days of history
@@ -178,6 +179,7 @@ if (pastDays.length >= AVG_MIN_DAYS) {
     for (const kind of ['cameras', 'alerts']) {
       const days = kind === 'alerts' && sameDow.length >= 2 ? sameDow : pastDays;
       const vals = days.map((d) => history[d]?.[st]?.[kind]).filter((v) => typeof v === 'number');
+      if (kind === 'alerts' && FORWARD_WINDOW.has(st) && days !== sameDow) continue;
       const minVals = days === sameDow ? 2 : AVG_MIN_DAYS;
       if (vals.length < minVals || p[kind] == null) continue;
       const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
