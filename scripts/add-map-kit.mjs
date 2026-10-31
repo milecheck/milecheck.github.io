@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 
 const DRY = process.argv.includes("--dry");
-const TAGS = "  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->\n  <link rel=\"stylesheet\" href=\"/assets/map-kit.css?v=20261030\">\n  <script src=\"/assets/map-kit.js?v=20261030\" defer></script>\n</head>";
+const TAGS = "  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->\n  <link rel=\"stylesheet\" href=\"/assets/map-kit.css?v=20261030b\">\n  <script src=\"/assets/map-kit.js?v=20261030b\" defer></script>\n</head>";
 // Pass pages: same text as scripts/gen-pass-pages.js after the 2026-10-03 change.
 const PASS_SWAPS = [
   [

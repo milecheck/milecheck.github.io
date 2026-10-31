@@ -318,6 +318,7 @@ var bridgeLayer=L.layerGroup();
 if(ST==='WA'){var BR=[['fremont','Fremont Bridge',47.6476,-122.3499],['ballard','Ballard Bridge',47.6596,-122.3765],['montlake','Montlake Bridge',47.6473,-122.3045],['south-park','South Park Bridge',47.5290,-122.3140],['first-ave-s','1st Ave S Bridge',47.5420,-122.3343]];
 fetch(WORKER+'/bridge-status',{cache:'no-store'}).then(function(r){return r.ok?r.json():{};}).catch(function(){return {};}).then(function(d){var up=(d&&d.raised)||[];BR.forEach(function(b){var isUp=up.indexOf('WA-bridge-'+b[0])>=0;L.circleMarker([b[2],b[3]],{radius:7,color:'#4c1d95',weight:1,fillColor:isUp?'#DC2626':'#7C3AED',fillOpacity:.9}).bindPopup('<b>'+b[1]+'</b><br>'+(isUp?'Raised now':'Down, open to traffic')+'<br><a href="/seattle-drawbridges/" target="_blank" rel="noopener">Seattle drawbridges live</a>').addTo(bridgeLayer);});});}
 window.mcMapOptions={layers:[{label:'Closures and crashes',color:'#cf3320',layer:layer},{label:'Restrictions and roadwork',color:'#F59E0B',layer:workLayer},null,{label:'Wildfires',color:'#B91C1C',layer:fireLayer},(ST==='WA')?{label:'Seattle drawbridges',color:'#7C3AED',layer:bridgeLayer}:null].filter(Boolean)};
+window.mcExtraLayers={state:ST};
 var last=null;
 function load(){
   fetch(WORKER+'/incidents?state='+ST,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){

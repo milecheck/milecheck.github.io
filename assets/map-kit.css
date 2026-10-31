@@ -176,4 +176,12 @@ html .co-card{z-index:1100;}
 @media (max-width:600px) and (orientation:portrait){.cm-opts-panel{width:min(300px,calc(100vw - 72px));}.cm-tiles{grid-template-columns:repeat(3,1fr);}}
 @media (orientation:landscape) and (max-height:500px){.cm-tile{min-height:54px;padding:5px 3px;}.cm-ic{width:24px;height:24px;}}
 .leaflet-left .cm-opts-panel.cm-side{left:calc(100% + 10px);bottom:auto;}
+.cm-opts-panel.cm-side .cm-tiles{grid-template-columns:repeat(auto-fill,minmax(78px,1fr));}
 .cm-opts-panel.cm-side::after{display:none;}
+/* Pass, ski, corridor and mountain layer boxes as tiles (10-30). */
+html .co-layers.cm-tiled{width:384px;max-width:calc(100% - 66px);padding:10px;overflow-y:auto;}
+html .co-layers.cm-tiled::before{display:none;}
+html .co-layers .cm-tile{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;padding:7px 4px 6px;font-weight:600;font-size:11.5px;color:#0E1116;}
+html .co-layers .co-key{margin-top:8px;}
+@media (max-width:600px) and (orientation:portrait){html .co-layers.cm-tiled{width:min(300px,calc(100% - 66px));}}
+.cm-opts-panel.cm-side .cm-tile{min-height:54px;padding:5px 3px;}.cm-opts-panel.cm-side .cm-ic{width:24px;height:24px;}.cm-opts-panel.cm-side .cm-ic svg{width:14px;height:14px;}

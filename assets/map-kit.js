@@ -108,92 +108,128 @@
   // joins them, it starts closed on phones and pulses three times there. It replaces
   // Leaflet's own basemap control (Leah, 10-03: "I don't see a map options. Just the
   // satellite etc options").
-  // Shared layers (Leah, 10-30: "every map should have the same filters"). A page sets
-  //   window.mcExtraLayers = { state:'CO', on:['cameras'] }
-  // and its Map options panel gets the same rows on every map: Alerts, Closures and
-  // crashes, Road weather, Cameras, Mile markers, Wildfires. Each page opens with its own
-  // topic switched on (`on`), and a visitor can switch any other on without leaving.
-  // A row is left out with `<name>:false`; camera pages leave out Cameras because their
-  // own camera pins are already there. A row the page already has under its own name
-  // (its own closures, cameras, roadwork) is left out too, so nothing shows twice.
-  // Data loads the first time a row is switched on.
+  // Shared layers (Leah, 10-30: "every map should have the same filters"). Every map with
+  // the Map layers card gets the same tiles: Alerts, Closures and crashes, Road weather,
+  // Cameras, Mile markers, Wildfires. Data loads the first time a tile is switched on,
+  // for the states and provinces in view (up to four, so a whole-country view asks you to
+  // zoom in), and more load as you pan. A page can pin one state and open with its own
+  // topic on:  window.mcExtraLayers = { state:'CO', on:['cameras'] }
+  // `<name>:false` drops a tile, `window.mcExtraLayers = false` drops them all. A tile the
+  // page already has under its own name (its own closures, cameras, roadwork) is left out
+  // so nothing shows twice; camera pages leave out Cameras for the same reason.
   var SAME = { alerts: /restriction|roadwork|work zone|alert/i, closures: /closure|crash/i, weather: /road weather|road condition|surface/i,
     cameras: /camera/i, mileposts: /mile ?(marker|post)/i, fires: /fire/i };
+  var BOXES = {WA:[45.54,49,-124.85,-116.91],OR:[41.99,46.29,-124.57,-116.46],ID:[42,49,-117.24,-111.04],MT:[44.36,49,-116.05,-104.04],AZ:[31.33,36.999,-114.82,-109.04],UT:[37,42,-114.05,-109.04],CO:[37.001,41,-109.05,-102.04],NM:[31.33,37,-109.05,-103],AK:[54.5,71.5,-165,-129.5],SD:[42.48,45.94,-104.06,-96.43],ND:[45.94,49,-104.05,-96.55],NE:[40,43,-104.05,-95.31],KS:[37,40,-102.05,-94.59],WI:[42.49,47.08,-92.89,-86.8],MN:[43.5,49,-97.21,-89.6],IA:[40.37,43.5,-96.64,-90.14],IL:[36.97,42.51,-91.52,-87.02],WY:[40.99,45.01,-111.06,-104.05],ME:[43.06,47.46,-71.08,-66.95],RI:[41.15,42.02,-71.86,-71.12],MI:[41.7,48.3,-90.42,-82.12],NV:[35,42,-120.01,-114.04],NJ:[38.92,41.36,-75.56,-73.89],DE:[38.45,39.84,-75.79,-75.04],MD:[37.91,39.73,-79.49,-75.04],VA:[36.54,39.47,-83.68,-75.24],WV:[37.2,40.64,-82.65,-77.72],OH:[38.4,42,-84.82,-80.52],PA:[39.72,42.27,-80.52,-74.69],MA:[41.18,42.89,-73.51,-69.93],VT:[42.73,45.02,-73.43,-71.46],NH:[42.7,45.31,-72.56,-70.7],CT:[40.98,42.05,-73.73,-71.79],NY:[40.48,45.02,-79.77,-71.86],FL:[24.4,31,-87.63,-80.03],GA:[30.36,35,-85.61,-80.84],NC:[33.84,36.59,-84.32,-75.46],SC:[32.03,35.22,-83.35,-78.54],MS:[30.17,35,-91.66,-88.1],AL:[30.22,35.01,-88.47,-84.89],AR:[33,36.5,-94.62,-89.64],LA:[28.93,33.02,-94.04,-88.82],OK:[33.62,37,-103,-94.43],TN:[34.98,36.68,-90.31,-81.65],KY:[36.5,39.15,-89.57,-81.96],IN:[37.77,41.76,-88.1,-84.78],MO:[36,40.61,-95.77,-89.1],CA:[32.5,42,-124.5,-114.1],HI:[18.5,22.5,-160.5,-154.5],TX:[25.8,36.5,-106.7,-93.5],ON:[41.66,56.9,-95.16,-74.32],QC:[44.99,62.6,-79.77,-57.1],BC:[48.3,60.02,-139.06,-114.03],AB:[48.99,60,-120.01,-109.95],MB:[48.99,60,-102.11,-88.9]};
   function extraLayers(own) {
     own = own || [];
     var X = window.mcExtraLayers;
-    if (!X || !X.state || !gm) return [];
-    var W = 'https://api.milecheckapp.com', st = X.state, all = st === 'ALL';
+    if (X === false || !gm) return [];
+    X = X || {};
+    var W = 'https://api.milecheckapp.com', pinned = X.state && X.state !== 'ALL' ? X.state : null, all = X.state === 'ALL';
     var e = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
     var src = function (s) { return '<br><span style="color:#8A939B">Source: ' + s + ' via MileCheck</span>'; };
-    var get = function (path) { return fetch(W + path, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }); };
-    var dot = function (la, lo, fill, r) { return L.circleMarker([la, lo], { radius: r || 7, color: '#fff', weight: 1.5, fillColor: fill, fillOpacity: .95 }); };
+    var get = function (path) { return fetch(W + path, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
+    var dot = function (la, lo, fill, r, rend) { return L.circleMarker([la, lo], { renderer: rend, radius: r || 7, color: '#fff', weight: 1.5, fillColor: fill, fillOpacity: .95 }); };
     var ok = function (la, lo) { return isFinite(la) && isFinite(lo) && !(!la && !lo); };
-    var loaded = {};
-    function once(key, fn) { return function () { if (loaded[key]) return; loaded[key] = 1; fn(); }; }
-    var L_alerts = L.layerGroup(), L_clos = L.layerGroup(), L_wx = L.layerGroup(), L_cams = L.layerGroup(), L_mp = L.layerGroup(), L_fires = L.layerGroup();
+    var clean = function (t) { return String(t || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(); };
+    var canvas = L.canvas({ padding: 0.3 });
+    var G = { alerts: L.layerGroup(), closures: L.layerGroup(), weather: L.layerGroup(), cameras: L.layerGroup(), mileposts: L.layerGroup(), fires: L.layerGroup() };
 
-    // Alerts and closures share one /incidents fetch: closures and crashes go to their own
-    // row, everything else (work zones, hazards, weather events) goes to Alerts.
-    var inc = null;
-    function incidents() {
-      if (!inc) inc = get('/incidents?state=' + st).then(function (d) {
-        var out = { clos: [], other: [] };
-        ((d && d['incident-reports']) || []).forEach(function (r) {
-          var t = r['event-type-id'], loc = r.location || {}, sl = loc['start-location'] || {};
-          var txt = String(r.headline || r.description || r['impact-desc'] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-          var la = +sl['start-lat'], lo = +sl['start-long'];
-          if (!ok(la, lo)) return;
-          var rt = (loc['route-id'] || '').trim();
-          var isClos = (t === 'CL' || t === 'AC' || /\b(closed|closure|crash)\b/i.test(txt)) && !/\b(ramp|exit|rest area|shoulder)\b/i.test(txt);
-          var kind = isClos ? (t === 'AC' ? 'Crash' : 'Closure') : (t === 'RW' ? 'Work zone' : t === 'WE' ? 'Weather' : t === 'HZ' ? 'Hazard' : 'Alert');
-          (isClos ? out.clos : out.other).push({ la: la, lo: lo, html: '<b>' + e(kind) + (rt ? ' · ' + e(rt) : '') + '</b><br>' + e(txt.slice(0, 280)) + src('state DOT') });
-        });
-        return out;
-      }).catch(function () { return { clos: [], other: [] }; });
-      return inc;
+    // Which states to load: the pinned one, or the ones in view.
+    function inView() {
+      if (pinned) return [pinned];
+      var b = gm.getBounds(), hits = [];
+      Object.keys(BOXES).forEach(function (k) {
+        var x = BOXES[k];
+        var la = Math.min(b.getNorth(), x[1]) - Math.max(b.getSouth(), x[0]), lo = Math.min(b.getEast(), x[3]) - Math.max(b.getWest(), x[2]);
+        if (la > 0 && lo > 0) hits.push(k);
+      });
+      return hits.length > 4 ? null : hits;
     }
-    L_clos.on('add', once('c', function () { incidents().then(function (o) { o.clos.forEach(function (x) { dot(x.la, x.lo, '#DC2626').bindPopup(x.html).addTo(L_clos); }); }); }));
-    L_alerts.on('add', once('a', function () { incidents().then(function (o) { o.other.forEach(function (x) { dot(x.la, x.lo, '#F59E0B', 6).bindPopup(x.html).addTo(L_alerts); }); }); }));
+    var note = null, noteT = null;
+    function zoomNote() {
+      if (!note) {
+        note = document.createElement('div');
+        note.style.cssText = 'position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:800;background:rgba(14,17,22,.86);color:#fff;border-radius:8px;padding:6px 12px;font:600 12.5px/1.4 system-ui,sans-serif;pointer-events:none;white-space:nowrap';
+        note.textContent = 'Zoom in to load this layer';
+        gm.getContainer().appendChild(note);
+      }
+      note.hidden = false;
+      clearTimeout(noteT);
+      noteT = setTimeout(function () { note.hidden = true; }, 2600);
+    }
 
-    // Road weather: reported road surface conditions. Bare, dry and normal are left out.
-    L_wx.on('add', once('w', function () {
-      get('/conditions?state=' + st).then(function (d) {
-        ((d && d['road-weather-reports']) || []).forEach(function (r) {
-          var loc = r.location || {}, sl = loc['start-location'] || {};
-          var la = +(r.latitude || sl['start-lat']), lo = +(r.longitude || sl['start-long']);
-          var cond = String(r['road-surface-condition'] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-          if (!ok(la, lo) || !cond || /^(bare|dry|normal|bare\s*\/\s*dry|bare and dry|no report)/i.test(cond)) return;
-          var name = String(r['location-name'] || loc['location-name'] || '').trim();
-          dot(la, lo, '#0EA5E9', 6).bindPopup('<b>Road weather' + (r['route-id'] ? ' · ' + e(r['route-id']) : '') + '</b><br>' + (name ? e(name.slice(0, 140)) + '<br>' : '') + e(cond.slice(0, 200)) + src('state DOT')).addTo(L_wx);
+    // One fetch per state per feed, shared by the tiles that read it.
+    var cache = {};
+    function feed(path, st) { var k = path + st; if (!cache[k]) cache[k] = get('/' + path + '?state=' + st); return cache[k]; }
+    var drawn = {};
+    var DRAW = {
+      closures: function (st) { return feed('incidents', st).then(function (d) { incidents(d, true).forEach(function (x) { dot(x.la, x.lo, '#DC2626').bindPopup(x.html).addTo(G.closures); }); }); },
+      alerts: function (st) { return feed('incidents', st).then(function (d) { incidents(d, false).forEach(function (x) { dot(x.la, x.lo, '#F59E0B', 6).bindPopup(x.html).addTo(G.alerts); }); }); },
+      // Road weather: reported road surface conditions. Bare, dry and normal are left out.
+      weather: function (st) {
+        return feed('conditions', st).then(function (d) {
+          ((d && d['road-weather-reports']) || []).forEach(function (r) {
+            var loc = r.location || {}, sl = loc['start-location'] || {};
+            var la = +(r.latitude || sl['start-lat']), lo = +(r.longitude || sl['start-long']), cond = clean(r['road-surface-condition']);
+            if (!ok(la, lo) || !cond || /^(bare|dry|normal|bare\s*\/\s*dry|bare and dry|no report)/i.test(cond)) return;
+            var name = clean(r['location-name'] || loc['location-name']);
+            dot(la, lo, '#0EA5E9', 6).bindPopup('<b>Road weather' + (r['route-id'] ? ' · ' + e(r['route-id']) : '') + '</b><br>' + (name ? e(name.slice(0, 140)) + '<br>' : '') + e(cond.slice(0, 200)) + src('state DOT')).addTo(G.weather);
+          });
         });
-      }).catch(function () {});
-    }));
-
-    // Cameras: a pin per camera, the still loads only when its popup opens. Drawn on a
-    // canvas, because a state can have a few thousand.
-    var camRender = L.canvas({ padding: 0.3 });
-    L_cams.on('add', once('k', function () {
-      get('/cameras?state=' + st).then(function (d) {
-        ((d && d.cameras) || []).forEach(function (c) {
-          if (!ok(+c.lat, +c.lon) || c.isActive === false) return;
-          var m = L.circleMarker([+c.lat, +c.lon], { renderer: camRender, radius: 5, color: '#fff', weight: 1.5, fillColor: '#475569', fillOpacity: .95 });
-          m.bindPopup(function () {
-            return '<b>' + e(c.title || 'Camera') + '</b>' + (c.imageUrl ? '<br><a href="' + e(c.imageUrl) + '" target="_blank" rel="noopener"><img src="' + e(c.imageUrl) + '" alt="' + e(c.title || 'Traffic camera') + '" loading="lazy" style="display:block;width:240px;max-width:100%;margin-top:6px;border-radius:6px"></a>' : '') + src('state DOT');
-          }, { maxWidth: 260 });
-          m.addTo(L_cams);
+      },
+      // Cameras: a pin per camera on a canvas (a state can have thousands); the still
+      // loads only when its popup opens.
+      cameras: function (st) {
+        return feed('cameras', st).then(function (d) {
+          ((d && d.cameras) || []).forEach(function (c) {
+            if (!ok(+c.lat, +c.lon) || c.isActive === false) return;
+            dot(+c.lat, +c.lon, '#475569', 5, canvas).bindPopup(function () {
+              return '<b>' + e(c.title || 'Camera') + '</b>' + (c.imageUrl ? '<br><a href="' + e(c.imageUrl) + '" target="_blank" rel="noopener"><img src="' + e(c.imageUrl) + '" alt="' + e(c.title || 'Traffic camera') + '" loading="lazy" style="display:block;width:240px;max-width:100%;margin-top:6px;border-radius:6px"></a>' : '') + src('state DOT');
+            }, { maxWidth: 260 }).addTo(G.cameras);
+          });
         });
-      }).catch(function () {});
-    }));
+      },
+      mileposts: function (st) {
+        return feed('mileposts', st).then(function (d) {
+          var arr = Array.isArray(d) ? d : [];
+          if (!arr.length && d && typeof d === 'object') Object.keys(d).forEach(function (k) { if (Array.isArray(d[k])) d[k].forEach(function (p) { arr.push({ highway: p.highway || k, milepost: p.milepost != null ? p.milepost : p.mile, lat: p.lat, lon: p.lon }); }); });
+          arr.forEach(function (p) { if (ok(+p.lat, +p.lon)) posts.push(p); });
+          drawPosts();
+        });
+      }
+    };
+    function incidents(d, wantClos) {
+      var out = [];
+      ((d && d['incident-reports']) || []).forEach(function (r) {
+        var t = r['event-type-id'], loc = r.location || {}, sl = loc['start-location'] || {};
+        var txt = clean(r.headline || r.description || r['impact-desc']), la = +sl['start-lat'], lo = +sl['start-long'];
+        if (!ok(la, lo)) return;
+        var isClos = (t === 'CL' || t === 'AC' || /\b(closed|closure|crash)\b/i.test(txt)) && !/\b(ramp|exit|rest area|shoulder)\b/i.test(txt);
+        if (isClos !== wantClos) return;
+        var rt = (loc['route-id'] || '').trim();
+        var kind = isClos ? (t === 'AC' ? 'Crash' : 'Closure') : (t === 'RW' ? 'Work zone' : t === 'WE' ? 'Weather' : t === 'HZ' ? 'Hazard' : 'Alert');
+        out.push({ la: la, lo: lo, html: '<b>' + e(kind) + (rt ? ' · ' + e(rt) : '') + '</b><br>' + e(txt.slice(0, 280)) + src('state DOT') });
+      });
+      return out;
+    }
+    function sync(key, fromTap) {
+      if (!gm.hasLayer(G[key])) return;
+      var sts = inView();
+      if (!sts) { if (fromTap) zoomNote(); return; }
+      sts.forEach(function (st) { var k = key + st; if (drawn[k]) return; drawn[k] = 1; DRAW[key](st); });
+    }
+    Object.keys(DRAW).forEach(function (key) { G[key].on('add', function () { sync(key, true); }); });
+    if (!pinned) gm.on('moveend', function () { Object.keys(DRAW).forEach(function (k) { sync(k, false); }); });
 
-    // Mile markers: the state's posts, drawn only for the area in view once zoomed in, and
-    // thinned out as you zoom out, so a state with 15,000 posts stays fast.
-    var posts = null, mpRender = L.canvas({ padding: 0.3 });
+    // Mile markers: drawn only for the area in view once zoomed in, and thinned as you
+    // zoom out, so 15,000 posts stay fast.
+    var posts = [], mpRender = L.canvas({ padding: 0.3 });
     function drawPosts() {
       var pop = gm._popup;
-      if (pop && gm.hasLayer(pop) && pop._source && L_mp.hasLayer(pop._source)) return;
-      L_mp.clearLayers();
-      if (!posts || !gm.hasLayer(L_mp)) return;
+      if (pop && gm.hasLayer(pop) && pop._source && G.mileposts.hasLayer(pop._source)) return;
+      G.mileposts.clearLayers();
+      if (!gm.hasLayer(G.mileposts)) return;
       var z = gm.getZoom();
       if (z < 9) return;
       var step = z >= 12 ? 1 : z >= 10 ? 5 : 10, b = gm.getBounds().pad(0.2), n = 0;
@@ -203,47 +239,40 @@
         n++;
         L.circleMarker([p.lat, p.lon], { renderer: mpRender, radius: 4, color: '#fff', weight: 1, fillColor: '#0f7a4f', fillOpacity: 1 })
           .bindPopup('<b>' + e(p.highway) + ' · mile ' + e(p.milepost) + '</b>' + src('state DOT mile marker data'))
-          .addTo(L_mp);
+          .addTo(G.mileposts);
       }
     }
-    L_mp.on('add', function () {
-      if (!loaded.m) {
-        loaded.m = 1;
-        get('/mileposts?state=' + st).then(function (d) {
-          var arr = Array.isArray(d) ? d : [];
-          if (!arr.length && d && typeof d === 'object') Object.keys(d).forEach(function (k) { if (Array.isArray(d[k])) d[k].forEach(function (p) { arr.push({ highway: p.highway || k, milepost: p.milepost != null ? p.milepost : p.mile, lat: p.lat, lon: p.lon }); }); });
-          posts = arr.filter(function (p) { return ok(+p.lat, +p.lon); });
-          drawPosts();
-        }).catch(function () {});
-      }
-      drawPosts();
-      gm.on('moveend', drawPosts);
-    });
-    L_mp.on('remove', function () { gm.off('moveend', drawPosts); });
+    G.mileposts.on('add', function () { drawPosts(); gm.on('moveend', drawPosts); if (gm.getZoom() < 9) zoomNote(); });
+    G.mileposts.on('remove', function () { gm.off('moveend', drawPosts); });
 
-    L_fires.on('add', once('f', function () {
+    // Wildfires: one national feed. A pinned state shows only its fires; otherwise all
+    // of them, prescribed burns left out.
+    G.fires.on('add', function () {
+      if (drawn.fires) return;
+      drawn.fires = 1;
       get('/fires').then(function (d) {
         ((d && d.fires) || []).forEach(function (x) {
-          if ((all ? !/^US-/.test(x.state || '') : x.state !== 'US-' + st) || x.isRx || !isFinite(x.lat)) return;
+          if ((pinned ? x.state !== 'US-' + pinned : all && !/^US-/.test(x.state || '')) || x.isRx || !isFinite(x.lat)) return;
           L.circleMarker([x.lat, x.lon], { radius: Math.min(14, 5 + Math.log10((x.acres || 1) + 1) * 2), color: '#9a3412', weight: 1, fillColor: '#EA580C', fillOpacity: .8 })
             .bindPopup('<b>' + e(x.name || 'Fire') + '</b><br>' + (x.acres != null ? Math.round(x.acres).toLocaleString() + ' acres' : 'Size not reported') + (x.containedPct != null ? ' · ' + x.containedPct + '% contained' : '') + src('NIFC'))
-            .addTo(L_fires);
+            .addTo(G.fires);
         });
-      }).catch(function () {});
-    }));
+      });
+    });
 
     var camPage = /^\/(es\/|pt\/)?cameras\//.test(location.pathname);
     var rows = [
-      { key: 'alerts', label: 'Alerts', color: '#F59E0B', layer: L_alerts, skip: all },
-      { key: 'closures', label: 'Closures and crashes', color: '#DC2626', layer: L_clos, skip: all },
-      { key: 'weather', label: 'Road weather', color: '#0EA5E9', layer: L_wx, skip: all },
-      { key: 'cameras', label: 'Cameras', color: '#475569', layer: L_cams, skip: all || camPage },
-      { key: 'mileposts', label: 'Mile markers', color: '#0f7a4f', layer: L_mp, skip: all },
-      { key: 'fires', label: 'Wildfires', color: '#EA580C', layer: L_fires }
+      { key: 'alerts', label: 'Alerts', color: '#F59E0B', skip: all },
+      { key: 'closures', label: 'Closures and crashes', color: '#DC2626', skip: all },
+      { key: 'weather', label: 'Road weather', color: '#0EA5E9', skip: all },
+      { key: 'cameras', label: 'Cameras', color: '#475569', skip: all || camPage },
+      { key: 'mileposts', label: 'Mile markers', color: '#0f7a4f', skip: all },
+      { key: 'fires', label: 'Wildfires', color: '#EA580C' }
     ];
     var on = X.on || [];
     var dup = function (r) { return own.some(function (t) { return SAME[r.key].test(t); }); };
     return rows.filter(function (r) { return !r.skip && X[r.key] !== false && !dup(r); }).map(function (r) {
+      r.layer = G[r.key];
       if (on.indexOf(r.key) >= 0) r.layer.addTo(gm);
       return r;
     });
@@ -273,7 +302,41 @@
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
   }
 
+  // The pass, ski, corridor and mountain pages build their own layer box (.co-layers)
+  // with switch rows. Turn those rows into the same icon tiles as the shared card, so
+  // every map looks alike (Leah, 10-30). Each page's own checkboxes stay, so its code
+  // that listens to them keeps working.
+  function tileBox(box) {
+    var rows = [].slice.call(box.querySelectorAll('label.co-layer'));
+    if (!rows.length || box.querySelector('.cm-tiles')) return;
+    var grid = document.createElement('div');
+    grid.className = 'cm-tiles';
+    var lt = box.querySelector('.lt');
+    box.insertBefore(grid, lt ? lt.nextSibling : box.firstChild);
+    rows.forEach(function (r) {
+      var inp = r.querySelector('input'), dotEl = r.querySelector('.co-dot');
+      var text = r.textContent.trim();
+      var c = (dotEl && dotEl.style.background) || '#0f7a4f';
+      r.innerHTML = '';
+      r.className = 'cm-tile' + (inp && inp.checked ? ' cm-on' : '');
+      r.style.setProperty('--c', c);
+      if (inp) r.appendChild(inp);
+      r.insertAdjacentHTML('beforeend', '<span class="cm-ic">' + tileIcon(text) + '</span><span class="cm-tl">' + text.replace(/ and /g, ' & ').replace(/[<>"]/g, '') + '</span>');
+      grid.appendChild(r);
+    });
+    box.classList.add('cm-tiled');
+    box.addEventListener('change', function (ev) { var t = ev.target.closest('.cm-tile'); if (t) t.classList.toggle('cm-on', ev.target.checked); });
+  }
+
   function buildOptions() {
+    // Pages that build their map inside a function (the closure pages) have no global
+    // `map`; take the first map on the page from the registry in section 1 instead.
+    if (!gm) {
+      if (window.MCMaps) MCMaps.each(function (m) { if (!gm) { gm = m; buildOptions(); } });
+      // A resize makes Leaflet re-measure, which registers a map made before this file ran.
+      if (!gm && document.querySelector('.leaflet-container')) window.dispatchEvent(new Event('resize'));
+      return;
+    }
     var O = window.mcMapOptions || {};
     if (!gm || gm._mcOpts) return;
     // A page with Leaflet's own layers control and no options keeps that control alone.
@@ -326,6 +389,7 @@
         own.appendChild(l2);
         l2.querySelector('input').onchange = function (e) { if (e.target.checked) x.layer.addTo(gm); else gm.removeLayer(x.layer); };
       });
+      tileBox(own);
       return;
     }
     var layers = (O.layers || []).concat(extraLayers((O.layers || []).map(function (l) { return l && l.label || ''; }))).filter(function (l) { return l && l.layer; });
@@ -383,19 +447,25 @@
         // below its top edge and scrolls inside that (Leah, 10-30: "cant scroll it").
         var fit = function () {
           if (panel.classList.contains('cm-closed')) return;
-          panel.style.maxHeight = '';
-          panel.style.top = '';
-          var mb = gm.getContainer().getBoundingClientRect();
-          // A phone turned sideways has little room below the buttons, so the card opens
-          // beside the layers button instead, starting at the top of the map.
-          var side = sideQ.matches && !/bottom/.test(O.position || '');
-          panel.classList.toggle('cm-side', side);
-          if (side) panel.style.top = Math.round(mb.top - wrap.getBoundingClientRect().top + 8) + 'px';
-          var pb = panel.getBoundingClientRect();
-          var room = /bottom/.test(O.position || '') ? pb.bottom - mb.top - 8 : mb.bottom - pb.top - 8;
-          if (pb.height > room) panel.style.maxHeight = Math.max(120, room) + 'px';
+          panel.style.maxHeight = panel.style.top = panel.style.width = '';
+          panel.classList.remove('cm-side');
+          var bottomCtl = /bottom/.test(O.position || '');
+          var mb = gm.getContainer().getBoundingClientRect(), pb = panel.getBoundingClientRect();
+          var room = bottomCtl ? pb.bottom - mb.top - 8 : mb.bottom - pb.top - 8;
+          // Not enough room below the buttons (a short map, or a phone turned sideways):
+          // open beside the layers button instead, from the top of the map, as wide as fits.
+          if (!bottomCtl && pb.height > room) {
+            var wr = wrap.getBoundingClientRect(), across = mb.right - wr.right - 18;
+            if (across >= 220) {
+              panel.classList.add('cm-side');
+              panel.style.top = Math.round(mb.top - wr.top + 8) + 'px';
+              if (across < pb.width) panel.style.width = Math.floor(across) + 'px';
+              pb = panel.getBoundingClientRect();
+              room = mb.bottom - pb.top - 8;
+            }
+          }
+          if (pb.height > room) panel.style.maxHeight = Math.max(110, room) + 'px';
         };
-        var sideQ = window.matchMedia('(orientation:landscape) and (max-height:500px)');
         gm.on('resize', fit);
         var set = function (open) {
           panel.classList.toggle('cm-closed', !open);
@@ -654,8 +724,15 @@
     var lbtn = null;
     var place = function () {
       if (!lbtn) return;
-      var top = lbtn.getBoundingClientRect().top - panel.offsetParent.getBoundingClientRect().top;
-      panel.style.top = Math.round(top - 6) + 'px';
+      var op = panel.offsetParent.getBoundingClientRect(), mb = m.getContainer().getBoundingClientRect();
+      var top = lbtn.getBoundingClientRect().top - op.top - 6;
+      panel.style.maxHeight = '';
+      // Short map (a phone turned sideways): start the box at the top of the map so the
+      // tiles fit beside the buttons, and let it scroll if it still does not (10-30).
+      var mapTop = mb.top - op.top + 8, mapBottom = mb.bottom - op.top - 8;
+      if (top + panel.offsetHeight > mapBottom) top = Math.max(mapTop, mapBottom - panel.offsetHeight);
+      panel.style.top = Math.round(top) + 'px';
+      if (top + panel.offsetHeight > mapBottom) panel.style.maxHeight = Math.round(mapBottom - top) + 'px';
     };
     var set = function (open) {
       panel.classList.toggle('cm-closed', !open);
