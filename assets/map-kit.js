@@ -249,6 +249,30 @@
     });
   }
 
+  // One small line icon per layer, picked from its label so a page's own layers
+  // (snowplows, drawbridges, chain controls) get one too. Unknown labels get a dot.
+  var TILE_ICONS = [
+    [/radar/i, 'M12 12m-8 0a8 8 0 1016 0 8 8 0 10-16 0M12 12l6-4'],
+    [/closure|crash/i, 'M6 6l12 12M18 6L6 18'],
+    [/restriction|roadwork|work zone|construction/i, 'M4 20h16M7 20l3-12h4l3 12M9 13h6'],
+    [/road weather|condition|surface/i, 'M7 15a4 4 0 010-8 5 5 0 019.6 1.5A3.5 3.5 0 0117 15zM9 18l-1 2M13 18l-1 2'],
+    [/alert/i, 'M12 4l9 16H3zM12 10v4M12 17v.5'],
+    [/plow/i, 'M3 15h12v-5h3l3 5v2H3zM7 19a1.5 1.5 0 100-.1M17 19a1.5 1.5 0 100-.1'],
+    [/camera/i, 'M4 8h11v8H4zM15 11l5-3v8l-5-3'],
+    [/mile ?(marker|post)/i, 'M8 4h8v9H8zM12 13v7'],
+    [/fire/i, 'M12 3c3 4 5 6 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z'],
+    [/bridge/i, 'M3 16h18M5 16v-4a7 7 0 0114 0v4M9 16v-5M15 16v-5'],
+    [/chain/i, 'M9 15l6-6M7 11l-2 2a3 3 0 004 4l2-2M17 13l2-2a3 3 0 00-4-4l-2 2'],
+    [/ferr|boat/i, 'M3 17l2 3h14l2-3zM6 17V10h12v7M10 10V6h4v4'],
+    [/rail|train/i, 'M7 4h10v11H7zM7 11h10M9 19l-2 2M15 19l2 2M9 15v.5M15 15v.5'],
+    [/border|wait/i, 'M12 3v18M5 7h7M12 12h7M5 17h7']
+  ];
+  function tileIcon(label) {
+    var d = 'M12 12m-4 0a4 4 0 108 0 4 4 0 10-8 0';
+    for (var i = 0; i < TILE_ICONS.length; i++) if (TILE_ICONS[i][0].test(label)) { d = TILE_ICONS[i][1]; break; }
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
+  }
+
   function buildOptions() {
     var O = window.mcMapOptions || {};
     if (!gm || gm._mcOpts) return;
@@ -324,10 +348,14 @@
         var panel = L.DomUtil.create('div', 'cm-opts-panel', wrap);
         panel.setAttribute('role', 'group');
         panel.setAttribute('aria-label', 'Map options');
-        var html = '<div class="lt">Map options</div>';
+        var html = '<div class="lt">Map layers</div>';
+        // Tiles, three across, each with an icon (option B, Leah 10-30). Grey icon = off.
+        html += '<div class="cm-tiles">';
         layers.forEach(function (l, i) {
-          html += '<label class="cm-opts-row"><input type="checkbox" data-i="' + i + '"' + (gm.hasLayer(l.layer) ? ' checked' : '') + '><span class="cm-sw" style="--on:' + (l.color || '#0f7a4f') + '"></span>' + (l.color ? '<span class="cm-dot" style="background:' + l.color + '"></span>' : '') + l.label + '</label>';
+          var on = gm.hasLayer(l.layer);
+          html += '<label class="cm-tile' + (on ? ' cm-on' : '') + '" style="--c:' + (l.color || '#0f7a4f') + '"><input type="checkbox" data-i="' + i + '"' + (on ? ' checked' : '') + '><span class="cm-ic">' + tileIcon(l.label) + '</span><span class="cm-tl">' + l.label.replace(/ and /g, ' & ') + '</span></label>';
         });
+        html += '</div>';
         if (baseNames.length > 1) {
           html += '<div class="cm-opts-sub">Map style</div><div class="cm-opts-bases">' + baseNames.map(function (n) {
             return '<button type="button" data-b="' + n + '"' + (gm.hasLayer(bases[n]) ? ' class="cm-on"' : '') + '>' + n + '</button>';
@@ -340,6 +368,8 @@
           var l = layers[+e.target.dataset.i];
           if (!l) return;
           if (e.target.checked) gm.addLayer(l.layer); else gm.removeLayer(l.layer);
+          var t = e.target.closest('.cm-tile');
+          if (t) t.classList.toggle('cm-on', e.target.checked);
         });
         panel.addEventListener('click', function (e) {
           var b = e.target.closest('button[data-b]');
@@ -354,10 +384,18 @@
         var fit = function () {
           if (panel.classList.contains('cm-closed')) return;
           panel.style.maxHeight = '';
-          var mb = gm.getContainer().getBoundingClientRect(), pb = panel.getBoundingClientRect();
+          panel.style.top = '';
+          var mb = gm.getContainer().getBoundingClientRect();
+          // A phone turned sideways has little room below the buttons, so the card opens
+          // beside the layers button instead, starting at the top of the map.
+          var side = sideQ.matches && !/bottom/.test(O.position || '');
+          panel.classList.toggle('cm-side', side);
+          if (side) panel.style.top = Math.round(mb.top - wrap.getBoundingClientRect().top + 8) + 'px';
+          var pb = panel.getBoundingClientRect();
           var room = /bottom/.test(O.position || '') ? pb.bottom - mb.top - 8 : mb.bottom - pb.top - 8;
           if (pb.height > room) panel.style.maxHeight = Math.max(120, room) + 'px';
         };
+        var sideQ = window.matchMedia('(orientation:landscape) and (max-height:500px)');
         gm.on('resize', fit);
         var set = function (open) {
           panel.classList.toggle('cm-closed', !open);
@@ -370,9 +408,11 @@
           bar.classList.remove('cm-pulse');
           set(panel.classList.contains('cm-closed'));
         });
-        set(!phoneQ.matches);
-        if (phoneQ.matches) bar.classList.add('cm-pulse');
-        gm.on('click', function () { if (phoneQ.matches) set(false); });
+        // Starts closed at every width; the button pulses so people know to tap it
+        // (Leah, 10-30: the panel popping open on arrival was "kind of annoying").
+        set(false);
+        bar.classList.add('cm-pulse');
+        gm.on('click', function () { set(false); });
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
         return wrap;
       }
@@ -642,9 +682,10 @@
     // A phone turned sideways is wider than 600px but under 520px tall (map-kit.css section 7).
     // There the open panel covered the left third of the map, so it starts closed there too.
     var compact = window.matchMedia('(max-width:600px), (max-height:520px)');
-    var fit = function () { set(!compact.matches); };
+    // Closed on arrival at every width, with a pulsing button (Leah, 10-30).
+    var fit = function () { set(false); };
     fit();
-    if (compact.matches && lbtn) lbtn.parentNode.classList.add('cm-pulse');
+    if (lbtn) lbtn.parentNode.classList.add('cm-pulse');
     window.addEventListener('resize', function () { if (!panel.classList.contains('cm-closed')) place(); });
     if (compact.addEventListener) compact.addEventListener('change', fit);
     m.on('click', function () { if (compact.matches) set(false); });
