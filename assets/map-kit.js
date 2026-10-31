@@ -349,8 +349,19 @@
           if (bases[b.dataset.b].bringToBack) bases[b.dataset.b].bringToBack();
           panel.querySelectorAll('button[data-b]').forEach(function (x) { x.classList.toggle('cm-on', x === b); });
         });
+        // The panel never runs past the bottom of the map: it gets the room that is left
+        // below its top edge and scrolls inside that (Leah, 10-30: "cant scroll it").
+        var fit = function () {
+          if (panel.classList.contains('cm-closed')) return;
+          panel.style.maxHeight = '';
+          var mb = gm.getContainer().getBoundingClientRect(), pb = panel.getBoundingClientRect();
+          var room = /bottom/.test(O.position || '') ? pb.bottom - mb.top - 8 : mb.bottom - pb.top - 8;
+          if (pb.height > room) panel.style.maxHeight = Math.max(120, room) + 'px';
+        };
+        gm.on('resize', fit);
         var set = function (open) {
           panel.classList.toggle('cm-closed', !open);
+          if (open) setTimeout(fit, 0);
           btn.classList.toggle('cm-on', open);
           btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         };
