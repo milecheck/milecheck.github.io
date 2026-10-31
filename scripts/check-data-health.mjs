@@ -136,7 +136,7 @@ for (const st of ALL) {
 // Incident lifecycle (crash log) freshness. The sweep writes each state's open.json about every 16 minutes. IL, MI, NH,
 // PA and VT sat frozen from 10/21 to 10/29 with nothing reporting it, so a state whose list is hours old now fails.
 // Before the Worker route exists (404) this is skipped, not failed.
-const LIFECYCLE_STALE_HOURS = 3;
+const LIFECYCLE_STALE_HOURS = 1; // 60 minutes (10/31: Tennessee sat 143 minutes stale unnoticed; the sweep reads a state about every 16)
 try {
   const lf = await getJson(`${WORKER}/lifecycle-freshness`);
   for (const [st, at] of Object.entries(lf.states || {})) {
@@ -146,6 +146,25 @@ try {
     if (ageH > LIFECYCLE_STALE_HOURS) flag(`${st}:lifecycle`, `${st}: crash log not written for ${ageH.toFixed(1)}h (last ${at}); its incidents are not being recorded`);
   }
 } catch (e) { warnings.push(`lifecycle freshness not checked (${e.message})`); }
+
+// Camera jobs and upstream 403s (2026-10-31). /health/jobs reports the newest saved frame of the I-5 48-hour ring and of
+// the global crash look-back while their cameras.json is present, and today's count of upstream 403s per state.
+const JOB_STALE_MINUTES = 30;
+const UPSTREAM_403_MAX_PER_DAY = 10;
+try {
+  const jobs = await getJson(`${WORKER}/health/jobs`);
+  for (const [name, label] of [['ring48', 'I-5 48-hour camera ring'], ['lookback', 'crash camera look-back']]) {
+    const j = jobs[name];
+    if (!j || j.error) { warnings.push(`${label}: not checked (${(j && j.error) || 'no answer'})`); continue; }
+    if (!j.configPresent) continue; // switched off on purpose (its cameras.json is removed)
+    if (j.ageMinutes == null) flag(`${name}:frames`, `${label}: its camera list is on but no saved frame was found`);
+    else if (j.ageMinutes > JOB_STALE_MINUTES) flag(`${name}:frames`, `${label}: no new frame in ${j.ageMinutes} minutes (last ${j.newestFrameAt})`);
+  }
+  for (const [st, n] of Object.entries(jobs.upstream403 || {})) {
+    if (n > UPSTREAM_403_MAX_PER_DAY) flag(`${st}:403`, `${st}: ${n} upstream 403s today (over ${UPSTREAM_403_MAX_PER_DAY}); the agency may be blocking us or limiting the key`);
+    else if (n > 0) warnings.push(`${st}: ${n} upstream 403(s) today`);
+  }
+} catch (e) { warnings.push(`camera jobs not checked (${e.message})`); }
 
 // 7-day average: today vs the mean of the previous days kept in the history file.
 let history = {};
