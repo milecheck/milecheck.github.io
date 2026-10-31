@@ -110,8 +110,40 @@ const PAGES = [
       <p>Email sales@milecheckapp.com for a 14-day test key, or read the endpoint reference first.</p>
       <div class="btns"><a class="primary" href="/api/">API reference</a><a class="ghost" href="/api/plan/">Plans and prices</a></div>
     </div>`,
-    rel: [['/api/', 'MileCheck API'], ['/data-sources/', 'Where MileCheck gets its road data'], ['/blog/dot-alerts-api-for-fleets.html', 'A DOT alerts API for fleets'], ['/what-is-511/', 'What is 511?']],
+    rel: [['/api/', 'MileCheck API'], ['/iteris-cleardata-road511-alternative/', 'Is there an alternative to Iteris ClearData or Road511?'], ['/data-sources/', 'Where MileCheck gets its road data'], ['/blog/dot-alerts-api-for-fleets.html', 'A DOT alerts API for fleets'], ['/what-is-511/', 'What is 511?']],
     noApp: true,
+  },
+  {
+    slug: 'iteris-cleardata-road511-alternative',
+    h1: 'Is there an alternative to Iteris ClearData or Road511?',
+    title: 'Is There an Alternative to Iteris ClearData or Road511? | MileCheck',
+    desc: `Iteris ClearData, Road511 and MileCheck compared on public pricing, API access and coverage. Public pages read ${CHECKED}.`,
+    lede: `Yes. Which one fits depends on what data you need. All three turn state DOT traffic data into a format software can read. We read each company's public pages on ${CHECKED}. When a page does not say something, we write "not publicly documented". That does not mean the company does not offer it.`,
+    body: `
+    <h2>Iteris ClearData</h2>
+    <p>Iteris sells ClearData as a subscription data feed or API for the US and Canada (${link('https://www.iteris.com/oursolutions/traffic-incident-data/cleardata', 'Iteris ClearData page')}). It covers incident data and speed data.</p>
+    <p>Iteris says its incidents come from more than 200 sources, including agencies and verified crowdsourced reports. Its speeds come from GPS probes. MileCheck has no probe speed data.</p>
+    <p>The public page does not list a price, API documentation or a free trial. Price, documentation and trial are not publicly documented. The call to action on the page is "Talk to an Expert".</p>
+    <h2>Road511</h2>
+    <p>Road511 lists a free 14-day trial with no credit card, and a Starter plan at $29 a month with a limit of 50,000 requests a day (${link('https://road511.com', 'road511.com')}). The page also lists a $99 Pro plan and a $279 Enterprise plan.</p>
+    <p>Its site lists 64 jurisdictions. It lists events, cameras, truck routing and bridge clearance data. The public page does not mention mile markers.</p>
+    <p>Road511's starting price is lower than MileCheck's.</p>
+    <h2>MileCheck</h2>
+    <p>Alerts come from a live state DOT feed in all 50 states and in British Columbia, Alberta and Manitoba. Hawaii's feed lists work zones only.</p>
+    <p>Each alert names the highway. It carries a mile marker when the state provides one. When the state does not, the API can add an estimated mile marker from our own mile marker file, and it marks that value as an estimate.</p>
+    <p>Cameras are listed in 46 states and 5 provinces. The mile marker file, for 50 states and 10 provinces and territories, can also be licensed on its own.</p>
+    <p>A test key runs 14 days at 100 calls a day, and we issue it by email. The Business plan is $299 a month for 100,000 calls a day. We do not offer an uptime guarantee yet. The endpoints and fields are on ${'<a href="/api/">the API page</a>'}, and the plans are on ${'<a href="/api/plan/">the plans page</a>'}.</p>
+    <h2>Which one fits?</h2>
+    <p>Iteris ClearData is worth a look if you need GPS probe speed data, or incident reports that include crowdsourced sources, or you buy as an agency.</p>
+    <p>Road511 is worth a look if you want a posted price and a self-serve trial, or you need truck routing.</p>
+    <p>MileCheck is worth a look if you need mile markers on alerts, where the state gives one or as an estimate, or the mile marker file by itself.</p>
+    <p>Prices and features change. Check each company's own page before you buy.</p>
+    <div class="cta">
+      <h3>Get a MileCheck test key</h3>
+      <p>Email sales@milecheckapp.com for a 14-day test key, or read the endpoint reference first.</p>
+      <div class="btns"><a class="primary" href="/api/">API reference</a><a class="ghost" href="/api/plan/">Plans and prices</a></div>
+    </div>`,
+    rel: [['/one-api-for-every-states-511-road-alerts/', "Is there one API for every state's 511 road alerts?"], ['/api/', 'MileCheck API'], ['/data-sources/', 'Where MileCheck gets its road data']],
   },
 ];
 
