@@ -638,7 +638,7 @@ ${sp.html}
       </div>
       <div class="co-card sk-card" id="skCard"></div><!-- co-* classes: assets/map-kit.css phone layout (bottom-sheet card, one-line status, 2-up stats) applies to this page too -->
     </div>
-    <div class="sk-legend"><span><i style="background:#0E1116"></i>Resort base</span>${plows ? `<span><i style="background:#0369A1"></i>Plow truck, last reported position</span>` : ''}<span><i style="background:#0f7a4f"></i>Camera</span><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#a16207"></i>Ramp or lane</span><span style="color:#8A939B">Dashed ring: the ${radiusTxt} search area</span></div>
+    <div class="sk-legend"><span><i style="background:#0E1116"></i>Resort base</span>${plows ? `<span><i style="background:#0369A1"></i>Plow truck, last reported position</span>` : ''}<span><i style="background:#0f7a4f"></i>Camera</span><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#a16207"></i>Ramp or lane</span></div>
   </div>
 
   <div class="sk-grid">

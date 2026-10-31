@@ -222,9 +222,13 @@
     Object.keys(DRAW).forEach(function (key) { G[key].on('add', function () { sync(key, true); }); });
     if (!pinned) gm.on('moveend', function () { Object.keys(DRAW).forEach(function (k) { sync(k, false); }); });
 
-    // Mile markers: drawn only for the area in view once zoomed in, and thinned as you
-    // zoom out, so 15,000 posts stay fast.
-    var posts = [], mpRender = L.canvas({ padding: 0.3 });
+    // Mile markers: little green signs with the number on them, like the app (Leah, 10-30:
+    // plain green dots looked like the page's camera dots). Drawn only for the area in view
+    // once zoomed in, and thinned as you zoom out, so a state's 15,000 posts stay fast.
+    var posts = [];
+    // Signs sit above road lines and just to the right of the post, so they do not hide camera or closure dots.
+    function mpPane() { if (!gm.getPane('mcMp')) { var pn = gm.createPane('mcMp'); pn.style.zIndex = 450; } return 'mcMp'; }
+    function mpLabel(v) { var n = +v; return Math.abs(n - Math.round(n)) < 0.05 ? String(Math.round(n)) : n.toFixed(1); }
     function drawPosts() {
       var pop = gm._popup;
       if (pop && gm.hasLayer(pop) && pop._source && G.mileposts.hasLayer(pop._source)) return;
@@ -232,13 +236,17 @@
       if (!gm.hasLayer(G.mileposts)) return;
       var z = gm.getZoom();
       if (z < 9) return;
-      var step = z >= 12 ? 1 : z >= 10 ? 5 : 10, b = gm.getBounds().pad(0.2), n = 0;
-      for (var i = 0; i < posts.length && n < 1500; i++) {
+      var step = z >= 12 ? 1 : z >= 11 ? 2 : z >= 10 ? 5 : 10, b = gm.getBounds().pad(0.1), n = 0, seen = {};
+      for (var i = 0; i < posts.length && n < 400; i++) {
         var p = posts[i], mi = Math.round(+p.milepost);
         if (mi % step || !b.contains([p.lat, p.lon])) continue;
+        // One sign per road and number (some feeds list each direction separately).
+        var k = p.highway + '|' + mpLabel(p.milepost);
+        if (seen[k]) continue;
+        seen[k] = 1;
         n++;
-        L.circleMarker([p.lat, p.lon], { renderer: mpRender, radius: 4, color: '#fff', weight: 1, fillColor: '#0f7a4f', fillOpacity: 1 })
-          .bindPopup('<b>' + e(p.highway) + ' · mile ' + e(p.milepost) + '</b>' + src('state DOT mile marker data'))
+        L.marker([p.lat, p.lon], { pane: mpPane(), icon: L.divIcon({ className: 'cm-mp', html: '<span>' + e(mpLabel(p.milepost)) + '</span>', iconSize: [0, 0] }), keyboard: false })
+          .bindPopup('<b>' + e(p.highway) + ' · mile ' + e(mpLabel(p.milepost)) + '</b>' + src('state DOT mile marker data'))
           .addTo(G.mileposts);
       }
     }
