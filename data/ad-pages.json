@@ -13,7 +13,8 @@
     "privacyExempt: pages that need no privacy link (store displays, redirects, admin, fragments, drafts, verification files). Every other page with a <head> and <body> must link the privacy policy, ads or not.",
     "adsTxtRequired: the seller lines Journey requires, copied from the dashboard at onboarding (e.g. its mediavine.com DIRECT line). The check fails while ads are on and this is empty or a line is missing from /ads.txt.",
     "fullScreenTools: path regexes for full-screen map tools. No ad script and no inserted privacy link (it would sit under the map); they open from pages that carry both.",
-    "adsTxtSource: Mediavine's hosted ads.txt for this site. /ads.txt is a verbatim copy; refresh it when the dashboard's ads.txt health check turns yellow or red. Program is Mediavine Official (not Journey), script host scripts.mediavine.com."
+    "adsTxtSource: Mediavine's hosted ads.txt for this site. /ads.txt is a verbatim copy; refresh it when the dashboard's ads.txt health check turns yellow or red. Program is Mediavine Official (not Journey), script host scripts.mediavine.com.",
+    "2026-10-30: maps/mile-markers/ moved from no-ads to the map treatment (Leah: lighter ads on the map pages): in-content ads only in the guide text below the map (.mc-guide), no sticky bar, no floating video. Verify with ?test=placeholders after Google approves, before Launch."
   ],
   "enabled": true,
   "siteId": "d74ff19f-a5bf-47fa-a630-0a438f90c11a",
@@ -38,7 +39,6 @@
     "dash-preorder.html",
     "android.html",
     "carplay/",
-    "maps/mile-markers/",
     "internal/",
     "q/",
     "data/",
@@ -57,7 +57,7 @@
   ],
   "contentExpect": {
     "index.html": "story-body",
-    "maps/mile-markers/index.html": null,
+    "maps/mile-markers/index.html": "mc-guide",
     "cameras/washington/index.html": "co-guide",
     "road-conditions/washington/index.html": "rc-body",
     "seasonal/colorado/index.html": "sc-body",
@@ -97,8 +97,7 @@
     "mediavine.com, d74ff19f-a5bf-47fa-a630-0a438f90c11a, DIRECT, 1363c924529b3998"
   ],
   "fullScreenTools": [
-    "(^|/)map/index\\.html$",
-    "^maps/mile-markers/"
+    "(^|/)map/index\\.html$"
   ],
   "adsTxtSource": "https://adstxt.mediavine.com/sites/d74ff19f-a5bf-47fa-a630-0a438f90c11a/ads.txt"
 }
