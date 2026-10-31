@@ -203,14 +203,16 @@ module.exports = [
   // I-90 / US 2 / SR 410, and WA route numbers are unique across types, so the page matches on the number.
   // Crystal Mountain: OSM search 2026-10-15. Access: SR 410 from Enumclaw, then Crystal Mountain
   // Boulevard 6 mi (crystalmountainresort.com/plan-your-trip/getting-here).
-  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams', reportName: 'Crystal Mountain mountain report', pass: 'crystal-mountain', note: 'WSDOT's last camera on SR 410 is at mile 24.9 in Enumclaw. Past that, WSDOT has no cameras on the roughly 32 miles of SR 410 to the turnoff or the 6 miles up Crystal Mountain Boulevard.',
+  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams', reportName: 'Crystal Mountain mountain report', pass: 'crystal-mountain', note: "WSDOT's last camera on SR 410 is at mile 24.9 in Enumclaw. Past that, WSDOT has no cameras on the roughly 32 miles of SR 410 to the turnoff or the 6 miles up Crystal Mountain Boulevard.",
     // 2026-10-23 template upgrade (Leah's resort feedback). Every field below is optional per resort; the
     // generator only prints a section when its data is here. Sources checked 2026-10-23.
     // cams: WSDOT SR 410 cameras out to MP 60 (they stop at MP 24.9, Watson Rd, Enumclaw) plus, inside the ring,
-    //   only the NPS Sunrise camera (Sunrise Park Rd leaves SR 410). Airport and Paradise cameras are not on the route.
-    cams: { routes: [['SR 410', 0, 60]], ring: ['Sunrise Park Rd'] },
+    //   the NPS Sunrise camera (Sunrise Park Rd leaves SR 410) and one NPS Paradise camera by id (Leah 10/30: not on the route, but it shows the weather on the mountain). A ring entry is a route name or a camera id.
+    cams: { routes: [['SR 410', 0, 60]], ring: ['Sunrise Park Rd', 'NPS-MORA-mountain'] },
     // The resort's webcams sit behind an Imperva bot wall and the site grants no embed permission: link out only.
     resortCams: 'https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams/webcams',
+    // The summit 360 camera is on Roundshot, outside the bot wall; its settings.json allows any origin (checked 10/30).
+    roundshot: [{ url: 'https://crystalmountainresort.roundshot.com/summit', title: 'Crystal Mountain summit, 360° camera', credit: 'Crystal Mountain Resort (Roundshot)' }],
     // NWS grid cells (2.5 km): 145,31 holds the base area, 145,32 the highest cell over the ski area. Elevations
     // printed on the page come from the API response, not from here.
     forecast: [{ label: 'Base area', grid: 'SEW/145,31' }, { label: 'Upper mountain', grid: 'SEW/145,32' }],
