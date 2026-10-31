@@ -362,7 +362,7 @@ function near(lat,lon){return isFinite(lat)&&isFinite(lon)&&km(PASS.lat,PASS.lon
 const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
 const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Stevens Pass cameras &amp; conditions: WSDOT via MileCheck',maxZoom:16}).addTo(map);
-if(PASS.area){const dy=PASS.radiusKm/111,dx=dy/Math.cos(PASS.lat*Math.PI/180);map.fitBounds([[PASS.lat-dy,PASS.lon-dx],[PASS.lat+dy,PASS.lon+dx]]);}else{map.setView([PASS.lat,PASS.lon],11);}
+if(PASS.area){const dy=PASS.radiusKm/111,dx=dy/Math.cos(PASS.lat*Math.PI/180);map.fitBounds([[PASS.lat-dy,PASS.lon-dx],[PASS.lat+dy,PASS.lon+dx]]);map.setZoom(map.getZoom()-1,{animate:false});}else{map.setView([PASS.lat,PASS.lon],10);}
 const camLayer=L.layerGroup().addTo(map);
 const alrLayer=L.layerGroup().addTo(map);
 const fireLayer=L.layerGroup().addTo(map);

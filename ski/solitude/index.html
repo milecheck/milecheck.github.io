@@ -472,8 +472,8 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map
 // view fits the focus line (the last road up) plus the base; without one, a box 0.8 radius wide around the base.
 var ACCESS=[];
 var focus=ACCESS.filter(function(a){return a.focus;});
-if(focus.length){var fb=L.latLngBounds([[RES.lat,RES.lon]]);focus.forEach(function(a){a.pts.forEach(function(p){fb.extend(p);});});map.fitBounds(fb,{padding:[40,40],maxZoom:14});}
-else map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*0.8),{padding:[6,6]});
+if(focus.length){var fb=L.latLngBounds([[RES.lat,RES.lon]]);focus.forEach(function(a){a.pts.forEach(function(p){fb.extend(p);});});map.fitBounds(fb,{padding:[40,40],maxZoom:14});map.setZoom(map.getZoom()-1,{animate:false});}
+else map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*0.8),{padding:[6,6]});map.setZoom(map.getZoom()-1,{animate:false});
 // Access roads drawn solid (the Esri topo basemap draws some of these roads dashed, which reads as a trail).
 ACCESS.forEach(function(a){L.polyline(a.pts,{color:'#ffffff',weight:8,opacity:.9,interactive:false}).addTo(map);L.polyline(a.pts,{color:'#0E1116',weight:4,opacity:.9}).bindTooltip(esc(a.name),{sticky:true}).addTo(map);});
 L.circle([RES.lat,RES.lon],{radius:RES.radius*1609.34,color:'#0f7a4f',weight:1.5,dashArray:'4 5',fill:false,interactive:false}).addTo(map);

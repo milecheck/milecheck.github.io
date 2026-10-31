@@ -316,12 +316,12 @@ var KEYS=keysOf(RES);
 var TOUCH=('ontouchstart' in window),RS=function(v){return TOUCH?Math.round(v*1.6):v;};
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+(DOT===TRAFFIC?DOT:DOT+' and '+TRAFFIC)+' via MileCheck'+(${JSON.stringify((ACCESS[r.slug] || []).length > 0)}?' · access road © OpenStreetMap contributors':''),maxZoom:16}).addTo(map);
 // Set the view before adding layers: a circle added to a map with no view has no _map yet, so its getBounds() throws.
-// Leah 2026-10-23: open centred and zoomed on the resort with the access road in view. With a drawn access road the
+// Leah 2026-10-23: open centred on the resort with the access road in view. Leah 2026-10-30: then one zoom level out, so people pan in. With a drawn access road the
 // view fits the focus line (the last road up) plus the base; without one, a box 0.8 radius wide around the base.
 var ACCESS=${JSON.stringify(ACCESS[r.slug] || [])};
 var focus=ACCESS.filter(function(a){return a.focus;});
-if(focus.length){var fb=L.latLngBounds([[RES.lat,RES.lon]]);focus.forEach(function(a){a.pts.forEach(function(p){fb.extend(p);});});map.fitBounds(fb,{padding:[40,40],maxZoom:14});}
-else map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*0.8),{padding:[6,6]});
+if(focus.length){var fb=L.latLngBounds([[RES.lat,RES.lon]]);focus.forEach(function(a){a.pts.forEach(function(p){fb.extend(p);});});map.fitBounds(fb,{padding:[40,40],maxZoom:14});map.setZoom(map.getZoom()-1,{animate:false});}
+else map.fitBounds(L.latLng(RES.lat,RES.lon).toBounds(RES.radius*1609.34*0.8),{padding:[6,6]});map.setZoom(map.getZoom()-1,{animate:false});
 // Access roads drawn solid (the Esri topo basemap draws some of these roads dashed, which reads as a trail).
 ACCESS.forEach(function(a){L.polyline(a.pts,{color:'#ffffff',weight:8,opacity:.9,interactive:false}).addTo(map);L.polyline(a.pts,{color:'#0E1116',weight:4,opacity:.9}).bindTooltip(esc(a.name),{sticky:true}).addTo(map);});
 L.circle([RES.lat,RES.lon],{radius:RES.radius*1609.34,color:'#0f7a4f',weight:1.5,dashArray:'4 5',fill:false,interactive:false}).addTo(map);
