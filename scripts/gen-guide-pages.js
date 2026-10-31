@@ -971,7 +971,7 @@ ${g.related ? `    <p class="g-related">${T.rel} ${g.related}</p>` : ''}
           <p class="footer-label">${T.help}</p>
           <ul class="footer-list">
             <li><a href="mailto:feedback@milecheckapp.com">${T.fb}</a></li>
-            <li><a href="https://milecheck.github.io/milecheck-privacy/">${T.pp}</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">${T.pp}</a></li>
           </ul>
         </div>
       </div>

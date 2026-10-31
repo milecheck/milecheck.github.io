@@ -1217,7 +1217,7 @@ ${p.vis ? `
           <p class="footer-label">Help &amp; legal</p>
           <ul class="footer-list">
             <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
-            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
           </ul>
         </div>
       </div>

@@ -108,6 +108,7 @@
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
   <link rel="stylesheet" href="/assets/map-kit.css?v=20261030g">
   <script src="/assets/map-kit.js?v=20261030g" defer></script>
+<!-- mv:start --><script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/d74ff19f-a5bf-47fa-a630-0a438f90c11a.js"></script><!-- mv:end -->
   <!-- site-nav:assets -->
   <link rel="stylesheet" href="/assets/site-nav.css?v=20261030-1">
   <script src="/assets/site-nav.js?v=20261030-1" defer></script>
@@ -174,7 +175,7 @@
     </div>
   </div>
 
-  <div class="cl-notes" id="about">
+  <div class="cl-notes journey-content" id="about"><!-- mvb:start --><div id="ad-management-config-settings" data-blocklist-adhesion-mobile="1" data-blocklist-universal-player-mobile="1" data-blocklist-universal-player-desktop="1"></div><!-- mvb:end -->
     <p><b>What this means.</b> These are the coverage maps each carrier files with the FCC, not measured signal. Carriers miss real signal in places and claim signal that is not there in others, and mountain passes are where the maps are weakest. Red means none of the three carriers reports coverage, not that your phone will have none. You may still reach 911 through another carrier's network, a regional carrier or satellite messaging.</p>
     <p><b>How this was built.</b> For every mile marker in the MileCheck milepost data in these states, we looked up the H3 hexagon (about 0.1 square kilometer) that contains it in each carrier's FCC filing, and kept only the "in a moving vehicle" layer at 4G LTE 5/1 Mbps. The lines between mile markers are drawn in the color of the marker they start at. They are not a survey of the whole road, and a short gap between two markers can hide a stretch with no reported coverage. 5G-only coverage is not counted. Regional carriers are not shown, and neither are the partner networks a carrier roams on, so a Verizon phone can have service where Verizon's own filing shows none (much of eastern Utah and Wyoming works this way).</p>
     <p><b>States mapped so far:</b> Idaho, Montana, Nevada, Oregon, Utah, Washington, Wyoming. More states are coming. If you know a stretch where the map is wrong, tell us at <a href="mailto:feedback@milecheckapp.com">feedback@milecheckapp.com</a>. You can also challenge a carrier's map with the FCC on the <a href="https://broadbandmap.fcc.gov/" target="_blank" rel="noopener">National Broadband Map</a>. The FCC takes mobile challenges backed by speed tests.</p>
@@ -329,7 +330,7 @@
           <ul class="footer-list">
             <li><a href="/data-sources/">Data sources</a></li>
             <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
-            <li><a href="https://milecheck.github.io/milecheck-privacy/">Privacy policy</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
           </ul>
         </div>
       </div>

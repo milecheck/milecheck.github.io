@@ -15,7 +15,7 @@ const BLOCK = `<!-- values:start -->
     <li style="margin-bottom:8px"><strong>Only what&rsquo;s needed.</strong> Weather sends your approximate location to the National Weather Service, route planning sends your location and destination to Google, and wildfire alerts send a location rounded to about 7 miles only if you turn them on. Sentry receives anonymous crash reports, we count feature use without location or identity, and Apple or Google handles subscriptions.</li>
     <li style="margin-bottom:8px"><strong>Built for real roads.</strong> Nearly every feature exists because someone on a real road asked for it.</li>
   </ul>
-  <p style="font-size:15px">More in our <a href="https://milecheck.github.io/milecheck-privacy/" style="color:#0f7a4f;text-decoration:underline">privacy policy</a> and <a href="/#story" style="color:#0f7a4f;text-decoration:underline">our story</a>.</p>
+  <p style="font-size:15px">More in our <a href="https://milecheckapp.com/milecheck-privacy/" style="color:#0f7a4f;text-decoration:underline">privacy policy</a> and <a href="/#story" style="color:#0f7a4f;text-decoration:underline">our story</a>.</p>
 </section>
 <!-- values:end -->
 `;
