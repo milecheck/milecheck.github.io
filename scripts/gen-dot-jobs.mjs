@@ -170,6 +170,7 @@ const page = `<div class="eyebrow">Jobs</div>
 
     <h2>Where can I find DOT jobs in other states?</h2>
     <p>For these states we link to the official hiring site instead of copying listings. Search for "seasonal" or "highway maintenance."</p>
+    <p>Every state, in one list: <a href="/road-workers/dot-jobs/">how do you get a job at your state DOT?</a> Pay and headcount by state are on <a href="/road-workers/">how much highway maintenance workers make</a>.</p>
     <ul>
 ${PORTALS.map(p => `      <li><a href="${esc(p[2])}" target="_blank" rel="noopener">${esc(p[0])}</a> for ${esc(p[1])} (${esc(p[3])})</li>`).join('\n')}
     </ul>
