@@ -306,6 +306,7 @@
   // with switch rows. Turn those rows into the same icon tiles as the shared card, so
   // every map looks alike (Leah, 10-30). Each page's own checkboxes stay, so its code
   // that listens to them keeps working.
+  var X_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
   function tileBox(box) {
     var rows = [].slice.call(box.querySelectorAll('label.co-layer'));
     if (!rows.length || box.querySelector('.cm-tiles')) return;
@@ -325,6 +326,15 @@
       grid.appendChild(r);
     });
     box.classList.add('cm-tiled');
+    // Close X, top right (Leah, 10-30). It presses the layers button, which closes the box.
+    var x = document.createElement('button');
+    x.type = 'button'; x.className = 'cm-x'; x.setAttribute('aria-label', 'Close map layers'); x.innerHTML = X_SVG;
+    box.insertBefore(x, box.firstChild);
+    x.addEventListener('click', function (ev) {
+      ev.preventDefault(); ev.stopPropagation();
+      var host = box.parentNode, lb = host && host.querySelector('.cm-layers-btn a');
+      if (lb) { lb.click(); lb.focus(); } else box.classList.add('cm-closed');
+    });
     box.addEventListener('change', function (ev) { var t = ev.target.closest('.cm-tile'); if (t) t.classList.toggle('cm-on', ev.target.checked); });
   }
 
@@ -412,7 +422,7 @@
         var panel = L.DomUtil.create('div', 'cm-opts-panel', wrap);
         panel.setAttribute('role', 'group');
         panel.setAttribute('aria-label', 'Map options');
-        var html = '<div class="lt">Map layers</div>';
+        var html = '<button type="button" class="cm-x" aria-label="Close map layers">' + X_SVG + '</button><div class="lt">Map layers</div>';
         // Tiles, three across, each with an icon (option B, Leah 10-30). Grey icon = off.
         html += '<div class="cm-tiles">';
         layers.forEach(function (l, i) {
@@ -436,6 +446,7 @@
           if (t) t.classList.toggle('cm-on', e.target.checked);
         });
         panel.addEventListener('click', function (e) {
+          if (e.target.closest('.cm-x')) { set(false); btn.focus(); return; }
           var b = e.target.closest('button[data-b]');
           if (!b) return;
           baseNames.forEach(function (n) { if (gm.hasLayer(bases[n])) gm.removeLayer(bases[n]); });
@@ -765,7 +776,8 @@
     if (lbtn) lbtn.parentNode.classList.add('cm-pulse');
     window.addEventListener('resize', function () { if (!panel.classList.contains('cm-closed')) place(); });
     if (compact.addEventListener) compact.addEventListener('change', fit);
-    m.on('click', function () { if (compact.matches) set(false); });
+    // A tap on the map closes the box, at every width (Leah, 10-30).
+    m.on('click', function () { set(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.classList.contains('cm-closed')) set(false); });
   }
 })();

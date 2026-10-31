@@ -185,3 +185,9 @@ html .co-layers .cm-tile{display:flex;flex-direction:column;align-items:center;j
 html .co-layers .co-key{margin-top:8px;}
 @media (max-width:600px) and (orientation:portrait){html .co-layers.cm-tiled{width:min(300px,calc(100% - 66px));}}
 .cm-opts-panel.cm-side .cm-tile{min-height:54px;padding:5px 3px;}.cm-opts-panel.cm-side .cm-ic{width:24px;height:24px;}.cm-opts-panel.cm-side .cm-ic svg{width:14px;height:14px;}
+/* Close X on the layers card, top right (10-30). 36px tap area, 16px icon. */
+.cm-x{position:absolute;top:2px;right:2px;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:8px;background:transparent;color:#5b6670;cursor:pointer;padding:0;z-index:2;}
+.cm-x svg{width:16px;height:16px;}
+.cm-x:hover{background:#F1F3F0;color:#0E1116;}
+.cm-x:focus-visible{outline:2px solid #0f7a4f;outline-offset:-2px;}
+.cm-opts-panel .lt,html .co-layers.cm-tiled .lt{padding-right:34px;min-height:24px;display:flex;align-items:center;margin-bottom:6px;}
