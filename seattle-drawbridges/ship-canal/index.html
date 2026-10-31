@@ -113,8 +113,8 @@
       <div class="sd-stamp">The app</div>
       <h3>Seattle Drawbridges</h3>
       <p>The Now screen shows which bridge is up at a glance. Premium unlocks every bridge's own page: live status, the rule, alerts and lift history. $9.99 a year (about 83 cents a month) or $0.99 month to month. No ads in the app.</p>
-      <a href="https://milecheckapp.com/get/drawbridges/" class="btn btn-primary">Get it on the App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dseattle-drawbridges" class="sd-play" rel="noopener">Get it on Google Play</a>
+      <a href="https://apps.apple.com/us/app/id6811393568?pt=128447811&ct=seattle-drawbridges-web&mt=8" class="btn btn-primary" data-store="ios" rel="noopener">Get it on the App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dseattle-drawbridges" class="sd-play" data-store="play" rel="noopener">Get it on Google Play</a>
     </div>
   </div>
   <div class="sd-wrap">
@@ -130,7 +130,7 @@
       <div class="sd-card">
         <h3>Seattle Drawbridges</h3>
         <p>At a glance: which of the five monitored bridges is up right now, and for how long. Premium, $9.99 a year (about 83 cents a month) or $0.99 month to month, unlocks every bridge's own page: its opening rule, its live status detail, a push when a bridge you chose goes up, the lift history MileCheck keeps for it, and four more colour schemes. No account needed. No ads in the app. Your location stays on your phone.</p>
-        <div class="sd-cta"><a href="https://milecheckapp.com/get/drawbridges/" class="btn btn-primary">Get it on the App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dseattle-drawbridges" class="sd-play" rel="noopener">Get it on Google Play</a></div>
+        <div class="sd-cta"><a href="https://apps.apple.com/us/app/id6811393568?pt=128447811&ct=seattle-drawbridges-web&mt=8" class="btn btn-primary" data-store="ios" rel="noopener">Get it on the App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dseattle-drawbridges" class="sd-play" data-store="play" rel="noopener">Get it on Google Play</a></div>
       </div></div>
   </div>
   <div class="sd-notes">Live status from Seattle DOT via the MileCheck API. Opening rules from 33 CFR 117, the federal drawbridge regulations. Not affiliated with the City of Seattle, WSDOT or the Coast Guard.</div><script>
@@ -166,13 +166,17 @@
   // A real limit has to live in the Worker; see docs/NEXT.md. The status feed URL is public.
   var FREE='sdFreeCheck', WINDOW=5*60*1000, TODAY=new Date().toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'}), PAGE=location.pathname, used=null, timer=null, poll=null;
   try{used=JSON.parse(localStorage.getItem(FREE)||'null');}catch(e){}
+  // On a phone show only that phone's store button; desktop shows both.
+  function stores(){var ua=navigator.userAgent||'',an=/Android/i.test(ua),io=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);if(!an&&!io)return;document.querySelectorAll('a[data-store]').forEach(function(l){var k=l.getAttribute('data-store');if((an&&k==='ios')||(io&&k==='play'))l.style.display='none';});}
+  stores();
   function save(o){try{localStorage.setItem(FREE,JSON.stringify(o));}catch(e){}}
   function block(){
     if(poll){clearInterval(poll);poll=null;}
     document.querySelectorAll('[data-kv]').forEach(function(el){el.className=el.className.replace(/\b(UP|DOWN|NONE|WAIT)\b/g,'')+' NONE';el.textContent=el.classList.contains('sd-v')?'IN THE APP':'in the app';});
-    document.querySelectorAll('[data-line]').forEach(function(el){el.innerHTML='No views left today. Subscribe to check as often as you like. <span style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;"><a href="https://milecheckapp.com/get/drawbridges/?utm_source=web&amp;utm_medium=limit&amp;utm_campaign=free-check" class="btn btn-primary" style="display:inline-block;">Get it on the App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dlimit%26utm_campaign%3Dfree-check" class="sd-play" rel="noopener">Get it on Google Play</a></span>';});
+    document.querySelectorAll('[data-line]').forEach(function(el){el.innerHTML='No views left today. Subscribe to check as often as you like. <span style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;"><a href="https://apps.apple.com/us/app/id6811393568?pt=128447811&ct=free-check&mt=8" class="btn btn-primary" data-store="ios" rel="noopener" style="display:inline-block;">Get it on the App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dlimit%26utm_campaign%3Dfree-check" class="sd-play" data-store="play" rel="noopener">Get it on Google Play</a></span>';});
     var n=document.getElementById('sd-count'); if(n){n.textContent='No views left today';}
     document.querySelectorAll('.sd-meta').forEach(function(m){m.style.display='none';});
+    stores();
   }
   var spent=used&&used.day===TODAY&&(used.path!==PAGE||(used.start&&Date.now()-used.start>=WINDOW));
   if(spent){block();return;}

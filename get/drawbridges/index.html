@@ -33,5 +33,6 @@
 <a class="home" href="/">milecheckapp.com</a>
 </main>
 <script>(function(){try{var c=(new URLSearchParams(location.search).get('utm_campaign')||'').replace(/[^a-z0-9-]/gi,'').slice(0,40);if(!c)return;document.querySelectorAll('a.btn').forEach(function(l){l.href=l.href.replace('ct=get','ct='+c).replace('utm_campaign%3Dget','utm_campaign%3D'+c);});}catch(e){}})();</script>
+<script>(function(){try{if(new URLSearchParams(location.search).has('stay'))return;var ua=navigator.userAgent||'',pat=/Android/i.test(ua)?/play\.google\.com/:/iPhone|iPad|iPod/i.test(ua)?/apps\.apple\.com/:null;if(!pat)return;var b=[].slice.call(document.querySelectorAll('a.btn')).filter(function(a){return pat.test(a.href);})[0];if(b)location.replace(b.href);}catch(e){}})();</script>
 </body>
 </html>
