@@ -108,46 +108,145 @@
   // joins them, it starts closed on phones and pulses three times there. It replaces
   // Leaflet's own basemap control (Leah, 10-03: "I don't see a map options. Just the
   // satellite etc options").
-  // Closures and wildfires for maps that only carry their own data (the camera maps).
-  // A page sets window.mcExtraLayers = { state:'WA' } and gets two rows in its layers
-  // panel, both off: closures and crashes from /incidents, and wildfires from /fires,
-  // that state only, prescribed burns left out (site map-layers plan, 10-25).
-  function extraLayers() {
+  // Shared layers (Leah, 10-30: "every map should have the same filters"). A page sets
+  //   window.mcExtraLayers = { state:'CO', on:['cameras'] }
+  // and its Map options panel gets the same rows on every map: Alerts, Closures and
+  // crashes, Road weather, Cameras, Mile markers, Wildfires. Each page opens with its own
+  // topic switched on (`on`), and a visitor can switch any other on without leaving.
+  // A row is left out with `<name>:false`; camera pages leave out Cameras because their
+  // own camera pins are already there. A row the page already has under its own name
+  // (its own closures, cameras, roadwork) is left out too, so nothing shows twice.
+  // Data loads the first time a row is switched on.
+  var SAME = { alerts: /restriction|roadwork|work zone|alert/i, closures: /closure|crash/i, weather: /road weather|road condition|surface/i,
+    cameras: /camera/i, mileposts: /mile ?(marker|post)/i, fires: /fire/i };
+  function extraLayers(own) {
+    own = own || [];
     var X = window.mcExtraLayers;
     if (!X || !X.state || !gm) return [];
     var W = 'https://api.milecheckapp.com', st = X.state, all = st === 'ALL';
     var e = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-    var clos = L.layerGroup(), fires = L.layerGroup(), out = [];
+    var src = function (s) { return '<br><span style="color:#8A939B">Source: ' + s + ' via MileCheck</span>'; };
+    var get = function (path) { return fetch(W + path, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }); };
+    var dot = function (la, lo, fill, r) { return L.circleMarker([la, lo], { radius: r || 7, color: '#fff', weight: 1.5, fillColor: fill, fillOpacity: .95 }); };
+    var ok = function (la, lo) { return isFinite(la) && isFinite(lo) && !(!la && !lo); };
     var loaded = {};
     function once(key, fn) { return function () { if (loaded[key]) return; loaded[key] = 1; fn(); }; }
-    clos.on('add', once('c', function () {
-      fetch(W + '/incidents?state=' + st, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+    var L_alerts = L.layerGroup(), L_clos = L.layerGroup(), L_wx = L.layerGroup(), L_cams = L.layerGroup(), L_mp = L.layerGroup(), L_fires = L.layerGroup();
+
+    // Alerts and closures share one /incidents fetch: closures and crashes go to their own
+    // row, everything else (work zones, hazards, weather events) goes to Alerts.
+    var inc = null;
+    function incidents() {
+      if (!inc) inc = get('/incidents?state=' + st).then(function (d) {
+        var out = { clos: [], other: [] };
         ((d && d['incident-reports']) || []).forEach(function (r) {
-          var t = r['event-type-id'], sl = ((r.location || {})['start-location']) || {};
+          var t = r['event-type-id'], loc = r.location || {}, sl = loc['start-location'] || {};
           var txt = String(r.headline || r.description || r['impact-desc'] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-          if (!(t === 'CL' || t === 'AC' || /\b(closed|closure|crash)\b/i.test(txt)) || /\b(ramp|exit|rest area|shoulder)\b/i.test(txt)) return;
           var la = +sl['start-lat'], lo = +sl['start-long'];
-          if (!isFinite(la) || !isFinite(lo) || (!la && !lo)) return;
-          var rt = ((r.location || {})['route-id'] || '').trim();
-          L.circleMarker([la, lo], { radius: 7, color: '#fff', weight: 1.5, fillColor: '#DC2626', fillOpacity: .95 })
-            .bindPopup('<b>' + e(t === 'AC' ? 'Crash' : 'Closure') + (rt ? ' · ' + e(rt) : '') + '</b><br>' + e(txt.slice(0, 280)) + '<br><span style="color:#8A939B">Source: state DOT via MileCheck</span>')
-            .addTo(clos);
+          if (!ok(la, lo)) return;
+          var rt = (loc['route-id'] || '').trim();
+          var isClos = (t === 'CL' || t === 'AC' || /\b(closed|closure|crash)\b/i.test(txt)) && !/\b(ramp|exit|rest area|shoulder)\b/i.test(txt);
+          var kind = isClos ? (t === 'AC' ? 'Crash' : 'Closure') : (t === 'RW' ? 'Work zone' : t === 'WE' ? 'Weather' : t === 'HZ' ? 'Hazard' : 'Alert');
+          (isClos ? out.clos : out.other).push({ la: la, lo: lo, html: '<b>' + e(kind) + (rt ? ' · ' + e(rt) : '') + '</b><br>' + e(txt.slice(0, 280)) + src('state DOT') });
+        });
+        return out;
+      }).catch(function () { return { clos: [], other: [] }; });
+      return inc;
+    }
+    L_clos.on('add', once('c', function () { incidents().then(function (o) { o.clos.forEach(function (x) { dot(x.la, x.lo, '#DC2626').bindPopup(x.html).addTo(L_clos); }); }); }));
+    L_alerts.on('add', once('a', function () { incidents().then(function (o) { o.other.forEach(function (x) { dot(x.la, x.lo, '#F59E0B', 6).bindPopup(x.html).addTo(L_alerts); }); }); }));
+
+    // Road weather: reported road surface conditions. Bare, dry and normal are left out.
+    L_wx.on('add', once('w', function () {
+      get('/conditions?state=' + st).then(function (d) {
+        ((d && d['road-weather-reports']) || []).forEach(function (r) {
+          var loc = r.location || {}, sl = loc['start-location'] || {};
+          var la = +(r.latitude || sl['start-lat']), lo = +(r.longitude || sl['start-long']);
+          var cond = String(r['road-surface-condition'] || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+          if (!ok(la, lo) || !cond || /^(bare|dry|normal|bare\s*\/\s*dry|bare and dry|no report)/i.test(cond)) return;
+          var name = String(r['location-name'] || loc['location-name'] || '').trim();
+          dot(la, lo, '#0EA5E9', 6).bindPopup('<b>Road weather' + (r['route-id'] ? ' · ' + e(r['route-id']) : '') + '</b><br>' + (name ? e(name.slice(0, 140)) + '<br>' : '') + e(cond.slice(0, 200)) + src('state DOT')).addTo(L_wx);
         });
       }).catch(function () {});
     }));
-    fires.on('add', once('f', function () {
-      fetch(W + '/fires', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+
+    // Cameras: a pin per camera, the still loads only when its popup opens. Drawn on a
+    // canvas, because a state can have a few thousand.
+    var camRender = L.canvas({ padding: 0.3 });
+    L_cams.on('add', once('k', function () {
+      get('/cameras?state=' + st).then(function (d) {
+        ((d && d.cameras) || []).forEach(function (c) {
+          if (!ok(+c.lat, +c.lon) || c.isActive === false) return;
+          var m = L.circleMarker([+c.lat, +c.lon], { renderer: camRender, radius: 5, color: '#fff', weight: 1.5, fillColor: '#475569', fillOpacity: .95 });
+          m.bindPopup(function () {
+            return '<b>' + e(c.title || 'Camera') + '</b>' + (c.imageUrl ? '<br><a href="' + e(c.imageUrl) + '" target="_blank" rel="noopener"><img src="' + e(c.imageUrl) + '" alt="' + e(c.title || 'Traffic camera') + '" loading="lazy" style="display:block;width:240px;max-width:100%;margin-top:6px;border-radius:6px"></a>' : '') + src('state DOT');
+          }, { maxWidth: 260 });
+          m.addTo(L_cams);
+        });
+      }).catch(function () {});
+    }));
+
+    // Mile markers: the state's posts, drawn only for the area in view once zoomed in, and
+    // thinned out as you zoom out, so a state with 15,000 posts stays fast.
+    var posts = null, mpRender = L.canvas({ padding: 0.3 });
+    function drawPosts() {
+      var pop = gm._popup;
+      if (pop && gm.hasLayer(pop) && pop._source && L_mp.hasLayer(pop._source)) return;
+      L_mp.clearLayers();
+      if (!posts || !gm.hasLayer(L_mp)) return;
+      var z = gm.getZoom();
+      if (z < 9) return;
+      var step = z >= 12 ? 1 : z >= 10 ? 5 : 10, b = gm.getBounds().pad(0.2), n = 0;
+      for (var i = 0; i < posts.length && n < 1500; i++) {
+        var p = posts[i], mi = Math.round(+p.milepost);
+        if (mi % step || !b.contains([p.lat, p.lon])) continue;
+        n++;
+        L.circleMarker([p.lat, p.lon], { renderer: mpRender, radius: 4, color: '#fff', weight: 1, fillColor: '#0f7a4f', fillOpacity: 1 })
+          .bindPopup('<b>' + e(p.highway) + ' · mile ' + e(p.milepost) + '</b>' + src('state DOT mile marker data'))
+          .addTo(L_mp);
+      }
+    }
+    L_mp.on('add', function () {
+      if (!loaded.m) {
+        loaded.m = 1;
+        get('/mileposts?state=' + st).then(function (d) {
+          var arr = Array.isArray(d) ? d : [];
+          if (!arr.length && d && typeof d === 'object') Object.keys(d).forEach(function (k) { if (Array.isArray(d[k])) d[k].forEach(function (p) { arr.push({ highway: p.highway || k, milepost: p.milepost != null ? p.milepost : p.mile, lat: p.lat, lon: p.lon }); }); });
+          posts = arr.filter(function (p) { return ok(+p.lat, +p.lon); });
+          drawPosts();
+        }).catch(function () {});
+      }
+      drawPosts();
+      gm.on('moveend', drawPosts);
+    });
+    L_mp.on('remove', function () { gm.off('moveend', drawPosts); });
+
+    L_fires.on('add', once('f', function () {
+      get('/fires').then(function (d) {
         ((d && d.fires) || []).forEach(function (x) {
           if ((all ? !/^US-/.test(x.state || '') : x.state !== 'US-' + st) || x.isRx || !isFinite(x.lat)) return;
           L.circleMarker([x.lat, x.lon], { radius: Math.min(14, 5 + Math.log10((x.acres || 1) + 1) * 2), color: '#9a3412', weight: 1, fillColor: '#EA580C', fillOpacity: .8 })
-            .bindPopup('<b>' + e(x.name || 'Fire') + '</b><br>' + (x.acres != null ? Math.round(x.acres).toLocaleString() + ' acres' : 'Size not reported') + (x.containedPct != null ? ' · ' + x.containedPct + '% contained' : '') + '<br><span style="color:#8A939B">Source: NIFC via MileCheck</span>')
-            .addTo(fires);
+            .bindPopup('<b>' + e(x.name || 'Fire') + '</b><br>' + (x.acres != null ? Math.round(x.acres).toLocaleString() + ' acres' : 'Size not reported') + (x.containedPct != null ? ' · ' + x.containedPct + '% contained' : '') + src('NIFC'))
+            .addTo(L_fires);
         });
       }).catch(function () {});
     }));
-    if (!all && X.closures !== false) out.push({ label: 'Closures and crashes', color: '#DC2626', layer: clos });
-    if (X.fires !== false) out.push({ label: 'Wildfires', color: '#EA580C', layer: fires });
-    return out;
+
+    var camPage = /^\/(es\/|pt\/)?cameras\//.test(location.pathname);
+    var rows = [
+      { key: 'alerts', label: 'Alerts', color: '#F59E0B', layer: L_alerts, skip: all },
+      { key: 'closures', label: 'Closures and crashes', color: '#DC2626', layer: L_clos, skip: all },
+      { key: 'weather', label: 'Road weather', color: '#0EA5E9', layer: L_wx, skip: all },
+      { key: 'cameras', label: 'Cameras', color: '#475569', layer: L_cams, skip: all || camPage },
+      { key: 'mileposts', label: 'Mile markers', color: '#0f7a4f', layer: L_mp, skip: all },
+      { key: 'fires', label: 'Wildfires', color: '#EA580C', layer: L_fires }
+    ];
+    var on = X.on || [];
+    var dup = function (r) { return own.some(function (t) { return SAME[r.key].test(t); }); };
+    return rows.filter(function (r) { return !r.skip && X[r.key] !== false && !dup(r); }).map(function (r) {
+      if (on.indexOf(r.key) >= 0) r.layer.addTo(gm);
+      return r;
+    });
   }
 
   function buildOptions() {
@@ -195,16 +294,17 @@
       var first = own.querySelector('.co-layer');
       own.insertBefore(lab, first || null);
       lab.querySelector('input').onchange = function (e) { if (e.target.checked) rl.addTo(gm); else gm.removeLayer(rl); };
-      extraLayers().forEach(function (x) {
+      var ownLabels = [].map.call(own.querySelectorAll('.co-layer'), function (l) { return l.textContent; });
+      extraLayers(ownLabels).forEach(function (x) {
         var l2 = document.createElement('label');
         l2.className = 'co-layer';
-        l2.innerHTML = '<input type="checkbox"><span class="co-sw"></span><span class="co-dot" style="background:' + x.color + '"></span>' + x.label;
+        l2.innerHTML = '<input type="checkbox"' + (gm.hasLayer(x.layer) ? ' checked' : '') + '><span class="co-sw"></span><span class="co-dot" style="background:' + x.color + '"></span>' + x.label;
         own.appendChild(l2);
         l2.querySelector('input').onchange = function (e) { if (e.target.checked) x.layer.addTo(gm); else gm.removeLayer(x.layer); };
       });
       return;
     }
-    var layers = (O.layers || []).concat(extraLayers()).filter(function (l) { return l && l.layer; });
+    var layers = (O.layers || []).concat(extraLayers((O.layers || []).map(function (l) { return l && l.label || ''; }))).filter(function (l) { return l && l.layer; });
     // Weather radar on every map, off by default (Leah, 10-24). Same NEXRAD composite the
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
     layers.unshift({ label: 'Weather radar', color: '#2563EB', layer: radarLayer() });

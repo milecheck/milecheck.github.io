@@ -155,3 +155,6 @@ html .co-card{z-index:1100;}
 .cm-attr-top{display:none;font-size:10px;line-height:1.4;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.8);padding:0 5px;margin:0!important;color:#333;cursor:pointer;}
 .cm-attr-top.cm-open{white-space:normal;}
 .cm-attr-top a{color:#0078A8;}
+/* Shared layer rows (10-30): 44px tap rows on phones, and the panel scrolls inside the
+   map when a page has many rows, instead of running off the bottom. */
+@media (max-width:600px){.cm-opts-row{min-height:44px;}.cm-opts-panel{max-height:min(70vh,440px);overflow-y:auto;}}
