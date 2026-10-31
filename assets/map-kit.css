@@ -191,3 +191,8 @@ html .co-layers .co-key{margin-top:8px;}
 .cm-x:hover{background:#F1F3F0;color:#0E1116;}
 .cm-x:focus-visible{outline:2px solid #0f7a4f;outline-offset:-2px;}
 .cm-opts-panel .lt,html .co-layers.cm-tiled .lt{padding-right:34px;min-height:24px;display:flex;align-items:center;margin-bottom:6px;}
+/* No system-colored focus ring around the whole map or the map buttons after a tap or
+   click (it showed orange on Leah's Mac, 10-30). Keyboard focus still gets a green ring. */
+.leaflet-container:focus{outline:none;}
+.leaflet-bar a:focus{outline:none;}
+.leaflet-bar a:focus-visible{outline:2px solid #0f7a4f;outline-offset:2px;}

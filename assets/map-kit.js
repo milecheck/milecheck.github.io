@@ -333,7 +333,7 @@
     x.addEventListener('click', function (ev) {
       ev.preventDefault(); ev.stopPropagation();
       var host = box.parentNode, lb = host && host.querySelector('.cm-layers-btn a');
-      if (lb) { lb.click(); lb.focus(); } else box.classList.add('cm-closed');
+      if (lb) { lb.click(); if (ev.detail === 0) lb.focus(); } else box.classList.add('cm-closed');
     });
     box.addEventListener('change', function (ev) { var t = ev.target.closest('.cm-tile'); if (t) t.classList.toggle('cm-on', ev.target.checked); });
   }
@@ -446,7 +446,7 @@
           if (t) t.classList.toggle('cm-on', e.target.checked);
         });
         panel.addEventListener('click', function (e) {
-          if (e.target.closest('.cm-x')) { set(false); btn.focus(); return; }
+          if (e.target.closest('.cm-x')) { set(false); if (e.detail === 0) btn.focus(); return; }
           var b = e.target.closest('button[data-b]');
           if (!b) return;
           baseNames.forEach(function (n) { if (gm.hasLayer(bases[n])) gm.removeLayer(bases[n]); });
