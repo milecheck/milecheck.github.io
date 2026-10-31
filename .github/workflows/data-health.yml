@@ -24,6 +24,11 @@ jobs:
       - name: Check camera and alert data per state
         id: check
         run: node scripts/check-data-health.mjs
+      # Mediavine: the ad script is on the pages it should be, and /ads.txt still carries
+      # Mediavine's seller line. Red here means re-copy ads.txt from the dashboard or re-run finish-pages.
+      - name: Check Mediavine script and ads.txt on the live site
+        if: always()
+        run: node scripts/check-mediavine.mjs --live
       - uses: actions/cache/save@v4
         if: always()
         with:
