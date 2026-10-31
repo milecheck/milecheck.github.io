@@ -201,3 +201,10 @@ html .co-layers .co-key{margin-top:8px;}
 .cm-mp{background:none;border:0;}
 .cm-mp span{position:absolute;left:0;top:0;transform:translate(7px,-50%);display:block;min-width:20px;padding:1px 4px;background:#0f7a4f;color:#fff;border:1.5px solid #fff;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.35);font:700 11px/1.3 system-ui,-apple-system,sans-serif;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;}
 .cm-mp::before{content:"";position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px #1d1f1c;}
+/* Ring on the open pin (10-30). A steady ring plus one that grows and fades. */
+.cm-ring{background:none;border:0;}
+.cm-ring span,.cm-ring span::after{position:absolute;left:0;top:0;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:3px solid #0f7a4f;box-sizing:border-box;}
+.cm-ring span{box-shadow:0 0 0 2px #fff;}
+.cm-ring span::after{content:"";margin:-3px 0 0 -3px;animation:cmRing 1.4s ease-out infinite;}
+@keyframes cmRing{0%{transform:scale(1);opacity:.9;}100%{transform:scale(2.4);opacity:0;}}
+@media (prefers-reduced-motion:reduce){.cm-ring span::after{animation:none;opacity:0;}}

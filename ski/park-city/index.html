@@ -154,8 +154,8 @@
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261030e">
-  <script src="/assets/map-kit.js?v=20261030e" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261030f">
+  <script src="/assets/map-kit.js?v=20261030f" defer></script>
   <!-- site-nav:assets -->
   <link rel="stylesheet" href="/assets/site-nav.css?v=20261030-1">
   <script src="/assets/site-nav.js?v=20261030-1" defer></script>
@@ -467,7 +467,7 @@ function onRoad(res,keys,lat,lon,route){var d=(isFinite(lat)&&isFinite(lon))?hav
 function keysOf(res){var k={};res.routes.forEach(function(r){k[normKey(r,res.state)]=1;});return k;}
 var KEYS=keysOf(RES);
 var TOUCH=('ontouchstart' in window),RS=function(v){return TOUCH?Math.round(v*1.6):v;};
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+DOT+' and '+TRAFFIC+' via MileCheck'+(false?' · access road © OpenStreetMap contributors':''),maxZoom:16}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+(DOT===TRAFFIC?DOT:DOT+' and '+TRAFFIC)+' via MileCheck'+(false?' · access road © OpenStreetMap contributors':''),maxZoom:16}).addTo(map);
 // Set the view before adding layers: a circle added to a map with no view has no _map yet, so its getBounds() throws.
 // Leah 2026-10-23: open centred and zoomed on the resort with the access road in view. With a drawn access road the
 // view fits the focus line (the last road up) plus the base; without one, a box 0.8 radius wide around the base.

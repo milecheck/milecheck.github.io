@@ -314,7 +314,7 @@ var WORKER='https://api.milecheckapp.com';
 ${MATCH_JS}
 var KEYS=keysOf(RES);
 var TOUCH=('ontouchstart' in window),RS=function(v){return TOUCH?Math.round(v*1.6):v;};
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+DOT+' and '+TRAFFIC+' via MileCheck'+(${JSON.stringify((ACCESS[r.slug] || []).length > 0)}?' · access road © OpenStreetMap contributors':''),maxZoom:16}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · '+(DOT===TRAFFIC?DOT:DOT+' and '+TRAFFIC)+' via MileCheck'+(${JSON.stringify((ACCESS[r.slug] || []).length > 0)}?' · access road © OpenStreetMap contributors':''),maxZoom:16}).addTo(map);
 // Set the view before adding layers: a circle added to a map with no view has no _map yet, so its getBounds() throws.
 // Leah 2026-10-23: open centred and zoomed on the resort with the access road in view. With a drawn access road the
 // view fits the focus line (the last road up) plus the base; without one, a box 0.8 radius wide around the base.
@@ -681,7 +681,7 @@ ${faqHtml}
 
   <p class="sk-related">More: <a href="/ski/">every ski resort road</a> · <a href="/snowplows/">snowplow map</a> · <a href="/passes/">mountain passes</a>${cams ? ` · <a href="/cameras/${reg.slug}/">${reg.name} cameras</a>` : ''}${roadConds ? ` · <a href="/road-conditions/${reg.slug}/">${reg.name} road conditions</a>` : ''} · <a href="/maps/">all maps</a></p>
 
-` + footer(`Plow, camera and alert data: ${reg.dot} and ${reg.trafficName} via MileCheck. A plow pin is a reported position, not a statement about the road surface.`) + sp.js + '\n' + liveJs(r, reg) + '\n' + extrasJs(r) + `
+` + footer(`Plow, camera and alert data: ${reg.dot === reg.trafficName ? reg.dot : reg.dot + ' and ' + reg.trafficName} via MileCheck. A plow pin is a reported position, not a statement about the road surface.`) + sp.js + '\n' + liveJs(r, reg) + '\n' + extrasJs(r) + `
 
 </body>
 </html>`;
