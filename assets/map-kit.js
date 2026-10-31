@@ -656,12 +656,12 @@
   // showing 3 or so bc then you never get to the other info" (Cajon listed 43 before the
   // closures and work zones). The page's own "Show every camera" (load every frame) also
   // unfolds it. Pass, mountain-roads and Enchantments pages (#lstCams).
-  var lst = document.getElementById('lstCams');
-  var lul = lst && lst.querySelector('ul');
-  if (lul) {
+  // Same fold on the ski pages' camera boxes (#camList, #camStatic), with "See more" and
+  // "See less" (Leah, 10-30: show 3 so you can get to the closures).
+  function foldList(lul, sel, box) {
     var unfolded = false, more = null;
     var fold = function () {
-      var items = [].slice.call(lul.querySelectorAll('li[data-i]'));
+      var items = [].slice.call(lul.querySelectorAll(sel)).filter(function (li) { return !li.classList.contains('none'); });
       if (items.length <= 4) {
         items.forEach(function (li) { li.hidden = false; });
         if (more) more.hidden = true;
@@ -675,19 +675,29 @@
         more.addEventListener('click', function () {
           unfolded = !unfolded;
           fold();
-          if (!unfolded && lst.getBoundingClientRect().top < 0) lst.scrollIntoView({ block: 'start' });
+          if (!unfolded && box.getBoundingClientRect().top < 0) box.scrollIntoView({ block: 'start' });
         });
         lul.parentNode.insertBefore(more, lul.nextSibling);
       }
       more.hidden = false;
-      more.textContent = unfolded ? 'Show fewer cameras' : 'Show all ' + items.length + ' cameras';
+      more.textContent = unfolded ? 'See less' : 'See more (' + (items.length - 3) + ')';
       more.setAttribute('aria-expanded', unfolded ? 'true' : 'false');
     };
     new MutationObserver(fold).observe(lul, { childList: true });
     fold();
-    var allBtn = document.getElementById('btnAllCams');
-    if (allBtn) allBtn.addEventListener('click', function () { unfolded = true; fold(); });
+    return function () { unfolded = true; fold(); };
   }
+  var lst = document.getElementById('lstCams');
+  var lul = lst && lst.querySelector('ul');
+  if (lul) {
+    var openAll = foldList(lul, 'li[data-i]', lst);
+    var allBtn = document.getElementById('btnAllCams');
+    if (allBtn) allBtn.addEventListener('click', openAll);
+  }
+  ['camList', 'camStatic'].forEach(function (id) {
+    var ul = document.getElementById(id);
+    if (ul && ul.tagName === 'UL') foldList(ul, ':scope > li', ul.closest('.sk-box') || ul.parentNode);
+  });
 
   // ---- The live #comap map (cameras, passes, corridors, mountain roads) --------------
   var el = document.getElementById('comap');
