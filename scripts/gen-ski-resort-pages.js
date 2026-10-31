@@ -589,10 +589,10 @@ function resortPage(r) {
         <p class="pn" id="plowCamNote" style="display:none"></p>
         <p class="pnote">Positions come from the trucks' own GPS, through ${reg.dot}, and refresh here every minute. "Last reported" is the truck's time, not ours.</p>
       </div>` : `      <div class="sk-box">
-        <h2>Plows on the road right now</h2>
-        <p class="hint">${reg.name} publishes no plow positions. ${reg.dot} does not put its trucks on a public feed, so no page can show them. Here is what ${reg.dot} does publish:</p>
+        <h2>Cameras on the way to ${esc(r.name)}</h2>
+        <p class="hint">The cameras on ${esc(routesTxt)} along the way up, plus any others within ${radiusTxt}, nearest to the base first. Tap one to find it on the map.</p>
         <ul id="camList"><li class="none">Loading ${reg.trafficName} cameras&hellip;</li></ul>
-        <p class="pnote">The cameras above are the ones within ${radiusTxt} of the base, nearest first. Closures and crashes are in the next box. For the states and provinces that do publish trucks, see the <a href="/snowplows/">snowplow map</a>.</p>
+        <p class="pnote">Plow trucks are not shown because ${reg.dot} does not publish where its plows are. For the states and provinces that do, see the <a href="/snowplows/">snowplow map</a>. Closures and crashes are in the next box.</p>
       </div>`;
 
   const faq = [
