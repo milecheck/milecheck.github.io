@@ -203,7 +203,7 @@ module.exports = [
   // I-90 / US 2 / SR 410, and WA route numbers are unique across types, so the page matches on the number.
   // Crystal Mountain: OSM search 2026-10-15. Access: SR 410 from Enumclaw, then Crystal Mountain
   // Boulevard 6 mi (crystalmountainresort.com/plan-your-trip/getting-here).
-  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams', reportName: 'Crystal Mountain mountain report', pass: 'crystal-mountain', note: 'WSDOT cameras sit on SR 410 well below the resort; the last 6 miles up Crystal Mountain Boulevard have no DOT feed.',
+  R({ name: 'Crystal Mountain', slug: 'crystal-mountain', state: 'WA', lat: 46.9327, lon: -121.4877, routes: ['SR 410'], road: 'SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard', radius: 25, report: 'https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams', reportName: 'Crystal Mountain mountain report', pass: 'crystal-mountain', note: 'WSDOT's last camera on SR 410 is at mile 24.9 in Enumclaw. Past that, WSDOT has no cameras on the roughly 32 miles of SR 410 to the turnoff or the 6 miles up Crystal Mountain Boulevard.',
     // 2026-10-23 template upgrade (Leah's resort feedback). Every field below is optional per resort; the
     // generator only prints a section when its data is here. Sources checked 2026-10-23.
     // cams: WSDOT SR 410 cameras out to MP 60 (they stop at MP 24.9, Watson Rd, Enumclaw) plus, inside the ring,
