@@ -174,21 +174,34 @@
     var t=document.getElementById('sd-checked'); if(t){t.textContent=new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit'})+' Pacific';}
   }
   function fail(){document.querySelectorAll('[data-kv]').forEach(function(el){el.className=el.className.replace(/\bWAIT\b/,'')+' NONE';el.textContent=el.classList.contains('sd-v')?'NO SIGNAL':'no signal';});document.querySelectorAll('[data-line]').forEach(function(el){el.textContent='Could not reach the status feed. Nothing here is a reading.';});}
-  // One free live check a day on the web, same as Mountain Visibility (Leah, 2026-10-27). The first
-  // bridge page a visitor opens each day shows live status and keeps refreshing. Every other page that
-  // day points to the app. localStorage only, so a private window resets it. The rules on each page
-  // stay readable for everyone; only the live up/down is held back.
-  var FREE='sdFreeCheck', TODAY=new Date().toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'}), PAGE=location.pathname, used=null;
+  // One free view a day on the web, same rule as the app (Leah, 2026-10-31): the first answered
+  // status check of the day starts a 5 minute live window on that page. When it closes, or on any
+  // other bridge page that day, the live up/down is replaced by "No views left today." and the two
+  // store buttons. A failed poll does not use the view up. The rules on each page stay readable.
+  // localStorage only, so a private window, cleared storage or another browser gets a fresh view.
+  // A real limit has to live in the Worker; see docs/NEXT.md. The status feed URL is public.
+  var FREE='sdFreeCheck', WINDOW=5*60*1000, TODAY=new Date().toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'}), PAGE=location.pathname, used=null, timer=null, poll=null;
   try{used=JSON.parse(localStorage.getItem(FREE)||'null');}catch(e){}
-  if(used&&used.day===TODAY&&used.path!==PAGE){
-    document.querySelectorAll('[data-kv]').forEach(function(el){el.className=el.className.replace(/(UP|DOWN|NONE|WAIT)/g,'')+' NONE';el.textContent=el.classList.contains('sd-v')?'IN THE APP':'in the app';});
-    document.querySelectorAll('[data-line]').forEach(function(el){el.innerHTML='One live check is free here each day. Get the rest in Seattle Drawbridges. <a href="https://milecheckapp.com/get/drawbridges/?utm_source=web&amp;utm_medium=limit&amp;utm_campaign=free-check" class="btn btn-primary" style="margin-top:12px;display:inline-block;">Get the app</a>';});
-    var n=document.getElementById('sd-count'); if(n){n.textContent='Live status in the app';}
-    return;
+  function save(o){try{localStorage.setItem(FREE,JSON.stringify(o));}catch(e){}}
+  function block(){
+    if(poll){clearInterval(poll);poll=null;}
+    document.querySelectorAll('[data-kv]').forEach(function(el){el.className=el.className.replace(/\b(UP|DOWN|NONE|WAIT)\b/g,'')+' NONE';el.textContent=el.classList.contains('sd-v')?'IN THE APP':'in the app';});
+    document.querySelectorAll('[data-line]').forEach(function(el){el.innerHTML='No views left today. Subscribe to check as often as you like. <span style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;"><a href="https://milecheckapp.com/get/drawbridges/?utm_source=web&amp;utm_medium=limit&amp;utm_campaign=free-check" class="btn btn-primary" style="display:inline-block;">Get it on the App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dlimit%26utm_campaign%3Dfree-check" class="sd-play" rel="noopener">Get it on Google Play</a></span>';});
+    var n=document.getElementById('sd-count'); if(n){n.textContent='No views left today';}
+    document.querySelectorAll('.sd-meta').forEach(function(m){m.style.display='none';});
   }
-  try{localStorage.setItem(FREE,JSON.stringify({day:TODAY,path:PAGE}));}catch(e){}
-  function go(){fetch("https://milepost-proxy.leahgerber93.workers.dev/bridge-status",{cache:'no-store'}).then(function(r){return r.json();}).then(paint).catch(fail);}
-  go(); setInterval(go,120000);
+  var spent=used&&used.day===TODAY&&(used.path!==PAGE||(used.start&&Date.now()-used.start>=WINDOW));
+  if(spent){block();return;}
+  function started(){
+    if(timer) return;
+    var u=used&&used.day===TODAY&&used.path===PAGE?used:{day:TODAY,path:PAGE};
+    if(!u.start){u.start=Date.now();}
+    used=u; save(u);
+    timer=setTimeout(block,Math.max(0,WINDOW-(Date.now()-u.start)));
+  }
+  save({day:TODAY,path:PAGE,start:(used&&used.day===TODAY&&used.path===PAGE&&used.start)||0});
+  function go(){fetch("https://milepost-proxy.leahgerber93.workers.dev/bridge-status",{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){if(spent)return;paint(d);started();}).catch(fail);}
+  go(); poll=setInterval(go,120000);
 })();
 </script>
   <!-- dq:start -->
