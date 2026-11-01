@@ -17,6 +17,9 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, 
 
 // ---- the changelog: newest first. One line per change a developer could notice. ----
 const CHANGELOG = [
+  { date: '2026-11-01', tag: 'Added', items: [
+    '<code>POST /v1/keys/test</code>: a free test key with no email and no sign-up. 100 calls a day for 14 days. One key per network per day. The key is shown once and not emailed. Get one on the <a href="/api/#get-key">API page</a>.',
+  ] },
   { date: '2026-10-30', tag: 'Added', items: [
     'Every /v1 response carries <code>X-Request-Id</code>. Quote it when you write to us and we can find the exact call.',
     'Keys with a daily limit also get <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code> and <code>X-RateLimit-Reset</code> (epoch seconds, next UTC midnight). A 429 adds <code>Retry-After</code>.',

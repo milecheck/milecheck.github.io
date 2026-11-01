@@ -162,10 +162,10 @@
     <p class="sub">For dispatch, fleet, EMS and routing software that needs to know which highway and mile marker a vehicle is on, and what is happening on the road ahead.</p>
     <p class="value">It is the same data that runs the MileCheck app: mile markers for all 50 states and 10 Canadian provinces and territories, and live state DOT feeds from every state plus British Columbia, Alberta and Manitoba.</p>
     <div class="btns">
-      <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email us for an API key</a>
+      <a class="primary" href="#get-key">Get a test key</a>
       <a class="ghost" href="#two-prices">How pricing works</a>
     </div>
-    <p class="btn-note">The key button opens an email to sales@milecheckapp.com. A test key runs 14 days at 100 calls a day.</p>
+    <p class="btn-note">The test key is instant, with no email. It runs 14 days at 100 calls a day. Paid plans are set up by email to sales@milecheckapp.com.</p>
   </div>
 
   <!-- VALUE -->
@@ -217,7 +217,7 @@
     <p class="lead">Base URL: <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">https://api.milecheckapp.com</code></p>
 
     <div class="auth-note">
-      <strong>Authentication</strong> — every request needs an API key. Pass it as a query parameter (<code>?apikey=YOUR_KEY</code>), an <code>x-api-key</code> header, or an <code>Authorization: Bearer YOUR_KEY</code> header. Don't have a key yet? <a href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access" style="color:#0f7a4f;font-weight:700;">Email sales@milecheckapp.com</a>.
+      <strong>Authentication</strong> — every request needs an API key. Pass it as a query parameter (<code>?apikey=YOUR_KEY</code>), an <code>x-api-key</code> header, or an <code>Authorization: Bearer YOUR_KEY</code> header. Don't have a key yet? <a href="#get-key" style="color:#0f7a4f;font-weight:700;">Get a test key</a>, no email needed.
     </div>
 
     <div class="ep-card">
@@ -453,6 +453,16 @@
     <p class="lead" style="margin-top:12px">See all eight example screens on <a href="/api/plan/#screens">what road data you can buy</a>.</p>
   </div>
 
+  <div class="api-section" id="get-key">
+    <h2>Get a test key</h2>
+    <p class="lead">No email and no sign-up. The key works for 14 days at 100 calls a day. It is shown once and is not emailed, so copy it.</p>
+    <div class="try-card">
+      <button class="try-btn" id="key-btn" type="button">Get a test key</button>
+      <pre class="try-out" id="key-out" style="display:none"></pre>
+      <p class="try-note" id="key-note">One key per network per day. Need more than 100 calls a day? <a href="#two-prices">See the plans</a>.</p>
+    </div>
+  </div>
+
   <div class="api-section" id="try">
     <h2>Try it</h2>
     <p class="lead">Live demo of <code style="background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:2px 8px;font:600 14px 'JetBrains Mono',monospace;">/v1/locate</code>. Drop in a key, adjust the coordinates, and hit Locate.</p>
@@ -474,7 +484,7 @@
       </div>
       <button class="try-btn" id="try-btn" type="button">Locate</button>
       <pre class="try-out" id="try-out">Response will appear here.</pre>
-      <p class="try-note">Need a key? <a href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email sales@milecheckapp.com</a>.</p>
+      <p class="try-note">Need a key? <a href="#get-key">Get a test key</a>.</p>
     </div>
   </div>
 
@@ -535,7 +545,7 @@
             <li>Attribution required</li>
             <li>No support or SLA</li>
           </ul>
-          <a class="price-cta" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20%E2%80%94%20Developer%20key">Get a key</a>
+          <a class="price-cta" href="#get-key">Get a test key</a>
         </div>
         <div class="price-card featured">
           <div class="price-tier">Business</div>
@@ -608,9 +618,10 @@
   <div class="api-section" style="padding-top:0;">
     <div class="cta">
       <h3>Ready to integrate?</h3>
-      <p>Tell us what you're building and we'll get you a key. A test key runs 14 days at 100 calls a day. Keys are issued by email, not self-serve yet.</p>
+      <p>A test key is instant and needs no email. It runs 14 days at 100 calls a day. For the Business plan or a license, tell us what you're building.</p>
       <div class="btns">
-        <a class="primary" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email us for an API key</a>
+        <a class="primary" href="#get-key">Get a test key</a>
+        <a class="ghost" href="mailto:sales@milecheckapp.com?subject=MileCheck%20API%20access">Email sales</a>
         <a class="ghost" href="/partners/">All MileCheck business products</a>
       </div>
     </div>
@@ -805,5 +816,33 @@
   </footer>
 
 <script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<script>
+(function () {
+  var btn = document.getElementById("key-btn"), out = document.getElementById("key-out"), note = document.getElementById("key-note");
+  if (!btn) return;
+  btn.addEventListener("click", function () {
+    btn.disabled = true; btn.textContent = "Getting your key…";
+    fetch("https://api.milecheckapp.com/v1/keys/test", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        out.style.display = "block";
+        if (res.ok && res.j.api_key) {
+          out.textContent = "Your key (shown once):\n" + res.j.api_key + "\n\nExpires: " + String(res.j.expires_at || "").slice(0, 10) + "   Limit: " + res.j.daily_limit + " calls a day\n\nTry it:\n" + res.j.try_it;
+          var tk = document.getElementById("try-key"); if (tk) tk.value = res.j.api_key;
+          btn.textContent = "Key issued";
+          note.textContent = "Copy the key now. It is not emailed and is not shown again.";
+        } else {
+          out.textContent = (res.j && res.j.message) || "We could not issue a key. Email sales@milecheckapp.com.";
+          btn.disabled = false; btn.textContent = "Get a test key";
+        }
+      })
+      .catch(function () {
+        out.style.display = "block"; out.textContent = "We could not reach the key service. Email sales@milecheckapp.com.";
+        btn.disabled = false; btn.textContent = "Get a test key";
+      });
+  });
+})();
+</script>
 </body>
 </html>
