@@ -1,0 +1,1378 @@
+[
+  {
+    "code": "AL",
+    "name": "Alabama",
+    "truckSpeed": {
+      "car": "70 on interstates (65 on other highways with 4+ lanes)",
+      "truck": "70 (same as cars). Trucks and buses carrying explosives, flammable liquids or hazardous waste: 55",
+      "differs": false,
+      "source": "https://codes.findlaw.com/al/title-32-motor-vehicles-and-traffic/al-code-sect-32-5a-171/",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "Statewide interstate rule: a vehicle may not stay in the leftmost lane for more than 1.5 miles without completely passing another vehicle. Exceptions include heavy traffic, exiting left, weather or hazards, toll payment, emergency vehicles and work zones. Applies to all vehicles, not only trucks. Slower traffic must also keep right (32-5A-80(b)).",
+      "source": "https://codes.findlaw.com/al/title-32-motor-vehicles-and-traffic/al-code-sect-32-5a-80/",
+      "status": "secondary"
+    },
+    "idling": {
+      "rule": "No statewide commercial-vehicle idling law found. DOE's state law database lists only a weight exemption for idle-reduction equipment (Ala. Code 32-9-20), no idling limit.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=AL",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (Ala. Code 32-5A-58.2). Covers parked or working law enforcement and emergency vehicles, wreckers with amber lights, utility service vehicles, maintenance/construction/survey vehicles with flashing lights, and refuse collection vehicles. On multi-lane roads move out of the closest lane when safe, otherwise slow to at least 15 mph below the limit. On two-lane roads move as far over as possible and slow down.",
+      "source": "https://codes.findlaw.com/al/title-32-motor-vehicles-and-traffic/al-code-sect-32-5a-58-2/",
+      "status": "secondary"
+    },
+    "hazmat": "Trucks and buses carrying explosives, flammable liquids or hazardous waste are capped at 55 mph and must display the required placard (Ala. Code 32-5A-171, via FindLaw).",
+    "notes": "Alabama's official code site (alisondb.legislature.state.al.us) no longer resolves and the new ALISON code viewer could not be read, so all Alabama statute text came from FindLaw (current to Dec 2024). Re-check against the Legislature before publishing."
+  },
+  {
+    "code": "AK",
+    "name": "Alaska",
+    "truckSpeed": {
+      "car": "55 statewide default unless posted; IIHS lists 65 as the highest posted rural interstate-type limit",
+      "truck": "Same as cars. No truck-specific limit found",
+      "differs": false,
+      "source": "https://www.iihs.org/topics/speed/speed-limit-laws",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "Outside urban districts, any vehicle going slower than the maximum authorized speed of traffic must use the right-hand lane or stay as close to the right edge as practicable, except to pass or turn left (13 AAC 02.050(b)). No truck-specific left-lane ban. On two-lane roads outside urban areas, a driver with 5+ vehicles behind must pull off at the first safe opportunity (AS 28.35.140(b)).",
+      "source": "https://www.akleg.gov/basis/aac.asp?media=print&secStart=13.02.001&secEnd=13.02.099",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling limit found. DOE's state law database lists only a weight exemption for idle-reduction equipment (up to 550 lb, 17 AAC 25.013), no idling limit. Local rules may exist.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=AK",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (AS 28.35.185). Covers stationary emergency, fire and law enforcement vehicles, tow trucks picking up a vehicle, maintenance or road-service vehicles, and animal control vehicles showing flashing emergency lights. On roads with 2+ lanes in your direction, vacate the nearest lane if possible, otherwise slow to a reasonable and prudent speed. On roads with fewer than two lanes, slow down. Misdemeanor if injury results, otherwise an infraction.",
+      "source": "https://www.akleg.gov/basis/statutes.asp?media=print&secStart=28.35.010&secEnd=28.35.400",
+      "status": "verified"
+    },
+    "notes": "Statute default max is 55 mph on roads not otherwise posted (13 AAC 02.275(b)(4)). DOT&PF may raise limits outside urban districts and set different limits for different vehicle types (13 AAC 02.280). The 65 figure comes from IIHS only, not read on an Alaska DOT page."
+  },
+  {
+    "code": "AZ",
+    "name": "Arizona",
+    "truckSpeed": {
+      "car": "65 on rural interstates by statute; ADOT director may raise to 75",
+      "truck": "Same as cars by statute (limit applies to 'all types of motor vehicles'). IIHS lists trucks at 65 where cars are 75",
+      "differs": false,
+      "source": "https://www.azleg.gov/ars/28/00702-04.htm",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "General keep-right law only: a driver going slower than the normal speed of traffic must use the right-hand lane or stay as close to the right edge as practicable, except to pass or turn left (ARS 28-721(B)). Applies to all vehicles. No statewide truck-specific left-lane statute found.",
+      "source": "https://www.azleg.gov/ars/28/00721.htm",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide limit. State law (ARS 11-876) requires counties containing part of 'Area A' to adopt idling limits for heavy-duty diesel vehicles over 14,000 lb GVWR, with exemptions for emergency vehicles, traffic delays, driver sleeping and cargo refrigeration. Maricopa County's ordinance sets 5 consecutive minutes (text from EPA's 2006 compilation, may have changed). Fines $100 first, $300 repeat.",
+      "source": "https://www.azleg.gov/ars/11/00876.htm",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes (ARS 28-775(E)). Applies to any stationary vehicle showing alternately flashing or warning lights, not only emergency vehicles. On highways with 4+ lanes (2+ in your direction), change to a lane not adjacent if safe, otherwise slow to a safe speed. Civil penalty $275, $500 second, $1,000 third within five years.",
+      "source": "https://www.azleg.gov/ars/28/00775.htm",
+      "status": "verified"
+    },
+    "notes": "Truck speed conflict: statute says one limit for all vehicle types, IIHS says trucks 65. ARS 28-702 lets ADOT set different limits by vehicle type, so a posted truck limit on some segments is possible but not found. Maricopa 5-minute figure is from the 2006 EPA compilation (the file at the 2021 snapshot URL is the April 2006 edition)."
+  },
+  {
+    "code": "AR",
+    "name": "Arkansas",
+    "truckSpeed": {
+      "car": "75 on non-urban controlled-access highways (4+ lanes divided by a median)",
+      "truck": "70 for commercial motor vehicles on those highways",
+      "differs": true,
+      "source": "https://codes.findlaw.com/ar/title-27-transportation/ar-code-sect-27-51-201/",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "A vehicle may not be driven in the left lane of a multilane highway except to pass, when all other lanes in that direction are closed or unusable, or when preparing to exit on the left (Ark. Code 27-51-301(b)). Applies to all vehicles, not only trucks.",
+      "source": "https://codes.findlaw.com/ar/title-27-transportation/ar-code-sect-27-51-301/",
+      "status": "secondary"
+    },
+    "idling": {
+      "rule": "No statewide idling law found. DOE's state law database lists no Arkansas idle-reduction laws, only a diesel-emissions grant program.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=AR",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes for towing operations (Ark. Code 27-51-904): a driver approaching a towing operation (tow trucks at an accident scene or an inoperable vehicle) must move to the farthest lane or position if possible and use caution. A separate move-over rule for police and emergency vehicles was not located.",
+      "source": "https://codes.findlaw.com/ar/title-27-transportation/ar-code-sect-27-51-904/",
+      "status": "secondary"
+    },
+    "notes": "Official Arkansas Code (LexisNexis/arkleg) was not reachable, so all Arkansas statute text came from FindLaw (current to March 2024). The statute also sets 50 mph for trucks of 1.5-ton capacity or more 'in other locations' (27-51-201(c)(2)); that older provision was not reconciled with current posted limits."
+  },
+  {
+    "code": "CA",
+    "name": "California",
+    "truckSpeed": {
+      "car": "65 default; 70 on freeway segments Caltrans declares (CVC 22356)",
+      "truck": "55 for trucks with 3+ axles and any truck or tractor towing another vehicle (CVC 22406)",
+      "differs": true,
+      "source": "https://dot.ca.gov/-/media/dot-media/programs/safety-programs/documents/202503-ca-manual-setting-speed-limits-a11y.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Trucks with 3+ axles and vehicles towing others must use the right-hand lane, or any lane signed for them. On divided highways with 4+ marked lanes in their direction they may also use the lane just left of the right-hand lane (CVC 21655). They may use the right lanes to pass. Any vehicle slower than traffic must keep right except to pass (CVC 21654).",
+      "source": "https://www.dot.ca.gov/programs/traffic-operations/legal-truck-access/truck-lane-use",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Diesel commercial vehicles over 10,000 lb GVWR (including buses and sleeper trucks) may not idle the primary engine more than 5 minutes at any location (13 CCR 2485). Exemptions exist (traffic, severe weather, inspections, some auxiliary power uses). Marine terminals separately may not let trucks queue more than 30 minutes (H&S 40720).",
+      "source": "https://ww2.arb.ca.gov/our-work/programs/atcm-to-limit-vehicle-idling",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Applies to stationary Caltrans vehicles with amber lights, emergency vehicles, tow trucks, and any stranded motorist displaying hazard lights, cones or flares. Change lanes safely or slow to a reasonable speed.",
+      "source": "https://beworkzonealert.dot.ca.gov/move-over.html",
+      "status": "verified"
+    },
+    "notes": "leginfo.legislature.ca.gov returned 403 to every fetch, so statute numbers come from Caltrans pages that cite them (truck lane use page, speed-limit manual, move-over page) and CARB. The Caltrans move-over page cites no section number (the statute is commonly cited as CVC 21809, seen only in search results, not on a page read). The CARB page does not list exemptions; the 30-minute marine terminal figure is from the 2006 EPA compilation (H&S 40720), not the CARB page."
+  },
+  {
+    "code": "CO",
+    "name": "Colorado",
+    "truckSpeed": {
+      "car": "75 is the statutory maximum (CRS 42-4-1101(8)(b)); 65 is the default on surfaced 4-lane interstates unless a higher limit is posted",
+      "truck": "Same as cars. No truck-specific limit in statute",
+      "differs": false,
+      "source": "https://leg.colorado.gov/sites/default/files/images/olls/crs2024-title-42.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "On any highway with a limit of 65 mph or more and 2+ lanes in your direction, no one may drive in the left (passing) lane except to pass or turn left, or if traffic prevents merging right (CRS 42-4-1013). Commercial vehicles are also barred from the far left lane on six I-70 mountain stretches: mileposts 115.5-131.0 (Glenwood Canyon), 169.5-173.0 (Dowd Junction), 180.0-190.5 (Vail Pass), 205.5-221.0 (Eisenhower-Johnson Tunnel), 224.0-228.5 (Georgetown Hill) and 243.0-247.0 (Floyd Hill), unless passing is authorized (CRS 42-4-1014, effective Aug 7, 2024).",
+      "source": "https://leg.colorado.gov/sites/default/files/images/olls/crs2024-title-42.pdf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide: diesel commercial vehicles over 14,000 lb GVWR may not idle more than 5 minutes in any 60-minute period (CRS 42-14-105). Exemptions include traffic stops, defroster/heater safety use, repairs, power take-off, sleeper berth heating or cooling at rest areas, truck stops or fleet terminals, or 1,000+ ft from housing, schools, hospitals; up to 20 minutes per 60 when below 10 degrees F. Local rules may be as strict but not looser. Fine up to $150 first, $500 repeat.",
+      "source": "https://leg.colorado.gov/sites/default/files/images/olls/crs2024-title-42.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes (CRS 42-4-705). Covers stationary emergency vehicles, tow vehicles with yellow lights, public utility vehicles with amber lights, any vehicle showing hazard lights, and slow-moving maintenance/construction vehicles. On multi-lane roads move at least one lane away if possible, otherwise slow to 20 mph below the limit (or 25 mph or less where the limit is under 45).",
+      "source": "https://leg.colorado.gov/sites/default/files/images/olls/crs2024-title-42.pdf",
+      "status": "verified"
+    },
+    "notes": "Source is the 2024 Colorado Revised Statutes Title 42 PDF (uncertified printout). Laws passed in 2025-2026 could have changed it."
+  },
+  {
+    "code": "CT",
+    "name": "Connecticut",
+    "truckSpeed": {
+      "car": "65 maximum on multilane limited-access highways (CGS 14-218a(b)(1))",
+      "truck": "Same as cars. Statute lets the State Traffic Administration set different limits by vehicle type but no truck-specific interstate limit was found",
+      "differs": false,
+      "source": "https://www.cga.ct.gov/current/pub/chap_248.htm",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "On divided limited-access highways with more than two lanes each way, commercial-registration vehicles, buses, vehicles with trailers and school buses may not use the extreme left lane where the State Traffic Administration designates it (CGS 14-230a, $88 fine). Exceptions for police direction and left exits. All slower traffic must keep right (14-230(b)).",
+      "source": "https://www.cga.ct.gov/current/pub/chap_248.htm",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide DEEP regulation (RCSA 22a-174-18(b)(3)): a mobile source may not idle more than 3 consecutive minutes while not in motion. Exemptions include traffic, heating/cooling for health or safety, auxiliary equipment, maintenance, warm-up, and temperatures below 20 F. DEEP says its field staff have no ticketing authority and focus on commercial vehicle and bus complaints; police can ticket school bus idling.",
+      "source": "https://portal.ct.gov/DEEP/Air/Mobile-Sources/Anti-Idling/Anti-Idling---Compliance-and-Enforcement",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes (CGS 14-283b). Covers stationary or slow emergency vehicles with flashing lights: EMS, fire, police, maintenance vehicles and wreckers, and also any stationary nonemergency vehicle on the shoulder. On highways with 2+ lanes in your direction, move over one lane unless unsafe, and slow to a reasonable speed below the limit for emergency vehicles.",
+      "source": "https://www.cga.ct.gov/current/pub/chap_248.htm",
+      "status": "verified"
+    },
+    "notes": "Town ordinances exist too (e.g., Branford 10-minute limit for trucks over 10,000 lb near homes, per EPA 2006 compilation)."
+  },
+  {
+    "code": "DE",
+    "name": "Delaware",
+    "truckSpeed": {
+      "car": "55 default on 4-lane and divided roads by statute; 65 on SR 1 between Red Lion Creek and the Appoquinimink River; DelDOT posts other limits (IIHS lists 65 on rural interstates)",
+      "truck": "Same as cars. The statute has no separate truck limit",
+      "differs": false,
+      "source": "https://delcode.delaware.gov/title21/c041/sc08/index.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Slower traffic must keep to the right-hand lane (21 Del. C. 4114(b)). On the express/controlled-access parts of SR 1 and I-495, nobody may use the left lane except to pass or for listed reasons, and vehicles over 26,000 lb GVWR may only use the right-hand lane (4114A). Fine $25-$75 first offense. Driving below the limit in the left lane of a multilane road and blocking others is also an offense (4116(5)).",
+      "source": "https://delcode.delaware.gov/title21/c041/sc03/index.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No on-road heavy-duty vehicle over 8,500 lb GVWR may idle more than 3 consecutive minutes when not in motion (7 DE Admin Code 1145). Exempt: stuck in traffic or mechanical trouble, warm-up to operating temperature, repairs, emergency vehicles, auxiliary power/PTO use, sleeper-berth heat or AC when more than 25 miles from a truck stop with electrification, safety checks. Up to 15 minutes to heat occupants between -10F and 32F, no limit below -10F. Fine $50-$500 per offense. Wilmington and Newark also have local rules.",
+      "source": "https://archive.regulations.delaware.gov/AdminCode/title7/1000/1100/1145.shtml",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. 21 Del. C. 4134(b): approaching a stationary emergency vehicle, DOT vehicle, tow truck or public utility vehicle with flashing lights (or any vehicle showing hazards, flares, cones or warning signs), change to a non-adjacent lane when possible on a road with 2+ lanes your way. If you can't, slow to at least 20 mph under the posted limit when the limit is 50 or higher.",
+      "source": "https://delcode.delaware.gov/title21/c041/sc04/index.html",
+      "status": "verified"
+    },
+    "notes": "Idling rule text read from the state's archived regulations site (the state moved to a new system in 2025). ATRI 2024 lists the same 3-minute rule."
+  },
+  {
+    "code": "DC",
+    "name": "District of Columbia",
+    "truckSpeed": {
+      "car": "20 mph default on all streets unless posted (15 in alleys and some school/playground zones). No rural interstates. IIHS lists 55 on urban interstates/limited-access roads",
+      "truck": "Same. No truck-specific limit found",
+      "differs": false,
+      "source": "https://ddot.dc.gov/page/speeding-laws-fines-and-safety-tips",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "unknown",
+      "source": "",
+      "status": "unknown"
+    },
+    "idling": {
+      "rule": "No gasoline or diesel engine may idle more than 3 minutes while parked, stopped or standing, on public or private space (20 DCMR 900.1). Exceptions: private passenger vehicles, power takeoff equipment, and up to 5 minutes for heat when 32F or below. Fine up to $5,000 per violation (900/914 as quoted by EPA); ATRI lists $500, doubling for repeats.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "unknown",
+      "source": "https://code.dccouncil.gov/us/dc/council/code/titles/50/chapters/22",
+      "status": "unknown"
+    },
+    "notes": "DDOT page confirms the 20 mph default and that posted limits are the maximum; the 55 figure is IIHS only. Idling text is from EPA's 2006 compilation; ATRI Sept 2024 still lists 3 minutes (5 below 32F). Could not find a move-over section in the DC Code Title 50 ch. 22 table of contents I read, and found no official left-lane or truck-lane rule. Do not publish those two as 'no law'; they are just unconfirmed."
+  },
+  {
+    "code": "FL",
+    "name": "Florida",
+    "truckSpeed": {
+      "car": "70 on limited access highways (interstates); 65 on other 4-lane divided highways outside urban areas of 5,000+",
+      "truck": "70, same as cars. The statute sets no separate truck limit",
+      "differs": false,
+      "source": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0300-0399/0316/Sections/0316.187.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Keep right except to pass, for everyone: on a road with 2+ lanes in your direction you may not stay in the far-left lane if you know or should know a faster vehicle is overtaking you from behind (316.081(3)). Slower-than-traffic vehicles belong in the right-hand lane (316.081(2)). No truck-specific left-lane ban in the statute. Noncriminal moving violation.",
+      "source": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0300-0399/0316/Sections/0316.081.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide commercial idling law found. Neither the EPA compilation nor the ATRI 2024 compendium lists a Florida state or local rule.",
+      "source": "https://truckingresearch.org/wp-content/uploads/2024/09/2024-ATRI-IdlingCompendium-Sept.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. 316.126(1)(b): on an interstate or any road with 2+ lanes your way, vacate the lane closest to a parked emergency vehicle with lights, sanitation or utility vehicle working the roadside, wrecker with amber lights, road/bridge maintenance or construction vehicle with warning lights, or a disabled vehicle (hazards, flares or people visible). If you can't, slow to 20 mph under the limit. On two-lane roads, slow to 20 under the limit (5 mph if the limit is 20 or lower).",
+      "source": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0300-0399/0316/Sections/0316.126.html",
+      "status": "verified"
+    },
+    "notes": "Posted limits can be lower than the 70 statutory maximum. 'No statewide idling law' is based on absence from the compendia, not on a statute search, so it is secondary."
+  },
+  {
+    "code": "GA",
+    "name": "Georgia",
+    "truckSpeed": {
+      "car": "70 on rural interstates; 65 on urban interstates and multi-lane divided highways",
+      "truck": "Same as cars. The DDS manual lists no separate truck limit",
+      "differs": false,
+      "source": "https://dds.georgia.gov/section-5-continued-keep-right-except-pass",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Trucks (more than six wheels, not buses): on roads with 3+ lanes your way, trucks may only use the two right-hand lanes; on roads with 2 lanes your way, trucks may not use the left lane except to pass or turn left (O.C.G.A. 40-6-52, per the state DPS Motor Carrier fact sheet). Everyone: the 'Slow Poke' law (HB 459) requires leaving the passing lane (far left) when faster traffic approaches, with exceptions for congestion, weather, exits and left turns.",
+      "source": "https://dps.georgia.gov/document/publication/trucks-using-multi-lane-highways/download",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide law found. The City of Atlanta limits trucks and buses to 15 minutes of idling on streets (25 minutes below 32F), minimum fine $500, with exemptions for work, traffic and CNG/electric vehicles (Code 150-97(c)).",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. Drivers in the lane next to the shoulder must move over one lane for stopped emergency and utility vehicles working in an official capacity; covers law enforcement, fire, EMS, utility vehicles, DOT vehicles, HERO units and wreckers tending a crash. If a lane change isn't safe, slow down. Fine up to $500.",
+      "source": "https://www.gahighwaysafety.org/highway-safety/move-over-law/",
+      "status": "verified"
+    },
+    "notes": "The DPS truck-lane fact sheet is undated, so confirm against the current O.C.G.A. text before publishing exact lane wording (the statute site is not freely readable). Atlanta idling text is from EPA's 2006 compilation; ATRI 2024 lists the same 15/25-minute rule. 'No statewide idling law' rests on absence from both compilations."
+  },
+  {
+    "code": "HI",
+    "name": "Hawaii",
+    "truckSpeed": {
+      "car": "60 is the highest posted (IIHS). Limits are set by the Director of Transportation (state highways) or county ordinance, not a fixed statutory number",
+      "truck": "Same. No truck-specific limit found in HRS ch. 291C",
+      "differs": false,
+      "source": "https://www.iihs.org/topics/speed/speed-limit-laws",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "Any vehicle going slower than the normal speed of traffic must use the right-hand lane unless passing or preparing to turn left (HRS 291C-41(b)). No truck-specific left-lane rule found.",
+      "source": "https://data.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0291C/HRS_0291C-0041.htm",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide on-road limit in minutes. Hawaii Administrative Rules 11-60.1-34(c) bars running an engine while a vehicle is stationary at a loading zone, parking or servicing area, route terminal or other off-street area, except during repair, PTO equipment (not AC), loading passengers up to 3 minutes, and engine start-up/cool-down up to 3 minutes.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes, HRS 291C-27: approaching a stopped emergency vehicle with flashing lights, slow to a reasonable speed and move over one lane (two if possible) when safe. Covered: police, fire, ocean safety, EMS, freeway service patrol, sheriff, emergency management and civil defense vehicles, DOT harbors division, DLNR enforcement, and tow trucks.",
+      "source": "https://data.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0291C/HRS_0291C-0027.htm",
+      "status": "verified"
+    },
+    "notes": "Speed limit number is IIHS (secondary); HRS 291C-102 only says the limit is whatever county ordinance or DOT signs establish. Idling rule text is from EPA's 2006 compilation; ATRI 2024 quotes the same rule (fine $25-$2,500 per day under HRS 342B-47)."
+  },
+  {
+    "code": "ID",
+    "name": "Idaho",
+    "truckSpeed": {
+      "car": "75 on interstates; 80 on segments posted after an ITD engineering study",
+      "truck": "Same as cars since July 1, 2026",
+      "differs": false,
+      "source": "https://legislature.idaho.gov/statutesrules/idstat/Title49/T49CH6/SECT49-654/",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Any vehicle moving slower than the normal speed of traffic must stay in the right-hand lane unless passing or preparing to turn left (Idaho Code 49-630(2)). No truck-specific left-lane rule found.",
+      "source": "https://legislature.idaho.gov/statutesrules/idstat/Title49/T49CH6/SECT49-630/",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide commercial idling law found. Only city rules show up (e.g. Ketchum: 3 minutes in any 60).",
+      "source": "https://truckingresearch.org/wp-content/uploads/2024/09/2024-ATRI-IdlingCompendium-Sept.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes, Idaho Code 49-624: approaching a stationary police vehicle, authorized emergency vehicle, tow truck or highway incident response vehicle with flashing lights, change to a non-adjacent lane as soon as it can be done safely. On a one-lane-each-way road, slow below the posted limit to a safe speed until past.",
+      "source": "https://legislature.idaho.gov/statutesrules/idstat/Title49/T49CH6/SECT49-624/",
+      "status": "verified"
+    },
+    "notes": "Idaho used to post 80 for cars and 70 for trucks on rural interstates. 49-654(3) now says vehicles with 5+ axles over 26,000 lb get the same limits as other vehicles (H0664, signed 3/23/2026, effective 7/1/2026, session law ch. 108). Older articles and IIHS still show the split, so trucker sites may be out of date."
+  },
+  {
+    "code": "IL",
+    "name": "Illinois",
+    "truckSpeed": {
+      "car": "70 on interstates (all interstates and Tollway highways); 65 on other designated 4-lane divided highways",
+      "truck": "70 statewide for trucks too, except in Cook, DuPage, Kane, Lake, McHenry and Will counties, where vehicles of 8,001+ lb gross weight are limited to 60 on interstates outside urban districts (55 on other highways)",
+      "differs": true,
+      "source": "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K11-601",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "On an Interstate or fully access-controlled freeway, nobody may drive in the left lane except to overtake and pass (625 ILCS 5/11-701(d)). Exceptions: no vehicle directly behind, heavy traffic, snow or bad weather, hazards in the right lane, exiting from the left, toll lanes, emergency and highway work vehicles. The Department of Transportation may also sign lanes for particular vehicle types on multi-lane highways (11-709(c)).",
+      "source": "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K11-701",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "In Cook, DuPage, Lake, Kane, McHenry, Will, Madison, St. Clair and Monroe counties plus Aux Sable and Goose Lake townships (Grundy) and Oswego township (Kendall), diesel vehicles of 8,000 lb GVWR or more may not idle more than 10 minutes in any 60. No limit below 32F or above 80F. Sleeper-berth heat/AC, PTO or cargo equipment, traffic and mechanical trouble are exempt. Waiting to weigh/load/unload: up to 30 minutes in 60 at 32-80F. Fine $90 first, $500 for repeats within 12 months (625 ILCS 5/11-1429). Chicago has a stricter 3-minute rule.",
+      "source": "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K11-1429",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes, 625 ILCS 5/11-907(c): approaching a stationary authorized emergency vehicle with flashing lights, change to a non-adjacent lane if safe (4+ lane road, 2+ lanes your way) and slow down; otherwise slow and pass with caution. The definition covers any vehicle authorized by law to carry flashing lights (12-215) while on official duty, and you must also yield to emergency workers and pedestrians at an emergency scene. Fines $250-$10,000; license suspension if there's damage or injury.",
+      "source": "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K11-907",
+      "status": "verified"
+    },
+    "notes": "IIHS says Madison and St. Clair also have the 60 truck limit; the statute (11-601(e)) lists only Cook, DuPage, Kane, Lake, McHenry and Will. The same section lets Cook, DuPage, Kane, Lake, Madison, McHenry, St. Clair and Will counties set lower limits by ordinance. Statute page shows P.A. 104-787 eff. 8-7-26 as the latest change. Chicago's 3-minute rule is from ATRI 2024 (secondary)."
+  },
+  {
+    "code": "IN",
+    "name": "Indiana",
+    "truckSpeed": {
+      "car": "70",
+      "truck": "65",
+      "differs": true,
+      "source": "https://secure.in.gov/bmv/licenses-permits-ids/files/Drivers_Manual_Chapter_7.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "IC 9-21-5-9(b): on a road with two or more lanes each way, a driver who knows or should know another vehicle is overtaking from behind may not stay in the left-most lane (HOV lanes excepted). Applies to all vehicles, no truck-only rule. Exceptions: congestion, weather or hazards, traffic control devices, exiting or turning left, toll payment. Class C infraction. Subsection (a) also says vehicles below the maximum speed use the right lanes on interstates.",
+      "source": "https://www.in.gov/ipac/files/Title-9-2021.pdf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide commercial or heavy-duty idling limit found. DOE's AFDC page for Indiana lists only a school-grounds idling policy requirement (410 IAC 33-4-3) and a weight allowance for idle-reduction equipment (IC 9-20-4-1). ATRI's 2025 compendium has no Indiana entry.",
+      "source": "https://truckingresearch.org/wp-content/uploads/2025/06/2025-ATRI-Idling-Compendium.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. IC 9-21-8-35: approaching stationary emergency vehicles with red or red/blue lights (Class A infraction), and stationary tow/recovery, utility service, solid waste, road/highway maintenance, and survey/construction vehicles with flashing amber lights (Class B infraction). Change to a non-adjacent lane if possible on a road with 2+ lanes each way, otherwise slow to at least 10 mph below the posted limit. State BMV manual also applies it to disabled vehicles with hazards on.",
+      "source": "https://secure.in.gov/bmv/licenses-permits-ids/files/Drivers_Manual_Chapter_7.pdf",
+      "status": "verified"
+    },
+    "notes": "Truck limit applies to vehicles over 26,000 lb declared gross weight on rural interstates (outside urbanized areas of 50,000+) and on Indiana Finance Authority roads (Toll Road), IC 9-21-5-2(a)(3),(4),(6), per the statute copy at https://www.in.gov/ipac/files/Title-9-2021.pdf (2021 edition; BMV manual confirms 65 is still the truck limit). Bills to raise the truck limit to 70 (HB1055 2024, SB13 2023) appeared in search results but no sign they passed. Statute copies read are the 2021 edition."
+  },
+  {
+    "code": "IA",
+    "name": "Iowa",
+    "truckSpeed": {
+      "car": "70",
+      "truck": "70",
+      "differs": false,
+      "source": "https://www.legis.iowa.gov/docs/code/321.285.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Iowa Code 321.297(2): any vehicle going slower than the normal speed of traffic must use the right-hand lane, except when passing or preparing for a left turn. Applies to all vehicles. No truck-specific left-lane ban found in 321.297.",
+      "source": "https://www.legis.iowa.gov/docs/code/321.297.pdf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling limit found. DOE's AFDC page for Iowa lists only a weight allowance for idle-reduction equipment (Iowa Code 321.463). ATRI's 2025 compendium has no Iowa entry.",
+      "source": "https://truckingresearch.org/wp-content/uploads/2025/06/2025-ATRI-Idling-Compendium.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. Iowa Code 321.323A: approaching a stationary authorized emergency vehicle, towing or recovery vehicle, utility, municipal or highway maintenance vehicle, construction vehicle, or solid waste/recycling vehicle with flashing lights, or any stationary vehicle with hazard flashers on, change to a non-adjacent lane if possible, otherwise slow below the posted limit and be ready to stop. Simple misdemeanor.",
+      "source": "https://www.legis.iowa.gov/docs/code/321.323A.pdf",
+      "status": "verified"
+    },
+    "notes": "Iowa Code 2026 edition. 321.285(5)(a): 65 on fully controlled-access divided multilane highways, 70 on the interstate system. No weight-based limit in 321.285. Vehicles unable to hold 40 mph are barred from the interstate."
+  },
+  {
+    "code": "KS",
+    "name": "Kansas",
+    "truckSpeed": {
+      "car": "75 (on separated multilane highways designated and posted by KDOT)",
+      "truck": "75",
+      "differs": false,
+      "source": "https://www.ksrevisor.gov/statutes/chapters/ch08/008_015_0058.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "K.S.A. 8-1522: outside city limits, where a highway has two lanes in one direction, all vehicles stay in the right lane except to pass, turn left, or when directed by signs. Where it has three or more lanes in one direction, no vehicle in the far left lane except to pass, turn left, or when directed. Applies to all vehicles, not trucks specifically. Emergency, police, turnpike and DOT work vehicles exempt. K.S.A. 8-1514(b) also puts slower-than-traffic vehicles in the right lane.",
+      "source": "https://www.ksrevisor.gov/statutes/chapters/ch08/008_015_0022.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide limit. Johnson and Wyandotte Counties only (Kansas City area): K.A.R. 28-19-712b limits heavy-duty diesel vehicles (over 14,000 lb GVWR) that are commercial, institutional or public vehicles to 5 minutes in any 60, with a 30-minute limit at load/unload locations (K.A.R. 28-19-712c). Exemptions in 28-19-712d include traffic stops and maintenance. KDHE has said it emphasizes outreach over penalties.",
+      "source": "https://www.govinfo.gov/content/pkg/FR-2013-02-20/pdf/2013-03749.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. K.S.A. 8-1530(b): approaching a stationary authorized emergency vehicle with visual signals, change to a non-adjacent lane if the highway has 2+ lanes in your direction and it is safe, otherwise slow to a safe speed. 'Authorized emergency vehicle' (K.S.A. 8-1404) includes police, fire, ambulance, tow trucks and wreckers with a state corporation commission certificate, and other vehicles designated under K.S.A. 8-2010.",
+      "source": "https://www.ksrevisor.gov/statutes/chapters/ch08/008_015_0030.html",
+      "status": "verified"
+    },
+    "notes": "K.S.A. 8-1558(a)(2) sets 75 on separated multilane highways designated by KDOT, 65 on other highways, 55 on county/township roads. No truck-specific limit in 8-1558. Kansas Turnpike limits are set under separate authority and were not checked. Idling county rule also confirmed by ATRI 2025 compendium."
+  },
+  {
+    "code": "KY",
+    "name": "Kentucky",
+    "truckSpeed": {
+      "car": "65 (70 on listed interstate and parkway segments)",
+      "truck": "65 (70 on the same listed segments)",
+      "differs": false,
+      "source": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=52569",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Yes, trucks are restricted. KRS 189.340(7)(c): on a road with three or more marked lanes in one direction, no truck tractor, trailer or semitrailer in the leftmost lane except when entering or leaving the highway, yielding to merging traffic, or when traffic conditions make the right or center lanes unsafe. KRS 189.340(8): on limited-access highways of four or more lanes with a posted limit of 65+, no motor vehicle in the leftmost lane except to overtake a slower vehicle, yield to merging traffic, or for safe-lane reasons.",
+      "source": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=55539",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling limit found. ATRI's 2025 compendium has no Kentucky entry. DOE's AFDC Kentucky summary lists no idle-reduction law. Local rules may exist (for example Louisville Metro), not verified.",
+      "source": "https://truckingresearch.org/wp-content/uploads/2025/06/2025-ATRI-Idling-Compendium.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. KRS 189.930(5)-(6): approaching a stationary emergency vehicle or public safety vehicle with flashing lights, or a disabled vehicle with flashers, flares or reflectors, move to a non-adjacent lane if the highway has 4+ lanes (2+ in your direction) and it is safe, otherwise slow. 'Public safety vehicle' (KRS 189.910) includes wreckers, public utility repair vehicles, state/county/municipal service vehicles, slow highway equipment and wide-load escorts. KRS 189.960 also requires yielding to public safety vehicles working on a highway.",
+      "source": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=55550",
+      "status": "verified"
+    },
+    "notes": "KRS 189.390(3)(a): 65 on interstates and parkways; (4)(a) lets the Transportation secretary raise it to 70 on I-24, I-69, I-165, parts of I-64, I-65, I-71, I-75 and 10 named parkways. No weight-based limit in 189.390. KRS 189.340(9)(b) also requires trucks outside business or residential districts to stay 250 ft behind the vehicle ahead. Statute pages are the 2024-effective versions."
+  },
+  {
+    "code": "LA",
+    "name": "Louisiana",
+    "truckSpeed": {
+      "car": "70 by statute (DOTD may post higher; IIHS lists 75 on rural interstate segments)",
+      "truck": "same as cars",
+      "differs": false,
+      "source": "https://legis.la.gov/Legis/Law.aspx?d=88480",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "La. R.S. 32:71(B): on multilane highways, no vehicle in the left lane except to pass, turn left, when directed, or when right lanes are congested. A vehicle in the left lane may not impede traffic behind it and must merge right to let an overtaking vehicle pass. Vehicles slower than the posted limit stay in the right lane. Fines $150, $250, $350 for repeat offenses within 12 months. Applies to all vehicles, no truck-only rule.",
+      "source": "https://legis.la.gov/Legis/Law.aspx?d=88525",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling limit found. EPA's compilation (2006) lists only New Orleans city bus rules (20 minutes, 10 in the Garden District). ATRI's 2025 compendium has no Louisiana entry.",
+      "source": "https://truckingresearch.org/wp-content/uploads/2025/06/2025-ATRI-Idling-Compendium.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. La. R.S. 32:125(B): when a vehicle with authorized visual signals (including flashing green, amber or yellow) is parked on or near the highway, on a road with 2+ lanes in your direction change to a non-adjacent lane if safe, otherwise slow to a reasonably safe speed. Covers more than emergency vehicles (tow, utility, maintenance). Fine up to $200.",
+      "source": "https://legis.la.gov/Legis/Law.aspx?d=88033",
+      "status": "verified"
+    },
+    "notes": "R.S. 32:61(A)(1) caps interstates and controlled-access highways at 70; (A)(2) 65 on multi-lane divided highways with partial/no access control; R.S. 32:63(C) lets DOTD post higher speeds after an engineering study. The 75 figure is from IIHS only (unverified). Statute shows amendment by Acts 2025 No. 194 effective June 8, 2025."
+  },
+  {
+    "code": "ME",
+    "name": "Maine",
+    "truckSpeed": {
+      "car": "Up to 75 (statutory cap on interstate and divided controlled-access highways; MaineDOT sets posted limits, Maine Turnpike Authority sets the Turnpike)",
+      "truck": "same as cars",
+      "differs": false,
+      "source": "https://legislature.maine.gov/statutes/29-A/title29-Asec2073.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "No left-lane or truck-specific restriction found in 29-A ch. 19. 29-A 2070(2): a vehicle being passed must give way to the right on an audible signal and may not speed up until fully passed. 29-A 2051(3) requires obeying signs that direct slow traffic to a designated lane.",
+      "source": "https://legislature.maine.gov/statutes/29-A/title29-Asec2070.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Yes, statewide. 38 MRSA 585-L: commercial vehicles (and gasoline vehicles other than private passenger cars) may not idle more than 5 minutes in any 60-minute period. Up to 10 additional minutes when 32F or below, and unrestricted below 0F for heat. Exempt: traffic stops, maintenance or inspection, work operations (PTO, reefer on straight trucks), and occupied sleeper-berth heating or cooling during rest, or while waiting to load/unload. Loading sites may not make drivers idle more than 30 minutes. First violation is a traffic infraction, repeats $150 (operator) or $500 (owner).",
+      "source": "https://legislature.maine.gov/statutes/38/title38sec585-L.html",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. 29-A 2054(9): passing a stationary authorized emergency vehicle with emergency lights, or a stationary public service vehicle with its authorized lights, move to a non-adjacent lane if possible, otherwise pass at a careful and prudent speed. Public service vehicles include wreckers, vehicles assisting disabled vehicles or removing debris, trash/recycling trucks and utility vehicles. Minimum fine $275.",
+      "source": "https://legislature.maine.gov/statutes/29-A/title29-Asec2054.html",
+      "status": "verified"
+    },
+    "notes": "29-A 2074 sets no interstate number (45 default, other ways unless posted); 2073(1) lets the Commissioner raise limits to a 75 cap on the interstate system. Actual posted limits (IIHS lists 75) were not verified from MaineDOT. ATRI's compendium cites the idling statute as 585-K(5) for fines, the Maine Revisor page is 585-L."
+  },
+  {
+    "code": "MD",
+    "name": "Maryland",
+    "truckSpeed": {
+      "car": "70 (statutory ceiling; posted limits on rural interstates are 65-70)",
+      "truck": "same as cars",
+      "differs": false,
+      "source": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=21-801.1&enactments=false",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Transportation 21-301(b)(1): on every roadway, a vehicle going 10 mph or more below the maximum limit (or slower than normal traffic) must use the right-hand lane except when passing or turning left. (b)(2): drivers going slower than general traffic should use the right lane(s) if practicable, but that paragraph is policy only and no citation may be issued. No truck-specific left-lane rule found.",
+      "source": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=21-301&enactments=false",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Yes, statewide. Transportation 22-402(c)(3): an engine may not run more than 5 consecutive minutes while the vehicle is not in motion. Exceptions: traffic or mechanical problems outside the driver's control, operating heating, cooling or auxiliary equipment, warming to the manufacturer's recommended temperature, and when needed for the vehicle's intended use. Fine up to $500 per ATRI.",
+      "source": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=22-402&enactments=false",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Transportation 21-405(e): approaching from the rear a stopped vehicle that is an emergency vehicle, tow truck, service vehicle, waste/recycling vehicle, commercial vehicle giving emergency maintenance to a disabled vehicle (each using required visual signals), or any vehicle on the highway showing hazards, flares or cones, change to a non-adjacent lane if practicable, otherwise slow to a safe speed.",
+      "source": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=21-405&enactments=false",
+      "status": "verified"
+    },
+    "notes": "21-801.1(e)(2) bars any limit above 70 in Maryland and (e)(1) bars above 55 off interstates and expressways. No weight-based limit in 21-801.1. Baltimore tunnel hazmat rules not researched (no official page found)."
+  },
+  {
+    "code": "MA",
+    "name": "Massachusetts",
+    "truckSpeed": {
+      "car": "65 on listed Interstate segments (I-90, I-91, I-95 sections)",
+      "truck": "65",
+      "differs": false,
+      "source": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section17A",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Keep-right law (MGL ch. 89 s. 4B): drive in the lane closest to the right edge when available. Exceptions are passing and preparing for a left turn. It applies to all drivers and the section does not mention trucks.",
+      "source": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter89/Section4B",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide: MGL ch. 90 s. 16A bars unnecessary engine operation of a stopped motor vehicle for a foreseeable period over 5 minutes. Exempt: vehicles being serviced where the engine is essential, vehicles delivering or accepting goods that need engine-assisted power with no alternative, and vehicles whose engine powers non-movement equipment with no alternative (and no air pollution). Fine up to $100 first offense, up to $500 each later offense.",
+      "source": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section16A",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes (MGL ch. 89 s. 7C). Covers stopped emergency response vehicles (fire, police, ambulance, disaster), highway maintenance vehicles and recovery (tow) vehicles with flashing lights. Slow to a reasonable and safe speed; on roads with 4+ lanes (2+ in your direction) change lanes away from the vehicle when practicable. Fine up to $100.",
+      "source": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter89/Section7C",
+      "status": "verified"
+    },
+    "notes": "Ch. 90 s. 17 itself sets only prima facie limits (50 mph divided highway outside thickly settled areas). The 65 mph maximum comes from s. 17A and applies only to the named segments. Posted limits elsewhere are set by regulation or local authority and I did not fetch those."
+  },
+  {
+    "code": "MI",
+    "name": "Michigan",
+    "truckSpeed": {
+      "car": "70 (75 on freeway segments raised by MDOT/State Police)",
+      "truck": "65",
+      "differs": true,
+      "source": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-257-627",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "MCL 257.634: on roads with 2+ lanes in one direction, drive in the extreme right-hand lane available, except to pass, in substantially continuous traffic, or before a left turn. On freeways with 3+ lanes in one direction, trucks over 10,000 lb gross, truck-tractors and truck/trailer combinations may use only the 2 rightmost lanes (exceptions: a reasonable distance before a left turn, or a special hazard). Civil infraction.",
+      "source": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-257-634",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide commercial-vehicle idling law found. EPA's 2021 compilation has no Michigan entry, and anti-idling bills (2006, 2010-2014) were introduced but I found no enactment. Local rules exist, for example Ann Arbor (unoccupied commercial vehicles barred, occupied limited to 5 min per hour) and Detroit.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (MCL 257.653a). Applies to stationary authorized emergency vehicles with flashing lights, and per MCL 257.2 also to road service (tow) vehicles with flashing red or amber lights. On multi-lane roads, slow at least 10 mph below the posted limit and move over one lane or two vehicle widths when possible. Other roads: slow 10 mph under the limit and proceed with care. Misdemeanor or $400 civil fine.",
+      "source": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-257-653a",
+      "status": "verified"
+    },
+    "notes": "Truck limit applies where the posted limit is over 65 and covers trucks 10,000 lb or more, truck-tractors, combinations, and school buses, on freeways and state trunk lines (MCL 257.627(4)). Idling status is secondary because it rests on absence from the EPA list plus news and bill searches."
+  },
+  {
+    "code": "MN",
+    "name": "Minnesota",
+    "truckSpeed": {
+      "car": "70 on interstates outside urbanized areas (65 inside)",
+      "truck": "70",
+      "differs": false,
+      "source": "https://www.revisor.mn.gov/statutes/cite/169.14",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Minn. Stat. 169.18 subd. 10: on roads with multiple lanes in one direction, a driver must move out of the left-most lane to let another vehicle pass when practicable. Exceptions: passing, preparing for a left turn or left exit, lanes posted for specific traffic, emergency vehicles. Applies to all vehicles. No truck-specific left-lane rule on the page. Trucks, buses and vehicles towing must stay 500 ft behind the vehicle ahead outside business/residence districts (subd. 8).",
+      "source": "https://www.revisor.mn.gov/statutes/cite/169.18",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide heavy-duty idling law found. EPA's 2021 compilation lists only city rules: Minneapolis (trucks/tractors barred from idling in residential areas 10 pm to 6 am), Owatonna (15 min in residential districts), St. Cloud (5 min on part of West St. Germain St). School buses must minimize idling (Minn. Stat. 123B.885).",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (Minn. Stat. 169.18 subd. 11). Covers authorized emergency vehicles, tow trucks, freeway service patrol, road maintenance, utility, construction, postal service, solid waste and recycling vehicles with emergency, flashing or warning lights. Move to the lane farthest from the vehicle when there are 2+ lanes in your direction; if you cannot, slow to a reasonable and prudent speed. Subd. 11a covers any stopped vehicle with hazards on or people outside it.",
+      "source": "https://www.revisor.mn.gov/statutes/cite/169.18",
+      "status": "verified"
+    },
+    "notes": "Idling status is secondary because the finding rests on absence from the EPA list (2021) and the DOE AFDC page, which lists none."
+  },
+  {
+    "code": "MS",
+    "name": "Mississippi",
+    "truckSpeed": {
+      "car": "70 on interstate (statute: 65 general; Transportation Commission may raise interstates to 70)",
+      "truck": "70",
+      "differs": false,
+      "source": "https://codes.findlaw.com/ms/title-63-motor-vehicles-and-traffic-regulations/ms-code-sect-63-3-501/",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "Miss. Code 63-3-603: a vehicle may not be driven in the outermost left lane of a roadway with 2+ lanes in the same direction, except to overtake and pass, when the right lane is closed for construction or is impassable/unsafe, or when preparing to exit on the left. It also bars continuous driving in the left lane when it impedes traffic. Applies to all vehicles, no truck-specific rule found. Fine $5 to $50.",
+      "source": "https://codes.findlaw.com/ms/title-63-motor-vehicles-and-traffic-regulations/ms-code-sect-63-3-603/",
+      "status": "secondary"
+    },
+    "idling": {
+      "rule": "No statewide truck idling law found. The DOE AFDC state list shows only a school-bus idling requirement (Miss. Code 37-11-71).",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=ms",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (Miss. Code 63-3-809). Covers stationary authorized emergency vehicles, recovery (tow) vehicles, utility service vehicles, sanitation vehicles, highway maintenance vehicles, and U.S. rural mail carrier vehicles using flashing lights. On roads with 4+ lanes (2+ in your direction) change to a non-adjacent lane if safe; otherwise slow down and be prepared to stop. Misdemeanor, fine up to $250 ($1,000 if injury or property damage).",
+      "source": "https://codes.findlaw.com/ms/title-63-motor-vehicles-and-traffic-regulations/ms-code-sect-63-3-809/",
+      "status": "secondary"
+    },
+    "notes": "The Mississippi legislature's own code and bill-status sites were unreachable (certificate error, 403), so statute text comes from FindLaw copies. The 70 mph posted interstate figure is from the IIHS hint, not read on an official page. Bills to allow 75 mph (2025 HB 74, 2026 HB 436) failed. WebSearch budget ran out before I could look for an official MDOT or Highway Patrol page."
+  },
+  {
+    "code": "MO",
+    "name": "Missouri",
+    "truckSpeed": {
+      "car": "75 on rural interstates and freeways (statute effective 28 Aug 2026, amended by SB 1408; was 70 before)",
+      "truck": "75",
+      "differs": false,
+      "source": "https://revisor.mo.gov/main/OneSection.aspx?section=304.010",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "RSMo 304.015: on multi-lane roads, drive in the right-hand lane except when overtaking and passing; on roads with 3+ marked lanes, vehicles below normal traffic speed use the right-hand lane. Truck-specific: trucks registered over 48,000 lb gross may not use the far left lane on interstates, freeways and expressways within urbanized areas that have 3+ lanes in one direction (exceptions for traffic control devices and right-lane closures).",
+      "source": "https://revisor.mo.gov/main/OneSection.aspx?section=304.015",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide law found. EPA's 2021 compilation lists only the City of St. Louis (motor vehicles other than emergency vehicles may not idle more than 10 consecutive minutes, St. Louis Revised Code 11.34.150). Missouri's idle-reduction entry on DOE AFDC is only a 550 lb weight exemption (RSMo 304.180).",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (RSMo 304.022 subd. 2). Approaching a stationary vehicle showing red, red/blue, amber or amber/white lights: on roads with 4+ lanes (2+ in your direction) change to a lane not adjacent if safe, otherwise reduce speed to a safe speed. Subd. 4 includes wreckers/tow trucks and public utility vehicles as emergency vehicles while performing emergency service. Highway maintenance vehicles are not named but amber lights are covered.",
+      "source": "https://revisor.mo.gov/main/OneSection.aspx?section=304.022",
+      "status": "verified"
+    },
+    "notes": "The 75 mph rule is recent (page shows 'Effective 28 Aug 2026', history ends with A.L. 2026 S.B. 1408). Older IIHS-type tables show 70. Idling status is secondary because it rests on absence from the EPA/AFDC lists."
+  },
+  {
+    "code": "MT",
+    "name": "Montana",
+    "truckSpeed": {
+      "car": "80 at all times on interstates outside urbanized areas of 50,000+ (65 inside)",
+      "truck": "80",
+      "differs": false,
+      "source": "https://mca.legmt.gov/bills/mca/title_0610/chapter_0080/part_0030/section_0030/0610-0080-0030-0030.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "MCA 61-8-321: on roads with 2+ lanes in one direction, drive in the right-hand lane, with exceptions such as passing, merging traffic and left turns. Inside cities and towns the rule generally does not apply, except on interstates where you must stay in the right lane unless a traffic control device says otherwise. Applies to all vehicles. No truck-specific rule found.",
+      "source": "https://mca.legmt.gov/bills/mca/title_0610/chapter_0080/part_0030/section_0210/0610-0080-0030-0210.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling law found. EPA's 2021 compilation has no Montana entry and the DOE AFDC Montana page text showed no idle laws.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (MCA 61-8-388). Approaching a stationary law enforcement or authorized emergency vehicle with siren/lights, or a stationary highway worker vehicle with emergency lights (includes tow trucks and snow plows per 61-8-386), slow to the temporary posted limit. If none is posted, on an interstate slow 20 mph below the posted limit if you can change lanes, or to half the posted limit if not. State highways and county roads: 30 mph below, or half. On multi-lane roads move to a lane not adjacent to the vehicle.",
+      "source": "https://mca.legmt.gov/bills/mca/title_0610/chapter_0080/part_0030/section_0880/0610-0080-0030-0880.html",
+      "status": "verified"
+    },
+    "notes": "IIHS hint says trucks 70, but MCA 61-8-303 (2025) lists no truck-specific limit and sets 80 mph 'at all times' for all vehicles on rural interstates. Other public highways are 70 day / 65 night. The old move-over section 61-8-346 was repealed in 2023 (Ch. 567); the current rule is 61-8-388. Idling status is secondary because it rests on absence."
+  },
+  {
+    "code": "NE",
+    "name": "Nebraska",
+    "truckSpeed": {
+      "car": "75 on the Interstate (65 in Douglas County, I-180 in Lancaster County, I-129 in Dakota County)",
+      "truck": "75",
+      "differs": false,
+      "source": "https://nebraskalegislature.gov/laws/statutes.php?statute=60-6,186",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Neb. Rev. Stat. 60-6,131: a vehicle moving slower than normal traffic speed must use the right-hand lane available or stay as close as practicable to the right edge, except when passing or preparing for a left turn. 60-6,139 requires staying in a single lane as practicable. Applies to all vehicles. No truck-specific left-lane rule found.",
+      "source": "https://nebraskalegislature.gov/laws/statutes.php?statute=60-6,131",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling law found. The DOE AFDC Nebraska page lists only a 550 lb weight exemption for idle-reduction equipment (Neb. Rev. Stat. 60-6,294). EPA's 2021 compilation has no Nebraska entry.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=NE",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (Neb. Rev. Stat. 60-6,378.01). Stopped vehicles with flashing red/yellow/amber lights: emergency vehicles, towing and recovery vehicles, State Patrol motorist assistance vehicles, utility maintenance vehicles, highway maintenance vehicles, and solid waste/recycling collection vehicles. Proceed with due care, slow below the limit and change to a lane at least one lane away if safe, or just slow if you cannot. On controlled-access highways (60-6,378) the rule is to move at least one lane apart when 2+ same-direction lanes exist, otherwise reduce speed.",
+      "source": "https://nebraskalegislature.gov/laws/statutes.php?statute=60-6,378.01",
+      "status": "verified"
+    },
+    "notes": "60-6,186 cross-references 60-6,305 and 60-6,313 as other maximum-limit sections; I did not read those, so a truck-specific limit elsewhere is not fully ruled out, but 60-6,186 itself has none."
+  },
+  {
+    "code": "NV",
+    "name": "Nevada",
+    "truckSpeed": {
+      "car": "Up to 80 on posted segments (statute cap 80)",
+      "truck": "Same as posted; no separate truck limit listed",
+      "differs": false,
+      "source": "https://www.leg.state.nv.us/nrs/nrs-484b.html",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "On a controlled-access highway with two or more lanes in your direction, any driver who knows (or should know) they are below the posted limit and being overtaken may not stay in the extreme left lane. Exceptions: passing, left turn prep, HOV lane, road work, bad weather or hazards, traffic control devices, and city or town limits. Applies to all vehicles, not only trucks (NRS 484B.208).",
+      "source": "https://www.leg.state.nv.us/nrs/nrs-484b.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide: a diesel truck or bus may not idle more than 15 consecutive minutes (NAC 445B.576(4)). Exempt: emergency vehicles, snow removal, vehicles repairing other vehicles, stopped in traffic congestion, under repair at a shop, emissions contained and treated by a Commission-approved method, engine needed for a task it is built for (drilling, trenching, hoisting), or a Commission variance. Clark County has its own heavier-vehicle idling rule that was not read.",
+      "source": "https://www.leg.state.nv.us/nac/nac-445b.html",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. On approaching a 'traffic incident' the driver must slow to a reasonable speed, proceed with caution, be ready to stop, and if possible use a lane not adjacent (NRS 484B.607). Covers stopped emergency vehicles, tow cars, NDOT and local government vehicles, public utility vehicles, contractors with amber or blue lights, any vehicle with flashing amber lights, crash scenes, stalled vehicles, debris, and people repairing a vehicle. Misdemeanor.",
+      "source": "https://www.leg.state.nv.us/nrs/nrs-484b.html",
+      "status": "verified"
+    },
+    "notes": "NRS 484B.613 lets NDOT set limits up to 80 and a lower limit for trucks, so individual segments may post a truck limit. IIHS lists no separate truck limit for Nevada (https://www.iihs.org/topics/speed/speed-limit-laws). Statute text alone does not name which segments are 80."
+  },
+  {
+    "code": "NH",
+    "name": "New Hampshire",
+    "truckSpeed": {
+      "car": "65 on divided interstate and turnpikes of 4+ lanes (70 on I-93 from mile marker 45 to the Vermont border)",
+      "truck": "Same, no separate truck limit in statute",
+      "differs": false,
+      "source": "https://gc.nh.gov/rsa/html/XXI/265/265-60.htm",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "No truck-specific rule. RSA 265:16, IV: motor vehicles may not be operated continuously in the left lane of a multilane roadway when it impedes the flow of other traffic at or below the posted limit, unless reasonable and prudent for conditions. RSA 265:16, II also puts vehicles below normal traffic speed in the right-hand lane. Fine $50 plus penalty assessment.",
+      "source": "https://gc.nh.gov/rsa/html/xxi/265/265-mrg.htm",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide, all motor vehicles (not only diesel or trucks), Env-A 1102.02: above 32F no more than 5 consecutive minutes in any 60-minute period; between -10F and 32F no more than 15 consecutive minutes in 60; below -10F no limit unless a nuisance is created. Exempt (Env-A 1102.03): stopped by traffic, emergency or law enforcement vehicles in emergency or training mode, power takeoff for refrigeration or lift gates, passenger-vehicle heat or A/C for comfort, windshield defrost for a safety emergency (not as a rest period), mechanic maintenance or diagnostics. No sleeper-cab exemption is listed.",
+      "source": "https://gc.nh.gov/rules/state_agencies/env-a1100.html",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes, but written as a reduced-speed rule (RSA 265:37-a). Near a collision, fire, utility work, or other blockage, a police traffic stop, or any stopped vehicle showing warning signals or blue, red or amber lights, drivers must keep a reduced speed, give a wide berth if practical without endangering oncoming traffic, and clear a blocked lane as soon as possible. Covers emergency, tow, utility and any vehicle with hazard lights, cones or flares. Fine $75, $250 for a repeat in 12 months, plus assessment.",
+      "source": "https://gc.nh.gov/rsa/html/xxi/265/265-mrg.htm",
+      "status": "verified"
+    }
+  },
+  {
+    "code": "NJ",
+    "name": "New Jersey",
+    "truckSpeed": {
+      "car": "65 (rural interstate and other designated highways)",
+      "truck": "65, no separate truck limit listed (lower truck limits can be set on individual road segments)",
+      "differs": false,
+      "source": "https://www.iihs.org/topics/speed/speed-limit-laws",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "Trucks with a registered gross weight of 10,000 lb or more may not be driven in the farthest-left lane where a roadway has three or more lanes in one direction (R.S. 39:4-88(e)). Exceptions: up to one mile to prepare for a left turn, to enter or leave by a left-side ramp, and in emergency conditions. A 2022 bill (A4470) would extend this to roads with two or more lanes and to the Turnpike; its status was not checked. Everyone must also keep right unless passing (39:4-82).",
+      "source": "https://pub.njleg.gov/Bills/2022/A4500/4470_I1.HTM",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide, diesel vehicles may not idle more than 3 consecutive minutes while not moving (N.J.A.C. 7:27-14.3). Exceptions: stopped 3+ hours and below 25F, up to 15 minutes; diesel bus loading or unloading, 15 minutes in 60. Exempt: in traffic or a queue, power for cargo temperature or lift gates (not cab heat or A/C), waiting for a state or federal inspection, emergency services and snow removal, engine essential to repair, and a sleeper-berth truck with a 2007 or newer engine (or working DPF) used for sleeping in a non-residential zone, if no functioning APU. Also 3 minutes when parked at a space with truck-stop electrification.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/2018-07/documents/7.27-14.3_oct_2016_eff_date.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Slow Down or Move Over law, C.39:4-92.2. Covers stationary authorized emergency vehicles with red or blue lights, tow trucks with flashing amber, state, authority, county or municipal highway maintenance and emergency service vehicles with flashing yellow, amber or red lights, and sanitation vehicles with flashing amber. Move to a non-adjacent lane if safe, otherwise slow below the posted limit and be ready to stop. Fine $100 to $500; 2 points on a third offense within 12 months.",
+      "source": "https://www.njleg.state.nj.us/2018/Bills/A4000/3890_R2.HTM",
+      "status": "verified"
+    },
+    "notes": "Truck left-lane text comes from the Legislature's 2022 bill page, which prints the existing statute with proposed edits marked; confirm the current statute. Idling text is the Oct 2016 version hosted by EPA; NJDEP has a newer April 2025 fact sheet that blocked access, so the rule may have changed. The move-over text is the second reprint of A3890, enacted as P.L.2019, c.370 per the njcourts.gov filename. Speed is from IIHS only; the statute page was not reachable."
+  },
+  {
+    "code": "NM",
+    "name": "New Mexico",
+    "truckSpeed": {
+      "car": "75 (statute cap on declared limits)",
+      "truck": "Same, no separate truck limit found",
+      "differs": false,
+      "source": "https://codes.findlaw.com/nm/chapter-66-motor-vehicles/nm-st-sect-66-7-303/",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "No left-lane or truck-specific rule found. NMSA 66-7-308(B): a vehicle going well below the normal speed of traffic must use the right-hand lane, or stay as close as practicable to the right edge, except when passing or preparing to turn left. Applies to all vehicles.",
+      "source": "https://codes.findlaw.com/nm/chapter-66-motor-vehicles/nm-st-sect-66-7-308/",
+      "status": "secondary"
+    },
+    "idling": {
+      "rule": "No statewide idling limit found. The US DOE Alternative Fuels Data Center lists only a weight allowance of up to 400 lb for idle-reduction equipment (NMSA 66-7-410) for New Mexico. City or county rules were not checked.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=NM",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. NMSA 66-7-332(B): approaching a stopped authorized emergency vehicle or a recovery or repair vehicle showing flashing emergency or hazard lights, move to a non-adjacent lane if reasonably safe and slow to a safe speed, otherwise slow, proceed with caution and be ready to stop. The section does not name tow, highway maintenance or utility trucks or define 'recovery or repair vehicle'.",
+      "source": "https://codes.findlaw.com/nm/chapter-66-motor-vehicles/nm-st-sect-66-7-332/",
+      "status": "secondary"
+    },
+    "notes": "All New Mexico text came from FindLaw copies of NMSA (current as of Jan 1 2024), not the official site, which was blocked. IIHS also lists 75 mph and no separate truck limit. 66-7-303 caps declared limits at 75 but the exact interstate limit sign values were not confirmed."
+  },
+  {
+    "code": "NY",
+    "name": "New York",
+    "truckSpeed": {
+      "car": "65 on rural interstates and Thruway (set by DOT, not in VTL 1180)",
+      "truck": "65, no separate truck limit listed",
+      "differs": false,
+      "source": "https://www.iihs.org/topics/speed/speed-limit-laws",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "No statewide truck left-lane ban found. VTL 1120(b): a vehicle going slower than normal traffic speed must stay in the right-hand lane except to pass or turn left. VTL 1128(c): where signs, signals or markings direct slow traffic, trucks, buses or other vehicle types to a designated lane, drivers must obey them. Thruway-specific truck lane rules were not verified.",
+      "source": "https://www.nysenate.gov/legislation/laws/VAT/1120",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide, 6 NYCRR Part 217-3: heavy-duty vehicles over 8,500 lb GVWR (diesel or not) may not idle more than 5 minutes at a time. Exemptions per DEC (not an exhaustive list): held in traffic, power for refrigeration or lifts, cab temperature to the minimum an agency requires for passenger comfort, emergency and utility vehicles responding, diesel trucks that must stay stationary over 2 hours when below 25F, emissions inspection, agricultural vehicles on a farm. New York City has its own stricter rule.",
+      "source": "https://dec.ny.gov/environmental-protection/air-quality/controlling-motor-vehicle-pollution/heavy-duty-vehicles",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes, written as a due-care rule (VTL 1144-a). Covers parked, stopped or standing authorized emergency vehicles with red, blue or red-white lights, and hazard vehicles with amber lights including tow vehicles and state or local snow and ice removal vehicles with green or amber lights. On parkways and controlled-access highways due care includes moving out of the lane next to the shoulder where lawful. The text read has no required speed reduction. Also covers any vehicle stopped on the shoulder of a parkway or controlled-access highway.",
+      "source": "https://www.nysenate.gov/legislation/laws/VAT/1144-A",
+      "status": "verified"
+    },
+    "notes": "VTL 1180(b) sets a 55 mph default; higher limits are set by authorities under other sections, so the 65 figure is from IIHS only. VTL 1180(g): vehicles over 18,000 lb GVWR (and commercial vehicles over 10,000 lb) with a radar or laser detector may not exceed 55 mph or any lower posted limit. The nysenate.gov pages were read through a summarizer, not verbatim. Bill A8317 (2025) would broaden move-over; status unknown."
+  },
+  {
+    "code": "NC",
+    "name": "North Carolina",
+    "truckSpeed": {
+      "car": "70 (statute max on interstate and controlled-access highways, set by DOT)",
+      "truck": "Same, no separate truck limit in G.S. 20-141",
+      "differs": false,
+      "source": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-141.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "G.S. 20-146(f): a vehicle with GVWR of 26,001 lb or more may not use the left-most lane of a controlled-access highway with six or more lanes, except to enter or exit, avoid a hazard, or pass. Everyone: vehicles below the legal maximum speed must use the right-hand lane except to pass or turn left (20-146(b)); where 'Slower Traffic Keep Right' signs are posted, impeding the inside lane below the posted limit is unlawful (20-146(e)).",
+      "source": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-146.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling limit for trucks found. The US DOE Alternative Fuels Data Center lists only school-board bus idling policies for North Carolina. Local rules were not checked.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=NC",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. G.S. 20-157(f): approaching a parked or standing law enforcement, fire, ambulance or rescue vehicle, or a public service vehicle with warning lights, move to a non-adjacent lane when safe on a road with 2+ lanes, otherwise slow and be ready to stop. 'Public service vehicle' covers tow and wrecker assistance, utility work, refuse and recycling collection, and State or local highway maintenance vehicles with amber lights. Infraction, $250; felony if it causes serious injury or death.",
+      "source": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-157.html",
+      "status": "verified"
+    },
+    "notes": "G.S. 20-141(b)(2) sets 55 outside municipal limits as the default, so higher interstate limits depend on DOT postings up to 70. The 20-146(f) truck rule text was amended by 2025-47."
+  },
+  {
+    "code": "ND",
+    "name": "North Dakota",
+    "truckSpeed": {
+      "car": "80 on access-controlled, divided multilane interstates",
+      "truck": "80, no separate truck limit in statute",
+      "differs": false,
+      "source": "https://ndlegis.gov/cencode/t39c09.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "No truck or left-lane-specific rule. NDCC 39-10-08(2): a vehicle going slower than the normal speed of traffic must use the right-hand lane except when passing or preparing for a left turn. Applies to all vehicles.",
+      "source": "https://ndlegis.gov/cencode/t39c10.pdf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling limit found. The US DOE Alternative Fuels Data Center lists only a weight allowance of up to 550 lb for idle-reduction equipment (NDCC 39-12-01) for North Dakota. Local rules were not checked.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=ND",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. NDCC 39-10-26: on the interstate or a multilane highway outside a city, approaching a stopped authorized emergency vehicle with flashing amber, blue, white or red lights, or a state highway maintenance vehicle with flashing amber or white lights, move to a non-adjacent lane if safe, otherwise reduce speed and proceed with caution.",
+      "source": "https://ndlegis.gov/cencode/t39c10.pdf",
+      "status": "verified"
+    },
+    "notes": "The 80 mph limit in 39-09-02(1)(i) is for access-controlled paved divided multilane interstates 'unless otherwise permitted, restricted, or required by conditions', so individual stretches can post lower."
+  },
+  {
+    "code": "OH",
+    "name": "Ohio",
+    "truckSpeed": {
+      "car": "70 on rural freeways (65 on urbanized freeways without signals)",
+      "truck": "70 (same; no separate truck limit)",
+      "differs": false,
+      "source": "https://codes.ohio.gov/ohio-revised-code/section-4511.21",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Ohio R.C. 4511.25(B)(1): any vehicle going slower than traffic must use the right-hand lane then available, except to pass, prepare for a left turn, or when needed to continue its route. No truck-specific left-lane ban in that section.",
+      "source": "https://codes.ohio.gov/ohio-revised-code/section-4511.25",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide truck idling law found. Only local rules exist (EPA compilation lists a Waynesville bus idling ordinance; ATRI lists Cleveland and Maple Heights, 5 minutes).",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=OH",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. R.C. 4511.213 covers stationary public safety, emergency, road service and waste collection vehicles, PUCO inspection vehicles, and highway maintenance vehicles showing flashing lights. On multi-lane roads change to a non-adjacent lane if possible, otherwise slow to a safe speed.",
+      "source": "https://codes.ohio.gov/ohio-revised-code/section-4511.213",
+      "status": "verified"
+    },
+    "notes": "Idling 'none statewide' is an absence finding from DOE AFDC (no Ohio idling restriction listed) and the EPA 2006 compilation (local codes only). One low-quality site claimed R.C. 3704.11 sets a 5-minute limit; the section as read concerns local air-pollution authority and has no idling text."
+  },
+  {
+    "code": "OK",
+    "name": "Oklahoma",
+    "truckSpeed": {
+      "car": "75 on rural I-35/I-40 segments (set by Transportation Commission, statute allows up to 75); up to 80 on posted turnpike segments",
+      "truck": "Same as cars; no truck-specific limit in 47 O.S. 11-801 or ODOT's 2020 release",
+      "differs": false,
+      "source": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os47.rtf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "47 O.S. 11-309(4): a vehicle may not be driven in the left lane of a roadway except when passing, with exceptions for traffic conditions, flow, or merging traffic. The exception for city or county roads does not cover Interstate or turnpikes. Applies to all vehicles; no truck-specific rule.",
+      "source": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os47.rtf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling restriction found (DOE lists only a 400-lb weight allowance for idle-reduction equipment).",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=OK",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes (Bernardo-Mills Law, 47 O.S. 11-314). Covers stationary authorized emergency vehicles, ODOT and Turnpike Authority maintenance vehicles, licensed wreckers with flashing lights, and any stationary vehicle displaying flashing lights. Change to a non-adjacent lane if possible, otherwise slow to a safe speed. Violation is 'endangerment of an emergency worker', $1,000 first offense.",
+      "source": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os47.rtf",
+      "status": "verified"
+    },
+    "notes": "Turnpike Authority may set separate speeds for trucks, buses and cars under 11-801(D); OTA releases found mention only '80 mph' for motorists, no truck figure. Check turnpike signs."
+  },
+  {
+    "code": "OR",
+    "name": "Oregon",
+    "truckSpeed": {
+      "car": "65 on interstates (70 on I-84 east of The Dalles and on I-82 unless posted otherwise)",
+      "truck": "55 on most roads incl. interstates for trucks over 10,000 lb GVWR (65 on I-84 east of The Dalles and I-82)",
+      "differs": true,
+      "source": "https://www.oregonlegislature.gov/bills_laws/ors/ors811.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "ORS 811.325: any vehicle with a trailer, any camper, and any vehicle with a registration weight of 10,000 lb or more must drive in the right lane on roads with two or more lanes in one direction. Exceptions: passing, left turn, emergency, merge traffic, traffic control devices. Slow drivers generally must use the right lane (ORS 811.315).",
+      "source": "https://www.oregonlegislature.gov/bills_laws/ors/ors811.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "ORS 825.605: commercial vehicles over 10,000 lb GVWR may not idle more than 5 minutes in any 60 minutes on premises open to the public (Class C violation). Not idling if running an APU, generator or other idle-reduction tech, or a cargo temperature unit. ORS 825.610 exemptions include traffic, maintenance, inspections, up to 30 minutes waiting or loading, and sleeper-berth heating or cooling for vehicles over 26,000 lb when it is under 50F or over 75F (with limits).",
+      "source": "https://www.oregonlegislature.gov/bills_laws/ors/ors825.html",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. ORS 811.147: on a road with two or more lanes in your direction, change to a non-adjacent lane or slow to at least 5 mph under the limit when passing any stopped vehicle showing warning or hazard lights, or flares and signs. Not limited to emergency vehicles.",
+      "source": "https://www.oregonlegislature.gov/bills_laws/ors/ors811.html",
+      "status": "verified"
+    },
+    "notes": "Truck/car speed read from ORS 811.111. IIHS agrees (rural interstate 65, 70 on segments; trucks 55, 65 on segments)."
+  },
+  {
+    "code": "PA",
+    "name": "Pennsylvania",
+    "truckSpeed": {
+      "car": "65 or 70 on freeways where posted",
+      "truck": "Same; 75 Pa.C.S. 3362(a)(1.1) says 'for all vehicles'",
+      "differs": false,
+      "source": "https://www.palegis.us/statutes/consolidated/view-statute&txtType=PDF&ttl=75&div=00.&chpt=033.&sctn=062.&subsctn=000.",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "75 Pa.C.S. 3301(b): a vehicle going slower than normal traffic must drive in the right-hand lane (or as near the right edge as practicable), except to pass, turn left, or when needed to continue its route. Applies to everyone; no truck-specific left-lane ban in that section.",
+      "source": "https://www.palegis.us/statutes/consolidated/view-statute&txtType=PDF&ttl=75&div=00.&chpt=033.&sctn=001.&subsctn=000.",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Diesel-Powered Motor Vehicle Idling Act (Act 124 of 2008): diesel vehicles of 10,001 lb or more engaged in commerce may not idle more than 5 minutes in any continuous 60 minutes. Exemptions include traffic, maintenance, inspection, work-related power use, up to 15 minutes while sampling, weighing, loading or unloading, and vehicles with a CARB-certified NOx idling label. Motor homes and farm vehicles excluded. The act's sleeper-berth exemption (under 40F or over 75F) expired May 1, 2010 as enacted.",
+      "source": "https://www.palegis.us/statutes/unconsolidated/law-information/view-statute?txtType=PDF&SessYr=2008&ActNum=0124.&SessInd=0",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. 75 Pa.C.S. 3327: when approaching or passing an emergency response area or a disabled vehicle, pass in a non-adjacent lane if possible, otherwise pass at no more than 20 mph under the posted limit. Fines up to $500 first offense, $1,000 second, $2,000 third.",
+      "source": "https://www.palegis.us/statutes/consolidated/view-statute&txtType=PDF&ttl=75&div=00.&chpt=033.&sctn=027.&subsctn=000.",
+      "status": "verified"
+    },
+    "notes": "Definition of 'emergency response area' is in 75 Pa.C.S. 102, not read. Act 124 text read as originally enacted; HB 938/HB 954 pending amendments are listed on the legislature site, so check for current changes."
+  },
+  {
+    "code": "RI",
+    "name": "Rhode Island",
+    "truckSpeed": {
+      "car": "65 on rural interstates (per IIHS; posted by traffic commission)",
+      "truck": "Same; no truck-specific limit found",
+      "differs": false,
+      "source": "https://www.iihs.org/topics/speed/speed-limit-laws",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "R.I. Gen. Laws 31-15-2: any vehicle going slower than normal traffic must drive in the right-hand lane, except to pass or prepare to turn left. Applies to everyone; no truck-specific rule found.",
+      "source": "http://webserver.rilegislature.gov/Statutes/TITLE31/31-15/31-15-2.htm",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "R.I. Gen. Laws 23-23-29.2 directs DEM to bar unnecessary diesel engine idling over 5 consecutive minutes in any 60 minutes. Exemptions include traffic, heating or cooling needed for driver health or safety, maintenance, public safety, armored, non-road and fuel delivery vehicles. Fines up to $100 first offense, $500 later (per DOE AFDC).",
+      "source": "http://webserver.rilegislature.gov/Statutes/TITLE23/23-23/23-23-29.2.htm",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. R.I. Gen. Laws 31-14-3: for parked or standing emergency vehicles, tow trucks, transporter trucks, highway maintenance vehicles with flashing lights, roadside assistance vehicles with amber lights, and any stationary non-emergency vehicle on the shoulder, move to a non-adjacent lane if there are 2+ lanes and it is safe, otherwise slow to a safe speed.",
+      "source": "http://webserver.rilegislature.gov/Statutes/TITLE31/31-14/31-14-3.htm",
+      "status": "verified"
+    },
+    "notes": "RI statute 31-14-2 sets only prima facie 50 mph and lets the state traffic commission set limits by posting (31-14-4), so interstate limits are not in statute. The 65 figure comes only from IIHS. The detailed DEM idling regulation was not read; AFDC page (afdc.energy.gov/fuels/laws/IR?state=RI) summarizes the fine amounts."
+  },
+  {
+    "code": "SC",
+    "name": "South Carolina",
+    "truckSpeed": {
+      "car": "70 on interstates where posted",
+      "truck": "70 (same; no truck limit in statute)",
+      "differs": false,
+      "source": "https://www.scstatehouse.gov/code/t56c005.php",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "S.C. Code 56-5-1885: on controlled-access highways, no vehicle may use the farthest-left lane except to pass. Exceptions include nobody behind you, congestion, bad weather, hazards in the right lane, exiting, and a tractor-trailer or CDL vehicle that cannot safely move right because of passing traffic or a grade. $25 max fine, no court costs. DOT may set lane restrictions for certain vehicle types. Applies to all vehicles.",
+      "source": "https://www.scstatehouse.gov/code/t56c005.php",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "S.C. Code 56-35-20: commercial diesel vehicles of 10,001 lb or more may not idle more than 10 minutes in any 60 minutes. Exemptions include traffic, maintenance and inspection, work-related power, loading queues, and sleeper-berth climate control when under 40F or over 80F or at approved rest areas or truck stops 500+ ft from homes, schools and similar. Buses 15 minutes. Fine $75.",
+      "source": "https://www.scstatehouse.gov/code/t56c035.php",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. S.C. Code 56-5-1538(G),(J): approaching a stationary authorized emergency vehicle with flashing lights, or any stationary vehicle with hazard lights, slow significantly and change to a non-adjacent lane on highways with 2+ lanes in your direction (4+ lanes total), if safe. Emergency vehicle violations: $300 to $500 fine.",
+      "source": "https://www.scstatehouse.gov/code/t56c005.php",
+      "status": "verified"
+    }
+  },
+  {
+    "code": "SD",
+    "name": "South Dakota",
+    "truckSpeed": {
+      "car": "80 on interstates",
+      "truck": "80 (same; no truck-specific limit)",
+      "differs": false,
+      "source": "https://sdlegislature.gov/api/Statutes/32-25-4.html",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "SDCL 32-26-1: drivers must keep to the right half of the highway and drive slow-moving vehicles as close to the right edge as possible, except when overtaking. No left-lane-for-passing-only law and no truck-specific restriction found.",
+      "source": "https://sdlegislature.gov/api/Statutes/32-26-1.html",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling restriction found.",
+      "source": "https://afdc.energy.gov/fuels/laws/IR?state=SD",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. SDCL 32-31-6.1: for any stopped or shoulder vehicle using amber, yellow or blue warning lights, merge to the farthest lane at least 300 feet before it on roads with 2+ lanes, or on a two-lane road slow to 20 mph under the limit. Stopped emergency vehicles using red lights require a complete stop. Class 2 misdemeanor, minimum fine $270.",
+      "source": "https://sdlegislature.gov/api/Statutes/32-31-6.1.html",
+      "status": "verified"
+    },
+    "notes": "Transportation Commission may set lower limits than 80 on any highway (SDCL 32-25-7); 65 mph is the general cap elsewhere (32-25-1.1). Idling 'none' is an absence finding from the DOE AFDC page (only a VW settlement fund listed)."
+  },
+  {
+    "code": "TN",
+    "name": "Tennessee",
+    "truckSpeed": {
+      "car": "70",
+      "truck": "70",
+      "differs": false,
+      "source": "https://codes.findlaw.com/tn/title-55-motor-and-other-vehicles/tn-code-sect-55-8-152/",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "Tenn. Code 55-8-204 (as 'slow poke' law, extended 2020 to roads with two or more lanes each way): no one may stay in the far-left lane on interstates and multilane divided highways except to pass; exceptions for heavy traffic, weather, exits/left turns, hazards, emergency and work vehicles. $50 fine. Applies to all vehicles, not trucks only. Separately, 55-8-152(c) sets a 55 mph minimum in the left lane of controlled-access highways.",
+      "source": "https://codes.findlaw.com/tn/title-55-motor-and-other-vehicles/tn-code-sect-55-8-204/",
+      "status": "secondary"
+    },
+    "idling": {
+      "rule": "No statewide commercial idling limit listed in the EPA 2021 state idling compilation (Tennessee has no entry). Local rules may exist (not checked).",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "secondary"
+    },
+    "moveOver": {
+      "rule": "Yes. T.C.A. 55-8-132: move over into an adjacent lane when safe, or slow down, for emergency vehicles, recovery (tow) vehicles, highway maintenance, solid waste and utility service vehicles with audible or visual signals. Fine up to $500 and up to 30 days jail.",
+      "source": "https://www.tn.gov/tdot/work-with-us/move-over-law.html",
+      "status": "verified"
+    },
+    "notes": "tn.gov driver manual and Justia returned 403 / Tennessee Code is not freely hosted by the legislature, so speed and left-lane statute text came from FindLaw (secondary, current to Jan 2024). 55-8-152 text also mentions a 65 mph reference for trucks in subsection (f)(2) (reduced-speed provisions) that was not resolved; 70 mph applies to 'a motor vehicle or a truck' in subsection (c). TDOT removed the 55 mph truck / 65 mph car split on I-81 in Sullivan County in March 2024 (now 70 for all)."
+  },
+  {
+    "code": "TX",
+    "name": "Texas",
+    "truckSpeed": {
+      "car": "75 typical on rural interstates (80 on parts of I-10/I-20 in listed West Texas counties; up to 85 on designed segments)",
+      "truck": "same as cars",
+      "differs": false,
+      "source": "https://tcss.legis.texas.gov/resources/TN/pdf/TN.545.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Transp. Code 545.051(b): a driver moving slower than the normal speed of other traffic must stay in the right-hand lane (or as close as practicable to the right edge), except to pass or prepare a left turn. Applies to all vehicles, no truck-specific lane ban found in Chapter 545. TxDOT posts 'Left lane for passing only' signs where authorized (Sec. 544.011).",
+      "source": "https://tcss.legis.texas.gov/resources/TN/pdf/TN.545.pdf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "State rule 30 TAC 114.512: no idling the primary engine more than 5 consecutive minutes, April 1 to October 31, for motor vehicles over 14,000 lb GVWR, but only in jurisdictions that signed a delegation agreement with TCEQ (Bastrop, Caldwell, Hays, Travis, Williamson counties and the cities of Austin, Bastrop, Elgin, Lockhart, Round Rock, San Marcos per EPA's list). Exemptions include traffic, maintenance, defrost, power for non-propulsion equipment, 30 minutes for passenger vehicles/buses. No statewide idling limit otherwise.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Transp. Code 545.157: stationary authorized emergency vehicles with visual signals, stationary tow trucks, and TxDOT vehicles not behind channelizing devices. Vacate the closest lane on a road with 2+ lanes in your direction, or slow to 20 mph below the posted limit (5 mph if limit under 25).",
+      "source": "https://www.dps.texas.gov/sites/default/files/documents/docs/txtranspcode545157.pdf",
+      "status": "verified"
+    },
+    "notes": "Chapter 545 text (2024-era PDF mirror on the legislature's tcss.legis.texas.gov) sets 70 mph on numbered highways outside urban districts as the prima facie default; the Transportation Commission may post 75, 80 on I-10/I-20 in listed counties, and up to 85 mph on suitable segments (545.353(h)-(h-2)). The only vehicle-specific limits in 545.352(b) are for school buses; light trucks share the car limit (545.352(c)). Actual posted 75/80/85 mph values were not checked against TxDOT orders. 30 TAC 114.512 status is from EPA's 2021 compilation; may have changed."
+  },
+  {
+    "code": "UT",
+    "name": "Utah",
+    "truckSpeed": {
+      "car": "75 statutory cap on freeways; UDOT may post higher (80 on listed segments)",
+      "truck": "same as cars (no truck-specific limit found)",
+      "differs": false,
+      "source": "https://le.utah.gov/xcode/Title41/Chapter6A/C41-6a-S602_2022050420220504.pdf",
+      "status": "secondary"
+    },
+    "leftLane": {
+      "rule": "Utah Code 41-6a-704(3): on a multi-lane highway a driver in the left general-purpose lane must move right when overtaken and may not impede traffic in that lane. Two seconds or less gap to a following car is prima facie evidence of a violation. Exceptions: passing, left turn or exit, emergencies, merging traffic, signed lane use. Infraction. Applies to all vehicles.",
+      "source": "https://le.utah.gov/xcode/Title41/Chapter6A/C41-6a-S704_2024050120240501.pdf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide idling limit in EPA's 2021 compilation. Utah Code 41-6a-1403 only requires stopping the engine on an unattended vehicle. Local rules only, e.g. Salt Lake County Health Dept Reg 28: diesel vehicles max 15 minutes (exemptions for reefer, sleeper heat/AC, emergency; 15-minute cap within 500 ft of a residence); Park City delivery vehicles on Main Street.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Utah Code 41-6a-904: reduce speed, give as much space as practical, and change to a non-adjacent lane if practical, for stationary authorized emergency vehicles (red/blue lights), tow trucks and highway maintenance vehicles (amber lights), and any stationary vehicle with hazard lights on the roadside. Infraction plus a required defensive driving course.",
+      "source": "https://le.utah.gov/xcode/Title41/Chapter6A/C41-6a-S904_2023050320230503.pdf",
+      "status": "verified"
+    },
+    "notes": "Statute (41-6a-602, 2022 version) lets UDOT set limits by vehicle type, caps freeways at 75 unless UDOT sets higher after a study. The 80 mph segments and the absence of a lower truck limit were not confirmed on a UDOT page (the UDOT speed page 404'd and web search budget ran out). Versions read were the latest PDFs found, effective 2022-2024."
+  },
+  {
+    "code": "VT",
+    "name": "Vermont",
+    "truckSpeed": {
+      "car": "65",
+      "truck": "65",
+      "differs": false,
+      "source": "https://legislature.vermont.gov/Documents/2026/Workgroups/House%20Transportation/Legislative%20Counsel/W~Damien%20Leonard~Speed%20Limit%20Setting%20Vermont~2-26-2026.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "No left-lane-only statute. 23 V.S.A. 1082: slow-moving vehicles must keep as close to the right side as reasonably practicable, and a driver impeding traffic must pull off at the first opportunity. 1033: an overtaken driver must give way to the right. Applies to all vehicles; no truck-specific lane ban found.",
+      "source": "https://legislature.vermont.gov/statutes/fullchapter/23/013",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Statewide: 23 V.S.A. 1110 bars running the primary engine more than 5 minutes in any 60-minute period while stationary. Exceptions include traffic, safety/health, PTO or reefer work, maintenance, emergency vehicles, and pre-2018 model-year trucks with an occupied sleeper berth during a rest period. Fines up to $10 / $50 / $100 for 1st / 2nd / 3rd+.",
+      "source": "https://legislature.vermont.gov/statutes/fullchapter/23/013",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. 23 V.S.A. 1050(b): for stationary law enforcement, ambulance, fire/rescue vehicles and towing/repair vehicles with flashing lights, proceed with caution and change to a farther lane on a multilane road if safe, otherwise slow to a safe speed. 1033(c): stationary sanitation, maintenance, utility or delivery vehicles with flashing lights, slow and give 4 ft clearance (civil penalty $200 minimum). 1050(c) covers work zones.",
+      "source": "https://legislature.vermont.gov/statutes/fullchapter/23/013",
+      "status": "verified"
+    },
+    "notes": "Interstate speed is set by Traffic Committee rule CVR 14-053-004 art. 1.1 (65 mph on limited access highways), cited in a 2026 legislative counsel memo, not by 23 V.S.A. 1081 (default 50). The rule text itself was not fetched."
+  },
+  {
+    "code": "VA",
+    "name": "Virginia",
+    "truckSpeed": {
+      "car": "70 maximum where posted (interstates)",
+      "truck": "70 (no lower truck limit on interstates in 46.2-870; trucks 45 vs cars 55 only on 'other highways')",
+      "differs": false,
+      "source": "https://law.lis.virginia.gov/vacode/title46.2/chapter8/section46.2-870/",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "46.2-804(1): any vehicle going slower than normal traffic must use the lane nearest the right edge when available, except to pass or turn left. 46.2-804(4): VDOT must post signs requiring trucks and combination vehicles to keep right on Interstate segments with no more than two lanes each way where terrain slows trucks on grades.",
+      "source": "https://law.lis.virginia.gov/vacode/title46.2/chapter8/section46.2-804/",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "9 VAC 5-40-5670(C): in commercial or residential urban areas, propulsion engines of commercial or public-service vehicles may not run over 3 minutes while parked (diesel may idle up to 10 minutes to avoid restart problems; auxiliary-power use for non-heat/AC excepted). Local ordinances (Fairfax 3 min; Arlington and others for buses 10 min).",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. 46.2-861.1: for any stationary vehicle with flashing blue, red or amber lights (emergency, tow, highway/utility, etc.) or with hazard flashers, caution signs or flares, on a road with 4+ lanes (2+ each way) change to a non-adjacent lane if reasonable; otherwise slow with due caution. Violation for emergency/blue/red/amber vehicles is reckless driving; for hazard-flasher vehicles an infraction. Not applied in highway work zones.",
+      "source": "https://law.lis.virginia.gov/vacode/title46.2/chapter8/section46.2-861.1/",
+      "status": "verified"
+    },
+    "notes": "46.2-921.1 (the old move-over section) was repealed in 2019; replaced by 46.2-861.1. Idling citation is from EPA's 2021 compilation, may have changed. The 46.2-870 page text read had no 75 mph provision and showed 60 mph signed on some US routes."
+  },
+  {
+    "code": "WA",
+    "name": "Washington",
+    "truckSpeed": {
+      "car": "70 on most rural interstates; statute allows posting up to 75",
+      "truck": "60",
+      "differs": true,
+      "source": "https://app.leg.wa.gov/rcw/default.aspx?cite=46.61.410",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "RCW 46.61.100(3): on limited-access roadways with three or more lanes in one direction, no vehicle towing a trailer and no vehicle or combination over 10,000 lb may drive in the left-hand lane (HOV lane excepted; exemptions set by WSDOT/WSP). On other multilane roads, vehicles over 10,000 lb must stay in the right-hand lane (subsection 2). RCW 46.61.100(4): driving continuously in the left lane of a multilane roadway while impeding traffic is an infraction for everyone.",
+      "source": "https://app.leg.wa.gov/rcw/default.aspx?cite=46.61.100",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide limit in EPA's 2021 compilation; only local rules, e.g. Spokane's central business district bans idling over 60 seconds (exemptions include PTO use, repair, emergency and transit vehicles).",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. RCW 46.61.212: stationary emergency vehicles, police, tow trucks, roadside assistance, highway construction/maintenance, solid waste and utility vehicles with flashing or 360-degree warning lights. On roads with 4+ lanes, slow and move over if safe; otherwise slow to at least 10 mph under the limit (max 50 if posted 60+). Zone is 200 ft before and after; fine doubled.",
+      "source": "https://app.leg.wa.gov/rcw/default.aspx?cite=46.61.212",
+      "status": "verified"
+    },
+    "notes": "RCW 46.61.410(1) lets WSDOT raise limits to 75 mph; the 70 mph figure for cars on most rural interstates (and 75 on some eastern WA segments) comes from the IIHS hint, not a statute page, and was not re-verified on a WSDOT page. (2) caps vehicles over 10,000 lb GVW and combinations at 60 mph. EPA idling snapshot is from 2021."
+  },
+  {
+    "code": "WV",
+    "name": "West Virginia",
+    "truckSpeed": {
+      "car": "70",
+      "truck": "70",
+      "differs": false,
+      "source": "https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/DMV/DMVFormSearch/WV-CDL-Manual.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "Keep-right law applies to everyone: any vehicle going slower than normal traffic must use the right-hand lane except to pass or prepare for a left turn (W. Va. Code 17C-7-1(b)). No truck-specific left-lane ban found. The state CDL manual also says not to drive slowly in the left lane.",
+      "source": "https://code.wvlegislature.gov/17C-7-1/",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "Diesel vehicles of 10,001 lb GVW or more engaged in commerce may not idle more than 15 minutes in any continuous 60-minute period (W. Va. Code 17C-13A-2). Exemptions include traffic or signals, heat/AC/refrigeration needed for a safety or health emergency, maintenance and inspections, and a sleeper-berth exemption when the outside temperature is under 40F or over 75F during a rest period.",
+      "source": "https://code.wvlegislature.gov/17C-13A-3/",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Applies to any stationary vehicle showing flashing red, blue, amber or yellow lights, hazard lights, flares or a reflective warning sign (not only emergency vehicles). Change to a lane not adjacent if safely possible on a road with 2+ lanes in your direction, otherwise slow to no more than 15 mph (undivided) or 25 mph (divided). W. Va. Code 17C-14-9a.",
+      "source": "https://code.wvlegislature.gov/17C-14-9a/",
+      "status": "verified"
+    },
+    "notes": "The speed-limit statute (17C-6-1) sets 55 mph on open country highways and a minimum of 55 on interstates, and lets the Commissioner of Highways set zones (17C-6-2). The 70 mph interstate figure comes from the DMV CDL manual, not the statute. Statute 17C-6-4 still says vehicles not designed to carry passengers and on pneumatic tires (trucks over 8,000 lb) may not exceed 40 mph on open country highway, which conflicts with the 70 mph in practice. Posted limits control. Some stretches are lower (reported cuts on I-64 and I-77 are from news, not checked). 17C-14-9a penalty text on the page: fine up to $500 or up to 60 days jail."
+  },
+  {
+    "code": "WI",
+    "name": "Wisconsin",
+    "truckSpeed": {
+      "car": "70 on freeways (65 on expressways)",
+      "truck": "70",
+      "differs": false,
+      "source": "https://docs.legis.wisconsin.gov/document/statutes/346.57",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "General keep-right law for everyone: a vehicle going slower than normal traffic must drive in the right-hand lane (or as close to the right edge as practicable) except to pass or turn left (Wis. Stat. 346.05(3)). Lanes posted for particular speeds or directions must be obeyed (346.13(3)). No truck-specific left-lane ban found.",
+      "source": "https://docs.legis.wisconsin.gov/document/statutes/346.05",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide anti-idling law for trucks found. The EPA compilation lists only a Madison rule for large trucks on State Street (15 minutes when 40-80F). State involvement is a grant for idle-reduction equipment, not a limit.",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Applies to emergency vehicles giving visual signal, tow trucks with flashing red lamps, highway construction/maintenance vehicles, public utility/telecom vehicles with flashing amber or green, and disabled vehicles (hazard lights, flares, or attended). When parked within 12 ft of the road, move to a lane not nearest if 2+ lanes in your direction and safe, otherwise slow. Wis. Stat. 346.072. Violation also triggers license suspension.",
+      "source": "https://docs.legis.wisconsin.gov/document/statutes/346.072",
+      "status": "verified"
+    },
+    "notes": "Statute 346.57(4)(gm): 70 on freeways including interstates, 65 on expressways, unless signs show otherwise. No separate truck limit in the statute. The EPA idling compilation is a 2021 snapshot, so a newer local or state rule could exist; a web search found nothing (the idling-related statute 16.956 only funds equipment grants)."
+  },
+  {
+    "code": "WY",
+    "name": "Wyoming",
+    "truckSpeed": {
+      "car": "75 (80 on interstate segments designated by the superintendent)",
+      "truck": "75 (80 on the same segments)",
+      "differs": false,
+      "source": "https://wyoleg.gov/statutes/compress/title31.pdf",
+      "status": "verified"
+    },
+    "leftLane": {
+      "rule": "General keep-right law for everyone: a vehicle going slower than normal traffic must be in the right-hand lane except to pass or turn left (W.S. 31-5-201(b)). No truck-specific left-lane ban found in Title 31. Signed lane restrictions are enforceable (31-5-209).",
+      "source": "https://wyoleg.gov/statutes/compress/title31.pdf",
+      "status": "verified"
+    },
+    "idling": {
+      "rule": "No statewide law found; only local rules. The EPA compilation lists only Rawlins (no vehicle may idle while parked more than 20 minutes).",
+      "source": "https://19january2021snapshot.epa.gov/sites/static/files/documents/CompilationofStateIdlingRegulations.pdf",
+      "status": "verified"
+    },
+    "moveOver": {
+      "rule": "Yes. Applies to parked authorized emergency vehicles using visual signals, and to municipal, public utility and highway construction/maintenance vehicles stopped or moving under 20 mph with warning lights. On an interstate or road with 2+ lanes in your direction, merge to the farthest lane or at least one lane apart; on a two-lane road posted 45+ mph, slow to 20 mph under the posted limit. W.S. 31-5-224. Disabled civilian vehicles and tow trucks are not named in the text read.",
+      "source": "https://wyoleg.gov/statutes/compress/title31.pdf",
+      "status": "verified"
+    },
+    "notes": "W.S. 31-5-301(b)(iii) sets 75 on interstates and (vi) sets 80 on interstates the superintendent designates. 31-5-302 allows different limits for different vehicle types, but no separate truck limit was found in the statute. A WYDOT news page I tried is now gone, so I can't confirm trucks are posted at 80 on those segments. A trucking jobs website claims a 70 mph truck limit, unconfirmed. Check signs. The EPA idling compilation is a 2021 snapshot."
+  }
+]
