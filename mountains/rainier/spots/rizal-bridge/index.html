@@ -143,8 +143,8 @@
       <div><div class="mv-stamp">The app</div>
       <h3>Mountain Visibility</h3>
       <p>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, The Olympics, Mount Angeles and Mount Baldy. Visible now or not, the five-day forecast, and the sunrise and sunset light. $1.99, one time.</p></div>
-      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-rainier-spots-rizal-bridge&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a>
-      <span class="mv-soon">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-rainier" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
+      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-rainier-spots-rizal-bridge&amp;mt=8" class="btn btn-primary" data-store="ios" rel="noopener">Get the app, $1.99</a>
+      <span class="mv-soon" data-store="play">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-rainier" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
     </div>
   <div class="mv-wrap">
     <div>
@@ -175,8 +175,8 @@
         </ul>
         <p class="mv-price">$1.99, one time. No account needed. No ads in the app.</p>
         <div class="mv-cta">
-          <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-rainier-spots-rizal-bridge&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a>
-          <span class="mv-soon">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-rainier" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
+          <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-rainier-spots-rizal-bridge&amp;mt=8" class="btn btn-primary" data-store="ios" rel="noopener">Get the app, $1.99</a>
+          <span class="mv-soon" data-store="play">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-rainier" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
         </div>
       </div></div>
   </div>
@@ -203,6 +203,7 @@ function line(r,sun){
   if(!r.viewerCeilingFt) return 'No cloud deck over '+r.name+'. The summit itself is in cloud, by the forecast model.';
   return 'Cloud on the sightline from '+r.name+' is hiding the mountain.';
 }
+function stores(){var ua=navigator.userAgent||'',an=/Android/i.test(ua),io=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);if(!an&&!io)return;document.querySelectorAll('[data-store]').forEach(function(l){var k=l.getAttribute('data-store');if((an&&k==='ios')||(io&&k==='play'))l.style.display='none';});if(an){document.querySelectorAll('a[data-play]').forEach(function(a){a.href=a.getAttribute('data-play');});document.querySelectorAll('span[data-store="play"]').forEach(function(s){var a=s.querySelector('a');if(a){a.className='btn btn-primary';s.className='';s.textContent='';s.appendChild(a);}});}}stores();
 // One free reading a day on the web (Leah, 2026-10-03). The first mountain or region page a
 // visitor opens each day shows the live answer. Every other page that day points to the app.
 // localStorage only, so a private window resets it. That is fine: the app is the product.
@@ -210,7 +211,7 @@ const FREE='mvFreeRead', TODAY=new Date().toLocaleDateString('en-CA'), PAGE=loca
 let used=null; try{used=JSON.parse(localStorage.getItem(FREE)||'null');}catch(e){}
 if(used&&used.day===TODAY&&used.path!==PAGE){
   $('mvV').textContent='Get the app'; $('mvV').className='mv-v LOCK';
-  $('mvLine').innerHTML='One reading is free here each day. Get the rest in Mountain Visibility. <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-rainier-spots-rizal-bridge&amp;mt=8" class="btn btn-primary" style="margin-top:12px;display:inline-block;">Get the app, $1.99</a>';
+  $('mvLine').innerHTML='One reading is free here each day. Get the rest in Mountain Visibility. <span style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;"><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-rainier-spots-rizal-bridge&amp;mt=8" class="btn btn-primary" data-store="ios" rel="noopener" style="display:inline-block;">Get the app, $1.99</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-rainier" class="btn btn-primary" data-store="play" rel="noopener" style="display:inline-block;">Get it on Google Play</a></span>';stores();
   
   return;
 }

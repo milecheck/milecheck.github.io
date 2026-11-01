@@ -142,8 +142,8 @@
       <div><div class="mv-stamp">The app</div>
       <h3>Mountain Visibility</h3>
       <p>Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, The Olympics, Mount Angeles and Mount Baldy. Visible now or not, the five-day forecast, and the sunrise and sunset light. $1.99, one time.</p></div>
-      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-baker-history&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a>
-      <span class="mv-soon">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-baker" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
+      <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-baker-history&amp;mt=8" class="btn btn-primary" data-store="ios" rel="noopener">Get the app, $1.99</a>
+      <span class="mv-soon" data-store="play">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-baker" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
     </div>
   <div class="mv-wrap">
     <div>
@@ -162,8 +162,8 @@
         </ul>
         <p class="mv-price">$1.99, one time. No account needed. No ads in the app.</p>
         <div class="mv-cta">
-          <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-baker-history&amp;mt=8" class="btn btn-primary">Get the app, $1.99</a>
-          <span class="mv-soon">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-baker" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
+          <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=mtn-baker-history&amp;mt=8" class="btn btn-primary" data-store="ios" rel="noopener">Get the app, $1.99</a>
+          <span class="mv-soon" data-store="play">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-baker" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
         </div>
       </div></div>
   </div>
@@ -353,5 +353,6 @@ fetch(HOST+'/history.json').then(r=>r.json()).then(h=>{
     </div>
   </footer>
   <script></script>
+<script>function stores(){var ua=navigator.userAgent||'',an=/Android/i.test(ua),io=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);if(!an&&!io)return;document.querySelectorAll('[data-store]').forEach(function(l){var k=l.getAttribute('data-store');if((an&&k==='ios')||(io&&k==='play'))l.style.display='none';});if(an){document.querySelectorAll('a[data-play]').forEach(function(a){a.href=a.getAttribute('data-play');});document.querySelectorAll('span[data-store="play"]').forEach(function(s){var a=s.querySelector('a');if(a){a.className='btn btn-primary';s.className='';s.textContent='';s.appendChild(a);}});}}stores();</script>
 </body>
 </html>
