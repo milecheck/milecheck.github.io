@@ -42,7 +42,7 @@ const META = {
   loveland: { q: 'Loveland Pass', dot: 'CDOT', url: 'https://www.cotrip.org/' },
   berthoud: { q: 'Berthoud Pass', dot: 'CDOT', url: 'https://www.cotrip.org/' },
   'i80-wyoming': { q: 'I-80 between Laramie and Cheyenne', dot: 'WYDOT', url: 'https://wyoroad.info/' },
-  teton: { q: 'Teton Pass', dot: 'WYDOT', url: 'https://wyoroad.info/' },
+  teton: { q: 'Teton Pass', dot: 'WYDOT and Idaho 511', url: 'https://wyoroad.info/' },
   togwotee: { q: 'Togwotee Pass', dot: 'WYDOT', url: 'https://wyoroad.info/' },
   'echo-summit': { q: 'Echo Summit', dot: 'Caltrans', url: 'https://quickmap.dot.ca.gov/' },
   blewett: { q: 'Blewett Pass', dot: 'WSDOT', url: 'https://wsdot.com/travel/real-time/mountainpasses/blewett' },
@@ -128,7 +128,7 @@ async function status(slug, P) {
   }
   if (!anyFeed) return null;
   reports.sort((a, b) => a.d - b.d);
-  return { meta, rMi, reports, closures, other };
+  return { meta, rMi, reports, closures, other, ca: P.states.includes('CA') };
 }
 
 // Chains pages (/chains-required-<pass>/) take the same reading but lead with the restriction line.
@@ -159,9 +159,9 @@ function render(slug, name, s, now) {
   const when = stamp(now);
   const repClosed = reports.filter((x) => x.closedText).slice(0, 1);
   const closeLine = closures.length === 0 && repClosed.length
-    ? `The road report below says the highway is closed. The ${meta.dot} incident list shows no separate closure.`
+    ? `A road report below describes a closure on this highway. The ${meta.dot} incident list shows no separate closure.`
     : closures.length === 0
-    ? `The ${meta.dot} feed lists none within ${rMi} mi of ${meta.q}.`
+    ? `No closure reports within ${rMi} mi of ${meta.q} in the latest ${meta.dot} data MileCheck received.`
     : `${closures.length} closure${closures.length > 1 ? 's are' : ' is'} listed within ${rMi} mi: ${closures.slice(0, 2).map((a) => esc(`${a.location['route-id'] || ''} ${a.location.direction || ''}: ${clean(a.description || a.headline, 110)}`.replace(/^\s*:?\s*/, '').replace(/\s+:/, ':'))).join('; ')}.`;
   const lead = closures.length ? `<strong>Closure listed.</strong>` : repClosed.length ? `<strong>Closure noted in a road report.</strong>` : `<strong>No closure listed.</strong>`;
   let repLine = '';
@@ -174,7 +174,7 @@ function render(slug, name, s, now) {
     return `<li><strong>${esc(nm)}</strong>: ${[surf, wx, t].filter(Boolean).map(esc).join(', ') || 'no surface reading'}${rs ? `. Chains and traction: ${esc(rs)}` : ''}${u ? ` <span style="color:#5b6670">(${u})</span>` : ''}</li>`;
   });
   if (rows.length) repLine = `<ul style="margin:8px 0 0 18px;padding:0">${rows.join('')}</ul>`;
-  else repLine = `<p style="margin:8px 0 0">The ${meta.dot} feed has no current road-weather report within ${rMi} mi of the pass, so there is no surface or chain reading here. Check the ${meta.dot} page linked below.</p>`;
+  else repLine = `<p style="margin:8px 0 0">The ${meta.dot} feed has no current road-weather report within ${rMi} mi of the pass, so there is no surface reading here.${s.ca ? ' MileCheck does not yet show Caltrans chain controls, so check QuickMap for the chain level.' : ' MileCheck has no chain reading here.'} Check the ${meta.dot} page linked below.</p>`;
   const otherLine = other ? ` ${other} other alert${other > 1 ? 's' : ''} (crashes, roadwork or hazards) ${other > 1 ? 'are' : 'is'} listed in the same area.` : '';
   return `<!-- passnow:start -->
 <section class="mc-passnow" aria-label="Is ${esc(meta.q)} open" style="max-width:1000px;margin:18px auto;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">

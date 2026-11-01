@@ -51,7 +51,7 @@ const PAGES = [
     slug: 'chains-required-stevens-pass', pass: 'stevens', name: 'Stevens Pass', route: 'US-2',
     h1: 'Are chains required on Stevens Pass today?',
     desc: 'WSDOT’s traction tire and chain lines for Stevens Pass on US 2, what each means for a car, an AWD car and a truck, the $500 fine, and the hours chains were advised this fall.',
-    lede: 'Only when WSDOT’s restriction line for the pass says so. Stevens is higher than Snoqualmie, and the line changes fast in a storm.',
+    lede: 'Only when WSDOT’s restriction line for the pass says so. Stevens is higher than Snoqualmie, and the line can change during a storm.',
     stat: hoursFor('Stevens Pass US 2'),
     body: () => `
     <!-- passnow:start --><!-- passnow:end -->
@@ -82,6 +82,8 @@ const PAGES = [
       <li><strong>Chains required on vehicles towing or over 10,000 GVW.</strong> Vehicles over 10,000 lb GVW and vehicles towing must use chains. Trailers must also be chained when required.</li>
       <li><strong>Chains required on vehicles towing or single drive axles over 10,000 GVW.</strong> Vehicles over 10,000 lb GVW with a single drive axle must use chains. Tandem-drive-axle vehicles are not covered by this specific restriction. Other posted requirements may apply.</li>
     </ul>
+    <h2>What passenger vehicles need</h2>
+    <p>Under ordinary Oregon chain restrictions, vehicles rated 10,000 pounds or less that are not towing can generally use approved traction tires instead of chains. Some four-wheel-drive and all-wheel-drive vehicles qualify for an exemption if they meet Oregon’s conditions. A conditional closure can require chains on more vehicles. Follow the current posted restriction.</p>
     <h2>Carrying chains and the fines</h2>
     <p>Vehicles over 10,000 lb GVW must carry chains whenever road conditions might require their use, or when Snow Zone signs are posted. Not using required chains or traction tires is a Class C traffic violation with a presumptive fine of $165. For vehicles registered under ORS chapter 826, mostly commercial trucks, it is a specific-fine violation with an $880 presumptive fine. Not carrying required chains is a separate Class C violation.</p>
     ${SRC_OREGON}
@@ -97,7 +99,7 @@ const PAGES = [
 for (const P of PAGES) {
   const PATH = `/${P.slug}/`, URL = `https://milecheckapp.com${PATH}`;
   const stat = P.stat ? `<h2>How often this fall</h2>
-    <p>From ${esc(fromTxt)} through ${esc(asOfTxt)}, MileCheck saved WSDOT’s ${esc(P.name)} report every hour. Traction tires were advised for ${P.stat.advised} hours, required for ${P.stat.required} hours and the pass was listed closed for ${P.stat.closed} hours. This is a count of past hours and one early storm. See <a href="/how-often-are-chains-required-on-washington-passes/">all Washington passes</a>.</p>` : '';
+    <p>From ${esc(fromTxt)} through ${esc(asOfTxt)}, MileCheck checked WSDOT’s ${esc(P.name)} report every hour and saved each check. ${P.stat.advised} saved checks showed traction tires advised, ${P.stat.required} showed them required and ${P.stat.closed} showed the pass closed. This counts saved checks from one early storm, not every minute a restriction was posted. See <a href="/how-often-are-chains-required-on-washington-passes/">all Washington passes</a>.</p>` : '';
   const faq = P.faq;
   const ld = [
     { '@context': 'https://schema.org', '@type': 'Article', headline: P.h1, datePublished: '2026-11-01', dateModified: '2026-11-01', mainEntityOfPage: URL, author: { '@type': 'Organization', name: 'MileCheck' }, publisher: { '@type': 'Organization', name: 'MileCheck' } },
