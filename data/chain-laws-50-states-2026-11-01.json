@@ -1,0 +1,1010 @@
+[
+  {
+    "code": "AL",
+    "name": "Alabama",
+    "hasLaw": "no",
+    "summary": "Code of Alabama 32-5-210(b) permits tire chains and metal-studded or safety-spike tires when required for safety because of snow, rain or other conditions that cause skidding. No chain requirement was found.",
+    "appliesTo": "none (no requirement). Permission applies to all vehicles.",
+    "studdedTires": "no season set by law. Metal studded or safety-spike tires of reasonable proportions permitted only when required for safety because of snow, rain or other skid conditions.",
+    "chainsAllowed": "permitted when required for safety because of snow, rain or other conditions tending to cause a vehicle to slide or skid. Otherwise, protuberances other than rubber beyond the tread are prohibited (farm machinery excepted).",
+    "sources": [
+      {
+        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=32-5-210&tab=code-of-alabama",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Official Alabama Legislature (ALISON) Code of Alabama viewer for Section 32-5-210 'Restrictions as to Tire Equipment'. The page is JavaScript-rendered. I read the section text from the site's own GraphQL endpoint (https://alison.legislature.state.al.us/graphql), which returns the statute for displayId 32-5-210."
+      }
+    ],
+    "notes": "How I know there is no chain law: I read the equipment statute, which only permits chains and studs. I did not find another Alabama section or ALDOT order requiring chains. Searching was limited. A web claim that studs are banned year-round under 32-5-227 contradicts the statute text and was ignored. A J.J. Keller summary says non-rubber studs are barred on Public Service Commission regulated vehicles. Not verified. No fines read."
+  },
+  {
+    "code": "AR",
+    "name": "Arkansas",
+    "hasLaw": "no",
+    "summary": "Arkansas has no chain or traction requirement that I could find. The tire statute allows chains when needed for safety and allows metal studded tires only from Nov 15 to Apr 15.",
+    "appliesTo": "none (no requirement); stud season applies to all vehicles",
+    "studdedTires": "Lawful Nov 15 of each year until Apr 15 of the following year. Studs may protrude no more than 1/16 inch. Use outside that window is unlawful (Ark. Code 27-37-402, per FindLaw text current as of 2024-03-28).",
+    "chainsAllowed": "Permitted. Ark. Code 27-37-401(c)(2): chains of reasonable proportions may be used on any vehicle when required for safety.",
+    "sources": [
+      {
+        "url": "https://codes.findlaw.com/ar/title-27-transportation/ar-code-sect-27-37-401/",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Loaded. FindLaw reproduction of Ark. Code 27-37-401 (chains permitted when required for safety; metal studded tires permitted as prescribed in 27-37-402; metal tires on the roadway barred). Page says current as of 2024-03-28."
+      },
+      {
+        "url": "https://codes.findlaw.com/ar/title-27-transportation/ar-code-sect-27-37-402/",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Loaded. FindLaw reproduction of Ark. Code 27-37-402 (Nov 15 to Apr 15, 1/16 inch stud limit, misdemeanor fine $25 to $50). Page says current as of 2024-03-28."
+      }
+    ],
+    "notes": "No official Arkansas legislature or ARDOT page for these sections could be loaded (Justia returned 403, arkleg code not freely hosted). Marked secondary even though two search sources and a trucking-industry chart agree with the FindLaw text. The fine range is from FindLaw, not an official page, so do not publish it as verified. One site (isitlegaldb.pages.dev) claims a 2026 year-round studded tire ban under 27-37-603. I did not fetch it and found no support in the statute texts; treat as unreliable but worth one check against the current official code before shipping. No-requirement conclusion rests on 27-37-401 and 402 only; I did not find a DOT rule creating chain or traction closures."
+  },
+  {
+    "code": "CT",
+    "name": "Connecticut",
+    "hasLaw": "no",
+    "summary": "Sec. 14-98 of the Connecticut General Statutes limits tires 'incorporating a metal nonskid device' to November 15 to April 30 inclusive. It does not require chains or traction devices, and no chain-control or traction-law provision was found.",
+    "appliesTo": "none (a seasonal limit applies to metal nonskid devices on all vehicles)",
+    "studdedTires": "Allowed November 15 to April 30 inclusive under 14-98 (metal nonskid devices). Authorized emergency vehicles, road-making machinery, tractors going to agricultural land and trucks, tractors, trailers or semitrailers with a Commissioner of Transportation permit are exempt.",
+    "chainsAllowed": "Permitted only in season. The statute's 'metal nonskid device' language covers studs and, by its plain terms, likely chains, but the text does not name chains, so that reading is interpretive. Violation is an infraction for a first offense, fine up to $200 for later offenses.",
+    "sources": [
+      {
+        "url": "https://www.cga.ct.gov/current/pub/chap_246.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Chapter 246 text, Sec. 14-98 Tires: wording quoted above; first offense infraction, later offense fine not more than $200. WebFetch failed with a TLS certificate error; page was read through curl with certificate checking turned off. Content is the official CGA chapter page."
+      }
+    ],
+    "notes": "'No' for a chain requirement because 14-98 only permits metal nonskid devices in a season. If the site wants to say chains are restricted by date, that is an interpretation of 'metal nonskid device'. No DOT or State Police page was read; no separate chain section was found in chapter 246 headings."
+  },
+  {
+    "code": "DC",
+    "name": "District of Columbia",
+    "hasLaw": "yes",
+    "summary": "18 DCMR 2219.1: Oct 15 to Apr 15, when snow, sleet or freezing rain is falling or a Snow Emergency Route is coated, a driver may not let the vehicle stall on that street because the driving wheels lack tire chains or effective snow tires. Chains are permitted and studded tires are allowed Oct 15 to Apr 15 under 18 DCMR 732.5.",
+    "appliesTo": "all motor vehicles on streets marked as Snow Emergency Routes, Oct 15 to Apr 15, during snow, sleet, freezing rain or snow or ice cover",
+    "studdedTires": "Permitted Oct 15 to Apr 15 (18 DCMR 732.5), tips protruding no more than 1/8 inch, stud cross-section no more than 1/4 inch.",
+    "chainsAllowed": "Permitted. 18 DCMR 732.5: tire chains of reasonable proportions on any vehicle when required for safety because of snow, ice or other conditions tending to cause a vehicle to skid.",
+    "sources": [
+      {
+        "url": "https://www.dcregs.dc.gov/Common/DCMR/RuleDetail.aspx?RuleId=R0003048",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "18 DCMR 2219 Severe weather traffic controls: snow emergency route. Rule text downloaded from the 'View text' file on this official DCRegs page; 2219.1 is the chains or snow tires stall rule."
+      },
+      {
+        "url": "https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=18-732",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "18 DCMR 732 Tire equipment. Rule text downloaded from the 'View text' file on this official DCRegs page; 732.4 bars protuberances, 732.5 allows chains and studs Oct 15 to Apr 15."
+      }
+    ],
+    "notes": "2219.1 is written as a ban on stalling for lack of chains or effective snow tires, not as an equipment mandate to enter the street, but it does set a chain/snow tire standard on Snow Emergency Routes. The DCRegs page lists the effective date as 1/1/1900 (placeholder) and the source note runs to 1987, so I did not confirm no later amendment on a separate Register notice. The parking prohibition and route designation is under 18 DCMR 2414 and 2417, not read. No fine read on an official page. To open the rule text, the DCRegs page needs its 'View text' postback; the links above lead to that page."
+  },
+  {
+    "code": "DE",
+    "name": "Delaware",
+    "hasLaw": "no",
+    "summary": "No chain or snow tire requirement. 21 Del. C. 4302 allows tire chains when needed for safety and permits studded tires Oct 15 to Apr 15. The governor's winter driving restrictions (levels 1 to 3) limit travel, they are not equipment rules.",
+    "appliesTo": "none",
+    "studdedTires": "Permitted on all motor vehicles Oct 15 to Apr 15 (21 Del. C. 4302(b)).",
+    "chainsAllowed": "Permitted. 21 Del. C. 4302(a): tire chains of reasonable proportions may be used on any vehicle when required for safety because of snow, ice or other conditions tending to cause a vehicle to slide or skid.",
+    "sources": [
+      {
+        "url": "https://delcode.delaware.gov/title21/c043/sc01/index.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Statute text seen: 21 Del. C. 4302 Projections from periphery of tires; exceptions. (a) chains permitted for safety, (b) studded tires Oct 15 to Apr 15."
+      },
+      {
+        "url": "https://deldot.gov/home/faq_snow",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "DelDOT snow FAQ loaded. I searched it for chains, snow tires and studs and found no equipment rule."
+      }
+    ],
+    "notes": "I read the tire equipment section and it only permits chains. I did not search the whole Delaware Code or Administrative Code for other chain rules, so 'no' rests on the equipment statute plus the DelDOT FAQ. Delaware's three-level driving warning, restriction and ban system comes from news search summaries and was not read on an official page. No fine found on an official page."
+  },
+  {
+    "code": "FL",
+    "name": "Florida",
+    "hasLaw": "no",
+    "summary": "Florida has no chain or traction requirement that I could find. F.S. 316.299 bars roughened wheel surfaces on paved roads but exempts pneumatic rubber tires with studs designed to improve traction.",
+    "appliesTo": "none (no requirement)",
+    "studdedTires": "No season set by law. 316.299 exempts roughened pneumatic rubber tires having studs designed to improve traction. Secondary sources conflict (one says rubber studs only, one claims a year-round ban under 316.295), not confirmed.",
+    "chainsAllowed": "Not addressed in 316.299 (the section does not mention chains). No restriction found on chains and no requirement found.",
+    "sources": [
+      {
+        "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0300-0399/0316/Sections/0316.299.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Loaded on leg.state.fl.us. F.S. 316.299 Rough surfaced wheels prohibited. Exempts studded pneumatic rubber tires; no mention of chains; violation is a noncriminal traffic infraction under chapter 318."
+      }
+    ],
+    "notes": "Only one statute was read. No-requirement conclusion is from that section plus searches that returned no Florida chain or traction law. I did not scan all of chapter 316 or FDOT rules, so hasLaw no is a high-confidence negative, not a proven one. 316.2397 (named in the task search) is a lighting section, not relevant. No fine amount recorded."
+  },
+  {
+    "code": "GA",
+    "name": "Georgia",
+    "hasLaw": "yes",
+    "summary": "O.C.G.A. 32-6-5 lets GDOT limit access to roads in inclement winter weather. While limited, vehicles need tire chains, 4WD with adequate tires, or all-weather-rated snow tires. Commercial vehicles with four or more drive wheels must chain, and buses must chain two drive wheels.",
+    "appliesTo": "all vehicles (chains, 4WD with adequate tires, or rated snow tires); commercial vehicles (non-bus, 4+ drive wheels) must chain; buses must chain 2 drive wheels. Applies only on road sections GDOT has limited and posted.",
+    "studdedTires": "no season set by law found. Secondary: O.C.G.A. 40-8-74(c)(2) permits chains or tires with 'safety metal spike studs' when required for safety because of snow, ice or similar conditions. A 1968 Attorney General opinion cited on Justia says a studded tire is a metal tire and may not be used. Conflict not resolved.",
+    "chainsAllowed": "permitted and, in GDOT-limited sections, required (see appliesTo). Tire chains are defined as metal chains with two circular loops, one on each side of the tire, joined by at least nine evenly spaced chains across the tread, or other traction devices giving equal traction.",
+    "sources": [
+      {
+        "url": "https://dps.georgia.gov/document/publication/tire-chain-requirements-georgia",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Georgia Department of Public Safety Fact Sheet #08B 'Tire Chain Requirements in Georgia (O.C.G.A. 32-6-5)'. Loaded as PDF (file dated Nov 2014). Says access limit happens during a 'Declared State of Emergency' for inclement weather. Says a driver who causes an accident or blocks traffic while not complying shall be fined up to $1,000."
+      },
+      {
+        "url": "https://dps.georgia.gov/document/publication/tire-chain-requirements-georgia-0/download",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Second DPS fact sheet version (file dated Feb 2014). Same rules, worded as GDOT may close or limit access 'due to inclement weather that results in dangerous driving conditions'. No fine stated."
+      },
+      {
+        "url": "https://codes.findlaw.com/ga/title-32-highways-bridges-and-ferries/ga-code-sect-32-6-5",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "FindLaw copy of O.C.G.A. 32-6-5, 'current as of March 28, 2024'. Supports sign posting, chains on outermost drive wheel tires for commercial vehicles, towing and emergency exemptions, up to $1,000 fine. Not an official site."
+      },
+      {
+        "url": "https://law.onecle.com/georgia/title-40/40-8-74.html",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Onecle copy of O.C.G.A. 40-8-74(c)(2): chains or tires with safety metal spike studs permitted when required for safety because of snow, ice or similar. Not an official site."
+      }
+    ],
+    "notes": "I could not load O.C.G.A. 32-6-5 on an official legislature page. The DPS fact sheets are official but about 12 years old, and the two versions differ in trigger wording (declared state of emergency vs inclement weather with dangerous conditions). FindLaw 2024 matches the broader wording. The $1,000 fine applies only to a driver who causes an accident or blocks traffic, per DPS. Studded tire status conflicts between the statute copy and a 1968 AG opinion, and sites claiming a flat ban cite 40-8-76 without text. Treat stud rules as unverified."
+  },
+  {
+    "code": "HI",
+    "name": "Hawaii",
+    "hasLaw": "no",
+    "summary": "Hawaii has no chain requirement. HRS 291-33 bans destructive wheel projections but allows ordinary detachable tire or skid chains, and allows studded snow tires on the Mauna Kea access road. UH requires 4WD above the Visitor Information Station.",
+    "appliesTo": "none statewide. Mauna Kea summit road: 4WD vehicles only above the Visitor Information Station.",
+    "studdedTires": "Banned on public roads as a wheel projection destructive to road surfaces, except studded snow tires on the Mauna Kea access road above Hale Pohaku or any other road in the Mauna Kea Science Reserve leased to UH (HRS 291-33(a)). No seasonal dates set.",
+    "chainsAllowed": "Permitted. HRS 291-33(a) exempts ordinary detachable tire or skid chains from the ban on chains and spikes that damage road surfaces.",
+    "sources": [
+      {
+        "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0291/HRS_0291-0033.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Loaded on data.capitol.hawaii.gov. HRS 291-33 Projections on face of wheels prohibited, with the chains and Mauna Kea studded snow tire exceptions."
+      },
+      {
+        "url": "https://hilo.hawaii.edu/maunakea/visitor-information/station",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Loaded on UH Hilo (official university page). Says drivers are required to use 4-wheel drive vehicles above the Visitor Information Station and should use 4WD Low Range. No mention of chains, snow or ice."
+      },
+      {
+        "url": "https://www.nps.gov/hale/planyourvisit/conditions.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Loaded on nps.gov. Haleakala summit district page; no mention of snow, ice, chains or 4WD. Says summit area is always open (sunrise needs a reservation)."
+      }
+    ],
+    "notes": "The statute only regulates what is allowed, so no-requirement is clear for statewide road law. The Mauna Kea summit road is a UH-managed road, and the UH 4WD rule is an access rule, not a chain law. Closure on snow or ice (any ice or snow, winds over 55 mph) appears only in search results from the Mauna Kea Weather Center (mkwc.ifa.hawaii.edu), whose page failed to load (connection refused), so that closure rule is secondary and may be out of date. Haleakala: nothing official found on chains or 4WD. No fine amounts recorded."
+  },
+  {
+    "code": "IA",
+    "name": "Iowa",
+    "hasLaw": "no",
+    "summary": "No chain or traction-tire requirement found. Iowa Code 321.442 bans tire protrusions but permits tire chains of reasonable proportions when needed for safety, and permits studs Nov 1 to Apr 1.",
+    "appliesTo": "none (permission only)",
+    "studdedTires": "Pneumatic tires with inserted ice grips or studs projecting no more than 1/16 inch beyond the tread, on any vehicle, from Nov 1 of each year to Apr 1 of the following year. School buses and fire department emergency apparatus may use them at any time.",
+    "chainsAllowed": "Permitted. 321.442(2): tire chains of reasonable proportions on any vehicle when required for safety because of snow, ice or other conditions tending to cause a skid.",
+    "sources": [
+      {
+        "url": "https://www.legis.iowa.gov/docs/code/2026/321.442.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Iowa Code 2026, section 321.442 'Projections on wheels', full text read from the PDF. Refers to scheduled fine in 805.8A(3); the amount was not read."
+      }
+    ],
+    "notes": "How I know there is no requirement: read the full text of 321.442. Chains are an exception to the projection ban, nothing mandates them. I did not search Iowa DOT rules. No fine amounts read."
+  },
+  {
+    "code": "IL",
+    "name": "Illinois",
+    "hasLaw": "no",
+    "summary": "No chain or traction-tire requirement found. 625 ILCS 5/12-401 bans studs and other projections on tires but says nothing in it prohibits tire chains of reasonable proportion when needed for safety.",
+    "appliesTo": "none (permission only)",
+    "studdedTires": "Generally prohibited. Exceptions in 12-401: pneumatic tires with metal studs on vehicles of rural letter carriers used for mail delivery, and on vehicles with a disability or disabled-veteran plate whose owner lives in an unincorporated area on a county or township road. Both only between Nov 15 and Apr 1 of the next year.",
+    "chainsAllowed": "Permitted. 12-401: nothing prohibits tire chains of reasonable proportion on any vehicle when required for safety because of snow, ice or other skid conditions.",
+    "sources": [
+      {
+        "url": "https://www.ilga.gov/Documents/legislation/ilcs/documents/062500050K12-401.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "625 ILCS 5/12-401 'Restriction as to tire equipment', source P.A. 99-143 eff. 7-27-15. Fetched by script; the same URL without 'www' returned an error page."
+      }
+    ],
+    "notes": "How I know there is no requirement: read 12-401 in full. It permits chains and sets no requirement. I did not search the rest of the Vehicle Code or IDOT rules. One commercial legality site says studs are banned under 12-403; I did not verify that and it conflicts in detail with 12-401. No fine amounts read."
+  },
+  {
+    "code": "IN",
+    "name": "Indiana",
+    "hasLaw": "no",
+    "summary": "No chain or traction-tire requirement found. Indiana's own FAQ says tire chains are legal when required for safety. Studded tires are allowed Oct 1 through May 1 under IC 9-19-18-3.",
+    "appliesTo": "none (permission only)",
+    "studdedTires": "Oct 1 through May 1 (state FAQ, citing IC 9-19-18-3). From a FindLaw copy of the statute (secondary): studs may project no more than 3/32 inch, and retractable studs are allowed year round if retracted May 2 to Sep 30.",
+    "chainsAllowed": "Permitted. State FAQ: 'Tire chains are legal when required for safety reasons.' FindLaw copy of IC 9-19-18-3: chains of reasonable proportions when required for safety.",
+    "sources": [
+      {
+        "url": "https://faqs.in.gov/hc/en-us/articles/115005063487-Are-tire-chains-and-studs-legal-in-Indiana",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Official in.gov FAQ: chains legal when required for safety; studs permitted Oct 1 through May 1 (IC 9-19-18-3). FAQ is old (about 3.5 years per a search snippet)."
+      },
+      {
+        "url": "https://codes.findlaw.com/in/title-9-motor-vehicles/in-code-sect-9-19-18-3/",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "FindLaw copy of IC 9-19-18-3, current as of Jan 1, 2026 per the page. Source for 3/32 inch and retractable-stud details."
+      },
+      {
+        "url": "https://iga.in.gov/ic/2026/Title_9/Article_19.pdf",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Official IGA PDF for IC 9-19. Returned a blank shell page to the fetch tool, so statute text was not read from it. Search snippet only."
+      }
+    ],
+    "notes": "Statute text itself was not read from iga.in.gov (the site did not render). The hasLaw 'no' rests on the official in.gov FAQ plus FindLaw. Vendor sites claim an Oct 1 to Apr 30 requirement for snow tires or chains, and a commercial 4-drive-wheel chain rule. I found nothing official to support either and the search tool could not confirm them. Treat as unconfirmed. Sites that say Indiana bans studs outright conflict with the FAQ. Re-check on iga.in.gov in a browser before publishing. No fine amounts read."
+  },
+  {
+    "code": "KS",
+    "name": "Kansas",
+    "hasLaw": "no",
+    "summary": "Kansas has no chain requirement. K.S.A. 8-1742(c) permits tire chains and approved studded traction equipment or studded tires when needed for safety. KDOT rules set a November 1 to April 1 season for studded traction equipment.",
+    "appliesTo": "none",
+    "studdedTires": "Statute lets the Secretary of Transportation approve studded tires and studded traction equipment and limit use by month or vehicle type. KAR 36-7-2(d) permits studded traction equipment November 1 to April 1 (regulation text read on Cornell LII, not the official Kansas site).",
+    "chainsAllowed": "Permitted. K.S.A. 8-1742(c)(2): tire chains of reasonable proportions upon any vehicle when required for safety because of snow, ice or other conditions tending to cause a vehicle to skid.",
+    "sources": [
+      {
+        "url": "https://www.kslegislature.gov/li/b2025_26/statute/008_000_0000_chapter/008_017_0000_article/008_017_0042_section/008_017_0042_k/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "K.S.A. 8-1742 full text read on the 2025-26 statute page: chains, studded traction equipment, studded tires, secretary approval and season limits by rule."
+      },
+      {
+        "url": "https://www.law.cornell.edu/regulations/kansas/K-A-R-36-7-2",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "K.A.R. 36-7-2 text via Cornell LII: studded traction equipment permitted Nov 1 to Apr 1, min 32 studs per device. Not an official Kansas site."
+      }
+    ],
+    "notes": "Basis for 'no': statute only permits. Season date is secondary because the regulation came from Cornell, not the Kansas Secretary of State or KDOT. Whether the KAR season applies to all studded tires or only studded traction devices is not clear from the text I read (the regulation article is titled Stud Tires, but its definition covers traction devices). A web guide claiming a statewide stud ban under K.S.A. 8-1706 conflicts with 8-1742 and was not relied on. No KDOT page on chains was found. No fine read."
+  },
+  {
+    "code": "KY",
+    "name": "Kentucky",
+    "hasLaw": "no",
+    "summary": "No chain, traction-device or snow-tire requirement found. KRS 189.190 regulates how chains may be used, and no section of KRS chapter 189 mentions studded tires.",
+    "appliesTo": "none (no requirement). KRS 189.190 limits chain use for all vehicles.",
+    "studdedTires": "none set by law found. No KRS chapter 189 section mentions studs, snow tires or traction devices.",
+    "chainsAllowed": "restricted by wording. KRS 189.190(1): no person shall use on a highway not covered with ice a vehicle with a chained wheel, unless the wheel rests upon an ice shoe at least 6 inches wide. KRS 189.190(2): on rubber-tired vehicles, cross chains no more than 3/4 inch thick and spaced no more than 10 inches apart around the tire.",
+    "sources": [
+      {
+        "url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=6319",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "KRS 189.190 'Chains and lugs on wheels -- Thickness of solid rubber tires'. Official legislature URL returns a one-page PDF. Text read (subsections 1 and 2 quoted in chainsAllowed)."
+      },
+      {
+        "url": "https://apps.legislature.ky.gov/law/statutes/chapter.aspx?id=38038",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "KRS chapter 189 index (211 sections). Section titles checked. I also downloaded the text of all 211 sections and searched for studded, snow tire, tire chain and traction. Only 189.190 matched (the word 'traction' in the farm-tractor paragraph)."
+      }
+    ],
+    "notes": "hasLaw is 'no' for any chain requirement. The only chain rule is a use restriction in 189.190, with old wording about an 'ice shoe' that does not read like modern passenger chains. I did not check KYTC or State Police pages for chain rules. No penalty read on the page. KAR (601 KAR) regulations were not searched beyond a web search that found nothing. Kentucky secondary sites disagree on studded tires (one old AAA table said Nov 1 to Apr 1). Not confirmed in statute, so not reported."
+  },
+  {
+    "code": "LA",
+    "name": "Louisiana",
+    "hasLaw": "no",
+    "summary": "Louisiana has no chain or traction requirement in the tire equipment statute. R.S. 32:362 allows tire chains when needed for safety and bars other non-rubber tire protrusions.",
+    "appliesTo": "none (no requirement)",
+    "studdedTires": "Not addressed by name in R.S. 32:362. The statute bars non-rubber protrusions beyond the tread except farm machinery and chains, which in practice means metal studs are not permitted. No stud season set by law. Secondary sources conflict (one says rubber studs only, one says banned).",
+    "chainsAllowed": "Permitted. R.S. 32:362(B)(2): chains of reasonable proportions may be used when required for safety because of conditions tending to cause a vehicle to slide or skid.",
+    "sources": [
+      {
+        "url": "https://legis.la.gov/Legis/Law.aspx?d=88297",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Loaded on legis.la.gov. La. R.S. 32:362 Restrictions as to tire equipment. Subsection B protrusion rule and chain exception; text does not mention studs or snow."
+      }
+    ],
+    "notes": "Read the official statute. It has no chain requirement, which supports hasLaw no for this section only. I did not search the rest of Title 32 or DOTD rules, but a search turned up nothing else. The stud conclusion is my reading of the protrusion bar, not stated text. Fines from 32:362(E) escalate by offense, amounts not recorded."
+  },
+  {
+    "code": "MA",
+    "name": "Massachusetts",
+    "hasLaw": "no",
+    "summary": "G.L. c. 90 section 16 bars metal studded tires on public ways from May 1 to November 1, and the Registry inspection rule rejects studded tires in that window unless approved. No chain requirement or chain restriction was found.",
+    "appliesTo": "none",
+    "studdedTires": "Prohibited May 1 to November 1 (so allowed November 2 to April 30 on the plain reading, though MassDOT material says November 1). The registrar may authorize earlier use if weather requires. Emergency fire vehicle drivers are exempt. Fine up to $50 (c. 90 s. 16).",
+    "chainsAllowed": "Not addressed in c. 90 s. 16 or 540 CMR 4. No statute or regulation on tire chains was found. MassDOT/Mass.gov guidance lists chains as winter supplies per search snippets.",
+    "sources": [
+      {
+        "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section16",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "G.L. c. 90 s. 16: no person except an authorized emergency fire vehicle driver shall operate a motor vehicle with metal studded tires upon a public way between May the first and November the first; registrar may authorize use before Nov 1 if weather requires; fine not more than $50."
+      },
+      {
+        "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Chapter 90 section list: no section on tire chains or traction devices; only tires-related sections are retread tires (7M) and repair of tires on trucks (9C)."
+      },
+      {
+        "url": "https://www.mass.gov/files/documents/2017/09/27/540cmr4.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "540 CMR 4.04(11): inspection rejection for 'Studded tires between May 1st and November 1st unless approved by the Registrar.' Searched for chain/snow: no traction chain rule."
+      },
+      {
+        "url": "https://www.mass.gov/doc/frequently-asked-questions-about-highway-snow-and-ice-operations/download",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "MassDOT FAQ returned 403 to WebFetch; claim that studded snow tires are legal from Nov 1 to end of April comes from a search snippet only."
+      }
+    ],
+    "notes": "The statute does not say whether the endpoint days are in or out, so Nov 1 is the safe start date to quote. 'No' for chains rests on the c. 90 section list and the studded tire section; I did not read every section of c. 90 or c. 85 and 89. Do not publish the MassDOT FAQ claim without a re-check."
+  },
+  {
+    "code": "MD",
+    "name": "Maryland",
+    "hasLaw": "yes",
+    "summary": "When Maryland State Police and MDOT SHA declare a snow emergency, vehicles on designated snow emergency routes must have chains, snow tires, or (in the 2016 statewide plan) all-season radials. That is an event-triggered rule for all vehicles. Outside an emergency, chains are only permitted by statute.",
+    "appliesTo": "all vehicles on designated snow emergency routes while a snow emergency is declared; commercial hauling permits are not valid during one",
+    "studdedTires": "Restricted. Transportation Article 22-405.2: studs are prohibited except Nov 1 through Mar 31 for vehicles registered in Allegany, Carroll, Frederick, Garrett and Washington counties. Vehicles registered outside Maryland may use them. Sale is limited to those five counties.",
+    "chainsAllowed": "Permitted. Transportation Article 22-405.2(b)(2): tire chains of reasonable proportions on any vehicle when required for safety because of snow, ice or other conditions tending to cause a vehicle to skid.",
+    "sources": [
+      {
+        "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=22-405.2&enactments=false",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Statute text seen: Md. Code, Transportation 22-405.2 (chains, stud rules, five-county Nov 1 to Mar 31 exemption)."
+      },
+      {
+        "url": "https://news.maryland.gov/msp/2025/02/19/snow-emergency-plan-somerset-county/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Maryland State Police release, Feb 19 2025, Somerset County: all vehicles on the roadway must be equipped with snow chains or snow tires on both driving wheels while the Snow Emergency Plan is in effect; parking ban on snow emergency routes."
+      },
+      {
+        "url": "https://roads.maryland.gov/mdotsha/pages/pressreleasedetails.aspx?newsId=2447&PageId=818",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "MDOT SHA release, Jan 21 2016, statewide snow emergency: travel on designated snow emergency routes restricted unless the vehicle has chains, snow tires or all season radials; hauling permits not valid; MSP may tow vehicles."
+      },
+      {
+        "url": "https://mva.maryland.gov/Documents/DL-002.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "MVA Driver's Manual: use chains, snow tires, or radial tires on designated snow emergency routes when a snow emergency is declared."
+      }
+    ],
+    "notes": "I did not find the statute or regulation that gives the snow emergency plan force, so I cannot say what the penalty is. The route lists and declaration are county by county and issued by MSP with SHA. The statewide wording comes from a 2016 release, the county wording from a 2025 release, and they differ slightly (radials). CHART snow emergency page URL returned 404. COMAR 11.13.02.10 was only seen in search results; the statute I read is the controlling stud rule here. No fine found on an official page."
+  },
+  {
+    "code": "ME",
+    "name": "Maine",
+    "hasLaw": "no",
+    "summary": "Maine sets a studded tire season by statute (29-A MRS 1919) and has no passenger or commercial chain requirement in the equipment chapter read. The only chain provision in chapter 17 is a rule that skidder chains be removed before operating on a paved way.",
+    "appliesTo": "none",
+    "studdedTires": "Studs, wires, spikes or other metal protruding from the tread are prohibited from May 1 to October 1, so studs are legal October 2 to April 30. Tires with retractable protuberances may be used any time but not extended or engaged May 1 to October 1. The Commissioner of Transportation may extend the use period or issue a permit ($3 to $15 fee). Fire department vehicles and school buses are exempt.",
+    "chainsAllowed": "No restriction found on passenger or commercial traction chains in 29-A chapter 17. Section 1924 requires chains on a skidder to be removed before operation on a paved way.",
+    "sources": [
+      {
+        "url": "https://legislature.maine.gov/statutes/29-A/title29-Asec1919.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "29-A MRS 1919, Studded tires: May 1 to October 1 prohibition, retractable protuberances, commissioner extension and permit, exemptions. No penalty on this page."
+      },
+      {
+        "url": "https://legislature.maine.gov/statutes/29-a/title29-Ach17.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Chapter 17 Equipment (generated 10.20.2025), read as text and searched for 'chain': only section 1924, Chains on skidders."
+      }
+    ],
+    "notes": "No snow tire mandate was found; a 2019 bill (LD 213) proposed one, and I saw no evidence it passed. Penalties for 1919 are not on the page; do not quote a fine. The Maine inspection rules also mention studded tires (170.01(10)(K)); not opened. 'No' is based on chapter 17 only, not every title of the Maine statutes."
+  },
+  {
+    "code": "MI",
+    "name": "Michigan",
+    "hasLaw": "no",
+    "summary": "No chain or traction-device requirement found. MCL 257.710 allows tire chains of reasonable proportion on any vehicle when needed for safety because of snow, ice, or other skid conditions. Studs and other traction devices are allowed only under MDOT rules.",
+    "appliesTo": "none (permission only)",
+    "studdedTires": "Rule R 247.175: traction devices may be used Nov 15 to Apr 1 of the next year. In the Upper Peninsula and northern Lower Peninsula (counties at or north of Missaukee's southern boundary) Oct 1 to May 1. R 247.174 also requires studs to wear pavement at no more than 25% of a reference studded tire. Studs on law enforcement vehicles, ambulances and USPS rural carrier vehicles are allowed under MCL 257.710(e).",
+    "chainsAllowed": "Permitted. MCL 257.710(b): a person may use a tire chain of reasonable proportion on a vehicle when required for safety because of snow, ice, or other condition tending to cause a skid. Local ordinances may be stricter (R 247.172(2)).",
+    "sources": [
+      {
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-257-710",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "MCL 257.710 'Tires; studs or other traction devices; rules; exceptions; use or sale of unsafe tires prohibited.' Subsection (b) chains, (c) embedded wire, (d) MDOT rules for studs/traction devices with separate provisions for UP and northern LP, (e) exempt vehicles. Page shows no penalty and no season dates."
+      },
+      {
+        "url": "https://dtmb.state.mi.us/ORRDocs/AdminCode/100_10095_AdminCode.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Michigan Administrative Code R 247.171 to R 247.175 'Traction Devices' (state-hosted PDF, history 1979 AC). R 247.175 season dates, R 247.174 25% wear limit, R 247.172 local ordinances may be more restrictive."
+      },
+      {
+        "url": "https://www.monroecountylawyers.com/blog/2019/12/can-you-put-chains-on-your-tires-in-michigan/",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Law firm blog from search snippet only, not fetched. Source of the claim that no studded tire maker has shown MDOT it meets the wear spec. Do not publish that claim without a check."
+      }
+    ],
+    "notes": "How I know there is no requirement: read the whole of MCL 257.710 as summarized from legislature.mi.gov and the five traction-device rules. Nothing requires chains or snow tires. The rules date from 1979 and I did not confirm they are unchanged (a 2019 bill, HB 5210, proposed repealing them; no sign it passed). Search results include low-quality sites claiming chains are illegal or studs banned. The official text contradicts the chains claim. No fine amounts read from an official page."
+  },
+  {
+    "code": "MN",
+    "name": "Minnesota",
+    "hasLaw": "no",
+    "summary": "No chain or traction-tire requirement found. Minn. Stat. 169.72 bans tire protrusions but allows tire chains of reasonable proportions when needed for safety on snow, ice or similar conditions.",
+    "appliesTo": "none (permission only)",
+    "studdedTires": "No general studded tire season in the statute. Studs are not generally allowed for Minnesota residents. Subd. 4: vehicles registered in a state or province that allows studs may use them in Minnesota only occasionally (no more than 30 days in any consecutive six months; stud diameter up to 5/16 inch; studs no more than 2% of net contact area; not for people who work or go to school in Minnesota). Subd. 5: rural postal carriers may get a permit valid Nov 1 to Apr 15, studs off by 12:01 a.m. Apr 16.",
+    "chainsAllowed": "Permitted. Subd. 1: tire chains of reasonable proportions, used only when necessary for safety on snow, ice or other slippery conditions.",
+    "sources": [
+      {
+        "url": "https://www.revisor.mn.gov/statutes/?id=169.72",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Minn. Stat. 169.72 'Tire surface; metal studs', subd. 1 (chains), subd. 4 (nonresident studs), subd. 5 (rural carriers). Page lists a misdemeanor only for violating a postal carrier permit."
+      }
+    ],
+    "notes": "How I know there is no requirement: read 169.72, the equipment section that governs chains and studs. It requires neither. I did not search Chapter 169 or MnDOT rules beyond this section, and a search of MnDOT chain/traction law found nothing. A trucking-insurance site also says Minnesota has no chain law (secondary, not used). No fine amounts for chains read. 'No travel advised' on 511mn.org is an advisory, not a chain rule (general knowledge, not verified)."
+  },
+  {
+    "code": "MO",
+    "name": "Missouri",
+    "hasLaw": "unclear",
+    "summary": "Missouri bans metal or carbide studded tires from April 1 to November 1. I found no Missouri statute that requires or restricts tire chains, and none that expressly permits them. Likely no chain law, but no official page says so.",
+    "appliesTo": "none found",
+    "studdedTires": "Metal or carbide studs banned April 1 through November 1, so allowed November 2 to March 31 in effect. Violation is an infraction. (RSMo 307.171)",
+    "chainsAllowed": "Not addressed in the statutes read. The Highway Patrol lists tire chains as winter trunk gear and its stud page does not mention chains.",
+    "sources": [
+      {
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=307.171",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "RSMo 307.171 text read: stud ban Apr 1 to Nov 1, infraction. No chain language."
+      },
+      {
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=307.170",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "RSMo 307.170 (other equipment of motor vehicles) read: only mentions safety chains on towed vehicles, nothing on tire chains."
+      },
+      {
+        "url": "http://www.mshp.dps.mo.gov/MSHPWeb/Root/Nov.FeaturedStatuteStuddedSnowTires.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Missouri State Highway Patrol featured statute page: cites 307.171, no chain mention."
+      }
+    ],
+    "notes": "Marked unclear, not no, because no official page states there is no chain law and I did not read all of chapters 304 and 307 (the revisor chapter pages returned only the index). A radio-station article claimed Missouri chain rules are 'more specific' and cited 307.171. The 307.171 text has no chain language, so that claim is not supported. No fine amount beyond 'infraction'."
+  },
+  {
+    "code": "MS",
+    "name": "Mississippi",
+    "hasLaw": "no",
+    "summary": "Miss. Code 63-7-67 permits tire chains when required for safety because of snow, ice or other skid conditions. It bars studs and other non-rubber protuberances beyond the tread, with a farm machinery exception. No chain requirement was found.",
+    "appliesTo": "none (no requirement). Permission applies to all vehicles.",
+    "studdedTires": "not permitted for ordinary vehicles per the statute text read. Bills to allow studs on emergency and law enforcement vehicles (SB 2353 in 2006, SB 2012 in 2007) died in committee. No season set by law.",
+    "chainsAllowed": "permitted. 'Tire chains of reasonable proportions' may be used on any vehicle when required for safety because of snow, ice or other conditions tending to cause a vehicle to skid.",
+    "sources": [
+      {
+        "url": "https://billstatus.ls.state.ms.us/documents/2006/html/SB/2300-2399/SB2353IN.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Mississippi Legislature page, SB 2353 (2006) as introduced, which reprints Section 63-7-67 while amending it. The existing wording (metal tire ban, no studs or protuberances beyond the tread, tire chains permitted for safety) was read. The bill's one new sentence (studs on emergency and law enforcement vehicles) is the addition. This is 2006 text, not a current code page."
+      },
+      {
+        "url": "https://billstatus.ls.state.ms.us/2007/PDF/history/SB/SB2012.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Mississippi Legislature history for SB 2012 (2007), same proposed change. Disposition: Dead, 'Died In Committee' 01/30. Shows the stud ban was not changed by that bill."
+      }
+    ],
+    "notes": "I could not load the current codified 63-7-67 on an official site (Justia returned 403). The statute text above is from 2006 bill text, and my search found no later amendment. Earlier 2005 and 2006 bills also reportedly died, but I only read the 2006 and 2007 pages. A 2015 Vermont legislative compilation says studded tires are not permitted in Mississippi, which matches. How I know there is no chain law: the equipment statute only permits chains. I did not find MDOT or Highway Patrol chain rules. Searching was limited. No fines read."
+  },
+  {
+    "code": "NC",
+    "name": "North Carolina",
+    "hasLaw": "no",
+    "summary": "G.S. 20-122(b) allows tire chains when required for safety and allows studded snow tires with studs projecting no more than 1/16 inch. No chain requirement or chain-control rule was found for I-40 or the mountains.",
+    "appliesTo": "none (no requirement). Permission applies to all vehicles.",
+    "studdedTires": "no season set by law. Studded regular and snow tires allowed 'for increased safety' if studs project no more than 1/16 inch when compressed (G.S. 20-122(b)).",
+    "chainsAllowed": "permitted when required for safety because of snow, ice or other conditions tending to cause a vehicle to slide or skid. Chains must be of reasonable proportions.",
+    "sources": [
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-122.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "G.S. 20-122 'Restrictions as to tire equipment', subsection (b). Official General Assembly page read. Supports chains permitted, studs up to 1/16 inch, no season."
+      }
+    ],
+    "notes": "How I know there is no chain law: the equipment statute only permits chains and studs. A web search limited to ncdot.gov and ncleg.gov found no NCDOT chain order or I-40 Pigeon River Gorge chain rule. That is absence of results, not a read of every NCDOT page. Two low-quality websites claimed studded tires are illegal in NC. They contradict the statute text, so they are ignored. No fines read."
+  },
+  {
+    "code": "ND",
+    "name": "North Dakota",
+    "hasLaw": "no",
+    "summary": "North Dakota has no chain or traction requirement. The equipment statute permits tire chains of reasonable proportions, and the Highway Patrol FAQ says there is no mandatory chain law.",
+    "appliesTo": "none",
+    "studdedTires": "October 15 to April 15 for pneumatic tires with metal studs projecting no more than 1/16 inch beyond the tread. School buses may use them any time of year. (NDCC 39-21-40(3))",
+    "chainsAllowed": "Permitted. NDCC 39-21-40(3) says it is permissible to use tire chains of reasonable proportions. No condition (such as snow or ice) is attached in the text.",
+    "sources": [
+      {
+        "url": "https://ndlegis.gov/cencode/t39c21.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "NDCC Chapter 39-21, section 39-21-40(3) text read from the PDF: chains of reasonable proportions permitted; studs Oct 15 to Apr 15, max 1/16 inch, schoolbuses any time."
+      },
+      {
+        "url": "https://www.statepatrol.nd.gov/NDHPFAQ",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "ND Highway Patrol FAQ: studded tires allowed Oct 15 to Apr 15; states 'There is no mandatory chain law in North Dakota.'"
+      }
+    ],
+    "notes": "Basis for 'no': official Highway Patrol statement plus the equipment statute, which only permits chains. I did not read the whole motor vehicle code or any NDDOT closure policy. No fine read from an official page (a search summary mentioned a $20 fine for studs outside the season, from an NDHP offense list that I did not open, so not recorded). The NDHP page nd.gov/ndhp/node/120 that search listed returned 404, so it is not cited."
+  },
+  {
+    "code": "NE",
+    "name": "Nebraska",
+    "hasLaw": "no",
+    "summary": "Nebraska has no chain requirement. Neb. Rev. Stat. 60-6,250 permits tire chains of reasonable proportions when needed for safety because of snow, ice, or similar conditions.",
+    "appliesTo": "none",
+    "studdedTires": "Metal or metal-type studs (max 5/16 inch diameter, average protrusion 7/64 inch or less) allowed November 1 to April 1. School buses, mail carrier vehicles and emergency vehicles may use studs any time of year. (60-6,250(2)(a))",
+    "chainsAllowed": "Permitted. 60-6,250(2)(c): tire chains of reasonable proportions on any vehicle when required for safety because of snow, ice, or other condition tending to cause a vehicle to slide or skid.",
+    "sources": [
+      {
+        "url": "https://nebraskalegislature.gov/laws/statutes.php?statute=60-6,250",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Full text of 60-6,250 read: stud dates, stud size, chains permitted."
+      },
+      {
+        "url": "https://dot.nebraska.gov/safety/driving/winter/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "NDOT winter driving page: chains permitted per 60-6,250; studded snow tires Nov 1 to Apr 1; no required equipment listed, only a recommended survival kit."
+      }
+    ],
+    "notes": "Basis for 'no': statute only permits chains and NDOT lists no required equipment. I did not read the rest of chapter 60. No fine read. A search result claiming studs are banned year-round in Nebraska is wrong per the statute text."
+  },
+  {
+    "code": "NH",
+    "name": "New Hampshire",
+    "hasLaw": "no",
+    "summary": "No chain, traction-device, snow-tire or studded-tire provision appears in the NH motor vehicle statutes read (RSA chapters 262, 263, 265 and 266). RSA 266:48 only requires tires in safe operating condition with visual and tread-depth rules.",
+    "appliesTo": "none",
+    "studdedTires": "Not found in statute. No season is set in the RSA chapters read. Commercial tire-industry summaries conflict (some say year-round, one attributes Nov 1 to Apr 30 to NHDOT) and none cite a statute.",
+    "chainsAllowed": "No statute found that restricts or requires traction chains. Only safety chains for trailers and wreckers (RSA 266:63, 266:108) and load-binding chains appear.",
+    "sources": [
+      {
+        "url": "https://gc.nh.gov/rsa/html/XXI/266/266-mrg.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Full text of RSA ch. 266, Equipment of Vehicles, searched for stud, spike, cleat, snow, chain, tire. 266:48 tire requirements; chain hits are trailer safety chains (266:63), wrecker chains (266:108) and load binding only."
+      },
+      {
+        "url": "https://gc.nh.gov/rsa/html/XXI/265/265-mrg.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "RSA ch. 265, Rules of the Road, searched: no studded tire, snow tire or chain provisions."
+      },
+      {
+        "url": "https://gc.nh.gov/rsa/html/XXI/263/263-mrg.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "RSA ch. 263, searched: no tire or chain provisions on traction."
+      },
+      {
+        "url": "https://gc.nh.gov/rsa/html/XXI/262/262-mrg.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "RSA ch. 262, searched: nothing relevant."
+      },
+      {
+        "url": "https://gc.nh.gov/rsa/html/xxi/259/259-mrg.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "RSA 259:54 defines 'metal tire' (road-contact surface wholly or partly metal or other hard nonresilient material). Does not mention studs or chains."
+      },
+      {
+        "url": "https://gc.nh.gov/rules/state_agencies/saf-c3200.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Saf-C 3200 inspection rules searched for snow, stud, traction, protrusion: only wheel studs and lugs, no tire stud or chain rules."
+      },
+      {
+        "url": "https://www.moderntiredealer.com/retail/article/55340250/studded-tires-a-state-by-state-guide",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Search result only, not opened: trade guide that attributes a Nov 1 to Apr 30 stud window to NHDOT. No statute found to support it."
+      }
+    ],
+    "notes": "'No' rests on reading the full text of RSA chapters 262, 263, 265, 266 and 259 (plus Saf-C 3200) from gc.nh.gov and finding nothing. That is evidence of absence, not a statement from NHDOT or State Police, and I did not search every RSA title (for example towns' local ordinances or Title XX/other chapters). I did not find a current NHDOT or State Police page. If this state matters to a page, ask NHDOT or check with a call. Fetched with curl for the chapter pages; WebFetch hit a redirect to gc.nh.gov from gencourt.state.nh.us."
+  },
+  {
+    "code": "NJ",
+    "name": "New Jersey",
+    "hasLaw": "unclear",
+    "summary": "No state chain or traction requirement found. Secondary copies of N.J.S.A. 39:3-73 say chains are allowed when roads are slippery and may not be used otherwise or in a way that can throw them. Studded tires are allowed Nov 15 to Apr 1 per N.J.A.C. 13:20-33.19(e), read on a Cornell LII mirror only.",
+    "appliesTo": "none found",
+    "studdedTires": "Nov 15 to Apr 1 of any winter season (N.J.A.C. 13:20-33.19(e), Cornell LII copy). One unreliable site claims a statewide ban under N.J.S.A. 39:3-76.1; not verified and conflicts with the regulation.",
+    "chainsAllowed": "Permitted per secondary copies of N.J.S.A. 39:3-73: chains of reasonable proportions when roads are slippery; no chains at any time on improved highways when conditions do not make them necessary for safety of life or property; chains likely to be thrown so as to endanger people or property are barred.",
+    "sources": [
+      {
+        "url": "https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-13-20-33-19",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Text seen of N.J.A.C. 13:20-33.19(e) on studded tires Nov 15 to Apr 1. Cornell LII mirror, not an official NJ page. The rule sits in the private inspection facility subchapter and notes inspection will not be refused for stud misuse."
+      }
+    ],
+    "notes": "The Justia page for 39:3-73 returned 403 to me, so that wording comes from search result summaries of Justia, FindLaw and Counsel Stack copies. Official NJ Legislature statute text could not be loaded (pub.njleg.gov paths 404; the lis.njleg.state.nj.us statute database is a dynamic gateway I could not deep-link). Justia, FindLaw, LegalFix and Counsel Stack either 403 or 429 to scripts. The exact current wording of 39:3-73 is therefore unconfirmed; versions differ in whether the 'slippery roads' permission and the 'necessary for safety' limit are both present. Fines for improper chain use vary by source ($47, $54, $55) and are not from an official page. I found no NJDOT, MVC or NJ Turnpike chain or traction rule. Search found one municipal snow-route ordinance requiring snow tires or chains, local only and not read. hasLaw is unclear, not no, because no official page was read."
+  },
+  {
+    "code": "NY",
+    "name": "New York",
+    "hasLaw": "yes",
+    "summary": "VTL 145-c lets the state or a municipality designate snow emergency routes where no vehicle may operate without snow tires and/or tire chains once a snow emergency is declared. There is no statewide chain-control or traction-law closure in the statutes read. Studded tires are limited by season under VTL 375(35-a).",
+    "appliesTo": "all vehicles, but only on posted snow emergency routes while a snow emergency is declared",
+    "studdedTires": "Studs allowed only if within size limits (stud diameter up to 3/8 in, protrusion up to 3/32 in, contact area up to 0.75 percent). Vehicles with studded tires may not operate on public highways from May 1 to October 15 inclusive, so studs are legal October 16 to April 30. School buses and state or municipally owned vehicles are excepted (VTL 375(35-a)).",
+    "chainsAllowed": "Permitted. VTL 145-c names tire chains as an alternative to snow tires on snow emergency routes. No statute read restricts chain use; VTL 375 (first 100,000 characters) has no chain provision other than trailer safety chains in 29-a.",
+    "sources": [
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/VAT/375",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Subdivision 35-a: metal objects in tread prohibited, studded tire exception, no operation May 1 to Oct 15 inclusive. Page text is 118,755 chars; only the first 100,000 were read, the rest (subdivisions 47 to 57) was scanned for chain/snow tire/traction with no hits."
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/VAT/145-C",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Section 145-c, snow emergency route: no vehicle shall operate without snow tires and/or tire chains when a snow emergency has been declared. Routes must be posted under Article 44. No penalty in this section."
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/VAT/145-D",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Section 145-d, definition of snow tire: includes radial tires; radial-tire drivers cannot be prosecuted under local snow-tire laws during a declared snow emergency. Does not mention chains."
+      },
+      {
+        "url": "https://dmv.ny.gov/news/dmv-gtsc-and-other-state-agencies-offer-drivers-tips-to-prepare-for-winter-driving",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "NY DMV news page: 'State law allows the use of snow tires from October 16 through April 30.' Consistent with the 375(35-a) stud window. Page says nothing about chains."
+      }
+    ],
+    "notes": "This is not a statewide chain law. The 145-c requirement depends on a snow emergency declaration and a posted route set by the state or a locality. No fines on the pages read. Not checked: NYSDOT or Thruway Authority rules, NY commercial vehicle rules, or local snow emergency ordinances. nysenate.gov blocks curl (5 KB stub), so all NY text came through WebFetch, whose summarizer paraphrased some passages. Subdivision 35-a was re-fetched twice with consistent wording. Low-quality sites claim a '2026 law change' or an October 1 start; ignored."
+  },
+  {
+    "code": "OH",
+    "name": "Ohio",
+    "hasLaw": "no",
+    "summary": "No chain or traction-tire requirement found. ORC 5589.081 sets a studded tire season and says the section does not apply to tire chains used when there is snow or ice on the road or nearby.",
+    "appliesTo": "none (permission only)",
+    "studdedTires": "Studded tires allowed Nov 1 through Apr 15 of the next year. Outside that window they are banned except on public safety vehicles and school buses. Vehicles with retractable studs may run year round if studs stay retracted outside the season.",
+    "chainsAllowed": "Permitted with a condition. ORC 5589.081(C): the studded tire section does not apply to tire chains when there is snow or ice on the streets or highways where the chains are used, or in the immediate vicinity.",
+    "sources": [
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-5589.081",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "ORC 5589.081 'Studded tires - prohibited acts', effective Aug 22, 2008. (B)(1) season, (B)(2) retractable studs, (C) tire chains. Page shows no penalty."
+      }
+    ],
+    "notes": "How I know there is no requirement: read 5589.081. It permits chains and sets no requirement. A search snippet from a municipal code says violations are a minor misdemeanor under ORC 5589.99(B); not read on an official page. One secondary source claims chains cannot be used in Ohio. The official text contradicts that. I did not search for county snow emergency rules, which sheriffs set locally and which are not chain rules. No fine amounts read from an official page."
+  },
+  {
+    "code": "OK",
+    "name": "Oklahoma",
+    "hasLaw": "no",
+    "summary": "Oklahoma has no chain requirement. 47 O.S. 12-405 permits tire chains when required for safety because of snow, ice, or similar conditions, but only on vehicles rated up to 2 tons.",
+    "appliesTo": "none (permission is limited to vehicles with rated capacity up to and including two tons)",
+    "studdedTires": "Studded tires (studs max 3/32 inch beyond tread, studs no more than 3% of the traction surface) may be used on public highways only from November 1 to April 1, on vehicles rated up to 2 tons. On-demand studded tires may not be deployed outside that window. (47 O.S. 12-405(C)(2), (D))",
+    "chainsAllowed": "Permitted under 12-405(C)(1)(b) when required for safety because of snow, ice or other conditions tending to cause a vehicle to skid. Subsection (C)(2)(a) limits use of the chain and stud exceptions to vehicles rated up to and including two tons, and (C)(2)(b) ties the Nov 1 to Apr 1 window to tires 'so equipped'. The text is ambiguous on whether the window also covers chains.",
+    "sources": [
+      {
+        "url": "https://www.oklegislature.gov/cf_pdf/2021-22%20ENR/hB/HB2053%20ENR.PDF",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Enrolled HB 2053 (2021), effective Nov 1 2021, reprints the full amended text of 47 O.S. 12-405. Official legislature page, but it is the amending act, not the current codified code."
+      },
+      {
+        "url": "https://law.justia.com/codes/oklahoma/title-47/section-47-12-405/",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Justia mirror of 12-405 returned 403 to my fetch; listed only because search snippets pointed to it. Not read."
+      }
+    ],
+    "notes": "Basis for 'no': the statute only permits chains. Verified text is the 2021 enrolled act. I could not load the current codified section on oscn.net, so later amendments are unchecked. A site claiming a statewide stud ban under 12-402 contradicts the statute and was not relied on. No ODOT or DPS chain page found. No fine read."
+  },
+  {
+    "code": "PA",
+    "name": "Pennsylvania",
+    "hasLaw": "yes",
+    "summary": "No chain requirement for passenger cars. In winter storms PennDOT and the PA Turnpike run a tiered vehicle restriction plan that bans some commercial vehicles unless they carry chains or approved alternate traction devices (ATDs). 75 Pa.C.S. 4525 allows tire chains during snow and ice emergencies and sets the stud season.",
+    "appliesTo": "commercial only (tractor-trailers, buses, motor coaches) when a storm tier is in effect; passenger cars not required to carry chains",
+    "studdedTires": "Permitted Nov 1 to Apr 15 (75 Pa.C.S. 4525(c)); projections not over 2/32 inch. The Governor may extend the dates by executive order. Use outside the season is a summary offense.",
+    "chainsAllowed": "Permitted. 75 Pa.C.S. 4525(d): tire chains may be temporarily used during periods of snow and ice emergency if they conform to department regulations. Under the storm tiers, chains or ATDs must be on board for some commercial vehicles; at Tier 2 they must be readily available, not installed.",
+    "sources": [
+      {
+        "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/75/00.045.025.000..HTM",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Statute text seen: 75 Pa.C.S. 4525 (c) studs Nov 1 to Apr 15, (d) chains in snow and ice emergency, (e) penalties."
+      },
+      {
+        "url": "https://www.pa.gov/agencies/penndot/traveling-in-pa/winter/winter-event-vehicle-restrictions",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "PennDOT Winter Event Vehicle Restrictions page. Tier 1 to Tier 4 lists. Tier 2 bans tractors towing loaded tandem trailers unless chains or an ATD are on board. Tier 3 bans all commercial vehicles except loaded single trailers with chains or ATDs. School buses, commercial buses and motor coaches without chains or ATDs are barred at lower tiers."
+      }
+    ],
+    "notes": "The tier plan is a multi-agency operating plan (PennDOT, PEMA, PSP, PA Turnpike), not a statute I could find. I did not find the legal authority behind it, so enforcement and penalty are unknown. Fines in 4525(e) apply to stud use outside Nov 1 to Apr 15 only: $35 to $55 by month of unauthorized use, $10 for other stud violations between Nov 1 and Apr 15. Tiers are set storm by storm, so there is no fixed season or fixed road list. No snow tire mandate found."
+  },
+  {
+    "code": "RI",
+    "name": "Rhode Island",
+    "hasLaw": "no",
+    "summary": "RIGL 31-23-20 allows flat-headed studs from November 15 to April 1 and allows chains of reasonable proportions when needed for safety in snow, ice or skid conditions. There is no chain requirement or chain-control closure in the section read.",
+    "appliesTo": "none",
+    "studdedTires": "Flat-headed studs projecting no more than 1/16 inch beyond the tread are allowed November 15 through April 1. Other tread projections of non-rubber material are barred outside the listed exceptions (farm machinery excepted).",
+    "chainsAllowed": "Permitted. Chains of reasonable proportions may be used when necessary for safety because of snow, ice, or other conditions that tend to cause a vehicle to slide or skid.",
+    "sources": [
+      {
+        "url": "https://webserver.rilegislature.gov/Statutes/TITLE31/31-23/31-23-20.htm",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "RIGL 31-23-20, Protuberances on tires: Nov 15 to Apr 1 studs up to 1/16 in; chains allowed when needed for safety; violations carry fines in 31-41.1-4."
+      }
+    ],
+    "notes": "The fine amount sits in 31-41.1-4, which was not read, so no fine is given. Another website claimed a Nov 15 to April 15 window under 31-23-44; the official 31-23-20 text read says April 1, so I used April 1. Only one section was read; 'no' rests on that section plus no other chain provision turning up in title 31 searches."
+  },
+  {
+    "code": "SC",
+    "name": "South Carolina",
+    "hasLaw": "no",
+    "summary": "S.C. Code 56-5-5040 allows tire chains when required for safety and allows studded snow tires with studs up to 1/16 inch. No chain requirement or chain control exists in the vehicle code I searched.",
+    "appliesTo": "none (no requirement). Permission applies to all vehicles.",
+    "studdedTires": "no season set by law. Regular and snow tires with studs allowed 'for increased safety' if studs project no more than 1/16 inch when compressed.",
+    "chainsAllowed": "permitted. 'Tire chains of reasonable proportions' may be used upon any vehicle when required for safety because of snow, ice or other conditions tending to cause a vehicle to skid.",
+    "sources": [
+      {
+        "url": "https://www.scstatehouse.gov/code/t56c005.php",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "S.C. Code Title 56 Chapter 5. Section 56-5-5040 'Tires' read in full (history: 1962 Code 46-611, 1968 Act 2518). Also searched the whole chapter text for chains, stud and snow tire. Only 56-5-5040 and a trailer safety-chain section matched."
+      }
+    ],
+    "notes": "A website claimed studded tires are banned under 56-5-4730. I read 56-5-4730 and it is 'Signal lamps and signal devices'. That claim is wrong. Only Title 56 Chapter 5 was searched. I did not search SCDOT rules. No fines read."
+  },
+  {
+    "code": "SD",
+    "name": "South Dakota",
+    "hasLaw": "yes",
+    "summary": "The Secretary of Transportation may restrict travel on state trunk highways to four-wheel-drive vehicles or vehicles with tire chains, studded snow tires, or adequate snow tires. Signs must mark the restricted segment. Violation is a Class 2 misdemeanor.",
+    "appliesTo": "all motor vehicles, only on segments the Secretary has restricted and signed (discretionary, not a standing statewide rule)",
+    "studdedTires": "Metal studs banned May 1 to September 30. Allowed October 1 to April 30. School buses and local-government fire vehicles over 5,000 lb GVW may use studs any time. Retractable studs may be used year-round but not extended May 1 to Sep 30 (32-19-3.2). Violation of the stud ban is a Class 2 misdemeanor. (SDCL 32-19-3)",
+    "chainsAllowed": "Permitted. SDCL 32-19-2: tire chains of reasonable proportions allowed when required for safety because of snow, ice, or other conditions that cause a vehicle to slide or skid. Violation of 32-19-2 is a petty offense.",
+    "sources": [
+      {
+        "url": "https://sdlegislature.gov/api/Statutes/32-19-3.1.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "SDCL 32-19-3.1 full text read: restriction to 4WD or chains/studded/snow tires, signs required, Class 2 misdemeanor."
+      },
+      {
+        "url": "https://sdlegislature.gov/api/Statutes/32-19-2.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "SDCL 32-19-2 full text read: chains of reasonable proportions allowed when required for safety."
+      },
+      {
+        "url": "https://sdlegislature.gov/api/Statutes/32-19-3.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "SDCL 32-19-3 full text read: stud ban May 1 to Sep 30."
+      },
+      {
+        "url": "https://sdtruckinfo.sd.gov/rules-regulations/motor-carrier-handbook/chapter-5/routes-with-special-restrictions/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "SD DOT truck info page: some highways, especially Black Hills, may require chains, studded tires or snow tires; restrictions posted on the road; studs allowed statewide Oct 1 to Apr 30."
+      },
+      {
+        "url": "https://dot.sd.gov/media/f1udsxnr/external-whmp.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "SDDOT Winter Highway Maintenance Plan 2022-2023: Secretary of DOT and DPS can restrict or close state highways in bad weather. Does not repeat the chain wording."
+      }
+    ],
+    "notes": "The statutes were read on the legislature's API pages (sdlegislature.gov/api/Statutes/...), which are the official data behind the codified law site. This is a conditional restriction. No standing requirement to carry or fit chains. I found no record of how often it is used. No fine amounts on the pages read beyond the offense classes."
+  },
+  {
+    "code": "TN",
+    "name": "Tennessee",
+    "hasLaw": "unclear",
+    "summary": "T.C.A. 55-9-106 appears to allow tire chains when needed for safety and studded tires on vehicles of 9,000 lb or less in a winter window. I could not read the statute on an official page, and found no TDOT chain-control or traction law.",
+    "appliesTo": "none found (no chain or traction requirement found). Stud limits apply to vehicles over 9,000 lb GVW.",
+    "studdedTires": "secondary (FindLaw copy of 55-9-106, current as of 2024-01-02): studded tires allowed October 1 through April 15. Contact area limit 20% for the first 1,000 miles, then 5%. Not for vehicles over 9,000 lb gross weight, except school buses and emergency vehicles.",
+    "chainsAllowed": "permitted. 55-9-106(c), per FindLaw: tire chains of reasonable proportions may be used on any vehicle when required for safety because of snow, ice or other skid conditions.",
+    "sources": [
+      {
+        "url": "https://codes.findlaw.com/tn/title-55-motor-and-other-vehicles/tn-code-sect-55-9-106/",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Tenn. Code 55-9-106 text as copied by FindLaw, 'current as of January 02, 2024'. Supports chains permitted and the Oct 1 to Apr 15 stud window. Not an official site."
+      },
+      {
+        "url": "https://www.tn.gov/tema/news/getting-winter-ready--tema-and-tdot-encourage-simple-safety-steps.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "TEMA and TDOT winter safety release (loaded with curl, 200). Says to install winter tires 'or any chains or studs required in your local area'. Advice only. States no requirement."
+      },
+      {
+        "url": "https://www.tn.gov/content/dam/tn/safety/documents/DL_Manual.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Tennessee Comprehensive Driver License Manual (PDF loaded). Searched the full text for chain, stud, snow tire, traction. No match about tires."
+      }
+    ],
+    "notes": "The statute text is not verified because the official Tennessee Code Annotated is not freely fetchable and Justia returned 403. The Oct 1 to Apr 15 window and the 5%/20% limits come from one FindLaw copy. An earlier search snippet showed the same 20% first-1,000-mile rule but no dates, so the dates are not corroborated. A THP winter page (tn.gov/safety news, 2026-01-23) loaded and has no chain or stud content. TDOT pages found were advice only. No Smokies I-40 or Monteagle chain rule found on any TDOT page. I-40 Pigeon River Gorge on the NC side also has no chain rule found (see NC). hasLaw is 'unclear' only because I could not read the statute officially. My read is that there is no chain requirement."
+  },
+  {
+    "code": "TX",
+    "name": "Texas",
+    "hasLaw": "no",
+    "summary": "Texas has no chain requirement. Transportation Code 547.612(c) prohibits non-rubber protuberances on tires unless they do not injure the highway or are tire chains of reasonable proportion used as required for safety because of a skid-causing condition.",
+    "appliesTo": "none",
+    "studdedTires": "No stud season set by law. Section 547.612(c) bars protuberances such as studs unless they do not injure the highway. Secondary sources disagree on whether metal studs are legal (some say banned, some say only rubber studs allowed). Not resolved.",
+    "chainsAllowed": "Permitted. 547.612(c)(2): a tire chain of reasonable proportion used as required for safety because of a condition that might cause the vehicle to skid.",
+    "sources": [
+      {
+        "url": "https://texas.public.law/statutes/tex._transp._code_section_547.612",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Mirror of Tex. Transp. Code 547.612 full text; cites the official statutes.capitol.texas.gov page as its source. Official page is a JavaScript app that returned no statute text to my fetch."
+      },
+      {
+        "url": "https://statutes.capitol.texas.gov/Docs/TN/htm/TN.547.htm",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Official Texas Legislature page for Chapter 547 loaded (HTTP 200) but returned only site navigation, no statute text, so I could not read the section there."
+      },
+      {
+        "url": "http://www.txdot.gov/safety/severe-weather/snow-and-ice.html",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "TxDOT snow and ice page read: driving tips only, no mention of chains or studs."
+      }
+    ],
+    "notes": "Statute text is secondary because it came from a mirror. The txdot.gov winter-travel URL redirected to the snow-and-ice page, which I cite. No Texas chain or traction law found in the TxDOT or DPS pages searched. No fine for chains or studs read from an official page."
+  },
+  {
+    "code": "VA",
+    "name": "Virginia",
+    "hasLaw": "no",
+    "summary": "No statewide chain or snow tire requirement found. Va. Code 46.2-1044 allows tire chains when needed for safety and permits studded tires Oct 15 to Apr 15 on vehicles up to 10,000 lb. Localities may designate snow routes under 46.2-1302 and require snow tires or chains there.",
+    "appliesTo": "none statewide; local snow routes by county, city or town ordinance",
+    "studdedTires": "Oct 15 to Apr 15 only, vehicles of 10,000 lb gross weight or less; studs may project no more than 1/16 inch and cover no more than 3 percent of the traction surface (46.2-1044). Law enforcement, fire, EMS and VDOT or contractor vehicles are exempt from the section.",
+    "chainsAllowed": "Permitted. 46.2-1044: tire chains of reasonable proportions when required for safety because of snow, ice or other conditions tending to cause a vehicle to slide or skid.",
+    "sources": [
+      {
+        "url": "https://law.lis.virginia.gov/vacode/title46.2/chapter10/section46.2-1044/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Statute text seen: Va. Code 46.2-1044 Cleats, etc., on tires; chains; tires with studs."
+      },
+      {
+        "url": "https://law.lis.virginia.gov/vacodefull/title46.2/chapter13/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Statute text seen: Va. Code 46.2-1302 lets any county, city or town by ordinance designate posted snow routes and prohibit obstructing traffic there for lack of snow tires or chains."
+      },
+      {
+        "url": "https://www.vdot.virginia.gov/travel-traffic/driver-safety/weather/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "VDOT winter weather page loaded. It has tire checks and winter kit advice. I found no chain rule or chain mention on it."
+      }
+    ],
+    "notes": "'No' rests on the tire statute (permits only) plus a targeted search that found no VDOT or Code of Virginia chain mandate. I did not read all of Title 46.2 or the Virginia Administrative Code. A VDOT brochure PDF reportedly quotes 46.2-1044, but its URL redirected to the weather page, so it was not read. Specific county or city snow route ordinances were not read. No fine found on an official page. A January 2026 health department advisory telling drivers to use chains was seen only in a search summary."
+  },
+  {
+    "code": "VT",
+    "name": "Vermont",
+    "hasLaw": "yes",
+    "summary": "23 V.S.A. 1006c lets officials require tire chains on specified State highways during winter weather for vehicles over 26,000 lb GVWR or GCWR, when signs are posted. VTrans uses it on Route 9 between the Wilmington and Bennington chain-up areas. Passenger cars are not covered by the text read.",
+    "appliesTo": "commercial only (vehicles with GVWR or GCWR over 26,000 lb)",
+    "studdedTires": "No season set by law. 23 V.S.A. 1092 says its ban on wheel attachments that damage the road does not restrict the use of studs or cleats 'of a type designed for general use to facilitate travel in winter.' Studs are therefore permitted without dates in the statute read.",
+    "chainsAllowed": "Chains are required for the covered heavy vehicles when posted. For other vehicles the statutes read neither require nor prohibit chains; 1092 bars attachments that injure the road 'to any appreciable extent' but exempts winter studs and cleats and does not mention chains.",
+    "sources": [
+      {
+        "url": "https://legislature.vermont.gov/statutes/section/23/013/01006c",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "23 V.S.A. 1006c, chain requirements for vehicles with weight ratings of more than 26,000 pounds: officials may require chains on specified State highway portions during winter weather with signage; civil penalty $1,000 to operator or employer, $2,000 if it substantially impedes traffic, doubled on a second or later conviction within three years."
+      },
+      {
+        "url": "https://legislature.vermont.gov/statutes/section/23/013/01092",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "23 V.S.A. 1092, damaging surface of road: studs and cleats designed for winter use are not restricted. No dates, no penalty on the page."
+      },
+      {
+        "url": "https://dmv.vermont.gov/enforcement-and-safety/laws/chain-up-law",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "VT DMV 'Chain Up Law': aimed at drivers of large vehicles; mandatory section is Route 9 between the Wilmington and Bennington chain-up sites; 'no law that requires the use of chains on the Hogback Mountain portion'; requirement can switch on and off in a storm; announced via VTrans 511 and VT Alerts. Penalties not on this page."
+      },
+      {
+        "url": "https://vtrans.vermont.gov/sites/aot/files/highway/documents/materialsandresearch/completedprojects/Impacts_of_Studded_Tires_on_Pavement_Web.pdf",
+        "read": "2026-11-01",
+        "status": "secondary",
+        "what": "Search snippet only, not opened: says Vermont allows unrestricted studded tire use all year. Matches 1092 but is not a statute."
+      }
+    ],
+    "notes": "Fines come from the statute page as summarized by WebFetch; re-check the exact amounts before publishing. The DMV page does not state a weight threshold, so the 26,000 lb figure rests on 1006c. A 2017 bill (H.278) proposed a Nov 1 to May 15 stud window; I did not confirm whether it passed, and the 1092 text read has no dates, so it appears not to have."
+  },
+  {
+    "code": "WI",
+    "name": "Wisconsin",
+    "hasLaw": "no",
+    "summary": "No chain or traction requirement found. Wis. Stat. 347.45(2) bans tire protrusions beyond the tread but allows tire chains of reasonable proportions on any vehicle when needed for safety. Studded tires are limited to specific vehicles.",
+    "appliesTo": "none (permission only)",
+    "studdedTires": "Tungsten carbide studs (max 1/8 inch projection) only on authorized emergency vehicles, school buses, mail delivery vehicles, and out-of-state automobiles passing through for up to 30 days. DOT sets the season by rule. Trans 306.01: Nov 15 through Apr 1, both inclusive. Rule note says the legislature has prohibited general use of studded tires.",
+    "chainsAllowed": "Permitted. s. 347.45(2)(b): tire chains of reasonable proportions may be used on any vehicle when required for safety because of snow, ice or similar skid conditions.",
+    "sources": [
+      {
+        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/347/iii/45",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Wis. Stat. 347.45 (2)(a) farm exceptions, (2)(b) chains, (2)(c) embedded wire and tungsten carbide studs, season set by DOT rule. Page shows no penalty."
+      },
+      {
+        "url": "https://docs.legis.wisconsin.gov/document/administrativecode/Trans%20306.pdf",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Chapter Trans 306 'Use of studded tires', Trans 306.01(1): Nov 15 through Apr 1 both dates inclusive. Register November 2024 No. 827."
+      }
+    ],
+    "notes": "How I know there is no requirement: read 347.45 and Trans 306. Chains are permitted, nothing mandates them. One secondary source says chains must not touch the road directly, which I did not find in the statute. I did not look for county or municipal rules. No fine amounts read."
+  },
+  {
+    "code": "WV",
+    "name": "West Virginia",
+    "hasLaw": "no",
+    "summary": "No chain or snow tire requirement found. W.Va. Code 17C-15-37(c) permits tire chains when needed for safety and studded tires Nov 1 to Apr 15, with a 40 psi limit on studded tires except school buses.",
+    "appliesTo": "none",
+    "studdedTires": "Permitted Nov 1 to Apr 15 of the following year; no vehicle other than a school bus may be equipped with studded tires operational at a recommended pressure above 40 psi (17C-15-37(c)(3)).",
+    "chainsAllowed": "Permitted. 17C-15-37(c)(2): tire chains of reasonable proportions on any vehicle when required for safety because of snow, ice or other conditions tending to cause a vehicle to skid.",
+    "sources": [
+      {
+        "url": "https://code.wvlegislature.gov/17C-15-37/",
+        "read": "2026-11-01",
+        "status": "verified",
+        "what": "Statute text seen: W.Va. Code 17C-15-37 Tire equipment restrictions; chains and studs."
+      }
+    ],
+    "notes": "'No' rests on the statute (permit only, no requirement) and a search that found no Division of Highways or WV Turnpike chain-control rule. I did not read every WV rule. No fine found on an official page. A J.J. Keller summary (not read) lists WV as a permissive 'just in case' state. The statute was amended in 2021 (SB 376) to drop an obsolete commissioner standards provision; I saw the bill title only in search results."
+  }
+]

@@ -32,6 +32,7 @@ const exists = (p) => fs.existsSync(rel(p));
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const STATE = Object.fromEntries(STATES.map((s) => [s.code, s]));
 STATE.BC = { code: 'BC', name: 'British Columbia', dot: 'DriveBC', dotUrl: 'https://www.drivebc.ca' };
+STATE.DC = { code: 'DC', name: 'District of Columbia', dot: 'DDOT', dotUrl: 'https://ddot.dc.gov/' };
 const slugOf = (code) => STATE[code].name.toLowerCase().replace(/[^a-z]+/g, '-');
 const READ = 'October 15, 2026';
 const short = (u) => u.replace(/^https?:\/\/(www\d?\.)?/, '').replace(/[?#].*$/, '').replace(/\/$/, '');
@@ -211,6 +212,87 @@ const PAGES = [
       ['Commercial: $196 for not carrying chains (MVA Regulations s. 7.1635). $598 for bypassing an active chain-up area (MVA s. 208(4)).', U.bcEnf, 'BC enforcement'],
     ],
     units: 'km',
+  },
+  // ---- Snow-emergency and conditional rules (2026-11-01). Facts: data/chain-laws-50-states-2026-11-01.json, official pages read 2026-11-01.
+  // Only items the research marks verified are stated. Fines the research could not read on an official page are left out. GA and NJ are not stated as law.
+  {
+    code: 'NY', q: 'Do I need chains in New York?', read2: true,
+    lede: 'New York has no statewide chain law. The state or a municipality can designate snow emergency routes, and once a snow emergency is declared no vehicle may use them without snow tires or tire chains.',
+    levels: [],
+    rules: [
+      ['Vehicle and Traffic Law 145-c: where a snow emergency route is designated and posted, and a snow emergency is declared, no vehicle may operate on it without snow tires, tire chains, or both.', 'https://www.nysenate.gov/legislation/laws/VAT/145-C', 'NY VTL 145-c'],
+      ['Tire chains are permitted. Section 145-c names them as an alternative to snow tires on those routes.', 'https://www.nysenate.gov/legislation/laws/VAT/145-C', 'NY VTL 145-c'],
+      ['Studded tires may not be used on public highways from May 1 to October 15, so they are legal October 16 to April 30, within size limits. School buses and state or municipal vehicles are excepted.', 'https://www.nysenate.gov/legislation/laws/VAT/375', 'NY VTL 375(35-a)'],
+    ],
+    fines: [],
+    noFine: 'No fine amount was read on the official pages.',
+    notes: ['This is not a statewide chain law. The requirement depends on a snow emergency declaration and a posted route. NYSDOT, Thruway Authority and local snow emergency rules were not checked.'],
+  },
+  {
+    code: 'VT', q: 'Do I need chains in Vermont?', read2: true,
+    lede: 'Vermont can require tire chains on signed state highways in winter for vehicles over 26,000 lb. The statute does not cover passenger cars.',
+    levels: [],
+    rules: [
+      ['23 V.S.A. 1006c lets officials require tire chains on specified state highways during winter weather, for vehicles over 26,000 lb GVWR or GCWR, when signs are posted.', 'https://legislature.vermont.gov/statutes/section/23/013/01006c', '23 V.S.A. 1006c'],
+      ['VTrans uses the rule on Route 9 between the Wilmington and Bennington chain-up areas.', 'https://dmv.vermont.gov/enforcement-and-safety/laws/chain-up-law', 'Vermont DMV chain-up law'],
+      ['No studded-tire season is set in the statute read. Section 1092 says its ban on wheel attachments that damage the road does not restrict studs or cleats designed for winter travel.', 'https://legislature.vermont.gov/statutes/section/23/013/01092', '23 V.S.A. 1092'],
+    ],
+    fines: [],
+    noFine: 'The fine amount has not been verified against the statute text, so it is not stated here.',
+    notes: ['The 26,000 lb figure comes from the statute. The Vermont DMV page does not state a weight threshold.'],
+  },
+  {
+    code: 'MD', q: 'Do I need chains in Maryland?', read2: true,
+    lede: 'Maryland has no standing chain law. When a snow emergency is declared, vehicles on designated snow emergency routes need chains or snow tires.',
+    levels: [],
+    rules: [
+      ['Maryland State Police and MDOT SHA declare snow emergencies. On designated snow emergency routes vehicles must have chains or snow tires. The 2016 statewide plan also lists all-season radials, and the wording differs slightly between releases.', 'https://news.maryland.gov/msp/2025/02/19/snow-emergency-plan-somerset-county/', 'Maryland State Police, 2025'],
+      ['Tire chains of reasonable proportions are permitted on any vehicle when required for safety because of snow, ice or other conditions that cause a vehicle to skid.', 'https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=22-405.2&enactments=false', 'Transportation Article 22-405.2'],
+      ['Studded tires are prohibited except November 1 through March 31 for vehicles registered in Allegany, Carroll, Frederick, Garrett and Washington counties. Vehicles registered outside Maryland may use them.', 'https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=22-405.2&enactments=false', 'Transportation Article 22-405.2'],
+    ],
+    fines: [],
+    noFine: 'No fine amount was read on an official page, and the legal authority for the snow emergency plan was not found.',
+    notes: ['Route lists and declarations are issued county by county.'],
+  },
+  {
+    code: 'PA', q: 'Do I need chains in Pennsylvania?', read2: true,
+    lede: 'Pennsylvania does not require chains on passenger cars. In winter storms, PennDOT and the Turnpike restrict some commercial vehicles unless they carry chains or approved traction devices.',
+    levels: [],
+    rules: [
+      ['PennDOT runs a tiered winter-event restriction plan. It applies to commercial vehicles such as tractor-trailers, buses and motor coaches, and the tier is set storm by storm. At the second tier chains or devices must be on board and readily available, not installed.', 'https://www.pa.gov/agencies/penndot/traveling-in-pa/winter/winter-event-vehicle-restrictions', 'PennDOT winter event vehicle restrictions'],
+      ['Tire chains may be used temporarily during snow and ice emergencies if they conform to department regulations.', 'https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/75/00.045.025.000..HTM', '75 Pa.C.S. 4525(d)'],
+      ['Studded tires are permitted November 1 to April 15, with projections not over 2/32 inch. The Governor may extend the dates.', 'https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/75/00.045.025.000..HTM', '75 Pa.C.S. 4525(c)'],
+    ],
+    fines: [
+      ['Using studs outside the season is a summary offense. The fine is $35 to $55 depending on the month, and $10 for other stud violations between November 1 and April 15.', 'https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/75/00.045.025.000..HTM', '75 Pa.C.S. 4525(e)'],
+    ],
+    notes: ['The storm tier plan is a multi-agency operating plan. No fine for ignoring a tier was found.'],
+  },
+  {
+    code: 'SD', q: 'Do I need chains in South Dakota?', read2: true,
+    lede: 'South Dakota has no standing chain law. The Secretary of Transportation can restrict a signed state highway segment to four-wheel-drive vehicles or vehicles with chains, studded snow tires or adequate snow tires.',
+    levels: [],
+    rules: [
+      ['Where the Secretary restricts a segment, signs must mark it. A violation is a Class 2 misdemeanor.', 'https://sdlegislature.gov/api/Statutes/32-19-3.1.html', 'SDCL 32-19-3.1'],
+      ['Tire chains of reasonable proportions are allowed when required for safety because of snow, ice or other conditions that cause a vehicle to slide or skid.', 'https://sdlegislature.gov/api/Statutes/32-19-2.html', 'SDCL 32-19-2'],
+      ['Metal studs are banned May 1 to September 30 and allowed October 1 to April 30. A violation of the stud ban is a Class 2 misdemeanor.', 'https://sdlegislature.gov/api/Statutes/32-19-3.html', 'SDCL 32-19-3'],
+    ],
+    fines: [],
+    noFine: 'The statutes read give the offense class, not a dollar amount.',
+    notes: ['The restriction is discretionary and signed by segment. No record of how often it is used was found.'],
+  },
+  {
+    code: 'DC', q: 'Do I need chains in Washington, DC?', read2: true, noLive: true,
+    lede: 'DC has no chain mandate. From October 15 to April 15, a driver may not stall on a Snow Emergency Route because the driving wheels lack tire chains or effective snow tires.',
+    levels: [],
+    rules: [
+      ['18 DCMR 2219.1 applies from October 15 to April 15, when snow, sleet or freezing rain is falling or a Snow Emergency Route is coated with snow or ice. It is written as a ban on stalling, not as an equipment rule for entering the street.', 'https://www.dcregs.dc.gov/Common/DCMR/RuleDetail.aspx?RuleId=R0003048', '18 DCMR 2219.1'],
+      ['Tire chains of reasonable proportions are permitted when required for safety because of snow, ice or other conditions that cause a vehicle to skid.', 'https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=18-732', '18 DCMR 732.5'],
+      ['Studded tires are permitted October 15 to April 15, with tips protruding no more than 1/8 inch.', 'https://www.dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=18-732', '18 DCMR 732.5'],
+    ],
+    fines: [],
+    noFine: 'No fine was read on an official page.',
+    notes: ['The DCRegs page lists a placeholder effective date, so a later amendment was not ruled out.'],
   },
 ];
 
@@ -465,7 +547,7 @@ ${(p.notes || []).map((n) => `    <p class="cl-note">${esc(n)}</p>`).join('\n')}
 `;
 
   const cards = [];
-  cards.push(['Official source', s.dot, `${s.name}'s traveler site. Current chain and traction requirements are posted there.`, s.dotUrl, true]);
+  if (!p.noLive) cards.push(['Official source', s.dot, p.read2 ? `${s.name}'s traveler site. Closures and road conditions are posted there.` : `${s.name}'s traveler site. Current chain and traction requirements are posted there.`, s.dotUrl, true]);
   if (hasRc) cards.push(['Road conditions', `${s.name} road conditions`, `Closures and alerts reported through ${s.dot}, on one map.`, `/road-conditions/${slug}/`]);
   if (hasSeasonal) cards.push(['Winter closures', `Which roads close for winter in ${s.name}?`, `Seasonal closures with the dates each agency gives.`, `/seasonal/${slug}/`]);
   if (slug === 'washington') cards.push(['From our archive', 'How often are chains required on Washington passes?', 'Hour counts for each pass this season, from WSDOT pass reports.', '/how-often-are-chains-required-on-washington-passes/']);
@@ -475,7 +557,7 @@ ${(p.notes || []).map((n) => `    <p class="cl-note">${esc(n)}</p>`).join('\n')}
   const faq = [
     [p.q, `${p.lede} Check the official sources linked on this page for the published requirements and penalties. The sign on the road is the rule that applies.`],
     [`What is the fine for ignoring a chain rule in ${s.name}?`, fineLine + ((p.notes || []).length && !p.fines.length ? ' ' + p.notes.join(' ') : '')],
-    [`Where do I check the current chain requirement in ${s.name}?`, `${s.dot} posts current requirements. The block at the top of this page reads the ${s.dot} feed every five minutes and lists chain and traction reports. If the feed cannot be reached, the page says so.`],
+    [`Where do I check the current chain requirement in ${s.name}?`, p.noLive ? `${s.dot} and the posted signs are the record. This page does not show a live feed for ${s.name}.` : `${s.dot} posts current requirements. The block at the top of this page reads the ${s.dot} feed every five minutes and lists chain and traction reports. If the feed cannot be reached, the page says so.`],
   ];
   const faqHtml = faq.map(([q, a]) => `      <details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n');
   const ld = [
@@ -492,19 +574,19 @@ ${sp.html}
 <!-- spon:end -->
     <p class="sc-eyebrow">Chain and traction law · ${esc(s.name)}</p>
     <h1>${esc(p.q)}</h1>
-    <p class="sc-lede">${esc(p.lede)} Current chain and traction reports from <a href="${s.dotUrl}" target="_blank" rel="noopener">${esc(s.dot)}</a> appear below, followed by the rules and their official sources.</p>
+    <p class="sc-lede">${esc(p.lede)}${p.noLive ? " The rules and their official sources are below." : ` Current chain and traction reports from <a href="${s.dotUrl}" target="_blank" rel="noopener">${esc(s.dot)}</a> appear below, followed by the rules and their official sources.`}</p>
 
-    <div class="sc-live">
+    ${p.noLive ? '' : `<div class="sc-live">
       <div class="lh"><span style="color:#0E1116;font-size:14px;">Chain and traction reports right now</span><span>${esc(s.dot)} via MileCheck · <span id="clWhen">loading</span></span></div>
       <div class="sc-status" id="clStatus">Reading the ${esc(s.dot)} feed&hellip;</div>
       <div id="clRows"></div>
       <div class="sc-note">Reports whose text names a chain control, chain law or traction rule. Reloads every five minutes.</div>
-    </div>
+    </div>`}
   </div>
 
   <div class="sc-body">
 ${levelsHtml}${rulesHtml}${finesHtml}
-    <p class="sc-related">Official pages read ${READ}. Fines and rules change, and the official page is the record.</p>
+    <p class="sc-related">Official pages read ${p.read2 ? 'November 1, 2026' : READ}. Fines and rules change, and the official page is the record.</p>
 
     <h2>Where to look next</h2>
     <div class="sc-cards">
@@ -523,7 +605,7 @@ ${CTA(campaign, s.dot)}
 
   ${SIGNUP}
 
-` + footer(campaign, [['/chains/', 'Chain control map'], ['/chain-laws/', 'Chain laws by state'], ['/closures/', 'US closures map'], ['/maps/', 'All maps']]) + liveJs(p.code, s.dot) + `
+` + footer(campaign, [['/chains/', 'Chain control map'], ['/chain-laws/', 'Chain laws by state'], ['/closures/', 'US closures map'], ['/maps/', 'All maps']]) + (p.noLive ? '' : liveJs(p.code, s.dot)) + `
 <!-- spon:start -->${sp.js}<!-- spon:end -->
 </body>
 </html>
@@ -580,14 +662,44 @@ ${CTA(campaign, 'DOT')}
   return `chain-laws/${c.slug}/`;
 }
 
+
+// All-states table for the hub (2026-11-01). The research file is data/chain-laws-50-states-2026-11-01.json. A state gets "No requirement found"
+// only where the research says no; unclear states and Georgia (fact sheets about 12 years old) say "Not confirmed" and are not stated as law.
+function allStatesTable() {
+  const R = Object.fromEntries(JSON.parse(fs.readFileSync(rel('data/chain-laws-50-states-2026-11-01.json'), 'utf8')).map((x) => [x.code, x]));
+  const withPage = new Set(PAGES.map((q) => q.code));
+  const codes = [...new Set([...withPage, ...COMBINED.codes, ...Object.keys(R)])].filter((c) => c !== 'BC').sort((a, b) => STATE[a].name.localeCompare(STATE[b].name));
+  const rows = codes.map((c) => {
+    const st = STATE[c];
+    const pg = PAGES.find((q) => q.code === c);
+    let what, src;
+    if (pg && pg.read2) { what = `<a href="/chain-laws/${slugOf(c)}/">Conditional rule</a>. ${esc(pg.lede.split('. ')[0])}.`; src = 'Official pages'; }
+    else if (pg) { what = `<a href="/chain-laws/${slugOf(c)}/">Chain or traction requirements are posted</a>. ${esc(pg.lede.split('. ')[0])}.`; src = 'Official pages'; }
+    else if (COMBINED.codes.includes(c)) { what = `<a href="/chain-laws/${COMBINED.slug}/">See the Arizona, New Mexico and Alaska page</a>.`; src = 'Official pages'; }
+    else {
+      const r = R[c]; const official = r.sources.some((x) => x.status === 'verified');
+      src = official ? 'Official page read' : 'Secondary sources only';
+      what = c === 'GA' ? 'Not confirmed. The Georgia fact sheets we found are about 12 years old, so no rule is stated.'
+        : r.hasLaw === 'no' ? 'No chain or traction requirement found.' : 'Not confirmed. No official page states the rule either way.';
+    }
+    return `<tr><td>${esc(st.name)}</td><td>${what}</td><td>${src}</td></tr>`;
+  }).join('\n');
+  return `    <h2>Every state</h2>
+    <p>A line that says "found" means the research read the statute or agency page for it on November 1, 2026. "Not confirmed" means we are not stating a rule. The sign on the road is the rule that applies.</p>
+    <div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;min-width:560px;font-size:14px"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #E5E5E5">State</th><th style="text-align:left;padding:8px;border-bottom:2px solid #E5E5E5">What we found</th><th style="text-align:left;padding:8px;border-bottom:2px solid #E5E5E5">Sources</th></tr></thead><tbody>
+${rows.replace(/<td>/g, '<td style="padding:8px;border-bottom:1px solid #eee;vertical-align:top">')}
+</tbody></table></div>
+`;
+}
+
 function hubPage() {
   const q = 'Which states have chain laws?';
-  const desc = `Chain and traction rules for ${PAGES.length - 1} western states and British Columbia, with fines where an official source states them.`;
+  const desc = `Chain and traction rules for the western states and British Columbia, the snow-emergency rules in the East, and a table of every state, with fines where an official source states them.`;
   const title = `${q} Chain and traction laws by state | MileCheck`;
   const sp = SPON.slot({ kind: 'live', slug: 'chain-laws', state: '', name: q });
   const cards = PAGES.map((p) => {
     const s = STATE[p.code];
-    const tag = p.levels.length ? `${p.levels.length} levels` : 'posted by sign';
+    const tag = p.read2 ? 'conditional rule' : p.levels.length ? `${p.levels.length} levels` : 'posted by sign';
     return `      <a class="sc-card" href="/chain-laws/${slugOf(p.code)}/"><span class="k">${esc(s.name)} · ${tag}</span><h3>${esc(p.q)}</h3><p>${esc(p.lede.split('. ')[0])}.</p></a>`;
   }).join('\n') + `\n      <a class="sc-card" href="/chain-laws/${COMBINED.slug}/"><span class="k">AZ · NM · AK</span><h3>${esc(COMBINED.q)}</h3><p>Arizona, New Mexico and Alaska do not use the California R1, R2 and R3 system.</p></a>`;
   const ld = [
@@ -607,6 +719,7 @@ ${cards}
     </div>
   </div>
   <div class="sc-body">
+${allStatesTable()}
     <h2>What these pages do and do not say</h2>
     <p>They state the law and link the source. They do not say whether a road needs chains today. The sign on the road and the DOT posting decide that. Fine amounts are included where an applicable official statute or agency source supports them.</p>
     <p class="sc-related">Official pages read ${READ}. Also: <a href="/how-to-put-on-tire-chains/">How to put on tire chains</a> · <a href="/chains-required-explained/">What chains required means</a> · <a href="/seasonal/">Seasonal closures</a></p>
