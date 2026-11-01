@@ -17,6 +17,7 @@
 const fs = require('fs');
 const CAM_STATES = require('../data/coverage-ledger.json').feeds.cameras.us_states; // ledger number, never typed by hand
 const path = require('path');
+const WINTER = require('./lib/winter-titles.cjs');
 const SPON = require('./lib/sponsor-slot');
 const STATES = require('./road-conditions/states.cjs');
 const { stateFacts } = require('./lib/state-facts.cjs'); // sourced per-state facts, 2026-10-29
@@ -363,8 +364,9 @@ function statePage(s) {
   const url = `https://milecheckapp.com/road-conditions/${slug}/`;
   // 2026-10-29 winter pass: what people type in a storm. Chain rules only where the site has a chain-law page.
   const hasChains = exists(`chain-laws/${slug}/index.html`) || ['arizona', 'new-mexico', 'alaska'].includes(slug);
-  const title = hasChains ? `${s.name} road conditions, chain rules and closures now | MileCheck` : `${s.name} road conditions, closures and cameras now | MileCheck`;
-  const desc = `Live ${s.name} road conditions from ${s.dot}: closures and crashes by route and mile marker${hasChains ? ', chain and traction rules,' : ','} cameras, passes and corridors. Checked every five minutes.`;
+  const snow = WINTER.SNOW_STATES.has(slug) ? WINTER.snowState(s.name, s.dot) : null; // 2026-11-01: snow, ice and chains wording
+  const title = snow ? snow.title : hasChains ? `${s.name} road conditions, chain rules and closures now | MileCheck` : `${s.name} road conditions, closures and cameras now | MileCheck`;
+  const desc = snow ? snow.desc : `Live ${s.name} road conditions from ${s.dot}: closures and crashes by route and mile marker${hasChains ? ', chain and traction rules,' : ','} cameras, passes and corridors. Checked every five minutes.`;
   const cams = exists(`cameras/${slug}/index.html`);
   const cities = Object.entries(CITY_CAMS).filter(([, st]) => st === s.code).map(([c]) => c);
   const passes = PASSES.filter((p) => p[3] === s.code);

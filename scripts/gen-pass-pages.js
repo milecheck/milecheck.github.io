@@ -4,15 +4,18 @@
 // Run: node scripts/gen-pass-pages.js   (writes files + prints a summary)
 const fs = require('fs');
 const path = require('path');
+const WINTER = require('./lib/winter-titles.cjs');
 const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the eyebrow (2026-09-24)
 
 const PASSES = [
   {
     slug: 'snoqualmie', name: 'Snoqualmie Pass', route: 'I-90', state: 'WA', stateName: 'Washington',
     // Search Console 2026-09-25: "driving conditions snoqualmie pass" = 5,038 impressions, 0 clicks. Title leads with that phrase.
-    title: 'Snoqualmie Pass driving conditions and chains | MileCheck',
-    h1: 'Snoqualmie Pass driving conditions right now',
-    desc: 'Snoqualmie Pass conditions on I-90: WSDOT restrictions and chain rules for each direction, summit temperature, live cameras and closures.',
+    // 2026-11-01: webcam / conditions / road conditions / wsdot queries, 26,928 impressions at 0.5% (scripts/lib/winter-titles.cjs).
+    title: WINTER.PAGES['passes/snoqualmie'].title,
+    h1: WINTER.PAGES['passes/snoqualmie'].h1,
+    desc: WINTER.PAGES['passes/snoqualmie'].desc,
+    ogTitle: WINTER.PAGES['passes/snoqualmie'].title,
     dot: 'WSDOT', lat: 47.3923, lon: -121.4001, r: 30, elev: '3,022 ft', dist: '~52 mi', distNote: 'east of Seattle on I-90',
     range: 'Cascade Range',
     hero: `See the summit before you drive it. Live WSDOT cameras and real-time conditions on I-90 over Snoqualmie Pass. Snow, chains, and closures as they happen. WSDOT reports about 28,000 vehicles a day over the pass, on the main route between Seattle and Eastern Washington.`,

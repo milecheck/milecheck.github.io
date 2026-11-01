@@ -8,6 +8,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const WINTER = require('./lib/winter-titles.cjs');
 const SPON = require('./lib/sponsor-slot');
 const PROVINCES = require('./road-conditions/provinces.cjs');
 const SLOT_CSS = SPON.slot({ kind: 'live', slug: 'road-conditions', name: '(css only)' }).css; // one call, reused by every page's <style>
@@ -341,7 +342,7 @@ const joinList = (arr) => arr.length <= 1 ? arr.join('') : arr.slice(0, -1).join
 function provincePage(p) {
   const slug = p.slug;
   const url = `https://milecheckapp.com/road-conditions/${slug}/`;
-  const title = `${p.name} Road Conditions Now: Closures &amp; Cameras | MileCheck`;
+  const title = (WINTER.PAGES[`road-conditions/${slug}`] || {}).title || `${p.name} Road Conditions Now: Closures &amp; Cameras | MileCheck`; // 2026-11-01: Alberta retitled
   const desc = `${p.name} road conditions from ${p.dot}: closures, incidents and roadwork by highway, with cameras. Checks for updates every five minutes.`;
   const cams = exists(`cameras/${slug}/index.html`);
   const guide = p.guide && exists(`blog/${p.guide}.html`);

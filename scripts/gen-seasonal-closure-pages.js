@@ -23,6 +23,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const WINTER = require('./lib/winter-titles.cjs');
 const SPON = require('./lib/sponsor-slot');
 const STATES = require('./road-conditions/states.cjs');
 const RAW = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'seasonal-closures.json'), 'utf8'));
@@ -404,7 +405,7 @@ function roadPage(r) {
   const dots = r.states.map((s) => STATE[s].dot);
   const dotLinks = r.states.map((s) => `<a href="${STATE[s].dotUrl}" target="_blank" rel="noopener">${STATE[s].dot}</a>`);
   const agency = agencyLabel(r.sourceUrl);
-  const title = `${esc(r.q)} Seasonal closure dates | MileCheck`;
+  const title = (WINTER.PAGES[`seasonal/${r.slug}`] || {}).title || `${esc(r.q)} Seasonal closure dates | MileCheck`; // 2026-11-01: Tioga and Chinook retitled
   const desc = `${r.publicLine} What the ${dots.join(' and ')} feed is posting for ${r.routes.join(' and ')} right now, and the closure and reopening dates ${agency.replace('&amp;', '&')} publishes, with the source.`;
   const campaign = `seasonal-${r.slug}`;
   const sp = SPON.slot({ kind: 'live', slug: `seasonal-${r.slug}`, state: r.states[0], name: r.q });
