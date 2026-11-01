@@ -1181,6 +1181,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://milecheckapp.com/api/data-quality/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://milecheckapp.com/api/data-accuracy/</loc>
     <lastmod>2026-10-31</lastmod>
     <priority>0.6</priority>
