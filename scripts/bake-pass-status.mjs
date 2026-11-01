@@ -162,8 +162,8 @@ function render(slug, name, s, now) {
     ? `A road report below describes a closure on this highway. The ${meta.dot} incident list shows no separate closure.`
     : closures.length === 0
     ? `No closure reports within ${rMi} mi of ${meta.q} in the latest ${meta.dot} data MileCheck received.`
-    : `${closures.length} closure${closures.length > 1 ? 's are' : ' is'} listed within ${rMi} mi: ${closures.slice(0, 2).map((a) => esc(`${a.location['route-id'] || ''} ${a.location.direction || ''}: ${clean(a.description || a.headline, 110)}`.replace(/^\s*:?\s*/, '').replace(/\s+:/, ':'))).join('; ')}.`;
-  const lead = closures.length ? `<strong>Closure listed.</strong>` : repClosed.length ? `<strong>Closure noted in a road report.</strong>` : `<strong>No closure listed.</strong>`;
+    : `${closures.length} closure-type alert${closures.length > 1 ? 's are' : ' is'} listed within ${rMi} mi. These include lane closures, so read each one: ${closures.slice(0, 2).map((a) => esc(`${a.location['route-id'] || ''} ${a.location.direction || ''}: ${clean(a.description || a.headline || a['impact-desc'], 130)}`.replace(/^\s*:?\s*/, '').replace(/\s+:/, ':'))).join('; ')}.`;
+  const lead = closures.length ? `<strong>Closure alert listed.</strong>` : repClosed.length ? `<strong>Closure noted in a road report.</strong>` : `<strong>No closure listed.</strong>`;
   let repLine = '';
   const rows = reports.filter(({ r }) => useful(r['road-surface-condition']) || useful(r['weather-condition'])).sort((a, b) => (b.closedText ? 1 : 0) - (a.closedText ? 1 : 0)).slice(0, 4).map(({ r }) => {
     const nm = clean(r['location-name'] || (r.location && r.location['location-name']) || 'Road report', 70);
