@@ -131,6 +131,29 @@ async function status(slug, P) {
   return { meta, rMi, reports, closures, other };
 }
 
+// Chains pages (/chains-required-<pass>/) take the same reading but lead with the restriction line.
+const CHAINS = { 'chains-required-snoqualmie-pass': 'snoqualmie', 'chains-required-stevens-pass': 'stevens', 'chains-required-mt-hood': 'mt-hood' };
+function renderChains(slug, s, now) {
+  const { meta, rMi, reports, closures } = s;
+  // "No restrictions" on a report that says nothing else (WSDOT's "No current information available") is not a reading.
+  const trusted = (r) => useful(r['road-surface-condition']) || useful(r['weather-condition']) || (restrictionText(r) && !/^no restrict/i.test(restrictionText(r)));
+  const withRs = reports.filter(({ r }) => trusted(r)).map(({ r }) => ({ r, rs: restrictionText(r) })).filter((x) => x.rs);
+  const top = withRs[0];
+  const nm = top ? clean(top.r['location-name'] || (top.r.location && top.r.location['location-name']) || 'the pass', 70) : '';
+  const upd = top ? Date.parse(top.r['date-updated'] || '') : NaN;
+  const lead = top
+    ? `<strong>${esc(meta.dot)}’s last restriction line for ${esc(nm)}:</strong> ${esc(top.rs)}${isFinite(upd) ? ` (reported ${esc(stamp(new Date(upd)))})` : ''}.`
+    : `<strong>No current restriction reading.</strong> The ${esc(meta.dot)} feed has no restriction line for ${esc(meta.q)} within ${rMi} mi right now.`;
+  const closeNote = closures.length ? ` ${closures.length} closure${closures.length > 1 ? 's are' : ' is'} listed within ${rMi} mi, so check the ${esc(meta.dot)} page first.` : '';
+  return `<!-- passnow:start -->
+<section class="mc-passnow" aria-label="Are chains required on ${esc(meta.q)}" style="margin:18px 0;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
+<h2 style="font-size:19px;margin:0 0 6px">Chains and traction right now</h2>
+<p style="margin:0">${lead}${closeNote}</p>
+<p style="margin:10px 0 0;font-size:13.5px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(stamp(now))}. The line changes through the day. Read it again on the ${esc(meta.dot)} page, and go by the sign on the road: <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a>.</p>
+</section>
+<!-- passnow:end -->`;
+}
+
 function render(slug, name, s, now) {
   const { meta, rMi, reports, closures, other } = s;
   const when = stamp(now);
@@ -165,27 +188,34 @@ ${repLine}
 
 const RE = /<!-- passnow:start -->[\s\S]*?<!-- passnow:end -->/;
 const only = process.argv.slice(2);
-const dirs = fs.readdirSync(path.join(SITE, 'passes')).filter((d) => fs.existsSync(path.join(SITE, 'passes', d, 'index.html')) && (!only.length || only.includes(d)));
-const now = new Date(); let changed = 0; const skipped = [];
-for (const slug of dirs) {
-  const file = path.join(SITE, 'passes', slug, 'index.html');
+const jobs = [];
+for (const d of fs.readdirSync(path.join(SITE, 'passes'))) if (fs.existsSync(path.join(SITE, 'passes', d, 'index.html'))) jobs.push({ slug: d, file: path.join(SITE, 'passes', d, 'index.html'), page: d });
+for (const [page, pass] of Object.entries(CHAINS)) if (fs.existsSync(path.join(SITE, page, 'index.html'))) jobs.push({ slug: pass, file: path.join(SITE, page, 'index.html'), page, chains: true });
+const now = new Date(); let changed = 0; const skipped = []; let n = 0;
+for (const job of jobs) {
+  if (only.length && !only.includes(job.page)) continue;
+  n++;
+  const { slug, file } = job;
   let html = fs.readFileSync(file, 'utf8');
-  if (!META[slug]) { skipped.push(`${slug} (no META)`); continue; }
-  const P = parsePass(html, slug);
-  if (!P) { skipped.push(`${slug} (no PASS)`); continue; }
+  if (!META[slug]) { skipped.push(`${job.page} (no META)`); continue; }
+  const passHtml = job.chains ? fs.readFileSync(path.join(SITE, 'passes', slug, 'index.html'), 'utf8') : html;
+  const P = parsePass(passHtml, slug);
+  if (!P) { skipped.push(`${job.page} (no PASS)`); continue; }
   const s = await status(slug, P);
-  if (!s) { skipped.push(`${slug} (feed not live)`); continue; }
-  const block = render(slug, META[slug].q, s, now);
+  if (!s) { skipped.push(`${job.page} (feed not live)`); continue; }
+  const block = job.chains ? renderChains(slug, s, now) : render(slug, META[slug].q, s, now);
   let out;
-  if (RE.test(html)) out = html.replace(RE, block);
+  if (job.chains) out = RE.test(html) ? html.replace(RE, block) : html;
   else {
-    const m = html.match(/<p class="sub">[\s\S]*?<\/p>/);
-    if (!m) { skipped.push(`${slug} (no hero paragraph)`); continue; }
-    const i = html.indexOf(m[0]) + m[0].length;
-    out = html.slice(0, i) + '\n' + block + html.slice(i);
+    // Above the hero paragraph, so it sits in the first screen on a phone. Remove the old block first.
+    const bare = html.replace(/\n?<!-- passnow:start -->[\s\S]*?<!-- passnow:end -->/, '');
+    const m = bare.match(/<p class="sub">/);
+    if (!m) { skipped.push(`${job.page} (no hero paragraph)`); continue; }
+    const k = bare.indexOf(m[0]);
+    out = bare.slice(0, k) + block + '\n    ' + bare.slice(k);
   }
   // The map's loading text is what a crawler sees first. Say what the map is.
   out = out.replace(/(<div class="co-bs" id="coStatus">)Loading live [^<]*?…(<\/div>)/, '$1Live cameras and alerts$2');
   if (out !== html) { fs.writeFileSync(file, out); changed++; }
 }
-console.log(`pass status: ${changed} of ${dirs.length} pages changed${skipped.length ? '; skipped ' + skipped.join(', ') : ''}`);
+console.log(`pass status: ${changed} of ${n} pages changed${skipped.length ? '; skipped ' + skipped.join(', ') : ''}`);

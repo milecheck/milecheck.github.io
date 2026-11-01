@@ -52,3 +52,29 @@ edit('llms.txt', (h) => {
   return add ? h.replace(/(  - Wolf Creek Pass Road Conditions Right Now \(US-160\) — https:\/\/milecheckapp\.com\/passes\/wolf-creek\/\n)/, '$1' + add) : h;
 });
 console.log(`${changed} files changed`);
+
+// 6. The three "are chains required" pages: inbound links from the pass pages, chain-law pages, and the counts page.
+const CH = {
+  'chains-required-snoqualmie-pass': ['Are chains required on Snoqualmie Pass today?', 'WSDOT’s traction and chain lines, what they mean for a car, AWD and a truck.'],
+  'chains-required-stevens-pass': ['Are chains required on Stevens Pass today?', 'WSDOT’s traction and chain lines for US 2 over Stevens Pass.'],
+  'chains-required-mt-hood': ['Are chains required to drive to Mt Hood today?', 'How Oregon posts chain requirements on US 26 and OR 35, and the fines.'],
+};
+const chLink = (n) => `<a href="/${n}/">${CH[n][0]}</a>`;
+for (const [pass, n] of [['snoqualmie', 'chains-required-snoqualmie-pass'], ['stevens', 'chains-required-stevens-pass'], ['mt-hood', 'chains-required-mt-hood']]) {
+  edit(`passes/${pass}/index.html`, (h) => h.includes(`/${n}/`) ? h : h.replace(/(<p class="co-related">)([\s\S]*?)(<\/p>)/, (m, a, body, c) => a + body + ` · ${chLink(n)}` + c));
+}
+const cards = (names) => names.map((n) => `      <a class="sc-card" href="/${n}/"><span class="k">Pass guide</span><h3>${CH[n][0]}</h3><p>${CH[n][1]}</p></a>\n`).join('');
+edit('chain-laws/washington/index.html', (h) => h.includes('/chains-required-snoqualmie-pass/') ? h : h.replace(/(      <a class="sc-card" href="\/chains\/">)/, cards(['chains-required-snoqualmie-pass', 'chains-required-stevens-pass']) + '$1'));
+edit('chain-laws/oregon/index.html', (h) => h.includes('/chains-required-mt-hood/') ? h : h.replace(/(      <a class="sc-card" href="\/chains\/">)/, cards(['chains-required-mt-hood']) + '$1'));
+edit('how-often-are-chains-required-on-washington-passes/index.html', (h) => h.includes('/chains-required-snoqualmie-pass/') ? h : h.replace(/(      <li><a href="\/chain-laws\/washington\/">[^\n]*<\/li>\n)/, `$1      <li>${chLink('chains-required-snoqualmie-pass')} and ${chLink('chains-required-stevens-pass')}</li>\n`));
+edit('road-conditions/washington/index.html', (h) => h.includes('/chains-required-snoqualmie-pass/') ? h : h.replace(/(      <a class="rc-card" href="\/corridors\/)/, `      <a class="rc-card" href="/chains-required-snoqualmie-pass/"><span class="k">Chains</span><h3>Chains on Snoqualmie Pass</h3><p>${CH['chains-required-snoqualmie-pass'][1]}</p></a>\n$1`));
+edit('road-conditions/oregon/index.html', (h) => h.includes('/chains-required-mt-hood/') ? h : h.replace(/(      <a class="rc-card" href="\/corridors\/)/, `      <a class="rc-card" href="/chains-required-mt-hood/"><span class="k">Chains</span><h3>Chains to Mt Hood</h3><p>${CH['chains-required-mt-hood'][1]}</p></a>\n$1`));
+edit('llms.txt', (h) => {
+  const add = Object.keys(CH).filter((n) => !h.includes(`/${n}/`)).map((n) => `  - ${CH[n][0]} — https://milecheckapp.com/${n}/\n`).join('');
+  return add ? h.replace(/(  - Wolf Creek Pass Road Conditions Right Now \(US-160\) — https:\/\/milecheckapp\.com\/passes\/wolf-creek\/\n)/, '$1' + add) : h;
+});
+edit('sitemap.xml', (h) => {
+  const add = Object.keys(CH).filter((n) => !h.includes(`/${n}/<`)).map((n) => `  <url>\n    <loc>https://milecheckapp.com/${n}/</loc>\n    <lastmod>2026-11-01</lastmod>\n    <priority>0.6</priority>\n  </url>\n`).join('');
+  return add ? h.replace('  <url>\n    <loc>https://milecheckapp.com/passes/vail/</loc>', add + '  <url>\n    <loc>https://milecheckapp.com/passes/vail/</loc>') : h;
+});
+console.log(`${changed} files changed (with chains pages)`);
