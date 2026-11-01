@@ -31,7 +31,7 @@ for (const [slug, [code, name, dot]] of Object.entries(STATES)) {
   const block = `<!-- statenow:start -->
 <section class="mc-statenow" aria-label="${esc(name)} road conditions at the last read" style="max-width:1000px;margin:12px 0;padding:14px 18px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
 <h2 style="font-size:18px;margin:0 0 6px">${esc(name)} at the last read</h2>
-<p style="margin:0">The ${esc(dot)} feed lists ${plural(closures.length, 'closure-type alert')}, ${plural(crashes.length, 'crash', 'crashes')} and ${plural(work.length, 'roadwork alert')} on numbered highways right now. Closure-type alerts include lane closures, so read each one.${closures.length ? ' The first ones:' : ''}</p>
+<p style="margin:0">The ${esc(dot)} feed lists ${plural(closures.length, 'closure-type alert')}, ${plural(crashes.length, 'crash', 'crashes')} and ${plural(work.length, 'roadwork alert')} on numbered highways right now. Closure-type alerts include lane closures, so read each one.${closures.length ? ' Listed:' : ''}</p>
 ${lines ? `<ul style="margin:6px 0 0 18px;padding:0">${lines}</ul>${closures.length > 3 ? `<p style="margin:6px 0 0">And ${closures.length - 3} more on the map below.</p>` : ''}` : ''}
 <p style="margin:8px 0 0;font-size:13.5px;color:#5b6670">Read on ${esc(PT.format(new Date(now)))} PT. Chain and traction rules are on the <a href="/chain-laws/${slug === 'alaska' ? 'arizona-new-mexico-alaska' : slug}/" style="color:#0f7a4f;font-weight:700">${esc(name)} chain law page</a>. A feed with no closure is not a promise a road is open. The map below updates live.</p>
 </section>
