@@ -108,7 +108,8 @@ async function status(slug, P) {
       // Stale reports are dropped, except a "closed for the season" notice, which stands until the DOT lifts it (the report's own date is shown).
       // An undated report counts only if it carries a live air-temperature reading.
       const upd = Date.parse(r['date-updated'] || '');
-      const closedText = /\bclosed\b|\bclosure\b/i.test(`${r['road-surface-condition']} ${r['weather-condition']} ${r['restriction-one']} ${r['restriction-two']}`) && !/\bno (road )?closure/i.test(String(r['road-surface-condition']));
+      const onRoute = !routeNum(P.route) || new RegExp('(^|\\D)' + routeNum(P.route) + '(\\D|$)').test(`${r['location-name'] || ''} ${r['route-id'] || ''}`);
+      const closedText = onRoute && /\bclosed\b|\bclosure\b/i.test(`${r['road-surface-condition']} ${r['weather-condition']} ${r['restriction-one']} ${r['restriction-two']}`) && !/\bno (road )?closure/i.test(String(r['road-surface-condition']));
       const hasTemp = r['air-temperature'] != null && r['air-temperature'] !== '' && isFinite(+r['air-temperature']);
       const fresh = isFinite(upd) ? Date.now() - upd <= FRESH_MS : hasTemp;
       if (!fresh && !closedText) continue;

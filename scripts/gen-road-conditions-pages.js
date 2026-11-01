@@ -48,6 +48,8 @@ const PASSES = [ // scripts/gen-pass-pages.js
   ['grapevine', 'The Grapevine (Tejon Pass)', 'I-5', 'CA'], ['donner', 'Donner Pass', 'I-80', 'CA'], ['cajon', 'Cajon Pass', 'I-15', 'CA'],
   ['parleys', 'Parleys Summit', 'I-80', 'UT'], ['little-cottonwood', 'Little Cottonwood Canyon', 'SR-210', 'UT'],
   ['eisenhower', 'Eisenhower Tunnel', 'I-70', 'CO'], ['vail', 'Vail Pass', 'I-70', 'CO'],
+  ['loveland', 'Loveland Pass', 'US-6', 'CO'], ['berthoud', 'Berthoud Pass', 'US-40', 'CO'], ['teton', 'Teton Pass', 'WY-22', 'WY'], ['togwotee', 'Togwotee Pass', 'US-26', 'WY'],
+  ['echo-summit', 'Echo Summit', 'US-50', 'CA'], ['blewett', 'Blewett Pass', 'US-97', 'WA'], // 2026-11-01
 ].filter(([slug]) => exists(`passes/${slug}/index.html`));
 const CITY_CAMS = { // scripts/gen-city-camera-pages.js
   atlanta: 'GA', birmingham: 'AL', buffalo: 'NY', cincinnati: 'OH', cleveland: 'OH', columbus: 'OH', detroit: 'MI', 'las-vegas': 'NV', 'los-angeles': 'CA',

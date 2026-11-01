@@ -30,11 +30,12 @@ const GROUPS = [
     links: [...st(['washington', 'oregon', 'california', 'colorado', 'idaho', 'montana', 'nevada', 'utah', 'wyoming'], 'chain-laws', 'chain law'), ['/chain-laws/british-columbia/', 'British Columbia chain law']] },
   { t: 'Mountain passes', all: ['/passes/', 'Mountain passes'],
     links: [['/passes/snoqualmie/', 'Snoqualmie Pass'], ['/passes/stevens/', 'Stevens Pass'], ['/passes/donner/', 'Donner Pass'], ['/passes/grapevine/', 'The Grapevine'], ['/passes/cajon/', 'Cajon Pass'],
-      ['/passes/eisenhower/', 'Eisenhower Tunnel'], ['/passes/vail/', 'Vail Pass'], ['/passes/siskiyou/', 'Siskiyou Summit'], ['/passes/parleys/', 'Parleys Summit'], ['/passes/little-cottonwood/', 'Little Cottonwood Canyon']] },
+      ['/passes/eisenhower/', 'Eisenhower Tunnel'], ['/passes/vail/', 'Vail Pass'], ['/passes/siskiyou/', 'Siskiyou Summit'], ['/passes/parleys/', 'Parleys Summit'], ['/passes/little-cottonwood/', 'Little Cottonwood Canyon'],
+      ['/passes/loveland/', 'Loveland Pass'], ['/passes/berthoud/', 'Berthoud Pass'], ['/passes/teton/', 'Teton Pass'], ['/passes/togwotee/', 'Togwotee Pass'], ['/passes/echo-summit/', 'Echo Summit'], ['/passes/blewett/', 'Blewett Pass']] },
   { t: 'Interstate corridors', all: ['/corridors/', 'Interstate corridors'],
     links: ['i-5', 'i-90', 'i-80', 'i-70', 'i-15', 'i-95', 'i-75', 'i-10', 'i-40', 'i-94'].map((c) => [`/corridors/${c}/`, `${c.toUpperCase()} conditions`]) },
   { t: 'Closures, rest areas and help', all: ['/closures/', 'US closures map'],
-    links: [['/seasonal/', 'Roads that close for winter'], ['/chains/', 'Chain control map'], ['/snowplows/', 'Snowplow map'], ['/ski/', 'Ski resort roads'], ['/rest-areas/', 'Rest area rules by state'],
+    links: [['/storms/', 'Storm conditions by state'], ['/seasonal/', 'Roads that close for winter'], ['/chains/', 'Chain control map'], ['/snowplows/', 'Snowplow map'], ['/ski/', 'Ski resort roads'], ['/rest-areas/', 'Rest area rules by state'],
       ['/how-long-do-crashes-take-to-clear/', 'How long crashes take to clear'], ['/border-wait-times/', 'Border wait times'], ['/report-location/', 'How to report your location']] },
 ];
 

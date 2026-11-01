@@ -202,7 +202,7 @@ const PASSES = [
   },
   {
     slug: 'i80-wyoming', name: 'I-80 Summit (Laramie)', route: 'I-80', state: 'WY', stateName: 'Wyoming',
-    title: 'Is I-80 open between Laramie and Cheyenne? Road conditions now | MileCheck', ogTitle: 'I-80 Laramie to Cheyenne road conditions | MileCheck', h1: 'Is I-80 open between Laramie and Cheyenne right now?',
+    title: WINTER.PAGES['passes/i80-wyoming'].title, ogTitle: WINTER.PAGES['passes/i80-wyoming'].title, h1: WINTER.PAGES['passes/i80-wyoming'].h1, desc: WINTER.PAGES['passes/i80-wyoming'].desc, // Sherman Hill: 2026-11-01
     dot: 'WYDOT', lat: 41.2367, lon: -105.4369, r: 30, elev: '8,640 ft', dist: '~8 mi', distNote: 'southeast of Laramie on I-80',
     range: 'Laramie Mountains', markerLabel: 'I-80 Summit · 8,640 ft',
     hero: `Live WYDOT road alerts and snow on I-80 over the summit between Laramie and Cheyenne, the highest point on I-80.`,
@@ -314,6 +314,123 @@ const PASSES = [
       ['Do I need chains to drive to Mt Baker?', `WSDOT sets traction and chain requirements on SR-542 above Glacier in winter and posts them on signs.`],
       ['How far is Mt Baker Ski Area from Bellingham?', `About 56 miles east on SR-542, roughly 75 minutes in good weather.`],
       ['How much snow is at Mt Baker right now?', `The snow block above reads the USDA SNOTEL station at Wells Creek, 4,040 feet. See the <a href="../../ski/mt-baker/">Mt Baker ski page</a> and the <a href="../../mountains/baker/">Mt Baker view page</a>.`],
+    ],
+  },
+  // ---- Winter search additions (2026-11-01) --------------------------------------
+  // Added because Search Console showed no page for these passes. Elevations: Loveland 11,990 ft and Berthoud 11,307 ft
+  // (Wikipedia, CDOT-linked hazmat study), Teton 8,431 ft, Togwotee 9,658 ft, Echo Summit 7,382 ft (Wikipedia infobox),
+  // Blewett 4,124 ft (Wikipedia list of Washington passes). Secondary sources: no agency page states an elevation. Checked 2026-11-01.
+  // SNOTEL triplets read from the NRCS AWDB API 2026-11-01. Avalanche centers: BTAC and SAC confirmed on api.avalanche.org.
+  {
+    noPrint: true, // no printable map sheet yet (scripts/gen-map-sheets.mjs)
+    slug: 'loveland', name: 'Loveland Pass', route: 'US-6', state: 'CO', stateName: 'Colorado',
+    title: 'Loveland Pass road conditions, chains and closures today | MileCheck', ogTitle: 'Loveland Pass road conditions today | MileCheck', h1: 'Loveland Pass road conditions today',
+    desc: 'Is Loveland Pass open? Today’s US 6 road conditions from CDOT, closures, snow and plow positions, and why hazmat trucks use this road instead of the Eisenhower Tunnel.',
+    dot: 'CDOT', lat: 39.6639, lon: -105.8786, r: 24, elev: '11,990 ft', dist: '~60 mi', distNote: 'west of Denver via I-70 and US-6',
+    range: 'Continental Divide', markerLabel: 'Loveland Pass · 11,990 ft',
+    hero: `Live CDOT road alerts, snow and plow positions on US 6 over Loveland Pass, the Continental Divide crossing between Keystone and the Interstate 70 exit east of the Eisenhower Tunnel.`,
+    closes: `CDOT closes US 6 over Loveland Pass for storms, avalanche control and crashes. The road is two lanes and climbs above treeline on both sides, so wind and blowing snow reach it fast. When it closes, drivers who are allowed through the tunnel use I-70 instead.`,
+    extra: { h: 'Why trucks with hazardous materials use this road', p: `Under Colorado law, vehicles carrying hazardous materials are not allowed through the Eisenhower Tunnel under normal conditions. They are routed over Loveland Pass on US 6. When the pass is closed, CDOT can escort hazmat vehicles through the tunnel in convoys. That puts more large trucks on this road than its size suggests. Source: <a href="https://www.codot.gov/travel/ejmt/assets/ExecutiveSummaryHazMatStudy.pdf" target="_blank" rel="noopener">CDOT hazmat study, executive summary</a>.` },
+    snow: { station: '602:CO:SNTL', stationName: 'Loveland Basin', stationElev: '11,410 ft', stationNote: 'about 1.5 miles from the summit', avyCenter: 'CAIC', title: 'Snow at Loveland Pass' },
+    plows: { states: ['CO'], agency: 'CDOT' },
+    faq: [
+      ['Is Loveland Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US 6 near the summit, from CDOT, and the box above it says what the CDOT feed listed at the last update. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
+      ['Are chains required on Loveland Pass?', `CDOT sets traction and chain law restrictions and posts them on signs and COtrip. They tighten fast in a storm. See <a href="../../chain-laws/colorado/">Colorado chain laws</a> for what each level means.`],
+      ['How high is Loveland Pass?', `About 11,990 feet on US 6, higher than the 11,158-foot <a href="../eisenhower/">Eisenhower Tunnel</a> just north of it.`],
+      ['Why do trucks drive over Loveland Pass?', `Vehicles carrying hazardous materials are not allowed through the Eisenhower Tunnel and are routed over the pass, according to CDOT's hazmat study.`],
+      ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. Parked trucks are listed too.`],
+    ],
+  },
+  {
+    noPrint: true, // no printable map sheet yet (scripts/gen-map-sheets.mjs)
+    slug: 'berthoud', name: 'Berthoud Pass', route: 'US-40', state: 'CO', stateName: 'Colorado',
+    title: 'Berthoud Pass road conditions, chains and closures today | MileCheck', ogTitle: 'Berthoud Pass road conditions today | MileCheck', h1: 'Berthoud Pass road conditions today',
+    desc: 'Is Berthoud Pass open? Today’s US 40 road conditions from CDOT, avalanche closures, snow, chain law and plow positions between Winter Park and I-70.',
+    dot: 'CDOT', lat: 39.7981, lon: -105.7778, r: 24, elev: '11,307 ft', dist: '~52 mi', distNote: 'west of Denver via I-70 and US-40',
+    range: 'Front Range', markerLabel: 'Berthoud Pass · 11,307 ft',
+    hero: `Live CDOT road alerts, snow and plow positions on US 40 over Berthoud Pass, the road between Empire on I-70 and Winter Park.`,
+    closes: `US 40 over Berthoud Pass closes for avalanche control and after slides. Mapped avalanche paths cross the highway, and in January 2024 a slide hit ten vehicles and closed the road for much of the day, with no injuries reported. CDOT also runs an automated system that sets off one of the paths.`,
+    extra: { h: 'When it closes, the way around is long', p: `A closure on Berthoud Pass cuts off the quick link between the Denver area and Winter Park. In the 2024 closure CDOT pointed drivers west on US 40 to Colorado 9, then south to I-70. Check the closure first, because that route adds a lot of time. Sources: <a href="https://en.wikipedia.org/wiki/Berthoud_Pass" target="_blank" rel="noopener">Berthoud Pass</a>, <a href="https://www.summitdaily.com/news/avalanche-snags-10-vehicles-on-berthoud-pass-causing-lengthy-closure/" target="_blank" rel="noopener">Summit Daily</a>.` },
+    snow: { station: '335:CO:SNTL', stationName: 'Berthoud Summit', stationElev: '11,300 ft', stationNote: 'at the summit', avyCenter: 'CAIC', title: 'Snow at Berthoud Pass' },
+    plows: { states: ['CO'], agency: 'CDOT' },
+    faq: [
+      ['Is Berthoud Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US 40 near the summit, from CDOT, and the box above it says what the CDOT feed listed at the last update. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
+      ['Are chains required on Berthoud Pass?', `CDOT sets traction and chain law restrictions and posts them on signs and COtrip. See <a href="../../chain-laws/colorado/">Colorado chain laws</a> for what each level means.`],
+      ['How high is Berthoud Pass?', `About 11,307 feet on US 40. Compare <a href="../loveland/">Loveland Pass</a> and <a href="../eisenhower/">the Eisenhower Tunnel</a> on the same side of the Divide.`],
+      ['Why does Berthoud Pass close?', `Mostly for avalanche control and slides across the highway. Heavy snow and crashes also close it.`],
+      ['Where are the plows?', `The Snowplows list above shows CDOT plow positions within the map radius, updated about every minute. Parked trucks are listed too.`],
+    ],
+  },
+  {
+    noPrint: true, // no printable map sheet yet (scripts/gen-map-sheets.mjs)
+    slug: 'teton', name: 'Teton Pass', route: 'WY-22', state: 'WY', states: ['WY', 'ID'], stateName: 'Wyoming and Idaho',
+    title: 'Teton Pass road conditions, closures and cameras today | MileCheck', ogTitle: 'Teton Pass road conditions today | MileCheck', h1: 'Teton Pass road conditions today',
+    desc: 'Is Teton Pass open? Today’s WY 22 and ID 33 road conditions between Jackson and Victor from WYDOT and Idaho 511, closures, snow, and the 10 percent grade.',
+    dot: 'WYDOT', lat: 43.4986, lon: -110.9511, r: 24, elev: '8,431 ft', dist: '~12 mi', distNote: 'west of Jackson on WY-22',
+    range: 'Teton Range', markerLabel: 'Teton Pass · 8,431 ft',
+    hero: `Live road alerts and snow on WY 22 over Teton Pass, the steep link between Jackson, Wyoming and Victor, Idaho. Wyoming 22 becomes Idaho 33 at the state line.`,
+    closes: `WYDOT closes the pass for snow, slides and crashes, and a closure strands commuters who live in Idaho and work in Jackson. Signs on the descent warn of a 10 percent grade. Chains, low gear and room between vehicles matter more here than on a typical mountain pass.`,
+    extra: { h: 'One road, two states', p: `The pass is a daily commute for people who live in Victor and Driggs and work in Jackson, so a closure shows up fast in both states. MileCheck reads the Wyoming and Idaho feeds together for this page. The elevation and grade here come from secondary sources, so go by the signs and the WYDOT report on the road.` },
+    snow: { station: '689:WY:SNTL', stationName: 'Phillips Bench', stationElev: '8,170 ft', stationNote: 'about 2 miles from the summit', avyCenter: 'BTAC', title: 'Snow at Teton Pass' },
+    faq: [
+      ['Is Teton Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on WY 22 and ID 33 near the pass, and the box above it says what the WYDOT and Idaho feeds listed at the last update. See the <a href="../../road-conditions/wyoming/">Wyoming road conditions map</a>.`],
+      ['Are chains required on Teton Pass?', `WYDOT posts chain and traction requirements on the pass in winter. See <a href="../../chain-laws/wyoming/">Wyoming chain laws</a> and follow the signs.`],
+      ['How steep is Teton Pass?', `Signs on the descent post a 10 percent grade, by secondary sources. Use a low gear and do not ride the brakes.`],
+      ['How high is Teton Pass?', `About 8,431 feet on WY 22, between Jackson, Wyoming and Victor, Idaho.`],
+    ],
+  },
+  {
+    noPrint: true, // no printable map sheet yet (scripts/gen-map-sheets.mjs)
+    slug: 'togwotee', name: 'Togwotee Pass', route: 'US-26', state: 'WY', stateName: 'Wyoming',
+    title: 'Togwotee Pass road conditions, closures and snow today | MileCheck', ogTitle: 'Togwotee Pass road conditions today | MileCheck', h1: 'Togwotee Pass road conditions today',
+    desc: 'Is Togwotee Pass open? Today’s US 26 and US 287 road conditions from WYDOT between Dubois and Moran Junction, closures, snow and avalanche danger.',
+    dot: 'WYDOT', lat: 43.7461, lon: -110.0586, r: 30, elev: '9,658 ft', dist: '~25 mi', distNote: 'east of Moran Junction on US-26',
+    range: 'Absaroka Range', markerLabel: 'Togwotee Pass · 9,658 ft',
+    hero: `Live WYDOT road alerts and snow on US 26 and US 287 over Togwotee Pass, which crosses the Continental Divide between Dubois and Moran Junction on the way to Jackson and Grand Teton National Park.`,
+    closes: `Blizzards can close the road for extended periods. It is a long, high stretch with few services, so a closure here can leave a long way to the next town. Check the alerts before you leave Dubois or Moran.`,
+    extra: { h: 'A long way between towns', p: `There are about 25 miles between the summit and Moran Junction, and the road between Dubois and the pass has little in between. Fill the tank and carry what you need for a delay. The elevation comes from secondary sources, so go by the posted signs.` },
+    snow: { station: '822:WY:SNTL', stationName: 'Togwotee Pass', stationElev: '9,590 ft', stationNote: 'at the pass', avyCenter: 'BTAC', title: 'Snow at Togwotee Pass' },
+    faq: [
+      ['Is Togwotee Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US 26 and US 287 near the pass, from WYDOT, and the box above it says what the WYDOT feed listed at the last update. See the <a href="../../road-conditions/wyoming/">Wyoming road conditions map</a>.`],
+      ['Are chains required on Togwotee Pass?', `WYDOT posts chain and traction requirements in winter. See <a href="../../chain-laws/wyoming/">Wyoming chain laws</a> and follow the signs.`],
+      ['How high is Togwotee Pass?', `About 9,658 feet, on the Continental Divide in the Absaroka Range.`],
+      ['Where is Togwotee Pass?', `On US 26 and US 287 between Dubois and Moran Junction, Wyoming, about 25 miles east of Moran Junction.`],
+    ],
+  },
+  {
+    noPrint: true, // no printable map sheet yet (scripts/gen-map-sheets.mjs)
+    slug: 'echo-summit', name: 'Echo Summit', route: 'US-50', state: 'CA', stateName: 'California',
+    title: 'Echo Summit road conditions, chain controls and closures today | MileCheck', ogTitle: 'Echo Summit road conditions today | MileCheck', h1: 'Echo Summit road conditions today',
+    desc: 'Is Echo Summit open? Today’s US 50 road conditions near South Lake Tahoe from Caltrans, closures, chain control rules, snow and webcams.',
+    dot: 'Caltrans', lat: 38.8128, lon: -120.0306, r: 24, elev: '7,382 ft', dist: '~10 mi', distNote: 'southwest of South Lake Tahoe on US-50',
+    range: 'Sierra Nevada', markerLabel: 'Echo Summit · 7,382 ft',
+    hero: `Live Caltrans road alerts and snow on US 50 over Echo Summit, the Sierra Nevada crossing between Placerville and South Lake Tahoe.`,
+    closes: `Caltrans closes US 50 over Echo Summit for snow slides and rock slides, and runs chain controls through the winter. A snowslide closed it for hours in January 2023, and a boulder blocked both directions in March 2022. Slides can close the road with little warning.`,
+    extra: { h: 'Chain controls', p: `Caltrans sets chain controls on US 50 by segment as storms arrive, and a four-wheel-drive or all-wheel-drive car with snow-tread tires on all four wheels is exempt from some levels but must still carry chains. See <a href="../../chain-laws/california/">California chain laws</a> for R1, R2 and R3. MileCheck does not yet read Caltrans chain-control status, so confirm the level on QuickMap or the signs.` },
+    snow: { station: '463:CA:SNTL', stationName: 'Echo Peak', stationElev: '7,650 ft', stationNote: 'about 3.5 miles from the summit and 270 feet above it', avyCenter: 'SAC', title: 'Snow at Echo Summit' },
+    faq: [
+      ['Is Echo Summit open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US 50 near the summit, from Caltrans, and the box above it says what the Caltrans feed listed at the last update. See the <a href="../../road-conditions/california/">California road conditions map</a>.`],
+      ['Are chains required on Echo Summit?', `Caltrans posts chain controls on US 50 by segment, and they change with the storm. Check <a href="https://quickmap.dot.ca.gov/" target="_blank" rel="noopener">QuickMap</a> or the signs. See <a href="../../chain-laws/california/">California chain laws</a> for what R1, R2 and R3 mean.`],
+      ['How high is Echo Summit?', `About 7,382 feet on US 50 in El Dorado County, by Wikipedia's infobox. Its text gives 7,377 feet.`],
+      ['Why does Echo Summit close?', `Snow slides, rock slides and storms. A snowslide closed it for hours in January 2023.`],
+    ],
+  },
+  {
+    noPrint: true, // no printable map sheet yet (scripts/gen-map-sheets.mjs)
+    slug: 'blewett', name: 'Blewett Pass', route: 'US-97', state: 'WA', stateName: 'Washington',
+    title: 'Blewett Pass road conditions, chains and closures today | MileCheck', ogTitle: 'Blewett Pass road conditions today | MileCheck', h1: 'Blewett Pass road conditions today',
+    desc: 'Is Blewett Pass open? Today’s US 97 road conditions from WSDOT, chain and traction rules, closures, snow and cameras between Cle Elum and Wenatchee.',
+    dot: 'WSDOT', lat: 47.3500, lon: -120.6750, r: 24, elev: '4,124 ft', dist: 'between', distNote: 'Cle Elum on I-90 and Wenatchee',
+    range: 'Wenatchee Mountains', markerLabel: 'Blewett Pass · 4,124 ft',
+    hero: `Live WSDOT road conditions and alerts on US 97 over Blewett Pass, the route between Ellensburg and Cle Elum on I-90 and Wenatchee and US 2.`,
+    closes: `WSDOT posts traction tire and chain requirements on Blewett Pass in winter, and snow and crashes close it. It is lower than Snoqualmie and Stevens, but it is a common choice when those two are bad, which puts more traffic on it in a storm.`,
+    extra: { h: 'When the other crossings are bad', p: `If I-90 or US 2 is closed, drivers look at US 97. Check WSDOT's report for Blewett before you commit, and compare <a href="../snoqualmie/">Snoqualmie Pass</a> and <a href="../stevens/">Stevens Pass</a>. For how often WSDOT has required chains on each Washington pass this season, see <a href="../../how-often-are-chains-required-on-washington-passes/">how often chains are required on Washington passes</a>. The elevation comes from Wikipedia's list of Washington passes.` },
+    snow: { station: '352:WA:SNTL', stationName: 'Blewett Pass', stationElev: '4,240 ft', stationNote: 'at the pass', title: 'Snow at Blewett Pass' },
+    faq: [
+      ['Is Blewett Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US 97 near the summit, from WSDOT, and the box above it says what the WSDOT feed listed at the last update. See the <a href="../../road-conditions/washington/">Washington road conditions map</a>.`],
+      ['Are chains required on Blewett Pass?', `WSDOT sets traction tire and chain requirements and posts them on signs and its pass report. See <a href="../../chain-laws/washington/">Washington chain laws</a> for what each line means.`],
+      ['How high is Blewett Pass?', `About 4,124 feet on US 97, in the Wenatchee Mountains.`],
+      ['Where is Blewett Pass?', `On US 97 between Ellensburg and Wenatchee. SR 970 connects it to I-90 at Cle Elum.`],
     ],
   },
 ];
@@ -1163,7 +1280,7 @@ ${p.snow || p.plows ? `
 
   <section class="co-guide">
     <h2>${p.aboutH || `About ${p.name}`}</h2>
-    <p style="margin:10px 0 18px"><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>
+    ${p.noPrint ? '' : `<p style="margin:10px 0 18px"><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>`}
     <p class="lede">${p.lede || `${p.name} carries ${p.route} over the ${p.range} at ${p.elev}. Here's what to watch, and when it bites.`}</p>
 ${segsHtml}
   </section>

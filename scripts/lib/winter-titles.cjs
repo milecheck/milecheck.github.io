@@ -16,6 +16,11 @@ const PAGES = {
     h1: 'Snoqualmie Pass road conditions and webcams today',
     desc: 'Is Snoqualmie Pass open? Today’s I-90 road and driving conditions from WSDOT, chain and traction rules for each direction, summit temperature, webcams and closures.',
   },
+  'passes/i80-wyoming': {
+    title: 'Is I-80 open at Sherman Hill? Laramie to Cheyenne road conditions today | MileCheck',
+    h1: 'Is I-80 open at Sherman Hill, between Laramie and Cheyenne?',
+    desc: 'Is I-80 open at Sherman Hill? Today’s I-80 road conditions from WYDOT between Laramie and Cheyenne: closures, wind, snow, and the highest point on I-80.',
+  },
   'seasonal/tioga-pass': { title: 'Is Tioga Pass open? Road status today and opening dates | MileCheck' },
   'seasonal/chinook-pass': { title: 'Is Chinook Pass open? Road status today and opening dates | MileCheck' },
   'road-conditions/alberta': { title: 'Alberta road conditions today: closures and highway cameras | MileCheck' },

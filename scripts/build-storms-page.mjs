@@ -20,13 +20,13 @@ const PASS_STATES = ['WA','OR','ID','CA','CO','UT','WY'];
 const PASS_AREA = /cascade|pass|mountain|sierra|siskiyou|wasatch|uinta|crest|summit|higher elevation|western chelan|western okanogan/i;
 // Pass pages by state (US only; Canadian passes are not in the storm check).
 const PASSES = {
-  WA: [['snoqualmie','Snoqualmie'],['stevens','Stevens'],['white','White'],['mt-baker-highway','Mt Baker Highway'],['crystal-mountain','Crystal Mountain']],
+  WA: [['snoqualmie','Snoqualmie'],['blewett','Blewett'],['stevens','Stevens'],['white','White'],['mt-baker-highway','Mt Baker Highway'],['crystal-mountain','Crystal Mountain']],
   OR: [['siskiyou','Siskiyou Summit'],['santiam','Santiam'],['willamette','Willamette'],['mt-hood','Mt Hood'],['cabbage-hill','Cabbage Hill'],['anthony-lakes','Anthony Lakes']],
   ID: [['lookout','Lookout']], MT: [['lookout','Lookout']],
-  CA: [['donner','Donner'],['grapevine','The Grapevine'],['cajon','Cajon']],
-  CO: [['eisenhower','Eisenhower Tunnel'],['vail','Vail'],['monarch','Monarch'],['wolf-creek','Wolf Creek']],
+  CA: [['donner','Donner'],['echo-summit','Echo Summit'],['grapevine','The Grapevine'],['cajon','Cajon']],
+  CO: [['eisenhower','Eisenhower Tunnel'],['loveland','Loveland'],['berthoud','Berthoud'],['vail','Vail'],['monarch','Monarch'],['wolf-creek','Wolf Creek']],
   UT: [['parleys','Parleys Summit'],['little-cottonwood','Little Cottonwood']],
-  WY: [['i80-wyoming','I-80 Summit (Laramie)']],
+  WY: [['i80-wyoming','I-80 Summit (Laramie)'],['teton','Teton'],['togwotee','Togwotee']],
 };
 const slug = s => NAMES[s].toLowerCase().replace(/ /g, '-');
 const has = p => fs.existsSync(path.join(SITE, p));
