@@ -220,6 +220,30 @@ history[today] = Object.fromEntries(ALL.filter((st) => !live[st].errors.length).
 for (const d of Object.keys(history).sort().slice(0, -29)) delete history[d];
 try { fs.writeFileSync(HISTORY_FILE, JSON.stringify(history)); } catch (e) { warnings.push(`could not save history: ${e.message}`); }
 
+// Companion apps (2026-11-01, Planner backlog). Neither was watched before. Seattle Drawbridges reads /bridge-status; Mountain Visibility
+// serves each mountain's data.json from its own Worker. A bridge feed with no change for 12 h is a warning (quiet nights happen) and a failure at 36 h;
+// a mountain whose weather observation is over 3 h old, or whose forecast read none of its samples, fails. --fake-stale=apps ages the readings for a test.
+const APP_OBS_MAX_H = 3, BRIDGE_FAIL_H = 36;
+const ageShift = args.includes('--fake-stale=apps') ? 100 * 3600e3 : 0;
+try {
+  const b = await getJson(`${WORKER}/bridge-status`);
+  const since = Number.isFinite(b.lastTransitionAt) ? (Date.now() + ageShift - b.lastTransitionAt * 1000) / 3600e3 : null;
+  if (since == null) flag('app:drawbridges', 'Seattle Drawbridges: /bridge-status has no last bridge change on record');
+  else if (since > BRIDGE_FAIL_H) flag('app:drawbridges', `Seattle Drawbridges: no bridge change for ${Math.round(since)} h (the SDOT feed may be frozen)`);
+  else if (b.feedFrozen || since > 12) warnings.push(`Seattle Drawbridges: no bridge change for ${Math.round(since)} h. Quiet nights happen; it fails at ${BRIDGE_FAIL_H} h.`);
+} catch (e) { flag('app:drawbridges', `Seattle Drawbridges: /bridge-status did not answer (${e.message})`); }
+for (const m of ['rainier', 'hood', 'baker', 'denali']) {
+  try {
+    const d = await getJson(`https://${m}-is-out.leahgerber93.workers.dev/data.json`);
+    const obs = Date.parse(d.now && d.now.asOf);
+    const age = Number.isFinite(obs) ? (Date.now() + ageShift - obs) / 3600e3 : null;
+    if (age == null) flag(`app:mountain-${m}`, `Mountain Visibility ${m}: no weather observation time in data.json`);
+    else if (age > APP_OBS_MAX_H) flag(`app:mountain-${m}`, `Mountain Visibility ${m}: weather observation is ${age.toFixed(1)} h old (limit ${APP_OBS_MAX_H} h)`);
+    const f = d.forecast || {};
+    if (!(f.samplesRead > 0)) flag(`app:mountain-${m}`, `Mountain Visibility ${m}: the forecast read none of its ${f.samplesPlanned ?? '?'} samples`);
+    else if (f.samplesRead < f.samplesPlanned) warnings.push(`Mountain Visibility ${m}: forecast read ${f.samplesRead} of ${f.samplesPlanned} samples`);
+  } catch (e) { flag(`app:mountain-${m}`, `Mountain Visibility ${m}: data.json did not answer (${e.message})`); }
+}
 for (const k of Object.keys(known)) if (!seenBroken.has(k)) warnings.push(`${k} is listed in knownBroken but looks healthy now. Remove it and run --update-baseline.`);
 // Every public page must carry the current GA4 tag (scripts/ga4-check.mjs).
 try {
