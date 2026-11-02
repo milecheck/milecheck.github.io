@@ -175,6 +175,9 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
     h2.rc{margin-top:44px;}
     .rc-fig{font-size:14px;color:#5C6670;margin:-12px 0 20px;}
     body.hr-national .article-wrap{max-width:1040px;}
+    .sec-row{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;margin:0 0 22px;}
+    .sec-text{flex:1 1 420px;min-width:0;}
+    .sec-fig{flex:0 1 300px;min-width:220px;margin:0;}
     .wn-grid{display:flex;flex-direction:column;margin:6px 0 26px;border-top:1px solid #E4E7EA;}
     .wn-card{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid #E4E7EA;}
     .wn-ic{flex:none;width:44px;height:44px;border-radius:10px;background:#E8F3EC;color:#0f7a4f;display:flex;align-items:center;justify-content:center;}
@@ -380,22 +383,20 @@ national.push(methodBox('each state department of transportation (DOT) road feed
 const JUMP = `<p style="margin:4px 0 30px;"><a href="#by-state" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;">Find your state &darr;</a></p>`;
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(JUMP);
-// Monthly maps (scripts/road-report-maps/build.sh in the app repo). Shown when the images exist.
-{
-  // Order set by Leah 2026-11-02: closures, crashes, snow and ice, (plows), cameras, drawbridges, wildfires.
-  const MAPS = [['closure', 'Road closure alerts'], ['crash', 'Crash alerts'], ['snow', 'Snow, ice and chain alerts'], ['plows', 'Where snowplows reported'], ['cameras', 'Every DOT camera on MileCheck, as the month closed'], ['bridges', 'Seattle drawbridge openings, sped up'], ['fires', 'Wildfires on the national feed, Oct. 31']]
-    .filter(([k]) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k === 'bridges' ? 'bridges.mp4' : `${k}.webp`}`)));
-  if (MAPS.length) {
-    national.push(`<h2 class="rc" id="month-map">The month on a map</h2>`);
-    national.push(`<p>On the alert maps, each dot is one alert a feed posted in ${MONTH_NAME}. Blank areas can mean a feed does not post that kind of alert, so these maps show where alerts were posted, not every crash or closure.</p>`);
-    // All the month's maps stay together, the drawbridge time-lapse first (Leah 2026-11-02).
-    const tlTile = `<figure id="drawbridge-timelapse" style="margin:0;"><video src="highway-report-maps/${KEY}/bridges.mp4" poster="highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">Seattle drawbridge openings, sped up. <a href="${STATE_DIR_NAME}/washington.html#drawbridges">More in the Washington report</a></figcaption></figure>`;
-    national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:0 0 26px;">${MAPS.map(([k, t]) => k === 'bridges' ? tlTile : `<figure style="margin:0;"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${k === 'fires' ? `${t}, one dot per fire, sized by acres` : k === 'cameras' ? `${t}, one dot per camera` : `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${t}</figcaption></figure>`).join('')}</div>`);
-  }
-}
+// Monthly maps (scripts/road-report-maps/build.sh in the app repo), each in its own section beside the text
+// (Leah 2026-11-02: crashes under Crashes, closures under Closures, wildfires under Wildfires). Shown when the file exists.
+const mapExists = (k) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k === 'bridges' ? 'bridges.mp4' : `${k}.webp`}`));
+const mapFig = (k, caption, alt) => !mapExists(k) ? '' : k === 'bridges'
+  ? `<figure class="sec-fig"><video src="highway-report-maps/${KEY}/bridges.mp4" poster="highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`
+  : `<figure class="sec-fig"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${alt}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`;
+const alertAlt = (t) => `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`;
+const DOTS = 'Each dot is one alert a feed posted. Blank areas can mean a feed does not post that kind of alert.';
+const rowOpen = '<div class="sec-row"><div class="sec-text">';
+const rowClose = (fig) => `</div>${fig}</div>`;
 national.push(`<h2 class="rc">Crashes</h2>`);
-national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes appear on its feed. Your state's page shows which routes had the most crash alerts. <a href="#month-map">See where they were posted &uarr;</a></p>`);
-// Feeds with no crash alerts this month, listed under the paragraph in italics (Leah 2026-11-02).
+national.push(rowOpen);
+national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes appear on its feed. Your state's page shows which routes had the most crash alerts. </p>`);
+// Feeds with no crash alerts this month, listed under the paragraph in italics. Not linked: nothing to click through to (Leah 2026-11-02).
 {
   const none = J.filter((x) => !(x.crash > 0)).map((x) => x.state).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
   const hist = D.stateHistory || {};
@@ -403,11 +404,14 @@ national.push(`<p>Road feeds in ${crashStates.length} states and provinces poste
   const months = never.length ? (hist[never[0]] || []).map((m) => m.month) : [];
   const since = months.length ? new Date(`${months[0]}-01T12:00:00Z`).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long' }) : '';
   const andList = (a) => a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`;
-  if (none.length) national.push(`<p class="rc-fig" style="margin-top:-12px;"><em>${andList(none.map((st) => stLink(st)))} posted no crash alerts in ${MONTH_NAME}.${never.length ? ` ${andList(never.map((st) => stLink(st)))} have not posted a crash alert since ${since}.` : ''}</em></p>`);
+  if (none.length) national.push(`<p class="rc-fig" style="margin-top:-12px;"><em>${andList(none.map((st) => NAMES[st]))} posted no crash alerts in ${MONTH_NAME}.${never.length ? ` ${andList(never.map((st) => NAMES[st]))} have not posted a crash alert since ${since}.` : ''}</em></p>`);
 }
+national.push(rowClose(mapFig('crash', `Crash alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Crash alerts'))));
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
-national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most. <a href="#month-map">See where they were posted &uarr;</a></p>`);
+national.push(rowOpen);
+national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most. </p>`);
+national.push(rowClose(mapFig('closure', `Road closure alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Road closure alerts'))));
 // The national month-by-month section was cut (Leah 2026-11-02); state pages keep their own history.
 // Feed-change notes go on that state's own page only (Leah 2026-11-02).
 if (BW && BW.byMax.length) {
@@ -418,21 +422,30 @@ if (BW && BW.byMax.length) {
   national.push(`<p>Live waits are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
 }
 // Seattle drawbridges moved to the Washington page (Leah 2026-11-02). The time-lapse stays with the maps.
+// Camera map and the drawbridge time-lapse together (Leah 2026-11-02).
+if (mapExists('cameras') || mapExists('bridges')) {
+  national.push(`<h2 class="rc">Cameras and drawbridges</h2>`);
+  national.push(`<div class="sec-row">${mapFig('cameras', `Every DOT camera on MileCheck as ${MONTH_NAME} closed, one dot per camera.`, 'Every DOT camera on MileCheck, one dot per camera')}${mapFig('bridges', `Seattle drawbridge openings in ${MONTH_NAME}, sped up. <a href="${STATE_DIR_NAME}/washington.html#drawbridges">More in the Washington report</a>`, '')}</div>`);
+}
 if (FA) {
   const fireStates = Object.entries(FA.byState).sort((a, b) => b[1].acres - a[1].acres);
   national.push(`<h2 class="rc">Wildfires</h2>`);
+  national.push(rowOpen);
   national.push(`<p>The national wildfire feed (NIFC, plus the BC Wildfire Service) listed ${n(faTotals.active)} fire records ${fireAsOf} in the states and provinces we track, after prescribed burns were removed.${EX && EX.fires1000Plus != null ? ` ${n(EX.firesUnderOneAcre)} of them were under an acre. ${n(EX.fires1000Plus)} were 1,000 acres or more, and ${n(EX.fires1000PlusNotContained)} of those were not fully contained.` : ' Many are mostly or fully contained.'}</p>`);
+  national.push(rowClose(mapFig('fires', `Wildfires on the national feed, ${fireAsOf}. Dot size shows acres.`, 'Wildfires on the national feed, one dot per fire, sized by acres')));
   // Top three shown, the rest behind a dropdown (Leah 2026-11-02: the top three were each over 100,000 acres).
   const bigFires = fireStates.flatMap(([st, s]) => s.largest.map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${stLink(st)}</strong> &mdash; ${fireLine(f, st)}`);
   national.push(`<div class="pull-stat"><strong>Largest fires, ${fireAsOf}</strong>${list(bigFires.slice(0, 3))}${bigFires.length > 3 ? `<details style="margin-top:6px;"><summary style="cursor:pointer;font-weight:600;color:#0f7a4f;padding:10px 0;">Show the next ${bigFires.length - 3}</summary>${list(bigFires.slice(3))}</details>` : ''}</div>`);
   national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
-  national.push(`<p>${existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/fires.webp`)) ? '<a href="#month-map">See where they were burning &uarr;</a> ' : ''}Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
+  national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
 }
 {
   const wst = [...new Set(SEASONAL.flatMap((e) => String(e.state).split('/')))].filter((k) => NAMES[k]).sort((x, y) => NAMES[x].localeCompare(NAMES[y]));
   if (wst.length) {
     national.push(`<h2 class="rc">Winter closures</h2>`);
+    national.push(rowOpen);
     national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Tap a state for each road's usual closing and reopening times and the agency source. We update the list each month through winter.</p>`);
+    national.push(rowClose(mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts')) + mapFig('plows', `Where snowplows reported, ${MONTH_NAME}.`, 'Where snowplows reported, one dot per reported position')));
     const roadName = (e) => esc(String(e.name).replace(/\s*\(.*?\)\s*/g, ' ').replace(/ closure$/i, '').trim());
     national.push(box('Roads that usually close for winter', wst.map((k) => {
       const roads = [...new Set(SEASONAL.filter((e) => e.publicLine && String(e.state).split('/').includes(k)).map(roadName))];
