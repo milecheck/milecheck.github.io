@@ -319,7 +319,7 @@ national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(JUMP);
 // Monthly maps (scripts/road-report-maps/build.sh in the app repo). Shown when the images exist.
 {
-  const MAPS = [['snow', 'Snow, ice and chain alerts'], ['crash', 'Crash alerts'], ['closure', 'Road closure alerts']]
+  const MAPS = [['snow', 'Snow, ice and chain alerts'], ['crash', 'Crash alerts'], ['closure', 'Road closure alerts'], ['cameras', 'Every DOT camera on MileCheck, as the month closed']]
     .filter(([k]) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k}.webp`)));
   if (MAPS.length) {
     national.push(`<h2 class="rc">The month on a map</h2>`);
