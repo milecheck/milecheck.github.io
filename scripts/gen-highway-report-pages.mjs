@@ -79,7 +79,26 @@ const LT_WHAT = {
 };
 const ltLine = (p) => `<strong>${NAMES[p.state]}, ${esc(route(p.state, p.route || ''))}</strong> &mdash; ${esc(LT_WHAT[`${p.state} ${p.route}`] || quote(p.headline).slice(0, 110))}. Posted window ${dateLong(p.start)} to ${dateLong(p.end)}.`;
 // ---------- shared page chrome ----------
-function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld }) {
+// Call-to-action block at the end of the national report (Leah 2026-11-02): the app, the email report,
+// sharing, the dash display, the other apps and social. Replaces the single "live version" box there.
+function nextSteps(rel) {
+  const card = (title, text, actions) => `<div style="background:#fff;border:1px solid #E4E7EA;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;"><strong style="font-size:16px;color:#0F1419;">${title}</strong><span style="font-size:14.5px;line-height:1.5;color:#3D454D;">${text}</span><span style="display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;">${actions}</span></div>`;
+  const btn = (href, label) => `<a href="${href}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 14px;background:#0f7a4f;color:#fff;font-weight:700;font-size:14px;border-radius:8px;text-decoration:none;">${label}</a>`;
+  const share = `<button type="button" onclick="(async()=>{const u=location.href.split('#')[0];try{if(navigator.share){await navigator.share({title:document.title,url:u});return}}catch(e){return}try{await navigator.clipboard.writeText(u);this.textContent='Link copied'}catch(e){prompt('Copy this link',u)}})()" style="min-height:44px;padding:0 14px;background:#0f7a4f;color:#fff;font-weight:700;font-size:14px;font-family:inherit;border:0;border-radius:8px;cursor:pointer;">Share this report</button>`;
+  return `<section style="margin:48px 0 0;">
+        <h2 class="rc" style="margin-top:0;">Keep up with MileCheck</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 24px;">
+        ${card('Get the app', 'Live state DOT feeds in all 50 states, British Columbia, Alberta and Manitoba, with your nearest mile marker.', btn('https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&amp;ct=highway-report-cta&amp;mt=8', 'App Store') + btn('https://play.google.com/store/apps/details?id=app.milecheck.mobile&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report-cta', 'Google Play'))}
+        ${card('Get the Highway Report by email', 'Once a month, plus special reports like Thanksgiving travel. No spam.', btn('#subscribe', 'Sign up'))}
+        ${card('Share this report', 'Send it to someone who drives for work so they can sign up for the Highway Report.', share)}
+        ${card('Want a mile marker display on your dash?', 'Join the early access list. Sign-ups help us fund it and make it a reality.', btn(`${rel}dash-preorder.html`, 'Join early access'))}
+        ${card('Our other apps', 'Mountain Visibility tells you if the mountain is out. Seattle Drawbridges shows which bridges are up.', btn(`${rel}mountains/`, 'Mountain Visibility') + btn(`${rel}seattle-drawbridges/`, 'Seattle Drawbridges'))}
+        ${card('Follow MileCheck', 'Maps, road news and Roy. Instagram is the fun one.', btn('https://www.instagram.com/milecheck_app', 'Instagram') + btn('https://www.facebook.com/share/1FT9JtkH5D/', 'Facebook') + btn('https://x.com/milecheckapp', 'X') + btn('https://www.youtube.com/@milecheckapp', 'YouTube'))}
+        </div>
+      </section>
+`;
+}
+function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld, wide }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,12 +146,13 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
     .state-grid a:hover{border-bottom-color:#00A86B;}
     h2.rc{margin-top:44px;}
     .rc-fig{font-size:14px;color:#5C6670;margin:-12px 0 20px;}
+    body.hr-national .article-wrap{max-width:1040px;}
     .article-wrap p a:not([style]), .article-wrap li a:not([style]){color:#0f7a4f;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600;}
     .article-wrap .state-grid li a{color:#0F1419;text-decoration:none;font-weight:400;}
   </style>
 </head>
 
-<body>
+<body${wide ? ' class="hr-national"' : ''}>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -162,12 +182,12 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
 
 ${body}
 
-      <div class="article-cta">
+${wide ? nextSteps(rel) : `      <div class="article-cta">
         <h3>The live version is in the app.</h3>
         <p>MileCheck shows state DOT feeds for crashes, closures, and delays in all 50 states, British Columbia, Alberta and Manitoba as they are published, with your nearest mile marker, or kilometre marker in Canada.</p>
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
-      </div>
+      </div>`}
 
       <p class="article-note">Built from MileCheck's archive of state DOT road feeds. A new Highway Report comes out at the start of every month.</p>
 
@@ -323,16 +343,19 @@ national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(JUMP);
 // Monthly maps (scripts/road-report-maps/build.sh in the app repo). Shown when the images exist.
 {
-  const MAPS = [['snow', 'Snow, ice and chain alerts'], ['crash', 'Crash alerts'], ['closure', 'Road closure alerts'], ['plows', 'Where snowplows reported'], ['cameras', 'Every DOT camera on MileCheck, as the month closed']]
-    .filter(([k]) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k}.webp`)));
+  // Order set by Leah 2026-11-02: closures, crashes, snow and ice, (plows), cameras, drawbridges, wildfires.
+  const MAPS = [['closure', 'Road closure alerts'], ['crash', 'Crash alerts'], ['snow', 'Snow, ice and chain alerts'], ['plows', 'Where snowplows reported'], ['cameras', 'Every DOT camera on MileCheck, as the month closed'], ['bridges', 'Seattle drawbridge openings, sped up'], ['fires', 'Wildfires on the national feed, Oct. 31']]
+    .filter(([k]) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k === 'bridges' ? 'bridges.mp4' : `${k}.webp`}`)));
   if (MAPS.length) {
-    national.push(`<h2 class="rc">The month on a map</h2>`);
-    national.push(`<p>Each dot is one alert a feed posted in ${MONTH_NAME}. Blank areas can mean a feed does not post that kind of alert, so these maps show where alerts were posted, not every crash or closure.</p>`);
-    national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 26px;">${MAPS.map(([k, t]) => `<figure style="margin:0;"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${k === 'cameras' ? `${t}, one dot per camera` : `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${t}</figcaption></figure>`).join('')}</div>`);
+    national.push(`<h2 class="rc" id="month-map">The month on a map</h2>`);
+    national.push(`<p>On the alert maps, each dot is one alert a feed posted in ${MONTH_NAME}. Blank areas can mean a feed does not post that kind of alert, so these maps show where alerts were posted, not every crash or closure.</p>`);
+    // All the month's maps stay together, the drawbridge time-lapse first (Leah 2026-11-02).
+    const tlTile = `<figure id="drawbridge-timelapse" style="margin:0;"><video src="highway-report-maps/${KEY}/bridges.mp4" poster="highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">Seattle drawbridge openings, sped up</figcaption></figure>`;
+    national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:0 0 26px;">${MAPS.map(([k, t]) => k === 'bridges' ? tlTile : `<figure style="margin:0;"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${k === 'fires' ? `${t}, one dot per fire, sized by acres` : k === 'cameras' ? `${t}, one dot per camera` : `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${t}</figcaption></figure>`).join('')}</div>`);
   }
 }
 national.push(`<h2 class="rc">Crashes</h2>`);
-national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes appear on its feed. Your state's page shows which routes had the most crash alerts.</p>`);
+national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes appear on its feed. Your state's page shows which routes had the most crash alerts. <a href="#month-map">See the crash map</a>.</p>`);
 // Feeds with no crash alerts this month, listed under the paragraph in italics (Leah 2026-11-02).
 {
   const none = J.filter((x) => !(x.crash > 0)).map((x) => x.state).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
@@ -345,7 +368,7 @@ national.push(`<p>Road feeds in ${crashStates.length} states and provinces poste
 }
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
-national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most.</p>`);
+national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most. <a href="#month-map">See the closure map</a>.</p>`);
 // The national month-by-month section was cut (Leah 2026-11-02); state pages keep their own history.
 // Feed-change notes go on that state's own page only (Leah 2026-11-02).
 if (BW && BW.byMax.length) {
@@ -358,11 +381,10 @@ if (BW && BW.byMax.length) {
 if (BR && BR.length) {
   national.push(`<h2 class="rc">Seattle drawbridges</h2>`);
   national.push(`<p>Seattle's drawbridges opened ${n(bridgeTotal)} times in ${MONTH_NAME}.</p>`);
-  national.push(box(`Openings, ${MONTH_NAME}`, BR.map((b) => `<strong>${bridgeName(b.id)}</strong> &mdash; ${n(b.openings)} openings${b.medianMin != null ? `, typically ${b.medianMin} minutes, longest ${b.longestMin}` : ''}`)));
-  // Month time-lapse (scripts/road-report-maps/bridges-timelapse.mjs in the app repo), shown when the file exists.
-  if (existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/bridges.mp4`))) {
-    national.push(`<figure style="margin:0 0 26px;max-width:420px;"><video src="highway-report-maps/${KEY}/bridges.mp4" poster="highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">Seattle drawbridge openings in ${MONTH_NAME}, sped up. Each flash is one opening. The page counts ${n(bridgeTotal)} openings. The video shows ${n(BRIDGE_TL_TOTAL[KEY] || 0)} because it counts by Seattle time.</figcaption></figure>`);
-  }
+  // Openings list and the time-lapse side by side, so the section stays short (Leah 2026-11-02: "bulky").
+  const openings = box(`Openings, ${MONTH_NAME}`, BR.map((b) => `<strong>${bridgeName(b.id)}</strong> &mdash; ${n(b.openings)} openings${b.medianMin != null ? `, typically ${b.medianMin} minutes, longest ${b.longestMin}` : ''}`)).replace('<div class="pull-stat">', '<div class="pull-stat" style="margin:0;">');
+  national.push(openings.replace('style="margin:0;"', 'style="margin:0 0 18px;"'));
+  if (existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/bridges.mp4`))) national.push(`<p><a href="#drawbridge-timelapse">Watch every opening, sped up</a>, with the maps above. The video counts by Seattle time, so it ends at ${n(BRIDGE_TL_TOTAL[KEY] || 0)}.</p>`);
   national.push(`<p>Live status is on <a href="../maps/#drawbridges">the drawbridge map</a>.</p>`);
 }
 if (FA) {
@@ -373,7 +395,7 @@ if (FA) {
   const bigFires = fireStates.flatMap(([st, s]) => s.largest.map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${NAMES[st]}</strong> &mdash; ${fireLine(f, st)}`);
   national.push(`<div class="pull-stat"><strong>Largest fires, ${fireAsOf}</strong>${list(bigFires.slice(0, 3))}${bigFires.length > 3 ? `<details style="margin-top:6px;"><summary style="cursor:pointer;font-weight:600;color:#0f7a4f;padding:10px 0;">Show the next ${bigFires.length - 3}</summary>${list(bigFires.slice(3))}</details>` : ''}</div>`);
   national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
-  national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
+  national.push(`<p>${existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/fires.webp`)) ? '<a href="#month-map">See the wildfire map</a>. ' : ''}Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
 }
 {
   const wst = [...new Set(SEASONAL.flatMap((e) => String(e.state).split('/')))].filter((k) => NAMES[k]).sort((x, y) => NAMES[x].localeCompare(NAMES[y]));
@@ -420,6 +442,7 @@ try {
 const NAT_DESC = `${n(D.totalUniqueEvents)} unique alerts published by US state and Canadian provincial road feeds in ${MONTH_NAME} ${YEAR}: ${n(T.crash)} crash, ${n(T.closure)} closure and ${n(T.construction)} roadwork alerts, with a page for each state.`;
 const natCanon = `https://milecheckapp.com/${NATIONAL_FILE}`;
 writeFileSync(resolve(ROOT, NATIONAL_FILE), page({
+  wide: true,
   rel: '../', canonical: natCanon, pageTitle: H1, description: NAT_DESC, h1: H1,
   byline: `by MileCheck &middot; ${pubLong}`,
   body: national.map((p) => '      ' + p).join('\n\n'),
