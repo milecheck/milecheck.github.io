@@ -328,7 +328,7 @@ national.push(JUMP);
   }
 }
 national.push(`<h2 class="rc">Crashes</h2>`);
-national.push(`<p>Road feeds posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. ${crashStates.length} of the ${Object.keys(NAMES).length} feeds post crashes at all, and each agency decides which crashes go on its feed. Your state's page shows which routes had the most.</p>`);
+national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes go on its feed, and some post none. Your state's page shows which routes had the most.</p>`);
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push(JUMP);
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
