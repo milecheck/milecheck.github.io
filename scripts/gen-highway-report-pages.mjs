@@ -324,7 +324,7 @@ national.push(JUMP);
   if (MAPS.length) {
     national.push(`<h2 class="rc">The month on a map</h2>`);
     national.push(`<p>Each dot is one alert a feed posted in ${MONTH_NAME}. Blank areas can mean a feed does not post that kind of alert, so these maps show where alerts were posted, not every crash or closure.</p>`);
-    national.push(MAPS.map(([k, t]) => `<figure style="margin:0 0 22px;"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert" style="width:100%;max-width:900px;height:auto;border-radius:10px;display:block;"></figure>`).join('\n      '));
+    national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 26px;">${MAPS.map(([k, t]) => `<figure style="margin:0;"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${t}</figcaption></figure>`).join('')}</div>`);
   }
 }
 national.push(`<h2 class="rc">Crashes</h2>`);
