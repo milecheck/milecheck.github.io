@@ -1,18 +1,34 @@
 [
   {
     "heading": "New: the MileCheck dash display",
-    "items": [
+    "intro": "A small screen sits on your dash or air vent and shows the highway and mile marker you're on. It has its own GPS chip and stored mile marker data. It works without your phone or a cell signal. The first prototype runs on I-90. The plan is all 50 states.",
+    "images": [
       {
-        "text": "A small screen for your dash that shows your mile marker. Join the early access list.",
-        "href": "/dash-preorder.html"
+        "src": "/images/dash-display/dash-display-hero.webp",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Concept render of the MileCheck mile marker display on a car air vent, showing I-5 northbound mile marker 142.5",
+        "caption": "Concept"
+      },
+      {
+        "src": "/images/dash-display/first-prototype-2026-10.webp",
+        "width": 1200,
+        "height": 900,
+        "alt": "First prototype of the MileCheck mile marker display on a breadboard. The screen reads I-90 MILE 47.3.",
+        "caption": "First prototype, October"
       }
-    ]
+    ],
+    "cta": {
+      "text": "If you want a mile marker display on your dash, join the early access list. Sign-ups help us fund it and make it a reality.",
+      "linkText": "Join the early access list",
+      "href": "/dash-preorder.html"
+    }
   },
   {
     "heading": "In the app",
     "items": [
       {
-        "text": "You can now navigate to a mile marker on the right side of the highway, so EMS crews don't lose time on the wrong side.",
+        "text": "Navigate to a mile marker on the correct side of the highway. The route uses the right exits and overpasses to help EMS crews reach the scene faster.",
         "links": [
           {
             "text": "Watch the video",
@@ -21,7 +37,13 @@
         ]
       },
       {
-        "text": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores."
+        "text": "The Menu has a Cameras page. Scroll through nearby DOT cameras, pick a highway and star the ones you check most."
+      },
+      {
+        "text": "On iPhone, the Snowplows map layer shows where trucks last reported their locations. In states that publish plow positions, the Mile tab shows the nearest plow ahead on your road."
+      },
+      {
+        "text": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores. Make sure your app is up to date."
       }
     ]
   },
@@ -46,37 +68,28 @@
         "href": "/snowplows/"
       },
       {
-        "text": "A map of 20,031 open public railroad crossings at road level on state highway systems, from FRA records.",
-        "href": "/railroad-crossings/"
-      },
-      {
-        "text": "A cell coverage map for highways in WA, OR, ID, MT, NV, WY and UT, from carrier-reported FCC data.",
-        "href": "/cell-coverage/"
+        "text": "Pages for 63 ski areas, with the roads in, their cameras and the snow forecast.",
+        "href": "/ski/"
       },
       {
         "text": "New pass pages for Coquihalla, Sea-to-Sky, Rogers Pass, Kootenay Pass, Wolf Creek, Monarch, Mt Hood, Santiam, White Pass and more.",
         "href": "/passes/"
       },
       {
-        "text": "Pages for 63 ski areas, with the roads in, their cameras and the snow forecast.",
-        "href": "/ski/"
-      },
-      {
-        "text": "Late-November driving guides for I-5, I-40, I-70, I-80 and I-90, ahead of Thanksgiving.",
+        "text": "Late-November driving guides for I-5, I-40, I-70, I-80 and I-90 are up ahead of Thanksgiving. We'll keep them updated through the holiday. The November report will cover Thanksgiving travel.",
         "href": "/driving-conditions-i-80-late-november/"
       },
       {
         "text": "A current storms page, updated twice a day.",
         "href": "/storms/"
-      }
-    ]
-  },
-  {
-    "heading": "In other languages",
-    "items": [
+      },
       {
-        "text": "How to pump gas and how to charge an electric car, in Spanish, French, Portuguese, Vietnamese, Chinese and Punjabi.",
-        "href": "/es/how-to-pump-gas/"
+        "text": "A map of 20,031 open public railroad crossings at road level on state highway systems, from FRA records.",
+        "href": "/railroad-crossings/"
+      },
+      {
+        "text": "A cell coverage map for highways in WA, OR, ID, MT, NV, WY and UT, from carrier-reported FCC data.",
+        "href": "/cell-coverage/"
       }
     ]
   },
@@ -84,15 +97,7 @@
     "heading": "For businesses",
     "items": [
       {
-        "text": "One page for partners, with the same facts and prices on every business page.",
-        "href": "/partners/"
-      },
-      {
-        "text": "A free 14-day API test key, 100 calls a day. Live border waits are in the Business plan.",
-        "href": "/api/"
-      },
-      {
-        "text": "Corridor display boards, starting with US 2 over Stevens Pass.",
+        "text": "Corridor display boards are TVs in truck stops, travel centers or diners. They show live road conditions for the highway outside. The board is free for the store. The store gets a share when its sponsor slot sells. One sponsor per screen. First up is US 2 over Stevens Pass.",
         "links": [
           {
             "text": "For stores",
@@ -101,6 +106,43 @@
           {
             "text": "For advertisers",
             "href": "/sponsor/boards/"
+          }
+        ]
+      },
+      {
+        "text": "Dash displays are for fleets, plow trucks and tow trucks. Add your vehicle count to the early access form.",
+        "href": "/dash-preorder.html"
+      },
+      {
+        "text": "A free 14-day API test key, 100 calls a day. Live border waits are in the Business plan.",
+        "href": "/api/"
+      }
+    ]
+  },
+  {
+    "heading": "Other apps by the developer",
+    "items": [
+      {
+        "text": "Mountain Visibility shows whether the mountain is out right now. It covers Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, the Olympics, Mount Angeles and Mount Baldy.",
+        "href": "/mountains/",
+        "links": [
+          {
+            "text": "App Store",
+            "href": "https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&ct=highway-report&mt=8"
+          },
+          {
+            "text": "Google Play",
+            "href": "https://play.google.com/store/apps/details?id=app.milecheck.rainier&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report"
+          }
+        ]
+      },
+      {
+        "text": "Seattle Drawbridges shows which of Seattle's five drawbridges are up right now. It works on iPhone and in CarPlay.",
+        "href": "/seattle-drawbridges/",
+        "links": [
+          {
+            "text": "App Store",
+            "href": "https://apps.apple.com/us/app/id6811393568?pt=128447811&ct=highway-report&mt=8"
           }
         ]
       }

@@ -127,6 +127,8 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
     .state-grid a:hover{border-bottom-color:#00A86B;}
     h2.rc{margin-top:44px;}
     .rc-fig{font-size:14px;color:#5C6670;margin:-12px 0 20px;}
+    .article-wrap p a:not([style]), .article-wrap li a:not([style]){color:#0f7a4f;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600;}
+    .article-wrap .state-grid li a{color:#0F1419;text-decoration:none;font-weight:400;}
   </style>
 </head>
 
@@ -263,6 +265,8 @@ const winterSection = (st, name) => {
   out.push(`<p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>`);
   return out.join('\n');
 };
+// Total shown at the end of each month's drawbridge time-lapse (Pacific-time month; the tiles count by UTC day).
+const BRIDGE_TL_TOTAL = { 'october-2026': 700 };
 // ---------- data ----------
 const T = D.byType, J = D.jurisdictionSummary;
 const jOf = (st) => J.find((x) => x.state === st) || { state: st, crash: 0, closure: 0, construction: 0, total: 0, topRoutes: [] };
@@ -324,11 +328,21 @@ national.push(JUMP);
   if (MAPS.length) {
     national.push(`<h2 class="rc">The month on a map</h2>`);
     national.push(`<p>Each dot is one alert a feed posted in ${MONTH_NAME}. Blank areas can mean a feed does not post that kind of alert, so these maps show where alerts were posted, not every crash or closure.</p>`);
-    national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 26px;">${MAPS.map(([k, t]) => `<figure style="margin:0;"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${t}</figcaption></figure>`).join('')}</div>`);
+    national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 26px;">${MAPS.map(([k, t]) => `<figure style="margin:0;"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${k === 'cameras' ? `${t}, one dot per camera` : `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${t}</figcaption></figure>`).join('')}</div>`);
   }
 }
 national.push(`<h2 class="rc">Crashes</h2>`);
-national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes go on its feed, and some post none. Your state's page shows which routes had the most.</p>`);
+national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes appear on its feed. Your state's page shows which routes had the most crash alerts.</p>`);
+// Feeds with no crash alerts this month, listed under the paragraph in italics (Leah 2026-11-02).
+{
+  const none = J.filter((x) => !(x.crash > 0)).map((x) => x.state).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
+  const hist = D.stateHistory || {};
+  const never = none.filter((st) => (hist[st] || []).length >= 3 && (hist[st] || []).every((m) => !(m.crash > 0)));
+  const months = never.length ? (hist[never[0]] || []).map((m) => m.month) : [];
+  const since = months.length ? new Date(`${months[0]}-01T12:00:00Z`).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long' }) : '';
+  const andList = (a) => a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`;
+  if (none.length) national.push(`<p class="rc-fig" style="margin-top:-12px;"><em>${andList(none.map((st) => NAMES[st]))} posted no crash alerts in ${MONTH_NAME}.${never.length ? ` ${andList(never.map((st) => NAMES[st]))} have not posted a crash alert since ${since}.` : ''}</em></p>`);
+}
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
 national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most.</p>`);
@@ -345,13 +359,19 @@ if (BR && BR.length) {
   national.push(`<h2 class="rc">Seattle drawbridges</h2>`);
   national.push(`<p>Seattle's drawbridges opened ${n(bridgeTotal)} times in ${MONTH_NAME}.</p>`);
   national.push(box(`Openings, ${MONTH_NAME}`, BR.map((b) => `<strong>${bridgeName(b.id)}</strong> &mdash; ${n(b.openings)} openings${b.medianMin != null ? `, typically ${b.medianMin} minutes, longest ${b.longestMin}` : ''}`)));
+  // Month time-lapse (scripts/road-report-maps/bridges-timelapse.mjs in the app repo), shown when the file exists.
+  if (existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/bridges.mp4`))) {
+    national.push(`<figure style="margin:0 0 26px;max-width:420px;"><video src="highway-report-maps/${KEY}/bridges.mp4" poster="highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">Seattle drawbridge openings in ${MONTH_NAME}, sped up. Each flash is one opening. The page counts ${n(bridgeTotal)} openings. The video shows ${n(BRIDGE_TL_TOTAL[KEY] || 0)} because it counts by Seattle time.</figcaption></figure>`);
+  }
   national.push(`<p>Live status is on <a href="../maps/#drawbridges">the drawbridge map</a>.</p>`);
 }
 if (FA) {
   const fireStates = Object.entries(FA.byState).sort((a, b) => b[1].acres - a[1].acres);
   national.push(`<h2 class="rc">Wildfires</h2>`);
   national.push(`<p>The national wildfire feed (NIFC, plus the BC Wildfire Service) listed ${n(faTotals.active)} fire records ${fireAsOf} in the states and provinces we track, after prescribed burns were removed.${EX && EX.fires1000Plus != null ? ` ${n(EX.firesUnderOneAcre)} of them were under an acre. ${n(EX.fires1000Plus)} were 1,000 acres or more, and ${n(EX.fires1000PlusNotContained)} of those were not fully contained.` : ' Many are mostly or fully contained.'}</p>`);
-  national.push(box(`Largest fires, ${fireAsOf}`, fireStates.flatMap(([st, s]) => s.largest.map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${NAMES[st]}</strong> &mdash; ${fireLine(f, st)}`)));
+  // Top three shown, the rest behind a dropdown (Leah 2026-11-02: the top three were each over 100,000 acres).
+  const bigFires = fireStates.flatMap(([st, s]) => s.largest.map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${NAMES[st]}</strong> &mdash; ${fireLine(f, st)}`);
+  national.push(`<div class="pull-stat"><strong>Largest fires, ${fireAsOf}</strong>${list(bigFires.slice(0, 3))}${bigFires.length > 3 ? `<details style="margin-top:6px;"><summary style="cursor:pointer;font-weight:600;color:#0f7a4f;padding:10px 0;">Show the next ${bigFires.length - 3}</summary>${list(bigFires.slice(3))}</details>` : ''}</div>`);
   national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
   national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
 }
@@ -359,14 +379,25 @@ if (FA) {
   const wst = [...new Set(SEASONAL.flatMap((e) => String(e.state).split('/')))].filter((k) => NAMES[k]).sort((x, y) => NAMES[x].localeCompare(NAMES[y]));
   if (wst.length) {
     national.push(`<h2 class="rc">Winter closures</h2>`);
-    national.push(`<p>Some mountain roads close every winter. These states have them, and each state page lists the roads, their usual closing and reopening times, and the agency source. We update the list each month through winter.</p>`);
-    national.push(`<ul class="state-grid">\n        ${wst.map((k) => `<li><a href="${STATE_DIR_NAME}/${slug(k)}.html">${NAMES[k]}</a></li>`).join('\n        ')}\n      </ul>`);
+    national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Tap a state for each road's usual closing and reopening times and the agency source. We update the list each month through winter.</p>`);
+    const roadName = (e) => esc(String(e.name).replace(/\s*\(.*?\)\s*/g, ' ').replace(/ closure$/i, '').trim());
+    national.push(box('Roads that usually close for winter', wst.map((k) => {
+      const roads = [...new Set(SEASONAL.filter((e) => e.publicLine && String(e.state).split('/').includes(k)).map(roadName))];
+      return `<a href="${STATE_DIR_NAME}/${slug(k)}.html">${NAMES[k]}</a> &mdash; ${roads.join(' &middot; ')}`;
+    })));
   }
 }
 national.push(`<p style="margin:30px 0 0;font-size:15px;"><a href="#subscribe" style="color:#0f7a4f;font-weight:700;text-decoration:none;border-bottom:1px solid #9fd3b8;">&#9993; Get next month's report by email &rarr;</a></p>`);
 national.push(`<h2 class="rc" id="by-state">By state</h2>`);
 national.push(`<p>Each state and province has its own page with the same measures.</p>`);
-national.push(`<ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map((st) => `<li><a href="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul>`);
+// Dropdown first so the list doesn't bury What's new (Leah 2026-11-02); the full list stays one tap away.
+{
+  const order = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
+  // Two pickers, states on the left and provinces on the right, each with its flag (Leah 2026-11-02).
+  const picker = (id, flag, label, codes) => `<div style="flex:1 1 240px;min-width:0;"><label for="${id}" style="display:block;font-weight:600;margin:0 0 6px;"><span aria-hidden="true">${flag}</span> ${label}</label><select id="${id}" onchange="if(this.value)window.open(this.value,'_blank')" style="width:100%;min-height:44px;font-size:16px;padding:8px 10px;border:1px solid #C9CED3;border-radius:8px;background:#fff;"><option value="">Choose one</option>${codes.map((st) => `<option value="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</option>`).join('')}</select></div>`;
+  national.push(`<div style="display:flex;flex-wrap:wrap;gap:14px;margin:0 0 14px;">${picker('state-jump', '\u{1F1FA}\u{1F1F8}', 'Pick your state', order.filter((st) => !CANADA.has(st)))}${picker('province-jump', '\u{1F1E8}\u{1F1E6}', 'Pick your province', order.filter((st) => CANADA.has(st)))}</div>`);
+  national.push(`<details style="margin:0 0 30px;"><summary style="cursor:pointer;font-weight:600;color:#0f7a4f;padding:10px 0;">See all ${order.length} on one list</summary><ul class="state-grid">\n        ${order.map((st) => `<li><a href="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul></details>`);
+}
 
 // "What's new at MileCheck" (Leah: on every report, at the end). One file per month, written by hand
 // from that month's git log; only shipped, live things.
@@ -375,7 +406,13 @@ try {
   national.push(`<h2 class="rc">What's new at MileCheck</h2>`);
   const li = (w) => `<li>${w.href ? `<a href="${esc(w.href)}">${esc(w.text)}</a>` : esc(w.text)}${(w.links || []).map((l) => ` <a href="${esc(l.href)}">${esc(l.text)}</a>`).join(' &middot;')}</li>`;
   for (const g of WN) {
-    if (g.items) { national.push(`<h3 style="font-size:17px;margin:22px 0 4px;">${esc(g.heading)}</h3>`); national.push(`<ul class="article-list">${g.items.map(li).join('')}</ul>`); }
+    if (g.items || g.intro) {
+      national.push(`<h3 style="font-size:17px;margin:22px 0 4px;">${esc(g.heading)}</h3>`);
+      if (g.intro) national.push(`<p>${esc(g.intro)}</p>`);
+      if (g.images) national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0 0 16px;">${g.images.map((im) => `<figure style="margin:0;"><img src="${esc(im.src)}" width="${im.width}" height="${im.height}" loading="lazy" alt="${esc(im.alt)}" style="width:100%;height:auto;border-radius:8px;display:block;"><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${esc(im.caption)}</figcaption></figure>`).join('')}</div>`);
+      if (g.cta) national.push(`<p>${esc(g.cta.text)}</p><p style="margin:0 0 8px;"><a href="${esc(g.cta.href)}" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:11px 18px;border-radius:8px;text-decoration:none;">${esc(g.cta.linkText)} &rarr;</a></p>`);
+      if (g.items) national.push(`<ul class="article-list">${g.items.map(li).join('')}</ul>`);
+    }
     else national.push(`<ul class="article-list">${li(g)}</ul>`);
   }
 } catch {}
