@@ -34,16 +34,24 @@
             "text": "Watch the video",
             "href": "https://youtu.be/wviEK2a9a6I"
           }
-        ]
+        ],
+        "title": "Navigate to a mile marker",
+        "icon": "navigate"
       },
       {
-        "text": "The Menu has a Cameras page. Scroll through nearby DOT cameras, pick a highway and star the ones you check most."
+        "text": "The Menu has a Cameras page. Scroll through nearby DOT cameras, pick a highway and star the ones you check most.",
+        "title": "Cameras page in the app",
+        "icon": "camera"
       },
       {
-        "text": "On iPhone, the Snowplows map layer shows where trucks last reported their locations. In states that publish plow positions, the Mile tab shows the nearest plow ahead on your road."
+        "text": "On iPhone, the Snowplows map layer shows where trucks last reported their locations. In states that publish plow positions, the Mile tab shows the nearest plow ahead on your road.",
+        "title": "Snowplows on iPhone",
+        "icon": "snowflake"
       },
       {
-        "text": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores. Make sure your app is up to date."
+        "text": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores. Make sure your app is up to date.",
+        "title": "Update your app",
+        "icon": "refresh"
       }
     ]
   },
@@ -52,11 +60,15 @@
     "items": [
       {
         "text": "Camera pages and maps now have a Map options menu with closure and wildfire layers and weather radar.",
-        "href": "/cameras/"
+        "href": "/cameras/",
+        "title": "Map options on camera pages",
+        "icon": "layers"
       },
       {
         "text": "Crystal Mountain's summit camera and the Paradise camera at Mount Rainier are on the map.",
-        "href": "/mountains/"
+        "href": "/mountains/",
+        "title": "Crystal Mountain and Paradise cameras",
+        "icon": "camera"
       }
     ]
   },
@@ -65,31 +77,45 @@
     "items": [
       {
         "text": "A snowplow map for 14 US states and 3 Canadian provinces, with each truck's last reported spot.",
-        "href": "/snowplows/"
+        "href": "/snowplows/",
+        "title": "Snowplow map",
+        "icon": "snowflake"
       },
       {
         "text": "Pages for 63 ski areas, with the roads in, their cameras and the snow forecast.",
-        "href": "/ski/"
+        "href": "/ski/",
+        "title": "Ski areas",
+        "icon": "mountain"
       },
       {
         "text": "New pass pages for Coquihalla, Sea-to-Sky, Rogers Pass, Kootenay Pass, Wolf Creek, Monarch, Mt Hood, Santiam, White Pass and more.",
-        "href": "/passes/"
+        "href": "/passes/",
+        "title": "Mountain pass pages",
+        "icon": "route"
       },
       {
         "text": "Late-November driving guides for I-5, I-40, I-70, I-80 and I-90 are up ahead of Thanksgiving. We'll keep them updated through the holiday. The November report will cover Thanksgiving travel.",
-        "href": "/driving-conditions-i-80-late-november/"
+        "href": "/driving-conditions-i-80-late-november/",
+        "title": "Thanksgiving driving guides",
+        "icon": "calendar"
       },
       {
         "text": "A current storms page, updated twice a day.",
-        "href": "/storms/"
+        "href": "/storms/",
+        "title": "Current storms",
+        "icon": "storm"
       },
       {
         "text": "A map of 20,031 open public railroad crossings at road level on state highway systems, from FRA records.",
-        "href": "/railroad-crossings/"
+        "href": "/railroad-crossings/",
+        "title": "Railroad crossings map",
+        "icon": "rail"
       },
       {
         "text": "A cell coverage map for highways in WA, OR, ID, MT, NV, WY and UT, from carrier-reported FCC data.",
-        "href": "/cell-coverage/"
+        "href": "/cell-coverage/",
+        "title": "Cell coverage map",
+        "icon": "signal"
       }
     ]
   },
@@ -107,15 +133,21 @@
             "text": "For advertisers",
             "href": "/sponsor/boards/"
           }
-        ]
+        ],
+        "title": "Corridor display boards",
+        "icon": "tv"
       },
       {
         "text": "Dash displays are for fleets, plow trucks and tow trucks. Add your vehicle count to the early access form.",
-        "href": "/dash-preorder.html"
+        "href": "/dash-preorder.html",
+        "title": "Dash displays for fleets",
+        "icon": "truck"
       },
       {
         "text": "A free 14-day API test key, 100 calls a day. Live border waits are in the Business plan.",
-        "href": "/api/"
+        "href": "/api/",
+        "title": "API test key",
+        "icon": "code"
       }
     ]
   },
@@ -134,7 +166,9 @@
             "text": "Google Play",
             "href": "https://play.google.com/store/apps/details?id=app.milecheck.rainier&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report"
           }
-        ]
+        ],
+        "title": "Mountain Visibility",
+        "img": "/images/app-icons/mountain-visibility.png"
       },
       {
         "text": "Seattle Drawbridges shows which of Seattle's five drawbridges are up right now. It works on iPhone and in CarPlay.",
@@ -144,7 +178,9 @@
             "text": "App Store",
             "href": "https://apps.apple.com/us/app/id6811393568?pt=128447811&ct=highway-report&mt=8"
           }
-        ]
+        ],
+        "title": "Seattle Drawbridges",
+        "img": "/images/app-icons/seattle-drawbridges.png"
       }
     ]
   }

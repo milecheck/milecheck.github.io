@@ -79,21 +79,48 @@ const LT_WHAT = {
 };
 const ltLine = (p) => `<strong>${NAMES[p.state]}, ${esc(route(p.state, p.route || ''))}</strong> &mdash; ${esc(LT_WHAT[`${p.state} ${p.route}`] || quote(p.headline).slice(0, 110))}. Posted window ${dateLong(p.start)} to ${dateLong(p.end)}.`;
 // ---------- shared page chrome ----------
+// Line icons for the What's new and Keep up cards (24px grid, stroke drawn in the card's green).
+const ICON_PATHS = {
+  navigate: '<path d="M3 11 22 2l-9 19-2-8z"/>',
+  camera: '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/>',
+  snowflake: '<path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9"/>',
+  refresh: '<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>',
+  layers: '<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>',
+  mountain: '<path d="m8 3 4 8 5-5 5 15H2z"/>',
+  route: '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  storm: '<path d="M6 16.3A5 5 0 1 1 9.6 7.1 7 7 0 0 1 18 11h.5a3.5 3.5 0 0 1 .5 7"/><path d="m13 11-3 5h4l-3 5"/>',
+  rail: '<path d="M5 3l14 14M19 3 5 17M12 10v12"/>',
+  signal: '<path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16"/>',
+  tv: '<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  truck: '<path d="M10 17h4V5H2v12h3M20 17h2v-3.3a1 1 0 0 0-.2-.6l-3.5-4.4A1 1 0 0 0 17.5 8H14"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+  code: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
+  mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>',
+  share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/>',
+  dash: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h6M7 14h10"/>',
+  heart: '<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>',
+  instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+  facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+  x: '<path d="M4 4l16 16M20 4 4 20"/>',
+  youtube: '<rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/>',
+};
+const svgIcon = (k, size = 22) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[k] || ''}</svg>`;
+const iconTile = (w) => w.img ? `<img src="${esc(w.img)}" width="44" height="44" alt="" loading="lazy" style="flex:none;width:44px;height:44px;border-radius:10px;">` : `<span class="wn-ic">${svgIcon(w.icon)}</span>`;
 // Call-to-action block at the end of the national report (Leah 2026-11-02): the app, the email report,
 // sharing, the dash display, the other apps and social. Replaces the single "live version" box there.
 function nextSteps(rel) {
-  const card = (title, text, actions) => `<div style="background:#fff;border:1px solid #E4E7EA;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;"><strong style="font-size:16px;color:#0F1419;">${title}</strong><span style="font-size:14.5px;line-height:1.5;color:#3D454D;">${text}</span><span style="display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;">${actions}</span></div>`;
-  const btn = (href, label) => `<a href="${href}" style="display:inline-flex;align-items:center;min-height:44px;padding:0 14px;background:#0f7a4f;color:#fff;font-weight:700;font-size:14px;border-radius:8px;text-decoration:none;">${label}</a>`;
+  const card = (title, text, actions, lead = '') => `<div style="background:#fff;border:1px solid #E4E7EA;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;">${lead ? `<span style="display:flex;gap:8px;">${lead}</span>` : ''}<strong style="font-size:16px;color:#0F1419;">${title}</strong><span style="font-size:14.5px;line-height:1.5;color:#3D454D;">${text}</span><span style="display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;">${actions}</span></div>`;
+  const btn = (href, label) => `<a href="${href}" style="display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;background:#0f7a4f;color:#fff;font-weight:700;font-size:14px;border-radius:8px;text-decoration:none;">${label}</a>`;
   const share = `<button type="button" onclick="(async()=>{const u=location.href.split('#')[0];try{if(navigator.share){await navigator.share({title:document.title,url:u});return}}catch(e){return}try{await navigator.clipboard.writeText(u);this.textContent='Link copied'}catch(e){prompt('Copy this link',u)}})()" style="min-height:44px;padding:0 14px;background:#0f7a4f;color:#fff;font-weight:700;font-size:14px;font-family:inherit;border:0;border-radius:8px;cursor:pointer;">Share this report</button>`;
   return `<section style="margin:48px 0 0;">
         <h2 class="rc" style="margin-top:0;">Keep up with MileCheck</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 24px;">
-        ${card('Get the app', 'Live state DOT feeds in all 50 states, British Columbia, Alberta and Manitoba, with your nearest mile marker.', btn('https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&amp;ct=highway-report-cta&amp;mt=8', 'App Store') + btn('https://play.google.com/store/apps/details?id=app.milecheck.mobile&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report-cta', 'Google Play'))}
-        ${card('Get the Highway Report by email', 'Once a month, plus special reports like Thanksgiving travel. No spam.', btn('#subscribe', 'Sign up'))}
-        ${card('Share this report', 'Send it to someone who drives for work so they can sign up for the Highway Report.', share)}
-        ${card('Want a mile marker display on your dash?', 'Join the early access list. Sign-ups help us fund it and make it a reality.', btn(`${rel}dash-preorder.html`, 'Join early access'))}
-        ${card('Our other apps', 'Mountain Visibility tells you if the mountain is out. Seattle Drawbridges shows which bridges are up.', btn(`${rel}mountains/`, 'Mountain Visibility') + btn(`${rel}seattle-drawbridges/`, 'Seattle Drawbridges'))}
-        ${card('Follow MileCheck', 'Maps, road news and Roy. Instagram is the fun one.', btn('https://www.instagram.com/milecheck_app', 'Instagram') + btn('https://www.facebook.com/share/1FT9JtkH5D/', 'Facebook') + btn('https://x.com/milecheckapp', 'X') + btn('https://www.youtube.com/@milecheckapp', 'YouTube'))}
+        ${card('Get the app', 'Live state DOT feeds in all 50 states, British Columbia, Alberta and Manitoba, with your nearest mile marker.', btn('https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&amp;ct=highway-report-cta&amp;mt=8', 'App Store') + btn('https://play.google.com/store/apps/details?id=app.milecheck.mobile&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report-cta', 'Google Play'), `<img src="${rel}images/app-icons/milecheck.png" width="44" height="44" alt="" loading="lazy" style="width:44px;height:44px;border-radius:10px;">`)}
+        ${card('Get the Highway Report by email', 'Once a month, plus special reports like Thanksgiving travel. No spam.', btn('#subscribe', 'Sign up'), `<span class="wn-ic">${svgIcon('mail')}</span>`)}
+        ${card('Share this report', 'Send it to someone who drives for work so they can sign up for the Highway Report.', share, `<span class="wn-ic">${svgIcon('share')}</span>`)}
+        ${card('Want a mile marker display on your dash?', 'Join the early access list. Sign-ups help us fund it and make it a reality.', btn(`${rel}dash-preorder.html`, 'Join early access'), `<span class="wn-ic">${svgIcon('dash')}</span>`)}
+        ${card('Our other apps', 'Mountain Visibility tells you if the mountain is out. Seattle Drawbridges shows which bridges are up.', btn(`${rel}mountains/`, 'Mountain Visibility') + btn(`${rel}seattle-drawbridges/`, 'Seattle Drawbridges'), `<img src="${rel}images/app-icons/mountain-visibility.png" width="44" height="44" alt="" loading="lazy" style="width:44px;height:44px;border-radius:10px;">` + `<img src="${rel}images/app-icons/seattle-drawbridges.png" width="44" height="44" alt="" loading="lazy" style="width:44px;height:44px;border-radius:10px;">`)}
+        ${card('Follow MileCheck', 'Maps, road news and Roy. Instagram is the fun one.', btn('https://www.instagram.com/milecheck_app', `${svgIcon('instagram', 18)}Instagram`) + btn('https://www.facebook.com/share/1FT9JtkH5D/', `${svgIcon('facebook', 18)}Facebook`) + btn('https://x.com/milecheckapp', `${svgIcon('x', 18)}X`) + btn('https://www.youtube.com/@milecheckapp', `${svgIcon('youtube', 18)}YouTube`), `<span class="wn-ic">${svgIcon('heart')}</span>`)}
         </div>
       </section>
 `;
@@ -147,6 +174,14 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
     h2.rc{margin-top:44px;}
     .rc-fig{font-size:14px;color:#5C6670;margin:-12px 0 20px;}
     body.hr-national .article-wrap{max-width:1040px;}
+    .wn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:8px 0 22px;}
+    .wn-card{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #E4E7EA;border-radius:12px;padding:14px;}
+    .wn-ic{flex:none;width:44px;height:44px;border-radius:10px;background:#E8F3EC;color:#0f7a4f;display:flex;align-items:center;justify-content:center;}
+    .article-wrap .wn-card a.wn-t,.article-wrap .wn-card span.wn-t{display:block;font-weight:700;font-size:15.5px;line-height:1.35;color:#0F1419;text-decoration:none;}
+    .article-wrap .wn-card a.wn-t::after{content:" \\2192";color:#0f7a4f;}
+    .article-wrap .wn-card p{margin:4px 0 0 !important;font-size:14px;line-height:1.5;color:#3D454D;}
+    .wn-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+    .article-wrap .wn-links a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid #9fd3b8;border-radius:999px;color:#0f7a4f;font-weight:600;font-size:13.5px;text-decoration:none;}
     .article-wrap p a:not([style]), .article-wrap li a:not([style]){color:#0f7a4f;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600;}
     .article-wrap .state-grid li a{color:#0F1419;text-decoration:none;font-weight:400;}
   </style>
@@ -433,7 +468,8 @@ try {
       if (g.intro) national.push(`<p>${esc(g.intro)}</p>`);
       if (g.images) national.push(`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0 0 16px;">${g.images.map((im) => `<figure style="margin:0;"><img src="${esc(im.src)}" width="${im.width}" height="${im.height}" loading="lazy" alt="${esc(im.alt)}" style="width:100%;height:auto;border-radius:8px;display:block;"><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${esc(im.caption)}</figcaption></figure>`).join('')}</div>`);
       if (g.cta) national.push(`<p>${esc(g.cta.text)}</p><p style="margin:0 0 8px;"><a href="${esc(g.cta.href)}" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:11px 18px;border-radius:8px;text-decoration:none;">${esc(g.cta.linkText)} &rarr;</a></p>`);
-      if (g.items) national.push(`<ul class="article-list">${g.items.map(li).join('')}</ul>`);
+      // Cards with an icon, a short title and the line under it (Leah 2026-11-02: no long underlined sentences).
+      if (g.items) national.push(`<div class="wn-grid">${g.items.map((w) => `<div class="wn-card">${iconTile(w)}<div style="min-width:0;">${w.href ? `<a class="wn-t" href="${esc(w.href)}">${esc(w.title || '')}</a>` : `<span class="wn-t">${esc(w.title || '')}</span>`}<p>${esc(w.text)}</p>${(w.links || []).length ? `<span class="wn-links">${w.links.map((l) => `<a href="${esc(l.href)}">${esc(l.text)}</a>`).join('')}</span>` : ''}</div></div>`).join('')}</div>`);
     }
     else national.push(`<ul class="article-list">${li(g)}</ul>`);
   }
