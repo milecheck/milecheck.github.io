@@ -510,7 +510,7 @@ document.getElementById('bwDir').onclick=e=>{
   setDir(d);
 };
 document.getElementById('bwVeh').onclick=e=>{if(e.target.dataset.v){veh=e.target.dataset.v;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render();}};
-document.getElementById('bwSearch').oninput=e=>{q=e.target.value.toLowerCase().trim();render();};
+document.getElementById('bwSearch').oninput=e=>{q=e.target.value.toLowerCase().trim();render();};{const q0=new URLSearchParams(location.search).get('q');if(q0){const el=document.getElementById('bwSearch');el.value=q0;el.dispatchEvent(new Event('input'));}}
 load();
 setInterval(load,300000);
 </script>

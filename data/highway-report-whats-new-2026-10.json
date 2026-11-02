@@ -9,13 +9,6 @@
         "height": 1024,
         "alt": "Concept render of the MileCheck mile marker display on a car air vent, showing I-5 northbound mile marker 142.5",
         "caption": "Concept"
-      },
-      {
-        "src": "/images/dash-display/first-prototype-2026-10.webp",
-        "width": 1200,
-        "height": 900,
-        "alt": "First prototype of the MileCheck mile marker display on a breadboard. The screen reads I-90 MILE 47.3.",
-        "caption": "First prototype, October"
       }
     ],
     "cta": {
@@ -44,7 +37,7 @@
         "icon": "camera"
       },
       {
-        "text": "On iPhone, the Snowplows map layer shows where trucks last reported their locations. In states that publish plow positions, the Mile tab shows the nearest plow ahead on your road.",
+        "text": "On iPhone, the Snowplows map layer shows where plow trucks last reported. Only some states and provinces publish live plow positions. In those, the Mile tab shows the nearest plow ahead on your road.",
         "title": "Snowplows on iPhone",
         "icon": "snowflake"
       },
@@ -56,27 +49,10 @@
     ]
   },
   {
-    "heading": "Cameras",
-    "items": [
-      {
-        "text": "Camera pages and maps now have a Map options menu with closure and wildfire layers and weather radar.",
-        "href": "/cameras/",
-        "title": "Map options on camera pages",
-        "icon": "layers"
-      },
-      {
-        "text": "Crystal Mountain's summit camera and the Paradise camera at Mount Rainier are on the map.",
-        "href": "/mountains/",
-        "title": "Crystal Mountain and Paradise cameras",
-        "icon": "camera"
-      }
-    ]
-  },
-  {
     "heading": "Roads and closures",
     "items": [
       {
-        "text": "A snowplow map for 14 US states and 3 Canadian provinces, with each truck's last reported spot.",
+        "text": "Each truck's last reported location, in 14 US states and 3 Canadian provinces. Only some agencies publish live plow positions.",
         "href": "/snowplows/",
         "title": "Snowplow map",
         "icon": "snowflake"
@@ -123,6 +99,12 @@
     "heading": "For businesses",
     "items": [
       {
+        "text": "A free 14-day API test key, 100 calls a day. Live border waits are in the Business plan.",
+        "href": "/api/",
+        "title": "API test key",
+        "icon": "code"
+      },
+      {
         "text": "Corridor display boards are TVs in truck stops, travel centers or diners. They show live road conditions for the highway outside. The board is free for the store. The store gets a share when its sponsor slot sells. One sponsor per screen. First up is US 2 over Stevens Pass.",
         "links": [
           {
@@ -142,12 +124,6 @@
         "href": "/dash-preorder.html",
         "title": "Dash displays for fleets",
         "icon": "truck"
-      },
-      {
-        "text": "A free 14-day API test key, 100 calls a day. Live border waits are in the Business plan.",
-        "href": "/api/",
-        "title": "API test key",
-        "icon": "code"
       }
     ]
   },
