@@ -3,5 +3,11 @@
   "snowIceNote": "Unique October alerts in the 48 contiguous states whose text names snow or ice on the road, chain controls or chain requirements. Place names like Snow Rd are excluded. Counted 2026-11-02 from the daily incident archive.",
   "cameras": 53552,
   "camerasAsOf": "Nov. 2",
-  "camerasNote": "Live DOT camera feeds on MileCheck's map, summed across every state and province on 2026-11-02. Ohio's camera feed returned none that day."
+  "camerasNote": "Live DOT camera feeds on MileCheck's map, summed across every state and province on 2026-11-02. Ohio's camera feed returned none that day.",
+  "firesTotal": 226,
+  "firesRxExcluded": 381,
+  "firesUnderOneAcre": 100,
+  "fires1000Plus": 44,
+  "fires1000PlusNotContained": 21,
+  "firesNote": "From the last hourly national wildfire snapshot of October (2026-10-31 23:00 UTC), states and provinces MileCheck covers. Prescribed burns removed. Counted 2026-11-02."
 }

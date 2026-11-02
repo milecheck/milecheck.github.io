@@ -309,7 +309,7 @@ const nums = [
   `<div><b>${n(T.closure)}</b><span>closure alerts</span></div>`,
   `<div><b>${n(T.construction)}</b><span>roadwork alerts</span></div>`,
   BR ? `<div><b>${n(bridgeTotal)}</b><span>Seattle drawbridge openings in ${MONTH_NAME}</span></div>` : '',
-  FA ? `<div><b>${n(faTotals.active)}</b><span>wildfire records, ${fireAsOf}</span></div>` : '',
+  FA ? (EX && EX.fires1000Plus != null ? `<div><b>${n(EX.fires1000Plus)}</b><span>wildfires of 1,000 acres or more, ${fireAsOf}</span></div>` : `<div><b>${n(faTotals.active)}</b><span>wildfire records, ${fireAsOf}</span></div>`) : '',
   EX && EX.snowIceLower48 != null ? `<div><b>${n(EX.snowIceLower48)}</b><span>snow, ice and chain alerts in the lower 48</span></div>` : '',
   EX && EX.cameras ? `<div><b>${n(EX.cameras)}</b><span>DOT cameras on MileCheck's map, ${esc(EX.camerasAsOf)}</span></div>` : '',
 ].filter(Boolean).join('\n        ');
@@ -323,7 +323,7 @@ national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(JUMP);
 national.push(`<h2 class="rc">Crashes</h2>`);
 national.push(`<p>Road feeds published ${n(T.crash)} unique crash alerts from ${crashStates.length} states and provinces in ${MONTH_NAME}. States publish crashes differently. California's count includes Highway Patrol dispatch logs, for example. Each state's page lists the routes with the most crash alerts in that state.</p>`);
-if (fatal.length) national.push(`<p>${fatal.length} crash ${plural(fatal.length, 'alert', 'alerts')} on the feeds mentioned a fatality. California's come from Highway Patrol dispatch logs.</p>` + box('Crash alerts that mentioned a fatality', [...fatal].sort((a, b) => a.date.localeCompare(b.date)).map((f) => `<strong>${NAMES[f.state]}, ${esc(route(f.state, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
+// Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push(JUMP);
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
 national.push(`<p>Road feeds published ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Each state's page lists the routes with the most alerts inside that state.</p>`);
@@ -357,7 +357,7 @@ if (BR && BR.length) {
 if (FA) {
   const fireStates = Object.entries(FA.byState).sort((a, b) => b[1].acres - a[1].acres);
   national.push(`<h2 class="rc">Wildfires</h2>`);
-  national.push(`<p>The national wildfire feed (NIFC, plus the BC Wildfire Service) listed ${n(faTotals.active)} fire records ${fireAsOf} in the states and provinces we track. Many are mostly or fully contained.</p>`);
+  national.push(`<p>The national wildfire feed (NIFC, plus the BC Wildfire Service) listed ${n(faTotals.active)} fire records ${fireAsOf} in the states and provinces we track, after prescribed burns were removed.${EX && EX.fires1000Plus != null ? ` ${n(EX.firesUnderOneAcre)} of them were under an acre. ${n(EX.fires1000Plus)} were 1,000 acres or more, and ${n(EX.fires1000PlusNotContained)} of those were not fully contained.` : ' Many are mostly or fully contained.'}</p>`);
   national.push(box(`Largest fires, ${fireAsOf}`, fireStates.flatMap(([st, s]) => s.largest.map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${NAMES[st]}</strong> &mdash; ${fireLine(f, st)}`)));
   national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
   national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
@@ -427,7 +427,7 @@ for (const st of Object.keys(NAMES)) {
     const hp = hs && st !== 'OR' ? hs.places.filter((q) => realPlace(q.place)) : [];
     if (hp.length) parts.push(box(st === 'CA' ? 'Highway Patrol dispatch areas named in two or more crash alerts' : 'Areas named in two or more crash alerts', hp.map((p) => `<strong>${esc(title(p.place))}</strong>${p.route ? ` (${esc(route(st, p.route))})` : ''} &mdash; ${n(p.crashes)}`)));
     const fs = fatal.filter((f) => f.state === st);
-    if (fs.length) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
+    if (fs.length && ['CA', 'TX'].includes(st)) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
     parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     const rc = (S.routeCounts || []).filter(([r]) => r);
