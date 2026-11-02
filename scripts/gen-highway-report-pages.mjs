@@ -322,25 +322,13 @@ const JUMP = `<p style="margin:4px 0 30px;"><a href="#by-state" style="display:i
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(JUMP);
 national.push(`<h2 class="rc">Crashes</h2>`);
-national.push(`<p>Road feeds published ${n(T.crash)} unique crash alerts from ${crashStates.length} states and provinces in ${MONTH_NAME}. States publish crashes differently. California's count includes Highway Patrol dispatch logs, for example. Each state's page lists the routes with the most crash alerts in that state.</p>`);
+national.push(`<p>Road feeds posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. ${crashStates.length} of the ${Object.keys(NAMES).length} feeds post crashes at all, and each agency decides which crashes go on its feed. Your state's page shows which routes had the most.</p>`);
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push(JUMP);
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
-national.push(`<p>Road feeds published ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Each state's page lists the routes with the most alerts inside that state.</p>`);
-national.push(`<p>Live alerts on the major interstates are on <a href="../corridors/">the corridor maps</a>.</p>`);
-{
-  // Each state against its own earlier months. Alphabetical, never sorted by size.
-  const withHist = Object.keys(NAMES).filter((st) => !feedNote(st) && histOf(st).filter((h) => h.comparable).length >= 2).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
-  national.push(`<h2 class="rc">Compared with earlier months</h2>`);
-  if (withHist.length) national.push(`<p>${withHist.length === 1 ? 'One state or province has' : `${withHist.length} states and provinces have`} at least two comparable full months in MileCheck's archive. Each line compares a place with itself.</p>` +
-    box('Unique alerts by month', withHist.map((st) => `<strong>${NAMES[st]}</strong> &mdash; ${histOf(st).filter((h) => h.comparable).map((h) => `${MONTH_LONG(h.month)} ${n(h.total)}`).join(', ')}`)));
-  const noted = Object.keys(NAMES).filter((st) => feedNote(st));
-  noted.forEach((st) => national.push(`<p><strong>${NAMES[st]}:</strong> ${feedNote(st)}</p>`));
-  const firsts = Object.keys(NAMES).filter((st) => !withHist.includes(st) && !noted.includes(st)).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
-  if (firsts.length) national.push(`<p>For ${listAnd(firsts.map((st) => NAMES[st]))}, ${MONTH_NAME} is the first full month in MileCheck's archive. Next month's report compares ${firsts.length === 1 ? 'it' : 'them'} with ${MONTH_NAME}.</p>`);
-  const dn = dropNoteNational();
-  if (dn) national.push(`<p style="font-size:14px;color:#5b6670">${dn.trim()}</p>`);
-}
+national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most.</p>`);
+// The national month-by-month section was cut (Leah 2026-11-02); state pages keep their own history.
+Object.keys(NAMES).filter((st) => feedNote(st)).forEach((st) => national.push(`<p><strong>${NAMES[st]}:</strong> ${feedNote(st)}</p>`));
 if (BW && BW.byMax.length) {
   national.push(`<h2 class="rc">Border waits</h2>`);
   national.push(`<p>Waits to enter the United States in standard passenger lanes, ${MONTH_NAME}, from hourly U.S. Customs and Border Protection readings. Averages use every valid hourly reading. Dates are local to each crossing.</p>`);
