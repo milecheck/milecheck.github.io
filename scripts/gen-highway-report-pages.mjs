@@ -8,7 +8,7 @@
 //
 //   node scripts/gen-highway-report-pages.mjs 2026-09
 //   then: add-sponsor-slots -> tag-store-links -> add-signup-band -> add-signup-ctas -> add-nav-search -> build-search-index -> build-sitemap -> link-jsonld (always LAST)
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -321,6 +321,16 @@ national.push(methodBox('each state department of transportation (DOT) road feed
 const JUMP = `<p style="margin:4px 0 30px;"><a href="#by-state" style="display:inline-block;background:#0F1419;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;">Find your state &darr;</a></p>`;
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(JUMP);
+// Monthly maps (scripts/road-report-maps/build.sh in the app repo). Shown when the images exist.
+{
+  const MAPS = [['snow', 'Snow, ice and chain alerts'], ['crash', 'Crash alerts'], ['closure', 'Road closure alerts']]
+    .filter(([k]) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k}.webp`)));
+  if (MAPS.length) {
+    national.push(`<h2 class="rc">The month on a map</h2>`);
+    national.push(`<p>Each dot is one alert a feed posted in ${MONTH_NAME}. Blank areas can mean a feed does not post that kind of alert, so these maps show where alerts were posted, not every crash or closure.</p>`);
+    national.push(MAPS.map(([k, t]) => `<figure style="margin:0 0 22px;"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert" style="width:100%;max-width:900px;height:auto;border-radius:10px;display:block;"></figure>`).join('\n      '));
+  }
+}
 national.push(`<h2 class="rc">Crashes</h2>`);
 national.push(`<p>Road feeds posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. ${crashStates.length} of the ${Object.keys(NAMES).length} feeds post crashes at all, and each agency decides which crashes go on its feed. Your state's page shows which routes had the most.</p>`);
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
