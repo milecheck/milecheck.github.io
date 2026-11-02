@@ -1,0 +1,82 @@
+[
+  {
+    "heading": "In the app",
+    "items": [
+      {
+        "text": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores."
+      }
+    ]
+  },
+  {
+    "heading": "Cameras",
+    "items": [
+      {
+        "text": "Camera pages and maps now have a Map options menu with closure and wildfire layers and weather radar.",
+        "href": "/cameras/"
+      },
+      {
+        "text": "Crystal Mountain's summit camera and the Paradise camera at Mount Rainier are on the map.",
+        "href": "/mountains/"
+      }
+    ]
+  },
+  {
+    "heading": "Roads and closures",
+    "items": [
+      {
+        "text": "A snowplow map for 14 US states and 3 Canadian provinces, with each truck's last reported spot.",
+        "href": "/snowplows/"
+      },
+      {
+        "text": "A map of 20,031 open public railroad crossings at road level on state highway systems, from FRA records.",
+        "href": "/railroad-crossings/"
+      },
+      {
+        "text": "A cell coverage map for highways in WA, OR, ID, MT, NV, WY and UT, from carrier-reported FCC data.",
+        "href": "/cell-coverage/"
+      },
+      {
+        "text": "New pass pages for Coquihalla, Sea-to-Sky, Rogers Pass, Kootenay Pass, Wolf Creek, Monarch, Mt Hood, Santiam, White Pass and more.",
+        "href": "/passes/"
+      },
+      {
+        "text": "Pages for 63 ski areas, with the roads in, their cameras and the snow forecast.",
+        "href": "/ski/"
+      },
+      {
+        "text": "Late-November driving guides for I-5, I-40, I-70, I-80 and I-90, ahead of Thanksgiving.",
+        "href": "/driving-conditions-i-80-late-november/"
+      },
+      {
+        "text": "A current storms page, updated twice a day.",
+        "href": "/storms/"
+      }
+    ]
+  },
+  {
+    "heading": "In other languages",
+    "items": [
+      {
+        "text": "How to pump gas and how to charge an electric car, in Spanish, French, Portuguese, Vietnamese, Chinese and Punjabi.",
+        "href": "/es/how-to-pump-gas/"
+      }
+    ]
+  },
+  {
+    "heading": "For businesses",
+    "items": [
+      {
+        "text": "One page for partners, with the same facts and prices on every business page.",
+        "href": "/partners/"
+      },
+      {
+        "text": "A free 14-day API test key, 100 calls a day. Live border waits are in the Business plan.",
+        "href": "/api/"
+      },
+      {
+        "text": "Corridor board demos, starting with US 2 over Stevens Pass. Store installations have not started.",
+        "href": "/sponsor/boards/"
+      }
+    ]
+  }
+]

@@ -13,11 +13,11 @@
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/road-conditions/">
   <meta property="og:type" content="website">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Road Conditions by State: Live Closures &amp; Crashes | MileCheck">
   <meta name="twitter:description" content="Current road conditions for all 50 states, one page per state: live closures and crashes from the state DOT, cameras, mountain passes, interstate corridors and what the season does to the roads.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,8 @@
     .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;}
     .rc-eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin:0 0 6px;}
     .rc-wrap h1{font-size:clamp(27px,4.4vw,40px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 10px;}
+    .rc-facts{margin:0 0 6px;padding-left:20px;max-width:78ch;}
+    .rc-facts li{margin:0 0 10px;line-height:1.6;}
     .rc-lede{font-size:16.5px;line-height:1.6;color:#3a444d;max-width:78ch;margin:0 0 18px;}
     .rc-lede a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .rc-live{display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
@@ -98,7 +100,7 @@
     .rc-related{color:#5b6670;font-size:14px;margin-top:26px;}
     .rc-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:56px;font-size:12px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}
-    </style>
+  </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
   <link rel="stylesheet" href="/assets/map-kit.css?v=20261030g">
   <script src="/assets/map-kit.js?v=20261030g" defer></script>
@@ -135,7 +137,7 @@
   <div class="rc-wrap">
         <p class="rc-eyebrow">Road conditions</p>
     <h1>Road conditions by state</h1>
-    <p class="rc-lede">One page per state. Each one checks that state's DOT feed through MileCheck every five minutes and puts closures and crashes on a map with the route and mile marker, then links the state's cameras, mountain passes and interstate corridors, and says what the season does to its highways. For one national view, use the <a href="/closures/">US closures map</a>. To see which states have winter storms now, use <a href="/storms/">current storms</a>.</p>
+    <p class="rc-lede">One page per state. Each one checks that state's DOT feed through MileCheck every five minutes and puts closures and crashes on a map with the route and mile marker, then links the state's cameras, mountain passes and interstate corridors, and says what the season does to its highways. For one national view, use the <a href="/closures/">US closures map</a>.</p>
     <div class="rc-states">
       <a class="rc-state" href="/road-conditions/alabama/"><b>Alabama</b><span>ALGO Traffic</span></a>
       <a class="rc-state" href="/road-conditions/alaska/"><b>Alaska</b><span>AK 511</span></a>
@@ -193,7 +195,7 @@
     <h2>How these pages work</h2>
     <p>Every state DOT publishes road alerts, and no two publish them the same way. MileCheck's server reads each feed and converts it to one format, the same one the app uses. A closure in Washington and a closure in Texas arrive looking identical. These pages show that feed for one state at a time, so the map is the DOT's own list, not a summary of it. <a href="/blog/how-one-app-reads-fifty-dot-systems.html">How one app reads 50 DOT systems</a> explains the plumbing.</p>
     <p>What a page can show depends on what the DOT publishes. Some states post closures and crashes with a mile marker on every one. Some post closures only. A quiet map in Kentucky is normal, and a busy one in California is too. Where a feed cannot be reached the page says so instead of showing an empty map.</p>
-    <p class="rc-related">Also: <a href="/passes/">Mountain passes</a> · <a href="/cell-coverage/">Where is there no cell service on the highway?</a> · <a href="/corridors/">Interstate corridors</a> · <a href="/cameras/">Cameras by state and city</a> · <a href="/states/">Mile markers by state</a> · <a href="/canada/">Canada</a></p>
+    <p class="rc-related">Also: <a href="/passes/">Mountain passes</a> · <a href="/corridors/">Interstate corridors</a> · <a href="/cameras/">Cameras by state and city</a> · <a href="/states/">Mile markers by state</a> · <a href="/canada/">Canada</a></p>
   </div>
 
   <!-- signup:start -->
@@ -214,7 +216,7 @@
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
       <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
+      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>

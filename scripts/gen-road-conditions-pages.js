@@ -7,7 +7,7 @@
 // /incidents?state=XX, same call the /closures/ map makes), a map bounded to the state,
 // the state's cameras / passes / corridors / drawbridges / guides wired in, two prose
 // sections adapted from the approved mile-marker guide, a road-trip checklist, the
-// September archive numbers, and a FAQ. Content per state: scripts/road-conditions/states.cjs.
+// Last month's archive numbers, and a FAQ. Content per state: scripts/road-conditions/states.cjs.
 //
 // Run: node scripts/gen-road-conditions-pages.js [state-slug ...]
 // Then: node scripts/add-nav-search.mjs && node scripts/build-search-index.mjs && node scripts/build-sitemap.mjs
@@ -60,7 +60,14 @@ const cityName = (slug) => slug.split('-').map((w) => w[0].toUpperCase() + w.sli
 const MOUNTAINS = { WA: ['rainier', 'baker', 'sthelens', 'olympics', 'angeles'], OR: ['hood'], AK: ['denali'] }; // /mountains/<slug>/ (Mountain Visibility)
 const MOUNTAIN_NAMES = { rainier: 'Mount Rainier', baker: 'Mount Baker', sthelens: 'Mount St. Helens', olympics: 'the Olympics', angeles: 'Mount Angeles', hood: 'Mount Hood', denali: 'Denali' };
 
-const REPORT = JSON.parse(fs.readFileSync(rel('data/road-report-september-2026.json'), 'utf8'));
+// Newest Highway Report JSON by its own `month` field, so a new month takes over without a code change (2026-11-01).
+const REPORT_FILE = fs.readdirSync(rel('data')).filter((f) => /^road-report-[a-z]+-\d{4}\.json$/.test(f))
+  .map((f) => ({ f, m: JSON.parse(fs.readFileSync(rel('data/' + f), 'utf8')).month || '' }))
+  .sort((a, b) => b.m.localeCompare(a.m))[0].f;
+const REPORT = JSON.parse(fs.readFileSync(rel('data/' + REPORT_FILE), 'utf8'));
+const REPORT_SLUG = REPORT_FILE.replace(/^road-report-|\.json$/g, ''); // e.g. october-2026
+const REPORT_MONTH = REPORT_SLUG.split('-')[0].replace(/^./, (c) => c.toUpperCase()); // October
+const REPORT_YEAR = REPORT_SLUG.split('-')[1];
 const SEPT = Object.fromEntries((REPORT.jurisdictionSummary || []).map((j) => [j.state, j]));
 
 // Shared chrome, lifted from a page every other generator matches (GA4 tag byte-identical).
@@ -85,7 +92,7 @@ const SIGNUP = `<!-- signup:start -->
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
       <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
+      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-${REPORT_SLUG}.html">See the ${REPORT_MONTH} report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>
@@ -203,8 +210,8 @@ ${SLOT_CSS}
 /* /spon:css */
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css">
-  <script src="/assets/map-kit.js" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261030g">
+  <script src="/assets/map-kit.js?v=20261030g" defer></script>
 </head>
 <body>
 
@@ -411,8 +418,8 @@ function statePage(s) {
     if (sept.construction) bits.push(`${sept.construction.toLocaleString('en-US')} work-zone ${sept.construction === 1 ? 'report' : 'reports'}`);
     if (sept.weather) bits.push(`${sept.weather.toLocaleString('en-US')} weather ${sept.weather === 1 ? 'report' : 'reports'}`);
     const routes = (sept.topRoutes || []).filter((r) => /^(I|US|SR|[A-Z]{2})-\d/.test(r)).slice(0, 3);
-    septHtml = `    <h2>What September looked like</h2>
-    <p class="rc-sept">In September 2026, MileCheck's archive of the ${s.dot} feed held ${sept.total.toLocaleString('en-US')} unique ${sept.total === 1 ? 'report' : 'reports'}${bits.length ? `, including ${joinList(bits)}` : ''}.${routes.length ? ` The routes with the most reports were ${joinList(routes)}.` : ''} Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/road-report-september-2026.html">Read the September Highway Report</a>.</p>
+    septHtml = `    <h2>What ${REPORT_MONTH} looked like</h2>
+    <p class="rc-sept">In ${REPORT_MONTH} ${REPORT_YEAR}, MileCheck's archive of the ${s.dot} feed held ${sept.total.toLocaleString('en-US')} unique ${sept.total === 1 ? 'report' : 'reports'}${bits.length ? `, including ${joinList(bits)}` : ''}.${routes.length ? ` The routes with the most reports were ${joinList(routes)}.` : ''} Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/road-report-${REPORT_SLUG}.html">Read the ${REPORT_MONTH} Highway Report</a>.</p>
 `;
   }
 

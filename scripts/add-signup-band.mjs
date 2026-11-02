@@ -8,11 +8,16 @@
 //   - camera, pass, corridor and guide pages (English, from data/sponsor-pages.json): band
 //     inserted above the footer between <!-- signup:start/end --> markers
 //   - MailerLite loader added once per page if missing
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 
 const EYEBROW = 'The Monthly Highway Report';
 const H2 = "Get your state's monthly road alert report";
-const SUB = `Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.`;
+// Newest report by the JSON's own `month` field, so a new month takes over without a code change (2026-11-01).
+const RPT = readdirSync('data').filter((f) => /^road-report-[a-z]+-\d{4}\.json$/.test(f))
+  .map((f) => ({ f, m: JSON.parse(readFileSync('data/' + f, 'utf8')).month || '' }))
+  .sort((a, b) => b.m.localeCompare(a.m))[0].f.replace(/^road-report-|\.json$/g, '');
+const RPT_MONTH = RPT.split('-')[0].replace(/^./, (c) => c.toUpperCase());
+const SUB = `Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-${RPT}.html">See the ${RPT_MONTH} report</a>. No spam.`;
 const FAMILIES = new Set(['cameras', 'pass', 'corridor', 'guide']);
 
 const CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}

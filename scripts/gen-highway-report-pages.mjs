@@ -32,12 +32,21 @@ const updLong = UPDATED ? new Date(UPDATED + 'T12:00:00Z').toLocaleDateString('e
 const pubLong = new Date(PUBLISHED + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const H1 = `MileCheck Highway Report, ${MONTH_NAME} ${YEAR}`;
 const WINDOW = `${MON_ABBR} 1 through ${MON_ABBR} ${LAST_DAY}`;
-const NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming', BC:'British Columbia' };
+const NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming', BC:'British Columbia', AB:'Alberta', MB:'Manitoba' };
 const slug = (st) => NAMES[st].toLowerCase().replace(/\s+/g, '-');
 const n = (x) => Number(x || 0).toLocaleString('en-US');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const title = (s) => { s = String(s).replace(/^\d+\s+/, '').trim(); return s === s.toUpperCase() ? s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()).replace(/\bMc([a-z])/g, (m, c) => 'Mc' + c.toUpperCase()) : s; };
-const DOT_NAME = { BC: 'DriveBC' };
+const DOT_NAME = { BC: 'DriveBC', AB: '511 Alberta', MB: 'Manitoba 511' };
+const CANADA = new Set(['BC', 'AB', 'MB']);
+const isProv = (st) => CANADA.has(st);
+// Known feed gaps, by report month. A state listed here is shown with a note and kept out of the
+// month-to-month comparison (Leah + ChatGPT/Fable review, 2026-11-02).
+const FEED_NOTES = {
+  '2026-10': { NY: '511NY changed its data system at the end of September. MileCheck recorded 3,429 alerts in September and 590 in October. The drop reflects the feed change, so these counts do not show whether New York had fewer road incidents.' },
+};
+const feedNote = (st) => (FEED_NOTES[MONTH] || {})[st] || '';
+const plural = (k, one, many) => (k === 1 ? one : many);
 
 // Washington's feed labels every state route "SR n", interstates and US routes included. Show the signed name.
 const WA_I = new Set(['5', '82', '90', '182', '205', '405', '705']), WA_US = new Set(['2', '12', '97', '101', '195', '395', '730']);
@@ -52,7 +61,7 @@ const list = (items) => `<ul class="article-list" style="margin-top:10px;margin-
 const box = (label, items) => `<div class="pull-stat"><strong>${label}</strong>${list(items)}</div>`;
 const quote = (h) => { let t = String(h).replace(/\s+/g, ' ').replace(/^[-\u2013\u2014\s]+/, '').trim(); if (t.length >= 219) t = t.replace(/\s+\S*$/, '') + '\u2026'; return t; };
 const dateLong = (iso) => { const [y, mo, d] = iso.split('-').map(Number); return new Date(Date.UTC(y, mo - 1, d)).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' }); };
-const fireLine = (f, st) => `${esc(title(f.name))}${f.county && st !== 'BC' ? ` (${esc(f.county)} County)` : ''}, ${n(f.acres)} acres, ${f.containedPct == null ? 'containment not published' : `${f.containedPct}% contained`}`;
+const fireLine = (f, st) => `${esc(title(f.name))}${f.county && !CANADA.has(st) ? ` (${esc(f.county)} County)` : ''}, ${n(f.acres)} acres, ${f.containedPct == null ? 'containment not published' : `${f.containedPct}% contained`}`;
 const bridgeName = (id) => ({ 'WA-bridge-fremont': 'Fremont Bridge', 'WA-bridge-ballard': 'Ballard Bridge', 'WA-bridge-university': 'University Bridge', 'WA-bridge-montlake': 'Montlake Bridge', 'WA-bridge-south-park': 'South Park Bridge', 'WA-bridge-1st-ave-s': '1st Ave S Bridge', 'WA-bridge-spokane-st': 'Lower Spokane St Bridge' }[id] || id);
 const hm = (m) => { m = Math.round(m); const h = Math.floor(m / 60), r = m % 60; return h ? `${h} hr${r ? ` ${r} min` : ''}` : `${r} min`; };
 const STATE_TZ = { WA: 'America/Los_Angeles', CA: 'America/Los_Angeles', ID: 'America/Los_Angeles', MT: 'America/Denver', NM: 'America/Denver', AZ: 'America/Phoenix', ND: 'America/Chicago', MN: 'America/Chicago', MI: 'America/Detroit', NY: 'America/New_York', VT: 'America/New_York', NH: 'America/New_York', ME: 'America/New_York', TX: 'America/Chicago' };
@@ -153,7 +162,7 @@ ${body}
 
       <div class="article-cta">
         <h3>The live version is in the app.</h3>
-        <p>MileCheck shows state DOT feeds for crashes, closures, and delays in all 50 states, British Columbia, Alberta and Manitoba as they are published, with your nearest mile marker.</p>
+        <p>MileCheck shows state DOT feeds for crashes, closures, and delays in all 50 states, British Columbia, Alberta and Manitoba as they are published, with your nearest mile marker, or kilometre marker in Canada.</p>
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>
@@ -269,7 +278,7 @@ const faTotals = FA ? Object.values(FA.byState).reduce((a, s) => ({ active: a.ac
 const bridgeTotal = BR ? BR.reduce((a, b) => a + b.openings, 0) : 0;
 const portLabel = (p) => `${esc(p.port)}${p.crossing && !/Passenger/i.test(p.crossing) ? ' / ' + esc(p.crossing) : ''}`;
 
-const methodBox = (scope, extra) => `<div class="method-box"><strong>How we got these numbers:</strong> These are unique alerts published by ${scope}, from a daily copy taken ${WINDOW}, ${YEAR}. Each alert is counted once. An alert posted and removed between two daily copies is not counted. States publish different things, so compare a state with its own earlier months, not with other states.${extra || ''}</div>`;
+const methodBox = (scope, extra) => `<div class="method-box"><strong>How we got these numbers:</strong> These are unique alerts published by ${scope}, from a daily copy taken ${WINDOW}, ${YEAR}. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all states report the same data, so compare each place with its own earlier months.${extra || ''}</div>`;
 // Alerts a feed carried for another state's road, removed by gen-road-report.mjs (D.droppedOffState).
 const DROP = D.droppedOffState || [];
 const dropTotal = DROP.reduce((a, d) => a + d.count, 0);
@@ -277,7 +286,7 @@ const listAnd = (a) => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + '
 const dropFor = (st) => { const rows = DROP.filter((d) => d.state === st); const c = rows.reduce((a, d) => a + d.count, 0);
   const to = [...new Set(rows.sort((a, b) => b.count - a.count).map((d) => d.actual))].map((k) => NAMES[k] || k);
   return c ? { c, to } : null; };
-const dropNote = (st) => { const d = dropFor(st); return d ? ` ${n(d.c)} alerts this feed carried for roads in ${listAnd(d.to)} were removed. Those states' own feeds carry them.` : ''; };
+const dropNote = (st) => { const d = dropFor(st); return d ? ` ${n(d.c)} ${plural(d.c, 'alert', 'alerts')} this feed carried for roads in ${listAnd(d.to)} ${plural(d.c, 'was', 'were')} removed. ${d.to.length === 1 ? `${NAMES[d.to[0]] || d.to[0]}'s own feed carries ${plural(d.c, 'it', 'them')}.` : "Those states' own feeds carry them."}` : ''; };
 const dropNoteNational = () => { if (!dropTotal) return '';
   const byFeed = {}; DROP.forEach((d) => { byFeed[d.state] = (byFeed[d.state] || 0) + d.count; });
   const [top, topC] = Object.entries(byFeed).sort((a, b) => b[1] - a[1])[0];
@@ -291,45 +300,53 @@ const extras = (opts) => [
   opts.border && BW ? ' Border waits are from U.S. Customs and Border Protection, saved every hour. Readings over five hours were treated as feed errors.' : '',
 ].join('');
 
+// Optional hand-checked extras for the top tiles (data/road-report-<month>-<year>-extra.json).
+let EX = null; try { EX = JSON.parse(readFileSync(resolve(ROOT, `data/road-report-${KEY}-extra.json`), 'utf8')); } catch {}
 // ---------- national page ----------
 const nums = [
-  `<div><b>${n(D.totalUniqueEvents)}</b><span>unique alerts published by DOT feeds</span></div>`,
+  `<div><b>${n(D.totalUniqueEvents)}</b><span>unique alerts published by road feeds</span></div>`,
   `<div><b>${n(T.crash)}</b><span>crash alerts</span></div>`,
   `<div><b>${n(T.closure)}</b><span>closure alerts</span></div>`,
   `<div><b>${n(T.construction)}</b><span>roadwork alerts</span></div>`,
   BR ? `<div><b>${n(bridgeTotal)}</b><span>Seattle drawbridge openings in ${MONTH_NAME}</span></div>` : '',
-  FA ? `<div><b>${n(faTotals.active)}</b><span>wildfires on the national list, ${fireAsOf}</span></div>` : '',
+  FA ? `<div><b>${n(faTotals.active)}</b><span>wildfire records, ${fireAsOf}</span></div>` : '',
+  EX && EX.snowIceLower48 != null ? `<div><b>${n(EX.snowIceLower48)}</b><span>snow, ice and chain alerts in the lower 48</span></div>` : '',
+  EX && EX.cameras ? `<div><b>${n(EX.cameras)}</b><span>DOT cameras on MileCheck's map, ${esc(EX.camerasAsOf)}</span></div>` : '',
 ].filter(Boolean).join('\n        ');
 
 const national = [];
 if (updLong) national.push(`<p class="rc-fig"><strong>Updated ${updLong}.</strong> Alerts a feed carried for another state's road were removed, and each state is now compared with its own earlier months instead of with other states.</p>`);
-national.push(`<p class="article-lead">What state DOT feeds published in ${MONTH_NAME} ${YEAR}, in all 50 states and British Columbia. ${[ 'Crashes', 'closures', 'roadwork', BW && 'border waits', BR && "Seattle's drawbridges", FA && 'wildfires'].filter(Boolean).join(', ').replace(/, ([^,]*)$/, ' and $1')}.</p>`);
-national.push(methodBox('each state department of transportation (DOT) road feed and DriveBC', dropNoteNational() + extras({ fires: true, border: true })));
+national.push(`<p class="article-lead">What road feeds published in ${MONTH_NAME} ${YEAR} across all 50 US states, British Columbia, Alberta and Manitoba. ${[BW && 'border waits', BR && 'Seattle drawbridge openings', FA && 'wildfire records'].filter(Boolean).length ? `The report also covers ${[BW && 'border waits', BR && 'Seattle drawbridge openings', FA && 'wildfire records'].filter(Boolean).join(', ').replace(/, ([^,]*)$/, ' and $1')}, from separate sources.` : ''}</p>`);
+national.push(methodBox('each state department of transportation (DOT) road feed, DriveBC, 511 Alberta and Manitoba 511', ''));
 const JUMP = `<p style="margin:4px 0 30px;"><a href="#by-state" style="display:inline-block;background:#0F1419;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;">Find your state &darr;</a></p>`;
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(JUMP);
 national.push(`<h2 class="rc">Crashes</h2>`);
-national.push(`<p>DOT feeds published ${n(T.crash)} unique crash alerts from ${crashStates.length} states and provinces in ${MONTH_NAME}. States publish crashes differently. California's count includes Highway Patrol dispatch logs, for example. Each state's page lists the routes with the most crash alerts in that state.</p>`);
-if (fatal.length) national.push(`<p>${fatal.length} crashes were marked fatal by the reporting DOT.</p>` + box('Crashes marked fatal', [...fatal].sort((a, b) => a.date.localeCompare(b.date)).map((f) => `<strong>${NAMES[f.state]}, ${esc(route(f.state, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
+national.push(`<p>Road feeds published ${n(T.crash)} unique crash alerts from ${crashStates.length} states and provinces in ${MONTH_NAME}. States publish crashes differently. California's count includes Highway Patrol dispatch logs, for example. Each state's page lists the routes with the most crash alerts in that state.</p>`);
+if (fatal.length) national.push(`<p>${fatal.length} crash ${plural(fatal.length, 'alert', 'alerts')} on the feeds mentioned a fatality. California's come from Highway Patrol dispatch logs.</p>` + box('Crash alerts that mentioned a fatality', [...fatal].sort((a, b) => a.date.localeCompare(b.date)).map((f) => `<strong>${NAMES[f.state]}, ${esc(route(f.state, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
 national.push(JUMP);
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
-national.push(`<p>DOT feeds published ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Each state's page lists the routes with the most alerts inside that state.</p>`);
+national.push(`<p>Road feeds published ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Each state's page lists the routes with the most alerts inside that state.</p>`);
 national.push(`<p>Live alerts on the major interstates are on <a href="../corridors/">the corridor maps</a>.</p>`);
 {
   // Each state against its own earlier months. Alphabetical, never sorted by size.
-  const withHist = Object.keys(NAMES).filter((st) => histOf(st).filter((h) => h.comparable).length >= 2).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
+  const withHist = Object.keys(NAMES).filter((st) => !feedNote(st) && histOf(st).filter((h) => h.comparable).length >= 2).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
   national.push(`<h2 class="rc">Compared with earlier months</h2>`);
-  if (withHist.length) national.push(`<p>${withHist.length === 1 ? 'One state has' : `${withHist.length} states have`} at least two full months in MileCheck's archive. Each line compares a state with itself.</p>` +
+  if (withHist.length) national.push(`<p>${withHist.length === 1 ? 'One state or province has' : `${withHist.length} states and provinces have`} at least two comparable full months in MileCheck's archive. Each line compares a place with itself.</p>` +
     box('Unique alerts by month', withHist.map((st) => `<strong>${NAMES[st]}</strong> &mdash; ${histOf(st).filter((h) => h.comparable).map((h) => `${MONTH_LONG(h.month)} ${n(h.total)}`).join(', ')}`)));
-  const others = Object.keys(NAMES).length - withHist.length;
-  national.push(`<p>For the other ${others}, ${MONTH_NAME} is the first full month in MileCheck's archive. Next month's report compares them with ${MONTH_NAME}.</p>`);
+  const noted = Object.keys(NAMES).filter((st) => feedNote(st));
+  noted.forEach((st) => national.push(`<p><strong>${NAMES[st]}:</strong> ${feedNote(st)}</p>`));
+  const firsts = Object.keys(NAMES).filter((st) => !withHist.includes(st) && !noted.includes(st)).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
+  if (firsts.length) national.push(`<p>For ${listAnd(firsts.map((st) => NAMES[st]))}, ${MONTH_NAME} is the first full month in MileCheck's archive. Next month's report compares ${firsts.length === 1 ? 'it' : 'them'} with ${MONTH_NAME}.</p>`);
+  const dn = dropNoteNational();
+  if (dn) national.push(`<p style="font-size:14px;color:#5b6670">${dn.trim()}</p>`);
 }
 if (BW && BW.byMax.length) {
   national.push(`<h2 class="rc">Border waits</h2>`);
   national.push(`<p>Waits to enter the United States in standard passenger lanes, ${MONTH_NAME}, from hourly U.S. Customs and Border Protection readings. Averages use every valid hourly reading. Dates are local to each crossing.</p>`);
   national.push(box('Highest single reading', [...BW.all].sort((x, y) => y.maxMin - x.maxMin || y.avgMin - x.avgMin).slice(0, 6).map((p) => `<strong>${portLabel(p)}</strong>${p.state ? ` (${NAMES[p.state]})` : ''} &mdash; ${hm(p.maxMin)}, ${dayOf(p.maxAt, p)}`)));
-  national.push(box('Longest average wait', BW.byAvg.slice(0, 6).map((p) => `<strong>${portLabel(p)}</strong>${p.state ? ` (${NAMES[p.state]})` : ''} &mdash; ${hm(p.avgMin)} average`)));
-  national.push(`<p>Live waits for all 85 crossings are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
+  national.push(box('Longest average wait', BW.byAvg.filter((p) => (p.readings || 0) >= 300).slice(0, 6).map((p) => `<strong>${portLabel(p)}</strong>${p.state ? ` (${NAMES[p.state]})` : ''} &mdash; ${hm(p.avgMin)} average`)));
+  national.push(`<p>Live waits are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
 }
 if (BR && BR.length) {
   national.push(`<h2 class="rc">Seattle drawbridges</h2>`);
@@ -340,8 +357,8 @@ if (BR && BR.length) {
 if (FA) {
   const fireStates = Object.entries(FA.byState).sort((a, b) => b[1].acres - a[1].acres);
   national.push(`<h2 class="rc">Wildfires</h2>`);
-  national.push(`<p>${n(faTotals.active)} wildfires were on the national wildfire list ${fireAsOf}, in the states and provinces we track. Many are mostly or fully contained.</p>`);
-  national.push(box(`Largest fires, ${fireAsOf}`, fireStates.slice(0, 8).flatMap(([st, s]) => s.largest.slice(0, 2).map((f) => `<strong>${NAMES[st]}</strong> &mdash; ${fireLine(f, st)}`))));
+  national.push(`<p>The national wildfire feed (NIFC, plus the BC Wildfire Service) listed ${n(faTotals.active)} fire records ${fireAsOf} in the states and provinces we track. Many are mostly or fully contained.</p>`);
+  national.push(box(`Largest fires, ${fireAsOf}`, fireStates.flatMap(([st, s]) => s.largest.map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${NAMES[st]}</strong> &mdash; ${fireLine(f, st)}`)));
   national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
   national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
 }
@@ -370,7 +387,7 @@ try {
   }
 } catch {}
 
-const NAT_DESC = `${n(D.totalUniqueEvents)} unique alerts published by state DOT feeds in ${MONTH_NAME} ${YEAR}: ${n(T.crash)} crash, ${n(T.closure)} closure and ${n(T.construction)} roadwork alerts, with a page for each state.`;
+const NAT_DESC = `${n(D.totalUniqueEvents)} unique alerts published by US state and Canadian provincial road feeds in ${MONTH_NAME} ${YEAR}: ${n(T.crash)} crash, ${n(T.closure)} closure and ${n(T.construction)} roadwork alerts, with a page for each state.`;
 const natCanon = `https://milecheckapp.com/${NATIONAL_FILE}`;
 writeFileSync(resolve(ROOT, NATIONAL_FILE), page({
   rel: '../', canonical: natCanon, pageTitle: H1, description: NAT_DESC, h1: H1,
@@ -383,33 +400,34 @@ writeFileSync(resolve(ROOT, NATIONAL_FILE), page({
 let written = 0;
 for (const st of Object.keys(NAMES)) {
   const S = jOf(st), name = NAMES[st];
-  const feed = st === 'BC' ? 'the DriveBC feed' : `${name}'s department of transportation (DOT) feed`;
+  const feed = DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s department of transportation (DOT) feed`;
   const fire = FA && FA.byState[st];
   const ports = BW ? BW.all.filter((p) => p.state === st).sort((a, b) => b.maxMin - a.maxMin || b.avgMin - a.avgMin).slice(0, 6) : [];
   const lt = ltOf(st);
   const parts = [];
   parts.push(`<p class="article-lead">What ${feed} showed in ${MONTH_NAME} ${YEAR}. Part of the <a href="../road-report-${KEY}.html">national ${H1}</a>.</p>`);
   if (updLong && dropFor(st)) parts.push(`<p class="rc-fig"><strong>Updated ${updLong}.</strong> Alerts this feed carried for another state's road were removed.</p>`);
-  parts.push(methodBox(st === 'BC' ? 'the DriveBC feed' : `${name}'s department of transportation (DOT) feed`, dropNote(st) + extras({ fires: !!fire, border: ports.length > 0 })));
+  parts.push(methodBox(DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s department of transportation (DOT) feed`, dropNote(st) + extras({ fires: !!fire, border: ports.length > 0 })));
+  if (feedNote(st)) parts.push(`<p class="rc-fig"><strong>Feed change.</strong> ${feedNote(st)}</p>`);
   const sn = [];
   if (S.crash > 0) sn.push(`<div><b>${n(S.crash)}</b><span>crash alerts in ${MONTH_NAME}</span></div>`);
   sn.push(`<div><b>${n(S.closure)}</b><span>closure alerts</span></div>`);
   sn.push(`<div><b>${n(S.construction)}</b><span>roadwork alerts</span></div>`);
-  if (fire) sn.push(`<div><b>${n(fire.active)}</b><span>wildfires on the national list, ${fireAsOf}</span></div>`);
+  if (fire) sn.push(`<div><b>${n(fire.active)}</b><span>${plural(fire.active, 'wildfire record', 'wildfire records')}, ${fireAsOf}</span></div>`);
   if (st === 'WA' && BR) sn.push(`<div><b>${n(bridgeTotal)}</b><span>Seattle drawbridge openings</span></div>`);
   parts.push(`<div class="headline-nums">${sn.join('')}</div>`);
   if (S.total === 0) {
     parts.push(`<h2 class="rc">Crashes, closures and roadwork</h2><p>${name}'s feed returned no records in ${MONTH_NAME}, so this page cannot say what was on the roads.</p>`);
   } else {
     parts.push(`<h2 class="rc">Crashes</h2>`);
-    parts.push(S.crash > 0 ? `<p>${n(S.crash)} ${S.crash === 1 ? 'crash was' : 'crashes were'} reported in ${name} in ${MONTH_NAME}.</p>` : `<p>No crashes were on ${name}'s feed in ${MONTH_NAME}. Not all states publish crash reports.</p>`);
+    parts.push(S.crash > 0 ? `<p>${name}'s road feed carried ${n(S.crash)} crash ${plural(S.crash, 'alert', 'alerts')} in ${MONTH_NAME}.</p>` : `<p>No crash alerts were on ${name}'s feed in ${MONTH_NAME}. Not every agency publishes crash reports.</p>`);
     const hs = D.crashHotspots && D.crashHotspots[st];
     if (hs && hs.routes.length) parts.push(box('Routes with the most crash alerts', hs.routes.map(([r, c]) => `<strong>${esc(route(st, r))}</strong> &mdash; ${n(c)}`)));
     // Oregon's feed puts ODOT highway names (Pacific, Columbia River, Old Oregon Trail) in the place field, not areas.
     const hp = hs && st !== 'OR' ? hs.places.filter((q) => realPlace(q.place)) : [];
-    if (hp.length) parts.push(box('Areas named in two or more crash alerts', hp.map((p) => `<strong>${esc(title(p.place))}</strong>${p.route ? ` (${esc(route(st, p.route))})` : ''} &mdash; ${n(p.crashes)}`)));
+    if (hp.length) parts.push(box(st === 'CA' ? 'Highway Patrol dispatch areas named in two or more crash alerts' : 'Areas named in two or more crash alerts', hp.map((p) => `<strong>${esc(title(p.place))}</strong>${p.route ? ` (${esc(route(st, p.route))})` : ''} &mdash; ${n(p.crashes)}`)));
     const fs = fatal.filter((f) => f.state === st);
-    if (fs.length) parts.push(box('Crashes marked fatal by the DOT', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
+    if (fs.length) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
     parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     const rc = (S.routeCounts || []).filter(([r]) => r);
@@ -420,6 +438,7 @@ for (const st of Object.keys(NAMES)) {
     // This state against its own earlier months only.
     const h = histOf(st), comp = h.filter((x) => x.comparable), cur = h.find((x) => x.month === MONTH);
     parts.push(`<h2 class="rc">Compared with earlier months</h2>`);
+    if (feedNote(st)) parts.push(`<p>See the feed change note at the top of this page.</p>`);
     if (cur && !cur.comparable) parts.push(`<p>MileCheck has ${n(cur.days)} of ${cur.daysInMonth} days of ${name}'s feed for ${MONTH_NAME}, so these counts are partial.</p>`);
     else if (comp.length >= 2) parts.push(`<p>Unique alerts on ${name}'s feed in each full month MileCheck has.</p>` + box('By month', comp.map(histLine)));
     else parts.push(`<p>${MONTH_NAME} is the first full month of ${name}'s feed in MileCheck's archive. Next month's report compares it with ${MONTH_NAME}.</p>`);
@@ -435,14 +454,15 @@ for (const st of Object.keys(NAMES)) {
     parts.push(box(`Openings, ${MONTH_NAME}`, BR.map((b) => `<strong>${bridgeName(b.id)}</strong> &mdash; ${n(b.openings)} openings${b.medianMin != null ? `, typically ${b.medianMin} minutes, longest ${b.longestMin}` : ''}`)));
   }
   if (fire) {
-    parts.push(`<h2 class="rc">Wildfires</h2><p>${name} had ${n(fire.active)} ${fire.active === 1 ? 'fire' : 'fires'} on the national wildfire list ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
+    parts.push(`<h2 class="rc">Wildfires</h2><p>The national wildfire feed listed ${n(fire.active)} ${plural(fire.active, 'fire record', 'fire records')} in ${name} ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
     parts.push(box(`Largest fires, ${fireAsOf}`, fire.largest.map((f) => fireLine(f, st))));
     parts.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
     parts.push(`<p>Live fire perimeters are at <a href="../../fire/">milecheckapp.com/fire</a>.</p>`);
   }
-  parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state</a>.</p>`);
+  parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state or province</a>.</p>`);
   const h1 = `MileCheck Highway Report: ${name}, ${MONTH_NAME} ${YEAR}`;
-  const desc = `${S.crash > 0 ? `${n(S.crash)} crash, ` : ''}${n(S.closure)} closure and ${n(S.construction)} roadwork alerts published by ${name}'s DOT feed in ${MONTH_NAME} ${YEAR}, compared with earlier months${ports.length ? ', plus border waits' : ''}${fire ? ', plus wildfires' : ''}.`;
+  const firstMonth = !(histOf(st).filter((x) => x.comparable).length >= 2);
+  const desc = `${S.crash > 0 ? `${n(S.crash)} crash, ` : ''}${n(S.closure)} closure and ${n(S.construction)} roadwork alerts published by ${DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s DOT feed`} in ${MONTH_NAME} ${YEAR}${firstMonth ? `, MileCheck's first full month of ${name}` : ', compared with earlier months'}${ports.length ? ', plus border waits' : ''}${fire ? ', plus wildfires' : ''}.`;
   const canonical = `https://milecheckapp.com/blog/${STATE_DIR_NAME}/${slug(st)}.html`;
   writeFileSync(resolve(OUT_DIR, `${slug(st)}.html`), page({
     rel: '../../', canonical, pageTitle: h1, description: desc, h1,
@@ -455,7 +475,7 @@ for (const st of Object.keys(NAMES)) {
 const idxCanon = `https://milecheckapp.com/blog/${STATE_DIR_NAME}/`;
 writeFileSync(resolve(OUT_DIR, 'index.html'), page({
   rel: '../../', canonical: idxCanon, pageTitle: `${H1}, by State`,
-  description: `The ${H1} for every US state and British Columbia: crashes, closures and roadwork from each state DOT feed.`,
+  description: `The ${H1} for every US state, British Columbia, Alberta and Manitoba: crashes, closures and roadwork from each state DOT feed.`,
   h1: `${H1}, by State`, byline: `by MileCheck &middot; ${pubLong}`,
   body: `      <p class="article-lead">One page per state and province, with the same measures. The <a href="../road-report-${KEY}.html">national report</a> has the totals.</p>\n      <ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b])).map((st) => `<li><a href="${slug(st)}.html">${NAMES[st]}</a></li>`).join('\n        ')}\n      </ul>`,
   jsonld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `${H1}, by State`, url: idxCanon, publisher: { '@type': 'Organization', name: 'MileCheck' } },
