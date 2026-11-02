@@ -333,7 +333,7 @@ national.push(`<p>Road feeds in ${crashStates.length} states and provinces poste
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
 national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most.</p>`);
 // The national month-by-month section was cut (Leah 2026-11-02); state pages keep their own history.
-Object.keys(NAMES).filter((st) => feedNote(st)).forEach((st) => national.push(`<p><strong>${NAMES[st]}:</strong> ${feedNote(st)}</p>`));
+// Feed-change notes go on that state's own page only (Leah 2026-11-02).
 if (BW && BW.byMax.length) {
   national.push(`<h2 class="rc">Border waits</h2>`);
   national.push(`<p>Waits to enter the United States in standard passenger lanes, ${MONTH_NAME}, from hourly U.S. Customs and Border Protection readings. Averages use every valid hourly reading. Dates are local to each crossing.</p>`);
