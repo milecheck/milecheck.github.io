@@ -307,10 +307,7 @@ const nums = [
   `<div><b>${n(T.crash)}</b><span>crash alerts</span></div>`,
   `<div><b>${n(T.closure)}</b><span>closure alerts</span></div>`,
   `<div><b>${n(T.construction)}</b><span>roadwork alerts</span></div>`,
-  BR ? `<div><b>${n(bridgeTotal)}</b><span>Seattle drawbridge openings in ${MONTH_NAME}</span></div>` : '',
-  FA ? (EX && EX.fires1000Plus != null ? `<div><b>${n(EX.fires1000Plus)}</b><span>wildfires of 1,000 acres or more, ${fireAsOf}</span></div>` : `<div><b>${n(faTotals.active)}</b><span>wildfire records, ${fireAsOf}</span></div>`) : '',
   EX && EX.snowIceLower48 != null ? `<div><b>${n(EX.snowIceLower48)}</b><span>snow, ice and chain alerts in the lower 48</span></div>` : '',
-  EX && EX.cameras ? `<div><b>${n(EX.cameras)}</b><span>DOT cameras on MileCheck's map</span></div>` : '',
 ].filter(Boolean).join('\n        ');
 
 const national = [];
