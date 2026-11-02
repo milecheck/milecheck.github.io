@@ -304,7 +304,6 @@ const extras = (opts) => [
 let EX = null; try { EX = JSON.parse(readFileSync(resolve(ROOT, `data/road-report-${KEY}-extra.json`), 'utf8')); } catch {}
 // ---------- national page ----------
 const nums = [
-  `<div><b>${n(D.totalUniqueEvents)}</b><span>unique alerts published by road feeds</span></div>`,
   `<div><b>${n(T.crash)}</b><span>crash alerts</span></div>`,
   `<div><b>${n(T.closure)}</b><span>closure alerts</span></div>`,
   `<div><b>${n(T.construction)}</b><span>roadwork alerts</span></div>`,
