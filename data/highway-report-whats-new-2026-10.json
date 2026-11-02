@@ -1,7 +1,25 @@
 [
   {
+    "heading": "New: the MileCheck dash display",
+    "items": [
+      {
+        "text": "A small screen for your dash that shows your mile marker. Join the early access list.",
+        "href": "/dash-preorder.html"
+      }
+    ]
+  },
+  {
     "heading": "In the app",
     "items": [
+      {
+        "text": "You can now navigate to a mile marker on the right side of the highway, so EMS crews don't lose time on the wrong side.",
+        "links": [
+          {
+            "text": "Watch the video",
+            "href": "https://youtu.be/wviEK2a9a6I"
+          }
+        ]
+      },
       {
         "text": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores."
       }
@@ -74,8 +92,17 @@
         "href": "/api/"
       },
       {
-        "text": "Corridor board demos, starting with US 2 over Stevens Pass. Store installations have not started.",
-        "href": "/sponsor/boards/"
+        "text": "Corridor display boards, starting with US 2 over Stevens Pass.",
+        "links": [
+          {
+            "text": "For stores",
+            "href": "/partners/corridor-boards.html"
+          },
+          {
+            "text": "For advertisers",
+            "href": "/sponsor/boards/"
+          }
+        ]
       }
     ]
   }

@@ -373,7 +373,7 @@ national.push(`<ul class="state-grid">\n        ${Object.keys(NAMES).sort((a, b)
 try {
   const WN = JSON.parse(readFileSync(resolve(ROOT, `data/highway-report-whats-new-${MONTH}.json`), 'utf8'));
   national.push(`<h2 class="rc">What's new at MileCheck</h2>`);
-  const li = (w) => `<li>${w.href ? `<a href="${esc(w.href)}">${esc(w.text)}</a>` : esc(w.text)}</li>`;
+  const li = (w) => `<li>${w.href ? `<a href="${esc(w.href)}">${esc(w.text)}</a>` : esc(w.text)}${(w.links || []).map((l) => ` <a href="${esc(l.href)}">${esc(l.text)}</a>`).join(' &middot;')}</li>`;
   for (const g of WN) {
     if (g.items) { national.push(`<h3 style="font-size:17px;margin:22px 0 4px;">${esc(g.heading)}</h3>`); national.push(`<ul class="article-list">${g.items.map(li).join('')}</ul>`); }
     else national.push(`<ul class="article-list">${li(g)}</ul>`);
