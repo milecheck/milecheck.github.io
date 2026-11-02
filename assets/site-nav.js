@@ -126,15 +126,14 @@
   w.addEventListener('scroll', function onS() { var h = d.documentElement; if (h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight) >= 0.25) { w.removeEventListener('scroll', onS); show(); } }, { passive: true });
 })();
 
-/* Links open in a new tab, sitewide (Leah 10/21). Skips in-page anchors, mail/phone links,
-   the site menu, and links that already set a target or run page code (data-tab). */
+/* Links open in a new tab, sitewide, menu included (Leah 10/21, hard rule 11/2). Skips in-page anchors,
+   mail/phone links, and links that already set a target or run page code (data-tab). */
 (function () {
   if (typeof document === 'undefined') return;
   function mark(a) {
     if (a.hasAttribute('target') || a.hasAttribute('data-tab') || a.hasAttribute('download')) return;
     var h = a.getAttribute('href') || '';
     if (!h || h.charAt(0) === '#' || /^(mailto:|tel:|sms:|javascript:)/i.test(h)) return;
-    if (a.closest('header, nav.site-nav, .mc-nav, [data-site-nav]')) return;
     a.setAttribute('target', '_blank');
     var r = (a.getAttribute('rel') || '').split(/\s+/);
     if (r.indexOf('noopener') < 0) { r.push('noopener'); a.setAttribute('rel', r.join(' ').trim()); }

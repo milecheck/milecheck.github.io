@@ -8,7 +8,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const require = createRequire(import.meta.url);
 const { activeSection } = require('../assets/site-nav.js');
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const VERSION = '20261030-1';
+const VERSION = '20261102-1';
 export const LINKS = [
   ['home', 'Home', '/'], ['maps', 'Maps', '/maps/'], ['cameras', 'Cameras', '/cameras/'],
   ['states', 'United States', '/states/'], ['canada', 'Canada', '/canada/'], ['story', 'Story', '/#story'],
