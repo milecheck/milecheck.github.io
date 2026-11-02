@@ -330,7 +330,6 @@ national.push(JUMP);
 national.push(`<h2 class="rc">Crashes</h2>`);
 national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes go on its feed, and some post none. Your state's page shows which routes had the most.</p>`);
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
-national.push(JUMP);
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
 national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most.</p>`);
 // The national month-by-month section was cut (Leah 2026-11-02); state pages keep their own history.
