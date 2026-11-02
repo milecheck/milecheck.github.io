@@ -1100,3 +1100,130 @@
 
 // Popups open clear of the button column on the left of every map (10-30).
 if (typeof L !== 'undefined' && L.Popup) L.Popup.prototype.options.autoPanPaddingTopLeft = L.point(60, 12);
+
+/* 8. Camera pictures: when each was taken, a Refresh button, and a new picture every 30 seconds
+   while one is on screen. Every camera page shares this file, so every state, city, corridor,
+   pass and ski page gets it with no page edit.
+   Why (11-02): a visitor on /cameras/arizona/ wrote "Do you have to clear your web browser cache
+   to get a new updated photo? Refresh does not seem to help." The page added t=Date.now() to the
+   picture, but the Worker ignored it and kept one copy for up to 150 seconds, so the same picture
+   came back. The Worker now treats t= or fresh=1 as "get a new one" (one DOT read per camera per
+   15 s at most) and sends X-Camera-Captured-At, plus X-Camera-Source-Time when the DOT gives a
+   picture time of its own. This reads them with fetch, shows them under the picture, and
+   swaps the new picture in. Video cards and plow photos are left alone (no /camera-image URL). */
+(function () {
+  var PROXY = /\/camera-image\?/;
+  var EVERY = 30000;
+  var tracked = [];
+
+  function ago(s) {
+    s = Math.max(0, Math.round(s));
+    if (s < 5) return 'just now';
+    if (s < 90) return s + ' s ago';
+    var m = Math.round(s / 60);
+    return m < 90 ? m + ' min ago' : Math.round(m / 60) + ' h ago';
+  }
+  function clock(sec) {
+    try { return new Date(sec * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; }
+  }
+  function label(st) {
+    var now = Date.now() / 1000;
+    if (st.failed && !st.captured) return 'Could not load this picture. Try Refresh.';
+    var t;
+    if (st.stale) t = 'The DOT is not answering. Showing the last picture, taken ' + clock(st.captured) + ' (' + ago(now - st.captured) + ').';
+    else if (st.source) t = 'Picture time from the DOT: ' + clock(st.source) + ' (' + ago(now - st.source) + ').';
+    else t = 'Fetched from the DOT at ' + clock(st.captured) + ' (' + ago(now - st.captured) + ').';
+    if (st.failed) t = 'Could not refresh just now. ' + t;
+    return t;
+  }
+  function render(st) { st.text.textContent = label(st); }
+
+  function load(st) {
+    if (st.busy) return;
+    st.busy = true;
+    st.btn.disabled = true;
+    st.btn.textContent = 'Refreshing…';
+    var u = st.base + (st.base.indexOf('?') < 0 ? '?' : '&') + 'fresh=1&t=' + Date.now();
+    fetch(u, { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var cap = parseInt(r.headers.get('X-Camera-Captured-At') || '0', 10);
+      var src = parseInt(r.headers.get('X-Camera-Source-Time') || '0', 10);
+      st.captured = cap || Math.floor(Date.now() / 1000);
+      st.source = src || 0;
+      st.stale = r.headers.get('X-Camera-Stale') === 'true';
+      return r.blob();
+    }).then(function (b) {
+      var obj = URL.createObjectURL(b);
+      var old = st.obj;
+      st.img.src = obj;
+      st.obj = obj;
+      if (old) setTimeout(function () { URL.revokeObjectURL(old); }, 3000);
+      st.failed = false;
+    }).catch(function () {
+      st.failed = true;
+    }).then(function () {
+      st.busy = false;
+      st.last = Date.now();
+      st.btn.disabled = false;
+      st.btn.textContent = 'Refresh picture';
+      render(st);
+    });
+  }
+
+  function enhance(img) {
+    if (img.getAttribute('data-mc-cam') || !PROXY.test(img.src || '')) return;
+    img.setAttribute('data-mc-cam', '1');
+    var u;
+    try { u = new URL(img.src, location.href); } catch (e) { return; }
+    u.searchParams.delete('t');
+    u.searchParams.delete('fresh');
+    var row = document.createElement('div');
+    row.className = 'cc-meta cc-age';
+    var text = document.createElement('span');
+    text.className = 'cc-age-t';
+    text.textContent = 'Loading the latest picture…';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cc-refresh';
+    btn.textContent = 'Refresh picture';
+    row.appendChild(text);
+    row.appendChild(btn);
+    var a = img.closest ? img.closest('a') : null;
+    var anchor = a || img;
+    anchor.parentNode.insertBefore(row, anchor.nextSibling);
+    var st = { img: img, base: u.href, text: text, btn: btn, captured: 0, source: 0, stale: false, failed: false, busy: false, last: 0, obj: null };
+    btn.addEventListener('click', function () { load(st); });
+    // "Open full image" must open a new picture too, not a copy the browser or Worker kept.
+    if (a) a.addEventListener('click', function () { a.href = st.base + (st.base.indexOf('?') < 0 ? '?' : '&') + 'fresh=1&t=' + Date.now(); }, true);
+    tracked.push(st);
+    load(st);
+  }
+  function scan(root) {
+    var list = (root.querySelectorAll ? root.querySelectorAll('img.cc-img') : []);
+    for (var i = 0; i < list.length; i++) enhance(list[i]);
+    if (root.matches && root.matches('img.cc-img')) enhance(root);
+  }
+
+  function onScreen(el) {
+    var r = el.getBoundingClientRect();
+    return r.width > 0 && r.bottom > 0 && r.top < (window.innerHeight || 800);
+  }
+  setInterval(function () {
+    tracked = tracked.filter(function (st) { return st.img.isConnected; });
+    tracked.forEach(function (st) {
+      render(st);
+      if (document.visibilityState === 'visible' && !st.busy && Date.now() - st.last >= EVERY && onScreen(st.img)) load(st);
+    });
+  }, 5000);
+
+  function start() {
+    scan(document.body);
+    if (window.MutationObserver) new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) for (var j = 0; j < muts[i].addedNodes.length; j++) {
+        var n = muts[i].addedNodes[j];
+        if (n.nodeType === 1) scan(n);
+      }
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
+})();

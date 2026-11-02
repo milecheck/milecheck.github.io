@@ -208,3 +208,9 @@ html .co-layers .co-key{margin-top:8px;}
 .cm-ring span::after{content:"";margin:-3px 0 0 -3px;animation:cmRing 1.4s ease-out infinite;}
 @keyframes cmRing{0%{transform:scale(1);opacity:.9;}100%{transform:scale(2.4);opacity:0;}}
 @media (prefers-reduced-motion:reduce){.cm-ring span::after{animation:none;opacity:0;}}
+
+/* Camera pictures: age line and Refresh button (map-kit.js section 8, 11-02) */
+.cc-age{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;}
+.cc-age .cc-age-t{flex:1 1 180px;min-width:0;}
+.cc-refresh{min-height:44px;padding:0 14px;border:1px solid #c9d0d6;border-radius:8px;background:#fff;color:#0E1116;font:600 13.5px/1 inherit;font-family:inherit;cursor:pointer;}
+.cc-refresh:disabled{opacity:.6;cursor:default;}
