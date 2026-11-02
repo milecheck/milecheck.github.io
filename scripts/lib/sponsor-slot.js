@@ -185,7 +185,7 @@ function slot({ kind, slug, state, name }) {
   const { key, sponsor } = resolve(cfg, keysFor(kind, { slug, state }), day);
   const house = Object.assign({ url: '/sponsor/', cta: 'Learn more', title: 'Want to advertise with us?', copy: '' }, cfg.house || {});
   // Monthly Highway Report pages sell the NEXT report, not the page (Leah 10/1).
-  if (/road-report|highway-report/.test(slug)) Object.assign(house, { title: "Sponsor next month's Highway Report.", url: cfg.reportSponsorUrl || '/sponsor/#report', cta: cfg.reportSponsorUrl ? 'Book it, $500' : house.cta });
+  if (/road-report|highway-report/.test(slug)) Object.assign(house, { title: "Sponsor next month's Highway Report.", url: cfg.reportSponsorUrl || '/sponsor/#report', cta: cfg.reportSponsorUrl ? `Book it, ${cfg.reportSponsorPrice || '$500'}` : house.cta }); // price lives in data/sponsors.json next to its Stripe link
   placed.push({ slotKey, name, via: key, sponsorId: sponsor ? sponsor.id : 'house' });
   return {
     key: slotKey,
