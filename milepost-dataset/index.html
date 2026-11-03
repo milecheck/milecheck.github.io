@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+
+
+
+
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highway mile marker data for all 50 US states | MileCheck</title>
+  <meta name="description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet size.">
+  <link rel="canonical" href="https://milecheckapp.com/milepost-dataset/">
+  <meta property="og:title" content="Highway mile marker data for all 50 US states | MileCheck">
+  <meta property="og:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet size.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/milepost-dataset/">
+  <meta property="og:type" content="website">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Highway mile marker data for all 50 US states | MileCheck">
+  <meta name="twitter:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet size.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","@id":"https://milecheckapp.com/milepost-dataset/#dataset","name":"MileCheck Milepost Dataset","description":"Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet size.","url":"https://milecheckapp.com/milepost-dataset/","creator":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"},"isAccessibleForFree":false,"spatialCoverage":{"@type":"Place","name":"United States"},"temporalCoverage":"2026-11-02/..","distribution":[{"@type":"DataDownload","encodingFormat":"text/csv"},{"@type":"DataDownload","encodingFormat":"application/geo+json"}],"publisher":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"},"isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+
+
+  <style>
+    .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
+    .api-hero .eyebrow{font:800 13px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;margin-bottom:10px;}
+    .api-hero h1{font-size:clamp(30px,5.5vw,48px);line-height:1.1;margin:0 0 14px;letter-spacing:-0.01em;}
+    .api-hero p.sub{font-size:18px;line-height:1.6;color:#3a444d;max-width:62ch;margin:0 auto 10px;}
+    .api-hero p.value{font-size:15px;color:#5b6670;max-width:60ch;margin:0 auto 26px;}
+    .api-hero .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
+    .api-hero .btns a{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;}
+    .api-hero .btns a.primary{background:#0f7a4f;color:#fff;}
+    .api-hero .btns a.ghost{border:1.5px solid #0F1419;color:#0F1419;}
+
+    .api-section{max-width:960px;margin:0 auto;padding:36px 20px;}
+    .api-section h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 8px;letter-spacing:-0.01em;}
+    .api-section p.lead{font-size:15.5px;color:#3a444d;line-height:1.65;max-width:70ch;margin:0 0 22px;}
+
+    .value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    @media(max-width:860px){.value-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:520px){.value-grid{grid-template-columns:1fr;}}
+    .value-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:18px 16px;}
+    .value-card h3{font-size:15px;margin:0 0 6px;color:#0E1116;}
+    .value-card p{font-size:13.5px;color:#5b6670;line-height:1.55;margin:0;}
+
+    .ep-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;margin-bottom:20px;}
+    .ep-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+    .ep-method{font:800 12.5px 'JetBrains Mono',monospace;background:#0f7a4f;color:#fff;padding:3px 9px;border-radius:6px;letter-spacing:.03em;}
+    .ep-path{font:700 16px 'JetBrains Mono',monospace;color:#0E1116;}
+    .ep-desc{font-size:14.5px;color:#5b6670;margin:6px 0 14px;line-height:1.6;}
+    .ep-params{font-size:13.5px;color:#3a444d;margin:0 0 14px;line-height:1.7;}
+    .ep-params code{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;}
+    .ep-label{font:700 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#8A939B;margin:14px 0 6px;}
+    .ep-label:first-of-type{margin-top:0;}
+    pre.codeblock{background:#0E1116;color:#e6f4ec;border-radius:10px;padding:14px 16px;overflow-x:auto;font:13px/1.6 'JetBrains Mono',monospace;margin:0;}
+    pre.codeblock .cmt{color:#7a8790;}
+
+    .auth-note{border:1px dashed #c9c6b8;border-radius:12px;background:#FBFAF5;padding:14px 16px;font-size:13.5px;color:#3a444d;line-height:1.6;margin-bottom:24px;}
+    .auth-note code{background:#F6F8F7;border:1px solid #E5E5E5;border-radius:5px;padding:1px 6px;font:600 12.5px 'JetBrains Mono',monospace;}
+
+    .try-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;}
+    .try-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;}
+    @media(max-width:640px){.try-grid{grid-template-columns:1fr;}}
+    .try-field label{display:block;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.03em;color:#5b6670;margin-bottom:5px;}
+    .try-field input{width:100%;padding:10px 12px;border:1px solid #c9c6b8;border-radius:9px;font-size:14px;font-family:inherit;box-sizing:border-box;}
+    .try-field input:focus{outline:2px solid #0f7a4f;outline-offset:1px;}
+    .try-btn{background:#0f7a4f;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:700;font-size:14.5px;cursor:pointer;}
+    .try-btn:hover{background:#0c6540;}
+    .try-out{margin-top:14px;background:#0E1116;color:#e6f4ec;border-radius:10px;padding:14px 16px;font:12.5px/1.6 'JetBrains Mono',monospace;overflow-x:auto;white-space:pre-wrap;word-break:break-word;min-height:44px;}
+    .try-note{font-size:12.5px;color:#8A939B;margin-top:10px;}
+    .try-note a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+
+    .pricing-note{font-size:13px;color:#8A939B;font-style:italic;margin-bottom:18px;}
+    .pricing-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:14px;min-width:680px;}
+    @media(max-width:720px){.pricing-grid{min-width:0;grid-template-columns:1fr;}}
+    .price-card{border:1px solid #E5E5E5;border-radius:16px;background:#fff;padding:22px;display:flex;flex-direction:column;}
+    .price-card.featured{border-color:#0f7a4f;box-shadow:0 6px 20px rgba(15,122,79,.12);}
+    .price-tier{font:700 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#8A939B;margin-bottom:6px;}
+    .price-card.featured .price-tier{color:#0f7a4f;}
+    .price-amt{font-size:28px;font-weight:800;color:#0E1116;margin-bottom:2px;}
+    .price-amt span{font-size:14px;font-weight:600;color:#8A939B;}
+    .price-desc{font-size:13.5px;color:#5b6670;margin:6px 0 16px;line-height:1.5;min-height:34px;}
+    .price-feat{list-style:none;padding:0;margin:0 0 18px;font-size:13.5px;color:#3a444d;line-height:1.9;flex-grow:1;}
+    .price-feat li:before{content:"✓ ";color:#0f7a4f;font-weight:800;}
+    .price-cta{display:block;text-align:center;padding:10px 16px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;}
+    .price-card.featured .price-cta{background:#0f7a4f;color:#fff;}
+    .price-card:not(.featured) .price-cta{border:1.5px solid #0F1419;color:#0F1419;}
+
+    .faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .faq summary{font-weight:700;font-size:15.5px;cursor:pointer;}
+    .faq p{margin:10px 0 0;font-size:14.5px;color:#3a444d;line-height:1.65;}
+
+    .cta{border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);padding:26px 22px;margin:8px 0 4px;text-align:center;}
+    .cta h3{font-size:21px;margin:0 0 8px;}
+    .cta p{font-size:15px;color:#3a444d;margin:0 auto 16px;max-width:520px;}
+  </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+.who{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}@media(max-width:620px){.who{grid-template-columns:1fr}}
+.who div{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px}.who h3{font-size:15px;margin:0 0 4px}.who p{font-size:14px;color:#3a444d;line-height:1.55;margin:0}
+.api-section{padding:18px 20px}.api-hero{padding-bottom:0}.api-section h2{margin-bottom:12px}.three .ep-card{margin-bottom:0}.ep-desc{margin:0}.api-section p.lead{margin-bottom:12px}.cta{margin:0}
+.three .ep-label{color:#0f7a4f;font-size:13px;margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}@media(max-width:860px){.three{grid-template-columns:1fr}}
+.pricing-grid.two{grid-template-columns:repeat(2,1fr);min-width:0}@media(max-width:720px){.pricing-grid.two{grid-template-columns:1fr}}
+.api-hero p.value{margin-bottom:16px}
+</style>
+<style>
+.three-lines{max-width:62ch;margin:0 auto 14px;text-align:left;display:grid;gap:8px}
+.three-lines p{margin:0;font-size:17px;line-height:1.5;color:#3a444d}.three-lines strong{color:#0f7a4f}
+.defs{max-width:62ch;margin:0 auto 22px;font-size:15px;line-height:1.6;color:#3a444d;text-align:left;background:#fff;border:1px solid #E5E5E5;border-radius:12px;padding:12px 16px}
+.defs p{margin:0 0 6px}.defs p:last-child{margin:0}
+.tbl{overflow-x:auto}.tbl table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}.tbl th,.tbl td{border-bottom:1px solid #E5E5E5;padding:10px 12px;text-align:left;vertical-align:top;line-height:1.5}.tbl th{font:700 12px 'JetBrains Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#8A939B}
+@media(max-width:700px){.tbl table{min-width:0}.tbl thead{display:none}.tbl tr{display:block;border-bottom:1px solid #E5E5E5;padding:12px 0}.tbl td{display:block;border:0;padding:3px 0}}
+.proof{max-width:760px;margin:16px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:left}@media(max-width:620px){.proof{grid-template-columns:1fr 1fr}}
+.proof div{border:1px solid #E5E5E5;border-radius:10px;background:#fff;padding:9px 12px;font-size:13px;line-height:1.4;color:#5b6670}.proof b{display:block;font-size:17px;color:#0E1116}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:s}@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.steps li{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;counter-increment:s}.steps li:before{content:counter(s);display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;margin:0 8px 0 0;vertical-align:middle}.steps b{color:#0E1116}.steps b:after{content:"";display:block;margin-bottom:4px}
+.faq details{padding:10px 16px;margin-bottom:8px}.faq summary{font-size:15px}.faq p{margin-top:6px;font-size:14px}.faq a,.api-section p.lead a{color:#0f7a4f;font-weight:700}
+.badge{display:inline-block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;background:#e6f4ec;color:#0f7a4f}.badge.dl{background:#eef0f7;color:#3b4a8a}
+</style>
+<style>
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,300px));gap:18px;justify-content:center;margin:6px 0 4px}
+.shots figure{margin:0}.shots img{display:block;width:100%;height:auto;border:1px solid #E5E5E5;border-radius:22px}
+.shots figcaption{font-size:13.5px;line-height:1.5;color:#5b6670;margin-top:8px;text-align:left}
+@media(max-width:560px){.shots{grid-template-columns:minmax(0,1fr);gap:22px}.shots figure{max-width:320px;margin:0 auto}}
+</style>
+<style>
+.mocks{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.mock{margin:0}.mock img{display:block;width:100%;height:auto;border:1px solid #d9dedc;border-radius:12px}
+.mock a{display:block}.mock figcaption{font-size:14px;line-height:1.5;color:#3a444d;margin-top:8px}
+.mocks-h{font-size:19px;margin:22px 0 4px}
+.badge{display:inline-block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;background:#e6f4ec;color:#0f7a4f}.badge.dl{background:#eef0f7;color:#3b4a8a}
+</style>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
+  <script src="/assets/site-nav.js?v=20261102-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261102-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/pricing/" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+<style>
+  .ds-wrap{max-width:880px;margin:0 auto;padding:36px 20px 24px;}
+  .ds-wrap .eyebrow{font:800 13px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;margin-bottom:10px;}
+  .ds-wrap .eyebrow a{color:inherit;text-decoration:none;}
+  .ds-wrap h1{font-size:clamp(28px,5vw,42px);line-height:1.12;margin:0 0 12px;letter-spacing:-0.01em;}
+  .ds-wrap h2{font-size:clamp(22px,3.4vw,28px);margin:40px 0 8px;letter-spacing:-0.01em;}
+  .ds-wrap p{font-size:16px;line-height:1.65;color:#3a444d;margin:0 0 14px;max-width:70ch;}
+  .ds-wrap .lede{font-size:18px;margin-bottom:22px;}
+  .ds-btns{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 26px;}
+  .ds-btns a{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;}
+  .ds-btns a.primary{background:#0f7a4f;color:#fff;}
+  .ds-btns a.ghost{border:1.5px solid #0F1419;color:#0F1419;}
+  .ds-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 10px;}
+  @media(max-width:700px){.ds-facts{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  .ds-fact{border:1px solid #E4EAE6;border-radius:12px;background:#fff;padding:14px 14px 12px;}
+  .ds-fact b{display:block;font:800 22px/1.1 'JetBrains Mono',monospace;color:#0E1116;margin-bottom:4px;}
+  .ds-fact span{font-size:14px;color:#5b6670;line-height:1.4;}
+  .ds-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px;border:1px solid #E4EAE6;border-radius:12px;background:#fff;}
+  .ds-tbl{width:100%;border-collapse:collapse;font-size:15px;}
+  .ds-tbl th,.ds-tbl td{text-align:left;padding:10px 12px;border-bottom:1px solid #EEF1EF;vertical-align:top;line-height:1.45;}
+  .ds-tbl tr:last-child td{border-bottom:0;}
+  .ds-tbl th{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:#4a5560;background:#F4F8F6;}
+  .ds-tbl code{font:600 13.5px 'JetBrains Mono',monospace;color:#0E1116;white-space:nowrap;}
+  .ds-tbl td.num{font:700 15px 'JetBrains Mono',monospace;white-space:nowrap;color:#0E1116;}
+  .ds-pre{font:13px/1.55 'JetBrains Mono',monospace;background:#0F1419;color:#E6EDF3;border-radius:12px;padding:14px 16px;overflow-x:auto;margin:0 0 14px;white-space:pre;}
+  .ds-list{margin:0 0 14px;padding-left:20px;max-width:70ch;}
+  .ds-list li{font-size:16px;line-height:1.6;color:#3a444d;margin:0 0 6px;}
+  .ds-small{font-size:14px!important;color:#5b6670!important;}
+  .in-form{margin-top:8px;max-width:720px;}
+  .in-form fieldset{border:0;padding:0;margin:0 0 22px;}
+  .in-form legend,.in-form label.q{display:block;font-weight:700;font-size:16px;line-height:1.35;color:#0E1116;margin:0 0 8px;padding:0;}
+  .in-form .hint{font-size:14px;color:#5b6670;margin:-4px 0 8px;line-height:1.5;}
+  .in-form textarea,.in-form input[type=text],.in-form input[type=email]{width:100%;box-sizing:border-box;font:inherit;font-size:16px;line-height:1.4;padding:11px 12px;min-height:44px;border:1.5px solid #cfd5da;border-radius:10px;background:#fff;color:#0E1116;}
+  .in-form textarea{min-height:92px;resize:vertical;}
+  .in-form textarea:focus,.in-form input:focus{outline:2px solid #0f7a4f;outline-offset:1px;border-color:#0f7a4f;}
+  .in-opts{display:flex;flex-wrap:wrap;gap:8px 10px;}
+  .in-opts label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1.5px solid #cfd5da;border-radius:10px;background:#fff;font-size:16px;cursor:pointer;}
+  .in-opts input{width:20px;height:20px;margin:0;accent-color:#0f7a4f;}
+  .in-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:520px){.in-row{grid-template-columns:1fr;}}
+  .in-sub{margin-top:10px;}
+  .in-sub label{display:block;margin:0 0 4px;}
+  .in-go{display:inline-block;min-height:48px;padding:0 26px;border:0;border-radius:10px;background:#0f7a4f;color:#fff;font:700 16px inherit;font-family:inherit;cursor:pointer;}
+  .in-go:disabled{opacity:.6;cursor:default;}
+  .in-msg{margin:16px 0 0;padding:14px 16px;border-radius:10px;font-size:16px;line-height:1.5;display:none;}
+  .in-msg.ok{display:block;background:#e8f5ee;border:1px solid #b9dfc9;color:#0b4a30;}
+  .in-msg.bad{display:block;background:#fdeceb;border:1px solid #f1b9b4;color:#7a1d15;}
+  .in-msg a{color:inherit;font-weight:700;}
+  .in-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+</style>
+<main class="ds-wrap">
+  <div class="eyebrow"><a href="/partners/">MileCheck for business</a> &rsaquo; <a href="/api/">API</a> &rsaquo; Milepost dataset</div>
+  <h1>Highway mile marker data for all 50 US states</h1>
+  <p class="lede">Every highway mile marker position we have in the United States, as CSV and GeoJSON files you run on your own systems. You pay one flat price a year, set by the size of your fleet. There are no API calls to count, and lookups work without a cell signal.</p>
+  <div class="ds-btns"><a class="primary" href="#contact">Ask for a sample</a><a class="ghost" href="#pricing">See prices</a></div>
+
+  <div class="ds-facts">
+    <div class="ds-fact"><b>396,842</b><span>marker positions</span></div>
+    <div class="ds-fact"><b>9,056</b><span>signed routes</span></div>
+    <div class="ds-fact"><b>50</b><span>states, one schema</span></div>
+    <div class="ds-fact"><b>Monthly</b><span>snapshot and change list</span></div>
+  </div>
+  <p class="ds-small">Counts are from the November 2, 2026 release.</p>
+
+  <h2 id="contents">What is in each row</h2>
+  <p>One row is one mile marker. The route is the one a driver reads on the sign, like I-15 or US-89, not an internal agency code.</p>
+  <div class="ds-tbl-wrap"><table class="ds-tbl">
+    <thead><tr><th>Field</th><th>What it holds</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>A stable row id. It survives coordinate corrections, so you can match rows from one month to the next.</td></tr>
+      <tr><td><code>state</code>, <code>country</code></td><td>Two-letter state code, and US.</td></tr>
+      <tr><td><code>route</code></td><td>The signed route, for example I-15, US-89 or SR-201.</td></tr>
+      <tr><td><code>route_alt</code></td><td>Other signed routes on the same pavement at that marker.</td></tr>
+      <tr><td><code>agency_route_id</code></td><td>The agency's own route name, where it differs. Oregon highway numbers, for example.</td></tr>
+      <tr><td><code>marker</code>, <code>unit</code></td><td>The number on the marker, whole or one decimal, and mi.</td></tr>
+      <tr><td><code>direction</code></td><td>NB, SB, EB or WB where the state places a marker on each side of the road.</td></tr>
+      <tr><td><code>lat</code>, <code>lon</code></td><td>WGS84, six decimal places.</td></tr>
+      <tr><td><code>county</code></td><td>When the state supplies it.</td></tr>
+      <tr><td><code>position_type</code></td><td>Whether the point is a surveyed sign or placed along the state's route line at that mile.</td></tr>
+      <tr><td><code>source</code>, <code>source_url</code>, <code>license</code></td><td>The agency layer the row came from and its stated terms.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Three rows from the Utah file, some columns left out here:</p>
+  <pre class="ds-pre" id="sample-rows">id,state,country,route,route_alt,marker,unit,lat,lon,position_type
+UT-I_15-0-NB,UT,US,I-15,,0,mi,37.000019,-113.622456,physical
+UT-I_15-1-NB,UT,US,I-15,,1,mi,37.012987,-113.614383,physical
+UT-I_15-1-SB,UT,US,I-15,,1,mi,37.013145,-113.614777,physical
+</pre>
+
+  <h2 id="coverage">Coverage</h2>
+  <ul class="ds-list">
+    <li>All 50 states, interstates, US routes and state routes where the state publishes markers.</li>
+    <li>24 states give surveyed sign positions. 19 are placed along the state's own route line at each mile. 7 use surveyed signs where they exist and the route line elsewhere. Every row says which.</li>
+    <li>Each state's source agency and its stated terms are listed in the manifest and in LICENSE.txt.</li>
+    <li>Kilometre markers for ten Canadian provinces and territories are available on request, in the same layout.</li>
+  </ul>
+
+  <h2 id="delivery">How you get it</h2>
+  <ul class="ds-list">
+    <li>Delivered to your S3 bucket, or by a secure download link.</li>
+    <li>One file per state and one national file, in CSV and GeoJSON.</li>
+    <li>A full snapshot every month, with a change list naming the markers added, moved and removed since the last one.</li>
+    <li>Corrections sent between snapshots when a state fixes its data.</li>
+    <li>A manifest with row counts per state and SHA-256 checksums for every file.</li>
+  </ul>
+  <p>Want live lookups instead of files? The <a href="/api/">MileCheck API</a> turns a GPS position into the nearest mile marker, one call at a time.</p>
+  <p class="ds-small">Related questions: <a href="/mile-marker-database/">Is there a database of every highway mile marker in the US?</a> &middot; <a href="/mile-marker-api/">Is there an API that gives the mile marker for a GPS location?</a> &middot; <a href="/mile-marker-lookup-for-dispatch/">How do dispatchers find the mile marker for a caller's location?</a></p>
+
+  <h2 id="pricing">Prices</h2>
+  <p>One flat price a year, set by the number of trucks on your platform. There is no per-truck charge.</p>
+  <div class="ds-tbl-wrap"><table class="ds-tbl">
+    <thead><tr><th>Tier</th><th>Trucks on your platform</th><th>Per year</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Up to 200</td><td class="num">$5,000</td></tr>
+      <tr><td>2</td><td>201 to 1,000</td><td class="num">$8,000</td></tr>
+      <tr><td>3</td><td>1,001 to 2,500</td><td class="num">$11,000</td></tr>
+      <tr><td>4</td><td>2,501 to 5,000</td><td class="num">$14,000</td></tr>
+      <tr><td>5</td><td>More than 5,000</td><td class="num">Quoted</td></tr>
+    </tbody>
+  </table></div>
+  <p>Every tier includes all 50 states, the monthly snapshot and change list, corrections between snapshots, and the right to show the mile markers to your own customers and drivers.</p>
+  <p class="ds-small">Billed yearly in advance. Your tier is checked once a year at renewal, from the truck count you report. There is no monthly reporting. Resale or redistribution of the data is not included. Prices are in US dollars, before tax.</p>
+
+  <h2 id="contact">Ask for a sample or a quote</h2>
+  <p>The free sample is Washington and Oregon, 21,918 rows, in the same layout as the full set. A person at MileCheck reads every message and writes back.</p>
+  <form class="in-form" id="ds-form" novalidate>
+    <div class="in-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <fieldset>
+      <legend>What do you want?</legend>
+      <div class="in-opts">
+        <label><input type="radio" name="want" value="Dataset: free WA and OR sample" checked> The free sample</label>
+        <label><input type="radio" name="want" value="Dataset: license quote"> A license quote</label>
+        <label><input type="radio" name="want" value="Dataset: a question"> A question</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <label class="q" for="why">What will you use the mile markers for?</label>
+      <textarea id="why" name="why" required></textarea>
+    </fieldset>
+    <fieldset>
+      <div class="in-row">
+        <div class="in-sub"><label for="trucks" class="hint">Trucks on your platform</label><input type="text" id="trucks" name="vehicles_now" inputmode="numeric" placeholder="A number, or not sure"></div>
+        <div class="in-sub"><label for="hosting" class="hint">How should we deliver it?</label><input type="text" id="hosting" name="hosting" placeholder="S3 bucket, download link, not sure"></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>About you</legend>
+      <div class="in-sub"><label for="company" class="hint">Company</label><input type="text" id="company" name="company" autocomplete="organization" required></div>
+      <div class="in-row in-sub">
+        <div><label for="cname" class="hint">Your name</label><input type="text" id="cname" name="contact_name" autocomplete="name" required></div>
+        <div><label for="cemail" class="hint">Your email</label><input type="email" id="cemail" name="contact_email" autocomplete="email" required></div>
+      </div>
+    </fieldset>
+    <p class="ds-small" style="margin:0 0 14px">We keep your message for up to 180 days so we can reply, and we do not sell it. This form runs on Cloudflare and the notice to our sales inbox goes through an email service.</p>
+    <button class="in-go" type="submit" id="ds-go">Send</button>
+    <div class="in-msg" id="ds-msg" role="status" aria-live="polite"></div>
+    <p class="ds-small" style="margin-top:14px">Prefer email? Write to <a href="mailto:sales@milecheckapp.com?subject=Milepost%20dataset">sales@milecheckapp.com</a>.</p>
+  </form>
+</main>
+<script>
+(function () {
+  var ENDPOINT = 'https://api.milecheckapp.com/api-intake';
+  var form = document.getElementById('ds-form'), go = document.getElementById('ds-go'), msg = document.getElementById('ds-msg');
+  if (!form) return;
+  function text(n) { var el = form.elements[n]; return el && el.value ? String(el.value).trim() : ''; }
+  function want() { var r = form.querySelector('input[name=want]:checked'); return r ? r.value : ''; }
+  function collect() {
+    return { website: text('website'), products: ['mile markers'], products_other: want(), why: text('why'),
+      vehicles_now: text('vehicles_now'), hosting: text('hosting'), company: text('company'),
+      contact_name: text('contact_name'), contact_email: text('contact_email') };
+  }
+  function mailto(d) {
+    var body = ['Want: ' + d.products_other, 'Use: ' + d.why, 'Trucks: ' + d.vehicles_now, 'Delivery: ' + d.hosting,
+      'Company: ' + d.company, 'Name: ' + d.contact_name, 'Email: ' + d.contact_email].join('\n');
+    return 'mailto:sales@milecheckapp.com?subject=' + encodeURIComponent(d.products_other + ' (' + (d.company || '') + ')') + '&body=' + encodeURIComponent(body);
+  }
+  function show(kind, html) { msg.className = 'in-msg ' + kind; msg.innerHTML = html; msg.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = collect();
+    if (!d.why) { show('bad', 'Tell us what you will use the mile markers for, even in one line.'); form.elements.why.focus(); return; }
+    if (!d.company) { show('bad', 'Add your company name.'); form.elements.company.focus(); return; }
+    if (!d.contact_name) { show('bad', 'Add your name.'); form.elements.contact_name.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.contact_email)) { show('bad', 'Add an email we can reply to.'); form.elements.contact_email.focus(); return; }
+    go.disabled = true; go.textContent = 'Sending…';
+    fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && res.j && res.j.ok) { form.reset(); show('ok', 'Thanks. We have your message and will reply to the email you gave.'); go.textContent = 'Sent'; }
+        else { throw new Error((res.j && res.j.error) || 'failed'); }
+      })
+      .catch(function (err) {
+        go.disabled = false; go.textContent = 'Send';
+        show('bad', (err && err.message && err.message !== 'failed' && err.message !== 'Failed to fetch' ? err.message + ' ' : 'That did not send. ') + '<a href="' + mailto(d) + '">Email it to sales@milecheckapp.com instead</a>.');
+      });
+  });
+})();
+</script>
+
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:block;font-size:14.5px;line-height:1.35;padding:7px 0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/washington/">Washington road conditions</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+<!-- footer-hub:start -->
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:block;font-size:14.5px;line-height:1.35;padding:7px 0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/washington/">Washington road conditions</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=milepost-dataset&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmilepost-dataset" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Learn more</p>
+          <ul class="footer-list">
+            <li><a href="/what-is-my-mile-marker/">What is my mile marker?</a></li>
+            <li><a href="/cameras/">Highway cameras</a></li>
+            <li><a href="/passes/">Mountain passes</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">For business</p>
+          <ul class="footer-list">
+            <li><a href="/partners/">MileCheck for business</a></li>
+            <li><a href="/api/plan/">What you can buy</a></li>
+            <li><a href="/fleets/">Fleets</a></li>
+            <li><a href="/sponsor/">Advertise</a></li>
+            <li><a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+</body>
+</html>
