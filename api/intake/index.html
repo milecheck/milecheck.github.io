@@ -9,19 +9,19 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tell MileCheck what you need mile markers for</title>
-  <meta name="description" content="A short form for companies that want mile markers or road data in their own software. Answer what you can. Nothing here is a commitment.">
+  <title>Tell MileCheck what road data you need</title>
+  <meta name="description" content="A short form for companies that want mile markers or road data in their own software. Only the reason you need it and your contact details are required. Nothing here is a commitment.">
   <link rel="canonical" href="https://milecheckapp.com/api/intake/">
   <meta name="robots" content="noindex,follow">
-  <meta property="og:title" content="Tell MileCheck what you need mile markers for">
-  <meta property="og:description" content="A short form for companies that want mile markers or road data in their own software. Answer what you can. Nothing here is a commitment.">
+  <meta property="og:title" content="Tell MileCheck what road data you need">
+  <meta property="og:description" content="A short form for companies that want mile markers or road data in their own software. Only the reason you need it and your contact details are required. Nothing here is a commitment.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/api/intake/">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tell MileCheck what you need mile markers for">
-  <meta name="twitter:description" content="A short form for companies that want mile markers or road data in their own software. Answer what you can. Nothing here is a commitment.">
+  <meta name="twitter:title" content="Tell MileCheck what road data you need">
+  <meta name="twitter:description" content="A short form for companies that want mile markers or road data in their own software. Only the reason you need it and your contact details are required. Nothing here is a commitment.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -198,24 +198,41 @@
 </style>
 <main class="in-wrap">
   <div class="eyebrow"><a href="/partners/">MileCheck for business</a> &rsaquo; <a href="/api/">API</a> &rsaquo; Intake</div>
-  <h1>Tell us what you need mile markers for</h1>
-  <p class="lede">Only the first question and your contact details are required. Skip anything else. A person at MileCheck reads your answers and writes back. Nothing here is a commitment.</p>
+  <h1>Tell us what road data you need</h1>
+  <p class="lede">Pick what you want, then answer what you can. Only "Why do you need it?" and your contact details are required. A person at MileCheck reads your answers and writes back. Nothing here is a commitment.</p>
 
   <form class="in-form" id="intake" novalidate>
     <div class="in-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
     <fieldset>
-      <label class="q" for="why">Why do you need mile markers?</label>
+      <legend>What do you want from MileCheck?</legend>
+      <p class="hint">Pick all that apply.</p>
+      <div class="in-opts" id="products">
+        <label><input type="checkbox" name="products" value="mile markers"> Mile markers</label>
+        <label><input type="checkbox" name="products" value="road closures and alerts"> Road closures and alerts</label>
+        <label><input type="checkbox" name="products" value="road conditions and chain controls"> Road conditions and chain controls</label>
+        <label><input type="checkbox" name="products" value="cameras"> Cameras</label>
+        <label><input type="checkbox" name="products" value="drawbridges"> Drawbridges</label>
+        <label><input type="checkbox" name="products" value="fires"> Fires</label>
+        <label><input type="checkbox" name="products" value="border waits"> Border waits</label>
+        <label><input type="checkbox" name="products" value="records of past alerts"> Records of past alerts</label>
+        <label><input type="checkbox" name="products" value="other"> Other</label>
+      </div>
+      <div class="in-sub"><input type="text" name="products_other" aria-label="Other data" placeholder="If other, what?"></div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="why">Why do you need it?</label>
       <textarea id="why" name="why" required></textarea>
     </fieldset>
 
     <fieldset>
-      <label class="q" for="usage">How would a driver or dispatcher use them?</label>
+      <label class="q" for="usage">How would a driver or dispatcher use it?</label>
       <textarea id="usage" name="usage"></textarea>
     </fieldset>
 
     <fieldset>
-      <label class="q" for="realized">When did you realize you needed them?</label>
+      <label class="q" for="realized">When did you realize you needed it?</label>
       <p class="hint">A call, a delay, a customer request. Whatever happened.</p>
       <textarea id="realized" name="realized"></textarea>
     </fieldset>
@@ -241,7 +258,7 @@
     </fieldset>
 
     <fieldset>
-      <legend>Do you need mile markers without cell service?</legend>
+      <legend>Does it need to work without cell service?</legend>
       <div class="in-opts">
         <label><input type="radio" name="needs_offline" value="yes"> Yes</label>
         <label><input type="radio" name="needs_offline" value="no"> No</label>
@@ -260,16 +277,6 @@
       <div class="in-row">
         <div><label for="v_now" class="hint" style="display:block;margin:0 0 4px;">Now</label><input type="text" id="v_now" name="vehicles_now" inputmode="numeric" placeholder="A number, or not sure"></div>
         <div><label for="v_12" class="hint" style="display:block;margin:0 0 4px;">In 12 months</label><input type="text" id="v_12" name="vehicles_12mo" inputmode="numeric" placeholder="A number, or not sure"></div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Which add-ons interest you?</legend>
-      <div class="in-opts" id="addons">
-        <label><input type="checkbox" name="addons" value="road alerts"> Road alerts</label>
-        <label><input type="checkbox" name="addons" value="drawbridges"> Drawbridges</label>
-        <label><input type="checkbox" name="addons" value="fires"> Fires</label>
-        <label><input type="checkbox" name="addons" value="border waits"> Border waits</label>
       </div>
     </fieldset>
 
@@ -303,15 +310,15 @@
       website: text('website'), why: text('why'), usage: text('usage'), realized: text('realized'),
       gps: vals('gps'), gps_other: text('gps_other'), signal_loss: one('signal_loss'), needs_offline: one('needs_offline'),
       offline_notes: text('offline_notes'), hosting: text('hosting'), vehicles_now: text('vehicles_now'), vehicles_12mo: text('vehicles_12mo'),
-      addons: vals('addons'), company: text('company'), contact_name: text('contact_name'), contact_email: text('contact_email'), signer: text('signer')
+      products: vals('products'), products_other: text('products_other'), company: text('company'), contact_name: text('contact_name'), contact_email: text('contact_email'), signer: text('signer')
     };
   }
   function mailto(d) {
     var L = function (k, v) { return k + ': ' + (v || '') ; };
-    var body = [L('Why we need mile markers', d.why), L('What drivers or dispatchers do with them', d.usage), L('When we realized', d.realized),
+    var body = [L('What we want', d.products.concat(d.products_other ? [d.products_other] : []).join(', ')), L('Why we need it', d.why), L('What drivers or dispatchers do with them', d.usage), L('When we realized', d.realized),
       L('GPS today', d.gps.concat(d.gps_other ? [d.gps_other] : []).join(', ')), L('Vehicles lose signal', d.signal_loss),
       L('Needs offline', [d.needs_offline, d.offline_notes].filter(Boolean).join('. ')), L('Hosting', d.hosting),
-      L('Vehicles today', d.vehicles_now), L('Vehicles in 12 months', d.vehicles_12mo), L('Add-ons', d.addons.join(', ')),
+      L('Vehicles today', d.vehicles_now), L('Vehicles in 12 months', d.vehicles_12mo), 
       L('Company', d.company), L('Name', d.contact_name), L('Email', d.contact_email), L('Who signs', d.signer)].join('\n');
     return 'mailto:sales@milecheckapp.com?subject=' + encodeURIComponent('API intake: ' + (d.company || '')) + '&body=' + encodeURIComponent(body);
   }
@@ -319,7 +326,7 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var d = collect();
-    if (!d.why) { show('bad', 'Tell us why you need mile markers, even in one line.'); form.elements.why.focus(); return; }
+    if (!d.why) { show('bad', 'Tell us why you need it, even in one line.'); form.elements.why.focus(); return; }
     if (!d.company) { show('bad', 'Add your company name.'); form.elements.company.focus(); return; }
     if (!d.contact_name) { show('bad', 'Add your name.'); form.elements.contact_name.focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.contact_email)) { show('bad', 'Add an email we can reply to.'); form.elements.contact_email.focus(); return; }
