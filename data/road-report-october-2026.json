@@ -6,10 +6,10 @@
   "totalUniqueEvents": 36894,
   "byType": {
     "hazard": 1258,
-    "other": 3568,
-    "construction": 23886,
-    "closure": 5369,
-    "crash": 2329,
+    "other": 3555,
+    "construction": 23882,
+    "closure": 5399,
+    "crash": 2316,
     "weather": 484
   },
   "keywordCounts": {
@@ -1589,16 +1589,16 @@
           266
         ],
         [
-          "other",
-          63
+          "closure",
+          60
         ],
         [
-          "closure",
-          54
+          "other",
+          58
         ],
         [
           "crash",
-          48
+          47
         ],
         [
           "hazard",
@@ -2300,32 +2300,32 @@
       "routes": [
         [
           "I-84",
-          23
+          22
         ],
         [
           "I-5",
-          17
+          16
         ],
         [
           "I-205",
-          12
+          10
         ]
       ],
       "places": [
         {
           "route": "I-5",
           "place": "PACIFIC",
-          "crashes": 17
+          "crashes": 16
         },
         {
           "route": "I-84",
           "place": "OLD OREGON TRAIL",
-          "crashes": 15
+          "crashes": 14
         },
         {
           "route": "I-205",
           "place": "EAST PORTLAND FREEWAY",
-          "crashes": 12
+          "crashes": 10
         }
       ]
     },
@@ -4518,12 +4518,12 @@
     },
     {
       "state": "OR",
-      "closure": 0,
-      "crash": 151,
-      "construction": 318,
+      "closure": 30,
+      "crash": 138,
+      "construction": 314,
       "weather": 0,
       "hazard": 0,
-      "other": 139,
+      "other": 126,
       "total": 608,
       "fires": 163,
       "acres": 1415778,
@@ -5223,9 +5223,9 @@
       {
         "month": "2026-07",
         "total": 737,
-        "closure": 0,
-        "crash": 149,
-        "construction": 344,
+        "closure": 28,
+        "crash": 142,
+        "construction": 338,
         "days": 31,
         "daysInMonth": 31,
         "comparable": true
@@ -5233,9 +5233,9 @@
       {
         "month": "2026-08",
         "total": 692,
-        "closure": 0,
-        "crash": 146,
-        "construction": 349,
+        "closure": 31,
+        "crash": 140,
+        "construction": 341,
         "days": 31,
         "daysInMonth": 31,
         "comparable": true
@@ -5243,9 +5243,9 @@
       {
         "month": "2026-09",
         "total": 620,
-        "closure": 0,
-        "crash": 140,
-        "construction": 353,
+        "closure": 21,
+        "crash": 136,
+        "construction": 348,
         "days": 30,
         "daysInMonth": 30,
         "comparable": true
@@ -5253,9 +5253,9 @@
       {
         "month": "2026-10",
         "total": 608,
-        "closure": 0,
-        "crash": 151,
-        "construction": 318,
+        "closure": 30,
+        "crash": 138,
+        "construction": 314,
         "days": 31,
         "daysInMonth": 31,
         "comparable": true
@@ -5265,9 +5265,9 @@
       {
         "month": "2026-07",
         "total": 111,
-        "closure": 0,
-        "crash": 8,
-        "construction": 96,
+        "closure": 4,
+        "crash": 7,
+        "construction": 94,
         "days": 2,
         "daysInMonth": 31,
         "comparable": false
@@ -5391,9 +5391,9 @@
       {
         "month": "2026-07",
         "total": 161,
-        "closure": 0,
-        "crash": 20,
-        "construction": 109,
+        "closure": 9,
+        "crash": 17,
+        "construction": 108,
         "days": 10,
         "daysInMonth": 31,
         "comparable": false
@@ -5433,9 +5433,9 @@
       {
         "month": "2026-08",
         "total": 124,
-        "closure": 0,
-        "crash": 7,
-        "construction": 96,
+        "closure": 12,
+        "crash": 6,
+        "construction": 89,
         "days": 6,
         "daysInMonth": 31,
         "comparable": false
@@ -6009,9 +6009,9 @@
       {
         "month": "2026-08",
         "total": 113,
-        "closure": 0,
+        "closure": 11,
         "crash": 2,
-        "construction": 94,
+        "construction": 87,
         "days": 3,
         "daysInMonth": 31,
         "comparable": false
@@ -9024,12 +9024,12 @@
     {
       "route": "I-5",
       "total": 441,
-      "crash": 48,
-      "closure": 54,
+      "crash": 47,
+      "closure": 60,
       "construction": 266,
       "weather": 2,
       "hazard": 8,
-      "other": 63,
+      "other": 58,
       "states": {
         "CA": 213,
         "OR": 86,
@@ -9039,12 +9039,12 @@
     {
       "route": "US-101",
       "total": 387,
-      "crash": 21,
-      "closure": 82,
+      "crash": 19,
+      "closure": 86,
       "construction": 234,
       "weather": 5,
       "hazard": 11,
-      "other": 34,
+      "other": 32,
       "states": {
         "CA": 282,
         "OR": 52,
@@ -9274,11 +9274,11 @@
       "route": "US-30",
       "total": 273,
       "crash": 9,
-      "closure": 8,
+      "closure": 9,
       "construction": 254,
       "weather": 0,
       "hazard": 0,
-      "other": 2,
+      "other": 1,
       "states": {
         "IA": 9,
         "ID": 14,
@@ -9347,12 +9347,12 @@
     {
       "route": "I-84",
       "total": 227,
-      "crash": 40,
-      "closure": 19,
-      "construction": 139,
+      "crash": 39,
+      "closure": 22,
+      "construction": 138,
       "weather": 0,
       "hazard": 0,
-      "other": 29,
+      "other": 28,
       "states": {
         "CT": 83,
         "ID": 47,
@@ -9691,11 +9691,11 @@
       "route": "US-395",
       "total": 123,
       "crash": 8,
-      "closure": 42,
+      "closure": 43,
       "construction": 57,
       "weather": 0,
       "hazard": 3,
-      "other": 13,
+      "other": 12,
       "states": {
         "CA": 47,
         "NV": 60,
@@ -11114,12 +11114,12 @@
     {
       "route": "US-26",
       "total": 44,
-      "crash": 10,
-      "closure": 1,
+      "crash": 9,
+      "closure": 3,
       "construction": 25,
       "weather": 0,
       "hazard": 1,
-      "other": 7,
+      "other": 6,
       "states": {
         "ID": 1,
         "NE": 3,
@@ -11937,9 +11937,9 @@
     {
       "route": "I-205",
       "total": 30,
-      "crash": 15,
-      "closure": 2,
-      "construction": 6,
+      "crash": 13,
+      "closure": 5,
+      "construction": 5,
       "weather": 0,
       "hazard": 1,
       "other": 6,
@@ -13462,8 +13462,8 @@
     {
       "route": "OR126",
       "total": 18,
-      "crash": 2,
-      "closure": 0,
+      "crash": 1,
+      "closure": 1,
       "construction": 14,
       "weather": 0,
       "hazard": 0,
@@ -15868,8 +15868,8 @@
     {
       "route": "OR99W",
       "total": 11,
-      "crash": 4,
-      "closure": 0,
+      "crash": 3,
+      "closure": 1,
       "construction": 4,
       "weather": 0,
       "hazard": 0,
@@ -29365,11 +29365,11 @@
       "route": "OR238",
       "total": 3,
       "crash": 0,
-      "closure": 0,
+      "closure": 1,
       "construction": 2,
       "weather": 0,
       "hazard": 0,
-      "other": 1,
+      "other": 0,
       "states": {
         "OR": 3
       }
@@ -37418,8 +37418,8 @@
       "route": "OR127",
       "total": 2,
       "crash": 0,
-      "closure": 0,
-      "construction": 2,
+      "closure": 1,
+      "construction": 1,
       "weather": 0,
       "hazard": 0,
       "other": 0,
@@ -37456,8 +37456,8 @@
     {
       "route": "OR224",
       "total": 2,
-      "crash": 1,
-      "closure": 0,
+      "crash": 0,
+      "closure": 1,
       "construction": 0,
       "weather": 0,
       "hazard": 0,
@@ -52503,8 +52503,8 @@
     {
       "route": "OR221",
       "total": 1,
-      "crash": 1,
-      "closure": 0,
+      "crash": 0,
+      "closure": 1,
       "construction": 0,
       "weather": 0,
       "hazard": 0,
@@ -52543,11 +52543,11 @@
       "route": "OR229",
       "total": 1,
       "crash": 0,
-      "closure": 0,
+      "closure": 1,
       "construction": 0,
       "weather": 0,
       "hazard": 0,
-      "other": 1,
+      "other": 0,
       "states": {
         "OR": 1
       }
@@ -52555,8 +52555,8 @@
     {
       "route": "OR233",
       "total": 1,
-      "crash": 1,
-      "closure": 0,
+      "crash": 0,
+      "closure": 1,
       "construction": 0,
       "weather": 0,
       "hazard": 0,
@@ -52620,8 +52620,8 @@
     {
       "route": "OR332",
       "total": 1,
-      "crash": 1,
-      "closure": 0,
+      "crash": 0,
+      "closure": 1,
       "construction": 0,
       "weather": 0,
       "hazard": 0,
@@ -52673,8 +52673,8 @@
       "route": "OR429",
       "total": 1,
       "crash": 0,
-      "closure": 0,
-      "construction": 1,
+      "closure": 1,
+      "construction": 0,
       "weather": 0,
       "hazard": 0,
       "other": 0,
@@ -57765,5 +57765,6 @@
         "WY": 1
       }
     }
-  ]
+  ],
+  "snowRoadCount": 92
 }
