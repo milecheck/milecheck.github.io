@@ -63,8 +63,30 @@ const when = new Date(readNow).toLocaleString('en-US', { timeZone: 'America/Los_
 const title = 'How fresh and complete is the MileCheck road alert data?';
 const desc = 'Per state and province: how often MileCheck reads the agency, how many alerts it holds, how many carry a DOT mile marker, how old the newest record is, and where the gaps are. A dated snapshot, not a promise.';
 const lead = `Read from the live API on ${when}: ${live} of ${rows.length} states and provinces reporting live, ${total.toLocaleString('en-US')} alerts in all.`;
+const n5 = rows.filter(r => (READ[r.code] || 300) <= 300).length;
+const n15 = rows.filter(r => (READ[r.code] || 300) == 900).length;
 const section = (inner) => `<section class="api-section" style="max-width:1040px;margin:0 auto">${inner}</section>`;
 const bodyHtml = `<section class="api-hero" style="max-width:820px;margin:0 auto"><div class="eyebrow"><a href="/api/" style="color:inherit;text-decoration:none">MileCheck API</a> &rsaquo; Data quality</div><h1>${esc(title)}</h1><p class="sub">${esc(lead)}</p></section>` +
+section(`<h2>How a road event gets to your software</h2>
+<style>
+.mc-flow{display:flex;align-items:stretch;gap:0;margin:16px 0 8px}
+.mc-flow .box{flex:1 1 0;background:#fff;border:2px solid #0f7a4f;border-radius:10px;padding:14px 16px;min-width:0}
+.mc-flow .box b{display:block;font-size:17px;margin-bottom:4px}
+.mc-flow .box span{font-size:14px;line-height:1.5;color:#4a544f}
+.mc-flow .gap{flex:0 0 150px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-size:13px;line-height:1.4;color:#4a544f;padding:0 8px}
+.mc-flow .gap i{font-style:normal;font-size:22px;color:#0f7a4f;line-height:1}
+.mc-flow .start{flex:0 0 120px}
+@media (max-width:760px){.mc-flow{flex-direction:column}.mc-flow .gap,.mc-flow .start{flex:0 0 auto;padding:10px 0}.mc-flow .gap i{transform:rotate(90deg)}}
+</style>
+<div class="mc-flow">
+<div class="gap start"><strong>Something happens on the road</strong><i>&rarr;</i>The agency verifies it</div>
+<div class="box"><b>1. The state DOT posts it</b><span>Federal rule 23 CFR 511.309 gives agencies 10 minutes from verifying a lane-blocking incident to post it in metro areas, and 20 minutes outside them, on Interstates and other major routes they designate.</span></div>
+<div class="gap"><i>&rarr;</i>Within 5 minutes in ${n5} states and provinces, 15 minutes in ${n15}</div>
+<div class="box"><b>2. MileCheck reads the feed</b><span>We check each agency on a set interval, add the mile marker, and put every place in one format. The table below lists the interval for each place.</span></div>
+<div class="gap"><i>&rarr;</i>On your next call</div>
+<div class="box"><b>3. Your software gets it</b><span>Each API call returns what we hold at that moment.</span></div>
+</div>
+<p style="font-size:14px;color:#4a544f;margin:6px 0 0">Weather closures follow the same 20-minute rule from when the agency observes them. Construction closures run 10 minutes in metro areas and 20 outside.</p>`) +
 section(`<h2>What each column means</h2>
 <ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
 <li><strong>Alerts now.</strong> Records the API returns for that place at the read time, after we drop records with no numbered highway.</li>
@@ -77,7 +99,7 @@ ${body}
 </tbody></table></div>`) +
 section(`<h2>What this page does not say</h2>
 <ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
-<li>It does not measure the delay between an agency posting a record and our API returning it. We have not measured that.</li>
+<li>It does not time each record from the road to your software. The steps above show the limit each step works within.</li>
 <li>It does not promise uptime. We do not publish a service level agreement. The <a href="https://status.milecheckapp.com/">status page</a> shows current service.</li>
 <li>One read is one moment. Roadwork counts swing by day of the week, and an agency can be down when you look.</li>
 </ul><p style="margin-top:18px"><a href="/api/#get-key" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none">Get a 14-day test key</a></p>
