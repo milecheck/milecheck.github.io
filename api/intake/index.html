@@ -249,15 +249,6 @@
     </fieldset>
 
     <fieldset>
-      <legend>Do your drivers lose cell service on the road?</legend>
-      <div class="in-opts">
-        <label><input type="radio" name="signal_loss" value="yes"> Yes</label>
-        <label><input type="radio" name="signal_loss" value="no"> No</label>
-        <label><input type="radio" name="signal_loss" value="not sure"> Not sure</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
       <legend>Does it need to work without cell service?</legend>
       <div class="in-opts">
         <label><input type="radio" name="needs_offline" value="yes"> Yes</label>
@@ -308,7 +299,7 @@
   function collect() {
     return {
       website: text('website'), why: text('why'), usage: text('usage'), realized: text('realized'),
-      gps: vals('gps'), gps_other: text('gps_other'), signal_loss: one('signal_loss'), needs_offline: one('needs_offline'),
+      gps: vals('gps'), gps_other: text('gps_other'), needs_offline: one('needs_offline'),
       offline_notes: text('offline_notes'), hosting: text('hosting'), vehicles_now: text('vehicles_now'), vehicles_12mo: text('vehicles_12mo'),
       products: vals('products'), products_other: text('products_other'), company: text('company'), contact_name: text('contact_name'), contact_email: text('contact_email'), signer: text('signer')
     };
@@ -316,7 +307,7 @@
   function mailto(d) {
     var L = function (k, v) { return k + ': ' + (v || '') ; };
     var body = [L('What we want', d.products.concat(d.products_other ? [d.products_other] : []).join(', ')), L('Why we need it', d.why), L('What drivers or dispatchers do with them', d.usage), L('When we realized', d.realized),
-      L('GPS today', d.gps.concat(d.gps_other ? [d.gps_other] : []).join(', ')), L('Vehicles lose signal', d.signal_loss),
+      L('GPS today', d.gps.concat(d.gps_other ? [d.gps_other] : []).join(', ')),
       L('Needs offline', [d.needs_offline, d.offline_notes].filter(Boolean).join('. ')), L('Hosting', d.hosting),
       L('Vehicles today', d.vehicles_now), L('Vehicles in 12 months', d.vehicles_12mo), 
       L('Company', d.company), L('Name', d.contact_name), L('Email', d.contact_email), L('Who signs', d.signer)].join('\n');
