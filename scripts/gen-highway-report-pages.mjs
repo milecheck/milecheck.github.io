@@ -186,6 +186,12 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
     .article-wrap .wn-card p{margin:4px 0 0 !important;font-size:14px;line-height:1.5;color:#3D454D;}
     .wn-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
     .article-wrap .wn-links a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid #9fd3b8;border-radius:999px;color:#0f7a4f;font-weight:600;font-size:13.5px;text-decoration:none;}
+    .road-fact{margin:40px 0 8px;padding:20px 22px;background:#F4F8F6;border:1px solid #DCE9E1;border-left:5px solid #00C880;border-radius:12px;}
+    .road-fact .rf-k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5C6670;margin:0 0 6px !important;}
+    .road-fact .rf-h{font-size:21px;font-weight:800;line-height:1.25;color:#0F1419;margin:0 0 8px !important;}
+    .road-fact .rf-t{font-size:16.5px;line-height:1.6;color:#0F1419;margin:0 0 12px !important;}
+    .road-fact .rf-s{font-size:13.5px;color:#5C6670;margin:0 !important;display:flex;flex-wrap:wrap;align-items:center;column-gap:14px;}
+    .article-wrap .road-fact .rf-s a{display:inline-flex;align-items:center;min-height:44px;}
     .article-wrap p a:not([style]), .article-wrap li a:not([style]){color:#0f7a4f;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600;}
     .article-wrap .state-grid li a{color:#0F1419;text-decoration:none;font-weight:400;}
   </style>
@@ -368,6 +374,7 @@ const extras = (opts) => [
 
 // Optional hand-checked extras for the top tiles (data/road-report-<month>-<year>-extra.json).
 let EX = null; try { EX = JSON.parse(readFileSync(resolve(ROOT, `data/road-report-${KEY}-extra.json`), 'utf8')); } catch {}
+let RF = null; try { RF = JSON.parse(readFileSync(resolve(ROOT, 'data/road-facts-50-states.json'), 'utf8')); } catch {}
 // ---------- national page ----------
 const nums = [
   `<div><b>${n(T.crash)}</b><span>crash alerts</span></div>`,
@@ -564,6 +571,8 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
     parts.push(`<p>Live fire perimeters are at <a href="../../fire/">milecheckapp.com/fire</a>.</p>`);
   }
+  const rf = RF && RF.facts[st];
+  if (rf) parts.push(`<aside class="road-fact"><p class="rf-k">${name} road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">${esc(rf.text).replace(/\b((?:I|US|H)-\d+)/g, '<span style="white-space:nowrap">$1</span>')}</p><p class="rf-s"><span>Day ${rf.day} of our 50 States series</span>${rf.sources && rf.sources[0] ? `<a href="${rf.sources[0]}" target="_blank" rel="noopener">Source</a>` : ''}<a href="${RF.instagram}" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>`);
   parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state or province</a>.</p>`);
   const h1 = `MileCheck Highway Report: ${name}, ${MONTH_NAME} ${YEAR}`;
   const firstMonth = !(histOf(st).filter((x) => x.comparable).length >= 2);
