@@ -19,7 +19,7 @@ const tpl = readFileSync(resolve(ROOT, 'api/plan/index.html'), 'utf8');
 const READ = { CA: 60, ND: 600, CT: 900, GA: 900, HI: 900, LA: 900, NV: 900, NM: 900, WI: 900 };
 const GAPS = {
   NJ: 'Work zones only. No incident feed.', HI: 'Work zones only, and the agency updates weekly.', NM: 'Work zones only. The upstream feed has been intermittent.',
-  RI: 'No named incident feed.', MS: 'Read from a copy refreshed about every 30 minutes (the agency blocks our server).',
+  RI: 'No named incident feed.', MS: 'Read from a copy refreshed about every 30 minutes.',
 };
 const STATUS_NOTE = { unsupported: 'No live feed yet.', live_empty: 'Feed reachable, with no alerts at the read time.', stale: 'Serving a saved copy because the last read failed.' };
 const every = (s) => (s === 60 ? 'every minute' : `every ${s / 60} min`);
@@ -66,7 +66,7 @@ const lead = `Read from the live API on ${when}: ${live} of ${rows.length} state
 const section = (inner) => `<section class="api-section" style="max-width:1040px;margin:0 auto">${inner}</section>`;
 const bodyHtml = `<section class="api-hero" style="max-width:820px;margin:0 auto"><div class="eyebrow"><a href="/api/" style="color:inherit;text-decoration:none">MileCheck API</a> &rsaquo; Data quality</div><h1>${esc(title)}</h1><p class="sub">${esc(lead)}</p></section>` +
 section(`<h2>What each column means</h2>
-<ul style="margin:8px 0 0 20px;line-height:1.6">
+<ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
 <li><strong>Alerts now.</strong> Records the API returns for that place at the read time, after we drop records with no numbered highway.</li>
 <li><strong>With a DOT mile marker.</strong> The share of those records where the agency itself sent a mile marker. The API adds an <code>estimated-mile-marker</code> field, labeled as ours, where the agency sent none.</li>
 <li><strong>Newest record.</strong> How long ago the agency last touched any one record. A quiet road can show an old number while the feed is fine, so read it as a hint, not a delay.</li>
@@ -76,11 +76,12 @@ section(`<h2>State and province table</h2><div class="tbl" style="overflow-x:aut
 ${body}
 </tbody></table></div>`) +
 section(`<h2>What this page does not say</h2>
-<ul style="margin:8px 0 0 20px;line-height:1.6">
+<ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
 <li>It does not measure the delay between an agency posting a record and our API returning it. We have not measured that.</li>
 <li>It does not promise uptime. We do not publish a service level agreement. The <a href="https://status.milecheckapp.com/">status page</a> shows current service.</li>
 <li>One read is one moment. Roadwork counts swing by day of the week, and an agency can be down when you look.</li>
-</ul><p style="margin-top:14px"><a href="/api/#get-key" style="color:#0f7a4f;font-weight:700">Get a test key</a> and read any state yourself. See also the <a href="/api/data-accuracy/" style="color:#0f7a4f;font-weight:700">data accuracy notes</a> and the <a href="/data-sources/" style="color:#0f7a4f;font-weight:700">data sources</a>.</p>`);
+</ul><p style="margin-top:18px"><a href="/api/#get-key" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none">Get a 14-day test key</a></p>
+<p style="margin-top:12px">Read any state yourself with it. See also the <a href="/api/data-accuracy/" style="color:#0f7a4f;font-weight:700">data accuracy notes</a> and the <a href="/data-sources/" style="color:#0f7a4f;font-weight:700">data sources</a>.</p>`);
 
 const bodyStart = tpl.indexOf('<!-- /site-nav:header -->') + '<!-- /site-nav:header -->'.length;
 const valuesAt = tpl.indexOf('<section class="mc-values"');
@@ -96,7 +97,7 @@ let head = tpl.slice(0, bodyStart)
   .replace(/\n\s*<meta name="twitter:[^>]*>/g, '')
   .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, '');
 const ld = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'TechArticle', headline: title, description: desc, url, dateModified: new Date(readNow).toISOString().slice(0, 10), publisher: { '@type': 'Organization', name: 'MileCheck' } })}</script>`;
-const html = head.replace('</head>', `${ld}\n</head>`) + `\n${bodyHtml}\n` + tpl.slice(valuesAt);
+const html = head.replace('</head>', `${ld}\n</head>`) + `\n${bodyHtml}\n` + tpl.slice(valuesAt).replace('max-width:760px;margin:34px auto 30px;padding:24px 20px 6px', 'max-width:1040px;margin:34px auto 30px;padding:24px 0 6px');
 mkdirSync(resolve(ROOT, 'api/data-quality'), { recursive: true });
 writeFileSync(resolve(ROOT, 'api/data-quality/index.html'), html);
 console.log(`api/data-quality/index.html: ${rows.length} places, ${live} live, ${total} alerts`);
