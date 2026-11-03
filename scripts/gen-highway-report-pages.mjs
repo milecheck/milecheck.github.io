@@ -331,7 +331,7 @@ const winterSection = (st, name) => {
   return out.join('\n');
 };
 // Total shown at the end of each month's drawbridge time-lapse (Pacific-time month; the tiles count by UTC day).
-const BRIDGE_TL_TOTAL = { 'october-2026': 700 };
+const BRIDGE_TL_TOTAL = { 'october-2026': 708 };
 // ---------- data ----------
 const T = D.byType, J = D.jurisdictionSummary;
 const jOf = (st) => J.find((x) => x.state === st) || { state: st, crash: 0, closure: 0, construction: 0, total: 0, topRoutes: [] };
@@ -560,7 +560,7 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<h2 class="rc" id="drawbridges">Seattle drawbridges</h2><p>Seattle's drawbridges opened ${n(bridgeTotal)} times in ${MONTH_NAME}.</p>`);
     // List and the month's time-lapse side by side (moved here from the national page, Leah 2026-11-02).
     const tl = existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/bridges.mp4`))
-      ? `<figure style="margin:0;flex:0 1 260px;min-width:200px;"><video src="../highway-report-maps/${KEY}/bridges.mp4" poster="../highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">Every opening in ${MONTH_NAME}, sped up. The video counts by Seattle time, so it ends at ${n(BRIDGE_TL_TOTAL[KEY] || 0)}.</figcaption></figure>`
+      ? `<figure style="margin:0;flex:0 1 260px;min-width:200px;"><video src="../highway-report-maps/${KEY}/bridges.mp4" poster="../highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">Every opening in ${MONTH_NAME}, sped up.${BRIDGE_TL_TOTAL[KEY] && BRIDGE_TL_TOTAL[KEY] !== bridgeTotal ? ` The video counts by Seattle time, so it ends at ${n(BRIDGE_TL_TOTAL[KEY])}.` : ''}</figcaption></figure>`
       : '';
     parts.push(`<div style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;margin:0 0 22px;"><div style="flex:1 1 360px;min-width:0;">${box(`Openings, ${MONTH_NAME}`, BR.map((b) => `<strong>${bridgeName(b.id)}</strong> &mdash; ${n(b.openings)} openings${b.medianMin != null ? `, typically ${b.medianMin} minutes, longest ${b.longestMin}` : ''}`)).replace('<div class="pull-stat">', '<div class="pull-stat" style="margin:0;">')}</div>${tl}</div>`);
     parts.push(`<p>Live status is on <a href="../../maps/#drawbridges">the drawbridge map</a>. New in ${MONTH_NAME}: Crystal Mountain's summit camera and the Paradise camera at Mount Rainier. See them on the <a href="../../ski/crystal-mountain/">Crystal Mountain page</a> and the <a href="../../mountains/rainier/">Mount Rainier page</a>.</p>`);
