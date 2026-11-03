@@ -268,7 +268,7 @@
         <div><label for="cname" class="hint" style="display:block;margin:0 0 4px;">Your name</label><input type="text" id="cname" name="contact_name" autocomplete="name" required></div>
         <div><label for="cemail" class="hint" style="display:block;margin:0 0 4px;">Your email</label><input type="email" id="cemail" name="contact_email" autocomplete="email" required></div>
       </div>
-      <div class="in-sub"><label for="signer" class="hint" style="display:block;margin:0 0 4px;">Who signs for your company?</label><input type="text" id="signer" name="signer" placeholder="Name and title"></div>
+      <div class="in-sub"><label for="ctitle" class="hint" style="display:block;margin:0 0 4px;">Your title</label><input type="text" id="ctitle" name="title" autocomplete="organization-title" placeholder="For example, fleet manager"></div>
     </fieldset>
 
     <p class="in-note" style="margin:0 0 14px">We keep your answers for up to 180 days so we can reply, and we do not sell them. This form runs on Cloudflare and the notice to our sales inbox goes through an email service.</p>
@@ -290,7 +290,7 @@
     return {
       website: text('website'), why: text('why'), usage: text('usage'), realized: text('realized'),
       gps: vals('gps'), gps_other: text('gps_other'), hosting: text('hosting'), vehicles_now: text('vehicles_now'), vehicles_12mo: text('vehicles_12mo'),
-      products: vals('products'), products_other: text('products_other'), company: text('company'), contact_name: text('contact_name'), contact_email: text('contact_email'), signer: text('signer')
+      products: vals('products'), products_other: text('products_other'), company: text('company'), contact_name: text('contact_name'), contact_email: text('contact_email'), title: text('title')
     };
   }
   function mailto(d) {
@@ -299,7 +299,7 @@
       L('GPS today', d.gps.concat(d.gps_other ? [d.gps_other] : []).join(', ')),
       L('Hosting', d.hosting),
       L('Vehicles today', d.vehicles_now), L('Vehicles in 12 months', d.vehicles_12mo), 
-      L('Company', d.company), L('Name', d.contact_name), L('Email', d.contact_email), L('Who signs', d.signer)].join('\n');
+      L('Company', d.company), L('Name', d.contact_name), L('Email', d.contact_email), L('Title', d.title)].join('\n');
     return 'mailto:sales@milecheckapp.com?subject=' + encodeURIComponent('API intake: ' + (d.company || '')) + '&body=' + encodeURIComponent(body);
   }
   function show(kind, html) { msg.className = 'in-msg ' + kind; msg.innerHTML = html; msg.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
