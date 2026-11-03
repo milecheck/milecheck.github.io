@@ -1,28 +1,386 @@
 {
-  "_note": "Facts from MileCheck's 50 States social series, as posted (IG/FB caption text, app pitch lines removed). Source: MILECHECKAPP/marketing/social-media/WEEKS/50-states-week*/. Add a state the day its post goes out. Shown on the Highway Report state pages.",
+  "_note": "Facts from MileCheck's 50 States social series, as posted (IG/FB caption text, app pitch lines removed). Source: MILECHECKAPP/marketing/social-media/WEEKS/50-states-week*/. Add a state the day its post goes out. Shown on the Highway Report state pages. Days 22-50 are written and source-checked but carry \"posted\": false until that state's post goes out; delete the flag (or set true) on post day, then rebuild.",
   "series": "50 States",
   "instagram": "https://www.instagram.com/milecheck_app",
   "facts": {
-    "AL": { "day": 1, "text": "During a hurricane evacuation, Alabama can reverse I-65's southbound lanes to carry traffic north.", "sources": ["https://www.dot.state.al.us/news/pdf/ALDOTtoPerformI-65Evac.pdf"] },
-    "AK": { "day": 2, "text": "The Dalton Highway runs about 240 miles from Coldfoot to Deadhorse with no gas stations. Fill up before leaving Coldfoot northbound.", "sources": ["https://www.alaska.org/guide/dalton-highway"] },
-    "AZ": { "day": 3, "text": "I-19 is signed in kilometers from Tucson to Nogales.", "sources": ["https://azdot.gov/adot-blog/kilometers-arizona-you-bet"] },
-    "AR": { "day": 4, "text": "Highway 23 through the Ozarks is nicknamed the Pig Trail. It's named for Razorback fans driving it to games in Fayetteville.", "sources": ["https://www.arkansas.com/articles/arkansas-joy-rides"] },
-    "CA": { "day": 5, "text": "California's mile markers start over at every county line. Most states count from the state line.", "sources": ["https://postmile.dot.ca.gov/"] },
-    "CO": { "day": 6, "text": "The Eisenhower–Johnson tunnels pass beneath the Continental Divide at an average elevation of 11,112 feet.", "sources": ["https://www.codot.gov/projects/archives/ejmt-infrastructure-repairs"] },
-    "CT": { "day": 7, "text": "INRIX ranked southbound I-95 from Westport to Indian Field Road first among US corridors in its 2024 scorecard.", "sources": ["https://inrix.com/press-releases/2024-global-traffic-scorecard-us/"] },
-    "DE": { "day": 8, "text": "The Delaware Memorial Bridge is two suspension bridges side by side. The first span opened in 1951. The second, identical one opened in 1968.", "sources": ["https://www.drba.net/drba-celebrates-completion-ship-collision-protection-system-and-75th-anniversary-first-span"] },
-    "FL": { "day": 9, "text": "During a major hurricane evacuation, Florida can open the paved shoulders of I-4, I-75 and other routes as extra travel lanes. Large trucks, buses and trailers stay off the shoulder.", "sources": ["https://www.fdot.gov/emergencymanagement/esu"] },
-    "GA": { "day": 10, "text": "Spaghetti Junction's official name is the Tom Moreland Interchange. It's where I-85 meets I-285 in DeKalb County, and its highest ramp is 90 feet up.", "sources": ["https://en.wikipedia.org/wiki/Tom_Moreland_Interchange"] },
-    "HI": { "day": 11, "text": "Every interstate in Hawaii is on Oahu, so none of them cross a state line. Congress authorized them in the 1960 statehood act.", "sources": ["https://en.wikipedia.org/wiki/Interstate_H-3"] },
-    "ID": { "day": 12, "text": "A sign on US-12 east of Kooskia reads “Winding Road Next 99 Miles.” The highway follows the Lochsa River up to Lolo Pass.", "sources": ["https://www.kamiahchamber.com/documents/Motorcycling-Lochsa.pdf"] },
-    "IL": { "day": 13, "text": "The “Begin Route 66” sign hangs on Adams Street in Chicago, facing westbound traffic. The original 1926 start was a block south, at Jackson Boulevard.", "sources": ["https://www.roadsideamerica.com/tip/27039"] },
-    "IN": { "day": 14, "text": "Indiana runs on two time zones. Drive I-65 from Indianapolis up to Gary and you cross into Central time. 12 of the state's 92 counties are on it.", "sources": ["https://visitindiana.in.gov/about-indiana/time-zones"] },
-    "IA": { "day": 15, "text": "Iowa 80, at I-80 exit 284 in Walcott, calls itself the world's largest truck stop. It sits on 220 acres with 900 truck parking spaces. Inside there's a dentist, a chiropractor, a barber shop and a movie theater.", "sources": ["https://iowa80truckstop.com/frequently-asked-questions/"] },
-    "KS": { "day": 16, "text": "Kansas says it opened the first finished section of Interstate in the country on November 14, 1956. Missouri claims the first one too. The Kansas section was eight miles of what became I-70 west of Topeka, between Valencia and Maple Hill roads. Eisenhower had signed the Interstate law that June.", "sources": ["https://www.kansashistory.gov/kansapedia/eisenhower-highway-interstate-70/16894"] },
-    "KY": { "day": 17, "text": "The Brent Spence Bridge was designed for 80,000 vehicles a day. The federal project page puts traffic at about 160,000. It carries I-71 and I-75 over the Ohio River between Kentucky and Ohio.", "sources": ["https://www.permits.performance.gov/permitting-project/dot-projects/brent-spence-bridge-corridor-project"] },
-    "LA": { "day": 18, "text": "The Atchafalaya Basin Bridge stretches about 18 miles. Its two parallel bridges carry I-10 over the basin between Baton Rouge and Lafayette. They opened in 1973.", "sources": ["https://en.wikipedia.org/wiki/Atchafalaya_Basin_Bridge"] },
-    "ME": { "day": 19, "text": "The Maine Turnpike opened December 13, 1947. Its opening section was a 45-mile, four-lane divided highway. Before it opened, Route 1 was the main road between Kittery and Portland.", "sources": ["https://www.maineturnpike.com/About-MTA/History.aspx"] },
-    "MD": { "day": 20, "text": "The Chesapeake Bay Bridge has two separate spans. The eastbound span opened July 30, 1952. The westbound span opened June 28, 1973. Together they carry US 50 and US 301 across five lanes.", "sources": ["https://en.wikipedia.org/wiki/Chesapeake_Bay_Bridge"] },
-    "MA": { "day": 21, "text": "The Big Dig moved the elevated Central Artery of I-93 through downtown Boston into the Thomas P. O'Neill Jr. Tunnel. The project concluded in December 2007.", "sources": ["https://en.wikipedia.org/wiki/Big_Dig"] }
+    "AL": {
+      "day": 1,
+      "text": "During a hurricane evacuation, Alabama can reverse I-65's southbound lanes to carry traffic north.",
+      "sources": [
+        "https://www.dot.state.al.us/news/pdf/ALDOTtoPerformI-65Evac.pdf"
+      ]
+    },
+    "AK": {
+      "day": 2,
+      "text": "The Dalton Highway runs about 240 miles from Coldfoot to Deadhorse with no gas stations. Fill up before leaving Coldfoot northbound.",
+      "sources": [
+        "https://www.alaska.org/guide/dalton-highway"
+      ]
+    },
+    "AZ": {
+      "day": 3,
+      "text": "I-19 is signed in kilometers from Tucson to Nogales.",
+      "sources": [
+        "https://azdot.gov/adot-blog/kilometers-arizona-you-bet"
+      ]
+    },
+    "AR": {
+      "day": 4,
+      "text": "Highway 23 through the Ozarks is nicknamed the Pig Trail. It's named for Razorback fans driving it to games in Fayetteville.",
+      "sources": [
+        "https://www.arkansas.com/articles/arkansas-joy-rides"
+      ]
+    },
+    "CA": {
+      "day": 5,
+      "text": "California's mile markers start over at every county line. Most states count from the state line.",
+      "sources": [
+        "https://postmile.dot.ca.gov/"
+      ]
+    },
+    "CO": {
+      "day": 6,
+      "text": "The Eisenhower–Johnson tunnels pass beneath the Continental Divide at an average elevation of 11,112 feet.",
+      "sources": [
+        "https://www.codot.gov/projects/archives/ejmt-infrastructure-repairs"
+      ]
+    },
+    "CT": {
+      "day": 7,
+      "text": "INRIX ranked southbound I-95 from Westport to Indian Field Road first among US corridors in its 2024 scorecard.",
+      "sources": [
+        "https://inrix.com/press-releases/2024-global-traffic-scorecard-us/"
+      ]
+    },
+    "DE": {
+      "day": 8,
+      "text": "The Delaware Memorial Bridge is two suspension bridges side by side. The first span opened in 1951. The second, identical one opened in 1968.",
+      "sources": [
+        "https://www.drba.net/drba-celebrates-completion-ship-collision-protection-system-and-75th-anniversary-first-span"
+      ]
+    },
+    "FL": {
+      "day": 9,
+      "text": "During a major hurricane evacuation, Florida can open the paved shoulders of I-4, I-75 and other routes as extra travel lanes. Large trucks, buses and trailers stay off the shoulder.",
+      "sources": [
+        "https://www.fdot.gov/emergencymanagement/esu"
+      ]
+    },
+    "GA": {
+      "day": 10,
+      "text": "Spaghetti Junction's official name is the Tom Moreland Interchange. It's where I-85 meets I-285 in DeKalb County, and its highest ramp is 90 feet up.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Tom_Moreland_Interchange"
+      ]
+    },
+    "HI": {
+      "day": 11,
+      "text": "Every interstate in Hawaii is on Oahu, so none of them cross a state line. Congress authorized them in the 1960 statehood act.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Interstate_H-3"
+      ]
+    },
+    "ID": {
+      "day": 12,
+      "text": "A sign on US-12 east of Kooskia reads “Winding Road Next 99 Miles.” The highway follows the Lochsa River up to Lolo Pass.",
+      "sources": [
+        "https://www.kamiahchamber.com/documents/Motorcycling-Lochsa.pdf"
+      ]
+    },
+    "IL": {
+      "day": 13,
+      "text": "The “Begin Route 66” sign hangs on Adams Street in Chicago, facing westbound traffic. The original 1926 start was a block south, at Jackson Boulevard.",
+      "sources": [
+        "https://www.roadsideamerica.com/tip/27039"
+      ]
+    },
+    "IN": {
+      "day": 14,
+      "text": "Indiana runs on two time zones. Drive I-65 from Indianapolis up to Gary and you cross into Central time. 12 of the state's 92 counties are on it.",
+      "sources": [
+        "https://visitindiana.in.gov/about-indiana/time-zones"
+      ]
+    },
+    "IA": {
+      "day": 15,
+      "text": "Iowa 80, at I-80 exit 284 in Walcott, calls itself the world's largest truck stop. It sits on 220 acres with 900 truck parking spaces. Inside there's a dentist, a chiropractor, a barber shop and a movie theater.",
+      "sources": [
+        "https://iowa80truckstop.com/frequently-asked-questions/"
+      ]
+    },
+    "KS": {
+      "day": 16,
+      "text": "Kansas says it opened the first finished section of Interstate in the country on November 14, 1956. Missouri claims the first one too. The Kansas section was eight miles of what became I-70 west of Topeka, between Valencia and Maple Hill roads. Eisenhower had signed the Interstate law that June.",
+      "sources": [
+        "https://www.kansashistory.gov/kansapedia/eisenhower-highway-interstate-70/16894"
+      ]
+    },
+    "KY": {
+      "day": 17,
+      "text": "The Brent Spence Bridge was designed for 80,000 vehicles a day. The federal project page puts traffic at about 160,000. It carries I-71 and I-75 over the Ohio River between Kentucky and Ohio.",
+      "sources": [
+        "https://www.permits.performance.gov/permitting-project/dot-projects/brent-spence-bridge-corridor-project"
+      ]
+    },
+    "LA": {
+      "day": 18,
+      "text": "The Atchafalaya Basin Bridge stretches about 18 miles. Its two parallel bridges carry I-10 over the basin between Baton Rouge and Lafayette. They opened in 1973.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Atchafalaya_Basin_Bridge"
+      ]
+    },
+    "ME": {
+      "day": 19,
+      "text": "The Maine Turnpike opened December 13, 1947. Its opening section was a 45-mile, four-lane divided highway. Before it opened, Route 1 was the main road between Kittery and Portland.",
+      "sources": [
+        "https://www.maineturnpike.com/About-MTA/History.aspx"
+      ]
+    },
+    "MD": {
+      "day": 20,
+      "text": "The Chesapeake Bay Bridge has two separate spans. The eastbound span opened July 30, 1952. The westbound span opened June 28, 1973. Together they carry US 50 and US 301 across five lanes.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Chesapeake_Bay_Bridge"
+      ]
+    },
+    "MA": {
+      "day": 21,
+      "text": "The Big Dig moved the elevated Central Artery of I-93 through downtown Boston into the Thomas P. O'Neill Jr. Tunnel. The project concluded in December 2007.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Big_Dig"
+      ]
+    },
+    "MI": {
+      "day": 22,
+      "text": "Michigan has an intersection design called the Michigan left. Instead of turning left at an intersection, drivers go straight or turn right, then make a U-turn at a median crossover. Michigan lefts have been used since the late 1960s.",
+      "sources": [
+        "https://www.michigan.gov/en/mdot/Travel/safety/Road-users/michigan-lefts"
+      ],
+      "posted": false
+    },
+    "MN": {
+      "day": 23,
+      "text": "Highway 61 passes through the 1,340-foot Silver Creek Cliff Tunnel in Lake County. Built in 1994, it is one of only two hard-rock mined tunnels in Minnesota.",
+      "sources": [
+        "https://www.dot.state.mn.us/historicbridges/38005.html"
+      ],
+      "posted": false
+    },
+    "MS": {
+      "day": 24,
+      "text": "At milepost 41.5 on the Natchez Trace Parkway, you can walk a sunken section of the Old Trace. Thousands of walkers, riders and wagons wore the soft soil into a trench in the late 1700s and early 1800s.",
+      "sources": [
+        "https://www.nps.gov/places/sunken-trace-milepost-41-5.htm"
+      ],
+      "posted": false
+    },
+    "MO": {
+      "day": 25,
+      "text": "Hooker Cut on Route 66 near Devils Elbow was carved 91 feet deep through rock. Construction began in 1941 to handle heavy traffic and large vehicles headed to Fort Leonard Wood during World War II.",
+      "sources": [
+        "https://www.visitmo.com/things-to-do/hooker-cut"
+      ],
+      "posted": false
+    },
+    "MT": {
+      "day": 26,
+      "text": "Going-to-the-Sun Road runs about 50 miles. At Logan Pass, it reaches 6,646 feet and crosses the Continental Divide. The full road is typically open from early July until the third Monday of October.",
+      "sources": [
+        "https://home.nps.gov/glac/planyourvisit/gtsrinfo.htm"
+      ],
+      "posted": false
+    },
+    "NE": {
+      "day": 27,
+      "text": "The Archway spans I-80 at exit 275 in Kearney. Its exhibit follows Nebraska travelers from the Oregon Trail to a 1950s drive-in theater and a replica roadside cafe where you can watch I-80 traffic below.",
+      "sources": [
+        "https://archway.org/plan-your-visit/"
+      ],
+      "posted": false
+    },
+    "NV": {
+      "day": 28,
+      "text": "Nevada renamed State Route 375, which skirts Area 51, the Extraterrestrial Highway in 1996. \"Speed Limit Warp 7\" signs went up and were later removed. A dedication time capsule in Rachel opens July 4, 2050.",
+      "sources": [
+        "https://travelnevada.com/shopping-leisure/the-silver-state-on-the-silver-screen/"
+      ],
+      "posted": false
+    },
+    "NH": {
+      "day": 29,
+      "text": "The Mount Washington Auto Road climbs 7.6 miles to the summit at an average grade of 12%. It opened in 1861 for carriages, decades before the first car drove up.",
+      "sources": [
+        "https://mt-washington.com/history/"
+      ],
+      "posted": false
+    },
+    "NJ": {
+      "day": 30,
+      "text": "The Pulaski Skyway carries Route 1&9 for 3.5 miles over the Hackensack and Passaic rivers between Newark and Jersey City. It has four lanes and no shoulders. Its river spans give ships 135 feet of clearance at high tide.",
+      "sources": [
+        "https://www.nj.gov/transportation/commuter/roads/pulaski_new/"
+      ],
+      "posted": false
+    },
+    "NM": {
+      "day": 31,
+      "text": "Route 66 once made a giant S-shaped detour through Santa Fe. New Mexico straightened it in 1937, cutting the state's Route 66 mileage from 506 to 399 and sending it straight through Albuquerque on Central Avenue.",
+      "sources": [
+        "https://www.nps.gov/places/new-mexico-road-segments.htm"
+      ],
+      "posted": false
+    },
+    "NY": {
+      "day": 32,
+      "text": "Four ventilation buildings serve the Holland Tunnel, two on each side of the Hudson River, with 84 large fans. The Port Authority says the fans change the air direction in both tunnels every 90 seconds.",
+      "sources": [
+        "https://portfolio.panynj.gov/2016/06/08/the-holland-tunnel-did-you-know/"
+      ],
+      "posted": false
+    },
+    "NC": {
+      "day": 33,
+      "text": "The Blue Ridge Parkway's Linn Cove Viaduct curves around Grandfather Mountain. It stretches 1,243 feet and was built from 153 precast concrete segments, so the only trees cut were directly beneath it.",
+      "sources": [
+        "https://www.nps.gov/blri/learn/historyculture/linn-cove-viaduct.htm"
+      ],
+      "posted": false
+    },
+    "ND": {
+      "day": 34,
+      "text": "The Enchanted Highway runs 32 miles from I-94 exit 72 near Gladstone to Regent. Giant scrap metal sculptures line the road, including geese in flight and grasshoppers in a field.",
+      "sources": [
+        "https://www.ndtourism.com/regent/attractions-entertainment/family-fun/enchanted-highway"
+      ],
+      "posted": false
+    },
+    "OH": {
+      "day": 35,
+      "text": "Zanesville has a Y-shaped bridge where the Licking and Muskingum rivers meet. Locals have long boasted that you can cross it and still be on the same side of the river where you started.",
+      "sources": [
+        "https://coz.org/232/History"
+      ],
+      "posted": false
+    },
+    "OK": {
+      "day": 36,
+      "text": "POPS on Route 66 in Arcadia has a 66-foot soda bottle sculpture covered in multicolored LED lights. The diner and gas station sells over 600 kinds of soda.",
+      "sources": [
+        "https://web1.travelok.com/listings/view.profile/id.6074"
+      ],
+      "posted": false
+    },
+    "OR": {
+      "day": 37,
+      "text": "The Historic Columbia River Highway was dedicated in 1916. Italian stonemasons built its stone walls, and the road was designed with gentle grades. Parts are now walking and biking trails.",
+      "sources": [
+        "https://www.oregon.gov/odot/About/Pages/History.aspx"
+      ],
+      "posted": false
+    },
+    "PA": {
+      "day": 38,
+      "text": "When the Pennsylvania Turnpike opened on October 1, 1940, six of its seven tunnels had been partly built for the abandoned South Pennsylvania Railroad. Crews finished, enlarged and reshaped them for cars.",
+      "sources": [
+        "https://www.paturnpike.com/about-us/turnpike-history/interactive-timeline"
+      ],
+      "posted": false
+    },
+    "RI": {
+      "day": 39,
+      "text": "The Newport Pell Bridge opened to traffic on June 28, 1969, to replace ferry service. It stretches 11,247 feet, with towers standing 400 feet above the water.",
+      "sources": [
+        "https://www.discovernewport.org/blog/post/newport-pell-bridge-celebration/"
+      ],
+      "posted": false
+    },
+    "SC": {
+      "day": 40,
+      "text": "The Arthur Ravenel Jr. Bridge carries eight lanes over the Cooper River between Charleston and Mount Pleasant. Its main span stretches 1,545 feet, and it has a walkway for pedestrians and cyclists.",
+      "sources": [
+        "https://www.wsp.com/en-us/projects/arthur-ravenel-jr-bridge"
+      ],
+      "posted": false
+    },
+    "SD": {
+      "day": 41,
+      "text": "Iron Mountain Road runs 17 miles along US Highway 16A in the Black Hills. It has spiraling \"pigtail\" bridges built from local timber and three tunnels that frame Mount Rushmore in the distance.",
+      "sources": [
+        "https://www.travelsouthdakota.com/trip-ideas/iron-mountain-road"
+      ],
+      "posted": false
+    },
+    "TN": {
+      "day": 42,
+      "text": "The Tail of the Dragon has 318 curves along 11 miles of US 129. It runs through the Smokies and the Cherokee National Forest.",
+      "sources": [
+        "https://www.tnvacation.com/trip-inspiration/articles/car-enthusiasts-guide-tennessee?page=1"
+      ],
+      "posted": false
+    },
+    "TX": {
+      "day": 43,
+      "text": "The southern 41 miles of State Highway 130 have an 85-mph speed limit, which the toll road's operator calls the nation's highest. Opened in 2012, the road offers an alternative to I-35 through Central Texas.",
+      "sources": [
+        "https://mysh130.com/about/company/"
+      ],
+      "posted": false
+    },
+    "UT": {
+      "day": 44,
+      "text": "Scenic Byway 12 connects Bryce Canyon and Capitol Reef national parks. On the Hogsback between Escalante and Boulder, hairpin turns follow a road whose shoulders drop steeply into deep canyons.",
+      "sources": [
+        "https://www.visitutah.com/articles/the-all-american-road-scenic-byway-12"
+      ],
+      "posted": false
+    },
+    "VT": {
+      "day": 45,
+      "text": "Route 108 through Smugglers' Notch has turns too tight for long trucks. Vehicles longer than 40 feet and combinations longer than 45 feet are prohibited. Fines start at $10,000.",
+      "sources": [
+        "https://vtrans.vermont.gov/notch"
+      ],
+      "posted": false
+    },
+    "VA": {
+      "day": 46,
+      "text": "The Chesapeake Bay Bridge-Tunnel carries US 13 for 17.6 miles from shore to shore. It includes two one-mile tunnels and four manmade islands. Ferry service ended when it opened in 1964.",
+      "sources": [
+        "https://www.cbbt.com/history/"
+      ],
+      "posted": false
+    },
+    "WA": {
+      "day": 47,
+      "text": "At Stevens Pass on US 2, crews use a 105mm howitzer to fire shells into the tops of 12 avalanche paths. The road reopens after the control work is finished and the snow is cleared.",
+      "sources": [
+        "https://wsdot.wa.gov/travel/operations-services/avalanche-control"
+      ],
+      "posted": false
+    },
+    "WV": {
+      "day": 48,
+      "text": "The New River Gorge Bridge carries US 19 876 feet above the New River. When it opened in 1977, it cut a 40-minute drive to less than a minute.",
+      "sources": [
+        "https://home.nps.gov/neri/planyourvisit/nrgbridge.htm"
+      ],
+      "posted": false
+    },
+    "WI": {
+      "day": 49,
+      "text": "I-39, I-90 and I-94 share 29 miles of road in Wisconsin. The state DOT calls it the longest stretch of three concurrent interstates in the country.",
+      "sources": [
+        "https://www.i399094project.wisconsindot.gov/about"
+      ],
+      "posted": false
+    },
+    "WY": {
+      "day": 50,
+      "text": "Within three months of opening in 1970, I-80 between Laramie and Walcott Junction was buried by drifts up to 16 feet deep and closed for 10 days. Crews installed 11.4 miles of snow fence in 1971.",
+      "sources": [
+        "https://ops.fhwa.dot.gov/weather/resources/publications/tech_briefs/cs101.htm"
+      ],
+      "posted": false
+    }
   }
 }
