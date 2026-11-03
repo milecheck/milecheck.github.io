@@ -572,7 +572,7 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<p>Live fire perimeters are at <a href="../../fire/">milecheckapp.com/fire</a>.</p>`);
   }
   const rf = RF && RF.facts[st];
-  if (rf) parts.push(`<aside class="road-fact"><p class="rf-k">${name} road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">${esc(rf.text).replace(/\b((?:I|US|H)-\d+)/g, '<span style="white-space:nowrap">$1</span>')}</p><p class="rf-s"><span>Day ${rf.day} of our 50 States series</span>${rf.sources && rf.sources[0] ? `<a href="${rf.sources[0]}" target="_blank" rel="noopener">Source</a>` : ''}<a href="${RF.instagram}" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>`);
+  if (rf) parts.push(`<aside class="road-fact"><p class="rf-k">${name} road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">${esc(rf.text).replace(/\b((?:I|US|H)-\d+)/g, '<span style="white-space:nowrap">$1</span>')}</p><p class="rf-s"><a href="${RF.instagram}" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>`);
   parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state or province</a>.</p>`);
   const h1 = `MileCheck Highway Report: ${name}, ${MONTH_NAME} ${YEAR}`;
   const firstMonth = !(histOf(st).filter((x) => x.comparable).length >= 2);
