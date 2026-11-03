@@ -199,7 +199,7 @@
 <main class="in-wrap">
   <div class="eyebrow"><a href="/partners/">MileCheck for business</a> &rsaquo; <a href="/api/">API</a> &rsaquo; Intake</div>
   <h1>Tell us what you need mile markers for</h1>
-  <p class="lede">Answer what you can and skip the rest. Your answers go to sales@milecheckapp.com and a person writes back. Nothing here is a commitment.</p>
+  <p class="lede">Only the first question and your contact details are required. Skip anything else. A person at MileCheck reads your answers and writes back. Nothing here is a commitment.</p>
 
   <form class="in-form" id="intake" novalidate>
     <div class="in-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -210,13 +210,13 @@
     </fieldset>
 
     <fieldset>
-      <label class="q" for="usage">What will a driver or dispatcher do with them?</label>
+      <label class="q" for="usage">How would a driver or dispatcher use them?</label>
       <textarea id="usage" name="usage"></textarea>
     </fieldset>
 
     <fieldset>
       <label class="q" for="realized">When did you realize you needed them?</label>
-      <p class="hint">A call, a delay, a customer. Whatever happened.</p>
+      <p class="hint">A call, a delay, a customer request. Whatever happened.</p>
       <textarea id="realized" name="realized"></textarea>
     </fieldset>
 
@@ -232,7 +232,7 @@
     </fieldset>
 
     <fieldset>
-      <legend>Do your vehicles lose signal?</legend>
+      <legend>Do your drivers lose cell service on the road?</legend>
       <div class="in-opts">
         <label><input type="radio" name="signal_loss" value="yes"> Yes</label>
         <label><input type="radio" name="signal_loss" value="no"> No</label>
@@ -241,25 +241,25 @@
     </fieldset>
 
     <fieldset>
-      <legend>Does it need to work offline?</legend>
+      <legend>Do you need mile markers without cell service?</legend>
       <div class="in-opts">
         <label><input type="radio" name="needs_offline" value="yes"> Yes</label>
         <label><input type="radio" name="needs_offline" value="no"> No</label>
         <label><input type="radio" name="needs_offline" value="not sure"> Not sure</label>
       </div>
-      <div class="in-sub"><input type="text" name="offline_notes" aria-label="Offline details" placeholder="Where does it matter? Mountain routes, rural roads, tunnels"></div>
+      <div class="in-sub"><input type="text" name="offline_notes" aria-label="Offline details" placeholder="Where would this matter? Mountain routes, rural roads, tunnels"></div>
     </fieldset>
 
     <fieldset>
-      <label class="q" for="hosting">Where do you host?</label>
-      <input type="text" id="hosting" name="hosting" placeholder="AWS, Cloudflare, your own servers, other">
+      <label class="q" for="hosting">Where does your software run?</label>
+      <input type="text" id="hosting" name="hosting" placeholder="AWS, Cloudflare, your own servers, other, not sure">
     </fieldset>
 
     <fieldset>
-      <legend>How many vehicles do you have?</legend>
+      <legend>How many vehicles would use MileCheck?</legend>
       <div class="in-row">
-        <div><label for="v_now" class="hint" style="display:block;margin:0 0 4px;">Today</label><input type="text" id="v_now" name="vehicles_now" inputmode="numeric"></div>
-        <div><label for="v_12" class="hint" style="display:block;margin:0 0 4px;">In 12 months</label><input type="text" id="v_12" name="vehicles_12mo" inputmode="numeric"></div>
+        <div><label for="v_now" class="hint" style="display:block;margin:0 0 4px;">Now</label><input type="text" id="v_now" name="vehicles_now" inputmode="numeric" placeholder="A number, or not sure"></div>
+        <div><label for="v_12" class="hint" style="display:block;margin:0 0 4px;">In 12 months</label><input type="text" id="v_12" name="vehicles_12mo" inputmode="numeric" placeholder="A number, or not sure"></div>
       </div>
     </fieldset>
 
@@ -283,6 +283,7 @@
       <div class="in-sub"><label for="signer" class="hint" style="display:block;margin:0 0 4px;">Who signs for your company?</label><input type="text" id="signer" name="signer" placeholder="Name and title"></div>
     </fieldset>
 
+    <p class="in-note" style="margin:0 0 14px">We keep your answers for up to 180 days so we can reply, and we do not sell them. This form runs on Cloudflare and the notice to our sales inbox goes through an email service.</p>
     <button class="in-go" type="submit" id="go">Send</button>
     <div class="in-msg" id="msg" role="status" aria-live="polite"></div>
     <p class="in-note">Prefer email? Write to <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a>. Looking for plans and prices first? <a href="/api/plan/">See what we sell</a>.</p>
@@ -328,7 +329,7 @@
       .then(function (res) {
         if (res.ok && res.j && res.j.ok) {
           form.reset();
-          show('ok', res.j.emailed ? 'Thanks. We got it and it is with sales@milecheckapp.com. We will write back to the email you gave.' : 'Thanks. We got your answers. We will write back to the email you gave.');
+          show('ok', 'Thanks. We have your answers and will reply to the email you gave.');
           go.textContent = 'Sent';
         } else {
           throw new Error((res.j && res.j.error) || 'failed');
