@@ -101,7 +101,7 @@
   var ios = /iphone|ipod/i.test(ua) || (/ipad/i.test(ua)), android = /android/i.test(ua);
   if (!ios && !android) return;
   if (w.matchMedia && !w.matchMedia('(max-width: 768px)').matches) return;
-  if (/^\/(sponsor|partners|api|fleets|data-sources|boards|internal|tv|get)(\/|$)/.test(location.pathname)) return;
+  if (/^\/(sponsor|partners|api|fleets|data-sources|boards|internal|tv|get)(\/|$)|^\/blog\/(road-report-|highway-report-)/.test(location.pathname)) return;
   var KEY = 'mcAppBarHide';
   try { var t = +localStorage.getItem(KEY); if (t && Date.now() - t < 14 * 864e5) return; } catch (e) {}
   var slug = (location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase() || 'home').slice(0, 40);

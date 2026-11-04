@@ -41,7 +41,7 @@
     .pull-stat ul.article-list{margin:10px 0 0 !important;}
     .pull-stat ul.article-list li:last-child{margin-bottom:0 !important;}
     .pull-stat li strong{display:inline;}
-    .headline-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 34px;}
+    .headline-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:0 0 20px;}
     .headline-nums div{background:#F7F8F9;border:1px solid #E4E7EA;border-radius:10px;padding:14px 14px 12px;}
     .headline-nums b{display:block;font-family:'JetBrains Mono',monospace;font-size:24px;color:#0F1419;font-variant-numeric:tabular-nums;line-height:1.1;}
     .headline-nums span{display:block;font-size:12.5px;color:#5C6670;margin-top:6px;line-height:1.4;}
@@ -52,9 +52,19 @@
     h2.rc{margin-top:44px;}
     .rc-fig{font-size:14px;color:#5C6670;margin:-12px 0 20px;}
     body.hr-national .article-wrap{max-width:1040px;}
-    .sec-row{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;margin:0 0 22px;}
-    .sec-text{flex:1 1 420px;min-width:0;}
-    .sec-fig{flex:0 1 300px;min-width:220px;margin:0;}
+    .sec-row{display:flex;flex-direction:column;gap:18px;align-items:flex-start;margin:0 0 22px;}
+    .sec-text{flex:1 1 auto;min-width:0;max-width:72ch;}
+    .sec-fig{flex:1 1 auto;width:100%;max-width:640px;min-width:0;margin:0;}
+    .sec-row--pair{flex-direction:row;flex-wrap:wrap;gap:22px;}
+    .sec-row--pair .sec-fig{flex:0 1 300px;min-width:220px;}
+    .hr-lede{font-size:18px;line-height:1.6;max-width:68ch;}
+    .method-fold{margin:0 0 28px;}
+    .method-fold summary{cursor:pointer;list-style:none;font-size:14.5px;font-weight:600;color:#0f7a4f;padding:10px 0;}
+    .method-fold summary::-webkit-details-marker{display:none;}
+    .method-fold summary::before{content:"\25B8  ";}
+    .method-fold[open] summary::before{content:"\25BE  ";}
+    .method-fold .method-box{margin:6px 0 0;}
+    .hbar{display:block;height:6px;background:#00C880;border-radius:3px;margin:6px 0 2px;}
     .wn-grid{display:flex;flex-direction:column;margin:6px 0 26px;border-top:1px solid #E4E7EA;}
     .wn-card{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid #E4E7EA;}
     .wn-ic{flex:none;width:44px;height:44px;border-radius:10px;background:#E8F3EC;color:#0f7a4f;display:flex;align-items:center;justify-content:center;}
@@ -112,12 +122,12 @@
       <h1 class="article-title">MileCheck Highway Report: Texas, October 2026</h1>
       <p class="article-byline">by MileCheck &middot; November 4, 2026</p>
 
-      <p class="article-lead">What Texas's department of transportation (DOT) feed showed in October 2026. Part of the <a href="../road-report-october-2026.html">national MileCheck Highway Report, October 2026</a>.</p>
+      <p class="article-lead">What Texas's department of transportation (DOT) feed showed in October 2026. 1,092 alerts in all, up from 1,030 in September. Part of the <a href="../road-report-october-2026.html">national MileCheck Highway Report, October 2026</a>.</p>
       <!-- signupcta:start --><p class="mc-cta-line" style="margin:6px 0 26px;font-size:15px;"><a href="#subscribe" style="color:#0f7a4f;font-weight:700;text-decoration:none;border-bottom:1px solid #9fd3b8;">&#9993; Get the MileCheck Highway Report by email, once a month &rarr;</a></p><!-- signupcta:end -->
 
-      <div class="method-box"><strong>How we got these numbers:</strong> These are unique alerts published by Texas's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months. Border waits are from U.S. Customs and Border Protection, saved every hour. Readings over five hours were treated as feed errors.</div>
-
       <div class="headline-nums"><div><b>4</b><span>crash alerts in October</span></div><div><b>23</b><span>closure alerts</span></div><div><b>1,051</b><span>roadwork alerts</span></div></div>
+
+      <details class="method-fold"><summary>How we got these numbers</summary><div class="method-box">These are unique alerts published by Texas's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months. Border waits are from U.S. Customs and Border Protection, saved every hour. Readings over five hours were treated as feed errors.</div></details>
 
       <h2 class="rc">Crashes</h2>
 
@@ -135,7 +145,7 @@
 
       <h2 class="rc">Compared with earlier months</h2>
 
-      <p>Unique alerts on Texas's feed in each full month MileCheck has.</p><div class="pull-stat"><strong>By month</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>September</strong> &mdash; 1,030 alerts: 7 crashes, 18 closures, 991 roadwork</li><li><strong>October</strong> &mdash; 1,092 alerts: 4 crashes, 23 closures, 1,051 roadwork</li></ul></div>
+      <p>Unique alerts on Texas's feed in each full month MileCheck has.</p><div class="pull-stat"><strong>By month</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>September</strong> &mdash; 1,030 alerts: 7 crashes, 18 closures, 991 roadwork<span class="hbar" style="width:94%"></span></li><li><strong>October</strong> &mdash; 1,092 alerts: 4 crashes, 23 closures, 1,051 roadwork<span class="hbar" style="width:100%"></span></li></ul></div>
 
       <h2 class="rc">Border waits</h2><p>Waits to enter the United States in standard passenger lanes at Texas's crossings, October, from hourly readings. Dates are local.</p>
 
