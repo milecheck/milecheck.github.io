@@ -5,7 +5,7 @@
 // and the feed status the Worker reports. It is a snapshot with its time on it, not a promise. No uptime number is offered.
 //   node scripts/gen-api-data-quality.mjs      # reads the Worker, writes api/data-quality/index.html
 // Then: node scripts/add-social-tags.mjs. Refresh by re-running; the date on the page is the read time.
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { STATES, PROVINCES } from './data-sources-data.mjs';
@@ -26,6 +26,26 @@ const every = (s) => (s === 60 ? 'every minute' : `every ${s / 60} min`);
 const age = (ms) => (ms < 90 * 60e3 ? `${Math.max(1, Math.round(ms / 60e3))} min` : ms < 48 * 3600e3 ? `${Math.round(ms / 3600e3)} h` : `${Math.round(ms / 86400e3)} days`);
 
 const places = [...STATES, ...PROVINCES];
+// Per-state timing from the incident-lifecycle archive (scripts/gen-alert-latency.mjs). Absent file = no section.
+const LAT_FILE = resolve(ROOT, 'data/alert-latency.json');
+const latency = existsSync(LAT_FILE) ? JSON.parse(readFileSync(LAT_FILE, 'utf8')) : null;
+const nameOf = Object.fromEntries(places.map(([c, n]) => [c, n]));
+const mins = (m) => (m < 1 ? 'under 1 min' : m < 90 ? `${m} min` : `${Math.round(m / 6) / 10} h`);
+const latencySection = () => {
+  if (!latency || !latency.kept.length) return '';
+  const day = (iso) => new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+  const td = 'style="padding:8px 6px;border-bottom:1px solid #eee"';
+  const rowsHtml = latency.kept.filter((r) => nameOf[r.st]).sort((a, b) => nameOf[a.st].localeCompare(nameOf[b.st]))
+    .map((r) => `<tr><td ${td}>${esc(nameOf[r.st])}</td><td ${td}>${mins(r.median)}</td><td ${td}>${mins(r.p75)}</td><td ${td}>${r.n.toLocaleString('en-US')}</td></tr>`).join('\n');
+  const left = latency.dropped.filter((r) => nameOf[r.st]).sort((a, b) => nameOf[a.st].localeCompare(nameOf[b.st]));
+  return `<h2>How soon we see a crash after the agency's own time</h2>
+<p style="max-width:70ch;line-height:1.55">From ${day(latency.from)} to ${day(latency.to)} we logged when each crash and road hazard first appeared in an agency's feed and compared it with the start time the agency put on the record. Half of the records in each state reached us within the first number below. Three in four reached us within the second. The time includes how long the agency took to post the record and the gap before our next check, which is 15 minutes or less in every place.</p>
+<div class="tbl" style="overflow-x:auto"><table style="min-width:520px;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Place</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Half within</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Three in four within</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Records</th></tr></thead><tbody>
+${rowsHtml}
+</tbody></table></div>
+<p style="font-size:14px;color:#4a544f;max-width:70ch;line-height:1.55">Read each place against itself. Agencies stamp their records differently, so these numbers say nothing about which agency is quicker. Only crashes and hazards are counted, since closures and road work carry planned times. A place is left out when it had fewer than ${latency.minN} usable records or when its start times do not mark when the event happened${left.length ? `: ${left.map((r) => esc(nameOf[r.st])).join(', ')}` : ''}.</p>`;
+};
+
 const readNow = Date.now();
 const rows = [];
 let idx = 0;
@@ -97,9 +117,10 @@ section(`<h2>What each column means</h2>
 section(`<h2>State and province table</h2><div class="tbl" style="overflow-x:auto"><table style="min-width:900px"><thead><tr><th>Place</th><th>Agency</th><th>Alerts now</th><th>With a DOT mile marker</th><th>Newest record</th><th>We read the agency</th><th>Known gaps</th></tr></thead><tbody>
 ${body}
 </tbody></table></div>`) +
+(latency ? section(latencySection()) : '') +
 section(`<h2>What this page does not say</h2>
 <ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
-<li>It does not time each record from the road to your software. The steps above show the limit each step works within.</li>
+<li>It does not time each record from the road to your software. The table above covers the agency-to-us part for crashes and hazards, and the steps above show the limit each step works within.</li>
 <li>It does not promise uptime. We do not publish a service level agreement. The <a href="https://status.milecheckapp.com/">status page</a> shows current service.</li>
 <li>One read is one moment. Roadwork counts swing by day of the week, and an agency can be down when you look.</li>
 </ul><p style="margin-top:18px"><a href="/api/#get-key" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none">Get a 14-day test key</a></p>

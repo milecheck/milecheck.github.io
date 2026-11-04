@@ -1,0 +1,167 @@
+{
+ "from": "2026-09-26T01:00:00.000Z",
+ "to": "2026-11-04T18:08:13.263Z",
+ "minN": 30,
+ "kept": [
+  {
+   "st": "AB",
+   "n": 132,
+   "median": 13,
+   "p75": 16
+  },
+  {
+   "st": "AL",
+   "n": 2248,
+   "median": 18,
+   "p75": 25
+  },
+  {
+   "st": "BC",
+   "n": 273,
+   "median": 11,
+   "p75": 15
+  },
+  {
+   "st": "CA",
+   "n": 17470,
+   "median": 20,
+   "p75": 47
+  },
+  {
+   "st": "CO",
+   "n": 1028,
+   "median": 10,
+   "p75": 14
+  },
+  {
+   "st": "CT",
+   "n": 539,
+   "median": 8,
+   "p75": 13
+  },
+  {
+   "st": "FL",
+   "n": 15815,
+   "median": 16,
+   "p75": 23
+  },
+  {
+   "st": "GA",
+   "n": 4891,
+   "median": 19,
+   "p75": 26
+  },
+  {
+   "st": "LA",
+   "n": 673,
+   "median": 14,
+   "p75": 19
+  },
+  {
+   "st": "MD",
+   "n": 4129,
+   "median": 7,
+   "p75": 11
+  },
+  {
+   "st": "MS",
+   "n": 224,
+   "median": 25,
+   "p75": 43
+  },
+  {
+   "st": "NC",
+   "n": 2119,
+   "median": 8,
+   "p75": 12
+  },
+  {
+   "st": "NM",
+   "n": 142,
+   "median": 7,
+   "p75": 13
+  },
+  {
+   "st": "NV",
+   "n": 447,
+   "median": 10,
+   "p75": 14
+  },
+  {
+   "st": "NY",
+   "n": 1163,
+   "median": 12,
+   "p75": 17
+  },
+  {
+   "st": "PA",
+   "n": 446,
+   "median": 11,
+   "p75": 16
+  },
+  {
+   "st": "WA",
+   "n": 1114,
+   "median": 9,
+   "p75": 14
+  },
+  {
+   "st": "WI",
+   "n": 1606,
+   "median": 9,
+   "p75": 15
+  }
+ ],
+ "dropped": [
+  {
+   "st": "IN",
+   "n": 1,
+   "why": "fewer than 30 usable crashes and hazards"
+  },
+  {
+   "st": "KY",
+   "n": 1536,
+   "why": "start times often run ahead of the clock"
+  },
+  {
+   "st": "MB",
+   "n": 6,
+   "why": "fewer than 30 usable crashes and hazards"
+  },
+  {
+   "st": "MN",
+   "n": 2,
+   "why": "fewer than 30 usable crashes and hazards"
+  },
+  {
+   "st": "ND",
+   "n": 56,
+   "why": "start time does not track when the event happened"
+  },
+  {
+   "st": "NE",
+   "n": 1,
+   "why": "fewer than 30 usable crashes and hazards"
+  },
+  {
+   "st": "NH",
+   "n": 3,
+   "why": "fewer than 30 usable crashes and hazards"
+  },
+  {
+   "st": "SD",
+   "n": 3,
+   "why": "fewer than 30 usable crashes and hazards"
+  },
+  {
+   "st": "TN",
+   "n": 967,
+   "why": "start time does not track when the event happened"
+  },
+  {
+   "st": "TX",
+   "n": 13,
+   "why": "fewer than 30 usable crashes and hazards"
+  }
+ ]
+}

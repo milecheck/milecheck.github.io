@@ -23,6 +23,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const LATEST_REPORT_SUB = require('./lib/latest-report.cjs').signupSub(); // newest road-report-*.json, not a fixed month
 const WINTER = require('./lib/winter-titles.cjs');
 const SPON = require('./lib/sponsor-slot');
 const STATES = require('./road-conditions/states.cjs');
@@ -171,7 +172,7 @@ const SIGNUP = `<!-- signup:start -->
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
       <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
+      <p class="mc-sub">${LATEST_REPORT_SUB}</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>
