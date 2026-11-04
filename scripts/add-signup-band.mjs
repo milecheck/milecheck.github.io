@@ -34,6 +34,9 @@ const CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-b
 const inner = `<p class="mc-eyebrow">${EYEBROW}</p>
       <h2>${H2}</h2>
       <p class="mc-sub">${SUB}</p>`;
+// The report page itself gets no "See the report" link: it would point at the page the reader is on (2026-11-04).
+const SUB_SELF = "Your state's reported closures, crashes and roadwork, once a month by email. No spam.";
+const innerFor = (f) => f === `blog/road-report-${RPT}.html` ? inner.replace(SUB, SUB_SELF) : inner;
 const BAND = `<!-- signup:start -->
   <section class="mc-signup" id="subscribe">
     <style>
@@ -74,7 +77,7 @@ for (const f of targets) {
   const was = s.search(STRIP); // put the band back exactly where it was, so a re-run is a no-op
   s = s.replace(STRIP, '');
   if (/data-form="LjADY8"/.test(s)) {
-    s = s.replace(/<p class="mc-eyebrow">[\s\S]*?<\/p>\s*<h2>[\s\S]*?<\/h2>\s*<p class="mc-sub">[\s\S]*?<\/p>/, inner);
+    s = s.replace(/<p class="mc-eyebrow">[\s\S]*?<\/p>\s*<h2>[\s\S]*?<\/h2>\s*<p class="mc-sub">[\s\S]*?<\/p>/, innerFor(f));
     if (!s.includes('.mc-signup .mc-sub a')) s = s.replace('.mc-signup .ml-form-embedContent{', '.mc-signup .mc-sub a{color:#00A86B;font-weight:700;}\n      .mc-signup .ml-form-embedContent{');
     if (!s.includes('.mc-signup select[name="fields[state]"]')) s = s.replace('.mc-signup input[type=email]{border-radius:8px !important;}', '.mc-signup input[type=email]{border-radius:8px !important;}\n      .mc-signup select[name="fields[state]"]{border-radius:8px !important;height:auto;min-height:44px;font-size:14px;padding:10px 12px;background:#fff;border:1px solid #cccccc;color:#333;}');
     if (s !== o) updated++;

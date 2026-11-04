@@ -43,7 +43,11 @@ const isProv = (st) => CANADA.has(st);
 // Known feed gaps, by report month. A state listed here is shown with a note and kept out of the
 // month-to-month comparison (Leah + ChatGPT/Fable review, 2026-11-02).
 const FEED_NOTES = {
-  '2026-10': { NY: '511NY changed its data system at the end of September. MileCheck recorded 3,429 alerts in September and 590 in October. The drop reflects the feed change, so these counts do not show whether New York had fewer road incidents.' },
+  '2026-10': {
+    NY: '511NY changed its data system at the end of September. MileCheck recorded 3,429 alerts in September and 590 in October. The drop reflects the feed change, so these counts do not show whether New York had fewer road incidents.',
+    KY: 'MileCheck added the KYTC 24-hour Combined Incidents feed on Sept. 25. October is the first full month with it. MileCheck recorded 465 alerts in September and 1,056 in October. The jump reflects the added feed, not more incidents on Kentucky roads.',
+    VA: 'Virginia alerts came back on Sept. 25 after VDOT moved its 511 service, with five data layers where there had been one. October is the first full month on the new feed. MileCheck recorded 682 alerts in September and 1,683 in October. The jump reflects the feed change, not more incidents on Virginia roads.',
+  },
 };
 const feedNote = (st) => (FEED_NOTES[MONTH] || {})[st] || '';
 const plural = (k, one, many) => (k === 1 ? one : many);
@@ -119,7 +123,7 @@ function nextSteps(rel) {
         ${card('Get the app', 'Live state DOT feeds in all 50 states, British Columbia, Alberta and Manitoba, with your nearest mile marker.', btn('https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&amp;ct=highway-report-cta&amp;mt=8', 'App Store') + btn('https://play.google.com/store/apps/details?id=app.milecheck.mobile&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report-cta', 'Google Play'), `<img src="${rel}images/app-icons/milecheck.png" width="44" height="44" alt="" loading="lazy" style="width:44px;height:44px;border-radius:10px;">`)}
         ${card('Get the Highway Report by email', 'Once a month, plus special reports like Thanksgiving travel. No spam.', btn('#subscribe', 'Sign up'), `<span class="wn-ic">${svgIcon('mail')}</span>`)}
         ${card('Share this report', 'Send it to someone who drives for work so they can sign up for the Highway Report.', share, `<span class="wn-ic">${svgIcon('share')}</span>`)}
-        ${card('Want a mile marker display on your dash?', 'Join the early access list. Sign-ups help us fund it and make it a reality.', btn(`${rel}dash-preorder.html`, 'Join early access'), `<span class="wn-ic">${svgIcon('dash')}</span>`)}
+        ${card('Want a mile marker display on your dash?', 'Join the early access list. Sign-ups help us fund it.', btn(`${rel}dash-preorder.html`, 'Join early access'), `<span class="wn-ic">${svgIcon('dash')}</span>`)}
         ${card('Our other apps', 'Mountain Visibility tells you if the mountain is out. Seattle Drawbridges shows which bridges are up.', btn(`${rel}mountains/`, 'Mountain Visibility') + btn(`${rel}seattle-drawbridges/`, 'Seattle Drawbridges'), `<img src="${rel}images/app-icons/mountain-visibility.png" width="44" height="44" alt="" loading="lazy" style="width:44px;height:44px;border-radius:10px;">` + `<img src="${rel}images/app-icons/seattle-drawbridges.png" width="44" height="44" alt="" loading="lazy" style="width:44px;height:44px;border-radius:10px;">`)}
         ${card('Follow MileCheck', 'Maps, road news and Roy. Instagram is the fun one.', btn('https://www.instagram.com/milecheck_app', `${svgIcon('instagram', 18)}Instagram`) + btn('https://www.facebook.com/share/1FT9JtkH5D/', `${svgIcon('facebook', 18)}Facebook`) + btn('https://x.com/milecheckapp', `${svgIcon('x', 18)}X`) + btn('https://www.youtube.com/@milecheckapp', `${svgIcon('youtube', 18)}YouTube`), `<span class="wn-ic">${svgIcon('heart')}</span>`)}
         </div>
@@ -254,7 +258,7 @@ ${wide ? nextSteps(rel) : `      <div class="article-cta">
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
       <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-${KEY}.html">See the ${MONTH_NAME} report</a>. No spam.</p>
+      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email.${canonical && canonical.endsWith(`/blog/road-report-${KEY}.html`) ? '' : ` <a href="/blog/road-report-${KEY}.html">See the ${MONTH_NAME} report</a>.`} No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>
@@ -314,19 +318,23 @@ ${wide ? nextSteps(rel) : `      <div class="article-cta">
 
 
 // A "place" from a DOT feed is often a road name (101-Loop, Pacific Highway, I-70e). Keep real places only.
-const realPlace = (p) => p && p.length <= 30 && !/\d/.test(p) && !/\b(highway|hwy|freeway|fwy|loop|interstate|route|pacific|parkway|pkwy|trail|expressway|turnpike|bypass|nb|sb|eb|wb)\b/i.test(p);
+const realPlace = (p) => p && p.length <= 30 && !/\d/.test(p) && !/\b(highway|hwy|freeway|fwy|loop|interstate|route|pacific|parkway|pkwy|trail|expressway|turnpike|bypass|nb|sb|eb|wb|maint|bdy)\b/i.test(p);
+// Feeds that name roads in all caps (Alaska's "GLENN HIGHWAY", New Jersey's "NJ TURNPIKE"): title-case the
+// words, leave route tokens (I-95, SR-520) and short codes (GSP, NJ) alone. Labels with any lowercase pass through.
+const pretty = (s) => /[a-z]/.test(s) ? s : s.split(' ').map((w) => (/^[A-Z]{3,}$/.test(w) && w !== 'GSP') ? w[0] + w.slice(1).toLowerCase() : w).join(' ');
+const realRoute = (r) => r && !/^unknown$/i.test(String(r).trim());
 // Recurring winter closures, researched with an official source per entry (data/seasonal-closures.json,
 // refreshed each fall). "In effect" comes from the month's feed archive (D.seasonalClosures).
 let SEASONAL = [];
 try { SEASONAL = JSON.parse(readFileSync(resolve(ROOT, 'data/seasonal-closures.json'), 'utf8')).filter((e) => !/See prior entry/i.test(e.typicalClose || '')); } catch {}
 const seasonalOf = (st) => SEASONAL.filter((e) => e.publicLine).filter((e) => String(e.state).split('/').includes(st));
 const winterSection = (st, name) => {
-  const live = ((D.seasonalClosures && D.seasonalClosures[st]) || []).filter((c) => !/construct|rebuild|bridge work/i.test(c.headline));
+  const live = ((D.seasonalClosures && D.seasonalClosures[st]) || []).filter((c) => !/construct|rebuild|bridge work|rest area/i.test(c.headline));
   const usual = seasonalOf(st);
   if (!live.length && !usual.length) return '';
   const out = [`<h2 class="rc">Winter closures</h2>`];
   if (live.length) out.push(box(`On ${name}'s feed as of ${dateLong(D.seasonalAsOf).replace(/, \d{4}$/, '')}`, live.map((c) => `<strong>${esc(route(st, c.route || ''))}</strong> &mdash; &ldquo;${esc(quote(c.headline).slice(0, 200))}&rdquo;`)));
-  if (usual.length) out.push(box('Roads that usually close for winter', usual.map((e) => `<strong>${esc(e.route)}, ${esc(e.name)}</strong> &mdash; ${esc(e.publicLine || `${e.typicalClose}. ${e.typicalReopen}.`)} <a href="${esc(e.sourceUrl)}" rel="noopener" target="_blank">Source</a>${(e.extraSources || []).map((x) => ` &middot; <a href="${esc(x.url)}" rel="noopener" target="_blank">${esc(x.label)} source</a>`).join('')}`)));
+  if (usual.length) out.push(box('Roads that usually close for winter', usual.map((e) => `<strong>${esc(!e.name || e.name === e.route ? e.route : e.name.startsWith(e.route) ? e.name : `${e.route}, ${e.name}`)}</strong> &mdash; ${esc(e.publicLine || `${e.typicalClose}. ${e.typicalReopen}.`)} <a href="${esc(e.sourceUrl)}" rel="noopener" target="_blank">Source</a>${(e.extraSources || []).map((x) => ` &middot; <a href="${esc(x.url)}" rel="noopener" target="_blank">${esc(x.label)} source</a>`).join('')}`)));
   out.push(`<p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>`);
   return out.join('\n');
 };
@@ -350,7 +358,7 @@ const stLink = (st, rel = '') => `<a href="${rel}${STATE_DIR_NAME}/${slug(st)}.h
 const portLink = (p, rel) => `<a href="${rel}borders/?q=${encodeURIComponent(p.port)}">${portLabel(p)}</a>`;
 const portLabel = (p) => `${esc(p.port)}${p.crossing && !/Passenger/i.test(p.crossing) ? ' / ' + esc(p.crossing) : ''}`;
 
-const methodBox = (scope, extra) => `<div class="method-box"><strong>How we got these numbers:</strong> These are unique alerts published by ${scope}, from a daily copy taken ${WINDOW}, ${YEAR}. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all states report the same data, so compare each place with its own earlier months.${extra || ''}</div>`;
+const methodBox = (scope, extra) => `<div class="method-box"><strong>How we got these numbers:</strong> These are unique alerts published by ${scope}, from a daily copy taken ${WINDOW}, ${YEAR}. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.${extra || ''}</div>`;
 // Alerts a feed carried for another state's road, removed by gen-road-report.mjs (D.droppedOffState).
 const DROP = D.droppedOffState || [];
 const dropTotal = DROP.reduce((a, d) => a + d.count, 0);
@@ -411,7 +419,7 @@ national.push(`<p>Road feeds in ${crashStates.length} states and provinces poste
   const months = never.length ? (hist[never[0]] || []).map((m) => m.month) : [];
   const since = months.length ? new Date(`${months[0]}-01T12:00:00Z`).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long' }) : '';
   const andList = (a) => a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`;
-  if (none.length) national.push(`<p class="rc-fig" style="margin-top:-12px;"><em>${andList(none.map((st) => NAMES[st]))} posted no crash alerts in ${MONTH_NAME}.${never.length ? ` ${andList(never.map((st) => NAMES[st]))} have not posted a crash alert since ${since}.` : ''}</em></p>`);
+  if (none.length) national.push(`<p class="rc-fig" style="margin-top:-12px;"><em>${andList(none.map((st) => NAMES[st]))} posted no crash alerts in ${MONTH_NAME}.${never.length ? ` ${andList(never.map((st) => NAMES[st]))} have posted none in any month since our archive began in ${since}.` : ''}</em></p>`);
 }
 national.push(rowClose(mapFig('crash', `Crash alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Crash alerts'))));
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
@@ -529,16 +537,16 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<h2 class="rc">Crashes</h2>`);
     parts.push(S.crash > 0 ? `<p>${name}'s road feed carried ${n(S.crash)} crash ${plural(S.crash, 'alert', 'alerts')} in ${MONTH_NAME}.</p>` : `<p>No crash alerts were on ${name}'s feed in ${MONTH_NAME}. Not every agency publishes crash reports.</p>`);
     const hs = D.crashHotspots && D.crashHotspots[st];
-    if (hs && hs.routes.length) parts.push(box('Routes with the most crash alerts', hs.routes.map(([r, c]) => `<strong>${esc(route(st, r))}</strong> &mdash; ${n(c)}`)));
+    if (hs && hs.routes.filter(([r]) => realRoute(r)).length) parts.push(box('Routes with the most crash alerts', hs.routes.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
     // Oregon's feed puts ODOT highway names (Pacific, Columbia River, Old Oregon Trail) in the place field, not areas.
     const hp = hs && st !== 'OR' ? hs.places.filter((q) => realPlace(q.place)) : [];
-    if (hp.length) parts.push(box(st === 'CA' ? 'Highway Patrol dispatch areas named in two or more crash alerts' : 'Areas named in two or more crash alerts', hp.map((p) => `<strong>${esc(title(p.place))}</strong>${p.route ? ` (${esc(route(st, p.route))})` : ''} &mdash; ${n(p.crashes)}`)));
+    if (hp.length) parts.push(box(st === 'CA' ? 'Highway Patrol dispatch areas named in two or more crash alerts' : 'Areas and routes named in two or more crash alerts', hp.map((p) => `<strong>${esc(title(p.place))}</strong>${p.route ? ` (${esc(route(st, p.route))})` : ''} &mdash; ${n(p.crashes)}`)));
     const fs = fatal.filter((f) => f.state === st);
     if (fs.length && ['CA', 'TX'].includes(st)) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
     parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     const rc = (S.routeCounts || []).filter(([r]) => r);
-    if (rc.length) parts.push(box(`Routes with the most alerts in ${name}`, rc.map(([r, c]) => `<strong>${esc(route(st, r))}</strong> &mdash; ${n(c)}`)));
+    if (rc.filter(([r]) => realRoute(r)).length) parts.push(box(`Routes with the most alerts in ${name}`, rc.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
     else if (S.topRoutes && S.topRoutes.length) parts.push(`<p>The routes with the most alerts were ${S.topRoutes.map((r) => esc(route(st, r))).join(', ').replace(/, ([^,]*)$/, ' and $1')}.</p>`);
   }
   {
