@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-11-04T06:44:26.214Z",
+   "fetchedAt": "2026-11-04T19:54:56.359Z",
    "ok": true,
    "rows": [
     {
@@ -30,20 +30,6 @@
      "closesNote": "Open until filled. May close any time after this date.",
      "kind": "Seasonal",
      "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Condon--ODOT--Maintenance/Highway-Maintenance-Specialist--Seasonal-_REQ-208389",
-     "recruiter": "ODOTRecruitment@odot.oregon.gov"
-    },
-    {
-     "id": "REQ-208607",
-     "state": "OR",
-     "agency": "Oregon Department of Transportation",
-     "title": "Highway Maintenance Specialist (Seasonal)",
-     "multiple": false,
-     "location": "Baker City, OR",
-     "pay": "$4,312 to $5,988 a month",
-     "closes": "2026-11-03",
-     "closesNote": null,
-     "kind": "Seasonal",
-     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Baker-City--ODOT--Maintenance/Highway-Maintenance-Specialist--Seasonal-_REQ-208607",
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
     },
     {
@@ -89,20 +75,6 @@
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
     },
     {
-     "id": "REQ-208636",
-     "state": "OR",
-     "agency": "Oregon Department of Transportation",
-     "title": "Highway Maintenance Specialist (Seasonal)",
-     "multiple": true,
-     "location": "Bend, OR",
-     "pay": "$4,312 to $5,988 a month",
-     "closes": "2026-11-03",
-     "closesNote": null,
-     "kind": "Seasonal",
-     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Bend--ODOT--Building-B/Highway-Maintenance-Specialist--Seasonal---Multiple-Positions-_REQ-208636",
-     "recruiter": "ODOTRecruitment@odot.oregon.gov"
-    },
-    {
      "id": "REQ-208789",
      "state": "OR",
      "agency": "Oregon Department of Transportation",
@@ -119,7 +91,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-11-04T06:44:26.214Z",
+   "fetchedAt": "2026-11-04T19:54:56.359Z",
    "ok": true,
    "rows": [
     {
@@ -127,7 +99,7 @@
      "state": "MN",
      "agency": "Minnesota Department of Transportation",
      "title": "Emergency Snow Plow Operators - Transportation Generalist",
-     "location": "Various, MN",
+     "location": "Various SW, MN",
      "pay": "$25.19 - $31.60 an hour",
      "closes": "2026-11-30",
      "closesNote": null,
@@ -140,7 +112,7 @@
      "state": "MN",
      "agency": "Minnesota Department of Transportation",
      "title": "Emergency Snow Plow Operator",
-     "location": "Various, MN",
+     "location": "Various NE, MN",
      "pay": "$23.57 - $31.60 an hour",
      "closes": "2026-11-13",
      "closesNote": null,
@@ -190,5 +162,5 @@
    ]
   }
  },
- "updatedAt": "2026-11-04T06:44:26.214Z"
+ "updatedAt": "2026-11-04T19:54:56.359Z"
 }
