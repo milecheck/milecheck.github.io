@@ -454,9 +454,11 @@ national.push(fold(methodBox('each state department of transportation (DOT) road
 const mapExists = (k) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k === 'bridges' ? 'bridges.mp4' : `${k}.webp`}`));
 // Cache tag from the file's mtime: a re-rendered map gets a new URL, so no reader sees last week's image (2026-11-06).
 const ver = (rel) => { try { return `${rel}?v=${Math.floor(statSync(resolve(ROOT, rel)).mtimeMs / 1000).toString(36)}`; } catch { return rel; } };
+// Intrinsic heights per map file (the border strips are shorter than the 3:2 national maps).
+const MAP_H = { 'borders-canada': 400, 'borders-mexico': 500 };
 const mapFig = (k, caption, alt) => !mapExists(k) ? '' : k === 'bridges'
   ? `<figure class="sec-fig"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><video src="${ver(`blog/highway-report-maps/${KEY}/bridges.mp4`).slice(5)}" poster="${ver(`blog/highway-report-maps/${KEY}/bridges-poster.webp`).slice(5)}" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video></figure>`
-  : `<figure class="sec-fig"><a href="${ver(`blog/highway-report-maps/${KEY}/${k}.webp`).slice(5)}"><img src="${ver(`blog/highway-report-maps/${KEY}/${k}.webp`).slice(5)}" width="1200" height="780" loading="lazy" alt="${alt}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`;
+  : `<figure class="sec-fig"><a href="${ver(`blog/highway-report-maps/${KEY}/${k}.webp`).slice(5)}"><img src="${ver(`blog/highway-report-maps/${KEY}/${k}.webp`).slice(5)}" width="1200" height="${MAP_H[k] || 780}" loading="lazy" alt="${alt}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`;
 const alertAlt = (t) => `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`;
 const DOTS = 'Each dot is one alert a feed posted. Blank areas can mean a feed does not post that kind of alert.';
 const rowOpen = '<div class="sec-row"><div class="sec-text">';
@@ -500,21 +502,13 @@ if (BW && BW.byMax.length) {
   national.push('<!--sec:border-->');
   national.push(`<h2 class="rc">Border waits</h2>`);
   national.push(`<p>Waits to enter the United States in standard passenger lanes, ${MONTH_NAME}, from hourly U.S. Customs and Border Protection readings. Averages use every valid hourly reading. Dates are local to each crossing.</p>`);
-  // Three columns (Leah 2026-11-06): into the US from Mexico, into the US from Canada, into Canada from the US.
-  // CBP publishes US-bound lanes only, so the Canada-bound column says so. 'Lowest wait' is the lowest average
-  // among crossings with at least 300 hourly readings; the feed carries no per-reading minimum.
-  const bwCol = (title, rows) => {
-    if (!rows.length) return `<div class="bw-col"><strong>${title}</strong><p class="rc-fig" style="margin:8px 0 0;">No data. The feed we read publishes waits into the United States only.</p></div>`;
-    const hi = [...rows].sort((x, y) => y.maxMin - x.maxMin || y.avgMin - x.avgMin)[0];
-    const lowPool = rows.filter((p) => (p.readings || 0) >= 300);
-    const lo = lowPool.length ? [...lowPool].sort((x, y) => x.avgMin - y.avgMin || x.maxMin - y.maxMin)[0] : null;
-    return `<div class="bw-col"><strong>${title}</strong><ul class="article-list" style="margin:8px 0 0;"><li>Highest single wait: <strong>${portLink(hi, '../')}</strong>${hi.state ? ` (${stLink(hi.state)})` : ''}, ${hm(hi.maxMin)}, ${dayOf(hi.maxAt, hi)}</li>${lo ? `<li>Lowest wait: <strong>${portLink(lo, '../')}</strong>${lo.state ? ` (${stLink(lo.state)})` : ''}, ${hm(lo.avgMin)} on average over ${n(lo.readings)} hourly readings</li>` : '<li>Lowest wait: no crossing had 300 readings</li>'}</ul></div>`;
-  };
-  national.push(`<div class="pull-stat bw-grid">${bwCol('Into the US from Mexico', BW.all.filter((p) => /Mexic/i.test(p.border || '')))}${bwCol('Into the US from Canada', BW.all.filter((p) => /Canad/i.test(p.border || '')))}${bwCol('Into Canada from the US', [])}</div>`);
-  national.push(box('Longest average wait', BW.byAvg.filter((p) => (p.readings || 0) >= 300).slice(0, 6).map((p) => `<strong>${portLink(p, '../')}</strong>${p.state ? ` (${stLink(p.state)})` : ''} &mdash; ${hm(p.avgMin)} average over ${n(p.readings)} hourly readings`)));
-  national.push(`<p>Live waits are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
-  // Map of every crossing with readings, dot size = average wait (Leah 2026-11-06: the text is dense, a map reads faster).
-  national.push(`<div class="sec-row">${mapFig('borders', `Average wait into the US at each land crossing, ${MONTH_NAME}. Bigger dot, longer wait.`, `Land border crossings into the United States, ${MONTH_NAME} ${YEAR}, one dot per crossing sized by the average wait`)}</div>`);
+  // Two strip maps, Canada then Mexico, each zoomed to its border (Leah 2026-11-06, picked from three mockups): one
+  // dot per crossing sized by the average wait, and the six longest averages carry a pill with the average and the
+  // high right on the map. The old three-column tables and the longest-average box are gone; one link goes to the
+  // live page with every crossing and its cameras.
+  national.push(`<div class="sec-row">${mapFig('borders-canada', `Into the US from Canada, ${MONTH_NAME}. Dot size is the average wait; pills mark the longest averages.`, `Crossings into the United States from Canada, ${MONTH_NAME} ${YEAR}, one dot per crossing sized by the average wait`)}</div>`);
+  national.push(`<div class="sec-row">${mapFig('borders-mexico', `Into the US from Mexico, ${MONTH_NAME}. Dot size is the average wait; pills mark the longest averages.`, `Crossings into the United States from Mexico, ${MONTH_NAME} ${YEAR}, one dot per crossing sized by the average wait`)}</div>`);
+  national.push(`<p>The feed we read publishes waits into the United States only. <a href="../borders/">See all border crossings and their cameras &rarr;</a></p>`);
 }
 // Seattle drawbridges live on the Washington page only, time-lapse included (Leah 2026-11-02, 2026-11-06). The national page shows the camera map.
 if (mapExists('cameras')) {
