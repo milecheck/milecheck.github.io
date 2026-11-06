@@ -178,3 +178,15 @@ ${ga}  <meta charset="UTF-8">
 fs.mkdirSync(path.join(SITE, 'storms'), { recursive: true });
 fs.writeFileSync(path.join(SITE, 'storms', 'index.html'), html);
 console.log(`wrote storms/index.html; flagged: ${flagged.map(f => f.st).join(', ') || 'none'}`);
+// The finishing steps every public page gets from finish-pages.mjs (2026-11-06: a bare build dropped the SEO head
+// tags, the footer link hub and the JSON-LD graph, 134 lines short of the live page). Each script is idempotent and
+// site-wide, so other pages are unchanged when the tree is current; the daily refresh commits storms/index.html only.
+// --no-finish skips them (tests, dry runs).
+if (!process.argv.includes('--no-finish')) {
+  const { execFileSync } = await import('node:child_process');
+  for (const step of ['add-seo-fixes.mjs', 'add-footer-hub.mjs', 'add-social-tags.mjs', 'add-analytics.mjs', 'link-jsonld.mjs']) {
+    try { execFileSync(process.execPath, [path.join(SITE, 'scripts', step)], { cwd: SITE, stdio: ['ignore', 'ignore', 'inherit'] }); }
+    catch (e) { console.error(`finish step ${step} failed: ${e.message}`); }
+  }
+  console.log('finish steps done (seo fixes, footer hub, social tags, GA4, JSON-LD)');
+}
