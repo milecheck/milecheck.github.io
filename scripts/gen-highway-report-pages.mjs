@@ -110,7 +110,7 @@ const ICON_PATHS = {
   alert: '<circle cx="12" cy="12" r="10"/><path d="M12 7v6"/><path d="M12 16.5h.01"/>',
 };
 const svgIcon = (k, size = 22) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[k] || ''}</svg>`;
-const iconTile = (w) => w.img ? `<img src="${esc(w.img)}" width="44" height="44" alt="" loading="lazy" style="flex:none;width:44px;height:44px;object-fit:contain;aspect-ratio:1/1;border-radius:10px;">` : `<span class="wn-ic"${w.icon === 'alert' ? ' style="background:#FEE2E2;color:#DC2626;"' : ''}>${svgIcon(w.icon)}</span>`;
+const iconTile = (w) => w.img ? `<img src="${esc(w.img)}" width="44" height="44" alt="" loading="lazy" style="flex:none;width:44px;height:44px;object-fit:contain;aspect-ratio:1/1;border-radius:10px;">` : `<span class="wn-ic">${svgIcon(w.icon)}</span>`;
 // Call-to-action block at the end of the national report (Leah 2026-11-02): the app, the email report,
 // sharing, the dash display, the other apps and social. Replaces the single "live version" box there.
 function nextSteps(rel) {
