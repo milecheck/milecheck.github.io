@@ -508,7 +508,12 @@ if (BW && BW.byMax.length) {
   // live page with every crossing and its cameras.
   national.push(`<div class="sec-row">${mapFig('borders-canada', `Into the US from Canada, ${MONTH_NAME}. Dot size is the average wait; pills mark the longest averages.`, `Crossings into the United States from Canada, ${MONTH_NAME} ${YEAR}, one dot per crossing sized by the average wait`)}</div>`);
   national.push(`<div class="sec-row">${mapFig('borders-mexico', `Into the US from Mexico, ${MONTH_NAME}. Dot size is the average wait; pills mark the longest averages.`, `Crossings into the United States from Mexico, ${MONTH_NAME} ${YEAR}, one dot per crossing sized by the average wait`)}</div>`);
-  national.push(`<p>The feed we read publishes waits into the United States only. <a href="../borders/">See all border crossings and their cameras &rarr;</a></p>`);
+  // Why those dates (Leah 2026-11-06): checked against the hourly readings in each crossing's local time. Most of the
+  // month's highs were Saturday and Sunday afternoons and evenings. No US or Mexican holiday fell in October;
+  // Canadian Thanksgiving was Oct. 12 and Sweetgrass, MT had its high the evening before. The weekly pattern per
+  // crossing lives at /border-wait-times/ (hourly archive since July).
+  national.push(`<p>Most of ${MONTH_NAME}'s longest waits came on Saturday and Sunday afternoons and evenings, when weekend traffic heads back into the United States. The feed we read publishes waits into the United States only.</p>`);
+  national.push(`<p><a href="../border-wait-times/">When each crossing is usually busiest and quietest &rarr;</a><br><a href="../borders/">See all border crossings and their cameras &rarr;</a></p>`);
 }
 // Seattle drawbridges live on the Washington page only, time-lapse included (Leah 2026-11-02, 2026-11-06). The national page shows the camera map.
 if (mapExists('cameras')) {
