@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
@@ -25,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css?v=20261015-2">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Google Maps show mile markers?","acceptedAnswer":{"@type":"Answer","text":"Not reliably. Google Maps is built around addresses, place names, and turn-by-turn directions — it doesn't show a continuous, always-visible mile marker as you drive down a highway the way a dedicated mile-marker app does."}},{"@type":"Question","name":"How do I find mile markers on Google Maps?","acceptedAnswer":{"@type":"Answer","text":"You generally can't, in real time. Some historical Street View imagery happens to catch a mile marker sign, and satellite view can sometimes show the physical signs if you zoom in closely enough on a highway shoulder, but there's no live, continuously-updating mile marker readout in Google Maps."}},{"@type":"Question","name":"Why doesn't Google Maps show my exact highway position?","acceptedAnswer":{"@type":"Answer","text":"Google Maps is a routing and navigation app — it's optimized for getting you from A to B, not for reporting your continuous position along a specific numbered route. Mile markers require route-aware, DOT-sourced data that general-purpose mapping apps don't build in."}},{"@type":"Question","name":"What app shows mile markers in real time?","acceptedAnswer":{"@type":"Answer","text":"MileCheck shows your nearest mile marker in real time as you drive, interpolated between DOT sign positions to the tenth of a mile, across all 50 US states and 10 Canadian provinces — plus live state DOT feeds and the nearest highway camera on your route."}}],"@id":"https://milecheckapp.com/can-google-maps-show-mile-markers/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Does Google Maps show mile markers?","author":{"@id":"https://milecheckapp.com/#org"},"publisher":{"@id":"https://milecheckapp.com/#org"},"mainEntityOfPage":"https://milecheckapp.com/can-google-maps-show-mile-markers/","@id":"https://milecheckapp.com/can-google-maps-show-mile-markers/#article","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Does Google Maps show mile markers?","author":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"},"publisher":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/","logo":{"@type":"ImageObject","url":"https://milecheckapp.com/apple-touch-icon.png","width":180,"height":180}},"mainEntityOfPage":"https://milecheckapp.com/can-google-maps-show-mile-markers/","@id":"https://milecheckapp.com/can-google-maps-show-mile-markers/#article","isPartOf":{"@id":"https://milecheckapp.com/#website"},"image":"https://milecheckapp.com/images/guides/mile-marker-finder.webp","datePublished":"2026-08-15","dateModified":"2026-10-31"}</script>
   <style>
     .art{max-width:760px;margin:0 auto;padding:34px 20px 40px;}
     .art .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
@@ -54,6 +55,8 @@
   <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
   <script src="/assets/site-nav.js?v=20261102-1" defer></script>
   <!-- /site-nav:assets -->
+<style data-seo-img>:where(img[width][height]){height:auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
 </head>
 <body>
 
@@ -82,6 +85,7 @@
   <article class="art journey-content">
     <div class="eyebrow">Highway basics</div>
     <h1>Does Google Maps show mile markers?</h1>
+    <p class="page-dates" style="font-size:.85em;opacity:.7;margin:.25em 0 1em">Published <time datetime="2026-08-15">August 15, 2026</time> · Updated <time datetime="2026-10-31">October 31, 2026</time></p>
     <p class="lede">No. Google's help page for map layers lists map, satellite, terrain, traffic, transit, biking, Street View, globe view, air quality, travel time and wildfires. Mile markers are not on the list (<a href="https://support.google.com/maps/answer/3092439" target="_blank" rel="noopener">Google Maps Help</a>, checked October 31, 2026).</p>
 <!-- mile-map-action:start -->
     <aside style="margin:16px 0 22px;padding:16px;border:1px solid #cfe3d7;border-radius:10px;background:#f3f9f6;" aria-label="Find a mile marker">
@@ -270,7 +274,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
           <p class="footer-tagline">Mile markers in all 50 US states.</p>
         </div>
         <div class="footer-col">

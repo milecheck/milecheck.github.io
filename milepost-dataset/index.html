@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
 
 
@@ -10,17 +11,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Highway mile marker data for all 50 US states | MileCheck</title>
-  <meta name="description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a yearly license priced by size and support.">
+  <meta name="description" content="Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license.">
   <link rel="canonical" href="https://milecheckapp.com/milepost-dataset/">
   <meta property="og:title" content="Highway mile marker data for all 50 US states | MileCheck">
-  <meta property="og:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a yearly license priced by size and support.">
+  <meta property="og:description" content="Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/milepost-dataset/">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Highway mile marker data for all 50 US states | MileCheck">
-  <meta name="twitter:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a yearly license priced by size and support.">
+  <meta name="twitter:description" content="Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,6 +146,7 @@
   <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
   <script src="/assets/site-nav.js?v=20261102-1" defer></script>
   <!-- /site-nav:assets -->
+<style data-seo-img>:where(img[width][height]){height:auto}</style>
 </head>
 <body>
 
@@ -626,7 +628,7 @@ UT-I_15-1-SB,UT,US,I-15,,1,mi,37.013145,-113.614777,physical
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-col-brand">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
           <p class="footer-tagline">Mile markers in all 50 US states.</p>
         </div>
         <div class="footer-col">
