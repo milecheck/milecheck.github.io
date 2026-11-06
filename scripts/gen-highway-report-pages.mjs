@@ -8,7 +8,7 @@
 //
 //   node scripts/gen-highway-report-pages.mjs 2026-09
 //   then: add-sponsor-slots -> tag-store-links -> add-signup-band -> add-signup-ctas -> add-nav-search -> build-search-index -> build-sitemap -> link-jsonld (always LAST)
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -443,9 +443,11 @@ national.push(fold(methodBox('each state department of transportation (DOT) road
 // Monthly maps (scripts/road-report-maps/build.sh in the app repo), each in its own section beside the text
 // (Leah 2026-11-02: crashes under Crashes, closures under Closures, wildfires under Wildfires). Shown when the file exists.
 const mapExists = (k) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k === 'bridges' ? 'bridges.mp4' : `${k}.webp`}`));
+// Cache tag from the file's mtime: a re-rendered map gets a new URL, so no reader sees last week's image (2026-11-06).
+const ver = (rel) => { try { return `${rel}?v=${Math.floor(statSync(resolve(ROOT, rel)).mtimeMs / 1000).toString(36)}`; } catch { return rel; } };
 const mapFig = (k, caption, alt) => !mapExists(k) ? '' : k === 'bridges'
-  ? `<figure class="sec-fig"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><video src="highway-report-maps/${KEY}/bridges.mp4" poster="highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video></figure>`
-  : `<figure class="sec-fig"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="${k === 'cameras' ? 900 : 1200}" height="${k === 'cameras' ? 1125 : 780}" loading="lazy" alt="${alt}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`;
+  ? `<figure class="sec-fig"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><video src="${ver(`blog/highway-report-maps/${KEY}/bridges.mp4`).slice(5)}" poster="${ver(`blog/highway-report-maps/${KEY}/bridges-poster.webp`).slice(5)}" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video></figure>`
+  : `<figure class="sec-fig"><a href="${ver(`blog/highway-report-maps/${KEY}/${k}.webp`).slice(5)}"><img src="${ver(`blog/highway-report-maps/${KEY}/${k}.webp`).slice(5)}" width="${k === 'cameras' ? 900 : 1200}" height="${k === 'cameras' ? 1125 : 780}" loading="lazy" alt="${alt}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`;
 const alertAlt = (t) => `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`;
 const DOTS = 'Each dot is one alert a feed posted. Blank areas can mean a feed does not post that kind of alert.';
 const rowOpen = '<div class="sec-row"><div class="sec-text">';
@@ -455,7 +457,7 @@ let SNAP_INDEX = null; try { SNAP_INDEX = JSON.parse(readFileSync(resolve(ROOT, 
 const snap = (st, layer, caption, alt) => {
   const f = `blog/highway-report-maps/${KEY}/states/${st}-${layer}.webp`;
   if (!existsSync(resolve(ROOT, f))) return '';
-  return `<figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><a href="../../${f}"><img src="../../${f}" width="720" height="720" loading="lazy" alt="${esc(alt)}" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>`;
+  return `<figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><a href="../../${ver(f)}"><img src="../../${ver(f)}" width="720" height="720" loading="lazy" alt="${esc(alt)}" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>`;
 };
 // Each section points at its live map (Leah 2026-11-06). Opens in a new tab like every other link on the page.
 const liveLink = (rel, path, label) => `<p class="rc-live"><a href="${rel}${path}">${label} &rarr;</a></p>`;
@@ -503,13 +505,12 @@ if (BW && BW.byMax.length) {
   national.push(box('Longest average wait', BW.byAvg.filter((p) => (p.readings || 0) >= 300).slice(0, 6).map((p) => `<strong>${portLink(p, '../')}</strong>${p.state ? ` (${stLink(p.state)})` : ''} &mdash; ${hm(p.avgMin)} average over ${n(p.readings)} hourly readings`)));
   national.push(`<p>Live waits are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
 }
-// Seattle drawbridges moved to the Washington page (Leah 2026-11-02). The time-lapse stays with the maps.
-// Camera map and the drawbridge time-lapse together (Leah 2026-11-02).
-if (mapExists('cameras') || mapExists('bridges')) {
+// Seattle drawbridges live on the Washington page only, time-lapse included (Leah 2026-11-02, 2026-11-06). The national page shows the camera map.
+if (mapExists('cameras')) {
   national.push('<!--sec:cameras-->');
-  national.push(`<h2 class="rc">Cameras and drawbridges</h2>`);
-  national.push(liveLink('../', 'cameras/', 'Live traffic cameras') + liveLink('../', 'seattle-drawbridges/', 'Seattle drawbridges, live'));
-  national.push(`<div class="sec-row sec-row--pair">${mapFig('cameras', `Every DOT camera on MileCheck as ${MONTH_NAME} closed, one dot per camera.`, 'Every DOT camera on MileCheck, one dot per camera')}${mapFig('bridges', `Seattle drawbridge openings in ${MONTH_NAME}, sped up. <a href="${STATE_DIR_NAME}/washington.html#drawbridges">More in the Washington report</a>`, '')}</div>`);
+  national.push(`<h2 class="rc">Traffic cameras</h2>`);
+  national.push(liveLink('../', 'cameras/', 'Live traffic cameras'));
+  national.push(`<div class="sec-row sec-row--pair">${mapFig('cameras', `Every DOT camera on MileCheck as ${MONTH_NAME} closed, one dot per camera.`, 'Every DOT camera on MileCheck, one dot per camera')}</div>`);
 }
 if (FA) {
   const fireStates = Object.entries(FA.byState).sort((a, b) => b[1].acres - a[1].acres);
@@ -652,7 +653,7 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<h2 class="rc" id="drawbridges">Seattle drawbridges</h2>` + liveLink('../../', 'seattle-drawbridges/', 'Seattle drawbridges, live') + `<p>Seattle's drawbridges opened ${n(bridgeTotal)} times in ${MONTH_NAME}.</p>`);
     // List and the month's time-lapse side by side (moved here from the national page, Leah 2026-11-02).
     const tl = existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/bridges.mp4`))
-      ? `<figure style="margin:0;flex:0 1 260px;min-width:200px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Every opening in ${MONTH_NAME}, sped up.${BRIDGE_TL_TOTAL[KEY] && BRIDGE_TL_TOTAL[KEY] !== bridgeTotal ? ` The video counts by Seattle time, so it ends at ${n(BRIDGE_TL_TOTAL[KEY])}.` : ''}</figcaption><video src="../highway-report-maps/${KEY}/bridges.mp4" poster="../highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video></figure>`
+      ? `<figure style="margin:0;flex:0 1 260px;min-width:200px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Every opening in ${MONTH_NAME}, sped up.${BRIDGE_TL_TOTAL[KEY] && BRIDGE_TL_TOTAL[KEY] !== bridgeTotal ? ` The video counts by Seattle time, so it ends at ${n(BRIDGE_TL_TOTAL[KEY])}.` : ''}</figcaption><video src="../${ver(`blog/highway-report-maps/${KEY}/bridges.mp4`).slice(5)}" poster="../${ver(`blog/highway-report-maps/${KEY}/bridges-poster.webp`).slice(5)}" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video></figure>`
       : '';
     parts.push(`<div style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;margin:0 0 22px;"><div style="flex:1 1 360px;min-width:0;">${box(`Openings, ${MONTH_NAME}`, BR.map((b) => `<strong>${bridgeName(b.id)}</strong> &mdash; ${n(b.openings)} openings${b.medianMin != null ? `, typically ${b.medianMin} minutes, longest ${b.longestMin}` : ''}`)).replace('<div class="pull-stat">', '<div class="pull-stat" style="margin:0;">')}</div>${tl}</div>`);
     parts.push(`<p>Live status is on <a href="../../maps/#drawbridges">the drawbridge map</a>. New in ${MONTH_NAME}: Crystal Mountain's summit camera and the Paradise camera at Mount Rainier. See them on the <a href="../../ski/crystal-mountain/">Crystal Mountain page</a> and the <a href="../../mountains/rainier/">Mount Rainier page</a>.</p>`);
