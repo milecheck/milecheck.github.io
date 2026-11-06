@@ -9,8 +9,8 @@ const ES_PAGES = new Set(['florida', 'miami', 'orlando', 'tampa']);
 const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versions (2026-09-25) // one sponsor slot above the map (2026-09-15)
 
 // state slug map (for cross-linking to the state camera page)
-const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont',TX:'texas',BC:'british-columbia',IL:'illinois',CO:'colorado',MA:'massachusetts',MN:'minnesota',IN:'indiana',NC:'north-carolina',KY:'kentucky',NM:'new-mexico',ID:'idaho',NE:'nebraska',VA:'virginia',CT:'connecticut',RI:'rhode-island',IA:'iowa',KS:'kansas',ON:'ontario',AB:'alberta',HI:'hawaii',OK:'oklahoma',AR:'arkansas',MS:'mississippi',ND:'north-dakota',WY:'wyoming'};
-const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Montana',AZ:'Arizona',NV:'Nevada',OH:'Ohio',WI:'Wisconsin',NY:'New York',PA:'Pennsylvania',GA:'Georgia',LA:'Louisiana',SC:'South Carolina',FL:'Florida',MI:'Michigan',AL:'Alabama',SD:'South Dakota',AK:'Alaska',ME:'Maine',NH:'New Hampshire',VT:'Vermont',TX:'Texas',BC:'British Columbia',IL:'Illinois',CO:'Colorado',MA:'Massachusetts',MN:'Minnesota',IN:'Indiana',NC:'North Carolina',KY:'Kentucky',NM:'New Mexico',ID:'Idaho',NE:'Nebraska',VA:'Virginia',CT:'Connecticut',RI:'Rhode Island',IA:'Iowa',KS:'Kansas',ON:'Ontario',AB:'Alberta',HI:'Hawaii',OK:'Oklahoma',AR:'Arkansas',MS:'Mississippi',ND:'North Dakota',WY:'Wyoming'};
+const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont',TX:'texas',BC:'british-columbia',IL:'illinois',CO:'colorado',MA:'massachusetts',MN:'minnesota',IN:'indiana',NC:'north-carolina',KY:'kentucky',NM:'new-mexico',ID:'idaho',NE:'nebraska',VA:'virginia',CT:'connecticut',RI:'rhode-island',IA:'iowa',KS:'kansas',ON:'ontario',AB:'alberta',HI:'hawaii',OK:'oklahoma',AR:'arkansas',MS:'mississippi',ND:'north-dakota',WY:'wyoming',QC:'quebec',TN:'tennessee',MO:'missouri',MD:'maryland',DE:'delaware',WV:'west-virginia'};
+const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Montana',AZ:'Arizona',NV:'Nevada',OH:'Ohio',WI:'Wisconsin',NY:'New York',PA:'Pennsylvania',GA:'Georgia',LA:'Louisiana',SC:'South Carolina',FL:'Florida',MI:'Michigan',AL:'Alabama',SD:'South Dakota',AK:'Alaska',ME:'Maine',NH:'New Hampshire',VT:'Vermont',TX:'Texas',BC:'British Columbia',IL:'Illinois',CO:'Colorado',MA:'Massachusetts',MN:'Minnesota',IN:'Indiana',NC:'North Carolina',KY:'Kentucky',NM:'New Mexico',ID:'Idaho',NE:'Nebraska',VA:'Virginia',CT:'Connecticut',RI:'Rhode Island',IA:'Iowa',KS:'Kansas',ON:'Ontario',AB:'Alberta',HI:'Hawaii',OK:'Oklahoma',AR:'Arkansas',MS:'Mississippi',ND:'North Dakota',WY:'Wyoming',QC:'Québec',TN:'Tennessee',MO:'Missouri',MD:'Maryland',DE:'Delaware',WV:'West Virginia'};
 
 const CITIES = [
   { slug:'seattle', name:'Seattle', state:'WA', dot:'WSDOT', lat:47.606, lon:-122.332, r:45,
@@ -349,11 +349,11 @@ const CITIES = [
     sub:'See Fort Worth traffic before you leave. TxDOT highway cameras around Fort Worth on one map. Tap any camera for the latest image.',
     blurb:`TxDOT runs the highway cameras around Fort Worth.`,
     freeways:`Watch I-30, I-820, I-20, TX-360 and TX-121.` },
-  { slug:'washington-dc', name:'Washington DC', state:'VA', dot:'VDOT', lat:38.9, lon:-77.04, r:35, anyRoute:true,
+  { slug:'washington-dc', name:'Washington DC', state:'VA', dot:'VDOT', extra:'MD', extraDot:'MDOT SHA', video:true, lat:38.9, lon:-77.04, r:35, anyRoute:true,
     title:'Washington DC Traffic Cameras | MileCheck', h1:'Washington DC traffic cameras', cityPage:true,
-    desc:'Washington DC area traffic cameras on one map. VDOT highway cameras on the Virginia side, on I-66, I-495 and I-95, with the latest image from each.',
-    sub:'See traffic around Washington DC before you leave. VDOT highway cameras on the Virginia side of the region on one map. Tap any camera for the latest image.',
-    blurb:`These are VDOT cameras on the Virginia side of the region. Maryland and District cameras are not on this map yet.`,
+    desc:'Washington DC area traffic cameras on one map. VDOT cameras on the Virginia side and MDOT SHA live video cameras on the Maryland side, on I-66, I-495, I-95 and I-270.',
+    sub:'See traffic around Washington DC before you leave. VDOT and MDOT SHA highway cameras on one map. Tap any camera for its latest image or live video.',
+    blurb:`VDOT runs the cameras on the Virginia side and MDOT SHA the live video cameras on the Maryland side. District (DDOT) cameras are not on this map yet.`,
     freeways:`Watch I-66, I-495, I-95, US-1 and VA-7.` },
   { slug:'colorado-springs', name:'Colorado Springs', state:'CO', dot:'CDOT', lat:38.83, lon:-104.82, r:30,
     title:'Colorado Springs Traffic Cameras | MileCheck', h1:'Colorado Springs traffic cameras', cityPage:true,
@@ -745,11 +745,11 @@ const CITIES = [
     sub:'See Quad Cities traffic before you leave. Iowa DOT highway cameras around Quad Cities on one map. Tap any camera for the latest image.',
     blurb:`Iowa DOT runs the highway cameras around Quad Cities.`,
     freeways:`Watch I-74, I-80, I-280 and US-67.` },
-  { slug:'kansas-city', name:'Kansas City', state:'KS', dot:'KDOT', lat:39.11, lon:-94.7, r:25,
+  { slug:'kansas-city', name:'Kansas City', state:'KS', dot:'KDOT', extra:'MO', extraDot:'MoDOT', video:true, lat:39.11, lon:-94.7, r:25,
     title:'Kansas City Traffic Cameras | MileCheck', h1:'Kansas City traffic cameras', cityPage:true,
-    desc:'Kansas City traffic cameras on one map. KDOT highway cameras on the Kansas side, on I-435, I-35 and I-70, with the latest image from each.',
-    sub:'See Kansas City traffic before you leave. KDOT highway cameras on the Kansas side of the metro on one map. Tap any camera for the latest image.',
-    blurb:`These are KDOT cameras on the Kansas side of the metro. Missouri cameras are not on this map yet.`,
+    desc:'Kansas City traffic cameras on one map. KDOT cameras on the Kansas side and MoDOT live video cameras on the Missouri side, on I-435, I-35, I-70 and I-29.',
+    sub:'See Kansas City traffic before you leave. KDOT and MoDOT highway cameras on one map. Tap any camera for its latest image or live video.',
+    blurb:`KDOT runs the cameras on the Kansas side and MoDOT the live video cameras on the Missouri side.`,
     freeways:`Watch I-435, I-35, I-70, US-69 and I-635.` },
   { slug:'saint-paul', name:'Saint Paul', state:'MN', dot:'MnDOT', lat:44.95, lon:-93.09, r:15,
     title:'Saint Paul Traffic Cameras | MileCheck', h1:'Saint Paul traffic cameras', cityPage:true,
@@ -841,6 +841,92 @@ const CITIES = [
     sub:'See Victoria traffic before you leave. DriveBC highway cameras around Victoria on one map. Tap any camera for the latest image.',
     blurb:`DriveBC runs the highway cameras around Victoria.`,
     freeways:`Watch BC-1, BC-17 and BC-14.` },
+  // Video cities (2026-11-06): these feeds are live video (HLS) only, so the page uses the state pages' player (video:true).
+  // Road lists are the routes with the most cameras in the feed. anyRoute: every camera the agency lists in the radius.
+  { slug:'montreal', name:'Montreal', state:'QC', dot:'Québec 511', lat:45.5, lon:-73.57, r:30, anyRoute:true, video:true,
+    title:'Montreal Traffic Cameras | MileCheck', h1:'Montreal traffic cameras', cityPage:true,
+    desc:'Montreal traffic cameras on one map. Québec 511 live video cameras on A-40 and other main roads.',
+    sub:'See Montreal traffic before you leave. Québec 511 live video cameras around Montreal on one map. Tap any camera to play it.',
+    blurb:`Québec 511 runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch A-40, A-15, A-20, A-13 and R-136.` },
+  { slug:'quebec-city', name:'Quebec City', state:'QC', dot:'Québec 511', lat:46.81, lon:-71.21, r:25, anyRoute:true, video:true,
+    title:'Quebec City Traffic Cameras | MileCheck', h1:'Quebec City traffic cameras', cityPage:true,
+    desc:'Quebec City traffic cameras on one map. Québec 511 live video cameras on A-73 and other main roads.',
+    sub:'See Quebec City traffic before you leave. Québec 511 live video cameras around Quebec City on one map. Tap any camera to play it.',
+    blurb:`Québec 511 runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch A-73, A-40, A-440, A-20 and A-740.` },
+  { slug:'gatineau', name:'Gatineau', state:'QC', dot:'Québec 511', lat:45.48, lon:-75.7, r:15, anyRoute:true, video:true,
+    title:'Gatineau Traffic Cameras | MileCheck', h1:'Gatineau traffic cameras', cityPage:true,
+    desc:'Gatineau traffic cameras on one map. Québec 511 live video cameras on A-50 and other main roads.',
+    sub:'See Gatineau traffic before you leave. Québec 511 live video cameras around Gatineau on one map. Tap any camera to play it.',
+    blurb:`Québec 511 runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch A-50, A-5, R-148, R-105 and R-307.` },
+  { slug:'nashville', name:'Nashville', state:'TN', dot:'TDOT SmartWay', lat:36.16, lon:-86.78, r:40, anyRoute:true, video:true,
+    title:'Nashville Traffic Cameras | MileCheck', h1:'Nashville traffic cameras', cityPage:true,
+    desc:'Nashville traffic cameras on one map. TDOT SmartWay live video cameras on I-24 and other main roads.',
+    sub:'See Nashville traffic before you leave. TDOT SmartWay live video cameras around Nashville on one map. Tap any camera to play it.',
+    blurb:`TDOT SmartWay runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-24, I-40, I-65, I-440 and I-840.` },
+  { slug:'memphis', name:'Memphis', state:'TN', dot:'TDOT SmartWay', lat:35.15, lon:-90.05, r:35, anyRoute:true, video:true,
+    title:'Memphis Traffic Cameras | MileCheck', h1:'Memphis traffic cameras', cityPage:true,
+    desc:'Memphis traffic cameras on one map. TDOT SmartWay live video cameras on I-40 and other main roads.',
+    sub:'See Memphis traffic before you leave. TDOT SmartWay live video cameras around Memphis on one map. Tap any camera to play it.',
+    blurb:`TDOT SmartWay runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-40, I-55, I-240 and TN-385.` },
+  { slug:'knoxville', name:'Knoxville', state:'TN', dot:'TDOT SmartWay', lat:35.96, lon:-83.92, r:30, anyRoute:true, video:true,
+    title:'Knoxville Traffic Cameras | MileCheck', h1:'Knoxville traffic cameras', cityPage:true,
+    desc:'Knoxville traffic cameras on one map. TDOT SmartWay live video cameras on I-40 and other main roads.',
+    sub:'See Knoxville traffic before you leave. TDOT SmartWay live video cameras around Knoxville on one map. Tap any camera to play it.',
+    blurb:`TDOT SmartWay runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-40, I-140, I-640, I-75 and I-275.` },
+  { slug:'chattanooga', name:'Chattanooga', state:'TN', dot:'TDOT SmartWay', lat:35.05, lon:-85.31, r:30, anyRoute:true, video:true,
+    title:'Chattanooga Traffic Cameras | MileCheck', h1:'Chattanooga traffic cameras', cityPage:true,
+    desc:'Chattanooga traffic cameras on one map. TDOT SmartWay live video cameras on I-24 and other main roads.',
+    sub:'See Chattanooga traffic before you leave. TDOT SmartWay live video cameras around Chattanooga on one map. Tap any camera to play it.',
+    blurb:`TDOT SmartWay runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-24, I-75, TN-153 and US-27.` },
+  { slug:'st-louis', name:'St. Louis', state:'MO', dot:'MoDOT', lat:38.63, lon:-90.2, r:40, anyRoute:true, video:true,
+    title:'St. Louis Traffic Cameras | MileCheck', h1:'St. Louis traffic cameras', cityPage:true,
+    desc:'St. Louis traffic cameras on one map. MoDOT live video cameras on I-44 and other main roads.',
+    sub:'See St. Louis traffic before you leave. MoDOT live video cameras around St. Louis on one map. Tap any camera to play it.',
+    blurb:`MoDOT runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-44, I-64, I-270, MO-141 and I-70.` },
+  { slug:'springfield-mo', name:'Springfield, MO', state:'MO', dot:'MoDOT', lat:37.21, lon:-93.29, r:30, anyRoute:true, video:true,
+    title:'Springfield, MO Traffic Cameras | MileCheck', h1:'Springfield, MO traffic cameras', cityPage:true,
+    desc:'Springfield, MO traffic cameras on one map. MoDOT live video cameras on US-65 and other main roads.',
+    sub:'See Springfield, MO traffic before you leave. MoDOT live video cameras around Springfield, MO on one map. Tap any camera to play it.',
+    blurb:`MoDOT runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch US-65, I-44, US-160 and US-60.` },
+  { slug:'baltimore', name:'Baltimore', state:'MD', dot:'MDOT SHA', lat:39.29, lon:-76.61, r:35, anyRoute:true, video:true,
+    title:'Baltimore Traffic Cameras | MileCheck', h1:'Baltimore traffic cameras', cityPage:true,
+    desc:'Baltimore traffic cameras on one map. MDOT SHA live video cameras on I-95 and other main roads.',
+    sub:'See Baltimore traffic before you leave. MDOT SHA live video cameras around Baltimore on one map. Tap any camera to play it.',
+    blurb:`MDOT SHA runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-95, I-695, I-895, US-1 and I-83.` },
+  { slug:'annapolis', name:'Annapolis', state:'MD', dot:'MDOT SHA', lat:38.98, lon:-76.49, r:20, anyRoute:true, video:true,
+    title:'Annapolis Traffic Cameras | MileCheck', h1:'Annapolis traffic cameras', cityPage:true,
+    desc:'Annapolis traffic cameras on one map. MDOT SHA live video cameras on US-50 and other main roads.',
+    sub:'See Annapolis traffic before you leave. MDOT SHA live video cameras around Annapolis on one map. Tap any camera to play it.',
+    blurb:`MDOT SHA runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch US-50, US-301, I-97 and MD-100.` },
+  { slug:'wilmington-de', name:'Wilmington, DE', state:'DE', dot:'DelDOT', lat:39.74, lon:-75.55, r:25, anyRoute:true, video:true,
+    title:'Wilmington, DE Traffic Cameras | MileCheck', h1:'Wilmington, DE traffic cameras', cityPage:true,
+    desc:'Wilmington, DE traffic cameras on one map. DelDOT live video cameras on I-95 and other main roads.',
+    sub:'See Wilmington, DE traffic before you leave. DelDOT live video cameras around Wilmington, DE on one map. Tap any camera to play it.',
+    blurb:`DelDOT runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-95, US-13, DE-2, DE-1 and DE-273.` },
+  { slug:'dover', name:'Dover, DE', state:'DE', dot:'DelDOT', lat:39.16, lon:-75.52, r:25, anyRoute:true, video:true,
+    title:'Dover, DE Traffic Cameras | MileCheck', h1:'Dover, DE traffic cameras', cityPage:true,
+    desc:'Dover, DE traffic cameras on one map. DelDOT live video cameras on US-13 and other main roads.',
+    sub:'See Dover, DE traffic before you leave. DelDOT live video cameras around Dover, DE on one map. Tap any camera to play it.',
+    blurb:`DelDOT runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch US-13, DE-1 and DE-8.` },
+  { slug:'charleston-wv', name:'Charleston, WV', state:'WV', dot:'WV511', lat:38.35, lon:-81.63, r:30, anyRoute:true, video:true,
+    title:'Charleston, WV Traffic Cameras | MileCheck', h1:'Charleston, WV traffic cameras', cityPage:true,
+    desc:'Charleston, WV traffic cameras on one map. WV511 live video cameras on I-64 and other main roads.',
+    sub:'See Charleston, WV traffic before you leave. WV511 live video cameras around Charleston, WV on one map. Tap any camera to play it.',
+    blurb:`WV511 runs these cameras. They are live video streams, a few seconds behind the road.`,
+    freeways:`Watch I-64, I-77, US-119 and US-60.` },
 ];
 
 // California (2026-10-02): Caltrans postmiles restart at every county line, so the
@@ -879,6 +965,13 @@ function faq(c){
 function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faq(c).map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
 function crumbJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'MileCheck','item':'https://milecheckapp.com/'},{'@type':'ListItem','position':2,'name':'Cameras','item':'https://milecheckapp.com/cameras/'},{'@type':'ListItem','position':3,'name':c.name+' Cameras','item':'https://milecheckapp.com/cameras/'+c.slug+'/'}]}); }
 
+// Video (HLS) cameras: the same player the state pages use (copied from the built Tennessee page at generation time).
+const STREAM_RUNTIME=(()=>{try{const t=fs.readFileSync(path.join('cameras','tennessee','index.html'),'utf8');const a=t.indexOf('var hlsInst=null');const m=t.indexOf('function streamOffline');const b=t.indexOf('\n',m);return a>0&&m>a?t.slice(a,b+1):'';}catch(e){return '';}})();
+function videoRuntime(c){
+  if(!STREAM_RUNTIME)throw new Error('stream runtime not found in cameras/tennessee/index.html');
+  const lbl=CANADA.has(c.state)?'KM':'MP';
+  return `const _imgCard=camCard;camCard=function(c){if(!c.stream)return _imgCard(c);return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · ${lbl} '+Math.round(c.mp):'')+' · live video from '+(c.dot||DOT)+'</div><video class="cc-img" id="ccVid" controls muted playsinline autoplay preload="none" aria-label="Live video: '+esc(c.title)+'"></video><div class="cc-meta">A live stream, a few seconds behind the road. Tap play if it does not start.</div>';};\n`+STREAM_RUNTIME;
+}
 function page(c){
   const sp = SPON.slot({ kind: 'cameras', slug: c.slug, state: c.state, name: c.name });
   const faqHtml=faq(c).map(([q,a])=>`    <details><summary>${q}</summary><p>${a}</p></details>`).join('\n');
@@ -1071,17 +1164,19 @@ const camLayer=L.layerGroup().addTo(map);
 let CAMS=[];
 function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 const cardEl=document.getElementById('coCard');
-function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+${c.video ? `function showCard(html){if(window.stopStream)stopStream();cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';if(window.stopStream)stopStream();};}` : `function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}`}
 ${c.state === 'CA' ? `// CA postmiles are county-relative, so the label is the app's: "SR-99 · PM 21.1 (Kern)" (src/utils/cameraLabel.ts, 2026-10-02).
 function fmtMile(m){var r=Math.round(m*10)/10;return r%1===0?String(r):r.toFixed(1);}
 function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · PM '+fmtMile(c.mp)+(c.county?' ('+esc(c.county)+')':''):'')+' · '+DOT+'</div>` : `function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · ${c.state === 'BC' ? 'KM' : 'MP'} '+Math.round(c.mp):'')+' · '+DOT+'</div>`}<a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
-function thin(items,cellPx){const z=map.getZoom();if(z>=12||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
-function draw(){camLayer.clearLayers();const b=map.getBounds();thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:FERRY_RE.test(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in ${c.name}'):'No cameras loaded — try again shortly.';}
+${c.video ? videoRuntime(c) : ''}function thin(items,cellPx){const z=map.getZoom();if(z>=12||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
+function draw(){camLayer.clearLayers();const b=map.getBounds();thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:FERRY_RE.test(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>{showCard(camCard(c));${c.video ? 'if(c.stream)playStream(c.stream);' : ''}}).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in ${c.name}'):'No cameras loaded — try again shortly.';}
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
-fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
+${c.extra ? `Promise.all([fetchJSON(WORKER+'/cameras?state='+CODE,4),fetchJSON(WORKER+'/cameras?state=${c.extra}',4)]).then(([a,b])=>{
+  // Two feeds (a metro that spans a state line). Each camera keeps its own agency name.
+  const d=(a||b)?{cameras:((a&&a.cameras)||[]).map(x=>Object.assign({},x,{_dot:DOT})).concat(((b&&b.cameras)||[]).map(x=>Object.assign({},x,{_dot:${JSON.stringify(c.extraDot||'')}})))}:null;` : `fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{`}
   if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
-  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&(${c.anyRoute ? 'true' : `(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||''))`})&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,${c.state === 'CA' ? "county:(c.county||'').trim()," : ''}img:c.imageUrl}));
+  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&${c.video ? '(c.imageUrl||c.streamUrl)' : 'c.imageUrl'}&&(${c.anyRoute ? 'true' : `(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||''))`})&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,${c.state === 'CA' ? "county:(c.county||'').trim()," : ''}${c.video ? "img:c.imageUrl||'',stream:c.imageUrl?'':(c.streamUrl||'')," : 'img:c.imageUrl,'}${c.extra ? 'dot:c._dot||DOT,' : ''}}));
   document.getElementById('statCams').textContent=CAMS.length;
   draw();
 });
