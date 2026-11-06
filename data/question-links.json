@@ -1,0 +1,293 @@
+{
+  "_readme": "Question pages built 2026-11-05 from the 100-questions list. Read by scripts/add-question-links.mjs, which puts a 'More questions' line on each existing page below. pages = the new question pages (slug: title). links = existing page -> slugs to link. patterns = same as links, but the key is a path with one * (e.g. passes/*/index.html) and applies to every matching page; an exact entry in links wins over a pattern.",
+  "pages": {
+    "how-do-i-tell-911-where-i-am-on-the-highway": "How do I tell 911 where I am on the highway?",
+    "what-exit-am-i-near": "What exit am I near?",
+    "does-carplay-show-what-mile-marker-im-at": "Does CarPlay show what mile marker I'm at?",
+    "do-mile-markers-start-at-the-state-line": "Do mile markers start at the state line?",
+    "why-do-mile-markers-go-up-in-one-direction": "Why do mile markers go up in one direction and down in the other?",
+    "what-are-the-small-green-signs-every-tenth-of-a-mile": "What do the small green signs every tenth of a mile mean?",
+    "how-do-i-find-a-mile-marker-on-a-map": "How do I find a mile marker on a map?",
+    "how-far-apart-are-mile-markers": "How far apart are mile markers?",
+    "why-is-the-highway-closed": "Why is the highway closed?",
+    "is-there-one-app-with-511-alerts-for-every-state": "Is there one app with 511 alerts for every state?",
+    "are-there-high-wind-warnings-for-trucks-on-my-route": "Are there high wind warnings for trucks on my route?",
+    "how-do-truckers-find-their-mile-marker-for-a-breakdown-call": "How do truckers find their mile marker for a breakdown call?",
+    "what-app-do-truck-drivers-use-for-road-closures": "What app do truck drivers use for road closures?",
+    "can-my-dispatch-software-show-road-closures": "Can my dispatch software show road closures?",
+    "how-does-an-ambulance-get-to-the-other-side-of-a-divided-highway": "How does an ambulance get to the other side of a divided highway?",
+    "is-there-a-mile-marker-layer-for-cad-software": "Is there a mile marker layer for CAD software?",
+    "how-do-fire-crews-find-a-crash-by-mile-marker": "How do fire crews find a crash by mile marker?",
+    "where-can-i-get-mile-marker-data": "Where can I get mile marker data?",
+    "how-do-i-add-mile-markers-to-google-maps-in-my-app": "How do I add mile markers to Google Maps in my app?",
+    "where-can-i-download-milepost-gis-data": "Where can I download milepost GIS data?",
+    "does-my-state-dot-publish-mile-marker-data": "Does my state DOT publish mile marker data?",
+    "surveyed-vs-calculated-mileposts": "What's the difference between a surveyed milepost and a calculated one?",
+    "what-is-wzdx-work-zone-data": "What is WZDx work zone data?",
+    "how-do-i-get-a-feed-of-road-closures-for-my-website": "How do I get a feed of road closures for my website?",
+    "is-there-a-drawbridge-status-api": "Is there a drawbridge status API?",
+    "how-to-convert-gps-coordinates-to-a-mile-marker": "How do I convert GPS coordinates to a highway mile marker?",
+    "is-there-canadian-kilometre-marker-data": "Is there Canadian kilometre marker data?",
+    "how-do-boats-ask-a-drawbridge-to-open": "How do boats ask a drawbridge to open?",
+    "is-mount-st-helens-active-right-now": "Is Mount St. Helens active right now?",
+    "what-does-a-flashing-yellow-arrow-mean": "What does a flashing yellow arrow mean?",
+    "what-should-i-do-if-i-break-down-on-the-interstate": "What should I do if I break down on the interstate?"
+  },
+  "links": {
+    "what-mile-marker-am-i-at/index.html": [
+      "how-do-i-tell-911-where-i-am-on-the-highway",
+      "what-exit-am-i-near",
+      "does-carplay-show-what-mile-marker-im-at",
+      "do-mile-markers-start-at-the-state-line",
+      "why-do-mile-markers-go-up-in-one-direction",
+      "what-are-the-small-green-signs-every-tenth-of-a-mile",
+      "how-do-i-find-a-mile-marker-on-a-map",
+      "how-far-apart-are-mile-markers"
+    ],
+    "report-location/index.html": [
+      "how-do-i-tell-911-where-i-am-on-the-highway",
+      "what-should-i-do-if-i-break-down-on-the-interstate",
+      "how-do-truckers-find-their-mile-marker-for-a-breakdown-call",
+      "what-exit-am-i-near",
+      "how-does-an-ambulance-get-to-the-other-side-of-a-divided-highway",
+      "how-do-fire-crews-find-a-crash-by-mile-marker"
+    ],
+    "mile-markers-vs-exit-numbers/index.html": [
+      "what-exit-am-i-near",
+      "do-mile-markers-start-at-the-state-line",
+      "why-do-mile-markers-go-up-in-one-direction",
+      "how-far-apart-are-mile-markers",
+      "what-are-the-small-green-signs-every-tenth-of-a-mile"
+    ],
+    "can-google-maps-show-mile-markers/index.html": [
+      "how-do-i-find-a-mile-marker-on-a-map",
+      "how-do-i-add-mile-markers-to-google-maps-in-my-app",
+      "does-carplay-show-what-mile-marker-im-at"
+    ],
+    "does-apple-maps-show-mile-markers/index.html": [
+      "how-do-i-find-a-mile-marker-on-a-map",
+      "does-carplay-show-what-mile-marker-im-at",
+      "how-far-apart-are-mile-markers"
+    ],
+    "carplay/index.html": [
+      "does-carplay-show-what-mile-marker-im-at",
+      "how-do-i-tell-911-where-i-am-on-the-highway",
+      "is-there-one-app-with-511-alerts-for-every-state"
+    ],
+    "contact-help-no-cell-signal/index.html": [
+      "how-do-i-tell-911-where-i-am-on-the-highway",
+      "what-should-i-do-if-i-break-down-on-the-interstate",
+      "how-do-truckers-find-their-mile-marker-for-a-breakdown-call"
+    ],
+    "move-over-laws/index.html": [
+      "what-should-i-do-if-i-break-down-on-the-interstate",
+      "how-does-an-ambulance-get-to-the-other-side-of-a-divided-highway",
+      "how-do-fire-crews-find-a-crash-by-mile-marker"
+    ],
+    "how-long-does-it-take-an-ambulance-to-reach-a-crash/index.html": [
+      "how-does-an-ambulance-get-to-the-other-side-of-a-divided-highway",
+      "how-do-fire-crews-find-a-crash-by-mile-marker",
+      "how-do-i-tell-911-where-i-am-on-the-highway"
+    ],
+    "mile-marker-lookup-for-dispatch/index.html": [
+      "is-there-a-mile-marker-layer-for-cad-software",
+      "how-do-fire-crews-find-a-crash-by-mile-marker",
+      "how-does-an-ambulance-get-to-the-other-side-of-a-divided-highway",
+      "how-to-convert-gps-coordinates-to-a-mile-marker"
+    ],
+    "milepost-dataset/index.html": [
+      "where-can-i-get-mile-marker-data",
+      "where-can-i-download-milepost-gis-data",
+      "does-my-state-dot-publish-mile-marker-data",
+      "surveyed-vs-calculated-mileposts",
+      "is-there-a-mile-marker-layer-for-cad-software",
+      "is-there-canadian-kilometre-marker-data",
+      "how-do-i-add-mile-markers-to-google-maps-in-my-app",
+      "how-to-convert-gps-coordinates-to-a-mile-marker"
+    ],
+    "mile-marker-api/index.html": [
+      "how-to-convert-gps-coordinates-to-a-mile-marker",
+      "how-do-i-add-mile-markers-to-google-maps-in-my-app",
+      "is-there-a-mile-marker-layer-for-cad-software",
+      "is-there-canadian-kilometre-marker-data",
+      "where-can-i-get-mile-marker-data"
+    ],
+    "api/index.html": [
+      "what-is-wzdx-work-zone-data",
+      "how-do-i-get-a-feed-of-road-closures-for-my-website",
+      "is-there-a-drawbridge-status-api",
+      "can-my-dispatch-software-show-road-closures",
+      "how-to-convert-gps-coordinates-to-a-mile-marker"
+    ],
+    "api/data-accuracy/index.html": [
+      "surveyed-vs-calculated-mileposts",
+      "does-my-state-dot-publish-mile-marker-data",
+      "where-can-i-download-milepost-gis-data"
+    ],
+    "fleets/index.html": [
+      "can-my-dispatch-software-show-road-closures",
+      "how-do-truckers-find-their-mile-marker-for-a-breakdown-call",
+      "are-there-high-wind-warnings-for-trucks-on-my-route",
+      "what-app-do-truck-drivers-use-for-road-closures",
+      "how-do-i-get-a-feed-of-road-closures-for-my-website"
+    ],
+    "partners/index.html": [
+      "can-my-dispatch-software-show-road-closures",
+      "is-there-a-mile-marker-layer-for-cad-software",
+      "where-can-i-get-mile-marker-data",
+      "is-there-a-drawbridge-status-api"
+    ],
+    "data-sources/index.html": [
+      "does-my-state-dot-publish-mile-marker-data",
+      "what-is-wzdx-work-zone-data",
+      "where-can-i-download-milepost-gis-data",
+      "surveyed-vs-calculated-mileposts"
+    ],
+    "one-api-for-every-states-511-road-alerts/index.html": [
+      "is-there-one-app-with-511-alerts-for-every-state",
+      "what-is-wzdx-work-zone-data",
+      "how-do-i-get-a-feed-of-road-closures-for-my-website",
+      "can-my-dispatch-software-show-road-closures"
+    ],
+    "what-is-511/index.html": [
+      "is-there-one-app-with-511-alerts-for-every-state",
+      "why-is-the-highway-closed"
+    ],
+    "closures/index.html": [
+      "why-is-the-highway-closed",
+      "is-there-one-app-with-511-alerts-for-every-state",
+      "how-do-i-get-a-feed-of-road-closures-for-my-website"
+    ],
+    "why-does-snoqualmie-pass-close/index.html": [
+      "why-is-the-highway-closed",
+      "is-there-one-app-with-511-alerts-for-every-state"
+    ],
+    "why-does-i-80-close-in-wyoming/index.html": [
+      "why-is-the-highway-closed",
+      "are-there-high-wind-warnings-for-trucks-on-my-route"
+    ],
+    "why-does-i-70-close-in-colorado/index.html": [
+      "why-is-the-highway-closed",
+      "are-there-high-wind-warnings-for-trucks-on-my-route"
+    ],
+    "does-trucker-path-show-dot-511-road-alerts/index.html": [
+      "what-app-do-truck-drivers-use-for-road-closures",
+      "is-there-one-app-with-511-alerts-for-every-state",
+      "how-do-truckers-find-their-mile-marker-for-a-breakdown-call"
+    ],
+    "does-waze-have-a-truck-mode/index.html": [
+      "what-app-do-truck-drivers-use-for-road-closures",
+      "are-there-high-wind-warnings-for-trucks-on-my-route"
+    ],
+    "highway-tips-for-new-cdl-drivers/index.html": [
+      "how-do-truckers-find-their-mile-marker-for-a-breakdown-call",
+      "are-there-high-wind-warnings-for-trucks-on-my-route",
+      "what-app-do-truck-drivers-use-for-road-closures"
+    ],
+    "seattle-drawbridges/opening-rules/index.html": [
+      "how-do-boats-ask-a-drawbridge-to-open",
+      "is-there-a-drawbridge-status-api"
+    ],
+    "seattle-drawbridges/rush-hour/index.html": [
+      "how-do-boats-ask-a-drawbridge-to-open",
+      "is-there-a-drawbridge-status-api"
+    ],
+    "seattle-drawbridges/how-long/index.html": [
+      "how-do-boats-ask-a-drawbridge-to-open",
+      "is-there-a-drawbridge-status-api"
+    ],
+    "bridges/index.html": [
+      "how-do-boats-ask-a-drawbridge-to-open",
+      "is-there-a-drawbridge-status-api"
+    ],
+    "canada/index.html": [
+      "is-there-canadian-kilometre-marker-data",
+      "how-far-apart-are-mile-markers"
+    ],
+    "what-km-marker-am-i-at/index.html": [
+      "is-there-canadian-kilometre-marker-data",
+      "how-far-apart-are-mile-markers",
+      "how-do-i-tell-911-where-i-am-on-the-highway"
+    ],
+    "highway-driving-tips-for-new-drivers/index.html": [
+      "what-does-a-flashing-yellow-arrow-mean",
+      "what-should-i-do-if-i-break-down-on-the-interstate",
+      "what-exit-am-i-near"
+    ],
+    "zipper-merge-explained/index.html": [
+      "what-does-a-flashing-yellow-arrow-mean"
+    ],
+    "highway-sign-colors/index.html": [
+      "what-does-a-flashing-yellow-arrow-mean",
+      "what-are-the-small-green-signs-every-tenth-of-a-mile"
+    ],
+    "left-exit-vs-right-exit/index.html": [
+      "what-exit-am-i-near",
+      "what-does-a-flashing-yellow-arrow-mean"
+    ],
+    "why-rainier-looks-so-big/index.html": [
+      "is-mount-st-helens-active-right-now"
+    ],
+    "october-mountain-views/index.html": [
+      "is-mount-st-helens-active-right-now"
+    ],
+    "best-binoculars-for-mountain-views/index.html": [
+      "is-mount-st-helens-active-right-now"
+    ],
+    "maps/mile-markers/index.html": [
+      "how-do-i-find-a-mile-marker-on-a-map",
+      "how-far-apart-are-mile-markers",
+      "how-to-convert-gps-coordinates-to-a-mile-marker"
+    ]
+  },
+  "patterns": {
+    "blog/mile-markers-*.html": [
+      "do-mile-markers-start-at-the-state-line",
+      "why-do-mile-markers-go-up-in-one-direction",
+      "how-far-apart-are-mile-markers",
+      "what-are-the-small-green-signs-every-tenth-of-a-mile",
+      "how-do-i-tell-911-where-i-am-on-the-highway",
+      "does-my-state-dot-publish-mile-marker-data"
+    ],
+    "blog/km-markers-*.html": [
+      "is-there-canadian-kilometre-marker-data",
+      "how-far-apart-are-mile-markers",
+      "how-do-i-tell-911-where-i-am-on-the-highway"
+    ],
+    "passes/*/index.html": [
+      "why-is-the-highway-closed",
+      "are-there-high-wind-warnings-for-trucks-on-my-route",
+      "what-should-i-do-if-i-break-down-on-the-interstate",
+      "is-there-one-app-with-511-alerts-for-every-state"
+    ],
+    "corridors/*/index.html": [
+      "why-is-the-highway-closed",
+      "how-do-i-tell-911-where-i-am-on-the-highway",
+      "what-exit-am-i-near",
+      "what-should-i-do-if-i-break-down-on-the-interstate",
+      "how-do-truckers-find-their-mile-marker-for-a-breakdown-call"
+    ],
+    "chain-laws/*/index.html": [
+      "why-is-the-highway-closed",
+      "is-there-one-app-with-511-alerts-for-every-state",
+      "are-there-high-wind-warnings-for-trucks-on-my-route"
+    ],
+    "road-conditions/*/index.html": [
+      "why-is-the-highway-closed",
+      "is-there-one-app-with-511-alerts-for-every-state",
+      "how-do-i-tell-911-where-i-am-on-the-highway"
+    ],
+    "seattle-drawbridges/*/index.html": [
+      "how-do-boats-ask-a-drawbridge-to-open",
+      "is-there-a-drawbridge-status-api"
+    ],
+    "bridges/*/index.html": [
+      "how-do-boats-ask-a-drawbridge-to-open",
+      "is-there-a-drawbridge-status-api"
+    ],
+    "seasonal/*/index.html": [
+      "why-is-the-highway-closed",
+      "is-there-one-app-with-511-alerts-for-every-state"
+    ]
+  }
+}
