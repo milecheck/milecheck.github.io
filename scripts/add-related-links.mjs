@@ -93,7 +93,7 @@ for (const n of nodes) {
 
 // ---- relations
 // Interstate that runs through each camera city. A city with none of our corridor pages (Pittsburgh) gets no corridor link.
-const CITY_CORRIDOR = { atlanta:'i-75', birmingham:'i-65', buffalo:'i-90', cincinnati:'i-75', cleveland:'i-90', columbus:'i-70', detroit:'i-75', 'las-vegas':'i-15', 'los-angeles':'i-5', miami:'i-95', milwaukee:'i-94', 'new-orleans':'i-10', 'new-york-city':'i-95', orlando:'i-4', philadelphia:'i-95', phoenix:'i-10', portland:'i-5', sacramento:'i-80', 'salt-lake-city':'i-15', 'san-diego':'i-5', 'san-francisco':'i-80', seattle:'i-5', tampa:'i-75' };
+const CITY_CORRIDOR = { atlanta:'i-75', birmingham:'i-65', buffalo:'i-90', cincinnati:'i-75', cleveland:'i-90', columbus:'i-70', detroit:'i-75', 'las-vegas':'i-15', 'los-angeles':'i-5', miami:'i-95', milwaukee:'i-94', 'new-orleans':'i-10', 'new-york-city':'i-95', orlando:'i-4', philadelphia:'i-95', phoenix:'i-10', portland:'i-5', sacramento:'i-80', 'salt-lake-city':'i-15', 'san-diego':'i-5', 'san-francisco':'i-80', seattle:'i-5', tampa:'i-75', austin:'i-35' };
 const by = (type, pred = () => true) => nodes.filter(n => n.type === type && pred(n));
 const first = (type, s) => by(type, n => n.states.includes(s));
 function related(n) {

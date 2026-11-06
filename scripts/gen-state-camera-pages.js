@@ -226,6 +226,8 @@ const CITIES_BY_STATE = {
   NY: [{slug:'new-york-city', name:'New York City'}, {slug:'buffalo', name:'Buffalo'}],
   LA: [{slug:'new-orleans', name:'New Orleans'}],
   AL: [{slug:'birmingham', name:'Birmingham'}],
+  TX: [{slug:'austin', name:'Austin'}],
+  BC: [{slug:'vancouver', name:'Vancouver'}, {slug:'surrey', name:'Surrey'}],
 };
 
 // Canada pages (2026-09-25): a province entry sets country:'CA'. Kilometre

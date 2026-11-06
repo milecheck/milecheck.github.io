@@ -9,8 +9,8 @@ const ES_PAGES = new Set(['florida', 'miami', 'orlando', 'tampa']);
 const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versions (2026-09-25) // one sponsor slot above the map (2026-09-15)
 
 // state slug map (for cross-linking to the state camera page)
-const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont'};
-const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Montana',AZ:'Arizona',NV:'Nevada',OH:'Ohio',WI:'Wisconsin',NY:'New York',PA:'Pennsylvania',GA:'Georgia',LA:'Louisiana',SC:'South Carolina',FL:'Florida',MI:'Michigan',AL:'Alabama',SD:'South Dakota',AK:'Alaska',ME:'Maine',NH:'New Hampshire',VT:'Vermont'};
+const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont',TX:'texas',BC:'british-columbia'};
+const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Montana',AZ:'Arizona',NV:'Nevada',OH:'Ohio',WI:'Wisconsin',NY:'New York',PA:'Pennsylvania',GA:'Georgia',LA:'Louisiana',SC:'South Carolina',FL:'Florida',MI:'Michigan',AL:'Alabama',SD:'South Dakota',AK:'Alaska',ME:'Maine',NH:'New Hampshire',VT:'Vermont',TX:'Texas',BC:'British Columbia'};
 
 const CITIES = [
   { slug:'seattle', name:'Seattle', state:'WA', dot:'WSDOT', lat:47.606, lon:-122.332, r:45,
@@ -97,16 +97,50 @@ const CITIES = [
   { slug:'buffalo', name:'Buffalo', state:'NY', dot:'NYSDOT', lat:42.89, lon:-78.88, r:40,
     blurb:`Buffalo's 511NY cameras cover the metro freeways, where lake-effect snow off Lake Erie is the winter story.`,
     freeways:`Watch <a href="../../corridors/i-90/">I-90</a> (the Thruway), I-190 to the Peace Bridge, I-290, and the Kensington (NY-33).` },
+  // City (municipal) camera pages (2026-11-05). The state or provincial feed draws the highway cameras like every
+  // other metro; the city's own street cameras are added by scripts/add-city-cameras.mjs (CITY_LAYERS there).
+  { slug:'austin', name:'Austin', state:'TX', dot:'TxDOT', lat:30.27, lon:-97.74, r:40,
+    title:'Austin Traffic Cameras | MileCheck', h1:'Austin traffic cameras', cityPage:true,
+    desc:'Austin traffic cameras on one map. City of Austin street cameras at intersections plus TxDOT highway cameras on I-35, MoPac, US-183 and SH-71.',
+    sub:'See Austin traffic before you leave. City of Austin intersection cameras and TxDOT highway cameras on one map. Tap any camera for the latest image.',
+    blurb:`Austin Transportation and Public Works runs cameras at intersections across the city. TxDOT covers the highways.`,
+    freeways:`Watch I-35 through downtown, Loop 1 (MoPac), US-183, US-290, SH-71 and the SH-130 and SH-45 toll roads.` },
+  { slug:'surrey', name:'Surrey', state:'BC', dot:'DriveBC', lat:49.15, lon:-122.82, r:18,
+    title:'Surrey Traffic Cameras | MileCheck', h1:'Surrey traffic cameras', cityPage:true,
+    desc:'Surrey traffic cameras on one map. City of Surrey intersection cameras plus DriveBC highway cameras on Highway 1, 99, 10, 15 and 17.',
+    sub:'See Surrey traffic before you leave. City of Surrey intersection cameras and DriveBC highway cameras on one map. Tap any camera for the latest image.',
+    blurb:`The City of Surrey publishes its intersection cameras as open data. DriveBC covers the provincial highways through the city.`,
+    freeways:`Watch Highway 1 and the Port Mann Bridge, Highway 99 to the Peace Arch crossing, Highway 15 to Pacific Highway, and Highways 10 and 17.` },
+  { slug:'vancouver', name:'Vancouver', state:'BC', dot:'DriveBC', lat:49.26, lon:-123.10, r:22,
+    title:'Vancouver Traffic Cameras | MileCheck', h1:'Vancouver traffic cameras', cityPage:true,
+    desc:'Vancouver traffic cameras on one map. DriveBC highway camera images, plus City of Vancouver camera locations from the City\'s open data, each with a link to its view.',
+    sub:'See Vancouver traffic before you leave. DriveBC highway camera images and City of Vancouver camera locations from the City\'s open data on one map. City cameras open on the City of Vancouver site.',
+    blurb:`The City of Vancouver lists its traffic cameras as open data. Its images stay on the City's own site, so each city camera here links to that view. DriveBC covers the highways and bridges.`,
+    freeways:`Watch Highway 1 and the Second Narrows (Ironworkers) Bridge, Highway 99 through the Massey crossing and the Lions Gate Bridge, and Highway 91.` },
 ];
 
 // California (2026-10-02): Caltrans postmiles restart at every county line, so the
 // number is a "postmile", not a mile marker, and the app labels it "PM 47.2 (Kern)"
 // (src/utils/cameraLabel.ts). The four California metros say the same thing; every
 // other city keeps the strings it always had.
-const marker = (c) => c.state === 'CA' ? 'postmile' : 'mile marker';
+const marker = (c) => c.state === 'CA' ? 'postmile' : c.state === 'BC' ? 'kilometre marker' : 'mile marker';
 
 function faq(c){
   const ss=STATE_SLUG[c.state], sn=STATE_NAME[c.state];
+  // City pages (2026-11-05, after the ChatGPT copy review): no "free" question, no claim that the app follows the
+  // nearest camera, markers only "where the agency provides one", and BC is a province.
+  if (c.cityPage) {
+    const whole = c.state === 'BC' ? 'For cameras across the province' : 'For cameras across the state';
+    return [
+      [`Where can I see ${c.name} traffic cameras?`,
+        `On the <a href="#comap">map above</a>. Green dots are ${c.dot} highway cameras, with the route and ${marker(c)} where the agency provides one. Orange dots are City of ${c.name} cameras. ${whole}, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
+      [`Do I need an account to view the cameras?`,
+        `No. You can view the cameras on this website without an account. The <a href="/get/" target="_blank" rel="noopener">MileCheck app</a> is a paid subscription with a free trial. It shows highway cameras and your ${marker(c)} as you drive. City street cameras are on this website only.`],
+      [`Which highways have cameras in ${c.name}?`, c.freeways],
+      [`How do I check ${c.name} traffic before I leave?`,
+        `Open the <a href="#comap">map above</a> and tap a camera near your route to see its latest image. Images refresh every few minutes, so check the time on the picture. The app updates your ${marker(c)} as you drive.`],
+    ];
+  }
   return [
     [`Where can I watch live ${c.name} traffic cameras?`,
       `Right here — the <a href="#comap">map above</a> shows live ${c.dot} cameras across the ${c.name} area, each tagged with its route and ${marker(c)}. For the whole state, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
@@ -236,7 +270,7 @@ ${c.crossLinkHtml || ''}
   </div>
 
   <section class="co-guide">
-    <h2>Live traffic cameras across ${c.name}</h2>
+    <h2>${c.cityPage ? 'Traffic cameras' : 'Live traffic cameras'} across ${c.name}</h2>
     <p>${c.blurb}</p>
     <p>${c.freeways}</p>
     <p>Every camera on this map comes straight from ${c.dot} and is tagged with the route and ${marker(c)} where the agency provides it.${c.state === 'CA' ? ' Caltrans postmiles restart at each county line, so every label carries the county.' : ''} Tap a camera dot to open its latest image; tap the image to see it full-size. For cameras beyond the metro, see <a href="../${ss}/">${sn} traffic cameras</a> or <a href="../">every highway camera</a>.</p>
@@ -248,8 +282,8 @@ ${faqHtml}
   </section>
 
   <div class="co-cta">
-    <h2>Check the nearest ${c.name} camera before you go</h2>
-    <p>In the MileCheck app, the nearest camera and your exact ${marker(c)} follow you hands-free on ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.</p>
+    <h2>${c.cityPage ? `MileCheck for driving in and around ${c.name}` : `Check the nearest ${c.name} camera before you go`}</h2>
+    <p>${c.cityPage ? `The MileCheck app shows your ${marker(c)} as you drive, highway cameras, and live road alerts on your route. It runs on CarPlay and Android Auto. City street cameras are on this website only.` : `In the MileCheck app, the nearest camera and your exact ${marker(c)} follow you hands-free on ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.`}</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
@@ -315,7 +349,7 @@ const cardEl=document.getElementById('coCard');
 function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
 ${c.state === 'CA' ? `// CA postmiles are county-relative, so the label is the app's: "SR-99 · PM 21.1 (Kern)" (src/utils/cameraLabel.ts, 2026-10-02).
 function fmtMile(m){var r=Math.round(m*10)/10;return r%1===0?String(r):r.toFixed(1);}
-function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · PM '+fmtMile(c.mp)+(c.county?' ('+esc(c.county)+')':''):'')+' · '+DOT+'</div>` : `function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div>`}<a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
+function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · PM '+fmtMile(c.mp)+(c.county?' ('+esc(c.county)+')':''):'')+' · '+DOT+'</div>` : `function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · ${c.state === 'BC' ? 'KM' : 'MP'} '+Math.round(c.mp):'')+' · '+DOT+'</div>`}<a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>';}
 function thin(items,cellPx){const z=map.getZoom();if(z>=12||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
 function draw(){camLayer.clearLayers();const b=map.getBounds();thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:FERRY_RE.test(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in ${c.name}'):'No cameras loaded — try again shortly.';}
 let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
@@ -332,8 +366,12 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
 </html>`;
 }
 
+// ONLY=austin,surrey node scripts/gen-city-camera-pages.js writes just those pages. The older metro pages have been
+// finished by later scripts, so regenerating them all undoes that work; generate only what you changed.
+const ONLY=(process.env.ONLY||'').split(',').map(x=>x.trim()).filter(Boolean);
 let n=0;
 for(const c of CITIES){
+  if(ONLY.length&&!ONLY.includes(c.slug))continue;
   const dir=path.join('cameras',c.slug);
   fs.mkdirSync(dir,{recursive:true});
   fs.writeFileSync(path.join(dir,'index.html'),page(c));

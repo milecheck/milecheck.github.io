@@ -70,5 +70,9 @@ export const OTHER = [
   ['Drawbridge opening rules','US Government, 33 CFR Part 117','https://www.ecfr.gov/current/title-33/chapter-I/subchapter-J/part-117','The federal regulations that set when a drawbridge must open.'],
   ['Ferries','Washington State Ferries','https://wsdot.wa.gov/travel/washington-state-ferries','Ferry schedules and status.'],
   ['Airport and park cameras','FAA Weather Cameras and National Park Service','https://weathercams.faa.gov','Aviation weather cameras in remote areas, and park webcams.'],
+  ['City cameras (Austin)','City of Austin, Austin Transportation and Public Works','https://data.austintexas.gov/Transportation-and-Mobility/Traffic-Cameras/b4k4-adkb','Intersection camera images on the website. Public domain open data.'],
+  ['City cameras (Seattle)','Seattle DOT','https://web.seattle.gov/Travelers/','City street camera images on the website.'],
+  ['City cameras (Surrey)','City of Surrey','https://data.surrey.ca/','Intersection camera images on the website. Contains information licensed under the Open Government License - City of Surrey.'],
+  ['City cameras (Vancouver)','City of Vancouver','https://opendata.vancouver.ca/explore/dataset/web-cam-url-links/','Camera locations on the website, each linking to the City\'s own view. Contains information licensed under the Open Government Licence – Vancouver.'],
   ['Mile marker positions (fallback)','Federal Highway Administration, HPMS','https://www.fhwa.dot.gov/policyinformation/hpms.cfm','Used where a state publishes no mile marker points of its own.'],
 ];
