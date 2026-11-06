@@ -3,11 +3,11 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 const PAGES = ['partners/index.html', 'sponsor/index.html', 'api/index.html'];
 const BLOCK = `<!-- values:start -->
-<section class="mc-values" style="max-width:760px;margin:34px auto 30px;padding:24px 20px 6px;border-top:1px solid #e3e0d6">
+<section class="mc-values" style="max-width:1120px;margin:34px auto 30px;padding:24px 32px 6px;border-top:1px solid #e3e0d6;box-sizing:border-box">
   <h2 style="font-size:24px;margin:0 0 8px">Our mission</h2>
-  <p style="font-size:16px;line-height:1.7;margin:0 0 18px">Become the trusted source for road information across North America, from today&rsquo;s closures to next season&rsquo;s roadwork.</p>
+  <p style="font-size:16px;line-height:1.7;margin:0 0 18px;max-width:740px">Become the trusted source for road information across North America, from today&rsquo;s closures to next season&rsquo;s roadwork.</p>
   <h2 style="font-size:24px;margin:0 0 8px">What we do</h2>
-  <p style="font-size:16px;line-height:1.7;margin:0 0 18px">We put every state&rsquo;s Department of Transportation data in one place, on your phone, in your car and in your browser.</p>
+  <p style="font-size:16px;line-height:1.7;margin:0 0 18px;max-width:740px">We put every state&rsquo;s Department of Transportation data in one place, on your phone, in your car and in your browser.</p>
   <h2 style="font-size:24px;margin:0 0 10px">Our values</h2>
   <ul style="margin:0 0 14px;padding-left:20px;font-size:16px;line-height:1.7">
     <li style="margin-bottom:8px"><strong>No ads in the app.</strong> Our website is free to use, so it has a clearly marked sponsor slot to help pay for it, without pop-ups.</li>
