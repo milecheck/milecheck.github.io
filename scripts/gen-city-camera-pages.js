@@ -956,10 +956,10 @@ function faq(c){
     [`Where can I watch live ${c.name} traffic cameras?`,
       `Right here — the <a href="#comap">map above</a> shows live ${c.dot} cameras across the ${c.name} area, each tagged with its route and ${marker(c)}. For the whole state, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
     [`Are ${c.name} traffic cameras free?`,
-      `Yes. ${c.dot} publishes its traffic cameras publicly, and MileCheck puts the ${c.name} ones on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
+      `Yes. ${c.dot} publishes its traffic cameras publicly, and MileCheck puts the ${c.name} ones on one map, with no account needed. The <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> also has a Cameras page that lists the cameras nearest you.`],
     [`Which freeways have cameras in ${c.name}?`, c.freeways],
     [`How do I check ${c.name} traffic before I leave?`,
-      `Open the <a href="#comap">live map above</a> and tap any camera near your route to see the road right now. Conditions change fast in a busy metro, so check just before you go — and in the app, the nearest camera and your ${marker(c)} update automatically as you drive.`],
+      `Open the <a href="#comap">live map above</a> and tap any camera near your route to see the road right now. Conditions change fast in a busy metro, so check just before you go — and in the app, the Cameras page lists the nearest ones and your ${marker(c)} updates as you drive.`],
   ];
 }
 function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faq(c).map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
@@ -1101,7 +1101,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>${c.cityPage ? `MileCheck for driving in and around ${c.name}` : `Check the nearest ${c.name} camera before you go`}</h2>
-    <p>${c.cityPage ? `The MileCheck app shows your ${marker(c)} as you drive, highway cameras, and live road alerts on your route. It runs on CarPlay and Android Auto.${c.cityLayer ? ' City street cameras are on this website only.' : ''}` : `In the MileCheck app, the nearest camera and your exact ${marker(c)} follow you hands-free on ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.`}</p>
+    <p>${c.cityPage ? `The MileCheck app shows your ${marker(c)} as you drive, highway cameras, and live road alerts on your route. It runs on CarPlay and Android Auto.${c.cityLayer ? ' City street cameras are on this website only.' : ''}` : `In the MileCheck app, the Cameras page lists the cameras nearest you, and your exact ${marker(c)} shows as you drive on ${c.name}'s freeways, plus live state DOT feeds on your route. The ${marker(c)} works offline and runs on CarPlay and Android Auto.`}</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>

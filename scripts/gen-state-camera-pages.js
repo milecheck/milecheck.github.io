@@ -287,7 +287,7 @@ function faq(s){
     [`Where can I watch live ${s.name} traffic cameras?`,
       `Right here — the <a href="#comap">map above</a> shows live ${s.dot} highway cameras across ${s.name}, each tagged with its route and ${w.marker} so you know which stretch you're seeing. For cameras beyond ${s.name}, ${w.beyond}.`],
     [w.freeQ,
-      `Yes. ${s.dot} publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. To have the nearest camera follow you as you drive, the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> does it hands-free on CarPlay and Android Auto.`],
+      `Yes. ${s.dot} publishes its traffic cameras publicly, and MileCheck puts them on one map, with no account needed. The <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a> also has a Cameras page that lists the cameras nearest you.`],
     [`Which highways have cameras in ${s.name}?`, s.notable],
     [`How often do ${s.name} traffic cameras update?`,
       `Most ${s.dot} cameras refresh every minute or two, ${w.fromAgency}. Open the app image full-size by tapping it on the map above. Weather, snow, and traffic can all change between refreshes, so always drive to the conditions you actually see.`],
