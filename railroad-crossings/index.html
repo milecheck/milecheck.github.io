@@ -67,7 +67,7 @@
     .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
     .co-cta a{display:inline-block;padding:12px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
     .co-cta a.primary{background:#0f7a4f;color:#fff;} .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
-      </style>
+      #coStatus.pick{top:50%!important;left:50%!important;transform:translate(-50%,-50%);max-width:80%;text-align:center;font-size:17px;padding:12px 18px;box-shadow:0 4px 16px rgba(0,0,0,.18);}</style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Where are the railroad crossings on this highway?","url":"https://milecheckapp.com/railroad-crossings/","description":"Map of open, public, at-grade railroad crossings on state highways, from the FRA Grade Crossing Inventory.","@id":"https://milecheckapp.com/railroad-crossings/#webpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
 <!-- mv:start --><script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/d74ff19f-a5bf-47fa-a630-0a438f90c11a.js"></script><!-- mv:end -->
   <!-- site-nav:assets -->
@@ -354,9 +354,9 @@ function load(st){
   return LOADING[st]=fetch('/data/rail-crossings/'+st.toLowerCase()+'.json').then(r=>r.ok?r.json():null).then(d=>{DATA[st]=d?d.crossings.map(c=>(c.state=st,c)):[];draw();}).catch(()=>{DATA[st]=[];draw();});
 }
 function draw(){
-  layer.clearLayers();
+  layer.clearLayers();statusEl.classList.remove('pick');
   const z=map.getZoom();
-  if(z<DOTZOOM&&!PICKED){statusEl.textContent='Pick a state below or zoom in to see crossings.';return;}
+  if(z<DOTZOOM&&!PICKED){statusEl.classList.add('pick');statusEl.textContent='Pick a state below or zoom in to see crossings.';return;}
   const b=map.getBounds(), sts=z<DOTZOOM?[PICKED]:statesInView(b);
   if(z<MINZOOM){
     let n=0,waiting=false;
