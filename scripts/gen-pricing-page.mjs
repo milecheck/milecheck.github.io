@@ -50,7 +50,7 @@ const body = `
 <section class="api-section faq" style="max-width:820px;margin:0 auto">
   <h2>Questions</h2>
   ${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${a}</p></details>`).join('\n  ')}
-  <p class="lead" style="margin-top:12px">Building on the data? See <a href="/api/plan/">API plans and data licenses</a>.</p>
+  <p class="lead" style="margin-top:12px">Building on mile marker data? See <a href="/milepost-dataset/">the data license</a>.</p>
 </section>
 `;
 
