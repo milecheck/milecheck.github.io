@@ -9,8 +9,8 @@ const ES_PAGES = new Set(['florida', 'miami', 'orlando', 'tampa']);
 const PT_PAGES = new Set(['florida', 'orlando']); // Brazilian Portuguese versions (2026-09-25) // one sponsor slot above the map (2026-09-15)
 
 // state slug map (for cross-linking to the state camera page)
-const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont',TX:'texas',BC:'british-columbia'};
-const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Montana',AZ:'Arizona',NV:'Nevada',OH:'Ohio',WI:'Wisconsin',NY:'New York',PA:'Pennsylvania',GA:'Georgia',LA:'Louisiana',SC:'South Carolina',FL:'Florida',MI:'Michigan',AL:'Alabama',SD:'South Dakota',AK:'Alaska',ME:'Maine',NH:'New Hampshire',VT:'Vermont',TX:'Texas',BC:'British Columbia'};
+const STATE_SLUG = {WA:'washington',OR:'oregon',CA:'california',UT:'utah',MT:'montana',AZ:'arizona',NV:'nevada',OH:'ohio',WI:'wisconsin',NY:'new-york',PA:'pennsylvania',GA:'georgia',LA:'louisiana',SC:'south-carolina',FL:'florida',MI:'michigan',AL:'alabama',SD:'south-dakota',AK:'alaska',ME:'maine',NH:'new-hampshire',VT:'vermont',TX:'texas',BC:'british-columbia',IL:'illinois',CO:'colorado',MA:'massachusetts',MN:'minnesota',IN:'indiana',NC:'north-carolina',KY:'kentucky',NM:'new-mexico',ID:'idaho',NE:'nebraska',VA:'virginia',CT:'connecticut',RI:'rhode-island',IA:'iowa',KS:'kansas',ON:'ontario',AB:'alberta',HI:'hawaii',OK:'oklahoma'};
+const STATE_NAME = {WA:'Washington',OR:'Oregon',CA:'California',UT:'Utah',MT:'Montana',AZ:'Arizona',NV:'Nevada',OH:'Ohio',WI:'Wisconsin',NY:'New York',PA:'Pennsylvania',GA:'Georgia',LA:'Louisiana',SC:'South Carolina',FL:'Florida',MI:'Michigan',AL:'Alabama',SD:'South Dakota',AK:'Alaska',ME:'Maine',NH:'New Hampshire',VT:'Vermont',TX:'Texas',BC:'British Columbia',IL:'Illinois',CO:'Colorado',MA:'Massachusetts',MN:'Minnesota',IN:'Indiana',NC:'North Carolina',KY:'Kentucky',NM:'New Mexico',ID:'Idaho',NE:'Nebraska',VA:'Virginia',CT:'Connecticut',RI:'Rhode Island',IA:'Iowa',KS:'Kansas',ON:'Ontario',AB:'Alberta',HI:'Hawaii',OK:'Oklahoma'};
 
 const CITIES = [
   { slug:'seattle', name:'Seattle', state:'WA', dot:'WSDOT', lat:47.606, lon:-122.332, r:45,
@@ -100,42 +100,267 @@ const CITIES = [
   // City (municipal) camera pages (2026-11-05). The state or provincial feed draws the highway cameras like every
   // other metro; the city's own street cameras are added by scripts/add-city-cameras.mjs (CITY_LAYERS there).
   { slug:'austin', name:'Austin', state:'TX', dot:'TxDOT', lat:30.27, lon:-97.74, r:40,
-    title:'Austin Traffic Cameras | MileCheck', h1:'Austin traffic cameras', cityPage:true,
+    title:'Austin Traffic Cameras | MileCheck', h1:'Austin traffic cameras', cityPage:true, cityLayer:true,
     desc:'Austin traffic cameras on one map. City of Austin street cameras at intersections plus TxDOT highway cameras on I-35, MoPac, US-183 and SH-71.',
     sub:'See Austin traffic before you leave. City of Austin intersection cameras and TxDOT highway cameras on one map. Tap any camera for the latest image.',
     blurb:`Austin Transportation and Public Works runs cameras at intersections across the city. TxDOT covers the highways.`,
     freeways:`Watch I-35 through downtown, Loop 1 (MoPac), US-183, US-290, SH-71 and the SH-130 and SH-45 toll roads.` },
   { slug:'surrey', name:'Surrey', state:'BC', dot:'DriveBC', lat:49.15, lon:-122.82, r:18,
-    title:'Surrey Traffic Cameras | MileCheck', h1:'Surrey traffic cameras', cityPage:true,
+    title:'Surrey Traffic Cameras | MileCheck', h1:'Surrey traffic cameras', cityPage:true, cityLayer:true,
     desc:'Surrey traffic cameras on one map. City of Surrey intersection cameras plus DriveBC highway cameras on Highway 1, 99, 10, 15 and 17.',
     sub:'See Surrey traffic before you leave. City of Surrey intersection cameras and DriveBC highway cameras on one map. Tap any camera for the latest image.',
     blurb:`The City of Surrey publishes its intersection cameras as open data. DriveBC covers the provincial highways through the city.`,
     freeways:`Watch Highway 1 and the Port Mann Bridge, Highway 99 to the Peace Arch crossing, Highway 15 to Pacific Highway, and Highways 10 and 17.` },
   { slug:'vancouver', name:'Vancouver', state:'BC', dot:'DriveBC', lat:49.26, lon:-123.10, r:22,
-    title:'Vancouver Traffic Cameras | MileCheck', h1:'Vancouver traffic cameras', cityPage:true,
+    title:'Vancouver Traffic Cameras | MileCheck', h1:'Vancouver traffic cameras', cityPage:true, cityLayer:true,
     desc:'Vancouver traffic cameras on one map. DriveBC highway camera images, plus City of Vancouver camera locations from the City\'s open data, each with a link to its view.',
     sub:'See Vancouver traffic before you leave. DriveBC highway camera images and City of Vancouver camera locations from the City\'s open data on one map. City cameras open on the City of Vancouver site.',
     blurb:`The City of Vancouver lists its traffic cameras as open data. Its images stay on the City's own site, so each city camera here links to that view. DriveBC covers the highways and bridges.`,
     freeways:`Watch Highway 1 and the Second Narrows (Ironworkers) Bridge, Highway 99 through the Massey crossing and the Lions Gate Bridge, and Highway 91.` },
+  // Metro pages from feeds the Worker already serves (2026-11-06, Leah: "LETS PUT MORE CITIES"). Toronto and Calgary
+  // also get the city's own cameras (scripts/add-city-cameras.mjs). anyRoute keeps cameras the agency gives no route.
+  { slug:'toronto', name:'Toronto', state:'ON', dot:'Ontario 511', lat:43.7, lon:-79.4, r:40, anyRoute:true,
+    title:'Toronto Traffic Cameras | MileCheck', h1:'Toronto traffic cameras', cityPage:true, cityLayer:true,
+    desc:'Toronto traffic cameras on one map. City of Toronto cameras plus Ontario 511 highway cameras on Highway 401 and more.',
+    sub:'See Toronto traffic before you leave. City of Toronto cameras and Ontario 511 highway cameras on one map. Tap any camera for the latest image.',
+    blurb:`The City of Toronto publishes its traffic cameras as open data. Ontario 511 covers the highways.`,
+    freeways:`Watch Highway 401, the QEW, Highways 400, 404 and 427, the Gardiner Expressway and the Don Valley Parkway.` },
+  { slug:'calgary', name:'Calgary', state:'AB', dot:'511 Alberta', lat:51.05, lon:-114.07, r:30, anyRoute:true,
+    title:'Calgary Traffic Cameras | MileCheck', h1:'Calgary traffic cameras', cityPage:true, cityLayer:true,
+    desc:'Calgary traffic cameras on one map. City of Calgary cameras plus 511 Alberta highway cameras on Deerfoot Trail and more.',
+    sub:'See Calgary traffic before you leave. City of Calgary cameras and 511 Alberta highway cameras on one map. Tap any camera for the latest image.',
+    blurb:`The City of Calgary publishes its traffic cameras as open data. 511 Alberta covers the highways.`,
+    freeways:`Watch Deerfoot Trail, Stoney Trail, Glenmore Trail, Crowchild Trail and Highway 1 (the Trans-Canada).` },
+  { slug:'edmonton', name:'Edmonton', state:'AB', dot:'511 Alberta', lat:53.55, lon:-113.49, r:30, anyRoute:true,
+    title:'Edmonton Traffic Cameras | MileCheck', h1:'Edmonton traffic cameras', cityPage:true,
+    desc:'Edmonton traffic cameras on one map. 511 Alberta highway cameras on Anthony Henday Drive and other main roads, with the latest image from each.',
+    sub:'See Edmonton traffic before you leave. 511 Alberta highway cameras around Edmonton on one map. Tap any camera for the latest image.',
+    blurb:`511 Alberta runs the highway cameras around Edmonton.`,
+    freeways:`Watch Anthony Henday Drive, the Yellowhead (Highway 16), Highway 2 (the QEII) and Whitemud Drive.` },
+  { slug:'ottawa', name:'Ottawa', state:'ON', dot:'Ontario 511', lat:45.42, lon:-75.7, r:30,
+    title:'Ottawa Traffic Cameras | MileCheck', h1:'Ottawa traffic cameras', cityPage:true,
+    desc:'Ottawa traffic cameras on one map. Ontario 511 highway cameras on Highway 417 (the Queensway) and other main roads, with the latest image from each.',
+    sub:'See Ottawa traffic before you leave. Ontario 511 highway cameras around Ottawa on one map. Tap any camera for the latest image.',
+    blurb:`Ontario 511 runs the highway cameras around Ottawa.`,
+    freeways:`Watch Highway 417 (the Queensway) and Highway 416.` },
+  { slug:'chicago', name:'Chicago', state:'IL', dot:'IDOT', lat:41.88, lon:-87.63, r:50, anyRoute:true,
+    title:'Chicago Traffic Cameras | MileCheck', h1:'Chicago traffic cameras', cityPage:true,
+    desc:'Chicago traffic cameras on one map. IDOT cameras on I-90, I-94 and other Chicago-area highways, with the latest image from each.',
+    sub:'See Chicago traffic before you leave. IDOT highway cameras around Chicago on one map. Tap any camera for the latest image.',
+    blurb:`IDOT runs the highway cameras around Chicago.`,
+    freeways:`Watch I-90 and I-94 (the Kennedy, Dan Ryan and Edens), I-290 (the Eisenhower), I-55 (the Stevenson), I-294 (the Tri-State) and I-88.` },
+  { slug:'houston', name:'Houston', state:'TX', dot:'TxDOT', lat:29.76, lon:-95.37, r:55, anyRoute:true,
+    title:'Houston Traffic Cameras | MileCheck', h1:'Houston traffic cameras', cityPage:true,
+    desc:'Houston traffic cameras on one map. TxDOT highway cameras on I-10 (the Katy Freeway) and other main roads, with the latest image from each.',
+    sub:'See Houston traffic before you leave. TxDOT highway cameras around Houston on one map. Tap any camera for the latest image.',
+    blurb:`TxDOT runs the highway cameras around Houston.`,
+    freeways:`Watch I-10 (the Katy Freeway), I-45, I-69 and US-59, the I-610 Loop and Beltway 8.` },
+  { slug:'dallas', name:'Dallas', state:'TX', dot:'TxDOT', lat:32.78, lon:-96.8, r:45,
+    title:'Dallas Traffic Cameras | MileCheck', h1:'Dallas traffic cameras', cityPage:true,
+    desc:'Dallas traffic cameras on one map. TxDOT highway cameras on I-35E and other main roads, with the latest image from each.',
+    sub:'See Dallas traffic before you leave. TxDOT highway cameras around Dallas on one map. Tap any camera for the latest image.',
+    blurb:`TxDOT runs the highway cameras around Dallas.`,
+    freeways:`Watch I-35E, I-30, I-635 (LBJ), I-45, US-75 (Central Expressway) and the President George Bush Turnpike.` },
+  { slug:'san-antonio', name:'San Antonio', state:'TX', dot:'TxDOT', lat:29.42, lon:-98.49, r:40,
+    title:'San Antonio Traffic Cameras | MileCheck', h1:'San Antonio traffic cameras', cityPage:true,
+    desc:'San Antonio traffic cameras on one map. TxDOT highway cameras on I-10 and other main roads, with the latest image from each.',
+    sub:'See San Antonio traffic before you leave. TxDOT highway cameras around San Antonio on one map. Tap any camera for the latest image.',
+    blurb:`TxDOT runs the highway cameras around San Antonio.`,
+    freeways:`Watch I-10, I-35, Loop 410, Loop 1604 and US-281.` },
+  { slug:'denver', name:'Denver', state:'CO', dot:'CDOT', lat:39.74, lon:-104.99, r:45,
+    title:'Denver Traffic Cameras | MileCheck', h1:'Denver traffic cameras', cityPage:true,
+    desc:'Denver traffic cameras on one map. CDOT highway cameras on I-25 and other main roads, with the latest image from each.',
+    sub:'See Denver traffic before you leave. CDOT highway cameras around Denver on one map. Tap any camera for the latest image.',
+    blurb:`CDOT runs the highway cameras around Denver.`,
+    freeways:`Watch I-25, I-70, I-225, I-270, C-470 and E-470.` },
+  { slug:'boston', name:'Boston', state:'MA', dot:'MassDOT', lat:42.36, lon:-71.06, r:40,
+    title:'Boston Traffic Cameras | MileCheck', h1:'Boston traffic cameras', cityPage:true,
+    desc:'Boston traffic cameras on one map. MassDOT highway cameras on I-93 and other main roads, with the latest image from each.',
+    sub:'See Boston traffic before you leave. MassDOT highway cameras around Boston on one map. Tap any camera for the latest image.',
+    blurb:`MassDOT runs the highway cameras around Boston.`,
+    freeways:`Watch I-93, I-90 (the Mass Pike), I-95 and Route 128, and Route 1.` },
+  { slug:'minneapolis', name:'Minneapolis', state:'MN', dot:'MnDOT', lat:44.98, lon:-93.27, r:45,
+    title:'Minneapolis Traffic Cameras | MileCheck', h1:'Minneapolis traffic cameras', cityPage:true,
+    desc:'Minneapolis traffic cameras on one map. MnDOT highway cameras on I-35W and I-35E and other main roads, with the latest image from each.',
+    sub:'See Minneapolis traffic before you leave. MnDOT highway cameras around Minneapolis on one map. Tap any camera for the latest image.',
+    blurb:`MnDOT runs the highway cameras around Minneapolis.`,
+    freeways:`Watch I-35W and I-35E, I-94, I-394, I-494 and I-694.` },
+  { slug:'indianapolis', name:'Indianapolis', state:'IN', dot:'INDOT', lat:39.77, lon:-86.16, r:40,
+    title:'Indianapolis Traffic Cameras | MileCheck', h1:'Indianapolis traffic cameras', cityPage:true,
+    desc:'Indianapolis traffic cameras on one map. INDOT highway cameras on I-65 and other main roads, with the latest image from each.',
+    sub:'See Indianapolis traffic before you leave. INDOT highway cameras around Indianapolis on one map. Tap any camera for the latest image.',
+    blurb:`INDOT runs the highway cameras around Indianapolis.`,
+    freeways:`Watch I-65, I-69, I-70, I-74 and the I-465 loop.` },
+  { slug:'charlotte', name:'Charlotte', state:'NC', dot:'NCDOT', lat:35.23, lon:-80.84, r:40,
+    title:'Charlotte Traffic Cameras | MileCheck', h1:'Charlotte traffic cameras', cityPage:true,
+    desc:'Charlotte traffic cameras on one map. NCDOT highway cameras on I-77 and other main roads, with the latest image from each.',
+    sub:'See Charlotte traffic before you leave. NCDOT highway cameras around Charlotte on one map. Tap any camera for the latest image.',
+    blurb:`NCDOT runs the highway cameras around Charlotte.`,
+    freeways:`Watch I-77, I-85, I-277 and the I-485 loop.` },
+  { slug:'raleigh', name:'Raleigh', state:'NC', dot:'NCDOT', lat:35.78, lon:-78.64, r:35,
+    title:'Raleigh Traffic Cameras | MileCheck', h1:'Raleigh traffic cameras', cityPage:true,
+    desc:'Raleigh traffic cameras on one map. NCDOT highway cameras on I-40 and other main roads, with the latest image from each.',
+    sub:'See Raleigh traffic before you leave. NCDOT highway cameras around Raleigh on one map. Tap any camera for the latest image.',
+    blurb:`NCDOT runs the highway cameras around Raleigh.`,
+    freeways:`Watch I-40, I-440 (the Beltline), I-540, I-87 and US-1.` },
+  { slug:'jacksonville', name:'Jacksonville', state:'FL', dot:'FDOT', lat:30.33, lon:-81.66, r:40,
+    title:'Jacksonville Traffic Cameras | MileCheck', h1:'Jacksonville traffic cameras', cityPage:true,
+    desc:'Jacksonville traffic cameras on one map. FDOT highway cameras on I-95 and other main roads, with the latest image from each.',
+    sub:'See Jacksonville traffic before you leave. FDOT highway cameras around Jacksonville on one map. Tap any camera for the latest image.',
+    blurb:`FDOT runs the highway cameras around Jacksonville.`,
+    freeways:`Watch I-95, I-10 and I-295.` },
+  { slug:'fort-lauderdale', name:'Fort Lauderdale', state:'FL', dot:'FDOT', lat:26.12, lon:-80.14, r:30, anyRoute:true,
+    title:'Fort Lauderdale Traffic Cameras | MileCheck', h1:'Fort Lauderdale traffic cameras', cityPage:true,
+    desc:'Fort Lauderdale traffic cameras on one map. FDOT highway cameras on I-95 and other main roads, with the latest image from each.',
+    sub:'See Fort Lauderdale traffic before you leave. FDOT highway cameras around Fort Lauderdale on one map. Tap any camera for the latest image.',
+    blurb:`FDOT runs the highway cameras around Fort Lauderdale.`,
+    freeways:`Watch I-95, I-595, I-75, Florida's Turnpike and the Sawgrass Expressway.` },
+  { slug:'louisville', name:'Louisville', state:'KY', dot:'KYTC', lat:38.25, lon:-85.76, r:35,
+    title:'Louisville Traffic Cameras | MileCheck', h1:'Louisville traffic cameras', cityPage:true,
+    desc:'Louisville traffic cameras on one map. KYTC highway cameras on I-64 and other main roads, with the latest image from each.',
+    sub:'See Louisville traffic before you leave. KYTC highway cameras around Louisville on one map. Tap any camera for the latest image.',
+    blurb:`KYTC runs the highway cameras around Louisville.`,
+    freeways:`Watch I-64, I-65, I-71, I-264 (the Watterson) and I-265 (the Gene Snyder).` },
+  { slug:'albuquerque', name:'Albuquerque', state:'NM', dot:'NMDOT', lat:35.08, lon:-106.65, r:35,
+    title:'Albuquerque Traffic Cameras | MileCheck', h1:'Albuquerque traffic cameras', cityPage:true,
+    desc:'Albuquerque traffic cameras on one map. NMDOT highway cameras on I-25 and other main roads, with the latest image from each.',
+    sub:'See Albuquerque traffic before you leave. NMDOT highway cameras around Albuquerque on one map. Tap any camera for the latest image.',
+    blurb:`NMDOT runs the highway cameras around Albuquerque.`,
+    freeways:`Watch I-25, I-40 and the Big I interchange where they meet.` },
+  { slug:'tucson', name:'Tucson', state:'AZ', dot:'ADOT', lat:32.22, lon:-110.97, r:35,
+    title:'Tucson Traffic Cameras | MileCheck', h1:'Tucson traffic cameras', cityPage:true,
+    desc:'Tucson traffic cameras on one map. ADOT highway cameras on I-10 and I-19 and other main roads, with the latest image from each.',
+    sub:'See Tucson traffic before you leave. ADOT highway cameras around Tucson on one map. Tap any camera for the latest image.',
+    blurb:`ADOT runs the highway cameras around Tucson.`,
+    freeways:`Watch I-10 and I-19.` },
+  { slug:'spokane', name:'Spokane', state:'WA', dot:'WSDOT', lat:47.66, lon:-117.43, r:30,
+    title:'Spokane Traffic Cameras | MileCheck', h1:'Spokane traffic cameras', cityPage:true,
+    desc:'Spokane traffic cameras on one map. WSDOT highway cameras on I-90 and other main roads, with the latest image from each.',
+    sub:'See Spokane traffic before you leave. WSDOT highway cameras around Spokane on one map. Tap any camera for the latest image.',
+    blurb:`WSDOT runs the highway cameras around Spokane.`,
+    freeways:`Watch I-90, US-395 and US-2.` },
+  { slug:'tacoma', name:'Tacoma', state:'WA', dot:'WSDOT', lat:47.25, lon:-122.44, r:20,
+    title:'Tacoma Traffic Cameras | MileCheck', h1:'Tacoma traffic cameras', cityPage:true,
+    desc:'Tacoma traffic cameras on one map. WSDOT highway cameras on I-5 and other main roads, with the latest image from each.',
+    sub:'See Tacoma traffic before you leave. WSDOT highway cameras around Tacoma on one map. Tap any camera for the latest image.',
+    blurb:`WSDOT runs the highway cameras around Tacoma.`,
+    freeways:`Watch I-5, SR-16 and the Tacoma Narrows Bridge, SR-167 and I-705.` },
+  { slug:'boise', name:'Boise', state:'ID', dot:'ITD', lat:43.62, lon:-116.2, r:30, anyRoute:true,
+    title:'Boise Traffic Cameras | MileCheck', h1:'Boise traffic cameras', cityPage:true,
+    desc:'Boise traffic cameras on one map. ITD highway cameras on I-84 and other main roads, with the latest image from each.',
+    sub:'See Boise traffic before you leave. ITD highway cameras around Boise on one map. Tap any camera for the latest image.',
+    blurb:`ITD runs the highway cameras around Boise.`,
+    freeways:`Watch I-84, I-184 (the Connector) and US-20/26.` },
+  { slug:'omaha', name:'Omaha', state:'NE', dot:'Nebraska DOT', lat:41.26, lon:-95.94, r:30,
+    title:'Omaha Traffic Cameras | MileCheck', h1:'Omaha traffic cameras', cityPage:true,
+    desc:'Omaha traffic cameras on one map. Nebraska DOT highway cameras on I-80 and other main roads, with the latest image from each.',
+    sub:'See Omaha traffic before you leave. Nebraska DOT highway cameras around Omaha on one map. Tap any camera for the latest image.',
+    blurb:`Nebraska DOT runs the highway cameras around Omaha.`,
+    freeways:`Watch I-80, I-480, I-680 and US-75.` },
+  { slug:'richmond', name:'Richmond', state:'VA', dot:'VDOT', lat:37.54, lon:-77.44, r:35,
+    title:'Richmond Traffic Cameras | MileCheck', h1:'Richmond traffic cameras', cityPage:true,
+    desc:'Richmond traffic cameras on one map. VDOT highway cameras on I-95 and other main roads, with the latest image from each.',
+    sub:'See Richmond traffic before you leave. VDOT highway cameras around Richmond on one map. Tap any camera for the latest image.',
+    blurb:`VDOT runs the highway cameras around Richmond.`,
+    freeways:`Watch I-95, I-64, I-195, I-295 and VA-288.` },
+  { slug:'hampton-roads', name:'Hampton Roads', state:'VA', dot:'VDOT', lat:36.85, lon:-76.29, r:40,
+    title:'Hampton Roads Traffic Cameras | MileCheck', h1:'Hampton Roads traffic cameras', cityPage:true,
+    desc:'Hampton Roads traffic cameras on one map. VDOT highway cameras on I-64 and other main roads, with the latest image from each.',
+    sub:'See Hampton Roads traffic before you leave. VDOT highway cameras around Hampton Roads on one map. Tap any camera for the latest image.',
+    blurb:`VDOT runs the highway cameras around Hampton Roads.`,
+    freeways:`Watch I-64, I-264, I-464 and I-664, the Hampton Roads Bridge-Tunnel and the Monitor-Merrimac Bridge-Tunnel.` },
+  { slug:'hartford', name:'Hartford', state:'CT', dot:'CTDOT', lat:41.76, lon:-72.68, r:30,
+    title:'Hartford Traffic Cameras | MileCheck', h1:'Hartford traffic cameras', cityPage:true,
+    desc:'Hartford traffic cameras on one map. CTDOT highway cameras on I-84 and other main roads, with the latest image from each.',
+    sub:'See Hartford traffic before you leave. CTDOT highway cameras around Hartford on one map. Tap any camera for the latest image.',
+    blurb:`CTDOT runs the highway cameras around Hartford.`,
+    freeways:`Watch I-84, I-91, I-291 and I-384.` },
+  { slug:'providence', name:'Providence', state:'RI', dot:'RIDOT', lat:41.82, lon:-71.41, r:25, anyRoute:true,
+    title:'Providence Traffic Cameras | MileCheck', h1:'Providence traffic cameras', cityPage:true,
+    desc:'Providence traffic cameras on one map. RIDOT highway cameras on I-95 and other main roads, with the latest image from each.',
+    sub:'See Providence traffic before you leave. RIDOT highway cameras around Providence on one map. Tap any camera for the latest image.',
+    blurb:`RIDOT runs the highway cameras around Providence.`,
+    freeways:`Watch I-95, I-195, I-295, US-6 and RI-146.` },
+  { slug:'reno', name:'Reno', state:'NV', dot:'NDOT', lat:39.53, lon:-119.81, r:30,
+    title:'Reno Traffic Cameras | MileCheck', h1:'Reno traffic cameras', cityPage:true,
+    desc:'Reno traffic cameras on one map. NDOT highway cameras on I-80 and other main roads, with the latest image from each.',
+    sub:'See Reno traffic before you leave. NDOT highway cameras around Reno on one map. Tap any camera for the latest image.',
+    blurb:`NDOT runs the highway cameras around Reno.`,
+    freeways:`Watch I-80, I-580 and US-395.` },
+  { slug:'el-paso', name:'El Paso', state:'TX', dot:'TxDOT', lat:31.76, lon:-106.49, r:35, anyRoute:true,
+    title:'El Paso Traffic Cameras | MileCheck', h1:'El Paso traffic cameras', cityPage:true,
+    desc:'El Paso traffic cameras on one map. TxDOT highway cameras on I-10 and other main roads, with the latest image from each.',
+    sub:'See El Paso traffic before you leave. TxDOT highway cameras around El Paso on one map. Tap any camera for the latest image.',
+    blurb:`TxDOT runs the highway cameras around El Paso.`,
+    freeways:`Watch I-10, US-54 (the Patriot Freeway) and Loop 375.` },
+  { slug:'fresno', name:'Fresno', state:'CA', dot:'Caltrans', lat:36.74, lon:-119.79, r:40,
+    title:'Fresno Traffic Cameras | MileCheck', h1:'Fresno traffic cameras', cityPage:true,
+    desc:'Fresno traffic cameras on one map. Caltrans highway cameras on CA-99 and other main roads, with the latest image from each.',
+    sub:'See Fresno traffic before you leave. Caltrans highway cameras around Fresno on one map. Tap any camera for the latest image.',
+    blurb:`Caltrans runs the highway cameras around Fresno.`,
+    freeways:`Watch CA-99, CA-41, CA-168 and CA-180.` },
+  { slug:'des-moines', name:'Des Moines', state:'IA', dot:'Iowa DOT', lat:41.59, lon:-93.62, r:30,
+    title:'Des Moines Traffic Cameras | MileCheck', h1:'Des Moines traffic cameras', cityPage:true,
+    desc:'Des Moines traffic cameras on one map. Iowa DOT highway cameras on I-35 and other main roads, with the latest image from each.',
+    sub:'See Des Moines traffic before you leave. Iowa DOT highway cameras around Des Moines on one map. Tap any camera for the latest image.',
+    blurb:`Iowa DOT runs the highway cameras around Des Moines.`,
+    freeways:`Watch I-35, I-80 and I-235.` },
+  { slug:'grand-rapids', name:'Grand Rapids', state:'MI', dot:'MDOT', lat:42.96, lon:-85.67, r:30,
+    title:'Grand Rapids Traffic Cameras | MileCheck', h1:'Grand Rapids traffic cameras', cityPage:true,
+    desc:'Grand Rapids traffic cameras on one map. MDOT highway cameras on I-96 and other main roads, with the latest image from each.',
+    sub:'See Grand Rapids traffic before you leave. MDOT highway cameras around Grand Rapids on one map. Tap any camera for the latest image.',
+    blurb:`MDOT runs the highway cameras around Grand Rapids.`,
+    freeways:`Watch I-96, I-196, US-131 and I-296.` },
+  { slug:'wichita', name:'Wichita', state:'KS', dot:'KDOT', lat:37.69, lon:-97.34, r:30,
+    title:'Wichita Traffic Cameras | MileCheck', h1:'Wichita traffic cameras', cityPage:true,
+    desc:'Wichita traffic cameras on one map. KDOT highway cameras on I-135 and other main roads, with the latest image from each.',
+    sub:'See Wichita traffic before you leave. KDOT highway cameras around Wichita on one map. Tap any camera for the latest image.',
+    blurb:`KDOT runs the highway cameras around Wichita.`,
+    freeways:`Watch I-135, I-235, US-54/400 (Kellogg) and K-96.` },
+  { slug:'madison', name:'Madison', state:'WI', dot:'WisDOT', lat:43.07, lon:-89.4, r:30,
+    title:'Madison Traffic Cameras | MileCheck', h1:'Madison traffic cameras', cityPage:true,
+    desc:'Madison traffic cameras on one map. WisDOT highway cameras on I-39/90 and other main roads, with the latest image from each.',
+    sub:'See Madison traffic before you leave. WisDOT highway cameras around Madison on one map. Tap any camera for the latest image.',
+    blurb:`WisDOT runs the highway cameras around Madison.`,
+    freeways:`Watch I-39/90, I-94, the Beltline (US-12/18) and US-151.` },
+  { slug:'honolulu', name:'Honolulu', state:'HI', dot:'HDOT', lat:21.31, lon:-157.86, r:30, anyRoute:true,
+    title:'Honolulu Traffic Cameras | MileCheck', h1:'Honolulu traffic cameras', cityPage:true,
+    desc:'Honolulu traffic cameras on one map. HDOT highway cameras on H-1 and other main roads, with the latest image from each.',
+    sub:'See Honolulu traffic before you leave. HDOT highway cameras around Honolulu on one map. Tap any camera for the latest image.',
+    blurb:`HDOT runs the highway cameras around Honolulu.`,
+    freeways:`Watch H-1, H-2 and H-3, the Pali Highway and the Likelike Highway.` },
+  { slug:'oklahoma-city', name:'Oklahoma City', state:'OK', dot:'ODOT', lat:35.47, lon:-97.52, r:40, anyRoute:true,
+    title:'Oklahoma City Traffic Cameras | MileCheck', h1:'Oklahoma City traffic cameras', cityPage:true,
+    desc:'Oklahoma City traffic cameras on one map. ODOT highway cameras on I-35 and other main roads, with the latest image from each.',
+    sub:'See Oklahoma City traffic before you leave. ODOT highway cameras around Oklahoma City on one map. Tap any camera for the latest image.',
+    blurb:`ODOT runs the highway cameras around Oklahoma City.`,
+    freeways:`Watch I-35, I-40, I-44, I-235 and I-240.` },
+  { slug:'anchorage', name:'Anchorage', state:'AK', dot:'Alaska DOT&PF', lat:61.22, lon:-149.9, r:30, anyRoute:true,
+    title:'Anchorage Traffic Cameras | MileCheck', h1:'Anchorage traffic cameras', cityPage:true,
+    desc:'Anchorage traffic cameras on one map. Alaska DOT&PF highway cameras on the Glenn Highway and other main roads, with the latest image from each.',
+    sub:'See Anchorage traffic before you leave. Alaska DOT&PF highway cameras around Anchorage on one map. Tap any camera for the latest image.',
+    blurb:`Alaska DOT&PF runs the highway cameras around Anchorage.`,
+    freeways:`Watch the Glenn Highway, the Seward Highway and Minnesota Drive.` },
 ];
 
 // California (2026-10-02): Caltrans postmiles restart at every county line, so the
 // number is a "postmile", not a mile marker, and the app labels it "PM 47.2 (Kern)"
 // (src/utils/cameraLabel.ts). The four California metros say the same thing; every
 // other city keeps the strings it always had.
-const marker = (c) => c.state === 'CA' ? 'postmile' : c.state === 'BC' ? 'kilometre marker' : 'mile marker';
+const CANADA = new Set(['BC','AB','ON','MB','QC','SK','NS','NB']);
+const marker = (c) => c.state === 'CA' ? 'postmile' : CANADA.has(c.state) ? 'kilometre marker' : 'mile marker';
 
 function faq(c){
   const ss=STATE_SLUG[c.state], sn=STATE_NAME[c.state];
   // City pages (2026-11-05, after the ChatGPT copy review): no "free" question, no claim that the app follows the
   // nearest camera, markers only "where the agency provides one", and BC is a province.
   if (c.cityPage) {
-    const whole = c.state === 'BC' ? 'For cameras across the province' : 'For cameras across the state';
+    const whole = CANADA.has(c.state) ? 'For cameras across the province' : 'For cameras across the state';
     return [
       [`Where can I see ${c.name} traffic cameras?`,
-        `On the <a href="#comap">map above</a>. Green dots are ${c.dot} highway cameras, with the route and ${marker(c)} where the agency provides one. Orange dots are City of ${c.name} cameras. ${whole}, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
+        `On the <a href="#comap">map above</a>. ${c.cityLayer ? 'Green dots are ' : 'The dots are '}${c.dot} highway cameras, with the route and ${marker(c)} where the agency provides one. ${c.cityLayer ? `Orange dots are City of ${c.name} cameras. ` : ''}${whole}, see <a href="../${ss}/">${sn} traffic cameras</a>.`],
       [`Do I need an account to view the cameras?`,
-        `No. You can view the cameras on this website without an account. The <a href="/get/" target="_blank" rel="noopener">MileCheck app</a> is a paid subscription with a free trial. It shows highway cameras and your ${marker(c)} as you drive. City street cameras are on this website only.`],
+        `No. You can view the cameras on this website without an account. The <a href="/get/" target="_blank" rel="noopener">MileCheck app</a> is a paid subscription with a free trial. It shows highway cameras and your ${marker(c)} as you drive.${c.cityLayer ? ' City street cameras are on this website only.' : ''}`],
       [`Which highways have cameras in ${c.name}?`, c.freeways],
       [`How do I check ${c.name} traffic before I leave?`,
         `Open the <a href="#comap">map above</a> and tap a camera near your route to see its latest image. Images refresh every few minutes, so check the time on the picture. The app updates your ${marker(c)} as you drive.`],
@@ -283,7 +508,7 @@ ${faqHtml}
 
   <div class="co-cta">
     <h2>${c.cityPage ? `MileCheck for driving in and around ${c.name}` : `Check the nearest ${c.name} camera before you go`}</h2>
-    <p>${c.cityPage ? `The MileCheck app shows your ${marker(c)} as you drive, highway cameras, and live road alerts on your route. It runs on CarPlay and Android Auto. City street cameras are on this website only.` : `In the MileCheck app, the nearest camera and your exact ${marker(c)} follow you hands-free on ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.`}</p>
+    <p>${c.cityPage ? `The MileCheck app shows your ${marker(c)} as you drive, highway cameras, and live road alerts on your route. It runs on CarPlay and Android Auto.${c.cityLayer ? ' City street cameras are on this website only.' : ''}` : `In the MileCheck app, the nearest camera and your exact ${marker(c)} follow you hands-free on ${c.name}'s freeways, plus live state DOT feeds on your route. Works offline and runs on CarPlay and Android Auto.`}</p>
     <div class="btns">
       <a class="primary" href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">iOS App Store</a>
       <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" target="_blank" rel="noopener">Google Play</a>
@@ -356,7 +581,7 @@ let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
 async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
 fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
   if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
-  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||''))&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,${c.state === 'CA' ? "county:(c.county||'').trim()," : ''}img:c.imageUrl}));
+  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&(${c.anyRoute ? 'true' : `(ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||''))`})&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,${c.state === 'CA' ? "county:(c.county||'').trim()," : ''}img:c.imageUrl}));
   document.getElementById('statCams').textContent=CAMS.length;
   draw();
 });
@@ -374,7 +599,14 @@ for(const c of CITIES){
   if(ONLY.length&&!ONLY.includes(c.slug))continue;
   const dir=path.join('cameras',c.slug);
   fs.mkdirSync(dir,{recursive:true});
-  fs.writeFileSync(path.join(dir,'index.html'),page(c));
+  let html=page(c);
+  // Some states have no camera page of their own (Colorado, Rhode Island, Hawaii, Oklahoma on 2026-11-06): link the hub.
+  const ss=STATE_SLUG[c.state], sn=STATE_NAME[c.state];
+  if(!fs.existsSync(path.join('cameras',ss,'index.html'))){
+    html=html.split(`<a href="../${ss}/">${sn} traffic cameras</a>`).join('<a href="../">highway cameras by state</a>')
+             .split(`<a href="../${ss}/">${sn} cameras</a>`).join('<a href="../">highway cameras by state</a>');
+  }
+  fs.writeFileSync(path.join(dir,'index.html'),html);
   n++;
   console.log('wrote cameras/'+c.slug+'/index.html  ('+c.name+', '+c.dot+')');
 }

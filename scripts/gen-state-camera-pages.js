@@ -210,23 +210,26 @@ const BRIDGE_STATES = new Set(['washington','oregon','california','ohio','wiscon
 // specific "Columbus traffic cameras" page Google actually needs for that query).
 // Kept in sync manually with the CITIES array in gen-city-camera-pages.js.
 const CITIES_BY_STATE = {
-  WA: [{slug:'seattle', name:'Seattle'}],
+  WA: [{slug:'seattle', name:'Seattle'}, {slug:'spokane', name:'Spokane'}, {slug:'tacoma', name:'Tacoma'}],
   OR: [{slug:'portland', name:'Portland'}],
   CA: [{slug:'los-angeles', name:'Los Angeles'}, {slug:'san-francisco', name:'San Francisco'},
        {slug:'sacramento', name:'Sacramento'}, {slug:'san-diego', name:'San Diego'}],
-  NV: [{slug:'las-vegas', name:'Las Vegas'}],
-  AZ: [{slug:'phoenix', name:'Phoenix'}],
+  NV: [{slug:'las-vegas', name:'Las Vegas'}, {slug:'reno', name:'Reno'}],
+  AZ: [{slug:'phoenix', name:'Phoenix'}, {slug:'tucson', name:'Tucson'}],
   UT: [{slug:'salt-lake-city', name:'Salt Lake City'}],
   GA: [{slug:'atlanta', name:'Atlanta'}],
-  FL: [{slug:'orlando', name:'Orlando'}, {slug:'tampa', name:'Tampa'}, {slug:'miami', name:'Miami'}],
-  MI: [{slug:'detroit', name:'Detroit'}],
+  FL: [{slug:'orlando', name:'Orlando'}, {slug:'tampa', name:'Tampa'}, {slug:'miami', name:'Miami'}, {slug:'jacksonville', name:'Jacksonville'}, {slug:'fort-lauderdale', name:'Fort Lauderdale'}],
+  MI: [{slug:'detroit', name:'Detroit'}, {slug:'grand-rapids', name:'Grand Rapids'}],
   OH: [{slug:'columbus', name:'Columbus'}, {slug:'cleveland', name:'Cleveland'}, {slug:'cincinnati', name:'Cincinnati'}],
-  WI: [{slug:'milwaukee', name:'Milwaukee'}],
+  WI: [{slug:'milwaukee', name:'Milwaukee'}, {slug:'madison', name:'Madison'}],
   PA: [{slug:'pittsburgh', name:'Pittsburgh'}, {slug:'philadelphia', name:'Philadelphia'}],
   NY: [{slug:'new-york-city', name:'New York City'}, {slug:'buffalo', name:'Buffalo'}],
   LA: [{slug:'new-orleans', name:'New Orleans'}],
   AL: [{slug:'birmingham', name:'Birmingham'}],
-  TX: [{slug:'austin', name:'Austin'}],
+  TX: [{slug:'austin', name:'Austin'}, {slug:'houston', name:'Houston'}, {slug:'dallas', name:'Dallas'}, {slug:'san-antonio', name:'San Antonio'}, {slug:'el-paso', name:'El Paso'}],
+  IL: [{slug:'chicago', name:'Chicago'}],
+  AB: [{slug:'calgary', name:'Calgary'}, {slug:'edmonton', name:'Edmonton'}],
+  ON: [{slug:'toronto', name:'Toronto'}, {slug:'ottawa', name:'Ottawa'}],
   BC: [{slug:'vancouver', name:'Vancouver'}, {slug:'surrey', name:'Surrey'}],
 };
 

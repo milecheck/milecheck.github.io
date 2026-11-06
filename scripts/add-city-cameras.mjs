@@ -41,6 +41,19 @@ export const CITY_LAYERS = {
     sourceUrl: 'https://opendata.vancouver.ca/explore/dataset/web-cam-url-links/', marker: 'kilometre marker',
     note: 'City of Vancouver camera locations come from the City\'s open data. The images stay on the City\'s site, so tap a city camera and open its view there. The highway cameras with images on this map are DriveBC\'s.',
   },
+  // 2026-11-06. Both overlap their province's 511 cameras; a city dot within 150 m of a highway camera is skipped (dedupeKm).
+  toronto: {
+    code: 'CITY_TOR', city: 'Toronto', roads: ['/road-conditions/canada/', 'Canada road conditions'], agency: 'City of Toronto', short: 'City of Toronto',
+    attribution: 'Contains information licensed under the Open Government Licence – Toronto.',
+    sourceUrl: 'https://open.toronto.ca/dataset/traffic-cameras/', marker: 'kilometre marker', dedupeKm: 0.15,
+    note: 'City of Toronto cameras cover city streets, the Gardiner Expressway and the Don Valley Parkway. Ontario 511 cameras cover provincial highways such as Highway 401. Where both have a camera on the same spot, the map shows one dot.',
+  },
+  calgary: {
+    code: 'CITY_CAL', city: 'Calgary', roads: ['/road-conditions/alberta/', 'Alberta road conditions'], agency: 'City of Calgary', short: 'City of Calgary',
+    attribution: 'Contains information licensed under the Open Government Licence – City of Calgary.',
+    sourceUrl: 'https://data.calgary.ca/Transportation-Transit/Traffic-Cameras/k7p9-kppz', marker: 'kilometre marker', dedupeKm: 0.15,
+    note: 'The City of Calgary and 511 Alberta both publish camera images, and most City cameras sit at the same spots as 511 Alberta cameras. Where both have a camera on the same spot, the map shows one dot.',
+  },
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -62,7 +75,7 @@ function guideBlock(c) {
 }
 
 function scriptBlock(c, linkData) {
-  const cfg = { roads: c.roads, marker: c.marker || 'mile marker', code: c.code || null, city: c.city, agency: c.agency, short: c.short, attribution: c.attribution, color: CITY_COLOR };
+  const cfg = { dedupeKm: c.dedupeKm || 0, roads: c.roads, marker: c.marker || 'mile marker', code: c.code || null, city: c.city, agency: c.agency, short: c.short, attribution: c.attribution, color: CITY_COLOR };
   return `<!-- city-cams-js:start -->
 <script>
 (function(){
@@ -83,15 +96,24 @@ function scriptBlock(c, linkData) {
       +'<a href="'+e(c.img)+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+e(bust)+'" alt="Live: '+e(c.title)+'" onerror="this.alt=\\'image unavailable\\'"></a>'
       +'<div class="cc-meta" style="margin-top:6px">'+e(CFG.attribution)+'</div>'+app;
   }
+  // Skip a city dot that sits on a highway camera already on the map (the same camera in both feeds).
+  function near(a,b){var p=Math.PI/180,x=Math.pow(Math.sin((b.lat-a.lat)*p/2),2)+Math.cos(a.lat*p)*Math.cos(b.lat*p)*Math.pow(Math.sin((b.lon-a.lon)*p/2),2);return 12742*Math.asin(Math.sqrt(x));}
+  function shown(){
+    if(!CFG.dedupeKm||typeof CAMS==='undefined'||!CAMS.length)return CITY;
+    return CITY.filter(function(c){for(var i=0;i<CAMS.length;i++){if(Math.abs(CAMS[i].lat-c.lat)<0.01&&near(c,CAMS[i])<CFG.dedupeKm)return false;}return true;});
+  }
   function drawCity(){
-    layer.clearLayers();var b=map.getBounds();
-    var vis=CITY.filter(function(c){return b.contains([c.lat,c.lon]);});
+    layer.clearLayers();var b=map.getBounds();var all=shown();
+    var el=document.getElementById('statCityCams');if(el&&CITY.length)el.textContent=all.length;
+    var vis=all.filter(function(c){return b.contains([c.lat,c.lon]);});
     if(typeof thin==='function')vis=thin(vis,16);
     var r=typeof RS==='function'?RS(5):5;
     vis.forEach(function(c){L.circleMarker([c.lat,c.lon],{radius:r,color:'#fff',weight:1.5,fillColor:CFG.color,fillOpacity:.95}).on('click',function(){showCard(card(c));}).addTo(layer);});
   }
   var t=null;map.on('moveend',function(){clearTimeout(t);t=setTimeout(drawCity,220);});
-  function done(){var el=document.getElementById('statCityCams');if(el)el.textContent=CITY.length||'—';drawCity();}
+  function done(){var el=document.getElementById('statCityCams');if(el)el.textContent=CITY.length||'—';drawCity();
+    // The highway list may land after this one; redraw once it does so duplicates drop out.
+    if(CFG.dedupeKm){var n=0,last=-1,iv=setInterval(function(){var k=(typeof CAMS!=='undefined'&&CAMS)?CAMS.length:0;if(k&&k!==last){last=k;drawCity();}if(++n>40)clearInterval(iv);},500);}}
   if(LINKS){CITY=LINKS.map(function(c){return {lat:c.lat,lon:c.lon,title:c.name,area:c.area,url:c.url};});done();return;}
   var tries=0;(function go(){
     fetch('https://api.milecheckapp.com/cameras?state='+CFG.code).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){

@@ -379,7 +379,7 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
 <script>
 (function(){
   if(typeof map==='undefined'||typeof L==='undefined')return;
-  var CFG={"roads":["/road-conditions/british-columbia/","British Columbia road conditions"],"marker":"kilometre marker","code":"CITY_SUR","city":"Surrey","agency":"City of Surrey","short":"City of Surrey","attribution":"Contains information licensed under the Open Government License - City of Surrey.","color":"#c2410c"};
+  var CFG={"dedupeKm":0,"roads":["/road-conditions/british-columbia/","British Columbia road conditions"],"marker":"kilometre marker","code":"CITY_SUR","city":"Surrey","agency":"City of Surrey","short":"City of Surrey","attribution":"Contains information licensed under the Open Government License - City of Surrey.","color":"#c2410c"};
   var LINKS=null;
   var layer=L.layerGroup().addTo(map), CITY=[];
   map.attributionControl.addAttribution(CFG.attribution.replace(/</g,'&lt;'));
@@ -395,15 +395,24 @@ fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
       +'<a href="'+e(c.img)+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+e(bust)+'" alt="Live: '+e(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>'
       +'<div class="cc-meta" style="margin-top:6px">'+e(CFG.attribution)+'</div>'+app;
   }
+  // Skip a city dot that sits on a highway camera already on the map (the same camera in both feeds).
+  function near(a,b){var p=Math.PI/180,x=Math.pow(Math.sin((b.lat-a.lat)*p/2),2)+Math.cos(a.lat*p)*Math.cos(b.lat*p)*Math.pow(Math.sin((b.lon-a.lon)*p/2),2);return 12742*Math.asin(Math.sqrt(x));}
+  function shown(){
+    if(!CFG.dedupeKm||typeof CAMS==='undefined'||!CAMS.length)return CITY;
+    return CITY.filter(function(c){for(var i=0;i<CAMS.length;i++){if(Math.abs(CAMS[i].lat-c.lat)<0.01&&near(c,CAMS[i])<CFG.dedupeKm)return false;}return true;});
+  }
   function drawCity(){
-    layer.clearLayers();var b=map.getBounds();
-    var vis=CITY.filter(function(c){return b.contains([c.lat,c.lon]);});
+    layer.clearLayers();var b=map.getBounds();var all=shown();
+    var el=document.getElementById('statCityCams');if(el&&CITY.length)el.textContent=all.length;
+    var vis=all.filter(function(c){return b.contains([c.lat,c.lon]);});
     if(typeof thin==='function')vis=thin(vis,16);
     var r=typeof RS==='function'?RS(5):5;
     vis.forEach(function(c){L.circleMarker([c.lat,c.lon],{radius:r,color:'#fff',weight:1.5,fillColor:CFG.color,fillOpacity:.95}).on('click',function(){showCard(card(c));}).addTo(layer);});
   }
   var t=null;map.on('moveend',function(){clearTimeout(t);t=setTimeout(drawCity,220);});
-  function done(){var el=document.getElementById('statCityCams');if(el)el.textContent=CITY.length||'—';drawCity();}
+  function done(){var el=document.getElementById('statCityCams');if(el)el.textContent=CITY.length||'—';drawCity();
+    // The highway list may land after this one; redraw once it does so duplicates drop out.
+    if(CFG.dedupeKm){var n=0,last=-1,iv=setInterval(function(){var k=(typeof CAMS!=='undefined'&&CAMS)?CAMS.length:0;if(k&&k!==last){last=k;drawCity();}if(++n>40)clearInterval(iv);},500);}}
   if(LINKS){CITY=LINKS.map(function(c){return {lat:c.lat,lon:c.lon,title:c.name,area:c.area,url:c.url};});done();return;}
   var tries=0;(function go(){
     fetch('https://api.milecheckapp.com/cameras?state='+CFG.code).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
