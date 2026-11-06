@@ -53,8 +53,7 @@
  ],
  "seasonal": {
   "WA": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "SR-20",
      "name": "North Cascades Highway",
@@ -63,11 +62,6 @@
     {
      "route": "SR-410",
      "name": "Chinook Pass",
-     "closed": false
-    },
-    {
-     "route": "SR-410",
-     "name": "Chinook Pass (reopen timing)",
      "closed": false
     },
     {
@@ -80,21 +74,21 @@
      "name": "Mount Baker Highway, Road to Artist Point",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "OR": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "OR-242",
      "name": "McKenzie Pass Highway (Old McKenzie Highway)",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "CA": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "SR-108",
      "name": "Sonora Pass",
@@ -120,11 +114,11 @@
      "name": "Lassen Park Highway (park road, NPS-managed; not a Caltrans closure)",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "CO": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "CO-82",
      "name": "Independence Pass",
@@ -135,11 +129,11 @@
      "name": "Trail Ridge Road (NPS park road)",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "WY": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "WY-130",
      "name": "Snowy Range Scenic Byway",
@@ -160,11 +154,11 @@
      "name": "Beartooth Highway",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "MT": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "US-212",
      "name": "Cooke City to Pilot Creek",
@@ -195,11 +189,11 @@
      "name": "Going-to-the-Sun Road (NPS park road, not state highway)",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "UT": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "SR-39",
      "name": "Monte Cristo",
@@ -245,21 +239,21 @@
      "name": "Cedar Breaks National Monument",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "ID": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "SH-21",
      "name": "Banner Summit closure",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   },
   "AK": {
-   "drawn": [],
-   "listed": [
+   "drawn": [
     {
      "route": "AK-8",
      "name": "Denali Highway",
@@ -280,7 +274,8 @@
      "name": "Eureka/Rampart Road",
      "closed": false
     }
-   ]
+   ],
+   "listed": []
   }
  }
 }

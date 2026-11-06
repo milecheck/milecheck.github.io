@@ -363,7 +363,7 @@ const winterSection = (st, name) => {
     if (sn) {
       const si = (SNAP_INDEX && SNAP_INDEX.seasonal && SNAP_INDEX.seasonal[st]) || { drawn: [], listed: [] };
       out.push(sn);
-      out.push(`<p class="rc-fig"><span style="display:inline-block;width:26px;height:6px;background:#FF4D4D;border-radius:3px;vertical-align:middle;"></span> closed for the season &nbsp; <span style="display:inline-block;width:26px;height:6px;background:#FFB547;border-radius:3px;vertical-align:middle;"></span> usually closes for winter, not closed yet. Road lines from OpenStreetMap.</p>`);
+      out.push(`<p class="rc-fig"><span style="display:inline-block;width:26px;height:6px;background:#FF4D4D;border-radius:3px;vertical-align:middle;"></span> closed for the season &nbsp; <span style="display:inline-block;width:26px;height:6px;background:#FFB547;border-radius:3px;vertical-align:middle;"></span> usually closes for winter, not closed yet. Lines show the road around the seasonal stretch, from OpenStreetMap; the exact gates can differ.</p>`);
       if (si.listed.length) out.push(`<p class="rc-fig">Not drawn (no road line in our data yet): ${si.listed.map((r) => esc(r.name && r.name !== r.route ? `${r.route}, ${r.name}` : r.route) + (r.closed ? ' (closed)' : '')).join(' · ')}.</p>`);
     } }
   if (live.length) out.push(box(`On ${name}'s feed as of ${dateLong(D.seasonalAsOf).replace(/, \d{4}$/, '')}`, live.map((c) => `<strong>${esc(route(st, c.route || ''))}</strong> &mdash; &ldquo;${esc(quote(c.headline).slice(0, 200))}&rdquo;`)));
