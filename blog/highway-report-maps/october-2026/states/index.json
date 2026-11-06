@@ -1,0 +1,286 @@
+{
+ "label": "October 2026",
+ "asOf": "Oct. 31, 4 PM Pacific",
+ "crash": [
+  "AK",
+  "AL",
+  "AZ",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "IA",
+  "ID",
+  "IL",
+  "IN",
+  "KS",
+  "KY",
+  "LA",
+  "MA",
+  "MD",
+  "MI",
+  "MN",
+  "MO",
+  "MS",
+  "MT",
+  "NC",
+  "NE",
+  "NJ",
+  "NM",
+  "NV",
+  "NY",
+  "OH",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "TN",
+  "TX",
+  "UT",
+  "VA",
+  "WA",
+  "WI",
+  "WY"
+ ],
+ "fires": [
+  "CA",
+  "OR",
+  "WA",
+  "WI",
+  "MS"
+ ],
+ "seasonal": {
+  "WA": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "SR-20",
+     "name": "North Cascades Highway",
+     "closed": false
+    },
+    {
+     "route": "SR-410",
+     "name": "Chinook Pass",
+     "closed": false
+    },
+    {
+     "route": "SR-410",
+     "name": "Chinook Pass (reopen timing)",
+     "closed": false
+    },
+    {
+     "route": "SR-123",
+     "name": "Cayuse Pass",
+     "closed": false
+    },
+    {
+     "route": "SR-542",
+     "name": "Mount Baker Highway, Road to Artist Point",
+     "closed": false
+    }
+   ]
+  },
+  "OR": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "OR-242",
+     "name": "McKenzie Pass Highway (Old McKenzie Highway)",
+     "closed": false
+    }
+   ]
+  },
+  "CA": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "SR-108",
+     "name": "Sonora Pass",
+     "closed": false
+    },
+    {
+     "route": "SR-4",
+     "name": "Ebbetts Pass",
+     "closed": false
+    },
+    {
+     "route": "SR-89",
+     "name": "Monitor Pass",
+     "closed": false
+    },
+    {
+     "route": "SR-120",
+     "name": "Tioga Road / Tioga Pass (SR 120 W at Lee Vining Gate through Yosemite NP)",
+     "closed": false
+    },
+    {
+     "route": "SR-89",
+     "name": "Lassen Park Highway (park road, NPS-managed; not a Caltrans closure)",
+     "closed": false
+    }
+   ]
+  },
+  "CO": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "CO-82",
+     "name": "Independence Pass",
+     "closed": false
+    },
+    {
+     "route": "US-34",
+     "name": "Trail Ridge Road (NPS park road)",
+     "closed": false
+    }
+   ]
+  },
+  "WY": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "WY-130",
+     "name": "Snowy Range Scenic Byway",
+     "closed": false
+    },
+    {
+     "route": "WY-70",
+     "name": "Battle Pass",
+     "closed": false
+    },
+    {
+     "route": "US-212",
+     "name": "Cooke City to Pilot Creek",
+     "closed": false
+    },
+    {
+     "route": "US-212",
+     "name": "Beartooth Highway",
+     "closed": false
+    }
+   ]
+  },
+  "MT": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "US-212",
+     "name": "Cooke City to Pilot Creek",
+     "closed": false
+    },
+    {
+     "route": "US-212",
+     "name": "Beartooth Highway",
+     "closed": false
+    },
+    {
+     "route": "MT-38",
+     "name": "Skalkaho Pass",
+     "closed": false
+    },
+    {
+     "route": "MT-49",
+     "name": "Looking Glass Highway",
+     "closed": false
+    },
+    {
+     "route": "S-471",
+     "name": "Thompson Pass",
+     "closed": false
+    },
+    {
+     "route": "Going-to-the-Sun Road",
+     "name": "Going-to-the-Sun Road (NPS park road, not state highway)",
+     "closed": false
+    }
+   ]
+  },
+  "UT": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "SR-39",
+     "name": "Monte Cristo",
+     "closed": false
+    },
+    {
+     "route": "SR-65",
+     "name": "East Canyon",
+     "closed": false
+    },
+    {
+     "route": "SR-190",
+     "name": "Guardsman Pass",
+     "closed": false
+    },
+    {
+     "route": "SR-224",
+     "name": "Guardsman Pass (as listed by UDOT)",
+     "closed": false
+    },
+    {
+     "route": "SR-92",
+     "name": "American Fork Canyon / Alpine Loop",
+     "closed": false
+    },
+    {
+     "route": "SR-150",
+     "name": "Mirror Lake Highway",
+     "closed": false
+    },
+    {
+     "route": "SR-35",
+     "name": "Wolf Creek Summit",
+     "closed": false
+    },
+    {
+     "route": "SR-153",
+     "name": "Mount Holly",
+     "closed": false
+    },
+    {
+     "route": "SR-148",
+     "name": "Cedar Breaks National Monument",
+     "closed": false
+    }
+   ]
+  },
+  "ID": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "SH-21",
+     "name": "Banner Summit closure",
+     "closed": false
+    }
+   ]
+  },
+  "AK": {
+   "drawn": [],
+   "listed": [
+    {
+     "route": "AK-8",
+     "name": "Denali Highway",
+     "closed": false
+    },
+    {
+     "route": "AK-5",
+     "name": "Taylor Highway",
+     "closed": false
+    },
+    {
+     "route": "McCarthy Road",
+     "name": "McCarthy Road",
+     "closed": false
+    },
+    {
+     "route": "Eureka/Rampart Road",
+     "name": "Eureka/Rampart Road",
+     "closed": false
+    }
+   ]
+  }
+ }
+}

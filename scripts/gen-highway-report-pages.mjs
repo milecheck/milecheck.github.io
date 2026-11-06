@@ -354,6 +354,13 @@ const winterSection = (st, name) => {
   const usual = seasonalOf(st);
   if (!live.length && !usual.length) return '';
   const out = [`<h2 class="rc">Winter closures</h2>`, liveLink('../../', 'chains/', 'Live chain and winter road map'), liveLink('../../', `seasonal/`, 'Roads that close for winter, by state')];
+  { const sn = snap(st, 'seasonal', `Roads that close for winter in ${name}, as of ${dateLong(D.seasonalAsOf)}`, `Map of ${name} with its seasonal-closure roads drawn: red closed for the season, orange not closed yet`);
+    if (sn) {
+      const si = (SNAP_INDEX && SNAP_INDEX.seasonal && SNAP_INDEX.seasonal[st]) || { drawn: [], listed: [] };
+      out.push(sn);
+      out.push(`<p class="rc-fig"><span style="display:inline-block;width:26px;height:6px;background:#FF4D4D;border-radius:3px;vertical-align:middle;"></span> closed for the season &nbsp; <span style="display:inline-block;width:26px;height:6px;background:#FFB547;border-radius:3px;vertical-align:middle;"></span> usually closes for winter, not closed yet. Road lines from OpenStreetMap.</p>`);
+      if (si.listed.length) out.push(`<p class="rc-fig">Not drawn (no road line in our data yet): ${si.listed.map((r) => esc(r.name && r.name !== r.route ? `${r.route}, ${r.name}` : r.route) + (r.closed ? ' (closed)' : '')).join(' · ')}.</p>`);
+    } }
   if (live.length) out.push(box(`On ${name}'s feed as of ${dateLong(D.seasonalAsOf).replace(/, \d{4}$/, '')}`, live.map((c) => `<strong>${esc(route(st, c.route || ''))}</strong> &mdash; &ldquo;${esc(quote(c.headline).slice(0, 200))}&rdquo;`)));
   if (usual.length) out.push(box('Roads that usually close for winter', usual.map((e) => `<strong>${esc(!e.name || e.name === e.route ? e.route : e.name.startsWith(e.route) ? e.name : `${e.route}, ${e.name}`)}</strong> &mdash; ${esc(e.publicLine || `${e.typicalClose}. ${e.typicalReopen}.`)} <a href="${esc(e.sourceUrl)}" rel="noopener" target="_blank">Source</a>${(e.extraSources || []).map((x) => ` &middot; <a href="${esc(x.url)}" rel="noopener" target="_blank">${esc(x.label)} source</a>`).join('')}`)));
   out.push(`<p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>`);
@@ -437,6 +444,14 @@ const mapFig = (k, caption, alt) => !mapExists(k) ? '' : k === 'bridges'
 const alertAlt = (t) => `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`;
 const DOTS = 'Each dot is one alert a feed posted. Blank areas can mean a feed does not post that kind of alert.';
 const rowOpen = '<div class="sec-row"><div class="sec-text">';
+// Per-state snapshot images (app repo scripts/road-report-maps/build-states.sh): crash dots, fires, seasonal roads
+// (Leah 2026-11-06). Shown when the file exists; caption above the image like the videos.
+let SNAP_INDEX = null; try { SNAP_INDEX = JSON.parse(readFileSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/states/index.json`), 'utf8')); } catch {}
+const snap = (st, layer, caption, alt) => {
+  const f = `blog/highway-report-maps/${KEY}/states/${st}-${layer}.webp`;
+  if (!existsSync(resolve(ROOT, f))) return '';
+  return `<figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><a href="../../${f}"><img src="../../${f}" width="720" height="720" loading="lazy" alt="${esc(alt)}" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>`;
+};
 // Each section points at its live map (Leah 2026-11-06). Opens in a new tab like every other link on the page.
 const liveLink = (rel, path, label) => `<p class="rc-live"><a href="${rel}${path}">${label} &rarr;</a></p>`;
 const rowClose = (fig) => `</div>${fig}</div>`;
@@ -597,6 +612,7 @@ for (const st of Object.keys(NAMES)) {
   } else {
     parts.push(`<h2 class="rc">Crashes</h2>`);
     parts.push(liveLink('../../', 'closures/', 'Live crash and closure alerts on the map'));
+    parts.push(snap(st, 'crash', `Crash alerts in ${name}, ${MONTH_NAME}, one dot per alert`, `Map of ${name} with one dot per published crash alert in ${MONTH_NAME} ${YEAR}`));
     parts.push(S.crash > 0 ? `<p>${name}'s road feed carried ${n(S.crash)} crash ${plural(S.crash, 'alert', 'alerts')} in ${MONTH_NAME}.</p>` : `<p>No crash alerts were on ${name}'s feed in ${MONTH_NAME}. Not every agency publishes crash reports.</p>`);
     const hs = D.crashHotspots && D.crashHotspots[st];
     if (hs && hs.routes.filter(([r]) => realRoute(r)).length) parts.push(box('Routes with the most crash alerts', hs.routes.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
@@ -637,7 +653,7 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<p>Live status is on <a href="../../maps/#drawbridges">the drawbridge map</a>. New in ${MONTH_NAME}: Crystal Mountain's summit camera and the Paradise camera at Mount Rainier. See them on the <a href="../../ski/crystal-mountain/">Crystal Mountain page</a> and the <a href="../../mountains/rainier/">Mount Rainier page</a>.</p>`);
   }
   if (fire) {
-    parts.push(`<h2 class="rc">Wildfires</h2>` + liveLink('../../', 'fire/', 'Live wildfire map') + `<p>The national wildfire feed listed ${n(fire.active)} ${plural(fire.active, 'fire record', 'fire records')} in ${name} ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
+    parts.push(`<h2 class="rc">Wildfires</h2>` + liveLink('../../', 'fire/', 'Live wildfire map') + snap(st, 'fires', `${MONTH_NAME} ${YEAR} fires in ${name}, ${fireAsOf}`, `Map of ${name} with the month's fire records as dots sized by acres`) + `<p>The national wildfire feed listed ${n(fire.active)} ${plural(fire.active, 'fire record', 'fire records')} in ${name} ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
     { const big = fire.largest.filter((f) => Number(f.acres) >= 50); // under 50 acres never lists (Leah 2026-11-06)
       parts.push(big.length ? box(`Largest fires, ${fireAsOf}`, big.map((f) => fireLine(f, st))) : `<p class="rc-fig">No fire on the feed in ${name} had reached 50 acres ${fireAsOf}.</p>`); }
     parts.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
