@@ -553,6 +553,12 @@ ${rows}
         </ul>` : ''}${chainLine}
       </div>`;
 }
+// Title rule (Leah, 2026-11-06): the search question if it fits in 60 characters as rendered, else the short form.
+function skiTitle(name) {
+  const q = `What are the road conditions to ${name} right now? | MileCheck`;
+  return q.length <= 60 ? q : `${name} road conditions now | MileCheck`;
+}
+
 function resortPage(r) {
   const reg = REGION[r.state];
   const plows = PLOW_FEEDS.has(r.state);
@@ -561,7 +567,7 @@ function resortPage(r) {
   const radiusTxt = km ? `${Math.round(r.radius * 1.609)} km` : `${r.radius} miles`;
   const farTxt = km ? `${Math.round(r.radius * 3 * 1.609)} km` : `${r.radius * 3} miles`;
   const routesTxt = r.routes.map((x) => x.replace(/^SR (\d+)$/, (m, n) => (r.state === 'WA' ? ({ 90: 'I-90', 2: 'US 2', 12: 'US 12', 97: 'US 97' }[n] || `SR ${n}`) : m))).join(', ');
-  const title = `What is the road to ${r.name} like right now? Plows, cameras and closures | MileCheck`;
+  const title = skiTitle(r.name);
   const desc = plows
     ? `Live ${reg.dot} plow truck positions, ${reg.trafficName} cameras and closures on ${routesTxt}, the road to ${r.name}. Updates every minute. No account.`
     : `${reg.trafficName} cameras, closures and crashes on ${routesTxt}, the road to ${r.name}. ${reg.name} publishes no plow positions; this page shows what ${reg.dot} does publish.`;
@@ -695,10 +701,11 @@ function hubPage() {
   for (const r of RESORTS) { let g = byState.find((x) => x.code === r.state); if (!g) { g = { code: r.state, reg: REGION[r.state], list: [] }; byState.push(g); } g.list.push(r); }
   const plowStates = byState.filter((g) => PLOW_FEEDS.has(g.code));
   const noPlow = byState.filter((g) => !PLOW_FEEDS.has(g.code));
-  const title = `What is the road to your ski resort like right now? ${RESORTS.length} resorts, live plows and cameras | MileCheck`;
-  const desc = `One page per ski resort: the DOT's plow trucks on the access road, the cameras within reach of the base, and closures and crashes on the road. ${RESORTS.length} resorts in ${byState.length} states and provinces.`;
+  const title = 'What are ski resort road conditions now? | MileCheck';
+  const desc = `Road conditions to ${RESORTS.length} ski resorts in ${byState.length} states and provinces. DOT plow trucks on the access road, cameras near the base, and closures and crashes.`;
   const sp = SPON.slot({ kind: 'pass', slug: 'ski-hub', name: 'Ski resort roads' });
-  const sections = byState.map((g) => `    <h2>${g.reg.name} <span style="font-size:13px;color:#5b6670;font-weight:600">· ${PLOW_FEEDS.has(g.code) ? `${g.reg.dot} publishes truck positions` : `${g.reg.dot} publishes no truck positions`}</span></h2>
+  const sections = byState.map((g) => `    <h2 id="${g.reg.slug}">${g.reg.name} ski resort road conditions</h2>
+    <p style="font-size:13px;color:#5b6670;font-weight:600;margin:-4px 0 8px">${g.list.length} ${g.list.length === 1 ? 'resort' : 'resorts'} · ${PLOW_FEEDS.has(g.code) ? `${g.reg.dot} publishes truck positions` : `${g.reg.dot} publishes no truck positions`}</p>
     <div class="sk-rows">
 ${g.list.map((r) => `      <a class="sk-row" href="/ski/${r.slug}/"><span><b>${esc(r.name)}</b><span class="rd">${esc(r.road.charAt(0).toUpperCase() + r.road.slice(1))}</span></span><span class="ct${PLOW_FEEDS.has(g.code) ? '' : ' none'}" id="c-${r.slug}">${PLOW_FEEDS.has(g.code) ? 'loading' : 'no truck positions published'}</span></a>`).join('\n')}
     </div>`).join('\n');
@@ -713,6 +720,7 @@ ${g.list.map((r) => `      <a class="sk-row" href="/ski/${r.slug}/"><span><b>${e
     { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Ski resort roads, live', url, description: desc, isPartOf: { '@type': 'WebSite', name: 'MileCheck', url: 'https://milecheckapp.com/' } },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'MileCheck', item: 'https://milecheckapp.com/' }, { '@type': 'ListItem', position: 2, name: 'Ski resort roads', item: url }] },
+    { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Ski resort road conditions', numberOfItems: RESORTS.length, itemListElement: byState.flatMap((g) => g.list).map((r, i) => ({ '@type': 'ListItem', position: i + 1, name: `${r.name} road conditions`, url: `https://milecheckapp.com/ski/${r.slug}/` })) },
   ];
   const hubData = RESORTS.filter((r) => PLOW_FEEDS.has(r.state)).map((r) => ({ slug: r.slug, state: r.state, lat: r.lat, lon: r.lon, radius: r.radius, routes: r.routes }));
   return head({ title, desc, url, ld, spCss: sp.css }) + `
@@ -720,7 +728,7 @@ ${g.list.map((r) => `      <a class="sk-row" href="/ski/${r.slug}/"><span><b>${e
 ${sp.html}
     <div class="eyebrow">Ski resort roads · ${RESORTS.length} resorts · ${byState.length} states and provinces</div>
     <h1>What is the road to your ski resort like right now?</h1>
-    <p class="sub">One page per resort. Each one puts the DOT's plow trucks on the access road, the cameras within reach of the base, and the closures and crashes on that road on one map, with the chain law and the resort's own snow report beside it. ${list(plowStates.map((g) => g.reg.name))} publish truck positions. ${list(noPlow.map((g) => g.reg.name))} do not, and those pages say so and show the cameras instead. The count beside each resort is the trucks reporting on its road now; it refreshes when you load the page.</p>
+    <p class="sub">Each resort page shows the DOT plow trucks on the access road, the highway cameras near the base, and the closures and crashes on that road, with the chain law and a link to the resort's snow report. It covers ${RESORTS.length} resorts in ${list(byState.map((g) => g.reg.name))}. ${list(noPlow.map((g) => g.reg.name))} publish no truck positions, so those pages show cameras and closures only.</p>
   </div>
 
   <div class="sk-states">

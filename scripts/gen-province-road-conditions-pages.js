@@ -352,6 +352,7 @@ function provincePage(p) {
   const cards = [];
   cards.push(['Official source', p.dot, `${p.name}'s road conditions service. The list of record for closures, restrictions and detours.`, p.dotUrl, true]);
   if (cams) cards.push(['Cameras', `${p.name} highway cameras`, `Cameras from ${p.dot}, with the route and kilometre where the province gives one.`, `/cameras/${slug}/`]);
+  { const ski = require('./ski-resorts.cjs').filter((r) => r.state === p.code); if (ski.length) cards.push(['Ski resorts', `${p.name} ski resort road conditions`, `The access roads to ${ski.length} ${p.name} ski ${ski.length === 1 ? 'resort' : 'resorts'}: plow trucks where the DOT publishes them, cameras and closures.`, `/ski/#${slugOf(p.name)}`]); } // 2026-11-06
   if (guide) cards.push(['Kilometre markers', `Kilometre markers in ${p.name}`, `How ${p.name} references its highways and what to tell 911 or a tow.`, `/blog/${p.guide}.html`]);
   cards.push(['Guide', 'What km marker am I at?', 'How to find your km marker or exit number in Canada, and what to say to 911.', '/what-km-marker-am-i-at/']);
   cards.push(['Border', 'Border wait times', 'Live waits at the land crossings, passenger and commercial.', '/borders/']);

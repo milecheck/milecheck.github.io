@@ -395,6 +395,7 @@ function statePage(s) {
   if (cams) cards.push(['Cameras', `${s.name} highway cameras`, `Every ${s.dot} camera on one map, with the route and mile marker where the DOT gives one.`, `/cameras/${slug}/`]);
   for (const c of cities) cards.push(['City cameras', `${cityName(c)} cameras`, `Live cameras on the ${cityName(c)} freeways.`, `/cameras/${c}/`]);
   for (const [ps, pn, pr] of passes) cards.push(['Mountain pass', pn, `${pr} over the summit: cameras, restrictions and closures on one page.`, `/passes/${ps}/`]);
+  { const ski = require('./ski-resorts.cjs').filter((r) => r.state === s.code); if (ski.length) cards.push(['Ski resorts', `${s.name} ski resort road conditions`, `The access roads to ${ski.length} ${s.name} ski ${ski.length === 1 ? 'resort' : 'resorts'}: plow trucks where the DOT publishes them, cameras and closures.`, `/ski/#${slugOf(s.name)}`]); } // 2026-11-06
   for (const [cs, cn] of corridors) cards.push(['Corridor', `${cn} conditions`, `The whole ${cn} corridor, every state it crosses, alerts by mile marker.`, `/corridors/${cs}/`]);
   if (bridges) cards.push(['Drawbridges', `${s.name} drawbridges`, `Where the movable spans are and the federal opening rule for each.`, `/bridges/${slug}/`]);
   for (const m of mountains) cards.push(['Mountain visibility', `Is ${MOUNTAIN_NAMES[m]} out?`, `Whether the mountain is visible right now, and from where.`, `/mountains/${m}/`]);
