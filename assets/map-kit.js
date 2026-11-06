@@ -550,7 +550,7 @@
   // Built on window load: some pages add their layers in a load handler of their own.
   if (document.readyState === 'complete') buildOptions(); else window.addEventListener('load', buildOptions);
 
-  // 6. App card after a few camera views (Leah, 10-26): after someone opens a third
+  // 6. App card after a few camera views (Leah, 10-26; moved from the third to the second camera 11-6): after someone opens a second
   // different camera, a small card offers the app. It never blocks the page, closes
   // with ×, and does not come back for 14 days. Page views are what the site earns
   // on, so this is a nudge, not a wall.
@@ -559,11 +559,18 @@
     function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
     var last = +store(KEY) || 0;
     if (Date.now() - last < 14 * 864e5) return;
+    function slug() { return (location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home').slice(0, 40); }
     function link() {
       var ua = navigator.userAgent || '';
-      if (/iPhone|iPad|iPod/.test(ua)) return 'https://apps.apple.com/us/app/milecheck/id6759212851';
-      if (/Android/.test(ua)) return 'https://play.google.com/store/apps/details?id=app.milecheck.mobile';
+      if (/iPhone|iPad|iPod/.test(ua)) return 'https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=appcard-' + slug() + '&mt=8';
+      if (/Android/.test(ua)) return 'https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dappcard-' + slug();
       return '/get/';
+    }
+    function label() {
+      var ua = navigator.userAgent || '';
+      if (/iPhone|iPad|iPod/.test(ua)) return 'Get it on the App Store';
+      if (/Android/.test(ua)) return 'Get it on Google Play';
+      return 'Get the app';
     }
     function show() {
       if (document.getElementById('mcAppCard')) return;
@@ -572,9 +579,9 @@
       d.setAttribute('role', 'dialog');
       d.setAttribute('aria-label', 'Get the MileCheck app');
       d.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:3000;max-width:420px;margin:0 auto;background:#fff;color:#1d1f1c;border:1px solid #d6ddd8;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:14px 44px 14px 16px;font:15px/1.4 system-ui,-apple-system,sans-serif';
-      d.innerHTML = '<div style="font-weight:700;margin-bottom:4px">Get these cameras and your mile marker on CarPlay and Android Auto.</div>'
-        + '<div style="color:#5b6670;font-size:14px;margin-bottom:10px">MileCheck · free trial</div>'
-        + '<a href="' + link() + '" target="_blank" rel="noopener" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;text-decoration:none;border-radius:8px;padding:10px 16px;min-height:24px">Get MileCheck</a>'
+      d.innerHTML = '<div style="font-weight:700;margin-bottom:4px;padding-right:36px">Seen enough cameras? The app shows the ones nearest you.</div>'
+        + '<div style="color:#5b6670;font-size:14px;margin-bottom:10px">Your mile marker on CarPlay and Android Auto · free trial</div>'
+        + '<a href="' + link() + '" target="_blank" rel="noopener" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;text-decoration:none;border-radius:8px;padding:12px 18px;min-height:44px;box-sizing:border-box">' + label() + '</a>'
         + '<button type="button" aria-label="Close" style="position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;font-size:24px;line-height:1;color:#5b6670;cursor:pointer">×</button>';
       d.querySelector('button').onclick = function () { d.remove(); };
       d.querySelector('a').onclick = function () { if (window.gtag) gtag('event', 'app_card_click', { page_path: location.pathname }); };
@@ -588,7 +595,7 @@
       var base = String(t.currentSrc || t.src || '').replace(/[?&]t=\d+/, '');
       if (!base || seen[base]) return;
       seen[base] = 1;
-      if (++n === 3) setTimeout(show, 1500);
+      if (++n === 2) setTimeout(show, 1000);
     }, true);
   })();
 
