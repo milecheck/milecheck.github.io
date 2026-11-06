@@ -837,7 +837,7 @@
   "title": "Mile markers vs exit numbers, explained | MileCheck"
  },
  "/milepost-dataset/": {
-  "desc": "Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license."
+  "desc": "A mile marker data license for all 50 states, as CSV and GeoJSON with monthly updates. Need live lookups instead? The MileCheck API covers that."
  },
  "/mountain-visibility-privacy/": {
   "desc": "Privacy policy for Mountain Visibility Forecast and its Mt ___ editions, published by MileCheck LLC. No account, no ads. Location stays on your phone."

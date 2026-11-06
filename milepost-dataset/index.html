@@ -10,18 +10,18 @@
   <meta name="apple-itunes-app" content="app-id=6759212851">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Highway mile marker data for all 50 US states | MileCheck</title>
-  <meta name="description" content="Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license.">
+  <title>How do I license mile marker data? | MileCheck</title>
+  <meta name="description" content="A mile marker data license for all 50 states, as CSV and GeoJSON with monthly updates. Need live lookups instead? The MileCheck API covers that.">
   <link rel="canonical" href="https://milecheckapp.com/milepost-dataset/">
-  <meta property="og:title" content="Highway mile marker data for all 50 US states | MileCheck">
-  <meta property="og:description" content="Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license.">
+  <meta property="og:title" content="How do I license mile marker data? | MileCheck">
+  <meta property="og:description" content="A mile marker data license for all 50 states, as CSV and GeoJSON with monthly updates. Need live lookups instead? The MileCheck API covers that.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/milepost-dataset/">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Highway mile marker data for all 50 US states | MileCheck">
-  <meta name="twitter:description" content="Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license.">
+  <meta name="twitter:title" content="How do I license mile marker data? | MileCheck">
+  <meta name="twitter:description" content="A mile marker data license for all 50 states, as CSV and GeoJSON with monthly updates. Need live lookups instead? The MileCheck API covers that.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -185,6 +185,7 @@
   .ds-btns a.ghost{border:1.5px solid #0F1419;color:#0F1419;}
   .ds-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 10px;}
   @media(max-width:700px){.ds-facts{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  .ds-row-label{margin:14px 0 6px;font:800 13px/1.2 Inter,-apple-system,'Segoe UI',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#5b6670;}
   .ds-fact{border:1px solid #E4EAE6;border-radius:12px;background:#fff;padding:14px 14px 12px;}
   .ds-fact b{display:block;font:800 22px/1.1 'JetBrains Mono',monospace;color:#0E1116;margin-bottom:4px;}
   .ds-fact span{font-size:14px;color:#5b6670;line-height:1.4;}
@@ -223,16 +224,25 @@
 </style>
 <main class="ds-wrap">
   <div class="eyebrow"><a href="/partners/">MileCheck for business</a> &rsaquo; <a href="/api/">API</a> &rsaquo; Milepost dataset</div>
-  <h1>Highway mile marker data for all 50 US states</h1>
+  <h1>How do I license mile marker data for all 50 states?</h1>
   <p class="lede">Every highway mile marker position we have in the United States, as CSV and GeoJSON files you run on your own systems. It is a yearly license, priced by size and support. There are no API calls to count, and lookups work without a cell signal.</p>
   <div class="ds-btns"><a class="primary" href="/milepost-dataset/milecheck-mileposts-sample-UT.zip" download>Download the Utah sample</a><a class="ghost" href="#pricing">Pricing</a></div>
 
+  <p class="ds-row-label">USA</p>
   <div class="ds-facts">
     <div class="ds-fact"><b>396,842</b><span>marker positions</span></div>
     <div class="ds-fact"><b>9,056</b><span>signed routes</span></div>
     <div class="ds-fact"><b>50</b><span>states, one schema</span></div>
     <div class="ds-fact"><b>Monthly</b><span>snapshot and change list</span></div>
   </div>
+  <p class="ds-row-label">Canada</p>
+  <div class="ds-facts">
+    <div class="ds-fact"><b>103,506</b><span>kilometre marker positions</span></div>
+    <div class="ds-fact"><b>1,318</b><span>signed routes</span></div>
+    <div class="ds-fact"><b>10</b><span>provinces and territories</span></div>
+    <div class="ds-fact"><b>km</b><span>markers, not miles</span></div>
+  </div>
+  <p class="ds-small">Counts are from the current MileCheck app data. <a href="mailto:sales@milecheckapp.com?subject=Canada%20mile%20marker%20sample">Request a Canada sample</a></p>
   <p class="ds-small">Counts are from the November 2, 2026 release.</p>
 
   <h2 id="contents">What is in each row</h2>
