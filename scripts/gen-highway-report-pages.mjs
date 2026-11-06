@@ -514,14 +514,14 @@ if (BW && BW.byMax.length) {
   national.push(box('Longest average wait', BW.byAvg.filter((p) => (p.readings || 0) >= 300).slice(0, 6).map((p) => `<strong>${portLink(p, '../')}</strong>${p.state ? ` (${stLink(p.state)})` : ''} &mdash; ${hm(p.avgMin)} average over ${n(p.readings)} hourly readings`)));
   national.push(`<p>Live waits are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
   // Map of every crossing with readings, dot size = average wait (Leah 2026-11-06: the text is dense, a map reads faster).
-  national.push(`<div class="sec-row sec-row--pair">${mapFig('borders', `Average wait into the US at each land crossing, ${MONTH_NAME}. Bigger dot, longer wait.`, `Land border crossings into the United States, ${MONTH_NAME} ${YEAR}, one dot per crossing sized by the average wait`)}</div>`);
+  national.push(`<div class="sec-row">${mapFig('borders', `Average wait into the US at each land crossing, ${MONTH_NAME}. Bigger dot, longer wait.`, `Land border crossings into the United States, ${MONTH_NAME} ${YEAR}, one dot per crossing sized by the average wait`)}</div>`);
 }
 // Seattle drawbridges live on the Washington page only, time-lapse included (Leah 2026-11-02, 2026-11-06). The national page shows the camera map.
 if (mapExists('cameras')) {
   national.push('<!--sec:cameras-->');
   national.push(`<h2 class="rc">Traffic cameras</h2>`);
   national.push(liveLink('../', 'cameras/', 'Live traffic cameras'));
-  national.push(`<div class="sec-row sec-row--pair">${mapFig('cameras', `Every DOT camera on MileCheck, one dot per camera.`, 'Every DOT camera on MileCheck, one dot per camera')}</div>`);
+  national.push(`<div class="sec-row">${mapFig('cameras', `Every DOT camera on MileCheck, one dot per camera.`, 'Every DOT camera on MileCheck, one dot per camera')}</div>`);
 }
 if (FA) {
   const fireStates = Object.entries(FA.byState).sort((a, b) => b[1].acres - a[1].acres);
@@ -545,7 +545,7 @@ if (FA) {
     national.push(liveLink('../', 'chains/', 'Live chain and winter road map') + liveLink('../', 'seasonal/', 'Roads that close for winter, by state'));
     national.push(rowOpen);
     national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Tap a state for each road's usual closing and reopening times and the agency source. We update the list each month through winter.</p>`);
-    national.push(rowClose(`<div class="sec-row sec-row--pair" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported, ${MONTH_NAME}.`, 'Where snowplows reported, one dot per reported position')}</div>`));
+    national.push(rowClose(`<div class="sec-row${mapExists('plows') ? ' sec-row--pair' : ''}" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported, ${MONTH_NAME}.`, 'Where snowplows reported, one dot per reported position')}</div>`));
     const roadName = (e) => esc(String(e.name).replace(/\s*\(.*?\)\s*/g, ' ').replace(/ closure$/i, '').trim());
     national.push(box('Roads that usually close for winter', wst.map((k) => {
       const roads = [...new Set(SEASONAL.filter((e) => e.publicLine && String(e.state).split('/').includes(k)).map(roadName))];
