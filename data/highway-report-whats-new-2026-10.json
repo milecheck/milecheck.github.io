@@ -55,7 +55,7 @@
       {
         "text": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores. Make sure your app is up to date.",
         "title": "Update your app",
-        "icon": "refresh",
+        "icon": "alert",
         "textHtml": "iPhone version 1.10.44 and Android version 1.10.40 are in the stores. <strong>Make sure your app is up to date.</strong>"
       }
     ]
@@ -130,12 +130,6 @@
         ],
         "title": "Corridor display boards",
         "icon": "tv"
-      },
-      {
-        "text": "Dash displays are for fleets, plow trucks and tow trucks. Add your vehicle count to the early access form.",
-        "href": "/dash-preorder.html",
-        "title": "Dash displays for fleets",
-        "icon": "truck"
       },
       {
         "text": "If you build software and want mile markers in it, the dataset is available as a file: GeoJSON and CSV, all 50 states and 10 Canadian provinces and territories, with a monthly snapshot of what changed. Flat yearly fee, no call limits. A free sample is on the page.",
