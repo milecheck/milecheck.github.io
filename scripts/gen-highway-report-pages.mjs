@@ -194,7 +194,7 @@ function pageHtml({ rel, canonical, pageTitle, description, h1, byline, body, js
     .sec-text{flex:1 1 auto;min-width:0;max-width:72ch;}
     .sec-fig{flex:1 1 auto;width:100%;max-width:100%;min-width:0;margin:0;}
     .sec-row--pair{flex-direction:row;flex-wrap:wrap;gap:22px;}
-    .sec-row--pair .sec-fig{flex:1 1 280px;min-width:0;}
+    .sec-row--pair .sec-fig{flex:1 1 280px;min-width:0;max-width:420px;}
     .hr-lede{font-size:18px;line-height:1.6;max-width:68ch;}
     .method-fold{margin:0 0 28px;}
     .method-fold summary{cursor:pointer;list-style:none;font-size:14.5px;font-weight:600;color:#0f7a4f;padding:10px 0;}
@@ -445,7 +445,7 @@ national.push(fold(methodBox('each state department of transportation (DOT) road
 const mapExists = (k) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k === 'bridges' ? 'bridges.mp4' : `${k}.webp`}`));
 const mapFig = (k, caption, alt) => !mapExists(k) ? '' : k === 'bridges'
   ? `<figure class="sec-fig"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><video src="highway-report-maps/${KEY}/bridges.mp4" poster="highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video></figure>`
-  : `<figure class="sec-fig"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="900" height="1125" loading="lazy" alt="${alt}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`;
+  : `<figure class="sec-fig"><a href="highway-report-maps/${KEY}/${k}.webp"><img src="highway-report-maps/${KEY}/${k}.webp" width="${k === 'cameras' ? 900 : 1200}" height="${k === 'cameras' ? 1125 : 780}" loading="lazy" alt="${alt}" style="width:100%;height:auto;border-radius:8px;display:block;"></a><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${caption}</figcaption></figure>`;
 const alertAlt = (t) => `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`;
 const DOTS = 'Each dot is one alert a feed posted. Blank areas can mean a feed does not post that kind of alert.';
 const rowOpen = '<div class="sec-row"><div class="sec-text">';
