@@ -109,7 +109,7 @@ const ICON_PATHS = {
   youtube: '<rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/>',
 };
 const svgIcon = (k, size = 22) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[k] || ''}</svg>`;
-const iconTile = (w) => w.img ? `<img src="${esc(w.img)}" width="44" height="44" alt="" loading="lazy" style="flex:none;width:44px;height:44px;border-radius:10px;">` : `<span class="wn-ic">${svgIcon(w.icon)}</span>`;
+const iconTile = (w) => w.img ? `<img src="${esc(w.img)}" width="44" height="44" alt="" loading="lazy" style="flex:none;width:44px;height:44px;object-fit:contain;aspect-ratio:1/1;border-radius:10px;">` : `<span class="wn-ic">${svgIcon(w.icon)}</span>`;
 // Call-to-action block at the end of the national report (Leah 2026-11-02): the app, the email report,
 // sharing, the dash display, the other apps and social. Replaces the single "live version" box there.
 function nextSteps(rel) {
@@ -123,14 +123,16 @@ function nextSteps(rel) {
         ${card('Get the app, or pass it on', 'If the report is useful, we would be glad if you downloaded MileCheck or shared it with a friend who drives. Live state DOT feeds in all 50 states, British Columbia, Alberta and Manitoba, with your nearest mile marker.', btn('https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&amp;ct=highway-report-cta&amp;mt=8', 'App Store') + btn('https://play.google.com/store/apps/details?id=app.milecheck.mobile&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report-cta', 'Google Play'), `<img src="${rel}images/app-icons/milecheck.png" width="44" height="44" alt="" loading="lazy" style="width:44px;height:44px;border-radius:10px;">`)}
         ${card('Get the Highway Report by email', 'Once a month, plus special reports like Thanksgiving travel. No spam.', btn('#subscribe', 'Sign up'), `<span class="wn-ic">${svgIcon('mail')}</span>`)}
         ${card('Share this report', 'Send it to someone who drives for work so they can sign up for the Highway Report.', share, `<span class="wn-ic">${svgIcon('share')}</span>`)}
-        ${card('New: Mountain Visibility', 'Is the mountain out right now? It covers Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, the Olympics, Mount Angeles and Mount Baldy. If you live near one of them it is worth having. $1.99 once, no subscription.', btn('https://apps.apple.com/app/apple-store/id6810003955?pt=128447811&amp;ct=highway-report-cta&amp;mt=8', 'App Store') + btn('https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report-cta', 'Google Play'), `<a href="${rel}get/mountains/" aria-label="Mountain Visibility"><img src="${rel}images/app-icons/mountain-visibility.png" width="44" height="44" alt="Mountain Visibility app icon" loading="lazy" style="width:44px;height:44px;border-radius:10px;display:block;"></a>`)}
+        ${card('New: Mountain Visibility', 'Is the mountain out right now? It covers Mount Rainier, Mount Hood, Mount Baker, Mount St. Helens, Denali, the Olympics, Mount Angeles and Mount Baldy. If you live near one of them it is worth having. $1.99 once, no subscription.', btn('https://apps.apple.com/app/apple-store/id6810003955?pt=128447811&amp;ct=highway-report-cta&amp;mt=8', 'App Store') + btn('https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dhighway-report-cta', 'Google Play'), `<a href="${rel}get/mountains/" aria-label="Mountain Visibility"><img src="${rel}images/app-icons/mountain-visibility.png" width="44" height="44" alt="Mountain Visibility app icon" loading="lazy" style="width:44px;height:44px;object-fit:contain;aspect-ratio:1/1;border-radius:10px;display:block;"></a>`)}
         ${card('Request a map or a feature', 'Want a map we do not have yet, or something in the app? Tell us. Every note gets read.', btn('mailto:feedback@milecheckapp.com?subject=Request%3A%20a%20map%20or%20a%20feature', 'Email feedback@milecheckapp.com'), `<span class="wn-ic">${svgIcon('mail')}</span>`)}
         ${card('Follow MileCheck', 'Maps, road news and Roy. Instagram is the fun one.', btn('https://www.instagram.com/milecheck_app', `${svgIcon('instagram', 18)}Instagram`) + btn('https://www.facebook.com/share/1FT9JtkH5D/', `${svgIcon('facebook', 18)}Facebook`) + btn('https://x.com/milecheckapp', `${svgIcon('x', 18)}X`) + btn('https://www.youtube.com/@milecheckapp', `${svgIcon('youtube', 18)}YouTube`), `<span class="wn-ic">${svgIcon('heart')}</span>`)}
         </div>
       </section>
 `;
 }
-function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld, wide }) {
+const newTab = (html) => html.replace(/<a\b(?![^>]*\btarget=)([^>]*?)\bhref="(?!#)([^"]*)"/g, '<a$1href="$2" target="_blank" rel="noopener"');
+function page(opts) { return newTab(pageHtml(opts)); }
+function pageHtml({ rel, canonical, pageTitle, description, h1, byline, body, jsonld, wide }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,12 +180,19 @@ function page({ rel, canonical, pageTitle, description, h1, byline, body, jsonld
     .state-grid a:hover{border-bottom-color:#00A86B;}
     h2.rc{margin-top:44px;}
     .rc-fig{font-size:14px;color:#5C6670;margin:-12px 0 20px;}
-    body.hr-national .article-wrap{max-width:1040px;}
+    .article-wrap, body.hr-national .article-wrap{max-width:820px;}
+    @media (max-width:600px){.article-wrap{padding:0 18px;}}
+    .article-wrap img, .article-wrap video{max-width:100%;height:auto;}
+    .article-wrap table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .rc-live{font-size:14px;margin:-8px 0 16px !important;}
+    .rc-live a{color:#0f7a4f;font-weight:600;}
+    .bw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+    .bw-grid .bw-col strong{display:block;}
     .sec-row{display:flex;flex-direction:column;gap:18px;align-items:flex-start;margin:0 0 22px;}
     .sec-text{flex:1 1 auto;min-width:0;max-width:72ch;}
-    .sec-fig{flex:1 1 auto;width:100%;max-width:640px;min-width:0;margin:0;}
+    .sec-fig{flex:1 1 auto;width:100%;max-width:100%;min-width:0;margin:0;}
     .sec-row--pair{flex-direction:row;flex-wrap:wrap;gap:22px;}
-    .sec-row--pair .sec-fig{flex:0 1 300px;min-width:220px;}
+    .sec-row--pair .sec-fig{flex:1 1 280px;min-width:0;}
     .hr-lede{font-size:18px;line-height:1.6;max-width:68ch;}
     .method-fold{margin:0 0 28px;}
     .method-fold summary{cursor:pointer;list-style:none;font-size:14.5px;font-weight:600;color:#0f7a4f;padding:10px 0;}
@@ -344,7 +353,7 @@ const winterSection = (st, name) => {
   const live = ((D.seasonalClosures && D.seasonalClosures[st]) || []).filter((c) => !/construct|rebuild|bridge work|rest area/i.test(c.headline));
   const usual = seasonalOf(st);
   if (!live.length && !usual.length) return '';
-  const out = [`<h2 class="rc">Winter closures</h2>`];
+  const out = [`<h2 class="rc">Winter closures</h2>`, live('../../', 'chains/', 'Live chain and winter road map'), live('../../', `seasonal/`, 'Roads that close for winter, by state')];
   if (live.length) out.push(box(`On ${name}'s feed as of ${dateLong(D.seasonalAsOf).replace(/, \d{4}$/, '')}`, live.map((c) => `<strong>${esc(route(st, c.route || ''))}</strong> &mdash; &ldquo;${esc(quote(c.headline).slice(0, 200))}&rdquo;`)));
   if (usual.length) out.push(box('Roads that usually close for winter', usual.map((e) => `<strong>${esc(!e.name || e.name === e.route ? e.route : e.name.startsWith(e.route) ? e.name : `${e.route}, ${e.name}`)}</strong> &mdash; ${esc(e.publicLine || `${e.typicalClose}. ${e.typicalReopen}.`)} <a href="${esc(e.sourceUrl)}" rel="noopener" target="_blank">Source</a>${(e.extraSources || []).map((x) => ` &middot; <a href="${esc(x.url)}" rel="noopener" target="_blank">${esc(x.label)} source</a>`).join('')}`)));
   out.push(`<p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>`);
@@ -410,9 +419,14 @@ national.push(`<p class="article-lead">What road feeds published in ${MONTH_NAME
 // paragraphs). Every number in it goes through check-numbers like the rest of the page. Skipped when the file is missing.
 let LEDE = null; try { LEDE = JSON.parse(readFileSync(resolve(ROOT, `data/highway-report-lede-${MONTH}.json`), 'utf8')); } catch {}
 if (Array.isArray(LEDE) && LEDE.length) national.push(LEDE.map((p) => `<p class="hr-lede">${esc(p)}</p>`).join('\n'));
-const JUMP = `<p style="margin:4px 0 30px;"><a href="#by-state" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;">Find your state &darr;</a></p>`;
+// The state and province pickers sit right under the headline numbers; the old 'Find your state' link jumped
+// most of the page (Leah 2026-11-06).
+const pickerOrder = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
+const picker = (id, flag, label, codes) => `<div style="flex:1 1 240px;min-width:0;"><label for="${id}" style="display:block;font-weight:600;margin:0 0 6px;"><span aria-hidden="true">${flag}</span> ${label}</label><select id="${id}" onchange="if(this.value)window.open(this.value,'_blank')" style="width:100%;min-height:44px;font-size:16px;padding:8px 10px;border:1px solid #C9CED3;border-radius:8px;background:#fff;"><option value="">Choose one</option>${codes.map((st) => `<option value="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</option>`).join('')}</select></div>`;
+const PICKERS = `<div id="by-state" style="display:flex;flex-wrap:wrap;gap:14px;margin:4px 0 30px;">${picker('state-jump', '\u{1F1FA}\u{1F1F8}', 'Pick your state', pickerOrder.filter((st) => !CANADA.has(st)))}${picker('province-jump', '\u{1F1E8}\u{1F1E6}', 'Pick your province', pickerOrder.filter((st) => CANADA.has(st)))}</div>`;
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
-national.push(JUMP);
+national.push(`<p style="margin:0 0 8px;">Every state and province has its own ${MONTH_NAME} report, with the routes that had the most crashes, closures and roadwork. Pick yours.</p>`);
+national.push(PICKERS);
 national.push(fold(methodBox('each state department of transportation (DOT) road feed, DriveBC, 511 Alberta and Manitoba 511', '')));
 // Monthly maps (scripts/road-report-maps/build.sh in the app repo), each in its own section beside the text
 // (Leah 2026-11-02: crashes under Crashes, closures under Closures, wildfires under Wildfires). Shown when the file exists.
@@ -423,9 +437,12 @@ const mapFig = (k, caption, alt) => !mapExists(k) ? '' : k === 'bridges'
 const alertAlt = (t) => `${t} posted on state and provincial road feeds in ${MONTH_NAME} ${YEAR}, one dot per alert`;
 const DOTS = 'Each dot is one alert a feed posted. Blank areas can mean a feed does not post that kind of alert.';
 const rowOpen = '<div class="sec-row"><div class="sec-text">';
+// Each section points at its live map (Leah 2026-11-06). Opens in a new tab like every other link on the page.
+const live = (rel, path, label) => `<p class="rc-live"><a href="${rel}${path}">${label} &rarr;</a></p>`;
 const rowClose = (fig) => `</div>${fig}</div>`;
 national.push('<!--sec:crash-->');
 national.push(`<h2 class="rc">Crashes</h2>`);
+national.push(live('../', 'closures/', 'Live crash and closure alerts on the map'));
 national.push(rowOpen);
 national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes appear on its feed. Your state's page shows which routes had the most crash alerts. </p>`);
 // Feeds with no crash alerts this month, listed under the paragraph in italics. Not linked: nothing to click through to (Leah 2026-11-02).
@@ -442,6 +459,7 @@ national.push(rowClose(mapFig('crash', `Crash alerts, ${MONTH_NAME}, one dot per
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push('<!--sec:closure-->');
 national.push(`<h2 class="rc">Closures and roadwork</h2>`);
+national.push(live('../', 'closures/', 'Live closure and roadwork alerts on the map'));
 national.push(rowOpen);
 national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most. </p>`);
 national.push(rowClose(mapFig('closure', `Road closure alerts, ${MONTH_NAME}, one dot per alert.`, alertAlt('Road closure alerts'))));
@@ -451,8 +469,18 @@ if (BW && BW.byMax.length) {
   national.push('<!--sec:border-->');
   national.push(`<h2 class="rc">Border waits</h2>`);
   national.push(`<p>Waits to enter the United States in standard passenger lanes, ${MONTH_NAME}, from hourly U.S. Customs and Border Protection readings. Averages use every valid hourly reading. Dates are local to each crossing.</p>`);
-  national.push(box('Highest single reading', [...BW.all].sort((x, y) => y.maxMin - x.maxMin || y.avgMin - x.avgMin).slice(0, 6).map((p) => `<strong>${portLink(p, '../')}</strong>${p.state ? ` (${stLink(p.state)})` : ''} &mdash; ${hm(p.maxMin)}, ${dayOf(p.maxAt, p)}`)));
-  national.push(box('Longest average wait', BW.byAvg.filter((p) => (p.readings || 0) >= 300).slice(0, 6).map((p) => `<strong>${portLink(p, '../')}</strong>${p.state ? ` (${stLink(p.state)})` : ''} &mdash; ${hm(p.avgMin)} average`)));
+  // Three columns (Leah 2026-11-06): into the US from Mexico, into the US from Canada, into Canada from the US.
+  // CBP publishes US-bound lanes only, so the Canada-bound column says so. 'Lowest wait' is the lowest average
+  // among crossings with at least 300 hourly readings; the feed carries no per-reading minimum.
+  const bwCol = (title, rows) => {
+    if (!rows.length) return `<div class="bw-col"><strong>${title}</strong><p class="rc-fig" style="margin:8px 0 0;">No data. The feed we read publishes waits into the United States only.</p></div>`;
+    const hi = [...rows].sort((x, y) => y.maxMin - x.maxMin || y.avgMin - x.avgMin)[0];
+    const lowPool = rows.filter((p) => (p.readings || 0) >= 300);
+    const lo = lowPool.length ? [...lowPool].sort((x, y) => x.avgMin - y.avgMin || x.maxMin - y.maxMin)[0] : null;
+    return `<div class="bw-col"><strong>${title}</strong><ul class="article-list" style="margin:8px 0 0;"><li>Highest single wait: <strong>${portLink(hi, '../')}</strong>${hi.state ? ` (${stLink(hi.state)})` : ''}, ${hm(hi.maxMin)}, ${dayOf(hi.maxAt, hi)}</li>${lo ? `<li>Lowest wait: <strong>${portLink(lo, '../')}</strong>${lo.state ? ` (${stLink(lo.state)})` : ''}, ${hm(lo.avgMin)} on average over ${n(lo.readings)} hourly readings</li>` : '<li>Lowest wait: no crossing had 300 readings</li>'}</ul></div>`;
+  };
+  national.push(`<div class="pull-stat bw-grid">${bwCol('Into the US from Mexico', BW.all.filter((p) => /Mexic/i.test(p.border || '')))}${bwCol('Into the US from Canada', BW.all.filter((p) => /Canad/i.test(p.border || '')))}${bwCol('Into Canada from the US', [])}</div>`);
+  national.push(box('Longest average wait', BW.byAvg.filter((p) => (p.readings || 0) >= 300).slice(0, 6).map((p) => `<strong>${portLink(p, '../')}</strong>${p.state ? ` (${stLink(p.state)})` : ''} &mdash; ${hm(p.avgMin)} average over ${n(p.readings)} hourly readings`)));
   national.push(`<p>Live waits are at <a href="../borders/">milecheckapp.com/borders</a>.</p>`);
 }
 // Seattle drawbridges moved to the Washington page (Leah 2026-11-02). The time-lapse stays with the maps.
@@ -460,17 +488,19 @@ if (BW && BW.byMax.length) {
 if (mapExists('cameras') || mapExists('bridges')) {
   national.push('<!--sec:cameras-->');
   national.push(`<h2 class="rc">Cameras and drawbridges</h2>`);
+  national.push(live('../', 'cameras/', 'Live traffic cameras') + live('../', 'seattle-drawbridges/', 'Seattle drawbridges, live'));
   national.push(`<div class="sec-row sec-row--pair">${mapFig('cameras', `Every DOT camera on MileCheck as ${MONTH_NAME} closed, one dot per camera.`, 'Every DOT camera on MileCheck, one dot per camera')}${mapFig('bridges', `Seattle drawbridge openings in ${MONTH_NAME}, sped up. <a href="${STATE_DIR_NAME}/washington.html#drawbridges">More in the Washington report</a>`, '')}</div>`);
 }
 if (FA) {
   const fireStates = Object.entries(FA.byState).sort((a, b) => b[1].acres - a[1].acres);
   national.push('<!--sec:fire-->');
   national.push(`<h2 class="rc">Wildfires</h2>`);
+  national.push(live('../', 'fire/', 'Live wildfire map'));
   national.push(rowOpen);
   national.push(`<p>The national wildfire feed (NIFC, plus the BC Wildfire Service) listed ${n(faTotals.active)} fire records ${fireAsOf} in the states and provinces we track, after prescribed burns were removed.${EX && EX.fires1000Plus != null ? ` ${n(EX.firesUnderOneAcre)} of them were under an acre. ${n(EX.fires1000Plus)} were 1,000 acres or more, and ${n(EX.fires1000PlusNotContained)} of those were not fully contained.` : ' Many are mostly or fully contained.'}</p>`);
   national.push(rowClose(mapFig('fires', `Wildfires on the national feed, ${fireAsOf}. Dot size shows acres.`, 'Wildfires on the national feed, one dot per fire, sized by acres')));
   // Top three shown, the rest behind a dropdown (Leah 2026-11-02: the top three were each over 100,000 acres).
-  const bigFires = fireStates.flatMap(([st, s]) => s.largest.map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${stLink(st)}</strong> &mdash; ${fireLine(f, st)}`);
+  const bigFires = fireStates.flatMap(([st, s]) => s.largest.filter((f) => Number(f.acres) >= 50).map((f) => ({ st, f }))).sort((x, y) => (y.f.acres || 0) - (x.f.acres || 0)).slice(0, 12).map(({ st, f }) => `<strong>${stLink(st)}</strong> &mdash; ${fireLine(f, st)}`);
   national.push(`<div class="pull-stat"><strong>Largest fires, ${fireAsOf}</strong>${list(bigFires.slice(0, 3))}${bigFires.length > 3 ? `<details style="margin-top:6px;"><summary style="cursor:pointer;font-weight:600;color:#0f7a4f;padding:10px 0;">Show the next ${bigFires.length - 3}</summary>${list(bigFires.slice(3))}</details>` : ''}</div>`);
   national.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
   national.push(`<p>Live fire perimeters and the closures near them are at <a href="../fire/">milecheckapp.com/fire</a>.</p>`);
@@ -480,6 +510,7 @@ if (FA) {
   if (wst.length) {
     national.push('<!--sec:winter-->');
     national.push(`<h2 class="rc">Winter closures</h2>`);
+    national.push(live('../', 'chains/', 'Live chain and winter road map') + live('../', 'seasonal/', 'Roads that close for winter, by state'));
     national.push(rowOpen);
     national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Tap a state for each road's usual closing and reopening times and the agency source. We update the list each month through winter.</p>`);
     national.push(rowClose(`<div class="sec-row sec-row--pair" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported, ${MONTH_NAME}.`, 'Where snowplows reported, one dot per reported position')}</div>`));
@@ -499,16 +530,7 @@ if (FA) {
   national.length = 0; national.push(...head);
   for (const k of ['fire', 'winter', 'crash', 'closure', 'border', 'cameras']) if (secs[k]) national.push(...secs[k]);
 }
-national.push(`<h2 class="rc" id="by-state">Your state's ${MONTH_NAME} report</h2>`);
-national.push(`<p>Every state and province has its own ${MONTH_NAME} report, with the routes that had the most crashes, closures and roadwork. Pick yours.</p>`);
-// Dropdown first so the list doesn't bury What's new (Leah 2026-11-02); the full list stays one tap away.
-{
-  const order = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAMES[b]));
-  // Two pickers, states on the left and provinces on the right, each with its flag (Leah 2026-11-02).
-  const picker = (id, flag, label, codes) => `<div style="flex:1 1 240px;min-width:0;"><label for="${id}" style="display:block;font-weight:600;margin:0 0 6px;"><span aria-hidden="true">${flag}</span> ${label}</label><select id="${id}" onchange="if(this.value)window.open(this.value,'_blank')" style="width:100%;min-height:44px;font-size:16px;padding:8px 10px;border:1px solid #C9CED3;border-radius:8px;background:#fff;"><option value="">Choose one</option>${codes.map((st) => `<option value="${STATE_DIR_NAME}/${slug(st)}.html">${NAMES[st]}</option>`).join('')}</select></div>`;
-  national.push(`<div style="display:flex;flex-wrap:wrap;gap:14px;margin:0 0 30px;">${picker('state-jump', '\u{1F1FA}\u{1F1F8}', 'Pick your state', order.filter((st) => !CANADA.has(st)))}${picker('province-jump', '\u{1F1E8}\u{1F1E6}', 'Pick your province', order.filter((st) => CANADA.has(st)))}</div>`);
-  // The full list was dropped once the pickers existed (Leah 2026-11-02).
-}
+// The state and province pickers moved up under the headline numbers (Leah 2026-11-06).
 
 // "What's new at MileCheck" (Leah: on every report, at the end). One file per month, written by hand
 // from that month's git log; only shipped, live things.
@@ -574,6 +596,7 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<h2 class="rc">Crashes, closures and roadwork</h2><p>${name}'s feed returned no records in ${MONTH_NAME}, so this page cannot say what was on the roads.</p>`);
   } else {
     parts.push(`<h2 class="rc">Crashes</h2>`);
+    parts.push(live('../../', 'closures/', 'Live crash and closure alerts on the map'));
     parts.push(S.crash > 0 ? `<p>${name}'s road feed carried ${n(S.crash)} crash ${plural(S.crash, 'alert', 'alerts')} in ${MONTH_NAME}.</p>` : `<p>No crash alerts were on ${name}'s feed in ${MONTH_NAME}. Not every agency publishes crash reports.</p>`);
     const hs = D.crashHotspots && D.crashHotspots[st];
     if (hs && hs.routes.filter(([r]) => realRoute(r)).length) parts.push(box('Routes with the most crash alerts', hs.routes.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
@@ -583,6 +606,7 @@ for (const st of Object.keys(NAMES)) {
     const fs = fatal.filter((f) => f.state === st);
     if (fs.length && ['CA', 'TX'].includes(st)) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
+    parts.push(live('../../', 'closures/', 'Live closure and roadwork alerts on the map'));
     parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     const rc = (S.routeCounts || []).filter(([r]) => r);
     if (rc.filter(([r]) => realRoute(r)).length) parts.push(box(`Routes with the most alerts in ${name}`, rc.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
@@ -599,12 +623,12 @@ for (const st of Object.keys(NAMES)) {
   }
   { const w = winterSection(st, name); if (w) parts.push(w); }
   if (ports.length) {
-    parts.push(`<h2 class="rc">Border waits</h2><p>Waits to enter the United States in standard passenger lanes at ${name}'s crossings, ${MONTH_NAME}, from hourly readings. Dates are local.</p>`);
+    parts.push(`<h2 class="rc">Border waits</h2>` + live('../../', 'borders/', 'Live border waits') + `<p>Waits to enter the United States in standard passenger lanes at ${name}'s crossings, ${MONTH_NAME}, from hourly readings. Dates are local.</p>`);
     parts.push(box('By crossing', ports.map((p) => `<strong>${portLink(p, '../../')}</strong> &mdash; ${p.maxMin ? `highest ${hm(p.maxMin)} (${dayOf(p.maxAt, p)}), average ${hm(p.avgMin)}` : `no wait in any of ${n(p.readings)} readings`}`)));
     parts.push(`<p>Live waits are at <a href="../../borders/">milecheckapp.com/borders</a>.</p>`);
   }
   if (st === 'WA' && BR && BR.length) {
-    parts.push(`<h2 class="rc" id="drawbridges">Seattle drawbridges</h2><p>Seattle's drawbridges opened ${n(bridgeTotal)} times in ${MONTH_NAME}.</p>`);
+    parts.push(`<h2 class="rc" id="drawbridges">Seattle drawbridges</h2>` + live('../../', 'seattle-drawbridges/', 'Seattle drawbridges, live') + `<p>Seattle's drawbridges opened ${n(bridgeTotal)} times in ${MONTH_NAME}.</p>`);
     // List and the month's time-lapse side by side (moved here from the national page, Leah 2026-11-02).
     const tl = existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/bridges.mp4`))
       ? `<figure style="margin:0;flex:0 1 260px;min-width:200px;"><video src="../highway-report-maps/${KEY}/bridges.mp4" poster="../highway-report-maps/${KEY}/bridges-poster.webp" width="720" height="900" controls muted playsinline preload="none" style="width:100%;height:auto;border-radius:8px;display:block;background:#0b0e12;"></video><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">Every opening in ${MONTH_NAME}, sped up.${BRIDGE_TL_TOTAL[KEY] && BRIDGE_TL_TOTAL[KEY] !== bridgeTotal ? ` The video counts by Seattle time, so it ends at ${n(BRIDGE_TL_TOTAL[KEY])}.` : ''}</figcaption></figure>`
@@ -613,8 +637,8 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<p>Live status is on <a href="../../maps/#drawbridges">the drawbridge map</a>. New in ${MONTH_NAME}: Crystal Mountain's summit camera and the Paradise camera at Mount Rainier. See them on the <a href="../../ski/crystal-mountain/">Crystal Mountain page</a> and the <a href="../../mountains/rainier/">Mount Rainier page</a>.</p>`);
   }
   if (fire) {
-    parts.push(`<h2 class="rc">Wildfires</h2><p>The national wildfire feed listed ${n(fire.active)} ${plural(fire.active, 'fire record', 'fire records')} in ${name} ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
-    parts.push(box(`Largest fires, ${fireAsOf}`, fire.largest.map((f) => fireLine(f, st))));
+    parts.push(`<h2 class="rc">Wildfires</h2>` + live('../../', 'fire/', 'Live wildfire map') + `<p>The national wildfire feed listed ${n(fire.active)} ${plural(fire.active, 'fire record', 'fire records')} in ${name} ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
+    parts.push(box(`Largest fires, ${fireAsOf}`, fire.largest.filter((f) => Number(f.acres) >= 50).map((f) => fireLine(f, st))));
     parts.push(`<p>Thank you to the firefighters and crews who worked these fires all season.</p>`);
     parts.push(`<p>Live fire perimeters are at <a href="../../fire/">milecheckapp.com/fire</a>.</p>`);
   }

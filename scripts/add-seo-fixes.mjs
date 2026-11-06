@@ -129,7 +129,8 @@ for (const p of paths) {
     const mod = (ld.match(/"dateModified":"(\d{4}-\d{2}-\d{2})/) || [])[1] || dt.modified;
     const h1End = html.indexOf('</h1>');
     const after = h1End > -1 ? html.slice(h1End, h1End + 600) : '';
-    if (h1End > -1 && !html.includes('class="page-dates"') && !/article-meta|<time\b/.test(after)) {
+    // No Published line when the page already shows a dated byline (article-byline / 'by MileCheck · <date>'): the October report showed the date twice (Leah 2026-11-06).
+    if (h1End > -1 && !html.includes('class="page-dates"') && !/article-meta|article-byline|by MileCheck &middot;|<time\b/.test(after)) {
       const line = `<p class="page-dates" style="font-size:.85em;opacity:.7;margin:.25em 0 1em">Published <time datetime="${pub}">${fmt(pub)}</time>${mod > pub ? ` · Updated <time datetime="${mod}">${fmt(mod)}</time>` : ''}</p>`;
       html = html.slice(0, h1End + 5) + `\n    ${line}` + html.slice(h1End + 5);
     }

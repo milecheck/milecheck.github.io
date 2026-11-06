@@ -88,10 +88,10 @@
         "icon": "rail"
       },
       {
-        "text": "A cell coverage map for highways in WA, OR, ID, MT, NV, WY and UT, from carrier-reported FCC data.",
-        "href": "/cell-coverage/",
-        "title": "Cell coverage map",
-        "icon": "signal"
+        "text": "Live traffic camera pages for 161 US cities, each with every DOT camera in and around that city on one page.",
+        "href": "/cameras/",
+        "title": "City camera pages",
+        "icon": "camera"
       }
     ]
   },
