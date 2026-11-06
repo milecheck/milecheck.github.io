@@ -38,11 +38,19 @@ export function exclusion(file, html = '') {
   return '';
 }
 
+// Each app has its own /get/ page. An app's pages send the menu button there, not to the all-apps page.
+export function getHref(file) {
+  if (/^(?:seattle-drawbridges|drawbridges)\//.test(file)) return '/get/drawbridges/';
+  if (/^mountains\//.test(file)) return '/get/mountains/';
+  return '/get/';
+}
+
 export function headerPartial(file, options = {}) {
   const pathname = '/' + file.replace(/index\.html$/, '');
   const active = activeSection(pathname, '');
   const home = file === 'index.html';
-  const links = LINKS.map(([key, label, href]) => {
+  const links = LINKS.map(([key, label, defaultHref]) => {
+    const href = key === 'get' ? getHref(file) : defaultHref;
     const current = active === key ? ' aria-current="page"' : '';
     const tab = home && ['home', 'story', 'pricing'].includes(key) ? ` data-tab="${key === 'story' ? 'story' : 'home'}"${key === 'pricing' ? ' data-goto="pricing"' : ''}` : '';
     const modal = key === 'get' && options.downloadModal ? ' data-dl' : '';
