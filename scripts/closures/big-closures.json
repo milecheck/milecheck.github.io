@@ -60,7 +60,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 95,
+   "missedChecks": 96,
    "note": null
   },
   "lat": 39.0618,
@@ -192,7 +192,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 106,
+   "missedChecks": 107,
    "note": null
   },
   "lat": 38.6899,
@@ -225,7 +225,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 78,
+   "missedChecks": 79,
    "note": null
   },
   "lat": 41.6106,
@@ -333,7 +333,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 163,
+   "missedChecks": 164,
    "note": null
   },
   "lat": 34.0173,
@@ -366,7 +366,7 @@
   },
   "status": {
    "state": "reported-closed",
-   "missedChecks": 0,
+   "missedChecks": 1,
    "note": null
   },
   "lat": 36.4547,
@@ -432,7 +432,7 @@
   },
   "status": {
    "state": "unconfirmed",
-   "missedChecks": 115,
+   "missedChecks": 116,
    "note": null
   },
   "lat": 39.3044,
