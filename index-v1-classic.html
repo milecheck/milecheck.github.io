@@ -1437,7 +1437,7 @@
     var m=document.getElementById('dlModal');
     document.addEventListener('click',function(e){
       var t=e.target.closest?e.target.closest('[data-dl]'):null;
-      if(t){ e.preventDefault(); m.style.display='flex'; return; }
+      if(t){ e.preventDefault(); if(window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine),(min-width:1024px)').matches){ window.open('/get/','_blank','noopener'); return; } m.style.display='flex'; return; }
       if(e.target===m||e.target.id==='dlClose'){ m.style.display='none'; }
     });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape') m.style.display='none'; });
