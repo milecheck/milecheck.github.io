@@ -1,0 +1,886 @@
+{
+ "/api/changelog/": {
+  "published": "2026-10-30",
+  "modified": "2026-11-01"
+ },
+ "/api/data-accuracy/": {
+  "published": "2026-10-30",
+  "modified": "2026-11-01"
+ },
+ "/api/data-quality/": {
+  "published": "2026-11-01",
+  "modified": "2026-11-04"
+ },
+ "/api/errors/": {
+  "published": "2026-10-30",
+  "modified": "2026-10-30"
+ },
+ "/api/versioning/": {
+  "published": "2026-10-30",
+  "modified": "2026-10-30"
+ },
+ "/are-there-high-wind-warnings-for-trucks-on-my-route/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/best-binoculars-for-mountain-views/": {
+  "published": "2026-10-08",
+  "modified": "2026-10-08"
+ },
+ "/best-dash-cams-for-your-car/": {
+  "published": "2026-09-26",
+  "modified": "2026-09-28"
+ },
+ "/best-fall-road-trips/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-03"
+ },
+ "/best-portable-jump-starters/": {
+  "published": "2026-09-26",
+  "modified": "2026-09-28"
+ },
+ "/best-portable-tire-inflators/": {
+  "published": "2026-09-26",
+  "modified": "2026-09-28"
+ },
+ "/best-tire-chains-for-mountain-passes/": {
+  "published": "2026-09-26",
+  "modified": "2026-09-28"
+ },
+ "/best-winter-car-emergency-kits/": {
+  "published": "2026-09-26",
+  "modified": "2026-09-28"
+ },
+ "/blog/carplay-approved.html": {
+  "published": "2026-06-06",
+  "modified": "2026-09-12"
+ },
+ "/blog/chain-control-alerts-for-fleets.html": {
+  "published": "2026-09-25",
+  "modified": "2026-09-26"
+ },
+ "/blog/dash-display-early-access.html": {
+  "published": "2026-09-25",
+  "modified": "2026-10-22"
+ },
+ "/blog/dot-alerts-api-for-fleets.html": {
+  "published": "2026-09-25",
+  "modified": "2026-10-31"
+ },
+ "/blog/fleet-dispatch-mile-markers.html": {
+  "published": "2026-09-25",
+  "modified": "2026-10-25"
+ },
+ "/blog/geotab-marketplace.html": {
+  "published": "2026-06-25",
+  "modified": "2026-10-25"
+ },
+ "/blog/highway-report-october-2026-states/alabama.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/alaska.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/alberta.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/arizona.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/arkansas.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/british-columbia.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/california.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/colorado.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/connecticut.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/delaware.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/florida.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/georgia.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/hawaii.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/idaho.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/illinois.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/indiana.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/iowa.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/kansas.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/kentucky.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/louisiana.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/maine.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/manitoba.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/maryland.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/massachusetts.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/michigan.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/minnesota.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/mississippi.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/missouri.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/montana.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/nebraska.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/nevada.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/new-hampshire.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/new-jersey.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/new-mexico.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/new-york.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/north-carolina.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/north-dakota.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/ohio.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/oklahoma.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/oregon.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/pennsylvania.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/rhode-island.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/south-carolina.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/south-dakota.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/tennessee.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/texas.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/utah.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/vermont.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/virginia.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/washington.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-03"
+ },
+ "/blog/highway-report-october-2026-states/west-virginia.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/wisconsin.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/highway-report-october-2026-states/wyoming.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/blog/how-a-crash-report-reaches-your-phone.html": {
+  "published": "2026-09-28",
+  "modified": "2026-10-08"
+ },
+ "/blog/how-roads-are-funded.html": {
+  "published": "2026-09-28",
+  "modified": "2026-10-08"
+ },
+ "/blog/iowa-i35-road-conditions.html": {
+  "published": "2026-10-28",
+  "modified": "2026-10-28"
+ },
+ "/blog/labor-day-weekend-recap-2026.html": {
+  "published": "2026-09-08",
+  "modified": "2026-09-14"
+ },
+ "/blog/mile-marker-420/": {
+  "published": "2026-10-25",
+  "modified": "2026-10-25"
+ },
+ "/blog/road-report-october-2026.html": {
+  "published": "2026-11-01",
+  "modified": "2026-11-05"
+ },
+ "/blog/road-report-september-2026.html": {
+  "published": "2026-09-25",
+  "modified": "2026-11-05"
+ },
+ "/border-wait-times/": {
+  "published": "2026-10-16",
+  "modified": "2026-10-16"
+ },
+ "/breakdown-on-the-autobahn/": {
+  "published": "2026-09-02",
+  "modified": "2026-09-03"
+ },
+ "/can-google-maps-show-mile-markers/": {
+  "published": "2026-08-15",
+  "modified": "2026-10-31"
+ },
+ "/can-my-dispatch-software-show-road-closures/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/chains-or-all-season-tires/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/chains-required-explained/": {
+  "published": "2026-07-13",
+  "modified": "2026-09-03"
+ },
+ "/chains-required-mt-hood/": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/chains-required-snoqualmie-pass/": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/chains-required-stevens-pass/": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/check-road-conditions-before-a-trip/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-03"
+ },
+ "/contact-help-no-cell-signal/": {
+  "published": "2026-10-02",
+  "modified": "2026-10-26"
+ },
+ "/do-mile-markers-start-at-the-state-line/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/does-apple-maps-show-mile-markers/": {
+  "published": "2026-10-31",
+  "modified": "2026-10-31"
+ },
+ "/does-carplay-show-what-mile-marker-im-at/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/does-my-state-dot-publish-mile-marker-data/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/does-trucker-path-show-dot-511-road-alerts/": {
+  "published": "2026-10-31",
+  "modified": "2026-10-31"
+ },
+ "/does-waze-have-a-truck-mode/": {
+  "published": "2026-10-31",
+  "modified": "2026-10-31"
+ },
+ "/dot-jobs/": {
+  "published": "2026-10-16",
+  "modified": "2026-11-05"
+ },
+ "/dragging-trailer-chains-wildfire/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-03"
+ },
+ "/drive-in-us-foreign-license/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/drive-into-canada/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-02"
+ },
+ "/drive-into-us-from-canada/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-02"
+ },
+ "/drive-or-fly-los-angeles-las-vegas/": {
+  "published": "2026-09-24",
+  "modified": "2026-10-09"
+ },
+ "/drive-or-fly-orlando-miami/": {
+  "published": "2026-09-24",
+  "modified": "2026-10-09"
+ },
+ "/drive-or-fly-seattle-portland/": {
+  "published": "2026-09-24",
+  "modified": "2026-10-09"
+ },
+ "/driving-a-car-vs-a-truck/": {
+  "published": "2026-09-01",
+  "modified": "2026-11-01"
+ },
+ "/driving-conditions-i-40-late-november/": {
+  "published": "2026-10-27",
+  "modified": "2026-10-27"
+ },
+ "/driving-conditions-i-5-late-november/": {
+  "published": "2026-10-27",
+  "modified": "2026-10-27"
+ },
+ "/driving-conditions-i-70-late-november/": {
+  "published": "2026-10-27",
+  "modified": "2026-10-27"
+ },
+ "/driving-conditions-i-80-late-november/": {
+  "published": "2026-10-27",
+  "modified": "2026-10-27"
+ },
+ "/driving-conditions-i-90-late-november/": {
+  "published": "2026-10-27",
+  "modified": "2026-10-27"
+ },
+ "/driving-i-80-in-november/": {
+  "published": "2026-10-02",
+  "modified": "2026-10-27"
+ },
+ "/driving-i-90-in-october/": {
+  "published": "2026-10-02",
+  "modified": "2026-10-27"
+ },
+ "/driving-in-the-us-foreign-visitor-guide/": {
+  "published": "2026-09-02",
+  "modified": "2026-09-25"
+ },
+ "/es/breakdown-on-the-autobahn/": {
+  "published": "2026-09-02",
+  "modified": "2026-10-13"
+ },
+ "/es/driving-in-the-us-foreign-visitor-guide/": {
+  "published": "2026-09-02",
+  "modified": "2026-10-13"
+ },
+ "/ev-chargers/": {
+  "published": "2026-10-15",
+  "modified": "2026-11-04"
+ },
+ "/ev-charging-cost/": {
+  "published": "2026-10-15",
+  "modified": "2026-11-03"
+ },
+ "/fr/drive-into-canada/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-02"
+ },
+ "/fr/drive-into-us-from-canada/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-02"
+ },
+ "/fr/driving-in-the-us-foreign-visitor-guide/": {
+  "published": "2026-09-03",
+  "modified": "2026-09-25"
+ },
+ "/fr/will-my-phone-work-in-canada/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-02"
+ },
+ "/fr/will-my-phone-work-in-the-us/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-30"
+ },
+ "/gas-prices/": {
+  "published": "2026-10-15",
+  "modified": "2026-11-04"
+ },
+ "/gas-vs-electric-car/": {
+  "published": "2026-10-16",
+  "modified": "2026-11-03"
+ },
+ "/gear/": {
+  "published": "2026-09-28",
+  "modified": "2026-09-28"
+ },
+ "/highway-driving-tips-for-new-drivers/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/highway-sign-colors/": {
+  "published": "2026-07-13",
+  "modified": "2026-09-03"
+ },
+ "/highway-tips-for-new-cdl-drivers/": {
+  "published": "2026-09-01",
+  "modified": "2026-11-01"
+ },
+ "/highway-tips-for-new-snowplow-drivers/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/highway-tips-for-new-tow-truck-drivers/": {
+  "published": "2026-09-01",
+  "modified": "2026-10-03"
+ },
+ "/highway-vs-freeway-vs-expressway/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/hit-a-deer-what-to-do/": {
+  "published": "2026-09-24",
+  "modified": "2026-10-19"
+ },
+ "/how-do-boats-ask-a-drawbridge-to-open/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-do-fire-crews-find-a-crash-by-mile-marker/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-do-i-add-mile-markers-to-google-maps-in-my-app/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-do-i-find-a-mile-marker-on-a-map/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-do-i-get-a-feed-of-road-closures-for-my-website/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-do-i-tell-911-where-i-am-on-the-highway/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-do-truckers-find-their-mile-marker-for-a-breakdown-call/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-do-you-drive-safely-in-winter-conditions/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-15"
+ },
+ "/how-do-you-know-if-a-mountain-pass-is-open/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-15"
+ },
+ "/how-does-an-ambulance-get-to-the-other-side-of-a-divided-highway/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-far-apart-are-mile-markers/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-interstates-are-numbered/": {
+  "published": "2026-07-13",
+  "modified": "2026-09-03"
+ },
+ "/how-long-do-crashes-take-to-clear/": {
+  "published": "2026-10-16",
+  "modified": "2026-10-19"
+ },
+ "/how-often-are-chains-required-on-washington-passes/": {
+  "published": "2026-10-29",
+  "modified": "2026-10-29"
+ },
+ "/how-to-charge-an-electric-car/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-16"
+ },
+ "/how-to-convert-gps-coordinates-to-a-mile-marker/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/how-to-pump-gas/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-15"
+ },
+ "/how-to-put-on-tire-chains/": {
+  "published": "2026-09-26",
+  "modified": "2026-10-02"
+ },
+ "/how-to-use-your-parking-brake/": {
+  "published": "2026-10-03",
+  "modified": "2026-10-03"
+ },
+ "/international-driving-permit-usa/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/is-mount-st-helens-active-right-now/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/is-there-a-drawbridge-status-api/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/is-there-a-mile-marker-layer-for-cad-software/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/is-there-canadian-kilometre-marker-data/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/is-there-one-app-with-511-alerts-for-every-state/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/iteris-cleardata-road511-alternative/": {
+  "published": "2026-10-31",
+  "modified": "2026-10-31"
+ },
+ "/left-exit-vs-right-exit/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-03"
+ },
+ "/loneliest-road-in-america/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/mexico-car-insurance/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/mile-marker-api/": {
+  "published": "2026-11-03",
+  "modified": "2026-11-05"
+ },
+ "/mile-marker-database/": {
+  "published": "2026-11-03",
+  "modified": "2026-11-05"
+ },
+ "/mile-marker-lookup-for-dispatch/": {
+  "published": "2026-11-03",
+  "modified": "2026-11-03"
+ },
+ "/mile-markers-vs-exit-numbers/": {
+  "published": "2026-07-13",
+  "modified": "2026-10-31"
+ },
+ "/move-over-laws/": {
+  "published": "2026-10-03",
+  "modified": "2026-11-01"
+ },
+ "/night-driving-desert-and-passes/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/nyc-airport-taxi-vs-uber/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/october-mountain-views/": {
+  "published": "2026-10-08",
+  "modified": "2026-10-08"
+ },
+ "/one-api-for-every-states-511-road-alerts/": {
+  "published": "2026-10-31",
+  "modified": "2026-10-31"
+ },
+ "/pa/km-markers-canada/": {
+  "published": "2026-09-25",
+  "modified": "2026-09-25"
+ },
+ "/pa/report-location/": {
+  "published": "2026-09-25",
+  "modified": "2026-09-25"
+ },
+ "/pa/what-is-my-mile-marker/": {
+  "published": "2026-09-25",
+  "modified": "2026-09-25"
+ },
+ "/pt/driving-in-the-us-foreign-visitor-guide/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-13"
+ },
+ "/rent-a-car-in-arizona/": {
+  "published": "2026-09-28",
+  "modified": "2026-10-09"
+ },
+ "/rent-a-car-in-nyc/": {
+  "published": "2026-09-24",
+  "modified": "2026-10-09"
+ },
+ "/rent-a-car-in-orlando/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-09"
+ },
+ "/rental-car-canada-mexico/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/rental-car-insurance-credit-card/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/rental-car-toll-pass/": {
+  "published": "2026-09-24",
+  "modified": "2026-10-19"
+ },
+ "/road-street-avenue-difference/": {
+  "published": "2026-08-31",
+  "modified": "2026-10-15"
+ },
+ "/road-trip-with-a-dog/": {
+  "published": "2026-10-02",
+  "modified": "2026-10-03"
+ },
+ "/roadside-wildfire-causes/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-03"
+ },
+ "/runaway-truck-ramps/": {
+  "published": "2026-08-31",
+  "modified": "2026-10-26"
+ },
+ "/sand-vs-salt-vs-brine/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/show-pass-closures-on-store-tv/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-15"
+ },
+ "/snow-tires-wa-or-co/": {
+  "published": "2026-09-24",
+  "modified": "2026-09-25"
+ },
+ "/steep-grade-signs-explained/": {
+  "published": "2026-08-31",
+  "modified": "2026-10-03"
+ },
+ "/surveyed-vs-calculated-mileposts/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/three-digit-interstate-numbers/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-03"
+ },
+ "/truck-speed-limits-by-state/": {
+  "published": "2026-11-01",
+  "modified": "2026-11-01"
+ },
+ "/tv-road-conditions-gas-station/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-15"
+ },
+ "/us-highways-vs-interstates/": {
+  "published": "2026-07-13",
+  "modified": "2026-10-15"
+ },
+ "/washington-larch-season/": {
+  "published": "2026-10-08",
+  "modified": "2026-10-08"
+ },
+ "/what-app-do-truck-drivers-use-for-road-closures/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/what-are-rumble-strips/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/what-are-the-small-green-signs-every-tenth-of-a-mile/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/what-do-r1-r2-r3-chain-controls-mean-on-i-80/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-22"
+ },
+ "/what-does-a-flashing-yellow-arrow-mean/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/what-exit-am-i-near/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/what-is-511/": {
+  "published": "2026-08-31",
+  "modified": "2026-10-31"
+ },
+ "/what-is-black-ice/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-03"
+ },
+ "/what-is-wzdx-work-zone-data/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/what-should-i-do-if-i-break-down-on-the-interstate/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/what-to-put-on-convenience-store-tv/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-15"
+ },
+ "/what-vehicles-do-state-dots-and-police-drive/": {
+  "published": "2026-10-16",
+  "modified": "2026-10-19"
+ },
+ "/where-can-i-download-milepost-gis-data/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/where-can-i-get-mile-marker-data/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/which-highways-are-most-dangerous-in-winter/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-16"
+ },
+ "/who-maintains-the-roads/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/why-do-mile-markers-go-up-in-one-direction/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/why-does-i-70-close-in-colorado/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-22"
+ },
+ "/why-does-i-80-close-in-wyoming/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-22"
+ },
+ "/why-does-snoqualmie-pass-close/": {
+  "published": "2026-10-15",
+  "modified": "2026-10-29"
+ },
+ "/why-is-the-highway-closed/": {
+  "published": "2026-11-05",
+  "modified": "2026-11-05"
+ },
+ "/why-no-interstate-50-or-60/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ },
+ "/why-rainier-looks-so-big/": {
+  "published": "2026-10-08",
+  "modified": "2026-10-08"
+ },
+ "/will-my-phone-work-in-canada/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-02"
+ },
+ "/will-my-phone-work-in-the-us/": {
+  "published": "2026-09-25",
+  "modified": "2026-10-30"
+ },
+ "/winter-car-prep-checklist/": {
+  "published": "2026-08-31",
+  "modified": "2026-09-26"
+ },
+ "/zipper-merge-explained/": {
+  "published": "2026-09-01",
+  "modified": "2026-09-03"
+ }
+}

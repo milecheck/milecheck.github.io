@@ -74,6 +74,7 @@ function orgDefinition(existing) {
   o.name = 'MileCheck';
   o.legalName = 'MileCheck LLC';
   o.url = `${BASE}/`;
+  o.logo = LOGO;
   o.sameAs = SAME_AS;
   o.contactPoint = [{ '@type': 'ContactPoint', contactType: 'sales', email: 'sales@milecheckapp.com' }, { '@type': 'ContactPoint', contactType: 'customer support', email: 'info@milecheckapp.com' }];
   return o;
@@ -81,6 +82,14 @@ function orgDefinition(existing) {
 
 // Google's Dataset parser wants a typed object for creator/publisher, not a bare @id reference.
 const DATASET_ORG = { '@type': 'Organization', '@id': ORG, name: 'MileCheck', url: `${BASE}/` };
+const LOGO = { '@type': 'ImageObject', url: `${BASE}/apple-touch-icon.png`, width: 180, height: 180 };
+const BANNER = `${BASE}/images/og-banner-light.png`;
+const ARTICLE_ORG = { '@type': 'Organization', '@id': ORG, name: 'MileCheck', url: `${BASE}/` };
+const ARTICLE_PUBLISHER = { ...ARTICLE_ORG, logo: LOGO };
+const DATES = existsSync(join(ROOT, 'data/article-dates.json')) ? JSON.parse(readFileSync(join(ROOT, 'data/article-dates.json'), 'utf8')) : {};
+const unent = (x) => x.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&mdash;/g, '—').replace(/&ndash;/g, '–').replace(/&middot;/g, '·').replace(/&quot;/g, '"').replace(/&#39;|&rsquo;/g, '’').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+const pageH1 = (src) => { const m = src.replace(/<script\b[\s\S]*?<\/script>/g, '').match(/<h1[^>]*>([\s\S]*?)<\/h1>/); return m ? unent(m[1]) : ''; };
+const pageTitle = (src) => { const m = src.match(/<title>([^<]*)<\/title>/); return m ? unent(m[1]).replace(/ \| MileCheck$/, '') : ''; };
 
 function datasetFor(rel, canon) {
   // National: blog/road-report-<month>-<year>.html ; states: blog/highway-report-<month>-<year>-states/<state>.html
@@ -154,9 +163,15 @@ for (const f of walk(ROOT)) {
         const t = typesOf(d).find((x) => MAIN.includes(x));
         if (!d['@id']) { d['@id'] = `${canon}#${t.toLowerCase()}`; idsAdded++; }
         if (!d.isPartOf) d.isPartOf = { '@id': SITE };
-        if (['Article', 'NewsArticle', 'BlogPosting'].includes(t)) {
-          if (!d.publisher) d.publisher = { '@id': ORG };
-          if (!d.author) d.author = { '@id': ORG };
+        if (['Article', 'NewsArticle', 'BlogPosting', 'TechArticle'].includes(t)) {
+          // 2026-11-06 (HeyCatch audit g_schema_required): typed author/publisher, not a bare @id, plus
+          // headline, image and dates. Author is the company until Leah decides on bylines.
+          d.author = ARTICLE_ORG;
+          d.publisher = ARTICLE_PUBLISHER;
+          if (!d.headline) { const h = pageH1(src) || pageTitle(src); if (h) d.headline = h.slice(0, 110); }
+          if (!d.image) d.image = (src.match(/<meta property="og:image" content="([^"]+)"/) || [])[1] || BANNER;
+          const dt = DATES[`/${rel.replace(/index\.html$/, '')}`];
+          if (dt) { if (!d.datePublished) d.datePublished = dt.published; if (!d.dateModified) d.dateModified = dt.modified; }
         }
       }
     }

@@ -1,0 +1,1768 @@
+{
+ "/api/data-quality/": {
+  "desc": "Per state and province: how often MileCheck reads the agency, how many alerts it holds, how many have a DOT mile marker, how old the newest record is, and gaps."
+ },
+ "/api/plan/": {
+  "desc": "What MileCheck sells to companies: mile marker files, a live road alerts API and records of past alerts. API plans start at $0. Data licenses are a yearly fee."
+ },
+ "/are-there-high-wind-warnings-for-trucks-on-my-route/": {
+  "title": "Are there high wind warnings for trucks? | MileCheck"
+ },
+ "/best-fall-road-trips/": {
+  "title": "Best fall road trips in the US for foliage | MileCheck"
+ },
+ "/blog/": {
+  "title": "MileCheck blog on highway data and state DOTs"
+ },
+ "/blog/carplay-approved.html": {
+  "title": "Why Driving Task approval on CarPlay is rare | MileCheck",
+  "desc": "MileCheck is live on CarPlay and Android Auto. This post explains Apple's Driving Task category, why few apps clear it, and why a plain car screen is the point."
+ },
+ "/blog/chain-control-alerts-for-fleets.html": {
+  "desc": "Chain and traction laws are set state by state and can change within the hour. A multi-state route means watching several systems, or one feed that covers them."
+ },
+ "/blog/dash-display-early-access.html": {
+  "title": "A dash display that shows your mile marker | MileCheck"
+ },
+ "/blog/dot-alerts-api-for-fleets.html": {
+  "title": "The State DOT Feeds API for live closures in 50 states",
+  "desc": "Every state DOT publishes live road alerts, and no two do it the same way. This post covers what it takes to build or license one feed for all 50 states."
+ },
+ "/blog/drawbridge-maps.html": {
+  "title": "Every US drawbridge has a federal opening rule | MileCheck",
+  "desc": "There are 800+ regulated drawbridges in the US, each with a federal opening rule in 33 CFR 117. We turned it into maps for Florida, New Jersey and Seattle."
+ },
+ "/blog/fleet-dispatch-mile-markers.html": {
+  "title": "Why fleet dispatch still uses mile markers, not GPS",
+  "desc": "Telematics gives a fleet a GPS coordinate, but dispatch, DOTs and roadside help work in route and mile marker. Here is the gap and how MileCheck closes it."
+ },
+ "/blog/geotab-marketplace.html": {
+  "desc": "MileCheck is live on the Geotab Marketplace. Fleets on Geotab can add real-time highway mile markers and live state DOT feeds in MyGeotab and Geotab Drive."
+ },
+ "/blog/highway-report-october-2026-states/california.html": {
+  "desc": "295 crash, 997 closure and 2,115 roadwork alerts from the California DOT feed in October 2026, compared with earlier months, plus border waits and wildfires."
+ },
+ "/blog/highway-report-october-2026-states/new-mexico.html": {
+  "desc": "New Mexico's DOT feed published 11 crash, 39 closure and 125 roadwork alerts in October 2026, compared with earlier months, plus border waits and wildfires."
+ },
+ "/blog/highway-report-october-2026-states/washington.html": {
+  "desc": "58 crash, 21 closure and 956 roadwork alerts published by Washington's DOT feed in October 2026, compared with earlier months, plus border waits and wildfires."
+ },
+ "/blog/how-a-crash-report-reaches-your-phone.html": {
+  "desc": "A trooper radios a crash at mile 184. This post follows the steps to your phone, from the DOT traffic center and 511 feed to MileCheck's server."
+ },
+ "/blog/how-milecheck-finds-your-mile-marker-offline.html": {
+  "title": "How MileCheck finds your mile marker offline | MileCheck",
+  "desc": "Mile markers don't move. This post explains how MileCheck turns your GPS position into an exact mile marker offline and holds your route through overlaps."
+ },
+ "/blog/how-roads-are-funded.html": {
+  "desc": "Where US highway money comes from: the 18.4-cent federal gas tax unchanged since 1993, state fuel taxes, tolls, fees, and why the Highway Trust Fund is short."
+ },
+ "/blog/how-to-find-your-mile-marker.html": {
+  "desc": "What highway mile markers mean, how to read them, what they count from, and how to find your exact mile marker with no sign in sight or no cell signal."
+ },
+ "/blog/insurance-claim-mile-marker.html": {
+  "title": "What mile marker goes on an insurance claim? | MileCheck"
+ },
+ "/blog/iowa-i35-road-conditions.html": {
+  "title": "Iowa I-35 road conditions by milepost | MileCheck"
+ },
+ "/blog/km-markers-alberta.html": {
+  "desc": "How kilometre markers work on Alberta highways, including the QEII from Calgary to Edmonton, the Trans-Canada to Banff and the Icefields Parkway in winter."
+ },
+ "/blog/km-markers-british-columbia.html": {
+  "title": "Kilometre markers in British Columbia | MileCheck",
+  "desc": "How BC marks its highways with landmark-to-landmark kilometre segments, the Coquihalla in winter, Highway 1 through the Fraser Canyon and the Sea-to-Sky."
+ },
+ "/blog/km-markers-northwest-territories.html": {
+  "title": "Kilometre markers in the Northwest Territories",
+  "desc": "On Northwest Territories highways the kilometre marker is your location. This guide covers the Mackenzie, the Dempster and the road to Tuktoyaktuk."
+ },
+ "/blog/km-markers-nova-scotia.html": {
+  "title": "Kilometre markers in Nova Scotia | MileCheck",
+  "desc": "Nova Scotia posts kilometre markers on its 100-series highways such as the 102, 104, 101 and 103, but not on trunk routes or the Cabot Trail. Live in the app."
+ },
+ "/blog/km-markers-ontario.html": {
+  "desc": "How kilometre markers work on Ontario highways, including the 401, the QEW and the 400-series, where exit numbers are the km-posts. Live in the MileCheck app."
+ },
+ "/blog/km-markers-quebec.html": {
+  "title": "Repères kilométriques in Quebec driving guide | MileCheck",
+  "desc": "How the small green repères kilométriques work along Quebec autoroutes, plus reading French-first signs on the A-20, A-40 and Route 132."
+ },
+ "/blog/labor-day-weekend-2026.html": {
+  "desc": "What is already scheduled on the roads for Labor Day weekend, September 4 to 7, 2026, checked across every state DOT feed plus British Columbia."
+ },
+ "/blog/labor-day-weekend-recap-2026.html": {
+  "desc": "444 crashes in 33 states, 1,971 closures, border waits, 213 Seattle drawbridge openings and wildfires by state, from state DOT feeds, Sept. 3 to 7, 2026."
+ },
+ "/blog/lane-closed-mp142.html": {
+  "title": "Why can't Google Maps show a lane closed at MP 142?"
+ },
+ "/blog/live-highway-cameras.html": {
+  "desc": "The Live Highway Cameras map shows 53,000+ state DOT cameras across 45 states, tagged with route and mile marker, so you can check Snoqualmie or Donner Pass."
+ },
+ "/blog/mile-marker-420/": {
+  "title": "Why do mile marker 420 signs keep getting stolen?"
+ },
+ "/blog/mile-markers-alaska.html": {
+  "desc": "How mile markers work on Alaska's named highways, including the Glenn, the Parks, the Seward and the Richardson. Live Alaska DOT feeds are in the app."
+ },
+ "/blog/mile-markers-arizona.html": {
+  "desc": "How mile markers work on Arizona highways, including I-10, I-17 starting at 194 and kilometer-posted I-19, plus monsoon dust storms and Flagstaff snow."
+ },
+ "/blog/mile-markers-arkansas.html": {
+  "desc": "How mile markers work on Arkansas highways, including I-40 from Fort Smith to Memphis, I-30, I-49 and the Ozark grades, plus live state DOT feeds in one app."
+ },
+ "/blog/mile-markers-connecticut.html": {
+  "desc": "How mile markers work on Connecticut highways, including I-95 on the shoreline, I-84 inland and mile-based exit numbers, plus live CTDOT road alerts."
+ },
+ "/blog/mile-markers-hawaii.html": {
+  "desc": "How mile markers work in Hawaii, including the H-1, H-2 and H-3 on Oahu, island route numbering and the Road to Hana. Live HDOT alerts are in the app."
+ },
+ "/blog/mile-markers-kansas.html": {
+  "desc": "How mile markers work on Kansas highways, including the longest I-70 stretch in any state, the Kansas Turnpike's milepost line and winter whiteouts."
+ },
+ "/blog/mile-markers-massachusetts.html": {
+  "desc": "How mile markers work on Massachusetts highways, including the MassPike, I-95 and the 2020 milepost-based exit renumbering, plus live MassDOT alerts in one app."
+ },
+ "/blog/mile-markers-mississippi.html": {
+  "desc": "How mile markers work on Mississippi highways, including I-55, I-20 through Jackson, I-10 on the Gulf and the Natchez Trace, plus live MDOT road alerts."
+ },
+ "/blog/mile-markers-nebraska.html": {
+  "desc": "How mile markers work in Nebraska, including 455 miles of I-80 along the Platte River, sandhills two-lanes and winter closures, plus live DOT feeds."
+ },
+ "/blog/mile-markers-new-hampshire.html": {
+  "desc": "How mile markers work on New Hampshire highways, including I-93 through Franconia Notch, I-95's 18-mile coast run and US-3, plus live NHDOT road alerts."
+ },
+ "/blog/mile-markers-oklahoma.html": {
+  "desc": "How mile markers work on Oklahoma highways, including I-40, I-35 and the turnpike network with its own milepost lines, plus live state DOT feeds in one app."
+ },
+ "/blog/mile-markers-oregon.html": {
+  "desc": "How mile markers work on Oregon highways, including I-5, I-84 through the Gorge, US-97, US-101 and the mountain grades, plus live ODOT TripCheck alerts."
+ },
+ "/blog/mile-markers-pennsylvania.html": {
+  "desc": "How mile markers work in Pennsylvania, including I-80, the PA Turnpike's separate milepost system and PennDOT's SR markers, plus live 511PA alerts."
+ },
+ "/blog/mile-markers-vs-gps.html": {
+  "title": "Do mile markers still matter with GPS? | MileCheck",
+  "desc": "Your phone shows a dot on a map. Dispatch, troopers and DOT crews ask for a route and mile marker. Here is why mile markers still matter next to GPS."
+ },
+ "/blog/road-report-august-2026.html": {
+  "desc": "MileCheck logged 4,461 closures and 1,170 crashes in daily state DOT snapshots from August 14 to 31, plus 2,750 wildfires and their largest reported acreage."
+ },
+ "/blog/road-report-october-2026.html": {
+  "desc": "36,894 unique alerts from US state and Canadian provincial road feeds in October 2026: 2,316 crash, 5,399 closure and 23,882 roadwork alerts."
+ },
+ "/blog/seattle-drawbridges-august-2026.html": {
+  "title": "Seattle drawbridges opened 430 times in August"
+ },
+ "/blog/what-happens-when-you-cross-a-state-line.html": {
+  "title": "What happens when you cross a state line? | MileCheck",
+  "desc": "Highways don't stop at state lines. This post shows how MileCheck detects the crossing, splits your trip log and holds your route through highway overlaps."
+ },
+ "/blog/what-to-tell-911-highway-breakdown.html": {
+  "title": "What to tell 911 when you break down on the highway",
+  "desc": "Stranded on the shoulder? Here is what to tell 911 or #77 so they can find you, starting with the one thing dispatch asks for first, your mile marker."
+ },
+ "/blog/wildfire-road-closures.html": {
+  "title": "How to know if a wildfire closed your highway | MileCheck",
+  "desc": "Wildfires close Western highways every summer with little warning. How closures work, how to check before you drive, and why the mile marker matters."
+ },
+ "/border-wait-times/": {
+  "title": "When is the border wait shortest by crossing? | MileCheck",
+  "desc": "Border waits follow a weekly pattern. MileCheck has logged every U.S. land crossing hourly since July 24, 2026. See when each is busiest and quietest."
+ },
+ "/borders/": {
+  "title": "Live US border crossing wait times | MileCheck",
+  "desc": "Live wait times at US land crossings with Canada and Mexico. Passenger and commercial delays from CBP, sorted by wait. Is San Ysidro backed up right now?"
+ },
+ "/breakdown-on-the-autobahn/": {
+  "title": "What to do if you break down on the Autobahn | MileCheck"
+ },
+ "/bridges/": {
+  "title": "Is the Seattle drawbridge up right now? | MileCheck",
+  "desc": "Live status for the Fremont, Ballard, Montlake, South Park and 1st Ave S drawbridges. See if a bridge is up now, how long it has been up and when it came down."
+ },
+ "/bridges/alabama/": {
+  "title": "Alabama drawbridge map | MileCheck"
+ },
+ "/bridges/arkansas/": {
+  "title": "Arkansas drawbridge map and opening rules | MileCheck"
+ },
+ "/bridges/california/": {
+  "title": "California drawbridge map with bridge phones | MileCheck",
+  "desc": "Every movable bridge in California on one map, including the Sacramento Delta bridges, Alameda's estuary bascules and SF's Mission Creek bridges, with rules."
+ },
+ "/bridges/connecticut/": {
+  "title": "Connecticut drawbridge map with schedules | MileCheck",
+  "desc": "Every movable bridge in Connecticut on one map, including the Mystic River bascule that opens at :40 past the hour, East Haddam, Norwalk and New Haven."
+ },
+ "/bridges/delaware/": {
+  "title": "Delaware drawbridge map | MileCheck"
+ },
+ "/bridges/florida/": {
+  "title": "Florida drawbridge map with live status | MileCheck",
+  "desc": "Every regulated drawbridge in Florida on one map, with live up or down status from FDOT sensors and federal opening schedules for the Intracoastal."
+ },
+ "/bridges/illinois/": {
+  "title": "Illinois drawbridge map and Chicago River lifts | MileCheck",
+  "desc": "Every movable bridge in Illinois on one map, including the Chicago River's scheduled lifts and the Illinois Waterway spans at Joliet, with opening rules."
+ },
+ "/bridges/indiana/": {
+  "title": "Indiana drawbridge map, Michigan City bridges | MileCheck"
+ },
+ "/bridges/louisiana/": {
+  "title": "Louisiana drawbridge map with live status | MileCheck",
+  "desc": "Every movable bridge in Louisiana on one map, with live road and marine status from LA DOTD for all 100 state bridges, plus federal opening schedules."
+ },
+ "/bridges/maine/": {
+  "title": "Maine drawbridge map and opening rules | MileCheck"
+ },
+ "/bridges/maryland/": {
+  "title": "Maryland drawbridge map with Knapps Narrows | MileCheck",
+  "desc": "Every movable bridge in Maryland on one map, including Knapps Narrows, Kent Narrows' seasonal schedule and Annapolis' Spa Creek, with federal opening rules."
+ },
+ "/bridges/massachusetts/": {
+  "title": "Massachusetts drawbridge map and schedules | MileCheck",
+  "desc": "Every movable bridge in Massachusetts on one map, including the New Bedford-Fairhaven swing schedule, Gloucester's Blynman Cut, Chelsea Street and Woods Hole."
+ },
+ "/bridges/michigan/": {
+  "title": "Michigan drawbridge map and schedules | MileCheck",
+  "desc": "Every movable bridge in Michigan on one map, including Charlevoix, Grand Haven, the Bay City four, Portage Lake and Cheboygan, with federal opening schedules."
+ },
+ "/bridges/minnesota/": {
+  "title": "Minnesota drawbridge map and opening rules | MileCheck"
+ },
+ "/bridges/mississippi/": {
+  "title": "Mississippi drawbridge map and Biloxi bridges | MileCheck"
+ },
+ "/bridges/more-states/": {
+  "title": "Drawbridges in GA, ID, DC, KY, NH, VT and more | MileCheck"
+ },
+ "/bridges/new-jersey/": {
+  "title": "New Jersey drawbridge map and schedules | MileCheck",
+  "desc": "Every regulated drawbridge in New Jersey on one map, with federal opening schedules for the Jersey Shore Intracoastal crossings, Hackensack, Passaic and more."
+ },
+ "/bridges/new-york/": {
+  "title": "New York drawbridge map and opening rules | MileCheck",
+  "desc": "Every movable bridge in New York on one map, including all 20 Erie Canal lift bridges, Long Island parkway drawbridges and NYC bridges with opening rules."
+ },
+ "/bridges/north-carolina/": {
+  "title": "North Carolina drawbridge map with schedules | MileCheck",
+  "desc": "Every movable bridge in North Carolina on one map, including Wrightsville Beach, the Alligator River swing bridge and Cape Fear, with their opening schedules."
+ },
+ "/bridges/ohio/": {
+  "title": "Ohio drawbridge map, Cleveland and Ashtabula | MileCheck",
+  "desc": "Every movable bridge in Ohio on one map, including the Cuyahoga River lift bridges in Cleveland's Flats and Ashtabula's on-the-hour bascule, with opening rules."
+ },
+ "/bridges/oregon/": {
+  "title": "Oregon drawbridge map and bridge schedules | MileCheck",
+  "desc": "Every movable bridge in Oregon on one map, including Portland Willamette drawbridges, live I-5 Interstate Bridge lift alerts and the US-101 coastal spans."
+ },
+ "/bridges/pennsylvania/": {
+  "title": "Pennsylvania drawbridge map and opening rules | MileCheck"
+ },
+ "/bridges/south-carolina/": {
+  "title": "South Carolina drawbridge map and Ben Sawyer | MileCheck",
+  "desc": "Every movable bridge in South Carolina on one map, including Charleston's Ben Sawyer and Wappoo Cut bridges and Beaufort's Lady's Island span, with rules."
+ },
+ "/bridges/texas/": {
+  "title": "Texas drawbridge map, Galveston and the bayous | MileCheck"
+ },
+ "/bridges/virginia/": {
+  "title": "Virginia drawbridge map and Norfolk bridges | MileCheck",
+  "desc": "Every movable bridge in Virginia on one map, including the Gilmerton bridge and the Intracoastal Waterway spans around Norfolk, with federal opening rules."
+ },
+ "/bridges/washington/": {
+  "title": "Washington drawbridge map and opening rules | MileCheck",
+  "desc": "Every regulated drawbridge in Washington on one map, including the Hood Canal Bridge and Grays Harbor, plus live status for Seattle's Ship Canal bridges."
+ },
+ "/bridges/wisconsin/": {
+  "title": "Wisconsin drawbridge map with Green Bay bridges | MileCheck",
+  "desc": "Every movable bridge in Wisconsin on one map, including Green Bay's Fox River bridges named for Packers legends and the Superior harbor spans, with rules."
+ },
+ "/cameras/": {
+  "desc": "Live highway cameras on one map, each tagged with route and mile marker. Covers 45 US states and 5 Canadian provinces, including the Coquihalla."
+ },
+ "/cameras/alberta/": {
+  "title": "Alberta road conditions and 511 cameras | MileCheck"
+ },
+ "/cameras/annapolis/": {
+  "desc": "Annapolis traffic cameras on one map, with MDOT SHA live video cameras on US-50 and other main roads. See traffic before you leave."
+ },
+ "/cameras/atlanta/": {
+  "desc": "Live Atlanta traffic cameras on one map. GDOT freeway and highway cameras, each tagged with route and mile marker. See traffic before you go."
+ },
+ "/cameras/baltimore/": {
+  "desc": "Baltimore traffic cameras on one map, with MDOT SHA live video cameras on I-95 and other main roads. Check the road before you drive."
+ },
+ "/cameras/birmingham/": {
+  "title": "Birmingham live traffic cameras and mile markers | MileCheck",
+  "desc": "Live Birmingham traffic cameras on one map. ALDOT freeway and highway cameras across the metro, each tagged with route and mile marker."
+ },
+ "/cameras/buffalo/": {
+  "title": "Buffalo live traffic cameras from NYSDOT | MileCheck",
+  "desc": "Watch live Buffalo traffic cameras on one map. NYSDOT freeway and highway cameras in the metro, each tagged with route and mile marker."
+ },
+ "/cameras/california/": {
+  "desc": "View live Caltrans highway cameras across California on one map. Filter by route to see current camera views along the highway you plan to drive."
+ },
+ "/cameras/charleston-wv/": {
+  "desc": "Charleston, WV traffic cameras on one map, with WV511 live video cameras on I-64 and other main roads. Check the road before you drive."
+ },
+ "/cameras/chattanooga/": {
+  "desc": "Chattanooga traffic cameras on one map, with TDOT SmartWay live video cameras on I-24 and other main roads. See traffic before you leave."
+ },
+ "/cameras/cincinnati/": {
+  "title": "Cincinnati traffic cameras live | MileCheck",
+  "desc": "Live Cincinnati traffic cameras on one map. ODOT freeway and highway cameras, each tagged with route and mile marker. See traffic before you go."
+ },
+ "/cameras/cleveland/": {
+  "title": "Cleveland live traffic cameras and mile markers | MileCheck",
+  "desc": "Live Cleveland traffic cameras on one map. ODOT freeway and highway cameras across the metro, each tagged with route and mile marker."
+ },
+ "/cameras/columbus/": {
+  "title": "Columbus live traffic cameras from ODOT | MileCheck",
+  "desc": "Watch live Columbus traffic cameras on one map. ODOT freeway and highway cameras in the metro, each tagged with route and mile marker."
+ },
+ "/cameras/detroit/": {
+  "desc": "Watch live Detroit traffic cameras on one map, with MDOT freeway cameras across the metro, each tagged with route and mile marker. See traffic before you leave."
+ },
+ "/cameras/dover/": {
+  "desc": "Dover, DE traffic cameras on one map. Live video cameras from DelDOT on US-13 and other main roads, so you can see the road before you drive it."
+ },
+ "/cameras/gatineau/": {
+  "desc": "Gatineau traffic cameras on one map, with Québec 511 live video cameras on A-50 and other main roads in the area. See traffic before you leave."
+ },
+ "/cameras/knoxville/": {
+  "desc": "Knoxville traffic cameras on one map, with TDOT SmartWay live video cameras on I-40 and other main roads. Check the road before you drive."
+ },
+ "/cameras/las-vegas/": {
+  "title": "Las Vegas traffic cameras live | MileCheck",
+  "desc": "Live Las Vegas traffic cameras on one map. NDOT freeway and highway cameras, each tagged with route and mile marker. See traffic before you go."
+ },
+ "/cameras/los-angeles/": {
+  "title": "Los Angeles live traffic cameras | MileCheck",
+  "desc": "Live Los Angeles traffic cameras on one map. Caltrans freeway and highway cameras across the metro, each tagged with route and postmile."
+ },
+ "/cameras/manitoba/": {
+  "title": "Manitoba 511 cameras and road conditions | MileCheck"
+ },
+ "/cameras/massachusetts/": {
+  "title": "Massachusetts road conditions and cameras | MileCheck"
+ },
+ "/cameras/memphis/": {
+  "desc": "Memphis traffic cameras on one map. Live video cameras from TDOT SmartWay on I-40 and other main roads, so you can see the road before you drive it."
+ },
+ "/cameras/miami/": {
+  "desc": "Live Miami traffic cameras on one map. FDOT freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave."
+ },
+ "/cameras/milwaukee/": {
+  "title": "Milwaukee live traffic cameras and mile markers | MileCheck",
+  "desc": "Live Milwaukee traffic cameras on one map. WisDOT freeway and highway cameras across the metro, each tagged with route and mile marker."
+ },
+ "/cameras/montreal/": {
+  "desc": "Montreal traffic cameras on one map. Live video cameras from Québec 511 on A-40 and other main roads, so you can see the road before you drive it."
+ },
+ "/cameras/nashville/": {
+  "desc": "Nashville traffic cameras on one map. TDOT SmartWay live video cameras on I-24 and other main roads, so you can check traffic before you leave."
+ },
+ "/cameras/new-hampshire/": {
+  "title": "New Hampshire NHDOT cameras and road conditions | MileCheck"
+ },
+ "/cameras/new-orleans/": {
+  "title": "New Orleans traffic cameras, live DOTD cams | MileCheck",
+  "desc": "Watch live New Orleans traffic cameras on one map, with DOTD freeway cameras across the metro, each tagged with route and mile marker. See traffic first."
+ },
+ "/cameras/new-york-city/": {
+  "title": "New York City traffic cameras live | MileCheck",
+  "desc": "Live New York City traffic cameras on one map. NYSDOT freeway and highway cameras, each tagged with route and mile marker. See traffic before you go."
+ },
+ "/cameras/north-carolina/": {
+  "title": "North Carolina NCDOT live traffic cameras | MileCheck"
+ },
+ "/cameras/ontario/": {
+  "title": "Ontario 511 cameras and road conditions | MileCheck"
+ },
+ "/cameras/orlando/": {
+  "desc": "Watch live Orlando traffic cameras on one map, with FDOT freeway cameras across the metro, each tagged with route and mile marker. See traffic before you leave."
+ },
+ "/cameras/pennsylvania/": {
+  "title": "Pennsylvania traffic cameras live | MileCheck"
+ },
+ "/cameras/philadelphia/": {
+  "title": "Philadelphia live traffic cameras | MileCheck",
+  "desc": "Live Philadelphia traffic cameras on one map. PennDOT freeway and highway cameras across the metro, each tagged with route and mile marker."
+ },
+ "/cameras/phoenix/": {
+  "desc": "Watch live Phoenix traffic cameras on one map. ADOT freeway and highway cameras in the metro, each tagged with route and mile marker."
+ },
+ "/cameras/pittsburgh/": {
+  "title": "Pittsburgh traffic cameras, live PennDOT cams | MileCheck",
+  "desc": "Watch live Pittsburgh traffic cameras on one map, with PennDOT freeway cameras across the metro, each tagged with route and mile marker. See traffic first."
+ },
+ "/cameras/quebec-city/": {
+  "desc": "Quebec City traffic cameras on one map, with Québec 511 live video cameras on A-73 and other main roads. Check the road before you drive."
+ },
+ "/cameras/sacramento/": {
+  "title": "Sacramento traffic cameras live | MileCheck",
+  "desc": "Live Sacramento traffic cameras on one map. Caltrans freeway and highway cameras, each tagged with route and postmile. See traffic before you go."
+ },
+ "/cameras/salt-lake-city/": {
+  "title": "Salt Lake City live traffic cameras | MileCheck",
+  "desc": "Live Salt Lake City traffic cameras on one map. UDOT freeway and highway cameras across the metro, each tagged with route and mile marker."
+ },
+ "/cameras/san-diego/": {
+  "title": "San Diego live traffic cameras from Caltrans | MileCheck",
+  "desc": "Watch live San Diego traffic cameras on one map. Caltrans freeway and highway cameras in the metro, each tagged with route and postmile."
+ },
+ "/cameras/san-francisco/": {
+  "title": "San Francisco Bay Area traffic cameras, live | MileCheck",
+  "desc": "Watch live Bay Area traffic cameras on one map, with Caltrans freeway cameras across the metro, each tagged with route and postmile. See traffic first."
+ },
+ "/cameras/seattle/": {
+  "desc": "Live Seattle area traffic cameras on one map. WSDOT freeway and highway cameras within about 28 miles of downtown, each tagged with route and mile marker."
+ },
+ "/cameras/south-carolina/": {
+  "title": "South Carolina SCDOT cameras and road conditions | MileCheck"
+ },
+ "/cameras/south-dakota/": {
+  "title": "South Dakota road conditions and SDDOT cameras | MileCheck"
+ },
+ "/cameras/springfield-mo/": {
+  "desc": "Springfield, MO traffic cameras on one map. Live video cameras from MoDOT on US-65 and other main roads, so you can see the road before you drive it."
+ },
+ "/cameras/st-louis/": {
+  "desc": "St. Louis traffic cameras on one map. MoDOT live video cameras on I-44 and other main roads, so you can check traffic before you leave."
+ },
+ "/cameras/tampa/": {
+  "desc": "Live Tampa traffic cameras on one map. FDOT freeway and highway cameras across the metro, each tagged with route and mile marker. See traffic before you leave."
+ },
+ "/cameras/tulsa/": {
+  "desc": "Tulsa traffic cameras on one map. ODOT highway cameras around Tulsa, with the latest image from each, so you can check the road before you leave."
+ },
+ "/cameras/vancouver/": {
+  "desc": "Vancouver traffic cameras on one map, with DriveBC highway camera images and City of Vancouver camera locations from open data, each linked to its view."
+ },
+ "/cameras/washington-dc/": {
+  "desc": "Washington DC area traffic cameras on one map. VDOT cameras on the Virginia side and MDOT SHA live video on the Maryland side, on I-66, I-495, I-95 and I-270."
+ },
+ "/cameras/west-virginia/": {
+  "title": "West Virginia live traffic cameras | MileCheck"
+ },
+ "/cameras/wilmington-de/": {
+  "desc": "Wilmington, DE traffic cameras on one map. DelDOT live video cameras on I-95 and other main roads, so you can check traffic before you leave."
+ },
+ "/canada/": {
+  "desc": "A province-by-province library of kilometre markers in Canada, with driver's guides to Ontario, Quebec, BC, Alberta and Nova Scotia. Live for 10 provinces."
+ },
+ "/cell-coverage/": {
+  "title": "Where is there no 4G on Western highways? | MileCheck",
+  "desc": "Map of highways in ID, MT, NV, OR, UT, WA and WY colored by how many carriers report 4G coverage at each mile marker. Uses FCC data from December 2025."
+ },
+ "/chain-laws/": {
+  "title": "Which states have chain laws? Rules by state | MileCheck",
+  "desc": "Chain and traction rules for the western states and British Columbia, snow emergency rules in the East, and a table of every state with fines where stated."
+ },
+ "/chain-laws/arizona-new-mexico-alaska/": {
+  "title": "Do you need chains in AZ, NM or Alaska? | MileCheck"
+ },
+ "/chain-laws/british-columbia/": {
+  "title": "Do I need winter tires or chains in BC? | MileCheck",
+  "desc": "British Columbia requires approved winter tires on designated highways from October 1 to March 31 or April 30. Rules, fines and live DriveBC chain reports."
+ },
+ "/chain-laws/california/": {
+  "title": "Do I need chains in California? Live reports | MileCheck",
+  "desc": "Caltrans posts chain controls in three levels, R1, R2 and R3. The rules and fines with official links, and the chain reports Caltrans QuickMap posts now."
+ },
+ "/chain-laws/colorado/": {
+  "title": "Do I need chains in Colorado? | MileCheck",
+  "desc": "Colorado has a Traction Law and a Passenger Vehicle Chain Law. See the rules and fines, and the chain reports COtrip is posting now."
+ },
+ "/chain-laws/district-of-columbia/": {
+  "title": "Do you need chains in Washington, DC? | MileCheck"
+ },
+ "/chain-laws/idaho/": {
+  "title": "Do I need chains in Idaho? Law and live reports | MileCheck",
+  "desc": "Idaho Code 49-948 requires some commercial vehicles over 26,000 lb to use chains when the restriction is active. Rules, fines and live 511 Idaho chain reports."
+ },
+ "/chain-laws/maryland/": {
+  "title": "Do I need chains in Maryland? Live reports | MileCheck"
+ },
+ "/chain-laws/montana/": {
+  "title": "Do I need chains in Montana? Chain law and fines | MileCheck",
+  "desc": "Montana may require chains or traction devices on signed highway sections. See the rules and fines, and the chain reports MDT 511 is posting now."
+ },
+ "/chain-laws/nevada/": {
+  "title": "Do you need chains in Nevada? | MileCheck",
+  "desc": "Nevada's chain rules are in NRS 484D.515 and 484D.520. Read the rules and fines with links to the official source, and the chain reports NVRoads is posting now."
+ },
+ "/chain-laws/new-york/": {
+  "title": "Do I need chains in New York? Law and reports | MileCheck"
+ },
+ "/chain-laws/oregon/": {
+  "title": "Do I need chains in Oregon? Live reports | MileCheck",
+  "desc": "Oregon posts chain requirements by sign in snow zones. The rules and fines with official links, and the chain reports TripCheck is posting right now."
+ },
+ "/chain-laws/pennsylvania/": {
+  "title": "Do I need chains in Pennsylvania? | MileCheck"
+ },
+ "/chain-laws/south-dakota/": {
+  "title": "Do you need chains in South Dakota? | MileCheck"
+ },
+ "/chain-laws/utah/": {
+  "title": "Do I need chains in Utah? Law and live reports | MileCheck",
+  "desc": "Utah can require traction devices on designated roads in severe winter conditions. The rules and fines, with a link to the source, and live UDOT chain reports."
+ },
+ "/chain-laws/vermont/": {
+  "title": "Do I need chains in Vermont? Live reports | MileCheck",
+  "desc": "Vermont can require tire chains on signed state highways in winter for vehicles over 26,000 lb. The rules, fines and chain reports from New England 511."
+ },
+ "/chain-laws/washington/": {
+  "title": "Do I need chains in Washington? | MileCheck",
+  "desc": "WSDOT posts traction and chain requirements by pass and direction. See the rules and fines, and the chain reports WSDOT is posting now."
+ },
+ "/chain-laws/wyoming/": {
+  "title": "Do you need chains in Wyoming? | MileCheck"
+ },
+ "/chains-or-all-season-tires/": {
+  "title": "Chains or all-season tires, which do you need? | MileCheck"
+ },
+ "/chains-required-explained/": {
+  "title": "What does chains required mean? | MileCheck"
+ },
+ "/chains-required-mt-hood/": {
+  "desc": "How Oregon posts chain and traction requirements on US 26 through Government Camp and OR 35 toward Mt Hood, the fines, and where to read the current rule."
+ },
+ "/chains-required-snoqualmie-pass/": {
+  "desc": "WSDOT chain and traction tire rules for Snoqualmie Pass on I-90, what they mean for a car, an AWD car and a truck, the $500 fine, and when chains were advised."
+ },
+ "/chains-required-stevens-pass/": {
+  "desc": "WSDOT's traction tire and chain rules for Stevens Pass on US 2, what each means for a car, an AWD car and a truck, and the $500 fine."
+ },
+ "/chains/": {
+  "title": "Chain control map with live rules by state | MileCheck"
+ },
+ "/closures/": {
+  "title": "Live US road closures map for every state DOT | MileCheck"
+ },
+ "/contact-help-no-cell-signal/": {
+  "title": "How to contact help with no phone signal | MileCheck"
+ },
+ "/corridors/": {
+  "title": "Interstate live cameras and road conditions | MileCheck",
+  "desc": "Live traffic cameras and road conditions along I-5, I-90, I-95, I-80 and I-10, each tagged with route and mile marker. See the road before you drive it."
+ },
+ "/corridors/i-10/": {
+  "title": "I-10 live traffic cameras and road conditions | MileCheck",
+  "desc": "See I-10 right now with live DOT traffic cameras and road conditions from Los Angeles to Jacksonville, each camera tagged with route and mile marker."
+ },
+ "/corridors/i-15/": {
+  "title": "I-15 live traffic cameras and conditions | MileCheck",
+  "desc": "I-15 right now with live DOT traffic cameras and road conditions from San Diego to Montana, each tagged with route and mile marker."
+ },
+ "/corridors/i-20/": {
+  "title": "I-20 live traffic cameras and road conditions | MileCheck",
+  "desc": "Live DOT traffic cameras and road conditions along I-20 from Texas to South Carolina, each tagged with route and mile marker. See I-20 right now."
+ },
+ "/corridors/i-35/": {
+  "title": "I-35 live traffic cameras and road conditions | MileCheck",
+  "desc": "See I-35 right now with live DOT traffic cameras and road conditions from Laredo, Texas to Duluth, Minnesota, each tagged with route and mile marker."
+ },
+ "/corridors/i-4/": {
+  "title": "I-4 live traffic cameras and road conditions | MileCheck",
+  "desc": "See I-4 right now with live DOT traffic cameras and road conditions from Tampa to Daytona Beach in Central Florida, each tagged with route and mile marker."
+ },
+ "/corridors/i-40/": {
+  "title": "I-40 live traffic cameras and conditions | MileCheck",
+  "desc": "I-40 right now with live DOT traffic cameras and road conditions from California to North Carolina, each tagged with route and mile marker."
+ },
+ "/corridors/i-5/": {
+  "title": "I-5 live traffic cameras and road conditions | MileCheck",
+  "desc": "Live DOT traffic cameras and road conditions along I-5 through Washington, Oregon and California, each tagged with route and mile marker. See I-5 right now."
+ },
+ "/corridors/i-65/": {
+  "title": "I-65 live traffic cameras and road conditions | MileCheck",
+  "desc": "See I-65 right now with live DOT traffic cameras and road conditions from Mobile, Alabama to Gary, Indiana, each tagged with route and mile marker."
+ },
+ "/corridors/i-70/": {
+  "title": "I-70 live traffic cameras and road conditions | MileCheck",
+  "desc": "See I-70 right now with live DOT traffic cameras and road conditions from Utah to Maryland, including the Rockies, each tagged with route and mile marker."
+ },
+ "/corridors/i-75/": {
+  "title": "I-75 live traffic cameras and conditions | MileCheck",
+  "desc": "I-75 right now with live DOT traffic cameras and road conditions from Florida to Michigan, each tagged with route and mile marker."
+ },
+ "/corridors/i-75/kentucky/": {
+  "title": "What are road conditions on I-75 in Kentucky? | MileCheck"
+ },
+ "/corridors/i-75/michigan/": {
+  "title": "I-75 road conditions in Michigan | MileCheck"
+ },
+ "/corridors/i-75/tennessee/": {
+  "title": "What are I-75 road conditions in Tennessee? | MileCheck"
+ },
+ "/corridors/i-80/": {
+  "title": "I-80 live traffic cameras and conditions | MileCheck",
+  "desc": "I-80 right now with live DOT traffic cameras and road conditions from San Francisco to New Jersey, each tagged with route and mile marker."
+ },
+ "/corridors/i-81/": {
+  "title": "I-81 live traffic cameras and road conditions | MileCheck",
+  "desc": "Live DOT traffic cameras and road conditions along I-81 from Tennessee to New York, each tagged with route and mile marker. See I-81 right now."
+ },
+ "/corridors/i-90/": {
+  "title": "I-90 live traffic cameras and road conditions | MileCheck",
+  "desc": "See I-90 right now with live DOT traffic cameras and road conditions along the corridor from Seattle to Boston, each tagged with route and mile marker."
+ },
+ "/corridors/i-94/": {
+  "title": "I-94 live traffic cameras and road conditions | MileCheck",
+  "desc": "See I-94 right now with live DOT traffic cameras and road conditions from Montana to Michigan, the northern Great Lakes route, each tagged with mile marker."
+ },
+ "/corridors/i-95/": {
+  "title": "I-95 live traffic cameras and conditions | MileCheck",
+  "desc": "I-95 right now with live DOT traffic cameras and road conditions from Miami to Maine, each tagged with route and mile marker."
+ },
+ "/dash-preorder.html": {
+  "title": "Is there a GPS display that shows mile markers? | MileCheck"
+ },
+ "/does-apple-maps-show-mile-markers/": {
+  "desc": "No. Apple's iPhone guide lists four map views and traffic markers for crashes, roadwork and closures. Mile markers are not listed. Checked October 31, 2026."
+ },
+ "/does-trucker-path-show-dot-511-road-alerts/": {
+  "desc": "Trucker Path says it added DOT 511 data in March 2025. What the sources say, what we could not confirm, and how MileCheck reads state feeds. Checked Oct. 31."
+ },
+ "/dot-jobs/": {
+  "title": "Which state DOTs are hiring seasonal workers? | MileCheck"
+ },
+ "/drive-or-fly-los-angeles-las-vegas/": {
+  "title": "Drive or fly from Los Angeles to Las Vegas? | MileCheck"
+ },
+ "/drive-or-fly-orlando-miami/": {
+  "title": "Drive, fly or take the train, Orlando to Miami? | MileCheck"
+ },
+ "/drive-or-fly-seattle-portland/": {
+  "title": "Drive, fly or train from Seattle to Portland | MileCheck"
+ },
+ "/driving-a-car-vs-a-truck/": {
+  "title": "Driving a car vs a semi-truck, key differences | MileCheck"
+ },
+ "/driving-conditions-i-40-late-november/": {
+  "title": "I-40 driving conditions in late November | MileCheck"
+ },
+ "/driving-conditions-i-5-late-november/": {
+  "title": "What is I-5 like to drive in late November? | MileCheck"
+ },
+ "/driving-conditions-i-70-late-november/": {
+  "title": "I-70 driving conditions in late November | MileCheck"
+ },
+ "/driving-conditions-i-80-late-november/": {
+  "title": "What is I-80 like in late November? | MileCheck"
+ },
+ "/driving-conditions-i-90-late-november/": {
+  "title": "I-90 driving conditions in late November | MileCheck"
+ },
+ "/driving-in-the-us-foreign-visitor-guide/": {
+  "title": "Driving in the US as a foreign visitor | MileCheck"
+ },
+ "/enchantments/roads/": {
+  "title": "Enchantments trailhead roads and closures | MileCheck",
+  "desc": "The drive to the Stuart Lake, Snow Lakes and Eightmile trailheads from Leavenworth, with the Icicle Road closure order and live WSDOT cameras on US 2 and US 97."
+ },
+ "/enchantments/roads/map/": {
+  "title": "Printable map of the Enchantments roads | MileCheck",
+  "desc": "A two-sided printable map of the roads around The Enchantments. Major roads, 17 numbered stops and town names on the front, and drive notes on the back."
+ },
+ "/es/breakdown-on-the-autobahn/": {
+  "title": "¿Avería en la Autobahn y no hablas alemán? | MileCheck",
+  "desc": "Una avería en un país cuyo idioma no hablas es la peor pesadilla de un viajero. Alemania tiene una solución sorprendentemente buena, y no es tu teléfono."
+ },
+ "/es/cameras/florida/": {
+  "title": "Cámaras de tráfico de Florida en vivo | MileCheck",
+  "desc": "Mira las cámaras de tráfico de Florida en vivo en un solo mapa, con cámaras de carretera de FDOT (FL511), cada una con su ruta y su marcador de millas."
+ },
+ "/es/cameras/miami/": {
+  "desc": "Mira las cámaras de tráfico de Miami en vivo en un mapa. Cámaras de FDOT en las autopistas del área metropolitana, con su ruta y marcador de millas."
+ },
+ "/es/cameras/orlando/": {
+  "desc": "Mira las cámaras de tráfico de Orlando en vivo en un solo mapa. Cámaras de FDOT en las autopistas del área, cada una con su ruta y marcador de millas."
+ },
+ "/es/cameras/tampa/": {
+  "desc": "Mira las cámaras de tráfico de Tampa en vivo en un solo mapa, con cámaras de FDOT en las autopistas del área metropolitana, con su ruta y marcador de millas."
+ },
+ "/es/driving-in-the-us-foreign-visitor-guide/": {
+  "title": "Conducir en EE. UU. antes de viajar | MileCheck",
+  "desc": "Alquilar un auto en EE. UU. es fácil. Lo que no te explican: qué es un marcador de millas, cómo orientarte sin cobertura y qué datos dar si necesitas ayuda."
+ },
+ "/es/how-to-charge-an-electric-car/": {
+  "title": "¿Cómo cargar un auto eléctrico en público? | MileCheck"
+ },
+ "/ev-chargers/": {
+  "title": "How many EV chargers are in each state? | MileCheck",
+  "desc": "The US has 83,802 EV charging locations with 263,432 ports, and 79,620 are DC fast chargers. Every state, updated weekly from the US Department of Energy."
+ },
+ "/ev-charging-cost/": {
+  "title": "How much does it cost to charge an EV by state? | MileCheck",
+  "desc": "Home power averaged 18.2¢ per kWh in August 2026. For a car rated 30 kWh per 100 miles, 100 miles costs about $5.45, from $3.82 in Nevada to $14.15 in Hawaii."
+ },
+ "/ferries/": {
+  "title": "Washington ferry sailings, space and cameras | MileCheck",
+  "desc": "Pick a Washington State Ferries route to see next sailings with drive-up space left, terminal cameras and boats on the map. Live from WSDOT every minute."
+ },
+ "/fire/": {
+  "title": "Live US wildfire map with acres and containment | MileCheck",
+  "desc": "Live map of active US wildfires from NIFC with fire perimeters, acres burned and percent containment, updated every 5 minutes. See fires near your route."
+ },
+ "/fleets/": {
+  "title": "Mile markers and DOT feeds for fleet dispatch | MileCheck"
+ },
+ "/fr/drive-into-canada/": {
+  "title": "Entrer au Canada en auto depuis les États-Unis | MileCheck"
+ },
+ "/fr/driving-in-the-us-foreign-visitor-guide/": {
+  "title": "Conduire aux États-Unis en visiteur étranger | MileCheck",
+  "desc": "Louer une voiture aux États-Unis est simple. Nul n'explique au comptoir ce qu'est un mile marker, pourquoi la ville suivante est loin ou ce que veut le 911."
+ },
+ "/fr/how-to-charge-an-electric-car/": {
+  "title": "Comment recharger une voiture électrique ? | MileCheck"
+ },
+ "/fr/will-my-phone-work-in-canada/": {
+  "title": "Un cellulaire américain marche-t-il au Canada? | MileCheck"
+ },
+ "/fr/will-my-phone-work-in-the-us/": {
+  "title": "Votre cellulaire marchera-t-il aux États-Unis? | MileCheck"
+ },
+ "/gas-prices/": {
+  "title": "What are gas prices in my state this week? | MileCheck",
+  "desc": "The U.S. average for regular gas was $4.15 a gallon for the week of November 2, 2026. Diesel averaged $6.29. State and regional averages from the EIA."
+ },
+ "/gas-vs-electric-car/": {
+  "title": "Is gas, hybrid or electric cheapest to drive? | MileCheck",
+  "desc": "Driving 100 miles costs about $13.84 in gas at 30 mpg, $8.31 in a 50 mpg hybrid and $5.45 in an EV charged at home. U.S. average gas, week of Nov. 2, 2026."
+ },
+ "/gear/": {
+  "desc": "The 18 products in MileCheck's gear guides on one page: tire chains, winter kits, jump starters, tire inflators and dash cams, each linked to its guide."
+ },
+ "/grades/": {
+  "title": "Steep grades map by route and mile marker | MileCheck"
+ },
+ "/guides/": {
+  "title": "Highway guides on mile markers, chains and 511 | MileCheck"
+ },
+ "/highway-sign-colors/": {
+  "title": "What do highway sign colors mean? | MileCheck"
+ },
+ "/highway-vs-freeway-vs-expressway/": {
+  "title": "Highway vs freeway vs expressway, what differs? | MileCheck"
+ },
+ "/how-do-i-add-mile-markers-to-google-maps-in-my-app/": {
+  "title": "How do I add mile markers to Google Maps? | MileCheck",
+  "desc": "Google Maps has no mile marker layer. Load your own mile marker points as GeoJSON with the Maps JavaScript API Data layer or the Android and iOS libraries."
+ },
+ "/how-do-i-get-a-feed-of-road-closures-for-my-website/": {
+  "title": "How do I get a road closure feed for my site? | MileCheck"
+ },
+ "/how-do-truckers-find-their-mile-marker-for-a-breakdown-call/": {
+  "title": "How do truckers find their mile marker? | MileCheck"
+ },
+ "/how-do-you-drive-safely-in-winter-conditions/": {
+  "desc": "Chain laws by state, stopping distance on snow with DOT and AAA numbers, what to carry, what DOT condition words mean, and how to report your mile marker."
+ },
+ "/how-do-you-know-if-a-mountain-pass-is-open/": {
+  "desc": "The state DOT's pass report or 511 page is the official answer. This page links each western state and province and shows MileCheck's pass pages and cameras."
+ },
+ "/how-does-an-ambulance-get-to-the-other-side-of-a-divided-highway/": {
+  "title": "How does an ambulance cross a divided highway? | MileCheck"
+ },
+ "/how-interstates-are-numbered/": {
+  "title": "How are interstate highways numbered? | MileCheck"
+ },
+ "/how-long-do-crashes-take-to-clear/": {
+  "title": "How long does it take to clear a highway crash? | MileCheck",
+  "desc": "A crash on a state highway stays on the state DOT feed for about 48 minutes before clearing, in the middle case. From 15,961 crashes logged in fall 2026."
+ },
+ "/how-long-does-it-take-an-ambulance-to-reach-a-crash/": {
+  "title": "How long until an ambulance reaches a crash? | MileCheck",
+  "desc": "In 2022, EMS took an average of 13.2 minutes from notification to reach a rural fatal crash and 7.6 minutes for an urban one. State averages from NHTSA."
+ },
+ "/how-often-are-chains-required-on-washington-passes/": {
+  "title": "How often do Washington passes require chains? | MileCheck",
+  "desc": "So far this season, traction tires were advised on five Washington passes on October 28 and required on three on October 28 and 29, counted hour by hour."
+ },
+ "/how-to-charge-an-electric-car/": {
+  "title": "How do you charge an electric car in public? | MileCheck"
+ },
+ "/how-to-convert-gps-coordinates-to-a-mile-marker/": {
+  "title": "How do I convert GPS to a mile marker? | MileCheck"
+ },
+ "/how-to-pump-gas/": {
+  "title": "How do you pump gas? A guide for new drivers | MileCheck"
+ },
+ "/international-driving-permit-usa/": {
+  "title": "Do you need an IDP to drive in the US? | MileCheck"
+ },
+ "/is-there-a-drawbridge-status-api/": {
+  "desc": "Yes. The MileCheck API lists every Coast Guard-regulated drawbridge in a state with its opening rule, plus live status in Seattle, Florida and Louisiana."
+ },
+ "/is-there-one-app-with-511-alerts-for-every-state/": {
+  "title": "Is there one app with 511 alerts for all states? | MileCheck"
+ },
+ "/iteris-cleardata-road511-alternative/": {
+  "title": "Alternatives to Iteris ClearData and Road511 | MileCheck"
+ },
+ "/left-exit-vs-right-exit/": {
+  "title": "Left exit vs right exit on highway signs | MileCheck"
+ },
+ "/loneliest-road-in-america/": {
+  "title": "The Loneliest Road in America, US-50 in Nevada | MileCheck"
+ },
+ "/maps/": {
+  "title": "Live maps of wildfires and road closures | MileCheck"
+ },
+ "/maps/mile-markers/": {
+  "title": "Mile marker map for all 50 states | MileCheck"
+ },
+ "/mile-marker-api/": {
+  "title": "Is there a mile marker API for GPS locations? | MileCheck",
+  "desc": "Most mile marker data is published by state or county as GIS layers. This page covers what exists and how the MileCheck API returns the nearest marker."
+ },
+ "/mile-marker-database/": {
+  "title": "Is there a database of every US mile marker? | MileCheck",
+  "desc": "There is no federal mile marker database. Each state publishes its own, in its own format. Here is how they differ and where to get all 50 states."
+ },
+ "/mile-marker-lookup-for-dispatch/": {
+  "title": "How do dispatchers find a caller's mile marker? | MileCheck",
+  "desc": "Callers on a highway often give a mile marker, and phones send coordinates. Here is how dispatch, towing and roadside teams turn one into the other."
+ },
+ "/mile-markers-vs-exit-numbers/": {
+  "title": "Mile markers vs exit numbers, explained | MileCheck"
+ },
+ "/milepost-dataset/": {
+  "desc": "Every US highway mile marker as CSV and GeoJSON. 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot and a yearly license."
+ },
+ "/mountain-visibility-privacy/": {
+  "desc": "Privacy policy for Mountain Visibility Forecast and its Mt ___ editions, published by MileCheck LLC. No account, no ads. Location stays on your phone."
+ },
+ "/move-over-laws/": {
+  "title": "Do you have to move over for hazard lights? | MileCheck"
+ },
+ "/night-driving-desert-and-passes/": {
+  "title": "Night driving on desert roads and passes | MileCheck"
+ },
+ "/nyc-airport-taxi-vs-uber/": {
+  "title": "Taxi or train from JFK, LaGuardia or Newark? | MileCheck"
+ },
+ "/one-api-for-every-states-511-road-alerts/": {
+  "title": "Is there one API for every state's 511 alerts? | MileCheck",
+  "desc": "States do not publish one. Each runs its own 511 and developer terms. MileCheck's API returns DOT alerts for all 50 states in one shape. Checked Oct. 31, 2026."
+ },
+ "/pa/how-to-charge-an-electric-car/": {
+  "desc": "ਅਮਰੀਕਾ ਵਿੱਚ ਇਲੈਕਟ੍ਰਿਕ ਕਾਰ ਚਾਰਜ ਕਰਨਾ ਸਿੱਖੋ। ਸਹੀ ਪਲੱਗ, ਭੁਗਤਾਨ, ਕੇਬਲ ਲਗਾਉਣ, ਸਮੇਂ ਅਤੇ ਖਰਚੇ ਬਾਰੇ ਜਾਣੋ। ਜਨਤਕ ਚਾਰਜਰ ਤੇ ਕਦਮ-ਦਰ-ਕਦਮ ਜਾਣਕਾਰੀ ਇੱਥੇ ਹੈ."
+ },
+ "/pa/km-markers-canada/": {
+  "desc": "BC ਅਤੇ Ontario ਵਿੱਚ ਹਾਈਵੇ ਉੱਤੇ ਆਪਣੀ ਥਾਂ ਕਿਵੇਂ ਦੱਸਣੀ ਹੈ? Ontario ਦੇ exit ਅਤੇ BC ਦੇ landmark ਸਮਝੋ, ਅਤੇ km marker ਪੜ੍ਹਨਾ ਸਿੱਖੋ."
+ },
+ "/pa/report-location/": {
+  "desc": "ਜੇ ਟਰੱਕ ਰੁਕ ਜਾਵੇ ਜਾਂ ਮਦਦ ਚਾਹੀਦੀ ਹੋਵੇ ਤਾਂ dispatch ਜਾਂ 911 ਨੂੰ ਹਾਈਵੇ, ਦਿਸ਼ਾ, ਨੇੜਲਾ mile marker ਅਤੇ exit ਦੱਸੋ। ਇਸ ਸਫ਼ੇ ਵਿੱਚ ਦੱਸਿਆ ਹੈ ਕਿ ਕੀ ਕਹਿਣਾ ਹੈ."
+ },
+ "/pa/what-is-my-mile-marker/": {
+  "desc": "ਹਾਈਵੇ ਦਾ mile marker ਕੀ ਹੁੰਦਾ ਹੈ ਅਤੇ ਆਪਣਾ ਨੰਬਰ ਕਿਵੇਂ ਲੱਭਣਾ ਹੈ? ਸਾਈਨ, exit ਅਤੇ GPS ਨਾਲ ਆਪਣੀ ਥਾਂ ਦੱਸਣ ਦਾ ਤਰੀਕਾ ਇੱਥੇ ਦੇਖੋ."
+ },
+ "/partners/corridor-boards.html": {
+  "title": "How can my gas station show roads on a TV? | MileCheck",
+  "desc": "Show live DOT road reports on your store's TV, with closures, crashes, chain controls and cameras for the highway outside. No charge. You supply TV and Wi-Fi."
+ },
+ "/passes/": {
+  "title": "Mountain pass cameras and road conditions | MileCheck",
+  "desc": "Live cameras and road conditions for busy Western mountain passes, including Snoqualmie, Stevens, Siskiyou, the Grapevine, Donner, Cajon and Parleys."
+ },
+ "/passes/anthony-lakes/": {
+  "title": "Anthony Lakes road conditions and cameras | MileCheck",
+  "desc": "Getting to Anthony Lakes Mountain Resort with live ODOT cameras and alerts on I-84 and OR 237 near North Powder, Oregon, plus the last unpatrolled miles."
+ },
+ "/passes/anthony-lakes/map/": {
+  "title": "Printable Anthony Lakes map and stops | MileCheck"
+ },
+ "/passes/berthoud/": {
+  "title": "Berthoud Pass road conditions and chains | MileCheck"
+ },
+ "/passes/blewett/": {
+  "title": "Blewett Pass conditions, chains and closures | MileCheck"
+ },
+ "/passes/cabbage-hill/": {
+  "title": "Cabbage Hill road conditions and cameras | MileCheck",
+  "desc": "Live ODOT cameras on the Cabbage Hill grade of I-84 east of Pendleton, with closures, construction, road reports and wildfires within 15 miles. No account."
+ },
+ "/passes/cabbage-hill/map/": {
+  "title": "Printable Cabbage Hill map and stops | MileCheck"
+ },
+ "/passes/cajon/": {
+  "title": "Cajon Pass road conditions and cameras | MileCheck",
+  "desc": "Cajon Pass road conditions on I-15 from live Caltrans cameras with the mile marker, chain and traction rules, closures and snow. Check the pass before you go."
+ },
+ "/passes/cajon/map/": {
+  "title": "Printable map of Cajon Pass roads and stops | MileCheck"
+ },
+ "/passes/coquihalla/": {
+  "title": "Coquihalla Highway conditions and cameras | MileCheck",
+  "desc": "Coquihalla Highway conditions on BC Highway 5 from Hope to Merritt, with live DriveBC cameras at the summit, closures, road work and the winter tire rule."
+ },
+ "/passes/crystal-mountain/": {
+  "title": "Getting to Crystal Mountain from Seattle | MileCheck",
+  "desc": "Driving to Crystal Mountain Resort with live cameras and DOT feeds on I-5, SR 18, SR 164 and SR 410, cell coverage, and the Chinook Pass winter closure."
+ },
+ "/passes/donner/": {
+  "title": "Donner Pass road conditions and cameras | MileCheck",
+  "desc": "Donner Pass road conditions on I-80 from live Caltrans cameras with the mile marker, chain and traction rules, closures and snow. Check the pass before you go."
+ },
+ "/passes/donner/map/": {
+  "title": "Printable map of Donner Pass roads and stops | MileCheck"
+ },
+ "/passes/echo-summit/": {
+  "title": "Echo Summit road conditions and chains | MileCheck"
+ },
+ "/passes/eisenhower/": {
+  "title": "Eisenhower Tunnel road conditions and cameras | MileCheck",
+  "desc": "Eisenhower Tunnel road conditions on I-70 now, with live CDOT cameras, chain and traction rules, closures and snow. Check the pass before you drive it."
+ },
+ "/passes/eisenhower/map/": {
+  "title": "Printable map of Eisenhower Tunnel roads | MileCheck"
+ },
+ "/passes/grapevine/": {
+  "title": "Grapevine road conditions, chains and cameras | MileCheck",
+  "desc": "Grapevine (Tejon Pass) conditions on I-5 now, with live Caltrans cameras, chain and traction rules, closures and snow. Check the pass before you drive it."
+ },
+ "/passes/grapevine/map/": {
+  "title": "Printable map of the Grapevine (Tejon Pass) | MileCheck"
+ },
+ "/passes/i80-wyoming/": {
+  "title": "Is I-80 open at Sherman Hill near Laramie? | MileCheck"
+ },
+ "/passes/little-cottonwood/": {
+  "title": "Little Cottonwood Canyon road conditions | MileCheck",
+  "desc": "Getting to Snowbird and Alta with live UDOT cameras and alerts on SR-210 up Little Cottonwood Canyon, avalanche closures, traction-law rules and the toll plan."
+ },
+ "/passes/little-cottonwood/map/": {
+  "title": "Printable map of Little Cottonwood Canyon | MileCheck"
+ },
+ "/passes/lookout/": {
+  "title": "Lookout Pass road conditions and cameras | MileCheck",
+  "desc": "Lookout Pass road conditions on I-90 now, with live ITD and MDT cameras showing the mile marker, chain and traction rules, closures and snow."
+ },
+ "/passes/loveland/": {
+  "title": "Loveland Pass road conditions and closures | MileCheck",
+  "desc": "Is Loveland Pass open? Today's US 6 road conditions from CDOT, closures, snow and plow positions, and why hazmat trucks use it instead of the Eisenhower Tunnel."
+ },
+ "/passes/monarch/": {
+  "title": "Monarch Pass road conditions and cameras | MileCheck",
+  "desc": "Monarch Pass road conditions on US-50 from live CDOT cameras with the mile marker, chain and traction rules, closures and snow. Check the pass before you go."
+ },
+ "/passes/mt-baker-highway/": {
+  "title": "Mt Baker Highway conditions, chains and cameras | MileCheck",
+  "desc": "Mt Baker Highway conditions on SR-542 now, with live WSDOT cameras tagged with mile marker, chain and traction rules, closures and snow. Check before you drive."
+ },
+ "/passes/mt-hood/": {
+  "title": "Mt Hood Government Camp road conditions | MileCheck",
+  "desc": "Government Camp (Mt Hood) road conditions on US-26 now, with live ODOT cameras showing the mile marker, chain and traction rules, closures and snow."
+ },
+ "/passes/parleys/": {
+  "title": "Parleys Summit road conditions and cameras | MileCheck",
+  "desc": "Parleys Summit road conditions on I-80 now, with live UDOT cameras, chain and traction rules, closures and snow. Check the pass before you drive it."
+ },
+ "/passes/parleys/map/": {
+  "title": "Printable map of Parleys Summit roads | MileCheck"
+ },
+ "/passes/rogers-pass/": {
+  "desc": "Rogers Pass conditions on the Trans-Canada Highway between Revelstoke and Golden, with live DriveBC summit and snowshed cameras, closures and road events."
+ },
+ "/passes/santiam/": {
+  "title": "Santiam Pass road conditions and cameras | MileCheck",
+  "desc": "Santiam Pass road conditions on US-20 now, with live ODOT cameras showing the mile marker, chain and traction rules, closures and snow. Check before you drive."
+ },
+ "/passes/sea-to-sky/": {
+  "title": "Sea-to-Sky Highway road conditions and cameras | MileCheck",
+  "desc": "Sea-to-Sky Highway conditions on BC Highway 99 from Horseshoe Bay to Whistler, with live DriveBC cameras, closures, road work and the winter tire rule."
+ },
+ "/passes/siskiyou/": {
+  "title": "Siskiyou Summit road conditions and chains | MileCheck",
+  "desc": "Siskiyou Summit road conditions on I-5 from live ODOT cameras with the mile marker, chain and traction rules, closures and snow. Check the pass before you go."
+ },
+ "/passes/siskiyou/map/": {
+  "title": "Printable map of Siskiyou Summit roads and stops | MileCheck"
+ },
+ "/passes/snoqualmie/": {
+  "title": "Is Snoqualmie Pass open? Webcams and chains | MileCheck",
+  "desc": "Is Snoqualmie Pass open? Today I-90 road conditions from WSDOT, chain and traction rules for each direction, summit temperature, webcams and closures."
+ },
+ "/passes/snoqualmie/map/": {
+  "title": "Printable Snoqualmie Pass map and stops | MileCheck"
+ },
+ "/passes/stevens/": {
+  "title": "Stevens Pass road conditions and cameras | MileCheck",
+  "desc": "Stevens Pass road conditions on US-2 from live WSDOT cameras with the mile marker, chain and traction rules, closures and snow. Check the pass before you go."
+ },
+ "/passes/stevens/map/": {
+  "title": "Printable map of Stevens Pass roads and stops | MileCheck"
+ },
+ "/passes/teton/": {
+  "title": "Teton Pass road conditions and cameras | MileCheck"
+ },
+ "/passes/togwotee/": {
+  "title": "Togwotee Pass road conditions and closures | MileCheck"
+ },
+ "/passes/vail/": {
+  "title": "Vail Pass road conditions and cameras | MileCheck"
+ },
+ "/passes/vail/map/": {
+  "title": "Printable map of Vail Pass roads and stops | MileCheck"
+ },
+ "/passes/white/": {
+  "title": "White Pass road conditions and cameras | MileCheck",
+  "desc": "White Pass road conditions on US-12 now, with live WSDOT cameras showing the mile marker, chain and traction rules, closures and snow. Check before you drive."
+ },
+ "/passes/willamette/": {
+  "title": "Willamette Pass road conditions and cameras | MileCheck",
+  "desc": "Willamette Pass road conditions on OR-58 now, with live ODOT cameras, chain and traction rules, closures and snow. Check the pass before you drive it."
+ },
+ "/passes/wolf-creek/": {
+  "title": "Wolf Creek Pass road conditions and cameras | MileCheck",
+  "desc": "Wolf Creek Pass road conditions on US-160 from live CDOT cameras with the mile marker, chain and traction rules, closures and snow. Check before you go."
+ },
+ "/pricing/": {
+  "title": "How much does MileCheck cost? Prices and trial"
+ },
+ "/pt/how-to-charge-an-electric-car/": {
+  "title": "Como carregar um carro elétrico em público? | MileCheck"
+ },
+ "/railroad-crossings/": {
+  "title": "Where are railroad crossings on highways? | MileCheck",
+  "desc": "A map of 20,031 open, public, at-grade railroad crossings on state highways, from the FRA inventory. Tap one for the road, railroad, tracks and gates or lights."
+ },
+ "/rent-a-car-in-arizona/": {
+  "title": "What to check before you rent a car in Arizona | MileCheck",
+  "desc": "The car they had left looked like a tin can, so I said no. Here is what to check before you rent a car in Arizona, from the car itself to the paperwork."
+ },
+ "/rent-a-car-in-orlando/": {
+  "title": "What to check before renting a car in Orlando | MileCheck"
+ },
+ "/rental-car-canada-mexico/": {
+  "title": "Can a rental car go into Canada or Mexico? | MileCheck"
+ },
+ "/rental-car-insurance-credit-card/": {
+  "title": "Rental car insurance or credit card benefit? | MileCheck"
+ },
+ "/report-location/": {
+  "title": "How do you report your location on the highway? | MileCheck",
+  "desc": "Broke down and not sure where you are? Here is what to tell 911, a tow truck or roadside help: the highway, direction and mile marker, and how to find yours."
+ },
+ "/rest-areas/": {
+  "desc": "Official rest area time limits and overnight sleeping rules for every state, with the official source for each one so you can check the rule yourself."
+ },
+ "/rest-areas/british-columbia/": {
+  "title": "Can you sleep at a BC rest area? | MileCheck"
+ },
+ "/rest-areas/hawaii/": {
+  "desc": "Not overnight. Hawaii bans using a vehicle to live or sleep in on public property from 6 p.m. to 6 a.m. The official rule for cars and trucks, with its source."
+ },
+ "/rest-areas/minnesota/": {
+  "desc": "Cars can stop for up to 4 hours where posted and commercial drivers up to 10 hours. The official Minnesota rule for cars, trucks and camping, with its source."
+ },
+ "/rest-areas/new-hampshire/": {
+  "desc": "New Hampshire sets no rest area time limit, but tents and sleeping on the ground are banned. The official rule for cars, trucks and camping, with its source."
+ },
+ "/rest-areas/texas/": {
+  "desc": "Yes, you can stay up to 24 hours. The official Texas rule for cars, trucks and camping at rest areas, with its source so you can check it yourself."
+ },
+ "/road-conditions/": {
+  "title": "Road conditions by state, with live closures | MileCheck",
+  "desc": "Current road conditions for all 50 states, one page per state, with live DOT closures and crashes, cameras, mountain passes and interstate corridors."
+ },
+ "/road-conditions/alabama/": {
+  "title": "Alabama road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/alaska/": {
+  "title": "Alaska road conditions, chains and closures | MileCheck",
+  "desc": "Live Alaska road conditions from AK 511, with closures and crashes by route and mile marker, chain and traction rules, and cameras. Checked every five minutes."
+ },
+ "/road-conditions/alberta/": {
+  "title": "Alberta road conditions closures and cameras | MileCheck"
+ },
+ "/road-conditions/arizona/": {
+  "title": "Arizona road conditions and closures now | MileCheck",
+  "desc": "Arizona road conditions from AZ511, with closures and crashes by route and mile marker, chain rules, cameras, passes and corridors. Checked every five minutes."
+ },
+ "/road-conditions/arkansas/": {
+  "title": "Arkansas road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/british-columbia/": {
+  "title": "British Columbia road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/california/": {
+  "title": "California road conditions, chains and closures | MileCheck",
+  "desc": "Live California road conditions from Caltrans QuickMap, with closures, crashes by route and mile marker, chain rules, cameras and passes. Checked every 5 min."
+ },
+ "/road-conditions/canada/": {
+  "title": "Canada road conditions, BC, Alberta, Manitoba | MileCheck",
+  "desc": "Road conditions for British Columbia, Alberta and Manitoba from each province feed, with closures, incidents and roadwork on a map, plus cameras. Updated often."
+ },
+ "/road-conditions/colorado/": {
+  "title": "Colorado road conditions, snow and chains | MileCheck",
+  "desc": "Live Colorado road conditions from COtrip, with snow and ice reports, chain rules, closures and crashes by mile marker, cameras and passes."
+ },
+ "/road-conditions/connecticut/": {
+  "title": "Connecticut road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/delaware/": {
+  "title": "Delaware road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/florida/": {
+  "title": "Florida road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/georgia/": {
+  "title": "Georgia road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/idaho/": {
+  "desc": "Live Idaho road conditions from 511 Idaho, with snow and ice reports, chain rules, closures and crashes by route and mile marker. Checked every five minutes."
+ },
+ "/road-conditions/illinois/": {
+  "title": "Illinois road conditions, closures and cameras | MileCheck",
+  "desc": "Live Illinois road conditions from Getting Around Illinois, with closures and crashes by route and mile marker, cameras and passes. Checked every five minutes."
+ },
+ "/road-conditions/indiana/": {
+  "title": "Indiana road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/kentucky/": {
+  "title": "Kentucky road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/louisiana/": {
+  "title": "Louisiana road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/maryland/": {
+  "title": "Maryland road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/massachusetts/": {
+  "title": "Massachusetts road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/michigan/": {
+  "title": "Michigan road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/minnesota/": {
+  "title": "Minnesota road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/mississippi/": {
+  "title": "Mississippi road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/missouri/": {
+  "title": "Missouri road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/montana/": {
+  "title": "Montana road conditions, snow and chains | MileCheck",
+  "desc": "Live Montana road conditions from MDT 511, with snow and ice reports, chain rules, closures and crashes by mile marker, cameras and passes."
+ },
+ "/road-conditions/nebraska/": {
+  "title": "Nebraska road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/nevada/": {
+  "title": "Nevada road conditions, chains and closures | MileCheck",
+  "desc": "Live Nevada road conditions from NVRoads, with closures and crashes by route and mile marker, chain rules, cameras and passes. Checked every five minutes."
+ },
+ "/road-conditions/new-hampshire/": {
+  "title": "New Hampshire road conditions and cameras now | MileCheck",
+  "desc": "New Hampshire conditions from New England 511, with closures and crashes by route and mile marker, cameras, passes and corridors, checked every 5 minutes."
+ },
+ "/road-conditions/new-jersey/": {
+  "title": "New Jersey road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/new-mexico/": {
+  "title": "New Mexico road conditions and chain rules | MileCheck",
+  "desc": "Live New Mexico road conditions from NMRoads, with closures and crashes by route and mile marker, chain and traction rules. Checked every five minutes."
+ },
+ "/road-conditions/new-york/": {
+  "title": "New York road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/north-carolina/": {
+  "title": "North Carolina road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/north-dakota/": {
+  "title": "North Dakota road conditions and closures | MileCheck"
+ },
+ "/road-conditions/oklahoma/": {
+  "title": "Oklahoma road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/oregon/": {
+  "desc": "Live Oregon road conditions from TripCheck, with snow and ice reports, chain rules, closures and crashes by mile marker, and cameras. Checked every 5 minutes."
+ },
+ "/road-conditions/pennsylvania/": {
+  "title": "Pennsylvania road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/rhode-island/": {
+  "title": "Rhode Island road conditions and closures | MileCheck"
+ },
+ "/road-conditions/south-carolina/": {
+  "title": "South Carolina road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/south-dakota/": {
+  "title": "South Dakota road conditions, closures, cameras | MileCheck"
+ },
+ "/road-conditions/tennessee/": {
+  "title": "Tennessee road conditions and cameras now | MileCheck"
+ },
+ "/road-conditions/utah/": {
+  "desc": "Live Utah road conditions from UDOT Traffic, with snow and ice reports, chain rules, closures and crashes by mile marker, cameras and passes."
+ },
+ "/road-conditions/vermont/": {
+  "title": "Vermont road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/virginia/": {
+  "title": "Virginia road conditions, closures and cameras | MileCheck"
+ },
+ "/road-conditions/washington/": {
+  "title": "Washington road conditions, snow and chains | MileCheck",
+  "desc": "Washington road conditions from WSDOT, with snow and ice reports, chain rules, closures and crashes by route and mile marker, cameras. Checked every 5 minutes."
+ },
+ "/road-conditions/west-virginia/": {
+  "title": "West Virginia road conditions and closures | MileCheck"
+ },
+ "/road-conditions/wisconsin/": {
+  "title": "Wisconsin road conditions and cameras | MileCheck"
+ },
+ "/road-conditions/wyoming/": {
+  "title": "Wyoming road conditions, chains and closures | MileCheck",
+  "desc": "Live Wyoming road conditions from WYDOT, with closures and crashes by route and mile marker, chain rules, cameras and passes. Checked every five minutes."
+ },
+ "/road-trip-with-a-dog/": {
+  "title": "Road trip with a dog on the big interstates | MileCheck"
+ },
+ "/road-workers/": {
+  "title": "How much do highway maintenance workers make? | MileCheck"
+ },
+ "/road-workers/dot-jobs/": {
+  "title": "How do you get a job at your state DOT? | MileCheck"
+ },
+ "/road-workers/truck-drivers/": {
+  "title": "How much do truck drivers make in each state? | MileCheck"
+ },
+ "/roadside-wildfire-causes/": {
+  "title": "What causes roadside wildfires? | MileCheck"
+ },
+ "/sand-vs-salt-vs-brine/": {
+  "title": "Sand vs salt vs brine for winter roads | MileCheck"
+ },
+ "/search/": {
+  "title": "Search cameras, passes, bridges and guides"
+ },
+ "/seasonal/": {
+  "title": "Which mountain roads close for winter? By state | MileCheck",
+  "desc": "33 roads in 9 western states close every winter. See the closing and reopening dates each agency publishes and what the state DOT feed is posting right now."
+ },
+ "/seasonal/alaska/": {
+  "title": "Which roads close for winter in Alaska? | MileCheck"
+ },
+ "/seasonal/alpine-loop/": {
+  "title": "Is the Alpine Loop (SR 92) open? Closure dates | MileCheck",
+  "desc": "Usually closed November through May or June. What UDOT Traffic is posting for SR-92 now, plus the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/artist-point/": {
+  "title": "Is the road to Artist Point open? | MileCheck",
+  "desc": "Usually closes with the first snow (Oct. 15 in 2025) and reopened June 10 in 2026. What the WSDOT feed posts for SR-542 now, and the dates WSDOT publishes."
+ },
+ "/seasonal/banner-summit/": {
+  "title": "Is Idaho 21 over Banner Summit open? Dates | MileCheck",
+  "desc": "Closes when avalanche danger is high, with no fixed dates. What the 511 Idaho feed shows for SH-21 now, and the dates ITD publishes, with the source."
+ },
+ "/seasonal/battle-pass/": {
+  "title": "Is Battle Pass (WY 70) open? | MileCheck",
+  "desc": "Usually closes late in the fall and reopens late May. See what the WYDOT feed is posting for WY-70 now and the closure and reopening dates WYDOT publishes."
+ },
+ "/seasonal/beartooth-highway/": {
+  "title": "Is the Beartooth Highway open? Closure dates | MileCheck",
+  "desc": "Usually closes mid-October and reopens the Friday of Memorial Day weekend. What MDT 511 and WYDOT post for US-212 now, plus the dates MDT publishes."
+ },
+ "/seasonal/california/": {
+  "title": "Which roads close for winter in California? | MileCheck",
+  "desc": "5 California roads that close for winter, with the closing and reopening dates each agency publishes and what Caltrans QuickMap is posting for each one now."
+ },
+ "/seasonal/cayuse-pass/": {
+  "desc": "Usually closes mid-November and reopens late May. What the WSDOT feed shows for SR-123 now, and the dates the National Park Service publishes."
+ },
+ "/seasonal/cedar-breaks/": {
+  "title": "Is SR 148 to Cedar Breaks open? | MileCheck",
+  "desc": "Usually closed November through May or June. See what the UDOT Traffic feed is posting for SR-148 now and the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/chinook-pass/": {
+  "title": "Is Chinook Pass open? Status and opening dates | MileCheck",
+  "desc": "Usually closes mid-November and reopens late May. What WSDOT is posting for SR-410 now, plus the closure and reopening dates the park service publishes."
+ },
+ "/seasonal/colorado/": {
+  "title": "Which roads close for winter in Colorado? | MileCheck"
+ },
+ "/seasonal/cooke-city-pilot-creek/": {
+  "title": "Is US 212 to Cooke City open? Closure dates | MileCheck",
+  "desc": "These 9 miles close to cars in winter and usually open mid-May to early November. What the MDT 511 and WYDOT feeds show for US-212 now."
+ },
+ "/seasonal/denali-highway/": {
+  "title": "Is the Denali Highway open? | MileCheck",
+  "desc": "Winter maintenance ends Oct. 1 and crews start reopening in late April. See what AK 511 is posting for AK-8 now and the dates Alaska DOT&PF publishes."
+ },
+ "/seasonal/east-canyon/": {
+  "title": "Is East Canyon (SR 65) open? Closure dates | MileCheck",
+  "desc": "Usually closed November through May or June. What UDOT Traffic is posting for SR-65 now, plus the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/ebbetts-pass/": {
+  "desc": "The closing date is set by conditions. Caltrans aims to reopen before Memorial Day. What the Caltrans QuickMap feed posts for SR-4 now, and its published dates."
+ },
+ "/seasonal/eureka-rampart-road/": {
+  "title": "Is the Eureka/Rampart Road open? Closure dates | MileCheck",
+  "desc": "Maintenance ends Oct. 1 and the road reopens in early spring. What the AK 511 feed shows for Eureka/Rampart Road now, and the dates Alaska DOT&PF publishes."
+ },
+ "/seasonal/going-to-the-sun-road/": {
+  "title": "Is Going-to-the-Sun Road open? | MileCheck",
+  "desc": "Usually closes around the third Monday of October and reopens late June at the earliest. See what the MDT 511 feed posts for the road and the NPS dates."
+ },
+ "/seasonal/guardsman-pass/": {
+  "desc": "Usually closed November through May or June. What UDOT Traffic is posting for SR-190 and SR-224 now, plus the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/idaho/": {
+  "title": "Which roads close for winter in Idaho? | MileCheck"
+ },
+ "/seasonal/independence-pass/": {
+  "title": "Is Independence Pass open? Closure dates | MileCheck",
+  "desc": "Usually closes late October or early November and reopens the week before Memorial Day weekend. What the COtrip feed shows for CO-82 now."
+ },
+ "/seasonal/lassen-park-highway/": {
+  "title": "Is the Lassen Park Highway open? | MileCheck",
+  "desc": "Closed for snow about November to June. See what the Caltrans QuickMap feed is posting for SR-89 now and the closure and reopening dates the NPS publishes."
+ },
+ "/seasonal/looking-glass-highway/": {
+  "title": "Is Looking Glass Highway (MT 49) open? Dates | MileCheck",
+  "desc": "Closed for winter, and MDT gives no set dates. What MDT 511 is posting for MT-49 now, plus the closure and reopening dates MDT publishes."
+ },
+ "/seasonal/mccarthy-road/": {
+  "title": "Is the McCarthy Road open this season? | MileCheck",
+  "desc": "Regular maintenance ends Oct. 1 and resumes in spring. What the AK 511 feed is posting for McCarthy Road now, and the dates Alaska DOT&PF publishes."
+ },
+ "/seasonal/mckenzie-pass/": {
+  "title": "Is McKenzie Pass (OR 242) open? Closure dates | MileCheck",
+  "desc": "Usually closes the Thursday before Veterans Day and reopens the third Monday in June. What the TripCheck feed shows for OR-242 now, and the ODOT dates."
+ },
+ "/seasonal/mirror-lake-highway/": {
+  "title": "Is the Mirror Lake Highway open? | MileCheck",
+  "desc": "Usually closed November through May or June. See what the UDOT Traffic feed is posting for SR-150 now and the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/monitor-pass/": {
+  "desc": "Closing date set by conditions, and Caltrans aims to reopen before Memorial Day. What QuickMap posts for SR-89 now, plus the dates Caltrans publishes."
+ },
+ "/seasonal/montana/": {
+  "title": "Which roads close for winter in Montana? | MileCheck"
+ },
+ "/seasonal/monte-cristo/": {
+  "title": "Is Monte Cristo (SR 39) open? Closure dates | MileCheck",
+  "desc": "Usually closed November through May or June. What the UDOT Traffic feed shows for SR-39 now, and the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/mount-holly/": {
+  "title": "Is SR 153 to Mount Holly open? | MileCheck",
+  "desc": "Usually closed November through May or June. See what the UDOT Traffic feed is posting for SR-153 now and the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/north-cascades-highway/": {
+  "title": "Is North Cascades Highway (SR 20) open? Dates | MileCheck",
+  "desc": "Closing date varies by year. The 2025 closure was Dec. 4. What WSDOT is posting for SR-20 now, plus the closure and reopening dates WSDOT publishes."
+ },
+ "/seasonal/oregon/": {
+  "title": "Which roads close for winter in Oregon? | MileCheck"
+ },
+ "/seasonal/skalkaho-pass/": {
+  "desc": "Closed for winter, and MDT gives no set dates. What the MDT 511 feed shows for MT-38 now, and the closure and reopening dates MDT publishes, with the source."
+ },
+ "/seasonal/snowy-range/": {
+  "title": "Is the Snowy Range road (WY 130) open? | MileCheck",
+  "desc": "Usually closes mid to late November (Nov. 10 to 26 in 2020 to 2025) and reopens in spring. See what the WYDOT feed posts for WY-130 and its published dates."
+ },
+ "/seasonal/sonora-pass/": {
+  "desc": "Closing date set by conditions, and Caltrans aims to reopen before Memorial Day. What QuickMap posts for SR-108 now, plus the dates Caltrans publishes."
+ },
+ "/seasonal/taylor-highway/": {
+  "title": "Is the Taylor Highway open this season? | MileCheck",
+  "desc": "Winter maintenance ends Oct. 15 and resumes in early April. What the AK 511 feed is posting for AK-5 now, and the dates Alaska DOT&PF publishes."
+ },
+ "/seasonal/thompson-pass/": {
+  "title": "Is Thompson Pass (Montana S-471) open? Dates | MileCheck",
+  "desc": "Closed for winter, and MDT gives no set dates. What the MDT 511 feed shows for S-471 now, and the closure and reopening dates MDT publishes, with the source."
+ },
+ "/seasonal/tioga-pass/": {
+  "title": "Is Tioga Pass open? Status and opening dates | MileCheck",
+  "desc": "Usually closes in November and reopens late May or June. See what the Caltrans QuickMap feed is posting for SR-120 now and the dates the NPS publishes."
+ },
+ "/seasonal/trail-ridge-road/": {
+  "desc": "Park road, usually closed mid to late October and reopened the last week of May. What COtrip posts for US-34 now, plus the park service dates."
+ },
+ "/seasonal/utah/": {
+  "title": "Which roads close for winter in Utah? | MileCheck"
+ },
+ "/seasonal/washington/": {
+  "title": "Which roads close for winter in Washington? | MileCheck"
+ },
+ "/seasonal/wolf-creek-summit/": {
+  "title": "Is Wolf Creek Summit (SR 35) open? | MileCheck",
+  "desc": "Usually closed November through May or June. See what the UDOT Traffic feed is posting for SR-35 now and the closure and reopening dates UDOT publishes."
+ },
+ "/seasonal/wyoming/": {
+  "title": "Which roads close for winter in Wyoming? | MileCheck"
+ },
+ "/seattle-drawbridges/": {
+  "desc": "Live up or down status for the Fremont, Ballard, Montlake, 1st Ave S and South Park bridges, opening rules for all seven Seattle drawbridges, and bridge alerts."
+ },
+ "/seattle-drawbridges/alerts/": {
+  "title": "Get a notification when a Seattle bridge goes up"
+ },
+ "/seattle-drawbridges/ballard-bridge/": {
+  "title": "Is the Ballard Bridge up right now? Live status",
+  "desc": "Ballard Bridge on 15th Ave NW over the Ship Canal, with live up or down status from Seattle DOT, time up, and opening times under 33 CFR 117.1051(d)."
+ },
+ "/seattle-drawbridges/duwamish/": {
+  "title": "Duwamish Waterway drawbridge status and rules"
+ },
+ "/seattle-drawbridges/first-avenue-south-bridge/": {
+  "title": "Is the First Avenue South Bridge up right now?",
+  "desc": "Live up or down status for the First Avenue South Bridge on SR 99 over the Duwamish from Seattle DOT, and when it opens for boats under 33 CFR 117.1041(a)(1)."
+ },
+ "/seattle-drawbridges/fremont-bridge/": {
+  "title": "Is the Fremont Bridge up right now? Live status",
+  "desc": "Fremont Bridge on Fremont Ave N over the Ship Canal. Live up or down status from Seattle DOT, time up, and opening rules under 33 CFR 117.1051(d)."
+ },
+ "/seattle-drawbridges/how-long/": {
+  "desc": "How long the Fremont, Ballard, Montlake, 1st Ave S and South Park bridges typically stay up for a boat, what makes a lift run long, and how we measure it."
+ },
+ "/seattle-drawbridges/montlake-bridge/": {
+  "title": "Is the Montlake Bridge up right now?",
+  "desc": "Live up or down status for Montlake Bridge over the Ship Canal from Seattle DOT, how long it has been up, and when it opens for boats under 33 CFR 117.1051(e)."
+ },
+ "/seattle-drawbridges/opening-rules/": {
+  "desc": "Opening rules for the Ballard, Fremont, University, Montlake, 1st Ave S, South Park and Spokane St bridges from 33 CFR 117, in plain words with the rule text."
+ },
+ "/seattle-drawbridges/rush-hour/": {
+  "title": "Do Seattle drawbridges open during rush hour?",
+  "desc": "Weekday hours when the Ballard, Fremont, University, Montlake, 1st Ave S and South Park bridges do not have to open for boats, and which vessels still get one."
+ },
+ "/seattle-drawbridges/ship-canal/": {
+  "title": "Seattle Ship Canal bridge status and opening rules",
+  "desc": "The four drawbridges on the Lake Washington Ship Canal, live status for Ballard, Fremont and Montlake, and the weekday rule that keeps them down at rush hours."
+ },
+ "/seattle-drawbridges/south-park-bridge/": {
+  "title": "Is the South Park Bridge up right now?",
+  "desc": "Live up or down status for South Park Bridge over the Duwamish from Seattle DOT, how long it has been up, and when it opens for boats under 33 CFR 117.1041."
+ },
+ "/seattle-drawbridges/spokane-street-bridge/": {
+  "title": "Is the Spokane Street Bridge up right now?",
+  "desc": "Southwest Spokane Street Bridge over the Duwamish. No live feed is published. This page explains when it opens for boats under 33 CFR 117.1041(b)(1)."
+ },
+ "/seattle-drawbridges/university-bridge/": {
+  "title": "Is the University Bridge up right now? Live status"
+ },
+ "/show-pass-closures-on-store-tv/": {
+  "title": "How can customers check a pass before leaving? | MileCheck"
+ },
+ "/ski/": {
+  "title": "What is the road to your ski resort like now? | MileCheck",
+  "desc": "One page per ski resort with the DOT's plow trucks on the access road, cameras near the base, and closures and crashes. 63 resorts in 16 states and provinces."
+ },
+ "/ski/afton-alps/": {
+  "title": "Is the road to Afton Alps open? Plows, cameras | MileCheck"
+ },
+ "/ski/alta/": {
+  "title": "Is the road to Alta open? Plows and cameras | MileCheck"
+ },
+ "/ski/alyeska/": {
+  "title": "Is the road to Alyeska open? Plows and cameras | MileCheck",
+  "desc": "Live Alaska DOT&PF plow truck positions, Alaska 511 cameras and closures on the Seward and Alyeska Highways, the road to Alyeska. Updates every minute."
+ },
+ "/ski/anthony-lakes/": {
+  "title": "Is the road to Anthony Lakes open? Live cameras | MileCheck"
+ },
+ "/ski/arapahoe-basin/": {
+  "title": "Is the road to Arapahoe Basin open? | MileCheck"
+ },
+ "/ski/asessippi/": {
+  "title": "Is the road to Asessippi open? Plows and cameras | MileCheck"
+ },
+ "/ski/aspen-snowmass/": {
+  "title": "Is the road to Aspen open? Plows and cameras | MileCheck"
+ },
+ "/ski/beaver-creek/": {
+  "title": "Is the road to Beaver Creek open? Live cameras | MileCheck"
+ },
+ "/ski/big-sky/": {
+  "title": "Is the road to Big Sky open? Plows and cameras | MileCheck"
+ },
+ "/ski/blue-mountain/": {
+  "title": "Is the road to Blue Mountain open? | MileCheck"
+ },
+ "/ski/boyne-mountain/": {
+  "title": "Is the road to Boyne Mountain open now? | MileCheck"
+ },
+ "/ski/breckenridge/": {
+  "title": "Is the road to Breckenridge open? Live cameras | MileCheck"
+ },
+ "/ski/bridger-bowl/": {
+  "title": "Is the road to Bridger Bowl open? Plows, cameras | MileCheck"
+ },
+ "/ski/brighton/": {
+  "title": "Is the road to Brighton open? Plows and cameras | MileCheck"
+ },
+ "/ski/camelback/": {
+  "title": "Is the road to Camelback open? Plows, cameras | MileCheck"
+ },
+ "/ski/canaan-valley/": {
+  "title": "Is the road to Canaan Valley open? Live cameras | MileCheck"
+ },
+ "/ski/castle-mountain/": {
+  "title": "Is the road to Castle Mountain open? | MileCheck"
+ },
+ "/ski/copper-mountain/": {
+  "title": "Is the road to Copper Mountain open? | MileCheck"
+ },
+ "/ski/crested-butte/": {
+  "title": "Is the road to Crested Butte open now? | MileCheck"
+ },
+ "/ski/crystal-mountain-michigan/": {
+  "title": "Is the road to Crystal Mountain (Michigan) open? | MileCheck",
+  "desc": "Live MDOT plow truck positions, Mi Drive cameras and closures on M-115, US-31 and US-131, the roads to Crystal Mountain (Michigan). Updates every minute."
+ },
+ "/ski/crystal-mountain/": {
+  "title": "Is the road to Crystal Mountain open? | MileCheck"
+ },
+ "/ski/deer-valley/": {
+  "title": "Is the road to Deer Valley open? | MileCheck"
+ },
+ "/ski/discovery/": {
+  "title": "Is the road to Discovery open? Plows, cameras | MileCheck"
+ },
+ "/ski/elk-mountain/": {
+  "title": "Is the road to Elk Mountain open? Live cameras | MileCheck"
+ },
+ "/ski/hoodoo/": {
+  "title": "Is the road to Hoodoo open? Plows and cameras | MileCheck"
+ },
+ "/ski/huff-hills/": {
+  "title": "Is the road to Huff Hills open? | MileCheck"
+ },
+ "/ski/keystone/": {
+  "title": "Is the road to Keystone open? Plows, cameras | MileCheck"
+ },
+ "/ski/lake-louise/": {
+  "title": "Is the road to Lake Louise open? Live cameras | MileCheck"
+ },
+ "/ski/loveland/": {
+  "title": "Is the road to Loveland Ski Area open? | MileCheck"
+ },
+ "/ski/lutsen/": {
+  "title": "Is the road to Lutsen Mountains open? | MileCheck"
+ },
+ "/ski/marmot-basin/": {
+  "title": "Is the road to Marmot Basin open now? | MileCheck"
+ },
+ "/ski/mission-ridge/": {
+  "title": "Is the road to Mission Ridge open? Live cameras | MileCheck",
+  "desc": "WSDOT cameras, closures and crashes on US 2, US 97 and SR 28, the roads to Mission Ridge. Washington publishes no plow positions, so the page shows WSDOT data."
+ },
+ "/ski/mount-norquay/": {
+  "title": "Is the road to Mt Norquay open? Plows, cameras | MileCheck"
+ },
+ "/ski/mount-st-louis-moonstone/": {
+  "title": "Is the road to Mount St. Louis Moonstone open? | MileCheck"
+ },
+ "/ski/mt-bachelor/": {
+  "title": "Is the road to Mt. Bachelor open now? | MileCheck"
+ },
+ "/ski/mt-baker/": {
+  "title": "Is the road to Mt. Baker open? Plows and cameras | MileCheck"
+ },
+ "/ski/mt-hood-meadows/": {
+  "title": "Is the road to Mt. Hood Meadows open? | MileCheck",
+  "desc": "TripCheck cameras, closures and crashes on OR-35 and US-26, the road to Mt. Hood Meadows. Oregon publishes no plow positions, so this shows what ODOT publishes."
+ },
+ "/ski/nakiska/": {
+  "title": "Is the road to Nakiska open? Plows and cameras | MileCheck"
+ },
+ "/ski/paoli-peaks/": {
+  "title": "Is the road to Paoli Peaks open now? | MileCheck"
+ },
+ "/ski/park-city/": {
+  "title": "Is the road to Park City Mountain open? Plows | MileCheck"
+ },
+ "/ski/perfect-north/": {
+  "title": "Is the road to Perfect North Slopes open? | MileCheck",
+  "desc": "Live INDOT plow truck positions, INDOT TrafficWise cameras and closures on IN-1, I-275 and I-74, the road to Perfect North Slopes. Updates every minute."
+ },
+ "/ski/powder-mountain/": {
+  "title": "Is the road to Powder Mountain open? | MileCheck"
+ },
+ "/ski/red-lodge/": {
+  "title": "Is the road to Red Lodge open? Plows, cameras | MileCheck"
+ },
+ "/ski/seven-springs/": {
+  "title": "Is the road to Seven Springs open? Live cameras | MileCheck"
+ },
+ "/ski/snowbasin/": {
+  "title": "Is the road to Snowbasin open? Plows and cameras | MileCheck"
+ },
+ "/ski/snowbird/": {
+  "title": "Is the road to Snowbird open? Plows and cameras | MileCheck"
+ },
+ "/ski/snowshoe/": {
+  "title": "Is the road to Snowshoe open? Plows, cameras | MileCheck"
+ },
+ "/ski/solitude/": {
+  "title": "Is the road to Solitude open? Plows and cameras | MileCheck"
+ },
+ "/ski/spirit-mountain/": {
+  "title": "Is the road to Spirit Mountain open? | MileCheck"
+ },
+ "/ski/steamboat/": {
+  "title": "Is the road to Steamboat open? Plows and cameras | MileCheck"
+ },
+ "/ski/stevens-pass/": {
+  "title": "Is the road to Stevens Pass open now? | MileCheck"
+ },
+ "/ski/summit-at-snoqualmie/": {
+  "title": "Is the road to The Summit at Snoqualmie open? | MileCheck",
+  "desc": "WSDOT cameras, closures and crashes on I-90, the road to The Summit at Snoqualmie. Washington publishes no plow positions, so this shows what WSDOT posts."
+ },
+ "/ski/sundance/": {
+  "title": "Is the road to Sundance open? Plows and cameras | MileCheck"
+ },
+ "/ski/sundown/": {
+  "title": "Is the road to Sundown Mountain open? | MileCheck"
+ },
+ "/ski/sunshine-village/": {
+  "title": "Is the road to Sunshine Village open now? | MileCheck"
+ },
+ "/ski/telluride/": {
+  "title": "Is the road to Telluride open? Plows and cameras | MileCheck"
+ },
+ "/ski/the-highlands/": {
+  "title": "Is the road to The Highlands open? | MileCheck"
+ },
+ "/ski/timberline/": {
+  "title": "Is the road to Timberline open? | MileCheck"
+ },
+ "/ski/vail/": {
+  "title": "Is the road to Vail open? Plows, cameras | MileCheck"
+ },
+ "/ski/white-pass/": {
+  "title": "Is the road to White Pass open? Live cameras | MileCheck"
+ },
+ "/ski/whitefish/": {
+  "title": "Is the road to Whitefish Mountain Resort open? | MileCheck"
+ },
+ "/ski/winter-park/": {
+  "title": "Is the road to Winter Park open? | MileCheck"
+ },
+ "/ski/wolf-creek/": {
+  "title": "Is the road to Wolf Creek open now? | MileCheck"
+ },
+ "/snow-tires-wa-or-co/": {
+  "title": "Do you need snow tires in WA, OR or CO? | MileCheck"
+ },
+ "/snowplows/": {
+  "title": "Where are the snowplows right now? Live map | MileCheck",
+  "desc": "Live snowplow positions from state DOT truck feeds in Colorado, Utah, Indiana, Iowa, Minnesota and more. Each shows its route, mile marker and last report."
+ },
+ "/sponsor/": {
+  "title": "Sponsor the MileCheck Highway Report or a TV | MileCheck"
+ },
+ "/sponsor/boards/": {
+  "title": "How much to advertise on a truck stop road TV? | MileCheck",
+  "desc": "A corridor board sponsor slot costs $99 a month per screen. Your business shows on a live road conditions TV in a truck stop or diner. One sponsor per screen."
+ },
+ "/stadiums/american-family-field/": {
+  "title": "Traffic and cameras near American Family Field | MileCheck"
+ },
+ "/storms/": {
+  "desc": "Which states have winter storms right now, based on National Weather Service winter alerts and unusual closure counts from live state DOT feeds."
+ },
+ "/surveyed-vs-calculated-mileposts/": {
+  "title": "Surveyed milepost vs calculated milepost | MileCheck"
+ },
+ "/three-digit-interstate-numbers/": {
+  "title": "What do 3-digit interstate numbers mean? | MileCheck"
+ },
+ "/truck-speed-limits-by-state/": {
+  "title": "Which states have a lower truck speed limit? | MileCheck",
+  "desc": "California, Illinois, Indiana, Michigan, Oregon, Virginia and Washington set a lower speed limit for trucks. The limits and official pages, read Nov. 1, 2026."
+ },
+ "/tv-road-conditions-gas-station/": {
+  "title": "How do I show road conditions on a station TV? | MileCheck"
+ },
+ "/us-highways-vs-interstates/": {
+  "title": "How do US highways differ from interstates? | MileCheck"
+ },
+ "/vi/how-to-charge-an-electric-car/": {
+  "desc": "Hướng dẫn từng bước sạc xe điện tại trạm sạc công cộng ở Mỹ. Tìm đúng đầu cắm, cách thanh toán, cắm dây, thời gian sạc và chi phí."
+ },
+ "/washington-larch-season/": {
+  "title": "When and where to see golden larches in WA | MileCheck",
+  "desc": "Larches are conifers that turn gold and drop their needles. When it happens in Washington, which hikes to start with, and four larches you can see in Seattle."
+ },
+ "/weather/": {
+  "title": "US road weather map for storms and closures | MileCheck",
+  "desc": "Major road weather on one live map, winter storms, hurricanes, flash floods and monsoon storms, plus the highway closures they cause. Updated every 5 minutes."
+ },
+ "/what-are-the-small-green-signs-every-tenth-of-a-mile/": {
+  "title": "What are the green signs every tenth of a mile? | MileCheck"
+ },
+ "/what-do-r1-r2-r3-chain-controls-mean-on-i-80/": {
+  "title": "What do R1, R2 and R3 chain controls mean? | MileCheck",
+  "desc": "R1 means chains unless a car or light truck under 6,000 lb has snow tires. R2 allows 4WD or AWD with snow tires on all four. R3 requires chains on all vehicles."
+ },
+ "/what-highway-am-i-on/": {
+  "desc": "Tap once to see which highway you are on and your nearest mile marker on that road. Covers U.S. and Canadian highways."
+ },
+ "/what-should-i-do-if-i-break-down-on-the-interstate/": {
+  "title": "What to do if you break down on the interstate | MileCheck"
+ },
+ "/what-to-put-on-convenience-store-tv/": {
+  "title": "What can I show on a convenience store TV? | MileCheck"
+ },
+ "/what-vehicles-do-cal-fire-and-seattle-fire-drive/": {
+  "title": "What do CAL FIRE and Seattle Fire drive? | MileCheck",
+  "desc": "CAL FIRE lists 3,669 ground vehicles in its 2025 fleet data, led by 900 Ram 2500 pickups. Seattle Fire lists 234, including 51 pumpers and 16 ladder trucks."
+ },
+ "/what-vehicles-do-state-dots-and-police-drive/": {
+  "desc": "State and local governments own about 4.2 million vehicles (FHWA, 2024). State police mostly drive Dodge Chargers or Ford vehicles, and DOTs drive pickups."
+ },
+ "/when-is-gas-cheapest/": {
+  "title": "When is gas cheapest during the year? | MileCheck"
+ },
+ "/which-highways-are-most-dangerous-in-winter/": {
+  "desc": "No national ranking of winter crashes by highway exists. What the data supports: NHTSA and FHWA weather-crash averages and DOT closure records for I-70, I-80."
+ },
+ "/which-states-pump-your-gas/": {
+  "title": "Which states pump your gas for you? | MileCheck"
+ },
+ "/who-maintains-the-roads/": {
+  "title": "Who maintains roads? Federal, state or county | MileCheck"
+ },
+ "/why-do-mile-markers-go-up-in-one-direction/": {
+  "title": "Why do mile markers go up in one direction? | MileCheck"
+ },
+ "/why-does-i-70-close-in-colorado/": {
+  "desc": "Crashes, snow and stuck vehicles on steep grades. CDOT also holds traffic at the Eisenhower Tunnel, enforces the Traction Law and closes lanes at Floyd Hill."
+ },
+ "/why-does-i-80-close-in-wyoming/": {
+  "desc": "Wind and blowing snow. I-80 crosses open high plains between Laramie and Rawlins, where wind lifts snow and cuts visibility. What each WYDOT closure term means."
+ },
+ "/why-does-snoqualmie-pass-close/": {
+  "title": "Why does Snoqualmie Pass close in winter? | MileCheck",
+  "desc": "WSDOT closes I-90 at Snoqualmie Pass for avalanche control, with typical delays of 30 minutes to two hours. Heavy snow, spinouts and crashes can also close it."
+ },
+ "/zh/how-to-charge-an-electric-car/": {
+  "title": "怎样在公共充电桩给电动车充电？停车、插头和付款 | MileCheck",
+  "desc": "了解如何在美国使用公共充电桩。学习选择正确的插头、付款方式、连接充电线，以及如何查看充电时间和费用。适合第一次在美国给电动车充电的司机，按步骤一步一步操作就可以，每个环节都有说明，方便对照，也方便提前做好准备，少走弯路，出门更安心。"
+ },
+ "/zh/how-to-pump-gas/": {
+  "title": "在美国怎么自己加汽油？步骤和注意事项 | MileCheck",
+  "desc": "了解在美国自助加油的步骤，包括付款、选择汽油标号、使用加油枪，以及安全加油的注意事项。适合第一次在美国开车并需要自己加油的游客和新手司机，按步骤阅读即可，附常见问题解答，出发前可以先看一遍，到加油站就不会手忙脚乱，也能避免选错汽油标号。"
+ },
+ "/zipper-merge-explained/": {
+  "title": "What is a zipper merge and how do you use it? | MileCheck"
+ }
+}
