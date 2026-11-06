@@ -10,24 +10,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Highway mile marker data for all 50 US states | MileCheck</title>
-  <meta name="description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet or app size.">
+  <meta name="description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a yearly license priced by size and support.">
   <link rel="canonical" href="https://milecheckapp.com/milepost-dataset/">
   <meta property="og:title" content="Highway mile marker data for all 50 US states | MileCheck">
-  <meta property="og:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet or app size.">
+  <meta property="og:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a yearly license priced by size and support.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/milepost-dataset/">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Highway mile marker data for all 50 US states | MileCheck">
-  <meta name="twitter:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet or app size.">
+  <meta name="twitter:description" content="Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a yearly license priced by size and support.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","@id":"https://milecheckapp.com/milepost-dataset/#dataset","name":"MileCheck Milepost Dataset","description":"Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a flat yearly license priced by fleet or app size.","url":"https://milecheckapp.com/milepost-dataset/","creator":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"},"isAccessibleForFree":false,"spatialCoverage":{"@type":"Place","name":"United States"},"temporalCoverage":"2026-11-02/..","distribution":[{"@type":"DataDownload","encodingFormat":"text/csv"},{"@type":"DataDownload","encodingFormat":"application/geo+json"}],"publisher":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"},"isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","@id":"https://milecheckapp.com/milepost-dataset/#dataset","name":"MileCheck Milepost Dataset","description":"Every US highway mile marker position as CSV and GeoJSON: 396,842 markers on 9,056 routes in all 50 states, a monthly snapshot with a change list, and a yearly license priced by size and support.","url":"https://milecheckapp.com/milepost-dataset/","creator":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"},"isAccessibleForFree":false,"spatialCoverage":{"@type":"Place","name":"United States"},"temporalCoverage":"2026-11-02/..","distribution":[{"@type":"DataDownload","encodingFormat":"text/csv"},{"@type":"DataDownload","encodingFormat":"application/geo+json"}],"publisher":{"@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"},"isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
 
 
   <style>
@@ -222,8 +222,8 @@
 <main class="ds-wrap">
   <div class="eyebrow"><a href="/partners/">MileCheck for business</a> &rsaquo; <a href="/api/">API</a> &rsaquo; Milepost dataset</div>
   <h1>Highway mile marker data for all 50 US states</h1>
-  <p class="lede">Every highway mile marker position we have in the United States, as CSV and GeoJSON files you run on your own systems. You pay one flat price a year, set by the size of your fleet or your app. There are no API calls to count, and lookups work without a cell signal.</p>
-  <div class="ds-btns"><a class="primary" href="/milepost-dataset/milecheck-mileposts-sample-UT.zip" download>Download the Utah sample</a><a class="ghost" href="#pricing">See prices</a></div>
+  <p class="lede">Every highway mile marker position we have in the United States, as CSV and GeoJSON files you run on your own systems. It is a yearly license, priced by size and support. There are no API calls to count, and lookups work without a cell signal.</p>
+  <div class="ds-btns"><a class="primary" href="/milepost-dataset/milecheck-mileposts-sample-UT.zip" download>Download the Utah sample</a><a class="ghost" href="#pricing">Pricing</a></div>
 
   <div class="ds-facts">
     <div class="ds-fact"><b>396,842</b><span>marker positions</span></div>
@@ -280,40 +280,10 @@ UT-I_15-1-SB,UT,US,I-15,,1,mi,37.013145,-113.614777,physical
   <p>We're based in Seattle and we know the roads. MileCheck started as a phone app, and drivers, including DOT crews, have sent us feedback on it for months. When someone reports a marker in the wrong place, we check it and correct it, and the fix goes into the next file. Every row says where it came from, so you can check it yourself.</p>
   <p class="ds-small">Related questions: <a href="/mile-marker-database/">Is there a database of every highway mile marker in the US?</a> &middot; <a href="/mile-marker-api/">Is there an API that gives the mile marker for a GPS location?</a> &middot; <a href="/mile-marker-lookup-for-dispatch/">How do dispatchers find the mile marker for a caller's location?</a></p>
 
-  <h2 id="pricing">Prices</h2>
-  <p>The data is the same in both tables. Pick the one that matches what you build. If your product serves both fleets and the public, or you want the data in more than one product, ask us for a quote.</p>
-
-  <h3>Fleet and dispatch software</h3>
-  <p>One flat price a year, set by the number of vehicles on your platform. There is no per-vehicle charge. Fleet licenses come with a named contact at MileCheck. We help fit the files to your system, deliver them the way your team wants, check in after each monthly release, and answer when something looks wrong.</p>
-  <div class="ds-tbl-wrap"><table class="ds-tbl">
-    <thead><tr><th>Tier</th><th>Vehicles on your platform</th><th>Per year</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>Up to 200</td><td class="num">$5,000</td></tr>
-      <tr><td>2</td><td>201 to 500</td><td class="num">$6,500</td></tr>
-      <tr><td>3</td><td>501 to 1,000</td><td class="num">$8,000</td></tr>
-      <tr><td>4</td><td>1,001 to 2,500</td><td class="num">$11,000</td></tr>
-      <tr><td>5</td><td>2,501 to 5,000</td><td class="num">$14,000</td></tr>
-      <tr><td>6</td><td>More than 5,000</td><td class="num">Quoted</td></tr>
-    </tbody>
-  </table></div>
-
-  <h3>Consumer apps</h3>
-  <p>One flat price a year, set by your monthly active users: the number of different people who open your app in a month, counted across every app the license covers. Your tier is your busiest month in the last 12. App licenses are self-serve. You get the files by download link, and support is by email.</p>
-  <div class="ds-tbl-wrap"><table class="ds-tbl">
-    <thead><tr><th>Tier</th><th>Monthly active users</th><th>Per year</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>Up to 2,500</td><td class="num">$750</td></tr>
-      <tr><td>2</td><td>2,501 to 10,000</td><td class="num">$1,500</td></tr>
-      <tr><td>3</td><td>10,001 to 50,000</td><td class="num">$3,500</td></tr>
-      <tr><td>4</td><td>50,001 to 250,000</td><td class="num">$8,000</td></tr>
-      <tr><td>5</td><td>250,001 to 500,000</td><td class="num">$16,000</td></tr>
-      <tr><td>6</td><td>More than 500,000</td><td class="num">Quoted</td></tr>
-    </tbody>
-  </table></div>
-  <p class="ds-small">Apps owned by a company with more than $10 million in yearly revenue, counting any parent company, are quoted separately.</p>
-
+  <h2 id="pricing">Pricing</h2>
+  <p>The Milepost Dataset is a yearly license, not a one-time purchase. While your license is active you can use the files in your products, and you get every monthly snapshot and update. Price depends on how many vehicles or people see the mile markers, and on how much support your team wants, from self-serve to a named contact who helps with integration and delivery. Tell us what you are building and we'll send a quote.</p>
+  <p><a href="#contact">Ask for a quote</a> &middot; <a href="/milepost-dataset/milecheck-mileposts-sample-UT.zip" download>Download the free Utah sample</a></p>
   <p>Every license includes all 50 states, the monthly snapshot and change list, updates between snapshots, and the right to show mile markers to your own users and drivers. It does not include selling, publishing or handing out the files themselves.</p>
-  <p class="ds-small">Prices are per year. Pay monthly, or pay for the year up front and take 10% off. Your tier is checked once a year at renewal, from the count you report, and we agree on where that count comes from before the license starts. Prices are in US dollars, before tax.</p>
 
   <h3>Nonprofits and public safety</h3>
   <p>We offer separate pricing for eligible nonprofits and public safety agencies buying for their own use. Email <a href="mailto:sales@milecheckapp.com">sales@milecheckapp.com</a> with your organization and what you are building. Software companies that sell to these groups use the prices above.</p>
