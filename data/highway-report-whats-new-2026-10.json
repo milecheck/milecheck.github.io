@@ -124,6 +124,12 @@
         "href": "/dash-preorder.html",
         "title": "Dash displays for fleets",
         "icon": "truck"
+      },
+      {
+        "text": "If you build software and want mile markers in it, the dataset is available as a file: GeoJSON and CSV, all 50 states and 10 Canadian provinces and territories, with a monthly snapshot of what changed. Flat yearly fee, no call limits. A free sample is on the page.",
+        "href": "/api/#dataset",
+        "title": "Mile marker data license",
+        "icon": "layers"
       }
     ]
   },
