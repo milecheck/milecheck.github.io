@@ -625,13 +625,14 @@ for (const st of Object.keys(NAMES)) {
   if (feedNote(st)) parts.push(`<p class="rc-fig"><strong>Feed change.</strong> ${feedNote(st)}</p>`);
   const sn = [];
   if (S.crash > 0) sn.push(`<div><b>${n(S.crash)}</b><span>crash alerts in ${MONTH_NAME}</span></div>`);
-  sn.push(`<div><b>${n(S.closure)}</b><span>closure alerts</span></div>`);
+  // No zero tiles anywhere (Leah 2026-11-06): a stat the feed does not carry is left out, not shown as 0.
+  if (S.closure > 0) sn.push(`<div><b>${n(S.closure)}</b><span>closure alerts</span></div>`);
   // AK, AZ, MT and UT post closures and crashes but no roadwork alerts in any month on file (their roadwork rides a
   // separate conditions feed). A '0 roadwork alerts' tile read like a drop (Leah 2026-11-06), so the tile goes and the
   // closures paragraph says so instead.
   const noRoadwork = S.construction === 0 && (D.stateHistory[st] || []).length > 0 && (D.stateHistory[st] || []).every((m) => !m.construction);
   if (!noRoadwork) sn.push(`<div><b>${n(S.construction)}</b><span>roadwork alerts</span></div>`);
-  if (fire) sn.push(`<div><b>${n(fire.active)}</b><span>${plural(fire.active, 'wildfire record', 'wildfire records')}, ${fireAsOf}</span></div>`);
+  if (fire && fire.active > 0) sn.push(`<div><b>${n(fire.active)}</b><span>${plural(fire.active, 'wildfire record', 'wildfire records')}, ${fireAsOf}</span></div>`);
   if (st === 'WA' && BR) sn.push(`<div><b>${n(bridgeTotal)}</b><span>Seattle drawbridge openings</span></div>`);
   parts.push(`<div class="headline-nums">${sn.join('')}</div>`);
   parts.push(mb);
@@ -651,7 +652,7 @@ for (const st of Object.keys(NAMES)) {
     if (fs.length && ['CA', 'TX'].includes(st)) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
     parts.push(liveLink('../../', 'closures/', 'Live closure and roadwork alerts on the map'));
-    if (noRoadwork) parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure was' : 'closures were'} on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types. This feed does not post roadwork as alerts, so roadwork is not counted here.</p>`);
+    if (noRoadwork) parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure was' : 'closures were'} on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types. ${name}'s roadwork is published as road conditions rather than alerts, and this report does not count those yet. Live roadwork is on <a href="../../closures/">the closures map</a>.</p>`);
     else parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     const rc = (S.routeCounts || []).filter(([r]) => r);
     if (rc.filter(([r]) => realRoute(r)).length) parts.push(box(`Routes with the most alerts in ${name}`, rc.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
