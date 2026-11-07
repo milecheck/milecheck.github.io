@@ -35,6 +35,14 @@
     .method-box{font-size:14.5px;line-height:1.6;color:#3D454D;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;padding:14px 16px;margin:0 0 30px;}
     .method-box strong{color:#0F1419;}
     .article-note{font-size:14px;color:#5C6670;background:#F7F8F9;border-radius:9px;padding:12px 15px;margin:18px 0;}
+    .dash-row{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:center;margin:4px 0 20px;}
+    @media (max-width:520px){.dash-row{grid-template-columns:1fr;}}
+    .wr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:0 0 26px;}
+    .wr-card{display:flex;flex-direction:column;gap:3px;padding:12px 14px;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;text-decoration:none;color:inherit;min-width:0;}
+    .wr-card:hover{border-color:#0f7a4f;background:#EEF6F1;}
+    .wr-st{font-weight:700;color:#0f7a4f;font-size:16px;}
+    .wr-n{font-size:13px;color:#5C6670;}
+    .wr-roads{font-size:13.5px;color:#3D454D;line-height:1.4;}
     .article-list{margin:18px 0 !important;padding:0 0 0 20px !important;}
     .article-list li{margin:0 0 11px 0 !important;line-height:1.6;padding:0;}
     .pull-stat{margin:26px 0;padding:18px 20px;background:#FFF7ED;border-left:4px solid #F59E0B;border-radius:0 10px 10px 0;}
@@ -155,7 +163,7 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live crash and closure alerts on the map &rarr;</a></p>
 
-      <figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Crash alerts in Washington, October, one dot per alert</figcaption><a href="../../blog/highway-report-maps/october-2026/states/WA-crash.webp?v=to44ar" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/WA-crash.webp?v=to44ar" width="720" height="720" loading="lazy" alt="Map of Washington with one dot per published crash alert in October 2026" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
+      <figure class="sec-fig" style="margin:0 0 22px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Crash alerts in Washington, October, one dot per alert</figcaption><a href="../../blog/highway-report-maps/october-2026/states/WA-crash.webp?v=to46xj" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/WA-crash.webp?v=to46xj" width="1080" height="702" loading="lazy" alt="Map of Washington with one dot per published crash alert in October 2026" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
 
       <p>Washington's road feed carried 58 crash alerts in October.</p>
 
@@ -176,7 +184,7 @@
       <h2 class="rc">Winter closures</h2>
 <p class="rc-live"><a href="../../chains/" target="_blank" rel="noopener">Live chain and winter road map &rarr;</a></p>
 <p class="rc-live"><a href="../../seasonal/" target="_blank" rel="noopener">Roads that close for winter, by state &rarr;</a></p>
-<figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Roads that close for winter in Washington, as of October 31, 2026</figcaption><a href="../../blog/highway-report-maps/october-2026/states/WA-seasonal.webp?v=to44at" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/WA-seasonal.webp?v=to44at" width="720" height="720" loading="lazy" alt="Map of Washington with its seasonal-closure roads drawn: red closed for the season, orange not closed yet" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
+<figure class="sec-fig" style="margin:0 0 22px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Roads that close for winter in Washington, as of October 31, 2026</figcaption><a href="../../blog/highway-report-maps/october-2026/states/WA-seasonal.webp?v=to46xj" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/WA-seasonal.webp?v=to46xj" width="1080" height="702" loading="lazy" alt="Map of Washington with its seasonal-closure roads drawn: red closed for the season, orange not closed yet" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
 <p class="rc-fig"><span style="display:inline-block;width:26px;height:6px;background:#FF4D4D;border-radius:3px;vertical-align:middle;"></span> closed for the season &nbsp; <span style="display:inline-block;width:26px;height:6px;background:#FFB547;border-radius:3px;vertical-align:middle;"></span> usually closes for winter, not closed yet. Lines show the road around the seasonal stretch, from OpenStreetMap; the exact gates can differ.</p>
 <div class="pull-stat"><strong>Roads that usually close for winter</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>SR-20, North Cascades Highway</strong> <span style="color:#5C6670;font-weight:400">(closure points: Ross Dam trailhead (MP 134) to Silver Star gate (MP 171), later moved to Newhalem gate (MP 120) and Early Winters gate (MP 178))</span> &mdash; Closing date varies by year. The 2025 closure was Dec. 4. <a href="https://wsdot.wa.gov/about/news/2025/sr-20-north-cascades-highway-closes-season-thursday-dec-4-6-pm" rel="noopener" target="_blank">Source</a></li><li><strong>SR-410, Chinook Pass</strong> <span style="color:#5C6670;font-weight:400">(crystal Mountain Blvd (about 12 mi NW of summit) to Morse Creek (5 mi east of summit))</span> &mdash; Usually closes mid-November and reopens late May. <a href="https://www.nps.gov/mora/learn/news/chinook-cayuse-close-for-the-season-nov-20-2018.htm" rel="noopener" target="_blank">Source</a> &middot; <a href="https://www.nps.gov/mora/learn/news/chinook-and-cayuse-passes-are-closed-for-the-season.htm" rel="noopener" target="_blank">Reopening source</a></li><li><strong>SR-123, Cayuse Pass</strong> <span style="color:#5C6670;font-weight:400">(within Mount Rainier NP, between Crystal Mountain Blvd (SR 410 side) and the Stevens Canyon Road entrance)</span> &mdash; Usually closes mid-November and reopens late May. <a href="https://www.nps.gov/mora/learn/news/chinook-cayuse-close-for-the-season-nov-20-2018.htm" rel="noopener" target="_blank">Source</a> &middot; <a href="https://www.nps.gov/mora/learn/news/chinook-and-cayuse-passes-are-closed-for-the-season.htm" rel="noopener" target="_blank">Reopening source</a></li><li><strong>SR-542, Mount Baker Highway, Road to Artist Point</strong> <span style="color:#5C6670;font-weight:400">(final 2.7 miles of SR 542 (no mileposts given))</span> &mdash; Usually closes with the first snow (Oct. 15 in 2025). Reopened June 10 in 2026. <a href="https://wsdot.wa.gov/about/news/2026/sr-542-road-artist-point-mount-baker-reopens-season-wednesday-june-10" rel="noopener" target="_blank">Source</a></li></ul></div>
 <p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>
@@ -207,6 +215,7 @@
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-highway-report-october-2026-states-washington&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-highway-report-october-2026-states-washington" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>
+
 
       <p class="article-note">Built from MileCheck's archive of state DOT road feeds. A new Highway Report comes out at the start of every month.</p>
 

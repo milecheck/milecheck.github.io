@@ -172,6 +172,14 @@ function pageHtml({ rel, canonical, pageTitle, description, h1, h1Html, byline, 
     .method-box{font-size:14.5px;line-height:1.6;color:#3D454D;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;padding:14px 16px;margin:0 0 30px;}
     .method-box strong{color:#0F1419;}
     .article-note{font-size:14px;color:#5C6670;background:#F7F8F9;border-radius:9px;padding:12px 15px;margin:18px 0;}
+    .dash-row{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:center;margin:4px 0 20px;}
+    @media (max-width:520px){.dash-row{grid-template-columns:1fr;}}
+    .wr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:0 0 26px;}
+    .wr-card{display:flex;flex-direction:column;gap:3px;padding:12px 14px;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;text-decoration:none;color:inherit;min-width:0;}
+    .wr-card:hover{border-color:#0f7a4f;background:#EEF6F1;}
+    .wr-st{font-weight:700;color:#0f7a4f;font-size:16px;}
+    .wr-n{font-size:13px;color:#5C6670;}
+    .wr-roads{font-size:13.5px;color:#3D454D;line-height:1.4;}
     .article-list{margin:18px 0 !important;padding:0 0 0 20px !important;}
     .article-list li{margin:0 0 11px 0 !important;line-height:1.6;padding:0;}
     .pull-stat{margin:26px 0;padding:18px 20px;background:#FFF7ED;border-left:4px solid #F59E0B;border-radius:0 10px 10px 0;}
@@ -278,6 +286,7 @@ ${wide ? nextSteps(rel) : `      <div class="article-cta">
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>`}
+${wide ? pickBlock('-3') : ''}
 
       <p class="article-note">Built from MileCheck's archive of state DOT road feeds. A new Highway Report comes out at the start of every month.</p>
 
@@ -299,7 +308,7 @@ ${wide ? nextSteps(rel) : `      <div class="article-cta">
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
       <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email.${canonical && canonical.endsWith(`/blog/road-report-${KEY}.html`) ? '' : ` <a href="/blog/road-report-${KEY}.html">See the ${MONTH_NAME} report</a>.`} No spam.</p>
+      <p class="mc-sub">Closures, crashes and roadwork from the state road feeds, once a month in your inbox.${canonical && canonical.endsWith(`/blog/road-report-${KEY}.html`) ? '' : ` <a href="/blog/road-report-${KEY}.html">See the ${MONTH_NAME} report</a>.`} No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>
@@ -496,7 +505,7 @@ let SNAP_INDEX = null; try { SNAP_INDEX = JSON.parse(readFileSync(resolve(ROOT, 
 const snap = (st, layer, caption, alt) => {
   const f = `blog/highway-report-maps/${KEY}/states/${st}-${layer}.webp`;
   if (!existsSync(resolve(ROOT, f))) return '';
-  return `<figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><a href="../../${ver(f)}"><img src="../../${ver(f)}" width="720" height="720" loading="lazy" alt="${esc(alt)}" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>`;
+  return `<figure class="sec-fig" style="margin:0 0 22px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">${caption}</figcaption><a href="../../${ver(f)}"><img src="../../${ver(f)}" width="1080" height="702" loading="lazy" alt="${esc(alt)}" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>`;
 };
 // Each section points at its live map (Leah 2026-11-06). Opens in a new tab like every other link on the page.
 const liveLink = (rel, path, label) => `<p class="rc-live"><a href="${rel}${path}">${label} &rarr;</a></p>`;
@@ -575,10 +584,13 @@ if (FA) {
     national.push(`<p>The snow map counts alerts only. Daily road-surface reports, such as Alaska's icy patches and packed snow on the Dalton Highway every day of ${MONTH_NAME}, are road conditions, not alerts, and are on the live chain and winter road map instead.</p>`);
     national.push(rowClose(`<div class="sec-row" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported in ${MONTH_NAME}. Dark states published no plow positions that month.`, 'Where snowplows reported in October, one dot per reported position; states that published no plow positions are dark')}</div>`));
     const roadName = (e) => esc(String(e.name).replace(/\s*\(.*?\)\s*/g, ' ').replace(/ closure$/i, '').trim());
-    national.push(box('Roads that usually close for winter', wst.map((k) => {
+    // One card per state, skimmable (Leah 2026-11-06: the one-line list "means very little skimming over").
+    national.push(`<h3 style="font-size:17px;margin:0 0 10px;">Roads that usually close for winter</h3><div class="wr-grid">${wst.map((k) => {
       const roads = [...new Set(SEASONAL.filter((e) => e.publicLine && String(e.state).split('/').includes(k)).map(roadName))];
-      return `<a href="${STATE_DIR_NAME}/${slug(k)}.html">${NAMES[k]}</a> &mdash; ${roads.join(' &middot; ')}`;
-    })));
+      const si = SNAP_INDEX && SNAP_INDEX.seasonal && SNAP_INDEX.seasonal[k];
+      const closedN = si ? [...(si.drawn || []), ...(si.listed || [])].filter((r) => r.closed).length : 0;
+      return `<a class="wr-card" href="${STATE_DIR_NAME}/${slug(k)}.html"><span class="wr-st">${NAMES[k]}</span><span class="wr-n">${roads.length} road${roads.length === 1 ? '' : 's'}${closedN ? ` &middot; ${closedN} closed for the season` : ''}</span><span class="wr-roads">${roads.slice(0, 3).join(', ')}${roads.length > 3 ? ` <span style="color:#5C6670;">+${roads.length - 3} more</span>` : ''}</span></a>`;
+    }).join('')}</div>`);
   }
 }
 {
@@ -610,7 +622,7 @@ try {
       // One image beside the text and the button (Leah 2026-11-02).
       if (g.intro || g.cta) {
         const im = (g.images || [])[0];
-        national.push(`<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;margin:4px 0 20px;">${im ? `<figure style="margin:0;flex:0 1 300px;min-width:220px;"><img src="${esc(im.src)}" width="${im.width}" height="${im.height}" loading="lazy" alt="${esc(im.alt)}" style="width:100%;height:auto;border-radius:10px;display:block;"><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${esc(im.caption)}</figcaption></figure>` : ''}<div style="flex:1 1 320px;min-width:0;">${g.intro ? `<p>${esc(g.intro)}</p>` : ''}${g.cta ? `<p>${esc(g.cta.text)}</p><p style="margin:0;"><a href="${esc(g.cta.href)}" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:11px 18px;border-radius:8px;text-decoration:none;">${esc(g.cta.linkText)} &rarr;</a></p>` : ''}</div></div>`);
+        national.push(`<div class="dash-row">${im ? `<figure style="margin:0;min-width:0;"><img src="${esc(im.src)}" width="${im.width}" height="${im.height}" loading="lazy" alt="${esc(im.alt)}" style="width:100%;height:auto;border-radius:10px;display:block;"><figcaption style="font-size:13px;color:#5C6670;margin-top:6px;">${esc(im.caption)}</figcaption></figure>` : ''}<div style="min-width:0;">${g.intro ? `<p>${esc(g.intro)}</p>` : ''}${g.cta ? `<p>${esc(g.cta.text)}</p><p style="margin:0;"><a href="${esc(g.cta.href)}" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:11px 18px;border-radius:8px;text-decoration:none;">${esc(g.cta.linkText)} &rarr;</a></p>` : ''}</div></div>`);
       }
       // Cards with an icon, a short title and the line under it (Leah 2026-11-02: no long underlined sentences).
       if (g.items) national.push(`<div class="wn-grid">${g.items.map((w) => `<div class="wn-card">${iconTile(w)}<div style="min-width:0;">${w.href ? `<a class="wn-t" href="${esc(w.href)}">${esc(w.title || '')}</a>` : `<span class="wn-t">${esc(w.title || '')}</span>`}<p>${w.textHtml || esc(w.text)}</p>${(w.links || []).length ? `<span class="wn-links">${w.links.map((l) => `<a href="${esc(l.href)}">${/youtu\.be|youtube\.com/.test(l.href) ? svgIcon('youtube', 16) : ''}${esc(l.text)}</a>`).join('')}</span>` : ''}</div></div>`).join('')}</div>`);
@@ -642,8 +654,7 @@ for (const st of Object.keys(NAMES)) {
   // One comparing sentence up top, this state against its own last full month only (editor's pass 2026-11-04).
   const hh = histOf(st), hc = hh.find((x) => x.month === MONTH), hpv = [...hh].reverse().find((x) => x.comparable && x.month < MONTH);
   const trend = hc && hc.comparable && hpv && !feedNote(st) ? ` ${n(hc.total)} alerts in all, ${hc.total === hpv.total ? 'the same as' : hc.total > hpv.total ? 'up from' : 'down from'} ${n(hpv.total)} in ${MONTH_LONG(hpv.month)}.` : '';
-  parts.push(`<p class="article-lead">What ${feed} showed in ${MONTH_NAME} ${YEAR}.${trend} Part of the <a href="../road-report-${KEY}.html">national ${H1}</a>.</p>`);
-  if (st === 'UT') parts.push(`<p>Ben, if you are reading this, I love you.</p>`);  // Leah 2026-11-06, her words, Utah page only
+  parts.push(`<p class="article-lead">What ${feed} showed in ${MONTH_NAME} ${YEAR}.${trend} Part of the <a href="../road-report-${KEY}.html">national ${H1}</a>.${st === 'UT' ? ' Ben, if you are reading this, I love you <span role="img" aria-label="heart hands">\u{1FAF6}</span>' : ''}</p>`);  // UT line: Leah 2026-11-06, her words, inline with the lead (her 11/6 edit)
   if (updLong && dropFor(st)) parts.push(`<p class="rc-fig"><strong>Updated ${updLong}.</strong> Alerts this feed carried for another state's road were removed.</p>`);
   const mb = fold(methodBox(DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s department of transportation (DOT) feed`, dropNote(st) + (['AK', 'AZ', 'MT', 'UT'].includes(st) ? ` ${name} publishes roadwork as road conditions rather than alerts; each roadwork condition is counted once per route, milepost and description.` : '') + extras({ fires: false, border: ports.length > 0 })));
   if (feedNote(st)) parts.push(`<p class="rc-fig"><strong>Feed change.</strong> ${feedNote(st)}</p>`);

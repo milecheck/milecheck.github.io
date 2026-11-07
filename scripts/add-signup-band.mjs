@@ -36,7 +36,7 @@ const inner = `<p class="mc-eyebrow">${EYEBROW}</p>
       <h2>${H2}</h2>
       <p class="mc-sub">${SUB}</p>`;
 // The report page itself gets no "See the report" link: it would point at the page the reader is on (2026-11-04).
-const SUB_SELF = "Your state's reported closures, crashes and roadwork, once a month by email. No spam.";
+const SUB_SELF = "Closures, crashes and roadwork from the state road feeds, once a month in your inbox. No spam.";
 const innerFor = (f) => f === `blog/road-report-${RPT}.html` ? inner.replace(SUB, SUB_SELF) : inner;
 const BAND = `<!-- signup:start -->
   <section class="mc-signup" id="subscribe">

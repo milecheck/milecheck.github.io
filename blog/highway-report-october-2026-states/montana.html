@@ -35,6 +35,14 @@
     .method-box{font-size:14.5px;line-height:1.6;color:#3D454D;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;padding:14px 16px;margin:0 0 30px;}
     .method-box strong{color:#0F1419;}
     .article-note{font-size:14px;color:#5C6670;background:#F7F8F9;border-radius:9px;padding:12px 15px;margin:18px 0;}
+    .dash-row{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:center;margin:4px 0 20px;}
+    @media (max-width:520px){.dash-row{grid-template-columns:1fr;}}
+    .wr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:0 0 26px;}
+    .wr-card{display:flex;flex-direction:column;gap:3px;padding:12px 14px;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;text-decoration:none;color:inherit;min-width:0;}
+    .wr-card:hover{border-color:#0f7a4f;background:#EEF6F1;}
+    .wr-st{font-weight:700;color:#0f7a4f;font-size:16px;}
+    .wr-n{font-size:13px;color:#5C6670;}
+    .wr-roads{font-size:13.5px;color:#3D454D;line-height:1.4;}
     .article-list{margin:18px 0 !important;padding:0 0 0 20px !important;}
     .article-list li{margin:0 0 11px 0 !important;line-height:1.6;padding:0;}
     .pull-stat{margin:26px 0;padding:18px 20px;background:#FFF7ED;border-left:4px solid #F59E0B;border-radius:0 10px 10px 0;}
@@ -155,7 +163,7 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live crash and closure alerts on the map &rarr;</a></p>
 
-      <figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Crash alerts in Montana, October, one dot per alert</figcaption><a href="../../blog/highway-report-maps/october-2026/states/MT-crash.webp?v=to44a5" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/MT-crash.webp?v=to44a5" width="720" height="720" loading="lazy" alt="Map of Montana with one dot per published crash alert in October 2026" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
+      <figure class="sec-fig" style="margin:0 0 22px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Crash alerts in Montana, October, one dot per alert</figcaption><a href="../../blog/highway-report-maps/october-2026/states/MT-crash.webp?v=to46x2" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/MT-crash.webp?v=to46x2" width="1080" height="702" loading="lazy" alt="Map of Montana with one dot per published crash alert in October 2026" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
 
       <p>Montana's road feed carried 31 crash alerts in October.</p>
 
@@ -174,7 +182,7 @@
       <h2 class="rc">Winter closures</h2>
 <p class="rc-live"><a href="../../chains/" target="_blank" rel="noopener">Live chain and winter road map &rarr;</a></p>
 <p class="rc-live"><a href="../../seasonal/" target="_blank" rel="noopener">Roads that close for winter, by state &rarr;</a></p>
-<figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Roads that close for winter in Montana, as of October 31, 2026</figcaption><a href="../../blog/highway-report-maps/october-2026/states/MT-seasonal.webp?v=to44a6" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/MT-seasonal.webp?v=to44a6" width="720" height="720" loading="lazy" alt="Map of Montana with its seasonal-closure roads drawn: red closed for the season, orange not closed yet" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
+<figure class="sec-fig" style="margin:0 0 22px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Roads that close for winter in Montana, as of October 31, 2026</figcaption><a href="../../blog/highway-report-maps/october-2026/states/MT-seasonal.webp?v=to46x3" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/MT-seasonal.webp?v=to46x3" width="1080" height="702" loading="lazy" alt="Map of Montana with its seasonal-closure roads drawn: red closed for the season, orange not closed yet" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
 <p class="rc-fig"><span style="display:inline-block;width:26px;height:6px;background:#FF4D4D;border-radius:3px;vertical-align:middle;"></span> closed for the season &nbsp; <span style="display:inline-block;width:26px;height:6px;background:#FFB547;border-radius:3px;vertical-align:middle;"></span> usually closes for winter, not closed yet. Lines show the road around the seasonal stretch, from OpenStreetMap; the exact gates can differ.</p>
 <div class="pull-stat"><strong>Roads that usually close for winter</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>US-212, Cooke City to Pilot Creek</strong> <span style="color:#5C6670;font-weight:400">(9 miles from Cooke City to Pilot Creek closed to wheeled vehicles in winter; open year-round WY-120 to Pilot Creek Parking Lot (4 miles toward Cooke City from the WY-296/US-212 junction))</span> &mdash; These 9 miles close to cars in winter and are usually open mid-May to early November. The Chief Joseph Scenic Byway (WY-296) stays open all year from WY-120 to Pilot Creek. <a href="https://www.nps.gov/yell/planyourvisit/parkroads.htm" rel="noopener" target="_blank">Source</a> &middot; <a href="https://www.fs.usda.gov/media/52325" rel="noopener" target="_blank">Forest Service source</a></li><li><strong>US-212, Beartooth Highway</strong> <span style="color:#5C6670;font-weight:400">(mT MP 45-56 (MDT); MDT to the MT/WY line, NPS beyond)</span> &mdash; Usually closes mid-October and reopens the Friday of Memorial Day weekend. <a href="https://mdt.mt.gov/travinfo/beartooth/" rel="noopener" target="_blank">Source</a></li><li><strong>MT-38, Skalkaho Pass</strong> <span style="color:#5C6670;font-weight:400">(mP 14-38, Ravalli-Granite Counties)</span> &mdash; Closed for winter. MDT gives no set dates. <a href="https://www.mdt.mt.gov/travinfo/seasonally-closed-roads.aspx" rel="noopener" target="_blank">Source</a></li><li><strong>MT-49, Looking Glass Highway</strong> <span style="color:#5C6670;font-weight:400">(mP 4-11, Glacier County)</span> &mdash; Closed for winter. MDT gives no set dates. <a href="https://www.mdt.mt.gov/travinfo/seasonally-closed-roads.aspx" rel="noopener" target="_blank">Source</a></li><li><strong>S-471, Thompson Pass</strong> <span style="color:#5C6670;font-weight:400">(mP 16-22, Sanders County)</span> &mdash; Closed for winter. MDT gives no set dates. <a href="https://www.mdt.mt.gov/travinfo/seasonally-closed-roads.aspx" rel="noopener" target="_blank">Source</a></li><li><strong>Going-to-the-Sun Road (NPS park road, not state highway)</strong> <span style="color:#5C6670;font-weight:400">(alpine sections; open year-round near the West Entrance)</span> &mdash; Park road. Usually closes around the third Monday of October and reopens late June at the earliest. <a href="https://www.nps.gov/glac/planyourvisit/directions.htm" rel="noopener" target="_blank">Source</a></li></ul></div>
 <p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>
@@ -199,6 +207,7 @@
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-highway-report-october-2026-states-montana&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-highway-report-october-2026-states-montana" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>
+
 
       <p class="article-note">Built from MileCheck's archive of state DOT road feeds. A new Highway Report comes out at the start of every month.</p>
 

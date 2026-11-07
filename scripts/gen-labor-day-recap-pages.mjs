@@ -154,7 +154,7 @@ ${body}
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
       <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
+      <p class="mc-sub">Closures, crashes and roadwork from the state road feeds, once a month in your inbox. <a href="/blog/road-report-september-2026.html">See the September report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>

@@ -35,6 +35,14 @@
     .method-box{font-size:14.5px;line-height:1.6;color:#3D454D;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;padding:14px 16px;margin:0 0 30px;}
     .method-box strong{color:#0F1419;}
     .article-note{font-size:14px;color:#5C6670;background:#F7F8F9;border-radius:9px;padding:12px 15px;margin:18px 0;}
+    .dash-row{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:center;margin:4px 0 20px;}
+    @media (max-width:520px){.dash-row{grid-template-columns:1fr;}}
+    .wr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:0 0 26px;}
+    .wr-card{display:flex;flex-direction:column;gap:3px;padding:12px 14px;background:#F7F8F9;border:1px solid #E4E7EA;border-radius:9px;text-decoration:none;color:inherit;min-width:0;}
+    .wr-card:hover{border-color:#0f7a4f;background:#EEF6F1;}
+    .wr-st{font-weight:700;color:#0f7a4f;font-size:16px;}
+    .wr-n{font-size:13px;color:#5C6670;}
+    .wr-roads{font-size:13.5px;color:#3D454D;line-height:1.4;}
     .article-list{margin:18px 0 !important;padding:0 0 0 20px !important;}
     .article-list li{margin:0 0 11px 0 !important;line-height:1.6;padding:0;}
     .pull-stat{margin:26px 0;padding:18px 20px;background:#FFF7ED;border-left:4px solid #F59E0B;border-radius:0 10px 10px 0;}
@@ -155,7 +163,7 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live crash and closure alerts on the map &rarr;</a></p>
 
-      <figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Crash alerts in Ohio, October, one dot per alert</figcaption><a href="../../blog/highway-report-maps/october-2026/states/OH-crash.webp?v=to44ae" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/OH-crash.webp?v=to44ae" width="720" height="720" loading="lazy" alt="Map of Ohio with one dot per published crash alert in October 2026" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
+      <figure class="sec-fig" style="margin:0 0 22px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Crash alerts in Ohio, October, one dot per alert</figcaption><a href="../../blog/highway-report-maps/october-2026/states/OH-crash.webp?v=to46x9" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/OH-crash.webp?v=to46x9" width="1080" height="702" loading="lazy" alt="Map of Ohio with one dot per published crash alert in October 2026" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
 
       <p>Ohio's road feed carried 85 crash alerts in October.</p>
 
@@ -185,6 +193,7 @@
         <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=blog-highway-report-october-2026-states-ohio&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
         <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dblog-highway-report-october-2026-states-ohio" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
       </div>
+
 
       <p class="article-note">Built from MileCheck's archive of state DOT road feeds. A new Highway Report comes out at the start of every month.</p>
 
