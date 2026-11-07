@@ -158,6 +158,7 @@ const CSS = `    .spon{display:flex;align-items:center;gap:12px;min-height:74px;
     .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
     .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
     .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .article-wrap .spon-roy{height:170px;width:auto;} /* article pages: .article-wrap img{height:auto} beat the 60px rule; Leah 11/6 likes the big Roy, a little shorter */
     .spon.spon-mini{min-height:48px;padding:4px 12px 4px 8px;margin:0 0 10px;gap:10px;}
     .spon-mini .spon-roy{height:40px;}
     .spon-mini .spon-text{font-size:13px;line-height:1.3;}
