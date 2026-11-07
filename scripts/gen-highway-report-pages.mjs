@@ -444,9 +444,16 @@ const pickerOrder = Object.keys(NAMES).sort((a, b) => NAMES[a].localeCompare(NAM
 // tab in every browser. The earlier <select> navigated in place for Leah (2026-11-06); window.open from onchange
 // is a pop-up some browsers block or run in the same tab.
 const picker = (id, flag, label, codes) => `<details id="${id}" class="st-pick" style="flex:1 1 240px;min-width:0;position:relative;"><summary style="list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:8px 12px;border:1px solid #C9CED3;border-radius:8px;background:#fff;font-weight:600;cursor:pointer;"><span><span aria-hidden="true">${flag}</span> ${label}</span><span aria-hidden="true" style="font-size:12px;color:#5A6670;">&#9660;</span></summary><div style="position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:20;max-height:320px;overflow:auto;background:#fff;border:1px solid #C9CED3;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:6px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));">${codes.map((st) => `<a href="${STATE_DIR_NAME}/${slug(st)}.html" target="_blank" rel="noopener" onclick="this.closest('details').removeAttribute('open')" style="display:block;padding:10px 10px;min-height:44px;line-height:24px;color:#0f7a4f;font-weight:600;text-decoration:none;border-radius:6px;">${NAMES[st]}</a>`).join('')}</div></details>`;
-const PICKERS = `<style>.st-pick summary::-webkit-details-marker{display:none}.st-pick a:hover{background:#EEF6F1}</style><div id="by-state" style="display:flex;flex-wrap:wrap;gap:14px;margin:4px 0 30px;">${picker('state-jump', '\u{1F1FA}\u{1F1F8}', 'Pick your state', pickerOrder.filter((st) => !CANADA.has(st)))}${picker('province-jump', '\u{1F1E8}\u{1F1E6}', 'Pick your province', pickerOrder.filter((st) => CANADA.has(st)))}</div><script>document.querySelectorAll('.st-pick').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('.st-pick[open]').forEach(function(o){if(o!==d)o.removeAttribute('open')})})});document.addEventListener('click',function(e){if(!e.target.closest('.st-pick'))document.querySelectorAll('.st-pick[open]').forEach(function(o){o.removeAttribute('open')})})</script>`;
+const PICK_STYLE = `<style>.st-pick summary::-webkit-details-marker{display:none}.st-pick a:hover{background:#EEF6F1}.pick-cta{margin:26px 0 30px;padding:18px 20px 6px;background:#F4F8F6;border:1px solid #DCE9E1;border-radius:12px;}.pick-cta h3{margin:0 0 6px;font-size:20px;line-height:1.25;}.pick-cta p{margin:0 0 14px;font-size:15px;color:#3D454D;}.pick-cta .mc-cta-sub{margin:0 0 12px;font-size:15px;}.pick-cta .mc-cta-sub a{color:#0f7a4f;font-weight:700;}</style>`;
+const PICK_JS = `<script>document.addEventListener('toggle',function(e){var d=e.target;if(!d.classList||!d.classList.contains('st-pick')||!d.open)return;document.querySelectorAll('.st-pick[open]').forEach(function(o){if(o!==d)o.removeAttribute('open')})},true);document.addEventListener('click',function(e){if(!e.target.closest('.st-pick'))document.querySelectorAll('.st-pick[open]').forEach(function(o){o.removeAttribute('open')})})</script>`;
+const pickers = (sfx) => `<div id="by-state${sfx}" style="display:flex;flex-wrap:wrap;gap:14px;margin:4px 0 14px;">${picker('state-jump' + sfx, '\u{1F1FA}\u{1F1F8}', 'Pick your state', pickerOrder.filter((st) => !CANADA.has(st)))}${picker('province-jump' + sfx, '\u{1F1E8}\u{1F1E6}', 'Pick your province', pickerOrder.filter((st) => CANADA.has(st)))}</div>`;
+// The CTA block (Leah 2026-11-06): a header, the two pickers, and the email sign-up line. Once under the headline
+// numbers and again after the last map section, before What's new. The sign-up link opens the same overlay as
+// the line add-signup-ctas.mjs puts at the top of the page.
+const SIGNUP_LINE = `<p class="mc-cta-sub"><a href="#subscribe" onclick="var c=document.querySelector('.mc-cta-line a');if(c){c.click();return false}">Sign up to get MileCheck's monthly Highway Report in your inbox &rarr;</a></p>`;
+const pickBlock = (sfx) => `<div class="pick-cta"><h3>A report for every state and province. Pick yours.</h3><p>Each one has the routes that had the most crashes, closures and roadwork in ${MONTH_NAME}, and how the month compares with the state's earlier months.</p>${pickers(sfx)}${SIGNUP_LINE}</div>`;
+const PICKERS = PICK_STYLE + pickBlock('') + PICK_JS;
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
-national.push(`<p style="margin:0 0 8px;">Every state and province has its own ${MONTH_NAME} report, with the routes that had the most crashes, closures and roadwork. Pick yours.</p>`);
 national.push(PICKERS);
 national.push(fold(methodBox('each state department of transportation (DOT) road feed, DriveBC, 511 Alberta and Manitoba 511', '')));
 // Monthly maps (scripts/road-report-maps/build.sh in the app repo), each in its own section beside the text
@@ -561,6 +568,7 @@ if (FA) {
   national.length = 0; national.push(...head);
   for (const k of ['fire', 'winter', 'crash', 'closure', 'border', 'cameras']) if (secs[k]) national.push(...secs[k]);
 }
+national.push(pickBlock('-2'));
 // The state and province pickers moved up under the headline numbers (Leah 2026-11-06).
 
 // "What's new at MileCheck" (Leah: on every report, at the end). One file per month, written by hand
