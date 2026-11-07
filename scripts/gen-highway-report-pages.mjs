@@ -626,7 +626,11 @@ for (const st of Object.keys(NAMES)) {
   const sn = [];
   if (S.crash > 0) sn.push(`<div><b>${n(S.crash)}</b><span>crash alerts in ${MONTH_NAME}</span></div>`);
   sn.push(`<div><b>${n(S.closure)}</b><span>closure alerts</span></div>`);
-  sn.push(`<div><b>${n(S.construction)}</b><span>roadwork alerts</span></div>`);
+  // AK, AZ, MT and UT post closures and crashes but no roadwork alerts in any month on file (their roadwork rides a
+  // separate conditions feed). A '0 roadwork alerts' tile read like a drop (Leah 2026-11-06), so the tile goes and the
+  // closures paragraph says so instead.
+  const noRoadwork = S.construction === 0 && (D.stateHistory[st] || []).length > 0 && (D.stateHistory[st] || []).every((m) => !m.construction);
+  if (!noRoadwork) sn.push(`<div><b>${n(S.construction)}</b><span>roadwork alerts</span></div>`);
   if (fire) sn.push(`<div><b>${n(fire.active)}</b><span>${plural(fire.active, 'wildfire record', 'wildfire records')}, ${fireAsOf}</span></div>`);
   if (st === 'WA' && BR) sn.push(`<div><b>${n(bridgeTotal)}</b><span>Seattle drawbridge openings</span></div>`);
   parts.push(`<div class="headline-nums">${sn.join('')}</div>`);
@@ -647,7 +651,8 @@ for (const st of Object.keys(NAMES)) {
     if (fs.length && ['CA', 'TX'].includes(st)) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
     parts.push(liveLink('../../', 'closures/', 'Live closure and roadwork alerts on the map'));
-    parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
+    if (noRoadwork) parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure was' : 'closures were'} on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types. This feed does not post roadwork as alerts, so roadwork is not counted here.</p>`);
+    else parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
     const rc = (S.routeCounts || []).filter(([r]) => r);
     if (rc.filter(([r]) => realRoute(r)).length) parts.push(box(`Routes with the most alerts in ${name}`, rc.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
     else if (S.topRoutes && S.topRoutes.length) parts.push(`<p>The routes with the most alerts were ${S.topRoutes.map((r) => esc(route(st, r))).join(', ').replace(/, ([^,]*)$/, ' and $1')}.</p>`);
@@ -688,7 +693,7 @@ for (const st of Object.keys(NAMES)) {
   parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state or province</a>.</p>`);
   const h1 = `MileCheck Highway Report: ${name}, ${MONTH_NAME} ${YEAR}`;
   const firstMonth = !(histOf(st).filter((x) => x.comparable).length >= 2);
-  const desc = `${S.crash > 0 ? `${n(S.crash)} crash, ` : ''}${n(S.closure)} closure and ${n(S.construction)} roadwork alerts published by ${DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s DOT feed`} in ${MONTH_NAME} ${YEAR}${firstMonth ? `, MileCheck's first full month of ${name}` : ', compared with earlier months'}${ports.length ? ', plus border waits' : ''}${fire ? ', plus wildfires' : ''}.`;
+  const desc = `${S.crash > 0 ? `${n(S.crash)} crash, ` : ''}${n(S.closure)} closure${noRoadwork ? '' : ` and ${n(S.construction)} roadwork`} alerts published by ${DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s DOT feed`} in ${MONTH_NAME} ${YEAR}${firstMonth ? `, MileCheck's first full month of ${name}` : ', compared with earlier months'}${ports.length ? ', plus border waits' : ''}${fire ? ', plus wildfires' : ''}.`;
   const canonical = `https://milecheckapp.com/blog/${STATE_DIR_NAME}/${slug(st)}.html`;
   writeFileSync(resolve(OUT_DIR, `${slug(st)}.html`), page({
     rel: '../../', canonical, pageTitle: h1, description: desc, h1,
