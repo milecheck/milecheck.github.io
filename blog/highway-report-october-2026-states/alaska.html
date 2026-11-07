@@ -73,6 +73,16 @@
     .method-fold[open] summary::before{content:"\25BE  ";}
     .method-fold .method-box{margin:6px 0 0;}
     .hbar{display:block;height:6px;background:#00C880;border-radius:3px;margin:6px 0 2px;}
+    .mo-chart{margin:14px 0 26px;}
+    .mo-rows{display:flex;flex-direction:column;gap:10px;}
+    .mo{display:grid;grid-template-columns:92px 1fr 64px;align-items:center;gap:10px;font-size:14.5px;}
+    .mo-l{color:#3D454D;font-weight:600;}.mo-n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;}
+    .mo-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:#EEF1F3;}
+    .mo-bar i,.mo-chart figcaption i{display:block;height:100%;}
+    .mo-c{background:#FF7A58;}.mo-k{background:#FFC249;}.mo-r{background:#00C880;}.mo-o{background:#B8C2CC;}
+    .mo-chart figcaption{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:#5C6670;margin:10px 0 0;}
+    .mo-chart figcaption span{display:inline-flex;align-items:center;gap:6px;}.mo-chart figcaption i{width:14px;height:10px;border-radius:3px;}
+    .mo-list{font-size:14px;color:#5C6670;margin:12px 0 0 !important;}
     .wn-grid{display:flex;flex-direction:column;margin:6px 0 26px;border-top:1px solid #E4E7EA;}
     .wn-card{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid #E4E7EA;}
     .wn-card--big{padding:22px 2px;background:#F4F8F6;border-radius:10px;margin:6px 0;}
@@ -131,7 +141,7 @@
       <a href="../../blog/" target="_blank" rel="noopener" class="article-back">All articles</a>
 
       <p class="article-eyebrow">MileCheck Highway Report</p>
-      <h1 class="article-title">MileCheck Highway Report: Alaska, October 2026</h1>
+      <h1 class="article-title">MileCheck Highway Report:<br>Alaska, October 2026</h1>
       <p class="article-byline">by MileCheck &middot; November 4, 2026</p>
 
       <p class="article-lead">What Alaska's department of transportation (DOT) feed showed in October 2026. 6 alerts in all, up from 4 in September. Part of the <a href="../road-report-october-2026.html" target="_blank" rel="noopener">national MileCheck Highway Report, October 2026</a>.</p>
@@ -139,7 +149,7 @@
 
       <div class="headline-nums"><div><b>3</b><span>crash alerts in October</span></div><div><b>1</b><span>closure alerts</span></div></div>
 
-      <details class="method-fold"><summary>How we got these numbers</summary><div class="method-box">These are unique alerts published by Alaska's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
+      <details class="method-fold"><summary>How we got these numbers</summary><div class="method-box">These are unique alerts published by Alaska's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months. Alaska publishes roadwork as road conditions rather than alerts; each roadwork condition is counted once per route, milepost and description.</div></details>
 
       <h2 class="rc">Crashes</h2>
 
@@ -155,20 +165,18 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <p>1 closure was on Alaska's feed in October, out of 6 alerts of all types. Alaska's roadwork is published as road conditions rather than alerts, and this report does not count those yet. Live roadwork is on <a href="../../closures/" target="_blank" rel="noopener">the closures map</a>.</p>
-
       <div class="pull-stat"><strong>Routes with the most alerts in Alaska</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>Richardson Highway</strong> &mdash; 2</li><li><strong>Glenn Highway</strong> &mdash; 2</li><li><strong>Parks Highway</strong> &mdash; 1</li><li><strong>Seward Highway</strong> &mdash; 1</li></ul></div>
 
       <h2 class="rc">Compared with earlier months</h2>
 
-      <p>Unique alerts on Alaska's feed in each full month MileCheck has.</p><div class="pull-stat"><strong>By month</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>July</strong> &mdash; 19 alerts: 2 crashes, 8 closures, 0 roadwork<span class="hbar" style="width:100%"></span></li><li><strong>August</strong> &mdash; 6 alerts: 0 crashes, 1 closure, 0 roadwork<span class="hbar" style="width:32%"></span></li><li><strong>September</strong> &mdash; 4 alerts: 0 crashes, 2 closures, 0 roadwork<span class="hbar" style="width:21%"></span></li><li><strong>October</strong> &mdash; 6 alerts: 3 crashes, 1 closure, 0 roadwork<span class="hbar" style="width:32%"></span></li></ul></div>
+      <p>Unique alerts on Alaska's feed in each full month MileCheck has.</p><figure class="mo-chart"><div class="mo-rows"><div class="mo"><span class="mo-l">July</span><div class="mo-bar" style="width:100%"><i class="mo-c" style="flex:2" title="2 crash"></i><i class="mo-k" style="flex:8" title="8 closure"></i><i class="mo-o" style="flex:9" title="9 other"></i></div><span class="mo-n">19</span></div><div class="mo"><span class="mo-l">August</span><div class="mo-bar" style="width:32%"><i class="mo-k" style="flex:1" title="1 closure"></i><i class="mo-o" style="flex:5" title="5 other"></i></div><span class="mo-n">6</span></div><div class="mo"><span class="mo-l">September</span><div class="mo-bar" style="width:21%"><i class="mo-k" style="flex:2" title="2 closure"></i><i class="mo-o" style="flex:2" title="2 other"></i></div><span class="mo-n">4</span></div><div class="mo"><span class="mo-l">October</span><div class="mo-bar" style="width:32%"><i class="mo-c" style="flex:3" title="3 crash"></i><i class="mo-k" style="flex:1" title="1 closure"></i><i class="mo-o" style="flex:2" title="2 other"></i></div><span class="mo-n">6</span></div></div><figcaption><span><i class="mo-c"></i>crash</span><span><i class="mo-k"></i>closure</span><span><i class="mo-r"></i>roadwork</span><span><i class="mo-o"></i>other</span></figcaption><ul class="article-list mo-list"><li><strong>July</strong> &mdash; 19 alerts: 2 crashes, 8 closures, 0 roadwork</li><li><strong>August</strong> &mdash; 6 alerts: 0 crashes, 1 closure, 0 roadwork</li><li><strong>September</strong> &mdash; 4 alerts: 0 crashes, 2 closures, 0 roadwork</li><li><strong>October</strong> &mdash; 6 alerts: 3 crashes, 1 closure, 0 roadwork</li></ul></figure>
 
       <h2 class="rc">Winter closures</h2>
 <p class="rc-live"><a href="../../chains/" target="_blank" rel="noopener">Live chain and winter road map &rarr;</a></p>
 <p class="rc-live"><a href="../../seasonal/" target="_blank" rel="noopener">Roads that close for winter, by state &rarr;</a></p>
 <figure class="sec-fig" style="margin:0 0 22px;max-width:520px;"><figcaption style="font-size:16px;font-weight:700;color:#0f7a4f;line-height:1.35;margin:0 0 8px;">Roads that close for winter in Alaska, as of October 31, 2026</figcaption><a href="../../blog/highway-report-maps/october-2026/states/AK-seasonal.webp?v=to3hou" target="_blank" rel="noopener"><img src="../../blog/highway-report-maps/october-2026/states/AK-seasonal.webp?v=to3hou" width="720" height="720" loading="lazy" alt="Map of Alaska with its seasonal-closure roads drawn: red closed for the season, orange not closed yet" style="width:100%;height:auto;border-radius:8px;display:block;"></a></figure>
 <p class="rc-fig"><span style="display:inline-block;width:26px;height:6px;background:#FF4D4D;border-radius:3px;vertical-align:middle;"></span> closed for the season &nbsp; <span style="display:inline-block;width:26px;height:6px;background:#FFB547;border-radius:3px;vertical-align:middle;"></span> usually closes for winter, not closed yet. Lines show the road around the seasonal stretch, from OpenStreetMap; the exact gates can differ.</p>
-<div class="pull-stat"><strong>Roads that usually close for winter</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>AK-8, Denali Highway</strong> &mdash; Winter maintenance ends Oct. 1. Crews start reopening in late April. <a href="https://dot.alaska.gov/comm/pressbox/arch2022/PR22-0044.shtml" rel="noopener" target="_blank">Source</a></li><li><strong>AK-5, Taylor Highway</strong> &mdash; Winter maintenance ends Oct. 15 and resumes in early April. <a href="https://dot.alaska.gov/comm/pressbox/arch2022/PR22-0044.shtml" rel="noopener" target="_blank">Source</a></li><li><strong>McCarthy Road</strong> &mdash; Regular maintenance ends Oct. 1 and resumes in spring. <a href="https://dot.alaska.gov/comm/pressbox/arch2022/PR22-0044.shtml" rel="noopener" target="_blank">Source</a></li><li><strong>Eureka/Rampart Road</strong> &mdash; Maintenance ends Oct. 1. Reopens in early spring. <a href="https://dot.alaska.gov/comm/pressbox/arch2022/PR22-0044.shtml" rel="noopener" target="_blank">Source</a></li></ul></div>
+<div class="pull-stat"><strong>Roads that usually close for winter</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>AK-8, Denali Highway</strong> <span style="color:#5C6670;font-weight:400">(135-mile highway)</span> &mdash; Winter maintenance ends Oct. 1. Crews start reopening in late April.</li><li><strong>AK-5, Taylor Highway</strong> <span style="color:#5C6670;font-weight:400">(160-mile road)</span> &mdash; Winter maintenance ends Oct. 15 and resumes in early April.</li><li><strong>McCarthy Road</strong> <span style="color:#5C6670;font-weight:400">(not given)</span> &mdash; Regular maintenance ends Oct. 1 and resumes in spring.</li><li><strong>Eureka/Rampart Road</strong> <span style="color:#5C6670;font-weight:400">(not given)</span> &mdash; Maintenance ends Oct. 1. Reopens in early spring.</li></ul><p class="rc-fig" style="margin:10px 0 0;">Source: <a href="https://dot.alaska.gov/comm/pressbox/arch2022/PR22-0044.shtml" rel="noopener" target="_blank">dot.alaska.gov</a></p></div>
 <p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>
 
       <aside class="road-fact"><p class="rf-k">Alaska road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">The Dalton Highway runs about 240 miles from Coldfoot to Deadhorse with no gas stations. Fill up before leaving Coldfoot northbound.</p><p class="rf-s"><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>
@@ -208,8 +216,8 @@
     </style>
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
-      <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
+      <h2>Get MileCheck's monthly Highway Report</h2>
+      <p class="mc-sub">Closures, crashes and roadwork from the state road feeds, once a month in your inbox. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>

@@ -11,20 +11,21 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 
 const EYEBROW = 'The Monthly Highway Report';
-const H2 = "Get your state's monthly road alert report";
+const H2 = "Get MileCheck's monthly Highway Report";  // Leah 2026-11-06: not 'your state's', not 'road alert report'
 // Newest report by the JSON's own `month` field, so a new month takes over without a code change (2026-11-01).
 const RPT = readdirSync('data').filter((f) => /^road-report-[a-z]+-\d{4}\.json$/.test(f))
   .map((f) => ({ f, m: JSON.parse(readFileSync('data/' + f, 'utf8')).month || '' }))
   .sort((a, b) => b.m.localeCompare(a.m))[0].f.replace(/^road-report-|\.json$/g, '');
 const RPT_MONTH = RPT.split('-')[0].replace(/^./, (c) => c.toUpperCase());
-const SUB = `Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-${RPT}.html">See the ${RPT_MONTH} report</a>. No spam.`;
+const SUB = `Closures, crashes and roadwork from the state road feeds, once a month in your inbox. <a href="/blog/road-report-${RPT}.html">See the ${RPT_MONTH} report</a>. No spam.`;
 const FAMILIES = new Set(['cameras', 'pass', 'corridor', 'guide']);
 
-const CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
+const CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:33px 0;}
       .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
       .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
       .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
-      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 12px;max-width:44ch;}
+.mc-signup .ml-form-embedBody{padding-top:6px !important;padding-bottom:0 !important;}
       .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
       .mc-signup .ml-form-embedContent{display:none !important;}
       .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}

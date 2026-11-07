@@ -73,6 +73,16 @@
     .method-fold[open] summary::before{content:"\25BE  ";}
     .method-fold .method-box{margin:6px 0 0;}
     .hbar{display:block;height:6px;background:#00C880;border-radius:3px;margin:6px 0 2px;}
+    .mo-chart{margin:14px 0 26px;}
+    .mo-rows{display:flex;flex-direction:column;gap:10px;}
+    .mo{display:grid;grid-template-columns:92px 1fr 64px;align-items:center;gap:10px;font-size:14.5px;}
+    .mo-l{color:#3D454D;font-weight:600;}.mo-n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;}
+    .mo-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:#EEF1F3;}
+    .mo-bar i,.mo-chart figcaption i{display:block;height:100%;}
+    .mo-c{background:#FF7A58;}.mo-k{background:#FFC249;}.mo-r{background:#00C880;}.mo-o{background:#B8C2CC;}
+    .mo-chart figcaption{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:#5C6670;margin:10px 0 0;}
+    .mo-chart figcaption span{display:inline-flex;align-items:center;gap:6px;}.mo-chart figcaption i{width:14px;height:10px;border-radius:3px;}
+    .mo-list{font-size:14px;color:#5C6670;margin:12px 0 0 !important;}
     .wn-grid{display:flex;flex-direction:column;margin:6px 0 26px;border-top:1px solid #E4E7EA;}
     .wn-card{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid #E4E7EA;}
     .wn-card--big{padding:22px 2px;background:#F4F8F6;border-radius:10px;margin:6px 0;}
@@ -131,7 +141,7 @@
       <a href="../../blog/" target="_blank" rel="noopener" class="article-back">All articles</a>
 
       <p class="article-eyebrow">MileCheck Highway Report</p>
-      <h1 class="article-title">MileCheck Highway Report: Texas, October 2026</h1>
+      <h1 class="article-title">MileCheck Highway Report:<br>Texas, October 2026</h1>
       <p class="article-byline">by MileCheck &middot; November 4, 2026</p>
 
       <p class="article-lead">What Texas's department of transportation (DOT) feed showed in October 2026. 1,092 alerts in all, up from 1,030 in September. Part of the <a href="../road-report-october-2026.html" target="_blank" rel="noopener">national MileCheck Highway Report, October 2026</a>.</p>
@@ -157,19 +167,19 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <p>23 closures and 1,051 roadwork records were on Texas's feed in October, out of 1,092 alerts of all types.</p>
-
       <div class="pull-stat"><strong>Routes with the most alerts in Texas</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>I-35</strong> &mdash; 153</li><li><strong>I-30</strong> &mdash; 113</li><li><strong>I-10</strong> &mdash; 51</li><li><strong>I-20</strong> &mdash; 47</li><li><strong>I-635</strong> &mdash; 45</li></ul></div>
 
       <h2 class="rc">Compared with earlier months</h2>
 
-      <p>Unique alerts on Texas's feed in each full month MileCheck has.</p><div class="pull-stat"><strong>By month</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>September</strong> &mdash; 1,030 alerts: 7 crashes, 18 closures, 991 roadwork<span class="hbar" style="width:94%"></span></li><li><strong>October</strong> &mdash; 1,092 alerts: 4 crashes, 23 closures, 1,051 roadwork<span class="hbar" style="width:100%"></span></li></ul></div>
+      <p>Unique alerts on Texas's feed in each full month MileCheck has.</p><figure class="mo-chart"><div class="mo-rows"><div class="mo"><span class="mo-l">September</span><div class="mo-bar" style="width:94%"><i class="mo-c" style="flex:7" title="7 crash"></i><i class="mo-k" style="flex:18" title="18 closure"></i><i class="mo-r" style="flex:991" title="991 roadwork"></i><i class="mo-o" style="flex:14" title="14 other"></i></div><span class="mo-n">1,030</span></div><div class="mo"><span class="mo-l">October</span><div class="mo-bar" style="width:100%"><i class="mo-c" style="flex:4" title="4 crash"></i><i class="mo-k" style="flex:23" title="23 closure"></i><i class="mo-r" style="flex:1051" title="1,051 roadwork"></i><i class="mo-o" style="flex:14" title="14 other"></i></div><span class="mo-n">1,092</span></div></div><figcaption><span><i class="mo-c"></i>crash</span><span><i class="mo-k"></i>closure</span><span><i class="mo-r"></i>roadwork</span><span><i class="mo-o"></i>other</span></figcaption><ul class="article-list mo-list"><li><strong>September</strong> &mdash; 1,030 alerts: 7 crashes, 18 closures, 991 roadwork</li><li><strong>October</strong> &mdash; 1,092 alerts: 4 crashes, 23 closures, 1,051 roadwork</li></ul></figure>
 
       <h2 class="rc">Border waits</h2><p class="rc-live"><a href="../../borders/" target="_blank" rel="noopener">Live border waits &rarr;</a></p><p>Waits to enter the United States in standard passenger lanes at Texas's crossings, October, from hourly readings. Dates are local.</p>
 
       <div class="pull-stat"><strong>By crossing</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong><a href="../../borders/?q=Eagle%20Pass" target="_blank" rel="noopener">Eagle Pass / Bridge II</a></strong> &mdash; highest 5 hr (October 13), average 40 min</li><li><strong><a href="../../borders/?q=Brownsville" target="_blank" rel="noopener">Brownsville / B&amp;M</a></strong> &mdash; highest 4 hr (October 17), average 49 min</li><li><strong><a href="../../borders/?q=Laredo" target="_blank" rel="noopener">Laredo / Bridge II</a></strong> &mdash; highest 3 hr 30 min (October 10), average 34 min</li><li><strong><a href="../../borders/?q=Brownsville" target="_blank" rel="noopener">Brownsville / Veterans International</a></strong> &mdash; highest 3 hr (October 17), average 45 min</li><li><strong><a href="../../borders/?q=Eagle%20Pass" target="_blank" rel="noopener">Eagle Pass / Bridge I</a></strong> &mdash; highest 2 hr 30 min (October 19), average 52 min</li><li><strong><a href="../../borders/?q=Brownsville" target="_blank" rel="noopener">Brownsville / Gateway</a></strong> &mdash; highest 2 hr 20 min (October 11), average 37 min</li></ul></div>
 
       <p>Live waits are at <a href="../../borders/" target="_blank" rel="noopener">milecheckapp.com/borders</a>.</p>
+
+      <aside class="road-fact"><p class="rf-k">Texas road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">The southern 41 miles of State Highway 130 have an 85-mph speed limit, which the toll road's operator calls the nation's highest. Opened in 2012, the road offers an alternative to <span style="white-space:nowrap">I-35</span> through Central Texas.</p><p class="rf-s"><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>
 
       <p style="margin-top:34px;">See the <a href="../road-report-october-2026.html" target="_blank" rel="noopener">national report</a> or <a href="index.html" target="_blank" rel="noopener">another state or province</a>.</p>
 
@@ -206,8 +216,8 @@
     </style>
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
-      <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
+      <h2>Get MileCheck's monthly Highway Report</h2>
+      <p class="mc-sub">Closures, crashes and roadwork from the state road feeds, once a month in your inbox. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>

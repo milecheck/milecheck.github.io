@@ -73,6 +73,16 @@
     .method-fold[open] summary::before{content:"\25BE  ";}
     .method-fold .method-box{margin:6px 0 0;}
     .hbar{display:block;height:6px;background:#00C880;border-radius:3px;margin:6px 0 2px;}
+    .mo-chart{margin:14px 0 26px;}
+    .mo-rows{display:flex;flex-direction:column;gap:10px;}
+    .mo{display:grid;grid-template-columns:92px 1fr 64px;align-items:center;gap:10px;font-size:14.5px;}
+    .mo-l{color:#3D454D;font-weight:600;}.mo-n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;}
+    .mo-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:#EEF1F3;}
+    .mo-bar i,.mo-chart figcaption i{display:block;height:100%;}
+    .mo-c{background:#FF7A58;}.mo-k{background:#FFC249;}.mo-r{background:#00C880;}.mo-o{background:#B8C2CC;}
+    .mo-chart figcaption{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:#5C6670;margin:10px 0 0;}
+    .mo-chart figcaption span{display:inline-flex;align-items:center;gap:6px;}.mo-chart figcaption i{width:14px;height:10px;border-radius:3px;}
+    .mo-list{font-size:14px;color:#5C6670;margin:12px 0 0 !important;}
     .wn-grid{display:flex;flex-direction:column;margin:6px 0 26px;border-top:1px solid #E4E7EA;}
     .wn-card{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid #E4E7EA;}
     .wn-card--big{padding:22px 2px;background:#F4F8F6;border-radius:10px;margin:6px 0;}
@@ -131,15 +141,15 @@
       <a href="../../blog/" target="_blank" rel="noopener" class="article-back">All articles</a>
 
       <p class="article-eyebrow">MileCheck Highway Report</p>
-      <h1 class="article-title">MileCheck Highway Report: North Dakota, October 2026</h1>
+      <h1 class="article-title">MileCheck Highway Report:<br>North Dakota, October 2026</h1>
       <p class="article-byline">by MileCheck &middot; November 4, 2026</p>
 
       <p class="article-lead">What North Dakota's department of transportation (DOT) feed showed in October 2026. 63 alerts in all, down from 81 in September. Part of the <a href="../road-report-october-2026.html" target="_blank" rel="noopener">national MileCheck Highway Report, October 2026</a>.</p>
       <!-- signupcta:start --><script>(function(){if(location.hash==='#subscribe'){history.replaceState(null,'',location.pathname+location.search);addEventListener('DOMContentLoaded',function(){scrollTo(0,0);var a=document.querySelector('.mc-cta-line a');if(a)setTimeout(function(){a.click()},400)})}})()</script><p class="mc-cta-line" style="margin:6px 0 26px;font-size:15px;"><a href="#subscribe" onclick="(function(a){var b=document.querySelector('.mc-signup');if(!b){location.hash='subscribe';return}var i=b.querySelector('.mc-signup-inner')||b;var ph=document.createElement('div');i.parentNode.insertBefore(ph,i);var o=document.createElement('div');o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-label','Get the Highway Report by email');o.style.cssText='position:fixed;inset:0;z-index:10000;background:rgba(15,20,25,.55);display:flex;align-items:center;justify-content:center;padding:16px;';var c=document.createElement('div');c.style.cssText='background:#fff;border-radius:14px;max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:28px 20px 22px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3);';var x=document.createElement('button');x.type='button';x.setAttribute('aria-label','Close');x.textContent='\u00d7';x.style.cssText='position:absolute;top:8px;right:10px;width:44px;height:44px;border:0;background:none;font-size:28px;line-height:1;cursor:pointer;color:#5A6670;';function close(){ph.parentNode.insertBefore(i,ph);ph.remove();o.remove();document.removeEventListener('keydown',k);a.focus()}function k(e){if(e.key==='Escape')close()}x.onclick=close;o.onclick=function(e){if(e.target===o)close()};document.addEventListener('keydown',k);c.appendChild(x);c.appendChild(i);o.appendChild(c);document.body.appendChild(o);var f=i.querySelector('input[type=email]');if(f)f.focus()})(this);return false;" style="color:#0f7a4f;font-weight:700;text-decoration:none;border-bottom:1px solid #9fd3b8;">&#9993; Get the MileCheck Highway Report by email, once a month &rarr;</a></p><!-- signupcta:end -->
 
-      <div class="headline-nums"><div><b>3</b><span>closure alerts</span></div><div><b>52</b><span>roadwork alerts</span></div><div><b>1</b><span>wildfire record, as of Oct. 31, 4 PM Pacific</span></div></div>
+      <div class="headline-nums"><div><b>3</b><span>closure alerts</span></div><div><b>52</b><span>roadwork alerts</span></div></div>
 
-      <details class="method-fold"><summary>How we got these numbers</summary><div class="method-box">These are unique alerts published by North Dakota's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months. Fire figures are as of Oct. 31, 4 PM Pacific. Border waits are from U.S. Customs and Border Protection, saved every hour. Readings over five hours were treated as feed errors.</div></details>
+      <details class="method-fold"><summary>How we got these numbers</summary><div class="method-box">These are unique alerts published by North Dakota's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months. Border waits are from U.S. Customs and Border Protection, saved every hour. Readings over five hours were treated as feed errors.</div></details>
 
       <h2 class="rc">Crashes</h2>
 
@@ -153,13 +163,11 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <p>3 closures and 52 roadwork records were on North Dakota's feed in October, out of 63 alerts of all types.</p>
-
       <div class="pull-stat"><strong>Routes with the most alerts in North Dakota</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>I-94</strong> &mdash; 9</li><li><strong>I-29</strong> &mdash; 7</li><li><strong>US-2</strong> &mdash; 7</li><li><strong>US-52</strong> &mdash; 4</li><li><strong>US-81</strong> &mdash; 4</li></ul></div>
 
       <h2 class="rc">Compared with earlier months</h2>
 
-      <p>Unique alerts on North Dakota's feed in each full month MileCheck has.</p><div class="pull-stat"><strong>By month</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>September</strong> &mdash; 81 alerts: 0 crashes, 7 closures, 66 roadwork<span class="hbar" style="width:100%"></span></li><li><strong>October</strong> &mdash; 63 alerts: 0 crashes, 3 closures, 52 roadwork<span class="hbar" style="width:78%"></span></li></ul></div>
+      <p>Unique alerts on North Dakota's feed in each full month MileCheck has.</p><figure class="mo-chart"><div class="mo-rows"><div class="mo"><span class="mo-l">September</span><div class="mo-bar" style="width:100%"><i class="mo-k" style="flex:7" title="7 closure"></i><i class="mo-r" style="flex:66" title="66 roadwork"></i><i class="mo-o" style="flex:8" title="8 other"></i></div><span class="mo-n">81</span></div><div class="mo"><span class="mo-l">October</span><div class="mo-bar" style="width:78%"><i class="mo-k" style="flex:3" title="3 closure"></i><i class="mo-r" style="flex:52" title="52 roadwork"></i><i class="mo-o" style="flex:8" title="8 other"></i></div><span class="mo-n">63</span></div></div><figcaption><span><i class="mo-c"></i>crash</span><span><i class="mo-k"></i>closure</span><span><i class="mo-r"></i>roadwork</span><span><i class="mo-o"></i>other</span></figcaption><ul class="article-list mo-list"><li><strong>September</strong> &mdash; 81 alerts: 0 crashes, 7 closures, 66 roadwork</li><li><strong>October</strong> &mdash; 63 alerts: 0 crashes, 3 closures, 52 roadwork</li></ul></figure>
 
       <h2 class="rc">Border waits</h2><p class="rc-live"><a href="../../borders/" target="_blank" rel="noopener">Live border waits &rarr;</a></p><p>Waits to enter the United States in standard passenger lanes at North Dakota's crossings, October, from hourly readings. Dates are local.</p>
 
@@ -167,13 +175,7 @@
 
       <p>Live waits are at <a href="../../borders/" target="_blank" rel="noopener">milecheckapp.com/borders</a>.</p>
 
-      <h2 class="rc">Wildfires</h2><p class="rc-live"><a href="../../fire/" target="_blank" rel="noopener">Live wildfire map &rarr;</a></p><p>The national wildfire feed listed 1 fire record in North Dakota as of Oct. 31, 4 PM Pacific.</p>
-
-      <p class="rc-fig">No fire on the feed in North Dakota had reached 50 acres as of Oct. 31, 4 PM Pacific.</p>
-
-      <p>Thank you to the firefighters and crews who worked these fires all season.</p>
-
-      <p>Live fire perimeters are at <a href="../../fire/" target="_blank" rel="noopener">milecheckapp.com/fire</a>.</p>
+      <aside class="road-fact"><p class="rf-k">North Dakota road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">The Enchanted Highway runs 32 miles from <span style="white-space:nowrap">I-94</span> exit 72 near Gladstone to Regent. Giant scrap metal sculptures line the road, including geese in flight and grasshoppers in a field.</p><p class="rf-s"><a href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>
 
       <p style="margin-top:34px;">See the <a href="../road-report-october-2026.html" target="_blank" rel="noopener">national report</a> or <a href="index.html" target="_blank" rel="noopener">another state or province</a>.</p>
 
@@ -210,8 +212,8 @@
     </style>
     <div class="mc-signup-inner">
       <p class="mc-eyebrow">The Monthly Highway Report</p>
-      <h2>Get your state's monthly road alert report</h2>
-      <p class="mc-sub">Your state's reported closures, crashes and roadwork, once a month by email. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
+      <h2>Get MileCheck's monthly Highway Report</h2>
+      <p class="mc-sub">Closures, crashes and roadwork from the state road feeds, once a month in your inbox. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
       <div class="ml-embedded" data-form="LjADY8"></div>
     </div>
   </section>

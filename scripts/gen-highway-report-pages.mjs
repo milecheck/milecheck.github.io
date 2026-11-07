@@ -140,7 +140,7 @@ function nextSteps(rel) {
 }
 const newTab = (html) => html.replace(/<a\b(?![^>]*\btarget=)([^>]*?)\bhref="(?!#)([^"]*)"/g, '<a$1href="$2" target="_blank" rel="noopener"');
 function page(opts) { return newTab(pageHtml(opts)); }
-function pageHtml({ rel, canonical, pageTitle, description, h1, byline, body, jsonld, wide }) {
+function pageHtml({ rel, canonical, pageTitle, description, h1, h1Html, byline, body, jsonld, wide }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -209,6 +209,16 @@ function pageHtml({ rel, canonical, pageTitle, description, h1, byline, body, js
     .method-fold[open] summary::before{content:"\\25BE  ";}
     .method-fold .method-box{margin:6px 0 0;}
     .hbar{display:block;height:6px;background:#00C880;border-radius:3px;margin:6px 0 2px;}
+    .mo-chart{margin:14px 0 26px;}
+    .mo-rows{display:flex;flex-direction:column;gap:10px;}
+    .mo{display:grid;grid-template-columns:92px 1fr 64px;align-items:center;gap:10px;font-size:14.5px;}
+    .mo-l{color:#3D454D;font-weight:600;}.mo-n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;}
+    .mo-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:#EEF1F3;}
+    .mo-bar i,.mo-chart figcaption i{display:block;height:100%;}
+    .mo-c{background:#FF7A58;}.mo-k{background:#FFC249;}.mo-r{background:#00C880;}.mo-o{background:#B8C2CC;}
+    .mo-chart figcaption{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:#5C6670;margin:10px 0 0;}
+    .mo-chart figcaption span{display:inline-flex;align-items:center;gap:6px;}.mo-chart figcaption i{width:14px;height:10px;border-radius:3px;}
+    .mo-list{font-size:14px;color:#5C6670;margin:12px 0 0 !important;}
     .wn-grid{display:flex;flex-direction:column;margin:6px 0 26px;border-top:1px solid #E4E7EA;}
     .wn-card{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid #E4E7EA;}
     .wn-card--big{padding:22px 2px;background:#F4F8F6;border-radius:10px;margin:6px 0;}
@@ -256,7 +266,7 @@ function pageHtml({ rel, canonical, pageTitle, description, h1, byline, body, js
       <a href="${rel}blog/" class="article-back">All articles</a>
 
       <p class="article-eyebrow">MileCheck Highway Report</p>
-      <h1 class="article-title">${esc(h1)}</h1>
+      <h1 class="article-title">${h1Html || esc(h1)}</h1>
       <p class="article-byline">${byline}</p>
 
 ${body}
@@ -373,7 +383,16 @@ const winterSection = (st, name) => {
       if (si.listed.length) out.push(`<p class="rc-fig">Not drawn (no road line in our data yet): ${si.listed.map((r) => esc(r.name && r.name !== r.route ? `${r.route}, ${r.name}` : r.route) + (r.closed ? ' (closed)' : '')).join(' · ')}.</p>`);
     } }
   if (live.length) out.push(box(`On ${name}'s feed as of ${dateLong(D.seasonalAsOf).replace(/, \d{4}$/, '')}`, live.map((c) => `<strong>${esc(route(st, c.route || ''))}</strong> &mdash; &ldquo;${esc(quote(c.headline).slice(0, 200))}&rdquo;`)));
-  if (usual.length) out.push(box('Roads that usually close for winter', usual.map((e) => `<strong>${esc(!e.name || e.name === e.route ? e.route : e.name.startsWith(e.route) ? e.name : `${e.route}, ${e.name}`)}</strong> &mdash; ${esc(e.publicLine || `${e.typicalClose}. ${e.typicalReopen}.`)} <a href="${esc(e.sourceUrl)}" rel="noopener" target="_blank">Source</a>${(e.extraSources || []).map((x) => ` &middot; <a href="${esc(x.url)}" rel="noopener" target="_blank">${esc(x.label)} source</a>`).join('')}`)));
+  if (usual.length) {
+    const urls = new Set(usual.map((e) => e.sourceUrl));
+    const oneSource = urls.size === 1 && usual.every((e) => !(e.extraSources || []).length);
+    const seg = (e) => e.segment && !/^(unknown|n\/a|)$/i.test(e.segment) ? ` <span style="color:#5C6670;font-weight:400">(${esc(e.segment.replace(/^./, (ch) => ch.toLowerCase()))})</span>` : '';
+    const line = (e) => `<strong>${esc(!e.name || e.name === e.route ? e.route : e.name.startsWith(e.route) ? e.name : `${e.route}, ${e.name}`)}</strong>${seg(e)} &mdash; ${esc(e.publicLine || `${e.typicalClose}. ${e.typicalReopen}.`)}`;
+    const perLine = (e) => ` <a href="${esc(e.sourceUrl)}" rel="noopener" target="_blank">Source</a>${(e.extraSources || []).map((x) => ` &middot; <a href="${esc(x.url)}" rel="noopener" target="_blank">${esc(x.label)} source</a>`).join('')}`;
+    const items = usual.map((e) => line(e) + (oneSource ? '' : perLine(e)));
+    const b = box('Roads that usually close for winter', items);
+    out.push(oneSource ? b.replace(/<\/div>$/, `<p class="rc-fig" style="margin:10px 0 0;">Source: <a href="${esc([...urls][0])}" rel="noopener" target="_blank">${esc(usual[0].sourceLabel || new URL([...urls][0]).hostname.replace(/^www\./, ''))}</a></p></div>`) : b);
+  }
   out.push(`<p class="rc-fig">Timing comes from each agency's own page. Exact dates depend on snow. We update this list each month through winter.</p>`);
   return out.join('\n');
 };
@@ -432,7 +451,7 @@ const nums = [
 
 const national = [];
 if (updLong) national.push(`<p class="rc-fig"><strong>Updated ${updLong}.</strong> Alerts a feed carried for another state's road were removed, and each state is now compared with its own earlier months instead of with other states.</p>`);
-national.push(`<p class="article-lead">What road feeds published in ${MONTH_NAME} ${YEAR} across all 50 US states, British Columbia, Alberta and Manitoba. ${[BW && 'border waits', FA && 'wildfire records'].filter(Boolean).length ? `The report also covers ${[BW && 'border waits', FA && 'wildfire records'].filter(Boolean).join(', ').replace(/, ([^,]*)$/, ' and $1')}, from separate sources.` : ''}</p>`);
+national.push(`<p class="article-lead">What road feeds published in ${MONTH_NAME} ${YEAR} across all 50 US states, British Columbia, Alberta and Manitoba. ${BW ? 'The report also covers border waits, from U.S. Customs and Border Protection.' : ''}</p>`);
 // The month's story in three or four sentences, written by hand (data/highway-report-lede-<month>.json, an array of
 // paragraphs). Every number in it goes through check-numbers like the rest of the page. Skipped when the file is missing.
 let LEDE = null; try { LEDE = JSON.parse(readFileSync(resolve(ROOT, `data/highway-report-lede-${MONTH}.json`), 'utf8')); } catch {}
@@ -455,7 +474,7 @@ const pickBlock = (sfx) => `<div class="pick-cta"><h3>A report for every state a
 const PICKERS = PICK_STYLE + pickBlock('') + PICK_JS;
 national.push(`<div class="headline-nums">\n        ${nums}\n      </div>`);
 national.push(PICKERS);
-national.push(fold(methodBox('each state department of transportation (DOT) road feed, DriveBC, 511 Alberta and Manitoba 511', '')));
+national.push(fold(methodBox('each state department of transportation (DOT) road feed, DriveBC, 511 Alberta and Manitoba 511', ' Alaska, Arizona, Montana and Utah publish roadwork as road conditions rather than alerts; for those four, each roadwork condition is counted once per route, milepost and description.')));
 // Monthly maps (scripts/road-report-maps/build.sh in the app repo), each in its own section beside the text
 // (Leah 2026-11-02: crashes under Crashes, closures under Closures, wildfires under Wildfires). Shown when the file exists.
 const mapExists = (k) => existsSync(resolve(ROOT, `blog/highway-report-maps/${KEY}/${k === 'bridges' ? 'bridges.mp4' : `${k}.webp`}`));
@@ -566,7 +585,8 @@ if (FA) {
   const head = national.slice(0, first), secs = {}; let cur = null;
   for (const p of national.slice(first)) { const m = /^<!--sec:(\w+)-->$/.exec(p); if (m) { cur = m[1]; secs[cur] = []; } else if (cur) secs[cur].push(p); }
   national.length = 0; national.push(...head);
-  for (const k of ['fire', 'winter', 'crash', 'closure', 'border', 'cameras']) if (secs[k]) national.push(...secs[k]);
+  // No wildfire section (Leah 2026-11-06: 'just because we have the stat does not mean we are interested'). The /fire/ page stays live.
+  for (const k of ['winter', 'crash', 'closure', 'border', 'cameras']) if (secs[k]) national.push(...secs[k]);
 }
 national.push(pickBlock('-2'));
 // The state and province pickers moved up under the headline numbers (Leah 2026-11-06).
@@ -620,8 +640,9 @@ for (const st of Object.keys(NAMES)) {
   const hh = histOf(st), hc = hh.find((x) => x.month === MONTH), hpv = [...hh].reverse().find((x) => x.comparable && x.month < MONTH);
   const trend = hc && hc.comparable && hpv && !feedNote(st) ? ` ${n(hc.total)} alerts in all, ${hc.total === hpv.total ? 'the same as' : hc.total > hpv.total ? 'up from' : 'down from'} ${n(hpv.total)} in ${MONTH_LONG(hpv.month)}.` : '';
   parts.push(`<p class="article-lead">What ${feed} showed in ${MONTH_NAME} ${YEAR}.${trend} Part of the <a href="../road-report-${KEY}.html">national ${H1}</a>.</p>`);
+  if (st === 'UT') parts.push(`<p>Ben, if you are reading this, I love you.</p>`);  // Leah 2026-11-06, her words, Utah page only
   if (updLong && dropFor(st)) parts.push(`<p class="rc-fig"><strong>Updated ${updLong}.</strong> Alerts this feed carried for another state's road were removed.</p>`);
-  const mb = fold(methodBox(DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s department of transportation (DOT) feed`, dropNote(st) + extras({ fires: !!fire, border: ports.length > 0 })));
+  const mb = fold(methodBox(DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s department of transportation (DOT) feed`, dropNote(st) + (['AK', 'AZ', 'MT', 'UT'].includes(st) ? ` ${name} publishes roadwork as road conditions rather than alerts; each roadwork condition is counted once per route, milepost and description.` : '') + extras({ fires: false, border: ports.length > 0 })));
   if (feedNote(st)) parts.push(`<p class="rc-fig"><strong>Feed change.</strong> ${feedNote(st)}</p>`);
   const sn = [];
   if (S.crash > 0) sn.push(`<div><b>${n(S.crash)}</b><span>crash alerts in ${MONTH_NAME}</span></div>`);
@@ -632,7 +653,7 @@ for (const st of Object.keys(NAMES)) {
   // closures paragraph says so instead.
   const noRoadwork = S.construction === 0 && (D.stateHistory[st] || []).length > 0 && (D.stateHistory[st] || []).every((m) => !m.construction);
   if (S.construction > 0) sn.push(`<div><b>${n(S.construction)}</b><span>roadwork alerts</span></div>`);
-  if (fire && fire.active > 0) sn.push(`<div><b>${n(fire.active)}</b><span>${plural(fire.active, 'wildfire record', 'wildfire records')}, ${fireAsOf}</span></div>`);
+  if (false && fire && fire.active > 0) sn.push(`<div><b>${n(fire.active)}</b><span>${plural(fire.active, 'wildfire record', 'wildfire records')}, ${fireAsOf}</span></div>`);
   if (st === 'WA' && BR) sn.push(`<div><b>${n(bridgeTotal)}</b><span>Seattle drawbridge openings</span></div>`);
   parts.push(`<div class="headline-nums">${sn.join('')}</div>`);
   parts.push(mb);
@@ -652,9 +673,7 @@ for (const st of Object.keys(NAMES)) {
     if (fs.length && ['CA', 'TX'].includes(st)) parts.push(box('Crash alerts that mentioned a fatality', fs.map((f) => `<strong>${esc(route(st, f.route || ''))}</strong> &mdash; ${dateLong(f.date.slice(0, 10)).replace(/, \d{4}$/, '')}`)));
     parts.push(`<h2 class="rc">Closures and roadwork</h2>`);
     parts.push(liveLink('../../', 'closures/', 'Live closure and roadwork alerts on the map'));
-    if (noRoadwork) parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure was' : 'closures were'} on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types. ${name}'s roadwork is published as road conditions rather than alerts, and this report does not count those yet. Live roadwork is on <a href="../../closures/">the closures map</a>.</p>`);
-    else if (S.construction === 0) parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure was' : 'closures were'} on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
-    else parts.push(`<p>${n(S.closure)} ${S.closure === 1 ? 'closure' : 'closures'} and ${n(S.construction)} roadwork ${S.construction === 1 ? 'record' : 'records'} were on ${name}'s feed in ${MONTH_NAME}, out of ${n(S.total)} alerts of all types.</p>`);
+    // No closures-and-roadwork sentence: the tiles and the month chart carry the numbers (Leah 2026-11-06).
     const rc = (S.routeCounts || []).filter(([r]) => r);
     if (rc.filter(([r]) => realRoute(r)).length) parts.push(box(`Routes with the most alerts in ${name}`, rc.filter(([r]) => realRoute(r)).map(([r, c]) => `<strong>${esc(pretty(route(st, r)))}</strong> &mdash; ${n(c)}`)));
     else if (S.topRoutes && S.topRoutes.length) parts.push(`<p>The routes with the most alerts were ${S.topRoutes.map((r) => esc(route(st, r))).join(', ').replace(/, ([^,]*)$/, ' and $1')}.</p>`);
@@ -665,7 +684,13 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<h2 class="rc">Compared with earlier months</h2>`);
     if (feedNote(st)) parts.push(`<p>See the feed change note at the top of this page.</p>`);
     if (cur && !cur.comparable) parts.push(`<p>MileCheck has ${n(cur.days)} of ${cur.daysInMonth} days of ${name}'s feed for ${MONTH_NAME}, so these counts are partial.</p>`);
-    else if (comp.length >= 2) { const mx = Math.max(...comp.map((y) => y.total)); parts.push(`<p>Unique alerts on ${name}'s feed in each full month MileCheck has.</p>` + box('By month', comp.map((x) => histLine(x) + `<span class="hbar" style="width:${Math.max(2, Math.round(100 * x.total / mx))}%"></span>`))); }
+    else if (comp.length >= 2) {
+      // Bar graph, one stacked bar per month (Leah 2026-11-06: "this would look better as a bar graph").
+      const mx = Math.max(...comp.map((y) => y.total));
+      const seg = (v, cls, t) => v > 0 ? `<i class="${cls}" style="flex:${v}" title="${t}"></i>` : '';
+      const rows = comp.map((x) => { const other = Math.max(0, x.total - x.crash - x.closure - x.construction); return `<div class="mo"><span class="mo-l">${MONTH_LONG(x.month)}</span><div class="mo-bar" style="width:${Math.max(3, Math.round(100 * x.total / mx))}%">${seg(x.crash, 'mo-c', `${n(x.crash)} crash`)}${seg(x.closure, 'mo-k', `${n(x.closure)} closure`)}${seg(x.construction, 'mo-r', `${n(x.construction)} roadwork`)}${seg(other, 'mo-o', `${n(other)} other`)}</div><span class="mo-n">${n(x.total)}</span></div>`; }).join('');
+      parts.push(`<p>Unique alerts on ${name}'s feed in each full month MileCheck has.</p><figure class="mo-chart"><div class="mo-rows">${rows}</div><figcaption><span><i class="mo-c"></i>crash</span><span><i class="mo-k"></i>closure</span><span><i class="mo-r"></i>roadwork</span><span><i class="mo-o"></i>other</span></figcaption><ul class="article-list mo-list">${comp.map((x) => `<li>${histLine(x)}</li>`).join('')}</ul></figure>`);
+    }
     else parts.push(`<p>${MONTH_NAME} is the first full month of ${name}'s feed in MileCheck's archive. Next month's report compares it with ${MONTH_NAME}.</p>`);
   }
   { const w = winterSection(st, name); if (w) parts.push(w); }
@@ -683,7 +708,7 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<div style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;margin:0 0 22px;"><div style="flex:1 1 360px;min-width:0;">${box(`Openings, ${MONTH_NAME}`, BR.map((b) => `<strong>${bridgeName(b.id)}</strong> &mdash; ${n(b.openings)} openings${b.medianMin != null ? `, typically ${b.medianMin} minutes, longest ${b.longestMin}` : ''}`)).replace('<div class="pull-stat">', '<div class="pull-stat" style="margin:0;">')}</div>${tl}</div>`);
     parts.push(`<p>Live status is on <a href="../../maps/#drawbridges">the drawbridge map</a>. New in ${MONTH_NAME}: Crystal Mountain's summit camera and the Paradise camera at Mount Rainier. See them on the <a href="../../ski/crystal-mountain/">Crystal Mountain page</a> and the <a href="../../mountains/rainier/">Mount Rainier page</a>.</p>`);
   }
-  if (fire) {
+  if (false && fire) {  // wildfire section removed from the report (Leah 2026-11-06)
     parts.push(`<h2 class="rc">Wildfires</h2>` + liveLink('../../', 'fire/', 'Live wildfire map') + snap(st, 'fires', `${MONTH_NAME} ${YEAR} fires in ${name}, ${fireAsOf}`, `Map of ${name} with the month's fire records as dots sized by acres`) + `<p>The national wildfire feed listed ${n(fire.active)} ${plural(fire.active, 'fire record', 'fire records')} in ${name} ${fireAsOf}.${st === 'BC' ? ' The BC Wildfire Service does not publish containment percentages.' : ''}</p>`);
     { const big = fire.largest.filter((f) => Number(f.acres) >= 50); // under 50 acres never lists (Leah 2026-11-06)
       parts.push(big.length ? box(`Largest fires, ${fireAsOf}`, big.map((f) => fireLine(f, st))) : `<p class="rc-fig">No fire on the feed in ${name} had reached 50 acres ${fireAsOf}.</p>`); }
@@ -691,14 +716,16 @@ for (const st of Object.keys(NAMES)) {
     parts.push(`<p>Live fire perimeters are at <a href="../../fire/">milecheckapp.com/fire</a>.</p>`);
   }
   const rf = RF && RF.facts[st];
-  if (rf && rf.posted !== false) parts.push(`<aside class="road-fact"><p class="rf-k">${name} road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">${esc(rf.text).replace(/\b((?:I|US|H)-\d+)/g, '<span style="white-space:nowrap">$1</span>')}</p><p class="rf-s"><a href="${RF.instagram}" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>`);
+  if (rf && rf.text) parts.push(  // shown whether or not the Instagram post has run (Leah 2026-11-06: "there's no fun fact for UT")
+    `<aside class="road-fact"><p class="rf-k">${name} road fact</p><p class="rf-h">Did you know?</p><p class="rf-t">${esc(rf.text).replace(/\b((?:I|US|H)-\d+)/g, '<span style="white-space:nowrap">$1</span>')}</p><p class="rf-s"><a href="${RF.instagram}" target="_blank" rel="noopener">More road facts on Instagram</a></p></aside>`);
   parts.push(`<p style="margin-top:34px;">See the <a href="../road-report-${KEY}.html">national report</a> or <a href="index.html">another state or province</a>.</p>`);
   const h1 = `MileCheck Highway Report: ${name}, ${MONTH_NAME} ${YEAR}`;
+  const h1Html = `MileCheck Highway Report:<br>${esc(name)}, ${MONTH_NAME} ${YEAR}`; // Leah 2026-11-06: break after the colon
   const firstMonth = !(histOf(st).filter((x) => x.comparable).length >= 2);
   const desc = `${S.crash > 0 ? `${n(S.crash)} crash, ` : ''}${n(S.closure)} closure${noRoadwork ? '' : ` and ${n(S.construction)} roadwork`} alerts published by ${DOT_NAME[st] ? `the ${DOT_NAME[st]} feed` : `${name}'s DOT feed`} in ${MONTH_NAME} ${YEAR}${firstMonth ? `, MileCheck's first full month of ${name}` : ', compared with earlier months'}${ports.length ? ', plus border waits' : ''}${fire ? ', plus wildfires' : ''}.`;
   const canonical = `https://milecheckapp.com/blog/${STATE_DIR_NAME}/${slug(st)}.html`;
   writeFileSync(resolve(OUT_DIR, `${slug(st)}.html`), page({
-    rel: '../../', canonical, pageTitle: h1, description: desc, h1,
+    rel: '../../', canonical, pageTitle: h1, h1Html, description: desc, h1,
     byline: `by MileCheck &middot; ${pubLong}`,
     body: parts.map((p) => '      ' + p).join('\n\n'),
     jsonld: { '@context': 'https://schema.org', '@type': 'NewsArticle', headline: h1, datePublished: PUBLISHED, dateModified: UPDATED || PUBLISHED, author: { '@type': 'Organization', name: 'MileCheck' }, publisher: { '@type': 'Organization', name: 'MileCheck', url: 'https://milecheckapp.com' }, mainEntityOfPage: canonical, description: desc, isPartOf: natCanon },
