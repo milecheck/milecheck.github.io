@@ -40,6 +40,8 @@ export function keyFor(rel) {
   if (dir === 'maps' && rel === 'maps/mile-markers/index.html') return { kind: 'home', slug: 'mile-marker-map' };
   if (dir === 'blog') {
     if (rest.length === 2 && rest[0] === 'labor-day-weekend-recap-2026-states') return { kind: 'article', slug: 'labor-day-2026-' + rest[1].replace(/\.html$/, '') };
+    // Monthly Highway Report state pages: a smaller banner (Leah 2026-11-06), sold as next month's report like the national page.
+    if (rest.length === 2 && /^highway-report-[a-z]+-\d{4}-states$/.test(rest[0])) return { kind: 'article', slug: rest[0].replace(/-states$/, '') + '-' + rest[1].replace(/\.html$/, ''), size: 'mini' };
     if (rest.length !== 1 || !rest[0].endsWith('.html')) return null;
     const f = rest[0].replace(/\.html$/, '');
     if (f === 'index') return { kind: 'article', slug: 'hub' };
@@ -131,7 +133,7 @@ for (const f of walk(ROOT).sort()) {
   // A stray </style> with no <style> before it (stadiums/, 2026-10-23) would put the CSS in the head as text.
   const styleOk = styleClose >= 0 && html.lastIndexOf('<style', styleClose) >= 0;
   if ((!anchor && !gridOpen) || !html.includes('</body>')) { skippedShape.push(rel); continue; }
-  const sp = SPON.slot({ kind: key.kind, slug: key.slug, name: titleOf(html, rel) });
+  const sp = SPON.slot({ kind: key.kind, slug: key.slug, name: titleOf(html, rel), size: key.size });
   if (!sp.html) { fs.writeFileSync(f, html); continue; } // web sponsor offer is off (lib/sponsor-slot.js WEB_SPONSORS_ENABLED); html is already stripped
   html = gridOpen
     ? html.replace(gridOpen, gridOpen + '\n' + START + '\n' + sp.html + '\n' + END)

@@ -113,11 +113,12 @@ function resolve(cfg, keys, day) {
   return { key: null, sponsor: null };
 }
 
-function slotHtml(slotKey, sponsor, house) {
+function slotHtml(slotKey, sponsor, house, size) {
+  const mini = size === 'mini' ? ' spon-mini' : ''; // smaller banner for the report state pages (Leah 2026-11-06)
   if (!sponsor) {
     // House version: Roy on the left, pointing at the message (Leah, 2026-09-24).
     // The placeholder is a crop of roy-crew.png until the pointing Roy arrives.
-    return `  <aside class="spon spon-house" id="spon" data-slot="${esc(slotKey)}" data-sponsor="house" aria-label="Sponsor">
+    return `  <aside class="spon spon-house${mini}" id="spon" data-slot="${esc(slotKey)}" data-sponsor="house" aria-label="Sponsor">
     <img class="spon-roy" src="${esc(safeHref(house.roy, { tel: false }) || '/images/sponsors/roy-sponsor.png')}" width="276" height="235" alt="" loading="lazy" decoding="async">
     <a class="spon-body" href="${esc(safeHref(house.url, { tel: false }) || '/sponsor/')}" data-spon-link>
       <span class="spon-text"><strong>${esc(house.title || 'Want to advertise with us?')}</strong>${house.copy ? ' ' + esc(house.copy) : ''}</span>
@@ -129,7 +130,7 @@ function slotHtml(slotKey, sponsor, house) {
   const logo = logoSrc
     ? `\n      <img class="spon-logo" src="${esc(logoSrc)}" width="${Math.round(+sponsor.logoW) || 264}" height="${Math.round(+sponsor.logoH) || 72}" alt="" loading="lazy" decoding="async">`
     : '';
-  return `  <aside class="spon" id="spon" data-slot="${esc(slotKey)}" data-sponsor="${esc(sponsor.id)}" aria-label="Sponsor">
+  return `  <aside class="spon${mini}" id="spon" data-slot="${esc(slotKey)}" data-sponsor="${esc(sponsor.id)}" aria-label="Sponsor">
     <span class="spon-tag">Sponsor</span>
     <a class="spon-body" href="${esc(safeHref(sponsor.url))}" rel="sponsored noopener" target="_blank" data-spon-link>${logo}
       <span class="spon-text"><strong>${esc(sponsor.name)}</strong> ${esc(sponsor.copy || '')}</span>
@@ -157,6 +158,11 @@ const CSS = `    .spon{display:flex;align-items:center;gap:12px;min-height:74px;
     .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
     .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
     .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon.spon-mini{min-height:48px;padding:4px 12px 4px 8px;margin:0 0 10px;gap:10px;}
+    .spon-mini .spon-roy{height:40px;}
+    .spon-mini .spon-text{font-size:13px;line-height:1.3;}
+    .spon-mini .spon-cta{font-size:12.5px;}
+    .spon-mini .spon-logo{height:28px;}
     .spon-body:hover .spon-cta{text-decoration:underline;}
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:50px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }`;
 
@@ -178,7 +184,7 @@ const WEB_SPONSORS_ENABLED = false;
 
 // Called once per generated page.
 // page: { slug, name, state? } — state is the 2-letter code for camera pages.
-function slot({ kind, slug, state, name }) {
+function slot({ kind, slug, state, name, size }) {
   const cfg = loadConfig();
   const day = today();
   const slotKey = prefixFor(kind) + slug;
@@ -191,7 +197,7 @@ function slot({ kind, slug, state, name }) {
   return {
     key: slotKey,
     sponsorId: sponsor ? sponsor.id : 'house',
-    html: slotHtml(slotKey, sponsor, house),
+    html: slotHtml(slotKey, sponsor, house, size),
     css: CSS,
     js: JS,
   };
