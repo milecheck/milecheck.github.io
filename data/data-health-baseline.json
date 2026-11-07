@@ -4,7 +4,13 @@
  "allowZeroAlerts": [
   "UT"
  ],
- "knownBroken": {},
+ "knownBroken": {
+  "DE:alerts": "Nov 6: Worker count equals upstream (DE 14, ND 26, MD 56, VA 123 raw, MA no errors); roadwork posts falling into winter. Remove when it recovers.",
+  "ND:alerts": "Nov 6: Worker count equals upstream (DE 14, ND 26, MD 56, VA 123 raw, MA no errors); roadwork posts falling into winter. Remove when it recovers.",
+  "MD:alerts": "Nov 6: Worker count equals upstream (DE 14, ND 26, MD 56, VA 123 raw, MA no errors); roadwork posts falling into winter. Remove when it recovers.",
+  "MA:alerts": "Nov 6: Worker count equals upstream (DE 14, ND 26, MD 56, VA 123 raw, MA no errors); roadwork posts falling into winter. Remove when it recovers.",
+  "VA:alerts": "Nov 6: Worker count equals upstream (DE 14, ND 26, MD 56, VA 123 raw, MA no errors); roadwork posts falling into winter. Remove when it recovers."
+ },
  "states": {
   "AL": {
    "cameras": 616,
