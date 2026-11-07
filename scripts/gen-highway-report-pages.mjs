@@ -572,6 +572,7 @@ if (FA) {
     national.push(liveLink('../', 'chains/', 'Live chain and winter road map') + liveLink('../', 'seasonal/', 'Roads that close for winter, by state'));
     national.push(rowOpen);
     national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Tap a state for each road's usual closing and reopening times and the agency source. We update the list each month through winter.</p>`);
+    national.push(`<p>The snow map counts alerts only. Daily road-surface reports, such as Alaska's icy patches and packed snow on the Dalton Highway every day of ${MONTH_NAME}, are road conditions, not alerts, and are on the live chain and winter road map instead.</p>`);
     national.push(rowClose(`<div class="sec-row" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported in ${MONTH_NAME}. Dark states published no plow positions that month.`, 'Where snowplows reported in October, one dot per reported position; states that published no plow positions are dark')}</div>`));
     const roadName = (e) => esc(String(e.name).replace(/\s*\(.*?\)\s*/g, ' ').replace(/ closure$/i, '').trim());
     national.push(box('Roads that usually close for winter', wst.map((k) => {
@@ -696,6 +697,7 @@ for (const st of Object.keys(NAMES)) {
     else parts.push(`<p>${MONTH_NAME} is the first full month of ${name}'s feed in MileCheck's archive. Next month's report compares it with ${MONTH_NAME}.</p>`);
   }
   { const w = winterSection(st, name); if (w) parts.push(w); }
+  if (st === 'AK') parts.push(`<p>Alaska's 511 feed reported icy patches, packed snow or snow on the roadway somewhere on its highways every day of ${MONTH_NAME}, from the Dalton Highway at Sag River to the Alaska Highway at Tok. Those are daily road-surface reports, not alerts, so they are not in the counts above. Live surface reports are on <a href="../../chains/">the chain and winter road map</a>.</p>`);  // Leah 2026-11-06: 'AK had ice reports in Oct'
   if (ports.length) {
     parts.push(`<h2 class="rc">Border waits</h2>` + liveLink('../../', 'borders/', 'Live border waits') + `<p>Waits to enter the United States in standard passenger lanes at ${name}'s crossings, ${MONTH_NAME}, from hourly readings. Dates are local.</p>`);
     parts.push(box('By crossing', ports.map((p) => `<strong>${portLink(p, '../../')}</strong> &mdash; ${p.maxMin ? `highest ${hm(p.maxMin)} (${dayOf(p.maxAt, p)}), average ${hm(p.avgMin)}` : `no wait in any of ${n(p.readings)} readings`}`)));
