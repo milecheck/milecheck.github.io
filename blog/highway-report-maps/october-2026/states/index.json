@@ -1,6 +1,6 @@
 {
  "label": "October 2026",
- "asOf": "Oct. 31, 4 PM Pacific",
+ "asOf": "as of Oct. 31, 4 PM Pacific",
  "crash": [
   "AK",
   "AL",
@@ -44,13 +44,7 @@
   "WI",
   "WY"
  ],
- "fires": [
-  "CA",
-  "OR",
-  "WA",
-  "WI",
-  "MS"
- ],
+ "fires": [],
  "seasonal": {
   "WA": {
    "drawn": [
