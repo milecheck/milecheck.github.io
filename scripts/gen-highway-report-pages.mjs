@@ -571,7 +571,7 @@ if (FA) {
     national.push(liveLink('../', 'chains/', 'Live chain and winter road map') + liveLink('../', 'seasonal/', 'Roads that close for winter, by state'));
     national.push(rowOpen);
     national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Tap a state for each road's usual closing and reopening times and the agency source. We update the list each month through winter.</p>`);
-    national.push(rowClose(`<div class="sec-row${mapExists('plows') ? ' sec-row--pair' : ''}" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported, ${MONTH_NAME}.`, 'Where snowplows reported, one dot per reported position')}</div>`));
+    national.push(rowClose(`<div class="sec-row" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported in ${MONTH_NAME}. Dark states do not publish plow positions.`, 'Where snowplows reported in October, one dot per reported position; states that do not publish plow positions are dark')}</div>`));
     const roadName = (e) => esc(String(e.name).replace(/\s*\(.*?\)\s*/g, ' ').replace(/ closure$/i, '').trim());
     national.push(box('Roads that usually close for winter', wst.map((k) => {
       const roads = [...new Set(SEASONAL.filter((e) => e.publicLine && String(e.state).split('/').includes(k)).map(roadName))];
