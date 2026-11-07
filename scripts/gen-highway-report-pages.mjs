@@ -46,6 +46,7 @@ const FEED_NOTES = {
   '2026-10': {
     NY: '511NY changed its data system at the end of September. MileCheck recorded 3,429 alerts in September and 590 in October. The drop reflects the feed change, so these counts do not show whether New York had fewer road incidents.',
     KY: 'MileCheck added the KYTC 24-hour Combined Incidents feed on Sept. 25. October is the first full month with it. MileCheck recorded 465 alerts in September and 1,056 in October. The jump reflects the added feed, not more incidents on Kentucky roads.',
+    AZ: 'Roadwork for Arizona comes from the AZ511 road-conditions feed. Until late July that feed included roadwork on local streets; since then MileCheck keeps only state highways. July shows 3,230 roadwork records and later months about 600, so July is not comparable.',
     VA: 'Virginia alerts came back on Sept. 25 after VDOT moved its 511 service, with five data layers where there had been one. October is the first full month on the new feed. MileCheck recorded 682 alerts in September and 1,683 in October. The jump reflects the feed change, not more incidents on Virginia roads.',
   },
 };
