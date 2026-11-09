@@ -24,7 +24,8 @@ mkdirSync(OUT_DIR, { recursive: true });
 
 const NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming', BC:'British Columbia', AB:'Alberta', MB:'Manitoba' };
 const DOT = { BC: 'DriveBC', AB: '511 Alberta', MB: 'Manitoba 511' };
-const dotOf = (st) => DOT[st] || `${NAMES[st]}'s department of transportation`;
+const poss = (x) => (x.endsWith('s') ? `${x}'` : `${x}'s`);
+const dotOf = (st) => DOT[st] || `${poss(NAMES[st])} department of transportation`;
 const CANADA = new Set(['BC', 'AB', 'MB']);
 // Feed changes that make September-to-October comparisons meaningless (same list as the live generator).
 const NO_COMPARE = new Set(['NY', 'KY', 'VA']);
@@ -41,7 +42,13 @@ const slug = (st) => NAMES[st].toLowerCase().replace(/\s+/g, '-');
 const n = (x) => Number(x || 0).toLocaleString('en-US');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const WA_I = new Set(['5', '82', '90', '182', '205', '405', '705']), WA_US = new Set(['2', '12', '97', '101', '195', '395', '730']);
-const route = (st, r) => { const m = String(r).match(/^SR\s*-?\s*(\d+[A-Z]?)$/i); if (m && st === 'WA') return WA_I.has(m[1]) ? `I-${m[1]}` : WA_US.has(m[1]) ? `US-${m[1]}` : `SR-${m[1]}`; if (m) return `SR-${m[1]}`; return String(r); };
+const route0 = (st, r) => { const m = String(r).match(/^SR\s*-?\s*(\d+[A-Z]?)$/i); if (m && st === 'WA') return WA_I.has(m[1]) ? `I-${m[1]}` : WA_US.has(m[1]) ? `US-${m[1]}` : `SR-${m[1]}`; if (m) return `SR-${m[1]}`; return String(r); };
+// Display names: Texas loops/spurs, all-caps highway names, NJ toll roads.
+const route = (st, r) => { let x = route0(st, r); let m;
+  if ((m = x.match(/^TX-(LOOP|SPUR)-(\w+)$/i))) return `${m[1][0].toUpperCase()}${m[1].slice(1).toLowerCase()} ${m[2]}`;
+  if (x === 'NJ TURNPIKE') return 'NJ Turnpike'; if (x === 'GSP') return 'Garden State Parkway';
+  if (/^[A-Z][A-Z .'-]+$/.test(x) && /[A-Z]{3,}/.test(x) && !/^(I|US|SR)\b/.test(x)) return x.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase());
+  return x; };
 const pct = (now, before) => (before ? Math.round(((now - before) / before) * 100) : null);
 // Leah 2026-11-09: no month-to-month comparisons. September was not archived cleanly enough to compare against.
 const COMPARE = false;
@@ -108,11 +115,17 @@ const share = (a, b) => (b ? `${Math.round((a / b) * 100)}%` : '');
 // ---------- state pages ----------
 
 const fmtD = (iso) => { const [y, m, d] = iso.split('-').map(Number); return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' }); };
-const clean = (h) => { let t = String(h).replace(/\s+/g, ' ').replace(/^(Road ?Work|Construction)\s*:\s*/i, '').trim(); if (t === t.toUpperCase()) t = t.charAt(0) + t.slice(1).toLowerCase(); return t; };
+// Feed text cleanup: whole-caps text to sentence case, ALL-CAPS words of 4+ letters to Title Case (street
+// names like SWEETWATER RD), feed prefixes and stray leading dashes removed.
+const SMALL = new Set(['TO', 'OF', 'ON', 'AT', 'IN', 'BY']), WORD3 = new Set(['NEW', 'OFF', 'END', 'AND', 'THE', 'FOR', 'ALL', 'ONE', 'TWO', 'NOW']);
+const deCap = (t) => t.replace(/\b[A-Z]{4,}\b/g, (w) => w[0] + w.slice(1).toLowerCase()).replace(/\b[A-Z]{2,3}\b/g, (w) => (SMALL.has(w) ? w.toLowerCase() : WORD3.has(w) ? w[0] + w.slice(1).toLowerCase() : w));
+const clean = (h) => { let t = String(h).replace(/\s+/g, ' ').replace(/^Scheduled Road Work on /i, 'Roadwork on ').replace(/^(Road ?Work|Construction|Scheduled Road Work|Restrictions)\s*[:-]\s*/i, '').replace(/^[-–—\s]+/, '').trim(); if (t === t.toUpperCase()) t = t.charAt(0) + t.slice(1).toLowerCase(); t = deCap(t); return t.charAt(0).toUpperCase() + t.slice(1); };
+// A place is shown only when it is a short place name, not a copy of the headline or the route.
+const placeOf = (st, p) => { const x = String(p.place || '').trim(); if (!x || x.length > 40 || /\*\*|^[-–—]/.test(x) || /[A-Z]{2}\d{3,}|\d+\.\d+ miles/i.test(x) || (x === x.toUpperCase() && x.length > 20) || (p.route && x.replace(/\W/g, '').toUpperCase().startsWith(String(p.route).replace(/\W/g, '').toUpperCase()))) return ''; return x === x.toUpperCase() ? x.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : x; };
 const projCard = (st, p, kind) => {
   const tag = { ongoing: ['t-on', 'Ongoing'], started: ['t-new', 'Started in October'], finished: ['t-done', 'Ended in October'] }[kind];
   const when = kind === 'finished' ? `Posted to run ${fmtD(p.start)} to ${fmtD(p.end)}` : kind === 'started' ? `Started ${fmtD(p.start)}, posted to end ${fmtD(p.end)}` : `Since ${fmtD(p.start)}, posted to end ${fmtD(p.end)}`;
-  return `<div class="v2-proj"><span class="tag ${tag[0]}">${tag[1]}</span>${p.closure ? '<span class="tag t-cl">Road closed</span>' : ''}<b>${esc(p.route ? route(st, p.route) : 'Roadwork')}${p.place ? `, ${esc(p.place)}` : ''}</b><p>${esc(clean(p.headline))}</p><small>${when}. From ${esc(dotOf(st))}'s feed.</small></div>`;
+  return `<div class="v2-proj"><span class="tag ${tag[0]}">${tag[1]}</span>${p.closure ? '<span class="tag t-cl">Road closed</span>' : ''}<b>${esc(p.route ? route(st, p.route) : 'Roadwork')}${placeOf(st, p) ? `, ${esc(placeOf(st, p))}` : ''}</b><p>${esc(clean(p.headline))}</p><small>${when}. From ${esc(dotOf(st))}'s feed.</small></div>`;
 };
 const annCard = (a) => `<div class="v2-ann"><b>${esc(a.title)}</b><p>${esc(a.text)}</p><a href="${a.url}" target="_blank" rel="noopener">Read it from ${esc(a.source.split(',')[0])} &rarr;</a></div>`;
 
@@ -138,9 +151,12 @@ function stateTop(st) {
   const ch = D.crashHotspots[st] || {}; const crashRoutes = (ch.routes || []).map(([r, c]) => [route(st, r), c]);
   const sameAs = (a, b) => String(a).replace(/[^a-z0-9]/gi, '').toLowerCase() === String(b).replace(/[^a-z0-9]/gi, '').toLowerCase();
   const places = (ch.places || []).filter((x) => x.place && x.crashes > 1 && !sameAs(x.place, x.route) && !sameAs(x.place, route(st, x.route)));
-  const OK_P = (p) => !/oversize|weight limit|permit/i.test(p.headline);
+  // Not projects, or barely affect drivers: oversize/weight/permit notices, shoulder-only closures, "No Lane Closure".
+  const OK_P = (p) => !/oversize|weight limit|permit/i.test(p.headline) && !/no lane closure/i.test(p.headline)
+    && !(/shoulder/i.test(p.headline) && !/lanes? (closed|blocked|reduced|disrupted)|reduced to|full closure|road closed|ramp closed|all lanes|detour|alternat/i.test(p.headline));
+  const seenP = new Set(); const uniq = (p) => { const k = `${p.route}|${placeOf(st, p) || clean(p.headline).replace(/\b(north|south|east|west)bound\b|\bboth directions\b|\b[NSEW]B\b/gi, '').replace(/\W+/g, ' ').trim().slice(0, 40)}`.toLowerCase(); if (seenP.has(k)) return false; seenP.add(k); return true; };
   const mw0 = MW[st] || { ongoing: [], started: [], finished: [] };
-  const mw = { ongoing: mw0.ongoing.filter(OK_P), started: mw0.started.filter(OK_P), finished: mw0.finished.filter(OK_P) };
+  const mw = { finished: mw0.finished.filter(OK_P).filter(uniq), started: mw0.started.filter(OK_P).filter(uniq), ongoing: mw0.ongoing.filter(OK_P).filter(uniq) };
   const ann = ANN[st] || [];
   const seasonal = D.seasonalClosures[st] || [];
   const snow = snowBy[st] || 0, fire = fireBy[st];
@@ -172,19 +188,24 @@ function stateTop(st) {
   const themes = [];
   if (seasonal.length) themes.push('winter closures'); else if (snow) themes.push('first snow');
   if (picked.length) themes.push('roadwork');
-  if (crashTop) themes.push('crashes');
-  const headline = themes.length >= 2 ? `${name} in October: ${list3(themes.slice(0, 3))}` : crashTop ? `${name} in October: where the crashes were` : `${name}'s roads in October`;
+  if (crashTop && j.crash > 0) themes.push('crashes');
+  const headline = themes.length >= 2 ? `${name} in October: ${list3(themes.slice(0, 3))}` : themes[0] === 'roadwork' ? `${name} in October: the major roadwork` : themes[0] === 'winter closures' ? `${name} in October: winter closures` : themes[0] === 'first snow' ? `${name} in October: the first snow` : themes[0] === 'crashes' ? `${name} in October: where the crashes were` : `${name} in October: closures on the map`;
 
   const lede = [];
   // The generator keeps at most 15 per group, so a count of 15 means "15 or more" and is never stated as exact.
   const cnt = (k) => (k >= 15 ? 'More than a dozen' : String(k));
   if (workRoutes.length) lede.push(`Across ${name} in October, major roadwork ran on ${list3(workRoutes.slice(0, 4))}${mw.finished.length ? `. ${cnt(mw.finished.length)} project${mw.finished.length === 1 ? '' : 's'} reached ${mw.finished.length === 1 ? 'its' : 'their'} posted end date` : ''}.`);
-  if (seasonal.length) lede.push(`${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} on the feed by Oct. 31.`);
-  else if (snow) lede.push(`The first snow and ice alerts showed up, ${snow} of them.`);
-  lede.push(`${dotOf(st).replace(/^./, (c) => c.toUpperCase())} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'}${crashTop ? `, ${crashTop[1]} of them on ${crashTop[0]}` : ''}.`);
+  const crashFirst = !workRoutes.length; const winterLede = [];
+  if (seasonal.length) winterLede.push(`${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} on the feed by Oct. 31.`);
+  else if (snow) winterLede.push(snow === 1 ? 'The first snow and ice alert of the season showed up.' : `The first snow and ice alerts of the season showed up, ${snow} of them.`);
+  const Dot = dotOf(st).replace(/^./, (c) => c.toUpperCase());
+  // A feed with no crash alerts usually doesn't publish crashes at all; never print "0 crash alerts".
+  if (j.crash > 0) lede.push(`${Dot} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'}${crashTop ? `, ${crashTop[1]} of them on ${crashTop[0]}` : ''}.`);
+  lede.push(...winterLede);
+  if (!lede.length) lede.push(`${Dot} posted ${n(j.closure)} closure alert${j.closure === 1 ? '' : 's'} in October. The map below shows where.`);
 
   const nums = `<div class="v2-nums">
-<div><b>${n(j.crash)}</b><span>crash alerts</span></div>
+${j.crash > 0 ? `<div><b>${n(j.crash)}</b><span>crash alerts</span></div>` : ''}
 ${crashTop ? `<div><b>${esc(crashTop[0])}</b><span>most crash alerts, ${crashTop[1]}</span></div>` : ''}
 ${(mw.ongoing.length + mw.started.length) ? `<div><b>${(mw.ongoing.length >= 15 || mw.started.length >= 15) ? `${mw.ongoing.length + mw.started.length}+` : mw.ongoing.length + mw.started.length}</b><span>major roadwork projects on the feed</span></div>` : ''}
 ${mw.finished.length ? `<div><b>${mw.finished.length >= 15 ? '15+' : mw.finished.length}</b><span>major projects ended in October</span></div>` : seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct. 31</span></div>` : ''}
