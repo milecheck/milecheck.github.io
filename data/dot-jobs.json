@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-11-09T06:55:18.380Z",
+   "fetchedAt": "2026-11-09T22:33:25.439Z",
    "ok": true,
    "rows": [
     {
@@ -77,9 +77,22 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-11-09T06:55:18.380Z",
+   "fetchedAt": "2026-11-09T22:33:25.439Z",
    "ok": true,
    "rows": [
+    {
+     "id": "98205",
+     "state": "MN",
+     "agency": "Minnesota Department of Transportation",
+     "title": "Highway Maintenance Worker with Snow & Ice - Transportation Generalist",
+     "location": "Milaca and Mora, MN",
+     "pay": "$52,596 - $65,980 a year",
+     "closes": "2026-11-23",
+     "closesNote": null,
+     "kind": "Appointment type not confirmed",
+     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=98205&PostingSeq=1",
+     "recruiter": null
+    },
     {
      "id": "97935",
      "state": "MN",
@@ -148,5 +161,5 @@
    ]
   }
  },
- "updatedAt": "2026-11-09T06:55:18.380Z"
+ "updatedAt": "2026-11-09T22:33:25.439Z"
 }
