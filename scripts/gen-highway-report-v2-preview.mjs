@@ -160,8 +160,8 @@ ${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j
 
 // Leah 2026-11-09: the top sign-up link is one short line that opens the sign-up page (/report/) in a new tab,
 // instead of scrolling to the form at the bottom.
-const SIGNUP = '<p class="mc-cta-line" style="margin:6px 0 22px;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><a href="/report/" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700;text-decoration:none;border-bottom:1px solid #9fd3b8;">&#9993; Sign up for the monthly report &rarr;</a></p>';
-const oneLineSignup = (h) => h.replace(/<p class="mc-cta-line"[\s\S]*?<\/p>/, SIGNUP);
+const SIGNUP = (from) => `<p class="mc-cta-line" style="margin:4px 0 18px;"><a href="/report/?from=${encodeURIComponent(from)}" target="_blank" rel="opener" style="display:inline-block;padding:6px 12px;border:1px solid #9fd3b8;border-radius:999px;background:#F4F8F6;color:#0f7a4f;font-size:13.5px;font-weight:700;text-decoration:none;line-height:1.3;">&#9993; Get the next report</a></p>`;
+const oneLineSignup = (h, from) => h.replace(/<p class="mc-cta-line"[\s\S]*?<\/p>/, SIGNUP(from));
 let made = 0;
 for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 'index.html')) {
   const st = Object.keys(NAMES).find((k) => slug(k) + '.html' === f); if (!st || !J[st]) continue;
@@ -179,7 +179,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   // The corridor grid replaces the old 'Routes with the most alerts' list (same numbers, shown once).
   if (t.grid) { const before = h; h = h.replace(/<div class="pull-stat"><strong>Routes with the most alerts in [^<]*<\/strong>[\s\S]*?<\/ul><\/div>/, t.grid.replace('<h2 class="rc">Corridor grid</h2>', '<h3 style="margin:0 0 4px">Corridor grid</h3>')); if (h === before) h = h.replace(anchor, `${t.grid}\n      ${anchor}`); }
   h = h.replace(/\.\.\/road-report-october-2026\.html/g, '../road-report-october-2026-preview.html');
-  writeFileSync(resolve(OUT_DIR, f), oneLineSignup(h)); made++;
+  writeFileSync(resolve(OUT_DIR, f), oneLineSignup(h, `/blog/highway-report-october-2026-preview/${f}`)); made++;
 }
 
 // ---------- national page ----------
@@ -240,6 +240,6 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${m}\n${pivot}`);
   h = h.replace('<h2 class="rc">Border waits', `${rank}${regionSec}${corrSec}${quotes}\n      <h2 class="rc">Border waits`);
   h = h.replace(/highway-report-october-2026-states\//g, 'highway-report-october-2026-preview/');
-  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), oneLineSignup(h));
+  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), oneLineSignup(h, '/blog/road-report-october-2026-preview.html'));
 }
 console.log(`preview: ${made} state pages + national`);
