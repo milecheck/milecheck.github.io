@@ -130,21 +130,40 @@ function stateTop(st) {
   const hm = (m) => { const h = Math.floor(m / 60), r = m % 60; return h ? `${h} hr${r ? ` ${r} min` : ''}` : `${r} min`; };
   const crashTop = crashRoutes[0];
 
-  let headline;
-  if (ann[0]) headline = ann[0].title;
-  else if (mw.finished[0] && mw.finished[0].route) headline = `${route(st, mw.finished[0].route)} work wraps up, and where ${name}'s crashes were`;
-  else if (snow) headline = `Snow and ice reach ${name}'s roads`;
-  else if (crashTop && (mw.ongoing.length + mw.started.length)) headline = `${name} in October: crashes, closures and the big roadwork`;
-  else if (crashTop) headline = `${name} in October: where the crashes were`;
-  else headline = `${name}'s roads in October`;
+  // Leah 2026-11-09: cover the whole state, not one city. Roadwork cards are picked across the state: the
+  // state's extent comes from its own crash/closure points, split into a 3x3 grid, and cards are taken one per
+  // area in turn (longest first within an area) before any area gets a second. Up to 8.
+  const pts = [...D.mapPoints.crash, ...D.mapPoints.closure].filter((q) => q[2] === st);
+  const all = [...mw.finished.map((p) => ({ p, k: 'finished' })), ...mw.started.map((p) => ({ p, k: 'started' })), ...mw.ongoing.map((p) => ({ p, k: 'ongoing' }))];
+  let picked = all.slice(0, 8);
+  if (pts.length > 10 && all.length > 8) {
+    const lats = pts.map((q) => q[0]).sort((x, y) => x - y), lons = pts.map((q) => q[1]).sort((x, y) => x - y);
+    const lo = (v) => v[Math.floor(v.length * 0.02)], hi = (v) => v[Math.ceil(v.length * 0.98) - 1];
+    const cell = (x) => (x.p.lat == null ? 'x' : `${Math.min(2, Math.max(0, Math.floor(((x.p.lat - lo(lats)) / (hi(lats) - lo(lats) || 1)) * 3)))}${Math.min(2, Math.max(0, Math.floor(((x.p.lon - lo(lons)) / (hi(lons) - lo(lons) || 1)) * 3)))}`);
+    const groups = new Map(); for (const x of all) { const c = cell(x); if (!groups.has(c)) groups.set(c, []); groups.get(c).push(x); }
+    for (const g of groups.values()) g.sort((x, y) => (x.k === 'ongoing') - (y.k === 'ongoing') || y.p.projectDays - x.p.projectDays);
+    picked = []; const qs = [...groups.values()];
+    while (picked.length < 8 && qs.some((g) => g.length)) for (const g of qs) { if (g.length && picked.length < 8) picked.push(g.shift()); }
+  }
+  // Routes for the lede come in the spread-across-the-state order, before the cards are sorted by status.
+  const workRoutes = [...new Set(picked.map((x) => x.p.route && route(st, x.p.route)).filter(Boolean))];
+  const order = { finished: 0, started: 1, ongoing: 2 };
+  picked.sort((x, y) => order[x.k] - order[y.k]);
+  const list3 = (a) => (a.length <= 1 ? a.join('') : a.length === 2 ? a.join(' and ') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
+
+  const themes = [];
+  if (seasonal.length) themes.push('winter closures'); else if (snow) themes.push('first snow');
+  if (fire && fire.acres >= 1000) themes.push('wildfires');
+  if (picked.length) themes.push('roadwork');
+  if (crashTop) themes.push('crashes');
+  const headline = themes.length >= 2 ? `${name} in October: ${list3(themes.slice(0, 3))}` : crashTop ? `${name} in October: where the crashes were` : `${name}'s roads in October`;
 
   const lede = [];
-  if (crashTop) lede.push(`${dotOf(st).replace(/^./, (c) => c.toUpperCase())} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'} in October. ${crashTop[0]} had the most, ${crashTop[1]}.`);
-  else lede.push(`${dotOf(st).replace(/^./, (c) => c.toUpperCase())} posted ${n(j.crash)} crash alerts in October.`);
-  const big = mw.started[0] || mw.ongoing[0];
-  if (mw.finished.length) lede.push(`${mw.finished.length} major roadwork project${mw.finished.length === 1 ? '' : 's'} ended${mw.started.length ? ` and ${mw.started.length} started` : ''}.`);
-  else if (big && big.route) lede.push(`The biggest roadwork on the feed was on ${route(st, big.route)}.`);
-  if (snow) lede.push(`The first snow and ice alerts showed up, ${snow} of them.`);
+  if (workRoutes.length) lede.push(`Across ${name} in October, major roadwork ran on ${list3(workRoutes.slice(0, 4))}${mw.finished.length ? `, and ${mw.finished.length} project${mw.finished.length === 1 ? '' : 's'} reached ${mw.finished.length === 1 ? 'its' : 'their'} posted end date` : ''}.`);
+  if (seasonal.length) lede.push(`${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} on the feed by Oct. 31.`);
+  else if (snow) lede.push(`The first snow and ice alerts showed up, ${snow} of them.`);
+  if (fire && fire.fires) lede.push(`${n(fire.fires)} wildfire${fire.fires === 1 ? ' was' : 's were'} still on the national wildfire feed on Oct. 31, covering ${n(fire.acres)} acres.`);
+  lede.push(`${dotOf(st).replace(/^./, (c) => c.toUpperCase())} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'}${crashTop ? `, ${crashTop[1]} of them on ${crashTop[0]}` : ''}.`);
 
   const nums = `<div class="v2-nums">
 <div><b>${n(j.crash)}</b><span>crash alerts</span></div>
@@ -154,9 +173,9 @@ ${mw.finished.length ? `<div><b>${mw.finished.length}</b><span>major projects en
 </div>`;
 
   const S = [];
+  const cards = picked.map((x) => projCard(st, x.p, x.k));
+  if (cards.length) S.push(`<section class="v2-sec"><h2 class="rc">Major roadwork</h2><p class="v2-sub">Projects on ${esc(dotOf(st))}'s feed in October that run a month or longer, with the dates the agency posted. Short lane closures are left out. Picked from across the ${CANADA.has(st) ? 'province' : 'state'}, not just the cities.</p>${cards.join('')}</section>`);
   if (ann.length) S.push(`<section class="v2-sec"><h2 class="rc">News from ${esc(dotOf(st))}</h2>${ann.map(annCard).join('')}</section>`);
-  const cards = [...mw.finished.map((p) => projCard(st, p, 'finished')), ...mw.started.map((p) => projCard(st, p, 'started')), ...mw.ongoing.map((p) => projCard(st, p, 'ongoing'))];
-  if (cards.length) S.push(`<section class="v2-sec"><h2 class="rc">Major roadwork</h2><p class="v2-sub">Projects on ${esc(dotOf(st))}'s feed in October that run a month or longer, with the dates the agency posted. Short lane closures are left out.</p>${cards.join('')}</section>`);
   // The live pages already have an 'Areas and routes named in two or more crash alerts' box; don't repeat it.
   if (false && places.length) S.push(`<section class="v2-sec"><h2 class="rc">Where the crashes were</h2><ul class="v2-pivot">${places.map((x) => `<li><strong>${esc(route(st, x.route))}</strong>${esc(x.place)}: ${x.crashes} crash alerts</li>`).join('')}</ul></section>`);
   const piv = [];
@@ -245,7 +264,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   const quotes = `<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page. Each state page has its own.</p>
 <div class="v2-quote"><strong>Winter arrives</strong>“${X.snowIceLower48} road alerts in the lower 48 named snow, ice or chains in October, the first of the season, according to the MileCheck Highway Report.”</div>
 <div class="v2-quote"><strong>Border</strong>“The longest border wait in October was ${hm(topWait.maxMin)} at ${esc(topWait.port)}, Texas, according to the MileCheck Highway Report, from hourly U.S. Customs and Border Protection data.”</div></section>`;
-  const lede = `Winter showed up on the roads in October. The first ${X.snowIceLower48} snow and ice alerts reached the lower 48, ${allAnn[0] && allAnn[0].lede ? `${allAnn[0].lede}, ` : ''}and the longest border wait was ${hm(topWait.maxMin)} at ${esc(topWait.port)}, Texas. Below: where the crashes were, the big roadwork that finished or started, and a report for every state and province.`;
+  const lede = `Winter showed up on the roads in October. The first ${X.snowIceLower48} snow and ice alerts reached the lower 48, and the longest border wait was ${hm(topWait.maxMin)} at ${esc(topWait.port)}, Texas. Below: where the crashes were, the big roadwork that finished or started, and a report for every state and province.`;
   h = h.replace('</head>', `<meta name="robots" content="noindex">\n${CSS}\n</head>`);
   h = h.replace(/<h1 class="article-title">[\s\S]*?<\/h1>/, `<h1 class="article-title">Winter reaches the roads</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report, October 2026</p>`);
   h = h.replace(/<p class="article-lead">[\s\S]*?<\/p>/, `<p class="article-lead">${lede}</p>`);
@@ -259,8 +278,8 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace('How we got these numbers', 'Where these numbers come from');
   h = h.replace(/<h2 class="rc">Closures and roadwork<\/h2>/, '<h2 class="rc">Closures</h2>');
   h = h.replace(/<p>Road feeds posted [\d,]+ closure alerts and [\d,]+ roadwork alerts[^<]*<\/p>/, '');
-  h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${m}\n${pivot}${annSec}`);
-  h = h.replace('<h2 class="rc">Border waits', `${projSec}${quotes}\n      <h2 class="rc">Border waits`);
+  h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${m}\n${pivot}`);
+  h = h.replace('<h2 class="rc">Border waits', `${projSec}${annSec}${quotes}\n      <h2 class="rc">Border waits`);
   h = h.replace(/highway-report-october-2026-states\//g, 'highway-report-october-2026-preview/');
   writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), finish(h, '/blog/road-report-october-2026-preview.html'));
 }
