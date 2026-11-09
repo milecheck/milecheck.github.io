@@ -153,7 +153,6 @@ function stateTop(st) {
 
   const themes = [];
   if (seasonal.length) themes.push('winter closures'); else if (snow) themes.push('first snow');
-  if (fire && fire.acres >= 1000) themes.push('wildfires');
   if (picked.length) themes.push('roadwork');
   if (crashTop) themes.push('crashes');
   const headline = themes.length >= 2 ? `${name} in October: ${list3(themes.slice(0, 3))}` : crashTop ? `${name} in October: where the crashes were` : `${name}'s roads in October`;
@@ -162,7 +161,6 @@ function stateTop(st) {
   if (workRoutes.length) lede.push(`Across ${name} in October, major roadwork ran on ${list3(workRoutes.slice(0, 4))}${mw.finished.length ? `, and ${mw.finished.length} project${mw.finished.length === 1 ? '' : 's'} reached ${mw.finished.length === 1 ? 'its' : 'their'} posted end date` : ''}.`);
   if (seasonal.length) lede.push(`${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} on the feed by Oct. 31.`);
   else if (snow) lede.push(`The first snow and ice alerts showed up, ${snow} of them.`);
-  if (fire && fire.fires) lede.push(`${n(fire.fires)} wildfire${fire.fires === 1 ? ' was' : 's were'} still on the national wildfire feed on Oct. 31, covering ${n(fire.acres)} acres.`);
   lede.push(`${dotOf(st).replace(/^./, (c) => c.toUpperCase())} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'}${crashTop ? `, ${crashTop[1]} of them on ${crashTop[0]}` : ''}.`);
 
   const nums = `<div class="v2-nums">
@@ -178,18 +176,23 @@ ${mw.finished.length ? `<div><b>${mw.finished.length}</b><span>major projects en
   if (ann.length) S.push(`<section class="v2-sec"><h2 class="rc">News from ${esc(dotOf(st))}</h2>${ann.map(annCard).join('')}</section>`);
   // The live pages already have an 'Areas and routes named in two or more crash alerts' box; don't repeat it.
   if (false && places.length) S.push(`<section class="v2-sec"><h2 class="rc">Where the crashes were</h2><ul class="v2-pivot">${places.map((x) => `<li><strong>${esc(route(st, x.route))}</strong>${esc(x.place)}: ${x.crashes} crash alerts</li>`).join('')}</ul></section>`);
-  const piv = [];
-  if (snow) piv.push(`<li><strong>First snow</strong>${snow} alert${snow === 1 ? '' : 's'} named snow, ice or chains on the road.</li>`);
-  if (seasonal.length) piv.push(`<li><strong>Winter closures</strong>${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} on the feed by Oct. 31. The list is further down.</li>`);
-  if (waits[0]) piv.push(`<li><strong>Border</strong>The longest wait was ${hm(waits[0].maxMin)} at ${esc(waits[0].port)}${waits[0].crossing && waits[0].crossing !== 'Passenger' ? ` (${esc(waits[0].crossing)})` : ''}. The average there was ${hm(waits[0].avgMin)}. From U.S. Customs and Border Protection.</li>`);
-  if (fire && fire.fires) piv.push(`<li><strong>Wildfires</strong>${n(fire.fires)} fires on the national wildfire feed were in ${name} by Oct. 31, covering ${n(fire.acres)} acres.</li>`);
-  if (piv.length) S.push(`<section class="v2-sec"><h2 class="rc">Also in October</h2><ul class="v2-pivot">${piv.join('')}</ul></section>`);
+  // Leah 2026-11-09: no wildfires (the fire feed lists every fire of the season, most of them contained, and
+  // October readers don't care anymore). The report is read in November, so bridge to what's coming: weather.
+  const CHAIN = { AZ: 'arizona-new-mexico-alaska', NM: 'arizona-new-mexico-alaska', AK: 'arizona-new-mexico-alaska', BC: 'british-columbia', CA: 'california', CO: 'colorado', ID: 'idaho', MD: 'maryland', MT: 'montana', NV: 'nevada', NY: 'new-york', OR: 'oregon', PA: 'pennsylvania', SD: 'south-dakota', UT: 'utah', VT: 'vermont', WA: 'washington', WY: 'wyoming' };
+  const wx = [];
+  if (snow) wx.push(`<li><strong>First snow</strong>${snow} alert${snow === 1 ? '' : 's'} in October named snow, ice or chains on the road. Expect more as November goes on.</li>`);
+  if (seasonal.length) wx.push(`<li><strong>Winter closures</strong>${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} already on the feed by Oct. 31. The roads that close every winter, with their usual dates, are listed below.</li>`);
+  if (CHAIN[st]) wx.push(`<li><strong>Chains</strong>${name === 'British Columbia' ? 'British Columbia' : name} has winter tire and chain rules. <a href="/chain-laws/${CHAIN[st]}/" target="_blank" rel="noopener">What the law requires &rarr;</a></li>`);
+  if (wx.length) wx.push(`<li><strong>Before you go</strong><a href="/chains/" target="_blank" rel="noopener">Live chain and winter road map &rarr;</a></li>`);
+  if (wx.length) S.push(`<section class="v2-sec"><h2 class="rc">Heading into November</h2><ul class="v2-pivot">${wx.join('')}</ul></section>`);
+  if (waits[0]) S.push(`<section class="v2-sec"><h2 class="rc">Border</h2><ul class="v2-pivot"><li><strong>Longest wait in October</strong>${hm(waits[0].maxMin)} at ${esc(waits[0].port)}${waits[0].crossing && waits[0].crossing !== 'Passenger' ? ` (${esc(waits[0].crossing)})` : ''}. The average there was ${hm(waits[0].avgMin)}. From U.S. Customs and Border Protection, saved every hour.</li></ul></section>`);
   const q = [];
   if (crashTop) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${esc(dotOf(st).replace(/^./, (c) => c.toUpperCase()))} posted ${n(j.crash)} crash alerts in October, according to the MileCheck Highway Report. ${esc(crashTop[0])} had the most, ${crashTop[1]}.”</div>`);
   const qp = mw.finished[0] || mw.started[0];
   if (qp && qp.route) q.push(`<div class="v2-quote"><strong>Roadwork</strong>“The ${mw.finished[0] ? 'roadwork' : 'new roadwork'} on ${esc(route(st, qp.route))} ${mw.finished[0] ? `was posted to end ${fmtD(qp.end)}` : `started ${fmtD(qp.start)} and is posted to run until ${fmtD(qp.end)}`}, according to the MileCheck Highway Report.”</div>`);
   if (q.length) S.push(`<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p>${q.join('')}</section>`);
-  return { headline, lede: lede.join(' '), nums, body: S.join('\n') };
+  const desc = `${name} in October 2026: ${list3([crashTop ? 'where the crashes were' : null, picked.length ? 'the major roadwork' : null, (seasonal.length || snow) ? 'winter closures' : null].filter(Boolean)) || 'the roads'}, and what to expect heading into November. From the MileCheck Highway Report.`;
+  return { headline, lede: lede.join(' '), nums, body: S.join('\n'), desc };
 }
 
 // Leah 2026-11-09: no sign-up line up high. A small pop-up asks once, after 25 seconds or 40% of the page,
@@ -224,6 +227,9 @@ const finish = (h, from) => {
   h = h.replace(/<h2 class="rc">Compared with earlier months<\/h2>[\s\S]*?(?=<h2|<section class="v2-sec">)/, '');
   return h.replace('</body>', `${POPUP(from)}\n</body>`);
 };
+// Search/social descriptions follow the page, not the old count-led wording (meta, og, twitter, JSON-LD).
+const setDesc = (h, text) => { const a = text.replace(/&/g, '&amp;').replace(/"/g, '&quot;'); const j = JSON.stringify(text).slice(1, -1);
+  return h.replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*(")/g, `$1${a}$2`).replace(/("description":")(?:[^"\\]|\\.)*(")/g, `$1${j}$2`); };
 let made = 0;
 for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 'index.html')) {
   const st = Object.keys(NAMES).find((k) => slug(k) + '.html' === f); if (!st || !J[st]) continue;
@@ -242,6 +248,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   const anchor = ['<h2 class="rc">Compared with earlier months', '<h2 class="rc">Winter closures', '<h2>More on'].find((a) => h.includes(a));
   h = h.replace(anchor, `${t.body}\n      ${anchor}`);
   h = h.replace(/\.\.\/road-report-october-2026\.html/g, '../road-report-october-2026-preview.html');
+  h = setDesc(h, t.desc);
   writeFileSync(resolve(OUT_DIR, f), finish(h, `/blog/highway-report-october-2026-preview/${f}`)); made++;
 }
 
@@ -281,6 +288,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${m}\n${pivot}`);
   h = h.replace('<h2 class="rc">Border waits', `${projSec}${annSec}${quotes}\n      <h2 class="rc">Border waits`);
   h = h.replace(/highway-report-october-2026-states\//g, 'highway-report-october-2026-preview/');
+  h = setDesc(h, 'MileCheck Highway Report, October 2026: the first snow and ice alerts, winter closures, major roadwork that ended or started, border waits, and a report for every state and province.');
   writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), finish(h, '/blog/road-report-october-2026-preview.html'));
 }
 console.log(`preview: ${made} state pages + national; majorWork states: ${Object.keys(MW).length}`);
