@@ -159,6 +159,10 @@ ${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j
   return { headline, lede: lede.join(' '), nums, body: grid + pivot + quotes };
 }
 
+// Leah 2026-11-09: the top sign-up link is one short line that opens the sign-up page (/report/) in a new tab,
+// instead of scrolling to the form at the bottom.
+const SIGNUP = '<p class="mc-cta-line" style="margin:6px 0 22px;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><a href="/report/" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700;text-decoration:none;border-bottom:1px solid #9fd3b8;">&#9993; Sign up for the monthly report &rarr;</a></p>';
+const oneLineSignup = (h) => h.replace(/<p class="mc-cta-line"[\s\S]*?<\/p>/, SIGNUP);
 let made = 0;
 for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 'index.html')) {
   const st = Object.keys(NAMES).find((k) => slug(k) + '.html' === f); if (!st || !J[st]) continue;
@@ -171,7 +175,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace(/<div class="headline-nums">[\s\S]*?<\/div><\/div>/, t.nums);
   h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${t.body}\n${m.replace('How we got these numbers', 'Where these numbers come from')}`);
   h = h.replace(/\.\.\/road-report-october-2026\.html/g, '../road-report-october-2026-preview.html');
-  writeFileSync(resolve(OUT_DIR, f), h); made++;
+  writeFileSync(resolve(OUT_DIR, f), oneLineSignup(h)); made++;
 }
 
 // ---------- national page ----------
@@ -230,6 +234,6 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
 </div>`);
   h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${pivot}${rank}${regionSec}${corrSec}${quotes}\n${m.replace('How we got these numbers', 'Where these numbers come from')}`);
   h = h.replace(/highway-report-october-2026-states\//g, 'highway-report-october-2026-preview/');
-  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), h);
+  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), oneLineSignup(h));
 }
 console.log(`preview: ${made} state pages + national`);
