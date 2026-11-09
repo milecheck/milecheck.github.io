@@ -39,7 +39,10 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const WA_I = new Set(['5', '82', '90', '182', '205', '405', '705']), WA_US = new Set(['2', '12', '97', '101', '195', '395', '730']);
 const route = (st, r) => { const m = String(r).match(/^SR\s*-?\s*(\d+[A-Z]?)$/i); if (m && st === 'WA') return WA_I.has(m[1]) ? `I-${m[1]}` : WA_US.has(m[1]) ? `US-${m[1]}` : `SR-${m[1]}`; if (m) return `SR-${m[1]}`; return String(r); };
 const pct = (now, before) => (before ? Math.round(((now - before) / before) * 100) : null);
+// Leah 2026-11-09: no month-to-month comparisons. September was not archived cleanly enough to compare against.
+const COMPARE = false;
 const chg = (now, before, st) => {
+  if (!COMPARE) return '';
   if (st) return '<em class="v2-flat">feed changed, not comparable</em>';
   const p = pct(now, before); if (p === null) return '<em class="v2-flat">new this month</em>';
   if (p === 0) return '<em class="v2-flat">same as September</em>';
@@ -99,7 +102,7 @@ function stateTop(st) {
   const top = routes[0];
   const topShare = top ? Math.round((top[1] / j.total) * 100) : 0;
   const crashTop = ((D.crashHotspots[st] || {}).routes || [])[0];
-  const comparable = !!p && !NO_COMPARE.has(st);
+  const comparable = COMPARE && !!p && !NO_COMPARE.has(st);
   const totP = comparable ? pct(j.total, p.total) : null;
   const rwP = comparable ? pct(roadwork(j), roadwork(p)) : null;
   const crP = comparable ? pct(j.crash, p.crash) : null;
@@ -138,6 +141,8 @@ ${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j
 <p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p>${mixBar(j.crash, j.closure, roadwork(j), j.total - j.crash - j.closure - roadwork(j))}${KEY}</section>` : '';
 
   const piv = [];
+  piv.push(`<li><strong>Roadwork</strong>${n(roadwork(j))} roadwork alerts, ${share(roadwork(j), j.total)} of the month's total.</li>`);
+  piv.push(`<li><strong>Crashes</strong>${n(j.crash)} crash alerts.${crashTop ? ` ${route(st, crashTop[0])} had the most, ${crashTop[1]}.` : ''}</li>`);
   if (rwP !== null) piv.push(`<li><strong>Roadwork</strong>${n(roadwork(j))} roadwork alerts in October, ${rwP < 0 ? 'down' : rwP > 0 ? 'up' : 'level'}${rwP ? ` ${Math.abs(rwP)}%` : ''} from ${n(roadwork(p))} in September.</li>`);
   if (crP !== null) piv.push(`<li><strong>Crashes</strong>${n(j.crash)} crash alerts, ${crP < 0 ? 'down' : crP > 0 ? 'up' : 'level'}${crP ? ` ${Math.abs(crP)}%` : ''} from ${n(p.crash)} in September.${crashTop ? ` ${route(st, crashTop[0])} had the most, ${crashTop[1]}.` : ''}</li>`);
   if (snow) piv.push(`<li><strong>First snow</strong>${snow} alert${snow === 1 ? '' : 's'} in October named snow, ice or chains on the road. The map below the grid shows where.</li>`);
@@ -148,7 +153,8 @@ ${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j
 
   const q = [];
   if (top) q.push(`<div class="v2-quote"><strong>${esc(top[0])} led ${name}</strong>“${top[0]} had more alerts than any other road in ${name} in October: ${n(top[1])} of the ${n(j.total)} MileCheck archived from ${dotOf(st)}'s feed, or ${topShare}%.”</div>`);
-  if (crP !== null && crashTop) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${dotOf(st).replace(/^./, (c) => c.toUpperCase())} published ${n(j.crash)} crash alerts in October, ${crP < 0 ? 'down' : 'up'} ${Math.abs(crP)}% from September, by MileCheck's count. ${route(st, crashTop[0])} had the most, ${crashTop[1]}.”</div>`);
+  if (crashTop) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${dotOf(st).replace(/^./, (c) => c.toUpperCase())} published ${n(j.crash)} crash alerts in October, by MileCheck's count. ${route(st, crashTop[0])} had the most, ${crashTop[1]}.”</div>`);
+  if (false) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${dotOf(st).replace(/^./, (c) => c.toUpperCase())} published ${n(j.crash)} crash alerts in October, ${crP < 0 ? 'down' : 'up'} ${Math.abs(crP)}% from September, by MileCheck's count. ${route(st, crashTop[0])} had the most, ${crashTop[1]}.”</div>`);
   const quotes = q.length ? `<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p>${q.join('')}</section>` : '';
   return { headline, lede: lede.join(' '), nums, body: grid + pivot + quotes };
 }
@@ -182,7 +188,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
     const lead = js.slice().sort((a, b) => b.total - a.total)[0];
     const crashLead = js.slice().sort((a, b) => b.crash - a.crash)[0];
     const topR = lead.routeCounts && lead.routeCounts[0];
-    const p = pct(nowC, befC);
+    const p = COMPARE ? pct(nowC, befC) : null;
     return `<div class="v2-region"><h3>${reg}</h3><p><b>${n(t)}</b> alerts${p === null ? '' : `, ${p < 0 ? 'down' : 'up'} ${Math.abs(p)}% from September`}. ${NAMES[lead.state]} had the most${topR ? `, led by ${esc(route(lead.state, topR[0]))} (${n(topR[1])})` : ''}. Most crash alerts: ${NAMES[crashLead.state]}, ${n(crashLead.crash)}.</p></div>`;
   }).join('');
   const regionSec = `<section class="v2-sec"><h2 class="rc">By region</h2><p class="v2-sub">States grouped by region, so you can find yours quickly. Tap the state picker at the end for any one state.</p><div class="v2-regions">${regions}</div></section>`;
@@ -200,18 +206,18 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   const hm = (m) => { const hh = Math.floor(m / 60), r = m % 60; return hh ? `${hh} hr${r ? ` ${r} min` : ''}` : `${r} min`; };
   const pivot = `<section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot">
 <li><strong>First snow</strong>${X.snowIceLower48} alerts in the lower 48 named snow, ice or chains on the road, most of them in California and Montana. Counting British Columbia, ${D.snowRoadCount}.</li>
-<li><strong>Roadwork</strong>${n(rw)} roadwork alerts, ${rwP < 0 ? 'down' : 'up'} ${Math.abs(rwP)}% from September. Roadwork was ${share(rw, tot)} of all alerts.</li>
+<li><strong>Roadwork</strong>${n(rw)} roadwork alerts. Roadwork was ${share(rw, tot)} of all alerts.</li>
 <li><strong>Border</strong>The longest wait was ${hm(topWait.maxMin)} at ${esc(topWait.port)}, Texas, on Oct. 13. From U.S. Customs and Border Protection, saved every hour.</li>
 <li><strong>Seattle drawbridges</strong>Seattle's five drawbridges opened ${n(br)} times.</li>
 </ul></section>`;
 
   const lead48 = D.corridorDetail[0];
   const quotes = `<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page. Each state page has its own.</p>
-<div class="v2-quote"><strong>The month in one number</strong>“MileCheck archived ${n(tot)} road alerts that state and provincial transportation agencies published in October 2026, ${totP < 0 ? 'down' : 'up'} ${Math.abs(totP)}% from September.”</div>
+<div class="v2-quote"><strong>The month in one number</strong>“MileCheck archived ${n(tot)} road alerts that state and provincial transportation agencies published in October 2026.”</div>
 <div class="v2-quote"><strong>The busiest interstate</strong>“${lead48.route} had more alerts than any other interstate in October: ${n(lead48.total)} across ${lead48.states.length} states, most of them in ${NAMES[lead48.states[0][0]]}.”</div>
 <div class="v2-quote"><strong>Winter arrives</strong>“${X.snowIceLower48} alerts in the lower 48 named snow, ice or chains on the road in October, the first of the season in MileCheck's archive.”</div></section>`;
 
-  const lede = `Winter showed up on the roads in October, while roadwork kept going. MileCheck archived ${n(tot)} alerts that transportation agencies across all 50 states, British Columbia, Alberta and Manitoba published in October, each counted once. In states with a full September to compare, that is ${totP < 0 ? 'down' : 'up'} ${Math.abs(totP)}%. The first ${X.snowIceLower48} snow and ice alerts reached the lower 48, and ${lead48.route} was the busiest interstate.`;
+  const lede = `Winter showed up on the roads in October, while roadwork kept going. MileCheck archived ${n(tot)} alerts that transportation agencies across all 50 states, British Columbia, Alberta and Manitoba published in October, each counted once. The first ${X.snowIceLower48} snow and ice alerts reached the lower 48, and ${lead48.route} was the busiest interstate.`;
   h = h.replace('</head>', `<meta name="robots" content="noindex">\n${CSS}\n</head>`);
   h = h.replace(/<h1 class="article-title">[\s\S]*?<\/h1>/, `<h1 class="article-title">Winter reaches the roads while roadwork keeps going</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report, October 2026</p>`);
   h = h.replace(/<p class="article-lead">[\s\S]*?<\/p>/, `<p class="article-lead">${lede}</p>`);
