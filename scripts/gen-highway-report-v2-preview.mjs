@@ -176,7 +176,9 @@ function stateTop(st) {
   const headline = themes.length >= 2 ? `${name} in October: ${list3(themes.slice(0, 3))}` : crashTop ? `${name} in October: where the crashes were` : `${name}'s roads in October`;
 
   const lede = [];
-  if (workRoutes.length) lede.push(`Across ${name} in October, major roadwork ran on ${list3(workRoutes.slice(0, 4))}${mw.finished.length ? `, and ${mw.finished.length} project${mw.finished.length === 1 ? '' : 's'} reached ${mw.finished.length === 1 ? 'its' : 'their'} posted end date` : ''}.`);
+  // The generator keeps at most 15 per group, so a count of 15 means "15 or more" and is never stated as exact.
+  const cnt = (k) => (k >= 15 ? 'More than a dozen' : String(k));
+  if (workRoutes.length) lede.push(`Across ${name} in October, major roadwork ran on ${list3(workRoutes.slice(0, 4))}${mw.finished.length ? `. ${cnt(mw.finished.length)} project${mw.finished.length === 1 ? '' : 's'} reached ${mw.finished.length === 1 ? 'its' : 'their'} posted end date` : ''}.`);
   if (seasonal.length) lede.push(`${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} on the feed by Oct. 31.`);
   else if (snow) lede.push(`The first snow and ice alerts showed up, ${snow} of them.`);
   lede.push(`${dotOf(st).replace(/^./, (c) => c.toUpperCase())} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'}${crashTop ? `, ${crashTop[1]} of them on ${crashTop[0]}` : ''}.`);
@@ -184,8 +186,8 @@ function stateTop(st) {
   const nums = `<div class="v2-nums">
 <div><b>${n(j.crash)}</b><span>crash alerts</span></div>
 ${crashTop ? `<div><b>${esc(crashTop[0])}</b><span>most crash alerts, ${crashTop[1]}</span></div>` : ''}
-${(mw.ongoing.length + mw.started.length) ? `<div><b>${mw.ongoing.length + mw.started.length}</b><span>major roadwork projects on the feed</span></div>` : ''}
-${mw.finished.length ? `<div><b>${mw.finished.length}</b><span>major projects ended in October</span></div>` : seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct. 31</span></div>` : ''}
+${(mw.ongoing.length + mw.started.length) ? `<div><b>${(mw.ongoing.length >= 15 || mw.started.length >= 15) ? `${mw.ongoing.length + mw.started.length}+` : mw.ongoing.length + mw.started.length}</b><span>major roadwork projects on the feed</span></div>` : ''}
+${mw.finished.length ? `<div><b>${mw.finished.length >= 15 ? '15+' : mw.finished.length}</b><span>major projects ended in October</span></div>` : seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct. 31</span></div>` : ''}
 </div>`;
 
   const S = [];
