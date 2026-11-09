@@ -116,7 +116,7 @@ function stateTop(st) {
   if (rwP !== null && rwP <= -10) headline = `Roadwork winds down as ${name} heads into winter`;
   else if (snow > 0) headline = `The first snow and ice alerts arrive in ${name}`;
   else if (crP !== null && crP >= 15) headline = `Crash alerts climb in ${name}`;
-  else if (top && topShare >= 25) headline = `${top[0]} carries a quarter or more of ${name}'s alerts`;
+  else if (top && topShare >= 25) headline = `${top[0]} carried ${topShare}% of ${name}'s alerts in October`;
   else if (totP !== null && totP <= -10) headline = `A quieter month on ${name}'s roads`;
   else if (totP !== null && totP >= 10) headline = `A busier month on ${name}'s roads`;
   else headline = `Where ${name}'s roads were busiest in October`;
