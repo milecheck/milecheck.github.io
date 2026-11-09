@@ -158,10 +158,25 @@ ${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j
   return { headline, lede: lede.join(' '), nums, grid, body: pivot + quotes };
 }
 
-// Leah 2026-11-09: the top sign-up link is one short line that opens the sign-up page (/report/) in a new tab,
-// instead of scrolling to the form at the bottom.
-const SIGNUP = (from) => `<p class="mc-cta-line" style="margin:4px 0 18px;"><a href="/report/?from=${encodeURIComponent(from)}" target="_blank" rel="opener" style="display:inline-block;padding:6px 12px;border:1px solid #9fd3b8;border-radius:999px;background:#F4F8F6;color:#0f7a4f;font-size:13.5px;font-weight:700;text-decoration:none;line-height:1.3;">&#9993; Get the next report</a></p>`;
-const oneLineSignup = (h, from) => h.replace(/<p class="mc-cta-line"[\s\S]*?<\/p>/, SIGNUP(from));
+// Leah 2026-11-09: no sign-up line up high. A small pop-up asks once, after 25 seconds or 40% of the page,
+// with "Get the next report" (opens /report/ in a new tab, which has a back link) and "Already subscribed"
+// (never asks again on this device). "Not now" hides it for this visit.
+const POPUP = (from) => `<div id="mc-pop" role="dialog" aria-label="Get the next Highway Report" hidden style="position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:420px;margin:0 auto;background:#fff;border:1px solid #DCE9E1;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:16px 16px 12px;font-family:Inter,-apple-system,sans-serif;">
+<button type="button" data-x aria-label="Close" style="position:absolute;top:6px;right:8px;width:36px;height:36px;border:0;background:none;font-size:22px;color:#5C6670;cursor:pointer">&times;</button>
+<p style="margin:0 34px 12px 0;font-size:16px;font-weight:700;color:#0F1419;line-height:1.35">Get next month's Highway Report in your inbox.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><a href="/report/?from=${encodeURIComponent(from)}" target="_blank" rel="opener" data-go style="flex:1 1 150px;text-align:center;padding:11px 14px;min-height:44px;box-sizing:border-box;border-radius:10px;background:#0f7a4f;color:#fff;font-weight:700;text-decoration:none">Get the next report</a><button type="button" data-sub style="flex:1 1 130px;padding:11px 14px;min-height:44px;border-radius:10px;border:1px solid #C9CED3;background:#fff;color:#0F1419;font-weight:600;font-size:15px;cursor:pointer">Already subscribed</button></div></div>
+<script>(function(){var K='mcHrSub',p=document.getElementById('mc-pop');function g(s,k){try{return s.getItem(k)}catch(e){return null}}function set(s,k){try{s.setItem(k,'1')}catch(e){}}
+if(g(localStorage,K)||g(sessionStorage,K+'Seen'))return;var shown=false;function show(){if(shown)return;shown=true;set(sessionStorage,K+'Seen');p.hidden=false;removeEventListener('scroll',sc)}
+function sc(){if(scrollY>(document.body.scrollHeight-innerHeight)*0.4)show()}setTimeout(show,25000);addEventListener('scroll',sc,{passive:true});
+p.querySelector('[data-x]').onclick=function(){p.hidden=true};p.querySelector('[data-go]').addEventListener('click',function(){p.hidden=true});p.querySelector('[data-sub]').onclick=function(){set(localStorage,K);p.hidden=true}})()</script>`;
+const LINK = (from) => `<a href="/report/?from=${encodeURIComponent(from)}" target="_blank" rel="opener">`;
+const finish = (h, from) => {
+  h = h.replace(/<p class="mc-cta-line"[\s\S]*?<\/p>/, ''); // the old top line
+  h = h.replace(/(<p class="mc-cta-sub">)<a href="#subscribe"[^>]*>[^<]*/g, `$1${LINK(from)}Get the next report &rarr;`); // national: link under the state picker
+  // Leah 11/9: the month chart goes until the archive has clean earlier months.
+  h = h.replace(/<h2 class="rc">Compared with earlier months<\/h2>[\s\S]*?(?=<h2|<section class="v2-sec">)/, '');
+  return h.replace('</body>', `${POPUP(from)}\n</body>`);
+};
 let made = 0;
 for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 'index.html')) {
   const st = Object.keys(NAMES).find((k) => slug(k) + '.html' === f); if (!st || !J[st]) continue;
@@ -179,7 +194,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   // The corridor grid replaces the old 'Routes with the most alerts' list (same numbers, shown once).
   if (t.grid) { const before = h; h = h.replace(/<div class="pull-stat"><strong>Routes with the most alerts in [^<]*<\/strong>[\s\S]*?<\/ul><\/div>/, t.grid.replace('<h2 class="rc">Corridor grid</h2>', '<h3 style="margin:0 0 4px">Corridor grid</h3>')); if (h === before) h = h.replace(anchor, `${t.grid}\n      ${anchor}`); }
   h = h.replace(/\.\.\/road-report-october-2026\.html/g, '../road-report-october-2026-preview.html');
-  writeFileSync(resolve(OUT_DIR, f), oneLineSignup(h, `/blog/highway-report-october-2026-preview/${f}`)); made++;
+  writeFileSync(resolve(OUT_DIR, f), finish(h, `/blog/highway-report-october-2026-preview/${f}`)); made++;
 }
 
 // ---------- national page ----------
@@ -240,6 +255,6 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${m}\n${pivot}`);
   h = h.replace('<h2 class="rc">Border waits', `${rank}${regionSec}${corrSec}${quotes}\n      <h2 class="rc">Border waits`);
   h = h.replace(/highway-report-october-2026-states\//g, 'highway-report-october-2026-preview/');
-  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), oneLineSignup(h, '/blog/road-report-october-2026-preview.html'));
+  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), finish(h, '/blog/road-report-october-2026-preview.html'));
 }
 console.log(`preview: ${made} state pages + national`);
