@@ -153,7 +153,7 @@
 .v2-up{color:#B42318}.v2-down{color:#0f7a4f}.v2-flat{color:#5C6670}
 .v2-sec{margin:0 0 30px}.v2-sec h2{margin:0 0 6px}.v2-sec>p.v2-sub{margin:0 0 14px;color:#5C6670;font-size:15px}
 .v2-gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #E4E7EA;border-radius:10px}
-.v2-grid{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+.v2-grid{width:100%!important;border-collapse:collapse;font-size:14.5px;display:table!important}
 .v2-grid th{background:#0F1419;color:#fff;text-align:left;padding:10px 12px;font-size:12.5px;letter-spacing:.02em;text-transform:uppercase}
 .v2-grid td{padding:11px 12px;border-top:1px solid #E4E7EA;vertical-align:top}
 .v2-grid td:first-child{font-weight:700;white-space:nowrap}
@@ -225,16 +225,7 @@
 <div><b>47</b><span>roadwork alerts</span></div>
 </div>
 
-      <section class="v2-sec"><h2 class="rc">Corridor grid</h2><p class="v2-sub">The 5 routes with the most alerts in October, from New Hampshire's department of transportation's feed.</p>
-<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of state</th><th>Crash alerts</th></tr></thead><tbody>
-<tr><td>I-93</td><td>19</td><td>40%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>I-95</td><td>10</td><td>21%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>I-89</td><td>7</td><td>15%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>NH-101</td><td>4</td><td>8%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>NH-12</td><td>2</td><td>4%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-</tbody></table></div>
-<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="0 crash, 0 closure, 47 roadwork, 1 other"><i class="c" style="flex:0"></i><i class="k" style="flex:0"></i><i class="r" style="flex:47"></i><i class="o" style="flex:1"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section><section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>47 roadwork alerts, 98% of the month's total.</li><li><strong>Crashes</strong>0 crash alerts.</li><li><strong>Wildfires</strong>3 fires on the national wildfire feed were in New Hampshire by Oct. 31, covering 1 acres.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>I-93 led New Hampshire</strong>“I-93 had more alerts than any other road in New Hampshire in October: 19 of the 48 MileCheck archived from New Hampshire's department of transportation's feed, or 40%.”</div></section>
-<details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by New Hampshire's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
+      <details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by New Hampshire's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
 
       <h2 class="rc">Crashes</h2>
 
@@ -248,8 +239,17 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <div class="pull-stat"><strong>Routes with the most alerts in New Hampshire</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>I-93</strong> &mdash; 19</li><li><strong>I-95</strong> &mdash; 10</li><li><strong>I-89</strong> &mdash; 7</li><li><strong>NH-101</strong> &mdash; 4</li><li><strong>NH-12</strong> &mdash; 2</li></ul></div>
+      <section class="v2-sec"><h3 style="margin:0 0 4px">Corridor grid</h3><p class="v2-sub">The 5 routes with the most alerts in October, from New Hampshire's department of transportation's feed.</p>
+<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of state</th></tr></thead><tbody>
+<tr><td>I-93</td><td>19</td><td>40%</td></tr>
+<tr><td>I-95</td><td>10</td><td>21%</td></tr>
+<tr><td>I-89</td><td>7</td><td>15%</td></tr>
+<tr><td>NH-101</td><td>4</td><td>8%</td></tr>
+<tr><td>NH-12</td><td>2</td><td>4%</td></tr>
+</tbody></table></div>
+<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="0 crash, 0 closure, 47 roadwork, 1 other"><i class="c" style="flex:0"></i><i class="k" style="flex:0"></i><i class="r" style="flex:47"></i><i class="o" style="flex:1"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section>
 
+      <section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>47 roadwork alerts, 98% of the month's total.</li><li><strong>Wildfires</strong>3 fires on the national wildfire feed were in New Hampshire by Oct. 31, covering 1 acres.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>I-93 led New Hampshire</strong>“I-93 had more alerts than any other road in New Hampshire in October: 19 of the 48 MileCheck archived from New Hampshire's department of transportation's feed, or 40%.”</div></section>
       <h2 class="rc">Compared with earlier months</h2>
 
       <p>Unique alerts on New Hampshire's feed in each full month MileCheck has.</p><figure class="mo-chart"><div class="mo-rows"><div class="mo"><span class="mo-l">September</span><div class="mo-bar" style="width:100%"><i class="mo-c" style="flex:3" title="3 crash"></i><i class="mo-r" style="flex:68" title="68 roadwork"></i><i class="mo-o" style="flex:5" title="5 other"></i></div><span class="mo-n">76</span></div><div class="mo"><span class="mo-l">October</span><div class="mo-bar" style="width:63%"><i class="mo-r" style="flex:47" title="47 roadwork"></i><i class="mo-o" style="flex:1" title="1 other"></i></div><span class="mo-n">48</span></div></div><figcaption><span><i class="mo-c"></i>crash</span><span><i class="mo-k"></i>closure</span><span><i class="mo-r"></i>roadwork</span><span><i class="mo-o"></i>other</span></figcaption><ul class="article-list mo-list"><li><strong>September</strong> &mdash; 76 alerts: 3 crashes, 0 closures, 68 roadwork</li><li><strong>October</strong> &mdash; 48 alerts: 0 crashes, 0 closures, 47 roadwork</li></ul></figure>

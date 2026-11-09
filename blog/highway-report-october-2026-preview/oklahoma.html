@@ -153,7 +153,7 @@
 .v2-up{color:#B42318}.v2-down{color:#0f7a4f}.v2-flat{color:#5C6670}
 .v2-sec{margin:0 0 30px}.v2-sec h2{margin:0 0 6px}.v2-sec>p.v2-sub{margin:0 0 14px;color:#5C6670;font-size:15px}
 .v2-gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #E4E7EA;border-radius:10px}
-.v2-grid{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+.v2-grid{width:100%!important;border-collapse:collapse;font-size:14.5px;display:table!important}
 .v2-grid th{background:#0F1419;color:#fff;text-align:left;padding:10px 12px;font-size:12.5px;letter-spacing:.02em;text-transform:uppercase}
 .v2-grid td{padding:11px 12px;border-top:1px solid #E4E7EA;vertical-align:top}
 .v2-grid td:first-child{font-weight:700;white-space:nowrap}
@@ -225,16 +225,7 @@
 <div><b>59</b><span>roadwork alerts</span></div>
 </div>
 
-      <section class="v2-sec"><h2 class="rc">Corridor grid</h2><p class="v2-sub">The 5 routes with the most alerts in October, from Oklahoma's department of transportation's feed.</p>
-<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of state</th><th>Crash alerts</th></tr></thead><tbody>
-<tr><td>I-35</td><td>6</td><td>10%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>I-40</td><td>6</td><td>10%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>US-412</td><td>3</td><td>5%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>OK-100</td><td>2</td><td>3%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>OK-19</td><td>2</td><td>3%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-</tbody></table></div>
-<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="0 crash, 4 closure, 59 roadwork, 0 other"><i class="c" style="flex:0"></i><i class="k" style="flex:4"></i><i class="r" style="flex:59"></i><i class="o" style="flex:0"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section><section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>59 roadwork alerts, 94% of the month's total.</li><li><strong>Crashes</strong>0 crash alerts.</li><li><strong>Wildfires</strong>54 fires on the national wildfire feed were in Oklahoma by Oct. 31, covering 9,737 acres.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>I-35 led Oklahoma</strong>“I-35 had more alerts than any other road in Oklahoma in October: 6 of the 63 MileCheck archived from Oklahoma's department of transportation's feed, or 10%.”</div></section>
-<details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by Oklahoma's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
+      <details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by Oklahoma's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
 
       <h2 class="rc">Crashes</h2>
 
@@ -248,8 +239,17 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <div class="pull-stat"><strong>Routes with the most alerts in Oklahoma</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>I-35</strong> &mdash; 6</li><li><strong>I-40</strong> &mdash; 6</li><li><strong>US-412</strong> &mdash; 3</li><li><strong>OK-100</strong> &mdash; 2</li><li><strong>OK-19</strong> &mdash; 2</li></ul></div>
+      <section class="v2-sec"><h3 style="margin:0 0 4px">Corridor grid</h3><p class="v2-sub">The 5 routes with the most alerts in October, from Oklahoma's department of transportation's feed.</p>
+<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of state</th></tr></thead><tbody>
+<tr><td>I-35</td><td>6</td><td>10%</td></tr>
+<tr><td>I-40</td><td>6</td><td>10%</td></tr>
+<tr><td>US-412</td><td>3</td><td>5%</td></tr>
+<tr><td>OK-100</td><td>2</td><td>3%</td></tr>
+<tr><td>OK-19</td><td>2</td><td>3%</td></tr>
+</tbody></table></div>
+<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="0 crash, 4 closure, 59 roadwork, 0 other"><i class="c" style="flex:0"></i><i class="k" style="flex:4"></i><i class="r" style="flex:59"></i><i class="o" style="flex:0"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section>
 
+      <section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>59 roadwork alerts, 94% of the month's total.</li><li><strong>Wildfires</strong>54 fires on the national wildfire feed were in Oklahoma by Oct. 31, covering 9,737 acres.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>I-35 led Oklahoma</strong>“I-35 had more alerts than any other road in Oklahoma in October: 6 of the 63 MileCheck archived from Oklahoma's department of transportation's feed, or 10%.”</div></section>
       <h2 class="rc">Compared with earlier months</h2>
 
       <p>Unique alerts on Oklahoma's feed in each full month MileCheck has.</p><figure class="mo-chart"><div class="mo-rows"><div class="mo"><span class="mo-l">September</span><div class="mo-bar" style="width:89%"><i class="mo-k" style="flex:4" title="4 closure"></i><i class="mo-r" style="flex:51" title="51 roadwork"></i><i class="mo-o" style="flex:1" title="1 other"></i></div><span class="mo-n">56</span></div><div class="mo"><span class="mo-l">October</span><div class="mo-bar" style="width:100%"><i class="mo-k" style="flex:4" title="4 closure"></i><i class="mo-r" style="flex:59" title="59 roadwork"></i></div><span class="mo-n">63</span></div></div><figcaption><span><i class="mo-c"></i>crash</span><span><i class="mo-k"></i>closure</span><span><i class="mo-r"></i>roadwork</span><span><i class="mo-o"></i>other</span></figcaption><ul class="article-list mo-list"><li><strong>September</strong> &mdash; 56 alerts: 0 crashes, 4 closures, 51 roadwork</li><li><strong>October</strong> &mdash; 63 alerts: 0 crashes, 4 closures, 59 roadwork</li></ul></figure>

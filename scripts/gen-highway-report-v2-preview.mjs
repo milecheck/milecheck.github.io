@@ -70,7 +70,7 @@ const CSS = `<style data-v2>
 .v2-up{color:#B42318}.v2-down{color:#0f7a4f}.v2-flat{color:#5C6670}
 .v2-sec{margin:0 0 30px}.v2-sec h2{margin:0 0 6px}.v2-sec>p.v2-sub{margin:0 0 14px;color:#5C6670;font-size:15px}
 .v2-gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #E4E7EA;border-radius:10px}
-.v2-grid{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+.v2-grid{width:100%!important;border-collapse:collapse;font-size:14.5px;display:table!important}
 .v2-grid th{background:#0F1419;color:#fff;text-align:left;padding:10px 12px;font-size:12.5px;letter-spacing:.02em;text-transform:uppercase}
 .v2-grid td{padding:11px 12px;border-top:1px solid #E4E7EA;vertical-align:top}
 .v2-grid td:first-child{font-weight:700;white-space:nowrap}
@@ -135,14 +135,13 @@ function stateTop(st) {
 </div>`;
 
   const grid = routes.length ? `<section class="v2-sec"><h2 class="rc">Corridor grid</h2><p class="v2-sub">The ${routes.length} routes with the most alerts in October, from ${dotOf(st)}'s feed.</p>
-<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of ${CANADA.has(st) ? 'province' : 'state'}</th><th>Crash alerts</th></tr></thead><tbody>
-${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j.total)}</td><td>${crashR[r] != null ? n(crashR[r]) : '<span style="color:#98A2B3">not in top 3</span>'}</td></tr>`).join('\n')}
+<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of ${CANADA.has(st) ? 'province' : 'state'}</th></tr></thead><tbody>
+${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j.total)}</td></tr>`).join('\n')}
 </tbody></table></div>
 <p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p>${mixBar(j.crash, j.closure, roadwork(j), j.total - j.crash - j.closure - roadwork(j))}${KEY}</section>` : '';
 
   const piv = [];
   piv.push(`<li><strong>Roadwork</strong>${n(roadwork(j))} roadwork alerts, ${share(roadwork(j), j.total)} of the month's total.</li>`);
-  piv.push(`<li><strong>Crashes</strong>${n(j.crash)} crash alerts.${crashTop ? ` ${route(st, crashTop[0])} had the most, ${crashTop[1]}.` : ''}</li>`);
   if (rwP !== null) piv.push(`<li><strong>Roadwork</strong>${n(roadwork(j))} roadwork alerts in October, ${rwP < 0 ? 'down' : rwP > 0 ? 'up' : 'level'}${rwP ? ` ${Math.abs(rwP)}%` : ''} from ${n(roadwork(p))} in September.</li>`);
   if (crP !== null) piv.push(`<li><strong>Crashes</strong>${n(j.crash)} crash alerts, ${crP < 0 ? 'down' : crP > 0 ? 'up' : 'level'}${crP ? ` ${Math.abs(crP)}%` : ''} from ${n(p.crash)} in September.${crashTop ? ` ${route(st, crashTop[0])} had the most, ${crashTop[1]}.` : ''}</li>`);
   if (snow) piv.push(`<li><strong>First snow</strong>${snow} alert${snow === 1 ? '' : 's'} in October named snow, ice or chains on the road. The map below the grid shows where.</li>`);
@@ -156,7 +155,7 @@ ${routes.map(([r, c]) => `<tr><td>${esc(r)}</td><td>${n(c)}</td><td>${share(c, j
   if (crashTop) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${dotOf(st).replace(/^./, (c) => c.toUpperCase())} published ${n(j.crash)} crash alerts in October, by MileCheck's count. ${route(st, crashTop[0])} had the most, ${crashTop[1]}.”</div>`);
   if (false) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${dotOf(st).replace(/^./, (c) => c.toUpperCase())} published ${n(j.crash)} crash alerts in October, ${crP < 0 ? 'down' : 'up'} ${Math.abs(crP)}% from September, by MileCheck's count. ${route(st, crashTop[0])} had the most, ${crashTop[1]}.”</div>`);
   const quotes = q.length ? `<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p>${q.join('')}</section>` : '';
-  return { headline, lede: lede.join(' '), nums, body: grid + pivot + quotes };
+  return { headline, lede: lede.join(' '), nums, grid, body: pivot + quotes };
 }
 
 // Leah 2026-11-09: the top sign-up link is one short line that opens the sign-up page (/report/) in a new tab,
@@ -173,7 +172,12 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   // Keep any personal line Leah added after the stock lead (e.g. Utah's).
   h = h.replace(/<p class="article-lead">([\s\S]*?)<\/p>/, (m, inner) => { const keep = (inner.match(/national MileCheck Highway Report, October 2026<\/a>\.\s*([\s\S]*)$/) || [])[1] || ''; return `<p class="article-lead">${esc(t.lede)}${keep ? ' ' + keep : ''} Part of the <a href="../road-report-october-2026-preview.html">national report</a>.</p>`; });
   h = h.replace(/<div class="headline-nums">[\s\S]*?<\/div><\/div>/, t.nums);
-  h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${t.body}\n${m.replace('How we got these numbers', 'Where these numbers come from')}`);
+  h = h.replace('How we got these numbers', 'Where these numbers come from');
+  // Leah 11/9: her maps come first, right after the numbers; the new sections follow them.
+  const anchor = ['<h2 class="rc">Compared with earlier months', '<h2 class="rc">Winter closures', '<h2>More on'].find((a) => h.includes(a));
+  h = h.replace(anchor, `${t.body}\n      ${anchor}`);
+  // The corridor grid replaces the old 'Routes with the most alerts' list (same numbers, shown once).
+  if (t.grid) { const before = h; h = h.replace(/<div class="pull-stat"><strong>Routes with the most alerts in [^<]*<\/strong>[\s\S]*?<\/ul><\/div>/, t.grid.replace('<h2 class="rc">Corridor grid</h2>', '<h3 style="margin:0 0 4px">Corridor grid</h3>')); if (h === before) h = h.replace(anchor, `${t.grid}\n      ${anchor}`); }
   h = h.replace(/\.\.\/road-report-october-2026\.html/g, '../road-report-october-2026-preview.html');
   writeFileSync(resolve(OUT_DIR, f), oneLineSignup(h)); made++;
 }
@@ -232,7 +236,9 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
 <div><b>${n(D.byType.closure)}</b><span>closure alerts</span>${chg(NT.closure, PT.closure)}</div>
 <div><b>${n(rw)}</b><span>roadwork alerts</span>${chg(NT.construction, PT.construction)}</div>
 </div>`);
-  h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${pivot}${rank}${regionSec}${corrSec}${quotes}\n${m.replace('How we got these numbers', 'Where these numbers come from')}`);
+  h = h.replace('How we got these numbers', 'Where these numbers come from');
+  h = h.replace(/(<details class="method-fold">[\s\S]*?<\/details>)/, (m) => `${m}\n${pivot}`);
+  h = h.replace('<h2 class="rc">Border waits', `${rank}${regionSec}${corrSec}${quotes}\n      <h2 class="rc">Border waits`);
   h = h.replace(/highway-report-october-2026-states\//g, 'highway-report-october-2026-preview/');
   writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), oneLineSignup(h));
 }

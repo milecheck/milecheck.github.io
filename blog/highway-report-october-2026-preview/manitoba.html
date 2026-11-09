@@ -153,7 +153,7 @@
 .v2-up{color:#B42318}.v2-down{color:#0f7a4f}.v2-flat{color:#5C6670}
 .v2-sec{margin:0 0 30px}.v2-sec h2{margin:0 0 6px}.v2-sec>p.v2-sub{margin:0 0 14px;color:#5C6670;font-size:15px}
 .v2-gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #E4E7EA;border-radius:10px}
-.v2-grid{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+.v2-grid{width:100%!important;border-collapse:collapse;font-size:14.5px;display:table!important}
 .v2-grid th{background:#0F1419;color:#fff;text-align:left;padding:10px 12px;font-size:12.5px;letter-spacing:.02em;text-transform:uppercase}
 .v2-grid td{padding:11px 12px;border-top:1px solid #E4E7EA;vertical-align:top}
 .v2-grid td:first-child{font-weight:700;white-space:nowrap}
@@ -225,16 +225,7 @@
 <div><b>88</b><span>roadwork alerts</span></div>
 </div>
 
-      <section class="v2-sec"><h2 class="rc">Corridor grid</h2><p class="v2-sub">The 5 routes with the most alerts in October, from Manitoba 511's feed.</p>
-<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of province</th><th>Crash alerts</th></tr></thead><tbody>
-<tr><td>MB-10</td><td>14</td><td>6%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>MB-5</td><td>11</td><td>5%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>MB-34</td><td>7</td><td>3%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>MB-101</td><td>7</td><td>3%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-<tr><td>MB-3</td><td>6</td><td>3%</td><td><span style="color:#98A2B3">not in top 3</span></td></tr>
-</tbody></table></div>
-<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="0 crash, 35 closure, 88 roadwork, 112 other"><i class="c" style="flex:0"></i><i class="k" style="flex:35"></i><i class="r" style="flex:88"></i><i class="o" style="flex:112"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section><section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>88 roadwork alerts, 37% of the month's total.</li><li><strong>Crashes</strong>0 crash alerts.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>MB-10 led Manitoba</strong>“MB-10 had more alerts than any other road in Manitoba in October: 14 of the 235 MileCheck archived from Manitoba 511's feed, or 6%.”</div></section>
-<details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by the Manitoba 511 feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
+      <details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by the Manitoba 511 feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
 
       <h2 class="rc">Crashes</h2>
 
@@ -248,8 +239,17 @@
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <div class="pull-stat"><strong>Routes with the most alerts in Manitoba</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>MB-10</strong> &mdash; 14</li><li><strong>MB-5</strong> &mdash; 11</li><li><strong>MB-34</strong> &mdash; 7</li><li><strong>MB-101</strong> &mdash; 7</li><li><strong>MB-3</strong> &mdash; 6</li></ul></div>
+      <section class="v2-sec"><h3 style="margin:0 0 4px">Corridor grid</h3><p class="v2-sub">The 5 routes with the most alerts in October, from Manitoba 511's feed.</p>
+<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of province</th></tr></thead><tbody>
+<tr><td>MB-10</td><td>14</td><td>6%</td></tr>
+<tr><td>MB-5</td><td>11</td><td>5%</td></tr>
+<tr><td>MB-34</td><td>7</td><td>3%</td></tr>
+<tr><td>MB-101</td><td>7</td><td>3%</td></tr>
+<tr><td>MB-3</td><td>6</td><td>3%</td></tr>
+</tbody></table></div>
+<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="0 crash, 35 closure, 88 roadwork, 112 other"><i class="c" style="flex:0"></i><i class="k" style="flex:35"></i><i class="r" style="flex:88"></i><i class="o" style="flex:112"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section>
 
+      <section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>88 roadwork alerts, 37% of the month's total.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>MB-10 led Manitoba</strong>“MB-10 had more alerts than any other road in Manitoba in October: 14 of the 235 MileCheck archived from Manitoba 511's feed, or 6%.”</div></section>
       <h2 class="rc">Compared with earlier months</h2>
 
       <p>October is the first full month of Manitoba's feed in MileCheck's archive. Next month's report compares it with October.</p>
