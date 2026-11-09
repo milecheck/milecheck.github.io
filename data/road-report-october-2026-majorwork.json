@@ -1,0 +1,4435 @@
+{
+ "PA": {
+  "ongoing": [
+   {
+    "route": "I-83",
+    "place": "CUMBERLAND",
+    "mile": 41,
+    "closure": false,
+    "headline": "Roadwork on I-83 northbound between Exit: EXIT 41B - LEMOYNE and Exit 43: CAPITOL/2ND ST.  There is a hauler restriction.",
+    "start": "2024-11-29",
+    "end": "2035-01-08",
+    "projectDays": 3692,
+    "lat": 40.244,
+    "lon": -76.885
+   },
+   {
+    "route": "I-83",
+    "place": "DAUPHIN",
+    "mile": 43,
+    "closure": false,
+    "headline": "Roadwork on I-83 southbound between Exit 43: CAPITOL/2ND ST and Exit 41B: LEMOYNE.  There is a hauler restriction.",
+    "start": "2024-11-29",
+    "end": "2035-01-08",
+    "projectDays": 3692,
+    "lat": 40.252,
+    "lon": -76.871
+   },
+   {
+    "route": "I-80",
+    "place": "JEFFERSON",
+    "mile": 80.3,
+    "closure": false,
+    "headline": "Roadwork on I-80 westbound between .7 miles west of Exit 81: PA 28 - HAZEN and .9 miles west of Exit 78: PA 36 - BROOKVILLE/SIGEL.  There is a traffic disruption.",
+    "start": "2024-09-30",
+    "end": "2028-09-29",
+    "projectDays": 1460,
+    "lat": 41.17,
+    "lon": -79.053
+   },
+   {
+    "route": "I-80",
+    "place": "JEFFERSON",
+    "mile": 77.4,
+    "closure": false,
+    "headline": "Roadwork on I-80 eastbound between .6 miles west of Exit 78: PA 36 - SIGEL/BROOKVILLE and .3 miles west of Exit 81: PA 28 - HAZEN.  There is a traffic disruption.",
+    "start": "2024-09-30",
+    "end": "2028-09-29",
+    "projectDays": 1460,
+    "lat": 41.172,
+    "lon": -79.108
+   },
+   {
+    "route": "I-80",
+    "place": "CLARION",
+    "mile": 53.9,
+    "closure": false,
+    "headline": "Roadwork on I-80 eastbound between .9 miles east of Exit 53: PA 338 - KNOX and .5 miles east of Exit : WEIGH STATION EAST RD.  There is a shoulder closed.",
+    "start": "2024-05-07",
+    "end": "2026-12-21",
+    "projectDays": 958,
+    "lat": 41.183,
+    "lon": -79.535
+   },
+   {
+    "route": "I-80",
+    "place": "CENTRE",
+    "mile": 159.7,
+    "closure": false,
+    "headline": "Roadwork on I-80 eastbound between 1.3 miles west of Exit 161: US 220 SOUTH/PA 26 - BELLEFONTE and .1 miles west of Exit 163: PA 26 NORTH - JACKSONVILLE HOWARD.  There is a traffic disruption.",
+    "start": "2024-12-17",
+    "end": "2027-04-01",
+    "projectDays": 835,
+    "lat": 40.952,
+    "lon": -77.744
+   }
+  ],
+  "started": [
+   {
+    "route": "I-80",
+    "place": "JEFFERSON",
+    "mile": "0.0",
+    "closure": false,
+    "headline": "ROADWORK on I-80 Westbound At MM 81. All Lanes Disrupted.",
+    "start": "2026-10-30",
+    "end": "2028-09-29",
+    "projectDays": 700,
+    "lat": 41.17,
+    "lon": -79.053
+   },
+   {
+    "route": "I-80",
+    "place": "JEFFERSON",
+    "mile": "0.0",
+    "closure": false,
+    "headline": "ROADWORK on I-80 Eastbound At MM 78. All Lanes Disrupted, Left Shoulder Disrupted, Right Shoulder Disrupted.",
+    "start": "2026-10-30",
+    "end": "2028-09-29",
+    "projectDays": 700,
+    "lat": 41.172,
+    "lon": -79.108
+   },
+   {
+    "route": "PA-309",
+    "place": "LEHIGH",
+    "mile": "0.0",
+    "closure": false,
+    "headline": "ROADWORK on PA-309 Northbound At SR 0078 SH. All Lanes Disrupted, Left Shoulder Disrupted, Right Shoulder Disrupted.",
+    "start": "2026-10-13",
+    "end": "2027-10-13",
+    "projectDays": 365,
+    "lat": 40.576,
+    "lon": -75.547
+   },
+   {
+    "route": "PA-309",
+    "place": "LEHIGH",
+    "mile": "0.0",
+    "closure": false,
+    "headline": "ROADWORK on PA-309 Southbound At Exit US 22 EAST - ALLENTOWN. All Lanes Disrupted, Left Shoulder Disrupted, Right Shoulder Disrupted.",
+    "start": "2026-10-13",
+    "end": "2027-10-13",
+    "projectDays": 365,
+    "lat": 40.599,
+    "lon": -75.559
+   },
+   {
+    "route": "US-209",
+    "place": "CARBON",
+    "mile": "0.0",
+    "closure": false,
+    "headline": "ROADWORK on US-209 Southbound between RACE ST and OAK DR. Right Shoulder Blocked.",
+    "start": "2026-10-15",
+    "end": "2027-09-30",
+    "projectDays": 350,
+    "lat": 40.859,
+    "lon": -75.718
+   },
+   {
+    "route": "I-79",
+    "place": "ALLEGHENY",
+    "mile": "0.0",
+    "closure": false,
+    "headline": "ROADWORK on I-79 Southbound At Exit 73 PA 910 - WEXFORD. Right Lane (of 3 Lanes) Blocked, Right Shoulder Blocked.",
+    "start": "2026-10-30",
+    "end": "2027-09-30",
+    "projectDays": 335,
+    "lat": 40.621,
+    "lon": -80.096
+   }
+  ],
+  "finished": [
+   {
+    "route": "US-219",
+    "place": "CAMBRIA",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork on US 219 northbound between Exit: GALLERIA DR and Exit: PA 869 EAST - ST MICHAEL/SIDMAN.  There is a lane restriction.",
+    "start": "2026-03-31",
+    "end": "2026-10-29",
+    "projectDays": 212,
+    "lat": 40.298,
+    "lon": -78.839
+   },
+   {
+    "route": "US-219",
+    "place": "CAMBRIA",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork on US 219 southbound between Exit: PA 869 EAST - ST MICHAEL/SIDMAN and Exit: PA 56 WEST - JOHNSTOWN EXPRESSWAY.  There is a lane restriction.",
+    "start": "2026-03-31",
+    "end": "2026-10-29",
+    "projectDays": 212,
+    "lat": 40.347,
+    "lon": -78.779
+   },
+   {
+    "route": "I-376",
+    "place": "BEAVER",
+    "mile": 38,
+    "closure": false,
+    "headline": "Roadwork on I-376 eastbound between Exit 38: PA 68 - BEAVER/MIDLAND and Exit 39: PA 18 - MONACA/SHIPPINGPORT.  There is a lane restriction.",
+    "start": "2026-04-30",
+    "end": "2026-10-30",
+    "projectDays": 183,
+    "lat": 40.685,
+    "lon": -80.335
+   },
+   {
+    "route": "US-22",
+    "place": "CAMBRIA",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork on US 22 eastbound between Exit: PA 53 - CRESSON and Exit: GALLITZIN.  There is a lane restriction.",
+    "start": "2026-04-16",
+    "end": "2026-10-15",
+    "projectDays": 182,
+    "lat": 40.448,
+    "lon": -78.6
+   },
+   {
+    "route": "US-11",
+    "place": "CUMBERLAND",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork on US 11 northbound between COLLEGE HILL RD and ROCKVILLE BL.  There is a lane restriction.",
+    "start": "2026-04-27",
+    "end": "2026-10-26",
+    "projectDays": 182,
+    "lat": 40.302,
+    "lon": -76.927
+   },
+   {
+    "route": "US-11",
+    "place": "PERRY",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork on US 11 southbound between ROCKVILLE BL and SHADY LN.  There is a lane restriction.",
+    "start": "2026-04-29",
+    "end": "2026-10-26",
+    "projectDays": 181,
+    "lat": 40.331,
+    "lon": -76.92
+   }
+  ]
+ },
+ "MS": {
+  "ongoing": [
+   {
+    "route": "US-90",
+    "place": "Hancock",
+    "mile": "",
+    "closure": true,
+    "headline": "Road Work : US 90 W between MS 604 and Camp Rd - Road closed",
+    "start": "2022-05-24",
+    "end": "2028-12-29",
+    "projectDays": 2411,
+    "lat": 30.239,
+    "lon": -89.615
+   },
+   {
+    "route": "MS-7",
+    "place": "Lafayette",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work :  MS 7 between CR 370 and US 278 - Expect delays",
+    "start": "2025-12-04",
+    "end": "2029-10-02",
+    "projectDays": 1397,
+    "lat": 34.255,
+    "lon": -89.544
+   },
+   {
+    "route": "US-51",
+    "place": "Madison",
+    "mile": "",
+    "closure": true,
+    "headline": "Road Work : US 51 at 8.5 miles north of Canton - Road closed",
+    "start": "2025-04-11",
+    "end": "2028-10-16",
+    "projectDays": 1284,
+    "lat": 32.732,
+    "lon": -89.994
+   },
+   {
+    "route": "MS-19",
+    "place": "Neshoba",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : MS 19 between W Tucker Cir and MS 492 - Expect delays",
+    "start": "2025-07-07",
+    "end": "2028-07-07",
+    "projectDays": 1096,
+    "lat": 32.703,
+    "lon": -89.05
+   },
+   {
+    "route": "I-10",
+    "place": "Harrison",
+    "mile": 28,
+    "closure": false,
+    "headline": "Road Work : I-10 between Long Beach / County Farm Rd EX 28 and MS 43 / MS 603 / Bay St Louis EX 13 - Expect delays",
+    "start": "2024-03-14",
+    "end": "2027-03-01",
+    "projectDays": 1082,
+    "lat": 30.417,
+    "lon": -89.189
+   },
+   {
+    "route": "US-98",
+    "place": "Marion",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : US 98 at Pearl River Bridge - Expect delays",
+    "start": "2024-01-29",
+    "end": "2027-01-04",
+    "projectDays": 1071,
+    "lat": 31.238,
+    "lon": -89.847
+   }
+  ],
+  "started": [
+   {
+    "route": "US-45",
+    "place": "Noxubee",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : US 45 between Buggs Ferry Rd and Hopewell Rd - Expect delays",
+    "start": "2026-10-01",
+    "end": "2027-09-30",
+    "projectDays": 364,
+    "lat": 33.161,
+    "lon": -88.56
+   },
+   {
+    "route": "MS-16",
+    "place": "Yazoo",
+    "mile": "",
+    "closure": true,
+    "headline": "Road Work : MS 16 between MS 3 and Carter Rd - Road closed",
+    "start": "2026-10-22",
+    "end": "2027-03-01",
+    "projectDays": 130,
+    "lat": 32.855,
+    "lon": -90.431
+   },
+   {
+    "route": "MS-145",
+    "place": "Lee",
+    "mile": "",
+    "closure": true,
+    "headline": "Road Work : MS 145 between Old Us Hwy 45 and Elizabeth Ave - Road closed",
+    "start": "2026-10-22",
+    "end": "2027-02-28",
+    "projectDays": 129,
+    "lat": 34.094,
+    "lon": -88.638
+   },
+   {
+    "route": "MS-481",
+    "place": "Smith",
+    "mile": "",
+    "closure": true,
+    "headline": "Road Work : MS 481 between MS 902 and CR 539 - Road closed",
+    "start": "2026-10-06",
+    "end": "2026-12-31",
+    "projectDays": 86,
+    "lat": 32.135,
+    "lon": -89.548
+   },
+   {
+    "route": "MS-482",
+    "place": "Neshoba",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : MS 482 between MS 16 and MS 491 - Expect delays",
+    "start": "2026-10-01",
+    "end": "2026-12-02",
+    "projectDays": 62,
+    "lat": 32.769,
+    "lon": -89.045
+   },
+   {
+    "route": "MS-16",
+    "place": "Neshoba",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : MS 16 between MS 15 and BIA Rd 2218 - Expect delays",
+    "start": "2026-10-01",
+    "end": "2026-12-02",
+    "projectDays": 61,
+    "lat": 32.758,
+    "lon": -89.148
+   }
+  ],
+  "finished": [
+   {
+    "route": "MS-15",
+    "place": "Union",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : MS 15 between Iron Horse Rd and I-22 - Expect delays",
+    "start": "2023-09-13",
+    "end": "2026-10-29",
+    "projectDays": 1142,
+    "lat": 34.374,
+    "lon": -89.025
+   },
+   {
+    "route": "US-98",
+    "place": "Franklin",
+    "mile": "",
+    "closure": true,
+    "headline": "Road Work : US 98 between Berrytown Rd and MS 556 - Road closed",
+    "start": "2023-11-06",
+    "end": "2026-10-15",
+    "projectDays": 1074,
+    "lat": 31.434,
+    "lon": -90.855
+   },
+   {
+    "route": "I-20",
+    "place": "Hinds",
+    "mile": 19,
+    "closure": false,
+    "headline": "Road Work : I-20 W between MS 22 / Flora / Edwards EX 19 and Flowers / Ceres Blvd EX 15 - Left lane closed",
+    "start": "2025-04-14",
+    "end": "2026-10-26",
+    "projectDays": 560,
+    "lat": 32.353,
+    "lon": -90.626
+   },
+   {
+    "route": "I-20",
+    "place": "Warren",
+    "mile": 15,
+    "closure": false,
+    "headline": "Road Work : I-20 E between Flowers / Ceres Blvd EX 15 and MS 22 / Flora / Edwards EX 19 - Right lane closed",
+    "start": "2025-04-28",
+    "end": "2026-10-26",
+    "projectDays": 546,
+    "lat": 32.353,
+    "lon": -90.635
+   },
+   {
+    "route": "US-11",
+    "place": "Pearl River",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : US 11 N between Goodyear Blvd and MS 43 - Expect delays",
+    "start": "2025-10-03",
+    "end": "2026-10-09",
+    "projectDays": 371,
+    "lat": 30.535,
+    "lon": -89.675
+   },
+   {
+    "route": "US-51",
+    "place": "Yalobusha",
+    "mile": "",
+    "closure": false,
+    "headline": "Road Work : US 51 between MS 7 and MS 32 - Expect delays",
+    "start": "2025-10-13",
+    "end": "2026-10-16",
+    "projectDays": 368,
+    "lat": 33.859,
+    "lon": -89.849
+   }
+  ]
+ },
+ "OH": {
+  "ongoing": [
+   {
+    "route": "I-75",
+    "place": "I-75 Southbound Ramp (Exit 1A) to Second Street",
+    "mile": "",
+    "closure": true,
+    "headline": "On or after Tuesday, June 30, the ramp from I-75 South to Second Street (Exit 1A) will be closed at 11 p.m. to start demolition. Traffic will be detoured by way of W. 5th Street (Exit 1C) and Race Street to Second Street",
+    "start": "2026-06-30",
+    "end": "2032-11-02",
+    "projectDays": 2317,
+    "lat": 39.1,
+    "lon": -84.522
+   },
+   {
+    "route": "I-75",
+    "place": "I-75 Pump Station/Combined Sewer Overflow for I-75 Widening northbound.",
+    "mile": 9.8,
+    "closure": false,
+    "headline": "Phase 8B of the Mill Creek Expressway Project. Project will construct a new Pump Station and Combined Sewer Overflow for the widening of IR 75. Phases 8+8C widen for additional through lanes, rehabilitate existing paveme",
+    "start": "2024-06-05",
+    "end": "2029-01-01",
+    "projectDays": 1671,
+    "lat": 39.198,
+    "lon": -84.471
+   },
+   {
+    "route": "I-70",
+    "place": "The SR 315 southbound ramp to I-70 eastbound",
+    "mile": 99.1,
+    "closure": true,
+    "headline": "The SR 315 southbound ramp to I-70 eastbound will close starting 10 p.m. Friday, May 17, 2024, for multiple years.",
+    "start": "2024-05-19",
+    "end": "2028-06-02",
+    "projectDays": 1475,
+    "lat": 39.951,
+    "lon": -83.016
+   },
+   {
+    "route": "I-70",
+    "place": "4th Street over I-70 northbound.",
+    "mile": "",
+    "closure": false,
+    "headline": "4th street is reduced to two lanes on the bridge over I-70.",
+    "start": "2024-01-12",
+    "end": "2027-08-30",
+    "projectDays": 1326,
+    "lat": 39.953,
+    "lon": -82.994
+   },
+   {
+    "route": "I-90",
+    "place": "I-90 eastbound and westbound from Ohio Turnpike toll booth to SR 611 interchange",
+    "mile": 146.7,
+    "closure": false,
+    "headline": "I-90 east/west, from the OH Turnpike toll booth to the SR 611 interchange, will have shoulder closures and single lane closures for a major reconstruction project. I-90 west is split into two lanes with the left lane cro",
+    "start": "2025-06-16",
+    "end": "2028-09-01",
+    "projectDays": 1173,
+    "lat": 41.41,
+    "lon": -82.1
+   },
+   {
+    "route": "I-75",
+    "place": "Westboundern Avenue on ramp to I-75 Southbound.",
+    "mile": "",
+    "closure": true,
+    "headline": "The ramp from Western Avenue to I-75 South is closed as part of the Linn Street Bridge reconstruction project. This is a permanent closure. The ramp is closed, and motorists may follow Freeman Avenue and the 6th Street/U",
+    "start": "2026-04-17",
+    "end": "2029-05-02",
+    "projectDays": 1111,
+    "lat": 39.107,
+    "lon": -84.532
+   }
+  ],
+  "started": [
+   {
+    "route": "OH-108",
+    "place": "SR 108 to westbound US 24",
+    "mile": "",
+    "closure": true,
+    "headline": "State Route 108/Scott St. on-ramp to westbound U.S. Route 24 will close for reconstruction beginning Thursday, October 1 through mid-to-late May 2027. Detour using Scott St./SR 108 to eastbound U.S. 24 to Industrial Dr. ",
+    "start": "2026-10-01",
+    "end": "2027-05-18",
+    "projectDays": 229,
+    "lat": 41.408,
+    "lon": -84.133
+   },
+   {
+    "route": "OH-104",
+    "place": "SR 104 westbound over Scioto River",
+    "mile": 90.1,
+    "closure": false,
+    "headline": "Shoulder closures on SR 104 westbound over Scioto River",
+    "start": "2026-10-09",
+    "end": "2027-01-01",
+    "projectDays": 84,
+    "lat": 39.917,
+    "lon": -83.011
+   },
+   {
+    "route": "OH-510",
+    "place": "SR 510 northbound of Clyde.",
+    "mile": "",
+    "closure": false,
+    "headline": "State Route 510, between Clyde and Buck Creek, will experience lane restrictions for resurfacing through November.",
+    "start": "2026-10-01",
+    "end": "2026-12-01",
+    "projectDays": 61,
+    "lat": 41.315,
+    "lon": -82.975
+   },
+   {
+    "route": "OH-3",
+    "place": "SR 3 just southbound of Triway Lane.",
+    "mile": 194.4,
+    "closure": false,
+    "headline": "SR 3, just south of Triway Lane and just south of McKee Road, will be reduced to one lane of traffic for two culvert replacements. Traffic will be maintained by portable traffic signals.",
+    "start": "2026-10-02",
+    "end": "2026-12-01",
+    "projectDays": 60,
+    "lat": 40.759,
+    "lon": -81.99
+   },
+   {
+    "route": "OH-521",
+    "place": "SR 521 over Alum Creek eastbound.",
+    "mile": 6.8,
+    "closure": false,
+    "headline": "SR 521 over Alum Creek is reduced to one lane. Two-way traffic is being maintained using a temporary traffic signal.",
+    "start": "2026-10-01",
+    "end": "2026-11-13",
+    "projectDays": 43,
+    "lat": 40.33,
+    "lon": -82.957
+   },
+   {
+    "route": "I-75",
+    "place": "Southbound I-75 at Bays Road",
+    "mile": "",
+    "closure": false,
+    "headline": "Southbound I-75 near Bays Road, south of U.S. 6, will experience right lane and shoulder closure for a slope repair beginning Monday, Oct. 5 through mid-November.",
+    "start": "2026-10-05",
+    "end": "2026-11-15",
+    "projectDays": 41,
+    "lat": 41.268,
+    "lon": -83.648
+   }
+  ],
+  "finished": [
+   {
+    "route": "I-71",
+    "place": "I-71 between U.S. 62 and SR 56 southbound.",
+    "mile": 89.4,
+    "closure": false,
+    "headline": "Expect daytime and nightly lane closures on I-71 between U.S. 62 and SR 56 starting 3-1-2023 through 10-1-2026.",
+    "start": "2023-03-01",
+    "end": "2026-10-02",
+    "projectDays": 1311,
+    "lat": 39.797,
+    "lon": -83.222
+   },
+   {
+    "route": "I-271",
+    "place": "I-271 Express Lanes under U.S. 6 southbound.",
+    "mile": "",
+    "closure": false,
+    "headline": "The I-271 Express Lanes under U.S. 6 will have daily lane restrictions through July 2027 for overhead work.",
+    "start": "2026-02-16",
+    "end": "2026-10-17",
+    "projectDays": 243,
+    "lat": 41.585,
+    "lon": -81.448
+   },
+   {
+    "route": "I-271",
+    "place": "I-271 Local Lanes under U.S. 6 northbound.",
+    "mile": "",
+    "closure": false,
+    "headline": "The I-271 Local Lanes under U.S. 6 will have daily lane restrictions through July 2027 for overhead work.",
+    "start": "2026-02-19",
+    "end": "2026-10-17",
+    "projectDays": 240,
+    "lat": 41.585,
+    "lon": -81.448
+   },
+   {
+    "route": "OH-2",
+    "place": "SR 2 eastbound and westbound from the bridges over Frailey Rd to the Lorain Coun",
+    "mile": 154.7,
+    "closure": false,
+    "headline": "SR 2 eastbound and westbound, from just east of the structures over Frailey Road to the Lorain County line, will have lane closures for a resurfacing project. One 11-ft lane of traffic will be maintained in each directio",
+    "start": "2026-03-09",
+    "end": "2026-10-17",
+    "projectDays": 222,
+    "lat": 41.397,
+    "lon": -82.389
+   },
+   {
+    "route": "OH-176",
+    "place": "SR 176 SB to I-480 EB eastbound.",
+    "mile": "",
+    "closure": false,
+    "headline": "SR 176 southbound to I-480 eastbound will have various lane restrictions through September.",
+    "start": "2026-03-25",
+    "end": "2026-10-09",
+    "projectDays": 198,
+    "lat": 41.42,
+    "lon": -81.684
+   },
+   {
+    "route": "OH-303",
+    "place": "SR 303 at SR 14 eastbound.",
+    "mile": "",
+    "closure": true,
+    "headline": "Beginning Monday, March 23, SR 303 at SR 14 will be closed through early July. The detour will be Superior Ave. to SR 14.",
+    "start": "2026-03-23",
+    "end": "2026-10-04",
+    "projectDays": 195,
+    "lat": 41.239,
+    "lon": -81.34
+   }
+  ]
+ },
+ "AB": {
+  "ongoing": [
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge maintenance operations on HWY-2 Both Directions Near Peace River. Speed Restriction: 50km/hr  Activities: Road Closed, Lane closure, One - lane alt traffic, Speed reduction, Temp traffic signals, Flag persons, Be ",
+    "start": "2021-07-31",
+    "end": "2027-09-16",
+    "projectDays": 2238,
+    "lat": 56.239,
+    "lon": -117.308
+   },
+   {
+    "route": "AB-8",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Construction Work on HWY-8 Eastbound from Range Road 25 to Lott Creek Blvd . Width Restriction: 5.7m Height Restriction: 5.4m  Activities: Height restriction, Width restriction",
+    "start": "2021-10-06",
+    "end": "2026-12-01",
+    "projectDays": 1881,
+    "lat": 51.016,
+    "lon": -114.257
+   },
+   {
+    "route": "AB-813",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-813 All Directions Near Athabasca River. Width Restriction: 9m Speed Restriction: 30km/hr  Activities: No passing, Speed reduction, Drive with caution",
+    "start": "2022-08-15",
+    "end": "2027-07-20",
+    "projectDays": 1800,
+    "lat": 54.728,
+    "lon": -113.275
+   },
+   {
+    "route": "AB-3",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Construction Work on HWY-3 Both Directions from HWY-36 to Range Road 121 .  Activities: Be prepared to stop, Traffic congestion, Expect traffic delays, Follow Directions",
+    "start": "2024-06-06",
+    "end": "2026-11-29",
+    "projectDays": 905,
+    "lat": 49.786,
+    "lon": -112.125
+   },
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-2 Southbound from HWY-11A to HWY-597 Eastbound . Speed Restriction: 80km/hr  Activities: Speed reduction, Traffic congestion, Highway Maintenance Vehicles   Visibility: Dust",
+    "start": "2025-09-25",
+    "end": "2027-10-01",
+    "projectDays": 736,
+    "lat": 52.347,
+    "lon": -113.845
+   },
+   {
+    "route": "AB-872",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bumps on HWY-872 Both Directions Near Battle River. Speed Restriction: 50km/hr  Activities: Speed reduction, Rough road, Drive with caution, Follow Directions",
+    "start": "2026-08-19",
+    "end": "2028-04-03",
+    "projectDays": 593,
+    "lat": 52.402,
+    "lon": -111.416
+   }
+  ],
+  "started": [
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-2 All Directions Near HWY-2 Northbound. Width Restriction: 5m Height Restriction: 5.4m Speed Restriction: 50km/hr  Activities: Lane closure, One - lane alt traffic, No passing, Speed reduction,",
+    "start": "2026-10-05",
+    "end": "2029-09-01",
+    "projectDays": 1061,
+    "lat": 53.776,
+    "lon": -113.644
+   },
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-2 Northbound Near HWY-2. Width Restriction: 5m Height Restriction: 5.4m Speed Restriction: 50km/hr  Activities: Lane closure, One - lane alt traffic, No passing, Speed reduction, Temp traffic s",
+    "start": "2026-10-05",
+    "end": "2029-09-01",
+    "projectDays": 1061,
+    "lat": 53.773,
+    "lon": -113.645
+   },
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-2 Southbound Near Township Road 554.  Activities: Lane closure, One - lane alt traffic, No passing, Speed reduction, Temp traffic signals, Fresh oil, No centerline marking, Grooved pavement, Na",
+    "start": "2026-10-05",
+    "end": "2029-09-01",
+    "projectDays": 1061,
+    "lat": 53.775,
+    "lon": -113.646
+   },
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-2 Northbound Near Township Road 554. Width Restriction: 5m Height Restriction: 5.4m Speed Restriction: 50km/hr  Activities: Lane closure, One - lane alt traffic, No passing, Speed reduction, Te",
+    "start": "2026-10-05",
+    "end": "2029-09-01",
+    "projectDays": 1061,
+    "lat": 53.773,
+    "lon": -113.645
+   },
+   {
+    "route": "AB-881",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Construction Work on HWY-881 Both Directions from Alpac K Rd to Range Road 122 . Speed Restriction: 50km/hr  Activities: Lane closure, One - lane alt traffic, No passing, Speed reduction, Fresh oil, No centerline marking",
+    "start": "2026-10-20",
+    "end": "2028-08-01",
+    "projectDays": 650,
+    "lat": 55.633,
+    "lon": -111.125
+   },
+   {
+    "route": "AB-10X",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-10X Both Directions Near 3 St S. Width Restriction: 4.2m Speed Restriction: 30km/hr  Activities: Lane closure, One - lane alt traffic, No passing, Speed reduction, Narrow lane, Narrow shoulder,",
+    "start": "2026-10-22",
+    "end": "2027-10-16",
+    "projectDays": 358,
+    "lat": 51.415,
+    "lon": -112.647
+   }
+  ],
+  "finished": [
+   {
+    "route": "AB-8",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-8 Both Directions Near Elbow River. Width Restriction: 3.7m Speed Restriction: 60km/hr  Activities: Lane closure, No passing, Speed reduction, Temp traffic signals, No centerline marking, Groov",
+    "start": "2025-07-02",
+    "end": "2026-10-30",
+    "projectDays": 485,
+    "lat": 51.017,
+    "lon": -114.242
+   },
+   {
+    "route": "AB-857",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction on HWY-857 Both Directions Near Township Road 542. Lane Alternating. Width Restriction: 4m Speed Restriction: 30km/hr  Activities: One - lane alt traffic, No passing, Speed reduction, Temp traffic sig",
+    "start": "2025-10-14",
+    "end": "2026-10-18",
+    "projectDays": 369,
+    "lat": 53.663,
+    "lon": -112.066
+   },
+   {
+    "route": "AB-834",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Construction Work on HWY-834 Both Directions Near Township Road 522. Speed Restriction: 50km/hr  Activities: Lane closure, Use alternate route, One - lane alt traffic, No passing, Rough road, Fresh oil, No centerline mar",
+    "start": "2026-04-06",
+    "end": "2026-10-22",
+    "projectDays": 199,
+    "lat": 53.504,
+    "lon": -112.656
+   },
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Paving operations on HWY-2 Northbound Near Menaik Road. Speed Restriction: 80km/hr  Activities: Lane closure, No passing, Speed reduction, Grooved pavement, Narrow shoulder, Pavement drop-off, Flag persons, Be prepared t",
+    "start": "2026-05-06",
+    "end": "2026-10-22",
+    "projectDays": 169,
+    "lat": 52.785,
+    "lon": -113.644
+   },
+   {
+    "route": "AB-2",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Paving operations on HWY-2 Both Directions from HWY-611 to Township Road 442 . Speed Restriction: 80km/hr  Activities: Lane closure, Flag persons, Highway Maintenance Vehicles",
+    "start": "2026-05-06",
+    "end": "2026-10-22",
+    "projectDays": 169,
+    "lat": 52.843,
+    "lon": -113.644
+   },
+   {
+    "route": "AB-837",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Traffic advisory on HWY-837 Both Directions Near HWY-575. All lanes closed. Activities: Road Closed, Use alternate route, Expect traffic delays",
+    "start": "2026-06-02",
+    "end": "2026-10-31",
+    "projectDays": 151,
+    "lat": 51.516,
+    "lon": -112.879
+   }
+  ]
+ },
+ "VA": {
+  "ongoing": [
+   {
+    "route": "I-81",
+    "place": "the ramp to Interstate 581 at MM 142.9 and at MM 147.3",
+    "mile": 142.9,
+    "closure": false,
+    "headline": "On I-81 in the County of Roanoke from mile marker 142.9 to mile marker 147.3, motorists can expect potential delays in this area from 03/28/25 at 12:00 PM until 04/01/31 at 12:00 PM due to construction activities. The no",
+    "start": "2025-03-28",
+    "end": "2031-04-01",
+    "projectDays": 2195,
+    "lat": 37.336,
+    "lon": -80.013
+   },
+   {
+    "route": "I-581",
+    "place": "the ramp to Interstate 581 at MM 6.5 and at MM 6",
+    "mile": 6.5,
+    "closure": false,
+    "headline": "On I-581 South in the County of Roanoke from mile marker 6.5 to mile marker 6, motorists can expect potential delays in this area from 03/28/25 at 12:00 PM until 04/01/31 at 12:00 PM due to construction activities.",
+    "start": "2025-03-28",
+    "end": "2031-04-01",
+    "projectDays": 2195,
+    "lat": 37.34,
+    "lon": -80
+   },
+   {
+    "route": "I-581",
+    "place": "the ramp from Rt. 117 West-Peters Creek Road at MM 6 and at MM 6.6",
+    "mile": 6,
+    "closure": false,
+    "headline": "On I-581 North in the County of Roanoke from mile marker 6 to mile marker 6.6, motorists can expect potential delays in this area from 03/28/25 at 12:00 PM until 04/01/31 at 12:00 PM due to construction activities.",
+    "start": "2025-03-28",
+    "end": "2031-04-01",
+    "projectDays": 2195,
+    "lat": 37.333,
+    "lon": -79.994
+   },
+   {
+    "route": "I-81",
+    "place": "County/City/Town Line: ROANOKE - BOTETOURT COUNTY LINE at MM 147.2 and at MM 142",
+    "mile": 147.2,
+    "closure": false,
+    "headline": "On I-81 in the County of Roanoke from mile marker 147.2 to mile marker 142.9, motorists can expect potential delays in this area from 03/28/25 at 12:00 PM until 04/01/31 at 12:00 PM due to construction activities. The so",
+    "start": "2025-03-28",
+    "end": "2031-04-01",
+    "projectDays": 2195,
+    "lat": 37.363,
+    "lon": -79.945
+   },
+   {
+    "route": "I-81",
+    "place": "County/City/Town Line: ROANOKE - BOTETOURT COUNTY LINE at MM 147.4 and at MM 151",
+    "mile": 147.4,
+    "closure": false,
+    "headline": "On I-81 in the County of Botetourt from mile marker 147.4 to mile marker 151.7, motorists can expect potential delays in this area from 03/28/25 at 12:00 PM until 04/01/31 at 12:00 PM due to construction activities. The ",
+    "start": "2025-03-28",
+    "end": "2031-04-01",
+    "projectDays": 2195,
+    "lat": 37.364,
+    "lon": -79.943
+   },
+   {
+    "route": "I-81",
+    "place": "the ramp to Rt. 220 at MM 151.7 and at MM 147.3",
+    "mile": 151.7,
+    "closure": false,
+    "headline": "On I-81 in the County of Botetourt from mile marker 151.7 to mile marker 147.3, motorists can expect potential delays in this area from 03/28/25 at 12:00 PM until 04/01/31 at 12:00 PM due to construction activities. The ",
+    "start": "2025-03-28",
+    "end": "2031-04-01",
+    "projectDays": 2195,
+    "lat": 37.408,
+    "lon": -79.893
+   }
+  ],
+  "started": [
+   {
+    "route": "VA-846",
+    "place": "Davis Dr; Rt. 868N/S (Loudoun County) at MM 0.7. Chase Heritage Cir at MM 0.9",
+    "mile": 0.7,
+    "closure": false,
+    "headline": "On Rt. 846 (S Sterling Blvd) in the County of Loudoun from Davis Dr; Rt. 868N/S (Loudoun County) to Chase Heritage Cir, motorists can expect potential delays in this area from 10/19/26 at 9:00 AM until 05/22/28 at 3:30 P",
+    "start": "2026-10-19",
+    "end": "2028-05-22",
+    "projectDays": 581,
+    "lat": 38.992,
+    "lon": -77.42
+   },
+   {
+    "route": "US-360",
+    "place": "Highway Median; Rt. 605N/S (King William County) at MM 161.4. Sharon Rd; Rt. 662",
+    "mile": 161.4,
+    "closure": false,
+    "headline": "On US-360 (Richmond Tappahannock Hwy) in the County of King William from Highway Median; Rt. 605N/S (King William County) to Sharon Rd; Rt. 662N/S (King William County), motorists can expect potential delays in this area",
+    "start": "2026-10-18",
+    "end": "2027-02-18",
+    "projectDays": 123,
+    "lat": 37.708,
+    "lon": -77.155
+   },
+   {
+    "route": "US-29",
+    "place": "Buckleys Gate Dr; Rt. 1257N/S (Fairfax County) at MM 231.5. Piney Branch Rd; Rt.",
+    "mile": 231.5,
+    "closure": false,
+    "headline": "On US-29 (Lee Hwy) in the County of Fairfax from Buckleys Gate Dr; Rt. 1257N/S (Fairfax County) to Piney Branch Rd; Rt. 6187N/S (Fairfax County), motorists can expect potential delays in this area from 10/26/26 at 2:30 P",
+    "start": "2026-10-26",
+    "end": "2027-01-09",
+    "projectDays": 75,
+    "lat": 38.844,
+    "lon": -77.381
+   },
+   {
+    "route": "VA-5",
+    "place": "St Georges Blvd; Rt. 1438N/S (James City County) at MM 47.3. Ironbound Rd; Rt. 6",
+    "mile": 47.3,
+    "closure": false,
+    "headline": "On VA-5 (John Tyler Hwy) in the County of James City from St Georges Blvd; Rt. 1438N/S (James City County) to Ironbound Rd; Rt. 615N/S (James City County), motorists can expect potential delays in this area from 10/29/26",
+    "start": "2026-10-29",
+    "end": "2026-12-31",
+    "projectDays": 63,
+    "lat": 37.25,
+    "lon": -76.78
+   },
+   {
+    "route": "VA-696",
+    "place": "Rt. 696E (Lancaster County)",
+    "mile": "",
+    "closure": false,
+    "headline": "On Rt. 696 in the County of Lancaster, motorists can expect potential delays in this area from 10/12/26 at 11:00 AM until 11/23/26 at 12:00 PM due to bridge work. The east through lanes are closed.",
+    "start": "2026-10-12",
+    "end": "2026-11-23",
+    "projectDays": 42,
+    "lat": 37.634,
+    "lon": -76.303
+   },
+   {
+    "route": "VA-35",
+    "place": "County/City/Town Line: COURTLAND at MM 16. Alley St; Main St; BUS US-58E/W (6 So",
+    "mile": 16,
+    "closure": true,
+    "headline": "On VA-35 (Plank Rd) in the County of Southampton from County/City/Town Line: COURTLAND to Alley St; Main St; BUS US-58E/W (6 Southampton/Courtland), BUS US-58E/W; Rt. 1511N/S (Southampton County), motorists can expect po",
+    "start": "2026-10-14",
+    "end": "2026-11-20",
+    "projectDays": 37,
+    "lat": 36.726,
+    "lon": -77.072
+   }
+  ],
+  "finished": [
+   {
+    "route": "I-81",
+    "place": "the ramp from US-33E at MM 247 and at MM 248",
+    "mile": 247,
+    "closure": false,
+    "headline": "On I-81 in the County of Rockingham from mile marker 247 to mile marker 248, motorists can expect potential delays in this area from 08/13/24 at 12:00 PM until 10/02/26 at 12:00 AM due to bridge work. The north left shou",
+    "start": "2024-08-13",
+    "end": "2026-10-02",
+    "projectDays": 780,
+    "lat": 38.436,
+    "lon": -78.859
+   },
+   {
+    "route": "I-81",
+    "place": "County/City/Town Line: SALEM at MM 136.4 and at MM 138",
+    "mile": 136.4,
+    "closure": false,
+    "headline": "On I-81 in the County of Roanoke from mile marker 136.4 to mile marker 138, motorists can expect potential delays in this area from 11/27/24 at 4:05 PM until 10/16/26 at 7:00 AM due to construction activities. The north ",
+    "start": "2024-11-27",
+    "end": "2026-10-16",
+    "projectDays": 688,
+    "lat": 37.29,
+    "lon": -80.113
+   },
+   {
+    "route": "VA-637",
+    "place": "Dickenson Hwy; VA-83E/W",
+    "mile": "",
+    "closure": false,
+    "headline": "On Rt. 637 South (Rose Rdg) in the County of Dickenson at Dickenson Hwy; VA-83E/W, motorists can expect potential delays in this area from 12/23/25 at 1:07 PM until 10/02/26 at 5:00 PM due to construction activities.",
+    "start": "2025-12-23",
+    "end": "2026-10-02",
+    "projectDays": 283,
+    "lat": 37.123,
+    "lon": -82.4
+   },
+   {
+    "route": "US-11",
+    "place": "Warden Ct; Rt. 740N/S (Pulaski County) at MM 106.6. Camelot Rd; Rt. 741E/W (Pula",
+    "mile": 106.6,
+    "closure": false,
+    "headline": "On US-11 (Lee Hwy) in the County of Pulaski from Warden Ct; Rt. 740N/S (Pulaski County) to Camelot Rd; Rt. 741E/W (Pulaski County), motorists can expect potential delays in this area from 03/02/26 at 7:30 AM until 10/30/",
+    "start": "2026-03-02",
+    "end": "2026-10-30",
+    "projectDays": 242,
+    "lat": 37.147,
+    "lon": -80.598
+   },
+   {
+    "route": "US-29",
+    "place": "Rt. 787N/S (Nelson County) at MM 101.7. Rt. 653N/S (Nelson County) at MM 102.6",
+    "mile": 101.7,
+    "closure": false,
+    "headline": "On US-29 (Thomas Nelson Hwy) in the County of Nelson from Rt. 787N/S (Nelson County) to Rt. 653N/S (Nelson County), motorists can expect potential delays in this area from 06/02/26 at 8:00 AM until 10/07/26 at 5:00 PM du",
+    "start": "2026-06-02",
+    "end": "2026-10-07",
+    "projectDays": 127,
+    "lat": 37.712,
+    "lon": -78.924
+   },
+   {
+    "route": "VA-675",
+    "place": "E Gate Rd; Dead End. Constitution Hwy; VA-20N/S",
+    "mile": "",
+    "closure": true,
+    "headline": "On Rt. 675 (Dolley Madison Rd) in the County of Orange from E Gate Rd; Dead End to Constitution Hwy; VA-20N/S, motorists can expect potential delays in this area from 07/21/26 at 7:00 AM until 10/16/26 at 7:00 AM due to ",
+    "start": "2026-07-21",
+    "end": "2026-10-16",
+    "projectDays": 87,
+    "lat": 38.238,
+    "lon": -78.154
+   }
+  ]
+ },
+ "NC": {
+  "ongoing": [
+   {
+    "route": "US-17",
+    "place": "Beaufort",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on US 17 Both Directions in Beaufort, Martin County from Mill Inn Rd to  NC 171. 1 Left Lane Intermittent. Id: 904",
+    "start": "2022-11-28",
+    "end": "2027-12-31",
+    "projectDays": 1859,
+    "lat": 35.787,
+    "lon": -77.059
+   },
+   {
+    "route": "NC-210",
+    "place": "Pender",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on NC 210 Both Directions in Pender county  from Winnie Pearl Ln to  Holiday Dr. Lanes Alternating. Id: 933",
+    "start": "2022-02-28",
+    "end": "2027-03-14",
+    "projectDays": 1840,
+    "lat": 34.383,
+    "lon": -77.759
+   },
+   {
+    "route": "NC-210",
+    "place": "Pender",
+    "mile": "",
+    "closure": false,
+    "headline": "Maintenance on NC 210 Eastbound in Pender County  from Sloop Point Loop Rd to  Country Club Dr. Lanes Alternating.",
+    "start": "2022-02-28",
+    "end": "2027-03-14",
+    "projectDays": 1840,
+    "lat": 34.414,
+    "lon": -77.653
+   },
+   {
+    "route": "NC-210",
+    "place": "Pender",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on NC 210 Both Directions in Pender county from Winnie Pearl Ln to Holiday Dr. Lanes Alternating. Id: 933",
+    "start": "2022-02-28",
+    "end": "2027-03-14",
+    "projectDays": 1840,
+    "lat": 34.383,
+    "lon": -77.759
+   },
+   {
+    "route": "NC-210",
+    "place": "Pender",
+    "mile": "",
+    "closure": false,
+    "headline": "Maintenance on NC 210 Eastbound in Pender County from Sloop Point Loop Rd to Country Club Dr. Lanes Alternating.",
+    "start": "2022-02-28",
+    "end": "2027-03-14",
+    "projectDays": 1840,
+    "lat": 34.414,
+    "lon": -77.653
+   },
+   {
+    "route": "US-21",
+    "place": "Iredell",
+    "mile": "",
+    "closure": true,
+    "headline": "Construction on US 21 Both Directions in Iredell County from Abberly Green Blvd to  Dry Dock Loop. All lanes closed. Id: 8194",
+    "start": "2024-06-01",
+    "end": "2029-01-28",
+    "projectDays": 1703,
+    "lat": 35.574,
+    "lon": -80.843
+   }
+  ],
+  "started": [
+   {
+    "route": "US-74",
+    "place": "Gaston",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on US 74 Both Directions in Gaston, Mecklenburg County from Patterson St to Moores Chapel Loop. All lanes blocked. Id: 12020",
+    "start": "2026-10-29",
+    "end": "2032-08-01",
+    "projectDays": 2103,
+    "lat": 35.247,
+    "lon": -81.017
+   },
+   {
+    "route": "NC-7",
+    "place": "Gaston",
+    "mile": "",
+    "closure": true,
+    "headline": "Construction on NC 7 Both Directions in Gaston County from 13th St to Wilkinson Blvd. All lanes closed. Id: 12024",
+    "start": "2026-10-29",
+    "end": "2032-08-01",
+    "projectDays": 2103,
+    "lat": 35.244,
+    "lon": -81.014
+   },
+   {
+    "route": "US-264",
+    "place": "Beaufort",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on US 264 Both Directions in Beaufort, Hyde County from Circle Grove Farm Rd to  Beech Ridge Rd. All Lanes Intermittent. Id: 8629",
+    "start": "2026-10-12",
+    "end": "2030-02-11",
+    "projectDays": 1218,
+    "lat": 35.57,
+    "lon": -76.505
+   },
+   {
+    "route": "NC-46",
+    "place": "Northampton",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on NC 46 Hwy Both Directions in Northampton County from North Carolina Virginia Border to  NC 48. All Lanes Affected. Id: 9102",
+    "start": "2026-10-01",
+    "end": "2029-05-14",
+    "projectDays": 956,
+    "lat": 36.545,
+    "lon": -77.802
+   },
+   {
+    "route": "US-64",
+    "place": "Alexander",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on US 64 Both Directions in Alexander County from Ellendale Fire Department Rd to Mooney Dr. All lanes blocked. Id: 12029",
+    "start": "2026-10-29",
+    "end": "2027-03-30",
+    "projectDays": 152,
+    "lat": 35.919,
+    "lon": -81.255
+   },
+   {
+    "route": "NC-67",
+    "place": "Yadkin",
+    "mile": "",
+    "closure": true,
+    "headline": "Construction on NC 67 All Directions in Yadkin County from Cardinal Ave to  US 601. All lanes closed. Id: 9376",
+    "start": "2026-10-16",
+    "end": "2027-01-29",
+    "projectDays": 105,
+    "lat": 36.233,
+    "lon": -80.712
+   }
+  ],
+  "finished": [
+   {
+    "route": "I-95",
+    "place": "Harnett",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on I-95 Both Directions in Harnett, Johnston County from mile marker 71 to  mile marker 81. All Lanes Intermittent. Id: 963",
+    "start": "2022-12-09",
+    "end": "2026-10-28",
+    "projectDays": 1419,
+    "lat": 35.276,
+    "lon": -78.614
+   },
+   {
+    "route": "NC-66",
+    "place": "Forsyth",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on NC 66 Both Directions in Forsyth County from US 158 to  Walkertown View Dr. All Lanes Intermittent. Id: 928",
+    "start": "2024-02-12",
+    "end": "2026-10-15",
+    "projectDays": 975,
+    "lat": 36.165,
+    "lon": -80.137
+   },
+   {
+    "route": "NC-280",
+    "place": "Transylvania",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on NC 280 Both Directions in Transylvania County  from Ed McCall Rdg to  Gibbs Ln. Lanes Alternating.",
+    "start": "2026-04-15",
+    "end": "2026-10-16",
+    "projectDays": 184,
+    "lat": 35.329,
+    "lon": -82.648
+   },
+   {
+    "route": "US-701",
+    "place": "Columbus",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on US 701 BUS in Columbus County from S Franklin St to  S Franklin St. 2 Lanes Closed. Id: 3621",
+    "start": "2026-07-20",
+    "end": "2026-10-20",
+    "projectDays": 92,
+    "lat": 34.317,
+    "lon": -78.706
+   },
+   {
+    "route": "US-70",
+    "place": "Columbus",
+    "mile": "",
+    "closure": true,
+    "headline": "Construction on US 70 BUS in Columbus County from Frazier St to  S Franklin St. All lanes closed. Id: 3622",
+    "start": "2026-07-20",
+    "end": "2026-10-19",
+    "projectDays": 91,
+    "lat": 34.318,
+    "lon": -78.705
+   },
+   {
+    "route": "US-129",
+    "place": "Cherokee",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction on US 129 Both Directions in Cherokee, Macon, Swain County from Robinson Rd to  NC 28. Lanes Alternating. Id: 4087",
+    "start": "2026-07-16",
+    "end": "2026-10-15",
+    "projectDays": 91,
+    "lat": 35.195,
+    "lon": -83.786
+   }
+  ]
+ },
+ "TX": {
+  "ongoing": [
+   {
+    "route": "US-87",
+    "place": "1140.48 Feet West of US0287 on US0087",
+    "mile": 94,
+    "closure": false,
+    "headline": "- Alternating lanes closed. New construction for divided hwy, improve existing roadway, drainage wor",
+    "start": "2026-03-02",
+    "end": "2031-10-31",
+    "projectDays": 2070,
+    "lat": 35.865,
+    "lon": -101.977
+   },
+   {
+    "route": "US-190",
+    "place": "1.304 Miles North of FM0974 on US0190",
+    "mile": 692,
+    "closure": false,
+    "headline": "- Alternating lanes closed. - Watch for flag personnel directing traffic.",
+    "start": "2026-02-16",
+    "end": "2031-07-31",
+    "projectDays": 1991,
+    "lat": 30.867,
+    "lon": -96.195
+   },
+   {
+    "route": "US-77",
+    "place": "15.84 Feet North of IH0037 on US0077",
+    "mile": 658,
+    "closure": false,
+    "headline": "- Motorists should expect delays. On IH0037 between Redbird Lane and the North US0077 interchange, c",
+    "start": "2021-09-19",
+    "end": "2027-03-01",
+    "projectDays": 1988,
+    "lat": 27.9,
+    "lon": -97.631
+   },
+   {
+    "route": "I-37",
+    "place": "IH0037 Road Construction and Bridge Replacement",
+    "mile": 18,
+    "closure": false,
+    "headline": "- Motorists should expect delays. On IH0037 between Redbird Lane and the North US0077 interchange, c",
+    "start": "2021-09-19",
+    "end": "2027-03-01",
+    "projectDays": 1988,
+    "lat": 27.911,
+    "lon": -97.635
+   },
+   {
+    "route": "TX-LOOP-20",
+    "place": "Loop 20",
+    "mile": 430,
+    "closure": false,
+    "headline": "- Alternating lanes closed. - Motorists should expect delays. Converting a non freeway to a freeway",
+    "start": "2024-03-04",
+    "end": "2029-06-30",
+    "projectDays": 1944,
+    "lat": 27.541,
+    "lon": -99.453
+   },
+   {
+    "route": "I-20",
+    "place": "I-20",
+    "mile": 121,
+    "closure": false,
+    "headline": "- Detour to the frontage road - Entrance Ramp closed. Eastbound ML - Loop 338 On-ramp closed - Traff",
+    "start": "2026-07-31",
+    "end": "2031-07-31",
+    "projectDays": 1826,
+    "lat": 31.871,
+    "lon": -102.294
+   }
+  ],
+  "started": [
+   {
+    "route": "US-259",
+    "place": "0.729 Miles South of SH0204 on US0259",
+    "mile": 344,
+    "closure": false,
+    "headline": "- Alternating lanes closed. - Delays due to slow moving road repair operations. - Motorists should e",
+    "start": "2026-10-28",
+    "end": "2031-11-01",
+    "projectDays": 1831,
+    "lat": 31.742,
+    "lon": -94.676
+   },
+   {
+    "route": "TX-204",
+    "place": "1367.52 Feet West of US0259 on SH0204",
+    "mile": 722,
+    "closure": false,
+    "headline": "- Alternating lanes closed. - Use alternate route Improvements to US 259 Construction Project 0138-0",
+    "start": "2026-10-28",
+    "end": "2031-11-01",
+    "projectDays": 1831,
+    "lat": 31.754,
+    "lon": -94.679
+   },
+   {
+    "route": "US-75",
+    "place": "US0075",
+    "mile": 214,
+    "closure": false,
+    "headline": "- Motorists should expect delays. US 75 from FM 1417 to FM 902 will be under construction. Motorists",
+    "start": "2026-10-05",
+    "end": "2030-01-31",
+    "projectDays": 1214,
+    "lat": 33.527,
+    "lon": -96.613
+   },
+   {
+    "route": "I-30",
+    "place": "0.548 Miles East of IH0035E on IH0030",
+    "mile": 46,
+    "closure": false,
+    "headline": "- Exit ramp closed. - Exit Ramp only. Griffin St Exit ramp to be closed for reconstruction",
+    "start": "2026-10-26",
+    "end": "2027-12-31",
+    "projectDays": 431,
+    "lat": 32.773,
+    "lon": -96.798
+   },
+   {
+    "route": "US-81",
+    "place": "US 287",
+    "mile": 220,
+    "closure": false,
+    "headline": "- Entrance Ramp closed. - Motorists should expect delays. - Travel lanes reduced to one lane.",
+    "start": "2026-10-26",
+    "end": "2027-10-30",
+    "projectDays": 369,
+    "lat": 33.495,
+    "lon": -97.804
+   },
+   {
+    "route": "TX-LOOP-289",
+    "place": "South Loop289 Service Road",
+    "mile": 309,
+    "closure": false,
+    "headline": "- Right lane closed. RIGHT LANE CLOSED DUE TO CONSTRUCTION. PROCEED WITH CAUTION.",
+    "start": "2026-10-08",
+    "end": "2027-10-08",
+    "projectDays": 365,
+    "lat": 33.529,
+    "lon": -101.86
+   }
+  ],
+  "finished": [
+   {
+    "route": "US-69",
+    "place": "1367.52 Feet West of SH0073 on US0069",
+    "mile": 540,
+    "closure": false,
+    "headline": "- Exit ramp closed. - Exit Ramp only. - Follow the marked detour Loop connecting SH 73 EB to US 69 N",
+    "start": "2023-10-28",
+    "end": "2026-10-28",
+    "projectDays": 1096,
+    "lat": 29.921,
+    "lon": -93.959
+   },
+   {
+    "route": "I-35",
+    "place": "26.4 Feet South of SL0288 on IH0035",
+    "mile": 470,
+    "closure": false,
+    "headline": "- Alternating lanes closed. - Daytime closure only. Work crews will be in the southbound frontage ro",
+    "start": "2026-05-04",
+    "end": "2026-10-03",
+    "projectDays": 152,
+    "lat": 33.256,
+    "lon": -97.178
+   },
+   {
+    "route": "TX-158",
+    "place": "SH 158",
+    "mile": 262,
+    "closure": false,
+    "headline": "- Alternating lanes closed. - Daytime closure only. Road Rehabilitation",
+    "start": "2026-07-23",
+    "end": "2026-10-23",
+    "projectDays": 92,
+    "lat": 32.032,
+    "lon": -102.396
+   },
+   {
+    "route": "US-67",
+    "place": "1.141 Miles East of SS0576 on US0067",
+    "mile": 772,
+    "closure": false,
+    "headline": "- All traffic reduced to one lane, two-way traffic control in place, be prepared to stop. - Motorist",
+    "start": "2026-08-07",
+    "end": "2026-10-30",
+    "projectDays": 84,
+    "lat": 31.232,
+    "lon": -101.915
+   },
+   {
+    "route": "US-190",
+    "place": "US 190",
+    "mile": 774,
+    "closure": false,
+    "headline": "- All traffic reduced to one lane, two-way traffic control in place, be prepared to stop. - Motorist",
+    "start": "2026-07-15",
+    "end": "2026-10-03",
+    "projectDays": 80,
+    "lat": 30.815,
+    "lon": -95.093
+   },
+   {
+    "route": "I-37",
+    "place": "IH-37 Frontage Rd",
+    "mile": 33,
+    "closure": false,
+    "headline": "- Delays due to slow moving road repair operations. - Frontage road only, main lanes are open. - Lan",
+    "start": "2026-08-11",
+    "end": "2026-10-30",
+    "projectDays": 80,
+    "lat": 28.055,
+    "lon": -97.771
+   }
+  ]
+ },
+ "WA": {
+  "ongoing": [
+   {
+    "route": "SR 165",
+    "place": null,
+    "mile": 14.1,
+    "closure": true,
+    "headline": "SR 165 is closed at the Carbon River/Fairfax Bridge to all vehicles, bicyclists and pedestrians until further notice. The closure means there is no access across the bridge to Mount Rainier National Park Mowich Lake and ",
+    "start": "2025-04-16",
+    "end": "2030-07-01",
+    "projectDays": 1902,
+    "lat": 47.077,
+    "lon": -122.044
+   },
+   {
+    "route": "US-101",
+    "place": null,
+    "mile": 184.5,
+    "closure": false,
+    "headline": "Expect around-the-clock single-lane alternating traffic on US 101 at the Jefferson-Clallam county line. The speed limit is reduced to 25 mph between mileposts 184 and 185. Crews are building a bridge to improve fish pass",
+    "start": "2024-02-29",
+    "end": "2026-12-31",
+    "projectDays": 1036,
+    "lat": 47.88,
+    "lon": -124.351
+   },
+   {
+    "route": "US-101",
+    "place": null,
+    "mile": 77.3,
+    "closure": false,
+    "headline": "The climbing lane on northbound US 101 approaching Cosi Hill is closed.",
+    "start": "2025-01-13",
+    "end": "2026-12-31",
+    "projectDays": 717,
+    "lat": 46.923,
+    "lon": -123.719
+   },
+   {
+    "route": "US-101",
+    "place": null,
+    "mile": 162.9,
+    "closure": false,
+    "headline": "Expect temporary traffic lights and single-lane alternating traffic around the clock on US 101 near Ruby Beach. The speed limit is reduced from 55 mph to 25 mph from milepost 162.93 to 163.51. Work is for a  fish passage",
+    "start": "2025-03-18",
+    "end": "2027-01-31",
+    "projectDays": 684,
+    "lat": 47.684,
+    "lon": -124.405
+   },
+   {
+    "route": "SR 16",
+    "place": null,
+    "mile": 26.9,
+    "closure": false,
+    "headline": "Expect shifted lanes and a reduced 45 mph speed limit on SR 16 near Old Clifton Road/Tremont Street in Port Orchard. Occasional nighttime single-lane closures continue through fall. Read more on the  project webpage .",
+    "start": "2026-04-07",
+    "end": "2028-01-01",
+    "projectDays": 633,
+    "lat": 47.524,
+    "lon": -122.661
+   },
+   {
+    "route": "I-82",
+    "place": null,
+    "mile": 131,
+    "closure": false,
+    "headline": "Eastbound over the Umatilla Bridge from Tuesday Oct. 13 at 5 a.m. until further notice, there will be a single lane closure with a 14-ft width restriction and a speed reduction for bridge maintenance and painting.",
+    "start": "2025-04-27",
+    "end": "2026-11-07",
+    "projectDays": 559,
+    "lat": 45.953,
+    "lon": -119.339
+   }
+  ],
+  "started": [],
+  "finished": [
+   {
+    "route": "SR 160",
+    "place": null,
+    "mile": 2.2,
+    "closure": false,
+    "headline": "SR 160 is closed between Blackberry Hill Lane SE and Long Lake Road SE through the end of October. The closure will allow crews to build a new bridge over Salmonberry Creek as part of a  fish barrier removal project .",
+    "start": "2026-05-18",
+    "end": "2026-10-17",
+    "projectDays": 152,
+    "lat": 47.505,
+    "lon": -122.601
+   },
+   {
+    "route": "SR 524",
+    "place": null,
+    "mile": 5.3,
+    "closure": false,
+    "headline": "Westbound SR 524/196th Street SW has been reduced to one lane and eastbound SR 524/196th Street SW has been reduced to two lanes, 24 hours a day, near the I-5 interchange for a city of Lynnwood construction project.",
+    "start": "2026-05-04",
+    "end": "2026-10-03",
+    "projectDays": 152,
+    "lat": 47.821,
+    "lon": -122.278
+   },
+   {
+    "route": "SR 203",
+    "place": null,
+    "mile": 23.2,
+    "closure": false,
+    "headline": "From 7 p.m. to 6 a.m. Sunday nights through Friday mornings beginning Monday, July 27, one lane of State Route 203 will be closed for a paving project between just south of Duvall to the Monroe city limits (mileposts 12.",
+    "start": "2026-07-24",
+    "end": "2026-10-30",
+    "projectDays": 98,
+    "lat": 47.846,
+    "lon": -121.97
+   },
+   {
+    "route": "I-5",
+    "place": null,
+    "mile": 136,
+    "closure": false,
+    "headline": "On Saturday, Oct. 3, expect overnight single and double lane closures in both directions of I-5 near Port of Tacoma Road in Fife. Northbound lane closures start at 7 p.m. and southbound lane closures start at 8 p.m. All ",
+    "start": "2026-06-30",
+    "end": "2026-10-04",
+    "projectDays": 95,
+    "lat": 47.241,
+    "lon": -122.387
+   },
+   {
+    "route": "SR 525",
+    "place": null,
+    "mile": 5.6,
+    "closure": false,
+    "headline": "Nightly, from 9 p.m. until 7 a.m. Sunday nights through Friday mornings, contractor crews will alternate traffic through the intersections of State Route 525 in Mukilteo between Paine Field and the Mukilteo Ferry Termina",
+    "start": "2026-08-10",
+    "end": "2026-10-30",
+    "projectDays": 81,
+    "lat": 47.91,
+    "lon": -122.293
+   },
+   {
+    "route": "I-5",
+    "place": null,
+    "mile": 168.3,
+    "closure": false,
+    "headline": "The Harvard Avenue on-ramp to northbound I-5 is closed until mid-October for the Revive I-5 Ship Canal Bridge construction project.",
+    "start": "2026-07-23",
+    "end": "2026-10-11",
+    "projectDays": 80,
+    "lat": 47.647,
+    "lon": -122.322
+   }
+  ]
+ },
+ "AL": {
+  "ongoing": [
+   {
+    "route": "US-11",
+    "place": "Vance",
+    "mile": 98.07,
+    "closure": false,
+    "headline": "US11 NB/SB @ MP 98.07 past Tingle Tangle Rd in Vance until US11 NB/SB @ MP 104 at US11/AL5 in Woodstock",
+    "start": "2022-02-10",
+    "end": "2026-10-31",
+    "projectDays": 1724,
+    "lat": 33.173,
+    "lon": -87.25
+   },
+   {
+    "route": "I-85",
+    "place": "Macon",
+    "mile": 46.96,
+    "closure": false,
+    "headline": "I-85 NB/SB @ MP 46.96 at Lee County Line in Macon County until I-85 NB/SB @ MP 46.96 at Beehive Rd in Macon County",
+    "start": "2026-07-13",
+    "end": "2031-02-28",
+    "projectDays": 1691,
+    "lat": 32.525,
+    "lon": -85.572
+   },
+   {
+    "route": "AL-41",
+    "place": "Dallas",
+    "mile": 105.1,
+    "closure": false,
+    "headline": "AL41 NB/SB @ MP 105.1 at AL89 in Dallas County until AL41 NB/SB @ MP 105.1 at US80 in Dallas County",
+    "start": "2026-09-08",
+    "end": "2030-08-21",
+    "projectDays": 1444,
+    "lat": 32.144,
+    "lon": -87.076
+   },
+   {
+    "route": "US-80",
+    "place": "Montgomery",
+    "mile": 124.64,
+    "closure": false,
+    "headline": "US80 EB/WB @ MP 124.64 at Felder Rd in Montgomery until US80 EB/WB @ MP 129.3 at I-65 in Montgomery",
+    "start": "2026-05-29",
+    "end": "2029-12-31",
+    "projectDays": 1312,
+    "lat": 32.303,
+    "lon": -86.42
+   },
+   {
+    "route": "US-231",
+    "place": "Huntsville",
+    "mile": 336.9,
+    "closure": false,
+    "headline": "US231/431 NB/SB @ MP 336.9 at Max Luther Dr in Huntsville until US231/431 NB/SB @ MP 337.5 at Mastin Lake Rd in Huntsville",
+    "start": "2023-06-20",
+    "end": "2026-12-28",
+    "projectDays": 1287,
+    "lat": 34.759,
+    "lon": -86.592
+   },
+   {
+    "route": "AL-193",
+    "place": "Mobile County",
+    "mile": 2.8,
+    "closure": false,
+    "headline": "AL 193 NB @ MP 2.8 past AL 188 in Mobile County until AL 193 NB @ MP 2.9 at AL 188 in Mobile County",
+    "start": "2025-09-29",
+    "end": "2029-02-01",
+    "projectDays": 1221,
+    "lat": 30.312,
+    "lon": -88.138
+   }
+  ],
+  "started": [
+   {
+    "route": "AL-181",
+    "place": "Daphne",
+    "mile": 16.4,
+    "closure": false,
+    "headline": "AL 181 NB @ MP 16.4 at CR 64 in Daphne until AL 181 NB @ MP 12.9 at CR 64 in Daphne",
+    "start": "2026-10-13",
+    "end": "2027-01-31",
+    "projectDays": 111,
+    "lat": 30.6,
+    "lon": -87.852
+   },
+   {
+    "route": "AL-181",
+    "place": "Daphne",
+    "mile": 16.4,
+    "closure": false,
+    "headline": "AL 181 SB @ MP 16.4 at CR 64 in Daphne until AL 181 SB @ MP 12.9 at CR 64 in Daphne",
+    "start": "2026-10-13",
+    "end": "2027-01-31",
+    "projectDays": 111,
+    "lat": 30.6,
+    "lon": -87.852
+   },
+   {
+    "route": "AL-181",
+    "place": "Daphne",
+    "mile": 16.4,
+    "closure": false,
+    "headline": "AL 181 NB/SB @ MP 16.4 at CR 64 in Daphne until AL 181 NB/SB @ MP 12.9 at CR 64 in Daphne",
+    "start": "2026-10-13",
+    "end": "2027-01-31",
+    "projectDays": 111,
+    "lat": 30.6,
+    "lon": -87.852
+   },
+   {
+    "route": "AL-59",
+    "place": "Loxley",
+    "mile": 27.8,
+    "closure": false,
+    "headline": "AL 59 NB/SB @ MP 27.8 at US 90 in Loxley until AL 59 NB/SB @ MP 36.6 at US 90 in Loxley",
+    "start": "2026-10-19",
+    "end": "2027-01-31",
+    "projectDays": 104,
+    "lat": 30.633,
+    "lon": -87.756
+   },
+   {
+    "route": "US-43",
+    "place": "Grove Hill",
+    "mile": 74.84,
+    "closure": false,
+    "headline": "US 43 NB/SB @ MP 74.84 before AL 177 in Grove Hill until US 43 NB/SB @ MP 74.84 at AL 177 in Grove Hill",
+    "start": "2026-10-01",
+    "end": "2026-12-31",
+    "projectDays": 91,
+    "lat": 31.674,
+    "lon": -87.793
+   },
+   {
+    "route": "US-431",
+    "place": "Russell",
+    "mile": 109.25,
+    "closure": false,
+    "headline": "US431 NB/SB @ MP 109.25 at AL165 in Russell County until US431 NB/SB @ MP 109.25 at Howard Cir in Russell County",
+    "start": "2026-10-02",
+    "end": "2026-12-31",
+    "projectDays": 90,
+    "lat": 32.424,
+    "lon": -85.038
+   }
+  ],
+  "finished": [
+   {
+    "route": "US-72",
+    "place": "Scottsboro",
+    "mile": 138.1,
+    "closure": false,
+    "headline": "US72 WB @ MP 138.1 at AL35 in Scottsboro until US72 WB @ MP 145.6 at Bellefonte Rd in Hollywood",
+    "start": "2025-09-04",
+    "end": "2026-10-09",
+    "projectDays": 400,
+    "lat": 34.657,
+    "lon": -86.021
+   },
+   {
+    "route": "US-278",
+    "place": "Cullman",
+    "mile": 61.52,
+    "closure": false,
+    "headline": "US278 EB/WB @ MP 61.52 at CR 300 in Cullman until US278 EB/WB @ MP 69.44 at CR 1094 in Cullman",
+    "start": "2026-05-11",
+    "end": "2026-10-09",
+    "projectDays": 151,
+    "lat": 34.174,
+    "lon": -87.108
+   },
+   {
+    "route": "AL-67",
+    "place": "Florette",
+    "mile": 19.6,
+    "closure": false,
+    "headline": "AL67 NB @ MP 19.6 at Pines Rd in Florette until AL67 NB @ MP 23.97 at AL36 in Somerville",
+    "start": "2026-05-18",
+    "end": "2026-10-16",
+    "projectDays": 151,
+    "lat": 34.402,
+    "lon": -86.685
+   },
+   {
+    "route": "AL-24",
+    "place": "Russellville",
+    "mile": 5.26,
+    "closure": false,
+    "headline": "AL24 EB/WB @ MP 5.26 at AL247 in Russellville until AL24 EB/WB @ MP 13 at CR 424 in Russellville",
+    "start": "2026-06-04",
+    "end": "2026-10-30",
+    "projectDays": 149,
+    "lat": 34.449,
+    "lon": -88.074
+   },
+   {
+    "route": "AL-25",
+    "place": "Centreville",
+    "mile": 92,
+    "closure": false,
+    "headline": "AL25 NB @ MP 92 at AL219 in Centreville until AL25 NB @ MP 93 at Collins Dr in Centreville",
+    "start": "2026-05-18",
+    "end": "2026-10-07",
+    "projectDays": 142,
+    "lat": 32.945,
+    "lon": -87.149
+   },
+   {
+    "route": "US-431",
+    "place": "Albertville",
+    "mile": 286.5,
+    "closure": false,
+    "headline": "US431 NB/SB @ MP 286.5 at Martling Rd in Albertville until US431 NB/SB @ MP 290.5 at Solitude Rd in Albertville",
+    "start": "2026-06-24",
+    "end": "2026-10-30",
+    "projectDays": 128,
+    "lat": 34.275,
+    "lon": -86.202
+   }
+  ]
+ },
+ "VT": {
+  "ongoing": [
+   {
+    "route": "I-89",
+    "place": "Royalton / Windsor / Exit 3 TO VT-107",
+    "mile": "",
+    "closure": false,
+    "headline": "I-89 — Construction — Bridge height restriction of 14' on VT-107 going under I-89 in Royalton near Exit 3. This restriction is to facilitate bridge construction efforts on I-89. There will also be daily lane closures on ",
+    "start": "2024-04-26",
+    "end": "2028-09-02",
+    "projectDays": 1590,
+    "lat": 43.825,
+    "lon": -72.582
+   },
+   {
+    "route": "I-89",
+    "place": "Royalton / Windsor / NA",
+    "mile": "22.42",
+    "closure": false,
+    "headline": "I-89 — Construction — TRAFFIC UPDATE: I-89 NB in Royalton at the bridge over the White River just before Exit 3, will be down to one lane of travel. The southbound crossover is in place, diverting traffic to one NB lane.",
+    "start": "2026-04-10",
+    "end": "2028-08-01",
+    "projectDays": 844,
+    "lat": 43.823,
+    "lon": -72.575
+   },
+   {
+    "route": "VT-103",
+    "place": "Chester / Windsor / Chester-MM 6.4",
+    "mile": "",
+    "closure": false,
+    "headline": "VT-103 — Construction — VT-103 in Chester, between and including Thompson Road and Jewett Road, one-lane alternating traffic for bridge demolition and the construction of a new, single replacement bridge. Drive with care",
+    "start": "2026-03-30",
+    "end": "2027-10-16",
+    "projectDays": 565,
+    "lat": 43.307,
+    "lon": -72.605
+   },
+   {
+    "route": "VT-12",
+    "place": "Northfield / Washington / NA",
+    "mile": "47.01",
+    "closure": false,
+    "headline": "VT-12 — Construction — VT-12 in Northfield between Old Mill Hill and VT-64, replacement of the existing retaining wall with related approach work. Traffic will be reduced to one lane with traffic signals.12-foot lane res",
+    "start": "2026-04-28",
+    "end": "2027-10-30",
+    "projectDays": 550,
+    "lat": 44.116,
+    "lon": -72.654
+   },
+   {
+    "route": "VT-31",
+    "place": "Poultney / Rutland / NA",
+    "mile": "5.39",
+    "closure": false,
+    "headline": "VT-31 — Construction — Poultney BF0145 (18) Rehabilitation of the VT-31 (South St) Bridge in Poultney over the Poultney River.",
+    "start": "2026-04-27",
+    "end": "2027-08-28",
+    "projectDays": 488,
+    "lat": 43.514,
+    "lon": -73.233
+   },
+   {
+    "route": "US-7",
+    "place": "Milton / Chittenden / NA",
+    "mile": "146.13",
+    "closure": false,
+    "headline": "US-7 — Construction — TRAFFIC ALERT: Construction - US 7 Milton from Centre Dr. and northerly approx. a half-mile, reconfiguration of an existing intersection, removal of the concrete base under US Route 7, construction ",
+    "start": "2026-04-01",
+    "end": "2027-07-10",
+    "projectDays": 465,
+    "lat": 44.622,
+    "lon": -73.123
+   }
+  ],
+  "started": [
+   {
+    "route": "US-7",
+    "place": "Brandon / Rutland / NA",
+    "mile": "78.48",
+    "closure": false,
+    "headline": "US-7 — Construction — Pittsford-Brandon NH 019-3 (494) Construction work along US-7 in Pittsford and Brandon between Chapel Hill and Hawk View Rd. Full depth reconstruction, replacement of multiple box culverts and pavin",
+    "start": "2026-10-21",
+    "end": "2028-10-14",
+    "projectDays": 724,
+    "lat": 43.767,
+    "lon": -73.051
+   },
+   {
+    "route": "VT-15",
+    "place": "Jericho / Chittenden / TH-6",
+    "mile": "11.24",
+    "closure": false,
+    "headline": "VT-15 — Construction — TRAFFIC ALERT: VT 15 Jericho at Lee River Rd. intersection. Construction of sidewalk and curbing, signing, crosswalks, roadway realignment and widening, paving, pavement markings, and other inciden",
+    "start": "2026-10-19",
+    "end": "2027-07-31",
+    "projectDays": 285,
+    "lat": 44.504,
+    "lon": -72.998
+   },
+   {
+    "route": "I-89",
+    "place": "South Burlington / Chittenden / NA",
+    "mile": "91.7",
+    "closure": false,
+    "headline": "I-89 — Construction — I-89 NB & SB in South Burlington just North of Exit 14(South Burlington) between 7:00 AM and 5:00 PM will have right shoulder closures while crews perform culvert work in the area. Expect workers in",
+    "start": "2026-10-13",
+    "end": "2026-12-16",
+    "projectDays": 64,
+    "lat": 44.477,
+    "lon": -73.179
+   },
+   {
+    "route": "US-4",
+    "place": "Rutland / Rutland / NA",
+    "mile": "18.05",
+    "closure": false,
+    "headline": "US-4 — Construction — BRIDGE WORK: Rutland Town BM24302 - Long-term bridge maintenance work along US-4 West in Rutland Town: joint replacement and approach work. Expect the roadway to be reduced to one lane with Jersey b",
+    "start": "2026-10-05",
+    "end": "2026-11-21",
+    "projectDays": 47,
+    "lat": 43.583,
+    "lon": -72.981
+   }
+  ],
+  "finished": [
+   {
+    "route": "VT-100",
+    "place": "Readsboro / Bennington / Phelps Ln",
+    "mile": "",
+    "closure": false,
+    "headline": "VT-100 — Construction — The temporary bridge in Readsboro over the Deerfield River is now open to two lane traffic. The existing bridge 25 will remain closed for reconstruction reopening in the summer of 2027.",
+    "start": "2025-02-26",
+    "end": "2027-11-13",
+    "projectDays": 990,
+    "lat": 42.772,
+    "lon": -72.946
+   },
+   {
+    "route": "VT-2A",
+    "place": "Williston / Chittenden / Williston-MM 4.6",
+    "mile": "",
+    "closure": false,
+    "headline": "VT-2A — Construction — TRAFFIC ALERT: Project is for improvements to the intersection of VT-2A and Industrial Ave and Mountain View Drive, and corresponding corridor and intersection improvements on VT Route 2A, in the T",
+    "start": "2025-04-01",
+    "end": "2026-10-17",
+    "projectDays": 564,
+    "lat": 44.462,
+    "lon": -73.113
+   },
+   {
+    "route": "VT-15",
+    "place": "Wolcott / Lamoille / School St",
+    "mile": "",
+    "closure": false,
+    "headline": "VT-15 — Construction — TRAFFIC ALERT: Shoulder closure on VT 15 Wolcott near School St. to facilitate bridge construction on School St. Drive with care.",
+    "start": "2025-10-06",
+    "end": "2026-10-17",
+    "projectDays": 376,
+    "lat": 44.547,
+    "lon": -72.458
+   },
+   {
+    "route": "VT-15",
+    "place": "Hardwick / Caledonia / Terrace Hill Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "VT-15 — Construction — Temporary traffic signal at the intersection of VT-14 and VT-15 (South Main/Wolcott St.) in the town of Hardwick, for construction work. Expect delays and workers and equipment in and about the roa",
+    "start": "2026-02-27",
+    "end": "2026-10-17",
+    "projectDays": 232,
+    "lat": 44.504,
+    "lon": -72.368
+   },
+   {
+    "route": "I-89",
+    "place": "Bethel / Windsor / NA",
+    "mile": "25.81",
+    "closure": false,
+    "headline": "I-89 — Construction — Bethel Brookfield IM-089-1(72)(73) Paving along I-89 NB in Bethel and Brookfield MM 25 to MM 36 expect lane closures, rough and uneven surfaces.",
+    "start": "2026-04-27",
+    "end": "2026-10-17",
+    "projectDays": 173,
+    "lat": 43.866,
+    "lon": -72.608
+   },
+   {
+    "route": "VT-114",
+    "place": "Norton / Essex / NA",
+    "mile": "34.27",
+    "closure": false,
+    "headline": "VT-114 — Construction — Culvert replacement on VT-114 in Norton approx 2 miles south of the Norton border station. Expect one way alternating traffic controlled by a temporary signal.",
+    "start": "2026-05-01",
+    "end": "2026-10-17",
+    "projectDays": 169,
+    "lat": 44.988,
+    "lon": -71.81
+   }
+  ]
+ },
+ "ID": {
+  "ongoing": [
+   {
+    "route": "I-84",
+    "place": null,
+    "mile": 29,
+    "closure": false,
+    "headline": "Long term road construction on I-84 Westbound from Franklin IC to Centennial IC. All Lanes Affected. 11/3/2023 12:00 AM MT to 5/27/2027 6:00 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 24ft",
+    "start": "2023-11-03",
+    "end": "2027-05-28",
+    "projectDays": 1302,
+    "lat": 43.662,
+    "lon": -116.66
+   },
+   {
+    "route": "I-84",
+    "place": null,
+    "mile": 27,
+    "closure": false,
+    "headline": "Long term road construction on I-84 Eastbound from Centennial Way to Franklin Rd. 11/3/2023 12:00 AM MT to 5/27/2027 6:00 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 24ft  Speed Restriction",
+    "start": "2023-11-03",
+    "end": "2027-05-28",
+    "projectDays": 1302,
+    "lat": 43.68,
+    "lon": -116.689
+   },
+   {
+    "route": "I-84",
+    "place": null,
+    "mile": 165,
+    "closure": false,
+    "headline": "Road construction on I-84 Eastbound from MM (165) to MM (168). All Lanes Intermittent. 7/27/2023 7:00 AM to 11/20/2026 7:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 22ft  Speed Restriction:",
+    "start": "2023-07-27",
+    "end": "2026-11-21",
+    "projectDays": 1213,
+    "lat": 42.726,
+    "lon": -114.549
+   },
+   {
+    "route": "I-84",
+    "place": null,
+    "mile": 173,
+    "closure": false,
+    "headline": "Major Road construction on I-84 Westbound from MM (173) to MM (168). All Lanes Intermittent. 7/27/2023 7:00 AM to 11/20/2026 7:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Speed Restriction: 70mph Activities: ",
+    "start": "2023-07-27",
+    "end": "2026-11-21",
+    "projectDays": 1213,
+    "lat": 42.643,
+    "lon": -114.446
+   },
+   {
+    "route": "I-84",
+    "place": null,
+    "mile": 208,
+    "closure": false,
+    "headline": "Road construction on I-84 Eastbound near N Overland Ave. 2/27/2024 3:55 PM to 12/23/2026 7:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day",
+    "start": "2024-02-27",
+    "end": "2026-12-24",
+    "projectDays": 1030,
+    "lat": 42.568,
+    "lon": -113.796
+   },
+   {
+    "route": "SR-27",
+    "place": null,
+    "mile": 22,
+    "closure": false,
+    "headline": "Road construction on SH-27 Northbound near I-84. Lanes Alternating. 4/29/2024 3:49 PM to 12/26/2026 5:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day",
+    "start": "2024-04-29",
+    "end": "2026-12-27",
+    "projectDays": 971,
+    "lat": 42.541,
+    "lon": -113.793
+   }
+  ],
+  "started": [
+   {
+    "route": "US-20",
+    "place": null,
+    "mile": 49,
+    "closure": false,
+    "headline": "Work on the shoulder on US-20 Westbound Near S 9th St. 10/1/2026 8:00 AM MT to 5/31/2027 5:00 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day",
+    "start": "2026-10-01",
+    "end": "2027-05-31",
+    "projectDays": 242,
+    "lat": 43.615,
+    "lon": -116.206
+   },
+   {
+    "route": "SR-11",
+    "place": null,
+    "mile": 2,
+    "closure": false,
+    "headline": "Road construction on SH-11 Both Directions from Mp 2.4 to Mp 2.6. Lane Alternating. 10/14/2026 7:00 AM PT to 1/30/2027 4:00 PM PT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 11ft  Activities: Exp",
+    "start": "2026-10-14",
+    "end": "2027-01-31",
+    "projectDays": 108,
+    "lat": 46.384,
+    "lon": -116.17
+   },
+   {
+    "route": "SR-55",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Work on the shoulder on SH-55  Near SH-55. 10/12/2026 7:00 AM MT to 11/30/2026 7:00 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Activities: Use Caution.",
+    "start": "2026-10-12",
+    "end": "2026-12-01",
+    "projectDays": 50,
+    "lat": 44.514,
+    "lon": -116.04
+   },
+   {
+    "route": "SR-34",
+    "place": null,
+    "mile": 45,
+    "closure": false,
+    "headline": "Road construction on SH-34 Both Directions from W 2nd S to W 4th S. Lane Alternating. 10/15/2026 11:50 AM MT to 11/16/2026 8:00 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day",
+    "start": "2026-10-15",
+    "end": "2026-11-17",
+    "projectDays": 32,
+    "lat": 42.575,
+    "lon": -111.73
+   },
+   {
+    "route": "SR-46",
+    "place": null,
+    "mile": 111,
+    "closure": false,
+    "headline": "Road construction on SH-46 Both Directions from US-26 to 1st Ave E. 10/1/2026 7:00 AM MT to 10/31/2026 7:00 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 12ft  Activities: Expect Delays, Look",
+    "start": "2026-10-01",
+    "end": "2026-11-01",
+    "projectDays": 31,
+    "lat": 42.924,
+    "lon": -114.713
+   },
+   {
+    "route": "I-90",
+    "place": null,
+    "mile": 24,
+    "closure": false,
+    "headline": "Road construction on I-90 Both Directions from MM (24) to MM (32). 1 Right lane closed. 10/20/2026 8:43 AM PT to 11/20/2026 12:00 AM PT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 14ft  Activitie",
+    "start": "2026-10-20",
+    "end": "2026-11-20",
+    "projectDays": 31,
+    "lat": 47.631,
+    "lon": -116.611
+   }
+  ],
+  "finished": [
+   {
+    "route": "SR-54",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "New road construction layout on SH-54 Both Directions from SH-41 to N Greystone Rd. 9/20/2024 6:00 AM to 10/30/2026 6:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 10ft  Speed Restriction: 45",
+    "start": "2024-09-20",
+    "end": "2026-10-31",
+    "projectDays": 771,
+    "lat": 47.953,
+    "lon": -116.868
+   },
+   {
+    "route": "SR-55",
+    "place": null,
+    "mile": 38,
+    "closure": false,
+    "headline": "Work on the shoulder on SH-55 Northbound from E Fairview Ave to E Fairview Ave. 1 Right lane closed. 2/23/2026 12:00 AM MT to 10/12/2026 4:23 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day",
+    "start": "2026-02-23",
+    "end": "2026-10-12",
+    "projectDays": 232,
+    "lat": 43.619,
+    "lon": -116.354
+   },
+   {
+    "route": "US-30",
+    "place": null,
+    "mile": 404.5,
+    "closure": false,
+    "headline": "Road construction on US-30 Both Directions from MM (404.5) to MM (406.8). 4/27/2026 12:00 AM to 10/11/2026 12:00 AM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 12ft  Activities: Consider Alternat",
+    "start": "2026-04-27",
+    "end": "2026-10-11",
+    "projectDays": 167,
+    "lat": 42.655,
+    "lon": -111.614
+   },
+   {
+    "route": "US-93",
+    "place": null,
+    "mile": 35,
+    "closure": false,
+    "headline": "Road construction on US-93 Both Directions from 3250  N to E 3800  N. 6/2/2026 6:00 AM MT to 10/17/2026 6:00 PM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 9ft  Activities: Expect Delays, Look",
+    "start": "2026-06-02",
+    "end": "2026-10-18",
+    "projectDays": 138,
+    "lat": 42.469,
+    "lon": -114.575
+   },
+   {
+    "route": "US-91",
+    "place": null,
+    "mile": 80,
+    "closure": false,
+    "headline": "Road construction on US-91 from MM (80) to MM (81). All Lanes Intermittent. 7/6/2026 8:00 PM MT to 10/16/2026 6:00 AM MT Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 12ft  Activities: Consider Alt",
+    "start": "2026-07-07",
+    "end": "2026-10-16",
+    "projectDays": 101,
+    "lat": 42.913,
+    "lon": -112.467
+   },
+   {
+    "route": "US-95",
+    "place": null,
+    "mile": 320,
+    "closure": false,
+    "headline": "Paving Operations on US-95 Northbound from MM (320) to Thorn Creek Rd. 7/13/2026 6:00 AM to 10/2/2026 6:00 PM Mon, Tue, Wed, Thu, Fri, Sat, Sun: Active all day Width Restriction: 16ft  Speed Restriction: 45mph Activities",
+    "start": "2026-07-13",
+    "end": "2026-10-03",
+    "projectDays": 82,
+    "lat": 46.485,
+    "lon": -117.034
+   }
+  ]
+ },
+ "NM": {
+  "ongoing": [
+   {
+    "route": "I-25",
+    "place": "Roadwork, I 25 northbound and southbound at mile marker 203, Meadow Lake (NM 6/L",
+    "mile": "203",
+    "closure": false,
+    "headline": "Roadwork, I 25 northbound and southbound at mile marker 203, Meadow Lake (NM 6/LOS LUNAS).",
+    "start": "2026-02-10",
+    "end": "2029-07-31",
+    "projectDays": 1267,
+    "lat": 34.81,
+    "lon": -106.763
+   },
+   {
+    "route": "NM-500",
+    "place": "Roadwork, NM 500 eastbound and westbound at mile marker 2.",
+    "mile": "2",
+    "closure": false,
+    "headline": "Roadwork, NM 500 eastbound and westbound at mile marker 2.",
+    "start": "2026-02-10",
+    "end": "2029-02-28",
+    "projectDays": 1114,
+    "lat": 35.027,
+    "lon": -106.678
+   }
+  ],
+  "started": [
+   {
+    "route": "I-25",
+    "place": "Lane Closure, I 25 northbound and southbound from mile marker 40, 1 mile south o",
+    "mile": "40",
+    "closure": false,
+    "headline": "Lane Closure, I 25 northbound and southbound from mile marker 40, 1 mile south of Hatch to mile marker 42, 1 mile north of Hatch.",
+    "start": "2026-10-22",
+    "end": "2026-12-05",
+    "projectDays": 43,
+    "lat": 32.684,
+    "lon": -107.154
+   }
+  ],
+  "finished": []
+ },
+ "NH": {
+  "ongoing": [
+   {
+    "route": "NH-124",
+    "place": "Jaffrey / Cheshire / Blake St",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-124 — Construction — Long Term Construction Project: Jaffrey, Intersection improvements for US-202 at NH-124 and NH137.  Project #16307.\r\nhttps://www.dot.nh.gov/projects-plans-and-programs/project-center/jaffrey-16307",
+    "start": "2025-03-06",
+    "end": "2028-07-01",
+    "projectDays": 1213,
+    "lat": 42.814,
+    "lon": -72.022
+   },
+   {
+    "route": "NH-125",
+    "place": "Plaistow / Rockingham / Old County Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-125 — Construction — Long Term Construction: Plaistow - Kingston, NH-125 from Old County Rd to Hunt Rd. Roadway improvement to include widening, drainage and road weather station construction.  Project 10044E",
+    "start": "2025-10-17",
+    "end": "2028-09-09",
+    "projectDays": 1058,
+    "lat": 42.856,
+    "lon": -71.097
+   },
+   {
+    "route": "NH-12",
+    "place": "Charlestown / Sullivan / South Main Street",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-12 — Construction — Long Term Construction Project: Charlestown - Claremont, NH-12/11 from S. Main St to Grissom Ln, Pavement Preservation Project #43910.",
+    "start": "2025-10-17",
+    "end": "2027-09-25",
+    "projectDays": 708,
+    "lat": 43.229,
+    "lon": -72.423
+   },
+   {
+    "route": "NH-12",
+    "place": "Westmoreland / Cheshire / South Village Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-12 — Construction — Long Term Construction Project: Westmoreland - Walpole, NH-12 from S. Village Rd to Main St, Pavement Preservation Project #43910.",
+    "start": "2025-10-17",
+    "end": "2027-09-25",
+    "projectDays": 708,
+    "lat": 42.99,
+    "lon": -72.39
+   },
+   {
+    "route": "I-89",
+    "place": "Lebanon / Grafton / CONNECTICUT RIVER,NECRR",
+    "mile": "",
+    "closure": false,
+    "headline": "I-89 S — Construction — Long Term Construction Project: I-89 Lebanon, NH ??? Hartford, VT Bridge Reconstruction and Widening Proj #16148\r\nhttps://www.dot.nh.gov/projects-plans-and-programs/project-center/lebanon-hartford",
+    "start": "2025-01-15",
+    "end": "2026-12-01",
+    "projectDays": 685,
+    "lat": 43.634,
+    "lon": -72.329
+   },
+   {
+    "route": "NH-28",
+    "place": "Londonderry / Rockingham / Stonehenge Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-28 — Construction — Long Term Construction Project: Londonderry, NH-28 North and South of Stonehenge Rd, Culvert Replacement Project #41715. \r\n\r\nhttps://maps.dot.nh.gov/reports/plan-inventory/?p=41715",
+    "start": "2025-10-02",
+    "end": "2027-06-02",
+    "projectDays": 608,
+    "lat": 42.902,
+    "lon": -71.36
+   }
+  ],
+  "started": [],
+  "finished": [
+   {
+    "route": "NH-101",
+    "place": "Candia / Rockingham / 65.2",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-101 — Construction — Long Term Construction Project: Auburn - Candia, NH-101 Eastbound from NH-121 to the Raymond T/L, pavement preservation project #44750.\r\n\r\nhttps://maps.dot.nh.gov/reports/plan-inventory/?p=44750",
+    "start": "2025-07-31",
+    "end": "2026-10-03",
+    "projectDays": 429,
+    "lat": 43.037,
+    "lon": -71.329
+   },
+   {
+    "route": "NH-101",
+    "place": "Exeter / Rockingham / 84.8",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-101 — Construction — Long Term Construction:  Epping - Exeter, NH-101 EB/ WB from NH-27 to NH-85, pavement preservation project #44750.\r\n\r\nhttps://maps.dot.nh.gov/reports/plan-inventory/?p=44750",
+    "start": "2025-07-31",
+    "end": "2026-10-03",
+    "projectDays": 429,
+    "lat": 43.003,
+    "lon": -70.962
+   },
+   {
+    "route": "NH-101",
+    "place": "Epping / Rockingham / 77.6",
+    "mile": "",
+    "closure": false,
+    "headline": "NH-101 — Construction — Long Term Construction:  Epping, NH-101 EB/ WB from Beede Rd to NH-125, pavement preservation project #44750.\r\n\r\nhttps://maps.dot.nh.gov/reports/plan-inventory/?p=44750",
+    "start": "2025-07-31",
+    "end": "2026-10-03",
+    "projectDays": 429,
+    "lat": 43.026,
+    "lon": -71.099
+   },
+   {
+    "route": "I-95",
+    "place": "North Hampton / Rockingham / NH 151",
+    "mile": "8.04",
+    "closure": false,
+    "headline": "I-95 — Construction — Long Term Construction Project: North Hampton - Greenland - Portsmouth, I-95 North and South, Mile 8.0 to 13.2, median barrier installation.   Project #45027\r\n\r\nhttps://maps.dot.nh.gov/reports/plan-",
+    "start": "2026-03-27",
+    "end": "2026-10-10",
+    "projectDays": 197,
+    "lat": 42.994,
+    "lon": -70.848
+   }
+  ]
+ },
+ "WI": {
+  "ongoing": [
+   {
+    "route": "I-94",
+    "place": "Milwaukee",
+    "mile": 307.2,
+    "closure": true,
+    "headline": "Roadwork - Ramp Full Closure on I-94 WB at OFF RAMP TO HAWLEY RD. Detour: WB I-94 Exit to NB STH 175 Exit to EB Wisconsin Ave to SB/WB Bluemound Rd to Hawley Rd",
+    "start": "2025-11-07",
+    "end": "2028-11-30",
+    "projectDays": 1119,
+    "lat": 43.03,
+    "lon": -87.988
+   },
+   {
+    "route": "I-94",
+    "place": "Milwaukee",
+    "mile": 307.3,
+    "closure": true,
+    "headline": "Roadwork - Ramp Full Closure on I-94 EB at ON RAMP FROM HAWLEY RD. Detour: NB N. Hawley Rd. to EB W. Bluemound Rd to EB W. Wisconsin Ave to SB 35th St",
+    "start": "2025-11-05",
+    "end": "2028-11-15",
+    "projectDays": 1106,
+    "lat": 43.03,
+    "lon": -87.985
+   },
+   {
+    "route": "I-94",
+    "place": "Milwaukee",
+    "mile": 307.1,
+    "closure": true,
+    "headline": "Roadwork - Ramp Full Closure on I-94 WB at ON RAMP FROM W HAWLEY RD. Detour: NB N. Hawley Rd. to WB W. Bluemound Rd. to SB N. 84th St to WB I-94",
+    "start": "2025-11-07",
+    "end": "2028-11-15",
+    "projectDays": 1104,
+    "lat": 43.03,
+    "lon": -87.989
+   },
+   {
+    "route": "I-94",
+    "place": "Milwaukee",
+    "mile": 306.8,
+    "closure": true,
+    "headline": "Roadwork - Ramp Full Closure on I-94 WB at OFF RAMP TO 68TH ST",
+    "start": "2026-03-21",
+    "end": "2028-11-17",
+    "projectDays": 972,
+    "lat": 43.03,
+    "lon": -87.995
+   },
+   {
+    "route": "I-41",
+    "place": "Outagamie",
+    "mile": 153.6,
+    "closure": true,
+    "headline": "Roadwork - Ramp Full Closure on I-41 NB at ON RAMP FROM WEIGH STATION #34",
+    "start": "2025-07-30",
+    "end": "2027-11-01",
+    "projectDays": 823,
+    "lat": 44.342,
+    "lon": -88.2
+   },
+   {
+    "route": "I-41",
+    "place": "Outagamie",
+    "mile": 153.4,
+    "closure": true,
+    "headline": "Roadwork - Ramp Full Closure on I-41 NB at OFF RAMP TO WEIGH STATION #34",
+    "start": "2025-07-30",
+    "end": "2027-11-01",
+    "projectDays": 823,
+    "lat": 44.339,
+    "lon": -88.203
+   }
+  ],
+  "started": [
+   {
+    "route": "I-41",
+    "place": "Brown",
+    "mile": 155.9,
+    "closure": false,
+    "headline": "Roadwork - Mainline Left Shoulder Closed on I-41 SB from ON RAMP FROM COUNTY S to COUNTY JJ (BRIDGE CROSSING)",
+    "start": "2026-10-08",
+    "end": "2027-03-20",
+    "projectDays": 163,
+    "lat": 44.369,
+    "lon": -88.176
+   },
+   {
+    "route": "I-41",
+    "place": "Brown",
+    "mile": 154.4,
+    "closure": false,
+    "headline": "Roadwork - Mainline Left Shoulder Closed on I-41 NB from ON RAMP FROM COUNTY U to OFF RAMP TO COUNTY S",
+    "start": "2026-10-20",
+    "end": "2027-03-21",
+    "projectDays": 152,
+    "lat": 44.353,
+    "lon": -88.19
+   },
+   {
+    "route": "I-41",
+    "place": "Outagamie",
+    "mile": 145.7,
+    "closure": false,
+    "headline": "Roadwork - Mainline Left Shoulder Closed on I-41 SB from BRIDGE (BRIDGE CROSSING) to RAMP I-41 SB to WIS 441 SB (BRIDGE CROSSING)",
+    "start": "2026-10-19",
+    "end": "2027-03-20",
+    "projectDays": 152,
+    "lat": 44.298,
+    "lon": -88.342
+   },
+   {
+    "route": "WI-50",
+    "place": "Kenosha",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork - Mainline Right Shoulder Closed on WIS 50 EB from 144TH AVE to 130TH AVE",
+    "start": "2026-10-07",
+    "end": "2027-01-01",
+    "projectDays": 86,
+    "lat": 42.567,
+    "lon": -87.982
+   },
+   {
+    "route": "WI-50",
+    "place": "Kenosha",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork - Mainline Right Shoulder Closed on WIS 50 WB from 130TH AVE  to 144TH AVE",
+    "start": "2026-10-07",
+    "end": "2027-01-01",
+    "projectDays": 86,
+    "lat": 42.567,
+    "lon": -87.964
+   },
+   {
+    "route": "WI-114",
+    "place": "Calumet",
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork - Mainline Flagging Operation on WIS 114 EB from WIS 114 EB (BEGIN CC) to WIS 55 NB (END DIVIDED)",
+    "start": "2026-10-21",
+    "end": "2027-01-01",
+    "projectDays": 72,
+    "lat": 44.192,
+    "lon": -88.285
+   }
+  ],
+  "finished": [
+   {
+    "route": "I-94",
+    "place": "St Croix",
+    "mile": 9.9,
+    "closure": false,
+    "headline": "Roadwork - Mainline Left Shoulder Closed on I-94 WB from ON RAMP FROM WIS 65 to OFF RAMP TO US 12 EB",
+    "start": "2024-09-03",
+    "end": "2026-10-17",
+    "projectDays": 774,
+    "lat": 44.96,
+    "lon": -92.564
+   },
+   {
+    "route": "I-94",
+    "place": "St Croix",
+    "mile": 4.6,
+    "closure": false,
+    "headline": "Roadwork - Mainline Left Shoulder Closed on I-94 EB from ON RAMP FROM US 12 to OFF RAMP TO WIS 65 NB",
+    "start": "2024-09-03",
+    "end": "2026-10-17",
+    "projectDays": 774,
+    "lat": 44.964,
+    "lon": -92.677
+   },
+   {
+    "route": "I-41",
+    "place": "Brown",
+    "mile": 160.5,
+    "closure": false,
+    "headline": "Roadwork - Mainline Right Shoulder Closed on I-41 SB from ON RAMP FROM COUNTY F to ON RAMP FROM COUNTY F",
+    "start": "2025-10-02",
+    "end": "2026-10-24",
+    "projectDays": 386,
+    "lat": 44.422,
+    "lon": -88.127
+   },
+   {
+    "route": "I-41",
+    "place": "Brown",
+    "mile": 159.9,
+    "closure": false,
+    "headline": "Roadwork - Mainline Right Shoulder Closed on I-41 NB from BRIDGE (BRIDGE CROSSING) to COUNTY F (Scheuring Road) (BRIDGE CROSSING)",
+    "start": "2025-10-02",
+    "end": "2026-10-24",
+    "projectDays": 386,
+    "lat": 44.417,
+    "lon": -88.132
+   },
+   {
+    "route": "US-53",
+    "place": "Barron",
+    "mile": 137.9,
+    "closure": false,
+    "headline": "Roadwork - Mainline Various Lanes Closed on US 53 SB from 15TH AVE (BRIDGE CROSSING) to CARLSON SCHOOL DRIVE (BRIDGE CROSSING)",
+    "start": "2026-03-02",
+    "end": "2026-10-10",
+    "projectDays": 222,
+    "lat": 45.428,
+    "lon": -91.762
+   },
+   {
+    "route": "I-41",
+    "place": "Brown",
+    "mile": 154.3,
+    "closure": false,
+    "headline": "Roadwork - Ramp Left Shoulder Closed on I-41 SB at OFF RAMP TO COUNTY U",
+    "start": "2026-03-23",
+    "end": "2026-10-10",
+    "projectDays": 201,
+    "lat": 44.352,
+    "lon": -88.191
+   }
+  ]
+ },
+ "IL": {
+  "ongoing": [
+   {
+    "route": "I-294",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between Cermak Rd/22nd St and I-88/I-290 - Roadwork. Hard shoulder closed. Lane closed.",
+    "start": "2023-12-18",
+    "end": "2026-12-22",
+    "projectDays": 1101,
+    "lat": 41.823,
+    "lon": -87.916
+   },
+   {
+    "route": "I-294",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between Cermak Rd/22nd St and Cermak Road Toll Plaza - Roadwork. Hard shoulder closed. Lane closed.",
+    "start": "2023-12-18",
+    "end": "2026-12-02",
+    "projectDays": 1081,
+    "lat": 41.823,
+    "lon": -87.916
+   },
+   {
+    "route": "I-294",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between US-34/Ogden Ave and Cermak Road Toll Plaza - Roadwork. Hard shoulder closed. Lane closed.",
+    "start": "2023-12-18",
+    "end": "2026-12-02",
+    "projectDays": 1081,
+    "lat": 41.823,
+    "lon": -87.916
+   },
+   {
+    "route": "I-294",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between Hinsdale Oasis and Cermak Road Toll Plaza - Roadwork. Hard shoulder closed. Lane closed.",
+    "start": "2023-12-18",
+    "end": "2026-12-02",
+    "projectDays": 1081,
+    "lat": 41.663,
+    "lon": -87.738
+   },
+   {
+    "route": "I-80",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Ramp  closed to S Raynor Ave Northbound - Closed.",
+    "start": "2025-12-22",
+    "end": "2028-11-22",
+    "projectDays": 1066,
+    "lat": 41.512,
+    "lon": -88.102
+   },
+   {
+    "route": "I-80",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Ramp  closed to S Raynor Ave Southbound - Closed.",
+    "start": "2025-12-22",
+    "end": "2028-11-22",
+    "projectDays": 1066,
+    "lat": 41.513,
+    "lon": -88.096
+   }
+  ],
+  "started": [
+   {
+    "route": "US-50",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between IL-4/Exit 23 and Green Mt Rd/Exit 16 - Construction work. Lane blocked.",
+    "start": "2026-10-06",
+    "end": "2027-10-31",
+    "projectDays": 390,
+    "lat": 38.575,
+    "lon": -89.882
+   },
+   {
+    "route": "IL-13",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "At CR-26/Spillway Rd - Construction work.",
+    "start": "2026-10-01",
+    "end": "2027-10-01",
+    "projectDays": 365,
+    "lat": 37.745,
+    "lon": -89.127
+   },
+   {
+    "route": "I-57",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between US-45/Exit 177 and Green Creek Rest Area - Construction work.",
+    "start": "2026-10-06",
+    "end": "2026-12-12",
+    "projectDays": 67,
+    "lat": 39.215,
+    "lon": -88.487
+   },
+   {
+    "route": "I-294",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Ramp  closed to I-294 SB and IL-38/Roosevelt Rd - Closed.",
+    "start": "2026-10-01",
+    "end": "2026-11-21",
+    "projectDays": 51,
+    "lat": 41.872,
+    "lon": -87.912
+   },
+   {
+    "route": "I-57",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between Green Creek Rest Area and US-45/Exit 177 - Construction work.",
+    "start": "2026-10-06",
+    "end": "2026-11-21",
+    "projectDays": 46,
+    "lat": 39.316,
+    "lon": -88.438
+   },
+   {
+    "route": "I-294",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "At 82nd/83rd St Toll Plaza - Roadwork. Hard shoulder closed. Lane closed.",
+    "start": "2026-10-12",
+    "end": "2026-11-25",
+    "projectDays": 44,
+    "lat": 41.736,
+    "lon": -87.822
+   }
+  ],
+  "finished": [
+   {
+    "route": "I-180",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "At IL-26/CR-2450/1200 Ave - Roadwork. Roadway reduced to 1 lane. Lane blocked.",
+    "start": "2025-03-05",
+    "end": "2026-10-27",
+    "projectDays": 601,
+    "lat": 41.291,
+    "lon": -89.4
+   },
+   {
+    "route": "IL-29",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "At IL-26/CR-2450/1200 Ave - Roadwork. Roadway reduced to 1 lane. Lane blocked.",
+    "start": "2025-03-05",
+    "end": "2026-10-27",
+    "projectDays": 601,
+    "lat": 41.291,
+    "lon": -89.4
+   },
+   {
+    "route": "IL-59",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between W 135th St and IL-126/W Main St - Construction work. Left lane blocked.",
+    "start": "2025-04-03",
+    "end": "2026-10-05",
+    "projectDays": 549,
+    "lat": 41.625,
+    "lon": -88.203
+   },
+   {
+    "route": "IL-59",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Between IL-126/W Main St and W 135th St - Construction work. Left lane blocked.",
+    "start": "2025-04-03",
+    "end": "2026-10-05",
+    "projectDays": 549,
+    "lat": 41.621,
+    "lon": -88.203
+   },
+   {
+    "route": "IL-1",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Ramp  closed to I-80 Eastbound/I-294 Southbound - Closed.",
+    "start": "2025-08-19",
+    "end": "2026-10-02",
+    "projectDays": 409,
+    "lat": 41.574,
+    "lon": -87.636
+   },
+   {
+    "route": "I-90",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Ramp  to I-90 WB and IL-53 NB - Roadwork. Lane closed.",
+    "start": "2025-10-10",
+    "end": "2026-10-18",
+    "projectDays": 373,
+    "lat": 42.057,
+    "lon": -88.029
+   }
+  ]
+ },
+ "ME": {
+  "ongoing": [
+   {
+    "route": "ME-15",
+    "place": "Dover-Foxcroft / Piscataquis / Rd Inv 21 00434",
+    "mile": "",
+    "closure": false,
+    "headline": "ME-15 — Construction — Dover - Foxcroft Essex Street Bridge closed starting March 25, 2026, between River Street and Essex Street due bridge replacement. Project location begins at the intersection of Essex and River Str",
+    "start": "2026-03-25",
+    "end": "2028-10-16",
+    "projectDays": 936,
+    "lat": 45.184,
+    "lon": -69.219
+   },
+   {
+    "route": "ME-15",
+    "place": "Bangor / Penobscot / Rd Inv 3201923",
+    "mile": "",
+    "closure": false,
+    "headline": "ME-15 — Construction — Bangor - Interstate 95 - Exit 185 North and South bound lanes Bridge replacement with ramp improvements with lane closures or full closures will be mostly done at night.\r\n\r\n(MaineDOT) will be imple",
+    "start": "2024-09-19",
+    "end": "2026-11-07",
+    "projectDays": 779,
+    "lat": 44.819,
+    "lon": -68.775
+   },
+   {
+    "route": "US-201",
+    "place": "Skowhegan / Somerset / Pleasant St",
+    "mile": "",
+    "closure": false,
+    "headline": "US-201 — Construction — Skowhegan, from Coburn Ave intersection to Margeret Chase Smith Library, Sept 14, 2026, until October 15, 2026, Temporary traffic signals alternating single lane for sidewalk construction with dra",
+    "start": "2025-05-04",
+    "end": "2026-12-16",
+    "projectDays": 591,
+    "lat": 44.766,
+    "lon": -69.724
+   },
+   {
+    "route": "I-95",
+    "place": "Bangor / Penobscot / Ramp Off To Hogan Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "I-95 — Construction — Bangor, Hogan Rd Bridge, Bridge Construction and Ramp realignments, multiple lanes reduced to one lane in each direction. Mon-Fri 7AM-6PM. Use Caution",
+    "start": "2026-04-13",
+    "end": "2027-11-13",
+    "projectDays": 579,
+    "lat": 44.836,
+    "lon": -68.742
+   },
+   {
+    "route": "ME-117",
+    "place": "Norway / Oxford / Inv 1701619 Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "ME-117 — Construction — Norway Rte 117 Tannery Brook Bridge #3610 located on Main Street/Route 17 over Tannery Brook approximately 0.15 miles Westerly of Junction Route 118 in Norway, Maine reduced to two 11 feet lanes s",
+    "start": "2025-04-10",
+    "end": "2026-10-31",
+    "projectDays": 569,
+    "lat": 44.212,
+    "lon": -70.538
+   },
+   {
+    "route": "ME-111",
+    "place": "Biddeford / York / Summer St",
+    "mile": "",
+    "closure": false,
+    "headline": "ME-111 — Construction — Biddeford Rte 111 reduced to one lane 11.6 foot width restriction Starting April 13, 2026 until Nov 15, 2026 Monday thur Sunday 6:00 a.m. to 8:00 p.m.",
+    "start": "2026-04-09",
+    "end": "2026-11-16",
+    "projectDays": 221,
+    "lat": 43.491,
+    "lon": -70.456
+   }
+  ],
+  "started": [],
+  "finished": [
+   {
+    "route": "I-395",
+    "place": "Bangor / Penobscot / Odlin Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "I-395 — Construction — Bangor / Brewer 395 East and West, Road Maintenance. Use Caution",
+    "start": "2025-07-11",
+    "end": "2026-10-02",
+    "projectDays": 448,
+    "lat": 44.787,
+    "lon": -68.813
+   },
+   {
+    "route": "ME-102",
+    "place": "Mount Desert / Hancock / Oak Hill Rd",
+    "mile": "",
+    "closure": false,
+    "headline": "ME-102 — Construction — Mount Desert starting August 5th, 2025, the Babson bridge will be closed with a temporary detour bridge in place that has an 11-foot width restriction. There could be one-lane intermittent traffic",
+    "start": "2025-08-05",
+    "end": "2026-10-06",
+    "projectDays": 427,
+    "lat": 44.369,
+    "lon": -68.331
+   }
+  ]
+ },
+ "LA": {
+  "ongoing": [
+   {
+    "route": "LA-10",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Bridge Maintenance Operations on LA-10 Both Directions from Bayou Ha Ha to Frame St . All lanes closed. Starting 11/26/2025 7:00 AM and Ending 4/28/2028 5:00 PM.",
+    "start": "2025-11-26",
+    "end": "2028-04-28",
+    "projectDays": 884,
+    "lat": 30.693,
+    "lon": -91.784
+   },
+   {
+    "route": "LA-26",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road Construction on LA-26 Both Directions from W Racca Rd to Perrys Trailer Dr.  Lanes Alternating. Width Restriction: 12ft Starting 3/9/2026 12:00 AM and Ending 10/29/2027 11:59 PM.",
+    "start": "2026-03-09",
+    "end": "2027-10-30",
+    "projectDays": 600,
+    "lat": 30.2,
+    "lon": -92.664
+   },
+   {
+    "route": "I-210",
+    "place": null,
+    "mile": 1,
+    "closure": false,
+    "headline": "Road Construction on I-210 Westbound from D'Lnde Bayou (MM 1) to I-10 (MM 1) . 1 Left Lane Affected. Width Restriction: 11ft Starting 9/25/2026 12:00 AM and Ending 10/31/2027 11:59 PM.",
+    "start": "2026-09-25",
+    "end": "2027-11-01",
+    "projectDays": 402,
+    "lat": 30.219,
+    "lon": -93.295
+   },
+   {
+    "route": "I-210",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road Maintenance Operations on ramp from I-210 Westbound to I-10 Westbound . 1 Right lane closed. Starting 9/25/2026 11:30 AM and Ending 10/31/2027 12:00 AM.",
+    "start": "2026-09-25",
+    "end": "2027-10-31",
+    "projectDays": 401,
+    "lat": 30.225,
+    "lon": -93.3
+   },
+   {
+    "route": "I-49",
+    "place": null,
+    "mile": 19,
+    "closure": false,
+    "headline": "Utility Work on I-49 Both Directions from LA-31 (MM 19) to LA-31 (MM 18) . Lanes Alternating. Starting 10/30/2025 7:00 AM and Ending 11/30/2026 6:00 PM.",
+    "start": "2025-10-30",
+    "end": "2026-12-01",
+    "projectDays": 397,
+    "lat": 30.523,
+    "lon": -92.068
+   },
+   {
+    "route": "I-20",
+    "place": null,
+    "mile": 160,
+    "closure": false,
+    "headline": "Paving Operations on I-20 Both Directions from Tensas River (MM 160) to US-80 (MM 180) . All Lanes Affected. Starting 5/18/2026 12:00 AM and Ending 5/31/2027 11:59 PM.",
+    "start": "2026-05-18",
+    "end": "2027-06-01",
+    "projectDays": 379,
+    "lat": 32.426,
+    "lon": -91.385
+   }
+  ],
+  "started": [
+   {
+    "route": "LA-82",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Bridge Closure on LA-82 Both Directions from Bernard Blvd to Vine St . All lanes closed. Additional Restrictions: Vehicle Restriction No Access For Emergency Starting 10/12/2026 12:00 AM and Ending 5/31/2027 12:00 AM.",
+    "start": "2026-10-12",
+    "end": "2027-05-31",
+    "projectDays": 231,
+    "lat": 29.953,
+    "lon": -92.156
+   },
+   {
+    "route": "LA-589",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Bridge Construction on LA-589 Both Directions from Nicholson Dr to Skinner Ln . All lanes closed. Additional Restrictions: Vehicle Restriction No Access For Emergency Starting 10/12/2026 12:00 AM and Ending 4/30/2027 11:",
+    "start": "2026-10-12",
+    "end": "2027-05-01",
+    "projectDays": 201,
+    "lat": 32.791,
+    "lon": -91.406
+   },
+   {
+    "route": "LA-155",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Bridge Construction on LA-155 Both Directions from New Hope Rd to Parish Road 300 . All lanes closed. Additional Restrictions: Vehicle Restriction No Access For Emergency Starting 10/19/2026 12:00 AM and Ending 3/31/2027",
+    "start": "2026-10-19",
+    "end": "2027-04-01",
+    "projectDays": 164,
+    "lat": 32.358,
+    "lon": -92.577
+   },
+   {
+    "route": "I-55",
+    "place": null,
+    "mile": 29,
+    "closure": false,
+    "headline": "Road Marking Operations on I-55 Northbound from US-51 (MM 29) to LA 1050 (MM 61) . Lanes Alternating. Starting 10/18/2026 8:00 PM and Ending 3/2/2027 6:00 AM.",
+    "start": "2026-10-19",
+    "end": "2027-03-02",
+    "projectDays": 134,
+    "lat": 30.468,
+    "lon": -90.481
+   },
+   {
+    "route": "LA-83",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Road Construction on LA-83 from Bayou Patout Bridge to Bayou Patoout Bridge . All lanes closed. Starting 10/26/2026 6:00 AM and Ending 2/28/2027 6:00 PM.",
+    "start": "2026-10-26",
+    "end": "2027-03-01",
+    "projectDays": 126,
+    "lat": 29.827,
+    "lon": -91.794
+   },
+   {
+    "route": "LA-92",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Utility Work on LA-92 Both Directions from US-167 to Autumn Park Dr . Lane Intermittent. Starting 10/8/2026 7:00 AM and Ending 1/31/2027 4:30 PM.",
+    "start": "2026-10-08",
+    "end": "2027-01-31",
+    "projectDays": 115,
+    "lat": 30.103,
+    "lon": -92.124
+   }
+  ],
+  "finished": [
+   {
+    "route": "LA-316",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road Maintenance Operations on LA-316 Both Directions from LA-24 Eastbound to LA-182 . Lanes Alternating. Starting 9/8/2025 7:00 AM and Ending 10/16/2026 5:00 PM.",
+    "start": "2025-09-08",
+    "end": "2026-10-16",
+    "projectDays": 403,
+    "lat": 29.698,
+    "lon": -90.787
+   },
+   {
+    "route": "LA-3127",
+    "place": null,
+    "mile": 11,
+    "closure": false,
+    "headline": "Paving Operations on LA-3127 Both Directions from Hymel Canal (MM 11) to Ascension St James Parish Line . Lanes Alternating. Width Restriction: 12ft 0in Starting 11/3/2025 6:00 AM and Ending 10/30/2026 6:00 PM.",
+    "start": "2025-11-03",
+    "end": "2026-10-30",
+    "projectDays": 361,
+    "lat": 29.913,
+    "lon": -90.411
+   },
+   {
+    "route": "LA-1062",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Bridge Maintenance Operations on LA-1062 Both Directions from Firetower Ln to  1.2 Mi South of Caboose Ln . All lanes closed. Starting 1/29/2026 6:00 AM and Ending 10/30/2026 7:00 PM.",
+    "start": "2026-01-29",
+    "end": "2026-10-31",
+    "projectDays": 275,
+    "lat": 30.661,
+    "lon": -90.376
+   },
+   {
+    "route": "LA-466",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Utility Work on LA-466 Westbound from LA 428 (Franklin St.) to Richard St.  All lanes closed. Starting 1/19/2026 4:25 AM and Ending 10/19/2026 6:00 PM.",
+    "start": "2026-01-19",
+    "end": "2026-10-19",
+    "projectDays": 274,
+    "lat": 29.922,
+    "lon": -90.05
+   },
+   {
+    "route": "LA-1026",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Bridge Closure on LA-1026 Both Directions from Dave Clark Rd to LA-1026/Linder/Cockerham Roundabout  . All lanes closed. Starting 7/22/2026 7:00 AM and Ending 10/13/2026 5:00 PM.",
+    "start": "2026-07-22",
+    "end": "2026-10-13",
+    "projectDays": 83,
+    "lat": 30.511,
+    "lon": -90.939
+   },
+   {
+    "route": "I-10",
+    "place": null,
+    "mile": 26,
+    "closure": false,
+    "headline": "Road Maintenance Operations on I-10 Westbound from PPG Dr (MM 26) to I-210 Westbound (MM 25) . 1 Left lane closed. Starting 8/9/2026 8:00 PM and Ending 10/30/2026 5:00 AM.",
+    "start": "2026-08-10",
+    "end": "2026-10-30",
+    "projectDays": 81,
+    "lat": 30.233,
+    "lon": -93.291
+   }
+  ]
+ },
+ "OK": {
+  "ongoing": [],
+  "started": [],
+  "finished": [
+   {
+    "route": "OK-6",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "GRADE, DRAIN, SURFACE, AND DOWNTOWN STREETSCAPE",
+    "start": "2024-05-28",
+    "end": "2026-10-10",
+    "projectDays": 866,
+    "lat": 35.405,
+    "lon": -99.405
+   },
+   {
+    "route": "OK-100",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "GRADE, DRAIN, WIDEN, SURFACE, AND BRIDGE",
+    "start": "2024-07-08",
+    "end": "2026-10-12",
+    "projectDays": 827,
+    "lat": 35.61,
+    "lon": -94.983
+   }
+  ]
+ },
+ "BC": {
+  "ongoing": [
+   {
+    "route": "BC-10",
+    "place": "Langley Bypass",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction work. Starting Sat Nov 15 until Mon Nov 15. Access to side lane closed. Eastbound lanes unaffected. Watch for crews.",
+    "start": "2025-11-15",
+    "end": "2027-11-15",
+    "projectDays": 730,
+    "lat": 49.112,
+    "lon": -122.674
+   },
+   {
+    "route": "BC-1",
+    "place": "Trans-Canada Highway",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction work at Highway 1, Gladwin Rd. and 8km East of Lytton. Starting Tue Nov 25 until Sun Nov 15. Expect 5 minutes delay. Watch for traffic control. Last update: September 30th, 2026 at 2:30pm PDT. Gladwin Culver",
+    "start": "2025-11-25",
+    "end": "2026-11-16",
+    "projectDays": 355,
+    "lat": 50.25,
+    "lon": -121.503
+   },
+   {
+    "route": "BC-1",
+    "place": "Trans-Canada Highway",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction work. Starting Thu Jan 29 until Tue Dec 15. From 9:00 PM to 5:30 AM PST on Monday, Tuesday, Wednesday, Thursday, and Friday. From 9:00 PM to 7:30 AM PST on Saturday and Sunday. Speed Limit restriction: 60km/",
+    "start": "2026-01-30",
+    "end": "2026-12-16",
+    "projectDays": 320,
+    "lat": 49.102,
+    "lon": -122.493
+   },
+   {
+    "route": "BC-1",
+    "place": "Trans-Canada Highway",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction work from Highway 1, Nicomen River Rd to At Exit From Highway 1 Northbound to Highway 8. Starting Tue Aug 25 until Wed Jun 30. Single lane alternating traffic. Watch for traffic control. Expect minor delays.",
+    "start": "2026-08-25",
+    "end": "2027-06-30",
+    "projectDays": 309,
+    "lat": 50.269,
+    "lon": -121.401
+   },
+   {
+    "route": "BC-1",
+    "place": "Trans-Canada Highway",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction work from Highway 1, At Quartz Creek Bridge to Wiseman Road. Starting Mon Apr 20 until Sun Dec 20. Expect delays. Watch for traffic control. Width restriction: 5 meters. Last update: September 15th, 2026 at ",
+    "start": "2026-04-20",
+    "end": "2026-12-20",
+    "projectDays": 244,
+    "lat": 51.478,
+    "lon": -117.36
+   },
+   {
+    "route": "BC-1",
+    "place": "Douglas Street",
+    "mile": "",
+    "closure": false,
+    "headline": "Utility work from Highway 1, In Saanich and At Cloverdale Avenue and Douglas Street and Kelvin Road to In Saanich and Roderick Street. Starting 10:00 PM PDT on Wednesday March 25, 2026 until 6:00 AM PCT on Sunday Novembe",
+    "start": "2026-03-26",
+    "end": "2026-11-15",
+    "projectDays": 234,
+    "lat": 48.449,
+    "lon": -123.373
+   }
+  ],
+  "started": [
+   {
+    "route": "BC-3A",
+    "place": "Highway 3A",
+    "mile": "",
+    "closure": false,
+    "headline": "Utility work from Highway 3A, At Van Wallegham Road to At Main Street. Starting Mon Oct 5 until Wed Dec 30. From 7:00 AM to 7:00 PM PDT, weekdays. Shoulder closed. Last update: September 29th, 2026 at 11:34am PDT.",
+    "start": "2026-10-05",
+    "end": "2026-12-31",
+    "projectDays": 87,
+    "lat": 49.26,
+    "lon": -119.829
+   },
+   {
+    "route": "BC-99",
+    "place": "Highway 99",
+    "mile": "",
+    "closure": false,
+    "headline": "Road maintenance from Highway 99, At Nordic Drive and 500m West of Nordic Drive to In Whistler. Starting Tue Oct 13 until Thu Dec 31. From 6:00 AM to 7:00 PM PDT, every day. Single lane alternating traffic. Last update: ",
+    "start": "2026-10-13",
+    "end": "2027-01-01",
+    "projectDays": 80,
+    "lat": 50.103,
+    "lon": -122.982
+   },
+   {
+    "route": "BC-1",
+    "place": "Trans-Canada Highway",
+    "mile": "",
+    "closure": false,
+    "headline": "Road construction from Highway 1, In Abbotsford and Mt. Lehman Interchange to Highway 1A, In Abbotsford and Clearbrook Rd Interchange. Starting Tue Oct 13 until Thu Dec 31. From 9:00 PM to 5:00 AM PDT the next day, Monda",
+    "start": "2026-10-14",
+    "end": "2026-12-31",
+    "projectDays": 78,
+    "lat": 49.038,
+    "lon": -122.338
+   },
+   {
+    "route": "BC-40",
+    "place": "Lillooet-Pioneer Road",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction work from Lillooet-Pioneer Road, At Lillooet-Pioneer Road and Yalakom Road and Yalakom Road  to Gold Bridge. Starting Thu Oct 1 until Mon Nov 30. From 6:00 AM to 7:00 PM PDT, every day. Single lane alternati",
+    "start": "2026-10-01",
+    "end": "2026-12-01",
+    "projectDays": 61,
+    "lat": 50.864,
+    "lon": -122.163
+   },
+   {
+    "route": "BC-23",
+    "place": "Highway 23",
+    "mile": "",
+    "closure": false,
+    "headline": "Utility work from Highway 23, In Nakusp to 9km Northwest of Nakusp. Starting Fri Oct 2 until Mon Nov 30. From 7:00 AM to 5:00 PM PDT, Monday to Saturday. Single lane alternating traffic. Watch for traffic control. Last u",
+    "start": "2026-10-02",
+    "end": "2026-12-01",
+    "projectDays": 60,
+    "lat": 50.249,
+    "lon": -117.811
+   },
+   {
+    "route": "BC-17A",
+    "place": "Highway 17A",
+    "mile": "",
+    "closure": false,
+    "headline": "Road construction from Highway 17A, In Delta and 12m Southwest of Ladner Underpass (Over Route 99) to In Delta and 150 metres south of the merge. Starting Thu Oct 1 until Mon Nov 30. Right lane closed. Last update: Octob",
+    "start": "2026-10-01",
+    "end": "2026-11-30",
+    "projectDays": 60,
+    "lat": 49.108,
+    "lon": -123.056
+   }
+  ],
+  "finished": [
+   {
+    "route": "BC-99",
+    "place": "Taylor Way",
+    "mile": "",
+    "closure": false,
+    "headline": "Paving operations from Highway 99, In West Vancouver to In West Vancouver. Starting Sun Oct 5 until Fri Oct 9. From 9:00 PM to 5:00 AM PDT the next day, Monday to Thursday. Lane closures in both directions. Expect delays",
+    "start": "2025-10-06",
+    "end": "2026-10-09",
+    "projectDays": 368,
+    "lat": 49.331,
+    "lon": -123.135
+   },
+   {
+    "route": "BC-99",
+    "place": "Taylor Way",
+    "mile": "",
+    "closure": false,
+    "headline": "Paving operations from Highway 99, Keith Rd to Inglewood Ave. Starting Mon Oct 13 until Sat Oct 17. From 9:00 PM to 5:00 AM PDT the next day, Tuesday and Friday. Lane closures in both directions. Expect delays. Reduced t",
+    "start": "2025-10-14",
+    "end": "2026-10-17",
+    "projectDays": 368,
+    "lat": 49.331,
+    "lon": -123.135
+   },
+   {
+    "route": "BC-1",
+    "place": "Trans-Canada Highway",
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge maintenance from Highway 1, Capilano River Bridge  to Capilano River Bridge. Starting Tue Oct 21 until Fri Oct 23. Right lane closed. Last update: October 20th, 2026 at 11:11am PDT. Bridge inspection being complet",
+    "start": "2025-10-22",
+    "end": "2026-10-23",
+    "projectDays": 366,
+    "lat": 49.333,
+    "lon": -123.119
+   },
+   {
+    "route": "BC-93",
+    "place": "Highway 93",
+    "mile": "",
+    "closure": false,
+    "headline": "Bridge construction at Highway 93, At Park Bldg and Camping and 44km North of Radium Hot Springs. Starting Mon Jun 22 until Wed Oct 7. Expect minor delays. Speed Limit restriction: 50 kmh. Last update: September 15th, 20",
+    "start": "2026-06-22",
+    "end": "2026-10-08",
+    "projectDays": 108,
+    "lat": 50.884,
+    "lon": -116.049
+   },
+   {
+    "route": "BC-1",
+    "place": "Trans-Canada Highway",
+    "mile": "",
+    "closure": false,
+    "headline": "Construction work from Highway 1, At W/B Exit to Illecillewaet Brake Check / Rest Area to At Jack Macdonald Snowshed. Starting Tue Jul 14 until Fri Oct 30. All day, every day. Speed Limit restriction: 50 km/hr. Last upda",
+    "start": "2026-07-14",
+    "end": "2026-10-30",
+    "projectDays": 108,
+    "lat": 51.181,
+    "lon": -117.762
+   },
+   {
+    "route": "BC-3B",
+    "place": "Highway 3B",
+    "mile": "",
+    "closure": false,
+    "headline": "Utility work. Starting Wed Aug 12 until Fri Oct 30. From 7:00 AM to 5:00 PM PDT, weekdays. Right lane blocked. Shoulder closed. 50km/h construction speed zone in effect 24/7. Storm main being replaced in the ditch. Eastb",
+    "start": "2026-08-12",
+    "end": "2026-10-31",
+    "projectDays": 79,
+    "lat": 49.09,
+    "lon": -117.633
+   }
+  ]
+ },
+ "NJ": {
+  "ongoing": [
+   {
+    "route": "NJ-208",
+    "place": null,
+    "mile": 3,
+    "closure": false,
+    "headline": "NJDOT - STMC: Roadwork on NJ 208 Southbound near North of Maple Ave (Glen Rock), Continuous left shoulder",
+    "start": "2026-09-15",
+    "end": "2028-08-05",
+    "projectDays": 690,
+    "lat": 40.951,
+    "lon": -74.138
+   },
+   {
+    "route": "NJ-208",
+    "place": null,
+    "mile": 2.8,
+    "closure": false,
+    "headline": "NJDOT - STMC: Roadwork on NJ 208 Northbound near South of Maple Ave (Fair Lawn), Continuous left shoulder",
+    "start": "2026-09-15",
+    "end": "2028-08-05",
+    "projectDays": 690,
+    "lat": 40.949,
+    "lon": -74.136
+   },
+   {
+    "route": "NJ-18",
+    "place": null,
+    "mile": 37.3,
+    "closure": false,
+    "headline": "NJDOT - STMC: Roadwork on NJ 18 Northbound at CR 606/Milltown Rd (East Brunswick Twp) Continuous Friday September 11, 2026 11:00 PM thru Friday May 12, 2028 05:00 AM, ramp",
+    "start": "2026-09-12",
+    "end": "2028-05-12",
+    "projectDays": 608,
+    "lat": 40.442,
+    "lon": -74.394
+   },
+   {
+    "route": "NJ-18",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork on NJ 18 Northbound at CR 606/Milltown Rd (East Brunswick Twp) Continuous Friday September 11",
+    "start": "2026-09-12",
+    "end": "2028-05-12",
+    "projectDays": 608,
+    "lat": 40.442,
+    "lon": -74.394
+   },
+   {
+    "route": "US-202",
+    "place": null,
+    "mile": 24.2,
+    "closure": false,
+    "headline": "NJDOT - STMC: Roadwork on US 202 Southbound near South of US 206/NJ 28 (Raritan Boro), Continuous Friday May 15, 2026 07:00 AM thru Saturday February 27, 2027 07:00 PM,",
+    "start": "2026-05-15",
+    "end": "2027-02-28",
+    "projectDays": 289,
+    "lat": 40.574,
+    "lon": -74.636
+   },
+   {
+    "route": "US-202",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Roadwork on US 202 Southbound near South of US 206/NJ 28 (Raritan Boro), Continuous Friday May 15",
+    "start": "2026-05-15",
+    "end": "2027-02-28",
+    "projectDays": 289,
+    "lat": 40.574,
+    "lon": -74.636
+   }
+  ],
+  "started": [],
+  "finished": []
+ },
+ "GA": {
+  "ongoing": [
+   {
+    "route": "GA-1",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road construction on SR 1  Northbound at MARLETTE DRIVE . Left lane blocked.",
+    "start": "2026-05-19",
+    "end": "2028-01-01",
+    "projectDays": 592,
+    "lat": 32.295,
+    "lon": -84.78
+   },
+   {
+    "route": "GA-1",
+    "place": null,
+    "mile": 4.8,
+    "closure": false,
+    "headline": "Road construction on SR 1 Northbound at MARLETTE DRIVE . Left lane blocked.",
+    "start": "2026-05-19",
+    "end": "2028-01-01",
+    "projectDays": 592,
+    "lat": 32.295,
+    "lon": -84.78
+   },
+   {
+    "route": "GA-74",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Road construction on SR 74 Eastbound at DYAS RD . All lanes closed.",
+    "start": "2025-09-10",
+    "end": "2026-12-31",
+    "projectDays": 477,
+    "lat": 32.881,
+    "lon": -83.999
+   },
+   {
+    "route": "GA-42",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Road construction on SR 42 Eastbound at SR 74. All lanes closed.",
+    "start": "2025-09-17",
+    "end": "2026-12-31",
+    "projectDays": 470,
+    "lat": 32.876,
+    "lon": -83.995
+   },
+   {
+    "route": "GA-29",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road construction on SR 29/US 441 Northbound at SR 112. Right lane blocked.",
+    "start": "2025-09-03",
+    "end": "2026-12-01",
+    "projectDays": 454,
+    "lat": 32.683,
+    "lon": -83.08
+   },
+   {
+    "route": "GA-29",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road construction on SR 29/US 441 Southbound at SR 112. Right lane blocked.",
+    "start": "2025-09-03",
+    "end": "2026-12-01",
+    "projectDays": 454,
+    "lat": 32.693,
+    "lon": -83.1
+   }
+  ],
+  "started": [
+   {
+    "route": "I-285",
+    "place": null,
+    "mile": 18.8,
+    "closure": false,
+    "headline": "Road construction on I-285 Westbound at US 41/Cobb Pkwy . Right lane blocked.",
+    "start": "2026-10-19",
+    "end": "2027-01-01",
+    "projectDays": 74,
+    "lat": 33.884,
+    "lon": -84.47
+   },
+   {
+    "route": "GA-81",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Road construction on SR 81 Northbound at WASHINGTON ST. All lanes closed.",
+    "start": "2026-10-20",
+    "end": "2026-12-31",
+    "projectDays": 72,
+    "lat": 33.596,
+    "lon": -83.864
+   },
+   {
+    "route": "GA-121",
+    "place": null,
+    "mile": 5.8,
+    "closure": false,
+    "headline": "Road construction on SR 121 Northbound at COLEMAN LN. Left lane blocked.",
+    "start": "2026-10-28",
+    "end": "2026-12-31",
+    "projectDays": 64,
+    "lat": 33.004,
+    "lon": -81.98
+   },
+   {
+    "route": "GA-3",
+    "place": null,
+    "mile": 20.1,
+    "closure": false,
+    "headline": "Road construction on SR 3 Northbound at LIVINGSTON RD. Right lane blocked.",
+    "start": "2026-10-12",
+    "end": "2026-11-26",
+    "projectDays": 45,
+    "lat": 31.893,
+    "lon": -84.255
+   }
+  ],
+  "finished": [
+   {
+    "route": "GA-36",
+    "place": null,
+    "mile": "",
+    "closure": true,
+    "headline": "Road construction on SR 36 Eastbound at HIGH FALLS RD. All lanes closed.",
+    "start": "2026-06-09",
+    "end": "2026-10-29",
+    "projectDays": 142,
+    "lat": 33.238,
+    "lon": -84.025
+   },
+   {
+    "route": "GA-23",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road construction on SR 23 Southbound at SWEETWATER RD. Right lane blocked.",
+    "start": "2026-05-18",
+    "end": "2026-10-06",
+    "projectDays": 142,
+    "lat": 32.799,
+    "lon": -81.95
+   },
+   {
+    "route": "I-575",
+    "place": null,
+    "mile": 21,
+    "closure": false,
+    "headline": "Road construction on I-575 Southbound at SR 5 Bus/Riverstone Pkwy. Left lane blocked.",
+    "start": "2026-08-26",
+    "end": "2026-10-24",
+    "projectDays": 59,
+    "lat": 34.267,
+    "lon": -84.468
+   },
+   {
+    "route": "GA-38",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road construction on SR 38 Eastbound at LIBERTY COUNTY LINE. Right lane blocked.",
+    "start": "2026-08-31",
+    "end": "2026-10-19",
+    "projectDays": 49,
+    "lat": 31.769,
+    "lon": -81.642
+   },
+   {
+    "route": "GA-515",
+    "place": null,
+    "mile": 1,
+    "closure": false,
+    "headline": "Road construction on SR 515 Southbound at WORLEY CROSSROADS. Left lane blocked.",
+    "start": "2026-08-26",
+    "end": "2026-10-03",
+    "projectDays": 38,
+    "lat": 34.391,
+    "lon": -84.406
+   },
+   {
+    "route": "I-575",
+    "place": null,
+    "mile": 30.7,
+    "closure": false,
+    "headline": "Road construction on I-575 Southbound at SR 372. Right lane blocked.",
+    "start": "2026-08-26",
+    "end": "2026-10-03",
+    "projectDays": 38,
+    "lat": 34.381,
+    "lon": -84.394
+   }
+  ]
+ },
+ "IN": {
+  "ongoing": [
+   {
+    "route": "US-27",
+    "place": null,
+    "mile": 30.6,
+    "closure": false,
+    "headline": "US-27 — permitted oversize loads prohibited",
+    "start": "2026-03-05",
+    "end": "2027-05-15",
+    "projectDays": 436,
+    "lat": 39.949,
+    "lon": -84.917
+   },
+   {
+    "route": "IN-111",
+    "place": null,
+    "mile": 0.7,
+    "closure": false,
+    "headline": "IN-111 — single line traffic alternating directions",
+    "start": "2026-08-03",
+    "end": "2026-10-31",
+    "projectDays": 89,
+    "lat": 38.141,
+    "lon": -85.911
+   }
+  ],
+  "started": [],
+  "finished": [
+   {
+    "route": "IN-135",
+    "place": null,
+    "mile": 17.2,
+    "closure": false,
+    "headline": "IN-135 — single line traffic alternating directions",
+    "start": "2026-08-17",
+    "end": "2026-10-30",
+    "projectDays": 74,
+    "lat": 38.253,
+    "lon": -86.124
+   },
+   {
+    "route": "IN-14",
+    "place": null,
+    "mile": 95.6,
+    "closure": false,
+    "headline": "IN-14 — single line traffic alternating directions",
+    "start": "2026-09-10",
+    "end": "2026-10-16",
+    "projectDays": 36,
+    "lat": 41.075,
+    "lon": -85.705
+   }
+  ]
+ },
+ "NV": {
+  "ongoing": [
+   {
+    "route": "I-11",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Long term road construction on I-11 Both Directions from MLK Blvd  to Lake Mead Blvd . Start time: 9/27/2026 7:00 PM.  End time: 12/1/2027 5:00 AM.  Public Details: Reduced lanes with a shoulder closures for road improve",
+    "start": "2026-09-28",
+    "end": "2027-12-01",
+    "projectDays": 429,
+    "lat": 36.175,
+    "lon": -115.161
+   },
+   {
+    "route": "I-215",
+    "place": null,
+    "mile": 10.1,
+    "closure": false,
+    "headline": "Long term road construction on ramp from Southern I-215 Westbound  to Airport Connector . Start time: 2/9/2026 6:00 AM.  End time: 2/9/2027 6:00 AM.  Public Details: Use caution around this area due to a temporary traffi",
+    "start": "2026-02-09",
+    "end": "2027-02-09",
+    "projectDays": 365,
+    "lat": 36.06,
+    "lon": -115.143
+   },
+   {
+    "route": "NV-156",
+    "place": null,
+    "mile": 17,
+    "closure": false,
+    "headline": "Utility work on SR-156/Lee Canyon Rd  Both Directions from Mile Marker 17 (south of US-95) to US-95. Start time: 8/1/2026 5:00 AM.  End time: 4/30/2027 7:00 PM.  Public Details: Intermittent road closures with flaggers f",
+    "start": "2026-08-01",
+    "end": "2027-05-01",
+    "projectDays": 273,
+    "lat": 36.471,
+    "lon": -115.475
+   },
+   {
+    "route": "NV-156",
+    "place": null,
+    "mile": 17,
+    "closure": false,
+    "headline": "Utility work on SR-156/Lee Canyon Rd Both Directions from Mile Marker 17 (south of US-95) to US-95. Start time: 8/1/2026 5:00 AM. End time: 4/30/2027 7:00 PM. Public Details: Intermittent road closures with flaggers for ",
+    "start": "2026-08-01",
+    "end": "2027-05-01",
+    "projectDays": 273,
+    "lat": 36.471,
+    "lon": -115.475
+   },
+   {
+    "route": "I-80",
+    "place": null,
+    "mile": 12,
+    "closure": false,
+    "headline": "Minor Road work on I-80 Both Directions from Jessup to Churchill Pershing County Line. Start time: 4/27/2026 6:00 AM.  End time: 12/31/2026 6:00 PM.  Public Details: lanes reduced to one both directions, expect delays up",
+    "start": "2026-04-27",
+    "end": "2027-01-01",
+    "projectDays": 249,
+    "lat": 39.861,
+    "lon": -118.907
+   },
+   {
+    "route": "US-93",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Paving operations on US-93 from WP 112.75 to EL 12.5. Start time: 6/1/2026 6:00 AM.  End time: 11/24/2026 6:00 PM.  Public Details: Paving operations with lanes reduced to one, no passing and the use of flaggers and pilo",
+    "start": "2026-06-01",
+    "end": "2026-11-25",
+    "projectDays": 177,
+    "lat": 40.065,
+    "lon": -114.614
+   }
+  ],
+  "started": [
+   {
+    "route": "US-395",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road work on Old US-395 Both Directions Near SR-431 Westbound. Start time: 10/2/2026 12:00 AM.  End time: 11/27/2026 11:59 PM.  Public Details: northbound lanes, shoulder work lane closures in place. right lane on mt.ros",
+    "start": "2026-10-02",
+    "end": "2026-11-28",
+    "projectDays": 57,
+    "lat": 39.403,
+    "lon": -119.746
+   },
+   {
+    "route": "NV-659",
+    "place": null,
+    "mile": 6.9,
+    "closure": false,
+    "headline": "Road work on SR-659 Both Directions from Summit Ridge Ct to W 4th St. Start time: 10/5/2026 7:00 AM.  End time: 11/20/2026 6:30 PM.  Public Details: mccarran blvd near 4th street periodic lane closures both directions f;",
+    "start": "2026-10-05",
+    "end": "2026-11-21",
+    "projectDays": 47,
+    "lat": 39.52,
+    "lon": -119.862
+   },
+   {
+    "route": "NV-659",
+    "place": null,
+    "mile": 20,
+    "closure": false,
+    "headline": "Minor Road work on SR-659 Northbound Near Dry Creek. Start time: 10/20/2026 7:00 AM.  End time: 12/4/2026 3:30 PM.  Public Details: Turn lanes will be closed with detours in place. .",
+    "start": "2026-10-20",
+    "end": "2026-12-04",
+    "projectDays": 45,
+    "lat": 39.498,
+    "lon": -119.748
+   },
+   {
+    "route": "NV-341",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Minor Road work on SR-341 Both Directions from Shadow Hills Drive to Veterans Pkwy. Lane Affected. Start time: 10/26/2026 7:00 AM.  End time: 12/4/2026 3:30 PM.",
+    "start": "2026-10-26",
+    "end": "2026-12-04",
+    "projectDays": 39,
+    "lat": 39.394,
+    "lon": -119.726
+   },
+   {
+    "route": "I-11",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Road work on I-11 Southbound from Decatur Blvd to S Valley View Blvd. 1 Right lane blocked. Start time: 10/18/2026 9:00 PM. End time: 11/23/2026 5:00 AM. Public Details: Road improvements. Use caution in area..",
+    "start": "2026-10-19",
+    "end": "2026-11-23",
+    "projectDays": 35,
+    "lat": 36.173,
+    "lon": -115.206
+   },
+   {
+    "route": "NV-159",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Long term road construction on SR-159/Charleston Blvd  Westbound from 30th St to 28th St. Start time: 10/5/2026 7:00 AM.  End time: 11/6/2026 3:30 PM.  Public Details: Lanes and shoulder reduced daily for roadway and sid",
+    "start": "2026-10-05",
+    "end": "2026-11-06",
+    "projectDays": 32,
+    "lat": 36.159,
+    "lon": -115.108
+   }
+  ],
+  "finished": [
+   {
+    "route": "I-580",
+    "place": null,
+    "mile": 24.1,
+    "closure": false,
+    "headline": "Minor Flagging Operations in effect on ramp from I-580 Southbound to Aviation Blvd. Start time: 3/11/2026 7:00 AM.  End time: 10/2/2026 3:30 PM.",
+    "start": "2026-03-11",
+    "end": "2026-10-02",
+    "projectDays": 205,
+    "lat": 39.507,
+    "lon": -119.78
+   },
+   {
+    "route": "US-50",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Minor Long term road construction on US-50 Both Directions from Kings Canyon Rd to Stateline Ave. 1 Lane Closed. Start time: 4/26/2026 8:00 PM.  End time: 10/16/2026 12:00 PM.  Public Details: Day and night intermittent ",
+    "start": "2026-04-27",
+    "end": "2026-10-16",
+    "projectDays": 173,
+    "lat": 39.105,
+    "lon": -119.894
+   },
+   {
+    "route": "NV-28",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Minor Road work on SR-28 Both Directions from US-50 to N Canyon Rd. Lane Affected. Start time: 5/4/2026 8:00 AM.  End time: 10/16/2026 8:00 AM.  Public Details: Trucks entering and exiting the highway with flaggers. Vari",
+    "start": "2026-05-04",
+    "end": "2026-10-16",
+    "projectDays": 165,
+    "lat": 39.101,
+    "lon": -119.91
+   },
+   {
+    "route": "NV-28",
+    "place": null,
+    "mile": 5,
+    "closure": false,
+    "headline": "Minor Road work on SR-28 Southbound from Tunnel Creek to Secret Harbor Creek. All Shoulders Closed. Start time: 7/7/2026 7:00 AM.  End time: 10/15/2026 3:30 PM.  Public Details: Shoulder closure will be in place. .",
+    "start": "2026-07-07",
+    "end": "2026-10-15",
+    "projectDays": 100,
+    "lat": 39.231,
+    "lon": -119.932
+   },
+   {
+    "route": "US-395",
+    "place": null,
+    "mile": 22.6,
+    "closure": false,
+    "headline": "Minor Overnight Roadwork on US-395 Both Directions from Buckeye Rd to SR-88. 1 Lane Closed. Start time: 7/12/2026 6:30 PM.  End time: 10/16/2026 7:00 AM.  Public Details: Nightly single lane closure from 6:30 PM to 7 AM,",
+    "start": "2026-07-13",
+    "end": "2026-10-16",
+    "projectDays": 96,
+    "lat": 38.955,
+    "lon": -119.765
+   },
+   {
+    "route": "NV-439",
+    "place": null,
+    "mile": "",
+    "closure": false,
+    "headline": "Minor Road work on SR-439 Southbound from Norway Dr to Lyon Storey County Line. Shoulder Affected. Start time: 7/13/2026 6:00 AM.  End time: 10/2/2026 2:00 PM.",
+    "start": "2026-07-13",
+    "end": "2026-10-02",
+    "projectDays": 81,
+    "lat": 39.501,
+    "lon": -119.429
+   }
+  ]
+ },
+ "MN": {
+  "ongoing": [
+   {
+    "route": "MN-5",
+    "place": null,
+    "mile": 38.9,
+    "closure": false,
+    "headline": "MN-5 — head to head traffic on the roadway",
+    "start": "2026-09-25",
+    "end": "2027-10-31",
+    "projectDays": 401,
+    "lat": 44.859,
+    "lon": -93.662
+   },
+   {
+    "route": "US-10",
+    "place": null,
+    "mile": 84.9,
+    "closure": false,
+    "headline": "US-10 — head to head traffic on the roadway",
+    "start": "2026-05-07",
+    "end": "2026-10-31",
+    "projectDays": 176,
+    "lat": 46.467,
+    "lon": -95.235
+   }
+  ],
+  "started": [],
+  "finished": [
+   {
+    "route": "MN-210",
+    "place": null,
+    "mile": 23.7,
+    "closure": false,
+    "headline": "MN-210 — head to head traffic on the roadway",
+    "start": "2026-05-04",
+    "end": "2026-10-31",
+    "projectDays": 180,
+    "lat": 46.29,
+    "lon": -96.134
+   },
+   {
+    "route": "US-212",
+    "place": null,
+    "mile": 124,
+    "closure": false,
+    "headline": "US-212 — head to head traffic on the roadway",
+    "start": "2026-05-18",
+    "end": "2026-10-16",
+    "projectDays": 151,
+    "lat": 44.768,
+    "lon": -94.078
+   }
+  ]
+ },
+ "FL": {
+  "ongoing": [
+   {
+    "route": "US-41",
+    "place": "Pasco — Lake Patience Rd expect lane closures weekdays from 8am-6pm (weather per",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on US-41 Both Directions At Lake Patience Rd expect lane closures weekdays from 8am-6pm (weather permitting).",
+    "start": "2026-09-28",
+    "end": "2026-11-06",
+    "projectDays": 39,
+    "lat": 28.216,
+    "lon": -82.46
+   },
+   {
+    "route": "US-98",
+    "place": "Pasco — CR 54 to near Townsend Rd expect periodic lane closures/flagging operati",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on US-98 Near CR 54 to near Townsend Rd expect periodic lane closures/flagging operations: Weekdays from 7 a.m",
+    "start": "2026-09-28",
+    "end": "2026-11-06",
+    "projectDays": 39,
+    "lat": 28.259,
+    "lon": -82.076
+   },
+   {
+    "route": "US-19",
+    "place": "Citrus — W Veterans Drive to south of W River Glen Court expect Left lane closur",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on US-19 Both Directions Near W Veterans Drive to south of W River Glen Court expect Left lane closures: Weekdays from 7",
+    "start": "2026-09-28",
+    "end": "2026-11-06",
+    "projectDays": 39,
+    "lat": 28.837,
+    "lon": -82.58
+   }
+  ],
+  "started": [
+   {
+    "route": "US-301",
+    "place": "Hillsborough — Big Bend Rd ** NEW TRAFFIC PATTERN ** as of Thursday morning, Oct",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on US-301 Southbound At Big Bend Rd ** NEW TRAFFIC PATTERN ** as of Thursday morning, Oct 22d",
+    "start": "2026-10-22",
+    "end": "2027-10-22",
+    "projectDays": 365,
+    "lat": 27.792,
+    "lon": -82.335
+   },
+   {
+    "route": "US-301",
+    "place": "Hillsborough — Big Bend Rd ** NEW TRAFFIC PATTERN ** as of Friday morning Octobe",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on US-301 Northbound At Big Bend Rd ** NEW TRAFFIC PATTERN ** as of Friday morning October 23rd",
+    "start": "2026-10-23",
+    "end": "2027-10-22",
+    "projectDays": 364,
+    "lat": 27.792,
+    "lon": -82.335
+   },
+   {
+    "route": "I-275",
+    "place": "Pinellas — Exit 25 38th Ave N ** EXIT RAMP CLOSED ** as of Oct 5. The ramp closu",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on I-275 Southbound At Exit 25 38th Ave N ** EXIT RAMP CLOSED ** as of Oct 5",
+    "start": "2026-10-02",
+    "end": "2026-12-15",
+    "projectDays": 74,
+    "lat": 27.811,
+    "lon": -82.664
+   },
+   {
+    "route": "US-41",
+    "place": "Hillsborough — E 127th Ave Weekdays, between 7am and 5pm expect lane closures (w",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on US-41 Both Directions At E 127th Ave Weekdays, between 7am and 5pm expect lane closures (weather permitting).",
+    "start": "2026-10-05",
+    "end": "2026-11-06",
+    "projectDays": 32,
+    "lat": 28.062,
+    "lon": -82.451
+   },
+   {
+    "route": "US-98",
+    "place": "Hernando — Mondo Hill Rd/Spring Lake Hwy Intersection expect lane closures Sunda",
+    "mile": "",
+    "closure": false,
+    "headline": "Scheduled Road Work on US-98 Both Directions Near Mondo Hill Rd/Spring Lake Hwy Intersection expect lane closures Sunday thru Thursday, from",
+    "start": "2026-10-05",
+    "end": "2026-11-06",
+    "projectDays": 32,
+    "lat": 28.523,
+    "lon": -82.303
+   }
+  ],
+  "finished": []
+ },
+ "ND": {
+  "ongoing": [],
+  "started": [
+   {
+    "route": "I-94",
+    "place": "Eldridge Exit 251",
+    "mile": 253.8,
+    "closure": true,
+    "headline": "Westbound Jamestown Rest Area is closed for interior renovations and roof repairs.",
+    "start": "2026-10-20",
+    "end": "2026-12-14",
+    "projectDays": 55,
+    "lat": 46.893,
+    "lon": -98.807
+   }
+  ],
+  "finished": [
+   {
+    "route": "I-94",
+    "place": "E BIS INTR E TO E OF MENOKEN INTR-WB",
+    "mile": 162.4,
+    "closure": false,
+    "headline": "Road Reconstruction Reduced to one lane.",
+    "start": "2026-03-30",
+    "end": "2026-10-10",
+    "projectDays": 194,
+    "lat": 46.837,
+    "lon": -100.61
+   },
+   {
+    "route": "I-29",
+    "place": "N OF KELSO N TO N OF N JCT 200 - NB",
+    "mile": 101.3,
+    "closure": false,
+    "headline": "Road Reconstruction Reduced to one lane.",
+    "start": "2026-04-13",
+    "end": "2026-10-17",
+    "projectDays": 187,
+    "lat": 47.432,
+    "lon": -97.07
+   },
+   {
+    "route": "ND-297",
+    "place": "GF; INTERSECTION DEMERS AVE/ND 297 AND 42ND ST.",
+    "mile": 0.1,
+    "closure": false,
+    "headline": "Intersection Improvement Work Reduced to one lane.",
+    "start": "2026-05-04",
+    "end": "2026-10-30",
+    "projectDays": 179,
+    "lat": 47.918,
+    "lon": -97.088
+   },
+   {
+    "route": "I-29",
+    "place": "NEAR 32ND AVE TO N OF N GF INTER",
+    "mile": 136.9,
+    "closure": false,
+    "headline": "Concrete Pavement Repair Work Reduced to one lane.",
+    "start": "2026-06-16",
+    "end": "2026-10-03",
+    "projectDays": 109,
+    "lat": 47.945,
+    "lon": -97.093
+   },
+   {
+    "route": "I-94",
+    "place": "1 MI W 45TH TO RED RIVER",
+    "mile": 347.6,
+    "closure": false,
+    "headline": "Concrete Pavement Repair Work Reduced to one lane.",
+    "start": "2026-07-06",
+    "end": "2026-10-23",
+    "projectDays": 109,
+    "lat": 46.847,
+    "lon": -96.857
+   },
+   {
+    "route": "I-94",
+    "place": "1 MI W 45TH TO RED RIVER",
+    "mile": 347.6,
+    "closure": false,
+    "headline": "Concrete Pavement Repair Work Reduced to two lanes.",
+    "start": "2026-07-06",
+    "end": "2026-10-23",
+    "projectDays": 109,
+    "lat": 46.848,
+    "lon": -96.857
+   }
+  ]
+ },
+ "SD": {
+  "ongoing": [
+   {
+    "route": "SD-471",
+    "place": "SD-471 from 0.25 mile north of Junction South Dakota 71-Rumford to 1 mile south ",
+    "mile": 11,
+    "closure": false,
+    "headline": "Road work: fresh oil, paving, uneven lanes",
+    "start": "2026-09-14",
+    "end": "2026-11-07",
+    "projectDays": 53,
+    "lat": 43.192,
+    "lon": -103.832
+   }
+  ],
+  "started": [],
+  "finished": [
+   {
+    "route": "US-85",
+    "place": "US-85 from 12.25 miles south to 12 miles south of Junction South Dakota 168",
+    "mile": 67,
+    "closure": false,
+    "headline": "Road work: gravel surface, miscellaneous construction",
+    "start": "2026-05-12",
+    "end": "2026-10-30",
+    "projectDays": 171,
+    "lat": 44.901,
+    "lon": -103.712
+   },
+   {
+    "route": "US-85",
+    "place": "US-85 from 12.25 miles south to 12 miles south of Junction South Dakota 168",
+    "mile": 67,
+    "closure": false,
+    "headline": "Restrictions: gravel surface, miscellaneous construction",
+    "start": "2026-05-12",
+    "end": "2026-10-30",
+    "projectDays": 171,
+    "lat": 44.903,
+    "lon": -103.71
+   }
+  ]
+ },
+ "WV": {
+  "ongoing": [
+   {
+    "route": "WV-622",
+    "place": null,
+    "mile": "0.0",
+    "closure": false,
+    "headline": "Road Widening Project Activities — WV-622",
+    "start": "2026-06-04",
+    "end": "2026-10-31",
+    "projectDays": 149,
+    "lat": 38.389,
+    "lon": -81.78
+   }
+  ],
+  "started": [],
+  "finished": []
+ }
+}
