@@ -170,6 +170,12 @@
 .v2-rank b{font-family:'JetBrains Mono',monospace;font-size:13.5px;text-align:right}
 .v2-regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .v2-region{border:1px solid #E4E7EA;border-radius:10px;padding:14px}.v2-region h3{margin:0 0 6px;font-size:17px}.v2-region p{margin:0;font-size:14.5px;line-height:1.5;color:#3D454D}
+.v2-proj{border:1px solid #E4E7EA;border-radius:10px;padding:12px 14px;margin:0 0 10px;background:#fff}
+.v2-proj .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:6px;vertical-align:1px}
+.v2-proj .t-on{background:#EFF8FF;color:#175CD3}.v2-proj .t-new{background:#FEF6EE;color:#B93815}.v2-proj .t-done{background:#ECFDF3;color:#067647}.v2-proj .t-cl{background:#FEF3F2;color:#B42318}
+.v2-proj b{font-size:15.5px}.v2-proj p{margin:6px 0 0;font-size:14.5px;line-height:1.5;color:#3D454D}.v2-proj small{display:block;margin-top:6px;color:#5C6670;font-size:12.5px}
+.v2-ann{border:1px solid #DCE9E1;border-left:4px solid #0f7a4f;border-radius:10px;padding:14px 16px;margin:0 0 12px;background:#F4F8F6}
+.v2-ann b{display:block;font-size:16px;margin-bottom:6px}.v2-ann p{margin:0 0 8px;font-size:15px;line-height:1.55}.v2-ann a{font-weight:700;color:#0f7a4f}
 @media (max-width:420px){.v2-rank a{grid-template-columns:96px 1fr 56px;font-size:13.5px}}
 </style>
 </head>
@@ -212,19 +218,19 @@
   </aside>
 <!-- spon:end -->
 <p class="article-eyebrow">MileCheck Highway Report</p>
-      <h1 class="article-title">Where New York's roads were busiest in October</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report: New York, October 2026</p>
+      <h1 class="article-title">New York in October: crashes, closures and the big roadwork</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report: New York, October 2026</p>
       <p class="article-byline">by MileCheck &middot; November 4, 2026</p>
 
-      <p class="article-lead">MileCheck archived 590 alerts that New York's department of transportation published in October 2026, each counted once. US-9 had the most, 26 alerts, or 4% of the state's total. Part of the <a href="../road-report-october-2026-preview.html">national report</a>.</p>
+      <p class="article-lead">New York's department of transportation posted 22 crash alerts in October. I-95 had the most, 3. Part of the <a href="../road-report-october-2026-preview.html">national report</a>.</p>
       <!-- signupcta:start --><script>(function(){if(location.hash==='#subscribe'){history.replaceState(null,'',location.pathname+location.search);addEventListener('DOMContentLoaded',function(){scrollTo(0,0);var a=document.querySelector('.mc-cta-line a');if(a)setTimeout(function(){a.click()},400)})}})()</script><!-- signupcta:end -->
 
       <p class="rc-fig"><strong>Feed change.</strong> 511NY changed its data system at the end of September. MileCheck recorded 3,429 alerts in September and 590 in October. The drop reflects the feed change, so these counts do not show whether New York had fewer road incidents.</p>
 
       <div class="v2-nums">
-<div><b>590</b><span>alerts archived</span></div>
 <div><b>22</b><span>crash alerts</span></div>
-<div><b>46</b><span>closure alerts</span></div>
-<div><b>471</b><span>roadwork alerts</span></div>
+<div><b>I-95</b><span>most crash alerts, 3</span></div>
+<div><b>0</b><span>major roadwork projects on the feed</span></div>
+
 </div>
 
       <details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by New York's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months. Border waits are from U.S. Customs and Border Protection, saved every hour. Readings over five hours were treated as feed errors.</div></details>
@@ -239,21 +245,14 @@
 
       <div class="pull-stat"><strong>Routes with the most crash alerts</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>I-95</strong> &mdash; 3</li><li><strong>I-87</strong> &mdash; 3</li><li><strong>I-90</strong> &mdash; 2</li></ul></div>
 
-      <h2 class="rc">Closures and roadwork</h2>
+      <h2 class="rc">Closures</h2>
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <section class="v2-sec"><h3 style="margin:0 0 4px">Corridor grid</h3><p class="v2-sub">The 5 routes with the most alerts in October, from New York's department of transportation's feed.</p>
-<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of state</th></tr></thead><tbody>
-<tr><td>US-9</td><td>26</td><td>4%</td></tr>
-<tr><td>I-87</td><td>24</td><td>4%</td></tr>
-<tr><td>NY-5</td><td>14</td><td>2%</td></tr>
-<tr><td>I-90</td><td>14</td><td>2%</td></tr>
-<tr><td>I-81</td><td>13</td><td>2%</td></tr>
-</tbody></table></div>
-<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="22 crash, 46 closure, 471 roadwork, 51 other"><i class="c" style="flex:22"></i><i class="k" style="flex:46"></i><i class="r" style="flex:471"></i><i class="o" style="flex:51"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section>
+      
 
-      <section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>471 roadwork alerts, 80% of the month's total.</li><li><strong>Border</strong>The longest wait was 1 hr 31 min at Buffalo/Niagara Falls (Peace Bridge). The average there was 8 min. From U.S. Customs and Border Protection, saved every hour.</li><li><strong>Wildfires</strong>1 fires on the national wildfire feed were in New York by Oct. 31, covering 251 acres.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>US-9 led New York</strong>“US-9 had more alerts than any other road in New York in October: 26 of the 590 MileCheck archived from New York's department of transportation's feed, or 4%.”</div><div class="v2-quote"><strong>Crashes</strong>“New York's department of transportation published 22 crash alerts in October, by MileCheck's count. I-95 had the most, 3.”</div></section>
+      <section class="v2-sec"><h2 class="rc">Also in October</h2><ul class="v2-pivot"><li><strong>Border</strong>The longest wait was 1 hr 31 min at Buffalo/Niagara Falls (Peace Bridge). The average there was 8 min. From U.S. Customs and Border Protection.</li><li><strong>Wildfires</strong>1 fires on the national wildfire feed were in New York by Oct. 31, covering 251 acres.</li></ul></section>
+<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>Crashes</strong>“New York's department of transportation posted 22 crash alerts in October, according to the MileCheck Highway Report. I-95 had the most, 3.”</div></section>
       <h2 class="rc">Border waits</h2><p class="rc-live"><a href="../../borders/" target="_blank" rel="noopener">Live border waits &rarr;</a></p><p>Waits to enter the United States in standard passenger lanes at New York's crossings, October, from hourly readings. Dates are local.</p>
 
       <div class="pull-stat"><strong>By crossing</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong><a href="../../borders/?q=Buffalo%2FNiagara%20Falls" target="_blank" rel="noopener">Buffalo/Niagara Falls / Peace Bridge</a></strong> &mdash; highest 1 hr 31 min (October 11), average 8 min</li><li><strong><a href="../../borders/?q=Buffalo%2FNiagara%20Falls" target="_blank" rel="noopener">Buffalo/Niagara Falls / Rainbow Bridge</a></strong> &mdash; highest 1 hr 21 min (October 24), average 8 min</li><li><strong><a href="../../borders/?q=Buffalo%2FNiagara%20Falls" target="_blank" rel="noopener">Buffalo/Niagara Falls / Lewiston Bridge</a></strong> &mdash; highest 55 min (October 3), average 4 min</li><li><strong><a href="../../borders/?q=Alexandria%20Bay" target="_blank" rel="noopener">Alexandria Bay / Thousand Islands Bridge</a></strong> &mdash; highest 45 min (October 31), average 4 min</li><li><strong><a href="../../borders/?q=Champlain" target="_blank" rel="noopener">Champlain</a></strong> &mdash; highest 40 min (October 4), average 3 min</li><li><strong><a href="../../borders/?q=Massena" target="_blank" rel="noopener">Massena</a></strong> &mdash; no wait in any of 716 readings</li></ul></div>

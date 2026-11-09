@@ -170,6 +170,12 @@
 .v2-rank b{font-family:'JetBrains Mono',monospace;font-size:13.5px;text-align:right}
 .v2-regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .v2-region{border:1px solid #E4E7EA;border-radius:10px;padding:14px}.v2-region h3{margin:0 0 6px;font-size:17px}.v2-region p{margin:0;font-size:14.5px;line-height:1.5;color:#3D454D}
+.v2-proj{border:1px solid #E4E7EA;border-radius:10px;padding:12px 14px;margin:0 0 10px;background:#fff}
+.v2-proj .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:6px;vertical-align:1px}
+.v2-proj .t-on{background:#EFF8FF;color:#175CD3}.v2-proj .t-new{background:#FEF6EE;color:#B93815}.v2-proj .t-done{background:#ECFDF3;color:#067647}.v2-proj .t-cl{background:#FEF3F2;color:#B42318}
+.v2-proj b{font-size:15.5px}.v2-proj p{margin:6px 0 0;font-size:14.5px;line-height:1.5;color:#3D454D}.v2-proj small{display:block;margin-top:6px;color:#5C6670;font-size:12.5px}
+.v2-ann{border:1px solid #DCE9E1;border-left:4px solid #0f7a4f;border-radius:10px;padding:14px 16px;margin:0 0 12px;background:#F4F8F6}
+.v2-ann b{display:block;font-size:16px;margin-bottom:6px}.v2-ann p{margin:0 0 8px;font-size:15px;line-height:1.55}.v2-ann a{font-weight:700;color:#0f7a4f}
 @media (max-width:420px){.v2-rank a{grid-template-columns:96px 1fr 56px;font-size:13.5px}}
 </style>
 </head>
@@ -212,17 +218,17 @@
   </aside>
 <!-- spon:end -->
 <p class="article-eyebrow">MileCheck Highway Report</p>
-      <h1 class="article-title">Where Ohio's roads were busiest in October</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report: Ohio, October 2026</p>
+      <h1 class="article-title">Ohio in October: crashes, closures and the big roadwork</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report: Ohio, October 2026</p>
       <p class="article-byline">by MileCheck &middot; November 4, 2026</p>
 
-      <p class="article-lead">MileCheck archived 799 alerts that Ohio's department of transportation published in October 2026, each counted once. I-70 had the most, 91 alerts, or 11% of the state's total. Part of the <a href="../road-report-october-2026-preview.html">national report</a>.</p>
+      <p class="article-lead">Ohio's department of transportation posted 85 crash alerts in October. I-75 had the most, 8. Part of the <a href="../road-report-october-2026-preview.html">national report</a>.</p>
       <!-- signupcta:start --><script>(function(){if(location.hash==='#subscribe'){history.replaceState(null,'',location.pathname+location.search);addEventListener('DOMContentLoaded',function(){scrollTo(0,0);var a=document.querySelector('.mc-cta-line a');if(a)setTimeout(function(){a.click()},400)})}})()</script><!-- signupcta:end -->
 
       <div class="v2-nums">
-<div><b>799</b><span>alerts archived</span></div>
 <div><b>85</b><span>crash alerts</span></div>
-<div><b>233</b><span>closure alerts</span></div>
-<div><b>414</b><span>roadwork alerts</span></div>
+<div><b>I-75</b><span>most crash alerts, 8</span></div>
+<div><b>0</b><span>major roadwork projects on the feed</span></div>
+
 </div>
 
       <details class="method-fold"><summary>Where these numbers come from</summary><div class="method-box">These are unique alerts published by Ohio's department of transportation (DOT) feed, from a daily copy taken Oct. 1 through Oct. 31, 2026. Each alert is counted once. An alert posted and removed between two daily copies is not counted. Not all feeds report the same data, so compare each place with its own earlier months.</div></details>
@@ -237,21 +243,14 @@
 
       <div class="pull-stat"><strong>Routes with the most crash alerts</strong><ul class="article-list" style="margin-top:10px;margin-bottom:0;"><li><strong>I-75</strong> &mdash; 8</li><li><strong>I-71</strong> &mdash; 8</li><li><strong>I-90</strong> &mdash; 7</li></ul></div>
 
-      <h2 class="rc">Closures and roadwork</h2>
+      <h2 class="rc">Closures</h2>
 
       <p class="rc-live"><a href="../../closures/" target="_blank" rel="noopener">Live closure and roadwork alerts on the map &rarr;</a></p>
 
-      <section class="v2-sec"><h3 style="margin:0 0 4px">Corridor grid</h3><p class="v2-sub">The 5 routes with the most alerts in October, from Ohio's department of transportation's feed.</p>
-<div class="v2-gridwrap"><table class="v2-grid"><thead><tr><th>Route</th><th>Alerts</th><th>Share of state</th></tr></thead><tbody>
-<tr><td>I-70</td><td>91</td><td>11%</td></tr>
-<tr><td>I-75</td><td>75</td><td>9%</td></tr>
-<tr><td>I-71</td><td>70</td><td>9%</td></tr>
-<tr><td>I-270</td><td>62</td><td>8%</td></tr>
-<tr><td>I-90</td><td>44</td><td>6%</td></tr>
-</tbody></table></div>
-<p style="margin:12px 0 4px;font-size:14px;color:#3D454D">What October's alerts were, all routes:</p><div class="v2-mix" role="img" aria-label="85 crash, 233 closure, 414 roadwork, 67 other"><i class="c" style="flex:85"></i><i class="k" style="flex:233"></i><i class="r" style="flex:414"></i><i class="o" style="flex:67"></i></div><div class="v2-key"><span><i style="background:#D92D20"></i>crash</span><span><i style="background:#F79009"></i>closure</span><span><i style="background:#2E90FA"></i>roadwork</span><span><i style="background:#98A2B3"></i>other</span></div></section>
+      
 
-      <section class="v2-sec"><h2 class="rc">What changed in October</h2><ul class="v2-pivot"><li><strong>Roadwork</strong>414 roadwork alerts, 52% of the month's total.</li></ul></section><section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>I-70 led Ohio</strong>“I-70 had more alerts than any other road in Ohio in October: 91 of the 799 MileCheck archived from Ohio's department of transportation's feed, or 11%.”</div><div class="v2-quote"><strong>Crashes</strong>“Ohio's department of transportation published 85 crash alerts in October, by MileCheck's count. I-75 had the most, 8.”</div></section>
+      <section class="v2-sec"><h2 class="rc">Where the crashes were</h2><ul class="v2-pivot"><li><strong>I-75</strong>I-75 Northbound.: 5 crash alerts</li><li><strong>I-90</strong>I-90 Westbound.: 4 crash alerts</li><li><strong>I-75</strong>I-75 Southbound.: 3 crash alerts</li></ul></section>
+<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p><div class="v2-quote"><strong>Crashes</strong>“Ohio's department of transportation posted 85 crash alerts in October, according to the MileCheck Highway Report. I-75 had the most, 8.”</div></section>
       <h2>More on Ohio</h2>
       <ul class="article-list"><li><a href="/road-conditions/ohio/">Ohio road conditions now</a></li><li><a href="/cameras/ohio/">Ohio highway cameras</a></li><li><a href="/blog/mile-markers-ohio.html">How mile markers work in Ohio</a></li><li><a href="/blog/road-report-october-2026.html">October 2026 highway report for every state</a></li><li><a href="/blog/highway-report-october-2026-states/">October reports for the other states</a></li></ul>
       <!-- report-links:end -->
