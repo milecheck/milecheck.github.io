@@ -12,9 +12,10 @@ const snowState = (name, dot) => ({
 // One-off pages, keyed by path from the site root. h1 is optional.
 const PAGES = {
   'passes/snoqualmie': {
-    title: 'Snoqualmie Pass road conditions, webcams and chains today | MileCheck',
-    h1: 'Snoqualmie Pass road conditions and webcams today',
-    desc: 'Is Snoqualmie Pass open? Today’s I-90 road and driving conditions from WSDOT, chain and traction rules for each direction, summit temperature, webcams and closures.',
+    // 2026-11-11 (Leah "titles go", ChatGPT copy): aimed at "snoqualmie pass weather", where we had no page-one result.
+    title: 'What is the weather at Snoqualmie Pass? | MileCheck',
+    h1: 'Snoqualmie Pass weather and road conditions',
+    desc: 'Check Snoqualmie Pass weather with the National Weather Service forecast, summit temperature, WSDOT road conditions, chain rules and webcams on I-90.',
   },
   'passes/i80-wyoming': {
     title: 'Is I-80 open at Sherman Hill? Laramie to Cheyenne road conditions today | MileCheck',

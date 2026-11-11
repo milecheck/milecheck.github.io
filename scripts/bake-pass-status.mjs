@@ -18,7 +18,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 
 // slug -> the question as a reader types it, the agency, and its public pass page.
 const META = {
-  snoqualmie: { q: 'Snoqualmie Pass', dot: 'WSDOT', url: 'https://wsdot.com/travel/real-time/mountainpasses/snoqualmie' },
+  snoqualmie: { q: 'Snoqualmie Pass', dot: 'WSDOT', url: 'https://wsdot.com/travel/real-time/mountainpasses/snoqualmie', weather: "What's the weather at Snoqualmie Pass? The current summit temperature is shown in the WSDOT conditions report near the top of this page. Scroll to Snow at Snoqualmie Pass for the National Weather Service forecast, including expected temperatures and precipitation." },
   stevens: { q: 'Stevens Pass', dot: 'WSDOT', url: 'https://wsdot.com/travel/real-time/mountainpasses/stevens' },
   white: { q: 'White Pass', dot: 'WSDOT', url: 'https://wsdot.com/travel/real-time/mountainpasses/white' },
   'mt-baker-highway': { q: 'the Mt Baker Highway', dot: 'WSDOT', url: 'https://wsdot.com/travel/real-time/mountainpasses/' },
@@ -181,6 +181,7 @@ function render(slug, name, s, now) {
 <h2 style="font-size:19px;margin:0 0 6px">Is ${esc(meta.q)} open today?</h2>
 <p style="margin:0">${lead} ${closeLine}${otherLine}</p>
 ${repLine}
+${meta.weather ? `<p style="margin:10px 0 0">${esc(meta.weather)}</p>` : ''}
 <p style="margin:10px 0 0;font-size:14px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(when)}. A pass with no closure listed is not a promise it is open, and a camera picture does not show the gates. Confirm on the <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a> before you leave. The map below updates live.</p>
 </section>
 <!-- passnow:end -->`;

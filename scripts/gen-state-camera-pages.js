@@ -18,7 +18,7 @@ const PLOW_PAGES = new Set(['UT', 'NE', 'IN', 'IA', 'MN', 'KS', 'MB', 'AK', 'DE'
 
 // bounds: [[minLat,minLon],[maxLat,maxLon]]  ·  notable = HTML (links to corridors/passes where they exist)
 const STATES = [
-  { slug:'washington', code:'WA', name:'Washington', dot:'WSDOT', bounds:'[[45.54,-124.85],[49,-116.91]]',
+  { slug:'washington', code:'WA', name:'Washington', dot:'WSDOT', title:'Where can I see WSDOT cameras? | MileCheck', h1:'WSDOT traffic cameras across Washington', bounds:'[[45.54,-124.85],[49,-116.91]]',
     blurb:`Washington State DOT runs one of the most-watched camera networks in the country, from the Seattle–Tacoma freeways to the mountain passes and the Washington State Ferries terminals.`,
     notable:`The big ones are <a href="../../corridors/i-5/">I-5</a> through the Seattle metro, <a href="../../corridors/i-90/">I-90</a> over <a href="../../passes/snoqualmie/">Snoqualmie Pass</a>, US-2 over <a href="../../passes/stevens/">Stevens Pass</a>, and the ferry-terminal cameras on Puget Sound.` },
   { slug:'oregon', code:'OR', name:'Oregon', dot:'ODOT (TripCheck)', bounds:'[[41.99,-124.57],[46.29,-116.46]]',

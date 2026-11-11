@@ -990,8 +990,8 @@
   "title": "Printable map of Siskiyou Summit roads and stops | MileCheck"
  },
  "/passes/snoqualmie/": {
-  "title": "Is Snoqualmie Pass open? Webcams and chains | MileCheck",
-  "desc": "Is Snoqualmie Pass open? Today I-90 road conditions from WSDOT, chain and traction rules for each direction, summit temperature, webcams and closures."
+  "title": "What is the weather at Snoqualmie Pass? | MileCheck",
+  "desc": "Check Snoqualmie Pass weather with the National Weather Service forecast, summit temperature, WSDOT road conditions, chain rules and webcams on I-90."
  },
  "/passes/snoqualmie/map/": {
   "title": "Printable Snoqualmie Pass map and stops | MileCheck"
@@ -1764,5 +1764,9 @@
  },
  "/zipper-merge-explained/": {
   "title": "What is a zipper merge and how do you use it? | MileCheck"
+ },
+ "/cameras/washington/": {
+  "title": "Where can I see WSDOT cameras? | MileCheck",
+  "desc": "View WSDOT traffic cameras across Washington on a map. Find the latest camera images by highway and mile marker, including I-5, I-90 and mountain passes."
  }
 }
