@@ -188,6 +188,7 @@
     <p class="mv-live" id="mvLive" hidden style="font-size:16px;font-weight:700;margin:8px 0 4px"><span id="mvLiveTxt"></span> <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=roads-baker&amp;mt=8" target="_blank" rel="noopener">View forecast</a></p>
     <script>(function(){var L={"OUT":"{Mountain} is visible right now.","PARTLY":"{Mountain} is partly visible right now.","HIDDEN":"{Mountain} is hidden by clouds right now."},N="Mount Baker";fetch('https://baker-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){var v=j&&j.now&&j.now.verdict;if(!L[v])return;document.getElementById('mvLiveTxt').textContent=L[v].replace('{Mountain}',N);document.getElementById('mvLive').hidden=false;}).catch(function(){});})();</script>
     <p class="sub">An empty list does not mean the road is open. Check <a href="https://wsdot.com/travel/real-time/mountainpasses/mt.-baker" target="_blank" rel="noopener">WSDOT's Mt. Baker Highway report</a> for the current status.</p>
+    <p class="sub"><b>Skiing?</b> This road goes to Mt. Baker Ski Area. <a href="https://www.mtbaker.us/snow-report/" target="_blank" rel="noopener">Mt. Baker Ski Area snow report</a>.</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">cameras on SR 542</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>

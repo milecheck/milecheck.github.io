@@ -1230,8 +1230,8 @@ for (const s of ROAD_SUBS) {
 // Ski areas on the route (2026-11-11). Name and the area's own conditions page only.
 function skiBlock(p){
   if(!p.ski||!p.ski.length)return '';
-  const links=p.ski.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n} conditions</a>`).join(' · ');
-  return `\n    <p class="sub"><b>Ski area on this road.</b> ${p.ski.map(([n])=>n).join(', ')}. The snow and lift report is on the ski area's own page. ${links}.</p>`;
+  const links=p.ski.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n} snow and lift report</a>`).join(' · ');
+  return `\n    <p class="sub"><b>Skiing?</b> This road goes to ${p.ski.map(([n])=>n).join(', ')}. ${links}.</p>`;
 }
 
 function faqJsonLd(p){
