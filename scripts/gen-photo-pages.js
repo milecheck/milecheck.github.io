@@ -10,7 +10,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const MV = process.env.MV_DIR || path.join(ROOT, '..', 'mv-b34');
 const COPY = require('./photo-copy.json');
-const KEYS = ['rainier', 'hood', 'baker', 'sthelens', 'denali', 'olympics', 'angeles', 'baldy', 'bachelor', 'southsister'];
+const KEYS = ['rainier', 'hood', 'baker', 'sthelens', 'denali', 'olympics', 'angeles', 'baldy', 'adams', 'bachelor', 'southsister'];
 const SLUG = 'sunset-glow';
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -103,7 +103,7 @@ function build(key) {
   return { key, title, tlen: title.length, dlen: desc.length, spots: spots.length, lightWord, url };
 }
 
-const res = KEYS.map(build);
+const res = (process.argv.length > 2 ? process.argv.slice(2) : KEYS).map(build); // slugs on the command line build only those mountains
 // Sitemap (idempotent).
 const smFile = path.join(ROOT, 'sitemap.xml');
 let sm = fs.readFileSync(smFile, 'utf8');

@@ -15,7 +15,7 @@ const MV_LINE = {
   HIDDEN: '{Mountain} is hidden by clouds right now.',
 };
 const MV_LINK_TEXT = 'View forecast';
-const MV_NAMES = { rainier: 'Mount Rainier', hood: 'Mount Hood', angeles: 'Mount Angeles', baker: 'Mount Baker', sthelens: 'Mount St. Helens', denali: 'Denali', bachelor: 'Mount Bachelor', southsister: 'South Sister' };
+const MV_NAMES = { rainier: 'Mount Rainier', hood: 'Mount Hood', angeles: 'Mount Angeles', baker: 'Mount Baker', sthelens: 'Mount St. Helens', denali: 'Denali', bachelor: 'Mount Bachelor', southsister: 'South Sister', adams: 'Mount Adams' };
 // Fetched client-side from the mountain's Worker; the line stays hidden if the fetch fails.
 const mvLine = (key) => (!MV_NAMES[key] || process.env.NO_MV_LINE) ? '' : `
     <p class="mv-live" id="mvLive" hidden style="font-size:16px;font-weight:700;margin:8px 0 4px"><span id="mvLiveTxt"></span> <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=roads-${key}&amp;mt=8" target="_blank" rel="noopener">${MV_LINK_TEXT}</a></p>
@@ -1124,6 +1124,47 @@ const AREAS = [
     ctaH: 'Take it with you', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
     related: (up) => `<a href="../">Is South Sister visible right now?</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
   },
+  {
+    kind: 'area', slug: 'adams-roads', out: 'mountains/adams/roads', up: '../../../',
+    url: 'https://milecheckapp.com/mountains/adams/roads/',
+    name: 'Mount Adams', route: 'SR 14 · US 12', state: 'WA', states: ['WA', 'OR'], stateName: 'Washington and Oregon',
+    dot: 'WSDOT and ODOT', credit: 'WSDOT, ODOT and NIFC via MileCheck',
+    // Summit from mountain-engine mountains/adams.cjs. Live /cameras and /incidents checked 2026-11-11:
+    // nothing inside 25 mi, so the radius is 45 mi. Inside it: US 12 at Packwood (29 mi) and White Pass (30),
+    // SR 14 at the Hood River Bridge (33), Bingen (34) and Dallesport (41), I-84 at Hood River, Wyeth and
+    // Cascade Locks (34 to 41), two SR 14 alerts at 33 mi. No camera or alert tagged SR 141 (Trout Lake).
+    lat: 46.2024, lon: -121.4906, rMi: 45, noPrint: true,
+    title: 'What are road conditions near Mt Adams? | MileCheck',
+    desc: 'Live WSDOT and ODOT cameras on SR 14, US 12 and I-84 around Mt Adams, with closures and wildfires within 45 miles of the summit.',
+    ogTitle: 'Mount Adams road cameras and conditions | MileCheck',
+    eyebrow: 'SR 14 · US 12 · Washington and Oregon',
+    h1: 'Mount Adams road cameras and conditions',
+    hero: `WSDOT cameras on SR 14 along the Columbia River and on US 12 over White Pass, plus ODOT cameras on I-84 at Hood River, on one map. Closures, construction, road reports and wildfires within 45 miles of the summit sit under the map.`,
+    markerLabel: 'Mount Adams',
+    camLabel: 'live cameras within 45 mi', elev: '45 mi', elevLabel: 'radius from the summit',
+    dist: '45 mi', distNote: 'radius from the summit', nearWord: 'within 45 miles of the summit', bannerWhere: 'on the roads around Mount Adams',
+    aboutH: 'The roads around Mount Adams',
+    lede: `SR 14 follows the Columbia River south of the mountain. US 12 crosses White Pass to the north. I-84 runs along the Oregon side of the river.`,
+    segs: [
+      { h: 'What the map covers', p: `A 45-mile radius around the summit of Mount Adams. That takes in Trout Lake, Hood River, Packwood and White Pass. The data comes from WSDOT, ODOT and NIFC. It shows what the agencies report. It does not say a road is safe to drive.` },
+      { h: 'Chains and closures', p: `WSDOT and ODOT post chain and traction-tire requirements when conditions call for it. Requirements change by the hour in a storm. <a href="https://wsdot.com/travel/real-time/" target="_blank" rel="noopener">WSDOT travel alerts</a> and <a href="https://tripcheck.com/" target="_blank" rel="noopener">TripCheck</a> are the agencies' own pages.` },
+    ],
+    driveP: `MileCheck shows your mile marker on SR 14 and US 12 as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
+    faq: [
+      ['Are the roads around Mt. Adams open right now?', `Closures and incidents show on the <a href="#comap">map above</a> from WSDOT and ODOT. <a href="https://wsdot.com/travel/real-time/" target="_blank" rel="noopener">WSDOT travel alerts</a> and <a href="https://tripcheck.com/" target="_blank" rel="noopener">TripCheck</a> are the agencies' own pages.`],
+      ['Is Mount Adams visible right now?', `A different question from whether the road is open. The <a href="../">visibility page</a> answers it for Yakima, Hood River, The Dalles, Goldendale and Trout Lake.`],
+      ['Where do the cameras come from?', `The cameras on this page come from WSDOT and ODOT's TripCheck feeds. Wildfires come from the national NIFC feed. See <a href="../../../cameras/">every highway camera</a> for the rest of your route.`],
+    ],
+    crumbs: [
+      { name: 'MileCheck', item: 'https://milecheckapp.com/' },
+      { name: 'Mountains', item: 'https://milecheckapp.com/mountains/' },
+      { name: 'Mount Adams', item: 'https://milecheckapp.com/mountains/adams/' },
+      { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/adams/roads/' },
+    ],
+    vis: { h: 'Is Mount Adams visible right now?', p: `Whether the road is open and whether you can see the mountain are different questions. The visibility page answers the second one for Yakima, Hood River, The Dalles, Goldendale and Trout Lake.`, href: '../', cta: 'Check visibility now' },
+    ctaH: 'Take it with you', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
+    related: (up) => `<a href="../">Is Mount Adams visible right now?</a> · <a href="${up}cameras/washington/">Washington cameras</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+  },
 ];
 
 // Road-specific pages under each mountain's roads page (2026-11-11). Same template and
@@ -1196,6 +1237,16 @@ const ROAD_SUBS = [
     desc: 'Live ODOT cameras and alerts on US 20 from Bend through Sisters to Santiam Pass and Santiam Junction, within 25 miles of South Sister.',
     lede: 'US 20 runs from Bend through Sisters and over Santiam Pass to Santiam Junction. ODOT runs the cameras and the alerts on this map.',
     check: ['ODOT TripCheck', 'https://tripcheck.com/'] },
+  { parent: 'adams-roads', sub: 'sr-14', route: 'SR 14', only: ['SR 14', 'SR-14', 'SR14'], elev: '45 mi', elevLabel: 'radius from Mount Adams',
+    title: 'What are SR 14 road conditions in the Gorge? | MileCheck',
+    desc: 'Live WSDOT cameras and alerts on SR 14 along the Columbia River, from the Hood River Bridge to Dallesport, within 45 miles of Mount Adams.',
+    lede: 'SR 14 runs along the Washington side of the Columbia River, south of Mount Adams. WSDOT runs the cameras and the alerts on this map.',
+    check: ['WSDOT travel alerts', 'https://wsdot.com/travel/real-time/'] },
+  { parent: 'adams-roads', sub: 'us-12', route: 'US 12', only: ['US 12', 'US-12', 'US12'], elev: '4,500 ft', elevLabel: 'White Pass',
+    title: 'Is US 12 over White Pass open right now? | MileCheck',
+    desc: 'Live WSDOT cameras and alerts on US 12 over White Pass, from Packwood to the summit, within 45 miles of Mount Adams in Washington.',
+    lede: 'US 12 crosses the Cascades at White Pass, north of Mount Adams, on the way from Packwood to Yakima. WSDOT runs the cameras and the alerts on this map.',
+    check: ['WSDOT White Pass report', 'https://wsdot.com/travel/real-time/mountainpasses/white'] },
 ];
 for (const s of ROAD_SUBS) {
   const P = AREAS.find((a) => a.slug === s.parent);
