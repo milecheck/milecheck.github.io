@@ -14,8 +14,93 @@
   "forecastNote": "This is a weather-based forecast, and a visible summit glow is never certain.",
   "ctaText": "Get the Mountain Visibility Forecast app for $1.99 to check summit visibility hour by hour.",
   "faq": [
-    {"q": "What causes {Mountain} to glow pink at sunset?", "a": "Low-angle sunlight travels through more atmosphere, scattering shorter wavelengths and leaving more red and orange light to reach the summit."},
-    {"q": "Can {Mountain} glow when it is cloudy?", "a": "Yes, if the summit and the sky toward the setting sun remain clear enough for sunlight to reach the mountain."},
-    {"q": "Does a Great glow forecast guarantee sunset color?", "a": "No. Cloud conditions can change before sunset, and even a clear summit does not guarantee visible alpenglow."}
-  ]
+    {
+      "q": "What causes {Mountain} to glow pink at sunset?",
+      "a": "Low-angle sunlight travels through more atmosphere, scattering shorter wavelengths and leaving more red and orange light to reach the summit."
+    },
+    {
+      "q": "Can {Mountain} glow when it is cloudy?",
+      "a": "Yes, if the summit and the sky toward the setting sun remain clear enough for sunlight to reach the mountain."
+    },
+    {
+      "q": "Does a Great glow forecast guarantee sunset color?",
+      "a": "No. Cloud conditions can change before sunset, and even a clear summit does not guarantee visible alpenglow."
+    }
+  ],
+  "pages2": {
+    "_source": "ChatGPT draft 2026-11-11 (chatgpt.com, Claude in Chrome), ideas 2-6. Dropped ChatGPT FAQs for C, D, E that named spots not in our viewpoint list (Reflection Lakes, Sunrise Point, Trillium Lake, Jonsrud, Artist Point, Boulevard Park). Titles from the ideas doc; idea 4 reworded to drop 'best'.",
+    "A": {
+      "desc": "Find places to photograph Mount Rainier from Seattle, compare viewpoint distances, and check which days ahead have clear summit forecasts.",
+      "intro": "Mount Rainier is visible from several viewpoints around Seattle when clouds clear the summit. Check the forecast before heading out to photograph it.",
+      "spotsHead": "Where to photograph Mount Rainier from Seattle",
+      "spotsIntro": "Explore Seattle-area viewpoints with distances from downtown Seattle and views toward Mount Rainier.",
+      "windowsHead": "Clear days ahead for Mount Rainier",
+      "faq": [
+        {
+          "q": "Where can I photograph Mount Rainier in Seattle?",
+          "a": "Kerry Park and Seward Park are two places to photograph Mount Rainier when the summit is visible."
+        },
+        {
+          "q": "When can you see Mount Rainier from Seattle?",
+          "a": "Look for days with a clear summit forecast. See it hour by hour in the app."
+        }
+      ]
+    },
+    "B": {
+      "desc": "See when Mount Rainier may be visible for photos. Check clear days ahead by weekday, summit cloud conditions, and tonight's sunset glow outlook.",
+      "intro": "Mount Rainier can be hidden by clouds even when the sky looks clear from Seattle. Check which days ahead have a clear summit forecast and tonight's glow grade before planning photos.",
+      "spotsHead": "Places to photograph Mount Rainier",
+      "spotsIntro": "Compare viewpoints around Mount Rainier and check the summit forecast before choosing a location.",
+      "windowsHead": "Which days will Mount Rainier be visible?",
+      "faq": [
+        {
+          "q": "Why can't I see Mount Rainier on a clear day?",
+          "a": "Clouds can cover the summit while skies remain clear at lower elevations."
+        },
+        {
+          "q": "How do I know when Mount Rainier will be visible?",
+          "a": "Check the clear days ahead by weekday name. See it hour by hour in the app."
+        }
+      ]
+    },
+    "C": {
+      "desc": "Find sunrise photography viewpoints for Mount Rainier with distances from Tacoma. Check upcoming clear summit days before planning your photos.",
+      "intro": "Mount Rainier can catch morning light when the summit is clear at sunrise. Cloud cover can hide the mountain even when Tacoma has clear skies.",
+      "spotsHead": "Mount Rainier sunrise photography viewpoints",
+      "spotsIntro": "Explore sunrise viewpoints around Mount Rainier with distances from downtown Tacoma.",
+      "windowsHead": "Clear days ahead for Mount Rainier sunrise photos",
+      "faq": [
+        {
+          "q": "Will Mount Rainier be visible at sunrise?",
+          "a": "Visibility depends on clouds around the summit and along the view. See it hour by hour in the app."
+        }
+      ]
+    },
+    "D": {
+      "desc": "Find Mount Hood sunrise photography viewpoints with distances from Portland. See upcoming clear summit days and plan photos around mountain visibility.",
+      "intro": "Mount Hood can be visible in morning light from viewpoints around Portland and the mountain. Clouds around the summit can block the view even when nearby skies are clear.",
+      "spotsHead": "Where to photograph Mount Hood at sunrise",
+      "spotsIntro": "Compare Mount Hood sunrise viewpoints with distances from downtown Portland.",
+      "windowsHead": "Clear days ahead for Mount Hood sunrise photos",
+      "faq": [
+        {
+          "q": "How can I check Mount Hood visibility before sunrise?",
+          "a": "Check upcoming clear summit days by weekday name. See it hour by hour in the app."
+        }
+      ]
+    },
+    "E": {
+      "desc": "Find sunset photography viewpoints for Mount Baker with distances from Bellingham. Check clear summit days ahead before planning mountain photos.",
+      "intro": "Mount Baker can be photographed in evening light from viewpoints around Bellingham. Clouds near the summit can hide the mountain even when the surrounding sky is clear.",
+      "spotsHead": "Where to photograph Mount Baker at sunset",
+      "spotsIntro": "Explore Mount Baker sunset viewpoints with distances from downtown Bellingham.",
+      "windowsHead": "Clear days ahead for Mount Baker sunset photos",
+      "faq": [
+        {
+          "q": "Will Mount Baker be visible at sunset?",
+          "a": "A clear summit forecast can help you plan, but clouds can change. See it hour by hour in the app."
+        }
+      ]
+    }
+  }
 }

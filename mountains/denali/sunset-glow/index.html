@@ -168,8 +168,8 @@
   function f(t,o){return new Date(t).toLocaleString('en-US',Object.assign({timeZone:TZ},o));}
   function hm(t){return f(t,{hour:'numeric',minute:'2-digit'});}
   fetch('https://denali-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){if(!j)return;var now=Date.now();
-  var g=(j.alpenglow||[]).filter(function(e){return e.kind==='sunset'&&Date.parse(e.windowEnd||e.when)>now;})[0];
-  if(g&&L[g.label]){document.getElementById('pgGrade').textContent=G[g.label]+(f(g.when,{year:'numeric',month:'numeric',day:'numeric'})===f(now,{year:'numeric',month:'numeric',day:'numeric'})?'':' · '+f(g.when,{weekday:'long'}));document.getElementById('pgGlowTxt').textContent=L[g.label];document.getElementById('pgSunset').textContent=SL+' '+hm(g.when);document.getElementById('pgGlow').hidden=false;}
+  var g=(j.alpenglow||[]).filter(function(e){return e.kind==="sunset"&&Date.parse(e.windowEnd||e.when)>now;})[0];
+  if(g&&L[g.label]&&!false){document.getElementById('pgGrade').textContent=G[g.label]+(f(g.when,{year:'numeric',month:'numeric',day:'numeric'})===f(now,{year:'numeric',month:'numeric',day:'numeric'})?'':' · '+f(g.when,{weekday:'long'}));document.getElementById('pgGlowTxt').textContent=L[g.label];document.getElementById('pgSunset').textContent=SL+' '+hm(g.when);document.getElementById('pgGlow').hidden=false;}
   if(Array.isArray(j.windows)){var w=j.windows.filter(function(x){return x.end>now;}).slice(0,5);document.getElementById('pgWinList').innerHTML=w.length?w.map(function(x){return f(x.start,{weekday:'long'});}).filter(function(d,i,a){return a.indexOf(d)===i;}).map(function(d){return '<li>'+d+'</li>';}).join(''):'<li>'+NONE+'</li>';document.getElementById('pgWin').hidden=false;}
   }).catch(function(){});})();</script>
 <section class="mc-gear" aria-label="Gear guides" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">

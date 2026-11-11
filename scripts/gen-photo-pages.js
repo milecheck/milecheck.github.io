@@ -16,19 +16,29 @@ const SLUG = 'sunset-glow';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const mi = (a, b, c, d) => { const R = 3958.8, p = Math.PI / 180; const x = Math.sin((c - a) * p / 2) ** 2 + Math.cos(a * p) * Math.cos(c * p) * Math.sin((d - b) * p / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
 
-function build(key) {
+function build(key, P) {
+  P = P || {};
+  const SLUG = P.slug || 'sunset-glow';
   const m = require(path.join(MV, 'mountains', key + '.cjs'));
   const name = m.mountainFull;
   const plural = /^The /.test(name);
   const subj = plural ? name.replace(/^The/, 'the') : name;
-  const title = (plural ? 'Are ' : 'Is ') + subj + ' going to glow at sunset tonight?';
-  const town = m.regions.find(r => r.key === m.defaultRegion) || m.regions[0];
+  const title = P.title || ((plural ? 'Are ' : 'Is ') + subj + ' going to glow at sunset tonight?');
+  const town = m.regions.find(r => r.key === (P.town || m.defaultRegion)) || m.regions[0];
+  const C = Object.assign({}, COPY, P.copy || {});
   const fill = s => s.replace(/\{Mountain\}/g, subj).replace(/\{town\}/g, town.name).replace(/^the /, 'The ');
   // Viewpoints: Sunset-tagged first, in file order (hand-picked list comes first). If none, "Any".
-  let spots = m.spots.filter(s => s.best === 'Sunset'), lightWord = 'Sunset';
-  if (!spots.length) { spots = m.spots.filter(s => s.best === 'Any'); lightWord = 'Any time of day'; }
-  spots = spots.slice(0, 5);
-  const desc = fill(COPY.desc);
+  let spots, lightWord;
+  if (P.best) {
+    const d = s => mi(town.lat, town.lon, s.lat, s.lon);
+    spots = m.spots.filter(s => P.best === 'all' || s.best === P.best).sort((a, b) => d(a) - d(b)).slice(0, P.n || 8);
+    lightWord = null;
+  } else {
+    spots = m.spots.filter(s => s.best === 'Sunset'); lightWord = 'Sunset';
+    if (!spots.length) { spots = m.spots.filter(s => s.best === 'Any'); lightWord = 'Any time of day'; }
+    spots = spots.slice(0, 5);
+  }
+  const desc = fill(C.desc);
   const hubFile = path.join(ROOT, 'mountains', key, 'index.html');
   const hub = fs.readFileSync(hubFile, 'utf8');
   const url = `https://milecheckapp.com/mountains/${key}/${SLUG}/`;
@@ -48,33 +58,33 @@ function build(key) {
     .replace(/(<meta property="og:description" content=")[^"]*/, '$1' + esc(desc))
     .replace(/(<meta property="og:url" content=")[^"]*/, '$1' + url)
     .replace(/\s*<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"FAQPage".*?<\/script>/, '');
-  const faq = COPY.faq.map(f => ({ q: fill(f.q), a: fill(f.a) }));
+  const faq = C.faq.map(f => ({ q: fill(f.q), a: fill(f.a) }));
   const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
   head += `  <script type="application/ld+json">${JSON.stringify(ld)}</script>
   <style>.pg-live[hidden]{display:none}.pg-big{font-family:var(--display);font-size:24px;font-weight:600;margin:4px 0}.pg-list{list-style:none;padding:0;margin:8px 0}.pg-list li{padding:8px 0;border-bottom:1px solid var(--line)}.pg-list .m{display:block;font-size:13px;color:var(--ink-soft)}</style>\n`;
   const shellTop = deeper(head + hub.slice(iHead, iNavEnd));
   const shellBot = deeper(hub.slice(iGear));
 
-  const spotLis = spots.map(s => `<li>${esc(s.name)}<span class="m">Best light: ${lightWord} · ${Math.round(mi(town.lat, town.lon, s.lat, s.lon))} mi from ${esc(town.name)}</span></li>`).join('');
-  const L = { Great: fill(COPY.glowGreat), Decent: fill(COPY.glowDecent), Skip: fill(COPY.glowPoor) };
+  const spotLis = spots.map(s => `<li>${esc(s.name)}<span class="m">Best light: ${lightWord || (s.best === 'Any' ? 'Any time of day' : s.best)} · ${Math.round(mi(town.lat, town.lon, s.lat, s.lon))} mi from ${esc(town.name)}</span></li>`).join('');
+  const L = { Great: fill(C.glowGreat), Decent: fill(C.glowDecent), Skip: fill(C.glowPoor) };
   const body = `
-  <div class="mv-crumbs"><a href="../../../index.html">MileCheck</a> / <a href="../../../mountains/">Mountains</a> / <a href="../">${esc(name)}</a> / Sunset glow</div>
+  <div class="mv-crumbs"><a href="../../../index.html">MileCheck</a> / <a href="../../../mountains/">Mountains</a> / <a href="../">${esc(name)}</a> / ${esc(P.crumb || 'Sunset glow')}</div>
   <div class="mv-hero"><div>
-    <div class="mv-stamp">${esc(name)} · sunset glow</div>
+    <div class="mv-stamp">${esc(name)} · ${esc((P.crumb || 'Sunset glow').toLowerCase())}</div>
     <h1>${esc(title)}</h1>
-    <p class="sub">${esc(fill(COPY.intro))}</p>
+    <p class="sub">${esc(fill(C.intro))}</p>
   </div></div>
   <div class="mv-body">
     <div class="mv-verdict pg-live" id="pgGlow" hidden>
-      <div class="mv-stamp">${esc(fill(COPY.glowHead))}</div>
+      <div class="mv-stamp">${esc(fill(C.glowHead))}</div>
       <div class="pg-big" id="pgGrade"></div>
       <p class="mv-line" id="pgGlowTxt"></p>
       <p class="mv-line" id="pgSunset"></p>
     </div>
-    <div class="mv-prose pg-live" id="pgWin" hidden><h2>${esc(fill(COPY.windowsHead))}</h2><ul class="pg-list" id="pgWinList"></ul><p><a href="${ios}">See it hour by hour in the app</a></p></div>
-    <div class="mv-prose">${spots.length ? `<h2>${esc(fill(COPY.spotsHead))}</h2><p>${esc(fill(COPY.spotsIntro))}</p><ul class="pg-list">${spotLis}</ul>` : `<p><a href="../spots/">Viewpoints for ${esc(subj)}</a></p>`}
-    <p>${esc(fill(COPY.forecastNote))}</p></div>
-    <div class="mv-get"><div><div class="mv-stamp">The app</div><h3>Mountain Visibility</h3><p>${esc(fill(COPY.ctaText))}</p></div>
+    <div class="mv-prose pg-live" id="pgWin" hidden><h2>${esc(fill(C.windowsHead))}</h2><ul class="pg-list" id="pgWinList"></ul><p><a href="${ios}">See it hour by hour in the app</a></p></div>
+    <div class="mv-prose">${spots.length ? `<h2>${esc(fill(C.spotsHead))}</h2><p>${esc(fill(C.spotsIntro))}</p><ul class="pg-list">${spotLis}</ul>` : `<p><a href="../spots/">Viewpoints for ${esc(subj)}</a></p>`}
+    <p>${esc(fill(C.forecastNote))}</p></div>
+    <div class="mv-get"><div><div class="mv-stamp">The app</div><h3>Mountain Visibility</h3><p>${esc(fill(C.ctaText))}</p></div>
       <a href="${ios}" class="btn btn-primary" data-store="ios" rel="noopener">Get the app, $1.99</a>
       ${play ? `<span class="mv-soon" data-store="play">On Android? <a href="${play}" target="_blank" rel="noopener">Get it on Google Play</a>.</span>` : ''}
     </div>
@@ -82,12 +92,12 @@ function build(key) {
     <div class="mv-prose"><h2>Questions</h2></div><div class="mv-faq">${faq.map(f => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}</div>
     <div class="mv-notes">Forecast from MET Norway (CC BY 4.0). Observations from NOAA aviation weather. Times are local to ${esc(name)}.</div>
   </div>
-  <script>(function(){var L=${JSON.stringify(L)},G={Great:'Great',Decent:'Decent',Skip:'Poor light expected'},TZ=${JSON.stringify(m.tz)},SL=${JSON.stringify(COPY.sunsetLabel)},NONE=${JSON.stringify(fill(COPY.windowsNone))};
+  <script>(function(){var L=${JSON.stringify(L)},G={Great:'Great',Decent:'Decent',Skip:'Poor light expected'},TZ=${JSON.stringify(m.tz)},SL=${JSON.stringify(C.sunsetLabel)},NONE=${JSON.stringify(fill(C.windowsNone))};
   function f(t,o){return new Date(t).toLocaleString('en-US',Object.assign({timeZone:TZ},o));}
   function hm(t){return f(t,{hour:'numeric',minute:'2-digit'});}
   fetch('https://${key}-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){if(!j)return;var now=Date.now();
-  var g=(j.alpenglow||[]).filter(function(e){return e.kind==='sunset'&&Date.parse(e.windowEnd||e.when)>now;})[0];
-  if(g&&L[g.label]){document.getElementById('pgGrade').textContent=G[g.label]+(f(g.when,{year:'numeric',month:'numeric',day:'numeric'})===f(now,{year:'numeric',month:'numeric',day:'numeric'})?'':' · '+f(g.when,{weekday:'long'}));document.getElementById('pgGlowTxt').textContent=L[g.label];document.getElementById('pgSunset').textContent=SL+' '+hm(g.when);document.getElementById('pgGlow').hidden=false;}
+  var g=(j.alpenglow||[]).filter(function(e){return e.kind===${JSON.stringify(P.glow || 'sunset')}&&Date.parse(e.windowEnd||e.when)>now;})[0];
+  if(g&&L[g.label]&&!${JSON.stringify(!!C.noGlow)}){document.getElementById('pgGrade').textContent=G[g.label]+(f(g.when,{year:'numeric',month:'numeric',day:'numeric'})===f(now,{year:'numeric',month:'numeric',day:'numeric'})?'':' · '+f(g.when,{weekday:'long'}));document.getElementById('pgGlowTxt').textContent=L[g.label];document.getElementById('pgSunset').textContent=SL+' '+hm(g.when);document.getElementById('pgGlow').hidden=false;}
   if(Array.isArray(j.windows)){var w=j.windows.filter(function(x){return x.end>now;}).slice(0,5);document.getElementById('pgWinList').innerHTML=w.length?w.map(function(x){return f(x.start,{weekday:'long'});}).filter(function(d,i,a){return a.indexOf(d)===i;}).map(function(d){return '<li>'+d+'</li>';}).join(''):'<li>'+NONE+'</li>';document.getElementById('pgWin').hidden=false;}
   }).catch(function(){});})();</script>
 `;
@@ -100,10 +110,23 @@ function build(key) {
     const nh = hub.replace('<ul class="mv-near">', `<ul class="mv-near"><li><a href="${SLUG}/">${esc(title)}</a></li>`);
     fs.writeFileSync(hubFile, nh);
   }
+  if (P.slug) {
+    const gf = path.join(ROOT, 'mountains', key, 'sunset-glow', 'index.html');
+    if (fs.existsSync(gf)) { let g = fs.readFileSync(gf, 'utf8');
+      if (!g.includes(`href="../${SLUG}/"`)) { g = g.replace('<p class="mv-back">', `<p class="mv-back"><a href="../${SLUG}/">${esc(title)}</a></p>\n    <p class="mv-back">`); fs.writeFileSync(gf, g); } }
+  }
   return { key, title, tlen: title.length, dlen: desc.length, spots: spots.length, lightWord, url };
 }
 
-const res = (process.argv.length > 2 ? process.argv.slice(2) : KEYS).map(build); // slugs on the command line build only those mountains
+const P2 = COPY.pages2;
+const PAGES = [
+  ['rainier', { slug: 'photograph-from-seattle', title: 'Where can you photograph Rainier from Seattle?', town: 'seattle', best: 'all', crumb: 'Photo spots from Seattle', copy: P2.A }],
+  ['rainier', { slug: 'visible-for-photos', title: 'When is Mount Rainier actually visible for photos?', town: 'seattle', best: 'all', n: 5, crumb: 'Visible for photos', copy: P2.B }],
+  ['rainier', { slug: 'sunrise-photos', title: 'Where can you photograph Mount Rainier at sunrise?', town: 'tacoma', best: 'Sunrise', crumb: 'Sunrise photos', copy: Object.assign({ noGlow: true }, P2.C) }],
+  ['hood', { slug: 'sunrise-photos', title: 'Where do you photograph Mount Hood at sunrise?', town: 'portland', best: 'Sunrise', crumb: 'Sunrise photos', copy: Object.assign({ noGlow: true }, P2.D) }],
+  ['baker', { slug: 'sunset-photos', title: 'Where can you photograph Mount Baker at sunset?', town: 'bellingham', best: 'Sunset', crumb: 'Sunset photos', copy: P2.E }],
+];
+const res = KEYS.map(k => build(k)).concat(PAGES.map(([k, p]) => build(k, p)));
 // Sitemap (idempotent).
 const smFile = path.join(ROOT, 'sitemap.xml');
 let sm = fs.readFileSync(smFile, 'utf8');
