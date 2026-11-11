@@ -176,11 +176,11 @@
         <a href="/get/" class="nav-cta">Get the app</a>
       </nav>
     </div>
-  </header><!-- mvb:start --><div id="ad-management-config-settings" data-blocklist-adhesion-mobile="1" data-blocklist-universal-player-mobile="1" data-blocklist-universal-player-desktop="1"></div><!-- mvb:end -->
+  </header>
 
   <div class="crit-banner" id="critBanner" style="display:none"></div>
 
-  <div class="co-hero">
+  <div class="co-hero journey-content"><!-- mvb:start --><div id="ad-management-config-settings" data-blocklist-adhesion-mobile="1" data-blocklist-universal-player-mobile="1" data-blocklist-universal-player-desktop="1"></div><!-- mvb:end -->
     <div class="eyebrow">Hurricane Ridge Road · US 101 · Washington</div>
     <h1>Mount Angeles road cameras and conditions</h1>
     <p class="sub">Check Hurricane Ridge access and US 101 cameras near Port Angeles and Sequim. The map shows agency cameras and reports within 25 miles of Mount Angeles.</p>
@@ -373,14 +373,19 @@ function alertEnd(a,sl){var el=a.location&&a.location['end-location'];if(!el)ret
 // a graph; the span is the shortest walk between the alert's two ends. If the walk
 // is much longer than the straight line, or the file is missing, the straight dashed
 // line stays.
-var ROADS=null,ROADG=null;
-function loadRoads(){if(ROADS!==null)return Promise.resolve(ROADS);return fetch('roads.json').then(function(r){return r.ok?r.json():null;}).then(function(j){ROADS=(j&&j.runs)||[];ROADG=ROADS.length?buildGraph(ROADS):null;return ROADS;}).catch(function(){ROADS=[];ROADG=null;return ROADS;});}
+var ROADS=null,ROADG=null,ROADREFS=null,ROADGS={};
+function loadRoads(){if(ROADS!==null)return Promise.resolve(ROADS);return fetch('roads.json').then(function(r){return r.ok?r.json():null;}).then(function(j){ROADS=(j&&j.runs)||[];ROADREFS=(j&&j.refs)||null;ROADG=ROADS.length?buildGraph(ROADS):null;return ROADS;}).catch(function(){ROADS=[];ROADG=null;return ROADS;});}
+// An alert is drawn only along its own route's geometry. Snapping to any road nearby drew
+// SR 906 MP 2-3 along I-90 (Leah, 2026-11-11). Match on the route number (WSDOT calls I-90 "SR 90").
+// No geometry for that route: straight line, no snap. A file without refs (one-road pages) keeps its single-road graph.
+function routeNum(s){var m=String(s||'').match(/(\d+)/);return m?String(+m[1]):'';}
+function roadGraphFor(route){var n=routeNum(route);if(!ROADREFS)return ROADG;if(!n)return null;if(ROADGS[n]!==undefined)return ROADGS[n];var rs=ROADS.filter(function(r,i){return routeNum(ROADREFS[i])===n;});return ROADGS[n]=rs.length?buildGraph(rs):null;}
 function gkey(p){return p[0].toFixed(5)+','+p[1].toFixed(5);}
 function gdist(a,b){var dy=(a[0]-b[0])*111,dx=(a[1]-b[1])*111*Math.cos(a[0]*Math.PI/180);return Math.sqrt(dx*dx+dy*dy);}
 function buildGraph(runs){var nodes={},adj={};function add(p){var k=gkey(p);if(!nodes[k]){nodes[k]=p;adj[k]=[];}return k;}runs.forEach(function(r){for(var i=1;i<r.length;i++){var a=add(r[i-1]),b=add(r[i]),w=gdist(r[i-1],r[i]);adj[a].push([b,w]);adj[b].push([a,w]);}});return {nodes:nodes,adj:adj};}
 function nearestNode(g,p){var best=null,bd=1e9;for(var k in g.nodes){var d=gdist(g.nodes[k],p);if(d<bd){bd=d;best=k;}}return bd<1.5?best:null;}
 function roadPath(g,from,to){var s=nearestNode(g,from),t=nearestNode(g,to);if(!s||!t||s===t)return null;var dist={},prev={},done={},q=[s];dist[s]=0;while(q.length){var u=null,ud=1e9,ui=-1;for(var i=0;i<q.length;i++){if(dist[q[i]]<ud){ud=dist[q[i]];u=q[i];ui=i;}}q.splice(ui,1);if(u===t)break;done[u]=1;g.adj[u].forEach(function(e){var v=e[0],nd=ud+e[1];if(done[v])return;if(dist[v]===undefined||nd<dist[v]){if(dist[v]===undefined)q.push(v);dist[v]=nd;prev[v]=u;}});}if(dist[t]===undefined)return null;if(dist[t]>gdist(from,to)*1.8+3)return null;var path=[],k=t;while(k){path.push(g.nodes[k]);k=prev[k];}return path.reverse();}
-function spanLine(a){var cl=a.type==='CL'&&liveNow(a),col=ALERT_COLORS[a.type]||'#6B7280';var line=L.polyline([[a.lat,a.lon],[a.end.lat,a.end.lon]],{color:col,weight:cl?7:5,opacity:.8,dashArray:'6 7'}).on('click',function(){showCard(alrCard(a),cl);}).addTo(alrLayer);L.circleMarker([a.end.lat,a.end.lon],{radius:RS(4),color:'#fff',weight:1.5,fillColor:col,fillOpacity:1}).on('click',function(){showCard(alrCard(a),cl);}).addTo(alrLayer);loadRoads().then(function(){if(!alrLayer.hasLayer(line))return;var p=ROADG?roadPath(ROADG,[a.lat,a.lon],[a.end.lat,a.end.lon]):null;if(p&&p.length>1){line.setLatLngs(p);line.setStyle({dashArray:null});}else if(L.latLng(a.lat,a.lon).distanceTo([a.end.lat,a.end.lon])>8000){alrLayer.removeLayer(line);}});}
+function spanLine(a){var cl=a.type==='CL'&&liveNow(a),col=ALERT_COLORS[a.type]||'#6B7280';var line=L.polyline([[a.lat,a.lon],[a.end.lat,a.end.lon]],{color:col,weight:cl?7:5,opacity:.8,dashArray:'6 7'}).on('click',function(){showCard(alrCard(a),cl);}).addTo(alrLayer);L.circleMarker([a.end.lat,a.end.lon],{radius:RS(4),color:'#fff',weight:1.5,fillColor:col,fillOpacity:1}).on('click',function(){showCard(alrCard(a),cl);}).addTo(alrLayer);loadRoads().then(function(){if(!alrLayer.hasLayer(line))return;var p=roadGraphFor(a.route);p=p?roadPath(p,[a.lat,a.lon],[a.end.lat,a.end.lon]):null;if(p&&p.length>1){line.setLatLngs(p);line.setStyle({dashArray:null});}else if(L.latLng(a.lat,a.lon).distanceTo([a.end.lat,a.end.lon])>8000){alrLayer.removeLayer(line);}});}
 function mpText(a){return a.mp>0?' · MP '+Math.round(a.mp)+(a.end&&a.end.mp>0&&Math.round(a.end.mp)!==Math.round(a.mp)?' to '+Math.round(a.end.mp):''):'';}
 async function loadConds(){const out=[];for(const st of PASS.states){for(const r of await feedRows(WORKER+'/conditions?state='+st,'road-weather-reports','road weather')){const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!near(lat,lon))continue;const restr=[r['restriction-one'],r['restriction-two']].filter(x=>x&&!/^no restrict/i.test(String(x))).map(x=>clean(x,80));out.push({lat,lon,name:clean(r['location-name']||(r.location&&r.location['location-name'])||r['route-id']||'Road report',80),cond:clean(r['road-surface-condition'],220),wx:clean(r['weather-condition'],60),temp:(r['air-temperature']!=null&&r['air-temperature']!=='')?String(r['air-temperature']):'',restr,note:clean(r.comments||'',280)});}}return out;}
 async function loadFires(){const dLat=PASS.radiusKm/111,dLon=PASS.radiusKm/(111*Math.cos(PASS.lat*Math.PI/180));const bb=[PASS.lon-dLon,PASS.lat-dLat,PASS.lon+dLon,PASS.lat+dLat].map(v=>v.toFixed(4)).join(',');const rows=await feedRows(WORKER+'/fires?bbox='+bb,'fires','fires');return rows.filter(f=>near(+f.lat,+f.lon)).map(f=>({lat:+f.lat,lon:+f.lon,name:clean(f.name||'Fire',80),acres:f.acres,pct:f.containedPct,rx:!!f.isRx,dist:km(PASS.lat,PASS.lon,+f.lat,+f.lon)/1.609344})).sort((a,b)=>a.dist-b.dist);}

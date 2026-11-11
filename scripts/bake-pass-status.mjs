@@ -149,7 +149,7 @@ function renderChains(slug, s, now) {
 <section class="mc-passnow" aria-label="Are chains required on ${esc(meta.q)}" style="margin:18px 0;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
 <h2 style="font-size:19px;margin:0 0 6px">Chains and traction right now</h2>
 <p style="margin:0">${lead}${closeNote}</p>
-<p style="margin:10px 0 0;font-size:13.5px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(stamp(now))}. The line changes through the day. Read it again on the ${esc(meta.dot)} page, and go by the sign on the road: <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a>.</p>
+<p style="margin:10px 0 0;font-size:14px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(stamp(now))}. The line changes through the day. Read it again on the ${esc(meta.dot)} page, and go by the sign on the road: <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a>.</p>
 </section>
 <!-- passnow:end -->`;
 }
@@ -181,7 +181,7 @@ function render(slug, name, s, now) {
 <h2 style="font-size:19px;margin:0 0 6px">Is ${esc(meta.q)} open today?</h2>
 <p style="margin:0">${lead} ${closeLine}${otherLine}</p>
 ${repLine}
-<p style="margin:10px 0 0;font-size:13.5px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(when)}. A pass with no closure listed is not a promise it is open, and a camera picture does not show the gates. Confirm on the <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a> before you leave. The map below updates live.</p>
+<p style="margin:10px 0 0;font-size:14px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(when)}. A pass with no closure listed is not a promise it is open, and a camera picture does not show the gates. Confirm on the <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a> before you leave. The map below updates live.</p>
 </section>
 <!-- passnow:end -->`;
 }

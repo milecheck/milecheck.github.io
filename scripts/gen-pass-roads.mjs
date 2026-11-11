@@ -18,6 +18,10 @@ import path from 'node:path';
 const require = createRequire(import.meta.url);
 const { PASSES, AREAS } = require('./gen-pass-pages.js');
 
+// Every numbered route in the frame, labelled, so the page draws an alert along its own
+// route only (SR 906 was drawn along I-90 on 2026-11-11 because SR 906 was not in the file).
+const NUMBERED = /^(I|US|SR|[A-Z]{2}|Hwy|Highway)[- ]?\d+[A-Z]?$/;
+
 let n = 0;
 for (const p of [...PASSES, ...AREAS]) {
   const file = path.join('data/map-sheets', p.slug + '.json');
@@ -25,18 +29,20 @@ for (const p of [...PASSES, ...AREAS]) {
   const d = JSON.parse(readFileSync(file, 'utf8'));
   const seen = new Set();
   const runs = [];
+  const refs = [];
   // The roads the page is about, plus freeways, inside the page's own radius. City
   // arterials stay out: Little Cottonwood's file was 207 KB with Salt Lake City in it.
   const rad = Math.PI / 180;
   const inside = (q) => { const dy = (q[0] - p.lat) * 111, dx = (q[1] - p.lon) * 111 * Math.cos(p.lat * rad); return Math.sqrt(dx * dx + dy * dy) <= d.radiusKm * 1.1; };
-  for (const r of [...(d.featured || []), ...d.roads.filter((x) => /^(motorway|trunk|named)$/.test(x.cls))]) {
+  for (const r of [...(d.featured || []), ...d.roads.filter((x) => /^(motorway|trunk|named)$/.test(x.cls) || NUMBERED.test(x.label || ''))]) {
     const key = r.pts[0].join(',') + '|' + r.pts[r.pts.length - 1].join(',') + '|' + r.pts.length;
     if (seen.has(key) || r.pts.length < 2 || !r.pts.some(inside)) continue;
     seen.add(key);
     runs.push(r.pts.map(([a, b]) => [+a.toFixed(5), +b.toFixed(5)]));
+    refs.push(NUMBERED.test(r.label || '') ? r.label : '');
   }
   const out = path.join(p.out || path.join('passes', p.slug), 'roads.json');
-  writeFileSync(out, JSON.stringify({ built: d.fetched, credit: 'OpenStreetMap contributors, ODbL', runs }));
+  writeFileSync(out, JSON.stringify({ built: d.fetched, credit: 'OpenStreetMap contributors, ODbL', runs, refs }));
   n++;
   console.log('wrote ' + out + '  (' + runs.length + ' runs, ' + runs.reduce((s, r) => s + r.length, 0) + ' points)');
 }

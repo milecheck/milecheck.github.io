@@ -188,7 +188,9 @@ for (const n of nodes) {
     if (at < 0) { console.error('no anchor:', n.file); continue; }
     s = s.slice(0, at) + '  ' + block(links) + s.slice(at);
     const side = s.search(/<div class="rc-official">/);
-    const h1 = s.indexOf('</h1>');
+    // Pass pages: the open/closed answer comes first on a phone, the strip goes under it.
+    const pn = s.indexOf('<!-- passnow:end -->');
+    const h1 = pn >= 0 ? pn + 20 - 5 : s.indexOf('</h1>');
     if (side >= 0) s = s.slice(0, side) + topRow(links.slice(0, 3)) + s.slice(side);
     else if (h1 >= 0) s = s.slice(0, h1 + 5) + topRow(links.slice(0, 3)) + s.slice(h1 + 5);
   }

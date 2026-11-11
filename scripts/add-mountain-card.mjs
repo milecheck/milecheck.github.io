@@ -20,7 +20,7 @@ for (const [m, list] of Object.entries(pages)) for (const p of list) {
   const o = readFileSync(f, 'utf8');
   let s = o.replace(STRIP, '');
   let at = -1;
-  for (const k of ['<!-- app-block:end -->', '<!-- toplinks:end -->', '</h1>']) { at = s.indexOf(k); if (at >= 0) { at += k.length; break; } }
+  for (const k of (s.includes('<!-- passnow:end -->') ? ['<!-- toplinks:end -->', '<!-- passnow:end -->'] : ['<!-- app-block:end -->', '<!-- toplinks:end -->', '</h1>'])) { at = s.indexOf(k); if (at >= 0) { at += k.length; break; } }
   if (at < 0) continue;
   s = s.slice(0, at) + card(m, p.replace(/\//g, '-')) + s.slice(at);
   if (s !== o) { writeFileSync(f, s); changed++; }
