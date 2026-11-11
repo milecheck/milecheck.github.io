@@ -108,7 +108,7 @@ const NAV_JS = `<script>(function(){var t=document.querySelector(".nav-toggle"),
 const SEARCH_LINK = `<a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>`;
 
 const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;}
-    .rc-eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin:0 0 6px;}
+    .rc-eyebrow{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin:0 0 6px;}
     .rc-wrap h1{font-size:clamp(27px,4.4vw,40px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 10px;}
     .rc-facts{margin:0 0 6px;padding-left:20px;max-width:78ch;}
     .rc-facts li{margin:0 0 10px;line-height:1.6;}
@@ -119,7 +119,7 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:400px;height:58vh;background:#eef0e9;}
     #rcmap{position:absolute;inset:0;}
     .leaflet-container{font-family:Inter,sans-serif;}
-    .rc-status{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13.5px;color:#0E1116;line-height:1.35;}
+    .rc-status{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;color:#0E1116;line-height:1.35;}
     .rc-status.err{color:#b4231a;}
     .rc-status.ok{display:none;}
     .rc-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
@@ -127,21 +127,21 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
     .rc-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:58vh;}
     .rc-list .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
-    .rc-list .lh label{font-size:12px;font-weight:600;color:#5b6670;display:flex;align-items:center;gap:5px;cursor:pointer;}
+    .rc-list .lh label{font-size:14px;font-weight:600;color:#5b6670;display:flex;align-items:center;gap:5px;cursor:pointer;}
     .rc-rows{overflow-y:auto;}
     .rc-row{padding:11px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;}
     .rc-row:hover{background:#F7F5EE;}
     .rc-row .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
     .rc-row .rt{font-weight:800;font-size:14px;}
-    .rc-row .kd{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;}
+    .rc-row .kd{font-weight:800;font-size:14px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;}
     .rc-row .kd.closure{color:#cf3320;} .rc-row .kd.crash{color:#d9640f;} .rc-row .kd.weather{color:#2563eb;} .rc-row .kd.hazard{color:#7C3AED;} .rc-row .kd.work{color:#a16207;}
-    .rc-row .sub{color:#5b6670;font-size:12.5px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .rc-row .sub{color:#5b6670;font-size:14px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
     .rc-empty{padding:28px 14px;text-align:center;color:#5b6670;font-size:14px;line-height:1.5;}
     .rc-empty b{color:#0f7a4f;font-size:15px;display:block;margin-bottom:4px;}
     .rc-empty.err b{color:#b4231a;}
-    .rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:#5b6670;margin:10px 0 0;}
+    .rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:#5b6670;margin:10px 0 0;}
     .rc-legend span{display:inline-flex;align-items:center;gap:6px;}
-    .rc-legend .rc-work{flex-basis:100%;font-weight:600;color:#1d1f1c;font-size:13.5px;}.rc-legend .rc-work input{width:18px;height:18px;}
+    .rc-legend .rc-work{flex-basis:100%;font-weight:600;color:#1d1f1c;font-size:14px;}.rc-legend .rc-work input{width:18px;height:18px;}
     .rc-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
     .rc-official{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;}
     .rc-official a{color:#0f7a4f;font-weight:700;text-decoration:none;}
@@ -153,15 +153,15 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:8px 0 6px;}
     .rc-card{display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;text-decoration:none;color:inherit;}
     .rc-card:hover{border-color:#0E1116;}
-    .rc-card .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
+    .rc-card .k{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
     .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
-    .rc-card p{font-size:13.5px;line-height:1.45;color:#5b6670;margin:0;}
+    .rc-card p{font-size:14px;line-height:1.45;color:#5b6670;margin:0;}
     .rc-src:hover{border-color:#E5E5E5;} .rc-src:has(.rc-src-link:hover){border-color:#0E1116;}
     .rc-src-link{display:block;text-decoration:none;color:inherit;}
     .rc-card p.rc-app{margin-top:10px;padding-top:10px;border-top:1px solid #F0F0EE;color:#3a444d;}
     .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
     .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
-    .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
+    .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
     .rc-sept{border-left:3px solid #E5E5E5;padding:2px 0 2px 14px;color:#5b6670;font-size:14.5px;line-height:1.6;max-width:78ch;margin:0 0 6px;}
     .rc-sept a{color:#0f7a4f;font-weight:700;}
     .faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
@@ -177,10 +177,10 @@ const CSS = `    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;
     .rc-states{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:14px 0 8px;}
     .rc-state{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:12px 14px;text-decoration:none;color:inherit;}
     .rc-state:hover{border-color:#0E1116;}
-    .rc-state b{font-size:15px;} .rc-state span{font-size:12px;color:#8A939B;font-weight:700;letter-spacing:.04em;}
+    .rc-state b{font-size:15px;} .rc-state span{font-size:14px;color:#8A939B;font-weight:700;letter-spacing:.04em;}
     .rc-related{color:#5b6670;font-size:14px;margin-top:26px;}
     .rc-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
-    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:56px;font-size:12px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}`;
+    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:56px;font-size:14px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}`;
 
 function head({ title, desc, url, ld, extraHead = '' }) {
   return `<!DOCTYPE html>
@@ -466,8 +466,8 @@ ${sp.html}
       <div class="rc-side">
         <div class="rc-legend" style="margin:0"><span class="rc-work">More on the map: tap the layers button at the top left of the map.</span><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#a16207"></i>Ramp or lane</span><span><i style="background:#F59E0B"></i>Work zone</span><span style="color:#8A939B">Faded markers are scheduled, not active</span></div>
         <div class="rc-list">
-          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:12px;"></span></span></div>${PLOW_FEEDS.has(s.code) ? `
-          <div class="lh" style="margin-top:6px"><span>Snowplows <span id="rcPlowCount" style="color:#0369A1;font-weight:600;font-size:12px;">loading</span></span><label><input type="checkbox" id="rcPlows" checked> Show trucks</label></div><div id="rcPlowNote" style="display:none;padding:4px 14px 8px;font-size:12.5px;color:#0369A1;font-weight:600"></div>` : ''}
+          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:14px;"></span></span></div>${PLOW_FEEDS.has(s.code) ? `
+          <div class="lh" style="margin-top:6px"><span>Snowplows <span id="rcPlowCount" style="color:#0369A1;font-weight:600;font-size:14px;">loading</span></span><label><input type="checkbox" id="rcPlows" checked> Show trucks</label></div><div id="rcPlowNote" style="display:none;padding:4px 14px 8px;font-size:14px;color:#0369A1;font-weight:600"></div>` : ''}
           <div class="rc-rows" id="rcRows"><div class="rc-empty">Loading the ${s.dot} feed&hellip;</div></div>
         </div>
         <div class="rc-official">Source: <a href="${s.dotUrl}" target="_blank" rel="noopener">${s.dot}</a>, through MileCheck's feed, checked every five minutes and converted to the same format MileCheck uses for all 50 states. Ramp, lane and shoulder closures are listed under the toggle, not as full closures. Closures with a future start date are marked scheduled. Positions are the DOT's; mile markers are approximate.</div>
