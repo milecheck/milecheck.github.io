@@ -62,5 +62,21 @@
     "width": 1200,
     "height": 630,
     "background": "#1d5fa8"
+  },
+  {
+    "key": "bachelor",
+    "question": "Is Mount Bachelor visible right now?",
+    "file": "og-bachelor.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
+  },
+  {
+    "key": "southsister",
+    "question": "Is South Sister visible right now?",
+    "file": "og-southsister.png",
+    "width": 1200,
+    "height": 630,
+    "background": "#1d5fa8"
   }
 ]
