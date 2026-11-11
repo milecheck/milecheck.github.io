@@ -1,0 +1,26 @@
+# Every 3 hours: refresh the dated "Is <pass> open today?" block on every pass page and the chains-required pages
+# (scripts/bake-pass-status.mjs). Added 2026-11-11: the block had been baked once by hand on 11/1 and sat 10 days stale.
+name: pass-status
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: pass-status
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/bake-pass-status.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "milecheck-bot"
+          git config user.email "info@milecheckapp.com"
+          git add passes chains-required-*
+          git diff --cached --quiet && exit 0
+          git commit -m "Pass status refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase origin main && git push origin HEAD:main

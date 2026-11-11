@@ -4,7 +4,8 @@
 // This reads the same Worker feeds the page uses, and writes what they say into the HTML between
 // <!-- passnow:start --> and <!-- passnow:end -->, with the time it was read. The live map under it still updates.
 // The wording only says what the DOT feed lists. A pass with no closure listed is "no closure listed", never "open".
-// Idempotent: the block is replaced on each run. Run it before a publish, or on the storms-page schedule.
+// Idempotent: the block is replaced on each run. Runs every 3 hours from .github/workflows/pass-status.yml (2026-11-11;
+// it had been baked by hand once on 11/1 and went 10 days stale). A read older than 6 hours says so on the page. Run it before a publish, or on the storms-page schedule.
 //   node scripts/bake-pass-status.mjs            # all /passes/ pages
 //   node scripts/bake-pass-status.mjs snoqualmie  # one page
 import fs from 'node:fs';
@@ -146,11 +147,12 @@ function renderChains(slug, s, now) {
     : `<strong>No current restriction reading.</strong> The ${esc(meta.dot)} feed has no restriction line for ${esc(meta.q)} within ${rMi} mi right now.`;
   const closeNote = closures.length ? ` ${closures.length} closure${closures.length > 1 ? 's are' : ' is'} listed within ${rMi} mi, so check the ${esc(meta.dot)} page first.` : '';
   return `<!-- passnow:start -->
-<section class="mc-passnow" aria-label="Are chains required on ${esc(meta.q)}" style="margin:18px 0;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
+<section class="mc-passnow" aria-label="Are chains required on ${esc(meta.q)}" data-read="${now.toISOString()}" style="margin:18px 0;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
 <h2 style="font-size:19px;margin:0 0 6px">Chains and traction right now</h2>
 <p style="margin:0">${lead}${closeNote}</p>
 <p style="margin:10px 0 0;font-size:14px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(stamp(now))}. The line changes through the day. Read it again on the ${esc(meta.dot)} page, and go by the sign on the road: <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a>.</p>
 </section>
+<script>(function(){var s=document.currentScript.previousElementSibling;var t=Date.parse(s&&s.getAttribute('data-read'));if(!isFinite(t)||Date.now()-t<6*3600e3)return;var p=document.createElement('p');p.style.cssText='margin:0 0 8px;padding:8px 10px;border-radius:8px;background:#fff4e5;color:#7a4b00;font-weight:600';p.textContent='This summary is out of date. It was last read more than 6 hours ago. Use the live map below and the DOT page for the current status.';s.insertBefore(p,s.children[1]||null);})();</script>
 <!-- passnow:end -->`;
 }
 
@@ -177,13 +179,14 @@ function render(slug, name, s, now) {
   else repLine = `<p style="margin:8px 0 0">The ${meta.dot} feed has no current road-weather report within ${rMi} mi of the pass, so there is no surface reading here.${s.ca ? ' MileCheck does not yet show Caltrans chain controls, so check QuickMap for the chain level.' : ' MileCheck has no chain reading here.'} Check the ${meta.dot} page linked below.</p>`;
   const otherLine = other ? ` ${other} other alert${other > 1 ? 's' : ''} (crashes, roadwork or hazards) ${other > 1 ? 'are' : 'is'} listed in the same area.` : '';
   return `<!-- passnow:start -->
-<section class="mc-passnow" aria-label="Is ${esc(meta.q)} open" style="max-width:1000px;margin:18px auto;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
+<section class="mc-passnow" aria-label="Is ${esc(meta.q)} open" data-read="${now.toISOString()}" style="max-width:1000px;margin:18px auto;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
 <h2 style="font-size:19px;margin:0 0 6px">Is ${esc(meta.q)} open today?</h2>
 <p style="margin:0">${lead} ${closeLine}${otherLine}</p>
 ${repLine}
 ${meta.weather ? `<p style="margin:10px 0 0">${esc(meta.weather)}</p>` : ''}
 <p style="margin:10px 0 0;font-size:14px;color:#5b6670">Read from the ${esc(meta.dot)} feed on ${esc(when)}. A pass with no closure listed is not a promise it is open, and a camera picture does not show the gates. Confirm on the <a href="${esc(meta.url)}" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">${esc(meta.dot)} page</a> before you leave. The map below updates live.</p>
 </section>
+<script>(function(){var s=document.currentScript.previousElementSibling;var t=Date.parse(s&&s.getAttribute('data-read'));if(!isFinite(t)||Date.now()-t<6*3600e3)return;var p=document.createElement('p');p.style.cssText='margin:0 0 8px;padding:8px 10px;border-radius:8px;background:#fff4e5;color:#7a4b00;font-weight:600';p.textContent='This summary is out of date. It was last read more than 6 hours ago. Use the live map below and the DOT page for the current status.';s.insertBefore(p,s.children[1]||null);})();</script>
 <!-- passnow:end -->`;
 }
 
