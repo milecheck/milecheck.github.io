@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I-84 Live Traffic Cameras &amp; Road Conditions Right Now | MileCheck</title>
+  <meta name="description" content="See I-84 right now — live DOT traffic cameras and real-time road conditions along the corridor (Two separate highways · Portland, OR to Echo, UT and Dunmore, PA to Sturbridge, MA), each tagged with route and mile marker.">
+  <link rel="canonical" href="https://milecheckapp.com/corridors/i-84/">
+  <meta property="og:title" content="I-84 Right Now — Live Cameras &amp; Conditions | MileCheck">
+  <meta property="og:description" content="Live I-84 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/corridors/i-84/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is I-84 open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows active incidents and closures along I-84, straight from each state DOT. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the road closures map."}},{"@type":"Question","name":"Is there more than one I-84?","acceptedAnswer":{"@type":"Answer","text":"Yes. The western I-84 runs from Portland, Oregon to near Echo, Utah. The eastern I-84 runs from Dunmore, Pennsylvania to Sturbridge, Massachusetts. Both are on the map above."}},{"@type":"Question","name":"What is Deadman Pass?","acceptedAnswer":{"@type":"Answer","text":"It is the summit of Emigrant Hill on I-84 east of Pendleton, Oregon. Drivers call the grade Cabbage Hill. The Cabbage Hill page has live cameras on it."}},{"@type":"Question","name":"How long is I-84?","acceptedAnswer":{"@type":"Answer","text":"The western I-84 is almost 770 miles and the eastern I-84 is about 233 miles."}}],"@id":"https://milecheckapp.com/corridors/i-84/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Corridors","item":"https://milecheckapp.com/corridors/"},{"@type":"ListItem","position":3,"name":"I-84","item":"https://milecheckapp.com/corridors/i-84/"}]}</script>
+  <style>
+    .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
+    .crit-banner a{color:#fff;text-decoration:underline;}
+    .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .co-hero .spon{margin:0 0 18px;}
+    .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
+    .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
+    .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
+    .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .co-stat .n.live{color:#0f7a4f;}
+    .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    a.co-stat-link{text-decoration:none;color:inherit;transition:border-color .15s;}
+    a.co-stat-link:hover{border-color:#0f7a4f;}
+    a.co-stat-link .l{color:#0f7a4f;}
+    .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    /* Map layers panel — Leah 9-16: the two pills above the map read as labels, not
+       switches ("didn't realize I could click them on/off"). A settings bar on the left
+       edge of the map, with real on/off switches, under Leaflet's zoom control. */
+    .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:196px;font-size:13.5px;}
+    .co-layers .lt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;margin:0 0 4px;}
+    .co-layer{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
+    .co-layer input{position:absolute;opacity:0;width:0;height:0;}
+    .co-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+    .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
+    .co-layer input:checked+.co-sw.alr{background:#DC2626;}
+    .co-layer input:checked+.co-sw.poi{background:#7C3AED;}
+    .co-layer input:checked+.co-sw::after{left:16px;}
+    .co-layer input:focus-visible+.co-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
+    .co-layer .co-dot{margin-left:2px;}
+    @media(max-width:600px){ .co-layers{top:auto;bottom:12px;min-width:0;padding:8px 10px 4px;font-size:13px;} }
+    .co-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+    .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card.closure{border:2px solid #DC2626;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card .cc-desc{font-size:13.5px;color:#3a444d;margin-top:8px;line-height:1.5;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .co-card .cc-link{display:inline-block;margin-top:9px;font-weight:700;color:#0f7a4f;text-decoration:none;font-size:13.5px;}
+    .poi-icon{color:#7C3AED;font-size:22px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;cursor:pointer;font-weight:900;}
+    .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
+    .co-guide h2{font-size:26px;margin:0 0 6px;}
+    .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
+    .co-seg{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px 22px;margin-bottom:14px;}
+    .co-seg h3{font-size:19px;margin:0 0 4px;}
+    .co-seg p{color:#3a444d;font-size:15px;line-height:1.6;margin:8px 0 0;}
+    .co-seg a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-faq{max-width:1000px;margin:34px auto 0;padding:0 20px;}
+    .co-faq h2{font-size:24px;margin:0 0 14px;}
+    .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .co-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-faq a:hover{text-decoration:underline;}
+    .co-cta{max-width:1000px;margin:34px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;}
+    .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
+
+  </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css">
+  <script src="/assets/map-kit.js" defer></script>
+  <script src="/assets/new-tab.js?v=20261102-1" defer></script><!-- new-tab -->
+<!-- mv:start --><script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/d74ff19f-a5bf-47fa-a630-0a438f90c11a.js"></script><!-- mv:end -->
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/" class="active">Maps</a>
+        <a href="../../cameras/">Cameras</a>
+        <a href="../../states/">United States</a>
+        <a href="../../canada/">Canada</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header><!-- mvb:start --><div id="ad-management-config-settings" data-blocklist-adhesion-mobile="1" data-blocklist-universal-player-mobile="1" data-blocklist-universal-player-desktop="1"></div><!-- mvb:end -->
+
+  <div class="crit-banner" id="critBanner" style="display:none"></div>
+
+  <div class="co-hero">
+
+    <div class="eyebrow">Interstate 84 · Two separate highways · Portland, OR to Echo, UT and Dunmore, PA to Sturbridge, MA</div>
+    <h1>I-84 right now: live cameras &amp; road conditions</h1>
+    <p class="sub">See I-84 right now — live DOT cameras and road conditions on both I-84s, the western one through Oregon, Idaho and Utah and the eastern one through Pennsylvania, New York, Connecticut and Massachusetts, each tagged with its mile marker.</p>
+    <div class="co-stats">
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras on I-84</div></div>
+      <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts on I-84</div></div>
+      <div class="co-stat"><div class="n">770 mi west, 233 mi east</div><div class="l">end to end</div></div>
+    <a class="co-stat co-stat-link" href="../../passes/cabbage-hill/"><div class="n" style="font-size:17px;padding-top:3px">Cabbage Hill</div><div class="l">3,565 ft · summit ▸</div></a>
+    </div>
+  </div>
+
+  <div class="co-wrap">
+    <div style="position:relative;">
+      <div id="comap"></div>
+      <div class="co-layers" role="group" aria-label="Map layers">
+        <div class="lt">Map layers</div>
+        <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
+        <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
+        <label class="co-layer"><input type="checkbox" id="tgPoi" checked><span class="co-sw poi"></span><span class="co-dot" style="background:#7C3AED"></span>Passes &amp; summits</label>
+      </div>
+      <div class="co-bs" id="coStatus">Loading live I-84 data…</div>
+      <div class="co-card" id="coCard"></div>
+    </div>
+  </div>
+
+  <section class="co-guide">
+    <h2>The I-84 corridor</h2>
+    <p class="lede">Two separate highways · Portland, OR to Echo, UT and Dunmore, PA to Sturbridge, MA. Here's what to watch, and where the weather actually bites.</p>
+    <div class="co-seg"><h3>Two I-84s that do not connect</h3><p>There are two I-84s. The western one runs almost 770 miles from Portland, Oregon through Boise, Idaho to I-80 near Echo, Utah. The eastern one runs about 233 miles from Dunmore, Pennsylvania through Hartford, Connecticut to Sturbridge, Massachusetts. They are not connected.</p></div>
+    <div class="co-seg"><h3>Cabbage Hill</h3><p>East of Pendleton, Oregon, the western I-84 climbs Emigrant Hill, a 6 percent grade, into the Blue Mountains. Drivers call it Cabbage Hill, and the summit is Deadman Pass. See the <a href="../../passes/cabbage-hill/">Cabbage Hill page</a> for the cameras and chain-up area.</p></div>
+  </section>
+
+  <section class="co-faq">
+    <h2>I-84 questions, answered</h2>
+    <details><summary>Is I-84 open right now?</summary><p>The <a href="#comap">live map above</a> shows active incidents and closures along I-84, straight from each state DOT. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href="../../closures/">road closures map</a>.</p></details>
+    <details><summary>Is there more than one I-84?</summary><p>Yes. The western I-84 runs from Portland, Oregon to near Echo, Utah. The eastern I-84 runs from Dunmore, Pennsylvania to Sturbridge, Massachusetts. Both are on the map above.</p></details>
+    <details><summary>What is Deadman Pass?</summary><p>It is the summit of Emigrant Hill on I-84 east of Pendleton, Oregon. Drivers call the grade Cabbage Hill. The <a href="../../passes/cabbage-hill/">Cabbage Hill page</a> has live cameras on it.</p></details>
+    <details><summary>How long is I-84?</summary><p>The western I-84 is almost 770 miles and the eastern I-84 is about 233 miles.</p></details>
+  </section>
+
+  <div class="co-cta">
+    <h2>Know your exact mile marker on I-84 — live</h2>
+    <p>MileCheck shows your nearest mile marker in real time as you drive I-84, plus live state DOT feeds on your route and the nearest camera. Works offline and runs on CarPlay and Android Auto.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-84&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcorridors-i-84" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="co-related">More: <a href="../">all corridors</a> · <a href="../../passes/">mountain passes</a> · <a href="../../cameras/">all highway cameras</a> · <a href="../../bridges/oregon/">Oregon drawbridges</a> · <a href="../../bridges/pennsylvania/">Pennsylvania drawbridges</a> · <a href="../../bridges/new-york/">New York drawbridges</a> · <a href="../../bridges/connecticut/">Connecticut drawbridges</a> · <a href="../../bridges/massachusetts/">Massachusetts drawbridges</a> · <a href="../../maps/">all maps</a></p>
+
+  <!-- qlinks:start -->
+<p class="mc-qlinks" style="max-width:760px;margin:22px auto;padding:0 20px;color:#5b6670;font:14px/1.6 Inter,-apple-system,'Segoe UI',sans-serif">More questions: <a href="/why-is-the-highway-closed/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Why is the highway closed?</a> &middot; <a href="/how-do-i-tell-911-where-i-am-on-the-highway/" style="color:#0f7a4f;font-weight:700;text-decoration:none">How do I tell 911 where I am on the highway?</a> &middot; <a href="/what-exit-am-i-near/" style="color:#0f7a4f;font-weight:700;text-decoration:none">What exit am I near?</a> &middot; <a href="/what-should-i-do-if-i-break-down-on-the-interstate/" style="color:#0f7a4f;font-weight:700;text-decoration:none">What should I do if I break down on the interstate?</a> &middot; <a href="/how-do-truckers-find-their-mile-marker-for-a-breakdown-call/" style="color:#0f7a4f;font-weight:700;text-decoration:none">How do truckers find their mile marker for a breakdown call?</a></p>
+<!-- qlinks:end -->
+<!-- dq:start -->
+<aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-corridors.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
+<!-- dq:end -->
+<!-- api-link:start -->
+<aside class="mc-api-link" style="max-width:760px;margin:28px auto;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420"><h2 style="font-size:17px;margin:0 0 6px">Use this data in your own software</h2><p style="margin:0">The alerts here come from state DOT feeds. MileCheck’s API returns them for all 50 states in one format, with the highway and a mile marker where the state provides one. <a href="/api/" style="color:#0f7a4f;font-weight:700">See the API</a> &middot; <a href="/one-api-for-every-states-511-road-alerts/" style="color:#0f7a4f;font-weight:700">Is there one API for every state&rsquo;s 511 road alerts?</a> &middot; <a href="/data-sources/" style="color:#0f7a4f;font-weight:700">Where the data comes from</a></p></aside>
+<!-- api-link:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=corridors-i-84&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcorridors-i-84" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../../cameras/">Highway cameras</a></li>
+            <li><a href="../../closures/">Road closures map</a></li>
+            <li><a href="../../fire/">Wildfire map</a></li>
+            <li><a href="../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: state DOTs via MileCheck. Always drive to conditions and follow posted signs.</p>
+    </div>
+  </footer>
+
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<script>
+const WORKER='https://api.milecheckapp.com';
+const STATES=["OR","ID","UT","PA","NY","CT","MA"];
+const NUM=84;
+const NAME="I-84";
+const POIS=[{"name":"Cabbage Hill","slug":"cabbage-hill","lat":45.5809,"lon":-118.6331}];
+// Match the interstate as the LEADING token: clean "I-5"/"I5"/"005", or descriptive
+// "I-15 SB Lake Mead N" (NV-style). "I-155" / "US-15" / "SR-15" correctly excluded.
+function isRoute(r){r=String(r||'').toUpperCase().trim();var m=r.match(/^I[\s-]?0*(\d+)/);if(m)return +m[1]===NUM;var n=r.match(/^0*(\d+)$/);if(n)return +n[1]===NUM;return false;}
+const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
+const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · I-84 cameras &amp; conditions: state DOTs via MileCheck',maxZoom:14}).addTo(map);
+map.fitBounds([[39.5,-123.2],[46.0,-69.5]]);
+const camLayer=L.layerGroup().addTo(map);
+const alrLayer=L.layerGroup().addTo(map);
+const poiLayer=L.layerGroup().addTo(map);
+let CAMS=[], ALERTS=[], showCam=true, showAlr=true;
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
+const cardEl=document.getElementById('coCard');
+function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closure':'');cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||NAME)+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+c.st+' DOT</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function alrTitle(a){var t=a.title||'',d=a.desc||'';if(d&&t&&d.indexOf(t.replace(/\.$/,''))===0){return {CL:'Closure',RW:'Roadwork',AC:'Crash',WE:'Weather',HZ:'Hazard'}[a.type]||(/lane|width|restrict/i.test(d)?'Lane restriction':'Road alert');}return t;}
+function alrCard(a){var pl=!liveNow(a)&&a.t0>Date.now();return (pl?'<div class="cc-meta" style="color:#92400e;font-weight:700">Planned, not in effect now. Starts '+new Date(a.t0).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</div>':'')+'<div class="cc-title">'+esc(alrTitle(a))+'</div><div class="cc-meta">'+NAME+(a.mp>0?' · MP '+Math.round(a.mp):'')+' · '+a.st+'</div>'+(a.desc&&a.desc!==alrTitle(a)?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
+function poiCard(p){return '<div class="cc-title">▲ '+esc(p.name)+'</div><div class="cc-meta">Mountain pass on '+NAME+'</div><div class="cc-desc">Live cameras, chain status, and closures for this pass.</div><a class="cc-link" href="../../passes/'+p.slug+'/">Open '+esc(p.name)+' conditions →</a>';}
+// Some state feeds (KY, NC, most of IL) publish cameras without a route field but with
+// the route in the title ("I-75 at Exit 29"). Fall back to the leading route token so
+// those cameras land on the corridor they sit on (2026-09-17, Leah's TN/KY report).
+function routeFromTitle(t){const m=String(t||'').match(/^\s*(?:I|US|SR)[\s-]?(\d{1,3})\b/i);return m?(String(t).trim().toUpperCase().startsWith('I')?'I-':'X-')+m[1]:'';}
+async function camsFor(st){const d=await fetchJSON(WORKER+'/cameras?state='+st,3);return ((d&&d.cameras)||[]).map(c=>Object.assign({},c,{route:c.route||routeFromTitle(c.title)})).filter(c=>c.isActive!==false&&+c.lat&&c.imageUrl&&isRoute(c.route)).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl,st}));}
+async function alertsFor(st){const d=await fetchJSON(WORKER+'/incidents?state='+st,3);return ((d&&d['incident-reports'])||[]).filter(a=>{const rid=a.location&&a.location['route-id'];const sl=a.location&&a.location['start-location'];return isRoute(rid)&&sl&&+sl['start-lat']&&!(Date.parse(a['end-time'])<Date.now());}).map(a=>{const sl=a.location['start-location'];return {lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:(a.headline||a.description||a['impact-desc']||'Incident').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,140),desc:(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,240),st,t0:Date.parse(a['start-time']||''),t1:Date.parse(a['end-time']||'')};});}
+function thin(items,cellPx){const z=map.getZoom();if(z>=11||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
+function draw(){
+  camLayer.clearLayers();alrLayer.clearLayers();const b=map.getBounds();
+  if(showCam)thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));
+  if(showAlr)thin(ALERTS.filter(a=>b.contains([a.lat,a.lon])),18).forEach(a=>{const cl=a.type==='CL'&&liveNow(a);L.circleMarker([a.lat,a.lon],{radius:RS(cl?9:6),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:liveNow(a)?1:.35}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
+  const bits=[];if(showCam)bits.push('📷 '+CAMS.length+' cameras');if(showAlr)bits.push('⚠ '+ALERTS.length+' alerts');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' on '+NAME:'Toggle a layer to view '+NAME+' data';
+}
+// pass / high-point POI markers (always shown, not thinned)
+POIS.forEach(p=>L.marker([p.lat,p.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon" title="'+esc(p.name)+'">▲</div>',iconSize:[26,26],iconAnchor:[13,13]}),zIndexOffset:500}).on('click',()=>showCard(poiCard(p),false)).addTo(poiLayer));
+let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
+document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
+document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
+document.getElementById('tgPoi').onchange=e=>{if(e.target.checked)poiLayer.addTo(map);else map.removeLayer(poiLayer);};
+function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
+// What is closed and how completely, clause by clause. A ramp, exit, connector, shoulder or rest area
+// closure is never a highway closure, even when it says "full closure". Negations and "reopened"
+// count as no closure. No stated extent is unspecified, not full. ChatGPT review 3, 2026-10-08.
+function closureKind(t){var r={none:0,unspecified:1,partial:2,full:3},k='none';String(t||'').toLowerCase().split(/[.;]+/).forEach(function(c){if(!/clos/.test(c)||/\b(no|not)\s+(a\s+)?(full\s+)?(closure|closed)|\breopen/.test(c))return;var feat=/(on-?ramp|off-?ramp|\bramps?\b|connector|rest area|shoulder)/.test(c)||/\bexit\b/.test(c.replace(/\b(near|at|past|before|after|by|from|to|between)\s+exit\b/g,''));var full=/(all lanes (are )?closed|roadway is closed|full closure|closed in both directions|\b(highway|hwy|road|roadway|route|pass|interstate|(i|us|sr|ca|or|wa|id|mt|ut|co|nv|az)-?\s?\d+[a-z]?)\s+(is\s+|are\s+)?closed\b)/.test(c);var x=feat?'partial':full?'full':/\blanes?\b/.test(c)?'partial':'unspecified';if(r[x]>r[k])k=x;});return k;}
+function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&closureKind(a.title+' '+(a.desc||''))==='full';}
+// Each state fills the tiles, map and banner as soon as its own calls return (I-75 has 6 states, 12 calls).
+const camsBy=STATES.map(()=>[]),alertsBy=STATES.map(()=>[]);
+function refresh(){
+  CAMS=camsBy.flat();ALERTS=alertsBy.flat();
+  document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.filter(liveNow).length;
+  draw();
+  const fc=ALERTS.filter(isFullClosure);
+  if(fc.length){const f=fc[0];const loc=NAME+(f.mp>0?' · MP '+Math.round(f.mp):'')+' · '+f.st;const bn=document.getElementById('critBanner');bn.innerHTML='⚠ CRITICAL: '+NAME+' has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' — nearest at '+loc+(fc.length>1?' (and '+(fc.length-1)+' more)':'')+'. Tap a red marker on the map for details.';bn.style.display='block';}
+}
+Promise.all(STATES.flatMap((st,i)=>[
+  camsFor(st).then(r=>{camsBy[i]=r;refresh();}),
+  alertsFor(st).then(r=>{alertsBy[i]=r;refresh();})
+])).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+</script>
+
+</body>
+</html>
