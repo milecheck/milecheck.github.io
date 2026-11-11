@@ -301,6 +301,286 @@ const CORRIDORS = [
       ['Does I-81 get winter weather?', `Yes — the Pennsylvania and New York mountain sections see real snow and ice most winters, and Virginia and West Virginia get occasional ice storms too. Track your mile marker through any of it with the <a href="https://apps.apple.com/us/app/milecheck/id6759212851" target="_blank" rel="noopener">MileCheck app</a>.`],
     ],
   },
+  // Added 2026-11-11 from Search Console demand (queries naming these roads, no dedicated page). Facts: Wikipedia infoboxes citing the FHWA route log; see new-pages-review.json.
+  {
+    "slug": "i-205",
+    "name": "I-205",
+    "num": 205,
+    "states": [
+      "OR",
+      "WA"
+    ],
+    "subtitle": "Tualatin, OR to Salmon Creek, WA · the Portland bypass",
+    "bounds": "[[45.3,-122.95],[45.85,-122.35]]",
+    "lengthMi": "37 mi",
+    "highPass": null,
+    "pois": [],
+    "hero": "See I-205 right now — live ODOT and WSDOT cameras and road conditions along the Portland bypass, from Tualatin, Oregon to Salmon Creek, Washington, each tagged with its mile marker.",
+    "segs": [
+      [
+        "The Portland bypass",
+        "I-205 is a 37-mile freeway along the east side of Portland, Oregon and Vancouver, Washington. It starts and ends at I-5, in Tualatin to the south and Salmon Creek to the north. It serves Portland International Airport and crosses the Columbia River on the Glenn L. Jackson Memorial Bridge. For I-5 itself, see the <a href=\"../i-5/\">I-5 page</a>."
+      ],
+      [
+        "Two states, two sets of cameras",
+        "Cameras on the Oregon side come from ODOT and cameras on the Washington side come from WSDOT. Both are on the map above, each tagged with its mile marker. For all of Portland, see the <a href=\"../../cameras/portland/\">Portland traffic cameras</a> page."
+      ]
+    ],
+    "faq": [
+      [
+        "Is I-205 backed up right now?",
+        "The <a href=\"#comap\">live map above</a> shows active incidents and closures along I-205, straight from ODOT and WSDOT. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href=\"../../closures/\">road closures map</a>."
+      ],
+      [
+        "Where can I see I-205 traffic cameras?",
+        "On the <a href=\"#comap\">map above</a>. Click a camera marker to see the current image and its mile marker. More Portland views are on the <a href=\"../../cameras/portland/\">Portland cameras</a> page."
+      ],
+      [
+        "How long is I-205 and where does it go?",
+        "About 37 miles. It connects to I-5 at both ends, in Tualatin, Oregon and in Salmon Creek, Washington."
+      ],
+      [
+        "Is this the I-205 in California?",
+        "No. There is a separate I-205 in California, in the San Francisco Bay Area. This page is the Portland one."
+      ]
+    ]
+  },
+  {
+    "slug": "i-76",
+    "name": "I-76",
+    "num": 76,
+    "states": [
+      "OH",
+      "PA",
+      "NJ"
+    ],
+    "subtitle": "Akron, OH to Bellmawr, NJ · the turnpikes and the Schuylkill Expressway",
+    "bounds": "[[39.7,-82.1],[41.2,-74.9]]",
+    "lengthMi": "436 mi",
+    "highPass": null,
+    "pois": [],
+    "hero": "See I-76 right now — live DOT cameras and road conditions from Ohio across Pennsylvania to New Jersey, including the Philadelphia stretch, each tagged with its mile marker.",
+    "segs": [
+      [
+        "Ohio to New Jersey",
+        "This I-76 runs about 436 miles, from I-71 west of Akron, Ohio to I-295 in Bellmawr, New Jersey. Across Ohio and most of Pennsylvania it is the Ohio Turnpike and the Pennsylvania Turnpike. It is not connected to the other I-76, which runs from Arvada, Colorado into Nebraska."
+      ],
+      [
+        "Into Philadelphia",
+        "At the Valley Forge interchange, I-76 leaves the Pennsylvania Turnpike and becomes the Schuylkill Expressway into Philadelphia. See also the <a href=\"../../cameras/philadelphia/\">Philadelphia traffic cameras</a> page."
+      ]
+    ],
+    "faq": [
+      [
+        "Is I-76 backed up right now?",
+        "The <a href=\"#comap\">live map above</a> shows active incidents and closures along I-76, straight from the Pennsylvania and Ohio DOT feeds we cover. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href=\"../../closures/\">road closures map</a>."
+      ],
+      [
+        "Where can I see live I-76 cameras in Philadelphia?",
+        "On the <a href=\"#comap\">map above</a>. Click a marker for the current image and its mile marker. The <a href=\"../../cameras/philadelphia/\">Philadelphia cameras</a> page has more."
+      ],
+      [
+        "How long is I-76?",
+        "The eastern I-76 is about 436 miles, from Akron, Ohio to Bellmawr, New Jersey."
+      ],
+      [
+        "Is there more than one I-76?",
+        "Yes. A separate I-76 runs about 187 miles from Arvada, Colorado to near Big Springs, Nebraska. It does not connect to this one. This page covers the Ohio to New Jersey road."
+      ]
+    ]
+  },
+  {
+    "slug": "i-17",
+    "name": "I-17",
+    "num": 17,
+    "states": [
+      "AZ"
+    ],
+    "subtitle": "Phoenix to Flagstaff · the Black Canyon Freeway",
+    "bounds": "[[33.3,-112.3],[35.3,-111.5]]",
+    "lengthMi": "146 mi",
+    "highPass": null,
+    "pois": [],
+    "hero": "See I-17 right now — live ADOT cameras and road conditions from Phoenix to Flagstaff, each tagged with its mile marker. Check the climb before you drive it.",
+    "segs": [
+      [
+        "Phoenix to Flagstaff",
+        "I-17 is about 146 miles and runs entirely in Arizona, from I-10 in Phoenix to I-40 in Flagstaff. Most of it is the Arizona Veterans Highway. In the Phoenix area it is the Black Canyon Freeway, and the southern 4.16 miles are the Maricopa Freeway."
+      ],
+      [
+        "From 1,117 feet to 7,000 feet",
+        "The road climbs from about 1,117 feet in Phoenix to about 7,000 feet in Flagstaff, a gain of more than a mile. The cameras on the map above let you see both ends before you leave. For all of Arizona, see the <a href=\"../../cameras/arizona/\">Arizona traffic cameras</a> page."
+      ]
+    ],
+    "faq": [
+      [
+        "Is I-17 open right now?",
+        "The <a href=\"#comap\">live map above</a> shows active incidents and closures along I-17, straight from ADOT. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href=\"../../closures/\">road closures map</a>."
+      ],
+      [
+        "Where can I see I-17 cameras between Phoenix and Flagstaff?",
+        "On the <a href=\"#comap\">map above</a>. Click a marker for the current image and its mile marker. More are on the <a href=\"../../cameras/arizona/\">Arizona cameras</a> and <a href=\"../../cameras/phoenix/\">Phoenix cameras</a> pages."
+      ],
+      [
+        "How long is I-17?",
+        "About 146 miles, from Phoenix to Flagstaff."
+      ],
+      [
+        "How much does I-17 climb?",
+        "From about 1,117 feet in Phoenix to about 7,000 feet in Flagstaff. Track your mile marker on the way up with the <a href=\"https://apps.apple.com/us/app/milecheck/id6759212851\" target=\"_blank\" rel=\"noopener\">MileCheck app</a>."
+      ]
+    ]
+  },
+  {
+    "slug": "i-85",
+    "name": "I-85",
+    "num": 85,
+    "states": [
+      "AL",
+      "GA",
+      "SC",
+      "NC",
+      "VA"
+    ],
+    "subtitle": "Montgomery, AL to Petersburg, VA · Atlanta, Greenville, Charlotte",
+    "bounds": "[[32.2,-86.4],[37.3,-77.3]]",
+    "lengthMi": "666 mi",
+    "highPass": null,
+    "pois": [],
+    "hero": "See I-85 right now — live DOT cameras and road conditions across five states, from Montgomery, Alabama through Atlanta and Charlotte to Petersburg, Virginia, each tagged with its mile marker.",
+    "segs": [
+      [
+        "Five states",
+        "I-85 runs about 666 miles, from I-65 in Montgomery, Alabama to I-95 in Petersburg, Virginia. It crosses Alabama, Georgia, South Carolina, North Carolina and Virginia, and serves Atlanta, Greenville and Spartanburg, Charlotte and the Richmond area."
+      ],
+      [
+        "Through Atlanta",
+        "In the Atlanta area I-85 meets I-20 and runs together with I-75 on the Downtown Connector through downtown. See also the <a href=\"../../cameras/atlanta/\">Atlanta traffic cameras</a> page."
+      ]
+    ],
+    "faq": [
+      [
+        "Is I-85 backed up right now?",
+        "The <a href=\"#comap\">live map above</a> shows active incidents and closures along I-85, straight from each state DOT. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href=\"../../closures/\">road closures map</a>."
+      ],
+      [
+        "Where can I see live I-85 traffic cameras?",
+        "On the <a href=\"#comap\">map above</a>. Click a marker for the current image and its mile marker. State pages: <a href=\"../../cameras/georgia/\">Georgia</a>, <a href=\"../../cameras/south-carolina/\">South Carolina</a>, <a href=\"../../cameras/north-carolina/\">North Carolina</a>."
+      ],
+      [
+        "How long is I-85?",
+        "About 666 miles, from Montgomery, Alabama to Petersburg, Virginia."
+      ],
+      [
+        "Which states does I-85 cross?",
+        "Alabama, Georgia, South Carolina, North Carolina and Virginia. Track your mile marker through all five with the <a href=\"https://apps.apple.com/us/app/milecheck/id6759212851\" target=\"_blank\" rel=\"noopener\">MileCheck app</a>."
+      ]
+    ]
+  },
+  {
+    "slug": "i-84",
+    "name": "I-84",
+    "num": 84,
+    "states": [
+      "OR",
+      "ID",
+      "UT",
+      "PA",
+      "NY",
+      "CT",
+      "MA"
+    ],
+    "subtitle": "Two separate highways · Portland, OR to Echo, UT and Dunmore, PA to Sturbridge, MA",
+    "bounds": "[[39.5,-123.2],[46.0,-69.5]]",
+    "lengthMi": "770 mi west, 233 mi east",
+    "highPass": {
+      "label": "summit",
+      "slug": "cabbage-hill",
+      "name": "Cabbage Hill",
+      "elev": "3,565 ft"
+    },
+    "pois": [
+      {
+        "name": "Cabbage Hill",
+        "slug": "cabbage-hill",
+        "lat": 45.5809,
+        "lon": -118.6331
+      }
+    ],
+    "hero": "See I-84 right now — live DOT cameras and road conditions on both I-84s, the western one through Oregon, Idaho and Utah and the eastern one through Pennsylvania, New York, Connecticut and Massachusetts, each tagged with its mile marker.",
+    "segs": [
+      [
+        "Two I-84s that do not connect",
+        "There are two I-84s. The western one runs almost 770 miles from Portland, Oregon through Boise, Idaho to I-80 near Echo, Utah. The eastern one runs about 233 miles from Dunmore, Pennsylvania through Hartford, Connecticut to Sturbridge, Massachusetts. They are not connected."
+      ],
+      [
+        "Cabbage Hill",
+        "East of Pendleton, Oregon, the western I-84 climbs Emigrant Hill, a 6 percent grade, into the Blue Mountains. Drivers call it Cabbage Hill, and the summit is Deadman Pass. See the <a href=\"../../passes/cabbage-hill/\">Cabbage Hill page</a> for the cameras and chain-up area."
+      ]
+    ],
+    "faq": [
+      [
+        "Is I-84 open right now?",
+        "The <a href=\"#comap\">live map above</a> shows active incidents and closures along I-84, straight from each state DOT. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href=\"../../closures/\">road closures map</a>."
+      ],
+      [
+        "Is there more than one I-84?",
+        "Yes. The western I-84 runs from Portland, Oregon to near Echo, Utah. The eastern I-84 runs from Dunmore, Pennsylvania to Sturbridge, Massachusetts. Both are on the map above."
+      ],
+      [
+        "What is Deadman Pass?",
+        "It is the summit of Emigrant Hill on I-84 east of Pendleton, Oregon. Drivers call the grade Cabbage Hill. The <a href=\"../../passes/cabbage-hill/\">Cabbage Hill page</a> has live cameras on it."
+      ],
+      [
+        "How long is I-84?",
+        "The western I-84 is almost 770 miles and the eastern I-84 is about 233 miles."
+      ]
+    ]
+  },
+  {
+    "slug": "i-26",
+    "name": "I-26",
+    "num": 26,
+    "states": [
+      "TN",
+      "NC",
+      "SC"
+    ],
+    "subtitle": "Kingsport, TN to Charleston, SC · through Asheville and Spartanburg",
+    "bounds": "[[32.7,-82.9],[36.6,-79.9]]",
+    "lengthMi": "328 mi",
+    "highPass": null,
+    "pois": [],
+    "hero": "See I-26 right now — live DOT cameras and road conditions from the Tennessee mountains through Asheville and Spartanburg to Charleston, each tagged with its mile marker.",
+    "segs": [
+      [
+        "Tennessee to the coast",
+        "I-26 runs about 328 miles, from US 11W and US 23 in Kingsport, Tennessee, southeast to US 17 in Charleston, South Carolina. It crosses the Blue Ridge Mountains at the Tennessee–North Carolina line, passes Asheville, and runs through Spartanburg."
+      ],
+      [
+        "The mountain stretch",
+        "At Sams Gap, on the North Carolina–Tennessee line, I-26 reaches 3,760 feet. For about two miles on each side of the state line it stays above 3,000 feet. Between Mars Hill and Asheville the signs say FUTURE I-26, because that part does not yet meet all Interstate standards."
+      ]
+    ],
+    "faq": [
+      [
+        "Is I-26 open right now?",
+        "The <a href=\"#comap\">live map above</a> shows active incidents and closures along I-26, straight from the DOT feeds we cover in Tennessee, North Carolina and South Carolina. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href=\"../../closures/\">road closures map</a>."
+      ],
+      [
+        "Where can I see I-26 traffic cameras?",
+        "On the <a href=\"#comap\">map above</a>. Click a marker for the current image and its mile marker. State pages: <a href=\"../../cameras/south-carolina/\">South Carolina</a> and <a href=\"../../cameras/north-carolina/\">North Carolina</a>."
+      ],
+      [
+        "How long is I-26?",
+        "About 328 miles, from Kingsport, Tennessee to Charleston, South Carolina."
+      ],
+      [
+        "What is the highest point on I-26?",
+        "Sams Gap, on the North Carolina–Tennessee line, at 3,760 feet. Track your mile marker through the mountains with the <a href=\"https://apps.apple.com/us/app/milecheck/id6759212851\" target=\"_blank\" rel=\"noopener\">MileCheck app</a>."
+      ]
+    ]
+  },
 ];
 
 function faqJsonLd(c){ return JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}}))}); }
