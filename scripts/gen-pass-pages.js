@@ -465,9 +465,9 @@ const AREAS = [
     dot: 'WSDOT', credit: 'WSDOT, National Park Service and NIFC via MileCheck',
     // Summit coordinates from side-projects/mountain-engine/mountains (the visibility pages use the same point).
     lat: 46.8523, lon: -121.7603, rMi: 30,
-    title: 'Mount Rainier road cameras and conditions right now | MileCheck',
+    title: 'What are Mount Rainier road conditions right now?',
     desc: 'Live cameras on the roads to Mount Rainier from the National Park Service and WSDOT, with closures, construction, pass reports and wildfires within 30 miles of the summit. No account.',
-    ogTitle: 'Mount Rainier road cameras and conditions | MileCheck',
+    ogTitle: 'What are Mount Rainier road conditions right now?',
     eyebrow: 'SR 706 · SR 410 · SR 123 · US 12 · Washington',
     // For the printable map sheet: the state highways plus the park roads they lead to,
     // which are not state highways and would otherwise drop Paradise and Longmire off
@@ -607,9 +607,9 @@ const AREAS = [
     dot: 'WSDOT', credit: 'WSDOT and NIFC via MileCheck',
     // Centre and radius from docs/seo-briefs-2026-09-28.md. SR 542 corridor: WSDOT corridor sketch and pass page.
     lat: 48.7767, lon: -121.8144, rMi: 25,
-    title: 'Mount Baker road cameras and conditions right now | MileCheck',
-    desc: 'SR 542 and Artist Point road access, seasonal closures and agency reports within 25 miles of Mount Baker. Camera coverage is limited.',
-    ogTitle: 'Mount Baker road cameras and conditions | MileCheck',
+    title: 'Is Artist Point and SR 542 open right now?',
+    desc: 'SR 542 road conditions to Mount Baker and Artist Point, seasonal closures and agency reports within 25 miles of the mountain. Camera coverage is limited.',
+    ogTitle: 'Is Artist Point and SR 542 open right now?',
     eyebrow: 'SR 542 · Mount Baker Highway · Washington',
     h1: 'Mount Baker road cameras and conditions',
     hero: `SR 542 runs from Bellingham through Glacier to Artist Point. Check seasonal access below, with agency reports within 25 miles of Mount Baker.`,
@@ -656,9 +656,9 @@ const AREAS = [
     dot: 'WSDOT', credit: 'WSDOT and NIFC via MileCheck',
     // Centre and radius from docs/seo-briefs-2026-09-28.md. SR 504 status: WSDOT project page, current 2026 end point is the winter gate at MP 45.2.
     lat: 46.1914, lon: -122.1956, rMi: 25,
-    title: 'Mount St. Helens road cameras and conditions right now | MileCheck',
-    desc: 'SR 504 closure details, forest-road access and agency reports within 25 miles of Mount St. Helens. Includes the WSDOT camera at milepost 33.',
-    ogTitle: 'Mount St. Helens road cameras and conditions | MileCheck',
+    title: 'Is the road to Mount St. Helens closed?',
+    desc: 'Is the road to Mount St. Helens closed? SR 504 closure details, forest-road access and agency reports within 25 miles, plus the WSDOT camera at milepost 33.',
+    ogTitle: 'Is the road to Mount St. Helens closed?',
     eyebrow: 'SR 504 · FR 83 · FR 90 · FR 99 · Washington',
     // For the printable map sheet: the roads the sheet is about, and points to label on the
     // front. The closure point is the South Coldwater slide, at the trailhead of that name.
