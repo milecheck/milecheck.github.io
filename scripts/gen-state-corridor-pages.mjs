@@ -38,12 +38,12 @@ ${analytics}
 <title>${esc(title)} | MileCheck</title><meta name="description" content="${esc(description)}">
 <meta property="og:title" content="${esc(title)} | MileCheck"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}"><meta property="og:type" content="website">
 <script type="application/ld+json">${JSON.stringify(graph).replaceAll('<','\\u003c')}</script>
-<link rel="canonical" href="${url}"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/assets/state-corridor.css"><link rel="stylesheet" href="/assets/map-kit.css">
+<link rel="canonical" href="${url}"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/assets/state-corridor.css"><link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js" defer></script>
-<script src="/assets/state-corridor.js" defer></script><script src="/assets/map-kit.js" defer></script>
+<script src="/assets/state-corridor.js" defer></script><script src="/assets/map-kit.js?v=20261111a" defer></script>
 </head><body>${header}
 <main class="state-corridor"><nav aria-label="Breadcrumb"><a href="/corridors/">Corridors</a> / <a href="/corridors/i-75/">I-75</a> / ${esc(s.name)}</nav>
 <h1>${esc(title)}</h1><p class="sc-lede">${esc(r.context)}</p>

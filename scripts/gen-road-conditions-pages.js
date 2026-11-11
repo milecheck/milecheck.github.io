@@ -76,14 +76,15 @@ const GA4 = (REF.match(/<!-- ga4 -->[\s\S]*?<!-- \/ga4 -->/) || [''])[0];
 if (!GA4) throw new Error('GA4 tag not found in reference page');
 const SIGNUP_CSS = `.mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:44px 0;}
       .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
-      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
       .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
       .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 18px;max-width:44ch;}
       .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
       .mc-signup .ml-form-embedContent{display:none !important;}
       .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
       .mc-signup input[type=email]{border-radius:8px !important;}
-      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}`;
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+      .mc-signup input[type=email],.mc-signup input[type=text],.mc-signup button{min-height:44px !important;box-sizing:border-box !important;}`;
 const SIGNUP = `<!-- signup:start -->
   <section class="mc-signup" id="subscribe">
     <style>
@@ -210,8 +211,8 @@ ${SLOT_CSS}
 /* /spon:css */
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261102a">
-  <script src="/assets/map-kit.js?v=20261102a" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
 </head>
 <body>
 

@@ -37,14 +37,14 @@
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
     .co-hero .spon{margin:0 0 18px;}
-    .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero .eyebrow{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
     .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
     .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
     .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
     .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
     .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
     .co-stat .n.live{color:#0f7a4f;}
-    .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .co-stat .l{font-size:14px;color:#5b6670;margin-top:4px;font-weight:600;}
     .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
     #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
     .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
@@ -60,7 +60,7 @@
     .co-faq{max-width:1000px;margin:24px auto 0;padding:0 20px;}
     .co-faq h2{font-size:24px;margin:0 0 14px;}
     .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
-    .co-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .co-faq summary{font-weight:700;font-size:16px;line-height:24px;padding:10px 0;cursor:pointer;color:#0E1116;}
     .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
     .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
@@ -91,8 +91,8 @@
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261102a">
-  <script src="/assets/map-kit.js?v=20261102a" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
 <style data-seo-img>:where(img[width][height]){height:auto}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
   <!-- site-nav:assets -->
@@ -178,7 +178,7 @@
     .mc-hub-g summary::-webkit-details-marker{display:none;}
     .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
     .mc-hub-g li{margin:0;}
-    .mc-hub-g a{display:block;font-size:14.5px;line-height:1.35;padding:7px 0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a{display:flex;align-items:center;min-height:44px;font-size:14.5px;line-height:1.35;padding:0;color:#0f6b3f;text-decoration:none;}
     .mc-hub-g a:hover{text-decoration:underline;}
     @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
     @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}

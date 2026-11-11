@@ -345,14 +345,14 @@ ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://mi
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
     .co-hero .spon{margin:0 0 18px;}
-    .co-hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero .eyebrow{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
     .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
     .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
     .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
     .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
     .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
     .co-stat .n.live{color:#0f7a4f;}
-    .co-stat .l{font-size:12.5px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .co-stat .l{font-size:14px;color:#5b6670;margin-top:4px;font-weight:600;}
     .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
     #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
     .co-layers{position:absolute;left:12px;top:84px;z-index:850;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:10px 12px 6px;min-width:196px;font-size:13.5px;}
@@ -379,7 +379,7 @@ ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://mi
     .co-faq{max-width:1000px;margin:24px auto 0;padding:0 20px;}
     .co-faq h2{font-size:24px;margin:0 0 14px;}
     .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
-    .co-faq summary{font-weight:700;font-size:16px;cursor:pointer;color:#0E1116;}
+    .co-faq summary{font-weight:700;font-size:16px;line-height:24px;padding:10px 0;cursor:pointer;color:#0E1116;}
     .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
     .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
     .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
@@ -395,8 +395,8 @@ ${ES_PAGES.has(s.slug) ? `  <link rel="alternate" hreflang="en" href="https://mi
 ${sp.css}
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css">
-  <script src="/assets/map-kit.js" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
   <script src="/assets/plows.js"></script>
 </head>
 <body>

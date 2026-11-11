@@ -607,8 +607,8 @@
       if (box.nextElementSibling && box.nextElementSibling.classList.contains('mc-fb')) return;
       var p = document.createElement('div');
       p.className = 'mc-fb';
-      p.style.cssText = 'display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin:4px 2px 0;font-size:12px;color:#6b7280';
-      var fb = '<span style="font-style:italic;margin-left:auto">See any issues? <a href="mailto:feedback@milecheckapp.com?subject=Map%20issue%3A%20' + encodeURIComponent(location.pathname) + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat looks wrong:\n') + '" style="color:inherit;text-decoration:underline">Tell us</a></span>';
+      p.style.cssText = 'display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin:4px 2px 0;font-size:14px;color:#6b7280';
+      var fb = '<span style="font-style:italic;margin-left:auto">See any issues? <a href="mailto:feedback@milecheckapp.com?subject=Map%20issue%3A%20' + encodeURIComponent(location.pathname) + '&body=' + encodeURIComponent('Page: ' + location.href + '\n\nWhat looks wrong:\n') + '" style="color:inherit;text-decoration:underline;display:inline-flex;align-items:center;min-height:44px;padding:0 4px">Tell us</a></span>';
       p.innerHTML = (gm && m === gm.getContainer() ? stylePicker() : '') + fb;
       box.insertAdjacentElement('afterend', p);
       wirePicker(p);
@@ -624,7 +624,7 @@
   var baseLayer = null, styleLayer = null;
   function stylePicker() {
     return '<span class="mc-style" role="group" aria-label="Map style">' + Object.keys(STYLES).map(function (k) {
-      return '<a href="#" data-style="' + k + '" style="color:inherit;text-decoration:none;padding:6px 4px;display:inline-block;min-height:24px">' + STYLES[k].label + '</a>';
+      return '<a href="#" data-style="' + k + '" style="color:inherit;text-decoration:none;padding:0 8px;display:inline-flex;align-items:center;min-height:44px">' + STYLES[k].label + '</a>';
     }).join('<span aria-hidden="true">·</span>') + '</span>';
   }
   function setStyle(k, wrap) {

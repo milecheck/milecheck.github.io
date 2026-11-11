@@ -48,7 +48,7 @@ html .co-layers [hidden]{display:none!important;}
   html .co-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
   html .co-stat{min-width:0;padding:9px 12px;}
   html .co-stat .n{font-size:21px;}
-  html .co-stat .l{font-size:12px;}
+  html .co-stat .l{font-size:14px;}
 
   /* Tapped camera or alert: a sheet across the bottom of the map. */
   html .co-card{left:8px;right:8px;top:auto;bottom:24px;width:auto;max-height:calc(100% - 72px);border-radius:14px;padding:12px 12px 10px;}

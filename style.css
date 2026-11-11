@@ -721,8 +721,11 @@ img, svg { display: block; max-width: 100%; }
   font-size: 14px;
   font-weight: 500;
   color: #C8CFC9;
-  padding: 3px 0;
+  padding: 0;
 }
+
+/* Tap target: each footer link row is at least 44px tall (audit 2026-11-11). */
+.footer-list a { display: flex; align-items: center; min-height: 44px; }
 
 .footer-list a:hover { color: #FFFFFF; opacity: 1; }
 

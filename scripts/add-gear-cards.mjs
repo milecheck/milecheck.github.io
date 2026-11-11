@@ -46,7 +46,7 @@ ${picks.map(([name, what]) => `    <p style="margin:0 0 6px">Our pick for ${what
     <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
 ${links.map(([href, label]) => `      <li style="margin:2px 0"><a href="${href}" style="color:#0f7a4f;text-decoration:underline;font-weight:600">${label}</a></li>`).join('\n')}
     </ul>
-    <div style="font-size:13px;opacity:.75">Product links go to Amazon. MileCheck earns a commission if you buy through them. The price is the same for you.</div>
+    <div style="font-size:14px;opacity:.75">Product links go to Amazon. MileCheck earns a commission if you buy through them. The price is the same for you.</div>
   </div>
 </section>
 ${END}
