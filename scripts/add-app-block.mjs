@@ -2,7 +2,7 @@
 // One compact block right after the title row (first phone screen), tagged per page for App Store Connect (ct=) and Play (utm_campaign=).
 // Idempotent: strips its own block and re-adds. Held road-status pages are never in the list.
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
-const pages = ['corridors/i-4/index.html', 'corridors/i-15/index.html', 'mountains/hood/roads/index.html', 'maps/index.html', 'closures/index.html', 'maps/mile-markers/index.html', 'rest-areas/index.html', 'gas-prices/index.html', 'road-workers/index.html', 'road-workers/dot-jobs/index.html', 'road-workers/truck-drivers/index.html', 'road-workers/emts/index.html', 'ev-chargers/index.html', 'ev-charging-cost/index.html', 'gas-vs-electric-car/index.html', 'how-long-do-crashes-take-to-clear/index.html', 'what-vehicles-do-state-dots-and-police-drive/index.html', 'border-wait-times/index.html', 'how-to-charge-an-electric-car/index.html', ...['es', 'fr', 'pt', 'pa', 'zh', 'vi'].map(l => `${l}/how-to-charge-an-electric-car/index.html`), 'when-is-gas-cheapest/index.html', 'which-states-pump-your-gas/index.html', 'how-to-pump-gas/index.html', ...['es', 'fr', 'pt', 'pa', 'zh', 'vi'].map(l => `${l}/how-to-pump-gas/index.html`), 'runaway-truck-ramp/index.html', 'what-is-my-mile-marker/index.html',
+const pages = ['corridors/i-4/index.html', 'corridors/i-15/index.html', 'mountains/hood/roads/index.html', 'maps/index.html', 'closures/index.html', 'maps/mile-markers/index.html', 'rest-areas/index.html', 'gas-prices/index.html', 'road-workers/index.html', 'road-workers/dot-jobs/index.html', 'road-workers/truck-drivers/index.html', 'road-workers/emts/index.html', 'ev-chargers/index.html', 'ev-charging-cost/index.html', 'gas-vs-electric-car/index.html', 'how-long-do-crashes-take-to-clear/index.html', 'what-vehicles-do-state-dots-and-police-drive/index.html', 'border-wait-times/index.html', 'how-to-charge-an-electric-car/index.html', ...['es', 'fr', 'pt', 'pa', 'zh', 'vi'].map(l => `${l}/how-to-charge-an-electric-car/index.html`), 'when-is-gas-cheapest/index.html', 'which-states-pump-your-gas/index.html', 'how-to-pump-gas/index.html', ...['es', 'fr', 'pt', 'pa', 'zh', 'vi'].map(l => `${l}/how-to-pump-gas/index.html`), 'runaway-truck-ramp/index.html', 'what-is-my-mile-marker/index.html', 'what-mile-marker-am-i-at/index.html', 'corridors/i-75/index.html', 'corridors/i-95/index.html', 'passes/cajon/index.html', 'cameras/index.html',
   ...readdirSync('cameras').filter(d => existsSync(`cameras/${d}/index.html`)).map(d => `cameras/${d}/index.html`),
   ...(existsSync('rest-areas') ? readdirSync('rest-areas').filter(d => existsSync(`rest-areas/${d}/index.html`)).map(d => `rest-areas/${d}/index.html`) : [])];
 const STRIP = /<!-- app-block:start -->[\s\S]*?<!-- app-block:end -->/g;
@@ -14,9 +14,25 @@ for (const f of pages) {
   let s = o.replace(STRIP, '');
   const slug = f.replace(/\/index\.html$/, '').replace(/\//g, '-');
   // after the related-links chips if present, else right after the h1
-  let at = s.indexOf('<!-- toplinks:end -->');
+  // Corridor pages and the California camera page: card goes right under the h1, above the related-links chips (first phone screen, audit 11/11).
+  const top = f.startsWith('corridors/') || f === 'cameras/california/index.html' || f === 'passes/cajon/index.html';
+  let at = top ? -1 : s.indexOf('<!-- toplinks:end -->');
   if (at >= 0) at += '<!-- toplinks:end -->'.length; else { at = s.indexOf('</h1>'); if (at < 0) continue; at += 5; }
   s = s.slice(0, at) + block(slug) + s.slice(at);
   if (s !== o) { writeFileSync(f, s); changed++; }
+}
+
+// Seattle Drawbridges app card on /bridges/ (audit 11/11): same words as the "The app" box on the Seattle Drawbridges pages, same two store links.
+{
+  const f = 'bridges/index.html';
+  if (existsSync(f)) {
+    const o = readFileSync(f, 'utf8');
+    let s = o.replace(/<!-- drawbridge-card:start -->[\s\S]*?<!-- drawbridge-card:end -->/g, '');
+    const btn = 'background:#0E1116;color:#fff;border-radius:10px;padding:0 18px;min-height:44px;display:inline-flex;align-items:center;font-size:15px;font-weight:700;text-decoration:none';
+    const card = `<!-- drawbridge-card:start --><div class="mc-app-block" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:12px 0 16px;padding:12px 14px;border:1px solid #E4EAE6;border-radius:12px;background:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif"><span style="flex:1 1 220px;font-size:14px;line-height:1.4;color:#2a333b"><b style="color:#0E1116">Seattle Drawbridges.</b> The Now screen shows which bridge is up at a glance.</span><a href="https://apps.apple.com/us/app/id6811393568?pt=128447811&amp;ct=bridges-block&amp;mt=8" target="_blank" rel="noopener" style="${btn}">App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.seattledrawbridges&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dbridges-block" target="_blank" rel="noopener" style="${btn}">Google Play</a></div><!-- drawbridge-card:end -->`;
+    let at = s.indexOf('<!-- toplinks:end -->');
+    if (at >= 0) at += '<!-- toplinks:end -->'.length; else { at = s.indexOf('</h1>'); if (at >= 0) at += 5; }
+    if (at >= 0) { s = s.slice(0, at) + card + s.slice(at); if (s !== o) { writeFileSync(f, s); changed++; } }
+  }
 }
 console.log(`app block: ${changed} pages changed of ${pages.length}`);

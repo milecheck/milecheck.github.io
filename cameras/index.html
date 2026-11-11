@@ -14,14 +14,14 @@
   <meta name="description" content="Live highway cameras on one map, each tagged with route and mile marker. Covers 45 US states and 5 Canadian provinces, including the Coquihalla.">
 
   <meta property="og:title" content="Live highway cameras by state | MileCheck">
-  <meta property="og:description" content="See the actual road before you drive it. Live highway cameras across 45 US states + 5 Canadian provinces, each tagged with route + mile marker.">
+  <meta property="og:description" content="Live highway cameras on one map, each tagged with route and mile marker. Covers 45 US states and 5 Canadian provinces, including the Coquihalla.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/cameras/">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Live highway cameras by state | MileCheck">
-  <meta name="twitter:description" content="See the actual road before you drive it. Live highway cameras across 45 US states + 5 Canadian provinces, each tagged with route + mile marker.">
+  <meta name="twitter:description" content="Live highway cameras on one map, each tagged with route and mile marker. Covers 45 US states and 5 Canadian provinces, including the Coquihalla.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
 
   <link rel="icon" type="image/png" href="../images/favicon.png">
@@ -55,7 +55,7 @@
     .leaflet-container{font-family:Inter,sans-serif;}
     .bigstatus{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:15px;color:#0f7a4f;}
     .bigstatus.hint{color:#5b6670;font-weight:700;}
-    .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;}
+    .nearme{position:absolute;top:12px;right:12px;z-index:800;background:#0E1116;color:#fff;border:none;border-radius:10px;padding:0 14px;min-height:44px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;}
     .nearme:hover{background:#2a2f36;}
     .leaflet-popup-content{font-family:Inter,sans-serif;margin:12px 14px;}
     .campop{width:280px;max-width:76vw;}
@@ -125,7 +125,7 @@
     .cams-by-state{max-width:1160px;margin:6px auto 0;padding:0 20px;}
     .cams-by-state h2{font-size:17px;font-weight:800;color:#0E1116;margin:0 0 8px;}
     .cams-by-state .links{display:flex;flex-wrap:wrap;gap:6px 6px;}
-    .cams-by-state a{display:inline-block;font-size:13.5px;font-weight:600;color:#0f7a4f;text-decoration:none;border:1px solid #E5E5E5;border-radius:8px;padding:5px 11px;background:#fff;}
+    .cams-by-state a{display:inline-block;font-size:14px;font-weight:600;color:#0f7a4f;text-decoration:none;border:1px solid #E5E5E5;border-radius:8px;padding:0 12px;min-height:44px;display:inline-flex;align-items:center;box-sizing:border-box;background:#fff;}
     .cams-by-state a:hover{border-color:#0f7a4f;}
 
     /* Add-to-Home-Screen banner (mobile only, dismissible, shows once) */
@@ -150,7 +150,7 @@
       .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
       .cl-mapbox{height:56vh;}
       .bigstatus{font-size:13px;padding:6px 10px;max-width:60%;}
-      .nearme{font-size:12px;padding:8px 11px;}
+      .nearme{font-size:14px;padding:0 11px;}
       .cl-list{max-height:none;}
       .cl-rows{max-height:52vh;}
     }
@@ -193,7 +193,7 @@
 <!-- /site-nav:header -->
 
   <div class="cl-hero">
-    <h1>Live <span class="accent">highway cameras</span></h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Keep exploring" style="margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00704A;margin:0 0 6px;">Keep exploring</div><div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"><a href="/road-conditions/washington/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Road conditions</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Washington road conditions, snow and chains</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/road-conditions/california/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Road conditions</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">California road conditions, chains and closures</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/cameras/washington/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">WSDOT cameras and road conditions in Washington</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a></div></nav><!-- toplinks:end -->
+    <h1>Live <span class="accent">highway cameras</span></h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Keep exploring" style="margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00704A;margin:0 0 6px;">Keep exploring</div><div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"><a href="/road-conditions/washington/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Road conditions</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Washington road conditions, snow and chains</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/road-conditions/california/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Road conditions</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">California road conditions, chains and closures</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/cameras/washington/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Where can I see WSDOT cameras?</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a></div></nav><!-- toplinks:end --><!-- app-block:start --><div class="mc-app-block" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:12px 0 16px;padding:12px 14px;border:1px solid #E4EAE6;border-radius:12px;background:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif"><span style="flex:1 1 220px;font-size:14px;line-height:1.4;color:#2a333b"><b style="color:#0E1116">Your mile marker on screen as you drive.</b> Plus live alerts and cameras in the MileCheck app.</span><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&amp;ct=cameras-block&amp;mt=8" target="_blank" rel="noopener" style="background:#0E1116;color:#fff;border-radius:10px;padding:0 18px;min-height:44px;display:inline-flex;align-items:center;font-size:15px;font-weight:700;text-decoration:none">App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&amp;referrer=utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3Dcameras-block" target="_blank" rel="noopener" style="background:#0E1116;color:#fff;border-radius:10px;padding:0 18px;min-height:44px;display:inline-flex;align-items:center;font-size:15px;font-weight:700;text-decoration:none">Google Play</a></div><!-- app-block:end -->
     <p class="sub">See the actual road before you drive it. Live highway cameras across <!--cov:cameras.us_states-->45<!--/cov--> US states and <!--cov:cameras.provinces-->5<!--/cov--> Canadian provinces — including the passes drivers check most, like I-90 Snoqualmie and BC's Coquihalla, plus Ontario's 401 — each tagged with its route and mile marker — plus Washington State Ferries terminal cams, FAA aviation weather cams, and National Park webcams. More coverage coming.</p>
   </div>
 
@@ -519,7 +519,7 @@
     <ul>
       <li><a href="/road-conditions/washington/">Washington road conditions, snow and chains</a></li>
       <li><a href="/road-conditions/california/">California road conditions, chains and closures</a></li>
-      <li><a href="/cameras/washington/">WSDOT cameras and road conditions in Washington</a></li>
+      <li><a href="/cameras/washington/">Where can I see WSDOT cameras?</a></li>
       <li><a href="/cameras/california/">Caltrans Cameras Live Map</a></li>
       <li><a href="/corridors/i-90/">I-90 cameras and road conditions</a></li>
       <li><a href="/corridors/i-80/">I-80 cameras and road conditions</a></li>

@@ -67,7 +67,7 @@ const sitemap = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
 const paths = [...sitemap.matchAll(/<loc>https:\/\/milecheckapp\.com([^<]*)<\/loc>/g)].map((m) => decodeURIComponent(m[1]));
 let changed = 0; const missingImg = new Set(); const badPages = new Set();
 for (const p of paths) {
-  if (p.startsWith('/mountains/')) continue;
+  if (p.startsWith('/mountains/') && !META[p]) continue; // mountain pages are skipped unless data/seo-meta.json names them
   const rel = p.endsWith('/') ? `${p.slice(1)}index.html` : p.slice(1);
   const file = join(ROOT, rel);
   if (!existsSync(file)) continue;
@@ -81,8 +81,9 @@ for (const p of paths) {
     const t = esc(m.title);
     if (old !== undefined && old !== t) {
       html = html.replace(`<title>${old}</title>`, () => `<title>${t}</title>`);
-      for (const a of ['property="og:title"', 'name="twitter:title"']) html = html.split(`${a} content="${old}"`).join(`${a} content="${t}"`);
     }
+    // og/twitter titles follow the page title whatever they said before (audit 11/11)
+    for (const a of ['property="og:title"', 'name="twitter:title"']) html = html.replace(new RegExp(`(${a} content=")[^"]*"`), (x, y) => `${y}${t}"`);
   }
   if (m && m.desc) {
     const d = esc(m.desc);
@@ -90,8 +91,8 @@ for (const p of paths) {
     if (old === undefined) html = html.replace(/(<title>[^<]*<\/title>)/, (x) => `${x}\n  <meta name="description" content="${d}">`);
     else if (old !== d) {
       html = html.replace(/(<meta\s+name="description"\s+content=")[^"]*"/, (x, a) => `${a}${d}"`);
-      for (const a of ['property="og:description"', 'name="twitter:description"']) html = html.split(`${a} content="${old}"`).join(`${a} content="${d}"`);
     }
+    for (const a of ['property="og:description"', 'name="twitter:description"']) html = html.replace(new RegExp(`(${a} content=")[^"]*"`), (x, y) => `${y}${d}"`);
   }
 
   // 2. referrer policy

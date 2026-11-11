@@ -572,13 +572,19 @@ function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
 // count as no closure. No stated extent is unspecified, not full. ChatGPT review 3, 2026-10-08.
 function closureKind(t){var r={none:0,unspecified:1,partial:2,full:3},k='none';String(t||'').toLowerCase().split(/[.;]+/).forEach(function(c){if(!/clos/.test(c)||/\\b(no|not)\\s+(a\\s+)?(full\\s+)?(closure|closed)|\\breopen/.test(c))return;var feat=/(on-?ramp|off-?ramp|\\bramps?\\b|connector|rest area|shoulder)/.test(c)||/\\bexit\\b/.test(c.replace(/\\b(near|at|past|before|after|by|from|to|between)\\s+exit\\b/g,''));var full=/(all lanes (are )?closed|roadway is closed|full closure|closed in both directions|\\b(highway|hwy|road|roadway|route|pass|interstate|(i|us|sr|ca|or|wa|id|mt|ut|co|nv|az)-?\\s?\\d+[a-z]?)\\s+(is\\s+|are\\s+)?closed\\b)/.test(c);var x=feat?'partial':full?'full':/\\blanes?\\b/.test(c)?'partial':'unspecified';if(r[x]>r[k])k=x;});return k;}
 function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&closureKind(a.title+' '+(a.desc||''))==='full';}
-Promise.all([Promise.all(STATES.map(camsFor)),Promise.all(STATES.map(alertsFor))]).then(([cams,alerts])=>{
-  CAMS=cams.flat();ALERTS=alerts.flat();
+// Each state fills the tiles, map and banner as soon as its own calls return (I-75 has 6 states, 12 calls).
+const camsBy=STATES.map(()=>[]),alertsBy=STATES.map(()=>[]);
+function refresh(){
+  CAMS=camsBy.flat();ALERTS=alertsBy.flat();
   document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.filter(liveNow).length;
   draw();
   const fc=ALERTS.filter(isFullClosure);
   if(fc.length){const f=fc[0];const loc=NAME+(f.mp>0?' · MP '+Math.round(f.mp):'')+' · '+f.st;const bn=document.getElementById('critBanner');bn.innerHTML='⚠ CRITICAL: '+NAME+' has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' — nearest at '+loc+(fc.length>1?' (and '+(fc.length-1)+' more)':'')+'. Tap a red marker on the map for details.';bn.style.display='block';}
-}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+}
+Promise.all(STATES.flatMap((st,i)=>[
+  camsFor(st).then(r=>{camsBy[i]=r;refresh();}),
+  alertsFor(st).then(r=>{alertsBy[i]=r;refresh();})
+])).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
 </script>
 
 </body>

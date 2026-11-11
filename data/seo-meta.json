@@ -305,7 +305,8 @@
   "desc": "Watch live Buffalo traffic cameras on one map. NYSDOT freeway and highway cameras in the metro, each tagged with route and mile marker."
  },
  "/cameras/california/": {
-  "desc": "View live Caltrans highway cameras across California on one map. Filter by route to see current camera views along the highway you plan to drive."
+  "desc": "View live Caltrans traffic cameras across California on a map. Find highway cameras by location and check the latest images from Caltrans.",
+  "title": "Caltrans Cameras Live Map | MileCheck"
  },
  "/cameras/charleston-wv/": {
   "desc": "Charleston, WV traffic cameras on one map, with WV511 live video cameras on I-64 and other main roads. Check the road before you drive."
@@ -544,7 +545,8 @@
   "title": "Chain control map with live rules by state | MileCheck"
  },
  "/closures/": {
-  "title": "Live US road closures map for every state DOT | MileCheck"
+  "title": "Road Closure Map for All 50 States | MileCheck",
+  "desc": "View a live road closure map covering all 50 states. Find highway closures, lane restrictions and current road alerts reported by state DOT feeds."
  },
  "/contact-help-no-cell-signal/": {
   "title": "How to contact help with no phone signal | MileCheck"
@@ -558,8 +560,8 @@
   "desc": "See I-10 right now with live DOT traffic cameras and road conditions from Los Angeles to Jacksonville, each camera tagged with route and mile marker."
  },
  "/corridors/i-15/": {
-  "title": "I-15 live traffic cameras and conditions | MileCheck",
-  "desc": "I-15 right now with live DOT traffic cameras and road conditions from San Diego to Montana, each tagged with route and mile marker."
+  "title": "I15 Traffic Now and Road Conditions | MileCheck",
+  "desc": "Check I15 traffic and road conditions along Interstate 15. View live highway cameras, traffic alerts and road closures along the route."
  },
  "/corridors/i-20/": {
   "title": "I-20 live traffic cameras and road conditions | MileCheck",
@@ -570,8 +572,8 @@
   "desc": "See I-35 right now with live DOT traffic cameras and road conditions from Laredo, Texas to Duluth, Minnesota, each tagged with route and mile marker."
  },
  "/corridors/i-4/": {
-  "title": "I-4 live traffic cameras and road conditions | MileCheck",
-  "desc": "See I-4 right now with live DOT traffic cameras and road conditions from Tampa to Daytona Beach in Central Florida, each tagged with route and mile marker."
+  "title": "I4 Traffic Now and Road Conditions | MileCheck",
+  "desc": "Check I4 traffic now across Florida. View live highway cameras, current traffic alerts, road closures and conditions along Interstate 4."
  },
  "/corridors/i-40/": {
   "title": "I-40 live traffic cameras and conditions | MileCheck",
@@ -590,8 +592,8 @@
   "desc": "See I-70 right now with live DOT traffic cameras and road conditions from Utah to Maryland, including the Rockies, each tagged with route and mile marker."
  },
  "/corridors/i-75/": {
-  "title": "I-75 live traffic cameras and conditions | MileCheck",
-  "desc": "I-75 right now with live DOT traffic cameras and road conditions from Florida to Michigan, each tagged with route and mile marker."
+  "title": "I75 Traffic Now and Closures Today | MileCheck",
+  "desc": "Check I75 traffic now, including southbound delays and road closures. View live highway cameras and state DOT traffic alerts along Interstate 75."
  },
  "/corridors/i-75/kentucky/": {
   "title": "What are road conditions on I-75 in Kentucky? | MileCheck"
@@ -619,8 +621,8 @@
   "desc": "See I-94 right now with live DOT traffic cameras and road conditions from Montana to Michigan, the northern Great Lakes route, each tagged with mile marker."
  },
  "/corridors/i-95/": {
-  "title": "I-95 live traffic cameras and conditions | MileCheck",
-  "desc": "I-95 right now with live DOT traffic cameras and road conditions from Miami to Maine, each tagged with route and mile marker."
+  "title": "I95 Traffic Now and Road Conditions | MileCheck",
+  "desc": "Check I95 traffic now along Interstate 95. View live highway cameras, current traffic alerts, road closures and conditions along the route."
  },
  "/dash-preorder.html": {
   "title": "Is there a GPS display that shows mile markers? | MileCheck"
@@ -819,7 +821,8 @@
   "title": "Live maps of wildfires and road closures | MileCheck"
  },
  "/maps/mile-markers/": {
-  "title": "Mile marker map for all 50 states | MileCheck"
+  "title": "Mile Marker Map for All 50 States | MileCheck",
+  "desc": "Find highway mile markers on a map for all 50 states. Select a state and highway to look up milepost locations and see approximate marker positions."
  },
  "/mile-marker-api/": {
   "title": "Is there a mile marker API for GPS locations? | MileCheck",
@@ -896,8 +899,8 @@
   "title": "Printable Cabbage Hill map and stops | MileCheck"
  },
  "/passes/cajon/": {
-  "title": "Cajon Pass road conditions and cameras | MileCheck",
-  "desc": "Cajon Pass road conditions on I-15 from live Caltrans cameras with the mile marker, chain and traction rules, closures and snow. Check the pass before you go."
+  "title": "Cajon Pass Traffic Now and Road Conditions | MileCheck",
+  "desc": "Check Cajon Pass traffic on I15 in California. View live highway cameras, traffic alerts, road closures and current conditions through the pass."
  },
  "/passes/cajon/map/": {
   "title": "Printable map of Cajon Pass roads and stops | MileCheck"
@@ -1768,5 +1771,20 @@
  "/cameras/washington/": {
   "title": "Where can I see WSDOT cameras? | MileCheck",
   "desc": "View WSDOT traffic cameras across Washington on a map. Find the latest camera images by highway and mile marker, including I-5, I-90 and mountain passes."
+ },
+ "/cameras/ohio/": {
+  "title": "Ohio Traffic Cameras from OHGO | MileCheck",
+  "desc": "View Ohio traffic cameras from OHGO and ODOT on a live map. Find highway cameras, check current road conditions and see the latest traffic images."
+ },
+ "/cameras/georgia/": {
+  "title": "GDOT Cameras and Georgia Traffic Map | MileCheck",
+  "desc": "View GDOT traffic cameras across Georgia on a live map. Find highway cameras by route and mile marker and check the latest traffic images."
+ },
+ "/mountains/hood/roads/": {
+  "title": "Mt Hood Road Cams and Conditions | MileCheck",
+  "desc": "View Mt Hood road cams on US 26 and OR 35, including Government Camp. Check ODOT camera images, road conditions, closures and snow reports."
+ },
+ "/cameras/utah/": {
+  "title": "Utah Traffic Cameras: Live UDOT Map"
  }
 }

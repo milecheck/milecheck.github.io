@@ -8,7 +8,7 @@ const M = {
 };
 const pages = {
   rainier: ['cameras/washington', 'cameras/seattle', 'passes/snoqualmie', 'passes/stevens', 'passes/white', 'seasonal/chinook-pass', 'seasonal/cayuse-pass'],
-  hood: ['cameras/portland', 'cameras/oregon', 'passes/mt-hood'],
+  hood: ['cameras/portland', 'cameras/oregon', 'passes/mt-hood', 'mountains/hood/roads'],
 };
 const STRIP = /<!-- mountain-card:start -->[\s\S]*?<!-- mountain-card:end -->/g;
 const btn = 'background:#0E1116;color:#fff;border-radius:8px;padding:11px 14px;font-size:14px;font-weight:600;text-decoration:none;min-height:44px;box-sizing:border-box;display:inline-flex;align-items:center';

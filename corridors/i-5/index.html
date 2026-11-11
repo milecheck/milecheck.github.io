@@ -9,15 +9,15 @@
   <title>I-5 live traffic cameras and road conditions | MileCheck</title>
   <meta name="description" content="Live DOT traffic cameras and road conditions along I-5 through Washington, Oregon and California, each tagged with route and mile marker. See I-5 right now.">
   <link rel="canonical" href="https://milecheckapp.com/corridors/i-5/">
-  <meta property="og:title" content="I-5 Right Now — Live Cameras &amp; Conditions | MileCheck">
-  <meta property="og:description" content="Live I-5 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
+  <meta property="og:title" content="I-5 live traffic cameras and road conditions | MileCheck">
+  <meta property="og:description" content="Live DOT traffic cameras and road conditions along I-5 through Washington, Oregon and California, each tagged with route and mile marker. See I-5 right now.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/corridors/i-5/">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="I-5 Right Now — Live Cameras &amp; Conditions | MileCheck">
-  <meta name="twitter:description" content="Live I-5 traffic cameras and road conditions, each tagged with its mile marker. See the road before you drive it.">
+  <meta name="twitter:title" content="I-5 live traffic cameras and road conditions | MileCheck">
+  <meta name="twitter:description" content="Live DOT traffic cameras and road conditions along I-5 through Washington, Oregon and California, each tagged with route and mile marker. See I-5 right now.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -203,7 +203,7 @@
   <!-- qlinks:start -->
 <p class="mc-qlinks" style="max-width:760px;margin:22px auto;padding:0 20px;color:#5b6670;font:14px/1.6 Inter,-apple-system,'Segoe UI',sans-serif">More questions: <a href="/why-is-the-highway-closed/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Why is the highway closed?</a> &middot; <a href="/how-do-i-tell-911-where-i-am-on-the-highway/" style="color:#0f7a4f;font-weight:700;text-decoration:none">How do I tell 911 where I am on the highway?</a> &middot; <a href="/what-exit-am-i-near/" style="color:#0f7a4f;font-weight:700;text-decoration:none">What exit am I near?</a> &middot; <a href="/what-should-i-do-if-i-break-down-on-the-interstate/" style="color:#0f7a4f;font-weight:700;text-decoration:none">What should I do if I break down on the interstate?</a> &middot; <a href="/how-do-truckers-find-their-mile-marker-for-a-breakdown-call/" style="color:#0f7a4f;font-weight:700;text-decoration:none">How do truckers find their mile marker for a breakdown call?</a></p>
 <!-- qlinks:end -->
-<!-- guide:start --><style>.mc-guide{max-width:760px;margin:32px auto;padding:0 16px;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#2a333b;font-size:16px;line-height:1.65}.mc-guide h2{font-size:22px;line-height:1.3;color:#0E1116;margin:28px 0 10px}.mc-guide h3{font-size:18px;color:#0E1116;margin:20px 0 8px}.mc-guide p{margin:0 0 14px}.mc-guide ul{margin:0 0 14px;padding-left:22px}.mc-guide li{margin:0 0 6px}.mc-guide a{color:#0B7A4B;text-decoration:underline}</style><section class="mc-guide"><h2>Driving I-5 at Thanksgiving</h2><p>Planning a late-November trip on I-5? Read <a href="/driving-conditions-i-5-late-november/">what late November is like on I-5</a>. It covers the stretches to check, the chain and tire rules in force, recent November storms and the state road reports to check before you leave.</p></section><!-- guide:end -->
+<!-- guide:start --><style>.mc-guide{text-align:left;font-weight:400;max-width:760px;margin:32px auto;padding:0 16px;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#2a333b;font-size:16px;line-height:1.65}.mc-guide h2{font-size:22px;line-height:1.3;color:#0E1116;margin:28px 0 10px}.mc-guide h3{font-size:18px;color:#0E1116;margin:20px 0 8px}.mc-guide p{margin:0 0 14px}.mc-guide ul{margin:0 0 14px;padding-left:22px}.mc-guide li{margin:0 0 6px}.mc-guide a{color:#0B7A4B;text-decoration:underline}</style><section class="mc-guide"><h2>Driving I-5 at Thanksgiving</h2><p>Planning a late-November trip on I-5? Read <a href="/driving-conditions-i-5-late-november/">what late November is like on I-5</a>. It covers the stretches to check, the chain and tire rules in force, recent November storms and the state road reports to check before you leave.</p></section><!-- guide:end -->
 <!-- related:start -->
   <section class="mc-related" aria-label="Nearby on MileCheck">
     <style>
@@ -357,13 +357,19 @@ function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
 // count as no closure. No stated extent is unspecified, not full. ChatGPT review 3, 2026-10-08.
 function closureKind(t){var r={none:0,unspecified:1,partial:2,full:3},k='none';String(t||'').toLowerCase().split(/[.;]+/).forEach(function(c){if(!/clos/.test(c)||/\b(no|not)\s+(a\s+)?(full\s+)?(closure|closed)|\breopen/.test(c))return;var feat=/(on-?ramp|off-?ramp|\bramps?\b|connector|rest area|shoulder)/.test(c)||/\bexit\b/.test(c.replace(/\b(near|at|past|before|after|by|from|to|between)\s+exit\b/g,''));var full=/(all lanes (are )?closed|roadway is closed|full closure|closed in both directions|\b(highway|hwy|road|roadway|route|pass|interstate|(i|us|sr|ca|or|wa|id|mt|ut|co|nv|az)-?\s?\d+[a-z]?)\s+(is\s+|are\s+)?closed\b)/.test(c);var x=feat?'partial':full?'full':/\blanes?\b/.test(c)?'partial':'unspecified';if(r[x]>r[k])k=x;});return k;}
 function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&closureKind(a.title+' '+(a.desc||''))==='full';}
-Promise.all([Promise.all(STATES.map(camsFor)),Promise.all(STATES.map(alertsFor))]).then(([cams,alerts])=>{
-  CAMS=cams.flat();ALERTS=alerts.flat();
+// Each state fills the tiles, map and banner as soon as its own calls return (I-75 has 6 states, 12 calls).
+const camsBy=STATES.map(()=>[]),alertsBy=STATES.map(()=>[]);
+function refresh(){
+  CAMS=camsBy.flat();ALERTS=alertsBy.flat();
   document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.filter(liveNow).length;
   draw();
   const fc=ALERTS.filter(isFullClosure);
   if(fc.length){const f=fc[0];const loc=NAME+(f.mp>0?' · MP '+Math.round(f.mp):'')+' · '+f.st;const bn=document.getElementById('critBanner');bn.innerHTML='⚠ CRITICAL: '+NAME+' has '+fc.length+' active full-closure alert'+(fc.length>1?'s':'')+' — nearest at '+loc+(fc.length>1?' (and '+(fc.length-1)+' more)':'')+'. Tap a red marker on the map for details.';bn.style.display='block';}
-}).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
+}
+Promise.all(STATES.flatMap((st,i)=>[
+  camsFor(st).then(r=>{camsBy[i]=r;refresh();}),
+  alertsFor(st).then(r=>{alertsBy[i]=r;refresh();})
+])).catch(()=>{document.getElementById('coStatus').textContent='Live data unavailable right now — try again shortly.';});
 </script>
 
   <!-- MailerLite Universal -->

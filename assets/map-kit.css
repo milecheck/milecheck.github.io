@@ -214,3 +214,12 @@ html .co-layers .co-key{margin-top:8px;}
 .cc-age .cc-age-t{flex:1 1 180px;min-width:0;}
 .cc-refresh{min-height:44px;padding:0 14px;border:1px solid #c9d0d6;border-radius:8px;background:#fff;color:#0E1116;font:600 13.5px/1 inherit;font-family:inherit;cursor:pointer;}
 .cc-refresh:disabled{opacity:.6;cursor:default;}
+/* Touch targets (audit 11/11): map buttons and the credit link are at least 44px on touch screens.
+   Last in the file so it wins over the landscape-phone 28px rule above. */
+@media (pointer:coarse){
+  html .leaflet-bar a,html .leaflet-control-zoom a,html .cm-locate a,html .cm-layers-btn a,html .cm-fs-btn a{width:44px!important;height:44px!important;line-height:44px!important;}
+  html .leaflet-container .leaflet-control-attribution a,html .cm-attr-top a{display:inline-block;min-height:44px;line-height:44px;padding:0 4px;}
+}
+/* Header brand link and closure list buttons: 44px tall everywhere. */
+a.brand{min-height:44px;box-sizing:border-box;}
+.lc-go,.nearme{min-height:44px;}
