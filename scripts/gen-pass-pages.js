@@ -15,7 +15,7 @@ const MV_LINE = {
   HIDDEN: '{Mountain} is hidden by clouds right now.',
 };
 const MV_LINK_TEXT = 'View forecast';
-const MV_NAMES = { rainier: 'Mount Rainier', hood: 'Mount Hood', angeles: 'Mount Angeles', baker: 'Mount Baker', sthelens: 'Mount St. Helens', denali: 'Denali' };
+const MV_NAMES = { rainier: 'Mount Rainier', hood: 'Mount Hood', angeles: 'Mount Angeles', baker: 'Mount Baker', sthelens: 'Mount St. Helens', denali: 'Denali', bachelor: 'Mount Bachelor', southsister: 'South Sister' };
 // Fetched client-side from the mountain's Worker; the line stays hidden if the fetch fails.
 const mvLine = (key) => (!MV_NAMES[key] || process.env.NO_MV_LINE) ? '' : `
     <p class="mv-live" id="mvLive" hidden style="font-size:16px;font-weight:700;margin:8px 0 4px"><span id="mvLiveTxt"></span> <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=roads-${key}&amp;mt=8" target="_blank" rel="noopener">${MV_LINK_TEXT}</a></p>
@@ -1046,6 +1046,84 @@ const AREAS = [
     ctaH: 'Take it with you', ctaP: `MileCheck shows live DOT and DriveBC alerts and cameras on both sides of the border. Runs on CarPlay and Android Auto.`,
     related: (up) => `<a href="../rogers-pass/">Rogers Pass</a> · <a href="../coquihalla/">Coquihalla Highway</a> · <a href="../">all mountain passes</a> · <a href="${up}cameras/british-columbia/">BC cameras</a> · <a href="${up}border-wait-times/">border wait times</a>`,
   },
+  {
+    kind: 'area', slug: 'bachelor-roads', out: 'mountains/bachelor/roads', up: '../../../',
+    url: 'https://milecheckapp.com/mountains/bachelor/roads/',
+    name: 'Mount Bachelor', route: 'US 97 · Century Drive', state: 'OR', states: ['OR'], stateName: 'Oregon',
+    dot: 'ODOT', credit: 'ODOT and NIFC via MileCheck',
+    // Summit from mountain-engine mountains/bachelor.cjs. Live /cameras?state=OR checked 2026-11-11:
+    // 33 cameras within 25 mi (US 97 through Bend, US 20 at Bend and Sisters, Century Drive MP 21.11).
+    lat: 43.9792, lon: -121.6886, rMi: 25, noPrint: true,
+    title: 'What are road conditions near Mt Bachelor? | MileCheck',
+    desc: 'Live ODOT cameras on US 97, US 20 and Century Drive around Bend and Mt Bachelor, with closures and wildfires within 25 miles of the summit.',
+    ogTitle: 'Mount Bachelor road cameras and conditions | MileCheck',
+    eyebrow: 'US 97 · Century Drive · Oregon',
+    h1: 'Mount Bachelor road cameras and conditions',
+    hero: `ODOT cameras on US 97 and US 20 through Bend and on Century Drive toward Mt. Bachelor, on one map. Closures, construction, road reports and wildfires within 25 miles of the summit sit under the map.`,
+    markerLabel: 'Mount Bachelor',
+    camLabel: 'live cameras within 25 mi', elev: '25 mi', elevLabel: 'radius from the summit',
+    dist: '25 mi', distNote: 'radius from the summit', nearWord: 'within 25 miles of the summit', bannerWhere: 'on the roads around Mount Bachelor',
+    aboutH: 'The roads to Mount Bachelor',
+    lede: `Century Drive leaves Bend to the west and becomes the Cascade Lakes Highway, the road to the Mt. Bachelor ski area. US 97 runs north and south through Bend.`,
+    segs: [
+      { h: 'What the map covers', p: `A 25-mile radius around the summit of Mount Bachelor. That takes in Bend, Sunriver and the north end of La Pine. The data comes from ODOT and NIFC. It shows what the agencies report. It does not say a road is safe to drive.` },
+      { h: 'Chains and closures', p: `ODOT posts chain and traction-tire requirements when conditions call for it. Requirements change by the hour in a storm. <a href="https://tripcheck.com/" target="_blank" rel="noopener">TripCheck</a> is ODOT's own page.` },
+    ],
+    driveP: `MileCheck shows your mile marker on US 97 and US 20 as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
+    faq: [
+      ['Is the road to Mt. Bachelor open right now?', `Closures and incidents show on the <a href="#comap">map above</a> from ODOT. <a href="https://tripcheck.com/" target="_blank" rel="noopener">TripCheck</a> is ODOT's own page.`],
+      ['Is Mount Bachelor visible right now?', `A different question from whether the road is open. The <a href="../">visibility page</a> answers it for Bend, Redmond and Sunriver.`],
+      ['Where do the cameras come from?', `All of the cameras on this page come from ODOT's TripCheck feed. Wildfires come from the national NIFC feed. See <a href="../../../cameras/">every highway camera</a> for the rest of your route.`],
+    ],
+    crumbs: [
+      { name: 'MileCheck', item: 'https://milecheckapp.com/' },
+      { name: 'Mountains', item: 'https://milecheckapp.com/mountains/' },
+      { name: 'Mount Bachelor', item: 'https://milecheckapp.com/mountains/bachelor/' },
+      { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/bachelor/roads/' },
+    ],
+    vis: { h: 'Is Mount Bachelor visible right now?', p: `Whether the road is open and whether you can see the mountain are different questions. The visibility page answers the second one for Bend, Redmond and Sunriver.`, href: '../', cta: 'Check visibility now' },
+    ctaH: 'Take it with you', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
+    related: (up) => `<a href="../">Is Mount Bachelor visible right now?</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+  },
+  {
+    kind: 'area', slug: 'southsister-roads', out: 'mountains/southsister/roads', up: '../../../',
+    url: 'https://milecheckapp.com/mountains/southsister/roads/',
+    name: 'South Sister', route: 'US 20 · US 97', state: 'OR', states: ['OR'], stateName: 'Oregon',
+    dot: 'ODOT', credit: 'ODOT and NIFC via MileCheck',
+    // Summit from mountain-engine mountains/southsister.cjs. Live /cameras?state=OR checked 2026-11-11:
+    // 36 cameras within 25 mi (US 20 Sisters to Santiam Pass, US 97 Bend, OR 126 McKenzie, Century Drive).
+    lat: 44.1036, lon: -121.7686, rMi: 25, noPrint: true,
+    title: 'What are road conditions near South Sister? | MileCheck',
+    desc: 'Live ODOT cameras on US 20 from Sisters to Santiam Pass, US 97 in Bend and OR 126, with closures and wildfires within 25 miles of South Sister.',
+    ogTitle: 'South Sister road cameras and conditions | MileCheck',
+    eyebrow: 'US 20 · US 97 · Oregon',
+    h1: 'South Sister road cameras and conditions',
+    hero: `ODOT cameras on US 20 from Sisters over Santiam Pass, on US 97 through Bend and on OR 126 near McKenzie Bridge, on one map. Closures, construction, road reports and wildfires within 25 miles of the summit sit under the map.`,
+    markerLabel: 'South Sister',
+    camLabel: 'live cameras within 25 mi', elev: '25 mi', elevLabel: 'radius from the summit',
+    dist: '25 mi', distNote: 'radius from the summit', nearWord: 'within 25 miles of the summit', bannerWhere: 'on the roads around South Sister',
+    aboutH: 'The roads around South Sister',
+    lede: `US 20 crosses the Cascades at Santiam Pass north of the Three Sisters. US 97 runs through Bend to the east. OR 126 runs up the McKenzie River on the west side.`,
+    segs: [
+      { h: 'What the map covers', p: `A 25-mile radius around the summit of South Sister. That takes in Sisters, Bend and the McKenzie River valley. The data comes from ODOT and NIFC. It shows what the agencies report. It does not say a road is safe to drive.` },
+      { h: 'Chains and closures', p: `ODOT posts chain and traction-tire requirements when conditions call for it. Requirements change by the hour in a storm. <a href="https://tripcheck.com/" target="_blank" rel="noopener">TripCheck</a> is ODOT's own page.` },
+    ],
+    driveP: `MileCheck shows your mile marker on US 20 and US 97 as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
+    faq: [
+      ['Is US 20 over Santiam Pass open right now?', `Closures and incidents show on the <a href="#comap">map above</a> from ODOT. <a href="https://tripcheck.com/" target="_blank" rel="noopener">TripCheck</a> is ODOT's own page.`],
+      ['Is South Sister visible right now?', `A different question from whether the road is open. The <a href="../">visibility page</a> answers it for Bend, Redmond, Sisters and Sunriver.`],
+      ['Where do the cameras come from?', `All of the cameras on this page come from ODOT's TripCheck feed. Wildfires come from the national NIFC feed. See <a href="../../../cameras/">every highway camera</a> for the rest of your route.`],
+    ],
+    crumbs: [
+      { name: 'MileCheck', item: 'https://milecheckapp.com/' },
+      { name: 'Mountains', item: 'https://milecheckapp.com/mountains/' },
+      { name: 'South Sister', item: 'https://milecheckapp.com/mountains/southsister/' },
+      { name: 'Road cameras and conditions', item: 'https://milecheckapp.com/mountains/southsister/roads/' },
+    ],
+    vis: { h: 'Is South Sister visible right now?', p: `Whether the road is open and whether you can see the mountain are different questions. The visibility page answers the second one for Bend, Redmond, Sisters and Sunriver.`, href: '../', cta: 'Check visibility now' },
+    ctaH: 'Take it with you', ctaP: `See your mile marker and nearby reports in the app. MileCheck also runs on CarPlay and Android Auto.`,
+    related: (up) => `<a href="../">Is South Sister visible right now?</a> · <a href="${up}cameras/oregon/">Oregon cameras</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}fire/">wildfire map</a>`,
+  },
 ];
 
 // Road-specific pages under each mountain's roads page (2026-11-11). Same template and
@@ -1099,6 +1177,22 @@ const ROAD_SUBS = [
     desc: 'AK511 cameras and alerts on AK-3, the George Parks Highway, within 60 miles of Denali. The approach road from Anchorage and Fairbanks.',
     lede: 'AK-3, the George Parks Highway, connects Anchorage and Fairbanks and passes the Denali park entrance. AK511 runs the cameras and the alerts on this map.',
     check: ['AK511', 'https://511.alaska.gov/'] },
+  { parent: 'bachelor-roads', sub: 'us-97', route: 'US 97', only: ['US-97', 'US97'], elev: '25 mi', elevLabel: 'radius from Mount Bachelor',
+    title: 'What are US 97 road conditions in Bend? | MileCheck',
+    desc: 'Live ODOT cameras and alerts on US 97 through Bend, from Lava Butte to Cooley Road, within 25 miles of Mount Bachelor in Central Oregon.',
+    lede: 'US 97 runs north and south through Bend as the Bend Parkway. ODOT runs the cameras and the alerts on this map.',
+    check: ['ODOT TripCheck', 'https://tripcheck.com/'] },
+  { parent: 'bachelor-roads', sub: 'cascade-lakes-highway', route: 'Century Drive', only: ['OR-372', 'OR372'], onlyTitle: 'Century Drive', elev: 'MP 21.11', elevLabel: 'Century Drive camera',
+    title: 'Is the road to Mt Bachelor Ski Area open? | MileCheck',
+    desc: 'The ODOT camera at milepost 21 on Century Drive, the Cascade Lakes Highway from Bend to Mt Bachelor, with alerts within 25 miles of the summit.',
+    lede: 'Century Drive leaves Bend to the west and becomes the Cascade Lakes Highway past the Mt. Bachelor ski area. ODOT runs the camera and the alerts on this map.',
+    check: ['ODOT TripCheck', 'https://tripcheck.com/'],
+    ski: [['Mt. Bachelor', 'https://www.mtbachelor.com/the-mountain/mountain-report/']] },
+  { parent: 'southsister-roads', sub: 'us-20', route: 'US 20', only: ['US-20', 'US20'], elev: '4,817 ft', elevLabel: 'Santiam Pass',
+    title: 'Is US 20 over Santiam Pass open right now? | MileCheck',
+    desc: 'Live ODOT cameras and alerts on US 20 from Bend through Sisters to Santiam Pass and Santiam Junction, within 25 miles of South Sister.',
+    lede: 'US 20 runs from Bend through Sisters and over Santiam Pass to Santiam Junction. ODOT runs the cameras and the alerts on this map.',
+    check: ['ODOT TripCheck', 'https://tripcheck.com/'] },
 ];
 for (const s of ROAD_SUBS) {
   const P = AREAS.find((a) => a.slug === s.parent);
@@ -1106,7 +1200,7 @@ for (const s of ROAD_SUBS) {
   const path = `${P.out}/${s.sub}`;
   const h = s.title.replace(/ \| MileCheck$/, '');
   AREAS.push({
-    kind: 'area', slug: `${key}-${s.sub}`, out: path, up: '../../../../', mapHref: '../map/', conds: false, only: s.only,
+    kind: 'area', slug: `${key}-${s.sub}`, out: path, up: '../../../../', mapHref: '../map/', conds: false, only: s.only, onlyTitle: s.onlyTitle, noPrint: P.noPrint, ski: s.ski,
     url: `https://milecheckapp.com/${path}/`, parentUrl: P.url,
     name: P.name, route: s.route, state: P.state, states: P.states, stateName: P.stateName, dot: P.dot, credit: P.credit,
     lat: P.lat, lon: P.lon, rMi: P.rMi, title: s.title, desc: s.desc, ogTitle: s.title,
@@ -1129,6 +1223,13 @@ for (const s of ROAD_SUBS) {
   });
 }
 
+
+// Ski areas on the route (2026-11-11). Name and the area's own conditions page only.
+function skiBlock(p){
+  if(!p.ski||!p.ski.length)return '';
+  const links=p.ski.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n} conditions</a>`).join(' · ');
+  return `\n    <p class="sub"><b>Ski area on this road.</b> ${p.ski.map(([n])=>n).join(', ')}. The snow and lift report is on the ski area's own page. ${links}.</p>`;
+}
 
 function faqJsonLd(p){
   return JSON.stringify({ '@context':'https://schema.org','@type':'FAQPage','mainEntity':
@@ -1327,7 +1428,7 @@ ${sp.html}
     <div class="eyebrow">${p.eyebrow || `${p.route} · ${p.stateName} · Elevation ${p.elev}`}</div>
     <h1>${p.h1 || `${p.name} right now: live camera &amp; conditions`}</h1>
     <p class="sub">${p.hero}</p>${mvLine(mountainKey)}
-    ${p.coverage ? `<p class="sub">${p.coverage}</p>` : ''}
+    ${p.coverage ? `<p class="sub">${p.coverage}</p>` : ''}${skiBlock(p)}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">${p.camLabel || 'live cameras near the pass'}</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
@@ -1445,7 +1546,7 @@ ${p.vis ? `
 
 <script>
 const WORKER='https://api.milecheckapp.com';
-const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea},conds:${p.conds!==false},only:${p.only?JSON.stringify(p.only):'null'}};
+const PASS={state:'${p.state}',states:${JSON.stringify(p.states||[p.state])},lat:${p.lat},lon:${p.lon},radiusKm:${isArea ? +(p.rMi*1.609344).toFixed(3) : p.r},route:'${p.route}',area:${isArea},conds:${p.conds!==false},only:${p.only?JSON.stringify(p.only):'null'},onlyTitle:${p.onlyTitle?JSON.stringify(p.onlyTitle):'null'}};
 const SNOW=${p.snow ? JSON.stringify({station:p.snow.station,avyCenter:p.snow.avyCenter}) : 'null'};
 const PLOWS=${p.plows ? JSON.stringify({states:p.plows.states}) : 'null'};
 function km(a,b,c,d){const R=6371,pi=Math.PI/180;const x=Math.sin((c-a)*pi/2)**2+Math.cos(a*pi)*Math.cos(c*pi)*Math.sin((d-b)*pi/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
@@ -1473,7 +1574,7 @@ function clean(t,n){const x=String(t==null?'':t).replace(/<[^>]+>/g,' ').replace
 // or the first clause before a comma. Build 9/30: a 140-character cut of the
 // description ended "there will be con" (Leah: "text cuts off on alert").
 function alertTitle(a){const h=clean(a.headline||'',140);const d=String(a.description||a['impact-desc']||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();if(h&&h!==clean(d,140))return h;if(!d)return 'Incident';const first=(d.match(/^.*?[.!?](\\s|$)/)||[d])[0].trim();if(first.length<=110)return first;const cl=first.indexOf(', ');return cl>20&&cl<=110?first.slice(0,cl):clean(first,90);}
-async function loadCams(){const out=[];for(const st of PASS.states){for(const c of await feedRows(WORKER+'/cameras?state='+st,'cameras','cameras')){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;if(PASS.only&&PASS.only.indexOf(c.route)<0)continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title&&c.title!=='N/A'?c.title:(c.route||'Traffic')+' camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
+async function loadCams(){const out=[];for(const st of PASS.states){for(const c of await feedRows(WORKER+'/cameras?state='+st,'cameras','cameras')){if(c.isActive===false||!c.imageUrl||!near(+c.lat,+c.lon))continue;if(PASS.only&&PASS.only.indexOf(c.route)<0&&!(PASS.onlyTitle&&String(c.title||'').indexOf(PASS.onlyTitle)>=0))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title&&c.title!=='N/A'?c.title:(c.route||'Traffic')+' camera',route:c.route,mp:c.mile,img:c.imageUrl,src:c.source==='NPS'?'NPS':'',park:c.park||''});}}return out;}
 async function loadAlerts(){const out=[];for(const st of PASS.states){for(const a of await feedRows(WORKER+'/incidents?state='+st,'incident-reports','alerts')){const sl=a.location&&a.location['start-location'];if(!sl||!near(+sl['start-lat'],+sl['start-long']))continue;if(PASS.only&&PASS.only.indexOf(a.location&&a.location['route-id'])<0)continue;if(Date.parse(a['end-time'])<Date.now())continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:alertTitle(a),desc:clean(a.description||a['impact-desc']||'',700),impact:clean(a['impact-desc']||'',80),route:a.location&&a.location['route-id'],end:alertEnd(a,sl),t0:Date.parse(a['start-time']||''),t1:Date.parse(a['end-time']||'')});}}return out;}
 // The feed's end location, when it is somewhere else. Leah, 2026-10-01: "show the
 // line between MPs?" The span is drawn along the road (see spanLine).
