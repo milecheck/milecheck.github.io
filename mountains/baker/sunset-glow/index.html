@@ -154,10 +154,10 @@
       <p class="mv-line" id="pgGlowTxt"></p>
       <p class="mv-line" id="pgSunset"></p>
     </div>
-    <div class="mv-prose pg-live" id="pgWin" hidden><h2>Next clear windows for Mount Baker</h2><ul class="pg-list" id="pgWinList"></ul></div>
+    <div class="mv-prose pg-live" id="pgWin" hidden><h2>Clear days ahead for Mount Baker</h2><ul class="pg-list" id="pgWinList"></ul><p><a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=photo-baker&amp;mt=8">See it hour by hour in the app</a></p></div>
     <div class="mv-prose"><h2>Where to photograph Mount Baker</h2><p>These viewpoints offer views of Mount Baker, with distances measured from Vancouver, BC.</p><ul class="pg-list"><li>Vancouver Waterfront<span class="m">Best light: Sunset · 1 mi from Vancouver, BC</span></li><li>Kitsilano Beach<span class="m">Best light: Sunset · 1 mi from Vancouver, BC</span></li><li>Spanish Banks Beach<span class="m">Best light: Sunset · 4 mi from Vancouver, BC</span></li><li>Discovery Park, South Bluff<span class="m">Best light: Sunset · 117 mi from Vancouver, BC</span></li><li>Alki Point<span class="m">Best light: Sunset · 122 mi from Vancouver, BC</span></li></ul>
     <p>This is a weather-based forecast, and a visible summit glow is never certain.</p></div>
-    <div class="mv-get"><div><div class="mv-stamp">The app</div><h3>Mountain Visibility</h3><p>Get the Mountain Visibility Forecast app for $1.99 to check summit visibility and upcoming clear windows.</p></div>
+    <div class="mv-get"><div><div class="mv-stamp">The app</div><h3>Mountain Visibility</h3><p>Get the Mountain Visibility Forecast app for $1.99 to check summit visibility hour by hour.</p></div>
       <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=photo-baker&amp;mt=8" class="btn btn-primary" data-store="ios" rel="noopener">Get the app, $1.99</a>
       <span class="mv-soon" data-store="play">On Android? <a href="https://play.google.com/store/apps/details?id=app.milecheck.rainier&amp;referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dmtn-baker" target="_blank" rel="noopener">Get it on Google Play</a>.</span>
     </div>
@@ -171,7 +171,7 @@
   fetch('https://baker-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){if(!j)return;var now=Date.now();
   var g=(j.alpenglow||[]).filter(function(e){return e.kind==='sunset'&&Date.parse(e.windowEnd||e.when)>now;})[0];
   if(g&&L[g.label]){document.getElementById('pgGrade').textContent=G[g.label]+(f(g.when,{year:'numeric',month:'numeric',day:'numeric'})===f(now,{year:'numeric',month:'numeric',day:'numeric'})?'':' · '+f(g.when,{weekday:'long'}));document.getElementById('pgGlowTxt').textContent=L[g.label];document.getElementById('pgSunset').textContent=SL+' '+hm(g.when);document.getElementById('pgGlow').hidden=false;}
-  if(Array.isArray(j.windows)){var w=j.windows.filter(function(x){return x.end>now;}).slice(0,5);document.getElementById('pgWinList').innerHTML=w.length?w.map(function(x){return '<li>'+f(x.start,{weekday:'long'})+', '+hm(x.start)+' to '+hm(x.end)+'</li>';}).join(''):'<li>'+NONE+'</li>';document.getElementById('pgWin').hidden=false;}
+  if(Array.isArray(j.windows)){var w=j.windows.filter(function(x){return x.end>now;}).slice(0,5);document.getElementById('pgWinList').innerHTML=w.length?w.map(function(x){return f(x.start,{weekday:'long'});}).filter(function(d,i,a){return a.indexOf(d)===i;}).map(function(d){return '<li>'+d+'</li>';}).join(''):'<li>'+NONE+'</li>';document.getElementById('pgWin').hidden=false;}
   }).catch(function(){});})();</script>
 <section class="mc-gear" aria-label="Gear guides" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">
   <div style="border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5">

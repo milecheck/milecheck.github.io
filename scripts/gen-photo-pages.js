@@ -71,7 +71,7 @@ function build(key) {
       <p class="mv-line" id="pgGlowTxt"></p>
       <p class="mv-line" id="pgSunset"></p>
     </div>
-    <div class="mv-prose pg-live" id="pgWin" hidden><h2>${esc(fill(COPY.windowsHead))}</h2><ul class="pg-list" id="pgWinList"></ul></div>
+    <div class="mv-prose pg-live" id="pgWin" hidden><h2>${esc(fill(COPY.windowsHead))}</h2><ul class="pg-list" id="pgWinList"></ul><p><a href="${ios}">See it hour by hour in the app</a></p></div>
     <div class="mv-prose">${spots.length ? `<h2>${esc(fill(COPY.spotsHead))}</h2><p>${esc(fill(COPY.spotsIntro))}</p><ul class="pg-list">${spotLis}</ul>` : `<p><a href="../spots/">Viewpoints for ${esc(subj)}</a></p>`}
     <p>${esc(fill(COPY.forecastNote))}</p></div>
     <div class="mv-get"><div><div class="mv-stamp">The app</div><h3>Mountain Visibility</h3><p>${esc(fill(COPY.ctaText))}</p></div>
@@ -88,7 +88,7 @@ function build(key) {
   fetch('https://${key}-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){if(!j)return;var now=Date.now();
   var g=(j.alpenglow||[]).filter(function(e){return e.kind==='sunset'&&Date.parse(e.windowEnd||e.when)>now;})[0];
   if(g&&L[g.label]){document.getElementById('pgGrade').textContent=G[g.label]+(f(g.when,{year:'numeric',month:'numeric',day:'numeric'})===f(now,{year:'numeric',month:'numeric',day:'numeric'})?'':' · '+f(g.when,{weekday:'long'}));document.getElementById('pgGlowTxt').textContent=L[g.label];document.getElementById('pgSunset').textContent=SL+' '+hm(g.when);document.getElementById('pgGlow').hidden=false;}
-  if(Array.isArray(j.windows)){var w=j.windows.filter(function(x){return x.end>now;}).slice(0,5);document.getElementById('pgWinList').innerHTML=w.length?w.map(function(x){return '<li>'+f(x.start,{weekday:'long'})+', '+hm(x.start)+' to '+hm(x.end)+'</li>';}).join(''):'<li>'+NONE+'</li>';document.getElementById('pgWin').hidden=false;}
+  if(Array.isArray(j.windows)){var w=j.windows.filter(function(x){return x.end>now;}).slice(0,5);document.getElementById('pgWinList').innerHTML=w.length?w.map(function(x){return f(x.start,{weekday:'long'});}).filter(function(d,i,a){return a.indexOf(d)===i;}).map(function(d){return '<li>'+d+'</li>';}).join(''):'<li>'+NONE+'</li>';document.getElementById('pgWin').hidden=false;}
   }).catch(function(){});})();</script>
 `;
   const out = path.join(ROOT, 'mountains', key, SLUG, 'index.html');
