@@ -1435,7 +1435,7 @@ ${sp.html}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">${p.camLabel || 'live cameras near the pass'}</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
-      <div class="co-stat"><div class="n">${p.elev}</div><div class="l">${p.elevLabel || 'summit elevation'}</div></div>
+      ${p.elev ? `<div class="co-stat"><div class="n">${p.elev}</div><div class="l">${p.elevLabel || 'summit elevation'}</div></div>` : ''}
       <div class="co-stat"><div class="n">${p.dist}</div><div class="l">${p.distNote}</div></div>
     </div>
   </div>
