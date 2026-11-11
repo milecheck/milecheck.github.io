@@ -1,0 +1,21 @@
+{
+  "_source": "ChatGPT draft 2026-11-11 (chatgpt.com, Claude in Chrome). Placeholders {Mountain} {town}.",
+  "desc": "Will {Mountain} glow at sunset tonight? Check the summit glow forecast, sunset time, clear windows over the next five days, and nearby viewpoints.",
+  "intro": "Alpenglow happens when low-angle sunlight lights up a mountain summit after the valley below has gone dark. It needs a clear summit and clear sky toward the setting sun.",
+  "glowHead": "Will {Mountain} glow tonight?",
+  "glowGreat": "Great light is expected on {Mountain} at sunset tonight, with skies forecast to favor a visible glow.",
+  "glowDecent": "Some sunset color is possible on {Mountain} tonight, but clouds may limit the glow.",
+  "glowPoor": "Cloud cover is expected to limit sunset light on {Mountain} tonight.",
+  "sunsetLabel": "Sunset tonight",
+  "windowsHead": "Clear days ahead for {Mountain}",
+  "windowsNone": "No clear summit windows are forecast for {Mountain} in the next five days.",
+  "spotsHead": "Where to photograph {Mountain}",
+  "spotsIntro": "These viewpoints offer views of {Mountain}, with distances measured from {town}.",
+  "forecastNote": "This is a weather-based forecast, and a visible summit glow is never certain.",
+  "ctaText": "Get the Mountain Visibility Forecast app for $1.99 to check summit visibility hour by hour.",
+  "faq": [
+    {"q": "What causes {Mountain} to glow pink at sunset?", "a": "Low-angle sunlight travels through more atmosphere, scattering shorter wavelengths and leaving more red and orange light to reach the summit."},
+    {"q": "Can {Mountain} glow when it is cloudy?", "a": "Yes, if the summit and the sky toward the setting sun remain clear enough for sunlight to reach the mountain."},
+    {"q": "Does a Great glow forecast guarantee sunset color?", "a": "No. Cloud conditions can change before sunset, and even a clear summit does not guarantee visible alpenglow."}
+  ]
+}
