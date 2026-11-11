@@ -184,6 +184,8 @@
     <div class="eyebrow">SR 706 · SR 410 · SR 123 · US 12 · Washington</div>
     <h1>Mount Rainier road cameras and conditions</h1>
     <p class="sub">The cameras on the roads to the park, on one map. Paradise, Longmire and Sunrise from the National Park Service, plus WSDOT cameras on SR 410, on US 12 at Packwood and White Pass, and on SR 7 at Elbe. Closures, construction, pass reports and wildfires within 30 miles of the summit sit under the map.</p>
+    <p class="mv-live" id="mvLive" hidden style="font-size:16px;font-weight:700;margin:8px 0 4px"><span id="mvLiveTxt"></span> <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=roads-rainier&amp;mt=8" target="_blank" rel="noopener">View forecast</a></p>
+    <script>(function(){var L={"OUT":"{Mountain} is visible right now.","PARTLY":"{Mountain} is partly visible right now.","HIDDEN":"{Mountain} is hidden by clouds right now."},N="Mount Rainier";fetch('https://rainier-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){var v=j&&j.now&&j.now.verdict;if(!L[v])return;document.getElementById('mvLiveTxt').textContent=L[v].replace('{Mountain}',N);document.getElementById('mvLive').hidden=false;}).catch(function(){});})();</script>
     
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras within 30 mi</div></div>

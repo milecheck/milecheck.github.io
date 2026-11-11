@@ -7,6 +7,20 @@ const path = require('path');
 const WINTER = require('./lib/winter-titles.cjs');
 const SPON = require('./lib/sponsor-slot'); // one sponsor slot above the eyebrow (2026-09-24)
 
+// Live visibility line on every mountain roads page (2026-11-11). One string per verdict,
+// {Mountain} is the mountain's full name. Swap the copy here only.
+const MV_LINE = {
+  OUT: '{Mountain} is visible right now.',
+  PARTLY: '{Mountain} is partly visible right now.',
+  HIDDEN: '{Mountain} is hidden by clouds right now.',
+};
+const MV_LINK_TEXT = 'View forecast';
+const MV_NAMES = { rainier: 'Mount Rainier', hood: 'Mount Hood', angeles: 'Mount Angeles', baker: 'Mount Baker', sthelens: 'Mount St. Helens', denali: 'Denali' };
+// Fetched client-side from the mountain's Worker; the line stays hidden if the fetch fails.
+const mvLine = (key) => (!MV_NAMES[key] || process.env.NO_MV_LINE) ? '' : `
+    <p class="mv-live" id="mvLive" hidden style="font-size:16px;font-weight:700;margin:8px 0 4px"><span id="mvLiveTxt"></span> <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=roads-${key}&amp;mt=8" target="_blank" rel="noopener">${MV_LINK_TEXT}</a></p>
+    <script>(function(){var L=${JSON.stringify(MV_LINE)},N=${JSON.stringify(MV_NAMES[key])};fetch('https://${key}-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){var v=j&&j.now&&j.now.verdict;if(!L[v])return;document.getElementById('mvLiveTxt').textContent=L[v].replace('{Mountain}',N);document.getElementById('mvLive').hidden=false;}).catch(function(){});})();</script>`;
+
 const PASSES = [
   {
     slug: 'snoqualmie', name: 'Snoqualmie Pass', route: 'I-90', state: 'WA', stateName: 'Washington',
@@ -1034,6 +1048,88 @@ const AREAS = [
   },
 ];
 
+// Road-specific pages under each mountain's roads page (2026-11-11). Same template and
+// live DOT feeds as the parent, filtered to one route with `only` (camera route and
+// incident route-id spellings both listed, they differ per feed). Built only where the
+// 2026-11-11 feed check returned cameras or incidents on that route inside the radius.
+// Candidate list and the queries each targets: Developer/mv-roads-candidates-2026-11-11.md
+const ROAD_SUBS = [
+  { parent: 'hood-roads', sub: 'us-26', route: 'US 26', only: ['US-26', 'US26'], elev: '4,000 ft', elevLabel: 'Government Camp',
+    title: 'Where are the Mt Hood road cams on US 26? | MileCheck',
+    desc: 'Live ODOT road cams on US 26 near Mt Hood, from Rhododendron through Government Camp, with closures and alerts within 25 miles of the summit.',
+    lede: 'US 26 is the road from Portland past Government Camp. ODOT runs the cameras and the alerts on this map.',
+    check: ['ODOT TripCheck', 'https://tripcheck.com/'] },
+  { parent: 'hood-roads', sub: 'or-35', route: 'OR 35', only: ['OR-35', 'OR35'], elev: '4,670 ft', elevLabel: 'Bennett Pass',
+    title: 'What are OR 35 road conditions near Mt Hood? | MileCheck',
+    desc: 'Live ODOT cameras and alerts on OR 35, the east side of Mt Hood between Government Camp and Hood River, within 25 miles of the summit.',
+    lede: 'OR 35 runs from US 26 near Government Camp over Bennett Pass to Hood River. ODOT runs the cameras and the alerts on this map.',
+    check: ['ODOT TripCheck', 'https://tripcheck.com/'] },
+  { parent: 'baker-roads', sub: 'sr-542', route: 'SR 542', only: ['SR 542'], elev: '5,140 ft', elevLabel: 'Artist Point',
+    title: 'What are SR 542 road conditions to Mt Baker? | MileCheck',
+    desc: 'WSDOT alerts on SR 542, the Mount Baker Highway, within 25 miles of the summit. WSDOT runs no traffic camera on SR 542 in this radius.',
+    lede: 'SR 542 runs from Bellingham through Glacier to Artist Point. WSDOT posts the alerts on this map.',
+    check: ["WSDOT's Mt. Baker Highway report", 'https://wsdot.com/travel/real-time/mountainpasses/mt.-baker'] },
+  { parent: 'sthelens-roads', sub: 'sr-504', route: 'SR 504', only: ['SR 504'], elev: 'MP 45.2', elevLabel: 'SR 504 winter gate',
+    title: 'Is SR 504 to Mt St Helens closed right now? | MileCheck',
+    desc: 'WSDOT alerts and the milepost 33 camera on SR 504, the Spirit Lake Highway to Mount St. Helens, within 25 miles of the summit.',
+    lede: 'SR 504 runs east from Castle Rock toward Coldwater Lake. WSDOT posts the camera and the alerts on this map.',
+    check: ['WSDOT SR 504 project page', 'https://wsdot.wa.gov/construction-planning/search-projects/sr-504-south-coldwater-slide-spirit-lake-outlet-bridge-washout'] },
+  { parent: 'rainier-roads', sub: 'sr-410', route: 'SR 410', only: ['SR 410'], elev: '5,430 ft', elevLabel: 'Chinook Pass',
+    title: 'Is SR 410 over Chinook Pass open right now? | MileCheck',
+    desc: 'Live WSDOT cameras and alerts on SR 410 near Mount Rainier, from Greenwater to Chinook Pass, within 30 miles of the summit.',
+    lede: 'SR 410 runs from Enumclaw past Crystal Mountain to Chinook Pass. It closes over the pass each winter. WSDOT runs the cameras and the alerts on this map.',
+    check: ['WSDOT Chinook Pass report', 'https://wsdot.com/travel/real-time/mountainpasses/chinook'] },
+  { parent: 'rainier-roads', sub: 'paradise-road', route: 'Paradise Road', only: ['Paradise Rd'], elev: '5,400 ft', elevLabel: 'Paradise',
+    title: 'Is the road to Paradise at Mt Rainier open? | MileCheck',
+    desc: 'National Park Service cameras on the road from Longmire to Paradise at Mount Rainier, with alerts within 30 miles. Check NPS for gate times.',
+    lede: 'The road from the Nisqually entrance climbs past Longmire to Paradise. The National Park Service runs the road and the cameras on this map.',
+    check: ['NPS road status', 'https://www.nps.gov/mora/planyourvisit/road-status.htm'] },
+  { parent: 'angeles-roads', sub: 'hurricane-ridge-road', route: 'Hurricane Ridge Road', only: ['Hurricane Ridge Rd'], elev: '5,242 ft', elevLabel: 'Hurricane Ridge',
+    title: 'Is Hurricane Ridge Road open right now? | MileCheck',
+    desc: 'National Park Service webcams on Hurricane Ridge Road above Port Angeles, with agency alerts within 25 miles. Check NPS for road hours.',
+    lede: 'Hurricane Ridge Road climbs 17 miles from Port Angeles to the ridge. The National Park Service runs the road and the webcams on this map.',
+    check: ['Olympic National Park conditions', 'https://www.nps.gov/olym/planyourvisit/conditions.htm'] },
+  { parent: 'angeles-roads', sub: 'us-101', route: 'US 101', only: ['US 101', 'SR 101'], elev: '25 mi', elevLabel: 'radius from Mount Angeles',
+    title: 'What are US 101 conditions near Port Angeles? | MileCheck',
+    desc: 'Live WSDOT cameras and alerts on US 101 near Port Angeles and Sequim, within 25 miles of Mount Angeles on the Olympic Peninsula.',
+    lede: 'US 101 is the road around the Olympic Peninsula. WSDOT runs the cameras and the alerts on this map.',
+    check: ['WSDOT travel alerts', 'https://wsdot.com/travel/real-time/'] },
+  { parent: 'denali-roads', sub: 'parks-highway', route: 'Parks Highway', only: ['Parks Highway', 'AK-3', 'AK 3'], elev: 'AK-3', elevLabel: 'George Parks Highway',
+    title: 'What are Parks Highway conditions near Denali? | MileCheck',
+    desc: 'AK511 cameras and alerts on AK-3, the George Parks Highway, within 60 miles of Denali. The approach road from Anchorage and Fairbanks.',
+    lede: 'AK-3, the George Parks Highway, connects Anchorage and Fairbanks and passes the Denali park entrance. AK511 runs the cameras and the alerts on this map.',
+    check: ['AK511', 'https://511.alaska.gov/'] },
+];
+for (const s of ROAD_SUBS) {
+  const P = AREAS.find((a) => a.slug === s.parent);
+  const key = P.out.split('/')[1];
+  const path = `${P.out}/${s.sub}`;
+  const h = s.title.replace(/ \| MileCheck$/, '');
+  AREAS.push({
+    kind: 'area', slug: `${key}-${s.sub}`, out: path, up: '../../../../', mapHref: '../map/', conds: false, only: s.only,
+    url: `https://milecheckapp.com/${path}/`, parentUrl: P.url,
+    name: P.name, route: s.route, state: P.state, states: P.states, stateName: P.stateName, dot: P.dot, credit: P.credit,
+    lat: P.lat, lon: P.lon, rMi: P.rMi, title: s.title, desc: s.desc, ogTitle: s.title,
+    eyebrow: `${s.route} · ${P.name} · ${P.stateName}`, h1: h,
+    hero: `Cameras and alerts on ${s.route} only, ${P.nearWord}. For every road in the area, see <a href="../">all ${P.name} road cameras and conditions</a>.`,
+    coverage: `An empty list does not mean the road is open. Check <a href="${s.check[1]}" target="_blank" rel="noopener">${s.check[0]}</a> for the current status.`,
+    markerLabel: P.markerLabel, camLabel: `cameras on ${s.route}`, elev: s.elev, elevLabel: s.elevLabel,
+    dist: P.dist, distNote: P.distNote, nearWord: `on ${s.route} ${P.nearWord}`, bannerWhere: `on ${s.route}`,
+    aboutH: `About ${s.route}`, lede: s.lede,
+    segs: [{ h: 'What the map covers', p: `Only feed entries tagged ${s.route}, ${P.nearWord}. The data comes from ${P.credit.replace(/ via MileCheck$/, '')}. It shows what the agencies report. It does not say a road is safe to drive.` }],
+    driveP: `MileCheck shows your mile marker on ${s.route} as you drive. The mile marker works without a signal. Camera images and alerts need a connection.`,
+    faq: [
+      [`Is ${s.route} open right now?`, `Check <a href="${s.check[1]}" target="_blank" rel="noopener">${s.check[0]}</a>. The map above shows the closures and alerts the agency feed reports right now.`],
+      [`Is ${P.name} visible right now?`, `A different question from road access. The <a href="../../">visibility page</a> answers it by region.`],
+    ],
+    crumbs: [...P.crumbs, { name: s.route, item: `https://milecheckapp.com/${path}/` }],
+    vis: { h: `Is ${P.name} visible right now?`, p: `Road access and a clear view are separate questions. The <a href="../../">visibility page</a> answers the second one by region.`, href: '../../', cta: 'Check visibility now' },
+    ctaH: `MileCheck on ${s.route}`, ctaP: P.ctaP,
+    related: (up) => `<a href="../">All ${P.name} roads</a> · <a href="../../">Is ${P.name} visible right now?</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a>`,
+  });
+}
+
+
 function faqJsonLd(p){
   return JSON.stringify({ '@context':'https://schema.org','@type':'FAQPage','mainEntity':
     p.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a.replace(/<[^>]+>/g,'')}})) });
@@ -1056,7 +1152,7 @@ function page(p){
   const url = p.url || `https://milecheckapp.com/passes/${p.slug}/`;
   const sp = SPON.slot({ kind: 'pass', slug: p.slug, name: p.name });
   const credit = p.credit || p.dot;
-  const mountainKey = (p.out || '').match(/^mountains\/([^/]+)\/roads$/)?.[1];
+  const mountainKey = (p.out || '').match(/^mountains\/([^/]+)\/roads(\/[^/]+)?$/)?.[1];
   const imagePath = mountainKey && `images/mountains/og-${mountainKey}.png`;
   const shareImage = imagePath && fs.existsSync(imagePath) ? `https://milecheckapp.com/${imagePath}` : 'https://milecheckapp.com/images/og-banner-light.png';
   const segs = p.segs || [{ h: 'When it closes', p: p.closes }, p.extra];
@@ -1230,7 +1326,7 @@ ${sp.css}
 ${sp.html}
     <div class="eyebrow">${p.eyebrow || `${p.route} · ${p.stateName} · Elevation ${p.elev}`}</div>
     <h1>${p.h1 || `${p.name} right now: live camera &amp; conditions`}</h1>
-    <p class="sub">${p.hero}</p>
+    <p class="sub">${p.hero}</p>${mvLine(mountainKey)}
     ${p.coverage ? `<p class="sub">${p.coverage}</p>` : ''}
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">${p.camLabel || 'live cameras near the pass'}</div></div>
@@ -1280,7 +1376,7 @@ ${p.snow || p.plows ? `
 
   <section class="co-guide">
     <h2>${p.aboutH || `About ${p.name}`}</h2>
-    ${p.noPrint ? '' : `<p style="margin:10px 0 18px"><a class="co-print" href="map/" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>`}
+    ${p.noPrint ? '' : `<p style="margin:10px 0 18px"><a class="co-print" href="${p.mapHref || 'map/'}" style="display:inline-block;text-decoration:none;color:inherit;">Printable map</a></p>`}
     <p class="lede">${p.lede || `${p.name} carries ${p.route} over the ${p.range} at ${p.elev}.`}</p>
 ${segsHtml}
   </section>

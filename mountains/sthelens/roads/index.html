@@ -184,6 +184,8 @@
     <div class="eyebrow">SR 504 · FR 83 · FR 90 · FR 99 · Washington</div>
     <h1>Mount St. Helens road cameras and conditions</h1>
     <p class="sub">Check SR 504 from Castle Rock toward Coldwater Lake and forest-road access on the south and east sides. The map shows agency reports within 25 miles of Mount St. Helens.</p>
+    <p class="mv-live" id="mvLive" hidden style="font-size:16px;font-weight:700;margin:8px 0 4px"><span id="mvLiveTxt"></span> <a href="https://apps.apple.com/us/app/mountain-visibility-forecast/id6810003955?pt=128447811&amp;ct=roads-sthelens&amp;mt=8" target="_blank" rel="noopener">View forecast</a></p>
+    <script>(function(){var L={"OUT":"{Mountain} is visible right now.","PARTLY":"{Mountain} is partly visible right now.","HIDDEN":"{Mountain} is hidden by clouds right now."},N="Mount St. Helens";fetch('https://sthelens-is-out.leahgerber93.workers.dev/data.json').then(function(r){return r.ok?r.json():null;}).then(function(j){var v=j&&j.now&&j.now.verdict;if(!L[v])return;document.getElementById('mvLiveTxt').textContent=L[v].replace('{Mountain}',N);document.getElementById('mvLive').hidden=false;}).catch(function(){});})();</script>
     <p class="sub">The SR 504 camera at milepost 33 does not show the closure farther east or the forest roads. Check <a href="https://www.fs.usda.gov/r06/giffordpinchot/conditions">Forest Service conditions</a> for those roads.</p>
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras within 25 mi</div></div>
