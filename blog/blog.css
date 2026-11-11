@@ -154,11 +154,13 @@
   padding: 0 32px;
 }
 .article-back {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: #999;
-  margin-bottom: 36px;
-  display: inline-block;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .article-back:hover { color: #000; opacity: 1; }
 .article-back::before { content: "← "; }
