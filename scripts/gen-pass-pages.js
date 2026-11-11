@@ -607,9 +607,9 @@ const AREAS = [
     dot: 'WSDOT', credit: 'WSDOT and NIFC via MileCheck',
     // Centre and radius from docs/seo-briefs-2026-09-28.md. SR 542 corridor: WSDOT corridor sketch and pass page.
     lat: 48.7767, lon: -121.8144, rMi: 25,
-    title: 'Is Artist Point and SR 542 open right now?',
+    title: 'Are Artist Point and SR 542 open right now?',
     desc: 'SR 542 road conditions to Mount Baker and Artist Point, seasonal closures and agency reports within 25 miles of the mountain. Camera coverage is limited.',
-    ogTitle: 'Is Artist Point and SR 542 open right now?',
+    ogTitle: 'Are Artist Point and SR 542 open right now?',
     eyebrow: 'SR 542 · Mount Baker Highway · Washington',
     h1: 'Mount Baker road cameras and conditions',
     hero: `SR 542 runs from Bellingham through Glacier to Artist Point. Check seasonal access below, with agency reports within 25 miles of Mount Baker.`,
