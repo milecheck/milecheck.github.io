@@ -121,13 +121,18 @@ const fmtD = (iso) => { const [y, m, d] = iso.split('-').map(Number); return new
 // names like SWEETWATER RD), feed prefixes and stray leading dashes removed.
 const SMALL = new Set(['TO', 'OF', 'ON', 'AT', 'IN', 'BY']), WORD3 = new Set(['NEW', 'OFF', 'END', 'AND', 'THE', 'FOR', 'ALL', 'ONE', 'TWO', 'NOW']);
 const deCap = (t) => t.replace(/\b[A-Z]{4,}\b/g, (w) => w[0] + w.slice(1).toLowerCase()).replace(/\b[A-Z]{2,3}\b/g, (w) => (SMALL.has(w) ? w.toLowerCase() : WORD3.has(w) ? w[0] + w.slice(1).toLowerCase() : w));
-const clean = (h) => { let t = String(h).replace(/\s+/g, ' ').replace(/^Scheduled Road Work on /i, 'Roadwork on ').replace(/^(Road ?Work|Construction|Scheduled Road Work|Restrictions)\s*[:-]\s*/i, '').replace(/^[-–—\s]+/, '').trim(); if (t === t.toUpperCase()) t = t.charAt(0) + t.slice(1).toLowerCase(); t = deCap(t); return t.charAt(0).toUpperCase() + t.slice(1); };
+const clean = (h) => { let t = String(h).replace(/\s+/g, ' ').replace(/^Caltrans (lane|full) closure\s+C\w+$/i, (m, k) => k[0].toUpperCase() + k.slice(1) + ' closure').replace(/^Scheduled Road Work on /i, 'Roadwork on ').replace(/^(Road ?Work|Construction|Scheduled Road Work|Restrictions)\s*[:-]\s*/i, '').replace(/^[-–—\s]+/, '').trim(); if (t === t.toUpperCase()) t = t.charAt(0) + t.slice(1).toLowerCase(); t = deCap(t); return t.charAt(0).toUpperCase() + t.slice(1); };
 // A place is shown only when it is a short place name, not a copy of the headline or the route.
 const placeOf = (st, p) => { const x = String(p.place || '').trim(); if (!x || x.length > 40 || /\*\*|^[-–—]/.test(x) || /[A-Z]{2}\d{3,}|\d+\.\d+ miles/i.test(x) || (x === x.toUpperCase() && x.length > 20) || (p.route && x.replace(/\W/g, '').toUpperCase().startsWith(String(p.route).replace(/\W/g, '').toUpperCase()))) return ''; return x === x.toUpperCase() ? x.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : x; };
 const projCard = (st, p, kind) => {
-  const tag = { ongoing: ['t-on', 'Ongoing'], started: ['t-new', 'Started in October'], finished: ['t-done', 'Ended in October'] }[kind];
-  const when = kind === 'finished' ? `Posted to run ${fmtD(p.start)} to ${fmtD(p.end)}` : kind === 'started' ? `Started ${fmtD(p.start)}, posted to end ${fmtD(p.end)}` : `Since ${fmtD(p.start)}, posted to end ${fmtD(p.end)}`;
-  return `<div class="v2-proj"><span class="tag ${tag[0]}">${tag[1]}</span>${p.closure ? '<span class="tag t-cl">Road closed</span>' : ''}<b>${esc(p.route ? route(st, p.route) : 'Roadwork')}${placeOf(st, p) ? `, ${esc(placeOf(st, p))}` : ''}</b><p>${esc(clean(p.headline))}</p><small>${when}. From ${esc(dotOf(st))}'s feed.</small></div>`;
+  const tag = { ongoing: ['t-on', 'Ongoing'], started: ['t-new', p.seenBasis ? 'New on the feed in October' : 'Started in October'], finished: ['t-done', p.seenBasis ? 'Came off the feed in October' : 'Ended in October'] }[kind];
+  // Archive-dated projects (feeds with no posted dates): say what we saw, never a posted date (Leah 11/12).
+  const when = p.seenBasis
+    ? (kind === 'finished' ? `On the feed ${p.startIsFloor ? 'since at least ' : 'from '}${fmtD(p.start)}, last seen ${fmtD(p.end)}`
+      : kind === 'started' ? `First seen ${fmtD(p.start)}, still on the feed ${fmtD(p.end)}`
+      : `On the feed since ${p.startIsFloor ? 'at least ' : ''}${fmtD(p.start)}`)
+    : kind === 'finished' ? `Posted to run ${fmtD(p.start)} to ${fmtD(p.end)}` : kind === 'started' ? `Started ${fmtD(p.start)}, posted to end ${fmtD(p.end)}` : `Since ${fmtD(p.start)}, posted to end ${fmtD(p.end)}`;
+  return `<div class="v2-proj"><span class="tag ${tag[0]}">${tag[1]}</span>${p.closure ? '<span class="tag t-cl">Road closed</span>' : ''}<b>${esc(p.route ? route(st, p.route) : 'Roadwork')}${placeOf(st, p) ? `, ${esc(placeOf(st, p))}` : ''}</b><p>${esc(clean(p.headline))}</p><small>${when}. Source: ${esc(dotOf(st))}.</small></div>`;
 };
 const annCard = (a) => `<div class="v2-ann"><b>${esc(a.title)}</b><p>${esc(a.text)}</p><a href="${a.url}" target="_blank" rel="noopener">Read it from ${esc(a.source.split(',')[0])} &rarr;</a></div>`;
 
@@ -196,26 +201,25 @@ function stateTop(st) {
   const lede = [];
   // The generator keeps at most 15 per group, so a count of 15 means "15 or more" and is never stated as exact.
   const cnt = (k) => (k >= 15 ? 'More than a dozen' : String(k));
-  if (workRoutes.length) lede.push(`Across ${name} in October, major roadwork ran on ${list3(workRoutes.slice(0, 4))}${mw.finished.length ? `. ${cnt(mw.finished.length)} project${mw.finished.length === 1 ? '' : 's'} reached ${mw.finished.length === 1 ? 'its' : 'their'} posted end date` : ''}.`);
+  if (workRoutes.length) lede.push(`Across ${name} in October, major roadwork ran on ${list3(workRoutes.slice(0, 4))}.`); // Leah 11/9: no roadwork counts
   const crashFirst = !workRoutes.length; const winterLede = [];
   if (seasonal.length) winterLede.push(`${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} on the feed by Oct. 31.`);
   else if (snow) winterLede.push(snow === 1 ? 'The first snow and ice alert of the season showed up.' : `The first snow and ice alerts of the season showed up, ${snow} of them.`);
   const Dot = dotOf(st).replace(/^./, (c) => c.toUpperCase());
   // A feed with no crash alerts usually doesn't publish crashes at all; never print "0 crash alerts".
-  if (j.crash > 0) lede.push(`${Dot} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'}${crashTop ? `, ${crashTop[1]} of them on ${crashTop[0]}` : ''}.`);
+  if (j.crash > 0) lede.push(`${Dot} posted ${n(j.crash)} crash alert${j.crash === 1 ? '' : 's'}${crashTop && crashTop[1] >= 2 ? `, ${crashTop[1]} of them on ${crashTop[0]}` : ''}.`);
   lede.push(...winterLede);
   if (!lede.length) lede.push(`${Dot} posted ${n(j.closure)} closure alert${j.closure === 1 ? '' : 's'} in October. The map below shows where.`);
 
   const nums = `<div class="v2-nums">
 ${j.crash > 0 ? `<div><b>${n(j.crash)}</b><span>crash alerts</span></div>` : ''}
-${crashTop ? `<div><b>${esc(crashTop[0])}</b><span>most crash alerts, ${crashTop[1]}</span></div>` : ''}
-${(mw.ongoing.length + mw.started.length) ? `<div><b>${(mw.ongoing.length >= 15 || mw.started.length >= 15) ? `${mw.ongoing.length + mw.started.length}+` : mw.ongoing.length + mw.started.length}</b><span>major roadwork projects on the feed</span></div>` : ''}
-${mw.finished.length ? `<div><b>${mw.finished.length >= 15 ? '15+' : mw.finished.length}</b><span>major projects ended in October</span></div>` : seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct. 31</span></div>` : ''}
+${crashTop && crashTop[1] >= 2 ? `<div><b>${esc(crashTop[0])}</b><span>most crash alerts, ${crashTop[1]}</span></div>` : ''}
+${seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct. 31</span></div>` : ''}
 </div>`;
 
   const S = [];
   const cards = picked.map((x) => projCard(st, x.p, x.k));
-  if (cards.length) S.push(`<section class="v2-sec"><h2 class="rc">Major roadwork</h2><p class="v2-sub">Projects on ${esc(dotOf(st))}'s feed in October that run a month or longer, with the dates the agency posted. Short lane closures are left out. Picked from across the ${CANADA.has(st) ? 'province' : 'state'}, not just the cities.</p>${cards.join('')}</section>`);
+  if (cards.length) S.push(`<section class="v2-sec"><h2 class="rc">Major roadwork</h2><p class="v2-sub">Projects that ${esc(dotOf(st))} listed in October that run a month or longer, ${(mw.ongoing.concat(mw.started, mw.finished)).some((p) => p.seenBasis) ? 'dated by when our daily copy of the feed first and last showed them, since this feed posts no start or end dates' : 'with the dates the agency posted'}. Short lane closures are left out. Picked from across the ${CANADA.has(st) ? 'province' : 'state'}, not just the cities.</p>${cards.join('')}</section>`);
   if (ann.length) S.push(`<section class="v2-sec"><h2 class="rc">News from ${esc(dotOf(st))}</h2>${ann.map(annCard).join('')}</section>`);
   // The live pages already have an 'Areas and routes named in two or more crash alerts' box; don't repeat it.
   if (false && places.length) S.push(`<section class="v2-sec"><h2 class="rc">Where the crashes were</h2><ul class="v2-pivot">${places.map((x) => `<li><strong>${esc(route(st, x.route))}</strong>${esc(x.place)}: ${x.crashes} crash alerts</li>`).join('')}</ul></section>`);
