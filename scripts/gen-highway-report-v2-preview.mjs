@@ -106,6 +106,8 @@ const CSS = `<style data-v2>
 .v2-ann b{display:block;font-size:16px;margin-bottom:6px}.v2-ann p{margin:0 0 8px;font-size:15px;line-height:1.55}.v2-ann a{font-weight:700;color:#0f7a4f}
 .v2-rel{margin:4px 0 22px;font-size:13px;line-height:1.6;color:#5C6670}.v2-rel a{color:#0f7a4f;font-weight:600}
 @media (max-width:420px){.v2-rank a{grid-template-columns:96px 1fr 56px;font-size:13.5px}}
+  .spon-strip{margin:0 0 14px;padding:7px 12px;border:1px solid #cfe3d7;border-radius:8px;background:#f3f7f4;font-size:13.5px;line-height:1.35;color:#1f3b2d;}
+  .spon-strip a{color:#0f7a4f;font-weight:700;}
 </style>`;
 
 const mixBar = (c, k, r, o) => { const t = c + k + r + o || 1; return `<div class="v2-mix" role="img" aria-label="${c} crash, ${k} closure, ${r} roadwork, ${o} other"><i class="c" style="flex:${c}"></i><i class="k" style="flex:${k}"></i><i class="r" style="flex:${r}"></i><i class="o" style="flex:${o}"></i></div>`; };
@@ -263,13 +265,20 @@ q('[data-copy]').onclick=function(){var b=this;function ok(){b.textContent='Copi
 function toShare(head){q('[data-head]').textContent=head;q('[data-step="ask"]').hidden=true;q('[data-step="share"]').hidden=false}
 q('[data-x]').onclick=function(){p.hidden=true};q('[data-go]').addEventListener('click',function(){toShare('Finish signing up in the new tab.')});q('[data-sub]').onclick=function(){set(localStorage,K);toShare('Thanks for reading!')}})()</script>`;
 const LINK = (from) => `<a href="/report/?from=${encodeURIComponent(from)}" target="_blank" rel="opener">`;
+const setTitle = (h, T) => h.replace(/<title>[^<]*<\/title>/, `<title>${esc(T)}</title>`)
+  .replace(/(<meta (?:property="og:title"|name="twitter:title") content=")[^"]*"/g, (m, a) => `${a}${esc(T)}"`);
+const SPON_STRIP = `<p class="spon-strip" id="spon" data-slot="article:highway-report" data-sponsor="house">Sponsor next month's Highway Report for only $99. <a href="mailto:sales@milecheckapp.com?subject=Sponsor%20the%20next%20Highway%20Report" data-spon-link>Email us</a>.</p>`;
 const finish = (h, from) => {
   h = h.replace(/<p class="mc-cta-line"[\s\S]*?<\/p>/, ''); // the old top line
   h = h.replace(/(<p class="mc-cta-sub">)<a href="#subscribe"[^>]*>[^<]*/g, `$1${LINK(from)}Get the next report &rarr;`); // national: link under the state picker
   // Leah 11/9: the month chart goes until the archive has clean earlier months.
   h = h.replace(/<h2 class="rc">Compared with earlier months<\/h2>[\s\S]*?(?=<h2|<section class="v2-sec">)/, '');
+  // Leah 11/12: the sponsor slot was too tall and pushed the headline down. One slim line, no Roy, no Stripe:
+  // "Sponsor next month's Highway Report for only $99. Email us." with "Email us" as a mailto (inbound only, 11/9).
+  h = h.replace(/<aside class="spon[^"]*" id="spon"[\s\S]*?<\/aside>/, SPON_STRIP);
   return h.replace('</body>', `${POPUP(from)}\n</body>`);
 };
+
 // Search/social descriptions follow the page, not the old count-led wording (meta, og, twitter, JSON-LD).
 const setDesc = (h, text) => { const a = text.replace(/&/g, '&amp;').replace(/"/g, '&quot;'); const j = JSON.stringify(text).slice(1, -1);
   return h.replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*(")/g, `$1${a}$2`).replace(/("description":")(?:[^"\\]|\\.)*(")/g, `$1${j}$2`); };
@@ -281,6 +290,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   const t = stateTop(st);
   h = h.replace('</head>', `<meta name="robots" content="noindex">\n${CSS}\n</head>`);
   h = h.replace(/<h1 class="article-title">[\s\S]*?<\/h1>/, `<h1 class="article-title">${esc(t.headline)}</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report: ${NAMES[st]}, October 2026</p>`);
+  { const T = `MileCheck Highway Report, October 2026: ${NAMES[st]} road closures, crashes and roadwork`; h = setTitle(h, T); } // Leah 11/9: name first, then what the reader searches for
   // Keep any personal line Leah added after the stock lead (e.g. Utah's).
   h = h.replace(/<p class="article-lead">([\s\S]*?)<\/p>/, (m, inner) => { const keep = (inner.match(/national MileCheck Highway Report, October 2026<\/a>\.\s*([\s\S]*)$/) || [])[1] || ''; return `<p class="article-lead">${esc(t.lede)}${keep ? ' ' + keep : ''} Part of the <a href="../road-report-october-2026-preview.html">national report</a>.</p>`; });
   h = h.replace(/<div class="headline-nums">[\s\S]*?<\/div><\/div>/, t.nums);
@@ -323,6 +333,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   const lede = `Winter showed up on the roads in October. The first ${X.snowIceLower48} snow and ice alerts reached the lower 48, and the longest border wait was ${hm(topWait.maxMin)} at ${esc(topWait.port)}, Texas. Below: where the crashes were, the big roadwork that finished or started, and a report for every state and province.`;
   h = h.replace('</head>', `<meta name="robots" content="noindex">\n${CSS}\n</head>`);
   h = h.replace(/<h1 class="article-title">[\s\S]*?<\/h1>/, `<h1 class="article-title">Winter reaches the roads</h1><p style="margin:-6px 0 10px;font-weight:700;color:#5C6670">MileCheck Highway Report, October 2026</p>`);
+  h = setTitle(h, 'MileCheck Highway Report, October 2026: road closures, crashes and roadwork in every state');
   h = h.replace(/<p class="article-lead">[\s\S]*?<\/p>/, `<p class="article-lead">${lede}</p>`);
   h = h.replace(/<p class="hr-lede">[\s\S]*?<\/p>\s*/g, '');
   h = h.replace(/<div class="headline-nums">[\s\S]*?<\/div>\s*<\/div>/, `<div class="v2-nums">
