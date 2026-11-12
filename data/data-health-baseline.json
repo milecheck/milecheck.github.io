@@ -55,7 +55,7 @@
    "alertStatus": "live"
   },
   "DE": {
-   "cameras": 362,
+   "cameras": 360,
    "cameraSupported": true,
    "alerts": 14,
    "alertStatus": "live"
@@ -127,7 +127,7 @@
    "alertStatus": "live"
   },
   "MD": {
-   "cameras": 490,
+   "cameras": 466,
    "cameraSupported": true,
    "alerts": 58,
    "alertStatus": "live"
@@ -145,7 +145,7 @@
    "alertStatus": "live"
   },
   "MN": {
-   "cameras": 1516,
+   "cameras": 1805,
    "cameraSupported": true,
    "alerts": 294,
    "alertStatus": "live"
@@ -157,7 +157,7 @@
    "alertStatus": "live"
   },
   "MO": {
-   "cameras": 285,
+   "cameras": 193,
    "cameraSupported": true,
    "alerts": 984,
    "alertStatus": "live"
@@ -295,7 +295,7 @@
    "alertStatus": "live"
   },
   "WV": {
-   "cameras": 133,
+   "cameras": 36,
    "cameraSupported": true,
    "alerts": 88,
    "alertStatus": "live"
