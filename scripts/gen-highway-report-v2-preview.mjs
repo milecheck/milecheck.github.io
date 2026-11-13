@@ -108,7 +108,7 @@ const CSS = `<style data-v2>
 .v2-ann b{display:block;font-size:16px;margin-bottom:6px}.v2-ann p{margin:0 0 8px;font-size:15px;line-height:1.55}.v2-ann a{font-weight:700;color:#0f7a4f}
 .v2-rel{margin:4px 0 22px;font-size:13px;line-height:1.6;color:#5C6670}.v2-rel a{color:#0f7a4f;font-weight:600}
 @media (max-width:420px){.v2-rank a{grid-template-columns:96px 1fr 56px;font-size:13.5px}}
-  .spon-strip{margin:0 0 14px;padding:7px 12px;border:1px solid #cfe3d7;border-radius:8px;background:#f3f7f4;font-size:13.5px;line-height:1.35;color:#1f3b2d;}
+  .v2-recap{background:#F4F8F6;border-left:4px solid #0f7a4f;border-radius:8px;padding:14px 16px;margin:18px 0 22px}.v2-recap strong{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px}.v2-recap p{margin:0;font-size:17px;line-height:1.6}.spon-strip{margin:0 0 14px;padding:7px 12px;border:1px solid #cfe3d7;border-radius:8px;background:#f3f7f4;font-size:13.5px;line-height:1.35;color:#1f3b2d;}
   .spon-strip a{color:#0f7a4f;font-weight:700;}
 </style>`;
 
@@ -343,6 +343,11 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
     }
   }
   h = h.replace('href="index.html"', 'href="../road-report-october-2026-preview.html#by-state"');
+  // State recap paragraph (Leah 11/12: a one-paragraph narrative at the top). Test: Arizona only.
+  const RECAP = {
+    arizona: "Most of Arizona's October crash alerts came from the Phoenix area, on I-10 and the Loop 101 and Loop 202 freeways. Outside Phoenix, I-17 had the most, bunched between Black Canyon City and Cordes Junction, with a few more near Camp Verde and Sedona. Closures stacked up on SR-260 just east of Payson, where a construction zone runs from milepost 256 to 261, and around Chandler. South of Tucson, crews started crack removal on I-10 near Vail and on I-19 near Green Valley, and the I-10 bridge work between Vail and Benson came off the feed in mid-October.",
+  };
+  if (RECAP[f.replace('.html', '')]) h = h.replace(/(<p class="article-lead">[\s\S]*?<\/p>)/, `$1\n<div class="v2-recap"><strong>October recap</strong><p>${RECAP[f.replace('.html', '')]}</p></div>`);
   h = newTabs(h);
   writeFileSync(resolve(OUT_DIR, f), newTab(finish(h, `/blog/highway-report-october-2026-preview/${f}`))); made++;
 }
