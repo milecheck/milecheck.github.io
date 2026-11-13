@@ -463,7 +463,7 @@ const nums = [
 const national = [];
 if (updLong) national.push(`<p class="rc-fig"><strong>Updated ${updLong}.</strong> Alerts a feed carried for another state's road were removed, and each state is now compared with its own earlier months instead of with other states.</p>`);
 national.push(`<p class="article-lead">What road feeds published in ${MONTH_NAME} ${YEAR} across all 50 US states, British Columbia, Alberta and Manitoba. ${BW ? 'The report also covers border waits, from U.S. Customs and Border Protection.' : ''}</p>`);
-national.push(`<p class="rc-live"><a href="https://youtu.be/T5PnCbNOJl4">${svgIcon('youtube', 16)} Watch the October report in three minutes &rarr;</a></p>`);  // published 2026-11-06
+national.push(`<p class="rc-live"><a href="https://youtu.be/hPlpHymJwpU">${svgIcon('youtube', 16)} Watch the October report in three minutes &rarr;</a></p>`);  // published 2026-11-06
 // The month's story in three or four sentences, written by hand (data/highway-report-lede-<month>.json, an array of
 // paragraphs). Every number in it goes through check-numbers like the rest of the page. Skipped when the file is missing.
 let LEDE = null; try { LEDE = JSON.parse(readFileSync(resolve(ROOT, `data/highway-report-lede-${MONTH}.json`), 'utf8')); } catch {}
