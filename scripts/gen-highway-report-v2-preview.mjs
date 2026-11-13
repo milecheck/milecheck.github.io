@@ -425,12 +425,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = setTitle(h, 'MileCheck Highway Report, October 2026: road closures, crashes and roadwork in every state');
   h = h.replace(/<p class="article-lead">[\s\S]*?<\/p>/, `<p class="article-lead">${lede}</p>`);
   h = h.replace(/<p class="hr-lede">[\s\S]*?<\/p>\s*/g, '');
-  h = h.replace(/<div class="headline-nums">[\s\S]*?<\/div>\s*<\/div>/, `<div class="v2-nums">
-<div><b>${X.snowIceLower48}</b><span>snow and ice alerts, lower 48</span></div>
-<div><b>${hm(topWait.maxMin)}</b><span>longest border wait, ${esc(topWait.port)}</span></div>
-<div><b>${n(br)}</b><span>Seattle drawbridge openings</span></div>
-<div><b>${n(X.cameras)}</b><span>live DOT cameras on the map</span></div>
-</div>`);
+  h = h.replace(/<div class="headline-nums">[\s\S]*?<\/div>\s*<\/div>/, '');
   h = h.replace('How we got these numbers', 'Where these numbers come from');
   h = h.replace(/<h2 class="rc">Closures and roadwork<\/h2>/, '<h2 class="rc">Closures</h2>');
   h = h.replace(/<p>Road feeds posted [\d,]+ closure alerts and [\d,]+ roadwork alerts[^<]*<\/p>/, '');
