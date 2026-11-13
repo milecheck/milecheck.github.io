@@ -44,6 +44,8 @@ export function keyFor(rel) {
     if (rest.length === 2 && /^highway-report-[a-z]+-\d{4}-states$/.test(rest[0])) return { kind: 'article', slug: rest[0].replace(/-states$/, '') + '-' + rest[1].replace(/\.html$/, ''), size: 'mini' };
     if (rest.length !== 1 || !rest[0].endsWith('.html')) return null;
     const f = rest[0].replace(/\.html$/, '');
+    // National Highway Report pages get the same small banner (Leah 2026-11-12).
+    if (/^road-report-[a-z]+-\d{4}$/.test(f)) return { kind: 'article', slug: f, size: 'mini' };
     if (f === 'index') return { kind: 'article', slug: 'hub' };
     if (f === 'mile-markers-vs-gps') return { kind: 'article', slug: f };
     if (/^mile-markers-[a-z-]+$/.test(f)) return { kind: 'guide', slug: f.replace(/^mile-markers-/, '') };
