@@ -128,7 +128,7 @@ const clean = (h) => { let t = cutClean(h).replace(/\s+/g, ' ').replace(/^Caltra
 // A place is shown only when it is a short place name, not a copy of the headline or the route.
 const placeOf = (st, p) => { const x = String(p.place || '').trim(); if (!x || x.length > 40 || /\*\*|^[-–—]/.test(x) || /[A-Z]{2}\d{3,}|\d+\.\d+ miles/i.test(x) || (x === x.toUpperCase() && x.length > 20) || (p.route && x.replace(/\W/g, '').toUpperCase().startsWith(String(p.route).replace(/\W/g, '').toUpperCase()))) return ''; return x === x.toUpperCase() ? x.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : x; };
 const projCard = (st, p, kind) => {
-  const tag = { ongoing: ['t-on', 'Ongoing'], started: ['t-new', p.seenBasis ? 'New on the feed in October' : 'Posted to start in October'], finished: ['t-done', p.seenBasis ? 'Came off the feed in October' : 'Posted to end in October'] }[kind];
+  const tag = { ongoing: ['t-on', 'Ongoing'], started: ['t-new', p.seenBasis ? 'New on the feed this month' : 'Roadwork starting this month'], finished: ['t-done', p.seenBasis ? 'Off the feed this month' : 'Roadwork ending this month'] }[kind];
   // Archive-dated projects (feeds with no posted dates): say what we saw, never a posted date (Leah 11/12).
   const when = p.seenBasis
     ? (kind === 'finished' ? `On the feed ${p.startIsFloor ? 'since at least ' : 'from '}${fmtD(p.start)}, last seen ${fmtD(p.end)}`
@@ -196,7 +196,7 @@ function stateTop(st) {
   const list3 = (a) => (a.length <= 1 ? a.join('') : a.length === 2 ? a.join(' and ') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 
   const themes = [];
-  if (seasonal.length) themes.push('winter closures'); else if (snow) themes.push('first snow');
+  if (seasonal.length) themes.push('winter closures'); else if (snow) themes.push('snow and ice');
   if (picked.length) themes.push('roadwork');
   if (crashTop && j.crash > 0) themes.push('crashes');
   const headline = themes.length >= 2 ? `${name} in October: ${list3(themes.slice(0, 3))}` : themes[0] === 'roadwork' ? `${name} in October: the major roadwork` : themes[0] === 'winter closures' ? `${name} in October: winter closures` : themes[0] === 'first snow' ? `${name} in October: the first snow` : themes[0] === 'crashes' ? `${name} in October: where the crashes were` : `${name} in October: closures on the map`;
@@ -235,7 +235,7 @@ ${seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct.
   const winterLinks = (CHAIN[st] || seasonal.length || snow) ? [...chainLinks, ...WINTER_READS] : [];
   const hasWinterSec = SRC_HAS_WINTER.has(st);
   const wx = [];
-  if (snow) wx.push(`<li><strong>First snow</strong>${snow} alert${snow === 1 ? '' : 's'} in October named snow, ice or chains on the road. Expect more as November goes on.</li>`);
+  if (snow) wx.push(`<li><strong>Snow and ice</strong>${snow} alert${snow === 1 ? '' : 's'} in October named snow, ice or chains on the road. Expect more as November goes on.</li>`);
   if (seasonal.length) wx.push(`<li><strong>Winter closures</strong>${seasonal.length} seasonal closure${seasonal.length === 1 ? ' was' : 's were'} already on the feed by Oct. 31.${hasWinterSec ? ' The roads that close every winter, with their usual dates, are listed below.' : ''}</li>`);
   if (!hasWinterSec && CHAIN[st]) wx.push(`<li><strong>Chains</strong>${name} has winter tire and chain rules. ${A(`/chain-laws/${CHAIN[st]}/`, 'What the law requires &rarr;')}</li>`);
   if (!hasWinterSec && wx.length) wx.push(`<li><strong>Before you go</strong>${A('/chains/', 'Live chain and winter road map &rarr;')}</li>`);
@@ -332,6 +332,16 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace(/(<p class="rc-fig">Timing comes from each agency[^<]*<\/p>)/, `$1${t.winterRel}`);
   h = h.replace('<h2 class="rc">Closures</h2>', `${relLine(CRASH_READS.map(([u, x]) => A(u, x)))}\n      <h2 class="rc">Closures</h2>`);
   h = h.replace(/(<p>Live waits are at[\s\S]*?<\/p>)/, `$1${relLine(BORDER_READS.map(([u, x]) => A(u, x)))}`);
+  // Leah 11/12: the state's winter-closure map sits in the Closures section, not far below it.
+  {
+    const wm = h.match(/\n\s*<h2 class="rc">Winter closures<\/h2>[\s\S]*?(?=\n\s*<h2 |\n\s*<section |<\/article>)/);
+    const cl = h.match(/<h2 class="rc">Closures<\/h2>\s*<p class="rc-live">[\s\S]*?<\/p>/);
+    if (wm && cl) {
+      h = h.replace(wm[0], '');
+      const body = wm[0].replace(/<h2 class="rc">Winter closures<\/h2>/, '<h3 class="rc">Roads that close for winter</h3>');
+      h = h.replace(cl[0], cl[0] + body);
+    }
+  }
   h = newTabs(h);
   writeFileSync(resolve(OUT_DIR, f), newTab(finish(h, `/blog/highway-report-october-2026-preview/${f}`))); made++;
 }
@@ -348,7 +358,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   const projSec = (fin.length || sta.length) ? `<section class="v2-sec"><h2 class="rc">Major roadwork</h2><p class="v2-sub">The longest projects that finished or started in October. Each state page lists its own.</p>${fin.map(({ st, p }) => projCard(st, p, 'finished').replace('<b>', `<b>${NAMES[st]}: `)).join('')}${sta.map(({ st, p }) => projCard(st, p, 'started').replace('<b>', `<b>${NAMES[st]}: `)).join('')}</section>` : '';
   const annSec = allAnn.length ? `<section class="v2-sec"><h2 class="rc">From the agencies</h2>${allAnn.map(annCard).join('')}</section>` : '';
   const pivot = `<section class="v2-sec"><h2 class="rc">October on the roads</h2><ul class="v2-pivot">
-<li><strong>First snow</strong>${X.snowIceLower48} alerts in the lower 48 named snow, ice or chains on the road, most of them in California and Montana. Counting British Columbia, ${D.snowRoadCount}.</li>
+<li><strong>Snow and ice</strong>${X.snowIceLower48} alerts in the lower 48 named snow, ice or chains on the road, most of them in California and Montana. Counting British Columbia, ${D.snowRoadCount}.</li>
 <li><strong>Border</strong>The longest wait was ${hm(topWait.maxMin)} at ${esc(topWait.port)}, Texas, on Oct. 13. From U.S. Customs and Border Protection, saved every hour.</li>
 <li><strong>Seattle drawbridges</strong>Seattle's five drawbridges opened ${n(br)} times.</li>
 </ul></section>`;
@@ -362,7 +372,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace(/<p class="article-lead">[\s\S]*?<\/p>/, `<p class="article-lead">${lede}</p>`);
   h = h.replace(/<p class="hr-lede">[\s\S]*?<\/p>\s*/g, '');
   h = h.replace(/<div class="headline-nums">[\s\S]*?<\/div>\s*<\/div>/, `<div class="v2-nums">
-<div><b>${X.snowIceLower48}</b><span>first snow and ice alerts, lower 48</span></div>
+<div><b>${X.snowIceLower48}</b><span>snow and ice alerts, lower 48</span></div>
 <div><b>${hm(topWait.maxMin)}</b><span>longest border wait, ${esc(topWait.port)}</span></div>
 <div><b>${n(br)}</b><span>Seattle drawbridge openings</span></div>
 <div><b>${n(X.cameras)}</b><span>live DOT cameras on the map</span></div>
@@ -377,7 +387,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace('<h2 class="rc">Traffic cameras', `${relLine(BORDER_READS.map(([u, x]) => A(u, x)))}\n      <h2 class="rc">Traffic cameras`);
   h = h.replace('<h2 class="rc">Closures</h2>', `${relLine(CRASH_READS.map(([u, x]) => A(u, x)))}\n      <h2 class="rc">Closures</h2>`);
   h = newTabs(h);
-  h = setDesc(h, 'MileCheck Highway Report, October 2026: the first snow and ice alerts, winter closures, major roadwork that ended or started, border waits, and a report for every state and province.');
+  h = setDesc(h, 'MileCheck Highway Report, October 2026: snow and ice alerts, winter closures, major roadwork that ended or started, border waits, and a report for every state and province.');
   writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), newTab(finish(h, '/blog/road-report-october-2026-preview.html')));
 }
 console.log(`preview: ${made} state pages + national; majorWork states: ${Object.keys(MW).length}`);
