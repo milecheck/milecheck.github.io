@@ -121,11 +121,12 @@ const fmtD = (iso) => { const [y, m, d] = iso.split('-').map(Number); return new
 // names like SWEETWATER RD), feed prefixes and stray leading dashes removed.
 const SMALL = new Set(['TO', 'OF', 'ON', 'AT', 'IN', 'BY']), WORD3 = new Set(['NEW', 'OFF', 'END', 'AND', 'THE', 'FOR', 'ALL', 'ONE', 'TWO', 'NOW']);
 const deCap = (t) => t.replace(/\b[A-Z]{4,}\b/g, (w) => w[0] + w.slice(1).toLowerCase()).replace(/\b[A-Z]{2,3}\b/g, (w) => (SMALL.has(w) ? w.toLowerCase() : WORD3.has(w) ? w[0] + w.slice(1).toLowerCase() : w));
-const clean = (h) => { let t = String(h).replace(/\s+/g, ' ').replace(/^Caltrans (lane|full) closure\s+C\w+$/i, (m, k) => k[0].toUpperCase() + k.slice(1) + ' closure').replace(/^Scheduled Road Work on /i, 'Roadwork on ').replace(/^(Road ?Work|Construction|Scheduled Road Work|Restrictions)\s*[:-]\s*/i, '').replace(/^[-–—\s]+/, '').trim(); if (t === t.toUpperCase()) t = t.charAt(0) + t.slice(1).toLowerCase(); t = deCap(t); return t.charAt(0).toUpperCase() + t.slice(1); };
+const cutClean = (t) => { t = String(t); if (t.length < 200 || /[.!?)]$/.test(t)) return t; const i = Math.max(t.lastIndexOf('. '), t.lastIndexOf('! ')); return i > 60 ? t.slice(0, i + 1) : t.replace(/\s+\S*$/, '…'); };
+const clean = (h) => { let t = cutClean(h).replace(/\s+/g, ' ').replace(/^Caltrans (lane|full) closure\s+C\w+$/i, (m, k) => k[0].toUpperCase() + k.slice(1) + ' closure').replace(/^Scheduled Road Work on /i, 'Roadwork on ').replace(/^(Road ?Work|Construction|Scheduled Road Work|Restrictions)\s*[:-]\s*/i, '').replace(/^[-–—\s]+/, '').trim(); if (t === t.toUpperCase()) t = t.charAt(0) + t.slice(1).toLowerCase(); t = deCap(t); return t.charAt(0).toUpperCase() + t.slice(1); };
 // A place is shown only when it is a short place name, not a copy of the headline or the route.
 const placeOf = (st, p) => { const x = String(p.place || '').trim(); if (!x || x.length > 40 || /\*\*|^[-–—]/.test(x) || /[A-Z]{2}\d{3,}|\d+\.\d+ miles/i.test(x) || (x === x.toUpperCase() && x.length > 20) || (p.route && x.replace(/\W/g, '').toUpperCase().startsWith(String(p.route).replace(/\W/g, '').toUpperCase()))) return ''; return x === x.toUpperCase() ? x.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : x; };
 const projCard = (st, p, kind) => {
-  const tag = { ongoing: ['t-on', 'Ongoing'], started: ['t-new', p.seenBasis ? 'New on the feed in October' : 'Started in October'], finished: ['t-done', p.seenBasis ? 'Came off the feed in October' : 'Ended in October'] }[kind];
+  const tag = { ongoing: ['t-on', 'Ongoing'], started: ['t-new', p.seenBasis ? 'New on the feed in October' : 'Posted to start in October'], finished: ['t-done', p.seenBasis ? 'Came off the feed in October' : 'Posted to end in October'] }[kind];
   // Archive-dated projects (feeds with no posted dates): say what we saw, never a posted date (Leah 11/12).
   const when = p.seenBasis
     ? (kind === 'finished' ? `On the feed ${p.startIsFloor ? 'since at least ' : 'from '}${fmtD(p.start)}, last seen ${fmtD(p.end)}`
@@ -236,9 +237,9 @@ ${seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct.
   if (!hasWinterSec && wx.length) wx.push(`<li><strong>Before you go</strong>${A('/chains/', 'Live chain and winter road map &rarr;')}</li>`);
   if (wx.length) S.push(`<section class="v2-sec"><h2 class="rc">Heading into November</h2><ul class="v2-pivot">${wx.join('')}</ul>${hasWinterSec ? '' : relLine(winterLinks.map(([h, t]) => A(h, t)))}</section>`);
   const q = [];
-  if (crashTop) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${esc(dotOf(st).replace(/^./, (c) => c.toUpperCase()))} posted ${n(j.crash)} crash alerts in October, according to the MileCheck Highway Report. ${esc(crashTop[0])} had the most, ${crashTop[1]}.”</div>`);
+  if (crashTop && j.crash > 0) q.push(`<div class="v2-quote"><strong>Crashes</strong>“${esc(dotOf(st).replace(/^./, (c) => c.toUpperCase()))} posted ${n(j.crash)} crash alerts in October, according to the MileCheck Highway Report. ${crashTop[1] >= 2 ? `${esc(crashTop[0])} had the most, ${crashTop[1]}.` : ''}”</div>`);
   const qp = mw.finished[0] || mw.started[0];
-  if (qp && qp.route) q.push(`<div class="v2-quote"><strong>Roadwork</strong>“The ${mw.finished[0] ? 'roadwork' : 'new roadwork'} on ${esc(route(st, qp.route))} ${mw.finished[0] ? `was posted to end ${fmtD(qp.end)}` : `started ${fmtD(qp.start)} and is posted to run until ${fmtD(qp.end)}`}, according to the MileCheck Highway Report.”</div>`);
+  if (qp && qp.route) q.push(`<div class="v2-quote"><strong>Roadwork</strong>“The ${mw.finished[0] ? 'roadwork' : 'new roadwork'} on ${esc(route(st, qp.route))} ${qp.seenBasis ? (mw.finished[0] ? `was last seen on the agency's road feed ${fmtD(qp.end)}` : `first appeared on the agency's road feed ${fmtD(qp.start)}`) : mw.finished[0] ? `had a posted end date of ${fmtD(qp.end)}` : `had a posted start date of ${fmtD(qp.start)} and a posted end date of ${fmtD(qp.end)}`}, according to the MileCheck Highway Report.”</div>`);
   if (q.length) S.push(`<section class="v2-sec"><h2 class="rc">For newsrooms</h2><p class="v2-sub">Free to quote with credit to the MileCheck Highway Report and a link to this page.</p>${q.join('')}</section>`);
   const desc = `${name} in October 2026: ${list3([crashTop ? 'where the crashes were' : null, picked.length ? 'the major roadwork' : null, (seasonal.length || snow) ? 'winter closures' : null].filter(Boolean)) || 'the roads'}, and what to expect heading into November. From the MileCheck Highway Report.`;
   return { headline, lede: lede.join(' '), nums, body: S.join('\n'), desc, winterRel: relLine(winterLinks.map(([h, t]) => A(h, t))) };
@@ -277,6 +278,22 @@ const finish = (h, from) => {
   h = h.replace(/(<p class="mc-cta-sub">)<a href="#subscribe"[^>]*>[^<]*/g, `$1${LINK(from)}Get the next report &rarr;`); // national: link under the state picker
   // Leah 11/9: the month chart goes until the archive has clean earlier months.
   h = h.replace(/<h2 class="rc">Compared with earlier months<\/h2>[\s\S]*?(?=<h2|<section class="v2-sec">)/, '');
+
+  // ChatGPT review 11/12: claims the archive can't support, and internal notes that leaked onto the page.
+  h = h.replace(/, the first of the season, according to/g, ', according to')
+    .replace(/The first snow and ice alerts of the season showed up, (\d+) of them\./g, 'The feed carried $1 alerts that named snow, ice or chains.')
+    .replace(/The first snow and ice alert of the season showed up\./g, 'The feed carried one alert that named snow, ice or chains.')
+    .replace(/The first (\d+) snow and ice alerts reached the lower 48, and the longest border wait was ([^,.<]+) at ([^.<]+?)\./, '$1 alerts in the lower 48 named snow, ice or chains, and the highest hourly border-wait reading was $2 at $3.')
+    .replace(/, and how the month compares with the state's earlier months\./g, '.')
+    .replace(/ Not all feeds report the same data, so compare each place with its own earlier months\./g, ' Feeds publish different kinds of records, so these figures describe what each feed showed, not every event on the road.')
+    .replace(/ \((\w[^()<]*?) \((?:no segment text on page|segment not given on page)\)\)/g, ' ($1)').replace(/ \((?:no segment text on page|segment not given on page)\)/g, '')
+    .replace(/posted no crash alerts in October\./g, 'had no crash alerts in our October archive.')
+    .replace(/Crash alerts that mentioned a fatality<\/strong>/g, 'Crash alerts whose text mentioned a fatality</strong><span style="display:block;font-weight:400;font-size:13px;color:#5C6670;margin-top:4px">From the alert text, not an official fatality count. Two alerts can be the same crash.</span>')
+    .replace(/Seattle's drawbridges opened 706 /g, "Seattle's drawbridges opened 708 ")
+    .replace(/(\d[\d,]*) live DOT cameras on the map/g, '$1 DOT cameras on the map')
+    .replace(/<span>longest border wait, /g, '<span>highest hourly border-wait reading, ')
+    .replace(/The longest border wait in October was ([^,]+) at /g, 'The highest hourly border-wait reading in October was $1 at ')
+    .replace(/ <span style="color:#5C6670;font-weight:400">\((?:no segment text on page|segment not given on page)\)<\/span>/g, '');
   // Leah 11/12: the sponsor slot was too tall and pushed the headline down. One slim line, no Roy, no Stripe:
   // "Sponsor next month's Highway Report for only $99. Email us." with "Email us" as a mailto (inbound only, 11/9).
   h = h.replace(/<aside class="spon[^"]*" id="spon"[\s\S]*?<\/aside>/, SPON_STRIP);
