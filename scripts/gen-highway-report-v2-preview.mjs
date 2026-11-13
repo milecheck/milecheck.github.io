@@ -342,6 +342,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
       h = h.replace(cl[0], cl[0] + body);
     }
   }
+  h = h.replace('href="index.html"', 'href="../road-report-october-2026-preview.html#by-state"');
   h = newTabs(h);
   writeFileSync(resolve(OUT_DIR, f), newTab(finish(h, `/blog/highway-report-october-2026-preview/${f}`))); made++;
 }
