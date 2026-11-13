@@ -220,6 +220,8 @@ ${seasonal.length ? `<div><b>${seasonal.length}</b><span>winter closures by Oct.
 
   const S = [];
   const cards = picked.map((x) => projCard(st, x.p, x.k));
+  // ChatGPT review 11/12: when a feed can't support the section, say so instead of leaving a gap.
+  if (!cards.length) S.push(`<section class="v2-sec"><h2 class="rc">Major roadwork</h2><p class="v2-sub">No roadwork item on ${esc(dotOf(st))}'s road feed stayed listed for a month or more in October, so there is no long project to show here. Short lane closures are on the <a href="/closures/" target="_blank" rel="noopener">live closures map</a>.</p></section>`);
   if (cards.length) S.push(`<section class="v2-sec"><h2 class="rc">Major roadwork</h2><p class="v2-sub">Projects that ${esc(dotOf(st))} listed in October that run a month or longer, ${(mw.ongoing.concat(mw.started, mw.finished)).some((p) => p.seenBasis) ? 'dated by when our daily copy of the feed first and last showed them, since this feed posts no start or end dates' : 'with the dates the agency posted'}. Short lane closures are left out. Picked from across the ${CANADA.has(st) ? 'province' : 'state'}, not just the cities.</p>${cards.join('')}</section>`);
   if (ann.length) S.push(`<section class="v2-sec"><h2 class="rc">News from ${esc(dotOf(st))}</h2>${ann.map(annCard).join('')}</section>`);
   // The live pages already have an 'Areas and routes named in two or more crash alerts' box; don't repeat it.
