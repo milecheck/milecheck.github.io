@@ -581,7 +581,7 @@ if (FA) {
     national.push(`<h2 class="rc">Winter closures</h2>`);
     national.push(liveLink('../', 'chains/', 'Live chain and winter road map') + liveLink('../', 'seasonal/', 'Roads that close for winter, by state'));
     national.push(rowOpen);
-    national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Tap a state for each road's usual closing and reopening times and the agency source. We update the list each month through winter.</p>`);
+    national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Each state's page lists each road's usual closing and reopening dates and the agency source. We update the list each month through winter.</p>`);
     national.push(`<p>The snow map counts alerts only. Daily road-surface reports, such as Alaska's icy patches and packed snow on the Dalton Highway every day of ${MONTH_NAME}, are road conditions, not alerts, and are on the live chain and winter road map instead.</p>`);
     national.push(rowClose(`<div class="sec-row" style="margin:0;">${mapFig('snow', `Snow, ice and chain alerts, ${MONTH_NAME}. ${DOTS}`, alertAlt('Snow, ice and chain alerts'))}${mapFig('plows', `Where snowplows reported in ${MONTH_NAME}. Dark states published no plow positions that month.`, 'Where snowplows reported in October, one dot per reported position; states that published no plow positions are dark')}</div>`));
     const roadName = (e) => esc(String(e.name).replace(/\s*\(.*?\)\s*/g, ' ').replace(/ closure$/i, '').trim());
