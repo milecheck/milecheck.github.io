@@ -106,6 +106,7 @@
       if(!current())return;
       fail(error&&error.code===1?'Location access is off. Allow it in your browser settings, or choose a highway on the map.':error&&error.code===3?'Your location took too long. Try again or choose a highway on the map.':'Your browser could not find your location. Try again or choose a highway on the map.');
     }
+    try{if(!root.sessionStorage.getItem('mcLocOk')){if(!root.confirm('Use your location to center this? It stays in your browser. MileCheck does not store it and ad partners never get it.')){fail('Location not shared. You can choose a highway on the map.');return;}root.sessionStorage.setItem('mcLocOk','1');}}catch(e){}
     try{root.navigator.geolocation.getCurrentPosition(onPosition,onError,{enableHighAccuracy:true,timeout:15000,maximumAge:0});}catch(error){onError(error);}
   });
   var copyText='',copyBtn=doc.getElementById('marker-copy'),copied=doc.getElementById('marker-copied');

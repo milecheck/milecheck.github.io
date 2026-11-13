@@ -766,6 +766,7 @@
         L.DomEvent.preventDefault(e);
         if (a.classList.contains('cm-busy')) return;
         a.classList.add('cm-busy');
+        try { if (!sessionStorage.getItem('mcLocOk')) { if (!confirm('Use your location to center this? It stays in your browser. MileCheck does not store it and ad partners never get it.')) { a.classList.remove('cm-busy'); return; } sessionStorage.setItem('mcLocOk', '1'); } } catch (e) { if (!confirm('Use your location to center this? It stays in your browser. MileCheck does not store it and ad partners never get it.')) { a.classList.remove('cm-busy'); return; } }
         navigator.geolocation.getCurrentPosition(function (pos) {
           a.classList.remove('cm-busy');
           var ll = [pos.coords.latitude, pos.coords.longitude];
