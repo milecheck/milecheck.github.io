@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-11-12T20:10:15.065Z",
+   "fetchedAt": "2026-11-13T06:58:27.573Z",
    "ok": true,
    "rows": [
     {
@@ -19,17 +19,17 @@
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
     },
     {
-     "id": "REQ-208389",
+     "id": "REQ-208322",
      "state": "OR",
      "agency": "Oregon Department of Transportation",
      "title": "Highway Maintenance Specialist (Seasonal)",
      "multiple": false,
-     "location": "Condon, OR",
+     "location": "Parkdale, OR",
      "pay": "$4,312 to $5,988 a month",
-     "closes": "2026-10-28",
-     "closesNote": "Open until filled. May close any time after this date.",
+     "closes": "2026-11-19",
+     "closesNote": null,
      "kind": "Seasonal",
-     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Condon--ODOT--Maintenance/Highway-Maintenance-Specialist--Seasonal-_REQ-208389",
+     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Parkdale--ODOT--MS/Highway-Maintenance-Specialist--Seasonal-_REQ-208322",
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
     },
     {
@@ -77,7 +77,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-11-12T20:10:15.065Z",
+   "fetchedAt": "2026-11-13T06:58:27.573Z",
    "ok": true,
    "rows": [
     {
@@ -161,5 +161,5 @@
    ]
   }
  },
- "updatedAt": "2026-11-12T20:10:15.065Z"
+ "updatedAt": "2026-11-13T06:58:27.573Z"
 }
