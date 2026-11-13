@@ -512,7 +512,7 @@ const snap = (st, layer, caption, alt) => {
 const liveLink = (rel, path, label) => `<p class="rc-live"><a href="${rel}${path}">${label} &rarr;</a></p>`;
 const rowClose = (fig) => `</div>${fig}</div>`;
 national.push('<!--sec:crash-->');
-national.push(`<h2 class="rc">Crashes</h2>`);
+national.push(`<span id="crashes" style="display:block;position:relative;top:-70px;"></span><h2 class="rc">Crashes</h2>`);
 national.push(liveLink('../', 'closures/', 'Live crash and closure alerts on the map'));
 national.push(rowOpen);
 national.push(`<p>Road feeds in ${crashStates.length} states and provinces posted ${n(T.crash)} crash alerts in ${MONTH_NAME}. Each agency decides which crashes appear on its feed. Your state's page shows which routes had the most crash alerts. </p>`);
@@ -529,7 +529,7 @@ national.push(`<p>Road feeds in ${crashStates.length} states and provinces poste
 national.push(rowClose(mapFig('crash', `Crash alerts, ${MONTH_NAME}, one dot per alert.`, alertAlt('Crash alerts'))));
 // Fatality mentions only on states whose feeds report them (CA Highway Patrol logs, TX). Leah 2026-11-02.
 national.push('<!--sec:closure-->');
-national.push(`<h2 class="rc">Closures and roadwork</h2>`);
+national.push(`<span id="closures" style="display:block;position:relative;top:-70px;"></span><h2 class="rc">Closures and roadwork</h2>`);
 national.push(liveLink('../', 'closures/', 'Live closure and roadwork alerts on the map'));
 national.push(rowOpen);
 national.push(`<p>Road feeds posted ${n(T.closure)} closure alerts and ${n(T.construction)} roadwork alerts in ${MONTH_NAME}. Your state's page shows which routes had the most. </p>`);
@@ -556,7 +556,7 @@ if (BW && BW.byMax.length) {
 // Seattle drawbridges live on the Washington page only, time-lapse included (Leah 2026-11-02, 2026-11-06). The national page shows the camera map.
 if (mapExists('cameras')) {
   national.push('<!--sec:cameras-->');
-  national.push(`<h2 class="rc">Traffic cameras</h2>`);
+  national.push(`<span id="cameras" style="display:block;position:relative;top:-70px;"></span><h2 class="rc">Traffic cameras</h2>`);
   national.push(liveLink('../', 'cameras/', 'Live traffic cameras'));
   national.push(`<div class="sec-row">${mapFig('cameras', `Every DOT camera on MileCheck, one dot per camera.`, 'Every DOT camera on MileCheck, one dot per camera')}</div>`);
 }
@@ -578,7 +578,7 @@ if (FA) {
   const wst = [...new Set(SEASONAL.flatMap((e) => String(e.state).split('/')))].filter((k) => NAMES[k]).sort((x, y) => NAMES[x].localeCompare(NAMES[y]));
   if (wst.length) {
     national.push('<!--sec:winter-->');
-    national.push(`<h2 class="rc">Winter closures</h2>`);
+    national.push(`<span id="snow" style="display:block;position:relative;top:-70px;"></span><h2 class="rc">Winter closures</h2>`);
     national.push(liveLink('../', 'chains/', 'Live chain and winter road map') + liveLink('../', 'seasonal/', 'Roads that close for winter, by state'));
     national.push(rowOpen);
     national.push(`<p>Some mountain roads close every winter. These are the ones on our list. Each state's page lists each road's usual closing and reopening dates and the agency source. We update the list each month through winter.</p>`);
