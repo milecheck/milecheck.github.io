@@ -14,7 +14,8 @@
     "adsTxtRequired: the seller lines Journey requires, copied from the dashboard at onboarding (e.g. its mediavine.com DIRECT line). The check fails while ads are on and this is empty or a line is missing from /ads.txt.",
     "fullScreenTools: path regexes for full-screen map tools. No ad script and no inserted privacy link (it would sit under the map); they open from pages that carry both.",
     "adsTxtSource: Mediavine's hosted ads.txt for this site. /ads.txt is a verbatim copy; refresh it when the dashboard's ads.txt health check turns yellow or red. Program is Mediavine Official (not Journey), script host scripts.mediavine.com.",
-    "2026-10-30: maps/mile-markers/ moved from no-ads to the map treatment (Leah: lighter ads on the map pages): in-content ads only in the guide text below the map (.mc-guide), no sticky bar, no floating video. Verify with ?test=placeholders after Google approves, before Launch."
+    "2026-10-30: maps/mile-markers/ moved from no-ads to the map treatment (Leah: lighter ads on the map pages): in-content ads only in the guide text below the map (.mc-guide), no sticky bar, no floating video. Verify with ?test=placeholders after Google approves, before Launch.",
+    "2026-11-12: cameras/ and mountains/*/spots/ moved to noScript after Google Ad Manager rejected the account twice. Templated pages around DOT camera images read as replicated content, and some DOT terms limit commercial reuse of camera images. Remove these lines to put ads back."
   ],
   "enabled": true,
   "siteId": "d74ff19f-a5bf-47fa-a630-0a438f90c11a",
@@ -51,7 +52,18 @@
     "zh/",
     "mountain-visibility-privacy/",
     "enchantments/privacy/",
-    "enchantments/terms/"
+    "enchantments/terms/",
+    "cameras/",
+    "mountains/angeles/spots/",
+    "mountains/bachelor/spots/",
+    "mountains/baker/spots/",
+    "mountains/baldy/spots/",
+    "mountains/denali/spots/",
+    "mountains/hood/spots/",
+    "mountains/olympics/spots/",
+    "mountains/rainier/spots/",
+    "mountains/southsister/spots/",
+    "mountains/sthelens/spots/"
   ],
   "blockAll": [],
   "mapBlock": [
@@ -62,7 +74,7 @@
   "contentExpect": {
     "index.html": "story-body",
     "maps/mile-markers/index.html": "mc-guide",
-    "cameras/washington/index.html": "co-guide",
+    "cameras/washington/index.html": null,
     "road-conditions/washington/index.html": "rc-body",
     "seasonal/colorado/index.html": "sc-body",
     "blog/labor-day-weekend-2026.html": "article-wrap",
