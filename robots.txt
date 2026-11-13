@@ -9,4 +9,5 @@ Disallow: /plows?state=
 Disallow: /mileposts?state=
 Disallow: /details/camera
 Disallow: /alluvium/
+Disallow: /maptest/
 Sitemap: https://milecheckapp.com/closures-sitemap.xml

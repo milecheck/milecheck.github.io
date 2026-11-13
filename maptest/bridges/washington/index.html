@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Washington drawbridge map and opening rules | MileCheck</title>
+  <meta name="description" content="Every regulated drawbridge in Washington on one map, including the Hood Canal Bridge and Grays Harbor, plus live status for Seattle's Ship Canal bridges.">
+
+  <meta property="og:title" content="Washington Drawbridge Map — schedules + Seattle live">
+  <meta property="og:description" content="When does the drawbridge open? Every regulated Washington drawbridge with its federal opening rules — Hood Canal, Grays Harbor, and live status for Seattle.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/bridges/washington/">
+  <meta property="og:type" content="website">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Washington Drawbridge Map — schedules + Seattle live">
+  <meta name="twitter:description" content="When does the drawbridge open? Every regulated Washington drawbridge with its federal opening rules — Hood Canal, Grays Harbor, and live status for Seattle.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<style id="one-width">body>:not(header):not(footer):not(script):not(style):not(.mc-signup){max-width:1040px!important;width:auto!important;margin-left:auto!important;margin-right:auto!important;padding-left:max(16px,env(safe-area-inset-left,0px))!important;padding-right:max(16px,env(safe-area-inset-right,0px))!important;box-sizing:border-box}</style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When do Washington drawbridges open?","acceptedAnswer":{"@type":"Answer","text":"Every regulated drawbridge has a federal opening rule in 33 CFR 117 — the Hood Canal Bridge opens for vessels with one hour's notice in season, Grays Harbor bridges open on signal with notice, and Seattle's Ship Canal bridges give boats priority outside rush hours. Tap any bridge on the map for its rule."}},{"@type":"Question","name":"Is the Hood Canal Bridge open right now?","acceptedAnswer":{"@type":"Answer","text":"The Hood Canal Bridge is a floating bridge that opens its draw span for marine traffic, closing SR-104 to cars — often for 30 to 60 minutes. WSDOT announces openings; this page shows the bridge's location and opening rules, and MileCheck's app carries live WSDOT alerts for the corridor."}},{"@type":"Question","name":"Which Seattle bridges have live status?","acceptedAnswer":{"@type":"Answer","text":"Fremont, Ballard, Montlake, South Park, and 1st Ave S have live raised/lowered status from Seattle DOT — see the Seattle drawbridge page, refreshed every 30 seconds."}}],"@id":"https://milecheckapp.com/bridges/washington/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+
+  <style>
+    .br-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .br-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .br-hero h1 .accent{color:#7C3AED;}
+    .br-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
+    .br-wrap{max-width:1160px;margin:18px auto 0;padding:0 20px;display:grid;grid-template-columns:.55fr 1.45fr;gap:16px;}
+    @media(max-width:860px){.br-wrap{grid-template-columns:1fr;}}
+    .br-list{display:flex;flex-direction:column;gap:10px;}
+    .br-card{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+    .br-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .br-card.up{border-color:#DC2626;background:#FEF5F5;}
+    .br-card.up .br-dot{background:#DC2626;animation:pulse 1.6s infinite;}
+    .br-card.down .br-dot{background:#0f7a4f;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .br-nm{font-weight:800;font-size:14.5px;}
+    .br-st{font-size:12.5px;color:#5b6670;margin-top:1px;font-weight:600;}
+    .br-card.up .br-st{color:#DC2626;font-weight:800;}
+    .br-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:460px;height:64vh;background:#eef0e9;}
+    #brmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .bmk-ic{width:30px;height:30px;border-radius:50%;background:#fff;border:2.5px solid #7C3AED;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.28);}
+    .bmk-ic.bi-up{background:#DC2626;border-color:#fff;animation:pulse 1.5s infinite;}
+    .bmk-ic.bi-live{border-color:#0f7a4f;}
+    .bmk-sched{width:14px;height:14px;border-radius:50%;background:#7C3AED;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);opacity:.85;}
+    .fpop b{font-size:14px;}
+    .fpop .st-up{color:#DC2626;font-weight:800;}
+    .fpop .st-down{color:#0f7a4f;font-weight:800;}
+    .fpop .sched{color:#454e56;font-size:12.5px;line-height:1.5;margin-top:6px;max-height:220px;overflow-y:auto;}
+    .fpop .cite{color:#8A939B;font-size:11px;margin-top:6px;}
+    .br-updated{font-size:12px;color:#8A939B;font-weight:600;padding:2px 4px;}
+    .br-notes{max-width:1160px;margin:22px auto 40px;padding:0 20px;color:#5b6670;font-size:13.5px;line-height:1.6;}
+    .br-notes b{color:#0E1116;}
+    .br-cta{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:16px;margin-top:2px;}
+    .br-cta h3{font-size:15.5px;font-weight:800;margin-bottom:6px;}
+    .br-cta p{color:#5b6670;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+    .legend{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:12px 16px;font-size:12.5px;color:#5b6670;line-height:2;}
+    .bl-box{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:46vh;}
+    .bl-box .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:13.5px;display:flex;justify-content:space-between;align-items:center;}
+    .bl-search{padding:9px 14px;border-bottom:1px solid #F0F0EE;}
+    .bl-search input{width:100%;font-family:inherit;font-size:13.5px;padding:8px 11px;border:1px solid #E5E5E5;border-radius:9px;background:#FAFAF7;color:#0E1116;outline:none;}
+    .bl-rows{overflow-y:auto;}
+    .blrow{padding:10px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+    .blrow:hover{background:#F7F5EE;}
+    .blrow:last-child{border-bottom:none;}
+    .blrow .nm{font-weight:700;font-size:13px;line-height:1.35;}
+    .blrow .sub{color:#8A939B;font-size:11.5px;margin-top:1px;}
+    .blrow .chip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+    .chip.c-up{background:#DC2626;color:#fff;animation:pulse 1.6s infinite;}
+    .chip.c-live{background:#E7F5EE;color:#0f7a4f;}
+    .chip.c-sched{background:#F1EBFB;color:#7C3AED;}
+    .legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;}
+    .nav-toggle { display:none; background:none; border:0; padding:6px; cursor:pointer; line-height:0; }
+    @media (max-width: 760px){
+      .header-inner { position: relative; }
+      .nav-toggle { display:inline-flex; align-items:center; }
+      .primary-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-top:1px solid #E5E5E5; border-bottom:1px solid #E5E5E5; flex-direction:column; align-items:stretch; gap:0 !important; padding:6px 0; box-shadow:0 16px 36px rgba(0,0,0,0.10); z-index:900; }
+      .primary-nav.open { display:flex !important; }
+      .primary-nav a { padding:14px 24px !important; width:100%; font-size:16px !important; border-bottom:1px solid #F4F4F4; }
+      .primary-nav a.nav-cta { margin:10px 24px 6px; border:1px solid #0F1419; border-radius:9px; text-align:center; }
+    }
+    </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <link rel="canonical" href="https://milecheckapp.com/bridges/washington/">
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
+  <script src="/assets/site-nav.js?v=20261102-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261102-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps" aria-current="page">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/pricing/" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <div class="br-hero">
+    <h1>Washington <span class="accent">drawbridge map</span> — every bridge, every opening rule</h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Keep exploring" style="margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00704A;margin:0 0 6px;">Keep exploring</div><div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"><a href="/cameras/bellevue/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Bellevue Traffic Cameras</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/cameras/bellingham/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Bellingham Traffic Cameras</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/cameras/everett/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Everett Traffic Cameras</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a></div></nav><!-- toplinks:end -->
+    <p class="sub">Every regulated drawbridge in Washington, on one map — Hood Canal, Grays Harbor, the Columbia, and the Ship Canal. Tap any bridge for its federal opening rule. Seattle's five city drawbridges have <a href="../">live up/down status here</a>.</p>
+  </div>
+
+  <div class="br-wrap">
+    <div class="br-list" id="brList">
+      <div class="legend">
+        <span class="sw" style="background:#7C3AED;"></span>Drawbridge — tap for its opening rules<br>
+        <span style="color:#8A939B;">Seattle's five city bridges have live status on the <a href="../">Seattle page</a>.</span>
+      </div>
+      <div class="bl-box">
+        <div class="lh"><span>All Washington drawbridges</span><span id="blCount" style="color:#8A939B;font-weight:700;font-size:12px;"></span></div>
+        <div class="bl-search"><input id="blSearch" type="search" placeholder="Search bridge, road, or waterway…" aria-label="Search bridges"></div>
+        <div class="bl-rows" id="blRows"></div>
+      </div>
+      <div class="br-cta">
+        <h3>Get drawbridge + road alerts in the app</h3>
+        <p>MileCheck shows live state DOT feeds, mile markers, and bridges on the road — in all 50 states, with CarPlay and Android Auto.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=bridges-washington&mt=8" class="btn btn-primary" target="_blank" rel="noopener">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dbridges-washington" class="btn btn-primary" target="_blank" rel="noopener">Google Play</a>
+      </div>
+      <span class="br-updated" id="brUpdated">—</span>
+    </div>
+    <div class="br-mapbox"><div id="brmap"></div></div>
+  </div>
+
+  <div class="br-notes">
+    <p><b>How it works:</b> opening schedules come from the US Coast Guard’s Drawbridge Operation Regulations (33 CFR Part 117) — the federal rules every bridge tender follows. The Hood Canal Bridge draw span closes SR-104 to traffic when it opens for vessels — often 30–60 minutes. For Seattle’s Fremont, Ballard, Montlake, South Park, and 1st Ave S bridges, see the <a href="../">live Seattle page</a> (30-second refresh). Also see <a href="../florida/">Florida</a> and <a href="../new-jersey/">New Jersey</a>.</p>
+  </div>
+
+  <!-- dq:start -->
+<aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-bridges.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
+<!-- dq:end -->
+<!-- gear-card -->
+<section class="mc-gear" aria-label="Gear guides" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">
+  <div style="border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5">
+    <div style="font-weight:700;font-size:16px;margin-bottom:6px">Gear for this drive</div>
+    <p style="margin:0 0 6px">Our pick for a front and rear dash cam: <a href="https://www.amazon.com/s?k=Viofo+A139+Pro+2CH&tag=trailapps-20" target="_blank" rel="sponsored noopener" onclick="window.gtag&&gtag('event','affiliate_click',{partner:'amazon',placement:'gear-card',page_path:location.pathname})" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Viofo A139 Pro 2CH on Amazon</a></p>
+    <div style="font-size:14px;font-weight:700;margin:10px 0 4px">More picks, compared</div>
+    <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
+      <li style="margin:2px 0"><a href="/best-dash-cams-for-your-car/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best dash cams for your car</a></li>
+      <li style="margin:2px 0"><a href="/best-portable-jump-starters/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best portable jump starters</a></li>
+    </ul>
+    <div style="font-size:14px;opacity:.75">Product links go to Amazon. MileCheck earns a commission if you buy through them. The price is the same for you.</div>
+  </div>
+</section>
+<!-- /gear-card -->
+
+<!-- footer-hub:start -->
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:flex;align-items:center;min-height:44px;font-size:14.5px;line-height:1.35;padding:0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/washington/">Washington road conditions</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+          <li><a href="/how-do-i-tell-911-where-i-am-on-the-highway/">How to tell 911 where you are</a></li>
+          <li><a href="/what-should-i-do-if-i-break-down-on-the-interstate/">What to do if you break down</a></li>
+          <li><a href="/why-is-the-highway-closed/">Why is the highway closed?</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+                      <!-- qlinks:start -->
+<p class="mc-qlinks" style="max-width:760px;margin:22px auto;padding:0 20px;color:#5b6670;font:14px/1.6 Inter,-apple-system,'Segoe UI',sans-serif">More questions: <a href="/how-do-boats-ask-a-drawbridge-to-open/" style="color:#0f7a4f;font-weight:700;text-decoration:none">How do boats ask a drawbridge to open?</a> &middot; <a href="/is-there-a-drawbridge-status-api/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Is there a drawbridge status API?</a></p>
+<!-- qlinks:end -->
+<!-- related:start -->
+  <section class="mc-related" aria-label="Nearby on MileCheck">
+    <style>
+      .mc-related{max-width:760px;margin:32px auto;padding:0 16px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+      .mc-related h2{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 10px;}
+      .mc-related ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+      .mc-related a{display:block;background:#fff;border:1px solid #E4EAE6;border-radius:10px;padding:11px 13px;font-size:14px;font-weight:600;line-height:1.35;color:#0F1419;text-decoration:none;overflow-wrap:anywhere;}
+      .mc-related a:hover{border-color:#00A86B;color:#00A86B;}
+      @media (max-width:520px){.mc-related ul{grid-template-columns:1fr;}}
+    </style>
+    <h2>Nearby on MileCheck</h2>
+    <ul>
+      <li><a href="/cameras/bellevue/">Bellevue Traffic Cameras</a></li>
+      <li><a href="/cameras/bellingham/">Bellingham Traffic Cameras</a></li>
+      <li><a href="/cameras/everett/">Everett Traffic Cameras</a></li>
+      <li><a href="/cameras/olympia/">Olympia Traffic Cameras</a></li>
+      <li><a href="/cameras/seattle/">Seattle Area Traffic Cameras</a></li>
+      <li><a href="/cameras/spokane/">Spokane Traffic Cameras</a></li>
+    </ul>
+  </section>
+<!-- related:end -->
+<footer class="site-footer">
+    <div class="container">
+      <p class="footer-fineprint" style="text-align:center;">&copy; 2026 MileCheck LLC. Schedules: 33 CFR 117 (USCG) · <a href="../../index.html">milecheckapp.com</a></p>
+    </div>
+  
+<!-- mvp:start --><p style="text-align:center;font-size:14px;margin:16px 0"><a href="https://milecheckapp.com/milecheck-privacy/">Privacy Policy</a></p><!-- mvp:end --></footer>
+
+<script>
+function cfrLink(c){var m=String(c||'').match(/117\.[0-9]+/);
+  if(!m)return c||'';
+  return '<a href="https://www.ecfr.gov/current/title-33/part-117/section-'+m[0]+'" target="_blank" rel="noopener">'+c+' — full rule →</a>';}
+const SCHED=[{"n":"U.S. 101 highway bridge","la":46.971058,"lo":-123.806242,"s":"The draw of the U.S. 101 highway bridge, mile 0.1, at Aberdeen shall open on signal if at least one-hour notice is given at all times by telephone to the Washington State Department of Transportation.","w":"Chehalis River","c":"33 CFR 117.1031"},{"n":"Burlington Northern Santa Fe railroad bridge","la":47.570124,"lo":-122.352101,"s":"(c) The draw of the Burlington Northern Santa Fe railroad bridge at mile 328.0, between Pasco and Kennewick, shall open on signal from 8 a.m. to 4 p.m. At all other times the draw shall open on signal if at least 2 hour's notice is given through the General Yardmaster, Pasco, Washington.","w":"Columbia River","c":"33 CFR 117.1035(c)"},{"n":"Burlington Northern Santa Fe railroad bridge","la":47.570124,"lo":-122.352101,"s":"(a) The draw shall open on signal if at least 24 hours notice is given.","w":"Cowlitz River","c":"33 CFR 117.1037(a)"},{"n":"Hood Canal Bridge","la":47.859607,"lo":-122.623992,"s":"(b) The draw of the Hood Canal Bridge, mile 5.0, need not open for vessel traffic from 3 p.m. to 6:15 p.m. daily from 3 p.m. May 22 to 6:16 p.m. September 30, except for commercial tug and tow vessels and vessels of the U.S. Navy or vessels attending the missions of the U.S. Navy and other public vessels of the United States. At all other times the bridge will operate in accordance with paragraph (a) of this section.","w":"Hood Canal","c":"33 CFR 117.1045(b)"},{"n":"Simpson Avenue Bridge","la":46.975187,"lo":-123.860791,"s":"(c) The draw of the Simpson Avenue Bridge, mile 0.5, at Hoquiam, shall open on signal if at least one hour notice is given by telephone to the Washington State Department of Transportation. The opening signal is two prolonged blasts followed by one short blast.","w":"Hoquiam River","c":"33 CFR 117.1047(c)"},{"n":"Riverside Avenue Bridge","la":46.979774,"lo":-123.88351,"s":"(d) The draw of the Riverside Avenue Bridge, mile 0.9, at Hoquiam, shall open on signal if at least one hour notice is given by telephone to the Washington State Department of Transportation. The opening signal is two prolonged blasts followed by two short blasts.","w":"Hoquiam River","c":"33 CFR 117.1047(d)"},{"n":"Burlington Northern Santa Fe railroad bridge","la":47.570124,"lo":-122.352101,"s":"(c) The draw of the Burlington Northern Santa Fe railroad bridge, mile 0.1, shall open on signal.","w":"Lake Washington Ship Canal","c":"33 CFR 117.1051(c)"},{"n":"Ballard Bridge","la":47.658918,"lo":-122.376234,"s":"(d) The draws of the Ballard Bridge, mile 1.1, Fremont Bridge, mile 2.6, and University Bridge, mile 4.3, shall open on signal, except that: (1) The draws need not be opened for a period of up to 10 minutes after receiving an opening request, if needed to pass accumulated vehicular traffic. However, the draws shall open without delay, when requested by vessels engaged in towing operations. (2) The draws need not open from 7 a.m. to 9 a.m. and from 4 p.m. to 6 p.m. Monday through Friday, except all Federal holidays but Columbus Day for any vessel of less than 1000 tons, unless the vessel has in tow a vessel of 1000 gross tons or over. (3) Between the hours of 11 p.m. and 7 a.m. the draws shall open if at least one hour notice is given by telephone, radiotelephone, or otherwise to the drawtender at the Fremont Avenue Bridge.","w":"Lake Washington Ship Canal","c":"33 CFR 117.1051(d)"},{"n":"Fremont Bridge","la":47.647772,"lo":-122.349759,"s":"(d) The draws of the Ballard Bridge, mile 1.1, Fremont Bridge, mile 2.6, and University Bridge, mile 4.3, shall open on signal, except that: (1) The draws need not be opened for a period of up to 10 minutes after receiving an opening request, if needed to pass accumulated vehicular traffic. However, the draws shall open without delay, when requested by vessels engaged in towing operations. (2) The draws need not open from 7 a.m. to 9 a.m. and from 4 p.m. to 6 p.m. Monday through Friday, except all Federal holidays but Columbus Day for any vessel of less than 1000 tons, unless the vessel has in tow a vessel of 1000 gross tons or over. (3) Between the hours of 11 p.m. and 7 a.m. the draws shall open if at least one hour notice is given by telephone, radiotelephone, or otherwise to the drawtender at the Fremont Avenue Bridge.","w":"Lake Washington Ship Canal","c":"33 CFR 117.1051(d)"},{"n":"University Bridge","la":47.653748,"lo":-122.319608,"s":"(d) The draws of the Ballard Bridge, mile 1.1, Fremont Bridge, mile 2.6, and University Bridge, mile 4.3, shall open on signal, except that: (1) The draws need not be opened for a period of up to 10 minutes after receiving an opening request, if needed to pass accumulated vehicular traffic. However, the draws shall open without delay, when requested by vessels engaged in towing operations. (2) The draws need not open from 7 a.m. to 9 a.m. and from 4 p.m. to 6 p.m. Monday through Friday, except all Federal holidays but Columbus Day for any vessel of less than 1000 tons, unless the vessel has in tow a vessel of 1000 gross tons or over. (3) Between the hours of 11 p.m. and 7 a.m. the draws shall open if at least one hour notice is given by telephone, radiotelephone, or otherwise to the drawtender at the Fremont Avenue Bridge.","w":"Lake Washington Ship Canal","c":"33 CFR 117.1051(d)"},{"n":"Montlake Bridge","la":47.647425,"lo":-122.304617,"s":"(e) The draw of the Montlake Bridge, mile 5.2, shall open on signal, except that: (1) The draw need not open for a period of up to 10 minutes after receiving an opening request, if needed to pass accumulated vehicular traffic. However, the draw shall open without delay, when requested by vessels engaged in towing operations. (2) For any vessel or watercraft of less than 1,000 gross tons, unless the vessel has in tow a vessel of 1,000 gross tons or over, from Monday through Friday, except Federal Holidays: (i) The draw need not open from 7 a.m. to 9 a.m. and from 3:30 p.m. to 6:30 p.m. from April 30 to September 1 and from 7 a.m. to 10 a.m. and from 3:30 p.m. to 7 p.m. from September 1 to April 30. (ii) The draw need open only on the hour and half hour from 12:30 p.m. to 3:30 p.m. and from 6 p.m. to 6:30 p.m.","w":"Lake Washington Ship Canal","c":"33 CFR 117.1051(e)"},{"n":"Burlington Northern Santa Fe railroad bridge","la":47.570124,"lo":-122.352101,"s":"The draw of the Burlington Northern Santa Fe railroad bridge, mile 2.0 at Woodland, need not be opened for the passage of vessels.","w":"Lewis River","c":"33 CFR 117.1053"},{"n":"Burlington Northern Santa Fe railroad bridge","la":47.570124,"lo":-122.352101,"s":"(a) The draw of the Burlington Northern Santa Fe railroad bridge across the Snake River at mile 1.5 between Pasco and Burbank is automated and is normally maintained in the fully open to navigation position.","w":"Snake River","c":"33 CFR 117.1058(a)"},{"n":"Vessels equipped with radiotelephones may contact Burlin","la":47.570124,"lo":-122.352101,"s":"(d) Vessels equipped with radiotelephones may contact Burlington Northern Santa Fe to obtain information on the status of the bridge. Bridge status information also may be obtained by calling the commercial telephone number posted at the drawspan of the bridge.","w":"Snake River","c":"33 CFR 117.1058(d)"},{"n":"SR 529 bridge","la":48.017058,"lo":-122.187455,"s":"(c) The draws of the twin, SR 529, highway bridges across the Snohomish River, mile 3.6, at Everett shall open on signal if notice is provided at least one hour in advance. Notice for openings shall be given by marine radio, telephone or other means to the drawtender at the twin, SR 529, Highway Bridges across the Snohomish River, mile 3.6. One signal opens both draws. During freshets, a drawtender shall be in constant attendance, and the draws shall open on signal when so ordered by the District Commander.","w":"Snohomish River, Steamboat Slough, and Ebey Slough","c":"33 CFR 117.1059(c)"},{"n":"Burlington Northern Santa Fe railroad bridge","la":47.570124,"lo":-122.352101,"s":"(d) The draw of the Burlington Northern Santa Fe railroad bridge across Steamboat Slough, mile 1.0, near Marysville, shall open on signal if at least four hours notice is given. The opening signal is one prolonged blast followed by one short blast and one prolonged blast.","w":"Snohomish River, Steamboat Slough, and Ebey Slough","c":"33 CFR 117.1059(d)"},{"n":"SR 529 bridge","la":48.043638,"lo":-122.179988,"s":"(e) The draws of the twin SR 529, highway bridges across Steamboat Slough, miles 1.1 and 1.2, near Marysville, shall open on signal if notice is provided at least four hours in advance. Notice for openings shall be given by marine radio or telephone to the drawtender at the twin, SR 529, Highway Bridges across the Snohomish River, mile 3.6. One signal opens both draws. During freshets, a drawtender shall be in constant attendance, and the draws shall open on signal when so ordered by the District Commander.","w":"Snohomish River, Steamboat Slough, and Ebey Slough","c":"33 CFR 117.1059(e)"},{"n":"Burlington Northern Santa Fe Railroad Bridge","la":47.570124,"lo":-122.352101,"s":"(f) The draw of the Burlington Northern Santa Fe Railroad Bridge across Ebey Slough, mile 1.5, near Marysville, WA, shall open on signal if at least four hours notice is given. The opening signal is one prolonged blast followed by one short blast. During freshets, a draw tender shall be in constant attendance, and the draw shall open on signal when so ordered by the District Commander.","w":"Snohomish River, Steamboat Slough, and Ebey Slough","c":"33 CFR 117.1059(f)"},{"n":"Murray Morgan Bridge","la":47.253951,"lo":-122.433404,"s":"(b) The draw of the Murray Morgan Bridge, also known as the South 11th Street Bridge, across Thea Foss Waterway, previously known as City Waterway, mile 0.6, at Tacoma, shall open on signal if at least two hours notice is given. However, to obtain a bridge opening between 10 p.m. and 8 a.m. notification must be made to the City of Tacoma by 8 p.m. In emergencies, openings shall be made as soon as possible upon notification to the City of Tacoma.","w":"Tacoma Harbor","c":"33 CFR 117.1061(b)"},{"n":"Heron Street Bridge","la":46.976534,"lo":-123.804263,"s":"(c) The draws of the Heron Street Bridge, mile 0.2 and the Wishkah Street Bridge, mile 0.4, at Aberdeen, shall open on signal if at least one hour notice is given by telephone to the Washington State Department of Transportation. The opening signal for both bridges is one prolonged blast followed by two short blasts.","w":"Wishkah River","c":"33 CFR 117.1065(c)"},{"n":"Wishkah Street Bridge","la":46.977437,"lo":-123.799312,"s":"(c) The draws of the Heron Street Bridge, mile 0.2 and the Wishkah Street Bridge, mile 0.4, at Aberdeen, shall open on signal if at least one hour notice is given by telephone to the Washington State Department of Transportation. The opening signal for both bridges is one prolonged blast followed by two short blasts.","w":"Wishkah River","c":"33 CFR 117.1065(c)"}];
+
+window.mcExtraLayers={state:'WA',fires:false};
+const map=L.map('brmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
+{const P=window.__mtP||(window.__mtP=new pmtiles.Protocol());maplibregl.addProtocol('pmtiles',P.tile);const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
+function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#26302b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094'}:
+{land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#dedbd2',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f'};
+const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
+return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
+sources:{b:{type:'vector',url:'pmtiles://'+abs('wa.pmtiles')},l:{type:'vector',url:'pmtiles://'+abs('local.pmtiles')},m:{type:'vector',url:'pmtiles://'+abs('mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('poi.pmtiles')},k:{type:'vector',url:'pmtiles://'+abs('blocks.pmtiles')},
+a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
+layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
+{id:'water',type:'fill','source':'b','source-layer':'water',paint:{'fill-color':C.water}},
+{id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
+{id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
+{id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
+{id:'sr',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'state'],paint:{'line-color':C.st,'line-width':rw(.6,2.5)}},
+{id:'us',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'us'],layout:{'line-cap':'round'},paint:{'line-color':C.us,'line-width':rw(1,4)}},
+{id:'ic',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.ic,'line-width':rw(2,7.5)}},
+{id:'i',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.i,'line-width':rw(1.4,5)}},
+{id:'blk',type:'line',source:'k','source-layer':'blocks',minzoom:13,paint:{'line-color':C.minor,'line-width':['interpolate',['linear'],['zoom'],13,1,17,4],'line-opacity':.9}},{id:'blkn',type:'symbol',source:'k','source-layer':'blocks',minzoom:15,layout:{'symbol-placement':'line-center','text-field':['concat',['to-string',['*',['floor',['/',['to-number',['slice',['get','r'],0,['index-of','-',['get','r']]]],100]],100]],' block of ',['get','n']],'text-font':['bold'],'text-size':10},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5}},{id:'mp',type:'circle','source':'m','source-layer':'mp',minzoom:8,filter:['any',['>=',['zoom'],10],['==',['get','t'],1]],paint:{'circle-color':C.mp,'circle-radius':['interpolate',['linear'],['zoom'],8,2,12,4],'circle-stroke-color':C.halo,'circle-stroke-width':1}},
+{id:'mpl',type:'symbol','source':'m','source-layer':'mp',minzoom:11,layout:{'text-field':['to-string',['get','mp']],'text-font':['bold'],'text-size':10,'text-offset':[0,1]},paint:{'text-color':C.mp,'text-halo-color':C.halo,'text-halo-width':1.5}},
+{id:'ref',type:'symbol','source':'b','source-layer':'roads',filter:['all',['!=',['get','ref'],''],['any',['in',['get','c'],['literal',['interstate','us']]],['>=',['zoom'],9]]],layout:{'symbol-placement':'line','symbol-spacing':260,'text-field':['get','ref'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],6,10,12,13],'text-rotation-alignment':'viewport'},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':2}},
+{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],60000000,8,15000000,10,2000000,11,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
+{id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'text-field':['get','l'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],9,7,13,9],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}},{id:'countyn',type:'symbol',source:'q','source-layer':'county',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
+
+const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);
+(function(){
+const LAY={snowamt:['Snow (6 hr)','ndfd.conus.snowamt'],qpf:['Rain and snow water (6 hr)','ndfd.conus.qpf'],windgust:['Wind gusts','ndfd.conus.windgust'],t:['Temperature','ndfd.conus.t'],wwa:['Warnings','ndfd.conus.wwa']};
+const times={};let cur='snowamt',wms=null;map.attributionControl.setPrefix(false);if(!map.getPane('fc')){map.createPane('fc');map.getPane('fc').style.zIndex=390;map.getPane('fc').style.pointerEvents='none';}
+const box=L.control({position:'bottomleft'});
+box.onAdd=()=>{const d=L.DomUtil.create('div','fc-box');d.innerHTML='<div class="fc-row"><select id="fcLayer" aria-label="Forecast layer"><option value="">Forecast off</option>'+Object.entries(LAY).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join('')+'</select><span id="fcTime">-</span></div><input id="fcSlider" type="range" min="0" max="0" value="0" aria-label="Forecast time" disabled><div class="fc-src">NOAA National Weather Service forecast</div>';L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d};
+box.addTo(map);
+const st=document.createElement('style');st.textContent='.fc-box{background:#fff;color:#16201b;padding:8px 10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.3);font:12px -apple-system,sans-serif;min-width:230px}.fc-row{display:flex;gap:8px;align-items:center;justify-content:space-between}.fc-box select{font:inherit;padding:4px}.fc-box input{width:100%;margin-top:6px}.fc-src{color:#5b675f;font-size:10px;margin-top:2px}';document.head.appendChild(st);
+const sel=document.getElementById('fcLayer'),sl=document.getElementById('fcSlider'),lab=document.getElementById('fcTime');
+const fmt=t=>new Date(t+':00Z').toLocaleString([], {weekday:'short',hour:'numeric'});
+function fallback(k){const step=(k==='snowamt'||k==='qpf')?6:3;const out=[];const n=new Date();n.setUTCMinutes(0,0,0);n.setUTCHours(Math.ceil(n.getUTCHours()/step)*step);for(let i=0;i<(step===6?16:40);i++){out.push(new Date(n.getTime()+i*step*3600e3).toISOString().slice(0,16))}return out}
+fetch('https://digital.weather.gov/ndfd.conus/wms?REQUEST=GetCapabilities').then(r=>r.text()).then(s=>{for(const k in LAY){const m=new RegExp('<Name>'+LAY[k][1]+'</Name>[\\s\\S]*?<Dimension name="vtit"[^>]*>([^<]+)').exec(s);if(m)times[k]=m[1].split(',').filter(t=>new Date(t+':00Z')>Date.now()-3*3600e3)}}).catch(()=>{}).finally(()=>{});
+function show(){if(wms){map.removeLayer(wms);wms=null}if(!cur){sl.disabled=true;lab.textContent='-';return}const ts=times[cur]||fallback(cur);sl.max=ts.length-1;sl.disabled=false;const t=ts[Math.min(+sl.value,ts.length-1)];lab.textContent=fmt(t);
+ wms=L.tileLayer.wms('https://digital.weather.gov/ndfd.conus/wms',{layers:LAY[cur][1],format:'image/png',transparent:true,opacity:.6,pane:'fc',vtit:t,version:'1.3.0',attribution:''}).addTo(map)}
+sel.onchange=()=>{cur=sel.value;sl.value=0;show()};sl.oninput=show;
+})();
+
+}
+map.fitBounds([[45.7,-124.6],[49.0,-117.0]],{padding:[14,14]});
+
+const svgBridge=c=>'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h20"/><path d="M6 16v-5m12 5v-5"/><path d="M6 11c2.2-4 9.8-4 12 0"/></svg>';
+const svgOpen='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"><path d="M2 16h3.5m13 0H22"/><path d="M6.5 16l4.2-8m6.8 8l-4.2-8"/></svg>';
+
+// Schedule-only corpus markers (static, purple)
+const schedIndex=[]; // {name, sub, search, marker, lat, lon}
+SCHED.forEach(b=>{
+  if(b.g) return; // live-tagged bridges are drawn by the live layer
+  const ic=L.divIcon({className:'',iconSize:[14,14],iconAnchor:[7,7],html:'<div class="bmk-sched"></div>'});
+  const m=L.marker([b.la,b.lo],{icon:ic}).addTo(map)
+    .bindPopup('<div class="fpop"><b>'+b.n+'</b><div class="sched">'+b.s+'</div>'+(b.p?'<div class="sched">Bridge house: <a href="tel:'+b.p.replace(/[^0-9]/g,'')+'">'+b.p+'</a></div>':'')+'<div class="cite">'+b.w+' · '+cfrLink(b.c)+'</div></div>');
+  schedIndex.push({name:b.n,sub:b.w,search:(b.n+' '+b.w+' '+b.s).toLowerCase(),marker:m,lat:b.la,lon:b.lo});
+});
+
+// Sidebar list: live bridges first (by status), then schedule-only A→Z.
+const liveIndex=[];
+function renderList(){
+  const q=(document.getElementById('blSearch').value||'').toLowerCase().trim();
+  const rows=document.getElementById('blRows');
+  const items=[];
+  liveIndex.forEach(x=>items.push({...x,order:x.up?0:1}));
+  schedIndex.slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(x=>items.push({...x,order:2,chip:'schedule',cls:'c-sched'}));
+  const shown=items.filter(x=>!q||x.search.includes(q)).sort((a,b)=>a.order-b.order||a.name.localeCompare(b.name));
+  document.getElementById('blCount').textContent=shown.length+' of '+items.length;
+  rows.innerHTML='';
+  shown.forEach(x=>{
+    const el=document.createElement('div');
+    el.className='blrow';
+    el.innerHTML='<div><div class="nm">'+x.name+'</div><div class="sub">'+(x.sub||'')+'</div></div><span class="chip '+x.cls+'">'+x.chip+'</span>';
+    el.addEventListener('click',()=>{
+      map.flyTo([x.lat,x.lon],14,{duration:.8});
+      setTimeout(()=>x.marker.openPopup(),850);
+      if(window.innerWidth<860)document.querySelector('.br-mapbox').scrollIntoView({behavior:'smooth'});
+    });
+    rows.appendChild(el);
+  });
+}
+document.getElementById('blSearch').addEventListener('input',renderList);
+
+document.getElementById('brUpdated').textContent='Schedules per 33 CFR 117 · Seattle live status on the Seattle page';
+renderList();
+
+
+</script>
+<div id="mt-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#14532d;color:#fff;font:13px -apple-system,sans-serif;padding:6px 12px;text-align:center">Map test: MileCheck's own map, built from US government data. Washington only. Not a public page.</div>
+</body>
+</html>

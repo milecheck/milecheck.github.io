@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting to Crystal Mountain from Seattle | MileCheck</title>
+  <meta name="description" content="Driving to Crystal Mountain Resort with live cameras and DOT feeds on I-5, SR 18, SR 164 and SR 410, cell coverage, and the Chinook Pass winter closure.">
+  <link rel="canonical" href="https://milecheckapp.com/passes/crystal-mountain/">
+  <meta property="og:title" content="Getting to Crystal Mountain: Live Alerts on the Drive | MileCheck">
+  <meta property="og:description" content="Live cameras and state DOT feeds on I-5, SR 18, SR 164, and SR 410 from Seattle to Crystal Mountain, plus cell coverage and the Chinook Pass winter closure just past the resort.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/passes/crystal-mountain/">
+  <meta property="og:type" content="website">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Getting to Crystal Mountain: Live Alerts on the Drive | MileCheck">
+  <meta name="twitter:description" content="Live cameras and state DOT feeds on I-5, SR 18, SR 164, and SR 410 from Seattle to Crystal Mountain, plus cell coverage and the Chinook Pass winter closure just past the resort.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<style id="one-width">body>:not(header):not(footer):not(script):not(style):not(.mc-signup){max-width:1040px!important;width:auto!important;margin-left:auto!important;margin-right:auto!important;padding-left:max(16px,env(safe-area-inset-left,0px))!important;padding-right:max(16px,env(safe-area-inset-right,0px))!important;box-sizing:border-box}</style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far is Crystal Mountain from Seattle?","acceptedAnswer":{"@type":"Answer","text":"About 84 miles southeast of Seattle, roughly a 2-hour drive: I-5 south to WA-18 east, then WA-164 east past Enumclaw to SR 410 east."}},{"@type":"Question","name":"Is there cell service on the drive to Crystal Mountain?","acceptedAnswer":{"@type":"Answer","text":"Coverage is limited to none on SR 410 between Enumclaw and Crystal Mountain Boulevard. Download directions and any conditions you need before you leave cell range."}},{"@type":"Question","name":"Does the road to Crystal Mountain close in winter?","acceptedAnswer":{"@type":"Answer","text":"No. The access road (Enumclaw to Crystal Mountain Boulevard) stays open all winter for the ski area. SR 410 continuing east over Chinook Pass, and SR 123 over Cayuse Pass, close for the season separately, typically mid-November to late May, starting just past the resort."}},{"@type":"Question","name":"What is the elevation at Crystal Mountain?","acceptedAnswer":{"@type":"Answer","text":"Base elevation is 4,400 feet, summit 7,012 feet, per Crystal Mountain Resort's own mountain stats."}}],"@id":"https://milecheckapp.com/passes/crystal-mountain/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Mountain Passes","item":"https://milecheckapp.com/passes/"},{"@type":"ListItem","position":3,"name":"Crystal Mountain","item":"https://milecheckapp.com/passes/crystal-mountain/"}]}</script>
+  <style>
+    .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .co-hero .eyebrow{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
+    .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
+    .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
+    .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .co-stat .n.live{color:#0f7a4f;}
+    .co-stat .l{font-size:14px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:62vh;min-height:440px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+.co-layers-toggle{position:absolute;left:12px;top:84px;z-index:850;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.96);border:1px solid #E5E5E5;box-shadow:0 2px 8px rgba(0,0,0,.08);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
+    .co-layers{position:absolute;left:12px;top:122px;z-index:850;background:rgba(255,255,255,.97);border:1px solid #E5E5E5;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:6px 10px 4px;min-width:150px;font-size:12px;display:none;}
+    .co-layers.open{display:block;}
+    .co-layers .lt{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#5b6670;margin:0 0 2px;}
+    .co-layer{display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;user-select:none;color:#0E1116;font-weight:600;position:relative;}
+    .co-layer input{position:absolute;opacity:0;width:0;height:0;}
+    .co-sw{flex:none;width:24px;height:14px;border-radius:8px;background:#cfd4da;position:relative;transition:background .15s;}
+    .co-sw::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+    .co-layer input:checked+.co-sw.cam{background:#0f7a4f;}
+    .co-layer input:checked+.co-sw.alr{background:#DC2626;}
+    .co-layer input:checked+.co-sw.cnd{background:#3B82F6;}
+    .co-layer input:checked+.co-sw::after{left:12px;}
+    .co-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:1px;}
+    @media(max-width:600px){ .co-layers-toggle{top:auto;bottom:12px;}.co-layers{top:auto;bottom:54px;min-width:0;} }
+    .co-bs{position:absolute;top:12px;right:12px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:13px;color:#0f7a4f;max-width:52%;text-align:right;}
+    .crit-banner{background:#DC2626;color:#fff;font-weight:800;font-size:15px;line-height:1.4;padding:12px 20px;text-align:center;}
+    .co-card{position:absolute;bottom:12px;left:12px;width:min(320px,80%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card.closure{border:2px solid #DC2626;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card .cc-desc{font-size:13.5px;color:#3a444d;margin-top:8px;line-height:1.5;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
+    .co-guide h2{font-size:26px;margin:0 0 6px;}
+    .co-guide .lede{color:#3a444d;font-size:16px;line-height:1.6;margin:0 0 22px;}
+    .co-seg{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:20px 22px;margin-bottom:14px;}
+    .co-seg h3{font-size:19px;margin:0 0 4px;}
+    .co-seg p{color:#3a444d;font-size:15px;line-height:1.6;margin:8px 0 0;}
+    .co-seg .seg-src{display:block;font-size:12.5px;color:#5b6670;margin-top:14px !important;padding-top:10px;border-top:1px solid #F0F0F0;}
+    .co-faq .src-line{display:block;font-size:12.5px;color:#5b6670;margin-top:10px;}
+    .co-faq{max-width:1000px;margin:34px auto 0;padding:0 20px;}
+    .co-faq h2{font-size:24px;margin:0 0 14px;}
+    .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .co-faq summary{font-weight:700;font-size:16px;line-height:24px;padding:10px 0;cursor:pointer;color:#0E1116;}
+    .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-faq a:hover{text-decoration:underline;}
+    .co-cta{max-width:1000px;margin:34px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;}
+    .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .poi-icon{color:#DC2626;font-size:24px;line-height:1;text-align:center;text-shadow:0 0 3px #fff,0 0 4px #fff,0 0 5px #fff;font-weight:900;}
+    .leaflet-marker-icon,.leaflet-interactive{outline:none !important;}
+    .poi-tip{background:rgba(255,255,255,.94) !important;border:1px solid #E5E5E5 !important;font-weight:800 !important;font-size:12.5px !important;color:#0E1116 !important;padding:4px 9px !important;box-shadow:0 2px 6px rgba(0,0,0,.12) !important;}
+    .poi-tip::before{border-top-color:#E5E5E5 !important;}
+    .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    @media(max-width:600px){ #comap{height:58vh;} }
+    .spon{display:flex;align-items:center;gap:12px;min-height:74px;margin:0 0 12px;padding:12px 16px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;box-sizing:border-box;width:100%;max-width:100%;flex-shrink:0;align-self:stretch;grid-column:1/-1;}
+    .spon-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;border:1px solid #E5E5E5;border-radius:6px;padding:3px 7px;line-height:1.3;}
+    .spon-body{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-decoration:none;color:#0E1116;}
+    .spon-logo{flex:none;height:36px;width:auto;max-width:132px;object-fit:contain;}
+    .spon-text{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:#3a444d;}
+    .spon-text strong{color:#0E1116;font-weight:800;}
+    .spon-house{background:linear-gradient(90deg,#f3f7f4,#fff 45%);border-color:#cfe3d7;}
+    .spon.spon-house{min-height:96px;padding:8px 16px 8px 12px;}
+    .spon-roy{flex:none;height:80px;width:auto;margin:0;align-self:center;}
+    .spon-house .spon-text{color:#1f3b2d;}
+    .spon-house .spon-text strong{color:#0f7a4f;}
+    .spon-logo-ph{display:inline-flex;align-items:center;justify-content:center;width:96px;height:36px;border:1px dashed #b9c0c7;border-radius:6px;font-size:11px;color:#5b6670;background:#f6f7f8;}
+    .spon-preview{flex:none;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f7a4f;border-radius:6px;padding:3px 7px;}
+    .spon-cta{flex:none;font-size:13.5px;font-weight:700;color:#0f7a4f;white-space:nowrap;}
+    .spon-body:hover .spon-cta{text-decoration:underline;}
+    @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
+  </style>
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
+  <script src="/assets/new-tab.js?v=20261102-1" defer></script><!-- new-tab -->
+<style data-seo-img>:where(img[width][height]){height:auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand" style="display:inline-flex;align-items:center;gap:9px;"><img width="120" height="120" src="../../assets/app-icon-60.png" alt="" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;">MileCheck</a>
+      <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F1419" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <nav class="primary-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../maps/" class="active">Maps</a>
+        <a href="../../cameras/">Cameras</a>
+        <a href="../../states/">United States</a>
+        <a href="../../canada/">Canada</a>
+        <a href="../../index.html#story">Story</a>
+        <a href="../../index.html#b2b">B2B</a>
+        <a href="../../blog/">Blog</a>
+        <a href="/search/" class="nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><span>Search</span></a>
+        <a href="/get/" class="nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="crit-banner" id="critBanner" style="display:none"></div>
+
+  <div class="co-hero">
+    <div class="eyebrow">I-5 &middot; SR 18 &middot; SR 164 &middot; SR 410 &middot; Washington</div>
+    <h1>Getting to Crystal Mountain</h1>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- passnow:start -->
+<section class="mc-passnow" aria-label="Is the road to Crystal Mountain (SR 410) open" data-read="2026-11-13T01:50:32.913Z" style="max-width:1000px;margin:18px auto;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
+<h2 style="font-size:19px;margin:0 0 6px">Is the road to Crystal Mountain (SR 410) open today?</h2>
+<p style="margin:0"><strong>No closure listed.</strong> No closure reports within 19 mi of the road to Crystal Mountain (SR 410) in the latest WSDOT data MileCheck received.</p>
+<ul style="margin:8px 0 0 18px;padding:0"><li><strong>Chinook Pass SR 410</strong>: Bare and wet, Clear skies. Chains and traction: no restrictions posted <span style="color:#5b6670">(reported Nov 12, 5:36 AM PT)</span></li></ul>
+
+<p style="margin:10px 0 0;font-size:14px;color:#5b6670">Read from the WSDOT feed on Nov 12, 5:50 PM PT. A pass with no closure listed is not a promise it is open, and a camera picture does not show the gates. Confirm on the <a href="https://wsdot.com/travel/real-time/mountainpasses/" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">WSDOT page</a> before you leave. The map below updates live.</p>
+</section>
+<script>(function(){var s=document.currentScript.previousElementSibling;var t=Date.parse(s&&s.getAttribute('data-read'));if(!isFinite(t)||Date.now()-t<6*3600e3)return;var p=document.createElement('p');p.style.cssText='margin:0 0 8px;padding:8px 10px;border-radius:8px;background:#fff4e5;color:#7a4b00;font-weight:600';p.textContent='This summary is out of date. It was last read more than 6 hours ago. Use the live map below and the DOT page for the current status.';s.insertBefore(p,s.children[1]||null);})();</script>
+<!-- passnow:end -->
+    <p class="sub">About 84 miles southeast of Seattle, roughly a 2-hour drive: I-5 south to WA-18 east, then WA-164 east past Enumclaw to SR 410 east. Live cameras and state DOT feeds for the whole route below &mdash; the last 41 miles from Enumclaw run on SR 410 alone, with limited to no cell coverage most of the way.</p>
+    <div class="co-stats">
+      <div class="co-stat"><div class="n live" id="statCams">&mdash;</div><div class="l">live cameras on your route</div></div>
+      <div class="co-stat"><div class="n" id="statAlerts">&mdash;</div><div class="l">active alerts on your route</div></div>
+      <div class="co-stat"><div class="n live" id="statSnowLevel">&mdash;</div><div class="l" id="statSnowLevelLabel">snow level right now</div></div>
+      <div class="co-stat"><div class="n">4,400 ft</div><div class="l">base elevation</div></div>
+      <div class="co-stat"><div class="n">~84 mi</div><div class="l">southeast of Seattle</div></div>
+    </div>
+  </div>
+
+  <div class="co-wrap">
+    <div style="position:relative;">
+      <div id="comap"></div>
+      <button type="button" class="co-layers-toggle" id="layersToggle" aria-label="Map layers" title="Map layers">&#9776;</button>
+      <div class="co-layers" role="group" aria-label="Map layers" id="layersPanel">
+        <div class="lt">Map layers</div>
+        <label class="co-layer"><input type="checkbox" id="tgCam" checked><span class="co-sw cam"></span><span class="co-dot" style="background:#0f7a4f"></span>Cameras</label>
+        <label class="co-layer"><input type="checkbox" id="tgAlr" checked><span class="co-sw alr"></span><span class="co-dot" style="background:#DC2626"></span>Alerts &amp; closures</label>
+        <label class="co-layer"><input type="checkbox" id="tgCnd" checked><span class="co-sw cnd"></span><span class="co-dot" style="background:#3B82F6"></span>Road reports</label>
+      </div>
+      <div class="co-bs" id="coStatus">Loading live route data&hellip;</div>
+      <div class="co-card" id="coCard"></div>
+    </div>
+    <p style="font-size:12.5px;color:#5b6670;margin:8px 4px 0;">Cameras and alerts are matched to I-5 (near the SR 18 interchange), SR 18, SR 164, and SR 410 &mdash; not a full-state view. WSDOT does not run cameras on SR 410 past Enumclaw yet, so the climb itself shows alerts and road reports only, no camera image.</p>
+  </div>
+
+  <section class="co-guide">
+    <h2>Before you leave</h2>
+    <p class="lede">Crystal Mountain is a resort, not a highway pass &mdash; the road that gets you there is different from the seasonal mountain pass just past it.</p>
+
+    <div class="co-seg">
+      <h3>The access road stays open all winter</h3>
+      <p>SR 410 from Enumclaw to Crystal Mountain Boulevard is the resort's access road and stays open through the ski season &mdash; that's the point of the road. WSDOT's live conditions feed tracks this exact stretch under the name <strong>"Crystal to Greenwater SR 410"</strong> (2,600 ft), separate from the seasonal pass report below.</p>
+      <p class="seg-src">Source: WSDOT road-weather reports, live via MileCheck's conditions feed.</p>
+    </div>
+
+    <div class="co-seg">
+      <h3>Chinook Pass closes for the season &mdash; just past the resort</h3>
+      <p>SR 410 continuing east of Crystal Mountain Boulevard climbs to <strong>Chinook Pass (5,430 ft)</strong>, and SR 123 branches to <strong>Cayuse Pass (4,675 ft)</strong>. Both close for the season, typically mid-November through late May, between Crystal Mountain Boulevard and Morse Creek near the summit &mdash; closed for avalanche risk, limited snow storage, and no winter emergency services on that stretch. The closure doesn't affect the drive to the resort itself, only the through-route toward Yakima.</p>
+      <p class="seg-src">Source: <a href="https://wsdot.wa.gov/travel/roads-bridges/mountain-pass-closure-and-opening-dates" target="_blank" rel="noopener">WSDOT mountain pass closure and opening dates</a>.</p>
+    </div>
+
+    <div class="co-seg">
+      <h3>Cell coverage runs out at Enumclaw</h3>
+      <p>Coverage is limited to none on SR 410 between Enumclaw and Crystal Mountain Boulevard. Check the map above and download anything you need before that stretch &mdash; not after.</p>
+      <div style="margin-top:14px;padding:12px 16px;background:#FFF7ED;border-left:4px solid #F59E0B;border-radius:0 8px 8px 0;font-size:14.5px;color:#3a444d;">No service past Enumclaw. <a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=passes-crystal-mountain&mt=8" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700;text-decoration:none;">Download MileCheck</a> and put your route in now, before you lose signal &mdash; the milepost sign and any saved alerts still work with no connection.</div>
+    </div>
+
+    <div class="co-seg">
+      <h3>Parking needs a reservation on weekends</h3>
+      <p>For the 2025&ndash;26 season, Crystal Mountain requires a parking reservation on Saturdays, Sundays, and holidays. Reserving within a rolling 7-day window is free, subject to availability; a season-long reservation costs $10 per day. There's no fee for the reservation itself outside that window structure &mdash; parking is separate from your lift ticket either way.</p>
+      <p class="seg-src">Source: <a href="https://www.crystalmountainresort.com/plan-your-trip/parking-and-shuttle-information" target="_blank" rel="noopener">Crystal Mountain parking and shuttle information</a>.</p>
+    </div>
+
+    <div class="co-seg">
+      <h3>Bus options, if you'd rather skip the parking reservation</h3>
+      <p>A weekend shuttle runs from the Enumclaw Expo Center and Fairgrounds &mdash; check the resort's page for the current schedule and fare. Midweek, the <strong>Monday Ski Bus</strong> and <strong>Thursday Fun Bus</strong> pick up from the Fred Meyer parking lot at 1100 N Meridian, Puyallup, for $65 a single trip or $425 for an 8-ride pass.</p>
+      <p class="seg-src">Source: <a href="https://www.crystalmountainresort.com/plan-your-trip/parking-and-shuttle-information" target="_blank" rel="noopener">Crystal Mountain parking and shuttle information</a>, <a href="https://www.crystalmountainresort.com/plan-your-trip/groups-and-corporate/midweek-bus-groups" target="_blank" rel="noopener">midweek bus groups</a>.</p>
+    </div>
+
+    <div class="co-seg">
+      <h3>The mountain's own snow report</h3>
+      <p>For lift status, snowfall totals, and current conditions, go to Crystal Mountain's website.</p>
+      <p class="seg-src"><a href="https://www.crystalmountainresort.com/" target="_blank" rel="noopener">Crystal Mountain Resort</a> &middot; <a href="https://www.crystalmountainresort.com/discover-crystal/getting-here" target="_blank" rel="noopener">Getting here, from the resort</a> &middot; <a href="https://www.crystalmountainresort.com/plan-your-trip/tickets-and-passes/day-tickets/winter-lift-tickets" target="_blank" rel="noopener">Lift tickets</a></p>
+    </div>
+  </section>
+
+  <section class="co-faq">
+    <h2>Crystal Mountain driving questions, answered</h2>
+    <details><summary>How far is Crystal Mountain from Seattle?</summary><p>About 84 miles southeast of Seattle, roughly a 2-hour drive: I-5 south to WA-18 east, then WA-164 east past Enumclaw to SR 410 east.</p></details>
+    <details><summary>Is there cell service on the drive to Crystal Mountain?</summary><p>Coverage is limited to none on SR 410 between Enumclaw and Crystal Mountain Boulevard. Check the <a href="#comap">live map above</a> and download anything you need before you leave cell range.</p></details>
+    <details><summary>Does the road to Crystal Mountain close in winter?</summary><p>No. The access road (Enumclaw to Crystal Mountain Boulevard) stays open all winter for the ski area. SR 410 continuing east over Chinook Pass, and SR 123 over Cayuse Pass, close for the season separately, typically mid-November to late May, starting just past the resort.<span class="src-line">Source: <a href="https://wsdot.wa.gov/travel/roads-bridges/mountain-pass-closure-and-opening-dates" target="_blank" rel="noopener">WSDOT mountain pass closure and opening dates</a>.</span></p></details>
+    <details><summary>What is the elevation at Crystal Mountain?</summary><p>Base elevation is 4,400 feet, summit 7,012 feet, per <a href="https://www.crystalmountainresort.com/media/mountain-stats-and-facts" target="_blank" rel="noopener">Crystal Mountain Resort's own mountain stats</a>.</p></details>
+  </section>
+
+  <div class="co-cta">
+    <h2>state DOT feeds for the whole drive, before you leave cell range</h2>
+    <p>MileCheck carries WSDOT's live conditions and incidents for I-5, SR 18, SR 164, SR 410, Chinook Pass, and Cayuse Pass, plus every other highway on the rest of your route &mdash; check it in Enumclaw, before the coverage runs out.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=passes-crystal-mountain&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dpasses-crystal-mountain" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="co-related">More passes &amp; routes: <a href="../">all mountain passes</a> · <a href="../../mountains/rainier/roads/">Mount Rainier road cameras &amp; conditions</a> (Crystal Mountain sits right at the park's NE boundary) · <a href="../../mountains/rainier/">Is Rainier out?</a> (the summit gondola looks straight at it) · <a href="../../cameras/">all highway cameras</a> · <a href="../../maps/">all maps</a> · <a href="../blewett/">Blewett Pass</a></p>
+
+  
+  <!-- signup:start -->
+  <section class="mc-signup" id="subscribe">
+    <style>
+      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:33px 0;}
+      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 12px;max-width:44ch;}
+.mc-signup .ml-form-embedBody{padding-top:6px !important;padding-bottom:0 !important;}
+      .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
+      .mc-signup .ml-form-embedContent{display:none !important;}
+      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
+      .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup select[name="fields[state]"]{border-radius:8px !important;height:auto;min-height:44px;font-size:14px;padding:10px 12px;background:#fff;border:1px solid #cccccc;color:#333;}
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+      .mc-signup input[type=email],.mc-signup input[type=text],.mc-signup button{min-height:44px !important;box-sizing:border-box !important;}
+    </style>
+    <div class="mc-signup-inner">
+      <p class="mc-eyebrow">The Monthly Highway Report</p>
+      <h2>Get MileCheck's monthly Highway Report</h2>
+      <p class="mc-sub">Closures, crashes and roadwork from the state road feeds, once a month in your inbox. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
+      <div class="ml-embedded" data-form="LjADY8"></div>
+    </div>
+  </section>
+<!-- signup:end -->
+                <!-- dq:start -->
+<aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-passes.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
+<!-- dq:end -->
+<!-- gear-card -->
+<section class="mc-gear" aria-label="Gear guides" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">
+  <div style="border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5">
+    <div style="font-weight:700;font-size:16px;margin-bottom:6px">Gear for this drive</div>
+    <p style="margin:0 0 6px">Our pick for tight wheel-well clearance: <a href="https://www.amazon.com/s?k=Security+Chain+Company+SZ143+Super+Z6+cable+tire+chain&tag=trailapps-20" target="_blank" rel="sponsored noopener" onclick="window.gtag&&gtag('event','affiliate_click',{partner:'amazon',placement:'gear-card',page_path:location.pathname})" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Security Chain Company SZ143 Super Z6 cable tire chain on Amazon</a></p>
+    <p style="margin:0 0 6px">Our pick for a winter emergency kit: <a href="https://www.amazon.com/s?k=Vetoos+roadside+emergency+car+kit&tag=trailapps-20" target="_blank" rel="sponsored noopener" onclick="window.gtag&&gtag('event','affiliate_click',{partner:'amazon',placement:'gear-card',page_path:location.pathname})" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Vetoos roadside emergency car kit on Amazon</a></p>
+    <div style="font-size:14px;font-weight:700;margin:10px 0 4px">More picks, compared</div>
+    <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
+      <li style="margin:2px 0"><a href="/best-tire-chains-for-mountain-passes/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best tire chains for mountain passes</a></li>
+      <li style="margin:2px 0"><a href="/best-winter-car-emergency-kits/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best winter car emergency kits</a></li>
+      <li style="margin:2px 0"><a href="/best-portable-jump-starters/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best portable jump starters</a></li>
+    </ul>
+    <div style="font-size:14px;opacity:.75">Product links go to Amazon. MileCheck earns a commission if you buy through them. The price is the same for you.</div>
+  </div>
+</section>
+<!-- /gear-card -->
+
+<!-- api-link:start -->
+<aside class="mc-api-link" style="max-width:760px;margin:28px auto;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420"><h2 style="font-size:17px;margin:0 0 6px">Use this data in your own software</h2><p style="margin:0">The alerts here come from state DOT feeds. MileCheck’s API returns them for all 50 states in one format, with the highway and a mile marker where the state provides one. <a href="/api/" style="color:#0f7a4f;font-weight:700">See the API</a> &middot; <a href="/one-api-for-every-states-511-road-alerts/" style="color:#0f7a4f;font-weight:700">Is there one API for every state&rsquo;s 511 road alerts?</a> &middot; <a href="/data-sources/" style="color:#0f7a4f;font-weight:700">Where the data comes from</a></p></aside>
+<!-- api-link:end -->
+<!-- qlinks:start -->
+<p class="mc-qlinks" style="max-width:760px;margin:22px auto;padding:0 20px;color:#5b6670;font:14px/1.6 Inter,-apple-system,'Segoe UI',sans-serif">More questions: <a href="/why-is-the-highway-closed/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Why is the highway closed?</a> &middot; <a href="/are-there-high-wind-warnings-for-trucks-on-my-route/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Are there high wind warnings for trucks on my route?</a> &middot; <a href="/what-should-i-do-if-i-break-down-on-the-interstate/" style="color:#0f7a4f;font-weight:700;text-decoration:none">What should I do if I break down on the interstate?</a> &middot; <a href="/is-there-one-app-with-511-alerts-for-every-state/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Is there one app with 511 alerts for every state?</a></p>
+<!-- qlinks:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=passes-crystal-mountain&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dpasses-crystal-mountain" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../../cameras/">Highway cameras</a></li>
+            <li><a href="../../closures/">Road closures map</a></li>
+            <li><a href="../../fire/">Wildfire map</a></li>
+            <li><a href="../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera and condition data: WSDOT. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<script>
+const WORKER='https://api.milecheckapp.com';
+// Route match, not a radius-from-a-point -- Crystal Mountain is 84 miles from
+// Seattle along four named routes, and a single-point radius pulled in Puget
+// Sound ferry cameras that have nothing to do with this drive (checked 2026-09-25).
+// I-5 is capped to the SR 18 interchange stretch; the other three routes are
+// short enough that every real record on them belongs on this page.
+// I-5 capped tight to the SR 18 interchange itself, not the whole South King County
+// stretch. SR 18 capped to MP 0-5, before its junction with SR 164 near Auburn --
+// past that, SR 18 continues toward North Bend, a different destination entirely,
+// not this route (checked 2026-09-25, WSDOT's own SR 18 interchange log confirms
+// the SR 164 exit sits in the low single-digit mileposts).
+// SR 410's own mileposts start near Sumner, well west of Enumclaw -- this route
+// joins SR 410 AT Enumclaw via SR 164, not from the Sumner end, so MP 9-17 near
+// Sumner (checked 2026-09-25 against real camera coordinates) isn't actually on
+// this drive either, same overreach as the SR 18 fix above.
+const ROUTES=[{re:/^I-\s*5\b/i,mpMin:139,mpMax:144},{re:/^SR\s*18\b/i,mpMin:0,mpMax:5},{re:/^SR\s*164\b/i},{re:/^SR\s*410\b/i,mpMin:20,mpMax:999}];
+// Thin a dense camera list to one every ~3 miles per route, so the map reads as a
+// handful of waypoints along the drive, not a full inventory of every WSDOT camera
+// near the corridor -- keeps the closest-to-start and closest-to-end cameras always.
+function thin(items,minGapMi){const byRoute={};items.forEach(c=>{const key=String(c.route||'').toUpperCase().replace(/\s+/g,'');(byRoute[key]=byRoute[key]||[]).push(c);});const out=[];for(const key in byRoute){const list=byRoute[key].filter(c=>isFinite(+c.mp)).sort((a,b)=>a.mp-b.mp);let lastMp=null;list.forEach((c,i)=>{if(lastMp==null||c.mp-lastMp>=minGapMi||i===list.length-1){out.push(c);lastMp=c.mp;}});byRoute[key].filter(c=>!isFinite(+c.mp)).forEach(c=>out.push(c));}return out;}
+function onRoute(route,mp){route=String(route||'');for(const r of ROUTES){if(r.re.test(route)){if(r.mpMin==null)return true;const m=Number(mp);return isFinite(m)&&m>=r.mpMin&&m<=r.mpMax;}}return false;}
+function onRouteName(name){return /\b410\b/.test(String(name||''));}
+const ALERT_COLORS={CL:'#DC2626',AC:'#DC2626',RW:'#F59E0B',WE:'#3B82F6',HZ:'#F97316',IN:'#DC2626',OT:'#6B7280'};
+const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;
+const map=L.map('comap',{gestureHandling:TOUCH,scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:TOUCH?14:6})});
+{const P=window.__mtP||(window.__mtP=new pmtiles.Protocol());maplibregl.addProtocol('pmtiles',P.tile);const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
+function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#26302b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094'}:
+{land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#dedbd2',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f'};
+const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
+return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
+sources:{b:{type:'vector',url:'pmtiles://'+abs('wa.pmtiles')},l:{type:'vector',url:'pmtiles://'+abs('local.pmtiles')},m:{type:'vector',url:'pmtiles://'+abs('mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('poi.pmtiles')},k:{type:'vector',url:'pmtiles://'+abs('blocks.pmtiles')},
+a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
+layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
+{id:'water',type:'fill','source':'b','source-layer':'water',paint:{'fill-color':C.water}},
+{id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
+{id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
+{id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
+{id:'sr',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'state'],paint:{'line-color':C.st,'line-width':rw(.6,2.5)}},
+{id:'us',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'us'],layout:{'line-cap':'round'},paint:{'line-color':C.us,'line-width':rw(1,4)}},
+{id:'ic',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.ic,'line-width':rw(2,7.5)}},
+{id:'i',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.i,'line-width':rw(1.4,5)}},
+{id:'blk',type:'line',source:'k','source-layer':'blocks',minzoom:13,paint:{'line-color':C.minor,'line-width':['interpolate',['linear'],['zoom'],13,1,17,4],'line-opacity':.9}},{id:'blkn',type:'symbol',source:'k','source-layer':'blocks',minzoom:15,layout:{'symbol-placement':'line-center','text-field':['concat',['to-string',['*',['floor',['/',['to-number',['slice',['get','r'],0,['index-of','-',['get','r']]]],100]],100]],' block of ',['get','n']],'text-font':['bold'],'text-size':10},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5}},{id:'mp',type:'circle','source':'m','source-layer':'mp',minzoom:8,filter:['any',['>=',['zoom'],10],['==',['get','t'],1]],paint:{'circle-color':C.mp,'circle-radius':['interpolate',['linear'],['zoom'],8,2,12,4],'circle-stroke-color':C.halo,'circle-stroke-width':1}},
+{id:'mpl',type:'symbol','source':'m','source-layer':'mp',minzoom:11,layout:{'text-field':['to-string',['get','mp']],'text-font':['bold'],'text-size':10,'text-offset':[0,1]},paint:{'text-color':C.mp,'text-halo-color':C.halo,'text-halo-width':1.5}},
+{id:'ref',type:'symbol','source':'b','source-layer':'roads',filter:['all',['!=',['get','ref'],''],['any',['in',['get','c'],['literal',['interstate','us']]],['>=',['zoom'],9]]],layout:{'symbol-placement':'line','symbol-spacing':260,'text-field':['get','ref'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],6,10,12,13],'text-rotation-alignment':'viewport'},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':2}},
+{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],60000000,8,15000000,10,2000000,11,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
+{id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'text-field':['get','l'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],9,7,13,9],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}},{id:'countyn',type:'symbol',source:'q','source-layer':'county',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
+
+const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);
+(function(){
+const LAY={snowamt:['Snow (6 hr)','ndfd.conus.snowamt'],qpf:['Rain and snow water (6 hr)','ndfd.conus.qpf'],windgust:['Wind gusts','ndfd.conus.windgust'],t:['Temperature','ndfd.conus.t'],wwa:['Warnings','ndfd.conus.wwa']};
+const times={};let cur='snowamt',wms=null;map.attributionControl.setPrefix(false);if(!map.getPane('fc')){map.createPane('fc');map.getPane('fc').style.zIndex=390;map.getPane('fc').style.pointerEvents='none';}
+const box=L.control({position:'bottomleft'});
+box.onAdd=()=>{const d=L.DomUtil.create('div','fc-box');d.innerHTML='<div class="fc-row"><select id="fcLayer" aria-label="Forecast layer"><option value="">Forecast off</option>'+Object.entries(LAY).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join('')+'</select><span id="fcTime">-</span></div><input id="fcSlider" type="range" min="0" max="0" value="0" aria-label="Forecast time" disabled><div class="fc-src">NOAA National Weather Service forecast</div>';L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d};
+box.addTo(map);
+const st=document.createElement('style');st.textContent='.fc-box{background:#fff;color:#16201b;padding:8px 10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.3);font:12px -apple-system,sans-serif;min-width:230px}.fc-row{display:flex;gap:8px;align-items:center;justify-content:space-between}.fc-box select{font:inherit;padding:4px}.fc-box input{width:100%;margin-top:6px}.fc-src{color:#5b675f;font-size:10px;margin-top:2px}';document.head.appendChild(st);
+const sel=document.getElementById('fcLayer'),sl=document.getElementById('fcSlider'),lab=document.getElementById('fcTime');
+const fmt=t=>new Date(t+':00Z').toLocaleString([], {weekday:'short',hour:'numeric'});
+function fallback(k){const step=(k==='snowamt'||k==='qpf')?6:3;const out=[];const n=new Date();n.setUTCMinutes(0,0,0);n.setUTCHours(Math.ceil(n.getUTCHours()/step)*step);for(let i=0;i<(step===6?16:40);i++){out.push(new Date(n.getTime()+i*step*3600e3).toISOString().slice(0,16))}return out}
+fetch('https://digital.weather.gov/ndfd.conus/wms?REQUEST=GetCapabilities').then(r=>r.text()).then(s=>{for(const k in LAY){const m=new RegExp('<Name>'+LAY[k][1]+'</Name>[\\s\\S]*?<Dimension name="vtit"[^>]*>([^<]+)').exec(s);if(m)times[k]=m[1].split(',').filter(t=>new Date(t+':00Z')>Date.now()-3*3600e3)}}).catch(()=>{}).finally(()=>{});
+function show(){if(wms){map.removeLayer(wms);wms=null}if(!cur){sl.disabled=true;lab.textContent='-';return}const ts=times[cur]||fallback(cur);sl.max=ts.length-1;sl.disabled=false;const t=ts[Math.min(+sl.value,ts.length-1)];lab.textContent=fmt(t);
+ wms=L.tileLayer.wms('https://digital.weather.gov/ndfd.conus/wms',{layers:LAY[cur][1],format:'image/png',transparent:true,opacity:.6,pane:'fc',vtit:t,version:'1.3.0',attribution:''}).addTo(map)}
+sel.onchange=()=>{cur=sel.value;sl.value=0;show()};sl.oninput=show;
+})();
+
+}
+const CRYSTAL={lat:46.9233,lon:-121.4760};
+const SEATTLE={lat:47.6062,lon:-122.3321};
+const ENUMCLAW={lat:47.2043,lon:-121.9915};
+map.fitBounds([[SEATTLE.lat,SEATTLE.lon],[CRYSTAL.lat,CRYSTAL.lon]],{padding:[36,36]});
+// A real black diamond -- the ski-trail difficulty symbol -- for the resort
+// itself. Reserved for actual ski areas on this page, not a generic waypoint.
+L.marker([CRYSTAL.lat,CRYSTAL.lon],{icon:L.divIcon({className:'',html:'<div style="width:20px;height:20px;background:#0F1419;border:2px solid #fff;border-radius:3px;transform:rotate(45deg);box-shadow:0 1px 4px rgba(0,0,0,.4);"></div>',iconSize:[20,20],iconAnchor:[10,10]}),zIndexOffset:500}).bindTooltip('&#9670; Crystal Mountain · 4,400 ft base',{direction:'top',offset:[0,-14],permanent:true,className:'poi-tip'}).addTo(map);
+// Town waypoints, styled deliberately unlike the data-layer dots (green=camera,
+// blue=road report, red/orange=alert) so they read as "a place on the route," not
+// another data point.
+// A plain town marker -- deliberately not a diamond, which is reserved for
+// actual ski areas on this page (Enumclaw is just a waypoint, not a resort).
+function townIcon(){return L.divIcon({className:'',html:'<div style="width:12px;height:12px;background:#6B7280;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.35);"></div>',iconSize:[12,12],iconAnchor:[6,6]});}
+L.marker([ENUMCLAW.lat,ENUMCLAW.lon],{icon:townIcon(),zIndexOffset:400}).bindTooltip('Enumclaw · last cell service',{direction:'top',offset:[0,-8]}).addTo(map);
+// A visual route line, not turn-by-turn geometry -- every waypoint is a real,
+// confirmed coordinate (WSDOT's own camera positions at the I-5/SR 18 interchange,
+// the SR 18/SR 164 split near Auburn, and SR 410 near Enumclaw), connected with
+// straight segments so the map reads as "this is roughly your drive," not a
+// promise of exact road-following precision.
+L.polyline([[47.290298,-122.306118],[47.303094,-122.224602],[ENUMCLAW.lat,ENUMCLAW.lon],[47.199387,-121.978888],[CRYSTAL.lat,CRYSTAL.lon]],{color:'#0f7a4f',weight:3,opacity:.55,dashArray:'2,8',lineCap:'round'}).addTo(map);
+const camLayer=L.layerGroup().addTo(map);
+const alrLayer=L.layerGroup().addTo(map);
+const cndLayer=L.layerGroup().addTo(map);
+let CAMS=[],ALERTS=[],CONDS=[],showCam=true,showAlr=true,showCnd=true;
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1000));}return null;}
+// Cut at a word boundary with an ellipsis, not a hard character slice -- a plain
+// .slice(0,140) produced "...traffic wil" mid-word with no indication it was cut.
+function clean(t,n){const s=String(t==null?'':t).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();if(s.length<=n)return s;return s.slice(0,n).replace(/\s+\S*$/,'')+'…';}
+async function loadCams(){const d=await fetchJSON(WORKER+'/cameras?state=WA',3);const out=[];for(const c of ((d&&d.cameras)||[])){if(c.isActive===false||!c.imageUrl)continue;if(!onRoute(c.route,c.mile))continue;out.push({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:c.route,mp:c.mile,img:c.imageUrl});}return out;}
+async function loadAlerts(){const d=await fetchJSON(WORKER+'/incidents?state=WA',3);const out=[];for(const a of ((d&&d['incident-reports'])||[])){const sl=a.location&&a.location['start-location'];const routeId=a.location&&a.location['route-id'];if(!sl||!onRoute(routeId,sl['start-mile-marker']))continue;if(!isFinite(+sl['start-lat'])||!isFinite(+sl['start-long']))continue;if(Date.parse(a['end-time'])<Date.now())continue;out.push({lat:+sl['start-lat'],lon:+sl['start-long'],type:a['event-type-id']||'OT',mp:sl['start-mile-marker'],title:clean(a.headline||a.description||a['impact-desc']||'Incident',140),desc:clean(a.description||a['impact-desc']||'',240),route:routeId,t0:Date.parse(a['start-time']||''),t1:Date.parse(a['end-time']||'')});}return out;}
+async function loadConds(){const d=await fetchJSON(WORKER+'/conditions?state=WA',3);const out=[];for(const r of ((d&&d['road-weather-reports'])||[])){const name=r['location-name']||(r.location&&r.location['location-name'])||'';if(!onRouteName(name))continue;const sl=r.location&&r.location['start-location'];const lat=+(r.latitude!=null?r.latitude:(sl&&sl['start-lat']));const lon=+(r.longitude!=null?r.longitude:(sl&&sl['start-long']));if(!isFinite(lat)||!isFinite(lon))continue;out.push({lat,lon,name:clean(name,80),cond:clean(r['road-surface-condition'],220),elev:r.elevation});}return out;}
+const cardEl=document.getElementById('coCard');
+function showCard(html,isClosure){cardEl.className='co-card'+(isClosure?' closure':'');cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+function bust(u){return u+(u.includes('?')?'&':'?')+'t='+Date.now();}
+function camCard(c){return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · WSDOT</div><a href="'+c.img+'" target="_blank" rel="noopener"><img class="cc-img" src="'+bust(c.img)+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function alrCard(a){var pl=!liveNow(a)&&a.t0>Date.now();return (pl?'<div class="cc-meta" style="color:#92400e;font-weight:700">Planned, not in effect now. Starts '+new Date(a.t0).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</div>':'')+'<div class="cc-title">'+esc(a.title)+'</div><div class="cc-meta">'+esc(a.route||'')+(a.mp>0?' · MP '+Math.round(a.mp):'')+'</div>'+(a.desc&&a.desc!==a.title?'<div class="cc-desc">'+esc(a.desc)+'</div>':'');}
+function cndCard(c){return '<div class="cc-title">'+esc(c.name)+'</div><div class="cc-meta">'+(c.elev?c.elev+' ft':'')+'</div><div class="cc-desc">'+esc(c.cond)+'</div>';}
+function liveNow(a){var n=Date.now();return !(a.t0>n)&&!(a.t1<n);}
+// What is closed and how completely, clause by clause. A ramp, exit, connector, shoulder or rest area
+// closure is never a highway closure, even when it says "full closure". Negations and "reopened"
+// count as no closure. No stated extent is unspecified, not full. ChatGPT review 3, 2026-10-08.
+function closureKind(t){var r={none:0,unspecified:1,partial:2,full:3},k='none';String(t||'').toLowerCase().split(/[.;]+/).forEach(function(c){if(!/clos/.test(c)||/\b(no|not)\s+(a\s+)?(full\s+)?(closure|closed)|\breopen/.test(c))return;var feat=/(on-?ramp|off-?ramp|\bramps?\b|connector|rest area|shoulder)/.test(c)||/\bexit\b/.test(c.replace(/\b(near|at|past|before|after|by|from|to|between)\s+exit\b/g,''));var full=/(all lanes (are )?closed|roadway is closed|full closure|closed in both directions|\b(highway|hwy|road|roadway|route|pass|interstate|(i|us|sr|ca|or|wa|id|mt|ut|co|nv|az)-?\s?\d+[a-z]?)\s+(is\s+|are\s+)?closed\b)/.test(c);var x=feat?'partial':full?'full':/\blanes?\b/.test(c)?'partial':'unspecified';if(r[x]>r[k])k=x;});return k;}
+function isFullClosure(a){if(!liveNow(a))return false;return a.type==='CL'&&closureKind(a.title+' '+(a.desc||''))==='full';}
+function draw(){camLayer.clearLayers();alrLayer.clearLayers();cndLayer.clearLayers();
+  if(showCam)CAMS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(6),color:'#fff',weight:1.5,fillColor:'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c),false)).addTo(camLayer));
+  if(showAlr)ALERTS.forEach(a=>{const cl=a.type==='CL'&&liveNow(a);L.circleMarker([a.lat,a.lon],{radius:RS(cl?10:7),color:'#fff',weight:cl?2.5:1.5,fillColor:ALERT_COLORS[a.type]||'#6B7280',fillOpacity:liveNow(a)?1:.35}).on('click',()=>showCard(alrCard(a),cl)).addTo(alrLayer);});
+  if(showCnd)CONDS.forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(8),color:'#fff',weight:1.5,fillColor:'#3B82F6',fillOpacity:.95}).on('click',()=>showCard(cndCard(c),false)).addTo(cndLayer));
+  const bits=[];if(showCam)bits.push(CAMS.length+' cameras');if(showAlr)bits.push(ALERTS.length+' alerts');if(showCnd)bits.push(CONDS.length+' road reports');document.getElementById('coStatus').textContent=bits.length?bits.join(' · ')+' on this route':'Toggle a layer to view route data';}
+document.getElementById('layersToggle').onclick=()=>{document.getElementById('layersPanel').classList.toggle('open');};
+document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
+document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
+document.getElementById('tgCnd').onchange=e=>{showCnd=e.target.checked;draw();};
+Promise.all([loadCams(),loadAlerts(),loadConds()]).then(([c,a,w])=>{CAMS=thin(c,3);ALERTS=a;CONDS=w;document.getElementById('statCams').textContent=CAMS.length;document.getElementById('statAlerts').textContent=ALERTS.filter(liveNow).length;draw();const fc=ALERTS.filter(isFullClosure);if(fc.length){const bn=document.getElementById('critBanner');bn.innerHTML='⚠ '+fc.length+' full closure'+(fc.length>1?'s':'')+' on your route: '+fc.slice(0,3).map(x=>esc(x.route||'road')+(x.mp>0?' near MP '+Math.round(x.mp):'')).join(', ')+'.';bn.style.display='block';}}).catch(()=>{document.getElementById('coStatus').textContent='Live data is unavailable right now. Try again shortly.';});
+// Snow level (not snow depth) -- the elevation where NWS's grid forecast expects
+// rain to turn to snow right now, at Crystal Mountain's coordinates. Real NWS
+// data (api.weather.gov gridpoints, field "snowLevel", meters), not a guess --
+// no snow-depth station is verified for this resort, so this stat stops at what's
+// actually confirmed live, same discipline as the rest of this page.
+async function loadSnowLevel(){
+  try{
+    const pt=await fetchJSON('https://api.weather.gov/points/'+CRYSTAL.lat.toFixed(4)+','+CRYSTAL.lon.toFixed(4),2);
+    const gridUrl=pt&&pt.properties&&pt.properties.forecastGridData;
+    const grid=gridUrl?await fetchJSON(gridUrl,2):null;
+    const vals=grid&&grid.properties&&grid.properties.snowLevel&&grid.properties.snowLevel.values;
+    if(!vals||!vals.length)throw 0;
+    const meters=vals[0].value;
+    const ft=Math.round(meters*3.28084/50)*50;
+    document.getElementById('statSnowLevel').textContent=ft.toLocaleString()+' ft';
+    document.getElementById('statSnowLevelLabel').textContent='NWS snow level now';
+  }catch(e){
+    document.getElementById('statSnowLevel').textContent='—';
+    document.getElementById('statSnowLevelLabel').textContent='snow level unavailable';
+  }
+}
+loadSnowLevel();
+</script>
+
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
+  <script src="/assets/state-pick.js" defer></script>
+<div id="mt-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#14532d;color:#fff;font:13px -apple-system,sans-serif;padding:6px 12px;text-align:center">Map test: MileCheck's own map, built from US government data. Washington only. Not a public page.</div>
+</body>
+</html>

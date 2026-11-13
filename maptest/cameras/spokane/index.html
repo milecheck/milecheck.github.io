@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spokane Traffic Cameras | MileCheck</title>
+  <meta name="description" content="Spokane traffic cameras on one map. WSDOT highway cameras on I-90 and other main roads, with the latest image from each.">
+  <link rel="canonical" href="https://milecheckapp.com/cameras/spokane/">
+
+  <meta property="og:title" content="Spokane Traffic Cameras | MileCheck">
+  <meta property="og:description" content="Spokane traffic cameras on one map. WSDOT highway cameras on I-90 and other main roads, with the latest image from each.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/cameras/spokane/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spokane Traffic Cameras | MileCheck">
+  <meta name="twitter:description" content="Spokane traffic cameras on one map. WSDOT highway cameras on I-90 and other main roads, with the latest image from each.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<style id="one-width">body>:not(header):not(footer):not(script):not(style):not(.mc-signup){max-width:1040px!important;width:auto!important;margin-left:auto!important;margin-right:auto!important;padding-left:max(16px,env(safe-area-inset-left,0px))!important;padding-right:max(16px,env(safe-area-inset-right,0px))!important;box-sizing:border-box}</style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where can I see Spokane traffic cameras?","acceptedAnswer":{"@type":"Answer","text":"On the map above. The dots are WSDOT highway cameras, with the route and mile marker where the agency provides one. For cameras across the state, see Washington traffic cameras."}},{"@type":"Question","name":"Do I need an account to view the cameras?","acceptedAnswer":{"@type":"Answer","text":"No. You can view the cameras on this website without an account. The MileCheck app is a paid subscription with a free trial. It shows highway cameras and your mile marker as you drive."}},{"@type":"Question","name":"Which highways have cameras in Spokane?","acceptedAnswer":{"@type":"Answer","text":"Watch I-90, US-395 and US-2."}},{"@type":"Question","name":"How do I check Spokane traffic before I leave?","acceptedAnswer":{"@type":"Answer","text":"Open the map above and tap a camera near your route to see its latest image. Images refresh every few minutes, so check the time on the picture. The app updates your mile marker as you drive."}}],"@id":"https://milecheckapp.com/cameras/spokane/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Cameras","item":"https://milecheckapp.com/cameras/"},{"@type":"ListItem","position":3,"name":"Spokane Cameras","item":"https://milecheckapp.com/cameras/spokane/"}]}</script>
+  <style>
+    .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
+    .co-hero .spon{margin:0 0 18px;}
+    .co-hero .eyebrow{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
+    .co-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;}
+    .co-hero .sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:760px;}
+    .co-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;}
+    .co-stat{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:10px 16px;min-width:120px;}
+    .co-stat .n{font-size:24px;font-weight:800;color:#0E1116;line-height:1;}
+    .co-stat .n.live{color:#0f7a4f;}
+    .co-stat .l{font-size:14px;color:#5b6670;margin-top:4px;font-weight:600;}
+    .co-wrap{max-width:1160px;margin:16px auto 0;padding:0 20px;}
+    #comap{width:100%;height:66vh;min-height:460px;border-radius:16px;border:1px solid #E5E5E5;overflow:hidden;scroll-margin-top:76px;}
+    .co-bs{position:absolute;top:12px;left:56px;z-index:800;background:rgba(255,255,255,.94);border:1px solid #E5E5E5;border-radius:10px;padding:8px 14px;font-weight:800;font-size:14px;color:#0f7a4f;}
+    .co-card{position:absolute;top:12px;right:12px;width:min(300px,44%);max-height:calc(100% - 24px);overflow:auto;z-index:900;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.20);padding:12px 14px;display:none;}
+    .co-card .cx{position:absolute;top:8px;right:8px;border:0;background:#f0f0ee;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:16px;line-height:1;color:#5b6670;}
+    .co-card .cc-title{font-weight:800;font-size:15px;padding-right:26px;line-height:1.3;}
+    .co-card .cc-meta{font-size:12.5px;color:#5b6670;margin-top:3px;}
+    .co-card img.cc-img{width:100%;border-radius:8px;margin-top:8px;display:block;background:#f0f0ee;min-height:40px;}
+    .co-guide{max-width:1000px;margin:40px auto 0;padding:0 20px;}
+    .co-guide h2{font-size:26px;margin:0 0 6px;}
+    .co-guide p{color:#3a444d;font-size:16px;line-height:1.65;margin:0 0 14px;}
+    .co-guide a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-faq{max-width:1000px;margin:24px auto 0;padding:0 20px;}
+    .co-faq h2{font-size:24px;margin:0 0 14px;}
+    .co-faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .co-faq summary{font-weight:700;font-size:16px;line-height:24px;padding:10px 0;cursor:pointer;color:#0E1116;}
+    .co-faq p{color:#3a444d;font-size:15px;line-height:1.6;margin:10px 0 0;}
+    .co-faq a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .co-cta{max-width:1000px;margin:24px auto 40px;padding:26px 22px;border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);text-align:center;}
+    .co-cta h2{font-size:24px;margin:0 0 8px;}
+    .co-cta p{color:#3a444d;font-size:15.5px;line-height:1.6;margin:0 auto 16px;max-width:560px;}
+    .co-cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .co-cta a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .co-cta a.primary{background:#0f7a4f;color:#fff;}
+    .co-cta a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .co-related{max-width:1000px;margin:0 auto 40px;padding:0 20px;color:#5b6670;font-size:14px;}
+    .co-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    @media(max-width:600px){ #comap{height:58vh;} .co-bs{font-size:12.5px;padding:6px 10px;} .co-card{width:60%;} }
+
+  </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
+<style data-seo-img>:where(img[width][height]){height:auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
+  <script src="/assets/site-nav.js?v=20261102-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261102-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras" aria-current="page">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/pricing/" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <div class="co-hero">
+
+    <div class="eyebrow">Live traffic cameras · Spokane · WSDOT</div>
+    <h1>Spokane traffic cameras</h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Keep exploring" style="margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00704A;margin:0 0 6px;">Keep exploring</div><div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"><a href="/cameras/washington/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">WSDOT cameras and road conditions in Washington</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/road-conditions/washington/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Road conditions</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Washington road conditions, snow and chains</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/cameras/bellevue/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Bellevue Traffic Cameras</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a></div></nav><!-- toplinks:end --><!-- app-block:start --><div class="mc-app-block" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:12px 0 16px;padding:12px 14px;border:1px solid #E4EAE6;border-radius:12px;background:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif"><span style="flex:1 1 220px;font-size:14px;line-height:1.4;color:#2a333b"><b style="color:#0E1116">Your mile marker on screen as you drive.</b> Plus live alerts and cameras in the MileCheck app.</span><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&amp;ct=cameras-spokane-block&amp;mt=8" target="_blank" rel="noopener" style="background:#0E1116;color:#fff;border-radius:10px;padding:0 18px;min-height:44px;display:inline-flex;align-items:center;font-size:15px;font-weight:700;text-decoration:none">App Store</a><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&amp;referrer=utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3Dcameras-spokane-block" target="_blank" rel="noopener" style="background:#0E1116;color:#fff;border-radius:10px;padding:0 18px;min-height:44px;display:inline-flex;align-items:center;font-size:15px;font-weight:700;text-decoration:none">Google Play</a></div><!-- app-block:end -->
+    <p class="sub">See Spokane traffic before you leave. WSDOT highway cameras around Spokane on one map. Tap any camera for the latest image.</p>
+
+    <div class="co-stats">
+      <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras in Spokane</div></div>
+      <div class="co-stat"><div class="n" style="font-size:16px;padding-top:4px">WSDOT</div><div class="l">camera source</div></div>
+    </div>
+  </div>
+
+  <div class="co-wrap">
+    <div style="position:relative;">
+      <div id="comap"></div>
+      <div class="co-bs" id="coStatus">Loading live Spokane cameras…</div>
+      <div class="co-card" id="coCard"></div>
+    </div>
+  </div>
+
+  <section class="co-guide">
+    <h2>Traffic cameras across Spokane</h2>
+    <p>WSDOT runs the highway cameras around Spokane.</p>
+    <p>Watch I-90, US-395 and US-2.</p>
+    <p>Every camera on this map comes straight from WSDOT and is tagged with the route and mile marker where the agency provides it. Tap a camera dot to open its latest image; tap the image to see it full-size. For cameras beyond the metro, see <a href="../washington/">Washington traffic cameras</a> or <a href="../">every highway camera</a>.</p>
+  </section>
+
+  <section class="co-faq">
+    <h2>Spokane traffic camera questions, answered</h2>
+    <details><summary>Where can I see Spokane traffic cameras?</summary><p>On the <a href="#comap">map above</a>. The dots are WSDOT highway cameras, with the route and mile marker where the agency provides one. For cameras across the state, see <a href="../washington/">Washington traffic cameras</a>.</p></details>
+    <details><summary>Do I need an account to view the cameras?</summary><p>No. You can view the cameras on this website without an account. The <a href="/get/" target="_blank" rel="noopener">MileCheck app</a> is a paid subscription with a free trial. It shows highway cameras and your mile marker as you drive.</p></details>
+    <details><summary>Which highways have cameras in Spokane?</summary><p>Watch I-90, US-395 and US-2.</p></details>
+    <details><summary>How do I check Spokane traffic before I leave?</summary><p>Open the <a href="#comap">map above</a> and tap a camera near your route to see its latest image. Images refresh every few minutes, so check the time on the picture. The app updates your mile marker as you drive.</p></details>
+  </section>
+
+  <div class="co-cta">
+    <h2>MileCheck for driving in and around Spokane</h2>
+    <p>The MileCheck app shows your mile marker as you drive, highway cameras, and live road alerts on your route. It runs on CarPlay and Android Auto.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-spokane&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcameras-spokane" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
+  <p class="co-related">More: <a href="../washington/">Washington cameras</a> · <a href="../">all highway cameras</a> · <a href="../../corridors/">interstate corridors</a> · <a href="../../maps/">all maps</a></p>
+
+  <!-- gear-card -->
+<section class="mc-gear" aria-label="Gear guides" style="max-width:760px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box">
+  <div style="border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5">
+    <div style="font-weight:700;font-size:16px;margin-bottom:6px">Gear for this drive</div>
+    <p style="margin:0 0 6px">Our pick for a front and rear dash cam: <a href="https://www.amazon.com/s?k=Viofo+A139+Pro+2CH&tag=trailapps-20" target="_blank" rel="sponsored noopener" onclick="window.gtag&&gtag('event','affiliate_click',{partner:'amazon',placement:'gear-card',page_path:location.pathname})" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Viofo A139 Pro 2CH on Amazon</a></p>
+    <div style="font-size:14px;font-weight:700;margin:10px 0 4px">More picks, compared</div>
+    <ul style="margin:0 0 8px;padding-left:20px;list-style:disc">
+      <li style="margin:2px 0"><a href="/best-dash-cams-for-your-car/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best dash cams for your car</a></li>
+      <li style="margin:2px 0"><a href="/best-winter-car-emergency-kits/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best winter car emergency kits</a></li>
+      <li style="margin:2px 0"><a href="/best-portable-tire-inflators/" style="color:#0f7a4f;text-decoration:underline;font-weight:600">Best portable tire inflators</a></li>
+    </ul>
+    <div style="font-size:14px;opacity:.75">Product links go to Amazon. MileCheck earns a commission if you buy through them. The price is the same for you.</div>
+  </div>
+</section>
+<!-- /gear-card -->
+
+<!-- dq:start -->
+<aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-cameras.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
+<!-- dq:end -->
+<!-- footer-hub:start -->
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:flex;align-items:center;min-height:44px;font-size:14.5px;line-height:1.35;padding:0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/washington/">Washington road conditions</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+          <li><a href="/how-do-i-tell-911-where-i-am-on-the-highway/">How to tell 911 where you are</a></li>
+          <li><a href="/what-should-i-do-if-i-break-down-on-the-interstate/">What to do if you break down</a></li>
+          <li><a href="/why-is-the-highway-closed/">Why is the highway closed?</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+  <!-- related:start -->
+  <section class="mc-related" aria-label="Nearby on MileCheck">
+    <style>
+      .mc-related{max-width:760px;margin:32px auto;padding:0 16px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+      .mc-related h2{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 10px;}
+      .mc-related ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+      .mc-related a{display:block;background:#fff;border:1px solid #E4EAE6;border-radius:10px;padding:11px 13px;font-size:14px;font-weight:600;line-height:1.35;color:#0F1419;text-decoration:none;overflow-wrap:anywhere;}
+      .mc-related a:hover{border-color:#00A86B;color:#00A86B;}
+      @media (max-width:520px){.mc-related ul{grid-template-columns:1fr;}}
+    </style>
+    <h2>Nearby on MileCheck</h2>
+    <ul>
+      <li><a href="/cameras/washington/">WSDOT cameras and road conditions in Washington</a></li>
+      <li><a href="/road-conditions/washington/">Washington road conditions, snow and chains</a></li>
+      <li><a href="/cameras/bellevue/">Bellevue Traffic Cameras</a></li>
+      <li><a href="/cameras/bellingham/">Bellingham Traffic Cameras</a></li>
+      <li><a href="/blog/highway-report-october-2026-states/washington.html">Washington road report, October 2026</a></li>
+      <li><a href="/blog/mile-markers-washington.html">Highway Mile Markers in Washington State</a></li>
+    </ul>
+  </section>
+<!-- related:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=cameras-spokane&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dcameras-spokane" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../">Highway cameras</a></li>
+            <li><a href="../../closures/">Road closures map</a></li>
+            <li><a href="../../fire/">Wildfire map</a></li>
+            <li><a href="../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: WSDOT via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+
+<script>
+const WORKER='https://api.milecheckapp.com';
+const CODE="WA";window.mcExtraLayers={state:CODE,fires:false};
+const DOT="WSDOT";
+const CTR=[47.66,-117.43], RKM=30;
+const ROAD_RE=/^(I|US|SR|SH|WA|OR|UT|MT|AZ|AL|NV|WI|NY|LA|GA|SC|CA|SD|FL|MI|VT|NH|ME|PA|CT|QEW|BC|ON|AB|M|Loop|\d)[- ]?\d*/i;
+const FERRY_RE=/ferr/i;
+function km(a,b,c,d){const R=6371,p=Math.PI/180;const x=Math.sin((c-a)*p/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin((d-b)*p/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+const TOUCH=('ontouchstart' in window);const RS=v=>TOUCH?Math.round(v*1.6):v;const map=L.map('comap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,preferCanvas:true,renderer:L.canvas({tolerance:('ontouchstart' in window)?14:6})});
+{const P=window.__mtP||(window.__mtP=new pmtiles.Protocol());maplibregl.addProtocol('pmtiles',P.tile);const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
+function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#26302b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094'}:
+{land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#dedbd2',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f'};
+const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
+return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
+sources:{b:{type:'vector',url:'pmtiles://'+abs('wa.pmtiles')},l:{type:'vector',url:'pmtiles://'+abs('local.pmtiles')},m:{type:'vector',url:'pmtiles://'+abs('mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('poi.pmtiles')},k:{type:'vector',url:'pmtiles://'+abs('blocks.pmtiles')},
+a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
+layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
+{id:'water',type:'fill','source':'b','source-layer':'water',paint:{'fill-color':C.water}},
+{id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
+{id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
+{id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
+{id:'sr',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'state'],paint:{'line-color':C.st,'line-width':rw(.6,2.5)}},
+{id:'us',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'us'],layout:{'line-cap':'round'},paint:{'line-color':C.us,'line-width':rw(1,4)}},
+{id:'ic',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.ic,'line-width':rw(2,7.5)}},
+{id:'i',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.i,'line-width':rw(1.4,5)}},
+{id:'blk',type:'line',source:'k','source-layer':'blocks',minzoom:13,paint:{'line-color':C.minor,'line-width':['interpolate',['linear'],['zoom'],13,1,17,4],'line-opacity':.9}},{id:'blkn',type:'symbol',source:'k','source-layer':'blocks',minzoom:15,layout:{'symbol-placement':'line-center','text-field':['concat',['to-string',['*',['floor',['/',['to-number',['slice',['get','r'],0,['index-of','-',['get','r']]]],100]],100]],' block of ',['get','n']],'text-font':['bold'],'text-size':10},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5}},{id:'mp',type:'circle','source':'m','source-layer':'mp',minzoom:8,filter:['any',['>=',['zoom'],10],['==',['get','t'],1]],paint:{'circle-color':C.mp,'circle-radius':['interpolate',['linear'],['zoom'],8,2,12,4],'circle-stroke-color':C.halo,'circle-stroke-width':1}},
+{id:'mpl',type:'symbol','source':'m','source-layer':'mp',minzoom:11,layout:{'text-field':['to-string',['get','mp']],'text-font':['bold'],'text-size':10,'text-offset':[0,1]},paint:{'text-color':C.mp,'text-halo-color':C.halo,'text-halo-width':1.5}},
+{id:'ref',type:'symbol','source':'b','source-layer':'roads',filter:['all',['!=',['get','ref'],''],['any',['in',['get','c'],['literal',['interstate','us']]],['>=',['zoom'],9]]],layout:{'symbol-placement':'line','symbol-spacing':260,'text-field':['get','ref'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],6,10,12,13],'text-rotation-alignment':'viewport'},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':2}},
+{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],60000000,8,15000000,10,2000000,11,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
+{id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'text-field':['get','l'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],9,7,13,9],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}},{id:'countyn',type:'symbol',source:'q','source-layer':'county',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
+
+const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);
+(function(){
+const LAY={snowamt:['Snow (6 hr)','ndfd.conus.snowamt'],qpf:['Rain and snow water (6 hr)','ndfd.conus.qpf'],windgust:['Wind gusts','ndfd.conus.windgust'],t:['Temperature','ndfd.conus.t'],wwa:['Warnings','ndfd.conus.wwa']};
+const times={};let cur='snowamt',wms=null;map.attributionControl.setPrefix(false);if(!map.getPane('fc')){map.createPane('fc');map.getPane('fc').style.zIndex=390;map.getPane('fc').style.pointerEvents='none';}
+const box=L.control({position:'bottomleft'});
+box.onAdd=()=>{const d=L.DomUtil.create('div','fc-box');d.innerHTML='<div class="fc-row"><select id="fcLayer" aria-label="Forecast layer"><option value="">Forecast off</option>'+Object.entries(LAY).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join('')+'</select><span id="fcTime">-</span></div><input id="fcSlider" type="range" min="0" max="0" value="0" aria-label="Forecast time" disabled><div class="fc-src">NOAA National Weather Service forecast</div>';L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d};
+box.addTo(map);
+const st=document.createElement('style');st.textContent='.fc-box{background:#fff;color:#16201b;padding:8px 10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.3);font:12px -apple-system,sans-serif;min-width:230px}.fc-row{display:flex;gap:8px;align-items:center;justify-content:space-between}.fc-box select{font:inherit;padding:4px}.fc-box input{width:100%;margin-top:6px}.fc-src{color:#5b675f;font-size:10px;margin-top:2px}';document.head.appendChild(st);
+const sel=document.getElementById('fcLayer'),sl=document.getElementById('fcSlider'),lab=document.getElementById('fcTime');
+const fmt=t=>new Date(t+':00Z').toLocaleString([], {weekday:'short',hour:'numeric'});
+function fallback(k){const step=(k==='snowamt'||k==='qpf')?6:3;const out=[];const n=new Date();n.setUTCMinutes(0,0,0);n.setUTCHours(Math.ceil(n.getUTCHours()/step)*step);for(let i=0;i<(step===6?16:40);i++){out.push(new Date(n.getTime()+i*step*3600e3).toISOString().slice(0,16))}return out}
+fetch('https://digital.weather.gov/ndfd.conus/wms?REQUEST=GetCapabilities').then(r=>r.text()).then(s=>{for(const k in LAY){const m=new RegExp('<Name>'+LAY[k][1]+'</Name>[\\s\\S]*?<Dimension name="vtit"[^>]*>([^<]+)').exec(s);if(m)times[k]=m[1].split(',').filter(t=>new Date(t+':00Z')>Date.now()-3*3600e3)}}).catch(()=>{}).finally(()=>{});
+function show(){if(wms){map.removeLayer(wms);wms=null}if(!cur){sl.disabled=true;lab.textContent='-';return}const ts=times[cur]||fallback(cur);sl.max=ts.length-1;sl.disabled=false;const t=ts[Math.min(+sl.value,ts.length-1)];lab.textContent=fmt(t);
+ wms=L.tileLayer.wms('https://digital.weather.gov/ndfd.conus/wms',{layers:LAY[cur][1],format:'image/png',transparent:true,opacity:.6,pane:'fc',vtit:t,version:'1.3.0',attribution:''}).addTo(map)}
+sel.onchange=()=>{cur=sel.value;sl.value=0;show()};sl.oninput=show;
+})();
+
+}
+map.setView(CTR,11);
+const camLayer=L.layerGroup().addTo(map);
+let CAMS=[];
+function esc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+const cardEl=document.getElementById('coCard');
+function showCard(html){cardEl.innerHTML='<button class="cx" aria-label="Close">×</button>'+html;cardEl.style.display='block';cardEl.querySelector('.cx').onclick=function(){cardEl.style.display='none';};}
+function camCard(c){const bust=c.img+(c.img.includes('?')?'&':'?')+'t='+Date.now();return '<div class="cc-title">'+esc(c.title)+'</div><div class="cc-meta">'+esc(c.route||'')+(c.mp>0?' · MP '+Math.round(c.mp):'')+' · '+DOT+'</div><a href="'+c.img+'" target="_blank" rel="noopener" title="Open full image"><img class="cc-img" src="'+bust+'" alt="Live: '+esc(c.title)+'" onerror="this.alt=\'image unavailable\'"></a>';}
+function thin(items,cellPx){const z=map.getZoom();if(z>=12||items.length<80)return items;const cell=cellPx*360/(256*Math.pow(2,z));const seen=new Set(),out=[];for(const it of items){const k=Math.round(it.lat/cell)+'|'+Math.round(it.lon/cell);if(seen.has(k))continue;seen.add(k);out.push(it);}return out;}
+function draw(){camLayer.clearLayers();const b=map.getBounds();thin(CAMS.filter(c=>b.contains([c.lat,c.lon])),16).forEach(c=>L.circleMarker([c.lat,c.lon],{radius:RS(5),color:'#fff',weight:1.5,fillColor:FERRY_RE.test(c.route)?'#1d6fd1':'#0f7a4f',fillOpacity:.95}).on('click',()=>showCard(camCard(c))).addTo(camLayer));document.getElementById('coStatus').textContent=CAMS.length?('📷 '+CAMS.length+' live cameras in Spokane'):'No cameras loaded — try again shortly.';}
+let _t=null;map.on('moveend',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
+async function fetchJSON(url,tries){for(let i=0;i<tries;i++){try{const r=await fetch(url);if(r.ok)return await r.json();}catch(e){}if(i<tries-1)await new Promise(res=>setTimeout(res,1200));}return null;}
+fetchJSON(WORKER+'/cameras?state='+CODE,4).then(d=>{
+  if(!d){document.getElementById('coStatus').textContent='Live cameras are busy right now — please refresh in a moment.';return;}
+  CAMS=(d.cameras||[]).filter(c=>c.isActive!==false&&isFinite(+c.lat)&&+c.lat&&c.imageUrl&&((ROAD_RE.test((c.route||'').trim())||FERRY_RE.test(c.route||'')))&&km(CTR[0],CTR[1],+c.lat,+c.lon)<=RKM).map(c=>({lat:+c.lat,lon:+c.lon,title:c.title||'Traffic camera',route:(c.route||'').trim(),mp:c.mile,img:c.imageUrl}));
+  document.getElementById('statCams').textContent=CAMS.length;
+  draw();
+});
+</script>
+
+<div id="mt-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#14532d;color:#fff;font:13px -apple-system,sans-serif;padding:6px 12px;text-align:center">Map test: MileCheck's own map, built from US government data. Washington only. Not a public page.</div>
+</body>
+</html>

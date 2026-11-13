@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Washington road conditions, snow and chains | MileCheck</title>
+  <meta name="description" content="Washington road conditions from WSDOT, with snow and ice reports, chain rules, closures and crashes by route and mile marker, cameras. Checked every 5 minutes.">
+  <link rel="canonical" href="https://milecheckapp.com/road-conditions/washington/">
+  <meta property="og:title" content="Washington road conditions, snow and chains | MileCheck">
+  <meta property="og:description" content="Washington road conditions from WSDOT, with snow and ice reports, chain rules, closures and crashes by route and mile marker, cameras. Checked every 5 minutes.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/road-conditions/washington/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Washington road conditions, snow and chains | MileCheck">
+  <meta name="twitter:description" content="Washington road conditions from WSDOT, with snow and ice reports, chain rules, closures and crashes by route and mile marker, cameras. Checked every 5 minutes.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/assets/plows.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<style id="one-width">body>:not(header):not(footer):not(script):not(style):not(.mc-signup){max-width:1040px!important;width:auto!important;margin-left:auto!important;margin-right:auto!important;padding-left:max(16px,env(safe-area-inset-left,0px))!important;padding-right:max(16px,env(safe-area-inset-right,0px))!important;box-sizing:border-box}</style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Washington road conditions","url":"https://milecheckapp.com/road-conditions/washington/","description":"Live Washington road conditions from WSDOT: snow and ice reports, chain and traction rules, closures and crashes by route and mile marker, cameras and passes. Checked every five minutes.","isPartOf":{"@id":"https://milecheckapp.com/#website"},"about":{"@type":"Place","name":"Washington"},"@id":"https://milecheckapp.com/road-conditions/washington/#webpage"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the highway closed in Washington right now?","acceptedAnswer":{"@type":"Answer","text":"The map above shows full closures from the WSDOT feed as red markers, crashes in orange, and weather and hazard alerts in blue and purple. Closures the DOT has posted for a future date are listed as scheduled, and ramp and lane closures sit under the toggle so the list stays readable. The page checks MileCheck's feed every five minutes. If the feed cannot be reached the page says so instead of showing an empty map. For the official list, open WSDOT."}},{"@type":"Question","name":"Where do I check Washington road conditions?","acceptedAnswer":{"@type":"Answer","text":"WSDOT is the official source, and dialing 511 in most states reaches the same information by phone. This page reads the same WSDOT feed and adds the Washington cameras, the corridor and pass pages, and your own mile marker if you carry the app."}},{"@type":"Question","name":"Are chains required in Washington?","acceptedAnswer":{"@type":"Answer","text":"Chain and traction rules are set by WSDOT per road and per direction, and they change with the storm. Restrictions the DOT publishes as alerts appear on the map above and on the Snoqualmie Pass, Stevens Pass and Crystal Mountain (SR-410) pages. Always follow the posted signs. What \"chains required\" means explains the levels."}},{"@type":"Question","name":"How often does this page update?","acceptedAnswer":{"@type":"Answer","text":"This page checks MileCheck's feed every five minutes. WSDOT updates individual reports on its own schedule. Source update times are shown when available."}},{"@type":"Question","name":"Does the MileCheck app show these alerts?","acceptedAnswer":{"@type":"Answer","text":"Yes. The app shows the same WSDOT alerts on your route, ahead of your position, with the mile marker you are passing. The mile marker works offline in all 50 states. Live alerts are part of MileCheck Premium, $19.99 a year or $4.99 a month after a 2-week free trial."}}],"@id":"https://milecheckapp.com/road-conditions/washington/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Road conditions","item":"https://milecheckapp.com/road-conditions/"},{"@type":"ListItem","position":3,"name":"Washington","item":"https://milecheckapp.com/road-conditions/washington/"}]}</script>
+  <style>
+    .rc-wrap{max-width:1160px;margin:0 auto;padding:30px 20px 10px;}
+    .rc-eyebrow{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin:0 0 6px;}
+    .rc-wrap h1{font-size:clamp(27px,4.4vw,40px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 10px;}
+    .rc-facts{margin:0 0 6px;padding-left:20px;max-width:78ch;}
+    .rc-facts li{margin:0 0 10px;line-height:1.6;}
+    .rc-lede{font-size:16.5px;line-height:1.6;color:#3a444d;max-width:78ch;margin:0 0 18px;}
+    .rc-lede a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .rc-live{display:grid;grid-template-columns:1.45fr .55fr;gap:16px;}
+    @media(max-width:860px){.rc-live{grid-template-columns:1fr;}}
+    .rc-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;min-height:400px;height:58vh;background:#eef0e9;}
+    #rcmap{position:absolute;inset:0;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+    .rc-status{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;color:#0E1116;line-height:1.35;}
+    .rc-status.err{color:#b4231a;}
+    .rc-status.ok{display:none;}
+    .rc-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+    .rc-dot.big{width:18px;height:18px;}
+    .rc-side{display:flex;flex-direction:column;gap:12px;min-height:0;}
+    .rc-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:58vh;}
+    .rc-list .lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+    .rc-list .lh label{font-size:14px;font-weight:600;color:#5b6670;display:flex;align-items:center;gap:5px;cursor:pointer;}
+    .rc-rows{overflow-y:auto;}
+    .rc-row{padding:11px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;}
+    .rc-row:hover{background:#F7F5EE;}
+    .rc-row .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+    .rc-row .rt{font-weight:800;font-size:14px;}
+    .rc-row .kd{font-weight:800;font-size:14px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;}
+    .rc-row .kd.closure{color:#cf3320;} .rc-row .kd.crash{color:#d9640f;} .rc-row .kd.weather{color:#2563eb;} .rc-row .kd.hazard{color:#7C3AED;} .rc-row .kd.work{color:#a16207;}
+    .rc-row .sub{color:#5b6670;font-size:14px;margin-top:3px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .rc-empty{padding:28px 14px;text-align:center;color:#5b6670;font-size:14px;line-height:1.5;}
+    .rc-empty b{color:#0f7a4f;font-size:15px;display:block;margin-bottom:4px;}
+    .rc-empty.err b{color:#b4231a;}
+    .rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:#5b6670;margin:10px 0 0;}
+    .rc-legend span{display:inline-flex;align-items:center;gap:6px;}
+    .rc-legend .rc-work{flex-basis:100%;font-weight:600;color:#1d1f1c;font-size:14px;}.rc-legend .rc-work input{width:18px;height:18px;}
+    .rc-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;}
+    .rc-official{border:1px solid #E5E5E5;border-radius:14px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;color:#3a444d;}
+    .rc-official a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .rc-body{max-width:1160px;margin:0 auto;padding:10px 20px 40px;}
+    .rc-body h2{font-size:23px;margin:32px 0 10px;letter-spacing:-0.01em;}
+    .rc-body p{font-size:16px;line-height:1.7;color:#2a333b;max-width:78ch;margin:0 0 14px;}
+    .rc-body a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    .rc-body a:hover{text-decoration:underline;}
+    .rc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:8px 0 6px;}
+    .rc-card{display:block;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 16px;text-decoration:none;color:inherit;}
+    .rc-card:hover{border-color:#0E1116;}
+    .rc-card .k{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7a4f;}
+    .rc-card h3{font-size:15.5px;margin:4px 0 4px;color:#0E1116;}
+    .rc-card p{font-size:14px;line-height:1.45;color:#5b6670;margin:0;}
+    .rc-src:hover{border-color:#E5E5E5;} .rc-src:has(.rc-src-link:hover){border-color:#0E1116;}
+    .rc-src-link{display:block;text-decoration:none;color:inherit;}
+    .rc-card p.rc-app{margin-top:10px;padding-top:10px;border-top:1px solid #F0F0EE;color:#3a444d;}
+    .rc-steps{counter-reset:s;padding:0;margin:0 0 6px;list-style:none;max-width:78ch;}
+    .rc-steps li{position:relative;padding:0 0 12px 40px;font-size:16px;line-height:1.6;color:#2a333b;}
+    .rc-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#0f7a4f;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+    .rc-sept{border-left:3px solid #E5E5E5;padding:2px 0 2px 14px;color:#5b6670;font-size:14.5px;line-height:1.6;max-width:78ch;margin:0 0 6px;}
+    .rc-sept a{color:#0f7a4f;font-weight:700;}
+    .faq details{border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px;}
+    .faq summary{font-weight:700;font-size:16px;cursor:pointer;}
+    .faq p{margin:10px 0 0;}
+    .cta{border:1px solid #E5E5E5;border-radius:16px;background:linear-gradient(135deg,#f4fbf7,#ffffff);padding:24px 22px;margin:30px 0 8px;text-align:center;}
+    .cta h3{font-size:21px;margin:0 0 8px;}
+    .cta p{font-size:15.5px;color:#3a444d;margin:0 auto 14px;max-width:560px;}
+    .cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .cta .btns a{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14.5px;text-decoration:none;}
+    .cta .btns a.primary{background:#0f7a4f;color:#fff;}
+    .cta .btns a.ghost{border:1px solid #0F1419;color:#0F1419;}
+    .rc-states{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:14px 0 8px;}
+    .rc-state{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;padding:12px 14px;text-decoration:none;color:inherit;}
+    .rc-state:hover{border-color:#0E1116;}
+    .rc-state b{font-size:15px;} .rc-state span{font-size:14px;color:#8A939B;font-weight:700;letter-spacing:.04em;}
+    .rc-related{color:#5b6670;font-size:14px;margin-top:26px;}
+    .rc-related a{color:#0f7a4f;font-weight:700;text-decoration:none;}
+    @media(max-width:760px){.rc-mapbox{height:52vh;} .leaflet-control-zoom{display:none;} .rc-status{left:56px;font-size:14px;padding:6px 10px;} .rc-list{max-height:none;} .rc-rows{max-height:48vh;}}
+    </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
+<style data-seo-img>:where(img[width][height]){height:auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
+  <script src="/assets/site-nav.js?v=20261102-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261102-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states" aria-current="page">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/pricing/" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <div class="rc-wrap">
+        <p class="rc-eyebrow">Road conditions</p>
+    <h1>Washington road conditions right now</h1>
+    <p class="rc-lede">Closures and crashes from WSDOT, on one map with the route and mile marker. Below it: the <a href="/cameras/washington/">live cameras</a>, <a href="/passes/snoqualmie/">Snoqualmie Pass</a>, <a href="/passes/stevens/">Stevens Pass</a> and <a href="/passes/crystal-mountain/">Crystal Mountain (SR-410)</a>, the <a href="/corridors/i-5/">I-5</a> and <a href="/corridors/i-90/">I-90</a> corridor pages, and what the season does to Washington's highways. For the whole country, see the <a href="/closures/">US closures map</a>. City traffic cameras: <a href="/cameras/spokane/">Spokane</a>, <a href="/cameras/tacoma/">Tacoma</a>, <a href="/cameras/olympia/">Olympia</a>, <a href="/cameras/bellingham/">Bellingham</a>, <a href="/cameras/vancouver-wa/">Vancouver, WA</a>, <a href="/cameras/everett/">Everett</a> and <a href="/cameras/bellevue/">Bellevue</a>.</p>
+<!-- statenow:start -->
+<section class="mc-statenow" aria-label="Washington road conditions at the last read" style="max-width:1000px;margin:12px 0;padding:14px 18px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420">
+<h2 style="font-size:18px;margin:0 0 6px">Washington at the last read</h2>
+<p style="margin:0">The WSDOT feed lists 6 closure-type alerts, 0 crashes and 100 roadwork alerts on numbered highways right now. Closure-type alerts include lane closures, so read each one. Listed:</p>
+<ul style="margin:6px 0 0 18px;padding:0"><li>SR 5 NB: On I-5 northbound from I-90 (MP 164) to NE 45th St (MP 169), all lanes are closed.for roadwork until 5 a.m. Monday, 11/2/2026.</li><li>SR 165: SR 165 is closed at the Carbon River/Fairfax Bridge to all vehicles, bicyclists and pedestrians until further notice. The closure </li><li>SR 27: Roadwork on SR 27 at milepost 87.46 between Mirabeau Pkwy and Pinecroft, near Trent Elementary, from October 12, 2026, until Novem</li></ul><p style="margin:6px 0 0">And 3 more on the map below.</p>
+<p style="margin:8px 0 0;font-size:13.5px;color:#5b6670">Read on Nov 1, 1:42 PM PT. Chain and traction rules are on the <a href="/chain-laws/washington/" style="color:#0f7a4f;font-weight:700">Washington chain law page</a>. A feed with no closure is not a promise a road is open. The map below updates live.</p>
+</section>
+<!-- statenow:end -->
+
+    <div class="rc-live">
+      <div class="rc-mapbox">
+        <span class="rc-status" id="rcStatus">Loading WSDOT alerts&hellip;</span>
+        <div id="rcmap" role="region" aria-label="Washington road alerts map"></div>
+      </div>
+      <div class="rc-side">
+        <div class="rc-legend" style="margin:0"><span class="rc-work">More on the map: tap the layers button at the top left of the map.</span><span><i style="background:#cf3320"></i>Full closure</span><span><i style="background:#f97316"></i>Crash</span><span><i style="background:#3B82F6"></i>Weather</span><span><i style="background:#7C3AED"></i>Hazard</span><span><i style="background:#a16207"></i>Ramp or lane</span><span><i style="background:#F59E0B"></i>Work zone</span><span style="color:#8A939B">Faded markers are scheduled, not active</span></div>
+        <div class="rc-list">
+          <div class="lh"><span>Closures and crashes <span id="rcCount" style="color:#8A939B;font-weight:600;font-size:14px;"></span></span></div>
+          <div class="rc-rows" id="rcRows"><div class="rc-empty">Loading the WSDOT feed&hellip;</div></div>
+        </div>
+        <!-- toplinks:start --><nav class="mc-toplinks" aria-label="Keep exploring" style="margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00704A;margin:0 0 6px;">Keep exploring</div><div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"><a href="/cameras/washington/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">WSDOT cameras and road conditions in Washington</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/road-conditions/oregon/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Road conditions</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Oregon road conditions</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/road-conditions/idaho/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Road conditions</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Idaho road conditions</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a></div></nav><!-- toplinks:end --><div class="rc-official">Source: <a href="https://wsdot.wa.gov/travel/real-time/map" target="_blank" rel="noopener">WSDOT</a>, through MileCheck's feed, checked every five minutes and converted to the same format MileCheck uses for all 50 states. Ramp, lane and shoulder closures are listed under the toggle, not as full closures. Closures with a future start date are marked scheduled. Positions are the DOT's; mile markers are approximate.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rc-body">
+    <h2>Where to look next</h2>
+    <div class="rc-cards">
+      <div class="rc-card rc-src"><a class="rc-src-link" href="https://wsdot.wa.gov/travel/real-time/map" target="_blank" rel="noopener"><span class="k">Official source</span><h3>WSDOT</h3><p>Washington's DOT traveler site. The list of record for closures, restrictions and detours.</p></a><p class="rc-app">Washington's official road conditions app is WSDOT.</p></div>
+      <a class="rc-card" href="/cameras/washington/"><span class="k">Cameras</span><h3>Washington highway cameras</h3><p>Every WSDOT camera on one map, with the route and mile marker where the DOT gives one.</p></a>
+      <a class="rc-card" href="/cameras/seattle/"><span class="k">City cameras</span><h3>Seattle cameras</h3><p>Live cameras on the Seattle freeways.</p></a>
+      <a class="rc-card" href="/passes/snoqualmie/"><span class="k">Mountain pass</span><h3>Snoqualmie Pass</h3><p>I-90 over the summit: cameras, restrictions and closures on one page.</p></a>
+      <a class="rc-card" href="/passes/stevens/"><span class="k">Mountain pass</span><h3>Stevens Pass</h3><p>US-2 over the summit: cameras, restrictions and closures on one page.</p></a>
+      <a class="rc-card" href="/passes/crystal-mountain/"><span class="k">Mountain pass</span><h3>Crystal Mountain (SR-410)</h3><p>SR-410 over the summit: cameras, restrictions and closures on one page.</p></a>
+      <a class="rc-card" href="/passes/blewett/"><span class="k">Mountain pass</span><h3>Blewett Pass</h3><p>US 97 between Cle Elum and Wenatchee: closures, chains, snow.</p></a>
+      <a class="rc-card" href="/chains-required-snoqualmie-pass/"><span class="k">Chains</span><h3>Chains on Snoqualmie Pass</h3><p>WSDOT’s traction and chain lines, what they mean for a car, AWD and a truck.</p></a>
+      <a class="rc-card" href="/ski/#washington"><span class="k">Ski resorts</span><h3>Washington ski resort road conditions</h3><p>The access roads to 6 Washington ski resorts: plow trucks where the DOT publishes them, cameras and closures.</p></a>
+      <a class="rc-card" href="/corridors/i-5/"><span class="k">Corridor</span><h3>I-5 conditions</h3><p>The whole I-5 corridor, every state it crosses, alerts by mile marker.</p></a>
+      <a class="rc-card" href="/corridors/i-90/"><span class="k">Corridor</span><h3>I-90 conditions</h3><p>The whole I-90 corridor, every state it crosses, alerts by mile marker.</p></a>
+      <a class="rc-card" href="/bridges/washington/"><span class="k">Drawbridges</span><h3>Washington drawbridges</h3><p>Where the movable spans are and the federal opening rule for each.</p></a>
+      <a class="rc-card" href="/mountains/rainier/"><span class="k">Mountain visibility</span><h3>Is Mount Rainier out?</h3><p>Whether the mountain is visible right now, and from where.</p></a>
+      <a class="rc-card" href="/mountains/baker/"><span class="k">Mountain visibility</span><h3>Is Mount Baker out?</h3><p>Whether the mountain is visible right now, and from where.</p></a>
+      <a class="rc-card" href="/mountains/sthelens/"><span class="k">Mountain visibility</span><h3>Is Mount St. Helens out?</h3><p>Whether the mountain is visible right now, and from where.</p></a>
+      <a class="rc-card" href="/mountains/olympics/"><span class="k">Mountain visibility</span><h3>Is the Olympics out?</h3><p>Whether the mountain is visible right now, and from where.</p></a>
+      <a class="rc-card" href="/mountains/angeles/"><span class="k">Mountain visibility</span><h3>Is Mount Angeles out?</h3><p>Whether the mountain is visible right now, and from where.</p></a>
+      <a class="rc-card" href="/blog/mile-markers-washington.html"><span class="k">Mile markers</span><h3>Mile markers in Washington</h3><p>How Washington numbers its highways and where the markers matter most.</p></a>
+      <a class="rc-card" href="/blog/labor-day-weekend-recap-2026-states/washington.html"><span class="k">Report</span><h3>Labor Day 2026 in Washington</h3><p>What the WSDOT feed carried over the holiday weekend.</p></a>
+    </div>
+
+    <h2>Driving across Washington</h2>
+    <p>I-5 runs the length of the state, about 276 miles from the Oregon border through Vancouver, Olympia, Tacoma and Seattle up to the Canadian border. I-90 crosses from Seattle east over Snoqualmie Pass toward the Idaho line, nearly 300 miles. I-405 is the Eastside bypass around Lake Washington through Bellevue and Renton. US-2 climbs over Stevens Pass, US-97 runs north to south east of the Cascades, and US-101 loops the Olympic Peninsula.</p>
+
+    <h2>What the season does to Washington's highways</h2>
+    <p>Washington closes highways more than most states. Snoqualmie Pass, around mile marker 52 on I-90, and Stevens Pass on US-2 shut for hours during winter storms and avalanche control. SR-20, the North Cascades Highway, closes across a long stretch every winter and reopens in spring, and Chinook and Cayuse passes close seasonally too. WSDOT posts chain requirements for each direction and every closure by milepost.</p>
+
+    <h2>Washington facts, with sources</h2>
+    <ul class="rc-facts">
+      <li><b>Crash clearance.</b> From September 25, 2026 to October 16, 2026, 343 crashes on the WSDOT feed were seen on at least two reads. A crash stayed posted a median of 47 min, and for the middle half it was between 16 min and 1 hr 20 min. Each DOT decides when to post and remove a crash, so compare Washington with Washington over time, not with other states. <a href="/how-long-do-crashes-take-to-clear/">How the numbers are made</a>.</li>
+      <li><b>Chain law.</b> WSDOT posts traction and chain requirements by pass and direction. Posted chain controls depend on conditions. Vehicles over 10,000 lb GVWR must also carry chains on specified routes from November 1 through April 1. <a href="/chain-laws/washington/">Washington chain law, with sources</a>.</li>
+      <li><b>Chains by pass.</b> Hours each Washington pass was under a traction or chain requirement this season, counted from WSDOT pass reports. <a href="/how-often-are-chains-required-on-washington-passes/">How often chains are required on Washington passes</a>.</li>
+      <li><b>Sleeping at a rest area.</b> Yes, up to 8 hours in any 24-hour period. Source: <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=47.38.020" target="_blank" rel="noopener">RCW 47.38.020</a>. <a href="/rest-areas/washington/">Washington rest area rules</a>.</li>
+      <li><b>Roads that close for winter.</b> North Cascades Highway: Closing date varies by year. The 2025 closure was Dec. 4. Chinook Pass: Usually closes mid-November and reopens late May. Cayuse Pass: Usually closes mid-November and reopens late May. 1 more is listed. <a href="/seasonal/washington/">Seasonal closures in Washington</a>.</li>
+    </ul>
+
+    <h2>Before a Washington road trip</h2>
+    <ol class="rc-steps">
+      <li>Check the map above for anything red on your route, then open <a href="https://wsdot.wa.gov/travel/real-time/map" target="_blank" rel="noopener">WSDOT</a> for the DOT's own detour and restriction text.</li>
+      <li>Look at the road. The <a href="/cameras/washington/">Washington cameras</a> show the pavement itself, and most carry the mile marker.</li>
+      <li>If the route crosses <a href="/passes/snoqualmie/">Snoqualmie Pass</a>, <a href="/passes/stevens/">Stevens Pass</a> and <a href="/passes/crystal-mountain/">Crystal Mountain (SR-410)</a>, read the pass page for the summit cameras, snow depth and chain rules.</li>
+      <li>For the long haul, the <a href="/corridors/i-5/">I-5</a> and <a href="/corridors/i-90/">I-90</a> corridor pages carry alerts for every state the route crosses, not only Washington.</li>
+      <li>Know how to say where you are. Dispatch, 911 and tow companies ask for the route, the direction and the mile marker. <a href="/report-location/">How to report your location on the highway</a>.</li>
+      <li>Carry the app. The mile marker works offline in all 50 states, and the same WSDOT alerts show on your route as you drive.</li>
+    </ol>
+
+    <h2>What October looked like</h2>
+    <p class="rc-sept">In October 2026, MileCheck's archive of the WSDOT feed held 1,100 unique reports, including 21 closure reports, 58 crash reports and 956 work-zone reports. The routes with the most reports were I-405, I-5 and I-90. Counts reflect what the feed publishes, so a state whose DOT posts only closures shows only closures. <a href="/blog/road-report-october-2026.html">Read the October Highway Report</a>.</p>
+    <h2>Questions, answered</h2>
+    <div class="faq">
+      <details><summary>Is the highway closed in Washington right now?</summary><p>The map above shows full closures from the WSDOT feed as red markers, crashes in orange, and weather and hazard alerts in blue and purple. Closures the DOT has posted for a future date are listed as scheduled, and ramp and lane closures sit under the toggle so the list stays readable. The page checks MileCheck's feed every five minutes. If the feed cannot be reached the page says so instead of showing an empty map. For the official list, open <a href="https://wsdot.wa.gov/travel/real-time/map" target="_blank" rel="noopener">WSDOT</a>.</p></details>
+      <details><summary>Where do I check Washington road conditions?</summary><p><a href="https://wsdot.wa.gov/travel/real-time/map" target="_blank" rel="noopener">WSDOT</a> is the official source, and dialing 511 in most states reaches the same information by phone. This page reads the same WSDOT feed and adds the <a href="/cameras/washington/">Washington cameras</a>, the corridor and pass pages, and your own mile marker if you carry the app.</p></details>
+      <details><summary>Are chains required in Washington?</summary><p>Chain and traction rules are set by WSDOT per road and per direction, and they change with the storm. Restrictions the DOT publishes as alerts appear on the map above and on the <a href="/passes/snoqualmie/">Snoqualmie Pass</a>, <a href="/passes/stevens/">Stevens Pass</a> and <a href="/passes/crystal-mountain/">Crystal Mountain (SR-410)</a> pages. Always follow the posted signs. <a href="/chains-required-explained/">What "chains required" means</a> explains the levels.</p></details>
+      <details><summary>How often does this page update?</summary><p>This page checks MileCheck's feed every five minutes. WSDOT updates individual reports on its own schedule. Source update times are shown when available.</p></details>
+      <details><summary>Does the MileCheck app show these alerts?</summary><p>Yes. The app shows the same WSDOT alerts on your route, ahead of your position, with the mile marker you are passing. The mile marker works offline in all 50 states. Live alerts are part of MileCheck Premium, $19.99 a year or $4.99 a month after a 2-week free trial.</p></details>
+    </div>
+
+    <div class="cta">
+      <h3>Know exactly where you are &mdash; live</h3>
+      <p>Your mile marker shows even offline. WSDOT alerts on your route and the nearest camera are part of MileCheck Premium and need a connection to update. Runs on CarPlay and Android Auto.</p>
+      <div class="btns">
+        <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=road-conditions-washington&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+        <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Droad-conditions-washington" target="_blank" rel="noopener">Google Play</a>
+      </div>
+    </div>
+
+    <p class="rc-related">Other states: <a href="/road-conditions/">road conditions by state</a> · <a href="/closures/">US closures map</a> · <a href="/passes/">Mountain passes</a> · <a href="/corridors/">Interstate corridors</a> · <a href="/cameras/">Cameras</a></p>
+  </div>
+
+                    <!-- qlinks:start -->
+<p class="mc-qlinks" style="max-width:760px;margin:22px auto;padding:0 20px;color:#5b6670;font:14px/1.6 Inter,-apple-system,'Segoe UI',sans-serif">More questions: <a href="/why-is-the-highway-closed/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Why is the highway closed?</a> &middot; <a href="/is-there-one-app-with-511-alerts-for-every-state/" style="color:#0f7a4f;font-weight:700;text-decoration:none">Is there one app with 511 alerts for every state?</a> &middot; <a href="/how-do-i-tell-911-where-i-am-on-the-highway/" style="color:#0f7a4f;font-weight:700;text-decoration:none">How do I tell 911 where I am on the highway?</a></p>
+<!-- qlinks:end -->
+<!-- related:start -->
+  <section class="mc-related" aria-label="Nearby on MileCheck">
+    <style>
+      .mc-related{max-width:760px;margin:32px auto;padding:0 16px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+      .mc-related h2{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 10px;}
+      .mc-related ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+      .mc-related a{display:block;background:#fff;border:1px solid #E4EAE6;border-radius:10px;padding:11px 13px;font-size:14px;font-weight:600;line-height:1.35;color:#0F1419;text-decoration:none;overflow-wrap:anywhere;}
+      .mc-related a:hover{border-color:#00A86B;color:#00A86B;}
+      @media (max-width:520px){.mc-related ul{grid-template-columns:1fr;}}
+    </style>
+    <h2>Nearby on MileCheck</h2>
+    <ul>
+      <li><a href="/blog/highway-report-october-2026-states/washington.html">Washington highway report, October 2026</a></li><!-- report-link -->
+      <li><a href="/cameras/washington/">WSDOT cameras and road conditions in Washington</a></li>
+      <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+      <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+      <li><a href="/passes/snoqualmie/">Is Snoqualmie Pass open? Webcams and chains</a></li>
+      <li><a href="/passes/stevens/">Stevens Pass road conditions and cameras</a></li>
+      <li><a href="/corridors/i-5/">I-5 cameras and road conditions</a></li>
+    </ul>
+  </section>
+<!-- related:end -->
+  <!-- signup:start -->
+  <section class="mc-signup" id="subscribe">
+    <style>
+      .mc-signup{background:#F4F8F6;border-top:1px solid #E4EAE6;border-bottom:1px solid #E4EAE6;padding:33px 0;}
+      .mc-signup .mc-signup-inner{max-width:560px;margin:0 auto;text-align:center;padding:0 20px;}
+      .mc-signup .mc-eyebrow{font-family:'Inter',-apple-system,sans-serif;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00A86B;margin:0 0 8px;}
+      .mc-signup h2{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;color:#0F1419;margin:0 0 8px;}
+      .mc-signup .mc-sub{font-family:'Inter',-apple-system,sans-serif;font-size:15px;line-height:1.55;color:#5A6670;margin:0 auto 12px;max-width:44ch;}
+.mc-signup .ml-form-embedBody{padding-top:6px !important;padding-bottom:0 !important;}
+      .mc-signup .mc-sub a{color:#00A86B;font-weight:700;}
+      .mc-signup .ml-form-embedContent{display:none !important;}
+      .mc-signup .ml-form-embedWrapper{background:transparent !important;box-shadow:none !important;max-width:440px;margin:0 auto;}
+      .mc-signup input[type=email]{border-radius:8px !important;}
+      .mc-signup select[name="fields[state]"]{border-radius:8px !important;height:auto;min-height:44px;font-size:14px;padding:10px 12px;background:#fff;border:1px solid #cccccc;color:#333;}
+      .mc-signup button,.mc-signup .primary{background:#00C880 !important;border-radius:8px !important;font-weight:700 !important;}
+      .mc-signup input[type=email],.mc-signup input[type=text],.mc-signup button{min-height:44px !important;box-sizing:border-box !important;}
+    </style>
+    <div class="mc-signup-inner">
+      <p class="mc-eyebrow">The Monthly Highway Report</p>
+      <h2>Get MileCheck's monthly Highway Report</h2>
+      <p class="mc-sub">Closures, crashes and roadwork from the state road feeds, once a month in your inbox. <a href="/blog/road-report-october-2026.html">See the October report</a>. No spam.</p>
+      <div class="ml-embedded" data-form="LjADY8"></div>
+    </div>
+  </section>
+<!-- signup:end -->
+
+  <!-- dq:start -->
+<aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-road-conditions.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
+<!-- dq:end -->
+<!-- api-link:start -->
+<aside class="mc-api-link" style="max-width:760px;margin:28px auto;padding:16px 20px;border:1px solid #dbe5df;border-radius:12px;background:#f7faf8;font:15px/1.55 Inter,-apple-system,'Segoe UI',sans-serif;color:#1b2420"><h2 style="font-size:17px;margin:0 0 6px">Use this data in your own software</h2><p style="margin:0">The alerts here come from state DOT feeds. MileCheck reads Washington State DOT at least every 5 minutes. That is how often we check, not how fast the agency posts. MileCheck’s API returns them for all 50 states in one format, with the highway and a mile marker where the state provides one. <a href="/api/" style="color:#0f7a4f;font-weight:700">See the API</a> &middot; <a href="/one-api-for-every-states-511-road-alerts/" style="color:#0f7a4f;font-weight:700">Is there one API for every state&rsquo;s 511 road alerts?</a> &middot; <a href="/data-sources/" style="color:#0f7a4f;font-weight:700">Where the data comes from</a></p></aside>
+<!-- api-link:end -->
+<!-- footer-hub:start -->
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:flex;align-items:center;min-height:44px;font-size:14.5px;line-height:1.35;padding:0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+          <li><a href="/how-do-i-tell-911-where-i-am-on-the-highway/">How to tell 911 where you are</a></li>
+          <li><a href="/what-should-i-do-if-i-break-down-on-the-interstate/">What to do if you break down</a></li>
+          <li><a href="/why-is-the-highway-closed/">Why is the highway closed?</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=road-conditions-washington&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Droad-conditions-washington" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="/closures/">US closures map</a></li>
+            <li><a href="/road-conditions/">Road conditions by state</a></li>
+            <li><a href="/cameras/">Live cameras</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Road data: state DOTs via MileCheck. Always follow posted signs and official detours.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
+<script>
+(function(){
+var ST="WA",DOT="WSDOT",DOTURL="https://wsdot.wa.gov/travel/real-time/map",B=[[45.54,-124.85],[49,-116.91]];
+var WORKER="https://api.milecheckapp.com";
+/* window.map: assets/map-kit.js reads the page-level map for its shared controls (full screen, 2026-10-16). */
+var map=window.map=L.map('rcmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true,attributionControl:true});
+var ESRI='https://server.arcgisonline.com/ArcGIS/rest/services/';
+{const P=window.__mtP||(window.__mtP=new pmtiles.Protocol());maplibregl.addProtocol('pmtiles',P.tile);const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
+function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#26302b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094'}:
+{land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#dedbd2',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f'};
+const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
+return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
+sources:{b:{type:'vector',url:'pmtiles://'+abs('wa.pmtiles')},l:{type:'vector',url:'pmtiles://'+abs('local.pmtiles')},m:{type:'vector',url:'pmtiles://'+abs('mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('poi.pmtiles')},k:{type:'vector',url:'pmtiles://'+abs('blocks.pmtiles')},
+a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
+layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
+{id:'water',type:'fill','source':'b','source-layer':'water',paint:{'fill-color':C.water}},
+{id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
+{id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
+{id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
+{id:'sr',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'state'],paint:{'line-color':C.st,'line-width':rw(.6,2.5)}},
+{id:'us',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'us'],layout:{'line-cap':'round'},paint:{'line-color':C.us,'line-width':rw(1,4)}},
+{id:'ic',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.ic,'line-width':rw(2,7.5)}},
+{id:'i',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.i,'line-width':rw(1.4,5)}},
+{id:'blk',type:'line',source:'k','source-layer':'blocks',minzoom:13,paint:{'line-color':C.minor,'line-width':['interpolate',['linear'],['zoom'],13,1,17,4],'line-opacity':.9}},{id:'blkn',type:'symbol',source:'k','source-layer':'blocks',minzoom:15,layout:{'symbol-placement':'line-center','text-field':['concat',['to-string',['*',['floor',['/',['to-number',['slice',['get','r'],0,['index-of','-',['get','r']]]],100]],100]],' block of ',['get','n']],'text-font':['bold'],'text-size':10},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5}},{id:'mp',type:'circle','source':'m','source-layer':'mp',minzoom:8,filter:['any',['>=',['zoom'],10],['==',['get','t'],1]],paint:{'circle-color':C.mp,'circle-radius':['interpolate',['linear'],['zoom'],8,2,12,4],'circle-stroke-color':C.halo,'circle-stroke-width':1}},
+{id:'mpl',type:'symbol','source':'m','source-layer':'mp',minzoom:11,layout:{'text-field':['to-string',['get','mp']],'text-font':['bold'],'text-size':10,'text-offset':[0,1]},paint:{'text-color':C.mp,'text-halo-color':C.halo,'text-halo-width':1.5}},
+{id:'ref',type:'symbol','source':'b','source-layer':'roads',filter:['all',['!=',['get','ref'],''],['any',['in',['get','c'],['literal',['interstate','us']]],['>=',['zoom'],9]]],layout:{'symbol-placement':'line','symbol-spacing':260,'text-field':['get','ref'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],6,10,12,13],'text-rotation-alignment':'viewport'},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':2}},
+{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],60000000,8,15000000,10,2000000,11,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
+{id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'text-field':['get','l'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],9,7,13,9],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}},{id:'countyn',type:'symbol',source:'q','source-layer':'county',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
+
+const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);
+(function(){
+const LAY={snowamt:['Snow (6 hr)','ndfd.conus.snowamt'],qpf:['Rain and snow water (6 hr)','ndfd.conus.qpf'],windgust:['Wind gusts','ndfd.conus.windgust'],t:['Temperature','ndfd.conus.t'],wwa:['Warnings','ndfd.conus.wwa']};
+const times={};let cur='snowamt',wms=null;map.attributionControl.setPrefix(false);if(!map.getPane('fc')){map.createPane('fc');map.getPane('fc').style.zIndex=390;map.getPane('fc').style.pointerEvents='none';}
+const box=L.control({position:'bottomleft'});
+box.onAdd=()=>{const d=L.DomUtil.create('div','fc-box');d.innerHTML='<div class="fc-row"><select id="fcLayer" aria-label="Forecast layer"><option value="">Forecast off</option>'+Object.entries(LAY).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join('')+'</select><span id="fcTime">-</span></div><input id="fcSlider" type="range" min="0" max="0" value="0" aria-label="Forecast time" disabled><div class="fc-src">NOAA National Weather Service forecast</div>';L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d};
+box.addTo(map);
+const st=document.createElement('style');st.textContent='.fc-box{background:#fff;color:#16201b;padding:8px 10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.3);font:12px -apple-system,sans-serif;min-width:230px}.fc-row{display:flex;gap:8px;align-items:center;justify-content:space-between}.fc-box select{font:inherit;padding:4px}.fc-box input{width:100%;margin-top:6px}.fc-src{color:#5b675f;font-size:10px;margin-top:2px}';document.head.appendChild(st);
+const sel=document.getElementById('fcLayer'),sl=document.getElementById('fcSlider'),lab=document.getElementById('fcTime');
+const fmt=t=>new Date(t+':00Z').toLocaleString([], {weekday:'short',hour:'numeric'});
+function fallback(k){const step=(k==='snowamt'||k==='qpf')?6:3;const out=[];const n=new Date();n.setUTCMinutes(0,0,0);n.setUTCHours(Math.ceil(n.getUTCHours()/step)*step);for(let i=0;i<(step===6?16:40);i++){out.push(new Date(n.getTime()+i*step*3600e3).toISOString().slice(0,16))}return out}
+fetch('https://digital.weather.gov/ndfd.conus/wms?REQUEST=GetCapabilities').then(r=>r.text()).then(s=>{for(const k in LAY){const m=new RegExp('<Name>'+LAY[k][1]+'</Name>[\\s\\S]*?<Dimension name="vtit"[^>]*>([^<]+)').exec(s);if(m)times[k]=m[1].split(',').filter(t=>new Date(t+':00Z')>Date.now()-3*3600e3)}}).catch(()=>{}).finally(()=>{});
+function show(){if(wms){map.removeLayer(wms);wms=null}if(!cur){sl.disabled=true;lab.textContent='-';return}const ts=times[cur]||fallback(cur);sl.max=ts.length-1;sl.disabled=false;const t=ts[Math.min(+sl.value,ts.length-1)];lab.textContent=fmt(t);
+ wms=L.tileLayer.wms('https://digital.weather.gov/ndfd.conus/wms',{layers:LAY[cur][1],format:'image/png',transparent:true,opacity:.6,pane:'fc',vtit:t,version:'1.3.0',attribution:''}).addTo(map)}
+sel.onchange=()=>{cur=sel.value;sl.value=0;show()};sl.oninput=show;
+})();
+
+}
+map.fitBounds(B);
+var layer=L.layerGroup().addTo(map),workLayer=L.layerGroup(),plowLayer=L.layerGroup().addTo(map);
+// Snowplows (2026-10-15): only for states whose DOT publishes truck positions. assets/plows.js owns the pin and card.
+var PLOWS=!!(window.MCPlows&&MCPlows.AGENCY&&MCPlows.AGENCY[ST]),plowToggle=document.getElementById('rcPlows'),plowNote='';
+var status=document.getElementById('rcStatus'),rows=document.getElementById('rcRows'),count=document.getElementById('rcCount'),workToggle=document.getElementById('rcWork');
+var COLOR={closure:'#cf3320',crash:'#f97316',weather:'#3B82F6',hazard:'#7C3AED',partial:'#a16207',work:'#F59E0B',other:'#6B7280'};
+var LABEL={closure:'Closed',crash:'Crash',weather:'Weather',hazard:'Hazard',partial:'Ramp / lane',work:'Work zone',other:'Alert'};
+var ON_TOGGLE={partial:1,work:1,other:1};
+function clean(t,n){var x=(t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/g,' ').replace(/\s+/g,' ').replace(/(\s*\|)+\s*(Status:\s*\w+)?\s*$/i,'').trim();n=n||200;if(x.length<=n)return x;var c=x.slice(0,n),sp=c.lastIndexOf(' ');return (sp>n*0.6?c.slice(0,sp):c).replace(/[\s,;:.|-]+$/,'')+'…';}
+function partial(txt){return /\b(ramp|shoulder|sidewalk|rest area)\b/.test(txt)||/\b(right|left|center|middle|one|two|three|hov|express|inside|outside|slow|fast) lanes?\b/.test(txt)||/\blane (closed|closure|blocked|restriction)/.test(txt)||/\blanes? (is|are) (closed|blocked)/.test(txt)||/\bsingle lane\b|\balternating\b|\breduced to one lane\b/.test(txt);}
+function fullWords(txt){return /\b(freeway|roadway|highway|road|route|interstate|bridge|tunnel|pass) (is )?closed\b|\bclosed (in )?both directions\b|\bfull closure\b|\bclosed to (all|thru|through) traffic\b/.test(txt);}
+function kind(r){var t=String(r['event-type-id']||'').toUpperCase(),txt=(clean(r.headline)+' '+clean(r['impact-desc'])+' '+clean(r.description)).toLowerCase();
+  // Explicit negation is handled first: "not closed", "no full closure is required", "no longer closed".
+  var neg=/\b(not|no|without|never)\s+(?:(?:yet|been|be|longer|full|complete|road|lane|highway|any)\s+)*clos(?:ed|ure|ures)\b|\bopen to traffic\b/.test(txt);
+  var closedText=!neg&&/\bclos(ed|ure)\b/.test(txt);
+  var isCL=t==='CL'&&!neg;
+  if(closedText&&partial(txt))return 'partial';
+  if(isCL&&!partial(txt))return 'closure';
+  if(closedText&&fullWords(txt))return 'closure';
+  if(t==='AC'||/\b(crash|collision|accident|overturn|rollover|jackknif)/.test(txt))return 'crash';
+  if(t==='WE'||/\b(snow|ice|icy|flood|fog|high wind|chain|blizzard|slick)/.test(txt))return 'weather';
+  if(t==='HZ')return 'hazard';
+  if(t==='RW')return 'work';
+  return 'other';}
+function when(r){var v=r['last-updated']||r['update-time']||r['date-updated'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
+function dirN(d){d=String(d||'').trim().toLowerCase();if(!d||/^(both|all|unknown|n\/a)/.test(d))return '';var m=d.match(/^(north|south|east|west)/);if(m)return m[1][0].toUpperCase()+'B';return /^(nb|sb|eb|wb)$/.test(d)?d.toUpperCase():'';}
+function starts(r){var v=r['start-time'];if(!v)return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
+function ago(d){var m=Math.round((Date.now()-d.getTime())/60000);if(m<1)return 'just now';if(m<60)return m+' min ago';var h=Math.round(m/60);if(h<48)return h+' h ago';return Math.round(h/24)+' d ago';}
+function icon(k){return L.divIcon({className:'',html:'<span class="rc-dot'+(k==='closure'?' big':'')+'" style="background:'+COLOR[k]+'"></span>',iconSize:[k==='closure'?18:14,k==='closure'?18:14],iconAnchor:[k==='closure'?9:7,k==='closure'?9:7]});}
+var markers={};
+function render(list){
+  layer.clearLayers();workLayer.clearLayers();markers={};
+  var shown=0;
+  list.forEach(function(a,i){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;if(ON_TOGGLE[a.k]&&shown>500)return;var m=L.marker([a.lat,a.lon],{icon:icon(a.k),zIndexOffset:a.k==='closure'?900:a.k==='crash'?800:100,opacity:a.future?0.55:1});
+    m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · MP '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+esc(a.dir):'')+(a.at?' · updated '+ago(a.at):'')+'</div><div class="fp-row">'+esc(a.fd&&a.fd.indexOf(a.fh)>=0?a.fd:a.fh)+'</div>'+(a.fd&&a.fh.indexOf(a.fd)<0&&a.fd.indexOf(a.fh)<0?'<div class="fp-row">'+esc(a.fd)+'</div>':'')+'</div>',{maxHeight:260,maxWidth:320});
+    (ON_TOGGLE[a.k]?workLayer:layer).addLayer(m);markers[i]=m;shown++;});
+  var listed=list.filter(function(a){return !ON_TOGGLE[a.k];}).slice(0,80);
+  if(!listed.length){rows.innerHTML='<div class="rc-empty"><b>No closures or crashes in the '+esc(DOT)+' feed right now.</b>Restrictions, roadwork and other reports are on the map when the box above is checked. '+esc(DOT)+' is the official source.</div>';}
+  else rows.innerHTML=listed.map(function(a){var i=list.indexOf(a);return '<div class="rc-row" data-i="'+i+'"><div class="t"><span class="rt">'+esc(a.route||LABEL[a.k])+(a.mp?' · MP '+esc(a.mp):'')+(a.dir?' '+esc(a.dir):'')+'</span><span class="kd '+a.k+'">'+(a.future?'Scheduled':LABEL[a.k])+'</span></div><div class="sub">'+(a.future?'<b>Starts '+a.start.toLocaleDateString([], {month:'short',day:'numeric'})+'.</b> ':'')+esc(a.head)+(a.at?' <span style="white-space:nowrap">· '+ago(a.at)+'</span>':'')+'</div></div>';}).join('');
+  // Counts left the map 2026-10-16 (Leah: they repeat the list below and clutter the map, as on /fire/).
+  // The pill now shows only while loading or when the feed fails; the feed time moved to the list header,
+  // source first ("TripCheck as of 2:55 PM") so the time reads as the DOT feed's, not MileCheck's (Leah, 2026-10-16).
+  status.className='rc-status ok';
+  count.textContent=(listed.length?listed.length+' listed · ':'')+DOT+' as of '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+rows.addEventListener('click',function(e){var r=e.target.closest('.rc-row');if(!r)return;var m=markers[r.getAttribute('data-i')];if(!m)return;if(!map.hasLayer(workLayer)&&workLayer.hasLayer(m))return;map.setView(m.getLatLng(),Math.max(map.getZoom(),9));m.openPopup();});
+if(workToggle)workToggle.addEventListener('change',function(){if(workToggle.checked)workLayer.addTo(map);else map.removeLayer(workLayer);});
+// Wildfires (10-25): the Worker's /fires list (NIFC + BC), this state only, prescribed burns left out. Off by default.
+var fireLayer=L.layerGroup();
+fetch(WORKER+'/fires',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){((d&&d.fires)||[]).forEach(function(x){if(x.state!=='US-'+ST||x.isRx||!isFinite(x.lat))return;L.circleMarker([x.lat,x.lon],{radius:Math.min(14,5+Math.log10((x.acres||1)+1)*2),color:'#7f1d1d',weight:1,fillColor:'#B91C1C',fillOpacity:.8}).bindPopup('<b>'+esc(x.name||'Fire')+'</b><br>'+(x.acres!=null?Math.round(x.acres).toLocaleString()+' acres':'Size not reported')+(x.containedPct!=null?' · '+x.containedPct+'% contained':'')+'<br><span style="color:#8A939B">Source: NIFC via MileCheck</span>').addTo(fireLayer);});}).catch(function(){});
+// Seattle drawbridges (10-25): the five bridges SDOT reports live, from /bridge-status. WA only.
+var bridgeLayer=L.layerGroup();
+if(ST==='WA'){var BR=[['fremont','Fremont Bridge',47.6476,-122.3499],['ballard','Ballard Bridge',47.6596,-122.3765],['montlake','Montlake Bridge',47.6473,-122.3045],['south-park','South Park Bridge',47.5290,-122.3140],['first-ave-s','1st Ave S Bridge',47.5420,-122.3343]];
+fetch(WORKER+'/bridge-status',{cache:'no-store'}).then(function(r){return r.ok?r.json():{};}).catch(function(){return {};}).then(function(d){var up=(d&&d.raised)||[];BR.forEach(function(b){var isUp=up.indexOf('WA-bridge-'+b[0])>=0;L.circleMarker([b[2],b[3]],{radius:7,color:'#4c1d95',weight:1,fillColor:isUp?'#DC2626':'#7C3AED',fillOpacity:.9}).bindPopup('<b>'+b[1]+'</b><br>'+(isUp?'Raised now':'Down, open to traffic')+'<br><a href="/seattle-drawbridges/" target="_blank" rel="noopener">Seattle drawbridges live</a>').addTo(bridgeLayer);});});}
+window.mcMapOptions={layers:[{label:'Closures and crashes',color:'#cf3320',layer:layer},{label:'Restrictions and roadwork',color:'#F59E0B',layer:workLayer},(typeof PLOWS!=='undefined'&&PLOWS)?{label:'Snowplows',color:'#0369A1',layer:plowLayer}:null,{label:'Wildfires',color:'#B91C1C',layer:fireLayer},(ST==='WA')?{label:'Seattle drawbridges',color:'#7C3AED',layer:bridgeLayer}:null].filter(Boolean)};
+window.mcExtraLayers={state:ST};
+var last=null;
+function load(){
+  fetch(WORKER+'/incidents?state='+ST,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){
+    if(!Array.isArray(d['incident-reports']))throw new Error('unexpected payload');
+    var list=d['incident-reports'].map(function(r){var loc=r.location||{},sl=loc['start-location']||{};var st=starts(r),future=!!(st&&st.getTime()>Date.now()+3600000);return {k:kind(r),lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r.description||r['impact-desc']||'Alert',180),fh:clean(r.headline||r.description||r['impact-desc']||'Alert',1500),fd:clean(r.description||r['impact-desc']||'',1500),at:when(r),start:st,future:future};});
+    var order={closure:0,crash:1,weather:2,hazard:3,partial:4,other:5,work:6};
+    list.sort(function(a,b){return (a.future-b.future)||order[a.k]-order[b.k]||((b.at?b.at.getTime():0)-(a.at?a.at.getTime():0));});
+    last=list;render(list);
+  }).catch(function(e){
+    status.className='rc-status err';status.textContent='Live data from '+DOT+' is unavailable right now. Check '+DOT+' directly.';
+    if(!last)rows.innerHTML='<div class="rc-empty err"><b>Could not load the '+esc(DOT)+' feed.</b>That is an outage, not an all-clear. <a href="'+esc(DOTURL)+'" target="_blank" rel="noopener">Open '+esc(DOT)+'</a> for the official list.</div>';
+  });
+}
+function loadPlows(){if(!PLOWS)return;fetch(WORKER+'/plows?state='+ST,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){plowLayer.clearLayers();var list=MCPlows.sort(((d&&d.plows)||[]).filter(function(t){return isFinite(+t.lat)&&isFinite(+t.lon);}).map(function(t){return MCPlows.normalize(t);}));list.forEach(function(t){var m=L.marker([t.lat,t.lon],{icon:MCPlows.icon(t,L),zIndexOffset:t.stale?400:700});m.bindPopup('<div class="fpop">'+MCPlows.card(t)+'</div>');plowLayer.addLayer(m);});var el=document.getElementById('rcPlowCount');if(el)el.textContent=MCPlows.summary(list);var cn=document.getElementById('rcPlowNote');if(cn){var txt=MCPlows.cameraNote(list);cn.textContent=txt;cn.style.display=txt?'block':'none';}}).catch(function(){var el=document.getElementById('rcPlowCount');if(el)el.textContent='plow feed unavailable';});}
+if(plowToggle)plowToggle.addEventListener('change',function(){if(plowToggle.checked)plowLayer.addTo(map);else map.removeLayer(plowLayer);});
+load();loadPlows();setInterval(load,300000);setInterval(loadPlows,60000);
+})();</script>
+  <script src="/assets/state-pick.js" defer></script>
+<div id="mt-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#14532d;color:#fff;font:13px -apple-system,sans-serif;padding:6px 12px;text-align:center">Map test: MileCheck's own map, built from US government data. Washington only. Not a public page.</div>
+</body>
+</html>

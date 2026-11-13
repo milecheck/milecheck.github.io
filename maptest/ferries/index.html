@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Washington ferry sailings, space and cameras | MileCheck</title>
+  <meta name="description" content="Pick a Washington State Ferries route to see next sailings with drive-up space left, terminal cameras and boats on the map. Live from WSDOT every minute.">
+
+  <meta property="og:title" content="Washington ferries, live: next sailings, space left, cameras, boats on the map">
+  <meta property="og:description" content="Pick a route. Next sailings with space left, terminal cameras, and the boats on the water, live from WSDOT.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/ferries/">
+  <meta property="og:type" content="website">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Washington ferries, live: next sailings, space left, cameras, boats on the map">
+  <meta name="twitter:description" content="Pick a route. Next sailings with space left, terminal cameras, and the boats on the water, live from WSDOT.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="canonical" href="https://milecheckapp.com/ferries/">
+
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How full is the next Washington State Ferry?","acceptedAnswer":{"@type":"Answer","text":"This page shows live drive-up vehicle space for upcoming Washington State Ferries sailings at each terminal, straight from WSDOT's terminal feed, refreshed every minute. Space counts change fast near departure time."}},{"@type":"Question","name":"Which ferry terminals does this page cover?","acceptedAnswer":{"@type":"Answer","text":"Every WSF terminal reporting sailing space — including Seattle, Bainbridge Island, Edmonds, Kingston, Mukilteo, Clinton, Fauntleroy, Vashon, Southworth, Point Defiance, Tahlequah, and Anacortes for the San Juan Islands."}},{"@type":"Question","name":"Does drive-up space guarantee I will make the sailing?","acceptedAnswer":{"@type":"Answer","text":"No — space counts are live but change quickly, and vehicle loading closes before departure. Use the counts as a planning signal, leave buffer time, and consider a reservation on routes that offer them."}}],"@id":"https://milecheckapp.com/ferries/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    .fy-hero{max-width:1160px;margin:0 auto;padding:30px 20px 6px;}
+    .fy-hero h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em;}
+    .fy-hero h1 .accent{color:#0f7a4f;}
+    .fy-hero p.sub{color:#5b6670;font-size:15px;margin-top:8px;max-width:74ch;line-height:1.55;}
+    .fy-wrap{max-width:1160px;margin:0 auto;padding:10px 20px 40px;}
+    .fy-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:14px 0 12px;}
+    .fy-ctl label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6670;}
+    .fy-ctl select{font:inherit;font-size:15px;font-weight:600;padding:9px 34px 9px 12px;border:1px solid #E5E5E5;border-radius:10px;background:#fff;color:#0E1116;min-width:260px;}
+    .fy-seg{display:inline-flex;border:1px solid #E5E5E5;border-radius:10px;overflow:hidden;background:#fff;}
+    .fy-seg button{font:inherit;font-size:13px;font-weight:700;padding:8px 12px;border:0;background:transparent;color:#5b6670;cursor:pointer;}
+    .fy-seg button[aria-pressed="true"]{background:#0f7a4f;color:#fff;}
+    .fy-status{font-size:12.5px;color:#8a8fa3;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+    .fy-disrupt{display:none;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:10px 14px;margin:0 0 12px;font-size:14px;color:#9a3412;}
+    .fy-disrupt.on{display:block;}
+    .fy-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;background:#fff;}
+    #fyMap{height:62vh;min-height:420px;width:100%;z-index:0;}
+    .fy-card{position:absolute;top:12px;right:12px;width:min(360px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:14px 14px 12px;z-index:500;display:none;}
+    .fy-card.on{display:block;}
+    .fy-card .cx{position:absolute;top:6px;right:8px;border:0;background:transparent;font-size:22px;line-height:1;color:#8a8fa3;cursor:pointer;}
+    .fy-card h3{font-size:17px;font-weight:800;margin:0 26px 2px 0;}
+    .fy-card .k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8fa3;margin:12px 0 6px;}
+    .fy-card .k:first-of-type{margin-top:6px;}
+    .fy-sail{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;padding:6px 0;border-top:1px solid #f0f0f0;font-size:13.5px;}
+    .fy-sail:first-child{border-top:0;}
+    .fy-sail .t{font-family:'JetBrains Mono',monospace;font-weight:700;color:#0E1116;white-space:nowrap;}
+    .fy-sail .d{color:#3a444d;min-width:0;}
+    .fy-sail .d small{display:block;color:#8a8fa3;font-size:12px;}
+    .fy-sail .sp{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;white-space:nowrap;text-align:right;}
+    .fy-sail .bar{grid-column:1 / -1;height:4px;border-radius:2px;background:#eef0f2;overflow:hidden;}
+    .fy-sail .bar i{display:block;height:100%;background:#0f7a4f;}
+    .fy-sail.low .sp{color:#b45309;} .fy-sail.low .bar i{background:#f59e0b;}
+    .fy-sail.full .sp{color:#b91c1c;} .fy-sail.full .bar i{background:#dc2626;}
+    .fy-fares{font-size:12.5px;color:#3a444d;margin:0 0 6px;line-height:1.6;}
+    .fy-fare{display:inline-block;margin-right:10px;white-space:nowrap;}
+    .fy-walkmode .fy-sail .sp,.fy-walkmode .fy-sail .bar{display:none;}
+    .fy-walkmode .fy-sail{grid-template-columns:auto 1fr;}
+    .fy-sail.cx .t,.fy-sail.cx .d{text-decoration:line-through;color:#8a8fa3;}
+    .fy-cams{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .fy-cam{display:block;border:1px solid #E5E5E5;border-radius:8px;overflow:hidden;text-decoration:none;color:inherit;background:#f6f7f8;}
+    .fy-cam img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;}
+    .fy-cam span{display:block;font-size:11.5px;line-height:1.3;padding:5px 7px;color:#3a444d;}
+    .fy-empty{font-size:13.5px;color:#8a8fa3;padding:6px 0;}
+    .fy-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:#5b6670;margin:10px 2px 0;}
+    .fy-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#0f7a4f;vertical-align:-1px;margin-right:6px;}
+    .fy-legend b{display:inline-block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #1d4ed8;vertical-align:-1px;margin-right:6px;}
+    .fy-legend .fy-camleg{display:inline-block;width:10px;height:10px;border-radius:2px;background:#f59e0b;vertical-align:-1px;margin-right:6px;}
+    .fy-legend u{display:inline-block;width:18px;height:0;border-top:3px solid #1d4ed8;vertical-align:3px;margin-right:6px;text-decoration:none;}
+    .fy-lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px;}
+    .fy-route{margin-top:22px;}
+    .fy-route h3{font-size:19px;font-weight:800;margin:0;padding-bottom:6px;border-bottom:2px solid #0f7a4f;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+    .fy-route h3 small{font-size:12.5px;font-weight:600;color:#5b6670;margin-left:8px;flex:1;}
+    .fy-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px;padding:14px 16px;background:#fff;border:1px solid #E5E5E5;border-radius:14px;}
+    .fy-fact .k{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8fa3;margin-bottom:3px;}
+    .fy-fact b{font-size:14.5px;}
+    .fy-factnote{grid-column:1 / -1;font-size:13.5px;color:#3a444d;line-height:1.55;margin:4px 0 0;}
+    .fy-factnote a{color:#0f7a4f;font-weight:700;}
+    .fy-route h3 a{font-size:13px;font-weight:700;color:#0f7a4f;text-decoration:none;white-space:nowrap;}
+    .fy-term{background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:14px 16px;}
+    .fy-term h2{font-size:17px;font-weight:800;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+    .fy-term h2 small{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8fa3;}
+    .fy-term .sub{font-size:12.5px;color:#8a8fa3;margin:0 0 6px;}
+    .fy-term .more{font-size:13px;font-weight:700;color:#0f7a4f;text-decoration:none;display:inline-block;margin-top:8px;}
+    .fy-note{max-width:1160px;margin:22px auto 0;padding:0 20px;font-size:14px;color:#5b6670;line-height:1.6;}
+    .fy-note h2{font-size:20px;color:#0E1116;margin:22px 0 8px;}
+    .fy-note p{margin:0 0 10px;}
+    .fy-cta{background:#fff;border:1px solid #E5E5E5;border-radius:12px;padding:12px 16px;font-size:14px;}
+    .fy-tdot{width:14px;height:14px;border-radius:50%;background:#0f7a4f;border:2.5px solid #fff;box-shadow:0 0 0 1.5px #0f7a4f;}
+    .fy-camdot{width:12px;height:12px;border-radius:3px;background:#f59e0b;border:2px solid #fff;box-shadow:0 0 0 1px #b45309;cursor:pointer;}
+    .fy-tdot.dim{background:#9aa5ad;box-shadow:0 0 0 1.5px #9aa5ad;}
+    .fy-tlabel{background:transparent;border:0;box-shadow:none;font:700 12px/1 'Inter',sans-serif;color:#0E1116;text-shadow:0 0 3px #fff,0 0 3px #fff;white-space:nowrap;}
+    .fy-boat{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:18px solid #1d4ed8;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));transform-origin:50% 60%;}
+    .fy-boat.dock{border-bottom-color:#64748b;}
+    @media(max-width:720px){ #fyMap{height:52vh;} .fy-card{top:auto;bottom:10px;right:10px;left:10px;width:auto;max-height:55%;} .fy-ctl select{min-width:0;flex:1 1 100%;} .fy-status{margin-left:0;flex-basis:100%;} }
+    </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
+  <script src="/assets/map-kit.js?v=20261111a" defer></script>
+<style data-seo-img>:where(img[width][height]){height:auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
+<!-- mv:start --><script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/d74ff19f-a5bf-47fa-a630-0a438f90c11a.js"></script><!-- mv:end -->
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
+  <script src="/assets/site-nav.js?v=20261102-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261102-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps" aria-current="page">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/pricing/" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header --><!-- mvb:start --><div id="ad-management-config-settings" data-blocklist-adhesion-mobile="1" data-blocklist-universal-player-mobile="1" data-blocklist-universal-player-desktop="1"></div><!-- mvb:end -->
+  <div class="fy-hero">
+    <h1>Washington <span class="accent">ferries</span>, live</h1>
+    <p class="sub">Pick a route. The next sailings with the drive-up space left on each boat, the cameras at both terminals, and the boats on the water right now. Live from WSDOT, refreshed every minute.</p>
+  </div>
+  <div class="fy-wrap">
+    <div class="fy-ctl">
+      <label for="fyRoute">Route</label>
+      <select id="fyRoute"><option value="">All routes</option></select>
+      <div class="fy-seg" role="group" aria-label="How you board"><button type="button" id="fyDrive" aria-pressed="true">Driving on</button><button type="button" id="fyWalk" aria-pressed="false">Walking on</button></div>
+      <div class="fy-seg" role="group" aria-label="Time format"><button type="button" id="fy12" aria-pressed="true">12-hour</button><button type="button" id="fy24" aria-pressed="false">24-hour</button></div>
+      <div class="fy-status"><span id="fyNow"></span> · <span id="fyUpdated">Loading…</span></div>
+    </div>
+    <div class="fy-disrupt" id="fyDisrupt"></div>
+    <div class="fy-mapbox">
+      <div id="fyMap"></div>
+      <div class="fy-card" id="fyCard"></div>
+    </div>
+    <div class="fy-legend"><span><i></i>Terminal (tap for sailings and cameras)</span><span><b></b>Boat, pointing the way it is heading</span><span><em class="fy-camleg"></em>Camera (tap for the picture)</span><span><u></u>Route, drawn approximately</span><span id="fyTzNote"></span></div>
+    <div id="fyLists"></div>
+  </div>
+
+  <div class="fy-note">
+    <div class="fy-cta"><b>Driving to the terminal?</b> The MileCheck app shows your nearest mile marker, live road alerts and pass conditions on the way, with CarPlay and Android Auto. <a href="/get/">Get the app</a>.</div>
+    <h2>Reading the space number</h2>
+    <p>"43 of 120 left" means 43 drive-up vehicle spaces remain of the 120 on that sailing, as WSDOT last reported it. "Full" with a number after it means more cars are already in line than the boat holds. Reservable spaces, where a route sells them, are shown separately. Counts move fast in the last half hour before departure. They are a planning signal, not a promise.</p>
+    <h2>What this page covers</h2>
+    <p>Every Washington State Ferries route. Sailing space comes from the terminals that report it (Anacortes, Bainbridge Island, Bremerton, Clinton, Seattle, Edmonds, Friday Harbor, Coupeville, Kingston, Mukilteo, Orcas Island, Point Defiance, Port Townsend). Fauntleroy, Vashon, Southworth, Tahlequah, Lopez and Shaw show their cameras and boats but do not report space. Route lines are drawn approximately, not from the vessels' tracks. Cameras are WSDOT's, refreshed on their schedule.</p>
+  </div>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<style id="one-width">body>:not(header):not(footer):not(script):not(style):not(.mc-signup){max-width:1040px!important;width:auto!important;margin-left:auto!important;margin-right:auto!important;padding-left:max(16px,env(safe-area-inset-left,0px))!important;padding-right:max(16px,env(safe-area-inset-right,0px))!important;box-sizing:border-box}</style>
+
+<script>
+(function(){
+var W='https://api.milecheckapp.com';
+var TZ='America/Los_Angeles';
+// Terminal positions (WSDOT terminal docks). Names match the WSDOT feed after trim().
+var T={
+ 'Seattle':[47.6025,-122.3384],'Bainbridge Island':[47.6227,-122.5114],'Bremerton':[47.5623,-122.6247],
+ 'Edmonds':[47.8115,-122.3835],'Kingston':[47.7960,-122.4966],'Mukilteo':[47.9497,-122.3040],'Clinton':[47.9752,-122.3513],
+ 'Anacortes':[48.5069,-122.6790],'Friday Harbor':[48.5352,-123.0142],'Orcas Island':[48.5978,-122.9440],'Lopez Island':[48.5711,-122.8830],'Shaw Island':[48.5840,-122.9296],
+ 'Coupeville':[48.1595,-122.6730],'Port Townsend':[48.1123,-122.7590],'Point Defiance':[47.3064,-122.5145],'Tahlequah':[47.3320,-122.5069],
+ 'Fauntleroy':[47.5232,-122.3929],'Vashon Island':[47.5100,-122.4636],'Southworth':[47.5130,-122.4954]};
+// Routes: feed abbrev → terminals on it and an approximate water line. Hand-placed waypoints, not tracks.
+var R={
+ 'sea-bi':{name:'Seattle / Bainbridge Island',t:['Seattle','Bainbridge Island'],lines:[[[47.6025,-122.3384],[47.608,-122.40],[47.618,-122.48],[47.6227,-122.5114]]]},
+ 'sea-br':{name:'Seattle / Bremerton',t:['Seattle','Bremerton'],lines:[[[47.6025,-122.3384],[47.592,-122.42],[47.578,-122.50],[47.567,-122.56],[47.559,-122.595],[47.5623,-122.6247]]]},
+ 'ed-king':{name:'Edmonds / Kingston',t:['Edmonds','Kingston'],lines:[[[47.8115,-122.3835],[47.805,-122.44],[47.7960,-122.4966]]]},
+ 'muk-cl':{name:'Mukilteo / Clinton',t:['Mukilteo','Clinton'],lines:[[[47.9497,-122.3040],[47.9752,-122.3513]]]},
+ 'pt-key':{name:'Port Townsend / Coupeville',t:['Port Townsend','Coupeville'],lines:[[[48.1123,-122.7590],[48.135,-122.72],[48.1595,-122.6730]]]},
+ 'pd-tal':{name:'Point Defiance / Tahlequah',t:['Point Defiance','Tahlequah'],lines:[[[47.3064,-122.5145],[47.3320,-122.5069]]]},
+ 'f-v-s':{name:'Fauntleroy / Vashon / Southworth',t:['Fauntleroy','Vashon Island','Southworth'],lines:[[[47.5232,-122.3929],[47.5100,-122.4636],[47.5130,-122.4954]]]},
+ 'f-s':{name:'Fauntleroy / Southworth',t:['Fauntleroy','Southworth'],lines:[[[47.5232,-122.3929],[47.518,-122.445],[47.5130,-122.4954]]]},
+ 's-v':{name:'Southworth / Vashon',t:['Southworth','Vashon Island'],lines:[[[47.5130,-122.4954],[47.5100,-122.4636]]]},
+ 'ana-sj':{name:'Anacortes / San Juan Islands',t:['Anacortes','Lopez Island','Shaw Island','Orcas Island','Friday Harbor'],lines:[[[48.5069,-122.6790],[48.52,-122.75],[48.55,-122.83],[48.5711,-122.8830],[48.58,-122.92],[48.5840,-122.9296],[48.5978,-122.9440]],[[48.5840,-122.9296],[48.562,-122.975],[48.5352,-123.0142]]]}
+};
+// Route facts. Crossing times are WSDOT's published schedule times, rounded ("about").
+// Reservations: only the San Juan and Port Townsend routes take them (WSDOT Save A Spot).
+var F={
+ 'sea-bi':{cross:'about 35 min',res:false,freq:'roughly every 50 min',note:'Downtown Seattle to Bainbridge. Walk-ons and bikes board first.'},
+ 'sea-br':{cross:'about 60 min',res:false,freq:'roughly every 70 to 90 min',note:'The long Seattle crossing through Rich Passage.'},
+ 'ed-king':{cross:'about 30 min',res:false,freq:'roughly every 40 to 50 min',note:'The main route to the Olympic Peninsula from the north end.'},
+ 'muk-cl':{cross:'about 20 min',res:false,freq:'roughly every 30 min',note:'Whidbey Island. Short, frequent, and the line backs up on summer weekends.'},
+ 'f-v-s':{cross:'about 20 min to Vashon, 40 min to Southworth',res:false,freq:'varies, three-terminal loop',note:'Some sailings stop at Vashon on the way to Southworth. Check the destination on each sailing.'},
+ 'f-s':{cross:'about 35 min',res:false,freq:'varies',note:'Direct Fauntleroy to Southworth sailings.'},
+ 's-v':{cross:'about 10 min',res:false,freq:'varies',note:'The short hop across Colvos Passage.'},
+ 'pd-tal':{cross:'about 15 min',res:false,freq:'roughly every 35 to 55 min',note:'Tacoma to the south end of Vashon.'},
+ 'pt-key':{cross:'about 35 min',res:true,freq:'roughly every 90 min',note:'Reservations recommended in summer. Vehicles over 80 ft cannot board here.'},
+ 'ana-sj':{cross:'about 45 min to Lopez, 60 to 85 min to Orcas, 65 to 105 min to Friday Harbor',res:true,freq:'varies by island',note:'Reservations recommended; drive-up space on peak days is often gone. Sailings can stop at several islands, so the destination list on each sailing matters.'}
+};
+var RULES='Vehicles up to 7 ft 6 in tall pay the standard fare; taller ones pay by length. Walk-on passengers and bicycles are never turned away. Arrive early: WSDOT asks for 20 minutes on most routes and more where reservations run, and a reservation is released if you miss its check-in cutoff. On most Puget Sound routes walk-on fares are collected westbound only, while vehicle fares are collected each way. The fares shown are what WSDOT charges today, per direction.';
+var ORDER=['sea-bi','sea-br','ed-king','muk-cl','f-v-s','f-s','s-v','pd-tal','pt-key','ana-sj'];
+var $=function(id){return document.getElementById(id)};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var h24=false; try{h24=localStorage.getItem('mc_time24')==='1'}catch(e){}
+var walk=false; try{walk=localStorage.getItem('mc_ferry_walk')==='1'}catch(e){}
+var fares=null; // {from,to,adult,vehicleDriver} pairs from the Worker
+function fareFor(from,to){if(!fares)return null;var f=fares.find(function(p){return p.from===from&&p.to===to});return f||null}
+function money(v){return v==null?'—':(v===0?'free':'$'+v.toFixed(2))}
+function setWalk(v){walk=v;try{localStorage.setItem('mc_ferry_walk',v?'1':'0')}catch(e){};$('fyDrive').setAttribute('aria-pressed',String(!v));$('fyWalk').setAttribute('aria-pressed',String(v));document.body.classList.toggle('fy-walkmode',v);render()}
+function fmtTime(iso){var d=new Date(iso);if(isNaN(d))return '';return d.toLocaleTimeString('en-US',{timeZone:TZ,hour:h24?'2-digit':'numeric',minute:'2-digit',hour12:!h24})}
+function tzName(){try{return new Intl.DateTimeFormat('en-US',{timeZone:TZ,timeZoneName:'short'}).formatToParts(new Date()).filter(function(p){return p.type==='timeZoneName'})[0].value}catch(e){return 'PT'}}
+function tick(){var el=$('fyNow');if(el)el.textContent='Now '+fmtTime(new Date().toISOString())+' '+tzName();var n=$('fyTzNote');if(n)n.textContent='All times '+tzName()}
+function setH24(v){h24=v;try{localStorage.setItem('mc_time24',v?'1':'0')}catch(e){};$('fy12').setAttribute('aria-pressed',String(!v));$('fy24').setAttribute('aria-pressed',String(v));render()}
+$('fy12').addEventListener('click',function(){setH24(false)});$('fy24').addEventListener('click',function(){setH24(true)});
+$('fy12').setAttribute('aria-pressed',String(!h24));$('fy24').setAttribute('aria-pressed',String(h24));
+$('fyDrive').addEventListener('click',function(){setWalk(false)});$('fyWalk').addEventListener('click',function(){setWalk(true)});
+$('fyDrive').setAttribute('aria-pressed',String(!walk));$('fyWalk').setAttribute('aria-pressed',String(walk));document.body.classList.toggle('fy-walkmode',walk);
+var sel=$('fyRoute');ORDER.forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=R[k].name;sel.appendChild(o)});
+var route=''; try{var q=new URLSearchParams(location.search).get('route');if(q&&R[q])route=q;else{var st=localStorage.getItem('mc_ferry_route');if(st&&R[st])route=st}}catch(e){}
+sel.value=route;
+sel.addEventListener('change',function(){route=sel.value;try{localStorage.setItem('mc_ferry_route',route)}catch(e){};closeCard();fitRoute();render()});
+
+var map=L.map('fyMap',{zoomControl:true,scrollWheelZoom:false});
+{const P=window.__mtP||(window.__mtP=new pmtiles.Protocol());maplibregl.addProtocol('pmtiles',P.tile);const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
+function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#26302b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094'}:
+{land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#dedbd2',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f'};
+const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
+return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
+sources:{b:{type:'vector',url:'pmtiles://'+abs('wa.pmtiles')},l:{type:'vector',url:'pmtiles://'+abs('local.pmtiles')},m:{type:'vector',url:'pmtiles://'+abs('mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('poi.pmtiles')},k:{type:'vector',url:'pmtiles://'+abs('blocks.pmtiles')},
+a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
+layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
+{id:'water',type:'fill','source':'b','source-layer':'water',paint:{'fill-color':C.water}},
+{id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
+{id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
+{id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
+{id:'sr',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'state'],paint:{'line-color':C.st,'line-width':rw(.6,2.5)}},
+{id:'us',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'us'],layout:{'line-cap':'round'},paint:{'line-color':C.us,'line-width':rw(1,4)}},
+{id:'ic',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.ic,'line-width':rw(2,7.5)}},
+{id:'i',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-color':C.i,'line-width':rw(1.4,5)}},
+{id:'blk',type:'line',source:'k','source-layer':'blocks',minzoom:13,paint:{'line-color':C.minor,'line-width':['interpolate',['linear'],['zoom'],13,1,17,4],'line-opacity':.9}},{id:'blkn',type:'symbol',source:'k','source-layer':'blocks',minzoom:15,layout:{'symbol-placement':'line-center','text-field':['concat',['to-string',['*',['floor',['/',['to-number',['slice',['get','r'],0,['index-of','-',['get','r']]]],100]],100]],' block of ',['get','n']],'text-font':['bold'],'text-size':10},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5}},{id:'mp',type:'circle','source':'m','source-layer':'mp',minzoom:8,filter:['any',['>=',['zoom'],10],['==',['get','t'],1]],paint:{'circle-color':C.mp,'circle-radius':['interpolate',['linear'],['zoom'],8,2,12,4],'circle-stroke-color':C.halo,'circle-stroke-width':1}},
+{id:'mpl',type:'symbol','source':'m','source-layer':'mp',minzoom:11,layout:{'text-field':['to-string',['get','mp']],'text-font':['bold'],'text-size':10,'text-offset':[0,1]},paint:{'text-color':C.mp,'text-halo-color':C.halo,'text-halo-width':1.5}},
+{id:'ref',type:'symbol','source':'b','source-layer':'roads',filter:['all',['!=',['get','ref'],''],['any',['in',['get','c'],['literal',['interstate','us']]],['>=',['zoom'],9]]],layout:{'symbol-placement':'line','symbol-spacing':260,'text-field':['get','ref'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],6,10,12,13],'text-rotation-alignment':'viewport'},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':2}},
+{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],60000000,8,15000000,10,2000000,11,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
+{id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'text-field':['get','l'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],9,7,13,9],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}},{id:'countyn',type:'symbol',source:'q','source-layer':'county',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
+
+const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);
+(function(){
+const LAY={snowamt:['Snow (6 hr)','ndfd.conus.snowamt'],qpf:['Rain and snow water (6 hr)','ndfd.conus.qpf'],windgust:['Wind gusts','ndfd.conus.windgust'],t:['Temperature','ndfd.conus.t'],wwa:['Warnings','ndfd.conus.wwa']};
+const times={};let cur='snowamt',wms=null;map.attributionControl.setPrefix(false);if(!map.getPane('fc')){map.createPane('fc');map.getPane('fc').style.zIndex=390;map.getPane('fc').style.pointerEvents='none';}
+const box=L.control({position:'bottomleft'});
+box.onAdd=()=>{const d=L.DomUtil.create('div','fc-box');d.innerHTML='<div class="fc-row"><select id="fcLayer" aria-label="Forecast layer"><option value="">Forecast off</option>'+Object.entries(LAY).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join('')+'</select><span id="fcTime">-</span></div><input id="fcSlider" type="range" min="0" max="0" value="0" aria-label="Forecast time" disabled><div class="fc-src">NOAA National Weather Service forecast</div>';L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d};
+box.addTo(map);
+const st=document.createElement('style');st.textContent='.fc-box{background:#fff;color:#16201b;padding:8px 10px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.3);font:12px -apple-system,sans-serif;min-width:230px}.fc-row{display:flex;gap:8px;align-items:center;justify-content:space-between}.fc-box select{font:inherit;padding:4px}.fc-box input{width:100%;margin-top:6px}.fc-src{color:#5b675f;font-size:10px;margin-top:2px}';document.head.appendChild(st);
+const sel=document.getElementById('fcLayer'),sl=document.getElementById('fcSlider'),lab=document.getElementById('fcTime');
+const fmt=t=>new Date(t+':00Z').toLocaleString([], {weekday:'short',hour:'numeric'});
+function fallback(k){const step=(k==='snowamt'||k==='qpf')?6:3;const out=[];const n=new Date();n.setUTCMinutes(0,0,0);n.setUTCHours(Math.ceil(n.getUTCHours()/step)*step);for(let i=0;i<(step===6?16:40);i++){out.push(new Date(n.getTime()+i*step*3600e3).toISOString().slice(0,16))}return out}
+fetch('https://digital.weather.gov/ndfd.conus/wms?REQUEST=GetCapabilities').then(r=>r.text()).then(s=>{for(const k in LAY){const m=new RegExp('<Name>'+LAY[k][1]+'</Name>[\\s\\S]*?<Dimension name="vtit"[^>]*>([^<]+)').exec(s);if(m)times[k]=m[1].split(',').filter(t=>new Date(t+':00Z')>Date.now()-3*3600e3)}}).catch(()=>{}).finally(()=>{});
+function show(){if(wms){map.removeLayer(wms);wms=null}if(!cur){sl.disabled=true;lab.textContent='-';return}const ts=times[cur]||fallback(cur);sl.max=ts.length-1;sl.disabled=false;const t=ts[Math.min(+sl.value,ts.length-1)];lab.textContent=fmt(t);
+ wms=L.tileLayer.wms('https://digital.weather.gov/ndfd.conus/wms',{layers:LAY[cur][1],format:'image/png',transparent:true,opacity:.6,pane:'fc',vtit:t,version:'1.3.0',attribution:''}).addTo(map)}
+sel.onchange=()=>{cur=sel.value;sl.value=0;show()};sl.oninput=show;
+})();
+
+}
+var lineLayer=L.layerGroup().addTo(map), camLayer=L.layerGroup().addTo(map), termLayer=L.layerGroup().addTo(map), boatLayer=L.layerGroup().addTo(map);
+var data=null, cams=[], terminalsByName={};
+function terminalsFor(){return route?R[route].t:Object.keys(T)}
+function fitRoute(){var pts=terminalsFor().map(function(n){return T[n]});if(route){R[route].lines.forEach(function(l){pts=pts.concat(l)})}map.fitBounds(L.latLngBounds(pts).pad(route?0.25:0.08))}
+function drawStatic(){
+  lineLayer.clearLayers();termLayer.clearLayers();
+  var keys=route?[route]:ORDER;
+  keys.forEach(function(k){R[k].lines.forEach(function(l){L.polyline(l,{color:'#1d4ed8',weight:route?4:2.5,opacity:route?0.85:0.45,dashArray:route?null:'6 6'}).addTo(lineLayer)})});
+  terminalsFor().forEach(function(n){
+    var reports=!!terminalsByName[n];
+    var m=L.marker(T[n],{icon:L.divIcon({className:'',html:'<div class="fy-tdot'+(reports?'':' dim')+'"></div>',iconSize:[14,14],iconAnchor:[7,7]}),zIndexOffset:400}).addTo(termLayer);
+    // The topo base already prints the town names, so a permanent label printed each one twice
+    // (Leah 10-13). Terminal name shows on hover; tapping opens the terminal.
+    m.bindTooltip(n,{direction:'right',offset:[8,0],className:'fy-tlabel'});
+    m.on('click',function(){openTerminal(n)});
+  });
+}
+function drawCams(){
+  camLayer.clearLayers(); if(!cams.length)return;
+  var seen={};
+  terminalsFor().forEach(function(n){camsNear(n).forEach(function(c){var k=c.lat.toFixed(4)+','+c.lon.toFixed(4)+c.title;if(seen[k])return;seen[k]=1;
+    var m=L.marker([c.lat,c.lon],{icon:L.divIcon({className:'',html:'<div class="fy-camdot" title="'+esc(c.title)+'"></div>',iconSize:[12,12],iconAnchor:[6,6]}),zIndexOffset:150}).addTo(camLayer);
+    m.bindPopup('<a href="'+esc(c.imageUrl)+'" target="_blank" rel="noopener"><img src="'+esc(c.imageUrl)+'" alt="" style="display:block;width:260px;max-width:70vw;border-radius:6px"></a><div style="font:600 12px Inter,sans-serif;margin-top:6px">'+esc(c.title.replace(/^WSF\s+/,''))+'</div>',{maxWidth:300});
+  })});
+}
+function drawBoats(){
+  boatLayer.clearLayers(); if(!data||!data.vessels)return;
+  var names=terminalsFor();
+  data.vessels.forEach(function(v){
+    if(!isFinite(v.lat)||!isFinite(v.lon))return;
+    if(route&&names.indexOf(String(v.departingTerminal||'').trim())<0&&names.indexOf(String(v.arrivingTerminal||'').trim())<0)return;
+    var m=L.marker([v.lat,v.lon],{icon:L.divIcon({className:'',html:'<div class="fy-boat'+(v.atDock?' dock':'')+'" style="transform:rotate('+(Math.round(v.heading)||0)+'deg)"></div>',iconSize:[16,18],iconAnchor:[8,11]}),zIndexOffset:200}).addTo(boatLayer);
+    var to=v.arrivingTerminal?' → '+esc(v.arrivingTerminal):'';
+    m.bindTooltip('<b>'+esc(v.name)+'</b>'+(v.atDock?' at '+esc(v.departingTerminal||'dock'):' '+esc(v.departingTerminal||'')+to)+(v.eta&&!v.atDock?'<br>ETA '+fmtTime(v.eta):'')+(v.speedKnots&&!v.atDock?' · '+Math.round(v.speedKnots)+' kn':''),{direction:'top',offset:[0,-8]});
+  });
+}
+function spaceInfo(sp){ if(!sp||!sp.length)return null; var s=sp[0]; var left=s.driveUpSpaceCount, max=s.maxSpaceCount; if(left==null||max==null)return null; return {left:left,max:max,res:s.reservableSpaceCount,to:s.arrivingTerminalName||''}; }
+function sailRow(dep,short){
+  var si=spaceInfo(dep.spaces); var cls='fy-sail'; var spTxt='—'; var w=0;
+  if(si){ if(si.left<0){cls+=' full';spTxt='Full · '+(-si.left)+' waiting';w=100;} else {var pct=si.max?si.left/si.max:0; w=Math.round(100*pct); spTxt=si.left+' of '+si.max+' left'; if(pct<0.15)cls+=' low';} }
+  if(dep.isCancelled){cls+=' cx';spTxt='Cancelled'}
+  var dest=si?si.to.replace(/\s*->\s*/g,' → '):'';
+  return '<div class="'+cls+'"><span class="t">'+esc(fmtTime(dep.departure))+'</span><span class="d">'+esc(short?dest.split(' → ').slice(1).join(' → ')||dest:dest)+(dep.vesselName?'<small>'+esc(dep.vesselName)+(si&&si.res!=null&&si.res>0?' · '+si.res+' reservable':'')+'</small>':'')+'</span><span class="sp">'+esc(spTxt)+'</span>'+(si&&!dep.isCancelled?'<span class="bar"><i style="width:'+w+'%"></i></span>':'')+'</div>';
+}
+function fareLines(n){if(!fares)return '';var mates=[];Object.keys(R).forEach(function(k){if(R[k].t.indexOf(n)>=0)R[k].t.forEach(function(m){if(m!==n&&mates.indexOf(m)<0)mates.push(m)})});var out=mates.map(function(m){var f=fareFor(n,m);if(!f)return '';var v=walk?f.adult:f.vehicleDriver;if(v==null)return '';return '<span class="fy-fare">to '+esc(m)+': <b>'+money(v)+'</b></span>'}).filter(Boolean).join('');return out?'<p class="fy-fares">'+(walk?'Adult walk-on':'Car under 22 ft with driver')+' '+out+'</p>':''}
+function upcoming(t,n){var now=Date.now();return (t.departures||[]).filter(function(d){return new Date(d.departure).getTime()>now-5*60000}).slice(0,n)}
+function camsNear(n){var p=T[n];if(!p)return [];return cams.filter(function(c){var dy=(c.lat-p[0])*111,dx=(c.lon-p[1])*111*Math.cos(p[0]*Math.PI/180);return Math.sqrt(dx*dx+dy*dy)<=2.6}).slice(0,6)}
+function openTerminal(n){
+  var t=terminalsByName[n]; var html='<button class="cx" aria-label="Close">×</button><h3>'+esc(n)+'</h3>';
+  html+='<div class="k">Next sailings</div>';
+  if(t){var u=upcoming(t,4);html+=u.length?u.map(function(d){return sailRow(d,true)}).join(''):'<div class="fy-empty">No upcoming sailings reported.</div>'}
+  else html+='<div class="fy-empty">This terminal does not report sailing space. Check the other end of the route.</div>';
+  var cs=camsNear(n); html+='<div class="k">Cameras</div>';
+  html+=cs.length?'<div class="fy-cams">'+cs.map(function(c){return '<a class="fy-cam" href="'+esc(c.imageUrl)+'" target="_blank" rel="noopener"><img src="'+esc(c.imageUrl)+'" alt="" loading="lazy"><span>'+esc(c.title.replace(/^WSF\s+/,''))+'</span></a>'}).join('')+'</div>':'<div class="fy-empty">No WSDOT camera at this terminal.</div>';
+  var el=$('fyCard');el.innerHTML=html;el.classList.add('on');el.querySelector('.cx').addEventListener('click',closeCard);
+  map.panTo(T[n]);
+}
+function closeCard(){$('fyCard').classList.remove('on')}
+function render(){
+  if(!data)return;
+  drawStatic();drawCams();drawBoats();
+  var list=$('fyLists');list.innerHTML='';
+  function card(n){
+    var t=terminalsByName[n]; if(!t)return null; var u=upcoming(t,route?8:4); if(!u.length)return null;
+    var div=document.createElement('div');div.className='fy-term';
+    div.innerHTML='<h2>'+esc(n)+'<small>'+(walk?'walk-on':'space left')+'</small></h2><p class="sub">Departing '+esc(n)+'</p>'+fareLines(n)+u.map(function(d){return sailRow(d,true)}).join('')+'<a class="more" href="#">Cameras and more sailings →</a>';
+    div.querySelector('.more').addEventListener('click',function(e){e.preventDefault();openTerminal(n);window.scrollTo({top:$('fyMap').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'})});
+    return div;
+  }
+  if(route){
+    var f=F[route]; var boats=(data.vessels||[]).filter(function(v){var n=R[route].t;return n.indexOf(String(v.departingTerminal||'').trim())>=0||n.indexOf(String(v.arrivingTerminal||'').trim())>=0}).map(function(v){return v.name});
+    var fc=document.createElement('div');fc.className='fy-facts';
+    fc.innerHTML='<div class="fy-fact"><span class="k">Crossing</span><b>'+esc(f.cross)+'</b></div>'+
+      '<div class="fy-fact"><span class="k">Reservations</span><b>'+(f.res?'Yes, WSDOT Save A Spot':'No, drive-up only')+'</b></div>'+
+      '<div class="fy-fact"><span class="k">Frequency</span><b>'+esc(f.freq)+'</b></div>'+
+      '<div class="fy-fact"><span class="k">Boats today</span><b>'+(boats.length?esc(boats.join(', ')):'—')+'</b></div>'+
+      (fares?'<div class="fy-fact" style="grid-column:1 / -1"><span class="k">Fares today, WSDOT ('+esc(fares.date||'')+')</span><b>'+R[route].t.map(function(a){return R[route].t.filter(function(b){return b!==a}).map(function(b){var f=fareFor(a,b);return f?esc(a)+' → '+esc(b)+': car '+money(f.vehicleDriver)+', walk-on '+money(f.adult):''}).filter(Boolean).join(' · ')}).filter(Boolean).join(' · ')+'</b></div>':'')+
+      '<p class="fy-factnote">'+(walk?'Walking on: no reservation and no space count applies, walk-ons always board; buy a passenger ticket at the terminal or with the WSDOT app. ':'')+esc(f.note)+' '+RULES+' <a href="https://wsdot.wa.gov/travel/washington-state-ferries" target="_blank" rel="noopener">WSDOT schedules, fares and reservations →</a></p>';
+    list.appendChild(fc);
+  }
+  var groups=route?[route]:ORDER;
+  groups.forEach(function(k){
+    var cards=R[k].t.map(card).filter(Boolean); if(!cards.length)return;
+    var sec=document.createElement('section');sec.className='fy-route';
+    if(!route){var h=document.createElement('h3');h.innerHTML=esc(R[k].name)+'<small>'+esc(F[k].cross)+' · '+(F[k].res?'reservations':'drive-up only')+'</small> <a href="?route='+k+'">Just this route →</a>';h.querySelector('a').addEventListener('click',function(e){e.preventDefault();sel.value=k;sel.dispatchEvent(new Event('change'))});sec.appendChild(h)}
+    var grid=document.createElement('div');grid.className='fy-lists';cards.forEach(function(c){grid.appendChild(c)});sec.appendChild(grid);list.appendChild(sec);
+  });
+  if(!list.children.length)list.innerHTML='<div class="fy-empty">No sailing space reported on this route right now.</div>';
+  var dis=(data.routes||[]).filter(function(r){return (!route||r.abbrev===route)&&r.disruptions&&r.disruptions.length});
+  var db=$('fyDisrupt'); if(dis.length){db.innerHTML=dis.map(function(r){return '<b>'+esc(r.name)+':</b> '+r.disruptions.map(function(x){return esc(typeof x==='string'?x:(x.description||x.title||JSON.stringify(x)))}).join(' · ')}).join('<br>');db.classList.add('on')}else db.classList.remove('on');
+  var when=data.fetched_at?fmtTime(data.fetched_at):fmtTime(new Date().toISOString());
+  $('fyUpdated').textContent='WSDOT data as of '+when+' · refreshed every minute';tick();
+}
+function load(){
+  fetch(W+'/ferries').then(function(r){return r.json()}).then(function(d){
+    data=d; terminalsByName={}; (d.terminals||[]).forEach(function(t){terminalsByName[String(t.name||'').trim()]=t});
+    render();
+  }).catch(function(){$('fyUpdated').textContent='WSDOT feed did not answer. Trying again in a minute.';tick()});
+}
+fetch(W+'/cameras?state=WA').then(function(r){return r.json()}).then(function(d){cams=(d.cameras||[]).filter(function(c){return /ferries/i.test(c.route||'')||/^WSF\b/.test(c.title||'')});drawCams();}).catch(function(){});
+fetch(W+'/ferries/fares').then(function(r){return r.json()}).then(function(d){if(d&&d.ok){fares=d.pairs;fares.date=d.date;render()}}).catch(function(){});
+fitRoute();load();tick();setInterval(load,60000);setInterval(tick,15000);
+})();
+</script>
+<!-- dq:start -->
+<aside class="dq" aria-label="Get MileCheck on your phone"><style>.dq{display:none}@media (min-width:900px) and (hover:hover) and (pointer:fine){.dq{display:flex;align-items:center;gap:18px;max-width:760px;margin:8px auto 28px;padding:16px 20px;border:1px solid #E5E5E5;border-radius:14px;background:#fff}.dq img{width:112px;height:112px;flex:none}.dq b{display:block;font-size:17px;margin-bottom:4px;color:#0E1116}.dq span{font-size:14.5px;line-height:1.5;color:#3a444d}}</style><img src="/assets/qr/get-ferries.svg" width="112" height="112" alt="QR code to get MileCheck" loading="lazy"><div><b>On a computer? Scan to get MileCheck on your phone.</b><span>Your mile marker works with no signal. Live DOT alerts and cameras need a connection. iPhone and Android.</span></div></aside>
+<!-- dq:end -->
+<!-- footer-hub:start -->
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:flex;align-items:center;min-height:44px;font-size:14.5px;line-height:1.35;padding:0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/washington/">Washington road conditions</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+          <li><a href="/how-do-i-tell-911-where-i-am-on-the-highway/">How to tell 911 where you are</a></li>
+          <li><a href="/what-should-i-do-if-i-break-down-on-the-interstate/">What to do if you break down</a></li>
+          <li><a href="/why-is-the-highway-closed/">Why is the highway closed?</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ferries&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dferries" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../maps/mile-markers/">Mile marker map</a></li>
+            <li><a href="../bridges/">Seattle drawbridges</a></li>
+            <li><a href="../closures/">Road closures map</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Sailing space and vessel data from WSDOT Ferries; counts change rapidly and are not a guarantee of boarding.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<!-- shared hamburger toggle (was missing on this page; the global collapse in style.css needs it) -->
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+<div id="mt-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#14532d;color:#fff;font:13px -apple-system,sans-serif;padding:6px 12px;text-align:center">Map test: MileCheck's own map, built from US government data. Washington only. Not a public page.</div>
+</body>
+</html>
