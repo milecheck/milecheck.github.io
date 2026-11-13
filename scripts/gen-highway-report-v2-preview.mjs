@@ -10,6 +10,8 @@
 //   node scripts/gen-highway-report-v2-preview.mjs
 //   writes blog/road-report-october-2026-preview.html and blog/highway-report-october-2026-preview/<state>.html
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+// Site rule: every link opens in a new tab (Leah 11/12: states/provinces too).
+function newTab(html) { return html.replace(/<a (?![^>]*\btarget=)([^>]*\bhref="(?!#|mailto:|tel:)[^"]*"[^>]*)>/g, '<a $1 target="_blank" rel="noopener">'); }
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -331,7 +333,7 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace('<h2 class="rc">Closures</h2>', `${relLine(CRASH_READS.map(([u, x]) => A(u, x)))}\n      <h2 class="rc">Closures</h2>`);
   h = h.replace(/(<p>Live waits are at[\s\S]*?<\/p>)/, `$1${relLine(BORDER_READS.map(([u, x]) => A(u, x)))}`);
   h = newTabs(h);
-  writeFileSync(resolve(OUT_DIR, f), finish(h, `/blog/highway-report-october-2026-preview/${f}`)); made++;
+  writeFileSync(resolve(OUT_DIR, f), newTab(finish(h, `/blog/highway-report-october-2026-preview/${f}`))); made++;
 }
 
 // ---------- national page ----------
@@ -376,6 +378,6 @@ for (const f of readdirSync(SRC_DIR).filter((x) => x.endsWith('.html') && x !== 
   h = h.replace('<h2 class="rc">Closures</h2>', `${relLine(CRASH_READS.map(([u, x]) => A(u, x)))}\n      <h2 class="rc">Closures</h2>`);
   h = newTabs(h);
   h = setDesc(h, 'MileCheck Highway Report, October 2026: the first snow and ice alerts, winter closures, major roadwork that ended or started, border waits, and a report for every state and province.');
-  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), finish(h, '/blog/road-report-october-2026-preview.html'));
+  writeFileSync(resolve(ROOT, 'blog/road-report-october-2026-preview.html'), newTab(finish(h, '/blog/road-report-october-2026-preview.html')));
 }
 console.log(`preview: ${made} state pages + national; majorWork states: ${Object.keys(MW).length}`);
