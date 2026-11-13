@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: node scripts/bake-pass-status.mjs
+      # The bake rewrites the passnow block, which drops the Mediavine class and blocklist on it. Re-apply, then verify.
+      - run: node scripts/add-mediavine.mjs && (node scripts/check-mediavine.mjs || echo "::warning::Mediavine check failed")
       - name: Commit if changed
         run: |
           git config user.name "milecheck-bot"
