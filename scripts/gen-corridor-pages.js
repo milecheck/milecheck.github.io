@@ -408,11 +408,23 @@ const CORRIDORS = [
         "I-17 is about 146 miles and runs entirely in Arizona, from I-10 in Phoenix to I-40 in Flagstaff. Most of it is the Arizona Veterans Highway. In the Phoenix area it is the Black Canyon Freeway, and the southern 4.16 miles are the Maricopa Freeway."
       ],
       [
+        "The climbs: Black Canyon City, Sunset Point, Munds Park",
+        "Northbound, the long grade starts past Black Canyon City (exit 242) and climbs to the Sunset Point rest area near mile 252. Past Camp Verde the road climbs again toward Munds Park (exit 322) and Flagstaff, where winter snow and ice close lanes. Trucks slow on both grades, and crashes on them back traffic up for miles. Arizona's mileposts on I-17 run from about 194 in Phoenix to 341 in Flagstaff."
+      ],
+      [
         "From 1,117 feet to 7,000 feet",
         "The road climbs from about 1,117 feet in Phoenix to about 7,000 feet in Flagstaff, a gain of more than a mile. The cameras on the map above let you see both ends before you leave. For all of Arizona, see the <a href=\"../../cameras/arizona/\">Arizona traffic cameras</a> page."
       ]
     ],
     "faq": [
+      [
+        "What are I-17 road conditions today?",
+        "The <a href=\"#comap\">live map above</a> shows ADOT closures, crashes and roadwork on I-17 with the mile marker of each, updated every few minutes. For the rest of the state, see <a href=\"../../road-conditions/arizona/\">Arizona road conditions</a>."
+      ],
+      [
+        "Is I-17 closed?",
+        "If ADOT reports a full closure on I-17, a red banner appears at the top of this page and the closure shows on the map with its mile markers. Closures happen most often on the grades near Sunset Point and between Munds Park and Flagstaff in winter."
+      ],
       [
         "Is I-17 open right now?",
         "The <a href=\"#comap\">live map above</a> shows active incidents and closures along I-17, straight from ADOT. A red banner appears at the top of this page if a stretch is fully closed. For a full US view, see the <a href=\"../../closures/\">road closures map</a>."
