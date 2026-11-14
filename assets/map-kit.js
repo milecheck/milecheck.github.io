@@ -314,6 +314,72 @@
       });
     });
 
+    // Jump-to search (Leah 11/14: "the one search box"). Highways and mile markers come from
+    // the mile marker file of the states in view; towns from OpenStreetMap's Nominatim, asked
+    // only on Enter or a pause, US and Canada only.
+    (function searchBox() {
+      if (gm._mcSearch || X.search === false) return;
+      gm._mcSearch = true;
+      var box = L.DomUtil.create('div', 'mc-search');
+      box.style.cssText = 'position:absolute;left:58px;right:10px;top:10px;z-index:1001;max-width:360px;font:15px/1.3 system-ui,sans-serif';
+      box.innerHTML = '<input type="search" aria-label="Jump to a highway, town or mile marker" placeholder="Highway, town or I-17 mile 252" style="width:100%;box-sizing:border-box;height:40px;border:1px solid #cfd6d1;border-radius:10px;padding:0 12px;font:16px system-ui,sans-serif;background:#fff;color:#0E1116;box-shadow:0 1px 4px rgba(0,0,0,.18)"><div class="mc-sr" style="display:none;margin-top:4px;background:#fff;color:#0E1116;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.2);overflow:hidden;max-height:260px;overflow-y:auto"></div>';
+      gm.getContainer().appendChild(box);
+      var tr = gm.getContainer().querySelector('.leaflet-top.leaflet-right'); if (tr) tr.style.top = '54px';
+      L.DomEvent.disableClickPropagation(box); L.DomEvent.disableScrollPropagation(box);
+      var inp = box.querySelector('input'), list = box.querySelector('.mc-sr'), timer, townReq = 0;
+      var norm = function (t) { return String(t || '').toUpperCase().replace(/[\s_-]+/g, ''); };
+      var loaded = function () { return Promise.all(inView().slice(0, 4).map(function (st) { return feed('mileposts', st).then(function (d) { return normPosts(d).map(function (p) { return { h: p.highway, m: +p.milepost, lat: +p.lat, lon: +p.lon, st: st }; }).filter(function (p) { return ok(p.lat, p.lon); }); }); })).then(function (a) { return [].concat.apply([], a); }); };
+      function show(rows) {
+        list.innerHTML = '';
+        if (!rows.length) { list.style.display = 'none'; return; }
+        rows.slice(0, 8).forEach(function (r) {
+          var b = document.createElement('button'); b.type = 'button';
+          b.style.cssText = 'display:block;width:100%;text-align:left;border:0;border-top:1px solid #eef1ee;background:#fff;color:#0E1116;padding:10px 12px;min-height:44px;font:15px system-ui,sans-serif;cursor:pointer';
+          b.innerHTML = '<b>' + e(r.title) + '</b>' + (r.sub ? '<br><span style="color:#5b6670;font-size:13px">' + e(r.sub) + '</span>' : '');
+          b.onclick = function () { list.style.display = 'none'; inp.blur(); r.go(); };
+          list.appendChild(b);
+        });
+        list.style.display = 'block';
+      }
+      function posts() { if (!gm.hasLayer(G.mileposts)) G.mileposts.addTo(gm); }
+      function local(q) {
+        var m = q.match(/^(.*?)(?:\s+(?:mile|mi|mp|mm))?\s+(\d+(?:\.\d+)?)$/i);
+        var road = norm(m ? m[1] : q), mile = m ? +m[2] : null;
+        if (road.length < 2) return Promise.resolve([]);
+        return loaded().then(function (all) {
+          var by = {};
+          all.forEach(function (p) { var k = norm(p.h); if (k.indexOf(road) === 0 || k === road) { (by[p.h + '|' + p.st] = by[p.h + '|' + p.st] || []).push(p); } });
+          var rows = [];
+          Object.keys(by).sort(function (a, b) { return by[b].length - by[a].length; }).forEach(function (k) {
+            var ps = by[k], h = ps[0].h, st = ps[0].st;
+            if (mile != null) {
+              var best = null; ps.forEach(function (p) { if (!best || Math.abs(p.m - mile) < Math.abs(best.m - mile)) best = p; });
+              if (best && Math.abs(best.m - mile) <= 2) rows.push({ title: h + ' mile ' + mpLabel(best.m), sub: st, go: function () { posts(); gm.setView([best.lat, best.lon], 13); } });
+            } else {
+              rows.push({ title: h, sub: st + ' · ' + ps.length + ' mile markers', go: function () { posts(); gm.fitBounds(L.latLngBounds(ps.map(function (p) { return [p.lat, p.lon]; })).pad(0.05)); } });
+            }
+          });
+          return rows;
+        });
+      }
+      function towns(q) {
+        var id = ++townReq;
+        return fetch('https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=us,ca&featuretype=settlement&q=' + encodeURIComponent(q))
+          .then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+          .then(function (a) { if (id !== townReq) return null; return (a || []).map(function (t) { var parts = String(t.display_name || '').split(','); return { title: parts[0], sub: parts.slice(1, 3).join(',').trim(), go: function () { gm.setView([+t.lat, +t.lon], 12); } }; }); });
+      }
+      function run(withTowns) {
+        var q = inp.value.trim();
+        if (q.length < 2) { show([]); return; }
+        local(q).then(function (rows) {
+          show(rows);
+          if (withTowns && q.length >= 3 && !/\d/.test(q.replace(/^\D+/, '').slice(0, 1))) towns(q).then(function (t) { if (t && inp.value.trim() === q) show(rows.concat(t)); });
+        });
+      }
+      inp.addEventListener('input', function () { clearTimeout(timer); run(false); timer = setTimeout(function () { run(true); }, 700); });
+      inp.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { clearTimeout(timer); run(true); } if (ev.key === 'Escape') show([]); });
+    })();
+
     var camPage = /^\/(es\/|pt\/)?cameras\//.test(location.pathname);
     var rows = [
       { key: 'alerts', label: 'Alerts', color: '#F59E0B', skip: all },
