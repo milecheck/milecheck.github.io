@@ -411,7 +411,7 @@ ${sp.css}
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
   <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
-  <script src="/assets/map-kit.js?v=20261111a" defer></script>
+  <script src="/assets/map-kit.js?v=20261114a" defer></script>
 </head>
 <body>
 

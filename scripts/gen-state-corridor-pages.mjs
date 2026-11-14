@@ -43,7 +43,7 @@ ${analytics}
 <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js" defer></script>
-<script src="/assets/state-corridor.js" defer></script><script src="/assets/map-kit.js?v=20261111a" defer></script>
+<script src="/assets/state-corridor.js" defer></script><script src="/assets/map-kit.js?v=20261114a" defer></script>
 </head><body>${header}
 <main class="state-corridor"><nav aria-label="Breadcrumb"><a href="/corridors/">Corridors</a> / <a href="/corridors/i-75/">I-75</a> / ${esc(s.name)}</nav>
 <h1>${esc(title)}</h1><p class="sc-lede">${esc(r.context)}</p>

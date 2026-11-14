@@ -166,6 +166,15 @@
 
     // One fetch per state per feed, shared by the tiles that read it.
     var cache = {};
+    function normPosts(d) {
+      if (d && d._mcNorm) return d._mcNorm;
+      var arr = [];
+      var push = function (p, k) { if (!p) return; var lo = p.lon != null ? p.lon : p.lng; arr.push({ highway: p.highway || p.route || k, milepost: p.milepost != null ? p.milepost : p.mile, lat: p.lat, lon: lo }); };
+      if (Array.isArray(d)) d.forEach(function (p) { push(p); });
+      else if (d && typeof d === 'object') Object.keys(d).forEach(function (k) { if (Array.isArray(d[k])) d[k].forEach(function (p) { push(p, k); }); });
+      if (d && typeof d === 'object') try { Object.defineProperty(d, '_mcNorm', { value: arr }); } catch (er) {}
+      return arr;
+    }
     function feed(path, st) { var k = path + st; if (!cache[k]) cache[k] = get('/' + path + '?state=' + st); return cache[k]; }
     var drawn = {};
     var DRAW = {
@@ -197,9 +206,7 @@
       },
       mileposts: function (st) {
         return feed('mileposts', st).then(function (d) {
-          var arr = Array.isArray(d) ? d : [];
-          if (!arr.length && d && typeof d === 'object') Object.keys(d).forEach(function (k) { if (Array.isArray(d[k])) d[k].forEach(function (p) { arr.push({ highway: p.highway || k, milepost: p.milepost != null ? p.milepost : p.mile, lat: p.lat, lon: p.lon }); }); });
-          arr.forEach(function (p) { if (ok(+p.lat, +p.lon)) { p.st = st; posts.push(p); } });
+          normPosts(d).forEach(function (p) { if (ok(+p.lat, +p.lon)) { var q = Object.assign({}, p); q.st = st; posts.push(q); } });
           drawPosts();
         });
       }
@@ -241,7 +248,7 @@
       var straight = function () { if (hasEnd && gm.distance([x.la, x.lo], [x.la2, x.lo2]) < 40000) line([[x.la, x.lo], [x.la2, x.lo2]]); };
       if (!(isFinite(x.m1) && isFinite(x.m2) && x.rt)) return straight();
       feed('mileposts', st).then(function (d) {
-        var arr = Array.isArray(d) ? d : [], lo = Math.min(x.m1, x.m2), hi = Math.max(x.m1, x.m2), k = rkey(x.rt), seen = {};
+        var arr = normPosts(d), lo = Math.min(x.m1, x.m2), hi = Math.max(x.m1, x.m2), k = rkey(x.rt), seen = {};
         var pts = arr.filter(function (p) { return rkey(p.highway) === k && +p.milepost >= lo - 0.5 && +p.milepost <= hi + 0.5 && ok(+p.lat, +p.lon); })
           .sort(function (a, b) { return a.milepost - b.milepost; })
           .filter(function (p) { var q = Math.round(+p.milepost * 10); if (seen[q]) return false; seen[q] = 1; return true; });
@@ -274,11 +281,11 @@
       G.mileposts.clearLayers();
       if (!gm.hasLayer(G.mileposts)) return;
       var z = gm.getZoom();
-      if (z < 9) return;
-      var step = z >= 12 ? 1 : z >= 11 ? 2 : z >= 10 ? 5 : 10, b = gm.getBounds().pad(0.1), n = 0, seen = {};
+      if (z < 6) return;
+      var step = z >= 12 ? 1 : z >= 11 ? 2 : z >= 10 ? 5 : z >= 9 ? 10 : z >= 8 ? 25 : 50, b = gm.getBounds().pad(0.1), n = 0, seen = {};
       for (var i = 0; i < posts.length && n < 400; i++) {
         var p = posts[i], mi = Math.round(+p.milepost);
-        if (mi % step || !b.contains([p.lat, p.lon])) continue;
+        if (mi % step || (!mi && step > 1) || !b.contains([p.lat, p.lon])) continue;
         // One sign per road and number (some feeds list each direction separately).
         var k = p.highway + '|' + mpLabel(p.milepost);
         if (seen[k]) continue;
@@ -289,7 +296,7 @@
           .addTo(G.mileposts);
       }
     }
-    G.mileposts.on('add', function () { drawPosts(); gm.on('moveend', drawPosts); if (gm.getZoom() < 9) zoomNote(); });
+    G.mileposts.on('add', function () { drawPosts(); gm.on('moveend', drawPosts); if (gm.getZoom() < 6) zoomNote(); });
     G.mileposts.on('remove', function () { gm.off('moveend', drawPosts); });
 
     // Wildfires: one national feed. A pinned state shows only its fires; otherwise all
