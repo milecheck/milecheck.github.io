@@ -12,7 +12,8 @@
   "VA:alerts": "Nov 6: Worker count equals upstream (DE 14, ND 26, MD 56, VA 123 raw, MA no errors); roadwork posts falling into winter. Remove when it recovers.",
   "OR:conditions": "ODOT RW/Reports serves exactly 100 stations; no paging in the API (checked 11/14), so 100 is the full list",
   "MO:cameras": "MoDOT snapshot.json shrank upstream (11/14); streams still served",
-  "WV:cameras": "WV511 streams that don't play are hidden; only ~34 of 132 play (11/14)"
+  "WV:cameras": "WV511 streams that don't play are hidden; only ~34 of 132 play (11/14)",
+  "WI:alerts": "Seasonal: roadwork winding down for winter, feed healthy (512 on 11/15 vs 769 usual). Remove once the Sunday average catches up."
  },
  "states": {
   "AL": {
