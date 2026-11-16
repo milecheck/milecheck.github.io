@@ -645,7 +645,7 @@
       if (/Android/.test(ua)) return 'Get it on Google Play';
       return 'Get the app';
     }
-    function show() {
+    function show(inline) {
       if (document.getElementById('mcAppCard')) return;
       var d = document.createElement('div');
       d.id = 'mcAppCard';
@@ -656,11 +656,27 @@
         + '<div style="color:#5b6670;font-size:14px;margin-bottom:10px">Your mile marker on CarPlay and Android Auto · free trial</div>'
         + '<a href="' + link() + '" target="_blank" rel="noopener" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;text-decoration:none;border-radius:8px;padding:12px 18px;min-height:44px;box-sizing:border-box">' + label() + '</a>'
         + '<button type="button" aria-label="Close" style="position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;font-size:24px;line-height:1;color:#5b6670;cursor:pointer">×</button>';
-      d.querySelector('button').onclick = function () { d.remove(); };
+      d.querySelector('button').onclick = function () { d.remove(); if (inline) store(KEY, String(Date.now())); };
       d.querySelector('a').onclick = function () { if (window.gtag) gtag('event', 'app_card_click', { page_path: location.pathname }); };
       document.body.appendChild(d);
-      store(KEY, String(Date.now()));
+      if (!inline) store(KEY, String(Date.now()));
       if (window.gtag) gtag('event', 'app_card_shown', { page_path: location.pathname });
+    }
+    // Phone (Leah "card go", 11-16): the card sits inline above the map on load, on the
+    // first phone screen, instead of sliding up after the second camera. Placement only.
+    if (window.matchMedia && matchMedia('(max-width: 767px)').matches) {
+      var place = function () {
+        var m = document.querySelector('.leaflet-container');
+        if (!m || document.getElementById('mcAppCard')) return;
+        var box = m.parentElement && /mapbox|map-wrap|rc-mapbox/.test(m.parentElement.className) ? m.parentElement : m;
+        show(true);
+        var d = document.getElementById('mcAppCard');
+        d.style.cssText = 'position:relative;margin:0 0 12px;max-width:none;background:#fff;color:#1d1f1c;border:1px solid #d6ddd8;border-radius:12px;padding:14px 44px 14px 16px;font:15px/1.4 system-ui,-apple-system,sans-serif';
+        d.removeAttribute('role');
+        box.parentNode.insertBefore(d, box);
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', place); else place();
+      return;
     }
     document.addEventListener('load', function (e) {
       var t = e.target;
