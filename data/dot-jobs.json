@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-11-16T06:51:50.131Z",
+   "fetchedAt": "2026-11-16T22:22:07.243Z",
    "ok": true,
    "rows": [
     {
@@ -26,7 +26,7 @@
      "multiple": false,
      "location": "Parkdale, OR",
      "pay": "$4,312 to $5,988 a month",
-     "closes": "2026-11-19",
+     "closes": "2026-11-23",
      "closesNote": null,
      "kind": "Seasonal",
      "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Parkdale--ODOT--MS/Highway-Maintenance-Specialist--Seasonal-_REQ-208322",
@@ -77,7 +77,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-11-16T06:51:50.131Z",
+   "fetchedAt": "2026-11-16T22:22:07.243Z",
    "ok": true,
    "rows": [
     {
@@ -104,32 +104,6 @@
      "closesNote": null,
      "kind": "Appointment type not confirmed",
      "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97935&PostingSeq=1",
-     "recruiter": null
-    },
-    {
-     "id": "97443",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Emergency Snow Plow Operator",
-     "location": "Various NE, MN",
-     "pay": "$23.57 - $31.60 an hour",
-     "closes": "2026-11-13",
-     "closesNote": null,
-     "kind": "Appointment type not confirmed",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97443&PostingSeq=1",
-     "recruiter": null
-    },
-    {
-     "id": "97458",
-     "state": "MN",
-     "agency": "Minnesota Department of Transportation",
-     "title": "Temporary Snow Plow Operator",
-     "location": "Various, MN",
-     "pay": "$23.57 - $31.60 an hour",
-     "closes": "2026-11-13",
-     "closesNote": null,
-     "kind": "Seasonal or temporary (from the title)",
-     "url": "https://careers.mn.gov/psp/mnjob/MNCAREERS/HRCR/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=1001&JobOpeningId=97458&PostingSeq=1",
      "recruiter": null
     },
     {
@@ -161,5 +135,5 @@
    ]
   }
  },
- "updatedAt": "2026-11-16T06:51:50.131Z"
+ "updatedAt": "2026-11-16T22:22:07.243Z"
 }
