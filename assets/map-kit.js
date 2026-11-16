@@ -652,8 +652,8 @@
       d.setAttribute('role', 'dialog');
       d.setAttribute('aria-label', 'Get the MileCheck app');
       d.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:3000;max-width:420px;margin:0 auto;background:#fff;color:#1d1f1c;border:1px solid #d6ddd8;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:14px 44px 14px 16px;font:15px/1.4 system-ui,-apple-system,sans-serif';
-      d.innerHTML = '<div style="font-weight:700;margin-bottom:4px;padding-right:36px">Seen enough cameras? The app shows the ones nearest you.</div>'
-        + '<div style="color:#5b6670;font-size:14px;margin-bottom:10px">Your mile marker on CarPlay and Android Auto · free trial</div>'
+      d.innerHTML = '<div style="font-weight:700;margin-bottom:4px;padding-right:36px">' + (inline ? 'See the highway cameras nearest you.' : 'Seen enough cameras? The app shows the ones nearest you.') + '</div>'
+        + '<div style="color:#5b6670;font-size:14px;margin-bottom:10px">' + (inline ? 'Plus live DOT alerts on your road in the MileCheck app.' : 'Your mile marker on CarPlay and Android Auto · free trial') + '</div>'
         + '<a href="' + link() + '" target="_blank" rel="noopener" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;text-decoration:none;border-radius:8px;padding:12px 18px;min-height:44px;box-sizing:border-box">' + label() + '</a>'
         + '<button type="button" aria-label="Close" style="position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;font-size:24px;line-height:1;color:#5b6670;cursor:pointer">×</button>';
       d.querySelector('button').onclick = function () { d.remove(); if (inline) store(KEY, String(Date.now())); };
@@ -674,6 +674,7 @@
         d.style.cssText = 'position:relative;margin:0 0 12px;max-width:none;background:#fff;color:#1d1f1c;border:1px solid #d6ddd8;border-radius:12px;padding:14px 44px 14px 16px;font:15px/1.4 system-ui,-apple-system,sans-serif';
         d.removeAttribute('role');
         box.parentNode.insertBefore(d, box);
+        document.querySelectorAll('.mc-app-block').forEach(function (b) { b.style.display = 'none'; });
       };
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', place); else place();
       return;
