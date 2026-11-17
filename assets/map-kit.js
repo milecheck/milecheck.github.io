@@ -299,14 +299,26 @@
     G.mileposts.on('add', function () { drawPosts(); gm.on('moveend', drawPosts); if (gm.getZoom() < 6) zoomNote(); });
     // Exits (11/16): exit numbers and cross streets for the states we have them (WSDOT, ADOT, and exits derived from
     // Census TIGER ramps for OR and WI). Static files on this site; drawn once zoomed in, for the area in view.
-    var EXIT_STATES = ['WA', 'OR', 'AZ', 'WI'], exitData = {};
+    var EXIT_STATES = ['WA', 'OR', 'AZ', 'WI'], exitData = {}, exitNoteEl = null, exitNoteT = null;
+    function exitNote(txt) {
+      if (!exitNoteEl) {
+        exitNoteEl = document.createElement('div');
+        exitNoteEl.style.cssText = 'position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:800;background:rgba(14,17,22,.86);color:#fff;border-radius:8px;padding:6px 12px;font:600 12.5px/1.4 system-ui,sans-serif;pointer-events:none;max-width:86%;text-align:center';
+        gm.getContainer().appendChild(exitNoteEl);
+      }
+      exitNoteEl.textContent = txt; exitNoteEl.style.display = 'block';
+      clearTimeout(exitNoteT); exitNoteT = setTimeout(function () { exitNoteEl.style.display = 'none'; }, 4000);
+    }
     function drawExits() {
       var pop = gm._popup;
       if (pop && gm.hasLayer(pop) && pop._source && G.exits.hasLayer(pop._source)) return;
       G.exits.clearLayers();
       if (!gm.hasLayer(G.exits)) return;
       if (gm.getZoom() < 10) { zoomNote(); return; }
-      var b = gm.getBounds().pad(0.1), states = (inView() || []).filter(function (k) { return EXIT_STATES.indexOf(k) >= 0; }), n = 0;
+      var all = inView() || [];
+      var b = gm.getBounds().pad(0.1), states = all.filter(function (k) { return EXIT_STATES.indexOf(k) >= 0; }), n = 0;
+      // Say so instead of showing a blank map where we have no exits yet (Leah 11/16: "not yet in this state").
+      if (all.length && !states.length) { exitNote('Exits aren\u2019t in this state yet. They\u2019re in AZ, OR, WA and WI for now.'); return; }
       states.forEach(function (st) {
         if (exitData[st] === undefined) {
           exitData[st] = null;
