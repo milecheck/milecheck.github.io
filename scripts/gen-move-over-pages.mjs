@@ -28,6 +28,21 @@ function head(title, desc, url, ld) {
     .replace('</head>', ld.map((o) => `  <script type="application/ld+json">${JSON.stringify(o)}</script>\n`).join('') + '</head>');
 }
 
+
+const CHIPS = [
+  ['🚓', 'Police', /police|law enforcement|emergency|blue light/i],
+  ['🚑', 'Ambulances', /ems|ambulance|emergency|rescue/i],
+  ['🚒', 'Fire trucks', /fire|emergency/i],
+  ['🛻', 'Tow trucks', /tow|wrecker|recovery/i],
+  ['🚧', 'Road crews and construction', /maintenance|construction|road work|work zone|highway work|dot |department of transportation|survey|amber/i],
+  ['❄️', 'Snowplows', /maintenance|snow|plow/i],
+  ['⚠️', 'Breakdowns with hazard lights', /disabled|hazard|breakdown|any stopped|any stationary|stalled|distress/i],
+  ['🔌', 'Utility crews', /utility/i],
+  ['🗑️', 'Garbage trucks', /garbage|waste|sanitation|refuse|recycling/i],
+];
+const chips = (covers) => { const t = (covers || []).join(' | ') + ' '; const anyLit = /any (stopped|stationary|parked|disabled)?\s*vehicle/i.test(t); return CHIPS.filter(([, l, re]) => re.test(t) || (anyLit && !/Utility|Garbage/.test(l))).map(([e, l]) => `<span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #D6E8DE;border-radius:999px;padding:6px 12px;margin:0 6px 8px 0;font-size:15px;font-weight:600;background:#fff"><span aria-hidden="true">${e}</span>${l}</span>`).join(''); };
+const FIG = `<figure style="margin:14px 0"><img src="/images/move-over/multilane.webp" width="1000" height="563" loading="lazy" alt="Diagram: a car moves one lane left, away from a stopped road crew truck with a flashing arrow board on the shoulder" style="max-width:100%;height:auto;border-radius:10px"></figure><figure style="margin:14px 0"><img src="/images/move-over/twolane.webp" width="1000" height="563" loading="lazy" alt="Diagram: on a two-lane road with oncoming traffic, a car stays in its lane and slows down past a tow truck helping a broken-down car" style="max-width:100%;height:auto;border-radius:10px"></figure>`;
+
 for (const s of laws) {
   const sl = slug(s.name), url = `https://milecheckapp.com/move-over/${sl}/`;
   const q = `What is ${s.name}'s move over law?`;
@@ -47,7 +62,10 @@ for (const s of laws) {
     <div class="sc-body" style="max-width:78ch;font-size:16px;line-height:1.6">
     <h2>What you have to do</h2>
     <ul>${s.duty.split(/;\s*/).map((t) => t.trim().replace(/\.$/, '')).filter(Boolean).map((t) => `<li>${esc(t.charAt(0).toUpperCase() + t.slice(1))}.</li>`).join('')}</ul>
+    ${FIG}
     <h2>Who it protects</h2>
+    <div>${chips(s.covers)}</div>
+    <p style="color:#5b6670;font-size:14px;margin:6px 0 2px">What the statute says:</p>
     <ul>${(s.covers || []).map((c) => `<li>${esc(c.charAt(0).toUpperCase() + c.slice(1))}</li>`).join('')}</ul>
     <h2>Penalty</h2>
     <p>${pen ? `${esc(pen.charAt(0).toUpperCase() + pen.slice(1))}${/[.)]$/.test(pen) ? '' : '.'} Source: <a href="${esc(s.penalty_source_url || s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>.` : `The penalty is set in <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>. See the statute for the current amount.`}</p>
