@@ -25,4 +25,4 @@ jobs:
           git add passes chains-required-*
           git diff --cached --quiet && exit 0
           git commit -m "Pass status refresh $(date -u +%Y-%m-%dT%H:%MZ)"
-          git pull --rebase origin main && git push origin HEAD:main
+          git pull --rebase --autostash origin main && git push origin HEAD:main
