@@ -1,6 +1,6 @@
 {
  "/api/data-quality/": {
-  "desc": "Per state and province: how often MileCheck reads the agency, how many alerts it holds, how many have a DOT mile marker, how old the newest record is, and gaps."
+  "desc": "Per state and province: how often MileCheck reads the agency, how many alerts it holds, how old the newest record is, and gaps."
  },
  "/api/plan/": {
   "desc": "What MileCheck sells to companies: mile marker files, a live road alerts API and records of past alerts. API plans start at $0. Data licenses are a yearly fee."
