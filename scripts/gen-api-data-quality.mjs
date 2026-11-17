@@ -134,7 +134,7 @@ fold(`What this page does not say`, `
 <li>It does not promise uptime. We do not publish a service level agreement. The <a href="https://status.milecheckapp.com/">status page</a> shows current service.</li>
 <li>One read is one moment. Roadwork counts swing by day of the week, and an agency can be down when you look.</li>
 </ul><p style="margin-top:18px"><a href="/api/#get-key" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none">Get a 14-day test key</a></p>
-<p style="margin-top:12px">Read any state yourself with it. See also the <a href="/api/data-accuracy/" style="color:#0f7a4f;font-weight:700">data accuracy notes</a>.</p>`);
+<p style="margin-top:12px">Read any state yourself with it. Uptime and what we keep: <a href="/api/uptime-and-data/" style="color:#0f7a4f;font-weight:700">uptime and data</a>. See also the <a href="/api/data-accuracy/" style="color:#0f7a4f;font-weight:700">data accuracy notes</a>.</p>`);
 
 const bodyStart = tpl.indexOf('<!-- /site-nav:header -->') + '<!-- /site-nav:header -->'.length;
 const valuesAt = tpl.indexOf('<section class="mc-values"');
