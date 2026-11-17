@@ -1,0 +1,242 @@
+{
+ "AK": {
+  "fine": "$150 (court bail amount, no injury)",
+  "source": "https://public.courts.alaska.gov/web/scheduled/docs/UMOT_Title28.pdf",
+  "verified": true
+ },
+ "AL": {
+  "fine": "$200 first, $250 second, $300 third",
+  "source": "https://www.alea.gov/dps/highway-patrol/alabama-move-over-act",
+  "verified": true
+ },
+ "AR": {
+  "fine": "$250 to $1,000",
+  "source": "https://dps.arkansas.gov/news/asp-urges-motorists-to-move-over-for-first-responders/",
+  "verified": true
+ },
+ "AZ": {
+  "fine": "$275",
+  "source": "https://azleg.gov/ars/28/00775.htm",
+  "verified": true
+ },
+ "CA": {
+  "fine": "Up to $1,000 plus points",
+  "source": "https://dot.ca.gov/news-releases/news-release-2019-080",
+  "verified": true
+ },
+ "CO": {
+  "fine": "",
+  "source": "https://content.leg.colorado.gov/sites/default/files/2023a_1123_signed.pdf",
+  "verified": false
+ },
+ "CT": {
+  "fine": "$136 total ($90 fine plus fees)",
+  "source": "https://www.jud.ct.gov/webforms/forms/infractions.pdf",
+  "verified": true
+ },
+ "DE": {
+  "fine": "Up to $250",
+  "source": "https://delcode.delaware.gov/title21/c041/sc04/index.html",
+  "verified": true
+ },
+ "FL": {
+  "fine": "",
+  "source": "https://m.flsenate.gov/Statutes/316.126",
+  "verified": false
+ },
+ "GA": {
+  "fine": "Up to $500 (up to $250 for tow, maintenance and utility vehicles)",
+  "source": "https://www.legis.ga.gov/api/document/docs/default-source/joint-features-document-library/t40-ch6-16-(v29)-2018-pdf.pdf",
+  "verified": true
+ },
+ "HI": {
+  "fine": "",
+  "source": "https://data.capitol.hawaii.gov/sessions/session2026/Bills/HB1692_CD1_.pdf",
+  "verified": false
+ },
+ "IA": {
+  "fine": "$135",
+  "source": "https://www.legis.iowa.gov/docs/code/805.8A.pdf",
+  "verified": true
+ },
+ "ID": {
+  "fine": "",
+  "source": "https://legislature.idaho.gov/wp-content/uploads/statutesrules/idstat/Title49/T49CH6.pdf",
+  "verified": false
+ },
+ "IL": {
+  "fine": "$250 to $10,000",
+  "source": "https://www.ilga.gov/Documents/legislation/ilcs/documents/062500050K11-907.htm",
+  "verified": true
+ },
+ "IN": {
+  "fine": "",
+  "source": "https://iga.in.gov/ic/2026/Title_9/Article_21/Chapter_8.pdf",
+  "verified": false
+ },
+ "KS": {
+  "fine": "$195",
+  "source": "https://www.ksrevisor.gov/statutes/chapters/ch08/008_021_0018.html",
+  "verified": true
+ },
+ "KY": {
+  "fine": "$60 to $500",
+  "source": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=46292",
+  "verified": true
+ },
+ "LA": {
+  "fine": "Up to $200",
+  "source": "https://legis.la.gov/legis/Law.aspx?d=88033",
+  "verified": true
+ },
+ "MA": {
+  "fine": "Up to $100",
+  "source": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter89/Section7C",
+  "verified": true
+ },
+ "MD": {
+  "fine": "Up to $500",
+  "source": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=27-101&enactments=false",
+  "verified": true
+ },
+ "ME": {
+  "fine": "At least $275",
+  "source": "https://legislature.maine.gov/statutes/29-A/title29-Asec2054.html",
+  "verified": true
+ },
+ "MI": {
+  "fine": "$400",
+  "source": "https://www.legislature.mi.gov/documents/mcl/pdf/MCL-257-653A.pdf",
+  "verified": true
+ },
+ "MN": {
+  "fine": "Up to $300",
+  "source": "https://www.revisor.mn.gov/statutes/cite/169.89",
+  "verified": true
+ },
+ "MO": {
+  "fine": "Up to $2,000",
+  "source": "https://revisor.mo.gov/main/OneSection.aspx?section=558.002",
+  "verified": true
+ },
+ "MS": {
+  "fine": "Up to $250 (up to $1,000 if it causes damage or injury)",
+  "source": "https://billstatus.ls.state.ms.us/documents/2026/html/HB/0200-0299/HB0287IN.htm",
+  "verified": true
+ },
+ "MT": {
+  "fine": "$10 to $100",
+  "source": "https://mca.legmt.gov/bills/mca/title_0610/chapter_0080/part_0070/section_0110/0610-0080-0070-0110.html",
+  "verified": true
+ },
+ "NC": {
+  "fine": "$250",
+  "source": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-157.html",
+  "verified": true
+ },
+ "ND": {
+  "fine": "$50 (emergency or maintenance vehicles); $20 for stationary vehicles with hazard lights",
+  "source": "https://www.visionzero.nd.gov/reaching-zero/road-users/move-over-law",
+  "verified": true
+ },
+ "NE": {
+  "fine": "Up to $100",
+  "source": "https://nebraskalegislature.gov/laws/statutes.php?statute=60-689",
+  "verified": true
+ },
+ "NH": {
+  "fine": "$75 plus penalty assessment first; $250 plus assessment for a repeat within 12 months",
+  "source": "https://gc.nh.gov/rsa/html/XXI/265/265-37-a.htm",
+  "verified": true
+ },
+ "NJ": {
+  "fine": "$100 to $500",
+  "source": "https://www.nj.gov/mvc/drivertopics/driversafe.htm",
+  "verified": true
+ },
+ "NM": {
+  "fine": "",
+  "source": "https://www.nmlegis.gov/Sessions/19%20Regular/bills/house/HB0113.HTML",
+  "verified": false
+ },
+ "NV": {
+  "fine": "Up to $1,000",
+  "source": "https://www.leg.state.nv.us/nrs/nrs-193.html#NRS193Sec150",
+  "verified": true
+ },
+ "NY": {
+  "fine": "Up to $150",
+  "source": "https://www.nysenate.gov/legislation/laws/VAT/1800",
+  "verified": true
+ },
+ "OH": {
+  "fine": "Up to $150, doubled for move-over violations",
+  "source": "https://codes.ohio.gov/ohio-revised-code/section-2929.28",
+  "verified": true
+ },
+ "OR": {
+  "fine": "Up to $1,000 (usual fine $265)",
+  "source": "https://www.oregonlegislature.gov/bills_laws/ors/ors153.html",
+  "verified": true
+ },
+ "PA": {
+  "fine": "Up to $500",
+  "source": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/75/00.033.027.000..HTM",
+  "verified": true
+ },
+ "RI": {
+  "fine": "$95",
+  "source": "https://webserver.rilegislature.gov/Statutes/TITLE31/31-41.1/31-41.1-4.htm",
+  "verified": true
+ },
+ "SC": {
+  "fine": "$300 to $500",
+  "source": "https://www.scstatehouse.gov/code/t56c005.php",
+  "verified": true
+ },
+ "SD": {
+  "fine": "$270 to $500",
+  "source": "https://sdlegislature.gov/Statutes/22-6-2",
+  "verified": true
+ },
+ "TX": {
+  "fine": "$500 to $1,250",
+  "source": "https://tcss.legis.texas.gov/resources/TN/pdf/TN.545.pdf",
+  "verified": true
+ },
+ "UT": {
+  "fine": "Up to $750 (infraction)",
+  "source": "https://le.utah.gov/xcode/Title76/Chapter3/C76-3-S301_2023050320230503.html",
+  "verified": true
+ },
+ "VA": {
+  "fine": "Up to $2,500 (reckless driving) near emergency vehicles; up to $250 near other stationary vehicles",
+  "source": "https://law.lis.virginia.gov/vacode/title18.2/chapter1/section18.2-11/",
+  "verified": true
+ },
+ "VT": {
+  "fine": "",
+  "source": "https://legislature.vermont.gov/statutes/section/23/013/01050",
+  "verified": false
+ },
+ "WA": {
+  "fine": "Twice the base penalty (base is capped at $250, so up to $500)",
+  "source": "https://app.leg.wa.gov/rcw/default.aspx?cite=46.63.110",
+  "verified": true
+ },
+ "WI": {
+  "fine": "$30 to $300",
+  "source": "https://docs.legis.wisconsin.gov/statutes/statutes/346/ii/17",
+  "verified": true
+ },
+ "WV": {
+  "fine": "Up to $500",
+  "source": "https://code.wvlegislature.gov/17C-14-9A/",
+  "verified": true
+ },
+ "WY": {
+  "fine": "Up to $200",
+  "source": "https://wyoleg.gov/statutes/compress/title31.pdf",
+  "verified": true
+ }
+}
