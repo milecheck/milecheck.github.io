@@ -43,14 +43,14 @@ for (const s of laws) {
   const body = `<div class="sc-wrap">
     <p class="sc-eyebrow">Move over law · ${esc(s.name)}</p>
     <h1>${esc(q)}</h1>
-    <p class="sc-lede">${esc(s.name)}'s move over law requires drivers to ${esc(lc(s.duty))}. The law covers ${esc(covers)} under <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>.</p>
+    <p class="sc-lede">The law is <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>. Here is what it asks of drivers in ${esc(s.name)}.</p>
     <div class="sc-body" style="max-width:78ch;font-size:16px;line-height:1.6">
     <h2>What you have to do</h2>
-    <p>When approaching a vehicle or roadside scene covered by the law, drivers must ${esc(lc(s.duty))}.</p>
+    <ul>${s.duty.split(/;\s*/).map((t) => t.trim().replace(/\.$/, '')).filter(Boolean).map((t) => `<li>${esc(t.charAt(0).toUpperCase() + t.slice(1))}.</li>`).join('')}</ul>
     <h2>Who it protects</h2>
-    <p>The law protects ${esc(covers)}.</p>
+    <ul>${(s.covers || []).map((c) => `<li>${esc(c.charAt(0).toUpperCase() + c.slice(1))}</li>`).join('')}</ul>
     <h2>Penalty</h2>
-    <p>${pen ? `Violating ${esc(s.name)}'s move over law can result in ${esc(pen)}, under <a href="${esc(s.penalty_source_url || s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>.` : `The penalty is set in <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>. See the statute for the current amount.`}</p>
+    <p>${pen ? `${esc(pen.charAt(0).toUpperCase() + pen.slice(1))}${/[.)]$/.test(pen) ? '' : '.'} Source: <a href="${esc(s.penalty_source_url || s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>.` : `The penalty is set in <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>. See the statute for the current amount.`}</p>
     <h2>Why it matters</h2>
     <p>DOT crews and tow operators work beside moving traffic. Police officers respond to incidents on the shoulder. Arrow-board trailers mark work areas and lane closures. These workers, their vehicles and roadside equipment can be struck by passing traffic. Moving over and slowing down helps reduce that risk.</p>
     <h2>Road conditions in ${esc(s.name)}</h2>
