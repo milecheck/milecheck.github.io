@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (n) => n.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
+const FINES = JSON.parse(readFileSync('data/move-over-fines.json', 'utf8'));
 const laws = JSON.parse(readFileSync('data/move-over-laws.json', 'utf8')).sort((a, b) => a.name.localeCompare(b.name));
 const tpl = readFileSync('chain-laws/oregon/index.html', 'utf8');
 const headEnd = tpl.indexOf('<div class="sc-wrap">');
@@ -68,7 +69,7 @@ for (const s of laws) {
     <p style="color:#5b6670;font-size:14px;margin:6px 0 2px">What the statute says:</p>
     <ul>${(s.covers || []).map((c) => `<li>${esc(c.charAt(0).toUpperCase() + c.slice(1))}</li>`).join('')}</ul>
     <h2>Penalty</h2>
-    <p>${pen ? `${esc(pen.charAt(0).toUpperCase() + pen.slice(1))}${/[.)]$/.test(pen) ? '' : '.'} Source: <a href="${esc(s.penalty_source_url || s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>.` : `The penalty is set in <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>. See the statute for the current amount.`}</p>
+    <p>${(() => { const f = FINES[s.state]; const cls = pen && !/\$/.test(pen) ? ` ${esc(pen.charAt(0).toUpperCase() + pen.slice(1))}${/[.)]$/.test(pen) ? '' : '.'}` : ''; if (f && f.verified && f.fine) return `Fine: <strong style="font-size:18px">${esc(f.fine)}</strong>.${cls} Source: <a href="${esc(f.source)}" target="_blank" rel="noopener">${esc(s.statute)}</a>.`; return pen ? `${esc(pen.charAt(0).toUpperCase() + pen.slice(1))}${/[.)]$/.test(pen) ? '' : '.'} Source: <a href="${esc(s.penalty_source_url || s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>.` : `The penalty is set in <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>. We could not confirm a dollar amount from an official source.`; })()}</p>
     <h2>Why it matters</h2>
     <p>DOT crews and tow operators work beside moving traffic. Police officers respond to incidents on the shoulder. Arrow-board trailers mark work areas and lane closures. These workers, their vehicles and roadside equipment can be struck by passing traffic. Moving over and slowing down helps reduce that risk.</p>
     <h2>Road conditions in ${esc(s.name)}</h2>
