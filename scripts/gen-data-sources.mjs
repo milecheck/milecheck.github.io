@@ -120,7 +120,6 @@ ${ga}
 
     <h2>Found an error?</h2>
     <p>Email <a href="mailto:feedback@milecheckapp.com">feedback@milecheckapp.com</a> with the page or alert and what is wrong. Fixes to an agency&rsquo;s own data have to come from the agency.</p>
-    <p class="checked">Links last checked ${CHECKED}.</p>
   </article>
 
   ${footer}
