@@ -20,7 +20,7 @@ const yes = '<span class="y">Yes</span>';
 const no = '<span class="n">&ndash;</span>';
 
 const stateRows = STATES.map(([code, name, agency, url, note]) => `
-        <tr><td><strong>${name}</strong></td><td>${esc(agency)}<br>${link(url)}${note ? `<br><span class="note">${esc(note)}</span>` : ''}</td><td>${altUS.has(code) ? yes : no}</td><td>${camUS.has(code) ? yes : no}</td></tr>`).join('');
+        <tr><td><strong>${name}</strong></td><td>${esc(agency)}<br>${link(url)}</td><td>${altUS.has(code) ? yes : no}</td><td>${camUS.has(code) ? yes : no}</td></tr>`).join('');
 const provRows = PROVINCES.map(([code, name, agency, url, uses]) => `
         <tr><td><strong>${name}</strong></td><td>${esc(agency)}<br>${link(url)}</td><td>${uses.includes('alerts') ? yes : no}</td><td>${camCA.has(code) ? yes : no}</td></tr>`).join('');
 const otherRows = OTHER.map(([what, who, url, detail]) => `
@@ -97,10 +97,6 @@ ${ga}
     <h1>Where MileCheck gets its road data</h1>
     <p class="lede">MileCheck is not a government app and does not speak for any agency. It reads public feeds from the agencies below and shows them by mile marker.</p>
     <p class="disclaimer">For anything official, such as a closure order or a legal restriction, use the agency&rsquo;s own site, linked in each row. If MileCheck and the agency disagree, the agency is right.</p>
-
-    <h2>How the data gets to you</h2>
-    <p>Each agency publishes in its own format. MileCheck reads the feed, converts it to one format, and refreshes it every 5 to 15 minutes depending on the source. We sort alerts into types such as crash, closure and construction. We do not write alerts of our own. An alert appears in MileCheck after the agency posts it, so it is never ahead of the source.</p>
-    <p>Mile marker positions come from each state&rsquo;s published highway location data. Where a state publishes none for a road, the federal HPMS road dataset fills the gap. Mile markers are stored in the app and work with no signal. Alerts and cameras need a connection.</p>
 
     <h2>United States: state transportation agencies</h2>
     <p>Alerts are live for all 50 states. Cameras are live for ${camUS.size} states.</p>

@@ -88,54 +88,6 @@
     <p class="lede">MileCheck is not a government app and does not speak for any agency. It reads public feeds from the agencies below and shows them by mile marker.</p>
     <p class="disclaimer">For anything official, such as a closure order or a legal restriction, use the agency&rsquo;s own site, linked in each row. If MileCheck and the agency disagree, the agency is right.</p>
 
-    <h2>How the data gets to you</h2>
-    <p>Each agency publishes in its own format. MileCheck reads the feed and converts it to one format. We read most states at least every 5 minutes. California is read every minute and North Dakota every 10. Connecticut, Georgia, Hawaii, Louisiana, Nevada, New Mexico and Wisconsin are read every 15, and Mississippi comes through a copy we refresh about every 30. Hawaii's own source updates weekly. How soon an alert shows up also depends on how often the state publishes it. We sort alerts into types such as crash, closure and construction. We do not write alerts of our own. An alert appears in MileCheck after the agency posts it, so it is never ahead of the source.</p>
-    <p>Mile marker positions come from each state&rsquo;s published highway location data. Where a state publishes none for a road, the federal HPMS road dataset fills the gap. Mile markers are stored in the app and work with no signal. Alerts and cameras need a connection.</p>
-    <p>Companies can buy this data as an API or as a data license. <a href="/api/plan/">See what each is and what it costs</a>.
-    <figure class="flow" aria-label="How data moves from agencies to MileCheck">
-      <div class="flow-scroll"><svg viewBox="0 0 790 330" xmlns="http://www.w3.org/2000/svg" role="img">
-        <title>Agency feeds go to MileCheck's server, which converts them to one format and serves the app, the website and business customers. Mile marker positions are built into the app.</title>
-        <defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a4f"/></marker>
-        <marker id="fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a928c"/></marker></defs>
-        <g font-family="IBM Plex Sans, -apple-system, sans-serif">
-          <rect x="10" y="40" width="200" height="86" rx="8" fill="#f4fbf7" stroke="#0f7a4f" stroke-width="1.5"/>
-          <text x="24" y="68" font-size="15" font-weight="700" fill="#23261f">Agency feeds</text>
-          <text x="24" y="90" font-size="12.5" fill="#5c6156">50 states and 3 provinces</text>
-          <text x="24" y="108" font-size="12.5" fill="#5c6156">each in its own format</text>
-
-          <rect x="280" y="30" width="200" height="106" rx="8" fill="#23261f"/>
-          <text x="380" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">MileCheck&#8217;s server</text>
-          <text x="380" y="84" text-anchor="middle" font-size="12.5" fill="#d9dccf">reads each feed</text>
-          <text x="380" y="102" text-anchor="middle" font-size="12.5" fill="#d9dccf">converts it to one format</text>
-          <text x="380" y="120" text-anchor="middle" font-size="12.5" fill="#d9dccf">sorts alerts by type</text>
-
-          <path d="M210 83 H274" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
-          <text x="242" y="74" text-anchor="middle" font-size="11.5" fill="#5c6156">5&#8211;15 min</text>
-
-          <rect x="550" y="10" width="200" height="56" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5"/>
-          <text x="564" y="34" font-size="14.5" font-weight="700" fill="#23261f">MileCheck app</text>
-          <text x="564" y="53" font-size="12.5" fill="#5c6156">alerts, cameras, map</text>
-          <rect x="550" y="80" width="200" height="56" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5"/>
-          <text x="564" y="104" font-size="14.5" font-weight="700" fill="#23261f">milecheckapp.com</text>
-          <text x="564" y="123" font-size="12.5" fill="#5c6156">state, closure and camera pages</text>
-          <rect x="550" y="150" width="200" height="56" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5"/>
-          <text x="564" y="174" font-size="14.5" font-weight="700" fill="#23261f">Businesses</text>
-          <text x="564" y="193" font-size="12.5" fill="#5c6156">API and data license</text>
-
-          <path d="M480 66 L544 42" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
-          <path d="M480 96 L544 106" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
-          <path d="M480 124 L544 170" stroke="#0f7a4f" stroke-width="2" fill="none" marker-end="url(#fa)"/>
-
-          <rect x="10" y="236" width="240" height="72" rx="8" fill="#ffffff" stroke="#c9c6b8" stroke-width="1.5" stroke-dasharray="5 4"/>
-          <text x="24" y="262" font-size="15" font-weight="700" fill="#23261f">Mile marker positions</text>
-          <text x="24" y="283" font-size="12.5" fill="#5c6156">state highway data + federal HPMS</text>
-          <path d="M250 272 H772 V38 H756" stroke="#8a928c" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#fg)"/>
-          <text x="510" y="292" text-anchor="middle" font-size="11.5" fill="#5c6156">built into the app, works with no signal</text>
-        </g>
-      </svg></div>
-      <figcaption>Alerts and cameras travel the green path and need a connection. Mile markers travel the dashed path once, inside the app.</figcaption>
-    </figure>
-
     <h2>United States: state transportation agencies</h2>
     <p>Alerts come from a live state feed in all 50 states. Hawaii's feed lists work zones only. Cameras are live for <!--cov:cameras.us_states-->45<!--/cov--> states.</p>
     <div class="tbl"><table>
@@ -145,33 +97,33 @@
         <tr><td><strong>Alaska</strong></td><td>Alaska DOT&amp;PF (Alaska 511)<br><a href="https://511.alaska.gov" target="_blank" rel="noopener">511.alaska.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Arizona</strong></td><td>Arizona DOT (AZ511)<br><a href="https://az511.gov" target="_blank" rel="noopener">az511.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Arkansas</strong></td><td>Arkansas DOT (IDrive Arkansas)<br><a href="https://www.idrivearkansas.com" target="_blank" rel="noopener">idrivearkansas.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>California</strong></td><td>Caltrans (QuickMap)<br><a href="https://quickmap.dot.ca.gov" target="_blank" rel="noopener">quickmap.dot.ca.gov</a><br><span class="note">Incidents also from the California Highway Patrol public incident feed.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>California</strong></td><td>Caltrans (QuickMap)<br><a href="https://quickmap.dot.ca.gov" target="_blank" rel="noopener">quickmap.dot.ca.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Colorado</strong></td><td>Colorado DOT (COtrip)<br><a href="https://www.cotrip.org" target="_blank" rel="noopener">cotrip.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Connecticut</strong></td><td>Connecticut DOT (CTroads)<br><a href="https://www.ctroads.org" target="_blank" rel="noopener">ctroads.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Delaware</strong></td><td>Delaware DOT (DelDOT)<br><a href="https://deldot.gov" target="_blank" rel="noopener">deldot.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Florida</strong></td><td>Florida DOT (FL511)<br><a href="https://fl511.com" target="_blank" rel="noopener">fl511.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Georgia</strong></td><td>Georgia DOT (511GA)<br><a href="https://511ga.org" target="_blank" rel="noopener">511ga.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Hawaii</strong></td><td>Hawaii DOT<br><a href="https://hidot.hawaii.gov" target="_blank" rel="noopener">hidot.hawaii.gov</a><br><span class="note">Work zones from the department's public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
-        <tr><td><strong>Idaho</strong></td><td>Idaho Transportation Department (Idaho 511)<br><a href="https://511.idaho.gov" target="_blank" rel="noopener">511.idaho.gov</a><br><span class="note">Incidents from the public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Hawaii</strong></td><td>Hawaii DOT<br><a href="https://hidot.hawaii.gov" target="_blank" rel="noopener">hidot.hawaii.gov</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>Idaho</strong></td><td>Idaho Transportation Department (Idaho 511)<br><a href="https://511.idaho.gov" target="_blank" rel="noopener">511.idaho.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Illinois</strong></td><td>Illinois DOT (Getting Around Illinois)<br><a href="https://www.gettingaroundillinois.com" target="_blank" rel="noopener">gettingaroundillinois.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Indiana</strong></td><td>Indiana DOT (TrafficWise)<br><a href="https://511in.org" target="_blank" rel="noopener">511in.org</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Iowa</strong></td><td>Iowa DOT (511 Iowa)<br><a href="https://511ia.org" target="_blank" rel="noopener">511ia.org</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Kansas</strong></td><td>Kansas DOT (KanDrive)<br><a href="https://www.kandrive.gov" target="_blank" rel="noopener">kandrive.gov</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Indiana</strong></td><td>Indiana DOT (TrafficWise)<br><a href="https://511in.org" target="_blank" rel="noopener">511in.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Iowa</strong></td><td>Iowa DOT (511 Iowa)<br><a href="https://511ia.org" target="_blank" rel="noopener">511ia.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Kansas</strong></td><td>Kansas DOT (KanDrive)<br><a href="https://www.kandrive.gov" target="_blank" rel="noopener">kandrive.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Kentucky</strong></td><td>Kentucky Transportation Cabinet (goKY)<br><a href="https://goky.ky.gov" target="_blank" rel="noopener">goky.ky.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Louisiana</strong></td><td>Louisiana DOTD (511LA)<br><a href="https://www.511la.org" target="_blank" rel="noopener">511la.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Maine</strong></td><td>Maine DOT (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a><br><span class="note">Read through the New England Compass data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Maryland</strong></td><td>Maryland DOT SHA (CHART)<br><a href="https://chart.maryland.gov" target="_blank" rel="noopener">chart.maryland.gov</a><br><span class="note">Incidents from the state's open data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Maine</strong></td><td>Maine DOT (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Maryland</strong></td><td>Maryland DOT SHA (CHART)<br><a href="https://chart.maryland.gov" target="_blank" rel="noopener">chart.maryland.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Massachusetts</strong></td><td>MassDOT (Mass511)<br><a href="https://www.mass511.com" target="_blank" rel="noopener">mass511.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Michigan</strong></td><td>Michigan DOT (Mi Drive)<br><a href="https://mdotjboss.state.mi.us/MiDrive" target="_blank" rel="noopener">mdotjboss.state.mi.us</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Minnesota</strong></td><td>Minnesota DOT (511MN)<br><a href="https://511mn.org" target="_blank" rel="noopener">511mn.org</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Mississippi</strong></td><td>Mississippi DOT (MDOTtraffic)<br><a href="https://www.mdottraffic.com" target="_blank" rel="noopener">mdottraffic.com</a><br><span class="note">Copied to our own storage every 30 minutes, because the agency's server does not answer ours directly.</span></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>Minnesota</strong></td><td>Minnesota DOT (511MN)<br><a href="https://511mn.org" target="_blank" rel="noopener">511mn.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Mississippi</strong></td><td>Mississippi DOT (MDOTtraffic)<br><a href="https://www.mdottraffic.com" target="_blank" rel="noopener">mdottraffic.com</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
         <tr><td><strong>Missouri</strong></td><td>Missouri DOT (Traveler Information)<br><a href="https://traveler.modot.org" target="_blank" rel="noopener">traveler.modot.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Montana</strong></td><td>Montana DOT (511 Montana)<br><a href="https://www.511mt.net" target="_blank" rel="noopener">511mt.net</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Nebraska</strong></td><td>Nebraska DOT (Nebraska 511)<br><a href="https://511.nebraska.gov" target="_blank" rel="noopener">511.nebraska.gov</a><br><span class="note">Read through the state's CARS data hub.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Nebraska</strong></td><td>Nebraska DOT (Nebraska 511)<br><a href="https://511.nebraska.gov" target="_blank" rel="noopener">511.nebraska.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Nevada</strong></td><td>Nevada DOT (NVRoads)<br><a href="https://www.nvroads.com" target="_blank" rel="noopener">nvroads.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>New Hampshire</strong></td><td>NH DOT (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a><br><span class="note">Read through the New England Compass data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>New Jersey</strong></td><td>NJ DOT (511NJ)<br><a href="https://511nj.org" target="_blank" rel="noopener">511nj.org</a><br><span class="note">Work zones from the public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
-        <tr><td><strong>New Mexico</strong></td><td>New Mexico DOT (NMRoads)<br><a href="https://nmroads.com" target="_blank" rel="noopener">nmroads.com</a><br><span class="note">Work zones from the public WZDx work-zone feed.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>New Hampshire</strong></td><td>NH DOT (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>New Jersey</strong></td><td>NJ DOT (511NJ)<br><a href="https://511nj.org" target="_blank" rel="noopener">511nj.org</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
+        <tr><td><strong>New Mexico</strong></td><td>New Mexico DOT (NMRoads)<br><a href="https://nmroads.com" target="_blank" rel="noopener">nmroads.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>New York</strong></td><td>New York State DOT (511NY)<br><a href="https://511ny.org" target="_blank" rel="noopener">511ny.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>North Carolina</strong></td><td>NCDOT (DriveNC)<br><a href="https://www.drivenc.gov" target="_blank" rel="noopener">drivenc.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>North Dakota</strong></td><td>North Dakota DOT (Travel Information)<br><a href="https://travel.dot.nd.gov" target="_blank" rel="noopener">travel.dot.nd.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
@@ -185,9 +137,9 @@
         <tr><td><strong>Tennessee</strong></td><td>Tennessee DOT (SmartWay)<br><a href="https://smartway.tn.gov/traffic" target="_blank" rel="noopener">smartway.tn.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Texas</strong></td><td>Texas DOT (DriveTexas)<br><a href="https://drivetexas.org" target="_blank" rel="noopener">drivetexas.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Utah</strong></td><td>Utah DOT (UDOT Traffic)<br><a href="https://www.udottraffic.utah.gov" target="_blank" rel="noopener">udottraffic.utah.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Vermont</strong></td><td>Vermont Agency of Transportation (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a><br><span class="note">Read through the New England Compass data portal.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Vermont</strong></td><td>Vermont Agency of Transportation (New England 511)<br><a href="https://newengland511.org" target="_blank" rel="noopener">newengland511.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Virginia</strong></td><td>Virginia DOT (511 Virginia)<br><a href="https://511.vdot.virginia.gov" target="_blank" rel="noopener">511.vdot.virginia.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><td><strong>Washington</strong></td><td>Washington State DOT<br><a href="https://wsdot.com/travel/real-time/map/" target="_blank" rel="noopener">wsdot.com</a><br><span class="note">Drawbridge status from Seattle DOT.</span></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><td><strong>Washington</strong></td><td>Washington State DOT<br><a href="https://wsdot.com/travel/real-time/map/" target="_blank" rel="noopener">wsdot.com</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>West Virginia</strong></td><td>West Virginia DOT (WV511)<br><a href="https://wv511.org" target="_blank" rel="noopener">wv511.org</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Wisconsin</strong></td><td>Wisconsin DOT (511 Wisconsin)<br><a href="https://511wi.gov" target="_blank" rel="noopener">511wi.gov</a></td><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
         <tr><td><strong>Wyoming</strong></td><td>Wyoming DOT (WyoRoad)<br><a href="https://wyoroad.info" target="_blank" rel="noopener">wyoroad.info</a></td><td><span class="y">Yes</span></td><td><span class="n">&ndash;</span></td></tr>
