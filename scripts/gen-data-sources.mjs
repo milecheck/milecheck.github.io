@@ -20,9 +20,9 @@ const yes = '<span class="y">Yes</span>';
 const no = '<span class="n">&ndash;</span>';
 
 const stateRows = STATES.map(([code, name, agency, url, note]) => `
-        <tr><td><strong>${name}</strong></td><td>${esc(agency)}<br>${link(url)}</td><td>${altUS.has(code) ? yes : no}</td><td>${camUS.has(code) ? yes : no}</td></tr>`).join('');
+        <tr><td><strong>${name}</strong></td><td>${esc(agency)}</td></tr>`).join('');
 const provRows = PROVINCES.map(([code, name, agency, url, uses]) => `
-        <tr><td><strong>${name}</strong></td><td>${esc(agency)}<br>${link(url)}</td><td>${uses.includes('alerts') ? yes : no}</td><td>${camCA.has(code) ? yes : no}</td></tr>`).join('');
+        <tr><td><strong>${name}</strong></td><td>${esc(agency)}</td></tr>`).join('');
 const otherRows = OTHER.map(([what, who, url, detail]) => `
         <tr><td><strong>${what}</strong></td><td>${esc(who)}<br>${link(url)}</td><td colspan="2">${esc(detail)}</td></tr>`).join('');
 
@@ -96,19 +96,19 @@ ${ga}
     <div class="eyebrow">Data sources</div>
     <h1>Where MileCheck gets its road data</h1>
     <p class="lede">MileCheck is not a government app and does not speak for any agency. It reads public feeds from the agencies below and shows them by mile marker.</p>
-    <p class="disclaimer">For anything official, such as a closure order or a legal restriction, use the agency&rsquo;s own site, linked in each row. If MileCheck and the agency disagree, the agency is right.</p>
+    <p class="disclaimer">For anything official, such as a closure order or a legal restriction, use the agency&rsquo;s own site. If MileCheck and the agency disagree, the agency is right.</p>
 
     <h2>United States: state transportation agencies</h2>
-    <p>Alerts are live for all 50 states. Cameras are live for ${camUS.size} states.</p>
+    
     <div class="tbl"><table>
-      <thead><tr><th>State</th><th>Agency and public site</th><th>Alerts</th><th>Cameras</th></tr></thead>
+      <thead><tr><th>State</th><th>Agency</th></tr></thead>
       <tbody>${stateRows}
       </tbody></table></div>
 
     <h2>Canada: provincial agencies</h2>
-    <p>Kilometre markers cover ten provinces. Live alerts and cameras are listed below.</p>
+    
     <div class="tbl"><table>
-      <thead><tr><th>Province</th><th>Agency and public site</th><th>Alerts</th><th>Cameras</th></tr></thead>
+      <thead><tr><th>Province</th><th>Agency</th></tr></thead>
       <tbody>${provRows}
       </tbody></table></div>
 
