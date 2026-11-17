@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (n) => n.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
+const MEM = JSON.parse(readFileSync('data/move-over-memorials.json', 'utf8'));
 const FINES = JSON.parse(readFileSync('data/move-over-fines.json', 'utf8'));
 const laws = JSON.parse(readFileSync('data/move-over-laws.json', 'utf8')).sort((a, b) => a.name.localeCompare(b.name));
 const tpl = readFileSync('chain-laws/oregon/index.html', 'utf8');
@@ -60,6 +61,7 @@ for (const s of laws) {
     <p class="sc-eyebrow">Move over law · ${esc(s.name)}</p>
     <h1>${esc(q)}</h1>
     <p class="sc-lede">The law is <a href="${esc(s.statute_url)}" target="_blank" rel="noopener">${esc(s.statute)}</a>. Here is what it asks of drivers in ${esc(s.name)}.</p>
+    ${MEM[s.state] ? `<p style="max-width:78ch;border-left:4px solid #0f7a4f;padding:8px 14px;margin:0 0 16px;font-size:15.5px;line-height:1.55"><strong>In memory of ${esc(MEM[s.state].name)}.</strong> ${esc(MEM[s.state].law)} is named in their honor. ${esc(MEM[s.state].line)} <a href="${esc(MEM[s.state].source)}" target="_blank" rel="noopener">Source</a>.</p>` : ''}
     <div class="sc-body" style="max-width:78ch;font-size:16px;line-height:1.6">
     <h2>What you have to do</h2>
     <ul>${s.duty.split(/;\s*/).map((t) => t.trim().replace(/\.$/, '')).filter(Boolean).map((t) => `<li>${esc(t.charAt(0).toUpperCase() + t.slice(1))}.</li>`).join('')}</ul>
