@@ -120,8 +120,8 @@
   </style>
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b22dd97eac65485dae41ab1e51f823e9"}'></script><!-- End Cloudflare Web Analytics -->
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
-  <script src="/assets/map-kit.js?v=20261114b" defer></script>
+  <link rel="stylesheet" href="/maptest/assets/map-kit.css?v=20261111a">
+  <script src="/maptest/assets/map-kit.js?v=20261114b" defer></script>
   <script src="/assets/new-tab.js?v=20261102-1" defer></script><!-- new-tab -->
 <style data-seo-img>:where(img[width][height]){height:auto}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
@@ -152,6 +152,15 @@
   <div class="co-hero">
     <div class="eyebrow">I-5 &middot; SR 18 &middot; SR 164 &middot; SR 410 &middot; Washington</div>
     <h1>Getting to Crystal Mountain</h1>
+<div data-card-moved="1" class="co-cta">
+    <h2>state DOT feeds for the whole drive, before you leave cell range</h2>
+    <p>MileCheck carries WSDOT's live conditions and incidents for I-5, SR 18, SR 164, SR 410, Chinook Pass, and Cayuse Pass, plus every other highway on the rest of your route &mdash; check it in Enumclaw, before the coverage runs out.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=passes-crystal-mountain&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dpasses-crystal-mountain" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
     
     
     
@@ -247,14 +256,7 @@
     <details><summary>What is the elevation at Crystal Mountain?</summary><p>Base elevation is 4,400 feet, summit 7,012 feet, per <a href="https://www.crystalmountainresort.com/media/mountain-stats-and-facts" target="_blank" rel="noopener">Crystal Mountain Resort's own mountain stats</a>.</p></details>
   </section>
 
-  <div class="co-cta">
-    <h2>state DOT feeds for the whole drive, before you leave cell range</h2>
-    <p>MileCheck carries WSDOT's live conditions and incidents for I-5, SR 18, SR 164, SR 410, Chinook Pass, and Cayuse Pass, plus every other highway on the rest of your route &mdash; check it in Enumclaw, before the coverage runs out.</p>
-    <div class="btns">
-      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=passes-crystal-mountain&mt=8" target="_blank" rel="noopener">iOS App Store</a>
-      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dpasses-crystal-mountain" target="_blank" rel="noopener">Google Play</a>
-    </div>
-  </div>
+  
 
   <p class="co-related">More passes &amp; routes: <a href="../">all mountain passes</a> · <a href="../../mountains/rainier/roads/">Mount Rainier road cameras &amp; conditions</a> (Crystal Mountain sits right at the park's NE boundary) · <a href="../../mountains/rainier/">Is Rainier out?</a> (the summit gondola looks straight at it) · <a href="../../cameras/">all highway cameras</a> · <a href="../../maps/">all maps</a> · <a href="../blewett/">Blewett Pass</a></p>
 
@@ -397,7 +399,7 @@ layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
 {id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],60000000,8,15000000,10,2000000,11,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
 {id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'text-field':['get','l'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],9,7,13,9],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}},{id:'countyn',type:'symbol',source:'q','source-layer':'county',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
 
-const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);
+const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);const gl__mt=L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);window.__mtSetDark=d=>{try{gl__mt.getMaplibreMap().setStyle(style(d))}catch(e){}};
 (function(){
 const LAY={snowamt:['Snow (6 hr)','ndfd.conus.snowamt'],qpf:['Rain and snow water (6 hr)','ndfd.conus.qpf'],windgust:['Wind gusts','ndfd.conus.windgust'],t:['Temperature','ndfd.conus.t'],wwa:['Warnings','ndfd.conus.wwa']};
 const times={};let cur='snowamt',wms=null;map.attributionControl.setPrefix(false);if(!map.getPane('fc')){map.createPane('fc');map.getPane('fc').style.zIndex=390;map.getPane('fc').style.pointerEvents='none';}

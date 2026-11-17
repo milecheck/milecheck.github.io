@@ -162,8 +162,8 @@
     @media(max-width:600px){ .spon.spon-house{flex-wrap:nowrap;align-items:center;gap:10px;padding:10px 12px;min-height:0;} .spon-roy{height:62px;margin:0;align-self:center;} .spon.spon-house .spon-body{flex:1 1 auto;flex-basis:auto;flex-direction:column;align-items:flex-start;gap:3px;flex-wrap:nowrap;} .spon-house .spon-text{font-size:13.5px;} .spon-house .spon-cta{margin-left:0;} .spon{flex-wrap:wrap;gap:8px 12px;padding:12px 14px;min-height:56px;} .spon-body{flex-basis:100%;flex-wrap:wrap;} .spon-text{flex:1 1 60%;} .spon-cta{margin-left:auto;} }
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261111a">
-  <script src="/assets/map-kit.js?v=20261114b" defer></script>
+  <link rel="stylesheet" href="/maptest/assets/map-kit.css?v=20261111a">
+  <script src="/maptest/assets/map-kit.js?v=20261114b" defer></script>
 <style data-seo-img>:where(img[width][height]){height:auto}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
   <!-- site-nav:assets -->
@@ -198,6 +198,15 @@
   <div class="sk-hero">
     <div class="eyebrow">Ski resort roads · Washington · WSDOT</div>
     <h1>What is the road to Crystal Mountain like right now?</h1>
+<div data-card-moved="1" class="co-cta">
+    <h2>The same alerts on your route, as you drive</h2>
+    <p>MileCheck shows your mile marker and the WSDOT alerts ahead of you on SR 410, offline in dead zones, on CarPlay and Android Auto. Premium starts with a trial.</p>
+    <div class="btns">
+      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ski-crystal-mountain&mt=8" target="_blank" rel="noopener">iOS App Store</a>
+      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dski-crystal-mountain" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+
     <p class="sub">SR 410 from Enumclaw through Greenwater, then Crystal Mountain Boulevard. This page puts WSDOT's cameras and its closure and crash reports for that road on one map. Washington publishes no plow positions, and the page says so instead of guessing. The resort's own <a href="https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams" target="_blank" rel="noopener">Crystal Mountain mountain report</a> covers the mountain itself. WSDOT's last camera on SR 410 is at mile 24.9 in Enumclaw. Past that, WSDOT has no cameras on the roughly 32 miles of SR 410 to the turnoff or the 6 miles up Crystal Mountain Boulevard.</p>
     <div class="co-stats sk-stats">
       <div class="co-stat sk-stat"><div class="n" style="font-size:15px;padding-top:5px">none published</div><div class="l">WSDOT plow positions</div></div>
@@ -289,14 +298,7 @@
     <details><summary>How often does this page update?</summary><p>Plow positions every minute, closures and crashes every five minutes, the camera list every ten. MileCheck's server reads the WSDOT and WSDOT feeds and converts them to one format. Each truck and each alert carries its own time stamp from the DOT, shown next to it.</p></details>
   </section>
 
-  <div class="co-cta">
-    <h2>The same alerts on your route, as you drive</h2>
-    <p>MileCheck shows your mile marker and the WSDOT alerts ahead of you on SR 410, offline in dead zones, on CarPlay and Android Auto. Premium starts with a trial.</p>
-    <div class="btns">
-      <a class="primary" href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=ski-crystal-mountain&mt=8" target="_blank" rel="noopener">iOS App Store</a>
-      <a class="ghost" href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dski-crystal-mountain" target="_blank" rel="noopener">Google Play</a>
-    </div>
-  </div>
+  
 
   <p class="sk-related">More: <a href="/ski/">every ski resort road</a> · <a href="/snowplows/">snowplow map</a> · <a href="/passes/">mountain passes</a> · <a href="/cameras/washington/">Washington cameras</a> · <a href="/road-conditions/washington/">Washington road conditions</a> · <a href="/maps/">all maps</a></p>
 
@@ -525,7 +527,7 @@ layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
 {id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],60000000,8,15000000,10,2000000,11,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
 {id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'text-field':['get','l'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],9,7,13,9],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}},{id:'countyn',type:'symbol',source:'q','source-layer':'county',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
 
-const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);
+const map__mt=map;map.attributionControl&&map.attributionControl.setPrefix(false);const gl__mt=L.maplibreGL({style:style(false),attribution:'Data: Census, WSDOT, NOAA'}).addTo(map);window.__mtSetDark=d=>{try{gl__mt.getMaplibreMap().setStyle(style(d))}catch(e){}};
 (function(){
 const LAY={snowamt:['Snow (6 hr)','ndfd.conus.snowamt'],qpf:['Rain and snow water (6 hr)','ndfd.conus.qpf'],windgust:['Wind gusts','ndfd.conus.windgust'],t:['Temperature','ndfd.conus.t'],wwa:['Warnings','ndfd.conus.wwa']};
 const times={};let cur='snowamt',wms=null;map.attributionControl.setPrefix(false);if(!map.getPane('fc')){map.createPane('fc');map.getPane('fc').style.zIndex=390;map.getPane('fc').style.pointerEvents='none';}

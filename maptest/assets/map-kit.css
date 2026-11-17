@@ -1,0 +1,225 @@
+/* map-kit.css: the live map (#comap) on phones.
+   Leah, 2026-10-03: "the camera maps are clunky on mobile view". Measured at 375px:
+   a tapped camera opened in a 201px card with a 171px image, the status chip ran off
+   the map, the layers panel covered a quarter of it, and the credit line wrapped to
+   three lines. Linked from every page with the map: state and city camera pages,
+   passes, corridors (scripts/add-map-kit.mjs adds the tags to built pages; the
+   four generators carry them too). Selectors start with "html" so they beat each
+   page's inline <style> whatever order the tags land in. Desktop gets the near-me and layers buttons; the rest is phone-only.
+   Since 10-03 every other Leaflet map on the site links this file too (closures, road
+   conditions, bridges, fire, weather, grades, chains, ferries, borders, the cameras hub,
+   Canada, the mile-marker map). They get only the parts that fit any map: the one-line
+   credit and the lighter status type. Everything keyed on #comap/.co-* stays theirs-free. */
+
+/* Type on the map overlays (Leah 10-03: "make the font look less AI"). The pages are
+   set in IBM Plex Sans; the overlays used it at 800 with a tiny tracked all-caps title.
+   Sentence case, 500-600 weights. */
+html .co-layers .lt{text-transform:none;letter-spacing:0;font-size:13px;font-weight:600;color:#0E1116;margin:0 0 2px;}
+html .co-layer{font-weight:500;}
+html .co-bs{font-weight:600;}
+html .co-card .cc-title{font-weight:600;}
+html #bigStatus,html #rcStatus{font-weight:600;}
+
+/* Near-me button, under Leaflet's zoom control. Every width. */
+.cm-locate a.cm-busy{opacity:.5;}
+.cm-locate svg{width:17px;height:17px;}
+.cm-toast{position:absolute;left:50%;transform:translateX(-50%);bottom:34px;z-index:950;max-width:calc(100% - 24px);background:#0E1116;color:#fff;font-size:13px;font-weight:600;line-height:1.4;padding:8px 12px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.25);}
+.cm-toast a{color:#86efac;}
+/* Layers (option C, Leah 10-03): the icon button opens and closes the panel. The panel
+   opens level with the button (map-kit.js sets its top) with a pointer to it, and
+   on phones the button pulses three times on load. Every width. */
+.cm-locate a,.cm-layers-btn a{display:flex!important;align-items:center;justify-content:center;color:#0E1116;}
+.cm-layers-btn svg{width:18px;height:18px;}
+.cm-layers-btn a.cm-on{background:#E8F5EE;color:#0f7a4f;}
+.cm-layers-btn.cm-pulse{animation:cmPulse 1.5s ease-out .6s 5;}
+.cm-layers-btn.cm-pulse a{animation:cmPulseFill 1.5s ease-out .6s 5;}
+@keyframes cmPulse{0%{box-shadow:0 0 0 0 rgba(15,122,79,.7);}100%{box-shadow:0 0 0 16px rgba(15,122,79,0);}}
+@keyframes cmPulseFill{0%,40%{background:#E8F5EE;color:#0f7a4f;}100%{background:#fff;}}
+@media (prefers-reduced-motion:reduce){.cm-layers-btn.cm-pulse,.cm-layers-btn.cm-pulse a{animation:none;}}
+html .co-layers{left:54px;top:124px;bottom:auto;min-width:0;max-width:calc(100% - 66px);padding:8px 12px 6px;}
+html .co-layers::before{content:"";position:absolute;left:-7px;top:14px;width:12px;height:12px;background:#fff;border-left:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;transform:rotate(45deg);}
+html .co-layers.cm-closed{display:none!important;}
+/* The "Park webcam" key is marked hidden until a park camera loads, but .co-key's
+   display:flex beat the hidden attribute, so every pass page showed it. */
+html .co-layers [hidden]{display:none!important;}
+
+@media (max-width:600px){
+  /* Stats: a 2-up grid instead of cards wrapping one, two, one. */
+  html .co-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  html .co-stat{min-width:0;padding:9px 12px;}
+  html .co-stat .n{font-size:21px;}
+  html .co-stat .l{font-size:14px;}
+
+  /* Tapped camera or alert: a sheet across the bottom of the map. */
+  html .co-card{left:8px;right:8px;top:auto;bottom:24px;width:auto;max-height:calc(100% - 72px);border-radius:14px;padding:12px 12px 10px;}
+  html .co-card .cc-title{font-size:15px;}
+  /* Reserve the image box so the card does not jump when the frame arrives. */
+  html .co-card img.cc-img,html .co-card video.cc-img{margin-top:8px;aspect-ratio:4/3;height:auto;object-fit:contain;}
+  html .co-card img.cc-img.cm-loaded{aspect-ratio:auto;}
+
+  /* Status chip: one line, inside the map. */
+  html .co-bs{left:52px;right:10px;top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;padding:7px 10px;}
+
+  html .co-layers{font-size:13px;}
+
+  /* Credit line: one line; tap it to read all of it. */
+  html .leaflet-container .leaflet-control-attribution{font-size:10px;line-height:1.4;max-width:calc(100vw - 60px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+  html .leaflet-container .leaflet-control-attribution.cm-open{white-space:normal;}
+
+  html .cm-toast{bottom:64px;}
+}
+
+/* Map options panel for maps that declare window.mcMapOptions (map-kit.js #5). Same
+   option C as the camera maps' layers panel: icon button, pointer, pulse on phones. */
+.cm-opts{position:relative;}
+.cm-opts-panel{position:absolute;z-index:1000;background:#fff;border:1px solid #E5E5E5;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:9px 12px 10px;min-width:200px;max-width:calc(100vw - 48px);font-size:13px;line-height:1.3;color:#0E1116;text-align:left;cursor:default;}
+.cm-opts-panel.cm-closed{display:none;}
+.leaflet-right .cm-opts-panel{right:0;}
+.leaflet-left .cm-opts-panel{left:0;}
+.leaflet-bottom .cm-opts-panel{bottom:calc(100% + 12px);}
+.leaflet-top .cm-opts-panel{top:calc(100% + 12px);}
+.cm-opts-panel::after{content:"";position:absolute;width:12px;height:12px;background:#fff;transform:rotate(45deg);}
+.leaflet-bottom .cm-opts-panel::after{bottom:-7px;border-right:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
+.leaflet-top .cm-opts-panel::after{top:-7px;border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;}
+.leaflet-right .cm-opts-panel::after{right:10px;}
+.leaflet-left .cm-opts-panel::after{left:10px;}
+.cm-opts-panel .lt{font-size:13px;font-weight:600;margin:0 0 4px;}
+.cm-opts-row{display:flex;align-items:center;gap:9px;padding:6px 0;cursor:pointer;user-select:none;font-weight:500;position:relative;}
+.cm-opts-row input{position:absolute;opacity:0;width:0;height:0;}
+.cm-sw{flex:none;width:34px;height:20px;border-radius:10px;background:#cfd4da;position:relative;transition:background .15s;}
+.cm-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .15s;}
+.cm-opts-row input:checked+.cm-sw{background:var(--on,#0f7a4f);}
+.cm-opts-row input:checked+.cm-sw::after{left:16px;}
+.cm-opts-row input:focus-visible+.cm-sw{outline:2px solid #0f7a4f;outline-offset:2px;}
+.cm-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;}
+.cm-opts-sub{font-size:12px;font-weight:600;color:#5b6670;margin:8px 0 6px;padding-top:8px;border-top:1px solid #F0F0EE;}
+.cm-opts-bases{display:flex;gap:6px;}
+.cm-opts-bases button{flex:1;font:inherit;font-size:12.5px;font-weight:500;padding:6px 8px;border:1px solid #E5E5E5;border-radius:8px;background:#fff;color:#0E1116;cursor:pointer;}
+.cm-opts-bases button.cm-on{background:#0E1116;border-color:#0E1116;color:#fff;}
+
+/* Camera list folds to three (map-kit.js #6). */
+html .co-list li[hidden]{display:none!important;}
+.cm-more{display:block;width:100%;margin:10px 0 2px;font:inherit;font-size:14px;font-weight:600;color:#0f7a4f;background:#f2f7f3;border:1px solid #d6e8dc;border-radius:10px;padding:10px 14px;cursor:pointer;}
+.cm-more:hover{background:#e8f2eb;}
+
+/* 5. Camera card arrows (map-kit.js section 5). One rule for every camera map. */
+.cm-camnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 40px 8px 0;font-size:12px;color:#5b6670;}
+.cm-camnav button{flex:none;border:1px solid #E5E5E5;background:#fff;border-radius:8px;width:36px;height:30px;font-size:20px;line-height:1;cursor:pointer;color:#0E1116;padding:0;}
+.cm-camnav button:hover{border-color:#0E1116;}
+.cm-camnav span{flex:1;min-width:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* 6. Full screen (map-kit.js section 6). .cm-fs-on is set in both native and pinned modes; .cm-fs only in the pinned fallback. */
+.cm-fs-btn a{display:flex;align-items:center;justify-content:center;width:30px;height:30px;color:#0E1116;}
+.cm-fs-on{background:#eef0e9;}
+.cm-fs-on:fullscreen{border-radius:0;}
+.cm-fs{position:fixed !important;inset:0 !important;z-index:6000 !important;width:auto !important;height:100vh !important;height:100dvh !important;max-height:none !important;margin:0 !important;border-radius:0 !important;}
+.cm-fs-on > .leaflet-container{width:100% !important;height:100% !important;min-height:0 !important;max-height:none !important;border-radius:0 !important;}
+.cm-fs-on .leaflet-container.leaflet-container{position:absolute;inset:0;}
+.cm-fs-on .co-card,.cm-fs-on .sk-card{max-height:calc(100% - 24px);}
+.cm-fs-doc{overflow:hidden;}
+
+/* 7. Landscape phones (Leah, 2026-10-16: "landscape on mobile even"): a map with a 440-460px minimum is taller than a
+   375px-high screen. Below 520px of height the map takes most of the screen and drops its minimum, on every map page. */
+@media (max-height:520px){
+  html #comap,html .rc-mapbox{height:82vh !important;height:82dvh !important;min-height:0 !important;}
+  html .co-card{max-height:calc(100% - 16px);}
+}
+
+/* 8. Status pill (map-kit.js section 8): hidden while it repeats the counts the stat cards show. */
+html .co-bs.cm-hide{display:none !important;}
+
+/* 9. 511 Alberta no-feed line (map-kit.js section 9), in place of its "No live camera feed" picture. */
+.cm-nofeed{margin-top:8px;padding:10px 12px;border:1px dashed #cfd4da;border-radius:8px;color:#5b6670;}
+
+/* 10. Camera filed under the wrong road (map-kit.js section 10). */
+.cm-routenote{margin-top:8px;font-size:13px;font-style:italic;color:#b91c1c;line-height:1.4;}
+
+/* 11. Camera card above the map controls (Leah, 2026-10-23, SR 410 / Crystal Mountain page on a phone:
+   zoom, near-me, layers and full-screen buttons sat on top of "3 of 3 · SR 18"; worse in landscape).
+   The card was z-index 900 and Leaflet's control corners are 1000, so the buttons won. The card now
+   sits above them; it has its own close button. On phones and short screens the card also stops below
+   the button column where there is room, and the credit line moves to the top right so the browser's
+   floating address bar (the "milecheckapp.com" pill in Safari) never covers it. */
+html .co-card{z-index:1100;}
+@media (max-width:600px){
+  html .co-card{max-height:max(55%,calc(100% - 196px));}
+}
+@media (max-width:900px),(max-height:520px){
+  html .leaflet-container .leaflet-bottom.leaflet-right .leaflet-control-attribution{display:none;}
+  html .leaflet-container .leaflet-top.leaflet-right .cm-attr-top{display:block;}
+}
+@media (max-height:520px){
+  /* Landscape phone: card on the right half so the left button column stays usable. */
+  html .co-card{left:auto;right:8px;top:26px;bottom:8px;width:min(340px,48%);max-height:none;}
+  html .leaflet-control-zoom a,html .cm-locate a,html .cm-layers-btn a,html .cm-fs-btn a{width:28px!important;height:28px!important;line-height:28px!important;}
+  html .leaflet-top.leaflet-left .leaflet-control{margin-top:6px;margin-left:6px;}
+}
+.cm-attr-top{display:none;font-size:10px;line-height:1.4;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.8);padding:0 5px;margin:0!important;color:#333;cursor:pointer;}
+.cm-attr-top.cm-open{white-space:normal;}
+.cm-attr-top a{color:#0078A8;}
+/* Shared layer rows (10-30): 44px tap rows on phones, and the panel scrolls inside the
+   map when a page has many rows, instead of running off the bottom. */
+.cm-opts-panel{overflow-y:auto;overscroll-behavior:contain;}
+/* Option B tiles (10-30): icon on top, label under. Grey icon = off, colored icon and
+   border = on. Four across on tablets, desktops and sideways phones (two rows), three
+   across on a phone held upright. */
+.cm-opts-panel{width:384px;padding:10px;}
+.cm-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.cm-tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;min-height:64px;padding:7px 4px 6px;border:2px solid #E3E7E2;border-radius:10px;font-size:11.5px;font-weight:600;line-height:1.2;text-align:center;cursor:pointer;user-select:none;color:#0E1116;background:#fff;transition:border-color .15s,background .15s;}
+.cm-tile input{position:absolute;opacity:0;width:0;height:0;}
+.cm-ic{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#C9CFCA;color:#fff;transition:background .15s;}
+.cm-ic svg{width:16px;height:16px;}
+.cm-tile.cm-on{border-color:var(--c);background:color-mix(in srgb,var(--c) 9%,#fff);}
+.cm-tile.cm-on .cm-ic{background:var(--c);}
+.cm-tile:has(input:focus-visible){outline:2px solid #0f7a4f;outline-offset:2px;}
+@media (hover:hover){.cm-tile:hover{border-color:#B9C1BB;}.cm-tile.cm-on:hover{border-color:var(--c);}}
+@media (max-width:600px) and (orientation:portrait){.cm-opts-panel{width:min(300px,calc(100vw - 72px));}.cm-tiles{grid-template-columns:repeat(3,1fr);}}
+@media (orientation:landscape) and (max-height:500px){.cm-tile{min-height:54px;padding:5px 3px;}.cm-ic{width:24px;height:24px;}}
+.leaflet-left .cm-opts-panel.cm-side{left:calc(100% + 10px);bottom:auto;}
+.cm-opts-panel.cm-side .cm-tiles{grid-template-columns:repeat(auto-fill,minmax(78px,1fr));}
+.cm-opts-panel.cm-side::after{display:none;}
+/* Pass, ski, corridor and mountain layer boxes as tiles (10-30). */
+html .co-layers.cm-tiled{width:384px;max-width:calc(100% - 66px);padding:10px;overflow-y:auto;}
+html .co-layers.cm-tiled::before{display:none;}
+html .co-layers .cm-tile{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;padding:7px 4px 6px;font-weight:600;font-size:11.5px;color:#0E1116;}
+html .co-layers .co-key{margin-top:8px;}
+@media (max-width:600px) and (orientation:portrait){html .co-layers.cm-tiled{width:min(300px,calc(100% - 66px));}}
+.cm-opts-panel.cm-side .cm-tile{min-height:54px;padding:5px 3px;}.cm-opts-panel.cm-side .cm-ic{width:24px;height:24px;}.cm-opts-panel.cm-side .cm-ic svg{width:14px;height:14px;}
+/* Close X on the layers card, top right (10-30). 36px tap area, 16px icon. */
+.cm-x{position:absolute;top:2px;right:2px;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:8px;background:transparent;color:#5b6670;cursor:pointer;padding:0;z-index:2;}
+.cm-x svg{width:16px;height:16px;}
+.cm-x:hover{background:#F1F3F0;color:#0E1116;}
+.cm-x:focus-visible{outline:2px solid #0f7a4f;outline-offset:-2px;}
+.cm-opts-panel .lt,html .co-layers.cm-tiled .lt{padding-right:34px;min-height:24px;display:flex;align-items:center;margin-bottom:6px;}
+/* No system-colored focus ring around the whole map or the map buttons after a tap or
+   click (it showed orange on Leah's Mac, 10-30). Keyboard focus still gets a green ring. */
+.leaflet-container:focus{outline:none;}
+.leaflet-bar a:focus{outline:none;}
+.leaflet-bar a:focus-visible{outline:2px solid #0f7a4f;outline-offset:2px;}
+/* Mile marker signs on the shared Mile markers layer (10-30): green, white border, white
+   number, like the app's milepost sign. */
+.cm-mp{background:none;border:0;}
+.cm-mp span{position:absolute;left:0;top:0;transform:translate(7px,-50%);display:block;min-width:20px;padding:1px 4px;background:#0f7a4f;color:#fff;border:1.5px solid #fff;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.35);font:700 11px/1.3 system-ui,-apple-system,sans-serif;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;}
+.cm-mp::before{content:"";position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px #1d1f1c;}
+/* Ring on the open pin (10-30). A steady ring plus one that grows and fades. */
+.cm-ring{background:none;border:0;}
+.cm-ring span,.cm-ring span::after{position:absolute;left:0;top:0;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:3px solid #0f7a4f;box-sizing:border-box;}
+.cm-ring span{box-shadow:0 0 0 2px #fff;}
+.cm-ring span::after{content:"";margin:-3px 0 0 -3px;animation:cmRing 1.4s ease-out infinite;}
+@keyframes cmRing{0%{transform:scale(1);opacity:.9;}100%{transform:scale(2.4);opacity:0;}}
+@media (prefers-reduced-motion:reduce){.cm-ring span::after{animation:none;opacity:0;}}
+
+/* Camera pictures: age line and Refresh button (map-kit.js section 8, 11-02) */
+.cc-age{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px;}
+.cc-age .cc-age-t{flex:1 1 180px;min-width:0;}
+.cc-refresh{min-height:44px;padding:0 14px;border:1px solid #c9d0d6;border-radius:8px;background:#fff;color:#0E1116;font:600 13.5px/1 inherit;font-family:inherit;cursor:pointer;}
+.cc-refresh:disabled{opacity:.6;cursor:default;}
+/* Touch targets (audit 11/11): map buttons and the credit link are at least 44px on touch screens.
+   Last in the file so it wins over the landscape-phone 28px rule above. */
+@media (pointer:coarse){
+  html .leaflet-bar a,html .leaflet-control-zoom a,html .cm-locate a,html .cm-layers-btn a,html .cm-fs-btn a{width:44px!important;height:44px!important;line-height:44px!important;}
+  html .leaflet-container .leaflet-control-attribution a,html .cm-attr-top a{display:inline-block;min-height:44px;line-height:44px;padding:0 4px;}
+}
+/* Header brand link and closure list buttons: 44px tall everywhere. */
+a.brand{min-height:44px;box-sizing:border-box;}
+.lc-go,.nearme{min-height:44px;}
