@@ -1,0 +1,854 @@
+[
+ {
+  "state": "AK",
+  "name": "Alaska",
+  "statute": "Alaska Statute 28.35.185",
+  "statute_url": "https://www.akleg.gov/pdf/billfiles/SLAs/sl18pdfs/CH076.pdf",
+  "covers": [
+   "police, fire and emergency vehicles",
+   "tow trucks",
+   "DOT and highway maintenance vehicles",
+   "animal control vehicles"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move out of the lane nearest the stopped vehicle when safe; if you cannot, slow to a reasonable, prudent speed.",
+  "penalty": "Infraction; Class A misdemeanor if it results in personal injury",
+  "penalty_source_url": "https://www.akleg.gov/pdf/billfiles/SLAs/sl18pdfs/CH076.pdf",
+  "verified": true,
+  "notes": "Read from 2018 session law (Ch. 76) amending the statute; akleg.gov statute page returned 403. Recheck for later amendments."
+ },
+ {
+  "state": "AL",
+  "name": "Alabama",
+  "statute": "Code of Alabama 32-5A-58.2 (John Hubbard Move Over Act)",
+  "statute_url": "https://www.alea.gov/dps/highway-patrol/alabama-move-over-act",
+  "covers": [
+   "parked law enforcement and emergency vehicles",
+   "wreckers with amber lights",
+   "utility service vehicles",
+   "maintenance, construction and surveying vehicles with flashing lights",
+   "garbage and recycling collection vehicles"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move out of the lane closest to the vehicle on multi-lane roads, or slow to at least 15 mph below the limit if you cannot; on two-lane roads move as far over as possible and slow down.",
+  "penalty": "Misdemeanor, $200 fine; $250 second violation; $300 third plus 90 day license suspension",
+  "penalty_source_url": "https://www.alea.gov/dps/highway-patrol/alabama-move-over-act",
+  "verified": true,
+  "notes": "Read on ALEA page; ALEA cites the section. Legislature code site not loadable."
+ },
+ {
+  "state": "AR",
+  "name": "Arkansas",
+  "statute": "Ark. Code 27-51-310",
+  "statute_url": "https://dps.arkansas.gov/news/asp-urges-motorists-to-move-over-for-first-responders/",
+  "covers": [
+   "emergency response and law enforcement vehicles",
+   "ArDOT and ArDOT contractor vehicles",
+   "utility company vehicles",
+   "tow trucks",
+   "other authorized vehicles with flashing lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move to the farthest lane or position from the stopped vehicle; if you cannot, slow down for conditions.",
+  "penalty": "Fines $250 to $1,000, possible jail and license loss",
+  "penalty_source_url": "https://dps.arkansas.gov/news/asp-urges-motorists-to-move-over-for-first-responders/",
+  "verified": true,
+  "notes": "Read on Arkansas State Police (.gov) page, which does not print the section number; cite from ASP testing rule via secondary search. Legislature site not read."
+ },
+ {
+  "state": "AZ",
+  "name": "Arizona",
+  "statute": "ARS 28-775(E)",
+  "statute_url": "https://azleg.gov/ars/28/00775.htm",
+  "covers": [
+   "any stationary vehicle displaying flashing or warning lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "On a highway with four or more lanes, change lanes away from the stationary vehicle if safe; if not, slow down and proceed with caution.",
+  "penalty": "Civil penalty $275 first violation; $500 second within 5 years; $1,000 third or more within 5 years",
+  "penalty_source_url": "https://azleg.gov/ars/28/00775.htm",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "CA",
+  "name": "California",
+  "statute": "California Vehicle Code 21809",
+  "statute_url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=VEH&sectionNum=21809",
+  "covers": [
+   "emergency vehicles",
+   "tow trucks",
+   "Caltrans vehicles",
+   "with amber or other flashing lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move over one lane if safe; if you cannot, slow down.",
+  "penalty": "Fines up to $1,000 plus points (per Caltrans)",
+  "penalty_source_url": "https://dot.ca.gov/news-releases/news-release-2019-080",
+  "verified": true,
+  "notes": "Duty, coverage and fine read on Caltrans .gov release (2019). leginfo returned 403 so statute text not read; a 2026 amendment (AB 390) reportedly adds disabled vehicles, unconfirmed."
+ },
+ {
+  "state": "CO",
+  "name": "Colorado",
+  "statute": "CRS 42-4-705(2)",
+  "statute_url": "https://content.leg.colorado.gov/sites/default/files/2023a_1123_signed.pdf",
+  "covers": [
+   "emergency vehicles including port of entry",
+   "tow vehicles",
+   "utility vehicles",
+   "any stationary vehicle with hazard or warning lights"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "On a road with two or more lanes in your direction, move at least one lane away; if you cannot, slow to a safe speed and proceed with caution.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://content.leg.colorado.gov/sites/default/files/2023a_1123_signed.pdf",
+  "verified": false,
+  "notes": "Read HB23-1123 signed act. Penalty not in that text; CDOT card says careless driving but not confirmed. Maintenance vehicles not named in the amended text."
+ },
+ {
+  "state": "CT",
+  "name": "Connecticut",
+  "statute": "Conn. Gen. Stat. 14-283b",
+  "statute_url": "https://www.cga.ct.gov/current/pub/chap_248.htm",
+  "covers": [
+   "police, fire and EMS vehicles",
+   "highway maintenance vehicles",
+   "wreckers",
+   "any stationary vehicle on the shoulder"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow to a reasonable speed below the limit and move over one lane if safe; on two-lane roads slow until clear.",
+  "penalty": "Infraction; fine up to $2,500 if injury, up to $10,000 if death of emergency vehicle occupant",
+  "penalty_source_url": "https://www.cga.ct.gov/current/pub/chap_248.htm",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "DE",
+  "name": "Delaware",
+  "statute": "21 Del. C. 4134",
+  "statute_url": "https://delcode.delaware.gov/title21/c041/sc04/index.html",
+  "covers": [
+   "emergency vehicles",
+   "DOT vehicles",
+   "tow trucks",
+   "public utility vehicles",
+   "any stationary vehicle showing hazard lights or warning signs"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change lanes away on roads with four or more lanes; if you cannot, slow at least 20 mph below the limit when the limit is 50 mph or higher.",
+  "penalty": "Up to $250 first, $500 second, $1,000 later (or equal community service); class F felony if you strike a responder",
+  "penalty_source_url": "https://delcode.delaware.gov/title21/c041/sc04/index.html",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "FL",
+  "name": "Florida",
+  "statute": "Fla. Stat. 316.126(1)(b)",
+  "statute_url": "https://m.flsenate.gov/Statutes/316.126",
+  "covers": [
+   "emergency vehicles",
+   "sanitation vehicles",
+   "utility service vehicles",
+   "wreckers",
+   "road and bridge maintenance or construction vehicles",
+   "stopped disabled vehicles with hazards or people present"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move out of the lane closest to the vehicle if safe; otherwise slow to 20 mph below the limit (5 mph if the limit is 20 or less) on two-lane roads.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://m.flsenate.gov/Statutes/316.126",
+  "verified": false,
+  "notes": "Dollar fine set by ch. 318, not read."
+ },
+ {
+  "state": "GA",
+  "name": "Georgia",
+  "statute": "O.C.G.A. 40-6-16 (Spencer Pass Law)",
+  "statute_url": "https://www.legis.ga.gov/api/document/docs/default-source/joint-features-document-library/t40-ch6-16-(v29)-2018-pdf.pdf",
+  "covers": [
+   "police, fire, EMS (authorized emergency vehicles)",
+   "tow and recovery vehicles",
+   "highway maintenance vehicles",
+   "utility service vehicles",
+   "sanitation vehicles with active workers (40-6-16.1)"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change to a lane not next to the stopped vehicle if safe, otherwise slow to a reasonable speed below the posted limit and be ready to stop.",
+  "penalty": "Emergency vehicles: fine of not more than $500. Tow, maintenance and utility vehicles: fine of not more than $250.",
+  "penalty_source_url": "https://www.legis.ga.gov/api/document/docs/default-source/joint-features-document-library/t40-ch6-16-(v29)-2018-pdf.pdf",
+  "verified": true,
+  "notes": "Read the official 2018 code PDF. 2024 HB 1193 revised subsection (c) and added sanitation workers; fines were not re-checked against the 2024 text."
+ },
+ {
+  "state": "HI",
+  "name": "Hawaii",
+  "statute": "HRS 291C-27, plus new section added by Act 95 (HB 1692), 2026",
+  "statute_url": "https://data.capitol.hawaii.gov/sessions/session2026/Bills/HB1692_CD1_.pdf",
+  "covers": [
+   "police, fire and other emergency vehicles",
+   "any stationary vehicle on the road or shoulder showing hazard lights, flares, cones or warning signs, including tow trucks"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow to a reasonable and prudent speed and, if possible and safe, move to an adjacent lane. If you cannot change lanes, stay at a reasonable speed and stop if needed.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://data.capitol.hawaii.gov/sessions/session2026/Bills/HB1692_CD1_.pdf",
+  "verified": false,
+  "notes": "Read the CD1 bill text only, not the enacted act or codified HRS. The bill calls it a traffic violation and gives no fine amount."
+ },
+ {
+  "state": "IA",
+  "name": "Iowa",
+  "statute": "Iowa Code 321.323A",
+  "statute_url": "https://www.legis.iowa.gov/docs/code/321.323A.pdf",
+  "covers": [
+   "authorized emergency vehicles",
+   "towing and recovery vehicles",
+   "utility, municipal and highway maintenance vehicles",
+   "construction vehicles",
+   "solid waste and recycling vehicles",
+   "any stopped vehicle with hazard lights flashing"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change to a lane not next to the stopped vehicle if possible. If not, slow to a reasonable speed below the posted limit and be ready to stop.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://www.legis.iowa.gov/docs/code/321.323A.pdf",
+  "verified": false,
+  "notes": "Base scheduled fine is set in 805.8A(11), not read."
+ },
+ {
+  "state": "ID",
+  "name": "Idaho",
+  "statute": "Idaho Code 49-624",
+  "statute_url": "https://legislature.idaho.gov/statutesrules/idstat/Title49/T49CH6/SECT49-624/",
+  "covers": [
+   "police vehicles",
+   "authorized emergency vehicles",
+   "tow trucks",
+   "highway incident response vehicles"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "On a road with two or more lanes each way, slow below the posted limit and move away from the stopped vehicle's lane when safe. On other roads, slow below the posted limit until past.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://legislature.idaho.gov/wp-content/uploads/statutesrules/idstat/Title49/T49CH6.pdf",
+  "verified": false,
+  "notes": "Duty text read in Title 49 Chapter 6. Section 49-624 states no penalty. The $50 fixed penalty in that chapter is for work zone speeding (49-657), not move over."
+ },
+ {
+  "state": "IL",
+  "name": "Illinois",
+  "statute": "625 ILCS 5/11-907(c), (c-5), (c-10) (Scott's Law)",
+  "statute_url": "https://www.ilga.gov/Documents/legislation/ilcs/documents/062500050K11-907.htm",
+  "covers": [
+   "authorized emergency vehicles and any vehicle allowed flashing lights under 12-215, including police, fire, EMS, tow and highway maintenance when on duty",
+   "emergency workers and pedestrians at an emergency scene"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change to a lane not next to the stopped vehicle if safe on a road with 2 or more lanes each way, and slow down and leave a safe distance. If you cannot change lanes, slow down and proceed with caution.",
+  "penalty": "Business offense: fine of $250 to $10,000 for a first violation, $750 to $10,000 for later ones. Class A misdemeanor if another vehicle is damaged, Class 4 felony if someone is injured or killed. License suspension also applies.",
+  "penalty_source_url": "https://www.ilga.gov/Documents/legislation/ilcs/documents/062500050K11-907.htm",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "IN",
+  "name": "Indiana",
+  "statute": "IC 9-21-8-35",
+  "statute_url": "https://iga.in.gov/ic/2026/Title_9/Article_21/Chapter_8.pdf",
+  "covers": [
+   "police, fire, EMS (authorized emergency vehicles)",
+   "recovery (tow) vehicles",
+   "utility service vehicles",
+   "solid waste haulers",
+   "road, street and highway maintenance vehicles",
+   "survey and construction vehicles",
+   "any disabled vehicle with hazard flashers"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "On a road with 4 or more lanes (2 or more each way), change to a lane not next to the vehicle if safe. Otherwise slow to at least 10 mph below the posted limit.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://iga.in.gov/ic/2026/Title_9/Article_21/Chapter_8.pdf",
+  "verified": false,
+  "notes": "Fine dollar amounts are not in this section."
+ },
+ {
+  "state": "KS",
+  "name": "Kansas",
+  "statute": "K.S.A. 8-1530(b)",
+  "statute_url": "https://ksrevisor.gov/statutes/chapters/ch08/008_015_0030.html",
+  "covers": [
+   "authorized emergency vehicles showing flashing lights"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "On a road with 2 or more lanes each way, change to a lane not next to the vehicle if possible and safe. Otherwise slow down and keep a safe speed.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://ksrevisor.gov/statutes/chapters/ch08/008_015_0030.html",
+  "verified": false,
+  "notes": "Duty text read on ksrevisor.gov. The section states no penalty and does not name tow or road work vehicles."
+ },
+ {
+  "state": "KY",
+  "name": "Kentucky",
+  "statute": "KRS 189.930(5)-(6)",
+  "statute_url": "https://apps.legislature.ky.gov/law/acts/24RS/documents/0198.pdf",
+  "covers": [
+   "emergency and public safety vehicles with flashing lights",
+   "tow trucks",
+   "any disabled vehicle showing flashers, flares or reflective signals"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "On a highway with at least 4 lanes (2 or more each way), move to a lane not next to the vehicle if safe. Otherwise slow to a safe speed for conditions.",
+  "penalty": "Fines, jail time or both under KRS 189.993(8)",
+  "penalty_source_url": "https://transportation.ky.gov/NewsRoom/2023%20Move%20Over%20Release.pdf",
+  "verified": true,
+  "notes": "Statute text read in 2024 Acts ch. 198 (SB 107). Penalty wording is from the Transportation Cabinet release, which cites KRS 189.993(8); that section was not read. Work zone violations carry a $500 fine under KRS 189.2327."
+ },
+ {
+  "state": "LA",
+  "name": "Louisiana",
+  "statute": "La. R.S. 32:125(B)-(C)",
+  "statute_url": "https://legis.la.gov/legis/Law.aspx?d=88033",
+  "covers": [
+   "any vehicle parked or disabled on or near the highway showing flashing lights, hazard lamps or warning devices",
+   "authorized emergency vehicles (subsection A)"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "On an interstate or road with 2 or more lanes each way, change to a lane not next to the vehicle if safe. Otherwise slow to a reasonably safe speed.",
+  "penalty": "Fine not to exceed $200",
+  "penalty_source_url": "https://legis.la.gov/legis/Law.aspx?d=88033",
+  "verified": true,
+  "notes": "Section reflects Acts 2026, No. 234."
+ },
+ {
+  "state": "MA",
+  "name": "Massachusetts",
+  "statute": "M.G.L. c. 89, 7C",
+  "statute_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter89/Section7C",
+  "covers": [
+   "emergency vehicles",
+   "highway maintenance vehicles",
+   "recovery vehicles"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow to a safe speed and, on a road with at least 4 lanes and 2 in your direction, move to a lane not next to the stopped vehicle if practicable.",
+  "penalty": "Fine of not more than $100",
+  "penalty_source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter89/Section7C",
+  "verified": true,
+  "notes": "Bills to expand the law were pending in 2025-2026."
+ },
+ {
+  "state": "MD",
+  "name": "Maryland",
+  "statute": "Md. Code, Transportation Article, 21-405(e)",
+  "statute_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=21-405&enactments=false",
+  "covers": [
+   "emergency vehicles",
+   "service vehicles",
+   "tow trucks",
+   "commercial vehicles giving roadside repair",
+   "waste and recycling trucks",
+   "any stopped vehicle with hazard lights or flares"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change to a lane not next to the stopped vehicle if it is safe, or slow to a reasonable and safe speed if you cannot.",
+  "penalty": "Misdemeanor, fine up to $500 (general Vehicle Law penalty, 27-101)",
+  "penalty_source_url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=27-101&enactments=false",
+  "verified": true,
+  "notes": "No separate 21-405.1 exists. Penalty is the general Vehicle Law misdemeanor penalty."
+ },
+ {
+  "state": "ME",
+  "name": "Maine",
+  "statute": "29-A M.R.S. 2054(9)",
+  "statute_url": "https://legislature.maine.gov/statutes/29-A/title29-Asec2054.html",
+  "covers": [
+   "stationary authorized emergency vehicles using emergency lights",
+   "stationary public service vehicles using authorized lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Pass in a lane not next to the stopped vehicle if possible. If not possible or unsafe, pass at a careful and prudent speed.",
+  "penalty": "Traffic infraction, minimum fine of $275",
+  "penalty_source_url": "https://legislature.maine.gov/statutes/29-A/title29-Asec2054.html",
+  "verified": true,
+  "notes": "Definition of public service vehicle not read, so road work coverage is assumed from the term."
+ },
+ {
+  "state": "MI",
+  "name": "Michigan",
+  "statute": "MCL 257.653a and 257.653b",
+  "statute_url": "https://www.legislature.mi.gov/documents/mcl/pdf/MCL-257-653A.pdf",
+  "covers": [
+   "police, fire, EMS and other emergency vehicles (653a)",
+   "road maintenance vehicles (653b)",
+   "utility service vehicles (653b)",
+   "solid waste collection vehicles (653b)"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow at least 10 mph below the posted limit and move at least one lane or two vehicle widths away if possible.",
+  "penalty": "Civil infraction, $400 fine (653a); felony if it causes injury or death to responders",
+  "penalty_source_url": "https://www.legislature.mi.gov/documents/mcl/pdf/MCL-257-653A.pdf",
+  "verified": true,
+  "notes": "653b (non-emergency vehicles) states no penalty in its own text."
+ },
+ {
+  "state": "MN",
+  "name": "Minnesota",
+  "statute": "Minn. Stat. 169.18, subd. 11 and 11a",
+  "statute_url": "https://www.revisor.mn.gov/statutes/cite/169.18",
+  "covers": [
+   "emergency vehicles",
+   "tow trucks",
+   "freeway service patrol vehicles",
+   "road maintenance and construction vehicles",
+   "utility, postal, solid waste and recycling vehicles",
+   "stalled vehicles with hazard lights or people outside (subd. 11a)"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move to the lane farthest away, or leave a full lane open, if possible. If not, slow to a reasonable and prudent speed until past.",
+  "penalty": "Petty misdemeanor (default chapter 169 penalty, 169.89)",
+  "penalty_source_url": "https://www.revisor.mn.gov/statutes/cite/169.89",
+  "verified": true,
+  "notes": "Officer may cite on probable cause up to 4 hours after the incident."
+ },
+ {
+  "state": "MO",
+  "name": "Missouri",
+  "statute": "RSMo 304.022",
+  "statute_url": "https://revisor.mo.gov/main/OneSection.aspx?section=304.022",
+  "covers": [
+   "stationary vehicles with red or red and blue lights (police, fire, EMS)",
+   "stationary vehicles with amber or amber and white lights (including road work and tow vehicles)"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change to a lane not next to the vehicle on a road with 4 or more lanes if safe, otherwise slow to a safe speed.",
+  "penalty": "Class A misdemeanor",
+  "penalty_source_url": "https://revisor.mo.gov/main/OneSection.aspx?section=304.022",
+  "verified": true,
+  "notes": "Subsection 7 says violation of the section is a class A misdemeanor."
+ },
+ {
+  "state": "MS",
+  "name": "Mississippi",
+  "statute": "Miss. Code 63-3-809",
+  "statute_url": "https://billstatus.ls.state.ms.us/documents/2026/html/HB/0200-0299/HB0287IN.htm",
+  "covers": [
+   "authorized emergency vehicles",
+   "recovery vehicles",
+   "utility service vehicles",
+   "sanitation vehicles",
+   "highway maintenance vehicles",
+   "rural mail carrier vehicles"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change to a lane not next to the vehicle on a road with 4 or more lanes if safe, otherwise slow to a safe speed and be ready to stop.",
+  "penalty": "Misdemeanor, fine up to $250, or up to $1,000 if it causes property damage or injury",
+  "penalty_source_url": "https://billstatus.ls.state.ms.us/documents/2026/html/HB/0200-0299/HB0287IN.htm",
+  "verified": true,
+  "notes": "Text read from the Legislature's 2026 HB 287 as introduced, which reprints current 63-3-809. Disabled vehicle coverage is only proposed there."
+ },
+ {
+  "state": "MT",
+  "name": "Montana",
+  "statute": "MCA 61-8-388",
+  "statute_url": "https://mca.legmt.gov/bills/mca/title_0610/chapter_0080/part_0030/section_0880/0610-0080-0030-0880.html",
+  "covers": [
+   "law enforcement and emergency vehicles using siren or lights",
+   "highway worker vehicles using emergency lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow to the posted temporary limit, or if none, 20 to 30 mph below the limit (half the limit if you cannot change lanes), and move to a non-adjacent lane or as far over as safe.",
+  "penalty": "See statute",
+  "penalty_source_url": "",
+  "verified": false,
+  "notes": "Duty text read on official MCA site. The section states no penalty and a fine amount could not be confirmed from an official source."
+ },
+ {
+  "state": "NC",
+  "name": "North Carolina",
+  "statute": "N.C.G.S. 20-157(f)",
+  "statute_url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-157.html",
+  "covers": [
+   "police, fire, EMS",
+   "public service vehicles (wreckers, utility, refuse, state or local highway maintenance with amber light)"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move to a lane away from the stopped vehicle if safe, otherwise slow down and be ready to stop until past it.",
+  "penalty": "Infraction with $250 fine; Class 1 misdemeanor if over $500 property damage or injury to a responder; Class F felony if serious injury or death",
+  "penalty_source_url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-157.html",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "ND",
+  "name": "North Dakota",
+  "statute": "N.D.C.C. 39-10-26 and 39-10-26.3",
+  "statute_url": "https://ndlegis.gov/cencode/t39c10.pdf",
+  "covers": [
+   "police, fire, EMS with flashing lights",
+   "state highway maintenance vehicles",
+   "any stopped vehicle with hazard lights (since 2023)"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "On interstates and multilane highways outside cities, move to a lane not next to the stopped vehicle if safe, otherwise slow down to a safe speed.",
+  "penalty": "$50 fine and 2 points for emergency or highway maintenance vehicles; $20 fine and 0 points for stationary vehicles with hazard lights",
+  "penalty_source_url": "https://www.visionzero.nd.gov/reaching-zero/road-users/move-over-law",
+  "verified": true,
+  "notes": "Statute text read at ndlegis.gov; fines from state Vision Zero page. Causing an accident with a covered vehicle is an infraction under 39-10-26(5)."
+ },
+ {
+  "state": "NE",
+  "name": "Nebraska",
+  "statute": "Neb. Rev. Stat. 60-6,378 and 60-6,378.01",
+  "statute_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=60-6%2C378",
+  "covers": [
+   "any stopped vehicle on the same side of a controlled-access highway (2025 change)",
+   "emergency vehicles",
+   "towing and recovery vehicles",
+   "utility and highway maintenance vehicles",
+   "solid waste and recycling vehicles"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move at least one lane away if possible, otherwise slow to a safe speed and proceed with care.",
+  "penalty": "Traffic infraction; Class IIIA misdemeanor for a second violation within 5 years (60-6,378)",
+  "penalty_source_url": "https://nebraskalegislature.gov/laws/statutes.php?statute=60-6%2C378",
+  "verified": true,
+  "notes": "60-6,378.01 covers other roads; its own text states no penalty. Updated by LB 530, effective Sept 3, 2025."
+ },
+ {
+  "state": "NH",
+  "name": "New Hampshire",
+  "statute": "RSA 265:37-a",
+  "statute_url": "https://gc.nh.gov/rsa/html/XXI/265/265-37-a.htm",
+  "covers": [
+   "police traffic stops",
+   "fire, collision, disaster scenes",
+   "utility construction and maintenance",
+   "any stopped vehicle with hazard lights, flares or cones"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Reduce speed, give a wide berth if practical, and clear any lane blocked as soon as possible.",
+  "penalty": "$75 plus penalty assessment first offense; $250 plus penalty assessment for a repeat within 12 months",
+  "penalty_source_url": "https://gc.nh.gov/rsa/html/XXI/265/265-37-a.htm",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "NJ",
+  "name": "New Jersey",
+  "statute": "N.J.S.A. 39:4-92.2",
+  "statute_url": "https://www.nj.gov/mvc/drivertopics/driversafe.htm",
+  "covers": [
+   "police, fire, EMS (authorized emergency vehicles)",
+   "tow trucks",
+   "highway maintenance vehicles",
+   "other emergency service vehicles with flashing red, blue, amber or yellow lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Change to a lane not next to the stopped vehicle if safe, otherwise slow down to a reasonable speed below the limit and be ready to stop.",
+  "penalty": "Fine of $100 to $500",
+  "penalty_source_url": "https://www.nj.gov/mvc/drivertopics/driversafe.htm",
+  "verified": true,
+  "notes": "Read from NJ MVC official page, which also cites 39:3-84.6. Later amendments (P.L. 2019 c.370 points, P.L. 2023 c.325 disabled vehicles) not read in statute text."
+ },
+ {
+  "state": "NM",
+  "name": "New Mexico",
+  "statute": "NMSA 1978 66-7-332 (subsection B, move over)",
+  "statute_url": "https://www.nmlegis.gov/Sessions/19%20Regular/bills/house/HB0113.HTML",
+  "covers": [
+   "stationary emergency vehicles with flashing lights (scope may have been widened to other vehicles with flashing hazard lights)"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "Move to a lane not next to the stationary vehicle if reasonably safe, otherwise slow down and be prepared to stop.",
+  "penalty": "See statute",
+  "penalty_source_url": "",
+  "verified": false,
+  "notes": "Only bill text read, not current compiled statute. Citation may be 66-7-332, not 66-7-332.1. Could not confirm penalty."
+ },
+ {
+  "state": "NV",
+  "name": "Nevada",
+  "statute": "NRS 484B.607",
+  "statute_url": "https://www.leg.state.nv.us/nrs/nrs-484b.html#NRS484BSec607",
+  "covers": [
+   "emergency vehicles",
+   "tow cars",
+   "Department of Transportation vehicles",
+   "contractor aid-to-motorist vehicles",
+   "public utility vehicles",
+   "local government vehicles",
+   "any traffic incident or hazard"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow to a reasonable speed, proceed with caution, be ready to stop, and use a lane not next to the incident if possible.",
+  "penalty": "Misdemeanor",
+  "penalty_source_url": "https://www.leg.state.nv.us/nrs/nrs-484b.html#NRS484BSec607",
+  "verified": true,
+  "notes": "Fine amount is set by the general misdemeanor statute and was not checked."
+ },
+ {
+  "state": "NY",
+  "name": "New York",
+  "statute": "N.Y. Vehicle and Traffic Law 1144-a",
+  "statute_url": "https://www.nysenate.gov/legislation/laws/VAT/1144-A",
+  "covers": [
+   "emergency vehicles with red, blue or white lights",
+   "amber-light hazard vehicles (tow, snow removal)",
+   "vehicles with blue or green volunteer lights",
+   "any stopped vehicle on a parkway or controlled-access highway"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Use due care to avoid hitting the vehicle; on parkways and controlled-access highways move out of the lane next to the shoulder when safe.",
+  "penalty": "See statute",
+  "penalty_source_url": "",
+  "verified": false,
+  "notes": "Statute text read. Section states no fine; general VTL 1800(b)(1) cap is $150 but not confirmed to apply."
+ },
+ {
+  "state": "OH",
+  "name": "Ohio",
+  "statute": "Ohio Rev. Code 4511.213",
+  "statute_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.213",
+  "covers": [
+   "public safety and emergency vehicles",
+   "road service vehicles",
+   "waste collection vehicles",
+   "highway maintenance vehicles and PUCO inspection vehicles with flashing lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "On multi-lane roads change to a lane not next to the stopped vehicle if possible, otherwise slow down and keep a safe speed.",
+  "penalty": "Minor misdemeanor; fine doubled; higher misdemeanor degree with prior offenses within one year",
+  "penalty_source_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.213",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "OR",
+  "name": "Oregon",
+  "statute": "ORS 811.147",
+  "statute_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors811.html",
+  "covers": [
+   "any stopped vehicle displaying warning or hazard lights",
+   "person signaling distress with flares or signs"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "On multi-lane roads change to a lane not next to the stopped vehicle or slow to at least 5 mph under the limit; on two-lane roads slow to at least 5 mph under the limit.",
+  "penalty": "Class B traffic violation",
+  "penalty_source_url": "https://www.oregonlegislature.gov/bills_laws/ors/ors811.html",
+  "verified": true,
+  "notes": "Fine amount for Class B not read. Exception when the stopped vehicle is in a designated parking area."
+ },
+ {
+  "state": "PA",
+  "name": "Pennsylvania",
+  "statute": "75 Pa.C.S. 3327",
+  "statute_url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/75/00.033.027.000..HTM",
+  "covers": [
+   "emergency response areas (police, fire, EMS, traffic stops, utility crews in declared emergencies)",
+   "disabled vehicles with at least two markings such as hazard lights, flares or signs"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "Pass in a lane not next to the scene if possible, otherwise pass at no more than 20 mph below the posted limit.",
+  "penalty": "Summary offense: up to $500 first, $1,000 second, $2,000 third or later; 90-day license suspension in serious cases",
+  "penalty_source_url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/75/00.033.027.000..HTM",
+  "verified": true,
+  "notes": "Section 3327, not 3326 (3326 is work zones). Road work zones covered separately under 3326."
+ },
+ {
+  "state": "RI",
+  "name": "Rhode Island",
+  "statute": "R.I. Gen. Laws 31-14-3(b)",
+  "statute_url": "https://webserver.rilegislature.gov/Statutes/TITLE31/31-14/31-14-3.htm",
+  "covers": [
+   "emergency vehicles with flashing lights",
+   "highway maintenance equipment",
+   "tow trucks",
+   "roadside assistance vehicles",
+   "stationary non-emergency vehicles on the shoulder or breakdown lane"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "As soon as safe, change to a lane away from the stopped vehicle, or if that is not possible slow down and stay slow until past it.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://webserver.rilegislature.gov/Statutes/TITLE31/31-41.1/31-41.1-4.htm",
+  "verified": false,
+  "notes": "Fine schedule lists 31-14-3 generally as 'Condition requiring reduced speed'; statute points to 31-41.1-4."
+ },
+ {
+  "state": "SC",
+  "name": "South Carolina",
+  "statute": "S.C. Code 56-5-1538",
+  "statute_url": "https://www.scstatehouse.gov/code/t56c005.php",
+  "covers": [
+   "stopped emergency vehicles with warning lights (ambulance, police, fire, rescue, recovery, tow)",
+   "stopped vehicles with flashing hazard lights"
+  ],
+  "covers_road_work_or_dot": false,
+  "duty": "Slow down significantly and change lanes away from the vehicle on highways with four or more lanes, otherwise keep a safe speed.",
+  "penalty": "Misdemeanor with fine of $300 to $500",
+  "penalty_source_url": "https://scdps.sc.gov/drivinginsc/move-over-law",
+  "verified": true,
+  "notes": "Read statute at scstatehouse.gov; DPS page cited by search. Section 56-5-2780 is school bus law, not move over. Highway workers addressed separately (56-5-1535)."
+ },
+ {
+  "state": "SD",
+  "name": "South Dakota",
+  "statute": "SDCL 32-31-6.1",
+  "statute_url": "https://sdlegislature.gov/Statutes/32-31-6.1",
+  "covers": [
+   "stopped authorized emergency vehicles with red lights",
+   "any vehicle stopped or on the shoulder with amber, yellow or blue warning lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Stop before reaching a stopped emergency vehicle with red lights, or for other vehicles with warning lights on the shoulder, merge into the lane farthest from it at least 300 feet before, or on a two-lane road slow to at least 20 mph under the limit.",
+  "penalty": "Class 2 misdemeanor with a minimum fine of $270",
+  "penalty_source_url": "https://sdlegislature.gov/Statutes/32-31-6.1",
+  "verified": true,
+  "notes": "Read text via sdlegislature.gov API (api/Statutes/32-31-6.1.html); the page itself needs a modern browser. SL 2025 ch 130."
+ },
+ {
+  "state": "TX",
+  "name": "Texas",
+  "statute": "Tex. Transp. Code 545.157",
+  "statute_url": "https://statutes.capitol.texas.gov/Docs/TN/htm/TN.545.htm",
+  "covers": [
+   "stationary emergency vehicles",
+   "tow trucks",
+   "TxDOT and highway maintenance or construction vehicles",
+   "utility service vehicles",
+   "solid waste vehicles",
+   "toll project vehicles",
+   "animal control vehicles",
+   "local authority parking enforcement vehicles"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move out of the lane closest to the vehicle on a road with two or more lanes in your direction, or slow to 20 mph under the posted limit (5 mph if the limit is under 25).",
+  "penalty": "Misdemeanor, fine $500 to $1,250; second offense within five years $1,000 to $2,000; Class A misdemeanor if bodily injury; state jail felony for repeat injury offense",
+  "penalty_source_url": "https://tcss.legis.texas.gov/resources/TN/pdf/TN.545.pdf",
+  "verified": true,
+  "notes": "Read current text in the Legislature's TN.545.pdf; statute_url page is JavaScript rendered."
+ },
+ {
+  "state": "UT",
+  "name": "Utah",
+  "statute": "Utah Code 41-6a-904",
+  "statute_url": "https://le.utah.gov/xcode/Title41/Chapter6A/C41-6a-S904_2023050320230503.html",
+  "covers": [
+   "authorized emergency vehicles with lights",
+   "tow trucks with flashing amber lights",
+   "highway maintenance vehicles with flashing amber lights",
+   "stationary vehicles with hazard lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow down, leave as much room as practical, and change lanes away from the stationary vehicle if safe.",
+  "penalty": "Infraction, plus a required four-hour defensive driving course; 90 day license suspension if the course is not completed within 90 days",
+  "penalty_source_url": "https://le.utah.gov/xcode/Title41/Chapter6A/C41-6a-S904_2023050320230503.html",
+  "verified": true,
+  "notes": "Version effective 5/3/2023."
+ },
+ {
+  "state": "VA",
+  "name": "Virginia",
+  "statute": "Va. Code 46.2-861.1",
+  "statute_url": "https://law.lis.virginia.gov/vacode/title46.2/chapter8/section46.2-861.1/",
+  "covers": [
+   "stationary vehicles with flashing blue, red or amber lights",
+   "stationary vehicles with amber lights, hazard flashers, caution signs or flares"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "On a road with at least four lanes (two in your direction), proceed with caution and change to a lane not next to the stationary vehicle if reasonable, otherwise keep a safe speed.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://law.lis.virginia.gov/vacode/title46.2/chapter8/section46.2-861.1/",
+  "verified": false,
+  "notes": "Old section 46.2-921.1 was repealed in 2019. Section does not apply in highway work zones. Fine amounts not stated on the page."
+ },
+ {
+  "state": "VT",
+  "name": "Vermont",
+  "statute": "23 V.S.A. 1050",
+  "statute_url": "https://legislature.vermont.gov/statutes/section/23/013/01050",
+  "covers": [
+   "law enforcement vehicles with blue lights",
+   "ambulances, fire apparatus and rescue vehicles with red lights",
+   "towing and repair vehicles with amber lights",
+   "designated work zones"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Proceed with caution and move to a lane farther from the stationary vehicle on a multilane road if safe, otherwise slow to a reasonable, safe speed.",
+  "penalty": "See statute",
+  "penalty_source_url": "https://legislature.vermont.gov/statutes/section/23/013/01050",
+  "verified": false,
+  "notes": "Section 1050 states no penalty; the penalty is not confirmed from an official source."
+ },
+ {
+  "state": "WA",
+  "name": "Washington",
+  "statute": "RCW 46.61.212",
+  "statute_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=46.61.212",
+  "covers": [
+   "emergency vehicles",
+   "tow trucks",
+   "roadside assistance vehicles",
+   "police vehicles with flashing lights",
+   "highway construction, maintenance, solid waste and utility vehicles with warning lights"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Slow down and, if safe, move away from the vehicle; if you cannot, slow to at least 10 mph under the limit (no more than 50 mph if the limit is over 60).",
+  "penalty": "Twice the base penalty under RCW 46.63.110, not waivable; endangering zone workers is reckless endangerment, a gross misdemeanor with 60 day license suspension",
+  "penalty_source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=46.61.212",
+  "verified": true,
+  "notes": "Zone covers adjacent lanes 200 feet before and after the vehicle."
+ },
+ {
+  "state": "WI",
+  "name": "Wisconsin",
+  "statute": "Wis. Stat. 346.072",
+  "statute_url": "https://docs.legis.wisconsin.gov/statutes/statutes/346/ii/072",
+  "covers": [
+   "authorized emergency vehicles",
+   "tow trucks with red lights",
+   "highway construction and maintenance vehicles",
+   "public utility vehicles with flashing amber or green lamps",
+   "stopped vehicles with hazard lights, flares or people attending"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "Move out of the lane nearest the stopped vehicle if safe on a road with two or more lanes in your direction, otherwise slow to a safe speed until past.",
+  "penalty": "Penalty under s. 346.17(2) plus operating privilege suspension under s. 343.30(1o)",
+  "penalty_source_url": "https://docs.legis.wisconsin.gov/statutes/statutes/346/ii/072",
+  "verified": true,
+  "notes": "Stopped vehicle coverage added by 2025 Wisconsin Act 54 per search results. Fine amount not stated in this section."
+ },
+ {
+  "state": "WV",
+  "name": "West Virginia",
+  "statute": "W. Va. Code 17C-14-9a",
+  "statute_url": "https://code.wvlegislature.gov/17C-14-9A/",
+  "covers": [
+   "any stationary vehicle with flashing red, blue, amber or yellow lights",
+   "vehicles with hazard lights, flares or a reflective warning sign"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "On a road with four or more lanes, change lanes away if safe and slow down; otherwise slow to a safe speed (no more than 15 mph on undivided or 25 mph on divided roads).",
+  "penalty": "Misdemeanor: fine up to $500, up to 60 days jail, or both; license suspension of 90 days (property damage), 6 months (injury), 2 years (death)",
+  "penalty_source_url": "https://code.wvlegislature.gov/17C-14-9A/",
+  "verified": true,
+  "notes": ""
+ },
+ {
+  "state": "WY",
+  "name": "Wyoming",
+  "statute": "W.S. 31-5-224",
+  "statute_url": "https://wyoleg.gov/statutes/compress/title31.pdf",
+  "covers": [
+   "parked authorized emergency vehicles with lights",
+   "municipal, public utility and highway construction or maintenance vehicles stopped or moving under 20 mph"
+  ],
+  "covers_road_work_or_dot": true,
+  "duty": "As soon as safe, merge into the lane farthest from the vehicle (or one lane apart) on roads with two or more lanes, or on a two-lane road with a limit of 45 or more slow to 20 mph under the limit.",
+  "penalty": "Misdemeanor under W.S. 31-5-1201: first conviction fine up to $200, second within a year up to $300, third up to $500 or 6 months jail",
+  "penalty_source_url": "https://wyoleg.gov/statutes/compress/title31.pdf",
+  "verified": true,
+  "notes": "Read from the Title 31 PDF; penalty is the general penalty in 31-5-1201 as no specific one is in 31-5-224."
+ }
+]
