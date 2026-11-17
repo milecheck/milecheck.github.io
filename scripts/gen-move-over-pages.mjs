@@ -41,7 +41,7 @@ const CHIPS = [
   ['🔌', 'Utility crews', /utility/i],
   ['🗑️', 'Garbage trucks', /garbage|waste|sanitation|refuse|recycling/i],
 ];
-const chips = (covers) => { const t = (covers || []).join(' | ') + ' '; const anyLit = /any (stopped|stationary|parked|disabled)?\s*vehicle/i.test(t); return CHIPS.filter(([, l, re]) => re.test(t) || (anyLit && !/Utility|Garbage/.test(l))).map(([e, l]) => `<span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #D6E8DE;border-radius:999px;padding:6px 12px;margin:0 6px 8px 0;font-size:15px;font-weight:600;background:#fff"><span aria-hidden="true">${e}</span>${l}</span>`).join(''); };
+const chips = (covers) => { const t = (covers || []).join(' | ') + ' '; const anyLit = /any (stopped|stationary|parked|disabled)?\s*vehicle/i.test(t); return CHIPS.filter(([, l, re]) => re.test(t) || (anyLit && !/Utility|Garbage/.test(l))).map(([, l]) => `<li>${l}</li>`).join(''); };
 const FIG = `<figure style="margin:14px 0"><img src="/images/move-over/multilane.webp" width="1000" height="563" loading="lazy" alt="Diagram: well before a stopped road crew truck on the right shoulder, a car moves from the right lane into a gap in the left lane and passes with the lane next to the truck empty" style="max-width:100%;height:auto;border-radius:10px"></figure><figure style="margin:14px 0"><img src="/images/move-over/twolane.webp" width="1000" height="563" loading="lazy" alt="Diagram: on a two-lane road with oncoming traffic, a car slows from 55 to 40 well before a tow truck helping a broken-down car on the shoulder" style="max-width:100%;height:auto;border-radius:10px"></figure>`;
 
 for (const s of laws) {
@@ -65,7 +65,7 @@ for (const s of laws) {
     <ul>${s.duty.split(/;\s*/).map((t) => t.trim().replace(/\.$/, '')).filter(Boolean).map((t) => `<li>${esc(t.charAt(0).toUpperCase() + t.slice(1))}.</li>`).join('')}</ul>
     ${FIG}
     <h2>Who it protects</h2>
-    <div>${chips(s.covers)}</div>
+    <ul style="columns:2;column-gap:24px;font-size:16px;font-weight:600;padding-left:20px;margin:6px 0 10px">${chips(s.covers)}</ul>
     <p style="color:#5b6670;font-size:14px;margin:6px 0 2px">What the statute says:</p>
     <ul>${(s.covers || []).map((c) => `<li>${esc(c.charAt(0).toUpperCase() + c.slice(1))}</li>`).join('')}</ul>
     <h2>Penalty</h2>
