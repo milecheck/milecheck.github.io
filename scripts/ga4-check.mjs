@@ -8,8 +8,9 @@ import { join, relative, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Pages that must NOT carry GA4: TV boards (loops that would count as real traffic; they ping
-// the Worker's /metric instead) and partner add-in pages that open inside Geotab.
-export const NO_GA_DIRS = ['boards', 'tv', 'geotab'];
+// the Worker's /metric instead), partner add-in pages that open inside Geotab, and the unlisted
+// own-map test pages (/maptest/, noindex, Leah-only).
+export const NO_GA_DIRS = ['boards', 'tv', 'geotab', 'maptest'];
 const SITE = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 function walk(root, d, out) {
