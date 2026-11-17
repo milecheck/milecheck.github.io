@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// /move-over/<state>/ and the /move-over/ hub (Leah "do this now", 11/16, after the ODOT call).
+// /move-over-laws/<state>/ (Leah "do this now", 11/16, after the ODOT call). The hub is the existing /move-over-laws/ guide.
 // Data: data/move-over-laws.json (official statute sources only). Records not marked verified
 // say "See the statute" for the penalty rather than guessing. Copy: ChatGPT template, 11/16.
 // Chrome (head, header, footer) is taken from the built /chain-laws/oregon/ page.
@@ -47,7 +47,7 @@ const chips = (covers) => { const t = (covers || []).join(' | ') + ' '; const an
 const FIG = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0">${moveOverSvg()}${slowDownSvg()}</div>`;
 
 for (const s of laws) {
-  const sl = slug(s.name), url = `https://milecheckapp.com/move-over/${sl}/`;
+  const sl = slug(s.name), url = `https://milecheckapp.com/move-over-laws/${sl}/`;
   const q = `What is ${s.name}'s move over law?`;
   const covers = (s.covers || []).join(', ');
   const pen = s.verified && s.penalty && s.penalty !== 'See statute' ? s.penalty : null;
@@ -55,7 +55,7 @@ for (const s of laws) {
   const ld = [
     { '@context': 'https://schema.org', '@type': 'WebPage', name: q, url },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: `${s.duty} (${s.statute})` } }] },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Move over laws', item: 'https://milecheckapp.com/move-over/' }, { '@type': 'ListItem', position: 2, name: s.name, item: url }] },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Move over laws', item: 'https://milecheckapp.com/move-over-laws/' }, { '@type': 'ListItem', position: 2, name: s.name, item: url }] },
   ];
   const rc = hasRC(s.name) ? `/road-conditions/${sl}/` : '/maps/';
   const body = `<div class="sc-wrap">
@@ -77,45 +77,13 @@ for (const s of laws) {
     <p>DOT crews and tow operators work beside moving traffic. Police officers respond to incidents on the shoulder. Arrow-board trailers mark work areas and lane closures. These workers, their vehicles and roadside equipment can be struck by passing traffic. Moving over and slowing down helps reduce that risk.</p>
     <h2>Road conditions in ${esc(s.name)}</h2>
     <p><a href="${rc}" target="_blank" rel="noopener">See live state DOT road alerts and find highway mile markers in ${esc(s.name)} on MileCheck</a>.</p>
-    <p class="sc-related"><a href="/move-over/" target="_blank" rel="noopener">Move over laws in every state</a></p>
+    <p class="sc-related"><a href="/move-over-laws/" target="_blank" rel="noopener">Move over laws in every state</a> · <a href="/zipper-merge-explained/" target="_blank" rel="noopener">How to zipper merge</a></p>
     <p style="color:#5b6670;font-size:14px">This page is for general information, not legal advice. The text of ${esc(s.statute)} controls.</p>
     </div>
   </div>
 `;
-  mkdirSync(`move-over/${sl}`, { recursive: true });
-  writeFileSync(`move-over/${sl}/index.html`, head(q, desc, url, ld) + body + footTpl);
+  mkdirSync(`move-over-laws/${sl}`, { recursive: true });
+  writeFileSync(`move-over-laws/${sl}/index.html`, head(q, desc, url, ld) + body + footTpl);
 }
 
-// Hub
-const hubUrl = 'https://milecheckapp.com/move-over/';
-const rows = laws.map((s) => `<tr><td><a href="/move-over/${slug(s.name)}/" target="_blank" rel="noopener">${esc(s.name)}</a></td><td>${esc(s.statute)}</td></tr>`).join('');
-const hub = `<div class="sc-wrap">
-    <p class="sc-eyebrow">Move over laws</p>
-    <h1>What is the move over law in each state?</h1>
-    <p class="sc-lede">Every state requires drivers to move over or slow down for some roadside vehicles. Who is covered and what you have to do differ by state. Pick a state for its rule, the penalty and a link to the statute.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0;max-width:760px">${moveOverSvg()}${slowDownSvg()}</div>
-    <p style="font-size:16px"><a href="/zipper-merge/" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">How do you zipper merge when a lane closes?</a></p>
-    <div style="overflow-x:auto;max-width:640px"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr><th style="text-align:left;padding:6px">State</th><th style="text-align:left;padding:6px">Statute</th></tr>${rows}</table></div>
-    <p style="color:#5b6670;font-size:14px">General information, not legal advice. Each state's statute controls.</p>
-  </div>
-`;
-mkdirSync('move-over', { recursive: true });
-writeFileSync('move-over/index.html', head('What is the move over law in each state?', 'The move over law in every US state, with the statute, who it covers and what drivers have to do.', hubUrl, [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Move over laws by state', url: hubUrl }]) + hub + footTpl);
-// Zipper merge page (Leah 11/16). Linked from the hub and from work-zone pages.
-{
-  const url = 'https://milecheckapp.com/zipper-merge/';
-  const body = `<div class="sc-wrap">
-    <p class="sc-eyebrow">Work zones</p>
-    <h1>How do you zipper merge when a lane closes?</h1>
-    <p class="sc-lede">Stay in your lane until the merge point, then take turns. One car from the open lane, one car from the closing lane.</p>
-    <div style="max-width:380px;margin:14px 0">${zipperSvg()}</div>
-    <div class="sc-body" style="max-width:78ch;font-size:16px;line-height:1.6">
-    <h2>What to do</h2><ul><li>Use both lanes up to the merge point.</li><li>At the merge point, take turns, like the teeth of a zipper.</li><li>Leave room and let the next car in.</li></ul>
-    <h2>Why it works</h2><p>When everyone moves over early, one lane backs up and the other sits empty. Using both lanes to the end keeps the line shorter.</p>
-    <p class="sc-related"><a href="/move-over/" target="_blank" rel="noopener">Move over laws in every state</a></p>
-    </div></div>
-`;
-  mkdirSync('zipper-merge', { recursive: true });
-  writeFileSync('zipper-merge/index.html', head('How do you zipper merge when a lane closes?', 'How to zipper merge in a work zone: use both lanes to the merge point, then take turns.', url, [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'How to zipper merge', url }]) + body + footTpl);
-}
-console.log(`move-over: ${laws.length} state pages + hub`);
+console.log(`move-over-laws: ${laws.length} state pages`);
