@@ -141,9 +141,9 @@ pages.changelog = shell({
 const L = ledger.feeds || {};
 pages['data-accuracy'] = shell({
   slug: 'data-accuracy',
-  title: 'What is in the MileCheck API data, and how accurate is it?',
+  title: 'What does the MileCheck API include?',
   desc: 'Response fields, how IDs behave, where each state\'s data comes from, how fresh it is, and the known limits of the mile marker and alert data.',
-  body: hero('What is in the MileCheck API data, and how accurate is it?', 'What each field is, which IDs you can store, where the data comes from, and where it is wrong or missing. Written for the engineer who has to rely on it.') +
+  body: hero('What does the MileCheck API include?', 'What each field is, which IDs you can store, where the data comes from, and where it is wrong or missing. Written for the engineer who has to rely on it.') +
   section(`<h2 id="fields">Alert records</h2><p class="lead"><code>GET /v1/alerts</code> returns <code>conditions</code> (road weather and surface) and <code>incidents</code> (closures, crashes, construction, hazards). Both are the state's own data in one shape. Fields a state does not publish are <code>null</code> or absent, never guessed.</p>` + code(`// incidents[]  (from a live Washington record)
 {
   "incident-id": "WA-722671",
