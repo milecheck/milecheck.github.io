@@ -687,7 +687,7 @@
   "covers_road_work_or_dot": false,
   "duty": "Slow down significantly and change lanes away from the vehicle on highways with four or more lanes, otherwise keep a safe speed.",
   "penalty": "Misdemeanor with fine of $300 to $500",
-  "penalty_source_url": "https://scdps.sc.gov/drivinginsc/move-over-law",
+  "penalty_source_url": "",
   "verified": true,
   "notes": "Read statute at scstatehouse.gov; DPS page cited by search. Section 56-5-2780 is school bus law, not move over. Highway workers addressed separately (56-5-1535)."
  },
