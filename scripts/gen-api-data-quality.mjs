@@ -76,12 +76,12 @@ const body = rows.map((r) => {
   const pct = r.n ? Math.round((r.withMile / r.n) * 100) + '%' : '—';
   const newest = r.newest ? age(readNow - r.newest) + ' old' : '—';
   const note = [GAPS[r.code], STATUS_NOTE[r.status] ? STATUS_NOTE[r.status] : (r.status !== 'live' ? `Feed status: ${esc(r.status)}.` : ''), r.errors ? `${r.errors} source error${r.errors > 1 ? 's' : ''} on this read.` : ''].filter(Boolean).join(' ');
-  return `<tr><td>${esc(r.name)}</td><td>${esc(r.agency)}</td><td>${r.n == null ? '—' : r.n}</td><td>${pct}</td><td>${newest}</td><td>${r.code === 'MS' ? 'about every 30 min (copy), then every 5 min' : (secs === 300 ? 'at least ' : '') + every(secs)}</td><td>${note}</td></tr>`;
+  return `<tr><td>${esc(r.name)}</td><td>${esc(r.agency)}</td><td>${r.n == null ? '—' : r.n}</td><td>${newest}</td><td>${r.code === 'MS' ? 'about every 30 min (copy), then every 5 min' : (secs === 300 ? 'at least ' : '') + every(secs)}</td><td>${note}</td></tr>`;
 }).join('\n');
 
 const when = new Date(readNow).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' Pacific';
 const title = 'How fresh and complete is the MileCheck road alert data?';
-const desc = 'Per state and province: how often MileCheck reads the agency, how many alerts it holds, how many carry a DOT mile marker, how old the newest record is, and where the gaps are. A dated snapshot, not a promise.';
+const desc = 'Per state and province: how often MileCheck reads the agency, how many alerts it holds, how old the newest record is, and where the gaps are. A dated snapshot, not a promise.';
 const feeds = rows.filter((r) => r.status !== 'unsupported').length;
 const markerOnly = rows.length - feeds;
 const lead = `Read from the live API on ${when}. All 50 states plus British Columbia, Alberta, Manitoba and Quebec have live alert feeds, with ${total.toLocaleString('en-US')} alerts in all at the read time. We check each feed every 1 to 15 minutes. Open a section below for the details.`;
@@ -90,7 +90,7 @@ const n15 = rows.filter(r => (READ[r.code] || 300) == 900).length;
 const fold = (title, inner, open = false) => `<section class="api-section" style="max-width:1040px;margin:0 auto"><details${open ? ' open' : ''} style="border:1px solid #e3e8e5;border-radius:10px;padding:10px 16px;background:#fff"><summary style="cursor:pointer;font-weight:700;font-size:18px;min-height:44px;display:flex;align-items:center">${title}</summary>${inner}</details></section>`;
 const section = (inner) => `<section class="api-section" style="max-width:1040px;margin:0 auto">${inner}</section>`;
 const bodyHtml = `<section class="api-hero" style="max-width:820px;margin:0 auto"><div class="eyebrow"><a href="/api/" style="color:inherit;text-decoration:none">MileCheck API</a> &rsaquo; Data quality</div><h1>${esc(title)}</h1><p class="sub">${esc(lead)}</p></section>` +
-fold(`Every state and province`, `<div class="tbl" style="overflow-x:auto"><table style="min-width:900px"><thead><tr><th>Place</th><th>Agency</th><th>Alerts now</th><th>With a DOT mile marker</th><th>Newest record</th><th>We read the agency</th><th>Known gaps</th></tr></thead><tbody>
+fold(`Every state and province`, `<div class="tbl" style="overflow-x:auto"><table style="min-width:900px"><thead><tr><th>Place</th><th>Agency</th><th>Alerts now</th><th>Newest record</th><th>We read the agency</th><th>Known gaps</th></tr></thead><tbody>
 ${body}
 </tbody></table></div>`, true) +
 fold(`How a road event gets to your software`, `
@@ -116,7 +116,6 @@ fold(`How a road event gets to your software`, `
 fold(`What each column means`, `
 <ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
 <li><strong>Alerts now.</strong> Records the API returns for that place at the read time, after we drop records with no numbered highway.</li>
-<li><strong>With a DOT mile marker.</strong> The share of those records where the agency itself sent a mile marker. When an alert has a location but no mile marker, we work one out from our own mile-marker data and send it in a separate field, <code>estimated-mile-marker</code>, so you can tell it came from us and not the agency.</li>
 <li><strong>Newest record.</strong> How long ago the agency last touched any one record. A quiet road can show an old number while the feed is fine, so read it as a hint, not a delay.</li>
 <li><strong>We read the agency.</strong> The interval we have set in the Worker. It is how often we check, not how fast the agency posts.</li>
 </ul>`) +
