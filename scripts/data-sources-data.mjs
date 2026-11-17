@@ -76,4 +76,7 @@ export const OTHER = [
   ['City cameras (Toronto)','City of Toronto','https://open.toronto.ca/dataset/traffic-cameras/','Camera images on the website. Contains information licensed under the Open Government Licence – Toronto.'],
   ['City cameras (Calgary)','City of Calgary','https://data.calgary.ca/Transportation-Transit/Traffic-Cameras/k7p9-kppz','Camera images on the website. Contains information licensed under the Open Government Licence – City of Calgary.'],
   ['City cameras (Vancouver)','City of Vancouver','https://opendata.vancouver.ca/explore/dataset/web-cam-url-links/','Camera locations on the website, each linking to the City\'s own view. Contains information licensed under the Open Government Licence – Vancouver.'],
+  ['Crashes and incidents (California)','California Highway Patrol','https://cad.chp.ca.gov','Live crash and incident reports for California highways.'],
+  ['Wildfire cameras (California)','ALERTCalifornia, UC San Diego','https://alertcalifornia.org','Wildfire camera images near California highways.'],
+  ['Street names and highway exits','US Census Bureau, TIGER/Line','https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html','Street names next to a mile marker, and exit locations where a state publishes none.'],
 ];
