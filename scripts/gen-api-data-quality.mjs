@@ -39,7 +39,7 @@ const latencySection = () => {
     .map((r) => `<tr><td ${td}>${esc(nameOf[r.st])}</td><td ${td}>${mins(r.median)}</td><td ${td}>${mins(r.p75)}</td><td ${td}>${r.n.toLocaleString('en-US')}</td></tr>`).join('\n');
   const left = latency.dropped.filter((r) => nameOf[r.st]).sort((a, b) => nameOf[a.st].localeCompare(nameOf[b.st]));
   return `<h2>How soon we see a crash after the agency's own time</h2>
-<p style="max-width:70ch;line-height:1.55">From ${day(latency.from)} to ${day(latency.to)} we logged when each crash and road hazard first appeared in an agency's feed and compared it with the start time the agency put on the record. Half of the records in each state reached us within the first number below. Three in four reached us within the second. The time includes how long the agency took to post the record and the gap before our next check, which is 15 minutes or less in every place.</p>
+<p style="max-width:70ch;line-height:1.55">From ${day(latency.from)} to ${day(latency.to)} we logged when each crash and road hazard first appeared in an agency's feed and compared it with the start time the agency put on the record. Half of the records in each state reached us within the first number below. Three in four reached us within the second. <strong style="color:#b42318">The time includes how long the agency took to post the record and the gap before our next check, which is 15 minutes or less in every place.</strong></p>
 <div class="tbl" style="overflow-x:auto"><table style="min-width:520px;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Place</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Half within</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Three in four within</th><th style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5">Records</th></tr></thead><tbody>
 ${rowsHtml}
 </tbody></table></div>
@@ -82,7 +82,9 @@ const body = rows.map((r) => {
 const when = new Date(readNow).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' Pacific';
 const title = 'How fresh and complete is the MileCheck road alert data?';
 const desc = 'Per state and province: how often MileCheck reads the agency, how many alerts it holds, how many carry a DOT mile marker, how old the newest record is, and where the gaps are. A dated snapshot, not a promise.';
-const lead = `Read from the live API on ${when}: ${live} of ${rows.length} states and provinces reporting live, ${total.toLocaleString('en-US')} alerts in all.`;
+const feeds = rows.filter((r) => r.status !== 'unsupported').length;
+const markerOnly = rows.length - feeds;
+const lead = `Read from the live API on ${when}: ${feeds} states and provinces with a live alert feed, ${live} of them reporting alerts at the read time, ${total.toLocaleString('en-US')} alerts in all. The other Canadian provinces and territories have mile markers only.`;
 const n5 = rows.filter(r => (READ[r.code] || 300) <= 300).length;
 const n15 = rows.filter(r => (READ[r.code] || 300) == 900).length;
 const section = (inner) => `<section class="api-section" style="max-width:1040px;margin:0 auto">${inner}</section>`;
@@ -101,7 +103,7 @@ section(`<h2>How a road event gets to your software</h2>
 <div class="mc-flow">
 <div class="gap start"><strong>Something happens on the road</strong><i>&rarr;</i>The agency verifies it</div>
 <div class="box"><b>1. The state DOT posts it</b><span>Federal rule 23 CFR 511.309 gives agencies 10 minutes from verifying a lane-blocking incident to post it in metro areas, and 20 minutes outside them, on Interstates and other major routes they designate.</span></div>
-<div class="gap"><i>&rarr;</i>Within 5 minutes in ${n5} states and provinces, 15 minutes in ${n15}</div>
+<div class="gap"><i>&rarr;</i>Every 1 to 15 minutes, depending on the source</div>
 <div class="box"><b>2. MileCheck reads the feed</b><span>We check each agency on a set interval, add the mile marker, and put every place in one format. The table below lists the interval for each place.</span></div>
 <div class="gap"><i>&rarr;</i>On your next call</div>
 <div class="box"><b>3. Your software gets it</b><span>Each API call returns what we hold at that moment.</span></div>
@@ -110,7 +112,7 @@ section(`<h2>How a road event gets to your software</h2>
 section(`<h2>What each column means</h2>
 <ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
 <li><strong>Alerts now.</strong> Records the API returns for that place at the read time, after we drop records with no numbered highway.</li>
-<li><strong>With a DOT mile marker.</strong> The share of those records where the agency itself sent a mile marker. The API adds an <code>estimated-mile-marker</code> field, labeled as ours, where the agency sent none.</li>
+<li><strong>With a DOT mile marker.</strong> The share of those records where the agency itself sent a mile marker. When an alert has a location but no mile marker, we work one out from our own mile-marker data and send it in a separate field, <code>estimated-mile-marker</code>, so you can tell it came from us and not the agency.</li>
 <li><strong>Newest record.</strong> How long ago the agency last touched any one record. A quiet road can show an old number while the feed is fine, so read it as a hint, not a delay.</li>
 <li><strong>We read the agency.</strong> The interval we have set in the Worker. It is how often we check, not how fast the agency posts.</li>
 </ul>`) +
