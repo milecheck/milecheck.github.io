@@ -299,7 +299,7 @@
     G.mileposts.on('add', function () { drawPosts(); gm.on('moveend', drawPosts); if (gm.getZoom() < 6) zoomNote(); });
     // Exits (11/16): exit numbers and cross streets for the states we have them (WSDOT, ADOT, and exits derived from
     // Census TIGER ramps for OR and WI). Static files on this site; drawn once zoomed in, for the area in view.
-    var EXIT_STATES = ['WA', 'OR', 'AZ', 'WI'], exitData = {}, exitNoteEl = null, exitNoteT = null;
+    var EXIT_STATES = ['AL', 'AR', 'AZ', 'CO', 'FL', 'GA', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NJ', 'NM', 'NV', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WI', 'WV', 'WY'], exitData = {}, exitNoteEl = null, exitNoteT = null;
     function exitNote(txt) {
       if (!exitNoteEl) {
         exitNoteEl = document.createElement('div');
@@ -318,7 +318,7 @@
       var all = inView() || [];
       var b = gm.getBounds().pad(0.1), states = all.filter(function (k) { return EXIT_STATES.indexOf(k) >= 0; }), n = 0;
       // Say so instead of showing a blank map where we have no exits yet (Leah 11/16: "not yet in this state").
-      if (all.length && !states.length) { exitNote('Exits aren\u2019t in this state yet. They\u2019re in AZ, OR, WA and WI for now.'); return; }
+      if (all.length && !states.length) { exitNote('Exits aren\u2019t in this state yet. They\u2019re in 41 states so far.'); return; }
       states.forEach(function (st) {
         if (exitData[st] === undefined) {
           exitData[st] = null;
