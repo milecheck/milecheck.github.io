@@ -299,7 +299,7 @@
     G.mileposts.on('add', function () { drawPosts(); gm.on('moveend', drawPosts); if (gm.getZoom() < 6) zoomNote(); });
     // Exits (11/16): exit numbers and cross streets for the states we have them (WSDOT, ADOT, and exits derived from
     // Census TIGER ramps for OR and WI). Static files on this site; drawn once zoomed in, for the area in view.
-    var EXIT_STATES = ['AL', 'AR', 'AZ', 'CO', 'FL', 'GA', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NJ', 'NM', 'NV', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WI', 'WV', 'WY'], exitData = {}, exitNoteEl = null, exitNoteT = null;
+    var EXIT_STATES = ['AL', 'AR', 'AZ', 'CO', 'CT', 'FL', 'GA', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'WA', 'WI', 'WV', 'WY'], exitData = {}, exitNoteEl = null, exitNoteT = null;
     function exitNote(txt) {
       if (!exitNoteEl) {
         exitNoteEl = document.createElement('div');
