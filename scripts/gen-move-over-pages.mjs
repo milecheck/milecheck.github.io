@@ -5,6 +5,7 @@
 // Chrome (head, header, footer) is taken from the built /chain-laws/oregon/ page.
 // Run: node scripts/gen-move-over-pages.mjs, then node scripts/finish-pages.mjs
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { moveOverSvg, slowDownSvg, zipperSvg } from './lib/move-over-diagrams.mjs';
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (n) => n.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
@@ -43,7 +44,7 @@ const CHIPS = [
   ['🗑️', 'Garbage trucks', /garbage|waste|sanitation|refuse|recycling/i],
 ];
 const chips = (covers) => { const t = (covers || []).join(' | ') + ' '; const anyLit = /any (stopped|stationary|parked|disabled)?\s*vehicle/i.test(t); return CHIPS.filter(([, l, re]) => re.test(t) || (anyLit && !/Utility|Garbage/.test(l))).map(([, l]) => `<li>${l}</li>`).join(''); };
-const FIG = `<figure style="margin:14px 0"><img src="/images/move-over/multilane.webp" width="1000" height="563" loading="lazy" alt="Diagram: well before a stopped road crew truck on the right shoulder, a car moves from the right lane into a gap in the left lane and passes with the lane next to the truck empty" style="max-width:100%;height:auto;border-radius:10px"></figure><figure style="margin:14px 0"><img src="/images/move-over/twolane.webp" width="1000" height="563" loading="lazy" alt="Diagram: on a two-lane road with oncoming traffic, a car slows from 55 to 40 well before a tow truck helping a broken-down car on the shoulder" style="max-width:100%;height:auto;border-radius:10px"></figure>`;
+const FIG = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0">${moveOverSvg()}${slowDownSvg()}</div>`;
 
 for (const s of laws) {
   const sl = slug(s.name), url = `https://milecheckapp.com/move-over/${sl}/`;
@@ -92,10 +93,29 @@ const hub = `<div class="sc-wrap">
     <p class="sc-eyebrow">Move over laws</p>
     <h1>What is the move over law in each state?</h1>
     <p class="sc-lede">Every state requires drivers to move over or slow down for some roadside vehicles. Who is covered and what you have to do differ by state. Pick a state for its rule, the penalty and a link to the statute.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0;max-width:760px">${moveOverSvg()}${slowDownSvg()}</div>
+    <p style="font-size:16px"><a href="/zipper-merge/" target="_blank" rel="noopener" style="color:#0f7a4f;font-weight:700">How do you zipper merge when a lane closes?</a></p>
     <div style="overflow-x:auto;max-width:640px"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr><th style="text-align:left;padding:6px">State</th><th style="text-align:left;padding:6px">Statute</th></tr>${rows}</table></div>
     <p style="color:#5b6670;font-size:14px">General information, not legal advice. Each state's statute controls.</p>
   </div>
 `;
 mkdirSync('move-over', { recursive: true });
 writeFileSync('move-over/index.html', head('What is the move over law in each state?', 'The move over law in every US state, with the statute, who it covers and what drivers have to do.', hubUrl, [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Move over laws by state', url: hubUrl }]) + hub + footTpl);
+// Zipper merge page (Leah 11/16). Linked from the hub and from work-zone pages.
+{
+  const url = 'https://milecheckapp.com/zipper-merge/';
+  const body = `<div class="sc-wrap">
+    <p class="sc-eyebrow">Work zones</p>
+    <h1>How do you zipper merge when a lane closes?</h1>
+    <p class="sc-lede">Stay in your lane until the merge point, then take turns. One car from the open lane, one car from the closing lane.</p>
+    <div style="max-width:380px;margin:14px 0">${zipperSvg()}</div>
+    <div class="sc-body" style="max-width:78ch;font-size:16px;line-height:1.6">
+    <h2>What to do</h2><ul><li>Use both lanes up to the merge point.</li><li>At the merge point, take turns, like the teeth of a zipper.</li><li>Leave room and let the next car in.</li></ul>
+    <h2>Why it works</h2><p>When everyone moves over early, one lane backs up and the other sits empty. Using both lanes to the end keeps the line shorter.</p>
+    <p class="sc-related"><a href="/move-over/" target="_blank" rel="noopener">Move over laws in every state</a></p>
+    </div></div>
+`;
+  mkdirSync('zipper-merge', { recursive: true });
+  writeFileSync('zipper-merge/index.html', head('How do you zipper merge when a lane closes?', 'How to zipper merge in a work zone: use both lanes to the merge point, then take turns.', url, [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'How to zipper merge', url }]) + body + footTpl);
+}
 console.log(`move-over: ${laws.length} state pages + hub`);
