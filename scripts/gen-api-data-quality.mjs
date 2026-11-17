@@ -93,6 +93,7 @@ const bodyHtml = `<section class="api-hero" style="max-width:820px;margin:0 auto
 fold(`Every state and province`, `<div class="tbl" style="overflow-x:auto"><table style="min-width:900px"><thead><tr><th>Place</th><th>Agency</th><th>Alerts now</th><th>Newest record</th><th>We read the agency</th><th>Known gaps</th></tr></thead><tbody>
 ${body}
 </tbody></table></div>`, true) +
+fold(`How accurate are the mile markers?`, `<ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6"><li>Every marker says whether it is a physical post or placed from the state's road records.</li><li>In road tests across several states, the marker has landed right at the post. We keep checking and correcting state by state.</li><li>Some states restart numbers at county lines (Georgia, California). Those markers carry the county.</li><li>Canada and Arizona's I-19 are in kilometres.</li></ul><p style="margin-top:10px">The full notes, state by state: <a href="/api/data-accuracy/" style="color:#0f7a4f;font-weight:700">data accuracy</a>.</p>`, true) +
 fold(`How a road event gets to your software`, `
 <style>
 .mc-flow{display:flex;align-items:stretch;gap:0;margin:16px 0 8px}
