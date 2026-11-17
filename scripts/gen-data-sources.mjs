@@ -82,7 +82,7 @@ ${ga}
     .tbl th{text-align:left;background:#f6f7f8;padding:9px 12px;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;color:#5b6670;border-bottom:1px solid #E5E5E5;}
     .tbl td{padding:10px 12px;border-bottom:1px solid #EEF0F1;vertical-align:top;color:#2a333b;}
     .tbl tr:last-child td{border-bottom:0;}
-    .tbl td:nth-child(3),.tbl td:nth-child(4),.tbl th:nth-child(3),.tbl th:nth-child(4){text-align:center;white-space:nowrap;}
+    .tbl td,.tbl th{text-align:left;}
     .tbl .y{color:#0f7a4f;font-weight:800;} .tbl .n{color:#9aa3ab;}
     .tbl .note{font-size:13px;color:#5b6670;}
     .checked{font-size:13px;color:#5b6670;margin-top:24px;}
