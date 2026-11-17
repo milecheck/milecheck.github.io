@@ -14,14 +14,14 @@
   <meta name="description" content="Highway mile-marker lookup and live, normalized state DOT feeds for all 50 US states plus BC, Alberta and Manitoba. One schema, 53 upstream feeds.">
   <link rel="canonical" href="https://milecheckapp.com/api/">
   <meta property="og:title" content="MileCheck API — Mile Markers &amp; Live State DOT Feeds">
-  <meta property="og:description" content="Highway mile-marker geocoding and live, normalized state DOT feeds for all 50 US states plus British Columbia, Alberta and Manitoba — one API, one schema.">
+  <meta property="og:description" content="Highway mile-marker geocoding and live, normalized state DOT feeds for all 50 US states plus British Columbia, Alberta, Manitoba and Quebec — one API, one schema.">
   <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <meta property="og:url" content="https://milecheckapp.com/api/">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MileCheck API — Mile Markers &amp; Live State DOT Feeds">
-  <meta name="twitter:description" content="Highway mile-marker geocoding and live, normalized state DOT feeds for all 50 US states plus British Columbia, Alberta and Manitoba — one API, one schema.">
+  <meta name="twitter:description" content="Highway mile-marker geocoding and live, normalized state DOT feeds for all 50 US states plus British Columbia, Alberta, Manitoba and Quebec — one API, one schema.">
   <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
   <link rel="icon" type="image/png" href="../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live state DOT feeds for all 50 US states plus British Columbia, Alberta and Manitoba. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"There is no published SLA. Developer and Business plans carry none. Fleet and enterprise terms, including support, are agreed in the license and invoiced yearly."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}],"@id":"https://milecheckapp.com/api/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's covered by the MileCheck API?","acceptedAnswer":{"@type":"Answer","text":"Highway mile markers and live state DOT feeds for all 50 US states plus British Columbia, Alberta, Manitoba and Quebec. Alert coverage (closures, crashes, construction, road-weather) is normalized from over 50 separate state and provincial DOT feeds into one consistent schema."}},{"@type":"Question","name":"What's the difference between /v1/locate and /v1/alerts?","acceptedAnswer":{"@type":"Answer","text":"/v1/locate turns GPS coordinates into the nearest highway mile marker (route, milepost, direction). /v1/alerts returns live, normalized road conditions and incidents — closures, crashes, construction — for a state or a location."}},{"@type":"Question","name":"How do API keys work?","acceptedAnswer":{"@type":"Answer","text":"Every request needs an API key, passed as a query parameter, an x-api-key header, or an Authorization: Bearer header. Email sales@milecheckapp.com to request one."}},{"@type":"Question","name":"Is there an SLA?","acceptedAnswer":{"@type":"Answer","text":"There is no published SLA. Developer and Business plans carry none. Fleet and enterprise terms, including support, are agreed in the license and invoiced yearly."}},{"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Mile-marker positions come from state DOT reference-marker datasets. Road alerts come directly from each state and provincial DOT's live traffic feed, normalized by MileCheck into one schema."}}],"@id":"https://milecheckapp.com/api/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
 
   <style>
     .api-hero{max-width:960px;margin:0 auto;padding:40px 20px 8px;text-align:center;}
@@ -163,7 +163,7 @@
     <div class="eyebrow">MileCheck for business &rsaquo; For software teams</div>
     <h1>The MileCheck API</h1>
     <p class="sub">For dispatch, fleet, EMS and routing software that needs to know which highway and mile marker a vehicle is on, and what is happening on the road ahead.</p>
-    <p class="value">It is the same data that runs the MileCheck app: mile markers for all 50 states and 10 Canadian provinces and territories, and live state DOT feeds from every state plus British Columbia, Alberta and Manitoba.</p>
+    <p class="value">It is the same data that runs the MileCheck app: mile markers for all 50 states and 10 Canadian provinces and territories, and live state DOT feeds from every state plus British Columbia, Alberta, Manitoba and Quebec.</p>
     <div class="btns">
       <a class="primary" href="#get-key">Get a test key</a>
       <a class="ghost" href="#two-prices">How pricing works</a>
@@ -246,22 +246,34 @@
       <p class="ep-desc">Coordinates in, nearest highway mile marker out.</p>
       <div class="ep-row">
       <div class="ep-code">
-      <p class="ep-params"><code>lat</code> and <code>lon</code> required · <code>state</code> optional (2-letter code, narrows the search)</p>
+      <p class="ep-params"><code>lat</code> and <code>lon</code> required · <code>heading</code> optional (degrees, 0 = north; adds NB/SB/EB/WB and which exit is ahead) · <code>state</code> optional (2-letter code, narrows the search)</p>
 
       <p class="ep-label">Request</p>
-      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/locate?apikey=YOUR_KEY&amp;lat=47.869&amp;lon=-121.760"</pre>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/locate?apikey=YOUR_KEY&amp;lat=47.6062&amp;lon=-122.33&amp;heading=0"</pre>
 
-      <p class="ep-label">Response</p>
+      <p class="ep-label">Response (abridged)</p>
       <pre class="codeblock">{
-  "milepost": 25,
-  "route": "SR 2",
-  "route_class": "S",
+  "milepost": 166,
+  "unit": "mi",
+  "route": "I-5",
+  "also_signed_as": [],
+  "route_class": "I",
   "state": "WA",
-  "direction": null,
-  "distance_mi": 0.04,
-  "coordinates": { "lat": 47.869404, "lon": -121.760126 },
-  "query": { "lat": 47.869, "lon": -121.76 }
+  "direction": "NB",
+  "label": "I-5 NB MP 166",
+  "road_name": null,
+  "nearest_exit": {
+    "ahead": { "exit": "167", "name": "Mercer St", "distance": 1, "unit": "mi",
+               "label": "Exit 167 / Mercer St, 1 mi ahead" },
+    "behind": { "exit": "166", "name": "Olive Way", "distance": 0, "unit": "mi",
+                "label": "Exit 166 / Olive Way" }
+  },
+  "distance_mi": 0.161,
+  "coordinates": { "lat": 47.613281, "lon": -122.330096 },
+  "nearby": [ { "route": "SR 99", "milepost": 34, "unit": "mi", "distance_mi": 0.406 } ],
+  "query": { "lat": 47.6062, "lon": -122.33 }
 }</pre>
+      <p class="ep-params">Where two routes share one road, <code>also_signed_as</code> lists the others ("I-90 EB / I-39 / I-94 MP 122"). Canada and Arizona's I-19 answer in kilometres (<code>"unit": "km"</code>). <code>nearest_exit</code> is in Washington and Arizona today. <code>road_name</code> adds the street name where the road has one ("US-60 WB MP 155 / Grand Ave").</p></pre>
       </div>
       <figure class="ep-visual"><a href="/images/mockups/01-fleet-dispatch-mile-marker.webp" target="_blank" rel="noopener"><img src="/images/mockups/01-fleet-dispatch-mile-marker.webp" width="1200" height="771" loading="lazy" alt="Fleet dispatch screen: a map of I-90 in Montana with a truck at mile 47.3 eastbound and the lookup response beside it"></a><figcaption><span class="badge">API</span> <strong>Mile marker lookup.</strong> A fleet dispatch tool uses the lookup and the truck's GPS to read out its highway and mile. The same markers are also licensed as a file with no call limits.</figcaption></figure>
     </div>
@@ -596,7 +608,7 @@
     <div class="faq">
       <details>
         <summary>What's covered by the MileCheck API?</summary>
-        <p>Mile markers for all 50 US states and 10 Canadian provinces and territories. Live state DOT feeds (closures, crashes, construction, chain controls, road weather) for all 50 states plus British Columbia, Alberta and Manitoba, normalized from 53 separate feeds into one schema. Wildfires, drawbridge status and border wait times are on the Business plan.</p>
+        <p>Mile markers for all 50 US states and 10 Canadian provinces and territories. Live state DOT feeds (closures, crashes, construction, chain controls, road weather) for all 50 states plus British Columbia, Alberta, Manitoba and Quebec, normalized from 54 separate feeds into one schema. Wildfires, drawbridge status and border wait times are on the Business plan.</p>
       </details>
       <details>
         <summary>What's the difference between /v1/locate and /v1/alerts?</summary>
