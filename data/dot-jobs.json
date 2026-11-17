@@ -1,7 +1,7 @@
 {
  "sources": {
   "OR": {
-   "fetchedAt": "2026-11-16T22:22:07.243Z",
+   "fetchedAt": "2026-11-17T08:10:36.430Z",
    "ok": true,
    "rows": [
     {
@@ -30,6 +30,20 @@
      "closesNote": null,
      "kind": "Seasonal",
      "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Parkdale--ODOT--MS/Highway-Maintenance-Specialist--Seasonal-_REQ-208322",
+     "recruiter": "ODOTRecruitment@odot.oregon.gov"
+    },
+    {
+     "id": "REQ-209872",
+     "state": "OR",
+     "agency": "Oregon Department of Transportation",
+     "title": "Highway Maintenance Specialist (Seasonal)",
+     "multiple": false,
+     "location": "Sisters, OR",
+     "pay": "$4,312 to $5,988 a month",
+     "closes": "2026-12-03",
+     "closesNote": null,
+     "kind": "Seasonal",
+     "url": "https://oregon.wd5.myworkdayjobs.com/SOR_External_Career_Site/job/Sisters--ODOT--Santiam-Junction-Maintenance/Highway-Maintenance-Specialist--Seasonal-_REQ-209872",
      "recruiter": "ODOTRecruitment@odot.oregon.gov"
     },
     {
@@ -77,7 +91,7 @@
    ]
   },
   "MN": {
-   "fetchedAt": "2026-11-16T22:22:07.243Z",
+   "fetchedAt": "2026-11-17T08:10:36.430Z",
    "ok": true,
    "rows": [
     {
@@ -135,5 +149,5 @@
    ]
   }
  },
- "updatedAt": "2026-11-16T22:22:07.243Z"
+ "updatedAt": "2026-11-17T08:10:36.430Z"
 }
