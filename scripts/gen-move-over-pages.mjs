@@ -5,7 +5,6 @@
 // Chrome (head, header, footer) is taken from the built /chain-laws/oregon/ page.
 // Run: node scripts/gen-move-over-pages.mjs, then node scripts/finish-pages.mjs
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { moveOverSvg, slowDownSvg, zipperSvg } from './lib/move-over-diagrams.mjs';
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (n) => n.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
@@ -44,7 +43,7 @@ const CHIPS = [
   ['🗑️', 'Garbage trucks', /garbage|waste|sanitation|refuse|recycling/i],
 ];
 const chips = (covers) => { const t = (covers || []).join(' | ') + ' '; const anyLit = /any (stopped|stationary|parked|disabled)?\s*vehicle/i.test(t); return CHIPS.filter(([, l, re]) => re.test(t) || (anyLit && !/Utility|Garbage/.test(l))).map(([, l]) => `<li>${l}</li>`).join(''); };
-const FIG = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0">${moveOverSvg()}${slowDownSvg()}</div>`;
+const FIG = `<figure style="margin:16px 0"><img src="/images/move-over/move-over-or-slow-down.webp" width="1200" height="675" loading="lazy" alt="Two panels. Left, two or more lanes: a car signals and moves into the left lane well before a work truck stopped with flashing lights. Right, one lane each way with oncoming traffic: a car slows down at a SLOW DOWN sign well before a tow truck on the shoulder." style="max-width:100%;height:auto;border-radius:10px"></figure>`;
 
 for (const s of laws) {
   const sl = slug(s.name), url = `https://milecheckapp.com/move-over-laws/${sl}/`;
