@@ -84,7 +84,7 @@ const title = 'How fresh and complete is the MileCheck road alert data?';
 const desc = 'Per state and province: how often MileCheck reads the agency, how many alerts it holds, how old the newest record is, and where the gaps are. A dated snapshot, not a promise.';
 const feeds = rows.filter((r) => r.status !== 'unsupported').length;
 const markerOnly = rows.length - feeds;
-const lead = `Read from the live API on ${when}. All 50 states plus British Columbia, Alberta, Manitoba and Quebec have live alert feeds, with ${total.toLocaleString('en-US')} alerts in all at the read time. We check each feed every 1 to 15 minutes. Open a section below for the details.`;
+const lead = `Read from the live API on ${when}. All 50 states plus British Columbia, Alberta, Manitoba and Quebec have live alert feeds. We check each feed every 1 to 15 minutes. The table is a snapshot from that read. Open a section below for the details.`;
 const n5 = rows.filter(r => (READ[r.code] || 300) <= 300).length;
 const n15 = rows.filter(r => (READ[r.code] || 300) == 900).length;
 const fold = (title, inner, open = false) => `<section class="api-section" style="max-width:1040px;margin:0 auto"><details${open ? ' open' : ''} style="border:1px solid #e3e8e5;border-radius:10px;padding:10px 16px;background:#fff"><summary style="cursor:pointer;font-weight:700;font-size:18px;min-height:44px;display:flex;align-items:center">${title}</summary>${inner}</details></section>`;
