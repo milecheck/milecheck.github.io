@@ -118,7 +118,7 @@
   // page already has under its own name (its own closures, cameras, roadwork) is left out
   // so nothing shows twice; camera pages leave out Cameras for the same reason.
   var SAME = { alerts: /restriction|roadwork|work zone|alert/i, closures: /closure|crash/i, weather: /road weather|road condition|surface/i,
-    cameras: /camera/i, mileposts: /mile ?(marker|post)/i, fires: /fire/i };
+    cameras: /camera/i, mileposts: /mile ?(marker|post)/i, fires: /fire/i, exits: /\bexits?\b/i };
   var BOXES = {WA:[45.54,49,-124.85,-116.91],OR:[41.99,46.29,-124.57,-116.46],ID:[42,49,-117.24,-111.04],MT:[44.36,49,-116.05,-104.04],AZ:[31.33,36.999,-114.82,-109.04],UT:[37,42,-114.05,-109.04],CO:[37.001,41,-109.05,-102.04],NM:[31.33,37,-109.05,-103],AK:[54.5,71.5,-165,-129.5],SD:[42.48,45.94,-104.06,-96.43],ND:[45.94,49,-104.05,-96.55],NE:[40,43,-104.05,-95.31],KS:[37,40,-102.05,-94.59],WI:[42.49,47.08,-92.89,-86.8],MN:[43.5,49,-97.21,-89.6],IA:[40.37,43.5,-96.64,-90.14],IL:[36.97,42.51,-91.52,-87.02],WY:[40.99,45.01,-111.06,-104.05],ME:[43.06,47.46,-71.08,-66.95],RI:[41.15,42.02,-71.86,-71.12],MI:[41.7,48.3,-90.42,-82.12],NV:[35,42,-120.01,-114.04],NJ:[38.92,41.36,-75.56,-73.89],DE:[38.45,39.84,-75.79,-75.04],MD:[37.91,39.73,-79.49,-75.04],VA:[36.54,39.47,-83.68,-75.24],WV:[37.2,40.64,-82.65,-77.72],OH:[38.4,42,-84.82,-80.52],PA:[39.72,42.27,-80.52,-74.69],MA:[41.18,42.89,-73.51,-69.93],VT:[42.73,45.02,-73.43,-71.46],NH:[42.7,45.31,-72.56,-70.7],CT:[40.98,42.05,-73.73,-71.79],NY:[40.48,45.02,-79.77,-71.86],FL:[24.4,31,-87.63,-80.03],GA:[30.36,35,-85.61,-80.84],NC:[33.84,36.59,-84.32,-75.46],SC:[32.03,35.22,-83.35,-78.54],MS:[30.17,35,-91.66,-88.1],AL:[30.22,35.01,-88.47,-84.89],AR:[33,36.5,-94.62,-89.64],LA:[28.93,33.02,-94.04,-88.82],OK:[33.62,37,-103,-94.43],TN:[34.98,36.68,-90.31,-81.65],KY:[36.5,39.15,-89.57,-81.96],IN:[37.77,41.76,-88.1,-84.78],MO:[36,40.61,-95.77,-89.1],CA:[32.5,42,-124.5,-114.1],HI:[18.5,22.5,-160.5,-154.5],TX:[25.8,36.5,-106.7,-93.5],ON:[41.66,56.9,-95.16,-74.32],QC:[44.99,62.6,-79.77,-57.1],BC:[48.3,60.02,-139.06,-114.03],AB:[48.99,60,-120.01,-109.95],MB:[48.99,60,-102.11,-88.9]};
   // The agency each state's feed comes from, named and linked in every popup (10-30).
   var DOTS = {"WA":["WSDOT","https://wsdot.wa.gov/travel/real-time/map"],"BC":["DriveBC","https://www.drivebc.ca"],"AB":["511 Alberta","https://511.alberta.ca"],"MB":["Manitoba 511","https://www.manitoba511.ca"],"OR":["TripCheck","https://tripcheck.com"],"AZ":["AZ511","https://az511.gov"],"MT":["MDT","https://www.511mt.net"],"UT":["UDOT","https://udottraffic.utah.gov"],"ID":["ITD 511","https://511.idaho.gov"],"AK":["AK 511","https://511.alaska.gov"],"CO":["COtrip","https://www.cotrip.org"],"ND":["NDRoads","https://travel.dot.nd.gov/"],"SD":["SD511","https://www.sd511.org/"],"WI":["511WI","https://511wi.gov/"],"WY":["WYDOT","https://wyoroad.info"],"ME":["New England 511","https://newengland511.org/"],"RI":["RIDOT","https://www.dot.ri.gov/"],"MI":["Mi Drive","https://mdotjboss.state.mi.us/MiDrive"],"NV":["NVRoads","https://www.nvroads.com"],"PA":["511PA","https://www.511pa.com"],"MA":["MassDOT","https://www.mass511.com"],"VT":["VTrans","https://newengland511.org/"],"NH":["NHDOT","https://newengland511.org/"],"CT":["CTDOT","https://portal.ct.gov/dot"],"NJ":["511NJ","https://www.511nj.org/"],"NY":["511NY","https://511ny.org"],"MN":["511MN","https://511mn.org/"],"OH":["OHGO","https://www.ohgo.com/"],"IA":["511IA","https://511ia.org/"],"NE":["NE 511","https://www.511.nebraska.gov/"],"NM":["NMRoads","https://nmroads.com/"],"VA":["VA 511","https://511.vdot.virginia.gov/"],"WV":["WV 511","https://wv511.org/"],"DE":["DelDOT","https://deldot.gov/traffic"],"MD":["MD 511","https://chart.maryland.gov/"],"IL":["IDOT","https://www.gettingaroundillinois.com/"],"AL":["ALGO","https://algotraffic.com"],"AR":["IDrive","https://www.idrivearkansas.com"],"IN":["INDOT","https://indot.carsprogram.org/"],"KY":["goKY","https://goky.ky.gov/"],"LA":["511LA","https://www.511la.org/"],"OK":["OK 511","https://www.oktraffic.org/"],"TN":["SmartWay","https://smartway.tn.gov/traffic"],"FL":["FL511","https://fl511.com"],"GA":["511GA","https://511ga.org"],"KS":["KanDrive","https://www.kandrive.gov/"],"MO":["MoDOT","https://traveler.modot.org/"],"MS":["MDOTtraffic","https://www.mdottraffic.com/"],"NC":["NCDOT","https://www.ncdot.gov/travel-maps/traffic-travel/Pages/default.aspx"],"SC":["511SC","https://www.511sc.org/"],"CA":["QuickMap","https://quickmap.dot.ca.gov/"],"HI":["HI DOT","https://hidot.hawaii.gov/"],"TX":["DriveTexas","https://drivetexas.org/"]};
@@ -138,7 +138,7 @@
     var ok = function (la, lo) { return isFinite(la) && isFinite(lo) && !(!la && !lo); };
     var clean = function (t) { return String(t || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(); };
     var canvas = L.canvas({ padding: 0.3 });
-    var G = { alerts: L.layerGroup(), closures: L.layerGroup(), weather: L.layerGroup(), cameras: L.layerGroup(), mileposts: L.layerGroup(), fires: L.layerGroup() };
+    var G = { alerts: L.layerGroup(), closures: L.layerGroup(), weather: L.layerGroup(), cameras: L.layerGroup(), mileposts: L.layerGroup(), fires: L.layerGroup(), exits: L.layerGroup() };
 
     // Which states to load: the pinned one, or the ones in view.
     function inView() {
@@ -297,6 +297,36 @@
       }
     }
     G.mileposts.on('add', function () { drawPosts(); gm.on('moveend', drawPosts); if (gm.getZoom() < 6) zoomNote(); });
+    // Exits (11/16): exit numbers and cross streets for the states we have them (WSDOT, ADOT, and exits derived from
+    // Census TIGER ramps for OR and WI). Static files on this site; drawn once zoomed in, for the area in view.
+    var EXIT_STATES = ['WA', 'OR', 'AZ', 'WI'], exitData = {};
+    function drawExits() {
+      var pop = gm._popup;
+      if (pop && gm.hasLayer(pop) && pop._source && G.exits.hasLayer(pop._source)) return;
+      G.exits.clearLayers();
+      if (!gm.hasLayer(G.exits)) return;
+      if (gm.getZoom() < 10) { zoomNote(); return; }
+      var b = gm.getBounds().pad(0.1), states = (inView() || []).filter(function (k) { return EXIT_STATES.indexOf(k) >= 0; }), n = 0;
+      states.forEach(function (st) {
+        if (exitData[st] === undefined) {
+          exitData[st] = null;
+          fetch('/data/exits/' + st + '.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { exitData[st] = j || false; drawExits(); }).catch(function () { exitData[st] = false; });
+          return;
+        }
+        var d = exitData[st];
+        if (!d) return;
+        d.exits.forEach(function (x) {
+          if (n >= 300 || !b.contains([x.la, x.lo])) return;
+          n++;
+          L.marker([x.la, x.lo], { pane: mpPane(), icon: L.divIcon({ className: 'cm-exit', html: '<span>Exit ' + e(x.x) + '</span>', iconSize: [0, 0] }), keyboard: false })
+            .bindPopup('<b>' + e(x.r) + ' · Exit ' + e(x.x) + '</b>' + (x.n ? '<br>' + e(x.n) : '') + '<div style="font-size:12px;color:#5b6670;margin-top:4px">Source: ' + e(d.source) + '</div>')
+            .addTo(G.exits);
+        });
+      });
+    }
+    G.exits.on('add', function () { drawExits(); gm.on('moveend', drawExits); });
+    G.exits.on('remove', function () { gm.off('moveend', drawExits); });
+
     G.mileposts.on('remove', function () { gm.off('moveend', drawPosts); });
 
     // Wildfires: one national feed. A pinned state shows only its fires; otherwise all
@@ -387,6 +417,7 @@
       { key: 'weather', label: 'Road weather', color: '#0EA5E9', skip: all },
       { key: 'cameras', label: 'Cameras', color: '#475569', skip: all || camPage },
       { key: 'mileposts', label: 'Mile markers', color: '#0f7a4f', skip: all },
+      { key: 'exits', label: 'Exits', color: '#1d4ed8', skip: all },
       { key: 'fires', label: 'Wildfires', color: '#EA580C' }
     ];
     var on = X.on || [];

@@ -223,3 +223,7 @@ html .co-layers .co-key{margin-top:8px;}
 /* Header brand link and closure list buttons: 44px tall everywhere. */
 a.brand{min-height:44px;box-sizing:border-box;}
 .lc-go,.nearme{min-height:44px;}
+
+/* Exits layer (11/16) */
+.cm-exit{background:none;border:0;}
+.cm-exit span{position:absolute;left:0;top:0;transform:translate(-50%,-140%);display:block;padding:1px 5px;background:#1d4ed8;color:#fff;border:1.5px solid #fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.35);font:700 10.5px/1.3 system-ui,-apple-system,sans-serif;white-space:nowrap;cursor:pointer;}
