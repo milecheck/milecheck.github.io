@@ -11,15 +11,14 @@ btn.addEventListener("click",function(){
  st.textContent="Finding your location…";out.hidden=true;none.hidden=true;
  navigator.geolocation.getCurrentPosition(function(p){
   var la=p.coords.latitude,lo=p.coords.longitude,hd=p.coords.heading,sp=p.coords.speed;
-  var codes=Object.keys(B).filter(function(k){var b=B[k];return la>=b[0]-.1&&la<=b[1]+.1&&lo>=b[2]-.1&&lo<=b[3]+.1;});
+  var codes=Object.keys(B).filter(function(k){var b=B[k];return la>=b[0]-.2&&la<=b[1]+.2&&lo>=b[2]-.3&&lo<=b[3]+.3;});
   if(!codes.length){st.textContent="";none.hidden=false;return;}
   Promise.all(codes.map(function(c){return fetch("/data/exits/"+c+".json").then(function(r){return r.json();}).then(function(j){return (j.exits||j).map(function(x){x.st=c;return x;});}).catch(function(){return [];});})).then(function(l){
-   var all=[].concat.apply([],l).map(function(x){x.mi=d(la,lo,x.la,x.lo);x.g=brg(la,lo,x.la,x.lo);return x;}).filter(function(x){return x.mi<=10;}).sort(function(a,b){return a.mi-b.mi;}).slice(0,3);
+   var all=[].concat.apply([],l).map(function(x){x.mi=d(la,lo,x.la,x.lo);x.g=brg(la,lo,x.la,x.lo);return x;}).filter(function(x){return isFinite(x.mi)&&x.mi<=10;}).sort(function(a,b){return a.mi-b.mi;}).slice(0,3);
    st.textContent="";
    if(!all.length){none.hidden=false;return;}
-   var moving=hd!=null&&!isNaN(hd)&&sp!=null&&sp>2;
-   out.innerHTML=all.map(function(x,i){var ahead=moving&&Math.abs(((x.g-hd+540)%360)-180)<90?" · ahead of you":"";
-    return "<li"+(i?"":" class=\"exit-top\"")+"><span class=\"exit-sign\">EXIT<b>"+esc(x.x)+"</b></span><span class=\"exit-text\"><b>"+esc(x.r)+(x.n?" · "+esc(x.n):"")+"</b><br>"+(x.mi<0.1?"Right here":x.mi.toFixed(1)+" mi "+cmp(x.g)+" of you")+ahead+"</span></li>";}).join("");
+      out.innerHTML=all.map(function(x,i){
+    return "<li"+(i?"":" class=\"exit-top\"")+"><span class=\"exit-sign\">EXIT<b>"+esc(x.x)+"</b></span><span class=\"exit-text\"><b>"+esc(x.r)+(x.n?" · "+esc(x.n):"")+"</b><br>"+(x.mi<0.1?"Right here":x.mi.toFixed(1)+" mi "+cmp(x.g)+" of you")+"</span></li>";}).join("");
    out.hidden=false;
   });
  },function(){st.textContent="Location was blocked or timed out. Allow location for this site and tap again.";},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
