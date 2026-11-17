@@ -123,7 +123,7 @@ fold(`How a road event gets to your software`, `
 <p style="font-size:14px;color:#4a544f;margin:6px 0 0">Weather closures follow the same 20-minute rule from when the agency observes them. Construction closures run 10 minutes in metro areas and 20 outside.</p>`) +
 fold(`What each column means`, `
 <ul style="margin:8px 0 0;padding-left:22px;list-style:disc;line-height:1.6">
-<li><strong>Alerts now.</strong> Records the API returns for that place at the read time, after we drop records with no numbered highway.</li>
+<li><strong>Alerts now.</strong> How many alerts that state or province had when we took the snapshot. Alerts on local streets and other roads without a highway number are left out.</li>
 <li><strong>Newest record.</strong> How long ago the agency last touched any one record. A quiet road can show an old number while the feed is fine, so read it as a hint, not a delay.</li>
 <li><strong>We read the agency.</strong> The interval we have set in the Worker. It is how often we check, not how fast the agency posts.</li>
 </ul>`) +
