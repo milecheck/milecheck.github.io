@@ -76,5 +76,4 @@ export const OTHER = [
   ['City cameras (Toronto)','City of Toronto','https://open.toronto.ca/dataset/traffic-cameras/','Camera images on the website. Contains information licensed under the Open Government Licence – Toronto.'],
   ['City cameras (Calgary)','City of Calgary','https://data.calgary.ca/Transportation-Transit/Traffic-Cameras/k7p9-kppz','Camera images on the website. Contains information licensed under the Open Government Licence – City of Calgary.'],
   ['City cameras (Vancouver)','City of Vancouver','https://opendata.vancouver.ca/explore/dataset/web-cam-url-links/','Camera locations on the website, each linking to the City\'s own view. Contains information licensed under the Open Government Licence – Vancouver.'],
-  ['Mile marker positions (fallback)','Federal Highway Administration, HPMS','https://www.fhwa.dot.gov/policyinformation/hpms.cfm','Used where a state publishes no mile marker points of its own.'],
 ];
