@@ -68,7 +68,7 @@ ${ga}
   <link rel="stylesheet" href="../style.css">
   ${ld}
   <style>
-    .art{max-width:900px;margin:0 auto;padding:34px 20px 40px;}
+    .art{max-width:900px;margin:0 auto;padding:34px 20px 40px;}.mc-qlinks{max-width:900px!important;}
     .art .eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin-bottom:6px;}
     .art h1{font-size:clamp(28px,5vw,42px);line-height:1.12;margin:0 0 14px;}
     .art .lede{font-size:18px;line-height:1.6;color:#3a444d;margin:0 0 16px;max-width:760px;}
