@@ -91,7 +91,18 @@
     <div class="eyebrow"><a href="/guides/" style="color:inherit">Highway guides</a> · Location help</div>
     <h1>What exit am I near?</h1>
     <p class="page-dates" style="font-size:.85em;opacity:.7;margin:.25em 0 1em">Published <time datetime="2026-11-05">November 5, 2026</time></p>
-    <p class="lede">In most states, an interstate exit is numbered by the mile marker where it sits. Exit 47 is near mile 47. So the nearest mile marker helps you estimate the exit numbers ahead and behind you. It doesn't name a specific exit. Use a map or your state's 511 map to confirm one.</p>
+<style>.exit-tool{margin:8px 0 22px}.exit-tool button{min-height:48px;padding:12px 22px;border:0;border-radius:10px;background:#0f7a4f;color:#fff;font:700 16px Inter,sans-serif;cursor:pointer}.exit-tool .note{font-size:14px;color:#5b6670;margin:8px 0}#exit-result{list-style:none;padding:0;margin:14px 0;display:grid;gap:10px}#exit-result li{display:flex;gap:12px;align-items:center;border:1px solid #E4EAE6;border-radius:12px;padding:10px 12px;background:#fff}#exit-result .exit-top{border-color:#0f7a4f}.exit-sign{flex:0 0 auto;min-width:64px;text-align:center;background:#0f6b3f;color:#fff;border:2px solid #fff;outline:1px solid #0f6b3f;border-radius:6px;padding:4px 6px;font:700 11px Inter,sans-serif;letter-spacing:.06em}.exit-sign b{display:block;font-size:22px;letter-spacing:0}.exit-text{font-size:15px;line-height:1.4;overflow-wrap:anywhere}.exit-tool .app{display:block;margin-top:12px;font-weight:700;color:#0f7a4f}</style>
+    <section class="exit-tool" aria-label="Find the nearest exit">
+      <button id="exit-locate" type="button">Use my location</button>
+      <p class="note">Shows the closest recorded exits within 10 miles. Your coordinates stay in this browser.</p>
+      <p id="exit-status" role="status" aria-live="polite"></p>
+      <ul id="exit-result" aria-live="polite" hidden></ul>
+      <p id="exit-none" hidden>No recorded exit within 10 miles. Exit numbers are loaded for highways in 41 states so far. DE, NH, VT, NY, CT, ME, CA, AK and HI are not included yet. <a href="/what-mile-marker-am-i-at/">Find your nearest mile marker instead</a>.</p>
+      <p class="note">Exit numbers come from state DOT data and Census ramp records. Trust the sign on the road if it differs. <a href="/maps/mile-markers/">See exits on the map</a></p>
+      <a class="app" href="/get/?utm_source=site&amp;utm_medium=finder&amp;utm_campaign=what-exit-am-i-near">The MileCheck app shows your next exit as you drive, without cell service. Get the app</a>
+    </section>
+    <script src="/assets/nearest-exit.js?v=20261117" defer></script>
+    <p class="lede">In most states, an interstate exit is numbered by the mile marker where it sits. Exit 47 is near mile 47. So the nearest mile marker also tells you roughly which exit numbers are ahead and behind you.</p>
 
     <h2>How to work it out</h2>
     <p>Read the nearest mile marker. If you are driving the way the numbers go up (usually north or east), the next exit has a higher number. Driving the other way, it has a lower one. Exit 47 to exit 52 is about five miles.</p>
