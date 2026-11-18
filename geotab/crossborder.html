@@ -60,6 +60,19 @@
   .mc-map .brg.up{background:var(--crit);}
   .mc-map .cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:rgba(255,255,255,.94);padding:5px 10px;font-size:11.5px;color:var(--ink);}
   .mc-map .cap b{font-weight:700;}
+  .xm{position:relative;height:340px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#e8e6df;margin-bottom:12px;}
+  .xm .tile{position:absolute;width:256px;height:256px;}
+  .xm .me{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#1a6fd6;border:3px solid #fff;box-shadow:0 0 0 5px rgba(26,111,214,.25);z-index:3;}
+  .xm .pin{position:absolute;transform:translate(-50%,-100%);z-index:2;display:grid;justify-items:center;}
+  .xm .pin .lb{background:#fff;border:1px solid #9aa6a0;border-radius:5px;padding:3px 7px;font-size:11.5px;line-height:1.3;color:#17211c;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .xm .pin .lb b{display:block;font-size:12px;}
+  .xm .pin .lb .t{font-variant-numeric:tabular-nums;}
+  .xm .pin .lb .t.best{color:#0b6b3a;font-weight:700;}
+  .xm .pin .st{width:2px;height:10px;background:#17211c;}
+  .xm .pin .dt{width:10px;height:10px;border-radius:50%;background:#0f3d2b;border:2px solid #fff;margin-top:-1px;}
+  .xm .pin.closed .lb{color:#8a1c1c;}
+  .xm .attr{position:absolute;right:4px;top:3px;font-size:9.5px;color:#333;background:rgba(255,255,255,.8);padding:0 4px;border-radius:2px;z-index:4;}
+  .xm .cap{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);padding:5px 10px;font-size:11.5px;color:#17211c;z-index:4;}
   .mc-map .attr{position:absolute;right:4px;top:3px;font-size:9.5px;color:#333;background:rgba(255,255,255,.8);padding:0 4px;border-radius:2px;}
 
   .mc-section-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:1.1px;font-weight:700;margin:0 0 6px 1px;}
@@ -418,6 +431,41 @@
     if(l.delayMinutes!=null) return waitTile(label, l.delayMinutes, l.lanesOpen!=null?(l.lanesOpen+(l.lanesOpen===1?" lane open":" lanes open")):"");
     return waitTile(label, null, l.status||"No data");
   }
+  // Crossings map: the vehicle and the nearest crossings, each pin labelled with its commercial waits.
+  function merc(lat,lon,z){ var n=Math.pow(2,z)*256, r=lat*Math.PI/180;
+    return {x:(lon+180)/360*n, y:(1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*n}; }
+  function crossingsMapHtml(h, list){
+    var pts=list.filter(function(r){return r.lat!=null&&r.lon!=null;});
+    if(h.lat==null||!pts.length) return '';
+    var all=pts.concat([{lat:h.lat,lon:h.lon}]);
+    var minLa=Math.min.apply(null,all.map(function(p){return p.lat;})), maxLa=Math.max.apply(null,all.map(function(p){return p.lat;}));
+    var minLo=Math.min.apply(null,all.map(function(p){return p.lon;})), maxLo=Math.max.apply(null,all.map(function(p){return p.lon;}));
+    var W=Math.max(320,Math.min(1200,(el("mc-content")&&el("mc-content").clientWidth)||900)), H=340, z=12;
+    for(;z>4;z--){ var a=merc(maxLa,minLo,z), b=merc(minLa,maxLo,z); if(b.x-a.x<=W-260&&b.y-a.y<=H-120) break; }
+    var c1=merc(maxLa,minLo,z), c2=merc(minLa,maxLo,z), cx=(c1.x+c2.x)/2, cy=(c1.y+c2.y)/2-10;
+    var t='', tx0=Math.floor((cx-W/2-256)/256), tx1=Math.floor((cx+W/2+256)/256), ty0=Math.floor((cy-H/2-256)/256), ty1=Math.floor((cy+H/2+256)/256);
+    for(var x=tx0;x<=tx1;x++) for(var y=ty0;y<=ty1;y++)
+      t+='<img class="tile" alt="" src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/'+z+'/'+y+'/'+x+'" style="left:calc(50% + '+Math.round(x*256-cx)+'px);top:calc(50% + '+Math.round(y*256-cy)+'px)">';
+    function w(v){ return v==null?'–':(v+' min'); }
+    var best=null;
+    pts.forEach(function(r){ var l=r.commercial&&r.commercial.standard; var v=(l&&l.available&&l.delayMinutes!=null)?l.delayMinutes:null;
+      r._cus=v; r._cca=r.intoCanada?r.intoCanada.commercial:null; });
+    var placed=[];
+    pts.slice().sort(function(a,b){return merc(a.lat,a.lon,z).x-merc(b.lat,b.lon,z).x;}).forEach(function(r){
+      var px=merc(r.lat,r.lon,z).x, lv=0;
+      while(placed.some(function(q){return q.lv===lv&&Math.abs(q.x-px)<190;})) lv++;
+      placed.push({x:px,lv:lv}); r._lv=lv; });
+    pts.forEach(function(r){ var p=merc(r.lat,r.lon,z), closed=/closed/i.test(r.portStatus||"");
+      var name=r.crossingName||r.portName;
+      t+='<span class="pin'+(closed?' closed':'')+'" style="left:calc(50% + '+Math.round(p.x-cx)+'px);top:calc(50% + '+Math.round(p.y-cy)+'px)"><span class="lb"><b>'+esc(name)+'</b>'
+        +(closed?'Closed now':(r._cus==null&&r._cca==null?'No truck lanes':'<span class="t">Trucks into US '+w(r._cus)+'</span><br><span class="t">Trucks into Canada '+w(r._cca)+'</span>'))
+        +'</span><span class="st" style="height:'+(10+r._lv*56)+'px"></span><span class="dt"></span></span>';
+    });
+    var me=merc(h.lat,h.lon,z);
+    t+='<span class="me" style="left:calc(50% + '+Math.round(me.x-cx)+'px);top:calc(50% + '+Math.round(me.y-cy)+'px)"></span>';
+    return '<div class="xm" role="img" aria-label="Map of the vehicle and the nearest border crossings with commercial waits">'+t
+      +'<span class="attr">Esri</span><div class="cap">Blue dot is the vehicle. Commercial lane waits from CBP (into the US) and CBSA (into Canada).</div></div>';
+  }
   function render(list, meta, isLive, pos, errMsg, hero){
     el("mc-live").classList.toggle("on", !!isLive);
     el("mc-demo").classList.toggle("on", !isLive);
@@ -426,6 +474,7 @@
     if(list.length){ h.route=h.route||""; }
     var html='<div class="mc-top">'+signHtml(h)+mapHtml(h)+'</div>';
     html+='<div class="mc-section-label">Nearest '+list.length+' crossings by straight-line distance &middot; wait times</div>';
+    html+=crossingsMapHtml(h, list);
     if(meta&&meta.waitsUnavailable) html+='<div class="mc-empty" style="margin-bottom:8px">CBP wait times are unavailable right now. Crossing locations below; no waits shown.</div>';
     if(!list.length) html+='<div class="mc-empty">No crossing data could be loaded.</div>';
     html+='<div class="xc-grid">'+list.map(function(r,idx){
