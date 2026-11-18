@@ -55,6 +55,16 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+/* Links inside body text must look like links (Leah 11/17, recurring). Zero-specificity
+   :where() so any page's own link styling still wins; only plain, class-less links in
+   running text change. Buttons, nav, footer and hub lists carry classes or sit outside. */
+:where(main, article) :where(p, li, td, dd, blockquote, figcaption) a:where(:not([class]):not([role="button"])) {
+  color: var(--sign);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+:where(main, article) :where(nav, footer, .mc-hub-g, .btns, .ds-btns) a:where(:not([class])) { text-decoration: none; color: inherit; }
 a:hover { opacity: 0.75; transition: opacity 0.15s; }
 
 ul { list-style: none; }

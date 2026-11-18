@@ -26,3 +26,15 @@
   .mc-site-header[data-nav-ready] .mc-primary-nav{position:fixed;top:66px;left:0;right:0;z-index:1601;max-height:calc(100vh - 70px);max-height:calc(100dvh - 70px);overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;border-top:1px solid rgba(255,255,255,.12);box-shadow:0 16px 36px rgba(0,0,0,.35);}
   .mc-site-header[data-nav-ready][data-nav-open="false"] .mc-primary-nav{display:none;}
 }
+
+/* Body-text links must look like links (Leah 11/17, recurring on iPhone). Underline is
+   forced for class-less links in running text; colour stays whatever the page set, and
+   falls back to the brand green only where the page left it at "inherit" (style.css). */
+:where(main, article) :where(p, li, td, dd, blockquote, figcaption) a:not([class]):not([role="button"]) {
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 2px;
+}
+:where(main, article) :where(nav, footer, .mc-hub-g, .btns, .ds-btns, .api-hero, .eyebrow) a:not([class]) {
+  text-decoration: none !important;
+}
