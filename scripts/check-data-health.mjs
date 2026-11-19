@@ -16,6 +16,8 @@ const CAMERA_DROP = 0.4;          // fail if cameras fall more than 40% below ba
 const ALERT_MIN_BASELINE = 10;    // only fail an empty alert feed when the baseline had at least this many
 const STALE_HOURS = 6;            // fetched_at older than this = stale feed
 const FORWARD_WINDOW = new Set(['HI']); // feed shows only the next 48h, so a Friday night run sees a weekend-only count (HI 41 vs 203, 10/30): alerts compare to same weekday only
+// AZ alerts are only crashes and closures on numbered highways (2,700 roadwork posts are conditions, city-street CAD calls are dropped by design), so the count follows traffic, not the feed's health: 34 live vs a 51 Thursday average on 11/19 with every upstream event accounted for. A drop warns, never fails; an empty feed still fails.
+const INCIDENT_ONLY = new Set(['AZ']);
 const AVG_DROP = 0.3;             // fail if a count falls more than 30% below its 7-day average (alerts: same-weekday average, two runs in a row)
 const AVG_MIN = 20;               // ...only when that average is at least this (small feeds swing too much)
 const AVG_MIN_DAYS = 3;           // ...and only once there are this many days of history
@@ -205,6 +207,7 @@ if (pastDays.length >= AVG_MIN_DAYS) {
       if (!(avg >= AVG_MIN && p[kind] < avg * (1 - AVG_DROP))) continue;
       const label = days === sameDow ? `${vals.length}-${['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dow]} average` : `${vals.length}-day average`;
       const msg = `${st}: ${kind} at ${p[kind]}, over ${AVG_DROP * 100}% below the ${label} of ${Math.round(avg)}`;
+      if (kind === 'alerts' && INCIDENT_ONLY.has(st)) { warnings.push(`${msg} (crash/closure-only feed, warning only)`); continue; }
       if (kind === 'alerts') {
         lowAlerts.add(st);
         if (lastDay && history[lastDay]?.[st]?.alertsLow) flag(`${st}:alerts`, `${msg}, two runs in a row`);
