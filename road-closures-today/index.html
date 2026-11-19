@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Which roads are closed today? | MileCheck</title>
+  <meta name="description" content="Road closures, lane and ramp closures and roadwork by state on one map: today, tonight, this weekend or scheduled. Times from each state DOT feed.">
+  <link rel="canonical" href="https://milecheckapp.com/road-closures-today/">
+  <meta property="og:title" content="Which roads are closed today? | MileCheck">
+  <meta property="og:description" content="Road closures, lane and ramp closures and roadwork by state on one map: today, tonight, this weekend or scheduled. Times from each state DOT feed.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/road-closures-today/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Which roads are closed today? | MileCheck">
+  <meta name="twitter:description" content="Road closures, lane and ramp closures and roadwork by state on one map: today, tonight, this weekend or scheduled. Times from each state DOT feed.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Which roads are closed today?","url":"https://milecheckapp.com/road-closures-today/","description":"Road closures, lane and ramp closures and roadwork by state on one map: today, tonight, this weekend or scheduled. Times from each state DOT feed.","isPartOf":{"@id":"https://milecheckapp.com/#website"},"@id":"https://milecheckapp.com/road-closures-today/#webpage"}</script>
+  <style>
+    .wk-wrap{max-width:1160px;margin:0 auto;padding:26px 16px 10px;}
+    .wk-eyebrow{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0f7a4f;margin:0 0 6px;}
+    .wk-wrap h1{font-size:clamp(26px,4.4vw,40px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 10px;}
+    .wk-lede{font-size:16px;line-height:1.6;color:#3a444d;max-width:78ch;margin:0 0 14px;}
+    .wk-lede a,.wk-body a{color:#0f7a4f;font-weight:700;}
+    .wk-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px;}
+    .wk-ctl select{min-height:44px;font:600 15px Inter,sans-serif;padding:0 12px;border:1px solid #cfd5dc;border-radius:10px;background:#fff;max-width:100%;}
+    .wk-chips{display:flex;flex-wrap:wrap;gap:6px;}
+    .wk-chip{min-height:44px;padding:0 14px;border:1px solid #cfd5dc;border-radius:22px;background:#fff;font:600 14px Inter,sans-serif;cursor:pointer;color:#0E1116;}
+    .wk-chip[aria-pressed="true"]{background:#e8780c;border-color:#e8780c;color:#000;}
+    .wk-win{font-size:14px;color:#5b6670;margin:0 0 10px;}
+    .wk-live{display:grid;grid-template-columns:1.4fr .6fr;gap:16px;}
+    @media(max-width:860px){.wk-live{grid-template-columns:1fr;}}
+    .wk-mapbox{position:relative;border:1px solid #E5E5E5;border-radius:14px;overflow:hidden;height:56vh;min-height:320px;background:#eef0e9;}
+    #wkmap{position:absolute;inset:0;}
+    .wk-status{position:absolute;top:12px;left:56px;right:12px;z-index:800;background:rgba(255,255,255,.95);border:1px solid #E5E5E5;border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;}
+    .wk-status.err{color:#b4231a;} .wk-status.ok{display:none;}
+    .wk-dot{display:block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+    .wk-list{border:1px solid #E5E5E5;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;max-height:56vh;}
+    @media(max-width:860px){.wk-list{max-height:none;} .wk-rows{max-height:60vh;}}
+    .wk-lh{padding:11px 14px;border-bottom:1px solid #E5E5E5;font-weight:800;font-size:15px;}
+    .wk-lh span{color:#8A939B;font-weight:600;font-size:14px;}
+    .wk-rows{overflow-y:auto;}
+    .wk-row{padding:11px 14px;border-bottom:1px solid #F0F0EE;cursor:pointer;font-size:14px;}
+    .wk-row:hover{background:#F7F5EE;}
+    .wk-row .t{display:flex;justify-content:space-between;gap:8px;font-weight:700;}
+    .wk-row .kd{font-size:14px;white-space:nowrap;}
+    .wk-row .sub{color:#4a545e;margin-top:3px;line-height:1.45;overflow-wrap:anywhere;}
+    .wk-row .when{color:#0E1116;font-weight:600;}
+    .wk-empty{padding:16px 14px;color:#4a545e;font-size:14px;line-height:1.5;}
+    .wk-empty b{display:block;color:#0E1116;margin-bottom:4px;}
+    .wk-body{max-width:78ch;line-height:1.6;font-size:16px;color:#3a444d;}
+    .wk-body h2{font-size:22px;color:#0E1116;margin:28px 0 8px;}
+    .wk-body ul{padding-left:20px;}
+    .leaflet-container{font-family:Inter,sans-serif;}
+  </style>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261118ca">
+  <script src="/assets/map-kit.js?v=20261118ca" defer></script>
+<style data-seo-img>:where(img[width][height]){height:auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
+<!-- mv:start --><script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/d74ff19f-a5bf-47fa-a630-0a438f90c11a.js"></script><!-- mv:end -->
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
+  <script src="/assets/site-nav.js?v=20261102-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261102-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/pricing/" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+  <main class="wk-wrap journey-content"><!-- mvb:start --><div id="ad-management-config-settings" data-blocklist-adhesion-mobile="1" data-blocklist-universal-player-mobile="1" data-blocklist-universal-player-desktop="1"></div><!-- mvb:end -->
+    <p class="wk-eyebrow">Road closures</p>
+    <h1>Which roads are closed today?</h1>
+    <p class="wk-lede">Closures and roadwork with a start and end time from the state DOT. Pick a state, then today, overnight, this weekend or scheduled. Long projects that run more than 60 days are left out. For crashes and every live report, use the <a href="/closures/" target="_blank" rel="noopener">US closures map</a>.</p>
+    <div class="wk-ctl">
+      <label for="wkState" style="font-weight:700;font-size:15px">State</label>
+      <select id="wkState" aria-label="State"></select>
+      <div class="wk-chips" role="group" aria-label="When">
+        <button type="button" class="wk-chip wk-t" data-t="today" aria-pressed="true">Today</button>
+        <button type="button" class="wk-chip wk-t" data-t="tonight" aria-pressed="false">Night</button>
+        <button type="button" class="wk-chip wk-t" data-t="weekend" aria-pressed="false">Weekend</button>
+        <button type="button" class="wk-chip wk-t" data-t="sched" aria-pressed="false">Scheduled</button>
+      </div>
+      <div class="wk-chips" role="group" aria-label="Closure type">
+        <button type="button" class="wk-chip wk-k" data-k="all" aria-pressed="true">All</button>
+        <button type="button" class="wk-chip wk-k" data-k="closure" aria-pressed="false">Full closure</button>
+        <button type="button" class="wk-chip wk-k" data-k="lane" aria-pressed="false">Lanes</button>
+        <button type="button" class="wk-chip wk-k" data-k="ramp" aria-pressed="false">Ramps</button>
+        <button type="button" class="wk-chip wk-k" data-k="work" aria-pressed="false">Roadwork</button>
+      </div>
+    </div>
+    <p class="wk-win" id="wkWin"></p>
+    <div class="wk-live">
+      <div class="wk-mapbox"><span class="wk-status" id="wkStatus">Loading the state feed&hellip;</span><div id="wkmap" aria-label="Map of road closures"></div></div>
+      <div class="wk-list">
+        <div class="wk-lh">Closures <span id="wkCount"></span></div>
+        <div class="wk-rows" id="wkRows"><div class="wk-empty">Loading&hellip;</div></div>
+      </div>
+    </div>
+    <section class="wk-body">
+      <h2>How are the filters decided?</h2>
+      <p>Every report needs a start and an end time from the DOT, and a span of 60 days or less. Today means it is active now or starts before midnight. Night means it runs roughly 7 PM to 6 AM, or the DOT calls it nightly or overnight. Weekend means it overlaps Friday 12:00 AM to Sunday 11:59 PM. Scheduled means it starts later. All times are the state's own time zone. Times come straight from the feed. Crews finish early and storms cancel work, so check the DOT before you leave.</p>
+      <h2>Why is my state empty?</h2>
+      <p>Some state feeds publish when a closure starts but not when it ends, and a few publish neither. The page says so when that is the case. Those closures still show on the live <a href="/road-conditions/" target="_blank" rel="noopener">road conditions page</a> for each state.</p>
+      <h2>More maps</h2>
+      <ul>
+        <li><a href="/closures/" target="_blank" rel="noopener">US closures map</a></li>
+        <li><a href="/road-conditions/" target="_blank" rel="noopener">Road conditions by state</a></li>
+        <li><a href="/passes/" target="_blank" rel="noopener">Mountain passes</a></li>
+        <li><a href="/cameras/" target="_blank" rel="noopener">Highway cameras</a></li>
+      </ul>
+    </section>
+  </main>
+
+<!-- footer-hub:start -->
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:flex;align-items:center;min-height:44px;font-size:14.5px;line-height:1.35;padding:0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/washington/">Washington road conditions</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+          <li><a href="/how-do-i-tell-911-where-i-am-on-the-highway/">How to tell 911 where you are</a></li>
+          <li><a href="/what-should-i-do-if-i-break-down-on-the-interstate/">What to do if you break down</a></li>
+          <li><a href="/why-is-the-highway-closed/">Why is the highway closed?</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="/assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=road-closures-today&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Droad-closures-today" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="/closures/">US closures map</a></li>
+            <li><a href="/road-conditions/">Road conditions by state</a></li>
+            <li><a href="/cameras/">Live cameras</a></li>
+            <li><a href="/maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Road data: state DOTs via MileCheck. Always follow posted signs and official detours.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+<script>(function(){var t=document.querySelector(".nav-toggle"),n=document.querySelector(".primary-nav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});document.addEventListener("click",function(e){if(!e.target.closest(".header-inner"))n.classList.remove("open");})}})();</script>
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2507175');
+  </script>
+  <!-- End MailerLite Universal -->
+<script>
+(function(){
+var WORKER="https://api.milecheckapp.com";
+var ST={AL:['Alabama','America/Chicago'],AK:['Alaska','America/Anchorage'],AZ:['Arizona','America/Phoenix'],AR:['Arkansas','America/Chicago'],CA:['California','America/Los_Angeles'],CO:['Colorado','America/Denver'],CT:['Connecticut','America/New_York'],DE:['Delaware','America/New_York'],FL:['Florida','America/New_York'],GA:['Georgia','America/New_York'],HI:['Hawaii','Pacific/Honolulu'],ID:['Idaho','America/Boise'],IL:['Illinois','America/Chicago'],IN:['Indiana','America/Indiana/Indianapolis'],IA:['Iowa','America/Chicago'],KS:['Kansas','America/Chicago'],KY:['Kentucky','America/New_York'],LA:['Louisiana','America/Chicago'],ME:['Maine','America/New_York'],MD:['Maryland','America/New_York'],MA:['Massachusetts','America/New_York'],MI:['Michigan','America/Detroit'],MN:['Minnesota','America/Chicago'],MS:['Mississippi','America/Chicago'],MO:['Missouri','America/Chicago'],MT:['Montana','America/Denver'],NE:['Nebraska','America/Chicago'],NV:['Nevada','America/Los_Angeles'],NH:['New Hampshire','America/New_York'],NJ:['New Jersey','America/New_York'],NM:['New Mexico','America/Denver'],NY:['New York','America/New_York'],NC:['North Carolina','America/New_York'],ND:['North Dakota','America/Chicago'],OH:['Ohio','America/New_York'],OK:['Oklahoma','America/Chicago'],OR:['Oregon','America/Los_Angeles'],PA:['Pennsylvania','America/New_York'],RI:['Rhode Island','America/New_York'],SC:['South Carolina','America/New_York'],SD:['South Dakota','America/Chicago'],TN:['Tennessee','America/Chicago'],TX:['Texas','America/Chicago'],UT:['Utah','America/Denver'],VT:['Vermont','America/New_York'],VA:['Virginia','America/New_York'],WA:['Washington','America/Los_Angeles'],WV:['West Virginia','America/New_York'],WI:['Wisconsin','America/Chicago'],WY:['Wyoming','America/Denver']};
+var COLOR={closure:'#cf3320',lane:'#e8780c',ramp:'#7C3AED',work:'#F59E0B'};
+var LABEL={closure:'Full closure',lane:'Lanes',ramp:'Ramp',work:'Roadwork'};
+var sel=document.getElementById('wkState'),rows=document.getElementById('wkRows'),count=document.getElementById('wkCount'),status=document.getElementById('wkStatus'),win=document.getElementById('wkWin');
+Object.keys(ST).sort(function(a,b){return ST[a][0]<ST[b][0]?-1:1;}).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=ST[k][0];sel.appendChild(o);});
+function guessState(){try{var q=new URLSearchParams(location.search).get('state');if(q&&ST[q.toUpperCase()])return q.toUpperCase();var s=localStorage.getItem('wkState');if(s&&ST[s])return s;}catch(e){}return 'WA';}
+var cur=guessState(),filt='all',when='today',data=[],markers={};
+sel.value=cur;
+var map=window.map=L.map('wkmap',{gestureHandling:('ontouchstart' in window),scrollWheelZoom:true});
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · state DOT feeds via MileCheck',maxZoom:14}).addTo(map);
+map.setView([39.5,-98.5],4);
+var layer=L.layerGroup().addTo(map);
+window.mcMapOptions={layers:[{label:'Road closures',color:'#e8780c',layer:layer}]};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function clean(t,n){var x=(t||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/g,' ').replace(/\s+/g,' ').trim();n=n||200;return x.length<=n?x:x.slice(0,n).replace(/\s+\S*$/,'')+'…';}
+function toDate(v){if(v==null||v==='')return null;var d=typeof v==='number'?new Date(v<1e12?v*1000:v):new Date(v);return isNaN(d)?null:d;}
+// Offset (ms) of a time zone at a given instant: wall clock in tz minus UTC.
+function tzOff(tz,d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(d).forEach(function(x){p[x.type]=x.value;});return Date.UTC(+p.year,p.month-1,+p.day,+p.hour,+p.minute,+p.second)-d.getTime();}
+function localMidnight(tz,y,m,day){var g=Date.UTC(y,m,day);var t=g-tzOff(tz,new Date(g));return t-(tzOff(tz,new Date(t))-tzOff(tz,new Date(g)));}
+// This coming Friday 00:00 to Sunday 23:59:59 in the state's time; on Fri to Sun, the current weekend.
+function weekend(tz){var now=new Date(),w=new Date(now.getTime()+tzOff(tz,now));var dow=w.getUTCDay(),add=dow===5?0:dow===6?-1:dow===0?-2:5-dow;var y=w.getUTCFullYear(),m=w.getUTCMonth(),d=w.getUTCDate()+add;return {from:localMidnight(tz,y,m,d),to:localMidnight(tz,y,m,d+3)-1};}
+function kind(r){var t=String(r['event-type-id']||'').toUpperCase(),txt=(clean(r.headline,2000)+' '+clean(r['impact-desc'],2000)+' '+clean(r.description,2000)).toLowerCase();
+  var neg=/\b(not|no|without|never)\s+(?:(?:yet|been|be|longer|full|complete|road|lane|highway|any)\s+)*clos(?:ed|ure|ures)\b|\bopen to traffic\b/.test(txt);
+  var closed=!neg&&/\bclos(ed|ure|ures|ing)\b/.test(txt);
+  if(closed&&/\b(ramp|on-ramp|off-ramp|exit|interchange)\b/.test(txt))return 'ramp';
+  if((closed||t==='CL')&&(/\blanes?\b|\bshoulder\b|\balternat|\bflagg/.test(txt)))return 'lane';
+  if(/\balternat(e|ing) (traffic|lanes?|one-way)|\bflagger|\bsingle lane|\bone lane\b|\blane restriction/.test(txt))return 'lane';
+  if((t==='CL'&&!neg)||(closed&&/\b(road|roadway|highway|route|freeway|interstate|bridge|tunnel|pass|street)\b/.test(txt)))return 'closure';
+  if(t==='RW'||/\b(construction|roadwork|road work|paving|maintenance|work zone)\b/.test(txt))return 'work';
+  return null;}
+function hourIn(tz,d){return +new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',hour:'2-digit'}).format(d);}
+function endOfToday(tz){var n=new Date(),w=new Date(n.getTime()+tzOff(tz,n));return localMidnight(tz,w.getUTCFullYear(),w.getUTCMonth(),w.getUTCDate()+1)-1;}
+function setWin(){var tz=ST[cur][1],w=weekend(tz),o={weekday:'short',month:'short',day:'numeric',timeZone:tz},n=ST[cur][0];
+  win.textContent=when==='weekend'?'Weekend shown: '+new Date(w.from).toLocaleDateString([],o)+' to '+new Date(w.to).toLocaleDateString([],o)+', '+n+' time.':when==='today'?'Active now or starting before midnight, '+n+' time.':when==='tonight'?'Overnight work, roughly 7 PM to 6 AM, or reports the DOT marks nightly or overnight.':'Starting later, within the next 60 days.';}
+var TL={today:'today',tonight:'overnight',weekend:'this weekend',sched:'scheduled in the next 60 days'};
+function fmt(d,tz){return d.toLocaleString([], {timeZone:tz,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}
+function dirN(d){d=String(d||'').trim().toLowerCase();var m=d.match(/^(north|south|east|west)/);if(m)return m[1][0].toUpperCase()+'B';return /^(nb|sb|eb|wb)$/.test(d)?d.toUpperCase():'';}
+function render(){
+  var tz=ST[cur][1],list=data.filter(function(a){return (filt==='all'||a.k===filt)&&a[when];});
+  layer.clearLayers();markers={};var pts=[];
+  list.forEach(function(a,i){if(!isFinite(a.lat)||!isFinite(a.lon)||!a.lat)return;var m=L.marker([a.lat,a.lon],{icon:L.divIcon({className:'',html:'<span class="wk-dot" style="background:'+COLOR[a.k]+'"></span>',iconSize:[14,14],iconAnchor:[7,7]})});
+    m.bindPopup('<div class="fpop"><div class="fp-nm">'+esc(a.route?a.route+(a.mp?' · MP '+a.mp:''):LABEL[a.k])+'</div><div class="fp-st">'+LABEL[a.k]+(a.dir?' · '+a.dir:'')+'</div><div class="fp-row"><b>'+esc(fmt(a.s,tz))+' to '+esc(fmt(a.e,tz))+'</b></div><div class="fp-row">'+esc(a.full)+'</div></div>',{maxWidth:300,maxHeight:260});
+    layer.addLayer(m);markers[i]=m;pts.push([a.lat,a.lon]);});
+  if(pts.length)map.fitBounds(pts,{padding:[30,30],maxZoom:10});
+  status.className='wk-status ok';
+  count.textContent='· '+list.length+(list.length===1?' report':' reports');
+  if(!list.length){rows.innerHTML=data.noTimes?'<div class="wk-empty"><b>'+esc(ST[cur][0])+'\'s feed doesn\'t publish planned start and end times.</b>So there is no way to tell which closures fall on the weekend. The live <a href="/road-conditions/" target="_blank" rel="noopener">road conditions page</a> still shows everything the feed has.</div>':'<div class="wk-empty"><b>Nothing of this type '+(when==='weekend'?'is scheduled for the weekend':'is listed '+TL[when])+' in '+esc(ST[cur][0])+'.</b>That covers reports with a start and end time from the state DOT. Check the DOT before you leave.</div>';return;}
+  rows.innerHTML=list.slice(0,300).map(function(a,i){return '<div class="wk-row" data-i="'+i+'"><div class="t"><span>'+esc(a.route||'Road')+(a.mp?' · MP '+esc(a.mp):'')+(a.dir?' '+a.dir:'')+'</span><span class="kd" style="color:'+COLOR[a.k]+'">'+LABEL[a.k]+'</span></div><div class="sub"><span class="when">'+esc(fmt(a.s,tz))+' to '+esc(fmt(a.e,tz))+'.</span> '+esc(a.head)+'</div></div>';}).join('')+(list.length>300?'<div class="wk-empty">Showing the first 300. Pick a type to narrow the list.</div>':'');
+}
+rows.addEventListener('click',function(e){var r=e.target.closest('.wk-row');if(!r)return;var m=markers[r.getAttribute('data-i')];if(!m)return;map.setView(m.getLatLng(),Math.max(map.getZoom(),10));m.openPopup();});
+document.querySelectorAll('.wk-t').forEach(function(b){b.addEventListener('click',function(){when=b.getAttribute('data-t');document.querySelectorAll('.wk-t').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});setWin();render();});});
+document.querySelectorAll('.wk-k').forEach(function(b){b.addEventListener('click',function(){filt=b.getAttribute('data-k');document.querySelectorAll('.wk-k').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});render();});});
+function load(){
+  var tz=ST[cur][1],w=weekend(tz),MAX=60*864e5,now=Date.now(),dayEnd=endOfToday(tz);setWin();
+  status.className='wk-status';status.textContent='Loading the '+ST[cur][0]+' feed…';rows.innerHTML='<div class="wk-empty">Loading…</div>';count.textContent='';
+  var want=cur;
+  fetch(WORKER+'/incidents?state='+cur,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){
+    if(want!==cur)return;var all=d['incident-reports'];if(!Array.isArray(all))throw new Error('bad payload');
+    var timed=0;data=[];
+    all.forEach(function(r){var s=toDate(r['start-time']),e=toDate(r['end-time']);if(!s||!e)return;timed++;var st=s.getTime(),et=e.getTime();if(et<st||et-st>MAX||et<now)return;var k=kind(r);if(!k)return;var loc=r.location||{},sl=loc['start-location']||{};
+      var txt=clean(r.headline,2000)+' '+clean(r['impact-desc'],2000)+' '+clean(r.description,2000);var hs=hourIn(tz,s),he=hourIn(tz,e);
+      data.push({weekend:st<=w.to&&et>=w.from,today:st<=dayEnd&&et>=now,sched:st>now&&st<=now+MAX,tonight:/\b(nightly|night|overnight)\b/i.test(txt)||((hs>=19||hs<6)&&(he<=7||he>=19)&&et-st<=16*36e5)||(hs>=19&&et-st<=14*36e5),k:k,s:s,e:e,lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']!=null&&sl['start-mile-marker']!==''?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:String(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r['impact-desc']||r.description||'',170),full:clean(r['impact-desc']||r.description||r.headline||'',600)});});
+    data.noTimes=all.length>0&&timed===0;
+    data.sort(function(a,b){var o={closure:0,ramp:1,lane:2,work:3};return o[a.k]-o[b.k]||a.s-b.s;});
+    render();
+  }).catch(function(){status.className='wk-status err';status.textContent='The '+ST[cur][0]+' feed is unavailable right now.';rows.innerHTML='<div class="wk-empty"><b>Could not load the feed.</b>That is an outage, not an all-clear. Check the state DOT directly.</div>';count.textContent='';});
+}
+sel.addEventListener('change',function(){cur=sel.value;try{localStorage.setItem('wkState',cur);}catch(e){}try{history.replaceState(null,'','?state='+cur);}catch(e){}load();});
+load();
+})();
+</script>
+</body>
+</html>
