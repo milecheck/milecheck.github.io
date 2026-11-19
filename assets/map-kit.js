@@ -1381,3 +1381,92 @@ if (typeof L !== 'undefined' && L.Popup) L.Popup.prototype.options.autoPanPaddin
   }
   if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
 })();
+
+// 12. Live video in camera cards, one player for every page (2026-11-18). A card that
+// carries <video class="cc-img" data-hls="URL" data-img="SNAPSHOT"> plays here. hls.js
+// loads from cdnjs only when the first such card opens; iPhone Safari plays the playlist
+// itself. If the stream fails, the card falls back to the snapshot, or to the usual
+// "image unavailable" box. Removing the card stops the stream. State camera pages keep
+// their own player (data-hls is absent there), so nothing plays twice.
+(function () {
+  var loading = null, live = [];
+  function loadHls() {
+    if (window.Hls) return Promise.resolve();
+    if (loading) return loading;
+    loading = new Promise(function (res, rej) {
+      var sc = document.createElement('script');
+      sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';
+      sc.onload = res; sc.onerror = rej; document.head.appendChild(sc);
+    }).catch(function (e) { loading = null; throw e; });
+    return loading;
+  }
+  function fallback(v) {
+    if (!v.isConnected || v.getAttribute('data-done')) return;
+    v.setAttribute('data-done', '1');
+    stop(v);
+    var src = v.getAttribute('data-img');
+    var el;
+    if (src) {
+      el = document.createElement('img');
+      el.className = 'cc-img';
+      el.alt = v.getAttribute('aria-label') || 'Traffic camera';
+      el.src = src + (src.indexOf('?') < 0 ? '?' : '&') + 't=' + Date.now();
+      el.onerror = function () { var d = document.createElement('div'); d.className = 'cc-meta'; d.textContent = 'Image unavailable right now.'; if (el.isConnected) el.replaceWith(d); };
+    } else {
+      el = document.createElement('div');
+      el.className = 'cc-meta';
+      el.textContent = 'This camera is offline right now. Some state DOTs switch streams off for stretches.';
+    }
+    v.replaceWith(el);
+  }
+  function stop(v) {
+    if (v._mcHls) { try { v._mcHls.destroy(); } catch (e) {} v._mcHls = null; }
+    try { v.pause(); v.removeAttribute('src'); v.load(); } catch (e) {}
+  }
+  function play(v) {
+    if (v._mcStarted) return;
+    v._mcStarted = true;
+    var url = v.getAttribute('data-hls');
+    var go = function () { try { var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {} };
+    var native = function () {
+      if (!v.canPlayType('application/vnd.apple.mpegurl')) { fallback(v); return; }
+      v.addEventListener('error', function () { fallback(v); }, { once: true });
+      v.addEventListener('loadedmetadata', go, { once: true });
+      v.src = url; go();
+    };
+    // A stream that never starts within 12 s counts as offline.
+    setTimeout(function () { if (v.isConnected && !v.getAttribute('data-done') && v.readyState < 2) fallback(v); }, 12000);
+    live.push(v);
+    loadHls().then(function () {
+      if (!v.isConnected) return;
+      if (window.Hls && Hls.isSupported()) {
+        var h = new Hls({ liveSyncDurationCount: 3 });
+        v._mcHls = h;
+        h.loadSource(url); h.attachMedia(v);
+        h.on(Hls.Events.MANIFEST_PARSED, go);
+        h.on(Hls.Events.ERROR, function (ev, d) { if (d && d.fatal) fallback(v); });
+      } else native();
+    }).catch(native);
+  }
+  function scan(root) {
+    var list = root.querySelectorAll ? root.querySelectorAll('video[data-hls]') : [];
+    for (var i = 0; i < list.length; i++) play(list[i]);
+    if (root.matches && root.matches('video[data-hls]')) play(root);
+  }
+  function start() {
+    scan(document.body);
+    if (!window.MutationObserver) return;
+    new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) for (var j = 0; j < muts[i].addedNodes.length; j++) {
+        var n = muts[i].addedNodes[j]; if (n.nodeType === 1) scan(n);
+      }
+      live = live.filter(function (v) { if (v.isConnected && v.offsetParent !== null) return true; stop(v); return false; });
+    }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+  }
+  window.MCMaps = window.MCMaps || {};
+  window.MCMaps.videoTag = function (url, img, label) {
+    var esc = function (s) { return String(s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    return '<video class="cc-img" controls muted playsinline autoplay preload="none" data-hls="' + esc(url) + '"' + (img ? ' data-img="' + esc(img) + '" poster="' + esc(img) + '"' : '') + ' aria-label="' + esc(label || 'Live video') + '"></video>';
+  };
+  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
+})();
