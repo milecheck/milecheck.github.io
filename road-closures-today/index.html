@@ -133,7 +133,7 @@
     </div>
     <section class="wk-body">
       <h2>How are the filters decided?</h2>
-      <p>Every report needs a start and an end time from the DOT, and a span of 60 days or less. Today means it is active now or starts before midnight. Night means it runs roughly 7 PM to 6 AM, or the DOT calls it nightly or overnight. Weekend means it overlaps Friday 12:00 AM to Sunday 11:59 PM. Scheduled means it starts later. All times are the state's own time zone. Times come straight from the feed. Crews finish early and storms cancel work, so check the DOT before you leave.</p>
+      <p>Every report needs a start and an end time from the DOT, and a span of 60 days or less. Today means it is active now or starts before midnight. Night means it overlaps tonight and either starts between 6 PM and 6 AM and lasts 14 hours or less, or the DOT posts a PM-to-AM window such as 9 PM to 5 AM. Weekend means it overlaps Friday 12:00 AM to Sunday 11:59 PM. Scheduled means it starts later. All times are the state's own time zone. Times come straight from the feed. Crews finish early and storms cancel work, so check the DOT before you leave.</p>
       <h2>Why is my state empty?</h2>
       <p>Some state feeds publish when a closure starts but not when it ends, and a few publish neither. The page says so when that is the case. Those closures still show on the live <a href="/road-conditions/" target="_blank" rel="noopener">road conditions page</a> for each state.</p>
       <h2>More maps</h2>
@@ -353,7 +353,12 @@ function kind(r){var t=String(r['event-type-id']||'').toUpperCase(),txt=(clean(r
 function hourIn(tz,d){return +new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',hour:'2-digit'}).format(d);}
 function endOfToday(tz){var n=new Date(),w=new Date(n.getTime()+tzOff(tz,n));return localMidnight(tz,w.getUTCFullYear(),w.getUTCMonth(),w.getUTCDate()+1)-1;}
 function setWin(){var tz=ST[cur][1],w=weekend(tz),o={weekday:'short',month:'short',day:'numeric',timeZone:tz},n=ST[cur][0];
-  win.textContent=when==='weekend'?'Weekend shown: '+new Date(w.from).toLocaleDateString([],o)+' to '+new Date(w.to).toLocaleDateString([],o)+', '+n+' time.':when==='today'?'Active now or starting before midnight, '+n+' time.':when==='tonight'?'Overnight work, roughly 7 PM to 6 AM, or reports the DOT marks nightly or overnight.':'Starting later, within the next 60 days.';}
+  win.textContent=when==='weekend'?'Weekend shown: '+new Date(w.from).toLocaleDateString([],o)+' to '+new Date(w.to).toLocaleDateString([],o)+', '+n+' time.':when==='today'?'Active now or starting before midnight, '+n+' time.':when==='tonight'?'Tonight: work that starts between 6 PM and 6 AM and lasts 14 hours or less, or has a posted PM-to-AM window.':'Starting later, within the next 60 days.';}
+// Night (11/18): a real window that starts 18:00-05:59 local and lasts 14 h or less, or text with an explicit
+// PM-to-AM window ("9 PM to 5 AM", "nightly 8 PM-6 AM"). Bare "night"/"overnight" never counts. Must overlap the coming night.
+var OVN=/\b\d{1,2}(:\d\d)?\s*p\.?\s?m\.?\s*(to|until|through|-|–|—)\s*\d{1,2}(:\d\d)?\s*a\.?\s?m\b/i;
+function tonight(tz){var n=new Date(),w=new Date(n.getTime()+tzOff(tz,n)),M=localMidnight(tz,w.getUTCFullYear(),w.getUTCMonth(),w.getUTCDate()),h=w.getUTCHours(),now=n.getTime();
+  if(h<6)return {from:now,to:M+6*36e5};return {from:Math.max(now,M+18*36e5),to:localMidnight(tz,w.getUTCFullYear(),w.getUTCMonth(),w.getUTCDate()+1)+6*36e5};}
 var TL={today:'today',tonight:'overnight',weekend:'this weekend',sched:'scheduled in the next 60 days'};
 function fmt(d,tz){return d.toLocaleString([], {timeZone:tz,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}
 function dirN(d){d=String(d||'').trim().toLowerCase();var m=d.match(/^(north|south|east|west)/);if(m)return m[1][0].toUpperCase()+'B';return /^(nb|sb|eb|wb)$/.test(d)?d.toUpperCase():'';}
@@ -373,7 +378,7 @@ rows.addEventListener('click',function(e){var r=e.target.closest('.wk-row');if(!
 document.querySelectorAll('.wk-t').forEach(function(b){b.addEventListener('click',function(){when=b.getAttribute('data-t');document.querySelectorAll('.wk-t').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});setWin();render();});});
 document.querySelectorAll('.wk-k').forEach(function(b){b.addEventListener('click',function(){filt=b.getAttribute('data-k');document.querySelectorAll('.wk-k').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});render();});});
 function load(){
-  var tz=ST[cur][1],w=weekend(tz),MAX=60*864e5,now=Date.now(),dayEnd=endOfToday(tz);setWin();
+  var tz=ST[cur][1],w=weekend(tz),MAX=60*864e5,now=Date.now(),dayEnd=endOfToday(tz),nt=tonight(tz);setWin();
   status.className='wk-status';status.textContent='Loading the '+ST[cur][0]+' feed…';rows.innerHTML='<div class="wk-empty">Loading…</div>';count.textContent='';
   var want=cur;
   fetch(WORKER+'/incidents?state='+cur,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){
@@ -381,7 +386,7 @@ function load(){
     var timed=0;data=[];
     all.forEach(function(r){var s=toDate(r['start-time']),e=toDate(r['end-time']);if(!s||!e)return;timed++;var st=s.getTime(),et=e.getTime();if(et<st||et-st>MAX||et<now)return;var k=kind(r);if(!k)return;var loc=r.location||{},sl=loc['start-location']||{};
       var txt=clean(r.headline,2000)+' '+clean(r['impact-desc'],2000)+' '+clean(r.description,2000);var hs=hourIn(tz,s),he=hourIn(tz,e);
-      data.push({weekend:st<=w.to&&et>=w.from,today:st<=dayEnd&&et>=now,sched:st>now&&st<=now+MAX,tonight:/\b(nightly|night|overnight)\b/i.test(txt)||((hs>=19||hs<6)&&(he<=7||he>=19)&&et-st<=16*36e5)||(hs>=19&&et-st<=14*36e5),k:k,s:s,e:e,lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']!=null&&sl['start-mile-marker']!==''?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:String(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r['impact-desc']||r.description||'',170),full:clean(r['impact-desc']||r.description||r.headline||'',600)});});
+      data.push({weekend:st<=w.to&&et>=w.from,today:st<=dayEnd&&et>=now,sched:st>now&&st<=now+MAX,tonight:(et>=nt.from&&st<=nt.to)&&((((hs>=18||hs<6)&&et-st<=14*36e5))||OVN.test(txt)),k:k,s:s,e:e,lat:+sl['start-lat'],lon:+sl['start-long'],mp:sl['start-mile-marker']!=null&&sl['start-mile-marker']!==''?String(sl['start-mile-marker']).replace(/\.0+$/,''):'',route:String(loc['route-id']||'').trim(),dir:dirN(loc.direction),head:clean(r.headline||r['impact-desc']||r.description||'',170),full:clean(r['impact-desc']||r.description||r.headline||'',600)});});
     data.noTimes=all.length>0&&timed===0;
     data.sort(function(a,b){var o={closure:0,ramp:1,lane:2,work:3};return o[a.k]-o[b.k]||a.s-b.s;});
     render();
