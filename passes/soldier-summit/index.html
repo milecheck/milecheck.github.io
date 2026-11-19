@@ -26,7 +26,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
   <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Soldier Summit open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows closures and incidents on US-6 near the summit, from UDOT. See the Utah road conditions map."}},{"@type":"Question","name":"How high is Soldier Summit?","acceptedAnswer":{"@type":"Answer","text":"The summit is 7,477 feet on US-6. Compare Parleys Summit on I-80."}}],"@id":"https://milecheckapp.com/passes/soldier-summit/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Soldier Summit open right now?","acceptedAnswer":{"@type":"Answer","text":"The live map above shows closures and incidents on US-6 near the summit, from UDOT. See the Utah road conditions map."}},{"@type":"Question","name":"How high is Soldier Summit?","acceptedAnswer":{"@type":"Answer","text":"The summit is 7,470 feet on US-6. Compare Parleys Summit on I-80."}}],"@id":"https://milecheckapp.com/passes/soldier-summit/#faqpage","isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Mountain Passes","item":"https://milecheckapp.com/passes/"},{"@type":"ListItem","position":3,"name":"Soldier Summit","item":"https://milecheckapp.com/passes/soldier-summit/"}]}</script>
   <style>
     .co-hero{max-width:1160px;margin:0 auto;padding:34px 20px 6px;}
@@ -137,8 +137,8 @@
 
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261118hl">
-  <script src="/assets/map-kit.js?v=20261118hl" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261118ac">
+  <script src="/assets/map-kit.js?v=20261118ac" defer></script>
   <script src="/assets/new-tab.js?v=20261102-1" defer></script><!-- new-tab -->
 </head>
 <body>
@@ -166,14 +166,14 @@
 
   <div class="co-hero">
 
-    <div class="eyebrow">US-6 · Utah · Elevation 7,477 ft</div>
+    <div class="eyebrow">US-6 · Utah · Elevation 7,470 ft</div>
     <h1>Soldier Summit road conditions right now</h1><!-- toplinks:start --><nav class="mc-toplinks" aria-label="Keep exploring" style="margin:10px 0 14px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00704A;margin:0 0 6px;">Keep exploring</div><div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"><a href="/cameras/ogden/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Ogden Traffic Cameras</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/cameras/provo/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Provo Traffic Cameras</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a><a href="/cameras/salt-lake-city/" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #D6E8DE;border-radius:10px;padding:9px 12px;text-decoration:none;min-height:44px;box-sizing:border-box;"><span style="display:block;line-height:1.3;"><span style="display:block;font-size:11px;font-weight:600;color:#5b6670;">Live cameras</span><span style="display:block;font-size:14px;font-weight:700;color:#0F1419;">Salt Lake City live traffic cameras</span></span><span aria-hidden="true" style="color:#00704A;font-weight:700;font-size:18px;">&rarr;</span></a></div></nav><!-- toplinks:end -->
     <p class="sub">Live UDOT road alerts and cameras on US-6 over Soldier Summit, between Spanish Fork and Price.</p>
     
     <div class="co-stats">
       <div class="co-stat"><div class="n live" id="statCams">—</div><div class="l">live cameras near the pass</div></div>
       <div class="co-stat"><div class="n" id="statAlerts">—</div><div class="l">active alerts nearby</div></div>
-      <div class="co-stat"><div class="n">7,477 ft</div><div class="l">summit elevation</div></div>
+      <div class="co-stat"><div class="n">7,470 ft</div><div class="l">summit elevation</div></div>
       <div class="co-stat"><div class="n">between</div><div class="l">Spanish Fork and Price on US-6</div></div>
     </div>
   </div>
@@ -200,14 +200,14 @@
   <section class="co-guide">
     <h2>About Soldier Summit</h2>
     
-    <p class="lede">Soldier Summit carries US-6 over the Wasatch Plateau at 7,477 ft.</p>
-    <div class="co-seg"><h3>When it closes</h3><p>US-6 over Soldier Summit carries heavy truck traffic between I-15 and eastern Utah. Snow and ice cause crashes and closures in winter.</p></div>
+    <p class="lede">Soldier Summit carries US-6 over the Wasatch Plateau at 7,470 ft.</p>
+    <div class="co-seg"><h3>When it closes</h3><p>US-6 crosses Soldier Summit between Spanish Fork and Price. Snow and ice cause crashes and closures in winter.</p></div>
   </section>
 
   <section class="co-faq">
     <h2>Soldier Summit questions, answered</h2>
     <details><summary>Is Soldier Summit open right now?</summary><p>The <a href="#comap">live map above</a> shows closures and incidents on US-6 near the summit, from UDOT. See the <a href="../../road-conditions/utah/">Utah road conditions map</a>.</p></details>
-    <details><summary>How high is Soldier Summit?</summary><p>The summit is 7,477 feet on US-6. Compare <a href="../parleys/">Parleys Summit</a> on I-80.</p></details>
+    <details><summary>How high is Soldier Summit?</summary><p>The summit is 7,470 feet on US-6. Compare <a href="../parleys/">Parleys Summit</a> on I-80.</p></details>
   </section>
 
 
@@ -438,7 +438,7 @@ function renderLists(){
     el.querySelector('.cnt').textContent='?';
   }
 }
-L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">★</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:500}).bindTooltip('Soldier Summit · 7,477 ft',{direction:'top',offset:[0,-12]}).addTo(map);
+L.marker([PASS.lat,PASS.lon],{icon:L.divIcon({className:'',html:'<div class="poi-icon">★</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:500}).bindTooltip('Soldier Summit · 7,470 ft',{direction:'top',offset:[0,-12]}).addTo(map);
 document.getElementById('tgCam').onchange=e=>{showCam=e.target.checked;draw();};
 document.getElementById('tgAlr').onchange=e=>{showAlr=e.target.checked;draw();};
 const tgFire=document.getElementById('tgFire');if(tgFire)tgFire.onchange=e=>{showFire=e.target.checked;draw();};

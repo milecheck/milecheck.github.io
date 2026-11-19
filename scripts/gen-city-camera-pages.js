@@ -1044,8 +1044,8 @@ ${ES_PAGES.has(c.slug) ? `  <link rel="alternate" hreflang="en" href="https://mi
 ${sp.css}
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261118hl">
-  <script src="/assets/map-kit.js?v=20261118hl" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261118ac">
+  <script src="/assets/map-kit.js?v=20261118ac" defer></script>
 </head>
 <body>
 

@@ -455,7 +455,7 @@ const PASSES = [
     dot: 'CDOT', lat: 37.8986, lon: -107.7125, r: 30, elev: '11,018 ft', dist: 'between', distNote: 'Ouray and Silverton on US-550',
     range: 'San Juan Mountains',
     hero: `Live CDOT road alerts and plow positions on US-550 over Red Mountain Pass, between Ouray and Silverton.`,
-    closes: `CDOT closes US-550 over Red Mountain Pass for avalanche control and heavy snow in winter. Much of the road has no guardrail and no shoulder. A closure here has no short detour.`,
+    closes: `CDOT closes US-550 over Red Mountain Pass for avalanche control and heavy snow in winter. A closure here has no short detour.`,
     plows: { states: ['CO'], agency: 'CDOT' },
     faq: [
       ['Is Red Mountain Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-550 near the summit, from CDOT. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
@@ -472,7 +472,7 @@ const PASSES = [
     plows: { states: ['CO'], agency: 'CDOT' },
     faq: [
       ['Is Rabbit Ears Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-40 near the pass, from CDOT. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
-      ['How high is Rabbit Ears Pass?', `The west summit is 9,426 feet on US-40.`],
+      ['How high is Rabbit Ears Pass?', `The summit is 9,426 feet on US-40.`],
     ],
   },
   {
@@ -514,13 +514,13 @@ const PASSES = [
   {
     slug: 'soldier-summit', name: 'Soldier Summit', route: 'US-6', state: 'UT', stateName: 'Utah',
     title: 'Soldier Summit road conditions and cameras | MileCheck', ogTitle: 'Soldier Summit road conditions | MileCheck', h1: 'Soldier Summit road conditions right now',
-    dot: 'UDOT', lat: 39.9290, lon: -111.0790, r: 30, elev: '7,477 ft', dist: 'between', distNote: 'Spanish Fork and Price on US-6',
+    dot: 'UDOT', lat: 39.9290, lon: -111.0790, r: 30, elev: '7,470 ft', dist: 'between', distNote: 'Spanish Fork and Price on US-6',
     range: 'Wasatch Plateau',
     hero: `Live UDOT road alerts and cameras on US-6 over Soldier Summit, between Spanish Fork and Price.`,
-    closes: `US-6 over Soldier Summit carries heavy truck traffic between I-15 and eastern Utah. Snow and ice cause crashes and closures in winter.`,
+    closes: `US-6 crosses Soldier Summit between Spanish Fork and Price. Snow and ice cause crashes and closures in winter.`,
     faq: [
       ['Is Soldier Summit open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-6 near the summit, from UDOT. See the <a href="../../road-conditions/utah/">Utah road conditions map</a>.`],
-      ['How high is Soldier Summit?', `The summit is 7,477 feet on US-6. Compare <a href="../parleys/">Parleys Summit</a> on I-80.`],
+      ['How high is Soldier Summit?', `The summit is 7,470 feet on US-6. Compare <a href="../parleys/">Parleys Summit</a> on I-80.`],
     ],
   },
 ];
@@ -1528,8 +1528,8 @@ function page(p){
 ${sp.css}
   </style>
   <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
-  <link rel="stylesheet" href="/assets/map-kit.css?v=20261118hl">
-  <script src="/assets/map-kit.js?v=20261118hl" defer></script>
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261118ac">
+  <script src="/assets/map-kit.js?v=20261118ac" defer></script>
 </head>
 <body>
 
