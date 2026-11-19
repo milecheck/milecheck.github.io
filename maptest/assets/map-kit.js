@@ -1310,3 +1310,20 @@ if (typeof L !== 'undefined' && L.Popup) L.Popup.prototype.options.autoPanPaddin
   }
   if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
 })();
+
+// Map test (2026-11-18): the map sits directly under the page title, so it is on the first
+// screen without scrolling. Moves the map's block, then tells Leaflet the size changed.
+(function () {
+  function move() {
+    var m = document.querySelector('.leaflet-container'), h = document.querySelector('h1');
+    if (!m || !h || m.dataset.mtMoved) return;
+    var wrap = m.closest('.co-wrap') || m.closest('section') || m.parentElement;
+    var top = function (e) { while (e.parentElement && e.parentElement !== document.body && e.parentElement.tagName !== 'MAIN') e = e.parentElement; return e; };
+    var ht = top(h);
+    if (wrap.contains(h)) return;
+    if (h.compareDocumentPosition(wrap) & Node.DOCUMENT_POSITION_FOLLOWING) h.insertAdjacentElement('afterend', wrap);
+    m.dataset.mtMoved = '1';
+    setTimeout(function () { try { (window.map || gm).invalidateSize(); } catch (e) {} }, 50);
+  }
+  if (document.readyState === 'complete') move(); else window.addEventListener('load', move);
+})();

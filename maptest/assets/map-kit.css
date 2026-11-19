@@ -223,3 +223,16 @@ html .co-layers .co-key{margin-top:8px;}
 /* Header brand link and closure list buttons: 44px tall everywhere. */
 a.brand{min-height:44px;box-sizing:border-box;}
 .lc-go,.nearme{min-height:44px;}
+
+/* Map test (2026-11-18): the camera card opens at the bottom right so the top-right map
+   buttons (radar, layers, full screen) stay clickable; on phones it stays below the map. */
+@media (min-width: 701px) {
+  .co-card { top: auto !important; bottom: 12px !important; max-height: calc(100% - 96px) !important; }
+}
+
+/* Map test: on phones the forecast box is one row (layer menu + time), no slider caption. */
+@media (max-width: 700px) {
+  .fc-box { min-width: 0 !important; padding: 6px 8px !important; }
+  .fc-box .fc-src { display: none; }
+  .fc-box input[type=range] { margin-top: 4px; }
+}
