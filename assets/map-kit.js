@@ -688,14 +688,27 @@
       if (/Android/.test(ua)) return 'Get it on Google Play';
       return 'Get the app';
     }
+    // Page-tied headline (Leah 11-18 plan item 3): name the pass, road or state the page is about.
+    function place() {
+      var path = location.pathname, m, h;
+      var title = function (x) { return x.replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); }); };
+      if ((m = path.match(/^\/corridors\/(i-\d+[a-z]?)\/?$/i))) return m[1].toUpperCase() + ' alerts';
+      if (/^\/passes\/[^/]+\/?$/.test(path) && (h = document.querySelector('h1'))) {
+        var t = h.textContent.replace(/\s+/g, ' ').trim().split(/:| right now| weather| road conditions| cameras| conditions/i)[0].trim();
+        if (t && t.length < 40) return t + ' alerts';
+      }
+      if ((m = path.match(/^\/cameras\/([a-z-]+)\/?$/))) return title(m[1]) + ' road alerts';
+      return '';
+    }
     function show(inline) {
       if (document.getElementById('mcAppCard')) return;
+      var where = place();
       var d = document.createElement('div');
       d.id = 'mcAppCard';
       d.setAttribute('role', 'dialog');
       d.setAttribute('aria-label', 'Get the MileCheck app');
       d.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:3000;max-width:420px;margin:0 auto;background:#fff;color:#1d1f1c;border:1px solid #d6ddd8;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:14px 44px 14px 16px;font:15px/1.4 system-ui,-apple-system,sans-serif';
-      d.innerHTML = '<div style="font-weight:700;margin-bottom:4px;padding-right:36px">' + (inline ? 'See the highway cameras nearest you.' : 'Seen enough cameras? The app shows the ones nearest you.') + '</div>'
+      d.innerHTML = '<div style="font-weight:700;margin-bottom:4px;padding-right:36px">' + (where ? 'Get ' + where + ' on your phone' : inline ? 'See the highway cameras nearest you.' : 'Seen enough cameras? The app shows the ones nearest you.') + '</div>'
         + '<div style="color:#5b6670;font-size:14px;margin-bottom:10px">' + (inline ? 'Plus live DOT alerts on your road in the MileCheck app.' : 'Your mile marker on CarPlay and Android Auto · free trial') + '</div>'
         + '<a href="' + link() + '" target="_blank" rel="noopener" style="display:inline-block;background:#0f7a4f;color:#fff;font-weight:700;text-decoration:none;border-radius:8px;padding:12px 18px;min-height:44px;box-sizing:border-box">' + label() + '</a>'
         + '<button type="button" aria-label="Close" style="position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;font-size:24px;line-height:1;color:#5b6670;cursor:pointer">×</button>';

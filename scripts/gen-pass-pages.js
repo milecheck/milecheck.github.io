@@ -447,6 +447,82 @@ const PASSES = [
       ['Where is Blewett Pass?', `On US 97 between Ellensburg and Wenatchee. SR 970 connects it to I-90 at Cle Elum.`],
     ],
   },
+  // ---- Storm-season additions (2026-11-18, held for Leah's review) ----
+  // Snowy passes with search demand and no page. No SNOTEL block until a station is checked.
+  {
+    slug: 'red-mountain', name: 'Red Mountain Pass', route: 'US-550', state: 'CO', stateName: 'Colorado',
+    title: 'Red Mountain Pass road conditions and cameras | MileCheck', ogTitle: 'Red Mountain Pass road conditions | MileCheck', h1: 'Red Mountain Pass road conditions right now',
+    dot: 'CDOT', lat: 37.8986, lon: -107.7125, r: 30, elev: '11,018 ft', dist: 'between', distNote: 'Ouray and Silverton on US-550',
+    range: 'San Juan Mountains',
+    hero: `Live CDOT road alerts and plow positions on US-550 over Red Mountain Pass, between Ouray and Silverton.`,
+    closes: `CDOT closes US-550 over Red Mountain Pass for avalanche control and heavy snow in winter. Much of the road has no guardrail and no shoulder. A closure here has no short detour.`,
+    plows: { states: ['CO'], agency: 'CDOT' },
+    faq: [
+      ['Is Red Mountain Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-550 near the summit, from CDOT. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
+      ['How high is Red Mountain Pass?', `The summit is 11,018 feet on US-550. Compare <a href="../wolf-creek/">Wolf Creek Pass</a> on US-160.`],
+    ],
+  },
+  {
+    slug: 'rabbit-ears', name: 'Rabbit Ears Pass', route: 'US-40', state: 'CO', stateName: 'Colorado',
+    title: 'Rabbit Ears Pass road conditions and cameras | MileCheck', ogTitle: 'Rabbit Ears Pass road conditions | MileCheck', h1: 'Rabbit Ears Pass road conditions right now',
+    dot: 'CDOT', lat: 40.3850, lon: -106.6100, r: 30, elev: '9,426 ft', dist: 'between', distNote: 'Steamboat Springs and Kremmling on US-40',
+    range: 'Park Range',
+    hero: `Live CDOT road alerts and plow positions on US-40 over Rabbit Ears Pass, east of Steamboat Springs.`,
+    closes: `US-40 over Rabbit Ears Pass is the main road into Steamboat Springs from the east. CDOT closes it for crashes and heavy snow, and the traction law is common in winter.`,
+    plows: { states: ['CO'], agency: 'CDOT' },
+    faq: [
+      ['Is Rabbit Ears Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-40 near the pass, from CDOT. See the <a href="../../road-conditions/colorado/">Colorado road conditions map</a>.`],
+      ['How high is Rabbit Ears Pass?', `The west summit is 9,426 feet on US-40.`],
+    ],
+  },
+  {
+    slug: 'homestake', name: 'Homestake Pass', route: 'I-90', state: 'MT', stateName: 'Montana',
+    title: 'Homestake Pass road conditions and cameras | MileCheck', ogTitle: 'Homestake Pass road conditions | MileCheck', h1: 'Homestake Pass road conditions right now',
+    dot: 'MDT', lat: 45.9200, lon: -112.4130, r: 30, elev: '6,329 ft', dist: 'just east of', distNote: 'Butte on I-90',
+    range: 'Continental Divide',
+    hero: `Live MDT road alerts and cameras on I-90 over Homestake Pass, just east of Butte.`,
+    closes: `I-90 crosses the Continental Divide at Homestake Pass. Snow and ice on the grades either side cause crashes and slowdowns in winter.`,
+    faq: [
+      ['Is Homestake Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on I-90 near the pass, from MDT. See the <a href="../../road-conditions/montana/">Montana road conditions map</a>.`],
+      ['How high is Homestake Pass?', `The summit is 6,329 feet on I-90.`],
+    ],
+  },
+  {
+    slug: 'fourth-of-july', name: 'Fourth of July Pass', route: 'I-90', state: 'ID', stateName: 'Idaho',
+    title: 'Fourth of July Pass road conditions and cameras | MileCheck', ogTitle: 'Fourth of July Pass road conditions | MileCheck', h1: 'Fourth of July Pass road conditions right now',
+    dot: 'ITD', lat: 47.6281, lon: -116.5530, r: 30, elev: '3,081 ft', dist: 'between', distNote: 'Coeur d\'Alene and Kellogg on I-90',
+    range: 'Coeur d\'Alene Mountains',
+    hero: `Live ITD road alerts and cameras on I-90 over Fourth of July Pass, east of Coeur d'Alene.`,
+    closes: `Fourth of July Pass is the first climb on I-90 east of Coeur d'Alene. Snow and ice on the grade cause crashes in winter. Lookout Pass is further east at the Montana line.`,
+    faq: [
+      ['Is Fourth of July Pass open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on I-90 near the pass, from ITD. See the <a href="../../road-conditions/idaho/">Idaho road conditions map</a>.`],
+      ['How high is Fourth of July Pass?', `The summit is 3,081 feet on I-90. <a href="../lookout/">Lookout Pass</a> is further east.`],
+    ],
+  },
+  {
+    slug: 'mt-rose', name: 'Mount Rose Highway', route: 'NV-431', state: 'NV', stateName: 'Nevada',
+    title: 'Mount Rose Highway road conditions and cameras | MileCheck', ogTitle: 'Mount Rose Highway road conditions | MileCheck', h1: 'Mount Rose Highway road conditions right now',
+    dot: 'NDOT', lat: 39.3115, lon: -119.8925, r: 30, elev: '8,911 ft', dist: 'between', distNote: 'Reno and Incline Village on NV-431',
+    range: 'Carson Range',
+    hero: `Live NDOT road alerts and cameras on NV-431, the Mount Rose Highway, between Reno and Lake Tahoe.`,
+    closes: `NV-431 climbs to 8,911 feet between Reno and Incline Village. NDOT puts chain controls on it and closes it for storms and crashes in winter.`,
+    faq: [
+      ['Is the Mount Rose Highway open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on NV-431, from NDOT. See the <a href="../../road-conditions/nevada/">Nevada road conditions map</a>.`],
+      ['How high is the Mount Rose Highway?', `The summit is 8,911 feet on NV-431.`],
+    ],
+  },
+  {
+    slug: 'soldier-summit', name: 'Soldier Summit', route: 'US-6', state: 'UT', stateName: 'Utah',
+    title: 'Soldier Summit road conditions and cameras | MileCheck', ogTitle: 'Soldier Summit road conditions | MileCheck', h1: 'Soldier Summit road conditions right now',
+    dot: 'UDOT', lat: 39.9290, lon: -111.0790, r: 30, elev: '7,477 ft', dist: 'between', distNote: 'Spanish Fork and Price on US-6',
+    range: 'Wasatch Plateau',
+    hero: `Live UDOT road alerts and cameras on US-6 over Soldier Summit, between Spanish Fork and Price.`,
+    closes: `US-6 over Soldier Summit carries heavy truck traffic between I-15 and eastern Utah. Snow and ice cause crashes and closures in winter.`,
+    faq: [
+      ['Is Soldier Summit open right now?', `The <a href="#comap">live map above</a> shows closures and incidents on US-6 near the summit, from UDOT. See the <a href="../../road-conditions/utah/">Utah road conditions map</a>.`],
+      ['How high is Soldier Summit?', `The summit is 7,477 feet on US-6. Compare <a href="../parleys/">Parleys Summit</a> on I-80.`],
+    ],
+  },
 ];
 
 // ---- Mountain-area pages (2026-09-24, Leah) ---------------------------------
@@ -1310,7 +1386,7 @@ function page(p){
   const mountainKey = (p.out || '').match(/^mountains\/([^/]+)\/roads(\/[^/]+)?$/)?.[1];
   const imagePath = mountainKey && `images/mountains/og-${mountainKey}.png`;
   const shareImage = imagePath && fs.existsSync(imagePath) ? `https://milecheckapp.com/${imagePath}` : 'https://milecheckapp.com/images/og-banner-light.png';
-  const segs = p.segs || [{ h: 'When it closes', p: p.closes }, p.extra];
+  const segs = (p.segs || [{ h: 'When it closes', p: p.closes }, p.extra]).filter(Boolean);
   const segsHtml = segs.map(s=>`    <div class="co-seg"><h3>${s.h}</h3>${s.html || `<p>${s.p}</p>`}</div>`).join('\n');
   const relatedHtml = typeof p.related === 'function' ? p.related(up)
     : `More passes &amp; routes: ${PASSES.filter(q=>q!==p&&(q.state===p.state||q.route===p.route)).map(q=>`<a href="../${q.slug}/">${q.name}</a>`).join(' · ')}${PASSES.some(q=>q!==p&&(q.state===p.state||q.route===p.route))?' · ':''}<a href="../">all mountain passes</a> · <a href="${up}cameras/">all highway cameras</a> · <a href="${up}closures/">road closures</a> · <a href="${up}maps/">all maps</a>`;
