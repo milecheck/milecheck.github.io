@@ -864,6 +864,19 @@
   if (card) card.addEventListener('load', function (e) {
     if (e.target.classList && e.target.classList.contains('cc-img')) e.target.classList.add('cm-loaded');
   }, true);
+  // A dead or blocked camera host left a broken-image icon in the card. Swap it for
+  // a plain box with the same words the alt text already used.
+  if (card) card.addEventListener('error', function (e) {
+    var im = e.target;
+    if (!im || im.tagName !== 'IMG' || !im.classList.contains('cc-img')) return;
+    im.style.display = 'none';
+    var nx = im.nextSibling;
+    if (nx && nx.className === 'cc-img-off') return;
+    var d = document.createElement('div');
+    d.className = 'cc-img-off'; d.setAttribute('role', 'status');
+    d.textContent = 'image unavailable';
+    im.parentNode.insertBefore(d, im.nextSibling);
+  }, true);
   var panTo = m.panTo;
   m.panTo = function (ll, opts) {
     if (!phone.matches || !card || card.style.display !== 'block') return panTo.call(m, ll, opts);
