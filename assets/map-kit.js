@@ -179,7 +179,7 @@
     var drawn = {};
     var DRAW = {
       closures: function (st) { return feed('incidents', st).then(function (d) { incidents(d, true, st).forEach(function (x) { place(x, '#DC2626', 7, G.closures, st); }); }); },
-      alerts: function (st) { return feed('incidents', st).then(function (d) { incidents(d, false, st).forEach(function (x) { place(x, '#F59E0B', 6, G.alerts, st); }); }); },
+      alerts: function (st) { return feed('incidents', st).then(function (d) { incidents(d, false, st).forEach(function (x) { place(x, x.hi ? '#B91C1C' : '#F59E0B', x.hi ? 8 : 6, G.alerts, st); }); }); },
       // Road weather: reported road surface conditions. Bare, dry and normal are left out.
       weather: function (st) {
         return feed('conditions', st).then(function (d) {
@@ -220,9 +220,11 @@
         var isClos = (t === 'CL' || t === 'AC' || /\b(closed|closure|crash)\b/i.test(txt)) && !/\b(ramp|exit|rest area|shoulder)\b/i.test(txt);
         if (isClos !== wantClos) return;
         var rt = (loc['route-id'] || '').trim(), m1 = parseFloat(sl['start-mile-marker']), m2 = parseFloat(el['end-mile-marker']);
-        var kind = isClos ? (t === 'AC' ? 'Crash' : 'Closure') : (t === 'RW' ? 'Work zone' : t === 'WE' ? 'Weather' : t === 'HZ' ? 'Hazard' : 'Alert');
+        // Vehicle fires are a high hazard, as in app build 107 (classifyAlert.ts): red, larger dot.
+        var vfire = !isClos && /\b(vehicle|car|truck|semi|rv|bus|auto)\s+fire\b/i.test(txt);
+        var kind = isClos ? (t === 'AC' ? 'Crash' : 'Closure') : vfire ? 'Vehicle fire' : (t === 'RW' ? 'Work zone' : t === 'WE' ? 'Weather' : t === 'HZ' ? 'Hazard' : 'Alert');
         var span = isFinite(m1) && isFinite(m2) && Math.abs(m2 - m1) >= 0.3 ? 'Mile ' + mpLabel(Math.min(m1, m2)) + ' to ' + mpLabel(Math.max(m1, m2)) : '';
-        out.push({ la: la, lo: lo, la2: +el['end-lat'], lo2: +el['end-long'], rt: rt, m1: m1, m2: m2,
+        out.push({ hi: vfire, la: la, lo: lo, la2: +el['end-lat'], lo2: +el['end-long'], rt: rt, m1: m1, m2: m2,
           html: '<b>' + e(kind) + (rt ? ' · ' + e(rt) : '') + '</b>' + (span ? '<br><span style="font-weight:600">' + e(span) + '</span>' : '') + '<br>' + e(txt.slice(0, 280)) + src(st) });
       });
       return out;
@@ -424,10 +426,11 @@
 
     var camPage = /^\/(es\/|pt\/)?cameras\//.test(location.pathname);
     var rows = [
+      // Cameras first, as in app build 107's Map Options (Leah 11/21: cameras drive growth).
+      { key: 'cameras', label: 'Cameras', color: '#475569', skip: all || camPage },
       { key: 'alerts', label: 'Alerts', color: '#F59E0B', skip: all },
       { key: 'closures', label: 'Closures and crashes', color: '#DC2626', skip: all },
       { key: 'weather', label: 'Road weather', color: '#0EA5E9', skip: all },
-      { key: 'cameras', label: 'Cameras', color: '#475569', skip: all || camPage },
       { key: 'mileposts', label: 'Mile markers', color: '#0f7a4f', skip: all },
       { key: 'exits', label: 'Exits', color: '#1d4ed8', skip: all },
       { key: 'fires', label: 'Wildfires', color: '#EA580C' }
@@ -566,6 +569,8 @@
       return;
     }
     var layers = (O.layers || []).concat(extraLayers((O.layers || []).map(function (l) { return l && l.label || ''; }))).filter(function (l) { return l && l.layer; });
+    // Cameras lead the list, matching app build 107.
+    layers = layers.filter(function (l) { return /camera/i.test(l.label); }).concat(layers.filter(function (l) { return !/camera/i.test(l.label); }));
     // Weather radar on every map, off by default (Leah, 10-24). Same NEXRAD composite the
     // app's map uses (Iowa State Mesonet, refreshed about every 5 minutes upstream).
     layers.unshift({ label: 'Weather radar', color: '#2563EB', layer: radarLayer() });
@@ -717,6 +722,28 @@
       document.body.appendChild(d);
       if (!inline) store(KEY, String(Date.now()));
       if (window.gtag) gtag('event', 'app_card_shown', { page_path: location.pathname });
+    }
+    // California cameras and Siskiyou Pass (11-21): the card showed about 2% taps (CA 2,182
+    // shown / 46 taps, Siskiyou 575 / 10). On these pages it sits inline directly under the
+    // map, on load, on phone and desktop. Same app_card_shown / app_card_click events.
+    if (/^\/(es\/|pt\/)?(cameras\/california|passes\/siskiyou)\/?$/.test(location.pathname)) {
+      var under = function () {
+        var m = document.getElementById('comap') || document.querySelector('.leaflet-container');
+        if (!m || document.getElementById('mcAppCard')) return;
+        var box = (m.closest && m.closest('.co-wrap')) || m;
+        show(true);
+        var d = document.getElementById('mcAppCard');
+        d.style.cssText = 'position:relative;margin:12px 0;max-width:none;background:#fff;color:#1d1f1c;border:1px solid #d6ddd8;border-radius:12px;padding:14px 44px 14px 16px;font:15px/1.4 system-ui,-apple-system,sans-serif';
+        d.removeAttribute('role');
+        var w = document.createElement('div');
+        w.className = 'co-wrap mc-appcard-under';
+        w.style.display = 'block';
+        w.appendChild(d);
+        box.parentNode.insertBefore(w, box.nextSibling);
+        d.querySelector('button').addEventListener('click', function () { w.remove(); });
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', under); else under();
+      return;
     }
     // Phone (Leah "card go", 11-16): the card sits inline above the map on load, on the
     // first phone screen, instead of sliding up after the second camera. Placement only.
