@@ -225,9 +225,9 @@
     .faq-item p a{color:var(--green);font-weight:600}
 
     /* ---- story / roy panel ---- */
-    .roy-grid{display:grid;grid-template-columns:280px 1fr;gap:44px;align-items:center;margin-top:26px}
+    .roy-grid{display:grid;grid-template-columns:200px minmax(0,640px);gap:40px;align-items:center;justify-content:center}
     @media (max-width:720px){.roy-grid{grid-template-columns:1fr;gap:24px;text-align:center}}
-    .roy-img img{width:250px;height:auto;filter:drop-shadow(0 14px 28px rgba(35,38,31,.2))}
+    .roy-img img{width:200px;height:auto;filter:drop-shadow(0 14px 28px rgba(35,38,31,.2))}
     @media (max-width:720px){.roy-img img{width:200px}.roy-grid p{margin-left:auto;margin-right:auto}}
     .roy-tag{display:inline-block;font:600 12px var(--mono);letter-spacing:.06em;color:var(--ink);border:1.5px solid var(--rule);background:#fff;padding:6px 14px;margin-top:6px}
     .story-body{margin-top:24px;max-width:720px}
@@ -569,11 +569,11 @@
     <!-- ===== STORY TAB ===== -->
     <section data-panel="story" id="roy">
       <div class="container">
-        <span class="section-label">Meet the crew</span>
-        <h2 class="section-h2">This is Roy.</h2>
         <div class="roy-grid">
           <div class="roy-img"><img width="1024" height="1536" src="assets/roy.png" alt="Roy, MileCheck's road-crew foreman — a badger in a hard hat and hi-vis vest holding a clipboard"></div>
           <div>
+            <span class="section-label">Meet the crew</span>
+            <h2 class="section-h2">This is Roy.</h2>
             <p class="prose">Roy is MileCheck&rsquo;s road-crew foreman &mdash; named for the dad who first showed me that on a highway, everything comes back to the mile marker.</p>
             <p class="prose">He works nights, distrusts unmarked detours, and takes road conditions personally. Every so often he drops by with a reminder: check the cameras before the pass, know your mile marker before you need it, turn on fire alerts for your area.</p>
             <a class="roy-tag" href="https://www.instagram.com/milecheck_app" target="_blank" rel="noopener">Reminders from Roy &middot; on our Instagram &rarr;</a>
