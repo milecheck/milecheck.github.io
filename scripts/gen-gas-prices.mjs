@@ -84,7 +84,7 @@ const stateRows = sorted.map(x => [esc(x.n), x.rOwn ? `<strong>${$(x.r)}</strong
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const headA = tpl.slice(0, tpl.indexOf('  <title>'));
 const headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">'));
-const headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">'));
+const headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art'));
 const tail = tpl.slice(tpl.indexOf('  </article>'));
 
 const h1 = 'What are gas prices in my state this week?';

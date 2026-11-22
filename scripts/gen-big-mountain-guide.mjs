@@ -63,7 +63,7 @@ const head = tpl.slice(0, tpl.indexOf('<body>'))
   .replace(/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"FAQPage"[\s\S]*?<\/script>\n?/, '')
   .replace(/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"Article"[\s\S]*?<\/script>/, `<script type="application/ld+json">${ld}</script>`)
   .replace(/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"BreadcrumbList"[\s\S]*?<\/script>/, `<script type="application/ld+json">${bc}</script>`);
-const header = tpl.slice(tpl.indexOf('<body>'), tpl.indexOf('<article class="art">'));
+const header = tpl.slice(tpl.indexOf('<body>'), tpl.indexOf('<article class="art'));
 const footer = tpl.slice(tpl.indexOf('<footer class="site-footer">'))
   .replace(/ct=best-portable-jump-starters/g, `ct=${slug}`).replace(/utm_campaign%3Dbest-portable-jump-starters/g, `utm_campaign%3D${slug}`);
 mkdirSync(slug, { recursive: true });

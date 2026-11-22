@@ -27,7 +27,7 @@ ${sortJs}
     <p>Gas is the EIA weekly average for regular, using the state number where EIA publishes one and the regional average otherwise. Electricity is the EIA average home price. See <a href="/gas-prices/">gas prices by state</a> and <a href="/ev-charging-cost/">EV charging cost by state</a>.</p>
 ${pc}`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
-const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
+const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'Gas, hybrid or electric car: which is cheapest to drive in your state?', url = 'https://milecheckapp.com/gas-vs-electric-car/';
 const title = 'Gas, hybrid or electric car: which is cheapest to drive in your state? | MileCheck';
 const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: 'Is it cheaper to drive an electric car than a gas car?', acceptedAnswer: { '@type': 'Answer', text: lede } }] };
