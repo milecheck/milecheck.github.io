@@ -52,6 +52,17 @@
     .article-wrap .state-grid li a{color:#0F1419;text-decoration:none;font-weight:400;border-bottom:1px solid #D5DADE;}
     .article-wrap p a:not([style]), .article-wrap li a:not([style]){color:#0f7a4f;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600;}
     .recap{margin:30px 0 10px;padding:16px 18px;background:#FFF7ED;border-left:4px solid #F59E0B;border-radius:0 10px 10px 0;font-size:16px;}
+    .wx-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 0 10px;font-size:14.5px;}
+    .wx-ctl label{font-weight:600;color:#0F1419;}
+    .wx-ctl select{font:inherit;font-size:15px;min-height:44px;padding:6px 10px;border:1px solid #C9CFD4;border-radius:8px;background:#fff;color:#0F1419;max-width:100%;}
+    .wx-status{font-size:14px;color:#5C6670;}
+    .tg tr.wx-row td{border-top:0;padding:0 12px 11px;font-weight:400;white-space:normal;}
+    .wx-chips{display:flex;flex-direction:column;gap:6px;}
+    .wx-chip{display:block;font-size:14px;line-height:1.4;padding:6px 10px;border-radius:8px;border-left:4px solid #F59E0B;background:#FFF7ED;color:#3D454D;overflow-wrap:anywhere;}
+    .wx-chip b{color:#0F1419;}
+    .wx-chip.sev-extreme,.wx-chip.sev-severe{border-left-color:#DC2626;background:#FEF2F2;}
+    .wx-chip.sev-minor,.wx-chip.sev-unknown{border-left-color:#3B82F6;background:#EFF6FF;}
+    .wx-src{font-size:14px;color:#5C6670;margin:-8px 0 18px !important;}
   </style>
   <script src="/assets/new-tab.js?v=20261102-1" defer></script><!-- new-tab -->
 <!-- mv:start --><script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/d74ff19f-a5bf-47fa-a630-0a438f90c11a.js"></script><!-- mv:end -->
@@ -117,16 +128,22 @@
       <h2 class="rc">When is the worst time to drive for Thanksgiving?</h2>
       <p>The worst times are Tuesday 2 PM to 8 PM and Wednesday noon to 7 PM, according to INRIX. Thanksgiving Day itself is expected to be light.</p>
       <p>AAA expects 81.5 million people to travel 50 miles or more between Nov. 24 and Nov. 30. Last year it was 81.6 million. INRIX, AAA's traffic partner, lists these windows for drivers.</p>
-      <div class="tg-wrap"><table class="tg">
+      <div class="wx-ctl" id="tg-wx" hidden>
+        <label for="tg-wx-state">Weather alerts for:</label>
+        <select id="tg-wx-state"></select>
+        <span class="wx-status" id="tg-wx-status" role="status" aria-live="polite"></span>
+      </div>
+      <div class="tg-wrap"><table class="tg" id="tg-days">
         <tr><th>Day</th><th>Worst time to drive</th><th>Best time to drive</th></tr>
-        <tr><td>Tue. Nov. 24</td><td>2 PM to 8 PM</td><td>Before 1 PM</td></tr>
-        <tr><td>Wed. Nov. 25</td><td>Noon to 7 PM</td><td>Before noon</td></tr>
-        <tr><td>Thu. Nov. 26</td><td colspan="2">Minimal traffic expected</td></tr>
-        <tr><td>Fri. Nov. 27</td><td>1 PM to 7 PM</td><td>Before noon</td></tr>
-        <tr><td>Sat. Nov. 28</td><td>Noon to 9 PM</td><td>Before 11 AM</td></tr>
-        <tr><td>Sun. Nov. 29</td><td>Noon to 8 PM</td><td>Before 11 AM</td></tr>
-        <tr><td>Mon. Nov. 30</td><td>2 PM to 7 PM</td><td>Before 1 PM</td></tr>
+        <tr data-date="2026-11-24"><td>Tue. Nov. 24</td><td>2 PM to 8 PM</td><td>Before 1 PM</td></tr>
+        <tr data-date="2026-11-25"><td>Wed. Nov. 25</td><td>Noon to 7 PM</td><td>Before noon</td></tr>
+        <tr data-date="2026-11-26"><td>Thu. Nov. 26</td><td colspan="2">Minimal traffic expected</td></tr>
+        <tr data-date="2026-11-27"><td>Fri. Nov. 27</td><td>1 PM to 7 PM</td><td>Before noon</td></tr>
+        <tr data-date="2026-11-28"><td>Sat. Nov. 28</td><td>Noon to 9 PM</td><td>Before 11 AM</td></tr>
+        <tr data-date="2026-11-29"><td>Sun. Nov. 29</td><td>Noon to 8 PM</td><td>Before 11 AM</td></tr>
+        <tr data-date="2026-11-30"><td>Mon. Nov. 30</td><td>2 PM to 7 PM</td><td>Before 1 PM</td></tr>
       </table></div>
+      <p class="wx-src" id="tg-wx-src" hidden>Live alerts from the National Weather Service (api.weather.gov). Alerts appear under the day they are in effect and drop off when they expire.</p>
       <p class="rc-rel">Sources: <a href="https://www.wtvr.com/news/local-news/richmond/aaa-thanksgiving-travel-nov-16-2026" target="_blank" rel="noopener">AAA and INRIX via WTVR</a> &middot; <a href="https://kmph.com/news/nation-world/aaa-815-million-americans-expected-to-travel-for-thanksgiving-nearly-90-will-drive" target="_blank" rel="noopener">AAA via KMPH</a></p>
 
       <h2 class="rc">Do I need chains for Thanksgiving travel?</h2>
@@ -376,5 +393,71 @@
   </script>
   <!-- End MailerLite Universal -->
   <script src="/assets/state-pick.js" defer></script>
+  <!-- tg-wx:start -->
+  <script src="/assets/thanksgiving-advisories.js?v=20261122-1" defer></script>
+  <script>
+  /* Live NWS alerts on the Thanksgiving day table. Feed text is only ever set with textContent. */
+  addEventListener('DOMContentLoaded',function(){
+    var A=window.TgAdvisories,box=document.getElementById('tg-wx'),sel=document.getElementById('tg-wx-state'),
+        status=document.getElementById('tg-wx-status'),src=document.getElementById('tg-wx-src'),tbl=document.getElementById('tg-days');
+    if(!A||!box||!sel||!tbl)return;
+    var STATES={AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'District of Columbia',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming'};
+    var KEY='mc-tg-wx-state',TTL=10*60*1000,LAST_DAY='2026-11-30';
+    var state='WA';try{var s=localStorage.getItem(KEY);if(s&&STATES[s])state=s;}catch(e){}
+    Object.keys(STATES).sort(function(a,b){return STATES[a]<STATES[b]?-1:1;}).forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=STATES[c];sel.appendChild(o);});
+    sel.value=state;
+    var rows=[].slice.call(tbl.querySelectorAll('tr[data-date]')),features=[],loadedAt=0,failed=false,seq=0;
+    function weekOver(){return Date.now()>=A.dayRange(LAST_DAY,A.stateTimeZone(state)).end;}
+    function slot(row){
+      var n=row.nextElementSibling;
+      if(n&&n.classList.contains('wx-row'))return n;
+      n=document.createElement('tr');n.className='wx-row';n.hidden=true;
+      var td=document.createElement('td');td.colSpan=3;n.appendChild(td);
+      row.parentNode.insertBefore(n,row.nextSibling);return n;
+    }
+    function render(){
+      var tz=A.stateTimeZone(state),now=Date.now();
+      rows.forEach(function(row){
+        var list=failed?[]:A.alertsForDay(features,row.getAttribute('data-date'),now,tz),r=slot(row),td=r.firstChild;
+        td.textContent='';
+        if(!list.length){r.hidden=true;return;}
+        var wrap=document.createElement('div');wrap.className='wx-chips';
+        list.forEach(function(x){
+          var c=document.createElement('span');c.className='wx-chip sev-'+String(x.severity).toLowerCase();
+          var b=document.createElement('b');b.textContent=x.event;c.appendChild(b);
+          var area=A.truncate(x.areaDesc,60);
+          c.appendChild(document.createTextNode(' · '+x.severity+(area?' · '+area:'')+' · '+A.formatUntil(x.end,tz)));
+          c.title=x.headline||(x.event+(x.areaDesc?' — '+x.areaDesc:''));
+          wrap.appendChild(c);
+        });
+        td.appendChild(wrap);r.hidden=false;
+      });
+    }
+    function cacheGet(){try{var j=JSON.parse(sessionStorage.getItem('mc-tg-wx-'+state)||'null');if(j&&Date.now()-j.t<TTL)return j;}catch(e){}return null;}
+    function cacheSet(f){try{sessionStorage.setItem('mc-tg-wx-'+state,JSON.stringify({t:Date.now(),f:f}));}catch(e){}}
+    function load(force){
+      if(weekOver()){features=[];failed=false;status.textContent='';render();return;}
+      var c=!force&&cacheGet();
+      if(c){features=c.f;loadedAt=c.t;failed=false;status.textContent='';render();return;}
+      var my=++seq,want=state;
+      fetch('https://api.weather.gov/alerts/active?area='+encodeURIComponent(want),{cache:'no-store',headers:{Accept:'application/geo+json'}})
+        .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+        .then(function(d){
+          if(my!==seq)return;
+          // keep only fields we use, so the cache stays small
+          features=(d&&d.features||[]).filter(A.isTravelRelevant).map(function(f){var p=f.properties;return {properties:{id:p.id,event:p.event,severity:p.severity,status:p.status,messageType:p.messageType,areaDesc:p.areaDesc,headline:p.headline,sent:p.sent,effective:p.effective,onset:p.onset,expires:p.expires,ends:p.ends}};});
+          loadedAt=Date.now();failed=false;status.textContent='';cacheSet(features);render();
+        })
+        .catch(function(){if(my!==seq)return;failed=true;features=[];status.textContent="Couldn't load NWS alerts right now.";render();});
+    }
+    sel.addEventListener('change',function(){state=sel.value;try{localStorage.setItem(KEY,state);}catch(e){}load(false);});
+    box.hidden=false;if(src)src.hidden=false;
+    load(false);
+    setInterval(render,60*1000);
+    setInterval(function(){if(!document.hidden)load(true);},TTL);
+    document.addEventListener('visibilitychange',function(){if(!document.hidden&&Date.now()-loadedAt>=TTL)load(true);});
+  });
+  </script>
+  <!-- tg-wx:end -->
 </body>
 </html>
