@@ -1,0 +1,1061 @@
+{
+ "AL": {
+  "interstates": [
+   "I-10",
+   "I-20",
+   "I-22",
+   "I-59",
+   "I-65",
+   "I-85",
+   "I-165",
+   "I-359",
+   "I-459",
+   "I-565",
+   "I-759"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "ALGO",
+   "url": "https://algotraffic.com"
+  }
+ },
+ "AK": {
+  "interstates": [],
+  "passes": [],
+  "dot": {
+   "name": "AK 511",
+   "url": "https://511.alaska.gov"
+  }
+ },
+ "AZ": {
+  "interstates": [
+   "I-8",
+   "I-10",
+   "I-15",
+   "I-17",
+   "I-19",
+   "I-40"
+  ],
+  "passes": [
+   {
+    "id": "flagstaff-i17",
+    "name": "Flagstaff Summit",
+    "route": "I-17"
+   }
+  ],
+  "dot": {
+   "name": "AZ511",
+   "url": "https://az511.gov"
+  }
+ },
+ "AR": {
+  "interstates": [
+   "I-30",
+   "I-40",
+   "I-49",
+   "I-55",
+   "I-430",
+   "I-440",
+   "I-530",
+   "I-540",
+   "I-555",
+   "I-630"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "IDrive",
+   "url": "https://www.idrivearkansas.com"
+  }
+ },
+ "CA": {
+  "interstates": [
+   "I-5",
+   "I-10",
+   "I-15",
+   "I-40",
+   "I-80",
+   "I-105",
+   "I-110",
+   "I-205",
+   "I-210",
+   "I-215",
+   "I-280",
+   "I-405",
+   "I-505",
+   "I-580",
+   "I-605",
+   "I-680",
+   "I-710",
+   "I-805",
+   "I-880",
+   "I-980"
+  ],
+  "passes": [
+   {
+    "id": "donner",
+    "name": "Donner Summit",
+    "route": "I-80"
+   },
+   {
+    "id": "tejon",
+    "name": "Tejon Pass (Grapevine)",
+    "route": "I-5"
+   },
+   {
+    "id": "cajon",
+    "name": "Cajon Pass",
+    "route": "I-15"
+   },
+   {
+    "id": "tehachapi",
+    "name": "Tehachapi Pass",
+    "route": "CA-58"
+   }
+  ],
+  "dot": {
+   "name": "QuickMap",
+   "url": "https://quickmap.dot.ca.gov/"
+  }
+ },
+ "CO": {
+  "interstates": [
+   "I-25",
+   "I-70",
+   "I-76",
+   "I-225",
+   "I-270"
+  ],
+  "passes": [
+   {
+    "id": "eisenhower",
+    "name": "Eisenhower Tunnel",
+    "route": "I-70"
+   },
+   {
+    "id": "vail-pass",
+    "name": "Vail Pass",
+    "route": "I-70"
+   },
+   {
+    "id": "loveland",
+    "name": "Loveland Pass",
+    "route": "US-6"
+   },
+   {
+    "id": "monarch",
+    "name": "Monarch Pass",
+    "route": "US-50"
+   },
+   {
+    "id": "wolf-creek",
+    "name": "Wolf Creek Pass",
+    "route": "US-160"
+   }
+  ],
+  "dot": {
+   "name": "COtrip",
+   "url": "https://www.cotrip.org"
+  }
+ },
+ "CT": {
+  "interstates": [
+   "I-84",
+   "I-91",
+   "I-95",
+   "I-291",
+   "I-384",
+   "I-395",
+   "I-684",
+   "I-691"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "CTDOT",
+   "url": "https://portal.ct.gov/dot"
+  }
+ },
+ "DE": {
+  "interstates": [
+   "I-95",
+   "I-295",
+   "I-495"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "DelDOT",
+   "url": "https://deldot.gov/traffic"
+  }
+ },
+ "DC": {
+  "interstates": [
+   "I-66",
+   "I-295",
+   "I-395",
+   "I-695"
+  ],
+  "passes": [],
+  "dot": null
+ },
+ "FL": {
+  "interstates": [
+   "I-4",
+   "I-10",
+   "I-75",
+   "I-95",
+   "I-110",
+   "I-195",
+   "I-275",
+   "I-295",
+   "I-395",
+   "I-595"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "FL511",
+   "url": "https://fl511.com"
+  }
+ },
+ "GA": {
+  "interstates": [
+   "I-16",
+   "I-20",
+   "I-75",
+   "I-85",
+   "I-95",
+   "I-285",
+   "I-475",
+   "I-575",
+   "I-675",
+   "I-985"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511GA",
+   "url": "https://511ga.org"
+  }
+ },
+ "HI": {
+  "interstates": [
+   "H-1",
+   "H-2"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "HI DOT",
+   "url": "https://hidot.hawaii.gov/"
+  }
+ },
+ "ID": {
+  "interstates": [
+   "I-15",
+   "I-84",
+   "I-86",
+   "I-90",
+   "I-184"
+  ],
+  "passes": [
+   {
+    "id": "lookout",
+    "name": "Lookout Pass",
+    "route": "I-90"
+   },
+   {
+    "id": "lolo",
+    "name": "Lolo Pass",
+    "route": "US-12"
+   }
+  ],
+  "dot": {
+   "name": "ITD 511",
+   "url": "https://511.idaho.gov"
+  }
+ },
+ "IL": {
+  "interstates": [
+   "I-24",
+   "I-39",
+   "I-55",
+   "I-57",
+   "I-64",
+   "I-70",
+   "I-72",
+   "I-74",
+   "I-80",
+   "I-88",
+   "I-90",
+   "I-94",
+   "I-155",
+   "I-172",
+   "I-180",
+   "I-255",
+   "I-270",
+   "I-280",
+   "I-290",
+   "I-294",
+   "I-355",
+   "I-474"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "IDOT",
+   "url": "https://www.gettingaroundillinois.com/"
+  }
+ },
+ "IN": {
+  "interstates": [
+   "I-64",
+   "I-65",
+   "I-69",
+   "I-70",
+   "I-74",
+   "I-80",
+   "I-94",
+   "I-265",
+   "I-275",
+   "I-465",
+   "I-469",
+   "I-865"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "INDOT",
+   "url": "https://indot.carsprogram.org/"
+  }
+ },
+ "IA": {
+  "interstates": [
+   "I-29",
+   "I-35",
+   "I-74",
+   "I-80",
+   "I-235",
+   "I-280",
+   "I-380",
+   "I-680",
+   "I-880"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511IA",
+   "url": "https://511ia.org/"
+  }
+ },
+ "KS": {
+  "interstates": [
+   "I-35",
+   "I-70",
+   "I-135",
+   "I-235",
+   "I-335",
+   "I-435",
+   "I-470",
+   "I-635"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "KanDrive",
+   "url": "https://www.kandrive.gov/"
+  }
+ },
+ "KY": {
+  "interstates": [
+   "I-24",
+   "I-64",
+   "I-65",
+   "I-69",
+   "I-71",
+   "I-75",
+   "I-165",
+   "I-264",
+   "I-265",
+   "I-275",
+   "I-471"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "goKY",
+   "url": "https://goky.ky.gov/"
+  }
+ },
+ "LA": {
+  "interstates": [
+   "I-10",
+   "I-12",
+   "I-20",
+   "I-49",
+   "I-55",
+   "I-59",
+   "I-110",
+   "I-210",
+   "I-220",
+   "I-310",
+   "I-510",
+   "I-610"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511LA",
+   "url": "https://www.511la.org/"
+  }
+ },
+ "ME": {
+  "interstates": [
+   "I-95",
+   "I-195",
+   "I-295",
+   "I-395",
+   "I-495"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "New England 511",
+   "url": "https://newengland511.org/"
+  }
+ },
+ "MD": {
+  "interstates": [
+   "I-68",
+   "I-70",
+   "I-81",
+   "I-83",
+   "I-95",
+   "I-97",
+   "I-270",
+   "I-495",
+   "I-595",
+   "I-695",
+   "I-795",
+   "I-895"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "MD 511",
+   "url": "https://chart.maryland.gov/"
+  }
+ },
+ "MA": {
+  "interstates": [
+   "I-84",
+   "I-90",
+   "I-91",
+   "I-93",
+   "I-95",
+   "I-190",
+   "I-195",
+   "I-290",
+   "I-291",
+   "I-295",
+   "I-391",
+   "I-395",
+   "I-495"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "MassDOT",
+   "url": "https://www.mass511.com"
+  }
+ },
+ "MI": {
+  "interstates": [
+   "I-69",
+   "I-75",
+   "I-94",
+   "I-96",
+   "I-194",
+   "I-196",
+   "I-275",
+   "I-475",
+   "I-496",
+   "I-675",
+   "I-696"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "Mi Drive",
+   "url": "https://mdotjboss.state.mi.us/MiDrive"
+  }
+ },
+ "MN": {
+  "interstates": [
+   "I-35",
+   "I-35E",
+   "I-35W",
+   "I-90",
+   "I-94",
+   "I-394",
+   "I-494",
+   "I-535",
+   "I-694"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511MN",
+   "url": "https://511mn.org/"
+  }
+ },
+ "MS": {
+  "interstates": [
+   "I-10",
+   "I-20",
+   "I-22",
+   "I-55",
+   "I-59",
+   "I-69",
+   "I-220",
+   "I-269"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "MDOTtraffic",
+   "url": "https://www.mdottraffic.com/"
+  }
+ },
+ "MO": {
+  "interstates": [
+   "I-29",
+   "I-35",
+   "I-44",
+   "I-49",
+   "I-55",
+   "I-57",
+   "I-64",
+   "I-70",
+   "I-72",
+   "I-155",
+   "I-170",
+   "I-229",
+   "I-255",
+   "I-270",
+   "I-435",
+   "I-470",
+   "I-635",
+   "I-670"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "MoDOT",
+   "url": "https://traveler.modot.org/"
+  }
+ },
+ "MT": {
+  "interstates": [
+   "I-15",
+   "I-90",
+   "I-94",
+   "I-115"
+  ],
+  "passes": [
+   {
+    "id": "homestake",
+    "name": "Homestake Pass",
+    "route": "I-90"
+   },
+   {
+    "id": "macdonald",
+    "name": "MacDonald Pass",
+    "route": "US-12"
+   }
+  ],
+  "dot": {
+   "name": "MDT",
+   "url": "https://www.511mt.net"
+  }
+ },
+ "NE": {
+  "interstates": [
+   "I-76",
+   "I-80",
+   "I-180",
+   "I-480",
+   "I-680"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "NE 511",
+   "url": "https://www.511.nebraska.gov/"
+  }
+ },
+ "NV": {
+  "interstates": [
+   "I-11",
+   "I-15",
+   "I-80",
+   "I-215",
+   "I-580"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "NVRoads",
+   "url": "https://www.nvroads.com"
+  }
+ },
+ "NH": {
+  "interstates": [
+   "I-89",
+   "I-93",
+   "I-95",
+   "I-293",
+   "I-393"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "NHDOT",
+   "url": "https://newengland511.org/"
+  }
+ },
+ "NJ": {
+  "interstates": [
+   "I-76",
+   "I-78",
+   "I-80",
+   "I-95",
+   "I-195",
+   "I-278",
+   "I-280",
+   "I-287",
+   "I-295",
+   "I-676"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511NJ",
+   "url": "https://www.511nj.org/"
+  }
+ },
+ "NM": {
+  "interstates": [
+   "I-10",
+   "I-25",
+   "I-40"
+  ],
+  "passes": [
+   {
+    "id": "raton",
+    "name": "Raton Pass",
+    "route": "I-25"
+   }
+  ],
+  "dot": {
+   "name": "NMRoads",
+   "url": "https://nmroads.com/"
+  }
+ },
+ "NY": {
+  "interstates": [
+   "I-81",
+   "I-84",
+   "I-86",
+   "I-87",
+   "I-88",
+   "I-90",
+   "I-95",
+   "I-99",
+   "I-190",
+   "I-278",
+   "I-287",
+   "I-290",
+   "I-295",
+   "I-390",
+   "I-478",
+   "I-481",
+   "I-490",
+   "I-495",
+   "I-590",
+   "I-678",
+   "I-684",
+   "I-690",
+   "I-781",
+   "I-787",
+   "I-790",
+   "I-890",
+   "I-990"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511NY",
+   "url": "https://511ny.org"
+  }
+ },
+ "NC": {
+  "interstates": [
+   "I-26",
+   "I-40",
+   "I-73",
+   "I-74",
+   "I-77",
+   "I-85",
+   "I-87",
+   "I-95",
+   "I-140",
+   "I-240",
+   "I-277",
+   "I-295",
+   "I-440",
+   "I-485",
+   "I-540",
+   "I-795",
+   "I-840"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "NCDOT",
+   "url": "https://www.ncdot.gov/travel-maps/traffic-travel/Pages/default.aspx"
+  }
+ },
+ "ND": {
+  "interstates": [
+   "I-29",
+   "I-94",
+   "I-194"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "NDRoads",
+   "url": "https://travel.dot.nd.gov/"
+  }
+ },
+ "OH": {
+  "interstates": [
+   "I-70",
+   "I-71",
+   "I-74",
+   "I-75",
+   "I-76",
+   "I-77",
+   "I-80",
+   "I-90",
+   "I-270",
+   "I-271",
+   "I-275",
+   "I-277",
+   "I-280",
+   "I-470",
+   "I-475",
+   "I-480",
+   "I-490",
+   "I-670",
+   "I-675",
+   "I-680"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "OHGO",
+   "url": "https://www.ohgo.com/"
+  }
+ },
+ "OK": {
+  "interstates": [
+   "I-35",
+   "I-40",
+   "I-44",
+   "I-240",
+   "I-344"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "OK 511",
+   "url": "https://www.oktraffic.org/"
+  }
+ },
+ "OR": {
+  "interstates": [
+   "I-5",
+   "I-82",
+   "I-84",
+   "I-105",
+   "I-205",
+   "I-405"
+  ],
+  "passes": [
+   {
+    "id": "santiam",
+    "name": "Santiam Pass",
+    "route": "US-20"
+   },
+   {
+    "id": "siskiyou",
+    "name": "Siskiyou Summit",
+    "route": "I-5"
+   },
+   {
+    "id": "willamette-pass",
+    "name": "Willamette Pass",
+    "route": "OR-58"
+   }
+  ],
+  "dot": {
+   "name": "TripCheck",
+   "url": "https://tripcheck.com"
+  }
+ },
+ "PA": {
+  "interstates": [
+   "I-70",
+   "I-76",
+   "I-78",
+   "I-79",
+   "I-80",
+   "I-81",
+   "I-83",
+   "I-84",
+   "I-86",
+   "I-90",
+   "I-95",
+   "I-99",
+   "I-176",
+   "I-180",
+   "I-279",
+   "I-283",
+   "I-295",
+   "I-376",
+   "I-380",
+   "I-476"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511PA",
+   "url": "https://www.511pa.com"
+  }
+ },
+ "RI": {
+  "interstates": [
+   "I-95",
+   "I-195",
+   "I-295"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "RIDOT",
+   "url": "https://www.dot.ri.gov/"
+  }
+ },
+ "SC": {
+  "interstates": [
+   "I-20",
+   "I-26",
+   "I-77",
+   "I-85",
+   "I-95",
+   "I-126",
+   "I-185",
+   "I-385",
+   "I-520",
+   "I-526",
+   "I-585"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511SC",
+   "url": "https://www.511sc.org/"
+  }
+ },
+ "SD": {
+  "interstates": [
+   "I-29",
+   "I-90",
+   "I-229"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "SD511",
+   "url": "https://www.sd511.org/"
+  }
+ },
+ "TN": {
+  "interstates": [
+   "I-24",
+   "I-26",
+   "I-40",
+   "I-55",
+   "I-65",
+   "I-75",
+   "I-81",
+   "I-140",
+   "I-155",
+   "I-240",
+   "I-440",
+   "I-640"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "SmartWay",
+   "url": "https://smartway.tn.gov/traffic"
+  }
+ },
+ "TX": {
+  "interstates": [
+   "I-2",
+   "I-10",
+   "I-14",
+   "I-20",
+   "I-27",
+   "I-30",
+   "I-35",
+   "I-37",
+   "I-40",
+   "I-44",
+   "I-45",
+   "I-69",
+   "I-369",
+   "I-410",
+   "I-610",
+   "I-635",
+   "I-820"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "DriveTexas",
+   "url": "https://drivetexas.org/"
+  }
+ },
+ "UT": {
+  "interstates": [
+   "I-15",
+   "I-70",
+   "I-80",
+   "I-84",
+   "I-215"
+  ],
+  "passes": [
+   {
+    "id": "parleys",
+    "name": "Parleys Summit",
+    "route": "I-80"
+   },
+   {
+    "id": "soldier",
+    "name": "Soldier Summit",
+    "route": "US-6"
+   }
+  ],
+  "dot": {
+   "name": "UDOT",
+   "url": "https://udottraffic.utah.gov"
+  }
+ },
+ "VT": {
+  "interstates": [
+   "I-89",
+   "I-91",
+   "I-93"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "VTrans",
+   "url": "https://newengland511.org/"
+  }
+ },
+ "VA": {
+  "interstates": [
+   "I-64",
+   "I-66",
+   "I-77",
+   "I-81",
+   "I-85",
+   "I-95",
+   "I-264",
+   "I-295",
+   "I-395",
+   "I-495",
+   "I-581",
+   "I-664"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "VA 511",
+   "url": "https://511.vdot.virginia.gov/"
+  }
+ },
+ "WA": {
+  "interstates": [
+   "I-5",
+   "I-82",
+   "I-90",
+   "I-182",
+   "I-205",
+   "I-405",
+   "I-705"
+  ],
+  "passes": [
+   {
+    "id": "snoqualmie",
+    "name": "Snoqualmie Pass",
+    "route": "I-90"
+   },
+   {
+    "id": "stevens",
+    "name": "Stevens Pass",
+    "route": "US-2"
+   },
+   {
+    "id": "white-pass",
+    "name": "White Pass",
+    "route": "US-12"
+   },
+   {
+    "id": "blewett",
+    "name": "Blewett Pass",
+    "route": "US-97"
+   }
+  ],
+  "dot": {
+   "name": "WSDOT",
+   "url": "https://wsdot.wa.gov/travel/real-time/map"
+  }
+ },
+ "WV": {
+  "interstates": [
+   "I-64",
+   "I-68",
+   "I-70",
+   "I-77",
+   "I-79",
+   "I-81",
+   "I-470"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "WV 511",
+   "url": "https://wv511.org/"
+  }
+ },
+ "WI": {
+  "interstates": [
+   "I-39",
+   "I-41",
+   "I-43",
+   "I-90",
+   "I-94",
+   "I-794",
+   "I-894"
+  ],
+  "passes": [],
+  "dot": {
+   "name": "511WI",
+   "url": "https://511wi.gov/"
+  }
+ },
+ "WY": {
+  "interstates": [
+   "I-25",
+   "I-80",
+   "I-90"
+  ],
+  "passes": [
+   {
+    "id": "teton-pass",
+    "name": "Teton Pass",
+    "route": "WY-22"
+   },
+   {
+    "id": "snowy-range",
+    "name": "Snowy Range Pass",
+    "route": "WY-130"
+   }
+  ],
+  "dot": {
+   "name": "WYDOT",
+   "url": "https://wyoroad.info"
+  }
+ }
+}
