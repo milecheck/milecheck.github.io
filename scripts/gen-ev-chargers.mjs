@@ -66,7 +66,7 @@ ${changed}
     <h2>More</h2>
     <ul><li><a href="/how-to-charge-an-electric-car/">How do you charge an electric car at a public charger?</a></li><li><a href="/ev-charging-cost/">How much does it cost to charge an EV in each state?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li><li><a href="/road-conditions/">Road conditions by state</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
-const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
+const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'How many EV chargers are in each state?', url = 'https://milecheckapp.com/ev-chargers/';
 const title = 'How many EV chargers are in each state? Fast and Level 2 | MileCheck';
 const desc = `${lede} Every state, updated weekly from the U.S. Department of Energy.`;

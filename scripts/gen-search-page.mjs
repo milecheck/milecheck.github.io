@@ -10,7 +10,7 @@ const strip = (html) => html
   .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/g, '')
   .replace(/<meta property="og:type" content="article">/, '<meta property="og:type" content="website">');
 const head = strip(tpl.slice(0, tpl.indexOf('<body>')));
-const header = tpl.slice(tpl.indexOf('<body>'), tpl.indexOf('<article class="art">')).replace(/\.\.\/index\.html/g, '/').replace(/href="\.\.\//g, 'href="/')
+const header = tpl.slice(tpl.indexOf('<body>'), tpl.indexOf('<article class="art')).replace(/\.\.\/index\.html/g, '/').replace(/href="\.\.\//g, 'href="/')
   .replace(/<a\b[^>]*class="nav-search"[^>]*>[\s\S]*?<\/a>\s*/g, '');
 const footer = tpl.slice(tpl.indexOf('<footer class="site-footer">')).replace(/href="\.\.\//g, 'href="/').replace(/src="\.\.\//g, 'src="/')
   .replace(/ct=best-portable-jump-starters/g, 'ct=search').replace(/utm_campaign%3Dbest-portable-jump-starters/g, 'utm_campaign%3Dsearch')

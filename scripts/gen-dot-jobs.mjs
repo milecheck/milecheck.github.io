@@ -194,7 +194,7 @@ ${PORTALS.map(p => `      <li><a href="${esc(p[2])}" target="_blank" rel="noopen
     </div>`;
 
 const tpl = readFileSync(resolve(SITE, 'rest-areas/index.html'), 'utf8');
-const a0 = tpl.indexOf('<article class="art">');
+const a0 = tpl.indexOf('<article class="art');
 const a1 = tpl.indexOf('</article>');
 const TITLE = 'Which state DOTs are hiring seasonal highway workers right now?';
 const DESC = 'Open seasonal and winter maintenance jobs at state DOTs, with pay and closing dates, each linking to the official posting. Plus how state DOT hiring works.';
