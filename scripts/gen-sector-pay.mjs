@@ -12,7 +12,7 @@ const $ = n => '$' + Math.round(n).toLocaleString('en-US');
 const td = 'style="padding:9px 6px;border-bottom:1px solid #eee;vertical-align:top"', th = 'style="text-align:left;padding:8px 6px;border-bottom:2px solid #E5E5E5"';
 const sortJs = readFileSync('gas-prices/index.html', 'utf8').match(/<script>\ndocument\.querySelectorAll\('table\[data-sortable\]'\)[\s\S]*?<\/script>/)[0];
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
-const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
+const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art')), tail = tpl.slice(tpl.indexOf('  </article>'));
 for (const P of PAGES) {
   const us = D.us[P.occ], year = D.year;
   const rows = Object.entries(D.states).filter(([, v]) => v[P.occ]?.median).map(([st, v]) => ({ name: NAMES[st], ...v[P.occ] })).sort((a, b) => b.median - a.median);

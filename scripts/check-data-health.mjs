@@ -60,6 +60,8 @@ async function probe(st) {
     out.alerts = (a['incident-reports'] || []).length;
     out.alertStatus = a.source_status || null;
     out.alertErrors = (a.errors || []).length;
+    // Errors that are not 'the DOT published few rows' (low-count): a real fetch or parse failure.
+    out.alertHardErrors = (a.errors || []).filter((e) => e && e.stage !== 'low-count').length;
     out.fetchedAt = a.fetched_at || null;
   } catch (e) { out.errors.push(`alerts: ${e.message}`); }
   try {
@@ -203,11 +205,16 @@ if (pastDays.length >= AVG_MIN_DAYS) {
       if (kind === 'alerts' && FORWARD_WINDOW.has(st) && days !== sameDow) continue;
       const minVals = days === sameDow ? 2 : AVG_MIN_DAYS;
       if (vals.length < minVals || p[kind] == null) continue;
-      const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
+      // Median, not mean (11/22): one storm Sunday (CA 10,569 avg vs 2,952 on a quiet Thanksgiving-week Sunday) set the floor.
+      const sorted = [...vals].sort((a, b) => a - b);
+      const avg = sorted.length % 2 ? sorted[(sorted.length - 1) / 2] : (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
       if (!(avg >= AVG_MIN && p[kind] < avg * (1 - AVG_DROP))) continue;
-      const label = days === sameDow ? `${vals.length}-${['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dow]} average` : `${vals.length}-day average`;
+      const label = days === sameDow ? `${vals.length}-${['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dow]} median` : `${vals.length}-day median`;
       const msg = `${st}: ${kind} at ${p[kind]}, over ${AVG_DROP * 100}% below the ${label} of ${Math.round(avg)}`;
       if (kind === 'alerts' && INCIDENT_ONLY.has(st)) { warnings.push(`${msg} (crash/closure-only feed, warning only)`); continue; }
+      // A drop with every source fetched fine is a quiet day upstream (11/22: CO, MI, NJ, NY live with no errors; CA's
+      // Caltrans files themselves short in Thanksgiving week). Warn; an empty feed or a failed source still fails.
+      if (kind === 'alerts' && !p.alertHardErrors && p.alertStatus !== 'failed') { warnings.push(`${msg} (every source fetched; upstream is quiet, warning only)`); continue; }
       if (kind === 'alerts') {
         lowAlerts.add(st);
         if (lastDay && history[lastDay]?.[st]?.alertsLow) flag(`${st}:alerts`, `${msg}, two runs in a row`);

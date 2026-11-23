@@ -52,7 +52,7 @@ ${table}
     <h2>More</h2>
     <ul><li><a href="/what-vehicles-do-cal-fire-and-seattle-fire-drive/">What vehicles do CAL FIRE and Seattle Fire drive?</a></li><li><a href="/how-long-does-it-take-an-ambulance-to-reach-a-crash/">How long does it take an ambulance to reach a crash scene?</a></li><li><a href="/road-conditions/">Road conditions by state</a></li><li><a href="/closures/">Highway closures map</a></li><li><a href="/road-workers/emts/">How much do EMTs make in each state?</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
-const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
+const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'How long does it take to clear a highway crash?', url = 'https://milecheckapp.com/how-long-do-crashes-take-to-clear/';
 const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: h1, acceptedAnswer: { '@type': 'Answer', text: lede } }] };
 const html = headA + `  <title>${esc(h1)} Times by state | MileCheck</title>\n  <meta name="description" content="${esc(lede)}">\n  <link rel="canonical" href="${url}">\n  <meta property="og:title" content="${esc(h1)}">\n  <meta property="og:url" content="${url}">\n  <meta property="og:type" content="article">\n` +

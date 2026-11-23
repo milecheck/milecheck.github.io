@@ -7,7 +7,7 @@ const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const headA = tpl.slice(0, tpl.indexOf('  <title>'));
 const headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">'));
-const headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">'));
+const headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art'));
 const tail = tpl.slice(tpl.indexOf('  </article>'));
 const PATH = '/how-often-are-chains-required-on-washington-passes/';
 const URL = `https://milecheckapp.com${PATH}`;

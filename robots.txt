@@ -2,12 +2,10 @@ User-agent: *
 Allow: /
 Sitemap: https://milecheckapp.com/sitemap.xml
 
-Disallow: /or-family/
 Disallow: /conditions?state=
 Disallow: /fires?bbox=
 Disallow: /plows?state=
 Disallow: /mileposts?state=
 Disallow: /details/camera
-Disallow: /alluvium/
 Disallow: /maptest/
 Sitemap: https://milecheckapp.com/closures-sitemap.xml

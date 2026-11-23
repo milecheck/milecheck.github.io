@@ -57,7 +57,7 @@ const headOut = head
   .replace(/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"Article"[\s\S]*?<\/script>/, `<script type="application/ld+json">${ld}</script>`)
   .replace(/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"BreadcrumbList"[\s\S]*?<\/script>/, `<script type="application/ld+json">${bc}</script>`)
   .replace('  <style>', `  <style>\n    .gear-sec{margin-top:34px;}\n    .gear-sub{color:#5b6670;font-size:15px;margin:0 0 12px;}\n    .gear-toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;}\n    .gear-toc a{display:inline-block;border:1px solid #E5E5E5;border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:700;color:#0E1116;text-decoration:none;}\n    .gear-toc a:hover{border-color:#0E1116;}`);
-const header = tpl.slice(tpl.indexOf('<body>'), tpl.indexOf('<article class="art">'));
+const header = tpl.slice(tpl.indexOf('<body>'), tpl.indexOf('<article class="art'));
 const footer = tpl.slice(tpl.indexOf('<footer class="site-footer">')).replace(/ct=best-portable-jump-starters/g, 'ct=gear').replace(/utm_campaign%3Dbest-portable-jump-starters/g, 'utm_campaign%3Dgear')
   .replace(/<p class="footer-label">Learn more<\/p>\s*<ul class="footer-list">[\s\S]*?<\/ul>/, `<p class="footer-label">Gear guides</p>\n          <ul class="footer-list">\n${GUIDES.map(([s, t]) => `            <li><a href="../${s}/">${t}</a></li>`).join('\n')}\n          </ul>`);
 const spon = tpl.slice(tpl.indexOf('<!-- spon:start -->'), tpl.indexOf('<!-- spon:end -->') + '<!-- spon:end -->'.length).replace('basics:best-portable-jump-starters', 'basics:gear');

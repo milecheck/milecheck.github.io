@@ -31,7 +31,7 @@ ${sortJs}
     <h2>On the road</h2>
     <ul><li><a href="/road-workers/dot-jobs/">How do you get a job at your state DOT?</a></li><li><a href="/dot-jobs/">Which state DOTs are hiring seasonal highway workers right now?</a></li><li><a href="/road-workers/truck-drivers/">How much do truck drivers make in each state?</a></li><li><a href="/road-workers/emts/">How much do EMTs make in each state?</a></li><li><a href="/road-conditions/">Road conditions by state</a></li><li><a href="/snowplows/">Where are the snowplows?</a></li><li><a href="/gas-prices/">Gas prices by state this week</a></li></ul>`;
 const tpl = readFileSync('what-is-my-mile-marker/index.html', 'utf8');
-const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art">')), tail = tpl.slice(tpl.indexOf('  </article>'));
+const headA = tpl.slice(0, tpl.indexOf('  <title>')), headB = tpl.slice(tpl.indexOf('  <link rel="icon"'), tpl.indexOf('  <script type="application/ld+json">')), headC = tpl.slice(tpl.indexOf('  <style>'), tpl.indexOf('  <article class="art')), tail = tpl.slice(tpl.indexOf('  </article>'));
 const h1 = 'How much do highway maintenance workers make in each state?';
 const url = 'https://milecheckapp.com/road-workers/';
 const title = `How much do highway maintenance workers make in each state? (${year}) | MileCheck`;
