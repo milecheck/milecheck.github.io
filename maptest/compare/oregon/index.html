@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Which map is easier to read? | MileCheck map test</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<style>
+:root{--ink:#16201b;--mute:#5b675f;--line:#d9dfdb;--g:#14532d}
+*{box-sizing:border-box}body{margin:0;font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fafaf7}
+header{background:#1f2622;color:#fff;padding:12px 16px;font-weight:700}
+main{max-width:1200px;margin:0 auto;padding:16px 16px 80px}
+h1{font-size:24px;margin:8px 0 4px}p.sub{color:var(--mute);margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}.chips button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:8px 14px;font:inherit;font-size:14px;min-height:44px;cursor:pointer}
+.maps{display:flex;gap:12px}.col{flex:1;min-width:0}.lab{font-weight:700;margin:0 0 6px}
+.m{height:62vh;min-height:360px;border:1px solid var(--line);border-radius:10px}
+.leaflet-bar a,.leaflet-bar a:hover{background-color:#fff!important}
+form{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:16px;max-width:720px}
+fieldset{border:0;padding:0;margin:0 0 12px}legend{font-weight:700;margin-bottom:6px}
+.pick{display:flex;gap:8px;flex-wrap:wrap}.pick label{border:1px solid var(--line);border-radius:8px;padding:10px 16px;min-height:44px;display:flex;align-items:center;gap:6px;cursor:pointer}
+textarea,input[type=text],select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px}textarea{min-height:80px}
+label.f{display:block;font-weight:700;margin:12px 0 4px}button.go{margin-top:14px;background:var(--g);color:#fff;border:0;border-radius:8px;padding:12px 20px;font:inherit;font-weight:700;min-height:44px;cursor:pointer}
+#msg{margin-top:10px;font-weight:700}
+#mt-banner{position:fixed;bottom:0;left:0;right:0;z-index:99999;background:var(--g);color:#fff;font-size:13px;padding:6px 12px;text-align:center}
+@media(max-width:760px){.maps{flex-direction:column}.m{height:46vh;min-height:280px}}
+</style></head><body>
+<header>MileCheck map test</header>
+<main>
+<h1>Which map is easier to read?</h1>
+<p class="sub">Two maps of the same place. They move together. Look around, then tell us which one you would rather use and why.</p>
+<div class="chips" id="chips"><button data-v="45.52,-122.68,12">Portland</button><button data-v="45.519,-122.677,15">Downtown Portland</button><button data-v="45.528,-122.664,16">I-5 and I-84</button><button data-v="45.30,-121.75,11">Mount Hood</button><button data-v="45.66,-121.9,11">Columbia Gorge</button><button data-v="44.058,-121.315,13">Bend</button><button data-v="45.672,-118.788,13">Pendleton</button><button data-v="44.8,-118.5,8">Eastern Oregon</button></div>
+<div class="maps"><div class="col"><div class="lab">Map A</div><div class="m" id="m0"></div></div>
+<div class="col"><div class="lab">Map B</div><div class="m" id="m1"></div></div></div>
+<form id="f">
+<fieldset><legend>Which map would you rather use?</legend><div class="pick">
+<label><input type="radio" name="pick" value="A" required> Map A</label><label><input type="radio" name="pick" value="B"> Map B</label><label><input type="radio" name="pick" value="same"> No real difference</label></div></fieldset>
+<label class="f" for="why">Why?</label><textarea id="why" maxlength="2000" placeholder="What made it easier or harder to read?"></textarea>
+<label class="f" for="wrong">Anything wrong or missing on either map?</label><textarea id="wrong" maxlength="2000" placeholder="A road in the wrong place, a missing label, something hard to tap"></textarea>
+<label class="f" for="role">What do you do on the road? (optional)</label>
+<select id="role"><option value="">Pick one</option><option>DOT or road crew</option><option>Police, fire, EMS or dispatch</option><option>Truck driver</option><option>Everyday driver</option><option>Other</option></select>
+<label class="f" for="who">Your name (optional)</label><input type="text" id="who" maxlength="120">
+<button class="go" type="submit">Send</button><div id="msg" role="status"></div>
+</form>
+</main>
+<div id="mt-banner">Map test. Not a public page. Oregon only.</div>
+<script>
+(function(){
+const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
+function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#36413b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094',mk:'#cbd5e1'}:
+{land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#c9c4b8',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f',mk:'#475569'};
+const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
+return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
+sources:{b:{type:'vector',url:'pmtiles://'+abs('or/base.pmtiles')},l:{type:'vector',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/streets.pmtiles'},w:{type:'vector',url:'pmtiles://'+abs('or/water.pmtiles')},hs:{type:'raster',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/hillshade.pmtiles',tileSize:256},ln:{type:'vector',url:'pmtiles://'+new URL('/maptest/tiles/or/lanes.pmtiles',location.href).href+''},m:{type:'vector',url:'pmtiles://'+abs('or/mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('or/poi.pmtiles')},
+a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
+layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
+{id:'hs',type:'raster',source:'hs',maxzoom:15,paint:{'raster-opacity':['interpolate',['linear'],['zoom'],12,d?.35:.45,15,0],'raster-contrast':d?-.2:0}},
+{id:'water',type:'fill','source':'b','source-layer':'water',maxzoom:10,paint:{'fill-color':C.water}},{id:'water2',type:'fill',source:'w','source-layer':'water',minzoom:9,paint:{'fill-color':C.water}},
+{id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
+{id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
+{id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
+{id:'sr',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'state'],paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.st,'line-width':rw(.6,2.5)}},
+{id:'us',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'us'],layout:{'line-cap':'round'},paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.us,'line-width':rw(1,4)}},
+{id:'ic',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.ic,'line-width':rw(2,7.5)}},
+{id:'i',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.i,'line-width':rw(1.4,5)}},
+{id:'lnr',type:'line',source:'ln','source-layer':'lanes',minzoom:14,filter:['==',['get','k'],'road'],paint:{'line-color':d?'#2a2f2c':'#9aa0a0','line-width':['interpolate',['exponential',2],['zoom'],14,['*',['get','n'],1.4],17,['*',['get','n'],11]],'line-opacity':.9}},{id:'lne',type:'line',source:'ln','source-layer':'lanes',minzoom:15,filter:['==',['get','k'],'edge'],paint:{'line-color':'#ffffff','line-width':1}},{id:'lnl',type:'line',source:'ln','source-layer':'lanes',minzoom:15,filter:['==',['get','k'],'lane'],paint:{'line-color':'#ffffff','line-width':1,'line-dasharray':[3,4]}},{id:'lnc',type:'line',source:'ln','source-layer':'lanes',minzoom:15,filter:['==',['get','k'],'center'],paint:{'line-color':'#f2c200','line-width':1}},
+{id:'stn',type:'symbol',source:'l','source-layer':'local',minzoom:14,filter:['!=',['get','n'],''],layout:{'symbol-placement':'line','text-field':['get','n'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],14,9,17,12],'symbol-spacing':300},paint:{'text-color':C.txt,'text-opacity':.8,'text-halo-color':C.halo,'text-halo-width':1.5}},{id:'mp',type:'circle','source':'m','source-layer':'mp',minzoom:8,filter:['any',['>=',['zoom'],10],['==',['get','t'],1]],paint:{'circle-color':C.mk,'circle-radius':['interpolate',['linear'],['zoom'],8,2,12,4],'circle-stroke-color':C.halo,'circle-stroke-width':1}},
+{id:'mpl',type:'symbol','source':'m','source-layer':'mp',minzoom:11,layout:{'text-field':['to-string',['get','mp']],'text-font':['bold'],'text-size':10,'text-offset':[0,1]},paint:{'text-color':C.mk,'text-halo-color':C.halo,'text-halo-width':1.5}},
+{id:'countyn',type:'symbol',source:'q','source-layer':'countypt',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'ref',type:'symbol','source':'b','source-layer':'roads',filter:['all',['!=',['get','ref'],''],['any',['in',['get','c'],['literal',['interstate','us']]],['>=',['zoom'],9]]],layout:{'symbol-sort-key':['match',['get','c'],'interstate',0,'us',1,2],'symbol-placement':'line','symbol-spacing':260,'text-field':['get','ref'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],6,10,12,13],'text-rotation-alignment':'viewport'},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':2}},
+{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],40000000,6,15000000,7,5000000,9,1000000,10,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
+{id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'icon-image':['match',['get','t'],'EVF','bolt','EV','bolt','pump'],'icon-size':['interpolate',['linear'],['zoom'],9,.55,13,.8],'icon-allow-overlap':true},paint:{}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
+
+const P=new pmtiles.Protocol();maplibregl.addProtocol('pmtiles',P.tile);
+let order;try{order=sessionStorage.getItem('mtOrder')}catch(e){}if(order!=='OE'&&order!=='EO'){order=Math.random()<.5?'OE':'EO';try{sessionStorage.setItem('mtOrder',order)}catch(e){}}
+const mk=id=>L.map(id,{zoomControl:true,attributionControl:true,scrollWheelZoom:false}).setView([45.52,-122.68],12);
+const maps=[mk('m0'),mk('m1')];
+function ours(m){m.attributionControl.setPrefix(false);const gl=L.maplibreGL({padding:.3,style:style(false),attribution:'Data: Census, USGS, FHWA, DOE'}).addTo(m);m._zoomAnimated=false;
+ (function w(){const g=gl.getMaplibreMap&&gl.getMaplibreMap();if(!g){setTimeout(w,100);return}
+ const img=n=>{const c=document.createElement('canvas');c.width=c.height=32;const x=c.getContext('2d');x.fillStyle='#fff';x.strokeStyle='#fff';
+  if(n==='bolt'){x.beginPath();x.moveTo(18,3);x.lineTo(7,18);x.lineTo(15,18);x.lineTo(13,29);x.lineTo(25,13);x.lineTo(17,13);x.lineTo(19,3);x.closePath();x.fill()}
+  else{x.fillRect(8,7,11,19);x.fillRect(6,25,15,3);x.lineWidth=2.5;x.beginPath();x.moveTo(19,12);x.lineTo(24,15);x.lineTo(24,23);x.stroke();x.fillStyle='#0e7490';x.fillRect(10,9,7,5)}
+  return x.getImageData(0,0,32,32)};
+ g.on('styleimagemissing',e=>{if((e.id==='bolt'||e.id==='pump')&&!g.hasImage(e.id))g.addImage(e.id,img(e.id),{pixelRatio:2})})})()}
+function esri(m){m.attributionControl.setPrefix(false);L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Esri'}).addTo(m)}
+(order==='OE'?[ours,esri]:[esri,ours]).forEach((fn,i)=>fn(maps[i]));
+let lock=false;maps.forEach((m,i)=>m.on('move',()=>{if(lock)return;lock=true;maps[1-i].setView(m.getCenter(),m.getZoom(),{animate:false});lock=false}));
+document.getElementById('chips').onclick=e=>{const v=e.target.dataset&&e.target.dataset.v;if(!v)return;const [a,b,z]=v.split(',').map(Number);maps[0].setView([a,b],z)};
+const f=document.getElementById('f'),msg=document.getElementById('msg');
+f.onsubmit=async e=>{e.preventDefault();const pk=f.querySelector('input[name=pick]:checked');if(!pk)return;
+ const pick=pk.value==='same'?'same':((pk.value==='A')===(order==='OE')?'ours':'esri');
+ const c=maps[0].getCenter();
+ const body={state:'OR',pick:pk.value,why:why.value,wrong:wrong.value,role:role.value,who:who.value,order:order,view:c.lat.toFixed(4)+','+c.lng.toFixed(4)+',z'+maps[0].getZoom()};
+ msg.textContent='Sending...';
+ try{const r=await fetch('https://milepost-proxy.leahgerber93.workers.dev/maptest/feedback',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)});if(!r.ok)throw 0;
+  msg.textContent='Thank you. Got it.';f.reset();}
+ catch(err){const t='Picked: Map '+body.pick+' (order '+order+')\n\nWhy: '+body.why+'\n\nWrong or missing: '+body.wrong+'\n\nRole: '+body.role+'\nName: '+body.who+'\nView: '+body.view;
+  msg.textContent='Could not send. Your email app will open with your answers.';location.href='mailto:feedback@milecheckapp.com?subject=Map%20test%20vote&body='+encodeURIComponent(t)}};
+})();
+</script></body></html>
