@@ -1,0 +1,32 @@
+# Every 3 hours: re-bake the dated "<State> at the last read" box on the 9 winter-state /road-conditions/ pages
+# (scripts/bake-state-status.mjs). Added 2026-11-24: the box had been baked once by hand on 11/1 and sat three weeks
+# stale under a live map. In the browser, assets/state-now.js refreshes the same box from the live feed; this keeps the
+# HTML itself (no JavaScript, crawlers, slow feed) no more than a few hours old.
+name: state-status
+on:
+  schedule:
+    - cron: '47 */3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: state-status
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node --test assets/state-now.test.cjs
+      - run: node scripts/bake-state-status.mjs
+      # Same guard as pass-status: put the Mediavine markup back if a rewrite dropped it, then verify.
+      - run: node scripts/add-mediavine.mjs && (node scripts/check-mediavine.mjs || echo "::warning::Mediavine check failed")
+      - name: Commit if changed
+        run: |
+          git config user.name "milecheck-bot"
+          git config user.email "info@milecheckapp.com"
+          git add road-conditions
+          git diff --cached --quiet && exit 0
+          git commit -m "State status refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git stash --include-untracked --quiet || true
+          git pull --rebase --autostash origin main && git push origin HEAD:main
