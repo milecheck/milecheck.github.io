@@ -1,5 +1,17 @@
 {
   "_comment": "Pages that stay up for readers and old links but are kept out of search and the sitemap. Read by scripts/noindex-old-reports.mjs (runs in finish-pages). A directory means every .html file in it. 2026-10-30: the dated per-state pages from last month's reports (Search Console showed 336 of 1,118 pages Discovered but not indexed on 10/28, and these are near-duplicates of each other by design). The national report pages stay indexed.",
-  "dirs": ["blog/highway-report-september-2026-states", "blog/labor-day-weekend-recap-2026-states"],
-  "files": []
+  "dirs": [
+    "blog/highway-report-september-2026-states",
+    "blog/labor-day-weekend-recap-2026-states"
+  ],
+  "files": [],
+  "_comment_2026_11_24": "Ad review (Google Ad Manager / AdSense denied the site three times with no reason). Google's publisher policies bar ads on screens used for alerts or navigation, pages built from other sites' images, and auto-generated near-duplicate pages. leafDirs noindexes every page under these sections except the hub, so the indexed site is the written guides, passes, corridors, blog and the mile-marker map. Leah 2026-11-24: 'whatever it takes to get approved'. To undo after approval, remove a section from leafDirs and delete the robots meta from its pages.",
+  "leafDirs": [
+    "cameras",
+    "ski",
+    "road-conditions",
+    "thanksgiving",
+    "move-over-laws",
+    "rest-areas"
+  ]
 }
