@@ -1,13 +1,13 @@
 {
  "source": "https://afdc.energy.gov/stations/states",
- "updated": "2026-11-24",
+ "updated": "2026-11-25",
  "us": {
   "name": "Total",
-  "locations": 84536,
-  "ports": 266826,
+  "locations": 84668,
+  "ports": 267261,
   "l1": 688,
-  "l2": 185167,
-  "dc": 80959
+  "l2": 185504,
+  "dc": 81057
  },
  "states": [
   {
@@ -15,8 +15,8 @@
    "locations": 580,
    "ports": 1799,
    "l1": 2,
-   "l2": 855,
-   "dc": 942
+   "l2": 854,
+   "dc": 943
   },
   {
    "name": "Alaska",
@@ -28,11 +28,11 @@
   },
   {
    "name": "Arizona",
-   "locations": 1584,
-   "ports": 4912,
+   "locations": 1583,
+   "ports": 4909,
    "l1": 2,
-   "l2": 3285,
-   "dc": 1625
+   "l2": 3281,
+   "dc": 1626
   },
   {
    "name": "Arkansas",
@@ -44,27 +44,27 @@
   },
   {
    "name": "California",
-   "locations": 20714,
-   "ports": 70217,
+   "locations": 20730,
+   "ports": 70241,
    "l1": 284,
-   "l2": 50059,
-   "dc": 19862
+   "l2": 50074,
+   "dc": 19871
   },
   {
    "name": "Colorado",
-   "locations": 2968,
-   "ports": 8021,
+   "locations": 3028,
+   "ports": 8141,
    "l1": 55,
-   "l2": 6251,
-   "dc": 1715
+   "l2": 6369,
+   "dc": 1717
   },
   {
    "name": "Connecticut",
-   "locations": 1669,
-   "ports": 4981,
+   "locations": 1663,
+   "ports": 4970,
    "l1": 9,
-   "l2": 4201,
-   "dc": 771
+   "l2": 4191,
+   "dc": 770
   },
   {
    "name": "Delaware",
@@ -76,34 +76,34 @@
   },
   {
    "name": "District of Columbia",
-   "locations": 310,
-   "ports": 1088,
+   "locations": 311,
+   "ports": 1089,
    "l1": 2,
-   "l2": 1017,
+   "l2": 1018,
    "dc": 69
   },
   {
    "name": "Florida",
-   "locations": 4461,
-   "ports": 15569,
+   "locations": 4466,
+   "ports": 15588,
    "l1": 33,
-   "l2": 9975,
-   "dc": 5561
+   "l2": 9982,
+   "dc": 5573
   },
   {
    "name": "Georgia",
-   "locations": 2416,
-   "ports": 7758,
+   "locations": 2409,
+   "ports": 7744,
    "l1": 77,
-   "l2": 5257,
-   "dc": 2424
+   "l2": 5247,
+   "dc": 2420
   },
   {
    "name": "Hawaii",
-   "locations": 408,
-   "ports": 1059,
+   "locations": 409,
+   "ports": 1061,
    "l1": 0,
-   "l2": 874,
+   "l2": 876,
    "dc": 185
   },
   {
@@ -116,11 +116,11 @@
   },
   {
    "name": "Illinois",
-   "locations": 1969,
-   "ports": 6557,
+   "locations": 1973,
+   "ports": 6566,
    "l1": 3,
-   "l2": 3421,
-   "dc": 3133
+   "l2": 3429,
+   "dc": 3134
   },
   {
    "name": "Indiana",
@@ -132,26 +132,26 @@
   },
   {
    "name": "Iowa",
-   "locations": 485,
-   "ports": 1309,
+   "locations": 487,
+   "ports": 1311,
    "l1": 0,
-   "l2": 718,
+   "l2": 720,
    "dc": 591
   },
   {
    "name": "Kansas",
-   "locations": 592,
-   "ports": 1477,
+   "locations": 595,
+   "ports": 1484,
    "l1": 0,
-   "l2": 1055,
-   "dc": 422
+   "l2": 1058,
+   "dc": 426
   },
   {
    "name": "Kentucky",
-   "locations": 411,
-   "ports": 1208,
+   "locations": 412,
+   "ports": 1210,
    "l1": 4,
-   "l2": 731,
+   "l2": 733,
    "dc": 473
   },
   {
@@ -164,42 +164,42 @@
   },
   {
    "name": "Maine",
-   "locations": 653,
-   "ports": 1637,
+   "locations": 651,
+   "ports": 1635,
    "l1": 3,
    "l2": 1208,
-   "dc": 426
+   "dc": 424
   },
   {
    "name": "Maryland",
-   "locations": 1690,
-   "ports": 5669,
+   "locations": 1688,
+   "ports": 5666,
    "l1": 12,
-   "l2": 4010,
-   "dc": 1647
+   "l2": 4006,
+   "dc": 1648
   },
   {
    "name": "Massachusetts",
-   "locations": 4654,
+   "locations": 4651,
    "ports": 11994,
    "l1": 6,
-   "l2": 9949,
-   "dc": 2039
+   "l2": 9953,
+   "dc": 2035
   },
   {
    "name": "Michigan",
-   "locations": 2094,
-   "ports": 5802,
+   "locations": 2100,
+   "ports": 5817,
    "l1": 4,
-   "l2": 3977,
-   "dc": 1821
+   "l2": 3987,
+   "dc": 1826
   },
   {
    "name": "Minnesota",
-   "locations": 1170,
-   "ports": 3375,
+   "locations": 1171,
+   "ports": 3377,
    "l1": 13,
-   "l2": 2276,
+   "l2": 2278,
    "dc": 1086
   },
   {
@@ -212,11 +212,11 @@
   },
   {
    "name": "Missouri",
-   "locations": 1344,
-   "ports": 3343,
+   "locations": 1343,
+   "ports": 3342,
    "l1": 0,
    "l2": 2437,
-   "dc": 906
+   "dc": 905
   },
   {
    "name": "Montana",
@@ -228,19 +228,19 @@
   },
   {
    "name": "Nebraska",
-   "locations": 338,
-   "ports": 798,
+   "locations": 337,
+   "ports": 797,
    "l1": 0,
    "l2": 492,
-   "dc": 306
+   "dc": 305
   },
   {
    "name": "Nevada",
-   "locations": 641,
-   "ports": 2890,
+   "locations": 640,
+   "ports": 2888,
    "l1": 3,
    "l2": 1565,
-   "dc": 1322
+   "dc": 1320
   },
   {
    "name": "New Hampshire",
@@ -252,35 +252,35 @@
   },
   {
    "name": "New Jersey",
-   "locations": 2186,
-   "ports": 7269,
+   "locations": 2190,
+   "ports": 7293,
    "l1": 11,
-   "l2": 5012,
-   "dc": 2246
+   "l2": 5010,
+   "dc": 2272
   },
   {
    "name": "New Mexico",
-   "locations": 502,
-   "ports": 1299,
+   "locations": 504,
+   "ports": 1304,
    "l1": 2,
-   "l2": 673,
-   "dc": 624
+   "l2": 677,
+   "dc": 625
   },
   {
    "name": "New York",
-   "locations": 5752,
-   "ports": 22204,
+   "locations": 5790,
+   "ports": 22433,
    "l1": 9,
-   "l2": 18618,
-   "dc": 3577
+   "l2": 18782,
+   "dc": 3642
   },
   {
    "name": "North Carolina",
-   "locations": 1917,
-   "ports": 5950,
+   "locations": 1920,
+   "ports": 5953,
    "l1": 9,
-   "l2": 3985,
-   "dc": 1956
+   "l2": 3987,
+   "dc": 1957
   },
   {
    "name": "North Dakota",
@@ -292,11 +292,11 @@
   },
   {
    "name": "Ohio",
-   "locations": 1952,
-   "ports": 5473,
+   "locations": 1947,
+   "ports": 5453,
    "l1": 4,
-   "l2": 3877,
-   "dc": 1592
+   "l2": 3855,
+   "dc": 1594
   },
   {
    "name": "Oklahoma",
@@ -308,35 +308,35 @@
   },
   {
    "name": "Oregon",
-   "locations": 1682,
-   "ports": 4385,
+   "locations": 1696,
+   "ports": 4414,
    "l1": 35,
-   "l2": 2961,
-   "dc": 1389
+   "l2": 2986,
+   "dc": 1393
   },
   {
    "name": "Pennsylvania",
-   "locations": 2090,
+   "locations": 2088,
    "ports": 5937,
    "l1": 12,
-   "l2": 3844,
-   "dc": 2081
+   "l2": 3843,
+   "dc": 2082
   },
   {
    "name": "Rhode Island",
-   "locations": 359,
-   "ports": 887,
+   "locations": 358,
+   "ports": 886,
    "l1": 20,
    "l2": 713,
-   "dc": 154
+   "dc": 153
   },
   {
    "name": "South Carolina",
-   "locations": 712,
-   "ports": 2266,
+   "locations": 715,
+   "ports": 2271,
    "l1": 3,
-   "l2": 1285,
-   "dc": 978
+   "l2": 1287,
+   "dc": 981
   },
   {
    "name": "South Dakota",
@@ -348,67 +348,67 @@
   },
   {
    "name": "Tennessee",
-   "locations": 1183,
-   "ports": 3230,
+   "locations": 1182,
+   "ports": 3229,
    "l1": 1,
-   "l2": 2118,
+   "l2": 2117,
    "dc": 1111
   },
   {
    "name": "Texas",
-   "locations": 3877,
-   "ports": 13326,
+   "locations": 3878,
+   "ports": 13328,
    "l1": 0,
-   "l2": 7440,
-   "dc": 5886
+   "l2": 7447,
+   "dc": 5881
   },
   {
    "name": "Utah",
-   "locations": 1044,
-   "ports": 3290,
+   "locations": 1045,
+   "ports": 3295,
    "l1": 4,
-   "l2": 2206,
+   "l2": 2211,
    "dc": 1080
   },
   {
    "name": "Vermont",
-   "locations": 552,
-   "ports": 1367,
+   "locations": 551,
+   "ports": 1365,
    "l1": 16,
    "l2": 1004,
-   "dc": 347
+   "dc": 345
   },
   {
    "name": "Virginia",
-   "locations": 1866,
-   "ports": 5615,
+   "locations": 1869,
+   "ports": 5619,
    "l1": 22,
-   "l2": 3701,
+   "l2": 3705,
    "dc": 1892
   },
   {
    "name": "Washington",
    "locations": 3246,
-   "ports": 9278,
+   "ports": 9270,
    "l1": 15,
-   "l2": 6789,
-   "dc": 2474
+   "l2": 6794,
+   "dc": 2461
   },
   {
    "name": "West Virginia",
-   "locations": 183,
-   "ports": 556,
+   "locations": 182,
+   "ports": 554,
    "l1": 2,
    "l2": 326,
-   "dc": 228
+   "dc": 226
   },
   {
    "name": "Wisconsin",
-   "locations": 910,
-   "ports": 2451,
+   "locations": 908,
+   "ports": 2448,
    "l1": 5,
    "l2": 1460,
-   "dc": 986
+   "dc": 983
   },
   {
    "name": "Wyoming",
