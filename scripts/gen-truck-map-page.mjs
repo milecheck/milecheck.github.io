@@ -78,8 +78,8 @@ ${ld.map(o => `  <script type="application/ld+json">${JSON.stringify(o)}</script
   <style>
     .tr-wrap{max-width:1160px;margin:0 auto;padding:28px 16px 10px;box-sizing:border-box}
     .tr-wrap h1{overflow-wrap:anywhere;font-size:clamp(26px,5vw,42px);line-height:1.1;margin:0 0 10px}
-    .tr-sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:780px;margin:0 0 14px}
-    .tr-warn{background:#fff6e5;border:1px solid #f0c36d;border-radius:10px;padding:10px 14px;font-size:15px;line-height:1.5;margin:0 0 16px;max-width:780px}
+    .tr-sub{font-size:17px;line-height:1.55;color:#3a444d;margin:0 0 14px}
+    .tr-warn{background:#fff6e5;border:1px solid #f0c36d;border-radius:10px;padding:10px 14px;font-size:15px;line-height:1.5;margin:0 0 16px}
     .tr-controls{max-width:100%;display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-start;margin:0 0 12px}
     .tr-controls label{font-size:15px}
     .tr-controls select{font-size:16px;padding:8px 10px;border-radius:8px;border:1px solid #c5ccd3;min-height:44px}
@@ -99,7 +99,7 @@ ${ld.map(o => `  <script type="application/ld+json">${JSON.stringify(o)}</script
     .tr-empty{padding:14px;font-size:14px;color:#5a646d}
     .tr-pop{font-size:14px;line-height:1.45;min-width:200px}
     .tr-pop b{font-size:15px}
-    .tr-notes{max-width:780px;font-size:15px;line-height:1.6}
+    .tr-notes{font-size:15px;line-height:1.6}
     .tr-notes h2{font-size:22px;margin:26px 0 8px}
     .tr-notes ul{padding-left:20px}
     #trStatus{font-size:14px;color:#5a646d;margin:0 0 8px;min-height:20px}
