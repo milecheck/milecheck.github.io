@@ -94,7 +94,9 @@
 });
 
 /* Phone app bar (Leah 10/20, modeled on thedyrt.com). Phones only, after 8 s or 25% scroll,
-   dismiss remembered 14 days. Ratings read from the live listings on 2026-10-20; refresh by hand. */
+   dismiss remembered 14 days. App Store rating comes from /data/app-rating.json, which the daily
+   app-rating workflow fills from Apple's public lookup; the text below is only the fallback.
+   Google Play has no public rating lookup, so its line is still read from the listing by hand (2026-10-20). */
 (function () {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
   var w = window, d = document, ua = navigator.userAgent || '';
@@ -107,7 +109,12 @@
   var slug = (location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase() || 'home').slice(0, 40);
   var store = ios ? 'https://apps.apple' + '.com/app/apple-store/id6759212851?pt=128447811&ct=sticky-' + slug + '&mt=8'
                   : 'https://play.google' + '.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dsite%26utm_medium%3Dsticky%26utm_campaign%3D' + slug;
-  var rating = ios ? 'App Store 4.3 ★ (12 ratings)' : 'Google Play 5.0 ★ (12 reviews)';
+  var rating = ios ? 'App Store 4.5 ★' : 'Google Play 5.0 ★ (12 reviews)';
+  function iosText(r) {
+    var v = r && r.ios ? Number(r.ios.rating) : NaN, n = r && r.ios ? Number(r.ios.count) : NaN;
+    if (!(v >= 1 && v <= 5)) return null;
+    return 'App Store ' + v.toFixed(1) + ' ★' + (n >= 1 ? ' (' + Math.round(n).toLocaleString('en-US') + (n === 1 ? ' rating)' : ' ratings)') : '');
+  }
   var shown = false;
   function show() {
     if (shown) return; shown = true;
@@ -116,7 +123,10 @@
     d.head.appendChild(css);
     var bar = d.createElement('div'); bar.id = 'mc-appbar'; bar.setAttribute('role', 'complementary'); bar.setAttribute('aria-label', 'Get the MileCheck app');
     bar.innerHTML = '<img src="/images/favicon.png" alt="" width="40" height="40"><div class="t"><b>Mile markers and road alerts on your phone</b><span></span></div><a class="go" rel="noopener">Get the app</a><button type="button" aria-label="Close">×</button>';
-    bar.querySelector('.t span').textContent = rating;
+    var line = bar.querySelector('.t span');
+    line.textContent = rating;
+    if (ios && w.fetch) fetch('/data/app-rating.json').then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { var t = iosText(j); if (t) line.textContent = t; }).catch(function () {});
     bar.querySelector('a.go').href = store;
     bar.querySelector('button').onclick = function () { bar.classList.remove('on'); try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {} setTimeout(function () { bar.remove(); }, 350); };
     d.body.appendChild(bar);

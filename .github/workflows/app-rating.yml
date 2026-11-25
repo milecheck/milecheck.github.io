@@ -1,0 +1,27 @@
+# Daily: read the App Store rating from Apple's public lookup and update data/app-rating.json,
+# which the phone "Get the app" bar shows. Commits only when the rating or count changes.
+name: app-rating
+on:
+  schedule:
+    - cron: '23 14 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: app-rating
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/app-rating.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "milecheck-bot"
+          git config user.email "info@milecheckapp.com"
+          git add data/app-rating.json
+          git diff --cached --quiet && exit 0
+          git commit -m "App Store rating update $(date -u +%Y-%m-%d)"
+          git stash --include-untracked --quiet || true
+          git pull --rebase --autostash origin main && git push origin HEAD:main
