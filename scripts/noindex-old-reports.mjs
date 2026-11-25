@@ -28,6 +28,8 @@ function leaves(d) {
   }
 }
 for (const d of cfg.leafDirs || []) leaves(d);
+const KEEP = new Set(cfg.keepFiles || []);
+for (let i = files.length - 1; i >= 0; i--) if (KEEP.has(files[i])) files.splice(i, 1);
 const TAG = '<meta name="robots" content="noindex,follow">';
 let changed = 0;
 for (const rel of files) {
