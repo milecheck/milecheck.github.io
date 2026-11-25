@@ -60,7 +60,7 @@ const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
 
 const W='https://milepost-proxy.leahgerber93.workers.dev/basemap/';
 const STATES={
- wa:{n:'Washington',code:'WA',c:[47.613,-122.19],z:11,t:{b:'wa.pmtiles',w:'water.pmtiles',m:'mp.pmtiles',q:'poi.pmtiles',k:'blocks.pmtiles'},ln:W+'wa-lanes.pmtiles',attr:'Data: Census, USGS, FHWA',
+ wa:{n:'Washington',code:'WA',c:[47.613,-122.19],z:11,t:{b:'wa.pmtiles',w:'water.pmtiles',m:'mp.pmtiles',q:'poi.pmtiles',k:'blocks.pmtiles'},ln:abs('wa/lanes.pmtiles'),attr:'Data: Census, USGS, FHWA',
   chips:[['Bellevue',47.613,-122.19,12],['Snoqualmie Pass',47.42,-121.41,12],['Downtown Seattle',47.606,-122.333,15],['I-405 up close',47.59,-122.185,16],['Spokane',47.658,-117.42,13],['Central Washington',46.6,-120.5,9]]},
  or:{n:'Oregon',code:'OR',c:[45.52,-122.68],z:11,t:{b:'or/base.pmtiles',w:'or/water.pmtiles',m:'or/mp.pmtiles',q:'or/poi.pmtiles'},ln:abs('or/lanes.pmtiles'),attr:'Data: Census, USGS, FHWA',
   chips:[['Portland',45.52,-122.68,12],['Downtown Portland',45.519,-122.677,15],['I-5 and I-84',45.528,-122.664,16],['Mount Hood',45.30,-121.75,11],['Columbia Gorge',45.66,-121.9,11],['Bend',44.058,-121.315,13],['Pendleton',45.672,-118.788,13],['Eastern Oregon',44.8,-118.5,8]]},
