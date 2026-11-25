@@ -1,0 +1,155 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Which map is easier to read? | MileCheck map test</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<link rel="preconnect" href="https://milepost-proxy.leahgerber93.workers.dev" crossorigin>
+<link rel="preconnect" href="https://server.arcgisonline.com" crossorigin>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script defer src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<style>
+:root{--ink:#16201b;--mute:#5b675f;--line:#d9dfdb;--g:#14532d}
+*{box-sizing:border-box}body{margin:0;font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fafaf7}
+header{background:#1f2622;color:#fff;padding:12px 16px;font-weight:700}
+main{max-width:1200px;margin:0 auto;padding:16px 16px 80px}
+h1{font-size:24px;margin:8px 0 4px}p.sub{color:var(--mute);margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}.chips button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:8px 14px;font:inherit;font-size:14px;min-height:44px;cursor:pointer}
+.maps{display:flex;gap:12px}.col{flex:1;min-width:0}.lab{font-weight:700;margin:0 0 6px}
+.m{height:62vh;min-height:360px;border:1px solid var(--line);border-radius:10px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}.tools .tl{font-weight:700;font-size:14px}
+.tools label{border:1px solid var(--line);background:#fff;border-radius:20px;padding:8px 12px;font-size:14px;min-height:44px;display:flex;align-items:center;gap:6px;cursor:pointer}
+.tools button{border:1px solid var(--g);background:#fff;color:var(--g);border-radius:20px;padding:8px 14px;font:inherit;font-size:14px;font-weight:700;min-height:44px;cursor:pointer}
+.tools button[aria-pressed=true]{background:var(--g);color:#fff}#navmsg{font-size:14px;color:var(--mute);flex-basis:100%}
+.me{width:18px;height:18px;border-radius:50%;background:#2563eb;border:3px solid #fff;box-shadow:0 0 0 3px rgba(37,99,235,.3)}
+form{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:16px;max-width:720px}
+fieldset{border:0;padding:0;margin:0 0 12px}legend{font-weight:700;margin-bottom:6px}
+.pick{display:flex;gap:8px;flex-wrap:wrap}.pick label{border:1px solid var(--line);border-radius:8px;padding:10px 16px;min-height:44px;display:flex;align-items:center;gap:6px;cursor:pointer}
+textarea,input[type=text],select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px}textarea{min-height:80px}
+label.f{display:block;font-weight:700;margin:12px 0 4px}button.go{margin-top:14px;background:var(--g);color:#fff;border:0;border-radius:8px;padding:12px 20px;font:inherit;font-weight:700;min-height:44px;cursor:pointer}
+#msg{margin-top:10px;font-weight:700}
+#mt-banner{position:fixed;bottom:0;left:0;right:0;z-index:99999;background:var(--g);color:#fff;font-size:13px;padding:6px 12px;text-align:center}
+@media(max-width:760px){.maps{flex-direction:column}.m{height:46vh;min-height:280px}}
+</style></head><body>
+<header>MileCheck map test</header>
+<main>
+<h1>Which map is easier to read?</h1>
+<p class="sub">Two maps of the same place, with the same things drawn on top. They move together, and the switches below change both maps at once. Look around, then tell us which one you would rather use and why.</p>
+<div class="chips" id="chips"><button data-v="45.52,-122.68,12">Portland</button><button data-v="45.519,-122.677,15">Downtown Portland</button><button data-v="45.528,-122.664,16">I-5 and I-84</button><button data-v="45.30,-121.75,11">Mount Hood</button><button data-v="45.66,-121.9,11">Columbia Gorge</button><button data-v="44.058,-121.315,13">Bend</button><button data-v="45.672,-118.788,13">Pendleton</button><button data-v="44.8,-118.5,8">Eastern Oregon</button></div>
+<div class="tools" id="layers"><span class="tl">Show on both maps:</span><label><input type="checkbox" data-g="ev" checked> EV chargers and fuel</label><label><input type="checkbox" data-g="mp" checked> Mile markers</label><label><input type="checkbox" data-g="county" checked> County lines</label><label><input type="checkbox" data-g="city" checked> City limits</label></div>
+<div class="tools"><button type="button" id="nav" aria-pressed="false">Navigation view</button><button type="button" id="me" aria-pressed="false">Follow my location</button><span id="navmsg" role="status"></span></div>
+<div class="maps"><div class="col"><div class="lab">Map A</div><div class="m" id="m0"></div></div>
+<div class="col"><div class="lab">Map B</div><div class="m" id="m1"></div></div></div>
+<form id="f">
+<fieldset><legend>Which map would you rather use?</legend><div class="pick">
+<label><input type="radio" name="pick" value="A" required> Map A</label><label><input type="radio" name="pick" value="B"> Map B</label><label><input type="radio" name="pick" value="same"> No real difference</label></div></fieldset>
+<label class="f" for="why">Why?</label><textarea id="why" maxlength="2000" placeholder="What made it easier or harder to read?"></textarea>
+<label class="f" for="wrong">Anything wrong or missing on either map?</label><textarea id="wrong" maxlength="2000" placeholder="A road in the wrong place, a missing label, something hard to tap"></textarea>
+<label class="f" for="role">What do you do on the road? (optional)</label>
+<select id="role"><option value="">Pick one</option><option>DOT or road crew</option><option>Police, fire, EMS or dispatch</option><option>Truck driver</option><option>Everyday driver</option><option>Other</option></select>
+<label class="f" for="who">Your name (optional)</label><input type="text" id="who" maxlength="120">
+<button class="go" type="submit">Send</button><div id="msg" role="status"></div>
+</form>
+</main>
+<div id="mt-banner">Map test. Not a public page. Oregon only.</div>
+<script>
+// Runs after the deferred map scripts, so the page text shows before ~1 MB of map code arrives.
+(function(go){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',go):go()})(function(){
+const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
+function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#36413b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094',mk:'#cbd5e1'}:
+{land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#c9c4b8',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f',mk:'#475569'};
+const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
+return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
+sources:{b:{type:'vector',url:'pmtiles://'+abs('or/base.pmtiles')},l:{type:'vector',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/streets.pmtiles'},w:{type:'vector',url:'pmtiles://'+abs('or/water.pmtiles')},ln:{type:'vector',url:'pmtiles://'+new URL('/maptest/tiles/or/lanes.pmtiles',location.href).href+''},m:{type:'vector',url:'pmtiles://'+abs('or/mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('or/poi.pmtiles')},
+a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
+layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
+{id:'hs',type:'raster',source:'hs',maxzoom:15,paint:{'raster-opacity':['interpolate',['linear'],['zoom'],12,d?.35:.45,15,0],'raster-contrast':d?-.2:0}},
+{id:'water',type:'fill','source':'b','source-layer':'water',maxzoom:10,paint:{'fill-color':C.water}},{id:'water2',type:'fill',source:'w','source-layer':'water',minzoom:9,paint:{'fill-color':C.water}},
+{id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
+{id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
+{id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
+{id:'sr',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'state'],paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.st,'line-width':rw(.6,2.5)}},
+{id:'us',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'us'],layout:{'line-cap':'round'},paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.us,'line-width':rw(1,4)}},
+{id:'ic',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.ic,'line-width':rw(2,7.5)}},
+{id:'i',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'interstate'],layout:{'line-cap':'round'},paint:{'line-opacity':['interpolate',['linear'],['zoom'],14.5,1,15.5,0.15],'line-color':C.i,'line-width':rw(1.4,5)}},
+{id:'lnr',type:'line',source:'ln','source-layer':'lanes',minzoom:14,filter:['==',['get','k'],'road'],paint:{'line-color':d?'#2a2f2c':'#9aa0a0','line-width':['interpolate',['exponential',2],['zoom'],14,['*',['get','n'],1.4],17,['*',['get','n'],11]],'line-opacity':.9}},{id:'lne',type:'line',source:'ln','source-layer':'lanes',minzoom:15,filter:['==',['get','k'],'edge'],paint:{'line-color':'#ffffff','line-width':1}},{id:'lnl',type:'line',source:'ln','source-layer':'lanes',minzoom:15,filter:['==',['get','k'],'lane'],paint:{'line-color':'#ffffff','line-width':1,'line-dasharray':[3,4]}},{id:'lnc',type:'line',source:'ln','source-layer':'lanes',minzoom:15,filter:['==',['get','k'],'center'],paint:{'line-color':'#f2c200','line-width':1}},
+{id:'stn',type:'symbol',source:'l','source-layer':'local',minzoom:14,filter:['!=',['get','n'],''],layout:{'symbol-placement':'line','text-field':['get','n'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],14,9,17,12],'symbol-spacing':300},paint:{'text-color':C.txt,'text-opacity':.8,'text-halo-color':C.halo,'text-halo-width':1.5}},{id:'mp',type:'circle','source':'m','source-layer':'mp',minzoom:8,filter:['any',['>=',['zoom'],10],['==',['get','t'],1]],paint:{'circle-color':C.mk,'circle-radius':['interpolate',['linear'],['zoom'],8,2,12,4],'circle-stroke-color':C.halo,'circle-stroke-width':1}},
+{id:'mpl',type:'symbol','source':'m','source-layer':'mp',minzoom:11,layout:{'text-field':['to-string',['get','mp']],'text-font':['bold'],'text-size':10,'text-offset':[0,1]},paint:{'text-color':C.mk,'text-halo-color':C.halo,'text-halo-width':1.5}},
+{id:'countyn',type:'symbol',source:'q','source-layer':'countypt',minzoom:7,maxzoom:11,layout:{'text-field':['upcase',['get','n']],'text-font':['bold'],'text-size':10,'text-letter-spacing':.15},paint:{'text-color':C.txt,'text-opacity':.45,'text-halo-color':C.halo,'text-halo-width':1}},{id:'ref',type:'symbol','source':'b','source-layer':'roads',filter:['all',['!=',['get','ref'],''],['any',['in',['get','c'],['literal',['interstate','us']]],['>=',['zoom'],9]]],layout:{'symbol-sort-key':['match',['get','c'],'interstate',0,'us',1,2],'symbol-placement':'line','symbol-spacing':260,'text-field':['get','ref'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],6,10,12,13],'text-rotation-alignment':'viewport'},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':2}},
+{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],40000000,6,15000000,7,5000000,9,1000000,10,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
+{id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,7,13,10],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'icon-image':['match',['get','t'],'EVF','bolt','EV','bolt','pump'],'icon-size':['interpolate',['linear'],['zoom'],9,.55,13,.8],'icon-allow-overlap':true},paint:{}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
+
+const P=new pmtiles.Protocol();maplibregl.addProtocol('pmtiles',P.tile);
+let order;try{order=sessionStorage.getItem('mtOrder')}catch(e){}if(order!=='OE'&&order!=='EO'){order=Math.random()<.5?'OE':'EO';try{sessionStorage.setItem('mtOrder',order)}catch(e){}}
+// Overlays drawn on BOTH maps, so the only difference left is the base map itself.
+const GROUPS={ev:['fuel','fuell'],mp:['mp','mpl'],county:['county','countyn'],city:['city'],alerts:['alerts']};
+const OVER=new Set(Object.values(GROUPS).flat());
+const S=style(false);
+S.sources.b.attribution='Data: Census, USGS, FHWA';S.sources.q.attribution='Chargers and fuel: US DOE AFDC';
+const ESRI={version:8,glyphs:S.glyphs,sources:{e:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'],tileSize:256,maxzoom:19,attribution:'Esri'},m:S.sources.m,q:S.sources.q,a:S.sources.a},
+ layers:[{id:'bg',type:'background',paint:{'background-color':'#f4f2ec'}},{id:'e',type:'raster',source:'e'}].concat(S.layers.filter(l=>OVER.has(l.id)))};
+const show={};Object.keys(GROUPS).forEach(k=>show[k]=true);
+const img=n=>{const c=document.createElement('canvas');c.width=c.height=32;const x=c.getContext('2d');x.fillStyle='#fff';x.strokeStyle='#fff';
+ if(n==='bolt'){x.beginPath();x.moveTo(18,3);x.lineTo(7,18);x.lineTo(15,18);x.lineTo(13,29);x.lineTo(25,13);x.lineTo(17,13);x.lineTo(19,3);x.closePath();x.fill()}
+ else{x.fillRect(8,7,11,19);x.fillRect(6,25,15,3);x.lineWidth=2.5;x.beginPath();x.moveTo(19,12);x.lineTo(24,15);x.lineTo(24,23);x.stroke();x.fillStyle='#0e7490';x.fillRect(10,9,7,5)}
+ return x.getImageData(0,0,32,32)};
+const esc=x=>String(x==null?'':x).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]);
+function applyShow(m){Object.keys(GROUPS).forEach(k=>GROUPS[k].forEach(id=>{if(m.getLayer(id))m.setLayoutProperty(id,'visibility',show[k]?'visible':'none')}))}
+// MapLibre zoom = Leaflet zoom - 1 (512px vector tiles), so 11 here matches the old Leaflet 12.
+// Phase 1 draws only the base (fast, small files on this site). Phase 2 adds city streets (from the Worker),
+// lane detail and the shared overlays once phase 1 has drawn, so the first picture is not held up by them.
+const LATE_SRC=new Set(['l','ln','q','m','a']);
+function split(st){const late=st.layers.filter(l=>LATE_SRC.has(l.source)),srcs={};Object.keys(st.sources).forEach(k=>{if(LATE_SRC.has(k))srcs[k]=st.sources[k]});
+ const first=Object.assign({},st,{sources:Object.fromEntries(Object.entries(st.sources).filter(([k])=>!LATE_SRC.has(k))),layers:st.layers.filter(l=>!LATE_SRC.has(l.source))});
+ return{first,late,srcs,all:st.layers.map(l=>l.id)}}
+function addLate(m,pl){if(m._late)return;m._late=true;Object.entries(pl.srcs).forEach(([k,v])=>{if(!m.getSource(k))m.addSource(k,v)});
+ pl.late.forEach(l=>{const i=pl.all.indexOf(l.id);const before=pl.all.slice(i+1).find(id=>m.getLayer(id));m.addLayer(l,before)});applyShow(m)}
+const mk=(id,full)=>{const pl=split(full),st=pl.first;const m=new maplibregl.Map({container:id,style:st,center:[-122.68,45.52],zoom:11,maxPitch:60,scrollZoom:false,attributionControl:{compact:false}});
+ m.addControl(new maplibregl.NavigationControl({visualizePitch:true}),'top-left');
+ m.on('styleimagemissing',e=>{if((e.id==='bolt'||e.id==='pump')&&!m.hasImage(e.id))m.addImage(e.id,img(e.id),{pixelRatio:2})});
+ m.on('load',()=>{applyShow(m);m.once('idle',()=>addLate(m,pl));setTimeout(()=>addLate(m,pl),2500)});
+ m.on('click',e=>{const p=e.point;const fs=m.queryRenderedFeatures([[p.x-10,p.y-10],[p.x+10,p.y+10]],{layers:['fuel','mp'].filter(x=>m.getLayer(x))});if(!fs.length)return;const q=fs[0].properties;
+  const h=fs[0].layer.id==='mp'?'<b>Mile marker '+esc(q.mp)+'</b><br>'+esc(q.r):'<b>'+({EVF:'DC fast charger',EV:'EV charger (Level 2)'}[q.t]||'Alternative fuel')+'</b><br>'+esc(q.n)+'<br><small>'+esc(q.d)+'</small><br><small>Source: US DOE AFDC</small>';
+  new maplibregl.Popup().setLngLat(e.lngLat).setHTML(h).addTo(m)});
+ return m};
+const maps=(order==='OE'?[S,ESRI]:[ESRI,S]).map((st,i)=>mk('m'+i,st));
+let lock=false;maps.forEach((m,i)=>m.on('move',()=>{if(lock)return;lock=true;maps[1-i].jumpTo({center:m.getCenter(),zoom:m.getZoom(),bearing:m.getBearing(),pitch:m.getPitch()});lock=false}));
+document.getElementById('layers').onchange=e=>{const k=e.target.dataset&&e.target.dataset.g;if(!k)return;show[k]=e.target.checked;maps.forEach(m=>{if(m.isStyleLoaded())applyShow(m)})};
+document.getElementById('chips').onclick=e=>{const v=e.target.dataset&&e.target.dataset.v;if(!v)return;const [a,b,z]=v.split(',').map(Number);if(follow)setFollow(false);maps[0].jumpTo({center:[b,a],zoom:z-1})};
+// Navigation view: tilted and turned so the way you face (or drive) is up.
+const navBtn=document.getElementById('nav'),meBtn=document.getElementById('me'),nmsg=document.getElementById('navmsg');
+const say=t=>{nmsg.textContent=t};
+let nav=false,follow=false,watchId=null,gotCompass=false,gpsHead=false,tb=null,tc=null,raf=0,first=true,ori=null;
+const dots=maps.map(m=>{const d=document.createElement('div');d.className='me';return new maplibregl.Marker({element:d,pitchAlignment:'map',rotationAlignment:'map'})});
+function step(){raf=0;const m=maps[0],o={};let more=false;
+ if(nav&&tb!=null){const b=m.getBearing(),d=((tb-b+540)%360)-180;if(Math.abs(d)>.5){o.bearing=b+d*.25;more=true}}
+ if(follow&&tc){const c=m.getCenter(),dx=tc[0]-c.lng,dy=tc[1]-c.lat;if(Math.abs(dx)+Math.abs(dy)>1e-6){o.center=[c.lng+dx*.2,c.lat+dy*.2];more=true}}
+ if(more){m.jumpTo(o);raf=requestAnimationFrame(step)}}
+const kick=()=>{if(!raf)raf=requestAnimationFrame(step)};
+function onOri(e){let h=null;if(typeof e.webkitCompassHeading==='number'&&!isNaN(e.webkitCompassHeading))h=e.webkitCompassHeading;else if(e.absolute&&e.alpha!=null)h=360-e.alpha;if(h==null)return;
+ const so=(screen.orientation&&screen.orientation.angle)||window.orientation||0;gotCompass=true;if(!gpsHead){tb=(h+so+360)%360;kick()}}
+function startCompass(){const D=window.DeviceOrientationEvent;const go=()=>{ori='ondeviceorientationabsolute' in window?'deviceorientationabsolute':'deviceorientation';window.addEventListener(ori,onOri);
+  setTimeout(()=>{if(nav&&!gotCompass&&!gpsHead)say('No compass on this device, so the maps are tilted but stay north-up. Turn on Follow my location to point them the way you are moving, or rotate with two fingers or right-click and drag.')},2500)};
+ if(D&&typeof D.requestPermission==='function'){D.requestPermission().then(r=>{if(r==='granted')go();else say('Compass access was turned down, so the maps are tilted but stay north-up.')}).catch(()=>say('Compass access was turned down, so the maps are tilted but stay north-up.'))}else go()}
+function stopCompass(){if(ori)window.removeEventListener(ori,onOri);ori=null;gotCompass=false;tb=null}
+function setNav(on){nav=on;navBtn.setAttribute('aria-pressed',on);navBtn.textContent=on?'Back to north-up':'Navigation view';say('');
+ if(on){startCompass();maps[0].easeTo({pitch:55,duration:600})}else{stopCompass();gpsHead=false;maps[0].easeTo({pitch:0,bearing:0,duration:600})}}
+function setFollow(on){follow=on;meBtn.setAttribute('aria-pressed',on);meBtn.textContent=on?'Stop following':'Follow my location';
+ if(!on){if(watchId!=null)navigator.geolocation.clearWatch(watchId);watchId=null;tc=null;gpsHead=false;dots.forEach(d=>d.remove());return}
+ if(!navigator.geolocation){say('This browser cannot share your location.');setFollow(false);return}
+ first=true;watchId=navigator.geolocation.watchPosition(p=>{const c=p.coords,ll=[c.longitude,c.latitude];dots.forEach((d,i)=>d.setLngLat(ll).addTo(maps[i]));
+  if(first){first=false;maps[0].jumpTo({center:ll,zoom:Math.max(maps[0].getZoom(),14)})}else{tc=ll}
+  if(nav&&c.heading!=null&&!isNaN(c.heading)&&c.speed>2){gpsHead=true;tb=c.heading}kick()},
+  ()=>{say('Location was not shared, so the maps will not follow you.');setFollow(false)},{enableHighAccuracy:true,maximumAge:2000,timeout:20000})}
+navBtn.onclick=()=>setNav(!nav);meBtn.onclick=()=>setFollow(!follow);
+const f=document.getElementById('f'),msg=document.getElementById('msg');
+f.onsubmit=async e=>{e.preventDefault();const pk=f.querySelector('input[name=pick]:checked');if(!pk)return;
+ const pick=pk.value==='same'?'same':((pk.value==='A')===(order==='OE')?'ours':'esri');
+ const c=maps[0].getCenter();
+ const body={state:'OR',pick:pk.value,why:why.value,wrong:wrong.value,role:role.value,who:who.value,order:order,view:c.lat.toFixed(4)+','+c.lng.toFixed(4)+',z'+Math.round(maps[0].getZoom()+1)};
+ msg.textContent='Sending...';
+ try{const r=await fetch('https://milepost-proxy.leahgerber93.workers.dev/maptest/feedback',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)});if(!r.ok)throw 0;
+  msg.textContent='Thank you. Got it.';f.reset();}
+ catch(err){const t='Picked: Map '+body.pick+' (order '+order+')\n\nWhy: '+body.why+'\n\nWrong or missing: '+body.wrong+'\n\nRole: '+body.role+'\nName: '+body.who+'\nView: '+body.view;
+  msg.textContent='Could not send. Your email app will open with your answers.';location.href='mailto:feedback@milecheckapp.com?subject=Map%20test%20vote&body='+encodeURIComponent(t)}};
+});
+</script></body></html>
