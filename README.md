@@ -52,3 +52,17 @@ or behave there, once, and every map gets it. Do not patch map pages one by one.
   (2026-09-28). Per-state prose in `scripts/road-conditions/states.cjs`.
 - `node scripts/add-analytics.mjs G-XXXXXXXXXX` — injects the GA4 tag on every page, with `store_click` and
   `outbound_click` events. Idempotent. Run after generators too.
+
+## Ad review cleanup (added 2026-11-24)
+Google Ad Manager (the Mediavine account) and AdSense denied the site three times with no reason given.
+Google's publisher policies bar ads on screens used for alerts or navigation, pages built from other
+sites' images, and auto-generated near-duplicate pages. So, while the site is under review:
+- Every page under cameras/, ski/, road-conditions/, thanksgiving/, move-over-laws/ and rest-areas/ is
+  noindex (the section hubs stay indexed). The list is `leafDirs` in data/noindex-pages.json, applied by
+  scripts/noindex-old-reports.mjs in finish-pages, so regenerated pages keep the tag. Noindex pages also
+  get no ad script (scripts/add-mediavine.mjs) and drop out of sitemap.xml.
+- The homepage preview copy (index-refresh-preview.html, which said "no ads, ever") is deleted.
+- App "no ads" lines say "in the app", so nothing reads as a claim that the site has no ads. The mountain
+  pages come from the Mountain Visibility generator: keep that wording if they are regenerated.
+To undo after approval: remove a section from `leafDirs`, strip its robots meta, rerun finish-pages and
+build-sitemap.

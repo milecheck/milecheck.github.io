@@ -15,6 +15,21 @@ for (const d of cfg.dirs || []) {
   const abs = resolve(ROOT, d);
   if (existsSync(abs)) for (const f of readdirSync(abs)) if (f.endsWith('.html')) files.push(join(d, f));
 }
+// leafDirs (2026-11-24): every <dir>/<slug>/index.html, recursively, but not <dir>/index.html itself.
+// Keeps a section's hub page indexed while its templated per-state / per-place pages stay out of search.
+function leaves(d) {
+  const abs = resolve(ROOT, d);
+  if (!existsSync(abs)) return;
+  for (const e of readdirSync(abs, { withFileTypes: true })) {
+    if (!e.isDirectory()) continue;
+    const sub = join(d, e.name);
+    if (existsSync(resolve(ROOT, sub, 'index.html'))) files.push(join(sub, 'index.html'));
+    leaves(sub);
+  }
+}
+for (const d of cfg.leafDirs || []) leaves(d);
+const KEEP = new Set(cfg.keepFiles || []);
+for (let i = files.length - 1; i >= 0; i--) if (KEEP.has(files[i])) files.splice(i, 1);
 const TAG = '<meta name="robots" content="noindex,follow">';
 let changed = 0;
 for (const rel of files) {
