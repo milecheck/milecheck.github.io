@@ -332,8 +332,8 @@ function bridgePop(p){const h=[];
   if(p.k.includes('W'))h.push('<div><b>Weight-posted</b>'+(p.e&&EVAL[p.e]?', '+EVAL[p.e]:'')+'. Use the tons on the sign.</div>');
   if(p.k.includes('R'))h.push('<div><b>Restricted</b> (a limit other than load)</div>');
   if(p.k.includes('C'))h.push('<div><b>Closed</b> at the last report</div>');
-  if(p.t&&!p.k.includes('L'))h.push('<div>Inspection load rating: '+p.t+' tons</div>');
-  return '<div class="tr-pop"><b>'+esc(p.on||'Bridge')+'</b><div>Crosses: '+esc(p.x)+'</div>'+h.join('')+'<div style="color:#5a646d;margin-top:4px">NBI structure '+esc(p.s)+'</div></div>';}
+  if(p.t&&!p.k.includes('L'))h.push('<div>Rated to carry: '+p.t+' tons (inspection rating)</div>');
+  return '<div class="tr-pop"><b>'+esc(p.on||'Bridge')+'</b><div>Crosses: '+esc(p.x)+'</div>'+h.join('')+'<div style="color:#5a646d;margin-top:4px">Federal bridge ID '+esc(p.s)+'</div></div>';}
 function poiPop(layer,p){const h=['<b>'+esc(p.n||NAMES[layer])+'</b>','<div>'+NAMES[layer]+'</div>'];
   if(p.r)h.push('<div>Ref: '+esc(p.r)+'</div>');if(p.d)h.push('<div>Direction: '+esc(p.d)+'</div>');if(p.cap)h.push('<div>Spaces: '+esc(p.cap)+'</div>');if(p.h)h.push('<div>Hours (OSM): '+esc(p.h)+'</div>');
   h.push('<div style="color:#5a646d;margin-top:4px"><a href="https://www.openstreetmap.org/'+({n:'node',w:'way',r:'relation'}[p.id[0]])+'/'+p.id.slice(1)+'" target="_blank" rel="noopener">OpenStreetMap '+esc(p.id)+'</a></div>');
@@ -345,7 +345,7 @@ async function draw(fit){
   const wantB=['low','W','R','C'].some(k=>show.has(k));
   const [b,...pois]=await Promise.all([wantB?get('bridges',st):{features:[]},...OSM.map(l=>show.has(l)?get(l,st):{features:[]})]);
   group.clearLayers();items=[];const failed=[];if(b.failed)failed.push('bridges');
-  for(const f of b.features){const p=f.properties,k=bridgeKind(p,lim);
+  for(const f of b.features){const p=f.properties;for(const q of ["on","x"])if(!p[q]||/^\s*(no data( entered)?|n\/?a|unknown|none)\s*$/i.test(p[q]))p[q]=q==="on"?"Unnamed road":"unnamed feature";const k=bridgeKind(p,lim);
     let c=null;if(show.has('C')&&p.k.includes('C'))c='C';else if(show.has('low')&&k.low)c='low';else if(show.has('W')&&p.k.includes('W'))c='W';else if(show.has('R')&&p.k.includes('R'))c='R';
     if(!c)continue;const [lon,lat]=f.geometry.coordinates;
     const label=c==='low'?(k.lowU?ftin(p.u)+' under':ftin(p.o)+' on deck'):c==='W'?'Weight-posted':c==='R'?'Restricted':'Closed';
