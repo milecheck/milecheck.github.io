@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ga4 --><script async src="https://www.googletagmanager.com/gtag/js?id=G-CDMSB5630W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CDMSB5630W',{anonymize_ip:true});function mcOut(h){try{return new URL(h,location.href).hostname.replace(/^www\./,'')!==location.hostname.replace(/^www\./,'')}catch(x){return false}}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(/apps\.apple\.com|play\.google\.com|testflight\.apple\.com/.test(h)){gtag('event','store_click',{store:/apple/.test(h)?'app_store':'google_play',page_path:location.pathname});}else if(/^https?:/.test(h)&&mcOut(h)){gtag('event','outbound_click',{link_url:h,page_path:location.pathname});}},{capture:true});</script><!-- /ga4 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="apple-itunes-app" content="app-id=6759212851">
+  <title>Where are low bridges, weigh stations and truck parking on my route? | MileCheck</title>
+  <meta name="description" content="A trucker map by state. Low bridge clearances, weight-posted and closed bridges from the federal bridge inventory, plus weigh stations, truck parking, truck stops, rest areas and runaway truck ramps.">
+  <link rel="canonical" href="https://milecheckapp.com/truck-restrictions/">
+  <meta property="og:title" content="Where are low bridges, weigh stations and truck parking on my route?">
+  <meta property="og:description" content="A trucker map by state. Low bridge clearances, weight-posted and closed bridges from the federal bridge inventory, plus weigh stations, truck parking, truck stops, rest areas and runaway truck ramps.">
+  <meta property="og:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <meta property="og:url" content="https://milecheckapp.com/truck-restrictions/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Where are low bridges, weigh stations and truck parking on my route?">
+  <meta name="twitter:description" content="A trucker map by state. Low bridge clearances, weight-posted and closed bridges from the federal bridge inventory, plus weigh stations, truck parking, truck stops, rest areas and runaway truck ramps.">
+  <meta name="twitter:image" content="https://milecheckapp.com/images/og-banner-light.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=20261111-1">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.css">
+  <script src="https://unpkg.com/leaflet-gesture-handling@1.2.2/dist/leaflet-gesture-handling.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","@id":"https://milecheckapp.com/truck-restrictions/#faqpage","mainEntity":[{"@type":"Question","name":"Where does the low clearance data come from?","acceptedAnswer":{"@type":"Answer","text":"The FHWA National Bridge Inventory (2025 file). Each state DOT reports the vertical clearance under and over every public highway bridge. Railroad bridges over a road, like the 11foot8 bridge in Durham, are not in it, so they do not show here."}},{"@type":"Question","name":"Is the clearance on the map the same as the sign?","acceptedAnswer":{"@type":"Answer","text":"Not always. The inventory is measured at inspection and rounded down here to the inch. Repaving, snow and posted signs can differ. Read the sign on the bridge."}},{"@type":"Question","name":"What does weight-posted mean?","acceptedAnswer":{"@type":"Answer","text":"The state has posted a load limit on the bridge because it cannot carry full legal loads. The inventory says that a bridge is posted, not the exact tons on the sign."}}],"isPartOf":{"@id":"https://milecheckapp.com/#website"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MileCheck","item":"https://milecheckapp.com/"},{"@type":"ListItem","position":2,"name":"Trucker map","item":"https://milecheckapp.com/truck-restrictions/"}]}</script>
+  <style>
+    .tr-wrap{max-width:1160px;margin:0 auto;padding:28px 16px 10px;box-sizing:border-box}
+    .tr-wrap h1{overflow-wrap:anywhere;font-size:clamp(26px,5vw,42px);line-height:1.1;margin:0 0 10px}
+    .tr-sub{font-size:17px;line-height:1.55;color:#3a444d;max-width:780px;margin:0 0 14px}
+    .tr-warn{background:#fff6e5;border:1px solid #f0c36d;border-radius:10px;padding:10px 14px;font-size:15px;line-height:1.5;margin:0 0 16px;max-width:780px}
+    .tr-controls{max-width:100%;display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-start;margin:0 0 12px}
+    .tr-controls label{font-size:15px}
+    .tr-controls select{font-size:16px;padding:8px 10px;border-radius:8px;border:1px solid #c5ccd3;min-height:44px}
+    .tr-layers{min-width:0;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;border:0}
+    .tr-layers legend{font-weight:700;font-size:15px;margin-bottom:4px;padding:0}
+    .tr-layers label{display:inline-flex;align-items:center;gap:6px;min-height:44px;cursor:pointer}
+    .tr-sw{display:inline-block;width:13px;height:13px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #9aa4ad}
+    .tr-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px}
+    #trmap{height:620px;border-radius:12px;border:1px solid #d6dbe0}
+    .tr-list{border:1px solid #d6dbe0;border-radius:12px;max-height:620px;overflow:auto;background:#fff}
+    .tr-list h2{font-size:16px;margin:0;padding:12px 14px;border-bottom:1px solid #e6e9ec;position:sticky;top:0;background:#fff}
+    .tr-list ul{list-style:none;margin:0;padding:0}
+    .tr-list li{border-bottom:1px solid #eef0f2}
+    .tr-list button{all:unset;display:block;box-sizing:border-box;width:100%;padding:10px 14px;cursor:pointer;font-size:14px;line-height:1.4;min-height:44px}
+    .tr-list button:hover,.tr-list button:focus{background:#f3f6f8}
+    .tr-list b{display:block;font-size:15px}
+    .tr-empty{padding:14px;font-size:14px;color:#5a646d}
+    .tr-pop{font-size:14px;line-height:1.45;min-width:200px}
+    .tr-pop b{font-size:15px}
+    .tr-notes{max-width:780px;font-size:15px;line-height:1.6}
+    .tr-notes h2{font-size:22px;margin:26px 0 8px}
+    .tr-notes ul{padding-left:20px}
+    #trStatus{font-size:14px;color:#5a646d;margin:0 0 8px;min-height:20px}
+    @media (max-width:900px){.tr-grid{grid-template-columns:minmax(0,1fr)}#trmap{height:440px}.tr-list{max-height:420px}}
+  </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://milecheckapp.com/#org","name":"MileCheck","url":"https://milecheckapp.com/"}</script>
+  <!-- Shared map behavior for every Leaflet map: assets/map-kit.css + .js. Change maps there, not per page. -->
+  <link rel="stylesheet" href="/assets/map-kit.css?v=20261121b107">
+  <script src="/assets/map-kit.js?v=20261121b107" defer></script>
+<!-- mv:start --><script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/d74ff19f-a5bf-47fa-a630-0a438f90c11a.js"></script><!-- mv:end -->
+  <!-- site-nav:assets -->
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20261102-1">
+  <script src="/assets/site-nav.js?v=20261102-1" defer></script>
+  <!-- /site-nav:assets -->
+</head>
+<body>
+  <!-- site-nav:header -->
+  <header class="mc-site-header" data-site-nav="20261102-1">
+    <div class="mc-header-inner">
+      <a href="/" class="mc-brand"><img src="/assets/app-icon-60.png" width="28" height="28" alt="">MileCheck</a>
+      <button class="mc-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="mc-primary-nav" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav class="mc-primary-nav" id="mc-primary-nav" aria-label="Main navigation">
+        <a href="/" data-nav-link="home">Home</a>
+        <a href="/maps/" data-nav-link="maps">Maps</a>
+        <a href="/cameras/" data-nav-link="cameras">Cameras</a>
+        <a href="/states/" data-nav-link="states">United States</a>
+        <a href="/canada/" data-nav-link="canada">Canada</a>
+        <a href="/#story" data-nav-link="story">Story</a>
+        <a href="/partners/" data-nav-link="b2b">B2B</a>
+        <a href="/pricing/" data-nav-link="pricing">Pricing</a>
+        <a href="/blog/" data-nav-link="blog">Blog</a>
+        <a href="/search/" data-nav-link="search" class="mc-nav-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg><span>Search</span></a>
+        <a href="/get/" data-nav-link="get" class="mc-nav-cta">Get the app</a>
+      </nav>
+    </div>
+  </header>
+<!-- /site-nav:header -->
+
+<main>
+  <div class="tr-wrap journey-content"><!-- mvb:start --><div id="ad-management-config-settings" data-blocklist-adhesion-mobile="1" data-blocklist-universal-player-mobile="1" data-blocklist-universal-player-desktop="1"></div><!-- mvb:end -->
+    <h1>Where are low bridges, weigh stations and truck parking on my route?</h1>
+    <p class="tr-sub">Pick a state. The map shows low bridges and weight-posted or closed bridges from the federal bridge inventory, and weigh stations, truck parking, truck stops, rest areas and runaway truck ramps from OpenStreetMap. Tap a marker for the details.</p>
+    <p class="tr-warn"><b>Approximate.</b> Bridge clearances and postings come from the FHWA National Bridge Inventory (2025 file), measured at the last inspection. Weigh stations and truck stops come from OpenStreetMap volunteers. Signs on the road are the rule. Read the posted clearance and weight before you go under or over.</p>
+    <div class="tr-controls">
+      <label>State<br><select id="trState" aria-label="Choose a state"><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District of Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="PR">Puerto Rico</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option></select></label>
+      <label>Low clearance<br><select id="trClr" aria-label="Low clearance filter">
+        <option value="186">Under 15' 6"</option><option value="168">Under 14' 0"</option><option value="162" selected>Under 13' 6"</option></select></label>
+      <fieldset class="tr-layers"><legend>Show on the map</legend>
+        <label><input type="checkbox" class="tr-layer" value="low" checked><span class="tr-sw" style="background:#d32f2f"></span>Low clearance bridges</label>
+        <label><input type="checkbox" class="tr-layer" value="W" checked><span class="tr-sw" style="background:#ef6c00"></span>Weight-posted bridges</label>
+        <label><input type="checkbox" class="tr-layer" value="R"><span class="tr-sw" style="background:#7b1fa2"></span>Restricted bridges (not load)</label>
+        <label><input type="checkbox" class="tr-layer" value="C" checked><span class="tr-sw" style="background:#212121"></span>Closed bridges</label>
+        <label><input type="checkbox" class="tr-layer" value="weigh" checked><span class="tr-sw" style="background:#1565c0"></span>Weigh stations</label>
+        <label><input type="checkbox" class="tr-layer" value="parking"><span class="tr-sw" style="background:#00897b"></span>Truck parking</label>
+        <label><input type="checkbox" class="tr-layer" value="stops"><span class="tr-sw" style="background:#2e7d32"></span>Truck stops (diesel for trucks)</label>
+        <label><input type="checkbox" class="tr-layer" value="rest"><span class="tr-sw" style="background:#8d6e63"></span>Rest areas</label>
+        <label><input type="checkbox" class="tr-layer" value="ramps"><span class="tr-sw" style="background:#c2185b"></span>Runaway truck ramps</label>
+      </fieldset>
+    </div>
+    <p id="trStatus" aria-live="polite"></p>
+    <div class="tr-grid">
+      <div class="tr-mapcol" style="min-width:0"><div id="trmap" role="region" aria-label="Trucker map"></div></div>
+      <div class="tr-list"><h2 id="trListHead">In view on the map</h2><ul id="trList"></ul></div>
+    </div>
+    <div class="tr-notes">
+      <h2>How to read the map</h2>
+      <ul>
+        <li><b>Low clearance.</b> "Under the bridge" is the clearance for the road that passes beneath it. "On the bridge" is the clearance over the deck, for example a truss over the roadway. Numbers are rounded down to the inch.</li>
+        <li><b>Weight-posted.</b> The state posted a load limit. The inventory does not carry the tons on the sign, so the popup shows the inspection load rating and how far below legal loads the bridge rates. Use the sign.</li>
+        <li><b>Restricted and closed.</b> Restricted means a limit other than load, like one lane or speed. Closed means closed to all traffic at the last report.</li>
+        <li><b>Weigh stations, parking and truck stops</b> are mapped by OpenStreetMap volunteers. Hours and open or closed status are not live. Some are missing.</li>
+        <li><b>Railroad bridges over a road are not in the bridge inventory.</b> The 11foot8 bridge on Gregson Street in Durham, NC is one. It does not appear here.</li>
+      </ul>
+      <h2>Sources</h2>
+      <ul>
+        <li>Bridges: <a href="https://www.fhwa.dot.gov/bridge/nbi/ascii.cfm" target="_blank" rel="noopener">FHWA National Bridge Inventory</a>, 2025 delimited file (2025HwyBridgesDelimitedAllStates.txt). Items 10, 53 and 54 (vertical clearance), 41 (open, posted or closed), 64 and 70 (load rating).</li>
+        <li>Weigh stations, truck parking, truck stops, rest areas and runaway truck ramps: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>, ODbL. Tags used: amenity=weigh_station, amenity=parking with hgv=yes or designated, amenity=fuel with hgv=yes or designated, highway=rest_area, highway=escape. Pulled 2026-11-25.</li>
+        <li>Base map: Esri, USGS.</li>
+      </ul>
+      <h2>Related</h2>
+      <ul>
+        <li><a href="/runaway-truck-ramps/" target="_blank" rel="noopener">What are runaway truck ramps?</a></li>
+        <li><a href="/rest-areas/" target="_blank" rel="noopener">Rest area rules by state</a></li>
+        <li><a href="/truck-speed-limits-by-state/" target="_blank" rel="noopener">Truck speed limits by state</a></li>
+        <li><a href="/grades/" target="_blank" rel="noopener">Steep grades</a></li>
+        <li><a href="/chain-laws/" target="_blank" rel="noopener">Chain laws</a></li>
+      </ul>
+    </div>
+  </div>
+</main>
+<!-- footer-hub:start -->
+<nav class="mc-hub" aria-label="Browse road conditions, cameras, chain laws and passes">
+  <style>
+    .mc-hub{background:#F4F8F6;border-top:1px solid #E4EAE6;padding:28px 0 22px;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:#1b2420;}
+    .mc-hub-in{max-width:1160px;margin:0 auto;padding:0 20px;}
+    .mc-hub-t{font-size:15px;font-weight:800;margin:0 0 12px;}
+    .mc-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 28px;}
+    .mc-hub-g summary{cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#4a5560;padding:10px 0;min-height:44px;display:flex;align-items:center;list-style:none;}
+    .mc-hub-g summary::-webkit-details-marker{display:none;}
+    .mc-hub-g ul{list-style:none;margin:0 0 14px;padding:0;}
+    .mc-hub-g li{margin:0;}
+    .mc-hub-g a{display:flex;align-items:center;min-height:44px;font-size:14.5px;line-height:1.35;padding:0;color:#0f6b3f;text-decoration:none;}
+    .mc-hub-g a:hover{text-decoration:underline;}
+    @media(max-width:900px){.mc-hub-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.mc-hub-grid{grid-template-columns:1fr;gap:0;}.mc-hub-g{border-bottom:1px solid #E4EAE6;}.mc-hub-g summary::after{content:"+";margin-left:auto;font-size:18px;}.mc-hub-g[open] summary::after{content:"\2212";}.mc-hub-g a{padding:11px 0;}}
+  </style>
+  <div class="mc-hub-in">
+    <p class="mc-hub-t">Find your road</p>
+    <div class="mc-hub-grid">
+      <details class="mc-hub-g" open>
+        <summary>Road conditions</summary>
+        <ul>
+          <li><a href="/road-conditions/">Road conditions in all 50 states</a></li>
+          <li><a href="/road-conditions/washington/">Washington road conditions</a></li>
+          <li><a href="/road-conditions/oregon/">Oregon road conditions</a></li>
+          <li><a href="/road-conditions/california/">California road conditions</a></li>
+          <li><a href="/road-conditions/colorado/">Colorado road conditions</a></li>
+          <li><a href="/road-conditions/montana/">Montana road conditions</a></li>
+          <li><a href="/road-conditions/idaho/">Idaho road conditions</a></li>
+          <li><a href="/road-conditions/utah/">Utah road conditions</a></li>
+          <li><a href="/road-conditions/nevada/">Nevada road conditions</a></li>
+          <li><a href="/road-conditions/new-york/">New York road conditions</a></li>
+          <li><a href="/road-conditions/minnesota/">Minnesota road conditions</a></li>
+          <li><a href="/road-conditions/pennsylvania/">Pennsylvania road conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Highway cameras</summary>
+        <ul>
+          <li><a href="/cameras/">Highway cameras by state and city</a></li>
+          <li><a href="/cameras/washington/">Washington cameras</a></li>
+          <li><a href="/cameras/oregon/">Oregon cameras</a></li>
+          <li><a href="/cameras/california/">California cameras</a></li>
+          <li><a href="/cameras/utah/">Utah cameras</a></li>
+          <li><a href="/cameras/idaho/">Idaho cameras</a></li>
+          <li><a href="/cameras/montana/">Montana cameras</a></li>
+          <li><a href="/cameras/nevada/">Nevada cameras</a></li>
+          <li><a href="/cameras/arizona/">Arizona cameras</a></li>
+          <li><a href="/cameras/new-york/">New York cameras</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Chain laws</summary>
+        <ul>
+          <li><a href="/chain-laws/">Chain and traction laws by state</a></li>
+          <li><a href="/chain-laws/washington/">Washington chain law</a></li>
+          <li><a href="/chain-laws/oregon/">Oregon chain law</a></li>
+          <li><a href="/chain-laws/california/">California chain law</a></li>
+          <li><a href="/chain-laws/colorado/">Colorado chain law</a></li>
+          <li><a href="/chain-laws/idaho/">Idaho chain law</a></li>
+          <li><a href="/chain-laws/montana/">Montana chain law</a></li>
+          <li><a href="/chain-laws/nevada/">Nevada chain law</a></li>
+          <li><a href="/chain-laws/utah/">Utah chain law</a></li>
+          <li><a href="/chain-laws/wyoming/">Wyoming chain law</a></li>
+          <li><a href="/chain-laws/british-columbia/">British Columbia chain law</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Mountain passes</summary>
+        <ul>
+          <li><a href="/passes/">Mountain passes</a></li>
+          <li><a href="/passes/snoqualmie/">Snoqualmie Pass</a></li>
+          <li><a href="/passes/stevens/">Stevens Pass</a></li>
+          <li><a href="/passes/donner/">Donner Pass</a></li>
+          <li><a href="/passes/grapevine/">The Grapevine</a></li>
+          <li><a href="/passes/cajon/">Cajon Pass</a></li>
+          <li><a href="/passes/eisenhower/">Eisenhower Tunnel</a></li>
+          <li><a href="/passes/vail/">Vail Pass</a></li>
+          <li><a href="/passes/siskiyou/">Siskiyou Summit</a></li>
+          <li><a href="/passes/parleys/">Parleys Summit</a></li>
+          <li><a href="/passes/little-cottonwood/">Little Cottonwood Canyon</a></li>
+          <li><a href="/passes/loveland/">Loveland Pass</a></li>
+          <li><a href="/passes/berthoud/">Berthoud Pass</a></li>
+          <li><a href="/passes/teton/">Teton Pass</a></li>
+          <li><a href="/passes/togwotee/">Togwotee Pass</a></li>
+          <li><a href="/passes/echo-summit/">Echo Summit</a></li>
+          <li><a href="/passes/blewett/">Blewett Pass</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Interstate corridors</summary>
+        <ul>
+          <li><a href="/corridors/">Interstate corridors</a></li>
+          <li><a href="/corridors/i-5/">I-5 conditions</a></li>
+          <li><a href="/corridors/i-90/">I-90 conditions</a></li>
+          <li><a href="/corridors/i-80/">I-80 conditions</a></li>
+          <li><a href="/corridors/i-70/">I-70 conditions</a></li>
+          <li><a href="/corridors/i-15/">I-15 conditions</a></li>
+          <li><a href="/corridors/i-95/">I-95 conditions</a></li>
+          <li><a href="/corridors/i-75/">I-75 conditions</a></li>
+          <li><a href="/corridors/i-10/">I-10 conditions</a></li>
+          <li><a href="/corridors/i-40/">I-40 conditions</a></li>
+          <li><a href="/corridors/i-94/">I-94 conditions</a></li>
+        </ul>
+      </details>
+      <details class="mc-hub-g" open>
+        <summary>Closures, rest areas and help</summary>
+        <ul>
+          <li><a href="/closures/">US closures map</a></li>
+          <li><a href="/storms/">Storm conditions by state</a></li>
+          <li><a href="/seasonal/">Roads that close for winter</a></li>
+          <li><a href="/chains/">Chain control map</a></li>
+          <li><a href="/snowplows/">Snowplow map</a></li>
+          <li><a href="/ski/">Ski resort roads</a></li>
+          <li><a href="/rest-areas/">Rest area rules by state</a></li>
+          <li><a href="/how-long-do-crashes-take-to-clear/">How long crashes take to clear</a></li>
+          <li><a href="/border-wait-times/">Border wait times</a></li>
+          <li><a href="/report-location/">How to report your location</a></li>
+          <li><a href="/how-do-i-tell-911-where-i-am-on-the-highway/">How to tell 911 where you are</a></li>
+          <li><a href="/what-should-i-do-if-i-break-down-on-the-interstate/">What to do if you break down</a></li>
+          <li><a href="/why-is-the-highway-closed/">Why is the highway closed?</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <script>if(window.matchMedia&&matchMedia("(max-width:560px)").matches)document.querySelectorAll(".mc-hub-g").forEach(function(d){d.removeAttribute("open")});</script>
+</nav>
+<!-- footer-hub:end -->
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><img width="120" height="120" src="../../assets/app-icon-60.png" alt="MileCheck" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"><p class="footer-brand" style="margin-bottom:0;">MileCheck</p></div>
+          <p class="footer-tagline">Mile markers in all 50 US states.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Get the app</p>
+          <ul class="footer-list">
+            <li><a href="https://apps.apple.com/app/apple-store/id6759212851?pt=128447811&ct=truck-restrictions&mt=8" target="_blank" rel="noopener">iOS App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=app.milecheck.mobile&referrer=utm_source%3Dmilecheckapp.com%26utm_medium%3Dweb%26utm_campaign%3Dtruck-restrictions" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Live maps</p>
+          <ul class="footer-list">
+            <li><a href="../">Highway cameras</a></li>
+            <li><a href="../../closures/">Road closures map</a></li>
+            <li><a href="../../fire/">Wildfire map</a></li>
+            <li><a href="../../maps/">All maps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-label">Help &amp; legal</p>
+          <ul class="footer-list">
+            <li><a href="/data-sources/">Data sources</a></li>
+            <li><a href="mailto:feedback@milecheckapp.com">Send feedback</a></li>
+            <li><a href="https://milecheckapp.com/milecheck-privacy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-fineprint">&copy; 2026 MileCheck LLC. Camera data: WSDOT via MileCheck. Always drive to conditions and follow posted signs.</p>
+      <p class="footer-fineprint footer-disclosure">MileCheck is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
+  </footer>
+
+<script>
+(function(){
+const COLORS={"low":"#d32f2f","W":"#ef6c00","R":"#7b1fa2","C":"#212121","weigh":"#1565c0","parking":"#00897b","stops":"#2e7d32","rest":"#8d6e63","ramps":"#c2185b"};
+const NAMES={weigh:'Weigh station',parking:'Truck parking',stops:'Truck stop',rest:'Rest area',ramps:'Runaway truck ramp'};
+const OSM=["weigh","parking","stops","rest","ramps"];
+const EVAL={'0':'rates 40% or more below legal loads','1':'rates 30-39.9% below legal loads','2':'rates 20-29.9% below legal loads','3':'rates 10-19.9% below legal loads','4':'rates 0.1-9.9% below legal loads'};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ftin=i=>Math.floor(i/12)+"' "+(i%12)+'"';
+const map=L.map('trmap',{gestureHandling:('ontouchstart' in window),preferCanvas:true}).setView([39.5,-98.5],4);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri, USGS · Bridges: FHWA NBI · POIs: © OpenStreetMap contributors',maxZoom:17}).addTo(map);
+const group=L.layerGroup().addTo(map);
+const cache={};let items=[];
+const $=id=>document.getElementById(id);
+const on=()=>new Set([...document.querySelectorAll('.tr-layer:checked')].map(x=>x.value));
+function get(layer,st){const k=layer+'/'+st;if(!cache[k])cache[k]=fetch('/data/restrictions/'+layer+'/'+st+'.geojson').then(r=>r.ok?r.json():{features:[]}).catch(()=>({features:[],failed:true}));return cache[k];}
+function bridgeKind(p,lim){const lowU=p.u!=null&&p.u<lim,lowO=p.o!=null&&p.o<lim;return {low:lowU||lowO,lowU,lowO};}
+function bridgePop(p){const h=[];
+  if(p.u!=null)h.push('<div>Under the bridge: <b>'+ftin(p.u)+'</b> on '+esc(p.x)+'</div>');
+  if(p.o!=null)h.push('<div>On the bridge: <b>'+ftin(p.o)+'</b> on '+esc(p.on)+'</div>');
+  if(p.k.includes('W'))h.push('<div><b>Weight-posted</b>'+(p.e&&EVAL[p.e]?', '+EVAL[p.e]:'')+'. Use the tons on the sign.</div>');
+  if(p.k.includes('R'))h.push('<div><b>Restricted</b> (a limit other than load)</div>');
+  if(p.k.includes('C'))h.push('<div><b>Closed</b> at the last report</div>');
+  if(p.t&&!p.k.includes('L'))h.push('<div>Inspection load rating: '+p.t+' tons</div>');
+  return '<div class="tr-pop"><b>'+esc(p.on||'Bridge')+'</b><div>Crosses: '+esc(p.x)+'</div>'+h.join('')+'<div style="color:#5a646d;margin-top:4px">NBI structure '+esc(p.s)+'</div></div>';}
+function poiPop(layer,p){const h=['<b>'+esc(p.n||NAMES[layer])+'</b>','<div>'+NAMES[layer]+'</div>'];
+  if(p.r)h.push('<div>Ref: '+esc(p.r)+'</div>');if(p.d)h.push('<div>Direction: '+esc(p.d)+'</div>');if(p.cap)h.push('<div>Spaces: '+esc(p.cap)+'</div>');if(p.h)h.push('<div>Hours (OSM): '+esc(p.h)+'</div>');
+  h.push('<div style="color:#5a646d;margin-top:4px"><a href="https://www.openstreetmap.org/'+({n:'node',w:'way',r:'relation'}[p.id[0]])+'/'+p.id.slice(1)+'" target="_blank" rel="noopener">OpenStreetMap '+esc(p.id)+'</a></div>');
+  return '<div class="tr-pop">'+h.join('')+'</div>';}
+async function draw(fit){
+  const st=$('trState').value,lim=+$('trClr').value,show=on();
+  try{history.replaceState(null,'','#'+st);}catch(e){}
+  $('trStatus').textContent='Loading '+$('trState').selectedOptions[0].text+'…';
+  const wantB=['low','W','R','C'].some(k=>show.has(k));
+  const [b,...pois]=await Promise.all([wantB?get('bridges',st):{features:[]},...OSM.map(l=>show.has(l)?get(l,st):{features:[]})]);
+  group.clearLayers();items=[];const failed=[];if(b.failed)failed.push('bridges');
+  for(const f of b.features){const p=f.properties,k=bridgeKind(p,lim);
+    let c=null;if(show.has('C')&&p.k.includes('C'))c='C';else if(show.has('low')&&k.low)c='low';else if(show.has('W')&&p.k.includes('W'))c='W';else if(show.has('R')&&p.k.includes('R'))c='R';
+    if(!c)continue;const [lon,lat]=f.geometry.coordinates;
+    const label=c==='low'?(k.lowU?ftin(p.u)+' under':ftin(p.o)+' on deck'):c==='W'?'Weight-posted':c==='R'?'Restricted':'Closed';
+    items.push({lat,lon,c,title:label+' · '+(c==='low'&&k.lowU?p.x:p.on),sub:c==='low'&&k.lowU?'Under '+p.on:'Over '+p.x,pop:bridgePop(p),sort:c==='low'?(k.lowU?p.u:p.o):999});}
+  OSM.forEach((l,i)=>{if(pois[i].failed)failed.push(NAMES[l].toLowerCase());for(const f of pois[i].features){const p=f.properties,[lon,lat]=f.geometry.coordinates;items.push({lat,lon,c:l,title:p.n||NAMES[l],sub:NAMES[l]+(p.r?' · '+p.r:''),pop:poiPop(l,p),sort:1000});}});
+  for(const it of items){it.m=L.circleMarker([it.lat,it.lon],{radius:('ontouchstart' in window)?8:6,color:'#fff',weight:1.5,fillColor:COLORS[it.c],fillOpacity:.95}).bindPopup(it.pop).addTo(group);}
+  $('trStatus').textContent=failed.length?('Could not load: '+failed.join(', ')+'. The rest of the map is shown.'):'';
+  if(fit&&items.length){map.fitBounds(L.latLngBounds(items.map(i=>[i.lat,i.lon])).pad(.05));}
+  list();}
+function list(){const bd=map.getBounds(),ul=$('trList');const v=items.filter(i=>bd.contains([i.lat,i.lon])).sort((a,b)=>a.sort-b.sort);
+  $('trListHead').textContent=v.length?('In view on the map: '+v.length+(v.length>200?' (lowest clearances first, first 200 listed)':'')):'In view on the map';
+  ul.innerHTML='';if(!v.length){ul.innerHTML='<li class="tr-empty">Nothing in this view for the layers you picked. Zoom out or turn on more layers.</li>';return;}
+  for(const it of v.slice(0,200)){const li=document.createElement('li'),b=document.createElement('button');b.innerHTML='<span class="tr-sw" style="background:'+COLORS[it.c]+';margin-right:6px"></span><b style="display:inline">'+esc(it.title)+'</b><br>'+esc(it.sub);b.onclick=()=>{map.setView([it.lat,it.lon],Math.max(map.getZoom(),13));it.m.openPopup();};li.appendChild(b);ul.appendChild(li);}}
+map.on('moveend',list);
+$('trState').onchange=()=>draw(true);$('trClr').onchange=()=>draw(false);document.querySelectorAll('.tr-layer').forEach(x=>x.onchange=()=>draw(false));
+const h=(location.hash||'').slice(1).toUpperCase();if([...$('trState').options].some(o=>o.value===h))$('trState').value=h;else $('trState').value='WA';
+draw(true);
+})();
+</script>
+</body>
+</html>
