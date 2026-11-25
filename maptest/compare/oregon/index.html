@@ -3,8 +3,10 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Which map is easier to read? | MileCheck map test</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
-<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
+<link rel="preconnect" href="https://milepost-proxy.leahgerber93.workers.dev" crossorigin>
+<link rel="preconnect" href="https://server.arcgisonline.com" crossorigin>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script defer src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
 <style>
 :root{--ink:#16201b;--mute:#5b675f;--line:#d9dfdb;--g:#14532d}
 *{box-sizing:border-box}body{margin:0;font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fafaf7}
@@ -50,13 +52,14 @@ label.f{display:block;font-weight:700;margin:12px 0 4px}button.go{margin-top:14p
 </main>
 <div id="mt-banner">Map test. Not a public page. Oregon only.</div>
 <script>
-(function(){
+// Runs after the deferred map scripts, so the page text shows before ~1 MB of map code arrives.
+(function(go){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',go):go()})(function(){
 const abs=f=>new URL('/maptest/tiles/'+f,location.href).href;
 function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',minor:'#3b4741',local:'#36413b',st:'#8a7a4a',us:'#d9a441',i:'#4fa3ff',ic:'#0d1a2a',txt:'#c8d3cc',halo:'#0e1411',mp:'#00e094',mk:'#cbd5e1'}:
 {land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#c9c4b8',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f',mk:'#475569'};
 const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
 return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
-sources:{b:{type:'vector',url:'pmtiles://'+abs('or/base.pmtiles')},l:{type:'vector',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/streets.pmtiles'},w:{type:'vector',url:'pmtiles://'+abs('or/water.pmtiles')},hs:{type:'raster',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/hillshade.pmtiles',tileSize:256},ln:{type:'vector',url:'pmtiles://'+new URL('/maptest/tiles/or/lanes.pmtiles',location.href).href+''},m:{type:'vector',url:'pmtiles://'+abs('or/mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('or/poi.pmtiles')},
+sources:{b:{type:'vector',url:'pmtiles://'+abs('or/base.pmtiles')},l:{type:'vector',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/streets.pmtiles'},w:{type:'vector',url:'pmtiles://'+abs('or/water.pmtiles')},ln:{type:'vector',url:'pmtiles://'+new URL('/maptest/tiles/or/lanes.pmtiles',location.href).href+''},m:{type:'vector',url:'pmtiles://'+abs('or/mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('or/poi.pmtiles')},
 a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
 layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
 {id:'hs',type:'raster',source:'hs',maxzoom:15,paint:{'raster-opacity':['interpolate',['linear'],['zoom'],12,d?.35:.45,15,0],'raster-contrast':d?-.2:0}},
@@ -92,10 +95,18 @@ const img=n=>{const c=document.createElement('canvas');c.width=c.height=32;const
 const esc=x=>String(x==null?'':x).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]);
 function applyShow(m){Object.keys(GROUPS).forEach(k=>GROUPS[k].forEach(id=>{if(m.getLayer(id))m.setLayoutProperty(id,'visibility',show[k]?'visible':'none')}))}
 // MapLibre zoom = Leaflet zoom - 1 (512px vector tiles), so 11 here matches the old Leaflet 12.
-const mk=(id,st)=>{const m=new maplibregl.Map({container:id,style:st,center:[-122.68,45.52],zoom:11,maxPitch:60,scrollZoom:false,attributionControl:{compact:false}});
+// Phase 1 draws only the base (fast, small files on this site). Phase 2 adds city streets (from the Worker),
+// lane detail and the shared overlays once phase 1 has drawn, so the first picture is not held up by them.
+const LATE_SRC=new Set(['l','ln','q','m','a']);
+function split(st){const late=st.layers.filter(l=>LATE_SRC.has(l.source)),srcs={};Object.keys(st.sources).forEach(k=>{if(LATE_SRC.has(k))srcs[k]=st.sources[k]});
+ const first=Object.assign({},st,{sources:Object.fromEntries(Object.entries(st.sources).filter(([k])=>!LATE_SRC.has(k))),layers:st.layers.filter(l=>!LATE_SRC.has(l.source))});
+ return{first,late,srcs,all:st.layers.map(l=>l.id)}}
+function addLate(m,pl){if(m._late)return;m._late=true;Object.entries(pl.srcs).forEach(([k,v])=>{if(!m.getSource(k))m.addSource(k,v)});
+ pl.late.forEach(l=>{const i=pl.all.indexOf(l.id);const before=pl.all.slice(i+1).find(id=>m.getLayer(id));m.addLayer(l,before)});applyShow(m)}
+const mk=(id,full)=>{const pl=split(full),st=pl.first;const m=new maplibregl.Map({container:id,style:st,center:[-122.68,45.52],zoom:11,maxPitch:60,scrollZoom:false,attributionControl:{compact:false}});
  m.addControl(new maplibregl.NavigationControl({visualizePitch:true}),'top-left');
  m.on('styleimagemissing',e=>{if((e.id==='bolt'||e.id==='pump')&&!m.hasImage(e.id))m.addImage(e.id,img(e.id),{pixelRatio:2})});
- m.on('load',()=>applyShow(m));
+ m.on('load',()=>{applyShow(m);m.once('idle',()=>addLate(m,pl));setTimeout(()=>addLate(m,pl),2500)});
  m.on('click',e=>{const p=e.point;const fs=m.queryRenderedFeatures([[p.x-10,p.y-10],[p.x+10,p.y+10]],{layers:['fuel','mp'].filter(x=>m.getLayer(x))});if(!fs.length)return;const q=fs[0].properties;
   const h=fs[0].layer.id==='mp'?'<b>Mile marker '+esc(q.mp)+'</b><br>'+esc(q.r):'<b>'+({EVF:'DC fast charger',EV:'EV charger (Level 2)'}[q.t]||'Alternative fuel')+'</b><br>'+esc(q.n)+'<br><small>'+esc(q.d)+'</small><br><small>Source: US DOE AFDC</small>';
   new maplibregl.Popup().setLngLat(e.lngLat).setHTML(h).addTo(m)});
@@ -140,5 +151,5 @@ f.onsubmit=async e=>{e.preventDefault();const pk=f.querySelector('input[name=pic
   msg.textContent='Thank you. Got it.';f.reset();}
  catch(err){const t='Picked: Map '+body.pick+' (order '+order+')\n\nWhy: '+body.why+'\n\nWrong or missing: '+body.wrong+'\n\nRole: '+body.role+'\nName: '+body.who+'\nView: '+body.view;
   msg.textContent='Could not send. Your email app will open with your answers.';location.href='mailto:feedback@milecheckapp.com?subject=Map%20test%20vote&body='+encodeURIComponent(t)}};
-})();
+});
 </script></body></html>
