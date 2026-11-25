@@ -351,7 +351,7 @@ async function draw(fit){
     const label=c==='low'?(k.lowU?ftin(p.u)+' under':ftin(p.o)+' on deck'):c==='W'?'Weight-posted':c==='R'?'Restricted':'Closed';
     items.push({lat,lon,c,title:label+' · '+(c==='low'&&k.lowU?p.x:p.on),sub:c==='low'&&k.lowU?'Under '+p.on:'Over '+p.x,pop:bridgePop(p),sort:c==='low'?(k.lowU?p.u:p.o):999});}
   OSM.forEach((l,i)=>{if(pois[i].failed)failed.push(NAMES[l].toLowerCase());for(const f of pois[i].features){const p=f.properties,[lon,lat]=f.geometry.coordinates;items.push({lat,lon,c:l,title:p.n||NAMES[l],sub:NAMES[l]+(p.r?' · '+p.r:''),pop:poiPop(l,p),sort:1000});}});
-  for(const it of items){it.m=L.circleMarker([it.lat,it.lon],{radius:('ontouchstart' in window)?8:6,color:'#fff',weight:1.5,fillColor:COLORS[it.c],fillOpacity:.95}).bindPopup(it.pop).addTo(group);}
+  for(const it of items){it.m=L.circleMarker([it.lat,it.lon],{radius:('ontouchstart' in window)?8:6,color:'#fff',weight:1.5,fillColor:COLORS[it.c],fillOpacity:.95}).bindPopup(it.pop,{autoPanPaddingTopLeft:[20,80],autoPanPadding:[20,20]}).addTo(group);}
   $('trStatus').textContent=failed.length?('Could not load: '+failed.join(', ')+'. The rest of the map is shown.'):'';
   if(fit&&items.length){map.fitBounds(L.latLngBounds(items.map(i=>[i.lat,i.lon])).pad(.05));}
   list();}
