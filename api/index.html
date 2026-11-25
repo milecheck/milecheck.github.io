@@ -460,6 +460,20 @@
       </div>
       <figure class="ep-visual"><a href="/images/mockups/02-bridge-lift-planner.webp" target="_blank" rel="noopener"><img src="/images/mockups/02-bridge-lift-planner.webp" width="1200" height="677" loading="lazy" alt="Route planner for the Ballard Bridge in Seattle: 259 lifts in 30 days, a typical lift of 4 minutes, a chart of lifts by hour and the five Seattle drawbridges"></a><figcaption><span class="badge">API</span> <strong>Seattle bridge lift history.</strong> A route planner shows how often and how long the Ballard Bridge lifts, and which daytime hours had the fewest lifts in the last 30 days.</figcaption></figure>
     </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">POST</span><span class="ep-path">/v1/bridges/subscribe</span></div>
+      <p class="ep-desc">Push alerts to a phone when a Seattle bridge goes up. Send an Expo push token and the bridge ids from <code>/v1/bridges</code>. Optional: <code>paused_until</code> (ISO time), <code>long_up_minutes</code> and <code>windows</code>. Send <code>enabled: false</code> or an empty list to stop. Bridges with no live feed are dropped. Seattle today.</p>
+      <pre class="codeblock">curl -X POST "https://api.milecheckapp.com/v1/bridges/subscribe?apikey=YOUR_KEY" \
+  -H "content-type: application/json" \
+  -d '{"token":"ExponentPushToken[...]","bridge_ids":["..."]}'</pre>
+    </div>
+
+    <div class="ep-card">
+      <div class="ep-head"><span class="ep-method">GET</span><span class="ep-path">/v1/health</span></div>
+      <p class="ep-desc">The endpoint list and <code>"status": "ok"</code>. No key needed, and it does not count against your limit. Use it for uptime checks.</p>
+      <pre class="codeblock">curl "https://api.milecheckapp.com/v1/health"</pre>
+    </div>
     </div>
 
 <!-- TRY IT -->
