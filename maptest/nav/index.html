@@ -102,9 +102,9 @@ layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
 {id:'wlab',type:'symbol',source:'w','source-layer':'wlab',minzoom:7,filter:['all',['>=',['zoom'],['get','z']],['>',['get','a'],['step',['zoom'],20000000,9,2000000,10,500000,11,150000,12,30000]]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':['interpolate',['linear'],['zoom'],7,10,14,13],'text-letter-spacing':.06,'text-rotate':['get','r'],'text-rotation-alignment':'map','text-max-width':9,'text-padding':2},paint:{'text-color':'#2b6a99','text-halo-color':'rgba(255,255,255,.75)','text-halo-width':1.2}},{id:'place',type:'symbol','source':'b','source-layer':'places',filter:['>',['get','a'],['step',['zoom'],40000000,6,15000000,7,5000000,9,1000000,10,0]],layout:{'text-field':['get','n'],'text-font':['bold'],'text-size':12},paint:{'text-color':C.txt,'text-halo-color':C.halo,'text-halo-width':1.5,'text-opacity':.85}},
 {id:'fuel',type:'circle',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],paint:{'circle-radius':['interpolate',['linear'],['zoom'],9,4.5,13,7],'circle-color':['match',['get','t'],'EVF','#7c3aed','EV','#8b5cf6','#0e7490'],'circle-stroke-color':C.halo,'circle-stroke-width':1.5}},{id:'fuell',type:'symbol',source:'q','source-layer':'fuel',minzoom:9,filter:['any',['>=',['zoom'],15],['!=',['get','t'],'EV']],layout:{'icon-image':['match',['get','t'],'EVF','bolt','EV','bolt','pump'],'icon-size':['interpolate',['linear'],['zoom'],9,.35,13,.55],'icon-allow-overlap':true},paint:{}},{id:'alerts',type:'circle',source:'a',paint:{'circle-radius':6,'circle-color':['match',['get','e'],'AC','#dc2626','CL','#dc2626','RW','#f59e0b','WE','#3b82f6','#a855f7'],'circle-stroke-color':C.halo,'circle-stroke-width':2}}]}}
 
-let view='map';
-function makeStyle(){const S=ST[st],s=style(view==='dark');
- const map={'wa.pmtiles':S.tiles.b,'mp.pmtiles':S.tiles.mp,'poi.pmtiles':S.tiles.q,'water.pmtiles':S.tiles.w,'blocks.pmtiles':S.tiles.k};
+let view='map',styleSt=null;
+function makeStyle(){styleSt=st;const S=ST[st],s=style(view==='dark');
+ const map={'wa/base.pmtiles':S.tiles.b,'mp.pmtiles':S.tiles.mp,'poi.pmtiles':S.tiles.q,'water2.pmtiles':S.tiles.w,'blocks.pmtiles':S.tiles.k};
  for(const k in s.sources){const src=s.sources[k];if(!src.url)continue;for(const f in map){if(src.url.endsWith('/maptest/tiles/'+f)){if(map[f])src.url='pmtiles://'+T(map[f]);else{delete s.sources[k]}}}
   if(k==='ln'){if(S.lanes)src.url='pmtiles://'+new URL(S.lanes,location.href).href;else delete s.sources[k]}}
  s.layers=s.layers.filter(l=>!l.source||s.sources[l.source]);
@@ -176,7 +176,7 @@ const hm=s=>{const h=Math.floor(s/3600),m=Math.round((s%3600)/60);return h?h+' h
 
 const $=id=>document.getElementById(id);
 // state follows the map: switch tiles when the map's center moves into another state
-map.on('moveend',()=>{if(nav)return;const c=map.getCenter(),s2=stAt(c.lng,c.lat);if(s2&&s2!==st){st=s2;G=null;for(const k in LIVE)LIVE[k].features=[];for(const k in got)delete got[k];const keep=R;map.setStyle(makeStyle());map.once('idle',()=>{if(keep)drawRoute(keep);pts()})}});
+map.on('moveend',()=>{if(nav)return;const c=map.getCenter(),s2=stAt(c.lng,c.lat);if(s2&&s2!==styleSt){if(s2!==st){st=s2;G=null}for(const k in LIVE)LIVE[k].features=[];for(const k in got)delete got[k];const keep=R;map.setStyle(makeStyle());map.once('idle',()=>{if(keep)drawRoute(keep);pts()})}});
 // ---- search: towns as you type (Census Gazetteer), addresses and blocks via the US Census geocoder ----
 let PL=[];fetch(T('places.json')).then(r=>r.json()).then(d=>PL=d);
 let MPX=null;fetch(T('mpindex.json')).then(r=>r.json()).then(d=>MPX=d);
@@ -238,6 +238,7 @@ function nearOn(c,route){let bi=-1,bd=1e18;for(const e of G.e){if(rnorm(G.s[e[4]
 async function doRoute(){$('rsteps').innerHTML='';$('go').disabled=true;if(!from||!dest){$('rsum').innerHTML='<small>Pick a start: search above, or long-press the map.</small>';return}
  const sa=stAt(from.c[0],from.c[1]),sb=stAt(dest.c[0],dest.c[1]);if(!sa||sa!==sb){$('rsum').innerHTML='<small>This test routes inside one state: Washington, Oregon or Florida.</small>';return}
  if(!G||st!==sa){st=sa;$('rsum').innerHTML='<small>Loading roads...</small>';await loadGraph()}
+ if(styleSt!==st){const keep=R;map.setStyle(makeStyle());map.once('idle',()=>{if(keep)drawRoute(keep);pts()})}
  A=from.c;B=dest.c;const a=from.route?nearOn(A,from.route):nearest(A[0],A[1]),b=dest.route?nearOn(B,dest.route):nearest(B[0],B[1]);const r=route(a,b);if(!r){$('rsum').innerHTML='<small>No route found.</small>';return}
  R=build(r);const na=[G.n[2*a],G.n[2*a+1]],nb=[G.n[2*b],G.n[2*b+1]];R.line=[A,...R.line,B];R.steps.forEach(x=>x.at+=1);
  R.secs=r.secs+(hav(A[0],A[1],na[0],na[1])+hav(B[0],B[1],nb[0],nb[1]))/9;R.m=r.edges.reduce((s,[ei])=>s+G.e[ei][2],0);
@@ -300,11 +301,11 @@ map.on('click',e=>{if(nav)return;const ids=['lv-cams','lv-clos','lv-alerts','lv-
  new maplibregl.Popup({maxWidth:'280px'}).setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);e.preventDefault&&e.preventDefault()});
 // ---- navigation ----
 let nav=null,mpLast=0;
-function stopNav(){if(nav){cancelAnimationFrame(nav.raf);nav=null}$('banner').style.display=$('foot').style.display=$('mm').style.display='none';$('top').style.display='';$('lay').style.display=$('loc').style.display='';if(R)$('routeC').style.display='block';map.easeTo({pitch:0,bearing:0,duration:500})}
+function stopNav(){if(nav){cancelAnimationFrame(nav.raf);nav=null}$('banner').style.display=$('foot').style.display=$('mm').style.display='none';$('top').style.display='';$('lay').style.display=$('loc').style.display='';$('lay').style.top='';$('lay').style.bottom='';if(R)$('routeC').style.display='block';map.easeTo({pitch:0,bearing:0,duration:500})}
 $('end').onclick=stopNav;
 $('go').onclick=()=>{if(!R)return;const cum=[0];for(let i=1;i<R.line.length;i++)cum.push(cum[i-1]+hav(R.line[i-1][0],R.line[i-1][1],R.line[i][0],R.line[i][1]));
  nav={said:{},cum,d:0,last:performance.now(),speed:Math.max(60,cum[cum.length-1]/150)};
- $('top').style.display=$('routeC').style.display=$('lay').style.display=$('loc').style.display=$('layp').style.display='none';$('banner').style.display='block';$('foot').style.display='flex';$('mm').style.display='block';pts();
+ $('top').style.display=$('routeC').style.display=$('loc').style.display=$('layp').style.display='none';$('lay').style.top='auto';$('lay').style.bottom='160px';$('banner').style.display='block';$('foot').style.display='flex';$('mm').style.display='none';pts();
  map.easeTo({center:R.line[0],zoom:16,pitch:55,duration:900});setTimeout(()=>{if(nav){nav.last=performance.now();tick()}},950)};
 function tick(){if(!nav)return;const now=performance.now(),dt=(now-nav.last)/1000;nav.last=now;nav.d+=nav.speed*dt;const c=nav.cum,L=c[c.length-1];
  if(nav.d>=L){$('nD').textContent='You have arrived';$('nT').textContent=dest?dest.name:'';$('nL').style.display='none';$('fEta').textContent='Arrived';$('fLeft').textContent='';setTimeout(stopNav,3000);nav.raf=0;return}
@@ -318,7 +319,7 @@ function tick(){if(!nav)return;const now=performance.now(),dt=(now-nav.last)/100
  else{$('nD').textContent=mi(L-nav.d);$('nT').textContent='Arrive at '+(dest?dest.name:'your stop');lane.style.display='none'}
  const left=L-nav.d;$('fEta').textContent=hm(R.secs*left/L);$('fLeft').textContent=mi(left)+' to go';
  if(now-mpLast>700){mpLast=now;const pp=map.project(pos);const fs=map.getLayer('mp')?map.queryRenderedFeatures([[pp.x-70,pp.y-70],[pp.x+70,pp.y+70]],{layers:['mp']}):[];
-  if(fs.length){let best=fs[0],bd=1e9;for(const qq of fs){const g=qq.geometry.coordinates,dd=hav(g[0],g[1],pos[0],pos[1]);if(dd<bd){bd=dd;best=qq}}$('mmN').textContent=best.properties.mp;$('mmR').textContent=String(best.properties.r||'').replace(/^SR (5|82|90|182|205|405|705)$/,'I-$1')}}
+  if(fs.length){let best=fs[0],bd=1e9;for(const qq of fs){const g=qq.geometry.coordinates,dd=hav(g[0],g[1],pos[0],pos[1]);if(dd<bd){bd=dd;best=qq}}$('mm').style.display='block';$('mmN').textContent=best.properties.mp;$('mmR').textContent=String(best.properties.r||'').replace(/^SR (5|82|90|182|205|405|705)$/,'I-$1')}}
  nav.raf=requestAnimationFrame(tick)}
 })();
 </script></body></html>
