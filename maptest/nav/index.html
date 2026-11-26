@@ -35,7 +35,11 @@
 #foot .eta{flex:1}#foot .eta b{font-size:22px}#end{border:0;background:#dc2626;color:#fff;border-radius:12px;font:inherit;font-weight:800;min-height:48px;padding:0 22px;cursor:pointer}
 #mm{position:absolute;right:12px;bottom:100px;z-index:5;display:none;background:var(--g);color:#fff;border:2px solid #fff;border-radius:6px;padding:6px 10px;text-align:center;font-weight:800}#mm small{display:block;font-weight:600;font-size:11px}
 #lay{position:absolute;right:12px;top:max(12px,env(safe-area-inset-top));z-index:5;width:44px;height:44px;border:0;border-radius:12px;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.18);cursor:pointer}
-#layp{position:absolute;right:12px;top:calc(max(12px,env(safe-area-inset-top)) + 52px);z-index:6;padding:8px;display:none;grid-template-columns:1fr 1fr;gap:6px;width:200px}
+#layp{position:absolute;right:12px;top:calc(max(12px,env(safe-area-inset-top)) + 52px);z-index:6;padding:8px;display:none;grid-template-columns:1fr 1fr;gap:6px;width:250px;max-height:calc(100vh - 90px);overflow:auto}
+#layp .fh{grid-column:1/-1;font-size:12px;font-weight:700;color:var(--mute);margin:6px 2px 0;text-transform:uppercase;letter-spacing:.04em}
+#flt{grid-column:1/-1;display:flex;flex-direction:column;max-height:46vh;overflow:auto}
+#flt label{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 4px;font-size:15px;cursor:pointer}#flt input{width:20px;height:20px;accent-color:#14532d}
+#flt .sw{width:12px;height:12px;border-radius:50%;flex:none}
 #layp button{border:0;background:#f3f6f4;border-radius:10px;padding:10px;font:inherit;font-size:14px;min-height:44px;cursor:pointer}#layp button.on{outline:2px solid var(--g);background:#e7f3ec}
 #loc{position:absolute;right:12px;bottom:max(110px,calc(env(safe-area-inset-bottom) + 110px));z-index:4;width:44px;height:44px;border:0;border-radius:12px;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.18);cursor:pointer}
 #test{position:fixed;bottom:0;left:0;right:0;z-index:3;background:rgba(20,83,45,.85);color:#fff;font-size:11px;text-align:center;padding:2px}
@@ -49,7 +53,8 @@
  <ul id="sug" role="listbox"></ul></div>
  <div id="chips"></div></div>
 <button id="lay" aria-label="Map views"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16201b" stroke-width="2"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></button>
-<div id="layp" class="card"><button data-v="map" class="on">Map</button><button data-v="terrain">Terrain</button><button data-v="sat">Satellite</button><button data-v="dark">Dark</button></div>
+<div id="layp" class="card"><button data-v="map" class="on">Map</button><button data-v="terrain">Terrain</button><button data-v="sat">Satellite</button><button data-v="dark">Dark</button>
+<div class="fh">Show on map</div><div id="flt"></div></div>
 <button id="loc" aria-label="Show my location"><svg width="22" height="22" viewBox="0 0 24 24" fill="#16201b"><path d="M21 3 3 10.5l7.5 2.6L13 21z"/></svg></button>
 <div id="place" class="card sheet"><button class="x" data-close aria-label="Close">&times;</button><h2 id="pN"></h2><div class="sub" id="pS"></div>
  <button class="big" id="pDir">Directions</button><div class="two"><button class="big" id="pFrom">Start from here</button></div></div>
@@ -64,7 +69,7 @@
 <script>
 (function(){
 const ST={
- wa:{bb:[-124.76,45.54,-116.92,49.0],tiles:{b:'wa.pmtiles',mp:'mp.pmtiles',q:'poi.pmtiles',w:'water.pmtiles',k:'blocks.pmtiles'},lanes:'/maptest/tiles/wa/lanes.pmtiles',graph:'wa/graph.json'},
+ wa:{bb:[-124.76,45.54,-116.92,49.0],tiles:{b:'wa/base.pmtiles',mp:'mp.pmtiles',q:'poi.pmtiles',w:'water.pmtiles',k:'blocks.pmtiles'},lanes:'/maptest/tiles/wa/lanes.pmtiles',graph:'wa/graph.json'},
  or:{bb:[-124.57,41.99,-116.46,46.29],tiles:{b:'or/base.pmtiles',mp:'or/mp.pmtiles',q:'or/poi.pmtiles',w:'or/water.pmtiles'},lanes:'/maptest/tiles/or/lanes.pmtiles',graph:'or/graph.json'},
  fl:{bb:[-87.63,24.52,-80.03,31.0],tiles:{b:'fl/base.pmtiles',mp:'fl/mp.pmtiles',q:'fl/poi.pmtiles',w:'fl/water.pmtiles'},lanes:null,graph:'fl/graph.json'}};
 const CHIPS=[['Pike St to Bellevue','wa',['700 Pike St, Seattle, WA','700 block of Pike St, Seattle'],['100 Bellevue Way NE, Bellevue, WA','100 block of Bellevue Way NE, Bellevue']],
@@ -78,11 +83,11 @@ function style(d){const C=d?{land:'#141b17',water:'#0f2a3a',state:'#2f3d35',mino
 {land:'#f4f2ec',water:'#aacde3',state:'#9aa79f',minor:'#c9c4b8',local:'#c9c4b8',st:'#e8c77a',us:'#f0a830',i:'#2f6fd6',ic:'#ffffff',txt:'#29342e',halo:'#ffffff',mp:'#00875f',mk:'#475569'};
 const rw=(a,b)=>['interpolate',['exponential',1.5],['zoom'],6,a,12,b];
 return{version:8,glyphs:abs('fonts/')+'{fontstack}/{range}.pbf',
-sources:{b:{type:'vector',url:'pmtiles://'+abs('wa.pmtiles')},l:{type:'vector',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/streets.pmtiles'},w:{type:'vector',url:'pmtiles://'+abs('water.pmtiles')},hs:{type:'raster',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/hillshade.pmtiles',tileSize:256},ln:{type:'vector',url:'pmtiles://'+abs('wa/lanes.pmtiles')},m:{type:'vector',url:'pmtiles://'+abs('mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('poi.pmtiles')},k:{type:'vector',url:'pmtiles://'+abs('blocks.pmtiles')},
+sources:{oc:{type:'vector',url:'pmtiles://'+abs('ocean.pmtiles')},b:{type:'vector',url:'pmtiles://'+abs('wa/base.pmtiles')},l:{type:'vector',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/streets.pmtiles'},w:{type:'vector',url:'pmtiles://'+abs('water.pmtiles')},hs:{type:'raster',url:'pmtiles://https://milepost-proxy.leahgerber93.workers.dev/basemap/hillshade.pmtiles',tileSize:256},ln:{type:'vector',url:'pmtiles://'+abs('wa/lanes.pmtiles')},m:{type:'vector',url:'pmtiles://'+abs('mp.pmtiles')},q:{type:'vector',url:'pmtiles://'+abs('poi.pmtiles')},k:{type:'vector',url:'pmtiles://'+abs('blocks.pmtiles')},
 a:{type:'geojson',data:{type:'FeatureCollection',features:[].map(x=>({type:'Feature',properties:x,geometry:{type:'Point',coordinates:[x.lon,x.lat]}}))}}},
 layers:[{id:'bg',type:'background',paint:{'background-color':C.land}},
 {id:'hs',type:'raster',source:'hs',maxzoom:15,paint:{'raster-opacity':['interpolate',['linear'],['zoom'],12,d?.35:.45,15,0],'raster-contrast':d?-.2:0}},
-{id:'water',type:'fill','source':'b','source-layer':'water',maxzoom:10,paint:{'fill-color':C.water}},{id:'water2',type:'fill',source:'w','source-layer':'water',minzoom:9,paint:{'fill-color':C.water}},
+{id:'ocean',type:'fill',source:'oc','source-layer':'ocean',paint:{'fill-color':C.water}},{id:'water',type:'fill','source':'b','source-layer':'water',maxzoom:10,paint:{'fill-color':C.water}},{id:'water2',type:'fill',source:'w','source-layer':'water',minzoom:9,paint:{'fill-color':C.water}},
 {id:'state',type:'line','source':'b','source-layer':'state',paint:{'line-color':C.state,'line-width':1.2,'line-dasharray':[3,2]}},
 {id:'county',type:'line',source:'q','source-layer':'county',paint:{'line-color':C.state,'line-width':.8,'line-dasharray':[4,3],'line-opacity':.7}},{id:'city',type:'line',source:'q','source-layer':'city',minzoom:9,paint:{'line-color':C.mp,'line-width':.8,'line-opacity':.35}},{id:'local',type:'line','source':'l','source-layer':'local',paint:{'line-color':C.local,'line-width':['interpolate',['linear'],['zoom'],11,.5,12,1]}},
 {id:'minor',type:'line','source':'b','source-layer':'roads',filter:['==',['get','c'],'minor'],minzoom:9,paint:{'line-color':C.minor,'line-width':rw(.4,1.6)}},
@@ -171,7 +176,7 @@ const hm=s=>{const h=Math.floor(s/3600),m=Math.round((s%3600)/60);return h?h+' h
 
 const $=id=>document.getElementById(id);
 // state follows the map: switch tiles when the map's center moves into another state
-map.on('moveend',()=>{if(nav)return;const c=map.getCenter(),s2=stAt(c.lng,c.lat);if(s2&&s2!==st){st=s2;G=null;const keep=R;map.setStyle(makeStyle());map.once('idle',()=>{if(keep)drawRoute(keep);pts()})}});
+map.on('moveend',()=>{if(nav)return;const c=map.getCenter(),s2=stAt(c.lng,c.lat);if(s2&&s2!==st){st=s2;G=null;for(const k in LIVE)LIVE[k].features=[];for(const k in got)delete got[k];const keep=R;map.setStyle(makeStyle());map.once('idle',()=>{if(keep)drawRoute(keep);pts()})}});
 // ---- search: towns as you type (Census Gazetteer), addresses and blocks via the US Census geocoder ----
 let PL=[];fetch(T('places.json')).then(r=>r.json()).then(d=>PL=d);
 let MPX=null;fetch(T('mpindex.json')).then(r=>r.json()).then(d=>MPX=d);
@@ -255,6 +260,44 @@ if(navigator.permissions)navigator.permissions.query({name:'geolocation'}).then(
 // map views behind one button
 $('lay').onclick=()=>{$('layp').style.display=$('layp').style.display==='grid'?'none':'grid'};
 $('layp').onclick=e=>{const b=e.target.closest('button');if(!b)return;view=b.dataset.v;[...$('layp').children].forEach(x=>x.classList.toggle('on',x===b));$('layp').style.display='none';const keep=R;map.setStyle(makeStyle());map.once('idle',()=>{if(keep)drawRoute(keep);pts()})};
+
+// ---- on/off filters (the MileCheck app's map layers) ----
+const API='https://api.milecheckapp.com';
+const FL=[['alerts','Road alerts','#f59e0b',1],['closures','Closures and crashes','#dc2626',1],['weather','Road weather','#3b82f6',1],['cams','Traffic cameras','#0f766e',0],['plows','Snowplows','#ea580c',1],
+ ['mp','Mile markers','#475569',1],['fuel','EV chargers and fuel','#7c3aed',1],['lanes','Lane lines','#9aa0a0',1],['towns','Town names','#16201b',1],['lakes','Lake and water names','#2b6a99',1],
+ ['county','County lines','#9aa79f',1],['city','City limits','#00875f',1],['shade','Terrain shading','#bbb',1]];
+const LAY={mp:['mp','mpl'],fuel:['fuel','fuell'],lanes:['lnr','lne','lnl','lnc'],towns:['place'],lakes:['wlab'],county:['county','countyn'],city:['city'],shade:['hs'],alerts:['lv-alerts'],closures:['lv-clos'],weather:['lv-wx'],cams:['lv-cams'],plows:['lv-plows']};
+let ON={};try{ON=JSON.parse(localStorage.getItem('mcNavFilters')||'{}')}catch(e){}
+FL.forEach(f=>{if(!(f[0] in ON))ON[f[0]]=!!f[3]});
+$('flt').innerHTML=FL.map(f=>'<label><input type="checkbox" data-f="'+f[0]+'"'+(ON[f[0]]?' checked':'')+'><span class="sw" style="background:'+f[2]+'"></span>'+f[1]+'</label>').join('');
+$('flt').addEventListener('change',e=>{const k=e.target.dataset.f;ON[k]=e.target.checked;try{localStorage.setItem('mcNavFilters',JSON.stringify(ON))}catch(x){}applyF();if(ON[k])loadLive()});
+$('layp').addEventListener('click',e=>e.stopPropagation());
+function applyF(){for(const k in LAY)for(const id of LAY[k])if(map.getLayer(id))map.setLayoutProperty(id,'visibility',ON[k]?'visible':'none')}
+const LIVE={alerts:{type:'FeatureCollection',features:[]},clos:{type:'FeatureCollection',features:[]},wx:{type:'FeatureCollection',features:[]},cams:{type:'FeatureCollection',features:[]},plows:{type:'FeatureCollection',features:[]}};const got={};
+function addLive(){const add=(id,src,paint)=>{if(!map.getSource(src))map.addSource(src,{type:'geojson',data:LIVE[src.slice(3)]});if(!map.getLayer(id))map.addLayer({id,type:'circle',source:src,paint},map.getLayer('rc')?'rc':undefined)};
+ add('lv-wx','lv-wx',{'circle-radius':5,'circle-color':'#3b82f6','circle-stroke-color':'#fff','circle-stroke-width':1.5});
+ add('lv-alerts','lv-alerts',{'circle-radius':5.5,'circle-color':'#f59e0b','circle-stroke-color':'#fff','circle-stroke-width':1.5});
+ add('lv-clos','lv-clos',{'circle-radius':6.5,'circle-color':'#dc2626','circle-stroke-color':'#fff','circle-stroke-width':2});
+ add('lv-cams','lv-cams',{'circle-radius':['interpolate',['linear'],['zoom'],8,2.5,13,5],'circle-color':'#0f766e','circle-stroke-color':'#fff','circle-stroke-width':1});
+ add('lv-plows','lv-plows',{'circle-radius':5,'circle-color':'#ea580c','circle-stroke-color':'#fff','circle-stroke-width':1.5});applyF()}
+const txt=h=>String(h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+async function loadLive(){const S=st.toUpperCase();if(got[S])return;got[S]=1;const j=p=>fetch(API+p,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
+ const [inc,con,cam,plw]=await Promise.all([j('/incidents?state='+S),j('/conditions?state='+S),j('/cameras?state='+S),j('/plows?state='+S)]);
+ for(const x of (inc&&inc['incident-reports'])||[]){const l=x.location||{},s=l['start-location']||{},la=+s['start-lat'],lo=+s['start-long'];if(!la||!lo)continue;const t=x['event-type-id'],clos=t==='CL'||t==='AC';
+  (clos?LIVE.clos:LIVE.alerts).features.push({type:'Feature',properties:{t:clos?(t==='AC'?'Crash':'Closure'):(t==='RW'?'Construction':t==='WE'?'Weather':'Alert'),r:l['route-id']||'',d:txt(x.headline||x['impact-desc']||x.description).slice(0,220)},geometry:{type:'Point',coordinates:[lo,la]}})}
+ for(const x of (con&&con['road-weather-reports'])||[]){const la=+x.latitude,lo=+x.longitude;if(!la||!lo)continue;LIVE.wx.features.push({type:'Feature',properties:{t:'Road weather',r:x['location-name']||'',d:txt([x['road-surface-condition'],x['weather-condition'],x['air-temperature']!=null?x['air-temperature']+'°F':''].filter(Boolean).join(' · '))},geometry:{type:'Point',coordinates:[lo,la]}})}
+ for(const x of (cam&&cam.cameras)||[]){if(!x.lat||!x.lon||x.isActive===false)continue;LIVE.cams.features.push({type:'Feature',properties:{t:'Camera',r:x.title||'',img:x.imageUrl||''},geometry:{type:'Point',coordinates:[x.lon,x.lat]}})}
+ for(const x of (plw&&plw.plows)||[]){if(!x.lat||!x.lon)continue;LIVE.plows.features.push({type:'Feature',properties:{t:'Snowplow, last reported',r:x.route||'',d:x.time||x.updated||''},geometry:{type:'Point',coordinates:[x.lon,x.lat]}})}
+ for(const k in LIVE){const sid='lv-'+k;if(map.getSource(sid))map.getSource(sid).setData(LIVE[k])}}
+map.on('styledata',()=>{if(map.isStyleLoaded()){addLive();}});map.on('load',()=>{addLive();loadLive()});
+map.on('idle',()=>{if(!map.getLayer('lv-alerts'))addLive();loadLive()});
+map.on('click',e=>{if(nav)return;const ids=['lv-cams','lv-clos','lv-alerts','lv-wx','lv-plows','fuel','mp'].filter(i=>map.getLayer(i)&&map.getLayoutProperty(i,'visibility')!=='none');
+ const fs=map.queryRenderedFeatures([[e.point.x-8,e.point.y-8],[e.point.x+8,e.point.y+8]],{layers:ids});if(!fs.length)return;const f=fs[0],q=f.properties;const esc=x=>String(x==null?'':x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+ let h;if(f.layer.id==='lv-cams')h='<b>'+esc(q.r)+'</b><br><img src="'+esc(q.img)+'" alt="" style="width:240px;max-width:70vw;border-radius:6px;margin-top:6px">';
+ else if(f.layer.id==='mp')h='<b>Mile marker '+esc(q.mp)+'</b><br>'+esc(q.r);
+ else if(f.layer.id==='fuel')h='<b>'+({EVF:'DC fast charger',EV:'EV charger (Level 2)'}[q.t]||'Alternative fuel')+'</b><br>'+esc(q.n)+'<br><small>'+esc(q.d)+'</small>';
+ else h='<b>'+esc(q.t)+(q.r?' · '+esc(q.r):'')+'</b><br><small>'+esc(q.d)+'</small>';
+ new maplibregl.Popup({maxWidth:'280px'}).setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);e.preventDefault&&e.preventDefault()});
 // ---- navigation ----
 let nav=null,mpLast=0;
 function stopNav(){if(nav){cancelAnimationFrame(nav.raf);nav=null}$('banner').style.display=$('foot').style.display=$('mm').style.display='none';$('top').style.display='';$('lay').style.display=$('loc').style.display='';if(R)$('routeC').style.display='block';map.easeTo({pitch:0,bearing:0,duration:500})}
