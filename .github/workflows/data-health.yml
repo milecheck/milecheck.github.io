@@ -4,6 +4,8 @@ name: data-health
 on:
   schedule:
     - cron: '17 14 * * *'
+    # GitHub often starts the 14:17 run hours late; a second slot makes a morning result likely.
+    - cron: '47 16 * * *'
   workflow_dispatch:
 permissions:
   contents: read
