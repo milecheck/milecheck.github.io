@@ -37,6 +37,43 @@
   if (document.querySelectorAll('.leaflet-container').length > maps.length) window.dispatchEvent(new Event('resize'));
 })();
 
+/* 0b. Zooming in never blanks the map (Leah, 2026-11-26: "Web zoom in on map can we make
+   sure it doesn't go blank"). Leaflet lets a map zoom as far as its deepest tile layer
+   goes, and stops drawing every other tile layer past that layer's own maxZoom. Radar
+   frames and forecast layers carry Leaflet's default limit (18), so turning one on let
+   the map zoom past the base map's 14, 16 or 17 and the base map vanished, leaving a
+   blank map. Now every tile layer keeps drawing its last real zoom level, scaled up,
+   all the way to the map's limit. A map with no tile layer limit at all (the maptest
+   pages, drawn by MapLibre inside Leaflet) stops at 19 instead of zooming forever. */
+(function () {
+  if (typeof L === 'undefined' || !L.TileLayer || !window.MCMaps) return;
+  var CAP = 19;
+  function native(l) { if (l.options.maxNativeZoom == null) l.options.maxNativeZoom = l.options.maxZoom; }
+  L.TileLayer.addInitHook(function () { native(this); });
+  function fit(m) {
+    var gl = false;
+    m.eachLayer(function (l) { if (L.MaplibreGL && l instanceof L.MaplibreGL) gl = true; });
+    if (gl && !isFinite(m.getMaxZoom())) m.setMaxZoom(CAP);
+    var mx = m.getMaxZoom();
+    if (!isFinite(mx)) return;
+    m.eachLayer(function (l) {
+      if (!(l instanceof L.TileLayer)) return;
+      native(l);
+      if (l.options.maxZoom < mx) l.options.maxZoom = mx;
+    });
+  }
+  MCMaps.each(function (m) {
+    fit(m);
+    // Only tile and MapLibre layers change the zoom range; markers come and go on every
+    // move, so they are skipped.
+    m.on('layeradd', function (e) {
+      var l = e.layer;
+      if (l instanceof L.TileLayer || (L.MaplibreGL && l instanceof L.MaplibreGL)) fit(m);
+    });
+    m.on('zoomlevelschange', function () { fit(m); });
+  });
+})();
+
 (function () {
   // 2. Credit line, on every Leaflet map on the page (any template): tap to read all of
   // it. Delegated, so maps created after this file runs are covered too.
