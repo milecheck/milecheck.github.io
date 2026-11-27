@@ -64,8 +64,7 @@ const STATES={
   chips:[['Bellevue',47.613,-122.19,12],['Snoqualmie Pass',47.42,-121.41,12],['Downtown Seattle',47.606,-122.333,15],['I-405 up close',47.59,-122.185,16],['Spokane',47.658,-117.42,13],['Central Washington',46.6,-120.5,9]]},
  or:{n:'Oregon',code:'OR',c:[45.52,-122.68],z:11,t:{b:'or/base.pmtiles',w:'or/water3.pmtiles',m:'or/mp.pmtiles',q:'or/poi.pmtiles'},ln:abs('or/lanes.pmtiles'),attr:'Data: Census, USGS, FHWA',
   chips:[['Portland',45.52,-122.68,12],['Downtown Portland',45.519,-122.677,15],['I-5 and I-84',45.528,-122.664,16],['Mount Hood',45.30,-121.75,11],['Columbia Gorge',45.66,-121.9,11],['Bend',44.058,-121.315,13],['Pendleton',45.672,-118.788,13],['Eastern Oregon',44.8,-118.5,8]]},
- fl:{n:'Florida',code:'FL',c:[28.54,-81.38],z:12,t:{b:'fl/base.pmtiles',w:'fl/water3.pmtiles',m:'fl/mp.pmtiles',q:'fl/poi.pmtiles'},ln:null,attr:'Data: Census, USGS, DOE',
-  note:'Florida: lane lines are not in yet (the federal lane server was down on 11/25).',
+ fl:{n:'Florida',code:'FL',c:[28.54,-81.38],z:12,t:{b:'fl/base.pmtiles',w:'fl/water3.pmtiles',m:'fl/mp.pmtiles',q:'fl/poi.pmtiles'},ln:abs('fl/lanes.pmtiles'),attr:'Data: Census, USGS, DOE',
   chips:[['Miami',25.77,-80.19,13],['Orlando',28.54,-81.38,13],['Tampa',27.95,-82.46,13],['I-4 up close',28.51,-81.43,16],['Jacksonville',30.33,-81.66,13]]}
 };
 function srcs(cfg){const t=cfg.t,S={l:{type:'vector',url:'pmtiles://'+W+'streets.pmtiles'},hs:{type:'raster',url:'pmtiles://'+W+'hillshade.pmtiles',tileSize:256},
