@@ -147,5 +147,5 @@
     "seattle-drawbridges/south-park-bridge/index.html",
     "ski/telluride/index.html"
   ],
-  "_comment_2026_11_27": "2026-11-27 Leah: 'noindex the thin pages now', 'we can add them back later', AdSense/Ad Manager keep denying. Template-generated pages with under 10 Search Console clicks in 90 days (both properties, max of the two, 2026-08-27 to 2026-11-25) are noindexed: mountains spot pages, seasonal, bridges, chain-laws, seattle-drawbridges, corridors, translations, October state reports. Pages with 10+ clicks are in keepFiles. Full list: docs/noindex-2026-11-27.txt. To undo, remove the dir from leafDirs/dirs and rerun finish-pages, then delete the robots meta from those pages."
+  "_comment_2026_11_27": "2026-11-27 Leah: 'noindex the thin pages now', 'we can add them back later', AdSense/Ad Manager keep denying. Template-generated pages with under 10 Search Console clicks in 90 days (both properties, max of the two, 2026-08-27 to 2026-11-25) are noindexed: mountains spot pages, seasonal, bridges, chain-laws, seattle-drawbridges, corridors, translations, October state reports. Pages with 10+ clicks are in keepFiles. Full list: data/noindex-2026-11-27.txt. To undo, remove the dir from leafDirs/dirs and rerun finish-pages, then delete the robots meta from those pages."
 }
