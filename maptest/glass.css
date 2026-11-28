@@ -1,0 +1,18 @@
+/* iPhone-style frosted glass for map overlays (Leah 2026-11-27: "glossy UI vibes"). Glass on floating controls only;
+   the turn banner stays solid for sun glare (Apple: don't stack glass on glass; respect Reduce Transparency). */
+:root{--gl-bg:rgba(255,255,255,.6);--gl-bd:rgba(255,255,255,.7);--gl-hi:rgba(255,255,255,.85);--gl-sh:0 8px 28px rgba(15,30,25,.18),0 1px 2px rgba(15,30,25,.12);--gl-blur:blur(22px) saturate(185%)}
+#sb,.card,.sheet,#layp,#lay,#loc,#chips .k,#rsum,#foot,.maplibregl-ctrl-group,.maplibregl-popup-content,#sug{
+ background:var(--gl-bg)!important;-webkit-backdrop-filter:var(--gl-blur);backdrop-filter:var(--gl-blur);
+ border:1px solid var(--gl-bd)!important;box-shadow:var(--gl-sh),inset 0 1px 0 var(--gl-hi)!important}
+#sb,#lay,#loc,.maplibregl-ctrl-group{border-radius:22px!important;overflow:hidden}
+.card,.sheet,#layp,#sug,#rsum,.maplibregl-popup-content{border-radius:20px!important}
+#chips .k{border-radius:999px!important}
+#q{background:transparent!important}
+.maplibregl-ctrl-group button{background:transparent!important}
+.maplibregl-ctrl-group button+button{border-top:1px solid rgba(0,0,0,.08)!important}
+.maplibregl-popup-tip{opacity:.55}
+#banner{-webkit-backdrop-filter:none;backdrop-filter:none}
+@media (prefers-reduced-transparency:reduce){#sb,.card,.sheet,#layp,#lay,#loc,#chips .k,#rsum,#foot,.maplibregl-ctrl-group,.maplibregl-popup-content,#sug{background:#fff!important;-webkit-backdrop-filter:none;backdrop-filter:none}}
+#sb,#sb *,.card,.sheet,#layp,#layp *,#sug,#rsum,#foot{color:#16201b}
+#layp .fh{color:#4a5a52}
+#layp button{background:rgba(255,255,255,.45)!important;border:1px solid rgba(255,255,255,.75)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
