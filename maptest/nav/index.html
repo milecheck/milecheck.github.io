@@ -267,38 +267,55 @@ const API='https://api.milecheckapp.com';
 const FL=[['alerts','Road alerts','#f59e0b',1],['closures','Closures and crashes','#dc2626',1],['weather','Road weather','#3b82f6',1],['cams','Traffic cameras','#0f766e',0],['plows','Snowplows','#ea580c',1],
  ['mp','Mile markers','#475569',1],['fuel','EV chargers and fuel','#7c3aed',1],['lanes','Lane lines','#9aa0a0',1],['towns','Town names','#16201b',1],['lakes','Lake and water names','#2b6a99',1],
  ['county','County lines','#9aa79f',1],['city','City limits','#00875f',1],['shade','Terrain shading','#bbb',1]];
-const LAY={mp:['mp','mpl'],fuel:['fuel','fuell'],lanes:['lnr','lne','lnl','lnc'],towns:['place'],lakes:['wlab'],county:['countyf','county','countyn'],city:['city'],shade:['hs'],alerts:['lv-alerts'],closures:['lv-clos'],weather:['lv-wx'],cams:['lv-cams'],plows:['lv-plows']};
+const LAY={mp:['mp','mpl'],fuel:['fuel','fuell'],lanes:['lnr','lne','lnl','lnc'],towns:['place'],lakes:['wlab'],county:['countyf','county','countyn'],city:['city'],shade:['hs'],alerts:['lv-alerts','lv-span-a'],closures:['lv-clos','lv-span-c','lv-span-o'],weather:['lv-wx'],cams:['lv-cams'],plows:['lv-plows']};
 let ON={};try{ON=JSON.parse(localStorage.getItem('mcNavFilters')||'{}')}catch(e){}
 FL.forEach(f=>{if(!(f[0] in ON))ON[f[0]]=!!f[3]});
 $('flt').innerHTML=FL.map(f=>'<label><input type="checkbox" data-f="'+f[0]+'"'+(ON[f[0]]?' checked':'')+'><span class="sw" style="background:'+f[2]+'"></span>'+f[1]+'</label>').join('');
 $('flt').addEventListener('change',e=>{const k=e.target.dataset.f;ON[k]=e.target.checked;try{localStorage.setItem('mcNavFilters',JSON.stringify(ON))}catch(x){}applyF();if(ON[k])loadLive()});
 $('layp').addEventListener('click',e=>e.stopPropagation());
 function applyF(){for(const k in LAY)for(const id of LAY[k])if(map.getLayer(id))map.setLayoutProperty(id,'visibility',ON[k]?'visible':'none')}
-const LIVE={alerts:{type:'FeatureCollection',features:[]},clos:{type:'FeatureCollection',features:[]},wx:{type:'FeatureCollection',features:[]},cams:{type:'FeatureCollection',features:[]},plows:{type:'FeatureCollection',features:[]}};const got={};
-function addLive(){const add=(id,src,paint)=>{if(!map.getSource(src))map.addSource(src,{type:'geojson',data:LIVE[src.slice(3)]});if(!map.getLayer(id))map.addLayer({id,type:'circle',source:src,paint},map.getLayer('rc')?'rc':undefined)};
+const LIVE={span:{type:'FeatureCollection',features:[]},alerts:{type:'FeatureCollection',features:[]},clos:{type:'FeatureCollection',features:[]},wx:{type:'FeatureCollection',features:[]},cams:{type:'FeatureCollection',features:[]},plows:{type:'FeatureCollection',features:[]}};const got={};
+function addLive(){if(!map.getSource('lv-span'))map.addSource('lv-span',{type:'geojson',data:LIVE.span});
+ if(!map.getLayer('lv-span-o'))map.addLayer({id:'lv-span-o',type:'line',source:'lv-span',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'#ffffff','line-width':['interpolate',['linear'],['zoom'],8,6,14,13]}},map.getLayer('rc')?'rc':undefined);
+ for(const [id,f,c] of [['lv-span-a',['!=',['get','c'],1],'#b45309'],['lv-span-c',['==',['get','c'],1],'#b91c1c']])if(!map.getLayer(id))map.addLayer({id,type:'line',source:'lv-span',filter:f,layout:{'line-join':'round'},paint:{'line-color':c,'line-width':['interpolate',['linear'],['zoom'],8,3.5,14,8],'line-dasharray':[1.6,0.9]}},map.getLayer('rc')?'rc':undefined);
+ const add=(id,src,paint)=>{if(!map.getSource(src))map.addSource(src,{type:'geojson',data:LIVE[src.slice(3)]});if(!map.getLayer(id))map.addLayer({id,type:'circle',source:src,paint},map.getLayer('rc')?'rc':undefined)};
  add('lv-wx','lv-wx',{'circle-radius':5,'circle-color':'#3b82f6','circle-stroke-color':'#fff','circle-stroke-width':1.5});
  add('lv-alerts','lv-alerts',{'circle-radius':5.5,'circle-color':'#f59e0b','circle-stroke-color':'#fff','circle-stroke-width':1.5});
  add('lv-clos','lv-clos',{'circle-radius':6.5,'circle-color':'#dc2626','circle-stroke-color':'#fff','circle-stroke-width':2});
  add('lv-cams','lv-cams',{'circle-radius':['interpolate',['linear'],['zoom'],8,2.5,13,5],'circle-color':'#0f766e','circle-stroke-color':'#fff','circle-stroke-width':1});
  add('lv-plows','lv-plows',{'circle-radius':5,'circle-color':'#ea580c','circle-stroke-color':'#fff','circle-stroke-width':1.5});applyF()}
+const SPANQ=[];setTimeout(()=>{window.__live=LIVE;window.__spanDbg=()=>({q:SPANQ.length,G:!!G})},0);
+// A to B: draw an alert's start-to-end along the road (routed on the Census graph). Skipped if the route
+// wanders (longer than 1.6x the straight line + 1 km) or the span is over 80 km, so we never draw the wrong road.
+let spanGL=null;async function spanAll(){if(!G&&!spanGL)spanGL=loadGraph().catch(()=>{});for(let k=0;k<120&&!G;k++)await new Promise(r=>setTimeout(r,500));if(!G)return;let n=0;
+ while(SPANQ.length&&n<200){const q=SPANQ.shift();const straight=hav(q.a[0],q.a[1],q.b[0],q.b[1]);if(straight>80000)continue;
+  const a=nearest(q.a[0],q.a[1]),b=nearest(q.b[0],q.b[1]);if(a<0||b<0||a===b)continue;const r=route(a,b);if(!r)continue;const ln=build(r).line;let len=0;for(let i=1;i<ln.length;i++)len+=hav(ln[i-1][0],ln[i-1][1],ln[i][0],ln[i][1]);
+  if(len>straight*1.6+1000)continue;LIVE.span.features.push({type:'Feature',properties:q.P,geometry:{type:'LineString',coordinates:ln}});n++;if(n%10===0)await new Promise(r=>setTimeout(r,0))}
+ if(map.getSource('lv-span'))map.getSource('lv-span').setData(LIVE.span)}
 const txt=h=>String(h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
 async function loadLive(){const S=st.toUpperCase();if(got[S])return;got[S]=1;const j=p=>fetch(API+p,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
  const [inc,con,cam,plw]=await Promise.all([j('/incidents?state='+S),j('/conditions?state='+S),j('/cameras?state='+S),j('/plows?state='+S)]);
  for(const x of (inc&&inc['incident-reports'])||[]){const l=x.location||{},s=l['start-location']||{},la=+s['start-lat'],lo=+s['start-long'];if(!la||!lo)continue;const t=x['event-type-id'],clos=t==='CL'||t==='AC';
-  (clos?LIVE.clos:LIVE.alerts).features.push({type:'Feature',properties:{t:clos?(t==='AC'?'Crash':'Closure'):(t==='RW'?'Construction':t==='WE'?'Weather':'Alert'),r:l['route-id']||'',d:txt(x.headline||x['impact-desc']||x.description).slice(0,220)},geometry:{type:'Point',coordinates:[lo,la]}})}
+  const e=l['end-location']||{},ela=+e['end-lat'],elo=+e['end-long'],hd=txt(x.headline||''),ds=txt(x.description||''),im=txt(x['impact-desc']||''),sm=s['start-mile-marker'],em=e['end-mile-marker'];
+  const P={t:clos?(t==='AC'?'Crash':'Closure'):(t==='RW'?'Construction':t==='WE'?'Weather':'Alert'),r:l['route-id']||'',dir:l.direction||'',hd,d:[ds,im].filter((v,i,a)=>v&&v!==hd&&a.indexOf(v)===i).join(' — ')||hd,mp:(sm!=null&&sm!==''?('MP '+sm+(em!=null&&em!==''&&em!==sm?' to '+em:'')):''),st:x['start-time']||'',en:x['end-time']||'',up:x['last-updated']||x['update-time']||'',c:clos?1:0};
+  (clos?LIVE.clos:LIVE.alerts).features.push({type:'Feature',properties:P,geometry:{type:'Point',coordinates:[lo,la]}});
+  if(ela&&elo&&(Math.abs(ela-la)>2e-4||Math.abs(elo-lo)>2e-4))SPANQ.push({a:[lo,la],b:[elo,ela],P})}
+ spanAll();
  for(const x of (con&&con['road-weather-reports'])||[]){const la=+x.latitude,lo=+x.longitude;if(!la||!lo)continue;LIVE.wx.features.push({type:'Feature',properties:{t:'Road weather',r:x['location-name']||'',d:txt([x['road-surface-condition'],x['weather-condition'],x['air-temperature']!=null?x['air-temperature']+'°F':''].filter(Boolean).join(' · '))},geometry:{type:'Point',coordinates:[lo,la]}})}
  for(const x of (cam&&cam.cameras)||[]){if(!x.lat||!x.lon||x.isActive===false)continue;LIVE.cams.features.push({type:'Feature',properties:{t:'Camera',r:x.title||'',img:x.imageUrl||''},geometry:{type:'Point',coordinates:[x.lon,x.lat]}})}
  for(const x of (plw&&plw.plows)||[]){if(!x.lat||!x.lon)continue;LIVE.plows.features.push({type:'Feature',properties:{t:'Snowplow, last reported',r:x.route||'',d:x.time||x.updated||''},geometry:{type:'Point',coordinates:[x.lon,x.lat]}})}
  for(const k in LIVE){const sid='lv-'+k;if(map.getSource(sid))map.getSource(sid).setData(LIVE[k])}}
 map.on('styledata',()=>{if(map.isStyleLoaded()){addLive();}});map.on('load',()=>{addLive();loadLive()});
 map.on('idle',()=>{if(!map.getLayer('lv-alerts'))addLive();loadLive()});
-map.on('click',e=>{if(nav)return;const ids=['lv-cams','lv-clos','lv-alerts','lv-wx','lv-plows','fuel','mp'].filter(i=>map.getLayer(i)&&map.getLayoutProperty(i,'visibility')!=='none');
+map.on('click',e=>{if(nav)return;const ids=['lv-cams','lv-clos','lv-alerts','lv-span-c','lv-span-a','lv-wx','lv-plows','fuel','mp'].filter(i=>map.getLayer(i)&&map.getLayoutProperty(i,'visibility')!=='none');
  const fs=map.queryRenderedFeatures([[e.point.x-8,e.point.y-8],[e.point.x+8,e.point.y+8]],{layers:ids});if(!fs.length)return;const f=fs[0],q=f.properties;const esc=x=>String(x==null?'':x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
  let h;if(f.layer.id==='lv-cams')h='<b>'+esc(q.r)+'</b><br><img src="'+esc(q.img)+'" alt="" style="width:240px;max-width:70vw;border-radius:6px;margin-top:6px">';
  else if(f.layer.id==='mp')h='<b>Mile marker '+esc(q.mp)+'</b><br>'+esc(q.r);
  else if(f.layer.id==='fuel')h='<b>'+({EVF:'DC fast charger',EV:'EV charger (Level 2)'}[q.t]||'Alternative fuel')+'</b><br>'+esc(q.n)+'<br><small>'+esc(q.d)+'</small>';
+ else if(q.hd!==undefined){const fmt=v=>{if(!v)return '';const d=new Date(/^\d+$/.test(v)?(+v<1e12?+v*1000:+v):v);return isNaN(d)?esc(v):d.toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})};
+  h='<div style="max-height:50vh;overflow:auto"><b>'+esc(q.t)+(q.r?' · '+esc(q.r):'')+(q.dir?' '+esc(q.dir):'')+'</b>'+(q.mp?'<br><small>'+esc(q.mp)+'</small>':'')+(q.hd?'<p style="margin:6px 0">'+esc(q.hd)+'</p>':'')+(q.d&&q.d!==q.hd?'<p style="margin:6px 0">'+esc(q.d)+'</p>':'')+((q.st||q.en)?'<small>'+(q.st?'From '+fmt(q.st):'')+(q.en?' until '+fmt(q.en):'')+'</small><br>':'')+(q.up?'<small>Updated '+fmt(q.up)+'</small><br>':'')+'<small>Source: state DOT feed</small></div>'}
  else h='<b>'+esc(q.t)+(q.r?' · '+esc(q.r):'')+'</b><br><small>'+esc(q.d)+'</small>';
- new maplibregl.Popup({maxWidth:'280px'}).setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);e.preventDefault&&e.preventDefault()});
+ new maplibregl.Popup({maxWidth:'320px'}).setLngLat(f.geometry.type==='Point'?f.geometry.coordinates:e.lngLat).setHTML(h).addTo(map);e.preventDefault&&e.preventDefault()});
 // ---- navigation ----
 let nav=null,mpLast=0;
 function stopNav(){if(nav){cancelAnimationFrame(nav.raf);nav=null}$('banner').style.display=$('foot').style.display=$('mm').style.display='none';$('top').style.display='';$('lay').style.display=$('loc').style.display='';$('lay').style.top='';$('lay').style.bottom='';if(R)$('routeC').style.display='block';map.easeTo({pitch:0,bearing:0,duration:500})}
